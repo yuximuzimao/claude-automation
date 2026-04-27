@@ -1,0 +1,32 @@
+# Claude Code 内部文件（缓存/备份/历史）
+.claude/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 敏感数据（绝不上传）
+sessions/
+
+# 对话导出（大文件，非代码）
+_exports/
+
+# 临时产出
+_sandbox/
+
+# Node 依赖
+node_modules/
+**/node_modules/
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+# 日志
+*.log
+logs/
+
+# 截图/临时截图
+screenshots/
+**/screenshots/

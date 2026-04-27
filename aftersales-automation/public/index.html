@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黑总专属售后系统</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <span class="logo">黑总专属售后系统</span>
+      <div id="connection-status" class="conn-dot disconnected" title="实时连接状态"></div>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="pending">待确认 <span class="tab-badge" id="pending-tab-count"></span></button>
+      <button class="tab-btn" data-tab="auto">已自动执行 <span class="tab-badge" id="auto-tab-count"></span></button>
+      <button class="tab-btn" data-tab="waiting-tab">等待重查 <span class="tab-badge" id="waiting-tab-count"></span></button>
+      <button class="tab-btn" data-tab="action">快递行动 <span class="tab-badge" id="action-tab-count"></span></button>
+      <button class="tab-btn" data-tab="history">历史记录</button>
+      <button class="tab-btn" data-tab="stats">统计复盘</button>
+      <button class="tab-btn" data-tab="accounts">店铺管理 <span class="tab-badge" id="accounts-tab-count"></span></button>
+    </nav>
+    <div class="header-right">
+      <div id="deadline-alert" class="deadline-alert hidden"></div>
+      <button id="emergency-stop-btn" class="btn-emergency-stop" onclick="emergencyStop()">🛑 紧急停止</button>
+      <button id="resume-btn" class="btn-resume hidden" onclick="resumeSystem()">▶ 恢复运行</button>
+      <div id="op-queue-panel" class="op-queue-panel">
+        <button class="op-queue-toggle" onclick="toggleQueuePanel()">
+          <span id="op-queue-badge">○ 空闲</span> ▾
+        </button>
+        <div id="op-queue-dropdown" class="op-queue-dropdown hidden"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 暂停横幅 -->
+  <div id="paused-banner" class="paused-banner hidden">⚠️ 系统已暂停，所有自动化操作已停止</div>
+
+  <!-- Tab: 待确认 -->
+  <section id="tab-pending" class="tab-content active">
+    <div class="toolbar">
+      <h2>待确认 <span id="pending-count" class="count-badge">—</span></h2>
+      <div class="toolbar-actions">
+        <button id="scan-btn" class="btn-primary" onclick="scanTickets()">扫描工单</button>
+        <span id="next-scan-label" style="font-size:12px;color:#888;margin-left:4px"></span>
+        <button class="btn-ghost" onclick="batchExecute()">批量执行</button>
+        <button class="btn-ghost" onclick="batchReprocess()">批量重来</button>
+      </div>
+    </div>
+    <div id="pending-list" class="ticket-list"></div>
+  </section>
+
+  <!-- Tab: 已自动执行 -->
+  <section id="tab-auto" class="tab-content">
+    <div class="toolbar">
+      <h2>已自动执行 <span id="auto-count" class="count-badge">—</span></h2>
+      <div class="toolbar-actions">
+        <span style="font-size:12px;color:#888">自动同意退款，请打分确认是否正确</span>
+      </div>
+    </div>
+    <div id="auto-list" class="ticket-list"></div>
+  </section>
+
+  <!-- Tab: 等待重查 -->
+  <section id="tab-waiting-tab" class="tab-content">
+    <div class="toolbar">
+      <h2>等待重查 <span id="waiting-count" class="count-badge">—</span></h2>
+      <div class="toolbar-actions">
+        <span style="font-size:12px;color:#888">下次扫描时自动重新采集推理</span>
+      </div>
+    </div>
+    <div id="waiting-list" class="ticket-list"></div>
+  </section>
+
+  <!-- Tab: 快递行动 -->
+  <section id="tab-action" class="tab-content">
+    <div class="toolbar">
+      <h2>快递行动 <span id="action-count" class="count-badge">—</span></h2>
+      <div class="toolbar-actions">
+        <button class="btn-ghost" onclick="loadActionList()">刷新</button>
+        <span style="font-size:12px;color:#888">基于当前等待重查和已推理工单实时计算</span>
+      </div>
+    </div>
+    <div id="action-content"></div>
+  </section>
+
+  <!-- Tab: 历史记录 -->
+  <section id="tab-history" class="tab-content">
+    <div class="toolbar">
+      <h2>历史记录 <span id="history-count" class="count-badge">—</span></h2>
+      <button class="btn-ghost" onclick="loadHistory()">刷新</button>
+    </div>
+    <div id="history-list"></div>
+  </section>
+
+  <!-- Tab: 统计复盘 -->
+  <section id="tab-stats" class="tab-content">
+    <div class="toolbar">
+      <h2>统计复盘</h2>
+      <button class="btn-ghost" onclick="loadStats()">刷新</button>
+    </div>
+    <div id="stats-content"></div>
+  </section>
+
+  <!-- Tab: 店铺管理 -->
+  <section id="tab-accounts" class="tab-content">
+    <div class="toolbar">
+      <h2>店铺管理</h2>
+      <button class="btn-ghost" onclick="loadAccounts()">刷新</button>
+    </div>
+    <div id="accounts-list" class="accounts-grid"></div>
+  </section>
+
+  <!-- 模拟训练（从导航移除，保留 HTML 供需要时恢复）-->
+  <section id="tab-sim" class="tab-content" style="display:none">
+    <div class="toolbar">
+      <h2>模拟训练 <span id="sim-count" class="count-badge">—</span></h2>
+      <div class="toolbar-actions">
+        <button class="btn-ghost" onclick="toggleAddForm()">+ 添加案例</button>
+        <button class="btn-ghost" onclick="loadSim()">刷新</button>
+      </div>
+    </div>
+    <div id="add-form" class="add-form hidden">
+      <h3>手动添加训练案例</h3>
+      <div class="form-row">
+        <label>工单号 <input id="f-workOrderNum" placeholder="100001775xxx" /></label>
+        <label>账号编号 <input id="f-accountNum" type="number" placeholder="3" /></label>
+        <label>账号名称 <input id="f-accountNote" placeholder="百浩-RITEKOKO" /></label>
+        <label>已知结果
+          <select id="f-groundTruth">
+            <option value="">未知</option>
+            <option value="approve">同意退款</option>
+            <option value="reject">拒绝退款</option>
+            <option value="escalate">上报人工</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" onclick="submitAdd()">添加到训练队列</button>
+        <button class="btn-ghost" onclick="toggleAddForm()">取消</button>
+      </div>
+    </div>
+    <div id="sim-list" class="ticket-list"></div>
+  </section>
+
+  <!-- 弹窗 -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title">确认操作</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modal-body"></div>
+      <div class="modal-footer">
+        <button id="modal-confirm" class="btn-primary">确认</button>
+        <button class="btn-ghost" onclick="closeModal()">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
