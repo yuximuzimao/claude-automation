@@ -327,9 +327,10 @@ async function execScan(op) {
   let result = null;
   try { result = JSON.parse(stdout); } catch(e) {}
   // 写扫描状态文件（兼容旧的 scan-status 接口）
-  const fs = require('fs');
   const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
   try { fs.writeFileSync(SCAN_STATUS_FILE, JSON.stringify({ scanning: false, lastScanAt: new Date().toISOString(), lastResult: result })); } catch(e) {}
+  // scan-all.js 已直接写 account-status.json，这里只需 SSE 广播让前端实时刷新
+  if (result) sse.broadcast('accounts-update', readAccountStatus());
   if (code !== 0 && !result) throw new Error('scan-all 执行失败');
 
   // 6小时预警：为即将过期的工单创建 Mac 提醒

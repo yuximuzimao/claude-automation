@@ -175,6 +175,33 @@ async function main() {
     }
   }
 
+  // 写入 data/account-status.json（供店铺管理 Tab 显示）
+  if (!isDryRun) {
+    const ACCOUNT_STATUS_FILE = path.join(__dirname, 'data/account-status.json');
+    try {
+      let statusMap = {};
+      try { statusMap = JSON.parse(fs.readFileSync(ACCOUNT_STATUS_FILE, 'utf8')); } catch(e) {}
+      const scanTime = new Date().toISOString();
+      for (const s of result.scanned) {
+        statusMap[String(s.num)] = Object.assign(statusMap[String(s.num)] || {}, {
+          status: 'ok', lastScan: scanTime, count: s.count, note: s.note,
+        });
+      }
+      for (const e of result.errors) {
+        const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.error);
+        statusMap[String(e.num)] = Object.assign(statusMap[String(e.num)] || {}, {
+          status: isExpired ? 'expired' : 'error',
+          lastScan: scanTime,
+          error: e.error.slice(0, 200),
+          note: e.note,
+        });
+      }
+      fs.writeFileSync(ACCOUNT_STATUS_FILE, JSON.stringify(statusMap, null, 2));
+    } catch(e) {
+      log(`⚠️ 写入账号状态失败: ${e.message}`);
+    }
+  }
+
   // 汇总输出
   log('\n=== 巡检完成 ===');
   if (result.urgent.length === 0) {
