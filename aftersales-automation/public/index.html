@@ -107,7 +107,10 @@
   <section id="tab-accounts" class="tab-content">
     <div class="toolbar">
       <h2>店铺管理</h2>
-      <button class="btn-ghost" onclick="loadAccounts()">刷新</button>
+      <div class="toolbar-actions">
+        <button class="btn-ghost" onclick="addNewAccount()">+ 新增店铺</button>
+        <button class="btn-ghost" onclick="loadAccounts()">刷新</button>
+      </div>
     </div>
     <div id="accounts-list" class="accounts-grid"></div>
   </section>

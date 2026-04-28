@@ -210,10 +210,11 @@ async function _execScanAccountInner(accountNum, accountNote) {
   const r = spawnSync('node', [path.join(BASE, 'cli.js'), 'list'], {
     timeout: 120000, encoding: 'utf8', cwd: BASE,
   });
-  const out = JSON.parse(r.stdout || '{}');
+  let out;
+  try { out = JSON.parse(r.stdout || '{}'); } catch(e) { throw new Error(`list 输出解析失败: ${(r.stdout || '').slice(0, 100)}`); }
   if (!out.success) throw new Error(out.error || 'list 失败');
 
-  const urgent = out.data.urgent || [];
+  const urgent = (out.data && out.data.urgent) || [];
 
   // 写入 queue.json（去重）
   let added = 0, updated = 0, waitingReset = 0;

@@ -1596,7 +1596,7 @@ async function loadAccounts() {
     const statusKey = !a.hasFile ? 'unknown' : (a.status || 'unknown');
     const statusLabel = { ok: '正常', expired: '登录失效', error: '扫描异常', unknown: '未扫描' }[statusKey] || '未知';
     const isPending = reloginPending.has(a.num);
-    const showBtn = statusKey === 'expired' || statusKey === 'unknown' || !a.hasFile;
+    const showReloginBtn = statusKey === 'expired' || statusKey === 'error' || statusKey === 'unknown' || !a.hasFile;
     const btnLabel = isPending ? '等待登录中...' : (!a.hasFile ? '添加登录' : '重新登录');
     const lastScan = a.lastScan ? new Date(a.lastScan).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
     return `<div class="account-card status-${statusKey}">
@@ -1607,7 +1607,10 @@ async function loadAccounts() {
       <div class="account-note">${h(a.note || a.name)}</div>
       <div class="account-meta">上次扫描：${lastScan}${a.status === 'ok' && a.count !== undefined ? `　工单：${a.count}` : ''}</div>
       ${a.error ? `<div class="account-error">${h(a.error)}</div>` : ''}
-      ${showBtn ? `<button class="btn-relogin${isPending ? ' pending' : ''}" onclick="reloginAccount(${a.num})" ${isPending ? 'disabled' : ''}>${btnLabel}</button>` : ''}
+      <div class="account-actions">
+        ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num})">打开店铺后台</button>` : ''}
+        ${showReloginBtn ? `<button class="btn-relogin${isPending ? ' pending' : ''}" onclick="reloginAccount(${a.num})" ${isPending ? 'disabled' : ''}>${btnLabel}</button>` : ''}
+      </div>
     </div>`;
   }).join('');
 }
@@ -1619,4 +1622,21 @@ async function reloginAccount(num) {
   showToast(res.message || `已启动账号${num}登录窗口`);
   // 30秒后自动刷新状态（登录成功会通过 SSE 推送）
   setTimeout(() => { reloginPending.delete(num); loadAccounts(); }, 30000);
+}
+
+async function openAccountStore(num) {
+  const res = await api(`/accounts/${num}/open`, { method: 'POST' });
+  showToast(res.message || `已打开账号${num}店铺后台`);
+}
+
+async function addNewAccount() {
+  const note = prompt('请输入新店铺备注（如：店铺名-品牌）：');
+  if (!note || !note.trim()) return;
+  const res = await api('/accounts/add', { method: 'POST', body: JSON.stringify({ note: note.trim() }) });
+  if (res.ok) {
+    showToast(res.message || '新店铺已创建，正在启动登录窗口');
+    setTimeout(loadAccounts, 2000);
+  } else {
+    showToast(res.error || '创建失败', 'error');
+  }
 }

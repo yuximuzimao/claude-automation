@@ -442,4 +442,38 @@ router.post('/accounts/:num/relogin', (req, res) => {
   res.json({ ok: true, message: `已为账号${num}启动登录窗口，请在弹出的浏览器中完成登录，登录成功后将自动保存` });
 });
 
+router.post('/accounts/:num/open', (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+  const { spawn } = require('child_process');
+  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), String(num)], {
+    detached: true, stdio: 'ignore',
+  }).unref();
+  res.json({ ok: true, message: `已为账号${num}打开鲸灵店铺后台` });
+});
+
+router.post('/accounts/add', (req, res) => {
+  const note = (req.body && req.body.note || '').trim();
+  if (!note) return res.status(400).json({ error: 'note is required' });
+  try {
+    const fs = require('fs');
+    const accounts = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8'));
+    const nums = Object.keys(accounts).map(Number).sort((a, b) => a - b);
+    const newNum = nums.length > 0 ? nums[nums.length - 1] + 1 : 1;
+    accounts[String(newNum)] = {
+      file: `account${newNum}.json`,
+      name: `账号${newNum}`,
+      note,
+    };
+    fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(accounts, null, 2));
+    const { spawn } = require('child_process');
+    spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(newNum), '--auto-save'], {
+      detached: true, stdio: 'ignore',
+    }).unref();
+    res.json({ ok: true, message: `已创建账号${newNum}「${note}」，请在弹出的浏览器中完成登录` });
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 module.exports = router;

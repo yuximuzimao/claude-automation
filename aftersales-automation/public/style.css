@@ -1200,8 +1200,13 @@ details[open] .action-dismissed-summary::before { content: '▼ '; }
   color: var(--red);
   word-break: break-all;
 }
-.account-card .btn-relogin {
+.account-card .account-actions {
+  display: flex;
+  gap: 6px;
   margin-top: 6px;
+  flex-wrap: wrap;
+}
+.account-card .btn-relogin {
   padding: 5px 12px;
   font-size: 12px;
   background: var(--red);
@@ -1212,3 +1217,4 @@ details[open] .action-dismissed-summary::before { content: '▼ '; }
 }
 .account-card .btn-relogin:hover { opacity: 0.85; }
 .account-card .btn-relogin.pending { background: var(--orange); }
+.btn-sm { padding: 4px 10px; font-size: 12px; }

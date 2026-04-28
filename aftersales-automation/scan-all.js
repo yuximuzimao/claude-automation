@@ -183,9 +183,8 @@ async function main() {
       try { statusMap = JSON.parse(fs.readFileSync(ACCOUNT_STATUS_FILE, 'utf8')); } catch(e) {}
       const scanTime = new Date().toISOString();
       for (const s of result.scanned) {
-        statusMap[String(s.num)] = Object.assign(statusMap[String(s.num)] || {}, {
-          status: 'ok', lastScan: scanTime, count: s.count, note: s.note,
-        });
+        // 整条覆盖，清除可能残留的 error 字段
+        statusMap[String(s.num)] = { status: 'ok', lastScan: scanTime, count: s.count, note: s.note };
       }
       for (const e of result.errors) {
         const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.error);

@@ -82,6 +82,22 @@ const CLICK_NEXT_PAGE_JS = `(function(){
   return 'no-next';
 })()`;
 
+// 点击"待商家处理"筛选标签（确保只读该状态下的工单）
+// 页面左侧有状态标签列表，找含"待商家处理"文本的标签并点击
+const CLICK_PENDING_FILTER_JS = `(function(){
+  var candidates = Array.from(document.querySelectorAll('span, div, li, a, p'));
+  for (var i = 0; i < candidates.length; i++) {
+    var el = candidates[i];
+    if (el.children.length > 0) continue;
+    var txt = el.textContent.trim();
+    if (/^待商家处理/.test(txt)) {
+      el.click();
+      return 'clicked:' + txt;
+    }
+  }
+  return 'not-found';
+})()`;
+
 // 刷新页面并等待加载完成，检查鲸灵登录状态
 async function reloadAndCheckLogin(targetId) {
   await cdp.eval(targetId, 'location.reload()');
@@ -105,6 +121,14 @@ async function listTickets(targetId, maxHours) {
   try {
     await reloadAndCheckLogin(targetId);
     await navigate(targetId, '/business/after-sale-list');
+
+    // 点击"待商家处理"筛选标签（确保只读该状态，不混入其他状态工单）
+    try {
+      const clickRes = await cdp.eval(targetId, CLICK_PENDING_FILTER_JS);
+      if (clickRes && clickRes !== 'not-found') {
+        await sleep(1500); // 等待筛选后列表刷新
+      }
+    } catch (e) { /* non-critical */ }
 
     // 读取"待商家处理"筛选按钮数字
     let filterCount = null;
