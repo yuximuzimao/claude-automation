@@ -287,6 +287,24 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
+    // 驿站待取件：货到了买家未取，应拒绝并通知拦截（驿站可退件）
+    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站'];
+    const anyAtYizhan = packages.some(pkg => {
+      const text = pkg.text || '';
+      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      return !hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw));
+    });
+    s({ type: 'check', condition: '有包裹处于驿站待取件状态（未签收）', result: anyAtYizhan });
+
+    if (anyAtYizhan) {
+      s({ type: 'branch', text: '拒绝退款 → 商品已到驿站待取件，可联系驿站退件拦截' });
+      return fin(reject(
+        '商品已到驿站待取件，可联系快递公司/驿站拦截退件，拦截成功后退款',
+        ['需创建快递拦截提醒'],
+        [{ doc: 'flow-5.3', section: 'Step4', summary: '驿站待取件→拒绝+创建拦截提醒' }]
+      ));
+    }
+
     // 时间分支：在途拦截件，剩余时效 > 距下次扫描时间 → 自动标记等待重查
     const remainingHours = queueItem.deadlineAt
       ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)

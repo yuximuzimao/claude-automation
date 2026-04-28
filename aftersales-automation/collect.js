@@ -207,6 +207,12 @@ async function collectOne(item) {
   }
 
   // 写入 simulations.jsonl
+  // 重采时保留已有的 feedbackStatus / groundTruth（不重置用户已评价的标记）
+  const existingSims = db.readSimulations();
+  const prevSim = [...existingSims].reverse().find(s => s.queueItemId === item.id && s.id !== undefined);
+  const inheritedFeedbackStatus = prevSim && prevSim.feedbackStatus !== 'pending' ? prevSim.feedbackStatus : 'pending';
+  const inheritedGroundTruth = item.groundTruth || (prevSim && prevSim.groundTruth) || null;
+
   const sim = {
     id: `sim-${Date.now()}`,
     queueItemId: item.id,
@@ -216,8 +222,8 @@ async function collectOne(item) {
     createdAt: new Date().toISOString(),
     collectedData: collected,
     decision: null,
-    groundTruth: item.groundTruth || null,
-    feedbackStatus: 'pending',
+    groundTruth: inheritedGroundTruth,
+    feedbackStatus: inheritedFeedbackStatus,
   };
   db.appendSimulation(sim);
 
