@@ -12,7 +12,7 @@ function makeSearchJS(subOrderId) {
       var r = i.getBoundingClientRect();
       return r.width > 0 && r.height > 0;
     });
-    // 用 placeholder 精确匹配搜索框（见 RULES 3.5 + 错误#35）
+    // 用 placeholder 精确匹配搜索框（见 docs/ops-tech.md #3, 坑#35）
     var inp = inputs.find(function(i){ return i.placeholder && i.placeholder.includes('系统单号'); });
     // 禁止 fallback：找不到精确字段直接报错，不能填错位置
     if (!inp) return JSON.stringify({error:'未找到系统单号搜索框，当前页面可见input placeholders: ' + inputs.map(function(i){return i.placeholder;}).join('|')});
@@ -29,7 +29,7 @@ function makeSearchJS(subOrderId) {
   })()`;
 }
 
-// 确保 mixKey radio 已勾选（见 RULES 3.5）
+// 确保 mixKey radio 已勾选（见 docs/ops-tech.md #4）
 const CHECK_MIXKEY_JS = `(function(){
   var radio = document.querySelector('input[value="mixKey"]');
   return JSON.stringify({exists: !!radio, checked: radio ? radio.checked : false});

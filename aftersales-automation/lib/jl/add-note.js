@@ -4,7 +4,7 @@ const { navigate } = require('./navigate');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
-// 三步独立执行，每步之间 sleep 1s（见 RULES 3.7）
+// 三步独立执行，每步之间 sleep 1s（见 docs/ops-tech.md + docs/INDEX.md §4.3）
 // Step 1：点「致内部」按钮（精确匹配工单号，找最近的按钮）
 function makeClickNoteButtonJS(workOrderNum) {
   return `(function(){

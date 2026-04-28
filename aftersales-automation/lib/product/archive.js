@@ -4,7 +4,7 @@ const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
-// 切换查询类型为「精确查询」（见 RULES 4.2 Step 2）
+// 切换查询类型为「精确查询」（见 docs/erp-query.md §2）
 const SET_EXACT_QUERY_JS = `(function(){
   var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
     var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
@@ -47,7 +47,7 @@ function makeSearchSpecCodeJS(specCode) {
     mainInp.value = '${specCode}';
     mainInp.dispatchEvent(new Event('input', {bubbles:true}));
     mainInp.dispatchEvent(new Event('change', {bubbles:true}));
-    // 找持有 handleQuery 的父 Vue 组件（见 RULES 4.2 Step 3）
+    // 找持有 handleQuery 的父 Vue 组件（见 docs/erp-query.md §2 + docs/ops-tech.md #22）
     var el = mainInp; var sv = null;
     for (var i = 0; i < 12; i++) {
       if (!el) break;

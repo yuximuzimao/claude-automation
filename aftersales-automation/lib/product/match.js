@@ -4,7 +4,7 @@ const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
-// 切换店铺过滤器（见 RULES 4.1 Step 2）
+// 切换店铺过滤器（见 docs/erp-query.md §1）
 // ⚠️ 必须按当前处理账号传入对应店铺名（如「百浩创展」「杭州共途」），不能硬编码
 // 用 Vue emit 直接设值（li.click() 不触发 Vue 响应，需绕过）
 function makeCheckShopJS(shopName) {
