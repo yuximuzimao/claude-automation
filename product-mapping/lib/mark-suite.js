@@ -117,5 +117,67 @@ async function main(erpId, shopName, productCode, platformCode) {
   console.log(`[done] ${platformCode} 已标记为套件`);
 }
 
+/**
+ * 原子操作：在已展开的对应表中，勾选目标 SKU → 套件处理 → 标记套件
+ * 调用方须已完成：navigateErp + 点店铺 + 搜索展开
+ *
+ * @param {string} erpId
+ * @param {string} platformCode
+ */
+async function markOneSuite(erpId, platformCode) {
+  // Step5: 只勾选目标 platformCode 那一行
+  const r4 = await cdp.eval(erpId, `(function(){
+    var expCells = document.querySelectorAll('.el-table__expanded-cell');
+    for(var c=0;c<expCells.length;c++){
+      var rows = expCells[c].querySelectorAll('tbody tr');
+      for(var i=0;i<rows.length;i++){
+        var tds = rows[i].querySelectorAll('td');
+        if(tds.length>=6 && tds[5].innerText.trim()===${JSON.stringify(platformCode)}){
+          var cb = rows[i].querySelector('input[type=checkbox]');
+          if(!cb) return JSON.stringify({error:'checkbox not found'});
+          cb.click(); return JSON.stringify({checked:true, platformCode:${JSON.stringify(platformCode)}});
+        }
+      }
+    }
+    return JSON.stringify({error:${JSON.stringify(platformCode)} + ' not found in expanded cells'});
+  })()`);
+  if (r4 && r4.error) throw new Error(r4.error);
+
+  // 验证只有 1 行被选中（防止误操作）
+  const selectedCount = await cdp.eval(erpId,
+    '(function(){return document.querySelectorAll(".el-table__expanded-cell input[type=checkbox]:checked").length;})()'
+  );
+  if (selectedCount !== 1) {
+    throw new Error(`markOneSuite: 期望选中 1 行，实际选中 ${selectedCount} 行`);
+  }
+  await sleep(500);
+
+  // Step6: 点「套件处理」下拉
+  const r5 = await cdp.eval(erpId,
+    '(function(){' +
+    '  var btns = Array.from(document.querySelectorAll("span, button"));' +
+    '  var t = btns.find(function(b){ return b.innerText && b.innerText.includes("套件处理") && b.getBoundingClientRect().width > 0; });' +
+    '  if(!t) return JSON.stringify({error:"套件处理 not found"});' +
+    '  t.click(); return JSON.stringify({clicked:"套件处理"});' +
+    '})()'
+  );
+  if (r5 && r5.error) throw new Error(r5.error);
+  await sleep(800);
+
+  // Step7: 点「标记套件」
+  const r6 = await cdp.eval(erpId,
+    '(function(){' +
+    '  var items = Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
+    '  var t = items.find(function(i){ return i.innerText.trim()==="标记套件"; });' +
+    '  if(!t) return JSON.stringify({error:"标记套件 not found"});' +
+    '  t.click(); return JSON.stringify({clicked:"标记套件"});' +
+    '})()'
+  );
+  if (r6 && r6.error) throw new Error(r6.error);
+  await sleep(2000);
+
+  console.log(`[markOneSuite] ${platformCode} 已标记为套件`);
+}
+
 if (require.main === module) { main().catch(e => { console.error("[ERROR]", e.message); process.exit(1); }); }
-module.exports = { main };
+module.exports = { main, markOneSuite };

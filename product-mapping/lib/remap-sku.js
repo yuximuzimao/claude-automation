@@ -32,17 +32,19 @@ const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
  * @returns {Promise<{ok:boolean, erpCode:string, erpName:string, message:string}>}
  */
 async function remapSku(erpId, platformCode, erpName, opts = {}) {
-  const { confirm = false, itemType = '普通商品' } = opts;
+  const { confirm = false, itemType = '普通商品', skipNav = false } = opts;
 
   // Step 1: 从 sku-records.json 查出 productCode（货号）和 shopName
-  const records = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+  // 支持新格式（{stage, skus:{...}}）和旧格式（{platformCode:{...}}）
+  const rawRecords = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+  const records = rawRecords.skus || rawRecords;
   const skuRecord = records[platformCode];
   if (!skuRecord) throw new Error(`platformCode ${platformCode} not found in sku-records.json`);
   const { productCode, shopName } = skuRecord;
   console.error(`[remap] ${platformCode} → productCode=${productCode}, shop=${shopName}`);
 
-  // Step 2: 导航到商品对应表
-  await navigateErp(erpId, '商品对应表');
+  // Step 2: 导航到商品对应表（skipNav=true 时跳过，调用方已就绪）
+  if (!skipNav) await navigateErp(erpId, '商品对应表');
 
   // Step 3: 点击左侧店铺
   await cdp.eval(erpId,

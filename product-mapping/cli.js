@@ -175,6 +175,27 @@ async function main() {
       await matchMain(erpId, opts.shop, limit);
       break;
     }
+    case 'match-one': {
+      // 解析 --from 参数
+      const fromIdx = args.indexOf('--from');
+      const fromStep = fromIdx >= 0 ? args[fromIdx + 1] : undefined;
+      const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep);
+      if (!opts.shop || !productCode) {
+        console.error('用法: node cli.js match-one <货号> --shop <店铺> [--from <步骤>]');
+        console.error('步骤可选值: download, read_skus, recognize, annotate, match, read_erp, verify');
+        process.exit(1);
+      }
+      const { matchOne } = require('./lib/match-one');
+      const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep });
+      console.log(JSON.stringify(result, null, 2));
+      break;
+    }
+    case 'match-batch': {
+      if (!opts.shop) { console.error('用法: node cli.js match-batch --shop <店铺>'); process.exit(1); }
+      // TODO: implement match-batch.js
+      console.error('match-batch 尚未实现');
+      process.exit(1);
+    }
     default:
       console.error(`未知命令: ${cmd}`);
       process.exit(1);
