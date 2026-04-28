@@ -186,6 +186,20 @@ function markFeedbackInsighted(ids) {
   fs.writeFileSync(FB_PATH, updated.join('\n') + '\n');
 }
 
+function unmarkFeedbackInsighted(ids) {
+  if (!fs.existsSync(FB_PATH)) return;
+  const idSet = new Set(ids);
+  const lines = fs.readFileSync(FB_PATH, 'utf8').split('\n').filter(Boolean);
+  const updated = lines.map(l => {
+    try {
+      const f = JSON.parse(l);
+      if (idSet.has(f.id)) { const { insightedAt, ...rest } = f; return JSON.stringify(rest); }
+      return l;
+    } catch { return l; }
+  });
+  fs.writeFileSync(FB_PATH, updated.join('\n') + '\n');
+}
+
 function appendFeedback(fb) {
   const id = `fb-${Date.now()}`;
   const record = { id, ...fb, createdAt: new Date().toISOString() };
@@ -329,7 +343,7 @@ function removeDismissed(tracking) {
 module.exports = {
   readQueue, writeQueue, addQueueItem, updateQueueItem, deleteQueueItem,
   readSimulations, getSimulation, appendSimulation, updateSimulation,
-  readFeedback, appendFeedback, revokeFeedback, markFeedbackInsighted,
+  readFeedback, appendFeedback, revokeFeedback, markFeedbackInsighted, unmarkFeedbackInsighted,
   readCases, appendCase,
   readDismissed, addDismissed, isDismissed, removeDismissed,
   computeStats,

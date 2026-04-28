@@ -20,6 +20,10 @@ function connectSSE() {
   es.addEventListener('feedback-new', () => { if (currentTab === 'stats') loadStats(); });
   es.addEventListener('cases-update', () => { if (currentTab === 'history') loadHistory(); });
   es.addEventListener('insight-ready', () => { if (currentTab === 'stats') loadStats(); showToast('洞察已生成，已刷新统计页'); });
+  es.addEventListener('insight-error', (e) => {
+    try { const d = JSON.parse(e.data); showToast('洞察生成失败：' + (d.error || '未知错误') + '，请重新生成', 'error'); } catch {}
+    if (currentTab === 'stats') loadStats();
+  });
   es.addEventListener('pipeline-update', (e) => {
     loadLive();
     try {
@@ -1167,12 +1171,16 @@ async function loadStats() {
   ${(recentInsights||[]).length ? `
   <div style="font-size:13px;color:var(--gray-600);margin-top:12px;margin-bottom:6px">历史洞察：</div>
   ${(recentInsights||[]).map(ins => `
-  <div style="border:1px solid var(--gray-200);border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px">
+  <div style="border:1px solid ${ins.failed ? 'var(--red-300,#fca5a5)' : 'var(--gray-200)'};border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px${ins.failed ? ';background:#fff5f5' : ''}">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <span style="color:var(--gray-500)">${ins.createdAt}</span>
-      <button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>
+      <span style="color:${ins.failed ? '#dc2626' : 'var(--gray-500)'}">
+        ${ins.failed ? '⚠️ 生成失败 · ' : ''}${ins.createdAt}
+      </span>
+      <div style="display:flex;gap:6px">
+        ${ins.failed ? `<button class="btn-primary" style="font-size:12px;padding:2px 8px" onclick="generateInsight(this)">重新生成</button>` : `<button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>`}
+      </div>
     </div>
-    <div style="margin-top:4px;color:var(--gray-700);white-space:pre-wrap">${h(ins.preview)}…</div>
+    ${ins.failed ? '' : `<div style="margin-top:4px;color:var(--gray-700);white-space:pre-wrap">${h(ins.preview)}…</div>`}
   </div>`).join('')}` : ''}
 </div>`;
 

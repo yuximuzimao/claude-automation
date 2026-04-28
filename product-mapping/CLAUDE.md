@@ -15,8 +15,14 @@
 ## 命令速查
 
 ```bash
-node cli.js check --shop <店铺>             # ① 扫描+标记（含下载平台商品+档案查询）
-node cli.js match --shop <店铺> [--limit N] # ③ 自动匹配（异常立即停止）
+# 新架构（树状分支，优先使用）
+node cli.js match-one <货号> --shop <店铺> [--from <步骤>]  # 单货号匹配（7步闭环，支持断点）
+node cli.js match-batch --shop <店铺>                        # 批量匹配（整店）
+
+# --from 合法值：download / read_skus / recognize / annotate / match / read_erp / verify
+
+# 旧命令（check 流程独立，仍有效）
+node cli.js check --shop <店铺>             # 扫描+标记（含下载平台商品+档案查询）
 node cli.js visual-pending --shop <店铺>    # 列出待识图 SKU
 node cli.js visual-ok <平台编码> "<描述>"   # 记录识图确认
 node cli.js visual-flag <平台编码> "<描述>" # 记录识图不符
@@ -24,7 +30,7 @@ node cli.js km-archive <编码>               # 查商品档案V2（单条）
 node cli.js targets                         # 检查浏览器连通性
 ```
 
-**完整流程见 `docs/INDEX.md §2`（4步命令序列）**
+**match-one 流程见 `tasks/todo.md §当前任务`；完整规则见 `docs/INDEX.md §2`**
 
 ## 进入工作前确认（详细规则见 `docs/INDEX.md §1`）
 - 写操作（新增匹配）必须人工确认

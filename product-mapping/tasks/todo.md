@@ -1,5 +1,36 @@
 # 待处理优化项
 
+## 当前任务：树状分支架构重构（match-one 流程）
+
+> 计划文件：`~/.claude/plans/whimsical-finding-otter.md`
+
+### 实施清单（按依赖顺序）
+
+- [ ] 1. `mkdir lib/ops lib/utils`
+- [ ] 2. `lib/utils/safe-write.js` — .tmp+rename 原子写入，写前清理脏 tmp
+- [ ] 3. `lib/ops/read-table-rows.js` — 公共表格 DOM 读取，内置等待+expectedProductCode 绑定校验
+- [ ] 4. `lib/ops/ensure-corr-page.js` — 确保在对应表页面 + canSkipSearch 严格4项判断链
+- [ ] 5. `lib/ops/download-products.js` — 封装 correspondence.js 的 downloadPlatformProducts
+- [ ] 6. `lib/ops/read-skus.js` — 读取货号 SKU 列表，初始化 sku-records.json（stage=skus_read）
+- [ ] 7. `lib/ops/annotate.js` — 纯数据，recognition→itemType，stage: images_done→annotated
+- [ ] 8. `lib/ops/remap-single.js` + 小改 `remap-sku.js`（加 skipNav 参数）
+- [ ] 9. `lib/ops/create-suite.js` + 小改 `mark-suite.js`（提取 markOneSuite 导出）
+- [ ] 10. `lib/ops/read-erp-codes.js` — 重读验证 ERP 编码，只更新 unmatched
+- [ ] 11. `lib/ops/verify-archive.js` — 档案核查+识图对比报告
+- [ ] 12. `lib/match-one.js` — 单货号编排器（7步，支持 --from 断点执行）
+- [ ] 13. 改 `cli.js` — 新增 match-one / match-batch 命令路由
+- [ ] 14. 端到端测试：kgossynt-cx 澜泽（3 SKU，含 single+suite 两分支）
+
+### 数据契约快查
+
+sku-records.json 新格式：`{ stage, shopName, productCode, skus: { [platformCode]: {...} } }`
+
+stage 状态机：`skus_read → images_done → annotated → matched → verified`
+
+matchStatus 四态：`unmatched / matched-original / matched-ai / failed-ai`
+
+---
+
 ## P1 人工操作
 - [x] 0326zp-9 / 0225zp-4 核查完成（2026-04-22）：实际为青柑普洱味，ERP 映射无误，recognition 已修正回普洱味
 - [x] 260422-73 核查完成（2026-04-22）：子品正确（美式×7+生椰×7+礼袋×2），匹配无误

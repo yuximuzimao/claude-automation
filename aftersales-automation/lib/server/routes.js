@@ -314,7 +314,8 @@ router.get('/insights', (req, res) => {
     .sort().reverse().slice(0, 10);
   const list = files.map(f => {
     const content = fs.readFileSync(path.join(INSIGHTS_DIR, f), 'utf8');
-    return { file: f, createdAt: f.replace('insight-', '').replace('.md', ''), preview: content.slice(0, 200) };
+    const failed = content.includes('⚠️ 洞察生成失败') || content.includes('（无输出）');
+    return { file: f, createdAt: f.replace('insight-', '').replace('.md', ''), preview: content.slice(0, 200), failed };
   });
   res.json(list);
 });
@@ -324,6 +325,22 @@ router.get('/insights/:file', (req, res) => {
   const p = path.join(INSIGHTS_DIR, req.params.file);
   if (!fs.existsSync(p)) return res.status(404).json({ error: '未找到' });
   res.json({ content: fs.readFileSync(p, 'utf8') });
+});
+
+// 重置失败洞察（清除对应 feedback 的 insightedAt，使其重新进入待洞察队列）
+router.post('/insights/reset-failed', (req, res) => {
+  // 找所有未被 insightedAt 标记的 feedback（即上次失败未标记的）
+  // 实际上失败时 feedback 未被标记，直接触发新的 generate 即可
+  // 此接口供手动清理历史误标记的情况
+  const { ids } = req.body || {};
+  if (ids && ids.length) {
+    db.unmarkFeedbackInsighted(ids);
+    return res.json({ ok: true, reset: ids.length });
+  }
+  // 无 ids 时：查找所有有 insightedAt 但对应洞察文件是失败的 feedback 并清除
+  // 简化实现：直接返回当前待洞察数量，让前端判断
+  const pending = db.readFeedback({ uninsighted: true });
+  res.json({ ok: true, pending: pending.length });
 });
 
 // 触发洞察生成
@@ -352,7 +369,10 @@ ${lines}
 2. 应该如何修改推理规则？（给出具体的修改建议，而不是泛泛而谈）
 3. 如果有好评反馈，哪些做法值得保留？
 
-输出格式：直接给出分析结论和具体修改建议，不需要重复罗列原始反馈。`;
+输出要求：
+- 不要输出任何标题行、元数据行（如"生成时间"、"覆盖差评"等）
+- 不要重复罗列原始反馈内容
+- 直接从分析结论开始，使用 ## 二级标题组织问题`;
 
   // 调 claude CLI（不阻塞，异步执行）
   res.json({ ok: true, count: pending.length });
@@ -367,14 +387,36 @@ ${lines}
         timeout: 120000, encoding: 'utf8', cwd: BASE,
       });
 
-      const content = result.stdout || result.stderr || '（无输出）';
+      const content = (result.stdout || '').trim();
+
+      // API 失败：无内容或有错误码
+      if (!content || result.status !== 0) {
+        const errMsg = (result.stderr || '').trim() || `退出码 ${result.status}`;
+        const failContent = `> ⚠️ 洞察生成失败：${errMsg}\n\n可点击"重新生成"重试。`;
+        fs.writeFileSync(outFile, `# 洞察报告 ${ts}\n\n${failContent}\n`);
+        // 失败时不标记 insightedAt，feedback 保持待洞察状态，下次可重新触发
+        sse.broadcast('insight-error', { file: path.basename(outFile), error: errMsg });
+        console.error('[insight] 生成失败:', errMsg);
+        return;
+      }
+
       fs.writeFileSync(outFile, `# 洞察报告 ${ts}\n\n${content}\n`);
 
-      // 标记已洞察
+      // 成功才标记已洞察；同时清除所有历史失败记录文件
       db.markFeedbackInsighted(pending.map(f => f.id));
+      try {
+        const failedFiles = fs.readdirSync(INSIGHTS_DIR).filter(f => {
+          if (!f.endsWith('.md')) return false;
+          const c = fs.readFileSync(path.join(INSIGHTS_DIR, f), 'utf8');
+          return c.includes('⚠️ 洞察生成失败') || c.includes('（无输出）');
+        });
+        failedFiles.forEach(f => fs.unlinkSync(path.join(INSIGHTS_DIR, f)));
+        if (failedFiles.length) console.log('[insight] 已清除失败记录:', failedFiles.join(', '));
+      } catch (e) { console.error('[insight] 清除失败记录出错:', e.message); }
       sse.broadcast('insight-ready', { file: path.basename(outFile) });
     } catch (e) {
       console.error('[insight]', e.message);
+      sse.broadcast('insight-error', { error: e.message });
     }
   })();
 });
@@ -432,26 +474,6 @@ router.get('/accounts', (req, res) => {
   }
 });
 
-router.post('/accounts/:num/relogin', (req, res) => {
-  const num = parseInt(req.params.num, 10);
-  if (!num) return res.status(400).json({ error: 'invalid num' });
-  const { spawn } = require('child_process');
-  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(num), '--auto-save'], {
-    detached: true, stdio: 'ignore',
-  }).unref();
-  res.json({ ok: true, message: `已为账号${num}启动登录窗口，请在弹出的浏览器中完成登录，登录成功后将自动保存` });
-});
-
-router.post('/accounts/:num/open', (req, res) => {
-  const num = parseInt(req.params.num, 10);
-  if (!num) return res.status(400).json({ error: 'invalid num' });
-  const { spawn } = require('child_process');
-  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), String(num)], {
-    detached: true, stdio: 'ignore',
-  }).unref();
-  res.json({ ok: true, message: `已为账号${num}打开鲸灵店铺后台` });
-});
-
 router.post('/accounts/add', (req, res) => {
   const note = (req.body && req.body.note || '').trim();
   if (!note) return res.status(400).json({ error: 'note is required' });
@@ -474,6 +496,26 @@ router.post('/accounts/add', (req, res) => {
   } catch(e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+router.post('/accounts/:num/relogin', (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+  const { spawn } = require('child_process');
+  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(num), '--auto-save'], {
+    detached: true, stdio: 'ignore',
+  }).unref();
+  res.json({ ok: true, message: `已为账号${num}启动登录窗口，请在弹出的浏览器中完成登录，登录成功后将自动保存` });
+});
+
+router.post('/accounts/:num/open', (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+  const { spawn } = require('child_process');
+  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), String(num)], {
+    detached: true, stdio: 'ignore',
+  }).unref();
+  res.json({ ok: true, message: `已为账号${num}打开鲸灵店铺后台` });
 });
 
 module.exports = router;

@@ -98,11 +98,18 @@ async function processOne(queueItem, options = {}) {
 
     // 来源2：DB交叉比对（补充：找本系统内其他工单使用同一快递单号）
     const dbConflictNums = [];
+    const currentSubOrderIds = new Set(
+      ((sim.collectedData.ticket && sim.collectedData.ticket.subOrders) || []).map(o => String(o.id || o))
+    );
     allSims.forEach(s => {
       if (s.id === sim.id) return;
       if (s.workOrderNum === workOrderNum) return;  // 同一工单的历史sim不算冲突
       const rt = s.collectedData && s.collectedData.ticket && s.collectedData.ticket.returnTracking;
-      if (rt && rt === returnTracking) dbConflictNums.push(s.workOrderNum);
+      if (!rt || rt !== returnTracking) return;
+      // 同一子订单（同一笔订单的多个售后工单）不算冲突
+      const otherSubOrderIds = ((s.collectedData.ticket.subOrders) || []).map(o => String(o.id || o));
+      if (otherSubOrderIds.some(id => currentSubOrderIds.has(id))) return;
+      dbConflictNums.push(s.workOrderNum);
     });
 
     // 合并两个来源（去重）
