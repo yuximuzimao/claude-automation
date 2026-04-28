@@ -6,19 +6,19 @@
 
 ### 实施清单（按依赖顺序）
 
-- [ ] 1. `mkdir lib/ops lib/utils`
-- [ ] 2. `lib/utils/safe-write.js` — .tmp+rename 原子写入，写前清理脏 tmp
-- [ ] 3. `lib/ops/read-table-rows.js` — 公共表格 DOM 读取，内置等待+expectedProductCode 绑定校验
-- [ ] 4. `lib/ops/ensure-corr-page.js` — 确保在对应表页面 + canSkipSearch 严格4项判断链
-- [ ] 5. `lib/ops/download-products.js` — 封装 correspondence.js 的 downloadPlatformProducts
-- [ ] 6. `lib/ops/read-skus.js` — 读取货号 SKU 列表，初始化 sku-records.json（stage=skus_read）
-- [ ] 7. `lib/ops/annotate.js` — 纯数据，recognition→itemType，stage: images_done→annotated
-- [ ] 8. `lib/ops/remap-single.js` + 小改 `remap-sku.js`（加 skipNav 参数）
-- [ ] 9. `lib/ops/create-suite.js` + 小改 `mark-suite.js`（提取 markOneSuite 导出）
-- [ ] 10. `lib/ops/read-erp-codes.js` — 重读验证 ERP 编码，只更新 unmatched
-- [ ] 11. `lib/ops/verify-archive.js` — 档案核查+识图对比报告
-- [ ] 12. `lib/match-one.js` — 单货号编排器（7步，支持 --from 断点执行）
-- [ ] 13. 改 `cli.js` — 新增 match-one / match-batch 命令路由
+- [x] 1. `mkdir lib/ops lib/utils`
+- [x] 2. `lib/utils/safe-write.js` — .tmp+rename 原子写入，写前清理脏 tmp
+- [x] 3. `lib/ops/read-table-rows.js` — 公共表格 DOM 读取，内置等待+expectedProductCode 绑定校验
+- [x] 4. `lib/ops/ensure-corr-page.js` — 确保在对应表页面 + canSkipSearch 严格4项判断链
+- [x] 5. `lib/ops/download-products.js` — 封装 correspondence.js 的 downloadPlatformProducts
+- [x] 6. `lib/ops/read-skus.js` — 读取货号 SKU 列表，初始化 sku-records.json（stage=skus_read）
+- [x] 7. `lib/ops/annotate.js` — 纯数据，recognition→itemType，stage: images_done→annotated
+- [x] 8. `lib/ops/remap-single.js` + 小改 `remap-sku.js`（加 skipNav 参数）
+- [x] 9. `lib/ops/create-suite.js` + 小改 `mark-suite.js`（提取 markOneSuite 导出）
+- [x] 10. `lib/ops/read-erp-codes.js` — 重读验证 ERP 编码，只更新 unmatched/matched-ai
+- [x] 11. `lib/ops/verify-archive.js` — 档案核查+识图对比报告
+- [x] 12. `lib/match-one.js` — 单货号编排器（7步，支持 --from 断点执行）
+- [x] 13. 改 `cli.js` — 新增 match-one / match-batch 命令路由
 - [ ] 14. 端到端测试：kgossynt-cx 澜泽（3 SKU，含 single+suite 两分支）
 
 ### 数据契约快查
