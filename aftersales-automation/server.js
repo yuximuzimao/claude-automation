@@ -1,4 +1,20 @@
 'use strict';
+const path = require('path');
+const fs = require('fs');
+
+// ── 单实例锁（防止多个 server.js 进程同时运行导致重复扫描）─────────
+const LOCK_FILE = path.join(__dirname, 'data/.server.lock');
+try {
+  const existingPid = fs.readFileSync(LOCK_FILE, 'utf8').trim();
+  // 检查旧进程是否仍在运行
+  try {
+    process.kill(Number(existingPid), 0); // signal 0 = 只检查不发送
+    console.error(`[server] 已有实例运行中 (PID ${existingPid})，退出`);
+    process.exit(1);
+  } catch(e) { /* 旧进程不存在，继续 */ }
+} catch(e) { /* lock 文件不存在，继续 */ }
+fs.writeFileSync(LOCK_FILE, String(process.pid));
+process.on('exit', () => { try { fs.unlinkSync(LOCK_FILE); } catch(e) {} });
 
 // 自动从 Claude Code 设置注入 API 配置（若 env 未手动设置）
 (function injectClaudeEnv() {
@@ -22,8 +38,6 @@
 })();
 
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const routes = require('./lib/server/routes');
 const opQueue = require('./lib/server/op-queue');
 const { SCAN_HOURS } = require('./lib/constants');

@@ -26,7 +26,13 @@ function writeAccountStatus(status) {
 }
 function updateAccountStatus(num, patch) {
   const s = readAccountStatus();
-  s[String(num)] = Object.assign(s[String(num)] || {}, patch);
+  const prev = s[String(num)] || {};
+  const merged = Object.assign({}, prev, patch);
+  // 扫描成功时清除残留的 error 字段，避免前端显示过期错误
+  if (patch.status === 'ok' && !patch.error) {
+    delete merged.error;
+  }
+  s[String(num)] = merged;
   writeAccountStatus(s);
   sse.broadcast('accounts-update', readAccountStatus());
 }

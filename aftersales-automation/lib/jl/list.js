@@ -1,6 +1,5 @@
 'use strict';
 const cdp = require('../cdp');
-const { navigate } = require('./navigate');
 const { ok, fail } = require('../result');
 const { sleep, waitFor } = require('../wait');
 
@@ -98,17 +97,28 @@ const CLICK_PENDING_FILTER_JS = `(function(){
   return 'not-found';
 })()`;
 
-// 刷新页面并等待加载完成，检查鲸灵登录状态
-async function reloadAndCheckLogin(targetId) {
-  await cdp.eval(targetId, 'location.reload()');
-  await sleep(3000);
+// 一步完成：全页导航到工单列表 + 等待加载 + 检查登录
+// 合并了原来的 reloadAndCheckLogin + navigate 两步（从 3 次刷新减少到 1 次）
+async function navigateAndCheckLogin(targetId) {
+  await cdp.navigate(targetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
 
   await waitFor(
     async () => {
       const state = await cdp.eval(targetId, 'document.readyState');
       return state === 'complete';
     },
-    { timeoutMs: 15000, intervalMs: 500, label: '页面刷新完成' }
+    { timeoutMs: 20000, intervalMs: 500, label: '页面加载完成' }
+  );
+
+  // 等待 Vue 应用初始化（确保后续 Vue Router 操作可用）
+  await waitFor(
+    async () => {
+      try {
+        const ready = await cdp.eval(targetId, `!!(document.querySelector('#app') && document.querySelector('#app').__vue__)`);
+        return ready || null;
+      } catch { return null; }
+    },
+    { timeoutMs: 10000, intervalMs: 1000, label: 'Vue 应用初始化' }
   );
 
   const url = await cdp.eval(targetId, 'window.location.href');
@@ -119,8 +129,7 @@ async function reloadAndCheckLogin(targetId) {
 
 async function listTickets(targetId, maxHours) {
   try {
-    await reloadAndCheckLogin(targetId);
-    await navigate(targetId, '/business/after-sale-list');
+    await navigateAndCheckLogin(targetId);
 
     // 点击"待商家处理"筛选标签（确保只读该状态，不混入其他状态工单）
     try {
