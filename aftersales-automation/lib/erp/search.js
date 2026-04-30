@@ -97,25 +97,29 @@ async function erpSearch(targetId, subOrderId) {
         throw new Error(`填入字段不正确，placeholder: ${fill.placeholder}，期望含「系统单号」`);
       }
 
-      // 先等旧结果清除（ERP 触发搜索后会短暂进入 loading，「共N条」消失）
-      // 最多等 2s；若搜索前本来就无结果则跳过
-      const hadPrevResult = await cdp.eval(targetId, `!!document.body.innerText.match(/共\\d+条/)`);
-      if (hadPrevResult) {
-        for (let c = 0; c < 4; c++) {
-          await sleep(500);
-          const stillHas = await cdp.eval(targetId, `!!document.body.innerText.match(/共\\d+条/)`);
-          if (!stillHas) break;
-        }
-      }
+      // 整表指纹判断搜索完成（不依赖「共N条」文案，防旧结果穿透）
+      // 记录搜索前的指纹：所有列表项前30字符拼接
+      const FINGERPRINT_JS = `(function(){
+        var items = Array.from(document.querySelectorAll('.module-trade-list-item'));
+        return items.map(function(r){ return r.innerText.substring(0,30); }).join('|');
+      })()`;
+      const prevFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
 
-      // 轮询等待「共N条」出现（最多 8s）
-      let countText = '';
-      for (let w = 0; w < 16; w++) {
+      // 轮询等待指纹变化（最多 10s）
+      let newFingerprint = '';
+      for (let w = 0; w < 20; w++) {
         await sleep(500);
-        countText = await cdp.eval(targetId, `(document.body.innerText.match(/共\\d+条/) || [''])[0]`);
-        if (countText) break;
+        newFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
+        // 首次搜索（之前无结果）：只要有值即可
+        if (!prevFingerprint && newFingerprint) break;
+        // 非首次：指纹必须变化
+        if (prevFingerprint && newFingerprint && newFingerprint !== prevFingerprint) break;
       }
-      if (!countText) throw new Error('搜索未执行（未找到共N条文字）');
+      // fallback：如果指纹未变，再检查「共N条」文案（兼容极端场景）
+      if (newFingerprint === prevFingerprint) {
+        const countText = await cdp.eval(targetId, `(document.body.innerText.match(/共\\d+条/) || [''])[0]`);
+        if (!countText) throw new Error('搜索未执行（指纹未变且无共N条文字）');
+      }
     }, { maxRetries: 3, delayMs: 2000, label: `erp-search ${subOrderId}` });
 
     const rows = await cdp.eval(targetId, READ_ROWS_JS);
