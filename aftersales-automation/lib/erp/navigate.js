@@ -230,31 +230,36 @@ async function navigateErp(targetId, pageName) {
     // 在不同页，切换标签（无需刷新）
     if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 跳过刷新，切换到 ${pageName}\n`);
   } else {
-    // Session 过期或首次：完整刷新流程（原逻辑）
-    if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 执行完整刷新（${sessionFresh === false ? 'TTL过期' : '首次'}）\n`);
-    // ⚠️ 刷新让掉线弹窗出现（不刷新时 title/hash 维持旧值，无法检测掉线）
-    await cdp.eval(targetId, 'location.reload(); "ok"');
+    // Session 缓存过期或首次：先轻量检测是否真的需要 reload
+    // 如果 ERP 已登录（checkLogin 通过），跳过 reload 直接切 tab（减少不必要的 reload 导致登录丢失）
+    const preLoginCheck = await checkLogin(targetId);
+    if (preLoginCheck.loggedIn) {
+      if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 缓存过期但 ERP 仍登录中，跳过 reload 直接切 tab\n`);
+      // 更新缓存（重建 session 信任）
+      cache[targetId] = { time: now, page: null }; saveSessionCache(cache);
+    } else {
+      if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 执行完整刷新（${sessionFresh === false ? 'TTL过期' : '首次'}）\n`);
+      // ⚠️ 刷新让掉线弹窗出现（不刷新时 title/hash 维持旧值，无法检测掉线）
+      await cdp.eval(targetId, 'location.reload(); "ok"');
 
-    // 轮询等待页面加载：title 出现 或 登录弹窗出现（最多 20s）
-    for (let i = 0; i < 20; i++) {
-      await sleep(1000);
-      const st = await checkLogin(targetId);
-      if (st.loggedIn || st.sessionExpired || (st.title && st.title.includes('快麦ERP--'))) break;
-      // URL 跳到登录页也算就绪
-      if (st.url && st.url.includes('login')) break;
-    }
+      // 轮询等待页面加载：title 出现 或 登录弹窗出现（最多 20s）
+      for (let i = 0; i < 20; i++) {
+        await sleep(1000);
+        const st = await checkLogin(targetId);
+        if (st.loggedIn || st.sessionExpired || (st.title && st.title.includes('快麦ERP--'))) break;
+        if (st.url && st.url.includes('login')) break;
+      }
 
-    const loginStatus = await checkLogin(targetId);
-    if (!loginStatus.loggedIn) {
-      if (process.env.VERBOSE) process.stderr.write(`[navigateErp] ERP 已掉线，尝试恢复登录\n`);
-      try {
-        await recoverLogin(targetId);
-      } catch {
-        // 恢复失败，重试一次：重新加载页面再恢复
-        await sleep(2000);
-        await cdp.eval(targetId, 'location.reload()');
-        await sleep(4000);
-        await recoverLogin(targetId);
+      const loginStatus = await checkLogin(targetId);
+      if (!loginStatus.loggedIn) {
+        if (process.env.VERBOSE) process.stderr.write(`[navigateErp] ERP 已掉线，尝试恢复登录\n`);
+        try {
+          await recoverLogin(targetId);
+        } catch {
+          // 恢复失败，再试一次（不再 reload，recoverLogin 内部已处理重试）
+          await sleep(3000);
+          await recoverLogin(targetId);
+        }
       }
     }
   }
