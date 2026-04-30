@@ -186,28 +186,32 @@ function makeExpandAndReadJS(barcode) {
 function makeReadSpecCodeJS(attr1) {
   return `(function(){
     var attr1 = ${JSON.stringify(attr1)};
-    // 归一化：多个空格→单空格，trim，全角→半角，去赠品后缀
+    // 归一化工具函数
     var toHalf = function(s){ return s.replace(/[\uff01-\uff5e]/g, function(c){ return String.fromCharCode(c.charCodeAt(0)-0xFEE0); }); };
     var stripGift = function(s){ return s.replace(/\\s*赠[^;]*$/, '').trim(); };
-    var normalize = function(s){ return stripGift(toHalf(s.replace(/\\s+/g,' ').trim())); };
-    var normAttr1 = normalize(attr1);
-    // 在展开子表中匹配 skuName（td[4]），取 ERP编码 input（td[11]）
-    // ERP 对应表 td[4] 格式为 "skuName;店铺简称"（如"防晒*2支 赠防晒口罩*1;悦希"），
-    // 取分号前的部分归一化后与 attr1 比较
-    // 与 correspondence.js 读取方式保持一致（sc[4]=skuName, sc[11]=erpCode input）
+    var baseNorm = function(s){ return toHalf(s.replace(/\\s+/g,' ').trim()); };
+
+    // 两轮匹配：第一轮保留完整 attr1，第二轮去赠品后缀
+    var candidates = [baseNorm(attr1)];
+    var stripped = stripGift(baseNorm(attr1));
+    if (stripped !== candidates[0]) candidates.push(stripped);
+
     var expCells = document.querySelectorAll('.el-table__expanded-cell');
-    for (var c = 0; c < expCells.length; c++) {
-      var tables = expCells[c].querySelectorAll('table');
-      for (var t = 0; t < tables.length; t++) {
-        var srs = tables[t].querySelectorAll('tbody tr');
-        if (!srs.length || srs[0].querySelectorAll('td').length <= 11) continue;
-        for (var s = 0; s < srs.length; s++) {
-          var sc = srs[s].querySelectorAll('td');
-          if (sc.length < 12) continue;
-          var skuName = normalize(sc[4].innerText).split(';')[0].trim();
-          if (skuName !== normAttr1) continue;
-          var ei = sc[11].querySelector('input');
-          if (ei && ei.value) return JSON.stringify({specCode: ei.value, searched: attr1, matchedSku: skuName});
+    for (var round = 0; round < candidates.length; round++) {
+      var normAttr1 = candidates[round];
+      for (var c = 0; c < expCells.length; c++) {
+        var tables = expCells[c].querySelectorAll('table');
+        for (var t = 0; t < tables.length; t++) {
+          var srs = tables[t].querySelectorAll('tbody tr');
+          if (!srs.length || srs[0].querySelectorAll('td').length <= 11) continue;
+          for (var s = 0; s < srs.length; s++) {
+            var sc = srs[s].querySelectorAll('td');
+            if (sc.length < 12) continue;
+            var skuRaw = baseNorm(sc[4].innerText).split(';')[0].trim();
+            if (skuRaw !== normAttr1) continue;
+            var ei = sc[11].querySelector('input');
+            if (ei && ei.value) return JSON.stringify({specCode: ei.value, searched: attr1, matchedSku: skuRaw, matchRound: round === 0 ? 'exact' : 'stripGift'});
+          }
         }
       }
     }
