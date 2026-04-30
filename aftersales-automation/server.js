@@ -129,8 +129,17 @@ app.locals.resumeScan = () => {
 app.listen(PORT, () => {
   console.log(`黑总专属售后系统已启动: http://localhost:${PORT}`);
   scheduleNextScan();
-  // 启动时处理队列里已有的 pending 工单（每张单独入队，可逐条取消）
+  // 启动时清理残留状态：collecting/collected（上次进程崩溃留下的）重置为 pending
+  // 然后把所有 pending 工单入队推理
   const db = require('./lib/server/data');
+  const stale = (db.readQueue().items || []).filter(i =>
+    ['collecting', 'collected', 'inferring'].includes(i.status) && i.mode === 'live'
+  );
+  for (const item of stale) {
+    db.updateQueueItem(item.id, { status: 'pending' });
+  }
+  if (stale.length > 0) console.log(`[startup] 重置 ${stale.length} 条残留状态工单为 pending`);
+
   const pending = (db.readQueue().items || []).filter(i => i.status === 'pending' && i.mode === 'live');
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
