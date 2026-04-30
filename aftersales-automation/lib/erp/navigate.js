@@ -60,7 +60,15 @@ async function checkLogin(targetId) {
 //   A. Session 超时弹窗（.inner-login-wrapper）：勾协议 → 点登录
 //   B. 完全退出到登录页（URL 含 login / title 变化）：点密码框触发自动填充 → 点登录 → 点弹窗同意
 async function recoverLogin(targetId) {
-  await cdp.eval(targetId, 'location.reload()');
+  // 先检测当前状态，决定是否需要 reload
+  const preCheck = await checkLogin(targetId);
+  const alreadyOnLoginPage = !preCheck.loggedIn && !preCheck.sessionExpired &&
+    (preCheck.url && preCheck.url.includes('login'));
+
+  // 已经在登录页时不 reload（reload 会清掉 Chrome 密码管理器的自动填充）
+  if (!alreadyOnLoginPage) {
+    await cdp.eval(targetId, 'location.reload()');
+  }
 
   // 轮询等待页面就绪：登录页+密码框出现，或 session 弹窗出现（最多 20s）
   let hasModal = false;
@@ -82,19 +90,34 @@ async function recoverLogin(targetId) {
 
   if (isLoginPage && pwdFieldReady) {
     // 场景 B：完全退出到登录页
-    // 额外等待 2s 让 Chrome 密码管理器注册表单
+    // Chrome 自动填充需要先点用户名框再点密码框（两步触发关联填充）
     await sleep(2000);
 
-    // Step 1: 点密码框触发浏览器自动填充
-    await cdp.clickAt(targetId, 'input[type="password"]');
-    await sleep(2000);
+    // Step 1: 点用户名框 → 等待 → 点密码框 → 触发 Chrome 密码管理器自动填充
+    // 多次尝试：Chrome 自动填充时序不稳定，需重试
+    let passwordFilled = false;
+    for (let attempt = 0; attempt < 3 && !passwordFilled; attempt++) {
+      // 先点用户名框触发 Chrome 关联记忆
+      const hasUserField = await cdp.eval(targetId, '!!document.querySelector("input[name=userName]")');
+      if (hasUserField) {
+        await cdp.clickAt(targetId, 'input[name="userName"]');
+        await sleep(1500);
+      }
+      // 再点密码框触发密码自动填充
+      await cdp.clickAt(targetId, 'input[type="password"]');
+      await sleep(2000);
 
-    const passwordFilled = await cdp.eval(targetId, `(function(){
-      var pwd = document.querySelector('input[type="password"]');
-      return !!(pwd && pwd.value && pwd.value.length > 0);
-    })()`);
+      passwordFilled = await cdp.eval(targetId, `(function(){
+        var pwd = document.querySelector('input[type="password"]');
+        return !!(pwd && pwd.value && pwd.value.length > 0);
+      })()`);
+      if (!passwordFilled && attempt < 2) {
+        if (process.env.VERBOSE) process.stderr.write(`[recoverLogin] 密码未填充，第${attempt + 1}次重试\n`);
+        await sleep(1000);
+      }
+    }
     if (!passwordFilled) {
-      throw new Error('ERP已完全退出登录且密码未自动填充，请手动重新登录ERP后重试');
+      throw new Error('ERP已完全退出登录且密码未自动填充（已重试3次），请手动重新登录ERP后重试');
     }
 
     // Step 2: 点登录按钮（不提前勾协议，让弹窗自然出现）

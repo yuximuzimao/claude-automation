@@ -283,8 +283,11 @@ async function execScanFinalize(op) {
   // 清理已退回的拦截记录
   await cleanReturnedIntercepts();
 
-  // 每张 pending live 工单单独入队推理（可逐条取消）
-  const pending = (db.readQueue().items || []).filter(i => i.status === 'pending' && i.mode === 'live');
+  // 每张 pending/collected live 工单单独入队推理（可逐条取消）
+  // collected = 采集完成但推理未执行（手动 collect.js 或上次中断留下的）
+  const pending = (db.readQueue().items || []).filter(i =>
+    (i.status === 'pending' || i.status === 'collected') && i.mode === 'live'
+  );
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
     enqueue('reprocess-one', label, { queueItemId: item.id });
@@ -357,7 +360,10 @@ async function execScan(op) {
   }
 
   // 扫描完成后逐工单入队推理（每张单独一条，可逐条取消）
-  const pending = (db.readQueue().items || []).filter(i => i.status === 'pending' && i.mode === 'live');
+  // 包含 collected 状态：采集完成但推理未执行的工单
+  const pending = (db.readQueue().items || []).filter(i =>
+    (i.status === 'pending' || i.status === 'collected') && i.mode === 'live'
+  );
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
     enqueue('reprocess-one', label, { queueItemId: item.id });
