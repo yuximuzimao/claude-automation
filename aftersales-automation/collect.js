@@ -116,6 +116,14 @@ async function collectOne(item) {
       collected.collectErrors.push('erp-search: 无子订单号，跳过');
     }
 
+    // Step 2b: erp-logistics（紧接 erp-search，此时 ERP 仍在订单管理页面，避免后续切页面再切回来）
+    if (collected.erpSearch && !collected.collectErrors.some(e => e.startsWith('erp-search:'))) {
+      const erpLogRes = runCmd(['erp-logistics-all']);
+      if (erpLogRes.success) {
+        collected.erpLogistics = erpLogRes.data;
+      }
+    }
+
     // Step 3: logistics（鲸灵物流）
     const logRes = runCmd(['logistics', item.workOrderNum]);
     if (!logRes.success) {
@@ -181,17 +189,6 @@ async function collectOne(item) {
       }
     } else {
       collected.collectErrors.push('erp-aftersale: 无退货快递单号，跳过（非退货退款类型正常）');
-    }
-
-    // Step 5b: erp-logistics（遍历所有ERP行采集物流，作为双源核查依据）
-    // 注：ERP物流需在 erp-search 成功后执行（页面已停留在ERP订单管理搜索结果页）
-    // 失败时静默跳过——属于补充来源，不影响推理
-    if (collected.erpSearch && !collected.collectErrors.some(e => e.startsWith('erp-search:'))) {
-      const erpLogRes = runCmd(['erp-logistics-all']);
-      if (erpLogRes.success) {
-        collected.erpLogistics = erpLogRes.data;
-      }
-      // erp-logistics 失败不计入 collectErrors，推理引擎降级为只用鲸灵物流
     }
 
     // Step 6: 赠品 erp-search（如有赠品子订单号）
