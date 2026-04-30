@@ -197,3 +197,4 @@
 - `[1/2026-04]` **「选择商品」dialog v-show 状态残留**：dialog 关闭后 Vue 保留上次勾选（v-show 不销毁实例），再次打开时旧勾选仍在。每次打开弹窗后立即全选反选清零（`querySelectorAll("input[type=checkbox]:checked").click()`），再添加子品
 - `[1/2026-04]` **商品类型下拉不能 UI 点击**：el-select 下拉 input 展开后 portal 在 dialog 外生成，触发 close-on-click-modal 关闭弹窗。正确做法：直接 Vue emit：`vm.$emit("input", value); vm.$emit("change", value)`
 - `[1/2026-04]` **脚本长时间运行用 run_in_background**：`node lib/auto-match2.js` 同步跑时全量 stderr 输出消耗大量 token。正确：`run_in_background: true`，结束后只读 `data/auto-match-log.json` 的 done/failed 数字
+- `[1/2026-04-30]` **对应表搜索输入框是 `.el-input-popup-editor input`**：form-item[4] 是"精确搜索"下拉框，form-item[5] 是"平台商家编码"下拉框，form-item[6] 的 `el-input-popup-editor` 才是真正的搜索输入框。把货号输入到下拉框会导致搜索无效、表格不刷新。`_setMainPageSelect` 索引：精确搜索=4，平台商家编码=5（排除 dialog 内的 select 后）

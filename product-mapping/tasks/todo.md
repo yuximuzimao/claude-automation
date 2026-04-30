@@ -39,20 +39,26 @@
 - [x] L2-read-erp-codes: 3/3 ✓（2026-04-30）
 
 ### Phase 6: L2 匹配操作测试（下次从这里开始，全部重跑）
-- [ ] L2-remap-single: 4 用例 × 5 次（上次 5/5 但需用修复后的代码重跑）
-- [ ] L2-create-suite: 5 用例 × 5 次（上次 5/5 但需重跑）
-- [ ] L2-verify-archive: 5 用例 × 3 次（上次 1/3，偶发超时 + 搜索 bug）
+- [ ] L2-remap-single: 4 用例 × 5 次
+- [ ] L2-create-suite: 5 用例 × 5 次
+- [ ] L2-verify-archive: 5 用例 × 3 次
 
 ### Phase 7: L2 编排器测试
 - [ ] L2-match-one: 11 用例 × 3 次
 
 ---
 
-### 本次 session 发现的关键 bug（已修复）
+### 已修复的关键 bug（2026-04-30 session）
 1. **搜索输入框选择器错误**：主页面搜索输入框是 `.el-input-popup-editor input`，不是 `form-item[4]`（那是下拉框）
 2. **`_setMainPageSelect` 索引错误**：精确搜索=index 4，平台商家编码=index 5（不是 2/3）
 3. **`readTableRows` 首行校验时机**：waitFor 只检查 `count > 0`，应等首行编码匹配
 4. **已修复 5 个模块**：read-skus, read-erp-codes, ensure-corr-page, remap-sku, create-suite
+
+### 知识库清理（2026-04-30 neat-freak）
+- memory/project_km_product_mapping.md — 更新：测试店铺→杭州共途、ERP tab 锁定、Phase 0-5 进度
+- docs/INDEX.md §6 — 新增搜索输入框选择器坑位
+- tasks/lessons.md — 清空过期待办（已全部完成或迁入 todo.md）
+- `_setMainPageSelect` 下拉框选择后未关闭 — 待修复
 
 ### ERP 页面布局（form-item 索引）
 | idx | 元素 | 说明 |
