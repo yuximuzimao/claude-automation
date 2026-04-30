@@ -47,9 +47,34 @@
 
 ## Git 版本管理
 
-所有 git 操作由 Claude 执行。验证通过 → 立即 commit + push；改动前先建检查点；session 结束前清空未提交改动。
+所有 git 操作由 Claude 执行。**铁律**：
 
-详细规范按需读：`docs/git.md`
+1. **每次代码修改验证通过后，立即 commit + push**（不能攒到 session 结束）
+2. **commit 只含代码文件**，排除运行时数据（`data/` 下的 JSON/jsonl、日志文件）
+3. **session 结束前**：`git status` 检查是否有未提交改动，有则 commit + push
+4. **禁止 force push**，禁止修改已 push 的 commit
+
+### 自动触发时机（Claude 必须执行）
+
+- 修复完成 + 验证通过 → 立即 commit + push
+- 新功能开发完成 → commit + push
+- session 结束前（用户说"归档"/"结束"/"新会话"）→ commit + push 所有改动
+
+### commit message 规范
+
+```
+<type>(<scope>): <简短描述>
+
+type: fix / feat / refactor / docs / data
+scope: aftersales / product-mapping / workspace
+```
+
+### 不提交的文件
+
+- `data/` 下的运行时数据（queue.json / cases.jsonl / simulations.jsonl / scan-status.json 等）
+- `*.log` 文件
+- `_sandbox/` / `_exports/` 下的临时文件
+- `.server.lock`
 
 ---
 

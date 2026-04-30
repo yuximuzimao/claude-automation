@@ -42,6 +42,21 @@ node cli.js targets                         # 检查浏览器连通性
 - `tasks/lessons.md` — Session 级新发现，先记这里
 - `docs/INDEX.md §6` — 稳定后迁入永久坑位，不在两处重复维护
 
+## Git 存档规则
+
+**每次代码改动验证通过后立即 commit + push**，不攒到 session 结束。
+
+```bash
+# 只提交代码，排除运行时数据
+git add lib/ cli.js docs/ tasks/
+git commit -m "fix(product-mapping): <描述>"
+git push
+```
+
+不提交：`data/`（sku-records.json / auto-match-log.json 等）、`data/imgs/`、`data/reports/`
+
+session 结束前（用户说"归档"/"结束"）：`git status` 检查未提交改动 → commit + push
+
 ## 相关项目
 
 鲸灵售后系统（`../aftersales-automation/`）与本项目操作**同一套 ERP 和鲸灵**：

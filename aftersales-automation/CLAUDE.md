@@ -42,6 +42,21 @@
 - `tasks/lessons.md` — Session 级新发现，先记这里
 - `docs/INDEX.md §6` — 沉淀后的永久坑位，稳定后从 lessons 迁入，不在两处重复维护
 
+## Git 存档规则
+
+**每次代码改动验证通过后立即 commit + push**，不攒到 session 结束。
+
+```bash
+# 只提交代码，排除运行时数据
+git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/
+git commit -m "fix(aftersales): <描述>"
+git push
+```
+
+不提交：`data/`（queue.json / cases.jsonl / simulations.jsonl 等）、`*.log`、`.server.lock`
+
+session 结束前（用户说"归档"/"结束"）：`git status` 检查未提交改动 → commit + push
+
 ## 目录说明
 
 | 目录/文件 | 用途 |
