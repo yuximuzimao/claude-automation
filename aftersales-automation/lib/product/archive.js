@@ -110,14 +110,20 @@ const CLOSE_SUB_DIALOG_JS = `(function(){
   return JSON.stringify({closed: true});
 })()`;
 
-// 读子商品明细表格（a.ml_15点击后出现的 el-table__row）
+// 读子商品明细表格（a.ml_15点击后出现的 el-dialog 内 el-table__row）
+// 必须限定在可见 dialog 内读取，防止读到主页面的行
 // 列定义: [1]=商品名称, [3]=商家编码(specCode), [10]=组合数量(qty in bundle)
 const READ_SUB_ITEMS_JS = `(function(){
-  var rows = Array.from(document.querySelectorAll('tr.el-table__row'));
+  // 找最新打开的可见 dialog
+  var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+    return window.getComputedStyle(d).display !== 'none';
+  });
+  if (!dialogs.length) return JSON.stringify({error:'子商品弹窗未打开'});
+  var dialog = dialogs[dialogs.length - 1];
+  var rows = Array.from(dialog.querySelectorAll('tr.el-table__row'));
   var items = [];
   rows.forEach(function(r){
     var cells = Array.from(r.querySelectorAll('td')).map(function(td){ return td.innerText.trim(); });
-    // 子商品行：cells[1] 为商品名称，cells[3] 为商家编码，cells[10] 为组合数量
     if (cells[1] && cells[3] && cells[10] && !isNaN(parseInt(cells[10]))) {
       items.push({
         name: cells[1],
@@ -126,7 +132,7 @@ const READ_SUB_ITEMS_JS = `(function(){
       });
     }
   });
-  return JSON.stringify(items.length ? items : {error:'未找到子商品行'});
+  return JSON.stringify(items.length ? items : {error:'弹窗内未找到子商品行'});
 })()`;
 
 async function productArchive(targetId, specCode) {
