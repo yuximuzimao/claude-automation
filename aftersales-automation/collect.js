@@ -81,6 +81,8 @@ async function collectOne(item) {
     productMatch: null,
     productArchive: null,
     giftErpSearch: null,
+    giftProductMatch: null,
+    giftProductArchive: null,
     collectErrors: [],
   };
 
@@ -199,6 +201,38 @@ async function collectOne(item) {
         collected.collectErrors.push(`erp-search(gift): ${giftRes.error}`);
       } else {
         collected.giftErpSearch = giftRes.data;
+      }
+    }
+
+    // Step 6b: 赠品 product-match + product-archive（如有赠品 sku）
+    const giftSku = giftOrder && giftOrder.sku;
+    const giftAttr1 = giftOrder && giftOrder.attr1;
+    if (giftSku) {
+      let giftShopName;
+      try { giftShopName = getErpShop(item.accountNote); } catch {}
+      if (giftShopName) {
+        const gpmArgs = ['product-match', giftSku, giftAttr1 || '', giftShopName];
+        log(`  gift product-match: sku=${giftSku} attr1=${giftAttr1 || '(空)'} shop=${giftShopName}`);
+        const gpmRes = runCmd(gpmArgs);
+        if (!gpmRes.success) {
+          collected.collectErrors.push(`product-match(gift): ${gpmRes.error}`);
+        } else {
+          collected.giftProductMatch = gpmRes.data;
+          const giftSpecCode = gpmRes.data && gpmRes.data.specCode;
+          if (gpmRes.data && gpmRes.data.matched === false) {
+            const allCodes = (gpmRes.data.specCodes || []).map(c => c.code).join(',');
+            collected.collectErrors.push(`product-match(gift): attr1「${giftAttr1}」未精确匹配，候选编码=[${allCodes}]`);
+          } else if (giftSpecCode) {
+            log(`  gift product-match 成功: specCode=${giftSpecCode}`);
+            const gpaRes = runCmd(['product-archive', giftSpecCode]);
+            if (!gpaRes.success) {
+              collected.collectErrors.push(`product-archive(gift): ${gpaRes.error}`);
+            } else {
+              collected.giftProductArchive = gpaRes.data;
+              log(`  gift product-archive: type=${gpaRes.data.type} subItemNum=${gpaRes.data.subItemNum}`);
+            }
+          }
+        }
       }
     }
 
