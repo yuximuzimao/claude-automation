@@ -186,12 +186,14 @@ function makeExpandAndReadJS(barcode) {
 function makeReadSpecCodeJS(attr1) {
   return `(function(){
     var attr1 = ${JSON.stringify(attr1)};
-    // 归一化：多个空格→单空格，trim
-    var normalize = function(s){ return s.replace(/\\s+/g,' ').trim(); };
+    // 归一化：多个空格→单空格，trim，全角→半角，去赠品后缀
+    var toHalf = function(s){ return s.replace(/[\uff01-\uff5e]/g, function(c){ return String.fromCharCode(c.charCodeAt(0)-0xFEE0); }); };
+    var stripGift = function(s){ return s.replace(/\\s*赠[^;]*$/, '').trim(); };
+    var normalize = function(s){ return stripGift(toHalf(s.replace(/\\s+/g,' ').trim())); };
     var normAttr1 = normalize(attr1);
-    // 在展开子表中精确匹配 skuName（td[4]），取 ERP编码 input（td[11]）
+    // 在展开子表中匹配 skuName（td[4]），取 ERP编码 input（td[11]）
     // ERP 对应表 td[4] 格式为 "skuName;店铺简称"（如"防晒*2支 赠防晒口罩*1;悦希"），
-    // 取分号前的部分再与 attr1 比较，必须完全相等（不能用 includes）
+    // 取分号前的部分归一化后与 attr1 比较
     // 与 correspondence.js 读取方式保持一致（sc[4]=skuName, sc[11]=erpCode input）
     var expCells = document.querySelectorAll('.el-table__expanded-cell');
     for (var c = 0; c < expCells.length; c++) {
