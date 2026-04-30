@@ -560,6 +560,9 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const gifts = ticket.gifts || [];
   const archive = cd.productArchive;
   const archiveSubItems = (archive && archive.subItems) || [];
+  // 赠品商品档案：合并到 expectedItems 一起参与逐商品匹配
+  const giftArchive = cd.giftProductArchive;
+  const giftArchiveSubItems = (giftArchive && giftArchive.subItems) || [];
 
   // 检查 productArchive 是否可用
   const pmAttr1MismatchError = (cd.collectErrors || []).find(e => e.startsWith('product-match: attr1') && e.includes('未精确匹配'));
@@ -585,17 +588,16 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     const matchResults = [];  // { expected: item, expectedQty, matched, receivedQty, status }
     const usedReceived = new Set();  // 已匹配的入库项索引
 
+    // 主品子品匹配
     archiveSubItems.forEach(exp => {
       const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
       if (isExempt) return;
       const expQty = (exp.qty || 1) * afterSaleNum;
 
-      // 在入库 items 中找最佳匹配（名称包含匹配）
       let bestIdx = -1;
       let bestScore = 0;
       receivedItems.forEach((ri, idx) => {
         if (usedReceived.has(idx)) return;
-        // 双向包含匹配
         const nameA = (exp.name || '').replace(/\s+/g, '');
         const nameB = (ri.name || '').replace(/\s+/g, '');
         if (nameA.includes(nameB) || nameB.includes(nameA)) {
@@ -608,16 +610,46 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         usedReceived.add(bestIdx);
         const ri = receivedItems[bestIdx];
         const status = ri.qtyGood >= expQty ? 'ok' : 'short';
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '主品' });
       } else {
-        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing' });
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '主品' });
+      }
+    });
+
+    // 赠品子品匹配（有 giftProductArchive 时）
+    const giftAfterSaleNum = (gifts[0] && gifts[0].afterSaleNum) || 1;
+    giftArchiveSubItems.forEach(exp => {
+      const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
+      if (isExempt) return;
+      const expQty = (exp.qty || 1) * giftAfterSaleNum;
+
+      let bestIdx = -1;
+      let bestScore = 0;
+      receivedItems.forEach((ri, idx) => {
+        if (usedReceived.has(idx)) return;
+        const nameA = (exp.name || '').replace(/\s+/g, '');
+        const nameB = (ri.name || '').replace(/\s+/g, '');
+        if (nameA.includes(nameB) || nameB.includes(nameA)) {
+          const score = Math.min(nameA.length, nameB.length);
+          if (score > bestScore) { bestScore = score; bestIdx = idx; }
+        }
+      });
+
+      if (bestIdx >= 0) {
+        usedReceived.add(bestIdx);
+        const ri = receivedItems[bestIdx];
+        const status = ri.qtyGood >= expQty ? 'ok' : 'short';
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status, source: '赠品' });
+      } else {
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing', source: '赠品' });
       }
     });
 
     // 输出匹配结果
     matchResults.forEach(m => {
       const label = m.status === 'ok' ? '✓' : m.status === 'short' ? '✗不足' : '✗缺失';
-      s({ type: 'check', condition: `${m.expected}`, result: `${label} 期望${m.expectedQty}件，入库${m.receivedQty}件${m.matched ? `（匹配：${m.matched}）` : ''}` });
+      const srcTag = m.source === '赠品' ? '[赠]' : '';
+      s({ type: 'check', condition: `${srcTag}${m.expected}`, result: `${label} 期望${m.expectedQty}件，入库${m.receivedQty}件${m.matched ? `（匹配：${m.matched}）` : ''}` });
     });
 
     // 检查赠品是否在入库中（未匹配的入库项可能是赠品）
