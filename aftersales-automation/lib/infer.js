@@ -269,22 +269,32 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }).join('；');
     s({ type: 'read', label: '各包裹物流状态', value: pkgSummary });
 
-    // 交叉核查：ERP发货行数 vs 采集到的包裹数（防止分包采集不完整导致假阳性）
-    // 注意：此处比较的是「发货行数」vs「采集到的包裹数」，不是商品套数
-    const mainShippedCount = getErpRows(cd, 'erpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status)).length;
-    const giftShippedCount = getErpRows(cd, 'giftErpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status)).length;
-    const totalShipRows = mainShippedCount + giftShippedCount;
-    s({ type: 'read', label: 'ERP发货行总数', value: `${totalShipRows}（主品${mainShippedCount}+赠品${giftShippedCount}）` });
+    // 交叉核查：合并 ERP 全部 tracking（主品+赠品）+ 鲸灵全部包裹 tracking → 去重
+    // 鲸灵工单详情页不显示赠品物流，因此必须从 ERP 补充赠品 tracking
+    const mainShippedRows = getErpRows(cd, 'erpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status));
+    const giftShippedRows = getErpRows(cd, 'giftErpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status));
+    const totalShipRows = mainShippedRows.length + giftShippedRows.length;
+    s({ type: 'read', label: 'ERP发货行总数', value: `${totalShipRows}（主品${mainShippedRows.length}+赠品${giftShippedRows.length}）` });
+
+    // 提取所有已知 tracking：ERP主品 + ERP赠品 + 鲸灵物流包裹
+    const erpTrackings = [...mainShippedRows, ...giftShippedRows]
+      .flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
+    const jlTrackings = (packages || []).map(p => {
+      const m = (p.text || '').match(/物流单号：\n(\S+)/);
+      return m ? m[1] : null;
+    }).filter(Boolean);
+    const allTrackings = [...new Set([...erpTrackings, ...jlTrackings])];
+    s({ type: 'read', label: '合并去重包裹', value: `${allTrackings.length}个（ERP:${erpTrackings.length} 鲸灵:${jlTrackings.length} 去重后:${allTrackings.length}）` });
 
     // 双源判断：鲸灵全部退回 OR ERP显示退回 → 同意
-    // 但只有在采集完整（包裹数 >= ERP发货行数）时才信任"全部退回"
+    // 采集完整性：去重后的包裹数 >= ERP发货行数
     const allJLReturned = allPackagesReturned(packages);
-    const collectionComplete = totalShipRows <= 1 || packages.length >= totalShipRows;
-    s({ type: 'check', condition: `物流采集完整（采集${packages.length}包裹 vs ERP ${totalShipRows}发货行）`, result: collectionComplete });
+    const collectionComplete = totalShipRows <= 1 || allTrackings.length >= totalShipRows;
+    s({ type: 'check', condition: `物流采集完整（去重${allTrackings.length}包裹 vs ERP ${totalShipRows}发货行）`, result: collectionComplete });
 
     if (allJLReturned && !collectionComplete) {
-      s({ type: 'branch', text: `上报 → ${packages.length}个包裹显示退回，但ERP有${totalShipRows}行发货，采集不完整无法确认全部退回` });
-      return fin(escalate(`物流采集不完整（采集${packages.length}/${totalShipRows}个包裹），无法确认全部退回，需人工核查`));
+      s({ type: 'branch', text: `上报 → 去重后${allTrackings.length}个包裹，但ERP有${totalShipRows}行发货，采集不完整` });
+      return fin(escalate(`物流采集不完整（去重后${allTrackings.length}/${totalShipRows}个包裹），无法确认全部退回，需人工核查`));
     }
 
     const allReturned = collectionComplete && (allJLReturned || erpReturned);
