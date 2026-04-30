@@ -561,8 +561,15 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const archive = cd.productArchive;
   const archiveSubItems = (archive && archive.subItems) || [];
   // 赠品商品档案：合并到 expectedItems 一起参与逐商品匹配
+  // 如果赠品是单品（type=0, subItems 为空），用赠品档案的 title 作为1个 expected item
   const giftArchive = cd.giftProductArchive;
-  const giftArchiveSubItems = (giftArchive && giftArchive.subItems) || [];
+  let giftArchiveSubItems = (giftArchive && giftArchive.subItems && giftArchive.subItems.length > 0)
+    ? giftArchive.subItems
+    : [];
+  if (giftArchive && giftArchiveSubItems.length === 0 && giftArchive.title) {
+    // 单品赠品：用档案 title 构造虚拟 subItem（qty=1，名称取分号前）
+    giftArchiveSubItems = [{ name: (giftArchive.title || '').split(';')[0].split('-')[0].trim(), specCode: giftArchive.outerId, qty: 1 }];
+  }
 
   // 检查 productArchive 是否可用
   const pmAttr1MismatchError = (cd.collectErrors || []).find(e => e.startsWith('product-match: attr1') && e.includes('未精确匹配'));
@@ -617,17 +624,34 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     });
 
     // 赠品子品匹配（有 giftProductArchive 时）
+    // 如果赠品和主品是同一种商品（名称包含匹配），合并到主品的 expectedQty，不单独占用入库行
     const giftAfterSaleNum = (gifts[0] && gifts[0].afterSaleNum) || 1;
     giftArchiveSubItems.forEach(exp => {
       const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
       if (isExempt) return;
       const expQty = (exp.qty || 1) * giftAfterSaleNum;
+      const giftNameNorm = (exp.name || '').replace(/\s+/g, '');
 
+      // 先检查是否和某个已匹配的主品是同一种商品 → 合并
+      const sameItemMain = matchResults.find(m => {
+        if (!m.matched) return false;
+        const mainName = (m.matched || '').replace(/\s+/g, '');
+        return mainName.includes(giftNameNorm) || giftNameNorm.includes(mainName);
+      });
+      if (sameItemMain) {
+        // 合并：增加期望数，重新判断状态
+        sameItemMain.expectedQty += expQty;
+        sameItemMain.status = sameItemMain.receivedQty >= sameItemMain.expectedQty ? 'ok' : 'short';
+        sameItemMain.source = '主品+赠品';
+        return;
+      }
+
+      // 赠品和主品不同 → 独立匹配
       let bestIdx = -1;
       let bestScore = 0;
       receivedItems.forEach((ri, idx) => {
         if (usedReceived.has(idx)) return;
-        const nameA = (exp.name || '').replace(/\s+/g, '');
+        const nameA = giftNameNorm;
         const nameB = (ri.name || '').replace(/\s+/g, '');
         if (nameA.includes(nameB) || nameB.includes(nameA)) {
           const score = Math.min(nameA.length, nameB.length);
@@ -700,12 +724,22 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     // 全部品匹配通过且无未匹配项
+    const totalExpected = matchResults.reduce((s, m) => s + m.expectedQty, 0);
     const summary = matchResults.map(m => `${m.expected}${m.expectedQty}件`).join('+');
-    s({ type: 'branch', text: `同意退款 → 全部匹配（${summary}），入库${totalGood}件 ≥ 期望${matchResults.reduce((s,m)=>s+m.expectedQty,0)}件 (flow-5.1)` });
-    return fin(approve(
-      `入库商品明细核对通过（${summary}），良品${totalGood}件`,
+    const surplus = totalGood - totalExpected;
+    const surplusWarning = surplus > 0
+      ? [`入库${totalGood}件比期望${totalExpected}件多${surplus}件（可能客户少申请了退货份数）`]
+      : [];
+    if (surplus > 0) {
+      s({ type: 'read', label: '入库多于期望', value: `多${surplus}件（入库${totalGood} vs 期望${totalExpected}）` });
+    }
+    s({ type: 'branch', text: `同意退款 → 全部匹配（${summary}），入库${totalGood}件 ≥ 期望${totalExpected}件 (flow-5.1)` });
+    const approveResult = approve(
+      `入库商品明细核对通过（${summary}），良品${totalGood}件${surplus > 0 ? `（多${surplus}件，可能客户少申请）` : ''}`,
       [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比通过→同意退款' }]
-    ));
+    );
+    if (surplusWarning.length) approveResult.warnings = surplusWarning;
+    return fin(approveResult);
   }
 
   // ── 无 productArchive 时的降级逻辑：上报人工 ─────────────────────
