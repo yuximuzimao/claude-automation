@@ -109,12 +109,11 @@ const CHECK_SEARCH_MODE_JS = `(function(){
 function makeSearchBarcodeJS(barcode) {
   return `(function(){
     var barcode = ${JSON.stringify(barcode)};
-    var inputs = Array.from(document.querySelectorAll('input.el-input__inner'));
-    var hasField = inputs.find(function(i){ return i.value === '平台商家编码'; });
-    if (!hasField) return JSON.stringify({error:'未找到平台商家编码字段'});
-    var pivotIdx = inputs.indexOf(hasField);
-    var inp = inputs[pivotIdx + 1];
-    if (!inp) return JSON.stringify({error:'搜索输入框未找到'});
+    // 搜索输入框在 .el-input-popup-editor 内（与 product-mapping 项目一致，非 el-input__inner pivotIdx 方式）
+    var editor = document.querySelector('.el-input-popup-editor');
+    if (!editor) return JSON.stringify({error:'搜索输入框未找到（.el-input-popup-editor 不存在）'});
+    var inp = editor.querySelector('input');
+    if (!inp) return JSON.stringify({error:'搜索输入框内 input 不存在'});
     inp.click(); inp.focus();
     // 使用原生 setter 绕过 Vue el-input 包装，确保响应式触发
     var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -123,7 +122,7 @@ function makeSearchBarcodeJS(barcode) {
     inp.dispatchEvent(new Event('change', {bubbles:true}));
     // 验证值已写入
     if (inp.value !== barcode) return JSON.stringify({error:'值写入失败，期望:'+barcode+'，实际:'+inp.value});
-    // 触发回车搜索（和产品匹配项目一致，内联 dispatch 避免时序问题）
+    // 触发回车搜索
     inp.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',keyCode:13,bubbles:true}));
     inp.dispatchEvent(new KeyboardEvent('keyup',{key:'Enter',keyCode:13,bubbles:true}));
     return JSON.stringify({filled: inp.value});
@@ -228,7 +227,7 @@ async function productMatch(targetId, barcode, attr1, shopName) {
       await sleep(3500);
       // 检查结果数量：0 行说明搜索无结果，>50 说明搜索条件没生效（返回全量）
       const rowCount = await cdp.eval(targetId,
-        `document.querySelectorAll('tr.el-table__row').filter(function(r){return r.querySelector('.el-table__expand-icon')}).length`
+        `Array.from(document.querySelectorAll('tr.el-table__row')).filter(function(r){return r.querySelector('.el-table__expand-icon')}).length`
       );
       if (rowCount === 0) throw new Error(`搜索无结果（0行），货号 ${barcode}`);
       if (rowCount > 50) throw new Error(`搜索返回 ${rowCount} 行（疑似搜索条件未生效），货号 ${barcode}`);

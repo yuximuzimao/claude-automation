@@ -97,7 +97,18 @@ async function erpSearch(targetId, subOrderId) {
         throw new Error(`填入字段不正确，placeholder: ${fill.placeholder}，期望含「系统单号」`);
       }
 
-      // 轮询等待「共N条」出现（最多 8s），替换固定 sleep(4500)
+      // 先等旧结果清除（ERP 触发搜索后会短暂进入 loading，「共N条」消失）
+      // 最多等 2s；若搜索前本来就无结果则跳过
+      const hadPrevResult = await cdp.eval(targetId, `!!document.body.innerText.match(/共\\d+条/)`);
+      if (hadPrevResult) {
+        for (let c = 0; c < 4; c++) {
+          await sleep(500);
+          const stillHas = await cdp.eval(targetId, `!!document.body.innerText.match(/共\\d+条/)`);
+          if (!stillHas) break;
+        }
+      }
+
+      // 轮询等待「共N条」出现（最多 8s）
       let countText = '';
       for (let w = 0; w < 16; w++) {
         await sleep(500);
