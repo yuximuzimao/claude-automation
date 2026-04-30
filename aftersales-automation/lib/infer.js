@@ -30,6 +30,25 @@ function isRemarkEmpty(remark) {
   return /^[无\/\-\s]*$/.test(remark.trim());
 }
 
+// 判断是否有包裹签收超过指定天数（从物流文本解析签收时间）
+// 返回 { overdue: boolean, days: number, signedAt: string|null }
+function checkSignedOverDays(cd, days) {
+  const packages = (cd.logistics && cd.logistics.packages) || [];
+  const signRegex = /签收\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/;
+
+  for (const pkg of packages) {
+    const m = (pkg.text || '').match(signRegex);
+    if (!m) continue;
+    const signedAt = new Date(m[1]);
+    if (isNaN(signedAt.getTime())) continue;
+    const diffDays = (Date.now() - signedAt.getTime()) / (1000 * 60 * 60 * 24);
+    if (diffDays > days) {
+      return { overdue: true, days: Math.floor(diffDays), signedAt: m[1] };
+    }
+  }
+  return { overdue: false, days: 0, signedAt: null };
+}
+
 // 返回所有 ERP 行数据（见 docs/collect-schema.md）
 function getErpRows(cd, field) {
   return (cd[field] && cd[field].rows && cd[field].rows.rows) || [];
@@ -222,9 +241,13 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'read', label: '物流包裹数', value: packages ? `${packages.length} 个` : '未获取' });
 
     // ERP双源：同时检查 ERP 物流文本（鲸灵有时不更新退回状态）
-    const erpLogText = (cd.erpLogistics && cd.erpLogistics.logisticsText) || '';
-    const erpReturned = erpLogText ? RETURN_KEYWORDS.some(kw => erpLogText.includes(kw)) : false;
-    s({ type: 'read', label: 'ERP物流退回状态', value: erpLogText ? (erpReturned ? '已退回' : '未退回') : '未采集' });
+    // erpLogistics 格式：{ results: [{ tracking, logisticsText }, ...] }（多行）或旧格式 { logisticsText }（单行兼容）
+    const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
+      ? cd.erpLogistics.results
+      : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+    const erpReturned = erpLogResults.some(r => r.logisticsText && RETURN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
+    const erpLogSummary = erpLogResults.length ? erpLogResults.map(r => r.tracking || '?').join(',') : '';
+    s({ type: 'read', label: 'ERP物流退回状态', value: erpLogResults.length ? (erpReturned ? `已退回（${erpLogSummary}）` : `未退回（${erpLogSummary}）`) : '未采集' });
 
     if (!packages || !packages.length) {
       if (erpReturned) {
@@ -275,11 +298,36 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
-    const anySigned = anyPackageSignedByBuyer(packages);
-    s({ type: 'check', condition: '有包裹已被买家签收（且无退回节点）', result: anySigned });
+    // 逐包裹分类：已签收 vs 在途（可拦截）
+    const signedPkgs = [];
+    const inTransitPkgs = [];
+    const returnedPkgs = [];
+    packages.forEach(pkg => {
+      const text = pkg.text || '';
+      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
+      const numMatch = text.match(/物流单号[：:]\s*([A-Za-z0-9]+)/);
+      const tracking = numMatch ? numMatch[1] : (pkg.num || '?');
+      if (hasReturn) returnedPkgs.push(tracking);
+      else if (hasSigned) signedPkgs.push(tracking);
+      else inTransitPkgs.push(tracking);
+    });
+    s({ type: 'read', label: '包裹分类', value: `已签收:${signedPkgs.join(',') || '无'} 在途:${inTransitPkgs.join(',') || '无'} 已退回:${returnedPkgs.join(',') || '无'}` });
+
+    const anySigned = signedPkgs.length > 0;
 
     if (anySigned) {
-      s({ type: 'branch', text: '拒绝退款 → 商品已签收，改退货退款' });
+      // 有包裹已签收：如果同时有在途包裹 → escalate（需拦截在途件+已签收需退货退款）
+      // 如果全部已签收 → reject（无件可拦截）
+      if (inTransitPkgs.length > 0) {
+        const desc = `已签收包裹（${signedPkgs.join('、')}）需买家申请退货退款；在途包裹（${inTransitPkgs.join('、')}）需拦截`;
+        s({ type: 'branch', text: `上报 → 混合状态：${desc}` });
+        return fin(escalate(desc, {
+          rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '部分签收+部分在途→拦截在途件+签收件走退货退款' }],
+        }));
+      }
+      // 全部已签收，无在途件
+      s({ type: 'branch', text: '拒绝退款 → 全部包裹已签收，无件可拦截，请申请退货退款' });
       return fin(reject(
         '商品已签收，无法拦截，请自行申请退货退款',
         [],
@@ -287,8 +335,8 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
-    // 驿站待取件：货到了买家未取，应拒绝并通知拦截（驿站可退件）
-    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站'];
+    // 驿站/快递柜待取件：货到了买家未取，应拒绝并通知拦截（驿站/快递柜可退件）
+    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
     const anyAtYizhan = packages.some(pkg => {
       const text = pkg.text || '';
       const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
@@ -322,7 +370,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'branch', text: `自动标记等待重查 → 在途拦截件，剩余${remainingHours.toFixed(1)}h > 下次扫描${hoursUntilNextScan.toFixed(1)}h` });
       return fin({
         ...escalate(
-          `订单在途，剩余时效${queueItem.urgency}充足，等拦截退回后下次扫描自动重查`,
+          `订单在途，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
           {
             confidence: 'high',
             rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余>下次扫描→自动等待重查' }],
@@ -332,11 +380,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    s({ type: 'branch', text: `拒绝退款 → 在途拦截件，时效紧张或无法判断，立即处理` });
+    s({ type: 'branch', text: `拒绝退款 → 在途拦截件，剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h，立即处理` });
     return fin(reject(
       '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
       ['需创建快递拦截提醒'],
-      [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+时效紧张→拒绝+创建拦截提醒' }]
+      [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余时效不足→拒绝+创建拦截提醒' }]
     ));
   }
 
@@ -363,13 +411,19 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     const isNonQualityReason = NON_MERCHANT_REASONS.some(kw => reason.includes(kw));
 
     // 售后原因是"质量问题"/"其他"但buyerRemark含超期/无理由关键词（实为个人原因）
+    // 三重校验：原因 + 关键词 + 签收距今>7天
     const OVERDUE_KEYWORDS = ['买重复', '买多', '买多了', '买错', '拍错', '重复购买', '不想要', '拍多', '未拆封', '没拆开'];
-    const isQualityOrOtherWithOverdueRemark = (reason.includes('质量问题') || reason.includes('其他')) &&
+    const hasOverdueKeyword = (reason.includes('质量问题') || reason.includes('其他')) &&
       OVERDUE_KEYWORDS.some(kw => remark.includes(kw));
+    const signedCheck = hasOverdueKeyword ? checkSignedOverDays(cd, 7) : { overdue: false };
+    const isQualityOrOtherWithOverdueRemark = hasOverdueKeyword && signedCheck.overdue;
+    if (hasOverdueKeyword) {
+      s({ type: 'check', condition: '签收距今>7天', result: signedCheck.overdue ? `是（签收${signedCheck.days}天前 ${signedCheck.signedAt}）` : '否' });
+    }
 
     if (isNonQualityReason || isQualityOrOtherWithOverdueRemark) {
       const rejectNote = isQualityOrOtherWithOverdueRemark
-        ? `售后原因"${reason}"但备注"${remark}"，实为超售后期无理由退货，不支持`
+        ? `售后原因"${reason}"备注"${remark}"，签收${signedCheck.days}天前（${signedCheck.signedAt}），超售后期不支持`
         : `售后原因"${reason}"属于无理由退货诉求，超过售后期不支持`;
       s({ type: 'branch', text: `拒绝退款 → ${rejectNote}` });
       const d = reject(
@@ -426,7 +480,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
           confidence: 'high',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '无入库+无说明+无图片+时效充足→自动等待重查' }],
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '无入库+无说明+无图片+剩余时效>下次扫描→自动等待重查' }],
         }),
         waitingRescan: true,
       });
@@ -453,7 +507,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
           confidence: 'high',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '有ERP记录未入库+无说明+无图片+时效充足→自动等待重查' }],
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '有ERP记录未入库+无说明+无图片+剩余时效>下次扫描→自动等待重查' }],
         }),
         waitingRescan: true,
       });
@@ -463,74 +517,150 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
 
-  let qtyGood = 0, qtyBad = 0, qtyAccessory = 0;
+  // ── 收集入库明细 ─────────────────────────────────────────────────
+  const receivedItems = [];  // { name, qtyGood, qtyBad }
   aftersale.rows.forEach(row => {
     (row.items || []).forEach(item => {
-      if (EXEMPT_ACCESSORY_KEYWORDS.some(kw => (item.name || '').includes(kw))) {
-        qtyAccessory += parseInt(item.qtyGood) || 0;
-      } else {
-        qtyGood += parseInt(item.qtyGood) || 0;
-        qtyBad += parseInt(item.qtyBad) || 0;
-      }
+      const name = item.name || '';
+      if (EXEMPT_ACCESSORY_KEYWORDS.some(kw => name.includes(kw))) return;
+      receivedItems.push({
+        name,
+        qtyGood: parseInt(item.qtyGood) || 0,
+        qtyBad: parseInt(item.qtyBad) || 0,
+      });
     });
   });
-  s({ type: 'read', label: '入库数量', value: `良品 ${qtyGood} 件，次品 ${qtyBad} 件${qtyAccessory > 0 ? `，免退配件 ${qtyAccessory} 件（已排除）` : ''}` });
+  const totalGood = receivedItems.reduce((s, i) => s + i.qtyGood, 0);
+  const totalBad = receivedItems.reduce((s, i) => s + i.qtyBad, 0);
+  s({ type: 'read', label: '入库数量', value: `良品 ${totalGood} 件，次品 ${totalBad} 件` });
 
-  if (qtyBad > 0) {
-    s({ type: 'branch', text: `上报 → 次品 ${qtyBad} 件，需人工处理 (flow-5.1)` });
-    return fin(escalate(`退货含次品（次品${qtyBad}件），需人工处理`, {
+  // ── 次品检查：逐商品报告 ────────────────────────────────────────
+  const badItems = receivedItems.filter(i => i.qtyBad > 0);
+  if (badItems.length > 0) {
+    const badDesc = badItems.map(i => `${i.name}（次品${i.qtyBad}件）`).join('、');
+    s({ type: 'branch', text: `上报 → 次品：${badDesc}` });
+    return fin(escalate(`退货含次品：${badDesc}，需人工处理`, {
       confidence: 'high',
-      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'qtyBad>0→上报人工' }],
+      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '次品→上报人工' }],
     }));
   }
 
-  const subOrder = ticket.subOrders && ticket.subOrders[0];
-  const afterSaleNum = (subOrder && subOrder.afterSaleNum) || 1;
+  // ── 逐商品对比（有 productArchive 时）────────────────────────────
+  const subOrders = ticket.subOrders || [];
+  const gifts = ticket.gifts || [];
+  const archive = cd.productArchive;
+  const archiveSubItems = (archive && archive.subItems) || [];
 
-  // 若 product-match attr1 未精确匹配（productArchive 为 null），无法确认 subItemNum
-  // → 组合装套件的数量判断会出错（以单品1件/套计算），必须上报人工核查
+  // 检查 productArchive 是否可用
   const pmAttr1MismatchError = (cd.collectErrors || []).find(e => e.startsWith('product-match: attr1') && e.includes('未精确匹配'));
-  if (pmAttr1MismatchError && !cd.productArchive) {
-    s({ type: 'branch', text: `上报 → 对应表规格属性匹配失败，无法确认 subItemNum，数量校验有误判风险` });
-    return fin(escalate(`商品规格属性在对应表中未精确匹配，无法确认套件数量，需人工核查后处理`, {
-      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'attr1 mismatch → subItemNum unknown → 上报' }],
+  if (pmAttr1MismatchError && !archive) {
+    s({ type: 'branch', text: `上报 → 对应表规格属性匹配失败，无法确认商品明细` });
+    return fin(escalate(`商品规格属性在对应表中未精确匹配，无法确认商品明细，需人工核查后处理`, {
+      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'attr1 mismatch → 上报' }],
       warnings: [pmAttr1MismatchError],
     }));
   }
-
-  // specCode 存在但 product-archive 采集失败 → subItemNum 未知，无法做数量判断，上报人工
-  const paFailError = !cd.productArchive && (cd.collectErrors || []).find(e => e.startsWith('product-archive:') && !e.includes('跳过'));
+  const paFailError = !archive && (cd.collectErrors || []).find(e => e.startsWith('product-archive:') && !e.includes('跳过'));
   if (cd.productMatch && cd.productMatch.specCode && paFailError) {
-    s({ type: 'branch', text: `上报 → product-archive 采集失败，无法确认套件数量` });
-    return fin(escalate(
-      `商品档案V2采集失败（ERP编码：${cd.productMatch.specCode}），无法确认套件数量，需人工核查`,
-      {
-        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'product-archive失败 → subItemNum未知 → 上报' }],
-        warnings: [paFailError],
+    s({ type: 'branch', text: `上报 → product-archive 采集失败，无法确认商品明细` });
+    return fin(escalate(`商品档案V2采集失败（ERP编码：${cd.productMatch.specCode}），无法确认商品明细，需人工核查`, {
+      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'product-archive失败 → 上报' }],
+      warnings: [paFailError],
+    }));
+  }
+
+  if (archiveSubItems.length > 0) {
+    // ── 逐商品匹配 ──────────────────────────────────────────────
+    const afterSaleNum = (subOrders[0] && subOrders[0].afterSaleNum) || 1;
+    const matchResults = [];  // { expected: item, expectedQty, matched, receivedQty, status }
+    const usedReceived = new Set();  // 已匹配的入库项索引
+
+    archiveSubItems.forEach(exp => {
+      const isExempt = EXEMPT_ACCESSORY_KEYWORDS.some(kw => (exp.name || '').includes(kw));
+      if (isExempt) return;
+      const expQty = (exp.qty || 1) * afterSaleNum;
+
+      // 在入库 items 中找最佳匹配（名称包含匹配）
+      let bestIdx = -1;
+      let bestScore = 0;
+      receivedItems.forEach((ri, idx) => {
+        if (usedReceived.has(idx)) return;
+        // 双向包含匹配
+        const nameA = (exp.name || '').replace(/\s+/g, '');
+        const nameB = (ri.name || '').replace(/\s+/g, '');
+        if (nameA.includes(nameB) || nameB.includes(nameA)) {
+          const score = Math.min(nameA.length, nameB.length);
+          if (score > bestScore) { bestScore = score; bestIdx = idx; }
+        }
+      });
+
+      if (bestIdx >= 0) {
+        usedReceived.add(bestIdx);
+        const ri = receivedItems[bestIdx];
+        const status = ri.qtyGood >= expQty ? 'ok' : 'short';
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: ri.name, receivedQty: ri.qtyGood, status });
+      } else {
+        matchResults.push({ expected: exp.name, expectedQty: expQty, matched: null, receivedQty: 0, status: 'missing' });
       }
-    ));
-  }
+    });
 
-  const subItemNum = cd.productArchive && (cd.productArchive.subItemNum || 0);
-  const exemptInArchive = (subItemNum > 0 && cd.productArchive && cd.productArchive.subItems)
-    ? cd.productArchive.subItems
-        .filter(i => EXEMPT_ACCESSORY_KEYWORDS.some(kw => (i.name || '').includes(kw)))
-        .reduce((sum, i) => sum + (i.qty != null ? i.qty : 1), 0)
-    : 0;
-  const effectiveSubItemNum = subItemNum > 0 ? subItemNum - exemptInArchive : subItemNum;
-  const expectedQty = effectiveSubItemNum > 0 ? afterSaleNum * effectiveSubItemNum : afterSaleNum;
-  s({ type: 'check', condition: `良品数量 ${qtyGood} ≥ 应退数量 ${expectedQty}（申请 ${afterSaleNum} 套 × ${effectiveSubItemNum || 1} 件/套${exemptInArchive > 0 ? `，已排除${exemptInArchive}件免退配件` : ''}）`, result: qtyGood >= expectedQty });
+    // 输出匹配结果
+    matchResults.forEach(m => {
+      const label = m.status === 'ok' ? '✓' : m.status === 'short' ? '✗不足' : '✗缺失';
+      s({ type: 'check', condition: `${m.expected}`, result: `${label} 期望${m.expectedQty}件，入库${m.receivedQty}件${m.matched ? `（匹配：${m.matched}）` : ''}` });
+    });
 
-  if (qtyGood >= expectedQty) {
-    s({ type: 'branch', text: `同意退款 → ERP入库 ${qtyGood} 件良品，与申请套数吻合 (flow-5.1)` });
+    // 检查赠品是否在入库中（未匹配的入库项可能是赠品）
+    const unmatchedReceived = receivedItems.filter((_, idx) => !usedReceived.has(idx));
+    if (unmatchedReceived.length > 0) {
+      const giftDesc = unmatchedReceived.map(i => `${i.name}(${i.qtyGood}件)`).join('、');
+      s({ type: 'read', label: '入库额外项（可能为赠品）', value: giftDesc });
+    }
+
+    // 判断结果
+    const hasShortage = matchResults.some(m => m.status !== 'ok');
+    if (hasShortage) {
+      const shortItems = matchResults.filter(m => m.status !== 'ok');
+      const shortDesc = shortItems.map(m =>
+        m.status === 'missing' ? `${m.expected}（完全缺失）` : `${m.expected}（期望${m.expectedQty}件，入库${m.receivedQty}件）`
+      ).join('、');
+      s({ type: 'branch', text: `上报 → 主品入库不足：${shortDesc}` });
+      return fin(escalate(`入库商品明细不符：${shortDesc}，需人工核查`, {
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比→主品不足→上报' }],
+      }));
+    }
+
+    // 全部主品匹配通过
+    const summary = matchResults.map(m => `${m.expected}${m.expectedQty}件`).join('+');
+    s({ type: 'branch', text: `同意退款 → 主品全部匹配（${summary}），入库${totalGood}件 ≥ 期望${matchResults.reduce((s,m)=>s+m.expectedQty,0)}件 (flow-5.1)` });
     return fin(approve(
-      `ERP入库${qtyGood}件良品，与申请套数(${afterSaleNum})吻合`,
-      [{ doc: 'flow-5.1', section: 'Step4', summary: '入库数量吻合→同意退款' }]
+      `入库商品明细核对通过（${summary}），良品${totalGood}件`,
+      [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比通过→同意退款' }]
     ));
   }
 
-  s({ type: 'branch', text: `上报 → 入库数量不足 ${qtyGood}/${expectedQty}` });
-  return fin(escalate(`入库数量不足：应退${expectedQty}件，实际入库${qtyGood}件`));
+  // ── 无 productArchive 时的降级逻辑：上报人工 ─────────────────────
+  let expectedMainQty = 0;
+  subOrders.forEach(so => {
+    expectedMainQty += (so.afterSaleNum || 1);
+  });
+  let expectedGiftQty = 0;
+  gifts.forEach(g => {
+    const attr = g.attr1 || '';
+    const parts = attr.split(/[+＋、]/).filter(Boolean);
+    expectedGiftQty += parts.length > 0 ? parts.length : 1;
+  });
+  const expectedQty = expectedMainQty + expectedGiftQty;
+  const qtyDesc = gifts.length > 0 ? `主品${expectedMainQty}件+赠品${expectedGiftQty}件` : `${expectedMainQty}件`;
+
+  s({ type: 'check', condition: `良品 ${totalGood} ≥ 应退 ${expectedQty}（${qtyDesc}，无商品档案按单品算）`, result: totalGood >= expectedQty });
+
+  // 无 productArchive 时无法准确计算应退数量，禁止自动批准
+  s({ type: 'branch', text: `上报 → 无商品档案，无法核对应退数量，需人工核查 (flow-5.1)` });
+  return fin(escalate(
+    `无商品档案，无法核对应退数量（入库${totalGood}件，申请${expectedMainQty}件），需人工核查`,
+    [{ doc: 'flow-5.1', section: 'Step4', summary: '无档案→上报人工（安全优先）' }]
+  ));
 }
 
 // ── 主入口：校验 + 路由 ───────────────────────────────────────────

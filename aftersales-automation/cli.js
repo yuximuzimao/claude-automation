@@ -28,6 +28,7 @@ ERP命令:
   erp-search <子订单号>             ERP订单搜索
   erp-aftersale <快递单号>          ERP售后工单搜索
   erp-logistics <行号>              读ERP订单详情物流（0-based）
+  erp-logistics-all               遍历所有ERP行读物流
 
 商品查询:
   product-match <货号> <attr1> <ERP店铺名>   商品对应表查询（店铺名见 lib/erp/shop-map.js）
@@ -195,6 +196,11 @@ async function main() {
         const rowIndex = args[1] !== undefined ? parseInt(args[1]) : 0;
         const { readErpLogistics } = require('./lib/erp/read-logistics');
         result = await readErpLogistics(erpId, rowIndex);
+        break;
+      }
+      case 'erp-logistics-all': {
+        const { readAllErpLogistics } = require('./lib/erp/read-logistics');
+        result = await readAllErpLogistics(erpId);
         break;
       }
       case 'product-match': {

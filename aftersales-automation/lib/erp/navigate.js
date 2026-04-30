@@ -224,7 +224,15 @@ async function navigateErp(targetId, pageName) {
     const loginStatus = await checkLogin(targetId);
     if (!loginStatus.loggedIn) {
       if (process.env.VERBOSE) process.stderr.write(`[navigateErp] ERP 已掉线，尝试恢复登录\n`);
-      await recoverLogin(targetId);
+      try {
+        await recoverLogin(targetId);
+      } catch {
+        // 恢复失败，重试一次：重新加载页面再恢复
+        await sleep(2000);
+        await cdp.eval(targetId, 'location.reload()');
+        await sleep(4000);
+        await recoverLogin(targetId);
+      }
     }
   }
 

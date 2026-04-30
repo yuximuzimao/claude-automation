@@ -1,7 +1,8 @@
 'use strict';
 const cdp = require('../cdp');
-const { sleep, waitFor } = require('../wait');
+const { sleep, waitFor, retry } = require('../wait');
 const { ok, fail } = require('../result');
+const { checkLogin, recoverLogin } = require('./navigate');
 
 // 展开订单行并打开 show_detail_dialog 读物流
 function makeOpenDialogJS(rowIndex) {
@@ -61,6 +62,11 @@ const DIALOG_COUNT_JS = `Array.from(document.querySelectorAll('.el-dialog__wrapp
 
 async function readErpLogistics(targetId, rowIndex) {
   try {
+    // 登录检查 + 自动恢复
+    const loginStatus = await checkLogin(targetId);
+    if (!loginStatus.loggedIn) {
+      await recoverLogin(targetId);
+    }
     // 展开行
     const expand = await cdp.eval(targetId, makeOpenDialogJS(rowIndex));
     if (expand.error) throw new Error(expand.error);
@@ -94,4 +100,36 @@ async function readErpLogistics(targetId, rowIndex) {
   }
 }
 
-module.exports = { readErpLogistics };
+// 读取所有行的物流信息（遍历每行展开→详情→读物流→关闭）
+async function readAllErpLogistics(targetId) {
+  try {
+    // 登录检查
+    const loginStatus = await checkLogin(targetId);
+    if (!loginStatus.loggedIn) await recoverLogin(targetId);
+
+    // 获取总行数
+    const rowCount = await cdp.eval(targetId,
+      `Array.from(document.querySelectorAll('.module-trade-list-item')).length`
+    );
+    if (!rowCount || rowCount === 0) return ok({ results: [], note: '无ERP行' });
+
+    const results = [];
+    for (let i = 0; i < rowCount; i++) {
+      try {
+        const r = await readErpLogistics(targetId, i);
+        if (r.success) {
+          results.push(r.data);
+        } else {
+          results.push({ rowIndex: i, error: r.error });
+        }
+      } catch (e) {
+        results.push({ rowIndex: i, error: e.message });
+      }
+    }
+    return ok({ results });
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+module.exports = { readErpLogistics, readAllErpLogistics };

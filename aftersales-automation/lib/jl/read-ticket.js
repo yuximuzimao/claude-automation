@@ -156,7 +156,15 @@ async function readTicket(targetId, workOrderNum) {
         const v = await cdp.eval(targetId, verifyJS);
         if (v === 'ok') { pageOk = true; break; }
         if (v === 'notfound' && i >= 2) {
-          return fail(`工单 ${workOrderNum} 页面未找到，账号可能未切换到对应店铺`);
+          // 反查工单列表区分"已处理"vs"切错店铺"
+          await navigate(targetId, '/business/after-sale-list');
+          await new Promise(r => setTimeout(r, 2000));
+          const listText = await cdp.eval(targetId, 'document.body.innerText || ""');
+          const inList = listText.includes(workOrderNum);
+          if (inList) {
+            return fail(`工单 ${workOrderNum} 在列表中可见但详情页加载失败，请重试`);
+          }
+          return fail(`工单 ${workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
         }
       } catch { /* ignore */ }
     }

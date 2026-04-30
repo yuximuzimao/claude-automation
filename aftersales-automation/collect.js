@@ -181,11 +181,11 @@ async function collectOne(item) {
       collected.collectErrors.push('erp-aftersale: 无退货快递单号，跳过（非退货退款类型正常）');
     }
 
-    // Step 5b: erp-logistics（仅退款-已发货时，采集ERP物流作为双源核查依据）
+    // Step 5b: erp-logistics（遍历所有ERP行采集物流，作为双源核查依据）
     // 注：ERP物流需在 erp-search 成功后执行（页面已停留在ERP订单管理搜索结果页）
-    // 失败时静默跳过（ERP已完成工单页面结构不同，行数可能为0）——属于补充来源，不影响推理
-    if (item.type === '仅退款' && collected.erpSearch && !collected.collectErrors.some(e => e.startsWith('erp-search:'))) {
-      const erpLogRes = runCmd(['erp-logistics', '0']);
+    // 失败时静默跳过——属于补充来源，不影响推理
+    if (collected.erpSearch && !collected.collectErrors.some(e => e.startsWith('erp-search:'))) {
+      const erpLogRes = runCmd(['erp-logistics-all']);
       if (erpLogRes.success) {
         collected.erpLogistics = erpLogRes.data;
       }

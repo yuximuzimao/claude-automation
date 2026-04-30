@@ -71,6 +71,16 @@ async function approveTicket(targetId, workOrderNum) {
         return null;
       }, { timeoutMs: 10500, intervalMs: 1500, label: `verify-ticket ${workOrderNum}` });
     } catch (e) {
+      // 工单未找到时反查列表区分"已处理"vs"切错店铺"
+      if (e.message && e.message.includes('页面未找到')) {
+        await navigate(targetId, '/business/after-sale-list');
+        await sleep(2000);
+        const listText = await cdp.eval(targetId, 'document.body.innerText || ""');
+        if (listText.includes(workOrderNum)) {
+          return fail(`工单 ${workOrderNum} 在列表中可见但详情页加载失败，请重试`);
+        }
+        return fail(`工单 ${workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
+      }
       return fail(e.message.startsWith('waitFor 超时') ? '工单详情未加载超时，账号可能不匹配' : e.message);
     }
 

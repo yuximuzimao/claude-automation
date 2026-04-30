@@ -357,24 +357,18 @@ function parseUrgencyMinutes(urgency) {
 }
 
 // 实时倒计时格式化（从 deadlineAt ISO 时间戳计算）
+// 显示总小时数，保留1位小数
 function formatCountdown(deadlineAt) {
   if (!deadlineAt) return null;
   const diff = new Date(deadlineAt).getTime() - Date.now();
   if (diff <= 0) return { text: '已过期', className: 'urgency-expired' };
-  const hours = Math.floor(diff / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const days = Math.floor(hours / 24);
-  const remHours = hours % 24;
-
-  let text;
-  if (days > 0) text = days + '天' + remHours + '小时';
-  else if (hours > 0) text = hours + '小时' + mins + '分';
-  else text = mins + '分钟';
+  const totalHours = diff / 3600000;
+  const text = totalHours.toFixed(1) + 'h';
 
   let className = 'urgency-safe';
-  if (hours < 6) className = 'urgency-critical';
-  else if (hours < 12) className = 'urgency-warning';
-  else if (hours < 24) className = 'urgency-caution';
+  if (totalHours < 6) className = 'urgency-critical';
+  else if (totalHours < 12) className = 'urgency-warning';
+  else if (totalHours < 24) className = 'urgency-caution';
 
   return { text: text, className: className };
 }

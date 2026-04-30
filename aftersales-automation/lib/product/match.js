@@ -44,6 +44,60 @@ function makeSelectShopJS(shopName) {
 })()`;
 }
 
+// 在主页 el-select 中设置搜索模式
+// 按选项内容定位正确的 select（不依赖固定索引，避免页面结构变化导致设错）
+async function setMainPageSelect(targetId, optionText) {
+  // Step 1: 先关闭所有已打开的下拉菜单，避免点到错误的 dropdown item
+  await cdp.eval(targetId, `document.body.click()`);
+  await sleep(200);
+
+  // Step 2: 找到目标 select 并点击打开
+  const js = `(function(){
+    var optionText = ${JSON.stringify(optionText)};
+    var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
+      return !s.closest('.el-dialog__wrapper');
+    });
+    for (var i = 0; i < sels.length; i++) {
+      var vm = sels[i].__vue__;
+      if (!vm || !vm.options) continue;
+      var hasOpt = Array.from(vm.options).some(function(o){ return (o.label||o.currentLabel||'') === optionText; });
+      if (!hasOpt) continue;
+      var inp = sels[i].querySelector('input');
+      if (inp && inp.value === optionText) return JSON.stringify({already: true, idx: i});
+      // 记录 select 的位置，用于后续定位正确的 dropdown
+      var rect = sels[i].getBoundingClientRect();
+      sels[i].click();
+      return JSON.stringify({clicked: true, idx: i, top: rect.top, left: rect.left});
+    }
+    return JSON.stringify({error:'未找到包含选项「' + optionText + '」的 select'});
+  })()`;
+  const r = await cdp.eval(targetId, js);
+  if (r.error) throw new Error(r.error);
+  if (r.already) return;
+  await sleep(500);
+
+  // Step 3: 在可见的 dropdown 中找到匹配项并点击（只找最近弹出的）
+  await cdp.eval(targetId, `(function(){
+    var optionText = ${JSON.stringify(optionText)};
+    var popper = document.querySelector('.el-select-dropdown__wrap');
+    // 找所有可见的 dropdown items（在可见的 popper 容器内）
+    var dropdowns = Array.from(document.querySelectorAll('.el-select-dropdown')).filter(function(d){
+      return d.style.display !== 'none' && d.offsetHeight > 0;
+    });
+    // 从最后一个（最新打开的）开始找
+    for (var d = dropdowns.length - 1; d >= 0; d--) {
+      var items = dropdowns[d].querySelectorAll('.el-select-dropdown__item');
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].innerText.trim() === optionText && items[i].getBoundingClientRect().height > 0) {
+          items[i].click(); return 'clicked:' + optionText;
+        }
+      }
+    }
+    return 'not_found';
+  })()`);
+  await sleep(300);
+}
+
 // 确认搜索模式为「精确搜索」+「平台商家编码」
 const CHECK_SEARCH_MODE_JS = `(function(){
   var inputs = Array.from(document.querySelectorAll('input.el-input__inner'));
@@ -54,6 +108,7 @@ const CHECK_SEARCH_MODE_JS = `(function(){
 
 function makeSearchBarcodeJS(barcode) {
   return `(function(){
+    var barcode = ${JSON.stringify(barcode)};
     var inputs = Array.from(document.querySelectorAll('input.el-input__inner'));
     var hasField = inputs.find(function(i){ return i.value === '平台商家编码'; });
     if (!hasField) return JSON.stringify({error:'未找到平台商家编码字段'});
@@ -61,9 +116,16 @@ function makeSearchBarcodeJS(barcode) {
     var inp = inputs[pivotIdx + 1];
     if (!inp) return JSON.stringify({error:'搜索输入框未找到'});
     inp.click(); inp.focus();
-    inp.value = ${JSON.stringify(barcode)};
+    // 使用原生 setter 绕过 Vue el-input 包装，确保响应式触发
+    var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+    nativeSetter.call(inp, barcode);
     inp.dispatchEvent(new Event('input', {bubbles:true}));
     inp.dispatchEvent(new Event('change', {bubbles:true}));
+    // 验证值已写入
+    if (inp.value !== barcode) return JSON.stringify({error:'值写入失败，期望:'+barcode+'，实际:'+inp.value});
+    // 触发回车搜索（和产品匹配项目一致，内联 dispatch 避免时序问题）
+    inp.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',keyCode:13,bubbles:true}));
+    inp.dispatchEvent(new KeyboardEvent('keyup',{key:'Enter',keyCode:13,bubbles:true}));
     return JSON.stringify({filled: inp.value});
   })()`;
 }
@@ -149,22 +211,29 @@ async function productMatch(targetId, barcode, attr1, shopName) {
     }, { maxRetries: 3, delayMs: 1500, label: `set shop filter ${shopName}` });
     await sleep(1500); // 过滤器切换后额外等待，确保查询参数生效后再搜索
 
-    // 验证搜索模式
+    // 设置搜索模式为「精确搜索」+「平台商家编码」，然后验证
     await retry(async () => {
+      await setMainPageSelect(targetId, '精确搜索');
+      await setMainPageSelect(targetId, '平台商家编码');
       const mode = await cdp.eval(targetId, CHECK_SEARCH_MODE_JS);
       if (!mode.hasExact || !mode.hasField) {
-        throw new Error(`搜索模式不正确: hasExact=${mode.hasExact}, hasField=${mode.hasField}，请手动设置为「精确搜索」+「平台商家编码」`);
+        throw new Error(`搜索模式设置失败: hasExact=${mode.hasExact}, hasField=${mode.hasField}`);
       }
-    }, { maxRetries: 3, delayMs: 1000, label: `check-search-mode ${barcode}` });
+    }, { maxRetries: 3, delayMs: 1500, label: `set-search-mode ${barcode}` });
 
-    // 填值搜索
+    // 填值搜索（Enter 已在 makeSearchBarcodeJS 内联触发）
     await retry(async () => {
       const fill = await cdp.eval(targetId, makeSearchBarcodeJS(barcode));
       if (fill.error) throw new Error(fill.error);
-      await cdp.key(targetId, 'Enter');
       await sleep(3500);
+      // 检查结果数量：0 行说明搜索无结果，>50 说明搜索条件没生效（返回全量）
+      const rowCount = await cdp.eval(targetId,
+        `document.querySelectorAll('tr.el-table__row').filter(function(r){return r.querySelector('.el-table__expand-icon')}).length`
+      );
+      if (rowCount === 0) throw new Error(`搜索无结果（0行），货号 ${barcode}`);
+      if (rowCount > 50) throw new Error(`搜索返回 ${rowCount} 行（疑似搜索条件未生效），货号 ${barcode}`);
       const hasResult = await cdp.eval(targetId, `document.body.innerText.includes(${JSON.stringify(barcode)})`);
-      if (!hasResult) throw new Error(`搜索结果未包含货号 ${barcode}`);
+      if (!hasResult) throw new Error(`搜索结果未包含货号 ${barcode}（${rowCount}行中找不到）`);
     }, { maxRetries: 3, delayMs: 2000, label: `product-match ${barcode}` });
 
     // ── 验证1：结果唯一性 + 平台商家编码完全一致 ───────────────
