@@ -652,7 +652,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'check', condition: `${srcTag}${m.expected}`, result: `${label} 期望${m.expectedQty}件，入库${m.receivedQty}件${m.matched ? `（匹配：${m.matched}）` : ''}` });
     });
 
-    // 检查赠品是否在入库中（未匹配的入库项可能是赠品）
+    // 检查赠品是否在入库中（未匹配的入库项可能是赠品或 archive 缺失的品类）
     const unmatchedReceived = receivedItems.filter((_, idx) => !usedReceived.has(idx));
     if (unmatchedReceived.length > 0) {
       const giftDesc = unmatchedReceived.map(i => `${i.name}(${i.qtyGood}件)`).join('、');
@@ -672,9 +672,36 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       }));
     }
 
-    // 全部主品匹配通过
+    // 全部已知品匹配通过，但有未匹配的入库项 → archive 不完整（活动组合更新等）
+    // 从 attr1 解析疑似明细作为提示，escalate 人工
+    if (unmatchedReceived.length > 0) {
+      // 解析 attr1 中的 "商品*数量" 模式
+      const allAttr1 = [
+        ...(subOrders || []).map(o => o.attr1 || ''),
+        ...(gifts || []).map(g => g.attr1 || ''),
+      ].filter(Boolean);
+      const parsedHints = allAttr1.map(a => {
+        const parts = a.split(/[+＋]/).map(p => p.trim()).filter(Boolean);
+        return parts.map(p => {
+          const m = p.match(/^(.+?)[*×＊](\d+)/);
+          return m ? `${m[1]}×${m[2]}` : p;
+        }).join('+');
+      }).join('；');
+      const unmatchedDesc = unmatchedReceived.map(i => `${i.name}(${i.qtyGood}件)`).join('、');
+      s({ type: 'branch', text: `上报 → 商品档案不含入库中的部分品类，疑似活动组合更新` });
+      return fin(escalate(
+        `商品档案不完整：入库含${unmatchedDesc}未在档案中，疑似活动组合已更新。根据规格名称推测明细：${parsedHints || '无法解析'}，afterSaleNum=${afterSaleNum}，需人工核对`,
+        {
+          confidence: 'medium',
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '档案不含全部入库品→上报+提示' }],
+          warnings: [`入库额外项：${unmatchedDesc}`],
+        }
+      ));
+    }
+
+    // 全部品匹配通过且无未匹配项
     const summary = matchResults.map(m => `${m.expected}${m.expectedQty}件`).join('+');
-    s({ type: 'branch', text: `同意退款 → 主品全部匹配（${summary}），入库${totalGood}件 ≥ 期望${matchResults.reduce((s,m)=>s+m.expectedQty,0)}件 (flow-5.1)` });
+    s({ type: 'branch', text: `同意退款 → 全部匹配（${summary}），入库${totalGood}件 ≥ 期望${matchResults.reduce((s,m)=>s+m.expectedQty,0)}件 (flow-5.1)` });
     return fin(approve(
       `入库商品明细核对通过（${summary}），良品${totalGood}件`,
       [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比通过→同意退款' }]
