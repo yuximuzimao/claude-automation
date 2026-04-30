@@ -283,10 +283,24 @@ async function execScanFinalize(op) {
   // 清理已退回的拦截记录
   await cleanReturnedIntercepts();
 
-  // 每张 pending/collected live 工单单独入队推理（可逐条取消）
-  // collected = 采集完成但推理未执行（手动 collect.js 或上次中断留下的）
+  // 批量重置：所有 pending/collected/simulated live 工单统一设为 pending
+  // 让前端立即看到"全部待采集"，而不是只有正在处理的那条在变
+  const allLive = (db.readQueue().items || []).filter(i =>
+    ['pending', 'collected', 'simulated'].includes(i.status) && i.mode === 'live'
+  );
+  for (const item of allLive) {
+    if (item.status !== 'pending') {
+      db.updateQueueItem(item.id, { status: 'pending' });
+    }
+  }
+  // 一次性广播，前端刷新所有卡片为"待采集"
+  if (allLive.length) {
+    sse.broadcast('queue-update', { resetCount: allLive.length });
+  }
+
+  // 每张 pending live 工单单独入队推理（可逐条取消）
   const pending = (db.readQueue().items || []).filter(i =>
-    (i.status === 'pending' || i.status === 'collected') && i.mode === 'live'
+    i.status === 'pending' && i.mode === 'live'
   );
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;

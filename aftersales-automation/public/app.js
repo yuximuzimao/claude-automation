@@ -606,8 +606,10 @@ function renderHistoryCard(c, latestFb) {
 
 // ── 卡片渲染（实际工单 + 模拟训练）──────────────────────────────
 function renderCard(item, sim, mode, prevSims = [], seqNum = null) {
-  const action = sim && sim.decision && sim.decision.action || 'pending';
-  const fbStatus = sim && sim.feedbackStatus || 'pending';
+  // pending 状态不使用旧 sim 的决策（批量重扫时清掉旧标签）
+  const activeSim = item.status === 'pending' ? null : sim;
+  const action = activeSim && activeSim.decision && activeSim.decision.action || 'pending';
+  const fbStatus = activeSim && activeSim.feedbackStatus || 'pending';
   const statusClass = 'tag-status-' + item.status;
 
   const fbTagHtml = mode === 'sim' ? `<span class="fb-tag ${fbStatus}">${{positive:'✅ 正确', negative:'❌ 错误', pending:'待判定'}[fbStatus]}</span>` : '';
@@ -659,10 +661,12 @@ function renderBody(item, sim, mode) {
   if (['collecting', 'inferring'].includes(item.status)) {
     return `<p style="font-size:13px;padding:4px 0;color:var(--gray-400)">${STATUS_CN[item.status]}…</p>`;
   }
+  // pending 状态：显示"待采集"，不渲染旧的 sim 数据（批量重扫时清掉旧信息）
+  if (item.status === 'pending') {
+    return `<p style="font-size:13px;padding:4px 0"><span style="color:var(--gray-400)">待采集…</span></p>`;
+  }
   if (!sim || !sim.collectedData) {
-    const liveMsg = item.status === 'pending'
-      ? `<span style="color:var(--gray-400)">待采集…</span>`
-      : `运行：<code>node collect.js --sim</code>`;
+    const liveMsg = `运行：<code>node collect.js --sim</code>`;
     return `<p style="font-size:13px;padding:4px 0">${liveMsg}</p>`;
   }
 
