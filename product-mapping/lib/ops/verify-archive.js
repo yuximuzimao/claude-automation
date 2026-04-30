@@ -123,4 +123,4 @@ async function verifyArchive(erpId, shopName, productCode) {
   return { ok: true, data: summary };
 }
 
-module.exports = { verifyArchive };
+module.exports = { verifyArchive, itemSetsEqual };

@@ -39,24 +39,21 @@ async function _searchAndExpand(erpId, shopName, productCode) {
   if (shopClicked !== 'clicked') throw new Error(`左侧店铺「${shopName}」未找到`);
   await sleep(1500);
 
-  // 输入货号 + 回车
+  // 输入货号 + 回车（搜索输入框在 el-input-popup-editor 内）
   const inputResult = await cdp.eval(erpId,
     '(function(){' +
-    '  var inputs=document.querySelectorAll("input[type=text],input:not([type])");' +
-    '  for(var i=0;i<inputs.length;i++){' +
-    '    var ph=inputs[i].placeholder||"";' +
-    '    if(ph.includes("商家编码")){' +
-    '      inputs[i].value=' + JSON.stringify(productCode) + ';' +
-    '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      return "triggered";' +
-    '    }' +
-    '  }' +
-    '  return "not-found";' +
+    '  var editor=document.querySelector(".el-input-popup-editor");' +
+    '  if(!editor) return "editor-not-found";' +
+    '  var inp=editor.querySelector("input");' +
+    '  if(!inp) return "input-not-found";' +
+    '  inp.value=' + JSON.stringify(productCode) + ';' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  return "triggered";' +
     '})()'
   );
-  if (inputResult !== 'triggered') throw new Error('搜索输入框未找到');
+  if (inputResult !== 'triggered') throw new Error('搜索输入框未找到: ' + inputResult);
   await sleep(2500);
 
   // 展开货号行

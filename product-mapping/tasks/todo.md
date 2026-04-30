@@ -1,25 +1,75 @@
 # 待处理优化项
 
-## 当前任务：树状分支架构重构（match-one 流程）
+## 当前任务：模块化测试（match-one 流水线）
 
-> 计划文件：`~/.claude/plans/whimsical-finding-otter.md`
+> 计划文件：`~/.claude/plans/peppy-dancing-mango.md`
+> 测试店铺：杭州共途（不是澜泽）
+> ERP 标签页锁定：`1F46BAA92728117C35DD6845CB85FB33`
 
-### 实施清单（按依赖顺序）
+### Phase 0: 前置条件
+- [x] 0.1 升级 `lib/navigate.js` — session 缓存 + 自动登录恢复 + 页面轮询等待
+- [x] 0.2 CDP 健康检查 + fallback 直连 9222
+- [x] 0.3 结构化日志（navigate.js 已含 VERBOSE 日志）
 
-- [x] 1. `mkdir lib/ops lib/utils`
-- [x] 2. `lib/utils/safe-write.js` — .tmp+rename 原子写入，写前清理脏 tmp
-- [x] 3. `lib/ops/read-table-rows.js` — 公共表格 DOM 读取，内置等待+expectedProductCode 绑定校验
-- [x] 4. `lib/ops/ensure-corr-page.js` — 确保在对应表页面 + canSkipSearch 严格4项判断链
-- [x] 5. `lib/ops/download-products.js` — 封装 correspondence.js 的 downloadPlatformProducts
-- [x] 6. `lib/ops/read-skus.js` — 读取货号 SKU 列表，初始化 sku-records.json（stage=skus_read）
-- [x] 7. `lib/ops/annotate.js` — 纯数据，recognition→itemType，stage: images_done→annotated
-- [x] 8. `lib/ops/remap-single.js` + 小改 `remap-sku.js`（加 skipNav 参数）
-- [x] 9. `lib/ops/create-suite.js` + 小改 `mark-suite.js`（提取 markOneSuite 导出）
-- [x] 10. `lib/ops/read-erp-codes.js` — 重读验证 ERP 编码，只更新 unmatched/matched-ai
-- [x] 11. `lib/ops/verify-archive.js` — 档案核查+识图对比报告
-- [x] 12. `lib/match-one.js` — 单货号编排器（7步，支持 --from 断点执行）
-- [x] 13. 改 `cli.js` — 新增 match-one / match-batch 命令路由
-- [ ] 14. 端到端测试：kgossynt-cx 澜泽（3 SKU，含 single+suite 两分支）
+### Phase 1: 测试基础设施
+- [x] 1.1 `test/helpers/browser.js` — resetErp/resetJl + 连接锁定
+- [x] 1.2 `test/helpers/fixtures.js` — 数据工厂 + 备份恢复 + assertErpState
+- [x] 1.3 `test/helpers/assertions.js` — 文件/数据/日志断言
+- [x] 1.4 `test/helpers/cdp-mock.js` — L1 层 mock
+- [x] 1.5 `test/schemas.js` — 步骤定义
+- [x] 1.6 `test/run.js` — CLI 测试运行器（--fast / step / all）
+
+### Phase 2: L1 单元测试（不需要浏览器）
+- [x] L1-safe-write: 4 用例 × 3 次 = 12/12 ✓
+- [x] L1-annotate: 6 用例 × 3 次 = 18/18 ✓
+- [x] L1-match-one-logic: 3 用例 × 3 次 = 9/9 ✓
+
+### Phase 3: L2 基础设施测试（需要 Chrome）
+- [x] L2-targets: 5/5 ✓（2026-04-30）
+- [x] L2-cdp: 5/5 ✓（2026-04-30）
+- [x] L2-navigate: 4/5 ✓（2026-04-30，1次 flaky）
+
+### Phase 4: L2 对应表页面操作测试
+- [x] L2-ensure-corr-page: 3/3 ✓（2026-04-30）
+- [x] L2-read-table-rows: 3/3 ✓（2026-04-30）
+- [x] L2-download-products: 1/1 ✓（2026-04-30，破坏性预检）
+
+### Phase 5: L2 SKU 读写测试
+- [x] L2-read-skus: 3/3 ✓（2026-04-30，修复搜索输入框选择器后）
+- [x] L2-read-erp-codes: 3/3 ✓（2026-04-30）
+
+### Phase 6: L2 匹配操作测试（下次从这里开始，全部重跑）
+- [ ] L2-remap-single: 4 用例 × 5 次（上次 5/5 但需用修复后的代码重跑）
+- [ ] L2-create-suite: 5 用例 × 5 次（上次 5/5 但需重跑）
+- [ ] L2-verify-archive: 5 用例 × 3 次（上次 1/3，偶发超时 + 搜索 bug）
+
+### Phase 7: L2 编排器测试
+- [ ] L2-match-one: 11 用例 × 3 次
+
+---
+
+### 本次 session 发现的关键 bug（已修复）
+1. **搜索输入框选择器错误**：主页面搜索输入框是 `.el-input-popup-editor input`，不是 `form-item[4]`（那是下拉框）
+2. **`_setMainPageSelect` 索引错误**：精确搜索=index 4，平台商家编码=index 5（不是 2/3）
+3. **`readTableRows` 首行校验时机**：waitFor 只检查 `count > 0`，应等首行编码匹配
+4. **已修复 5 个模块**：read-skus, read-erp-codes, ensure-corr-page, remap-sku, create-suite
+
+### ERP 页面布局（form-item 索引）
+| idx | 元素 | 说明 |
+|-----|------|------|
+| 2 | `El-select-shop` | 店铺选择器 |
+| 3 | `el-select` | 平台商品 |
+| 4 | `el-select` | **精确搜索** |
+| 5 | `el-select` | **平台商家编码** |
+| 6 | `el-input-popup-editor` | **搜索输入框**（真正的搜索框！） |
+| 7 | `el-select` | 商品状态 |
+| 8 | button | 查询按钮 |
+| 9 | button | 下载平台商品 |
+
+---
+
+### 旧任务存档（架构重构，已完成）
+- [x] 1-13. 树状分支架构重构（match-one 7步闭环）全部完成
 
 ### 数据契约快查
 

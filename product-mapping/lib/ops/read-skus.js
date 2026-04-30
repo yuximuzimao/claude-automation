@@ -8,7 +8,7 @@
 const path = require('path');
 const fs = require('fs');
 const cdp = require('../cdp');
-const { sleep } = require('../wait');
+const { sleep, waitFor } = require('../wait');
 const { ensureCorrPage } = require('./ensure-corr-page');
 const { readTableRows } = require('./read-table-rows');
 const { safeWriteJson } = require('../utils/safe-write');
@@ -71,6 +71,17 @@ async function _setMainPageSelect(erpId, selectIdx, optionText) {
 async function readSkus(erpId, shopName, productCode) {
   await ensureCorrPage(erpId);
 
+  // 0. 等待页面渲染完成（确保 form-item[4] 的搜索输入框存在）
+  await waitFor(async () => {
+    const ready = await cdp.eval(erpId,
+      '(function(){' +
+      '  var items=Array.from(document.querySelectorAll(".el-form-item")).filter(function(f){return !f.closest(".el-dialog__wrapper")});' +
+      '  return items.length>=5&&items[4].querySelector("input")?"ready":"not-ready";' +
+      '})()'
+    );
+    return ready === 'ready';
+  }, { timeoutMs: 10000, intervalMs: 500, label: '等搜索输入框就绪' });
+
   // 1. 点击左侧店铺
   const shopClicked = await cdp.eval(erpId,
     '(function(){' +
@@ -86,29 +97,28 @@ async function readSkus(erpId, shopName, productCode) {
   if (shopClicked !== 'clicked') throw new Error(`左侧店铺「${shopName}」未找到`);
   await sleep(1500);
 
-  // 2. 设搜索下拉：精确搜索（[0]）+ 平台商家编码（[1]）
-  await _setMainPageSelect(erpId, 0, '精确搜索');
-  await _setMainPageSelect(erpId, 1, '平台商家编码');
+  // 2. 设搜索下拉：精确搜索（[4]）+ 平台商家编码（[5]）
+  //    索引排除 dialog 内的 select 后：2=店铺, 3=平台商品, 4=精确搜索, 5=平台商家编码
+  await _setMainPageSelect(erpId, 4, '精确搜索');
+  await _setMainPageSelect(erpId, 5, '平台商家编码');
 
   // 3. 输入货号 + 回车
+  //    搜索输入框在 el-input-popup-editor 内（form-item[6]），不是 el-select
   const inputResult = await cdp.eval(erpId,
     '(function(){' +
-    '  var inputs=document.querySelectorAll("input[type=text],input:not([type])");' +
-    '  for(var i=0;i<inputs.length;i++){' +
-    '    var ph=inputs[i].placeholder||"";' +
-    '    if(ph.includes("商家编码")){' +
-    '      inputs[i].value=' + JSON.stringify(productCode) + ';' +
-    '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      return "triggered";' +
-    '    }' +
-    '  }' +
-    '  return "input-not-found";' +
+    '  var editor=document.querySelector(".el-input-popup-editor");' +
+    '  if(!editor) return "editor-not-found";' +
+    '  var inp=editor.querySelector("input");' +
+    '  if(!inp) return "input-not-found";' +
+    '  inp.value=' + JSON.stringify(productCode) + ';' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  return "triggered";' +
     '})()'
   );
-  if (inputResult !== 'triggered') throw new Error('搜索输入框未找到（placeholder 不含「商家编码」）');
-  await sleep(2500);
+  if (inputResult !== 'triggered') throw new Error('搜索输入框未找到: ' + inputResult);
+  await sleep(3500);
 
   // 4. 验证至少有 1 行结果
   const rowCount = await cdp.eval(erpId,

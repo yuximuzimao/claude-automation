@@ -24,18 +24,15 @@ async function ensureCorrPage(erpId) {
   if (hash !== CORR_HASH) {
     await navigateErp(erpId, '商品对应表');
   } else {
-    // 已在对应表，只清空搜索条件
+    // 已在对应表，只清空搜索条件（el-input-popup-editor 内的输入框）
     await cdp.eval(erpId,
       '(function(){' +
-      '  var inputs=document.querySelectorAll("input[type=text],input:not([type])");' +
-      '  for(var i=0;i<inputs.length;i++){' +
-      '    var ph=inputs[i].placeholder||"";' +
-      '    if(ph.includes("商家编码")||ph.includes("货号")||ph.includes("编码")){' +
-      '      inputs[i].value="";' +
-      '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-      '      return;' +
-      '    }' +
-      '  }' +
+      '  var editor=document.querySelector(".el-input-popup-editor");' +
+      '  if(!editor) return;' +
+      '  var inp=editor.querySelector("input");' +
+      '  if(!inp) return;' +
+      '  inp.value="";' +
+      '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
       '})()'
     );
     await sleep(300);
@@ -58,13 +55,9 @@ async function canSkipSearch(erpId, shopName, productCode, expectedSkuCount) {
   try {
     const result = await cdp.eval(erpId,
       '(function(){' +
-      // 检查 1：搜索输入框值
-      '  var inputs=document.querySelectorAll("input[type=text],input:not([type])");' +
-      '  var searchInp=null;' +
-      '  for(var i=0;i<inputs.length;i++){' +
-      '    var ph=inputs[i].placeholder||"";' +
-      '    if(ph.includes("商家编码")){searchInp=inputs[i];break;}' +
-      '  }' +
+      // 检查 1：搜索输入框值（el-input-popup-editor 内）
+      '  var editor=document.querySelector(".el-input-popup-editor");' +
+      '  var searchInp=editor?editor.querySelector("input"):null;' +
       '  var c1=searchInp&&searchInp.value.trim()===' + JSON.stringify(productCode) + ';' +
       // 检查 2：首行 productCode
       '  var rows=document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row");' +

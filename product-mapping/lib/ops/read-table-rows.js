@@ -21,23 +21,21 @@ const SUB_COL = { skuName: 4, platformCode: 5, erpName: 10, erpCode: 11 };
 async function readTableRows(erpId, { fields, expectedProductCode }) {
   if (!expectedProductCode) throw new Error('readTableRows: expectedProductCode 必传');
 
-  // 1. 等主行出现（最多 10s）
+  // 1. 等主行出现且首行编码匹配（最多 10s）
+  let firstRowCode = '';
   await waitFor(async () => {
-    const count = await cdp.eval(erpId,
-      '(function(){return document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row").length;})()'
+    firstRowCode = await cdp.eval(erpId,
+      '(function(){' +
+      '  var rows=document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row");' +
+      '  if(!rows.length) return "";' +
+      '  var tds=rows[0].querySelectorAll("td");' +
+      '  return tds[' + MAIN_ROW_PRODUCT_CODE_COL + ']?tds[' + MAIN_ROW_PRODUCT_CODE_COL + '].innerText.trim():"";' +
+      '})()'
     );
-    return count > 0;
-  }, { timeoutMs: 10000, intervalMs: 500, label: '等主行出现' });
+    return firstRowCode === expectedProductCode;
+  }, { timeoutMs: 15000, intervalMs: 500, label: '等主行编码匹配' });
 
   // 2. 验证首行 productCode = expectedProductCode（最后防线）
-  const firstRowCode = await cdp.eval(erpId,
-    '(function(){' +
-    '  var rows=document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row");' +
-    '  if(!rows.length) return "";' +
-    '  var tds=rows[0].querySelectorAll("td");' +
-    '  return tds[' + MAIN_ROW_PRODUCT_CODE_COL + ']?tds[' + MAIN_ROW_PRODUCT_CODE_COL + '].innerText.trim():"";' +
-    '})()'
-  );
   if (firstRowCode !== expectedProductCode) {
     throw new Error(`TABLE_DATA_MISMATCH: 期望货号 ${expectedProductCode}，表格首行显示 ${firstRowCode}`);
   }

@@ -63,17 +63,14 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
   // 对应表搜索框按「货号」有效，输入 productCode 可过滤到目标行，避免分页问题
   await cdp.eval(erpId,
     '(function(){' +
-    '  var inputs=document.querySelectorAll("input");' +
-    '  for(var i=0;i<inputs.length;i++){' +
-    '    var ph=inputs[i].placeholder||"";' +
-    '    if(ph.includes("商家编码")){' +
-    '      inputs[i].value=' + JSON.stringify(productCode) + ';' +
-    '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      return;' +
-    '    }' +
-    '  }' +
+    '  var editor=document.querySelector(".el-input-popup-editor");' +
+    '  if(!editor) return;' +
+    '  var inp=editor.querySelector("input");' +
+    '  if(!inp) return;' +
+    '  inp.value=' + JSON.stringify(productCode) + ';' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
     '})()'
   );
   await sleep(2000);
