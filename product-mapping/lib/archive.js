@@ -160,7 +160,7 @@ const READ_SUB_ITEMS_JS =
   '  var items=[];' +
   '  rows.forEach(function(r){' +
   '    var cells=Array.from(r.querySelectorAll("td")).map(function(td){return td.innerText.trim();});' +
-  '    if(cells[1]&&cells[3]&&cells[10]&&!isNaN(parseInt(cells[10]))){' +
+  '    if(cells[1]&&cells[3]&&cells[10]){' +
 	  '    if(!cells[1]||!cells[3]||!cells[10]) return;' +
 	  '    var qty=parseInt(cells[10]);' +
 	  '    if(isNaN(qty)||qty<=0) return;' +
