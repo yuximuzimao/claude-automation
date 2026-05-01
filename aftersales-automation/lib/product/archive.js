@@ -175,12 +175,18 @@ async function productArchive(targetId, specCode) {
           if (clickRes.error) throw new Error(clickRes.error);
         }, { maxRetries: 3, delayMs: 1000, label: `click-sub-item ${specCode}` });
         await sleep(1500);
-        const raw = await retry(async () => {
-          const r = await cdp.eval(targetId, READ_SUB_ITEMS_JS);
-          if (r.error) throw new Error(r.error);
-          return r;
-        }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
-        subItems = raw;
+        try {
+          const raw = await retry(async () => {
+            const r = await cdp.eval(targetId, READ_SUB_ITEMS_JS);
+            if (r.error) throw new Error(r.error);
+            return r;
+          }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
+          subItems = raw;
+        } catch (e) {
+          // 子品明细读取失败（含验证层过滤后无有效行）不导致整个 archive 失败
+          // 保留 data（outerId/title/type/subItemNum）供推理引擎使用
+          console.error(`[product-archive] 子品明细读取失败: ${e.message}`);
+        }
       } finally {
         // CLOSE_SUB_DIALOG_JS 内部已处理无弹窗情况（skipped），直接调用即可
         await cdp.eval(targetId, CLOSE_SUB_DIALOG_JS);
