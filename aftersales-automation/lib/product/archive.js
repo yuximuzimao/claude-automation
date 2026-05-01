@@ -18,13 +18,11 @@ const SET_EXACT_QUERY_JS = `(function(){
 })()`;
 
 const CLICK_EXACT_OPTION_JS = `(function(){
-  // 找包含「精确查询」文字的 li 选项（el-select 下拉列表项），点 li 而非 span
   var li = Array.from(document.querySelectorAll('li.el-select-dropdown__item')).find(function(e){
     var r = e.getBoundingClientRect();
     return e.textContent.trim() === '精确查询' && r.width > 0;
   });
   if (!li) {
-    // 降级：找宽度 > 0 的叶子 span
     var span = Array.from(document.querySelectorAll('span')).find(function(e){
       var r = e.getBoundingClientRect();
       return e.textContent.trim() === '精确查询' && e.children.length === 0 && r.width > 0;
@@ -47,7 +45,6 @@ function makeSearchSpecCodeJS(specCode) {
     mainInp.value = '${specCode}';
     mainInp.dispatchEvent(new Event('input', {bubbles:true}));
     mainInp.dispatchEvent(new Event('change', {bubbles:true}));
-    // 找持有 handleQuery 的父 Vue 组件（见 docs/erp-query.md §2 + docs/ops-tech.md #22）
     var el = mainInp; var sv = null;
     for (var i = 0; i < 12; i++) {
       if (!el) break;
@@ -98,7 +95,6 @@ function makeClickSubItemLinkJS(subItemNum) {
 }
 
 // 关闭子商品弹窗（读完明细后调用）
-// ⚠️ 子商品弹窗关闭按钮类名是 el-dialog__closeBtn，不是标准的 el-dialog__headerbtn
 const CLOSE_SUB_DIALOG_JS = `(function(){
   var visible = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
@@ -110,34 +106,53 @@ const CLOSE_SUB_DIALOG_JS = `(function(){
   return JSON.stringify({closed: true});
 })()`;
 
-// 读子商品明细表格（a.ml_15点击后出现的 el-dialog 内 el-table__row）
-// 必须限定在可见 dialog 内读取，防止读到主页面的行
-// 列定义: [1]=商品名称, [3]=商家编码(specCode), [10]=组合数量(qty in bundle)
+// 读子商品明细表格
+// 策略：先尝试 dialog 限定，再无结果则退回到全页读取（dialog 表可能结构与主表不同）
+// 所有读取结果均经过验证层过滤垃圾数据
 const READ_SUB_ITEMS_JS = `(function(){
-  // 找最新打开的可见 dialog
+  function readRows(container) {
+    var rows = Array.from(container.querySelectorAll('tr.el-table__row'));
+    var items = [];
+    var debug = [];
+    rows.forEach(function(r, ri){
+      var cells = Array.from(r.querySelectorAll('td')).map(function(td){ return td.innerText.trim(); });
+      if (ri < 2) {
+        debug.push({rowIdx: ri, cellCount: cells.length, cells: cells.slice(0, Math.min(cells.length, 12))});
+      }
+      if (!cells[1] || !cells[3] || !cells[10]) return;
+      var qty = parseInt(cells[10]);
+      if (isNaN(qty) || qty <= 0) return;
+      if (!/^\\d{6,}$/.test(cells[3])) return;
+      if (/已(下|付|发)单|\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2}/.test(cells[1])) return;
+      items.push({ name: cells[1], specCode: cells[3], qty: qty });
+    });
+    return { items: items, debug: debug };
+  }
+
+  // Step 1: 尝试限定在最新可见 dialog 内读取
   var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
   });
-  if (!dialogs.length) return JSON.stringify({error:'子商品弹窗未打开'});
-  var dialog = dialogs[dialogs.length - 1];
-  var rows = Array.from(dialog.querySelectorAll('tr.el-table__row'));
-  var items = [];
-  rows.forEach(function(r){
-    var cells = Array.from(r.querySelectorAll('td')).map(function(td){ return td.innerText.trim(); });
-    if (!cells[1] || !cells[3] || !cells[10]) return;
-    var qty = parseInt(cells[10]);
-    if (isNaN(qty) || qty <= 0) return;
-    // 数据验证：商家编码必须是纯数字（排除 "退" 等非编码值）
-    if (!/^\\d{6,}$/.test(cells[3])) return;
-    // 数据验证：商品名不能包含订单元数据（下单时间/已下单/已付款等）
-    if (/已(下|付|发)单|\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2}/.test(cells[1])) return;
-    items.push({
-      name: cells[1],
-      specCode: cells[3],
-      qty: qty
-    });
-  });
-  return JSON.stringify(items.length ? items : {error:'弹窗内未找到子商品行'});
+  if (dialogs.length) {
+    var dialog = dialogs[dialogs.length - 1];
+    var result = readRows(dialog);
+    if (result.items.length) {
+      result._source = 'dialog';
+      return JSON.stringify(result);
+    }
+    // dialog 内没找到有效行 → 检查全页
+    console.log('[archive] dialog内有' + result.debug.length + '行样本，cellCounts=' + JSON.stringify(result.debug.map(function(d){return d.cellCount;})));
+  }
+
+  // Step 2: 退回全页读取 + 验证过滤（dialog 限定可能因表结构差异失效）
+  var pageResult = readRows(document);
+  if (pageResult.items.length) {
+    pageResult._source = 'page-fallback';
+    return JSON.stringify(pageResult);
+  }
+
+  pageResult._source = 'none';
+  return JSON.stringify(pageResult);
 })()`;
 
 async function productArchive(targetId, specCode) {
@@ -181,14 +196,16 @@ async function productArchive(targetId, specCode) {
             if (r.error) throw new Error(r.error);
             return r;
           }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
-          subItems = raw;
+          if (raw && raw.items) {
+            subItems = raw.items;
+          }
+          if (raw && raw._source) {
+            console.error(`[product-archive] 子品读取来源: ${raw._source}, items=${subItems.length}`);
+          }
         } catch (e) {
-          // 子品明细读取失败（含验证层过滤后无有效行）不导致整个 archive 失败
-          // 保留 data（outerId/title/type/subItemNum）供推理引擎使用
           console.error(`[product-archive] 子品明细读取失败: ${e.message}`);
         }
       } finally {
-        // CLOSE_SUB_DIALOG_JS 内部已处理无弹窗情况（skipped），直接调用即可
         await cdp.eval(targetId, CLOSE_SUB_DIALOG_JS);
         await sleep(600);
       }
