@@ -161,7 +161,12 @@ const READ_SUB_ITEMS_JS =
   '  rows.forEach(function(r){' +
   '    var cells=Array.from(r.querySelectorAll("td")).map(function(td){return td.innerText.trim();});' +
   '    if(cells[1]&&cells[3]&&cells[10]&&!isNaN(parseInt(cells[10]))){' +
-  '      items.push({name:cells[1],specCode:cells[3],qty:parseInt(cells[10])});' +
+	  '    if(!cells[1]||!cells[3]||!cells[10]) return;' +
+	  '    var qty=parseInt(cells[10]);' +
+	  '    if(isNaN(qty)||qty<=0) return;' +
+	  '    if(!/^\\d{6,}$/.test(cells[3])) return;' +
+	  '    if(/已(下|付|发)单|\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2}/.test(cells[1])) return;' +
+	  '    items.push({name:cells[1],specCode:cells[3],qty:qty});' +
   '    }' +
   '  });' +
   '  return JSON.stringify(items.length?items:{error:"弹窗内未找到子商品行"});' +
