@@ -148,9 +148,15 @@ function makeClickSubItemLinkJS(subItemNum) {
 }
 
 // 读子商品明细表格（列定义: [1]=商品名称, [3]=商家编码, [10]=组合数量）
+// ⚠️ 必须限定在可见 dialog 内读取，防止读到主页面的行
 const READ_SUB_ITEMS_JS =
   '(function(){' +
-  '  var rows=Array.from(document.querySelectorAll("tr.el-table__row"));' +
+  '  var dialogs=Array.from(document.querySelectorAll(".el-dialog__wrapper")).filter(function(d){' +
+  '    return window.getComputedStyle(d).display!=="none";' +
+  '  });' +
+  '  if(!dialogs.length) return JSON.stringify({error:"子商品弹窗未打开"});' +
+  '  var dialog=dialogs[dialogs.length-1];' +
+  '  var rows=Array.from(dialog.querySelectorAll("tr.el-table__row"));' +
   '  var items=[];' +
   '  rows.forEach(function(r){' +
   '    var cells=Array.from(r.querySelectorAll("td")).map(function(td){return td.innerText.trim();});' +
@@ -158,7 +164,7 @@ const READ_SUB_ITEMS_JS =
   '      items.push({name:cells[1],specCode:cells[3],qty:parseInt(cells[10])});' +
   '    }' +
   '  });' +
-  '  return JSON.stringify(items.length?items:{error:"未找到子商品行"});' +
+  '  return JSON.stringify(items.length?items:{error:"弹窗内未找到子商品行"});' +
   '})()';
 
 // 关闭子商品弹窗（⚠️ 关闭按钮是 el-dialog__closeBtn，不是 el-dialog__headerbtn）
