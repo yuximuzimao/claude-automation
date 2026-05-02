@@ -104,6 +104,12 @@ async function collectOne(item) {
     const returnTracking = ticket && ticket.returnTracking;
     const giftSubOrderId = giftOrder && giftOrder.id;
 
+    // 仅退款/换货不需要核对商品明细（无退货入库流程），跳过 product-match + product-archive
+    const skipProductDetail = item.type === '仅退款' || item.type === '换货';
+    if (skipProductDetail) {
+      collected.collectErrors.push(`product-detail: 跳过（工单类型=${item.type}，无需核对商品明细）`);
+    }
+
     // Step 2: erp-search（遍历所有子订单）
     collected.erpSearches = [];
     for (const so of subOrders) {
@@ -137,8 +143,8 @@ async function collectOne(item) {
       collected.logistics = logRes.data;
     }
 
-    // Step 4: product-match（商品对应表：展开货号行→抓规格属性→ERP编码）
-    //          + product-archive（商品档案V2：查类型+子品数量）
+    // Step 4: product-match + product-archive（退货退款才需要核对商品明细）
+    if (!skipProductDetail) {
     if (sku) {
       let shopName;
       try { shopName = getErpShop(item.accountNote); } catch (e) {
@@ -183,6 +189,7 @@ async function collectOne(item) {
     } else {
       collected.collectErrors.push('product-match: 无货号，跳过');
     }
+    } // end if (!skipProductDetail)
 
     // Step 5: erp-aftersale（有退货快递单号时）
     if (returnTracking) {
@@ -206,7 +213,8 @@ async function collectOne(item) {
       }
     }
 
-    // Step 6b: 赠品 product-match + product-archive（如有赠品 sku）
+    // Step 6b: 赠品 product-match + product-archive（退货退款才需要）
+    if (!skipProductDetail) {
     const giftSku = giftOrder && giftOrder.sku;
     const giftAttr1 = giftOrder && giftOrder.attr1;
     if (giftSku) {
@@ -237,6 +245,7 @@ async function collectOne(item) {
         }
       }
     }
+    } // end if (!skipProductDetail)
 
   } catch (e) {
     collected.collectErrors.push(`采集异常: ${e.message}`);
