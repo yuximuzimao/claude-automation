@@ -237,3 +237,6 @@ node cli.js erp-aftersale <快递单号>
 - `[1/2026-04]` **LaunchAgent 后台禁用 Reminders.app**：后台进程发提醒必须用 `display notification`，不能 osascript 操作 Reminders.app（AppleEvent 超时 -1712）。
 - `[1/2026-04]` **测试框架触发时机**：修改 lib/ 任意文件、CLI 步骤连续出错 ≥2 次、新增 CLI 命令时，必须跑 `node test.js`。框架建立后若不主动触发等于白建。
 - `[1/2026-04]` **工单列表类型识别串位**：`list.js` 扫描窗口 `winStart = positions[t-1].idx + 1` 覆盖上一条详情行，导致类型串位。修复：`winStart = Math.max(positions[t-1].idx + 1, center - 3)`。
+- `[∞/永久保留]` **#48 读表数据用表头定位列索引，禁数据特征过滤**：`<th>` 表头文本定位列索引（"商品名称"/"商家编码"/"组合比例"），直接读。禁止用正则/关键词/长度过滤数据内容——这会把合法非数字编码（kgoxnld等）当垃圾误杀。参见 `tasks/lessons.md §48`。
+- `[∞/永久保留]` **#49 验证数据=读实时源头，不分析旧采集**：判断数据是否正确→从 ERP 页面/CLI 命令重新读取，不分析 simulations.jsonl 过期数据。验证单一环节用 CLI 直调，不走 pipeline。
+- `[1/2026-05]` **#50 后台 osascript Reminders 需降级**：无 TTY 后台进程 osascript Reminders AppleEvent -1712。用 `createReminder()` 优先 Reminders 失败降级 `display notification`。
