@@ -177,18 +177,28 @@ function readFeedback(filter = {}) {
 }
 
 function markFeedbackInsighted(ids) {
-  if (!fs.existsSync(FB_PATH)) return;
+  if (!fs.existsSync(FB_PATH) || !ids.length) return;
   const now = new Date().toISOString();
   const idSet = new Set(ids);
-  const lines = fs.readFileSync(FB_PATH, 'utf8').split('\n').filter(Boolean);
-  const updated = lines.map(l => {
+  const origLines = fs.readFileSync(FB_PATH, 'utf8').split('\n').filter(Boolean);
+  const origCount = origLines.length;
+  const modified = origLines.map(l => {
     try {
       const f = JSON.parse(l);
       if (idSet.has(f.id)) return JSON.stringify({ ...f, insightedAt: now });
       return l;
     } catch { return l; }
   });
-  fs.writeFileSync(FB_PATH, updated.join('\n') + '\n');
+  // 检测写入期间是否有新 feedback 追加（防 TOCTOU 覆盖丢失）
+  const currentLines = fs.readFileSync(FB_PATH, 'utf8').split('\n').filter(Boolean);
+  if (currentLines.length > origCount) {
+    // 将新增行追加到 modified 中（新增行在文件末尾）
+    const newLines = currentLines.slice(origCount);
+    modified.push(...newLines);
+  }
+  const tmpPath = FB_PATH + '.tmp';
+  fs.writeFileSync(tmpPath, modified.join('\n') + '\n');
+  fs.renameSync(tmpPath, FB_PATH);
 }
 
 function unmarkFeedbackInsighted(ids) {

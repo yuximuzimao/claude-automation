@@ -313,10 +313,15 @@ router.delete('/op-queue/:id', (req, res) => {
 // ── Reviews（复盘笔记 CRUD）───────────────────────────────────────
 
 const REVIEWS_PATH = path.join(BASE, 'data/reviews.jsonl');
-const INSIGHTS_DIR = path.join(BASE, 'data/insights');
 const fs = require('fs');
 
 // ── Insights（AI洞察）─────────────────────────────────────────────
+
+const INSIGHTS_DIR = path.join(BASE, 'data/insights');
+const MAX_INSIGHT_BATCH = 30;  // 单次最多分析30条，防止 token 溢出
+
+// 洞察生成锁（防止并发重复生成）
+let insightLock = false;
 
 // 获取最近洞察列表
 router.get('/insights', (req, res) => {
@@ -339,67 +344,75 @@ router.get('/insights/:file', (req, res) => {
   res.json({ content: fs.readFileSync(p, 'utf8') });
 });
 
-// 重置失败洞察（清除对应 feedback 的 insightedAt，使其重新进入待洞察队列）
+// 重置失败洞察
 router.post('/insights/reset-failed', (req, res) => {
-  // 找所有未被 insightedAt 标记的 feedback（即上次失败未标记的）
-  // 实际上失败时 feedback 未被标记，直接触发新的 generate 即可
-  // 此接口供手动清理历史误标记的情况
   const { ids } = req.body || {};
   if (ids && ids.length) {
     db.unmarkFeedbackInsighted(ids);
     return res.json({ ok: true, reset: ids.length });
   }
-  // 无 ids 时：查找所有有 insightedAt 但对应洞察文件是失败的 feedback 并清除
-  // 简化实现：直接返回当前待洞察数量，让前端判断
   const pending = db.readFeedback({ uninsighted: true });
   res.json({ ok: true, pending: pending.length });
 });
 
 // 触发洞察生成
 router.post('/insights/generate', (req, res) => {
-  const pending = db.readFeedback({ uninsighted: true });
-  if (!pending.length) return res.status(400).json({ error: '没有待洞察的反馈' });
+  // 防并发
+  if (insightLock) return res.status(409).json({ error: '洞察生成进行中，请稍后再试' });
 
-  // 组装 prompt
-  const lines = pending.map((f, i) => {
+  const all = db.readFeedback({ uninsighted: true });
+  if (!all.length) return res.status(400).json({ error: '没有待洞察的反馈' });
+
+  // 分批：差评优先，最多 MAX_INSIGHT_BATCH 条
+  const neg = all.filter(f => f.verdict === 'negative');
+  const pos = all.filter(f => f.verdict === 'positive');
+  const batch = [...neg, ...pos].slice(0, MAX_INSIGHT_BATCH);
+  const remaining = all.length - batch.length;
+
+  // 组装 prompt（跳过 sim 为 null 的反馈，不阻塞整批）
+  const lines = [];
+  const validIds = [];
+  for (let i = 0; i < batch.length; i++) {
+    const f = batch[i];
     const sim = db.getSimulation(f.simulationId);
-    const cd = sim && sim.collectedData || {};
+    if (!sim || !sim.decision) continue;  // sim 已删除/无决策，跳过
+    validIds.push(f.id);
+    const cd = sim.collectedData || {};
     const ticket = cd.ticket || {};
-    const action = sim && sim.decision && sim.decision.action || '未知';
-    const reason = sim && sim.decision && sim.decision.reason || '';
-    const confidence = sim && sim.decision && sim.decision.confidence || '';
-    // 采集异常（人工看不到，但对AI分析有用）
+    const action = sim.decision.action || '未知';
+    const reason = sim.decision.reason || '';
+    const confidence = sim.decision.confidence || '';
     const errs = (cd.collectErrors || []).filter(e => !e.includes('跳过（非退货退款类型正常）'));
     const errSummary = errs.length ? `采集异常(${errs.length}): ${errs.map(e => e.split(':')[0]).join(', ')}` : '采集正常';
-    // 推理步骤简述（关键分支）
-    const steps = (sim && sim.decision && sim.decision.steps || [])
-      .filter(s => s.type === 'branch')
-      .map(s => s.text).join(' → ');
-    return `${i+1}. [${f.verdict === 'negative' ? '❌差评' : '✅好评'}] ${f.workOrderNum}
-   类型: ${cd.ticket ? (cd.ticket.subOrders ? cd.ticket.subOrders.length : 1) : '?'}子订单 | ${ticket.afterSaleReason || '未知'} | ${confidence}
+    const steps = (sim.decision.steps || []).filter(s => s.type === 'branch').map(s => s.text).join(' → ');
+    lines.push(`${i+1}. [${f.verdict === 'negative' ? '❌差评' : '✅好评'}] ${f.workOrderNum}
+   类型: ${ticket.subOrders ? ticket.subOrders.length : '?'}子订单 | ${ticket.afterSaleReason || '未知'} | ${confidence}
    结论: ${action} — ${reason}
    ${steps ? '路径: ' + steps : ''}
    ${errSummary}
-   人工: ${f.reason || '(无)'}`;
-  }).join('\n\n');
+   人工: ${f.reason || '(无)'}`);
+  }
 
-  const negCount = pending.filter(f => f.verdict === 'negative').length;
-  const posCount = pending.filter(f => f.verdict === 'positive').length;
+  if (!lines.length) return res.status(400).json({ error: '所有待洞察反馈对应的 simulation 已失效' });
+
+  const negCount = batch.filter(f => f.verdict === 'negative').length;
+  const posCount = batch.filter(f => f.verdict === 'positive').length;
+  const batchNote = remaining > 0 ? `（剩余 ${remaining} 条下次分析）` : '';
 
   const prompt = `你是售后工单AI推理系统的规则优化助手。
 
 ## 数据
-${pending.length} 条评价（${negCount} 条差评 + ${posCount} 条好评）：
+${batch.length} 条评价${batchNote}（${negCount} 条差评 + ${posCount} 条好评）：
 
-${lines}
+${lines.join('\n\n')}
 
 ## 分析要求
 
 1. **差评问题**：哪些推理逻辑错了？根因是什么？（具体场景×判断错误）
-2. **好评隐性问题**：✅好评只代表结论正确，不代表过程没问题。找出满足以下条件的工单：
-   - 结论正确但有采集异常 → 说明过程脆但结果侥幸对
-   - 置信度 high 但实际推理路径走了不可靠分支
-   - 多个好评的工单有共性采集异常 → 系统盲区
+2. **好评隐性问题**：✅好评只代表结论正确，不代表过程没问题。找出：
+   - 结论正确但有采集异常 → 过程脆但结果侥幸对
+   - 置信度 high 但推理路径走了不可靠分支
+   - 多个好评有共性采集异常 → 系统盲区
 3. **规则建议**：针对发现的问题，具体怎么改规则/改代码？
 4. **好评中值得保留的做法**：哪些规则/模式在多个好评工单中持续正确？
 
@@ -408,8 +421,8 @@ ${lines}
 - 使用 ## 二级标题组织
 - 每个发现标注涉及工单号`;
 
-  // 调 claude CLI（不阻塞，异步执行）
-  res.json({ ok: true, count: pending.length });
+  insightLock = true;
+  res.json({ ok: true, count: batch.length, remaining });
 
   (async () => {
     try {
@@ -421,24 +434,22 @@ ${lines}
       const result = spawnSync(claudeBin, ['-p', prompt], {
         timeout: 120000, encoding: 'utf8', cwd: BASE, env: { ...process.env },
       });
-
       const content = (result.stdout || '').trim();
 
-      // API 失败：无内容或有错误码
       if (!content || result.status !== 0) {
         const errMsg = (result.stderr || '').trim() || `退出码 ${result.status}`;
-        const failContent = `> ⚠️ 洞察生成失败：${errMsg}\n\n可点击"重新生成"重试。`;
-        fs.writeFileSync(outFile, `# 洞察报告 ${ts}\n\n${failContent}\n`);
-        // 失败时不标记 insightedAt，feedback 保持待洞察状态，下次可重新触发
+        fs.writeFileSync(outFile, `# 洞察报告 ${ts}\n\n> ⚠️ 洞察生成失败：${errMsg}\n\n可点击"重新生成"重试。\n`);
         sse.broadcast('insight-error', { file: path.basename(outFile), error: errMsg });
         console.error('[insight] 生成失败:', errMsg);
         return;
       }
 
+      // 先标记 feedback，再写洞察文件（标记成功但文件写入失败 → 安全：feedback
+      // 已被标记，下次不会重复分析；可通过 reset-failed 回滚）
+      db.markFeedbackInsighted(validIds);
       fs.writeFileSync(outFile, `# 洞察报告 ${ts}\n\n${content}\n`);
 
-      // 成功才标记已洞察；同时清除所有历史失败记录文件
-      db.markFeedbackInsighted(pending.map(f => f.id));
+      // 清理历史失败记录文件
       try {
         const failedFiles = fs.readdirSync(INSIGHTS_DIR).filter(f => {
           if (!f.endsWith('.md')) return false;
@@ -448,10 +459,13 @@ ${lines}
         failedFiles.forEach(f => fs.unlinkSync(path.join(INSIGHTS_DIR, f)));
         if (failedFiles.length) console.log('[insight] 已清除失败记录:', failedFiles.join(', '));
       } catch (e) { console.error('[insight] 清除失败记录出错:', e.message); }
+
       sse.broadcast('insight-ready', { file: path.basename(outFile) });
     } catch (e) {
       console.error('[insight]', e.message);
       sse.broadcast('insight-error', { error: e.message });
+    } finally {
+      insightLock = false;
     }
   })();
 });
