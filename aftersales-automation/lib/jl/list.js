@@ -26,14 +26,46 @@ const READ_LIST_JS = `(function(){
 
     for (var i = winStart; i < winEnd; i++) {
       var line = lines[i];
-      // 倒计时（只取第一个匹配）
+      // 倒计时（多级正则：精确到分钟，向后兼容无分钟/无天的格式）
       if (rec.days === undefined) {
-        var tm = line.match(/(\\d+)\\s*天\\s*(\\d+)\\s*小时/);
+        var tm;
+        // 优先级1：完整格式 "X天 X小时 X分"
+        tm = line.match(/(\\d+)\\s*天\\s*(\\d+)\\s*小时\\s*(\\d+)\\s*分/);
         if (tm) {
           rec.days = parseInt(tm[1]);
           rec.hours = parseInt(tm[2]);
-          rec.totalHours = rec.days * 24 + rec.hours;
+          rec.minutes = parseInt(tm[3]);
+          rec.totalHours = rec.days * 24 + rec.hours + rec.minutes / 60;
+        } else {
+          // 优先级2：无分钟 "X天 X小时"
+          tm = line.match(/(\\d+)\\s*天\\s*(\\d+)\\s*小时/);
+          if (tm) {
+            rec.days = parseInt(tm[1]);
+            rec.hours = parseInt(tm[2]);
+            rec.totalHours = rec.days * 24 + rec.hours;
+          } else {
+            // 优先级3：无天 "X小时 X分"
+            tm = line.match(/(\\d+)\\s*小时\\s*(\\d+)\\s*分/);
+            if (tm) {
+              rec.days = 0;
+              rec.hours = parseInt(tm[1]);
+              rec.minutes = parseInt(tm[2]);
+              rec.totalHours = rec.hours + rec.minutes / 60;
+            } else {
+              // 优先级4：仅小时 "X小时"
+              tm = line.match(/(\\d+)\\s*小时/);
+              if (tm) {
+                rec.days = 0;
+                rec.hours = parseInt(tm[1]);
+                rec.totalHours = rec.hours;
+              }
+            }
+          }
+        }
+        if (rec.totalHours !== undefined) {
           rec.deadlineAt = new Date(Date.now() + rec.totalHours * 3600000).toISOString();
+        } else {
+          rec.urgencySource = 'text-fallback';
         }
       }
       // 售后类型（只取第一个匹配）
@@ -44,11 +76,11 @@ const READ_LIST_JS = `(function(){
       }
     }
 
-    if (rec.totalHours !== undefined && rec.type) workOrders.push(rec);
+    if ((rec.totalHours !== undefined || rec.urgencySource === 'text-fallback') && rec.type) workOrders.push(rec);
   }
 
   // 按剩余时间升序（最紧急在前）
-  workOrders.sort(function(a, b){ return a.totalHours - b.totalHours; });
+  workOrders.sort(function(a, b){ if (a.totalHours == null) return 1; if (b.totalHours == null) return -1; return a.totalHours - b.totalHours; });
   return JSON.stringify(workOrders);
 })()`;
 
@@ -185,7 +217,7 @@ async function listTickets(targetId, maxHours) {
     }
 
     const threshold = maxHours !== undefined ? maxHours : 48;
-    const urgent = deduped.filter(t => t.totalHours <= threshold);
+    const urgent = deduped.filter(t => t.totalHours != null && t.totalHours <= threshold);
 
     // 数量校验
     let mismatchWarning = null;

@@ -57,8 +57,8 @@ function writeToQueue(urgentTickets, isDryRun) {
   let added = 0, updated = 0, waitingReset = 0;
   const queue = readQueue();
   for (const t of urgentTickets) {
-    const urgency = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
-    const deadlineAt = t.deadlineAt || new Date(Date.now() + (t.totalHours || 0) * 3600000).toISOString();
+    const urgency = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '时间解析失败';
+    const deadlineAt = t.totalHours != null ? (t.deadlineAt || new Date(Date.now() + t.totalHours * 3600000).toISOString()) : null;
     // 找已存在的未完成工单（pending/collecting/inferring/simulated/waiting）
     const existing = queue.items.find(
       i => i.workOrderNum === t.workOrderNum && i.status !== 'done'

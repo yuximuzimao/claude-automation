@@ -199,8 +199,8 @@ async function _execScanAccountInner(accountNum, accountNote) {
   let added = 0, updated = 0, waitingReset = 0;
   const queue = db.readQueue();
   for (const t of urgent) {
-    const urgency = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
-    const deadlineAt = t.deadlineAt || new Date(Date.now() + (t.totalHours || 0) * 3600000).toISOString();
+    const urgency = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '时间解析失败';
+    const deadlineAt = t.totalHours != null ? (t.deadlineAt || new Date(Date.now() + t.totalHours * 3600000).toISOString()) : null;
     const existing = queue.items.find(i => i.workOrderNum === t.workOrderNum && i.status !== 'done');
     if (existing) {
       if (existing.status === 'waiting') {
@@ -220,9 +220,9 @@ async function _execScanAccountInner(accountNum, accountNote) {
   }
 
   // 到期预警
-  const warnTickets = urgent.filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
+  const warnTickets = urgent.filter(t => t.totalHours != null && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
-    const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
+    const timeStr = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '未知';
     const dl = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${accountNote} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${dlStr}`;
@@ -329,9 +329,9 @@ async function execScan(op) {
   if (code !== 0 && !result) throw new Error('scan-all 执行失败');
 
   // 到期预警：从本次扫描结果
-  const warnTickets = (result && result.urgent || []).filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
+  const warnTickets = (result && result.urgent || []).filter(t => t.totalHours != null && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
-    const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
+    const timeStr = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '未知';
     const deadlineDate = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const deadlineStr = `截止${(deadlineDate.getMonth()+1).toString().padStart(2,'0')}/${deadlineDate.getDate().toString().padStart(2,'0')} ${deadlineDate.getHours().toString().padStart(2,'0')}:${deadlineDate.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${t.note || '账号' + t.num} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${deadlineStr}`;
