@@ -383,8 +383,9 @@ ${lines}
       const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
       const outFile = path.join(INSIGHTS_DIR, `insight-${ts}.md`);
 
-      const result = spawnSync('claude', ['-p', prompt], {
-        timeout: 120000, encoding: 'utf8', cwd: BASE,
+      const claudeBin = path.join(path.dirname(process.execPath), 'claude');
+      const result = spawnSync(claudeBin, ['-p', prompt], {
+        timeout: 120000, encoding: 'utf8', cwd: BASE, env: { ...process.env },
       });
 
       const content = (result.stdout || '').trim();
