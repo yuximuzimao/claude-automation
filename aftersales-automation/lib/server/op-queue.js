@@ -10,7 +10,7 @@ const { execFileSync, spawnSync, spawn } = require('child_process');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
-const { RETURN_KEYWORDS, REMIND_HOURS } = require('../constants');
+const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -247,12 +247,36 @@ async function execScanFinalize(op) {
 
   await cleanReturnedIntercepts();
 
+  // pending/collected/simulated：无条件重置为 pending
   const allLive = (db.readQueue().items || []).filter(i =>
     ['pending', 'collected', 'simulated'].includes(i.status) && i.mode === 'live'
   );
   for (const item of allLive) {
     if (item.status !== 'pending') db.updateQueueItem(item.id, { status: 'pending' });
   }
+
+  // waiting：节流重置——距上次推理 ≥ RESCAN_INTERVAL_HOURS 才允许
+  const waitingItems = (db.readQueue().items || []).filter(i =>
+    i.status === 'waiting' && i.mode === 'live'
+  );
+  let waitingResetCount = 0;
+  for (const item of waitingItems) {
+    const allSims = db.readSimulations();
+    const latestSim = [...allSims].reverse().find(s => s.queueItemId === item.id);
+    const lastInferAt = latestSim?.decision?.inferredAt;
+    const anchor = lastInferAt || item.collectDoneAt;
+    if (!anchor) {
+      db.updateQueueItem(item.id, { status: 'pending' });
+      waitingResetCount++;
+      continue;
+    }
+    const hoursSince = (Date.now() - new Date(anchor).getTime()) / 3600000;
+    if (hoursSince >= RESCAN_INTERVAL_HOURS) {
+      db.updateQueueItem(item.id, { status: 'pending' });
+      waitingResetCount++;
+    }
+  }
+  if (waitingResetCount) log(`waiting 节流重置: ${waitingResetCount}/${waitingItems.length}`);
   if (allLive.length) sse.broadcast('queue-update', { resetCount: allLive.length });
 
   const pending = (db.readQueue().items || []).filter(i =>

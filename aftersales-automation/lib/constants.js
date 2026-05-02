@@ -41,6 +41,9 @@ const SCAN_HOURS = [0, 8, 12, 16, 20];
 // 到期提醒阈值（小时）：工单剩余时效 ≤ 此值时自动创建 Mac 提醒事项
 const REMIND_HOURS = 12;
 
+// waiting 重查最小间隔（小时）：距上次推理完成 ≥ 此值才允许重置为 pending
+const RESCAN_INTERVAL_HOURS = 4;
+
 // 计算距下次自动扫描的小时数
 function getHoursUntilNextScan() {
   const now = new Date();
@@ -54,4 +57,4 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, getHoursUntilNextScan };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, getHoursUntilNextScan };
