@@ -57,6 +57,7 @@ const READ_ROWS_JS = `(function(){
       else if (text.includes('待发货')) status = '待发货';
       else if (text.includes('卖家已发货')) status = '卖家已发货';
       else if (text.includes('交易成功')) status = '交易成功';
+      else if (text.includes('交易关闭')) status = '交易关闭';
       return { internalId, tracking, trackings, status, textSnippet: text.substring(0, 150) };
     })
   });

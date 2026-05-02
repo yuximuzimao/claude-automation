@@ -136,6 +136,15 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate('未获取到ERP状态，需人工核查'));
   }
 
+  // 交易关闭：订单已退款关闭（仅退款场景下说明退款已处理完成）
+  if (erpStatus === '交易关闭' || erpAgg.statuses.includes('交易关闭')) {
+    s({ type: 'branch', text: '同意退款 → ERP订单已交易关闭，退款已处理' });
+    return fin(approve(
+      'ERP订单已交易关闭，退款已处理',
+      [{ doc: 'flow-5.3', section: 'Step0', summary: '交易关闭（已退款）→同意' }]
+    ));
+  }
+
   // 5.2：未发货
   // 待审核：订单未审核，可退款
   // 待打印快递单：已审核，分两种情况：有快递单号→需拦截，无快递单号→可退款
