@@ -44,30 +44,15 @@
 
 ## Git 存档规则
 
-**每次代码改动验证通过后立即 commit + push**，不攒到 session 结束。
+改动验证通过后立即 commit + push，不攒到 session 结束。
+暂存：`git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/`
+不提交：`data/`、`*.log`、`.server.lock`
 
-```bash
-# 只提交代码，排除运行时数据
-git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/
-git commit -m "fix(aftersales): <描述>"
-git push
-```
+## 主要文件
 
-不提交：`data/`（queue.json / cases.jsonl / simulations.jsonl 等）、`*.log`、`.server.lock`
-
-session 结束前（用户说"归档"/"结束"）：`git status` 检查未提交改动 → commit + push
-
-## 目录说明
-
-| 目录/文件 | 用途 |
-|----------|------|
-| `cli.js` | 主命令入口（list / read-ticket / approve / reject / add-note / remind / logistics / erp-*） |
-| `server.js` | HTTP 服务器（队列管理 + SSE 推送），`node server.js` 启动 |
-| `scan-all.js` | 14 账号批量扫描工单，配合 `run-scan.sh` 使用 |
-| `lib/` | 核心自动化逻辑（不直接调用） |
-| `docs/` | 处理规则权威文档，规则只在此维护 |
-| `data/` | 运行时数据（cases.jsonl / queue.json / insights/ 等） |
-| `public/` | 前端页面（管理界面） |
-| `tasks/` | `todo.md`（当前待办）/ `lessons.md`（临时教训） |
-| `test/` + `test-cases/` | 测试框架（`node test.js`）和测试用例 |
-| `scan.log` / `server.log` | 运行时日志，可随时清理 |
+| 文件 | 用途 |
+|------|------|
+| `cli.js` | 主命令（list / approve / reject / erp-* 等） |
+| `server.js` | HTTP 服务（队列 + SSE），`node server.js` 启动 |
+| `scan-all.js` | 14账号批量扫描，配合 `run-scan.sh` |
+| `public/` | 前端管理界面 |
