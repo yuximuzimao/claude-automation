@@ -37,22 +37,9 @@
 | 多层嵌套 dialog 确定按钮查找（getBoundingClientRect） | `../product-mapping/docs/INDEX.md §6` |
 | 对应表图片列 class 动态变化（懒加载处理方式） | `../product-mapping/docs/INDEX.md §5` |
 
-## 教训沉淀流程
-
-- `tasks/lessons.md` — Session 级新发现，先记这里
-- `docs/INDEX.md §6` — 沉淀后的永久坑位，稳定后从 lessons 迁入，不在两处重复维护
-
 ## Git 存档规则
 
 改动验证通过后立即 commit + push，不攒到 session 结束。
 暂存：`git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/`
 不提交：`data/`、`*.log`、`.server.lock`
 
-## 主要文件
-
-| 文件 | 用途 |
-|------|------|
-| `cli.js` | 主命令（list / approve / reject / erp-* 等） |
-| `server.js` | HTTP 服务（队列 + SSE），`node server.js` 启动 |
-| `scan-all.js` | 14账号批量扫描，配合 `run-scan.sh` |
-| `public/` | 前端管理界面 |

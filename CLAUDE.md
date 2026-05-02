@@ -1,16 +1,5 @@
 # 工作区规则
 
-## 目录结构
-
-| 目录 | 用途 |
-|------|------|
-| `aftersales-automation/` | 鲸灵售后自动化系统 |
-| `product-mapping/` | 快麦商品对应表匹配核查（与售后同系统） |
-| `sessions/` | 鲸灵多账号 Session 管理 |
-| `reviews/` | 周/月回顾报告 |
-| `_exports/` | 对话导出 `.txt`，按需归档 |
-| `_sandbox/` | 临时落盘产出（一次性脚本、测试数据、评估报告），超过30天清理 |
-
 ## 跨项目共享知识
 
 `aftersales-automation/` 和 `product-mapping/` 操作同一套系统：
@@ -46,22 +35,9 @@
 - 根目录只放子项目文件夹，`.txt` / 截图 / 临时脚本一律归属对应目录
 - 新子项目建立时，第一步先写 `CLAUDE.md`
 
-## 何时用 _sandbox/
+## 临时产出
 
-**需要落盘的临时产出**放 `_sandbox/`，例如：一次性脚本、测试截图、评估 HTML、临时数据文件。
-
-**不需要放 _sandbox/ 的情况**：
-- 方法论、操作经验、核查结论 → 写进 **memory**（跨 session 复用）
-- 长期有效的规则、流程 → 写进项目 **docs/**
-- 纯对话过程中的中间结果 → 不落盘
-
-判断标准：「这个文件30天后还有用吗？」没用 → _sandbox，有用 → memory 或 docs。
-
-## 命名约定
-
-- 子项目目录：小写中划线（如 `aftersales-automation`）
-- 下划线前缀目录（`_exports/`、`_sandbox/`）表示非核心/可清理内容
-- 导出文件：`_exports/YYYY-MM-DD-<描述>.txt`
+需要落盘的临时产出放 `_sandbox/`。判断标准：30天后还有用？没用 → `_sandbox`，有用 → memory 或 `docs/`。
 
 ## Git 版本管理
 
@@ -72,12 +48,6 @@
 3. **session 结束前**：`git status` 检查是否有未提交改动，有则 commit + push
 4. **禁止 force push**，禁止修改已 push 的 commit
 
-### 自动触发时机（Claude 必须执行）
-
-- 修复完成 + 验证通过 → 立即 commit + push
-- 新功能开发完成 → commit + push
-- session 结束前（用户说"归档"/"结束"/"新会话"）→ commit + push 所有改动
-
 ### commit message 规范
 
 ```
@@ -87,12 +57,9 @@ type: fix / feat / refactor / docs / data
 scope: aftersales / product-mapping / workspace
 ```
 
-### 不提交的文件
+### NEVER 提交
 
-- `data/` 下的运行时数据（queue.json / cases.jsonl / simulations.jsonl / scan-status.json 等）
-- `*.log` 文件
-- `_sandbox/` / `_exports/` 下的临时文件
-- `.server.lock`
+`data/` 运行时数据 · `*.log` · `_sandbox/` · `_exports/` · `.server.lock`
 
 ---
 
