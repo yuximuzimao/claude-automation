@@ -137,7 +137,7 @@ async function processOne(queueItem, options = {}) {
     function addFrom(erpData) {
       const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
       rows.forEach(row => {
-        if (!['卖家已发货', '交易成功'].includes(row.status)) return;
+        if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
         const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
         ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
       });

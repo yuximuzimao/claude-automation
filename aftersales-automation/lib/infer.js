@@ -55,13 +55,13 @@ function getErpRows(cd, field) {
 }
 
 // 聚合所有行的发货状态，替代只读第一行的 getErpStatus()
-// 已发货状态：卖家已发货 / 交易成功（买家已收货或交易完成）
+// 已发货状态：卖家已发货 / 交易成功 / 交易关闭（订单已关闭但曾是发货状态）
 // 未发货状态：待审核 / 待打印快递单
 function getAggregatedErpStatus(cd, field) {
   const rows = getErpRows(cd, field);
   if (!rows.length) return { raw: null, statuses: [], hasShipped: false, allNotShipped: false, hasTracking: false };
   const statuses = [...new Set(rows.map(r => r.status).filter(Boolean))];
-  const SHIPPED = ['卖家已发货', '交易成功'];
+  const SHIPPED = ['卖家已发货', '交易成功', '交易关闭'];
   const NOT_SHIPPED = ['待审核', '待打印快递单'];
   return {
     raw: rows[0].status || null,
@@ -134,15 +134,6 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
   if (!erpStatus && !erpAgg.statuses.length) {
     s({ type: 'branch', text: '上报 → ERP状态未获取' });
     return fin(escalate('未获取到ERP状态，需人工核查'));
-  }
-
-  // 交易关闭：订单已退款关闭（仅退款场景下说明退款已处理完成）
-  if (erpStatus === '交易关闭' || erpAgg.statuses.includes('交易关闭')) {
-    s({ type: 'branch', text: '同意退款 → ERP订单已交易关闭，退款已处理' });
-    return fin(approve(
-      'ERP订单已交易关闭，退款已处理',
-      [{ doc: 'flow-5.3', section: 'Step0', summary: '交易关闭（已退款）→同意' }]
-    ));
   }
 
   // 5.2：未发货
@@ -228,9 +219,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'branch', text: '注意 → ERP状态待发货但已有快递单号，可能因退款导致状态未同步，按已发货处理' });
   }
 
-  // 5.3：已发货（卖家已发货 / 交易成功 / 待发货但有快递单号）
+  // 5.3：已发货（卖家已发货 / 交易成功 / 交易关闭 / 待发货但有快递单号）
   const isShipped = erpAgg.hasShipped || (erpStatus === '待发货' && erpAgg.hasTracking);
-  s({ type: 'check', condition: `ERP有已发货行（卖家已发货/交易成功）或待发货+有快递`, result: isShipped });
+  s({ type: 'check', condition: `ERP有已发货行（卖家已发货/交易成功/交易关闭）或待发货+有快递`, result: isShipped });
 
   if (isShipped) {
     s({ type: 'branch', text: '进入「仅退款-已发货」流程 (flow-5.3)' });
@@ -280,8 +271,8 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     // 交叉核查：合并 ERP 全部 tracking（主品+赠品）+ 鲸灵全部包裹 tracking → 去重
     // 鲸灵工单详情页不显示赠品物流，因此必须从 ERP 补充赠品 tracking
-    const mainShippedRows = getErpRows(cd, 'erpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status));
-    const giftShippedRows = getErpRows(cd, 'giftErpSearch').filter(r => ['卖家已发货', '交易成功'].includes(r.status));
+    const mainShippedRows = getErpRows(cd, 'erpSearch').filter(r => ['卖家已发货', '交易成功', '交易关闭'].includes(r.status));
+    const giftShippedRows = getErpRows(cd, 'giftErpSearch').filter(r => ['卖家已发货', '交易成功', '交易关闭'].includes(r.status));
     const totalShipRows = mainShippedRows.length + giftShippedRows.length;
     s({ type: 'read', label: 'ERP发货行总数', value: `${totalShipRows}（主品${mainShippedRows.length}+赠品${giftShippedRows.length}）` });
 
