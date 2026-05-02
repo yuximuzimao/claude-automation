@@ -105,7 +105,12 @@ function updateQueueItem(id, patch) {
   const queue = readQueue();
   const idx = queue.items.findIndex(i => i.id === id);
   if (idx === -1) return null;
-  queue.items[idx] = { ...queue.items[idx], ...patch };
+  const existing = queue.items[idx];
+  // 离开 waiting 状态时清除 firstWaitingAt（防止误触发超时安全阀）
+  if (patch.status && patch.status !== 'waiting' && existing.status === 'waiting') {
+    patch = { ...patch, firstWaitingAt: null };
+  }
+  queue.items[idx] = { ...existing, ...patch };
   writeQueue(queue);
   return queue.items[idx];
 }

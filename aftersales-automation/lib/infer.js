@@ -11,7 +11,7 @@
  * 变更任一读取字段必须同步更新该文档。
  */
 
-const { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS } = require('./constants');
+const { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS } = require('./constants');
 
 // 免退配件关键词（不计入应退/实退数量）
 const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
@@ -363,6 +363,19 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
+    // 超时安全阀：已等待 ≥ REMIND_HOURS 仍未拦截成功 → 拒绝退款
+    if (queueItem.firstWaitingAt) {
+      const waitingDuration = (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000;
+      if (waitingDuration >= REMIND_HOURS) {
+        s({ type: 'branch', text: `超时安全阀触发 → 已等待${waitingDuration.toFixed(0)}h ≥ ${REMIND_HOURS}h，拒绝退款` });
+        return fin(reject(
+          `已等待${waitingDuration.toFixed(0)}h未拦截成功（阈值${REMIND_HOURS}h），拒绝退款，建议客户重新下单`,
+          ['⚠️ 超时安全阀自动拒绝'],
+          [{ doc: 'flow-5.3', section: 'Step4', summary: '等待超时→自动拒绝' }]
+        ));
+      }
+    }
+
     // 时间分支：在途拦截件，剩余时效 > 距下次扫描时间 → 自动标记等待重查
     const remainingHours = queueItem.deadlineAt
       ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)
@@ -464,6 +477,19 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const aftersale = cd.erpAftersale;
   const hasRows = aftersale && aftersale.rows && aftersale.rows.length;
   s({ type: 'read', label: 'ERP售后入库记录', value: hasRows ? `${aftersale.rows.length} 条记录` : '无记录' });
+
+  // 超时安全阀：已等待 ≥ REMIND_HOURS 仍未入库 → 拒绝退款
+  if (queueItem.firstWaitingAt) {
+    const waitingDuration = (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000;
+    if (waitingDuration >= REMIND_HOURS) {
+      s({ type: 'branch', text: `超时安全阀触发 → 已等待${waitingDuration.toFixed(0)}h ≥ ${REMIND_HOURS}h，拒绝退款` });
+      return fin(reject(
+        `已等待${waitingDuration.toFixed(0)}h未入库（阈值${REMIND_HOURS}h），拒绝退款，等入库后再处理`,
+        ['⚠️ 超时安全阀自动拒绝'],
+        [{ doc: 'flow-5.1', section: 'Step3', summary: '等待超时未入库→自动拒绝' }]
+      ));
+    }
+  }
 
   // 场景B/C公共变量（无记录和有记录未入库两种情况共用相同判断逻辑）
   const buyerRemark = ticket.buyerRemark || '';
