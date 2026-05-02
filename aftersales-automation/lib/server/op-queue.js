@@ -28,7 +28,6 @@ function updateAccountStatus(num, patch) {
   const s = readAccountStatus();
   const prev = s[String(num)] || {};
   const merged = Object.assign({}, prev, patch);
-  // 扫描成功时清除残留的 error 字段，避免前端显示过期错误
   if (patch.status === 'ok' && !patch.error) {
     delete merged.error;
   }
@@ -37,12 +36,29 @@ function updateAccountStatus(num, patch) {
   sse.broadcast('accounts-update', readAccountStatus());
 }
 
+// 创建 Mac 提醒：优先 Reminders.app，失败时（后台无 TTY）降级为系统通知
+function createReminder(title) {
+  const remind = spawnSync('osascript', ['-e',
+    `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`
+  ], { timeout: 10000, encoding: 'utf8' });
+  if (remind.status === 0) {
+    log(`[预警] ${title}`);
+    return true;
+  }
+  const errMsg = (remind.stderr || '').slice(0, 80);
+  log(`[预警] Reminders 创建失败（${errMsg}），降级为系统通知`);
+  spawnSync('osascript', ['-e',
+    `display notification "${title.replace(/"/g, '\\"')}" with title "鲸灵售后预警" sound name "default"`
+  ], { timeout: 5000 });
+  return false;
+}
+
 let counter = 0;
-const queue = [];        // OpItem[]，包含 queued + running + done/error（done 保留最近20条）
-let running = null;      // 当前正在执行的 OpItem | null
-let lastCompleted = null; // 最近一次完成的 OpItem（供前端闪烁提示）
-let paused = false;      // 紧急停止标志
-let activeProc = null;   // 当前子进程引用（用于 kill）
+const queue = [];
+let running = null;
+let lastCompleted = null;
+let paused = false;
+let activeProc = null;
 
 function log(msg) { process.stdout.write(`[op-queue] ${msg}\n`); }
 
@@ -51,14 +67,11 @@ function log(msg) { process.stdout.write(`[op-queue] ${msg}\n`); }
 function enqueue(type, label, params) {
   const op = {
     id: `op-${Date.now()}-${++counter}`,
-    type,
-    label,
+    type, label,
     params: params || {},
-    status: 'queued',
-    result: null,
+    status: 'queued', result: null,
     createdAt: new Date().toISOString(),
-    startedAt: null,
-    doneAt: null,
+    startedAt: null, doneAt: null,
   };
   queue.push(op);
   log(`入队 [${op.id}] ${label}`);
@@ -77,80 +90,46 @@ function cancel(id) {
 }
 
 function getState() {
-  return {
-    running,
-    queued: queue.filter(op => op.status === 'queued'),
-    lastCompleted,
-    paused,
-  };
+  return { running, queued: queue.filter(op => op.status === 'queued'), lastCompleted, paused };
 }
 
 function emergencyStop() {
   paused = true;
-  // 清空所有排队中的任务（直接从 queue 移除）
   for (let i = queue.length - 1; i >= 0; i--) {
     if (queue[i].status === 'queued') queue.splice(i, 1);
   }
-  // 终止当前子进程
-  if (activeProc) {
-    try { activeProc.kill('SIGTERM'); } catch(e) {}
-    activeProc = null;
-  }
-  log('紧急停止：队列已清空，子进程已终止');
+  if (activeProc) { try { activeProc.kill('SIGTERM'); } catch(e) {} activeProc = null; }
+  log('紧急停止');
   broadcast();
 }
 
-function resume() {
-  paused = false;
-  log('系统恢复运行');
-  broadcast();
-  processNext();
-}
-
+function resume() { paused = false; log('恢复'); broadcast(); processNext(); }
 function isPaused() { return paused; }
-
 function isRunning() { return !!running; }
 
 // ── 内部调度 ──────────────────────────────────────────────────────
 
-function broadcast() {
-  sse.broadcast('op-queue-update', getState());
-}
+function broadcast() { sse.broadcast('op-queue-update', getState()); }
 
 function processNext() {
-  if (running) return; // 已有任务在跑
-  if (paused) return;  // 已紧急停止
+  if (running || paused) return;
   const next = queue.find(op => op.status === 'queued');
   if (!next) return;
-
-  next.status = 'running';
-  next.startedAt = new Date().toISOString();
-  running = next;
-  log(`开始 [${next.id}] ${next.label}`);
-  broadcast();
-
+  next.status = 'running'; next.startedAt = new Date().toISOString(); running = next;
+  log(`开始 [${next.id}] ${next.label}`); broadcast();
   executeOp(next).then(result => {
-    next.status = 'done';
-    next.result = result;
-    next.doneAt = new Date().toISOString();
+    next.status = 'done'; next.result = result; next.doneAt = new Date().toISOString();
     log(`完成 [${next.id}] ${next.label}`);
   }).catch(e => {
-    next.status = 'error';
-    next.result = { error: e.message };
-    next.doneAt = new Date().toISOString();
-    // execute 失败时把错误写回 sim，卡片可以展示
+    next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
     if (next.type === 'execute' && next.params && next.params.simId) {
       try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
     }
     log(`失败 [${next.id}] ${next.label}: ${e.message}`);
   }).finally(() => {
-    running = null;
-    lastCompleted = next;
-    // 完成后直接从 queue 中移除，不保留历史
-    const idx = queue.indexOf(next);
-    if (idx !== -1) queue.splice(idx, 1);
-    broadcast();
-    processNext(); // 继续下一条
+    running = null; lastCompleted = next;
+    const idx = queue.indexOf(next); if (idx !== -1) queue.splice(idx, 1);
+    broadcast(); processNext();
   });
 }
 
@@ -184,35 +163,30 @@ function spawnAsync(cmd, args, opts) {
   });
 }
 
-// ── 单账号扫描（自动巡检拆分为每账号一条任务）─────────────────────
+// ── 单账号扫描 ─────────────────────────────────────────────────────
+
 async function execScanAccount(op) {
   const { accountNum, accountNote } = op.params;
-  try {
-    return await _execScanAccountInner(accountNum, accountNote);
-  } catch(e) {
+  try { return await _execScanAccountInner(accountNum, accountNote); }
+  catch(e) {
     const msg = e.message || '';
     const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(msg);
     updateAccountStatus(accountNum, {
       status: isExpired ? 'expired' : 'error',
       lastScan: new Date().toISOString(),
-      error: msg.slice(0, 200),
-      note: accountNote,
+      error: msg.slice(0, 200), note: accountNote,
     });
     throw e;
   }
 }
 
 async function _execScanAccountInner(accountNum, accountNote) {
-  // 注入账号
   const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
     timeout: 30000, encoding: 'utf8',
   });
   if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败: ${(inj.stderr || inj.stdout || '').slice(0, 100)}`);
-
-  // 等待浏览器稳定
   await new Promise(r => setTimeout(r, 5000));
 
-  // 读工单列表
   const r = spawnSync('node', [path.join(BASE, 'cli.js'), 'list'], {
     timeout: 120000, encoding: 'utf8', cwd: BASE,
   });
@@ -222,7 +196,6 @@ async function _execScanAccountInner(accountNum, accountNote) {
 
   const urgent = (out.data && out.data.urgent) || [];
 
-  // 写入 queue.json（去重）
   let added = 0, updated = 0, waitingReset = 0;
   const queue = db.readQueue();
   for (const t of urgent) {
@@ -239,30 +212,21 @@ async function _execScanAccountInner(accountNum, accountNote) {
       }
     } else {
       const item = db.addQueueItem({
-        workOrderNum: t.workOrderNum,
-        accountNum,
-        accountNote,
-        mode: 'live',
-        source: 'scan',
-        type: t.type || null,
-        urgency,
-        deadlineAt,
+        workOrderNum: t.workOrderNum, accountNum, accountNote,
+        mode: 'live', source: 'scan', type: t.type || null, urgency, deadlineAt,
       });
       if (item) added++;
     }
   }
 
-  // 到期预警（REMIND_HOURS小时阈值）
+  // 到期预警
   const warnTickets = urgent.filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
     const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
     const dl = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${accountNote} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${dlStr}`;
-    const script = `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`;
-    const remind = spawnSync('osascript', ['-e', script], { timeout: 10000, encoding: 'utf8' });
-    if (remind.status === 0) log(`[预警] ${title}`);
-    else log(`[预警] 创建失败（非致命）: ${(remind.stderr || '').slice(0, 80)}`);
+    createReminder(title);
   }
 
   log(`账号${accountNum} ${accountNote}: 采集 ${urgent.length} 条，新增 ${added}，更新 ${updated}，重置等待 ${waitingReset}`);
@@ -270,7 +234,8 @@ async function _execScanAccountInner(accountNum, accountNote) {
   return { accountNum, accountNote, count: urgent.length, added, updated, waitingReset };
 }
 
-// ── 巡检收尾（全部账号扫完后：清理拦截 + 逐工单入队推理）─────────
+// ── 巡检收尾 ─────────────────────────────────────────────────────
+
 async function execScanFinalize(op) {
   const fs = require('fs');
   const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
@@ -280,25 +245,16 @@ async function execScanFinalize(op) {
     }));
   } catch(e) {}
 
-  // 清理已退回的拦截记录
   await cleanReturnedIntercepts();
 
-  // 批量重置：所有 pending/collected/simulated live 工单统一设为 pending
-  // 让前端立即看到"全部待采集"，而不是只有正在处理的那条在变
   const allLive = (db.readQueue().items || []).filter(i =>
     ['pending', 'collected', 'simulated'].includes(i.status) && i.mode === 'live'
   );
   for (const item of allLive) {
-    if (item.status !== 'pending') {
-      db.updateQueueItem(item.id, { status: 'pending' });
-    }
+    if (item.status !== 'pending') db.updateQueueItem(item.id, { status: 'pending' });
   }
-  // 一次性广播，前端刷新所有卡片为"待采集"
-  if (allLive.length) {
-    sse.broadcast('queue-update', { resetCount: allLive.length });
-  }
+  if (allLive.length) sse.broadcast('queue-update', { resetCount: allLive.length });
 
-  // 每张 pending live 工单单独入队推理（可逐条取消）
   const pending = (db.readQueue().items || []).filter(i =>
     i.status === 'pending' && i.mode === 'live'
   );
@@ -306,7 +262,6 @@ async function execScanFinalize(op) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
     enqueue('reprocess-one', label, { queueItemId: item.id });
   }
-
   log(`巡检收尾：入队 ${pending.length} 条工单推理`);
   return { done: true, pipelineCount: pending.length };
 }
@@ -315,8 +270,7 @@ async function execScan(op) {
   const { accounts = [] } = op.params;
   const args = accounts.length ? accounts.map(String) : [];
   const { code, stdout } = await new Promise((resolve, reject) => {
-    let stdout = '';
-    let stderrBuf = '';
+    let stdout = '', stderrBuf = '';
     const proc = spawn('node', [path.join(BASE, 'scan-all.js'), ...args], {
       cwd: BASE, stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -325,24 +279,19 @@ async function execScan(op) {
     proc.stderr.on('data', d => {
       stderrBuf += d;
       const lines = stderrBuf.split('\n');
-      stderrBuf = lines.pop(); // 不完整的末行暂存
+      stderrBuf = lines.pop();
       for (const line of lines) {
         if (line.startsWith('SCAN_PROGRESS:')) {
           try { sse.broadcast('scan-progress', JSON.parse(line.slice(14))); } catch(e) {}
-        } else if (line.trim()) {
-          process.stderr.write(line + '\n');
-        }
+        } else if (line.trim()) process.stderr.write(line + '\n');
       }
     });
     proc.on('close', code => {
       if (activeProc === proc) activeProc = null;
-      // 处理 stderr 剩余内容
       if (stderrBuf.trim()) {
         if (stderrBuf.startsWith('SCAN_PROGRESS:')) {
           try { sse.broadcast('scan-progress', JSON.parse(stderrBuf.slice(14))); } catch(e) {}
-        } else {
-          process.stderr.write(stderrBuf + '\n');
-        }
+        } else process.stderr.write(stderrBuf + '\n');
       }
       resolve({ code, stdout });
     });
@@ -350,36 +299,28 @@ async function execScan(op) {
   });
   let result = null;
   try { result = JSON.parse(stdout); } catch(e) {}
-  // 写扫描状态文件（兼容旧的 scan-status 接口）
   const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
   try { fs.writeFileSync(SCAN_STATUS_FILE, JSON.stringify({ scanning: false, lastScanAt: new Date().toISOString(), lastResult: result })); } catch(e) {}
-  // scan-all.js 已直接写 account-status.json，这里只需 SSE 广播让前端实时刷新
   if (result) sse.broadcast('accounts-update', readAccountStatus());
   if (code !== 0 && !result) throw new Error('scan-all 执行失败');
 
-  // 到期预警（REMIND_HOURS小时阈值）：为即将过期的工单创建 Mac 提醒
+  // 到期预警：从本次扫描结果
   const warnTickets = (result && result.urgent || []).filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
     const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
     const deadlineDate = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const deadlineStr = `截止${(deadlineDate.getMonth()+1).toString().padStart(2,'0')}/${deadlineDate.getDate().toString().padStart(2,'0')} ${deadlineDate.getHours().toString().padStart(2,'0')}:${deadlineDate.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${t.note || '账号' + t.num} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${deadlineStr}`;
-    const appleScript = `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`;
-    const r = spawnSync('osascript', ['-e', appleScript], { timeout: 10000, encoding: 'utf8' });
-    if (r.status === 0) {
-      log(`[预警] 提醒已创建：${title}`);
-    } else {
-      log(`[预警] 提醒创建失败（非致命）: ${(r.stderr || '').slice(0, 80)}`);
-    }
+    createReminder(title);
   }
 
-  // 补充：检查队列中已有但扫描未重新命中的到期工单（waiting/simulated 状态）
+  // 补充：检查队列中扫描未命中的到期工单（waiting/simulated）
   const scanWarnedNums = new Set(warnTickets.map(t => t.workOrderNum));
   const queueItems = (db.readQueue().items || []).filter(i =>
     i.mode === 'live' && !['done', 'auto_executed'].includes(i.status)
   );
   for (const qi of queueItems) {
-    if (scanWarnedNums.has(qi.workOrderNum)) continue; // 已在扫描预警中覆盖
+    if (scanWarnedNums.has(qi.workOrderNum)) continue;
     if (!qi.deadlineAt) continue;
     const remainingHours = (new Date(qi.deadlineAt).getTime() - Date.now()) / 3600000;
     if (remainingHours > REMIND_HOURS || remainingHours <= 0) continue;
@@ -387,14 +328,10 @@ async function execScan(op) {
     const dl = new Date(qi.deadlineAt);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
-    const script = `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\"')}"}`;
-    const remind = spawnSync('osascript', ['-e', script], { timeout: 10000, encoding: 'utf8' });
-    if (remind.status === 0) log(`[预警] 队列补充提醒：${title}`);
-    else log(`[预警] 队列补充提醒失败（非致命）: ${(remind.stderr || '').slice(0, 80)}`);
+    createReminder(title);
   }
 
-  // 扫描完成后逐工单入队推理（每张单独一条，可逐条取消）
-  // 包含 collected 状态：采集完成但推理未执行的工单
+  // 入队推理
   const pending = (db.readQueue().items || []).filter(i =>
     (i.status === 'pending' || i.status === 'collected') && i.mode === 'live'
   );
@@ -403,44 +340,30 @@ async function execScan(op) {
     enqueue('reprocess-one', label, { queueItemId: item.id });
   }
 
-  // 扫描后专项清理：用实时 ERP 查询检测已退回的拦截记录（后台执行，不阻塞推理入队）
   cleanReturnedIntercepts().catch(e => log(`[intercept-clean] 清理失败（非致命）: ${e.message}`));
-
   return result;
 }
 
-// 扫描后专项清理：查 ERP 实时物流状态，检测拦截记录是否已退回
+// ── 拦截记录清理 ─────────────────────────────────────────────────
+
 async function cleanReturnedIntercepts() {
   const map = db.readIntercepts();
   const trackings = Object.keys(map);
   if (!trackings.length) return;
 
-  // TTL 过期清理（不需要 ERP）
   let cleaned = 0;
   for (const tracking of trackings) {
     const rec = map[tracking];
     const age = Date.now() - new Date(rec.executedAt).getTime();
-    if (age > db.INTERCEPT_TTL_MS) {
-      db.removeIntercept(tracking);
-      log(`[intercept-clean] ${tracking} 超7天过期，已清除`);
-      cleaned++;
-    }
+    if (age > db.INTERCEPT_TTL_MS) { db.removeIntercept(tracking); log(`[intercept-clean] ${tracking} 超7天过期，已清除`); cleaned++; }
   }
 
-  // ERP 实时查询（获取失败则跳过，不影响 TTL 清理结果）
   const { getTargetIds } = require('../targets');
   const { erpSearch } = require('../erp/search');
   let erpId;
-  try {
-    const ids = await getTargetIds();
-    erpId = ids.erpId;
-  } catch(e) {
-    log(`[intercept-clean] 无法获取 ERP target，跳过实时查询: ${e.message}`);
-    if (cleaned > 0) log(`[intercept-clean] 共清除 ${cleaned} 条过期记录`);
-    return;
-  }
+  try { const ids = await getTargetIds(); erpId = ids.erpId; }
+  catch(e) { log(`[intercept-clean] 无法获取 ERP target: ${e.message}`); if (cleaned > 0) log(`[intercept-clean] 共清除 ${cleaned} 条过期记录`); return; }
 
-  // 查询剩余（未过期）的记录
   const remaining = Object.keys(db.readIntercepts());
   for (const tracking of remaining) {
     try {
@@ -448,25 +371,17 @@ async function cleanReturnedIntercepts() {
       if (!res.success) { log(`[intercept-clean] ERP 查 ${tracking} 失败: ${res.error}`); continue; }
       const rows = res.data && res.data.rows && res.data.rows.rows || [];
       const hasReturned = rows.some(r => RETURN_KEYWORDS.some(kw => (r.textSnippet || '').includes(kw)));
-      if (hasReturned) {
-        db.removeIntercept(tracking);
-        log(`[intercept-clean] ${tracking} ERP显示已退回，已清除`);
-        cleaned++;
-      } else {
-        log(`[intercept-clean] ${tracking} 未退回，保留`);
-      }
-    } catch(e) {
-      log(`[intercept-clean] 查询 ${tracking} 异常: ${e.message}`);
-    }
+      if (hasReturned) { db.removeIntercept(tracking); log(`[intercept-clean] ${tracking} ERP显示已退回，已清除`); cleaned++; }
+      else log(`[intercept-clean] ${tracking} 未退回，保留`);
+    } catch(e) { log(`[intercept-clean] 查询 ${tracking} 异常: ${e.message}`); }
   }
   if (cleaned > 0) log(`[intercept-clean] 共清除 ${cleaned} 条拦截记录`);
   else log(`[intercept-clean] 检查完毕，无需清除`);
 }
 
 async function execPipeline(op) {
-  const { mode = 'live' } = op.params;
   const pipeline = require('./pipeline');
-  await pipeline.runPipeline(mode);
+  await pipeline.runPipeline(op.params.mode || 'live');
   return { done: true };
 }
 
@@ -492,7 +407,6 @@ async function execExecute(op) {
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
 
-  // 注入账号
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
   const accountNum = queueItem && queueItem.accountNum;
   if (accountNum) {
@@ -507,27 +421,22 @@ async function execExecute(op) {
   let result;
 
   if (action === 'approve') {
-    const raw = execFileSync('node', [CLI, 'approve', sim.workOrderNum], EXEC_OPTS);
-    result = JSON.parse(raw);
+    result = JSON.parse(execFileSync('node', [CLI, 'approve', sim.workOrderNum], EXEC_OPTS));
   } else if (action === 'reject') {
     const args = ['reject', sim.workOrderNum,
       rejectReason || sim.decision.rejectReason || sim.decision.reason,
       rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
     ];
     if (rejectImageUrl) args.push(rejectImageUrl);
-    const raw = execFileSync('node', [CLI, ...args], EXEC_OPTS);
-    result = JSON.parse(raw);
+    result = JSON.parse(execFileSync('node', [CLI, ...args], EXEC_OPTS));
     // 拦截提醒
     const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
     if (needsReminder) {
       try {
         const cd = sim.collectedData || {};
         const accountNote = queueItem && queueItem.accountNote || '未知账号';
-
-        // 收集所有发货快递单号（主订单所有分包 + 赠品子订单），去重
         const allShipTrackings = (function() {
-          const result = [];
-          const seen = new Set();
+          const result = [], seen = new Set();
           function addFrom(erpData) {
             const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
             rows.forEach(row => {
@@ -536,27 +445,19 @@ async function execExecute(op) {
               ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
             });
           }
-          addFrom(cd.erpSearch);
-          addFrom(cd.giftErpSearch);
+          addFrom(cd.erpSearch); addFrom(cd.giftErpSearch);
           return result;
         })();
-
         const erpRows = cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows || [];
         const internalId = erpRows[0] && erpRows[0].internalId || '';
-
-        // 商品名（取 productArchive.title 前30字，或 subOrders[0].attr1）
         const archiveTitle = cd.productArchive && cd.productArchive.title || '';
         const subOrderAttr = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].attr1 || '';
         const goodsName = (archiveTitle || subOrderAttr).slice(0, 30);
         const qty = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].afterSaleNum || '';
-
-        // 发一条提醒，快递单号用逗号拼接（含所有分包+赠品）
         const shipTracking = allShipTrackings.join(',');
         const remindArgs = [CLI, 'remind', sim.workOrderNum, accountNote,
           shipTracking, internalId, goodsName, qty ? String(qty) : ''];
         execFileSync('node', remindArgs, EXEC_OPTS);
-
-        // 记录已拦截（每个快递单号单独记录，防止二次工单重复拦截）
         allShipTrackings.forEach(t => {
           db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
           log(`已记录拦截: ${t}`);
@@ -564,23 +465,18 @@ async function execExecute(op) {
       } catch(e) { log(`remind 失败（非致命）: ${e.message}`); }
     }
   } else if (action === 'escalate') {
-    const raw = execFileSync('node', [CLI, 'add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`], EXEC_OPTS);
-    result = JSON.parse(raw);
+    result = JSON.parse(execFileSync('node', [CLI, 'add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`], EXEC_OPTS));
   } else {
     throw new Error(`未知 action: ${action}`);
   }
 
   if (!result.success) throw new Error(result.error || '执行失败');
 
-  // 归档
   db.appendCase({
-    id: `case-${Date.now()}`,
-    workOrderNum: sim.workOrderNum,
-    accountNote: sim.accountNote,
+    id: `case-${Date.now()}`, workOrderNum: sim.workOrderNum, accountNote: sim.accountNote,
     type: sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type,
     groundTruth: { action, reason: sim.decision.reason, source: 'executed' },
-    collectedData: sim.collectedData,
-    addedAt: new Date().toISOString(),
+    collectedData: sim.collectedData, addedAt: new Date().toISOString(),
   });
   db.updateSimulation(simId, { executedAt: new Date().toISOString() });
   db.updateQueueItem(sim.queueItemId, { status: 'done' });
@@ -595,17 +491,14 @@ async function execOpenTicket(op) {
     });
     if (injResult.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(injResult.stderr || injResult.stdout || '').slice(0, 200)}`);
   }
-  const raw = execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' });
-  return JSON.parse(raw);
+  return JSON.parse(execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' }));
 }
 
 async function execCollect(op) {
   const { queueItemId, mode = 'live', accountNum } = op.params;
   const args = ['--limit', '1', mode === 'live' ? '--live' : '--sim'];
   if (accountNum) args.push('--account', String(accountNum));
-  const { code } = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...args], {
-    cwd: BASE, timeout: 120000,
-  });
+  const { code } = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...args], { cwd: BASE, timeout: 120000 });
   if (code !== 0) throw new Error('采集失败');
   return { done: true };
 }
