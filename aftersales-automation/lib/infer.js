@@ -729,7 +729,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     if (hasShortage) {
       const shortItems = matchResults.filter(m => m.status !== 'ok');
       const shortDesc = shortItems.map(m => {
-        const name = (m.expected || '').replace(/\s+/g, '').slice(0, 15);
+        const name = (m.expected || '').replace(/\s+/g, '');
         if (m.status === 'missing') return `${name}（退货里没有）`;
         return `${name}（退了${m.receivedQty}件，应退${m.expectedQty}件）`;
       }).join('，');
@@ -742,11 +742,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     // 全部已知品匹配通过，但有未匹配的入库项
     if (unmatchedReceived.length > 0) {
       const matchedSummary = matchResults.map(m => {
-        const name = (m.matched || m.expected || '').replace(/\s+/g, '').slice(0, 12);
+        const name = (m.matched || m.expected || '').replace(/\s+/g, '');
         return `${name}×${m.receivedQty}`;
       }).join('、');
       const unmatchedSummary = unmatchedReceived.map(i => {
-        const name = (i.name || '').replace(/\s+/g, '').slice(0, 15);
+        const name = (i.name || '').replace(/\s+/g, '');
         return `${name}×${i.qtyGood}件`;
       }).join('、');
       s({ type: 'branch', text: `上报 → ${unmatchedSummary} 未在对应表中` });
@@ -763,7 +763,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     // 全部品匹配通过且无未匹配项
     const totalExpected = matchResults.reduce((s, m) => s + m.expectedQty, 0);
     const summary = matchResults.map(m => {
-      const name = (m.expected || '').replace(/\s+/g, '').slice(0, 8);
+      const name = (m.expected || '').replace(/\s+/g, '');
       return `${name}×${m.expectedQty}`;
     }).join('、');
     const surplus = totalGood - totalExpected;
