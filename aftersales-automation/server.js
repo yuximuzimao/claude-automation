@@ -4,6 +4,9 @@ const fs = require('fs');
 
 // ── 单实例锁（防止多个 server.js 进程同时运行导致重复扫描）─────────
 const LOCK_FILE = path.join(__dirname, 'data/.server.lock');
+
+function cleanupLock() { try { fs.unlinkSync(LOCK_FILE); } catch(e) {} }
+
 try {
   const existingPid = fs.readFileSync(LOCK_FILE, 'utf8').trim();
   // 检查旧进程是否仍在运行
@@ -14,7 +17,35 @@ try {
   } catch(e) { /* 旧进程不存在，继续 */ }
 } catch(e) { /* lock 文件不存在，继续 */ }
 fs.writeFileSync(LOCK_FILE, String(process.pid));
-process.on('exit', () => { try { fs.unlinkSync(LOCK_FILE); } catch(e) {} });
+
+// 确保 lock 文件在所有退出路径上被清理
+process.on('exit', cleanupLock);
+process.on('SIGINT', () => { cleanupLock(); process.exit(0); });
+process.on('SIGTERM', () => { cleanupLock(); process.exit(0); });
+process.on('SIGHUP', () => { cleanupLock(); process.exit(0); });
+
+// ── 全局崩溃防护（防止 uncaughtException/unhandledRejection 杀死进程）────
+const CRASH_LOG = path.join(__dirname, 'data/crash.log');
+function logCrash(type, err) {
+  const ts = new Date().toISOString();
+  const msg = `[${ts}] ${type}: ${err && err.stack ? err.stack : err}\n`;
+  try { fs.appendFileSync(CRASH_LOG, msg); } catch(e) {}
+  console.error(msg);
+}
+
+process.on('uncaughtException', (err) => {
+  logCrash('uncaughtException', err);
+  // 致命异常：清理锁后退出，由外部进程管理器重启
+  cleanupLock();
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  logCrash('unhandledRejection', reason);
+  // unhandledRejection 通常不是致命的，记录但不退出
+  // Node.js 默认行为在 v15+ 会杀死进程，覆盖为仅记录
+  console.error('未处理的Promise拒绝（已捕获，进程继续运行）:', reason);
+});
 
 // 自动从 Claude Code 设置注入 API 配置（若 env 未手动设置）
 (function injectClaudeEnv() {
