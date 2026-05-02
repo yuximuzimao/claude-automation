@@ -358,7 +358,7 @@ router.post('/insights/reset-failed', (req, res) => {
 // 触发洞察生成
 router.post('/insights/generate', (req, res) => {
   const pending = db.readFeedback({ uninsighted: true });
-  if (!pending.length) return res.status(400).json({ error: '没有待洞察的有说明反馈' });
+  if (!pending.length) return res.status(400).json({ error: '没有待洞察的反馈' });
 
   // 组装 prompt
   const lines = pending.map((f, i) => {

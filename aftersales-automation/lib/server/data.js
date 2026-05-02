@@ -171,7 +171,7 @@ function readFeedback(filter = {}) {
   let items = lines.map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
   if (filter.verdict) items = items.filter(f => f.verdict === filter.verdict);
   if (filter.withReason) items = items.filter(f => (f.reason || '').trim());
-  if (filter.uninsighted) items = items.filter(f => !f.insightedAt && (f.reason || '').trim());
+  if (filter.uninsighted) items = items.filter(f => !f.insightedAt);
   if (filter.limit) items = items.slice(-filter.limit);
   return items;
 }
