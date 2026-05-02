@@ -247,4 +247,17 @@ async function navigateErp(targetId, pageName) {
   saveSessionCache(cache);
 }
 
-module.exports = { navigateErp, checkLogin, recoverLogin, waitForPageContent };
+// 关闭所有可见的 Element UI 弹窗（档案V2子品弹窗等）
+const CLOSE_ALL_DIALOGS_JS = `(function(){
+  var closed = 0;
+  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(e){
+    return window.getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().width > 0;
+  });
+  wrappers.forEach(function(w) {
+    var btn = w.querySelector('.el-dialog__closeBtn');
+    if (btn) { btn.click(); closed++; }
+  });
+  return closed;
+})()`;
+
+module.exports = { navigateErp, checkLogin, recoverLogin, waitForPageContent, CLOSE_ALL_DIALOGS_JS };

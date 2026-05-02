@@ -1,6 +1,6 @@
 'use strict';
 const cdp = require('../cdp');
-const { navigateErp, CLOSE_ALL_DIALOGS_JS } = require('../erp/navigate');
+const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
@@ -157,8 +157,6 @@ const READ_SUB_ITEMS_JS = `(function(){
 
 async function productArchive(targetId, specCode) {
   try {
-    // 清理可能残留的子品弹窗（前次查询未正常关闭）
-    await cdp.eval(targetId, CLOSE_ALL_DIALOGS_JS);
     await navigateErp(targetId, '商品档案V2');
 
     // 设置精确查询

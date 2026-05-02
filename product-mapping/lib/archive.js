@@ -1,7 +1,7 @@
 'use strict';
 const cdp = require('./cdp');
 const { sleep, retry } = require('./wait');
-const { navigateErp } = require('./navigate');
+const { navigateErp, CLOSE_ALL_DIALOGS_JS } = require('./navigate');
 
 // 直接移植自售后工单项目 lib/product/archive.js
 // 方法：DOM 输入法（模拟用户在「主商家编码」框打字）+ 精确查询下拉 + 遍历父组件找 handleQuery
@@ -86,7 +86,7 @@ async function initArchiveComp(erpId) {
   await navigateErp(erpId, '商品档案V2');
   await sleep(1000);
   // 清理可能残留的子品弹窗（前次查询未正常关闭）
-  await cdp.eval(erpId, '(function(){var c=0;Array.from(document.querySelectorAll(".el-dialog__wrapper")).filter(function(e){return window.getComputedStyle(e).display!=="none"&&e.getBoundingClientRect().width>0}).forEach(function(w){var b=w.querySelector(".el-dialog__closeBtn");if(b){b.click();c++}});return c;})()');
+  await cdp.eval(erpId, CLOSE_ALL_DIALOGS_JS);
   // 清空所有列头筛选条件（防止上次操作遗留"普通商品"等筛选）
   const cleared = await cdp.eval(erpId,
     '(function(){' +

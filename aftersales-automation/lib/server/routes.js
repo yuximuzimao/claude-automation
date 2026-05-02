@@ -357,7 +357,6 @@ router.post('/insights/reset-failed', (req, res) => {
 
 // 触发洞察生成
 router.post('/insights/generate', (req, res) => {
-  // 防并发
   if (insightLock) return res.status(409).json({ error: '洞察生成进行中，请稍后再试' });
 
   const all = db.readFeedback({ uninsighted: true });
@@ -395,8 +394,8 @@ router.post('/insights/generate', (req, res) => {
 
   if (!lines.length) return res.status(400).json({ error: '所有待洞察反馈对应的 simulation 已失效' });
 
-  const negCount = batch.filter(f => f.verdict === 'negative').length;
-  const posCount = batch.filter(f => f.verdict === 'positive').length;
+  const negCount = Math.min(neg.length, MAX_INSIGHT_BATCH);
+  const posCount = batch.length - negCount;
   const batchNote = remaining > 0 ? `（剩余 ${remaining} 条下次分析）` : '';
 
   const prompt = `你是售后工单AI推理系统的规则优化助手。
