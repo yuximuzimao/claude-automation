@@ -728,54 +728,54 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     const hasShortage = matchResults.some(m => m.status !== 'ok');
     if (hasShortage) {
       const shortItems = matchResults.filter(m => m.status !== 'ok');
-      const shortDesc = shortItems.map(m =>
-        m.status === 'missing' ? `${m.expected}（完全缺失）` : `${m.expected}（期望${m.expectedQty}件，入库${m.receivedQty}件）`
-      ).join('、');
-      s({ type: 'branch', text: `上报 → 主品入库不足：${shortDesc}` });
-      return fin(escalate(`入库商品明细不符：${shortDesc}，需人工核查`, {
-        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比→主品不足→上报' }],
+      const shortDesc = shortItems.map(m => {
+        const name = (m.expected || '').replace(/\s+/g, '').slice(0, 15);
+        if (m.status === 'missing') return `${name}（退货里没有）`;
+        return `${name}（退了${m.receivedQty}件，应退${m.expectedQty}件）`;
+      }).join('，');
+      s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
+      return fin(escalate(`退货数量不足：${shortDesc}`, {
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比→数量不足→上报' }],
       }));
     }
 
-    // 全部已知品匹配通过，但有未匹配的入库项 → 部分商品档案缺失
+    // 全部已知品匹配通过，但有未匹配的入库项
     if (unmatchedReceived.length > 0) {
-      // 汇总已知品名称（用于人工快速判断）
-      const knownNames = matchResults.map(m => {
-        const short = (m.matched || m.expected || '').split(' ')[0].slice(0, 10);
-        return `${short}×${m.receivedQty}`;
-      }).join(' + ');
-      const unknownNames = unmatchedReceived.map(i => {
-        const short = (i.name || '').replace(/\s+/g, '').slice(0, 15);
-        return `${short}×${i.qtyGood}`;
-      }).join(' + ');
-      const expectedSummary = matchResults.map(m => {
-        const short = (m.expected || '').split(' ')[0].slice(0, 10);
-        return `${short}×${m.expectedQty}`;
-      }).join(' + ');
-      s({ type: 'branch', text: `上报 → 入库含未匹配品类：${unknownNames}` });
+      const matchedSummary = matchResults.map(m => {
+        const name = (m.matched || m.expected || '').replace(/\s+/g, '').slice(0, 12);
+        return `${name}×${m.receivedQty}`;
+      }).join('、');
+      const unmatchedSummary = unmatchedReceived.map(i => {
+        const name = (i.name || '').replace(/\s+/g, '').slice(0, 15);
+        return `${name}×${i.qtyGood}件`;
+      }).join('、');
+      s({ type: 'branch', text: `上报 → ${unmatchedSummary} 未在对应表中` });
       return fin(escalate(
-        `需核对：已知品 ${knownNames}（期望 ${expectedSummary}），额外入库 ${unknownNames}`,
+        `对应表查无此规格：${unmatchedSummary}（已匹配 ${matchedSummary}），请确认是否为赠品或活动搭配`,
         {
           confidence: 'medium',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '部分品类未匹配→上报' }],
-          warnings: [`入库额外项：${unmatchedReceived.map(i => i.name).join('、')}`],
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '对应表缺规格→上报' }],
+          warnings: [`未匹配商品：${unmatchedReceived.map(i => i.name).join('、')}`],
         }
       ));
     }
 
     // 全部品匹配通过且无未匹配项
     const totalExpected = matchResults.reduce((s, m) => s + m.expectedQty, 0);
-    const summary = matchResults.map(m => `${m.expected}${m.expectedQty}件`).join('+');
+    const summary = matchResults.map(m => {
+      const name = (m.expected || '').replace(/\s+/g, '').slice(0, 8);
+      return `${name}×${m.expectedQty}`;
+    }).join('、');
     const surplus = totalGood - totalExpected;
     const surplusWarning = surplus > 0
-      ? [`入库${totalGood}件比期望${totalExpected}件多${surplus}件（可能客户少申请了退货份数）`]
+      ? [`入库${totalGood}件，比期望多${surplus}件（可能少申请了退货份数）`]
       : [];
     if (surplus > 0) {
-      s({ type: 'read', label: '入库多于期望', value: `多${surplus}件（入库${totalGood} vs 期望${totalExpected}）` });
+      s({ type: 'read', label: '入库多于期望', value: `多${surplus}件` });
     }
-    s({ type: 'branch', text: `同意退款 → 全部匹配（${summary}），入库${totalGood}件 ≥ 期望${totalExpected}件 (flow-5.1)` });
+    s({ type: 'branch', text: `同意退款 → ${summary}，入库${totalGood}件 ≥ 期望${totalExpected}件` });
     const approveResult = approve(
-      `入库商品明细核对通过（${summary}），良品${totalGood}件${surplus > 0 ? `（多${surplus}件，可能客户少申请）` : ''}`,
+      `核对通过：${summary}，实退${totalGood}件${surplus > 0 ? `（多${surplus}件）` : ''}`,
       [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比通过→同意退款' }]
     );
     if (surplusWarning.length) approveResult.warnings = surplusWarning;
@@ -799,9 +799,9 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   s({ type: 'check', condition: `良品 ${totalGood} ≥ 应退 ${expectedQty}（${qtyDesc}，无商品档案按单品算）`, result: totalGood >= expectedQty });
 
   // 无 productArchive 时无法准确计算应退数量，禁止自动批准
-  s({ type: 'branch', text: `上报 → 无商品档案，无法核对应退数量，需人工核查 (flow-5.1)` });
+  s({ type: 'branch', text: `上报 → 缺少商品档案，无法核对应退数量` });
   return fin(escalate(
-    `无商品档案，无法核对应退数量（入库${totalGood}件，申请${expectedMainQty}件），需人工核查`,
+    `缺少商品档案，无法核对明细（入库${totalGood}件，申请退${expectedMainQty}件）`,
     [{ doc: 'flow-5.1', section: 'Step4', summary: '无档案→上报人工（安全优先）' }]
   ));
 }
