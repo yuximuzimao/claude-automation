@@ -22,6 +22,24 @@
 - ERP 对应表/档案V2 读取规范 → `product-mapping/docs/INDEX.md §5`
 - Element UI 弹窗/下拉/表格操作坑位 → 两个项目的 `docs/INDEX.md §6`
 - 浏览器自动化通用规范 → memory: `feedback_browser_automation.md`
+- **读 JS 文件 >200行**：禁止直接 Read 全文，必须先 `smart_outline` 定位，再 `smart_unfold` 展开目标函数
+
+## 并行执行规则
+
+**默认策略：IO 操作（读文件 / 查数据 / 跨模块分析）优先并行，串行需要理由。**
+
+以下场景无需等用户提示，直接启动并行 Agent：
+
+| 场景 | 并行方式 |
+|------|---------|
+| 同阶段需要读 ≥3 个无顺序依赖的文件 | 全部同时 Agent，不串行 |
+| 跨项目影响面评估 | aftersales + product-mapping 同时检查 |
+| bug 根因分析 | 代码路径 / 数据文件 / 相关模块 三路同时 |
+| `/simplify` `/review` 类审查 | 多维度独立 Agent 并行 |
+
+**禁止并行**（精确范围）：
+- **同一浏览器 session** 的 ERP 写操作（不同 session 的只读操作可并行）
+- 有数据依赖的写操作（B 需要 A 的输出才能开始）
 
 ## 约束
 
@@ -80,50 +98,6 @@ scope: aftersales / product-mapping / workspace
 
 ## 新项目开工规范
 
-### 标准目录结构
+详见 `docs/new-project-template.md`。
 
-```
-project/
-  CLAUDE.md           # Session 启动 + 目录说明 + 相关项目引用 + 教训沉淀流程
-  cli.js              # 主命令入口
-  lib/                # 核心模块（从其他项目移植时，文件头注明来源）
-  docs/
-    INDEX.md          # §分节规则文档，§6 为已知坑位（格式见售后/商品匹配项目）
-  data/               # 结构化持久数据（禁止放日志/临时文件）
-  tasks/
-    todo.md           # 当前待办（每次 session 启动必读）
-    lessons.md        # 临时教训（稳定后迁入 docs/INDEX.md §6）
-  package.json
-```
-
-### 文件存放铁律
-
-- **试错/原型脚本** → 工作区 `_sandbox/`，不在项目内建 _sandbox/
-- **运行日志** → console 输出，不落盘；调试需要时放 `_sandbox/`
-- **data/ 只放**：结构化持久数据（JSON/图片/报告），禁止放日志、临时文件
-- **每次新建文件必问**：30天后还有用吗？没用 → _sandbox 或不落盘
-- **移植代码**：文件头注明来源，如 `// 移植自 aftersales-automation/lib/erp/navigate.js`
-
-### CLAUDE.md 必要段落
-
-```markdown
-# <项目名>
-
-## Session 启动（必做，按顺序）
-1. 读 `tasks/todo.md` — 确认当前待办和进度
-2. <项目特有的启动命令>
-3. 读 `docs/INDEX.md` — 所有操作规则的权威入口
-
-## 规则文档（渐进式，按需加载）
-| 文档 | 加载时机 |
-
-## 教训沉淀流程
-- `tasks/lessons.md` — Session 级新发现，先记这里
-- `docs/INDEX.md §6` — 稳定后迁入，不在两处重复维护
-
-## 相关项目
-- `../other-project/` — 说明共享的系统/操作，及关键文档位置
-
-## 目录说明
-| 目录 | 用途 |（只列实际存在的目录）
-```
+**触发加载时机**：用户提到"新项目"/"从零开始"/"初始化项目"/"scaffold"时，主动读取该文件。
