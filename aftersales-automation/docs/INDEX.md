@@ -240,3 +240,10 @@ node cli.js erp-aftersale <快递单号>
 - `[∞/永久保留]` **#48 读表数据用表头定位列索引，禁数据特征过滤**：`<th>` 表头文本定位列索引（"商品名称"/"商家编码"/"组合比例"），直接读。禁止用正则/关键词/长度过滤数据内容——这会把合法非数字编码（kgoxnld等）当垃圾误杀。参见 `tasks/lessons.md §48`。
 - `[∞/永久保留]` **#49 验证数据=读实时源头，不分析旧采集**：判断数据是否正确→从 ERP 页面/CLI 命令重新读取，不分析 simulations.jsonl 过期数据。验证单一环节用 CLI 直调，不走 pipeline。
 - `[1/2026-05]` **#50 后台 osascript Reminders 需降级**：无 TTY 后台进程 osascript Reminders AppleEvent -1712。用 `createReminder()` 优先 Reminders 失败降级 `display notification`。
+- `[∞/永久保留]` **#51 ERP 状态只路由不决策**：仅退款中 ERP 订单状态唯一作用是区分未发货（flow-5.2）vs 已发货（flow-5.3）。决策依据是物流数据。"交易关闭"只说明订单关了，不说明包裹已退回。必须加入 SHIPPED 常量让其走物流判断，禁止"看到状态X→直接决策Y"。
+- `[∞/永久保留]` **#52 采集按工单类型分流**：product-match/archive 唯一消费者是退货退款的逐商品核对（flow-5.1 Step4）。仅退款/换货不需要，应跳过。反之，退货退款必须遍历所有子订单做 product-match（不能只取 subOrders[0]）。
+- `[∞/永久保留]` **#53 firstWaitingAt 仅 done 时清零**：`updateQueueItem` 中离开 waiting 状态时不能无条件清除 firstWaitingAt。扫描周期把 waiting→pending 也清除会导致等待时钟归零，超时安全阀（REMIND_HOURS）形同虚设。条件必须改为 `patch.status === 'done'`。
+- `[∞/永久保留]` **#54 推理文案说人话**：escalate reason 三要素：①第一句说清根因（非表象）②无代码变量名（afterSaleNum等）③给明确建议动作。格式："对应表查无此规格：XX×N件，请确认是否为赠品"。禁止"商品档案不完整…afterSaleNum=N"。
+- `[∞/永久保留]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 必须交叉校验 accountNum 和 accountNote 的对应关系（查 accounts.json）。账号编号和店铺名不一致时拒绝，防止注入错误session导致跨商家权限拒绝[cbe]。
+- `[1/2026-05]` **#56 CLOSE_ALL_DIALOGS_JS 全量关闭**：原来只关 `.trade-detail-dialog` 漏了档案V2子品弹窗等。改为 `querySelectorAll('.el-dialog__wrapper')` 过滤 `getComputedStyle(e).display !== 'none'`。navigateErp 切页面前 + product-archive 启动时都加清理。
+- `[1/2026-05]` **#57 洞察生成防并发+分批**：`POST /api/insights/generate` 无限流→并发重复生成。加 in-memory lock（冲突返回409）+ MAX_BATCH=30（差评优先）+ sim为null时skip不阻塞整批。
