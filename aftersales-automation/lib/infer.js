@@ -584,8 +584,36 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   // ── 逐商品对比（有 productArchive 时）────────────────────────────
   const subOrders = ticket.subOrders || [];
   const gifts = ticket.gifts || [];
-  const archive = cd.productArchive;
-  const archiveSubItems = (archive && archive.subItems) || [];
+
+  // 合并所有子订单的商品档案（多子订单各需独立 product-match）
+  const productArchives = cd.productArchives || [];
+  const productMatches = cd.productMatches || [];
+  let archiveSubItems = [];
+  // 向后兼容：旧数据无 productArchives 数组时，使用 productArchive 单字段
+  if (productArchives.length === 0 && cd.productArchive && cd.productArchive.subItems) {
+    archiveSubItems = cd.productArchive.subItems;
+  } else {
+    for (const pa of productArchives) {
+      if (pa && pa.subItems) {
+        for (const item of pa.subItems) {
+          archiveSubItems.push({ ...item, _subOrderId: pa.subOrderId });
+        }
+      }
+    }
+  }
+
+  // 检查 product-match 是否有任何子订单失败
+  const anyMatchFailed = productMatches.length > 0 && productMatches.every(m => m.error || m.matched === false);
+  const anyArchiveAvailable = productArchives.some(pa => pa && pa.subItems);
+  // 全部子订单 product-match 失败且无档案可用 → 上报
+  if (anyMatchFailed && !anyArchiveAvailable && archiveSubItems.length === 0) {
+    const allErrors = productMatches.map(m => `${m.subOrderId || '?'}: ${m.error || 'attr1未匹配'}`).join('; ');
+    s({ type: 'branch', text: `上报 → 所有子订单对应表匹配失败，无法确认商品明细` });
+    return fin(escalate(`商品对应表匹配失败（${allErrors}），需人工核查`, {
+      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '全部子订单 attr1 mismatch → 上报' }],
+    }));
+  }
+
   // 赠品商品档案：合并到 expectedItems 一起参与逐商品匹配
   // 如果赠品是单品（type=0, subItems 为空），用赠品档案的 title 作为1个 expected item
   const giftArchive = cd.giftProductArchive;
@@ -595,24 +623,6 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   if (giftArchive && giftArchiveSubItems.length === 0 && giftArchive.title) {
     // 单品赠品：用档案 title 构造虚拟 subItem（qty=1，名称取分号前）
     giftArchiveSubItems = [{ name: (giftArchive.title || '').split(';')[0].split('-')[0].trim(), specCode: giftArchive.outerId, qty: 1 }];
-  }
-
-  // 检查 productArchive 是否可用
-  const pmAttr1MismatchError = (cd.collectErrors || []).find(e => e.startsWith('product-match: attr1') && e.includes('未精确匹配'));
-  if (pmAttr1MismatchError && !archive) {
-    s({ type: 'branch', text: `上报 → 对应表规格属性匹配失败，无法确认商品明细` });
-    return fin(escalate(`商品规格属性在对应表中未精确匹配，无法确认商品明细，需人工核查后处理`, {
-      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'attr1 mismatch → 上报' }],
-      warnings: [pmAttr1MismatchError],
-    }));
-  }
-  const paFailError = !archive && (cd.collectErrors || []).find(e => e.startsWith('product-archive:') && !e.includes('跳过'));
-  if (cd.productMatch && cd.productMatch.specCode && paFailError) {
-    s({ type: 'branch', text: `上报 → product-archive 采集失败，无法确认商品明细` });
-    return fin(escalate(`商品档案V2采集失败（ERP编码：${cd.productMatch.specCode}），无法确认商品明细，需人工核查`, {
-      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: 'product-archive失败 → 上报' }],
-      warnings: [paFailError],
-    }));
   }
 
   if (archiveSubItems.length > 0) {
@@ -727,29 +737,28 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       }));
     }
 
-    // 全部已知品匹配通过，但有未匹配的入库项 → archive 不完整（活动组合更新等）
-    // 从 attr1 解析疑似明细作为提示，escalate 人工
+    // 全部已知品匹配通过，但有未匹配的入库项 → 部分商品档案缺失
     if (unmatchedReceived.length > 0) {
-      // 解析 attr1 中的 "商品*数量" 模式
-      const allAttr1 = [
-        ...(subOrders || []).map(o => o.attr1 || ''),
-        ...(gifts || []).map(g => g.attr1 || ''),
-      ].filter(Boolean);
-      const parsedHints = allAttr1.map(a => {
-        const parts = a.split(/[+＋]/).map(p => p.trim()).filter(Boolean);
-        return parts.map(p => {
-          const m = p.match(/^(.+?)[*×＊](\d+)/);
-          return m ? `${m[1]}×${m[2]}` : p;
-        }).join('+');
-      }).join('；');
-      const unmatchedDesc = unmatchedReceived.map(i => `${i.name}(${i.qtyGood}件)`).join('、');
-      s({ type: 'branch', text: `上报 → 商品档案不含入库中的部分品类，疑似活动组合更新` });
+      // 汇总已知品名称（用于人工快速判断）
+      const knownNames = matchResults.map(m => {
+        const short = (m.matched || m.expected || '').split(' ')[0].slice(0, 10);
+        return `${short}×${m.receivedQty}`;
+      }).join(' + ');
+      const unknownNames = unmatchedReceived.map(i => {
+        const short = (i.name || '').replace(/\s+/g, '').slice(0, 15);
+        return `${short}×${i.qtyGood}`;
+      }).join(' + ');
+      const expectedSummary = matchResults.map(m => {
+        const short = (m.expected || '').split(' ')[0].slice(0, 10);
+        return `${short}×${m.expectedQty}`;
+      }).join(' + ');
+      s({ type: 'branch', text: `上报 → 入库含未匹配品类：${unknownNames}` });
       return fin(escalate(
-        `商品档案不完整：入库含${unmatchedDesc}未在档案中，疑似活动组合已更新。根据规格名称推测明细：${parsedHints || '无法解析'}，afterSaleNum=${afterSaleNum}，需人工核对`,
+        `需核对：已知品 ${knownNames}（期望 ${expectedSummary}），额外入库 ${unknownNames}`,
         {
           confidence: 'medium',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '档案不含全部入库品→上报+提示' }],
-          warnings: [`入库额外项：${unmatchedDesc}`],
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '部分品类未匹配→上报' }],
+          warnings: [`入库额外项：${unmatchedReceived.map(i => i.name).join('、')}`],
         }
       ));
     }

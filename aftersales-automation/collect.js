@@ -80,6 +80,8 @@ async function collectOne(item) {
     erpAftersale: null,
     productMatch: null,
     productArchive: null,
+    productMatches: [],
+    productArchives: [],
     giftErpSearch: null,
     giftProductMatch: null,
     giftProductArchive: null,
@@ -97,10 +99,7 @@ async function collectOne(item) {
 
     const ticket = collected.ticket;
     const subOrders = (ticket && ticket.subOrders) || [];
-    const subOrder = subOrders[0];
     const giftOrder = ticket && ticket.gifts && ticket.gifts[0];
-    const sku = subOrder && subOrder.sku;
-    const attr1 = subOrder && subOrder.attr1;
     const returnTracking = ticket && ticket.returnTracking;
     const giftSubOrderId = giftOrder && giftOrder.id;
 
@@ -143,52 +142,65 @@ async function collectOne(item) {
       collected.logistics = logRes.data;
     }
 
-    // Step 4: product-match + product-archive（退货退款才需要核对商品明细）
+    // Step 4: product-match + product-archive（退货退款才需要，遍历所有子订单）
     if (!skipProductDetail) {
-    if (sku) {
-      let shopName;
-      try { shopName = getErpShop(item.accountNote); } catch (e) {
-        collected.collectErrors.push(`product-match: 无法获取ERP店铺名 (${e.message})`);
-      }
-      if (!shopName) {
-        collected.collectErrors.push('product-match: 跳过（无店铺名）');
-      } else {
-        const pmArgs = ['product-match', sku, attr1 || '', shopName];
-        log(`  product-match: sku=${sku} attr1=${attr1 || '(空)'} shop=${shopName}`);
+    collected.productMatches = [];
+    collected.productArchives = [];
+    let shopName;
+    try { shopName = getErpShop(item.accountNote); } catch (e) {
+      collected.collectErrors.push(`product-match: 无法获取ERP店铺名 (${e.message})`);
+    }
+    if (!shopName) {
+      collected.collectErrors.push('product-match: 跳过（无店铺名）');
+    } else {
+      for (const so of subOrders) {
+        const soSku = so.sku;
+        const soAttr1 = so.attr1;
+        if (!soSku) {
+          collected.collectErrors.push(`product-match(${so.id}): 无货号，跳过`);
+          collected.productMatches.push({ subOrderId: so.id, sku: null, error: '无货号' });
+          collected.productArchives.push({ subOrderId: so.id, archive: null, error: '无货号' });
+          continue;
+        }
+        const pmArgs = ['product-match', soSku, soAttr1 || '', shopName];
+        log(`  product-match: subOrder=${so.id} sku=${soSku} attr1=${soAttr1 || '(空)'} shop=${shopName}`);
         const pmRes = runCmd(pmArgs);
         if (!pmRes.success) {
-          collected.collectErrors.push(`product-match: ${pmRes.error}`);
-          log(`  product-match 失败: ${pmRes.error}`);
+          collected.collectErrors.push(`product-match(${so.id}): ${pmRes.error}`);
+          log(`  product-match(${so.id}) 失败: ${pmRes.error}`);
+          collected.productMatches.push({ subOrderId: so.id, error: pmRes.error });
+          collected.productArchives.push({ subOrderId: so.id, archive: null, error: pmRes.error });
         } else {
-          collected.productMatch = pmRes.data;
+          collected.productMatches.push({ subOrderId: so.id, ...pmRes.data });
           const exactMatch = pmRes.data && pmRes.data.specCode;
           const specCode = exactMatch || null;
-          // ⚠️ matched=false 时禁止用 specCodes[0] 猜测——attr1 匹配失败说明规格属性与对应表不符，
-          // 用第一条兜底 specCode 调 product-archive 会拿到错误的 subItemNum，导致数量判断出错。
-          // 改为写入 collectErrors，由推理引擎感知并上报人工核查。
           if (pmRes.data && pmRes.data.matched === false) {
             const allCodes = (pmRes.data.specCodes || []).map(c => c.code).join(',');
-            collected.collectErrors.push(`product-match: attr1「${attr1}」在对应表中未精确匹配，候选编码=[${allCodes}]，跳过 product-archive 以防 subItemNum 误判`);
-            log(`  product-match attr1 未精确匹配，候选编码: ${allCodes}`);
+            collected.collectErrors.push(`product-match(${so.id}): attr1「${soAttr1}」未精确匹配，候选编码=[${allCodes}]，跳过 product-archive`);
+            log(`  product-match(${so.id}) attr1 未精确匹配，候选编码: ${allCodes}`);
+            collected.productArchives.push({ subOrderId: so.id, archive: null, error: 'attr1未精确匹配' });
           } else if (specCode) {
-            log(`  product-match 成功: specCode=${specCode}`);
+            log(`  product-match(${so.id}) 成功: specCode=${specCode}`);
             const paRes = runCmd(['product-archive', specCode]);
             if (!paRes.success) {
-              collected.collectErrors.push(`product-archive: ${paRes.error}`);
-              log(`  product-archive 失败: ${paRes.error}`);
+              collected.collectErrors.push(`product-archive(${so.id}): ${paRes.error}`);
+              log(`  product-archive(${so.id}) 失败: ${paRes.error}`);
+              collected.productArchives.push({ subOrderId: so.id, archive: null, error: paRes.error });
             } else {
-              collected.productArchive = paRes.data;
+              collected.productArchives.push({ subOrderId: so.id, ...paRes.data });
               const pa = paRes.data;
-              log(`  product-archive: type=${pa.type} subItemNum=${pa.subItemNum} title=${pa.title}`);
+              log(`  product-archive(${so.id}): type=${pa.type} subItemNum=${pa.subItemNum} title=${pa.title}`);
             }
           } else {
-            collected.collectErrors.push('product-archive: product-match 未返回 specCode，跳过');
+            collected.collectErrors.push(`product-archive(${so.id}): product-match 未返回 specCode，跳过`);
+            collected.productArchives.push({ subOrderId: so.id, archive: null, error: '无specCode' });
           }
         }
-      } // end if shopName
-    } else {
-      collected.collectErrors.push('product-match: 无货号，跳过');
+      }
     }
+    // 向后兼容：保留第一个子订单的结果
+    collected.productMatch = collected.productMatches[0] || null;
+    collected.productArchive = (collected.productArchives[0] && collected.productArchives[0].subItems) ? collected.productArchives[0] : null;
     } // end if (!skipProductDetail)
 
     // Step 5: erp-aftersale（有退货快递单号时）
