@@ -363,28 +363,50 @@ router.post('/insights/generate', (req, res) => {
   // 组装 prompt
   const lines = pending.map((f, i) => {
     const sim = db.getSimulation(f.simulationId);
+    const cd = sim && sim.collectedData || {};
+    const ticket = cd.ticket || {};
     const action = sim && sim.decision && sim.decision.action || '未知';
     const reason = sim && sim.decision && sim.decision.reason || '';
-    const ticket = sim && sim.collectedData && sim.collectedData.ticket || {};
-    return `${i+1}. [${f.verdict === 'negative' ? '❌差评' : '✅好评'}] 工单${f.workOrderNum}
-   售后原因: ${ticket.afterSaleReason || '未知'}
-   推理结论: ${action} — ${reason}
-   反馈说明: ${f.reason}`;
+    const confidence = sim && sim.decision && sim.decision.confidence || '';
+    // 采集异常（人工看不到，但对AI分析有用）
+    const errs = (cd.collectErrors || []).filter(e => !e.includes('跳过（非退货退款类型正常）'));
+    const errSummary = errs.length ? `采集异常(${errs.length}): ${errs.map(e => e.split(':')[0]).join(', ')}` : '采集正常';
+    // 推理步骤简述（关键分支）
+    const steps = (sim && sim.decision && sim.decision.steps || [])
+      .filter(s => s.type === 'branch')
+      .map(s => s.text).join(' → ');
+    return `${i+1}. [${f.verdict === 'negative' ? '❌差评' : '✅好评'}] ${f.workOrderNum}
+   类型: ${cd.ticket ? (cd.ticket.subOrders ? cd.ticket.subOrders.length : 1) : '?'}子订单 | ${ticket.afterSaleReason || '未知'} | ${confidence}
+   结论: ${action} — ${reason}
+   ${steps ? '路径: ' + steps : ''}
+   ${errSummary}
+   人工: ${f.reason || '(无)'}`;
   }).join('\n\n');
 
-  const prompt = `你是一个售后工单AI推理系统的规则优化助手。以下是最近 ${pending.length} 条带说明的用户反馈：
+  const negCount = pending.filter(f => f.verdict === 'negative').length;
+  const posCount = pending.filter(f => f.verdict === 'positive').length;
+
+  const prompt = `你是售后工单AI推理系统的规则优化助手。
+
+## 数据
+${pending.length} 条评价（${negCount} 条差评 + ${posCount} 条好评）：
 
 ${lines}
 
-请分析：
-1. 哪些推理逻辑存在问题？（具体指出是什么场景判断错了）
-2. 应该如何修改推理规则？（给出具体的修改建议，而不是泛泛而谈）
-3. 如果有好评反馈，哪些做法值得保留？
+## 分析要求
 
-输出要求：
-- 不要输出任何标题行、元数据行（如"生成时间"、"覆盖差评"等）
-- 不要重复罗列原始反馈内容
-- 直接从分析结论开始，使用 ## 二级标题组织问题`;
+1. **差评问题**：哪些推理逻辑错了？根因是什么？（具体场景×判断错误）
+2. **好评隐性问题**：✅好评只代表结论正确，不代表过程没问题。找出满足以下条件的工单：
+   - 结论正确但有采集异常 → 说明过程脆但结果侥幸对
+   - 置信度 high 但实际推理路径走了不可靠分支
+   - 多个好评的工单有共性采集异常 → 系统盲区
+3. **规则建议**：针对发现的问题，具体怎么改规则/改代码？
+4. **好评中值得保留的做法**：哪些规则/模式在多个好评工单中持续正确？
+
+输出：
+- 直接分析，不要标题行/元数据行/原始数据罗列
+- 使用 ## 二级标题组织
+- 每个发现标注涉及工单号`;
 
   // 调 claude CLI（不阻塞，异步执行）
   res.json({ ok: true, count: pending.length });
