@@ -106,53 +106,53 @@ const CLOSE_SUB_DIALOG_JS = `(function(){
   return JSON.stringify({closed: true});
 })()`;
 
-// 读子商品明细表格
-// 策略：先尝试 dialog 限定，再无结果则退回到全页读取（dialog 表可能结构与主表不同）
-// 所有读取结果均经过验证层过滤垃圾数据
+// 读子商品明细表格：通过表头文本定位列索引，不做数据特征过滤
 const READ_SUB_ITEMS_JS = `(function(){
-  function readRows(container) {
-    var rows = Array.from(container.querySelectorAll('tr.el-table__row'));
-    var items = [];
-    var debug = [];
-    rows.forEach(function(r, ri){
-      var cells = Array.from(r.querySelectorAll('td')).map(function(td){ return td.innerText.trim(); });
-      if (ri < 2) {
-        debug.push({rowIdx: ri, cellCount: cells.length, cells: cells.slice(0, Math.min(cells.length, 12))});
-      }
-      if (!cells[1] || !cells[3] || !cells[10]) return;
-      var qty = parseInt(cells[10]);
-      if (isNaN(qty) || qty <= 0) return;
-      if (!/^\\d{6,}$/.test(cells[3])) return;
-      if (/已(下|付|发)单|\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2}/.test(cells[1])) return;
-      items.push({ name: cells[1], specCode: cells[3], qty: qty });
-    });
-    return { items: items, debug: debug };
-  }
-
-  // Step 1: 尝试限定在最新可见 dialog 内读取
+  // 找最新打开的可见 dialog
   var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
   });
-  if (dialogs.length) {
-    var dialog = dialogs[dialogs.length - 1];
-    var result = readRows(dialog);
-    if (result.items.length) {
-      result._source = 'dialog';
-      return JSON.stringify(result);
+  if (!dialogs.length) return JSON.stringify({error:'子商品弹窗未打开'});
+  var dialog = dialogs[dialogs.length - 1];
+
+  // 通过表头文本定位列索引
+  var ths = dialog.querySelectorAll('th');
+  var colName = -1, colCode = -1, colQty = -1;
+  for (var i = 0; i < ths.length; i++) {
+    var txt = ths[i].innerText.trim();
+    if (txt === '商品名称') colName = i;
+    else if (txt === '商家编码') colCode = i;
+    else if (txt === '组合比例') colQty = i;
+  }
+  if (colName < 0 || colCode < 0 || colQty < 0) {
+    var headerTexts = Array.from(ths).map(function(th){ return th.innerText.trim(); });
+    return JSON.stringify({error:'未找到子品明细表头', headers: headerTexts, colName: colName, colCode: colCode, colQty: colQty});
+  }
+
+  // 读所有数据行
+  var rows = dialog.querySelectorAll('tr.el-table__row');
+  var items = [];
+  var debugSkips = [];
+  rows.forEach(function(r, ri){
+    var cells = r.querySelectorAll('td');
+    if (cells.length <= Math.max(colName, colCode, colQty)) {
+      debugSkips.push({row:ri, reason:'cells too few', cellCount:cells.length});
+      return;
     }
-    // dialog 内没找到有效行 → 检查全页
-    console.log('[archive] dialog内有' + result.debug.length + '行样本，cellCounts=' + JSON.stringify(result.debug.map(function(d){return d.cellCount;})));
+    var name = (cells[colName].innerText || '').trim();
+    var code = (cells[colCode].innerText || '').trim();
+    var qtyText = (cells[colQty].innerText || '').trim();
+    var qty = parseInt(qtyText);
+    if (!name) { debugSkips.push({row:ri, reason:'empty name'}); return; }
+    if (!code) { debugSkips.push({row:ri, reason:'empty code'}); return; }
+    if (isNaN(qty)) { debugSkips.push({row:ri, reason:'NaN qty', qtyText: qtyText}); return; }
+    if (qty <= 0) { debugSkips.push({row:ri, reason:'qty<=0', qty: qty}); return; }
+    items.push({ name: name, specCode: code, qty: qty });
+  });
+  if (!items.length) {
+    return JSON.stringify({error:'弹窗内未找到子商品行', debug: {rowsFound: rows.length, colName: colName, colCode: colCode, colQty: colQty, skips: debugSkips}});
   }
-
-  // Step 2: 退回全页读取 + 验证过滤（dialog 限定可能因表结构差异失效）
-  var pageResult = readRows(document);
-  if (pageResult.items.length) {
-    pageResult._source = 'page-fallback';
-    return JSON.stringify(pageResult);
-  }
-
-  pageResult._source = 'none';
-  return JSON.stringify(pageResult);
+  return JSON.stringify(items);
 })()`;
 
 async function productArchive(targetId, specCode) {
@@ -196,12 +196,7 @@ async function productArchive(targetId, specCode) {
             if (r.error) throw new Error(r.error);
             return r;
           }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
-          if (raw && raw.items) {
-            subItems = raw.items;
-          }
-          if (raw && raw._source) {
-            console.error(`[product-archive] 子品读取来源: ${raw._source}, items=${subItems.length}`);
-          }
+          subItems = Array.isArray(raw) ? raw : [];
         } catch (e) {
           console.error(`[product-archive] 子品明细读取失败: ${e.message}`);
         }

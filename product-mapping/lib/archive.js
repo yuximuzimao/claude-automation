@@ -147,8 +147,7 @@ function makeClickSubItemLinkJS(subItemNum) {
     '})()';
 }
 
-// 读子商品明细表格（列定义: [1]=商品名称, [3]=商家编码, [10]=组合数量）
-// ⚠️ 必须限定在可见 dialog 内读取，防止读到主页面的行
+// 读子商品明细表格：通过表头文本定位列索引，不做数据特征过滤
 const READ_SUB_ITEMS_JS =
   '(function(){' +
   '  var dialogs=Array.from(document.querySelectorAll(".el-dialog__wrapper")).filter(function(d){' +
@@ -156,18 +155,24 @@ const READ_SUB_ITEMS_JS =
   '  });' +
   '  if(!dialogs.length) return JSON.stringify({error:"子商品弹窗未打开"});' +
   '  var dialog=dialogs[dialogs.length-1];' +
-  '  var rows=Array.from(dialog.querySelectorAll("tr.el-table__row"));' +
+  '  var ths=dialog.querySelectorAll("th");' +
+  '  var colName=-1,colCode=-1,colQty=-1;' +
+  '  for(var i=0;i<ths.length;i++){' +
+  '    var txt=ths[i].innerText.trim();' +
+  '    if(txt==="商品名称") colName=i;' +
+  '    else if(txt==="商家编码") colCode=i;' +
+  '    else if(txt==="组合比例") colQty=i;' +
+  '  }' +
+  '  if(colName<0||colCode<0||colQty<0) return JSON.stringify({error:"未找到子品明细表头"});' +
+  '  var rows=dialog.querySelectorAll("tr.el-table__row");' +
   '  var items=[];' +
   '  rows.forEach(function(r){' +
-  '    var cells=Array.from(r.querySelectorAll("td")).map(function(td){return td.innerText.trim();});' +
-  '    if(cells[1]&&cells[3]&&cells[10]){' +
-	  '    if(!cells[1]||!cells[3]||!cells[10]) return;' +
-	  '    var qty=parseInt(cells[10]);' +
-	  '    if(isNaN(qty)||qty<=0) return;' +
-	  '    if(!/^\\d{6,}$/.test(cells[3])) return;' +
-	  '    if(/已(下|付|发)单|\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2}/.test(cells[1])) return;' +
-	  '    items.push({name:cells[1],specCode:cells[3],qty:qty});' +
-  '    }' +
+  '    var cells=r.querySelectorAll("td");' +
+  '    if(cells.length<=Math.max(colName,colCode,colQty)) return;' +
+  '    var name=(cells[colName].innerText||"").trim();' +
+  '    var code=(cells[colCode].innerText||"").trim();' +
+  '    var qty=parseInt((cells[colQty].innerText||"").trim());' +
+  '    if(name&&code&&!isNaN(qty)&&qty>0) items.push({name:name,specCode:code,qty:qty});' +
   '  });' +
   '  return JSON.stringify(items.length?items:{error:"弹窗内未找到子商品行"});' +
   '})()';
