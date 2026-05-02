@@ -855,18 +855,21 @@ function inferDecision(sim, queueItem) {
     });
   }
 
-  // ── 工单已不在SCRM待处理列表 → 自动归档 ──────────────────────
+  // ── 工单不可访问 → 自动归档（已处理/跨商家/权限问题）──────────
   // 必须在 validateCollectedData 之前，因为此时 ticket 为 null
   const goneFromList = (cd.collectErrors || []).find(e =>
-    e.startsWith('read-ticket:') && (e.includes('已不在待处理列表') || e.includes('已处理或已关闭'))
+    e.startsWith('read-ticket:') && (
+      e.includes('已不在待处理列表') || e.includes('已处理或已关闭') ||
+      e.includes('不属于当前商家')
+    )
   );
   if (goneFromList) {
-    s({ type: 'branch', text: `工单已处理 → ${goneFromList}` });
+    s({ type: 'branch', text: `工单不可访问 → ${goneFromList}` });
     return fin({
       action: 'skip',
       reason: goneFromList,
       confidence: 'high',
-      rulesApplied: [{ doc: 'terminal', section: 'gone', summary: '工单已不在待处理列表→自动归档' }],
+      rulesApplied: [{ doc: 'terminal', section: 'gone', summary: '工单不可访问→自动归档' }],
       warnings: [],
     });
   }

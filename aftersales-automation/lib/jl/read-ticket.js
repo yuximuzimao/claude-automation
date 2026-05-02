@@ -156,9 +156,14 @@ async function readTicket(targetId, workOrderNum) {
   try {
     await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
 
-    // ── 核验页面是否加载了对应工单（区分账号错误 vs 页面慢）────────
+    // ── 核验页面是否加载了对应工单（区分账号错误 vs 页面慢 vs 跨商家权限）──
     const verifyJS = `(function(){
       var t = document.body.innerText || '';
+      // 检测跨商家权限拒绝（SCRM 阻止查看其他商家的工单）
+      if (t.includes('非当前商') || t.includes('不允许查看')) {
+        var mch = (t.match(/\\[([a-zA-Z]+)\\]/) || [])[1] || '未知';
+        return 'wrong_merchant:' + mch;
+      }
       if (!t.includes('${workOrderNum}')) return 'notfound';
       if (t.includes('售后工单信息') || t.includes('售后类型') || t.includes('售后原因')) return 'ok';
       return 'loading';
@@ -170,6 +175,10 @@ async function readTicket(targetId, workOrderNum) {
       try {
         const v = await cdp.eval(targetId, verifyJS);
         if (v === 'ok') { pageOk = true; break; }
+        if (typeof v === 'string' && v.startsWith('wrong_merchant:')) {
+          const mch = v.split(':')[1];
+          return fail(`工单 ${workOrderNum} 不属于当前商家（实际归属 [${mch}]），请确认账号是否正确`);
+        }
         if (v === 'notfound' && i >= 2) {
           // 反查工单列表区分"已处理"vs"切错店铺"
           await navigate(targetId, '/business/after-sale-list');

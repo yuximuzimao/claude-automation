@@ -50,6 +50,18 @@ router.get('/queue', (req, res) => {
 router.post('/queue', (req, res) => {
   const { workOrderNum, accountNum, accountNote, mode, source, type, urgency, groundTruth } = req.body;
   if (!workOrderNum) return res.status(400).json({ error: 'workOrderNum required' });
+
+  // 校验 accountNum 与 accountNote 匹配，防止跨店铺注入
+  if (accountNum) {
+    try {
+      const accounts = JSON.parse(require('fs').readFileSync(ACCOUNTS_FILE, 'utf8'));
+      const expectedNote = accounts[String(accountNum)] && accounts[String(accountNum)].note;
+      if (expectedNote && accountNote && expectedNote !== accountNote) {
+        return res.status(400).json({ error: `账号${accountNum}对应店铺为「${expectedNote}」，与提交的「${accountNote}」不一致` });
+      }
+    } catch(e) { /* accounts 文件不存在，跳过校验 */ }
+  }
+
   const item = db.addQueueItem({ workOrderNum, accountNum, accountNote, mode: mode || 'sim', source: source || 'web', type, urgency, groundTruth });
   if (!item) return res.status(409).json({ error: '工单号已存在且未完成' });
   res.json(item);

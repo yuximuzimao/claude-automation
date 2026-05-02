@@ -53,6 +53,11 @@ async function approveTicket(targetId, workOrderNum) {
     // ── 轮询核验页面是否正确加载了对应工单（最多 10.5s）────────────
     const verifyJS = `(function(){
       var bodyText = document.body.innerText || '';
+      // 检测跨商家权限拒绝（SCRM 阻止查看其他商家的工单）
+      if (bodyText.includes('非当前商') || bodyText.includes('不允许查看')) {
+        var mch = (bodyText.match(/\\[([a-zA-Z]+)\\]/) || [])[1] || '未知';
+        return JSON.stringify({wrongMerchant: true, merchant: mch, error: '工单不属于当前商家，归属 [' + mch + ']'});
+      }
       if (!bodyText.includes('${workOrderNum}')) {
         return JSON.stringify({notFound: true, error: '工单页面未找到工单号 ${workOrderNum}，可能账号未切换到对应店铺或页面加载失败，请检查账号注入'});
       }
@@ -66,7 +71,8 @@ async function approveTicket(targetId, workOrderNum) {
       await waitFor(async () => {
         const v = await cdp.eval(targetId, verifyJS);
         if (v.verified) return v;
-        // 账号错误是确定性失败，不需要继续轮询
+        // 跨商家权限 / 账号错误是确定性失败，不需要继续轮询
+        if (v.wrongMerchant) throw new Error(v.error);
         if (v.notFound) throw new Error(v.error);
         return null;
       }, { timeoutMs: 10500, intervalMs: 1500, label: `verify-ticket ${workOrderNum}` });
