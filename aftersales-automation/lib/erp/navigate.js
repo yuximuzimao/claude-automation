@@ -32,8 +32,9 @@ function saveSessionCache(cache) {
 // 供 search.js / aftersale.js 在 navigateErp 前调用
 const CLOSE_ALL_DIALOGS_JS = `(function(){
   var closed = 0;
-  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog')).filter(function(e){
-    return e.getBoundingClientRect().width > 0;
+  // 关闭所有可见的 Element UI 弹窗（不限 trade-detail-dialog，档案V2子品弹窗等也覆盖）
+  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(e){
+    return window.getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().width > 0;
   });
   wrappers.forEach(function(w) {
     var btn = w.querySelector('.el-dialog__closeBtn');
@@ -271,6 +272,9 @@ async function navigateErp(targetId, pageName) {
       await waitForPageContent(targetId, pageName);
       return;
     }
+
+    // 切页面前清理所有弹窗（档案V2子品弹窗等可能残留）
+    await cdp.eval(targetId, CLOSE_ALL_DIALOGS_JS);
 
     const clickTabJS = `(function(){
       var li = Array.from(document.querySelectorAll('li.fix-tab')).find(function(el){

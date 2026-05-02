@@ -85,6 +85,8 @@ const READ_DATALIST_JS =
 async function initArchiveComp(erpId) {
   await navigateErp(erpId, '商品档案V2');
   await sleep(1000);
+  // 清理可能残留的子品弹窗（前次查询未正常关闭）
+  await cdp.eval(erpId, '(function(){var c=0;Array.from(document.querySelectorAll(".el-dialog__wrapper")).filter(function(e){return window.getComputedStyle(e).display!=="none"&&e.getBoundingClientRect().width>0}).forEach(function(w){var b=w.querySelector(".el-dialog__closeBtn");if(b){b.click();c++}});return c;})()');
   // 清空所有列头筛选条件（防止上次操作遗留"普通商品"等筛选）
   const cleared = await cdp.eval(erpId,
     '(function(){' +
