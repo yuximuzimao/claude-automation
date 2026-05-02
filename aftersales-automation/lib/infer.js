@@ -855,6 +855,22 @@ function inferDecision(sim, queueItem) {
     });
   }
 
+  // ── 工单已不在SCRM待处理列表 → 自动归档 ──────────────────────
+  // 必须在 validateCollectedData 之前，因为此时 ticket 为 null
+  const goneFromList = (cd.collectErrors || []).find(e =>
+    e.startsWith('read-ticket:') && (e.includes('已不在待处理列表') || e.includes('已处理或已关闭'))
+  );
+  if (goneFromList) {
+    s({ type: 'branch', text: `工单已处理 → ${goneFromList}` });
+    return fin({
+      action: 'skip',
+      reason: goneFromList,
+      confidence: 'high',
+      rulesApplied: [{ doc: 'terminal', section: 'gone', summary: '工单已不在待处理列表→自动归档' }],
+      warnings: [],
+    });
+  }
+
   // ── 采集数据完整性校验 ────────────────────────────────────────
   // 必填字段缺失 → 立即 escalate，禁止走默认分支（无声失败的根本防护）
   const validationErr = validateCollectedData(cd, type);
