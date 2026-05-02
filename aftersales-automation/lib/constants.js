@@ -38,6 +38,9 @@ const MERCHANT_FAULT_REASONS = [
 // 自动扫描时间点（server.js 和 pipeline.js 共用）
 const SCAN_HOURS = [0, 8, 12, 16, 20];
 
+// 到期提醒阈值（小时）：工单剩余时效 ≤ 此值时自动创建 Mac 提醒事项
+const REMIND_HOURS = 12;
+
 // 计算距下次自动扫描的小时数
 function getHoursUntilNextScan() {
   const now = new Date();
@@ -51,4 +54,4 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, getHoursUntilNextScan };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, getHoursUntilNextScan };

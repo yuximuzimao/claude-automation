@@ -10,7 +10,7 @@ const { execFileSync, spawnSync, spawn } = require('child_process');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
-const { RETURN_KEYWORDS } = require('../constants');
+const { RETURN_KEYWORDS, REMIND_HOURS } = require('../constants');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -252,8 +252,8 @@ async function _execScanAccountInner(accountNum, accountNote) {
     }
   }
 
-  // 6小时预警
-  const warnTickets = urgent.filter(t => t.totalHours !== undefined && t.totalHours <= 6);
+  // 到期预警（REMIND_HOURS小时阈值）
+  const warnTickets = urgent.filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
     const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
     const dl = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
@@ -357,8 +357,8 @@ async function execScan(op) {
   if (result) sse.broadcast('accounts-update', readAccountStatus());
   if (code !== 0 && !result) throw new Error('scan-all 执行失败');
 
-  // 6小时预警：为即将过期的工单创建 Mac 提醒
-  const warnTickets = (result && result.urgent || []).filter(t => t.totalHours !== undefined && t.totalHours <= 6);
+  // 到期预警（REMIND_HOURS小时阈值）：为即将过期的工单创建 Mac 提醒
+  const warnTickets = (result && result.urgent || []).filter(t => t.totalHours !== undefined && t.totalHours <= REMIND_HOURS);
   for (const t of warnTickets) {
     const timeStr = t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`;
     const deadlineDate = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
@@ -371,6 +371,26 @@ async function execScan(op) {
     } else {
       log(`[预警] 提醒创建失败（非致命）: ${(r.stderr || '').slice(0, 80)}`);
     }
+  }
+
+  // 补充：检查队列中已有但扫描未重新命中的到期工单（waiting/simulated 状态）
+  const scanWarnedNums = new Set(warnTickets.map(t => t.workOrderNum));
+  const queueItems = (db.readQueue().items || []).filter(i =>
+    i.mode === 'live' && !['done', 'auto_executed'].includes(i.status)
+  );
+  for (const qi of queueItems) {
+    if (scanWarnedNums.has(qi.workOrderNum)) continue; // 已在扫描预警中覆盖
+    if (!qi.deadlineAt) continue;
+    const remainingHours = (new Date(qi.deadlineAt).getTime() - Date.now()) / 3600000;
+    if (remainingHours > REMIND_HOURS || remainingHours <= 0) continue;
+    const timeStr = remainingHours < 1 ? '<1小时' : `${remainingHours.toFixed(0)}小时`;
+    const dl = new Date(qi.deadlineAt);
+    const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
+    const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
+    const script = `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\"')}"}`;
+    const remind = spawnSync('osascript', ['-e', script], { timeout: 10000, encoding: 'utf8' });
+    if (remind.status === 0) log(`[预警] 队列补充提醒：${title}`);
+    else log(`[预警] 队列补充提醒失败（非致命）: ${(remind.stderr || '').slice(0, 80)}`);
   }
 
   // 扫描完成后逐工单入队推理（每张单独一条，可逐条取消）
