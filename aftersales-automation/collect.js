@@ -96,24 +96,29 @@ async function collectOne(item) {
     }
 
     const ticket = collected.ticket;
-    const subOrder = ticket && ticket.subOrders && ticket.subOrders[0];
+    const subOrders = (ticket && ticket.subOrders) || [];
+    const subOrder = subOrders[0];
     const giftOrder = ticket && ticket.gifts && ticket.gifts[0];
-    const subOrderId = subOrder && subOrder.id;
     const sku = subOrder && subOrder.sku;
     const attr1 = subOrder && subOrder.attr1;
     const returnTracking = ticket && ticket.returnTracking;
     const giftSubOrderId = giftOrder && giftOrder.id;
 
-    // Step 2: erp-search（主订单）
-    if (subOrderId) {
-      const erpRes = runCmd(['erp-search', subOrderId]);
-      if (!erpRes.success) {
-        collected.collectErrors.push(`erp-search: ${erpRes.error}`);
+    // Step 2: erp-search（遍历所有子订单）
+    collected.erpSearches = [];
+    for (const so of subOrders) {
+      if (!so.id) continue;
+      const erpRes = runCmd(['erp-search', so.id]);
+      if (erpRes.success) {
+        collected.erpSearches.push({ subOrderId: so.id, ...erpRes.data });
       } else {
-        collected.erpSearch = erpRes.data;
+        collected.collectErrors.push(`erp-search(${so.id}): ${erpRes.error}`);
       }
-    } else {
-      collected.collectErrors.push('erp-search: 无子订单号，跳过');
+    }
+    // 向后兼容：保留第一个子订单的结果在 erpSearch
+    collected.erpSearch = collected.erpSearches[0] || null;
+    if (!collected.erpSearches.length) {
+      collected.collectErrors.push('erp-search: 所有子订单搜索均失败');
     }
 
     // Step 2b: erp-logistics（紧接 erp-search，此时 ERP 仍在订单管理页面，避免后续切页面再切回来）

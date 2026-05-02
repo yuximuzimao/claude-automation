@@ -618,6 +618,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   if (archiveSubItems.length > 0) {
     // ── 逐商品匹配 ──────────────────────────────────────────────
     const afterSaleNum = (subOrders[0] && subOrders[0].afterSaleNum) || 1;
+    // afterSaleNum 一致性断言（多子订单应共享同一值，不匹配时打日志）
+    if (subOrders.length > 1) {
+      const nums = subOrders.map(function(s){ return s.afterSaleNum; });
+      if (new Set(nums).size > 1) console.error('[WARN] afterSaleNum mismatch:', nums);
+    }
     const matchResults = [];  // { expected: item, expectedQty, matched, receivedQty, status }
     const usedReceived = new Set();  // 已匹配的入库项索引
 

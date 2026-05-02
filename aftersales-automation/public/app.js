@@ -674,6 +674,24 @@ function renderBody(item, sim, mode) {
   const ticket = cd.ticket || {};
   const errors = (cd.collectErrors || []).filter(e => !e.includes('正常')).length;
   const subOrder = ticket.subOrders && ticket.subOrders[0];
+  const allSubOrderIds = (ticket.subOrders || []).map(function(s){ return s.id; }).filter(Boolean).join(', ');
+  const allGiftIds = (ticket.gifts || []).map(function(g){ return g.id; }).filter(Boolean).join(', ');
+  // 汇总所有发货快递单号
+  var allShipTrackings = [];
+  var seen = {};
+  function addTrackings(data) {
+    var rows = (data && data.rows && data.rows.rows) || [];
+    rows.forEach(function(r){
+      var ts = (r.trackings && r.trackings.length) ? r.trackings : (r.tracking ? [r.tracking] : []);
+      ts.forEach(function(t){ if (t && !seen[t]) { seen[t] = true; allShipTrackings.push(t); } });
+    });
+  }
+  if (cd.erpSearches && cd.erpSearches.length) {
+    cd.erpSearches.forEach(function(es){ addTrackings(es); });
+  } else {
+    addTrackings(cd.erpSearch);
+    if (cd.giftErpSearch) addTrackings(cd.giftErpSearch);
+  }
 
   // ── 售后申请信息块 ────────────────────────────────────────────
   const applyItems = [
@@ -695,12 +713,13 @@ function renderBody(item, sim, mode) {
 
   // ── 工单数据摘要块 ─────────────────────────────────────────────
   const summaryItems = [
-    ['子订单号', subOrder && subOrder.id],
+    ['子订单号', allSubOrderIds || null],
     ['货号', subOrder && subOrder.sku],
     ['SKU属性', subOrder && subOrder.attr1],
     ['物流状态', subOrder && subOrder.logistics],
+    ['赠品', allGiftIds || null],
     ['退货快递', ticket.returnTracking],
-    ['发货快递', cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows && cd.erpSearch.rows.rows[0] && cd.erpSearch.rows.rows[0].tracking],
+    ['发货快递', allShipTrackings.length ? allShipTrackings.join(', ') : null],
     ['历史售后', ticket.afterSaleCount ? `${ticket.afterSaleCount} 次` : null],
     ['ERP状态', cd.erpSearch && cd.erpSearch.status],
     ['物流包裹', cd.logistics && cd.logistics.packages && `${cd.logistics.packages.length} 个`],

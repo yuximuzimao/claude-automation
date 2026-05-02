@@ -107,6 +107,21 @@ const READ_ORDER_INFO_JS = `(function(){
     if (wsMatch) workOrderStatus = wsMatch[1].trim();
   }
 
+    // 展开折叠的子订单（如有"查看剩余子订单"按钮）
+  (function(){
+    var btn = Array.from(document.querySelectorAll('span, button, div, a')).find(function(el){
+      return /查看剩余.*子订单/.test(el.textContent || el.innerText || '') && el.getBoundingClientRect().width > 0;
+    });
+    if (btn) {
+      var before = (info.subBizOrderDetailDTO || []).length;
+      btn.click();
+      var start = Date.now();
+      while (Date.now() - start < 3000 && (info.subBizOrderDetailDTO || []).length === before) {
+        // 轮询等待 Vue 响应式更新
+      }
+    }
+  })();
+
   return JSON.stringify({
     subOrders: (info.subBizOrderDetailDTO || []).map(function(s){
       return {
