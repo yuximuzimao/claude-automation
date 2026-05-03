@@ -7,7 +7,7 @@ entry: cli.js
 
 ## DO FIRST
 
-1. **找 CLI 命令** → `cli.js`（23 个命令，JSON 输出 `{success, data/error}`）
+1. **找 CLI 命令** → `cli.js`（17 个命令，JSON 输出 `{success, data/error}`）
 2. **找流程逻辑** → `lib/server/pipeline.js`（scan→collect→infer→approve/reject）
 3. **找规则/红线** → `docs/INDEX.md`（错误分级、工单路由、已知坑位 §6）
 4. **不要直接读 `routes.js`**——它是 Express 薄层，业务逻辑在 `lib/` 下
@@ -17,7 +17,7 @@ entry: cli.js
 
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
-| `cli.js` | CLI 入口，23 个命令的路由分发 | 需要了解可用命令或新增命令时 |
+| `cli.js` | CLI 入口，17 个命令的路由分发 | 需要了解可用命令或新增命令时 |
 | `server.js` | Express 服务（port 3457），定时扫描+队列管理+Web 面板 | 改 API/队列/定时任务时 |
 | `lib/infer.js` | 规则推理引擎（926行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
@@ -53,6 +53,12 @@ entry: cli.js
 2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
 3. **infer** — `lib/infer.js` → 规则推理 → 输出 decision (anchor: inferDecision, inferRefundOnly, inferRefundReturn)
 4. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批 (anchor: approveTicket, rejectTicket)
+
+### 重试与重启
+
+- **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
+- **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting` 状态，距上次推理 ≥ `RESCAN_INTERVAL_HOURS`(4h) 后下次扫描自动重置为 `pending` 重采。
+- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。重启后自动批量重跑未处理工单。
 
 ### 工单类型路由（`docs/INDEX.md §2`）
 
@@ -116,6 +122,8 @@ await cdp.navigate(targetId, 'https://...');
 | 6 | 截图判断操作结果 | 截图只用于上传凭证，所有判断用 DOM 文字 |
 | 7 | el-select 用 JS `.click()` | 必须用 `cdp.clickAt()` 触发物理点击 |
 | 8 | ERP 状态直接决策 | ERP 状态只路由不决策；"交易关闭"走物流判断，不直接同意退款 |
+| 9 | collect.js spawn timeout → exit code null | 被 SIGTERM 杀死时 exit code=null（非数字），`null !== 0` 为 true 触发重试。排查前先确认是超时还是逻辑错误 |
+| 10 | collect.js 失败无上限导致死循环 | 失败→重置 pending→pipeline 重采→又失败→无限。collectRetries 计数器 3 次上限后标记 simulated；成功后（进入 inferring）清零 |
 
 ## PATHS
 

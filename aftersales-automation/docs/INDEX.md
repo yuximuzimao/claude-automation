@@ -247,3 +247,5 @@ node cli.js erp-aftersale <快递单号>
 - `[∞/永久保留]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 必须交叉校验 accountNum 和 accountNote 的对应关系（查 accounts.json）。账号编号和店铺名不一致时拒绝，防止注入错误session导致跨商家权限拒绝[cbe]。
 - `[1/2026-05]` **#56 CLOSE_ALL_DIALOGS_JS 全量关闭**：原来只关 `.trade-detail-dialog` 漏了档案V2子品弹窗等。改为 `querySelectorAll('.el-dialog__wrapper')` 过滤 `getComputedStyle(e).display !== 'none'`。navigateErp 切页面前 + product-archive 启动时都加清理。
 - `[1/2026-05]` **#57 洞察生成防并发+分批**：`POST /api/insights/generate` 无限流→并发重复生成。加 in-memory lock（冲突返回409）+ MAX_BATCH=30（差评优先）+ sim为null时skip不阻塞整批。
+- `[∞/永久保留]` **#58 collect.js 重试上限**：collect.js 失败（含 exit code null/SIGTERM 杀进程）最多重试 3 次。pipeline.js processOne 维护 `collectRetries` 计数器：成功进入 inferring 时清零，失败累加，≥3 次标记 `simulated` 上报人工。防止采集死循环。op-queue.js 的 execCollect 路径暂不计数（独立 code path）。
+- `[∞/永久保留]` **#59 spawn timeout 180s 双路径对齐**：pipeline.js 和 op-queue.js 各有一条 spawn collect.js 路径，两条都设 `timeout: 180000`（3分钟）。含赠品的退货退款工单采集步骤多（两次 product-match+archive），120s 不够易触发 SIGTERM → exit code=null → 被 #58 重试。改超时必须双路径同步。
