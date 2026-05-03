@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    paths-ignore:
+      - 'aftersales-automation/data/**'
+      - 'product-mapping/data/**'
+      - 'reviews/**'
+      - '_sandbox/**'
+      - '*.md'
+  pull_request:
+
+jobs:
+  aftersales-flow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node test/flow-test.js
+        working-directory: aftersales-automation
+        env:
+          CI: true
+
+  product-mapping-l1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node test/run.js --fast
+        working-directory: product-mapping
+        env:
+          CI: true

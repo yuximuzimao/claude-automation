@@ -2,9 +2,10 @@
 
 ## Session 启动（必做，按顺序）
 
-1. 读 `tasks/todo.md` — 确认当前待办和进度
-2. `node cli.js list` — 获取实时工单，**禁止沿用历史工单号**
-3. 读 `docs/INDEX.md` — 所有处理规则的权威入口
+1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
+2. 读 `tasks/todo.md` — 确认当前待办和进度
+3. `node cli.js list` — 获取实时工单，**禁止沿用历史工单号**
+4. 读 `docs/INDEX.md` — 处理规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
 ## 规则文档（渐进式，按需加载）
 

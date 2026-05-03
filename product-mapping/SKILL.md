@@ -54,16 +54,17 @@ entry: cli.js
 ### 核查主流程（`docs/INDEX.md §2`）
 
 ```
-① check --shop <店铺>  → 扫描+标记+下载图片+生成报告
-② 识图（Claude 手动） → visual-ok / visual-flag 记录结论
-③ match --shop <店铺>  → 自动匹配（套件+单品，异常停止）
-④ check --shop <店铺>  → 重新扫描+对比报告
+① check --shop <店铺>  → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
+② 识图（Claude 手动） → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
+③ match --shop <店铺>  → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
+④ check --shop <店铺>  → 重新扫描+对比报告 (anchor: runCheck)
 ```
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
 
 ```
 download → read_skus → recognize → annotate → match → read_erp → verify
+(anchor: downloadProducts, readSkus, annotate, remapSingle, createSuite, readErpCodes, verifyArchive)
 ```
 
 - `recognize` 步骤由 Claude 手动执行，脚本到此暂停

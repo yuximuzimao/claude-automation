@@ -1,5 +1,9 @@
 # 工作区规则
 
+## 语义层铁律
+
+进入任一子项目时，**第一步读该项目的 `SKILL.md`**。禁止先 grep/glob/smart_search 再读 SKILL.md——语义层是导航地图，先看地图再走路。
+
 ## 跨项目共享知识
 
 `aftersales-automation/` 和 `product-mapping/` 操作同一套系统：

@@ -2,9 +2,10 @@
 
 ## Session 启动（必做，按顺序）
 
-1. 读 `tasks/todo.md` — 确认当前待办和进度
-2. 确认 Chrome 已打开鲸灵和快麦 ERP 两个标签页
-3. 读 `docs/INDEX.md` — 所有操作规则的权威入口
+1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
+2. 读 `tasks/todo.md` — 确认当前待办和进度
+3. 确认 Chrome 已打开鲸灵和快麦 ERP 两个标签页
+4. 读 `docs/INDEX.md` — 操作规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
 ## 规则文档（渐进式，按需加载）
 

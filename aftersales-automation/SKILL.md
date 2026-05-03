@@ -49,26 +49,26 @@ entry: cli.js
 
 ### 主流程：scan → collect → infer → approve/reject
 
-1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 写入 `data/queue.json`
-2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl`
-3. **infer** — `lib/infer.js:inferDecision()` → 规则推理 → 输出 decision
-4. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批
+1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 写入 `data/queue.json` (anchor: listTickets)
+2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
+3. **infer** — `lib/infer.js` → 规则推理 → 输出 decision (anchor: inferDecision, inferRefundOnly, inferRefundReturn)
+4. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批 (anchor: approveTicket, rejectTicket)
 
 ### 工单类型路由（`docs/INDEX.md §2`）
 
 | 类型 | 文档 | 对应函数 |
 |------|------|---------|
-| 退货退款 | `docs/flow-5.1.md` | `inferRefundReturn()` |
-| 仅退款（未发货） | `docs/flow-5.2.md` | `inferRefundOnly()` |
-| 仅退款（已发货） | `docs/flow-5.3.md` | `inferRefundOnly()` |
+| 退货退款 | `docs/flow-5.1.md` | `inferRefundReturn()` (anchor: inferRefundReturn) |
+| 仅退款（未发货） | `docs/flow-5.2.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
+| 仅退款（已发货） | `docs/flow-5.3.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
 | 换货 | `docs/flow-5.4.md` | — |
 
 ### ERP 操作流程
 
-1. **登录恢复** — `lib/erp/navigate.js:checkLogin()` → `recoverLogin()`
-2. **导航** — `lib/erp/navigate.js:erpNav()` → 订单管理/售后工单新版/商品档案V2/商品对应表
-3. **搜索** — `lib/erp/search.js:erpSearch()` → 解析订单行+状态
-4. **物流** — `lib/erp/read-logistics.js` → 读物流追踪
+1. **登录恢复** — `lib/erp/navigate.js` → 检测+恢复登录 (anchor: checkLogin, recoverLogin)
+2. **导航** — `lib/erp/navigate.js` → 页面导航 (anchor: erpNav)
+3. **搜索** — `lib/erp/search.js` → 订单搜索+状态解析 (anchor: erpSearch)
+4. **物流** — `lib/erp/read-logistics.js` → 物流追踪 (anchor: readErpLogistics, readAllErpLogistics)
 
 ## NON-STANDARD PATTERNS
 
