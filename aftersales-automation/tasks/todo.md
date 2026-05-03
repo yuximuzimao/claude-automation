@@ -96,4 +96,4 @@
 
 ### Phase 2（按需）：Worktree 强制规则
 
-- [ ] workspace CLAUDE.md 加 worktree 强制触发条件（≥3文件/改流程结构/涉及shared）
+- [x] workspace CLAUDE.md 加 worktree 强制触发条件（≥3文件/改流程结构/涉及shared）
