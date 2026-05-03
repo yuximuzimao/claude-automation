@@ -43,7 +43,7 @@ async function autoExecuteApprove(workOrderNum, accountNum) {
 function spawnAsync(cmd, args, opts) {
   return new Promise((resolve) => {
     const proc = spawn(cmd, args, { ...opts, stdio: ['ignore', 'ignore', 'inherit'] });
-    proc.on('close', resolve);
+    proc.on('close', (code) => resolve(code));
     proc.on('error', () => resolve(1));
   });
 }
@@ -71,8 +71,15 @@ async function processOne(queueItem, options = {}) {
 
   // collect.js 失败时：状态可能停在 collecting 或 collected，重置为 pending 待下次重试
   if (collectExitCode !== 0) {
-    log(`[${workOrderNum}] collect.js 退出码 ${collectExitCode}，重置为 pending`);
-    db.updateQueueItem(queueItemId, { status: 'pending' });
+    const retries = (queueItem.collectRetries || 0) + 1;
+    log(`[${workOrderNum}] collect.js 退出码 ${collectExitCode}，第 ${retries} 次重试`);
+    if (retries >= 3) {
+      log(`[${workOrderNum}] collect.js 已重试 ${retries} 次，上报人工`);
+      db.updateQueueItem(queueItemId, { status: 'simulated', hint: '采集连续失败，需人工核查', collectRetries: retries });
+      sse.broadcast('pipeline-update', { stage: 'error', workOrderNum });
+      return;
+    }
+    db.updateQueueItem(queueItemId, { status: 'pending', collectRetries: retries });
     sse.broadcast('pipeline-update', { stage: 'error', workOrderNum });
     return;
   }
@@ -80,7 +87,7 @@ async function processOne(queueItem, options = {}) {
   // ── 推理 ─────────────────────────────────────────────────────────
   log(`[${workOrderNum}] 推理`);
   // collect.js 已把状态设为 'collected'，这里改为 'inferring'
-  db.updateQueueItem(queueItemId, { status: 'inferring' });
+  db.updateQueueItem(queueItemId, { status: 'inferring', collectRetries: 0 });
   sse.broadcast('pipeline-update', { stage: 'inferring', workOrderNum });
 
   // 一次读取，供 getLatestSim 和多次使用检测共用
