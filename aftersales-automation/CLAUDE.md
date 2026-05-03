@@ -44,3 +44,10 @@
 暂存：`git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/`
 不提交：`data/`、`*.log`、`.server.lock`
 
+## 代码生效铁律
+
+**修改 `lib/` 下任何决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server**。
+原因：server 启动时加载模块到内存，不重启新逻辑不生效。重启后自动批量重跑未处理工单应用新规则。
+
+触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/erp/*.js`
+
