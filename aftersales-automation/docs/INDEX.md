@@ -242,7 +242,7 @@ node cli.js erp-aftersale <快递单号>
 - `[1/2026-05]` **#50 后台 osascript Reminders 需降级**：无 TTY 后台进程 osascript Reminders AppleEvent -1712。用 `createReminder()` 优先 Reminders 失败降级 `display notification`。
 - `[∞/永久保留]` **#51 ERP 状态只路由不决策**：仅退款中 ERP 订单状态唯一作用是区分未发货（flow-5.2）vs 已发货（flow-5.3）。决策依据是物流数据。"交易关闭"只说明订单关了，不说明包裹已退回。必须加入 SHIPPED 常量让其走物流判断，禁止"看到状态X→直接决策Y"。
 - `[∞/永久保留]` **#52 采集按工单类型分流**：product-match/archive 唯一消费者是退货退款的逐商品核对（flow-5.1 Step4）。仅退款/换货不需要，应跳过。反之，退货退款必须遍历所有子订单做 product-match（不能只取 subOrders[0]）。
-- `[∞/永久保留]` **#53 决策只读剩余时效，不看累计等待**：累计等待时间（getWaitingHours/firstWaitingAt）无意义——工单可能第一天就进waiting，等22h不代表该处理。唯一决策依据：剩余时效 vs 下次扫描间隔——剩余>扫描间隔→等（不管累计多久）；剩余≤扫描间隔→立即拒绝防止超时自动退款。2026-05-03 彻底移除 getWaitingHours 函数和全部4处调用。
+- `[∞/永久保留]` **#53 决策只看"剩余-扫描"安全边际，不看累计等待**：累计等待时间无意义。唯一决策依据：剩余时效 - 下次扫描间隔 > 8h → 安全等待；≤ 8h → 立即拒绝防止超时自动退款。SAFETY_MARGIN_HOURS=8 常量化在 constants.js。2026-05-03 彻底移除 getWaitingHours。2026-05-03 晚追加8h安全边际。
 - `[∞/永久保留]` **#54 推理文案说人话**：escalate reason 三要素：①第一句说清根因（非表象）②无代码变量名（afterSaleNum等）③给明确建议动作。格式："对应表查无此规格：XX×N件，请确认是否为赠品"。禁止"商品档案不完整…afterSaleNum=N"。
 - `[∞/永久保留]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 必须交叉校验 accountNum 和 accountNote 的对应关系（查 accounts.json）。账号编号和店铺名不一致时拒绝，防止注入错误session导致跨商家权限拒绝[cbe]。
 - `[1/2026-05]` **#56 CLOSE_ALL_DIALOGS_JS 全量关闭**：原来只关 `.trade-detail-dialog` 漏了档案V2子品弹窗等。改为 `querySelectorAll('.el-dialog__wrapper')` 过滤 `getComputedStyle(e).display !== 'none'`。navigateErp 切页面前 + product-archive 启动时都加清理。

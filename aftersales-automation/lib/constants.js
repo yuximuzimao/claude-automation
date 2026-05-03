@@ -44,6 +44,9 @@ const REMIND_HOURS = 12;
 // waiting 重查最小间隔（小时）：距上次推理完成 ≥ 此值才允许重置为 pending
 const RESCAN_INTERVAL_HOURS = 4;
 
+// 安全边际（小时）：剩余时效 - 下次扫描间隔 > 此值才安全等待，否则拒绝
+const SAFETY_MARGIN_HOURS = 8;
+
 // 计算距下次自动扫描的小时数
 function getHoursUntilNextScan() {
   const now = new Date();
@@ -57,4 +60,4 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, getHoursUntilNextScan };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan };
