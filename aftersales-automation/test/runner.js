@@ -1,6 +1,6 @@
 'use strict';
 
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 const cdp = require('../lib/cdp');
 const { sleep, waitFor } = require('../lib/wait');
 
@@ -134,9 +134,7 @@ function runCmd(args) {
     } catch (e) {
       const isConnReset = e.message && e.message.includes('ECONNRESET');
       if (isConnReset && attempt === 0) {
-        const { execSync: es } = require('child_process');
-        // 同步等 2s（spawnSync sleep 2）
-        require('child_process').spawnSync('sleep', ['2']);
+        spawnSync('sleep', ['2']);
         continue;
       }
       throw e;

@@ -3,16 +3,15 @@
 // 产品匹配模块化测试运行器
 // 参考 aftersales-automation/test/runner.js
 
+const fs = require('fs');
 const path = require('path');
-const { describe, it, before, after } = require('node:test');
 const assert = require('assert');
 
 const PROJECT_ROOT = path.join(__dirname, '..');
-const { testContext, initTestContext, resetErp, resetJl, clearSessionCache } = require('./helpers/browser');
-const { backupSkuRecords, restoreSkuRecords, readSkuRecords, writeFixture, makeSkuRecord, makeSkuRecordsJson } = require('./helpers/fixtures');
-const { assertStage, assertMatchStatus, assertNoTmpFiles, assertOk, assertSkipped, assertThrows, assertFileJson } = require('./helpers/assertions');
-const { createMockCdp } = require('./helpers/cdp-mock');
-const { STEPS, READONLY_STEPS, DESTRUCTIVE_STEPS } = require('./schemas');
+const { testContext, initTestContext, resetErp, clearSessionCache } = require('./helpers/browser');
+const { writeFixture, makeSkuRecord, makeSkuRecordsJson } = require('./helpers/fixtures');
+const { assertOk, assertSkipped, assertThrows } = require('./helpers/assertions');
+const { STEPS } = require('./schemas');
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -76,7 +75,6 @@ async function runL0() {
 
   // 3. Session cache 文件可写
   try {
-    const fs = require('fs');
     const cacheFile = path.join(PROJECT_ROOT, 'data/erp-session-cache.json');
     fs.writeFileSync(cacheFile, JSON.stringify({ test: true }));
     const read = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
@@ -108,8 +106,7 @@ async function runL0() {
 
 async function runL1SafeWrite(n = 3) {
   const { safeWriteJson } = require(path.join(PROJECT_ROOT, 'lib/utils/safe-write'));
-  const fs = require('fs');
-  const tmpFile = path.join(__dirname, '_test_safe_write.json');
+const tmpFile = path.join(__dirname, '_test_safe_write.json');
 
   const results = [];
   process.stdout.write(`\n▸ L1-safe-write safe-write 原子写入 (${n}次): `);
@@ -162,8 +159,7 @@ async function runL1SafeWrite(n = 3) {
 // ── L1 测试套件：annotate ──────────────────────────────────────────────────
 
 async function runL1Annotate(n = 3) {
-  const fs = require('fs');
-  const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
   const testPath = path.join(PROJECT_ROOT, 'data/sku-records-test.json');
 
   // annotate.js 硬编码了 data/sku-records.json 路径
@@ -252,8 +248,7 @@ async function runL1Annotate(n = 3) {
 // ── L1 测试套件：match-one 逻辑 ───────────────────────────────────────────
 
 async function runL1MatchOneLogic(n = 3) {
-  const fs = require('fs');
-  const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
   const matchOne = require(path.join(PROJECT_ROOT, 'lib/match-one')).matchOne;
 
   const results = [];
@@ -557,8 +552,7 @@ async function runL2DownloadProducts(n = 1) {
 async function runL2ReadSkus(n = 5) {
   const cdp = require(path.join(PROJECT_ROOT, 'lib/cdp'));
   const { readSkus } = require(path.join(PROJECT_ROOT, 'lib/ops/read-skus'));
-  const fs = require('fs');
-  const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
 
   const results = [];
   process.stdout.write(`\n▸ L2-read-skus 读取货号 SKU 列表 (${n}次): `);
@@ -615,8 +609,7 @@ async function runL2ReadErpCodes(n = 3) {
   const cdp = require(path.join(PROJECT_ROOT, 'lib/cdp'));
   const { readSkus } = require(path.join(PROJECT_ROOT, 'lib/ops/read-skus'));
   const { readErpCodes } = require(path.join(PROJECT_ROOT, 'lib/ops/read-erp-codes'));
-  const fs = require('fs');
-  const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
 
   const results = [];
   process.stdout.write(`\n▸ L2-read-erp-codes 重读验证 ERP 编码 (${n}次): `);
@@ -665,8 +658,7 @@ async function runL2ReadErpCodes(n = 3) {
 
 async function runL2RemapSingle(n = 5) {
   const { remapSingle } = require(path.join(PROJECT_ROOT, 'lib/ops/remap-single'));
-  const fs = require('fs');
-  const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
 
   const results = [];
   process.stdout.write(`\n▸ L2-remap-single 单品换绑 (${n}次): `);
@@ -780,8 +772,7 @@ async function runL2CreateSuite(n = 5) {
 async function runL2VerifyArchive(n = 3) {
   const { verifyArchive, itemSetsEqual } = require(path.join(PROJECT_ROOT, 'lib/ops/verify-archive'));
   const { readSkus } = require(path.join(PROJECT_ROOT, 'lib/ops/read-skus'));
-  const fs = require('fs');
-  const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
+const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
 
   const results = [];
   process.stdout.write(`\n▸ L2-verify-archive 档案核查 (${n}次): `);
