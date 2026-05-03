@@ -372,13 +372,13 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'read', label: '剩余时效', value: remainingDisplay });
     s({ type: 'read', label: '距下次扫描', value: hoursUntilNextScan != null ? `${hoursUntilNextScan.toFixed(1)}小时` : '未知' });
 
-    const safeToWait = remainingHours != null && hoursUntilNextScan != null
-      ? remainingHours - hoursUntilNextScan > SAFETY_MARGIN_HOURS
-      : null;  // 未知时不自动标记
+    const margin = remainingHours != null && hoursUntilNextScan != null
+      ? remainingHours - hoursUntilNextScan
+      : null;
+    const safeToWait = margin != null ? margin > SAFETY_MARGIN_HOURS : null;
 
     if (safeToWait === true) {
-      const buffer = remainingHours - hoursUntilNextScan;
-      s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${hoursUntilNextScan.toFixed(1)}h = ${buffer.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
+      s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${hoursUntilNextScan.toFixed(1)}h = ${margin.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
       return fin({
         ...escalate(
           `订单在途，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
@@ -391,10 +391,8 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    const bufferReject = remainingHours != null && hoursUntilNextScan != null
-      ? (remainingHours - hoursUntilNextScan).toFixed(1)
-      : '?';
-    s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${bufferReject}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
+    const marginStr = margin != null ? margin.toFixed(1) : '?';
+    s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
     return fin(reject(
       '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
       ['需创建快递拦截提醒'],
@@ -476,8 +474,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)
     : parseUrgencyHours(queueItem.urgency);
   const hoursUntilNextScanWait = queueItem.hoursUntilNextScan != null ? queueItem.hoursUntilNextScan : null;
-  const safeToWait = remainingHoursWait != null && hoursUntilNextScanWait != null
-    ? remainingHoursWait - hoursUntilNextScanWait > SAFETY_MARGIN_HOURS
+  const marginWait = remainingHoursWait != null && hoursUntilNextScanWait != null
+    ? remainingHoursWait - hoursUntilNextScanWait
+    : null;
+  const safeToWait = marginWait != null
+    ? marginWait > SAFETY_MARGIN_HOURS
     // fallback：deadlineAt 缺失时，用 urgency 文本估算，>REMIND_HOURS 视为安全等待
     : (remainingHoursWait != null ? remainingHoursWait > REMIND_HOURS : null);
 
@@ -487,10 +488,10 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'read', label: '售后图片', value: hasImages ? '有' : '无' });
 
     if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
-      const bufferB = hoursUntilNextScanWait != null
-        ? `${(remainingHoursWait - hoursUntilNextScanWait).toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
+      const waitMsgB = marginWait != null
+        ? `${marginWait.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
         : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
-      s({ type: 'branch', text: `自动标记等待重查 → 无入库记录+无说明+无图片，快递可能刚到未拆包，${bufferB}` });
+      s({ type: 'branch', text: `自动标记等待重查 → 无入库记录+无说明+无图片，快递可能刚到未拆包，${waitMsgB}` });
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
           confidence: 'high',
@@ -501,8 +502,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     if (safeToWait === false) {
-      const bRej = (remainingHoursWait - hoursUntilNextScanWait).toFixed(1);
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${bRej}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，未入库立即处理防止超时自动退款` });
+      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${marginWait.toFixed(1)}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，未入库立即处理防止超时自动退款` });
       return fin(reject(
         `剩余${remainingHoursWait.toFixed(1)}h时效不足，未入库拒绝退款，等入库后再处理`,
         ['⚠️ 超时自动拒绝'],
@@ -523,10 +523,10 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   if (!hasConfirmedReceipt) {
     // 场景C：有ERP记录但未入库（在途/已签收待仓库拆包）
     if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
-      const bufferC = hoursUntilNextScanWait != null
-        ? `${(remainingHoursWait - hoursUntilNextScanWait).toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
+      const waitMsgC = marginWait != null
+        ? `${marginWait.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
         : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
-      s({ type: 'branch', text: `自动标记等待重查 → ERP有记录但未入库（状态：${statusList}）+无说明+无图片，在途或待仓库拆包，${bufferC}` });
+      s({ type: 'branch', text: `自动标记等待重查 → ERP有记录但未入库（状态：${statusList}）+无说明+无图片，在途或待仓库拆包，${waitMsgC}` });
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
           confidence: 'high',
@@ -537,8 +537,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     if (safeToWait === false) {
-      const cRej = (remainingHoursWait - hoursUntilNextScanWait).toFixed(1);
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${cRej}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，ERP有记录未入库立即处理防止超时自动退款` });
+      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${marginWait.toFixed(1)}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，ERP有记录未入库立即处理防止超时自动退款` });
       return fin(reject(
         `剩余${remainingHoursWait.toFixed(1)}h时效不足，未入库拒绝退款，等入库后再处理`,
         ['⚠️ 超时自动拒绝'],
