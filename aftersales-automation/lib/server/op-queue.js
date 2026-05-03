@@ -522,7 +522,7 @@ async function execCollect(op) {
   const { queueItemId, mode = 'live', accountNum } = op.params;
   const args = ['--limit', '1', mode === 'live' ? '--live' : '--sim'];
   if (accountNum) args.push('--account', String(accountNum));
-  const { code } = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...args], { cwd: BASE, timeout: 120000 });
+  const { code } = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...args], { cwd: BASE, timeout: 180000 });
   if (code !== 0) throw new Error('采集失败');
   return { done: true };
 }
