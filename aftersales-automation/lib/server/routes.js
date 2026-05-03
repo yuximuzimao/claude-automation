@@ -1,5 +1,10 @@
 'use strict';
-
+/**
+ * WHAT: Express API 路由（43 个端点）
+ * WHERE: server.js → 注册为 /api 前缀
+ * WHY: HTTP 接口层，所有业务逻辑在 lib/ 下，此处只做参数解析和调用转发
+ * ENTRY: server.js: app.use('/api', routes)
+ */
 const express = require('express');
 const { execFileSync, spawnSync } = require('child_process');
 const path = require('path');

@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 鲸灵工单添加内部备注
+ * WHERE: pipeline.js escalate → cli.js add-note 命令 → 此模块
+ * WHY: 必须点「致内部」按钮进入内部备注区，严禁点「+新增备注」（会进供应商可见区）
+ * ENTRY: cli.js: add-note 命令
+ */
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { sleep, retry } = require('../wait');

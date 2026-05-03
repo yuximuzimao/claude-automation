@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 售后工单搜索（按退货快递单号查）
+ * WHERE: collect.js 退货核验 → CLI erp-aftersale 命令 → 此模块
+ * WHY: 退货退款必须到 ERP 售后工单新版验收，展开所有行逐项核对
+ * ENTRY: cli.js: erp-aftersale 命令, collect.js: 退货采集
+ */
 const cdp = require('../cdp');
 const { navigateErp, CLOSE_ALL_DIALOGS_JS } = require('./navigate');
 const { sleep, retry } = require('../wait');

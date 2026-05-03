@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 页面导航（reload→登录检测→切tab→验hash→等Vue mount）
+ * WHERE: 所有 ERP 操作的前置步骤
+ * WHY: 跳过 reload 直接导航会读到上次页面残留数据；登录恢复自动填充账号密码
+ * ENTRY: 所有需要 ERP 页面的 lib/*.js 第一步调用
+ */
 // 移植自售后工单项目 lib/erp/navigate.js
 // v2: 新增 session 缓存、自动登录恢复、页面内容轮询等待
 const fs = require('fs');

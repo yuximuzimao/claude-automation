@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 商品对应表查询（货号+attr1→匹配SKU）
+ * WHERE: collect.js 商品采集 → CLI product-match 命令 → 此模块
+ * WHY: 对应表是确认商品是否有档案的唯一入口，未匹配→无法核对→escalate
+ * ENTRY: cli.js: product-match 命令, collect.js: 商品数据采集
+ */
 const cdp = require('../cdp');
 const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');

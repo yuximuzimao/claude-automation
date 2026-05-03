@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 读取鲸灵工单物流信息
+ * WHERE: collect.js 数据采集 → CLI logistics 命令 → 此模块
+ * WHY: 物流是判断退回成功/拦截成功的唯一依据
+ * ENTRY: cli.js: logistics 命令, collect.js: 采集物流数据
+ */
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { sleep } = require('../wait');

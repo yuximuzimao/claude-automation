@@ -1,5 +1,10 @@
 'use strict';
-
+/**
+ * WHAT: JSON/jsonl 数据持久化层
+ * WHERE: server.js 启动时初始化，routes.js 通过此模块读写数据
+ * WHY: 统一文件锁+原子写入，避免 routes.js 直接 fs 操作导致并发写损坏
+ * ENTRY: lib/server/routes.js: const db = require('./data')
+ */
 const fs = require('fs');
 const path = require('path');
 

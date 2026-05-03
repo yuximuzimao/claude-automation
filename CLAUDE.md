@@ -61,6 +61,15 @@ scope: aftersales / product-mapping / workspace
 
 `data/` 运行时数据 · `*.log` · `_sandbox/` · `_exports/` · `.server.lock`
 
+### SKILL.md 同步铁律
+
+Claude 的导航地图必须与代码库保持同步：
+
+1. **任何 commit 包含文件重命名/删除/新增/移动** → 同步更新所属项目的 `SKILL.md` PATHS 区块
+2. **新文件属于核心流程** → 补 ENTRY MAP 条目 + DO FIRST（如需要）
+3. **谁制造了变更，谁负责更新地图** — Claude 改的文件，Claude 更新 SKILL.md；用户改的文件，Claude 主动检查并更新
+4. **pre-commit hook 做安全网** — 检测 PATHS 中引用的文件被删/改名时警告，不阻止 commit
+
 ---
 
 ## 新项目开工规范

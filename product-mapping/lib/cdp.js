@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: CDP HTTP proxy 客户端（非直接 WebSocket）
+ * WHERE: 所有浏览器操作 → 此模块提供 eval/clickAt/navigate/screenshot
+ * WHY: 与 aftersales-automation 的 cdp.js 实现完全不同——此项目走 HTTP proxy（localhost:3456），fallback 直连。导出相同接口但不可混用
+ * ENTRY: lib/targets.js: getTargetIds(), 所有 lib/*.js 浏览器操作
+ */
 const http = require('http');
 
 const PROXY = 'http://localhost:3456';

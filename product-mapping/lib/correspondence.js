@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 商品对应表全量读取（下载平台商品+读SKU映射+图片URL）
+ * WHERE: check 流程 step 1.2/1.3 → 此模块
+ * WHY: 对应表是 SKU 匹配的唯一数据源，读取不全会导致匹配遗漏
+ * ENTRY: lib/check.js: readAllCorrespondence()
+ */
 const cdp = require('./cdp');
 const { sleep } = require('./wait');
 const { navigateErp } = require('./navigate');

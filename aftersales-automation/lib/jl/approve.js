@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 鲸灵同意退款（处理三层弹窗）
+ * WHERE: pipeline.js autoExecute → cli.js approve 命令 → 此模块
+ * WHY: 三层弹窗（确认→确认同意→风险提示）必须严格按序处理，不能跳过
+ * ENTRY: cli.js: approve 命令, pipeline.js: autoExecuteApprove()
+ */
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { sleep, retry, waitFor } = require('../wait');

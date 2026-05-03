@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 订单搜索 + READ_ROWS_JS 解析订单行（含订单状态）
+ * WHERE: collect.js 数据采集 → CLI erp-search 命令 → 此模块
+ * WHY: 订单状态解析缺失终态会导致空值传播到 infer.js → escalate 误报
+ * ENTRY: cli.js: erp-search 命令, collect.js: 采集 ERP 订单数据
+ */
 const cdp = require('../cdp');
 const { navigateErp, checkLogin, recoverLogin, CLOSE_ALL_DIALOGS_JS } = require('./navigate');
 const { sleep, retry } = require('../wait');

@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 鲸灵拒绝退款（含物流截图上传）
+ * WHERE: pipeline.js autoExecute → cli.js reject 命令 → 此模块
+ * WHY: 拒绝必须上传证据截图，curl+cookie 注入 Vue 组件是唯一可靠路径
+ * ENTRY: cli.js: reject 命令, pipeline.js autoExecute
+ */
 const { execSync } = require('child_process');
 const fs = require('fs');
 const cdp = require('../cdp');

@@ -1,5 +1,10 @@
 'use strict';
-
+/**
+ * WHAT: Server-Sent Events 实时推送
+ * WHERE: server.js 初始化 SSE 端点，pipeline.js 调用 broadcast() 推送状态
+ * WHY: 前端 Web 面板需要实时看到工单处理进度，轮询开销大且延迟高
+ * ENTRY: server.js: app.use('/api/events', sse.router)
+ */
 const fs = require('fs');
 const path = require('path');
 

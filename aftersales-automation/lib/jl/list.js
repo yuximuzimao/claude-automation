@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 鲸灵工单列表扫描（≤48小时）
+ * WHERE: scan-all.js → CLI list 命令 → 此模块
+ * WHY: 扫描窗口定位有串位历史（§18），必须用 Math.max 修正
+ * ENTRY: cli.js: list 命令, scan-all.js: 定时扫描
+ */
 const cdp = require('../cdp');
 const { ok, fail } = require('../result');
 const { sleep, waitFor } = require('../wait');

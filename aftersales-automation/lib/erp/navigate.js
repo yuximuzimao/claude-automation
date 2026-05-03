@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 页面导航 + 登录状态检测与恢复
+ * WHERE: 所有 ERP 操作的前置步骤，erpNav() / checkLogin() / recoverLogin()
+ * WHY: 跳过 reload 直接导航会读到上次页面残留数据；密码框需 cdp.clickAt 触发 Chrome 自动填充
+ * ENTRY: 所有 lib/erp/*.js 的第一步调用
+ */
 const fs = require('fs');
 const path = require('path');
 const cdp = require('../cdp');

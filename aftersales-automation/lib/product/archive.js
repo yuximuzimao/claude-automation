@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 商品档案V2查询（规格编码→商品详情+子品明细）
+ * WHERE: collect.js 商品采集 → CLI product-archive 命令 → 此模块
+ * WHY: 档案V2是商品规格的唯一权威数据，子品明细用于套装数量核对
+ * ENTRY: cli.js: product-archive 命令, collect.js: 商品数据采集
+ */
 const cdp = require('../cdp');
 const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');

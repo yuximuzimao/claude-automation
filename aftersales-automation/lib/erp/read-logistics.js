@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: ERP 订单物流读取（逐行或全部）
+ * WHERE: collect.js 物流采集 → CLI erp-logistics/erp-logistics-all → 此模块
+ * WHY: ERP 物流是判断发货状态和物流进度的唯一权威数据源
+ * ENTRY: cli.js: erp-logistics / erp-logistics-all 命令
+ */
 const cdp = require('../cdp');
 const { sleep, waitFor, retry } = require('../wait');
 const { ok, fail } = require('../result');

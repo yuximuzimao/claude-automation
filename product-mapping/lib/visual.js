@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 视觉识别结论管理（visual-ok/visual-flag/visual-pending）
+ * WHERE: check 流程 step ② 识图 → CLI → 此模块
+ * WHY: 识图结论写入 sku-records.json，作为 match 流程的前置数据
+ * ENTRY: cli.js: visual-ok / visual-flag / visual-pending 命令
+ */
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');

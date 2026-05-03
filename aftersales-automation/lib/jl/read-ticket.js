@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 读取单条鲸灵工单详情（页面 DOM 解析）
+ * WHERE: collect.js → CLI read-ticket 命令 → 此模块
+ * WHY: 工单详情是后续推理的唯一数据源，字段提取错误会导致整个流程误判
+ * ENTRY: cli.js: read-ticket 命令, collect.js: 数据采集
+ */
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { ok, fail } = require('../result');

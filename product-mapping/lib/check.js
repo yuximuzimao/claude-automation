@@ -1,4 +1,10 @@
 'use strict';
+/**
+ * WHAT: 完整核查流程编排（扫描+标记+下载图片+生成报告）
+ * WHERE: CLI check 命令 → 此模块
+ * WHY: 4 步核查流程的自动化编排入口，输出 comparison 报告用于人工核查
+ * ENTRY: cli.js: check 命令
+ */
 const path = require('path');
 const fs = require('fs');
 const { listActiveProducts } = require('./jl-products');
