@@ -111,10 +111,6 @@ function updateQueueItem(id, patch) {
   const idx = queue.items.findIndex(i => i.id === id);
   if (idx === -1) return null;
   const existing = queue.items[idx];
-  // 离开 waiting 状态时：仅"完成"清除 firstWaitingAt（重置为 pending 保留累加计时）
-  if (patch.status === 'done' && existing.status === 'waiting') {
-    patch = { ...patch, firstWaitingAt: null };
-  }
   queue.items[idx] = { ...existing, ...patch };
   writeQueue(queue);
   return queue.items[idx];

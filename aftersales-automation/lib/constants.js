@@ -57,11 +57,4 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-// 计算队列项累计等待小时数（从 firstWaitingAt 起算）
-function getWaitingHours(queueItem) {
-  return queueItem && queueItem.firstWaitingAt
-    ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
-    : 0;
-}
-
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, getHoursUntilNextScan, getWaitingHours };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, getHoursUntilNextScan };

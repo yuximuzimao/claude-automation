@@ -202,9 +202,7 @@ async function processOne(queueItem, options = {}) {
 
   if (decision.waitingRescan) {
     db.updateSimulation(sim.id, { decision, hint: hint || null });
-    const waitingPatch = { status: 'waiting', hint: hint || null };
-    if (!freshItem.firstWaitingAt) waitingPatch.firstWaitingAt = new Date().toISOString();
-    db.updateQueueItem(queueItemId, waitingPatch);
+    db.updateQueueItem(queueItemId, { status: 'waiting', hint: hint || null });
     sse.broadcast('pipeline-update', { stage: 'waiting', workOrderNum });
     log(`[${workOrderNum}] 标记等待重查 → ${decision.reason.slice(0, 60)}`);
     return;
