@@ -1,4 +1,4 @@
-# 待处理问题台账（2026-04-28 更新）
+# 待处理问题台账（2026-05-03 更新）
 
 > 按执行顺序排列。Phase A 修点，Phase B 架构重构。
 
@@ -72,3 +72,28 @@
 
 - [ ] **B1** Phase 2 无痕浏览器隔离（自动化脚本与手动浏览完全隔离）
 - [ ] **B2** collect-schema.md 正式文档化（A1.1 已完成后在此补充完整字段说明）
+
+---
+
+## Claude Code 优化项目（2026-05-03 完成 Phase 0+1）
+
+> 详见 workspace plan: `.claude/plans/shimmering-skipping-dolphin.md`
+
+### Phase 0：语义对齐层 ✅
+
+- [x] **P0-1** aftersales-automation/SKILL.md（6区块：DO FIRST/ENTRY MAP/CORE FLOWS/NON-STANDARD PATTERNS/FAILURE PATTERNS/PATHS）
+- [x] **P0-1** product-mapping/SKILL.md（同上结构）
+- [x] **P0-2** 20 个核心 lib 文件补齐 WHAT/WHERE/WHY/ENTRY 文件头
+- [x] **P0-3** 防过时机制：PATHS 读时验证 + CLAUDE.md 同步铁律 + pre-commit hook
+
+### Phase 1：CI + 流程测试 + 三刀防失效 ✅
+
+- [x] **P1-0** 3个CLAUDE.md 加入强制入口规则（Session第一步读SKILL.md）
+- [x] **P1-1** CORE FLOWS 加 function anchor，smart_search 可校验
+- [x] **P1-2** test/fixtures/decision-regression.json（20条 frozen 推理场景）
+- [x] **P1-3** test/flow-test.js（纯逻辑回归测试，20/20通过，7ms）
+- [x] **P1-4** .github/workflows/test.yml（CI 自动跑 flow-test + pm L1）
+
+### Phase 2（按需）：Worktree 强制规则
+
+- [ ] workspace CLAUDE.md 加 worktree 强制触发条件（≥3文件/改流程结构/涉及shared）
