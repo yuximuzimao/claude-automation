@@ -1,6 +1,7 @@
 'use strict';
 
 // ── SSE ───────────────────────────────────────────────────────────
+const SHIPPED_STATUSES = ['卖家已发货', '交易成功', '交易关闭'];
 let es;
 function connectSSE() {
   es = new EventSource('/api/events');
@@ -1330,7 +1331,7 @@ function getShipRows(cd) {
   function addFrom(erpData) {
     const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
     rows.forEach(function(row) {
-      if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
+      if (!SHIPPED_STATUSES.includes(row.status)) return;
       const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
       ts.forEach(function(t) { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
     });
@@ -1455,7 +1456,7 @@ async function loadActionList() {
     }
 
     // 退货待入库：有 returnTracking，且决策含"拆包"/"尚未入库"/"在途"
-    if (ticket.returnTracking && decision && decision.action === 'escalate' &&
+    if (ticket.returnTracking && decision && (decision.action === 'escalate' || decision.action === 'reject') &&
         (reason.includes('拆包') || reason.includes('尚未入库') || reason.includes('在途'))) {
       if (dismissed && dismissed[ticket.returnTracking]) {
         dismissedReturns.push({ ...base, tracking: ticket.returnTracking });

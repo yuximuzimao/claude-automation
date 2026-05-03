@@ -11,7 +11,7 @@
  * 变更任一读取字段必须同步更新该文档。
  */
 
-const { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS } = require('./constants');
+const { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, getWaitingHours } = require('./constants');
 
 // 免退配件关键词（不计入应退/实退数量）
 const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
@@ -376,11 +376,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ? remainingHours > hoursUntilNextScan
       : null;  // 未知时不自动标记
 
-    // 剩余时效充足 → 永远等（不管累计等了多久，时效充足就该等）
     if (safeToWait === true) {
-      const waitTrace = queueItem.firstWaitingAt
-        ? `（累计等待${((Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000).toFixed(0)}h）`
-        : '';
+      const waited = getWaitingHours(queueItem);
+      const waitTrace = waited > 0 ? `（累计等待${waited.toFixed(0)}h）` : '';
       s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h > 下次扫描${hoursUntilNextScan.toFixed(1)}h${waitTrace}` });
       return fin({
         ...escalate(
@@ -394,10 +392,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    // 剩余时效不足 → 拒绝退款
-    const waitDur = queueItem.firstWaitingAt
-      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
-      : 0;
+    const waitDur = getWaitingHours(queueItem);
     const timeoutTag = waitDur >= REMIND_HOURS ? `（已等待${waitDur.toFixed(0)}h ≥ ${REMIND_HOURS}h阈值）` : '';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h不足，立即处理${timeoutTag}` });
     return fin(reject(
@@ -505,10 +500,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    // 无入库记录但不满足自动等待条件 → 超时则拒绝，否则上报
-    const waitDurB = queueItem.firstWaitingAt
-      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
-      : 0;
+    const waitDurB = getWaitingHours(queueItem);
     if (waitDurB >= REMIND_HOURS && safeToWait !== true) {
       s({ type: 'branch', text: `超时拒绝 → 已等待${waitDurB.toFixed(0)}h ≥ ${REMIND_HOURS}h，未入库且剩余时效不足` });
       return fin(reject(
@@ -544,10 +536,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    // 有ERP记录未入库但不满足自动等待条件 → 超时则拒绝，否则上报
-    const waitDurC = queueItem.firstWaitingAt
-      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
-      : 0;
+    const waitDurC = getWaitingHours(queueItem);
     if (waitDurC >= REMIND_HOURS && safeToWait !== true) {
       s({ type: 'branch', text: `超时拒绝 → 已等待${waitDurC.toFixed(0)}h ≥ ${REMIND_HOURS}h，ERP有记录未入库且剩余时效不足` });
       return fin(reject(
