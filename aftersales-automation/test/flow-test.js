@@ -16,11 +16,15 @@ const FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
 function loadFixtures(name) {
   const file = path.join(FIXTURES_DIR, `${name}.json`);
-  if (!fs.existsSync(file)) {
-    console.log(`SKIP: ${name}.json 不存在`);
-    return [];
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      console.log(`SKIP: ${name}.json 不存在`);
+      return [];
+    }
+    throw e;
   }
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 function runTests(label, fixtures) {
@@ -68,19 +72,13 @@ function runTests(label, fixtures) {
   return { passed, failed, failures };
 }
 
-async function main() {
+function main() {
   const start = Date.now();
-
-  // CI 模式：跳过 CDP 加载检查
-  // eslint-disable-next-line no-unused-vars
-  const _ciGuard = typeof process.env.CI !== 'undefined';
 
   let totalPassed = 0;
   let totalFailed = 0;
   const allFailures = [];
 
-  // 回归测试：frozen fixtures，expected = inferDecision 当前输出
-  // 目的：防止意外修改导致行为变化
   const data = loadFixtures('decision-regression');
   if (data.length) {
     const r = runTests('决策回归（frozen）', data);
