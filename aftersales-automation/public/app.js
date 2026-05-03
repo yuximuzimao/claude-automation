@@ -1330,7 +1330,7 @@ function getShipRows(cd) {
   function addFrom(erpData) {
     const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
     rows.forEach(function(row) {
-      if (row.status !== '卖家已发货') return;
+      if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
       const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
       ts.forEach(function(t) { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
     });
@@ -1354,7 +1354,7 @@ async function loadActionBadge() {
       if (!sim || !sim.collectedData || !sim.decision) continue;
       const ticket = sim.collectedData.ticket || {};
       const reason = sim.decision.reason || '';
-      if (sim.decision.action === 'escalate') {
+      if (sim.decision.action === 'escalate' || sim.decision.action === 'reject') {
         if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
           count += getShipRows(sim.collectedData).length;
         }
@@ -1443,7 +1443,7 @@ async function loadActionList() {
 
     // 待拦截：决策含"拦截"或"在途"，且 returnTracking 为空（发出包裹拦截，非退货）
     // 包含主订单所有分包快递单号 + 赠品子订单对应的快递单号
-    if (decision && decision.action === 'escalate' && !ticket.returnTracking &&
+    if (decision && (decision.action === 'escalate' || decision.action === 'reject') && !ticket.returnTracking &&
         (reason.includes('拦截') || reason.includes('在途'))) {
       getShipRows(cd).forEach(tracking => {
         if (dismissed && dismissed[tracking]) {

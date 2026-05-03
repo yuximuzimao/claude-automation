@@ -363,20 +363,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
-    // 超时安全阀：已等待 ≥ REMIND_HOURS 仍未拦截成功 → 拒绝退款
-    if (queueItem.firstWaitingAt) {
-      const waitingDuration = (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000;
-      if (waitingDuration >= REMIND_HOURS) {
-        s({ type: 'branch', text: `超时安全阀触发 → 已等待${waitingDuration.toFixed(0)}h ≥ ${REMIND_HOURS}h，拒绝退款` });
-        return fin(reject(
-          `已等待${waitingDuration.toFixed(0)}h未拦截成功（阈值${REMIND_HOURS}h），拒绝退款，建议客户重新下单`,
-          ['⚠️ 超时安全阀自动拒绝'],
-          [{ doc: 'flow-5.3', section: 'Step4', summary: '等待超时→自动拒绝' }]
-        ));
-      }
-    }
-
-    // 时间分支：在途拦截件，剩余时效 > 距下次扫描时间 → 自动标记等待重查
+    // 时间分支：剩余时效 > 距下次扫描时间 → 等待重查；否则拒绝
     const remainingHours = queueItem.deadlineAt
       ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)
       : parseUrgencyHours(queueItem.urgency);
@@ -389,8 +376,12 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ? remainingHours > hoursUntilNextScan
       : null;  // 未知时不自动标记
 
+    // 剩余时效充足 → 永远等（不管累计等了多久，时效充足就该等）
     if (safeToWait === true) {
-      s({ type: 'branch', text: `自动标记等待重查 → 在途拦截件，剩余${remainingHours.toFixed(1)}h > 下次扫描${hoursUntilNextScan.toFixed(1)}h` });
+      const waitTrace = queueItem.firstWaitingAt
+        ? `（累计等待${((Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000).toFixed(0)}h）`
+        : '';
+      s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h > 下次扫描${hoursUntilNextScan.toFixed(1)}h${waitTrace}` });
       return fin({
         ...escalate(
           `订单在途，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
@@ -403,7 +394,12 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
-    s({ type: 'branch', text: `拒绝退款 → 在途拦截件，剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h，立即处理` });
+    // 剩余时效不足 → 拒绝退款
+    const waitDur = queueItem.firstWaitingAt
+      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
+      : 0;
+    const timeoutTag = waitDur >= REMIND_HOURS ? `（已等待${waitDur.toFixed(0)}h ≥ ${REMIND_HOURS}h阈值）` : '';
+    s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h不足，立即处理${timeoutTag}` });
     return fin(reject(
       '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
       ['需创建快递拦截提醒'],
@@ -478,19 +474,6 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const hasRows = aftersale && aftersale.rows && aftersale.rows.length;
   s({ type: 'read', label: 'ERP售后入库记录', value: hasRows ? `${aftersale.rows.length} 条记录` : '无记录' });
 
-  // 超时安全阀：已等待 ≥ REMIND_HOURS 仍未入库 → 拒绝退款
-  if (queueItem.firstWaitingAt) {
-    const waitingDuration = (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000;
-    if (waitingDuration >= REMIND_HOURS) {
-      s({ type: 'branch', text: `超时安全阀触发 → 已等待${waitingDuration.toFixed(0)}h ≥ ${REMIND_HOURS}h，拒绝退款` });
-      return fin(reject(
-        `已等待${waitingDuration.toFixed(0)}h未入库（阈值${REMIND_HOURS}h），拒绝退款，等入库后再处理`,
-        ['⚠️ 超时安全阀自动拒绝'],
-        [{ doc: 'flow-5.1', section: 'Step3', summary: '等待超时未入库→自动拒绝' }]
-      ));
-    }
-  }
-
   // 场景B/C公共变量（无记录和有记录未入库两种情况共用相同判断逻辑）
   const buyerRemark = ticket.buyerRemark || '';
   const hasImages = !!(ticket.images && ticket.images.length);
@@ -500,8 +483,8 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const hoursUntilNextScanWait = queueItem.hoursUntilNextScan != null ? queueItem.hoursUntilNextScan : null;
   const safeToWait = remainingHoursWait != null && hoursUntilNextScanWait != null
     ? remainingHoursWait > hoursUntilNextScanWait
-    // fallback：deadlineAt 缺失时，用 urgency 文本估算，>12小时视为安全等待
-    : (remainingHoursWait != null ? remainingHoursWait > 12 : null);
+    // fallback：deadlineAt 缺失时，用 urgency 文本估算，>REMIND_HOURS 视为安全等待
+    : (remainingHoursWait != null ? remainingHoursWait > REMIND_HOURS : null);
 
   if (!hasRows) {
     // 场景B自动等待：无入库记录 + 无售后说明 + 无图片 → 快递刚到未拆包，可自动等待
@@ -511,7 +494,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
       const waitMsg = hoursUntilNextScanWait != null
         ? `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > 下次扫描${hoursUntilNextScanWait.toFixed(1)}h`
-        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > 12h兜底阈值`;
+        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
       s({ type: 'branch', text: `自动标记等待重查 → 无入库记录+无说明+无图片，快递可能刚到未拆包，${waitMsg}` });
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
@@ -522,6 +505,18 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
+    // 无入库记录但不满足自动等待条件 → 超时则拒绝，否则上报
+    const waitDurB = queueItem.firstWaitingAt
+      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
+      : 0;
+    if (waitDurB >= REMIND_HOURS && safeToWait !== true) {
+      s({ type: 'branch', text: `超时拒绝 → 已等待${waitDurB.toFixed(0)}h ≥ ${REMIND_HOURS}h，未入库且剩余时效不足` });
+      return fin(reject(
+        `已等待${waitDurB.toFixed(0)}h未入库（阈值${REMIND_HOURS}h），拒绝退款，等入库后再处理`,
+        ['⚠️ 超时自动拒绝'],
+        [{ doc: 'flow-5.1', section: 'Step3', summary: '等待超时未入库→自动拒绝' }]
+      ));
+    }
     s({ type: 'branch', text: '上报 → ERP售后工单无入库记录' });
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
@@ -538,7 +533,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
       const waitMsgC = hoursUntilNextScanWait != null
         ? `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > 下次扫描${hoursUntilNextScanWait.toFixed(1)}h`
-        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > 12h兜底阈值`;
+        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
       s({ type: 'branch', text: `自动标记等待重查 → ERP有记录但未入库（状态：${statusList}）+无说明+无图片，在途或待仓库拆包，${waitMsgC}` });
       return fin({
         ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
@@ -549,6 +544,18 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       });
     }
 
+    // 有ERP记录未入库但不满足自动等待条件 → 超时则拒绝，否则上报
+    const waitDurC = queueItem.firstWaitingAt
+      ? (Date.now() - new Date(queueItem.firstWaitingAt).getTime()) / 3600000
+      : 0;
+    if (waitDurC >= REMIND_HOURS && safeToWait !== true) {
+      s({ type: 'branch', text: `超时拒绝 → 已等待${waitDurC.toFixed(0)}h ≥ ${REMIND_HOURS}h，ERP有记录未入库且剩余时效不足` });
+      return fin(reject(
+        `已等待${waitDurC.toFixed(0)}h未入库（阈值${REMIND_HOURS}h），拒绝退款，等入库后再处理`,
+        ['⚠️ 超时自动拒绝'],
+        [{ doc: 'flow-5.1', section: 'Step3', summary: '等待超时未入库→自动拒绝' }]
+      ));
+    }
     s({ type: 'branch', text: '上报 → 退货快递单存在，货物尚未入库确认' });
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
