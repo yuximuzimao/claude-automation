@@ -67,7 +67,7 @@ async function processOne(queueItem, options = {}) {
 
   const collectArgs = ['--live', '--workOrderNum', workOrderNum];
   if (accountNum) collectArgs.push('--account', String(accountNum));
-  const collectExitCode = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...collectArgs], { cwd: BASE, timeout: 120000 });
+  const collectExitCode = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...collectArgs], { cwd: BASE, timeout: 180000 });
 
   // collect.js 失败时：状态可能停在 collecting 或 collected，重置为 pending 待下次重试
   if (collectExitCode !== 0) {
