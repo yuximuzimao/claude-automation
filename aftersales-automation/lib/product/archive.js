@@ -104,15 +104,23 @@ function makeClickSubItemLinkJS(subItemNum) {
 }
 
 // 关闭子商品弹窗（读完明细后调用）
+// 使用 DOM 移除而非 btn.click()：Vue 的 fade 动画可能卡在中途不完成，导致弹窗残留
+// 残留弹窗阻塞下次查询的 a.ml_15 点击和子品表格读取
 const CLOSE_SUB_DIALOG_JS = `(function(){
-  var visible = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
   });
-  if (!visible.length) return JSON.stringify({skipped: 'no visible dialog'});
-  var btn = visible[0].querySelector('button.el-dialog__closeBtn');
-  if (!btn) return JSON.stringify({skipped: 'no closeBtn in dialog'});
-  btn.click();
-  return JSON.stringify({closed: true});
+  if (!wrappers.length) return JSON.stringify({skipped: 'no visible dialog'});
+  var closed = 0;
+  wrappers.forEach(function(w){
+    // 优先 DOM 强制移除（绕过 Vue 动画），fallback 点关闭按钮
+    if (w.parentNode) { w.parentNode.removeChild(w); closed++; }
+    else {
+      var btn = w.querySelector('button.el-dialog__closeBtn');
+      if (btn) { btn.click(); closed++; }
+    }
+  });
+  return JSON.stringify({closed: closed});
 })()`;
 
 // 读子商品明细表格：通过表头文本定位列索引，不做数据特征过滤
