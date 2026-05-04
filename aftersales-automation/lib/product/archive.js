@@ -65,7 +65,10 @@ function makeSearchSpecCodeJS(specCode) {
 }
 
 const READ_DATALIST_JS = `(function(){
-  var el = document.querySelector('.el-input__inner[placeholder="主商家编码"]');
+  var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
+    var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+  });
+  var el = inputs.find(function(i){ return i.placeholder === '主商家编码'; });
   if (!el) return JSON.stringify({error:'未找到输入框'});
   var v = el; var sv = null;
   for (var i = 0; i < 12; i++) {
