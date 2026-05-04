@@ -104,18 +104,28 @@ function makeClickSubItemLinkJS(subItemNum) {
 }
 
 // 关闭子商品弹窗（读完明细后调用）
-// 双重清理：dialog wrapper + v-modal 遮罩（DOM 移除绕过 Vue fade 动画）
-// 只移除 wrapper 会残留 .v-modal 背景遮罩，累积后遮挡 a.ml_15 点击
+// ⚠️ 必须用 Vue 方式关闭（btn.click()），不能用 DOM 移除。
+// DOM 移除不更新 Vue 内部 dialogVisible 状态 → 下次 a.ml_15 点击时 Vue 认为弹窗已打开而跳过 → "子商品弹窗未打开"
+// 关闭后轮询等待弹窗从 DOM 消失（Vue 动画可能需几百ms）
 const CLOSE_SUB_DIALOG_JS = `(function(){
-  var vmodals = Array.from(document.querySelectorAll('.v-modal')).filter(function(m){
-    return window.getComputedStyle(m).display !== 'none';
-  });
-  vmodals.forEach(function(m){ if (m.parentNode) m.parentNode.removeChild(m); });
-  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+  var visible = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
   });
-  wrappers.forEach(function(w){ if (w.parentNode) w.parentNode.removeChild(w); });
-  return JSON.stringify({vmodals: vmodals.length, wrappers: wrappers.length});
+  if (!visible.length) return JSON.stringify({skipped: 'no visible dialog'});
+  // 先点关闭按钮触发 Vue close 流程
+  visible.forEach(function(w) {
+    var btn = w.querySelector('button.el-dialog__closeBtn');
+    if (btn) btn.click();
+  });
+  // 等待 fade 动画完成（同步轮询，最多 2s）
+  var deadline = Date.now() + 2000;
+  var remaining = visible.length;
+  while (remaining > 0 && Date.now() < deadline) {
+    remaining = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+      return window.getComputedStyle(d).display !== 'none';
+    }).length;
+  }
+  return JSON.stringify({closed: visible.length, remaining: remaining});
 })()`;
 
 // 读子商品明细表格：通过表头文本定位列索引，不做数据特征过滤

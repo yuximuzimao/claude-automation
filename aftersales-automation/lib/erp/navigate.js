@@ -38,16 +38,15 @@ function saveSessionCache(cache) {
 // 供 search.js / aftersale.js 在 navigateErp 前调用
 const CLOSE_ALL_DIALOGS_JS = `(function(){
   // 关闭所有可见的 Element UI 弹窗（不限 trade-detail-dialog，档案V2子品弹窗等也覆盖）
-  // DOM 移除绕过 Vue fade 动画；同时清理 .v-modal 遮罩层防止累积遮挡
+  // ⚠️ 必须用 Vue 方式关闭，不能 DOM 移除：后者不更新 Vue 内部 dialogVisible 状态
   var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(e){
     return window.getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().width > 0;
   });
-  wrappers.forEach(function(w) { if (w.parentNode) w.parentNode.removeChild(w); });
-  var vmodals = Array.from(document.querySelectorAll('.v-modal')).filter(function(m){
-    return window.getComputedStyle(m).display !== 'none';
+  wrappers.forEach(function(w) {
+    var btn = w.querySelector('.el-dialog__closeBtn');
+    if (btn) btn.click();
   });
-  vmodals.forEach(function(m) { if (m.parentNode) m.parentNode.removeChild(m); });
-  return JSON.stringify({dialogs: wrappers.length, vmodals: vmodals.length});
+  return JSON.stringify({closed: wrappers.length});
 })()`;
 
 // 检查登录状态
