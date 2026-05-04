@@ -124,6 +124,7 @@ await cdp.navigate(targetId, 'https://...');
 | 8 | ERP 状态直接决策 | ERP 状态只路由不决策；"交易关闭"走物流判断，不直接同意退款 |
 | 9 | collect.js spawn timeout → exit code null | 被 SIGTERM 杀死时 exit code=null（非数字），`null !== 0` 为 true 触发重试。排查前先确认是超时还是逻辑错误 |
 | 10 | collect.js 失败无上限导致死循环 | 失败→重置 pending→pipeline 重采→又失败→无限。collectRetries 计数器 3 次上限后标记 simulated；成功后（进入 inferring）清零 |
+| 11 | querySelector 未过滤隐藏元素导致假阴性 | `document.querySelector('.el-input__inner[placeholder="X"]')` 返回 DOM 序第一个元素（可能隐藏 0×0），导致后续 Vue 父链遍历找不到 dataList。必须与其他函数一致：`querySelectorAll` + `getBoundingClientRect` 过滤 `r.width>0 && r.height>0` 再取第一个可见元素。案例：2026-05-04 archive.js READ_DATALIST_JS 读到隐藏的"主商家编码" input → dataList 为空 |
 
 ## PATHS
 
