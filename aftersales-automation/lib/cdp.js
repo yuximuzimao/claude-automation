@@ -145,6 +145,12 @@ async function key(targetId, keyName) {
   return { key: keyName };
 }
 
+// 向当前焦点元素插入文本（需先 clickAt 聚焦目标元素）
+// 使用 Input.insertText，可穿透前端框架的 value setter 拦截
+async function typeText(targetId, text) {
+  await cdpCall(targetId, 'Input.insertText', { text });
+}
+
 const cdp = {
   eval: evalJs,
   clickAt,
@@ -152,6 +158,7 @@ const cdp = {
   navigate,
   scroll,
   key,
+  typeText,
   getTargets,
 };
 

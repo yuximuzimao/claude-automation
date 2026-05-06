@@ -157,9 +157,38 @@ app.locals.resumeScan = () => {
   console.log('[auto-scan] 定时扫描已恢复');
 };
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`黑总专属售后系统已启动: http://localhost:${PORT}`);
+
+  // ===== ERP 启动闸门：先校验登录，再开放工单队列 =====
+  const { checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown } = require('./lib/erp/navigate');
+  const { getTargetIds } = require('./lib/targets');
+  let startupErpId = null;
+  try {
+    // 确保 CDP 就绪（Chrome 可能尚未完全启动）
+    for (let i = 0; i < 3; i++) {
+      try { ({ erpId: startupErpId } = await getTargetIds()); break; }
+      catch { await new Promise(r => setTimeout(r, 1000)); }
+    }
+    if (!startupErpId) throw new Error('CDP target 未就绪（Chrome 可能未启动）');
+
+    const status = await checkLogin(startupErpId);
+    if (!status.loggedIn) {
+      console.log('[startup] ERP 未登录，尝试恢复...');
+      await recoverLogin(startupErpId);
+    }
+    updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
+    console.log('[startup] ERP 登录校验通过');
+  } catch (e) {
+    console.error('[startup] ERP 登录校验失败:', e.message);
+    updateErpHealth({ status: 'down', failReason: e.message, lastFailTime: new Date().toISOString() });
+    alertErpDown(e.message); // 告警但不阻止启动（鲸灵扫描仍可运行）
+  }
+  // ===== 闸门结束，以下正常启动 =====
+
   scheduleNextScan();
+  startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
+
   // 启动时清理残留状态：collecting/collected（上次进程崩溃留下的）重置为 pending
   // 然后把所有 pending 工单入队推理
   const db = require('./lib/server/data');
@@ -178,3 +207,74 @@ app.listen(PORT, () => {
   }
   if (pending.length > 0) console.log(`[startup] 入队 ${pending.length} 条 pending 工单`);
 });
+
+// ── ERP 保活心跳（1小时）─────────────────────────────────────────────
+// 防止 ERP 服务端 session 超时（实测约 4-8h），避免登录恢复失败的情况
+function startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown) {
+  const HEARTBEAT_INTERVAL = 60 * 60 * 1000; // 1 小时
+  const ALERT_REPEAT_MS = 30 * 60 * 1000;    // 30 分钟重复告警
+
+  let heartbeatRunning = false;
+
+  async function runHeartbeat() {
+    if (heartbeatRunning) return; // 防止上次未完成时重入
+    heartbeatRunning = true;
+    try {
+      let erpId;
+      try { ({ erpId } = await getTargetIds()); }
+      catch { console.log('[erp-heartbeat] 获取 ERP tab 失败，跳过本次心跳'); return; }
+
+      const loginStatus = await checkLogin(erpId);
+      if (loginStatus.loggedIn) {
+        // 已登录：用 fetch + cache bust 续期（比 location.reload 副作用小）
+        const fetchResult = await require('./lib/cdp').eval(erpId,
+          `(async function(){
+            try {
+              var r = await fetch(location.href + (location.href.includes('?') ? '&' : '?') + '_t=' + Date.now(), {credentials:'include'});
+              return JSON.stringify({ ok: r.ok, status: r.status });
+            } catch(e) { return JSON.stringify({ ok: false, err: e.message }); }
+          })()`
+        ).catch(() => null);
+
+        // 验证 fetch 后 session 仍有效
+        const afterFetch = await checkLogin(erpId);
+        if (afterFetch.loggedIn) {
+          updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
+          console.log(`[erp-heartbeat] ERP 在线，fetch 续期完成 (${fetchResult && fetchResult.status || '?'})`);
+        } else {
+          // fetch 后 session 消失了（可能服务端确认失效），尝试恢复
+          console.log('[erp-heartbeat] fetch 后检测到掉线，尝试 recoverLogin');
+          await recoverLogin(erpId);
+          updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
+          console.log('[erp-heartbeat] recoverLogin 成功');
+        }
+      } else {
+        // 未登录：直接尝试恢复
+        console.log('[erp-heartbeat] ERP 未登录，尝试 recoverLogin');
+        try {
+          await recoverLogin(erpId);
+          updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
+          console.log('[erp-heartbeat] recoverLogin 成功');
+        } catch (recoverErr) {
+          console.error('[erp-heartbeat] recoverLogin 失败:', recoverErr.message);
+          updateErpHealth({ status: 'down', lastFailTime: new Date().toISOString(), failReason: recoverErr.message });
+          // 重复告警：若 health 记录的 lastAlertTime 距今超过 30 分钟则再次告警
+          const health = loadErpHealth();
+          const lastAlert = health.lastAlertTime ? new Date(health.lastAlertTime).getTime() : 0;
+          if (Date.now() - lastAlert > ALERT_REPEAT_MS) {
+            updateErpHealth({ lastAlertTime: new Date().toISOString() });
+            alertErpDown(`心跳恢复失败 - ${recoverErr.message}`);
+          }
+        }
+      }
+    } catch (e) {
+      console.error('[erp-heartbeat] 心跳异常:', e.message);
+    } finally {
+      heartbeatRunning = false;
+    }
+  }
+
+  // 首次心跳在 1 小时后触发（避免启动校验刚完成就再做一次）
+  setInterval(runHeartbeat, HEARTBEAT_INTERVAL);
+  console.log(`[erp-heartbeat] 已启动，每 ${HEARTBEAT_INTERVAL / 60000} 分钟保活一次`);
+}
