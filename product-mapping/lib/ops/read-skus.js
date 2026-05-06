@@ -66,9 +66,10 @@ async function _setMainPageSelect(erpId, selectIdx, optionText) {
  * @param {string} erpId
  * @param {string} shopName
  * @param {string} productCode
+ * @param {{ brand?: string }} opts
  * @returns {Promise<{ok: true, data: {skuCount, matchedCount, unmatchedCount}}>}
  */
-async function readSkus(erpId, shopName, productCode) {
+async function readSkus(erpId, shopName, productCode, opts = {}) {
   await ensureCorrPage(erpId);
 
   // 0. 等待页面渲染完成（确保 form-item[4] 的搜索输入框存在）
@@ -166,7 +167,7 @@ async function readSkus(erpId, shopName, productCode) {
     };
   }
 
-  const record = { stage: 'skus_read', shopName, productCode, skus };
+  const record = { stage: 'skus_read', shopName, productCode, brand: opts.brand || 'kgos', skus };
   safeWriteJson(SKU_RECORDS_PATH, record);
 
   console.error(`[read-skus] ${productCode}：${subRows.length} SKU，已匹配 ${matchedCount}，待匹配 ${unmatchedCount}`);

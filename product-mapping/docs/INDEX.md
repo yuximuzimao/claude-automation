@@ -72,16 +72,67 @@
 3. 对照 features.json 描述逐一确认图中每个商品
 4. 报告：每个商品是否在图中可见，数量是否一致
 
-**参考图库**：`data/products/*.jpg` — 单品标准图，命名 = 商品名称
+**参考图库**：`data/products/{brand}/*.jpg` — 单品标准图，命名 = 商品名称（如 `data/products/kgos/益生菌.jpg`、`data/products/hee/悦颜霜.jpg`）
+
+**配件不识图**：礼盒/礼袋/雪梨纸等不可见配件**不在识图范围内**，由系统在 annotate 步骤读取 `data/products/{brand}/accessories.json` 自动注入。识图时只记录图片中**可见**商品。
 
 ---
 
 ## §4 商品参考库维护规范
 
+### 目录结构（多品牌）
+
+```
+data/products/
+  kgos/            ← KGOS 品牌（原有文件）
+    features.json  ← 商品视觉特征库
+    益生菌.jpg
+    ...
+  hee/             ← 悦希（HEE）品牌
+    features.json  ← 商品视觉特征库
+    accessories.json ← 不可见配件规则（每次活动更新）
+    悦颜霜.jpg
+    ...
+```
+
+### 图片维护规范
+
 - 文件名用商品中文名（如 `益生菌.jpg`、`黑茶体验装-茉莉花茶味.jpg`）
 - 同款不同规格：正装无后缀、体验装加"体验装"前缀
-- 视觉特征记录在 `data/products/features.json`，字段：颜色、特征、别名
 - **每次新增图片必须打开确认内容与文件名一致**（教训：预存 `益生菌.jpg` 实为阻断片）
+
+### features.json 维护规范
+
+- 视觉特征记录在 `data/products/{brand}/features.json`，字段：`erpName`（必填）、`颜色`、`特征`、`别名`
+- `erpName` 必须与 ERP 档案V2 精确一致，脚本做 Set 等值比对
+
+### accessories.json — 不可见配件规则（悦希专用）
+
+**用途**：声明哪些货号（productCode）在 ERP 套件中含有图片不可见的配件（礼盒/礼袋/雪梨纸等）。
+**更新时机**：每次活动前，由用户直接编辑 `data/products/hee/accessories.json`。
+**注入时机**：annotate 步骤自动读取，追加到 recognition.items，识图不需要手动处理配件。
+
+```json
+{
+  "_meta": { "campaign": "2026年X月活动", "lastUpdated": "YYYY-MM-DD" },
+  "rules": {
+    "yxxh-cx": {
+      "note": "修颜四件组礼盒套装",
+      "accessories": [
+        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
+        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
+        { "erpName": "HEE悦希雪梨纸", "qty": 2 }
+      ]
+    }
+  }
+}
+```
+
+**注意**：
+- `erpName` 必须与 features.json 中的 erpName 完全一致（脚本精确匹配）
+- 键 = productCode（货号），同一货号下所有 SKU 共享配件规则
+- 配件商品本身也需要在 features.json 中有条目（ERP 搜索时需要精确名称）
+- 示例条目（`_` 开头的键）会被自动过滤，可保留作为格式参考
 
 ---
 

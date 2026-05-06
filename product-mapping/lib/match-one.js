@@ -46,10 +46,10 @@ function stageAtLeast(current, required) {
  * @param {string} jlId    - 鲸灵 targetId（暂未使用，预留）
  * @param {string} shopName
  * @param {string} productCode
- * @param {{ from?: string }} opts
+ * @param {{ from?: string, brand?: string }} opts
  */
 async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
-  const { from } = opts;
+  const { from, brand = 'kgos' } = opts;
 
   // --from 非法值校验
   if (from && !STEPS.includes(from)) {
@@ -84,7 +84,7 @@ async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
   // 步骤 1：读取 SKU 列表
   if (startIdx <= 1) {
     console.error(`[match-one] ── 步骤2/7：读取 SKU 列表 ──`);
-    const r = await readSkus(erpId, shopName, productCode);
+    const r = await readSkus(erpId, shopName, productCode, { brand });
     console.error(`[match-one] SKU 数: ${r.data.skuCount}`);
   }
 

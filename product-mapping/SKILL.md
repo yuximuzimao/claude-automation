@@ -67,8 +67,9 @@ download → read_skus → recognize → annotate → match → read_erp → ver
 (anchor: downloadProducts, readSkus, annotate, remapSingle, createSuite, readErpCodes, verifyArchive)
 ```
 
-- `recognize` 步骤由 Claude 手动执行，脚本到此暂停
-- 支持 `--from annotate` 从中间步骤续跑
+- `recognize` 步骤由 Claude 手动执行，脚本到此暂停（**只识图片可见商品，不识配件**）
+- `annotate` 步骤自动注入不可见配件（读 `data/products/{brand}/accessories.json`）
+- 支持 `--from annotate` 从中间步骤续跑；`--brand hee` 指定品牌（默认 `kgos`）
 - `stage` 状态机：`skus_read → images_done → annotated → matched → verified`
 
 ### 档案V2 查询流程
@@ -141,6 +142,9 @@ visible.querySelector('button.el-button--primary').click();
 
 ## PATHS
 
+data/products/kgos/features.json
+data/products/hee/features.json
+data/products/hee/accessories.json
 lib/archive.js
 lib/auto-match.js
 lib/auto-match2.js

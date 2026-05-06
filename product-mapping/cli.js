@@ -176,17 +176,20 @@ async function main() {
       break;
     }
     case 'match-one': {
-      // 解析 --from 参数
+      // 解析 --from / --brand 参数
       const fromIdx = args.indexOf('--from');
       const fromStep = fromIdx >= 0 ? args[fromIdx + 1] : undefined;
-      const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep);
+      const brandIdx = args.indexOf('--brand');
+      const brandArg = brandIdx >= 0 ? args[brandIdx + 1] : 'kgos';
+      const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep && a !== brandArg);
       if (!opts.shop || !productCode) {
-        console.error('用法: node cli.js match-one <货号> --shop <店铺> [--from <步骤>]');
+        console.error('用法: node cli.js match-one <货号> --shop <店铺> [--from <步骤>] [--brand <品牌>]');
         console.error('步骤可选值: download, read_skus, recognize, annotate, match, read_erp, verify');
+        console.error('品牌可选值: kgos（默认）, hee');
         process.exit(1);
       }
       const { matchOne } = require('./lib/match-one');
-      const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep });
+      const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep, brand: brandArg });
       console.log(JSON.stringify(result, null, 2));
       break;
     }
