@@ -156,23 +156,65 @@ if (window.location.hash !== targetHash) {
 
 ### 3.2 ERP 登录状态检测与恢复
 
-```javascript
-// 检测掉线
-var isLoggedOut = window.location.href.includes("login") ||
-                  !document.title.includes("快麦ERP--");
+**检测方法**（`checkLogin()` 在 `lib/erp/navigate.js`）：
 
-// 掉线处理（无需填密码，浏览器已记住）
-location.reload();  // 等 3 秒
-// 勾选协议：clickAt: .iCheck-helper
-// 验证：document.querySelector("input[type=checkbox]").checked === true
-// 点登录按钮：
-var btn = Array.from(document.querySelectorAll("button"))
-  .find(b => b.textContent.trim().includes("登"));
-btn.click();  // 等 5 秒
-// 验证：document.title.includes("快麦ERP--") === true
+```javascript
+// 任意一条为 true 则判定未登录
+url.includes('login')
+|| !title.includes('快麦ERP--')
+|| !!document.querySelector('.inner-login-wrapper')  // session 超时弹窗
 ```
 
-> ⚠️ 禁止填密码框——浏览器已记住密码，手动填入会触发验证码
+**恢复机制（3 层防御，`recoverLogin()` 在 `lib/erp/navigate.js`）**：
+
+```
+Phase 1: Chrome 自动填充（单次尝试，确定性）
+  a) 若当前 URL 含 login → 跳过 reload（避免清除已填充密码）
+  b) 若非 login 页 → location.reload()，等 5s，等待 .inner-login-wrapper 出现
+  c) cdp.clickAt('input[name="userName"]') → sleep 1.5s
+  d) cdp.clickAt('input[type="password"]') → sleep 2s
+  e) 检查密码框 value.length > 0
+  ↓ 密码框仍为空 + env vars 已配置？进 Phase 2
+
+Phase 2: CDP 凭据注入（deterministic fallback）
+  需要环境变量：ERP_USERNAME / ERP_PASSWORD（在 ~/.claude/settings.json env 块配置）
+  三级降级注入：
+    Level 1: nativeInputValueSetter + dispatchEvent('input'/'change') → 读回校验
+    Level 2: element.focus() + document.execCommand('insertText') → 读回校验
+    Level 3: cdp.clickAt(input) + cdp.typeText(password) → 读回校验
+  任意一级成功（pwdInput.value === password）继续登录流程
+
+Phase 3: 点登录按钮 → 等协议弹窗 → 点同意（input.rc-btn-ok）
+  checkLogin() 确认 loggedIn: true → 成功
+  否则 → 抛错（触发熔断计数）
+```
+
+**熔断器**（`data/erp-circuit-breaker.json`）：
+- 连续 3 次认证失败（`classifyErpError()` 返回 true）→ `state: 'open'`
+- 熔断冷却 15 分钟 → `state: 'half_open'` → 允许一次探测
+- 熔断中任何 `erpNav()` 调用立即返回熔断错误，不重试
+
+**保活心跳**（`server.js startErpHeartbeat()`）：
+- 每 1 小时检查 ERP 登录状态
+- 已登录 → `fetch(location.href + '?_t=Date.now(), {credentials:'include'})` 续期 session
+  → fetch 后再调 `checkLogin()` 验证 session 仍有效
+  → 失败则降级到 `recoverLogin()`
+- 未登录 → 直接 `recoverLogin()`
+- 连续失败超过 30 分钟 → 重复 macOS 通知告警
+
+**ERP 健康状态文件**（`data/erp-health.json`，读合并写，不会覆盖丢字段）：
+```json
+{
+  "status": "up",
+  "lastOkTime": "ISO",
+  "lastFailTime": "ISO",
+  "lastAlertTime": "ISO",
+  "failReason": "...",
+  "consecutiveAuthFail": 0
+}
+```
+
+> ⚠️ 凭据注入的 env vars（`ERP_USERNAME`/`ERP_PASSWORD`）配置在 `~/.claude/settings.json` 的 `env` 块中。未配置时 Phase 2 自动跳过，行为与旧版相同（向后兼容）。
 
 ### 3.3 ERP 订单详情弹窗（查物流）
 

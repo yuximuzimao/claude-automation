@@ -106,9 +106,13 @@ await cdp.navigate(targetId, 'https://...');
 
 ### 登录恢复机制
 
-- 触发条件：`checkLogin()` 返回 `loggedIn: false`
-- 处理：`recoverLogin()` 自动填充账号密码+点击登录
-- 密码框：必须 `cdp.clickAt(targetId, 'input[type="password"]')` 触发 Chrome 自动填充
+- 触发条件：`checkLogin()` 返回 `loggedIn: false`（URL 含 login / title 不含快麦ERP-- / 有 `.inner-login-wrapper` 弹窗）
+- **Phase 1**：Chrome 自动填充（单次尝试）— 若当前在 login 页则跳过 reload（避免清除已填充密码），clickAt 用户名框 → clickAt 密码框 → 检查密码是否被填入
+- **Phase 2**（密码仍为空且配置了 ERP_USERNAME/ERP_PASSWORD）：三级凭据注入降级（nativeSetter → execCommand → CDP typeText），每级注入后读回校验
+- **Phase 3**：点登录按钮 → 等协议弹窗 → 点同意 → checkLogin 确认
+- 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
+- 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知
+- 详见 `docs/ops-tech.md §3.2`
 
 ## FAILURE PATTERNS
 
@@ -126,6 +130,8 @@ await cdp.navigate(targetId, 'https://...');
 | 10 | collect.js 失败无上限导致死循环 | 失败→重置 pending→pipeline 重采→又失败→无限。collectRetries 计数器 3 次上限后标记 simulated；成功后（进入 inferring）清零 |
 | 11 | querySelector 未过滤隐藏元素导致假阴性 | `document.querySelector('.el-input__inner[placeholder="X"]')` 返回 DOM 序第一个元素（可能隐藏 0×0），导致后续 Vue 父链遍历找不到 dataList。必须与其他函数一致：`querySelectorAll` + `getBoundingClientRect` 过滤 `r.width>0 && r.height>0` 再取第一个可见元素。案例：2026-05-04 archive.js READ_DATALIST_JS 读到隐藏的"主商家编码" input → dataList 为空 |
 | 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击 `a.ml_15` 时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
+| 13 | Chrome 自动填充只触发一次 | Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试而非 3 次循环；仍失败时进 Phase 2 凭据注入而不是重试 reload。单点依赖 Chrome 自动填充是 ERP session 反复失效的根因。 |
+| 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
 
 ## PATHS
 
