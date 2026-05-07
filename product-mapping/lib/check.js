@@ -53,8 +53,12 @@ async function runCheck(jlId, erpId, shopName) {
     fs.mkdirSync(path.join(__dirname, '../data/imgs'), { recursive: true });
 
     // 读取识图记录（sku-records.json），用于报告对比
+    // 兼容两种格式：match-one 格式 {stage,skus:{platformCode→rec}} 和旧平铺格式 {platformCode→rec}
     let skuRecords = {};
-    try { skuRecords = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8')); } catch (_) {}
+    try {
+      const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+      skuRecords = raw.skus || raw;
+    } catch (_) {}
 
     // 5. 逐产品核查
     console.error('[check] 4/4 逐产品核查...');
@@ -233,7 +237,10 @@ async function runCheck(jlId, erpId, shopName) {
       try {
         const records = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
         const activeScope = `active-${dateStr}`;
-        for (const [code, rec] of Object.entries(records)) {
+        // 兼容 match-one 格式（{stage,skus:{...}}）和旧平铺格式（{platformCode→rec}）
+        const flatRecords = records.skus || records;
+        for (const [code, rec] of Object.entries(flatRecords)) {
+          if (typeof rec !== 'object' || rec === null) continue;
           if (activePlatformCodes.has(code)) {
             rec.scope = activeScope;
           } else if (!rec.scope) {
