@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const cdp = require('./cdp');
 const { sleep, retry } = require('./wait');
+const { acquireErpLock } = require('./erp-lock');
 
 const PAGE_MAP = {
   '商品档案V2': '#/prod/parallel/',
@@ -169,6 +170,7 @@ async function waitForPageContent(targetId, pageName) {
 // 优化：6 小时内 session 有效时跳过 location.reload()，只做轻量 DOM 检测
 // 只在 session 过期 或 切换到不同页面 时才做完整刷新
 async function navigateErp(targetId, pageName) {
+  await acquireErpLock(); // 暂停 aftersales 定时任务，防止干扰 ERP 操作
   const targetHash = PAGE_MAP[pageName];
   if (!targetHash) throw new Error(`未知页面: ${pageName}，可用: ${Object.keys(PAGE_MAP).join(', ')}`);
 

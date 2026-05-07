@@ -12,6 +12,7 @@ const { readAllCorrespondence } = require('./correspondence');
 const { initArchiveComp, queryArchive, querySubItems } = require('./archive');
 const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
+const { releaseErpLock } = require('./erp-lock');
 
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
@@ -24,6 +25,7 @@ const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
  * @returns {Promise<object>} 核查报告
  */
 async function runCheck(jlId, erpId, shopName) {
+  try {
   const report = {
     shop: shopName,
     checkTime: new Date().toISOString(),
@@ -246,6 +248,9 @@ async function runCheck(jlId, erpId, shopName) {
   }
 
   return report;
+  } finally {
+    await releaseErpLock();
+  }
 }
 
 module.exports = { runCheck };

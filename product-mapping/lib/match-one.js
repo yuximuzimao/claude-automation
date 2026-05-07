@@ -17,6 +17,7 @@ const { createSuite } = require('./ops/create-suite');
 const { readErpCodes } = require('./ops/read-erp-codes');
 const { verifyArchive } = require('./ops/verify-archive');
 const { safeWriteJson } = require('./utils/safe-write');
+const { releaseErpLock } = require('./erp-lock');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 
@@ -49,6 +50,7 @@ function stageAtLeast(current, required) {
  * @param {{ from?: string, brand?: string }} opts
  */
 async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
+  try {
   const { from, brand = 'kgos' } = opts;
 
   // --from 非法值校验
@@ -159,6 +161,9 @@ async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
   }
 
   return { done: true };
+  } finally {
+    await releaseErpLock();
+  }
 }
 
 module.exports = { matchOne, STEPS };

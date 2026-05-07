@@ -24,6 +24,7 @@ entry: cli.js
 | `lib/cdp.js` | CDP HTTP proxy 客户端（localhost:3456），fallback 直连 | 写浏览器操作时 |
 | `lib/targets.js` | 查找 ERP 浏览器 tab ID（固定 `1F46BAA...`） | 需要定位 ERP 标签时 |
 | `lib/navigate.js` | ERP 页面导航（reload→登录→切tab） | ERP 页面跳转时 |
+| `lib/erp-lock.js` | ERP 操作锁（acquireErpLock/releaseErpLock）暂停 aftersales | 任何 ERP 操作（navigateErp 自动调用） |
 | `lib/correspondence.js` | 商品对应表读取 | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
@@ -159,6 +160,7 @@ lib/jl-sku-detail.js
 lib/mark-suite.js
 lib/match-one.js
 lib/match.js
+lib/erp-lock.js
 lib/navigate.js
 lib/remap-sku.js
 lib/result.js
