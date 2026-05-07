@@ -18,11 +18,29 @@ const { navigateErp } = require('./navigate');
 async function downloadPlatformProducts(erpId, shopName) {
   console.error('[corr] 触发「下载平台商品」...');
 
+  // 前置清理：关闭页面上可能残留的旧下载弹窗（避免干扰新对话框检测）
+  await cdp.eval(erpId,
+    '(function(){' +
+    '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
+    '  for(var i=0;i<ds.length;i++){' +
+    '    if(ds[i].getBoundingClientRect().height>0){' +
+    '      var btns=Array.from(ds[i].querySelectorAll("button"));' +
+    '      var cancel=btns.find(function(b){return b.innerText.trim()==="取消";});' +
+    '      if(cancel){cancel.click();continue;}' +
+    '      var close=ds[i].querySelector(".el-dialog__headerbtn");' +
+    '      if(close) close.click();' +
+    '    }' +
+    '  }' +
+    '})()'
+  );
+  await sleep(500);
+
   // 按优先级尝试多种按钮文字
   const clicked = await cdp.eval(erpId,
     '(function(){' +
+    // 只在 button 里找，避免误点同名 <div>（如 .download-commodity）
     '  var candidates=["下载平台商品","下载商品","同步平台商品","同步商品"];' +
-    '  var all=Array.from(document.querySelectorAll("button,span,a,div"));' +
+    '  var all=Array.from(document.querySelectorAll("button"));' +
     '  for(var ci=0;ci<candidates.length;ci++){' +
     '    var t=all.find(function(el){' +
     '      return el.innerText&&el.innerText.trim()===candidates[ci]&&el.getBoundingClientRect().width>0;' +
@@ -31,7 +49,7 @@ async function downloadPlatformProducts(erpId, shopName) {
     '  }' +
     '  var texts=all.filter(function(el){' +
     '    return el.getBoundingClientRect().width>0&&el.innerText&&el.innerText.trim().length>0&&el.innerText.trim().length<20;' +
-    '  }).map(function(el){return el.tagName+":"+el.innerText.trim();}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,40);' +
+    '  }).map(function(el){return el.innerText.trim();}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,40);' +
     '  return "NOT_FOUND:"+texts.join("|");' +
     '})()'
   );
@@ -40,7 +58,7 @@ async function downloadPlatformProducts(erpId, shopName) {
     throw new Error(`未找到「下载平台商品」按钮。页面可见元素: ${clicked.replace('NOT_FOUND:', '')}`);
   }
   console.error(`[corr] ${clicked}`);
-  await sleep(1500);
+  await sleep(3000);
 
   // 验证弹窗出现
   const dialogVisible = await cdp.eval(erpId,
@@ -48,26 +66,74 @@ async function downloadPlatformProducts(erpId, shopName) {
   );
   if (!dialogVisible) throw new Error('点击下载按钮后弹窗未出现');
 
-  // 选择店铺（el-select，用 Vue emit 避免 close-on-click-modal）
+  // 选择店铺：
+  // 1. 通过 ElSelectShop vm.options 找目标店铺 value
+  // 2. emit 设 ElSelectShop 自身 value
+  // 3. 向上遍历找 DownLoadCommodity（有 bindShops/userIds 字段），直接设值
+  //    原因：ElSelectShop 的 emit 不能自动上传到父组件
   const shopSelected = await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
     '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
     '  if(!d)return "no-dialog";' +
-    '  var sels=d.querySelectorAll(".el-select");' +
-    '  for(var j=0;j<sels.length;j++){' +
-    '    var vm=sels[j].__vue__;if(!vm)continue;' +
-    '    var opts=(vm.$children||[]).filter(function(c){return c.$options&&c.$options.name==="ElOption";});' +
-    '    var target=opts.find(function(o){return (o.label||"").includes(' + JSON.stringify(shopName) + ');});' +
-    '    if(target){vm.$emit("input",target.value);vm.$emit("change",target.value);return "selected:"+target.label;}' +
-    '    return "not-found:"+opts.map(function(o){return o.label;}).join(",");' +
+    '  var sel=d.querySelector(".el-select");' +
+    '  if(!sel)return "no-select";' +
+    '  var vm=sel.__vue__;' +
+    '  if(!vm)return "no-vue";' +
+    '  var opts=vm.options||[];' +
+    '  var target=opts.find(function(o){return (o.label||"").includes(' + JSON.stringify(shopName) + ');});' +
+    '  if(!target)return "not-found:"+opts.map(function(o){return o.label;}).join(",");' +
+    // 设 ElSelectShop 自身 value
+    '  vm.visible=false;' +
+    '  vm.$emit("input",[target.value]);' +
+    '  vm.$emit("change",[target.value]);' +
+    // 向上遍历找有 bindShops 或 userIds 的父组件（DownLoadCommodity）
+    '  var parent=vm.$parent;' +
+    '  for(var i=0;i<15&&parent;i++){' +
+    '    if(typeof parent.bindShops!=="undefined"||typeof parent.userIds!=="undefined")break;' +
+    '    parent=parent.$parent;' +
     '  }' +
-    '  return "no-select";' +
+    '  var result="selected:"+target.label+":"+target.value;' +
+    // bindShops 是店铺对象数组（不是 ID 数组），禁止直接赋值，否则破坏数据结构
+    // userIds 是已选店铺 ID 数组，通过 v-model 绑定到 el-select
+    '  if(parent){' +
+    '    if(typeof parent.userIds!=="undefined"){parent.userIds=[target.value];result+=" |userIds-set";}' +
+    '  } else {result+=" |no-parent";}' +
+    '  return result;' +
     '})()'
   );
   console.error(`[corr] 店铺选择: ${shopSelected}`);
   if (!shopSelected.startsWith('selected:')) {
     throw new Error(`下载弹窗未找到店铺「${shopName}」: ${shopSelected}`);
+  }
+  await sleep(300);
+
+  // 验证：DownLoadCommodity bindShops 包含目标店铺
+  const verifyParent = await cdp.eval(erpId,
+    '(function(){' +
+    '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
+    '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
+    '  if(!d)return "no-dialog";' +
+    '  var sel=d.querySelector(".el-select");' +
+    '  if(!sel||!sel.__vue__)return "no-vue";' +
+    '  var vm=sel.__vue__;' +
+    '  var parent=vm.$parent;' +
+    '  for(var i=0;i<15&&parent;i++){' +
+    '    if(typeof parent.bindShops!=="undefined"||typeof parent.userIds!=="undefined")break;' +
+    '    parent=parent.$parent;' +
+    '  }' +
+    '  if(!parent)return "no-parent";' +
+    '  return JSON.stringify({userIds:parent.userIds});' +
+    '})()'
+  );
+  console.error(`[corr] DownLoadCommodity 验证: ${JSON.stringify(verifyParent)}`);
+  if (typeof verifyParent === 'string') {
+    throw new Error(`无法找到父组件 DownLoadCommodity: ${verifyParent}`);
+  }
+  const parentData = verifyParent;
+  const hasShop = (parentData.userIds||[]).length > 0;
+  if (!hasShop) {
+    throw new Error(`店铺选择验证失败，userIds未更新: ${JSON.stringify(parentData)}`);
   }
   await sleep(500);
 
