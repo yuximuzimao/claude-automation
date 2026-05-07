@@ -25,6 +25,7 @@ async function main() {
   node cli.js match-test "<SKU名>" "<识图描述>" — 测试 SKU名 vs 识图结果比对
   node cli.js fetch-archive-names             — 读取档案V2普通商品全列表（含简称）
   node cli.js mark-suite <店铺> <货号> <平台编码> — 对应表标记套件（只处理单个SKU）
+  node cli.js download-products --shop <店铺>   — 仅下载平台商品（只需 ERP tab，不需鲸灵）
   node cli.js match --shop <店铺> [--limit N]    — 自动匹配（组合装套件+单品，任何异常立即停止）`);
     process.exit(0);
   }
@@ -109,7 +110,21 @@ async function main() {
     return;
   }
 
-  // ── 其他命令需要浏览器标签页 ID ──
+  // ── 只需 ERP tab 的命令（不调用 getTargetIds，避免鲸灵 tab 未开时报错） ──
+  if (cmd === 'download-products') {
+    if (!opts.shop) { console.error('用法: node cli.js download-products --shop <店铺>'); process.exit(1); }
+    const cdp = require('./lib/cdp');
+    const { downloadProducts } = require('./lib/ops/download-products');
+    const targets = await cdp.getTargets();
+    const erp = targets.find(t => t.url && t.url.includes('superboss.cc'));
+    if (!erp) { console.error('ERP tab 未找到，请确认快麦 ERP 已在浏览器中打开'); process.exit(1); }
+    const erpId = erp.targetId || erp.id;
+    await downloadProducts(erpId, opts.shop);
+    console.log(JSON.stringify(ok({ done: true })));
+    return;
+  }
+
+  // ── 其他命令需要两个浏览器标签页 ID ──
   const { jlId, erpId } = await getTargetIds();
 
   switch (cmd) {
