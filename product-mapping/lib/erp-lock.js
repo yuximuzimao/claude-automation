@@ -19,14 +19,10 @@ const MAX_LOCK_MS = 5 * 60 * 1000; // 5 分钟超时保护
 let locked = false;
 let lockTimer = null;
 
-async function _doEmergencyStop() {
-  const res = await fetch(`${AFTERSALES_API}/emergency-stop`, { method: 'POST' });
-  if (process.env.VERBOSE) process.stderr.write('[erp-lock] aftersales 已暂停\n');
-}
-
-async function _doResume() {
-  await fetch(`${AFTERSALES_API}/resume`, { method: 'POST' });
-  if (process.env.VERBOSE) process.stderr.write('[erp-lock] aftersales 已恢复\n');
+async function _callApi(endpoint, logMsg) {
+  const res = await fetch(`${AFTERSALES_API}/${endpoint}`, { method: 'POST' });
+  if (!res.ok) throw new Error(`aftersales API ${endpoint} failed: ${res.status}`);
+  if (process.env.VERBOSE) process.stderr.write(`[erp-lock] ${logMsg}\n`);
 }
 
 function _resetTimer() {
@@ -34,7 +30,12 @@ function _resetTimer() {
   lockTimer = setTimeout(async () => {
     locked = false;
     lockTimer = null;
-    try { await _doResume(); } catch (_) {}
+    try {
+      await _callApi('resume', 'aftersales 已恢复（超时保护）');
+    } catch (e) {
+      // aftersales server 可能已关闭，超时恢复失败可忽略
+      if (process.env.VERBOSE) process.stderr.write(`[erp-lock] resume failed: ${e.message}\n`);
+    }
   }, MAX_LOCK_MS);
 }
 
@@ -43,10 +44,10 @@ function _resetTimer() {
  */
 async function acquireErpLock() {
   _resetTimer();
-  if (locked) return; // 已加锁，只重置计时器
+  if (locked) return;
   locked = true;
   try {
-    await _doEmergencyStop();
+    await _callApi('emergency-stop', 'aftersales 已暂停');
   } catch (_) {
     // aftersales server 未运行，无需锁
     if (process.env.VERBOSE) process.stderr.write('[erp-lock] aftersales server 未运行，跳过\n');
@@ -61,7 +62,7 @@ async function releaseErpLock() {
   if (!locked) return;
   locked = false;
   try {
-    await _doResume();
+    await _callApi('resume', 'aftersales 已恢复');
   } catch (_) {
     // aftersales server 未运行，忽略
   }
