@@ -250,3 +250,88 @@ data/products/
 - `[1/2026-04]` **脚本长时间运行用 run_in_background**：`node lib/auto-match2.js` 同步跑时全量 stderr 输出消耗大量 token。正确：`run_in_background: true`，结束后只读 `data/auto-match-log.json` 的 done/failed 数字
 - `[1/2026-04-30]` **对应表搜索输入框是 `.el-input-popup-editor input`**：form-item[4] 是"精确搜索"下拉框，form-item[5] 是"平台商家编码"下拉框，form-item[6] 的 `el-input-popup-editor` 才是真正的搜索输入框。把货号输入到下拉框会导致搜索无效、表格不刷新。`_setMainPageSelect` 索引：精确搜索=4，平台商家编码=5（排除 dialog 内的 select 后）
 - `[∞/永久保留]` **#48 读表数据用<th>表头定位，禁用正则/长度过滤**：子品弹窗表读取必须通过 `<th>` 表头文本（"商品名称"/"商家编码"/"组合比例"）定位列索引。禁止硬编码固定位置 [1][3][10]，禁止对 specCode/name 做正则匹配过滤——会把非数字编码（kgoxnld等）合法行当垃圾误杀。
+- `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
+- `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
+- `[1/2026-05-07]` **readAllCorrespondence 有副作用**：内部硬编码调用 downloadPlatformProducts()，不是只读操作。仅查询数据时用 readCorrespondence()（待实现），需要刷新数据时才用 readAllCorrespondence()。
+
+---
+
+## §7 品牌建档 SOP（新品牌上线前必做）
+
+> **入口**：开始前先读 `docs/preflight-brand.md` checklist，确认全部通过再进入下一步
+
+### 什么时候需要做品牌建档？
+
+- 首次对一个品牌做视觉核查（如本次 HEE）
+- 品牌添加了新产品（对 features.json 做增量更新）
+- 数据被污染需要重建
+
+### 完整流程（Step 0 → Step 6）
+
+```
+Step 0: 清空旧数据工作区（止血步骤，等待架构重构后自动化）
+  - 备份：cp -r data/imgs data/imgs.bak.$(date +%Y%m%d)
+  - 清空：rm -f data/imgs/*
+  - 清空 sku-records.json（如果是新品牌/新店铺）
+  - 清空 data/products/{brand}/sku-map.json（如果存在）
+
+Step 1: 获取全量数据
+  - 跑 node cli.js check --shop <店铺>
+  - 产出：data/imgs/（SKU 图片）+ data/reports/check-{shop}-{date}.json
+  - 注意：check 会自动下载图片，这是唯一合法的图片来源
+
+Step 2: 建立 sku-map（货号→platformCode 追踪台账）
+  - 从 check 报告提取所有产品的 {productCode → [{platformCode, skuName, erpCode, erpName}]}
+  - 存入 data/products/{brand}/sku-map.json
+  - 当前手动执行；第三个品牌建档时实现自动化脚本
+
+Step 3: 下载/整理参考图片
+  - 目标：data/products/{brand}/*.jpg（单品标准图，命名=商品中文名）
+  - 来源：从 data/imgs/ 中找对应 platformCode 的图片复制
+    - 查 sku-map：商品中文名 → 货号 → platformCode
+    - cp data/imgs/{platformCode}.jpg data/products/{brand}/{商品名}.jpg
+  - "不在对应表"的产品：需额外获取图片（见下方异常处理）
+
+Step 4: 建立/完善 features.json
+  - 每个 ERP 活跃产品需要一个条目
+  - erpName 必须与 ERP 档案V2 精确一致（可从 check 报告的 archiveTitle 字段获取）
+  - 颜色 + 特征字段描述视觉识别依据
+  - 如有体验装/正装两个版本，分别建条目
+
+Step 5: 交叉验收（Phase Gate — 全部通过才算建档完成）
+
+  自动可验（可写脚本或人工检查）：
+  ✅ #1 sku-map keys 覆盖所有活动产品（无遗漏）
+  ✅ #2 sku-map 中每个 platformCode 在 data/imgs/ 都有对应图片
+  ✅ #4 features.json 产品数 = ERP 档案V2 该品牌活跃产品数
+  ✅ #6 data/imgs/ 中无跨品牌图片（或确认品牌作用域已隔离）
+  ✅ #7 features.json 每个条目都有对应参考图（data/products/{brand}/{name}.jpg）
+
+  必须人工执行：
+  👁 #3 随机抽 5+ 张图片目视 spot-check，确认内容与产品名一致
+  👁 #5 随机抽 5~10 个 SKU 实跑识图，确认 features.json 可正确匹配
+
+Step 6: 记录建档时间戳
+  - 在 data/products/{brand}/features.json 的 _meta.lastUpdated 更新日期
+```
+
+### "不在对应表"产品的图片获取
+
+有些产品活动期间不通过对应表销售（如礼盒整体包装图），需要特殊处理：
+1. 确认该产品是否在鲸灵活动中（check 报告显示"不在对应表"）
+2. 通过 ERP 档案V2 查询该产品的实物图
+3. 或由用户直接提供参考图片
+
+### 长期架构方向（当前为止血补丁）
+
+**当前问题**：所有品牌数据混在 `data/imgs/` 和 `data/sku-records.json`，品牌切换时需手动清空。
+
+**目标架构**（重构 ticket 已建立，触发条件：第二个品牌建档开始前）：
+```
+data/brands/{brand}/
+  imgs/           ← 该品牌 SKU 图片（隔离）
+  sku-records.json
+  sku-map.json
+  check-report.json
+  ref-imgs/       ← 参考图（原 data/products/{brand}/）
+```

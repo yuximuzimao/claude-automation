@@ -119,6 +119,30 @@ matchStatus 四态：`unmatched / matched-original / matched-ai / failed-ai`
   - 在 _sandbox/ 写独立测试脚本，验证 `el-table.__vue__.clearSelection()` 能否清除 Vue 状态
   - 通过后更新 auto-match2.js 并记录到 docs/INDEX.md §6
 
+## 架构重构 Ticket
+
+### TICKET: 品牌作用域隔离重构
+
+**触发条件**：第二个品牌（非 kgos、非 hee）建档开始前，必须先完成此重构。
+
+**当前问题**：所有品牌数据混在全局目录（`data/imgs/`、`data/sku-records.json`），品牌切换依赖人工清空。
+
+**目标架构**：
+```
+data/brands/{brand}/
+  imgs/              ← 该品牌 SKU 图片（隔离）
+  sku-records.json   ← 该品牌 SKU 元数据
+  sku-map.json       ← 货号→platformCode 映射台账
+  check-report.json  ← 最新 check 快照
+  ref-imgs/          ← 参考图（原 data/products/{brand}/）
+```
+
+**影响文件**：`lib/visual.js`（imgPath 函数）、`lib/check.js`（SKU_RECORDS_PATH）、`lib/correspondence.js`、所有读写 `data/imgs/` 的模块（6+ 个文件）。
+
+**sku-map 自动生成**（Step 2 自动化）：第三个品牌建档时，同步实现从 check 报告自动生成 sku-map.json 的脚本。
+
+---
+
 ## 已完成
 - [x] 澜泽活动 107 SKU 全部完成 auto-match2（2026-04-22）
 - [x] ERP 体验装口味错误 15 条套件子品已由人工修正（2026-04-22）

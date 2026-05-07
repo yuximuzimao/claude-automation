@@ -17,6 +17,8 @@ const { waitFor, sleep } = require('../wait');
 const MAIN_ROW_PRODUCT_CODE_COL = 6;
 // 子行列索引
 const SUB_COL = { skuName: 4, platformCode: 5, erpName: 10, erpCode: 11 };
+// 平台 SKU 图片列索引（2026-05-07 CDP inspect 验证：img[0] 在 td[3]，parent=el-image）
+const PLATFORM_IMG_TD_IDX = 3;
 
 async function readTableRows(erpId, { fields, expectedProductCode }) {
   if (!expectedProductCode) throw new Error('readTableRows: expectedProductCode 必传');
@@ -107,8 +109,16 @@ async function readTableRows(erpId, { fields, expectedProductCode }) {
     '    sku.erpCode=erpCodeInp?erpCodeInp.value:"";' +
     '    var erpNameInp=tds[10].querySelector("input");' +
     '    sku.erpName=erpNameInp?erpNameInp.value:"";' +
+    // 取平台 SKU 图片（td[3]，左侧列）。断言 td 索引 = PLATFORM_IMG_TD_IDX=3，
+    // 防止 ERP 产品图（右侧 td[12+]）被误取。
     '    var imgs=rows[i].querySelectorAll("img");' +
-    '    sku.imgUrl=(imgs[0]&&imgs[0].src&&imgs[0].src.indexOf("http")===0)?imgs[0].src:"";' +
+    '    var imgEl=imgs[0]||null;' +
+    '    if(imgEl){' +
+    '      var imgTd=imgEl.closest("td");' +
+    '      var imgTdIdx=imgTd?Array.from(rows[i].querySelectorAll("td")).indexOf(imgTd):-1;' +
+    '      if(imgTdIdx!==' + PLATFORM_IMG_TD_IDX + '){imgEl=null;sku._imgColumnMismatch=true;}' +
+    '    }' +
+    '    sku.imgUrl=(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0)?imgEl.src:"";' +
     '    result.push(sku);' +
     '  }' +
     '  return JSON.stringify(result);' +

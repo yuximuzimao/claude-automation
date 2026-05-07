@@ -12,6 +12,7 @@ entry: cli.js
 3. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
 4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
 5. **写操作（新增匹配）必须人工确认后执行**
+6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/INDEX.md §7`（SOP 完整流程）
 
 ## ENTRY MAP
 
@@ -25,7 +26,7 @@ entry: cli.js
 | `lib/targets.js` | 查找 ERP 浏览器 tab ID（固定 `1F46BAA...`） | 需要定位 ERP 标签时 |
 | `lib/navigate.js` | ERP 页面导航（reload→登录→切tab） | ERP 页面跳转时 |
 | `lib/erp-lock.js` | ERP 操作锁（acquireErpLock/releaseErpLock）暂停 aftersales | 任何 ERP 操作（navigateErp 自动调用） |
-| `lib/correspondence.js` | 商品对应表读取 | 查对应表数据时 |
+| `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
@@ -146,6 +147,8 @@ visible.querySelector('button.el-button--primary').click();
 data/products/kgos/features.json
 data/products/hee/features.json
 data/products/hee/accessories.json
+data/products/hee/sku-map.json
+docs/preflight-brand.md
 lib/archive.js
 lib/auto-match.js
 lib/auto-match2.js

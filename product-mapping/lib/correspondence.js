@@ -181,19 +181,12 @@ async function downloadPlatformProducts(erpId, shopName) {
 }
 
 /**
- * 读取指定店铺的全部商品对应关系（一次性展开读取）
- * 图片URL通过逐段滚动触发懒加载后收集
- * @param {string} erpId - ERP 标签页 targetId
- * @param {string} shopName - 店铺名，如「澜泽」
- * @returns {Promise<Array<{productCode,skus:[{skuName,platformCode,erpCode,erpName,imgUrl}]}>>}
+ * 纯读取：读取对应表数据（不触发平台商品下载）。
+ * 假设调用方已 navigateErp 到商品对应表页面。
+ * 副作用：点击店铺、空搜索、展开所有行、滚动页面。
+ * @private
  */
-async function readAllCorrespondence(erpId, shopName) {
-  // reload → 登录检测 → hash 验证（移植自售后项目 navigateErp）
-  await navigateErp(erpId, '商品对应表');
-
-  // 下载最新平台商品数据到 ERP
-  await downloadPlatformProducts(erpId, shopName);
-  console.error('[corr] 页面就绪');
+async function _readCorrData(erpId, shopName) {
 
   // 点击左侧树对应店铺
   await cdp.eval(erpId,
@@ -339,9 +332,11 @@ async function readAllCorrespondence(erpId, shopName) {
       // platformCode在cells[5]的innerText
       '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
       '      if(!pCode) continue;' +
-      '      var img=rows[j].querySelector("img");' +
-      '      if(img&&img.src&&img.src.indexOf("http")===0){' +
-      '        map[pCode]=img.src;' +
+      // 只取 td[3]（平台 SKU 图片列，2026-05-07 inspect 验证）
+      '      var imgTds=rows[j].querySelectorAll("td");' +
+      '      var imgEl=imgTds[3]?imgTds[3].querySelector("img"):null;' +
+      '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){' +
+      '        map[pCode]=imgEl.src;' +
       '      }' +
       '    }' +
       '  }' +
@@ -384,11 +379,31 @@ async function readAllCorrespondence(erpId, shopName) {
 }
 
 /**
- * 查询特定货号的对应关系
+ * 读取对应表（含下载刷新）：navigate + 下载平台商品 + 读取数据。
+ * check.js 使用——需要获取最新 SKU 映射时调用。
+ */
+async function readAllCorrespondence(erpId, shopName) {
+  await navigateErp(erpId, '商品对应表');
+  await downloadPlatformProducts(erpId, shopName);
+  console.error('[corr] 页面就绪');
+  return _readCorrData(erpId, shopName);
+}
+
+/**
+ * 只读对应表（不触发下载）：navigate + 读取数据。
+ * 当天已下载过、只需查询数据时使用。
+ */
+async function readCorrWithoutDownload(erpId, shopName) {
+  await navigateErp(erpId, '商品对应表');
+  return _readCorrData(erpId, shopName);
+}
+
+/**
+ * 查询特定货号的对应关系（不触发下载）
  */
 async function readCorrespondence(erpId, shopName, productCode) {
-  const all = await readAllCorrespondence(erpId, shopName);
+  const all = await readCorrWithoutDownload(erpId, shopName);
   return all.find(r => r.productCode === productCode) || null;
 }
 
-module.exports = { readAllCorrespondence, readCorrespondence, downloadPlatformProducts };
+module.exports = { readAllCorrespondence, readCorrWithoutDownload, readCorrespondence, downloadPlatformProducts };
