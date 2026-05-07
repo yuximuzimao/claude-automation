@@ -219,39 +219,23 @@ node cli.js erp-aftersale <快递单号>
 
 > 格式：`[触发次数/最后触发]` — 说明。触发次数≥3且超过2周未触发可清理。
 
-- `[∞/永久保留]` **#5 赠品子订单号禁止推算**：赠品子订单号禁止用主号+1推算，必须从 `giftSubBizOrderDetailDTO.subBizOrderId` 读取
-- `[∞/永久保留]` **#9 图片上传唯一路径**：curl+cookie 上传 → 注入 Vue 组件 `WorkOrderStateForm`；禁止 DataTransfer / 本地HTTP / XHR拦截器（拦截器会导致堆栈溢出无法恢复）
-- `[∞/永久保留]` **#24 备注写 shortTitle 不写编码**：备注必须写 ERP shortTitle（如"KGOS保温壶1个"），禁止写编码（如 kgosbwh），人工处理者不知道编码含义
-- `[∞/永久保留]` **#25 备注只写结论**：备注只写结论和动作，一句话，不写原因分析
-- `[∞/永久保留]` **#37 内部备注入口**：必须用「致内部」按钮；严禁点「+新增备注」（会进入供应商可见的订单备注区域）
-- `[1/2026-04]` **approve/reject 必须验证按钮消失**：操作完成后 eval 确认「同意退款」/「拒绝退款」按钮已从页面消失才算成功。返回 rejected:true 不等于按钮消失。
-- `[1/2026-04]` **El-Select 展开必须用 cdp.clickAt**：展开 El-Select 下拉必须用 `cdp.clickAt(targetId, 'input.el-input__inner[placeholder="请选择"]')`；JS `.click()` 只触发 click 不触发 mousedown，下拉不展开（静默失败）。同类：El-DatePicker 等所有弹出组件均用 cdp.clickAt。
-- `[1/2026-04]` **ERP 表格 el-input-number 值读 input.value**：ERP 表格明细行中凡是 el-input-number 列（如数量良品/次品），innerText 始终为空，必须用 `td.querySelector('input').value` 读值。
-- `[1/2026-04]` **ERP 弹窗关闭按钮类名不统一**：档案V2「子商品信息」弹窗是 `button.el-dialog__closeBtn`，不是标准 `button.el-dialog__headerbtn`。检测弹窗存在用 wrapper 可见性，关闭时两个选择器都试。
-- `[1/2026-04]` **jl-server 重启后等 pipeline 空闲**：重启后服务自动处理 queue.json pending 工单，此时浏览器被占用。任何浏览器操作前必须轮询 `GET /api/op-queue` 确认 running 为 null。
-- `[1/2026-04]` **批量操作必须完整传 source 参数**：调 archive-manual 接口时，auto_executed 工单必须传 `source: 'auto_executed'`，漏传 fallback 为 manual_handled，历史页全部显示错误来源。
-- `[1/2026-04]` **batch-execute 扫全量历史禁止误用**：`POST /api/simulations/batch-execute` 扫整个 simulations.jsonl（含历史归档），会触发数百条入队。处理当前工单用 `POST /api/queue/:id/reprocess`。
-- `[1/2026-04]` **检查脚本语法禁用 node -e require()**：`node -e "require('./scan-all')"` 会执行脚本顶层代码（触发全量扫描）。语法检查用 `node --check <file>`。
-- `[1/2026-04]` **退货快递单多次使用有两条独立路径**：① read-ticket.js 正则抓工单号时包含当前工单号自身 → 过滤 workOrderNum 本身；② pipeline.js 交叉比对时未排除同工单历史 sim → 加 `s.workOrderNum === workOrderNum` 过滤。两处都要检查。
-- `[1/2026-04]` **ERP 密码框点击触发自动填充**：ERP 完全退出到登录页，Chrome 密码自动填充需 `cdp.clickAt(targetId, 'input[type="password"]')` 触发；点账号框无效。实现见 `lib/erp/navigate.js` 场景B。
-- `[1/2026-04]` **LaunchAgent 后台禁用 Reminders.app**：后台进程发提醒必须用 `display notification`，不能 osascript 操作 Reminders.app（AppleEvent 超时 -1712）。
-- `[1/2026-04]` **测试框架触发时机**：修改 lib/ 任意文件、CLI 步骤连续出错 ≥2 次、新增 CLI 命令时，必须跑 `node test.js`。框架建立后若不主动触发等于白建。
-- `[1/2026-04]` **工单列表类型识别串位**：`list.js` 扫描窗口 `winStart = positions[t-1].idx + 1` 覆盖上一条详情行，导致类型串位。修复：`winStart = Math.max(positions[t-1].idx + 1, center - 3)`。
-- `[∞/永久保留]` **#48 读表数据用表头定位列索引，禁数据特征过滤**：`<th>` 表头文本定位列索引（"商品名称"/"商家编码"/"组合比例"），直接读。禁止用正则/关键词/长度过滤数据内容——这会把合法非数字编码（kgoxnld等）当垃圾误杀。参见 `tasks/lessons.md §48`。
-- `[∞/永久保留]` **#49 验证数据=读实时源头，不分析旧采集**：判断数据是否正确→从 ERP 页面/CLI 命令重新读取，不分析 simulations.jsonl 过期数据。验证单一环节用 CLI 直调，不走 pipeline。
-- `[1/2026-05]` **#50 后台 osascript Reminders 需降级**：无 TTY 后台进程 osascript Reminders AppleEvent -1712。用 `createReminder()` 优先 Reminders 失败降级 `display notification`。
-- `[∞/永久保留]` **#51 ERP 状态只路由不决策**：仅退款中 ERP 订单状态唯一作用是区分未发货（flow-5.2）vs 已发货（flow-5.3）。决策依据是物流数据。"交易关闭"只说明订单关了，不说明包裹已退回。必须加入 SHIPPED 常量让其走物流判断，禁止"看到状态X→直接决策Y"。
-- `[∞/永久保留]` **#52 采集按工单类型分流**：product-match/archive 唯一消费者是退货退款的逐商品核对（flow-5.1 Step4）。仅退款/换货不需要，应跳过。反之，退货退款必须遍历所有子订单做 product-match（不能只取 subOrders[0]）。
-- `[∞/永久保留]` **#53 决策只看"剩余-扫描"安全边际，不看累计等待**：累计等待时间无意义。唯一决策依据：剩余时效 - 下次扫描间隔 > 8h → 安全等待；≤ 8h → 立即拒绝防止超时自动退款。SAFETY_MARGIN_HOURS=8 常量化在 constants.js。2026-05-03 彻底移除 getWaitingHours。2026-05-03 晚追加8h安全边际。
-- `[∞/永久保留]` **#54 推理文案说人话**：escalate reason 三要素：①第一句说清根因（非表象）②无代码变量名（afterSaleNum等）③给明确建议动作。格式："对应表查无此规格：XX×N件，请确认是否为赠品"。禁止"商品档案不完整…afterSaleNum=N"。
-- `[∞/永久保留]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 必须交叉校验 accountNum 和 accountNote 的对应关系（查 accounts.json）。账号编号和店铺名不一致时拒绝，防止注入错误session导致跨商家权限拒绝[cbe]。
-- `[1/2026-05]` **#56 CLOSE_ALL_DIALOGS_JS 全量关闭**：原来只关 `.trade-detail-dialog` 漏了档案V2子品弹窗等。改为 `querySelectorAll('.el-dialog__wrapper')` 过滤 `getComputedStyle(e).display !== 'none'`。navigateErp 切页面前 + product-archive 启动时都加清理。
-- `[1/2026-05]` **#57 洞察生成防并发+分批**：`POST /api/insights/generate` 无限流→并发重复生成。加 in-memory lock（冲突返回409）+ MAX_BATCH=30（差评优先）+ sim为null时skip不阻塞整批。
-- `[∞/永久保留]` **#58 collect.js 重试上限**：collect.js 失败（含 exit code null/SIGTERM 杀进程）最多重试 3 次。pipeline.js processOne 维护 `collectRetries` 计数器：成功进入 inferring 时清零，失败累加，≥3 次标记 `simulated` 上报人工。防止采集死循环。op-queue.js 的 execCollect 路径暂不计数（独立 code path）。
-- `[∞/永久保留]` **#59 spawn timeout 180s 双路径对齐**：pipeline.js 和 op-queue.js 各有一条 spawn collect.js 路径，两条都设 `timeout: 180000`（3分钟）。含赠品的退货退款工单采集步骤多（两次 product-match+archive），120s 不够易触发 SIGTERM → exit code=null → 被 #58 重试。改超时必须双路径同步。
-- `[1/2026-05]` **#60 querySelector 返回隐藏元素导致假阴性**：`document.querySelector` 返回 DOM 序第一个匹配元素，不保证可见。ERP 页面常有同 placeholder 的隐藏 input（0×0），读到它会导致 Vue 父链遍历找 dataList 失败（错误返回"dataList 为空"但数据实际在页面上）。修复：与其他函数一致，用 `querySelectorAll` + `getBoundingClientRect().width>0 && height>0` 过滤后再取第一个。案例：2026-05-04 archive.js READ_DATALIST_JS 选中隐藏"主商家编码"input 而非可见的搜索结果输入框，导致 product-archive 假阴性 → escalate 而非 approve。
-- `[1/2026-05]` **#61 DOM 移除 Element UI 弹窗破坏 Vue dialogVisible 状态**：`el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 内部 `dialogVisible` 仍为 true。下次 `a.ml_15` 点击时 Vue 认为弹窗已打开 → 跳过打开 → READ_SUB_ITEMS_JS 报"子商品弹窗未打开" → subItems 空数组 → escalate。必须用 `btn.click()` 触发 Vue close 流程，关闭后轮询等待弹窗 `display:none`（max 2s）。案例：2026-05-04 第一个工单正常，后续全部 subItems 空——CLOSE_SUB_DIALOG_JS 的 DOM 移除破坏了 Vue 状态。
-- `[∞/永久保留]` **#62 Chrome 自动填充非确定性——单次触发，不可重试**：Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试自动填充，失败则进凭据注入（Phase 2），不能循环 reload 再试。循环 reload 会清掉已填密码且不会触发第二次自动填充。根因：5 轮修复方案均绕不开该单点，唯一解是确定性凭据注入。
-- `[∞/永久保留]` **#63 ERP 熔断行为——熔断中不要在调用侧包 retry**：`erp-circuit-breaker.json` state=open 时，`erpNav()` 直接返回熔断错误；15 分钟冷却后 half_open 允许一次探测。上层代码不得在调用 erpNav/erpSearch 等时另包 retry 循环——本地 retry 会绕过全局熔断保护，在 session 耗尽时仍无限重试。
-- `[∞/永久保留]` **#64 erp-health.json 读合并写，不能整体覆盖**：`updateErpHealth()` 必须读现有 JSON → merge → 写回，防止多调用点覆盖丢字段（status/lastOkTime/consecutiveAuthFail 由不同代码路径写入）。直接 `JSON.stringify(updates)` 写入会覆盖其他字段，导致 lastAlertTime 丢失 → 告警重复间隔失效。
-- `[∞/永久保留]` **#65 ERP 对应表店铺过滤器——每次搜索前必须后置验证，不可信任上次残留状态**：连续两个工单属于不同店铺时，上次搜索留下的过滤器即为错误状态。原逻辑：`if (!check.correct) { 切换; 再验; }` ——若第一次 check 恰好 correct（残留上一工单的店铺），则跳过切换直接搜索，导致搜到错误店铺的数据（返回1行但货号不匹配 → NO_RESULT）。修复：无论 check 结果如何，切换完成后**强制执行后置验证**；retry 3次仍 incorrect 则抛错停止人工介入。案例：2026-05-07 product-mapping 操作残留澜泽店铺状态 → aftersales 两个澜泽工单搜到其他店铺1行 → NO_RESULT → escalate。
+- `[∞]` **#5 赠品子订单号禁止推算**：必须从 `giftSubBizOrderDetailDTO.subBizOrderId` 读取，禁止用主号+1推算。
+- `[∞]` **#9 图片上传唯一路径**：curl+cookie → 注入 Vue `WorkOrderStateForm`。禁止 DataTransfer/本地HTTP/XHR拦截器（拦截器导致堆栈溢出）。
+- `[∞]` **#24 备注写 shortTitle 不写编码**：写"KGOS保温壶1个"，禁止写 kgosbwh 等编码。
+- `[∞]` **#25 备注只写结论**：一句话结论+动作，不写原因分析。
+- `[∞]` **#37 内部备注入口**：必须用「致内部」按钮；严禁「+新增备注」（进供应商可见区域）。
+- `[∞]` **#48 读表数据用表头定位列索引**：用 `<th>` 文本定位列，禁止用正则/关键词/长度过滤数据内容（会误杀合法编码如 kgoxnld）。
+- `[∞]` **#49 验证数据=读实时源头**：→ 见全局 CLAUDE.md 浏览器操作约束。
+- `[∞]` **#51 ERP 状态只路由不决策**：ERP 订单状态只区分 flow-5.2/5.3，不直接决策。"交易关闭"≠包裹退回，必须走物流判断。
+- `[∞]` **#52 采集按工单类型分流**：product-match/archive 仅退货退款需要。退货退款必须遍历所有子订单，不能只取 subOrders[0]。
+- `[∞]` **#53 决策看"剩余-扫描"安全边际**：剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。
+- `[∞]` **#54 推理文案说人话**：reason 三要素：①根因②无代码变量名③明确建议动作。
+- `[∞]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 交叉校验 accountNum 与 accountNote，不一致拒绝。
+- `[∞]` **#58 collect.js 重试上限 3 次**：`collectRetries` 计数器在 pipeline.js，≥3 次标记 simulated。成功进 inferring 时清零。op-queue.js 路径暂不计数。
+- `[∞]` **#59 spawn timeout 180s 双路径对齐**：pipeline.js 和 op-queue.js 两条 spawn 路径都设 180000ms，改一处必须同步另一处。
+- `[∞]` **#60 querySelector 禁止选隐藏元素**：→ 见全局 CLAUDE.md 浏览器操作约束。
+- `[∞]` **#61 禁止 DOM 移除 Element UI 弹窗**：→ 见全局 CLAUDE.md 浏览器操作约束。
+- `[∞]` **#62 Chrome 自动填充单次触发不可重试**：`recoverLogin` 单次尝试，失败进凭据注入（Phase 2），禁止循环 reload。
+- `[∞]` **#63 熔断中调用侧禁止包 retry**：`erpNav()` 熔断时直接返回错误，本地 retry 绕过全局保护。
+- `[∞]` **#64 erp-health.json 读-merge-写**：`updateErpHealth()` 必须读现有 JSON → merge → 写回，禁止整体覆盖。
+- `[∞]` **#65 ERP 对应表店铺过滤器每次必须后置验证**：切换完成后强制 check，不信任残留状态。retry 3次仍错则抛错人工介入。

@@ -4,6 +4,14 @@
 
 进入任一子项目时，**第一步读该项目的 `SKILL.md`**。禁止先 grep/glob/smart_search 再读 SKILL.md——语义层是导航地图，先看地图再走路。
 
+## 浏览器自动化约束（CDP + Element UI）
+
+适用所有项目，违者必踩：
+
+- **验证数据必须读实时源头**：从 ERP 页面/CLI 重新读取，禁止分析 jsonl 历史快照（快照是过期数据，不是真值）
+- **querySelector 必须过滤可见元素**：ERP 页面常有同 selector 的隐藏 0×0 元素排在 DOM 前面。必须用 `querySelectorAll` + `getBoundingClientRect().width>0 && height>0` 取第一个可见元素，不能用 `querySelector` 直接取
+- **禁止 DOM 移除 Element UI 弹窗**：`parentNode.removeChild()` 移除 `.el-dialog__wrapper` 后 Vue `dialogVisible` 仍为 true，下次触发被 Vue 跳过。必须用 `btn.click()` 走 Vue 关闭流程，再轮询等 `display:none`
+
 ## 跨项目共享知识
 
 `aftersales-automation/` 和 `product-mapping/` 操作同一套系统：
