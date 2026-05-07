@@ -231,15 +231,18 @@ async function productMatch(targetId, barcode, attr1, shopName) {
 
     await navigateErp(targetId, '商品对应表');
 
-    // 设置店铺过滤器（按传入的店铺名切换，不硬编码）
+    // 设置店铺过滤器：先检测当前店铺，不是目标则切换，切换后再验证。
+    // 不信任上次残留状态——因为不同工单可能属于不同店铺。
+    // 最多尝试 3 次，3 次仍错必有异常，抛错停止等人工介入。
     await retry(async () => {
-      const shop = await cdp.eval(targetId, makeCheckShopJS(shopName));
-      if (!shop.correct) {
+      const before = await cdp.eval(targetId, makeCheckShopJS(shopName));
+      if (!before.correct) {
         await cdp.eval(targetId, makeSelectShopJS(shopName));
         await sleep(1500); // 等待 Vue 响应式更新
-        const shop2 = await cdp.eval(targetId, makeCheckShopJS(shopName));
-        if (!shop2.correct) throw new Error(`店铺未切换为${shopName}: ${JSON.stringify(shop2.tags)}`);
       }
+      // 无论是否刚切换，都做后置检测
+      const after = await cdp.eval(targetId, makeCheckShopJS(shopName));
+      if (!after.correct) throw new Error(`店铺未切换为${shopName}（当前: ${JSON.stringify(after.tags)}）`);
     }, { maxRetries: 3, delayMs: 1500, label: `set shop filter ${shopName}` });
     await sleep(1500); // 过滤器切换后额外等待，确保查询参数生效后再搜索
 
