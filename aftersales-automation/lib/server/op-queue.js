@@ -7,6 +7,7 @@
  */
 
 const { execFileSync, spawnSync, spawn } = require('child_process');
+const http = require('http');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
@@ -28,7 +29,7 @@ function updateAccountStatus(num, patch) {
   const s = readAccountStatus();
   const prev = s[String(num)] || {};
   const merged = Object.assign({}, prev, patch);
-  if (patch.status === 'ok' && !patch.error) {
+  if ((patch.status === 'ok' && !patch.error) || patch.error === null) {
     delete merged.error;
   }
   s[String(num)] = merged;
@@ -140,6 +141,7 @@ async function executeOp(op) {
     case 'scan':           return execScan(op);
     case 'scan-account':   return execScanAccount(op);
     case 'scan-finalize':  return execScanFinalize(op);
+    case 'check-session':  return execCheckSession(op);
     case 'pipeline':       return execPipeline(op);
     case 'reinfer':        return execReinfer(op);
     case 'reprocess-one':  return execReprocessOne(op);
@@ -161,6 +163,58 @@ function spawnAsync(cmd, args, opts) {
     proc.on('close', code => { if (activeProc === proc) activeProc = null; resolve({ code, stdout }); });
     proc.on('error', err => { if (activeProc === proc) activeProc = null; reject(err); });
   });
+}
+
+// ── 轻量 session 检测（inject + CDP URL 校验，不拉工单） ────────────
+
+async function execCheckSession(op) {
+  const { accountNum, accountNote } = op.params;
+
+  // Step 1: 注入 session（失败则直接标 expired/error）
+  const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
+    timeout: 30000, encoding: 'utf8',
+  });
+  if (inj.status !== 0) {
+    const msg = (inj.stderr || inj.stdout || '').slice(0, 150);
+    const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(msg);
+    updateAccountStatus(accountNum, {
+      status: isExpired ? 'expired' : 'error',
+      lastScan: new Date().toISOString(),
+      error: msg, note: accountNote,
+    });
+    return { accountNum, status: isExpired ? 'expired' : 'error' };
+  }
+
+  // Step 2: 额外等 3s，让页面完成跳转（inject 内已等 2s）
+  await new Promise(r => setTimeout(r, 3000));
+
+  // Step 3: 用 CDP /json 查 SCRM tab 当前 URL
+  const tabUrl = await new Promise(resolve => {
+    http.get('http://localhost:9222/json', res => {
+      let d = ''; res.on('data', c => d += c);
+      res.on('end', () => {
+        try {
+          const t = JSON.parse(d).find(t => t.url && t.url.includes('scrm.jlsupp.com'));
+          resolve(t ? t.url : null);
+        } catch(e) { resolve(null); }
+      });
+    }).on('error', () => resolve(null));
+  });
+
+  let status, error;
+  if (tabUrl === null) {
+    status = 'error'; error = '鲸灵标签页未找到';
+  } else if (tabUrl.includes('/login')) {
+    status = 'expired'; error = `登录已失效，当前URL: ${tabUrl.slice(0, 100)}`;
+  } else {
+    status = 'ok'; error = null;
+  }
+
+  updateAccountStatus(accountNum, {
+    status, lastScan: new Date().toISOString(), note: accountNote,
+    ...(error ? { error } : { error: null }),
+  });
+  return { accountNum, status };
 }
 
 // ── 单账号扫描 ─────────────────────────────────────────────────────
@@ -527,4 +581,4 @@ async function execCollect(op) {
   return { done: true };
 }
 
-module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused };
+module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, updateAccountStatus };

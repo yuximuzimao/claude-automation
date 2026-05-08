@@ -1217,4 +1217,5 @@ details[open] .action-dismissed-summary::before { content: '▼ '; }
 }
 .account-card .btn-relogin:hover { opacity: 0.85; }
 .account-card .btn-relogin.pending { background: var(--orange); }
+.account-card .btn-relogin.confirm { background: var(--green, #16a34a); }
 .btn-sm { padding: 4px 10px; font-size: 12px; }

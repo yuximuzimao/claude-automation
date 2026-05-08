@@ -6,6 +6,7 @@
  * ENTRY: server.js: app.use('/api', routes)
  */
 const express = require('express');
+const http = require('http');
 const { execFileSync, spawnSync } = require('child_process');
 const path = require('path');
 const db = require('./data');
@@ -551,14 +552,78 @@ router.post('/accounts/add', (req, res) => {
   }
 });
 
-router.post('/accounts/:num/relogin', (req, res) => {
+router.post('/accounts/:num/relogin', async (req, res) => {
   const num = parseInt(req.params.num, 10);
   if (!num) return res.status(400).json({ error: 'invalid num' });
+
+  const portFile = path.join(SESSIONS_DIR, `.relogin-port-${num}`);
+  const fsSync = require('fs');
+  if (fsSync.existsSync(portFile)) fsSync.unlinkSync(portFile);
+
   const { spawn } = require('child_process');
   spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(num), '--auto-save'], {
     detached: true, stdio: 'ignore',
   }).unref();
-  res.json({ ok: true, message: `已为账号${num}启动登录窗口，请在弹出的浏览器中完成登录，登录成功后将自动保存` });
+
+  // 等待 jl.js 写入 port file（HTTP server 启动后写入）
+  let waited = 0;
+  while (!fsSync.existsSync(portFile) && waited < 8000) {
+    await new Promise(r => setTimeout(r, 200));
+    waited += 200;
+  }
+  if (!fsSync.existsSync(portFile)) {
+    return res.status(500).json({ ok: false, error: '登录窗口启动失败，请重试' });
+  }
+
+  res.json({ ok: true, message: `账号${num}登录窗口已打开，登录成功后点击"确认保存"` });
+});
+
+router.post('/accounts/:num/relogin-confirm', async (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+
+  const portFile = path.join(SESSIONS_DIR, `.relogin-port-${num}`);
+  const fsSync = require('fs');
+  if (!fsSync.existsSync(portFile)) {
+    return res.status(404).json({ ok: false, error: '没有待确认的登录会话，请重新点击"重新登录"' });
+  }
+
+  const port = parseInt(fsSync.readFileSync(portFile, 'utf8').trim(), 10);
+  try {
+    await new Promise((resolve, reject) => {
+      const req2 = http.request(
+        { hostname: '127.0.0.1', port, path: '/confirm', method: 'POST', timeout: 10000 },
+        r2 => { r2.resume(); r2.on('end', resolve); }
+      );
+      req2.on('error', reject);
+      req2.end();
+    });
+
+    // session 已保存，清除 expired 状态（改为"未扫描"，等下次扫描验证）
+    const accounts = JSON.parse(require('fs').readFileSync(ACCOUNTS_FILE, 'utf8'));
+    const note = accounts[String(num)] ? (accounts[String(num)].note || accounts[String(num)].name) : `账号${num}`;
+    opQueue.updateAccountStatus(num, { status: 'unknown', error: null, note });
+
+    res.json({ ok: true, message: `账号${num} session 已保存` });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: `确认失败: ${e.message}` });
+  }
+});
+
+router.post('/accounts/refresh-status', (req, res) => {
+  const fsSync = require('fs');
+  const accounts = JSON.parse(fsSync.readFileSync(ACCOUNTS_FILE, 'utf8'));
+  const nums = Object.keys(accounts).sort((a, b) => Number(a) - Number(b));
+  let queued = 0;
+  for (const num of nums) {
+    const a = accounts[num];
+    if (!fsSync.existsSync(path.join(SESSIONS_DIR, a.file))) continue;
+    opQueue.enqueue('check-session', `检测账号${num}「${a.note || a.name}」登录状态`, {
+      accountNum: parseInt(num), accountNote: a.note || a.name,
+    });
+    queued++;
+  }
+  res.json({ ok: true, queued, message: `已入队检测 ${queued} 个账号，结果实时更新` });
 });
 
 router.post('/accounts/:num/open', (req, res) => {

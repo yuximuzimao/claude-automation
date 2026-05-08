@@ -1606,7 +1606,8 @@ setInterval(function() {
 }, 60000);
 
 // ── 店铺管理 ─────────────────────────────────────────────────────
-const reloginPending = new Set();
+const reloginPending = new Set();   // 正在启动窗口（等待后端返回 port）
+const reloginConfirm = new Set();   // 窗口已打开，等待用户点击"确认保存"
 
 async function loadAccounts() {
   const el = document.getElementById('accounts-list');
@@ -1622,9 +1623,19 @@ async function loadAccounts() {
     const statusKey = !a.hasFile ? 'unknown' : (a.status || 'unknown');
     const statusLabel = { ok: '正常', expired: '登录失效', error: '扫描异常', unknown: '未扫描' }[statusKey] || '未知';
     const isPending = reloginPending.has(a.num);
+    const isConfirm = reloginConfirm.has(a.num);
     const showReloginBtn = statusKey === 'expired' || statusKey === 'error' || statusKey === 'unknown' || !a.hasFile;
-    const btnLabel = isPending ? '等待登录中...' : (!a.hasFile ? '添加登录' : '重新登录');
     const lastScan = a.lastScan ? new Date(a.lastScan).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+    let reloginBtn = '';
+    if (showReloginBtn) {
+      if (isPending) {
+        reloginBtn = `<button class="btn-relogin pending" disabled>启动中...</button>`;
+      } else if (isConfirm) {
+        reloginBtn = `<button class="btn-relogin confirm" onclick="confirmRelogin(${a.num})">确认保存</button>`;
+      } else {
+        reloginBtn = `<button class="btn-relogin" onclick="reloginAccount(${a.num})">${!a.hasFile ? '添加登录' : '重新登录'}</button>`;
+      }
+    }
     return `<div class="account-card status-${statusKey}">
       <div class="account-header">
         <span class="account-num">账号${a.num}</span>
@@ -1635,7 +1646,7 @@ async function loadAccounts() {
       ${a.error ? `<div class="account-error">${h(a.error)}</div>` : ''}
       <div class="account-actions">
         ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num})">打开店铺后台</button>` : ''}
-        ${showReloginBtn ? `<button class="btn-relogin${isPending ? ' pending' : ''}" onclick="reloginAccount(${a.num})" ${isPending ? 'disabled' : ''}>${btnLabel}</button>` : ''}
+        ${reloginBtn}
       </div>
     </div>`;
   }).join('');
@@ -1645,9 +1656,42 @@ async function reloginAccount(num) {
   reloginPending.add(num);
   loadAccounts();
   const res = await api(`/accounts/${num}/relogin`, { method: 'POST' });
-  showToast(res.message || `已启动账号${num}登录窗口`);
-  // 30秒后自动刷新状态（登录成功会通过 SSE 推送）
-  setTimeout(() => { reloginPending.delete(num); loadAccounts(); }, 30000);
+  reloginPending.delete(num);
+  if (!res.ok) {
+    showToast(res.error || `账号${num}登录窗口启动失败`);
+    loadAccounts();
+    return;
+  }
+  showToast(res.message || `账号${num}登录窗口已打开`);
+  reloginConfirm.add(num);
+  loadAccounts();
+}
+
+async function confirmRelogin(num) {
+  reloginConfirm.delete(num);
+  loadAccounts();
+  const res = await api(`/accounts/${num}/relogin-confirm`, { method: 'POST' });
+  if (res.ok) {
+    showToast(res.message || `账号${num} session 已保存`);
+    setTimeout(loadAccounts, 1000);
+  } else {
+    showToast(res.error || `账号${num}确认失败`);
+    reloginConfirm.add(num);
+    loadAccounts();
+  }
+}
+
+async function checkAccountsStatus() {
+  const btn = document.getElementById('btn-check-status');
+  if (btn) { btn.disabled = true; btn.textContent = '检测中...'; }
+  // 先立即从文件读最新缓存（快速显示当前状态）
+  await loadAccounts();
+  // 再入队真实检测（inject + CDP URL 校验，结果通过 SSE 实时回来）
+  const res = await api('/accounts/refresh-status', { method: 'POST' });
+  showToast(res.message || '检测已启动，结果实时更新');
+  setTimeout(() => {
+    if (btn) { btn.disabled = false; btn.textContent = '刷新状态'; }
+  }, 5000);
 }
 
 async function openAccountStore(num) {
