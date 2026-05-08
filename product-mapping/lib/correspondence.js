@@ -5,9 +5,14 @@
  * WHY: 对应表是 SKU 匹配的唯一数据源，读取不全会导致匹配遗漏
  * ENTRY: lib/check.js: readAllCorrespondence()
  */
+const fs = require('fs');
+const path = require('path');
 const cdp = require('./cdp');
 const { sleep } = require('./wait');
 const { navigateErp } = require('./navigate');
+
+// 下载标记文件：downloadPlatformProducts 完成后写入，供 downloadProducts 防止重复下载
+const DOWNLOAD_MARKER_FILE = path.join(__dirname, '../data/.download-marker.json');
 
 /**
  * 触发 ERP「下载平台商品」：选店铺 → 全量下载 → 确认 → 等待完成
@@ -174,7 +179,11 @@ async function downloadPlatformProducts(erpId, shopName) {
     const gone = await cdp.eval(erpId,
       '(function(){var ds=document.querySelectorAll(".el-dialog__wrapper");for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0)return false;}return true;})()'
     );
-    if (gone) { console.error(`[corr] 下载完成（${i + 1}s）`); return; }
+    if (gone) {
+      console.error(`[corr] 下载完成（${i + 1}s）`);
+      try { fs.writeFileSync(DOWNLOAD_MARKER_FILE, JSON.stringify({ shopName, downloadedAt: new Date().toISOString() })); } catch {}
+      return;
+    }
     if ((i + 1) % 10 === 0) console.error(`[corr] 下载中...（${i + 1}s）`);
   }
   throw new Error('下载平台商品超时（60s），请检查 ERP 网络');
@@ -201,20 +210,41 @@ async function _readCorrData(erpId, shopName) {
   );
   await sleep(1500);
 
-  // 空搜索（清空输入框后回车，触发全量查询）
+  // 重置搜索筛选条件：清空 select 过滤（精确搜索→默认第一项）+ 清空搜索输入框
+  // 必要性：navigateErp 在 session 新鲜时跳过 reload，前次 read-skus 的精确搜索/平台商家编码筛选会残留
   await cdp.eval(erpId,
     '(function(){' +
-    '  var inputs=document.querySelectorAll("input[type=text],input:not([type])");' +
-    '  for(var i=0;i<inputs.length;i++){' +
-    '    var ph=inputs[i].placeholder||"";' +
-    '    if(ph.includes("货号")||ph.includes("商品编码")||ph.includes("编码")){' +
-    '      inputs[i].value="";' +
-    '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      return;' +
-    '    }' +
-    '  }' +
+    // 重置 select[4]（搜索方式）+ select[5]（搜索字段）为第一个选项（最宽松，覆盖全量）
+    '  var sels=Array.from(document.querySelectorAll(".el-select")).filter(function(s){' +
+    '    return !s.closest(".el-dialog__wrapper");' +
+    '  });' +
+    '  [4,5].forEach(function(idx){' +
+    '    var sel=sels[idx];' +
+    '    if(!sel) return;' +
+    '    var vm=sel.__vue__;' +
+    '    if(!vm) return;' +
+    '    var opts=vm.options||[];' +
+    '    if(opts.length>0){vm.$emit("input",opts[0].value);vm.$emit("change",opts[0].value);}' +
+    '  });' +
+    // 清空 el-input-popup-editor 搜索框（正确 selector，非 placeholder 匹配——以前的代码找不到此输入框）
+    '  var editor=document.querySelector(".el-input-popup-editor");' +
+    '  if(!editor) return;' +
+    '  var inp=editor.querySelector("input");' +
+    '  if(!inp) return;' +
+    '  inp.value="";' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '})()'
+  );
+  await sleep(800);
+  // 触发全量搜索（空条件回车）
+  await cdp.eval(erpId,
+    '(function(){' +
+    '  var editor=document.querySelector(".el-input-popup-editor");' +
+    '  if(!editor) return;' +
+    '  var inp=editor.querySelector("input");' +
+    '  if(!inp) return;' +
+    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
     '})()'
   );
   await sleep(2000);
