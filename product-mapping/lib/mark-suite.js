@@ -125,6 +125,15 @@ async function main(erpId, shopName, productCode, platformCode) {
  * @param {string} platformCode
  */
 async function markOneSuite(erpId, platformCode) {
+  // Step5-pre: 清除展开行中所有已勾选状态（只清 tbody tr 内，不碰表头全选框）
+  await cdp.eval(erpId,
+    '(function(){' +
+    '  var cbs=document.querySelectorAll(".el-table__expanded-cell tbody tr input[type=checkbox]:checked");' +
+    '  for(var i=0;i<cbs.length;i++){cbs[i].click();}' +
+    '})()'
+  );
+  await sleep(300);
+
   // Step5: 只勾选目标 platformCode 那一行
   const r4 = await cdp.eval(erpId, `(function(){
     var expCells = document.querySelectorAll('.el-table__expanded-cell');
@@ -143,9 +152,9 @@ async function markOneSuite(erpId, platformCode) {
   })()`);
   if (r4 && r4.error) throw new Error(r4.error);
 
-  // 验证只有 1 行被选中（防止误操作）
+  // 验证只有 1 行被选中（只计 tbody tr，排除表头全选框联动）
   const selectedCount = await cdp.eval(erpId,
-    '(function(){return document.querySelectorAll(".el-table__expanded-cell input[type=checkbox]:checked").length;})()'
+    '(function(){return document.querySelectorAll(".el-table__expanded-cell tbody tr input[type=checkbox]:checked").length;})()'
   );
   if (selectedCount !== 1) {
     throw new Error(`markOneSuite: 期望选中 1 行，实际选中 ${selectedCount} 行`);

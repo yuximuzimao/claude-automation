@@ -129,8 +129,7 @@ async function queryArchive(erpId, erpCode) {
     if (search.error) throw new Error(search.error);
     await sleep(3500);
     const d = await cdp.eval(erpId, READ_DATALIST_JS);
-    if (d.error && d.count === 0) return null; // 档案里找不到该编码
-    if (d.error) throw new Error(d.error);
+    if (d.error) return null; // 档案里找不到该编码（count=0 无结果 / count=-1 组件遍历深度不足）
     return d;
   }, { maxRetries: 3, delayMs: 2000, label: `queryArchive ${erpCode}` });
 

@@ -50,12 +50,18 @@ async function annotate() {
     // 注入不可见配件（accessories overlay）
     if (accRules && sku.productCode && accRules[sku.productCode]) {
       const rule = accRules[sku.productCode];
-      for (const acc of rule.accessories) {
+      const existing = new Set(sku.recognition.items.map(i => i.name));
+      const toInject = rule.accessories.filter(acc => !existing.has(acc.erpName));
+      for (const acc of toInject) {
         sku.recognition.items.push({ name: acc.erpName, qty: acc.qty });
       }
-      injected++;
-      const note = rule.note ? `（${rule.note}）` : '';
-      console.error(`[annotate] ${platformCode}${note}：注入配件 ${rule.accessories.map(a => `${a.erpName}×${a.qty}`).join('，')}`);
+      if (toInject.length > 0) {
+        injected++;
+        const note = rule.note ? `（${rule.note}）` : '';
+        console.error(`[annotate] ${platformCode}${note}：注入配件 ${toInject.map(a => `${a.erpName}×${a.qty}`).join('，')}`);
+      } else {
+        console.error(`[annotate] ${platformCode}：配件已注入，跳过（幂等）`);
+      }
     }
 
     const items = sku.recognition.items || [];

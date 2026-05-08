@@ -14,6 +14,9 @@ const fs = require('fs');
 const cdp = require('../cdp');
 const { sleep } = require('../wait');
 const { ensureCorrPage } = require('./ensure-corr-page');
+const { navigateErp } = require('../navigate');
+
+const SESSION_CACHE_PATH = path.join(__dirname, '../../data/erp-session-cache.json');
 const { markOneSuite } = require('../mark-suite');
 const { addProductToDialog, confirmDialog } = require('../copy-as-suite');
 const { safeWriteJson } = require('../utils/safe-write');
@@ -143,8 +146,14 @@ async function createSuite(erpId, sku) {
 
   console.error(`[create-suite] ${platformCode} 开始，子品 ${recognition.items.length} 个`);
 
-  // 确保在对应表页面
-  await ensureCorrPage(erpId);
+  // 强制 reload 对应表页面，清除 Vue 弹窗组件状态（防止上次失败的「选择商品」子品状态残留）
+  // 删除 session 缓存条目，让 navigateErp 走完整刷新流程而非 hash 短路
+  try {
+    const cache = JSON.parse(fs.readFileSync(SESSION_CACHE_PATH, 'utf8'));
+    delete cache[erpId];
+    fs.writeFileSync(SESSION_CACHE_PATH, JSON.stringify(cache));
+  } catch {}
+  await navigateErp(erpId, '商品对应表');
 
   // 搜索并展开货号行
   await _searchAndExpand(erpId, shopName, productCode);
@@ -170,6 +179,21 @@ async function createSuite(erpId, sku) {
     '})()'
   );
   if (!hasCopyBtn) throw new Error(`标记套件后「复制为套件」按钮未出现（${platformCode}）`);
+
+  // 关闭任何遗留的「选择商品」弹窗（上一次失败运行可能留下未关闭的弹窗带旧数据）
+  await cdp.eval(erpId,
+    '(function(){' +
+    '  var dialogs=Array.from(document.querySelectorAll(".el-dialog__wrapper"));' +
+    '  dialogs.forEach(function(d){' +
+    '    var t=d.querySelector(".el-dialog__title");' +
+    '    if(t&&t.innerText.trim()==="选择商品"&&d.getBoundingClientRect().height>0){' +
+    '      var btn=d.querySelector(".el-dialog__headerbtn");' +
+    '      if(btn)btn.click();' +
+    '    }' +
+    '  });' +
+    '})()'
+  );
+  await sleep(600);
 
   // 点击「复制为套件」
   await _clickCopyAsSuite(erpId, platformCode);

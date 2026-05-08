@@ -1,6 +1,26 @@
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const { getTargetIds } = require('./lib/targets');
 const { ok, fail } = require('./lib/result');
+
+/**
+ * 自动推断品牌：扫描所有 data/products\/{brand}\/accessories.json
+ * 找到 rules[productCode] 的 brand 即为目标品牌
+ * 找不到则返回 'kgos'（无配件可注入，brand 无关紧要）
+ */
+function detectBrand(productCode) {
+  const productsDir = path.join(__dirname, 'data/products');
+  try {
+    for (const brand of fs.readdirSync(productsDir)) {
+      const accFile = path.join(productsDir, brand, 'accessories.json');
+      if (!fs.existsSync(accFile)) continue;
+      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
+      if (acc.rules && acc.rules[productCode]) return brand;
+    }
+  } catch {}
+  return 'kgos';
+}
 
 const [,, cmd, ...args] = process.argv;
 
@@ -195,8 +215,9 @@ async function main() {
       const fromIdx = args.indexOf('--from');
       const fromStep = fromIdx >= 0 ? args[fromIdx + 1] : undefined;
       const brandIdx = args.indexOf('--brand');
-      const brandArg = brandIdx >= 0 ? args[brandIdx + 1] : 'kgos';
-      const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep && a !== brandArg);
+      const explicitBrand = brandIdx >= 0 ? args[brandIdx + 1] : null;
+      const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep && a !== explicitBrand);
+      const brandArg = explicitBrand || detectBrand(productCode);
       if (!opts.shop || !productCode) {
         console.error('用法: node cli.js match-one <货号> --shop <店铺> [--from <步骤>] [--brand <品牌>]');
         console.error('步骤可选值: download, read_skus, recognize, annotate, match, read_erp, verify');
