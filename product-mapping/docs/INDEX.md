@@ -253,6 +253,8 @@ data/products/
 - `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
 - `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
 - `[1/2026-05-07]` **readAllCorrespondence 有副作用**：内部硬编码调用 downloadPlatformProducts()，不是只读操作。仅查询数据时用 readCorrespondence()（待实现），需要刷新数据时才用 readAllCorrespondence()。
+- `[1/2026-05-08]` **「选择商品」弹窗搜索返回2条结果不等于名称歧义**：气垫霜正装和替换装名称都包含"亮肤色"，ERP 弹窗是子串搜索，count=2 是正常的。wait-loop break 条件必须同时检查 `hasExact`（任意 td 的 innerText 精确等于 productName 即命中），不能只靠 count===1，否则10s 超时。行选择（r3）本就精确匹配，无需另改。
+- `[1/2026-05-08]` **matched-original SKU 的 recognition 必须补填，不能留 null**：重跑 `--from annotate` 时，matched-original + recognition=null 会被 annotate 跳过，导致 itemType=null。识图阶段需要按 erpName/skuName 为这些条目补填 recognition.items，让 annotate 能正常生成 itemType。
 
 ---
 
