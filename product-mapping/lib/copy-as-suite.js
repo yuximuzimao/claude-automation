@@ -80,18 +80,22 @@ async function addProductToDialog(erpId, productName, amount, expectedCount) {
     r2 = await cdp.eval(erpId,
       `(function(){var w=${FIND_SELECT_DIALOG};` +
       `if(!w)return JSON.stringify({error:'dialog gone'});` +
+      `var pName=${JSON.stringify(productName)};` +
       `var rows=Array.from(w.querySelectorAll('tbody tr'));` +
       `var first=rows[0]?rows[0].innerText.replace(/\\t+/g,' ').trim().substring(0,120):'';` +
-      `return JSON.stringify({count:rows.length,first:first});` +
+      `var hasExact=rows.some(function(r){` +
+      `  return Array.from(r.querySelectorAll('td')).some(function(td){return td.innerText.trim()===pName;});` +
+      `});` +
+      `return JSON.stringify({count:rows.length,first:first,hasExact:hasExact});` +
       `})()`,
     );
     if (!r2 || r2.error) throw new Error(r2 ? r2.error : '读取结果失败');
-    if (r2.count === 1 && r2.first.includes(productName)) break;
+    if ((r2.count === 1 && r2.first.includes(productName)) || r2.hasExact) break;
     r2 = null; // 结果未就绪，继续等
   }
   if (!r2) throw new Error(`搜索「${productName}」超时`);
   if (r2.count === 0) throw new Error(`搜索「${productName}」无结果`);
-  if (r2.count !== 1) throw new Error(`搜索「${productName}」返回 ${r2.count} 条结果，名称存在歧义，请修正后重试`);
+  if (r2.count !== 1 && !r2.hasExact) throw new Error(`搜索「${productName}」返回 ${r2.count} 条结果，无精确匹配行，请修正名称后重试`);
   console.log(`  搜索结果 ${r2.count} 条，首行: ${r2.first}`);
   await sleep(500); // 结果已刷新，等 UI 稳定再操作
 

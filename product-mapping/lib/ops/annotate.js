@@ -44,6 +44,10 @@ async function annotate() {
 
   for (const [platformCode, sku] of Object.entries(record.skus)) {
     if (!sku.recognition) {
+      if (sku.matchStatus === 'matched-original') {
+        console.error(`[annotate] ${platformCode} 已是 matched-original，recognition 为空，跳过`);
+        continue;
+      }
       throw new Error(`annotate: ${platformCode} 的 recognition 为 null，请先完成识图步骤`);
     }
 
