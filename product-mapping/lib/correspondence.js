@@ -249,163 +249,148 @@ async function _readCorrData(erpId, shopName) {
   );
   await sleep(2000);
 
-  // 展开所有未展开的行
-  await cdp.eval(erpId,
-    'var icons=document.querySelectorAll(".el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
-    'for(var i=0;i<icons.length;i++) icons[i].click();'
-  );
-  await sleep(2000);
+  // 翻页循环读取全部数据（对应表每页 20 条，共可能 70+ 条）
+  const allData = [];
+  const imgMap = {}; // platformCode -> imgUrl，跨页累积
+  let page = 1;
 
-  // 验证展开数量，补展开（mainCount只数主表的 el-table__row，不含子行）
-  const expandedCount = await cdp.eval(erpId,
-    '(function(){return document.querySelectorAll(".el-table__expand-icon--expanded").length;})()'
-  );
-  const mainCount = await cdp.eval(erpId,
-    '(function(){' +
-    '  var tb=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
-    '  if(!tb) return 0;' +
-    '  var rows=tb.children;' +
-    '  var n=0;' +
-    '  for(var i=0;i<rows.length;i++){if(rows[i].classList.contains("el-table__row"))n++;}' +
-    '  return n;' +
-    '})()'
-  );
-  if (expandedCount < mainCount) {
+  while (true) {
+    // ── 展开当前页所有行 ──────────────────────────────────────────────────────
     await cdp.eval(erpId,
       'var icons=document.querySelectorAll(".el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
       'for(var i=0;i<icons.length;i++) icons[i].click();'
     );
-    await sleep(1500);
-  }
-  console.error(`[corr] 展开行: ${expandedCount}/${mainCount}`);
+    await sleep(2000);
 
-  // 第一步：读取文字数据（不含图片，不依赖列名）
-  const results = await cdp.eval(erpId,
-    '(function(){' +
-    '  var mainTbody=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
-    '  if(!mainTbody) return JSON.stringify([]);' +
-    '  var children=mainTbody.children;' +
-    '  var results=[];' +
-    '  var lastCode="";' +
-    '  for(var i=0;i<children.length;i++){' +
-    '    var row=children[i];' +
-    '    if(row.classList.contains("el-table__row")){' +
-    '      var tds=row.querySelectorAll("td");' +
-    '      lastCode=tds[6]?tds[6].innerText.trim():"";' +
-    '    } else {' +
-    '      var expCell=row.querySelector(".el-table__expanded-cell");' +
-    '      if(!expCell||!lastCode) continue;' +
-    '      var tables=expCell.querySelectorAll("table");' +
-    '      var tbl=null;' +
-    '      for(var t=0;t<tables.length;t++){' +
-    '        var srs=tables[t].querySelectorAll("tbody tr");' +
-    '        if(srs.length>0&&srs[0].querySelectorAll("td").length>11){tbl=tables[t];break;}' +
-    '      }' +
-    '      if(!tbl) continue;' +
-    '      var skus=[];' +
-    '      var srs2=tbl.querySelectorAll("tbody tr");' +
-    '      for(var s=0;s<srs2.length;s++){' +
-    '        var sc=srs2[s].querySelectorAll("td");' +
-    '        if(sc.length<12) continue;' +
-    '        var ei=sc[11].querySelector("input");' +
-    '        var en=sc[10].querySelector("input");' +
-    '        skus.push({skuName:sc[4].innerText.trim(),platformCode:sc[5].innerText.trim(),erpCode:ei?ei.value:"",erpName:en?en.value:"",imgUrl:""});' +
-    '      }' +
-    '      if(lastCode) results.push({productCode:lastCode,skus:skus});' +
-    '    }' +
-    '  }' +
-    '  return JSON.stringify(results);' +
-    '})()'
-  );
-
-  const data = Array.isArray(results) ? results : [];
-  console.error(`[corr] 读取产品数: ${data.length}, SKU数: ${data.reduce((n,p)=>n+p.skus.length,0)}`);
-
-  // 第二步：动态探测图片列的class名（每次导航后会变）
-  const imgColClass = await cdp.eval(erpId,
-    '(function(){' +
-    '  var expCell=document.querySelector(".el-table__expanded-cell");' +
-    '  if(!expCell) return "";' +
-    '  var img=expCell.querySelector("img");' +
-    '  if(!img) return "";' +
-    '  var td=img.closest("td");' +
-    '  if(!td) return "";' +
-    '  var cls=Array.from(td.classList).find(function(c){return c.indexOf("column_")>-1;});' +
-    '  return cls||"";' +
-    '})()'
-  );
-  console.error(`[corr] 图片列class: ${imgColClass || '未探测到（可能需要滚动触发）'}`);
-
-  // 第三步：逐段滚动触发懒加载，用 platformCode 作为 key 收集图片URL
-  // 每个展开行内的子表行：通过同行中的 platformCode input 来关联图片
-  const imgMap = {}; // platformCode -> imgUrl
-
-  const scrollHeight = await cdp.eval(erpId, 'document.body.scrollHeight');
-  const STEPS = 12; // 每次滚动约1/12页，停留1s等懒加载
-  console.error(`[corr] 开始逐段滚动收集图片(scrollHeight=${scrollHeight})...`);
-
-  for (let i = 0; i <= STEPS; i++) {
-    const pos = Math.floor(scrollHeight * i / STEPS);
-    await cdp.eval(erpId, `window.scrollTo(0, ${pos})`);
-    await sleep(1000);
-
-    // 收集当前DOM中已加载的图片，用同行的platformCode作为key
-    const batch = await cdp.eval(erpId,
+    // 补展开（防漏）
+    const expandedCount = await cdp.eval(erpId,
+      '(function(){return document.querySelectorAll(".el-table__expand-icon--expanded").length;})()'
+    );
+    const mainCount = await cdp.eval(erpId,
       '(function(){' +
-      '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
-      '  var map={};' +
-      '  for(var i=0;i<expCells.length;i++){' +
-      '    var rows=expCells[i].querySelectorAll("tbody tr");' +
-      '    for(var j=0;j<rows.length;j++){' +
-      '      var tds=rows[j].querySelectorAll("td");' +
-      '      if(tds.length<6) continue;' +
-      // platformCode在cells[5]的innerText
-      '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
-      '      if(!pCode) continue;' +
-      // 只取 td[3]（平台 SKU 图片列，2026-05-07 inspect 验证）
-      '      var imgTds=rows[j].querySelectorAll("td");' +
-      '      var imgEl=imgTds[3]?imgTds[3].querySelector("img"):null;' +
-      '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){' +
-      '        map[pCode]=imgEl.src;' +
-      '      }' +
-      '    }' +
-      '  }' +
-      '  return JSON.stringify(map);' +
+      '  var tb=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
+      '  if(!tb) return 0;' +
+      '  var rows=tb.children;var n=0;' +
+      '  for(var i=0;i<rows.length;i++){if(rows[i].classList.contains("el-table__row"))n++;}' +
+      '  return n;' +
       '})()'
     );
-
-    if (batch && typeof batch === 'object') {
-      let newCount = 0;
-      for (const [k, v] of Object.entries(batch)) {
-        if (!imgMap[k]) { imgMap[k] = v; newCount++; }
-      }
-      if (newCount > 0) process.stderr.write(`+${newCount}`);
+    if (expandedCount < mainCount) {
+      await cdp.eval(erpId,
+        'var icons=document.querySelectorAll(".el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
+        'for(var i=0;i<icons.length;i++) icons[i].click();'
+      );
+      await sleep(1500);
     }
+    console.error(`[corr] 第${page}页 展开: ${expandedCount}/${mainCount}`);
+
+    // ── 读取当前页文字数据 ─────────────────────────────────────────────────────
+    const pageResults = await cdp.eval(erpId,
+      '(function(){' +
+      '  var mainTbody=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
+      '  if(!mainTbody) return JSON.stringify([]);' +
+      '  var children=mainTbody.children;' +
+      '  var results=[];var lastCode="";' +
+      '  for(var i=0;i<children.length;i++){' +
+      '    var row=children[i];' +
+      '    if(row.classList.contains("el-table__row")){' +
+      '      var tds=row.querySelectorAll("td");' +
+      '      lastCode=tds[6]?tds[6].innerText.trim():"";' +
+      '    } else {' +
+      '      var expCell=row.querySelector(".el-table__expanded-cell");' +
+      '      if(!expCell||!lastCode) continue;' +
+      '      var tables=expCell.querySelectorAll("table");' +
+      '      var tbl=null;' +
+      '      for(var t=0;t<tables.length;t++){' +
+      '        var srs=tables[t].querySelectorAll("tbody tr");' +
+      '        if(srs.length>0&&srs[0].querySelectorAll("td").length>11){tbl=tables[t];break;}' +
+      '      }' +
+      '      if(!tbl) continue;' +
+      '      var skus=[];' +
+      '      var srs2=tbl.querySelectorAll("tbody tr");' +
+      '      for(var s=0;s<srs2.length;s++){' +
+      '        var sc=srs2[s].querySelectorAll("td");' +
+      '        if(sc.length<12) continue;' +
+      '        var ei=sc[11].querySelector("input");' +
+      '        var en=sc[10].querySelector("input");' +
+      '        skus.push({skuName:sc[4].innerText.trim(),platformCode:sc[5].innerText.trim(),erpCode:ei?ei.value:"",erpName:en?en.value:"",imgUrl:""});' +
+      '      }' +
+      '      if(lastCode) results.push({productCode:lastCode,skus:skus});' +
+      '    }' +
+      '  }' +
+      '  return JSON.stringify(results);' +
+      '})()'
+    );
+    const pageData = Array.isArray(pageResults) ? pageResults : [];
+    allData.push(...pageData);
+    console.error(`[corr] 第${page}页: ${pageData.length}条，累计${allData.length}条`);
+
+    // ── 滚动收集当前页图片（懒加载）─────────────────────────────────────────
+    const scrollHeight = await cdp.eval(erpId, 'document.body.scrollHeight');
+    const IMG_STEPS = 10;
+    for (let i = 0; i <= IMG_STEPS; i++) {
+      await cdp.eval(erpId, `window.scrollTo(0, ${Math.floor(scrollHeight * i / IMG_STEPS)})`);
+      await sleep(800);
+      const batch = await cdp.eval(erpId,
+        '(function(){' +
+        '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+        '  var map={};' +
+        '  for(var i=0;i<expCells.length;i++){' +
+        '    var rows=expCells[i].querySelectorAll("tbody tr");' +
+        '    for(var j=0;j<rows.length;j++){' +
+        '      var tds=rows[j].querySelectorAll("td");' +
+        '      if(tds.length<6) continue;' +
+        '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
+        '      if(!pCode) continue;' +
+        '      var imgEl=tds[3]?tds[3].querySelector("img"):null;' +
+        '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){map[pCode]=imgEl.src;}' +
+        '    }' +
+        '  }' +
+        '  return JSON.stringify(map);' +
+        '})()'
+      );
+      if (batch && typeof batch === 'object') {
+        let newCount = 0;
+        for (const [k, v] of Object.entries(batch)) {
+          if (!imgMap[k]) { imgMap[k] = v; newCount++; }
+        }
+        if (newCount > 0) process.stderr.write(`+${newCount}`);
+      }
+    }
+    process.stderr.write('\n');
+
+    // ── 检查是否有下一页 ──────────────────────────────────────────────────────
+    const hasNext = await cdp.eval(erpId,
+      '(function(){' +
+      '  var btn=document.querySelector("button.btn-next");' +
+      '  if(!btn) return false;' +
+      '  return !btn.disabled && btn.getBoundingClientRect().width>0 && !btn.classList.contains("is-disabled");' +
+      '})()'
+    );
+    if (!hasNext) break;
+
+    // 翻到下一页
+    await cdp.eval(erpId, '(function(){var btn=document.querySelector("button.btn-next");if(btn&&!btn.disabled)btn.click();})()')
+    await sleep(2500); // 等新页渲染
+    page++;
   }
-  console.error('');
 
-  // 统计图片覆盖率
-  const totalSkus = data.reduce((n, p) => n + p.skus.length, 0);
-  const coveredImgs = Object.keys(imgMap).length;
-  console.error(`[corr] 图片收集: ${coveredImgs}/${totalSkus} SKU`);
-
-  // 第四步：将图片URL合并回数据
-  for (const product of data) {
+  // ── 合并图片 URL 回数据 ────────────────────────────────────────────────────
+  const totalSkus = allData.reduce((n, p) => n + p.skus.length, 0);
+  console.error(`[corr] 全部读取: ${allData.length}条产品, ${totalSkus} SKU, 图片${Object.keys(imgMap).length}张`);
+  for (const product of allData) {
     for (const sku of product.skus) {
-      if (imgMap[sku.platformCode]) {
-        sku.imgUrl = imgMap[sku.platformCode];
-      }
+      if (imgMap[sku.platformCode]) sku.imgUrl = imgMap[sku.platformCode];
     }
   }
 
-  // 检查未覆盖的SKU（兜底日志）
-  const missing = data.flatMap(p => p.skus).filter(s => !s.imgUrl);
+  const missing = allData.flatMap(p => p.skus).filter(s => !s.imgUrl);
   if (missing.length > 0) {
     console.error(`[corr] ⚠️ 仍有 ${missing.length} 个SKU无图片:`);
     missing.slice(0, 5).forEach(s => console.error(`  - ${s.skuName} (${s.platformCode})`));
   }
 
-  return data;
+  return allData;
 }
 
 /**
