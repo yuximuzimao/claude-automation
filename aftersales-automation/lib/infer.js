@@ -587,12 +587,19 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   // 向后兼容：旧数据无 productArchives 数组时，使用 productArchive 单字段
   if (productArchives.length === 0 && cd.productArchive && cd.productArchive.subItems) {
     archiveSubItems = cd.productArchive.subItems;
+    // 单品向后兼容：subItems 为空但有 title → 构造虚拟 subItem
+    if (archiveSubItems.length === 0 && cd.productArchive.title) {
+      archiveSubItems = [{ name: (cd.productArchive.title || '').split(';')[0].split('-')[0].trim(), specCode: cd.productArchive.outerId, qty: 1 }];
+    }
   } else {
     for (const pa of productArchives) {
-      if (pa && pa.subItems) {
+      if (pa && pa.subItems && pa.subItems.length > 0) {
         for (const item of pa.subItems) {
           archiveSubItems.push({ ...item, _subOrderId: pa.subOrderId });
         }
+      } else if (pa && pa.title) {
+        // 单品（type=0，subItems 为空）：用档案 title 构造虚拟 subItem，与赠品处理对称
+        archiveSubItems.push({ name: (pa.title || '').split(';')[0].split('-')[0].trim(), specCode: pa.outerId, qty: 1, _subOrderId: pa.subOrderId });
       }
     }
   }
