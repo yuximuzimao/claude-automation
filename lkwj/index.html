@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>洛克王国 · 收集助手</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f5f6fa; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; }
+
+    .header { background: #fff; padding: 14px 20px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .header h1 { font-size: 17px; color: #4f46e5; font-weight: 700; }
+    .header .updated { font-size: 12px; color: #aaa; margin-left: auto; }
+    .save-indicator { font-size: 12px; color: #10b981; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
+    .save-indicator.show { opacity: 1; }
+
+    .nav { display: flex; gap: 2px; padding: 10px 20px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; }
+    .nav button { padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
+    .nav button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .nav button:hover:not(.active) { border-color: #4f46e5; color: #4f46e5; }
+
+    .container { padding: 16px 20px; max-width: 860px; }
+
+    /* 看板卡片 */
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .stat-card { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; }
+    .stat-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); border-color: #c7d2fe; }
+    .stat-card .label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .stat-card .numbers { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+    .stat-card .numbers span { font-size: 13px; color: #bbb; font-weight: 400; }
+    .progress-bar { height: 4px; background: #f0f0f5; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 2px; background: #4f46e5; transition: width 0.3s; }
+    .progress-fill.complete { background: #10b981; }
+
+    /* 收集列表 */
+    .section-title { font-size: 12px; color: #aaa; margin-bottom: 8px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .item-list { display: flex; flex-direction: column; gap: 6px; }
+    .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; transition: box-shadow 0.1s; }
+    .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .item-row.done { opacity: 0.4; }
+    .item-row .item-name { flex: 1; font-size: 14px; font-weight: 500; color: #1a1a2e; }
+    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; font-weight: 400; }
+    .item-row .item-category-tag { font-size: 11px; color: #6366f1; background: #eef2ff; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+
+    .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
+    .check-btn:hover { border-color: #10b981; }
+    .check-btn.checked { background: #10b981; border-color: #10b981; }
+    .check-btn.checked::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
+
+    .source-btn { font-size: 12px; color: #4f46e5; text-decoration: none; padding: 3px 10px; border-radius: 5px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; }
+    .source-btn:hover { background: #e0e7ff; }
+    .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; }
+    .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
+
+    /* 弹窗 */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 14px; padding: 22px; width: 90%; max-width: 400px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .modal h3 { font-size: 15px; margin-bottom: 14px; color: #1a1a2e; }
+    .modal label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+    .modal input, .modal select, .modal textarea { width: 100%; padding: 8px 11px; background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 7px; color: #1a1a2e; font-size: 13px; margin-bottom: 10px; font-family: inherit; }
+    .modal textarea { resize: vertical; min-height: 60px; }
+    .modal-btns { display: flex; gap: 8px; margin-top: 4px; }
+    .btn { padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .btn-primary { background: #4f46e5; color: #fff; }
+    .btn-primary:hover { background: #4338ca; }
+    .btn-secondary { background: #f0f0f5; color: #666; }
+
+    /* 活动预警 */
+    .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
+
+    /* 空状态 */
+    .empty { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
+    .empty small { display: block; margin-top: 6px; font-size: 12px; color: #ccc; }
+
+    /* 限定标签 */
+    .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
+    .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎮 洛克王国 · 收集助手</h1>
+  <span class="save-indicator" id="save-indicator">已保存</span>
+  <span class="updated" id="last-updated"></span>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="switchTab('dashboard')">看板</button>
+  <button onclick="switchTab('yise')">异色炫彩</button>
+  <button onclick="switchTab('sprite')">精灵图鉴</button>
+  <button onclick="switchTab('all')">全部收集</button>
+</div>
+
+<div class="container">
+  <div id="tab-dashboard"></div>
+  <div id="tab-yise" style="display:none"></div>
+  <div id="tab-sprite" style="display:none"></div>
+  <div id="tab-all" style="display:none"></div>
+</div>
+
+<!-- 攻略/备注编辑弹窗 -->
+<div class="modal-overlay" id="source-modal">
+  <div class="modal">
+    <h3 id="modal-title">编辑攻略</h3>
+    <label>收集项</label>
+    <input type="text" id="modal-name" readonly style="color:#aaa; cursor:default;">
+    <label>攻略链接</label>
+    <input type="url" id="modal-url" placeholder="https://...（可不填）">
+    <label>来源类型</label>
+    <select id="modal-type">
+      <option value="链接">攻略链接</option>
+      <option value="视频">跟跑视频</option>
+      <option value="图文">图文攻略</option>
+    </select>
+    <label>备注</label>
+    <textarea id="modal-notes" placeholder="可填写路线、时长、注意事项等"></textarea>
+    <div class="modal-btns">
+      <button class="btn btn-primary" onclick="saveSource()">保存</button>
+      <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let data = null;
+let editingId = null;
+let currentTab = 'dashboard';
+
+// ── 数据加载与保存 ──────────────────────────────
+async function loadData() {
+  const res = await fetch('/api/data');
+  data = await res.json();
+  document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
+  renderAll();
+}
+
+async function saveData() {
+  data.meta.last_updated = new Date().toISOString().slice(0, 10);
+  await fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
+  const ind = document.getElementById('save-indicator');
+  ind.classList.add('show');
+  setTimeout(() => ind.classList.remove('show'), 1500);
+}
+
+// ── 渲染 ──────────────────────────────────────
+function renderAll() {
+  renderDashboard();
+  renderYise();
+  renderSprite();
+  renderAllItems();
+}
+
+function renderDashboard() {
+  const el = document.getElementById('tab-dashboard');
+  const cats = data.categories;
+  const regions = data.regions;
+  const yiseItems = data.items.filter(i => i.category === '异色炫彩');
+  const yiseDone = yiseItems.filter(i => i.status === '已完成').length;
+
+  let html = '';
+
+  // 活动预警
+  const now = new Date();
+  data.activities.filter(a => {
+    if (!a.end_date) return false;
+    const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
+    return days >= 0 && days <= 14;
+  }).forEach(a => {
+    const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
+    html += `<div class="alert-bar">⚠️ <strong>${a.name}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
+  });
+
+  // 进度卡片
+  html += '<div class="dashboard-grid">';
+  const sp = cats['精灵'];
+  html += statCard('精灵图鉴', sp.owned, sp.total, "switchTab('sprite')");
+  Object.entries(regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
+  html += statCard('异色炫彩', yiseDone, yiseItems.length, "switchTab('yise')");
+  ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
+    const c = cats[cat];
+    html += statCard(cat, c.owned, c.total, '');
+  });
+  html += '</div>';
+
+  // 待完成异色炫彩
+  const pending = yiseItems.filter(i => i.status !== '已完成');
+  if (pending.length > 0) {
+    html += `<div class="section-title">异色炫彩 · 待完成（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(item => { html += renderItemRow(item); });
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+function statCard(label, owned, total, onclick) {
+  const o = owned || 0;
+  const t = total;
+  const pct = t ? Math.round(o / t * 100) : 0;
+  const complete = t && o >= t;
+  const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
+  const displayTotal = t !== null && t !== undefined ? t : '?';
+  return `
+    <div class="stat-card" ${clickAttr}>
+      <div class="label">${label}</div>
+      <div class="numbers">${o} <span>/ ${displayTotal}</span></div>
+      <div class="progress-bar">
+        <div class="progress-fill ${complete ? 'complete' : ''}" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+}
+
+function renderItemRow(item) {
+  const isDone = item.status === '已完成';
+  let rightEl = '';
+  if (item.source_url) {
+    rightEl = `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`;
+  } else {
+    rightEl = `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
+  }
+  let limitedTag = '';
+  if (item.limited) {
+    limitedTag = item.limited_status === '赛季已过'
+      ? `<span class="tag-archived">已归档</span>`
+      : `<span class="tag-limited">限定</span>`;
+  }
+  return `
+    <div class="item-row ${isDone ? 'done' : ''}" id="row-${item.id}">
+      <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleStatus('${item.id}')"></button>
+      <div style="flex:1; min-width:0">
+        <div class="item-name">${item.name} ${limitedTag}</div>
+        ${item.notes ? `<div class="item-notes">${item.notes}</div>` : ''}
+      </div>
+      ${rightEl}
+    </div>`;
+}
+
+function renderYise() {
+  const el = document.getElementById('tab-yise');
+  const items = data.items.filter(i => i.category === '异色炫彩');
+  const done = items.filter(i => i.status === '已完成').length;
+  let html = `<div class="section-title">异色炫彩 ${done} / ${items.length}</div><div class="item-list">`;
+  items.forEach(item => { html += renderItemRow(item); });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderSprite() {
+  const el = document.getElementById('tab-sprite');
+  const c = data.categories['精灵'];
+  let html = '<div class="dashboard-grid">';
+  html += statCard('精灵总数', c.owned, c.total, '');
+  Object.entries(data.regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
+  html += '</div>';
+  html += '<div class="empty">精灵明细待补充<small>录入地区/精灵明细后将在此展示</small></div>';
+  el.innerHTML = html;
+}
+
+function renderAllItems() {
+  const el = document.getElementById('tab-all');
+  const items = data.items;
+  if (!items.length) {
+    el.innerHTML = '<div class="empty">暂无收集项<small>从其他标签页添加数据</small></div>';
+    return;
+  }
+  const pending = items.filter(i => i.status !== '已完成');
+  const done = items.filter(i => i.status === '已完成');
+  let html = '';
+  if (pending.length) {
+    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(i => { html += renderItemRow(i); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += `<div class="section-title" style="margin-top:16px">已完成（${done.length}）</div><div class="item-list">`;
+    done.forEach(i => { html += renderItemRow(i); });
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+// ── 交互 ──────────────────────────────────────
+function switchTab(name) {
+  ['dashboard','yise','sprite','all'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav button').forEach((btn, i) => {
+    btn.classList.toggle('active', ['dashboard','yise','sprite','all'][i] === name);
+  });
+  currentTab = name;
+}
+
+async function toggleStatus(id) {
+  const item = data.items.find(i => i.id === id);
+  if (!item) return;
+  item.status = item.status === '已完成' ? '未完成' : '已完成';
+  await saveData();
+  renderAll();
+}
+
+function openModal(id) {
+  editingId = id;
+  const item = data.items.find(i => i.id === id);
+  document.getElementById('modal-title').textContent = '编辑攻略 · ' + item.name;
+  document.getElementById('modal-name').value = item.name;
+  document.getElementById('modal-url').value = item.source_url || '';
+  document.getElementById('modal-type').value = item.source_type || '链接';
+  document.getElementById('modal-notes').value = item.notes || '';
+  document.getElementById('source-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('source-modal').classList.remove('open');
+  editingId = null;
+}
+
+async function saveSource() {
+  if (!editingId) return;
+  const item = data.items.find(i => i.id === editingId);
+  item.source_url = document.getElementById('modal-url').value.trim();
+  item.source_type = document.getElementById('modal-type').value;
+  item.notes = document.getElementById('modal-notes').value.trim();
+  await saveData();
+  closeModal();
+  renderAll();
+}
+
+// 点弹窗外关闭
+document.getElementById('source-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+loadData();
+</script>
+</body>
+</html>
