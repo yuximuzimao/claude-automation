@@ -126,7 +126,7 @@
 <script>
 let data = null;
 let editingId = null;
-let currentTab = 'dashboard';
+let currentTab = 'dashboard';  // tracks active tab to skip re-rendering hidden tabs
 
 // ── 数据加载与保存 ──────────────────────────────
 async function loadData() {
@@ -152,9 +152,9 @@ async function saveData() {
 // ── 渲染 ──────────────────────────────────────
 function renderAll() {
   renderDashboard();
-  renderYise();
-  renderSprite();
-  renderAllItems();
+  if (currentTab === 'yise') renderYise();
+  if (currentTab === 'sprite') renderSprite();
+  if (currentTab === 'all') renderAllItems();
 }
 
 function renderDashboard() {
@@ -168,13 +168,11 @@ function renderDashboard() {
 
   // 活动预警
   const now = new Date();
-  data.activities.filter(a => {
-    if (!a.end_date) return false;
+  data.activities.forEach(a => {
+    if (!a.end_date) return;
     const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
-    return days >= 0 && days <= 14;
-  }).forEach(a => {
-    const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
-    html += `<div class="alert-bar">⚠️ <strong>${a.name}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
+    if (days >= 0 && days <= 14)
+      html += `<div class="alert-bar">⚠️ <strong>${a.name}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
   });
 
   // 进度卡片
@@ -295,6 +293,10 @@ function switchTab(name) {
     btn.classList.toggle('active', ['dashboard','yise','sprite','all'][i] === name);
   });
   currentTab = name;
+  if (name === 'yise') renderYise();
+  else if (name === 'sprite') renderSprite();
+  else if (name === 'all') renderAllItems();
+  else if (name === 'dashboard') renderDashboard();
 }
 
 async function toggleStatus(id) {
