@@ -40,7 +40,7 @@ entry: cli.js
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
-| `lib/server/routes.js` | Express API 路由（569行，43 路由） | 改 API 端点时 |
+| `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -132,6 +132,9 @@ await cdp.navigate(targetId, 'https://...');
 | 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击 `a.ml_15` 时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
 | 13 | Chrome 自动填充只触发一次 | Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试而非 3 次循环；仍失败时进 Phase 2 凭据注入而不是重试 reload。单点依赖 Chrome 自动填充是 ERP session 反复失效的根因。 |
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
+| 15 | "刷新状态"卡死=正常，是串行队列 | `POST /accounts/refresh-status` 为每个账号入队 `check-session` op，12个账号×~8s=~96s，期间 op-queue 被占满。不要以为卡死——等 SSE `accounts-update` 逐个回来即可。触发后不要重复点击，否则会重复入队。 |
+| 16 | check-session URL 检测依赖唯一 SCRM tab | `check-session` 通过 CDP `/json` 取第一个 `scrm.jlsupp.com` tab 的 URL 判断登录状态。若用户同时开了多个 SCRM tab（如手动打开了多个店铺），检测的可能不是刚注入的那个账号 → 误报"正常"。检测时应保持主 Chrome 中只有一个鲸灵 tab。 |
+| 17 | check-session 慢网络下可能误报"正常" | inject 内等 2s + check-session 再等 3s = 共 5s。若网络慢，页面仍在跳转中（URL 尚未到达 `/login`），就会被判为"正常"。实际上 session 已过期，只是跳转还没完成。症状：刷新后显示"正常"，但 scan 时仍报 expired。解法：直接触发全账号扫描（真实 cli.js list 验证）。 |
 
 ## PATHS
 
