@@ -239,3 +239,6 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#63 熔断中调用侧禁止包 retry**：`erpNav()` 熔断时直接返回错误，本地 retry 绕过全局保护。
 - `[∞]` **#64 erp-health.json 读-merge-写**：`updateErpHealth()` 必须读现有 JSON → merge → 写回，禁止整体覆盖。
 - `[∞]` **#65 ERP 对应表店铺过滤器每次必须后置验证**：切换完成后强制 check，不信任残留状态。retry 3次仍错则抛错人工介入。
+- `[∞]` **#66 单品档案（type=0）subItems=[] 不等于无档案**：`productArchive` 查到 title 但 subItemNum=0 时，必须用 title 构造虚拟 subItem（qty=1）参与匹配，不能因 `archiveSubItems` 为空就走"无档案→上报"降级。与赠品的处理完全对称。2026-05-09 案例：甘油二酯咖啡固体饮料生椰拿铁味，入库1件良品、申请退1件，被误上报。
+- `[∞]` **#67 execExecute 禁用 execFileSync，改用 spawnAsync**：`execFileSync` 阻塞 Node.js 事件循环，SSE 响应无法 flush，批量执行时前端看不到队列状态更新且失败 toast 被覆盖。`op-queue.js` 中所有 CLI 调用统一走 `spawnAsync`（已有函数）。2026-05-12 修复。
+- `[∞]` **#68 批量执行与手动执行写入 cases.jsonl 时 source 字段必须区分**：批量走 `'batch_executed'`，手动走 `'executed'`。`routes.js` 入队时传 `fromBatch: true`，`execExecute` 读 `op.params.fromBatch` 决定。2026-05-12 修复。
