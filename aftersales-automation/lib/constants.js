@@ -47,6 +47,26 @@ const RESCAN_INTERVAL_HOURS = 4;
 // 安全边际（小时）：剩余时效 - 下次扫描间隔 > 此值才安全等待，否则拒绝
 const SAFETY_MARGIN_HOURS = 8;
 
+// 批量执行：允许入队的 queue item 状态白名单
+const BATCH_EXECUTABLE_STATUSES = ['simulated'];
+
+// 批量执行：允许自动批量执行的 reject reasonCode 白名单
+const BATCH_SAFE_REJECT_CODES = [
+  'SIGNED_NO_INTERCEPT',  // 已签收，无法拦截，请改退货退款
+  'AT_STATION',           // 已到驿站待取件，可联系驿站拦截
+  'INTERCEPT_TIMEOUT',    // 在途拦截件时效不足，立即处理
+  'OVERDUE_RETURN',       // 超售后期无理由退货
+];
+
+// 判断某条 simulation decision 是否允许批量执行
+function isBatchExecutable(decision, queueItemStatus) {
+  if (!queueItemStatus || !BATCH_EXECUTABLE_STATUSES.includes(queueItemStatus)) return false;
+  if (!decision) return false;
+  if (decision.action === 'approve') return true;
+  if (decision.action === 'reject') return BATCH_SAFE_REJECT_CODES.includes(decision.reasonCode);
+  return false;
+}
+
 // 计算距下次自动扫描的小时数
 function getHoursUntilNextScan() {
   const now = new Date();
@@ -60,4 +80,4 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable };

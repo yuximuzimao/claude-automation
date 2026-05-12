@@ -273,11 +273,14 @@ async function reinferSim(simId, btn) {
 
 // ── 批量执行 ─────────────────────────────────────────────────────
 async function batchExecute() {
-  if (!confirm('确认批量执行所有推理完成的实际工单？')) return;
+  if (!confirm('确认批量执行所有同意退款 + 确定性拒绝的工单？（排除等待重查和上报人工）')) return;
   try {
     const res = await api('/simulations/batch-execute', { method: 'POST', body: JSON.stringify({}) });
     const count = res.count || 0;
-    showToast(count > 0 ? `已将 ${count} 张工单加入执行队列` : '没有待执行的工单');
+    const msg = count > 0
+      ? `已将 ${count} 张工单加入执行队列（同意${res.approveCount || 0}张，拒绝${res.rejectCount || 0}张）`
+      : '没有待执行的工单';
+    showToast(msg);
   } catch (e) {
     showToast('批量执行失败：' + e.message, 'error');
   }

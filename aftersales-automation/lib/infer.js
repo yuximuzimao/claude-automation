@@ -338,11 +338,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       }
       // 全部已签收，无在途件
       s({ type: 'branch', text: '拒绝退款 → 全部包裹已签收，无件可拦截，请申请退货退款' });
-      return fin(reject(
+      return fin({ ...reject(
         '商品已签收，无法拦截，请自行申请退货退款',
         [],
         [{ doc: 'flow-5.3', section: 'Step4', summary: '已签收→拒绝，让改退货退款' }]
-      ));
+      ), reasonCode: 'SIGNED_NO_INTERCEPT' });
     }
 
     // 驿站/快递柜待取件：货到了买家未取，应拒绝并通知拦截（驿站/快递柜可退件）
@@ -356,11 +356,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     if (anyAtYizhan) {
       s({ type: 'branch', text: '拒绝退款 → 商品已到驿站待取件，可联系驿站退件拦截' });
-      return fin(reject(
+      return fin({ ...reject(
         '商品已到驿站待取件，可联系快递公司/驿站拦截退件，拦截成功后退款',
         ['需创建快递拦截提醒'],
         [{ doc: 'flow-5.3', section: 'Step4', summary: '驿站待取件→拒绝+创建拦截提醒' }]
-      ));
+      ), reasonCode: 'AT_STATION' });
     }
 
     // 时间分支：剩余时效 - 下次扫描间隔 > 8h → 等待重查；≤ 8h → 拒绝
@@ -393,11 +393,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     const marginStr = margin != null ? margin.toFixed(1) : '?';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
-    return fin(reject(
+    return fin({ ...reject(
       '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
       ['需创建快递拦截提醒'],
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
-    ));
+    ), reasonCode: 'INTERCEPT_TIMEOUT' });
   }
 
   s({ type: 'branch', text: `上报 → ERP状态未识别: ${erpStatus}` });
@@ -445,6 +445,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       );
       d.rejectReason = '已超过售后期';
       d.rejectDetail = '商品已超过售后期，不支持退货，图片为发货快递截图';
+      d.reasonCode = 'OVERDUE_RETURN';
       return fin(d);
     }
 

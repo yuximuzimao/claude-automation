@@ -486,7 +486,9 @@ async function execExecute(op) {
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
 
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
-  const accountNum = queueItem && queueItem.accountNum;
+  if (!queueItem) return { skipped: true, reason: '队列项不存在' };
+  if (queueItem.status === 'waiting') return { skipped: true, reason: '工单处于等待重查状态，跳过执行' };
+  const accountNum = queueItem.accountNum;
   if (accountNum) {
     const injResult = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
       timeout: 30000, encoding: 'utf8',

@@ -12,6 +12,7 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const opQueue = require('./op-queue');
+const { isBatchExecutable } = require('../constants');
 
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
@@ -108,12 +109,33 @@ router.post('/simulations/:id/reinfer', (req, res) => {
 // 批量执行（拆成多条 execute 入队，逐一串行）
 router.post('/simulations/batch-execute', (req, res) => {
   const sims = db.readSimulations({ mode: 'live' });
-  const toExec = sims.filter(s => s.decision && !s.executedAt && s.mode === 'live');
+  const queue = db.readQueue();
+  const queueMap = new Map((queue.items || []).map(i => [i.id, i]));
+
+  // 按 createdAt 正序排列，Map.set 后面覆盖前面，同 queueItemId 保留最新 simulation
+  const candidates = sims
+    .filter(s => s.decision && !s.executedAt && s.mode === 'live')
+    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+  const latestByQueue = new Map();
+  for (const s of candidates) {
+    const qi = queueMap.get(s.queueItemId);
+    if (!qi) continue; // 孤儿 simulation，无对应 queue item
+    if (isBatchExecutable(s.decision, qi.status)) {
+      latestByQueue.set(s.queueItemId, s);
+    }
+  }
+  const toExec = [...latestByQueue.values()];
+
+  let approveCount = 0, rejectCount = 0;
   for (const sim of toExec) {
-    const actionLabel = { approve: '同意退款', reject: '拒绝退款', escalate: '上报人工' }[sim.decision.action] || sim.decision.action;
+    const action = sim.decision.action;
+    if (action === 'approve') approveCount++;
+    else if (action === 'reject') rejectCount++;
+    const actionLabel = { approve: '同意退款', reject: '拒绝退款' }[action] || action;
     opQueue.enqueue('execute', `执行 ${sim.workOrderNum} ${actionLabel}`, { simId: sim.id });
   }
-  res.status(202).json({ ok: true, count: toExec.length });
+  res.status(202).json({ ok: true, count: toExec.length, approveCount, rejectCount });
 });
 
 // 批量重来（每条工单单独入队，前端可见每条进度）
