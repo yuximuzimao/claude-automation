@@ -561,7 +561,7 @@ function renderHistoryCard(c, latestFb) {
   const gtSource = gt && gt.source;
 
   const gtBadge = gtAction ? `<span class="decision-tag ${gtAction}">${DECISION_ICONS[gtAction]} ${DECISION_LABELS[gtAction]}</span>` : '';
-  const sourceBadge = `<span class="tag tag-type">${gtSource === 'auto_executed' ? '自动处理' : gtSource === 'executed' ? '已执行' : gtSource === 'manual_handled' ? '手动归档' : gtSource === 'manual' ? '手动录入' : '导入'}</span>`;
+  const sourceBadge = `<span class="tag tag-type">${gtSource === 'auto_executed' ? '自动处理' : gtSource === 'batch_executed' ? '批量执行' : gtSource === 'executed' ? '手动执行' : gtSource === 'manual_handled' ? '手动归档' : gtSource === 'manual' ? '手动录入' : '导入'}</span>`;
 
   // 反馈（只取最新一条）
   const fbHtml = latestFb ? `

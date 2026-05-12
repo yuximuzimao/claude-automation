@@ -133,7 +133,7 @@ router.post('/simulations/batch-execute', (req, res) => {
     if (action === 'approve') approveCount++;
     else if (action === 'reject') rejectCount++;
     const actionLabel = { approve: '同意退款', reject: '拒绝退款' }[action] || action;
-    opQueue.enqueue('execute', `执行 ${sim.workOrderNum} ${actionLabel}`, { simId: sim.id });
+    opQueue.enqueue('execute', `执行 ${sim.workOrderNum} ${actionLabel}`, { simId: sim.id, fromBatch: true });
   }
   res.status(202).json({ ok: true, count: toExec.length, approveCount, rejectCount });
 });

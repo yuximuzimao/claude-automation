@@ -480,7 +480,7 @@ async function execReprocessOne(op) {
 }
 
 async function execExecute(op) {
-  const { simId, rejectReason, rejectDetail, rejectImageUrl } = op.params;
+  const { simId, rejectReason, rejectDetail, rejectImageUrl, fromBatch } = op.params;
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
@@ -497,18 +497,25 @@ async function execExecute(op) {
   }
 
   const { action } = sim.decision;
-  const EXEC_OPTS = { cwd: BASE, timeout: 90000, encoding: 'utf8' };
   let result;
 
+  // 用 spawnAsync 替代 execFileSync，避免阻塞事件循环（保证 SSE 队列状态能实时推送）
+  async function runCLI(args) {
+    const { code, stdout } = await spawnAsync('node', [CLI, ...args], { cwd: BASE });
+    let parsed;
+    try { parsed = JSON.parse(stdout); } catch(e) { throw new Error(`CLI 输出解析失败（exit ${code}）: ${stdout.slice(0, 100)}`); }
+    return parsed;
+  }
+
   if (action === 'approve') {
-    result = JSON.parse(execFileSync('node', [CLI, 'approve', sim.workOrderNum], EXEC_OPTS));
+    result = await runCLI(['approve', sim.workOrderNum]);
   } else if (action === 'reject') {
     const args = ['reject', sim.workOrderNum,
       rejectReason || sim.decision.rejectReason || sim.decision.reason,
       rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
     ];
     if (rejectImageUrl) args.push(rejectImageUrl);
-    result = JSON.parse(execFileSync('node', [CLI, ...args], EXEC_OPTS));
+    result = await runCLI(args);
     // 拦截提醒
     const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
     if (needsReminder) {
@@ -535,17 +542,18 @@ async function execExecute(op) {
         const goodsName = (archiveTitle || subOrderAttr).slice(0, 30);
         const qty = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].afterSaleNum || '';
         const shipTracking = allShipTrackings.join(',');
-        const remindArgs = [CLI, 'remind', sim.workOrderNum, accountNote,
-          shipTracking, internalId, goodsName, qty ? String(qty) : ''];
-        execFileSync('node', remindArgs, EXEC_OPTS);
-        allShipTrackings.forEach(t => {
-          db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
-          log(`已记录拦截: ${t}`);
-        });
+        const remindResult = await runCLI(['remind', sim.workOrderNum, accountNote,
+          shipTracking, internalId, goodsName, qty ? String(qty) : '']);
+        if (remindResult) {
+          allShipTrackings.forEach(t => {
+            db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
+            log(`已记录拦截: ${t}`);
+          });
+        }
       } catch(e) { log(`remind 失败（非致命）: ${e.message}`); }
     }
   } else if (action === 'escalate') {
-    result = JSON.parse(execFileSync('node', [CLI, 'add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`], EXEC_OPTS));
+    result = await runCLI(['add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`]);
   } else {
     throw new Error(`未知 action: ${action}`);
   }
@@ -555,7 +563,7 @@ async function execExecute(op) {
   db.appendCase({
     id: `case-${Date.now()}`, workOrderNum: sim.workOrderNum, accountNote: sim.accountNote,
     type: sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type,
-    groundTruth: { action, reason: sim.decision.reason, source: 'executed' },
+    groundTruth: { action, reason: sim.decision.reason, source: fromBatch ? 'batch_executed' : 'executed' },
     collectedData: sim.collectedData, addedAt: new Date().toISOString(),
   });
   db.updateSimulation(simId, { executedAt: new Date().toISOString() });
