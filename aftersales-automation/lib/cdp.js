@@ -151,6 +151,46 @@ async function typeText(targetId, text) {
   await cdpCall(targetId, 'Input.insertText', { text });
 }
 
+// Chrome HTTP API: PUT /json/new?{url} 创建新标签页，返回 target 信息（含 id）
+function createTarget(url) {
+  return new Promise((resolve, reject) => {
+    const req = http.request({
+      hostname: 'localhost', port: CHROME_PORT,
+      path: '/json/new?' + encodeURIComponent(url),
+      method: 'PUT', timeout: 15000,
+    }, (res) => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => {
+        try { resolve(JSON.parse(Buffer.concat(chunks).toString())); }
+        catch(e) { reject(e); }
+      });
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('createTarget timeout')); });
+    req.end();
+  });
+}
+
+// Chrome HTTP API: POST /json/activate/{targetId} 将标签页切换到前台
+// 必须前台才能触发 Chrome 密码管理器自动填充
+function activateTarget(targetId) {
+  return new Promise((resolve, reject) => {
+    const req = http.request({
+      hostname: 'localhost', port: CHROME_PORT,
+      path: '/json/activate/' + targetId,
+      method: 'POST', timeout: 5000,
+    }, (res) => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => resolve());
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('activateTarget timeout')); });
+    req.end();
+  });
+}
+
 const cdp = {
   eval: evalJs,
   clickAt,
@@ -160,6 +200,8 @@ const cdp = {
   key,
   typeText,
   getTargets,
+  createTarget,
+  activateTarget,
 };
 
 module.exports = cdp;
