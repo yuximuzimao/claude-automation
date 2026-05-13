@@ -77,26 +77,20 @@ async function physicalClickVisible(targetId, containerSel, itemSel) {
 // Step 1: 确保弹窗已打开
 // ============================================================
 async function ensureDialogOpen(targetId) {
-  const isOpen = await cdp.eval(targetId, `(function(){
-    var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper'));
-    return wrappers.some(function(w){
-      var r = w.getBoundingClientRect();
-      return r.width > 0 && r.height > 0;
-    });
-  })()`);
+  // 专门查"新建售后工单"弹窗（忽略"提示"等其他弹窗）
+  const FIND_MAIN = `Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
+    var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+    var t = w.querySelector('.el-dialog__title');
+    return t && t.textContent.includes('新建售后工单');
+  })`;
+  const isOpen = await cdp.eval(targetId, `!!(${FIND_MAIN})`);
   if (isOpen) return;
 
   // 点"新建售后工单"按钮
   await clickVisibleBtn(targetId, '新建售后工单', 10000);
   await waitFor(async () => {
-    return await cdp.eval(targetId, `(function(){
-      var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper'));
-      return wrappers.some(function(w){
-        var r = w.getBoundingClientRect();
-        return r.width > 0 && r.height > 0;
-      });
-    })()`);
-  }, { timeoutMs: 10000, intervalMs: 500, label: '等待弹窗打开' });
+    return await cdp.eval(targetId, `!!(${FIND_MAIN})`);
+  }, { timeoutMs: 10000, intervalMs: 500, label: '等待新建售后工单弹窗打开' });
 }
 
 // ============================================================
@@ -106,7 +100,9 @@ async function ensureDialogOpen(targetId) {
 async function ensureFilterCorrect(targetId) {
   const current = await cdp.eval(targetId, `(function(){
     var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
     });
     if (!wrapper) return null;
     // index=1：查询维度筛选（排除 index=0 的"订单/出库单"类型 select）
@@ -123,7 +119,9 @@ async function ensureFilterCorrect(targetId) {
   // 获取 index=1 select 的坐标，物理点击展开
   const selRect = await cdp.eval(targetId, `(function(){
     var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
     });
     if (!wrapper) return null;
     var sels = Array.from(wrapper.querySelectorAll('.el-select')).filter(function(s){
@@ -139,7 +137,9 @@ async function ensureFilterCorrect(targetId) {
   // JS click inp 展开下拉
   await cdp.eval(targetId, `(function(){
     var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
     });
     var sels = Array.from(wrapper.querySelectorAll('.el-select')).filter(function(s){
       var r = s.getBoundingClientRect(); return r.width > 0 && r.height > 0;
@@ -172,7 +172,9 @@ async function ensureFilterCorrect(targetId) {
   await waitFor(async () => {
     return await cdp.eval(targetId, `(function(){
       var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-        var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+        var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+        var t = w.querySelector('.el-dialog__title');
+        return t && t.textContent.includes('新建售后工单');
       });
       var sels = Array.from(wrapper.querySelectorAll('.el-select')).filter(function(s){
         var r = s.getBoundingClientRect(); return r.width > 0 && r.height > 0;
@@ -191,7 +193,9 @@ async function fillTracking(targetId, tracking) {
   // 找输入框并物理点击聚焦
   const inputRect = await cdp.eval(targetId, `(function(){
     var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
     });
     if (!wrapper) return null;
     // 找不是 select 内的 input（排除筛选下拉）
@@ -209,7 +213,9 @@ async function fillTracking(targetId, tracking) {
   // JS focus + select 聚焦输入框，再 insertText
   await cdp.eval(targetId, `(function(){
     var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
     });
     var inputs = Array.from(wrapper.querySelectorAll('input[type="text"], input:not([type])'));
     var inp = inputs.find(function(i){
@@ -377,26 +383,44 @@ async function ensureContinueNextChecked(targetId) {
 // Step 8: 全选商品
 // ============================================================
 async function selectAllItems(targetId) {
+  // 必须等到弹窗内表格有行才点（否则点了也没有商品）
   await waitFor(async () => {
     const clicked = await cdp.eval(targetId, `(function(){
-      // 找表头全选 checkbox（el-table 的 header checkbox）
-      var headerCbs = Array.from(document.querySelectorAll('.el-table__header .el-checkbox, .el-table__header input[type="checkbox"]'));
-      var cb = headerCbs.find(function(c){
-        var r = c.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      // 必须从弹窗 wrapper 内查找，禁止全局 querySelectorAll（会命中主页表格）
+      var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
+        var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+        var t = w.querySelector('.el-dialog__title');
+        return t && t.textContent.includes('新建售后工单');
       });
+      if (!wrapper) return false;
+      // 确保弹窗内结果表格有行
+      var table = Array.from(wrapper.querySelectorAll('.el-table')).find(function(t){
+        return t.getBoundingClientRect().width > 0;
+      });
+      if (!table) return false;
+      var rows = table.querySelectorAll('.el-table__body tbody tr');
+      if (rows.length === 0) return false; // 表格还没加载
+      // 找弹窗内表格的 header checkbox
+      var cb = table.querySelector('.el-table__header .el-checkbox');
       if (cb) { cb.click(); return true; }
-      // fallback: "全部勾选"按钮
-      var btns = Array.from(document.querySelectorAll('button'));
-      var btn = btns.find(function(b){
-        var r = b.getBoundingClientRect();
-        return r.width > 0 && r.height > 0 && b.textContent.includes('全部勾选');
-      });
-      if (btn) { btn.click(); return true; }
       return false;
     })()`);
     return clicked;
-  }, { timeoutMs: 8000, intervalMs: 500, label: '全选商品' });
-  await sleep(300);
+  }, { timeoutMs: 10000, intervalMs: 500, label: '全选商品' });
+  await sleep(400);
+
+  // 验证：确认行已被选中（至少有 1 行 checked）
+  const verified = await cdp.eval(targetId, `(function(){
+    var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
+      var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+      var t = w.querySelector('.el-dialog__title');
+      return t && t.textContent.includes('新建售后工单');
+    });
+    if (!wrapper) return false;
+    var inputs = Array.from(wrapper.querySelectorAll('.el-table__body input[type=checkbox]'));
+    return inputs.some(function(i){ return i.checked; });
+  })()`);
+  if (!verified) throw new Error('全选商品后无行被选中，请检查表格状态');
 }
 
 // ============================================================
@@ -447,9 +471,11 @@ async function createAndReceive(targetId) {
   await waitFor(async () => {
     return await cdp.eval(targetId, `(function(){
       var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-        var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+        var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+        var t = w.querySelector('.el-dialog__title');
+        return t && t.textContent.includes('新建售后工单');
       });
-      if (!wrapper) return false; // 弹窗关闭了 = 也算成功（继续下一笔未勾选时）
+      if (!wrapper) return true; // 弹窗关闭了 = 创建成功（继续下一笔未勾选时）
       var inputs = Array.from(wrapper.querySelectorAll('input[type="text"], input:not([type])'));
       var inp = inputs.find(function(i){
         var r = i.getBoundingClientRect();
