@@ -119,23 +119,7 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
     '})()'
   );
   if (clickResult !== 'clicked') throw new Error(`Cannot click 换 for ${platformCode}: ${clickResult}`);
-
-  // 等待弹窗完全渲染（el-select 至少 3 个才算就绪），最多 8s
-  const { waitFor } = require('./wait');
-  await waitFor(async () => {
-    const count = await cdp.eval(erpId,
-      '(function(){' +
-      '  var dialogs=document.querySelectorAll(".el-dialog__wrapper");' +
-      '  for(var i=0;i<dialogs.length;i++){' +
-      '    if(dialogs[i].getBoundingClientRect().height>0){' +
-      '      return dialogs[i].querySelectorAll(".el-select").length;' +
-      '    }' +
-      '  }' +
-      '  return 0;' +
-      '})()'
-    );
-    return count >= 3;
-  }, { timeoutMs: 8000, intervalMs: 300, label: '等换对应商品弹窗渲染' });
+  await sleep(1500);
 
   // Step 7: 验证弹窗出现
   const dialogTitle = await cdp.eval(erpId,
