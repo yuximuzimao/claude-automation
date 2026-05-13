@@ -255,6 +255,8 @@ data/products/
 - `[1/2026-05-07]` **readAllCorrespondence 有副作用**：内部硬编码调用 downloadPlatformProducts()，不是只读操作。仅查询数据时用 readCorrespondence()（待实现），需要刷新数据时才用 readAllCorrespondence()。
 - `[1/2026-05-08]` **「选择商品」弹窗搜索返回2条结果不等于名称歧义**：气垫霜正装和替换装名称都包含"亮肤色"，ERP 弹窗是子串搜索，count=2 是正常的。wait-loop break 条件必须同时检查 `hasExact`（任意 td 的 innerText 精确等于 productName 即命中），不能只靠 count===1，否则10s 超时。行选择（r3）本就精确匹配，无需另改。
 - `[1/2026-05-08]` **matched-original SKU 的 recognition 必须补填，不能留 null**：重跑 `--from annotate` 时，matched-original + recognition=null 会被 annotate 跳过，导致 itemType=null。识图阶段需要按 erpName/skuName 为这些条目补填 recognition.items，让 annotate 能正常生成 itemType。
+- `[1/2026-05-13]` **全量下载选择是 el-radio，不是 el-checkbox**：下载平台商品弹窗里「全量下载」「增量下载」「指定下载」三个选项是 `el-radio` 组，默认选中「增量下载（value=2）」。代码若用 `.el-checkbox` + `input[type=checkbox]` 查找，永远 null，全量下载永远不被选中，静默跑增量。正确：`.el-radio` + `input[type=radio]`，查 checked 状态再 click。
+- `[1/2026-05-13]` **ensureCorrPage 跳过 reload 导致残留 dialog 叠加超时**：`ensureCorrPage` 检测到 hash 已匹配时跳过 reload，仅清空搜索框。若前一次操作（如手动 inspect）留有未关闭 dialog，新 download dialog 叠加在顶层但 gone 检测（等所有 dialog 消失）永远不通过，导致 60s 超时。根治：download 操作前必须用 `navigateErp()`（强制 full reload），不能用 `ensureCorrPage`。
 
 ---
 
