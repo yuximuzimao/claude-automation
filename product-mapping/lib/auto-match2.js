@@ -311,7 +311,10 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
 
 async function main(erpId, shopName = '澜泽', limit = Infinity) {
   const log = loadLog();
-  // 每次新任务开始前清空 failed[]，避免历史失败记录干扰本次统计和排查
+  // 每次新任务开始前清空 done[] 和 failed[]：
+  // - done[] 旧记录对新活动 platformCode 无效，留着只会误过滤
+  // - failed[] 历史错误对本次无意义，干扰统计排查
+  log.done = [];
   log.failed = [];
   saveLog(log);
 

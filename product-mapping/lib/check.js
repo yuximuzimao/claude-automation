@@ -49,8 +49,18 @@ async function runCheck(jlId, erpId, shopName) {
     console.error('[check] 3/4 初始化商品档案V2...');
     await initArchiveComp(erpId);
 
-    // 4. 确保图片目录存在
-    fs.mkdirSync(path.join(__dirname, '../data/imgs'), { recursive: true });
+    // 4. 清空并重建图片目录、清空旧报告（对下次匹配无用，保留只会积累干扰）
+    const imgsDir = path.join(__dirname, '../data/imgs');
+    if (fs.existsSync(imgsDir)) {
+      fs.readdirSync(imgsDir).forEach(f => fs.unlinkSync(path.join(imgsDir, f)));
+    }
+    fs.mkdirSync(imgsDir, { recursive: true });
+    if (fs.existsSync(REPORT_DIR)) {
+      fs.readdirSync(REPORT_DIR).forEach(f => {
+        if (f.endsWith('.json')) fs.unlinkSync(path.join(REPORT_DIR, f));
+      });
+    }
+    console.error('[check] 清空 imgs/ 和 reports/（全新开始）');
 
     // 读取识图记录（sku-records.json），用于报告对比
     // 兼容两种格式：match-one 格式 {stage,skus:{platformCode→rec}} 和旧平铺格式 {platformCode→rec}
