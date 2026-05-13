@@ -91,6 +91,7 @@ async function ensureDialogOpen(targetId) {
   await waitFor(async () => {
     return await cdp.eval(targetId, `!!(${FIND_MAIN})`);
   }, { timeoutMs: 10000, intervalMs: 500, label: '等待新建售后工单弹窗打开' });
+  await sleep(150);              // 弹窗 DOM 到 Vue mounted 的最后一段渲染
 }
 
 // ============================================================
@@ -228,7 +229,7 @@ async function fillTracking(targetId, tracking) {
 
   // 用 Input.insertText 填入（必须通过 cdp typeText）
   await cdp.typeText(targetId, tracking);
-  await sleep(300);
+  await sleep(500);              // 等 Vue input handler 处理完输入再回车
 
   // 回车
   await cdp.key(targetId, 'Enter');
@@ -495,7 +496,11 @@ async function processOne(targetId, tracking) {
   process.stdout.write(`[${tracking}] 开始处理\n`);
 
   await ensureDialogOpen(targetId);
+  await sleep(200);              // 等 Vue 完成弹窗 mount 初始化
+
   await ensureFilterCorrect(targetId);
+  await sleep(200);              // 等 Vue 提交筛选维度变更
+
   await fillTracking(targetId, tracking);
 
   const result = await waitForSearchResult(targetId);
@@ -572,6 +577,7 @@ async function processOne(targetId, tracking) {
   // 订单已加载
   await selectRefusalType(targetId);
   await selectWarehouse(targetId);
+  await sleep(300);              // 等退货仓库变更后表格可能的重渲染稳定
   await ensureContinueNextChecked(targetId);
   await selectAllItems(targetId);
   await createAndReceive(targetId);
