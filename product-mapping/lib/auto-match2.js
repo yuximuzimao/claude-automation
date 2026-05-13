@@ -175,20 +175,15 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
   await closeSelectDialogIfOpen(erpId);
   await sleep(300);
 
-  // 搜索货号过滤表格（不整页跳转，留在商品对应表）
+  // 搜索货号过滤表格（用 .el-input-popup-editor input，无 placeholder，INDEX.md §5）
   await cdp.eval(erpId,
     '(function(){' +
-    '  var inputs=document.querySelectorAll("input");' +
-    '  for(var i=0;i<inputs.length;i++){' +
-    '    var ph=inputs[i].placeholder||"";' +
-    '    if(ph.includes("商家编码")){' +
-    '      inputs[i].value=' + JSON.stringify(productCode) + ';' +
-    '      inputs[i].dispatchEvent(new Event("input",{bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      inputs[i].dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '      return;' +
-    '    }' +
-    '  }' +
+    '  var inp=document.querySelector(".el-input-popup-editor input");' +
+    '  if(!inp) return;' +
+    '  inp.value=' + JSON.stringify(productCode) + ';' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
     '})()'
   );
   await sleep(2000);
@@ -320,42 +315,44 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
 
   console.error(`[auto-match2] 组合装: ${bundles.length}, 单品: ${singles.length}`);
 
-  // ══ Phase 1：组合装 ══
+  // ══ Phase 1：组合装（每个 bundle 独立走：搜索→勾选→标记套件→复制为套件）══
   if (bundles.length > 0) {
-    console.error('\n── Phase 1a+b：导航 + 逐页展开+勾选所有组合装 SKU ──');
     await navigateErp(erpId, '商品对应表');
-    await cdp.eval(erpId,
-      '(function(){' +
-      '  var spans=document.querySelectorAll("span");' +
-      '  for(var i=0;i<spans.length;i++){' +
-      '    if(spans[i].innerText.trim()===' + JSON.stringify(shopName) + '&&spans[i].className.includes("el-tooltip")){spans[i].click();return;}' +
-      '  }' +
-      '})()'
-    );
-    await sleep(1500);
 
-    const productCodes = [...new Set(bundles.map(r => r.productCode))];
-    const platformCodes = bundles.map(r => r.platformCode);
-
-    // 逐页处理
-    let pageNum = 1;
-    while (true) {
-      console.error(`\n  第 ${pageNum} 页：展开+勾选`);
-      await processCurrentPage(erpId, productCodes, platformCodes);
-      const more = await hasNextPage(erpId);
-      if (!more) break;
-      await clickNextPage(erpId);
-      pageNum++;
-    }
-
-    console.error('\n── Phase 1c：套件处理 → 标记套件 ──');
-    await sleep(500);
-    await clickMarkSuite(erpId);
-
-    console.error('\n── Phase 1d：逐个复制为套件 ──');
     for (let i = 0; i < bundles.length; i++) {
       const r = bundles[i];
-      console.error(`\n[${i + 1}/${bundles.length}] ${r.platformCode}`);
+      console.error(`\n── Phase 1 [${i + 1}/${bundles.length}] ${r.platformCode} ──`);
+
+      // Step A: 用货号搜索，定位到目标行所在页
+      await cdp.eval(erpId,
+        '(function(){' +
+        '  var inp=document.querySelector(".el-input-popup-editor input");' +
+        '  if(!inp) return;' +
+        '  inp.value=' + JSON.stringify(r.productCode) + ';' +
+        '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
+        '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
+        '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
+        '})()'
+      );
+      await sleep(2000);
+
+      // Step B: 展开目标货号行并勾选目标 SKU（只在当前页操作，不翻页）
+      const pageResult = await processCurrentPage(erpId, [r.productCode], [r.platformCode]);
+      if (pageResult.checked === 0) {
+        const err = `展开+勾选失败: productCode=${r.productCode} platformCode=${r.platformCode}`;
+        log.failed.push({ platformCode: r.platformCode, type: '组合装', error: err, time: new Date().toISOString() });
+        saveLog(log);
+        throw new Error(err);
+      }
+      console.error(`[Phase1] 勾选成功，立即标记套件`);
+
+      // Step C: 标记套件（在当前页勾选状态未丢失时立即执行）
+      console.error(`\n── Phase 1c：套件处理 → 标记套件 ──`);
+      await sleep(500);
+      await clickMarkSuite(erpId);
+
+      // Step D: 复制为套件
+      console.error(`\n── Phase 1d：复制为套件 ──`);
       try {
         await copyOneSku(erpId, shopName, r.productCode, r.platformCode,
           r.recognition.items.map(it => ({ name: it.name, qty: it.qty })));
