@@ -311,6 +311,9 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
 
 async function main(erpId, shopName = '澜泽', limit = Infinity) {
   const log = loadLog();
+  // 每次新任务开始前清空 failed[]，避免历史失败记录干扰本次统计和排查
+  log.failed = [];
+  saveLog(log);
 
   const todo = getTodo(shopName);
   const bundles = todo.filter(r => r.recognition.type === '组合装').slice(0, limit);
