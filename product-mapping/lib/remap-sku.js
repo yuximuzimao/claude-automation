@@ -17,7 +17,7 @@
 const path = require('path');
 const fs = require('fs');
 const cdp = require('./cdp');
-const { sleep } = require('./wait');
+const { sleep, waitFor } = require('./wait');
 const { navigateErp } = require('./navigate');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
@@ -45,18 +45,21 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
 
   // Step 2: 导航到商品对应表（skipNav=true 时跳过，调用方已就绪）
   if (!skipNav) await navigateErp(erpId, '商品对应表');
+  console.error(`[remap] S2 done`);
 
   // Step 3: 点击左侧店铺
-  await cdp.eval(erpId,
+  const s3 = await cdp.eval(erpId,
     '(function(){' +
     '  var spans=document.querySelectorAll("span");' +
     '  for(var i=0;i<spans.length;i++){' +
     '    if(spans[i].innerText.trim().includes(' + JSON.stringify(shopName) + ')&&spans[i].className.includes("el-tooltip")){' +
-    '      spans[i].click();return;' +
+    '      spans[i].click();return "clicked:" + spans[i].innerText.trim();' +
     '    }' +
     '  }' +
+    '  return "not-found";' +
     '})()'
   );
+  console.error(`[remap] S3 shop:`, s3);
   await sleep(1500);
 
   // Step 4: 用货号在搜索框中定位并展开
@@ -74,9 +77,10 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
     '})()'
   );
   await sleep(2000);
+  console.error(`[remap] S4 done`);
 
-  // Step 5: 展开目标货号行
-  // Step 5: 展开目标货号行
+  // Step 5a: 先收起（如已展开），再展开（确保 Vue 状态干净）
+  // 移除 collapse 逻辑——直接用已展开状态更稳定（fresh mount 反而会触发 Vue 异常）
   const expandResult = await cdp.eval(erpId,
     '(function(){' +
     '  var rows = document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row");' +
@@ -93,14 +97,38 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
     '})()'
   );
   if (expandResult === 'not-found') throw new Error(`productCode ${productCode} not found in table`);
-  await sleep(1500);
+  console.error(`[remap] S5 expand:`, expandResult);
+  // 等展开动画+Vue mount 完成：轮询直到「换」链接可见
+  await waitFor(async () => {
+    const found = await cdp.eval(erpId,
+      '(function(){' +
+      '  var expCells = document.querySelectorAll(".el-table__expanded-cell");' +
+      '  for(var c=0;c<expCells.length;c++){' +
+      '    var rows = expCells[c].querySelectorAll("tbody tr");' +
+      '    for(var i=0;i<rows.length;i++){' +
+      '      var tds = rows[i].querySelectorAll("td");' +
+      '      if(tds.length<6) continue;' +
+      '      if(tds[5].innerText.trim()===' + JSON.stringify(platformCode) + '){' +
+      '        var links = rows[i].querySelectorAll("a.mr_5");' +
+      '        for(var j=0;j<links.length;j++){' +
+      '          if(links[j].innerText.trim()==="换"){return links[j].getBoundingClientRect().height>0;}' +
+      '        }' +
+      '      }' +
+      '    }' +
+      '  }' +
+      '  return false;' +
+      '})()'
+    ).catch(() => false);
+    return found === true;
+  }, { timeoutMs: 5000, intervalMs: 300, label: '等「换」链接可见' });
 
   // Step 6: 找到 platformCode 那行，点「换」链接
+  console.error(`[remap] S6 start`);
+  // 直接用 JS click（已等待 Vue 完全 mount）
   const clickResult = await cdp.eval(erpId,
     '(function(){' +
     '  var expCells = document.querySelectorAll(".el-table__expanded-cell");' +
     '  if(!expCells.length) return "no-expanded-cell";' +
-    '  // 找包含目标productCode展开行的那个expCell（取最后展开的）' +
     '  for(var c=0;c<expCells.length;c++){' +
     '    var rows = expCells[c].querySelectorAll("tbody tr");' +
     '    for(var i=0;i<rows.length;i++){' +
@@ -119,6 +147,7 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
     '})()'
   );
   if (clickResult !== 'clicked') throw new Error(`Cannot click 换 for ${platformCode}: ${clickResult}`);
+  console.error(`[remap] S6 换: clicked`);
   await sleep(1500);
 
   // Step 7: 验证弹窗出现
@@ -135,6 +164,7 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
     '})()'
   );
   if (!dialogTitle.includes('换对应商品')) throw new Error(`Expected 换对应商品 dialog, got: ${dialogTitle}`);
+  console.error(`[remap] S7 dialog:`, dialogTitle);
 
   // Step 8: 设置筛选条件——精确搜索 | 商品名称 | itemType
   // 精确搜索（select[0]）和商品名称（select[1]）通常已默认，先检查再改
@@ -151,6 +181,7 @@ async function remapSku(erpId, platformCode, erpName, opts = {}) {
   );
   // cdp.eval 已自动 JSON.parse，selRaw 可能是数组也可能是字符串
   const selVals = Array.isArray(selRaw) ? selRaw : JSON.parse(selRaw);
+  console.error(`[remap] S8 selVals:`, selVals);
 
   // 确保精确搜索
   if (selVals[0] !== '精确搜索') {
