@@ -186,6 +186,9 @@ app.listen(PORT, async () => {
   }
   // ===== 闸门结束，以下正常启动 =====
 
+  // ── 启动时数据清理 ────────────────────────────────────────────────
+  startupDataCleanup();
+
   scheduleNextScan();
   startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
 
@@ -207,6 +210,46 @@ app.listen(PORT, async () => {
   }
   if (pending.length > 0) console.log(`[startup] 入队 ${pending.length} 条 pending 工单`);
 });
+
+// ── 启动时数据清理 ────────────────────────────────────────────────────
+// simulations.jsonl: 保留最新 500 条（循环缓冲）
+// queue.json: 清理 30 天前的 done 条目
+function startupDataCleanup() {
+  const SIM_FILE = path.join(__dirname, 'data/simulations.jsonl');
+  const SIM_MAX = 500;
+  const QUEUE_KEEP_DAYS = 30;
+
+  // 1. Trim simulations.jsonl
+  try {
+    const lines = fs.readFileSync(SIM_FILE, 'utf8').split('\n').filter(l => l.trim());
+    if (lines.length > SIM_MAX) {
+      const kept = lines.slice(-SIM_MAX);
+      fs.writeFileSync(SIM_FILE, kept.join('\n') + '\n');
+      console.log(`[cleanup] simulations.jsonl: ${lines.length} → ${kept.length} 条（保留最新 ${SIM_MAX}）`);
+    }
+  } catch (e) {
+    if (e.code !== 'ENOENT') console.error('[cleanup] simulations.jsonl 清理失败:', e.message);
+  }
+
+  // 2. Clean old done items from queue.json
+  try {
+    const db = require('./lib/server/data');
+    const q = db.readQueue();
+    const cutoff = Date.now() - QUEUE_KEEP_DAYS * 24 * 60 * 60 * 1000;
+    const before = (q.items || []).length;
+    q.items = (q.items || []).filter(i => {
+      if (i.status !== 'done') return true;
+      const ts = i.doneAt || i.executedAt || i.updatedAt || i.createdAt;
+      return ts ? new Date(ts).getTime() > cutoff : true; // 无时间戳保留
+    });
+    if (q.items.length < before) {
+      fs.writeFileSync(path.join(__dirname, 'data/queue.json'), JSON.stringify(q, null, 2));
+      console.log(`[cleanup] queue.json: 清理 ${before - q.items.length} 条 30 天前的 done 记录，剩余 ${q.items.length} 条`);
+    }
+  } catch (e) {
+    console.error('[cleanup] queue.json 清理失败:', e.message);
+  }
+}
 
 // ── ERP 保活心跳（1小时）─────────────────────────────────────────────
 // 防止 ERP 服务端 session 超时（实测约 4-8h），避免登录恢复失败的情况
