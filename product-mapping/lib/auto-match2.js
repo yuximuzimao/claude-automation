@@ -27,13 +27,16 @@ function loadLog() {
 function saveLog(log) { fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2)); }
 
 function getTodo(shopName) {
-  const records = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+  // check.js 全量重写后是纯平铺 {platformCode→rec}；兼容旧的 {skus:{...}} 包装格式
+  const records = (raw.skus && typeof raw.skus === 'object') ? raw.skus : raw;
   const log = loadLog();
   const done = new Set(log.done);
   return Object.values(records).filter(r =>
+    r && typeof r === 'object' &&
     r.shopName === shopName &&
     !r.erpCode &&
-    r.recognition && r.recognition.items.length > 0 &&
+    r.recognition && r.recognition.items && r.recognition.items.length > 0 &&
     !done.has(r.platformCode)
   );
 }

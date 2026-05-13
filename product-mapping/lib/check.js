@@ -235,20 +235,28 @@ async function runCheck(jlId, erpId, shopName) {
 
     if (activePlatformCodes.size > 0) {
       try {
-        const records = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
         const activeScope = `active-${dateStr}`;
-        // 兼容 match-one 格式（{stage,skus:{...}}）和旧平铺格式（{platformCode→rec}）
-        const flatRecords = records.skus || records;
-        for (const [code, rec] of Object.entries(flatRecords)) {
-          if (typeof rec !== 'object' || rec === null) continue;
-          if (activePlatformCodes.has(code)) {
-            rec.scope = activeScope;
-          } else if (!rec.scope) {
-            rec.scope = 'history';
+        // 全量重写 sku-records.json：以本次 check 的活跃 SKU 为唯一数据源
+        // 不读旧文件做 patch，避免历史残留导致 getTodo() 误判
+        const newRecords = {};
+        for (const prod of report.products) {
+          for (const sku of prod.skus) {
+            if (!sku.platformCode) continue;
+            newRecords[sku.platformCode] = {
+              platformCode: sku.platformCode,
+              skuName: sku.skuName || null,
+              productCode: prod.productCode,
+              shopName,
+              imgUrl: null,
+              erpCode: sku.erpCode || null,
+              erpName: sku.erpName || null,
+              recognition: sku.recognition || null,
+              scope: activeScope,
+            };
           }
         }
-        fs.writeFileSync(SKU_RECORDS_PATH, JSON.stringify(records, null, 2));
-        console.error(`[check] sku-records: ${activePlatformCodes.size} 条标记 scope=${activeScope}`);
+        fs.writeFileSync(SKU_RECORDS_PATH, JSON.stringify(newRecords, null, 2));
+        console.error(`[check] sku-records 全量重写：${Object.keys(newRecords).length} 条，scope=${activeScope}`);
       } catch (e) {
         console.error(`[check] ⚠️ sku-records 更新失败: ${e.message}`);
       }

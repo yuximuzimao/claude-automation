@@ -88,7 +88,7 @@ async function readSkus(erpId, shopName, productCode, opts = {}) {
     '(function(){' +
     '  var spans=document.querySelectorAll("span");' +
     '  for(var i=0;i<spans.length;i++){' +
-    '    if(spans[i].innerText.trim()===' + JSON.stringify(shopName) + '&&spans[i].className.includes("el-tooltip")){' +
+    '    if(spans[i].innerText.trim().includes(' + JSON.stringify(shopName) + ')&&spans[i].className.includes("el-tooltip")){' +
     '      spans[i].click();return "clicked";' +
     '    }' +
     '  }' +

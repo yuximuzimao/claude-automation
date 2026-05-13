@@ -31,7 +31,7 @@ async function main(erpId, shopName, productCode, platformCode) {
   // Step2: 点左侧店铺
   const r1 = await cdp.eval(erpId, `(function(){
     var spans = Array.from(document.querySelectorAll('span'));
-    var t = spans.find(function(s){ return s.innerText.trim()===${JSON.stringify(shopName)} && s.className.includes('el-tooltip'); });
+    var t = spans.find(function(s){ return s.innerText.trim().includes(${JSON.stringify(shopName)}) && s.className.includes('el-tooltip'); });
     if(!t) return JSON.stringify({error:${JSON.stringify(shopName)} + ' not found'});
     t.click(); return JSON.stringify({clicked: ${JSON.stringify(shopName)}});
   })()`);
