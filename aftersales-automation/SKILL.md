@@ -44,6 +44,7 @@ entry: cli.js
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
+| `../return-inbound/SKILL.md` | 退货入库项目导航地图（跨目录） | 调试/改退货入库 op 时；op-queue 的 `return-inbound` case 调用 `../return-inbound/lib/workflow.js` |
 
 ## CORE FLOWS
 
