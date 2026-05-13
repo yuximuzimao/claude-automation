@@ -148,11 +148,67 @@ async function executeOp(op) {
     case 'execute':        return execExecute(op);
     case 'open-ticket':    return execOpenTicket(op);
     case 'collect':        return execCollect(op);
-    default: throw new Error(`未知操作类型: ${op.type}`);
+    case 'return-inbound': return execReturnInbound(op);
   }
 }
 
 // ── 各类操作实现 ──────────────────────────────────────────────────
+
+// ── 退货入库 ──────────────────────────────────────────────────────
+
+async function execReturnInbound(op) {
+  const { processOne, findErpTarget } = require('../../../return-inbound/lib/workflow');
+  const { erpNav } = require('../../../return-inbound/lib/navigate');
+  const trackingNumbers = op.params.trackingNumbers;
+  const total = trackingNumbers.length;
+
+  // targetId 一次获取，整批复用
+  let targetId;
+  try {
+    targetId = await findErpTarget();
+  } catch(e) {
+    sse.broadcast('ri-error', { error: e.message });
+    throw e;
+  }
+
+  // 导航到售后工单新版
+  const navResult = await erpNav(targetId, '售后工单新版');
+  if (!navResult.success) {
+    const err = 'ERP导航失败: ' + navResult.error;
+    sse.broadcast('ri-error', { error: err });
+    throw new Error(err);
+  }
+
+  const results = []; // 严格保持输入顺序
+
+  for (let i = 0; i < total; i++) {
+    const tracking = trackingNumbers[i];
+
+    // 阶段1: 广播"正在处理"
+    sse.broadcast('ri-progress', { total, done: i, current: tracking, phase: 'processing' });
+
+    let status;
+    try {
+      status = await processOne(targetId, tracking);
+    } catch(e) {
+      status = '错误:' + e.message;
+    }
+    results.push({ tracking, status });
+
+    // 阶段2: 广播"已完成本条"（只传 lastResult，不传全量）
+    sse.broadcast('ri-progress', {
+      total,
+      done: i + 1,
+      current: tracking,
+      phase: 'completed',
+      lastResult: { tracking, status },
+    });
+  }
+
+  // 最终一次性传全量（按输入顺序）
+  sse.broadcast('ri-done', { results });
+  return { results };
+}
 
 function spawnAsync(cmd, args, opts) {
   return new Promise((resolve, reject) => {

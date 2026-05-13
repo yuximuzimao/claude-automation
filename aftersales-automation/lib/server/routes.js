@@ -658,4 +658,23 @@ router.post('/accounts/:num/open', (req, res) => {
   res.json({ ok: true, message: `已为账号${num}打开鲸灵店铺后台` });
 });
 
+// ── 退货入库 ──────────────────────────────────────────────────────
+
+router.post('/return-inbound/run', (req, res) => {
+  const raw = req.body && req.body.trackingNumbers;
+  if (!Array.isArray(raw) || raw.length === 0) {
+    return res.status(400).json({ error: '无单号' });
+  }
+  const trackingNumbers = raw.map(s => String(s).trim()).filter(Boolean);
+  if (trackingNumbers.length === 0) {
+    return res.status(400).json({ error: '单号为空' });
+  }
+  const op = opQueue.enqueue(
+    'return-inbound',
+    `退货入库 ${trackingNumbers.length}单`,
+    { trackingNumbers }
+  );
+  res.status(202).json({ ok: true, opId: op.id, count: trackingNumbers.length });
+});
+
 module.exports = router;

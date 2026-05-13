@@ -17,6 +17,7 @@
       <button class="tab-btn" data-tab="auto">已自动执行 <span class="tab-badge" id="auto-tab-count"></span></button>
       <button class="tab-btn" data-tab="waiting-tab">等待重查 <span class="tab-badge" id="waiting-tab-count"></span></button>
       <button class="tab-btn" data-tab="action">快递行动 <span class="tab-badge" id="action-tab-count"></span></button>
+      <button class="tab-btn" data-tab="return-inbound">退货入库</button>
       <button class="tab-btn" data-tab="history">历史记录</button>
       <button class="tab-btn" data-tab="stats">统计复盘</button>
       <button class="tab-btn" data-tab="accounts">店铺管理 <span class="tab-badge" id="accounts-tab-count"></span></button>
@@ -83,6 +84,23 @@
       </div>
     </div>
     <div id="action-content"></div>
+  </section>
+
+  <!-- Tab: 退货入库 -->
+  <section id="tab-return-inbound" class="tab-content">
+    <div class="toolbar">
+      <h2>退货入库</h2>
+      <div class="toolbar-actions">
+        <button class="btn-primary" id="ri-run-btn" onclick="riRun()">开始处理</button>
+        <button class="btn-ghost" onclick="riClear()">清空</button>
+      </div>
+    </div>
+    <div style="padding:0 16px 16px">
+      <textarea id="ri-input" placeholder="粘贴快递单号，每行一个（或逗号分隔）" rows="6"
+        style="width:100%;box-sizing:border-box;font-family:'SF Mono',Menlo,monospace;font-size:13px;padding:8px;border:1px solid #d0d0d0;border-radius:6px;resize:vertical;margin-bottom:12px;"></textarea>
+      <div id="ri-progress" style="display:none;margin-bottom:12px;padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:13px;"></div>
+      <div id="ri-results"></div>
+    </div>
   </section>
 
   <!-- Tab: 历史记录 -->

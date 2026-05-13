@@ -70,6 +70,15 @@ function connectSSE() {
   es.addEventListener('accounts-update', () => {
     if (currentTab === 'accounts') loadAccounts();
   });
+  es.addEventListener('ri-progress', (e) => {
+    try { riOnProgress(JSON.parse(e.data || '{}')); } catch {}
+  });
+  es.addEventListener('ri-done', (e) => {
+    try { riOnDone(JSON.parse(e.data || '{}')); } catch {}
+  });
+  es.addEventListener('ri-error', (e) => {
+    try { riOnError(JSON.parse(e.data || '{}')); } catch {}
+  });
 }
 
 // ── 队列面板 ─────────────────────────────────────────────────────
@@ -225,6 +234,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     if (tabEl) tabEl.classList.add('active');
     if (['pending', 'auto', 'waiting-tab'].includes(currentTab)) loadAllLiveTabs();
     if (currentTab === 'action') loadActionList();
+    if (currentTab === 'return-inbound') { /* 无需加载，等用户操作 */ }
     if (currentTab === 'history') { historyPage = 1; loadHistory(); }
     if (currentTab === 'stats') loadStats();
     if (currentTab === 'accounts') loadAccounts();
@@ -1712,4 +1722,188 @@ async function addNewAccount() {
   } else {
     showToast(res.error || '创建失败', 'error');
   }
+}
+
+// ── 退货入库 ─────────────────────────────────────────────────────
+
+// 存储本次输入顺序（供结果对齐）
+let _riInputList = [];
+// 存储已完成结果（按输入顺序，tracking → status）
+let _riResults = {};
+
+async function riRun() {
+  const raw = document.getElementById('ri-input').value;
+  const list = raw
+    .split(/[\n,，\s]+/)
+    .map(s => s.trim())
+    .filter(Boolean);
+  if (list.length === 0) { showToast('请先粘贴快递单号', 'error'); return; }
+
+  _riInputList = list;
+  _riResults = {};
+
+  // 禁用按钮
+  const btn = document.getElementById('ri-run-btn');
+  btn.disabled = true;
+  btn.textContent = '处理中...';
+
+  // 显示进度区，隐藏结果区
+  const prog = document.getElementById('ri-progress');
+  prog.style.display = 'block';
+  prog.innerHTML = `<span style="color:#888">正在提交 ${list.length} 个单号...</span>`;
+  document.getElementById('ri-results').innerHTML = '';
+
+  try {
+    const res = await api('/return-inbound/run', {
+      method: 'POST',
+      body: JSON.stringify({ trackingNumbers: list }),
+    });
+    if (!res.ok) {
+      showToast(res.error || '提交失败', 'error');
+      riResetBtn();
+    }
+    // 后续由 SSE 驱动
+  } catch(e) {
+    showToast('请求失败: ' + e.message, 'error');
+    riResetBtn();
+  }
+}
+
+function riResetBtn() {
+  const btn = document.getElementById('ri-run-btn');
+  btn.disabled = false;
+  btn.textContent = '开始处理';
+}
+
+function riOnProgress(data) {
+  const prog = document.getElementById('ri-progress');
+  if (!prog) return;
+  prog.style.display = 'block';
+
+  const { total, done, current, phase, lastResult } = data;
+
+  // 更新结果记录
+  if (phase === 'completed' && lastResult) {
+    _riResults[lastResult.tracking] = lastResult.status;
+  }
+
+  // 计算汇总
+  const inbounded = Object.values(_riResults).filter(s => s === '已入库').length;
+  const skipped   = Object.values(_riResults).filter(s => s === '未出库无需入库').length;
+  const errored   = Object.values(_riResults).filter(s => s.startsWith('错误')).length;
+
+  let phaseText = phase === 'processing'
+    ? `正在处理 <strong>${h(current)}</strong>`
+    : `已完成 <strong>${h(current)}</strong>`;
+
+  prog.innerHTML = `
+    <div style="margin-bottom:6px">${phaseText}</div>
+    <div style="display:flex;gap:16px;font-size:12px;color:#666">
+      <span>进度 <strong>${done}/${total}</strong></span>
+      <span style="color:#389e0d">已入库 <strong>${inbounded}</strong></span>
+      <span style="color:#888">无需入库 <strong>${skipped}</strong></span>
+      ${errored > 0 ? `<span style="color:#cf1322">错误 <strong>${errored}</strong></span>` : ''}
+    </div>
+    <div style="margin-top:8px;background:#e8e8e8;border-radius:4px;height:6px;">
+      <div style="background:#4a90e2;border-radius:4px;height:100%;width:${Math.round(done/total*100)}%;transition:width 0.3s"></div>
+    </div>`;
+}
+
+function riOnDone(data) {
+  const { results } = data;
+  riResetBtn();
+
+  const prog = document.getElementById('ri-progress');
+  const inbounded = results.filter(r => r.status === '已入库').length;
+  const skipped   = results.filter(r => r.status === '未出库无需入库').length;
+  const errored   = results.filter(r => r.status.startsWith('错误')).length;
+  if (prog) {
+    prog.innerHTML = `
+      <div style="display:flex;gap:16px;font-size:13px">
+        <span>✅ 全部完成，共 ${results.length} 单</span>
+        <span style="color:#389e0d">已入库 <strong>${inbounded}</strong></span>
+        <span style="color:#888">无需入库 <strong>${skipped}</strong></span>
+        ${errored > 0 ? `<span style="color:#cf1322">错误 <strong>${errored}</strong></span>` : ''}
+      </div>`;
+  }
+
+  // 按输入顺序构建结果
+  // 用 _riInputList 顺序，result 里可能有，也可能没（用 ri-error 处理了）
+  const orderedResults = _riInputList.map(t => {
+    const found = results.find(r => r.tracking === t);
+    return found || { tracking: t, status: '未处理' };
+  });
+
+  const el = document.getElementById('ri-results');
+  if (!el) return;
+
+  // 结果表格（轻量）
+  const rows = orderedResults.map((r, i) => {
+    let cls = '', label = r.status;
+    if (r.status === '已入库') { cls = 'color:#389e0d'; }
+    else if (r.status === '未出库无需入库') { cls = 'color:#888'; }
+    else if (r.status.startsWith('错误')) { cls = 'color:#cf1322'; }
+    return `<tr>
+      <td style="color:#bbb;padding:5px 10px;font-size:12px">${i+1}</td>
+      <td style="font-family:monospace;font-size:12px;padding:5px 10px">${h(r.tracking)}</td>
+      <td style="padding:5px 10px;font-size:13px;${cls}">${h(label)}</td>
+    </tr>`;
+  }).join('');
+
+  // 复制用文本：按输入顺序，每行一个状态
+  const copyText = orderedResults.map(r => r.status).join('\n');
+
+  el.innerHTML = `
+    <div style="margin-bottom:8px">
+      <button onclick="riCopyResults()" class="btn-ghost" style="font-size:12px">复制结果列（粘贴到WPS J列）</button>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <thead><tr style="background:#fafafa;color:#666;font-size:12px">
+        <th style="padding:7px 10px;text-align:left">#</th>
+        <th style="padding:7px 10px;text-align:left">快递单号</th>
+        <th style="padding:7px 10px;text-align:left">状态</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <textarea id="ri-copy-buf" style="position:absolute;left:-9999px;opacity:0">${h(copyText)}</textarea>`;
+}
+
+function riOnError(data) {
+  riResetBtn();
+  const prog = document.getElementById('ri-progress');
+  if (prog) {
+    prog.innerHTML = `<span style="color:#cf1322">❌ 运行失败：${h(data.error || '未知错误')}</span>`;
+  }
+  showToast('退货入库失败：' + (data.error || '未知错误'), 'error');
+}
+
+function riCopyResults() {
+  const buf = document.getElementById('ri-copy-buf');
+  if (!buf) return;
+  // textarea 里存的是 h() 转义过的，需要解码后复制
+  const text = buf.value
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('已复制结果列');
+  }).catch(() => {
+    buf.style.left = '0';
+    buf.style.opacity = '1';
+    buf.select();
+    document.execCommand('copy');
+    buf.style.left = '-9999px';
+    buf.style.opacity = '0';
+    showToast('已复制结果列');
+  });
+}
+
+function riClear() {
+  _riInputList = [];
+  _riResults = {};
+  const inp = document.getElementById('ri-input');
+  const prog = document.getElementById('ri-progress');
+  const res = document.getElementById('ri-results');
+  if (inp) inp.value = '';
+  if (prog) { prog.style.display = 'none'; prog.innerHTML = ''; }
+  if (res) res.innerHTML = '';
+  riResetBtn();
 }
