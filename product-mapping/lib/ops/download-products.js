@@ -6,7 +6,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { ensureCorrPage } = require('./ensure-corr-page');
+const { navigateErp } = require('../navigate');
 const { downloadPlatformProducts } = require('../correspondence');
 
 const DOWNLOAD_MARKER_FILE = path.join(__dirname, '../../data/.download-marker.json');
@@ -29,7 +29,8 @@ async function downloadProducts(erpId, shopName) {
     }
   } catch {}
 
-  await ensureCorrPage(erpId);
+  // 下载前必须 full reload（navigateErp），确保无残留弹窗
+  await navigateErp(erpId, '商品对应表');
   await downloadPlatformProducts(erpId, shopName);
   return { ok: true };
 }

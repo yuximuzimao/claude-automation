@@ -142,19 +142,18 @@ async function downloadPlatformProducts(erpId, shopName) {
   }
   await sleep(500);
 
-  // 勾选「全量下载」（el-checkbox 或原生 checkbox）
+  // 选择「全量下载」—— 实际是 el-radio（不是 el-checkbox，改用 el-radio 选择器）
   await cdp.eval(erpId,
     '(function(){' +
     '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
     '  var d=null;for(var i=0;i<ds.length;i++){if(ds[i].getBoundingClientRect().height>0){d=ds[i];break;}}' +
     '  if(!d)return;' +
-    '  var els=Array.from(d.querySelectorAll("label,span,.el-checkbox,.el-checkbox__label"));' +
-    '  var target=els.find(function(el){return el.innerText&&el.innerText.includes("全量");});' +
+    '  var radios=Array.from(d.querySelectorAll(".el-radio"));' +
+    '  var target=radios.find(function(el){return el.innerText&&el.innerText.includes("全量");});' +
     '  if(!target)return;' +
-    '  var cb=target.querySelector("input[type=checkbox]");' +
-    '  if(cb){if(!cb.checked)cb.click();return;}' +
-    '  var vmEl=target.closest(".el-checkbox");' +
-    '  if(vmEl&&vmEl.__vue__&&!vmEl.__vue__.isChecked){vmEl.click();}' +
+    '  var rb=target.querySelector("input[type=radio]");' +
+    '  if(rb&&!rb.checked){rb.click();return;}' +
+    '  if(target.__vue__&&!target.__vue__.isChecked){target.click();}' +
     '})()'
   );
   await sleep(300);

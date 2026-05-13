@@ -7,11 +7,12 @@
 ## 数据隔离检查
 
 - [ ] **data/imgs/ 是否干净？**
-  - 验证：`ls data/imgs/ | wc -l` → 应为 0（或只含当前品牌图片）
-  - 如有旧图片：先备份 `cp -r data/imgs data/imgs.bak.$(date +%Y%m%d)`，再清空 `rm -f data/imgs/*`
+  - 验证：`ls data/imgs/ | wc -l` → 应为 0
+  - 如有旧图片：**直接清空**，无需备份 → `rm -f data/imgs/*`
+  - （data/imgs/ 是一次性工作区，每次 check 重新下载，不需要保留历史图片）
 
 - [ ] **data/sku-records.json 是否已重置？**
-  - 如果是新品牌/新店铺：删除或清空旧数据（保留 stage 字段结构即可）
+  - 如果是新品牌/新店铺：直接清空 → `echo '{}' > data/sku-records.json`
 
 - [ ] **data/products/{brand}/sku-map.json 是否已清空？**
   - 如果存在旧 sku-map：`echo '{}' > data/products/{brand}/sku-map.json`

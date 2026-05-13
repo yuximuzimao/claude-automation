@@ -271,11 +271,11 @@ data/products/
 ### 完整流程（Step 0 → Step 6）
 
 ```
-Step 0: 清空旧数据工作区（止血步骤，等待架构重构后自动化）
-  - 备份：cp -r data/imgs data/imgs.bak.$(date +%Y%m%d)
-  - 清空：rm -f data/imgs/*
-  - 清空 sku-records.json（如果是新品牌/新店铺）
+Step 0: 清空旧数据工作区
+  - 直接清空（无需备份）：rm -f data/imgs/*
+  - 直接重置：echo '{}' > data/sku-records.json
   - 清空 data/products/{brand}/sku-map.json（如果存在）
+  - （data/imgs/ 是一次性工作区，每次 check 重新下载，不保留历史）
 
 Step 1: 获取全量数据
   - 跑 node cli.js check --shop <店铺>
