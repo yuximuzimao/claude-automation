@@ -39,15 +39,23 @@ function writeReport(allocResult, warehouseStock, outputPath) {
 function buildMainSheet(allocResult, warehouseStock, productCols) {
   const { skuDetails, totalDemand, available } = allocResult;
 
-  // 第1行：表头
+  // 第1行：表头（使用 ERP 实际商品名）
   const headerRow1 = ['货号', '主销售属性', '建议库存', '加购数'];
   for (const col of productCols) {
-    headerRow1.push(col.displayName); // 单位用量列
-    headerRow1.push('');              // 总占用列（合并标题）
+    const erpName = (col.erpNames && col.erpNames[0]) || col.displayName;
+    headerRow1.push(erpName); // 使用 ERP 实际商品名
+    headerRow1.push('');
+  }
+
+  // 第2行：子表头（用量 / 总占用）
+  const headerRow2 = ['', '', '', ''];
+  for (let i = 0; i < productCols.length; i++) {
+    headerRow2.push('用量');
+    headerRow2.push('总占用');
   }
 
   // 数据行
-  const rows = [headerRow1];
+  const rows = [headerRow1, headerRow2];
   for (const sku of skuDetails) {
     const row = [
       sku.huohao,
@@ -104,8 +112,8 @@ function buildAnalysisSheet(allocResult, warehouseStock, productCols) {
 
   const rows = [];
   rows.push(['── 分配参数 ──']);
-  rows.push(['全局缩放系数 k', _meta.k]);
-  rows.push(['k < 1 说明', _meta.k < 1 ? '库存不足，按比例缩减' : '库存充足，按加购数分配']);
+  rows.push(['最紧约束系数 k（参考值）', _meta.k]);
+  rows.push(['说明', _meta.k < 1 ? '存在库存不足单品，使用该单品的 SKU 按比例缩减；其余 SKU 按加购数满足' : '所有单品库存充足，全部按加购数分配']);
   rows.push(['库存余量比例', `${(_meta.reserve * 100).toFixed(0)}%`]);
   rows.push(['无加购SKU保底', `${_meta.coldFixed} 件`]);
   rows.push(['有加购SKU数', _meta.activeCount]);

@@ -97,9 +97,58 @@ function cmdReport(opts = {}) {
   ok({ reportPath: outputPath });
 }
 
+// ─── resolve-stock ────────────────────────────────────────────────────────────
+async function cmdResolveStock(opts = {}) {
+  const cdp = require('../product-mapping/lib/cdp');
+  const { queryStockAndSave } = require('./lib/query-stock');
+
+  const targets = await cdp.getTargets();
+  console.log('可用 CDP targets:');
+  targets.forEach(t => console.log(`  ${t.id}  ${t.url}`));
+
+  const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
+  if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
+
+  console.log(`使用 ERP targetId: ${erpId}`);
+  console.log('查询库存状态...');
+  const output = await queryStockAndSave(erpId);
+
+  ok({
+    totalRawRows: output._meta.totalRawRows,
+    mappedCount: output._meta.mappedCount,
+    warnings: output._meta.warnings.length,
+    savedTo: 'data/warehouse-stock.json',
+  });
+}
+
+// ─── resolve-components ───────────────────────────────────────────────────────
+async function cmdResolveComponents(opts = {}) {
+  const cdp = require('../product-mapping/lib/cdp');
+  const { resolveComponents } = require('./lib/resolve-components');
+
+  const targets = await cdp.getTargets();
+  const erpId = opts.erpId || targets.find(t => t.url && (t.url.includes('viperp') || t.url.includes('superboss')))?.targetId;
+  if (!erpId) fail('找不到 ERP tab，请确认 Chrome 已打开 ERP 并连接 CDP proxy');
+
+  console.log(`使用 ERP targetId: ${erpId}`);
+  const shopName = opts.shop || '澜泽';
+  console.log(`读取对应表（店铺: ${shopName}）...`);
+
+  const output = await resolveComponents(erpId, shopName);
+  const { _meta } = output;
+
+  ok({
+    totalSkus:    _meta.totalSkus,
+    matchedSkus:  _meta.matchedSkus,
+    resolvedSkus: _meta.resolvedSkus,
+    warnings:     _meta.warnings.length,
+    savedTo:      'data/sku-components.json',
+  });
+}
+
 // ─── run（全流程）───────────────────────────────────────────────────────────
 function cmdRun(excelPath, opts = {}) {
-  console.log('=== 全流程执行 ===\n');
+  console.log('=== 全流程执行（不含 ERP 查询）===\n');
   console.log('Step 1/3: 解析加购数据');
   cmdParse(excelPath);
 
@@ -107,6 +156,26 @@ function cmdRun(excelPath, opts = {}) {
   cmdCalculate(opts);
 
   console.log('\nStep 3/3: 生成 Excel 报告');
+  cmdReport(opts);
+}
+
+// ─── run-full（含 ERP 的全流程）──────────────────────────────────────────────
+async function cmdRunFull(excelPath, opts = {}) {
+  console.log('=== 全流程执行（含 ERP 查询）===\n');
+
+  console.log('Step 1/5: 解析加购数据');
+  cmdParse(excelPath);
+
+  console.log('\nStep 2/5: 查询 ERP 库存状态');
+  await cmdResolveStock(opts);
+
+  console.log('\nStep 3/5: 查询 ERP 组合明细');
+  await cmdResolveComponents(opts);
+
+  console.log('\nStep 4/5: 执行分配算法');
+  cmdCalculate(opts);
+
+  console.log('\nStep 5/5: 生成 Excel 报告');
   cmdReport(opts);
 }
 
@@ -129,15 +198,18 @@ function parseOpts(argv) {
 
 if (!cmd) {
   console.log(`用法:
-  node cli.js parse <excel文件>           解析加购数据
-  node cli.js calculate [--reserve 0.2]  执行分配算法
-  node cli.js report [--output <路径>]   生成 Excel 报告
-  node cli.js run <excel文件>             全流程一键执行
+  node cli.js parse <excel文件>                    解析加购数据
+  node cli.js calculate [--reserve 0.2]           执行分配算法
+  node cli.js report [--output <路径>]            生成 Excel 报告
+  node cli.js run <excel文件>                      全流程（不含 ERP）
+  node cli.js resolve-stock [--erp-id <id>]       查询 ERP 库存状态
+  node cli.js resolve-components [--shop 澜泽]    查询 ERP 组合明细
+  node cli.js run-full <excel文件> [--shop 澜泽]  全流程（含 ERP 查询）
 `);
   process.exit(0);
 }
 
-try {
+async function main() {
   if (cmd === 'parse') {
     if (!args[1]) fail('缺少参数: <excel文件>');
     cmdParse(args[1]);
@@ -148,9 +220,16 @@ try {
   } else if (cmd === 'run') {
     if (!args[1]) fail('缺少参数: <excel文件>');
     cmdRun(args[1], parseOpts(args.slice(2)));
+  } else if (cmd === 'resolve-stock') {
+    await cmdResolveStock(parseOpts(args.slice(1)));
+  } else if (cmd === 'resolve-components') {
+    await cmdResolveComponents(parseOpts(args.slice(1)));
+  } else if (cmd === 'run-full') {
+    if (!args[1]) fail('缺少参数: <excel文件>');
+    await cmdRunFull(args[1], parseOpts(args.slice(2)));
   } else {
     fail(`未知命令: ${cmd}`);
   }
-} catch (e) {
-  fail(e.message);
 }
+
+main().catch(e => fail(e.message));

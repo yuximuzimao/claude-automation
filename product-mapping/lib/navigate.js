@@ -16,6 +16,7 @@ const { acquireErpLock } = require('./erp-lock');
 const PAGE_MAP = {
   '商品档案V2': '#/prod/parallel/',
   '商品对应表': '#/prod/prod_correspondence_next/',
+  '库存状态': '#/stock/newstatu/',
 };
 
 // ── Session 缓存 ────────────────────────────────────────────────────────────
@@ -189,9 +190,9 @@ async function navigateErp(targetId, pageName) {
       return navigateErp(targetId, pageName);
     }
 
-    // 已在目标页且 session 有效，直接返回
+    // 已在目标页且 session 有效，直接返回（用 startsWith 兼容带查询参数的 hash）
     const currentHash = await cdp.eval(targetId, 'window.location.hash');
-    if (currentHash === targetHash) {
+    if (currentHash.startsWith(targetHash)) {
       if (process.env.VERBOSE) process.stderr.write(`[navigateErp] 跳过刷新（session 新鲜，已在目标页 ${pageName}）\n`);
       cache[targetId] = { time: now, page: pageName }; saveSessionCache(cache);
       return;
@@ -221,7 +222,7 @@ async function navigateErp(targetId, pageName) {
 
   await retry(async () => {
     const currentHash = await cdp.eval(targetId, 'window.location.hash');
-    if (currentHash === targetHash) {
+    if (currentHash.startsWith(targetHash)) {
       await waitForPageContent(targetId, pageName);
       return;
     }
@@ -237,15 +238,15 @@ async function navigateErp(targetId, pageName) {
     const result = await cdp.eval(targetId, clickTabJS);
     if (result === 'not found') throw new Error(`顶部标签未找到: ${pageName}`);
 
-    // 等待 hash 切换（最多 3s）
+    // 等待 hash 切换（最多 3s，用 startsWith 兼容带查询参数的 hash）
     for (let i = 0; i < 6; i++) {
       await sleep(500);
       const h = await cdp.eval(targetId, 'window.location.hash');
-      if (h === targetHash) break;
+      if (h.startsWith(targetHash)) break;
     }
 
     const hash = await cdp.eval(targetId, 'window.location.hash');
-    if (hash !== targetHash) throw new Error(`导航失败: 期望 ${targetHash}，实际 ${hash}`);
+    if (!hash.startsWith(targetHash)) throw new Error(`导航失败: 期望 ${targetHash}，实际 ${hash}`);
 
     await waitForPageContent(targetId, pageName);
   }, { maxRetries: 3, delayMs: 6000, label: `erp-nav ${pageName}` });

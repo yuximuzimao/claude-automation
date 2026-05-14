@@ -29,9 +29,9 @@ function assertEq(a, b, msg) {
 }
 
 // ─────────────────────────────────────────
-// 测试1: 库存充足时 k=1，按加购数分配
+// 测试1: 库存充足 → 建议库存≥加购数，充分利用库存
 // ─────────────────────────────────────────
-console.log('\n[Test 1] 库存充足 → k=1，按加购数分配');
+console.log('\n[Test 1] 库存充足 → 建议库存≥加购数，充分利用库存');
 {
   const skus = [
     { key: 'A', huohao: 'a', skuName: 'A', cartAddCount: 500 },
@@ -44,10 +44,15 @@ console.log('\n[Test 1] 库存充足 → k=1，按加购数分配');
   const stock = { 黑茶: 100000, 益生菌: 50000 };
 
   const result = allocate(skus, components, stock, { reserve: 0.2 });
+  const aInv = result.skuDetails.find(s => s.key === 'A').allocatedInventory;
+  const bInv = result.skuDetails.find(s => s.key === 'B').allocatedInventory;
 
-  assertEq(result._meta.k, 1.0, 'k = 1.0');
-  assertEq(result.skuDetails.find(s => s.key === 'A').allocatedInventory, 500, 'A 库存 = 500');
-  assertEq(result.skuDetails.find(s => s.key === 'B').allocatedInventory, 300, 'B 库存 = 300');
+  assert(aInv >= 500, `A 建议库存(${aInv}) ≥ 加购数(500)`);
+  assert(bInv >= 300, `B 建议库存(${bInv}) ≥ 加购数(300)`);
+  const ratio = aInv / bInv;
+  assert(Math.abs(ratio - 500 / 300) < 0.2, `A:B 比例约5:3（实际 ${ratio.toFixed(2)}）`);
+  const blackTeaDemand = result.totalDemand['黑茶'] || 0;
+  assert(blackTeaDemand <= 80000, `黑茶总消耗(${blackTeaDemand}) ≤ 可用量(80000)`);
 }
 
 // ─────────────────────────────────────────
