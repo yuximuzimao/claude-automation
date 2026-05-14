@@ -52,46 +52,47 @@ function makeSelectShopJS(shopName) {
 
 // 在主页 el-select 中设置搜索模式
 // 双通道匹配：优先按 label text 匹配，失败时 fallback 按 Vue option value 匹配
+// ⚠️ 必须用 cdp.clickAt 物理点击才能触发 el-select mousedown 展开，JS .click() 无效
 async function setMainPageSelect(targetId, optionText) {
-  // Step 1: 先关闭所有已打开的下拉菜单，避免点到错误的 dropdown item
+  // Step 1: 先关闭所有已打开的下拉菜单
   await cdp.eval(targetId, `document.body.click()`);
   await sleep(200);
 
-  // Step 2: 找到目标 select 并点击打开（双通道：text 优先，value fallback）
+  // Step 2: 找到目标 select，给它的 input 打标记，再用 cdp.clickAt 物理点击打开
   const js = `(function(){
     var optionText = ${JSON.stringify(optionText)};
     var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
       return !s.closest('.el-dialog__wrapper');
     });
+    function trySelect(s, i) {
+      var inp = s.querySelector('input');
+      if (inp && inp.value === optionText) return JSON.stringify({already: true, idx: i});
+      // 给 input 打唯一标记，供外部 cdp.clickAt 定位
+      var mark = 'km-sel-' + i + '-' + Date.now();
+      if (inp) inp.setAttribute('data-km-mark', mark);
+      return JSON.stringify({needClick: true, idx: i, mark: mark});
+    }
     // 通道1: label/currentLabel 精确匹配
     for (var i = 0; i < sels.length; i++) {
       var vm = sels[i].__vue__;
       if (!vm || !vm.options) continue;
       var hasOpt = Array.from(vm.options).some(function(o){ return (o.label||o.currentLabel||'') === optionText; });
-      if (!hasOpt) continue;
-      var inp = sels[i].querySelector('input');
-      if (inp && inp.value === optionText) return JSON.stringify({already: true, idx: i, channel: 'text'});
-      var rect = sels[i].getBoundingClientRect();
-      sels[i].click();
-      return JSON.stringify({clicked: true, idx: i, top: rect.top, left: rect.left, channel: 'text'});
+      if (hasOpt) return trySelect(sels[i], i);
     }
-    // 通道2: value fallback（防 UI 改文案场景：后端 value=code，前端 label 变了）
+    // 通道2: value fallback
     for (var i = 0; i < sels.length; i++) {
       var vm = sels[i].__vue__;
       if (!vm || !vm.options) continue;
-      var hasVal = Array.from(vm.options).some(function(o){ return o.value === optionText; });
-      if (!hasVal) continue;
-      var inp = sels[i].querySelector('input');
-      if (inp && inp.value === optionText) return JSON.stringify({already: true, idx: i, channel: 'value'});
-      var rect = sels[i].getBoundingClientRect();
-      sels[i].click();
-      return JSON.stringify({clicked: true, idx: i, top: rect.top, left: rect.left, channel: 'value'});
+      var hasVal = Array.from(vm.options).some(function(o){ return String(o.value) === optionText; });
+      if (hasVal) return trySelect(sels[i], i);
     }
     return JSON.stringify({error:'SELECTOR_BROKEN: 未找到包含选项「' + optionText + '」的 select（text+value 双通道均未命中）'});
   })()`;
   const r = await cdp.eval(targetId, js);
   if (r.error) throw new Error(r.error);
   if (r.already) return;
+  // 用物理点击打开 dropdown（JS .click() 不触发 mousedown，el-select 不会展开）
+  await cdp.clickAt(targetId, `input[data-km-mark="${r.mark}"]`);
   await sleep(500);
 
   // Step 3: 在可见的 dropdown 中找到匹配项并点击（只找最近弹出的）

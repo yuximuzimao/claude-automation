@@ -141,19 +141,25 @@ async function classifyErpError(targetId, e) {
 }
 
 // ============================================================
-// 凭据注入（三级降级，仅在 Chrome 自动填充失败时触发）
+// 凭据注入（三级降级，env vars 优先，内置兜底）
 // ============================================================
 async function injectCredentials(targetId) {
-  const username = process.env.ERP_USERNAME;
-  const password = process.env.ERP_PASSWORD;
-  if (!username || !password) return false; // 未配置凭据，跳过
+  const company  = process.env.ERP_COMPANY   || '杭州绰绰贸易有限公司';
+  const username = process.env.ERP_USERNAME  || 'chuochuo';
+  const password = process.env.ERP_PASSWORD  || 'Chuochuo178';
 
   // Level 1: nativeInputValueSetter + dispatchEvent（绕过 Vue/React 受控组件拦截）
   const r1 = await cdp.eval(targetId, `(function(){
+    var companyEl = document.getElementById('login-company');
     var userEl = document.querySelector('input[name="userName"]');
     var pwdEl = document.querySelector('input[type="password"]');
     if (!pwdEl) return JSON.stringify({ ok: false, reason: 'no-pwd-field' });
     var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+    if (companyEl) {
+      nativeSetter.call(companyEl, ${JSON.stringify(company)});
+      companyEl.dispatchEvent(new Event('input', { bubbles: true }));
+      companyEl.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     if (userEl) {
       nativeSetter.call(userEl, ${JSON.stringify(username)});
       userEl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -172,12 +178,15 @@ async function injectCredentials(targetId) {
   // Level 2: execCommand('insertText')（deprecated 但在 Chromium 中通常有效）
   if (process.env.VERBOSE) process.stderr.write('[injectCredentials] Level 1 失败，尝试 execCommand\n');
   await cdp.eval(targetId, `(function(){
-    var pwdEl = document.querySelector('input[type="password"]');
-    if (!pwdEl) return;
-    pwdEl.focus();
-    pwdEl.select();
-    document.execCommand('selectAll');
-    document.execCommand('insertText', false, ${JSON.stringify(password)});
+    function fillByExec(el, val) {
+      if (!el) return;
+      el.focus(); el.select();
+      document.execCommand('selectAll');
+      document.execCommand('insertText', false, val);
+    }
+    fillByExec(document.getElementById('login-company'), ${JSON.stringify(company)});
+    fillByExec(document.querySelector('input[name="userName"]'), ${JSON.stringify(username)});
+    fillByExec(document.querySelector('input[type="password"]'), ${JSON.stringify(password)});
   })()`);
   const check2 = await cdp.eval(targetId, `(function(){
     var el = document.querySelector('input[type="password"]');
@@ -280,30 +289,11 @@ async function recoverLogin(targetId) {
 
   if (isLoginPage && pwdFieldReady) {
     // ---- 场景 B: 完全退出到登录页 ----
-    await sleep(2000);
-
-    // Phase 1: Chrome 自动填充（单次尝试，确定性行为，重试无意义）
-    const hasUserField = await cdp.eval(targetId, '!!document.querySelector("input[name=userName]")');
-    if (hasUserField) {
-      await cdp.clickAt(targetId, 'input[name="userName"]');
-      await sleep(1500);
-    }
-    await cdp.clickAt(targetId, 'input[type="password"]');
-    await sleep(2000);
-
-    let passwordFilled = await cdp.eval(targetId, `(function(){
-      var pwd = document.querySelector('input[type="password"]');
-      return !!(pwd && pwd.value && pwd.value.length > 0);
-    })()`);
-
-    // Phase 2: 凭据注入 fallback（仅在自动填充失败且 env vars 已配置时触发）
-    if (!passwordFilled) {
-      if (process.env.VERBOSE) process.stderr.write('[recoverLogin] Chrome 自动填充未触发，尝试凭据注入 fallback\n');
-      const injected = await injectCredentials(targetId);
-      if (!injected) {
-        throw new Error('ERP已完全退出登录：Chrome自动填充未触发，凭据注入失败（请配置 ERP_USERNAME/ERP_PASSWORD 或手动登录）');
-      }
-      passwordFilled = true;
+    // 直接凭据注入，不碰输入框（clickAt 会清空 Chrome 已填内容）
+    await sleep(1000);
+    const injected = await injectCredentials(targetId);
+    if (!injected) {
+      throw new Error('ERP已完全退出登录：凭据注入失败');
     }
 
     // 点登录按钮
