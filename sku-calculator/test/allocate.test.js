@@ -221,6 +221,81 @@ console.log('\n[Test 7] 全部无加购 → 走保底分配');
 }
 
 // ─────────────────────────────────────────
+// 测试8: 回归 — 稀缺单品不连坐无关SKU
+// 验证：旧算法（全局 k）此测试必然失败；新算法必须通过
+// ─────────────────────────────────────────
+console.log('\n[Test 8] 回归：稀缺单品不连坐无关 SKU，充分利用库存');
+{
+  // 场景：完全还原实际数据特征
+  //   SKU_普通黑茶：cart=100，只用 黑茶×1（黑茶库存充足）
+  //   SKU_含保温杯：cart=50，  用 黑茶×9 + 保温杯×1（保温杯极少）
+  // 黑茶: stock=20000, 可用=16000
+  // 保温杯: stock=14,  可用=11.2
+  //
+  // 旧算法（全局 k）：
+  //   baseDemand[保温杯] = 50×1 = 50，k_保温杯 = 11.2/50 = 0.224
+  //   全局 k = 0.224 → 普通黑茶 inv = floor(100×0.224) = 22 ← 错！
+  //
+  // 新算法（迭代锁定）：
+  //   第1轮 D[黑茶]=100×1+50×9=550, D[保温杯]=50×1=50
+  //   ratio[黑茶]=16000/550=29.1, ratio[保温杯]=11.2/50=0.224 ← 先耗尽
+  //   t=0.224，锁定 SKU_含保温杯：invFloat=50×0.224=11.2
+  //   R[黑茶] = 16000 - 11.2×9 = 15899.2
+  //   第2轮 S={SKU_普通黑茶}, D[黑茶]=100, ratio=15899.2/100=158.99
+  //   t=158.99，invFloat[普通黑茶]=100×158.99=15899 → inv≈15899 ← 远超加购数
+
+  const skus = [
+    { key: '普通黑茶', huohao: 'h1', skuName: '黑茶1盒', cartAddCount: 100 },
+    { key: '含保温杯', huohao: 'h2', skuName: '黑茶9+保温杯', cartAddCount: 50  },
+  ];
+  const components = {
+    普通黑茶: { components: { 黑茶: 1 } },
+    含保温杯: { components: { 黑茶: 9, 保温杯: 1 } },
+  };
+  const stock = { 黑茶: 20000, 保温杯: 14 };
+
+  const result = allocate(skus, components, stock, { reserve: 0.2 });
+  const normalInv  = result.skuDetails.find(s => s.key === '普通黑茶').allocatedInventory;
+  const thermoInv  = result.skuDetails.find(s => s.key === '含保温杯').allocatedInventory;
+  const blackTotal = result.totalDemand['黑茶'] || 0;
+  const thermoTotal = result.totalDemand['保温杯'] || 0;
+
+  // 核心断言：普通黑茶应远超加购数（充分利用黑茶库存）
+  assert(normalInv > 100,  `普通黑茶建议库存(${normalInv}) 应远大于加购数100（旧算法=22，此断言会失败）`);
+  assert(normalInv > 1000, `普通黑茶建议库存(${normalInv}) 应 >1000（黑茶库存16000远超需求）`);
+  // 含保温杯 SKU 受限
+  assert(thermoInv < 50,   `含保温杯建议库存(${thermoInv}) 应低于加购数50（受保温杯约束）`);
+  // 约束满足
+  assert(blackTotal  <= 16000, `黑茶总消耗(${blackTotal}) ≤ 可用量(16000)`);
+  assert(thermoTotal <= 12,    `保温杯总消耗(${thermoTotal}) ≤ 可用量(11.2，floor=11)`);
+}
+
+// ─────────────────────────────────────────
+// 测试9: 回归 — k无上限，库存充足时可远超加购数
+// ─────────────────────────────────────────
+console.log('\n[Test 9] 回归：库存充足时建议库存应充分利用，不被 k≤1 封顶');
+{
+  // 场景：单一产品，加购100，库存大量充裕
+  // 旧算法（k封顶1）：inv = min(k,1) × cart = 100
+  // 新算法（k无上限）：inv ≈ avail / comp = 8000 / 1 = 8000
+  const skus = [
+    { key: 'A', huohao: 'a', skuName: 'A', cartAddCount: 100 },
+  ];
+  const components = {
+    A: { components: { 黑茶: 1 } },
+  };
+  const stock = { 黑茶: 10000 }; // 可用 8000，加购仅 100
+
+  const result = allocate(skus, components, stock, { reserve: 0.2 });
+  const inv = result.skuDetails.find(s => s.key === 'A').allocatedInventory;
+  const blackTotal = result.totalDemand['黑茶'] || 0;
+
+  assert(inv > 100,   `建议库存(${inv}) > 加购数100（不被 k≤1 封顶）`);
+  assert(inv >= 7900, `建议库存(${inv}) ≥ 7900（充分利用8000可用库存）`);
+  assert(blackTotal <= 8000, `黑茶消耗(${blackTotal}) ≤ 可用量(8000)`);
+}
+
+// ─────────────────────────────────────────
 // 结果汇总
 // ─────────────────────────────────────────
 console.log(`\n────────────────────────────`);
