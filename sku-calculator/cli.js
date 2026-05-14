@@ -3,16 +3,28 @@
  * SKU 库存计算器 CLI
  *
  * 命令:
- *   node cli.js parse <excel文件>         解析加购 Excel → data/cart-adds.json
+ *   node cli.js parse [excel文件]         解析加购 Excel（缺省自动找桌面最新 xlsx）→ data/cart-adds.json
  *   node cli.js calculate                 执行分配算法 → data/allocation-result.json
- *   node cli.js report [--output <路径>]  生成 Excel 报告
- *   node cli.js run <excel文件>           全流程一键执行
+ *   node cli.js report [--output <路径>]  生成 Excel 报告（默认输出到桌面）
+ *   node cli.js run [excel文件]           全流程一键执行
  */
 
 const fs   = require('fs');
 const path = require('path');
+const os   = require('os');
 
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR   = path.join(__dirname, 'data');
+const DESKTOP    = path.join(os.homedir(), 'Desktop');
+
+/** 从桌面找最新的 .xlsx 文件（排除已生成的库存分配报告） */
+function findLatestDesktopExcel() {
+  const files = fs.readdirSync(DESKTOP)
+    .filter(f => f.endsWith('.xlsx') && !f.startsWith('库存分配'))
+    .map(f => ({ name: f, mtime: fs.statSync(path.join(DESKTOP, f)).mtimeMs }))
+    .sort((a, b) => b.mtime - a.mtime);
+  if (!files.length) fail('桌面上没有找到 .xlsx 文件，请把加购 Excel 放到桌面');
+  return path.join(DESKTOP, files[0].name);
+}
 
 function ok(data)   { console.log(JSON.stringify({ status: 'ok',    ...data  }, null, 2)); }
 function fail(msg)  { console.error(JSON.stringify({ status: 'error', message: msg }, null, 2)); process.exit(1); }
@@ -26,7 +38,7 @@ function readJson(file) {
 // ─── parse ───────────────────────────────────────────────────────────────────
 function cmdParse(excelPath) {
   const { parseAndSave } = require('./lib/parse-cart-adds');
-  const absPath = path.resolve(excelPath);
+  const absPath = excelPath ? path.resolve(excelPath) : findLatestDesktopExcel();
   console.log(`解析加购数据: ${absPath}`);
 
   const { skus, warnings } = parseAndSave(absPath);
@@ -87,11 +99,8 @@ function cmdReport(opts = {}) {
   if (!warehouseStock) fail('allocation-result.json 缺少 _warehouseStock 字段，请重新执行 calculate');
 
   const timestamp = new Date().toISOString().replace(/[T:]/g, '-').slice(0, 16);
-  const defaultOutput = path.join(__dirname, `output/库存分配-${timestamp}.xlsx`);
+  const defaultOutput = path.join(DESKTOP, `库存分配-${timestamp}.xlsx`);
   const outputPath = opts.output ? path.resolve(opts.output) : defaultOutput;
-
-  // 确保 output 目录存在
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
   writeReport(allocResult, warehouseStock, outputPath);
   ok({ reportPath: outputPath });
@@ -150,7 +159,7 @@ async function cmdResolveComponents(opts = {}) {
 function cmdRun(excelPath, opts = {}) {
   console.log('=== 全流程执行（不含 ERP 查询）===\n');
   console.log('Step 1/3: 解析加购数据');
-  cmdParse(excelPath);
+  cmdParse(excelPath || null);
 
   console.log('\nStep 2/3: 执行分配算法');
   cmdCalculate(opts);
@@ -164,7 +173,7 @@ async function cmdRunFull(excelPath, opts = {}) {
   console.log('=== 全流程执行（含 ERP 查询）===\n');
 
   console.log('Step 1/5: 解析加购数据');
-  cmdParse(excelPath);
+  cmdParse(excelPath || null);
 
   console.log('\nStep 2/5: 查询 ERP 库存状态');
   await cmdResolveStock(opts);
@@ -198,13 +207,13 @@ function parseOpts(argv) {
 
 if (!cmd) {
   console.log(`用法:
-  node cli.js parse <excel文件>                    解析加购数据
+  node cli.js parse [excel文件]                    解析加购数据（缺省自动找桌面最新 xlsx）
   node cli.js calculate [--reserve 0.2]           执行分配算法
-  node cli.js report [--output <路径>]            生成 Excel 报告
-  node cli.js run <excel文件>                      全流程（不含 ERP）
+  node cli.js report [--output <路径>]            生成 Excel 报告（默认输出到桌面）
+  node cli.js run [excel文件]                      全流程（不含 ERP）
   node cli.js resolve-stock [--erp-id <id>]       查询 ERP 库存状态
   node cli.js resolve-components [--shop 澜泽]    查询 ERP 组合明细
-  node cli.js run-full <excel文件> [--shop 澜泽]  全流程（含 ERP 查询）
+  node cli.js run-full [excel文件] [--shop 澜泽]  全流程（含 ERP 查询）
 `);
   process.exit(0);
 }
@@ -218,15 +227,13 @@ async function main() {
   } else if (cmd === 'report') {
     cmdReport(parseOpts(args.slice(1)));
   } else if (cmd === 'run') {
-    if (!args[1]) fail('缺少参数: <excel文件>');
-    cmdRun(args[1], parseOpts(args.slice(2)));
+    cmdRun(args[1] || null, parseOpts(args.slice(2)));
   } else if (cmd === 'resolve-stock') {
     await cmdResolveStock(parseOpts(args.slice(1)));
   } else if (cmd === 'resolve-components') {
     await cmdResolveComponents(parseOpts(args.slice(1)));
   } else if (cmd === 'run-full') {
-    if (!args[1]) fail('缺少参数: <excel文件>');
-    await cmdRunFull(args[1], parseOpts(args.slice(2)));
+    await cmdRunFull(args[1] || null, parseOpts(args.slice(2)));
   } else {
     fail(`未知命令: ${cmd}`);
   }
