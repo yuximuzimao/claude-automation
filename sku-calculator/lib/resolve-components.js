@@ -14,10 +14,11 @@ const { sleep, waitFor }    = require('../../product-mapping/lib/wait');
 const { ensureCorrPage }    = require('../../product-mapping/lib/ops/ensure-corr-page');
 const { readTableRows }     = require('../../product-mapping/lib/ops/read-table-rows');
 const { initArchiveComp, queryArchive, querySubItems } = require('../../product-mapping/lib/archive');
-const { getByErpName }      = require('./product-catalog');
+const { clearCache }        = require('./product-catalog');
 
-const DATA_DIR    = path.join(__dirname, '../data');
-const OUTPUT_FILE = path.join(DATA_DIR, 'sku-components.json');
+const DATA_DIR             = path.join(__dirname, '../data');
+const OUTPUT_FILE          = path.join(DATA_DIR, 'sku-components.json');
+const PRODUCT_COLUMNS_FILE = path.join(DATA_DIR, 'product-columns.json');
 
 /**
  * 在主页（非 dialog）的 el-select 中选值
@@ -159,6 +160,10 @@ async function _queryProductErpCodes(erpId, shopName, huohao, warnings) {
 async function resolveComponents(erpId, shopName = '澜泽') {
   // 清空旧数据，避免不同店铺间相互干扰
   fs.writeFileSync(OUTPUT_FILE, '{}', 'utf-8');
+  fs.writeFileSync(PRODUCT_COLUMNS_FILE, '[]', 'utf-8');
+
+  // 动态发现的单品目录：erpName → {colIndex, displayName, erpNames}
+  const discoveredProducts = new Map();
 
   // 1. 读加购数据
   const cartData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cart-adds.json'), 'utf-8'));
@@ -232,26 +237,29 @@ async function resolveComponents(erpId, shopName = '澜泽') {
         const subItems = await querySubItems(erpId, archiveItem.subItemNum);
         components = {};
         for (const sub of subItems) {
-          const col = getByErpName(sub.name);
-          if (!col) {
-            warnings.push(`子品名称映射失败: "${sub.name}"（SKU: ${sku.key}）`);
-            continue;
+          if (!discoveredProducts.has(sub.name)) {
+            discoveredProducts.set(sub.name, {
+              colIndex:    discoveredProducts.size,
+              displayName: sub.name,
+              erpNames:    [sub.name],
+            });
           }
-          components[col.displayName] = (components[col.displayName] || 0) + sub.qty;
+          components[sub.name] = (components[sub.name] || 0) + sub.qty;
         }
         if (!Object.keys(components).length) {
-          warnings.push(`组合装子品全部映射失败: ${sku.erpCode}（SKU: ${sku.key}）`);
           components = null;
         }
       } else {
         // 单品：组件就是档案标题对应的单品 × 1
-        const col = getByErpName(archiveItem.title);
-        if (!col) {
-          warnings.push(`单品档案名称映射失败: "${archiveItem.title}"（SKU: ${sku.key}）`);
-          components = null;
-        } else {
-          components = { [col.displayName]: 1 };
+        const erpName = archiveItem.title;
+        if (!discoveredProducts.has(erpName)) {
+          discoveredProducts.set(erpName, {
+            colIndex:    discoveredProducts.size,
+            displayName: erpName,
+            erpNames:    [erpName],
+          });
         }
+        components = { [erpName]: 1 };
       }
 
       erpCodeCache.set(sku.erpCode, components);
@@ -274,7 +282,13 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     warnings.forEach(w => console.warn(`  ⚠️  ${w}`));
   }
 
-  // 7. 写文件（格式与 mock 兼容：顶层 _meta + 各 key 平铺）
+  // 7. 写动态产品目录（发现顺序），刷新同进程缓存
+  const productCols = [...discoveredProducts.values()];
+  fs.writeFileSync(PRODUCT_COLUMNS_FILE, JSON.stringify(productCols, null, 2), 'utf-8');
+  clearCache();
+  console.log(`  产品目录已更新: ${productCols.length} 个单品 → ${PRODUCT_COLUMNS_FILE}`);
+
+  // 8. 写文件（格式与 mock 兼容：顶层 _meta + 各 key 平铺）
   const output = {
     _meta: {
       source:       `ERP 商品对应表（逐货号）+ 档案V2（${shopName}）`,

@@ -163,7 +163,7 @@ async function queryStock(erpId) {
   }
 
   if (unmapped.length > 0) {
-    console.log(`  未映射商品（${unmapped.length} 条，非 KGOS 单品，已忽略）:`);
+    console.log(`  未映射商品（${unmapped.length} 条，非本次目录单品，已忽略）:`);
     unmapped.slice(0, 10).forEach(n => console.log(`    - ${n}`));
     if (unmapped.length > 10) console.log(`    ... 还有 ${unmapped.length - 10} 条`);
   }

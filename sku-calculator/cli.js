@@ -175,11 +175,11 @@ async function cmdRunFull(excelPath, opts = {}) {
   console.log('Step 1/5: 解析加购数据');
   cmdParse(excelPath || null);
 
-  console.log('\nStep 2/5: 查询 ERP 库存状态');
-  await cmdResolveStock(opts);
-
-  console.log('\nStep 3/5: 查询 ERP 组合明细');
+  console.log('\nStep 2/5: 查询 ERP 组合明细（同时生成产品目录）');
   await cmdResolveComponents(opts);
+
+  console.log('\nStep 3/5: 查询 ERP 库存状态');
+  await cmdResolveStock(opts);
 
   console.log('\nStep 4/5: 执行分配算法');
   cmdCalculate(opts);

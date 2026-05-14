@@ -68,4 +68,8 @@ function getColumnCount() {
   return loadCatalog().columns.length;
 }
 
-module.exports = { getByErpName, getByDisplayName, getAllColumns, getColumnCount };
+function clearCache() {
+  _catalog = null;
+}
+
+module.exports = { getByErpName, getByDisplayName, getAllColumns, getColumnCount, clearCache };
