@@ -124,6 +124,8 @@ function runAutoScan() {
 let scanTimer = null;
 
 function scheduleNextScan() {
+  // 先清除可能残留的旧 timer，防止多次调用叠加（resumeScan 连续触发时重复入队根因）
+  if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
   const now = new Date();
   const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
   // 只找严格大于当前小时的下一个整点（当前整点不重复触发）
