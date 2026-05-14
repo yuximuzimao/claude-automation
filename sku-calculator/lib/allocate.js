@@ -211,6 +211,15 @@ function allocate(skus, components, stock, opts = {}) {
   );
   const globalMinK = bottlenecks.length > 0 ? Math.min(...bottlenecks.map(b => b.ratio)) : 1.0;
 
+  // 人工复核警告：需求超过可用量的单品（ratio < 1）
+  for (const b of bottlenecks) {
+    if (b.ratio < 1) {
+      warnings.push(
+        `⚠️ [人工复核] ${b.product}: 云仓库存${stock[b.product]}件，可用量${Math.round(b.available)}件，全量需求${Math.round(b.demand)}件，库存不足（${(b.ratio * 100).toFixed(1)}%），请人工确认分配方案`
+      );
+    }
+  }
+
   // 计算各单品总需求（报告用）
   const totalDemand = {};
   for (const sku of skus) {
