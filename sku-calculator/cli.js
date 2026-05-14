@@ -91,7 +91,7 @@ function cmdCalculate(opts = {}) {
 }
 
 // ─── report ──────────────────────────────────────────────────────────────────
-function cmdReport(opts = {}) {
+async function cmdReport(opts = {}) {
   const { writeReport } = require('./lib/write-report');
 
   const allocResult = readJson('allocation-result.json');
@@ -102,7 +102,7 @@ function cmdReport(opts = {}) {
   const defaultOutput = path.join(DESKTOP, `库存分配-${timestamp}.xlsx`);
   const outputPath = opts.output ? path.resolve(opts.output) : defaultOutput;
 
-  writeReport(allocResult, warehouseStock, outputPath);
+  await writeReport(allocResult, warehouseStock, outputPath);
   ok({ reportPath: outputPath });
 }
 
@@ -156,7 +156,7 @@ async function cmdResolveComponents(opts = {}) {
 }
 
 // ─── run（全流程）───────────────────────────────────────────────────────────
-function cmdRun(excelPath, opts = {}) {
+async function cmdRun(excelPath, opts = {}) {
   console.log('=== 全流程执行（不含 ERP 查询）===\n');
   console.log('Step 1/3: 解析加购数据');
   cmdParse(excelPath || null);
@@ -165,7 +165,7 @@ function cmdRun(excelPath, opts = {}) {
   cmdCalculate(opts);
 
   console.log('\nStep 3/3: 生成 Excel 报告');
-  cmdReport(opts);
+  await cmdReport(opts);
 }
 
 // ─── run-full（含 ERP 的全流程）──────────────────────────────────────────────

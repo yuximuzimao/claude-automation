@@ -17,8 +17,12 @@
 'use strict';
 
 const ExcelJS = require('exceljs');
+const colCache = require('exceljs/lib/utils/col-cache');
 const path = require('path');
 const { getAllColumns } = require('./product-catalog');
+
+// 列号（1-based）→ Excel 列字母，使用 exceljs 内置
+const colLetter = n => colCache.n2l(n);
 
 // 颜色常量
 const COLOR_BLUE_INPUT = { argb: 'FF0070C0' };   // 蓝色：用户可改的输入项
@@ -27,23 +31,6 @@ const COLOR_HEADER_BG  = { argb: 'FF4472C4' };   // 表头背景蓝
 const COLOR_HEADER_FG  = { argb: 'FFFFFFFF' };   // 表头文字白
 const COLOR_SUBHDR_BG  = { argb: 'FFD9E1F2' };   // 子表头背景浅蓝
 const COLOR_TOTAL_BG   = { argb: 'FFFFF2CC' };   // 合计区背景黄
-const COLOR_OK_BG      = { argb: 'FFC6EFCE' };   // 达标绿
-const COLOR_OK_FG      = { argb: 'FF006100' };
-const COLOR_WARN_BG    = { argb: 'FFFFC7CE' };   // 不达标红
-const COLOR_WARN_FG    = { argb: 'FF9C0006' };
-
-/**
- * 列号（1-based）→ Excel 列字母（A, B, ..., Z, AA, AB, ...）
- */
-function colLetter(n) {
-  let s = '';
-  while (n > 0) {
-    n--;
-    s = String.fromCharCode(65 + (n % 26)) + s;
-    n = Math.floor(n / 26);
-  }
-  return s;
-}
 
 /**
  * 生成 Excel 报告
@@ -152,13 +139,13 @@ async function buildMainSheet(wb, allocResult, warehouseStock, productCols) {
     row.getCell(4).font = { color: COLOR_BLACK, name: 'Arial', size: 10 };
 
     // 单品列
+    const invColLetter = colLetter(3); // C 列，固定不变
     for (let i = 0; i < productCols.length; i++) {
       const col = productCols[i];
       const qtyColNum   = FIXED_COLS + 1 + i * 2; // 用量列
       const totalColNum = FIXED_COLS + 2 + i * 2; // 总占用列
       const qtyColLetter   = colLetter(qtyColNum);
       const totalColLetter = colLetter(totalColNum);
-      const invColLetter   = colLetter(3); // C 列
 
       const breakdown = sku.productBreakdown[col.displayName];
       const qtyPerUnit = breakdown ? breakdown.qtyPerUnit : 0;
@@ -228,11 +215,10 @@ async function buildMainSheet(wb, allocResult, warehouseStock, productCols) {
     totalCell.fill = { type: 'pattern', pattern: 'solid', fgColor: COLOR_TOTAL_BG };
     totalCell.numFmt = '0';
 
-    // 用量列汇总区留空（不填公式）
-    [ROW_TOTAL, ROW_STOCK, ROW_REMAIN, ROW_QUALIFY].forEach(rn => {
-      const c = ws.getRow(rn).getCell(qtyColNum);
-      c.fill = { type: 'pattern', pattern: 'solid', fgColor: COLOR_TOTAL_BG };
-    });
+    // 用量列汇总区留空（不填公式），使用已缓存的行对象
+    for (const r of [totalRow, stockRow, remainRow, qualifyRow]) {
+      r.getCell(qtyColNum).fill = { type: 'pattern', pattern: 'solid', fgColor: COLOR_TOTAL_BG };
+    }
 
     // 云仓库存：硬编码蓝色
     const stockCell = stockRow.getCell(totalColNum);
@@ -255,9 +241,6 @@ async function buildMainSheet(wb, allocResult, warehouseStock, productCols) {
     qualCell.fill = { type: 'pattern', pattern: 'solid', fgColor: COLOR_TOTAL_BG };
     qualCell.alignment = { horizontal: 'center' };
 
-    // 条件格式：达标绿 / 不足红（通过 formula 模拟）
-    // exceljs 不支持 conditional formatting 公式，用预设值色来代替
-    // 实际颜色由 Excel 打开时公式结果决定 → 此处不做条件格式
   }
 
   // 冻结前两行表头
