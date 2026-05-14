@@ -178,6 +178,9 @@ async function queryStock(erpId) {
  * 保存结果到 data/warehouse-stock.json
  */
 async function queryStockAndSave(erpId) {
+  // 清空旧数据，避免不同店铺间相互干扰
+  fs.writeFileSync(OUTPUT_FILE, '{}', 'utf-8');
+
   const { stock, raw, warnings } = await queryStock(erpId);
 
   const output = {

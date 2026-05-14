@@ -157,6 +157,9 @@ async function _queryProductErpCodes(erpId, shopName, huohao, warnings) {
  * @returns {object} 与 sku-components.json 格式一致的对象
  */
 async function resolveComponents(erpId, shopName = '澜泽') {
+  // 清空旧数据，避免不同店铺间相互干扰
+  fs.writeFileSync(OUTPUT_FILE, '{}', 'utf-8');
+
   // 1. 读加购数据
   const cartData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cart-adds.json'), 'utf-8'));
   const skus = cartData.skus;
