@@ -237,6 +237,10 @@ function setCatStatus(tab, s) { catFilter[tab] = s; renderCategoryTab(tab); }
 
 // 随机任务
 let randomTask = null;
+let randomPicked = false;  // 是否已抽取过（切换Tab不回刷）
+
+// 不出现在随机池的任务类型
+const RANDOM_EXCLUDE = new Set(['destined_hero', 'fruit', 'confirm_forms']);
 
 const DONE_KEY = 'lkwj_done_today';
 
@@ -246,6 +250,8 @@ async function init() {
   data = await dRes.json();
   walletData = await wRes.json();
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
+  await loadSprites();
+  randomPicked = false;
   renderDashboard();
 }
 
@@ -261,7 +267,7 @@ async function saveData() {
 // ═══════════ 看板 Tab ═══════════
 function renderDashboard() {
   const el = document.getElementById('tab-dashboard');
-  const cats = data.categories, regions = data.regions;
+  const cats = data.categories;
 
   let spriteTotal, spriteOwned, yiseTotal, yiseOwned;
   if (spritesData) {
@@ -289,7 +295,6 @@ function renderDashboard() {
   // 进度卡片
   html += '<div class="dash-stats">';
   html += dashCard('精灵图鉴', spriteOwned, spriteTotal, "switchTab('sprite')");
-  Object.entries(regions).forEach(([n, r]) => html += dashCard(n, r.owned, r.total, ''));
   html += dashCard('异色炫彩', yiseOwned, yiseTotal, "switchTab('shiny')");
   ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
     const c = cats[cat];
@@ -297,8 +302,11 @@ function renderDashboard() {
   });
   html += '</div>';
 
-  // 随机未完成任务
-  randomTask = pickRandom();
+  // 随机未完成任务（只在 init/换一个/标记完成后 刷新）
+  if (!randomPicked || !randomTask) {
+    randomTask = pickRandom();
+    if (randomTask) randomPicked = true;
+  }
   html += '<div class="dash-widget">';
   html += '<h3>🎯 随机任务</h3>';
   if (randomTask) {
@@ -328,7 +336,7 @@ function renderDashboard() {
     } else {
       html += `<button class="primary" onclick="markRandomItemDone()">✅ 标记完成</button>`;
     }
-    html += `<button onclick="randomTask=null;renderDashboard()">🔄 换一个</button>`;
+    html += `<button onclick="randomTask=null;randomPicked=false;renderDashboard()">🔄 换一个</button>`;
     html += '</div></div>';
   } else {
     html += '<div class="empty-state" style="padding:12px">全部完成了 🎉</div>';
@@ -369,8 +377,14 @@ function pickRandom() {
   if (spritesData) {
     spritesData.forEach(sp => {
       sp.forms.forEach((f, fi) => {
+        // capture 任务状态（用于判断 capture20 前置条件）
+        const captureDone = f.tasks.some(t => t.type === 'capture' && t.done);
         f.tasks.forEach((t, ti) => {
-          if (!t.done) pool.push({ type: 'sprite', spriteId: sp.id, formIdx: fi, taskIdx: ti, name: sp.name, desc: t.desc, form: f.label });
+          if (t.done) return;
+          if (RANDOM_EXCLUDE.has(t.type)) return;
+          // capture20 需要先完成 capture
+          if (t.type === 'capture20' && !captureDone) return;
+          pool.push({ type: 'sprite', spriteId: sp.id, formIdx: fi, taskIdx: ti, name: sp.name, desc: t.desc, form: f.label });
         });
       });
     });
@@ -452,6 +466,7 @@ function renderSpriteToolbar() {
   // 属性 chips
   html += '<div class="chips">';
   html += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
+  html += `<span class="chip${spriteElement === 'destined_hero' ? ' active' : ''}" onclick="setSpriteElement('destined_hero')">命定勇者</span>`;
   allElements.forEach(el => {
     html += `<span class="chip${spriteElement === el ? ' active' : ''}" onclick="setSpriteElement('${el}')">${el}</span>`;
   });
@@ -476,7 +491,8 @@ function renderSpriteContent() {
     list = list.filter(s => s.name.includes(q) || s.element.includes(q) ||
       (s.pinyin && (s.pinyin.full.includes(q) || s.pinyin.initial.includes(q))));
   }
-  if (spriteElement) list = list.filter(s => s.element.includes(spriteElement));
+  if (spriteElement === 'destined_hero') list = list.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'destined_hero')));
+  else if (spriteElement) list = list.filter(s => s.element.includes(spriteElement));
 
   // 状态筛选
   if (spriteStatus !== 'all') {
@@ -686,15 +702,19 @@ function renderShinyToolbar() {
   const list = getShinyList();
   const done = list.filter(s => s.taskDone).length;
 
-  // 从 items 里提取已有的赛季信息
-  const seasons = [...new Set(
-    (data.items || []).filter(i => i.category === '异色炫彩' && i.limited_status).map(i => i.limited_status)
-  )];
+  // 赛季/来源分类 chips
+  const seasonChips = [
+    {v:'all', l:'全部'},
+    {v:'第一赛季', l:'第一赛季'},
+    {v:'第二赛季', l:'第二赛季'},
+    {v:'活动', l:'活动'},
+    {v:'通行证', l:'通行证'},
+  ];
 
   let html = '';
   html += `<input class="sprite-search" type="text" id="shiny-search-input" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="onShinySearch(this.value)">`;
   html += '<div class="chips">';
-  [{v:'all',l:'全部赛季'}].concat(seasons.map(s => ({v:s, l:s}))).forEach(s => {
+  seasonChips.forEach(s => {
     html += `<span class="chip${shinySeason === s.v ? ' active' : ''}" onclick="setShinySeason('${s.v}')">${s.l}</span>`;
   });
   html += '</div>';
@@ -882,14 +902,14 @@ async function toggleItemStatus(id) {
 async function markRandomDone() {
   if (!randomTask || randomTask.type !== 'sprite') return;
   await toggleTask(randomTask.spriteId, randomTask.formIdx, randomTask.taskIdx);
-  randomTask = null;
+  randomTask = null; randomPicked = false;
   renderDashboard();
 }
 
 async function markRandomItemDone() {
   if (!randomTask || randomTask.type !== 'item') return;
   await toggleItemStatus(randomTask.id);
-  randomTask = null;
+  randomTask = null; randomPicked = false;
   renderDashboard();
 }
 
@@ -1009,7 +1029,8 @@ function renderFruitsTab() {
     html += `<div class="item-row${acq ? ' done' : ''}">`;
     html += `<button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit(${sp.id})"></button>`;
     html += `<div style="flex:1"><div class="item-name">${esc(sp.fruit.name || sp.name+'果实')}</div>`;
-    html += `<div class="item-notes">精灵：${esc(sp.name)}</div></div>`;
+    html += `<div class="item-notes" style="color:#aaa">获取方式待补充</div></div>`;
+    html += '<span class="add-source" onclick="">+ 攻略</span>';
     html += '</div>';
   });
   html += '</div>';
