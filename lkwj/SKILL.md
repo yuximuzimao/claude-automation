@@ -27,19 +27,23 @@
 ```
 lkwj/
 ├── server.js                  # HTTP 服务器，端口 8899，GET /api/data + /api/sprites + POST /api/save
-├── index.html                 # 单页 App：看板/精灵图鉴/异色炫彩/背包 四标签
+├── index.html                 # 单页 App：看板+11品类标签（精灵/异色炫彩/果实/家具/服装/称号/星星/遗迹/支线/扭蛋/音乐）
 └── data/
     ├── collections.json       # 主数据：进度看板 + 异色炫彩收集列表（UI 读写此文件）
-    ├── sprites.json           # 精灵任务库：347 精灵，1857 个任务，三层结构
+    ├── sprites.json           # 精灵任务库：347 精灵，1834 个任务，三层结构，含 pinyin 字段
     ├── sprites_raw.json       # 原始数据（Excel 导出，勿写入）
     ├── shops.json             # 商店清单：36 商店 × 6 货币，售卖物品待填充
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
+    └── scripts/
+        ├── build-sprites-pinyin.js  # 为 sprites.json 生成 pinyin 字段
+        └── migrate-leader-evolve.js # 删除 leader form 冗余任务前迁移进度
     └── _待采集/                # 数据采集模板（交给其他模型填写）
         ├── README.md            #   采集需求说明文档
         ├── 外观图鉴.csv         #   空白模板
         ├── 家具图鉴.csv         #   空白模板
         ├── 异色炫彩完整列表.csv  #   152只精灵预填，待确认
         ├── 地区形态名称修正.csv  #   100个形态预填，待修正游戏内名称
+        ├── 商店与货币.csv       #   空白模板（36店×6货币，售卖物品待填充）
         └── 其他类别统计.csv     #   空白模板
 ```
 
@@ -52,48 +56,45 @@ lkwj/
   "meta": { "last_updated": "YYYY-MM-DD", "game": "洛克王国世界" },
   "categories": {
     "精灵": { "total": 347, "owned": 304 },
-    "外观/家具/玩具/称号/星星/课题": { "total": null, "owned": null }
-  },
-  "regions": {
-    "风眠省图鉴": { "total": 159, "owned": 143 },
-    "洛克里安图鉴": { "total": 187, "owned": 164 }
+    "外观": { "total": null, "owned": null }
   },
   "items": [
     {
       "id": "yise_001",
       "category": "异色炫彩",
       "name": "...",
-      "status": "未完成|已完成",
+      "status": "已完成|未完成",
       "limited": false,
-      "limited_status": "可获取|赛季已过",
+      "limited_status": "第一赛季|第二赛季|活动|通行证|可获取",
       "source_url": "",
       "source_type": "链接|视频|图文",
       "notes": ""
     }
   ],
-  "activities": [ { "name": "...", "end_date": "YYYY-MM-DD" } ]
+  "sprite_progress": { "1": { "collected": false, "forms": { "0": { "collected": false, "tasks": { "0": true } } } } },
+  "activities": []
 }
 ```
 
-### sprites.json（三层只读）
+> 异色炫彩统计以 sprites.json capture_shiny 为准，items[] 仅存储季节/攻略等元数据。
+
+### sprites.json（三层只读，运行时合并 sprite_progress）
 
 ```json
 [
   {
     "id": 1,
-    "name": "机械方方",
-    "type": "机械",
+    "name": "迪莫",
+    "element": "光",
+    "pinyin": { "full": "dimo", "initial": "dm" },
+    "fruit": null,
     "forms": [
       {
-        "formId": "1_base",
-        "formName": "基础形态",
-        "type": "base|regional|leader",
+        "type": "base",
+        "label": "基础形态",
         "tasks": [
-          {
-            "type": "skill|capture20|destined_hero|leader_evolve|affection",
-            "desc": "使用技能石·XX 10次",
-            "done": false
-          }
+          { "type": "capture", "desc": "捕捉1只迪莫", "done": false },
+          { "type": "capture_gifted", "desc": "捕捉1只了不起天分的迪莫", "done": false }
         ]
       }
     ]
@@ -107,11 +108,17 @@ lkwj/
 - **迁移脚本**：`scripts/migrate-leader-evolve.js` — 删除 leader form 的 leader_evolve 前同步用户进度。
 
 **任务类型说明**：
+- `capture` — 捕捉 1 只
+- `capture_gifted` — 捕捉 1 只了不起天分
+- `capture_shiny` — 捕捉 1 只炫彩突变（152 只精灵有此任务）
+- `capture20` — 捕捉 20 只（有果实字段的精灵，需 capture 先完成）
 - `skill` — 使用技能石 N 次
-- `capture20` — 捕捉 20 只（有果实字段的精灵）
-- `destined_hero` — 命定勇者（lv40+ 单人挑战，非赛季活动才有）
-- `leader_evolve` — 首领进化
-- `affection` — 亲密度（目前仅迪莫）
+- `evolve` — 进化一次
+- `leader_evolve` — 进化为首领形态（24 只，仅挂 base form）
+- `destined_hero` — 命定勇者奖牌（144 只，依赖限时活动，不出随机池）
+- `affection` — 亲密度（仅迪莫）
+- `fruit` — 果实获取
+- `confirm_forms` — 确认地区形态（56 只）
 
 ## 已知数量
 
@@ -120,14 +127,20 @@ lkwj/
 | 基础形态 | 347 |
 | 地区形态 | ~89 |
 | 首领形态 | ~24 |
-| 任务总数 | 1857 |
-| 异色炫彩（已录） | 5（机械方方/空空颅/贝瑟/粉星仔x2） |
+| 任务总数 | 1834（已删 24 条 leader form 冗余 leader_evolve） |
+| 异色炫彩 items | 27（S1赛季21+通行证2+活动1+可获取3） |
+| capture_shiny 精灵 | 152 只（sprites.json） |
 
 ## 待完成
 
-- [x] sprites.json 三层结构接入 index.html — 2026-05-15 完成
-- [x] 精灵图鉴 Tab：按精灵浏览 form→task，任务勾选同步进度 — 2026-05-15 完成
-- [ ] 精灵果实图鉴（99条，sprites.json 已有果实名称）：待 UI 展示
-- [ ] 家具图鉴（195条）：待采集原始数据到 `data/_待采集/家具图鉴.csv`
-- [ ] 外观图鉴：待采集原始数据到 `data/_待采集/外观图鉴.csv`
-- [ ] 服装图鉴：用户确认最低优先级，暂跳过
+- [x] sprites.json 三层结构接入 + 精灵图鉴 Tab — 2026-05-15
+- [x] 拼音搜索 + 分页 + 状态筛选（全部/未完成/已完成）— 2026-05-15
+- [x] 12 品类标签 + 随机任务看板 + 关联任务 — 2026-05-15
+- [x] 精灵果实 Tab（99条）— 2026-05-15
+- [x] S1 赛季异色导入（27 items）+ 赛季分类体系 — 2026-05-15
+- [x] 商店货币架构（shops.json + wallet.json + 商店与货币.csv）— 2026-05-15
+- [ ] 家具图鉴：待采集 CSV → 导入 items[]
+- [ ] 外观图鉴（服装）：待采集 CSV → 导入 items[]
+- [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集数据
+- [ ] 地区形态名称修正：待 CSV 确认
+- [ ] sprites.json region 字段注入 + 地区统计恢复
