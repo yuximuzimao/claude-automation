@@ -6,46 +6,47 @@
   <title>洛克王国 · 收集助手</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f5f6fa; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; }
+    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; }
 
-    .header { background: #fff; padding: 14px 20px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .header { background: #fff; padding: 14px 24px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
     .header h1 { font-size: 17px; color: #4f46e5; font-weight: 700; }
     .header .updated { font-size: 12px; color: #aaa; margin-left: auto; }
     .save-indicator { font-size: 12px; color: #10b981; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
     .save-indicator.show { opacity: 1; }
 
-    .nav { display: flex; gap: 2px; padding: 10px 20px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; }
+    .nav { display: flex; gap: 2px; padding: 10px 24px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 49px; z-index: 49; }
     .nav button { padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
     .nav button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .nav button:hover:not(.active) { border-color: #4f46e5; color: #4f46e5; }
 
-    .container { padding: 16px 20px; max-width: 860px; }
+    .container { padding: 20px 24px; max-width: 100%; }
 
     /* 看板 */
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-bottom: 14px; }
-    .stat-card { background: #fff; border-radius: 10px; padding: 12px; border: 1px solid #e8eaf0; cursor: pointer; transition: box-shadow 0.15s; }
-    .stat-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); }
+    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 14px 16px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
+    .stat-card:hover { box-shadow: 0 4px 16px rgba(79,70,229,0.1); transform: translateY(-1px); }
     .stat-card .label { font-size: 11px; color: #888; margin-bottom: 4px; }
-    .stat-card .numbers { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .stat-card .numbers { font-size: 22px; font-weight: 700; color: #1a1a2e; }
     .stat-card .numbers span { font-size: 12px; color: #bbb; font-weight: 400; }
     .stat-card .hint { font-size: 13px; color: #bbb; }
-    .progress-bar { height: 4px; background: #f0f0f5; border-radius: 2px; margin-top: 6px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 2px; background: #4f46e5; transition: width 0.3s; }
-    .progress-fill.complete { background: #10b981; }
+    .progress-bar { height: 5px; background: #f0f0f5; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #6366f1, #8b5cf6); transition: width 0.4s ease; }
+    .progress-fill.complete { background: linear-gradient(90deg, #10b981, #34d399); }
 
     /* 看板模块 */
     .dash-widget { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; margin-bottom: 10px; }
     .dash-widget h3 { font-size: 13px; color: #888; margin-bottom: 10px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 
     /* 随机任务 */
-    .random-box { text-align: center; padding: 6px 0; }
+    .random-box { padding: 4px 0; }
     .random-task-name { font-size: 16px; font-weight: 700; }
     .random-task-desc { font-size: 13px; color: #666; margin-top: 2px; }
     .random-task-form { font-size: 11px; color: #aaa; }
-    .random-actions { margin-top: 10px; display: flex; gap: 8px; justify-content: center; }
+    .random-actions { margin-top: 10px; display: flex; gap: 8px; }
     .random-actions button { padding: 6px 16px; border-radius: 16px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 12px; transition: all 0.1s; }
     .random-actions button:hover { border-color: #6366f1; color: #6366f1; }
     .random-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
+    .random-actions button.primary:hover { background: #059669; }
 
     /* 今日完成 */
     .today-done { font-size: 12px; color: #888; margin-top: 6px; }
@@ -102,20 +103,29 @@
     /* 背包 */
     .section-title { font-size: 12px; color: #aaa; margin-bottom: 8px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
     .item-list { display: flex; flex-direction: column; gap: 6px; }
-    .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; transition: box-shadow 0.1s; }
+    .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 10px; transition: box-shadow 0.1s; }
     .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
-    .item-row.done { opacity: 0.4; }
-    .item-row .item-name { flex: 1; font-size: 14px; font-weight: 500; }
-    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; }
-    .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
+    .item-row.done { opacity: 0.45; }
+    .item-row .item-info { flex: 1; min-width: 0; }
+    .item-row .item-name { font-size: 14px; font-weight: 500; line-height: 1.4; }
+    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; line-height: 1.3; }
+    .item-row .item-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
     .check-btn.checked::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
-    .source-btn { font-size: 12px; color: #4f46e5; text-decoration: none; padding: 3px 10px; border-radius: 5px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; }
+    .source-btn { font-size: 12px; color: #4f46e5; text-decoration: none; padding: 3px 10px; border-radius: 5px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
     .source-btn:hover { background: #e0e7ff; }
-    .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; }
+    .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
-    .item-category-tag { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
+    .item-category-tag { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+
+    /* 折叠已完成区域 */
+    .section-header { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 6px 0; }
+    .section-header .arrow { font-size: 10px; transition: transform 0.2s; color: #aaa; }
+    .section-header.collapsed .arrow { transform: rotate(-90deg); }
+    .section-body { overflow: hidden; transition: max-height 0.3s ease; max-height: 2000px; }
+    .section-body.collapsed { max-height: 0; }
 
     /* 弹窗 */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
@@ -301,11 +311,29 @@ function renderPendingDoneSections(list, renderFn, doneKey) {
     h += '</div>';
   }
   if (done.length) {
-    h += `<div class="section-title" style="margin-top:16px">${STATUS.DONE}（${done.length}）</div><div class="item-list">`;
-    done.forEach(i => { h += renderFn(i); });
-    h += '</div>';
+    h += renderCollapsibleDoneSection(done, renderFn, done.length);
   }
   return h;
+}
+
+function renderCollapsibleDoneSection(items, renderFn, count) {
+  const id = 'done-' + Math.random().toString(36).slice(2, 8);
+  let h = '';
+  h += `<div class="section-title section-header" style="margin-top:16px" onclick="toggleDoneSection('${id}')" id="${id}-header">`;
+  h += `<span class="arrow">▼</span> ${STATUS.DONE}（${count || items.length}）`;
+  h += '</div>';
+  h += `<div class="section-body" id="${id}-body"><div class="item-list">`;
+  items.forEach(i => { h += renderFn(i); });
+  h += '</div></div>';
+  return h;
+}
+
+function toggleDoneSection(id) {
+  const body = document.getElementById(id + '-body');
+  const header = document.getElementById(id + '-header');
+  if (!body || !header) return;
+  body.classList.toggle('collapsed');
+  header.classList.toggle('collapsed');
 }
 
 function renderLimitedTag(item) {
@@ -802,32 +830,48 @@ function renderShinyContent() {
   let html = '';
   if (!list.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>赛季信息待补充（_待采集/异色炫彩完整列表.csv）</small></div>'; el.innerHTML = html; return; }
 
-  html += '<div class="item-list">';
-  pageItems.forEach(s => {
-    const isDone = s.taskDone;
-    let seasonTag = '';
-    if (s.limited) {
-      seasonTag = s.limited_status === '赛季已过'
-        ? '<span class="tag-archived">赛季已过</span>'
-        : `<span class="tag-limited">${s.limited_status || '限定'}</span>`;
+  // 状态筛选时保持平铺；全部时分离待完成/已完成
+  if (shinyStatus !== 'all') {
+    html += '<div class="item-list">';
+    pageItems.forEach(s => { html += renderShinyRow(s); });
+    html += '</div>';
+  } else {
+    const pending = pageItems.filter(s => !s.taskDone);
+    const done = pageItems.filter(s => s.taskDone);
+    if (pending.length) {
+      html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+      pending.forEach(s => { html += renderShinyRow(s); });
+      html += '</div>';
     }
-    const rightEl = s.source_url
-      ? `<a href="${s.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
-      : (s.hasItem ? '' : '<span style="font-size:10px;color:#ccc">待补充</span>');
-
-    html += `<div class="item-row${isDone ? ' done' : ''}">`;
-    html += `<button class="check-btn${isDone ? ' checked' : ''}" onclick="toggleShinyTask(${s.spriteId})"></button>`;
-    html += `<div style="flex:1; min-width:0">`;
-    html += `<div class="item-name">${esc(s.name)} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>`;
-    if (s.notes) html += `<div class="item-notes">${esc(s.notes)}</div>`;
-    html += '</div>';
-    html += rightEl;
-    html += '</div>';
-  });
-  html += '</div>';
+    if (done.length) {
+      html += renderCollapsibleDoneSection(done, renderShinyRow, done.length);
+    }
+  }
 
   html += renderPagination(shinyPage, totalPages, 'goShinyPage');
   el.innerHTML = html;
+}
+
+function renderShinyRow(s) {
+  const isDone = s.taskDone;
+  let seasonTag = '';
+  if (s.limited) {
+    seasonTag = s.limited_status === '赛季已过'
+      ? '<span class="tag-archived">赛季已过</span>'
+      : `<span class="tag-limited">${s.limited_status || '限定'}</span>`;
+  }
+  const rightEl = s.source_url
+    ? `<a href="${s.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
+    : (s.hasItem ? '' : '<span style="font-size:10px;color:#ccc">待补充</span>');
+
+  return `<div class="item-row${isDone ? ' done' : ''}">
+    <button class="check-btn${isDone ? ' checked' : ''}" onclick="toggleShinyTask(${s.spriteId})"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(s.name)} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>
+      ${s.notes ? `<div class="item-notes">${esc(s.notes)}</div>` : ''}
+    </div>
+    <div class="item-actions">${rightEl}</div>
+  </div>`;
 }
 
 async function toggleShinyTask(spriteId) {
@@ -882,9 +926,7 @@ function renderBackpack() {
     html += '</div>';
   }
   if (done.length) {
-    html += `<div class="section-title" style="margin-top:16px">已完成（${done.length}）</div><div class="item-list">`;
-    done.forEach(i => { html += renderItemRow(i); });
-    html += '</div>';
+    html += renderCollapsibleDoneSection(done, renderItemRow, done.length);
   }
   el.innerHTML = html;
 }
@@ -900,12 +942,14 @@ function renderItemRow(item) {
   if (item.limited) tag = item.limited_status === '赛季已过' ? '<span class="tag-archived">已归档</span>' : '<span class="tag-limited">限定</span>';
   return `<div class="item-row ${isDone ? 'done' : ''}">
     <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleItemStatus('${item.id}')"></button>
-    <div style="flex:1; min-width:0">
+    <div class="item-info">
       <div class="item-name">${esc(item.name)} ${tag}</div>
       ${item.notes ? `<div class="item-notes">${esc(item.notes)}</div>` : ''}
     </div>
-    <span class="item-category-tag">${item.category}</span>
-    ${rightEl}
+    <div class="item-actions">
+      <span class="item-category-tag">${item.category}</span>
+      ${rightEl}
+    </div>
   </div>`;
 }
 
@@ -1034,9 +1078,7 @@ function renderCategoryTab(tab) {
     html += '</div>';
   }
   if (done.length) {
-    html += `<div class="section-title" style="margin-top:16px">已完成（${done.length}）</div><div class="item-list">`;
-    done.forEach(i => { html += renderItemRow(i); });
-    html += '</div>';
+    html += renderCollapsibleDoneSection(done, renderItemRow, done.length);
   }
   el.innerHTML = html;
 }
@@ -1057,19 +1099,33 @@ function renderFruitsTab() {
     el.innerHTML = html; return;
   }
 
-  html += '<div class="item-list">';
-  withFruit.forEach(sp => {
-    const acq = sp.fruit && sp.fruit.acquired;
-    html += `<div class="item-row${acq ? ' done' : ''}">`;
-    html += `<button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit(${sp.id})"></button>`;
-    html += `<div style="flex:1"><div class="item-name">${esc(sp.fruit.name || sp.name+'果实')}</div>`;
-    html += `<div class="item-notes" style="color:#aaa">获取方式待补充</div></div>`;
-    html += '<span class="add-source" onclick="">+ 攻略</span>';
+  const pending = withFruit.filter(s => !s.fruit || !s.fruit.acquired);
+  const done = withFruit.filter(s => s.fruit && s.fruit.acquired);
+
+  if (pending.length) {
+    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(sp => { html += renderFruitRow(sp); });
     html += '</div>';
-  });
-  html += '</div>';
+  }
+  if (done.length) {
+    html += renderCollapsibleDoneSection(done, renderFruitRow, done.length);
+  }
 
   el.innerHTML = html;
+}
+
+function renderFruitRow(sp) {
+  const acq = sp.fruit && sp.fruit.acquired;
+  return `<div class="item-row${acq ? ' done' : ''}">
+    <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit(${sp.id})"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(sp.fruit && sp.fruit.name || sp.name+'果实')}</div>
+      <div class="item-notes" style="color:#aaa">获取方式待补充</div>
+    </div>
+    <div class="item-actions">
+      <span class="add-source">+ 攻略</span>
+    </div>
+  </div>`;
 }
 
 async function toggleFruit(spriteId) {
