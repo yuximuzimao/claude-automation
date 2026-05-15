@@ -98,6 +98,11 @@ lkwj/
 ]
 ```
 
+## 数据约束
+
+- **evolve 类任务归属规则**：leader_evolve/evolve 任务只能挂在 source form（进化前形态），禁止 target form（进化后形态）出现同名 evolve 任务。sprites.json 导入/更新时必须校验此约束。
+- **迁移脚本**：`scripts/migrate-leader-evolve.js` — 删除 leader form 的 leader_evolve 前同步用户进度。
+
 **任务类型说明**：
 - `skill` — 使用技能石 N 次
 - `capture20` — 捕捉 20 只（有果实字段的精灵）
