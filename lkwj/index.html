@@ -22,24 +22,91 @@
     .container { padding: 16px 20px; max-width: 860px; }
 
     /* 看板 */
-    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; margin-bottom: 20px; }
-    .stat-card { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; }
-    .stat-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); border-color: #c7d2fe; }
-    .stat-card .label { font-size: 12px; color: #888; margin-bottom: 6px; }
-    .stat-card .numbers { font-size: 22px; font-weight: 700; color: #1a1a2e; }
-    .stat-card .numbers span { font-size: 13px; color: #bbb; font-weight: 400; }
-    .progress-bar { height: 4px; background: #f0f0f5; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-bottom: 14px; }
+    .stat-card { background: #fff; border-radius: 10px; padding: 12px; border: 1px solid #e8eaf0; cursor: pointer; transition: box-shadow 0.15s; }
+    .stat-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); }
+    .stat-card .label { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .stat-card .numbers { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .stat-card .numbers span { font-size: 12px; color: #bbb; font-weight: 400; }
+    .stat-card .hint { font-size: 13px; color: #bbb; }
+    .progress-bar { height: 4px; background: #f0f0f5; border-radius: 2px; margin-top: 6px; overflow: hidden; }
     .progress-fill { height: 100%; border-radius: 2px; background: #4f46e5; transition: width 0.3s; }
     .progress-fill.complete { background: #10b981; }
 
-    /* 收集列表（背包/异色） */
+    /* 看板模块 */
+    .dash-widget { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; margin-bottom: 10px; }
+    .dash-widget h3 { font-size: 13px; color: #888; margin-bottom: 10px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+
+    /* 随机任务 */
+    .random-box { text-align: center; padding: 6px 0; }
+    .random-task-name { font-size: 16px; font-weight: 700; }
+    .random-task-desc { font-size: 13px; color: #666; margin-top: 2px; }
+    .random-task-form { font-size: 11px; color: #aaa; }
+    .random-actions { margin-top: 10px; display: flex; gap: 8px; justify-content: center; }
+    .random-actions button { padding: 6px 16px; border-radius: 16px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 12px; transition: all 0.1s; }
+    .random-actions button:hover { border-color: #6366f1; color: #6366f1; }
+    .random-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
+
+    /* 今日完成 */
+    .today-done { font-size: 12px; color: #888; margin-top: 6px; }
+    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 10px; margin: 2px 3px; font-size: 11px; }
+
+    /* 提示条 */
+    .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
+
+    /* ── 图鉴/异色 Tab 共用 ── */
+    .sprite-toolbar { margin-bottom: 10px; }
+    .sprite-search { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 6px; }
+    .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+    .chips { display: flex; gap: 4px; flex-wrap: wrap; }
+    .chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .chip:hover { border-color: #4f46e5; color: #4f46e5; }
+    .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .sprite-stats { font-size: 12px; color: #999; margin: 8px 0; display: flex; gap: 14px; }
+    .sprite-stats strong { color: #4f46e5; }
+
+    /* 精灵卡片 */
+    .sprite-list { display: flex; flex-direction: column; gap: 6px; }
+    .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
+    .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; user-select: none; }
+    .sprite-card-header .si { font-size: 18px; flex-shrink: 0; }
+    .sprite-card-header .sn { flex: 1; font-size: 14px; font-weight: 600; }
+    .sprite-card-header .se { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
+    .sprite-card-header .sm { font-size: 11px; color: #aaa; white-space: nowrap; }
+    .sprite-card-header .sa { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; }
+    .sprite-card.expanded .sa { transform: rotate(90deg); }
+    .sprite-card-body { display: none; padding: 0 14px 12px; border-top: 1px solid #f0f0f5; }
+    .sprite-card.expanded .sprite-card-body { display: block; }
+
+    /* 关联任务组 */
+    .task-group { margin-top: 10px; }
+    .task-group-label { font-size: 11px; color: #888; margin-bottom: 3px; padding-left: 2px; }
+    .task-row { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 5px; font-size: 13px; color: #444; }
+    .task-row:hover { background: #f8f9fc; }
+    .task-row.done { color: #aaa; text-decoration: line-through; }
+    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+    .task-check.checked { background: #10b981; border-color: #10b981; }
+    .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
+    .task-type-tag { font-size: 10px; color: #aaa; background: #f5f6fa; padding: 1px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .form-label { font-size: 12px; font-weight: 600; color: #6366f1; margin-bottom: 2px; }
+    .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
+
+    /* 分页 */
+    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
+    .pagination button { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 12px; transition: all 0.1s; }
+    .pagination button:hover { border-color: #4f46e5; color: #4f46e5; }
+    .pagination button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .pagination button:disabled { opacity: 0.3; cursor: default; }
+
+    /* 背包 */
     .section-title { font-size: 12px; color: #aaa; margin-bottom: 8px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
     .item-list { display: flex; flex-direction: column; gap: 6px; }
     .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; transition: box-shadow 0.1s; }
     .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .item-row.done { opacity: 0.4; }
-    .item-row .item-name { flex: 1; font-size: 14px; font-weight: 500; color: #1a1a2e; }
-    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; font-weight: 400; }
+    .item-row .item-name { flex: 1; font-size: 14px; font-weight: 500; }
+    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; }
     .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
@@ -48,6 +115,7 @@
     .source-btn:hover { background: #e0e7ff; }
     .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; }
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
+    .item-category-tag { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
 
     /* 弹窗 */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
@@ -63,76 +131,10 @@
     .btn-primary:hover { background: #4338ca; }
     .btn-secondary { background: #f0f0f5; color: #666; }
 
-    .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
-
     .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
     .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
-
-    /* ── 图鉴 Tab ── */
-    .sprite-toolbar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-    .sprite-search { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a2e; font-family: inherit; }
-    .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
-    .chips { display: flex; gap: 4px; flex-wrap: wrap; }
-    .chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
-    .chip:hover { border-color: #4f46e5; color: #4f46e5; }
-    .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .sprite-stats { font-size: 12px; color: #999; margin-bottom: 8px; display: flex; gap: 14px; }
-    .sprite-stats strong { color: #4f46e5; }
-
-    .sprite-list { display: flex; flex-direction: column; gap: 6px; }
-    .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
-    .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; user-select: none; }
-    .sprite-card-header .sprite-icon { font-size: 20px; flex-shrink: 0; }
-    .sprite-card-header .sprite-name { flex: 1; font-size: 14px; font-weight: 600; color: #1a1a2e; }
-    .sprite-card-header .sprite-element { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
-    .sprite-card-header .sprite-meta { font-size: 11px; color: #aaa; white-space: nowrap; }
-    .sprite-card-header .sprite-arrow { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; }
-    .sprite-card.expanded .sprite-arrow { transform: rotate(90deg); }
-
-    .sprite-card-body { display: none; padding: 0 14px 12px; border-top: 1px solid #f0f0f5; }
-    .sprite-card.expanded .sprite-card-body { display: block; }
-    .sprite-card-body .form-block { margin-top: 10px; }
-    .sprite-card-body .form-label { font-size: 12px; font-weight: 600; color: #6366f1; margin-bottom: 4px; }
-    .sprite-card-body .task-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 13px; color: #444; }
-    .sprite-card-body .task-row:hover { background: #f8f9fc; }
-    .sprite-card-body .task-row.done { color: #aaa; text-decoration: line-through; }
-    .sprite-card-body .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
-    .sprite-card-body .task-check.checked { background: #10b981; border-color: #10b981; }
-    .sprite-card-body .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
-    .sprite-card-body .task-type-tag { font-size: 10px; color: #aaa; background: #f5f6fa; padding: 1px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-    .sprite-card-body .form-collected { font-size: 11px; color: #10b981; margin-left: 6px; }
-
-    /* 分页 */
-    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
-    .pagination button { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 12px; transition: all 0.1s; }
-    .pagination button:hover { border-color: #4f46e5; color: #4f46e5; }
-    .pagination button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .pagination button:disabled { opacity: 0.3; cursor: default; }
-
     .empty-state { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
     .empty-state small { display: block; margin-top: 6px; font-size: 12px; color: #ccc; }
-
-    /* 抽一个 Tab */
-    .random-section { text-align: center; padding: 20px 0; }
-    .draw-btn { padding: 14px 48px; border-radius: 30px; border: none; background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; font-size: 18px; font-weight: 700; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 14px rgba(79,70,229,0.25); }
-    .draw-btn:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(79,70,229,0.35); }
-    .draw-btn:active { transform: scale(0.97); }
-    .draw-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
-    .result-card { background: #fff; border-radius: 14px; padding: 20px; margin-top: 18px; border: 2px solid #6366f1; text-align: center; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
-    @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .result-card .result-emoji { font-size: 36px; margin-bottom: 6px; }
-    .result-card .result-name { font-size: 18px; font-weight: 700; color: #1a1a2e; }
-    .result-card .result-desc { font-size: 13px; color: #666; margin-top: 4px; }
-    .result-card .result-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
-    .result-actions { display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
-    .result-actions button { padding: 7px 16px; border-radius: 18px; border: 1px solid #e0e0e0; background: #fff; color: #444; cursor: pointer; font-size: 12px; transition: all 0.1s; }
-    .result-actions button:hover { border-color: #6366f1; color: #6366f1; }
-    .result-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
-    .history-block { margin-top: 20px; text-align: left; }
-    .history-block summary { font-size: 12px; color: #aaa; cursor: pointer; padding: 4px 0; }
-    .history-block .hist-item { font-size: 12px; color: #888; padding: 3px 0; display: flex; align-items: center; gap: 6px; }
-    .spinner-text { display: inline-block; min-width: 120px; }
   </style>
 </head>
 <body>
@@ -145,19 +147,25 @@
 
 <div class="nav">
   <button class="active" onclick="switchTab('dashboard')">看板</button>
-  <button onclick="switchTab('sprite')">图鉴</button>
+  <button onclick="switchTab('sprite')">精灵图鉴</button>
+  <button onclick="switchTab('shiny')">异色炫彩</button>
   <button onclick="switchTab('backpack')">背包</button>
-  <button onclick="switchTab('random')">抽一个</button>
 </div>
 
 <div class="container">
   <div id="tab-dashboard"></div>
-  <div id="tab-sprite" style="display:none"></div>
+  <div id="tab-sprite" style="display:none">
+    <div id="sprite-toolbar"></div>
+    <div id="sprite-content"></div>
+  </div>
+  <div id="tab-shiny" style="display:none">
+    <div id="shiny-toolbar"></div>
+    <div id="shiny-content"></div>
+  </div>
   <div id="tab-backpack" style="display:none"></div>
-  <div id="tab-random" style="display:none"></div>
 </div>
 
-<!-- 攻略/备注编辑弹窗 -->
+<!-- 攻略编辑弹窗 -->
 <div class="modal-overlay" id="source-modal">
   <div class="modal">
     <h3 id="modal-title">编辑攻略</h3>
@@ -181,175 +189,211 @@
 </div>
 
 <script>
-let data = null;
-let spritesData = null;
-let walletData = null;
-let editingId = null;
-let currentTab = 'dashboard';
+let data = null, spritesData = null, walletData = null, editingId = null, currentTab = 'dashboard';
 
-// 图鉴 Tab 状态
-let elementFilter = null;
-let spriteSearch = '';
-let spritePage = 1;
-let expandedSprite = null;
-let spriteLoaded = false;
-let spriteStatus = 'all';    // all | pending | done
+// 精灵图鉴状态
+let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spritePage = 1, expandedSprite = null, spriteLoaded = false;
 const PAGE_SIZE = 40;
 
-// 背包 Tab 状态
-let backpackStatus = 'all';  // all | pending | done
+// 异色炫彩状态（基于 items[]）
+let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
+const SHINY_PAGE = 40;
 
-// 抽一个 Tab 状态
-let randomRange = 'all';   // all | sprite | shiny | backpack
-let drawnTask = null;      // { type:'sprite'|'item', spriteId, formIdx, taskIdx, name, desc, ... }
-let isDrawing = false;
-const DRAWN_KEY = 'lkwj_drawn_today';
+// 背包状态
+let backpackStatus = 'all';
 
-// ── 数据加载 ──────────────────────────────────
-async function loadData() {
-  const [dRes, wRes] = await Promise.all([
-    fetch('/api/data'),
-    fetch('/api/wallet')
-  ]);
+// 随机任务
+let randomTask = null;
+
+const DONE_KEY = 'lkwj_done_today';
+
+// ═══════════ 数据加载 ═══════════
+async function init() {
+  const [dRes, wRes] = await Promise.all([fetch('/api/data'), fetch('/api/wallet')]);
   data = await dRes.json();
   walletData = await wRes.json();
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
-  renderAll();
-}
-
-async function saveWallet() {
-  await fetch('/api/wallet', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(walletData)
-  });
+  renderDashboard();
 }
 
 async function saveData() {
   data.meta.last_updated = new Date().toISOString().slice(0, 10);
-  await fetch('/api/save', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
+  await fetch('/api/save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
   const ind = document.getElementById('save-indicator');
   ind.classList.add('show');
   setTimeout(() => ind.classList.remove('show'), 1500);
 }
 
-// ── Tab 切换 ──────────────────────────────────
-function switchTab(name) {
-  ['dashboard','sprite','backpack','random'].forEach(t => {
-    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
-  });
-  document.querySelectorAll('.nav button').forEach((btn, i) => {
-    btn.classList.toggle('active', ['dashboard','sprite','backpack','random'][i] === name);
-  });
-  currentTab = name;
-  if (name === 'sprite') { loadSprites().then(() => renderSprite()); return; }
-  if (name === 'random') { loadSprites().then(() => renderRandom()); return; }
-  if (name === 'backpack') renderBackpack();
-  else if (name === 'dashboard') renderDashboard();
-}
-
-// ── 渲染入口 ──────────────────────────────────
-function renderAll() {
-  renderDashboard();
-  if (currentTab === 'sprite') renderSprite();
-  if (currentTab === 'backpack') renderBackpack();
-  if (currentTab === 'random') renderRandom();
-}
-
-// ── 看板 Tab ──────────────────────────────────
+// ═══════════ 看板 Tab ═══════════
 function renderDashboard() {
   const el = document.getElementById('tab-dashboard');
-  const cats = data.categories;
-  const regions = data.regions;
+  const cats = data.categories, regions = data.regions;
 
-  // 实时聚合（spritesData 可用时），否则回退到手动数值
-  let spriteOwned, spriteTotal, yiseOwned, yiseTotal;
+  let spriteTotal, spriteOwned, yiseTotal, yiseOwned;
   if (spritesData) {
     spriteTotal = spritesData.length;
     spriteOwned = spritesData.filter(s => s.collected || s.forms.some(f =>
-      f.tasks.some(t => (t.type === 'capture' || t.type === 'capture_gifted') && t.done)
-    )).length;
+      f.tasks.some(t => (t.type === 'capture' || t.type === 'capture_gifted') && t.done))).length;
     yiseTotal = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny'))).length;
     yiseOwned = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny' && t.done))).length;
   } else {
-    const sp = cats['精灵'];
-    spriteOwned = sp.owned; spriteTotal = sp.total;
-    const yiseItems = data.items.filter(i => i.category === '异色炫彩');
-    yiseOwned = yiseItems.filter(i => i.status === '已完成').length;
-    yiseTotal = yiseItems.length || 152;
+    const sp = cats['精灵']; spriteOwned = sp.owned; spriteTotal = sp.total;
+    yiseOwned = 0; yiseTotal = 152;
   }
 
   let html = '';
 
   // 活动预警
   const now = new Date();
-  data.activities.forEach(a => {
+  (data.activities || []).forEach(a => {
     if (!a.end_date) return;
     const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
     if (days >= 0 && days <= 14)
-      html += `<div class="alert-bar">&#9888;&#65039; <strong>${esc(a.name)}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
+      html += `<div class="alert-bar">⚠️ <strong>${esc(a.name)}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
   });
 
   // 进度卡片
-  html += '<div class="dashboard-grid">';
-  html += statCard('精灵图鉴', spriteOwned, spriteTotal, "switchTab('sprite')");
-  Object.entries(regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
-  html += statCard('异色炫彩', yiseOwned, yiseTotal, "switchTab('sprite')");
+  html += '<div class="dash-stats">';
+  html += dashCard('精灵图鉴', spriteOwned, spriteTotal, "switchTab('sprite')");
+  Object.entries(regions).forEach(([n, r]) => html += dashCard(n, r.owned, r.total, ''));
+  html += dashCard('异色炫彩', yiseOwned, yiseTotal, "switchTab('shiny')");
   ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
     const c = cats[cat];
-    html += statCard(cat, c.owned, c.total, '');
+    html += dashCard(cat, c.owned, c.total, '');
   });
   html += '</div>';
 
-  // 待完成异色炫彩（仅当 spritesData 未加载且 items 有数据时显示）
-  const yiseItems = data.items.filter(i => i.category === '异色炫彩');
-  const pending = yiseItems.filter(i => i.status !== '已完成');
-  if (pending.length > 0) {
-    html += `<div class="section-title">异色炫彩 · 待完成（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(item => { html += renderItemRow(item); });
-    html += '</div>';
+  // 随机未完成任务
+  randomTask = pickRandom();
+  html += '<div class="dash-widget">';
+  html += '<h3>🎯 随机任务</h3>';
+  if (randomTask) {
+    html += `<div class="random-box">`;
+    html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
+    html += `<div class="random-task-desc">${esc(randomTask.desc)}</div>`;
+    html += `<div class="random-task-form">${randomTask.form || randomTask.category || ''}</div>`;
+    html += '<div class="random-actions">';
+    if (randomTask.type === 'sprite') {
+      html += `<button class="primary" onclick="markRandomDone()">✅ 标记完成</button>`;
+      html += `<button onclick="switchTab('sprite');toggleSprite(${randomTask.spriteId})">📋 查看</button>`;
+    } else {
+      html += `<button class="primary" onclick="markRandomItemDone()">✅ 标记完成</button>`;
+    }
+    html += `<button onclick="randomTask=null;renderDashboard()">🔄 换一个</button>`;
+    html += '</div></div>';
+  } else {
+    html += '<div class="empty-state" style="padding:12px">全部完成了 🎉</div>';
+  }
+  html += '</div>';
+
+  // 今日完成
+  const doneToday = getDoneToday();
+  if (doneToday.length) {
+    html += '<div class="dash-widget">';
+    html += `<h3>📋 今日已完成（${doneToday.length}）</h3>`;
+    html += '<div class="today-done">';
+    doneToday.slice(-10).forEach(d => {
+      html += `<span class="td-item">${esc(d.name)} · ${esc(d.desc)}</span>`;
+    });
+    html += '</div></div>';
   }
 
   el.innerHTML = html;
 }
 
-function statCard(label, owned, total, onclick) {
-  const o = owned || 0;
-  const t = total;
+function dashCard(label, owned, total, onclick) {
+  const o = owned || 0, t = total;
   if (t === null || t === undefined) {
-    const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
-    return `<div class="stat-card" ${clickAttr}">
-      <div class="label">${label}</div>
-      <div class="numbers" style="font-size:14px;color:#bbb">待录入</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
-    </div>`;
+    return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
+      <div class="label">${label}</div><div class="hint">待录入</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>`;
   }
-  const pct = t ? Math.round(o / t * 100) : 0;
-  const complete = t && o >= t;
-  const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
-  return `<div class="stat-card" ${clickAttr}>
-    <div class="label">${label}</div>
-    <div class="numbers">${o} <span>/ ${t}</span></div>
-    <div class="progress-bar"><div class="progress-fill ${complete ? 'complete' : ''}" style="width:${pct}%"></div></div>
-  </div>`;
+  const pct = t ? Math.round(o / t * 100) : 0, done = t && o >= t;
+  return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
+    <div class="label">${label}</div><div class="numbers">${o} <span>/ ${t}</span></div>
+    <div class="progress-bar"><div class="progress-fill ${done?'complete':''}" style="width:${pct}%"></div></div></div>`;
 }
 
-// ── 图鉴 Tab ──────────────────────────────────
+// ═══════════ 随机抽取 ═══════════
+function pickRandom() {
+  const pool = [];
+  if (spritesData) {
+    spritesData.forEach(sp => {
+      sp.forms.forEach((f, fi) => {
+        f.tasks.forEach((t, ti) => {
+          if (!t.done) pool.push({ type: 'sprite', spriteId: sp.id, formIdx: fi, taskIdx: ti, name: sp.name, desc: t.desc, form: f.label });
+        });
+      });
+    });
+  }
+  (data.items || []).forEach(item => {
+    if (item.category !== '异色炫彩' && item.status !== '已完成')
+      pool.push({ type: 'item', id: item.id, name: item.name, desc: item.notes || item.category, category: item.category });
+  });
+  if (!pool.length) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ═══════════ 今日完成 ═══════════
+function getDoneToday() {
+  try {
+    const raw = localStorage.getItem(DONE_KEY);
+    if (!raw) return [];
+    const d = JSON.parse(raw);
+    if (d.date !== new Date().toISOString().slice(0, 10)) { localStorage.removeItem(DONE_KEY); return []; }
+    return d.items || [];
+  } catch { return []; }
+}
+
+function addDoneToday(entry) {
+  const today = new Date().toISOString().slice(0, 10);
+  let d = { date: today, items: [] };
+  try { const raw = localStorage.getItem(DONE_KEY); if (raw) d = JSON.parse(raw); if (d.date !== today) d = { date: today, items: [] }; } catch { d = { date: today, items: [] }; }
+  if (!d.items.some(i => i.key === entry.key)) d.items.push(entry);
+  localStorage.setItem(DONE_KEY, JSON.stringify(d));
+}
+
+// ═══════════ 精灵图鉴 Tab ═══════════
 async function loadSprites() {
   if (spriteLoaded) return;
-  const res = await fetch('/api/sprites');
-  spritesData = await res.json();
+  spritesData = await (await fetch('/api/sprites')).json();
   spriteLoaded = true;
 }
 
-function renderSprite() {
-  const el = document.getElementById('tab-sprite');
-  if (!spritesData) { el.innerHTML = '<div class="empty-state">加载中...</div>'; return; }
+function renderSpriteTab() {
+  renderSpriteToolbar();
+  renderSpriteContent();
+}
+
+function renderSpriteToolbar() {
+  const el = document.getElementById('sprite-toolbar');
+  const allElements = [...new Set(spritesData.map(s => {
+    const e = s.element; return e.length === 2 ? e[0] : e;
+  }))].filter(e => e !== '，').sort();
+
+  let html = '';
+  // 搜索框
+  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（支持拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
+  // 属性 chips
+  html += '<div class="chips">';
+  html += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
+  allElements.forEach(el => {
+    html += `<span class="chip${spriteElement === el ? ' active' : ''}" onclick="setSpriteElement('${el}')">${el}</span>`;
+  });
+  html += '</div>';
+  // 状态 Segment
+  html += '<div class="chips" style="margin-top:4px">';
+  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+    html += `<span class="chip${spriteStatus === s.v ? ' active' : ''}" onclick="setSpriteStatus('${s.v}')">${s.l}</span>`;
+  });
+  html += '</div>';
+
+  el.innerHTML = html;
+}
+
+function renderSpriteContent() {
+  const el = document.getElementById('sprite-content');
 
   // 过滤
   let list = spritesData;
@@ -358,221 +402,314 @@ function renderSprite() {
     list = list.filter(s => s.name.includes(q) || s.element.includes(q) ||
       (s.pinyin && (s.pinyin.full.includes(q) || s.pinyin.initial.includes(q))));
   }
-  if (elementFilter) {
-    if (elementFilter === 'shiny') {
-      list = list.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny')));
-    } else if (elementFilter === 'leader') {
-      list = list.filter(s => s.forms.some(f => f.type === 'leader'));
-    } else {
-      list = list.filter(s => s.element.includes(elementFilter));
-    }
-  }
+  if (spriteElement) list = list.filter(s => s.element.includes(spriteElement));
 
-  // 状态筛选（Chip 交叉语义：选中特定 Chip 时仅判断该 Chip 相关任务）
+  // 状态筛选
   if (spriteStatus !== 'all') {
     list = list.filter(s => {
-      let relevant = s.forms.flatMap(f => f.tasks);
-      if (elementFilter === 'shiny') relevant = relevant.filter(t => t.type === 'capture_shiny');
-      else if (elementFilter === 'leader') relevant = relevant.filter(t => t.type === 'leader_evolve');
-      if (!relevant.length) return false;
-      const allDone = relevant.every(t => t.done);
-      return spriteStatus === 'pending' ? !allDone : allDone;
+      const has = (done) => s.forms.some(f => f.tasks.some(t => t.done === done));
+      return spriteStatus === 'pending' ? has(false) : has(true);
     });
   }
 
   // 统计
   const total = spritesData.length;
   const collected = spritesData.filter(s => s.collected).length;
-  const totalTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.length, 0), 0);
-  const doneTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.filter(t => t.done).length, 0), 0);
 
   // 分页
   const totalPages = Math.ceil(list.length / PAGE_SIZE);
   if (spritePage > totalPages) spritePage = 1;
-  const start = (spritePage - 1) * PAGE_SIZE;
-  const pageItems = list.slice(start, start + PAGE_SIZE);
-
-  // 属性 chips
-  const allElements = [...new Set(spritesData.map(s => {
-    const e = s.element;
-    return e.length === 2 ? e[0] : e;
-  }))].filter(e => e !== '，').sort();
+  const pageItems = list.slice((spritePage - 1) * PAGE_SIZE, spritePage * PAGE_SIZE);
 
   let html = '';
-
-  // 搜索 + chips
-  html += '<div class="sprite-toolbar">';
-  html += `<input class="sprite-search" type="text" placeholder="搜索精灵（支持拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
-  html += '<div class="chips">';
-  const isElActive = !elementFilter || ['shiny','leader'].includes(elementFilter);
-  const isCustom = elementFilter === 'shiny' || elementFilter === 'leader';
-  html += `<span class="chip${!elementFilter ? ' active' : ''}" onclick="setElementFilter(null)">全部</span>`;
-  html += `<span class="chip${elementFilter === 'shiny' ? ' active' : ''}" onclick="setElementFilter('shiny')">异色炫彩</span>`;
-  html += `<span class="chip${elementFilter === 'leader' ? ' active' : ''}" onclick="setElementFilter('leader')">首领形态</span>`;
-  allElements.forEach(el => {
-    html += `<span class="chip${elementFilter === el ? ' active' : ''}" onclick="setElementFilter('${el}')">${el}</span>`;
-  });
-  html += '</div>';
-  // 状态筛选 Segment
-  html += '<div class="chips">';
-  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
-    html += `<span class="chip${spriteStatus === s.v ? ' active' : ''}" onclick="setSpriteStatus('${s.v}')">${s.l}</span>`;
-  });
-  html += '</div></div>';
-
-  // 统计
   html += `<div class="sprite-stats">`;
-  html += `<span>共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></span>`;
-  html += `<span>任务 <strong>${doneTasks}</strong> / ${totalTasks}</span>`;
-  html += `</div>`;
+  html += `<span>共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 本页 <strong>${pageItems.length}</strong></span>`;
+  html += '</div>';
 
   if (!list.length) {
     html += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
-    el.innerHTML = html;
-    return;
+    el.innerHTML = html; return;
   }
 
-  // 卡片列表
   html += '<div class="sprite-list">';
   pageItems.forEach(sp => {
-    const formCount = sp.forms.length;
-    const spTotal = sp.forms.reduce((c, f) => c + f.tasks.length, 0);
-    const spDone = sp.forms.reduce((c, f) => c + f.tasks.filter(t => t.done).length, 0);
-    const isExpanded = expandedSprite === sp.id;
-
-    html += `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
-    html += `<div class="sprite-card-header" onclick="toggleSprite(${sp.id})">`;
-    html += `<span class="sprite-icon">${sp.collected ? '✅' : '⬜'}</span>`;
-    html += `<span class="sprite-name">${esc(sp.name)}</span>`;
-    html += `<span class="sprite-element">${sp.element}</span>`;
-    html += `<span class="sprite-meta">${formCount}形态 · ${spDone}/${spTotal}</span>`;
-    html += `<span class="sprite-arrow">▶</span>`;
-    html += '</div>';
-
-    html += '<div class="sprite-card-body">';
-    sp.forms.forEach((f, fi) => {
-      const fDone = f.tasks.filter(t => t.done).length;
-      html += `<div class="form-block">`;
-      html += `<div class="form-label">${esc(f.label)}${f.collected ? '<span class="form-collected">✓ 已集齐</span>' : ''} · ${fDone}/${f.tasks.length}</div>`;
-      f.tasks.forEach((t, ti) => {
-        html += `<div class="task-row${t.done ? ' done' : ''}">`;
-        html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${sp.id},${fi},${ti})"></div>`;
-        html += `<span style="flex:1">${esc(t.desc)}</span>`;
-        html += `<span class="task-type-tag">${t.type}</span>`;
-        html += '</div>';
-      });
-      html += '</div>';
-    });
-    html += '</div></div>';
+    html += renderSpriteCard(sp, false);
   });
   html += '</div>';
 
-  // 分页导航
+  // 分页
   if (totalPages > 1) {
     html += '<div class="pagination">';
-    html += `<button onclick="goPage(${spritePage - 1})" ${spritePage <= 1 ? 'disabled' : ''}>◀</button>`;
+    html += `<button onclick="goSpritePage(${spritePage - 1})" ${spritePage <= 1 ? 'disabled' : ''}>◀</button>`;
     for (let p = 1; p <= totalPages; p++) {
-      if (p === 1 || p === totalPages || (p >= spritePage - 2 && p <= spritePage + 2)) {
-        html += `<button class="${p === spritePage ? 'active' : ''}" onclick="goPage(${p})">${p}</button>`;
-      } else if (p === spritePage - 3 || p === spritePage + 3) {
-        html += '<span style="padding:0 4px;color:#ccc">...</span>';
+      if (p === 1 || p === totalPages || Math.abs(p - spritePage) <= 2) {
+        html += `<button class="${p === spritePage ? 'active' : ''}" onclick="goSpritePage(${p})">${p}</button>`;
+      } else if (Math.abs(p - spritePage) === 3) {
+        html += '<span style="padding:0 2px;color:#ccc">...</span>';
       }
     }
-    html += `<button onclick="goPage(${spritePage + 1})" ${spritePage >= totalPages ? 'disabled' : ''}>▶</button>`;
+    html += `<button onclick="goSpritePage(${spritePage + 1})" ${spritePage >= totalPages ? 'disabled' : ''}>▶</button>`;
     html += '</div>';
   }
 
   el.innerHTML = html;
 }
 
+function renderSpriteCard(sp, isShinyTab) {
+  const spTotal = sp.forms.reduce((c, f) => c + f.tasks.length, 0);
+  const spDone = sp.forms.reduce((c, f) => c + f.tasks.filter(t => t.done).length, 0);
+  const isExpanded = (isShinyTab ? expandedShiny : expandedSprite) === sp.id;
+  // 对 异色 tab 只显示 capture_shiny 相关任务
+  const taskFilter = isShinyTab ? (t => t.type === 'capture_shiny') : (t => true);
+
+  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  card += `<div class="sprite-card-header" onclick="${isShinyTab ? 'toggleShiny' : 'toggleSprite'}(${sp.id})">`;
+  card += `<span class="si">${sp.collected ? '✅' : '⬜'}</span>`;
+  card += `<span class="sn">${esc(sp.name)}</span>`;
+  card += `<span class="se">${sp.element}</span>`;
+  card += `<span class="sm">${sp.forms.length}形态 · ${spDone}/${spTotal}</span>`;
+  card += `<span class="sa">▶</span>`;
+  card += '</div>';
+
+  card += '<div class="sprite-card-body">';
+  sp.forms.forEach((f, fi) => {
+    const formTasks = f.tasks.filter(taskFilter);
+    const fDone = formTasks.filter(t => t.done).length;
+    if (!formTasks.length) return;
+
+    // 应用状态筛选（只显示 done/pending 的 task）
+    let visibleTasks = formTasks;
+    if (isShinyTab) {
+      if (shinyStatus === 'pending') visibleTasks = formTasks.filter(t => !t.done);
+      else if (shinyStatus === 'done') visibleTasks = formTasks.filter(t => t.done);
+    } else {
+      if (spriteStatus === 'pending') visibleTasks = formTasks.filter(t => !t.done);
+      else if (spriteStatus === 'done') visibleTasks = formTasks.filter(t => t.done);
+    }
+    if (!visibleTasks.length) return;
+
+    card += `<div class="form-label">${esc(f.label)}${f.collected ? '<span class="fc">✓ 已集齐</span>' : ''} · ${fDone}/${formTasks.length}</div>`;
+
+    // 关联任务分组
+    const groups = groupRelatedTasks(visibleTasks);
+    groups.forEach(g => {
+      if (g.label) card += `<div class="task-group-label">${g.label}</div>`;
+      g.tasks.forEach(t => {
+        const ti = f.tasks.indexOf(t);
+        card += `<div class="task-row${t.done ? ' done' : ''}">`;
+        card += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${sp.id},${fi},${ti})"></div>`;
+        card += `<span style="flex:1">${esc(t.desc)}</span>`;
+        card += `<span class="task-type-tag">${t.type}</span>`;
+        card += '</div>';
+      });
+    });
+  });
+  card += '</div></div>';
+  return card;
+}
+
+// 关联任务分组：同形态下 capture/capture_gifted/capture_shiny 归一组，evolve/leader_evolve 归一组，其余各独立
+function groupRelatedTasks(tasks) {
+  const captureTypes = ['capture', 'capture_gifted', 'capture_shiny'];
+  const evolveTypes = ['evolve', 'leader_evolve'];
+
+  const groups = [];
+  const used = new Set();
+
+  // capture 组
+  const captures = tasks.filter(t => captureTypes.includes(t.type));
+  if (captures.length) {
+    captures.forEach(t => used.add(t));
+    groups.push({ label: captures.length > 1 ? '捕捉' : '', tasks: captures });
+  }
+  // evolve 组
+  const evolves = tasks.filter(t => !used.has(t) && evolveTypes.includes(t.type));
+  if (evolves.length) {
+    evolves.forEach(t => used.add(t));
+    groups.push({ label: evolves.length > 1 ? '进化' : '', tasks: evolves });
+  }
+  // skill 组
+  const skills = tasks.filter(t => !used.has(t) && t.type === 'skill');
+  if (skills.length) {
+    skills.forEach(t => used.add(t));
+    groups.push({ label: skills.length > 1 ? '技能' : '', tasks: skills });
+  }
+  // 其余各独立
+  tasks.filter(t => !used.has(t)).forEach(t => {
+    groups.push({ label: '', tasks: [t] });
+  });
+
+  return groups;
+}
+
+// 精灵图鉴操作
 function onSpriteSearch(val) {
   spriteSearch = val;
   spritePage = 1;
   expandedSprite = null;
-  renderSprite();
+  renderSpriteContent(); // 只重渲染内容，不碰 input
 }
 
-function setElementFilter(el) {
-  elementFilter = el;
+function setSpriteElement(el) {
+  spriteElement = el;
   spritePage = 1;
   expandedSprite = null;
-  renderSprite();
-}
-
-function toggleSprite(id) {
-  expandedSprite = expandedSprite === id ? null : id;
-  renderSprite();
-}
-
-function goPage(p) {
-  const totalPages = Math.ceil((spritesData || []).length / PAGE_SIZE);
-  if (p < 1 || p > totalPages) return;
-  spritePage = p;
-  expandedSprite = null;
-  renderSprite();
-  document.getElementById('tab-sprite').scrollIntoView({ behavior: 'smooth' });
+  renderSpriteTab();
 }
 
 function setSpriteStatus(s) {
   spriteStatus = s;
   spritePage = 1;
   expandedSprite = null;
-  renderSprite();
+  renderSpriteTab();
 }
 
-function setBackpackStatus(s) {
-  backpackStatus = s;
-  renderBackpack();
+function toggleSprite(id) {
+  expandedSprite = expandedSprite === id ? null : id;
+  renderSpriteContent();
 }
 
-async function toggleTask(spriteId, formIdx, taskIdx) {
-  const sp = spritesData.find(s => s.id === spriteId);
-  if (!sp) return;
-  sp.forms[formIdx].tasks[taskIdx].done = !sp.forms[formIdx].tasks[taskIdx].done;
-
-  if (!data.sprite_progress) data.sprite_progress = {};
-  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
-  const spProg = data.sprite_progress[String(spriteId)];
-  if (!spProg.forms) spProg.forms = {};
-  if (!spProg.forms[String(formIdx)]) spProg.forms[String(formIdx)] = { collected: false, tasks: {} };
-  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = sp.forms[formIdx].tasks[taskIdx].done;
-
-  await saveData();
-  renderSprite();
+function goSpritePage(p) {
+  const totalPages = Math.ceil(spritesData.length / PAGE_SIZE);
+  if (p < 1 || p > totalPages) return;
+  spritePage = p;
+  expandedSprite = null;
+  renderSpriteContent();
 }
 
-// ── 背包 Tab ──────────────────────────────────
-function renderBackpack() {
-  const el = document.getElementById('tab-backpack');
-  const items = data.items || [];
-  if (!items.length) {
-    el.innerHTML = '<div class="empty-state">暂无收集项<small>从图鉴标记进度后，这里会显示所有收集项</small></div>';
-    return;
+// ═══════════ 异色炫彩 Tab（个人收集，items[] 数据） ═══════════
+function renderShinyTab() {
+  renderShinyToolbar();
+  renderShinyContent();
+}
+
+function renderShinyToolbar() {
+  const el = document.getElementById('shiny-toolbar');
+  const items = (data.items || []).filter(i => i.category === '异色炫彩');
+  const total = items.length;
+  const done = items.filter(i => i.status === '已完成').length;
+
+  let html = '';
+  html += `<input class="sprite-search" type="text" id="shiny-search-input" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="onShinySearch(this.value)">`;
+  html += '<div class="chips">';
+  // 赛季
+  [{v:'all',l:'全部赛季'},{v:'available',l:'可获取'},{v:'expired',l:'赛季已过'}].forEach(s => {
+    html += `<span class="chip${shinySeason === s.v ? ' active' : ''}" onclick="setShinySeason('${s.v}')">${s.l}</span>`;
+  });
+  html += '</div>';
+  html += '<div class="chips" style="margin-top:4px">';
+  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+    html += `<span class="chip${shinyStatus === s.v ? ' active' : ''}" onclick="setShinyStatus('${s.v}')">${s.l}</span>`;
+  });
+  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${total} 项 · 已完成 ${done}</span>`;
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderShinyContent() {
+  const el = document.getElementById('shiny-content');
+  let items = (data.items || []).filter(i => i.category === '异色炫彩');
+  if (shinySearch) {
+    const q = shinySearch.toLowerCase();
+    items = items.filter(i => i.name.includes(q));
+  }
+  if (shinySeason === 'available') items = items.filter(i => !i.limited || i.limited_status !== '赛季已过');
+  else if (shinySeason === 'expired') items = items.filter(i => i.limited && i.limited_status === '赛季已过');
+  if (shinyStatus === 'pending') items = items.filter(i => i.status !== '已完成');
+  else if (shinyStatus === 'done') items = items.filter(i => i.status === '已完成');
+
+  const totalPages = Math.ceil(items.length / SHINY_PAGE);
+  if (shinyPage > totalPages) shinyPage = 1;
+  const pageItems = items.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
+
+  let html = '';
+  if (!items.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>完整列表待 CSV 导入</small></div>'; el.innerHTML = html; return; }
+
+  const pending = pageItems.filter(i => i.status !== '已完成');
+  const done = pageItems.filter(i => i.status === '已完成');
+  if (pending.length) {
+    html += `<div class="section-title">未完成（本页 ${pending.length}）</div><div class="item-list">`;
+    pending.forEach(i => { html += renderShinyItemRow(i); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += `<div class="section-title" style="margin-top:16px">已完成（本页 ${done.length}）</div><div class="item-list">`;
+    done.forEach(i => { html += renderShinyItemRow(i); });
+    html += '</div>';
   }
 
-  // 状态筛选
+  if (totalPages > 1) {
+    html += '<div class="pagination">';
+    html += `<button onclick="goShinyPage(${shinyPage - 1})" ${shinyPage <= 1 ? 'disabled' : ''}>◀</button>`;
+    for (let p = 1; p <= totalPages; p++) {
+      if (p === 1 || p === totalPages || Math.abs(p - shinyPage) <= 2)
+        html += `<button class="${p === shinyPage ? 'active' : ''}" onclick="goShinyPage(${p})">${p}</button>`;
+      else if (Math.abs(p - shinyPage) === 3)
+        html += '<span style="padding:0 2px;color:#ccc">...</span>';
+    }
+    html += `<button onclick="goShinyPage(${shinyPage + 1})" ${shinyPage >= totalPages ? 'disabled' : ''}>▶</button>`;
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderShinyItemRow(item) {
+  const isDone = item.status === '已完成';
+  let seasonTag = '';
+  if (item.limited) {
+    seasonTag = item.limited_status === '赛季已过'
+      ? '<span class="tag-archived">赛季已过</span>'
+      : '<span class="tag-limited">赛季限定</span>';
+  }
+  let rightEl = item.source_url
+    ? `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
+    : `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
+  return `<div class="item-row ${isDone ? 'done' : ''}">
+    <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleItemStatus('${item.id}')"></button>
+    <div style="flex:1; min-width:0">
+      <div class="item-name">${esc(item.name)} ${seasonTag}</div>
+      ${item.notes ? `<div class="item-notes">${esc(item.notes)}</div>` : ''}
+    </div>
+    ${item.forms > 1 ? `<span style="font-size:11px;color:#aaa;margin-right:4px">${item.forms}形态</span>` : ''}
+    ${rightEl}
+  </div>`;
+}
+
+function onShinySearch(val) { shinySearch = val; shinyPage = 1; renderShinyContent(); }
+function setShinySeason(s) { shinySeason = s; shinyPage = 1; renderShinyTab(); }
+function setShinyStatus(s) { shinyStatus = s; shinyPage = 1; renderShinyTab(); }
+function goShinyPage(p) {
+  const items = (data.items || []).filter(i => i.category === '异色炫彩');
+  const totalPages = Math.ceil(items.length / SHINY_PAGE);
+  if (p < 1 || p > totalPages) return;
+  shinyPage = p; renderShinyContent();
+}
+
+// ═══════════ 背包 Tab ═══════════
+function renderBackpack() {
+  const el = document.getElementById('tab-backpack');
+  const items = (data.items || []).filter(i => i.category !== '异色炫彩');
+  if (!items.length) {
+    el.innerHTML = '<div class="empty-state">暂无收集项<small>外观/家具/玩具等数据采集后将在此显示</small></div>';
+    return;
+  }
   let list = items;
   if (backpackStatus === 'pending') list = items.filter(i => i.status !== '已完成');
   else if (backpackStatus === 'done') list = items.filter(i => i.status === '已完成');
 
-  const pending = list.filter(i => i.status !== '已完成');
-  const done = list.filter(i => i.status === '已完成');
-  const totalStr = `共 ${items.length} 项 · 已完成 ${items.filter(i => i.status === '已完成').length}`;
-
+  const totalDone = items.filter(i => i.status === '已完成').length;
   let html = '';
-  // Segment Control
   html += '<div class="chips" style="margin-bottom:10px">';
   [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
     html += `<span class="chip${backpackStatus === s.v ? ' active' : ''}" onclick="setBackpackStatus('${s.v}')">${s.l}</span>`;
   });
-  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">${totalStr}</span>`;
+  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${items.length} 项 · 已完成 ${totalDone}</span>`;
   html += '</div>';
 
-  if (!list.length) {
-    html += '<div class="empty-state">没有匹配的收集项</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!list.length) { html += '<div class="empty-state">没有匹配的收集项</div>'; el.innerHTML = html; return; }
+
+  const pending = list.filter(i => i.status !== '已完成');
+  const done = list.filter(i => i.status === '已完成');
   if (pending.length) {
     html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
     pending.forEach(i => { html += renderItemRow(i); });
@@ -586,213 +723,67 @@ function renderBackpack() {
   el.innerHTML = html;
 }
 
+function setBackpackStatus(s) { backpackStatus = s; renderBackpack(); }
+
 function renderItemRow(item) {
   const isDone = item.status === '已完成';
   let rightEl = item.source_url
     ? `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
     : `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
-  let limitedTag = '';
-  if (item.limited) {
-    limitedTag = item.limited_status === '赛季已过'
-      ? `<span class="tag-archived">已归档</span>`
-      : `<span class="tag-limited">限定</span>`;
-  }
-  return `<div class="item-row ${isDone ? 'done' : ''}" id="row-${item.id}">
-    <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleStatus('${item.id}')"></button>
+  let tag = '';
+  if (item.limited) tag = item.limited_status === '赛季已过' ? '<span class="tag-archived">已归档</span>' : '<span class="tag-limited">限定</span>';
+  return `<div class="item-row ${isDone ? 'done' : ''}">
+    <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleItemStatus('${item.id}')"></button>
     <div style="flex:1; min-width:0">
-      <div class="item-name">${esc(item.name)} ${limitedTag}</div>
+      <div class="item-name">${esc(item.name)} ${tag}</div>
       ${item.notes ? `<div class="item-notes">${esc(item.notes)}</div>` : ''}
     </div>
+    <span class="item-category-tag">${item.category}</span>
     ${rightEl}
   </div>`;
 }
 
-// ── 抽一个 Tab ──────────────────────────────────
-function renderRandom() {
-  const el = document.getElementById('tab-random');
-  if (!spritesData && !data) { el.innerHTML = '<div class="empty-state">加载中...</div>'; return; }
-
-  const pool = getDrawPool();
-  const drawnToday = getDrawnToday();
-
-  let html = '<div class="random-section">';
-
-  // 范围选择
-  html += '<div class="chips" style="justify-content:center;margin-bottom:16px">';
-  [{v:'all',l:'全部'},{v:'sprite',l:'精灵任务'},{v:'shiny',l:'异色炫彩'},{v:'backpack',l:'背包物品'}].forEach(r => {
-    html += `<span class="chip${randomRange === r.v ? ' active' : ''}" onclick="setRandomRange('${r.v}')">${r.l}</span>`;
-  });
-  html += '</div>';
-
-  // 统计
-  html += `<div style="font-size:12px;color:#aaa;margin-bottom:12px">可抽取：<strong style="color:#4f46e5">${pool.length}</strong> 个</div>`;
-
-  // 抽取按钮
-  html += `<button class="draw-btn" onclick="drawOne()" ${isDrawing || !pool.length ? 'disabled' : ''}>`;
-  html += isDrawing ? '<span class="spinner-text">抽取中...</span>' : '🎲 抽一个！';
-  html += '</button>';
-
-  // 结果卡片
-  if (drawnTask) {
-    html += '<div class="result-card">';
-    html += `<div class="result-emoji">${drawnTask.type === 'item' ? '📦' : '✨'}</div>`;
-    html += `<div class="result-name">${esc(drawnTask.name)}</div>`;
-    html += `<div class="result-desc">${esc(drawnTask.desc)}</div>`;
-    html += `<div class="result-meta">${drawnTask.category || drawnTask.form || ''}</div>`;
-    html += '<div class="result-actions">';
-    if (drawnTask.type === 'sprite') {
-      html += `<button onclick="markDrawnAndReroll()" class="primary">✅ 标记完成</button>`;
-      html += `<button onclick="switchTab('sprite');toggleSprite(${drawnTask.spriteId})">📋 查看详情</button>`;
-    } else {
-      html += `<button onclick="markItemDrawn('${drawnTask.id}')" class="primary">✅ 标记完成</button>`;
-    }
-    html += `<button onclick="drawOne()">🎲 再抽一个</button>`;
-    html += '</div></div>';
-  }
-
-  html += '</div>';
-
-  // 今日已抽
-  if (drawnToday.length) {
-    html += '<div class="history-block"><details><summary>今天已抽过（' + drawnToday.length + '）</summary>';
-    drawnToday.forEach(d => {
-      html += `<div class="hist-item"><span>${d.type === 'item' ? '📦' : '✨'}</span> ${esc(d.name)} · ${esc(d.desc)}</div>`;
-    });
-    html += '</details></div>';
-  }
-
-  el.innerHTML = html;
-}
-
-function setRandomRange(r) {
-  randomRange = r;
-  drawnTask = null;
-  renderRandom();
-}
-
-function getDrawPool() {
-  const pool = [];
-  const drawnToday = getDrawnToday();
-  const drawnIds = new Set(drawnToday.map(d => d.key));
-
-  // 精灵任务
-  if ((randomRange === 'all' || randomRange === 'sprite' || randomRange === 'shiny') && spritesData) {
-    spritesData.forEach(sp => {
-      sp.forms.forEach((f, fi) => {
-        f.tasks.forEach((t, ti) => {
-          if (t.done) return;
-          if (randomRange === 'shiny' && t.type !== 'capture_shiny') return;
-          const key = `sprite_${sp.id}_${fi}_${ti}`;
-          if (drawnIds.has(key)) return;
-          pool.push({
-            type: 'sprite', key,
-            spriteId: sp.id, formIdx: fi, taskIdx: ti,
-            name: sp.name, desc: t.desc,
-            form: f.label, category: '精灵任务'
-          });
-        });
-      });
-    });
-  }
-
-  // 背包物品
-  if ((randomRange === 'all' || randomRange === 'backpack') && data && data.items) {
-    data.items.forEach(item => {
-      if (item.status === '已完成') return;
-      const key = `item_${item.id}`;
-      if (drawnIds.has(key)) return;
-      pool.push({
-        type: 'item', key,
-        id: item.id,
-        name: item.name, desc: item.notes || item.category,
-        category: item.category
-      });
-    });
-  }
-
-  return pool;
-}
-
-function getDrawnToday() {
-  try {
-    const raw = localStorage.getItem(DRAWN_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    const today = new Date().toISOString().slice(0, 10);
-    if (parsed.date !== today) { localStorage.removeItem(DRAWN_KEY); return []; }
-    return parsed.items || [];
-  } catch { return []; }
-}
-
-function addDrawnToday(entry) {
-  const today = new Date().toISOString().slice(0, 10);
-  let data = { date: today, items: [] };
-  try {
-    const raw = localStorage.getItem(DRAWN_KEY);
-    if (raw) data = JSON.parse(raw);
-    if (data.date !== today) data = { date: today, items: [] };
-  } catch { data = { date: today, items: [] }; }
-  data.items.push(entry);
-  localStorage.setItem(DRAWN_KEY, JSON.stringify(data));
-}
-
-function drawOne() {
-  if (isDrawing) return;
-  const pool = getDrawPool();
-  if (!pool.length) { drawnTask = null; renderRandom(); return; }
-
-  isDrawing = true;
-  renderRandom();
-
-  // 名称轮播动画
-  let spins = 0;
-  const maxSpins = 12;
-  const spinInterval = setInterval(() => {
-    const idx = Math.floor(Math.random() * pool.length);
-    drawnTask = pool[idx];
-    renderRandom();
-    spins++;
-    if (spins >= maxSpins) {
-      clearInterval(spinInterval);
-      // 最终随机选一个
-      drawnTask = pool[Math.floor(Math.random() * pool.length)];
-      addDrawnToday({ key: drawnTask.key, type: drawnTask.type, name: drawnTask.name, desc: drawnTask.desc });
-      isDrawing = false;
-      renderRandom();
-    }
-  }, 80);
-}
-
-async function markDrawnAndReroll() {
-  if (!drawnTask || drawnTask.type !== 'sprite') return;
-  const sp = spritesData.find(s => s.id === drawnTask.spriteId);
+// ═══════════ 通用操作 ═══════════
+async function toggleTask(spriteId, formIdx, taskIdx) {
+  const sp = spritesData.find(s => s.id === spriteId);
   if (!sp) return;
-  sp.forms[drawnTask.formIdx].tasks[drawnTask.taskIdx].done = true;
+  const task = sp.forms[formIdx].tasks[taskIdx];
+  task.done = !task.done;
+
   if (!data.sprite_progress) data.sprite_progress = {};
-  if (!data.sprite_progress[String(drawnTask.spriteId)]) data.sprite_progress[String(drawnTask.spriteId)] = { collected: false, forms: {} };
-  const spProg = data.sprite_progress[String(drawnTask.spriteId)];
+  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
+  const spProg = data.sprite_progress[String(spriteId)];
   if (!spProg.forms) spProg.forms = {};
-  if (!spProg.forms[String(drawnTask.formIdx)]) spProg.forms[String(drawnTask.formIdx)] = { collected: false, tasks: {} };
-  spProg.forms[String(drawnTask.formIdx)].tasks[String(drawnTask.taskIdx)] = true;
+  if (!spProg.forms[String(formIdx)]) spProg.forms[String(formIdx)] = { collected: false, tasks: {} };
+  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = task.done;
+
+  if (task.done) addDoneToday({ key: `sprite_${spriteId}_${formIdx}_${taskIdx}`, name: sp.name, desc: task.desc });
   await saveData();
-  drawOne();
+  renderSpriteContent();
 }
 
-async function markItemDrawn(id) {
-  const item = data.items.find(i => i.id === id);
-  if (!item) return;
-  item.status = '已完成';
-  await saveData();
-  drawOne();
-}
-
-// ── 交互 ──────────────────────────────────────
-async function toggleStatus(id) {
+async function toggleItemStatus(id) {
   const item = data.items.find(i => i.id === id);
   if (!item) return;
   item.status = item.status === '已完成' ? '未完成' : '已完成';
+  if (item.status === '已完成') addDoneToday({ key: `item_${id}`, name: item.name, desc: item.notes || item.category });
   await saveData();
-  renderAll();
+  if (currentTab === 'backpack') renderBackpack();
+  if (currentTab === 'dashboard') renderDashboard();
+}
+
+async function markRandomDone() {
+  if (!randomTask || randomTask.type !== 'sprite') return;
+  await toggleTask(randomTask.spriteId, randomTask.formIdx, randomTask.taskIdx);
+  randomTask = null;
+  renderDashboard();
+}
+
+async function markRandomItemDone() {
+  if (!randomTask || randomTask.type !== 'item') return;
+  await toggleItemStatus(randomTask.id);
+  randomTask = null;
+  renderDashboard();
 }
 
 function openModal(id) {
@@ -806,10 +797,7 @@ function openModal(id) {
   document.getElementById('source-modal').classList.add('open');
 }
 
-function closeModal() {
-  document.getElementById('source-modal').classList.remove('open');
-  editingId = null;
-}
+function closeModal() { document.getElementById('source-modal').classList.remove('open'); editingId = null; }
 
 async function saveSource() {
   if (!editingId) return;
@@ -819,18 +807,29 @@ async function saveSource() {
   item.notes = document.getElementById('modal-notes').value.trim();
   await saveData();
   closeModal();
-  renderAll();
+  if (currentTab === 'backpack') renderBackpack();
 }
 
-document.getElementById('source-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
+document.getElementById('source-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ═══════════ Tab 切换 ═══════════
+function switchTab(name) {
+  ['dashboard','sprite','shiny','backpack'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav button').forEach((btn, i) => {
+    btn.classList.toggle('active', ['dashboard','sprite','shiny','backpack'][i] === name);
+  });
+  currentTab = name;
+  if (name === 'dashboard') { renderDashboard(); return; }
+  if (name === 'sprite') { loadSprites().then(() => renderSpriteTab()); return; }
+  if (name === 'shiny') { loadSprites().then(() => renderShinyTab()); return; }
+  if (name === 'backpack') renderBackpack();
 }
 
-loadData();
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+init();
 </script>
 </body>
 </html>
