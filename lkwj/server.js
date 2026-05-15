@@ -4,6 +4,7 @@ const path = require('path');
 
 const PORT = 8899;
 const DATA_FILE = path.join(__dirname, 'data', 'collections.json');
+const SPRITES_FILE = path.join(__dirname, 'data', 'sprites.json');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -41,6 +42,34 @@ const server = http.createServer((req, res) => {
       const content = fs.readFileSync(DATA_FILE, 'utf8');
       res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
       res.end(content);
+    } catch (e) {
+      res.writeHead(500);
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // API: 读精灵数据（合并进度）
+  if (req.method === 'GET' && url.pathname === '/api/sprites') {
+    try {
+      const sprites = JSON.parse(fs.readFileSync(SPRITES_FILE, 'utf8'));
+      const coll = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+      const progress = coll.sprite_progress || {};
+      // 合并进度到精灵数据
+      const merged = sprites.map(sp => {
+        const spProgress = progress[String(sp.id)] || {};
+        const forms = sp.forms.map((f, fi) => {
+          const fp = (spProgress.forms || {})[String(fi)] || {};
+          const tasks = f.tasks.map((t, ti) => ({
+            ...t,
+            done: fp.tasks ? !!fp.tasks[String(ti)] : false
+          }));
+          return { ...f, collected: !!fp.collected, tasks };
+        });
+        return { ...sp, collected: !!spProgress.collected, forms };
+      });
+      res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+      res.end(JSON.stringify(merged));
     } catch (e) {
       res.writeHead(500);
       res.end(JSON.stringify({ error: e.message }));

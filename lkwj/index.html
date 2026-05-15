@@ -76,6 +76,42 @@
     /* 限定标签 */
     .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
     .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
+
+    /* ── 精灵图鉴 Tab ── */
+    .sprite-toolbar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .sprite-search { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a2e; font-family: inherit; }
+    .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+    .element-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+    .element-chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .element-chip:hover { border-color: #4f46e5; color: #4f46e5; }
+    .element-chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .sprite-stats { font-size: 12px; color: #999; margin-bottom: 8px; display: flex; gap: 14px; }
+    .sprite-stats strong { color: #4f46e5; }
+
+    .sprite-list { display: flex; flex-direction: column; gap: 6px; }
+    .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
+    .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; user-select: none; }
+    .sprite-card-header .sprite-icon { font-size: 20px; flex-shrink: 0; }
+    .sprite-card-header .sprite-name { flex: 1; font-size: 14px; font-weight: 600; color: #1a1a2e; }
+    .sprite-card-header .sprite-element { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
+    .sprite-card-header .sprite-meta { font-size: 11px; color: #aaa; white-space: nowrap; }
+    .sprite-card-header .sprite-arrow { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; }
+    .sprite-card.expanded .sprite-arrow { transform: rotate(90deg); }
+
+    .sprite-card-body { display: none; padding: 0 14px 12px; border-top: 1px solid #f0f0f5; }
+    .sprite-card.expanded .sprite-card-body { display: block; }
+    .sprite-card-body .form-block { margin-top: 10px; }
+    .sprite-card-body .form-label { font-size: 12px; font-weight: 600; color: #6366f1; margin-bottom: 4px; }
+    .sprite-card-body .task-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 13px; color: #444; }
+    .sprite-card-body .task-row:hover { background: #f8f9fc; }
+    .sprite-card-body .task-row.done { color: #aaa; text-decoration: line-through; }
+    .sprite-card-body .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+    .sprite-card-body .task-check.checked { background: #10b981; border-color: #10b981; }
+    .sprite-card-body .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
+    .sprite-card-body .task-type-tag { font-size: 10px; color: #aaa; background: #f5f6fa; padding: 1px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .sprite-card-body .form-collected { font-size: 11px; color: #10b981; margin-left: 6px; }
+    .sprite-empty { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -125,8 +161,13 @@
 
 <script>
 let data = null;
+let spritesData = null;
 let editingId = null;
-let currentTab = 'dashboard';  // tracks active tab to skip re-rendering hidden tabs
+let currentTab = 'dashboard';
+let elementFilter = null;
+let spriteSearch = '';
+let expandedSprite = null;
+let spriteLoaded = false;
 
 // ── 数据加载与保存 ──────────────────────────────
 async function loadData() {
@@ -250,15 +291,146 @@ function renderYise() {
   el.innerHTML = html;
 }
 
+async function loadSprites() {
+  if (spriteLoaded) return;
+  const res = await fetch('/api/sprites');
+  spritesData = await res.json();
+  spriteLoaded = true;
+}
+
 function renderSprite() {
   const el = document.getElementById('tab-sprite');
-  const c = data.categories['精灵'];
-  let html = '<div class="dashboard-grid">';
-  html += statCard('精灵总数', c.owned, c.total, '');
-  Object.entries(data.regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
+  if (!spritesData) {
+    el.innerHTML = '<div class="sprite-empty">加载中...</div>';
+    return;
+  }
+
+  // 过滤
+  let list = spritesData;
+  if (spriteSearch) {
+    const q = spriteSearch.toLowerCase();
+    list = list.filter(s => s.name.includes(q) || s.element.includes(q));
+  }
+  if (elementFilter) {
+    list = list.filter(s => s.element.includes(elementFilter));
+  }
+
+  // 统计
+  const total = spritesData.length;
+  const collected = spritesData.filter(s => s.collected).length;
+  const totalTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.length, 0), 0);
+  const doneTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.filter(t => t.done).length, 0), 0);
+
+  // 属性列表
+  const allElements = [...new Set(spritesData.map(s => {
+    const el = s.element;
+    return el.length === 2 ? el[0] : el;
+  }))].filter(e => e !== '，').sort();
+
+  let html = '';
+
+  // 搜索 + 属性筛选
+  html += '<div class="sprite-toolbar">';
+  html += `<input class="sprite-search" type="text" placeholder="搜索精灵名称..." value="${escapeHtml(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
+  html += '<div class="element-chips">';
+  html += `<span class="element-chip${elementFilter ? '' : ' active'}" onclick="setElementFilter(null)">全部</span>`;
+  allElements.forEach(el => {
+    html += `<span class="element-chip${elementFilter === el ? ' active' : ''}" onclick="setElementFilter('${el}')">${el}</span>`;
+  });
+  html += '</div></div>';
+
+  // 统计
+  html += `<div class="sprite-stats">`;
+  html += `<span>共 <strong>${total}</strong> 只精灵</span>`;
+  html += `<span>已收集 <strong>${collected}</strong></span>`;
+  html += `<span>任务 <strong>${doneTasks}</strong> / ${totalTasks}</span>`;
+  html += `</div>`;
+
+  if (!list.length) {
+    html += '<div class="sprite-empty">没有匹配的精灵</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // 精灵卡片列表
+  html += '<div class="sprite-list">';
+  list.forEach(sp => {
+    const formCount = sp.forms.length;
+    const spTasksTotal = sp.forms.reduce((c, f) => c + f.tasks.length, 0);
+    const spTasksDone = sp.forms.reduce((c, f) => c + f.tasks.filter(t => t.done).length, 0);
+    const isExpanded = expandedSprite === sp.id;
+
+    html += `<div class="sprite-card${isExpanded ? ' expanded' : ''}" id="spcard-${sp.id}">`;
+    html += `<div class="sprite-card-header" onclick="toggleSprite(${sp.id})">`;
+    html += `<span class="sprite-icon">${sp.collected ? '✅' : '⬜'}</span>`;
+    html += `<span class="sprite-name">${sp.name}</span>`;
+    html += `<span class="sprite-element">${sp.element}</span>`;
+    html += `<span class="sprite-meta">${formCount}形态 · ${spTasksDone}/${spTasksTotal}任务</span>`;
+    html += `<span class="sprite-arrow">▶</span>`;
+    html += '</div>';
+
+    // 展开区域
+    html += '<div class="sprite-card-body">';
+    sp.forms.forEach((f, fi) => {
+      const fDone = f.tasks.filter(t => t.done).length;
+      html += `<div class="form-block">`;
+      html += `<div class="form-label">${f.label}${f.collected ? '<span class="form-collected">✓ 已集齐</span>' : ''} · ${fDone}/${f.tasks.length} 任务</div>`;
+      f.tasks.forEach((t, ti) => {
+        const key = `${sp.id}_${fi}_${ti}`;
+        html += `<div class="task-row${t.done ? ' done' : ''}">`;
+        html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${sp.id},${fi},${ti})"></div>`;
+        html += `<span style="flex:1">${t.desc}</span>`;
+        html += `<span class="task-type-tag">${t.type}</span>`;
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>'; // sprite-card-body
+    html += '</div>'; // sprite-card
+  });
   html += '</div>';
-  html += '<div class="empty">精灵明细待补充<small>录入地区/精灵明细后将在此展示</small></div>';
+
   el.innerHTML = html;
+}
+
+function onSpriteSearch(val) {
+  spriteSearch = val;
+  expandedSprite = null;
+  renderSprite();
+}
+
+function setElementFilter(el) {
+  elementFilter = el;
+  expandedSprite = null;
+  renderSprite();
+}
+
+function toggleSprite(id) {
+  expandedSprite = expandedSprite === id ? null : id;
+  renderSprite();
+}
+
+async function toggleTask(spriteId, formIdx, taskIdx) {
+  // 更新 spritesData 缓存
+  const sp = spritesData.find(s => s.id === spriteId);
+  if (!sp) return;
+  const task = sp.forms[formIdx].tasks[taskIdx];
+  task.done = !task.done;
+
+  // 同步到 collections.json sprite_progress
+  if (!data.sprite_progress) data.sprite_progress = {};
+  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
+  const spProg = data.sprite_progress[String(spriteId)];
+  if (!spProg.forms) spProg.forms = {};
+  if (!spProg.forms[String(formIdx)]) spProg.forms[String(formIdx)] = { collected: false, tasks: {} };
+  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = task.done;
+
+  await saveData();
+  renderSprite();
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderAllItems() {
@@ -293,8 +465,8 @@ function switchTab(name) {
     btn.classList.toggle('active', ['dashboard','yise','sprite','all'][i] === name);
   });
   currentTab = name;
+  if (name === 'sprite') { loadSprites().then(() => renderSprite()); return; }
   if (name === 'yise') renderYise();
-  else if (name === 'sprite') renderSprite();
   else if (name === 'all') renderAllItems();
   else if (name === 'dashboard') renderDashboard();
 }
