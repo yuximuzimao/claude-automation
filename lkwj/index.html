@@ -223,7 +223,7 @@ const CATEGORY_META = {
 };
 
 // 精灵图鉴状态
-let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spritePage = 1, expandedSprite = null, spriteLoaded = false;
+let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spritePage = 1, expandedSprite = null;
 const PAGE_SIZE = 40;
 
 // 异色炫彩状态
@@ -241,6 +241,79 @@ let randomPicked = false;  // 是否已抽取过（切换Tab不回刷）
 
 // 不出现在随机池的任务类型
 const RANDOM_EXCLUDE = new Set(['destined_hero', 'fruit', 'confirm_forms']);
+
+// 常量
+const STATUS = { DONE: '已完成', PENDING: '未完成' };
+const FILTER = { ALL: 'all', PENDING: 'pending', DONE: 'done' };
+const STATUS_CHIPS = [{v:FILTER.ALL,l:'全部'},{v:FILTER.PENDING,l:STATUS.PENDING},{v:FILTER.DONE,l:STATUS.DONE}];
+
+// 精灵 ID → 对象 快速索引
+let spriteMap = new Map();
+
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+// ── 共享工具函数 ──
+function renderStatusChips(current, onClick) {
+  return STATUS_CHIPS.map(s =>
+    `<span class="chip${current === s.v ? ' active' : ''}" onclick="${onClick}('${s.v}')">${s.l}</span>`
+  ).join('');
+}
+
+function renderPagination(currentPage, totalPages, onClick) {
+  if (totalPages <= 1) return '';
+  let h = '<div class="pagination">';
+  h += `<button onclick="${onClick}(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''}>◀</button>`;
+  for (let p = 1; p <= totalPages; p++) {
+    if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= 2)
+      h += `<button class="${p === currentPage ? 'active' : ''}" onclick="${onClick}(${p})">${p}</button>`;
+    else if (Math.abs(p - currentPage) === 3)
+      h += '<span style="padding:0 2px;color:#ccc">...</span>';
+  }
+  h += `<button onclick="${onClick}(${currentPage + 1})" ${currentPage >= totalPages ? 'disabled' : ''}>▶</button>`;
+  h += '</div>';
+  return h;
+}
+
+function ensureSpriteProgress(spriteId, formIdx) {
+  if (!data.sprite_progress) data.sprite_progress = {};
+  const key = String(spriteId);
+  if (!data.sprite_progress[key]) data.sprite_progress[key] = { collected: false, forms: {} };
+  const spProg = data.sprite_progress[key];
+  if (!spProg.forms) spProg.forms = {};
+  const fk = String(formIdx);
+  if (!spProg.forms[fk]) spProg.forms[fk] = { collected: false, tasks: {} };
+  return spProg.forms[fk];
+}
+
+function filterTasksByStatus(tasks, status) {
+  if (status === FILTER.PENDING) return tasks.filter(t => !t.done);
+  if (status === FILTER.DONE) return tasks.filter(t => t.done);
+  return tasks;
+}
+
+function renderPendingDoneSections(list, renderFn, doneKey) {
+  const pending = list.filter(i => (doneKey ? i[doneKey] : i.status) !== STATUS.DONE);
+  const done = list.filter(i => (doneKey ? i[doneKey] : i.status) === STATUS.DONE);
+  let h = '';
+  if (pending.length) {
+    h += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(i => { h += renderFn(i); });
+    h += '</div>';
+  }
+  if (done.length) {
+    h += `<div class="section-title" style="margin-top:16px">${STATUS.DONE}（${done.length}）</div><div class="item-list">`;
+    done.forEach(i => { h += renderFn(i); });
+    h += '</div>';
+  }
+  return h;
+}
+
+function renderLimitedTag(item) {
+  if (!item.limited) return '';
+  return item.limited_status === '赛季已过'
+    ? '<span class="tag-archived">赛季已过</span>'
+    : `<span class="tag-limited">${item.limited_status || '限定'}</span>`;
+}
 
 const DONE_KEY = 'lkwj_done_today';
 
@@ -319,7 +392,7 @@ function renderDashboard() {
       const related = getRelatedTasks(randomTask.spriteId, randomTask.formIdx);
       if (related.length > 0) {
         html += '<div style="margin-top:6px;text-align:left;font-size:11px;color:#888">可一起完成：</div>';
-        const form = spritesData.find(s=>s.id===randomTask.spriteId)?.forms[randomTask.formIdx];
+        const form = spriteMap.get(randomTask.spriteId)?.forms[randomTask.formIdx];
         related.forEach(t => {
           const ti = form ? form.tasks.indexOf(t) : -1;
           html += `<div class="task-row${t.done ? ' done' : ''}" style="font-size:11px;padding:2px 8px">`;
@@ -400,7 +473,7 @@ function pickRandom() {
 // 获取同一形态下的其他未完成任务（适合一起完成）
 function getRelatedTasks(spriteId, formIdx) {
   if (!spritesData) return [];
-  const sp = spritesData.find(s => s.id === spriteId);
+  const sp = spriteMap.get(spriteId);
   if (!sp) return [];
   const form = sp.forms[formIdx];
   if (!form) return [];
@@ -444,9 +517,9 @@ function addDoneToday(entry) {
 
 // ═══════════ 精灵图鉴 Tab ═══════════
 async function loadSprites() {
-  if (spriteLoaded) return;
+  if (spritesData) return;
   spritesData = await (await fetch('/api/sprites')).json();
-  spriteLoaded = true;
+  spriteMap = new Map(spritesData.map(s => [s.id, s]));
 }
 
 function renderSpriteTab() {
@@ -473,9 +546,7 @@ function renderSpriteToolbar() {
   html += '</div>';
   // 状态 Segment
   html += '<div class="chips" style="margin-top:4px">';
-  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
-    html += `<span class="chip${spriteStatus === s.v ? ' active' : ''}" onclick="setSpriteStatus('${s.v}')">${s.l}</span>`;
-  });
+  html += renderStatusChips(spriteStatus, 'setSpriteStatus');
   html += '</div>';
 
   el.innerHTML = html;
@@ -528,19 +599,7 @@ function renderSpriteContent() {
   html += '</div>';
 
   // 分页
-  if (totalPages > 1) {
-    html += '<div class="pagination">';
-    html += `<button onclick="goSpritePage(${spritePage - 1})" ${spritePage <= 1 ? 'disabled' : ''}>◀</button>`;
-    for (let p = 1; p <= totalPages; p++) {
-      if (p === 1 || p === totalPages || Math.abs(p - spritePage) <= 2) {
-        html += `<button class="${p === spritePage ? 'active' : ''}" onclick="goSpritePage(${p})">${p}</button>`;
-      } else if (Math.abs(p - spritePage) === 3) {
-        html += '<span style="padding:0 2px;color:#ccc">...</span>';
-      }
-    }
-    html += `<button onclick="goSpritePage(${spritePage + 1})" ${spritePage >= totalPages ? 'disabled' : ''}>▶</button>`;
-    html += '</div>';
-  }
+  html += renderPagination(spritePage, totalPages, 'goSpritePage');
 
   el.innerHTML = html;
 }
@@ -719,9 +778,7 @@ function renderShinyToolbar() {
   });
   html += '</div>';
   html += '<div class="chips" style="margin-top:4px">';
-  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
-    html += `<span class="chip${shinyStatus === s.v ? ' active' : ''}" onclick="setShinyStatus('${s.v}')">${s.l}</span>`;
-  });
+  html += renderStatusChips(shinyStatus, 'setShinyStatus');
   html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${list.length} 只 · 已完成 ${done}</span>`;
   html += '</div>';
   el.innerHTML = html;
@@ -732,7 +789,7 @@ function renderShinyContent() {
   let list = getShinyList();
   if (shinySearch) {
     const q = shinySearch.toLowerCase();
-    list = list.filter(s => s.name.includes(q) || (spritesData.find(sp=>sp.id===s.spriteId)?.pinyin?.initial.includes(q)));
+    list = list.filter(s => s.name.includes(q) || (spriteMap.get(s.spriteId)?.pinyin?.initial.includes(q)));
   }
   if (shinySeason !== 'all') list = list.filter(s => s.limited_status === shinySeason);
   if (shinyStatus === 'pending') list = list.filter(s => !s.taskDone);
@@ -769,35 +826,19 @@ function renderShinyContent() {
   });
   html += '</div>';
 
-  if (totalPages > 1) {
-    html += '<div class="pagination">';
-    html += `<button onclick="goShinyPage(${shinyPage - 1})" ${shinyPage <= 1 ? 'disabled' : ''}>◀</button>`;
-    for (let p = 1; p <= totalPages; p++) {
-      if (p === 1 || p === totalPages || Math.abs(p - shinyPage) <= 2)
-        html += `<button class="${p === shinyPage ? 'active' : ''}" onclick="goShinyPage(${p})">${p}</button>`;
-      else if (Math.abs(p - shinyPage) === 3)
-        html += '<span style="padding:0 2px;color:#ccc">...</span>';
-    }
-    html += `<button onclick="goShinyPage(${shinyPage + 1})" ${shinyPage >= totalPages ? 'disabled' : ''}>▶</button>`;
-    html += '</div>';
-  }
+  html += renderPagination(shinyPage, totalPages, 'goShinyPage');
   el.innerHTML = html;
 }
 
 async function toggleShinyTask(spriteId) {
-  const sp = spritesData.find(s => s.id === spriteId);
+  const sp = spriteMap.get(spriteId);
   if (!sp) return;
   // 找 capture_shiny 任务
   let task = null, fi = -1, ti = -1;
   sp.forms.forEach((f, i) => { f.tasks.forEach((t, j) => { if (t.type === 'capture_shiny') { task = t; fi = i; ti = j; } }); });
   if (!task) return;
   task.done = !task.done;
-  if (!data.sprite_progress) data.sprite_progress = {};
-  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
-  const spProg = data.sprite_progress[String(spriteId)];
-  if (!spProg.forms) spProg.forms = {};
-  if (!spProg.forms[String(fi)]) spProg.forms[String(fi)] = { collected: false, tasks: {} };
-  spProg.forms[String(fi)].tasks[String(ti)] = task.done;
+  ensureSpriteProgress(spriteId, fi).tasks[String(ti)] = task.done;
   if (task.done) addDoneToday({ key: `shiny_${spriteId}`, name: sp.name, desc: '异色炫彩' });
   await saveData();
   renderShinyContent();
@@ -827,9 +868,7 @@ function renderBackpack() {
   const totalDone = items.filter(i => i.status === '已完成').length;
   let html = '';
   html += '<div class="chips" style="margin-bottom:10px">';
-  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
-    html += `<span class="chip${backpackStatus === s.v ? ' active' : ''}" onclick="setBackpackStatus('${s.v}')">${s.l}</span>`;
-  });
+  html += renderStatusChips(backpackStatus, 'setBackpackStatus');
   html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${items.length} 项 · 已完成 ${totalDone}</span>`;
   html += '</div>';
 
@@ -872,17 +911,12 @@ function renderItemRow(item) {
 
 // ═══════════ 通用操作 ═══════════
 async function toggleTask(spriteId, formIdx, taskIdx) {
-  const sp = spritesData.find(s => s.id === spriteId);
+  const sp = spriteMap.get(spriteId);
   if (!sp) return;
   const task = sp.forms[formIdx].tasks[taskIdx];
   task.done = !task.done;
 
-  if (!data.sprite_progress) data.sprite_progress = {};
-  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
-  const spProg = data.sprite_progress[String(spriteId)];
-  if (!spProg.forms) spProg.forms = {};
-  if (!spProg.forms[String(formIdx)]) spProg.forms[String(formIdx)] = { collected: false, tasks: {} };
-  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = task.done;
+  ensureSpriteProgress(spriteId, formIdx).tasks[String(taskIdx)] = task.done;
 
   if (task.done) addDoneToday({ key: `sprite_${spriteId}_${formIdx}_${taskIdx}`, name: sp.name, desc: task.desc });
   await saveData();
@@ -984,7 +1018,7 @@ function renderCategoryTab(tab) {
 
   const doneCount = items.filter(i => i.status === '已完成').length;
   html += '<div class="chips" style="margin-bottom:10px">';
-  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+  STATUS_CHIPS.forEach(s => {
     html += `<span class="chip${st === s.v ? ' active' : ''}" onclick="setCatStatus('${tab}','${s.v}')">${s.l}</span>`;
   });
   html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${items.length} 项 · 已完成 ${doneCount}</span>`;
@@ -1039,7 +1073,7 @@ function renderFruitsTab() {
 }
 
 async function toggleFruit(spriteId) {
-  const sp = spritesData.find(s => s.id === spriteId);
+  const sp = spriteMap.get(spriteId);
   if (!sp || !sp.fruit) return;
   sp.fruit.acquired = !sp.fruit.acquired;
   if (!data.sprite_progress) data.sprite_progress = {};
