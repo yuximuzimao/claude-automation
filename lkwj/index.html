@@ -145,11 +145,19 @@
   <span class="updated" id="last-updated"></span>
 </div>
 
-<div class="nav">
+<div class="nav" id="top-nav">
   <button class="active" onclick="switchTab('dashboard')">看板</button>
-  <button onclick="switchTab('sprite')">精灵图鉴</button>
+  <button onclick="switchTab('sprite')">精灵</button>
   <button onclick="switchTab('shiny')">异色炫彩</button>
-  <button onclick="switchTab('backpack')">背包</button>
+  <button onclick="switchTab('fruits')">精灵果实</button>
+  <button onclick="switchTab('furniture')">家具</button>
+  <button onclick="switchTab('clothing')">服装</button>
+  <button onclick="switchTab('titles')">称号</button>
+  <button onclick="switchTab('stars')">星星</button>
+  <button onclick="switchTab('dungeons')">遗迹</button>
+  <button onclick="switchTab('sidequests')">支线</button>
+  <button onclick="switchTab('gacha')">扭蛋</button>
+  <button onclick="switchTab('music')">音乐</button>
 </div>
 
 <div class="container">
@@ -162,7 +170,15 @@
     <div id="shiny-toolbar"></div>
     <div id="shiny-content"></div>
   </div>
-  <div id="tab-backpack" style="display:none"></div>
+  <div id="tab-fruits" style="display:none"></div>
+  <div id="tab-furniture" style="display:none"></div>
+  <div id="tab-clothing" style="display:none"></div>
+  <div id="tab-titles" style="display:none"></div>
+  <div id="tab-stars" style="display:none"></div>
+  <div id="tab-dungeons" style="display:none"></div>
+  <div id="tab-sidequests" style="display:none"></div>
+  <div id="tab-gacha" style="display:none"></div>
+  <div id="tab-music" style="display:none"></div>
 </div>
 
 <!-- 攻略编辑弹窗 -->
@@ -191,16 +207,33 @@
 <script>
 let data = null, spritesData = null, walletData = null, editingId = null, currentTab = 'dashboard';
 
+// 全体品类定义
+const ALL_TABS = ['dashboard','sprite','shiny','fruits','furniture','clothing','titles','stars','dungeons','sidequests','gacha','music'];
+
+const CATEGORY_META = {
+  fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集', csv: '精灵果实图鉴.csv' },
+  furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）', csv: '家具图鉴.csv' },
+  clothing:  { name: '服装', icon: '👗', desc: '外观装扮图鉴（皮卡服装店/活动/赛季）', csv: '外观图鉴.csv' },
+  titles:    { name: '称号', icon: '🏷️', desc: '称号收集', csv: '其他类别统计.csv' },
+  stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集', csv: '其他类别统计.csv' },
+  dungeons:  { name: '遗迹（副本）', icon: '🏛️', desc: '遗迹/副本通关与奖励收集', csv: '' },
+  sidequests:{ name: '支线任务', icon: '📋', desc: '支线任务清单', csv: '' },
+  gacha:     { name: '扭蛋机', icon: '🎰', desc: '扭蛋机收集品', csv: '' },
+  music:     { name: '音乐', icon: '🎵', desc: '音乐/乐谱收集', csv: '' },
+};
+
 // 精灵图鉴状态
 let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spritePage = 1, expandedSprite = null, spriteLoaded = false;
 const PAGE_SIZE = 40;
 
-// 异色炫彩状态（基于 items[]）
+// 异色炫彩状态
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
 const SHINY_PAGE = 40;
 
-// 背包状态
-let backpackStatus = 'all';
+// 品类 Tab 状态（item-based 品类共用）
+let catFilter = {};  // { furniture: 'all', clothing: 'all', ... }
+function catStatus(tab) { return catFilter[tab] || 'all'; }
+function setCatStatus(tab, s) { catFilter[tab] = s; renderCategoryTab(tab); }
 
 // 随机任务
 let randomTask = null;
@@ -273,10 +306,25 @@ function renderDashboard() {
     html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
     html += `<div class="random-task-desc">${esc(randomTask.desc)}</div>`;
     html += `<div class="random-task-form">${randomTask.form || randomTask.category || ''}</div>`;
+    // 关联任务（每个可独立勾选）
+    if (randomTask.type === 'sprite') {
+      const related = getRelatedTasks(randomTask.spriteId, randomTask.formIdx);
+      if (related.length > 0) {
+        html += '<div style="margin-top:6px;text-align:left;font-size:11px;color:#888">可一起完成：</div>';
+        const form = spritesData.find(s=>s.id===randomTask.spriteId)?.forms[randomTask.formIdx];
+        related.forEach(t => {
+          const ti = form ? form.tasks.indexOf(t) : -1;
+          html += `<div class="task-row${t.done ? ' done' : ''}" style="font-size:11px;padding:2px 8px">`;
+          html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${randomTask.spriteId},${randomTask.formIdx},${ti});randomTask=null;renderDashboard()" style="width:14px;height:14px;flex-shrink:0"></div>`;
+          html += `<span style="flex:1">${esc(t.desc)}</span>`;
+          html += `<span class="task-type-tag" style="font-size:9px">${t.type}</span>`;
+          html += '</div>';
+        });
+      }
+    }
     html += '<div class="random-actions">';
     if (randomTask.type === 'sprite') {
-      html += `<button class="primary" onclick="markRandomDone()">✅ 标记完成</button>`;
-      html += `<button onclick="switchTab('sprite');toggleSprite(${randomTask.spriteId})">📋 查看</button>`;
+      html += `<button onclick="viewRandomTask(${randomTask.spriteId})">📋 查看详情</button>`;
     } else {
       html += `<button class="primary" onclick="markRandomItemDone()">✅ 标记完成</button>`;
     }
@@ -333,6 +381,32 @@ function pickRandom() {
   });
   if (!pool.length) return null;
   return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// 获取同一形态下的其他未完成任务（适合一起完成）
+function getRelatedTasks(spriteId, formIdx) {
+  if (!spritesData) return [];
+  const sp = spritesData.find(s => s.id === spriteId);
+  if (!sp) return [];
+  const form = sp.forms[formIdx];
+  if (!form) return [];
+  return form.tasks.filter(t => !t.done);
+}
+
+// 从看板跳转到图鉴并定位到具体精灵
+async function viewRandomTask(spriteId) {
+  await loadSprites();
+  switchTab('sprite');
+  expandedSprite = spriteId;
+  spritePage = 1;
+  spriteSearch = '';
+  spriteElement = null;
+  spriteStatus = 'pending';
+  renderSpriteTab();
+  setTimeout(() => {
+    const card = document.querySelector('#sprite-content .sprite-card');
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
 }
 
 // ═══════════ 今日完成 ═══════════
@@ -577,7 +651,31 @@ function goSpritePage(p) {
   renderSpriteContent();
 }
 
-// ═══════════ 异色炫彩 Tab（个人收集，items[] 数据） ═══════════
+// ═══════════ 异色炫彩 Tab（sprites capture_shiny 为主，items[] 季节信息为辅） ═══════════
+function getShinyList() {
+  if (!spritesData) return [];
+  // items[] 索引：name → item
+  const itemMap = {};
+  (data.items || []).filter(i => i.category === '异色炫彩').forEach(i => { itemMap[i.name] = i; });
+
+  return spritesData
+    .filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny')))
+    .map(s => {
+      const task = s.forms.flatMap(f => f.tasks).find(t => t.type === 'capture_shiny');
+      const item = itemMap[s.name];
+      return {
+        spriteId: s.id, name: s.name, element: s.element,
+        taskDone: !!task.done,
+        limited: item ? item.limited : false,
+        limited_status: item ? item.limited_status : '',
+        source_url: item ? item.source_url : '',
+        source_type: item ? item.source_type : '',
+        notes: item ? item.notes : '',
+        hasItem: !!item
+      };
+    });
+}
+
 function renderShinyTab() {
   renderShinyToolbar();
   renderShinyContent();
@@ -585,15 +683,18 @@ function renderShinyTab() {
 
 function renderShinyToolbar() {
   const el = document.getElementById('shiny-toolbar');
-  const items = (data.items || []).filter(i => i.category === '异色炫彩');
-  const total = items.length;
-  const done = items.filter(i => i.status === '已完成').length;
+  const list = getShinyList();
+  const done = list.filter(s => s.taskDone).length;
+
+  // 从 items 里提取已有的赛季信息
+  const seasons = [...new Set(
+    (data.items || []).filter(i => i.category === '异色炫彩' && i.limited_status).map(i => i.limited_status)
+  )];
 
   let html = '';
   html += `<input class="sprite-search" type="text" id="shiny-search-input" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="onShinySearch(this.value)">`;
   html += '<div class="chips">';
-  // 赛季
-  [{v:'all',l:'全部赛季'},{v:'available',l:'可获取'},{v:'expired',l:'赛季已过'}].forEach(s => {
+  [{v:'all',l:'全部赛季'}].concat(seasons.map(s => ({v:s, l:s}))).forEach(s => {
     html += `<span class="chip${shinySeason === s.v ? ' active' : ''}" onclick="setShinySeason('${s.v}')">${s.l}</span>`;
   });
   html += '</div>';
@@ -601,42 +702,52 @@ function renderShinyToolbar() {
   [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
     html += `<span class="chip${shinyStatus === s.v ? ' active' : ''}" onclick="setShinyStatus('${s.v}')">${s.l}</span>`;
   });
-  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${total} 项 · 已完成 ${done}</span>`;
+  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${list.length} 只 · 已完成 ${done}</span>`;
   html += '</div>';
   el.innerHTML = html;
 }
 
 function renderShinyContent() {
   const el = document.getElementById('shiny-content');
-  let items = (data.items || []).filter(i => i.category === '异色炫彩');
+  let list = getShinyList();
   if (shinySearch) {
     const q = shinySearch.toLowerCase();
-    items = items.filter(i => i.name.includes(q));
+    list = list.filter(s => s.name.includes(q) || (spritesData.find(sp=>sp.id===s.spriteId)?.pinyin?.initial.includes(q)));
   }
-  if (shinySeason === 'available') items = items.filter(i => !i.limited || i.limited_status !== '赛季已过');
-  else if (shinySeason === 'expired') items = items.filter(i => i.limited && i.limited_status === '赛季已过');
-  if (shinyStatus === 'pending') items = items.filter(i => i.status !== '已完成');
-  else if (shinyStatus === 'done') items = items.filter(i => i.status === '已完成');
+  if (shinySeason !== 'all') list = list.filter(s => s.limited_status === shinySeason);
+  if (shinyStatus === 'pending') list = list.filter(s => !s.taskDone);
+  else if (shinyStatus === 'done') list = list.filter(s => s.taskDone);
 
-  const totalPages = Math.ceil(items.length / SHINY_PAGE);
+  const totalPages = Math.ceil(list.length / SHINY_PAGE);
   if (shinyPage > totalPages) shinyPage = 1;
-  const pageItems = items.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
+  const pageItems = list.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
 
   let html = '';
-  if (!items.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>完整列表待 CSV 导入</small></div>'; el.innerHTML = html; return; }
+  if (!list.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>赛季信息待补充（_待采集/异色炫彩完整列表.csv）</small></div>'; el.innerHTML = html; return; }
 
-  const pending = pageItems.filter(i => i.status !== '已完成');
-  const done = pageItems.filter(i => i.status === '已完成');
-  if (pending.length) {
-    html += `<div class="section-title">未完成（本页 ${pending.length}）</div><div class="item-list">`;
-    pending.forEach(i => { html += renderShinyItemRow(i); });
+  html += '<div class="item-list">';
+  pageItems.forEach(s => {
+    const isDone = s.taskDone;
+    let seasonTag = '';
+    if (s.limited) {
+      seasonTag = s.limited_status === '赛季已过'
+        ? '<span class="tag-archived">赛季已过</span>'
+        : `<span class="tag-limited">${s.limited_status || '限定'}</span>`;
+    }
+    const rightEl = s.source_url
+      ? `<a href="${s.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
+      : (s.hasItem ? '' : '<span style="font-size:10px;color:#ccc">待补充</span>');
+
+    html += `<div class="item-row${isDone ? ' done' : ''}">`;
+    html += `<button class="check-btn${isDone ? ' checked' : ''}" onclick="toggleShinyTask(${s.spriteId})"></button>`;
+    html += `<div style="flex:1; min-width:0">`;
+    html += `<div class="item-name">${esc(s.name)} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>`;
+    if (s.notes) html += `<div class="item-notes">${esc(s.notes)}</div>`;
     html += '</div>';
-  }
-  if (done.length) {
-    html += `<div class="section-title" style="margin-top:16px">已完成（本页 ${done.length}）</div><div class="item-list">`;
-    done.forEach(i => { html += renderShinyItemRow(i); });
+    html += rightEl;
     html += '</div>';
-  }
+  });
+  html += '</div>';
 
   if (totalPages > 1) {
     html += '<div class="pagination">';
@@ -653,34 +764,30 @@ function renderShinyContent() {
   el.innerHTML = html;
 }
 
-function renderShinyItemRow(item) {
-  const isDone = item.status === '已完成';
-  let seasonTag = '';
-  if (item.limited) {
-    seasonTag = item.limited_status === '赛季已过'
-      ? '<span class="tag-archived">赛季已过</span>'
-      : '<span class="tag-limited">赛季限定</span>';
-  }
-  let rightEl = item.source_url
-    ? `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
-    : `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
-  return `<div class="item-row ${isDone ? 'done' : ''}">
-    <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleItemStatus('${item.id}')"></button>
-    <div style="flex:1; min-width:0">
-      <div class="item-name">${esc(item.name)} ${seasonTag}</div>
-      ${item.notes ? `<div class="item-notes">${esc(item.notes)}</div>` : ''}
-    </div>
-    ${item.forms > 1 ? `<span style="font-size:11px;color:#aaa;margin-right:4px">${item.forms}形态</span>` : ''}
-    ${rightEl}
-  </div>`;
+async function toggleShinyTask(spriteId) {
+  const sp = spritesData.find(s => s.id === spriteId);
+  if (!sp) return;
+  // 找 capture_shiny 任务
+  let task = null, fi = -1, ti = -1;
+  sp.forms.forEach((f, i) => { f.tasks.forEach((t, j) => { if (t.type === 'capture_shiny') { task = t; fi = i; ti = j; } }); });
+  if (!task) return;
+  task.done = !task.done;
+  if (!data.sprite_progress) data.sprite_progress = {};
+  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
+  const spProg = data.sprite_progress[String(spriteId)];
+  if (!spProg.forms) spProg.forms = {};
+  if (!spProg.forms[String(fi)]) spProg.forms[String(fi)] = { collected: false, tasks: {} };
+  spProg.forms[String(fi)].tasks[String(ti)] = task.done;
+  if (task.done) addDoneToday({ key: `shiny_${spriteId}`, name: sp.name, desc: '异色炫彩' });
+  await saveData();
+  renderShinyContent();
 }
 
 function onShinySearch(val) { shinySearch = val; shinyPage = 1; renderShinyContent(); }
 function setShinySeason(s) { shinySeason = s; shinyPage = 1; renderShinyTab(); }
 function setShinyStatus(s) { shinyStatus = s; shinyPage = 1; renderShinyTab(); }
 function goShinyPage(p) {
-  const items = (data.items || []).filter(i => i.category === '异色炫彩');
-  const totalPages = Math.ceil(items.length / SHINY_PAGE);
+  const totalPages = Math.ceil(getShinyList().length / SHINY_PAGE);
   if (p < 1 || p > totalPages) return;
   shinyPage = p; renderShinyContent();
 }
@@ -814,17 +921,111 @@ document.getElementById('source-modal').addEventListener('click', function(e) { 
 
 // ═══════════ Tab 切换 ═══════════
 function switchTab(name) {
-  ['dashboard','sprite','shiny','backpack'].forEach(t => {
+  ALL_TABS.forEach(t => {
     document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
   });
-  document.querySelectorAll('.nav button').forEach((btn, i) => {
-    btn.classList.toggle('active', ['dashboard','sprite','shiny','backpack'][i] === name);
-  });
+  const navBtns = document.querySelectorAll('#top-nav button');
+  const idx = ALL_TABS.indexOf(name);
+  navBtns.forEach((btn, i) => btn.classList.toggle('active', i === idx));
   currentTab = name;
   if (name === 'dashboard') { renderDashboard(); return; }
   if (name === 'sprite') { loadSprites().then(() => renderSpriteTab()); return; }
   if (name === 'shiny') { loadSprites().then(() => renderShinyTab()); return; }
-  if (name === 'backpack') renderBackpack();
+  if (name === 'fruits') { loadSprites().then(() => renderFruitsTab()); return; }
+  if (CATEGORY_META[name]) { renderCategoryTab(name); return; }
+}
+
+// ═══════════ 通用品类 Tab（item-based：家具/服装/称号/星星/遗迹/支线/扭蛋/音乐） ═══════════
+function getCatItems(catKey) {
+  // 品类到 items[] category 的映射
+  const map = { furniture:'家具', clothing:'外观', titles:'称号', stars:'星星', dungeons:'遗迹', sidequests:'支线任务', gacha:'扭蛋机', music:'音乐' };
+  const cat = map[catKey] || catKey;
+  return (data.items || []).filter(i => i.category === cat);
+}
+
+function renderCategoryTab(tab) {
+  const el = document.getElementById('tab-' + tab);
+  const meta = CATEGORY_META[tab] || {};
+  const items = getCatItems(tab);
+  const st = catStatus(tab);
+
+  let list = items;
+  if (st === 'pending') list = items.filter(i => i.status !== '已完成');
+  else if (st === 'done') list = items.filter(i => i.status === '已完成');
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">${meta.icon || ''} ${meta.name || tab}</h3>`;
+
+  if (!items.length) {
+    html += `<div class="empty-state">暂无数据<small>${meta.desc || '待采集'}`;
+    if (meta.csv) html += `<br>模板：data/_待采集/${meta.csv}`;
+    html += '</small></div>';
+    el.innerHTML = html; return;
+  }
+
+  const doneCount = items.filter(i => i.status === '已完成').length;
+  html += '<div class="chips" style="margin-bottom:10px">';
+  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+    html += `<span class="chip${st === s.v ? ' active' : ''}" onclick="setCatStatus('${tab}','${s.v}')">${s.l}</span>`;
+  });
+  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${items.length} 项 · 已完成 ${doneCount}</span>`;
+  html += '</div>';
+
+  if (!list.length) { html += '<div class="empty-state">没有匹配的收集项</div>'; el.innerHTML = html; return; }
+
+  const pending = list.filter(i => i.status !== '已完成');
+  const done = list.filter(i => i.status === '已完成');
+  if (pending.length) {
+    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(i => { html += renderItemRow(i); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += `<div class="section-title" style="margin-top:16px">已完成（${done.length}）</div><div class="item-list">`;
+    done.forEach(i => { html += renderItemRow(i); });
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+// ═══════════ 精灵果实 Tab ═══════════
+function renderFruitsTab() {
+  const el = document.getElementById('tab-fruits');
+  if (!spritesData) { el.innerHTML = '<div class="empty-state">加载中...</div>'; return; }
+
+  const withFruit = spritesData.filter(s => s.fruit);
+  const owned = withFruit.filter(s => s.fruit && s.fruit.acquired).length;
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">🍎 精灵果实</h3>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${withFruit.length}</strong> 种 · 已获得 <strong>${owned}</strong></span></div>`;
+
+  if (!withFruit.length) {
+    html += '<div class="empty-state">暂无果实数据</div>';
+    el.innerHTML = html; return;
+  }
+
+  html += '<div class="item-list">';
+  withFruit.forEach(sp => {
+    const acq = sp.fruit && sp.fruit.acquired;
+    html += `<div class="item-row${acq ? ' done' : ''}">`;
+    html += `<button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit(${sp.id})"></button>`;
+    html += `<div style="flex:1"><div class="item-name">${esc(sp.fruit.name || sp.name+'果实')}</div>`;
+    html += `<div class="item-notes">精灵：${esc(sp.name)}</div></div>`;
+    html += '</div>';
+  });
+  html += '</div>';
+
+  el.innerHTML = html;
+}
+
+async function toggleFruit(spriteId) {
+  const sp = spritesData.find(s => s.id === spriteId);
+  if (!sp || !sp.fruit) return;
+  sp.fruit.acquired = !sp.fruit.acquired;
+  if (!data.sprite_progress) data.sprite_progress = {};
+  if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
+  data.sprite_progress[String(spriteId)].fruit_acquired = sp.fruit.acquired;
+  await saveData();
+  if (currentTab === 'fruits') renderFruitsTab();
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }

@@ -12,6 +12,7 @@
 | 精灵任务数据 | `data/sprites.json`（只读，完整三层结构） |
 | 精灵图鉴（合并进度） | GET `/api/sprites`（sprites.json + sprite_progress 合并） |
 | 数据采集需求 | `data/_待采集/README.md`（外观/家具/异色/地区形态修正模板） |
+| 商店与货币数据 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json`（用户持有量） |
 | 查看精灵原始数据 | `data/sprites_raw.json`（由 Excel 生成，已废弃，保留备查） |
 
 ## DO FIRST
@@ -26,11 +27,13 @@
 ```
 lkwj/
 ├── server.js                  # HTTP 服务器，端口 8899，GET /api/data + /api/sprites + POST /api/save
-├── index.html                 # 单页 App：看板/异色炫彩/精灵图鉴/全部收集 四标签
+├── index.html                 # 单页 App：看板/精灵图鉴/异色炫彩/背包 四标签
 └── data/
     ├── collections.json       # 主数据：进度看板 + 异色炫彩收集列表（UI 读写此文件）
     ├── sprites.json           # 精灵任务库：347 精灵，1857 个任务，三层结构
     ├── sprites_raw.json       # 原始数据（Excel 导出，勿写入）
+    ├── shops.json             # 商店清单：36 商店 × 6 货币，售卖物品待填充
+    ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
     └── _待采集/                # 数据采集模板（交给其他模型填写）
         ├── README.md            #   采集需求说明文档
         ├── 外观图鉴.csv         #   空白模板

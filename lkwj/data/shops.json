@@ -1,0 +1,53 @@
+{
+  "meta": { "updated": "2026-05-15", "note": "商店售卖物品清单待商品数据填充" },
+  "currencies": {
+    "许愿星": { "icon": "⭐", "owned": 0, "note": "最通用货币，日常/任务/活动产出" },
+    "独角兽银币": { "icon": "🦄", "owned": 0, "note": "安妮商店专用" },
+    "王国徽记": { "icon": "🛡️", "owned": 0, "note": "精灵道具店+维拉/薇薇安商店，互通累计消费" },
+    "闪闪翎羽": { "icon": "🪶", "owned": 0, "note": "阵营商店" },
+    "绩点": { "icon": "📊", "owned": 0, "note": "分院帽/竞技场/知愿石/生态广场/主楼右" },
+    "拾光代币": { "icon": "💎", "owned": 0, "note": "赛季限定代币商店" }
+  },
+  "shops": [
+    { "id": "lansiluo", "name": "兰斯洛商店", "currency": "许愿星", "type": "regular" },
+    { "id": "mengmeng", "name": "萌萌商店", "currency": "许愿星", "type": "regular" },
+    { "id": "yixi", "name": "易西商店", "currency": "许愿星", "type": "regular" },
+    { "id": "luyisi", "name": "路易斯商店", "currency": "许愿星", "type": "regular" },
+    { "id": "peixi", "name": "佩西阿姨商店", "currency": "许愿星", "type": "regular" },
+    { "id": "kelixiya", "name": "可丽希亚商店", "currency": "许愿星", "type": "regular" },
+    { "id": "feierte", "name": "菲尔特商店", "currency": "许愿星", "type": "regular" },
+    { "id": "bode", "name": "博德商店", "currency": "许愿星", "type": "regular" },
+    { "id": "qq", "name": "QQ商店", "currency": "许愿星", "type": "regular" },
+    { "id": "wanshitong", "name": "万事通商店", "currency": "许愿星", "type": "regular" },
+    { "id": "pika_1", "name": "皮卡服装店①", "currency": "许愿星", "type": "regular", "category": "外观" },
+    { "id": "pika_2", "name": "皮卡服装店②", "currency": "许愿星", "type": "regular", "category": "外观" },
+    { "id": "pika_3", "name": "皮卡服装店③", "currency": "许愿星", "type": "regular", "category": "外观" },
+    { "id": "xueyuan_glf", "name": "学院内格里芬商店", "currency": "许愿星", "type": "regular" },
+    { "id": "xueyuan_fly", "name": "学院内芙蕾雅商店", "currency": "许愿星", "type": "regular" },
+    { "id": "xueyuan_kp", "name": "学院内卡普商店", "currency": "许愿星", "type": "regular" },
+    { "id": "xueyuan_fd", "name": "学院内费得商店", "currency": "许愿星", "type": "regular" },
+    { "id": "anni", "name": "安妮商店", "currency": "独角兽银币", "type": "special" },
+    { "id": "spirit_1", "name": "精灵道具店", "currency": "王国徽记", "type": "special", "note": "2个入口互通，共享累计消费" },
+    { "id": "zhenying", "name": "阵营商店", "currency": "闪闪翎羽", "type": "special", "note": "4个阵营入口" },
+    { "id": "jidian_fenyuan", "name": "分院帽绩点商店", "currency": "绩点", "type": "gpa" },
+    { "id": "jidian_arena", "name": "竞技场商店", "currency": "绩点", "type": "gpa" },
+    { "id": "jidian_zhiyuan", "name": "知愿石商店", "currency": "绩点", "type": "gpa" },
+    { "id": "jidian_shengtai", "name": "生态广场左商店", "currency": "绩点", "type": "gpa" },
+    { "id": "jidian_zhulou", "name": "主楼右商店", "currency": "绩点", "type": "gpa" },
+    { "id": "season_lai12", "name": "来这里", "currency": "许愿星", "type": "season", "season": 12 },
+    { "id": "season_zuo12", "name": "左思右想", "currency": "许愿星", "type": "season", "season": 12 },
+    { "id": "season_huang12", "name": "恍然大悟", "currency": "许愿星", "type": "season", "season": 12 },
+    { "id": "season_dazh12", "name": "打招呼", "currency": "许愿星", "type": "season", "season": 12 },
+    { "id": "season_yanjiu", "name": "研究院帽子", "currency": "许愿星", "type": "season" },
+    { "id": "season_kezhu", "name": "舒适课桌", "currency": "许愿星", "type": "season" },
+    { "id": "season_band", "name": "知识板凳", "currency": "许愿星", "type": "season" },
+    { "id": "season_pix", "name": "旧皮箱", "currency": "许愿星", "type": "season" },
+    { "id": "gulala", "name": "古拉拉家具店", "currency": "许愿星", "type": "season", "category": "家具" },
+    { "id": "shiguang", "name": "拾光代币商店", "currency": "拾光代币", "type": "season", "note": "赛季限定代币" },
+    { "id": "zhaocaiya", "name": "招财鸭（鸭吉吉）", "currency": "许愿星", "type": "special", "note": "全收集可清空店铺" }
+  ],
+  "to_verify": [
+    { "name": "维拉商店", "currency": "王国徽记", "note": "洛克里安地区，与薇薇安共享累计消费" },
+    { "name": "薇薇安商店", "currency": "王国徽记", "note": "洛克里安地区，与维拉共享累计消费" }
+  ]
+}
