@@ -171,7 +171,11 @@ let spriteSearch = '';
 let spritePage = 1;
 let expandedSprite = null;
 let spriteLoaded = false;
+let spriteStatus = 'all';    // all | pending | done
 const PAGE_SIZE = 40;
+
+// 背包 Tab 状态
+let backpackStatus = 'all';  // all | pending | done
 
 // ── 数据加载 ──────────────────────────────────
 async function loadData() {
@@ -302,6 +306,18 @@ function renderSprite() {
     }
   }
 
+  // 状态筛选（Chip 交叉语义：选中特定 Chip 时仅判断该 Chip 相关任务）
+  if (spriteStatus !== 'all') {
+    list = list.filter(s => {
+      let relevant = s.forms.flatMap(f => f.tasks);
+      if (elementFilter === 'shiny') relevant = relevant.filter(t => t.type === 'capture_shiny');
+      else if (elementFilter === 'leader') relevant = relevant.filter(t => t.type === 'leader_evolve');
+      if (!relevant.length) return false;
+      const allDone = relevant.every(t => t.done);
+      return spriteStatus === 'pending' ? !allDone : allDone;
+    });
+  }
+
   // 统计
   const total = spritesData.length;
   const collected = spritesData.filter(s => s.collected).length;
@@ -333,6 +349,12 @@ function renderSprite() {
   html += `<span class="chip${elementFilter === 'leader' ? ' active' : ''}" onclick="setElementFilter('leader')">首领形态</span>`;
   allElements.forEach(el => {
     html += `<span class="chip${elementFilter === el ? ' active' : ''}" onclick="setElementFilter('${el}')">${el}</span>`;
+  });
+  html += '</div>';
+  // 状态筛选 Segment
+  html += '<div class="chips">';
+  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+    html += `<span class="chip${spriteStatus === s.v ? ' active' : ''}" onclick="setSpriteStatus('${s.v}')">${s.l}</span>`;
   });
   html += '</div></div>';
 
@@ -429,6 +451,18 @@ function goPage(p) {
   document.getElementById('tab-sprite').scrollIntoView({ behavior: 'smooth' });
 }
 
+function setSpriteStatus(s) {
+  spriteStatus = s;
+  spritePage = 1;
+  expandedSprite = null;
+  renderSprite();
+}
+
+function setBackpackStatus(s) {
+  backpackStatus = s;
+  renderBackpack();
+}
+
 async function toggleTask(spriteId, formIdx, taskIdx) {
   const sp = spritesData.find(s => s.id === spriteId);
   if (!sp) return;
@@ -453,9 +487,30 @@ function renderBackpack() {
     el.innerHTML = '<div class="empty-state">暂无收集项<small>从图鉴标记进度后，这里会显示所有收集项</small></div>';
     return;
   }
-  const pending = items.filter(i => i.status !== '已完成');
-  const done = items.filter(i => i.status === '已完成');
+
+  // 状态筛选
+  let list = items;
+  if (backpackStatus === 'pending') list = items.filter(i => i.status !== '已完成');
+  else if (backpackStatus === 'done') list = items.filter(i => i.status === '已完成');
+
+  const pending = list.filter(i => i.status !== '已完成');
+  const done = list.filter(i => i.status === '已完成');
+  const totalStr = `共 ${items.length} 项 · 已完成 ${items.filter(i => i.status === '已完成').length}`;
+
   let html = '';
+  // Segment Control
+  html += '<div class="chips" style="margin-bottom:10px">';
+  [{v:'all',l:'全部'},{v:'pending',l:'未完成'},{v:'done',l:'已完成'}].forEach(s => {
+    html += `<span class="chip${backpackStatus === s.v ? ' active' : ''}" onclick="setBackpackStatus('${s.v}')">${s.l}</span>`;
+  });
+  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">${totalStr}</span>`;
+  html += '</div>';
+
+  if (!list.length) {
+    html += '<div class="empty-state">没有匹配的收集项</div>';
+    el.innerHTML = html;
+    return;
+  }
   if (pending.length) {
     html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
     pending.forEach(i => { html += renderItemRow(i); });
