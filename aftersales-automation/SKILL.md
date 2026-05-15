@@ -108,9 +108,10 @@ await cdp.navigate(targetId, 'https://...');
 ### 登录恢复机制
 
 - 触发条件：`checkLogin()` 返回 `loggedIn: false`（URL 含 login / title 不含快麦ERP-- / 有 `.inner-login-wrapper` 弹窗）
-- **Phase 1**：Chrome 自动填充（单次尝试）— 若当前在 login 页则跳过 reload（避免清除已填充密码），clickAt 用户名框 → clickAt 密码框 → 检查密码是否被填入
-- **Phase 2**（密码仍为空且配置了 ERP_USERNAME/ERP_PASSWORD）：三级凭据注入降级（nativeSetter → execCommand → CDP typeText），每级注入后读回校验
-- **Phase 3**：点登录按钮 → 等协议弹窗 → 点同意 → checkLogin 确认
+- **Phase 1**：`injectCredentials(targetId)` 直接注入三字段（companyName + userName + password），用 nativeSetter + dispatchEvent('input'/'change')，有硬编码 fallback，可选配 env vars 覆盖
+  - ⚠️ Chrome 自动填充在 CDP headless 模式下**完全不可用**（测试确认），已彻底废弃
+  - ⚠️ `cdp.clickAt(input)` 会清除输入框内容，禁止在登录页点击任何输入框
+- **Phase 2**：点登录按钮 → 等协议弹窗（`.rc-kmui-com-dlg`）→ 点同意（`input.rc-btn-ok`）→ checkLogin 确认
 - 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
 - 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知
 - 详见 `docs/ops-tech.md §3.2`

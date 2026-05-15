@@ -25,32 +25,34 @@
 
 ```
 ① check 内部流程:
+   0. 【自动清空】data/imgs/ 和 data/reports/（旧活动数据对下次无用）
    1.1 鲸灵商品列表 → 筛选「特卖在售中」→ 抓取活动货号（处理范围）
    1.2 ERP 商品对应表 → 下载平台商品（选店铺+全量下载+等待完成）
    1.3 ERP 商品对应表 → 选店铺 → 展开所有行 → 读SKU映射 + 图片URL
    1.4 下载 SKU 图片到 data/imgs/，标记匹配/未匹配
    1.5 商品档案V2 → 按ERP编码查类型+子品明细
-   1.6 合并识图结论（visual-verdicts.json）→ 保存报告
+   1.6 合并识图结论（已有 recognition 从旧 sku-records 读取保留）→ 保存报告
+   1.7 【全量重写】sku-records.json（以 ERP 实时对应表为唯一数据源，保留 recognition）
    报告输出：recognition + comparisonResult + comparisonDetail 字段
 
 ② 我识图:
-   - 读 visual-pending 查看待识图列表
-   - Read 工具加载图片，对照 features.json 规则
-   - visual-ok / visual-flag 记录结论 → 更新 sku-records.json
+   - Read 工具加载 data/imgs/ 中的图片，对照 features.json 规则
+   - 写入 sku-records.json 的 recognition 字段
 
 ③ match 内部流程:
+   0. 【自动清空】done[] 和 failed[]（新任务，历史记录对本次无意义）
    - Phase 1: 组合装 → 勾选 → 标记套件 → 逐个复制为套件
-   - Phase 2: 单品 → 逐个 remapSku
-   - 任何错误立即停止（stop-on-error），已完成的自动跳过
+   - Phase 2: 单品 → 逐个 remapSku（getTodo 过滤：erpCode=null + 有recognition）
+   - 任何错误立即停止（stop-on-error）
 
 ④ 第二次 check = 重新扫描 + 对比:
-   - 同①，此时 SKU 已有 erpCode
+   - 同①，此时已匹配 SKU 有 erpCode，sku-records 全量重写后 erpCode 回填
    - comparisonResult: 识图预测 vs 档案实际 → match/mismatch
    - 若有 mismatch，人工核查
 ```
 
 **异常处理原则**：
-- match 任何 SKU 报错 → 立即 throw 停止，人工处理后重跑（done 列表防止重复）
+- match 任何 SKU 报错 → 立即 throw 停止，人工处理后重跑（done 列表仅在本次 match 任务内有效）
 - check 读取异常（ERP 未登录、页面无法访问）→ navigateErp 已处理，手动刷新登录后重跑
 - comparisonMismatch > 0 → check 报告会警告，需人工核查后继续
 
@@ -173,15 +175,15 @@ data/products/
 
 ### SKU 数据文件规范
 
-- **`data/sku-records.json`**：单文件存全量 SKU 元数据 + 识图结果，按 platformCode 索引
-- **字段**：`productCode / shopName / skuName / platformCode / erpCode / erpName / imgUrl / recognition / scope`
+- **`data/sku-records.json`**：单文件存全量 SKU 元数据 + 识图结果，按 platformCode 索引（纯平铺格式 `{platformCode→rec}`）
+- **字段**：`platformCode / productCode / shopName / skuName / erpCode / erpName / imgUrl / recognition / scope`
+- **写入时机**：check 结束时**全量重写**（以 ERP 实时对应表为唯一来源，erpCode 回填实况值，recognition 从旧文件保留）
 - **`scope` 字段**：
   - `"active-YYYY-MM-DD"` = 该日期 check 运行时确认的活动在售 SKU
-  - `"history"` = 历史活动遗留，不在当前核查范围
-  - check.js 运行后自动更新；手动可用 auto-match-log + check 报告补全
+  - `"history"` = 历史活动遗留，不在当前核查范围（旧格式遗留，全量重写后不再产生）
 - **`recognition` 字段**：识图后写入，格式 `{type:"单品"|"组合装", items:[{name,qty}], raw:"描述"}`
 - **禁止**：在 JSON 里存 `imgPath`（可从 platformCode 推导，存了是冗余）
-- **`data/visual-verdicts.json`**：识图结论（ok/mismatch），独立于 sku-records.json
+- **`data/visual-verdicts.json`**：识图结论（ok/mismatch），独立于 sku-records.json（legacy，当前流程直接写 sku-records）
 
 ### 视觉匹配数据契约
 
@@ -257,6 +259,9 @@ data/products/
 - `[1/2026-05-08]` **matched-original SKU 的 recognition 必须补填，不能留 null**：重跑 `--from annotate` 时，matched-original + recognition=null 会被 annotate 跳过，导致 itemType=null。识图阶段需要按 erpName/skuName 为这些条目补填 recognition.items，让 annotate 能正常生成 itemType。
 - `[1/2026-05-13]` **全量下载选择是 el-radio，不是 el-checkbox**：下载平台商品弹窗里「全量下载」「增量下载」「指定下载」三个选项是 `el-radio` 组，默认选中「增量下载（value=2）」。代码若用 `.el-checkbox` + `input[type=checkbox]` 查找，永远 null，全量下载永远不被选中，静默跑增量。正确：`.el-radio` + `input[type=radio]`，查 checked 状态再 click。
 - `[1/2026-05-13]` **ensureCorrPage 跳过 reload 导致残留 dialog 叠加超时**：`ensureCorrPage` 检测到 hash 已匹配时跳过 reload，仅清空搜索框。若前一次操作（如手动 inspect）留有未关闭 dialog，新 download dialog 叠加在顶层但 gone 检测（等所有 dialog 消失）永远不通过，导致 60s 超时。根治：download 操作前必须用 `navigateErp()`（强制 full reload），不能用 `ensureCorrPage`。
+- `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
+- `[1/2026-05-13]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。根治：check 结束时以 ERP 实时对应表数据全量重写，不读旧文件做增量合并。recognition 字段在重写前从旧文件读取并写回（保留识图结果）。
+- `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
 
 ---
 
@@ -274,10 +279,10 @@ data/products/
 
 ```
 Step 0: 清空旧数据工作区
-  - 直接清空（无需备份）：rm -f data/imgs/*
-  - 直接重置：echo '{}' > data/sku-records.json
-  - 清空 data/products/{brand}/sku-map.json（如果存在）
-  - （data/imgs/ 是一次性工作区，每次 check 重新下载，不保留历史）
+  - 无需手动清空：check 命令开始时自动清空 data/imgs/ 和 data/reports/
+  - 无需手动清空：match 命令开始时自动清空 done[] 和 failed[]
+  - 无需手动清空：sku-records.json 由 check 全量重写
+  - （只需确保 ERP 和鲸灵 Tab 正常打开）
 
 Step 1: 获取全量数据
   - 跑 node cli.js check --shop <店铺>

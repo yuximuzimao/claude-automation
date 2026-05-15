@@ -165,26 +165,23 @@ url.includes('login')
 || !!document.querySelector('.inner-login-wrapper')  // session 超时弹窗
 ```
 
-**恢复机制（3 层防御，`recoverLogin()` 在 `lib/erp/navigate.js`）**：
+**恢复机制（`recoverLogin()` 在 `lib/erp/navigate.js`）**：
 
 ```
-Phase 1: Chrome 自动填充（单次尝试，确定性）
-  a) 若当前 URL 含 login → 跳过 reload（避免清除已填充密码）
-  b) 若非 login 页 → location.reload()，等 5s，等待 .inner-login-wrapper 出现
-  c) cdp.clickAt('input[name="userName"]') → sleep 1.5s
-  d) cdp.clickAt('input[type="password"]') → sleep 2s
-  e) 检查密码框 value.length > 0
-  ↓ 密码框仍为空 + env vars 已配置？进 Phase 2
+Phase 1: 凭据注入（injectCredentials，确定性）
+  注入三字段：
+    #login-company（公司名，用 id=login-company 定位）
+    input[name="userName"]（账号）
+    input[type="password"]（密码）
+  注入方式：nativeInputValueSetter + dispatchEvent('input'/'change')
+  凭据来源：优先 env vars（ERP_COMPANY/ERP_USERNAME/ERP_PASSWORD），
+           无 env vars 时用硬编码 fallback（~/.claude/settings.json env 块配置可选）
+  注入后读回验证（value.length > 0），失败则抛错
 
-Phase 2: CDP 凭据注入（deterministic fallback）
-  需要环境变量：ERP_USERNAME / ERP_PASSWORD（在 ~/.claude/settings.json env 块配置）
-  三级降级注入：
-    Level 1: nativeInputValueSetter + dispatchEvent('input'/'change') → 读回校验
-    Level 2: element.focus() + document.execCommand('insertText') → 读回校验
-    Level 3: cdp.clickAt(input) + cdp.typeText(password) → 读回校验
-  任意一级成功（pwdInput.value === password）继续登录流程
+  ⚠️ Chrome 自动填充在 CDP headless 模式下完全不触发（2026-05-13 测试确认：reload 等 20s 三字段全空）
+  ⚠️ cdp.clickAt(input) 会触发表单重置清除内容，登录页禁止点击任何输入框
 
-Phase 3: 点登录按钮 → 等协议弹窗 → 点同意（input.rc-btn-ok）
+Phase 2: 点登录按钮 → 等协议弹窗（.rc-kmui-com-dlg）→ 点同意（input.rc-btn-ok）
   checkLogin() 确认 loggedIn: true → 成功
   否则 → 抛错（触发熔断计数）
 ```
@@ -214,7 +211,7 @@ Phase 3: 点登录按钮 → 等协议弹窗 → 点同意（input.rc-btn-ok）
 }
 ```
 
-> ⚠️ 凭据注入的 env vars（`ERP_USERNAME`/`ERP_PASSWORD`）配置在 `~/.claude/settings.json` 的 `env` 块中。未配置时 Phase 2 自动跳过，行为与旧版相同（向后兼容）。
+> 凭据来源优先级：env vars（`ERP_COMPANY`/`ERP_USERNAME`/`ERP_PASSWORD`）→ 硬编码 fallback（代码内已内置）。env vars 不配置也能正常工作，配置后可覆盖默认凭据。
 
 ### 3.3 ERP 订单详情弹窗（查物流）
 

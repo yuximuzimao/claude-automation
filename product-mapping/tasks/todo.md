@@ -1,5 +1,11 @@
 # 待处理优化项
 
+## 待办（下次 session）
+
+- [ ] **HEE 品牌建档修复计划（v2）落地**：计划文件 `~/.claude/plans/linear-percolating-crab.md`，覆盖品牌作用域隔离（data/brands/{brand}/）、副作用拆分（A2 readCorrespondence）、assertPlatformImageColumn 断言、validate-brand-archive.js 验收脚本、preflight-brand.md 完善。当前止血（imgs 清空+recognition 补填）已做，架构重构待推进。
+
+---
+
 ## 当前任务：模块化测试（match-one 流水线）
 
 > 计划文件：`~/.claude/plans/peppy-dancing-mango.md`
@@ -79,11 +85,9 @@
 
 ### 数据契约快查
 
-sku-records.json 新格式：`{ stage, shopName, productCode, skus: { [platformCode]: {...} } }`
+sku-records.json 格式：纯平铺 `{ [platformCode]: { platformCode, productCode, shopName, skuName, erpCode, erpName, imgUrl, recognition, scope } }`（check 全量重写，不再有 `{stage, skus:{...}}` 包装层）
 
-stage 状态机：`skus_read → images_done → annotated → matched → verified`
-
-matchStatus 四态：`unmatched / matched-original / matched-ai / failed-ai`
+matchStatus 四态（match-one 流程用）：`unmatched / matched-original / matched-ai / failed-ai`
 
 ---
 
