@@ -183,6 +183,7 @@
 <script>
 let data = null;
 let spritesData = null;
+let walletData = null;
 let editingId = null;
 let currentTab = 'dashboard';
 
@@ -206,10 +207,22 @@ const DRAWN_KEY = 'lkwj_drawn_today';
 
 // ── 数据加载 ──────────────────────────────────
 async function loadData() {
-  const res = await fetch('/api/data');
-  data = await res.json();
+  const [dRes, wRes] = await Promise.all([
+    fetch('/api/data'),
+    fetch('/api/wallet')
+  ]);
+  data = await dRes.json();
+  walletData = await wRes.json();
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
   renderAll();
+}
+
+async function saveWallet() {
+  await fetch('/api/wallet', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(walletData)
+  });
 }
 
 async function saveData() {
@@ -253,8 +266,23 @@ function renderDashboard() {
   const el = document.getElementById('tab-dashboard');
   const cats = data.categories;
   const regions = data.regions;
-  const yiseItems = data.items.filter(i => i.category === '异色炫彩');
-  const yiseDone = yiseItems.filter(i => i.status === '已完成').length;
+
+  // 实时聚合（spritesData 可用时），否则回退到手动数值
+  let spriteOwned, spriteTotal, yiseOwned, yiseTotal;
+  if (spritesData) {
+    spriteTotal = spritesData.length;
+    spriteOwned = spritesData.filter(s => s.collected || s.forms.some(f =>
+      f.tasks.some(t => (t.type === 'capture' || t.type === 'capture_gifted') && t.done)
+    )).length;
+    yiseTotal = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny'))).length;
+    yiseOwned = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny' && t.done))).length;
+  } else {
+    const sp = cats['精灵'];
+    spriteOwned = sp.owned; spriteTotal = sp.total;
+    const yiseItems = data.items.filter(i => i.category === '异色炫彩');
+    yiseOwned = yiseItems.filter(i => i.status === '已完成').length;
+    yiseTotal = yiseItems.length || 152;
+  }
 
   let html = '';
 
@@ -269,17 +297,17 @@ function renderDashboard() {
 
   // 进度卡片
   html += '<div class="dashboard-grid">';
-  const sp = cats['精灵'];
-  html += statCard('精灵图鉴', sp.owned, sp.total, "switchTab('sprite')");
+  html += statCard('精灵图鉴', spriteOwned, spriteTotal, "switchTab('sprite')");
   Object.entries(regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
-  html += statCard('异色炫彩', yiseDone, yiseItems.length, "switchTab('sprite')");
+  html += statCard('异色炫彩', yiseOwned, yiseTotal, "switchTab('sprite')");
   ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
     const c = cats[cat];
     html += statCard(cat, c.owned, c.total, '');
   });
   html += '</div>';
 
-  // 待完成异色炫彩
+  // 待完成异色炫彩（仅当 spritesData 未加载且 items 有数据时显示）
+  const yiseItems = data.items.filter(i => i.category === '异色炫彩');
   const pending = yiseItems.filter(i => i.status !== '已完成');
   if (pending.length > 0) {
     html += `<div class="section-title">异色炫彩 · 待完成（${pending.length}）</div><div class="item-list">`;
@@ -293,13 +321,20 @@ function renderDashboard() {
 function statCard(label, owned, total, onclick) {
   const o = owned || 0;
   const t = total;
+  if (t === null || t === undefined) {
+    const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
+    return `<div class="stat-card" ${clickAttr}">
+      <div class="label">${label}</div>
+      <div class="numbers" style="font-size:14px;color:#bbb">待录入</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>`;
+  }
   const pct = t ? Math.round(o / t * 100) : 0;
   const complete = t && o >= t;
   const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
-  const displayTotal = t !== null && t !== undefined ? t : '?';
   return `<div class="stat-card" ${clickAttr}>
     <div class="label">${label}</div>
-    <div class="numbers">${o} <span>/ ${displayTotal}</span></div>
+    <div class="numbers">${o} <span>/ ${t}</span></div>
     <div class="progress-bar"><div class="progress-fill ${complete ? 'complete' : ''}" style="width:${pct}%"></div></div>
   </div>`;
 }

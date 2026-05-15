@@ -5,6 +5,7 @@ const path = require('path');
 const PORT = 8899;
 const DATA_FILE = path.join(__dirname, 'data', 'collections.json');
 const SPRITES_FILE = path.join(__dirname, 'data', 'sprites.json');
+const WALLET_FILE = path.join(__dirname, 'data', 'wallet.json');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -74,6 +75,42 @@ const server = http.createServer((req, res) => {
       res.writeHead(500);
       res.end(JSON.stringify({ error: e.message }));
     }
+    return;
+  }
+
+  // API: 读钱包
+  if (req.method === 'GET' && url.pathname === '/api/wallet') {
+    try {
+      if (fs.existsSync(WALLET_FILE)) {
+        const content = fs.readFileSync(WALLET_FILE, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+        res.end(content);
+      } else {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ currencies: {}, income_sources: [] }));
+      }
+    } catch (e) {
+      res.writeHead(500);
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // API: 保存钱包
+  if (req.method === 'POST' && url.pathname === '/api/wallet') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        JSON.parse(body); // validate
+        fs.writeFileSync(WALLET_FILE, body, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true }));
+      } catch (e) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
     return;
   }
 
