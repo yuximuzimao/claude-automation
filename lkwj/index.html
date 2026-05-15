@@ -6,119 +6,123 @@
   <title>洛克王国 · 收集助手</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; }
+    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; font-size: 15px; }
 
-    .header { background: #fff; padding: 14px 24px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
-    .header h1 { font-size: 17px; color: #4f46e5; font-weight: 700; }
-    .header .updated { font-size: 12px; color: #aaa; margin-left: auto; }
+    .header { background: #fff; padding: 16px 32px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
+    .header h1 { font-size: 18px; color: #4f46e5; font-weight: 700; }
+    .header .updated { font-size: 13px; color: #aaa; margin-left: auto; }
     .save-indicator { font-size: 12px; color: #10b981; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
     .save-indicator.show { opacity: 1; }
 
-    .nav { display: flex; gap: 2px; padding: 10px 24px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 49px; z-index: 49; }
-    .nav button { padding: 6px 16px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
+    .nav { display: flex; gap: 2px; padding: 10px 32px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 53px; z-index: 49; }
+    .nav button { padding: 7px 18px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 14px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
     .nav button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .nav button:hover:not(.active) { border-color: #4f46e5; color: #4f46e5; }
 
-    .container { padding: 20px 24px; max-width: 100%; }
+    .container { padding: 28px 32px; max-width: 100%; }
 
     /* 看板 */
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
-    .stat-card { background: #fff; border-radius: 12px; padding: 14px 16px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
+    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 18px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 16px 18px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
     .stat-card:hover { box-shadow: 0 4px 16px rgba(79,70,229,0.1); transform: translateY(-1px); }
-    .stat-card .label { font-size: 11px; color: #888; margin-bottom: 4px; }
-    .stat-card .numbers { font-size: 22px; font-weight: 700; color: #1a1a2e; }
-    .stat-card .numbers span { font-size: 12px; color: #bbb; font-weight: 400; }
-    .stat-card .hint { font-size: 13px; color: #bbb; }
-    .progress-bar { height: 5px; background: #f0f0f5; border-radius: 3px; margin-top: 8px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #6366f1, #8b5cf6); transition: width 0.4s ease; }
-    .progress-fill.complete { background: linear-gradient(90deg, #10b981, #34d399); }
+    .stat-card .label { font-size: 13px; color: #888; margin-bottom: 4px; }
+    .stat-card .numbers { font-size: 26px; font-weight: 700; color: #1a1a2e; }
+    .stat-card .numbers span { font-size: 13px; color: #bbb; font-weight: 400; }
+    .stat-card .hint { font-size: 15px; color: #bbb; }
+    .stat-card .hint.tbd { color: #ccc; font-size: 14px; }
+    .progress-bar { height: 6px; background: #f0f0f5; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .progress-fill.low { background: linear-gradient(90deg, #ef4444, #f97316); }
+    .progress-fill.mid { background: linear-gradient(90deg, #f97316, #eab308); }
+    .progress-fill.high { background: linear-gradient(90deg, #22c55e, #10b981); }
+    .progress-fill.none { background: #e5e7eb; }
 
     /* 看板模块 */
-    .dash-widget { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; margin-bottom: 10px; }
-    .dash-widget h3 { font-size: 13px; color: #888; margin-bottom: 10px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+    .dash-widget { background: #fff; border-radius: 10px; padding: 18px; border: 1px solid #e8eaf0; margin-bottom: 12px; }
+    .dash-widget.accent { border-left: 4px solid #6366f1; background: #f8f9ff; }
+    .dash-widget h3 { font-size: 14px; color: #888; margin-bottom: 10px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 
     /* 随机任务 */
     .random-box { padding: 4px 0; }
-    .random-task-name { font-size: 16px; font-weight: 700; }
-    .random-task-desc { font-size: 13px; color: #666; margin-top: 2px; }
-    .random-task-form { font-size: 11px; color: #aaa; }
-    .random-actions { margin-top: 10px; display: flex; gap: 8px; }
-    .random-actions button { padding: 6px 16px; border-radius: 16px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 12px; transition: all 0.1s; }
+    .random-task-name { font-size: 17px; font-weight: 700; }
+    .random-task-desc { font-size: 14px; color: #666; margin-top: 4px; }
+    .random-task-form { font-size: 12px; color: #aaa; }
+    .random-actions { margin-top: 12px; display: flex; gap: 8px; }
+    .random-actions button { padding: 7px 18px; border-radius: 16px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 13px; transition: all 0.1s; }
     .random-actions button:hover { border-color: #6366f1; color: #6366f1; }
     .random-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
     .random-actions button.primary:hover { background: #059669; }
 
     /* 今日完成 */
-    .today-done { font-size: 12px; color: #888; margin-top: 6px; }
-    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 10px; margin: 2px 3px; font-size: 11px; }
+    .today-done { font-size: 13px; color: #888; margin-top: 6px; }
+    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 3px 10px; border-radius: 10px; margin: 2px 4px; font-size: 12px; }
 
     /* 提示条 */
     .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
 
     /* ── 图鉴/异色 Tab 共用 ── */
-    .sprite-toolbar { margin-bottom: 10px; }
-    .sprite-search { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 6px; }
+    .sprite-toolbar { margin-bottom: 12px; }
+    .sprite-search { width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 8px; }
     .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
     .chips { display: flex; gap: 4px; flex-wrap: wrap; }
-    .chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .chip { padding: 4px 12px; border-radius: 14px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 12px; white-space: nowrap; transition: all 0.12s; user-select: none; }
     .chip:hover { border-color: #4f46e5; color: #4f46e5; }
     .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .sprite-stats { font-size: 12px; color: #999; margin: 8px 0; display: flex; gap: 14px; }
+    .sprite-stats { font-size: 13px; color: #999; margin: 8px 0; display: flex; gap: 14px; }
     .sprite-stats strong { color: #4f46e5; }
 
     /* 精灵卡片 */
-    .sprite-list { display: flex; flex-direction: column; gap: 6px; }
+    .sprite-list { display: flex; flex-direction: column; gap: 8px; }
     .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
     .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; user-select: none; }
-    .sprite-card-header .si { font-size: 18px; flex-shrink: 0; }
-    .sprite-card-header .sn { flex: 1; font-size: 14px; font-weight: 600; }
-    .sprite-card-header .se { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; }
-    .sprite-card-header .sm { font-size: 11px; color: #aaa; white-space: nowrap; }
+    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; user-select: none; }
+    .sprite-card-header .si { font-size: 20px; flex-shrink: 0; }
+    .sprite-card-header .sn { flex: 1; font-size: 16px; font-weight: 600; }
+    .sprite-card-header .se { font-size: 11px; padding: 3px 8px; border-radius: 8px; white-space: nowrap; }
+    .sprite-card-header .sm { font-size: 12px; color: #aaa; white-space: nowrap; }
     .sprite-card-header .sa { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; }
     .sprite-card.expanded .sa { transform: rotate(90deg); }
-    .sprite-card-body { display: none; padding: 0 14px 12px; border-top: 1px solid #f0f0f5; }
+    .sprite-card-body { display: none; padding: 0 16px 14px; border-top: 1px solid #f0f0f5; }
     .sprite-card.expanded .sprite-card-body { display: block; }
 
     /* 关联任务组 */
     .task-group { margin-top: 10px; }
-    .task-group-label { font-size: 11px; color: #888; margin-bottom: 3px; padding-left: 2px; }
-    .task-row { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 5px; font-size: 13px; color: #444; }
+    .task-group-label { font-size: 12px; color: #888; margin-bottom: 4px; padding-left: 2px; }
+    .task-row { display: flex; align-items: flex-start; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 14px; color: #444; }
     .task-row:hover { background: #f8f9fc; }
-    .task-row.done { color: #aaa; text-decoration: line-through; }
-    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+    .task-row.done { color: #bbb; text-decoration: line-through; opacity: 0.5; }
+    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; margin-top: 1px; }
     .task-check.checked { background: #10b981; border-color: #10b981; }
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
-    .task-type-tag { font-size: 10px; color: #aaa; background: #f5f6fa; padding: 1px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-    .form-label { font-size: 12px; font-weight: 600; color: #6366f1; margin-bottom: 2px; }
+    .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin-bottom: 4px; margin-top: 8px; }
     .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
 
     /* 分页 */
-    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
-    .pagination button { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 12px; transition: all 0.1s; }
+    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 16px; }
+    .pagination button { width: 34px; height: 34px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 13px; transition: all 0.1s; }
     .pagination button:hover { border-color: #4f46e5; color: #4f46e5; }
     .pagination button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .pagination button:disabled { opacity: 0.3; cursor: default; }
 
     /* 背包 */
-    .section-title { font-size: 12px; color: #aaa; margin-bottom: 8px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
-    .item-list { display: flex; flex-direction: column; gap: 6px; }
-    .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 10px; transition: box-shadow 0.1s; }
+    .section-title { font-size: 13px; color: #aaa; margin-bottom: 8px; margin-top: 4px; letter-spacing: 0.04em; font-weight: 600; }
+    .item-list { display: flex; flex-direction: column; gap: 8px; }
+    .item-row { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 12px; transition: box-shadow 0.1s; }
     .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
-    .item-row.done { opacity: 0.45; }
+    .item-row.done { opacity: 0.4; }
     .item-row .item-info { flex: 1; min-width: 0; }
-    .item-row .item-name { font-size: 14px; font-weight: 500; line-height: 1.4; }
-    .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; line-height: 1.3; }
+    .item-row .item-name { font-size: 16px; font-weight: 500; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
+    .item-row .item-notes { font-size: 13px; color: #aaa; margin-top: 2px; line-height: 1.3; }
     .item-row .item-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
+    .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
-    .check-btn.checked::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
-    .source-btn { font-size: 12px; color: #4f46e5; text-decoration: none; padding: 3px 10px; border-radius: 5px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .check-btn.checked::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 800; }
+    .source-btn { font-size: 13px; color: #4f46e5; text-decoration: none; padding: 4px 12px; border-radius: 6px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
     .source-btn:hover { background: #e0e7ff; }
-    .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .add-source { font-size: 13px; color: #bbb; cursor: pointer; padding: 4px 12px; border-radius: 6px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
-    .item-category-tag { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 7px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+    .item-category-tag { font-size: 11px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
 
     /* 折叠已完成区域 */
     .section-header { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 6px 0; }
@@ -127,24 +131,44 @@
     .section-body { overflow: hidden; transition: max-height 0.3s ease; max-height: 2000px; }
     .section-body.collapsed { max-height: 0; }
 
-    /* 弹窗 */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
-    .modal { background: #fff; border-radius: 14px; padding: 22px; width: 90%; max-width: 400px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-    .modal h3 { font-size: 15px; margin-bottom: 14px; color: #1a1a2e; }
-    .modal label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
-    .modal input, .modal select, .modal textarea { width: 100%; padding: 8px 11px; background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 7px; color: #1a1a2e; font-size: 13px; margin-bottom: 10px; font-family: inherit; }
+    .modal { background: #fff; border-radius: 14px; padding: 24px; width: 90%; max-width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .modal h3 { font-size: 16px; margin-bottom: 16px; color: #1a1a2e; }
+    .modal label { font-size: 13px; color: #888; display: block; margin-bottom: 4px; }
+    .modal input, .modal select, .modal textarea { width: 100%; padding: 10px 12px; background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 7px; color: #1a1a2e; font-size: 14px; margin-bottom: 10px; font-family: inherit; }
     .modal textarea { resize: vertical; min-height: 60px; }
     .modal-btns { display: flex; gap: 8px; margin-top: 4px; }
-    .btn { padding: 8px 18px; border-radius: 7px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .btn { padding: 10px 20px; border-radius: 7px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; }
     .btn-primary { background: #4f46e5; color: #fff; }
     .btn-primary:hover { background: #4338ca; }
     .btn-secondary { background: #f0f0f5; color: #666; }
 
-    .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
-    .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
-    .empty-state { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
-    .empty-state small { display: block; margin-top: 6px; font-size: 12px; color: #ccc; }
+    .tag-limited { font-size: 12px; color: #dc2626; background: #fef2f2; padding: 3px 8px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
+    .tag-archived { font-size: 12px; color: #9ca3af; background: #f9fafb; padding: 3px 8px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
+    .empty-state { text-align: center; padding: 48px 20px; color: #bbb; font-size: 15px; }
+    .empty-state small { display: block; margin-top: 6px; font-size: 13px; color: #ccc; }
+
+    /* 属性标签颜色 */
+    .se { color: #6366f1; background: #eef2ff; } /* default */
+    .se.el-火 { color: #dc2626; background: #fef2f2; }
+    .se.el-水 { color: #2563eb; background: #eff6ff; }
+    .se.el-草 { color: #16a34a; background: #f0fdf4; }
+    .se.el-光 { color: #ca8a04; background: #fefce8; }
+    .se.el-电 { color: #d97706; background: #fefce8; }
+    .se.el-冰 { color: #0891b2; background: #f0f9ff; }
+    .se.el-地 { color: #b45309; background: #fef7ed; }
+    .se.el-幽 { color: #9333ea; background: #faf5ff; }
+    .se.el-幻 { color: #db2777; background: #fdf2f8; }
+    .se.el-恶 { color: #7c3aed; background: #faf5ff; }
+    .se.el-毒 { color: #be185d; background: #fdf2f8; }
+    .se.el-武 { color: #e85d04; background: #fef2f2; }
+    .se.el-虫 { color: #65a30d; background: #f7fee7; }
+    .se.el-萌 { color: #ec4899; background: #fdf2f8; }
+    .se.el-龙 { color: #8b5cf6; background: #faf5ff; }
+    .se.el-翼 { color: #0e7490; background: #f0f9ff; }
+    .se.el-普 { color: #6b7280; background: #f5f6fa; }
+    .se.el-机 { color: #52525b; background: #f5f5f6; }
   </style>
 </head>
 <body>
@@ -344,6 +368,22 @@ function renderLimitedTag(item) {
 }
 
 const DONE_KEY = 'lkwj_done_today';
+const RANDOM_KEY = 'lkwj_random_task';
+
+// 随机任务持久化
+function saveRandomTask(task) {
+  localStorage.setItem(RANDOM_KEY, JSON.stringify({ date: todayStr(), task: task }));
+}
+function loadRandomTask() {
+  try {
+    const raw = localStorage.getItem(RANDOM_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw);
+    if (d.date !== todayStr()) { localStorage.removeItem(RANDOM_KEY); return null; }
+    return d.task;
+  } catch { return null; }
+}
+function clearRandomTask() { localStorage.removeItem(RANDOM_KEY); }
 
 // ═══════════ 数据加载 ═══════════
 async function init() {
@@ -352,7 +392,9 @@ async function init() {
   walletData = await wRes.json();
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
   await loadSprites();
-  randomPicked = false;
+  randomTask = loadRandomTask();
+  if (!randomTask) { randomTask = pickRandom(); if (randomTask) saveRandomTask(randomTask); }
+  randomPicked = true;
   renderDashboard();
 }
 
@@ -403,30 +445,23 @@ function renderDashboard() {
   });
   html += '</div>';
 
-  // 随机未完成任务（只在 init/换一个/标记完成后 刷新）
-  if (!randomPicked || !randomTask) {
-    randomTask = pickRandom();
-    if (randomTask) randomPicked = true;
-  }
-  html += '<div class="dash-widget">';
+  // 随机未完成任务（init 恢复/换一个时刷新；完成后留空等手动换）
+  html += '<div class="dash-widget accent">';
   html += '<h3>🎯 随机任务</h3>';
   if (randomTask) {
     html += `<div class="random-box">`;
     html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
     html += `<div class="random-task-desc">${esc(randomTask.desc)}</div>`;
     html += `<div class="random-task-form">${randomTask.form || randomTask.category || ''}</div>`;
-    // 关联任务（每个可独立勾选）
+    // 关联任务（跨形态，排除 destin_hero/confirm_forms）
     if (randomTask.type === 'sprite') {
-      const related = getRelatedTasks(randomTask.spriteId, randomTask.formIdx);
+      const related = getRelatedTasks(randomTask.spriteId);
       if (related.length > 0) {
-        html += '<div style="margin-top:6px;text-align:left;font-size:11px;color:#888">可一起完成：</div>';
-        const form = spriteMap.get(randomTask.spriteId)?.forms[randomTask.formIdx];
+        html += '<div style="margin-top:8px;text-align:left;font-size:12px;color:#888">可一起完成：</div>';
         related.forEach(t => {
-          const ti = form ? form.tasks.indexOf(t) : -1;
-          html += `<div class="task-row${t.done ? ' done' : ''}" style="font-size:11px;padding:2px 8px">`;
-          html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${randomTask.spriteId},${randomTask.formIdx},${ti});randomTask=null;renderDashboard()" style="width:14px;height:14px;flex-shrink:0"></div>`;
-          html += `<span style="flex:1">${esc(t.desc)}</span>`;
-          html += `<span class="task-type-tag" style="font-size:9px">${t.type}</span>`;
+          html += `<div class="task-row${t.done ? ' done' : ''}">`;
+          html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${randomTask.spriteId},${t.formIdx},${t.taskIdx});clearRandomTask();randomTask=null;renderDashboard()"></div>`;
+          html += `<span style="flex:1">${esc(t.formLabel)} · ${esc(t.desc)}</span>`;
           html += '</div>';
         });
       }
@@ -434,13 +469,14 @@ function renderDashboard() {
     html += '<div class="random-actions">';
     if (randomTask.type === 'sprite') {
       html += `<button onclick="viewRandomTask(${randomTask.spriteId})">📋 查看详情</button>`;
+      html += `<button class="primary" onclick="markRandomDone()">✅ 标记完成</button>`;
     } else {
       html += `<button class="primary" onclick="markRandomItemDone()">✅ 标记完成</button>`;
     }
-    html += `<button onclick="randomTask=null;randomPicked=false;renderDashboard()">🔄 换一个</button>`;
+    html += `<button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button>`;
     html += '</div></div>';
   } else {
-    html += '<div class="empty-state" style="padding:12px">全部完成了 🎉</div>';
+    html += '<div class="empty-state" style="padding:14px">全部完成了 🎉<br><small><a href="javascript:randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()" style="color:#6366f1">🔄 换一个</a></small></div>';
   }
   html += '</div>';
 
@@ -463,13 +499,14 @@ function dashCard(label, owned, total, onclick) {
   const o = owned || 0, t = total;
   if (t === null || t === undefined) {
     return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
-      <div class="label">${label}</div><div class="hint">待录入</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>`;
+      <div class="label">${label}</div><div class="hint tbd">—</div>
+      <div class="progress-bar"><div class="progress-fill none" style="width:0%"></div></div></div>`;
   }
-  const pct = t ? Math.round(o / t * 100) : 0, done = t && o >= t;
+  const pct = t ? Math.round(o / t * 100) : 0;
+  const cls = pct === 0 ? 'none' : pct < 33 ? 'low' : pct < 67 ? 'mid' : 'high';
   return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
     <div class="label">${label}</div><div class="numbers">${o} <span>/ ${t}</span></div>
-    <div class="progress-bar"><div class="progress-fill ${done?'complete':''}" style="width:${pct}%"></div></div></div>`;
+    <div class="progress-bar"><div class="progress-fill ${cls}" style="width:${pct || 1}%"></div></div></div>`;
 }
 
 // ═══════════ 随机抽取 ═══════════
@@ -477,6 +514,9 @@ function pickRandom() {
   const pool = [];
   if (spritesData) {
     spritesData.forEach(sp => {
+      // 基础形态 capture 是否已完成（进化前置条件）
+      const baseCapture = sp.forms[0].tasks.find(t => t.type === 'capture');
+      const baseDone = !baseCapture || baseCapture.done;
       sp.forms.forEach((f, fi) => {
         // capture 任务状态（用于判断 capture20 前置条件）
         const captureDone = f.tasks.some(t => t.type === 'capture' && t.done);
@@ -485,6 +525,8 @@ function pickRandom() {
           if (RANDOM_EXCLUDE.has(t.type)) return;
           // capture20 需要先完成 capture
           if (t.type === 'capture20' && !captureDone) return;
+          // 非基础形态：需基础形态 capture 完成后才能随机到
+          if (fi > 0 && !baseDone) return;
           pool.push({ type: 'sprite', spriteId: sp.id, formIdx: fi, taskIdx: ti, name: sp.name, desc: t.desc, form: f.label });
         });
       });
@@ -498,14 +540,21 @@ function pickRandom() {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-// 获取同一形态下的其他未完成任务（适合一起完成）
-function getRelatedTasks(spriteId, formIdx) {
+// 获取整只精灵所有形态的未完成任务（跨进化链，适合一起完成）
+function getRelatedTasks(spriteId) {
   if (!spritesData) return [];
   const sp = spriteMap.get(spriteId);
   if (!sp) return [];
-  const form = sp.forms[formIdx];
-  if (!form) return [];
-  return form.tasks.filter(t => !t.done);
+  const excludeTypes = new Set(['destined_hero', 'confirm_forms']);
+  const related = [];
+  sp.forms.forEach((f, fi) => {
+    f.tasks.forEach((t, ti) => {
+      if (!t.done && !excludeTypes.has(t.type)) {
+        related.push({ formIdx: fi, taskIdx: ti, desc: t.desc, type: t.type, done: t.done, formLabel: f.label });
+      }
+    });
+  });
+  return related;
 }
 
 // 从看板跳转到图鉴并定位到具体精灵
@@ -643,7 +692,7 @@ function renderSpriteCard(sp, isShinyTab) {
   card += `<div class="sprite-card-header" onclick="${isShinyTab ? 'toggleShiny' : 'toggleSprite'}(${sp.id})">`;
   card += `<span class="si">${sp.collected ? '✅' : '⬜'}</span>`;
   card += `<span class="sn">${esc(sp.name)}</span>`;
-  card += `<span class="se">${sp.element}</span>`;
+  card += `<span class="se${elClass(sp.element)}">${sp.element}</span>`;
   card += `<span class="sm">${sp.forms.length}形态 · ${spDone}/${spTotal}</span>`;
   card += `<span class="sa">▶</span>`;
   card += '</div>';
@@ -676,7 +725,6 @@ function renderSpriteCard(sp, isShinyTab) {
         card += `<div class="task-row${t.done ? ' done' : ''}">`;
         card += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${sp.id},${fi},${ti})"></div>`;
         card += `<span style="flex:1">${esc(t.desc)}</span>`;
-        card += `<span class="task-type-tag">${t.type}</span>`;
         card += '</div>';
       });
     });
@@ -980,14 +1028,16 @@ async function toggleItemStatus(id) {
 async function markRandomDone() {
   if (!randomTask || randomTask.type !== 'sprite') return;
   await toggleTask(randomTask.spriteId, randomTask.formIdx, randomTask.taskIdx);
-  randomTask = null; randomPicked = false;
+  clearRandomTask();
+  randomTask = null;
   renderDashboard();
 }
 
 async function markRandomItemDone() {
   if (!randomTask || randomTask.type !== 'item') return;
   await toggleItemStatus(randomTask.id);
-  randomTask = null; randomPicked = false;
+  clearRandomTask();
+  randomTask = null;
   renderDashboard();
 }
 
@@ -1140,6 +1190,13 @@ async function toggleFruit(spriteId) {
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// 属性 → 颜色 CSS class（取主属性，即 element[0]）
+function elClass(element) {
+  if (!element) return '';
+  const primary = element.length === 2 ? element[0] : element;
+  return ' el-' + primary;
+}
 
 init();
 </script>
