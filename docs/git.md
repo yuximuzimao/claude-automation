@@ -19,7 +19,8 @@
 <类型>(<范围>): <描述>
 ```
 
-类型：`feat` 新功能 / `fix` 修复 / `refactor` 重构 / `docs` 文档 / `data` 数据 / `chore` 杂项
+类型：`feat` 新功能 / `fix` 修复 / `refactor` 重构 / `docs` 文档
+> `data` 类型已停用——运行时数据不入 git。杂项用 `chore` 仅在必要时使用。
 
 示例：
 - `feat(aftersales): 新增拦截快递行动Tab`
@@ -29,10 +30,12 @@
 
 ```bash
 git status && git diff --stat          # 确认改动范围
-git add -A
+git add <具体文件>                       # 不要 git add -A，排除 data/ *.log 等
 git commit -m "<类型>(<范围>): <描述>"
 git push
 ```
+
+> `git add -A` 会误加 `data/`、日志等禁止提交文件，必须用 `git add <path>` 指定文件。
 
 提交后告知用户：改了什么 + commit id 前7位。
 
