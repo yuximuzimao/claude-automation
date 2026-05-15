@@ -309,7 +309,8 @@ function renderSprite() {
   let list = spritesData;
   if (spriteSearch) {
     const q = spriteSearch.toLowerCase();
-    list = list.filter(s => s.name.includes(q) || s.element.includes(q));
+    list = list.filter(s => s.name.includes(q) || s.element.includes(q) ||
+      (s.pinyin && (s.pinyin.full.includes(q) || s.pinyin.initial.includes(q))));
   }
   if (elementFilter) {
     list = list.filter(s => s.element.includes(elementFilter));
