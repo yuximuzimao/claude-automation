@@ -21,7 +21,7 @@
 
     .container { padding: 16px 20px; max-width: 860px; }
 
-    /* 看板卡片 */
+    /* 看板 */
     .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; margin-bottom: 20px; }
     .stat-card { background: #fff; border-radius: 10px; padding: 14px; border: 1px solid #e8eaf0; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; }
     .stat-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); border-color: #c7d2fe; }
@@ -32,7 +32,7 @@
     .progress-fill { height: 100%; border-radius: 2px; background: #4f46e5; transition: width 0.3s; }
     .progress-fill.complete { background: #10b981; }
 
-    /* 收集列表 */
+    /* 收集列表（背包/异色） */
     .section-title { font-size: 12px; color: #aaa; margin-bottom: 8px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
     .item-list { display: flex; flex-direction: column; gap: 6px; }
     .item-row { background: #fff; border-radius: 8px; padding: 11px 14px; border: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; transition: box-shadow 0.1s; }
@@ -40,13 +40,10 @@
     .item-row.done { opacity: 0.4; }
     .item-row .item-name { flex: 1; font-size: 14px; font-weight: 500; color: #1a1a2e; }
     .item-row .item-notes { font-size: 12px; color: #aaa; margin-top: 2px; font-weight: 400; }
-    .item-row .item-category-tag { font-size: 11px; color: #6366f1; background: #eef2ff; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
-
     .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
     .check-btn.checked::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
-
     .source-btn { font-size: 12px; color: #4f46e5; text-decoration: none; padding: 3px 10px; border-radius: 5px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; }
     .source-btn:hover { background: #e0e7ff; }
     .add-source { font-size: 12px; color: #bbb; cursor: pointer; padding: 3px 10px; border-radius: 5px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; }
@@ -66,25 +63,19 @@
     .btn-primary:hover { background: #4338ca; }
     .btn-secondary { background: #f0f0f5; color: #666; }
 
-    /* 活动预警 */
     .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
 
-    /* 空状态 */
-    .empty { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
-    .empty small { display: block; margin-top: 6px; font-size: 12px; color: #ccc; }
-
-    /* 限定标签 */
     .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
     .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
 
-    /* ── 精灵图鉴 Tab ── */
+    /* ── 图鉴 Tab ── */
     .sprite-toolbar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
     .sprite-search { width: 100%; padding: 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; background: #fff; color: #1a1a2e; font-family: inherit; }
     .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
-    .element-chips { display: flex; gap: 4px; flex-wrap: wrap; }
-    .element-chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
-    .element-chip:hover { border-color: #4f46e5; color: #4f46e5; }
-    .element-chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .chips { display: flex; gap: 4px; flex-wrap: wrap; }
+    .chip { padding: 3px 10px; border-radius: 12px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 11px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .chip:hover { border-color: #4f46e5; color: #4f46e5; }
+    .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .sprite-stats { font-size: 12px; color: #999; margin-bottom: 8px; display: flex; gap: 14px; }
     .sprite-stats strong { color: #4f46e5; }
 
@@ -111,29 +102,38 @@
     .sprite-card-body .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
     .sprite-card-body .task-type-tag { font-size: 10px; color: #aaa; background: #f5f6fa; padding: 1px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
     .sprite-card-body .form-collected { font-size: 11px; color: #10b981; margin-left: 6px; }
-    .sprite-empty { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
+
+    /* 分页 */
+    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
+    .pagination button { width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 12px; transition: all 0.1s; }
+    .pagination button:hover { border-color: #4f46e5; color: #4f46e5; }
+    .pagination button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .pagination button:disabled { opacity: 0.3; cursor: default; }
+
+    .empty-state { text-align: center; padding: 40px 20px; color: #bbb; font-size: 14px; }
+    .empty-state small { display: block; margin-top: 6px; font-size: 12px; color: #ccc; }
   </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🎮 洛克王国 · 收集助手</h1>
+  <h1>洛克王国 · 收集助手</h1>
   <span class="save-indicator" id="save-indicator">已保存</span>
   <span class="updated" id="last-updated"></span>
 </div>
 
 <div class="nav">
   <button class="active" onclick="switchTab('dashboard')">看板</button>
-  <button onclick="switchTab('yise')">异色炫彩</button>
-  <button onclick="switchTab('sprite')">精灵图鉴</button>
-  <button onclick="switchTab('all')">全部收集</button>
+  <button onclick="switchTab('sprite')">图鉴</button>
+  <button onclick="switchTab('backpack')">背包</button>
+  <button onclick="switchTab('random')">抽一个</button>
 </div>
 
 <div class="container">
   <div id="tab-dashboard"></div>
-  <div id="tab-yise" style="display:none"></div>
   <div id="tab-sprite" style="display:none"></div>
-  <div id="tab-all" style="display:none"></div>
+  <div id="tab-backpack" style="display:none"></div>
+  <div id="tab-random" style="display:none"></div>
 </div>
 
 <!-- 攻略/备注编辑弹窗 -->
@@ -164,12 +164,16 @@ let data = null;
 let spritesData = null;
 let editingId = null;
 let currentTab = 'dashboard';
+
+// 图鉴 Tab 状态
 let elementFilter = null;
 let spriteSearch = '';
+let spritePage = 1;
 let expandedSprite = null;
 let spriteLoaded = false;
+const PAGE_SIZE = 40;
 
-// ── 数据加载与保存 ──────────────────────────────
+// ── 数据加载 ──────────────────────────────────
 async function loadData() {
   const res = await fetch('/api/data');
   data = await res.json();
@@ -190,14 +194,30 @@ async function saveData() {
   setTimeout(() => ind.classList.remove('show'), 1500);
 }
 
-// ── 渲染 ──────────────────────────────────────
-function renderAll() {
-  renderDashboard();
-  if (currentTab === 'yise') renderYise();
-  if (currentTab === 'sprite') renderSprite();
-  if (currentTab === 'all') renderAllItems();
+// ── Tab 切换 ──────────────────────────────────
+function switchTab(name) {
+  ['dashboard','sprite','backpack','random'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav button').forEach((btn, i) => {
+    btn.classList.toggle('active', ['dashboard','sprite','backpack','random'][i] === name);
+  });
+  currentTab = name;
+  if (name === 'sprite') { loadSprites().then(() => renderSprite()); return; }
+  if (name === 'backpack') renderBackpack();
+  else if (name === 'random') renderRandom();
+  else if (name === 'dashboard') renderDashboard();
 }
 
+// ── 渲染入口 ──────────────────────────────────
+function renderAll() {
+  renderDashboard();
+  if (currentTab === 'sprite') renderSprite();
+  if (currentTab === 'backpack') renderBackpack();
+  if (currentTab === 'random') renderRandom();
+}
+
+// ── 看板 Tab ──────────────────────────────────
 function renderDashboard() {
   const el = document.getElementById('tab-dashboard');
   const cats = data.categories;
@@ -213,7 +233,7 @@ function renderDashboard() {
     if (!a.end_date) return;
     const days = Math.ceil((new Date(a.end_date) - now) / 86400000);
     if (days >= 0 && days <= 14)
-      html += `<div class="alert-bar">⚠️ <strong>${a.name}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
+      html += `<div class="alert-bar">&#9888;&#65039; <strong>${esc(a.name)}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
   });
 
   // 进度卡片
@@ -221,7 +241,7 @@ function renderDashboard() {
   const sp = cats['精灵'];
   html += statCard('精灵图鉴', sp.owned, sp.total, "switchTab('sprite')");
   Object.entries(regions).forEach(([name, r]) => html += statCard(name, r.owned, r.total, ''));
-  html += statCard('异色炫彩', yiseDone, yiseItems.length, "switchTab('yise')");
+  html += statCard('异色炫彩', yiseDone, yiseItems.length, "switchTab('sprite')");
   ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
     const c = cats[cat];
     html += statCard(cat, c.owned, c.total, '');
@@ -246,51 +266,14 @@ function statCard(label, owned, total, onclick) {
   const complete = t && o >= t;
   const clickAttr = onclick ? `onclick="${onclick}" style="cursor:pointer"` : '';
   const displayTotal = t !== null && t !== undefined ? t : '?';
-  return `
-    <div class="stat-card" ${clickAttr}>
-      <div class="label">${label}</div>
-      <div class="numbers">${o} <span>/ ${displayTotal}</span></div>
-      <div class="progress-bar">
-        <div class="progress-fill ${complete ? 'complete' : ''}" style="width:${pct}%"></div>
-      </div>
-    </div>`;
+  return `<div class="stat-card" ${clickAttr}>
+    <div class="label">${label}</div>
+    <div class="numbers">${o} <span>/ ${displayTotal}</span></div>
+    <div class="progress-bar"><div class="progress-fill ${complete ? 'complete' : ''}" style="width:${pct}%"></div></div>
+  </div>`;
 }
 
-function renderItemRow(item) {
-  const isDone = item.status === '已完成';
-  let rightEl = '';
-  if (item.source_url) {
-    rightEl = `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`;
-  } else {
-    rightEl = `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
-  }
-  let limitedTag = '';
-  if (item.limited) {
-    limitedTag = item.limited_status === '赛季已过'
-      ? `<span class="tag-archived">已归档</span>`
-      : `<span class="tag-limited">限定</span>`;
-  }
-  return `
-    <div class="item-row ${isDone ? 'done' : ''}" id="row-${item.id}">
-      <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleStatus('${item.id}')"></button>
-      <div style="flex:1; min-width:0">
-        <div class="item-name">${item.name} ${limitedTag}</div>
-        ${item.notes ? `<div class="item-notes">${item.notes}</div>` : ''}
-      </div>
-      ${rightEl}
-    </div>`;
-}
-
-function renderYise() {
-  const el = document.getElementById('tab-yise');
-  const items = data.items.filter(i => i.category === '异色炫彩');
-  const done = items.filter(i => i.status === '已完成').length;
-  let html = `<div class="section-title">异色炫彩 ${done} / ${items.length}</div><div class="item-list">`;
-  items.forEach(item => { html += renderItemRow(item); });
-  html += '</div>';
-  el.innerHTML = html;
-}
-
+// ── 图鉴 Tab ──────────────────────────────────
 async function loadSprites() {
   if (spriteLoaded) return;
   const res = await fetch('/api/sprites');
@@ -300,10 +283,7 @@ async function loadSprites() {
 
 function renderSprite() {
   const el = document.getElementById('tab-sprite');
-  if (!spritesData) {
-    el.innerHTML = '<div class="sprite-empty">加载中...</div>';
-    return;
-  }
+  if (!spritesData) { el.innerHTML = '<div class="empty-state">加载中...</div>'; return; }
 
   // 过滤
   let list = spritesData;
@@ -313,7 +293,13 @@ function renderSprite() {
       (s.pinyin && (s.pinyin.full.includes(q) || s.pinyin.initial.includes(q))));
   }
   if (elementFilter) {
-    list = list.filter(s => s.element.includes(elementFilter));
+    if (elementFilter === 'shiny') {
+      list = list.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny')));
+    } else if (elementFilter === 'leader') {
+      list = list.filter(s => s.forms.some(f => f.type === 'leader'));
+    } else {
+      list = list.filter(s => s.element.includes(elementFilter));
+    }
   }
 
   // 统计
@@ -322,86 +308,109 @@ function renderSprite() {
   const totalTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.length, 0), 0);
   const doneTasks = spritesData.reduce((c, s) => c + s.forms.reduce((c2, f) => c2 + f.tasks.filter(t => t.done).length, 0), 0);
 
-  // 属性列表
+  // 分页
+  const totalPages = Math.ceil(list.length / PAGE_SIZE);
+  if (spritePage > totalPages) spritePage = 1;
+  const start = (spritePage - 1) * PAGE_SIZE;
+  const pageItems = list.slice(start, start + PAGE_SIZE);
+
+  // 属性 chips
   const allElements = [...new Set(spritesData.map(s => {
-    const el = s.element;
-    return el.length === 2 ? el[0] : el;
+    const e = s.element;
+    return e.length === 2 ? e[0] : e;
   }))].filter(e => e !== '，').sort();
 
   let html = '';
 
-  // 搜索 + 属性筛选
+  // 搜索 + chips
   html += '<div class="sprite-toolbar">';
-  html += `<input class="sprite-search" type="text" placeholder="搜索精灵名称..." value="${escapeHtml(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
-  html += '<div class="element-chips">';
-  html += `<span class="element-chip${elementFilter ? '' : ' active'}" onclick="setElementFilter(null)">全部</span>`;
+  html += `<input class="sprite-search" type="text" placeholder="搜索精灵（支持拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
+  html += '<div class="chips">';
+  const isElActive = !elementFilter || ['shiny','leader'].includes(elementFilter);
+  const isCustom = elementFilter === 'shiny' || elementFilter === 'leader';
+  html += `<span class="chip${!elementFilter ? ' active' : ''}" onclick="setElementFilter(null)">全部</span>`;
+  html += `<span class="chip${elementFilter === 'shiny' ? ' active' : ''}" onclick="setElementFilter('shiny')">异色炫彩</span>`;
+  html += `<span class="chip${elementFilter === 'leader' ? ' active' : ''}" onclick="setElementFilter('leader')">首领形态</span>`;
   allElements.forEach(el => {
-    html += `<span class="element-chip${elementFilter === el ? ' active' : ''}" onclick="setElementFilter('${el}')">${el}</span>`;
+    html += `<span class="chip${elementFilter === el ? ' active' : ''}" onclick="setElementFilter('${el}')">${el}</span>`;
   });
   html += '</div></div>';
 
   // 统计
   html += `<div class="sprite-stats">`;
-  html += `<span>共 <strong>${total}</strong> 只精灵</span>`;
-  html += `<span>已收集 <strong>${collected}</strong></span>`;
+  html += `<span>共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></span>`;
   html += `<span>任务 <strong>${doneTasks}</strong> / ${totalTasks}</span>`;
   html += `</div>`;
 
   if (!list.length) {
-    html += '<div class="sprite-empty">没有匹配的精灵</div>';
+    html += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
     el.innerHTML = html;
     return;
   }
 
-  // 精灵卡片列表
+  // 卡片列表
   html += '<div class="sprite-list">';
-  list.forEach(sp => {
+  pageItems.forEach(sp => {
     const formCount = sp.forms.length;
-    const spTasksTotal = sp.forms.reduce((c, f) => c + f.tasks.length, 0);
-    const spTasksDone = sp.forms.reduce((c, f) => c + f.tasks.filter(t => t.done).length, 0);
+    const spTotal = sp.forms.reduce((c, f) => c + f.tasks.length, 0);
+    const spDone = sp.forms.reduce((c, f) => c + f.tasks.filter(t => t.done).length, 0);
     const isExpanded = expandedSprite === sp.id;
 
-    html += `<div class="sprite-card${isExpanded ? ' expanded' : ''}" id="spcard-${sp.id}">`;
+    html += `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
     html += `<div class="sprite-card-header" onclick="toggleSprite(${sp.id})">`;
     html += `<span class="sprite-icon">${sp.collected ? '✅' : '⬜'}</span>`;
-    html += `<span class="sprite-name">${sp.name}</span>`;
+    html += `<span class="sprite-name">${esc(sp.name)}</span>`;
     html += `<span class="sprite-element">${sp.element}</span>`;
-    html += `<span class="sprite-meta">${formCount}形态 · ${spTasksDone}/${spTasksTotal}任务</span>`;
+    html += `<span class="sprite-meta">${formCount}形态 · ${spDone}/${spTotal}</span>`;
     html += `<span class="sprite-arrow">▶</span>`;
     html += '</div>';
 
-    // 展开区域
     html += '<div class="sprite-card-body">';
     sp.forms.forEach((f, fi) => {
       const fDone = f.tasks.filter(t => t.done).length;
       html += `<div class="form-block">`;
-      html += `<div class="form-label">${f.label}${f.collected ? '<span class="form-collected">✓ 已集齐</span>' : ''} · ${fDone}/${f.tasks.length} 任务</div>`;
+      html += `<div class="form-label">${esc(f.label)}${f.collected ? '<span class="form-collected">✓ 已集齐</span>' : ''} · ${fDone}/${f.tasks.length}</div>`;
       f.tasks.forEach((t, ti) => {
-        const key = `${sp.id}_${fi}_${ti}`;
         html += `<div class="task-row${t.done ? ' done' : ''}">`;
         html += `<div class="task-check${t.done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask(${sp.id},${fi},${ti})"></div>`;
-        html += `<span style="flex:1">${t.desc}</span>`;
+        html += `<span style="flex:1">${esc(t.desc)}</span>`;
         html += `<span class="task-type-tag">${t.type}</span>`;
         html += '</div>';
       });
       html += '</div>';
     });
-    html += '</div>'; // sprite-card-body
-    html += '</div>'; // sprite-card
+    html += '</div></div>';
   });
   html += '</div>';
+
+  // 分页导航
+  if (totalPages > 1) {
+    html += '<div class="pagination">';
+    html += `<button onclick="goPage(${spritePage - 1})" ${spritePage <= 1 ? 'disabled' : ''}>◀</button>`;
+    for (let p = 1; p <= totalPages; p++) {
+      if (p === 1 || p === totalPages || (p >= spritePage - 2 && p <= spritePage + 2)) {
+        html += `<button class="${p === spritePage ? 'active' : ''}" onclick="goPage(${p})">${p}</button>`;
+      } else if (p === spritePage - 3 || p === spritePage + 3) {
+        html += '<span style="padding:0 4px;color:#ccc">...</span>';
+      }
+    }
+    html += `<button onclick="goPage(${spritePage + 1})" ${spritePage >= totalPages ? 'disabled' : ''}>▶</button>`;
+    html += '</div>';
+  }
 
   el.innerHTML = html;
 }
 
 function onSpriteSearch(val) {
   spriteSearch = val;
+  spritePage = 1;
   expandedSprite = null;
   renderSprite();
 }
 
 function setElementFilter(el) {
   elementFilter = el;
+  spritePage = 1;
   expandedSprite = null;
   renderSprite();
 }
@@ -411,34 +420,37 @@ function toggleSprite(id) {
   renderSprite();
 }
 
+function goPage(p) {
+  const totalPages = Math.ceil((spritesData || []).length / PAGE_SIZE);
+  if (p < 1 || p > totalPages) return;
+  spritePage = p;
+  expandedSprite = null;
+  renderSprite();
+  document.getElementById('tab-sprite').scrollIntoView({ behavior: 'smooth' });
+}
+
 async function toggleTask(spriteId, formIdx, taskIdx) {
-  // 更新 spritesData 缓存
   const sp = spritesData.find(s => s.id === spriteId);
   if (!sp) return;
-  const task = sp.forms[formIdx].tasks[taskIdx];
-  task.done = !task.done;
+  sp.forms[formIdx].tasks[taskIdx].done = !sp.forms[formIdx].tasks[taskIdx].done;
 
-  // 同步到 collections.json sprite_progress
   if (!data.sprite_progress) data.sprite_progress = {};
   if (!data.sprite_progress[String(spriteId)]) data.sprite_progress[String(spriteId)] = { collected: false, forms: {} };
   const spProg = data.sprite_progress[String(spriteId)];
   if (!spProg.forms) spProg.forms = {};
   if (!spProg.forms[String(formIdx)]) spProg.forms[String(formIdx)] = { collected: false, tasks: {} };
-  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = task.done;
+  spProg.forms[String(formIdx)].tasks[String(taskIdx)] = sp.forms[formIdx].tasks[taskIdx].done;
 
   await saveData();
   renderSprite();
 }
 
-function escapeHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function renderAllItems() {
-  const el = document.getElementById('tab-all');
-  const items = data.items;
+// ── 背包 Tab ──────────────────────────────────
+function renderBackpack() {
+  const el = document.getElementById('tab-backpack');
+  const items = data.items || [];
   if (!items.length) {
-    el.innerHTML = '<div class="empty">暂无收集项<small>从其他标签页添加数据</small></div>';
+    el.innerHTML = '<div class="empty-state">暂无收集项<small>从图鉴标记进度后，这里会显示所有收集项</small></div>';
     return;
   }
   const pending = items.filter(i => i.status !== '已完成');
@@ -457,21 +469,34 @@ function renderAllItems() {
   el.innerHTML = html;
 }
 
-// ── 交互 ──────────────────────────────────────
-function switchTab(name) {
-  ['dashboard','yise','sprite','all'].forEach(t => {
-    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
-  });
-  document.querySelectorAll('.nav button').forEach((btn, i) => {
-    btn.classList.toggle('active', ['dashboard','yise','sprite','all'][i] === name);
-  });
-  currentTab = name;
-  if (name === 'sprite') { loadSprites().then(() => renderSprite()); return; }
-  if (name === 'yise') renderYise();
-  else if (name === 'all') renderAllItems();
-  else if (name === 'dashboard') renderDashboard();
+function renderItemRow(item) {
+  const isDone = item.status === '已完成';
+  let rightEl = item.source_url
+    ? `<a href="${item.source_url}" target="_blank" class="source-btn">攻略 ↗</a>`
+    : `<span class="add-source" onclick="openModal('${item.id}')">+ 攻略</span>`;
+  let limitedTag = '';
+  if (item.limited) {
+    limitedTag = item.limited_status === '赛季已过'
+      ? `<span class="tag-archived">已归档</span>`
+      : `<span class="tag-limited">限定</span>`;
+  }
+  return `<div class="item-row ${isDone ? 'done' : ''}" id="row-${item.id}">
+    <button class="check-btn ${isDone ? 'checked' : ''}" onclick="toggleStatus('${item.id}')"></button>
+    <div style="flex:1; min-width:0">
+      <div class="item-name">${esc(item.name)} ${limitedTag}</div>
+      ${item.notes ? `<div class="item-notes">${esc(item.notes)}</div>` : ''}
+    </div>
+    ${rightEl}
+  </div>`;
 }
 
+// ── 抽一个 Tab ──────────────────────────────────
+function renderRandom() {
+  const el = document.getElementById('tab-random');
+  el.innerHTML = '<div class="empty-state">即将上线 🎲<small>随机抽取未完成的任务，敬请期待</small></div>';
+}
+
+// ── 交互 ──────────────────────────────────────
 async function toggleStatus(id) {
   const item = data.items.find(i => i.id === id);
   if (!item) return;
@@ -507,10 +532,13 @@ async function saveSource() {
   renderAll();
 }
 
-// 点弹窗外关闭
 document.getElementById('source-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 loadData();
 </script>
