@@ -9,8 +9,9 @@
 | 启动本地服务 | `node server.js`（端口 8899） |
 | 打开界面 | 浏览器访问 `http://localhost:8899` |
 | 修改收集进度 | 直接编辑 `data/collections.json` 或通过 UI 勾选 |
-| 精灵任务数据 | `data/sprites.json`（只读，完整三层结构） |
+| 精灵任务数据 | `data/sprites.json`（只读，355 精灵，三层结构） |
 | 精灵图鉴（合并进度） | GET `/api/sprites`（sprites.json + sprite_progress 合并） |
+| 异色炫彩过滤规则 | `getShinyList()` capture_shiny 过滤：只保留有 capture_shiny task 的最低形态，进化形态自动排除 |
 | 数据采集需求 | `data/_待采集/README.md`（外观/家具/异色/地区形态修正模板） |
 | 商店与货币数据 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json`（用户持有量） |
 | 查看精灵原始数据 | `data/sprites_raw.json`（由 Excel 生成，已废弃，保留备查） |
@@ -28,16 +29,16 @@
 lkwj/
 ├── server.js                  # HTTP 服务器，端口 8899，GET /api/data + /api/sprites + POST /api/save
 ├── index.html                 # 单页 App：看板+11品类标签（精灵/异色炫彩/果实/家具/服装/称号/星星/遗迹/支线/扭蛋/音乐）
+├── scripts/
+│   ├── build-sprites-pinyin.js  # 为 sprites.json 生成 pinyin 字段
+│   └── migrate-leader-evolve.js # 删除 leader form 冗余任务前迁移进度
 └── data/
     ├── collections.json       # 主数据：进度看板 + 异色炫彩收集列表（UI 读写此文件）
-    ├── sprites.json           # 精灵任务库：347 精灵，1834 个任务，三层结构，含 pinyin 字段
+    ├── sprites.json           # 精灵任务库：355 精灵，~1850 个任务，三层结构，含 pinyin 字段；capture_shiny=最低形态标记
     ├── sprites_raw.json       # 原始数据（Excel 导出，勿写入）
     ├── shops.json             # 商店清单：36 商店 × 6 货币，售卖物品待填充
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
-    └── scripts/
-        ├── build-sprites-pinyin.js  # 为 sprites.json 生成 pinyin 字段
-        └── migrate-leader-evolve.js # 删除 leader form 冗余任务前迁移进度
-    └── _待采集/                # 数据采集模板（交给其他模型填写）
+    ├── _待采集/                # 数据采集模板（交给其他模型填写）
         ├── README.md            #   采集需求说明文档
         ├── 外观图鉴.csv         #   空白模板
         ├── 家具图鉴.csv         #   空白模板
@@ -76,7 +77,7 @@ lkwj/
 }
 ```
 
-> 异色炫彩统计以 sprites.json capture_shiny 为准，items[] 仅存储季节/攻略等元数据。
+> **异色炫彩过滤规则**：getShinyList() 从 items[] 驱动，额外过滤只保留 sprites 中有 `capture_shiny` task 的精灵（=最低形态）。同一进化链的进化形态（有 evolve 但无 capture_shiny）自动排除。items[].status 决定完成/未完成分区。
 
 ### sprites.json（三层只读，运行时合并 sprite_progress）
 
@@ -105,31 +106,35 @@ lkwj/
 ## 数据约束
 
 - **evolve 类任务归属规则**：leader_evolve/evolve 任务只能挂在 source form（进化前形态），禁止 target form（进化后形态）出现同名 evolve 任务。sprites.json 导入/更新时必须校验此约束。
+- **异色炫彩 capture_shiny 规则**：`capture_shiny` task = 最低形态标记。同一进化链中只有初始形态有此 task，进化形态（如帽兜娃娃→大耳帽兜的进化形态）无此 task。getShinyList() 据此自动过滤。
+- **随机任务进化约束**：`pickRandom()` 中 fi>0 的 task 需 form[0] capture 完成才入池。非最低形态不进随机池。
 - **迁移脚本**：`scripts/migrate-leader-evolve.js` — 删除 leader form 的 leader_evolve 前同步用户进度。
 
 **任务类型说明**：
 - `capture` — 捕捉 1 只
 - `capture_gifted` — 捕捉 1 只了不起天分
-- `capture_shiny` — 捕捉 1 只炫彩突变（152 只精灵有此任务）
+- `capture_shiny` — 捕捉 1 只炫彩突变（157 只精灵有此任务，=最低形态标记）
 - `capture20` — 捕捉 20 只（有果实字段的精灵，需 capture 先完成）
 - `skill` — 使用技能石 N 次
 - `evolve` — 进化一次
 - `leader_evolve` — 进化为首领形态（24 只，仅挂 base form）
-- `destined_hero` — 命定勇者奖牌（144 只，依赖限时活动，不出随机池）
+- `destined_hero` — 命定勇者奖牌（144 只，依赖限时活动，不出随机池和关联任务）
 - `affection` — 亲密度（仅迪莫）
 - `fruit` — 果实获取
-- `confirm_forms` — 确认地区形态（56 只）
+- `confirm_forms` — 确认地区形态（56 只，不出关联任务）
 
 ## 已知数量
 
 | 层级 | 数量 |
 |------|------|
-| 基础形态 | 347 |
+| 基础形态 | 355 |
 | 地区形态 | ~89 |
 | 首领形态 | ~24 |
-| 任务总数 | 1834（已删 24 条 leader form 冗余 leader_evolve） |
-| 异色炫彩 items | 27（S1赛季21+通行证2+活动1+可获取3） |
-| capture_shiny 精灵 | 152 只（sprites.json） |
+| 任务总数 | ~1850（已删 24 条 leader form 冗余 leader_evolve） |
+| 异色炫彩 items | 34（S1赛季14+通行证2+活动1+S2赛季16） |
+| capture_shiny 精灵 | 157 只（sprites.json） |
+| S2 新精灵 | 8 只（小丑豆豆~小鼓象，已入 sprites.json） |
+| S2 现有异色 | 8 只（公平鸽~尖嘴狐仙，已补 capture_shiny task） |
 
 ## 待完成
 
@@ -139,8 +144,13 @@ lkwj/
 - [x] 精灵果实 Tab（99条）— 2026-05-15
 - [x] S1 赛季异色导入（27 items）+ 赛季分类体系 — 2026-05-15
 - [x] 商店货币架构（shops.json + wallet.json + 商店与货币.csv）— 2026-05-15
+- [x] capture_shiny 进化链协同过滤（同家族只显示最低形态）— 2026-05-16
+- [x] S2 赛季数据录入（8 新精灵 + 8 现有异色）— 2026-05-16
+- [x] UI 全宽重构 + 字号放大 + 元素配色 + 进度条分档 + 已完成折叠 — 2026-05-16
+- [x] 随机任务 localStorage 持久化 + 进化前置约束 + 关联任务跨链 — 2026-05-16
 - [ ] 家具图鉴：待采集 CSV → 导入 items[]
 - [ ] 外观图鉴（服装）：待采集 CSV → 导入 items[]
 - [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集数据
 - [ ] 地区形态名称修正：待 CSV 确认
 - [ ] sprites.json region 字段注入 + 地区统计恢复
+- [ ] S2 新精灵完整任务数据补充（目前只有 capture/capture_gifted/capture_shiny）
