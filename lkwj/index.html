@@ -812,6 +812,12 @@ function getShinyList() {
 
   return (data.items || [])
     .filter(i => i.category === '异色炫彩')
+    .filter(item => {
+      // 只保留最低形态：sprite 必须有 capture_shiny 任务
+      const sp = spriteNameMap[item.name];
+      if (!sp) return true; // sprites 中未找到则保留（容错）
+      return sp.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny'));
+    })
     .map(item => {
       const sp = spriteNameMap[item.name];
       const shinyTask = sp ? sp.forms.flatMap(f => f.tasks).find(t => t.type === 'capture_shiny') : null;
@@ -929,7 +935,7 @@ function renderShinyRow(s) {
 
 async function toggleShinyTask(spriteId) {
   const sp = spriteMap.get(spriteId);
-  if (!sp) return;
+  if (!sp) { console.warn('toggleShinyTask: sprite not found', spriteId); return; }
   // 找 capture_shiny 任务
   let task = null, fi = -1, ti = -1;
   sp.forms.forEach((f, i) => { f.tasks.forEach((t, j) => { if (t.type === 'capture_shiny') { task = t; fi = i; ti = j; } }); });
