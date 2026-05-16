@@ -821,6 +821,7 @@ function getShinyList() {
         name: item.name,
         element: sp ? sp.element : '',
         taskDone: shinyTask ? !!shinyTask.done : (item.status === '已完成'),
+        itemStatus: item.status || '未完成',
         limited: !!item.limited,
         limited_status: item.limited_status || '',
         source_url: item.source_url || '',
@@ -839,7 +840,7 @@ function renderShinyTab() {
 function renderShinyToolbar() {
   const el = document.getElementById('shiny-toolbar');
   const list = getShinyList();
-  const done = list.filter(s => s.taskDone).length;
+  const done = list.filter(s => s.itemStatus === '已完成').length;
 
   // 赛季/来源分类 chips
   const seasonChips = [
@@ -888,8 +889,8 @@ function renderShinyContent() {
     pageItems.forEach(s => { html += renderShinyRow(s); });
     html += '</div>';
   } else {
-    const pending = pageItems.filter(s => !s.taskDone);
-    const done = pageItems.filter(s => s.taskDone);
+    const pending = pageItems.filter(s => s.itemStatus !== '已完成');
+    const done = pageItems.filter(s => s.itemStatus === '已完成');
     if (pending.length) {
       html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
       pending.forEach(s => { html += renderShinyRow(s); });
@@ -905,7 +906,7 @@ function renderShinyContent() {
 }
 
 function renderShinyRow(s) {
-  const isDone = s.taskDone;
+  const isDone = s.itemStatus === '已完成';
   let seasonTag = '';
   if (s.limited) {
     seasonTag = s.limited_status === '赛季已过'
