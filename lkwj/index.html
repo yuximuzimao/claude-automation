@@ -6,30 +6,30 @@
   <title>洛克王国 · 收集助手</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; font-size: 15px; }
+    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; font-size: 16px; }
 
-    .header { background: #fff; padding: 16px 32px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
-    .header h1 { font-size: 18px; color: #4f46e5; font-weight: 700; }
+    .header { background: #fff; padding: 16px 36px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
+    .header h1 { font-size: 20px; color: #4f46e5; font-weight: 700; }
     .header .updated { font-size: 13px; color: #aaa; margin-left: auto; }
     .save-indicator { font-size: 12px; color: #10b981; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
     .save-indicator.show { opacity: 1; }
 
-    .nav { display: flex; gap: 2px; padding: 10px 32px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 53px; z-index: 49; }
-    .nav button { padding: 7px 18px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 14px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
+    .nav { display: flex; gap: 3px; padding: 10px 36px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 55px; z-index: 49; }
+    .nav button { padding: 9px 22px; border-radius: 22px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 15px; white-space: nowrap; transition: all 0.15s; font-weight: 500; min-width: 72px; text-align: center; }
     .nav button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .nav button:hover:not(.active) { border-color: #4f46e5; color: #4f46e5; }
 
-    .container { padding: 28px 32px; max-width: 100%; }
+    .container { padding: 28px 36px; max-width: 100%; }
 
     /* 看板 */
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 18px; }
-    .stat-card { background: #fff; border-radius: 12px; padding: 16px 18px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
+    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 18px 20px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
     .stat-card:hover { box-shadow: 0 4px 16px rgba(79,70,229,0.1); transform: translateY(-1px); }
-    .stat-card .label { font-size: 13px; color: #888; margin-bottom: 4px; }
-    .stat-card .numbers { font-size: 26px; font-weight: 700; color: #1a1a2e; }
-    .stat-card .numbers span { font-size: 13px; color: #bbb; font-weight: 400; }
-    .stat-card .hint { font-size: 15px; color: #bbb; }
-    .stat-card .hint.tbd { color: #ccc; font-size: 14px; }
+    .stat-card .label { font-size: 14px; color: #888; margin-bottom: 4px; }
+    .stat-card .numbers { font-size: 28px; font-weight: 700; color: #1a1a2e; }
+    .stat-card .numbers span { font-size: 14px; color: #bbb; font-weight: 400; }
+    .stat-card .hint { font-size: 16px; color: #bbb; }
+    .stat-card .hint.tbd { color: #ccc; font-size: 15px; }
     .progress-bar { height: 6px; background: #f0f0f5; border-radius: 4px; margin-top: 8px; overflow: hidden; }
     .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
     .progress-fill.low { background: linear-gradient(90deg, #ef4444, #f97316); }
@@ -38,64 +38,64 @@
     .progress-fill.none { background: #e5e7eb; }
 
     /* 看板模块 */
-    .dash-widget { background: #fff; border-radius: 10px; padding: 18px; border: 1px solid #e8eaf0; margin-bottom: 12px; }
+    .dash-widget { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8eaf0; margin-bottom: 14px; }
     .dash-widget.accent { border-left: 4px solid #6366f1; background: #f8f9ff; }
-    .dash-widget h3 { font-size: 14px; color: #888; margin-bottom: 10px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+    .dash-widget h3 { font-size: 15px; color: #888; margin-bottom: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 
     /* 随机任务 */
     .random-box { padding: 4px 0; }
-    .random-task-name { font-size: 17px; font-weight: 700; }
-    .random-task-desc { font-size: 14px; color: #666; margin-top: 4px; }
-    .random-task-form { font-size: 12px; color: #aaa; }
-    .random-actions { margin-top: 12px; display: flex; gap: 8px; }
-    .random-actions button { padding: 7px 18px; border-radius: 16px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 13px; transition: all 0.1s; }
+    .random-task-name { font-size: 18px; font-weight: 700; }
+    .random-task-desc { font-size: 15px; color: #666; margin-top: 4px; }
+    .random-task-form { font-size: 13px; color: #aaa; }
+    .random-actions { margin-top: 14px; display: flex; gap: 8px; }
+    .random-actions button { padding: 8px 20px; border-radius: 18px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 14px; transition: all 0.1s; }
     .random-actions button:hover { border-color: #6366f1; color: #6366f1; }
     .random-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
     .random-actions button.primary:hover { background: #059669; }
 
     /* 今日完成 */
-    .today-done { font-size: 13px; color: #888; margin-top: 6px; }
-    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 3px 10px; border-radius: 10px; margin: 2px 4px; font-size: 12px; }
+    .today-done { font-size: 14px; color: #888; margin-top: 6px; }
+    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 4px 12px; border-radius: 10px; margin: 2px 4px; font-size: 13px; }
 
     /* 提示条 */
     .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
 
     /* ── 图鉴/异色 Tab 共用 ── */
     .sprite-toolbar { margin-bottom: 12px; }
-    .sprite-search { width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 8px; }
+    .sprite-search { width: 100%; padding: 11px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 15px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 8px; }
     .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
-    .chips { display: flex; gap: 4px; flex-wrap: wrap; }
-    .chip { padding: 4px 12px; border-radius: 14px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 12px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .chips { display: flex; gap: 5px; flex-wrap: wrap; }
+    .chip { padding: 5px 14px; border-radius: 14px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.12s; user-select: none; }
     .chip:hover { border-color: #4f46e5; color: #4f46e5; }
     .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .sprite-stats { font-size: 13px; color: #999; margin: 8px 0; display: flex; gap: 14px; }
+    .sprite-stats { font-size: 14px; color: #999; margin: 10px 0; display: flex; gap: 14px; }
     .sprite-stats strong { color: #4f46e5; }
 
     /* 精灵卡片 */
     .sprite-list { display: flex; flex-direction: column; gap: 8px; }
     .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
     .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .sprite-card-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; user-select: none; }
-    .sprite-card-header .si { font-size: 20px; flex-shrink: 0; }
-    .sprite-card-header .sn { flex: 1; font-size: 16px; font-weight: 600; }
-    .sprite-card-header .se { font-size: 11px; padding: 3px 8px; border-radius: 8px; white-space: nowrap; }
-    .sprite-card-header .sm { font-size: 12px; color: #aaa; white-space: nowrap; }
-    .sprite-card-header .sa { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; }
+    .sprite-card-header { display: flex; align-items: center; gap: 6px; padding: 12px 16px; cursor: pointer; user-select: none; }
+    .sprite-card-header .si { font-size: 22px; flex-shrink: 0; }
+    .sprite-card-header .sn { font-size: 17px; font-weight: 600; flex: 0 1 auto; }
+    .sprite-card-header .se { font-size: 11px; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+    .sprite-card-header .sm { font-size: 13px; color: #aaa; white-space: nowrap; flex-shrink: 0; }
+    .sprite-card-header .sa { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; margin-left: auto; }
     .sprite-card.expanded .sa { transform: rotate(90deg); }
     .sprite-card-body { display: none; padding: 0 16px 14px; border-top: 1px solid #f0f0f5; }
     .sprite-card.expanded .sprite-card-body { display: block; }
 
     /* 关联任务组 */
     .task-group { margin-top: 10px; }
-    .task-group-label { font-size: 12px; color: #888; margin-bottom: 4px; padding-left: 2px; }
-    .task-row { display: flex; align-items: flex-start; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 14px; color: #444; }
+    .task-group-label { font-size: 13px; color: #888; margin-bottom: 4px; padding-left: 2px; }
+    .task-row { display: flex; align-items: flex-start; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 15px; color: #444; }
     .task-row:hover { background: #f8f9fc; }
     .task-row.done { color: #bbb; text-decoration: line-through; opacity: 0.5; }
-    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; margin-top: 1px; }
+    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; margin-top: 2px; }
     .task-check.checked { background: #10b981; border-color: #10b981; }
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
-    .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin-bottom: 4px; margin-top: 8px; }
-    .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
+    .form-label { font-size: 14px; font-weight: 600; color: #6366f1; margin-bottom: 4px; margin-top: 8px; }
+    .form-label .fc { font-size: 12px; color: #10b981; margin-left: 6px; }
 
     /* 分页 */
     .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 16px; }
@@ -105,24 +105,24 @@
     .pagination button:disabled { opacity: 0.3; cursor: default; }
 
     /* 背包 */
-    .section-title { font-size: 13px; color: #aaa; margin-bottom: 8px; margin-top: 4px; letter-spacing: 0.04em; font-weight: 600; }
+    .section-title { font-size: 14px; color: #aaa; margin-bottom: 8px; margin-top: 4px; letter-spacing: 0.04em; font-weight: 600; }
     .item-list { display: flex; flex-direction: column; gap: 8px; }
-    .item-row { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 12px; transition: box-shadow 0.1s; }
+    .item-row { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 14px; transition: box-shadow 0.1s; }
     .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
     .item-row.done { opacity: 0.4; }
     .item-row .item-info { flex: 1; min-width: 0; }
-    .item-row .item-name { font-size: 16px; font-weight: 500; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
+    .item-row .item-name { font-size: 17px; font-weight: 500; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
     .item-row .item-notes { font-size: 13px; color: #aaa; margin-top: 2px; line-height: 1.3; }
-    .item-row .item-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .item-row .item-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
     .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
     .check-btn.checked::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 800; }
-    .source-btn { font-size: 13px; color: #4f46e5; text-decoration: none; padding: 4px 12px; border-radius: 6px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .source-btn { font-size: 14px; color: #4f46e5; text-decoration: none; padding: 5px 14px; border-radius: 6px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
     .source-btn:hover { background: #e0e7ff; }
-    .add-source { font-size: 13px; color: #bbb; cursor: pointer; padding: 4px 12px; border-radius: 6px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .add-source { font-size: 14px; color: #bbb; cursor: pointer; padding: 5px 14px; border-radius: 6px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
-    .item-category-tag { font-size: 11px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+    .item-category-tag { font-size: 12px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
 
     /* 折叠已完成区域 */
     .section-header { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 6px 0; }
@@ -146,8 +146,9 @@
 
     .tag-limited { font-size: 12px; color: #dc2626; background: #fef2f2; padding: 3px 8px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
     .tag-archived { font-size: 12px; color: #9ca3af; background: #f9fafb; padding: 3px 8px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
-    .empty-state { text-align: center; padding: 48px 20px; color: #bbb; font-size: 15px; }
-    .empty-state small { display: block; margin-top: 6px; font-size: 13px; color: #ccc; }
+    .empty-state { text-align: center; padding: 48px 20px; color: #bbb; font-size: 16px; }
+    .empty-state small { display: block; margin-top: 6px; font-size: 14px; color: #ccc; }
+    .alert-bar { font-size: 14px; }
 
     /* 属性标签颜色 */
     .se { color: #6366f1; background: #eef2ff; } /* default */
@@ -417,8 +418,9 @@ function renderDashboard() {
     spriteTotal = spritesData.length;
     spriteOwned = spritesData.filter(s => s.collected || s.forms.some(f =>
       f.tasks.some(t => (t.type === 'capture' || t.type === 'capture_gifted') && t.done))).length;
-    yiseTotal = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny'))).length;
-    yiseOwned = spritesData.filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny' && t.done))).length;
+    const shinyItems = (data.items || []).filter(i => i.category === '异色炫彩');
+    yiseTotal = shinyItems.length;
+    yiseOwned = shinyItems.filter(i => i.status === '已完成').length;
   } else {
     const sp = cats['精灵']; spriteOwned = sp.owned; spriteTotal = sp.total;
     yiseOwned = 0; yiseTotal = 152;
@@ -802,27 +804,29 @@ function goSpritePage(p) {
   renderSpriteContent();
 }
 
-// ═══════════ 异色炫彩 Tab（sprites capture_shiny 为主，items[] 季节信息为辅） ═══════════
+// ═══════════ 异色炫彩 Tab（items[] 驱动，仅显示已出现过的异色收集） ═══════════
 function getShinyList() {
-  if (!spritesData) return [];
-  // items[] 索引：name → item
-  const itemMap = {};
-  (data.items || []).filter(i => i.category === '异色炫彩').forEach(i => { itemMap[i.name] = i; });
+  // items[] 中 category=异色炫彩 的条目 → 匹配 sprites 获取精灵信息
+  const spriteNameMap = {};
+  if (spritesData) spritesData.forEach(s => { spriteNameMap[s.name] = s; });
 
-  return spritesData
-    .filter(s => s.forms.some(f => f.tasks.some(t => t.type === 'capture_shiny')))
-    .map(s => {
-      const task = s.forms.flatMap(f => f.tasks).find(t => t.type === 'capture_shiny');
-      const item = itemMap[s.name];
+  return (data.items || [])
+    .filter(i => i.category === '异色炫彩')
+    .map(item => {
+      const sp = spriteNameMap[item.name];
+      const shinyTask = sp ? sp.forms.flatMap(f => f.tasks).find(t => t.type === 'capture_shiny') : null;
       return {
-        spriteId: s.id, name: s.name, element: s.element,
-        taskDone: !!task.done,
-        limited: item ? item.limited : false,
-        limited_status: item ? item.limited_status : '',
-        source_url: item ? item.source_url : '',
-        source_type: item ? item.source_type : '',
-        notes: item ? item.notes : '',
-        hasItem: !!item
+        itemId: item.id,
+        spriteId: sp ? sp.id : null,
+        name: item.name,
+        element: sp ? sp.element : '',
+        taskDone: shinyTask ? !!shinyTask.done : (item.status === '已完成'),
+        limited: !!item.limited,
+        limited_status: item.limited_status || '',
+        source_url: item.source_url || '',
+        source_type: item.source_type || '',
+        notes: item.notes || '',
+        hasItem: true
       };
     });
 }
@@ -876,7 +880,7 @@ function renderShinyContent() {
   const pageItems = list.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
 
   let html = '';
-  if (!list.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>赛季信息待补充（_待采集/异色炫彩完整列表.csv）</small></div>'; el.innerHTML = html; return; }
+  if (!list.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>仅显示已出现过异色收集的精灵</small></div>'; el.innerHTML = html; return; }
 
   // 状态筛选时保持平铺；全部时分离待完成/已完成
   if (shinyStatus !== 'all') {
@@ -931,6 +935,9 @@ async function toggleShinyTask(spriteId) {
   if (!task) return;
   task.done = !task.done;
   ensureSpriteProgress(spriteId, fi).tasks[String(ti)] = task.done;
+  // 同步 items[] 中的异色炫彩条目状态
+  const item = (data.items || []).find(i => i.category === '异色炫彩' && i.name === sp.name);
+  if (item) item.status = task.done ? '已完成' : '未完成';
   if (task.done) addDoneToday({ key: `shiny_${spriteId}`, name: sp.name, desc: '异色炫彩' });
   await saveData();
   renderShinyContent();
