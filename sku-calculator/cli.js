@@ -36,13 +36,19 @@ function readJson(file) {
 }
 
 // ─── parse ───────────────────────────────────────────────────────────────────
-function cmdParse(excelPath) {
+function cmdParse(excelPath, opts = {}) {
   const { parseAndSave } = require('./lib/parse-cart-adds');
   const absPath = excelPath ? path.resolve(excelPath) : findLatestDesktopExcel();
   console.log(`解析加购数据: ${absPath}`);
 
   const { skus, warnings } = parseAndSave(absPath);
   for (const w of warnings) console.warn(w);
+
+  // 供应商ID验证（传入 --supplier-id 时执行）
+  if (opts.supplierId) {
+    const { validateSupplier } = require('./lib/validate-supplier');
+    validateSupplier(opts.supplierId);
+  }
 
   const withCart = skus.filter(s => s.cartAddCount > 0).length;
   ok({
@@ -221,7 +227,7 @@ if (!cmd) {
 async function main() {
   if (cmd === 'parse') {
     if (!args[1]) fail('缺少参数: <excel文件>');
-    cmdParse(args[1]);
+    cmdParse(args[1], parseOpts(args.slice(2)));
   } else if (cmd === 'calculate') {
     cmdCalculate(parseOpts(args.slice(1)));
   } else if (cmd === 'report') {

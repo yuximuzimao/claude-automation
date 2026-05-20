@@ -99,6 +99,19 @@ async function initArchiveComp(erpId) {
   );
   console.error('[archive] 清空条件:', cleared);
   await sleep(1500);
+  // 等待"主商家编码"输入框可见——Vue 组件 mount 需要时间，直接 sleep 不可靠
+  const { waitFor } = require('./wait');
+  await waitFor(async () => {
+    const found = await cdp.eval(erpId,
+      '(function(){' +
+      '  var inputs = Array.from(document.querySelectorAll("input.el-input__inner")).filter(function(i){' +
+      '    var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;' +
+      '  });' +
+      '  return !!inputs.find(function(i){ return i.placeholder === "主商家编码"; });' +
+      '})()'
+    );
+    return found === true;
+  }, { timeoutMs: 15000, intervalMs: 500, label: '等待主商家编码输入框' });
   console.error('[archive] 页面就绪');
 }
 
@@ -129,7 +142,10 @@ async function queryArchive(erpId, erpCode) {
     if (search.error) throw new Error(search.error);
     await sleep(3500);
     const d = await cdp.eval(erpId, READ_DATALIST_JS);
-    if (d.error) return null; // 档案里找不到该编码（count=0 无结果 / count=-1 组件遍历深度不足）
+    if (d.error) {
+      if (d.count === 0) return null; // 精确查询无结果，真实不存在
+      throw new Error(`${d.error} (count=${d.count})`); // Vue未就绪等瞬态错误，交给 retry
+    }
     return d;
   }, { maxRetries: 3, delayMs: 2000, label: `queryArchive ${erpCode}` });
 

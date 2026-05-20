@@ -12,13 +12,14 @@ const OUTPUT_FILE = path.join(__dirname, '../data/cart-adds.json');
 
 // 已知的列名映射（鲸灵导出格式可能变化，按优先级尝试）
 const COL_ALIASES = {
-  货号:      ['货号'],
-  商品名称:  ['商品名称'],
-  skuName:   ['属性1', '属性1值', '主销售属性', 'sku名称'],
-  加购件数:  ['加购件数', '加购数量'],
-  加购用户数: ['加购用户数', '加购人数'],
-  skuId:     ['sku_id', 'sku id', 'skuid'],
-  spuId:     ['spu_id', 'spu id', 'spuid'],
+  货号:       ['货号'],
+  商品名称:   ['商品名称'],
+  skuName:    ['属性1', '属性1值', '主销售属性', 'sku名称'],
+  加购件数:   ['加购件数', '加购数量'],
+  加购用户数:  ['加购用户数', '加购人数'],
+  skuId:      ['sku_id', 'sku id', 'skuid'],
+  spuId:      ['spu_id', 'spu id', 'spuid'],
+  supplierId: ['供应商id', '供应商ID', 'supplier_id'],
 };
 
 /**
@@ -59,13 +60,14 @@ function parseCartAdds(filePath) {
 
   // 找各列索引
   const cols = {
-    货号:      findCol(headers, '货号'),
-    商品名称:  findCol(headers, '商品名称'),
-    skuName:   findCol(headers, 'skuName'),
-    加购件数:  findCol(headers, '加购件数'),
-    加购用户数: findCol(headers, '加购用户数'),
-    skuId:     findCol(headers, 'skuId'),
-    spuId:     findCol(headers, 'spuId'),
+    货号:       findCol(headers, '货号'),
+    商品名称:   findCol(headers, '商品名称'),
+    skuName:    findCol(headers, 'skuName'),
+    加购件数:   findCol(headers, '加购件数'),
+    加购用户数:  findCol(headers, '加购用户数'),
+    skuId:      findCol(headers, 'skuId'),
+    spuId:      findCol(headers, 'spuId'),
+    supplierId: findCol(headers, 'supplierId'),
   };
 
   const warnings = [];
@@ -101,8 +103,9 @@ function parseCartAdds(filePath) {
       skuName,
       productName: cols.商品名称 >= 0 ? (row[cols.商品名称] || '').toString().trim() : '',
       cartAddCount,
-      skuId: cols.skuId >= 0 ? (row[cols.skuId] || null) : null,
-      spuId: cols.spuId >= 0 ? (row[cols.spuId] || null) : null,
+      skuId:      cols.skuId >= 0 ? (row[cols.skuId] || null) : null,
+      spuId:      cols.spuId >= 0 ? (row[cols.spuId] || null) : null,
+      supplierId: cols.supplierId >= 0 ? (row[cols.supplierId] != null ? row[cols.supplierId].toString().trim() : null) : null,
     });
   }
 
