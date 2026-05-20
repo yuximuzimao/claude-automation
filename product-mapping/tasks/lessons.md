@@ -89,3 +89,57 @@ Session 级新发现记在这里。稳定后迁入 `docs/INDEX.md §6`，不在�
 - `downloadProducts(erpId, shopName)` 只需 ERP tab，不需鲸灵 tab
 - `listActiveProducts(jlId)` 才需要鲸灵 tab
 - 判断依据：读函数参数列表，不是看 CLI `getTargetIds()` 的调用
+
+---
+
+## Lesson: 人工处理部分 SKU 后，必须重跑 check 才能继续 match
+
+**现象**：match 中途某 SKU 出错，人工在 ERP 界面手动完成匹配。之后直接重跑 match，同一 SKU 被再次尝试匹配，触发同样错误。
+
+**根因**：`getTodo()` 的判断条件是 `erpCode === null`。`erpCode` 只有 `check.js` 运行时通过读取 ERP 实时对应表才会被填入。人工在 ERP 界面完成匹配后，`sku-records.json` 里这条记录的 `erpCode` 仍是 null，match 看到的还是"未匹配"。
+
+同时，`auto-match2.js main()` 每次启动时都会清空 `log.done[]` 和 `log.failed[]`，所以"上次 done 过"的记录对本次毫无防护作用。
+
+**正确流程**：人工处理若干 SKU → **重跑 check** → sku-records.json 被全量重写（erpCode 同步为 ERP 最新状态）→ 重跑 match（getTodo 返回剩余未匹配）。
+
+**铁律**：任何人工 ERP 操作后，下一步必须是 `check`，不能是 `match`。
+
+---
+
+## Lesson: 同一 productCode 多比例套件触发「提示」弹窗，当前代码不处理
+
+**现象**：同一 productCode（如 `0519sy`）有两个 platformCode，第一个（0519-3）匹配为青柑×10+茉莉×10。第二个（0519-4）尝试匹配为青柑×5+茉莉×5 时，ERP 弹出「提示」弹窗（内容："该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"），后面的「选择商品」弹窗同时打开但被遮挡，代码报 `Expected 选择商品 dialog, got: 提示`。
+
+**根因**：ERP 在"同 productCode 已有未完成套件、且新套件比例不同"时，在打开选择商品弹窗之前插入一个确认弹窗。当前 copy-as-suite.js 没有处理这个前置弹窗。
+
+**现实处置**：遇到此情况，人工在 ERP 处理（点提示弹窗确认或取消），然后走「人工处理后重跑 check」流程。
+
+**后续优化方向**（如有必要）：在 `clickCopyAsSuite` 后、`addProductToDialog` 前，检测「提示」弹窗是否存在，若存在则先点确认再继续。
+
+---
+
+## Lesson: archive.js queryArchive 错误分类：count=0 vs 瞬态错误（2026-05-20）
+
+**现象**：档案V2查询出现 `dataList 为空 (count=-1)` 时，旧代码 `if (d.error) return null` 一律返回 null，retry 永远不触发，SKU 静默丢失（0 resolved）。
+
+**根因**：count=-1 是 Vue 组件未就绪的瞬态错误，与 count=0（精确查询真实无结果）是完全不同的两种情况，旧代码没有区分：
+- `count=0`：真实不存在 → 返回 null（正确）
+- `count=-1` 或其他：Vue 未就绪等瞬态错误 → 应 throw，让 retry 重试
+
+**修复**（已提交 2f7b644）：
+```javascript
+if (d.error) {
+  if (d.count === 0) return null;
+  throw new Error(`${d.error} (count=${d.count})`);
+}
+```
+
+**影响**：sku-calculator 的 resolve-components 曾因此 bug 导致 56 个 erpCode 全部查询失败（0/56 resolved）。修复后 54/54。
+
+**现象**：同一 productCode（如 `0519sy`）有两个 platformCode，第一个（0519-3）匹配为青柑×10+茉莉×10。第二个（0519-4）尝试匹配为青柑×5+茉莉×5 时，ERP 弹出「提示」弹窗（内容："该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"），后面的「选择商品」弹窗同时打开但被遮挡，代码报 `Expected 选择商品 dialog, got: 提示`。
+
+**根因**：ERP 在"同 productCode 已有未完成套件、且新套件比例不同"时，在打开选择商品弹窗之前插入一个确认弹窗。当前 copy-as-suite.js 没有处理这个前置弹窗。
+
+**现实处置**：遇到此情况，人工在 ERP 处理（点提示弹窗确认或取消），然后走「人工处理后重跑 check」流程。
+
+**后续优化方向**（如有必要）：在 `clickCopyAsSuite` 后、`addProductToDialog` 前，检测「提示」弹窗是否存在，若存在则先点确认再继续。

@@ -18,6 +18,7 @@
 | `lib/write-report.js` | 生成输出 xlsx | 修改报告格式时 |
 | `lib/resolve-components.js` | ERP 组合明细查询 + **动态生成 product-columns.json** | 接入 ERP 时 |
 | `lib/query-stock.js` | ERP 库存状态查询（依赖 product-columns.json 已生成） | 接入 ERP 时 |
+| `lib/validate-supplier.js` | 供应商ID校验（parse 后执行，不匹配即中止） | 使用 --supplier-id 参数时 |
 | `data/product-columns.json` | **运行时生成**（resolve-components 写出，不手动维护） | 调试单品映射时 |
 | `data/sku-components.json` | 组合明细（运行时生成） | 查询/调试时 |
 | `data/warehouse-stock.json` | 云仓库存（运行时生成） | 查询/调试时 |
@@ -39,6 +40,7 @@ sku-calculator/
     write-report.js
     resolve-components.js     # ERP 组合明细 + 动态生成 product-columns.json
     query-stock.js            # ERP 库存查询（依赖 resolve-components 先跑）
+    validate-supplier.js      # 供应商ID校验（parse --supplier-id 参数）
   data/                       # 全部运行时生成，不手动维护，已加入 .gitignore
     product-columns.json      # resolve-components 生成（ERP原名即displayName）
     sku-components.json       # resolve-components 生成

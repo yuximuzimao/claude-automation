@@ -38,8 +38,10 @@
 **正确步骤顺序**（resolve-components 必须先于 resolve-stock）：
 
 ```
-parse → resolve-components → resolve-stock → calculate → report
+parse --supplier-id <商家ID> → resolve-components → resolve-stock → calculate → report
 ```
+
+**供应商ID验证**：`parse --supplier-id <id>` 会校验 Excel 中所有行的「供应商id」列是否与目标商家ID一致，任一不匹配立即中止。商家ID在 ERP 后台右上角可查（每次运行需实时读取，不能凭记忆）。
 
 原因：resolve-stock 依赖 product-columns.json 做 ERP 名→displayName 映射，而该文件由 resolve-components 动态生成。
 
