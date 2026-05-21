@@ -13,6 +13,7 @@ const sse = require('./sse');
 const { inferDecision } = require('../infer');
 const { inferWithAI } = require('../ai-infer');
 const { RETURN_KEYWORDS, getHoursUntilNextScan } = require('../constants');
+const { extractShippedTrackings } = require('../helpers');
 
 const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
@@ -145,21 +146,7 @@ async function processOne(queueItem, options = {}) {
 
   // ── 已拦截检测：同快递单号已经创建过拦截提醒 → 注入标记 ──────────
   // 检查主订单+赠品的所有分包快递单号（不只是第一行）
-  const allShipTrackings = (function(cd) {
-    const result = [];
-    const seen = new Set();
-    function addFrom(erpData) {
-      const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
-      rows.forEach(row => {
-        if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
-        const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
-        ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
-      });
-    }
-    addFrom(cd.erpSearch);
-    addFrom(cd.giftErpSearch);
-    return result;
-  })(sim.collectedData);
+  const allShipTrackings = extractShippedTrackings(sim.collectedData);
 
   for (const shipTracking of allShipTrackings) {
     const interceptRecord = db.hasIntercept(shipTracking);

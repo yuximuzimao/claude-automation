@@ -12,6 +12,7 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
+const { extractShippedTrackings } = require('../helpers');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -578,19 +579,7 @@ async function execExecute(op) {
       try {
         const cd = sim.collectedData || {};
         const accountNote = queueItem && queueItem.accountNote || '未知账号';
-        const allShipTrackings = (function() {
-          const result = [], seen = new Set();
-          function addFrom(erpData) {
-            const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
-            rows.forEach(row => {
-              if (row.status !== '卖家已发货') return;
-              const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
-              ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
-            });
-          }
-          addFrom(cd.erpSearch); addFrom(cd.giftErpSearch);
-          return result;
-        })();
+        const allShipTrackings = extractShippedTrackings(cd);
         const erpRows = cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows || [];
         const internalId = erpRows[0] && erpRows[0].internalId || '';
         const archiveTitle = cd.productArchive && cd.productArchive.title || '';
@@ -614,19 +603,7 @@ async function execExecute(op) {
     if (sim.decision.reason && sim.decision.reason.includes('取消')) {
       try {
         const cd = sim.collectedData || {};
-        const allShipTrackings = (function() {
-          const result = [], seen = new Set();
-          function addFrom(erpData) {
-            const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
-            rows.forEach(row => {
-              if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
-              const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
-              ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
-            });
-          }
-          addFrom(cd.erpSearch); addFrom(cd.giftErpSearch);
-          return result;
-        })();
+        const allShipTrackings = extractShippedTrackings(cd);
         allShipTrackings.forEach(t => {
           if (db.hasIntercept(t)) {
             db.removeIntercept(t);
