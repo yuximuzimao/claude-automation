@@ -9,148 +9,212 @@
 | 启动本地服务 | `node server.js`（端口 8899） |
 | 打开界面 | 浏览器访问 `http://localhost:8899` |
 | 修改收集进度 | 直接编辑 `data/collections.json` 或通过 UI 勾选 |
-| 精灵任务数据 | `data/sprites.json`（只读，355 精灵，三层结构） |
-| 精灵图鉴（合并进度） | GET `/api/sprites`（sprites.json + sprite_progress 合并） |
-| 异色炫彩过滤规则 | `getShinyList()` capture_shiny 过滤：只保留有 capture_shiny task 的最低形态，进化形态自动排除 |
-| 数据采集需求 | `data/_待采集/README.md`（外观/家具/异色/地区形态修正模板） |
-| 商店与货币数据 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json`（用户持有量） |
-| 查看精灵原始数据 | `data/sprites_raw.json`（由 Excel 生成，已废弃，保留备查） |
+| 宠物定义 | `data/pets.json`（355 宠物，对象 key="pet_N"） |
+| 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
+| 进化链 | `data/evolution-chains.json`（162 链，含 9 分支链） |
+| 用户进度 | `data/collections.json`（sprite_progress + shiny_progress） |
+| 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
+| 数据采集需求 | `data/_待采集/README.md` |
+| 迁移脚本 | `scripts/migrate-*.js`（从 sprites.json 迁移到新格式） |
 
 ## DO FIRST
 
 进入本项目时：
 1. 确认 server 是否已运行：`lsof -ti :8899`（有输出=已运行）
 2. 若未运行：`node server.js &`
-3. 核心数据文件：`data/collections.json`（看板/异色/进度）和 `data/sprites.json`（精灵任务库）
+3. 核心数据文件：`data/pets.json` + `data/tasks.json` + `data/evolution-chains.json` + `data/collections.json`
 
 ## PATHS
 
 ```
 lkwj/
-├── server.js                  # HTTP 服务器，端口 8899，GET /api/data + /api/sprites + POST /api/save
-├── index.html                 # 单页 App：看板+11品类标签（精灵/异色炫彩/果实/家具/服装/称号/星星/遗迹/支线/扭蛋/音乐）
+├── server.js                  # HTTP 服务器，端口 8899
+├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 精灵果实 + 7 品类标签
 ├── scripts/
-│   ├── build-sprites-pinyin.js  # 为 sprites.json 生成 pinyin 字段
-│   └── migrate-leader-evolve.js # 删除 leader form 冗余任务前迁移进度
+│   ├── migrate-to-pets.js            # sprites.json → pets.json 迁移
+│   ├── migrate-to-tasks.js           # sprites.json → tasks.json 迁移
+│   ├── migrate-to-evolution-chains.js # sprites.json → evolution-chains.json 迁移
+│   ├── migrate-collections.js        # collections.json 格式迁移 + pets.json 回填
+│   ├── build-sprites-pinyin.js       # 拼音字段生成（适配新格式）
+│   └── migrate-leader-evolve.js      # 已过时，保留备查
 └── data/
-    ├── collections.json       # 主数据：进度看板 + 异色炫彩收集列表（UI 读写此文件）
-    ├── sprites.json           # 精灵任务库：355 精灵，~1850 个任务，三层结构，含 pinyin 字段；capture_shiny=最低形态标记
-    ├── sprites_raw.json       # 原始数据（Excel 导出，勿写入）
-    ├── shops.json             # 商店清单：36 商店 × 6 货币，售卖物品待填充
+    ├── pets.json              # 宠物定义（355 只）：形态 + 标签 + 元素数组
+    ├── tasks.json             # 任务定义（355 组）：form-independent，desc 不含宠物名
+    ├── evolution-chains.json  # 进化链（162 链）：独立于形态，支持分支
+    ├── collections.json       # 用户进度：sprite_progress + shiny_progress
+    ├── sprites.json           # DEPRECATED: 旧单文件格式，保留备查
+    ├── sprites_raw.json       # 原始数据（Wiki 抓取，勿写入）
+    ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
-    ├── _待采集/                # 数据采集模板（交给其他模型填写）
-        ├── README.md            #   采集需求说明文档
-        ├── 外观图鉴.csv         #   空白模板
-        ├── 家具图鉴.csv         #   空白模板
-        ├── 异色炫彩完整列表.csv  #   152只精灵预填，待确认
-        ├── 地区形态名称修正.csv  #   100个形态预填，待修正游戏内名称
-        ├── 商店与货币.csv       #   空白模板（36店×6货币，售卖物品待填充）
-        └── 其他类别统计.csv     #   空白模板
+    └── _待采集/               # 数据采集模板
 ```
 
-## 数据结构
+## 数据模型
 
-### collections.json（UI 读写）
+### pets.json — 宠物定义（静态）
 
 ```json
 {
-  "meta": { "last_updated": "YYYY-MM-DD", "game": "洛克王国世界" },
-  "categories": {
-    "精灵": { "total": 347, "owned": 304 },
-    "外观": { "total": null, "owned": null }
-  },
-  "items": [
-    {
-      "id": "yise_001",
-      "category": "异色炫彩",
-      "name": "...",
-      "status": "已完成|未完成",
-      "limited": false,
-      "limited_status": "第一赛季|第二赛季|活动|通行证|可获取",
-      "source_url": "",
-      "source_type": "链接|视频|图文",
-      "notes": ""
-    }
-  ],
-  "sprite_progress": { "1": { "collected": false, "forms": { "0": { "collected": false, "tasks": { "0": true } } } } },
-  "activities": []
+  "pet_18": {
+    "name": "雪绒鸟",
+    "element": ["翼"],
+    "forms": {
+      "basic":  { "formName": "本来的样子", "obtainMethods": ["商店街周边"] },
+      "spring": { "formName": "春天的样子", "obtainMethods": [] },
+      "summer": { "formName": "夏天的样子", "obtainMethods": [] },
+      "autumn": { "formName": "秋天的样子", "obtainMethods": [] }
+    },
+    "tags": {
+      "shiny": { "tagName": "异色", "limitedTime": "第一赛季" },
+      "chromatic": { "tagName": "炫彩" },
+      "boss": { "tagName": "首领" }
+    },
+    "pinyin": { "full": "xuerongniao", "initial": "xrn" },
+    "fruit": { "name": "雪绒鸟果实", "acquired": false }
+  }
 }
 ```
 
-> **异色炫彩过滤规则**：getShinyList() 从 items[] 驱动，额外过滤只保留 sprites 中有 `capture_shiny` task 的精灵（=最低形态）。同一进化链的进化形态（有 evolve 但无 capture_shiny）自动排除。items[].status 决定完成/未完成分区。
+字段说明：
+- `name` — 宠物中文名
+- `element` — 元素数组（支持双元素），如 `["光"]` 或 `["幽", "恶"]`
+- `forms` — 形态定义，使用语义键名（`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`, `variant_N`）
+- `tags` — 稀有度标签（`shiny`, `chromatic`, `boss`）。标签独立于形态，进化时保留
+- `pinyin` — 拼音（全拼 + 首字母），用于搜索
+- `fruit` — 果实信息（可选，99 只精灵有此字段）
+- `destined_hero` — 命定勇者标记（可选，144 只）
+- `notes` — 备注
+- `_todo_rename` — 标记形态键名待确认（88 个形态）
 
-### sprites.json（三层只读，运行时合并 sprite_progress）
+### tasks.json — 任务定义（静态）
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "迪莫",
-    "element": "光",
-    "pinyin": { "full": "dimo", "initial": "dm" },
-    "fruit": null,
-    "forms": [
-      {
-        "type": "base",
-        "label": "基础形态",
-        "tasks": [
-          { "type": "capture", "desc": "捕捉1只迪莫", "done": false },
-          { "type": "capture_gifted", "desc": "捕捉1只了不起天分的迪莫", "done": false }
-        ]
-      }
-    ]
-  }
-]
+{
+  "pet_20": [
+    { "type": "capture", "desc": "捕捉1只" },
+    { "type": "capture_gifted", "desc": "捕捉1只了不起天分的" },
+    { "type": "skill", "desc": "使用", "skillName": "龙卷风", "count": 3 },
+    { "type": "fruit", "desc": "捕捉20只" },
+    { "type": "leader_evolve", "desc": "进化为首领形态" }
+  ]
+}
 ```
+
+任务类型（10 种）：`capture`, `capture_gifted`, `capture_shiny`, `fruit`(原 capture20), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
+
+关键规则：
+- 任务是**形态无关**的——同一宠物所有形态共享同一份任务进度
+- `desc` 不含宠物名，前台拼接（如 "岚鸟" + "使用" + "龙卷风" + "3" + "次"）
+- skill 类任务额外提供 `skillName` 和 `count`
+
+### evolution-chains.json — 进化链（静态）
+
+```json
+{
+  "chainId": 41,
+  "baseSpeciesId": "pet_41",
+  "nodes": {
+    "pet_41": { "evolvesTo": [{ "toSpeciesId": "pet_42", "condition": { "type": "level", "level": 16 } }] },
+    "pet_42": { "evolvesTo": [{ "toSpeciesId": "pet_43", "condition": { "type": "level", "level": 32 } }] },
+    "pet_43": { "evolvesTo": [] }
+  }
+}
+```
+
+- 162 条链（100 条多节点 + 62 条单节点），9 条分支链
+- 条件类型：`level`（等级）, `bloodline`（血脉）, `defeat_monster`（打怪），可复合
+- 空 `evolvesTo` = 链终点
+
+### collections.json — 用户进度（动态）
+
+```json
+{
+  "meta": { "last_updated": "2026-05-21", "game": "洛克王国世界" },
+  "categories": { "精灵": { "total": 347, "owned": 304 }, ... },
+  "items": [...],
+  "sprite_progress": {
+    "pet_1": { "tasks": { "0": true, "1": true } },
+    "pet_18": { "forms_collected": ["basic", "spring"] }
+  },
+  "shiny_progress": { "pet_5": true, "pet_18": false }
+}
+```
+
+- `sprite_progress` — 按 pet ID 索引，`tasks` 为任务完成状态，`forms_collected` 为已收集形态
+- `shiny_progress` — 按 pet ID 索引的异色收集状态（0/1）
+- `items[]` — 非宠物类收集项（家具、外观等）
+
+## 核心设计原则
+
+### 形态 (form) = 同一物种的外观变体
+- 季节形态、地区形态、蜕皮形态属于 forms，不是进化链
+- 语义键名列表：`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`
+- 迁移阶段的 `variant_N` 占位需在游戏中确认后改为语义键（标记 `_todo_rename: true`）
+- 新增 form key 前先在本文档约定
+
+### 标签 (tag) = 稀有度标记
+- `shiny`(异色)、`chromatic`(炫彩)、`boss`(首领)
+- 多标签可共存（如异色+炫彩+首领）
+- 标签独立于形态
+
+### ★ 进化继承规则 ★
+> **进化仅改变 speciesId，form 与 tag 默认继承。**
+> 异色奇丽草进化 → 异色奇丽叶。首领奇丽草进化 → 首领奇丽叶。
+> 这是整个系统最核心的世界规则。
+
+### 数据源不交叉
+- `collections.json` = 进度状态（有/没有）
+- `pets.json` = 世界观定义（静态数据）
+- **禁止从 collection 反向生成定义数据**
+
+### 获取方式
+- `obtainMethods` 只写直接获取方式，禁止"由 XX 进化"
+- 进化来源在 evolution-chains.json 中
 
 ## 数据约束
 
-- **evolve 类任务归属规则**：leader_evolve/evolve 任务只能挂在 source form（进化前形态），禁止 target form（进化后形态）出现同名 evolve 任务。sprites.json 导入/更新时必须校验此约束。
-- **异色炫彩 capture_shiny 规则**：`capture_shiny` task = 最低形态标记。同一进化链中只有初始形态有此 task，进化形态（如帽兜娃娃→大耳帽兜的进化形态）无此 task。getShinyList() 据此自动过滤。
-- **随机任务进化约束**：`pickRandom()` 中 fi>0 的 task 需 form[0] capture 完成才入池。非最低形态不进随机池。
-- **迁移脚本**：`scripts/migrate-leader-evolve.js` — 删除 leader form 的 leader_evolve 前同步用户进度。
-
-**任务类型说明**：
-- `capture` — 捕捉 1 只
-- `capture_gifted` — 捕捉 1 只了不起天分
-- `capture_shiny` — 捕捉 1 只炫彩突变（157 只精灵有此任务，=最低形态标记）
-- `capture20` — 捕捉 20 只（有果实字段的精灵，需 capture 先完成）
-- `skill` — 使用技能石 N 次
-- `evolve` — 进化一次
-- `leader_evolve` — 进化为首领形态（24 只，仅挂 base form）
-- `destined_hero` — 命定勇者奖牌（144 只，依赖限时活动，不出随机池和关联任务）
-- `affection` — 亲密度（仅迪莫）
-- `fruit` — 果实获取
-- `confirm_forms` — 确认地区形态（56 只，不出关联任务）
+- **evolve 类任务归属**：leader_evolve/evolve 只需挂在进化前的 pet 上（form-independent）
+- **异色炫彩展示**：由 `pets.json` 的 `tags.shiny` 驱动，仅展示进化最终形态（标签随进化传递）
+- **异色炫彩进度**：独立统计于 `collections.shiny_progress`，不由 capture_shiny 任务状态驱动
+- **随机任务排除**：`destined_hero`、`fruit`、`confirm_forms` 任务类型不出现在随机池
+- **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
 
 ## 已知数量
 
 | 层级 | 数量 |
 |------|------|
-| 基础形态 | 355 |
-| 地区形态 | ~89 |
-| 首领形态 | ~24 |
-| 任务总数 | ~1850（已删 24 条 leader form 冗余 leader_evolve） |
-| 异色炫彩 items | 34（S1赛季14+通行证2+活动1+S2赛季16） |
-| capture_shiny 精灵 | 157 只（sprites.json） |
-| S2 新精灵 | 8 只（小丑豆豆~小鼓象，已入 sprites.json） |
-| S2 现有异色 | 8 只（公平鸽~尖嘴狐仙，已补 capture_shiny task） |
+| 宠物总数 | 355 |
+| 形态：basic | 355 |
+| 形态：季节/蜕皮/地区 | 100 |
+| 首领标签 | 24 |
+| 异色标签 | 165（含进化链各形态，最终形态 49） |
+| 炫彩标签 | 0（待采集） |
+| 任务总数 | 1763（form-independent） |
+| 进化链 | 162（100 多节点 + 62 单节点，9 分支） |
+| 精灵果实 | 99 种 |
+| S2 新精灵 | 8 只（小丑豆豆~小鼓象） |
+
+## API 端点
+
+| 端点 | 说明 |
+|------|------|
+| `GET /api/pets` | 宠物定义 |
+| `GET /api/tasks` | 任务定义 |
+| `GET /api/evolution-chains` | 进化链 |
+| `GET /api/game-data` | 合并数据（pets+tasks+chains+progress） |
+| `GET /api/data` | 原始 collections.json |
+| `POST /api/save` | 保存 collections.json |
+| `GET /api/wallet` | 钱包数据 |
+| `POST /api/wallet` | 保存钱包 |
 
 ## 待完成
 
-- [x] sprites.json 三层结构接入 + 精灵图鉴 Tab — 2026-05-15
-- [x] 拼音搜索 + 分页 + 状态筛选（全部/未完成/已完成）— 2026-05-15
-- [x] 12 品类标签 + 随机任务看板 + 关联任务 — 2026-05-15
-- [x] 精灵果实 Tab（99条）— 2026-05-15
-- [x] S1 赛季异色导入（27 items）+ 赛季分类体系 — 2026-05-15
-- [x] 商店货币架构（shops.json + wallet.json + 商店与货币.csv）— 2026-05-15
-- [x] capture_shiny 进化链协同过滤（同家族只显示最低形态）— 2026-05-16
-- [x] S2 赛季数据录入（8 新精灵 + 8 现有异色）— 2026-05-16
-- [x] UI 全宽重构 + 字号放大 + 元素配色 + 进度条分档 + 已完成折叠 — 2026-05-16
-- [x] 随机任务 localStorage 持久化 + 进化前置约束 + 关联任务跨链 — 2026-05-16
+- [x] 4 文档体系重构（pets + tasks + evolution-chains + collections）— 2026-05-21
+- [x] 形态语义化键名 + 标签系统 + 进化链独立
+- [x] UI 适配新数据模型（全部 Tab 通过）
 - [ ] 家具图鉴：待采集 CSV → 导入 items[]
-- [ ] 外观图鉴（服装）：待采集 CSV → 导入 items[]
-- [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集数据
-- [ ] 地区形态名称修正：待 CSV 确认
-- [ ] sprites.json region 字段注入 + 地区统计恢复
-- [ ] S2 新精灵完整任务数据补充（目前只有 capture/capture_gifted/capture_shiny）
+- [ ] 外观图鉴：待采集 CSV → 导入 items[]
+- [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集
+- [ ] 地区形态名称修正：variant_N → 语义 key
+- [ ] S2 新精灵完整任务数据补充
+- [ ] 炫彩（chromatic）数据采集与录入

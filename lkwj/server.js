@@ -4,7 +4,9 @@ const path = require('path');
 
 const PORT = 8899;
 const DATA_FILE = path.join(__dirname, 'data', 'collections.json');
-const SPRITES_FILE = path.join(__dirname, 'data', 'sprites.json');
+const PETS_FILE = path.join(__dirname, 'data', 'pets.json');
+const TASKS_FILE = path.join(__dirname, 'data', 'tasks.json');
+const CHAINS_FILE = path.join(__dirname, 'data', 'evolution-chains.json');
 const WALLET_FILE = path.join(__dirname, 'data', 'wallet.json');
 
 const MIME = {
@@ -16,10 +18,24 @@ const MIME = {
   '.js': 'text/javascript',
 };
 
+function readJSON(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+function serveJSON(res, data) {
+  res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+  res.end(JSON.stringify(data));
+}
+
+function serveError(res, code, msg) {
+  res.writeHead(code);
+  res.end(JSON.stringify({ error: msg }));
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
 
-  // API: 保存数据
+  // API: Save collections
   if (req.method === 'POST' && url.pathname === '/api/save') {
     let body = '';
     req.on('data', chunk => body += chunk);
@@ -27,58 +43,80 @@ const server = http.createServer((req, res) => {
       try {
         const parsed = JSON.parse(body);
         fs.writeFileSync(DATA_FILE, JSON.stringify(parsed, null, 2), 'utf8');
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ ok: true }));
+        serveJSON(res, { ok: true });
       } catch (e) {
-        res.writeHead(400);
-        res.end(JSON.stringify({ error: e.message }));
+        serveError(res, 400, e.message);
       }
     });
     return;
   }
 
-  // API: 读数据
+  // API: Raw collections data
   if (req.method === 'GET' && url.pathname === '/api/data') {
     try {
       const content = fs.readFileSync(DATA_FILE, 'utf8');
       res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
       res.end(content);
     } catch (e) {
-      res.writeHead(500);
-      res.end(JSON.stringify({ error: e.message }));
+      serveError(res, 500, e.message);
     }
     return;
   }
 
-  // API: 读精灵数据（合并进度）
-  if (req.method === 'GET' && url.pathname === '/api/sprites') {
+  // API: Pets
+  if (req.method === 'GET' && url.pathname === '/api/pets') {
     try {
-      const sprites = JSON.parse(fs.readFileSync(SPRITES_FILE, 'utf8'));
-      const coll = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-      const progress = coll.sprite_progress || {};
-      // 合并进度到精灵数据
-      const merged = sprites.map(sp => {
-        const spProgress = progress[String(sp.id)] || {};
-        const forms = sp.forms.map((f, fi) => {
-          const fp = (spProgress.forms || {})[String(fi)] || {};
-          const tasks = f.tasks.map((t, ti) => ({
-            ...t,
-            done: fp.tasks ? !!fp.tasks[String(ti)] : false
-          }));
-          return { ...f, collected: !!fp.collected, tasks };
-        });
-        return { ...sp, collected: !!spProgress.collected, forms };
-      });
-      res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
-      res.end(JSON.stringify(merged));
+      serveJSON(res, readJSON(PETS_FILE));
     } catch (e) {
-      res.writeHead(500);
-      res.end(JSON.stringify({ error: e.message }));
+      serveError(res, 500, e.message);
     }
     return;
   }
 
-  // API: 读钱包
+  // API: Tasks
+  if (req.method === 'GET' && url.pathname === '/api/tasks') {
+    try {
+      serveJSON(res, readJSON(TASKS_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Evolution chains
+  if (req.method === 'GET' && url.pathname === '/api/evolution-chains') {
+    try {
+      serveJSON(res, readJSON(CHAINS_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Merged game data (pets + tasks + chains + progress)
+  if (req.method === 'GET' && url.pathname === '/api/game-data') {
+    try {
+      const pets = readJSON(PETS_FILE);
+      const tasks = readJSON(TASKS_FILE);
+      const chains = readJSON(CHAINS_FILE);
+      const collections = readJSON(DATA_FILE);
+
+      serveJSON(res, {
+        pets,
+        tasks,
+        evolutionChains: chains,
+        sprite_progress: collections.sprite_progress || {},
+        shiny_progress: collections.shiny_progress || {},
+        categories: collections.categories || {},
+        meta: collections.meta || {},
+      });
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Wallet GET
   if (req.method === 'GET' && url.pathname === '/api/wallet') {
     try {
       if (fs.existsSync(WALLET_FILE)) {
@@ -86,35 +124,31 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
         res.end(content);
       } else {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ currencies: {}, income_sources: [] }));
+        serveJSON(res, { currencies: {}, income_sources: [] });
       }
     } catch (e) {
-      res.writeHead(500);
-      res.end(JSON.stringify({ error: e.message }));
+      serveError(res, 500, e.message);
     }
     return;
   }
 
-  // API: 保存钱包
+  // API: Wallet POST
   if (req.method === 'POST' && url.pathname === '/api/wallet') {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       try {
-        JSON.parse(body); // validate
+        JSON.parse(body);
         fs.writeFileSync(WALLET_FILE, body, 'utf8');
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ ok: true }));
+        serveJSON(res, { ok: true });
       } catch (e) {
-        res.writeHead(400);
-        res.end(JSON.stringify({ error: e.message }));
+        serveError(res, 400, e.message);
       }
     });
     return;
   }
 
-  // 静态文件
+  // Static files
   let filePath = path.join(__dirname, url.pathname === '/' ? 'index.html' : url.pathname);
   if (!filePath.startsWith(__dirname)) { res.writeHead(403); res.end(); return; }
 
