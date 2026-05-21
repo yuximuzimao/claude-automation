@@ -947,7 +947,14 @@ function inferDecision(sim, queueItem) {
   const ctx = { cd, ticket, queueItem, s, fin };
 
   if (type === '仅退款') return inferRefundOnly(ctx);
-  if (type === '退货退款') return inferRefundReturn(ctx);
+  if (type === '退货退款') {
+    const result = inferRefundReturn(ctx);
+    // 退货退款检测已有拦截记录 → 追加 warning 但不改变决策
+    if (cd.intercepted && !result.warnings.includes(`已有拦截记录`)) {
+      result.warnings.push(`该工单关联运单 ${cd.intercepted.tracking} 已有拦截记录（来自 ${cd.intercepted.workOrderNum}），请核实是否重复`);
+    }
+    return result;
+  }
 
   s({ type: 'branch', text: `上报 → 工单类型未识别: ${type || '未知'}` });
   return fin(escalate(`工单类型未识别: ${type || '未知'}`));
