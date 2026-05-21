@@ -375,10 +375,18 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const margin = remainingHours != null && hoursUntilNextScan != null
       ? remainingHours - hoursUntilNextScan
       : null;
-    const safeToWait = margin != null ? margin > SAFETY_MARGIN_HOURS : null;
+    const safeToWait = margin != null
+      ? margin > SAFETY_MARGIN_HOURS
+      // fallback：hoursUntilNextScan 缺失时用剩余时间 vs REMIND_HOURS 兜底
+      : (remainingHours != null ? remainingHours > REMIND_HOURS : null);
+    if (margin === null && remainingHours != null) {
+      console.warn(`[waitingRescan][${queueItem.workOrderNum}] hoursUntilNextScan 缺失，fallback to remainingHours(${remainingHours.toFixed(1)}h) > REMIND_HOURS(${REMIND_HOURS}h)`);
+    }
 
     if (safeToWait === true) {
-      s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${hoursUntilNextScan.toFixed(1)}h = ${margin.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
+      const scanStr = hoursUntilNextScan != null ? `${hoursUntilNextScan.toFixed(1)}h` : '?h';
+      const marginStr = margin != null ? margin.toFixed(1) : '?';
+      s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${scanStr} = ${marginStr}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
       return fin({
         ...escalate(
           `订单在途，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
