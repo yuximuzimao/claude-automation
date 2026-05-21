@@ -848,10 +848,23 @@ function inferDecision(sim, queueItem) {
   const ticket = cd.ticket || {};
 
   // ── 平台终态检测（优先于一切校验）────────────────────────────────
-  // 工单已终结（退款成功/用户取消）→ 无需操作，自动归档
+  // 工单已终结（退款成功/已关闭等）→ 无需操作，自动归档
   // 注意：此检测不依赖 erpSearch，必须在 validateCollectedData 之前执行
   const workOrderStatus = ticket.workOrderStatus || '';
-  const TERMINAL_STATES = ['已退款', '退款成功', '已完成退款', '已关闭', '已撤销', '已取消', '用户已取消', '客服-已同意', '客服-已拒绝'];
+
+  // 已取消/取消中 → 上报人工确认（可能恢复，不入终态 skip）
+  const CANCELLED_STATES = ['已取消', '用户已取消', '取消中'];
+  if (workOrderStatus && CANCELLED_STATES.some(cs => workOrderStatus.includes(cs))) {
+    s({ type: 'read', label: '工单状态', value: workOrderStatus });
+    s({ type: 'branch', text: `上报 → 工单${workOrderStatus}，需人工确认归档` });
+    return fin(escalate(`工单状态：${workOrderStatus}，请人工确认后归档（如已拦截请取消拦截）`, {
+      confidence: 'high',
+      rulesApplied: [{ doc: 'INDEX.md', section: '工单取消', summary: '取消状态→上报人工确认归档' }],
+      warnings: ['工单已取消，如有拦截记录请检查是否需清理'],
+    }));
+  }
+
+  const TERMINAL_STATES = ['已退款', '退款成功', '已完成退款', '已关闭', '已撤销', '客服-已同意', '客服-已拒绝'];
   if (workOrderStatus && TERMINAL_STATES.some(ts => workOrderStatus.includes(ts))) {
     s({ type: 'read', label: '工单状态', value: workOrderStatus });
     s({ type: 'branch', text: `工单已终结（${workOrderStatus}），平台已自动处理，无需操作` });

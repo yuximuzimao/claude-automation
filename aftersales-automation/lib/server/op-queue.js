@@ -610,6 +610,31 @@ async function execExecute(op) {
     }
   } else if (action === 'escalate') {
     result = await runCLI(['add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`]);
+    // 工单取消 → 清理关联的拦截记录（避免遗留无效拦截提醒）
+    if (sim.decision.reason && sim.decision.reason.includes('取消')) {
+      try {
+        const cd = sim.collectedData || {};
+        const allShipTrackings = (function() {
+          const result = [], seen = new Set();
+          function addFrom(erpData) {
+            const rows = (erpData && erpData.rows && erpData.rows.rows) || [];
+            rows.forEach(row => {
+              if (!['卖家已发货', '交易成功', '交易关闭'].includes(row.status)) return;
+              const ts = (row.trackings && row.trackings.length) ? row.trackings : (row.tracking ? [row.tracking] : []);
+              ts.forEach(t => { if (t && !seen.has(t)) { seen.add(t); result.push(t); } });
+            });
+          }
+          addFrom(cd.erpSearch); addFrom(cd.giftErpSearch);
+          return result;
+        })();
+        allShipTrackings.forEach(t => {
+          if (db.hasIntercept(t)) {
+            db.removeIntercept(t);
+            log(`[${sim.workOrderNum}] 工单取消，已清理拦截: ${t}`);
+          }
+        });
+      } catch(e) { log(`cancel-intercept-cleanup 失败（非致命）: ${e.message}`); }
+    }
   } else {
     throw new Error(`未知 action: ${action}`);
   }
