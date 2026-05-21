@@ -566,15 +566,15 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const totalBad = receivedItems.reduce((s, i) => s + i.qtyBad, 0);
   s({ type: 'read', label: '入库数量', value: `良品 ${totalGood} 件，次品 ${totalBad} 件` });
 
+  // ── 问题收集（次品 + 后续缺件统一输出，避免短路隐藏信息）─────
+  const issues = [];
+
   // ── 次品检查：逐商品报告 ────────────────────────────────────────
   const badItems = receivedItems.filter(i => i.qtyBad > 0);
   if (badItems.length > 0) {
     const badDesc = badItems.map(i => `${i.name}（次品${i.qtyBad}件）`).join('、');
     s({ type: 'branch', text: `上报 → 次品：${badDesc}` });
-    return fin(escalate(`退货含次品：${badDesc}，需人工处理`, {
-      confidence: 'high',
-      rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '次品→上报人工' }],
-    }));
+    issues.push({ type: 'qtyBad', message: `退货含次品：${badDesc}` });
   }
 
   // ── 逐商品对比（有 productArchive 时）────────────────────────────
@@ -737,8 +737,14 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
         return `${name}（退了${m.receivedQty}件，应退${m.expectedQty}件）`;
       }).join('，');
       s({ type: 'branch', text: `上报 → 入库不足：${shortDesc}` });
-      return fin(escalate(`退货数量不足：${shortDesc}`, {
-        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比→数量不足→上报' }],
+      issues.push({ type: 'shortage', message: `退货数量不足：${shortDesc}` });
+    }
+
+    // 汇总所有问题统一上报
+    if (issues.length > 0) {
+      return fin(escalate(issues.map(i => i.message).join('；'), {
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '退货异常→上报人工' }],
       }));
     }
 
