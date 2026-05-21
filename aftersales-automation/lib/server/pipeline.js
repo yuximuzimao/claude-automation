@@ -127,8 +127,9 @@ async function processOne(queueItem, options = {}) {
       dbConflictNums.push(s.workOrderNum);
     });
 
-    // 合并两个来源（去重）
-    const allUsedBy = [...new Set([...pageUsedBy, ...dbConflictNums])];
+    // 合并两个来源（去重），过滤 pageUsedBy 中的自身工单号
+    const filteredPageUsedBy = pageUsedBy.filter(n => n !== workOrderNum);
+    const allUsedBy = [...new Set([...filteredPageUsedBy, ...dbConflictNums])];
     if (pageMultiUse || allUsedBy.length > 0) {
       log(`[${workOrderNum}] 退货快递单 ${returnTracking} 多次使用（页面标注:${pageMultiUse}，关联工单:${allUsedBy.join('、') || '无'}）`);
       sim.collectedData.ticket.returnTrackingMultiUse = true;
