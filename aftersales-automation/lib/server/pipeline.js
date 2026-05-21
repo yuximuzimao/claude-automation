@@ -94,8 +94,14 @@ async function processOne(queueItem, options = {}) {
   const allSims = db.readSimulations();
   const sim = [...allSims].reverse().find(s => s.queueItemId === queueItemId) || null;
   if (!sim || !sim.collectedData) {
-    log(`[${workOrderNum}] 采集失败`);
-    db.updateQueueItem(queueItemId, { status: 'pending' });
+    const retries = (queueItem.collectRetries || 0) + 1;
+    log(`[${workOrderNum}] 采集无数据（第 ${retries} 次），collect.js 退出码为 0 但未写入 simulation`);
+    if (retries >= 3) {
+      log(`[${workOrderNum}] 采集无数据已达 ${retries} 次，上报人工`);
+      db.updateQueueItem(queueItemId, { status: 'simulated', hint: '采集无结果（collect.js 退出码0但无sim数据），需人工核查', collectRetries: retries });
+    } else {
+      db.updateQueueItem(queueItemId, { status: 'pending', collectRetries: retries });
+    }
     sse.broadcast('pipeline-update', { stage: 'error', workOrderNum });
     return;
   }
