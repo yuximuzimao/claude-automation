@@ -1,6 +1,9 @@
 {
   "name": "aftersales-automation",
   "version": "1.0.0",
+  "scripts": {
+    "test": "node --test test/**/*.test.js"
+  },
   "dependencies": {
     "express": "^5.2.1",
     "playwright": "^1.40.0"

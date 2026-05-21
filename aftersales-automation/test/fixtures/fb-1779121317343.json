@@ -1,0 +1,24 @@
+{
+  "feedbackId": "fb-1779121317343",
+  "issue": "cancelled-order-not-detected",
+  "description": "已取消工单应 escalate 转人工而非走正常推理",
+  "expected": {
+    "action": "escalate",
+    "reasonIncludes": "取消"
+  },
+  "queueItem": {
+    "id": "qi-test-003",
+    "type": "仅退款",
+    "workOrderNum": "100001779007190475281",
+    "accountNum": 1
+  },
+  "collectedData": {
+    "ticket": {
+      "workOrderStatus": "已取消",
+      "afterSaleReason": "多拍/拍错/不想要",
+      "type": "仅退款",
+      "subOrders": [{ "id": "sub-1", "attr1": "测试商品", "afterSaleNum": 1 }]
+    },
+    "erpSearch": null
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "feedbackId": "fb-1778868858729",
+  "issue": "merchant-fault-quality",
+  "description": "售后原因=质量问题，应被识别为商责并 escalate",
+  "expected": {
+    "action": "escalate",
+    "reasonIncludes": "商责"
+  },
+  "queueItem": {
+    "id": "qi-test-001",
+    "type": "仅退款",
+    "workOrderNum": "100001778848972478289",
+    "accountNum": 1
+  },
+  "collectedData": {
+    "ticket": {
+      "workOrderStatus": "待处理",
+      "afterSaleReason": "质量问题",
+      "type": "仅退款",
+      "subOrders": [{ "id": "sub-1", "attr1": "测试商品", "afterSaleNum": 1 }]
+    },
+    "erpSearch": {
+      "rows": {
+        "rows": [{ "status": "待打印快递单", "trackings": [], "tracking": "" }]
+      }
+    }
+  }
+}

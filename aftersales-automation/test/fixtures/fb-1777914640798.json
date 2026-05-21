@@ -1,0 +1,56 @@
+{
+  "feedbackId": "fb-1777914640798",
+  "issue": "qtybad-shortage-hidden",
+  "description": "退货含次品时缺件信息被隐藏",
+  "expected": {
+    "action": "escalate",
+    "reasonIncludes": ["次品"]
+  },
+  "queueItem": {
+    "id": "qi-test-002",
+    "type": "退货退款",
+    "workOrderNum": "100001777645740182295",
+    "accountNum": 1
+  },
+  "collectedData": {
+    "ticket": {
+      "workOrderStatus": "待处理",
+      "afterSaleReason": "七天无理由退货",
+      "type": "退货退款",
+      "returnTracking": "SF1234567890",
+      "buyerRemark": "无",
+      "subOrders": [{ "id": "sub-1", "attr1": "黑茶体验装", "afterSaleNum": 1 }],
+      "gifts": []
+    },
+    "erpSearch": {
+      "subOrderId": "sub-1",
+      "rows": {
+        "totalCount": 1,
+        "rows": [{
+          "internalId": "TEST001",
+          "tracking": "YT9999999999",
+          "status": "卖家已发货",
+          "textSnippet": ""
+        }]
+      }
+    },
+    "erpAftersale": {
+      "tracking": "SF1234567890",
+      "rows": [{
+        "goodsStatus": "卖家已收到退货",
+        "erpOrderId": "ORD001",
+        "tracking": "SF1234567890",
+        "items": [
+          { "name": "黑茶体验装", "qtyGood": "0", "qtyBad": "1", "qty": "1" }
+        ]
+      }]
+    },
+    "productArchives": [{
+      "subOrderId": "sub-1",
+      "outerId": "SPEC001",
+      "title": "黑茶体验装 1盒",
+      "subItems": [{ "name": "黑茶体验装", "specCode": "SPEC001", "qty": 1 }]
+    }],
+    "productMatches": [{ "subOrderId": "sub-1", "matched": true, "specCode": "SPEC001" }]
+  }
+}
