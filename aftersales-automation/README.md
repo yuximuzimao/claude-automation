@@ -8,6 +8,7 @@
 npm install
 node server.js          # 启动 Web 面板 → http://localhost:3457
 node scan-all.js        # 扫描所有账号写入队列
+npm test                # 运行推理层单元测试
 ```
 
 Web 面板功能：工单队列管理、推理结果确认、历史记录、统计复盘、店铺管理。
@@ -39,6 +40,7 @@ scan-all.js → queue.json → collect.js → simulations.jsonl → infer.js →
 - **Pipeline**（`lib/server/pipeline.js`）：scan → collect → infer → auto-execute
 - **Op-queue**（`lib/server/op-queue.js`）：全局操作队列，串行化浏览器操作
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
+- **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
 ## 文档
