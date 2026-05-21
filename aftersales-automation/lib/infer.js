@@ -511,9 +511,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     if (safeToWait === false) {
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${marginWait.toFixed(1)}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，未入库立即处理防止超时自动退款` });
+      const scanStrB = hoursUntilNextScanWait != null ? hoursUntilNextScanWait.toFixed(1) : '?';
+      const marginStrB = marginWait != null ? marginWait.toFixed(1) : '?';
+      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h - 扫描${scanStrB}h = ${marginStrB}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，未入库立即处理防止超时自动退款` });
       return fin(reject(
-        `剩余${remainingHoursWait.toFixed(1)}h时效不足，未入库拒绝退款，等入库后再处理`,
+        `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h时效不足，未入库拒绝退款，等入库后再处理`,
         ['⚠️ 超时自动拒绝'],
         [{ doc: 'flow-5.1', section: 'Step3', summary: '剩余-扫描≤8h未入库→自动拒绝' }]
       ));
@@ -546,9 +548,11 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     }
 
     if (safeToWait === false) {
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait.toFixed(1)}h - 扫描${hoursUntilNextScanWait.toFixed(1)}h = ${marginWait.toFixed(1)}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，ERP有记录未入库立即处理防止超时自动退款` });
+      const scanStr = hoursUntilNextScanWait != null ? hoursUntilNextScanWait.toFixed(1) : '?';
+      const marginStr = marginWait != null ? marginWait.toFixed(1) : '?';
+      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h - 扫描${scanStr}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，ERP有记录未入库立即处理防止超时自动退款` });
       return fin(reject(
-        `剩余${remainingHoursWait.toFixed(1)}h时效不足，未入库拒绝退款，等入库后再处理`,
+        `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h时效不足，未入库拒绝退款，等入库后再处理`,
         ['⚠️ 超时自动拒绝'],
         [{ doc: 'flow-5.1', section: 'Step3', summary: '剩余-扫描≤8h未入库→自动拒绝' }]
       ));
