@@ -12,6 +12,7 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const opQueue = require('./op-queue');
+const confidence = require('./auto-exec-confidence');
 const { isBatchExecutable } = require('../constants');
 
 const router = express.Router();
@@ -244,12 +245,31 @@ router.post('/feedback', (req, res) => {
   const { simulationId, workOrderNum, verdict, reason, suggestedAction, ruleImpact } = req.body;
   if (!simulationId || !verdict) return res.status(400).json({ error: 'simulationId + verdict required' });
   const fb = db.appendFeedback({ simulationId, workOrderNum, verdict, reason, suggestedAction, ruleImpact });
+
+  // 更新自动执行置信度（仅 approve 决策参与）
+  const sim = db.getSimulation(simulationId);
+  if (sim) {
+    try { confidence.onFeedback(sim, verdict); } catch (e) { /* 静默：置信度更新失败不阻塞 feedback */ }
+  }
+
   res.json(fb);
 });
 
 router.delete('/feedback/:simId', (req, res) => {
   db.revokeFeedback(req.params.simId);
   res.json({ ok: true });
+});
+
+// ── Auto-Exec Confidence ───────────────────────────────────────────
+
+router.get('/auto-exec-confidence', (req, res) => {
+  res.json({ scenes: confidence.getAllScenes() });
+});
+
+router.post('/auto-exec-confidence/recalculate', (req, res) => {
+  const data = confidence.recalculate();
+  const count = Object.keys(data.scenes).length;
+  res.json({ ok: true, scenes: count });
 });
 
 // ── Action Dismiss ────────────────────────────────────────────────

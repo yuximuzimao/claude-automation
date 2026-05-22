@@ -19,6 +19,7 @@ function connectSSE() {
   es.addEventListener('queue-update', () => { loadLive(); loadSim(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
   es.addEventListener('simulation-update', () => { loadLive(); loadSim(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
   es.addEventListener('feedback-new', () => { if (currentTab === 'stats') loadStats(); });
+  es.addEventListener('confidence-update', () => { if (currentTab === 'stats') loadStats(); });
   es.addEventListener('cases-update', () => { if (currentTab === 'history') loadHistory(); });
   es.addEventListener('insight-ready', () => { if (currentTab === 'stats') loadStats(); showToast('洞察已生成，已刷新统计页'); });
   es.addEventListener('insight-error', (e) => {
@@ -1160,11 +1161,12 @@ document.getElementById('modal').addEventListener('click', e => {
 
 // ── 统计复盘 ─────────────────────────────────────────────────────
 async function loadStats() {
-  const [stats, feedbacks, pendingInsight, recentInsights] = await Promise.all([
+  const [stats, feedbacks, pendingInsight, recentInsights, confData] = await Promise.all([
     api('/stats'),
     api('/feedback?limit=50'),
     api('/feedback?uninsighted=1'),
     api('/insights'),
+    api('/auto-exec-confidence'),
   ]);
   const el = document.getElementById('stats-content');
   const accuracy = stats.accuracy !== null ? (stats.accuracy * 100).toFixed(1) + '%' : '—';
@@ -1230,7 +1232,51 @@ async function loadStats() {
   </div>`).join('')}
 </div>` : '';
 
-  el.innerHTML = cardsHtml + insightHtml + fbHtml;
+  // 自动执行置信度
+  const scenes = confData && confData.scenes ? Object.values(confData.scenes) : [];
+  const confHtml = scenes.length ? renderAutoExecConfidence(scenes) : '';
+
+  el.innerHTML = cardsHtml + confHtml + insightHtml + fbHtml;
+}
+
+// ── 自动执行置信度展示 ──────────────────────────────────────────────
+function renderAutoExecConfidence(scenes) {
+  const sorted = scenes.sort((a, b) => b.totalExecutions - a.totalExecutions);
+  const rows = sorted.map(s => {
+    const daysSinceNeg = s.lastNegativeAt
+      ? Math.floor((Date.now() - new Date(s.lastNegativeAt).getTime()) / 86400000)
+      : null;
+    const progressPct = Math.min(100, Math.round((s.totalExecutions / 10) * 100));
+    const daysOk = !s.lastNegativeAt || daysSinceNeg > 15;
+    const thresholdMet = s.totalExecutions >= 10 && daysOk;
+    const statusBadge = s.status === 'auto'
+      ? '<span style="background:#dcfce7;color:#166534;padding:1px 6px;border-radius:4px;font-size:11px">自动执行</span>'
+      : thresholdMet
+        ? '<span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:4px;font-size:11px">即将启用</span>'
+        : '<span style="background:#f3f4f6;color:#6b7280;padding:1px 6px;border-radius:4px;font-size:11px">待积累</span>';
+
+    return `
+  <div style="border:1px solid var(--gray-200);border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <span style="font-weight:500">${h(s.sceneLabel)}</span>
+      ${statusBadge}
+    </div>
+    <div style="display:flex;gap:16px;font-size:12px;color:var(--gray-500);margin-bottom:4px">
+      <span>执行 ${s.totalExecutions} 次</span>
+      ${s.negativeCount > 0 ? `<span style="color:var(--red)">差评 ${s.negativeCount} 次</span>` : '<span>零差评</span>'}
+      ${s.lastNegativeAt ? `<span>最后差评: ${new Date(s.lastNegativeAt).toLocaleDateString('zh-CN')} (${daysSinceNeg}天前)</span>` : ''}
+    </div>
+    <div style="background:var(--gray-100);border-radius:4px;height:4px;overflow:hidden">
+      <div style="width:${progressPct}%;height:100%;background:${thresholdMet ? 'var(--green)' : 'var(--gray-400)'};border-radius:4px;transition:width 0.3s"></div>
+    </div>
+  </div>`;
+  }).join('');
+
+  return `<div class="chart-section">
+    <h3>自动执行置信度</h3>
+    <div style="font-size:12px;color:var(--gray-500);margin-bottom:8px">达标条件：执行 ≥10 次 && 无差评或距上次差评 &gt;15 天</div>
+    ${rows}
+  </div>`;
 }
 
 function generateInsights(stats) {

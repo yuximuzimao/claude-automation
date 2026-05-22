@@ -191,6 +191,15 @@ app.listen(PORT, async () => {
   // ── 启动时数据清理 ────────────────────────────────────────────────
   startupDataCleanup();
 
+  // ── 自动执行置信度文件初始化 ──────────────────────────────────────
+  (() => {
+    const confPath = path.join(__dirname, 'data/auto-exec-confidence.json');
+    if (!fs.existsSync(confPath)) {
+      fs.writeFileSync(confPath, JSON.stringify({ scenes: {} }, null, 2));
+      console.log('[startup] 初始化 auto-exec-confidence.json');
+    }
+  })();
+
   scheduleNextScan();
   startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
 

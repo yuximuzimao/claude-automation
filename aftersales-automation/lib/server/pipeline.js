@@ -8,6 +8,7 @@
 
 const { spawn, execFileSync, spawnSync } = require('child_process');
 const path = require('path');
+const confidence = require('./auto-exec-confidence');
 const db = require('./data');
 const sse = require('./sse');
 const { inferDecision } = require('../infer');
@@ -21,9 +22,16 @@ const SESSIONS_DIR = path.join(BASE, '../sessions');
 function log(msg) { process.stdout.write(`[pipeline] ${msg}\n`); }
 
 // ── 自动执行条件判断 ──────────────────────────────────────────────
+// 基于"沉默=正确"模型的置信度系统：场景指纹在 15 天内执行 ≥10 次且零差评 → 自动执行
 function shouldAutoExecute(decision, collectedData, queueItem) {
-  // 2026-04-26：关闭自动执行，切回人工确认模式（待规则稳定后重新开启）
-  return false;
+  if (!decision || decision.action !== 'approve') return false;
+  if (!queueItem || !queueItem.type) return false;
+
+  const dimensions = confidence.buildDimensions(collectedData, decision, queueItem.type);
+  if (!dimensions) return false;
+
+  const sceneKey = confidence.buildSceneKey(dimensions);
+  return confidence.isSceneAutoEligible(sceneKey);
 }
 
 async function autoExecuteApprove(workOrderNum, accountNum) {
