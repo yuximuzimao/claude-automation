@@ -59,11 +59,13 @@ function allocate(skus, components, stock, opts = {}) {
 
   if (giftConfig.length > 0) {
     const GIFT_CAP_RATIO = 1 - reserve;
+    const FLOAT_TOLERANCE = 1.0001;
+    const MAX_GIFT_ITERS   = 20;
 
-    // G1: 构建赠品SKU列表（含初始分配量）
     const giftAllocs = [];
     for (const gift of giftConfig) {
-      const key = `${gift.huohao}::${gift.skuName.replace(/\s+/g, ' ').trim()}`;
+      const normalized = gift.skuName.replace(/;.*$/, '').replace(/\s+/g, ' ').trim();
+      const key = `${gift.huohao}::${normalized}`;
       const comp = (components[key] && components[key].components) || {};
 
       if (!Object.keys(comp).length) {
@@ -75,10 +77,9 @@ function allocate(skus, components, stock, opts = {}) {
       giftAllocs.push({ key, huohao: gift.huohao, skuName: gift.skuName, comp, allocation: gift.fixedAllocation });
     }
 
-    // G2: 检测受限单品并等比例缩减（迭代至所有单品满足 赠品需求 ≤ stock×cap）
     let changed = true;
     let iter = 0;
-    while (changed && iter < 20) {
+    while (changed && iter < MAX_GIFT_ITERS) {
       changed = false;
       iter++;
 
@@ -95,7 +96,7 @@ function allocate(skus, components, stock, opts = {}) {
         const cap = (stock[p] || 0) * GIFT_CAP_RATIO;
         if (cap <= 0) continue;
         const ratio = demand / cap;
-        if (ratio > maxRatio && ratio > 1.0001) {
+        if (ratio > maxRatio && ratio > FLOAT_TOLERANCE) {
           maxRatio = ratio;
           maxProduct = p;
         }
@@ -121,7 +122,6 @@ function allocate(skus, components, stock, opts = {}) {
       }
     }
 
-    // G3: 预扣库存
     for (const g of giftAllocs) {
       for (const [p, qty] of Object.entries(g.comp)) {
         const required = g.allocation * qty;

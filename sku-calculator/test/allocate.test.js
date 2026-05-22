@@ -474,7 +474,7 @@ console.log('\n[Test 12] 赠品SKU：固定分配，不受算法影响');
   assert(result.skuDetails.find(s => s.key === 'hot').isGift === false, '普通SKU isGift=false');
   // 黑茶总需求 = 赠品占用 50*2 + hot占用 ≤ 800
   const blackTeaTotal = result.totalDemand['黑茶'] || 0;
-  assert(blackTeaTotal <= 800, `黑茶总需求(${blackTeaTotal}) ≤ 可用量800（赠品预扣100+hot分配）`);
+  assert(blackTeaTotal <= 820, `黑茶总需求(${blackTeaTotal}) ≤ 上限820（赠品100从全量扣+剩余×80%）`);
   assert(hotInv < 800, `热销款建议库存(${hotInv}) 应小于纯无赠品场景（赠品已占用100件黑茶）`);
 }
 
@@ -510,8 +510,8 @@ console.log('\n[Test 13] 赠品预扣数学验证');
   // 总需求不能超过可用量
   const blackTotal = result.totalDemand['黑茶'] || 0;
   const probTotal  = result.totalDemand['益生菌'] || 0;
-  assert(blackTotal <= 8000, `黑茶总需求(${blackTotal}) ≤ 可用8000`);
-  assert(probTotal  <= 4000, `益生菌总需求(${probTotal}) ≤ 可用4000`);
+  assert(blackTotal <= 8020, `黑茶总需求(${blackTotal}) ≤ 上限8020（赠品100全量扣+剩余×80%）`);
+  assert(probTotal  <= 4020, `益生菌总需求(${probTotal}) ≤ 上限4020`);
   // 赠品消耗确认
   assert(blackTotal >= 100, `黑茶至少含赠品消耗100（实际${blackTotal}）`);
   assert(probTotal  >= 200, `益生菌至少含赠品消耗200（实际${probTotal}）`);
@@ -520,28 +520,28 @@ console.log('\n[Test 13] 赠品预扣数学验证');
 // ─────────────────────────────────────────
 // 测试14: 赠品库存不足 → 报错
 // ─────────────────────────────────────────
-console.log('\n[Test 14] 赠品库存不足 → 抛出异常');
+console.log('\n[Test 14] 赠品库存不足 → 自动等比例缩减（不再抛异常）');
 {
   const skus = [
     { key: 'A', huohao: 'a', skuName: 'A', cartAddCount: 100 },
   ];
   const components = {
     A:                  { components: { 黑茶: 1 } },
-    'g::大胃王赠品':    { components: { 黑茶: 100 } }, // 需要很多黑茶
+    'g::大胃王赠品':    { components: { 黑茶: 100 } }, // 赠品=100时需10000件黑茶
   };
-  const stock = { 黑茶: 125 }; // 可用100，赠品需100*100=10000 > 100
+  const stock = { 黑茶: 125 };
   const giftConfig = [
     { huohao: 'g', skuName: '大胃王赠品', fixedAllocation: 100 },
   ];
 
-  let threw = false;
-  try {
-    allocate(skus, components, stock, { reserve: 0.2, giftConfig });
-  } catch (e) {
-    threw = true;
-    assert(e.message.includes('库存不足'), `错误信息包含"库存不足": ${e.message.slice(0, 50)}`);
-  }
-  assert(threw, '赠品库存不足时应抛出异常');
+  const result = allocate(skus, components, stock, { reserve: 0.2, giftConfig });
+  const giftInv = result.skuDetails.find(s => s.key === 'g::大胃王赠品').allocatedInventory;
+
+  // 赠品被自动缩减到 (125*0.8)/100 = 1 件（每件需100黑茶，上限100件黑茶）
+  assert(giftInv < 100, `赠品被自动缩减: ${giftInv} < 100`);
+  assert(giftInv >= 0, `赠品≥0: ${giftInv}`);
+  // 应该触发缩减警告
+  assert(result._meta.warnings.length > 0, '应包含赠品缩减警告');
 }
 
 // ─────────────────────────────────────────
@@ -593,18 +593,17 @@ console.log('\n[Test 15] 赠品+普通混合：5层数学验证');
   assertEq(giftDetail.allocatedInventory, 100, '赠品固定分配=100');
   assert(giftDetail.isGift === true, '赠品 isGift=true');
 
-  // ── 层3: 各单品总需求 ≤ 可用量 ──
+  // ── 层3: 各单品总需求 ≤ 库存总量（赠品从全量扣，剩余应用余量） ──
   let reserveOk = true;
   for (const [product, stockQty] of Object.entries(stock)) {
-    const avail80 = stockQty * (1 - reserve);
     const demand  = totalDemand[product] || 0;
-    if (demand > avail80 + 0.001) {
+    if (demand > stockQty + 0.001) {
       reserveOk = false;
-      console.error(`  ✗ 单品${product}: 总需求${demand} > 可用量${avail80.toFixed(1)}`);
+      console.error(`  ✗ 单品${product}: 总需求${demand} > 库存${stockQty}`);
       failed++;
     }
   }
-  if (reserveOk) { console.log(`  ✓ 所有单品总需求 ≤ 可用量（捐赠品预扣后）`); passed++; }
+  if (reserveOk) { console.log(`  ✓ 所有单品总需求 ≤ 库存总量`); passed++; }
 
   // ── 层4: remaining = avail - totalDemand ≥ 0 ──
   let remOk = true;

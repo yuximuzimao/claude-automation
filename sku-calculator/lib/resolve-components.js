@@ -59,9 +59,10 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   console.log(`  对应表共 ${corrAll.length} 条产品记录`);
 
   // 4. 按货号过滤，建立 huohao::normalizedSkuName → erpCode 索引
-  const corrIndex = new Map(); // `huohao::normalizedSkuName` → erpCode
+  const corrIndex = new Map();
+  const uniqueSet = new Set(uniqueHuohao);
   for (const prod of corrAll) {
-    if (!uniqueHuohao.includes(prod.productCode)) continue;
+    if (!uniqueSet.has(prod.productCode)) continue;
     for (const sku of prod.skus) {
       if (!sku.erpCode) {
         warnings.push(`货号 ${prod.productCode} SKU「${sku.skuName}」无 erpCode`);
@@ -81,8 +82,9 @@ async function resolveComponents(erpId, shopName = '澜泽') {
 
   if (needsExpansion) {
     expandedGiftConfig = [];
+    const corrByCode = new Map(corrAll.map(p => [p.productCode, p]));
     for (const gift of giftConfig.giftSkus) {
-      const prod = corrAll.find(p => p.productCode === gift.huohao);
+      const prod = corrByCode.get(gift.huohao);
       if (!prod) {
         warnings.push(`满赠货号 ${gift.huohao} 在对应表中不存在`);
         continue;
