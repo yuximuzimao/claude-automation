@@ -44,13 +44,13 @@
 - [x] L2-read-skus: 3/3 ✓（2026-04-30，修复搜索输入框选择器后）
 - [x] L2-read-erp-codes: 3/3 ✓（2026-04-30）
 
-### Phase 6: L2 匹配操作测试（下次从这里开始，全部重跑）
-- [ ] L2-remap-single: 4 用例 × 5 次
-- [ ] L2-create-suite: 5 用例 × 5 次
-- [ ] L2-verify-archive: 5 用例 × 3 次
+### Phase 6: L2 匹配操作测试
+- [ ] L2-remap-single: 4 用例 × 5 次（待验：需一次含单品换绑的实战活动）
+- [x] L2-create-suite: 5 用例 × 5 次（2026-05-20 共途/KGOS 39 套件实战，0 失败，覆盖超额）
+- [ ] L2-verify-archive: 5 用例 × 3 次（待验：verify-archive.js 在当前 auto-match2 流程中未调用）
 
 ### Phase 7: L2 编排器测试
-- [ ] L2-match-one: 11 用例 × 3 次
+- [ ] L2-match-one: 11 用例 × 3 次（待验：套件路径已实战验证，remap 路径待下次单品活动覆盖）
 
 ---
 

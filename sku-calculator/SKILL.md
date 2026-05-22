@@ -20,6 +20,7 @@
 | `lib/query-stock.js` | ERP 库存状态查询（依赖 product-columns.json 已生成） | 接入 ERP 时 |
 | `lib/validate-supplier.js` | 供应商ID校验（parse 后执行，不匹配即中止） | 使用 --supplier-id 参数时 |
 | `data/gift-sku-config.json` | 满赠SKU固定分配配置（手动编辑或通过 cli.js gift-config 命令维护） | 有赠品需求时 |
+| `../aftersales-automation/lib/erp/shop-map.js` | 供应商ID→ERP店铺名映射（共享模块，单一真相源） | 新增供应商时维护 |
 | `data/product-columns.json` | **运行时生成**（resolve-components 写出，不手动维护） | 调试单品映射时 |
 | `data/sku-components.json` | 组合明细（运行时生成） | 查询/调试时 |
 | `data/warehouse-stock.json` | 云仓库存（运行时生成） | 查询/调试时 |

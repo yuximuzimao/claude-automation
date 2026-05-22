@@ -227,6 +227,10 @@ function makeReadSpecCodeJS(attr1) {
 }
 
 async function productMatch(targetId, barcode, attr1, shopName) {
+  return matchWithRetry(targetId, barcode, attr1, shopName, false);
+}
+
+async function matchWithRetry(targetId, barcode, attr1, shopName, isRetry) {
   try {
     if (!shopName) throw new Error('必须传入 shopName（如「百浩创展」「杭州共途」），不能省略');
 
@@ -318,6 +322,11 @@ async function productMatch(targetId, barcode, attr1, shopName) {
 
     return ok({ barcode, attr1, specCode: spec.specCode });
   } catch (e) {
+    if (!isRetry && /NO_RESULT|顶部标签未找到/.test(e.message)) {
+      await cdp.eval(targetId, 'location.reload()');
+      await sleep(5000);
+      return matchWithRetry(targetId, barcode, attr1, shopName, true);
+    }
     return fail(e);
   }
 }

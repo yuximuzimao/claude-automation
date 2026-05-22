@@ -262,6 +262,8 @@ data/products/
 - `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
 - `[1/2026-05-13]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。根治：check 结束时以 ERP 实时对应表数据全量重写，不读旧文件做增量合并。recognition 字段在重写前从旧文件读取并写回（保留识图结果）。
 - `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
+- `[1/2026-05-20]` **人工处理某些 SKU 后不能直接续跑 match，必须先重跑 check**：`getTodo()` 的判断条件是 `erpCode === null`，只有 check.js 运行时读 ERP 实时对应表才会回填 erpCode。人工在 ERP 界面完成匹配后，sku-records.json 里该条记录的 erpCode 仍是 null，match 仍视为未匹配并重试，触发重复操作或同样错误。正确流程：**人工处理 → check → match**，不能跳过 check 直接续 match。
+- `[1/2026-05-20]` **同 productCode 多比例套件触发「提示」弹窗**：同一 productCode 下已有已匹配套件（如青柑×10+茉莉×10），尝试为另一 platformCode 配不同比例套件（如青柑×5+茉莉×5）时，ERP 在打开「选择商品」弹窗前插入「提示」弹窗（"该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"）。当前 copy-as-suite.js 无法处理此前置弹窗，脚本报 `Expected 选择商品 dialog, got: 提示`。处置：人工确认/取消提示弹窗后走「人工处理→check→match」流程。
 
 ---
 

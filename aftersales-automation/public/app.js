@@ -798,7 +798,7 @@ function renderActions(item, sim, mode) {
     <button class="btn-ghost" disabled style="opacity:0.4;cursor:not-allowed">重新采集推理</button>
     <button class="btn-ghost" disabled style="opacity:0.4;cursor:not-allowed">标记等待中</button>
     <button class="btn-primary" disabled style="opacity:0.5;cursor:not-allowed">⚡ 已自动同意退款</button>
-    <button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button>
+    <button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')" title="已自动归档到历史记录，点击从列表中移除">✓ 移除</button>
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>
   </div>
@@ -896,6 +896,17 @@ async function archiveManual(queueItemId, simId) {
     loadLive();
   } catch (e) {
     showToast('归档失败：' + e.message, 'error');
+  }
+}
+
+async function batchArchiveAutoExec() {
+  if (!confirm('将所有已自动执行的工单从列表移除？\n（历史记录已保存，此操作仅清理显示）')) return;
+  try {
+    const res = await api('/queue/batch-archive-auto', { method: 'POST' });
+    showToast(`已归档 ${res.count} 条`);
+    loadLive();
+  } catch (e) {
+    showToast('批量归档失败：' + e.message, 'error');
   }
 }
 

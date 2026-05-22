@@ -178,6 +178,10 @@ const READ_SUB_ITEMS_JS = `(function(){
 })()`;
 
 async function productArchive(targetId, specCode) {
+  return archiveWithRetry(targetId, specCode, false);
+}
+
+async function archiveWithRetry(targetId, specCode, isRetry) {
   try {
     await navigateErp(targetId, '商品档案V2');
 
@@ -230,6 +234,11 @@ async function productArchive(targetId, specCode) {
 
     return ok({ ...data, subItems });
   } catch (e) {
+    if (!isRetry && /顶部标签未找到/.test(e.message)) {
+      await cdp.eval(targetId, 'location.reload()');
+      await sleep(5000);
+      return archiveWithRetry(targetId, specCode, true);
+    }
     return fail(e);
   }
 }

@@ -2,16 +2,66 @@
   "_meta": {
     "brand": "悦希",
     "campaign": "（每次活动前更新此文件）",
-    "lastUpdated": "2026-05-06",
-    "note": "按货号(productCode)配置不可见配件。识图只记录图片中可见商品，配件由此文件在 annotate 步骤自动注入。erpName 必须与 ERP 档案精确一致（可从 features.json 复制）。"
+    "lastUpdated": "2026-05-08",
+    "note": "按货号(productCode)配置不可见配件。识图只记录图片中可见商品，配件由此文件在 annotate 步骤自动注入。erpName 必须与 ERP 档案精确一致（可从 features.json 复制）。",
+    "accessoryList": [
+      "HEE悦希印花礼袋-白",
+      "HEE悦希印花礼盒（天地盖）白色",
+      "HEE悦希雪梨纸",
+      "HEE悦希修颜礼盒(蓝色)手提袋礼袋"
+    ]
   },
   "rules": {
-    "_example_删除此条目": {
-      "note": "示例：修颜四件组礼盒套装（带礼盒+礼袋+雪梨纸）",
+    "yxxhtz": {
+      "note": "修颜四件组*2套，带2个修颜蓝色手提袋",
+      "accessories": [
+        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
+      ]
+    },
+    "0509-1": {
+      "note": "修颜四件组*2套+修护霜*4瓶，带2个修颜蓝色手提袋",
+      "accessories": [
+        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
+      ]
+    },
+    "0409-6": {
+      "note": "悦颜3件组+胶原饮套组，带白色印花礼盒+礼袋+雪梨纸",
       "accessories": [
         { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
         { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 2 }
+        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+      ]
+    },
+    "yxhyzh1": {
+      "note": "眼霜*2+眼油套组，带白色印花礼盒+礼袋+雪梨纸",
+      "accessories": [
+        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
+        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
+        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+      ]
+    },
+    "yx001": {
+      "note": "玻色因焕颜4件套，带白色印花礼盒+礼袋+雪梨纸",
+      "accessories": [
+        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
+        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
+        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+      ]
+    },
+    "yyyszh-5": {
+      "note": "眼霜*2+眼膜*2套组，带白色印花礼盒+礼袋+雪梨纸",
+      "accessories": [
+        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
+        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
+        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
+      ]
+    },
+    "yyzh26": {
+      "note": "悦颜3件组（霜+水+精华+赠悦颜霜8g），带白色印花礼盒+礼袋+雪梨纸",
+      "accessories": [
+        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
+        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
+        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
       ]
     }
   }

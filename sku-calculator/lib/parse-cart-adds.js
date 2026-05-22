@@ -123,12 +123,14 @@ function parseCartAdds(filePath) {
  */
 function parseAndSave(filePath) {
   const result = parseCartAdds(filePath);
+  const firstSupplierId = result.skus.find(s => s.supplierId)?.supplierId || null;
   const output = {
     _meta: {
       sourceFile: path.basename(filePath),
       parsedAt: new Date().toISOString(),
       totalSkus: result.skus.length,
       withCartData: result.skus.filter(s => s.cartAddCount > 0).length,
+      supplierId: firstSupplierId,
     },
     skus: result.skus,
   };

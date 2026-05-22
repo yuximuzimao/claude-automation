@@ -106,40 +106,53 @@ async function queryStock(erpId) {
   await sleep(2500);
   await waitForTableReady(erpId);
 
-  // 确认总记录数
-  const totalText = await cdp.eval(erpId, `
-    (function(){
-      var el = document.querySelector('.el-pagination__total');
-      return el ? el.innerText.trim() : '';
-    })()
-  `);
-  console.log(`  库存状态总记录: ${totalText}`);
+  // 等待分页信息加载，解析总记录数（totalText 可能延迟，需轮询）
+  let totalRecords = 0;
+  const totalWaitStart = Date.now();
+  while (Date.now() - totalWaitStart < 10000) {
+    const totalText = await cdp.eval(erpId, `
+      (function(){
+        var el = document.querySelector('.el-pagination__total');
+        return el ? el.innerText.trim() : '';
+      })()
+    `);
+    const m = totalText.match(/共(\d+)条/);
+    if (m && parseInt(m[1], 10) > 0) {
+      totalRecords = parseInt(m[1], 10);
+      console.log(`  库存状态总记录: ${totalText}`);
+      break;
+    }
+    await sleep(500);
+  }
+  if (totalRecords === 0) throw new Error('无法获取总记录数，分页信息未加载（超时10秒）');
+
+  // ERP 默认每页 50 条，用总记录数计算总页数（不依赖 btn.disabled，该属性不可靠）
+  const PAGE_SIZE = 50;
+  const totalPages = Math.ceil(totalRecords / PAGE_SIZE);
+  console.log(`  共 ${totalPages} 页，每页 ${PAGE_SIZE} 条`);
 
   // 翻页读全量数据（从 Vue store 读，绕过虚拟滚动截断）
   const allRows = [];
-  let page = 1;
-  while (true) {
+  for (let page = 1; page <= totalPages; page++) {
+    if (page > 1) {
+      await cdp.eval(erpId, `
+        (function(){
+          var btn = document.querySelector('button.btn-next');
+          if (btn) btn.click();
+        })()
+      `);
+      await sleep(2000);
+      await waitForTableReady(erpId);
+    }
     const rows = await readCurrentPage(erpId);
-    console.log(`  第 ${page} 页读取 ${rows.length} 条`);
+    console.log(`  第 ${page}/${totalPages} 页读取 ${rows.length} 条`);
     allRows.push(...rows);
-
-    // 检查下一页
-    const nextDisabled = await cdp.eval(erpId, `
-      (function(){
-        var btn = document.querySelector('button.btn-next');
-        return !btn || btn.disabled;
-      })()
-    `);
-    if (nextDisabled) break;
-
-    // 翻页
-    await cdp.eval(erpId, `document.querySelector('button.btn-next').click()`);
-    await sleep(2000);
-    await waitForTableReady(erpId);
-    page++;
   }
 
-  console.log(`  共读取 ${allRows.length} 条原始数据`);
+  console.log(`  共读取 ${allRows.length} 条原始数据（期望 ${totalRecords} 条）`);
+  if (allRows.length !== totalRecords) {
+    throw new Error(`数据不完整: 读取 ${allRows.length} 条，ERP 显示共 ${totalRecords} 条，请重试`);
+  }
 
   // 映射 erpName → displayName
   const stock    = {};

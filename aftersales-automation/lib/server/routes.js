@@ -142,7 +142,7 @@ router.post('/simulations/batch-execute', (req, res) => {
 // 批量重来（每条工单单独入队，前端可见每条进度）
 router.post('/queue/batch-reprocess', (req, res) => {
   const queue = db.readQueue();
-  const items = (queue.items || []).filter(i => i.mode === 'live' && i.status !== 'done');
+  const items = (queue.items || []).filter(i => i.mode === 'live' && !['done', 'auto_executed', 'auto_executing'].includes(i.status));
   for (const item of items) {
     db.updateQueueItem(item.id, { status: 'pending', hint: null });
     opQueue.enqueue('reprocess-one', `${item.workOrderNum} 采集推理`, { queueItemId: item.id });
@@ -180,10 +180,16 @@ router.post('/queue/:id/archive-manual', (req, res) => {
 
   const simId = req.body.simId;
   const sim = simId ? db.getSimulation(simId) : null;
-  const decision = sim && sim.decision;
 
-  const archiveSource = req.body.source || (queueItem.status === 'auto_executed' ? 'auto_executed' : 'manual_handled');
-  const defaultReason = archiveSource === 'auto_executed' ? '自动处理归档' : '手动处理归档';
+  // auto_executed 工单已在自动执行时写入 cases.jsonl，直接标记 done 即可，防止重复归档
+  if (queueItem.status === 'auto_executed') {
+    db.updateQueueItem(queueItem.id, { status: 'done' });
+    if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
+    sse.broadcast('cases-update', {});
+    return res.json({ ok: true, dedup: true });
+  }
+
+  const decision = sim && sim.decision;
 
   db.appendCase({
     id: `case-${Date.now()}`,
@@ -192,8 +198,8 @@ router.post('/queue/:id/archive-manual', (req, res) => {
     type: queueItem.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type),
     groundTruth: {
       action: (decision && decision.action) || 'escalate',
-      reason: (decision && decision.reason) || defaultReason,
-      source: archiveSource,
+      reason: (decision && decision.reason) || '手动处理归档',
+      source: 'manual_handled',
     },
     collectedData: sim && sim.collectedData,
     addedAt: new Date().toISOString(),
@@ -263,6 +269,17 @@ router.post('/feedback', (req, res) => {
 router.delete('/feedback/:simId', (req, res) => {
   db.revokeFeedback(req.params.simId);
   res.json({ ok: true });
+});
+
+// 批量归档已自动执行的工单（仅标记 done，不重复写 cases）
+router.post('/queue/batch-archive-auto', (req, res) => {
+  const queue = db.readQueue();
+  const autoItems = (queue.items || []).filter(i => i.status === 'auto_executed');
+  for (const item of autoItems) {
+    db.updateQueueItem(item.id, { status: 'done' });
+  }
+  sse.broadcast('cases-update', {});
+  res.json({ ok: true, count: autoItems.length });
 });
 
 // ── Auto-Exec Confidence ───────────────────────────────────────────

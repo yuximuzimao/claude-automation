@@ -60,3 +60,22 @@ if (d.error) {
 **实现**：`lib/validate-supplier.js`，读 cart-adds.json 校验 supplierId 字段。Excel 必须包含「供应商id」列。
 
 **铁律**：跑任意店铺时，必须传入 `--supplier-id`。商家ID需从 ERP 后台右上角实时读取，不能凭记忆。
+
+## L5 店铺名不能靠默认值——供应商ID→店铺名自动推导（2026-05-22）
+
+**事故**：共途 KGOS 库存分配时，`resolve-components` 默认 `--shop 澜泽`，读了错误店铺的对应表，43/60 匹配（漏 17 个 SKU）。换杭州共途后 57/60（差 3 个是 erpCode 为空的数据问题）。
+
+**根因**：parse 步骤已经校验了供应商ID=42528（共途），但 resolve-components 没有利用这个信息，用了硬编码默认值「澜泽」。不同店铺的对应表数据不同，会静默产生错误结果。
+
+**修复（三板斧）**：
+
+1. **供应商ID → 店铺名映射表** `data/supplier-shop-map.json`：持久化映射 `{ "42528": "杭州共途" }`，新供应商在此注册
+2. **parse 步骤写 supplierId 到 `_meta`**：`parse-cart-adds.js` 取第一个非空 supplierId 写入 `_meta.supplierId`
+3. **resolve-components 自动推导店铺**：`getShopFromCartData()` 从 `cart-adds.json` 读 supplierId → 查映射表 → 得店铺名。映射表未覆盖时立即报错（而非静默用默认值），强制人工确认一次
+4. **反向验证硬门禁**：`matchedSkus < totalSkus` 时 `process.exit(1)`，列出所有未匹配 SKU，不给错误数据进入 calculate 的机会
+
+**铁律**：
+- 店铺名永远不设默认值——要么从映射表推导，要么 `--shop` 显式传入，要么报错
+- resolve-components 后反向验证：所有加购 SKU 必须全部匹配，否则中止流水线
+- 新供应商接入第一步：在 `supplier-shop-map.json` 注册映射
+- 大模型的角色：处理异常（如映射表未覆盖的新供应商）、审计最终结果、反向数据测试

@@ -9,19 +9,19 @@
  * 已停用：悦希（老店铺）、汉益仙（老店铺）
  */
 const SHOP_MAP = [
-  { noteKeyword: '汐澜',     erpShop: '汐澜' },
-  { noteKeyword: '展宏妍',   erpShop: '成都展宏妍' },
-  { noteKeyword: '百浩',     erpShop: '百浩创展' },
-  { noteKeyword: '蓄力生长', erpShop: '蓄力生长' },
-  { noteKeyword: '共途',     erpShop: '杭州共途' },
-  { noteKeyword: '上海绰绰', erpShop: '上海绰绰' },
-  { noteKeyword: '厦门蒲颜', erpShop: '厦门蒲颜' },
-  { noteKeyword: '泓砚',     erpShop: '泓砚' },
-  { noteKeyword: '丰瑞宁',   erpShop: '丰瑞宁' },
-  { noteKeyword: '煜嘉轩',   erpShop: '煜嘉轩' },
-  { noteKeyword: '曼玲',     erpShop: '曼玲' },
-  { noteKeyword: '顺链',     erpShop: '顺链' },
-  { noteKeyword: '澜泽',     erpShop: '澜泽' },
+  { noteKeyword: '汐澜',     erpShop: '汐澜',       supplierId: null },
+  { noteKeyword: '展宏妍',   erpShop: '成都展宏妍',  supplierId: null },
+  { noteKeyword: '百浩',     erpShop: '百浩创展',    supplierId: null },
+  { noteKeyword: '蓄力生长', erpShop: '蓄力生长',    supplierId: null },
+  { noteKeyword: '共途',     erpShop: '杭州共途',    supplierId: '42528' },
+  { noteKeyword: '上海绰绰', erpShop: '上海绰绰',    supplierId: null },
+  { noteKeyword: '厦门蒲颜', erpShop: '厦门蒲颜',    supplierId: null },
+  { noteKeyword: '泓砚',     erpShop: '泓砚',        supplierId: null },
+  { noteKeyword: '丰瑞宁',   erpShop: '丰瑞宁',      supplierId: null },
+  { noteKeyword: '煜嘉轩',   erpShop: '煜嘉轩',      supplierId: null },
+  { noteKeyword: '曼玲',     erpShop: '曼玲',        supplierId: null },
+  { noteKeyword: '顺链',     erpShop: '顺链',        supplierId: null },
+  { noteKeyword: '澜泽',     erpShop: '澜泽',        supplierId: null },
 ];
 
 /**
@@ -47,4 +47,14 @@ function getErpShop(note) {
   throw new Error(`账号「${note}」无法推导 ERP 店铺名，请在 lib/erp/shop-map.js 手动补充映射`);
 }
 
-module.exports = { getErpShop, SHOP_MAP };
+/**
+ * 根据供应商ID查找对应 ERP 店铺名（供 sku-calculator 等跨项目使用）
+ * @param {string} supplierId  加购 Excel 中的供应商ID（如 '42528'）
+ * @returns {string|null}      ERP 店铺名，未映射时返回 null
+ */
+function getErpShopBySupplierId(supplierId) {
+  const match = SHOP_MAP.find(m => m.supplierId === String(supplierId));
+  return match ? match.erpShop : null;
+}
+
+module.exports = { getErpShop, getErpShopBySupplierId, SHOP_MAP };

@@ -41,17 +41,24 @@
 parse --supplier-id <商家ID> → resolve-components → resolve-stock → calculate → report
 ```
 
-**供应商ID验证**：`parse --supplier-id <id>` 会校验 Excel 中所有行的「供应商id」列是否与目标商家ID一致，任一不匹配立即中止。商家ID在 ERP 后台右上角可查（每次运行需实时读取，不能凭记忆）。
+**供应商ID验证**：`parse --supplier-id <id>` 会校验 Excel 中所有行的「供应商id」列是否与目标商家ID一致，任一不匹配立即中止。商家ID在 ERP 后台右上角可查（新供应商接入时需实时读取，不凭记忆）。
+
+**店铺名自动推导**：`resolve-components` 自动从 `cart-adds.json _meta.supplierId` → 查共享模块 `../aftersales-automation/lib/erp/shop-map.js`（`getErpShopBySupplierId()`） → 得 ERP 店铺名。无需手动传 `--shop`。`--shop` 参数仅用于显式覆盖自动推导结果。
+
+**反向验证硬门禁**：resolve-components 后若 `matchedSkus < totalSkus`，立即 `exit(1)` 并列出所有未匹配 SKU，不给错误数据进入 calculate 的机会。
 
 原因：resolve-stock 依赖 product-columns.json 做 ERP 名→displayName 映射，而该文件由 resolve-components 动态生成。
 
 模块依赖：
 - `../product-mapping/lib/correspondence.js` + `../product-mapping/lib/archive.js` → 组合明细
 - `../product-mapping/lib/cdp.js` → 库存状态页读取
+- `../aftersales-automation/lib/erp/shop-map.js` → 供应商ID→店铺名映射（共享模块）
 - 支持任意店铺（无需手动维护单品目录，ERP 原名自动成为 displayName）
 
 ## §6 已知坑位
 
 - **resolve-components 和 resolve-stock 必须顺序执行**：两者共用同一个 ERP tab，不能并行（ERP 浏览器操作互斥）
 - **product-columns.json 是临时产出**：每次 resolve-components 清空重建，不同店铺不相互污染
+- **店铺名不能设默认值**：2026-05-22 事故——resolve-components 默认 shop=澜泽，但数据是共途的，读了错误店铺对应表。修复：店铺名从 `supplierId → shop-map.js` 自动推导，推导失败时报错不静默
+- **新供应商接入第一步**：在 `aftersales-automation/lib/erp/shop-map.js` 对应条目补充 `supplierId` 字段
 - **mergeStock 场景**：旧的 KGOS 配置里有将两个 ERP 名合并到同一 displayName 的模式（如玉米片两种口味），动态目录不支持这种合并；如需合并，未来可在 resolve-components 后加一个手动配置覆盖步骤

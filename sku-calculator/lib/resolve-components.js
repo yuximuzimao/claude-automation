@@ -1,20 +1,17 @@
 'use strict';
 /**
- * WHAT: 从 ERP 商品对应表（逐货号精确搜索）+ 档案V2 读取每个 SKU 的组合明细
- * HOW:  per-product readTableRows → erpCode 映射 → queryArchive → querySubItems
+ * WHAT: 从 ERP 商品对应表（全量读取）+ 档案V2 读取每个 SKU 的组合明细
+ * HOW:  readCorrWithoutDownload（全量展开读取） → huohao 过滤 → erpCode 映射
+ *       → initArchiveComp → queryArchive → querySubItems
  * OUT:  data/sku-components.json
  *
- * 关键：对应表使用虚拟滚动，全量读取（readCorrWithoutDownload）返回 0 行。
- * 改用逐货号精确搜索（同 product-mapping read-skus），每次只渲染1行，绕过虚拟滚动。
+ * 与 product-mapping check.js 完全一致的路径，已验证可跑通。
  */
 const fs   = require('fs');
 const path = require('path');
-const cdp  = require('../../product-mapping/lib/cdp');
-const { sleep, waitFor }    = require('../../product-mapping/lib/wait');
-const { ensureCorrPage }    = require('../../product-mapping/lib/ops/ensure-corr-page');
-const { readTableRows }     = require('../../product-mapping/lib/ops/read-table-rows');
+const { readCorrWithoutDownload } = require('../../product-mapping/lib/correspondence');
 const { initArchiveComp, queryArchive, querySubItems } = require('../../product-mapping/lib/archive');
-const { clearCache }        = require('./product-catalog');
+const { clearCache } = require('./product-catalog');
 
 const DATA_DIR             = path.join(__dirname, '../data');
 const OUTPUT_FILE          = path.join(DATA_DIR, 'sku-components.json');
@@ -28,137 +25,6 @@ function readGiftConfig() {
 }
 
 /**
- * 在主页（非 dialog）的 el-select 中选值
- * （移植自 product-mapping/lib/ops/read-skus.js，未对外导出故在此复制）
- */
-async function _setMainPageSelect(erpId, selectIdx, optionText) {
-  const currentVal = await cdp.eval(erpId,
-    '(function(){' +
-    '  var sels=Array.from(document.querySelectorAll(".el-select")).filter(function(s){' +
-    '    return !s.closest(".el-dialog__wrapper");' +
-    '  });' +
-    '  var sel=sels[' + selectIdx + '];' +
-    '  if(!sel) return "";' +
-    '  var inp=sel.querySelector("input");' +
-    '  return inp?inp.value:"";' +
-    '})()'
-  );
-  if (currentVal === optionText) return;
-
-  await cdp.eval(erpId,
-    '(function(){' +
-    '  var sels=Array.from(document.querySelectorAll(".el-select")).filter(function(s){' +
-    '    return !s.closest(".el-dialog__wrapper");' +
-    '  });' +
-    '  var sel=sels[' + selectIdx + '];' +
-    '  if(sel) sel.click();' +
-    '})()'
-  );
-  await sleep(400);
-
-  await cdp.eval(erpId,
-    '(function(){' +
-    '  var items=document.querySelectorAll(".el-select-dropdown__item");' +
-    '  for(var i=0;i<items.length;i++){' +
-    '    if(items[i].innerText.trim()===' + JSON.stringify(optionText) + '&&items[i].getBoundingClientRect().height>0){' +
-    '      items[i].click();return;' +
-    '    }' +
-    '  }' +
-    '})()'
-  );
-  await sleep(300);
-}
-
-/**
- * 查询单个货号在对应表中的 skuName → erpCode 映射
- * @returns {Map<string, string>} skuName → erpCode
- */
-async function _queryProductErpCodes(erpId, shopName, huohao, warnings) {
-  await ensureCorrPage(erpId);
-
-  // 等搜索输入框就绪
-  await waitFor(async () => {
-    const ready = await cdp.eval(erpId,
-      '(function(){' +
-      '  var items=Array.from(document.querySelectorAll(".el-form-item")).filter(function(f){return !f.closest(".el-dialog__wrapper")});' +
-      '  return items.length>=5&&items[4].querySelector("input")?"ready":"not-ready";' +
-      '})()'
-    );
-    return ready === 'ready';
-  }, { timeoutMs: 10000, intervalMs: 500, label: '等搜索输入框就绪' });
-
-  // 点击左侧店铺
-  const shopClicked = await cdp.eval(erpId,
-    '(function(){' +
-    '  var spans=document.querySelectorAll("span");' +
-    '  for(var i=0;i<spans.length;i++){' +
-    '    if(spans[i].innerText.trim().includes(' + JSON.stringify(shopName) + ')&&spans[i].className.includes("el-tooltip")){' +
-    '      spans[i].click();return "clicked";' +
-    '    }' +
-    '  }' +
-    '  return "not-found";' +
-    '})()'
-  );
-  if (shopClicked !== 'clicked') throw new Error(`左侧店铺「${shopName}」未找到`);
-  await sleep(1500);
-
-  // 设搜索下拉：精确搜索 + 平台商家编码
-  await _setMainPageSelect(erpId, 4, '精确搜索');
-  await _setMainPageSelect(erpId, 5, '平台商家编码');
-
-  // 输入货号 + 回车
-  const inputResult = await cdp.eval(erpId,
-    '(function(){' +
-    '  var editor=document.querySelector(".el-input-popup-editor");' +
-    '  if(!editor) return "editor-not-found";' +
-    '  var inp=editor.querySelector("input");' +
-    '  if(!inp) return "input-not-found";' +
-    '  inp.value=' + JSON.stringify(huohao) + ';' +
-    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
-    '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
-    '  return "triggered";' +
-    '})()'
-  );
-  if (inputResult !== 'triggered') throw new Error('搜索输入框未找到: ' + inputResult);
-  await sleep(3500);
-
-  // 验证有结果，并读取 ERP 表中实际显示的 productCode（可能大小写与 huohao 不同）
-  const firstRowCode = await cdp.eval(erpId,
-    '(function(){' +
-    '  var rows=document.querySelectorAll(".el-table__body-wrapper .el-table__body tbody tr.el-table__row");' +
-    '  if(!rows.length) return "";' +
-    '  var tds=rows[0].querySelectorAll("td");' +
-    '  return tds[6]?tds[6].innerText.trim():"";' +
-    '})()'
-  );
-  if (!firstRowCode) {
-    warnings.push(`货号「${huohao}」在对应表中无搜索结果，跳过`);
-    return new Map();
-  }
-  // 用 ERP 实际显示的编码（防止大小写不一致导致 readTableRows 超时）
-  const actualProductCode = firstRowCode;
-
-  // 读取子行（platformCode → erpCode）
-  const subRows = await readTableRows(erpId, {
-    fields: ['skuName', 'platformCode', 'erpCode'],
-    expectedProductCode: actualProductCode,
-  });
-
-  // ERP skuName 格式：「名称;KGOS」，去掉 ; 后缀 + 空格归一 → 与加购 skuName 匹配
-  const skuMap = new Map(); // normalizedSkuName → erpCode
-  for (const row of subRows) {
-    if (row.erpCode) {
-      const normalized = row.skuName.replace(/;.*$/, '').replace(/\s+/g, ' ').trim();
-      skuMap.set(normalized, row.erpCode);
-    } else {
-      warnings.push(`货号 ${huohao} SKU「${row.skuName}」无 erpCode`);
-    }
-  }
-  return skuMap;
-}
-
-/**
  * 主入口：查询组合明细
  * @param {string} erpId  - CDP target ID
  * @param {string} [shopName='澜泽']
@@ -168,6 +34,8 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   // 清空旧数据，避免不同店铺间相互干扰
   fs.writeFileSync(OUTPUT_FILE, '{}', 'utf-8');
   fs.writeFileSync(PRODUCT_COLUMNS_FILE, '[]', 'utf-8');
+
+  const warnings = [];
 
   // 动态发现的单品目录：erpName → {colIndex, displayName, erpNames}
   const discoveredProducts = new Map();
@@ -195,26 +63,25 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   const uniqueHuohao = [...new Set(allSkus.map(s => s.huohao))];
   console.log(`  唯一货号数: ${uniqueHuohao.length}`);
 
-  const warnings = [];
+  // 2. 从对应表全量读取（与 check.js 完全相同路径）
+  console.log('  读取商品对应表（全量）...');
+  const corrAll = await readCorrWithoutDownload(erpId, shopName);
+  console.log(`  对应表共 ${corrAll.length} 条产品记录`);
 
-  // 3. 逐货号从对应表精确搜索（绕过虚拟滚动）
-  console.log('  逐货号读取对应表...');
-  // corrIndex key: `huohao::normalizedSkuName`（空格归一）→ erpCode
-  const corrIndex = new Map();
-
-  for (let i = 0; i < uniqueHuohao.length; i++) {
-    const huohao = uniqueHuohao[i];
-    process.stdout.write(`  [${i + 1}/${uniqueHuohao.length}] 对应表查询: ${huohao}\r`);
-    try {
-      const skuMap = await _queryProductErpCodes(erpId, shopName, huohao, warnings);
-      for (const [normalizedName, erpCode] of skuMap) {
-        corrIndex.set(`${huohao}::${normalizedName}`, erpCode);
+  // 3. 按货号过滤，建立 huohao::normalizedSkuName → erpCode 索引
+  const corrIndex = new Map(); // `huohao::normalizedSkuName` → erpCode
+  for (const prod of corrAll) {
+    if (!uniqueHuohao.has(prod.productCode)) continue;
+    for (const sku of prod.skus) {
+      if (!sku.erpCode) {
+        warnings.push(`货号 ${prod.productCode} SKU「${sku.skuName}」无 erpCode`);
+        continue;
       }
-    } catch (err) {
-      warnings.push(`货号 ${huohao} 查询对应表失败: ${err.message}`);
+      const normalized = sku.skuName.replace(/;.*$/, '').replace(/\s+/g, ' ').trim();
+      corrIndex.set(`${prod.productCode}::${normalized}`, sku.erpCode);
     }
   }
-  console.log(`\n  对应表查询完成，共 ${corrIndex.size} 条 SKU → erpCode 映射`);
+  console.log(`  共 ${corrIndex.size} 条 SKU → erpCode 映射`);
 
   // 4. 匹配每个 SKU 的 erpCode（加购 + 赠品 SKU 的 skuName 也做空格归一再查）
   const matched = [];
@@ -230,11 +97,11 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   }
   console.log(`  匹配成功: ${matched.length}/${allSkus.length}，警告: ${warnings.length}`);
 
-  // 5. 初始化档案V2（导航到档案页 + 清空条件，只做一次）
+  // 5. 初始化档案V2（与 check.js 完全相同路径）
   console.log('  初始化档案V2...');
   await initArchiveComp(erpId);
 
-  // 6. 逐个查询档案（erpCode 去重，避免重复 ERP 请求）
+  // 6. 逐个查询档案（erpCode 去重）
   const erpCodeCache = new Map(); // erpCode → components | null
   const result = {};
 
@@ -247,7 +114,14 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     if (erpCodeCache.has(sku.erpCode)) {
       components = erpCodeCache.get(sku.erpCode);
     } else {
-      const archiveItem = await queryArchive(erpId, sku.erpCode);
+      let archiveItem;
+      try {
+        archiveItem = await queryArchive(erpId, sku.erpCode);
+      } catch (err) {
+        warnings.push(`档案V2 查询异常 ${sku.erpCode}: ${err.message}`);
+        erpCodeCache.set(sku.erpCode, null);
+        continue;
+      }
 
       if (!archiveItem) {
         warnings.push(`档案V2 中找不到 erpCode: ${sku.erpCode}（SKU: ${sku.key}）`);
@@ -303,16 +177,16 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     warnings.forEach(w => console.warn(`  ⚠️  ${w}`));
   }
 
-  // 7. 写动态产品目录（发现顺序），刷新同进程缓存
+  // 7. 写动态产品目录
   const productCols = [...discoveredProducts.values()];
   fs.writeFileSync(PRODUCT_COLUMNS_FILE, JSON.stringify(productCols, null, 2), 'utf-8');
   clearCache();
   console.log(`  产品目录已更新: ${productCols.length} 个单品 → ${PRODUCT_COLUMNS_FILE}`);
 
-  // 8. 写文件（格式与 mock 兼容：顶层 _meta + 各 key 平铺）
+  // 8. 写文件
   const output = {
     _meta: {
-      source:       `ERP 商品对应表（逐货号）+ 档案V2（${shopName}）`,
+      source:       `ERP 商品对应表（全量）+ 档案V2（${shopName}）`,
       resolvedAt:   new Date().toISOString(),
       totalSkus:    allSkus.length,
       cartSkuCount: cartSkus.length,

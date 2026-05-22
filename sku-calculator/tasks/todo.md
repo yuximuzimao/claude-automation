@@ -19,5 +19,9 @@
 ## Phase 3: 健壮性 + 可选项
 
 - [x] 3.1 供应商ID验证（validate-supplier.js + parse --supplier-id 参数，2026-05-20）
+- [x] 3.4 店铺名自动推导 + 反向验证硬门禁（2026-05-22，L5 教训修复）
+  - parse 写 supplierId 到 _meta
+  - resolve-components 自动从共享 shop-map.js 推导店铺名
+  - matchedSkus < totalSkus → exit(1) 硬中止
 - [ ] 3.2 mergeStock 支持 — 将两个 ERP 名合并为同一 displayName（当前动态目录不支持，按需添加）
 - [ ] 3.3 kgossynt-sm 商品匹配 — 该货号尚未在商品匹配项目中完成，3个 SKU 无法包含在计算中
