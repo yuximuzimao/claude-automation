@@ -273,17 +273,27 @@ router.delete('/feedback/:simId', (req, res) => {
 // 批量归档已自动执行的工单（此时才写入 cases.jsonl，保证历史记录只有一条）
 router.post('/queue/batch-archive-auto', (req, res) => {
   const queue = db.readQueue();
+  const sims = db.readSimulations();
   const autoItems = (queue.items || []).filter(i => i.status === 'auto_executed');
   for (const item of autoItems) {
+    const sim = sims.filter(s => s.workOrderNum === item.workOrderNum && s.mode === 'live')
+      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))[0];
+    const decision = sim && sim.decision;
     db.appendCase({
       id: `case-${Date.now()}-${item.id}`,
       workOrderNum: item.workOrderNum,
       accountNote: item.accountNote,
-      type: item.type || '',
-      groundTruth: { action: 'approve', reason: '自动处理归档', source: 'auto_executed' },
+      type: item.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type) || '',
+      groundTruth: {
+        action: (decision && decision.action) || 'approve',
+        reason: (decision && decision.reason) || '自动处理归档',
+        source: 'auto_executed',
+      },
+      collectedData: sim && sim.collectedData,
       addedAt: new Date().toISOString(),
     });
     db.updateQueueItem(item.id, { status: 'done' });
+    if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
   }
   sse.broadcast('cases-update', {});
   res.json({ ok: true, count: autoItems.length });
