@@ -328,6 +328,20 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
   if (bundles.length > 0) {
     await navigateErp(erpId, '商品对应表');
 
+    // 点左侧店铺侧边栏（确保在正确店铺下操作）
+    await cdp.eval(erpId,
+      '(function(){' +
+      '  var spans=document.querySelectorAll("span");' +
+      '  for(var i=0;i<spans.length;i++){' +
+      '    if(spans[i].innerText.trim().includes(' + JSON.stringify(shopName) + ')&&spans[i].className.includes("el-tooltip")){' +
+      '      spans[i].click();return "clicked";' +
+      '    }' +
+      '  }' +
+      '  return "not-found";' +
+      '})()'
+    );
+    await sleep(2000);
+
     for (let i = 0; i < bundles.length; i++) {
       const r = bundles[i];
       console.error(`\n── Phase 1 [${i + 1}/${bundles.length}] ${r.platformCode} ──`);
