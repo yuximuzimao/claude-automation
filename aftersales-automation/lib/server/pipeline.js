@@ -230,15 +230,7 @@ async function processOne(queueItem, options = {}) {
     try {
       await autoExecuteApprove(workOrderNum, freshItem.accountNum);
       const autoExecutedAt = new Date().toISOString();
-      db.appendCase({
-        id: `case-${Date.now()}`,
-        workOrderNum,
-        accountNote: freshItem.accountNote,
-        type: (sim.collectedData.ticket && sim.collectedData.ticket.type) || '',
-        groundTruth: { action: 'approve', reason: decision.reason, source: 'auto_executed' },
-        collectedData: sim.collectedData,
-        addedAt: autoExecutedAt,
-      });
+      // 不在此处写 cases.jsonl——归档时才写入，保证历史记录只有一条
       db.updateSimulation(sim.id, { decision, autoExecutedAt, executedAt: autoExecutedAt });
       db.updateQueueItem(queueItemId, { status: 'auto_executed' });
       sse.broadcast('pipeline-update', { stage: 'auto_executed', workOrderNum });

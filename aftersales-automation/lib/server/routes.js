@@ -180,16 +180,9 @@ router.post('/queue/:id/archive-manual', (req, res) => {
 
   const simId = req.body.simId;
   const sim = simId ? db.getSimulation(simId) : null;
-
-  // auto_executed 工单已在自动执行时写入 cases.jsonl，直接标记 done 即可，防止重复归档
-  if (queueItem.status === 'auto_executed') {
-    db.updateQueueItem(queueItem.id, { status: 'done' });
-    if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
-    sse.broadcast('cases-update', {});
-    return res.json({ ok: true, dedup: true });
-  }
-
   const decision = sim && sim.decision;
+
+  const isAuto = queueItem.status === 'auto_executed';
 
   db.appendCase({
     id: `case-${Date.now()}`,
@@ -198,8 +191,8 @@ router.post('/queue/:id/archive-manual', (req, res) => {
     type: queueItem.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type),
     groundTruth: {
       action: (decision && decision.action) || 'escalate',
-      reason: (decision && decision.reason) || '手动处理归档',
-      source: 'manual_handled',
+      reason: (decision && decision.reason) || (isAuto ? '自动处理归档' : '手动处理归档'),
+      source: isAuto ? 'auto_executed' : 'manual_handled',
     },
     collectedData: sim && sim.collectedData,
     addedAt: new Date().toISOString(),
@@ -271,32 +264,23 @@ router.delete('/feedback/:simId', (req, res) => {
   res.json({ ok: true });
 });
 
-// 批量归档已自动执行的工单（检查 cases 是否已存在，缺失的补写）
+// 批量归档已自动执行的工单（此时才写入 cases.jsonl，保证历史记录只有一条）
 router.post('/queue/batch-archive-auto', (req, res) => {
   const queue = db.readQueue();
-  const cases = db.readCases().items;
-  const existingNums = new Set(cases.map(c => c.workOrderNum));
   const autoItems = (queue.items || []).filter(i => i.status === 'auto_executed');
-  let written = 0;
-
   for (const item of autoItems) {
-    if (!existingNums.has(item.workOrderNum)) {
-      // 补写缺失的 case 记录（可能因状态被手动恢复等情况丢失）
-      db.appendCase({
-        id: `case-${Date.now()}-${written}`,
-        workOrderNum: item.workOrderNum,
-        accountNote: item.accountNote,
-        type: item.type || '',
-        groundTruth: { action: 'approve', reason: '自动处理归档', source: 'auto_executed' },
-        addedAt: new Date().toISOString(),
-      });
-      written++;
-      existingNums.add(item.workOrderNum);
-    }
+    db.appendCase({
+      id: `case-${Date.now()}-${item.id}`,
+      workOrderNum: item.workOrderNum,
+      accountNote: item.accountNote,
+      type: item.type || '',
+      groundTruth: { action: 'approve', reason: '自动处理归档', source: 'auto_executed' },
+      addedAt: new Date().toISOString(),
+    });
     db.updateQueueItem(item.id, { status: 'done' });
   }
   sse.broadcast('cases-update', {});
-  res.json({ ok: true, count: autoItems.length, written });
+  res.json({ ok: true, count: autoItems.length });
 });
 
 // ── Auto-Exec Confidence ───────────────────────────────────────────

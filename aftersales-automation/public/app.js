@@ -900,10 +900,10 @@ async function archiveManual(queueItemId, simId) {
 }
 
 async function batchArchiveAutoExec() {
-  if (!confirm('将所有已自动执行的工单归档到历史记录并从列表移除？')) return;
+  if (!confirm('将所有已自动执行的工单归档到历史记录？')) return;
   try {
     const res = await api('/queue/batch-archive-auto', { method: 'POST' });
-    showToast(`已归档 ${res.count} 条${res.written ? '（补写 ' + res.written + ' 条历史记录）' : ''}`);
+    showToast(`已归档 ${res.count} 条到历史记录`);
     loadLive();
   } catch (e) {
     showToast('批量归档失败：' + e.message, 'error');
