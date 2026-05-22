@@ -45,33 +45,23 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   const cartSkus = cartData.skus;
   console.log(`  加购 SKU 总数: ${cartSkus.length}`);
 
-  // 1b. 读满赠SKU配置，构建伪SKU条目（用于参与ERP解析流程）
+  // 1b. 读满赠SKU配置
   const giftConfig = readGiftConfig();
-  const giftSkuEntries = giftConfig.giftSkus.map(g => ({
-    key: `${g.huohao}::${g.skuName.replace(/\s+/g, ' ').trim()}`,
-    huohao: g.huohao,
-    skuName: g.skuName,
-    cartAddCount: 0,
-    _isGift: true,
-  }));
-  const allSkus = [...cartSkus, ...giftSkuEntries];
-  if (giftSkuEntries.length) {
-    console.log(`  满赠 SKU 数: ${giftSkuEntries.length}（不在加购Excel中，从 gift-sku-config.json 读取）`);
-  }
 
-  // 2. 收集所有唯一货号（加购 + 赠品）
-  const uniqueHuohao = [...new Set(allSkus.map(s => s.huohao))];
-  console.log(`  唯一货号数: ${uniqueHuohao.length}`);
+  // 2. 收集所有唯一货号（加购 + 赠品货号）
+  const giftHuohaoSet = new Set(giftConfig.giftSkus.map(g => g.huohao));
+  const uniqueHuohao = [...new Set([...cartSkus.map(s => s.huohao), ...giftHuohaoSet])];
+  console.log(`  唯一货号数: ${uniqueHuohao.length}（加购 + 满赠）`);
 
-  // 2. 从对应表全量读取（与 check.js 完全相同路径）
+  // 3. 从对应表全量读取（与 check.js 完全相同路径）
   console.log('  读取商品对应表（全量）...');
   const corrAll = await readCorrWithoutDownload(erpId, shopName);
   console.log(`  对应表共 ${corrAll.length} 条产品记录`);
 
-  // 3. 按货号过滤，建立 huohao::normalizedSkuName → erpCode 索引
+  // 4. 按货号过滤，建立 huohao::normalizedSkuName → erpCode 索引
   const corrIndex = new Map(); // `huohao::normalizedSkuName` → erpCode
   for (const prod of corrAll) {
-    if (!uniqueHuohao.has(prod.productCode)) continue;
+    if (!uniqueHuohao.includes(prod.productCode)) continue;
     for (const sku of prod.skus) {
       if (!sku.erpCode) {
         warnings.push(`货号 ${prod.productCode} SKU「${sku.skuName}」无 erpCode`);
@@ -83,7 +73,70 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   }
   console.log(`  共 ${corrIndex.size} 条 SKU → erpCode 映射`);
 
-  // 4. 匹配每个 SKU 的 erpCode（加购 + 赠品 SKU 的 skuName 也做空格归一再查）
+  // 5. 满赠货号展开：从对应表查找每个赠品货号下的所有SKU
+  //    自动检测：如果配置已有 skuName（上次已展开），跳过展开
+  const needsExpansion = giftConfig.giftSkus.some(g => !g.skuName);
+  const giftSkuEntries = [];
+  let expandedGiftConfig;
+
+  if (needsExpansion) {
+    expandedGiftConfig = [];
+    for (const gift of giftConfig.giftSkus) {
+      const prod = corrAll.find(p => p.productCode === gift.huohao);
+      if (!prod) {
+        warnings.push(`满赠货号 ${gift.huohao} 在对应表中不存在`);
+        continue;
+      }
+      if (!prod.skus || prod.skus.length === 0) {
+        warnings.push(`满赠货号 ${gift.huohao} 在对应表中无SKU`);
+        continue;
+      }
+      for (const sku of prod.skus) {
+        if (!sku.erpCode) {
+          warnings.push(`满赠货号 ${gift.huohao} SKU「${sku.skuName}」无 erpCode`);
+          continue;
+        }
+        const normalized = sku.skuName.replace(/;.*$/, '').replace(/\s+/g, ' ').trim();
+        giftSkuEntries.push({
+          key: `${gift.huohao}::${normalized}`,
+          huohao: gift.huohao,
+          skuName: normalized,
+          cartAddCount: 0,
+          _isGift: true,
+        });
+        expandedGiftConfig.push({
+          huohao: gift.huohao,
+          skuName: normalized,
+          fixedAllocation: gift.fixedAllocation,
+        });
+      }
+    }
+    if (giftSkuEntries.length) {
+      console.log(`  满赠货号展开: ${giftConfig.giftSkus.length} 个货号 → ${giftSkuEntries.length} 个SKU`);
+    }
+    // 写回展开后的赠品配置，供 calculate 使用
+    if (expandedGiftConfig.length > 0) {
+      fs.writeFileSync(GIFT_CONFIG_FILE, JSON.stringify({ giftSkus: expandedGiftConfig }, null, 2), 'utf-8');
+    }
+  } else {
+    // 已展开：直接使用现有配置构建伪SKU条目
+    expandedGiftConfig = giftConfig.giftSkus;
+    for (const g of giftConfig.giftSkus) {
+      const normalized = g.skuName.replace(/\s+/g, ' ').trim();
+      giftSkuEntries.push({
+        key: `${g.huohao}::${normalized}`,
+        huohao: g.huohao,
+        skuName: g.skuName,
+        cartAddCount: 0,
+        _isGift: true,
+      });
+    }
+    console.log(`  满赠 SKU: ${giftSkuEntries.length} 个（已展开，来自 gift-sku-config.json）`);
+  }
+
+  const allSkus = [...cartSkus, ...giftSkuEntries];
+
+  // 6. 匹配每个 SKU 的 erpCode
   const matched = [];
   for (const sku of allSkus) {
     const normalizedSkuName = sku.skuName.replace(/\s+/g, ' ').trim();
@@ -97,11 +150,11 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   }
   console.log(`  匹配成功: ${matched.length}/${allSkus.length}，警告: ${warnings.length}`);
 
-  // 5. 初始化档案V2（与 check.js 完全相同路径）
+  // 7. 初始化档案V2（与 check.js 完全相同路径）
   console.log('  初始化档案V2...');
   await initArchiveComp(erpId);
 
-  // 6. 逐个查询档案（erpCode 去重）
+  // 8. 逐个查询档案（erpCode 去重）
   const erpCodeCache = new Map(); // erpCode → components | null
   const result = {};
 
@@ -177,13 +230,13 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     warnings.forEach(w => console.warn(`  ⚠️  ${w}`));
   }
 
-  // 7. 写动态产品目录
+  // 9. 写动态产品目录
   const productCols = [...discoveredProducts.values()];
   fs.writeFileSync(PRODUCT_COLUMNS_FILE, JSON.stringify(productCols, null, 2), 'utf-8');
   clearCache();
   console.log(`  产品目录已更新: ${productCols.length} 个单品 → ${PRODUCT_COLUMNS_FILE}`);
 
-  // 8. 写文件
+  // 10. 写文件
   const output = {
     _meta: {
       source:       `ERP 商品对应表（全量）+ 档案V2（${shopName}）`,

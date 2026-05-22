@@ -47,18 +47,21 @@ function allocate(skus, components, stock, opts = {}) {
   const warnings = [];
   const inv = {}; // key -> 最终库存整数
 
-  // Phase 0: 可用库存
-  const avail = {};
-  for (const [product, qty] of Object.entries(stock)) {
-    avail[product] = qty * (1 - reserve);
-  }
+  // Phase 0: 可用库存（初始全量，赠品预扣后再对剩余应用余量比例）
+  const avail = { ...stock };
 
   // Phase G: 赠品SKU固定分配 — 在算法运行前预扣库存
+  // 规则：赠品最多占单品库存的 (1-reserve)，即 80%。
+  // 仅当赠品需求超过此上限时才等比例缩减，否则不做任何调整。
   const giftKeys = new Set();
   const giftSkus = []; // 用于最终输出
   const giftConfig = opts.giftConfig || [];
 
   if (giftConfig.length > 0) {
+    const GIFT_CAP_RATIO = 1 - reserve;
+
+    // G1: 构建赠品SKU列表（含初始分配量）
+    const giftAllocs = [];
     for (const gift of giftConfig) {
       const key = `${gift.huohao}::${gift.skuName.replace(/\s+/g, ' ').trim()}`;
       const comp = (components[key] && components[key].components) || {};
@@ -69,27 +72,81 @@ function allocate(skus, components, stock, opts = {}) {
         );
       }
 
-      // 校验库存是否足够（不足直接中止，赠品是客户承诺不能缺）
-      for (const [p, qty] of Object.entries(comp)) {
-        const required = gift.fixedAllocation * qty;
+      giftAllocs.push({ key, huohao: gift.huohao, skuName: gift.skuName, comp, allocation: gift.fixedAllocation });
+    }
+
+    // G2: 检测受限单品并等比例缩减（迭代至所有单品满足 赠品需求 ≤ stock×cap）
+    let changed = true;
+    let iter = 0;
+    while (changed && iter < 20) {
+      changed = false;
+      iter++;
+
+      const giftDemand = {};
+      for (const g of giftAllocs) {
+        for (const [p, qty] of Object.entries(g.comp)) {
+          giftDemand[p] = (giftDemand[p] || 0) + g.allocation * qty;
+        }
+      }
+
+      let maxRatio = 0;
+      let maxProduct = null;
+      for (const [p, demand] of Object.entries(giftDemand)) {
+        const cap = (stock[p] || 0) * GIFT_CAP_RATIO;
+        if (cap <= 0) continue;
+        const ratio = demand / cap;
+        if (ratio > maxRatio && ratio > 1.0001) {
+          maxRatio = ratio;
+          maxProduct = p;
+        }
+      }
+
+      if (!maxProduct) break;
+
+      const factor = 1 / maxRatio;
+      const cap = (stock[maxProduct] || 0) * GIFT_CAP_RATIO;
+      for (const g of giftAllocs) {
+        if (g.comp[maxProduct]) {
+          const oldAlloc = g.allocation;
+          g.allocation = Math.floor(oldAlloc * factor);
+          if (g.allocation !== oldAlloc) changed = true;
+        }
+      }
+
+      if (changed) {
+        warnings.push(
+          `[赠品缩减] 单品「${maxProduct}」赠品需求超 stock×${(GIFT_CAP_RATIO * 100).toFixed(0)}%` +
+          `（上限${Math.round(cap)}件），等比例缩减（因子=${factor.toFixed(4)}）`
+        );
+      }
+    }
+
+    // G3: 预扣库存
+    for (const g of giftAllocs) {
+      for (const [p, qty] of Object.entries(g.comp)) {
+        const required = g.allocation * qty;
         const available = avail[p] ?? 0;
         if (available < required) {
           throw new Error(
-            `满赠SKU ${key} 库存不足: 单品「${p}」需要 ${required} 件` +
-            `（${gift.fixedAllocation} 件 × ${qty}），可用仅 ${Math.round(available)} 件`
+            `满赠SKU ${g.key} 库存不足: 单品「${p}」需要 ${required} 件` +
+            `（${g.allocation} 件 × ${qty}），可用仅 ${Math.round(available)} 件`
           );
         }
       }
 
-      // 预扣库存
-      for (const [p, qty] of Object.entries(comp)) {
-        avail[p] = (avail[p] ?? 0) - gift.fixedAllocation * qty;
+      for (const [p, qty] of Object.entries(g.comp)) {
+        avail[p] = (avail[p] ?? 0) - g.allocation * qty;
       }
 
-      inv[key] = gift.fixedAllocation;
-      giftKeys.add(key);
-      giftSkus.push({ key, huohao: gift.huohao, skuName: gift.skuName, comp, allocation: gift.fixedAllocation });
+      inv[g.key] = g.allocation;
+      giftKeys.add(g.key);
+      giftSkus.push(g);
     }
+  }
+
+  // 赠品预扣完毕后，对剩余库存应用余量比例（保证正常SKU有安全余量）
+  for (const [p, qty] of Object.entries(avail)) {
+    avail[p] = qty * (1 - reserve);
   }
 
   // 过滤掉赠品SKU，剩余进入正常算法流程
