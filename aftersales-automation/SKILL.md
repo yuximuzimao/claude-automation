@@ -31,7 +31,7 @@ entry: cli.js
 | `lib/erp/search.js` | ERP 订单搜索，`READ_ROWS_JS` 解析订单状态 | 查 ERP 订单数据时 |
 | `lib/erp/aftersale.js` | ERP 售后工单搜索（退货快递单号） | 退货核验时 |
 | `lib/erp/read-logistics.js` | ERP 订单物流读取 | 查 ERP 物流时 |
-| `lib/erp/shop-map.js` | 账号→ERP 店铺名映射 | 需要确定 ERP 店铺时 |
+| `lib/erp/shop-map.js` | 账号→ERP店铺名 + 供应商ID→店铺名映射（sku-calculator 共享） | 需要确定 ERP 店铺时 |
 | `lib/jl/list.js` | 鲸灵工单列表扫描 | 改列表扫描逻辑时 |
 | `lib/jl/read-ticket.js` | 读单条工单详情 | 改工单数据提取时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
@@ -45,6 +45,7 @@ entry: cli.js
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
+| `lib/server/auto-exec-confidence.js` | 自动执行置信度系统 — 场景指纹+人工反馈驱动 auto 判定 | 查/改自动执行条件时 |
 | `../return-inbound/SKILL.md` | 退货入库项目导航地图（跨目录） | 调试/改退货入库 op 时；op-queue 的 `return-inbound` case 调用 `../return-inbound/lib/workflow.js` |
 
 ## CORE FLOWS
@@ -54,7 +55,8 @@ entry: cli.js
 1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 写入 `data/queue.json` (anchor: listTickets)
 2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
 3. **infer** — `lib/infer.js` → 规则推理 → 输出 decision (anchor: inferDecision, inferRefundOnly, inferRefundReturn)
-4. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批 (anchor: approveTicket, rejectTicket)
+4. **auto-exec?** — `lib/server/auto-exec-confidence.js` → `shouldAutoExecute()` 判定场景是否达标（≥10次+零差评>15天）
+5. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批 (anchor: approveTicket, rejectTicket)
 
 ### 重试与重启
 
@@ -147,23 +149,16 @@ await cdp.navigate(targetId, 'https://...');
 lib/ai-infer.js
 lib/cdp.js
 lib/constants.js
-lib/erp/aftersale.js
-lib/erp/navigate.js
-lib/erp/read-logistics.js
-lib/erp/search.js
-lib/erp/shop-map.js
 lib/helpers.js
 lib/infer.js
-
-lib/ai-infer.js
-lib/cdp.js
-lib/constants.js
+lib/result.js
+lib/targets.js
+lib/wait.js
 lib/erp/aftersale.js
 lib/erp/navigate.js
 lib/erp/read-logistics.js
 lib/erp/search.js
 lib/erp/shop-map.js
-lib/infer.js
 lib/jl/add-note.js
 lib/jl/approve.js
 lib/jl/list.js
@@ -173,15 +168,12 @@ lib/jl/read-ticket.js
 lib/jl/reject.js
 lib/product/archive.js
 lib/product/match.js
-lib/result.js
+lib/server/auto-exec-confidence.js
 lib/server/data.js
 lib/server/op-queue.js
 lib/server/pipeline.js
 lib/server/routes.js
 lib/server/sse.js
-lib/targets.js
-lib/wait.js
-lib/helpers.js
 cli.js
 server.js
 collect.js
