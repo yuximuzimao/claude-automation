@@ -6,129 +6,117 @@
   <title>洛克王国 · 收集助手</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0f2f7; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; font-size: 16px; }
+    body { background: #f5f6fa; color: #1a1a2e; font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; font-size: 16px; }
 
-    .header { background: #fff; padding: 16px 36px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 50; }
-    .header h1 { font-size: 20px; color: #4f46e5; font-weight: 700; }
+    .header { background: #fff; padding: 14px 28px; border-bottom: 1px solid #e8eaf0; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 50; }
+    .header h1 { font-size: 18px; color: #4f46e5; font-weight: 700; }
     .header .updated { font-size: 13px; color: #aaa; margin-left: auto; }
     .save-indicator { font-size: 12px; color: #10b981; margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
     .save-indicator.show { opacity: 1; }
 
-    .nav { display: flex; gap: 3px; padding: 10px 36px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 55px; z-index: 49; }
-    .nav button { padding: 9px 22px; border-radius: 22px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 15px; white-space: nowrap; transition: all 0.15s; font-weight: 500; min-width: 72px; text-align: center; }
+    .nav { display: flex; gap: 4px; padding: 8px 28px; background: #fff; border-bottom: 1px solid #e8eaf0; overflow-x: auto; position: sticky; top: 51px; z-index: 49; }
+    .nav button { padding: 7px 18px; border-radius: 20px; border: 1.5px solid #e0e0e0; background: transparent; color: #666; cursor: pointer; font-size: 14px; white-space: nowrap; transition: all 0.15s; font-weight: 500; }
     .nav button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .nav button:hover:not(.active) { border-color: #4f46e5; color: #4f46e5; }
 
-    .container { padding: 28px 36px; max-width: 100%; }
+    .container { padding: 20px 28px; max-width: 100%; }
 
-    /* 看板 */
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 20px; }
-    .stat-card { background: #fff; border-radius: 12px; padding: 18px 20px; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
-    .stat-card:hover { box-shadow: 0 4px 16px rgba(79,70,229,0.1); transform: translateY(-1px); }
-    .stat-card .label { font-size: 14px; color: #888; margin-bottom: 4px; }
-    .stat-card .numbers { font-size: 28px; font-weight: 700; color: #1a1a2e; }
-    .stat-card .numbers span { font-size: 14px; color: #bbb; font-weight: 400; }
-    .stat-card .hint { font-size: 16px; color: #bbb; }
-    .stat-card .hint.tbd { color: #ccc; font-size: 15px; }
-    .progress-bar { height: 6px; background: #f0f0f5; border-radius: 4px; margin-top: 8px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
-    .progress-fill.low { background: linear-gradient(90deg, #ef4444, #f97316); }
-    .progress-fill.mid { background: linear-gradient(90deg, #f97316, #eab308); }
-    .progress-fill.high { background: linear-gradient(90deg, #22c55e, #10b981); }
-    .progress-fill.none { background: #e5e7eb; }
-
-    /* 看板模块 */
+    /* ── 看板 ── */
+    .dash-summary { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; padding: 16px 20px; background: #fff; border-radius: 10px; border: 1px solid #e8eaf0; }
+    .dash-summary .ds-item { display: flex; align-items: baseline; gap: 6px; }
+    .dash-summary .ds-label { font-size: 14px; color: #888; }
+    .dash-summary .ds-val { font-size: 22px; font-weight: 700; color: #4f46e5; }
+    .dash-summary .ds-total { font-size: 13px; color: #bbb; }
+    .dash-summary .ds-sep { width: 1px; height: 24px; background: #e8eaf0; margin: 0 4px; }
     .dash-widget { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #e8eaf0; margin-bottom: 14px; }
-    .dash-widget.accent { border-left: 4px solid #6366f1; background: #f8f9ff; }
-    .dash-widget h3 { font-size: 15px; color: #888; margin-bottom: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+    .dash-widget.accent { border-left: 3px solid #6366f1; }
+    .dash-widget h3 { font-size: 14px; color: #888; margin-bottom: 10px; font-weight: 500; }
 
     /* 随机任务 */
-    .random-box { padding: 4px 0; }
     .random-task-name { font-size: 18px; font-weight: 700; }
-    .random-task-desc { font-size: 15px; color: #666; margin-top: 4px; }
-    .random-task-form { font-size: 13px; color: #aaa; }
-    .random-actions { margin-top: 14px; display: flex; gap: 8px; }
-    .random-actions button { padding: 8px 20px; border-radius: 18px; border: 1px solid #e0e0e0; background: #fff; color: #555; cursor: pointer; font-size: 14px; transition: all 0.1s; }
-    .random-actions button:hover { border-color: #6366f1; color: #6366f1; }
-    .random-actions button.primary { background: #10b981; border-color: #10b981; color: #fff; }
-    .random-actions button.primary:hover { background: #059669; }
+    .random-task-desc { font-size: 15px; color: #555; margin: 4px 0 8px; }
+    .random-btns { margin-top: 12px; display: flex; gap: 8px; }
+    .random-btns button { padding: 7px 18px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; color: #555; cursor: pointer; font-size: 13px; transition: all 0.1s; }
+    .random-btns button:hover { border-color: #4f46e5; color: #4f46e5; }
+    .random-btns button.primary { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .random-btns button.primary:hover { background: #4338ca; }
 
-    /* 今日完成 */
-    .today-done { font-size: 14px; color: #888; margin-top: 6px; }
-    .today-done .td-item { display: inline-block; background: #f0fdf4; color: #166534; padding: 4px 12px; border-radius: 10px; margin: 2px 4px; font-size: 13px; }
+    /* 今日完成 / 关联任务列表 */
+    .related-tasks { margin-top: 12px; }
+    .rt-title { font-size: 13px; color: #888; margin-bottom: 6px; }
+    .rt-row { display: flex; align-items: center; gap: 8px; padding: 4px 8px; font-size: 14px; color: #555; border-radius: 4px; }
+    .rt-row.done { color: #bbb; text-decoration: line-through; opacity: 0.5; }
+    .td-list { display: flex; flex-wrap: wrap; gap: 4px; }
+    .td-row { display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 8px; font-size: 13px; }
 
     /* 提示条 */
-    .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px; }
+    .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 14px; color: #92400e; }
 
-    /* ── 图鉴/异色 Tab 共用 ── */
-    .sprite-toolbar { margin-bottom: 12px; }
-    .sprite-search { width: 100%; padding: 11px 14px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 15px; background: #fff; color: #1a1a2e; font-family: inherit; margin-bottom: 8px; }
+    /* ── 工具栏 ── */
+    .tb-section { margin-bottom: 10px; }
+    .tb-section:last-child { margin-bottom: 0; }
+    .tb-label { font-size: 12px; color: #aaa; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sprite-search { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; background: #fff; color: #1a1a2e; font-family: inherit; }
     .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
-    .chips { display: flex; gap: 5px; flex-wrap: wrap; }
-    .chip { padding: 5px 14px; border-radius: 14px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.12s; user-select: none; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip { padding: 5px 14px; border-radius: 14px; border: 1px solid #d1d5db; background: #fff; color: #777; cursor: pointer; font-size: 13px; white-space: nowrap; transition: all 0.12s; user-select: none; }
     .chip:hover { border-color: #4f46e5; color: #4f46e5; }
     .chip.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .sprite-stats { font-size: 14px; color: #999; margin: 10px 0; display: flex; gap: 14px; }
+    .sprite-stats { font-size: 13px; color: #999; margin: 8px 0 12px; }
     .sprite-stats strong { color: #4f46e5; }
 
     /* 精灵卡片 */
-    .sprite-list { display: flex; flex-direction: column; gap: 8px; }
-    .sprite-card { background: #fff; border-radius: 9px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
+    .sprite-list { display: flex; flex-direction: column; gap: 6px; }
+    .sprite-card { background: #fff; border-radius: 8px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
     .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .sprite-card-header { display: flex; align-items: center; gap: 6px; padding: 12px 16px; cursor: pointer; user-select: none; }
-    .sprite-card-header .si { font-size: 22px; flex-shrink: 0; }
-    .sprite-card-header .sn { font-size: 17px; font-weight: 600; flex: 0 1 auto; }
-    .sprite-card-header .se { font-size: 11px; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
-    .sprite-card-header .sm { font-size: 13px; color: #aaa; white-space: nowrap; flex-shrink: 0; }
-    .sprite-card-header .sa { font-size: 12px; color: #ccc; transition: transform 0.2s; flex-shrink: 0; margin-left: auto; }
+    .sprite-card-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; cursor: pointer; user-select: none; }
+    .sprite-card-header .si { font-size: 18px; flex-shrink: 0; }
+    .sprite-card-header .sn { font-size: 16px; font-weight: 600; }
+    .sprite-card-header .se { font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .sprite-card-header .sm { font-size: 12px; color: #aaa; white-space: nowrap; flex-shrink: 0; margin-left: auto; margin-right: 6px; }
+    .sprite-card-header .sa { font-size: 10px; color: #ccc; transition: transform 0.15s; flex-shrink: 0; }
     .sprite-card.expanded .sa { transform: rotate(90deg); }
-    .sprite-card-body { display: none; padding: 0 16px 14px; border-top: 1px solid #f0f0f5; }
+    .sprite-card-body { display: none; padding: 0 16px 12px; border-top: 1px solid #f0f0f5; }
     .sprite-card.expanded .sprite-card-body { display: block; }
 
-    /* 关联任务组 */
-    .task-group { margin-top: 10px; }
-    .task-group-label { font-size: 13px; color: #888; margin-bottom: 4px; padding-left: 2px; }
-    .task-row { display: flex; align-items: flex-start; gap: 8px; padding: 5px 8px; border-radius: 5px; font-size: 15px; color: #444; }
+    /* 任务 */
+    .task-group { margin-top: 8px; }
+    .task-group-label { font-size: 12px; color: #888; margin-bottom: 2px; padding-left: 2px; }
+    .task-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 4px; font-size: 15px; color: #444; }
     .task-row:hover { background: #f8f9fc; }
     .task-row.done { color: #bbb; text-decoration: line-through; opacity: 0.5; }
-    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; margin-top: 2px; }
+    .task-check { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #d1d5db; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
     .task-check.checked { background: #10b981; border-color: #10b981; }
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
-    .form-label { font-size: 14px; font-weight: 600; color: #6366f1; margin-bottom: 4px; margin-top: 8px; }
-    .form-label .fc { font-size: 12px; color: #10b981; margin-left: 6px; }
+    .task-row .task-check.noclick { cursor: default; pointer-events: none; }
 
-    /* 分页 */
-    .pagination { display: flex; justify-content: center; gap: 4px; margin-top: 16px; }
-    .pagination button { width: 34px; height: 34px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #666; cursor: pointer; font-size: 13px; transition: all 0.1s; }
-    .pagination button:hover { border-color: #4f46e5; color: #4f46e5; }
-    .pagination button.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
-    .pagination button:disabled { opacity: 0.3; cursor: default; }
+    .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin: 6px 0 2px; }
+    .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
 
-    /* 背包 */
-    .section-title { font-size: 14px; color: #aaa; margin-bottom: 8px; margin-top: 4px; letter-spacing: 0.04em; font-weight: 600; }
-    .item-list { display: flex; flex-direction: column; gap: 8px; }
-    .item-row { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 14px; transition: box-shadow 0.1s; }
-    .item-row:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    /* 通用 */
+    .section-title { font-size: 13px; color: #aaa; margin-bottom: 8px; margin-top: 4px; font-weight: 600; }
+    .item-list { display: flex; flex-direction: column; gap: 6px; }
+    .item-row { background: #fff; border-radius: 8px; padding: 13px 16px; border: 1px solid #e8eaf0; display: flex; align-items: flex-start; gap: 12px; transition: box-shadow 0.1s; }
+    .item-row:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .item-row.done { opacity: 0.4; }
     .item-row .item-info { flex: 1; min-width: 0; }
-    .item-row .item-name { font-size: 17px; font-weight: 500; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
-    .item-row .item-notes { font-size: 13px; color: #aaa; margin-top: 2px; line-height: 1.3; }
+    .item-row .item-name { font-size: 16px; font-weight: 500; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
+    .item-row .item-notes { font-size: 13px; color: #aaa; margin-top: 2px; }
     .item-row .item-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
+    .check-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d1d5db; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
     .check-btn:hover { border-color: #10b981; }
     .check-btn.checked { background: #10b981; border-color: #10b981; }
-    .check-btn.checked::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 800; }
-    .source-btn { font-size: 14px; color: #4f46e5; text-decoration: none; padding: 5px 14px; border-radius: 6px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .check-btn.checked::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 800; }
+    .source-btn { font-size: 13px; color: #4f46e5; text-decoration: none; padding: 4px 12px; border-radius: 6px; border: 1px solid #c7d2fe; background: #eef2ff; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
     .source-btn:hover { background: #e0e7ff; }
-    .add-source { font-size: 14px; color: #bbb; cursor: pointer; padding: 5px 14px; border-radius: 6px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .add-source { font-size: 13px; color: #bbb; cursor: pointer; padding: 4px 12px; border-radius: 6px; border: 1px dashed #ddd; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
     .item-category-tag { font-size: 12px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
 
-    /* 折叠已完成区域 */
     .section-header { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 6px 0; }
     .section-header .arrow { font-size: 10px; transition: transform 0.2s; color: #aaa; }
     .section-header.collapsed .arrow { transform: rotate(-90deg); }
-    .section-body { overflow: hidden; transition: max-height 0.3s ease; max-height: 2000px; }
+    .section-body { overflow: hidden; max-height: 2000px; }
     .section-body.collapsed { max-height: 0; }
 
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; align-items: center; justify-content: center; }
@@ -144,14 +132,12 @@
     .btn-primary:hover { background: #4338ca; }
     .btn-secondary { background: #f0f0f5; color: #666; }
 
-    .tag-limited { font-size: 12px; color: #dc2626; background: #fef2f2; padding: 3px 8px; border-radius: 10px; border: 1px solid #fecaca; white-space: nowrap; }
-    .tag-archived { font-size: 12px; color: #9ca3af; background: #f9fafb; padding: 3px 8px; border-radius: 10px; border: 1px solid #e5e7eb; white-space: nowrap; }
+    .tag-limited { font-size: 11px; color: #dc2626; background: #fef2f2; padding: 2px 7px; border-radius: 8px; border: 1px solid #fecaca; white-space: nowrap; }
+    .tag-archived { font-size: 11px; color: #9ca3af; background: #f9fafb; padding: 2px 7px; border-radius: 8px; border: 1px solid #e5e7eb; white-space: nowrap; }
     .empty-state { text-align: center; padding: 48px 20px; color: #bbb; font-size: 16px; }
     .empty-state small { display: block; margin-top: 6px; font-size: 14px; color: #ccc; }
-    .alert-bar { font-size: 14px; }
 
-    /* 属性标签颜色 */
-    .se { color: #6366f1; background: #eef2ff; } /* default */
+    .se { color: #6366f1; background: #eef2ff; }
     .se.el-火 { color: #dc2626; background: #fef2f2; }
     .se.el-水 { color: #2563eb; background: #eff6ff; }
     .se.el-草 { color: #16a34a; background: #f0fdf4; }
@@ -170,9 +156,9 @@
     .se.el-翼 { color: #0e7490; background: #f0f9ff; }
     .se.el-普 { color: #6b7280; background: #f5f6fa; }
     .se.el-机 { color: #52525b; background: #f5f5f6; }
-    .tag-boss { display:inline-block;font-size:10px;padding:1px 5px;border-radius:8px;background:#fef2f2;color:#dc2626;margin-left:4px;font-weight:600; }
-    .tag-shiny { display:inline-block;font-size:10px;padding:1px 5px;border-radius:8px;background:#fefce8;color:#ca8a04;margin-left:2px;font-weight:600; }
-    .tag-chromatic { display:inline-block;font-size:10px;padding:1px 5px;border-radius:8px;background:#f0f9ff;color:#0891b2;margin-left:2px;font-weight:600; }
+    .tag-boss { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#fef2f2;color:#dc2626;margin-left:4px;font-weight:600; }
+    .tag-shiny { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#fefce8;color:#ca8a04;margin-left:2px;font-weight:600; }
+    .tag-chromatic { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#f0f9ff;color:#0891b2;margin-left:2px;font-weight:600; }
   </style>
 </head>
 <body>
@@ -261,8 +247,7 @@ const CATEGORY_META = {
 };
 
 // 精灵图鉴状态
-let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spritePage = 1, expandedPet = null;
-const PAGE_SIZE = 40;
+let spriteSearch = '', spriteElement = null, spriteStatus = 'all', expandedPet = null;
 
 // 异色炫彩状态
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
@@ -434,26 +419,21 @@ function renderDashboard() {
 
   let spriteOwned = 0, spriteTotal = allPetKeys.length;
   let yiseTotal = 0, yiseOwned = 0;
+  let fruitTotal = 0, fruitOwned = 0;
 
   allPetKeys.forEach(petKey => {
     const pet = pets[petKey];
     if (!pet) return;
-    // Check if any capture/capture_gifted task is done
     const tasks = petTasks(petKey);
     const progress = getTaskProgress(petKey);
-    const hasCapture = tasks.some((t, i) =>
-      (t.type === 'capture' || t.type === 'capture_gifted') && progress[String(i)]
-    );
-    if (hasCapture) spriteOwned++;
-    // Shiny
-    if (pet.tags?.shiny && isFinalEvolution(petKey)) {
-      yiseTotal++;
-      if (shinyProg[petKey]) yiseOwned++;
-    }
+    if (tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && progress[String(i)])) spriteOwned++;
+    if (pet.tags?.shiny && isFinalEvolution(petKey)) { yiseTotal++; if (shinyProg[petKey]) yiseOwned++; }
+    if (pet.fruit) { fruitTotal++; if (pet.fruit.acquired) fruitOwned++; }
   });
 
   let html = '';
 
+  // 活动预警
   const now = new Date();
   (data.activities || []).forEach(a => {
     if (!a.end_date) return;
@@ -462,48 +442,70 @@ function renderDashboard() {
       html += `<div class="alert-bar">⚠️ <strong>${esc(a.name)}</strong> 还有 <strong>${days}</strong> 天结束</div>`;
   });
 
-  html += '<div class="dash-stats">';
-  html += dashCard('精灵图鉴', spriteOwned, spriteTotal, "switchTab('sprite')");
-  html += dashCard('异色炫彩', yiseOwned, yiseTotal, "switchTab('shiny')");
-  ['外观','家具','玩具','称号','星星','课题'].forEach(cat => {
-    const c = (data.categories || {})[cat];
-    html += dashCard(cat, c?.owned, c?.total, '');
-  });
+  // 紧凑进度摘要
+  html += '<div class="dash-summary">';
+  html += `<div class="ds-item"><span class="ds-label">精灵</span><span class="ds-val">${spriteOwned}</span><span class="ds-total">/ ${spriteTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">异色</span><span class="ds-val">${yiseOwned}</span><span class="ds-total">/ ${yiseTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">果实</span><span class="ds-val">${fruitOwned}</span><span class="ds-total">/ ${fruitTotal}</span></div>`;
+  html += `<span style="font-size:11px;color:#bbb;margin-left:auto">更新于 ${data.meta?.last_updated || '--'}</span>`;
   html += '</div>';
 
+  // 随机任务 — 用和精灵页一样的勾选形式
   html += '<div class="dash-widget accent">';
   html += '<h3>🎯 随机任务</h3>';
-  if (randomTask) {
-    html += `<div class="random-box">`;
-    html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
-    html += `<div class="random-task-desc">${esc(randomTask.desc)}</div>`;
-    html += `<div class="random-task-form">${randomTask.form || randomTask.category || ''}</div>`;
-    if (randomTask.type === 'sprite') {
-      const related = getRelatedTasks(randomTask.petKey);
-      if (related.length > 1) {
-        html += '<div class="related-tasks"><div class="rt-title">📋 可一起完成（同精灵其他任务）</div>';
-        related.filter(r => !r.isMain).forEach(r => {
-          html += `<div class="rt-row${r.done ? ' done' : ''}">${r.done ? '✅' : '⬜'} ${esc(r.desc)}</div>`;
-        });
+  if (randomTask && randomTask.type === 'sprite') {
+    const petKey = randomTask.petKey;
+    const pet = pets[petKey];
+    const tasks = petTasks(petKey);
+    const progress = getTaskProgress(petKey);
+    const task = tasks[randomTask.taskIdx];
+
+    html += `<div class="random-task-name">${esc(pet?.name || '?')}</div>`;
+    let mainDesc = task?.type === 'skill' ? `使用${task.skillName}${task.count}次` : (task?.desc || '');
+    html += `<div class="random-task-desc">${esc(mainDesc)}</div>`;
+
+    // 同精灵所有任务 (checkable)
+    if (tasks.length) {
+      const excludeTypes = new Set(['destined_hero', 'confirm_forms']);
+      html += '<div class="related-tasks"><div class="rt-title">📋 可一起完成</div>';
+      tasks.forEach((t, ti) => {
+        if (excludeTypes.has(t.type)) return;
+        const done = !!progress[String(ti)];
+        const desc = t.type === 'skill' ? `使用${t.skillName}${t.count}次` : t.desc;
+        const isMain = (ti === randomTask.taskIdx);
+        html += `<div class="rt-row${done ? ' done' : ''}">`;
+        html += `<div class="task-check${done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask('${petKey}',${ti});clearRandomTask();randomTask=null;renderDashboard()"></div>`;
+        html += `<span>${esc(desc)}${isMain ? ' <span style="color:#6366f1;font-size:11px">← 目标</span>' : ''}</span>`;
         html += '</div>';
-      }
-      html += `<div class="random-btns"><button class="btn btn-primary" onclick="viewRandomTask('${randomTask.petKey}')">去图鉴看</button>`;
-      html += `<button class="btn btn-primary done-btn" onclick="markRandomDone()">标记完成 🎉</button></div>`;
-    } else {
-      html += `<div class="random-btns"><button class="btn btn-primary done-btn" onclick="markRandomItemDone()">标记完成 🎉</button></div>`;
+      });
+      html += '</div>';
     }
+
+    html += `<div class="random-btns">`;
+    html += `<button class="primary" onclick="viewRandomTask('${petKey}')">去图鉴看</button>`;
+    html += `<button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button>`;
+    html += '</div>';
+  } else if (randomTask && randomTask.type === 'item') {
+    html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
+    html += `<div class="random-task-desc">${esc(randomTask.desc || '')}</div>`;
+    html += `<div class="random-btns"><button class="primary" onclick="markRandomItemDone()">标记完成</button>`;
+    html += `<button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button></div>`;
   } else {
-    html += '<div class="random-box"><span style="color:#aaa">暂无未完成的任务，去图鉴看看吧~</span></div>';
+    html += '<div style="color:#aaa;padding:8px 0">暂无未完成的任务，去图鉴看看吧~</div>';
+    html += `<div class="random-btns"><button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button></div>`;
   }
   html += '</div>';
 
+  // 今日完成
   html += '<div class="dash-widget">';
   html += '<h3>📅 今日完成</h3>';
   const doneToday = getDoneToday();
   if (doneToday.length) {
     html += '<div class="td-list">';
     doneToday.forEach(d => {
-      html += `<div class="td-row"><span>${esc(d.name)}</span><span style="color:#666;font-size:14px">${esc(d.desc || '')}</span></div>`;
+      html += `<div class="td-row"><span>${esc(d.name)}</span><span>${esc(d.desc || '')}</span></div>`;
     });
     html += '</div>';
   } else {
@@ -512,20 +514,6 @@ function renderDashboard() {
   html += '</div>';
 
   el.innerHTML = html;
-}
-
-function dashCard(label, owned, total, onclick) {
-  const o = owned || 0, t = total;
-  if (t === null || t === undefined) {
-    return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
-      <div class="label">${label}</div><div class="hint tbd">—</div>
-      <div class="progress-bar"><div class="progress-fill none" style="width:0%"></div></div></div>`;
-  }
-  const pct = t ? Math.round(o / t * 100) : 0;
-  const cls = pct === 0 ? 'none' : pct < 33 ? 'low' : pct < 67 ? 'mid' : 'high';
-  return `<div class="stat-card" ${onclick ? `onclick="${onclick}" style="cursor:pointer"` : ''}>
-    <div class="label">${label}</div><div class="numbers">${o} <span>/ ${t}</span></div>
-    <div class="progress-bar"><div class="progress-fill ${cls}" style="width:${pct || 1}%"></div></div></div>`;
 }
 
 // ═══════════ 随机抽取 ═══════════
@@ -583,13 +571,12 @@ function getRelatedTasks(petKey) {
 async function viewRandomTask(petKey) {
   switchTab('sprite');
   expandedPet = petKey;
-  spritePage = 1;
   spriteSearch = '';
   spriteElement = null;
-  spriteStatus = 'pending';
+  spriteStatus = 'all';
   renderSpriteTab();
   setTimeout(() => {
-    const card = document.querySelector('#sprite-content .sprite-card');
+    const card = document.querySelector('#sprite-content .sprite-card.expanded');
     if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 100);
 }
@@ -622,22 +609,24 @@ function renderSpriteTab() {
 function renderSpriteToolbar() {
   const el = document.getElementById('sprite-toolbar');
   const pets = gameData?.pets || {};
-  const allElements = [...new Set(
-    Object.values(pets).flatMap(p => p.element || [])
-  )].sort();
+  const allElements = [...new Set(Object.values(pets).flatMap(p => p.element || []))].sort();
 
-  let html = '';
-  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（支持拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
-  html += '<div class="chips">';
+  let html = '<div class="tb-section">';
+  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
+  html += '</div>';
+
+  html += '<div class="tb-section"><div class="tb-label">元素筛选</div><div class="chips">';
   html += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
   html += `<span class="chip${spriteElement === 'destined_hero' ? ' active' : ''}" onclick="setSpriteElement('destined_hero')">命定勇者</span>`;
   allElements.forEach(el => {
     html += `<span class="chip${spriteElement === el ? ' active' : ''}" onclick="setSpriteElement('${el}')">${el}</span>`;
   });
-  html += '</div>';
-  html += '<div class="chips" style="margin-top:4px">';
+  html += '</div></div>';
+
+  html += '<div class="tb-section"><div class="tb-label">进度</div><div class="chips">';
   html += renderStatusChips(spriteStatus, 'setSpriteStatus');
-  html += '</div>';
+  html += '</div></div>';
+
   el.innerHTML = html;
 }
 
@@ -646,24 +635,19 @@ function renderSpriteContent() {
   const pets = gameData?.pets || {};
   let entries = petEntries();
 
-  // Search filter
   if (spriteSearch) {
     const q = spriteSearch.toLowerCase();
     entries = entries.filter(([, pet]) => {
-      const nameMatch = pet.name.includes(q);
-      const elMatch = (pet.element || []).some(e => e.includes(q));
-      const pyMatch = pet.pinyin && (pet.pinyin.full.includes(q) || pet.pinyin.initial.includes(q));
-      return nameMatch || elMatch || pyMatch;
+      return pet.name.includes(q) || (pet.element || []).some(e => e.includes(q)) ||
+        (pet.pinyin && (pet.pinyin.full.includes(q) || pet.pinyin.initial.includes(q)));
     });
   }
-  // Element filter
   if (spriteElement === 'destined_hero') {
     entries = entries.filter(([, pet]) => pet.destined_hero);
   } else if (spriteElement) {
     entries = entries.filter(([, pet]) => (pet.element || []).includes(spriteElement));
   }
 
-  // Status filter
   if (spriteStatus !== 'all') {
     entries = entries.filter(([petKey]) => {
       const tasks = petTasks(petKey);
@@ -682,12 +666,8 @@ function renderSpriteContent() {
     return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && p[String(i)]);
   }).length;
 
-  const totalPages = Math.ceil(entries.length / PAGE_SIZE);
-  if (spritePage > totalPages) spritePage = 1;
-  const pageItems = entries.slice((spritePage - 1) * PAGE_SIZE, spritePage * PAGE_SIZE);
-
   let html = '';
-  html += `<div class="sprite-stats"><span>共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 本页 <strong>${pageItems.length}</strong></span></div>`;
+  html += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong></div>`;
 
   if (!entries.length) {
     html += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
@@ -695,9 +675,9 @@ function renderSpriteContent() {
   }
 
   html += '<div class="sprite-list">';
-  pageItems.forEach(([petKey, pet]) => { html += renderSpriteCard(petKey, pet); });
+  entries.forEach(([petKey, pet]) => { html += renderSpriteCard(petKey, pet); });
   html += '</div>';
-  html += renderPagination(spritePage, totalPages, 'goSpritePage');
+
   el.innerHTML = html;
 }
 
@@ -804,16 +784,10 @@ function groupRelatedTasks(tasks) {
   return groups;
 }
 
-function onSpriteSearch(val) { spriteSearch = val; spritePage = 1; expandedPet = null; renderSpriteContent(); }
-function setSpriteElement(el) { spriteElement = el; spritePage = 1; expandedPet = null; renderSpriteTab(); }
-function setSpriteStatus(s) { spriteStatus = s; spritePage = 1; expandedPet = null; renderSpriteTab(); }
+function onSpriteSearch(val) { spriteSearch = val; expandedPet = null; renderSpriteContent(); }
+function setSpriteElement(el) { spriteElement = el; expandedPet = null; renderSpriteTab(); }
+function setSpriteStatus(s) { spriteStatus = s; expandedPet = null; renderSpriteTab(); }
 function togglePet(petKey) { expandedPet = expandedPet === petKey ? null : petKey; renderSpriteContent(); }
-function goSpritePage(p) {
-  const entries = petEntries();
-  const totalPages = Math.ceil(entries.length / PAGE_SIZE);
-  if (p < 1 || p > totalPages) return;
-  spritePage = p; expandedPet = null; renderSpriteContent();
-}
 
 // ═══════════ 异色炫彩 Tab（pets tags.shiny 驱动，仅展示进化最终形态） ═══════════
 function getShinyList() {
