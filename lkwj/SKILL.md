@@ -100,12 +100,13 @@ lkwj/
 }
 ```
 
-任务类型（10 种）：`capture`, `capture_gifted`, `capture_shiny`, `fruit`(原 capture20), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
+任务类型（10 种）：`capture`, `capture_gifted`, `capture_chromatic`(炫彩突变), `fruit`(原 capture20), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
 
 关键规则：
 - 任务是**形态无关**的——同一宠物所有形态共享同一份任务进度
 - `desc` 不含宠物名，前台拼接（如 "岚鸟" + "使用" + "龙卷风" + "3" + "次"）
 - skill 类任务额外提供 `skillName` 和 `count`
+- `capture_chromatic` 对应炫彩突变捕捉（所有精灵除迪莫外都有炫彩），与异色（tags.shiny）无关
 
 ### evolution-chains.json — 进化链（静态）
 
@@ -174,8 +175,11 @@ lkwj/
 ## 数据约束
 
 - **evolve 类任务归属**：leader_evolve/evolve 只需挂在进化前的 pet 上（form-independent）
+- **capture_chromatic ≠ 异色**：`capture_chromatic` 是炫彩突变捕捉任务（所有精灵除迪莫外都有），与 `tags.shiny`（异色标签，仅限时获取精灵有）完全独立
 - **异色炫彩展示**：由 `pets.json` 的 `tags.shiny` 驱动，仅展示进化最终形态（标签随进化传递）
-- **异色炫彩进度**：独立统计于 `collections.shiny_progress`，不由 capture_shiny 任务状态驱动
+- **异色炫彩进度**：独立统计于 `collections.shiny_progress`，不由任何 task 状态驱动
+- **异色必有限定时间**：`tags.shiny.limitedTime` 不可为"可获取"，异色均为赛季/通行证/活动限定
+- **炫彩标签**：所有精灵（除迪莫外）均有 `tags.chromatic`
 - **随机任务排除**：`destined_hero`、`fruit`、`confirm_forms` 任务类型不出现在随机池
 - **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
 
@@ -187,8 +191,8 @@ lkwj/
 | 形态：basic | 355 |
 | 形态：季节/蜕皮/地区 | 100 |
 | 首领标签 | 24 |
-| 异色标签 | 353（沿进化链传播，终态 162；S1限定9只、S2限定13只、通行证4只、活动2只、可获取316只） |
-| 炫彩标签 | 0（待采集） |
+| 异色标签 | 61（32 基础形态 + 29 进化传播；S1限定 + S2限定 + 通行证 + 活动） |
+| 炫彩标签 | 354（所有精灵除迪莫外都有炫彩） |
 | 任务总数 | 1763（form-independent） |
 | 进化链 | 162（100 多节点 + 62 单节点，9 分支） |
 | 精灵果实 | 99 种 |

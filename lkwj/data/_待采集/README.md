@@ -88,4 +88,4 @@ sprite_id,sprite_name,form_index,sprites_label,game_name(请修正)
 
 ## 提交方式
 
-填好后告诉我文件名，我会写脚本自动解析并合并到 collections.json / sprites.json。
+填好后告诉我文件名，我会写脚本自动解析并合并到 collections.json / pets.json。
