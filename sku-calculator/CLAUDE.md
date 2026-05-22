@@ -35,7 +35,7 @@
 | 目录 | 用途 |
 |------|------|
 | `lib/` | 核心模块 |
-| `data/` | 持久数据：组合明细缓存、库存配置、列顺序配置 |
+| `data/` | 运行时数据（除 gift-sku-config.json 手动维护外均为运行时产出） |
 | `docs/` | 操作规范 |
 | `tasks/` | 待办和教训 |
 | `test/` | 单元测试 |
@@ -44,7 +44,10 @@
 
 ```bash
 node cli.js parse <excel文件>     # 解析加购 Excel
-node cli.js calculate             # 执行库存分配算法
+node cli.js calculate             # 执行库存分配算法（自动读取 gift-sku-config.json）
 node cli.js report                # 生成 Excel 报告
 node cli.js run <excel文件>       # 全流程一键执行
+node cli.js gift-config add <货号> <名称> <数量>  # 添加赠品SKU配置
+node cli.js gift-config list      # 列出赠品SKU配置
+node cli.js gift-config clear     # 清空赠品SKU配置
 ```

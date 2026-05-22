@@ -2,10 +2,15 @@
 
 ## §1 核心算法规则
 
-- 库存按加购比例分配，全局统一缩放系数 `k = min(1, min(available[j] / baseDemand[j]))`
-- k 封顶为 1，不超额备货
-- 零加购 SKU 走 Phase B 保底（默认5件），不参与比例计算
-- LRM 回填：每次 +1 立即扣减 remaining，防止组合超卖
+**Phase G — 赠品预扣**：赠品 SKU 按 `gift-sku-config.json` 的固定分配量从可用库存中预扣，不参与后续算法。库存不足直接报错中止。
+
+**Phase 0 — 预处理**：可用量 `avail[j] = stock[j] * (1 - reserve)`。零库存单品依赖的 SKU 直接归零移出。active（加购>0）/ cold（加购=0）分离。
+
+**Phase A — 迭代"耗尽即锁定"**：每轮找最紧约束单品（`min(R[j] / D[j])`），锁定所有使用该单品的 SKU 并扣减库存，不影响其余 SKU。库存充足时建议库存可远超加购数。
+
+**Phase B — 整数化 + LRM 回填**：floor 取整后按余数降序逐条 +1，每次立即扣减（防止组合超卖）。
+
+**Phase C — cold SKU 保底**：零加购 SKU 从剩余库存中按保底件数分配（默认 5 件）。
 
 ## §2 输出格式
 
@@ -14,24 +19,26 @@
 2. 汇总行（合计 / 云仓库存 / 剩余库存 / 余量达标行）
 3. 瓶颈分析 sheet（缩放系数 k + 瓶颈单品 + 各单品利用率）
 
-输出为带联动公式的 xlsx：建议库存（蓝色）改动后，总占用/剩余/达标自动重算。
+输出为带联动公式的 xlsx：普通 SKU 建议库存（蓝色）可编辑，赠品 SKU 建议库存（绿色）为固定值 + 【满赠】标签。改动后总占用/剩余/达标自动重算。瓶颈分析 sheet 含赠品数量。
 
 ## §3 数据文件规范
 
-**所有文件均为运行时产出，加入 .gitignore，不手动维护。**
+**除 gift-sku-config.json 外，所有文件均为运行时产出，加入 .gitignore。**
 
 | 文件 | 说明 | 生成命令 | 清空时机 |
 |------|------|----------|---------|
+| `data/gift-sku-config.json` | **手动维护**：满赠SKU固定分配配置 | `cli.js gift-config add` 或直接编辑 | 手动 |
 | `data/product-columns.json` | 本次活动涉及的单品目录（ERP原名即displayName，按发现顺序排列） | `resolve-components` | 每次 resolve-components 开始时清空 |
-| `data/sku-components.json` | SKU 组合明细（SKU → 各单品用量） | `resolve-components` | 每次 resolve-components 开始时清空 |
+| `data/sku-components.json` | SKU 组合明细（SKU → 各单品用量，含赠品SKU） | `resolve-components` | 每次 resolve-components 开始时清空 |
 | `data/warehouse-stock.json` | 云仓库存（displayName → 数量） | `resolve-stock` | 每次 resolve-stock 开始时清空 |
 | `data/cart-adds.json` | 本次加购数据（解析自鲸灵 Excel） | `parse` | 每次 parse 覆盖 |
-| `data/allocation-result.json` | 分配结果 | `calculate` | 每次 calculate 覆盖 |
+| `data/allocation-result.json` | 分配结果（赠品SKU 标记 isGift） | `calculate` | 每次 calculate 覆盖 |
 
 ## §4 可配置参数
 
 - `--reserve 0.2` — 库存余量比例（默认0.2即20%）
 - `--cold-fixed 5` — 零加购 SKU 保底库存（默认5）
+- `data/gift-sku-config.json` — 满赠SKU固定分配：`{"giftSkus": [{"huohao": "...", "skuName": "...", "fixedAllocation": N}]}`。`cli.js gift-config add/list/clear` 辅助维护。`calculate` 自动读取，`resolve-components` 自动将赠品 huohao 合并到 ERP 解析
 
 ## §5 ERP 接入（run-full 流程）
 

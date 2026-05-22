@@ -14,7 +14,7 @@
 | `cli.js` | CLI 入口，所有命令的分发 | 执行命令时 |
 | `lib/product-catalog.js` | 运行时产品目录读取（含 clearCache()） | 涉及单品名称时 |
 | `lib/parse-cart-adds.js` | 读鲸灵加购 Excel → JSON | 解析输入数据时 |
-| `lib/allocate.js` | 核心分配算法（全局缩放+LRM） | 修改算法时 |
+| `lib/allocate.js` | 核心分配算法：Phase G赠品预扣 + 迭代"耗尽即锁定" + LRM回填 + cold保底 | 修改算法时 |
 | `lib/write-report.js` | 生成输出 xlsx | 修改报告格式时 |
 | `lib/resolve-components.js` | ERP 组合明细查询 + **动态生成 product-columns.json** | 接入 ERP 时 |
 | `lib/query-stock.js` | ERP 库存状态查询（依赖 product-columns.json 已生成） | 接入 ERP 时 |

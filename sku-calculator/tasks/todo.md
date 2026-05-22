@@ -23,5 +23,6 @@
   - parse 写 supplierId 到 _meta
   - resolve-components 自动从共享 shop-map.js 推导店铺名
   - matchedSkus < totalSkus → exit(1) 硬中止
-- [ ] 3.2 mergeStock 支持 — 将两个 ERP 名合并为同一 displayName（当前动态目录不支持，按需添加）
-- [ ] 3.3 kgossynt-sm 商品匹配 — 该货号尚未在商品匹配项目中完成，3个 SKU 无法包含在计算中
+- [x] 3.2 满赠SKU固定分配 — 不在加购Excel中的赠品SKU，通过 gift-sku-config.json 配置固定分配量。resolve-components 自动合并 huohao 到 ERP 解析，allocate Phase G 预扣库存，report 绿色【满赠】标注（2026-05-22，61/61 测试通过）
+- [ ] 3.3 mergeStock 支持 — 将两个 ERP 名合并为同一 displayName（当前动态目录不支持，按需添加）
+- [ ] 3.4 kgossynt-sm 商品匹配 — 该货号尚未在商品匹配项目中完成，3个 SKU 无法包含在计算中
