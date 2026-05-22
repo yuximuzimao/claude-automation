@@ -433,10 +433,9 @@ router.post('/insights/generate', (req, res) => {
   const all = db.readFeedback({ uninsighted: true });
   if (!all.length) return res.status(400).json({ error: '没有待洞察的反馈' });
 
-  // 分批：差评优先，最多 MAX_INSIGHT_BATCH 条
+  // 只取差评（好评 93% 空点击，无分析价值）
   const neg = all.filter(f => f.verdict === 'negative');
-  const pos = all.filter(f => f.verdict === 'positive');
-  const batch = [...neg, ...pos].slice(0, MAX_INSIGHT_BATCH);
+  const batch = neg.slice(0, MAX_INSIGHT_BATCH);
   const remaining = all.length - batch.length;
 
   // 组装 prompt（跳过 sim 为 null 的反馈，不阻塞整批）
@@ -465,26 +464,19 @@ router.post('/insights/generate', (req, res) => {
 
   if (!lines.length) return res.status(400).json({ error: '所有待洞察反馈对应的 simulation 已失效' });
 
-  const negCount = Math.min(neg.length, MAX_INSIGHT_BATCH);
-  const posCount = batch.length - negCount;
   const batchNote = remaining > 0 ? `（剩余 ${remaining} 条下次分析）` : '';
 
   const prompt = `你是售后工单AI推理系统的规则优化助手。
 
 ## 数据
-${batch.length} 条评价${batchNote}（${negCount} 条差评 + ${posCount} 条好评）：
+${batch.length} 条差评${batchNote}：
 
 ${lines.join('\n\n')}
 
 ## 分析要求
 
 1. **差评问题**：哪些推理逻辑错了？根因是什么？（具体场景×判断错误）
-2. **好评隐性问题**：✅好评只代表结论正确，不代表过程没问题。找出：
-   - 结论正确但有采集异常 → 过程脆但结果侥幸对
-   - 置信度 high 但推理路径走了不可靠分支
-   - 多个好评有共性采集异常 → 系统盲区
-3. **规则建议**：针对发现的问题，具体怎么改规则/改代码？
-4. **好评中值得保留的做法**：哪些规则/模式在多个好评工单中持续正确？
+2. **规则建议**：针对发现的问题，具体怎么改规则/改代码？
 
 输出：
 - 直接分析，不要标题行/元数据行/原始数据罗列
