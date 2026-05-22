@@ -18,6 +18,24 @@ const { isBatchExecutable } = require('../constants');
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
 const BASE = path.join(__dirname, '../..');
+
+// 构建归档 case 数据（archive-manual 和 batch-archive-auto 共用）
+function buildCasePayload(id, queueItem, sim, source) {
+  const decision = sim && sim.decision;
+  return {
+    id,
+    workOrderNum: queueItem.workOrderNum,
+    accountNote: queueItem.accountNote,
+    type: queueItem.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type) || '',
+    groundTruth: {
+      action: (decision && decision.action) || (source === 'auto_executed' ? 'approve' : 'escalate'),
+      reason: (decision && decision.reason) || (source === 'auto_executed' ? '自动处理归档' : '手动处理归档'),
+      source,
+    },
+    collectedData: sim && sim.collectedData,
+    addedAt: new Date().toISOString(),
+  };
+}
 const SESSIONS_DIR = path.join(BASE, '../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
 const ACCOUNT_STATUS_FILE = path.join(BASE, 'data/account-status.json');
@@ -178,31 +196,14 @@ router.post('/queue/:id/archive-manual', (req, res) => {
   const queueItem = (queue.items || []).find(i => i.id === req.params.id);
   if (!queueItem) return res.status(404).json({ error: '未找到队列项' });
 
-  // 幂等性：已归档则直接返回，防止重复写入 cases.jsonl
-  if (queueItem.status === 'done') {
-    sse.broadcast('cases-update', {});
-    return res.json({ ok: true, dedup: true });
-  }
+  // 幂等：已归档的工单可能被用户双击或重试触发，直接返回避免重复写入
+  if (queueItem.status === 'done') return res.json({ ok: true, dedup: true });
 
   const simId = req.body.simId;
   const sim = simId ? db.getSimulation(simId) : null;
-  const decision = sim && sim.decision;
+  const source = queueItem.status === 'auto_executed' ? 'auto_executed' : 'manual_handled';
 
-  const isAuto = queueItem.status === 'auto_executed';
-
-  db.appendCase({
-    id: `case-${Date.now()}`,
-    workOrderNum: queueItem.workOrderNum,
-    accountNote: queueItem.accountNote,
-    type: queueItem.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type),
-    groundTruth: {
-      action: (decision && decision.action) || 'escalate',
-      reason: (decision && decision.reason) || (isAuto ? '自动处理归档' : '手动处理归档'),
-      source: isAuto ? 'auto_executed' : 'manual_handled',
-    },
-    collectedData: sim && sim.collectedData,
-    addedAt: new Date().toISOString(),
-  });
+  db.appendCase(buildCasePayload(`case-${Date.now()}`, queueItem, sim, source));
 
   db.updateQueueItem(queueItem.id, { status: 'done' });
   if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
@@ -273,25 +274,21 @@ router.delete('/feedback/:simId', (req, res) => {
 // 批量归档已自动执行的工单（此时才写入 cases.jsonl，保证历史记录只有一条）
 router.post('/queue/batch-archive-auto', (req, res) => {
   const queue = db.readQueue();
-  const sims = db.readSimulations();
   const autoItems = (queue.items || []).filter(i => i.status === 'auto_executed');
+  if (autoItems.length === 0) return res.json({ ok: true, count: 0 });
+
+  // 构建 queueItemId → 最新 live sim 的 Map，避免循环内重复扫描
+  const sims = db.readSimulations();
+  const simByQueueId = new Map();
+  sims.forEach(s => {
+    if (s.mode !== 'live' || !s.queueItemId) return;
+    const cur = simByQueueId.get(s.queueItemId);
+    if (!cur || new Date(s.createdAt || 0) > new Date(cur.createdAt || 0)) simByQueueId.set(s.queueItemId, s);
+  });
+
   for (const item of autoItems) {
-    const sim = sims.filter(s => s.workOrderNum === item.workOrderNum && s.mode === 'live')
-      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))[0];
-    const decision = sim && sim.decision;
-    db.appendCase({
-      id: `case-${Date.now()}-${item.id}`,
-      workOrderNum: item.workOrderNum,
-      accountNote: item.accountNote,
-      type: item.type || (sim && sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type) || '',
-      groundTruth: {
-        action: (decision && decision.action) || 'approve',
-        reason: (decision && decision.reason) || '自动处理归档',
-        source: 'auto_executed',
-      },
-      collectedData: sim && sim.collectedData,
-      addedAt: new Date().toISOString(),
-    });
+    const sim = simByQueueId.get(item.id);
+    db.appendCase(buildCasePayload(`case-${Date.now()}-${item.id}`, item, sim, 'auto_executed'));
     db.updateQueueItem(item.id, { status: 'done' });
     if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
   }
