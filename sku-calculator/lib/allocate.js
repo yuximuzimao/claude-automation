@@ -1,7 +1,12 @@
 /**
  * 核心库存分配算法
  *
- * 算法：迭代"耗尽即锁定" + 最大余数法回填（LRM）+ 冷热分离
+ * 算法：赠品预扣 + 迭代"耗尽即锁定" + 最大余数法回填（LRM）+ 冷热分离
+ *
+ * Phase G: 赠品SKU固定分配（在 Phase 0 之前）
+ *   - 读取 giftConfig，对每个赠品SKU按固定数量预扣库存
+ *   - 库存不足直接报错中止（赠品是客户承诺，不能缺）
+ *   - 赠品SKU从后续算法流程中移除
  *
  * Phase 0: 预处理
  *   - 计算可用量 avail[j] = stock[j] * (1 - reserve)
@@ -27,7 +32,7 @@
  * @param {object[]} skus - 每个 SKU: { key, huohao, skuName, cartAddCount }
  * @param {object} components - { [key]: { components: { displayName: qty } } }
  * @param {object} stock - { [displayName]: qty } 云仓库存
- * @param {object} opts - { reserve: 0.2, coldFixed: 5 }
+ * @param {object} opts - { reserve: 0.2, coldFixed: 5, giftConfig: [{ huohao, skuName, fixedAllocation }] }
  * @returns {object} 分配结果
  */
 function allocate(skus, components, stock, opts = {}) {
@@ -48,11 +53,53 @@ function allocate(skus, components, stock, opts = {}) {
     avail[product] = qty * (1 - reserve);
   }
 
+  // Phase G: 赠品SKU固定分配 — 在算法运行前预扣库存
+  const giftKeys = new Set();
+  const giftSkus = []; // 用于最终输出
+  const giftConfig = opts.giftConfig || [];
+
+  if (giftConfig.length > 0) {
+    for (const gift of giftConfig) {
+      const key = `${gift.huohao}::${gift.skuName.replace(/\s+/g, ' ').trim()}`;
+      const comp = (components[key] && components[key].components) || {};
+
+      if (!Object.keys(comp).length) {
+        throw new Error(
+          `满赠SKU ${key} 无组合明细。请先运行 resolve-components 确保赠品SKU已从ERP解析`
+        );
+      }
+
+      // 校验库存是否足够（不足直接中止，赠品是客户承诺不能缺）
+      for (const [p, qty] of Object.entries(comp)) {
+        const required = gift.fixedAllocation * qty;
+        const available = avail[p] ?? 0;
+        if (available < required) {
+          throw new Error(
+            `满赠SKU ${key} 库存不足: 单品「${p}」需要 ${required} 件` +
+            `（${gift.fixedAllocation} 件 × ${qty}），可用仅 ${Math.round(available)} 件`
+          );
+        }
+      }
+
+      // 预扣库存
+      for (const [p, qty] of Object.entries(comp)) {
+        avail[p] = (avail[p] ?? 0) - gift.fixedAllocation * qty;
+      }
+
+      inv[key] = gift.fixedAllocation;
+      giftKeys.add(key);
+      giftSkus.push({ key, huohao: gift.huohao, skuName: gift.skuName, comp, allocation: gift.fixedAllocation });
+    }
+  }
+
+  // 过滤掉赠品SKU，剩余进入正常算法流程
+  const nonGiftSkus = skus.filter(s => !giftKeys.has(s.key));
+
   // Phase 0: 分离 active/cold，零库存预处理
   const activeSkus = [];
   const coldSkus   = [];
 
-  for (const sku of skus) {
+  for (const sku of nonGiftSkus) {
     if (sku.cartAddCount <= 0) {
       coldSkus.push(sku);
       continue;
@@ -184,8 +231,8 @@ function allocate(skus, components, stock, opts = {}) {
     }
   }
 
-  // 缺少组合明细警告
-  for (const sku of skus) {
+  // 缺少组合明细警告（仅针对非赠品SKU，赠品已在Phase G校验）
+  for (const sku of nonGiftSkus) {
     if (!components[sku.key]) {
       warnings.push(`⚠️  缺少组合明细: ${sku.key}，无法计算单品占用`);
     }
@@ -220,17 +267,22 @@ function allocate(skus, components, stock, opts = {}) {
     }
   }
 
-  // 计算各单品总需求（报告用）
+  // 计算各单品总需求（报告用，含赠品SKU）
   const totalDemand = {};
-  for (const sku of skus) {
+  for (const sku of nonGiftSkus) {
     const allocation = inv[sku.key] || 0;
     for (const [p, qty] of Object.entries(getComp(sku))) {
       totalDemand[p] = (totalDemand[p] || 0) + allocation * qty;
     }
   }
+  for (const gift of giftSkus) {
+    for (const [p, qty] of Object.entries(gift.comp)) {
+      totalDemand[p] = (totalDemand[p] || 0) + gift.allocation * qty;
+    }
+  }
 
   // 构建 SKU 明细
-  const skuDetails = skus.map(sku => {
+  const skuDetails = nonGiftSkus.map(sku => {
     const comp = getComp(sku);
     const allocation = inv[sku.key] || 0;
     const productBreakdown = {};
@@ -243,10 +295,29 @@ function allocate(skus, components, stock, opts = {}) {
       skuName: sku.skuName,
       cartAddCount: sku.cartAddCount,
       isActive: sku.cartAddCount > 0,
+      isGift: false,
       allocatedInventory: allocation,
       productBreakdown,
     };
   });
+
+  // 追加赠品SKU明细
+  for (const gift of giftSkus) {
+    const productBreakdown = {};
+    for (const [p, qty] of Object.entries(gift.comp)) {
+      productBreakdown[p] = { qtyPerUnit: qty, totalDemand: gift.allocation * qty };
+    }
+    skuDetails.push({
+      key: gift.key,
+      huohao: gift.huohao,
+      skuName: gift.skuName,
+      cartAddCount: 0,
+      isActive: false,
+      isGift: true,
+      allocatedInventory: gift.allocation,
+      productBreakdown,
+    });
+  }
 
   return {
     _meta: {
@@ -257,6 +328,7 @@ function allocate(skus, components, stock, opts = {}) {
       bottleneckRatio: bottleneckProduct.ratio === Infinity ? null : parseFloat(bottleneckProduct.ratio.toFixed(4)),
       activeCount: activeSkus.length,
       coldCount: coldSkus.length,
+      giftCount: giftSkus.length,
       warnings,
     },
     skuDetails,

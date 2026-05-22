@@ -35,6 +35,17 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(full, 'utf-8'));
 }
 
+function readGiftConfig() {
+  const configPath = path.join(DATA_DIR, 'gift-sku-config.json');
+  if (!fs.existsSync(configPath)) return [];
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+  return (config.giftSkus || []).map(g => ({
+    huohao: g.huohao,
+    skuName: g.skuName,
+    fixedAllocation: g.fixedAllocation,
+  }));
+}
+
 // ─── parse ───────────────────────────────────────────────────────────────────
 function cmdParse(excelPath, opts = {}) {
   const { parseAndSave } = require('./lib/parse-cart-adds');
@@ -71,10 +82,13 @@ function cmdCalculate(opts = {}) {
   const stock      = stockData.stock;
   const reserve    = parseFloat(opts.reserve   ?? 0.2);
   const coldFixed  = parseInt(opts.coldFixed   ?? 5, 10);
+  const giftConfig = readGiftConfig();
 
-  console.log(`开始分配: ${skus.length} 个 SKU，余量比例 ${(reserve*100).toFixed(0)}%，冷门保底 ${coldFixed}`);
+  const parts = [`${skus.length} 个 SKU`, `余量比例 ${(reserve*100).toFixed(0)}%`, `冷门保底 ${coldFixed}`];
+  if (giftConfig.length) parts.push(`满赠 ${giftConfig.length} 个`);
+  console.log(`开始分配: ${parts.join('，')}`);
 
-  const result = allocate(skus, compData, stock, { reserve, coldFixed });
+  const result = allocate(skus, compData, stock, { reserve, coldFixed, giftConfig });
 
   // 保存中间结果
   const outputFile = path.join(DATA_DIR, 'allocation-result.json');
@@ -92,6 +106,7 @@ function cmdCalculate(opts = {}) {
     bottleneckRatio: _meta.bottleneckRatio,
     activeSkus: _meta.activeCount,
     coldSkus: _meta.coldCount,
+    giftSkus: _meta.giftCount,
     savedTo: 'data/allocation-result.json',
   });
 }
@@ -211,15 +226,46 @@ function parseOpts(argv) {
   return opts;
 }
 
+// ─── gift-config ───────────────────────────────────────────────────────────────
+function cmdGiftConfig(subCmd, args) {
+  const configPath = path.join(DATA_DIR, 'gift-sku-config.json');
+  let config = { giftSkus: [] };
+  if (fs.existsSync(configPath)) {
+    config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+  }
+
+  if (subCmd === 'add') {
+    const huohao = args[0];
+    const skuName = args[1];
+    const fixedAllocation = parseInt(args[2], 10);
+    if (!huohao || !skuName || isNaN(fixedAllocation)) {
+      fail('用法: node cli.js gift-config add <货号> <SKU名称> <分配数量>');
+    }
+    config.giftSkus.push({ huohao, skuName, fixedAllocation });
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
+    ok({ added: { huohao, skuName, fixedAllocation }, totalGiftSkus: config.giftSkus.length });
+  } else if (subCmd === 'list') {
+    console.log(JSON.stringify(config, null, 2));
+  } else if (subCmd === 'clear') {
+    fs.writeFileSync(configPath, JSON.stringify({ giftSkus: [] }, null, 2), 'utf-8');
+    ok({ message: '已清空所有赠品SKU配置' });
+  } else {
+    fail(`用法: node cli.js gift-config [add|list|clear] [...]`);
+  }
+}
+
 if (!cmd) {
   console.log(`用法:
   node cli.js parse [excel文件]                    解析加购数据（缺省自动找桌面最新 xlsx）
-  node cli.js calculate [--reserve 0.2]           执行分配算法
+  node cli.js calculate [--reserve 0.2]           执行分配算法（自动读取 gift-sku-config.json）
   node cli.js report [--output <路径>]            生成 Excel 报告（默认输出到桌面）
   node cli.js run [excel文件]                      全流程（不含 ERP）
   node cli.js resolve-stock [--erp-id <id>]       查询 ERP 库存状态
-  node cli.js resolve-components [--shop 澜泽]    查询 ERP 组合明细
+  node cli.js resolve-components [--shop 澜泽]    查询 ERP 组合明细（自动合并赠品SKU）
   node cli.js run-full [excel文件] [--shop 澜泽]  全流程（含 ERP 查询）
+  node cli.js gift-config add <货号> <名称> <数量>  添加赠品SKU配置
+  node cli.js gift-config list                      列出当前赠品SKU配置
+  node cli.js gift-config clear                     清空赠品SKU配置
 `);
   process.exit(0);
 }
@@ -240,6 +286,8 @@ async function main() {
     await cmdResolveComponents(parseOpts(args.slice(1)));
   } else if (cmd === 'run-full') {
     await cmdRunFull(args[1] || null, parseOpts(args.slice(2)));
+  } else if (cmd === 'gift-config') {
+    cmdGiftConfig(args[1], args.slice(2));
   } else {
     fail(`未知命令: ${cmd}`);
   }

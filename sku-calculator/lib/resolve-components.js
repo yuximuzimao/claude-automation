@@ -19,6 +19,13 @@ const { clearCache }        = require('./product-catalog');
 const DATA_DIR             = path.join(__dirname, '../data');
 const OUTPUT_FILE          = path.join(DATA_DIR, 'sku-components.json');
 const PRODUCT_COLUMNS_FILE = path.join(DATA_DIR, 'product-columns.json');
+const GIFT_CONFIG_FILE     = path.join(DATA_DIR, 'gift-sku-config.json');
+
+/** 读取满赠SKU配置（不存在则返回空） */
+function readGiftConfig() {
+  if (!fs.existsSync(GIFT_CONFIG_FILE)) return { giftSkus: [] };
+  return JSON.parse(fs.readFileSync(GIFT_CONFIG_FILE, 'utf-8'));
+}
 
 /**
  * 在主页（非 dialog）的 el-select 中选值
@@ -167,11 +174,25 @@ async function resolveComponents(erpId, shopName = '澜泽') {
 
   // 1. 读加购数据
   const cartData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cart-adds.json'), 'utf-8'));
-  const skus = cartData.skus;
-  console.log(`  加购 SKU 总数: ${skus.length}`);
+  const cartSkus = cartData.skus;
+  console.log(`  加购 SKU 总数: ${cartSkus.length}`);
 
-  // 2. 收集所有唯一货号
-  const uniqueHuohao = [...new Set(skus.map(s => s.huohao))];
+  // 1b. 读满赠SKU配置，构建伪SKU条目（用于参与ERP解析流程）
+  const giftConfig = readGiftConfig();
+  const giftSkuEntries = giftConfig.giftSkus.map(g => ({
+    key: `${g.huohao}::${g.skuName.replace(/\s+/g, ' ').trim()}`,
+    huohao: g.huohao,
+    skuName: g.skuName,
+    cartAddCount: 0,
+    _isGift: true,
+  }));
+  const allSkus = [...cartSkus, ...giftSkuEntries];
+  if (giftSkuEntries.length) {
+    console.log(`  满赠 SKU 数: ${giftSkuEntries.length}（不在加购Excel中，从 gift-sku-config.json 读取）`);
+  }
+
+  // 2. 收集所有唯一货号（加购 + 赠品）
+  const uniqueHuohao = [...new Set(allSkus.map(s => s.huohao))];
   console.log(`  唯一货号数: ${uniqueHuohao.length}`);
 
   const warnings = [];
@@ -195,9 +216,9 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   }
   console.log(`\n  对应表查询完成，共 ${corrIndex.size} 条 SKU → erpCode 映射`);
 
-  // 4. 匹配每个 SKU 的 erpCode（加购 skuName 也做空格归一再查）
+  // 4. 匹配每个 SKU 的 erpCode（加购 + 赠品 SKU 的 skuName 也做空格归一再查）
   const matched = [];
-  for (const sku of skus) {
+  for (const sku of allSkus) {
     const normalizedSkuName = sku.skuName.replace(/\s+/g, ' ').trim();
     const key = `${sku.huohao}::${normalizedSkuName}`;
     const erpCode = corrIndex.get(key);
@@ -207,7 +228,7 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     }
     matched.push({ ...sku, erpCode });
   }
-  console.log(`  匹配成功: ${matched.length}/${skus.length}，警告: ${warnings.length}`);
+  console.log(`  匹配成功: ${matched.length}/${allSkus.length}，警告: ${warnings.length}`);
 
   // 5. 初始化档案V2（导航到档案页 + 清空条件，只做一次）
   console.log('  初始化档案V2...');
@@ -293,7 +314,9 @@ async function resolveComponents(erpId, shopName = '澜泽') {
     _meta: {
       source:       `ERP 商品对应表（逐货号）+ 档案V2（${shopName}）`,
       resolvedAt:   new Date().toISOString(),
-      totalSkus:    skus.length,
+      totalSkus:    allSkus.length,
+      cartSkuCount: cartSkus.length,
+      giftSkuCount: giftSkuEntries.length,
       matchedSkus:  matched.length,
       resolvedSkus: Object.keys(result).length,
       warnings,
