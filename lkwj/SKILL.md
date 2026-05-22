@@ -15,7 +15,7 @@
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
 | 数据采集需求 | `data/_待采集/README.md` |
-| 迁移脚本 | `scripts/migrate-*.js`（从 sprites.json 迁移到新格式） |
+| 数据修正 | `scripts/fix-shiny-and-chains.js`（异色/炫彩标签修正、进化链传播） |
 
 ## DO FIRST
 
@@ -31,19 +31,12 @@ lkwj/
 ├── server.js                  # HTTP 服务器，端口 8899
 ├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 精灵果实 + 7 品类标签
 ├── scripts/
-│   ├── migrate-to-pets.js            # sprites.json → pets.json 迁移
-│   ├── migrate-to-tasks.js           # sprites.json → tasks.json 迁移
-│   ├── migrate-to-evolution-chains.js # sprites.json → evolution-chains.json 迁移
-│   ├── migrate-collections.js        # collections.json 格式迁移 + pets.json 回填
-│   ├── build-sprites-pinyin.js       # 拼音字段生成（适配新格式）
-│   └── migrate-leader-evolve.js      # 已过时，保留备查
+│   └── fix-shiny-and-chains.js # 异色/炫彩标签修正 + 进化链传播
 └── data/
     ├── pets.json              # 宠物定义（355 只）：形态 + 标签 + 元素数组
     ├── tasks.json             # 任务定义（355 组）：form-independent，desc 不含宠物名
     ├── evolution-chains.json  # 进化链（162 链）：独立于形态，支持分支
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress
-    ├── sprites.json           # DEPRECATED: 旧单文件格式，保留备查
-    ├── sprites_raw.json       # 原始数据（Wiki 抓取，勿写入）
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
     └── _待采集/               # 数据采集模板
