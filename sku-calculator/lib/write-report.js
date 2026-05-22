@@ -26,6 +26,7 @@ const colLetter = n => colCache.n2l(n);
 
 // 颜色常量
 const COLOR_BLUE_INPUT = { argb: 'FF0070C0' };   // 蓝色：用户可改的输入项
+const COLOR_GIFT_GREEN = { argb: 'FF008000' };   // 绿色：满赠固定分配（不可编辑）
 const COLOR_BLACK      = { argb: 'FF000000' };   // 黑色：公式
 const COLOR_HEADER_BG  = { argb: 'FF4472C4' };   // 表头背景蓝
 const COLOR_HEADER_FG  = { argb: 'FFFFFFFF' };   // 表头文字白
@@ -129,11 +130,11 @@ async function buildMainSheet(wb, allocResult, warehouseStock, productCols) {
 
     // 固定列
     row.getCell(1).value = sku.huohao;
-    row.getCell(2).value = sku.skuName;
-    // 建议库存：硬编码蓝色
+    row.getCell(2).value = sku.isGift ? `${sku.skuName}【满赠】` : sku.skuName;
+    // 建议库存：赠品绿色固定值，普通蓝色可改
     const invCell = row.getCell(3);
     invCell.value = sku.allocatedInventory;
-    invCell.font = { color: COLOR_BLUE_INPUT, name: 'Arial', size: 10 };
+    invCell.font = { color: sku.isGift ? COLOR_GIFT_GREEN : COLOR_BLUE_INPUT, name: 'Arial', size: 10 };
     // 加购数
     row.getCell(4).value = sku.cartAddCount;
     row.getCell(4).font = { color: COLOR_BLACK, name: 'Arial', size: 10 };
@@ -291,6 +292,9 @@ function buildAnalysisSheet(wb, allocResult, warehouseStock, productCols) {
   addRow(['无加购SKU保底', `${_meta.coldFixed} 件`]);
   addRow(['有加购SKU数', _meta.activeCount]);
   addRow(['无加购SKU数', _meta.coldCount]);
+  if (_meta.giftCount > 0) {
+    addRow(['满赠SKU数', _meta.giftCount]);
+  }
   ws.addRow([]);
 
   addRow(['── 瓶颈分析 ──'], { bold: true, bg: 'FFD9E1F2' });
