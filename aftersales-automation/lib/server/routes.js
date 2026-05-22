@@ -271,15 +271,32 @@ router.delete('/feedback/:simId', (req, res) => {
   res.json({ ok: true });
 });
 
-// 批量归档已自动执行的工单（仅标记 done，不重复写 cases）
+// 批量归档已自动执行的工单（检查 cases 是否已存在，缺失的补写）
 router.post('/queue/batch-archive-auto', (req, res) => {
   const queue = db.readQueue();
+  const cases = db.readCases().items;
+  const existingNums = new Set(cases.map(c => c.workOrderNum));
   const autoItems = (queue.items || []).filter(i => i.status === 'auto_executed');
+  let written = 0;
+
   for (const item of autoItems) {
+    if (!existingNums.has(item.workOrderNum)) {
+      // 补写缺失的 case 记录（可能因状态被手动恢复等情况丢失）
+      db.appendCase({
+        id: `case-${Date.now()}-${written}`,
+        workOrderNum: item.workOrderNum,
+        accountNote: item.accountNote,
+        type: item.type || '',
+        groundTruth: { action: 'approve', reason: '自动处理归档', source: 'auto_executed' },
+        addedAt: new Date().toISOString(),
+      });
+      written++;
+      existingNums.add(item.workOrderNum);
+    }
     db.updateQueueItem(item.id, { status: 'done' });
   }
   sse.broadcast('cases-update', {});
-  res.json({ ok: true, count: autoItems.length });
+  res.json({ ok: true, count: autoItems.length, written });
 });
 
 // ── Auto-Exec Confidence ───────────────────────────────────────────
