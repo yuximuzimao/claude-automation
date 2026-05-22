@@ -45,22 +45,83 @@ function allocate(skus, components, stock, opts = {}) {
   }
 
   const warnings = [];
-  const inv = {}; // key -> 最终库存整数
+  const inv = {}; // key → 最终库存整数
 
-  // Phase 0: 可用库存（初始全量，赠品预扣后再对剩余应用余量比例）
+  const FLOAT_TOLERANCE = 1.0001;
+  const MAX_REDUCE_ITERS = 20;
+
+  /** 迭代缩减：找到最受限单品，等比例缩减所有使用该单品的条目 */
+  function reduceAllocs(entries, capRatio, label) {
+    let changed = true;
+    let iter = 0;
+    while (changed && iter < MAX_REDUCE_ITERS) {
+      changed = false;
+      iter++;
+
+      const demand = {};
+      for (const e of entries) {
+        for (const [p, qty] of Object.entries(e.comp)) {
+          demand[p] = (demand[p] || 0) + e.allocation * qty;
+        }
+      }
+
+      let maxRatio = 0, maxProduct = null;
+      for (const [p, d] of Object.entries(demand)) {
+        const cap = (stock[p] || 0) * capRatio;
+        if (cap <= 0) continue;
+        const r = d / cap;
+        if (r > maxRatio && r > FLOAT_TOLERANCE) { maxRatio = r; maxProduct = p; }
+      }
+
+      if (!maxProduct) break;
+
+      const factor = 1 / maxRatio;
+      const cap = (stock[maxProduct] || 0) * capRatio;
+      for (const e of entries) {
+        if (!e.comp[maxProduct]) continue;
+        const old = e.allocation;
+        e.allocation = Math.floor(old * factor);
+        if (e.allocation !== old) changed = true;
+      }
+
+      if (changed) {
+        warnings.push(
+          `[${label}缩减] 单品「${maxProduct}」需求超 stock×${(capRatio * 100).toFixed(0)}%` +
+          `（上限${Math.round(cap)}件），等比例缩减（因子=${factor.toFixed(4)}）`
+        );
+      }
+    }
+  }
+
+  // Phase 0: 可用库存（初始全量，逐阶段预扣）
   const avail = { ...stock };
 
-  // Phase G: 赠品SKU固定分配 — 在算法运行前预扣库存
-  // 规则：赠品最多占单品库存的 (1-reserve)，即 80%。
-  // 仅当赠品需求超过此上限时才等比例缩减，否则不做任何调整。
+  // ─── Phase M: 保底预扣 — 每个正常SKU至少 coldFixed 件，优先于赠品 ───
+  const minInv = {};
+  if (coldFixed > 0) {
+    const minAllocs = [];
+    for (const sku of skus) {
+      const comp = getComp(sku);
+      if (!Object.keys(comp).length) continue;
+      minAllocs.push({ key: sku.key, comp, allocation: coldFixed });
+    }
+    reduceAllocs(minAllocs, 1.0, '保底');
+
+    for (const m of minAllocs) {
+      for (const [p, qty] of Object.entries(m.comp)) {
+        avail[p] = (avail[p] || 0) - m.allocation * qty;
+      }
+      minInv[m.key] = m.allocation;
+    }
+  }
+
+  // ─── Phase G: 赠品SKU固定分配 — 赠品最多占单品库存的 (1-reserve) ───
   const giftKeys = new Set();
-  const giftSkus = []; // 用于最终输出
+  const giftSkus = [];
   const giftConfig = opts.giftConfig || [];
 
   if (giftConfig.length > 0) {
     const GIFT_CAP_RATIO = 1 - reserve;
-    const FLOAT_TOLERANCE = 1.0001;
-    const MAX_GIFT_ITERS   = 20;
 
     const giftAllocs = [];
     for (const gift of giftConfig) {
@@ -77,59 +138,15 @@ function allocate(skus, components, stock, opts = {}) {
       giftAllocs.push({ key, huohao: gift.huohao, skuName: gift.skuName, comp, allocation: gift.fixedAllocation });
     }
 
-    let changed = true;
-    let iter = 0;
-    while (changed && iter < MAX_GIFT_ITERS) {
-      changed = false;
-      iter++;
-
-      const giftDemand = {};
-      for (const g of giftAllocs) {
-        for (const [p, qty] of Object.entries(g.comp)) {
-          giftDemand[p] = (giftDemand[p] || 0) + g.allocation * qty;
-        }
-      }
-
-      let maxRatio = 0;
-      let maxProduct = null;
-      for (const [p, demand] of Object.entries(giftDemand)) {
-        const cap = (stock[p] || 0) * GIFT_CAP_RATIO;
-        if (cap <= 0) continue;
-        const ratio = demand / cap;
-        if (ratio > maxRatio && ratio > FLOAT_TOLERANCE) {
-          maxRatio = ratio;
-          maxProduct = p;
-        }
-      }
-
-      if (!maxProduct) break;
-
-      const factor = 1 / maxRatio;
-      const cap = (stock[maxProduct] || 0) * GIFT_CAP_RATIO;
-      for (const g of giftAllocs) {
-        if (g.comp[maxProduct]) {
-          const oldAlloc = g.allocation;
-          g.allocation = Math.floor(oldAlloc * factor);
-          if (g.allocation !== oldAlloc) changed = true;
-        }
-      }
-
-      if (changed) {
-        warnings.push(
-          `[赠品缩减] 单品「${maxProduct}」赠品需求超 stock×${(GIFT_CAP_RATIO * 100).toFixed(0)}%` +
-          `（上限${Math.round(cap)}件），等比例缩减（因子=${factor.toFixed(4)}）`
-        );
-      }
-    }
+    reduceAllocs(giftAllocs, GIFT_CAP_RATIO, '赠品');
 
     for (const g of giftAllocs) {
       for (const [p, qty] of Object.entries(g.comp)) {
         const required = g.allocation * qty;
-        const available = avail[p] ?? 0;
-        if (available < required) {
+        if ((avail[p] ?? 0) < required) {
           throw new Error(
             `满赠SKU ${g.key} 库存不足: 单品「${p}」需要 ${required} 件` +
-            `（${g.allocation} 件 × ${qty}），可用仅 ${Math.round(available)} 件`
+            `（${g.allocation} 件 × ${qty}），可用仅 ${Math.round(avail[p] ?? 0)} 件`
           );
         }
       }
@@ -144,15 +161,14 @@ function allocate(skus, components, stock, opts = {}) {
     }
   }
 
-  // 赠品预扣完毕后，对剩余库存应用余量比例（保证正常SKU有安全余量）
+  // 保底+赠品预扣完毕后，对剩余库存应用余量比例
   for (const [p, qty] of Object.entries(avail)) {
     avail[p] = qty * (1 - reserve);
   }
 
-  // 过滤掉赠品SKU，剩余进入正常算法流程
   const nonGiftSkus = skus.filter(s => !giftKeys.has(s.key));
 
-  // Phase 0: 分离 active/cold，零库存预处理
+  // ─── Phase A: active/cold 分离，零库存预处理 ───
   const activeSkus = [];
   const coldSkus   = [];
 
@@ -166,8 +182,8 @@ function allocate(skus, components, stock, opts = {}) {
       ([p, qty]) => qty > 0 && (avail[p] ?? 0) === 0
     );
     if (infeasible) {
-      inv[sku.key] = 0;
-      warnings.push(`SKU ${sku.key} 因必用零库存单品而归零`);
+      inv[sku.key] = minInv[sku.key] || 0;
+      if (!inv[sku.key]) warnings.push(`SKU ${sku.key} 因必用零库存单品而归零`);
     } else {
       activeSkus.push(sku);
     }
@@ -236,21 +252,22 @@ function allocate(skus, components, stock, opts = {}) {
 
   // Phase B: 整数化
   for (const sku of activeSkus) {
-    inv[sku.key] = Math.floor(invFloat[sku.key] ?? 0);
+    inv[sku.key] = (minInv[sku.key] || 0) + Math.floor(invFloat[sku.key] ?? 0);
   }
 
-  // 计算 floor 后的整数剩余
+  // 计算 floor 后的整数剩余（仅扣除 Phase A 分配，minInv 已在 Phase M 预扣）
   const intRem = { ...avail };
   for (const sku of activeSkus) {
+    const phaseA = Math.floor(invFloat[sku.key] ?? 0);
     for (const [p, qty] of Object.entries(getComp(sku))) {
-      intRem[p] = (intRem[p] ?? 0) - inv[sku.key] * qty;
+      intRem[p] = (intRem[p] ?? 0) - phaseA * qty;
     }
   }
 
-  // LRM 回填：按余数降序，逐条 +1，立即扣减
+  // LRM 回填：按浮点余数降序，逐条 +1，立即扣减
   const sortedActive = [...activeSkus].sort((a, b) => {
-    const remA = (invFloat[a.key] ?? 0) - inv[a.key];
-    const remB = (invFloat[b.key] ?? 0) - inv[b.key];
+    const remA = ((invFloat[a.key] ?? 0) % 1);
+    const remB = ((invFloat[b.key] ?? 0) % 1);
     return remB - remA;
   });
 
@@ -270,22 +287,9 @@ function allocate(skus, components, stock, opts = {}) {
     }
   }
 
-  // Phase C: cold SKU 保底分配
+  // Phase C: cold SKU 分配（保底已在 Phase M 预扣）
   for (const sku of coldSkus) {
-    const comp = getComp(sku);
-    let canAllocate = true;
-    for (const [p, qty] of Object.entries(comp)) {
-      if ((intRem[p] ?? 0) < coldFixed * qty) { canAllocate = false; break; }
-    }
-    if (canAllocate) {
-      inv[sku.key] = coldFixed;
-      for (const [p, qty] of Object.entries(comp)) {
-        intRem[p] = (intRem[p] ?? 0) - coldFixed * qty;
-      }
-    } else {
-      inv[sku.key] = 0;
-      warnings.push(`冷门 SKU 保底不足，跳过: ${sku.key}`);
-    }
+    inv[sku.key] = minInv[sku.key] || 0;
   }
 
   // 缺少组合明细警告（仅针对非赠品SKU，赠品已在Phase G校验）
