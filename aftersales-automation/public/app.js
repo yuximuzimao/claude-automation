@@ -798,7 +798,7 @@ function renderActions(item, sim, mode) {
     <button class="btn-ghost" disabled style="opacity:0.4;cursor:not-allowed">重新采集推理</button>
     <button class="btn-ghost" disabled style="opacity:0.4;cursor:not-allowed">标记等待中</button>
     <button class="btn-primary" disabled style="opacity:0.5;cursor:not-allowed">⚡ 已自动同意退款</button>
-    <button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')" title="已自动归档到历史记录，点击从列表中移除">✓ 移除</button>
+    <button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')" title="归档到历史记录并从列表中移除">归档</button>
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>
   </div>
@@ -1125,14 +1125,7 @@ async function submitPendingFeedback(simId, workOrderNum, queueItemId) {
   const submitBtn = document.getElementById('fb-submit-' + simId);
   if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '提交中…'; }
   const ok = await submitFeedback(simId, workOrderNum, verdict);
-  if (ok && queueItemId) {
-    // auto_executed 工单评价提交后自动归档，标注为自动处理
-    await api('/queue/' + queueItemId + '/archive-manual', {
-      method: 'POST',
-      body: JSON.stringify({ simId, source: 'auto_executed' }),
-    });
-    loadLive();
-  }
+  if (ok) loadLive();
 }
 
 // ── 反馈（live 模式：好评/差评 读评价内容框；sim 模式由 judgeInline 直接传参）

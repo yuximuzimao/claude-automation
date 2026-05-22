@@ -178,6 +178,12 @@ router.post('/queue/:id/archive-manual', (req, res) => {
   const queueItem = (queue.items || []).find(i => i.id === req.params.id);
   if (!queueItem) return res.status(404).json({ error: '未找到队列项' });
 
+  // 幂等性：已归档则直接返回，防止重复写入 cases.jsonl
+  if (queueItem.status === 'done') {
+    sse.broadcast('cases-update', {});
+    return res.json({ ok: true, dedup: true });
+  }
+
   const simId = req.body.simId;
   const sim = simId ? db.getSimulation(simId) : null;
   const decision = sim && sim.decision;
