@@ -1,15 +1,15 @@
 'use strict';
 /**
- * WHAT: 自动执行置信度系统 — 基于"沉默=正确"模型，按场景指纹累积信用
- * WHERE: routes.js POST /api/feedback 调用 record*(); pipeline.js shouldAutoExecute() 查询
- * WHY: 只有人工反馈才能证明推理正确，系统不能自己给自己累积信用
+ * 自动执行置信度系统 — 基于"沉默=正确"模型，按场景指纹累积信用。
+ * 只有人工反馈才能证明推理正确，系统不能自己给自己累积信用。
  */
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const { MERCHANT_FAULT_REASONS, RETURN_KEYWORDS, SIGNED_KEYWORDS } = require('../constants');
+const { MERCHANT_FAULT_REASONS, RETURN_KEYWORDS, SIGNED_KEYWORDS, isMerchantFaultReason } = require('../constants');
+const db = require('./data');
 
 const DATA_DIR = path.join(__dirname, '../../data');
 const CONFIDENCE_PATH = path.join(DATA_DIR, 'auto-exec-confidence.json');
@@ -17,18 +17,23 @@ const CONFIDENCE_PATH = path.join(DATA_DIR, 'auto-exec-confidence.json');
 const AUTO_THRESHOLD_EXECUTIONS = 10;
 const AUTO_THRESHOLD_DAYS = 15;
 
-// ── 原子读写 ────────────────────────────────────────────────────────
+// ── 内存缓存（消除热路径上的同步文件 I/O）─────────────────────────
+
+let _cache = null;
 
 function readConfidence() {
+  if (_cache) return _cache;
   try {
-    const raw = fs.readFileSync(CONFIDENCE_PATH, 'utf8');
-    return JSON.parse(raw);
+    _cache = JSON.parse(fs.readFileSync(CONFIDENCE_PATH, 'utf8'));
+    return _cache;
   } catch {
-    return { scenes: {} };
+    _cache = { scenes: {} };
+    return _cache;
   }
 }
 
 function writeConfidence(data) {
+  _cache = data;
   const tmp = CONFIDENCE_PATH + '.tmp';
   fs.writeFileSync(tmp, JSON.stringify(data, null, 2));
   fs.renameSync(tmp, CONFIDENCE_PATH);
@@ -102,7 +107,7 @@ function buildDimensions(collectedData, decision, orderType) {
   if (!logisticsState && !goodsStatus) return null;
 
   const hasReturnTracking = !!ticket.returnTracking;
-  const isMerchantFault = MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
+  const isMerchantFault = isMerchantFaultReason(afterSaleReason);
   const ruleType = deriveRuleType(orderType, isMerchantFault, logisticsState);
 
   return {
@@ -128,7 +133,16 @@ function buildSceneLabel(dimensions) {
   return parts.join(' / ');
 }
 
-// ── 置信度记录 ───────────────────────────────────────────────────────
+// ── 置信度逻辑（共享核心，消除重复）─────────────────────────────────
+
+const STATUS_MANUAL = 'manual';
+const STATUS_AUTO = 'auto';
+
+function meetsAutoThreshold(scene) {
+  if (scene.totalExecutions < AUTO_THRESHOLD_EXECUTIONS) return false;
+  if (!scene.lastNegativeAt) return true;
+  return (Date.now() - new Date(scene.lastNegativeAt).getTime()) / 86400000 > AUTO_THRESHOLD_DAYS;
+}
 
 function ensureScene(data, sceneKey, dimensions) {
   if (!data.scenes[sceneKey]) {
@@ -139,7 +153,7 @@ function ensureScene(data, sceneKey, dimensions) {
       totalExecutions: 0,
       negativeCount: 0,
       lastNegativeAt: null,
-      status: 'manual',
+      status: STATUS_MANUAL,
       autoEnabledAt: null,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -148,109 +162,116 @@ function ensureScene(data, sceneKey, dimensions) {
   return data.scenes[sceneKey];
 }
 
-function checkAutoEligible(scene) {
-  if (scene.status !== 'auto') return false;
-  if (scene.totalExecutions < AUTO_THRESHOLD_EXECUTIONS) return false;
-  if (scene.lastNegativeAt) {
-    const daysSinceNegative = (Date.now() - new Date(scene.lastNegativeAt).getTime()) / 86400000;
-    if (daysSinceNegative <= AUTO_THRESHOLD_DAYS) return false;
-  }
-  return true;
-}
-
-function recordExecution(sceneKey) {
-  const data = readConfidence();
+/**
+ * 记录一次好评（人工确认推理正确）。
+ * data 参数可选——调用方持有时传入以避免重复读盘。
+ */
+function recordExecution(sceneKey, _data) {
+  const data = _data || readConfidence();
   const scene = data.scenes[sceneKey];
-  if (!scene) return; // buildDimensions 返回 null 时不创建
+  if (!scene) return;
 
   scene.totalExecutions += 1;
   scene.updatedAt = new Date().toISOString();
 
-  // 检查是否该升级为 auto
-  if (scene.status === 'manual' && scene.totalExecutions >= AUTO_THRESHOLD_EXECUTIONS) {
-    if (!scene.lastNegativeAt ||
-        (Date.now() - new Date(scene.lastNegativeAt).getTime()) / 86400000 > AUTO_THRESHOLD_DAYS) {
-      scene.status = 'auto';
-      scene.autoEnabledAt = new Date().toISOString();
-    }
+  if (scene.status === STATUS_MANUAL && meetsAutoThreshold(scene)) {
+    scene.status = STATUS_AUTO;
+    scene.autoEnabledAt = new Date().toISOString();
   }
 
-  writeConfidence(data);
+  if (!_data) writeConfidence(data);
 }
 
-function recordNegative(sceneKey) {
-  const data = readConfidence();
+/**
+ * 记录一次差评（推理错误），立即退出自动执行。
+ * data 参数可选——调用方持有时传入以避免重复读盘。
+ */
+function recordNegative(sceneKey, _data) {
+  const data = _data || readConfidence();
   const scene = data.scenes[sceneKey];
   if (!scene) return;
 
   scene.negativeCount += 1;
   scene.lastNegativeAt = new Date().toISOString();
-  scene.status = 'manual';
+  scene.status = STATUS_MANUAL;
   scene.autoEnabledAt = null;
   scene.updatedAt = new Date().toISOString();
 
-  writeConfidence(data);
+  if (!_data) writeConfidence(data);
 }
 
 function isSceneAutoEligible(sceneKey) {
   const data = readConfidence();
   const scene = data.scenes[sceneKey];
   if (!scene) return false;
-  return checkAutoEligible(scene);
+  return scene.status === STATUS_AUTO && meetsAutoThreshold(scene);
 }
 
 function getAllScenes() {
   return readConfidence().scenes;
 }
 
+// ── pipeline 集成 ──────────────────────────────────────────────────
+
+/**
+ * pipeline.js 调用：当前工单是否满足自动执行条件？
+ * 封装了构建维度→生成场景 key→查询置信度的完整调用链。
+ */
+function shouldAutoExecute(decision, collectedData, queueItem) {
+  if (!decision || decision.action !== 'approve') return false;
+  if (!queueItem || !queueItem.type) return false;
+
+  const dimensions = buildDimensions(collectedData, decision, queueItem.type);
+  if (!dimensions) return false;
+
+  const sceneKey = buildSceneKey(dimensions);
+  return isSceneAutoEligible(sceneKey);
+}
+
 // ── 从 feedback 更新置信度 ──────────────────────────────────────────
 
 /**
- * 在 POST /api/feedback 后调用。
+ * 在 POST /api/feedback 后调用。仅跟踪 approve 决策。
  * simulation 已清理或维度缺失 → 静默跳过。
+ * orderType 可选——传入时跳过 queue.json 读取。
  */
-function onFeedback(simulation, verdict) {
+function onFeedback(simulation, verdict, orderType) {
   if (!simulation) return;
   const cd = simulation.collectedData;
   const decision = simulation.decision;
-  if (!cd || !decision) return;
+  if (!cd || !decision || decision.action !== 'approve') return;
 
-  // 仅跟踪 approve 决策（只有同意退款才可能自动执行）
-  if (decision.action !== 'approve') return;
-
-  // orderType 从 collectedData 推导（queueItem.type 在 simulation 中没有直接存储）
-  // ticket 里可能有类型信息，或从 simulation 关联的 queue item 获取
-  // 这里通过 simulation 的 queueItemId 查找
-  const db = require('./data');
-  const queue = db.readQueue();
-  const qi = queue.items.find(i => i.id === simulation.queueItemId);
-  const orderType = qi ? qi.type : null;
+  // orderType：优先用传入值，否则从 queue item 查（兼容旧 simulation）
+  if (!orderType) {
+    const queue = db.readQueue();
+    const qi = queue.items.find(i => i.id === simulation.queueItemId);
+    orderType = qi ? qi.type : null;
+  }
 
   const dimensions = buildDimensions(cd, decision, orderType);
   if (!dimensions) return;
 
   const sceneKey = buildSceneKey(dimensions);
 
-  // 确保 scene 存在
+  // 单次读 → 修改 → 单次写
   const data = readConfidence();
   ensureScene(data, sceneKey, dimensions);
-  writeConfidence(data);
 
   if (verdict === 'negative') {
-    recordNegative(sceneKey);
+    recordNegative(sceneKey, data);
   } else {
-    recordExecution(sceneKey);
+    recordExecution(sceneKey, data);
   }
+  writeConfidence(data);
 }
 
 // ── 全量重建（手动修复工具）─────────────────────────────────────────
 
 function recalculate() {
-  const db = require('./data');
   const simulations = db.readSimulations();
   const feedbacks = db.readFeedback();
+  const queue = db.readQueue();  // 读一次，不在循环内重复读
 
-  // fbMap: simulationId → verdict
   const fbMap = {};
   for (const fb of feedbacks) {
     if (!fbMap[fb.simulationId]) {
@@ -260,7 +281,6 @@ function recalculate() {
 
   const data = { scenes: {} };
 
-  // 按时间顺序处理（旧→新），模拟历史演进
   const ordered = [...simulations].sort((a, b) =>
     (a.createdAt || '').localeCompare(b.createdAt || '')
   );
@@ -270,7 +290,6 @@ function recalculate() {
     if (!verdict) continue;
     if (!sim.decision || sim.decision.action !== 'approve') continue;
 
-    const queue = db.readQueue();
     const qi = queue.items.find(i => i.id === sim.queueItemId);
     const orderType = qi ? qi.type : null;
 
@@ -284,17 +303,13 @@ function recalculate() {
     if (verdict === 'negative') {
       scene.negativeCount += 1;
       scene.lastNegativeAt = fb.createdAt || sim.createdAt;
-      scene.status = 'manual';
+      scene.status = STATUS_MANUAL;
       scene.autoEnabledAt = null;
     } else {
       scene.totalExecutions += 1;
-      // 检查升级
-      if (scene.status === 'manual' && scene.totalExecutions >= AUTO_THRESHOLD_EXECUTIONS) {
-        if (!scene.lastNegativeAt ||
-            (Date.now() - new Date(scene.lastNegativeAt).getTime()) / 86400000 > AUTO_THRESHOLD_DAYS) {
-          scene.status = 'auto';
-          scene.autoEnabledAt = new Date().toISOString();
-        }
+      if (scene.status === STATUS_MANUAL && meetsAutoThreshold(scene)) {
+        scene.status = STATUS_AUTO;
+        scene.autoEnabledAt = new Date().toISOString();
       }
     }
     scene.updatedAt = new Date().toISOString();
@@ -314,6 +329,7 @@ module.exports = {
   recordNegative,
   isSceneAutoEligible,
   getAllScenes,
+  shouldAutoExecute,
   onFeedback,
   recalculate,
   AUTO_THRESHOLD_EXECUTIONS,

@@ -81,4 +81,10 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable };
+// 判断售后原因是否商责（infer.js + auto-exec-confidence.js 共用）
+function isMerchantFaultReason(afterSaleReason) {
+  if (!afterSaleReason) return false;
+  return MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
+}
+
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };

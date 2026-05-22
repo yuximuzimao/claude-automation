@@ -249,7 +249,12 @@ router.post('/feedback', (req, res) => {
   // 更新自动执行置信度（仅 approve 决策参与）
   const sim = db.getSimulation(simulationId);
   if (sim) {
-    try { confidence.onFeedback(sim, verdict); } catch (e) { /* 静默：置信度更新失败不阻塞 feedback */ }
+    try {
+      // 从 queue item 取 orderType，避免 confidence 模块内部重复读 queue.json
+      const queue = db.readQueue();
+      const qi = queue.items.find(i => i.id === sim.queueItemId);
+      confidence.onFeedback(sim, verdict, qi ? qi.type : null);
+    } catch (e) { /* 静默：置信度更新失败不阻塞 feedback */ }
   }
 
   res.json(fb);

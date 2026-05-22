@@ -22,16 +22,9 @@ const SESSIONS_DIR = path.join(BASE, '../sessions');
 function log(msg) { process.stdout.write(`[pipeline] ${msg}\n`); }
 
 // ── 自动执行条件判断 ──────────────────────────────────────────────
-// 基于"沉默=正确"模型的置信度系统：场景指纹在 15 天内执行 ≥10 次且零差评 → 自动执行
+// 基于"沉默=正确"模型：场景指纹在 15 天内执行 ≥10 次且零差评 → 自动执行
 function shouldAutoExecute(decision, collectedData, queueItem) {
-  if (!decision || decision.action !== 'approve') return false;
-  if (!queueItem || !queueItem.type) return false;
-
-  const dimensions = confidence.buildDimensions(collectedData, decision, queueItem.type);
-  if (!dimensions) return false;
-
-  const sceneKey = confidence.buildSceneKey(dimensions);
-  return confidence.isSceneAutoEligible(sceneKey);
+  return confidence.shouldAutoExecute(decision, collectedData, queueItem);
 }
 
 async function autoExecuteApprove(workOrderNum, accountNum) {
