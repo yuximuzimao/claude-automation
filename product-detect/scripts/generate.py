@@ -76,10 +76,13 @@ def load_assets(brand_dir: Path) -> dict:
     返回: {class_name: (class_id, rgba_image)}
     """
     supported = {".jpg", ".jpeg", ".png", ".webp"}
+    # 先过滤出图片文件再 enumerate，保证 class_id 从 0 连续递增
+    image_paths = sorted(
+        p for p in brand_dir.iterdir()
+        if p.suffix.lower() in supported and not p.name.startswith(("_", "."))
+    )
     assets = {}
-    for i, path in enumerate(sorted(brand_dir.iterdir())):
-        if path.suffix.lower() not in supported:
-            continue
+    for i, path in enumerate(image_paths):
         img = Image.open(path).convert("RGBA")
         arr = np.array(img)
         # 检测是否有真实透明像素（alpha < 255）
