@@ -70,6 +70,9 @@ def apply_augmentation(img: Image.Image) -> Image.Image:
 def load_assets(brand_dir: Path) -> dict:
     """
     加载品牌素材目录下的所有图片。
+    自动识别背景类型：
+      - PNG 含真实透明像素 → 直接使用 alpha 通道
+      - JPG 或白底 PNG → 自动去白底
     返回: {class_name: (class_id, rgba_image)}
     """
     supported = {".jpg", ".jpeg", ".png", ".webp"}
@@ -78,9 +81,13 @@ def load_assets(brand_dir: Path) -> dict:
         if path.suffix.lower() not in supported:
             continue
         img = Image.open(path).convert("RGBA")
-        # 如果是 JPG（无透明通道），去白底
-        if path.suffix.lower() in {".jpg", ".jpeg"}:
+        arr = np.array(img)
+        # 检测是否有真实透明像素（alpha < 255）
+        has_real_transparency = bool((arr[:, :, 3] < 255).any())
+        if not has_real_transparency:
+            # JPG 或白底 PNG → 去白底
             img = remove_white_bg(img)
+        # 否则 PNG 已有真实透明通道，直接使用
         class_name = path.stem  # 文件名（不含后缀）作为类别名
         assets[class_name] = (i, img)
     return assets
