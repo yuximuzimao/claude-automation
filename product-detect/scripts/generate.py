@@ -159,10 +159,10 @@ def generate_one(assets: dict, canvas_size: int = CANVAS_SIZE) -> tuple:
                 canvas.paste(resized, (x, y), resized)
                 placed_boxes.append(box)
 
-                x_c = (x + pw / 2) / canvas_size
-                y_c = (y + ph / 2) / canvas_size
-                w_n = pw / canvas_size
-                h_n = ph / canvas_size
+                x_c = min(max((x + pw / 2) / canvas_size, 0.0), 1.0)
+                y_c = min(max((y + ph / 2) / canvas_size, 0.0), 1.0)
+                w_n = min(pw / canvas_size, 1.0)
+                h_n = min(ph / canvas_size, 1.0)
                 labels.append((class_id, x_c, y_c, w_n, h_n))
                 placed = True
                 break
