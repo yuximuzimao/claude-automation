@@ -109,29 +109,30 @@ async function collectOne(item) {
       collected.collectErrors.push(`product-detail: 跳过（工单类型=${item.type}，无需核对商品明细）`);
     }
 
-    // Step 2: erp-search（遍历所有子订单）
+    // Step 2: erp-search + erp-logistics（每个子订单：搜索→立即读物流→再搜下一个）
+    // 原因：erp-logistics-all 读取当前页面的行，必须在每次 erp-search 后立即调用，
+    // 否则下次 erp-search 覆盖搜索结果，之前子订单的物流就永远读不到。
     collected.erpSearches = [];
+    const erpLogResults = [];
     for (const so of subOrders) {
       if (!so.id) continue;
       const erpRes = runCmd(['erp-search', so.id]);
       if (erpRes.success) {
         collected.erpSearches.push({ subOrderId: so.id, ...erpRes.data });
+        // 立即读当前搜索结果的物流（此时 ERP 页面显示的就是该子订单的行）
+        const erpLogRes = runCmd(['erp-logistics-all']);
+        if (erpLogRes.success && erpLogRes.data.results) {
+          erpLogResults.push(...erpLogRes.data.results);
+        }
       } else {
         collected.collectErrors.push(`erp-search(${so.id}): ${erpRes.error}`);
       }
     }
+    collected.erpLogistics = erpLogResults.length ? { results: erpLogResults } : null;
     // 向后兼容：保留第一个子订单的结果在 erpSearch
     collected.erpSearch = collected.erpSearches[0] || null;
     if (!collected.erpSearches.length) {
       collected.collectErrors.push('erp-search: 所有子订单搜索均失败');
-    }
-
-    // Step 2b: erp-logistics（紧接 erp-search，此时 ERP 仍在订单管理页面，避免后续切页面再切回来）
-    if (collected.erpSearch && !collected.collectErrors.some(e => e.startsWith('erp-search:'))) {
-      const erpLogRes = runCmd(['erp-logistics-all']);
-      if (erpLogRes.success) {
-        collected.erpLogistics = erpLogRes.data;
-      }
     }
 
     // Step 3: logistics（鲸灵物流）
