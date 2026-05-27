@@ -287,10 +287,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'read', label: '合并去重包裹', value: `${allTrackings.length}个（ERP:${erpTrackings.length} 鲸灵:${jlTrackings.length} 去重后:${allTrackings.length}）` });
 
     // 双源判断：鲸灵全部退回 OR ERP显示退回 → 同意
-    // 采集完整性：去重后的包裹数 >= ERP发货行数
+    // 采集完整性：鲸灵读到的包裹数 >= ERP主品发货行数（赠品单独走校验，不计入此处）
     const allJLReturned = allPackagesReturned(packages);
-    const collectionComplete = totalShipRows <= 1 || allTrackings.length >= totalShipRows;
-    s({ type: 'check', condition: `物流采集完整（去重${allTrackings.length}包裹 vs ERP ${totalShipRows}发货行）`, result: collectionComplete });
+    const jlTrackingCount = jlTrackings.length;
+    const collectionComplete = mainShippedRows.length <= 1 || jlTrackingCount >= mainShippedRows.length;
+    s({ type: 'check', condition: `物流采集完整（鲸灵${jlTrackingCount}包裹 vs ERP主品${mainShippedRows.length}发货行）`, result: collectionComplete });
 
     if (allJLReturned && !collectionComplete) {
       s({ type: 'branch', text: `上报 → 去重后${allTrackings.length}个包裹，但ERP有${totalShipRows}行发货，采集不完整` });
@@ -377,18 +378,25 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     // 驿站/快递柜待取件：货到了买家未取，应拒绝并通知拦截（驿站/快递柜可退件）
-    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
-    const anyAtYizhan = packages.some(pkg => {
+    // 快递柜品牌：巧目、丰巢、中邮、菜鸟
+    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
+    const yizhanPkgs = [];
+    packages.forEach(pkg => {
       const text = pkg.text || '';
       const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
-      return !hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw));
+      if (!hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw))) {
+        const numMatch = text.match(/物流单号[：:]\n(\S+)/);
+        yizhanPkgs.push(numMatch ? numMatch[1] : '?');
+      }
     });
-    s({ type: 'check', condition: '有包裹处于驿站待取件状态（未签收）', result: anyAtYizhan });
+    const anyAtYizhan = yizhanPkgs.length > 0;
+    s({ type: 'check', condition: '有包裹处于驿站/快递柜待取件状态（未签收）', result: anyAtYizhan });
 
     if (anyAtYizhan) {
-      s({ type: 'branch', text: '拒绝退款 → 商品已到驿站待取件，可联系驿站退件拦截' });
+      const desc = `快递（${yizhanPkgs.join('、')}）已到驿站/快递柜待取件，可联系快递公司拦截退件，拦截成功后退款`;
+      s({ type: 'branch', text: `拒绝退款 → ${desc}` });
       return fin({ ...reject(
-        '商品已到驿站待取件，可联系快递公司/驿站拦截退件，拦截成功后退款',
+        desc,
         ['需创建快递拦截提醒'],
         [{ doc: 'flow-5.3', section: 'Step4', summary: '驿站待取件→拒绝+创建拦截提醒' }]
       ), reasonCode: 'AT_STATION' });
@@ -418,9 +426,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const scanStr = hoursUntilNextScan != null ? `${hoursUntilNextScan.toFixed(1)}h` : '?h';
       const marginStr = margin != null ? margin.toFixed(1) : '?';
       s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${scanStr} = ${marginStr}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
+      const transitDesc = inTransitPkgs.length ? `快递（${inTransitPkgs.join('、')}）在途未拦截成功，` : '';
       return fin({
         ...escalate(
-          `订单在途，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
+          `${transitDesc}剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
           {
             confidence: 'high',
             rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描>8h→自动等待重查' }],
@@ -431,9 +440,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     const marginStr = margin != null ? margin.toFixed(1) : '?';
+    const transitRejectDesc = inTransitPkgs.length ? `快递（${inTransitPkgs.join('、')}）在途未拦截成功，` : '';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
     return fin({ ...reject(
-      '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
+      `${transitRejectDesc}订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`,
       ['需创建快递拦截提醒'],
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
     ), reasonCode: 'INTERCEPT_TIMEOUT' });
