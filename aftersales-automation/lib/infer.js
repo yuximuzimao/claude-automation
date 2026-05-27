@@ -891,10 +891,12 @@ function inferDecision(sim, queueItem) {
 
   // ── 工单不可访问 → 自动归档（已处理/跨商家/权限问题）──────────
   // 必须在 validateCollectedData 之前，因为此时 ticket 为 null
+  // "已不在待处理列表"/"已处理或已关闭" → 工单确实已关闭，自动归档
+  // 注意："不属于当前商家" 不在此处处理——这是账号注入异常，不是工单终态。
+  //       下方 validateCollectedData (ticket=null) 会捕获并 escalate 到人工。
   const goneFromList = (cd.collectErrors || []).find(e =>
     e.startsWith('read-ticket:') && (
-      e.includes('已不在待处理列表') || e.includes('已处理或已关闭') ||
-      e.includes('不属于当前商家')
+      e.includes('已不在待处理列表') || e.includes('已处理或已关闭')
     )
   );
   if (goneFromList) {

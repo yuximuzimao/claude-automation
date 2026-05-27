@@ -296,7 +296,7 @@ async function _execScanAccountInner(accountNum, accountNote) {
     timeout: 30000, encoding: 'utf8',
   });
   if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败: ${(inj.stderr || inj.stdout || '').slice(0, 100)}`);
-  await new Promise(r => setTimeout(r, 5000));
+  // jl.js inject 已轮询验证页面加载完成（readyState+Vue+URL），无需再固定等待
 
   const r = spawnSync('node', [path.join(BASE, 'cli.js'), 'list'], {
     timeout: 120000, encoding: 'utf8', cwd: BASE,

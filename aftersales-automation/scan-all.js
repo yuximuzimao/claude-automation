@@ -18,7 +18,7 @@ const { addQueueItem, readQueue, updateQueueItem } = require('./lib/server/data'
 
 const SESSIONS_DIR = path.join(__dirname, '../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
-const INJECT_DELAY_MS = 5000;  // 注入后等待浏览器稳定
+const INJECT_DELAY_MS = 500;  // jl.js inject 已轮询验证就绪，此处仅作最小缓冲
 
 const isDryRun = process.argv.includes('--dry-run');
 
