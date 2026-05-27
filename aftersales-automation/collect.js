@@ -216,13 +216,19 @@ async function collectOne(item) {
       collected.collectErrors.push('erp-aftersale: 无退货快递单号，跳过（非退货退款类型正常）');
     }
 
-    // Step 6: 赠品 erp-search（如有赠品子订单号）
+    // Step 6: 赠品 erp-search + erp-logistics（赠品物流只能从 ERP 读取，鲸灵工单不展示赠品包裹）
     if (giftSubOrderId) {
       const giftRes = runCmd(['erp-search', giftSubOrderId]);
       if (!giftRes.success) {
         collected.collectErrors.push(`erp-search(gift): ${giftRes.error}`);
       } else {
         collected.giftErpSearch = giftRes.data;
+        // 立即读赠品的 ERP 物流详情（与主品 Step 2 一致，搜到后立即读当前页面）
+        const giftErpLogRes = runCmd(['erp-logistics-all']);
+        if (giftErpLogRes.success && giftErpLogRes.data.results) {
+          erpLogResults.push(...giftErpLogRes.data.results);
+          collected.erpLogistics = { results: erpLogResults };
+        }
       }
     }
 

@@ -269,7 +269,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const text = p.text || '';
       const hasRet = RETURN_KEYWORDS.some(kw => text.includes(kw));
       const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
-      return `${p.num || '?'}：${hasRet ? '已退回' : hasSigned ? '已签收' : '在途'}`;
+      const numMatch = text.match(/物流单号[：:]\s*\n?(\S+)/);
+      const num = numMatch ? numMatch[1] : (p.tab || '?');
+      return `${num}：${hasRet ? '已退回' : hasSigned ? '已签收' : '在途'}`;
     }).join('；');
     s({ type: 'read', label: '各包裹物流状态', value: pkgSummary });
 
@@ -311,18 +313,20 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     if (giftShippedRows.length > 0) {
       const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
-      // 对每条赠品快递，从 packages 找对应包裹判断精准状态
+      // 赠品物流只从 ERP 读取（鲸灵工单详情页一定不展示赠品包裹）
       const giftPkgStatuses = giftTrackings.map(tr => {
-        const pkg = (packages || []).find(p => (p.text || '').includes(tr));
-        if (!pkg) return { tr, status: '未读取到物流', label: `${tr}未读取到物流（需人工拦截）` };
-        const text = pkg.text || '';
-        const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
-        const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
-        const hasYizhan = !hasReturn && YIZHAN_KWS.some(kw => text.includes(kw));
-        if (hasReturn) return { tr, status: 'returned', label: `${tr}拦截成功已退回` };
-        if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功（需拦截）` };
-        if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回（需申请退货退款）` };
-        return { tr, status: 'transit', label: `${tr}在途未拦截成功（需拦截）` };
+        const erpEntry = erpLogResults.find(r => r.tracking === tr);
+        if (erpEntry && erpEntry.logisticsText) {
+          const text = erpEntry.logisticsText;
+          const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+          const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
+          const hasYizhan = !hasReturn && YIZHAN_KWS.some(kw => text.includes(kw));
+          if (hasReturn) return { tr, status: 'returned', label: `${tr}拦截成功已退回（ERP物流）` };
+          if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功（ERP物流）` };
+          if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回（ERP物流）` };
+          return { tr, status: 'transit', label: `${tr}在途未拦截成功（ERP物流）` };
+        }
+        return { tr, status: '未读取到物流', label: `${tr}未读取到物流（赠品ERP物流未采集，需人工拦截）` };
       });
       const giftNotReturned = giftPkgStatuses.filter(p => p.status !== 'returned');
       s({ type: 'read', label: '赠品快递单号', value: giftTrackings.join('/') || '无' });
@@ -330,8 +334,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'check', condition: '赠品快递全部已退回', result: giftNotReturned.length === 0 });
       if (giftNotReturned.length > 0) {
         const desc = giftNotReturned.map(p => p.label).join('；');
+        const allStatus = `主品: ${pkgSummary}；赠品: ${giftPkgStatuses.map(p => p.label).join('；')}`;
         s({ type: 'branch', text: `上报 → 赠品快递未全部退回：${desc}` });
-        return fin(escalate(desc, {
+        return fin(escalate(`${desc}（全部物流: ${allStatus}）`, {
           rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '赠品已发货未退回→上报人工' }],
         }));
       }
