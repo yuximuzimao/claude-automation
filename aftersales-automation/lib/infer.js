@@ -249,15 +249,24 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
       ? cd.erpLogistics.results
       : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
-    const erpReturned = erpLogResults.some(r => r.logisticsText && RETURN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
-    const erpLogSummary = erpLogResults.length ? erpLogResults.map(r => r.tracking || '?').join(',') : '';
-    s({ type: 'read', label: 'ERP物流退回状态', value: erpLogResults.length ? (erpReturned ? `已退回（${erpLogSummary}）` : `未退回（${erpLogSummary}）`) : '未采集' });
+    // 修正：所有有物流信息的行都必须有退回关键词才算全部退回（之前 .some() 导致部分退回误判为全部退回）
+    const erpLogsWithText = erpLogResults.filter(r => r.logisticsText);
+    const erpReturned = erpLogsWithText.length > 0 && erpLogsWithText.every(r => RETURN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
+    // 逐运单物流状态（替代原来的 tracking 列表 + '?'）
+    const erpTrackingStatuses = erpLogResults.filter(r => r.tracking).map(r => {
+      const text = r.logisticsText || '';
+      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
+      const status = hasReturn ? '已退回' : hasSigned ? '已签收' : '在途';
+      return `${r.tracking}：${status}`;
+    });
+    s({ type: 'read', label: '各运单物流状态', value: erpTrackingStatuses.length ? erpTrackingStatuses.join('；') : '未采集' });
 
     if (!packages || !packages.length) {
       if (erpReturned) {
         s({ type: 'branch', text: '同意退款 → 鲸灵物流未读到，但ERP物流显示已退回' });
         return fin(approve(
-          'ERP物流显示已退回（鲸灵物流未读到）',
+          '物流显示已退回',
           [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP双源核查→已退回→同意退款' }]
         ));
       }
@@ -310,6 +319,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     // 赠品已发货独立校验：赠品快递必须也已退回，否则 approve 前必须 escalate
     // logistics.js 已展开多子订单，赠品快递单号会出现在 packages 中
+    let giftPkgStatuses = [];
     if (giftShippedRows.length > 0) {
       const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
@@ -321,22 +331,38 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
           const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
           const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
           const hasYizhan = !hasReturn && YIZHAN_KWS.some(kw => text.includes(kw));
-          if (hasReturn) return { tr, status: 'returned', label: `${tr}拦截成功已退回（ERP物流）` };
-          if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功（ERP物流）` };
-          if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回（ERP物流）` };
-          return { tr, status: 'transit', label: `${tr}在途未拦截成功（ERP物流）` };
+          if (hasReturn) return { tr, status: 'returned', label: `${tr}已退回` };
+          if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功` };
+          if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回` };
+          return { tr, status: 'transit', label: `${tr}在途未拦截成功需拦截` };
         }
-        return { tr, status: '未读取到物流', label: `${tr}未读取到物流（赠品ERP物流未采集，需人工拦截）` };
+        return { tr, status: '未读取到物流', label: `${tr}未读取到物流需人工拦截` };
       });
       const giftNotReturned = giftPkgStatuses.filter(p => p.status !== 'returned');
       s({ type: 'read', label: '赠品快递单号', value: giftTrackings.join('/') || '无' });
       s({ type: 'read', label: '赠品物流状态', value: giftPkgStatuses.map(p => p.label).join('；') });
       s({ type: 'check', condition: '赠品快递全部已退回', result: giftNotReturned.length === 0 });
       if (giftNotReturned.length > 0) {
-        const desc = giftNotReturned.map(p => p.label).join('；');
-        const allStatus = `主品: ${pkgSummary}；赠品: ${giftPkgStatuses.map(p => p.label).join('；')}`;
-        s({ type: 'branch', text: `上报 → 赠品快递未全部退回：${desc}` });
-        return fin(escalate(`${desc}（全部物流: ${allStatus}）`, {
+        // 构建主品物流状态（从鲸灵 packages）
+        const mainParts = [];
+        (packages || []).forEach(pkg => {
+          const text = pkg.text || '';
+          const hasRet = RETURN_KEYWORDS.some(kw => text.includes(kw));
+          const hasSig = SIGNED_KEYWORDS.some(kw => text.includes(kw));
+          const numMatch = text.match(/物流单号[：:]\s*([A-Za-z0-9]+)/);
+          const tr = numMatch ? numMatch[1] : '';
+          if (!tr) return;
+          if (hasRet) mainParts.push(`${tr}已退回`);
+          else if (hasSig) mainParts.push(`${tr}已签收未退回`);
+          else mainParts.push(`${tr}在途未拦截成功需拦截`);
+        });
+        const giftParts = giftPkgStatuses.map(p => p.label);
+        const desc = [
+          mainParts.length ? `主品${mainParts.join('，')}` : '',
+          giftParts.length ? `赠品${giftParts.join('，')}` : ''
+        ].filter(Boolean).join('；');
+        s({ type: 'branch', text: `上报 → ${desc}` });
+        return fin(escalate(desc, {
           rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '赠品已发货未退回→上报人工' }],
         }));
       }
@@ -346,9 +372,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'check', condition: `全部包裹有退回物流节点（鲸灵:${allJLReturned}，ERP:${erpReturned}，采集完整:${collectionComplete}）`, result: allReturned });
 
     if (allReturned) {
-      s({ type: 'branch', text: `同意退款 → 全部包裹已退回（来源：${allJLReturned ? '鲸灵' : 'ERP'}）` });
+      s({ type: 'branch', text: `同意退款 → 全部包裹已退回` });
       return fin(approve(
-        `全部包裹物流显示已退回（${allJLReturned ? '鲸灵' : 'ERP'}物流）`,
+        '全部包裹物流显示已退回',
         [{ doc: 'flow-5.3', section: 'Step3', summary: '所有包裹已退回→同意退款' }]
       ));
     }
@@ -368,6 +394,24 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       else inTransitPkgs.push(tracking);
     });
     s({ type: 'read', label: '包裹分类', value: `已签收:${signedPkgs.join(',') || '无'} 在途:${inTransitPkgs.join(',') || '无'} 已退回:${returnedPkgs.join(',') || '无'}` });
+
+    // 构建统一物流行动摘要（主品 + 赠品），用于 reason 输出
+    const mainActionParts = [];
+    if (returnedPkgs.length) mainActionParts.push(`${returnedPkgs.join('、')}已退回`);
+    if (inTransitPkgs.length) mainActionParts.push(`${inTransitPkgs.join('、')}在途未拦截成功需拦截`);
+    if (signedPkgs.length) mainActionParts.push(`${signedPkgs.join('、')}已签收未退回`);
+    const giftActionParts = [];
+    giftPkgStatuses.forEach(p => {
+      if (p.status === 'returned') giftActionParts.push(`${p.tr}已退回`);
+      else if (p.status === 'transit') giftActionParts.push(`${p.tr}在途未拦截成功需拦截`);
+      else if (p.status === 'signed') giftActionParts.push(`${p.tr}已签收未退回`);
+      else if (p.status === 'yizhan') giftActionParts.push(`${p.tr}驿站待取件未拦截成功`);
+      else giftActionParts.push(`${p.tr}未读取到物流需人工拦截`);
+    });
+    const actionSummary = [
+      mainActionParts.length ? `主品${mainActionParts.join('，')}` : '',
+      giftActionParts.length ? `赠品${giftActionParts.join('，')}` : ''
+    ].filter(Boolean).join('；');
 
     const anySigned = signedPkgs.length > 0;
 
@@ -439,10 +483,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const scanStr = hoursUntilNextScan != null ? `${hoursUntilNextScan.toFixed(1)}h` : '?h';
       const marginStr = margin != null ? margin.toFixed(1) : '?';
       s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${scanStr} = ${marginStr}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
-      const transitDesc = inTransitPkgs.length ? `快递（${inTransitPkgs.join('、')}）在途未拦截成功，` : '';
       return fin({
         ...escalate(
-          `${transitDesc}剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
+          `${actionSummary}，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
           {
             confidence: 'high',
             rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描>8h→自动等待重查' }],
@@ -453,10 +496,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     const marginStr = margin != null ? margin.toFixed(1) : '?';
-    const transitRejectDesc = inTransitPkgs.length ? `快递（${inTransitPkgs.join('、')}）在途未拦截成功，` : '';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
     return fin({ ...reject(
-      `${transitRejectDesc}订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`,
+      `${actionSummary}，等快递退返回我司后再退款`,
       ['需创建快递拦截提醒'],
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
     ), reasonCode: 'INTERCEPT_TIMEOUT' });

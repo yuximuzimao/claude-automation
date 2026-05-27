@@ -98,17 +98,23 @@ async function readErpLogistics(targetId, rowIndex) {
     const click = await cdp.eval(targetId, makeClickDetailJS(rowIndex));
     if (click.error) throw new Error(click.error);
 
-    // 等待订单详情弹窗可见且内容加载完成（最多 10s）
+    // 等待订单详情弹窗内容加载完成（最多 15s）
+    // 关键：h3.sub-title 存在仅代表骨架渲染，内容是异步填充的
+    // 必须检查商品信息区有实际数据（"暂无数据"消失）才算加载完成
     await waitFor(
       async () => {
         const r = await cdp.eval(targetId, `(function(){
           var w = Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog')).filter(function(d){ return d.getBoundingClientRect().width > 0; });
           if (!w.length) return false;
-          return !!w[w.length-1].querySelector('h3.sub-title');
+          var last = w[w.length-1];
+          var text = last.innerText || '';
+          var hasH3 = !!last.querySelector('h3.sub-title');
+          var skeletonOnly = text.includes('暂无数据') && text.length < 500;
+          return hasH3 && !skeletonOnly;
         })()`);
         return r === true;
       },
-      { timeoutMs: 10000, intervalMs: 500, label: '等待订单详情弹窗' }
+      { timeoutMs: 15000, intervalMs: 800, label: '等待订单详情弹窗内容加载' }
     );
 
     // 读物流
