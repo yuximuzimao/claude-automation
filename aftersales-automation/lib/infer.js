@@ -51,6 +51,10 @@ function checkSignedOverDays(cd, days) {
 
 // 返回所有 ERP 行数据（见 docs/collect-schema.md）
 function getErpRows(cd, field) {
+  // 主品 ERP：优先合并 erpSearches（所有子订单），fallback 到 erpSearch（向后兼容）
+  if (field === 'erpSearch' && cd.erpSearches && cd.erpSearches.length > 0) {
+    return cd.erpSearches.flatMap(s => (s.rows && s.rows.rows) || []);
+  }
   return (cd[field] && cd[field].rows && cd[field].rows.rows) || [];
 }
 
