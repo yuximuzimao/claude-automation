@@ -286,16 +286,21 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const allTrackings = [...new Set([...erpTrackings, ...jlTrackings])];
     s({ type: 'read', label: '合并去重包裹', value: `${allTrackings.length}个（ERP:${erpTrackings.length} 鲸灵:${jlTrackings.length} 去重后:${allTrackings.length}）` });
 
-    // 双源判断：鲸灵全部退回 OR ERP显示退回 → 同意
-    // 采集完整性：鲸灵读到的包裹数 >= ERP主品发货行数（赠品单独走校验，不计入此处）
+    // 采集完整性：ERP每行都有采集结果（有tracking或明确无tracking），
+    // 校验鲸灵是否覆盖了 ERP 所有 unique tracking（未去重行数做分母，去重单号做被覆盖目标）
+    // 公式：有tracking的ERP行（未去重）数 + 无tracking行数 = ERP总发货行数（恒等，说明ERP自身完整）
+    //        鲸灵读到的 tracking 数量 >= ERP unique tracking 数（说明鲸灵未漏读包裹）
+    const allShippedRows = [...mainShippedRows, ...giftShippedRows];
+    const noTrackingRows = allShippedRows.filter(r => !r.tracking && (!r.trackings || r.trackings.length === 0));
+    const erpUniqueTrackings = new Set(erpTrackings); // ERP去重后的 unique tracking 集合
+    const collectionComplete = totalShipRows === 0 || jlTrackings.length >= erpUniqueTrackings.size;
+    s({ type: 'check', condition: `物流采集完整（鲸灵读到${jlTrackings.length}个快递 >= ERP unique快递${erpUniqueTrackings.size}个，ERP发货${totalShipRows}行其中无单号${noTrackingRows.length}行）`, result: collectionComplete });
+
     const allJLReturned = allPackagesReturned(packages);
-    const jlTrackingCount = jlTrackings.length;
-    const collectionComplete = mainShippedRows.length <= 1 || jlTrackingCount >= mainShippedRows.length;
-    s({ type: 'check', condition: `物流采集完整（鲸灵${jlTrackingCount}包裹 vs ERP主品${mainShippedRows.length}发货行）`, result: collectionComplete });
 
     if (allJLReturned && !collectionComplete) {
-      s({ type: 'branch', text: `上报 → 去重后${allTrackings.length}个包裹，但ERP有${totalShipRows}行发货，采集不完整` });
-      return fin(escalate(`物流采集不完整（去重后${allTrackings.length}/${totalShipRows}个包裹），无法确认全部退回，需人工核查`));
+      s({ type: 'branch', text: `上报 → 采集不完整（去重快递${allTrackings.length}+无单号${noTrackingRows.length}=${collectionTotal}，但ERP有${totalShipRows}行发货）` });
+      return fin(escalate(`物流采集不完整（已采集${collectionTotal}/${totalShipRows}条），无法确认全部退回，需人工核查`));
     }
 
     // 赠品已发货独立校验：赠品快递必须也已退回，否则 approve 前必须 escalate
