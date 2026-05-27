@@ -309,7 +309,7 @@ function computeStats() {
     feedbackCount: judged.length,
     positive,
     negative,
-    accuracy: judged.length > 0 ? Math.round((positive / judged.length) * 1000) / 1000 : null,
+    accuracy: sims.length > 0 ? Math.round(((sims.length - negative) / sims.length) * 1000) / 1000 : null,
     byAction,
     byRule,
     byType,
