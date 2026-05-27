@@ -18,6 +18,7 @@ const { remapSku } = require('./remap-sku');
 const { addProductToDialog, confirmDialog } = require('./copy-as-suite');
 const { resolveItems } = require('./utils/resolve-items');
 
+const BRAND = 'hee';
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 const LOG_PATH = path.join(__dirname, '../data/auto-match-log.json');
 
@@ -379,7 +380,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
       console.error(`\n── Phase 1d：复制为套件 ──`);
       try {
         await copyOneSku(erpId, shopName, r.productCode, r.platformCode,
-          resolveItems(r.platformCode, r.recognition.items, 'hee'));
+          resolveItems(r.platformCode, r.recognition.items, BRAND));
         log.done.push(r.platformCode);
         saveLog(log);
       } catch (e) {

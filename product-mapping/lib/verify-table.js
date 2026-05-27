@@ -12,6 +12,7 @@ const path = require('path');
 const fs = require('fs');
 const { resolveItems } = require('./utils/resolve-items');
 
+const BRAND = 'hee';
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const IMGS_DIR = path.join(__dirname, '../data/imgs');
 const OUT_DIR = path.join(__dirname, '../data/reports');
@@ -55,8 +56,14 @@ function generate(report) {
     }
   }
 
+  // 预加载所有图片（避免 map 内逐个 I/O）
+  const imgCache = {};
+  for (const sku of allSkus) {
+    imgCache[sku.platformCode] = imgDataUri(sku.platformCode);
+  }
+
   const rows = allSkus.map(sku => {
-    const imgSrc = imgDataUri(sku.platformCode);
+    const imgSrc = imgCache[sku.platformCode];
     const hasImg = !!imgSrc;
     const isMatch = sku.comparisonResult === 'match';
     const isMismatch = sku.comparisonResult === 'mismatch';
@@ -76,7 +83,7 @@ function generate(report) {
     // 不一致时额外显示识图结果（含配件注入）用于对比
     let mismatchBlock = '';
     if (isMismatch && sku.recognition && sku.recognition.items) {
-      const resolvedItems = resolveItems(sku.platformCode, sku.recognition.items, 'hee');
+      const resolvedItems = resolveItems(sku.platformCode, sku.recognition.items, BRAND);
       const recogRows = resolvedItems.map(it =>
         `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
       ).join('');

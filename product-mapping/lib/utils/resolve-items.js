@@ -21,9 +21,12 @@ const _cache = {};
 function loadAccessories(brand) {
   if (_cache[brand] !== undefined) return _cache[brand];
   const file = path.join(PRODUCTS_DIR, brand, 'accessories.json');
-  if (!fs.existsSync(file)) { _cache[brand] = null; return null; }
-  const acc = JSON.parse(fs.readFileSync(file, 'utf8'));
-  _cache[brand] = acc.rules || null;
+  try {
+    const acc = JSON.parse(fs.readFileSync(file, 'utf8'));
+    _cache[brand] = acc.rules || null;
+  } catch {
+    _cache[brand] = null;
+  }
   return _cache[brand];
 }
 

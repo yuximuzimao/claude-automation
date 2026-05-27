@@ -170,7 +170,14 @@ async function confirmDialog(erpId) {
     if(!w) return JSON.stringify({closed:true});
     return JSON.stringify({closed: w.getBoundingClientRect().height === 0});
   })()`);
-  if (!r2 || !r2.closed) throw new Error('点确定后弹窗未关闭');
+  // 「换对应商品」会叠在「选择商品」之上，后者 height>0 不代表未关闭
+  // 只有在换对应商品也未出现时，才是真正的异常
+  if (!r2 || !r2.closed) {
+    const rebind = await cdp.eval(erpId,
+      `(function(){var w=${FIND_REBIND_DIALOG};return JSON.stringify({appeared:!!w});})()`,
+    );
+    if (!rebind || !rebind.appeared) throw new Error('点确定后弹窗未关闭');
+  }
 
   // 检查是否出现「换对应商品」弹窗（已有同比例套件时触发）
   const r3 = await cdp.eval(erpId,
