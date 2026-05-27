@@ -161,7 +161,16 @@ const cdp = {
     if (connectionMode === 'direct') {
       return directGetTargets();
     }
-    return request('GET', '/targets');
+    // proxy 模式下先尝试，失败则 fallback 直连
+    try {
+      return await request('GET', '/targets');
+    } catch (e) {
+      if (e.code === 'ECONNREFUSED' || (e instanceof AggregateError)) {
+        connectionMode = 'direct';
+        return directGetTargets();
+      }
+      throw e;
+    }
   },
 };
 
