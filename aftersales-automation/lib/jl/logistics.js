@@ -10,16 +10,34 @@ const { navigate } = require('./navigate');
 const { sleep } = require('../wait');
 const { ok, fail } = require('../result');
 
-// 读取鲸灵物流弹窗（多包裹多 tab）
-const OPEN_LOGISTICS_JS = `(function(){
-  var btns = Array.from(document.querySelectorAll('button.el-button--text.el-button--mini, a, button'));
-  var btn = btns.find(function(b){
+// Step 0: 展开所有折叠的子订单（「查看剩余子订单(N)」按钮）
+const EXPAND_SUB_ORDERS_JS = `(function(){
+  var btns = Array.from(document.querySelectorAll('button')).filter(function(b){
+    return b.textContent.trim().includes('查看剩余子订单') && b.getBoundingClientRect().width > 0;
+  });
+  btns.forEach(function(b){ b.click(); });
+  return btns.length;
+})()`;
+
+// Step 1: 统计当前可见的「查看物流」按钮数量
+const COUNT_LOGISTICS_BTNS_JS = `(function(){
+  var btns = Array.from(document.querySelectorAll('button')).filter(function(b){
     return b.textContent.trim() === '查看物流' && b.getBoundingClientRect().width > 0;
   });
-  if (!btn) return JSON.stringify({error:'未找到查看物流按钮'});
-  btn.click();
-  return 'clicked';
+  return btns.length;
 })()`;
+
+// Step 2: 点击第 idx 个「查看物流」按钮
+function makeClickNthLogisticsBtnJS(idx) {
+  return `(function(){
+    var btns = Array.from(document.querySelectorAll('button')).filter(function(b){
+      return b.textContent.trim() === '查看物流' && b.getBoundingClientRect().width > 0;
+    });
+    if (!btns[${idx}]) return JSON.stringify({error:'未找到第${idx+1}个查看物流按钮'});
+    btns[${idx}].click();
+    return 'clicked';
+  })()`;
+}
 
 const READ_LOGISTICS_TABS_JS = `(function(){
   var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
@@ -62,29 +80,48 @@ const CLOSE_DIALOG_JS = `(function(){
 async function getLogistics(targetId, workOrderNum) {
   try {
     await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
-    await cdp.eval(targetId, OPEN_LOGISTICS_JS);
-    await sleep(2000);
 
-    const tabsRaw = await cdp.eval(targetId, READ_LOGISTICS_TABS_JS);
-    const tabsData = tabsRaw;
-    if (tabsData.error) throw new Error(tabsData.error);
+    // Step 0: 展开折叠的子订单
+    const expandCount = await cdp.eval(targetId, EXPAND_SUB_ORDERS_JS);
+    if (expandCount > 0) await sleep(1500);
+
+    // Step 1: 统计所有「查看物流」按钮
+    const btnCount = await cdp.eval(targetId, COUNT_LOGISTICS_BTNS_JS);
+    if (!btnCount) throw new Error('未找到查看物流按钮');
 
     const packages = [];
-    // 读取第一个 tab（已激活）
-    packages.push({ tab: tabsData.tabs[0]?.name || '包裹1', text: tabsData.currentText });
 
-    // 如有多个 tab，逐一切换读取
-    for (let i = 1; i < tabsData.tabCount; i++) {
-      const tabName = tabsData.tabs[i]?.name;
-      if (!tabName) continue;
-      await cdp.eval(targetId, makeClickTabJS(tabName));
-      await sleep(1000);
-      const freshRaw = await cdp.eval(targetId, READ_LOGISTICS_TABS_JS);
-      const freshData = freshRaw;
-      packages.push({ tab: tabName, text: freshData.currentText });
+    // Step 2: 逐个子订单读取物流
+    for (let btnIdx = 0; btnIdx < btnCount; btnIdx++) {
+      const clickResult = await cdp.eval(targetId, makeClickNthLogisticsBtnJS(btnIdx));
+      if (typeof clickResult === 'object' && clickResult.error) {
+        packages.push({ tab: `子订单${btnIdx + 1}`, error: clickResult.error });
+        continue;
+      }
+      await sleep(1500);
+
+      const tabsData = await cdp.eval(targetId, READ_LOGISTICS_TABS_JS);
+      if (tabsData.error) {
+        packages.push({ tab: `子订单${btnIdx + 1}`, error: tabsData.error });
+        continue;
+      }
+
+      // 读取当前激活 tab
+      packages.push({ tab: tabsData.tabs[0]?.name || `包裹${packages.length + 1}`, text: tabsData.currentText });
+
+      // 如有多个 tab（同一子订单多包裹），逐一切换
+      for (let i = 1; i < tabsData.tabCount; i++) {
+        const tabName = tabsData.tabs[i]?.name;
+        if (!tabName) continue;
+        await cdp.eval(targetId, makeClickTabJS(tabName));
+        await sleep(800);
+        const freshData = await cdp.eval(targetId, READ_LOGISTICS_TABS_JS);
+        packages.push({ tab: tabName, text: freshData.currentText });
+      }
+
+      await cdp.eval(targetId, CLOSE_DIALOG_JS);
+      await sleep(500);
     }
-
-    await cdp.eval(targetId, CLOSE_DIALOG_JS);
 
     return ok({ packages });
   } catch (e) {

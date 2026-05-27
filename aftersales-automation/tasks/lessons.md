@@ -222,3 +222,35 @@ archive.js 子品读取经历了三轮错误修复才找到正确方案：
 
 server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app AppleEvent 超时 -1712。旧代码静默吞错。
 **修复**：`createReminder(title)` 函数优先 Reminders，失败降级 `display notification`。
+
+## 2026-05-22 session 教训（归档重复根因分析）
+
+| # | 教训 | memory |
+|---|------|--------|
+| 25 | **归档副作用是根因，不是重复写入本身**：`submitPendingFeedback` 在评价提交后自动调 `archive-manual` 归档（副作用），用户随后再点「归档」按钮又调一次，产生重复。正确设计：评价提交只提交评价，归档只由显式归档按钮触发。任何"捎带做了另一件事"的设计都要警惕。 | feedback_jingling_dev.md §80 |
+| 26 | **写操作端点必须加幂等守卫**：`archive-manual` 缺少 `status=done` 检查，任意重复调用都会写新 case。所有写 `cases.jsonl`/`simulations.jsonl` 的端点，都要先检查目标状态再决定是否执行。 | feedback_jingling_dev.md §80 |
+| 27 | **launchctl restart 后检查暂停状态**：如果系统在 stop 前已经是暂停状态，restart 后仍为暂停，需 `curl -X POST http://localhost:3457/api/resume` 或面板点「恢复运行」。若 stop 前是运行中的则自动恢复。 | — |
+
+## 2026-05-27 session 教训
+
+### 51. jl.js 注入后页面就绪检测：轮询 readyState + Vue 初始化，不用固定延时
+
+**问题**：`inject` 命令在 navigate 后等固定 2 秒，若页面未加载完毕就执行下一步抓取，得到的是上一个账号的数据。
+**根因**：导航是异步的，固定延时无法保证页面已渲染完成；账号切换时旧 localStorage（storeId、userId）未清除，新账号的标识可能覆盖不完整。
+**修复**：
+1. 注入 localStorage 前先 `localStorage.clear()`，确保旧账号标识不残留
+2. navigate 后轮询 `document.readyState === 'complete'`（最多 10 秒，500ms 间隔）
+3. 继续轮询 `#app.__vue__` 初始化（最多 5 秒）
+4. 验证最终 URL 不含 `/login` / `/sso`（跳回登录页 = session 失效）
+**教训**：固定延时是最坏方案。能检测状态的地方必须用状态检测，不靠时间猜测。
+
+### 52. 多子订单工单：logistics.js 只点第一个「查看物流」按钮，漏读其余子订单
+
+**问题**：工单 `100001779759971976518` 含 3 个子订单（2 主品 + 1 赠品），鲸灵页面每个子订单有独立的「查看物流」按钮。系统只读到 1 个包裹（第 1 个子订单），漏读了第 2 个主品子订单和赠品子订单。
+**根因**：`logistics.js` 的 `OPEN_LOGISTICS_JS` 用 `btns.find(...)` 只取**第一个**可见的「查看物流」按钮并点击，然后读弹窗内的 tab（包裹1/包裹2），这些 tab 只对应单个子订单内的多包裹，不跨子订单。
+- 其余子订单的「查看物流」按钮被直接跳过
+- 赠品子订单（748113610，快递 YT7623159902791）在 ERP 有发货记录，但鲸灵侧物流完全未读
+- 推理因信息不足做出错误的 approve 决策
+
+**正确方案**：先展开页面上所有子订单（可能有折叠的），再用 `querySelectorAll` 收集**所有**「查看物流」按钮，逐一点击 → 读弹窗 → 关闭，汇总所有子订单的物流。
+**教训**：多子订单 = 多个「查看物流」入口。`find()` 只拿第一个，必须改 `filter()` + 循环处理全部。
