@@ -122,17 +122,16 @@ async function setFieldSelect(targetId, fieldIndex) {
   await sleep(200);
 
   const js = `(function(){
-    var idx = ${fieldIndex};
     var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
       return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
     });
-    if (sels.length <= idx) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器未找到（非shop非dialog el-select 数量=' + sels.length + '，需要index=' + idx + '）'});
-    var sel = sels[idx];
+    if (sels.length <= ${fieldIndex}) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器未找到（非shop非dialog el-select 数量=' + sels.length + '，需要index=${fieldIndex}）'});
+    var sel = sels[${fieldIndex}];
     var inp = sel.querySelector('input');
     if (!inp) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器内 input 不存在'});
-    var mark = 'km-field-' + idx + '-' + Date.now();
+    var mark = 'km-field-${fieldIndex}-' + Date.now();
     inp.setAttribute('data-km-mark', mark);
-    return JSON.stringify({needClick: true, mark: mark, currentValue: inp.value});
+    return JSON.stringify({mark: mark, currentValue: inp.value});
   })()`;
 
   const r = await cdp.eval(targetId, js);
@@ -158,18 +157,16 @@ async function setFieldSelect(targetId, fieldIndex) {
 
 // 确认搜索模式：「精确搜索」已设置 + 字段选择器（第2个非shop select）有非空值
 const CHECK_SEARCH_MODE_JS = `(function(){
-  var inputs = Array.from(document.querySelectorAll('input.el-input__inner'));
-  var hasExact = !!inputs.find(function(i){ return i.value === '精确搜索'; });
-  // 按位置验证字段选择器（不检查具体文字，ERP 可能改名）
   var nonShopSels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
     return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
   });
+  var modeInp = nonShopSels[0] && nonShopSels[0].querySelector('input.el-input__inner');
+  var hasExact = !!(modeInp && modeInp.value === '精确搜索');
   var fieldSel = nonShopSels[1];
   var fieldInp = fieldSel && fieldSel.querySelector('input.el-input__inner');
   var hasField = !!(fieldInp && fieldInp.value && fieldInp.value.trim());
   return JSON.stringify({hasExact: hasExact, hasField: hasField, fieldValue: fieldInp ? fieldInp.value : null});
 })()`;
-
 
 function makeSearchBarcodeJS(barcode) {
   return `(function(){
