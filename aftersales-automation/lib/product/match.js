@@ -114,13 +114,62 @@ async function setMainPageSelect(targetId, optionText) {
   await sleep(300);
 }
 
-// 确认搜索模式为「精确搜索」+「平台商家编码」
+// 按位置设置搜索字段下拉（第 fieldIndex 个非店铺非弹窗 el-select）
+// 不依赖选项文字——ERP 可能改名，但布局位置固定：第2个 = 搜索字段（平台规格商家编码类）
+// 始终重置为第一个选项，确保每次都是正确的字段维度
+async function setFieldSelect(targetId, fieldIndex) {
+  await cdp.eval(targetId, `document.body.click()`);
+  await sleep(200);
+
+  const js = `(function(){
+    var idx = ${fieldIndex};
+    var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
+      return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
+    });
+    if (sels.length <= idx) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器未找到（非shop非dialog el-select 数量=' + sels.length + '，需要index=' + idx + '）'});
+    var sel = sels[idx];
+    var inp = sel.querySelector('input');
+    if (!inp) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器内 input 不存在'});
+    var mark = 'km-field-' + idx + '-' + Date.now();
+    inp.setAttribute('data-km-mark', mark);
+    return JSON.stringify({needClick: true, mark: mark, currentValue: inp.value});
+  })()`;
+
+  const r = await cdp.eval(targetId, js);
+  if (r.error) throw new Error(r.error);
+
+  await cdp.clickAt(targetId, `input[data-km-mark="${r.mark}"]`);
+  await sleep(500);
+
+  // 点击当前可见下拉的第一个可见选项（第1个选项 = 平台规格商家编码类，不管文字怎么改）
+  await cdp.eval(targetId, `(function(){
+    var dropdowns = Array.from(document.querySelectorAll('.el-select-dropdown')).filter(function(d){
+      return d.style.display !== 'none' && d.offsetHeight > 0;
+    });
+    for (var d = dropdowns.length - 1; d >= 0; d--) {
+      var items = Array.from(dropdowns[d].querySelectorAll('.el-select-dropdown__item'))
+        .filter(function(item){ return item.getBoundingClientRect().height > 0; });
+      if (items.length > 0) { items[0].click(); return 'clicked:' + items[0].innerText.trim(); }
+    }
+    return 'no-visible-dropdown';
+  })()`);
+  await sleep(300);
+}
+
+// 确认搜索模式：「精确搜索」已设置 + 字段选择器（第2个非shop select）有非空值
 const CHECK_SEARCH_MODE_JS = `(function(){
   var inputs = Array.from(document.querySelectorAll('input.el-input__inner'));
   var hasExact = !!inputs.find(function(i){ return i.value === '精确搜索'; });
-  var hasField = !!inputs.find(function(i){ return i.value === '平台商家编码'; });
-  return JSON.stringify({hasExact: hasExact, hasField: hasField});
+  // 按位置验证字段选择器（不检查具体文字，ERP 可能改名）
+  var nonShopSels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
+    return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
+  });
+  var fieldSel = nonShopSels[1];
+  var fieldInp = fieldSel && fieldSel.querySelector('input.el-input__inner');
+  var hasField = !!(fieldInp && fieldInp.value && fieldInp.value.trim());
+  return JSON.stringify({hasExact: hasExact, hasField: hasField, fieldValue: fieldInp ? fieldInp.value : null});
 })()`;
+
 
 function makeSearchBarcodeJS(barcode) {
   return `(function(){
@@ -254,7 +303,7 @@ async function matchWithRetry(targetId, barcode, attr1, shopName, isRetry) {
     // 设置搜索模式为「精确搜索」+「平台商家编码」，然后验证
     await retry(async () => {
       await setMainPageSelect(targetId, '精确搜索');
-      await setMainPageSelect(targetId, '平台商家编码');
+      await setFieldSelect(targetId, 1); // 第2个非shop select = 搜索字段（按位置不按文字）
       const mode = await cdp.eval(targetId, CHECK_SEARCH_MODE_JS);
       if (!mode.hasExact || !mode.hasField) {
         throw new Error(`搜索模式设置失败: hasExact=${mode.hasExact}, hasField=${mode.hasField}`);
