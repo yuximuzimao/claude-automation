@@ -13,6 +13,7 @@ const { initArchiveComp, queryArchive, querySubItems } = require('./archive');
 const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
 const { releaseErpLock } = require('./erp-lock');
+const { resolveItems } = require('./utils/resolve-items');
 
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
@@ -153,6 +154,7 @@ async function runCheck(jlId, erpId, shopName) {
         const subItems = (archiveItem && archiveItem.subItems) || [];
 
         // 识图 vs 档案对比（仅在有识图结果且有档案时计算）
+        // 组合装对比时临时注入配件（不写回 recognition）
         let comparisonResult = null, comparisonDetail = null;
         if (recognition && archiveItem) {
           if (archiveType === '0') {
@@ -163,7 +165,8 @@ async function runCheck(jlId, erpId, shopName) {
               ? `✓ ${actual}`
               : `✗ 识图:${expected} vs 档案:${actual}`;
           } else if (archiveType === '2' && subItems.length > 0) {
-            const expectedSet = recognition.items.map(it => `${it.name}×${it.qty}`).sort().join(',');
+            const resolvedItems = resolveItems(sku.platformCode, recognition.items, 'hee');
+            const expectedSet = resolvedItems.map(it => `${it.name}×${it.qty}`).sort().join(',');
             const actualSet = subItems.map(s => `${s.name}×${s.qty}`).sort().join(',');
             comparisonResult = expectedSet === actualSet ? 'match' : 'mismatch';
             comparisonDetail = comparisonResult === 'match'
