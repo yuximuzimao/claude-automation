@@ -286,15 +286,14 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const allTrackings = [...new Set([...erpTrackings, ...jlTrackings])];
     s({ type: 'read', label: '合并去重包裹', value: `${allTrackings.length}个（ERP:${erpTrackings.length} 鲸灵:${jlTrackings.length} 去重后:${allTrackings.length}）` });
 
-    // 采集完整性：ERP每行都有采集结果（有tracking或明确无tracking），
-    // 校验鲸灵是否覆盖了 ERP 所有 unique tracking（未去重行数做分母，去重单号做被覆盖目标）
-    // 公式：有tracking的ERP行（未去重）数 + 无tracking行数 = ERP总发货行数（恒等，说明ERP自身完整）
-    //        鲸灵读到的 tracking 数量 >= ERP unique tracking 数（说明鲸灵未漏读包裹）
+    // 采集完整性：鲸灵读到的每个 tracking 必须都能在 ERP 结果里找到
+    // ERP 是权威发货记录，鲸灵是物流读取。若鲸灵有 tracking 不在 ERP → ERP 采集遗漏了该发货行
     const allShippedRows = [...mainShippedRows, ...giftShippedRows];
     const noTrackingRows = allShippedRows.filter(r => !r.tracking && (!r.trackings || r.trackings.length === 0));
-    const erpUniqueTrackings = new Set(erpTrackings); // ERP去重后的 unique tracking 集合
-    const collectionComplete = totalShipRows === 0 || jlTrackings.length >= erpUniqueTrackings.size;
-    s({ type: 'check', condition: `物流采集完整（鲸灵读到${jlTrackings.length}个快递 >= ERP unique快递${erpUniqueTrackings.size}个，ERP发货${totalShipRows}行其中无单号${noTrackingRows.length}行）`, result: collectionComplete });
+    const erpUniqueTrackings = new Set(erpTrackings);
+    const jlOnlyTrackings = jlTrackings.filter(tr => !erpUniqueTrackings.has(tr));
+    const collectionComplete = jlOnlyTrackings.length === 0;
+    s({ type: 'check', condition: `物流采集完整（鲸灵单号全部包含在ERP中，ERP发货${totalShipRows}行/无单号${noTrackingRows.length}行，鲸灵仅有单号${jlOnlyTrackings.length}个）`, result: collectionComplete });
 
     const allJLReturned = allPackagesReturned(packages);
 
