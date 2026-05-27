@@ -39,13 +39,29 @@ function makeClickDetailJS(rowIndex) {
 }
 
 const READ_LOGISTICS_JS = `(function(){
-  var container = document.querySelector('.js-logistics-container');
-  if (!container) return JSON.stringify({error:'物流容器未打开'});
-  var navBox = document.querySelector('.box-nav.box-toogle-el');
-  var tracking = navBox ? (navBox.innerText.match(/运单号[：:]\s*([\\w]+)/) || [])[1] : '';
+  // 找最后一个可见的 trade-detail-dialog
+  var wrappers = Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog')).filter(function(d){
+    return d.getBoundingClientRect().width > 0;
+  });
+  if (!wrappers.length) return JSON.stringify({error:'订单详情弹窗未打开'});
+  var dialog = wrappers[wrappers.length - 1];
+
+  // 运单号：从 .list-title「运单号:」的相邻 span 读取
+  var trackingEl = Array.from(dialog.querySelectorAll('.list-title')).find(function(el){
+    return el.innerText.trim() === '运单号:';
+  });
+  var tracking = (trackingEl && trackingEl.nextElementSibling) ? trackingEl.nextElementSibling.innerText.trim() : '';
+
+  // 物流追踪文本：找含「物流信息」h3 的 .box 容器
+  var logBox = Array.from(dialog.querySelectorAll('.box')).find(function(b){
+    var h3 = b.querySelector('h3.sub-title');
+    return h3 && h3.innerText.includes('物流信息');
+  });
+  var logisticsText = logBox ? logBox.innerText.substring(0, 3000) : '';
+
   return JSON.stringify({
-    tracking: tracking || '',
-    logisticsText: container.innerText.substring(0, 3000)
+    tracking: tracking,
+    logisticsText: logisticsText
   });
 })()`;
 
@@ -82,10 +98,17 @@ async function readErpLogistics(targetId, rowIndex) {
     const click = await cdp.eval(targetId, makeClickDetailJS(rowIndex));
     if (click.error) throw new Error(click.error);
 
-    // 等待物流容器出现（最多 10s）
+    // 等待订单详情弹窗可见且内容加载完成（最多 10s）
     await waitFor(
-      async () => cdp.eval(targetId, `!!document.querySelector('.js-logistics-container')`),
-      { timeoutMs: 10000, intervalMs: 500, label: '等待物流容器' }
+      async () => {
+        const r = await cdp.eval(targetId, `(function(){
+          var w = Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog')).filter(function(d){ return d.getBoundingClientRect().width > 0; });
+          if (!w.length) return false;
+          return !!w[w.length-1].querySelector('h3.sub-title');
+        })()`);
+        return r === true;
+      },
+      { timeoutMs: 10000, intervalMs: 500, label: '等待订单详情弹窗' }
     );
 
     // 读物流

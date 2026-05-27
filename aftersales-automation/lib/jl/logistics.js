@@ -7,7 +7,7 @@
  */
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
-const { sleep } = require('../wait');
+const { sleep, waitFor } = require('../wait');
 const { ok, fail } = require('../result');
 
 // Step 0: 展开所有折叠的子订单（「查看剩余子订单(N)」按钮）
@@ -77,6 +77,13 @@ const CLOSE_DIALOG_JS = `(function(){
   return 'closed';
 })()`;
 
+const CHECK_DIALOG_CLOSED_JS = `(function(){
+  var open = Array.from(document.querySelectorAll('.el-dialog__wrapper')).some(function(d){
+    return d.getBoundingClientRect().width > 0;
+  });
+  return JSON.stringify({closed: !open});
+})()`;
+
 async function getLogistics(targetId, workOrderNum) {
   try {
     await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
@@ -120,7 +127,13 @@ async function getLogistics(targetId, workOrderNum) {
       }
 
       await cdp.eval(targetId, CLOSE_DIALOG_JS);
-      await sleep(500);
+      await waitFor(
+        async () => {
+          const r = await cdp.eval(targetId, CHECK_DIALOG_CLOSED_JS);
+          return r.closed;
+        },
+        { timeoutMs: 5000, intervalMs: 300, label: '等待物流弹窗关闭' }
+      );
     }
 
     return ok({ packages });
