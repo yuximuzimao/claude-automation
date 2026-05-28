@@ -324,23 +324,23 @@ function getAlertClass(title) {
 async function loadJlAlerts() {
   try {
     const data = await api('/jl-alerts');
-    const toggle = document.getElementById('jl-alerts-toggle');
+    const trigger = document.getElementById('jl-alerts-trigger');
     const panel = document.getElementById('jl-alerts-panel');
     const countEl = document.getElementById('jl-alerts-count');
-    if (!toggle || !panel) return;
+    if (!trigger || !panel) return;
 
     const byAccount = (data && data.byAccount) || {};
     const rows = Object.values(byAccount).filter(a => a.items && a.items.length > 0);
     const totalItems = rows.reduce((s, a) => s + a.items.length, 0);
 
     if (!rows.length) {
-      toggle.className = 'jl-alerts-toggle hidden';
+      trigger.className = 'jl-alerts-trigger hidden';
       panel.className = 'jl-alerts-panel hidden';
       return;
     }
 
     if (countEl) countEl.textContent = totalItems;
-    toggle.className = 'jl-alerts-toggle';
+    trigger.className = 'jl-alerts-trigger';
 
     panel.innerHTML = rows.map(a => {
       const chips = a.items.map(item => {
@@ -356,22 +356,22 @@ async function loadJlAlerts() {
 
 function toggleJlAlerts() {
   const panel = document.getElementById('jl-alerts-panel');
-  const toggle = document.getElementById('jl-alerts-toggle');
+  const arrow = document.getElementById('jl-alerts-arrow');
   if (!panel) return;
   const isHidden = panel.classList.contains('hidden');
   panel.className = isHidden ? 'jl-alerts-panel' : 'jl-alerts-panel hidden';
-  // 更新箭头方向
-  if (toggle) toggle.innerHTML = toggle.innerHTML.replace(/[▾▴]/, isHidden ? '▴' : '▾');
+  if (arrow) arrow.textContent = isHidden ? '▴' : '▾';
 }
 
 // 点击面板外部收起
 document.addEventListener('click', e => {
   const panel = document.getElementById('jl-alerts-panel');
-  const toggle = document.getElementById('jl-alerts-toggle');
+  const trigger = document.getElementById('jl-alerts-trigger');
   if (!panel || panel.classList.contains('hidden')) return;
-  if (!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+  if (!panel.contains(e.target) && !trigger.contains(e.target)) {
     panel.className = 'jl-alerts-panel hidden';
-    if (toggle) toggle.innerHTML = toggle.innerHTML.replace('▴', '▾');
+    const arrow = document.getElementById('jl-alerts-arrow');
+    if (arrow) arrow.textContent = '▾';
   }
 });
 

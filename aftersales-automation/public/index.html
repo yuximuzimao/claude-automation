@@ -21,11 +21,7 @@
       <button class="tab-btn" data-tab="history">历史记录</button>
       <button class="tab-btn" data-tab="stats">统计复盘</button>
       <button class="tab-btn" data-tab="accounts">店铺管理 <span class="tab-badge" id="accounts-tab-count"></span></button>
-      <button id="jl-alerts-toggle" class="jl-alerts-toggle hidden" onclick="toggleJlAlerts()">
-        🏪 平台提醒 <span id="jl-alerts-count" class="jl-alerts-count"></span> ▾
-      </button>
     </nav>
-    <div id="jl-alerts-panel" class="jl-alerts-panel hidden"></div>
     <div class="header-right">
       <div id="deadline-alert" class="deadline-alert hidden"></div>
       <button id="emergency-stop-btn" class="btn-emergency-stop" onclick="emergencyStop()">🛑 紧急停止</button>
@@ -39,6 +35,12 @@
     </div>
   </header>
 
+  <!-- 平台提醒触发条 + 展开面板 -->
+  <div id="jl-alerts-trigger" class="jl-alerts-trigger hidden" onclick="toggleJlAlerts()">
+    <span class="jat-label">平台提醒 <span id="jl-alerts-count" class="jl-alerts-count"></span></span>
+    <span id="jl-alerts-arrow" class="jat-arrow">▾</span>
+  </div>
+  <div id="jl-alerts-panel" class="jl-alerts-panel hidden"></div>
   <!-- 暂停横幅 -->
   <div id="paused-banner" class="paused-banner hidden">⚠️ 系统已暂停，所有自动化操作已停止</div>
 
