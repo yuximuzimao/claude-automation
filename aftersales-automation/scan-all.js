@@ -151,7 +151,7 @@ async function main() {
       // 读取完成后：导航到首页读取提醒公告（利用防风控间隔时间，不额外增加耗时）
       try {
         const alerts = require('./lib/jl/alerts');
-        await alerts.fetchAndCacheAlerts(); // 内部导航首页并等 4s
+        await alerts.fetchAndCacheAlerts(num, note); // 内部导航首页并等 4s
         log(`  首页提醒已更新`);
       } catch(e) {
         log(`  首页提醒读取失败（非阻塞）: ${e.message}`);

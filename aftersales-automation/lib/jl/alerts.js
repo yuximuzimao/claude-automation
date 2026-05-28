@@ -1,8 +1,10 @@
 'use strict';
 /**
- * WHAT: 鲸灵首页提醒信息抓取 + 持久化缓存（文件）
+ * WHAT: 鲸灵首页提醒信息抓取 + 持久化缓存（文件，按账号分组）
  * WHERE: routes.js（GET /api/jl-alerts） + scan-all.js（每账号扫完后读取）
  * WHY: scan-all.js 是子进程，内存缓存无法共享主进程，必须用文件作为缓存媒介
+ *
+ * 缓存结构：{ byAccount: { "1": { num, note, items, fetchedAt }, ... }, updatedAt }
  */
 const path = require('path');
 const fs = require('fs');
@@ -11,16 +13,15 @@ const cdp = require('../cdp');
 const CACHE_FILE = path.join(__dirname, '../../data/jl-alerts-cache.json');
 const HOME_URL = 'https://scrm.jlsupp.com/micro-supplier/business/home';
 
-async function fetchAndCacheAlerts() {
+async function fetchAndCacheAlerts(accountNum, accountNote) {
   const targets = await cdp.getTargets();
   const jl = targets.find(t => t.url && t.url.includes('scrm.jlsupp.com'));
   if (!jl) return readCache();
 
   // 若当前不在首页，先导航过去
   const curUrl = await cdp.eval(jl.id, 'window.location.href').catch(() => '');
-  if (!curUrl.includes('/home')) {
+  if (!curUrl.includes('/business/home')) {
     await cdp.navigate(jl.id, HOME_URL);
-    // 等首页滚动公告渲染（4s 确保完整加载）
     await new Promise(r => setTimeout(r, 4000));
   }
 
@@ -32,7 +33,10 @@ async function fetchAndCacheAlerts() {
   `).catch(() => []);
 
   if (Array.isArray(items) && items.length > 0) {
-    const cache = { items, fetchedAt: new Date().toISOString() };
+    const cache = readCache() || { byAccount: {} };
+    const key = String(accountNum || 'unknown');
+    cache.byAccount[key] = { num: accountNum, note: accountNote || key, items, fetchedAt: new Date().toISOString() };
+    cache.updatedAt = new Date().toISOString();
     try { fs.writeFileSync(CACHE_FILE, JSON.stringify(cache)); } catch(e) {}
     return cache;
   }
@@ -40,7 +44,14 @@ async function fetchAndCacheAlerts() {
 }
 
 function readCache() {
-  try { return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8')); } catch { return null; }
+  try {
+    const raw = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+    // 兼容旧格式（items 数组）→ 迁移为 byAccount
+    if (raw && raw.items && !raw.byAccount) {
+      return { byAccount: {}, updatedAt: raw.fetchedAt };
+    }
+    return raw;
+  } catch { return null; }
 }
 
 // 向后兼容旧接口

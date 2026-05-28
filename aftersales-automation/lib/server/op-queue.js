@@ -366,7 +366,7 @@ async function _execScanAccountInner(accountNum, accountNote) {
   // 利用 10s 防风控间隔中的前 4s 完成导航+读取，不额外增加总耗时
   try {
     const { fetchAndCacheAlerts } = require('../jl/alerts');
-    await fetchAndCacheAlerts(); // alerts.js 内部会导航首页并等 3s
+    await fetchAndCacheAlerts(accountNum, accountNote); // alerts.js 内部会导航首页并等 3s
     log(`账号${accountNum} 首页提醒已更新`);
   } catch(e) {
     log(`账号${accountNum} 首页提醒读取失败（非阻塞）: ${e.message}`);

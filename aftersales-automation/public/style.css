@@ -821,19 +821,25 @@ header {
 /* ── 平台警示横幅 ── */
 .jl-alerts-bar {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 3px;
   padding: 6px 16px;
   background: #fffbeb;
   border-bottom: 1px solid #fde68a;
   font-size: 13px;
-  flex-wrap: wrap;
 }
 .jl-alerts-bar.hidden { display: none; }
+.jl-alerts-bar .ja-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
 .jl-alerts-bar .ja-label {
   color: #92400e;
   font-weight: 600;
   white-space: nowrap;
+  min-width: 100px;
   margin-right: 4px;
 }
 .jl-alerts-bar .ja-chip {
