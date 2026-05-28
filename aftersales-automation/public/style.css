@@ -69,6 +69,7 @@ header {
   display: flex;
   gap: 0;
   flex: 1;
+  position: relative;
 }
 
 .tab-btn {
@@ -819,30 +820,69 @@ header {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── 平台警示横幅 ── */
-.jl-alerts-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 6px 16px;
-  background: #fffbeb;
-  border-bottom: 1px solid #fde68a;
-  font-size: 13px;
-}
-.jl-alerts-bar.hidden { display: none; }
-.jl-alerts-bar .ja-row {
-  display: flex;
+/* ── 平台提醒折叠按钮 + 下拉面板 ── */
+.jl-alerts-toggle {
+  margin-left: auto;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  padding: 4px 12px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+.jl-alerts-toggle:hover { background: #fde68a; }
+.jl-alerts-toggle.hidden { display: none; }
+.jl-alerts-count {
+  background: #ef4444;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+}
+.jl-alerts-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 200;
+  background: #fff;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  min-width: 320px;
+  max-width: 480px;
+  padding: 8px 0;
+  margin-top: 2px;
+}
+.jl-alerts-panel.hidden { display: none; }
+.jl-alerts-panel .ja-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 14px;
+  border-bottom: 1px solid #fef3c7;
   flex-wrap: wrap;
 }
-.jl-alerts-bar .ja-label {
+.jl-alerts-panel .ja-row:last-child { border-bottom: none; }
+.jl-alerts-panel .ja-label {
   color: #92400e;
   font-weight: 600;
+  font-size: 13px;
   white-space: nowrap;
-  min-width: 100px;
-  margin-right: 4px;
+  min-width: 110px;
+  padding-top: 2px;
 }
-.jl-alerts-bar .ja-chip {
+.jl-alerts-panel .ja-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.jl-alerts-panel .ja-chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -851,12 +891,11 @@ header {
   font-size: 12px;
   white-space: nowrap;
 }
-.jl-alerts-bar .ja-chip.overdue   { background: #fef2f2; color: var(--red);    border: 1px solid #fca5a5; }
-.jl-alerts-bar .ja-chip.aftersale { background: #fffbeb; color: var(--orange); border: 1px solid #fcd34d; }
-.jl-alerts-bar .ja-chip.invoice   { background: #eff6ff; color: var(--blue);   border: 1px solid #bfdbfe; }
-.jl-alerts-bar .ja-chip.default   { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
-.jl-alerts-bar .ja-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; }
-.jl-alerts-bar .ja-sep { color: #d1d5db; margin: 0 2px; }
+.jl-alerts-panel .ja-chip.overdue   { background: #fef2f2; color: var(--red);    border: 1px solid #fca5a5; }
+.jl-alerts-panel .ja-chip.aftersale { background: #fffbeb; color: var(--orange); border: 1px solid #fcd34d; }
+.jl-alerts-panel .ja-chip.invoice   { background: #eff6ff; color: var(--blue);   border: 1px solid #bfdbfe; }
+.jl-alerts-panel .ja-chip.default   { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+.jl-alerts-panel .ja-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; flex-shrink: 0; }
 
 /* ── 操作队列面板 ── */
 .deadline-alert {

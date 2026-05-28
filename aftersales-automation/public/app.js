@@ -324,33 +324,56 @@ function getAlertClass(title) {
 async function loadJlAlerts() {
   try {
     const data = await api('/jl-alerts');
-    const bar = document.getElementById('jl-alerts-bar');
-    if (!bar) return;
-    const byAccount = (data && data.byAccount) || {};
-    // 只展示有提醒的账号
-    const rows = Object.values(byAccount).filter(a => a.items && a.items.length > 0);
-    if (!rows.length) { bar.className = 'jl-alerts-bar hidden'; return; }
+    const toggle = document.getElementById('jl-alerts-toggle');
+    const panel = document.getElementById('jl-alerts-panel');
+    const countEl = document.getElementById('jl-alerts-count');
+    if (!toggle || !panel) return;
 
-    bar.innerHTML = rows.map(a => {
+    const byAccount = (data && data.byAccount) || {};
+    const rows = Object.values(byAccount).filter(a => a.items && a.items.length > 0);
+    const totalItems = rows.reduce((s, a) => s + a.items.length, 0);
+
+    if (!rows.length) {
+      toggle.className = 'jl-alerts-toggle hidden';
+      panel.className = 'jl-alerts-panel hidden';
+      return;
+    }
+
+    if (countEl) countEl.textContent = totalItems;
+    toggle.className = 'jl-alerts-toggle';
+
+    panel.innerHTML = rows.map(a => {
       const chips = a.items.map(item => {
         const cls = getAlertClass(item.title);
         const m = item.content.match(/您有\s*(\d+)\s*笔/);
         const count = m ? ` ×${m[1]}` : '';
         return `<span class="ja-chip ${cls}"><span class="ja-dot"></span>${item.title}${count}</span>`;
-      }).join('<span class="ja-sep">·</span>');
-      return `<div class="ja-row"><span class="ja-label">${h(a.note || `账号${a.num}`)}</span>${chips}</div>`;
+      }).join('');
+      return `<div class="ja-row"><span class="ja-label">${h(a.note || `账号${a.num}`)}</span><div class="ja-chips">${chips}</div></div>`;
     }).join('');
-    bar.className = 'jl-alerts-bar';
-
-    // 更新店铺管理 Tab 角标（有提醒的账号数）
-    const badge = document.getElementById('accounts-tab-count');
-    if (badge) {
-      const existing = parseInt(badge.textContent) || 0;
-      if (rows.length > 0) badge.textContent = rows.length;
-      // 如果已有 expired 角标且更大，保留（loadAccounts 会覆盖）
-    }
   } catch(e) {}
 }
+
+function toggleJlAlerts() {
+  const panel = document.getElementById('jl-alerts-panel');
+  const toggle = document.getElementById('jl-alerts-toggle');
+  if (!panel) return;
+  const isHidden = panel.classList.contains('hidden');
+  panel.className = isHidden ? 'jl-alerts-panel' : 'jl-alerts-panel hidden';
+  // 更新箭头方向
+  if (toggle) toggle.innerHTML = toggle.innerHTML.replace(/[▾▴]/, isHidden ? '▴' : '▾');
+}
+
+// 点击面板外部收起
+document.addEventListener('click', e => {
+  const panel = document.getElementById('jl-alerts-panel');
+  const toggle = document.getElementById('jl-alerts-toggle');
+  if (!panel || panel.classList.contains('hidden')) return;
+  if (!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+    panel.className = 'jl-alerts-panel hidden';
+    if (toggle) toggle.innerHTML = toggle.innerHTML.replace('▴', '▾');
+  }
+});
 
 async function loadNextScanTime() {
   try {
@@ -1719,14 +1742,12 @@ const reloginConfirm = new Set();   // 窗口已打开，等待用户点击"确�
 async function loadAccounts() {
   const el = document.getElementById('accounts-list');
   if (!el) return;
-  const [data, alertsData] = await Promise.all([api('/accounts'), api('/jl-alerts').catch(() => null)]);
+  const data = await api('/accounts');
   if (!data.ok) { el.innerHTML = `<p style="color:red">加载失败</p>`; return; }
   const accounts = data.accounts || [];
-  const byAccount = (alertsData && alertsData.byAccount) || {};
-  const expiredCount = accounts.filter(a => a.status === 'expired').length;
-  const alertCount = Object.values(byAccount).filter(a => a.items && a.items.length > 0).length;
+  const expiredCount = accounts.filter(a => a.status === 'expired' || a.status === 'error').length;
   const badge = document.getElementById('accounts-tab-count');
-  if (badge) badge.textContent = (expiredCount + alertCount) > 0 ? (expiredCount + alertCount) : '';
+  if (badge) badge.textContent = expiredCount > 0 ? expiredCount : '';
 
   el.innerHTML = accounts.map(a => {
     const statusKey = !a.hasFile ? 'unknown' : (a.status || 'unknown');
