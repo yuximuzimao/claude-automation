@@ -17,6 +17,9 @@ function extractShippedTrackings(collectedData, statusFilter) {
   }
 
   addFrom(collectedData.erpSearch);
+  if (Array.isArray(collectedData.erpSearches)) {
+    collectedData.erpSearches.forEach(s => addFrom(s));
+  }
   addFrom(collectedData.giftErpSearch);
   return result;
 }

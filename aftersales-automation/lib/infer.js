@@ -371,6 +371,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     const allJLReturned = allPackagesReturned(packages);
 
+    const collectionTotal = allTrackings.length + noTrackingRows.length;
     if (allJLReturned && !collectionComplete) {
       s({ type: 'branch', text: `上报 → 采集不完整（去重快递${allTrackings.length}+无单号${noTrackingRows.length}=${collectionTotal}，但ERP有${totalShipRows}行发货）` });
       return fin(escalate(`物流采集不完整（已采集${collectionTotal}/${totalShipRows}条），无法确认全部退回，需人工核查`));
@@ -383,7 +384,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
       // 赠品物流只从 ERP 读取（鲸灵工单详情页一定不展示赠品包裹）
-      const giftPkgStatuses = giftTrackings.map(tr => {
+      giftPkgStatuses = giftTrackings.map(tr => {
         const erpEntry = erpLogResults.find(r => r.tracking === tr);
         if (erpEntry && erpEntry.logisticsText) {
           const text = erpEntry.logisticsText;
