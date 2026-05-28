@@ -9,7 +9,7 @@ const fs = require('fs');
 const cdp = require('../cdp');
 
 const CACHE_FILE = path.join(__dirname, '../../data/jl-alerts-cache.json');
-const HOME_URL = 'https://scrm.jlsupp.com/micro-customer/home';
+const HOME_URL = 'https://scrm.jlsupp.com/micro-supplier/business/home';
 
 async function fetchAndCacheAlerts() {
   const targets = await cdp.getTargets();
