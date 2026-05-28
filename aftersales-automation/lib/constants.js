@@ -9,6 +9,9 @@ const RETURN_KEYWORDS = ['退回商家', '安排退回', '拒收', '退件', '�
 // "家门口"/"门口"等投递到门的场景等同签收，不可拦截
 const SIGNED_KEYWORDS = ['已签收', '签收成功', '本人签收', '代签收', '前台签收', '签收', '放置门口', '投递门口', '放门口'];
 
+// 驿站/快递柜待取件关键词（包裹可联系驿站拦截，未正式签收）
+const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
+
 // 平台标准非商责原因（无理由/个人原因类）
 // 来源：鲸灵工单列表筛选项「售后原因」完整枚举（2026-04）
 const NON_MERCHANT_REASONS = [
@@ -87,4 +90,4 @@ function isMerchantFaultReason(afterSaleReason) {
   return MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };
+module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };

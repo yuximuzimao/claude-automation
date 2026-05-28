@@ -11,7 +11,7 @@
  * 变更任一读取字段必须同步更新该文档。
  */
 
-const { RETURN_KEYWORDS, SIGNED_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
+const { RETURN_KEYWORDS, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
 
 // 免退配件关键词（不计入应退/实退数量）
 const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
@@ -180,7 +180,6 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
       if (!giftOk && giftAgg.hasShipped) {
         // 赠品有已发货行 → 读 ERP 物流判断是否可等待（与 flow-5.3 赠品逻辑一致）
-        const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
         const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
           ? cd.erpLogistics.results
           : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
@@ -204,7 +203,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
             const text = erpEntry.logisticsText;
             if (RETURN_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'returned', label: `${tr}（已退回）` };
             if (SIGNED_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'signed', label: `${tr}（已签收）` };
-            if (YIZHAN_KWS.some(kw => text.includes(kw))) return { tr, status: 'yizhan', label: `${tr}（驿站待取件）` };
+            if (YIZHAN_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'yizhan', label: `${tr}（驿站待取件）` };
             return { tr, status: 'transit', label: `${tr}（在途）` };
           }
           // 有快递单号但无物流记录 = 刚揽收/暂无信息 → 按在途处理
@@ -332,7 +331,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       // 鲸灵物流未读到，但 ERP 有物流数据 → 按 ERP 物流状态决策
       if (erpLogsWithText.length > 0) {
         const anySigned = erpLogsWithText.some(r => SIGNED_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
-        const anyYizhan = erpLogsWithText.some(r => ['驿站待取件','已到驿站','驿站自提','快递柜','菜鸟驿站','代收点'].some(kw => r.logisticsText.includes(kw)));
+        const anyYizhan = erpLogsWithText.some(r => YIZHAN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
         const erpDesc = erpTrackingStatuses.join('；');
         if (anySigned || anyYizhan) {
           s({ type: 'branch', text: `上报 → 鲸灵物流未读到，ERP显示已签收/驿站：${erpDesc}` });
@@ -397,7 +396,6 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     // logistics.js 已展开多子订单，赠品快递单号会出现在 packages 中
     let giftPkgStatuses = [];
     if (giftShippedRows.length > 0) {
-      const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点'];
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
       // 赠品物流只从 ERP 读取（鲸灵工单详情页一定不展示赠品包裹）
       giftPkgStatuses = giftTrackings.map(tr => {
@@ -406,7 +404,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
           const text = erpEntry.logisticsText;
           const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
           const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
-          const hasYizhan = !hasReturn && YIZHAN_KWS.some(kw => text.includes(kw));
+          const hasYizhan = !hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw));
           if (hasReturn) return { tr, status: 'returned', label: `${tr}已退回` };
           if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功` };
           if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回` };
@@ -512,7 +510,6 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     // 驿站/快递柜待取件：货到了买家未取，应拒绝并通知拦截（驿站/快递柜可退件）
     // 快递柜品牌：巧目、丰巢、中邮、菜鸟
-    const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
     const yizhanPkgs = [];
     packages.forEach(pkg => {
       const text = pkg.text || '';
