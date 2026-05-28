@@ -329,6 +329,22 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
           [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP双源核查→已退回→同意退款' }]
         ));
       }
+      // 鲸灵物流未读到，但 ERP 有物流数据 → 按 ERP 物流状态决策
+      if (erpLogsWithText.length > 0) {
+        const anySigned = erpLogsWithText.some(r => SIGNED_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
+        const anyYizhan = erpLogsWithText.some(r => ['驿站待取件','已到驿站','驿站自提','快递柜','菜鸟驿站','代收点'].some(kw => r.logisticsText.includes(kw)));
+        const erpDesc = erpTrackingStatuses.join('；');
+        if (anySigned || anyYizhan) {
+          s({ type: 'branch', text: `上报 → 鲸灵物流未读到，ERP显示已签收/驿站：${erpDesc}` });
+          return fin(escalate(`鲸灵物流未读到，ERP显示${erpDesc}，需人工确认`));
+        }
+        // 在途 → 等待重查
+        s({ type: 'branch', text: `等待重查 → 鲸灵物流未读到，ERP显示在途：${erpDesc}` });
+        return fin({ action: 'reject', waitingRescan: true,
+          reason: `鲸灵物流未读到，ERP显示${erpDesc}，等快递退回后处理`,
+          rulesApplied: [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP在途→等待重查' }],
+        });
+      }
       s({ type: 'branch', text: '上报 → 已发货但无法读取物流信息' });
       return fin(escalate('已发货但无法读取物流信息'));
     }
@@ -544,13 +560,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const marginStr = margin != null ? margin.toFixed(1) : '?';
       s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${scanStr} = ${marginStr}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
       return fin({
-        ...escalate(
-          `${actionSummary}，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
-          {
-            confidence: 'high',
-            rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描>8h→自动等待重查' }],
-          }
-        ),
+        action: 'reject',
+        reason: `${actionSummary}，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描>8h→自动等待重查' }],
         waitingRescan: true,
       });
     }
