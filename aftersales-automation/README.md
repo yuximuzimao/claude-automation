@@ -6,9 +6,15 @@
 
 ```bash
 npm install
-node server.js          # 启动 Web 面板 → http://localhost:3457
-node scan-all.js        # 扫描所有账号写入队列
 npm test                # 运行推理层单元测试
+node scan-all.js        # 扫描所有账号写入队列
+```
+
+**server.js 由 launchd 管理**（`~/Library/LaunchAgents/com.jl.server.plist`），Mac 启动时自动拉起，崩溃自动重启。手动重启用 `/aftersales-restart` skill。
+
+```bash
+# 手动重启（用 skill，不要直接 kill）
+# /aftersales-restart
 ```
 
 Web 面板功能：工单队列管理、推理结果确认、历史记录、统计复盘、店铺管理。

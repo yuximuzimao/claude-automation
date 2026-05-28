@@ -18,7 +18,7 @@ const { addQueueItem, readQueue, updateQueueItem } = require('./lib/server/data'
 
 const SESSIONS_DIR = path.join(__dirname, '../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
-const INJECT_DELAY_MS = 500;  // jl.js inject 已轮询验证就绪，此处仅作最小缓冲
+const INJECT_DELAY_MS = 10000;  // 注入后等待页面完全稳定（防风控：每账号注入前后各间隔10秒）
 
 const isDryRun = process.argv.includes('--dry-run');
 
@@ -147,6 +147,19 @@ async function main() {
       if (listResult.mismatchWarning) {
         log(`  ⚠️ ${listResult.mismatchWarning}`);
       }
+
+      // 读取完成后：导航到首页读取提醒公告（利用防风控间隔时间，不额外增加耗时）
+      try {
+        const alerts = require('./lib/jl/alerts');
+        await alerts.fetchAndCacheAlerts(); // 内部导航首页并等 4s
+        log(`  首页提醒已更新`);
+      } catch(e) {
+        log(`  首页提醒读取失败（非阻塞）: ${e.message}`);
+      }
+
+      // 剩余防风控等待（总 10s - alerts 约 4s = 6s）
+      log(`  等待 6s...`);
+      await new Promise(r => setTimeout(r, 6000));
 
       result.scanned.push({ num, note, count: tickets.length, totalCollected: listResult.totalCollected, filterCount: listResult.filterCount });
       process.stderr.write(`SCAN_PROGRESS:${JSON.stringify({ type: 'done', num, note, index: i + 1, total: numsToScan.length, count: tickets.length })}\n`);

@@ -177,19 +177,78 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       }
       const giftOk = giftAgg.allNotShipped;
       s({ type: 'check', condition: `赠品所有ERP行 ∈ [待审核, 待打印快递单]（全部未发货）`, result: giftOk });
+
       if (!giftOk && giftAgg.hasShipped) {
-        s({ type: 'branch', text: `上报 → 主商品未发货但赠品有已发货分包（${giftAgg.statuses.join('/')}），需人工拦截赠品快递后处理` });
-        return fin(escalate(`主商品未发货但赠品有已发货分包（${giftAgg.statuses.join('/')}），需人工拦截赠品快递后处理`, {
-          rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '主商品未发货+赠品已发货→上报人工' }],
-        }));
+        // 赠品有已发货行 → 读 ERP 物流判断是否可等待（与 flow-5.3 赠品逻辑一致）
+        const YIZHAN_KWS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
+        const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
+          ? cd.erpLogistics.results
+          : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+        const giftShippedRows52 = getErpRows(cd, 'giftErpSearch').filter(r =>
+          ['卖家已发货', '交易成功', '交易关闭'].includes(r.status)
+        );
+        const giftTrackings52 = giftShippedRows52.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
+        s({ type: 'read', label: '赠品已发货快递单号', value: giftTrackings52.join('/') || '无' });
+
+        // 无快递单号的已发货行 → 无法判断物流，人工
+        if (!giftTrackings52.length) {
+          s({ type: 'branch', text: `上报 → 赠品已发货（${giftAgg.statuses.join('/')}）但无快递单号，需人工核查` });
+          return fin(escalate(`赠品已发货（${giftAgg.statuses.join('/')}）但无快递单号，需人工核查`, {
+            rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '赠品已发货无单号→上报人工' }],
+          }));
+        }
+
+        const giftStatuses52 = giftTrackings52.map(tr => {
+          const erpEntry = erpLogResults.find(r => r.tracking === tr);
+          if (erpEntry && erpEntry.logisticsText) {
+            const text = erpEntry.logisticsText;
+            if (RETURN_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'returned', label: `${tr}（已退回）` };
+            if (SIGNED_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'signed', label: `${tr}（已签收）` };
+            if (YIZHAN_KWS.some(kw => text.includes(kw))) return { tr, status: 'yizhan', label: `${tr}（驿站待取件）` };
+            return { tr, status: 'transit', label: `${tr}（在途）` };
+          }
+          // 有快递单号但无物流记录 = 刚揽收/暂无信息 → 按在途处理
+          return { tr, status: 'transit', label: `${tr}（暂无物流信息，在途）` };
+        });
+        s({ type: 'read', label: '赠品物流状态', value: giftStatuses52.map(p => p.label).join('；') });
+
+        const giftAllReturned52 = giftStatuses52.every(p => p.status === 'returned');
+        s({ type: 'check', condition: '赠品快递全部已退回', result: giftAllReturned52 });
+
+        if (!giftAllReturned52) {
+          const giftAnySigned52 = giftStatuses52.some(p => p.status === 'signed');
+          const giftAnyYizhan52 = giftStatuses52.some(p => p.status === 'yizhan');
+          if (giftAnySigned52 || giftAnyYizhan52) {
+            // 已签收/驿站 → 无法自动等待，上报人工
+            const desc = `主商品未发货，赠品${giftStatuses52.map(p => p.label).join('；')}，需人工处理赠品退回`;
+            s({ type: 'branch', text: `上报 → ${desc}` });
+            return fin(escalate(desc, {
+              rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '赠品已签收/驿站→上报人工' }],
+            }));
+          }
+          // 在途 → 等待重查（主商品可先不退款，等赠品退回后一起处理）
+          const giftDesc = `赠品${giftStatuses52.map(p => p.label).join('；')}`;
+          s({ type: 'branch', text: `等待重查 → 主商品未发货，${giftDesc}，等快递退回后再同意退款` });
+          return fin({
+            action: 'reject',
+            waitingRescan: true,
+            reason: `主商品未发货，${giftDesc}，等快递退回后处理`,
+            confidence: 'medium',
+            rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '赠品在途→等待重查' }],
+            warnings: [],
+          });
+        }
+        // 赠品全退回 → 继续走主商品未发货 → approve
+        s({ type: 'branch', text: '赠品全部已退回 → 继续走主商品未发货→同意退款' });
       }
-      if (!giftOk) {
+
+      if (!giftOk && !giftAgg.hasShipped) {
         s({ type: 'branch', text: `上报 → 赠品ERP状态异常: ${giftAgg.statuses.join('/')}` });
         return fin(escalate(`赠品ERP状态异常: ${giftAgg.statuses.join('/')}，需人工核查`));
       }
 
       // 赠品待打印快递单时同样检查快递单号（扫所有行）
-      if (giftErpStatus === '待打印快递单') {
+      if (giftOk && giftErpStatus === '待打印快递单') {
         const printReadyGiftRow = getErpRows(cd, 'giftErpSearch').find(r =>
           r.status === '待打印快递单' && (r.tracking || (r.trackings && r.trackings.length))
         );

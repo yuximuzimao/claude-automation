@@ -137,8 +137,14 @@ const CLICK_PENDING_FILTER_JS = `(function(){
 
 // 一步完成：全页导航到工单列表 + 等待加载 + 检查登录
 // 合并了原来的 reloadAndCheckLogin + navigate 两步（从 3 次刷新减少到 1 次）
+// 若已在目标页（inject 刚刚导航过），跳过重复导航，避免每账号2次刷新
 async function navigateAndCheckLogin(targetId) {
-  await cdp.navigate(targetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
+  const TARGET = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
+  let curUrl = '';
+  try { curUrl = await cdp.eval(targetId, 'window.location.href'); } catch {}
+  if (!curUrl.includes('after-sale-list')) {
+    await cdp.navigate(targetId, TARGET);
+  }
 
   await waitFor(
     async () => {

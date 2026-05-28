@@ -230,16 +230,24 @@ if (!isExpanded) {
 var link = row.querySelector("a[data-name=show_detail_dialog][data-sid]");
 link.click();  // 等 2 秒
 
-// 验证弹窗已打开（禁止用 el-dialog__wrapper display:none 判断）
-// 正确：document.querySelector(".js-logistics-container") !== null
+// 验证弹窗已打开：等待 .el-dialog__wrapper.trade-detail-dialog 可见且含 h3.sub-title
+// Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog'))
+//   .filter(d => d.getBoundingClientRect().width > 0)[0].querySelector('h3.sub-title')
 
-// 读物流
-var logisticsText = document.querySelector(".js-logistics-container").innerText;
-var trackingText = document.querySelector(".box-nav.box-toogle-el").innerText;
+// 读运单号：找 .list-title 中文字为"运单号:"的元素，读其 nextElementSibling
+// 读物流文本：找含 h3.sub-title 且 innerText 包含"物流信息"的 .box 容器
+var dialog = Array.from(document.querySelectorAll('.el-dialog__wrapper.trade-detail-dialog'))
+  .filter(function(d){ return d.getBoundingClientRect().width > 0; }).slice(-1)[0];
+var trackingEl = Array.from(dialog.querySelectorAll('.list-title'))
+  .find(function(el){ return el.innerText.trim() === '运单号:'; });
+var tracking = trackingEl && trackingEl.nextElementSibling
+  ? trackingEl.nextElementSibling.innerText.trim() : '';
+var logBox = Array.from(dialog.querySelectorAll('.box'))
+  .find(function(b){ var h3 = b.querySelector('h3.sub-title'); return h3 && h3.innerText.includes('物流信息'); });
+var logisticsText = logBox ? logBox.innerText : '';
 
-// 关闭弹窗
-// clickAt: a.ui_close
-// 验证：document.querySelector(".js-logistics-container") === null
+// 关闭弹窗：点 .el-dialog__closeBtn（每次关一层，循环直到全部消失）
+// 验证：.el-dialog__wrapper.trade-detail-dialog 可见数量归零
 ```
 
 **多包裹优化（同一次搜索处理所有行）：**
@@ -335,7 +343,7 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 - `[∞/永久保留]` **#10 禁止全局拦截器**：严禁设置全局 fetch/XHR 拦截器——会导致堆栈溢出，页面无法恢复
 - `[∞/永久保留]` **#11 eval 不 await**：CDP eval 超时 120s，不能在 eval 里 await 长时间 XHR，异步请求不在 eval 里等待
 - `[∞/永久保留]` **#14 ERP 导航方式**：禁止用 /navigate 跳转任何 ERP 功能页面（会被重定向），必须用顶部 `li.fix-tab` 标签导航
-- `[∞/永久保留]` **#16 ERP 弹窗判断**：ERP 订单详情弹窗不是标准 el-dialog，禁止用 `el-dialog__wrapper` display:none 判断；正确用 `.js-logistics-container !== null`
+- `[∞/永久保留]` **#16 ERP 弹窗判断**：ERP 订单详情弹窗是 `.el-dialog__wrapper.trade-detail-dialog`（标准 el-dialog 子类），用 `getBoundingClientRect().width > 0` 判断可见；`.js-logistics-container` 和 `.box-nav.box-toogle-el` 从未存在于生产DOM，禁止使用。运单号读 `.list-title[innerText="运单号:"].nextSibling`，物流文本读含 `h3.sub-title[includes("物流信息")]` 的 `.box` 容器；关闭弹窗用 `.el-dialog__closeBtn` 循环关直到可见数归零。**等待弹窗必须检测内容加载完成**：`h3.sub-title` 存在仅代表骨架渲染，内容区仍显示"暂无数据"（innerText <500 字符）；条件改为 `hasH3 && !(text.includes('暂无数据') && text.length < 500)`；timeout 15s，interval 800ms
 - `[∞/永久保留]` **#17 订单行展开状态**：禁止用 `trade-icon-close/plus` class 判断展开状态（与状态无关）；正确用 `.module-trade-list-item-row2` 是否存在
 - `[∞/永久保留]` **#18 识别字段必须多场景验证**：任何识别/判断字段，必须多订单、多场景对比验证后才能写入规则，一次测试不算验证
 - `[∞/永久保留]` **#19 eval body 格式**：`POST /eval?target={id}` 的 body 为纯 JS 文本，禁止用 JSON 格式 `{"targetId":...,"code":...}`

@@ -818,6 +818,40 @@ header {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ── 平台警示横幅 ── */
+.jl-alerts-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: #fffbeb;
+  border-bottom: 1px solid #fde68a;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.jl-alerts-bar.hidden { display: none; }
+.jl-alerts-bar .ja-label {
+  color: #92400e;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+.jl-alerts-bar .ja-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.jl-alerts-bar .ja-chip.overdue   { background: #fef2f2; color: var(--red);    border: 1px solid #fca5a5; }
+.jl-alerts-bar .ja-chip.aftersale { background: #fffbeb; color: var(--orange); border: 1px solid #fcd34d; }
+.jl-alerts-bar .ja-chip.invoice   { background: #eff6ff; color: var(--blue);   border: 1px solid #bfdbfe; }
+.jl-alerts-bar .ja-chip.default   { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+.jl-alerts-bar .ja-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; }
+.jl-alerts-bar .ja-sep { color: #d1d5db; margin: 0 2px; }
+
 /* ── 操作队列面板 ── */
 .deadline-alert {
   display: inline-flex;
@@ -825,10 +859,8 @@ header {
   gap: 6px;
   padding: 4px 10px;
   border-radius: 6px;
-  font-size: 12px;
   font-weight: 500;
   margin-right: 8px;
-  white-space: nowrap;
   cursor: default;
 }
 .deadline-alert.urgent {
@@ -842,8 +874,9 @@ header {
   border: 1px solid #fcd34d;
 }
 .deadline-alert .da-icon { font-size: 13px; }
-.deadline-alert .da-list { display: flex; flex-direction: column; gap: 1px; }
-.deadline-alert .da-item { font-size: 11px; line-height: 1.4; }
+.deadline-alert .da-text { display: flex; flex-direction: column; gap: 1px; }
+.deadline-alert .da-line1 { font-size: 12px; line-height: 1.3; }
+.deadline-alert .da-line2 { font-size: 11px; opacity: 0.8; line-height: 1.3; }
 
 .op-queue-panel {
   position: relative;

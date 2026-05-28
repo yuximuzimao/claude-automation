@@ -98,9 +98,11 @@ async function readErpLogistics(targetId, rowIndex) {
     const click = await cdp.eval(targetId, makeClickDetailJS(rowIndex));
     if (click.error) throw new Error(click.error);
 
-    // 等待订单详情弹窗内容加载完成（最多 15s）
-    // 关键：h3.sub-title 存在仅代表骨架渲染，内容是异步填充的
-    // 必须检查商品信息区有实际数据（"暂无数据"消失）才算加载完成
+    // 先等 1.5s，确保弹窗 DOM 开始渲染再进入轮询（防止 waitFor 在骨架出现前就检测）
+    await sleep(1500);
+
+    // 等待物流框（含「物流信息」h3 的 .box）实际有内容（最多 15s）
+    // 关键：h3.sub-title 存在只代表骨架渲染；必须等物流框文本超过标题本身（>20字）才说明异步内容已填充
     await waitFor(
       async () => {
         const r = await cdp.eval(targetId, `(function(){
@@ -108,14 +110,24 @@ async function readErpLogistics(targetId, rowIndex) {
           if (!w.length) return false;
           var last = w[w.length-1];
           var text = last.innerText || '';
-          var hasH3 = !!last.querySelector('h3.sub-title');
-          var skeletonOnly = text.includes('暂无数据') && text.length < 500;
-          return hasH3 && !skeletonOnly;
+          // 还在加载中（纯骨架）
+          if (text.includes('加载中') || (text.includes('暂无数据') && text.length < 300)) return false;
+          // 找物流信息框
+          var logBox = Array.from(last.querySelectorAll('.box')).find(function(b){
+            var h3 = b.querySelector('h3.sub-title');
+            return h3 && h3.innerText.includes('物流信息');
+          });
+          if (!logBox) return false; // 物流框还未渲染
+          // 物流框文本必须超过 h3 标题本身（说明异步内容已填充，无论有无实际物流）
+          return (logBox.innerText || '').length > 20;
         })()`);
         return r === true;
       },
       { timeoutMs: 15000, intervalMs: 800, label: '等待订单详情弹窗内容加载' }
     );
+
+    // 至少驻留 3s（确保内容稳定，避免 DOM 还在更新就被读走）
+    await sleep(3000);
 
     // 读物流
     const log = await cdp.eval(targetId, READ_LOGISTICS_JS);

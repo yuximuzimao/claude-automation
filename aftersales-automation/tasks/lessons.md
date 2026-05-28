@@ -231,6 +231,15 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 | 26 | **写操作端点必须加幂等守卫**：`archive-manual` 缺少 `status=done` 检查，任意重复调用都会写新 case。所有写 `cases.jsonl`/`simulations.jsonl` 的端点，都要先检查目标状态再决定是否执行。 | feedback_jingling_dev.md §80 |
 | 27 | **launchctl restart 后检查暂停状态**：如果系统在 stop 前已经是暂停状态，restart 后仍为暂停，需 `curl -X POST http://localhost:3457/api/resume` 或面板点「恢复运行」。若 stop 前是运行中的则自动恢复。 | — |
 
+## 2026-05-28 session 教训（ERP 物流修复 + 鲸灵物流 pipeline 超时）
+
+| # | 教训 |
+|---|------|
+| 53 | **ERP 物流容器选择器必须用 CDP 实地验证**：`.js-logistics-container` 和 `.box-nav.box-toogle-el` 从 2026-04-27 初始提交起从未存在于生产 DOM（726 次超时 0 次成功）。实际 DOM 是 `.el-dialog__wrapper.trade-detail-dialog`；运单号用 `.list-title[运单号:].nextSibling`；物流文本用 `.box[h3.sub-title 含 "物流信息"]`。**规则：新 DOM 选择器上线前必须 cdp.eval 在真实页面验证存在**。memory: feedback_jingling_dev.md §81 |
+| 54 | **鲸灵 logistics pipeline 超时 vs 隔离运行正常**：`cli.js logistics` 单独运行、`read-ticket → logistics` 序列均成功；但 collect.js 完整流水线稳定超时（waitFor 超时: 等待物流弹窗关闭）。根因未找到，待用户协助排查。下次：在 collect.js logistics 步骤前 log VISIBLE_DIALOG_COUNT_JS 值确认 pipeline 与隔离差异点。memory: feedback_jingling_dev.md §82 |
+| 55 | **Element UI 弹窗 waitFor 必须检测内容加载完成，不能只检测骨架渲染**：`h3.sub-title` 存在仅代表骨架已渲染，内容区仍显示"暂无数据"（innerText ~317 字符）。内容异步填充后文本 ~3488 字符。条件改为 `hasH3 && !(text.includes('暂无数据') && text.length < 500)`。timeout 10s→15s，interval 500ms→800ms。memory: feedback_jingling_dev.md §83 |
+| 56 | **`.some()` vs `.every()` 语义差异可导致退款误批**：判断"所有包裹是否都退回"必须用 `.every()`。`.some()` 表示任一满足，1 个包裹退回就批准整个订单。同时注意空数组 `.every()` 返回 true，需先 `.filter().length > 0`。memory: feedback_jingling_dev.md §84 |
+
 ## 2026-05-27 session 教训
 
 ### 51. jl.js 注入后页面就绪检测：轮询 readyState + Vue 初始化，不用固定延时

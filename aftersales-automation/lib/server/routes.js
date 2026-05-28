@@ -12,6 +12,8 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const opQueue = require('./op-queue');
+const cdp = require('../cdp');
+const jlAlerts = require('../jl/alerts');
 const confidence = require('./auto-exec-confidence');
 const { isBatchExecutable } = require('../constants');
 
@@ -344,6 +346,16 @@ router.get('/stats', (req, res) => {
 // ── Scan（触发 scan-all.js）────────────────────────────────────────
 
 const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
+
+// 平台警示缓存（内存，重启清空，有效期 2 小时）
+let _jlAlertsCache = null; // 向后兼容旧引用，实际用 jlAlerts 模块
+
+router.get('/jl-alerts', async (req, res) => {
+  // 只返回缓存，不主动导航（导航只在扫描收尾时做，避免干扰正在运行的操作）
+  const cache = jlAlerts.getCache();
+  if (cache) return res.json({ ...cache, cached: true });
+  res.json({ items: [], fetchedAt: new Date().toISOString() });
+});
 
 router.get('/pipeline-status', (req, res) => {
   res.json({ running: opQueue.isRunning() });

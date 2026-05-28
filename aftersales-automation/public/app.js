@@ -9,6 +9,7 @@ function connectSSE() {
     setConnected(true);
     loadAllLiveTabs();
     loadNextScanTime();
+    loadJlAlerts();
     // 重连后恢复队列面板状态（先同步 lastCompletedOpId，避免弹出历史完成通知）
     api('/op-queue').then(state => {
       if (state.lastCompleted) lastCompletedOpId = state.lastCompleted.id;
@@ -63,6 +64,10 @@ function connectSSE() {
   });
   es.addEventListener('op-queue-update', (e) => {
     const state = JSON.parse(e.data || '{}');
+    // 扫描刚结束（running 从 scan 变为 null）→ 更新首页提醒（此时 server 已读完缓存）
+    const wasScan = lastQueueState && lastQueueState.running && lastQueueState.running.type === 'scan';
+    const nowIdle = !state.running;
+    if (wasScan && nowIdle) setTimeout(() => loadJlAlerts(), 2000); // 延 2s 确保 fetchAndCacheAlerts 完成
     // 清除已不适用的进度状态
     if (!state.running || state.running.type !== 'scan') scanProgress = null;
     if (!state.running || (state.running.type !== 'pipeline' && state.running.type !== 'reinfer')) pipelineProgress = null;
@@ -88,7 +93,6 @@ let queuedSimIds = new Set(); // 当前在队列中（running+queued）的 simId
 let lastQueueState = {};      // 缓存最新 queue state，供进度事件触发重绘
 let scanProgress = null;      // {accounts: [{num, note, status, count?}]}
 let pipelineProgress = null;  // {workOrderNum, stage}
-
 function renderScanProgress(progress) {
   if (!progress || !progress.accounts || !progress.accounts.length) return '';
   const items = progress.accounts.map(a => {
@@ -309,6 +313,33 @@ async function batchReprocess() {
 }
 
 // ── 下次扫描时间 ──────────────────────────────────────────────────
+// ── 平台警示横幅 ──────────────────────────────────────────────────
+function getAlertClass(title) {
+  if (title.includes('逾期') || title.includes('超时')) return 'overdue';
+  if (title.includes('售后') || title.includes('退款') || title.includes('换货')) return 'aftersale';
+  if (title.includes('开票') || title.includes('发票')) return 'invoice';
+  return 'default';
+}
+
+async function loadJlAlerts() {
+  try {
+    const data = await api('/jl-alerts');
+    const bar = document.getElementById('jl-alerts-bar');
+    if (!bar) return;
+    const items = (data && data.items) || [];
+    if (!items.length) { bar.className = 'jl-alerts-bar hidden'; return; }
+    const chips = items.map(item => {
+      const cls = getAlertClass(item.title);
+      // 从 content 提取数量：「您有 N 笔」
+      const m = item.content.match(/您有\s*(\d+)\s*笔/);
+      const count = m ? `×${m[1]}` : '';
+      return `<span class="ja-chip ${cls}"><span class="ja-dot"></span>${item.title}${count ? ' ' + count : ''}</span>`;
+    }).join('<span class="ja-sep">·</span>');
+    bar.innerHTML = `<span class="ja-label">🏪 平台提醒</span>${chips}`;
+    bar.className = 'jl-alerts-bar';
+  } catch(e) {}
+}
+
 async function loadNextScanTime() {
   try {
     const data = await api('/scan-status');
@@ -1355,17 +1386,18 @@ async function refreshDeadlineAlert() {
       return;
     }
 
-    var lines = urgent.map(function(i) {
-      var diff = new Date(i.deadlineAt) - now;
-      var h = Math.floor(diff / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var remain = h > 0 ? h + '小时' + (m > 0 ? m + '分' : '') : m + '分钟';
-      return (i.accountNote || '工单') + ' 剩余' + remain + '（截止 ' + formatAbsTime(i.deadlineAt) + '）';
-    });
+    // 只显示最紧急的一条
+    urgent.sort(function(a, b) { return new Date(a.deadlineAt) - new Date(b.deadlineAt); });
+    var i = urgent[0];
+    var diff = new Date(i.deadlineAt) - now;
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var remain = h > 0 ? h + '小时' + (m > 0 ? m + '分' : '') : m + '分钟';
 
     el.className = 'deadline-alert urgent';
-    el.innerHTML = '<span class="da-icon">🚨</span><div class="da-list">' +
-      lines.map(function(l) { return '<div class="da-item">' + l + '</div>'; }).join('') +
+    el.innerHTML = '<span class="da-icon">🚨</span><div class="da-text">' +
+      '<div class="da-line1">' + (i.accountNote || '工单') + ' 剩余' + remain + '</div>' +
+      '<div class="da-line2">截止 ' + formatAbsTime(i.deadlineAt) + '</div>' +
       '</div>';
   } catch(e) {}
 }

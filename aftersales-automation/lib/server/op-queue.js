@@ -18,6 +18,20 @@ const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
 const CLI = path.join(BASE, 'cli.js');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
+
+// ── 当前注入账号状态（跨子进程共享，10分钟TTL）─────────────────────
+const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
+const SESSION_TTL_MS = 10 * 60 * 1000;
+function readSessionState() {
+  try { return JSON.parse(fs.readFileSync(SESSION_STATE_FILE, 'utf8')); } catch { return null; }
+}
+function saveSessionState(num) {
+  try { fs.writeFileSync(SESSION_STATE_FILE, JSON.stringify({ accountNum: num, at: Date.now() })); } catch {}
+}
+function isSameSession(accountNum) {
+  const s = readSessionState();
+  return s && s.accountNum === accountNum && (Date.now() - s.at) < SESSION_TTL_MS;
+}
 const ACCOUNT_STATUS_FILE = path.join(BASE, 'data/account-status.json');
 
 function readAccountStatus() {
@@ -242,8 +256,8 @@ async function execCheckSession(op) {
     return { accountNum, status: isExpired ? 'expired' : 'error' };
   }
 
-  // Step 2: 额外等 3s，让页面完成跳转（inject 内已等 2s）
-  await new Promise(r => setTimeout(r, 3000));
+  // Step 2: 额外等 10s，让页面完成跳转（inject 内已等 2s，对齐 scan 注入间隔）
+  await new Promise(r => setTimeout(r, 10000));
 
   // Step 3: 用 CDP /json 查 SCRM tab 当前 URL
   const tabUrl = await new Promise(resolve => {
@@ -271,6 +285,9 @@ async function execCheckSession(op) {
     status, lastScan: new Date().toISOString(), note: accountNote,
     ...(error ? { error } : { error: null }),
   });
+
+  // 检测后再等 10s，确保下一次注入前有足够间隔（对齐 scan 的 10s+10s 节奏）
+  await new Promise(r => setTimeout(r, 10000));
   return { accountNum, status };
 }
 
@@ -296,7 +313,9 @@ async function _execScanAccountInner(accountNum, accountNote) {
     timeout: 30000, encoding: 'utf8',
   });
   if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败: ${(inj.stderr || inj.stdout || '').slice(0, 100)}`);
-  // jl.js inject 已轮询验证页面加载完成（readyState+Vue+URL），无需再固定等待
+  saveSessionState(accountNum);
+  // 注入完成后等 10 秒，让页面和 session 完全稳定再读列表（防风控 + 防双刷）
+  await new Promise(r => setTimeout(r, 10000));
 
   const r = spawnSync('node', [path.join(BASE, 'cli.js'), 'list'], {
     timeout: 120000, encoding: 'utf8', cwd: BASE,
@@ -342,6 +361,19 @@ async function _execScanAccountInner(accountNum, accountNote) {
 
   log(`账号${accountNum} ${accountNote}: 采集 ${urgent.length} 条，新增 ${added}，更新 ${updated}，重置等待 ${waitingReset}`);
   updateAccountStatus(accountNum, { status: 'ok', lastScan: new Date().toISOString(), count: urgent.length, note: accountNote });
+
+  // 读取结束后、切换下一账号前：导航到鲸灵首页读取提醒公告
+  // 利用 10s 防风控间隔中的前 4s 完成导航+读取，不额外增加总耗时
+  try {
+    const { fetchAndCacheAlerts } = require('../jl/alerts');
+    await fetchAndCacheAlerts(); // alerts.js 内部会导航首页并等 3s
+    log(`账号${accountNum} 首页提醒已更新`);
+  } catch(e) {
+    log(`账号${accountNum} 首页提醒读取失败（非阻塞）: ${e.message}`);
+  }
+
+  // 剩余等待时间（总 10s - alerts 约耗 4s = 6s），确保两次注入间隔
+  await new Promise(r => setTimeout(r, 6000));
   return { accountNum, accountNote, count: urgent.length, added, updated, waitingReset };
 }
 
@@ -393,11 +425,13 @@ async function execScanFinalize(op) {
   const pending = (db.readQueue().items || []).filter(i =>
     i.status === 'pending' && i.mode === 'live'
   );
+  // 按账号排序，同账号工单连续处理，减少注入切换次数
+  pending.sort((a, b) => (a.accountNum || 0) - (b.accountNum || 0));
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
     enqueue('reprocess-one', label, { queueItemId: item.id });
   }
-  log(`巡检收尾：入队 ${pending.length} 条工单推理`);
+  log(`巡检收尾：入队 ${pending.length} 条工单推理（已按账号排序）`);
   return { done: true, pipelineCount: pending.length };
 }
 
@@ -547,10 +581,15 @@ async function execExecute(op) {
   if (queueItem.status === 'waiting') return { skipped: true, reason: '工单处于等待重查状态，跳过执行' };
   const accountNum = queueItem.accountNum;
   if (accountNum) {
-    const injResult = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-      timeout: 30000, encoding: 'utf8',
-    });
-    if (injResult.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(injResult.stderr || injResult.stdout || '').slice(0, 200)}`);
+    if (isSameSession(accountNum)) {
+      log(`[execute] 账号 ${accountNum} 已是当前账号，跳过注入`);
+    } else {
+      const injResult = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
+        timeout: 30000, encoding: 'utf8',
+      });
+      if (injResult.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(injResult.stderr || injResult.stdout || '').slice(0, 200)}`);
+      saveSessionState(accountNum);
+    }
   }
 
   const { action } = sim.decision;

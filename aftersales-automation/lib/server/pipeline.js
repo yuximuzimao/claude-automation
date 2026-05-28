@@ -18,6 +18,17 @@ const { extractShippedTrackings } = require('../helpers');
 
 const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
+const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
+const SESSION_TTL_MS = 10 * 60 * 1000;
+function isSameSession(accountNum) {
+  try {
+    const s = JSON.parse(require('fs').readFileSync(SESSION_STATE_FILE, 'utf8'));
+    return s && s.accountNum === accountNum && (Date.now() - s.at) < SESSION_TTL_MS;
+  } catch { return false; }
+}
+function saveSessionState(num) {
+  try { require('fs').writeFileSync(SESSION_STATE_FILE, JSON.stringify({ accountNum: num, at: Date.now() })); } catch {}
+}
 
 function log(msg) { process.stdout.write(`[pipeline] ${msg}\n`); }
 
@@ -30,10 +41,15 @@ function shouldAutoExecute(decision, collectedData, queueItem) {
 async function autoExecuteApprove(workOrderNum, accountNum) {
   const EXEC_OPTS = { cwd: BASE, timeout: 90000, encoding: 'utf8' };
   if (accountNum) {
-    const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-      timeout: 30000, encoding: 'utf8',
-    });
-    if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(inj.stderr || '').slice(0, 100)}`);
+    if (isSameSession(accountNum)) {
+      log(`[auto-exec] 账号 ${accountNum} 已是当前账号，跳过注入`);
+    } else {
+      const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
+        timeout: 30000, encoding: 'utf8',
+      });
+      if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(inj.stderr || '').slice(0, 100)}`);
+      saveSessionState(accountNum);
+    }
   }
   const raw = execFileSync('node', [path.join(BASE, 'cli.js'), 'approve', workOrderNum], EXEC_OPTS);
   const result = JSON.parse(raw);

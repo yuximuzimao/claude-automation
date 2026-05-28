@@ -44,7 +44,8 @@ const READ_LOGISTICS_TABS_JS = `(function(){
     return window.getComputedStyle(d).display !== 'none';
   });
   if (!dialogs.length) return JSON.stringify({error:'物流弹窗未打开'});
-  var dialog = dialogs[0];
+  // 取最后一个（最新打开的）弹窗，避免读到上一个未完成关闭的弹窗
+  var dialog = dialogs[dialogs.length - 1];
   var tabs = Array.from(dialog.querySelectorAll('.el-tabs__item')).map(function(t){
     return { name: t.textContent.trim(), active: t.classList.contains('is-active'), el: t };
   });
@@ -60,7 +61,7 @@ function makeClickTabJS(tabName) {
     var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
       return window.getComputedStyle(d).display !== 'none';
     });
-    var dialog = dialogs[0];
+    var dialog = dialogs[dialogs.length - 1];
     var tab = Array.from(dialog.querySelectorAll('.el-tabs__item')).find(function(t){
       return t.textContent.trim() === '${tabName}';
     });
@@ -77,12 +78,10 @@ const CLOSE_DIALOG_JS = `(function(){
   return 'closed';
 })()`;
 
-const CHECK_DIALOG_CLOSED_JS = `(function(){
-  var open = Array.from(document.querySelectorAll('.el-dialog__wrapper')).some(function(d){
-    return d.getBoundingClientRect().width > 0;
-  });
-  return JSON.stringify({closed: !open});
-})()`;
+// 当前可见弹窗数量（用于检测弹窗是否已关闭：关闭前记录数量，关闭后等数量减少）
+const VISIBLE_DIALOG_COUNT_JS = `Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+  return window.getComputedStyle(d).display !== 'none';
+}).length`;
 
 async function getLogistics(targetId, workOrderNum) {
   try {
@@ -126,11 +125,13 @@ async function getLogistics(targetId, workOrderNum) {
         packages.push({ tab: tabName, text: freshData.currentText });
       }
 
+      // 关闭前记录当前弹窗数，等数量减少（不要求「全部关闭」，避免页面有持久弹窗导致超时）
+      const beforeClose = await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS);
       await cdp.eval(targetId, CLOSE_DIALOG_JS);
       await waitFor(
         async () => {
-          const r = await cdp.eval(targetId, CHECK_DIALOG_CLOSED_JS);
-          return r.closed;
+          const cur = await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS);
+          return cur < beforeClose;
         },
         { timeoutMs: 5000, intervalMs: 300, label: '等待物流弹窗关闭' }
       );

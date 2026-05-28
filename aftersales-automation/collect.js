@@ -36,19 +36,33 @@ function log(msg) {
 
 // ── 账号注入 ──────────────────────────────────────────────────────
 let currentAccount = null;
+const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
+const SESSION_TTL_MS = 10 * 60 * 1000; // 10分钟内同账号注入可跳过
+
+function readSessionState() {
+  try { return JSON.parse(fs.readFileSync(SESSION_STATE_FILE, 'utf8')); } catch { return null; }
+}
+function saveSessionState(num) {
+  try { fs.writeFileSync(SESSION_STATE_FILE, JSON.stringify({ accountNum: num, at: Date.now() })); } catch {}
+}
 
 function injectAccount(num) {
-  // 每次都重新注入并 reload，保证 Vue app 用新 session（不跳过同账号，避免页面状态残留）
+  // 同账号且 10 分钟内已注入：跳过注入和 reload，直接开始采集
+  const cur = readSessionState();
+  if (cur && cur.accountNum === num && (Date.now() - cur.at) < SESSION_TTL_MS) {
+    log(`  账号 ${num} 已是当前账号，跳过注入`);
+    currentAccount = num;
+    return;
+  }
   log(`  切换账号 ${num}...`);
   const r = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(num)], {
     timeout: 30000, encoding: 'utf8',
   });
   if (r.status !== 0) throw new Error(`账号注入失败: ${r.stderr || r.stdout || '未知错误'}`);
   currentAccount = num;
-  // 全页重载，让 Vue app 以新 session 重新初始化（串行等待完成）
-  runCmd(['reload-jl']);
-  // reload-jl 等列表文字出现即返回，但 Vue Router 还需要额外时间稳定
-  // 用同步 sleep 确保 router 完全就绪再进行下一步采集
+  saveSessionState(num);
+  // inject 已完成导航+Vue初始化，无需再 reload-jl（避免第二次刷新）
+  // 额外等 4s 确保 Vue Router 完全稳定
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 4000);
   log(`  账号 ${num} 稳定，开始采集`);
 }
