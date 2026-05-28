@@ -392,12 +392,12 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       return fin(escalate(`物流采集不完整（已采集${collectionTotal}/${totalShipRows}条），无法确认全部退回，需人工核查`));
     }
 
-    // 赠品已发货独立校验：赠品快递必须也已退回，否则 approve 前必须 escalate
-    // logistics.js 已展开多子订单，赠品快递单号会出现在 packages 中
+    // 赠品已发货独立校验：计算赠品物流状态，仅在主品全部退回时用于决策（不提前 escalate）
+    // 赠品物流只从 ERP 读取（鲸灵工单详情页不展示赠品包裹）
     let giftPkgStatuses = [];
+    let giftNotReturned = [];
     if (giftShippedRows.length > 0) {
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
-      // 赠品物流只从 ERP 读取（鲸灵工单详情页一定不展示赠品包裹）
       giftPkgStatuses = giftTrackings.map(tr => {
         const erpEntry = erpLogResults.find(r => r.tracking === tr);
         if (erpEntry && erpEntry.logisticsText) {
@@ -412,40 +412,23 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         }
         return { tr, status: '未读取到物流', label: `${tr}未读取到物流需人工拦截` };
       });
-      const giftNotReturned = giftPkgStatuses.filter(p => p.status !== 'returned');
+      giftNotReturned = giftPkgStatuses.filter(p => p.status !== 'returned');
       s({ type: 'read', label: '赠品快递单号', value: giftTrackings.join('/') || '无' });
       s({ type: 'read', label: '赠品物流状态', value: giftPkgStatuses.map(p => p.label).join('；') });
       s({ type: 'check', condition: '赠品快递全部已退回', result: giftNotReturned.length === 0 });
-      if (giftNotReturned.length > 0) {
-        // 构建主品物流状态（从鲸灵 packages）
-        const mainParts = [];
-        (packages || []).forEach(pkg => {
-          const text = pkg.text || '';
-          const hasRet = RETURN_KEYWORDS.some(kw => text.includes(kw));
-          const hasSig = SIGNED_KEYWORDS.some(kw => text.includes(kw));
-          const numMatch = text.match(/物流单号[：:]\s*([A-Za-z0-9]+)/);
-          const tr = numMatch ? numMatch[1] : '';
-          if (!tr) return;
-          if (hasRet) mainParts.push(`${tr}已退回`);
-          else if (hasSig) mainParts.push(`${tr}已签收未退回`);
-          else mainParts.push(`${tr}在途未拦截成功需拦截`);
-        });
-        const giftParts = giftPkgStatuses.map(p => p.label);
-        const desc = [
-          mainParts.length ? `主品${mainParts.join('，')}` : '',
-          giftParts.length ? `赠品${giftParts.join('，')}` : ''
-        ].filter(Boolean).join('；');
-        s({ type: 'branch', text: `上报 → ${desc}` });
-        return fin(escalate(desc, {
-          rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '赠品已发货未退回→上报人工' }],
-        }));
-      }
     }
 
     const allReturned = collectionComplete && (allJLReturned || erpReturned);
     s({ type: 'check', condition: `全部包裹有退回物流节点（鲸灵:${allJLReturned}，ERP:${erpReturned}，采集完整:${collectionComplete}）`, result: allReturned });
 
     if (allReturned) {
+      if (giftNotReturned.length > 0) {
+        const giftDesc = giftPkgStatuses.map(p => p.label).join('；');
+        s({ type: 'branch', text: `上报 → 主品全部退回，但赠品未退回: ${giftDesc}` });
+        return fin(escalate(`主品已退回，但赠品${giftDesc}，需人工确认`, {
+          rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift', summary: '主品退回但赠品未退回→上报人工' }],
+        }));
+      }
       s({ type: 'branch', text: `同意退款 → 全部包裹已退回` });
       return fin(approve(
         '全部包裹物流显示已退回',
