@@ -143,7 +143,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 
 **商责售后原因**：`MERCHANT_FAULT_REASONS` 在 `lib/constants.js` 中维护。2026-05-21 新增 `'质量问题'`——此前因漏加导致商责工单穿透到非商责流程（fb-1778868858729 / fb-1779092166923）。如需追加商责关键词，在该数组中新增。
 
-**工单已取消/取消中**：不走自动 `skip`，改为 `escalate` 上报人工确认后归档。执行归档时自动清理关联的快递拦截记录（`op-queue.js`）。`infer.js` 中 `TERMINAL_STATES` 仅含已退款/已关闭/客服终态，不含取消类状态。
+**工单已取消/取消中**：不走自动 `skip`，改为 `wait_archive`。创建 Mac Reminder 提醒用户取消快递拦截（`lib/helpers.js:createReminder()`），工单保留在 simulated 状态等待人工归档。执行归档时自动清理关联的快递拦截记录。`infer.js` 中 `TERMINAL_STATES` 仅含已退款/已关闭/客服终态，不含取消类状态。
 
 ---
 
@@ -238,7 +238,7 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#49 验证数据=读实时源头**：→ 见全局 CLAUDE.md 浏览器操作约束。
 - `[∞]` **#51 ERP 状态只路由不决策**：ERP 订单状态只区分 flow-5.2/5.3，不直接决策。"交易关闭"≠包裹退回，必须走物流判断。
 - `[∞]` **#52 采集按工单类型分流**：product-match/archive 仅退货退款需要。退货退款必须遍历所有子订单，不能只取 subOrders[0]。
-- `[∞]` **#53 决策看"剩余-扫描"安全边际**：剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。
+- `[∞]` **#53 决策看安全边际（flow-5.3）**：仅退款已发货流程中，剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。注意：flow-5.1 退货退款使用不同阈值（`REMIND_HOURS=12`），直接比较剩余时效，不计算扫描间隔。
 - `[∞]` **#54 推理文案说人话**：reason 三要素：①根因②无代码变量名③明确建议动作。
 - `[∞]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 交叉校验 accountNum 与 accountNote，不一致拒绝。
 - `[∞]` **#58 collect.js 重试上限 3 次**：`collectRetries` 计数器在 pipeline.js，≥3 次标记 simulated。成功进 inferring 时清零。op-queue.js 路径暂不计数。

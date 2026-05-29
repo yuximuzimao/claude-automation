@@ -9,11 +9,13 @@
 | 启动本地服务 | `node server.js`（端口 8899） |
 | 打开界面 | 浏览器访问 `http://localhost:8899` |
 | 修改收集进度 | 直接编辑 `data/collections.json` 或通过 UI 勾选 |
+| **人工核对任务/宠物数据** | 浏览器访问 `http://localhost:8899/review.html` |
 | 宠物定义 | `data/pets.json`（355 宠物，对象 key="pet_N"） |
 | 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
 | 进化链 | `data/evolution-chains.json`（162 链，含 9 分支链） |
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
+| 标注数据 | `data/annotations.json`（append-only ops 日志，Claude 批量处理用） |
 | 数据采集需求 | `data/_待采集/README.md` |
 | 数据修正 | `scripts/fix-shiny-and-chains.js`（异色/炫彩标签修正、进化链传播） |
 
@@ -30,6 +32,7 @@
 lkwj/
 ├── server.js                  # HTTP 服务器，端口 8899
 ├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 精灵果实 + 7 品类标签
+├── review.html                # 人工核对工具：精灵/任务/形态标注 + 进化链核对，两栏布局
 ├── scripts/
 │   └── fix-shiny-and-chains.js # 异色/炫彩标签修正 + 进化链传播
 └── data/
@@ -39,6 +42,7 @@ lkwj/
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
+    ├── annotations.json       # 标注日志（append-only ops，不提交 git）
     └── _待采集/               # 数据采集模板
 ```
 
@@ -203,6 +207,8 @@ lkwj/
 | `POST /api/save` | 保存 collections.json |
 | `GET /api/wallet` | 钱包数据 |
 | `POST /api/wallet` | 保存钱包 |
+| `GET /api/annotations` | 标注日志（返回 `{meta,ops[]}`，文件不存在则返回空结构） |
+| `POST /api/annotations` | 保存标注日志（body = 完整 JSON 替换写入） |
 
 ## 待完成
 

@@ -2,6 +2,16 @@
 
 ---
 
+## Lesson: 对应表搜索框是平台规格商家编码（platformCode），不是货号（2026-05-27）
+
+**现象**：`auto-match2.js` Phase 1 Step A 把 productCode（货号，如 `0605zh-1`）填入 `.el-input-popup-editor input`，表格返回 0 行，导致展开+勾选失败。
+
+**根因**：`el-input-popup-editor input` 是「平台规格商家编码」搜索框（platformCode 维度），不是货号搜索框。填货号会 0 结果。
+
+**铁律**：对应表搜索框填 platformCode；展开目标行靠 `tds[6]`（值=productCode）匹配。两个字段类型不同，不可混用。
+
+---
+
 ## Lesson: 识图结果不能包含配件，配件由 accessories.json 临时注入（2026-05-27）
 
 **现象**：识图 `260605- 6` 时，把不可见包装配件（礼盒）写进了 recognition.items，导致识图结果不纯净；同时 accessories.json 用 productCode + skuNameContains 模糊匹配，当同一 productCode 下有多个 platformCode 时匹配脆弱。

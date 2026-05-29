@@ -8,6 +8,7 @@ const PETS_FILE = path.join(__dirname, 'data', 'pets.json');
 const TASKS_FILE = path.join(__dirname, 'data', 'tasks.json');
 const CHAINS_FILE = path.join(__dirname, 'data', 'evolution-chains.json');
 const WALLET_FILE = path.join(__dirname, 'data', 'wallet.json');
+const ANNOTATIONS_FILE = path.join(__dirname, 'data', 'annotations.json');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -129,6 +130,38 @@ const server = http.createServer((req, res) => {
     } catch (e) {
       serveError(res, 500, e.message);
     }
+    return;
+  }
+
+  // API: Annotations GET
+  if (req.method === 'GET' && url.pathname === '/api/annotations') {
+    try {
+      if (fs.existsSync(ANNOTATIONS_FILE)) {
+        const content = fs.readFileSync(ANNOTATIONS_FILE, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+        res.end(content);
+      } else {
+        serveJSON(res, { meta: {}, ops: [] });
+      }
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Annotations POST
+  if (req.method === 'POST' && url.pathname === '/api/annotations') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        JSON.parse(body);
+        fs.writeFileSync(ANNOTATIONS_FILE, body, 'utf8');
+        serveJSON(res, { ok: true });
+      } catch (e) {
+        serveError(res, 400, e.message);
+      }
+    });
     return;
   }
 

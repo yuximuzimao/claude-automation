@@ -44,9 +44,10 @@
 
 ```bash
 node cli.js parse <excel文件>     # 解析加购 Excel
-node cli.js calculate             # 执行库存分配算法（自动读取 gift-sku-config.json）
+node cli.js resolve-components    # 查询 ERP 组合明细（自动展开赠品货号）
+node cli.js resolve-stock         # 查询 ERP 库存状态
+node cli.js calculate             # 执行库存分配算法（Phase M→G→A-C）
 node cli.js report                # 生成 Excel 报告
-node cli.js run <excel文件>       # 全流程一键执行
 node cli.js gift-config add <货号> <名称> <数量>  # 添加赠品SKU配置
 node cli.js gift-config list      # 列出赠品SKU配置
 node cli.js gift-config clear     # 清空赠品SKU配置

@@ -24,4 +24,17 @@ function extractShippedTrackings(collectedData, statusFilter) {
   return result;
 }
 
-module.exports = { extractShippedTrackings };
+// 创建 Mac 提醒：优先 Reminders.app，失败降级为系统通知
+function createReminder(title) {
+  const { spawnSync } = require('child_process');
+  const remind = spawnSync('osascript', ['-e',
+    `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`
+  ], { timeout: 10000, encoding: 'utf8' });
+  if (remind.status === 0) return true;
+  spawnSync('osascript', ['-e',
+    `display notification "${title.replace(/"/g, '\\"')}" with title "鲸灵售后预警" sound name "default"`
+  ], { timeout: 5000 });
+  return false;
+}
+
+module.exports = { extractShippedTrackings, createReminder };

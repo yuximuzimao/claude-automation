@@ -7,8 +7,8 @@ entry: cli.js
 
 ## DO FIRST
 
-1. **找 CLI 命令** → `cli.js`（18 个命令，JSON 输出）
-2. **找流程** → `docs/INDEX.md §2`（4 步核查流程：check→识图→match→check）
+1. **找 CLI 命令** → `cli.js`（19 个命令，JSON 输出）
+2. **找流程** → `docs/INDEX.md §2`（5 步核查流程：check→识图→match→check→verify-table）
 3. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
 4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
 5. **写操作（新增匹配）必须人工确认后执行**
@@ -29,6 +29,7 @@ entry: cli.js
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
+| `lib/verify-table.js` | 识图核对表 HTML 生成（图片+ERP明细一一对应） | 流程末尾人工兜底核对时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
 | `lib/jl-sku-detail.js` | 鲸灵 SKU 详情读取 | 查单个 SKU 时 |
 | `lib/auto-match.js` | 自动批量匹配 v1 | —（历史版本） |
@@ -49,17 +50,17 @@ entry: cli.js
 | `lib/ops/create-suite.js` | 对应表创建套件 | match 流程 step match |
 | `lib/ops/remap-single.js` | 单品 SKU 重映射 | match 流程 step match |
 | `lib/ops/read-erp-codes.js` | 重新读 ERP 编码验证 | match 流程 step read_erp |
-| `lib/ops/verify-archive.js` | 档案匹配验证 | match 流程 step verify |
 
 ## CORE FLOWS
 
 ### 核查主流程（`docs/INDEX.md §2`）
 
 ```
-① check --shop <店铺>  → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
-② 识图（Claude 手动） → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
-③ match --shop <店铺>  → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
-④ check --shop <店铺>  → 重新扫描+对比报告 (anchor: runCheck)
+① check --shop <店铺>    → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
+② 识图（Claude 手动）   → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
+③ match --shop <店铺>    → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
+④ check --shop <店铺>    → 重新扫描+对比报告 (anchor: runCheck)
+⑤ verify-table           → 生成核对表 HTML，图片+ERP明细一一对应，人工兜底核对 (anchor: main in verify-table.js)
 ```
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
@@ -114,8 +115,8 @@ vm.handleQuery();
 
 ### 对应表操作规则
 
-- **搜索框**：placeholder = "请输入商家编码"，实际只按货号过滤，输入 SKU platformCode 无效
-- **正确做法**：全量读 40 行，按 `tds[6].innerText` 找目标货号行再展开
+- **搜索框** (`el-input-popup-editor input`) = **平台规格商家编码**（platformCode）搜索框，填 platformCode → 1行结果；填 productCode（货号）→ 0行
+- **展开目标行**：用 `tds[6].innerText`（值=productCode）精确匹配后展开
 - **套件标记**：每次只处理一个 SKU，严禁批量勾选整个货号所有子行
 - **图片列 class** 动态变化，逐段滚动（12 步）触发懒加载
 
@@ -135,7 +136,7 @@ visible.querySelector('button.el-button--primary').click();
 |---|------|---------|
 | 1 | ERP 操作前跳过 reload | 必须走完整 `navigateErp()`（reload→登录→切tab→验hash→等mount） |
 | 2 | 档案V2 直接赋值 `window.__sv.searchData` | 必须 DOM 输入法 + dispatch input/change 事件 |
-| 3 | 对应表搜索框按 platformCode 筛选 | 搜不到；必须全量读 40 行后按 `tds[6]` 找目标行 |
+| 3 | 对应表搜索框填 productCode（货号） | 搜不到（0行）；搜索框是 platformCode 维度，填 platformCode → 1行，再用 `tds[6]`（=productCode）展开 |
 | 4 | 多层弹窗取第一个 footer | 必须遍历 `querySelectorAll` 找 `getBoundingClientRect().height > 0` 的 |
 | 5 | 翻页用按钮状态判断结束 | 必须用"共X条"总数推算总页数 |
 | 6 | 档案V2 查询前未清筛选残留 | 每次档案操作前检查/清空筛选状态 |
@@ -169,6 +170,7 @@ lib/remap-sku.js
 lib/result.js
 lib/targets.js
 lib/visual.js
+lib/verify-table.js
 lib/wait.js
 lib/utils/safe-write.js
 lib/ops/annotate.js

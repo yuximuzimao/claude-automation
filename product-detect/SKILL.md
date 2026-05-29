@@ -7,9 +7,12 @@
 
 ## 当前状态
 
-- Phase: 1（环境安装阶段）
-- 品牌进度: KGOS 待训练，hee 待训练
-- 素材图: 待用户提供 → assets/kgos/
+- Phase: 3（第五次训练进行中，2026-05-29）
+- **第五次训练**：yolov8s + 3000张 + AR clipping（修复v4维C泡腾片崩溃），日志 `runs/kgos_train5.log`
+- **第四次训练结果**：epoch 100/100，mAP50=0.977，mAP50-95=0.951（退步于v3；tight_bbox 双刃剑：阻断片+0.034 但 维C泡腾片-0.212）
+- **第三次训练结果**：epoch 100/100，mAP50=0.986，mAP50-95=0.958（2026-05-28）
+  - `runs/kgos_yolov8n/weights/best.pt` 已更新；`models/kgos_best.onnx` 仍是旧版（待导出）
+- hee 未开始
 
 ## ENTRY MAP
 

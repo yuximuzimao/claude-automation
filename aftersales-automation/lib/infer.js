@@ -24,12 +24,6 @@ function parseUrgencyHours(urgency) {
   return ((dayMatch ? parseInt(dayMatch[1]) : 0) * 24) + (hourMatch ? parseInt(hourMatch[1]) : 0);
 }
 
-// 判断售后说明是否实质为空（"无"/"无说明"/"/"等均视为空）
-function isRemarkEmpty(remark) {
-  if (!remark) return true;
-  return /^[无\/\-\s]*$/.test(remark.trim());
-}
-
 // 判断是否有包裹签收超过指定天数（从物流文本解析签收时间）
 // 返回 { overdue: boolean, days: number, signedAt: string|null }
 function checkSignedOverDays(cd, days) {
@@ -101,6 +95,11 @@ function approve(reason, rulesApplied) {
 
 function reject(reason, warnings, rulesApplied) {
   return { action: 'reject', reason, confidence: 'high', warnings: warnings || [], rulesApplied: rulesApplied || [] };
+}
+
+// 有拦截记录时不创建重复拦截提醒
+function interceptWarnings(cd) {
+  return cd.intercepted ? [] : ['需创建快递拦截提醒'];
 }
 
 function escalate(reason, extra) {
@@ -288,15 +287,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
   if (isShipped) {
     s({ type: 'branch', text: '进入「仅退款-已发货」流程 (flow-5.3)' });
 
-    // 已拦截检测：同一快递已经被我们拦截过，直接上报等退回，不再重复拒绝+创建提醒
+    // 已拦截记录仅影响输出文案和快递行动，不影响物流验证流程
     if (cd.intercepted) {
       const it = cd.intercepted;
       s({ type: 'read', label: '拦截记录', value: `快递 ${it.tracking} 已拦截（首次工单 ${it.workOrderNum}，${it.executedAt ? it.executedAt.slice(0, 10) : '未知时间'}）` });
-      s({ type: 'branch', text: '上报 → 快递已拦截等退回，请勿重复拒绝' });
-      return fin(escalate(`快递 ${it.tracking} 已拦截，等待退回后退款（首次工单 ${it.workOrderNum}）`, {
-        confidence: 'high',
-        rulesApplied: [{ doc: 'flow-5.3', section: 'intercept', summary: '同快递已拦截→上报人工，等退回' }],
-      }));
     }
 
     const packages = cd.logistics && cd.logistics.packages;
@@ -510,7 +504,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'branch', text: `拒绝退款 → ${desc}` });
       return fin({ ...reject(
         desc,
-        ['需创建快递拦截提醒'],
+        interceptWarnings(cd),
         [{ doc: 'flow-5.3', section: 'Step4', summary: '驿站待取件→拒绝+创建拦截提醒' }]
       ), reasonCode: 'AT_STATION' });
     }
@@ -552,7 +546,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
     return fin({ ...reject(
       `${actionSummary}，等快递退返回我司后再退款`,
-      ['需创建快递拦截提醒'],
+      interceptWarnings(cd),
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
     ), reasonCode: 'INTERCEPT_TIMEOUT' });
   }
@@ -631,45 +625,35 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   const remainingHoursWait = queueItem.deadlineAt
     ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)
     : parseUrgencyHours(queueItem.urgency);
-  const hoursUntilNextScanWait = queueItem.hoursUntilNextScan != null ? queueItem.hoursUntilNextScan : null;
-  const marginWait = remainingHoursWait != null && hoursUntilNextScanWait != null
-    ? remainingHoursWait - hoursUntilNextScanWait
-    : null;
-  const safeToWait = marginWait != null
-    ? marginWait > SAFETY_MARGIN_HOURS
-    // fallback：deadlineAt 缺失时，用 urgency 文本估算，>REMIND_HOURS 视为安全等待
-    : (remainingHoursWait != null ? remainingHoursWait > REMIND_HOURS : null);
 
   if (!hasRows) {
-    // 场景B自动等待：无入库记录 + 无售后说明 + 无图片 → 快递刚到未拆包，可自动等待
+    // 场景B：无入库记录，基于剩余时效自动决策
     s({ type: 'read', label: '售后说明', value: buyerRemark || '无' });
     s({ type: 'read', label: '售后图片', value: hasImages ? '有' : '无' });
+    s({ type: 'read', label: '剩余时效', value: remainingHoursWait != null ? `${remainingHoursWait.toFixed(1)}小时` : '未知' });
 
-    if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
-      const waitMsgB = marginWait != null
-        ? `${marginWait.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
-        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
-      s({ type: 'branch', text: `自动标记等待重查 → 无入库记录+无说明+无图片，快递可能刚到未拆包，${waitMsgB}` });
+    if (remainingHoursWait != null && remainingHoursWait > REMIND_HOURS) {
+      s({ type: 'branch', text: `自动标记等待重查 → 仓库未收到退货，剩余${remainingHoursWait.toFixed(1)}h > ${REMIND_HOURS}h，等待下次扫描` });
       return fin({
-        ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
-          confidence: 'high',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '无入库+无说明+无图片+剩余-扫描>8h→自动等待重查' }],
-        }),
+        action: 'reject',
         waitingRescan: true,
+        reason: `仓库未收到退货，剩余${remainingHoursWait.toFixed(1)}h，等待下次扫描自动重查`,
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '未入库+剩余>12h→等待重查' }],
+        warnings: [],
       });
     }
 
-    if (safeToWait === false) {
-      const scanStrB = hoursUntilNextScanWait != null ? hoursUntilNextScanWait.toFixed(1) : '?';
-      const marginStrB = marginWait != null ? marginWait.toFixed(1) : '?';
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h - 扫描${scanStrB}h = ${marginStrB}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，未入库立即处理防止超时自动退款` });
-      return fin(reject(
-        `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h时效不足，未入库拒绝退款，等入库后再处理`,
-        ['⚠️ 超时自动拒绝'],
-        [{ doc: 'flow-5.1', section: 'Step3', summary: '剩余-扫描≤8h未入库→自动拒绝' }]
-      ));
+    if (remainingHoursWait != null && remainingHoursWait <= REMIND_HOURS) {
+      s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHoursWait.toFixed(1)}h ≤ ${REMIND_HOURS}h，时效不足，立即处理` });
+      return fin({ ...reject(
+        `仓库暂未收到此件，已反馈快递找件`,
+        ['⚠️ 时效不足，退货仓库待拆包，建议人工核实'],
+        [{ doc: 'flow-5.1', section: 'Step3', summary: '未入库+剩余≤12h→拒绝' }]
+      ), reasonCode: 'WAREHOUSE_NOT_RECEIVED' });
     }
-    s({ type: 'branch', text: '上报 → ERP售后工单无入库记录' });
+
+    s({ type: 'branch', text: '上报 → 无法确定剩余时效' });
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
 
@@ -681,32 +665,31 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   s({ type: 'check', condition: `存在「卖家已收到退货」状态的入库行（实际：${statusList}）`, result: hasConfirmedReceipt });
 
   if (!hasConfirmedReceipt) {
-    // 场景C：有ERP记录但未入库（在途/已签收待仓库拆包）
-    if (isRemarkEmpty(buyerRemark) && !hasImages && safeToWait === true) {
-      const waitMsgC = marginWait != null
-        ? `${marginWait.toFixed(1)}h > ${SAFETY_MARGIN_HOURS}h安全边际`
-        : `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h > ${REMIND_HOURS}h兜底阈值`;
-      s({ type: 'branch', text: `自动标记等待重查 → ERP有记录但未入库（状态：${statusList}）+无说明+无图片，在途或待仓库拆包，${waitMsgC}` });
+    // 场景C：有ERP记录但未入库，基于剩余时效自动决策
+    s({ type: 'read', label: '剩余时效', value: remainingHoursWait != null ? `${remainingHoursWait.toFixed(1)}小时` : '未知' });
+
+    if (remainingHoursWait != null && remainingHoursWait > REMIND_HOURS) {
+      s({ type: 'branch', text: `自动标记等待重查 → ERP有记录但未入库（状态：${statusList}），剩余${remainingHoursWait.toFixed(1)}h > ${REMIND_HOURS}h，等待下次扫描` });
       return fin({
-        ...escalate('退货快递在途或仓库待拆包，下次扫描自动重查', {
-          confidence: 'high',
-          rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '有ERP记录未入库+无说明+无图片+剩余-扫描>8h→自动等待重查' }],
-        }),
+        action: 'reject',
         waitingRescan: true,
+        reason: `仓库未收到退货，剩余${remainingHoursWait.toFixed(1)}h，等待下次扫描自动重查`,
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step3', summary: '有记录未入库+剩余>12h→等待重查' }],
+        warnings: [],
       });
     }
 
-    if (safeToWait === false) {
-      const scanStr = hoursUntilNextScanWait != null ? hoursUntilNextScanWait.toFixed(1) : '?';
-      const marginStr = marginWait != null ? marginWait.toFixed(1) : '?';
-      s({ type: 'branch', text: `超时拒绝 → 剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h - 扫描${scanStr}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，ERP有记录未入库立即处理防止超时自动退款` });
-      return fin(reject(
-        `剩余${remainingHoursWait != null ? remainingHoursWait.toFixed(1) : '?'}h时效不足，未入库拒绝退款，等入库后再处理`,
-        ['⚠️ 超时自动拒绝'],
-        [{ doc: 'flow-5.1', section: 'Step3', summary: '剩余-扫描≤8h未入库→自动拒绝' }]
-      ));
+    if (remainingHoursWait != null && remainingHoursWait <= REMIND_HOURS) {
+      s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHoursWait.toFixed(1)}h ≤ ${REMIND_HOURS}h，时效不足，立即处理` });
+      return fin({ ...reject(
+        `仓库暂未收到此件，已反馈快递找件`,
+        ['⚠️ 时效不足，退货仓库待拆包，建议人工核实'],
+        [{ doc: 'flow-5.1', section: 'Step3', summary: '有记录未入库+剩余≤12h→拒绝' }]
+      ), reasonCode: 'WAREHOUSE_NOT_RECEIVED' });
     }
-    s({ type: 'branch', text: '上报 → 退货快递单存在，货物尚未入库确认' });
+
+    s({ type: 'branch', text: '上报 → 无法确定剩余时效' });
     return fin(escalate('退货尚未入库确认，需人工核查'));
   }
 
@@ -1017,12 +1000,14 @@ function inferDecision(sim, queueItem) {
   const CANCELLED_STATES = ['已取消', '用户已取消', '取消中'];
   if (workOrderStatus && CANCELLED_STATES.some(cs => workOrderStatus.includes(cs))) {
     s({ type: 'read', label: '工单状态', value: workOrderStatus });
-    s({ type: 'branch', text: `上报 → 工单${workOrderStatus}，需人工确认归档` });
-    return fin(escalate(`工单状态：${workOrderStatus}，请人工确认后归档（如已拦截请取消拦截）`, {
+    s({ type: 'branch', text: `等待归档 → 客户取消退款，建议人工取消拦截快递` });
+    return fin({
+      action: 'wait_archive',
+      reason: `工单状态：${workOrderStatus}，客户取消退款，建议人工取消拦截快递`,
       confidence: 'high',
-      rulesApplied: [{ doc: 'INDEX.md', section: '工单取消', summary: '取消状态→上报人工确认归档' }],
-      warnings: ['工单已取消，如有拦截记录请检查是否需清理'],
-    }));
+      rulesApplied: [{ doc: 'INDEX.md', section: '工单取消', summary: '取消状态→等待归档+提醒取消拦截' }],
+      warnings: ['客户取消退款，如有拦截记录请取消快递拦截'],
+    });
   }
 
   const TERMINAL_STATES = ['已退款', '退款成功', '已完成退款', '已关闭', '已撤销', '客服-已同意', '客服-已拒绝'];

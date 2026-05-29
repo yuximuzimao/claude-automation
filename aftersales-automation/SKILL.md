@@ -24,7 +24,7 @@ entry: cli.js
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
 | `lib/wait.js` | `sleep()`, `waitFor()`, `retry()` 工具；内置 `FORCE_NO_RETRY_DOMAINS` 自动禁止鲸灵重试 + `isRiskControlError()` 风控信号检测 + 熔断钩子 | 需要等待/重试/风控防护时 |
-| `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` | 从 collectedData 提取已发货快递单号时 |
+| `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` + `createReminder()` | 提取快递单号或创建 Mac Reminder 时 |
 | `lib/result.js` | `ok()/fail()` JSON 封包 | 新增 CLI 命令时 |
 | `lib/constants.js` | 共享常量（扫描时间/关键词/红灯） | 查常量定义时 |
 | `lib/erp/navigate.js` | ERP 页面导航+登录恢复（最长文件） | ERP 页面跳转/登录异常时 |
@@ -142,8 +142,8 @@ await cdp.navigate(targetId, 'https://...');
 | 15 | "刷新状态"卡死=正常，是串行队列 | `POST /accounts/refresh-status` 为每个账号入队 `check-session` op，12个账号×~8s=~96s，期间 op-queue 被占满。不要以为卡死——等 SSE `accounts-update` 逐个回来即可。触发后不要重复点击，否则会重复入队。 |
 | 16 | check-session URL 检测依赖唯一 SCRM tab | `check-session` 通过 CDP `/json` 取第一个 `scrm.jlsupp.com` tab 的 URL 判断登录状态。若用户同时开了多个 SCRM tab（如手动打开了多个店铺），检测的可能不是刚注入的那个账号 → 误报"正常"。检测时应保持主 Chrome 中只有一个鲸灵 tab。 |
 | 17 | check-session 慢网络下可能误报"正常" | inject 内等 2s + check-session 再等 3s = 共 5s。若网络慢，页面仍在跳转中（URL 尚未到达 `/login`），就会被判为"正常"。实际上 session 已过期，只是跳转还没完成。症状：刷新后显示"正常"，但 scan 时仍报 expired。解法：直接触发全账号扫描（真实 cli.js list 验证）。 |
-| 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 safeToWait 的 3 条路径在 hoursUntilNextScanWait 为 null 时直接调用 `.toFixed(1)` → TypeError。`processOne` 设置了 `hoursUntilNextScan` 但历史 data / 直接调用 inferDecision 时可能缺失。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复：3 处路径均已加固。 |
-| 19 | 全项目重复代码：allShipTrackings 提取 3 处 IIFE | pipeline.js、op-queue.js（remind/cancel 两条路径）各自复制了完全相同的"从 collectedData 提取已发货运单号"逻辑。op-queue remind 路径的状态过滤为仅`卖家已发货`，与另两处三态过滤不统一（潜在遗漏）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：已提取为 `lib/helpers.js:extractShippedTrackings()`。 |
+| 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 `inferRefundOnly`（flow-5.3）的 safeToWait 3 条路径在 hoursUntilNextScan 为 null 时直接调用 `.toFixed(1)` → TypeError。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复。注意：flow-5.1 已改为简单阈值（`remaining > REMIND_HOURS`），不涉及 margin 计算。 |
+| 19 | 全项目重复代码 → 提取共享函数 | pipeline.js、op-queue.js 各自复制了相同的逻辑（快递单号提取、Mac Reminder 创建）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：`extractShippedTrackings()` 提取到 `lib/helpers.js`。2026-05-29：`createReminder()` 同理提取到 `lib/helpers.js`，pipeline.js 和 op-queue.js 共用。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 

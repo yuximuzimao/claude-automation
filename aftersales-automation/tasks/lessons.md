@@ -231,6 +231,15 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 | 26 | **写操作端点必须加幂等守卫**：`archive-manual` 缺少 `status=done` 检查，任意重复调用都会写新 case。所有写 `cases.jsonl`/`simulations.jsonl` 的端点，都要先检查目标状态再决定是否执行。 | feedback_jingling_dev.md §80 |
 | 27 | **launchctl restart 后检查暂停状态**：如果系统在 stop 前已经是暂停状态，restart 后仍为暂停，需 `curl -X POST http://localhost:3457/api/resume` 或面板点「恢复运行」。若 stop 前是运行中的则自动恢复。 | — |
 
+## 2026-05-29 session 教训（infer.js 赠品/在途规则修复 + CI 回归）
+
+| # | 教训 |
+|---|------|
+| 57 | **`const` 内层变量重声明会静默遮蔽外层 `let`**：外层 `let giftPkgStatuses = []`，if 块内 `const giftPkgStatuses = ...` 不报错但覆盖了外层引用，导致下游 `giftPkgStatuses.forEach(...)` 永远遍历空数组。修复后首次正确赋值反而引入新 bug（见 #58）。JS 铁律：if/else 块内禁止用 `const`/`let` 重声明外层已有变量名。 |
+| 58 | **`{ ...escalate(reason), waitingRescan: true }` 不能修正 action**：`escalate()` 返回 `{ action: 'escalate', ... }`，spread 展开后追加 `waitingRescan: true` 并不改变 `action`，额外字段只是多余。修复：直接返回 `{ action: 'reject', waitingRescan: true, reason, ... }` 字面量。 |
+| 59 | **赠品物流校验只在 approve 门禁生效，不提前 escalate**：原代码在赠品未退回时直接 escalate，不管主品是否已签收。正确逻辑：主品状态决定拒绝/同意，赠品检查只在"主品全部退回准备 approve"时介入。修复：将 `giftNotReturned` 检查从赠品块移至 approve gate。 |
+| 60 | **冻结测试期望必须跟着业务规则更新**：4 个 fixture 期望 `escalate`（旧规则），改为 `reject`（新规则）后测试通过。同时在途+赠品物流未知的案例也需更新。CI 回归失败是业务规则变更的直接反映，不是代码 bug。 |
+
 ## 2026-05-28 session 教训（ERP 物流修复 + 鲸灵物流 pipeline 超时）
 
 | # | 教训 |

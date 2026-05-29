@@ -33,18 +33,20 @@ scripts/
 # 预览合成效果（生成10张，看素材去背景是否干净）
 python scripts/generate.py --brand kgos --preview
 
-# 生成正式训练数据（1200张，训练集1020+验证集180）
-python scripts/generate.py --brand kgos --count 1200
+# 生成正式训练数据（3000张，训练集2550+验证集450）
+python scripts/generate.py --brand kgos --count 3000
 
 # 验证标注框是否准确（抽20张画框）
 python scripts/verify.py --brand kgos --samples 20
 
-# 训练（低优先级，可后台跑）
-conda activate yolov8
-nohup python scripts/train.py --brand kgos > runs/kgos_train.log 2>&1 &
+# 训练（低优先级，后台；必须用 source + exec python -u，conda run 不传流日志为空）
+nohup bash -c 'source ~/miniconda3/etc/profile.d/conda.sh && conda activate yolov8 && exec python -u scripts/train.py --brand kgos --model yolov8s' > runs/kgos_trainN.log 2>&1 &
 
 # 中断后继续训练
 python scripts/train.py --brand kgos --resume
+
+# 评估验证集弱项
+conda run -n yolov8 python /tmp/eval_errors.py
 
 # 推理测试
 python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
@@ -53,6 +55,7 @@ python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
 ## 注意事项
 
 - 素材图文件名直接作为类别名，必须和 features.json 的 key 完全一致
-- 训练需要先 `conda activate yolov8`（Python 3.10 环境）
+- 训练需要 conda yolov8 环境（Python 3.10）
 - 推理（infer.py）可在系统 Python 3.14 下运行，不需要 conda 环境
-- 训练默认用 yolov8n（快，约6-10小时），效果差再换 yolov8s
+- yolov8n=快速验证(~8h)，yolov8s=生产精度(~18h)
+- **日志输出**：必须用 `source conda.sh + conda activate + exec python -u`，conda run 会缓冲日志

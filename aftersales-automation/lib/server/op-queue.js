@@ -12,7 +12,7 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
-const { extractShippedTrackings } = require('../helpers');
+const { extractShippedTrackings, createReminder } = require('../helpers');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -50,23 +50,6 @@ function updateAccountStatus(num, patch) {
   s[String(num)] = merged;
   writeAccountStatus(s);
   sse.broadcast('accounts-update', readAccountStatus());
-}
-
-// 创建 Mac 提醒：优先 Reminders.app，失败时（后台无 TTY）降级为系统通知
-function createReminder(title) {
-  const remind = spawnSync('osascript', ['-e',
-    `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`
-  ], { timeout: 10000, encoding: 'utf8' });
-  if (remind.status === 0) {
-    log(`[预警] ${title}`);
-    return true;
-  }
-  const errMsg = (remind.stderr || '').slice(0, 80);
-  log(`[预警] Reminders 创建失败（${errMsg}），降级为系统通知`);
-  spawnSync('osascript', ['-e',
-    `display notification "${title.replace(/"/g, '\\"')}" with title "鲸灵售后预警" sound name "default"`
-  ], { timeout: 5000 });
-  return false;
 }
 
 let counter = 0;
@@ -356,7 +339,7 @@ async function _execScanAccountInner(accountNum, accountNote) {
     const dl = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${accountNote} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${dlStr}`;
-    createReminder(title);
+    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
   }
 
   log(`账号${accountNum} ${accountNote}: 采集 ${urgent.length} 条，新增 ${added}，更新 ${updated}，重置等待 ${waitingReset}`);
@@ -480,7 +463,7 @@ async function execScan(op) {
     const deadlineDate = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
     const deadlineStr = `截止${(deadlineDate.getMonth()+1).toString().padStart(2,'0')}/${deadlineDate.getDate().toString().padStart(2,'0')} ${deadlineDate.getHours().toString().padStart(2,'0')}:${deadlineDate.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${t.note || '账号' + t.num} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${deadlineStr}`;
-    createReminder(title);
+    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
   }
 
   // 补充：检查队列中扫描未命中的到期工单（waiting/simulated）
@@ -497,7 +480,7 @@ async function execScan(op) {
     const dl = new Date(qi.deadlineAt);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
-    createReminder(title);
+    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
   }
 
   // 入队推理

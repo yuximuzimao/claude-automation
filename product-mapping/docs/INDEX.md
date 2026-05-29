@@ -12,13 +12,28 @@
 
 ## §2 核查流程（完整端到端）
 
+**Step 0（必做）：确认 JL 账号对齐**
+
+每次用户说「<店铺名>的匹配」，**第一步**查 `sessions/accounts.json` 确认 JL 账号并注入，再跑任何命令。
+
+| 账号 | 店铺 | 品牌 |
+|------|------|------|
+| `jl 3` | 百浩 | RITEKOKO |
+| `jl 4` | 蓄力生长 | KGOS |
+| `jl 5` | 共途 | KGOS |
+| `jl 6` | 上海绰绰 | 悦希 |
+
+> **根因**：JL 标签页登录哪个账号决定「抓哪家店的活动商品」。`--shop` 只控制 ERP 端。账号不对齐，JL 抓出来的是别家的产品，cross-reference 必然全是「不在对应表」。
+
 **命令序列**（每次新活动按此顺序执行）：
 
 ```
+0  jl <账号编号>                     ← 必须先对齐 JL 账号
 ① node cli.js check --shop <店铺>   ← 扫描+标记（自动完成以下子步骤）
 ② 我（Claude）识图                   ← 人工步骤，写入 sku-records.json
 ③ node cli.js match --shop <店铺>   ← 自动匹配（异常立即停止）
 ④ node cli.js check --shop <店铺>   ← 重新扫描+对比报告
+⑤ node cli.js verify-table          ← 生成核对表 HTML，图片+ERP明细一一对应，人工兜底核对
 ```
 
 **各步骤明细**：
@@ -49,6 +64,13 @@
    - 同①，此时已匹配 SKU 有 erpCode，sku-records 全量重写后 erpCode 回填
    - comparisonResult: 识图预测 vs 档案实际 → match/mismatch
    - 若有 mismatch，人工核查
+
+⑤ verify-table = 生成核对表 HTML:
+   - 读取最新 check 报告，将每个 SKU 的图片与 ERP 档案明细并排展示
+   - 图片嵌入 base64，HTML 自包含，生成后自动打开浏览器
+   - 每次生成前自动清空旧 verify-*.html（与 check 清空 imgs/reports 一致，旧表对下次无用，不保留存档）
+   - 用途：流程末尾人工兜底核对，防止识图错误（如体验装/正装混淆）漏过
+   - 对比结果用颜色标注：绿色=一致，红色=不一致
 ```
 
 **异常处理原则**：
@@ -73,6 +95,16 @@
 2. Read 工具加载图片
 3. 对照 features.json 描述逐一确认图中每个商品
 4. 报告：每个商品是否在图中可见，数量是否一致
+
+**形状判别铁律（2026-05-23 酵素4.0教训）**：
+- 同款商品有正装/体验装两个版本时，**盒子形状是第一识别线索**：体验装=窄长条（长宽比约2:1），正装=偏方形（长宽比约1:1）
+- 第一步「看实物」必须包含形状/比例判断，不能只看图案和颜色
+- 参考 features.json 中「形状」字段（正装、体验装分别有记录）
+
+**营养粉买赠 SKU 漏识图陷阱（2026-05-23 营养粉教训）**：
+- 营养粉「买X送Y」类 SKU（如买3送1=4盒），图片中常附带 1 盒**酵素4.0体验装**作为赠品展示
+- 识图时只数了营养粉盒数，漏掉了角落的酵素4.0体验装（小窄盒，容易被大盒营养粉遮挡或忽略）
+- **铁律**：营养粉买赠类 SKU 识图时，特别注意图片四角和边缘是否有酵素4.0体验装小盒
 
 **参考图库**：`data/products/{brand}/*.jpg` — 单品标准图，命名 = 商品名称（如 `data/products/kgos/益生菌.jpg`、`data/products/hee/悦颜霜.jpg`）
 
@@ -241,7 +273,7 @@ data/products/
 - `[2/2026-04]` **档案V2 直接赋值失效**：`window.__sv.searchData = code` 不触发 Vue 响应，必须 DOM 输入法（见§5）
 - `[1/2026-04]` **ERP 状态残留**：跳过 reload 直接操作读到上次的数据，所有页面操作前必须走 navigateErp()
 - `[1/2026-04]` **对应表只读1条**：空搜索后未展开所有行，或页面状态未重置，导致只读到当前可见行
-- `[1/2026-04]` **对应表搜索框按 platformCode 无效**：搜索框 placeholder 为「请输入商家编码」，实际只按货号（productCode）过滤，输入 SKU 的 platformCode（如 260422-37）不会筛选。正确做法：全量读取40行，按 `tds[6].innerText` 找目标货号行再展开
+- `[1/2026-04→2026-05-27 修正]` **对应表搜索框字段类型**：`el-input-popup-editor input` = **平台规格商家编码**（platformCode）搜索框，填 platformCode 有效（返回1行）；填 productCode（货号）会返回 0 行。`tds[6]` = 平台商家编码（productCode），用于展开目标货号行——与搜索框类型不同，不要混用
 - `[1/2026-04]` **多层嵌套 dialog 确定按钮点错**：Element UI 多弹窗叠加时 querySelector 取到第一个隐藏 footer，必须用 `querySelectorAll('.el-dialog__footer')` 遍历取 `getBoundingClientRect().height > 0` 的那个，再点其 `el-button--primary`。禁止用 innerText 文字匹配（有的按钮是"确 定"带空格）
 - `[1/2026-04]` **弹窗操作前未验证弹窗可见**：操作 dialog 内元素前必须先确认 wrapper 的 `getBoundingClientRect().height > 0`，否则操作到隐藏层
 - `[1/2026-04]` **档案V2 查询前筛选残留**：`fetch-archive-names` 等操作会留下"普通商品"筛选，下次 `km-archive` 查组合装时返回 null。`initArchiveComp` 现已加「清空条件」步骤；通用原则：每次档案操作前必须检查/清空筛选状态
@@ -250,7 +282,7 @@ data/products/
 - `[1/2026-04]` **「选择商品」dialog v-show 状态残留**：dialog 关闭后 Vue 保留上次勾选（v-show 不销毁实例），再次打开时旧勾选仍在。每次打开弹窗后立即全选反选清零（`querySelectorAll("input[type=checkbox]:checked").click()`），再添加子品
 - `[1/2026-04]` **商品类型下拉不能 UI 点击**：el-select 下拉 input 展开后 portal 在 dialog 外生成，触发 close-on-click-modal 关闭弹窗。正确做法：直接 Vue emit：`vm.$emit("input", value); vm.$emit("change", value)`
 - `[1/2026-04]` **脚本长时间运行用 run_in_background**：`node lib/auto-match2.js` 同步跑时全量 stderr 输出消耗大量 token。正确：`run_in_background: true`，结束后只读 `data/auto-match-log.json` 的 done/failed 数字
-- `[1/2026-04-30]` **对应表搜索输入框是 `.el-input-popup-editor input`**：form-item[4] 是"精确搜索"下拉框，form-item[5] 是"平台商家编码"下拉框，form-item[6] 的 `el-input-popup-editor` 才是真正的搜索输入框。把货号输入到下拉框会导致搜索无效、表格不刷新。`_setMainPageSelect` 索引：精确搜索=4，平台商家编码=5（排除 dialog 内的 select 后）
+- `[1/2026-04-30, 修正2026-05-27]` **对应表搜索输入框是 `.el-input-popup-editor input` = 平台规格商家编码（platformCode）**：form-item[4]=精确搜索下拉，form-item[5]=平台商家编码下拉，form-item[6] 的 `el-input-popup-editor` 才是文本搜索框，搜索维度是 platformCode（平台规格商家编码），不是 productCode（货号）。搜索时填 platformCode → 1行结果；填 productCode → 0行。展开目标行用 `tds[6]`（值=productCode）做精确匹配
 - `[∞/永久保留]` **#48 读表数据用<th>表头定位，禁用正则/长度过滤**：子品弹窗表读取必须通过 `<th>` 表头文本（"商品名称"/"商家编码"/"组合比例"）定位列索引。禁止硬编码固定位置 [1][3][10]，禁止对 specCode/name 做正则匹配过滤——会把非数字编码（kgoxnld等）合法行当垃圾误杀。
 - `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
 - `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
@@ -262,8 +294,13 @@ data/products/
 - `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
 - `[1/2026-05-13]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。根治：check 结束时以 ERP 实时对应表数据全量重写，不读旧文件做增量合并。recognition 字段在重写前从旧文件读取并写回（保留识图结果）。
 - `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
+- `[2/2026-05-22]` **check 前必须先对齐 JL 账号**：`--shop 共途` 只控制 ERP 端查哪张对应表，JL 标签页登录的是哪个账号决定抓哪家店的活动商品。账号不对齐时 JL 抓出别家产品，cross-reference 全部「不在对应表」，看起来像新活动未上线。铁律：用户说「<店铺>匹配」→ 先查 `sessions/accounts.json` → `jl <编号>` 注入账号 → 才跑 check。
 - `[1/2026-05-20]` **人工处理某些 SKU 后不能直接续跑 match，必须先重跑 check**：`getTodo()` 的判断条件是 `erpCode === null`，只有 check.js 运行时读 ERP 实时对应表才会回填 erpCode。人工在 ERP 界面完成匹配后，sku-records.json 里该条记录的 erpCode 仍是 null，match 仍视为未匹配并重试，触发重复操作或同样错误。正确流程：**人工处理 → check → match**，不能跳过 check 直接续 match。
 - `[1/2026-05-20]` **同 productCode 多比例套件触发「提示」弹窗**：同一 productCode 下已有已匹配套件（如青柑×10+茉莉×10），尝试为另一 platformCode 配不同比例套件（如青柑×5+茉莉×5）时，ERP 在打开「选择商品」弹窗前插入「提示」弹窗（"该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"）。当前 copy-as-suite.js 无法处理此前置弹窗，脚本报 `Expected 选择商品 dialog, got: 提示`。处置：人工确认/取消提示弹窗后走「人工处理→check→match」流程。
+- `[1/2026-05-22]` **downloadPlatformProducts 弹窗必须选含 .el-select 的 dialog**：ERP 对应表页面可能同时存在旧的进度弹窗（含 `.el-progress`）和新的下载配置弹窗，两者都 visible。取第一个可见 dialog 会错选进度弹窗，后续找不到店铺 el-select 报错。正确：`Array.from(ds).find(d => d.getBoundingClientRect().height>0 && d.querySelector('.el-select'))`。等待下载完成的终止条件是 `.el-progress` 消失，不是所有 dialog 消失（配置弹窗在确认后保持打开）。已同步处理：目标店铺已是唯一选项时跳过（`already-selected`），否则先清除多余 el-tag 再触发 `handleOptionSelect`。
+- `[1/2026-05-22]` **识图必须三步走：实物→数量自检→底部文字兜底**：只看实物摆放会漏掉赠品小件（如玉米片×10）。更危险的盲区：漏识图→错误绑定→check 时识图与档案同步错误→静默通过，永远发现不了。铁律：①看实物写 recognition.items（口味/规格由实物图决定，不从文字推断）②自检：数图中所有商品总件数，与 items.qty 加总对比，不一致必有漏项 ③底部文字做品类完整性兜底（只验证品类是否齐全，不推断规格/口味）。有疑问先告知用户确认，不擅自修改数据文件。
+- `[1/2026-05-23]` **识图形状必须判别：正装 vs 体验装靠长宽比**：酵素4.0 正装（50ml×10袋）盒子接近方形，体验装（50ml×3袋）盒子为窄长条。同款商品有正装/体验装双版本时，第一步必须看形状/比例。features.json 已拆分 酵素4.0 和 酵素4.0体验装 两条，分别记录形状特征。
+- `[1/2026-05-23]` **营养粉/益生菌买赠 SKU 图片必含酵素4.0体验装赠品**：kgosyyf-44 货号下含「4盒」的 SKU（0525-4/0525-5/0525-6）和 KGOSYSJ-30 的 0525-7（益生菌买3送1到手4盒），图片中均附带酵素4.0体验装×1 作为赠品展示。体验装小盒易被大盒营养粉/益生菌遮挡或挤到角落。识图时数完主商品盒数后，扫一遍图片四角和边缘。
 
 ---
 

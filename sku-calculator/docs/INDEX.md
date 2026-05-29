@@ -2,15 +2,17 @@
 
 ## §1 核心算法规则
 
-**Phase G — 赠品预扣**：赠品 SKU 按 `gift-sku-config.json` 的固定分配量从可用库存中预扣，不参与后续算法。库存不足直接报错中止。
+**Phase M — SKU 保底预扣**（2026-05-23）：每个正常 SKU 至少 `coldFixed` 件（默认 5），从全量库存中预扣，**优先级高于赠品**。受限单品等比例缩减。
 
-**Phase 0 — 预处理**：可用量 `avail[j] = stock[j] * (1 - reserve)`。零库存单品依赖的 SKU 直接归零移出。active（加购>0）/ cold（加购=0）分离。
+**Phase G — 赠品预扣**：赠品最多占单品库存的 `(1 - reserve)`（默认 80%），超出时等比例缩减所有使用该单品的赠品 SKU。受限单品保证正常 SKU 至少分到 stock × reserve（默认 20%）。
+
+**Phase 0 — 预处理**：赠品+保底预扣完毕后，对剩余库存应用 reserve。零库存单品依赖的 SKU 归零移出。active（加购>0）/ cold（加购=0）分离。
 
 **Phase A — 迭代"耗尽即锁定"**：每轮找最紧约束单品（`min(R[j] / D[j])`），锁定所有使用该单品的 SKU 并扣减库存，不影响其余 SKU。库存充足时建议库存可远超加购数。
 
 **Phase B — 整数化 + LRM 回填**：floor 取整后按余数降序逐条 +1，每次立即扣减（防止组合超卖）。
 
-**Phase C — cold SKU 保底**：零加购 SKU 从剩余库存中按保底件数分配（默认 5 件）。
+**Phase C — cold SKU 保底**：零加购 SKU 取 Phase M 预扣值（无需额外分配）。
 
 ## §2 输出格式
 
@@ -38,7 +40,11 @@
 
 - `--reserve 0.2` — 库存余量比例（默认0.2即20%）
 - `--cold-fixed 5` — 零加购 SKU 保底库存（默认5）
-- `data/gift-sku-config.json` — 满赠SKU固定分配：`{"giftSkus": [{"huohao": "...", "skuName": "...", "fixedAllocation": N}]}`。`cli.js gift-config add/list/clear` 辅助维护。`calculate` 自动读取，`resolve-components` 自动将赠品 huohao 合并到 ERP 解析
+- `data/gift-sku-config.json` — 满赠SKU固定分配。支持两种格式：
+  - **原始格式**（推荐）：`{"giftSkus": [{"huohao": "...", "fixedAllocation": N}]}`，只需货号，`resolve-components` 自动从对应表展开所有 SKU
+  - **完整格式**：`{"giftSkus": [{"huohao": "...", "skuName": "...", "fixedAllocation": N}]}`，`resolve-components` 运行后自动写入
+  - `calculate` 自动读取，`cli.js gift-config add/list/clear` 辅助维护
+- `--cold-fixed 5` — 所有正常 SKU 保底件数（默认5），Phase M 从全量库存预扣，优先于赠品
 
 ## §5 ERP 接入（run-full 流程）
 
@@ -69,3 +75,4 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 - **店铺名不能设默认值**：2026-05-22 事故——resolve-components 默认 shop=澜泽，但数据是共途的，读了错误店铺对应表。修复：店铺名从 `supplierId → shop-map.js` 自动推导，推导失败时报错不静默
 - **新供应商接入第一步**：在 `aftersales-automation/lib/erp/shop-map.js` 对应条目补充 `supplierId` 字段
 - **mergeStock 场景**：旧的 KGOS 配置里有将两个 ERP 名合并到同一 displayName 的模式（如玉米片两种口味），动态目录不支持这种合并；如需合并，未来可在 resolve-components 后加一个手动配置覆盖步骤
+- **多项目 ERP 浏览器互扰**（2026-05-23 事故）：`aftersales-automation` 与 `sku-calculator` 共享同一 Chrome ERP tab，售后系统的 DOM 操作会破坏 resolve-components 的 Vue 状态（对应表`展开: 20/0`、档案V2 全量 `count=-1`）。跑 sku-calculator 前先停售后 server；失败后手动刷新对应表和档案V2两个页面

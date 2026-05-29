@@ -40,13 +40,12 @@ def main():
     from ultralytics import YOLO
 
     if args.resume:
-        # 找最近一次训练的 last.pt
-        run_dirs = sorted((project_root / "runs" / "detect").glob("train*"))
-        if not run_dirs:
-            print("找不到可恢复的训练，从头开始")
+        last_pt = project_root / "runs" / f"{args.brand}_{args.model}" / "weights" / "last.pt"
+        if not last_pt.exists():
+            print(f"找不到 {last_pt}，从头开始")
             model = YOLO(f"{args.model}.pt")
+            args.resume = False
         else:
-            last_pt = run_dirs[-1] / "weights" / "last.pt"
             print(f"从 {last_pt} 恢复训练")
             model = YOLO(str(last_pt))
     else:
@@ -68,7 +67,7 @@ def main():
 可以 Ctrl+C 中断，下次用 --resume 继续
 """)
 
-    model.train(
+    train_kwargs = dict(
         data=str(data_yaml),
         epochs=args.epochs,
         imgsz=640,
@@ -81,6 +80,9 @@ def main():
         exist_ok=True,
         verbose=True,
     )
+    if args.resume:
+        train_kwargs["resume"] = True
+    model.train(**train_kwargs)
 
     # 训练完成后导出 ONNX（用于生产推理）
     best_pt = project_root / "runs" / "detect" / f"{args.brand}_{args.model}" / "weights" / "best.pt"

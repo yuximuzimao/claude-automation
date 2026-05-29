@@ -8,6 +8,15 @@ Thumbs.db
 # 敏感数据（绝不上传）
 sessions/
 
+# 运行时数据 — aftersales 售后自动化
+aftersales-automation/data/
+
+# 运行时数据 — product-mapping 采集产物
+product-mapping/data/imgs/
+product-mapping/data/auto-match-log.json
+product-mapping/data/erp-session-cache.json
+product-mapping/data/.download-marker.json
+
 # 对话导出（大文件，非代码）
 _exports/
 
@@ -26,6 +35,19 @@ node_modules/
 # 日志
 *.log
 logs/
+
+# 模型权重（大文件，不进 git）
+*.pt
+*.pth
+*.onnx
+
+# Codex 内部文件（运行时缓存和状态）
+.codex/cache/
+.codex/log*/
+.codex/state*/
+.codex/sessions/
+.codex/shell_snapshots/
+.codex/tmp/
 
 # 截图/临时截图
 screenshots/

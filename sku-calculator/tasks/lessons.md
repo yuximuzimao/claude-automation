@@ -69,13 +69,46 @@ if (d.error) {
 
 **修复（三板斧）**：
 
-1. **供应商ID → 店铺名映射表** `data/supplier-shop-map.json`：持久化映射 `{ "42528": "杭州共途" }`，新供应商在此注册
+1. **供应商ID → 店铺名映射** 通过共享模块 `aftersales-automation/lib/erp/shop-map.js`（`getErpShopBySupplierId()`），新供应商在此注册 `supplierId` 字段
 2. **parse 步骤写 supplierId 到 `_meta`**：`parse-cart-adds.js` 取第一个非空 supplierId 写入 `_meta.supplierId`
-3. **resolve-components 自动推导店铺**：`getShopFromCartData()` 从 `cart-adds.json` 读 supplierId → 查映射表 → 得店铺名。映射表未覆盖时立即报错（而非静默用默认值），强制人工确认一次
-4. **反向验证硬门禁**：`matchedSkus < totalSkus` 时 `process.exit(1)`，列出所有未匹配 SKU，不给错误数据进入 calculate 的机会
+3. **resolve-components 自动推导店铺**：从 `cart-adds.json` 读 supplierId → 查共享 shop-map.js → 得店铺名。映射表未覆盖时立即报错
+4. **反向验证硬门禁**：`matchedSkus < totalSkus` 时 `process.exit(1)`，列出所有未匹配 SKU
 
 **铁律**：
-- 店铺名永远不设默认值——要么从映射表推导，要么 `--shop` 显式传入，要么报错
-- resolve-components 后反向验证：所有加购 SKU 必须全部匹配，否则中止流水线
-- 新供应商接入第一步：在 `supplier-shop-map.json` 注册映射
-- 大模型的角色：处理异常（如映射表未覆盖的新供应商）、审计最终结果、反向数据测试
+- 店铺名永远不设默认值——从 shop-map.js 推导、`--shop` 显式传入、或报错
+- 新供应商接入第一步：在 `aftersales-automation/lib/erp/shop-map.js` 注册 `supplierId`
+
+## L6 满赠货号自动展开 + 受限单品 80/20 + SKU保底预扣（2026-05-22 ~ 2026-05-23）
+
+**背景**：共途活动有 4 个满赠货号（0525zp1~4），每个 500 件。对应表显示 4 个货号共 13 个 SKU。但帆布袋（库存 1312）/冰霸杯（库存 1255）库存不足，赠品需求远超可用量，且旧算法赠品不足直接报错，或赠品吃光库存导致正常 SKU 分配到 0~4 件。
+
+**修复（三板斧）**：
+
+1. **货号自动展开**（`resolve-components.js`）：赠品配置只需填货号，运行后自动从 ERP 对应表查找该货号下所有 SKU（`corrAll` Map 查询 O(1)），生成完整配置写回 `gift-sku-config.json`。防重复展开（已含 skuName 的配置跳过）。
+
+2. **受限单品 80/20 分账**（`allocate.js` Phase G）：赠品最多占单品库存的 `stock × (1-reserve)`（默认 80%），超出时等比例缩减。提取 `reduceAllocs()` 通用迭代缩减逻辑（保底和赠品共用）。
+
+3. **Phase M SKU 保底预扣**（`allocate.js`）：每个正常 SKU 至少 `coldFixed` 件（默认 5），从全量库存预扣，优先级高于赠品。受限单品按比例缩减。
+
+**核心架构**：`Phase M（全量预扣 5 件） > Phase G（赠品 ≤ stock×80%） > reserve（剩余 ×80%） > Phase A-C`
+
+**关键实现细节**：
+- LRM 回填排序用 `invFloat % 1`（浮点余数），不能用 `invFloat - inv`——后者因 minInv 导致 inv 大于 invFloat，排序为负
+- intRem 仅扣 Phase A 分配量（`Math.floor(invFloat)`），minInv 已在 Phase M 预扣，不能重复
+
+## L7 多项目 ERP 浏览器互扰导致 resolve-components 全量失败（2026-05-23）
+
+**事故**：连续两次 `resolve-components` 失败，第一次 0/73 resolved（72 errors），第二次对应表返回 0 行。两次都在用户刷新页面后才恢复。
+
+**根因**：`aftersales-automation` server 进程持有同一 Chrome 的 ERP tab，两者共享 CDP target。售后系统的 DOM 操作导致 resolve-components 依赖的 Vue 组件状态被破坏：
+- 档案V2 的 `dataList` 在第一个查询后变为 unreachable（`count=-1`，Vue 组件消失）
+- 对应表页面被售后系统导航到其他页，`el-table__row` 数量归零
+
+**修复三板斧**：
+1. **跑 sku-calculator 前先停售后 server**：kill 掉 aftersales 进程，避免 CDP target 冲突
+2. **失败后刷新页面**：resolve-components 异常中止后，需在 Chrome 中手动刷新对应表和档案V2两个页面
+3. **禁止两个项目同时操作同一 ERP target**：这是根目录 CLAUDE.md 「禁止并行」规则的跨项目扩展
+
+**诊断信号**：
+- `展开: 20/0` → 对应表页面状态异常（表有分页但无数据行），刷新对应表页面
+- `dataList 为空 (count=-1)` 全量出现 → 档案V2 Vue 组件状态丢失，刷新档案V2页面

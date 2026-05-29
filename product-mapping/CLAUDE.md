@@ -18,7 +18,9 @@
 ```bash
 node cli.js match-one <货号> --shop <店铺> [--from 步骤]  # 单货号匹配（断点续跑）
 node cli.js match-batch --shop <店铺>                      # 批量匹配
-node cli.js check --shop <店铺>                            # 旧：扫描+标记
+node cli.js check --shop <店铺>                            # 完整核查流程（扫描+标记+下载图片+生成报告）
+node cli.js match --shop <店铺> [--limit N]                # 自动匹配（组合装套件+单品，异常停止）
+node cli.js verify-table                                   # 生成识图核对表 HTML（流程末尾人工兜底核对）
 node cli.js targets                                        # 检查浏览器连通性
 ```
 

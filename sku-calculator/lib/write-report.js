@@ -52,7 +52,13 @@ async function writeReport(allocResult, warehouseStock, outputPath) {
 
 async function buildMainSheet(wb, allocResult, warehouseStock, productCols) {
   const ws = wb.addWorksheet('库存分配');
-  const { skuDetails } = allocResult;
+  const { skuDetails: rawDetails } = allocResult;
+  // 按货号分组排序：非赠品在前（同货号连续排列），赠品在后
+  const normal = rawDetails.filter(s => !s.isGift).sort((a, b) =>
+    a.huohao.localeCompare(b.huohao) || a.skuName.localeCompare(b.skuName));
+  const gifts = rawDetails.filter(s => s.isGift).sort((a, b) =>
+    a.huohao.localeCompare(b.huohao) || a.skuName.localeCompare(b.skuName));
+  const skuDetails = [...normal, ...gifts];
 
   // ── 固定列：A=货号 B=主销售属性 C=建议库存 D=加购数 ──
   const FIXED_COLS = 4;

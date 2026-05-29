@@ -14,12 +14,12 @@
 | `cli.js` | CLI 入口，所有命令的分发 | 执行命令时 |
 | `lib/product-catalog.js` | 运行时产品目录读取（含 clearCache()） | 涉及单品名称时 |
 | `lib/parse-cart-adds.js` | 读鲸灵加购 Excel → JSON | 解析输入数据时 |
-| `lib/allocate.js` | 核心分配算法：Phase G赠品预扣 + 迭代"耗尽即锁定" + LRM回填 + cold保底 | 修改算法时 |
+| `lib/allocate.js` | 核心分配算法：Phase M保底预扣 + Phase G赠品80%上限 + 迭代"耗尽即锁定" + LRM回填 | 修改算法时 |
 | `lib/write-report.js` | 生成输出 xlsx | 修改报告格式时 |
-| `lib/resolve-components.js` | ERP 组合明细查询 + **动态生成 product-columns.json** | 接入 ERP 时 |
+| `lib/resolve-components.js` | ERP 组合明细查询 + **满赠货号自动展开** + 动态生成 product-columns.json | 接入 ERP 时 |
 | `lib/query-stock.js` | ERP 库存状态查询（依赖 product-columns.json 已生成） | 接入 ERP 时 |
 | `lib/validate-supplier.js` | 供应商ID校验（parse 后执行，不匹配即中止） | 使用 --supplier-id 参数时 |
-| `data/gift-sku-config.json` | 满赠SKU固定分配配置（手动编辑或通过 cli.js gift-config 命令维护） | 有赠品需求时 |
+| `data/gift-sku-config.json` | 满赠SKU配置（只需货号，resolve-components 自动展开为完整SKU列表） | 有赠品需求时 |
 | `../aftersales-automation/lib/erp/shop-map.js` | 供应商ID→ERP店铺名映射（共享模块，单一真相源） | 新增供应商时维护 |
 | `data/product-columns.json` | **运行时生成**（resolve-components 写出，不手动维护） | 调试单品映射时 |
 | `data/sku-components.json` | 组合明细（运行时生成） | 查询/调试时 |

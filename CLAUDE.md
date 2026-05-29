@@ -77,7 +77,7 @@ How to apply:
 1. 代码验证通过后立即 commit + push，不攒到 session 结束
 2. commit 只含代码文件，排除运行时数据（`data/` 下的 JSON/jsonl、日志文件）
 3. 禁止 force push，禁止修改已 push 的 commit
-4. commit 格式：`<type>(<scope>): <描述>`（type: fix/feat/refactor/docs, scope: aftersales/product-mapping/workspace）
+4. commit 格式：`<type>(<scope>): <描述>`（type: fix/feat/refactor/docs, scope: aftersales/product-mapping/transfer/workspace）
 5. NEVER 提交：`data/` · `*.log` · `_sandbox/` · `_exports/` · `.server.lock`
 
 ## SKILL.md 同步铁律
@@ -87,9 +87,16 @@ How to apply:
 
 ## 目录约定
 
-- 根目录只放子项目文件夹，`.txt` / 截图 / 临时脚本一律归属对应目录
+- 根目录：`CLAUDE.md`（Claude Code 项目规则）、`AGENTS.md`（Codex CLI 入口规则）、子项目文件夹。`.txt` / 截图 / 临时脚本一律归属对应目录
 - 新子项目第一步写 CLAUDE.md
 - 临时产出放 `_sandbox/`（30 天后还有用→memory 或 docs/，没用→删）
+- `docs/HANDOFF.md`：跨 agent 交接文件，工作区脏或跨 session 未完成时写入；已验证完成的以 git commit 为准
+
+## Codex 协作
+
+- Codex CLI 与本工作区并行使用，`AGENTS.md` 为其入口规则
+- 分工：Claude Code 主驾驶（业务操作+写操作），Codex 审查/救援/补测试/风险挑战
+- 交接：`docs/HANDOFF.md` + git commit 双重握手，启动后先读 HANDOFF.md + git status
 
 ## 新项目开工
 

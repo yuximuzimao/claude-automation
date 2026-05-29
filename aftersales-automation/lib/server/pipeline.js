@@ -14,7 +14,7 @@ const sse = require('./sse');
 const { inferDecision } = require('../infer');
 const { inferWithAI } = require('../ai-infer');
 const { RETURN_KEYWORDS, getHoursUntilNextScan } = require('../constants');
-const { extractShippedTrackings } = require('../helpers');
+const { extractShippedTrackings, createReminder } = require('../helpers');
 
 const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
@@ -272,6 +272,35 @@ async function processOne(queueItem, options = {}) {
     db.updateQueueItem(queueItemId, { status: 'done', hint: hint || null });
     sse.broadcast('pipeline-update', { stage: 'done', workOrderNum });
     log(`[${workOrderNum}] 自动归档 → ${decision.reason}`);
+    return;
+  }
+
+  // 工单取消 → 等待人工归档，创建提醒取消拦截
+  if (decision.action === 'wait_archive') {
+    db.updateSimulation(sim.id, { decision, hint: hint || null });
+    db.updateQueueItem(queueItemId, { status: 'simulated', hint: hint || null });
+    sse.broadcast('pipeline-update', { stage: 'simulated', workOrderNum });
+
+    // 创建 Mac 提醒
+    const remindTitle = `[${workOrderNum}] 客户取消退款，请确认并取消快递拦截后归档`;
+    try {
+      const ok = createReminder(remindTitle);
+      log(`[${workOrderNum}] ${ok ? '已创建提醒' : 'Reminders 失败已降级通知'}: ${remindTitle}`);
+    } catch (e) { log(`[${workOrderNum}] 创建提醒失败: ${e.message}`); }
+
+    // 清理关联的拦截记录
+    try {
+      const cd = sim.collectedData || {};
+      const allShipTrackings = extractShippedTrackings(cd);
+      allShipTrackings.forEach(t => {
+        if (db.hasIntercept(t)) {
+          db.removeIntercept(t);
+          log(`[${workOrderNum}] 工单取消，已清理拦截: ${t}`);
+        }
+      });
+    } catch (e) { log(`[${workOrderNum}] cancel-intercept-cleanup 失败: ${e.message}`); }
+
+    log(`[${workOrderNum}] 等待归档 → ${decision.reason}`);
     return;
   }
 
