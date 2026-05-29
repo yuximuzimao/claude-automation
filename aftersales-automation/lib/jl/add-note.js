@@ -73,7 +73,7 @@ async function addNote(targetId, workOrderNum, text) {
     await retry(async () => {
       const step1 = await cdp.eval(targetId, makeClickNoteButtonJS(workOrderNum));
       if (step1.error) throw new Error(`Step1: ${step1.error}`);
-    }, { maxRetries: 3, delayMs: 1500, label: `add-note-step1 ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1500, label: `add-note-step1 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(1500);
 
     // Step 2
@@ -81,14 +81,14 @@ async function addNote(targetId, workOrderNum, text) {
       const step2 = await cdp.eval(targetId, makeFillTextareaJS(text));
       if (step2.error) throw new Error(`Step2: ${step2.error}`);
       if (!step2.filled) throw new Error('Step2: 填写备注失败，textarea 为空');
-    }, { maxRetries: 3, delayMs: 1000, label: `add-note-step2 ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1000, label: `add-note-step2 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(800);
 
     // Step 3
     await retry(async () => {
       const step3 = await cdp.eval(targetId, SUBMIT_NOTE_JS);
       if (step3.error) throw new Error(`Step3: ${step3.error}`);
-    }, { maxRetries: 3, delayMs: 1000, label: `add-note-step3 ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1000, label: `add-note-step3 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(2000);
     return ok({ workOrderNum, note: text });
   } catch (e) {

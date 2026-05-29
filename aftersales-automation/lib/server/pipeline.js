@@ -19,7 +19,57 @@ const { extractShippedTrackings } = require('../helpers');
 const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
 const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
+const CIRCUIT_BREAKER_FILE = path.join(BASE, 'data/circuit-breaker.json');
 const SESSION_TTL_MS = 10 * 60 * 1000;
+
+// ── 风控熔断器（持久化到磁盘，重启不丢失）───────────────────
+let circuitBreakerTripped = false;
+let circuitBreakerReason = '';
+
+function readCircuitBreaker() {
+  try {
+    const raw = require('fs').readFileSync(CIRCUIT_BREAKER_FILE, 'utf8');
+    const data = JSON.parse(raw);
+    if (data && data.tripped) {
+      circuitBreakerTripped = true;
+      circuitBreakerReason = data.reason || '未知';
+      log(`[熔断] 启动时检测到持久化熔断状态: ${circuitBreakerReason}`);
+    }
+  } catch { /* 文件不存在则视为未熔断 */ }
+}
+
+function writeCircuitBreaker(error, label) {
+  const data = {
+    tripped: true,
+    reason: (error && error.message) || '未知风控错误',
+    trippedAt: new Date().toISOString(),
+    trippedBy: label || 'unknown',
+  };
+  try { require('fs').writeFileSync(CIRCUIT_BREAKER_FILE, JSON.stringify(data, null, 2)); } catch {}
+}
+
+function clearCircuitBreaker() {
+  circuitBreakerTripped = false;
+  circuitBreakerReason = '';
+  try { require('fs').unlinkSync(CIRCUIT_BREAKER_FILE); } catch {}
+}
+
+// 启动时读取持久化熔断状态
+readCircuitBreaker();
+
+// 注册全局熔断函数（供 wait.js 就地调用）
+globalThis.__tripCircuitBreaker = function (error, label) {
+  if (circuitBreakerTripped) return;  // 已熔断，不重复写入
+  writeCircuitBreaker(error, label);
+  circuitBreakerTripped = true;
+  circuitBreakerReason = (error && error.message) || '未知风控错误';
+  log(`[熔断] 触发！${circuitBreakerReason} (${label})`);
+  sse.broadcast('circuit-breaker-tripped', {
+    reason: circuitBreakerReason,
+    trippedBy: label,
+    trippedAt: new Date().toISOString(),
+  });
+};
 function isSameSession(accountNum) {
   try {
     const s = JSON.parse(require('fs').readFileSync(SESSION_STATE_FILE, 'utf8'));
@@ -76,6 +126,13 @@ function getPendingItems(mode) {
 async function processOne(queueItem, options = {}) {
   const { hint } = options;
   const { workOrderNum, accountNum, id: queueItemId } = queueItem;
+
+  // ── 风控熔断检查：已熔断则拒绝所有鲸灵任务 ─────────────────
+  if (circuitBreakerTripped) {
+    log(`[${workOrderNum}] 跳过 → 风控熔断中: ${circuitBreakerReason}`);
+    sse.broadcast('pipeline-update', { stage: 'circuit_breaker', workOrderNum, reason: circuitBreakerReason });
+    return;
+  }
 
   // ── 采集 ─────────────────────────────────────────────────────────
   // 注意：不在这里改状态，让 collect.js 自己把 pending→collecting→collected
@@ -273,6 +330,11 @@ async function runPipeline(mode = 'live') {
     const items = getPendingItems(mode);
     log(`待处理 ${items.length} 张`);
     for (const item of items) {
+		// 熔断后停止接受新任务，已在途任务自然结束
+		if (circuitBreakerTripped) {
+			log(`熔断中，停止处理剩余 ${items.length - items.indexOf(item)} 张工单`);
+			break;
+		}
       await processOne(item);
     }
     sse.broadcast('pipeline-update', { stage: 'done', mode, count: items.length });
@@ -288,6 +350,13 @@ async function reprocessOne(queueItemId, hint = '') {
   const queue = db.readQueue();
   const queueItem = (queue.items || []).find(i => i.id === queueItemId);
   if (!queueItem) throw new Error('未找到队列项');
+
+  // 风控熔断检查
+  if (circuitBreakerTripped) {
+    log(`[${queueItem.workOrderNum}] 跳过重处理 → 风控熔断中: ${circuitBreakerReason}`);
+    sse.broadcast('pipeline-update', { stage: 'circuit_breaker', workOrderNum: queueItem.workOrderNum, reason: circuitBreakerReason });
+    return;
+  }
 
   // 已执行完成的工单不再重处理（防止平台已退款后重复操作）
   if (['auto_executed', 'done'].includes(queueItem.status)) {
@@ -311,4 +380,4 @@ async function reprocessOne(queueItemId, hint = '') {
   await processOne(queueItem, { hint });
 }
 
-module.exports = { runPipeline, reprocessOne };
+module.exports = { runPipeline, reprocessOne, clearCircuitBreaker, isCircuitBreakerTripped: () => circuitBreakerTripped };

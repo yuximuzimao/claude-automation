@@ -26,6 +26,7 @@
 - ERP 命令必须 `&&` 串行，禁止 `&` 并行
 - 赠品子订单号禁止推算，必须从 `giftSubBizOrderDetailDTO.subBizOrderId` 读取
 - 截图只用于上传凭证，禁止截图判断操作结果
+- 鲸灵行为操作报错即停（maxRetries=0，域名自动识别）；被动等待（导航）最多重试 1 次（共执行 2 次）。风控信号 → 全局熔断持久化到 `data/circuit-breaker.json`，需人工 `node cli.js reset-circuit`
 
 ## 相关项目
 

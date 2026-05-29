@@ -99,13 +99,13 @@ async function approveTicket(targetId, workOrderNum) {
     await retry(async () => {
       const step1 = await cdp.eval(targetId, CLICK_APPROVE_JS);
       if (step1.error) throw new Error(`点同意退款: ${step1.error}`);
-    }, { maxRetries: 3, delayMs: 1500, label: `approve-step1 ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1500, label: `approve-step1 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(1500);
 
     await retry(async () => {
       const step2 = await cdp.eval(targetId, CLICK_CONFIRM_JS);
       if (step2.error) throw new Error(`点确认同意退款: ${step2.error}`);
-    }, { maxRetries: 3, delayMs: 1500, label: `approve-step2 ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1500, label: `approve-step2 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(2000);
 
     // 处理「已发货风险提示」弹窗（出现则点确认，不出现则跳过）

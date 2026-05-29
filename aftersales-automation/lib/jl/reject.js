@@ -218,7 +218,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
       await retry(async () => {
         const openRes = await cdp.eval(targetId, OPEN_LOGISTICS_JS);
         if (openRes.error) throw new Error(`打开物流弹窗: ${openRes.error}`);
-      }, { maxRetries: 3, delayMs: 1500, label: `reject-open-logistics ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 1500, label: `reject-open-logistics ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
       await sleep(2500);
 
       // 多包裹时切换到对应 tab
@@ -226,7 +226,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
         await retry(async () => {
           const tabRes = await cdp.eval(targetId, makeClickLogisticsTabJS(packageTab));
           if (tabRes.error) throw new Error(tabRes.error);
-        }, { maxRetries: 3, delayMs: 1000, label: `reject-tab ${packageTab}` });
+        }, { maxRetries: 3, delayMs: 1000, label: `reject-tab ${packageTab}`, domain: 'scrm.jlsupp.com' });
         await sleep(1500);
       }
 
@@ -235,7 +235,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
         const r = await cdp.eval(targetId, GET_DIALOG_RECT_JS);
         if (r.error) throw new Error(`获取弹窗坐标: ${r.error}`);
         return r;
-      }, { maxRetries: 3, delayMs: 1000, label: `reject-dialog-rect ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 1000, label: `reject-dialog-rect ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
 
       // 截图并裁剪
       const cropPath = await screenshotDialog(targetId, rect);
@@ -247,14 +247,14 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
         await sleep(800);
         const checkRes = await cdp.eval(targetId, CHECK_DIALOG_CLOSED_JS);
         if (!checkRes.closed) throw new Error('物流弹窗未关闭');
-      }, { maxRetries: 3, delayMs: 1000, label: `reject-close-dialog ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 1000, label: `reject-close-dialog ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
       await sleep(800);
 
       // 上传图片（带重试）
       imgUrl = await retry(async () => {
         const cookie = await cdp.eval(targetId, GET_COOKIES_JS);
         return uploadImage(cookie, cropPath);
-      }, { maxRetries: 3, delayMs: 2000, label: `reject-upload-image ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 2000, label: `reject-upload-image ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     }
 
     // ── Step 2: 打开拒绝表单 ─────────────────────────────────────
@@ -270,7 +270,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
       await retry(async () => {
         const rejectRes = await cdp.eval(targetId, CLICK_REJECT_BTN_JS);
         if (rejectRes.error) throw new Error(`点拒绝退款: ${rejectRes.error}`);
-      }, { maxRetries: 3, delayMs: 1500, label: `reject-open-form ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 1500, label: `reject-open-form ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
       await sleep(2000);
     }
 
@@ -284,7 +284,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
         // 验证下拉确实展开了
         const checkRes = await cdp.eval(targetId, CHECK_SELECT_OPEN_JS);
         if (!checkRes.open) throw new Error(`下拉未展开，可用选项: ${(checkRes.allOptions || []).join('|')}`);
-      }, { maxRetries: 3, delayMs: 1000, label: `reject-open-select ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 1000, label: `reject-open-select ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
 
       await retry(async () => {
         const clickOptRes = await cdp.eval(targetId, makeClickReasonOptionJS(reason));
@@ -293,7 +293,7 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
           const fallbackRes = await cdp.eval(targetId, makeClickReasonOptionJS('其他'));
           if (fallbackRes.error) throw new Error(`选拒绝原因: ${clickOptRes.error}，可用: ${reason}`);
         }
-      }, { maxRetries: 3, delayMs: 800, label: `reject-select-reason ${workOrderNum}` });
+      }, { maxRetries: 3, delayMs: 800, label: `reject-select-reason ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
       await sleep(800);
     }
     // 若无下拉框则跳过，直接填详细原因
@@ -302,21 +302,21 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
     await retry(async () => {
       const fillRes = await cdp.eval(targetId, makeFillRejectDetailJS(detail));
       if (fillRes.error) throw new Error(`填详细原因: ${fillRes.error}`);
-    }, { maxRetries: 3, delayMs: 1000, label: `reject-fill-detail ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1000, label: `reject-fill-detail ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(500);
 
     // ── Step 5: 注入凭证图片 URL ─────────────────────────────────
     await retry(async () => {
       const injectRes = await cdp.eval(targetId, makeInjectImageJS(imgUrl));
       if (injectRes.error) throw new Error(`注入图片: ${injectRes.error}`);
-    }, { maxRetries: 3, delayMs: 1000, label: `reject-inject-image ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1000, label: `reject-inject-image ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(800);
 
     // ── Step 6: 确认拒绝 ─────────────────────────────────────────
     await retry(async () => {
       const confirmRes = await cdp.eval(targetId, CLICK_CONFIRM_REJECT_JS);
       if (confirmRes.error) throw new Error(`确认拒绝退款: ${confirmRes.error}`);
-    }, { maxRetries: 3, delayMs: 1500, label: `reject-confirm ${workOrderNum}` });
+    }, { maxRetries: 3, delayMs: 1500, label: `reject-confirm ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(3000);
 
     return ok({ workOrderNum, rejected: true, reason, imageUrl: imgUrl });

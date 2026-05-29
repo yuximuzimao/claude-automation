@@ -12,6 +12,18 @@
 - **querySelector 必须过滤可见元素**：ERP 页面常有同 selector 的隐藏 0×0 元素排在 DOM 前面。必须用 `querySelectorAll` + `getBoundingClientRect().width>0 && height>0` 取第一个可见元素，不能用 `querySelector` 直接取
 - **禁止 DOM 移除 Element UI 弹窗**：`parentNode.removeChild()` 移除 `.el-dialog__wrapper` 后 Vue `dialogVisible` 仍为 true，下次触发被 Vue 跳过。必须用 `btn.click()` 走 Vue 关闭流程，再轮询等 `display:none`
 
+## 鲸灵页面操作铁律（风控红线，违者必封IP）
+
+**所有操作 scrm.jlsupp.com 的代码，报错即停，绝对不重试第二次。**
+
+Why: 鲸灵风控将重复失败操作识别为自动化攻击。mimo 模型两次触发 IP 封禁（2026-05-28 并发创建 tab + 2026-05-29 操作报错后重试）。单次失败不封，自动重试会封。根因认知：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。
+
+How to apply:
+- `wait.js` 已内置域名自动识别（`FORCE_NO_RETRY_DOMAINS`），新代码传 `domain` 参数即可
+- 行为操作（点击/提交/填写）：maxRetries 强制为 0（域名自动识别）
+- 被动等待（导航/DOM ready）：最多重试 1 次（共执行 2 次），不传 domain
+- 检测到风控信号 → 就地熔断 + 写入磁盘 `data/circuit-breaker.json`（重启不丢失），需人工 `node cli.js reset-circuit`
+
 ## 跨项目共享知识
 
 `aftersales-automation/` 和 `product-mapping/` 操作同一套系统：

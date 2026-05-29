@@ -21,6 +21,7 @@ const USAGE = `
   add-note <工单号> <备注内容>      添加内部备注
   remind <工单号> <账号名> <原因>   创建Mac提醒事项（人工上报用）
   logistics <工单号>               读物流信息
+  reset-circuit                      清除风控熔断状态（人工确认后执行）
 
 ERP命令:
   erp-nav <页面名>                  导航（订单管理/售后工单新版/商品档案V2/商品对应表）
@@ -213,6 +214,16 @@ async function main() {
         if (!args[1]) throw new Error('缺少规格商家编码');
         const { productArchive } = require('./lib/product/archive');
         result = await productArchive(erpId, args[1]);
+        break;
+      }
+      case 'reset-circuit': {
+        const { clearCircuitBreaker, isCircuitBreakerTripped } = require('./lib/server/pipeline');
+        if (isCircuitBreakerTripped()) {
+          clearCircuitBreaker();
+          result = ok({ reset: true, message: '风控熔断状态已清除，鲸灵任务队列已恢复' });
+        } else {
+          result = ok({ reset: false, message: '熔断器未触发，无需清除' });
+        }
         break;
       }
       default:

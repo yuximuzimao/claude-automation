@@ -34,7 +34,7 @@ async function navigate(targetId, path, query) {
       const qv = Object.values(query)[0];
       if (!url.includes(qv)) throw new Error(`导航成功但 query 不匹配: ${url}`);
     }
-  }, { maxRetries: 2, delayMs: 2000, label: `navigate to ${path}` });
+  }, { maxRetries: 1, delayMs: 2000, label: `navigate to ${path}` });
 }
 
 module.exports = { navigate };
