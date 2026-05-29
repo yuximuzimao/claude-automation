@@ -14,7 +14,8 @@
   "file": "docs/codex-handoff/product-mapping-review-plan.md",
   "summary": "品牌数据重构方案 — 图片迁移与目录整理",
   "from": "codex",
-  "timestamp": "2026-05-29T23:00:00+08:00"
+  "timestamp": "2026-05-29T23:00:00+08:00",
+  "status": "unread"
 }
 ```
 3. 告诉用户："可以让 Claude Code 查看 `docs/codex-handoff/` 里的协作请求"
