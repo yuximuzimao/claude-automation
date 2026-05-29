@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核对工具 — 洛克王国</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --bg: #f5f5f7;
+  --card: #fff;
+  --border: #e0e0e0;
+  --primary: #2563eb;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --green: #16a34a;
+  --green-bg: #dcfce7;
+  --yellow-bg: #fef9c3;
+  --gray: #6b7280;
+  --gray-bg: #f3f4f6;
+  --text: #111827;
+  --text2: #6b7280;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Top bar ─── */
+#topbar {
+  flex-shrink: 0;
+  background: #1e293b;
+  color: #e2e8f0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+  font-size: 13px;
+}
+.tab-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all .15s;
+}
+.tab-btn.active { background: #334155; color: #f1f5f9; border-color: #475569; }
+.tab-btn:hover:not(.active) { color: #e2e8f0; }
+.topbar-spacer { flex: 1; }
+.stat-pill { font-size: 12px; color: #94a3b8; padding: 0 6px; }
+.stat-pill span { color: #f1f5f9; font-weight: 600; }
+.btn-top {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-save { background: #16a34a; color: #fff; }
+.btn-save:hover { background: #15803d; }
+.btn-export { background: var(--primary); color: #fff; }
+.btn-export:hover { background: #1d4ed8; }
+#save-msg { font-size: 11px; color: #64748b; min-width: 60px; }
+
+/* ─── Page layout ─── */
+#page {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ─── Left sidebar (search + list) ─── */
+#sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#sidebar-search {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+#search-input {
+  width: 100%;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font);
+  outline: none;
+}
+#search-input:focus { border-color: var(--primary); }
+#filter-row {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+}
+.flt {
+  flex: 1;
+  padding: 4px 2px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font);
+}
+.flt.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+#pet-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+.pet-item {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-left: 3px solid transparent;
+  transition: all .1s;
+}
+.pet-item:hover { background: var(--gray-bg); }
+.pet-item.active { background: #eff6ff; border-left-color: var(--primary); }
+.pet-item .pi-num { color: var(--text2); font-size: 10px; min-width: 30px; }
+.pet-item .pi-name { flex: 1; }
+.pi-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.pi-dot.has-issue { background: var(--red); }
+.pi-dot.has-ann { background: var(--primary); }
+.pi-dot.none { background: transparent; }
+
+/* ─── Main scroll area ─── */
+#main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* ─── Pet card ─── */
+.pet-card {
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  overflow: hidden;
+  scroll-margin-top: 16px;
+}
+.pet-card-header {
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pet-card-num { font-size: 11px; color: var(--text2); min-width: 28px; }
+.pet-card-name { font-size: 16px; font-weight: 700; }
+.pet-card-element { font-size: 11px; color: var(--text2); }
+.tag-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
+.tag-chromatic { background: #fef3c7; color: #92400e; }
+.tag-shiny { background: #fdf4ff; color: #7e22ce; }
+.tag-boss { background: var(--red-bg); color: var(--red); }
+.tag-destined { background: #eff6ff; color: #1e40af; }
+.tag-fruit { background: #f0fdf4; color: #166534; }
+.tag-add {
+  background: #fff;
+  border: 1px dashed var(--border);
+  color: var(--text2);
+  cursor: pointer;
+  font-family: var(--font);
+}
+.tag-add:hover { border-color: var(--primary); color: var(--primary); background: #eff6ff; }
+.tag-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 9px;
+  padding: 0 1px;
+  margin-left: 2px;
+  color: inherit;
+  opacity: .7;
+  font-family: var(--font);
+}
+.tag-x:hover { opacity: 1; }
+
+.pet-card-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 12px; }
+
+/* ── Info section (forms) ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  margin-bottom: 6px;
+}
+.forms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.form-chip {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: var(--gray-bg);
+  border: 1px solid var(--border);
+}
+.form-chip.basic { background: #eff6ff; border-color: #bfdbfe; }
+.form-chip.todo { border-style: dashed; color: var(--text2); }
+
+/* ── Tasks section ── */
+.task-list { display: flex; flex-direction: column; gap: 3px; }
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--gray-bg);
+  font-size: 12px;
+}
+.task-row:hover { background: #e5e7eb; }
+.task-row:hover .task-acts { opacity: 1; }
+.task-row.deleted { background: var(--red-bg); text-decoration: line-through; color: var(--red); opacity: .7; }
+.task-row.patched { background: var(--yellow-bg); }
+.task-row.added-row { background: var(--green-bg); border: 1px solid #86efac; }
+.ttype {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 500;
+  min-width: 52px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.tdesc { flex: 1; min-width: 0; }
+.task-acts { display: flex; gap: 4px; opacity: 0; transition: opacity .1s; }
+.btn-sm {
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-del { color: var(--red); border-color: #fca5a5; }
+.btn-del:hover { background: var(--red-bg); }
+.btn-del.on { background: var(--red); color: #fff; border-color: var(--red); }
+.btn-edt { color: var(--primary); border-color: #93c5fd; }
+.btn-edt:hover { background: #eff6ff; }
+
+/* ── Issues ── */
+.issue-list { display: flex; flex-direction: column; gap: 3px; }
+.issue-row {
+  padding: 5px 9px;
+  background: var(--red-bg);
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--red);
+  display: flex;
+  gap: 6px;
+}
+
+/* ── Pet footer ── */
+.pet-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+.btn-add-task {
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px dashed var(--primary);
+  background: #eff6ff;
+  color: var(--primary);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-add-task:hover { background: #dbeafe; }
+.btn-mark-ok {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text2);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-mark-ok.ok { background: var(--green-bg); color: var(--green); border-color: #86efac; }
+
+/* ─── Chain page ─── */
+#chain-page { display: none; flex: 1; overflow-y: auto; padding: 16px; }
+.chain-card {
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  padding: 14px 16px;
+}
+.chain-id { font-size: 11px; color: var(--text2); margin-bottom: 8px; }
+.chain-flow {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.chain-node {
+  display: flex;
+  align-items: center;
+}
+.chain-pet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 70px;
+}
+.chain-pet-num { font-size: 10px; color: var(--text2); }
+.chain-pet-name { font-size: 13px; font-weight: 600; }
+.chain-pet-tags { display: flex; gap: 3px; }
+.chain-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--text2);
+  font-size: 11px;
+  gap: 2px;
+}
+.chain-arrow .arrow-line { font-size: 16px; line-height: 1; }
+.chain-arrow .arrow-cond {
+  font-size: 10px;
+  color: #1d4ed8;
+  background: #eff6ff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: 120px;
+  text-align: center;
+}
+.chain-branch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chain-branch-row {
+  display: flex;
+  align-items: center;
+}
+.chain-card.has-issue { border-color: #fca5a5; }
+.chain-issue {
+  margin-top: 8px;
+  padding: 4px 9px;
+  background: var(--red-bg);
+  border-radius: 5px;
+  font-size: 11px;
+  color: var(--red);
+}
+
+/* ─── Modal ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #fff;
+  border-radius: 12px;
+  width: 500px;
+  max-width: 95vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  overflow: hidden;
+}
+.modal-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-head h3 { font-size: 14px; font-weight: 600; }
+.modal-x { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray); line-height: 1; }
+.modal-x:hover { color: var(--text); }
+.modal-body { padding: 14px 18px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.fg label { display: block; font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .3px; }
+.fg input, .fg select, .fg textarea {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font);
+  outline: none;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--primary); }
+.fg textarea { font-family: 'SF Mono', monospace; font-size: 11px; min-height: 110px; resize: vertical; }
+.fg-row { display: flex; gap: 8px; }
+.fg-row .fg { flex: 1; }
+.divider-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; color: var(--text2);
+}
+.divider-label::before, .divider-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.json-err { font-size: 10px; color: var(--red); min-height: 14px; }
+.modal-foot {
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.btn-cancel {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-cancel:hover { background: var(--gray-bg); }
+.btn-confirm {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-confirm:hover { background: #1d4ed8; }
+
+/* Template buttons */
+.tpl-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+.tpl-btn {
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.tpl-btn:hover { background: var(--gray-bg); }
+.tpl-btn.sel { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+#loading { text-align: center; color: var(--gray); padding: 60px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div id="topbar">
+  <button class="tab-btn active" id="tab-pets" onclick="switchTab('pets')">精灵核对</button>
+  <button class="tab-btn" id="tab-chains" onclick="switchTab('chains')">进化链核对</button>
+  <div class="topbar-spacer"></div>
+  <div class="stat-pill">精灵 <span id="s-total">–</span></div>
+  <div class="stat-pill">异常 <span id="s-issues" style="color:#f87171">–</span></div>
+  <div class="stat-pill">标注 <span id="s-ops">0</span></div>
+  <span id="save-msg"></span>
+  <button class="btn-top btn-save" onclick="saveToServer()">保存</button>
+  <button class="btn-top btn-export" onclick="exportJSON()">导出</button>
+</div>
+
+<!-- Page -->
+<div id="page">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div id="sidebar-search"><input id="search-input" placeholder="搜索名称…" oninput="renderSidebar()"></div>
+    <div id="filter-row">
+      <button class="flt active" data-f="all" onclick="setFilter('all')">全部</button>
+      <button class="flt" data-f="issues" onclick="setFilter('issues')">异常</button>
+      <button class="flt" data-f="ann" onclick="setFilter('ann')">已标注</button>
+    </div>
+    <div id="pet-list"></div>
+  </div>
+
+  <!-- Pet page -->
+  <div id="main"><div id="loading">加载中…</div></div>
+
+  <!-- Chain page -->
+  <div id="chain-page"></div>
+</div>
+
+<!-- Edit modal -->
+<div class="modal-overlay" id="edit-overlay" onclick="closeEditModal(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="edit-title">修改任务</h3>
+      <button class="modal-x" onclick="closeEditModalDirect()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg-row">
+        <div class="fg">
+          <label>任务类型</label>
+          <select id="e-type" onchange="onEditTypeChange()">
+            <option value="capture">capture 捕捉</option>
+            <option value="capture_gifted">capture_gifted 天分捕捉</option>
+            <option value="capture_chromatic">capture_chromatic 炫彩捕捉</option>
+            <option value="fruit">fruit 果实</option>
+            <option value="skill">skill 技能</option>
+            <option value="evolve">evolve 进化</option>
+            <option value="leader_evolve">leader_evolve 首领进化</option>
+            <option value="destined_hero">destined_hero 命定勇者</option>
+            <option value="affection">affection 亲密度</option>
+            <option value="confirm_forms">confirm_forms 样子确认</option>
+          </select>
+        </div>
+        <div class="fg" id="e-count-wrap" style="display:none">
+          <label>数量/次数</label>
+          <input id="e-count" type="number" min="1" max="999" value="1" oninput="syncQuickFields()">
+        </div>
+      </div>
+      <div class="fg" id="e-skill-wrap" style="display:none">
+        <label>技能名称</label>
+        <input id="e-skill" type="text" list="skill-dl" placeholder="例：火花" oninput="syncQuickFields()">
+        <datalist id="skill-dl"></datalist>
+      </div>
+      <div class="divider-label">JSON 编辑区（保存以此为准）</div>
+      <div class="fg">
+        <textarea id="e-json"></textarea>
+        <div class="json-err" id="e-err"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeEditModalDirect()">取消</button>
+      <button class="btn-confirm" onclick="saveEdit()">保存修改</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add modal -->
+<div class="modal-overlay" id="add-overlay" onclick="closeAddModal(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="add-title">添加任务</h3>
+      <button class="modal-x" onclick="closeAddModalDirect()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg">
+        <label>选择类型</label>
+        <div class="tpl-grid" id="tpl-grid"></div>
+      </div>
+      <div class="fg" id="add-json-wrap" style="display:none">
+        <div class="divider-label">JSON 编辑区</div>
+        <textarea id="a-json" style="font-family:monospace;font-size:11px;min-height:110px;resize:vertical;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;outline:none;"></textarea>
+        <div class="json-err" id="a-err"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeAddModalDirect()">取消</button>
+      <button class="btn-confirm" id="add-confirm" onclick="saveAdd()" disabled style="opacity:.5;cursor:not-allowed">添加</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════
+// STATE
+// ═══════════════════════════════
+let pets = {}, tasks = {}, chains = [];
+let derived = {}; // petId -> { position, chainId, issues[] }
+let petOrder = []; // sorted pet ids
+let ops = [];
+let reviewedPets = new Set();
+let currentFilter = 'all';
+let currentTab = 'pets';
+let editCtx = null;
+let addCtx = null;
+const SKILL_NAMES = new Set();
+
+const TASK_TYPES = [
+  { v:'capture', l:'capture 捕捉', tpl:{type:'capture',desc:'捕捉1只'} },
+  { v:'capture_gifted', l:'capture_gifted 天分', tpl:{type:'capture_gifted',desc:'捕捉1只了不起天分的'} },
+  { v:'capture_chromatic', l:'capture_chromatic 炫彩', tpl:{type:'capture_chromatic',desc:'捕捉1只炫彩突变的'} },
+  { v:'evolve', l:'evolve 进化', tpl:{type:'evolve',desc:'成功进化一次'} },
+  { v:'leader_evolve', l:'leader_evolve 首领', tpl:{type:'leader_evolve',desc:'进化为首领形态'} },
+  { v:'destined_hero', l:'destined_hero 命定', tpl:{type:'destined_hero',desc:'获得命定勇者奖牌'} },
+  { v:'fruit', l:'fruit 果实', tpl:{type:'fruit',desc:'捕捉20只',count:20} },
+  { v:'skill', l:'skill 技能', tpl:{type:'skill',desc:'使用',skillName:'',count:1} },
+  { v:'affection', l:'affection 亲密度', tpl:{type:'affection',desc:'亲密度达到5级',count:5} },
+  { v:'confirm_forms', l:'confirm_forms 样子', tpl:{type:'confirm_forms',desc:'确认3种不同样子的',count:3} },
+];
+
+// ═══════════════════════════════
+// LOAD
+// ═══════════════════════════════
+async function loadData() {
+  try {
+    const [p,t,c] = await Promise.all([
+      fetch('/api/pets').then(r=>r.json()),
+      fetch('/api/tasks').then(r=>r.json()),
+      fetch('/api/evolution-chains').then(r=>r.json()),
+    ]);
+    pets = p; tasks = t; chains = c;
+
+    // skill datalist
+    Object.values(tasks).forEach(arr => arr.forEach(tk => { if(tk.skillName) SKILL_NAMES.add(tk.skillName); }));
+    const dl = document.getElementById('skill-dl');
+    SKILL_NAMES.forEach(s => { const o=document.createElement('option'); o.value=s; dl.appendChild(o); });
+
+    buildDerived();
+    await restoreState();
+    renderAll();
+  } catch(e) {
+    document.getElementById('loading').textContent = '加载失败: '+e.message;
+  }
+}
+
+// ═══════════════════════════════
+// BUILD DERIVED
+// ═══════════════════════════════
+function buildDerived() {
+  // pet numeric sort
+  petOrder = Object.keys(pets).sort((a,b) => {
+    const na = parseInt(a.replace('pet_','')||0);
+    const nb = parseInt(b.replace('pet_','')||0);
+    return na - nb;
+  });
+
+  // Build position map from chains
+  const pos = {}; // petId -> position
+  const petChain = {}; // petId -> chainId
+
+  chains.forEach(chain => {
+    const cid = chain.chainId;
+    const nodes = chain.nodes;
+    const ids = Object.keys(nodes);
+
+    // Detect self-cycles
+    ids.forEach(pid => {
+      if ((nodes[pid].evolvesTo||[]).some(e => e.toSpeciesId === pid)) {
+        pos[pid] = pos[pid] || 'standalone';
+        derived[pid] = derived[pid] || {};
+        derived[pid].selfCycle = true;
+      }
+    });
+
+    const hasInEdge = new Set();
+    ids.forEach(pid => (nodes[pid].evolvesTo||[]).forEach(e => { if(e.toSpeciesId) hasInEdge.add(e.toSpeciesId); }));
+
+    ids.forEach(pid => {
+      petChain[pid] = cid;
+      const isRoot = !hasInEdge.has(pid);
+      const isFinal = (nodes[pid].evolvesTo||[]).filter(e=>e.toSpeciesId&&e.toSpeciesId!==pid).length === 0;
+      if(ids.length === 1) pos[pid] = 'standalone';
+      else if(isRoot && isFinal) pos[pid] = 'standalone';
+      else if(isRoot) pos[pid] = 'base';
+      else if(isFinal) pos[pid] = 'final';
+      else pos[pid] = 'mid';
+    });
+  });
+
+  // Detect issues per pet
+  const chainIssueCache = {}; // chainId -> bool (has leader_evolve)
+  Object.keys(pets).forEach(pid => {
+    derived[pid] = derived[pid] || {};
+    derived[pid].position = pos[pid] || 'standalone';
+    derived[pid].chainId = petChain[pid] || null;
+    derived[pid].issues = [];
+
+    const pet = pets[pid];
+    const ptasks = tasks[pid] || [];
+    const types = new Set(ptasks.map(t=>t.type));
+    const p2 = pos[pid] || 'standalone';
+
+    // Self-cycle check (already set above)
+    if(derived[pid].selfCycle) derived[pid].issues.push('进化链自环（进化目标指向自身）');
+
+    // Non-final pets need evolve
+    if((p2==='base'||p2==='mid') && !types.has('evolve'))
+      derived[pid].issues.push(`${p2==='base'?'初始':'中间'}进化阶段宠物缺少 evolve 任务`);
+
+    // destined_hero tag but no task
+    if(pet.destined_hero && !types.has('destined_hero'))
+      derived[pid].issues.push('有命定勇者属性但缺少 destined_hero 任务');
+
+    // boss tag - check chain for leader_evolve
+    if(pet.tags && pet.tags.boss) {
+      const cid = petChain[pid];
+      if(cid && chainIssueCache[cid] === undefined) {
+        const chainPets = Object.keys(chains.find(c=>c.chainId===cid)?.nodes||{});
+        chainIssueCache[cid] = chainPets.some(p => (tasks[p]||[]).some(t=>t.type==='leader_evolve'));
+      }
+      if(cid && !chainIssueCache[cid]) derived[pid].issues.push('有首领标签但进化链中缺少 leader_evolve 任务');
+    }
+  });
+
+  document.getElementById('s-total').textContent = petOrder.length;
+  const totalIssues = Object.values(derived).reduce((s,d)=>s+(d.issues||[]).length,0);
+  document.getElementById('s-issues').textContent = totalIssues;
+}
+
+// ═══════════════════════════════
+// PERSISTENCE
+// ═══════════════════════════════
+const LS_OPS = 'lkwj_ops_v2';
+const LS_REV = 'lkwj_reviewed_v2';
+
+async function restoreState() {
+  try { const r=localStorage.getItem(LS_REV); if(r) reviewedPets=new Set(JSON.parse(r)); } catch{}
+  try {
+    const local=localStorage.getItem(LS_OPS);
+    if(local){ ops=JSON.parse(local)||[]; setSaveMsg('已从本地恢复'); return; }
+  } catch{}
+  try {
+    const res=await fetch('/api/annotations');
+    if(res.ok){ const d=await res.json(); ops=d.ops||[]; if(ops.length) setSaveMsg('已从服务器恢复'); }
+  } catch{}
+}
+function saveLocal(){ localStorage.setItem(LS_OPS,JSON.stringify(ops)); localStorage.setItem(LS_REV,JSON.stringify([...reviewedPets])); }
+async function saveToServer(){
+  const body={meta:{lastSaved:new Date().toISOString()},ops};
+  try{
+    const r=await fetch('/api/annotations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body,null,2)});
+    if(r.ok){setSaveMsg('已保存 ✓');saveLocal();}else setSaveMsg('保存失败');
+  }catch(e){setSaveMsg('失败: '+e.message);}
+}
+function exportJSON(){
+  const b=new Blob([JSON.stringify({meta:{exported:new Date().toISOString(),total:ops.length},ops},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=`annotations-${new Date().toISOString().slice(0,10)}.json`; a.click();
+}
+function setSaveMsg(m){ document.getElementById('save-msg').textContent=m; }
+function updateStats(){ document.getElementById('s-ops').textContent=ops.length; }
+
+// ═══════════════════════════════
+// OP HELPERS
+// ═══════════════════════════════
+function isDeleted(petId,idx){ return ops.some(o=>o.action==='delete_task'&&o.petId===petId&&o.taskIndex===idx); }
+function isPatched(petId,idx){ return ops.some(o=>o.action==='patch_task'&&o.petId===petId&&o.taskIndex===idx); }
+function getPatch(petId,idx){ return ops.find(o=>o.action==='patch_task'&&o.petId===petId&&o.taskIndex===idx); }
+function getAdded(petId){ return ops.filter(o=>o.action==='add_task'&&o.petId===petId); }
+function hasAnn(petId){ return ops.some(o=>o.petId===petId); }
+
+// ═══════════════════════════════
+// RENDER
+// ═══════════════════════════════
+function renderAll(){ renderSidebar(); if(currentTab==='pets') renderPets(); else renderChains(); }
+
+function renderSidebar(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const list=document.getElementById('pet-list');
+  const visible=petOrder.filter(pid=>{
+    const p=pets[pid];
+    if(!p) return false;
+    if(q && !(p.name||'').includes(q)) return false;
+    if(currentFilter==='issues' && !(derived[pid]?.issues?.length)) return false;
+    if(currentFilter==='ann' && !hasAnn(pid)) return false;
+    return true;
+  });
+  list.innerHTML=visible.map(pid=>{
+    const p=pets[pid];
+    const num=pid.replace('pet_','');
+    const hasIss=derived[pid]?.issues?.length>0;
+    const hasAnn2=hasAnn(pid);
+    const dotCls=hasIss?'has-issue':hasAnn2?'has-ann':'none';
+    return `<div class="pet-item${pid===currentPetId?' active':''}" onclick="scrollToPet('${pid}')" id="si-${pid}">
+      <span class="pi-num">#${num}</span>
+      <span class="pi-name">${esc(p.name)}</span>
+      <span class="pi-dot ${dotCls}"></span>
+    </div>`;
+  }).join('');
+}
+
+let currentPetId=null;
+function scrollToPet(petId){
+  if(currentTab!=='pets') switchTab('pets');
+  currentPetId=petId;
+  renderSidebar();
+  const el=document.getElementById('pc-'+petId);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderPets(){
+  const main=document.getElementById('main');
+  main.innerHTML=petOrder.map(pid=>renderPetCard(pid)).join('');
+}
+
+function renderPetCard(petId){
+  const pet=pets[petId];
+  if(!pet) return '';
+  const num=petId.replace('pet_','');
+  const d=derived[petId]||{};
+  const ptasks=tasks[petId]||[];
+  const added=getAdded(petId);
+
+  // Tags (右上角只放炫彩/异色/首领/果实，带操作按钮；命定勇者移到任务行)
+  const tagsHtml = renderTagsSection(petId, pet);
+
+  // Forms — each row with edit/delete
+  const forms=pet.forms||{};
+  const formRows=Object.entries(forms).map(([key,f])=>{
+    const isTodo=f.formName&&f.formName.includes('variant_');
+    const isBasic=key==='basic';
+    const methods=(f.obtainMethods||[]).join('、')||'—';
+
+    // 类型列：显示 formName（或括号内描述），boss 显示"首领形态"
+    // 名称列：boss 显示独立名字，其他不显示（物种本名不变）
+    let typeDisplay, nameDisplay;
+    if (isTodo) {
+      typeDisplay = `(待命名: ${key})`;
+      nameDisplay = '';
+    } else if (key === 'boss') {
+      typeDisplay = '首领形态';
+      nameDisplay = f.formName || '';
+    } else if (isBasic) {
+      typeDisplay = '基础形态';
+      nameDisplay = '';
+    } else {
+      // 取括号内描述，如"雪绒鸟（蜕皮时的样子）"→"蜕皮时的样子"
+      const m = (f.formName||'').match(/[（(](.+)[）)]/);
+      typeDisplay = m ? m[1] : (f.formName||key);
+      nameDisplay = '';
+    }
+
+    return `<div class="task-row" id="fr-${petId}-${encodeKey(key)}" style="align-items:center">
+      <span class="ttype" style="background:#f0fdf4;color:#166534;min-width:60px;white-space:nowrap">${esc(typeDisplay)}</span>
+      <span class="tdesc" style="display:flex;flex-direction:column;gap:1px">
+        ${nameDisplay ? `<span>${esc(nameDisplay)}</span>` : ''}
+        <span style="color:var(--text2);font-size:10px">${esc(methods)}</span>
+      </span>
+      <div class="task-acts">
+        <button class="btn-sm btn-edt" onclick="openFormEdit('${petId}','${encodeKey(key)}')">编辑</button>
+        <button class="btn-sm btn-del" onclick="markFormDel('${petId}','${encodeKey(key)}')">删除</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Tasks — 命定勇者作为虚拟任务行显示
+  const destHeroRow = pet.destined_hero
+    ? renderDestinedRow(petId, pet.destined_hero)
+    : '';
+  const taskRows=ptasks.map((t,i)=>renderTaskRow(petId,t,i)).join('');
+  const addedRows=added.map((op,i)=>{
+    const t=op.task;
+    return `<div class="task-row added-row">
+      <span class="ttype">${esc(typeLabel(t.type))}</span>
+      <span class="tdesc">${esc(fmtDesc(t))}</span>
+      <div class="task-acts" style="opacity:1">
+        <button class="btn-sm btn-del" onclick="removeAdded('${petId}',${i})">撤销</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Issues
+  const issues=d.issues||[];
+  const issueHtml=issues.length
+    ?`<div class="issue-list">${issues.map(m=>`<div class="issue-row">⚠ ${esc(m)}</div>`).join('')}</div>`:'';
+
+  const isOk=reviewedPets.has(petId);
+  const posLabel={base:'初始',mid:'中间',final:'最终',standalone:'独立'}[d.position]||d.position||'';
+  const elStr=(pet.element||[]).join('/');
+
+  return `<div class="pet-card" id="pc-${petId}">
+    <div class="pet-card-header">
+      <span class="pet-card-num">#${num}</span>
+      <span class="pet-card-name">${esc(pet.name)}</span>
+      <span class="pet-card-element">${esc(elStr)}  ${posLabel}</span>
+      <div class="tag-chips">${tagsHtml}</div>
+    </div>
+    <div class="pet-card-body">
+      ${Object.keys(forms).length?`<div>
+        <div class="section-label">形态 (${Object.keys(forms).length}) <button class="btn-sm" style="margin-left:6px;font-size:10px;padding:1px 7px;border-style:dashed;border-color:var(--primary);color:var(--primary);background:#eff6ff" onclick="openFormAdd('${petId}')">+ 添加形态</button></div>
+        <div class="task-list">${formRows}</div>
+      </div>`:''}
+      <div>
+        <div class="section-label">任务 (${ptasks.length})</div>
+        <div class="task-list" id="tl-${petId}">
+          ${destHeroRow}
+          ${taskRows}
+          ${addedRows}
+        </div>
+      </div>
+      ${issueHtml}
+      <div class="pet-footer">
+        <button class="btn-add-task" onclick="openAddModal('${petId}')">+ 添加任务</button>
+        <button class="btn-mark-ok${isOk?' ok':''}" id="ok-${petId}" onclick="toggleOk('${petId}')">${isOk?'✓ 已核对':'标记已核对'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════
+// TAG SECTION (炫彩/异色/首领 带操作按钮)
+// ═══════════════════════════════
+function renderTagsSection(petId, pet) {
+  const tags = [];
+
+  // 炫彩
+  const hasChromatic = pet.tags?.chromatic;
+  const chromPatch = ops.find(o=>o.action==='patch_tag'&&o.petId===petId&&o.tag==='chromatic');
+  const chromDel = ops.some(o=>o.action==='delete_tag'&&o.petId===petId&&o.tag==='chromatic');
+  if (hasChromatic || chromPatch) {
+    if (chromDel) {
+      tags.push(`<span class="tag" style="background:#fee2e2;color:#dc2626;text-decoration:line-through;opacity:.6">炫彩 <button class="tag-x" onclick="undoTagOp('${petId}','chromatic')">撤</button></span>`);
+    } else {
+      tags.push(`<span class="tag tag-chromatic">炫彩 <button class="tag-x" onclick="openTagEdit('${petId}','chromatic')">编</button><button class="tag-x" onclick="deleteTag('${petId}','chromatic')">✕</button></span>`);
+    }
+  } else {
+    tags.push(`<button class="tag tag-add" onclick="addTag('${petId}','chromatic')">+ 炫彩</button>`);
+  }
+
+  // 异色
+  const hasShiny = pet.tags?.shiny;
+  const shinyPatch = ops.find(o=>o.action==='patch_tag'&&o.petId===petId&&o.tag==='shiny');
+  const shinyDel = ops.some(o=>o.action==='delete_tag'&&o.petId===petId&&o.tag==='shiny');
+  if (hasShiny || shinyPatch) {
+    const lt = shinyPatch?.patch?.limitedTime ?? pet.tags?.shiny?.limitedTime ?? '';
+    if (shinyDel) {
+      tags.push(`<span class="tag" style="background:#fee2e2;color:#dc2626;text-decoration:line-through;opacity:.6">异色 <button class="tag-x" onclick="undoTagOp('${petId}','shiny')">撤</button></span>`);
+    } else {
+      tags.push(`<span class="tag tag-shiny">异色${lt?'·'+esc(lt):''} <button class="tag-x" onclick="openTagEdit('${petId}','shiny')">编</button><button class="tag-x" onclick="deleteTag('${petId}','shiny')">✕</button></span>`);
+    }
+  } else {
+    tags.push(`<button class="tag tag-add" onclick="addTag('${petId}','shiny')">+ 异色</button>`);
+  }
+
+  // 首领（只读标签，不提供编辑，属于进化链结构）
+  if (pet.tags?.boss) tags.push('<span class="tag tag-boss">首领</span>');
+  // 果实
+  if (pet.fruit) tags.push('<span class="tag tag-fruit">果实</span>');
+
+  return tags.join('');
+}
+
+// 命定勇者作为任务行（虚拟任务，操作写入 patch_pet_field）
+function renderDestinedRow(petId, heroName) {
+  const del = ops.some(o=>o.action==='delete_pet_field'&&o.petId===petId&&o.field==='destined_hero');
+  const patch = ops.find(o=>o.action==='patch_pet_field'&&o.petId===petId&&o.field==='destined_hero');
+  const displayName = patch?.value ?? heroName;
+  return `<div class="task-row${del?' deleted':''}" id="dh-${petId}" style="background:${del?'var(--red-bg)':'#eff6ff'}">
+    <span class="ttype" style="background:#dbeafe;color:#1d4ed8">命定勇者</span>
+    <span class="tdesc">${esc(displayName)}${patch&&!del?' <em style="font-size:10px;color:#854d0e">[改]</em>':''}</span>
+    <div class="task-acts" style="${del?'opacity:1':''}">
+      ${!del?`<button class="btn-sm btn-edt" onclick="editDestined('${petId}')">编辑</button>`:''}
+      <button class="btn-sm btn-del${del?' on':''}" onclick="toggleDestinedDel('${petId}')">${del?'撤销':'删除'}</button>
+    </div>
+  </div>`;
+}
+
+function encodeKey(k){ return k.replace(/[^a-zA-Z0-9_]/g,'_'); }
+
+// ═══════════════════════════════
+// TAG OPERATIONS
+// ═══════════════════════════════
+function deleteTag(petId, tag) {
+  ops = ops.filter(o=>!(o.action==='delete_tag'&&o.petId===petId&&o.tag===tag));
+  ops.push({action:'delete_tag', petId, tag});
+  rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+function undoTagOp(petId, tag) {
+  ops = ops.filter(o=>!((o.action==='delete_tag'||o.action==='patch_tag'||o.action==='add_tag')&&o.petId===petId&&o.tag===tag));
+  rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+function addTag(petId, tag) {
+  // For shiny: open edit to fill limitedTime; for chromatic: direct add
+  if(tag==='shiny') {
+    openTagEdit(petId, 'shiny', true);
+  } else {
+    ops = ops.filter(o=>!((o.action==='add_tag')&&o.petId===petId&&o.tag===tag));
+    ops.push({action:'add_tag', petId, tag, value:{tagName: tag==='chromatic'?'炫彩':'?'}});
+    rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+  }
+}
+let tagEditCtx = null;
+function openTagEdit(petId, tag, isNew=false) {
+  tagEditCtx = {petId, tag, isNew};
+  const pet = pets[petId];
+  const existing = pet.tags?.[tag] || {};
+  const patchOp = ops.find(o=>o.action==='patch_tag'&&o.petId===petId&&o.tag===tag);
+  const current = patchOp?.patch ?? existing;
+
+  document.getElementById('edit-title').textContent = `${isNew?'添加':'修改'}标签 — ${pet.name} ${tag}`;
+  document.getElementById('e-type').value = 'capture'; // reuse modal but show only JSON
+  document.getElementById('e-count-wrap').style.display='none';
+  document.getElementById('e-skill-wrap').style.display='none';
+  document.getElementById('e-json').value = JSON.stringify(current, null, 2);
+  document.getElementById('e-err').textContent = '';
+  // Override save button
+  editCtx = {mode:'tag'};
+  document.getElementById('edit-overlay').classList.add('open');
+}
+// Extend saveEdit to handle tag mode
+const _origSaveEdit = saveEdit;
+
+// ═══════════════════════════════
+// DESTINED HERO OPERATIONS
+// ═══════════════════════════════
+function toggleDestinedDel(petId) {
+  const del = ops.some(o=>o.action==='delete_pet_field'&&o.petId===petId&&o.field==='destined_hero');
+  if(del) ops = ops.filter(o=>!(o.action==='delete_pet_field'&&o.petId===petId&&o.field==='destined_hero'));
+  else ops.push({action:'delete_pet_field', petId, field:'destined_hero'});
+  rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+function editDestined(petId) {
+  const pet = pets[petId];
+  const patch = ops.find(o=>o.action==='patch_pet_field'&&o.petId===petId&&o.field==='destined_hero');
+  const current = patch?.value ?? pet.destined_hero ?? '';
+  editCtx = {mode:'destined', petId};
+  document.getElementById('edit-title').textContent = `修改命定勇者 — ${pet.name}`;
+  document.getElementById('e-count-wrap').style.display='none';
+  document.getElementById('e-skill-wrap').style.display='none';
+  document.getElementById('e-json').value = JSON.stringify(current);
+  document.getElementById('e-err').textContent='';
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+// ═══════════════════════════════
+// FORM OPERATIONS
+// ═══════════════════════════════
+let formEditCtx = null;
+function openFormEdit(petId, encodedKey) {
+  const pet = pets[petId];
+  // Find original key
+  const origKey = Object.keys(pet.forms||{}).find(k=>encodeKey(k)===encodedKey) || encodedKey;
+  const form = pet.forms?.[origKey] || {};
+  const patchOp = ops.find(o=>o.action==='patch_form'&&o.petId===petId&&o.formKey===origKey);
+  const current = patchOp?.patch ?? {...form};
+  formEditCtx = {petId, formKey: origKey, encoded: encodedKey};
+  editCtx = {mode:'form'};
+  document.getElementById('edit-title').textContent = `修改形态 — ${pet.name} / ${origKey}`;
+  document.getElementById('e-count-wrap').style.display='none';
+  document.getElementById('e-skill-wrap').style.display='none';
+  document.getElementById('e-json').value = JSON.stringify(current, null, 2);
+  document.getElementById('e-err').textContent='';
+  document.getElementById('edit-overlay').classList.add('open');
+}
+function openFormAdd(petId) {
+  formEditCtx = {petId, formKey: null};
+  editCtx = {mode:'form_add'};
+  document.getElementById('edit-title').textContent = `添加形态 — ${pets[petId]?.name||petId}`;
+  document.getElementById('e-count-wrap').style.display='none';
+  document.getElementById('e-skill-wrap').style.display='none';
+  document.getElementById('e-json').value = JSON.stringify({formKey:'', formName:'', obtainMethods:[]}, null, 2);
+  document.getElementById('e-err').textContent='';
+  document.getElementById('edit-overlay').classList.add('open');
+}
+function markFormDel(petId, encodedKey) {
+  const pet = pets[petId];
+  const origKey = Object.keys(pet.forms||{}).find(k=>encodeKey(k)===encodedKey) || encodedKey;
+  ops = ops.filter(o=>!(o.action==='delete_form'&&o.petId===petId&&o.formKey===origKey));
+  ops.push({action:'delete_form', petId, formKey: origKey});
+  rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+
+function renderTaskRow(petId,task,idx){
+  const del=isDeleted(petId,idx);
+  const patched=isPatched(petId,idx);
+  const patch=patched?getPatch(petId,idx):null;
+  const disp=patch?{...task,...patch.patch}:task;
+  return `<div class="task-row${del?' deleted':''}${patched&&!del?' patched':''}" id="tr-${petId}-${idx}">
+    <span class="ttype">${esc(typeLabel(disp.type))}</span>
+    <span class="tdesc">${esc(fmtDesc(disp))}${patched&&!del?' <em style="font-size:10px;color:#854d0e">[改]</em>':''}</span>
+    <div class="task-acts">
+      ${!del?`<button class="btn-sm btn-edt" onclick="openEditModal('${petId}',${idx})">编辑</button>`:''}
+      <button class="btn-sm btn-del${del?' on':''}" onclick="handleDel('${petId}',${idx})">${del?'撤销':'删除'}</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════
+// CHAIN PAGE
+// ═══════════════════════════════
+function renderChains(){
+  const cp=document.getElementById('chain-page');
+  cp.innerHTML=chains.map(chain=>renderChainCard(chain)).join('');
+}
+
+function renderChainCard(chain){
+  const cid=chain.chainId;
+  const nodes=chain.nodes;
+  const ids=Object.keys(nodes);
+
+  // BFS order
+  const hasIn=new Set();
+  ids.forEach(pid=>(nodes[pid].evolvesTo||[]).forEach(e=>{if(e.toSpeciesId)hasIn.add(e.toSpeciesId);}));
+  const roots=ids.filter(pid=>!hasIn.has(pid));
+  const ordered=[];
+  const vis=new Set();
+  const q=[...roots];
+  while(q.length){const pid=q.shift();if(vis.has(pid)||!nodes[pid])continue;vis.add(pid);ordered.push(pid);(nodes[pid].evolvesTo||[]).forEach(e=>{if(e.toSpeciesId)q.push(e.toSpeciesId);});}
+  ids.forEach(pid=>{if(!vis.has(pid))ordered.push(pid);});
+
+  // Self-cycle check
+  const hasSelfCycle=ids.some(pid=>(nodes[pid].evolvesTo||[]).some(e=>e.toSpeciesId===pid));
+  const issueStr=hasSelfCycle?'<div class="chain-issue">⚠ 进化链自环</div>':'';
+
+  // Build flow HTML
+  function petNode(pid){
+    const p=pets[pid];
+    const name=p?p.name:pid;
+    const num=pid.replace('pet_','');
+    const tags=[];
+    if(p?.tags?.boss) tags.push('<span class="tag tag-boss" style="font-size:9px;padding:1px 4px">首领</span>');
+    if(p?.tags?.shiny) tags.push('<span class="tag tag-shiny" style="font-size:9px;padding:1px 4px">异色</span>');
+    return `<div class="chain-pet">
+      <span class="chain-pet-num">#${num}</span>
+      <span class="chain-pet-name">${esc(name)}</span>
+      ${tags.length?`<div class="chain-pet-tags">${tags.join('')}</div>`:''}
+    </div>`;
+  }
+
+  function condLabel(cond){
+    if(!cond) return '?';
+    let s=`Lv.${cond.level||'?'}`;
+    if(cond.note) s+=` ${cond.note}`;
+    return s;
+  }
+
+  function arrowBlock(cond){
+    return `<div class="chain-arrow">
+      <span class="arrow-line">→</span>
+      <span class="arrow-cond">${esc(condLabel(cond))}</span>
+    </div>`;
+  }
+
+  // Build linear or branching flow
+  let flowHtml='';
+  let i=0;
+  while(i<ordered.length){
+    const pid=ordered[i];
+    const evolves=(nodes[pid]?.evolvesTo||[]).filter(e=>e.toSpeciesId&&nodes[e.toSpeciesId]);
+    flowHtml+=petNode(pid);
+    if(evolves.length===1){
+      flowHtml+=arrowBlock(evolves[0].condition);
+      i++;
+    } else if(evolves.length>1){
+      // branching: show all branches vertically
+      flowHtml+=`<div class="chain-arrow"><span class="arrow-line">→</span></div><div class="chain-branch">`;
+      evolves.forEach(e=>{
+        flowHtml+=`<div class="chain-branch-row">`;
+        flowHtml+=`<div class="chain-arrow"><span class="arrow-cond">${esc(condLabel(e.condition))}</span></div>`;
+        flowHtml+=petNode(e.toSpeciesId);
+        // check if the branch target itself evolves further
+        const nextEvolves=(nodes[e.toSpeciesId]?.evolvesTo||[]).filter(e2=>e2.toSpeciesId&&nodes[e2.toSpeciesId]);
+        nextEvolves.forEach(e2=>{
+          flowHtml+=arrowBlock(e2.condition)+petNode(e2.toSpeciesId);
+        });
+        flowHtml+='</div>';
+      });
+      flowHtml+='</div>';
+      break; // branches handled
+    } else {
+      break; // leaf
+    }
+  }
+
+  const hasIss=hasSelfCycle;
+  return `<div class="chain-card${hasIss?' has-issue':''}">
+    <div class="chain-id">进化链 ${cid}</div>
+    <div class="chain-flow">${flowHtml}</div>
+    ${issueStr}
+  </div>`;
+}
+
+// ═══════════════════════════════
+// INTERACTIONS
+// ═══════════════════════════════
+function switchTab(tab){
+  currentTab=tab;
+  document.getElementById('tab-pets').classList.toggle('active',tab==='pets');
+  document.getElementById('tab-chains').classList.toggle('active',tab==='chains');
+  document.getElementById('main').style.display=tab==='pets'?'block':'none';
+  document.getElementById('chain-page').style.display=tab==='chains'?'block':'none';
+  document.getElementById('sidebar').style.display=tab==='pets'?'flex':'none';
+  if(tab==='chains'&&!document.getElementById('chain-page').innerHTML) renderChains();
+}
+
+function setFilter(f){
+  currentFilter=f;
+  document.querySelectorAll('.flt').forEach(b=>b.classList.toggle('active',b.dataset.f===f));
+  renderSidebar();
+}
+
+function toggleOk(petId){
+  if(reviewedPets.has(petId)) reviewedPets.delete(petId); else reviewedPets.add(petId);
+  const btn=document.getElementById('ok-'+petId);
+  if(btn){ btn.classList.toggle('ok',reviewedPets.has(petId)); btn.textContent=reviewedPets.has(petId)?'✓ 已核对':'标记已核对'; }
+  saveLocal();
+}
+
+function handleDel(petId,idx){
+  const del=isDeleted(petId,idx);
+  if(del) ops=ops.filter(o=>!(o.action==='delete_task'&&o.petId===petId&&o.taskIndex===idx));
+  else ops.push({action:'delete_task',petId,taskIndex:idx});
+  const row=document.getElementById(`tr-${petId}-${idx}`);
+  if(row){ const t=tasks[petId]?.[idx]; if(t) row.outerHTML=renderTaskRow(petId,t,idx); }
+  saveLocal(); updateStats(); renderSidebar();
+}
+
+function removeAdded(petId,addedIdx){
+  let cnt=0;
+  ops=ops.filter(o=>{
+    if(o.action==='add_task'&&o.petId===petId){ if(cnt===addedIdx){cnt++;return false;} cnt++; }
+    return true;
+  });
+  rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+
+function rerenderCard(petId){
+  const el=document.getElementById('pc-'+petId);
+  if(el) el.outerHTML=renderPetCard(petId);
+}
+
+// ═══════════════════════════════
+// EDIT MODAL
+// ═══════════════════════════════
+function openEditModal(petId,idx){
+  const t=tasks[petId]?.[idx]; if(!t) return;
+  const patch=getPatch(petId,idx);
+  const disp=patch?{...t,...patch.patch}:t;
+  editCtx={mode:'task', petId,idx};
+  document.getElementById('edit-title').textContent=`修改任务 — ${pets[petId]?.name||petId} #${idx}`;
+  document.getElementById('e-type').value=disp.type||'capture';
+  document.getElementById('e-count').value=disp.count||1;
+  document.getElementById('e-skill').value=disp.skillName||'';
+  onEditTypeChange(false);
+  const jobj={...disp}; delete jobj.desc;
+  document.getElementById('e-json').value=JSON.stringify(jobj,null,2);
+  document.getElementById('e-err').textContent='';
+  document.getElementById('edit-overlay').classList.add('open');
+}
+function onEditTypeChange(sync=true){
+  const type=document.getElementById('e-type').value;
+  const needCount=['skill','affection','confirm_forms','fruit'].includes(type);
+  document.getElementById('e-count-wrap').style.display=needCount?'block':'none';
+  document.getElementById('e-skill-wrap').style.display=type==='skill'?'block':'none';
+  if(sync) syncQuickFields();
+}
+function syncQuickFields(){
+  try{
+    const type=document.getElementById('e-type').value;
+    const count=parseInt(document.getElementById('e-count').value)||undefined;
+    const skill=document.getElementById('e-skill').value.trim()||undefined;
+    let obj={};
+    try{obj=JSON.parse(document.getElementById('e-json').value);}catch{}
+    obj.type=type;
+    if(count&&['skill','affection','confirm_forms','fruit'].includes(type)) obj.count=count; else delete obj.count;
+    if(skill&&type==='skill') obj.skillName=skill; else delete obj.skillName;
+    document.getElementById('e-json').value=JSON.stringify(obj,null,2);
+    document.getElementById('e-err').textContent='';
+  }catch{}
+}
+document.getElementById('e-json').addEventListener('input',()=>{
+  try{
+    const obj=JSON.parse(document.getElementById('e-json').value);
+    if(obj.type){document.getElementById('e-type').value=obj.type; onEditTypeChange(false);}
+    if(obj.count) document.getElementById('e-count').value=obj.count;
+    if(obj.skillName) document.getElementById('e-skill').value=obj.skillName;
+    document.getElementById('e-err').textContent='';
+  }catch(e){document.getElementById('e-err').textContent='JSON错误: '+e.message;}
+});
+function saveEdit(){
+  let val;
+  try{val=JSON.parse(document.getElementById('e-json').value);}
+  catch(e){document.getElementById('e-err').textContent='JSON格式错误';return;}
+
+  if(!editCtx) return;
+
+  if(editCtx.mode==='tag') {
+    const {petId, tag, isNew} = tagEditCtx;
+    ops = ops.filter(o=>!((o.action==='patch_tag'||o.action==='add_tag')&&o.petId===petId&&o.tag===tag));
+    ops.push({action: isNew?'add_tag':'patch_tag', petId, tag, patch: val});
+    closeEditModalDirect(); rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+    return;
+  }
+
+  if(editCtx.mode==='destined') {
+    const {petId} = editCtx;
+    ops = ops.filter(o=>!(o.action==='patch_pet_field'&&o.petId===petId&&o.field==='destined_hero'));
+    ops.push({action:'patch_pet_field', petId, field:'destined_hero', value: val});
+    closeEditModalDirect(); rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+    return;
+  }
+
+  if(editCtx.mode==='form') {
+    const {petId, formKey} = formEditCtx;
+    ops = ops.filter(o=>!(o.action==='patch_form'&&o.petId===petId&&o.formKey===formKey));
+    ops.push({action:'patch_form', petId, formKey, patch: val});
+    closeEditModalDirect(); rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+    return;
+  }
+
+  if(editCtx.mode==='form_add') {
+    const {petId} = formEditCtx;
+    if(!val.formKey){document.getElementById('e-err').textContent='需要 formKey 字段';return;}
+    ops.push({action:'add_form', petId, formKey: val.formKey, form: {formName:val.formName||'', obtainMethods:val.obtainMethods||[]}});
+    closeEditModalDirect(); rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+    return;
+  }
+
+  // Default: task patch
+  const {petId,idx}=editCtx;
+  ops.push({action:'patch_task',petId,taskIndex:idx,patch:val});
+  closeEditModalDirect(); rerenderCard(petId); saveLocal(); updateStats(); renderSidebar();
+}
+function closeEditModal(e){if(e.target===document.getElementById('edit-overlay'))closeEditModalDirect();}
+function closeEditModalDirect(){document.getElementById('edit-overlay').classList.remove('open');editCtx=null;}
+
+// ═══════════════════════════════
+// ADD MODAL
+// ═══════════════════════════════
+function openAddModal(petId){
+  addCtx={petId};
+  document.getElementById('add-title').textContent=`添加任务 — ${pets[petId]?.name||petId}`;
+  const grid=document.getElementById('tpl-grid');
+  grid.innerHTML=TASK_TYPES.map(t=>`<button class="tpl-btn" id="tpl-${t.v}" onclick="selectTpl('${t.v}')">${esc(t.l)}</button>`).join('');
+  document.getElementById('add-json-wrap').style.display='none';
+  document.getElementById('a-err').textContent='';
+  const btn=document.getElementById('add-confirm');
+  btn.disabled=true; btn.style.opacity='.5'; btn.style.cursor='not-allowed';
+  document.getElementById('add-overlay').classList.add('open');
+}
+function selectTpl(type){
+  document.querySelectorAll('.tpl-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('tpl-'+type)?.classList.add('sel');
+  const tpl=TASK_TYPES.find(t=>t.v===type);
+  document.getElementById('a-json').value=JSON.stringify(tpl?.tpl||{type},null,2);
+  document.getElementById('add-json-wrap').style.display='block';
+  document.getElementById('a-err').textContent='';
+  const btn=document.getElementById('add-confirm');
+  btn.disabled=false; btn.style.opacity='1'; btn.style.cursor='pointer';
+}
+function saveAdd(){
+  let task;
+  try{task=JSON.parse(document.getElementById('a-json').value);}
+  catch(e){document.getElementById('a-err').textContent='JSON格式错误: '+e.message;return;}
+  if(!task.type){document.getElementById('a-err').textContent='缺少 type 字段';return;}
+  ops.push({action:'add_task',petId:addCtx.petId,task});
+  closeAddModalDirect(); rerenderCard(addCtx.petId); saveLocal(); updateStats(); renderSidebar();
+}
+function closeAddModal(e){if(e.target===document.getElementById('add-overlay'))closeAddModalDirect();}
+function closeAddModalDirect(){document.getElementById('add-overlay').classList.remove('open');addCtx=null;}
+
+// ═══════════════════════════════
+// UTILS
+// ═══════════════════════════════
+function typeLabel(type){
+  return {capture:'捕捉',capture_gifted:'天分捕捉',capture_chromatic:'炫彩捕捉',fruit:'果实',skill:'技能',evolve:'进化',leader_evolve:'首领进化',destined_hero:'命定勇者',affection:'亲密度',confirm_forms:'样子确认'}[type]||type;
+}
+function fmtDesc(t){
+  if(t.type==='skill') return `使用「${t.skillName||'?'}」${t.count||'?'}次`;
+  if(t.desc) return t.desc;
+  return t.type;
+}
+function esc(s){
+  if(s==null)return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadData();
+</script>
+</body>
+</html>

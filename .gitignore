@@ -16,6 +16,21 @@ product-mapping/data/imgs/
 product-mapping/data/auto-match-log.json
 product-mapping/data/erp-session-cache.json
 product-mapping/data/.download-marker.json
+product-mapping/data/reports/
+product-mapping/data/visual-verdicts.json
+
+# 训练素材 / 可再生成资产
+product-detect/assets/
+
+# WIP 采集数据（完成并确认后再纳入 Git）
+lkwj/data/_待采集/*.csv
+
+# 已独立项目，不纳入当前工作区仓库
+transfer/
+
+# 一次性输入 / 计算产物
+return-inbound/input.html
+sku-calculator/data/
 
 # 对话导出（大文件，非代码）
 _exports/
