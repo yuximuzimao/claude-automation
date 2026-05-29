@@ -1,7 +1,7 @@
 # Handoff
 
-更新时间：2026-05-29 23:46
-当前负责人：Codex
+更新时间：2026-05-29 23:55
+当前负责人：无（本阶段已收尾）
 当前分支：data-model-restructure
 当前焦点：工作区基础设施（Git 边界 + Codex 协作协议）
 
@@ -17,6 +17,7 @@
 - 剩余仓库资产分类已提交（ee356b2）
   - 纳入：品牌参考图、lkwj 标注成果、复盘资料、Claude 审查回复
   - 忽略：product-detect/assets、lkwj WIP CSV、product-mapping reports/visual-verdicts、return-inbound/input.html、sku-calculator/data、transfer/
+- 线上仓库已同步：`origin/data-model-restructure` 指向 `4c1f190`
 
 ## 未完成
 - product-mapping 品牌数据重构：图片 jpg→png 迁移，品牌目录整理
