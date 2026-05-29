@@ -68,6 +68,17 @@ async function clickAt(targetId, selector) {
   return { clicked: true, x: rect.x, y: rect.y };
 }
 
+// 按屏幕坐标发送真实鼠标点击。用于固定位置控件的后备点击。
+async function clickPoint(targetId, x, y) {
+  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+    type: 'mousePressed', x, y, button: 'left', clickCount: 1,
+  });
+  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+    type: 'mouseReleased', x, y, button: 'left', clickCount: 1,
+  });
+  return { clicked: true, x, y };
+}
+
 // 列出所有标签页（Chrome HTTP API）
 function getTargets() {
   return new Promise((resolve, reject) => {
@@ -194,6 +205,7 @@ function activateTarget(targetId) {
 const cdp = {
   eval: evalJs,
   clickAt,
+  clickPoint,
   screenshot,
   navigate,
   scroll,
