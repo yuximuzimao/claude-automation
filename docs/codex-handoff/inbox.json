@@ -1,0 +1,20 @@
+{
+  "protocol": "codex-handoff-v1",
+  "description": "Codex → Claude Code 协作收件箱。Codex 追加条目，Claude Code SessionStart hook 检查。已处理完的条目移到 processed 数组。",
+  "pending": [],
+  "processed": [
+    {
+      "id": "2026-05-29T23:30:03+08:00",
+      "project": "workspace",
+      "action": "review-plan",
+      "file": "docs/codex-handoff/workspace-git-followup-review-plan.md",
+      "summary": "Git 仓库边界优化后续建议：checkpoint、剩余 untracked 分类、是否写入硬规则",
+      "from": "codex",
+      "timestamp": "2026-05-29T23:30:03+08:00",
+      "status": "unread",
+      "processedAt": "2026-05-29T23:35:00+08:00",
+      "processedBy": "claude",
+      "resolution": "approved-with-notes"
+    }
+  ]
+}
