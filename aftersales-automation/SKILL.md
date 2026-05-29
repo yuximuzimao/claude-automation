@@ -7,7 +7,7 @@ entry: cli.js
 
 ## DO FIRST
 
-1. **找 CLI 命令** → `cli.js`（17 个命令，JSON 输出 `{success, data/error}`）
+1. **找 CLI 命令** → `cli.js`（18 个命令，JSON 输出 `{success, data/error}`）
 2. **找流程逻辑** → `lib/server/pipeline.js`（scan→collect→infer→approve/reject）
 3. **找规则/红线** → `docs/INDEX.md`（错误分级、工单路由、已知坑位 §6）
 4. **不要直接读 `routes.js`**——它是 Express 薄层，业务逻辑在 `lib/` 下
@@ -17,13 +17,13 @@ entry: cli.js
 
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
-| `cli.js` | CLI 入口，17 个命令的路由分发 | 需要了解可用命令或新增命令时 |
+| `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
 | `server.js` | Express 服务（port 3457），定时扫描+队列管理+Web 面板 | 改 API/队列/定时任务时 |
-| `lib/infer.js` | 规则推理引擎（926行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
+| `lib/infer.js` | 规则推理引擎（1118行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
-| `lib/wait.js` | `sleep()`, `waitFor()` 工具 | 需要等待/重试逻辑时 |
+| `lib/wait.js` | `sleep()`, `waitFor()`, `retry()` 工具；内置 `FORCE_NO_RETRY_DOMAINS` 自动禁止鲸灵重试 + `isRiskControlError()` 风控信号检测 + 熔断钩子 | 需要等待/重试/风控防护时 |
 | `lib/helpers.js` | 共享工具函数 `extractShippedTrackings()` | 从 collectedData 提取已发货快递单号时 |
 | `lib/result.js` | `ok()/fail()` JSON 封包 | 新增 CLI 命令时 |
 | `lib/constants.js` | 共享常量（扫描时间/关键词/红灯） | 查常量定义时 |
@@ -39,6 +39,7 @@ entry: cli.js
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
+| `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示 | 改平台提醒逻辑时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
@@ -60,6 +61,7 @@ entry: cli.js
 
 ### 重试与重启
 
+- **鲸灵操禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
 - **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting` 状态，距上次推理 ≥ `RESCAN_INTERVAL_HOURS`(4h) 后下次扫描自动重置为 `pending` 重采。
 - **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。重启后自动批量重跑未处理工单。
@@ -143,6 +145,7 @@ await cdp.navigate(targetId, 'https://...');
 | 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 safeToWait 的 3 条路径在 hoursUntilNextScanWait 为 null 时直接调用 `.toFixed(1)` → TypeError。`processOne` 设置了 `hoursUntilNextScan` 但历史 data / 直接调用 inferDecision 时可能缺失。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复：3 处路径均已加固。 |
 | 19 | 全项目重复代码：allShipTrackings 提取 3 处 IIFE | pipeline.js、op-queue.js（remind/cancel 两条路径）各自复制了完全相同的"从 collectedData 提取已发货运单号"逻辑。op-queue remind 路径的状态过滤为仅`卖家已发货`，与另两处三态过滤不统一（潜在遗漏）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：已提取为 `lib/helpers.js:extractShippedTrackings()`。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
+| 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 
 ## PATHS
 
@@ -160,6 +163,7 @@ lib/erp/read-logistics.js
 lib/erp/search.js
 lib/erp/shop-map.js
 lib/jl/add-note.js
+lib/jl/alerts.js
 lib/jl/approve.js
 lib/jl/list.js
 lib/jl/logistics.js
