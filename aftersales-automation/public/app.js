@@ -1471,6 +1471,17 @@ function getShipRows(cd) {
   return result;
 }
 
+function isReturnWaitingAction(ticket, decision) {
+  if (!ticket || !ticket.returnTracking || !decision) return false;
+  const reason = decision.reason || '';
+  return decision.waitingRescan === true ||
+    decision.reasonCode === 'WAREHOUSE_NOT_RECEIVED' ||
+    reason.includes('拆包') ||
+    reason.includes('尚未入库') ||
+    reason.includes('在途') ||
+    reason.includes('仓库未收到退货');
+}
+
 async function loadActionBadge() {
   try {
     const [queue, sims] = await Promise.all([api('/queue?mode=live'), api('/simulations?mode=live')]);
@@ -1489,7 +1500,7 @@ async function loadActionBadge() {
         if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
           count += getShipRows(sim.collectedData).length;
         }
-        if (ticket.returnTracking && (reason.includes('拆包') || reason.includes('尚未入库') || reason.includes('在途'))) count++;
+        if (isReturnWaitingAction(ticket, sim.decision)) count++;
       }
     }
     const badgeEl = document.getElementById('action-tab-count');
@@ -1585,9 +1596,8 @@ async function loadActionList() {
       });
     }
 
-    // 退货待入库：有 returnTracking，且决策含"拆包"/"尚未入库"/"在途"
-    if (ticket.returnTracking && decision && (decision.action === 'escalate' || decision.action === 'reject') &&
-        (reason.includes('拆包') || reason.includes('尚未入库') || reason.includes('在途'))) {
+    // 退货待入库：由 isReturnWaitingAction 统一判断（waitingRescan / WAREHOUSE_NOT_RECEIVED / 关键词）
+    if (isReturnWaitingAction(ticket, decision)) {
       if (dismissed && dismissed[ticket.returnTracking]) {
         dismissedReturns.push({ ...base, tracking: ticket.returnTracking });
       } else {
