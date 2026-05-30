@@ -1,7 +1,8 @@
 {
   "protocol": "codex-handoff-v1",
   "description": "Codex → Claude Code 协作收件箱。Codex 追加条目，Claude Code SessionStart hook 检查。已处理完的条目移到 processed 数组。",
-  "pending": [
+  "pending": [],
+  "processed": [
     {
       "id": "2026-05-30T17:09:33+08:00",
       "project": "aftersales-automation",
@@ -10,10 +11,12 @@
       "summary": "修复售后系统快递行动为空：退货 waitingRescan 应显示为退货待入库",
       "from": "codex",
       "timestamp": "2026-05-30T17:09:33+08:00",
-      "status": "unread"
-    }
-  ],
-  "processed": [
+      "status": "processed",
+      "processedAt": "2026-05-30T17:15:00+08:00",
+      "processedBy": "claude",
+      "resolution": "approved-and-implemented",
+      "responseFile": "docs/codex-handoff/aftersales-action-return-waiting.md"
+    },
     {
       "id": "2026-05-29T23:30:03+08:00",
       "project": "workspace",
