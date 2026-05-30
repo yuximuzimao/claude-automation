@@ -47,6 +47,9 @@ entry: cli.js
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
 | `lib/server/auto-exec-confidence.js` | 自动执行置信度系统 — 场景指纹+人工反馈驱动 auto 判定 | 查/改自动执行条件时 |
+| `public/app.js` | 前端主逻辑（2026行）— 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
+| `public/index.html` | 前端 HTML 骨架 — 8 Tab 结构、模版、header 控件 | 改页面结构时 |
+| `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
 | `../return-inbound/SKILL.md` | 退货入库项目导航地图（跨目录） | 调试/改退货入库 op 时；op-queue 的 `return-inbound` case 调用 `../return-inbound/lib/workflow.js` |
 
 ## CORE FLOWS
@@ -64,7 +67,7 @@ entry: cli.js
 - **鲸灵操禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
 - **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting` 状态，距上次推理 ≥ `RESCAN_INTERVAL_HOURS`(4h) 后下次扫描自动重置为 `pending` 重采。
-- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。重启后自动批量重跑未处理工单。
+- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。重启后只报告工单状态，不自动重跑——由用户手动选择处理。
 
 ### 工单类型路由（`docs/INDEX.md §2`）
 
@@ -183,4 +186,7 @@ server.js
 collect.js
 scan-all.js
 docs/INDEX.md
+public/app.js
+public/index.html
+public/style.css
 test/

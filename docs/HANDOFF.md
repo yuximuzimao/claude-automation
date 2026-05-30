@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-05-29 23:55
+更新时间：2026-05-30 17:13
 当前负责人：无（本阶段已收尾）
 当前分支：data-model-restructure
 当前焦点：工作区基础设施（Git 边界 + Codex 协作协议）
@@ -17,6 +17,9 @@
 - 剩余仓库资产分类已提交（ee356b2）
   - 纳入：品牌参考图、lkwj 标注成果、复盘资料、Claude 审查回复
   - 忽略：product-detect/assets、lkwj WIP CSV、product-mapping reports/visual-verdicts、return-inbound/input.html、sku-calculator/data、transfer/
+- Codex handoff #1 已处理：快递行动退货待入库分类改用结构化字段判断（bf20ff0）
+  - `public/app.js` 新增 `isReturnWaitingAction()` helper
+  - 两处调用点（loadActionBadge + loadActionList）已统一
 - 线上仓库已同步：`data-model-restructure` 已推送到 `origin/data-model-restructure`
 
 ## 未完成
