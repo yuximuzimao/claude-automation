@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-05-31 15:14
-当前负责人：Codex（neat-freak 收尾）
+更新时间：2026-05-31 23:15
+当前负责人：Codex（按审计修正后开始实现）
 当前分支：data-model-restructure
-当前焦点：售后系统未提交改动收尾 + Codex Monitor 计划复审交接
+当前焦点：Codex Monitor 阶段 0 + 阶段 1 实现（已收到 Claude Code 正式审计）
 
 ## 已完成
 - Git 仓库边界优化：.gitignore 精确排除运行时数据，24 个运行时文件从索引移除（ac377b1）
@@ -26,14 +26,16 @@
   - flow-5.3 `INTERCEPT_TIMEOUT` 用户可见拒绝原因改为固定平台模板
   - 取消类工单测试口径已同步为 `wait_archive`
   - `npm test` 结果：44/44 通过
-- Codex Monitor 新项目计划复审请求已放入 `docs/codex-handoff/inbox.json`：
-  - 网页版 Claude 反馈仅作为临时参考，非 Claude Code 正式审计
-  - 等待 Claude Code 基于 `codex-monitor-review-plan.md` 和 `codex-monitor-web-claude-feedback.md` 重新调整计划
+- Codex Monitor 计划 Claude Code 正式审计完成（2026-05-31 23:15）：
+  - 回复文件：`docs/codex-handoff/codex-monitor-review-response.md`
+  - 结论：方向批准，3 处必须修正（rate_limits 路径 / Codex token 字段 / Claude Code 多模型）
+  - 用户决策：Python + tkinter 批准，视觉风格改为浅色（推翻 Codex 原深色方案）
+  - 执行许可：修正 3 处后可开始阶段 0 + 阶段 1
 - 线上仓库已同步：`data-model-restructure` 已推送到 `origin/data-model-restructure`
 
 ## 未完成
 - Codex 未执行售后系统重启；如需要线上 server 立刻加载新 `lib/` 逻辑，仍需手动运行 `/aftersales-restart`
-- Codex Monitor 仍待 Claude Code 正式复审/调整计划；不要把网页版反馈视为最终方案
+- Codex Monitor：Codex 需按审计修正 3 处后，开始阶段 0（项目初始化）+ 阶段 1（reader_codex.py）
 - product-mapping 品牌数据重构：图片 jpg→png 迁移，品牌目录整理
 - product-detect/assets/ 16MB 训练素材已从 Git 排除，后续需决定外部存储位置
 - transfer/ 本地目录已从当前仓库忽略；如确认不再需要本地副本，再手动清理
