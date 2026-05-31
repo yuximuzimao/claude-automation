@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-05-31 23:15
-当前负责人：Codex（按审计修正后开始实现）
+更新时间：2026-06-01 00:10
+当前负责人：Codex（product-detect 数据集生成 + codex-monitor 阶段 2）
 当前分支：data-model-restructure
-当前焦点：Codex Monitor 阶段 0 + 阶段 1 实现（已收到 Claude Code 正式审计）
+当前焦点：(1) product-detect KGOS 训练图：确认无训练进程占用后生成正式 train/business-val 数据集；(2) Codex Monitor 阶段 2（Claude Code reader）已放行
 
 ## 已完成
 - Git 仓库边界优化：.gitignore 精确排除运行时数据，24 个运行时文件从索引移除（ac377b1）
@@ -32,12 +32,19 @@
   - 用户决策：Python + tkinter 批准，视觉风格改为浅色（推翻 Codex 原深色方案）
   - 执行许可：修正 3 处后可开始阶段 0 + 阶段 1
 - 线上仓库已同步：`data-model-restructure` 已推送到 `origin/data-model-restructure`
+- product-detect 生成器已改为 KGOS 白底业务图规则（2026-05-31）：
+  - `scripts/generate.py` 支持 `--profile train|business-val`
+  - 训练场景固定为 20% 单品、35% 混放无遮挡、45% 混放遮挡
+  - 遮挡后按最终可见 alpha mask 写 bbox，可见面积 <35% 的目标不写 label
+  - `scripts/verify.py` 可用 `--dataset kgos_business_val --split val` 抽查业务验收集
+  - 已新增 `tests/test_generate.py` 覆盖生成规则与 business-val 输出
 
 ## 未完成
 - Codex 未执行售后系统重启；如需要线上 server 立刻加载新 `lib/` 逻辑，仍需手动运行 `/aftersales-restart`
-- Codex Monitor：Codex 需按审计修正 3 处后，开始阶段 0（项目初始化）+ 阶段 1（reader_codex.py）
+- Codex Monitor 阶段 0/1 已完成验证（2026-06-01）：4/4 测试通过，smoke 无对话内容泄露，阶段 2（Claude Code reader）放行
 - product-mapping 品牌数据重构：图片 jpg→png 迁移，品牌目录整理
 - product-detect/assets/ 16MB 训练素材已从 Git 排除，后续需决定外部存储位置
+- product-detect 尚未覆盖生成正式 `datasets/kgos/` 与 `datasets/kgos_business_val/`；下一步生成前应确认没有训练进程正在读取旧数据集
 - transfer/ 本地目录已从当前仓库忽略；如确认不再需要本地副本，再手动清理
 
 ## 新增协作规则
