@@ -545,7 +545,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const marginStr = margin != null ? margin.toFixed(1) : '?';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
     return fin({ ...reject(
-      `${actionSummary}，等快递退返回我司后再退款`,
+      `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`,
       interceptWarnings(cd),
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
     ), reasonCode: 'INTERCEPT_TIMEOUT' });

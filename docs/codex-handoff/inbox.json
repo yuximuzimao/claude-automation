@@ -1,8 +1,33 @@
 {
   "protocol": "codex-handoff-v1",
   "description": "Codex → Claude Code 协作收件箱。Codex 追加条目，Claude Code SessionStart hook 检查。已处理完的条目移到 processed 数组。",
-  "pending": [],
+  "pending": [
+    {
+      "id": "2026-05-31T15:11:45+08:00",
+      "project": "codex-monitor",
+      "action": "review-plan",
+      "file": "docs/codex-handoff/codex-monitor-review-plan.md",
+      "summary": "请 Claude Code 基于本机事实和网页版 Claude 临时反馈，重新调整 Codex Monitor 新项目计划",
+      "from": "codex",
+      "timestamp": "2026-05-31T15:11:45+08:00",
+      "status": "unread"
+    }
+  ],
   "processed": [
+    {
+      "id": "2026-05-31T01:48:58+08:00",
+      "project": "codex-monitor",
+      "action": "review-plan",
+      "file": "docs/codex-handoff/codex-monitor-review-plan.md",
+      "summary": "Codex Monitor 初版优化计划已根据网页版 Claude 临时反馈修正；仍等待 Claude Code 正式复审",
+      "from": "codex",
+      "timestamp": "2026-05-31T01:48:58+08:00",
+      "status": "processed",
+      "processedAt": "2026-05-31T15:03:32+08:00",
+      "processedBy": "codex",
+      "resolution": "superseded-by-new-review-request",
+      "responseFile": "docs/codex-handoff/codex-monitor-web-claude-feedback.md"
+    },
     {
       "id": "2026-05-30T17:09:33+08:00",
       "project": "aftersales-automation",

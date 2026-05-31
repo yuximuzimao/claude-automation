@@ -77,15 +77,6 @@ function addQueueItem(item) {
   );
   if (exists) return null;
 
-  // live 模式：已有执行记录（executedAt）的工单不重复入队
-  if ((item.mode || 'sim') === 'live') {
-    const sims = readSimulations();
-    const executed = sims.some(
-      s => s.workOrderNum === item.workOrderNum && s.mode === 'live' && !!s.executedAt
-    );
-    if (executed) return null;
-  }
-
   const id = `q-${Date.now()}-${queue.items.length}`;
   const newItem = {
     id,

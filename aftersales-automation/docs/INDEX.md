@@ -256,3 +256,6 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#70 多弹窗并存时必须按 title 精确匹配，禁止"取第一个可见 wrapper"**：多个 `.el-dialog__wrapper` 同时存在时（如"提示"弹窗 + "新建售后工单"弹窗），DOM 顺序决定哪个排第一。取第一个可见结果是随机的——"提示"弹窗无 el-select → `sels[1]` undefined → throw。**规则：所有弹窗操作必须验证 `.el-dialog__title` 文本**：`Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(w => w.getBoundingClientRect().width > 0 && w.querySelector('.el-dialog__title')?.textContent.includes('XXX'))`。2026-05-13。
 - `[∞]` **#71 调用新模块函数前必须先确认其返回结构**：`erpNav()` 返回 `{ success, data }`，代码检查 `navResult.ok`（undefined）→ 条件永远 falsy → 抛"ERP导航失败: undefined"。**规则：调用任何新模块函数前，先用 `smart_unfold` 或 Read 看返回值字段，禁止凭"猜测"写 `.ok / .result / .data`**。2026-05-13。
 - `[∞]` **#72 新功能必须逐函数自测，禁止一次性跑全链路**：4 个 bug（死代码、全局选择器、弹窗不精确、navResult.ok）叠加在一起，每次只暴露最外层，要多轮才能清干净。**规则：逐函数独立测（cdp.eval 验证 DOM，再测单步 processOne），确认每步通过后再组装，最后跑全链路**。用户说"一步一步来"是不变的准绳。2026-05-13。
+- `[∞]` **#73 `executedAt` 不等于工单已完成**：skip / auto-archive 也会写 `executedAt`，不能用 simulations 里存在 `executedAt` 来阻止重新入队或重处理；否则扫描能发现工单但无法入队。只在 auto-execute 防重复 approve/reject 的边界使用执行记录。2026-05-30。
+- `[∞]` **#74 重启 server 不等于自动重跑工单**：`/aftersales-restart` 只负责让新 `lib/` 逻辑生效并报告状态，不自动 batch-reprocess。自动重采会覆盖用户已审阅但未执行的决策；是否重采必须由用户手动选择。2026-05-30。
+- `[∞]` **#75 flow-5.3 用户可见拒绝原因使用固定模板**：`INTERCEPT_TIMEOUT` 不能把动态快递单号拼进用户可见 reason。固定模板用 `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`，具体运单和状态放 warnings / 诊断信息。2026-05-30。

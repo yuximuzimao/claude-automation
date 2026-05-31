@@ -392,17 +392,6 @@ async function reprocessOne(queueItemId, hint = '') {
     log(`[${queueItem.workOrderNum}] 跳过重处理 → 已执行完成 (${queueItem.status})`);
     return;
   }
-  // 没有 hint 时：检查历史 sim 是否已有执行记录（防止第二次 scan-finalize 重复处理）
-  if (!hint) {
-    const sims = db.readSimulations();
-    const prevExec = sims.some(s => s.workOrderNum === queueItem.workOrderNum && s.mode === 'live' && !!s.executedAt);
-    if (prevExec) {
-      log(`[${queueItem.workOrderNum}] 跳过重处理 → 历史已有执行记录，归档`);
-      db.updateQueueItem(queueItemId, { status: 'done' });
-      sse.broadcast('pipeline-update', { stage: 'done', workOrderNum: queueItem.workOrderNum });
-      return;
-    }
-  }
 
   // 重置为 pending，让 collect.js 重新采集
   db.updateQueueItem(queueItemId, { status: 'pending', hint: hint || null });

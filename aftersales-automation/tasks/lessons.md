@@ -97,7 +97,6 @@ Session 级新发现记在这里。稳定后迁入 `docs/INDEX.md §6`，不在�
 | 22 | session 缓存跳过 reload 后必须清残留弹窗；`node -e require()` 会执行 main() | feedback_jingling_dev.md §22 |
 | 23 | ERP 多行数据必须聚合读取 | feedback_jingling_dev.md §23 |
 | 24 | ERP 交易关闭状态 fallback textSnippet | feedback_jingling_dev.md §24 |
-| 25 | 已执行工单重处理防护（executedAt 检查） | feedback_jingling_dev.md §25 |
 | 27 | 并发扫描同一账号导致 CDP 脏数据 crash | feedback_jingling_dev.md §27 |
 | 28 | list.js 不点筛选标签会读到所有状态工单 | feedback_jingling_dev.md §28 |
 | 29 | 驿站待取件 ≠ 已签收，两者处理方式不同 | feedback_jingling_dev.md §29 |
