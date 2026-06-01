@@ -1,0 +1,148 @@
+"""Reader for local Claude Code project JSONL files."""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+from typing import Any, Iterable
+
+# Match /claude/{project}/ in any file path found in session content.
+# Used to infer the active project when cwd is a parent/workspace dir.
+_PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
+_INFERENCE_SKIP = frozenset({"projects", "claude", ".claude"})
+
+from app.models import (
+    ClaudeScanResult,
+    ClaudeSessionResult,
+    ClaudeUsage,
+    ClaudeUsageEvent,
+)
+
+
+def read_claude_session_file(path: Path) -> ClaudeSessionResult:
+    cwd: str | None = None
+    by_model: dict[str, ClaudeUsage] = {}
+    usage_events: list[ClaudeUsageEvent] = []
+    assistant_events = 0
+    parse_errors = 0
+    inferred_project = _infer_project(path)
+
+    with path.open("r", encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                parse_errors += 1
+                continue
+
+            if not isinstance(event, dict) or event.get("type") != "assistant":
+                continue
+
+            message = event.get("message")
+            if not isinstance(message, dict):
+                continue
+
+            usage_data = message.get("usage")
+            if not isinstance(usage_data, dict):
+                continue
+
+            assistant_events += 1
+            cwd = _read_cwd(event) or cwd
+            model = _read_model(message)
+            usage = ClaudeUsage.from_mapping(usage_data)
+            by_model[model] = by_model.get(model, ClaudeUsage()).plus(usage)
+            timestamp = event.get("timestamp")
+            if isinstance(timestamp, str):
+                usage_events.append(
+                    ClaudeUsageEvent(
+                        timestamp=timestamp,
+                        cwd=_read_cwd(event),
+                        model=model,
+                        usage=usage,
+                        session_path=str(path),
+                        inferred_project=inferred_project,
+                    )
+                )
+
+    return ClaudeSessionResult(
+        path=path,
+        cwd=cwd,
+        by_model=by_model,
+        usage_events=tuple(usage_events),
+        assistant_events=assistant_events,
+        parse_errors=parse_errors,
+    )
+
+
+def read_claude_projects(
+    root: Path,
+    *,
+    modified_since: float | int | None = None,
+    max_files: int | None = None,
+) -> ClaudeScanResult:
+    files = list(_iter_claude_files(root, modified_since=modified_since))
+    if max_files is not None:
+        files = files[:max_files]
+    return ClaudeScanResult(
+        sessions=tuple(read_claude_session_file(path) for path in files)
+    )
+
+
+_SKIP_PROJECT_DIR_PATTERNS = (
+    "observer-sessions",   # claude-mem observer generates thousands of system sessions
+)
+
+
+def _iter_claude_files(
+    root: Path,
+    *,
+    modified_since: float | int | None = None,
+) -> Iterable[Path]:
+    if root.is_file():
+        if _mtime_matches(root, modified_since):
+            yield root
+        return
+    if not root.exists():
+        return
+    for path in sorted(root.glob("**/*.jsonl")):
+        if any(pat in part for part in path.parts for pat in _SKIP_PROJECT_DIR_PATTERNS):
+            continue
+        if _mtime_matches(path, modified_since):
+            yield path
+
+
+def _mtime_matches(path: Path, modified_since: float | int | None) -> bool:
+    if modified_since is None:
+        return True
+    return path.stat().st_mtime >= modified_since
+
+
+def _infer_project(path: Path, *, max_lines: int = 100) -> str | None:
+    """Scan first N lines of a session file for /claude/{project}/ path mentions."""
+    votes: dict[str, int] = {}
+    try:
+        with path.open("r", encoding="utf-8", errors="replace") as f:
+            for i, line in enumerate(f):
+                if i >= max_lines:
+                    break
+                for m in _PROJECT_PATH_RE.finditer(line):
+                    name = m.group(1)
+                    if name not in _INFERENCE_SKIP:
+                        votes[name] = votes.get(name, 0) + 1
+    except OSError:
+        return None
+    if not votes:
+        return None
+    winner = max(votes, key=lambda k: votes[k])
+    return winner if votes[winner] >= 1 else None
+
+
+def _read_cwd(event: dict[str, Any]) -> str | None:
+    cwd = event.get("cwd")
+    return cwd if isinstance(cwd, str) else None
+
+
+def _read_model(message: dict[str, Any]) -> str:
+    model = message.get("model")
+    return model if isinstance(model, str) and model else "<missing>"
