@@ -97,7 +97,7 @@ def aggregate_usage(
     now: str | datetime | None = None,
     month_start: str | datetime | None = None,
     timezone: str = "Asia/Shanghai",
-    top_n: int = 5,
+    top_n: int = 10,
 ) -> UsageAggregate:
     tz = ZoneInfo(timezone)
     now_dt = _parse_datetime(now, tz) if now is not None else datetime.now(tz)
