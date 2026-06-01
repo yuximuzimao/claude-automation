@@ -415,7 +415,7 @@ class CodexMonitorWindow:
         if not projects:
             tk.Label(outer, text="暂无数据", bg=BG_WINDOW, fg=TEXT_SECONDARY,
                      font=self.fonts.label).pack(anchor="w", pady=8)
-            tk.Label(outer, text="本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
+            tk.Label(outer, text="结合 Claude Code 和 Codex 本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor="e").pack(anchor="e")
             return
 
@@ -444,10 +444,10 @@ class CodexMonitorWindow:
                          font=self.fonts.caption, anchor="e").grid(
                              row=row_i, column=col, sticky="e", pady=2)
 
-        # Note row: "本地日志估算" right-aligned below project rows
+        # Note row: "结合 Claude Code 和 Codex 本地日志估算" right-aligned below project rows
         note_row = tk.Frame(outer, bg=BG_WINDOW)
         note_row.pack(fill="x", pady=(4, 0))
-        tk.Label(note_row, text="本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
+        tk.Label(note_row, text="结合 Claude Code 和 Codex 本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
                  font=self.fonts.caption, anchor="e").pack(anchor="e")
 
     def _footer(self, parent: "tk.Widget") -> None:
