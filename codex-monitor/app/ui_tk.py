@@ -119,6 +119,27 @@ def run_ui(
         ) from exc
 
     root = tk.Tk(className="CodexMonitor")
+
+    # macOS: suppress Dock icon and app switcher entry for floating-widget style.
+    # Works both when launched directly and via .app bundle (LSUIElement only
+    # applies when the process is the bundle's main process).
+    try:
+        import ctypes, ctypes.util
+        _appkit = ctypes.cdll.LoadLibrary(ctypes.util.find_library("AppKit"))
+        _objc = ctypes.cdll.LoadLibrary(ctypes.util.find_library("objc"))
+        _objc.objc_getClass.restype = ctypes.c_void_p
+        _objc.sel_registerName.restype = ctypes.c_void_p
+        _objc.objc_msgSend.restype = ctypes.c_void_p
+        _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+        NSApplication = _objc.objc_getClass(b"NSApplication")
+        sel_shared = _objc.sel_registerName(b"sharedApplication")
+        sel_policy = _objc.sel_registerName(b"setActivationPolicy:")
+        app = _objc.objc_msgSend(NSApplication, sel_shared)
+        _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_long]
+        _objc.objc_msgSend(app, sel_policy, 1)  # NSApplicationActivationPolicyAccessory
+    except Exception:
+        pass
+
     window = CodexMonitorWindow(
         root,
         build_view_model(aggregate),
