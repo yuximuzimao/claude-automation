@@ -70,6 +70,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "首领形态",
+        "obtainMethods": [
+          "完成魔法学院初始精灵首领挑战，获得首领信物「阳光罐头」"
+        ]
       }
     },
     "pinyin": {
@@ -136,6 +142,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "首领形态",
+        "obtainMethods": [
+          "完成魔法学院初始精灵首领挑战，获得首领信物「熔炼之火」"
+        ]
       }
     },
     "tags": {
@@ -205,6 +217,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "首领形态",
+        "obtainMethods": [
+          "完成魔法学院初始精灵首领挑战，获得首领信物「命运钥匙」"
+        ]
       }
     },
     "tags": {
@@ -224,13 +242,55 @@
   "pet_11": {
     "name": "鸭吉吉",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
         "formName": "基础形态",
         "obtainMethods": [
           "风眠圣所(蓬松/紧实)"
+        ]
+      },
+      "蓬松的样子": {
+        "formName": "蓬松的样子",
+        "obtainMethods": [
+          "地图捕捉，果实放在缺少深水、两栖环境的眠枭庇护所里（提示可能改变精灵形态）"
+        ]
+      },
+      "紧实的样子": {
+        "formName": "紧实的样子",
+        "obtainMethods": [
+          "地图捕捉，果实放在有深水、两栖环境的眠枭庇护所里（不提示可能改变精灵形态）"
+        ]
+      },
+      "急急急鸦": {
+        "formName": "急急急鸦",
+        "obtainMethods": [
+          "一测有果实，或别人送的蛋孵化"
+        ]
+      },
+      "等一等鸭": {
+        "formName": "等一等鸭",
+        "obtainMethods": [
+          "二测有果实，或别人送的蛋孵化"
+        ]
+      },
+      "起来鸭": {
+        "formName": "起来鸭",
+        "obtainMethods": [
+          "三测有果实，或别人送的蛋孵化"
+        ]
+      },
+      "燃了鸭": {
+        "formName": "燃了鸭",
+        "obtainMethods": [
+          "公测礼有果实"
+        ]
+      },
+      "leader": {
+        "formName": "鸭吉吉国王",
+        "obtainMethods": [
+          "领地试炼获得首领信物「金色传说」"
         ]
       }
     },
@@ -264,9 +324,17 @@
           "轻风山、商业周边"
         ]
       },
-      "molting": {
-        "formName": "板板壳（蜕皮时的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "蜕皮时的样子": {
+        "formName": "蜕皮时的样子",
+        "obtainMethods": [
+          "地图捕捉，圣羽祭台的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -289,9 +357,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "molting": {
-        "formName": "咔咔壳（蜕皮时的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "蜕皮时的样子": {
+        "formName": "蜕皮时的样子",
+        "obtainMethods": [
+          "地图捕捉，圣羽祭台的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -314,9 +390,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "molting": {
-        "formName": "水泡壳（蜕皮时的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "蜕皮时的样子": {
+        "formName": "蜕皮时的样子",
+        "obtainMethods": [
+          "地图捕捉，圣羽祭台的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -417,17 +501,29 @@
           "岚诸峰西侧"
         ]
       },
-      "spring": {
-        "formName": "雪绒鸟（春天的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "开局就要捕捉，地图捕捉"
+        ]
       },
-      "summer": {
-        "formName": "雪绒鸟（夏天的样子）",
-        "obtainMethods": []
+      "秋天的样子": {
+        "formName": "秋天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       },
-      "autumn": {
-        "formName": "雪绒鸟（秋天的样子）",
-        "obtainMethods": []
+      "春天的样子": {
+        "formName": "春天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "夏天的样子": {
+        "formName": "夏天的样子",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       }
     },
     "tags": {
@@ -452,17 +548,29 @@
           "轻风山、叽叽喳喳台地"
         ]
       },
-      "spring": {
-        "formName": "冬羽雀（春天的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       },
-      "summer": {
-        "formName": "冬羽雀（夏天的样子）",
-        "obtainMethods": []
+      "秋天的样子": {
+        "formName": "秋天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       },
-      "autumn": {
-        "formName": "冬羽雀（秋天的样子）",
-        "obtainMethods": []
+      "春天的样子": {
+        "formName": "春天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "夏天的样子": {
+        "formName": "夏天的样子",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       }
     },
     "tags": {
@@ -485,17 +593,35 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "spring": {
-        "formName": "岚鸟（春天的样子）",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       },
-      "summer": {
-        "formName": "岚鸟（夏天的样子）",
-        "obtainMethods": []
+      "秋天的样子": {
+        "formName": "秋天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       },
-      "autumn": {
-        "formName": "岚鸟（秋天的样子）",
-        "obtainMethods": []
+      "春天的样子": {
+        "formName": "春天的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "夏天的样子": {
+        "formName": "夏天的样子",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
+      },
+      "leader": {
+        "formName": "霜翼领主",
+        "obtainMethods": [
+          "挑战精灵首领·霜翼领主获得首领信物，四种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -600,9 +726,17 @@
           "清风山、月牙湖岸(白天)"
         ]
       },
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
       "球球尾巴的样子": {
         "formName": "石肤蜥（球球尾巴的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       }
     },
     "tags": {
@@ -625,9 +759,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
       "球球尾巴的样子": {
         "formName": "石刺蜥（球球尾巴的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       }
     },
     "pinyin": {
@@ -650,9 +792,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
       "球球尾巴的样子": {
         "formName": "石冠王蜥（球球尾巴的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       }
     },
     "pinyin": {
@@ -723,6 +873,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "迷嶂布莱克",
+        "obtainMethods": [
+          "挑战精灵首领·迷嶂布莱克获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -855,17 +1011,29 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "平常的样子": {
+        "formName": "平常的样子",
+        "obtainMethods": [
+          "爬爬随机进化"
+        ]
+      },
       "幽冥眼的样子": {
         "formName": "化蝶（幽冥眼的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "爬爬随机进化"
+        ]
       },
       "喵喵的样子": {
         "formName": "化蝶（喵喵的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "爬爬随机进化"
+        ]
       },
       "奇丽花的样子": {
         "formName": "化蝶（奇丽花的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "爬爬随机进化"
+        ]
       }
     },
     "pinyin": {
@@ -895,6 +1063,12 @@
         "obtainMethods": [
           "商店街周边、叽叽喳喳台地(木桩)"
         ]
+      },
+      "leader": {
+        "formName": "幻影荆棘",
+        "obtainMethods": [
+          "挑战精灵首领·幻影荆棘获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -922,7 +1096,7 @@
   "pet_36": {
     "name": "小鼠獭",
     "element": [
-      "普",
+      "普通",
       "水"
     ],
     "forms": {
@@ -946,7 +1120,7 @@
   "pet_37": {
     "name": "燕尾獭",
     "element": [
-      "普",
+      "普通",
       "水"
     ],
     "forms": {
@@ -968,7 +1142,7 @@
   "pet_38": {
     "name": "卷胡巨獭",
     "element": [
-      "普",
+      "普通",
       "水"
     ],
     "forms": {
@@ -1017,7 +1191,7 @@
     }
   },
   "pet_40": {
-    "name": "晶石蝎",
+    "name": "晶石蜗",
     "element": [
       "光",
       "地"
@@ -1027,29 +1201,47 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "西瓜碧玺的样子": {
+        "formName": "西瓜碧玺的样子",
+        "obtainMethods": [
+          "撞击3次蓝晶碧玺"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "莲花刚玉的样子": {
+        "formName": "莲花刚玉的样子",
+        "obtainMethods": [
+          "撞击3次紫莲刚玉"
+        ]
       },
-      "形态3": {
-        "formName": "形态3",
-        "obtainMethods": []
+      "星彩榴石的样子": {
+        "formName": "星彩榴石的样子",
+        "obtainMethods": [
+          "撞击3次黄石榴石"
+        ]
       },
-      "形态4": {
-        "formName": "形态4",
-        "obtainMethods": []
+      "火山琉璃的样子": {
+        "formName": "火山琉璃的样子",
+        "obtainMethods": [
+          "撞击3次黑晶琉璃"
+        ]
       },
-      "形态5": {
-        "formName": "形态5",
-        "obtainMethods": []
+      "蓝锥矿的样子": {
+        "formName": "蓝锥矿的样子",
+        "obtainMethods": [
+          "撞击3次蓝晶碧玺＋3次紫莲刚玉"
+        ]
       },
-      "形态6": {
-        "formName": "形态6",
-        "obtainMethods": []
+      "烧蓝黄金的样子": {
+        "formName": "烧蓝黄金的样子",
+        "obtainMethods": [
+          "撞击任意3种矿石各3次"
+        ]
+      },
+      "leader": {
+        "formName": "钻石蜗",
+        "obtainMethods": [
+          "挑战精灵首领·钻石蜗获得首领信物，六种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -1123,6 +1315,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "奇丽果",
+        "obtainMethods": [
+          "挑战精灵首领·奇丽果获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -1157,15 +1355,21 @@
       },
       "沙地附近的样子": {
         "formName": "丢丢（沙地附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，晨曦山的魔力之源附近"
+        ]
+      },
+      "草地附近的样子": {
+        "formName": "草地附近的样子",
+        "obtainMethods": [
+          "地图捕捉，学院驻地和风息山口的魔力之源附近"
+        ]
       },
       "雪山附近的样子": {
         "formName": "丢丢（雪山附近的样子）",
-        "obtainMethods": []
-      },
-      "火山附近的样子": {
-        "formName": "丢丢（火山附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，星霜崖地的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -1190,15 +1394,21 @@
       },
       "沙地附近的样子": {
         "formName": "卡卡虫（沙地附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，晨曦山的魔力之源附近"
+        ]
+      },
+      "草地附近的样子": {
+        "formName": "草地附近的样子",
+        "obtainMethods": [
+          "地图捕捉，学院驻地和风息山口的魔力之源附近"
+        ]
       },
       "雪山附近的样子": {
         "formName": "卡卡虫（雪山附近的样子）",
-        "obtainMethods": []
-      },
-      "火山附近的样子": {
-        "formName": "卡卡虫（火山附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，星霜崖地的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -1223,15 +1433,21 @@
       },
       "沙地附近的样子": {
         "formName": "卡瓦重（沙地附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，晨曦山的魔力之源附近"
+        ]
+      },
+      "草地附近的样子": {
+        "formName": "草地附近的样子",
+        "obtainMethods": [
+          "地图捕捉，学院驻地和风息山口的魔力之源附近"
+        ]
       },
       "雪山附近的样子": {
         "formName": "卡瓦重（雪山附近的样子）",
-        "obtainMethods": []
-      },
-      "火山附近的样子": {
-        "formName": "卡瓦重（火山附近的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，星霜崖地的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -1281,6 +1497,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "风暴战犬",
+        "obtainMethods": [
+          "挑战精灵首领·风暴战犬获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -1304,7 +1526,7 @@
   "pet_49": {
     "name": "绿耳松鼠",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1327,7 +1549,7 @@
   "pet_50": {
     "name": "抱枕松鼠",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1348,7 +1570,7 @@
   "pet_51": {
     "name": "蹦床松鼠",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1463,7 +1685,15 @@
       },
       "闭眼的样子": {
         "formName": "暗影灵面（闭眼的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉小灵面，在魔力之源消磨时间至中午再进化"
+        ]
+      },
+      "睁眼的样子": {
+        "formName": "睁眼的样子",
+        "obtainMethods": [
+          "地图捕捉小灵面，在魔力之源消磨时间至晚上再进化"
+        ]
       }
     },
     "pinyin": {
@@ -1488,7 +1718,15 @@
       },
       "闭眼的样子": {
         "formName": "幽冥眼（闭眼的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "对应的暗影灵面进化"
+        ]
+      },
+      "睁眼的样子": {
+        "formName": "睁眼的样子",
+        "obtainMethods": [
+          "对应的暗影灵面进化"
+        ]
       }
     },
     "pinyin": {
@@ -1566,7 +1804,7 @@
   "pet_59": {
     "name": "兽花蕾",
     "element": [
-      "冰",
+      "光",
       "草"
     ],
     "forms": {
@@ -1595,7 +1833,7 @@
   "pet_60": {
     "name": "伏地兽",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1618,9 +1856,9 @@
     "destined_hero": "命定勇者"
   },
   "pet_61": {
-    "name": "贪食獾",
+    "name": "贪食鼹",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1639,9 +1877,9 @@
     }
   },
   "pet_62": {
-    "name": "巨嘴针鼹",
+    "name": "巨噬针鼹",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1663,7 +1901,7 @@
     "name": "蹦蹦种子",
     "element": [
       "草",
-      "莓"
+      "毒"
     ],
     "forms": {
       "basic": {
@@ -1674,15 +1912,27 @@
       },
       "彩玉球形态": {
         "formName": "蹦蹦种子（彩玉球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
       "短毛球形态": {
         "formName": "蹦蹦种子（短毛球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
-      "象牙球形态": {
-        "formName": "蹦蹦种子（象牙球形态）",
-        "obtainMethods": []
+      "海神球形态": {
+        "formName": "海神球形态",
+        "obtainMethods": [
+          "地图捕捉，或用蛋孵化"
+        ]
+      },
+      "象牙花形态": {
+        "formName": "象牙花形态",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       }
     },
     "tags": {
@@ -1699,7 +1949,7 @@
     "name": "蹦蹦草",
     "element": [
       "草",
-      "莓"
+      "毒"
     ],
     "forms": {
       "basic": {
@@ -1708,15 +1958,27 @@
       },
       "彩玉球形态": {
         "formName": "蹦蹦草（彩玉球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
       "短毛球形态": {
         "formName": "蹦蹦草（短毛球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
-      "象牙球形态": {
-        "formName": "蹦蹦草（象牙球形态）",
-        "obtainMethods": []
+      "海神球形态": {
+        "formName": "海神球形态",
+        "obtainMethods": [
+          "地图捕捉，或用蛋孵化"
+        ]
+      },
+      "象牙花形态": {
+        "formName": "象牙花形态",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       }
     },
     "pinyin": {
@@ -1733,7 +1995,7 @@
     "name": "蹦蹦花",
     "element": [
       "草",
-      "莓"
+      "毒"
     ],
     "forms": {
       "basic": {
@@ -1742,15 +2004,27 @@
       },
       "彩玉球形态": {
         "formName": "蹦蹦花（彩玉球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
       "短毛球形态": {
         "formName": "蹦蹦花（短毛球形态）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       },
-      "象牙球形态": {
-        "formName": "蹦蹦花（象牙球形态）",
-        "obtainMethods": []
+      "海神球形态": {
+        "formName": "海神球形态",
+        "obtainMethods": [
+          "地图捕捉，或用蛋孵化"
+        ]
+      },
+      "象牙花形态": {
+        "formName": "象牙花形态",
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态），或者用蛋孵化"
+        ]
       }
     },
     "pinyin": {
@@ -1943,7 +2217,7 @@
   "pet_73": {
     "name": "白发懒人",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -1966,7 +2240,7 @@
   "pet_74": {
     "name": "动力猿",
     "element": [
-      "普",
+      "普通",
       "武"
     ],
     "forms": {
@@ -1988,7 +2262,7 @@
   "pet_75": {
     "name": "瞌睡王",
     "element": [
-      "普",
+      "普通",
       "武"
     ],
     "forms": {
@@ -2013,7 +2287,7 @@
     }
   },
   "pet_76": {
-    "name": "海盗虫",
+    "name": "海盔虫",
     "element": [
       "水",
       "毒"
@@ -2025,13 +2299,17 @@
           "商业街周边、月牙湖岸"
         ]
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉，精灵首领·千棘海针附近或沉船旋涡沙滩外圈"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "磨损的样子": {
+        "formName": "磨损的样子",
+        "obtainMethods": [
+          "地图捕捉，沉船旋涡沙滩内圈"
+        ]
       }
     },
     "tags": {
@@ -2055,9 +2333,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉，精灵首领·千棘海针附近或沉船旋涡沙滩外圈"
+        ]
+      },
       "磨损的样子": {
         "formName": "刺盔虫（磨损的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，沉船旋涡沙滩内圈"
+        ]
       }
     },
     "pinyin": {
@@ -2081,9 +2367,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "本来的样子": {
+        "formName": "本来的样子",
+        "obtainMethods": [
+          "地图捕捉，精灵首领·千棘海针附近或沉船旋涡沙滩外圈"
+        ]
+      },
       "磨损的样子": {
         "formName": "千棘盔（磨损的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，沉船旋涡沙滩内圈"
+        ]
       }
     },
     "pinyin": {
@@ -2145,9 +2439,17 @@
           "聆风塔地、风息山口"
         ]
       },
+      "星光能量的样子": {
+        "formName": "星光能量的样子",
+        "obtainMethods": [
+          "地图捕捉，精灵首领·风暴战犬附近"
+        ]
+      },
       "月光能量的样子": {
         "formName": "小星光（月光能量的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态）"
+        ]
       }
     },
     "tags": {
@@ -2170,9 +2472,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "星光能量的样子": {
+        "formName": "星光能量的样子",
+        "obtainMethods": [
+          "地图捕捉，精灵首领·风暴战犬附近"
+        ]
+      },
       "月光能量的样子": {
         "formName": "星光狮（月光能量的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态）"
+        ]
       }
     },
     "pinyin": {
@@ -2246,6 +2556,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "女王蜂",
+        "obtainMethods": [
+          "挑战精灵首领·女王蜂获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -2349,7 +2665,7 @@
     "destined_hero": "命定勇者"
   },
   "pet_88": {
-    "name": "乖乖鹅",
+    "name": "乖乖鹄",
     "element": [
       "翼",
       "水"
@@ -2449,7 +2765,7 @@
     }
   },
   "pet_92": {
-    "name": "锤头鹬",
+    "name": "锤头鹳",
     "element": [
       "翼",
       "水"
@@ -2502,7 +2818,7 @@
     }
   },
   "pet_94": {
-    "name": "魔草巫灵",
+    "name": "魔草精灵",
     "element": [
       "草",
       "幻"
@@ -2562,7 +2878,7 @@
     "name": "咔咔羽毛",
     "element": [
       "翼",
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -2587,7 +2903,7 @@
     "name": "咔咔雀",
     "element": [
       "翼",
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -2609,7 +2925,7 @@
     "name": "咔咔鸟",
     "element": [
       "翼",
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -2834,6 +3150,12 @@
         "obtainMethods": [
           "风眠圣所"
         ]
+      },
+      "leader": {
+        "formName": "深渊罗隐",
+        "obtainMethods": [
+          "领地试炼获得首领信物「深渊罗隐的信物」"
+        ]
       }
     },
     "tags": {
@@ -2907,6 +3229,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "首领形态",
+        "obtainMethods": [
+          "领地试炼获得首领信物「遥远之音」"
+        ]
       }
     },
     "tags": {
@@ -3034,6 +3362,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "祭礼巨像",
+        "obtainMethods": [
+          "挑战精灵首领·祭礼巨像获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -3086,6 +3420,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "首领形态",
+        "obtainMethods": [
+          "推进风眠省旅途任务获得首领信物「生长痛」"
+        ]
       }
     },
     "tags": {
@@ -3113,7 +3453,7 @@
   "pet_118": {
     "name": "旋叶虫",
     "element": [
-      "普",
+      "普通",
       "虫"
     ],
     "forms": {
@@ -3125,7 +3465,15 @@
       },
       "枯叶的样子": {
         "formName": "旋叶虫（枯叶的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，黑水峡的魔力之源附近的树枝上"
+        ]
+      },
+      "金黄的样子": {
+        "formName": "金黄的样子",
+        "obtainMethods": [
+          "地图捕捉，叽叽喳喳台地和圣羽祭台的的魔力之源附近的枯树上"
+        ]
       }
     },
     "tags": {
@@ -3141,7 +3489,7 @@
   "pet_119": {
     "name": "蓬叶虫",
     "element": [
-      "普",
+      "普通",
       "虫"
     ],
     "forms": {
@@ -3151,7 +3499,15 @@
       },
       "枯叶的样子": {
         "formName": "蓬叶虫（枯叶的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，黑水峡的魔力之源附近的树枝上"
+        ]
+      },
+      "金黄的样子": {
+        "formName": "金黄的样子",
+        "obtainMethods": [
+          "地图捕捉，叽叽喳喳台地和圣羽祭台的的魔力之源附近的枯树上"
+        ]
       }
     },
     "pinyin": {
@@ -3167,7 +3523,7 @@
   "pet_120": {
     "name": "风滚暮虫",
     "element": [
-      "普",
+      "普通",
       "虫"
     ],
     "forms": {
@@ -3177,7 +3533,15 @@
       },
       "枯叶的样子": {
         "formName": "风滚暮虫（枯叶的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，黑水峡的魔力之源附近的树枝上"
+        ]
+      },
+      "金黄的样子": {
+        "formName": "金黄的样子",
+        "obtainMethods": [
+          "地图捕捉，叽叽喳喳台地和圣羽祭台的的魔力之源附近的枯树上"
+        ]
       }
     },
     "pinyin": {
@@ -3198,7 +3562,7 @@
   "pet_121": {
     "name": "小黑猫",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -3222,12 +3586,18 @@
   "pet_122": {
     "name": "黑猫巫师",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "黑猫密探",
+        "obtainMethods": [
+          "挑战精灵首领·黑猫密探获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -3249,7 +3619,7 @@
     "destined_hero": "命定勇者"
   },
   "pet_123": {
-    "name": "怨幽狸",
+    "name": "忽幽狸",
     "element": [
       "幽",
       "毒"
@@ -3453,6 +3823,12 @@
         "formName": "基础形态",
         "obtainMethods": [
           "星霜崖地、圣羽祭台-西北(夜晚)"
+        ]
+      },
+      "leader": {
+        "formName": "恶魔狼王",
+        "obtainMethods": [
+          "挑战精灵首领·恶魔狼王获得首领信物，原色和异色进化其中一种即可"
         ]
       }
     },
@@ -3792,6 +4168,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "雪影冰灵",
+        "obtainMethods": [
+          "挑战精灵首领·雪影冰灵获得首领信物，原色和异色进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -3815,7 +4197,7 @@
   "pet_145": {
     "name": "权杖-II",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -3838,7 +4220,7 @@
   "pet_146": {
     "name": "权杖-V",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -3972,7 +4354,7 @@
     }
   },
   "pet_151": {
-    "name": "灵羽勇士",
+    "name": "圣羽勇士",
     "element": [
       "翼"
     ],
@@ -4130,7 +4512,7 @@
     }
   },
   "pet_158": {
-    "name": "炽心勇狮",
+    "name": "炽焰勇狮",
     "element": [
       "火",
       "武"
@@ -4177,7 +4559,7 @@
     }
   },
   "pet_160": {
-    "name": "水蛇锁",
+    "name": "水滴锁",
     "element": [
       "水",
       "武"
@@ -4224,7 +4606,7 @@
   "pet_162": {
     "name": "公平鸽",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -4322,9 +4704,17 @@
           "港口驻地-北"
         ]
       },
+      "崖间地的样子": {
+        "formName": "崖间地的样子",
+        "obtainMethods": [
+          "地图捕捉，港口驻地的魔力之源附近"
+        ]
+      },
       "高山地的样子": {
         "formName": "小狮鹫（高山地的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态）"
+        ]
       }
     },
     "tags": {
@@ -4347,9 +4737,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "崖间地的样子": {
+        "formName": "崖间地的样子",
+        "obtainMethods": [
+          "地图捕捉，港口驻地的魔力之源附近，王国城堡的鹰巢内"
+        ]
+      },
       "高山地的样子": {
         "formName": "神圣狮鹫（高山地的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态）"
+        ]
       }
     },
     "pinyin": {
@@ -4372,9 +4770,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "崖间地的样子": {
+        "formName": "崖间地的样子",
+        "obtainMethods": [
+          "地图捕捉，港口驻地的魔力之源附近，王国城堡的鹰巢内"
+        ]
+      },
       "高山地的样子": {
         "formName": "皇家狮鹫（高山地的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "果实放入眠枭庇护所后可捕捉（提示可能改变精灵形态）"
+        ]
       }
     },
     "pinyin": {
@@ -4465,7 +4871,7 @@
     }
   },
   "pet_171": {
-    "name": "波波蝶",
+    "name": "波波螺",
     "element": [
       "地",
       "水"
@@ -4477,13 +4883,17 @@
           "水边到处都是"
         ]
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "（本来的样子）": {
+        "formName": "（本来的样子）",
+        "obtainMethods": [
+          "地图捕捉，监管区的魔力之源附近"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "被污染的样子": {
+        "formName": "被污染的样子",
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -4507,9 +4917,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "（本来的样子）": {
+        "formName": "（本来的样子）",
+        "obtainMethods": [
+          "地图捕捉，监管区的魔力之源附近"
+        ]
+      },
       "被污染的样子": {
         "formName": "消波螺（被污染的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -4533,9 +4951,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "（本来的样子）": {
+        "formName": "（本来的样子）",
+        "obtainMethods": [
+          "地图捕捉，监管区的魔力之源附近"
+        ]
+      },
       "被污染的样子": {
         "formName": "嗜波螺（被污染的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -4911,9 +5337,17 @@
           "二叠山丘"
         ]
       },
+      "白子": {
+        "formName": "白子",
+        "obtainMethods": [
+          "地图捕捉，果实放在眠枭庇护所里（不提示可能改变精灵形态）"
+        ]
+      },
       "黑子": {
         "formName": "棋棋（黑子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，果实放在眠枭庇护所里（提示可能改变精灵形态）"
+        ]
       }
     },
     "tags": {
@@ -4939,9 +5373,23 @@
           "二叠山丘"
         ]
       },
+      "白子": {
+        "formName": "白子",
+        "obtainMethods": [
+          "白子棋棋（♂）击败地图上的黑子棋骑士3次进化，或地图捕捉"
+        ]
+      },
       "黑子": {
         "formName": "棋骑士（黑子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "黑子棋棋（♂）击败地图上的白子棋骑士3次进化，或地图捕捉"
+        ]
+      },
+      "leader": {
+        "formName": "棋契陛下",
+        "obtainMethods": [
+          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -4963,7 +5411,7 @@
     "destined_hero": "命定勇者"
   },
   "pet_190": {
-    "name": "棋弃垒",
+    "name": "棋齐垒",
     "element": [
       "武",
       "地"
@@ -4975,13 +5423,23 @@
           "二叠山丘、银河蛇口"
         ]
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "白子": {
+        "formName": "白子",
+        "obtainMethods": [
+          "白子棋棋（♂）击败地图上的黑子棋齐垒3次进化，或地图捕捉"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "黑子": {
+        "formName": "黑子",
+        "obtainMethods": [
+          "黑子棋棋（♂）击败地图上的白子棋齐垒3次进化，或地图捕捉"
+        ]
+      },
+      "leader": {
+        "formName": "棋契陛下",
+        "obtainMethods": [
+          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -4999,7 +5457,7 @@
     "destined_hero": "命定勇者"
   },
   "pet_191": {
-    "name": "棋折膂",
+    "name": "棋祈督",
     "element": [
       "武",
       "地"
@@ -5011,13 +5469,23 @@
           "二叠山丘、咕嘟咕嘟浅滩"
         ]
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "白子": {
+        "formName": "白子",
+        "obtainMethods": [
+          "白子棋棋（♂）击败地图上的黑子棋祈督3次进化，或地图捕捉"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "黑子": {
+        "formName": "黑子",
+        "obtainMethods": [
+          "黑子棋棋（♂）击败地图上的白子棋祈督3次进化，或地图捕捉"
+        ]
+      },
+      "leader": {
+        "formName": "棋契陛下",
+        "obtainMethods": [
+          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -5047,9 +5515,23 @@
           "二叠山丘、王国城堡"
         ]
       },
+      "白子": {
+        "formName": "白子",
+        "obtainMethods": [
+          "白子棋棋（♀）击败地图上的黑子棋绮后3次进化，或地图捕捉"
+        ]
+      },
       "黑子": {
         "formName": "棋绮后（黑子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "黑子棋棋（♀）击败地图上的白子棋绮后3次进化，或地图捕捉"
+        ]
+      },
+      "leader": {
+        "formName": "棋契陛下",
+        "obtainMethods": [
+          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+        ]
       }
     },
     "tags": {
@@ -5241,6 +5723,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "奇梦咪",
+        "obtainMethods": [
+          "挑战精灵首领·奇梦咪获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -5345,6 +5833,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "伊兰龙",
+        "obtainMethods": [
+          "挑战精灵首领·伊兰龙获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -5495,7 +5989,7 @@
   "pet_210": {
     "name": "小箱怪",
     "element": [
-      "机",
+      "机械",
       "幻"
     ],
     "forms": {
@@ -5519,7 +6013,7 @@
   "pet_211": {
     "name": "迷迷箱怪",
     "element": [
-      "机",
+      "机械",
       "幻"
     ],
     "forms": {
@@ -5763,17 +6257,29 @@
           "咸水湾(海上)"
         ]
       },
-      "杏黄百合": {
-        "formName": "海枝枝（杏黄百合）",
-        "obtainMethods": []
-      },
       "洋红沙丁": {
         "formName": "海枝枝（洋红沙丁）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，彼得大道的魔力之源附近"
+        ]
       },
       "翠绿纶布": {
         "formName": "海枝枝（翠绿纶布）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，咸水湾的魔力之源附近"
+        ]
+      },
+      "碧蓝珊瑚": {
+        "formName": "碧蓝珊瑚",
+        "obtainMethods": [
+          "地图捕捉，监管区的魔力之源附近"
+        ]
+      },
+      "杏黄百合": {
+        "formName": "海枝枝（杏黄百合）",
+        "obtainMethods": [
+          "地图捕捉，港口驻地的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -5794,7 +6300,7 @@
   "pet_221": {
     "name": "多西",
     "element": [
-      "机",
+      "机械",
       "地"
     ],
     "forms": {
@@ -5819,7 +6325,7 @@
   "pet_222": {
     "name": "库多西",
     "element": [
-      "机",
+      "机械",
       "地"
     ],
     "forms": {
@@ -5841,7 +6347,7 @@
   "pet_223": {
     "name": "波多西",
     "element": [
-      "机",
+      "机械",
       "地"
     ],
     "forms": {
@@ -5962,6 +6468,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "波普鹿",
+        "obtainMethods": [
+          "挑战精灵首领·波普鹿获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -5985,7 +6497,7 @@
   "pet_229": {
     "name": "缇塔",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -6008,7 +6520,7 @@
   "pet_230": {
     "name": "声波缇塔",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -6055,7 +6567,7 @@
     }
   },
   "pet_232": {
-    "name": "鄱目鹬",
+    "name": "鄙目鹬",
     "element": [
       "翼"
     ],
@@ -6084,6 +6596,12 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "高帽脚鹬",
+        "obtainMethods": [
+          "领地试炼获得首领信物「高帽脚鹬的信物」"
+        ]
       }
     },
     "pinyin": {
@@ -6146,13 +6664,23 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "（樱桃饰品）": {
+        "formName": "（樱桃饰品）",
+        "obtainMethods": [
+          "脆筒甜甜随机进化"
+        ]
+      },
       "杨桃饰品": {
         "formName": "香草甜甜（杨桃饰品）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "脆筒甜甜随机进化"
+        ]
       },
       "蓝莓饰品": {
         "formName": "香草甜甜（蓝莓饰品）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "脆筒甜甜随机进化"
+        ]
       }
     },
     "pinyin": {
@@ -6175,37 +6703,59 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "（樱桃巧克力口味）": {
+        "formName": "（樱桃巧克力口味）",
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
+      },
       "樱桃草莓口味": {
         "formName": "圣代甜甜（樱桃草莓口味）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
       },
       "樱桃抹茶口味": {
         "formName": "圣代甜甜（樱桃抹茶口味）",
-        "obtainMethods": []
-      },
-      "蓝莓巧克力口味": {
-        "formName": "圣代甜甜（蓝莓巧克力口味）",
-        "obtainMethods": []
-      },
-      "蓝莓草莓口味": {
-        "formName": "圣代甜甜（蓝莓草莓口味）",
-        "obtainMethods": []
-      },
-      "蓝莓抹茶口味": {
-        "formName": "圣代甜甜（蓝莓抹茶口味）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
       },
       "杨桃巧克力口味": {
         "formName": "圣代甜甜（杨桃巧克力口味）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
       },
       "杨桃草莓口味": {
         "formName": "圣代甜甜（杨桃草莓口味）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
       },
       "杨桃抹茶口味": {
         "formName": "圣代甜甜（杨桃抹茶口味）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
+      },
+      "蓝莓巧克力口味": {
+        "formName": "圣代甜甜（蓝莓巧克力口味）",
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
+      },
+      "蓝莓草莓口味": {
+        "formName": "圣代甜甜（蓝莓草莓口味）",
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
+      },
+      "蓝莓抹茶口味": {
+        "formName": "圣代甜甜（蓝莓抹茶口味）",
+        "obtainMethods": [
+          "香草甜甜随机进化"
+        ]
       }
     },
     "pinyin": {
@@ -6224,7 +6774,7 @@
     }
   },
   "pet_237": {
-    "name": "刺轮蛇",
+    "name": "刺轮砣",
     "element": [
       "毒",
       "萌"
@@ -6236,13 +6786,17 @@
           "海上到处都是"
         ]
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "上弦的样子": {
+        "formName": "上弦的样子",
+        "obtainMethods": [
+          "地图捕捉，彼得大道的魔力之源附近"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "下弦的样子": {
+        "formName": "下弦的样子",
+        "obtainMethods": [
+          "地图捕捉，彼得大道的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -6256,7 +6810,7 @@
     }
   },
   "pet_238": {
-    "name": "月亮蛇",
+    "name": "月亮砣",
     "element": [
       "毒",
       "萌"
@@ -6266,13 +6820,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "上弦的样子": {
+        "formName": "上弦的样子",
+        "obtainMethods": [
+          "地图捕捉，彼得大道的魔力之源附近"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "下弦的样子": {
+        "formName": "下弦的样子",
+        "obtainMethods": [
+          "地图捕捉，彼得大道的魔力之源附近"
+        ]
       }
     },
     "pinyin": {
@@ -6758,9 +7316,17 @@
           "晨曦山(极昼)恶水沼泽(极夜)"
         ]
       },
+      "极昼的样子": {
+        "formName": "极昼的样子",
+        "obtainMethods": [
+          "地图捕捉，回填山涧的魔力之源附近"
+        ]
+      },
       "极夜的样子": {
         "formName": "乌达（极夜的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近"
+        ]
       }
     },
     "tags": {
@@ -6774,7 +7340,7 @@
     }
   },
   "pet_259": {
-    "name": "迷你鸟",
+    "name": "迷你乌",
     "element": [
       "恶",
       "火"
@@ -6784,13 +7350,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "形态1": {
-        "formName": "形态1",
-        "obtainMethods": []
+      "极昼的样子": {
+        "formName": "极昼的样子",
+        "obtainMethods": [
+          "地图捕捉，回填山涧的魔力之源附近，白天进化"
+        ]
       },
-      "形态2": {
-        "formName": "形态2",
-        "obtainMethods": []
+      "极夜的样子": {
+        "formName": "极夜的样子",
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近，晚上进化"
+        ]
       }
     },
     "pinyin": {
@@ -6814,9 +7384,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
+      "极昼的样子": {
+        "formName": "极昼的样子",
+        "obtainMethods": [
+          "地图捕捉，回填山涧的魔力之源附近，白天进化"
+        ]
+      },
       "极夜的样子": {
         "formName": "乌拉塔（极夜的样子）",
-        "obtainMethods": []
+        "obtainMethods": [
+          "地图捕捉，恶水沼泽的魔力之源附近，晚上进化"
+        ]
       }
     },
     "pinyin": {
@@ -6837,7 +7415,7 @@
   "pet_261": {
     "name": "螺旋帕帕",
     "element": [
-      "机",
+      "机械",
       "翼"
     ],
     "forms": {
@@ -6861,7 +7439,7 @@
   "pet_262": {
     "name": "帕帕斯卡",
     "element": [
-      "机",
+      "机械",
       "翼"
     ],
     "forms": {
@@ -6886,9 +7464,9 @@
     }
   },
   "pet_263": {
-    "name": "机械方",
+    "name": "机械方方",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -6914,9 +7492,9 @@
     "notes": "种子：获得果实"
   },
   "pet_264": {
-    "name": "多彩方",
+    "name": "多彩方方",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -6941,7 +7519,7 @@
   "pet_265": {
     "name": "立方人",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -7036,7 +7614,7 @@
     }
   },
   "pet_269": {
-    "name": "武士鸡",
+    "name": "武者鸡",
     "element": [
       "火",
       "武"
@@ -7240,9 +7818,17 @@
           "回填山涧-西、采邑地、圣所前哨(夜晚)"
         ]
       },
-      "储水期的样子": {
-        "formName": "地鼠（储水期的样子）",
-        "obtainMethods": []
+      "枯水期的样子": {
+        "formName": "枯水期的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "储水时的样子": {
+        "formName": "储水时的样子",
+        "obtainMethods": [
+          "果实放在有深水、两栖环境的眠枭庇护所里（提示可能改变精灵形态）"
+        ]
       }
     },
     "tags": {
@@ -7265,9 +7851,17 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "储水期的样子": {
-        "formName": "遁鼠（储水期的样子）",
-        "obtainMethods": []
+      "枯水期的样子": {
+        "formName": "枯水期的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
+      },
+      "储水时的样子": {
+        "formName": "储水时的样子",
+        "obtainMethods": [
+          "果实放在有深水、两栖环境的眠枭庇护所里（提示可能改变精灵形态）"
+        ]
       }
     },
     "pinyin": {
@@ -7290,9 +7884,23 @@
         "formName": "基础形态",
         "obtainMethods": []
       },
-      "储水期的样子": {
-        "formName": "遁地鼠（储水期的样子）",
-        "obtainMethods": []
+      "储水时的样子": {
+        "formName": "储水时的样子",
+        "obtainMethods": [
+          "果实放在有深水、两栖环境的眠枭庇护所里（提示可能改变精灵形态）"
+        ]
+      },
+      "单只海葵的样子": {
+        "formName": "单只海葵的样子",
+        "obtainMethods": [
+          "加油海葵在自己的世界进化"
+        ]
+      },
+      "（双只海葵的样子）": {
+        "formName": "（双只海葵的样子）",
+        "obtainMethods": [
+          "加油海葵在别人的世界进化"
+        ]
       }
     },
     "pinyin": {
@@ -7311,7 +7919,7 @@
     }
   },
   "pet_280": {
-    "name": "墨剑士",
+    "name": "墨鱿士",
     "element": [
       "幽"
     ],
@@ -7335,7 +7943,7 @@
     "notes": "种子：智慧树苗"
   },
   "pet_281": {
-    "name": "混乱戟影",
+    "name": "混乱鱿彩",
     "element": [
       "幽",
       "恶"
@@ -7358,7 +7966,7 @@
     }
   },
   "pet_282": {
-    "name": "秩序戟墨",
+    "name": "秩序鱿墨",
     "element": [
       "幽",
       "恶"
@@ -7432,7 +8040,7 @@
   "pet_285": {
     "name": "圣剑侍从",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -7456,12 +8064,18 @@
   "pet_286": {
     "name": "圣剑-X",
     "element": [
-      "机"
+      "机械"
     ],
     "forms": {
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "leader": {
+        "formName": "圣剑骑士",
+        "obtainMethods": [
+          "挑战精灵首领·圣剑骑士获得首领信物"
+        ]
       }
     },
     "tags": {
@@ -7581,7 +8195,7 @@
     }
   },
   "pet_291": {
-    "name": "厉毒小罗",
+    "name": "厉毒小萝",
     "element": [
       "毒",
       "恶"
@@ -7606,7 +8220,7 @@
     "notes": "种子：智慧树苗"
   },
   "pet_292": {
-    "name": "厉毒修罗",
+    "name": "厉毒修萝",
     "element": [
       "毒",
       "恶"
@@ -7695,7 +8309,7 @@
     }
   },
   "pet_296": {
-    "name": "毛头小妹",
+    "name": "毛头小蛛",
     "element": [
       "虫",
       "地"
@@ -7746,7 +8360,7 @@
     }
   },
   "pet_298": {
-    "name": "捕尘短绒",
+    "name": "食尘短绒",
     "element": [
       "虫",
       "地"
@@ -7775,7 +8389,7 @@
   "pet_299": {
     "name": "画精灵",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -7798,7 +8412,7 @@
   "pet_300": {
     "name": "画像守护",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -7819,7 +8433,7 @@
   "pet_301": {
     "name": "画间法师手",
     "element": [
-      "普",
+      "普通",
       "幻"
     ],
     "forms": {
@@ -7846,7 +8460,7 @@
   "pet_302": {
     "name": "画间沉铁兽",
     "element": [
-      "普",
+      "普通",
       "武"
     ],
     "forms": {
@@ -7869,7 +8483,7 @@
   "pet_303": {
     "name": "书魔虫",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -7892,7 +8506,7 @@
   "pet_304": {
     "name": "书卷守护",
     "element": [
-      "普"
+      "普通"
     ],
     "forms": {
       "basic": {
@@ -7913,7 +8527,7 @@
   "pet_305": {
     "name": "古卷执政官",
     "element": [
-      "普",
+      "普通",
       "幻"
     ],
     "forms": {
@@ -7938,9 +8552,9 @@
     }
   },
   "pet_306": {
-    "name": "古卷恒魔像",
+    "name": "古卷匣魔像",
     "element": [
-      "普",
+      "普通",
       "幻"
     ],
     "forms": {
@@ -8365,7 +8979,7 @@
     "destined_hero": "命定勇者"
   },
   "pet_323": {
-    "name": "晴光嗡嗡",
+    "name": "嗜光嗡嗡",
     "element": [
       "恶",
       "光"
@@ -8449,7 +9063,7 @@
     }
   },
   "pet_326": {
-    "name": "清渣虫",
+    "name": "燃薪虫",
     "element": [
       "火",
       "草"
@@ -8607,7 +9221,7 @@
   "pet_332": {
     "name": "贝瑟",
     "element": [
-      "机",
+      "机械",
       "火"
     ],
     "forms": {
@@ -8635,7 +9249,7 @@
   "pet_333": {
     "name": "贝加尔",
     "element": [
-      "机",
+      "机械",
       "火"
     ],
     "forms": {
@@ -8661,7 +9275,7 @@
   "pet_334": {
     "name": "贝古斯",
     "element": [
-      "机",
+      "机械",
       "火"
     ],
     "forms": {
@@ -8769,7 +9383,7 @@
     }
   },
   "pet_338": {
-    "name": "布瓜鲚",
+    "name": "布瓜蝌",
     "element": [
       "幻"
     ],
@@ -9006,9 +9620,9 @@
     }
   },
   "pet_348": {
-    "name": "小丑豆豆",
+    "name": "钨丝贝贝",
     "element": [
-      "恶"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -9031,10 +9645,9 @@
     }
   },
   "pet_349": {
-    "name": "加油海葵",
+    "name": "辉光幕机",
     "element": [
-      "水",
-      "萌"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -9057,10 +9670,9 @@
     }
   },
   "pet_350": {
-    "name": "烟花团",
+    "name": "机幕方舟",
     "element": [
-      "火",
-      "毒"
+      "机械"
     ],
     "forms": {
       "basic": {
@@ -9082,62 +9694,9 @@
       "initial": "yht"
     }
   },
-  "pet_351": {
-    "name": "猴麦仔",
-    "element": [
-      "普",
-      "机"
-    ],
-    "forms": {
-      "basic": {
-        "formName": "基础形态",
-        "obtainMethods": []
-      }
-    },
-    "tags": {
-      "chromatic": {
-        "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
-      }
-    },
-    "pinyin": {
-      "full": "houmaizai",
-      "initial": "hmz"
-    }
-  },
-  "pet_352": {
-    "name": "咕咕帽",
-    "element": [
-      "幽"
-    ],
-    "forms": {
-      "basic": {
-        "formName": "基础形态",
-        "obtainMethods": []
-      }
-    },
-    "tags": {
-      "chromatic": {
-        "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
-      }
-    },
-    "pinyin": {
-      "full": "gugumao",
-      "initial": "ggm"
-    }
-  },
   "pet_353": {
-    "name": "牵线木偶",
-    "element": [
-      "幻"
-    ],
+    "name": "凡鹰",
+    "element": [],
     "forms": {
       "basic": {
         "formName": "基础形态",
@@ -9159,10 +9718,9 @@
     }
   },
   "pet_354": {
-    "name": "炫光迪迪",
+    "name": "小雪人",
     "element": [
-      "电",
-      "光"
+      "冰"
     ],
     "forms": {
       "basic": {
@@ -9185,9 +9743,9 @@
     }
   },
   "pet_355": {
-    "name": "小鼓象",
+    "name": "雪怪",
     "element": [
-      "机"
+      "冰"
     ],
     "forms": {
       "basic": {
@@ -9208,5 +9766,355 @@
       "full": "xiaoguxiang",
       "initial": "xgx"
     }
+  },
+  "pet_356": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "爆焰仔",
+    "element": [
+      "火",
+      "龙"
+    ]
+  },
+  "pet_357": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "爆焰喷喷",
+    "element": [
+      "火",
+      "龙"
+    ]
+  },
+  "pet_358": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "猴麦仔",
+    "element": [
+      "普通",
+      "机械"
+    ]
+  },
+  "pet_359": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "音碟吼",
+    "element": [
+      "普通",
+      "机械"
+    ]
+  },
+  "pet_360": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "加油海葵",
+    "element": [
+      "水",
+      "萌"
+    ]
+  },
+  "pet_361": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "加油蟹",
+    "element": [
+      "水",
+      "萌"
+    ]
+  },
+  "pet_362": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "小丑豆豆",
+    "element": [
+      "恶"
+    ]
+  },
+  "pet_363": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "小丑兔",
+    "element": [
+      "恶"
+    ]
+  },
+  "pet_364": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "小丑公爵",
+    "element": [
+      "恶"
+    ]
+  },
+  "pet_365": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "烟花团",
+    "element": [
+      "火",
+      "毒"
+    ]
+  },
+  "pet_366": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "烟花伯爵",
+    "element": [
+      "火",
+      "毒"
+    ]
+  },
+  "pet_367": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "咕咕帽",
+    "element": [
+      "幽"
+    ]
+  },
+  "pet_368": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "咕德帽帽",
+    "element": [
+      "幽"
+    ]
+  },
+  "pet_369": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "炫光迪迪",
+    "element": [
+      "电",
+      "光"
+    ]
+  },
+  "pet_370": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "霹雳迪迪",
+    "element": [
+      "电",
+      "光"
+    ]
+  },
+  "pet_371": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "小鼓象",
+    "element": [
+      "机械"
+    ]
+  },
+  "pet_372": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "巨鼓象",
+    "element": [
+      "机械"
+    ]
+  },
+  "pet_373": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "牵线木偶",
+    "element": [
+      "幻"
+    ]
+  },
+  "pet_374": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "帅帅木偶",
+    "element": [
+      "幻"
+    ]
+  },
+  "pet_375": {
+    "forms": {
+      "basic": {
+        "formName": "基础形态",
+        "obtainMethods": []
+      }
+    },
+    "tags": {
+      "chromatic": {
+        "tagName": "炫彩"
+      }
+    },
+    "name": "学院呱呱",
+    "element": [
+      "武"
+    ]
   }
 }
