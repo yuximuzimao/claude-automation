@@ -105,11 +105,22 @@ def _iter_claude_files(
         return
     if not root.exists():
         return
-    for path in sorted(root.glob("**/*.jsonl")):
+    # Collect with mtime so we can sort most-recent-first.
+    # This ensures the max_files budget covers recently-active projects
+    # rather than alphabetically-first project directories.
+    matching: list[tuple[float, Path]] = []
+    for path in root.glob("**/*.jsonl"):
         if any(pat in part for part in path.parts for pat in _SKIP_PROJECT_DIR_PATTERNS):
             continue
-        if _mtime_matches(path, modified_since):
-            yield path
+        try:
+            mtime = path.stat().st_mtime
+        except OSError:
+            continue
+        if modified_since is None or mtime >= modified_since:
+            matching.append((mtime, path))
+    matching.sort(reverse=True)
+    for _, path in matching:
+        yield path
 
 
 def _mtime_matches(path: Path, modified_since: float | int | None) -> bool:
