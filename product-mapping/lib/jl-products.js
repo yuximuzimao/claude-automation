@@ -8,16 +8,28 @@ const { sleep } = require('./wait');
  * @returns {Promise<Array<{code: string, name: string, productId: string}>>}
  */
 async function listActiveProducts(jlId) {
-  // 风控规则：已在目标页面时跳过注入和跳转（参考 aftersales lib/jl/navigate.js）
-  // 筛选状态在同一 session 内持续有效，重复注入无必要且有风控风险
+  // Step 1: 检测页面 — 已在 goodsList 跳过导航，否则先跳转
   const currentUrl = await cdp.eval(jlId, 'window.location.href');
-  const alreadyOnPage = currentUrl.includes('goodsList');
-
-  if (!alreadyOnPage) {
+  if (!currentUrl.includes('goodsList')) {
     await cdp.navigate(jlId, 'https://scrm.jlsupp.com/micro-goods/business/goodsList');
     await sleep(3000);
+  }
 
-    // 打开在售状态下拉
+  // Step 2: 检测在售状态筛选 — 不正确则修改，始终点查询刷新数据
+  // el-select 选中值：tag 模式用 .el-tag__content，input 模式用 .el-input__inner
+  const filterVal = await cdp.eval(jlId,
+    '(function(){' +
+    '  var fi=document.querySelector("[attr-field-id*=onSaleStatus]");' +
+    '  if(!fi) return "";' +
+    '  var tag=fi.querySelector(".el-tag__content");' +
+    '  if(tag) return tag.innerText.trim();' +
+    '  var inp=fi.querySelector(".el-input__inner");' +
+    '  return inp?inp.value.trim():"";' +
+    '})()'
+  );
+
+  if (filterVal !== '特卖在售中') {
+    // 筛选不正确：打开下拉选择目标选项
     const opened = await cdp.eval(jlId,
       'var fi=document.querySelector("[attr-field-id*=onSaleStatus]");' +
       'var inp=fi?fi.querySelector("input"):null;' +
@@ -26,7 +38,6 @@ async function listActiveProducts(jlId) {
     if (opened !== 'ok') throw new Error('在售状态筛选器未找到');
     await sleep(600);
 
-    // 选「特卖在售中」
     const selected = await cdp.eval(jlId,
       'var items=document.querySelectorAll(".el-select-dropdown__item");' +
       'var r="notfound";' +
@@ -37,19 +48,19 @@ async function listActiveProducts(jlId) {
     );
     if (selected !== 'ok') throw new Error('未找到「特卖在售中」选项');
     await sleep(400);
-
-    // 点查询
-    const queried = await cdp.eval(jlId,
-      'var btns=document.querySelectorAll("button");' +
-      'var r="notfound";' +
-      'for(var i=0;i<btns.length;i++){' +
-      '  if(btns[i].innerText.trim()==="查询"){btns[i].click();r="ok";break;}' +
-      '}' +
-      'r'
-    );
-    if (queried !== 'ok') throw new Error('未找到查询按钮');
-    await sleep(2000);
   }
+
+  // 始终点查询（确保数据是当次最新结果）
+  const queried = await cdp.eval(jlId,
+    'var btns=document.querySelectorAll("button");' +
+    'var r="notfound";' +
+    'for(var i=0;i<btns.length;i++){' +
+    '  if(btns[i].innerText.trim()==="查询"){btns[i].click();r="ok";break;}' +
+    '}' +
+    'r'
+  );
+  if (queried !== 'ok') throw new Error('未找到查询按钮');
+  await sleep(2000);
 
   // 检查总条数
   const totalText = await cdp.eval(jlId,
