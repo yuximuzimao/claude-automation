@@ -69,6 +69,14 @@ CDP 浏览器级真实鼠标点击（`Input.dispatchMouseEvent`），POST body �
 curl -s -X POST "http://localhost:3456/clickAt?target=ID" -d 'button.upload'
 ```
 
+### POST /key?target=ID
+CDP 浏览器级真实键盘事件（`Input.dispatchKeyEvent`），POST body 为键名；空 body 默认发送 `Enter`。当前内置处理 `Enter`、`Tab` 和单字符键。
+```bash
+curl -s -X POST "http://localhost:3456/key?target=ID" -d 'Enter'
+curl -s -X POST "http://localhost:3456/key?target=ID" -d 'Tab'
+curl -s -X POST "http://localhost:3456/key?target=ID" -d 'a'
+```
+
 ### POST /setFiles?target=ID
 给 file input 设置本地文件路径（`DOM.setFileInputFiles`），完全绕过文件对话框。POST body 为 JSON。
 ```bash

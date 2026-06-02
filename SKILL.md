@@ -117,6 +117,9 @@ curl -s -X POST "http://localhost:3456/click?target=ID" -d 'button.submit'
 # 真实鼠标点击 — CDP Input.dispatchMouseEvent，算用户手势，能触发文件对话框
 curl -s -X POST "http://localhost:3456/clickAt?target=ID" -d 'button.upload'
 
+# 真实键盘事件 — CDP Input.dispatchKeyEvent，POST body 为键名，空 body 默认 Enter
+curl -s -X POST "http://localhost:3456/key?target=ID" -d 'Enter'
+
 # 文件上传 — 直接设置 file input 的本地文件路径，绕过文件对话框
 curl -s -X POST "http://localhost:3456/setFiles?target=ID" -d '{"selector":"input[type=file]","files":["/path/to/file.png"]}'
 

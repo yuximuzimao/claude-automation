@@ -34,7 +34,7 @@ Claude Code 原本有 WebSearch、WebFetch，但缺少调度策略和浏览器�
 |------|------|
 | 联网工具自动选择 | WebSearch / WebFetch / curl / Jina / CDP，按场景自主判断，可任意组合 |
 | CDP Proxy 浏览器操作 | 直连用户日常 Chrome，天然携带登录态，支持动态页面、交互操作、视频截帧 |
-| 三种点击方式 | `/click`（JS click）、`/clickAt`（CDP 真实鼠标事件）、`/setFiles`（文件上传） |
+| 真实交互事件 | `/click`（JS click）、`/clickAt`（CDP 真实鼠标事件）、`/key`（键盘事件）、`/setFiles`（文件上传） |
 | 并行分治 | 多目标时分发子 Agent 并行执行，共享一个 Proxy，tab 级隔离 |
 | 站点经验积累 | 按域名存储操作经验（URL 模式、平台特征、已知陷阱），跨 session 复用 |
 | 媒体提取 | 从 DOM 直取图片/视频 URL，或对视频任意时间点截帧分析 |
@@ -91,6 +91,7 @@ curl -s "http://localhost:3456/new?url=https://example.com"     # 新建 tab
 curl -s -X POST "http://localhost:3456/eval?target=ID" -d 'document.title'  # 执行 JS
 curl -s -X POST "http://localhost:3456/click?target=ID" -d 'button.submit'  # JS 点击
 curl -s -X POST "http://localhost:3456/clickAt?target=ID" -d '.upload-btn'  # 真实鼠标点击
+curl -s -X POST "http://localhost:3456/key?target=ID" -d 'Enter'            # 真实键盘事件
 curl -s -X POST "http://localhost:3456/setFiles?target=ID" \
   -d '{"selector":"input[type=file]","files":["/path/to/file.png"]}'        # 文件上传
 curl -s "http://localhost:3456/screenshot?target=ID&file=/tmp/shot.png"     # 截图
