@@ -46,6 +46,8 @@ async function main() {
   node cli.js fetch-archive-names             — 读取档案V2普通商品全列表（含简称）
   node cli.js mark-suite <店铺> <货号> <平台编码> — 对应表标记套件（只处理单个SKU）
   node cli.js download-products --shop <店铺>   — 仅下载平台商品（只需 ERP tab，不需鲸灵）
+  node cli.js preview-match                       — 匹配前核对表（识图后、match 前）
+  node cli.js verify-table                        — 匹配后核对表（match 后）
   node cli.js match --shop <店铺> [--limit N]    — 自动匹配（组合装套件+单品，任何异常立即停止）`);
     process.exit(0);
   }
@@ -57,6 +59,24 @@ async function main() {
   }
 
   // ── 不需要浏览器连接的命令 ──
+  if (cmd === 'preview-match') {
+    const { main: previewMain } = require('./lib/preview-match');
+    const result = previewMain();
+    console.log(`✅ 生成完成: ${result.path}`);
+    console.log(`   已匹配 ${result.matched} 项 | 待匹配 ${result.unmatched} 项`);
+    require('child_process').exec(`open "${result.path}"`);
+    return;
+  }
+
+  if (cmd === 'verify-table') {
+    const { main: verifyMain } = require('./lib/verify-table');
+    const result = verifyMain();
+    console.log(`✅ 生成完成: ${result.path}`);
+    console.log(`   共 ${result.skuCount} 个 SKU`);
+    require('child_process').exec(`open "${result.path}"`);
+    return;
+  }
+
   if (cmd === 'visual-pending') {
     const fs = require('fs');
     const path = require('path');
