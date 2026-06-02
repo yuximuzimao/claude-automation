@@ -10,9 +10,9 @@
 | 打开界面 | 浏览器访问 `http://localhost:8899` |
 | 修改收集进度 | 直接编辑 `data/collections.json` 或通过 UI 勾选 |
 | **人工核对任务/宠物数据** | 浏览器访问 `http://localhost:8899/review.html` |
-| 宠物定义 | `data/pets.json`（355 宠物，对象 key="pet_N"） |
+| 宠物定义 | `data/pets.json`（373 只，对象 key="pet_N"） |
 | 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
-| 进化链 | `data/evolution-chains.json`（162 链，含 9 分支链） |
+| 进化链 | `data/evolution-chains.json`（165 链，全覆盖 373 只） |
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
 | 标注数据 | `data/annotations.json`（append-only ops 日志，Claude 批量处理用） |
@@ -36,9 +36,9 @@ lkwj/
 ├── scripts/
 │   └── fix-shiny-and-chains.js # 异色/炫彩标签修正 + 进化链传播
 └── data/
-    ├── pets.json              # 宠物定义（355 只）：形态 + 标签 + 元素数组
-    ├── tasks.json             # 任务定义（355 组）：form-independent，desc 不含宠物名
-    ├── evolution-chains.json  # 进化链（162 链）：独立于形态，支持分支
+    ├── pets.json              # 宠物定义（373 只）：形态 + 标签 + 元素数组
+    ├── tasks.json             # 任务定义（373 组）：form-independent，desc 不含宠物名
+    ├── evolution-chains.json  # 进化链（165 链）：独立于形态，全覆盖 373 只
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
@@ -75,13 +75,12 @@ lkwj/
 字段说明：
 - `name` — 宠物中文名
 - `element` — 元素数组（支持双元素），如 `["光"]` 或 `["幽", "恶"]`
-- `forms` — 形态定义，使用语义键名（`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`, `variant_N`）
+- `forms` — 形态定义，使用语义键名（`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`, `leader`, `variant_N`）
 - `tags` — 稀有度标签（`shiny`, `chromatic`, `boss`）。标签独立于形态，进化时保留
 - `pinyin` — 拼音（全拼 + 首字母），用于搜索
 - `fruit` — 果实信息（可选，99 只精灵有此字段）
-- `destined_hero` — 命定勇者标记（可选，144 只）
+- `destined_hero` — 命定勇者标记（可选）
 - `notes` — 备注
-- `_todo_rename` — 标记形态键名待确认（88 个形态）
 
 ### tasks.json — 任务定义（静态）
 
@@ -119,8 +118,8 @@ lkwj/
 }
 ```
 
-- 162 条链（100 条多节点 + 62 条单节点），9 条分支链
-- 条件类型：`level`（等级）, `bloodline`（血脉）, `defeat_monster`（打怪），可复合
+- 165 条链，全覆盖 373 只精灵，无幽灵节点
+- 条件类型：`level`（等级，含可选 `note` 字段描述附加条件如"使用15次流星火雨"）
 - 空 `evolvesTo` = 链终点
 
 ### collections.json — 用户进度（动态）
@@ -146,8 +145,9 @@ lkwj/
 
 ### 形态 (form) = 同一物种的外观变体
 - 季节形态、地区形态、蜕皮形态属于 forms，不是进化链
-- 语义键名列表：`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`
-- 迁移阶段的 `variant_N` 占位需在游戏中确认后改为语义键（标记 `_todo_rename: true`）
+- 语义键名列表：`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`, `leader`
+- `leader` = 首领进化形态，formName 为首领名（如"鸭吉吉国王"）
+- 迁移阶段的中文占位键名需在游戏中确认后改为语义键
 - 新增 form key 前先在本文档约定
 
 ### 标签 (tag) = 稀有度标记
@@ -184,16 +184,16 @@ lkwj/
 
 | 层级 | 数量 |
 |------|------|
-| 宠物总数 | 355 |
-| 形态：basic | 355 |
-| 形态：季节/蜕皮/地区 | 100 |
-| 首领标签 | 24 |
-| 异色标签 | 61（32 基础形态 + 29 进化传播；S1限定 + S2限定 + 通行证 + 活动） |
+| 宠物总数 | 373（含 S2，pet_348~375 跳过 351/352） |
+| 形态：basic | 373 |
+| 形态：多形态（非 basic） | 50 只精灵有额外形态 |
+| 首领形态（forms.leader） | 27 只（22 已确认名称，5 待确认） |
+| 异色标签 | 61（32 基础形态 + 29 进化传播；S1/S2/通行证/活动） |
 | 炫彩标签 | 354（所有精灵除迪莫外都有炫彩） |
-| 任务总数 | 1763（form-independent） |
-| 进化链 | 162（100 多节点 + 62 单节点，9 分支） |
-| 精灵果实 | 99 种 |
-| S2 新精灵 | 8 只（小丑豆豆~小鼓象） |
+| 任务总数 | ~1850（form-independent） |
+| 进化链 | 165（全覆盖 373 只，无幽灵节点） |
+| 精灵果实（fruit 任务） | 354 只 |
+| S2 精灵 | 26 只（pet_348~375，跳过 351/352） |
 
 ## API 端点
 
@@ -215,9 +215,10 @@ lkwj/
 - [x] 4 文档体系重构（pets + tasks + evolution-chains + collections）— 2026-05-21
 - [x] 形态语义化键名 + 标签系统 + 进化链独立
 - [x] UI 适配新数据模型（全部 Tab 通过）
+- [x] 全量数据核对（对照外部表格）— 2026-06-01：精灵 373 只/任务全量/进化链 165 条/果实 354 只/首领形态 27 只
+- [ ] 5 只精灵首领名待确认（pet_4/7/10/110/117）
+- [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
 - [ ] 家具图鉴：待采集 CSV → 导入 items[]
 - [ ] 外观图鉴：待采集 CSV → 导入 items[]
 - [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集
-- [ ] 地区形态名称修正：variant_N → 语义 key
-- [ ] S2 新精灵完整任务数据补充
 - [ ] 炫彩（chromatic）数据采集与录入
