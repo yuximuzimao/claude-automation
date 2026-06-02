@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 from typing import Any, Iterable
 
-# Match /claude/{project}/ in any file path found in session content.
-# Used to infer the active project when cwd is a parent/workspace dir.
-_PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
-_INFERENCE_SKIP = frozenset({"projects", "claude", ".claude"})
+from app.reader_common import infer_project_from_handle
 
 from app.models import (
     ClaudeScanResult,
@@ -26,9 +22,10 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
     usage_events: list[ClaudeUsageEvent] = []
     assistant_events = 0
     parse_errors = 0
-    inferred_project = _infer_project(path)
 
     with path.open("r", encoding="utf-8", errors="replace") as handle:
+        inferred_project = infer_project_from_handle(handle)
+        handle.seek(0)
         for line in handle:
             try:
                 event = json.loads(line)
@@ -127,26 +124,6 @@ def _mtime_matches(path: Path, modified_since: float | int | None) -> bool:
     if modified_since is None:
         return True
     return path.stat().st_mtime >= modified_since
-
-
-def _infer_project(path: Path, *, max_lines: int = 100) -> str | None:
-    """Scan first N lines of a session file for /claude/{project}/ path mentions."""
-    votes: dict[str, int] = {}
-    try:
-        with path.open("r", encoding="utf-8", errors="replace") as f:
-            for i, line in enumerate(f):
-                if i >= max_lines:
-                    break
-                for m in _PROJECT_PATH_RE.finditer(line):
-                    name = m.group(1)
-                    if name not in _INFERENCE_SKIP:
-                        votes[name] = votes.get(name, 0) + 1
-    except OSError:
-        return None
-    if not votes:
-        return None
-    winner = max(votes, key=lambda k: votes[k])
-    return winner if votes[winner] >= 1 else None
 
 
 def _read_cwd(event: dict[str, Any]) -> str | None:

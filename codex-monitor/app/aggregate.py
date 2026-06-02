@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -220,7 +221,6 @@ def _project_identity(
             if display_name:
                 return ProjectIdentity(candidate.name, display_name)
 
-    # session_path fallback: extract project name from Claude session file path
     if session_path and cwd:
         project_name = _project_from_session_path(session_path, cwd)
         if project_name:
@@ -228,7 +228,6 @@ def _project_identity(
             display_name = _read_project_display_name(project_dir / "CLAUDE.md")
             return ProjectIdentity(project_name, display_name or project_display_name(project_name))
 
-    # inferred_project fallback: derived from /claude/{project}/ path patterns in session content.
     # Require CLAUDE.md to exist — filters out shared dirs like docs/, scripts/, reviews/.
     if inferred_project:
         project_claude_md = Path.home() / "claude" / inferred_project / "CLAUDE.md"
@@ -321,14 +320,13 @@ def _add_project_tokens(
     today_claude_tokens: int = 0,
     cwd: str | None = None,
 ) -> ProjectTotal:
-    return ProjectTotal(
-        project=project.project,
+    return dataclasses.replace(
+        project,
         display_name=project.display_name or display_name,
         codex_tokens=project.codex_tokens + codex_tokens,
         claude_tokens=project.claude_tokens + claude_tokens,
         today_codex_tokens=project.today_codex_tokens + today_codex_tokens,
         today_claude_tokens=project.today_claude_tokens + today_claude_tokens,
-        month_percent=project.month_percent,
         sample_cwds=_add_sample_cwd(project.sample_cwds, cwd),
     )
 
@@ -342,15 +340,10 @@ def _add_sample_cwd(samples: tuple[str, ...], cwd: str | None) -> tuple[str, ...
 
 
 def _with_percent(project: ProjectTotal, total_tokens: int) -> ProjectTotal:
-    return ProjectTotal(
-        project=project.project,
+    return dataclasses.replace(
+        project,
         display_name=project.display_name or project_display_name(project.project),
-        codex_tokens=project.codex_tokens,
-        claude_tokens=project.claude_tokens,
-        today_codex_tokens=project.today_codex_tokens,
-        today_claude_tokens=project.today_claude_tokens,
         month_percent=_percent(project.total_tokens, total_tokens),
-        sample_cwds=project.sample_cwds,
     )
 
 

@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-06-01 00:10
-当前负责人：Codex（product-detect 数据集生成 + codex-monitor 阶段 2）
+更新时间：2026-06-02 11:20
+当前负责人：Codex（Codex Monitor 第一版封板收尾）
 当前分支：data-model-restructure
-当前焦点：(1) product-detect KGOS 训练图：确认无训练进程占用后生成正式 train/business-val 数据集；(2) Codex Monitor 阶段 2（Claude Code reader）已放行
+当前焦点：(1) Codex Monitor 第一版已封板，协作材料已归档；(2) product-detect KGOS 第 6 轮 yolov8s 训练仍需后续按日志确认完成状态
 
 ## 已完成
 - Git 仓库边界优化：.gitignore 精确排除运行时数据，24 个运行时文件从索引移除（ac377b1）
@@ -38,13 +38,29 @@
   - 遮挡后按最终可见 alpha mask 写 bbox，可见面积 <35% 的目标不写 label
   - `scripts/verify.py` 可用 `--dataset kgos_business_val --split val` 抽查业务验收集
   - 已新增 `tests/test_generate.py` 覆盖生成规则与 business-val 输出
+- product-detect 新规则正式数据集已生成并读回验证（2026-06-01）：
+  - `datasets/kgos/`：3400 train + 600 val
+  - `datasets/kgos_business_val/`：600 val
+  - 文件数、label 数、label 坐标范围、白底角点抽样、overlay smoke 均通过
+  - 弱项类实例数相对普通类平均倍数：黑咖体验装 3.22x、酵素4.0体验装 3.54x、腰围卡尺 3.13x、冰霸杯 2.73x、KGO手提袋 2.72x
+- product-detect 第 6 轮训练已由 Claude Code 启动并经 Codex 复核（2026-06-01 00:49）：
+  - PID: 47371，命令：`python -u /tmp/kgos_train6_launcher.py`
+  - 日志: `product-detect/runs/kgos_train6.log`
+  - 输出目录: `product-detect/runs/kgos_yolov8s_train6/`
+  - 日志已进入 epoch 1；`runs/kgos_yolov8s/weights/best.pt` 时间戳仍为 2026-05-31 19:13，旧第 5 轮未覆盖
+  - 按 2026-06-01 00:52 日志速度估算 65-72 小时，预计 2026-06-03 晚至 2026-06-04 凌晨完成
+  - 训练效果验收重点：默认 val 可小幅低于 train5，但 business-val 与真实白底混放图必须改善弱项 Recall、mAP50-95 和漏检率
+- Codex Monitor 第一版已封板（2026-06-02）：
+  - 功能范围：本地 Codex/Claude JSONL 读取、近 30 天聚合、Top 项目、tkinter 浮窗、折叠态、窗口位置持久化、macOS `.app` wrapper、LaunchAgent plist 生成、watchdog/轮询刷新 fallback
+  - 用户确认：第一版可以封板；“本月”改“近 30 天”为用户确认口径
+  - 验证：`python3.13 -m unittest discover -s tests -v` 27/27 通过，`python3.13 -m compileall app tests` 通过，`python3.13 main.py --smoke-aggregate` 通过
+  - 协作材料归档：`docs/codex-handoff/archive/2026-06-02-codex-monitor-v1/`
 
 ## 未完成
 - Codex 未执行售后系统重启；如需要线上 server 立刻加载新 `lib/` 逻辑，仍需手动运行 `/aftersales-restart`
-- Codex Monitor 阶段 0/1 已完成验证（2026-06-01）：4/4 测试通过，smoke 无对话内容泄露，阶段 2（Claude Code reader）放行
 - product-mapping 品牌数据重构：图片 jpg→png 迁移，品牌目录整理
 - product-detect/assets/ 16MB 训练素材已从 Git 排除，后续需决定外部存储位置
-- product-detect 尚未覆盖生成正式 `datasets/kgos/` 与 `datasets/kgos_business_val/`；下一步生成前应确认没有训练进程正在读取旧数据集
+- product-detect 下一步：等待第 6 轮训练完成，并同时评估默认 val 与 `datasets/kgos_business_val/`；重点类为黑咖体验装、酵素4.0体验装、腰围卡尺、冰霸杯、KGO手提袋
 - transfer/ 本地目录已从当前仓库忽略；如确认不再需要本地副本，再手动清理
 
 ## 新增协作规则

@@ -1,91 +1,23 @@
 {
   "protocol": "codex-handoff-v1",
-  "description": "Codex → Claude Code 协作收件箱。Codex 追加条目，Claude Code SessionStart hook 检查。已处理完的条目移到 processed 数组。",
+  "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
   "pending": [],
-  "processed": [
+  "processed": [],
+  "archived": [
     {
-      "id": "2026-05-31T23:46:29+08:00",
+      "id": "2026-06-02-codex-monitor-v1",
       "project": "codex-monitor",
-      "action": "phase-review",
-      "file": "docs/codex-handoff/codex-monitor-phase1-review.md",
-      "summary": "Codex Monitor 阶段 0/1 已完成：项目初始化、Codex payload.rate_limits reader、五字段 token 模型、结构摘要 smoke check",
-      "from": "codex",
-      "timestamp": "2026-05-31T23:46:29+08:00",
-      "status": "processed",
-      "processedAt": "2026-06-01T00:10:00+08:00",
-      "processedBy": "claude",
-      "resolution": "phase1-approved-phase2-greenlit",
-      "responseFile": "docs/codex-handoff/codex-monitor-phase1-approved.md"
+      "summary": "Codex Monitor 第一版封板协作材料：UI 重构、阶段 6 产品化、最终疑问与 Claude 回复均已处理。",
+      "directory": "docs/codex-handoff/archive/2026-06-02-codex-monitor-v1/",
+      "archivedAt": "2026-06-02T11:20:00+08:00",
+      "status": "archived"
     },
     {
-      "id": "2026-05-31T23:36:00+08:00",
-      "project": "codex-monitor",
-      "action": "review-response-audit",
-      "file": "docs/codex-handoff/codex-monitor-codex-audit-response.md",
-      "summary": "Codex 已复核 Claude Code 正式回复：确认 payload.rate_limits 为正确路径，并补充多模型、synthetic、3.8GB 扫描性能边界等最终执行约束",
-      "from": "codex",
-      "timestamp": "2026-05-31T23:36:00+08:00",
-      "status": "processed",
-      "processedAt": "2026-05-31T23:50:00+08:00",
-      "processedBy": "claude",
-      "resolution": "all-5-points-confirmed-greenlight",
-      "responseFile": "docs/codex-handoff/codex-monitor-final-greenlight.md"
-    },
-    {
-      "id": "2026-05-31T15:11:45+08:00",
-      "project": "codex-monitor",
-      "action": "review-plan",
-      "file": "docs/codex-handoff/codex-monitor-review-plan.md",
-      "summary": "请 Claude Code 基于本机事实和网页版 Claude 临时反馈，重新调整 Codex Monitor 新项目计划",
-      "from": "codex",
-      "timestamp": "2026-05-31T15:11:45+08:00",
-      "status": "processed",
-      "processedAt": "2026-05-31T23:15:00+08:00",
-      "processedBy": "claude",
-      "resolution": "approved-with-corrections",
-      "responseFile": "docs/codex-handoff/codex-monitor-review-response.md"
-    },
-    {
-      "id": "2026-05-31T01:48:58+08:00",
-      "project": "codex-monitor",
-      "action": "review-plan",
-      "file": "docs/codex-handoff/codex-monitor-review-plan.md",
-      "summary": "Codex Monitor 初版优化计划已根据网页版 Claude 临时反馈修正；仍等待 Claude Code 正式复审",
-      "from": "codex",
-      "timestamp": "2026-05-31T01:48:58+08:00",
-      "status": "processed",
-      "processedAt": "2026-05-31T15:03:32+08:00",
-      "processedBy": "codex",
-      "resolution": "superseded-by-new-review-request",
-      "responseFile": "docs/codex-handoff/codex-monitor-web-claude-feedback.md"
-    },
-    {
-      "id": "2026-05-30T17:09:33+08:00",
-      "project": "aftersales-automation",
-      "action": "handoff",
-      "file": "docs/codex-handoff/aftersales-action-return-waiting.md",
-      "summary": "修复售后系统快递行动为空：退货 waitingRescan 应显示为退货待入库",
-      "from": "codex",
-      "timestamp": "2026-05-30T17:09:33+08:00",
-      "status": "processed",
-      "processedAt": "2026-05-30T17:15:00+08:00",
-      "processedBy": "claude",
-      "resolution": "approved-and-implemented",
-      "responseFile": "docs/codex-handoff/aftersales-action-return-waiting.md"
-    },
-    {
-      "id": "2026-05-29T23:30:03+08:00",
+      "id": "2026-06-01",
       "project": "workspace",
-      "action": "review-plan",
-      "file": "docs/codex-handoff/workspace-git-followup-review-plan.md",
-      "summary": "Git 仓库边界优化后续建议：checkpoint、剩余 untracked 分类、是否写入硬规则",
-      "from": "codex",
-      "timestamp": "2026-05-29T23:30:03+08:00",
-      "status": "processed",
-      "processedAt": "2026-05-29T23:35:00+08:00",
-      "processedBy": "claude",
-      "resolution": "approved-with-notes",
-      "responseFile": "docs/codex-handoff/workspace-git-review-response.md"
+      "summary": "历史协作材料归档。",
+      "directory": "docs/codex-handoff/archive/2026-06-01/",
+      "status": "archived"
     }
   ]
 }
