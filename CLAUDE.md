@@ -75,10 +75,10 @@ How to apply:
 ## Git 版本管理
 
 1. 代码验证通过后立即 commit + push，不攒到 session 结束
-2. commit 只含代码文件，排除运行时数据（`data/` 下的 JSON/jsonl、日志文件）
+2. commit 默认只含代码/文档文件，排除运行时数据（`data/` 下的 JSON/jsonl、日志文件）；用户明确要求归档已完成业务数据轮次时例外，必须单独提交并在 commit message 中说明范围
 3. 禁止 force push，禁止修改已 push 的 commit
 4. commit 格式：`<type>(<scope>): <描述>`（type: fix/feat/refactor/docs, scope: aftersales/product-mapping/transfer/workspace）
-5. NEVER 提交：`data/` · `*.log` · `_sandbox/` · `_exports/` · `.server.lock`
+5. NEVER 提交：`*.log` · `_sandbox/` · `_exports/` · `.server.lock`；`data/` 默认不提交，除非用户明确要求归档已完成业务数据轮次
 
 ## SKILL.md 同步铁律
 

@@ -38,7 +38,8 @@ node cli.js targets                                        # 检查浏览器连�
 
 改动验证通过后立即 commit + push，不攒到 session 结束。
 暂存：`git add lib/ cli.js docs/ tasks/`
-不提交：`data/`（sku-records.json / imgs/ / reports/ 等）
+默认不提交：`data/`（sku-records.json / imgs/ / reports/ 等）
+例外：用户明确确认“一轮商品匹配已完成，可以归档”时，`data/sku-records.json` 可单独提交；仍禁止提交 `data/imgs/`、`data/reports/` 等运行时产物。
 
 ## 相关项目
 
