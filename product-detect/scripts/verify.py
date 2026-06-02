@@ -14,6 +14,13 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 
+def resolve_dataset_dir(project_root: Path, brand: str, dataset: str | None, dataset_dir: Path | None) -> Path:
+    """解析要验证的数据集目录。显式路径优先，其次 dataset 名称，最后品牌默认目录。"""
+    if dataset_dir is not None:
+        return dataset_dir
+    return project_root / "datasets" / (dataset or brand)
+
+
 def draw_boxes(image_path: Path, label_path: Path, class_names: list) -> Image.Image:
     """在图上绘制标注框。"""
     img = Image.open(image_path).convert("RGB")
@@ -47,13 +54,17 @@ def draw_boxes(image_path: Path, label_path: Path, class_names: list) -> Image.I
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--brand", required=True, choices=["kgos", "hee"])
+    parser.add_argument("--dataset", default=None,
+                        help="datasets/ 下的数据集目录名，例如 kgos_business_val；默认等于 brand")
+    parser.add_argument("--dataset-dir", type=Path, default=None,
+                        help="自定义数据集目录，优先级高于 --dataset")
     parser.add_argument("--samples", type=int, default=20, help="抽样验证数量")
     parser.add_argument("--split", default="train", choices=["train", "val"])
     args = parser.parse_args()
 
     project_root = Path(__file__).parent.parent
-    dataset_dir = project_root / "datasets" / args.brand
-    out_dir = project_root / "datasets" / args.brand / "_verify"
+    dataset_dir = resolve_dataset_dir(project_root, args.brand, args.dataset, args.dataset_dir)
+    out_dir = dataset_dir / "_verify"
     out_dir.mkdir(exist_ok=True)
 
     # 读类别名
