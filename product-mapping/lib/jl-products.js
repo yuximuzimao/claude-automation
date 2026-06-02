@@ -8,45 +8,48 @@ const { sleep } = require('./wait');
  * @returns {Promise<Array<{code: string, name: string, productId: string}>>}
  */
 async function listActiveProducts(jlId) {
-  // 确保在商品列表页
-  const url = await cdp.eval(jlId, 'location.href');
-  if (!url.includes('goodsList')) {
+  // 风控规则：已在目标页面时跳过注入和跳转（参考 aftersales lib/jl/navigate.js）
+  // 筛选状态在同一 session 内持续有效，重复注入无必要且有风控风险
+  const currentUrl = await cdp.eval(jlId, 'window.location.href');
+  const alreadyOnPage = currentUrl.includes('goodsList');
+
+  if (!alreadyOnPage) {
     await cdp.navigate(jlId, 'https://scrm.jlsupp.com/micro-goods/business/goodsList');
     await sleep(3000);
+
+    // 打开在售状态下拉
+    const opened = await cdp.eval(jlId,
+      'var fi=document.querySelector("[attr-field-id*=onSaleStatus]");' +
+      'var inp=fi?fi.querySelector("input"):null;' +
+      'if(inp){inp.click();"ok"}else{"notfound"}'
+    );
+    if (opened !== 'ok') throw new Error('在售状态筛选器未找到');
+    await sleep(600);
+
+    // 选「特卖在售中」
+    const selected = await cdp.eval(jlId,
+      'var items=document.querySelectorAll(".el-select-dropdown__item");' +
+      'var r="notfound";' +
+      'for(var i=0;i<items.length;i++){' +
+      '  if(items[i].innerText.trim()==="特卖在售中"){items[i].click();r="ok";break;}' +
+      '}' +
+      'r'
+    );
+    if (selected !== 'ok') throw new Error('未找到「特卖在售中」选项');
+    await sleep(400);
+
+    // 点查询
+    const queried = await cdp.eval(jlId,
+      'var btns=document.querySelectorAll("button");' +
+      'var r="notfound";' +
+      'for(var i=0;i<btns.length;i++){' +
+      '  if(btns[i].innerText.trim()==="查询"){btns[i].click();r="ok";break;}' +
+      '}' +
+      'r'
+    );
+    if (queried !== 'ok') throw new Error('未找到查询按钮');
+    await sleep(2000);
   }
-
-  // 打开在售状态下拉
-  const opened = await cdp.eval(jlId,
-    'var fi=document.querySelector("[attr-field-id*=onSaleStatus]");' +
-    'var inp=fi?fi.querySelector("input"):null;' +
-    'if(inp){inp.click();"ok"}else{"notfound"}'
-  );
-  if (opened !== 'ok') throw new Error('在售状态筛选器未找到');
-  await sleep(600);
-
-  // 选「特卖在售中」
-  const selected = await cdp.eval(jlId,
-    'var items=document.querySelectorAll(".el-select-dropdown__item");' +
-    'var r="notfound";' +
-    'for(var i=0;i<items.length;i++){' +
-    '  if(items[i].innerText.trim()==="特卖在售中"){items[i].click();r="ok";break;}' +
-    '}' +
-    'r'
-  );
-  if (selected !== 'ok') throw new Error('未找到「特卖在售中」选项');
-  await sleep(400);
-
-  // 点查询
-  const queried = await cdp.eval(jlId,
-    'var btns=document.querySelectorAll("button");' +
-    'var r="notfound";' +
-    'for(var i=0;i<btns.length;i++){' +
-    '  if(btns[i].innerText.trim()==="查询"){btns[i].click();r="ok";break;}' +
-    '}' +
-    'r'
-  );
-  if (queried !== 'ok') throw new Error('未找到查询按钮');
-  await sleep(2000);
 
   // 检查总条数
   const totalText = await cdp.eval(jlId,
