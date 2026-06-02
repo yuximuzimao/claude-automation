@@ -28,12 +28,12 @@
 **命令序列**（每次新活动按此顺序执行）：
 
 ```
-0  jl <账号编号>                     ← 必须先对齐 JL 账号
-① node cli.js check --shop <店铺>   ← 扫描+标记（自动完成以下子步骤）
-② 我（Claude）识图                   ← 人工步骤，写入 sku-records.json
-③ node cli.js match --shop <店铺>   ← 自动匹配（异常立即停止）
-④ node cli.js check --shop <店铺>   ← 重新扫描+对比报告
-⑤ node cli.js verify-table          ← 生成核对表 HTML，图片+ERP明细一一对应，人工兜底核对
+0  jl <账号编号>                         ← 必须先对齐 JL 账号
+① node cli.js check --shop <店铺>       ← 扫描+标记（自动完成以下子步骤）
+② 我（Claude）识图                       ← 人工步骤，写入 sku-records.json
+②.5 node cli.js preview-match           ← 生成匹配前核对 HTML（已匹配明细+待匹配识图），人工确认后再 match
+③ node cli.js match --shop <店铺>       ← 自动匹配（异常立即停止）
+④ node cli.js check --shop <店铺>       ← 重新扫描+对比报告
 ```
 
 **各步骤明细**：
@@ -54,6 +54,12 @@
    - Read 工具加载 data/imgs/ 中的图片，对照 features.json 规则
    - 写入 sku-records.json 的 recognition 字段
 
+②.5 preview-match（核对后再 match）:
+   - 读取 sku-records.json + 最新 check 报告
+   - Part 1 已匹配：图片 + ERP 档案明细（subItems/archiveTitle）
+   - Part 2 待匹配：图片 + 识图结论（recognition.items + accessories 注入）
+   - 人工确认两部分内容正确后再执行 match
+
 ③ match 内部流程:
    0. 【自动清空】done[] 和 failed[]（新任务，历史记录对本次无意义）
    - Phase 1: 组合装 → 勾选 → 标记套件 → 逐个复制为套件
@@ -65,12 +71,13 @@
    - comparisonResult: 识图预测 vs 档案实际 → match/mismatch
    - 若有 mismatch，人工核查
 
-⑤ verify-table = 生成核对表 HTML:
+⑤ verify-table（可选，流程末尾兜底）:
    - 读取最新 check 报告，将每个 SKU 的图片与 ERP 档案明细并排展示
    - 图片嵌入 base64，HTML 自包含，生成后自动打开浏览器
    - 每次生成前自动清空旧 verify-*.html（与 check 清空 imgs/reports 一致，旧表对下次无用，不保留存档）
-   - 用途：流程末尾人工兜底核对，防止识图错误（如体验装/正装混淆）漏过
+   - 用途：核对对比结论，防止识图错误漏过
    - 对比结果用颜色标注：绿色=一致，红色=不一致
+   - **注意**：preview-match（②.5）已在 match 前完成人工确认，verify-table 为可选兜底步骤，正常流程可跳过
 ```
 
 **异常处理原则**：

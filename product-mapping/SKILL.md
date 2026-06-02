@@ -18,7 +18,7 @@ entry: cli.js
 
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
-| `cli.js` | CLI 入口，18 个命令路由 | 了解可用命令或新增命令时 |
+| `cli.js` | CLI 入口，19 个命令路由 | 了解可用命令或新增命令时 |
 | `lib/check.js` | 完整核查流程编排（扫描+标记+生成报告） | 改核查流程时 |
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
@@ -29,6 +29,7 @@ entry: cli.js
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
+| `lib/preview-match.js` | 匹配前核对 HTML 生成（已匹配明细 + 待匹配识图结论） | 识图完成后、match 前生成核对表时 |
 | `lib/verify-table.js` | 识图核对表 HTML 生成（图片+ERP明细一一对应） | 流程末尾人工兜底核对时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
 | `lib/jl-sku-detail.js` | 鲸灵 SKU 详情读取 | 查单个 SKU 时 |
@@ -56,11 +57,11 @@ entry: cli.js
 ### 核查主流程（`docs/INDEX.md §2`）
 
 ```
-① check --shop <店铺>    → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
-② 识图（Claude 手动）   → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
-③ match --shop <店铺>    → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
-④ check --shop <店铺>    → 重新扫描+对比报告 (anchor: runCheck)
-⑤ verify-table           → 生成核对表 HTML，图片+ERP明细一一对应，人工兜底核对 (anchor: main in verify-table.js)
+① check --shop <店铺>      → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
+② 识图（Claude 手动）      → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
+②.5 preview-match          → 生成匹配前核对 HTML（已匹配项 ERP 明细 + 未匹配项识图结论），人工确认 (anchor: main in preview-match.js)
+③ match --shop <店铺>      → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
+④ check --shop <店铺>      → 重新扫描+对比报告 (anchor: runCheck)
 ```
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
@@ -166,6 +167,7 @@ lib/match-one.js
 lib/match.js
 lib/erp-lock.js
 lib/navigate.js
+lib/preview-match.js
 lib/remap-sku.js
 lib/result.js
 lib/targets.js
