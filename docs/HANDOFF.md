@@ -1,7 +1,7 @@
 # Handoff
 
 更新时间：2026-06-02 11:20
-当前负责人：Codex（Codex Monitor 第一版封板收尾）
+当前负责人：待定（Codex Monitor 第一版已封板）
 当前分支：data-model-restructure
 当前焦点：(1) Codex Monitor 第一版已封板，协作材料已归档；(2) product-detect KGOS 第 6 轮 yolov8s 训练仍需后续按日志确认完成状态
 
@@ -12,7 +12,7 @@
   - `scripts/codex-inbox-check.cjs` — SessionStart hook 脚本
   - `~/.claude/settings.json` — hook 已注册
   - AGENTS.md 和 CLAUDE.md 已同步协议
-- Codex Git 后续建议已审查回复（approved-with-notes，详见 `docs/codex-handoff/workspace-git-review-response.md`）
+- Codex Git 后续建议已审查回复（approved-with-notes，详见 `docs/codex-handoff/archive/2026-06-01/workspace-git-review-response.md`）
 - 售后物流弹窗关闭超时容错已提交（09978b1）
 - 剩余仓库资产分类已提交（ee356b2）
   - 纳入：品牌参考图、lkwj 标注成果、复盘资料、Claude 审查回复
@@ -27,7 +27,7 @@
   - 取消类工单测试口径已同步为 `wait_archive`
   - `npm test` 结果：44/44 通过
 - Codex Monitor 计划 Claude Code 正式审计完成（2026-05-31 23:15）：
-  - 回复文件：`docs/codex-handoff/codex-monitor-review-response.md`
+  - 回复文件：`docs/codex-handoff/archive/2026-06-01/codex-monitor-review-response.md`
   - 结论：方向批准，3 处必须修正（rate_limits 路径 / Codex token 字段 / Claude Code 多模型）
   - 用户决策：Python + tkinter 批准，视觉风格改为浅色（推翻 Codex 原深色方案）
   - 执行许可：修正 3 处后可开始阶段 0 + 阶段 1

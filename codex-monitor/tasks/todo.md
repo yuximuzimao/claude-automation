@@ -77,7 +77,7 @@ Claude Code 已正式放行并已完成：
 ## 阶段 6：macOS 产品化
 
 - [x] 修复 Claude handoff inbox JSON，并吸收阶段 6 审查意见
-- [x] 新增 runtime debounce / polling fallback，watcher 刷新强制 `modified_since` + `max_files` 增量门控
+- [x] 新增 runtime debounce / polling fallback，watcher 刷新保持近 30 天口径并受 `--claude-max-files` 上限约束
 - [x] 新增 LaunchAgent plist 生成、安装、卸载、打印命令；安装不自动执行 `launchctl`
 - [x] LaunchAgent 日志改到 `~/Library/Logs/Codex Monitor/`
 - [x] 新增 `.app` bundle wrapper 生成命令
