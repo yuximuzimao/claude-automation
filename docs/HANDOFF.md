@@ -1,7 +1,7 @@
 # Handoff
 
-更新时间：2026-06-02 11:20
-当前负责人：待定（Codex Monitor 第一版已封板）
+更新时间：2026-06-02 13:06
+当前负责人：待定（工作区 Git 整理与远端备份已收尾）
 当前分支：data-model-restructure
 当前焦点：(1) Codex Monitor 第一版已封板，协作材料已归档；(2) product-detect KGOS 第 6 轮 yolov8s 训练仍需后续按日志确认完成状态
 
@@ -55,6 +55,12 @@
   - 用户确认：第一版可以封板；“本月”改“近 30 天”为用户确认口径
   - 验证：`python3.13 -m unittest discover -s tests -v` 27/27 通过，`python3.13 -m compileall app tests` 通过，`python3.13 main.py --smoke-aggregate` 通过
   - 协作材料归档：`docs/codex-handoff/archive/2026-06-02-codex-monitor-v1/`
+- 工作区 Git 整理已完成（2026-06-02）：
+  - `/Users/chat/claude` 已拆分并推送 5 个提交：product-detect 生成器、lkwj 核对说明、项目入口名、reviews 回顾索引、AGENTS memory context
+  - 全局 Git ignore 已新增 `/Users/chat/.config/git/ignore`，排除 `.DS_Store`、`.codex-marketplace-install.json`、`.qclaw/`
+  - `qclaw` 工作区仅做本地忽略，不删除内容
+  - `.cc-switch/skills/web-access` 新增 CDP `/key` 键盘事件端点；原上游 `eze-is/web-access` 当前账号无写权限，已备份到 `yuximuzimao/claude-automation` 的 `backup/web-access-cdp-key-endpoint` 分支
+  - 本地恢复文件：`/Users/chat/git-backups/0001-feat-cdp-add-key-dispatch-endpoint.patch`、`/Users/chat/git-backups/web-access-f2cac3b.bundle`
 
 ## 未完成
 - Codex 未执行售后系统重启；如需要线上 server 立刻加载新 `lib/` 逻辑，仍需手动运行 `/aftersales-restart`
