@@ -88,75 +88,77 @@ Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同�
 <claude-mem-context>
 # Memory Context
 
-# [claude] recent context, 2026-05-29 11:06pm GMT+8
+# [claude] recent context, 2026-06-01 4:53pm GMT+8
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (13,575t read) | 418,461t work | 97% savings
+Stats: 50 obs (14,643t read) | 994,765t work | 99% savings
 
 ### May 29, 2026
-1050 6:46p ⚖️ 商品转移功能将从 product-mapping 独立为单独项目
-1051 6:53p 🔄 transfer 功能独立项目开始创建
-1052 " 🔄 三个核心文件已复制到独立项目
-S377 修复 zip 包在 Windows 上中文文件名乱码的编码问题 (May 29 at 6:54 PM)
-1053 6:54p 🔄 generate.js 重构完成——zip 输出路径改为桌面
-1056 " 🔄 Task 6 完成——独立项目创建闭环，Task 5 开始清理
-1054 " 🟣 独立 CLI 入口 cli.js 创建完成——命令改为 collect/pack
-1055 " 🟣 SKILL.md + CLAUDE.md + package.json 创建完成
-1057 " 🔄 旧项目残留开始清理——lib/transfer/ 和 data/transfers/ 已删除
-1058 " 🔄 发现 cli.js 中 transfer 残留引用——transfer-pack 行待清理
-1059 " 🔵 product-mapping/cli.js 转移残留范围确认——12 行需清理
-1060 6:55p 🔴 cli.js Python 清理脚本失败——中转命令块未被移除
-1061 " 🔴 cli.js 从 git HEAD 恢复——Python 清理脚本误删后的抢救
-1062 " 🔵 product-mapping/SKILL.md 也有 12 行转移残留需清理
-1063 " 🔄 SKILL.md 转移残留已清理——关键字行过滤删除
-S378 修复 zip 包在 Windows 上中文文件名乱码的编码问题 (May 29 at 6:56 PM)
-1087 7:00p 🔵 Zip encoding fix: generate.js being investigated
-1088 7:03p 🔵 Zip encoding fix: full zip creation code revealed
-1089 7:04p 🔴 Zip encoding fix implemented: macOS zip replaced with Python zipfile
-1090 " 🔵 Python zipfile UTF-8 flag test passed: fix verified
-1091 " 🔴 Zip encoding fix fully verified: UTF-8 flag confirmed for Chinese filenames
-1092 " 🔴 Zip encoding fix closed: node --check passed, fix fully verified
-S379 修复 zip 包 Windows 中文乱码 + 最终清理验证 (May 29 at 7:04 PM)
-1094 7:05p ✅ Project file inventory confirmed: transfer and product-mapping structure intact
-1095 " 🔵 Product-mapping decontamination confirmed: zero transfer references in SKILL.md
-1096 " 🔵 MEMORY.md index still shows old transfer project description
-1097 " ✅ MEMORY.md index updated to reflect independent transfer project
-1098 " ✅ Obsolete plan file vast-roaming-crescent.md deleted
-S380 重复的进度总结请求 — 确认全部工作已闭环 (May 29 at 7:05 PM)
-S384 User asked Claude Code to call Codex CLI and negotiate a collaboration protocol between the two agents (May 29 at 7:06 PM)
-1112 9:29p 🔵 Codex CLI and Claude Code dual-agent collaboration model explored
-1113 9:30p 🔵 Codex CLI config.toml confirmed with MCP server and plugin state
-S385 用户要求 Claude Code 主动调用 Codex CLI 协商两个 agent 的协作协议 (May 29 at 9:30 PM)
-S381 User asked how Codex CLI and Claude Code collaborate when working in the same shared directory, after adding Codex alongside existing Claude Code workflow (May 29 at 9:30 PM)
-S383 查询 superpowers、pua、neat-freak 三个技能的 Git 仓库地址（安装来源） (May 29 at 9:30 PM)
-1122 9:37p 🔵 Three skills' git repository addresses confirmed
-S386 neat-freak — 工作区文档/内存洁癖级审计与同步修复 (May 29 at 9:38 PM)
-1160 10:08p 🔵 Codex CLI `codex exec` cross-agent handshake succeeded despite persistent WebSocket failures
-1161 " ✅ End-of-session knowledge cleanup with neat-freak skill
-1148 10:09p 🔵 Codex CLI command surface mapped for Claude Code integration
-1149 10:11p 🔵 Claude Code invoked Codex CLI via `codex exec` to negotiate collaboration protocol
-1150 " 🔄 CLAUDEMD reloaded — project rules reviewed
-1151 " 🔵 Shared workspace structure and hook system investigated
-1152 " ⚖️ Collaboration handoff method discussed between sessions
-1153 10:12p 🔵 Claude Code and Codex dual CLI environment mapped
-1154 " 🔵 Codex plugin hook infrastructure mapped
-1155 " 🔵 Session lifecycle hook internals understood
-1156 " 🔵 Stop-time review gate blocks session end on code issues
-1157 " 🔵 Jingling multi-account session management system documented
-1158 " 🔵 Codex companion state persistence internals revealed
-1159 " 🔵 Workspace root directory structure fully enumerated
-1162 10:24p 🔵 neat-freak 内存审计发现 33 个孤儿文件
 1163 10:25p 🔵 CLAUDE.md 与 AGENTS.md / HANDOFF.md 零引用——文档层断裂
 1164 " ✅ CLAUDE.md Git scope 新增 transfer 子项目
 1165 " ✅ CLAUDE.md 新增 Codex 协作章节与 AGENTS.md/HANDOFF.md 引用
 1166 " 🔵 AGENTS.md 同样不引用 HANDOFF.md——双向断裂
 1167 10:26p ✅ AGENTS.md 新增 HANDOFF.md 引用——双向文档断裂修复完成
-S387 neat-freak — 工作区文档/内存洁癖级审计完成 (May 29 at 10:26 PM)
 1183 10:59p ⚖️ Git backup strategy for AI change recovery
 1184 11:01p ⚖️ Codex Git optimization plan reviewed with risk assessment
+1190 11:06p ✅ .gitignore updated with runtime data, model weights, and Codex internal file exclusions
+1191 " 🔵 Git index unwritable prevents git rm --cached from removing tracked runtime files
+1192 11:10p ✅ .gitignore updated with runtime data, model weights, and Codex internal file exclusions
+1193 " 🔵 Codex sandbox cannot write to .git/index.lock blocking all git write operations
+1194 " 🔵 Tracked runtime data inventory: 85 files identified for git index removal
+1195 " 🔵 Full tracked file inventory under data/products/ and lkwj/ revealed
+1196 11:11p 🔵 Complete tracked data/ inventory: 85+ files across lkwj and product-mapping
+1197 " ✅ .gitignore rewritten from broad negation pattern to targeted per-project exclusion
+1198 " ✅ Aftersales runtime data removed from git index via git rm --cached
+1199 11:12p ✅ Product-mapping image collection files removed from git index
+1200 " ✅ auto-match-log.json removed from git index
+1201 " 🔵 product-mapping/data/imgs/ files already deleted from disk, not just index
+1203 11:15p ⚖️ Codex-Claude 协作协议设计方向明确
+1204 " 🔵 现有 AGENTS.md 已有 Codex 协作规则但缺乏双向通信协议
+1205 11:25p 🟣 创建协作协议基础设施目录 docs/codex-handoff/
+1210 " 🟣 Codex-Claude Code collaboration protocol v1 implemented (pending registration)
+1211 11:34p 🟣 Codex-Claude Code bidirectional handoff protocol fully implemented and verified
+1215 11:37p 🔵 Protocol gap: Codex cannot read Claude Code's in-process text responses
+### May 30, 2026
+1241 12:28a 🔵 No primary session activity detected for observation
+1242 " 🔵 Flow document reference text located for after-sale reason field
+1243 " 🔵 Root cause area identified: reject.js fills the detailed reason field
+1244 " 🔵 Root cause identified: dynamic rejection text in infer.js overrides fixed template
+1245 12:29a 🔵 CLI reject command flow confirmed for detail text passing
+S399 Fix flow-5.3 (仅退款-已发货) rejection detail text — replace dynamic tracking number concatenation with fixed platform template text in lib/infer.js (May 30 at 12:31 AM)
+S400 Fix flow-5.3 (仅退款-已发货) Step 4 "详细原因" rejection text in lib/infer.js — change dynamic tracking-number-containing text to static template "订单已发出，已通知快递拦截暂未退回，等快递退回我司后再退款" (May 30 at 12:33 AM)
+S401 User reported work orders not appearing in queue; primary session investigated queue state and server health instead of applying the requested infer.js fix (May 30 at 12:43 AM)
+1246 12:46a 🔵 Primary session still investigating queue instead of applying infer.js fix
+S402 User asked why work orders still not appearing in queue after previous changes; primary session continues investigating queue behavior instead of applying the infer.js fix (May 30 at 12:46 AM)
+S403 User reported work orders not appearing in queue; primary session continues server restart loop without applying requested infer.js fix (May 30 at 12:47 AM)
+1247 12:51a 🔵 Queue state unchanged despite multiple server restarts and scan cycles
+1249 " 🔵 Scan cycle completed — 3 new flow-5.3 (仅退款) tickets enqueued, 2 waiting items reset
+S405 Primary session previously claimed "修复生效了" for queue fix after scan cycle — now shifted to exploring project docs instead of applying remaining infer.js fix (May 30 at 12:51 AM)
+1248 12:52a 🔵 Full scan cycle completed across all 12 accounts with zero new queue entries
+S404 Primary session claims "fix took effect" after scan cycle — 3 new tickets enqueued — but the infer.js rejection detail text fix remains unexecuted (May 30 at 12:52 AM)
+1250 12:53a 🔵 All 5 queue items processed through pipeline — 2 full runs, 3 skipped as reprocess
+S406 Primary session continues queue-reprocessing tangent after pipeline.js guard deletion — infer.js rejection detail fix still completely ignored (May 30 at 12:53 AM)
+1251 12:55a 🔵 Pipeline reprocess gate: historical live-executed simulation records block re-processing
+1252 " 🔵 Auto-archive mechanism identified: read-ticket.js returns failure for closed tickets
+1253 " 🔵 Two historical execution guards identified in pipeline.js: lines 318 and 395
+1254 12:56a 🔵 Three-layer historical execution guard identified in pipeline.js auto-execute path
+1255 " 🔵 Circuit breaker state confirmed: erp-circuit-breaker closed, main circuit-breaker missing
+1256 " 🔵 Duplicate queue entries found for 3 work orders after data.js guard removal
+1257 " ✅ Queue.json modified: 4 duplicate entries deleted, 5 work orders restored to pending
+1258 12:57a 🔵 Primary session planning to delete historical execution guard in pipeline.js
+1259 " ✅ Historical execution guard deleted from pipeline.js lines 395-405 in reprocessOne()
+1260 " ✅ Confirmed: 5 work orders now pending in queue after cleanup + guard deletion
+1261 12:58a ✅ Server restarted with pipeline.js fix — PID 50852
+1262 " ✅ Pipeline auto-started after restart — 1 item collecting, 4 pending
+S407 修复 flow-5.3 仅退款已发货 Step 4 "详细原因"拒绝文案 — inferRefundOnly() 中 waitingRescan 路径（line 538）和 INTERCEPT_TIMEOUT 路径（line 548）的 reason 字段改为固定模板 "订单已发出，已通知快递拦截暂未退回，等快递退回我司后再退款" (May 30 at 12:58 AM)
+1269 5:10p ✅ End-of-session knowledge cleanup with neat-freak skill
+S411 Documentation debt cleanup — user independently identified and fixed SKILL.md missing front-end file entries, synced HANDOFF.md, and updated project memory to reflect the isReturnWaitingAction() refactoring from the prior session (May 30 at 5:13 PM)
+### May 31, 2026
+1284 11:09p ✅ Codex Monitor 阶段 0/1 审计通过，阶段 2 正式放行
+1285 11:55p ✅ Codex-Handoff 收件箱：阶段审计任务标记完成
 
-Access 418k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 995k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
