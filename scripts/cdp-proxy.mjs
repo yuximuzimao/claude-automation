@@ -487,6 +487,16 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
+    // POST /key?target=xxx — 发送真实键盘事件（body: 键名，如 Enter、Tab、a）
+    else if (pathname === '/key') {
+      const sid = await ensureSession(q.target);
+      const key = (await readBody(req)).trim() || 'Enter';
+      const keyCode = key === 'Enter' ? 13 : key === 'Tab' ? 9 : key.charCodeAt(0);
+      await sendCDP('Input.dispatchKeyEvent', { type: 'keyDown', key, keyCode, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode }, sid);
+      await sendCDP('Input.dispatchKeyEvent', { type: 'keyUp', key, keyCode, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode }, sid);
+      res.end(JSON.stringify({ sent: key }));
+    }
+
     // GET /info?target=xxx - 获取页面信息
     else if (pathname === '/info') {
       const sid = await ensureSession(q.target);
