@@ -1,5 +1,7 @@
 # 商品匹配核查
 
+项目中文名：商品匹配
+
 ## Session 启动（必做，按顺序）
 
 1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
@@ -50,4 +52,3 @@ node cli.js targets                                        # 检查浏览器连�
 | 批量操作写入路径漏传参 → 静默错误 | `../aftersales-automation/tasks/lessons.md §16` |
 
 售后项目参考本项目：el-table clearSelection / 多层 dialog 按钮 / 对应表图片懒加载 → `docs/INDEX.md §6`
-
