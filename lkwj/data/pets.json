@@ -72,7 +72,7 @@
         "obtainMethods": []
       },
       "leader": {
-        "formName": "首领形态",
+        "formName": "叶冕魔力猫",
         "obtainMethods": [
           "完成魔法学院初始精灵首领挑战，获得首领信物「阳光罐头」"
         ]
@@ -86,7 +86,17 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "boss": {
+        "tagName": "首领"
       }
+    },
+    "fruit": {
+      "name": "魔力猫果实",
+      "acquired": false,
+      "obtainMethod": "开局三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
     }
   },
   "pet_5": {
@@ -144,7 +154,7 @@
         "obtainMethods": []
       },
       "leader": {
-        "formName": "首领形态",
+        "formName": "烈火战神",
         "obtainMethods": [
           "完成魔法学院初始精灵首领挑战，获得首领信物「熔炼之火」"
         ]
@@ -162,7 +172,14 @@
       "full": "huoshen",
       "initial": "hs"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "火神果实",
+      "acquired": false,
+      "obtainMethod": "开局三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
+    }
   },
   "pet_8": {
     "name": "水蓝蓝",
@@ -219,7 +236,7 @@
         "obtainMethods": []
       },
       "leader": {
-        "formName": "首领形态",
+        "formName": "圣水守护",
         "obtainMethods": [
           "完成魔法学院初始精灵首领挑战，获得首领信物「命运钥匙」"
         ]
@@ -237,7 +254,14 @@
       "full": "shuiling",
       "initial": "sl"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "水灵果实",
+      "acquired": false,
+      "obtainMethod": "开局三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
+    }
   },
   "pet_11": {
     "name": "鸭吉吉",
@@ -308,7 +332,9 @@
     },
     "fruit": {
       "name": "鸭吉吉果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只鸭吉吉",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -409,7 +435,9 @@
     },
     "fruit": {
       "name": "水泡壳果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只水泡壳",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -480,7 +508,9 @@
     },
     "fruit": {
       "name": "花影羚羊果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只花影羚羊",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -620,7 +650,7 @@
       "leader": {
         "formName": "霜翼领主",
         "obtainMethods": [
-          "挑战精灵首领·霜翼领主获得首领信物，四种形态进化其中一种即可"
+          "挑战精灵首领·霜翼领主获得首领信物「霜翼领主的信物」（四种形态进化其中一种就可以）"
         ]
       }
     },
@@ -638,7 +668,9 @@
     },
     "fruit": {
       "name": "岚鸟果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只岚鸟",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -705,7 +737,9 @@
     },
     "fruit": {
       "name": "幻影灵菇果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只幻影灵菇",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -811,7 +845,9 @@
     },
     "fruit": {
       "name": "石冠王蜥果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只石冠王蜥",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -877,7 +913,7 @@
       "leader": {
         "formName": "迷嶂布莱克",
         "obtainMethods": [
-          "挑战精灵首领·迷嶂布莱克获得首领信物"
+          "挑战精灵首领·迷嶂布莱克获得首领信物「迷嶂布莱克的信物」"
         ]
       }
     },
@@ -895,7 +931,9 @@
     },
     "fruit": {
       "name": "布克棱岩果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只布克棱岩",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -916,10 +954,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -954,7 +988,9 @@
     },
     "fruit": {
       "name": "叮叮恶魔果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只叮叮恶魔",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1046,7 +1082,9 @@
     },
     "fruit": {
       "name": "化蝶果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只化蝶",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1071,7 +1109,7 @@
       "leader": {
         "formName": "幻影荆棘",
         "obtainMethods": [
-          "挑战精灵首领·幻影荆棘获得首领信物"
+          "挑战精灵首领·幻影荆棘获得首领信物「幻影荆棘的信物」"
         ]
       }
     },
@@ -1093,7 +1131,9 @@
     },
     "fruit": {
       "name": "幽影树果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只幽影树",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1161,7 +1201,9 @@
     },
     "fruit": {
       "name": "卷胡巨獭果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只卷胡巨獭",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1244,7 +1286,7 @@
       "leader": {
         "formName": "钻石蜗",
         "obtainMethods": [
-          "挑战精灵首领·钻石蜗获得首领信物，六种形态进化其中一种即可"
+          "挑战精灵首领·钻石蜗获得首领信物「钻石蜗的信物」（六种形态进化其中一种就可以）"
         ]
       }
     },
@@ -1262,7 +1304,9 @@
     },
     "fruit": {
       "name": "晶石蝎果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只晶石蜗",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1323,7 +1367,7 @@
       "leader": {
         "formName": "奇丽果",
         "obtainMethods": [
-          "挑战精灵首领·奇丽果获得首领信物"
+          "挑战精灵首领·奇丽果获得首领信物「奇丽果的信物」"
         ]
       }
     },
@@ -1333,6 +1377,10 @@
       },
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -1341,7 +1389,9 @@
     },
     "fruit": {
       "name": "奇丽花果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只奇丽花",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1460,7 +1510,9 @@
     },
     "fruit": {
       "name": "卡瓦重果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只卡瓦重",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1505,7 +1557,7 @@
       "leader": {
         "formName": "风暴战犬",
         "obtainMethods": [
-          "挑战精灵首领·风暴战犬获得首领信物"
+          "挑战精灵首领·风暴战犬获得首领信物「风暴战犬的信物」"
         ]
       }
     },
@@ -1523,7 +1575,9 @@
     },
     "fruit": {
       "name": "音速犬果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只音速犬",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1588,7 +1642,9 @@
     },
     "fruit": {
       "name": "蹦床松鼠果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只蹦床松鼠",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1613,10 +1669,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -1650,7 +1702,9 @@
     },
     "fruit": {
       "name": "嘟嘟锅果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只嘟嘟锅",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1739,7 +1793,9 @@
     },
     "fruit": {
       "name": "幽冥眼果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只幽冥眼",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1796,7 +1852,9 @@
     },
     "fruit": {
       "name": "梦悠悠果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只梦悠悠",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -1830,7 +1888,9 @@
     },
     "fruit": {
       "name": "兽花蕾果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只兽花蕾",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -1899,6 +1959,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "巨噬针鼹果实",
+      "acquired": false,
+      "obtainMethod": "解锁风眠省8个精灵图鉴 -学院驻地海边智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_63": {
@@ -2037,7 +2103,9 @@
     },
     "fruit": {
       "name": "蹦蹦花果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只蹦蹦花",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2107,7 +2175,9 @@
     },
     "fruit": {
       "name": "电球咩咩果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只电球咩咩",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2165,7 +2235,9 @@
     },
     "fruit": {
       "name": "蒲公英娃娃果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只蒲公英娃娃",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2209,7 +2281,9 @@
     },
     "fruit": {
       "name": "伊贝粉粉果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只伊贝粉粉",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2281,7 +2355,9 @@
     },
     "fruit": {
       "name": "瞌睡王果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只瞌睡王",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2390,7 +2466,9 @@
     },
     "fruit": {
       "name": "千棘盔果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只千棘盔",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2427,7 +2505,9 @@
     },
     "fruit": {
       "name": "菊花梨果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只菊花梨",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2495,7 +2575,9 @@
     },
     "fruit": {
       "name": "星光狮果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只星光狮",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2564,7 +2646,7 @@
       "leader": {
         "formName": "女王蜂",
         "obtainMethods": [
-          "挑战精灵首领·女王蜂获得首领信物"
+          "挑战精灵首领·女王蜂获得首领信物「女王蜂的信物」"
         ]
       }
     },
@@ -2582,7 +2664,9 @@
     },
     "fruit": {
       "name": "花魁蜂后果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只花魁蜂后",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2602,10 +2686,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -2631,10 +2711,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     }
   },
@@ -2664,7 +2740,9 @@
     },
     "fruit": {
       "name": "朔夜伊芙果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只朔夜伊芙",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2732,7 +2810,9 @@
     },
     "fruit": {
       "name": "翠顶夫人果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只翠顶夫人",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2759,7 +2839,9 @@
     },
     "fruit": {
       "name": "黑羽夫人果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只翠顶夫人",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -2793,7 +2875,9 @@
     },
     "fruit": {
       "name": "锤头鹬果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只锤头鹳",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2846,7 +2930,9 @@
     },
     "fruit": {
       "name": "魔草巫灵果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只魔草精灵",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2874,7 +2960,9 @@
     },
     "fruit": {
       "name": "记忆石果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只记忆石",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -2943,7 +3031,9 @@
     },
     "fruit": {
       "name": "咔咔鸟果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "解锁风眠省30个精灵图鉴-隐秘滩涂南边智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3016,7 +3106,9 @@
     },
     "fruit": {
       "name": "花衣蝶果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只花衣蝶",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3089,7 +3181,9 @@
     },
     "fruit": {
       "name": "魔眷鸟果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只魔眷鸟",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3165,6 +3259,9 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "boss": {
+        "tagName": "首领"
       }
     },
     "pinyin": {
@@ -3173,7 +3270,9 @@
     },
     "fruit": {
       "name": "罗隐果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只罗隐",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -3235,7 +3334,7 @@
         "obtainMethods": []
       },
       "leader": {
-        "formName": "首领形态",
+        "formName": "神谕鲨",
         "obtainMethods": [
           "领地试炼获得首领信物「遥远之音」"
         ]
@@ -3255,7 +3354,9 @@
     },
     "fruit": {
       "name": "彩蝶鲨果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只彩蝶鲨",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -3300,7 +3401,9 @@
     },
     "fruit": {
       "name": "巨灵石果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只巨灵石",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3370,7 +3473,7 @@
       "leader": {
         "formName": "祭礼巨像",
         "obtainMethods": [
-          "挑战精灵首领·祭礼巨像获得首领信物"
+          "挑战精灵首领·祭礼巨像获得首领信物「祭礼巨像的信物」"
         ]
       }
     },
@@ -3386,7 +3489,13 @@
       "full": "yishijuxiang",
       "initial": "ysjx"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "仪式巨像果实",
+      "acquired": false,
+      "obtainMethod": "解锁风眠省60个精灵图鉴-风息山口魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_116": {
     "name": "小独角兽",
@@ -3404,10 +3513,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -3426,7 +3531,7 @@
         "obtainMethods": []
       },
       "leader": {
-        "formName": "首领形态",
+        "formName": "彩虹独角兽",
         "obtainMethods": [
           "推进风眠省旅途任务获得首领信物「生长痛」"
         ]
@@ -3450,7 +3555,9 @@
     },
     "fruit": {
       "name": "白金独角兽果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只白金独角兽",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -3554,7 +3661,9 @@
     },
     "fruit": {
       "name": "风滚暮虫果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只风滚暮虫",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3600,7 +3709,7 @@
       "leader": {
         "formName": "黑猫密探",
         "obtainMethods": [
-          "挑战精灵首领·黑猫密探获得首领信物"
+          "挑战精灵首领·黑猫密探获得首领信物「黑猫密探的信物」"
         ]
       }
     },
@@ -3618,7 +3727,9 @@
     },
     "fruit": {
       "name": "黑猫巫师果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "解锁风眠省90个精灵图鉴-叽叽喳喳台地魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     },
     "destined_hero": "命定勇者"
   },
@@ -3671,7 +3782,9 @@
     },
     "fruit": {
       "name": "影狸果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只影狸",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -3739,7 +3852,9 @@
     },
     "fruit": {
       "name": "古啦多果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只古啦多",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3809,7 +3924,9 @@
     },
     "fruit": {
       "name": "怖哭菇果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只怖哭菇",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3833,7 +3950,7 @@
       "leader": {
         "formName": "恶魔狼王",
         "obtainMethods": [
-          "挑战精灵首领·恶魔狼王获得首领信物，原色和异色进化其中一种即可"
+          "挑战精灵首领·恶魔狼王获得首领信物「恶魔狼王的信物」（原色和异色进化其中一种就可以）"
         ]
       }
     },
@@ -3855,7 +3972,9 @@
     },
     "fruit": {
       "name": "恶魔狼果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只恶魔狼",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -3901,7 +4020,9 @@
     },
     "fruit": {
       "name": "电企鹅果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只电企鹅",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3971,7 +4092,9 @@
     },
     "fruit": {
       "name": "雪巨人果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只雪巨人",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -3997,10 +4120,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -4026,7 +4145,9 @@
     },
     "fruit": {
       "name": "獠牙猪果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只獠牙猪",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -4100,7 +4221,9 @@
     },
     "fruit": {
       "name": "雪灵果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只雪灵",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -4126,10 +4249,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -4157,10 +4276,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     }
   },
@@ -4178,7 +4293,7 @@
       "leader": {
         "formName": "雪影冰灵",
         "obtainMethods": [
-          "挑战精灵首领·雪影冰灵获得首领信物，原色和异色进化其中一种即可"
+          "挑战精灵首领·雪影冰灵获得首领信物「雪影冰灵的信物」（原色和异色进化其中一种就可以）"
         ]
       }
     },
@@ -4198,7 +4313,13 @@
       "full": "xueyingwawa",
       "initial": "xyww"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "雪影娃娃果实",
+      "acquired": false,
+      "obtainMethod": "解锁风眠省120个精灵图鉴-星霜崖地破船旁边智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_145": {
     "name": "权杖-II",
@@ -4247,7 +4368,9 @@
     },
     "fruit": {
       "name": "权杖-V果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只权杖-V",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -4268,10 +4391,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -4298,10 +4417,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     }
   },
@@ -4332,7 +4447,9 @@
     },
     "fruit": {
       "name": "尖嘴狐仙果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只尖嘴狐仙",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -4469,6 +4586,13 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "针叶巡林果实",
+      "acquired": false,
+      "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_156": {
@@ -4538,6 +4662,13 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "炽焰勇狮果实",
+      "acquired": false,
+      "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_159": {
@@ -4607,6 +4738,13 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "游蛇魔使果实",
+      "acquired": false,
+      "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_162": {
@@ -4637,7 +4775,9 @@
     },
     "fruit": {
       "name": "公平鸽果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只公平鸽",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -4689,7 +4829,9 @@
     },
     "fruit": {
       "name": "怒目怂猫果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只怒目怂猫",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -4795,7 +4937,9 @@
     },
     "fruit": {
       "name": "皇家狮鹫果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只皇家狮鹫",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -4867,7 +5011,9 @@
     },
     "fruit": {
       "name": "芋香巨角蛛果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只芋香巨角蛛",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -4976,7 +5122,9 @@
     },
     "fruit": {
       "name": "嗜波螺果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只嗜波螺",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5049,7 +5197,9 @@
     },
     "fruit": {
       "name": "九幽菇果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只九幽菇",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5098,7 +5248,9 @@
     },
     "fruit": {
       "name": "斑枭果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只斑枭",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5148,7 +5300,9 @@
     },
     "fruit": {
       "name": "卷毛鸭果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只卷毛鸭",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5199,7 +5353,9 @@
     },
     "fruit": {
       "name": "海豹船长果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只海豹船长",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5248,7 +5404,9 @@
     },
     "fruit": {
       "name": "圆号鱼果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只圆号鱼",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5321,7 +5479,9 @@
     },
     "fruit": {
       "name": "卡洛儿果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只卡洛儿",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5394,7 +5554,7 @@
       "leader": {
         "formName": "棋契陛下",
         "obtainMethods": [
-          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+          "挑战精灵首领·棋契陛下获得首领信物「棋契陛下的信物」（两种形态进化其中一种就可以）"
         ]
       }
     },
@@ -5412,7 +5572,9 @@
     },
     "fruit": {
       "name": "棋骑士果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只棋骑士",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -5444,7 +5606,7 @@
       "leader": {
         "formName": "棋契陛下",
         "obtainMethods": [
-          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+          "挑战精灵首领·棋契陛下获得首领信物「棋契陛下的信物」（两种形态进化其中一种就可以）"
         ]
       }
     },
@@ -5490,7 +5652,7 @@
       "leader": {
         "formName": "棋契陛下",
         "obtainMethods": [
-          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+          "挑战精灵首领·棋契陛下获得首领信物「棋契陛下的信物」（两种形态进化其中一种就可以）"
         ]
       }
     },
@@ -5536,7 +5698,7 @@
       "leader": {
         "formName": "棋契陛下",
         "obtainMethods": [
-          "挑战精灵首领·棋契陛下获得首领信物，两种形态进化其中一种即可"
+          "挑战精灵首领·棋契陛下获得首领信物「棋契陛下的信物」（两种形态进化其中一种就可以）"
         ]
       }
     },
@@ -5594,7 +5756,9 @@
     },
     "fruit": {
       "name": "流浪鼠果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只流浪鼠",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5667,7 +5831,9 @@
     },
     "fruit": {
       "name": "白发路路果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只白发路路",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5733,7 +5899,7 @@
       "leader": {
         "formName": "奇梦咪",
         "obtainMethods": [
-          "挑战精灵首领·奇梦咪获得首领信物"
+          "挑战精灵首领·奇梦咪获得首领信物「奇梦咪的信物」"
         ]
       }
     },
@@ -5751,7 +5917,9 @@
     },
     "fruit": {
       "name": "梦想三三果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只梦想三三",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -5797,7 +5965,9 @@
     },
     "fruit": {
       "name": "鳗尾兽果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只鳗尾兽",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5843,7 +6013,7 @@
       "leader": {
         "formName": "伊兰龙",
         "obtainMethods": [
-          "挑战精灵首领·伊兰龙获得首领信物"
+          "挑战精灵首领·伊兰龙获得首领信物「伊兰龙的信物」"
         ]
       }
     },
@@ -5859,7 +6029,13 @@
       "full": "yilanyalong",
       "initial": "ylyl"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "伊兰亚龙果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安120个精灵图鉴-银河蛇口魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_205": {
     "name": "拉特",
@@ -5877,10 +6053,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -5905,7 +6077,9 @@
     },
     "fruit": {
       "name": "酷拉果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只酷拉",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -5988,7 +6162,9 @@
     },
     "fruit": {
       "name": "荆棘电环果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只荆棘电环",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -6034,7 +6210,9 @@
     },
     "fruit": {
       "name": "迷迷箱怪果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只迷迷箱怪",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6093,7 +6271,9 @@
     },
     "fruit": {
       "name": "寒音蛇果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只寒音蛇",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6143,7 +6323,9 @@
     },
     "fruit": {
       "name": "恶魔红钻果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只恶魔红钻",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6213,7 +6395,9 @@
     },
     "fruit": {
       "name": "烈火守护果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只烈火守护",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6246,7 +6430,9 @@
     },
     "fruit": {
       "name": "里拉鳐果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只里拉鳐",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -6299,7 +6485,9 @@
     },
     "fruit": {
       "name": "海枝枝果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只海枝枝",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -6371,6 +6559,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "波多西果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安60个精灵图鉴-二叠山丘魔地下一层（圆号鱼的守护地附近）智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_224": {
@@ -6419,6 +6613,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "翼龙果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安70个精灵图鉴-监管区魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_226": {
@@ -6478,7 +6678,7 @@
       "leader": {
         "formName": "波普鹿",
         "obtainMethods": [
-          "挑战精灵首领·波普鹿获得首领信物"
+          "挑战精灵首领·波普鹿获得首领信物「波普鹿的信物」"
         ]
       }
     },
@@ -6496,7 +6696,9 @@
     },
     "fruit": {
       "name": "爵士鹿果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只爵士鹿",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者"
   },
@@ -6540,7 +6742,9 @@
     },
     "fruit": {
       "name": "声波缇塔果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只声波缇塔",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6616,12 +6820,17 @@
     },
     "fruit": {
       "name": "高脚鹬果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只高脚鹬",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "boss": {
+        "tagName": "首领"
       }
     }
   },
@@ -6770,7 +6979,9 @@
     },
     "fruit": {
       "name": "圣代甜甜果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只圣代甜甜",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6848,6 +7059,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "月亮砣果实",
+      "acquired": false,
+      "obtainMethod": "捕捉20只月亮砣",
+      "obtainType": "课题任务"
     }
   },
   "pet_239": {
@@ -6914,7 +7131,9 @@
     },
     "fruit": {
       "name": "龙鱼果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只龙鱼",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -6965,7 +7184,9 @@
     },
     "fruit": {
       "name": "闪电鳗鱼果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只闪电鳗鱼",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7016,7 +7237,9 @@
     },
     "fruit": {
       "name": "琉璃水母果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只琉璃水母",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7090,6 +7313,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "裘卡果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安100个精灵图鉴-望风半岛魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_249": {
@@ -7155,6 +7384,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "火焰猿果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安40个精灵图鉴-港口驻地魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_252": {
@@ -7222,6 +7457,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "冰钻布鲁斯果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安60个精灵图鉴-向日葵海岸魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_255": {
@@ -7241,10 +7482,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -7271,10 +7508,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     }
   },
@@ -7296,7 +7529,9 @@
     },
     "fruit": {
       "name": "红绒十字果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只红绒十字",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7409,7 +7644,9 @@
     },
     "fruit": {
       "name": "乌拉塔果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只乌拉塔",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7460,7 +7697,9 @@
     },
     "fruit": {
       "name": "帕帕斯卡果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只帕帕斯卡",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7485,10 +7724,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -7515,10 +7750,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     }
   },
@@ -7546,6 +7777,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "立方人果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安80个精灵图鉴-拾荒港口魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_266": {
@@ -7610,7 +7847,9 @@
     },
     "fruit": {
       "name": "绅士鸡果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只绅士鸡",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7684,7 +7923,9 @@
     },
     "fruit": {
       "name": "绒光优优果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只绒光优优",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7716,7 +7957,13 @@
       "full": "pipaniao",
       "initial": "ppn"
     },
-    "notes": "种子：智慧树苗、获得果实"
+    "notes": "种子：智慧树苗、获得果实",
+    "fruit": {
+      "name": "噼啪鸟果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安60个精灵图鉴-圣所前哨魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_273": {
     "name": "深蓝鲸",
@@ -7740,7 +7987,13 @@
       "full": "shenlanjing",
       "initial": "slj"
     },
-    "notes": "种子：获得果实"
+    "notes": "种子：获得果实",
+    "fruit": {
+      "name": "深蓝鲸果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安100个精灵图鉴-沉船旋涡魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_274": {
     "name": "格兰种子",
@@ -7803,12 +8056,18 @@
     },
     "fruit": {
       "name": "格兰球果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只格兰球",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第一赛季"
       }
     }
   },
@@ -7907,6 +8166,12 @@
         "obtainMethods": [
           "加油海葵在别人的世界进化"
         ]
+      },
+      "枯水期的样子": {
+        "formName": "枯水期的样子",
+        "obtainMethods": [
+          "地图捕捉"
+        ]
       }
     },
     "pinyin": {
@@ -7915,7 +8180,9 @@
     },
     "fruit": {
       "name": "遁地鼠果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只遁地鼠",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -7992,6 +8259,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "秩序鱿墨果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安50个精灵图鉴-圣所前哨魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_283": {
@@ -8034,7 +8307,9 @@
     },
     "fruit": {
       "name": "铠甲虫果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只铠甲虫",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8080,7 +8355,7 @@
       "leader": {
         "formName": "圣剑骑士",
         "obtainMethods": [
-          "挑战精灵首领·圣剑骑士获得首领信物"
+          "挑战精灵首领·圣剑骑士获得首领信物「圣剑骑士的信物」"
         ]
       }
     },
@@ -8096,7 +8371,13 @@
       "full": "shengjian-X",
       "initial": "sj-X"
     },
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "圣剑-X果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安80个精灵图鉴-风息山口的魔力之源智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
+    }
   },
   "pet_287": {
     "name": "吸泥鸥",
@@ -8140,7 +8421,9 @@
     },
     "fruit": {
       "name": "泥吼牙果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只泥吼牙",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8191,7 +8474,9 @@
     },
     "fruit": {
       "name": "寂灭骨龙果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只寂灭骨龙",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8246,6 +8531,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "厉毒修萝果实",
+      "acquired": false,
+      "obtainMethod": "解锁洛克里安140个精灵图鉴-厄水沼泽魔力之源附近智慧树苗处获得果实",
+      "obtainType": "智慧树苗"
     }
   },
   "pet_293": {
@@ -8356,7 +8647,9 @@
     },
     "fruit": {
       "name": "捕尘长绒果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只捕尘长绒",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8383,7 +8676,9 @@
     },
     "fruit": {
       "name": "捕尘短绒果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只捕尘长绒",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8454,7 +8749,9 @@
     },
     "fruit": {
       "name": "画间法师手果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只画间法师手",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8548,7 +8845,9 @@
     },
     "fruit": {
       "name": "古卷执政官果实",
-      "acquired": false
+      "acquired": false,
+      "obtainMethod": "捕捉20只古卷执政官",
+      "obtainType": "课题任务"
     },
     "destined_hero": "命定勇者",
     "tags": {
@@ -8597,10 +8896,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
     },
     "pinyin": {
@@ -8627,10 +8922,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
     }
   },
@@ -8654,11 +8945,14 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
+    },
+    "fruit": {
+      "name": "绒仙子果实",
+      "acquired": false,
+      "obtainMethod": "购买S1赛季通行证契约礼券获取，二选一",
+      "obtainType": "通行证契约礼券",
+      "exclusiveGroup": "pass_s1"
     }
   },
   "pet_310": {
@@ -8677,10 +8971,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
     },
     "pinyin": {
@@ -8706,10 +8996,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
     }
   },
@@ -8732,11 +9018,14 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "通行证"
       }
+    },
+    "fruit": {
+      "name": "疾光千兽果实",
+      "acquired": false,
+      "obtainMethod": "购买S1赛季通行证契约礼券获取，二选一",
+      "obtainType": "通行证契约礼券",
+      "exclusiveGroup": "pass_s1"
     }
   },
   "pet_313": {
@@ -8914,10 +9203,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -8952,6 +9237,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "利灯鱼果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉双灯鱼",
+      "obtainType": "赛季作业"
     }
   },
   "pet_322": {
@@ -8982,7 +9273,13 @@
       "initial": "yyxx"
     },
     "notes": "种子：赛季活动",
-    "destined_hero": "命定勇者"
+    "destined_hero": "命定勇者",
+    "fruit": {
+      "name": "月牙雪熊果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉月牙雪熊",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_323": {
     "name": "嗜光嗡嗡",
@@ -9001,10 +9298,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -9038,6 +9331,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "窃光蚊果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉嗜光嗡嗡",
+      "obtainType": "赛季作业"
     }
   },
   "pet_325": {
@@ -9057,10 +9356,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -9094,6 +9389,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "燃薪虫果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉柴渣虫",
+      "obtainType": "赛季作业"
     }
   },
   "pet_327": {
@@ -9112,10 +9413,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -9142,10 +9439,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     }
   },
@@ -9174,6 +9467,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "夜枭果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉空空颅",
+      "obtainType": "赛季作业"
     }
   },
   "pet_330": {
@@ -9221,7 +9520,17 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "小皮球果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉粉粉星",
+      "obtainType": "赛季作业"
     }
   },
   "pet_332": {
@@ -9241,10 +9550,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -9271,10 +9576,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     }
   },
@@ -9304,6 +9605,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "贝古斯果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉贝瑟",
+      "obtainType": "赛季作业"
     }
   },
   "pet_335": {
@@ -9322,10 +9629,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第一赛季"
       }
     },
     "pinyin": {
@@ -9386,6 +9689,12 @@
         "tagName": "异色",
         "limitedTime": "第一赛季"
       }
+    },
+    "fruit": {
+      "name": "落陨星兔果实",
+      "acquired": false,
+      "obtainMethod": "累计捕捉2只污染血脉粉星仔",
+      "obtainType": "赛季作业"
     }
   },
   "pet_338": {
@@ -9433,6 +9742,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "上岸蛙果实",
+      "acquired": false,
+      "obtainMethod": "通过官网下载后领取果实",
+      "obtainType": "限时活动"
     }
   },
   "pet_340": {
@@ -9451,10 +9766,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "活动"
       }
     },
     "pinyin": {
@@ -9486,6 +9797,12 @@
         "tagName": "异色",
         "limitedTime": "活动"
       }
+    },
+    "fruit": {
+      "name": "雅丹鬃果实",
+      "acquired": false,
+      "obtainMethod": "完成联动限定「火红迎新」活动剧情获得果实",
+      "obtainType": "限时活动"
     }
   },
   "pet_342": {
@@ -9555,6 +9872,12 @@
       "chromatic": {
         "tagName": "炫彩"
       }
+    },
+    "fruit": {
+      "name": "春花兔果实",
+      "acquired": false,
+      "obtainMethod": "001期，捕捉10只春花兔家族",
+      "obtainType": "限时活动"
     }
   },
   "pet_345": {
@@ -9624,6 +9947,12 @@
     "pinyin": {
       "full": "muxingchen",
       "initial": "mxc"
+    },
+    "fruit": {
+      "name": "暮星辰果实",
+      "acquired": false,
+      "obtainMethod": "002期，捕捉10只幽星光家族",
+      "obtainType": "限时活动"
     }
   },
   "pet_348": {
@@ -9634,16 +9963,14 @@
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "完成「狂欢怪谈」赛季任务获得蛋，挑战S2赛季「狂欢怪谈」传说精灵·机幕方舟获得"
+        ]
       }
     },
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -9665,10 +9992,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -9690,10 +10013,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -9713,10 +10032,6 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -9732,16 +10047,14 @@
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "开通S2赛季「狂欢怪谈」·拾光通行证契约礼券，10级获得果实"
+        ]
       }
     },
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
@@ -9763,22 +10076,27 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
-      },
-      "shiny": {
-        "tagName": "异色",
-        "limitedTime": "第二赛季"
       }
     },
     "pinyin": {
       "full": "xiaoguxiang",
       "initial": "xgx"
+    },
+    "fruit": {
+      "name": "雪怪果实",
+      "acquired": false,
+      "obtainMethod": "购买S2赛季通行证契约礼券获取，二选一",
+      "obtainType": "通行证契约礼券",
+      "exclusiveGroup": "pass_s2"
     }
   },
   "pet_356": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "开通S2赛季「狂欢怪谈」·拾光通行证契约礼券，10级获得果实"
+        ]
       }
     },
     "tags": {
@@ -9808,13 +10126,22 @@
     "element": [
       "火",
       "龙"
-    ]
+    ],
+    "fruit": {
+      "name": "爆焰喷喷果实",
+      "acquired": false,
+      "obtainMethod": "购买S2赛季通行证契约礼券获取，二选一",
+      "obtainType": "通行证契约礼券",
+      "exclusiveGroup": "pass_s2"
+    }
   },
   "pet_358": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -9838,19 +10165,31 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "音碟吼",
     "element": [
       "普通",
       "机械"
-    ]
+    ],
+    "fruit": {
+      "name": "音碟吼果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_360": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -9869,24 +10208,48 @@
       "basic": {
         "formName": "基础形态",
         "obtainMethods": []
+      },
+      "单只海葵的样子": {
+        "formName": "单只海葵的样子",
+        "obtainMethods": [
+          "加油海葵在自己的世界进化"
+        ]
+      },
+      "（双只海葵的样子）": {
+        "formName": "（双只海葵的样子）",
+        "obtainMethods": [
+          "加油海葵在别人的世界进化"
+        ]
       }
     },
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "加油蟹",
     "element": [
       "水",
       "萌"
-    ]
+    ],
+    "fruit": {
+      "name": "加油蟹果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_362": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -9926,18 +10289,30 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "小丑公爵",
     "element": [
       "恶"
-    ]
+    ],
+    "fruit": {
+      "name": "小丑公爵果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_365": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -9961,19 +10336,31 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "烟花伯爵",
     "element": [
       "火",
       "毒"
-    ]
+    ],
+    "fruit": {
+      "name": "烟花伯爵果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_367": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -9996,18 +10383,30 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "咕德帽帽",
     "element": [
       "幽"
-    ]
+    ],
+    "fruit": {
+      "name": "咕德帽帽果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_369": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -10031,19 +10430,31 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "霹雳迪迪",
     "element": [
       "电",
       "光"
-    ]
+    ],
+    "fruit": {
+      "name": "霹雳迪迪果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_371": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -10066,18 +10477,30 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "巨鼓象",
     "element": [
       "机械"
-    ]
+    ],
+    "fruit": {
+      "name": "巨鼓象果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_373": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "S2赛季「狂欢怪谈」连续捕捉精灵概率获得，或完成赛季作业第六章时光徽章课题得到果实"
+        ]
       }
     },
     "tags": {
@@ -10100,18 +10523,30 @@
     "tags": {
       "chromatic": {
         "tagName": "炫彩"
+      },
+      "shiny": {
+        "tagName": "异色",
+        "limitedTime": "第二赛季"
       }
     },
     "name": "帅帅木偶",
     "element": [
       "幻"
-    ]
+    ],
+    "fruit": {
+      "name": "帅帅木偶果实",
+      "acquired": false,
+      "obtainMethod": "赛季作业·狂欢怪谈",
+      "obtainType": "赛季作业"
+    }
   },
   "pet_375": {
     "forms": {
       "basic": {
         "formName": "基础形态",
-        "obtainMethods": []
+        "obtainMethods": [
+          "参与活动「呱呱上学记」达到100研学绩点获得蛋"
+        ]
       }
     },
     "tags": {

@@ -67,7 +67,7 @@ lkwj/
       "boss": { "tagName": "首领" }
     },
     "pinyin": { "full": "xuerongniao", "initial": "xrn" },
-    "fruit": { "name": "雪绒鸟果实", "acquired": false }
+    "fruit": { "name": "雪绒鸟果实", "acquired": false, "obtainMethod": "捕捉20只岚鸟", "obtainType": "课题任务" }
   }
 }
 ```
@@ -78,7 +78,12 @@ lkwj/
 - `forms` — 形态定义，使用语义键名（`basic`, `spring`, `summer`, `autumn`, `winter`, `molting`, `leader`, `variant_N`）
 - `tags` — 稀有度标签（`shiny`, `chromatic`, `boss`）。标签独立于形态，进化时保留
 - `pinyin` — 拼音（全拼 + 首字母），用于搜索
-- `fruit` — 果实信息（可选，99 只精灵有此字段）
+- `fruit` — 果实信息（可选，145 只精灵有此字段，7 只无果实家族不含）
+  - `name`: 果实名称
+  - `acquired`: 是否已获得（boolean）
+  - `obtainMethod`: 具体获取方式（来自 Excel 果实进度 D 列）
+  - `obtainType`: 获取方式分类（课题任务/智慧树苗/剧情任务/通行证契约礼券/赛季作业/限时活动）
+  - `exclusiveGroup`（可选）: 互斥组 ID（starter_gen1/2, pass_s{N}）——同赛季通行证二选一，御三家三选一
 - `destined_hero` — 命定勇者标记（可选）
 - `notes` — 备注
 
@@ -90,19 +95,21 @@ lkwj/
     { "type": "capture", "desc": "捕捉1只" },
     { "type": "capture_gifted", "desc": "捕捉1只了不起天分的" },
     { "type": "skill", "desc": "使用", "skillName": "龙卷风", "count": 3 },
-    { "type": "fruit", "desc": "捕捉20只" },
+    { "type": "fruit", "desc": "捕捉20只精灵" },
     { "type": "leader_evolve", "desc": "进化为首领形态" }
   ]
 }
 ```
 
-任务类型（10 种）：`capture`, `capture_gifted`, `capture_chromatic`(炫彩突变), `fruit`(原 capture20), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
+任务类型（10 种）：`capture`, `capture_gifted`, `capture_chromatic`(炫彩突变), `fruit`(精灵果实课题任务：捕捉 20 只获得果实，仅课题任务类型的果实有此任务), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
 
 关键规则：
 - 任务是**形态无关**的——同一宠物所有形态共享同一份任务进度
+- 任务只来自 Excel `课题进度` sheet，并排除 `异色` 行；`果实进度`、`多形态进度`、`forms.*.obtainMethods` 只能补已有任务的达成方式，不能反向生成任务
 - `desc` 不含宠物名，前台拼接（如 "岚鸟" + "使用" + "龙卷风" + "3" + "次"）
 - skill 类任务额外提供 `skillName` 和 `count`
 - `capture_chromatic` 对应炫彩突变捕捉（所有精灵除迪莫外都有炫彩），与异色（tags.shiny）无关
+- `fruit` 说人话是“精灵果实课题任务”，不是“果实图鉴”。有果实不代表有 fruit 任务；有 fruit 任务一定有果实
 
 ### evolution-chains.json — 进化链（静态）
 
@@ -168,9 +175,11 @@ lkwj/
 ### 获取方式
 - `obtainMethods` 只写直接获取方式，禁止"由 XX 进化"
 - 进化来源在 evolution-chains.json 中
+- `obtainMethods` 是任务达成方式，不是任务来源；只能补到已存在于 `课题进度` 的任务上
 
 ## 数据约束
 
+- **捕捉类任务获取方式（引用机制）**：capture/capture_gifted/capture_chromatic/fruit 四种任务的 obtainMethods **不存在 tasks.json 中**，前端通过 `getCaptureObtainMethods(petKey)` 动态解析，链路：`pets.json forms.basic.obtainMethods` → 进化链上游兜底（`No.{num} {name} {level}级进化获得`）。改获取方式只需改 pets.json 一处。覆盖率 372/373（仅 pet_353 凡鹰无捕捉任务，不适用）
 - **evolve 类任务归属**：leader_evolve/evolve 只需挂在进化前的 pet 上（form-independent）
 - **capture_chromatic ≠ 异色**：`capture_chromatic` 是炫彩突变捕捉任务（所有精灵除迪莫外都有），与 `tags.shiny`（异色标签，仅限时获取精灵有）完全独立
 - **异色炫彩展示**：由 `pets.json` 的 `tags.shiny` 驱动，仅展示进化最终形态（标签随进化传递）
@@ -179,6 +188,7 @@ lkwj/
 - **炫彩标签**：所有精灵（除迪莫外）均有 `tags.chromatic`
 - **随机任务排除**：`destined_hero`、`fruit`、`confirm_forms` 任务类型不出现在随机池
 - **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
+- **果实任务边界**：fruit 任务以 `课题进度` sheet 的“果实”课题行为准；`果实进度` 是家族级果实记录/获取方式来源，不是任务清单
 
 ## 已知数量
 
@@ -187,12 +197,13 @@ lkwj/
 | 宠物总数 | 373（含 S2，pet_348~375 跳过 351/352） |
 | 形态：basic | 373 |
 | 形态：多形态（非 basic） | 50 只精灵有额外形态 |
-| 首领形态（forms.leader） | 27 只（22 已确认名称，5 待确认） |
+| 首领形态（forms.leader） | 27 只（全部已确认名称） |
 | 异色标签 | 61（32 基础形态 + 29 进化传播；S1/S2/通行证/活动） |
 | 炫彩标签 | 354（所有精灵除迪莫外都有炫彩） |
-| 任务总数 | ~1850（form-independent） |
+| 真实课题任务总数 | 1848（`课题进度` 排除 `异色` 后） |
 | 进化链 | 165（全覆盖 373 只，无幽灵节点） |
-| 精灵果实（fruit 任务） | 354 只 |
+| 精灵果实课题任务（fruit） | 96 条（任务口径；仅"课题任务"类型的果实有此任务） |
+| 果实图鉴记录 | 145 个家族有果实（7 个无果实：迪莫/传说精灵3只/特殊奇遇2只/学院呱呱）；来源 Excel 果实进度 sheet |
 | S2 精灵 | 26 只（pet_348~375，跳过 351/352） |
 
 ## API 端点
@@ -215,8 +226,10 @@ lkwj/
 - [x] 4 文档体系重构（pets + tasks + evolution-chains + collections）— 2026-05-21
 - [x] 形态语义化键名 + 标签系统 + 进化链独立
 - [x] UI 适配新数据模型（全部 Tab 通过）
-- [x] 全量数据核对（对照外部表格）— 2026-06-01：精灵 373 只/任务全量/进化链 165 条/果实 354 只/首领形态 27 只
-- [ ] 5 只精灵首领名待确认（pet_4/7/10/110/117）
+- [x] 全量数据核对（对照外部表格）— 2026-06-01：精灵 373 只/任务全量/进化链 165 条/首领形态 27 只
+- [x] 任务口径修正：删除 256 条伪 fruit 任务，tasks.json 闭合 1848 条；fruit 课题任务 96 条 — 2026-06-03
+- [x] 5 只精灵首领名确认（叶冕魔力猫/烈火战神/圣水守护/神谕鲨/彩虹独角兽） — 2026-06-03
+- [x] 果实数据全量补充：145 只精灵有果实，6 种获取方式分类，互斥组逻辑 — 2026-06-04
 - [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
 - [ ] 家具图鉴：待采集 CSV → 导入 items[]
 - [ ] 外观图鉴：待采集 CSV → 导入 items[]

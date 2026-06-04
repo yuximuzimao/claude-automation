@@ -70,7 +70,7 @@
     .sprite-card { background: #fff; border-radius: 8px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
     .sprite-card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
     .sprite-card-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; cursor: pointer; user-select: none; }
-    .sprite-card-header .si { font-size: 18px; flex-shrink: 0; }
+    .sprite-card-header .si { font-size: 15px; font-weight: 600; flex-shrink: 0; color: #1a1a2e; min-width: 36px; text-align: right; margin-right: 6px; }
     .sprite-card-header .sn { font-size: 16px; font-weight: 600; }
     .sprite-card-header .se { font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
     .sprite-card-header .sm { font-size: 12px; color: #aaa; white-space: nowrap; flex-shrink: 0; margin-left: auto; margin-right: 6px; }
@@ -89,6 +89,7 @@
     .task-check.checked { background: #10b981; border-color: #10b981; }
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
     .task-row .task-check.noclick { cursor: default; pointer-events: none; }
+    .task-methods { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.5; }
 
     .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin: 6px 0 2px; }
     .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
@@ -247,7 +248,7 @@ const CATEGORY_META = {
 };
 
 // 精灵图鉴状态
-let spriteSearch = '', spriteElement = null, spriteStatus = 'all', expandedPet = null;
+let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spriteTaskFilter = null, expandedPet = null;
 
 // 异色炫彩状态
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
@@ -279,6 +280,32 @@ const shinyProgress = () => gameData?.shiny_progress || {};
 
 // Evolution chain helpers
 function getChain(petKey) { return (gameData?.evolutionChains || []).find(c => c.nodes[petKey]); }
+// 捕捉类任务获取方式：forms.basic.obtainMethods → 进化链上游兜底
+function getCaptureObtainMethods(petKey) {
+  const pets = gameData?.pets || {};
+  const pet = pets[petKey];
+  const basic = pet?.forms?.basic?.obtainMethods;
+  if (basic && basic.length > 0) return basic;
+  // 兜底：从进化链反查上游
+  const chain = getChain(petKey);
+  if (!chain) return [];
+  for (const [specId, spec] of Object.entries(chain.nodes || {})) {
+    for (const e of (spec.evolvesTo || [])) {
+      if (e.toSpeciesId === petKey) {
+        const fromPet = pets[specId];
+        const num = specId.replace('pet_', '');
+        const c = e.condition || {};
+        let condText = '';
+        if (c.type === 'level') condText = c.level + '级进化获得';
+        else if (c.type === 'item') condText = (c.item || '道具') + '进化获得';
+        else if (c.bloodline) condText = c.bloodline + '系血脉进化获得';
+        else condText = '进化获得';
+        return ['No.' + num + ' ' + (fromPet?.name || specId) + ' ' + condText];
+      }
+    }
+  }
+  return [];
+}
 function isFinalEvolution(petKey) {
   const chain = getChain(petKey);
   if (!chain) return true;
@@ -612,8 +639,15 @@ function renderSpriteToolbar() {
   const allElements = [...new Set(Object.values(pets).flatMap(p => p.element || []))].sort();
 
   let html = '<div class="tb-section">';
-  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
+  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
   html += '</div>';
+
+  html += '<div class="tb-section"><div class="tb-label">任务筛选</div><div class="chips">';
+  html += `<span class="chip${!spriteTaskFilter ? ' active' : ''}" onclick="setSpriteTaskFilter(null)">全部</span>`;
+  html += `<span class="chip${spriteTaskFilter === 'fruit' ? ' active' : ''}" onclick="setSpriteTaskFilter('fruit')">果实</span>`;
+  html += `<span class="chip${spriteTaskFilter === 'capture_chromatic' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_chromatic')">炫彩</span>`;
+  html += `<span class="chip${spriteTaskFilter === 'skill' ? ' active' : ''}" onclick="setSpriteTaskFilter('skill')">技能</span>`;
+  html += '</div></div>';
 
   html += '<div class="tb-section"><div class="tb-label">元素筛选</div><div class="chips">';
   html += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
@@ -637,8 +671,9 @@ function renderSpriteContent() {
 
   if (spriteSearch) {
     const q = spriteSearch.toLowerCase();
-    entries = entries.filter(([, pet]) => {
-      return pet.name.includes(q) || (pet.element || []).some(e => e.includes(q)) ||
+    entries = entries.filter(([petKey, pet]) => {
+      const petNum = petKey.replace('pet_', '');
+      return petNum === q || pet.name.includes(q) || (pet.element || []).some(e => e.includes(q)) ||
         (pet.pinyin && (pet.pinyin.full.includes(q) || pet.pinyin.initial.includes(q)));
     });
   }
@@ -648,12 +683,18 @@ function renderSpriteContent() {
     entries = entries.filter(([, pet]) => (pet.element || []).includes(spriteElement));
   }
 
+  if (spriteTaskFilter) {
+    entries = entries.filter(([petKey]) => petTasks(petKey).some(t => t.type === spriteTaskFilter));
+  }
+
   if (spriteStatus !== 'all') {
     entries = entries.filter(([petKey]) => {
       const tasks = petTasks(petKey);
       const progress = getTaskProgress(petKey);
-      const hasDone = tasks.some((t, i) => progress[String(i)]);
-      const hasPending = tasks.some((t, i) => !progress[String(i)]);
+      // 如果有任务类型筛选，只看该类型任务的进度
+      const filtered = spriteTaskFilter ? tasks.filter(t => t.type === spriteTaskFilter) : tasks;
+      const hasDone = filtered.some((t) => progress[String(tasks.indexOf(t))]);
+      const hasPending = filtered.some((t) => !progress[String(tasks.indexOf(t))]);
       return spriteStatus === 'pending' ? hasPending : hasDone;
     });
   }
@@ -696,28 +737,18 @@ function renderSpriteCard(petKey, pet) {
   if (tags.chromatic) tagsHtml += '<span class="tag-chromatic">炫彩</span>';
 
   const primaryEl = (pet.element || ['普'])[0];
-  const formCount = Object.keys(pet.forms || {}).length;
 
   let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="togglePet('${petKey}')">`;
-  card += `<span class="si">⬜</span>`;
+  const petNum = petKey.replace('pet_', '');
+  card += `<span class="si">No.${petNum}</span>`;
   card += `<span class="sn">${esc(pet.name)}</span>`;
   card += `<span class="se el-${primaryEl}">${(pet.element || []).join('')}${tagsHtml}</span>`;
-  card += `<span class="sm">${formCount}形态 · ${totalDone}/${tasks.length}</span>`;
+  card += `<span class="sm">${totalDone}/${tasks.length}</span>`;
   card += `<span class="sa">▶</span>`;
   card += '</div>';
 
   card += '<div class="sprite-card-body">';
-
-  // Forms display
-  Object.entries(pet.forms || {}).forEach(([formKey, form]) => {
-    const isTodo = form._todo_rename;
-    card += `<div class="form-label">${esc(form.formName)}${isTodo ? ' <span style=\"color:#f59e0b;font-size:10px\">[待命名]</span>' : ''}`;
-    if (form.obtainMethods && form.obtainMethods.length) {
-      card += ` <span style="color:#888;font-size:12px">${esc(form.obtainMethods.join('、'))}</span>`;
-    }
-    card += '</div>';
-  });
 
   // Tasks (form-independent)
   if (tasks.length) {
@@ -738,9 +769,14 @@ function renderSpriteCard(petKey, pet) {
           const done = !!progress[String(origIdx)];
           let desc = t.desc;
           if (t.type === 'skill') desc = `使用${t.skillName}${t.count}次`;
+          const methods = getTaskObtainMethods(petKey, t);
           card += `<div class="task-row${done ? ' done' : ''}">`;
           card += `<div class="task-check${done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask('${petKey}',${origIdx})"></div>`;
-          card += `<span style="flex:1">${esc(desc)}</span>`;
+          card += `<span style="flex:1">${esc(desc)}`;
+          if (methods.length) {
+            card += `<div class="task-methods">${methods.map(m => esc(m)).join('<br>')}</div>`;
+          }
+          card += `</span>`;
           card += '</div>';
         });
       });
@@ -768,18 +804,54 @@ function renderSpriteCard(petKey, pet) {
   return card;
 }
 
+// 按任务类型获取达成方式（统一从pets.json读取）
+const CAPTURE_TYPES = new Set(['capture', 'capture_gifted', 'capture_chromatic', 'fruit']);
+function getTaskObtainMethods(petKey, task) {
+  const pets = gameData?.pets || {};
+  const pet = pets[petKey];
+  if (!pet) return [];
+  if (CAPTURE_TYPES.has(task.type)) return getCaptureObtainMethods(petKey);
+  if (task.type === 'leader_evolve') return pet.forms?.leader?.obtainMethods || [];
+  if (task.type === 'confirm_forms') {
+    const methods = [];
+    for (const [fk, fv] of Object.entries(pet.forms || {})) {
+      if (fk === 'basic' || fk === 'leader') continue;
+      if (fv.obtainMethods?.length) methods.push(fv.formName + '：' + fv.obtainMethods[0]);
+      else methods.push(fv.formName);
+    }
+    return methods;
+  }
+  if (task.type === 'evolve') {
+    // 进化任务：从进化链读条件
+    const chain = getChain(petKey);
+    if (!chain) return [];
+    const node = chain.nodes?.[petKey];
+    if (!node?.evolvesTo?.length) return [];
+    return node.evolvesTo.map(e => {
+      const toPet = pets[e.toSpeciesId];
+      const num = e.toSpeciesId.replace('pet_', '');
+      const c = e.condition || {};
+      let cond = '';
+      if (c.type === 'level') cond = c.level + '级进化为';
+      else if (c.bloodline) cond = c.bloodline + '系血脉进化为';
+      else cond = '进化为';
+      return cond + 'No.' + num + ' ' + (toPet?.name || e.toSpeciesId);
+    });
+  }
+  return task.obtainMethods || [];
+}
+
 function groupRelatedTasks(tasks) {
-  const captureTypes = ['capture', 'capture_gifted', 'capture_chromatic'];
-  const evolveTypes = ['evolve', 'leader_evolve'];
+  const captureTypes = ['capture', 'capture_gifted', 'capture_chromatic', 'fruit', 'confirm_forms', 'evolve', 'leader_evolve', 'affection'];
   const groups = [];
   const used = new Set();
 
   const captures = tasks.filter(t => captureTypes.includes(t.type));
-  if (captures.length) { captures.forEach(t => used.add(t)); groups.push({ label: captures.length > 1 ? '捕捉' : '', tasks: captures }); }
-  const evolves = tasks.filter(t => !used.has(t) && evolveTypes.includes(t.type));
-  if (evolves.length) { evolves.forEach(t => used.add(t)); groups.push({ label: evolves.length > 1 ? '进化' : '', tasks: evolves }); }
+  if (captures.length) { captures.forEach(t => used.add(t)); groups.push({ label: '捕捉', tasks: captures }); }
+  const medals = tasks.filter(t => !used.has(t) && t.type === 'destined_hero');
+  if (medals.length) { medals.forEach(t => used.add(t)); groups.push({ label: '奖牌', tasks: medals }); }
   const skills = tasks.filter(t => !used.has(t) && t.type === 'skill');
-  if (skills.length) { skills.forEach(t => used.add(t)); groups.push({ label: skills.length > 1 ? '技能' : '', tasks: skills }); }
+  if (skills.length) { skills.forEach(t => used.add(t)); groups.push({ label: '技能', tasks: skills }); }
   tasks.filter(t => !used.has(t)).forEach(t => { groups.push({ label: '', tasks: [t] }); });
   return groups;
 }
@@ -787,22 +859,31 @@ function groupRelatedTasks(tasks) {
 function onSpriteSearch(val) { spriteSearch = val; expandedPet = null; renderSpriteContent(); }
 function setSpriteElement(el) { spriteElement = el; expandedPet = null; renderSpriteTab(); }
 function setSpriteStatus(s) { spriteStatus = s; expandedPet = null; renderSpriteTab(); }
+function setSpriteTaskFilter(f) { spriteTaskFilter = f; expandedPet = null; renderSpriteTab(); }
 function togglePet(petKey) { expandedPet = expandedPet === petKey ? null : petKey; renderSpriteContent(); }
 
-// ═══════════ 异色炫彩 Tab（pets tags.shiny 驱动，仅展示进化最终形态） ═══════════
+// ═══════════ 异色炫彩 Tab（pets tags.shiny 驱动，以Excel课题进度为准） ═══════════
 function getShinyList() {
   const pets = gameData?.pets || {};
   const shinyProg = shinyProgress();
+  const chains = gameData?.evolutionChains || [];
   const result = [];
 
   Object.entries(pets).forEach(([petKey, pet]) => {
     if (!pet.tags?.shiny) return;
-    // Only show final evolution forms
-    if (!isFinalEvolution(petKey)) return;
+
+    // 查找进化链基础形态名称
+    let baseName = '';
+    const chain = chains.find(c => c.nodes[petKey]);
+    if (chain && chain.baseSpeciesId !== petKey) {
+      const basePet = pets[chain.baseSpeciesId];
+      if (basePet) baseName = basePet.name;
+    }
 
     result.push({
       petKey,
       name: pet.name,
+      baseName,
       element: (pet.element || ['普']).join(''),
       limitedTime: pet.tags.shiny.limitedTime || '',
       isDone: !!shinyProg[petKey],
@@ -883,11 +964,12 @@ function renderShinyRow(s) {
   if (s.limitedTime) {
     seasonTag = `<span class="tag-limited">${s.limitedTime}</span>`;
   }
+  const baseNote = s.baseName ? ` <span style="color:#999;font-size:12px">(${esc(s.baseName)})</span>` : '';
 
   return `<div class="item-row${isDone ? ' done' : ''}">
     <button class="check-btn${isDone ? ' checked' : ''}" onclick="toggleShinyTask('${s.petKey}')"></button>
     <div class="item-info">
-      <div class="item-name">${esc(s.name)} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>
+      <div class="item-name">${esc(s.name)}${baseNote} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>
     </div>
   </div>`;
 }
@@ -1130,28 +1212,55 @@ function renderFruitsTab() {
 
   if (pending.length) {
     html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(([petKey, pet]) => { html += renderFruitRow(petKey, pet); });
+    pending.forEach(([petKey, pet]) => { html += renderFruitRow(petKey, pet, pets); });
     html += '</div>';
   }
   if (done.length) {
-    html += renderCollapsibleDoneSection(done, ([petKey, pet]) => renderFruitRow(petKey, pet), done.length);
+    html += renderCollapsibleDoneSection(done, ([petKey, pet]) => renderFruitRow(petKey, pet, pets), done.length);
   }
   el.innerHTML = html;
 }
 
-function renderFruitRow(petKey, pet) {
+function renderFruitRow(petKey, pet, allPets) {
   const acq = pet.fruit?.acquired;
-  return `<div class="item-row${acq ? ' done' : ''}">
-    <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit('${petKey}')"></button>
+  const fruit = pet.fruit;
+  allPets = allPets || gameData?.pets || {};
+
+  // 互斥逻辑：检查同组是否有其他已勾选的
+  let exclusiveBlocked = false;
+  if (fruit?.exclusiveGroup && !acq) {
+    exclusiveBlocked = Object.entries(allPets).some(([k, p]) =>
+      k !== petKey && p.fruit?.exclusiveGroup === fruit.exclusiveGroup && p.fruit?.acquired
+    );
+  }
+
+  // 获取方式文本
+  let methodHtml = '';
+  if (fruit?.obtainMethod) {
+    const methodText = esc(fruit.obtainMethod);
+    methodHtml = `<div class="task-methods">${methodText}</div>`;
+    // 课题任务类型额外显示捕捉地点
+    if (fruit.obtainType === '课题任务') {
+      const loc = getCaptureObtainMethods(petKey);
+      if (loc.length) methodHtml += `<div class="task-methods">${loc.map(esc).join('、')}</div>`;
+    }
+  }
+
+  const blockedStyle = exclusiveBlocked ? ' style="opacity:0.45"' : '';
+  const blockedNote = exclusiveBlocked ? `<div class="task-methods" style="color:#f60">已不可获取（同赛季/同代二选一/三选一）</div>` : '';
+
+  return `<div class="item-row${acq ? ' done' : ''}"${blockedStyle}>
+    <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit('${petKey}')"${exclusiveBlocked ? ' disabled' : ''}></button>
     <div class="item-info">
-      <div class="item-name">${esc(pet.fruit?.name || pet.name + '果实')}</div>
-      <div class="item-notes" style="color:#aaa">获取方式待补充</div>
+      <div class="item-name">${esc(fruit?.name || pet.name + '果实')}</div>
+      ${methodHtml}${blockedNote}
     </div>
   </div>`;
 }
 
 async function toggleFruit(petKey) {
-  const pet = gameData?.pets?.[petKey];
+  const pets = gameData?.pets || {};
+  const pet = pets[petKey];
   if (!pet || !pet.fruit) return;
   pet.fruit.acquired = !pet.fruit.acquired;
   if (!data.sprite_progress) data.sprite_progress = {};
