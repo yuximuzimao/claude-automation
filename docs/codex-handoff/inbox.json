@@ -2,7 +2,49 @@
   "protocol": "codex-handoff-v1",
   "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
   "pending": [],
-  "processed": [],
+  "processed": [
+    {
+      "id": "2026-06-04-lkwj-fruit-data-review",
+      "from": "claude",
+      "to": "codex",
+      "project": "lkwj",
+      "action": "review",
+      "subject": "lkwj 果实数据全量补充 — 独立审查",
+      "file": "docs/codex-handoff/lkwj-fruit-data-review.md",
+      "status": "processed",
+      "createdAt": "2026-06-04T13:30:00+08:00",
+      "processedAt": "2026-06-04T14:00:00+08:00",
+      "processedBy": "codex+claude",
+      "responseFile": "docs/codex-handoff/lkwj-fruit-data-review-response.md",
+      "summary": "审查通过。发现1个阻塞bug（果实进度刷新后失真）和1个文档提示，均已修复。pets.json数据完全正确，互斥组/无果实家族/任务口径全部验证通过。"
+    },
+    {
+      "id": "2026-06-02-lkwj-plan-review-response",
+      "from": "codex",
+      "project": "lkwj",
+      "action": "review-plan",
+      "subject": "洛克收集助手数据修正计划审计回复",
+      "file": "docs/codex-handoff/lkwj-data-plan-review-response.md",
+      "status": "processed",
+      "createdAt": "2026-06-02T14:45:50+08:00",
+      "processedAt": "2026-06-04T13:30:00+08:00",
+      "processedBy": "claude",
+      "summary": "已按审计约束实施：删除256条伪fruit任务（1848条闭合），果实数据全量补充145条，obtainMethod/obtainType/exclusiveGroup字段已写入pets.json。"
+    },
+    {
+      "id": "2026-06-02-lkwj-plan-review",
+      "from": "claude",
+      "project": "lkwj",
+      "subject": "洛克收集助手数据修正计划审计请求",
+      "file": "docs/codex-handoff/lkwj-data-plan-review.md",
+      "status": "processed",
+      "createdAt": "2026-06-02T19:45:00+08:00",
+      "processedAt": "2026-06-02T14:45:50+08:00",
+      "processedBy": "codex",
+      "responseFile": "docs/codex-handoff/lkwj-data-plan-review-response.md",
+      "summary": "已完成独立审计并生成 codex->claude 回复。"
+    }
+  ],
   "archived": [
     {
       "id": "2026-06-02-codex-monitor-v1",

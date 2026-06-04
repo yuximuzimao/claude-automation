@@ -420,6 +420,14 @@ async function init() {
   gameData = await gdRes.json();
   data = await dRes.json();
   walletData = await wRes.json();
+  // 回填果实进度：sprite_progress.fruit_acquired → pet.fruit.acquired
+  if (gameData?.pets && data?.sprite_progress) {
+    for (const [petKey, prog] of Object.entries(data.sprite_progress)) {
+      if (prog.fruit_acquired != null && gameData.pets[petKey]?.fruit) {
+        gameData.pets[petKey].fruit.acquired = prog.fruit_acquired;
+      }
+    }
+  }
   document.getElementById('last-updated').textContent = '更新于 ' + (data.meta?.last_updated || '--');
   randomTask = loadRandomTask();
   if (!randomTask) { randomTask = pickRandom(); if (randomTask) saveRandomTask(randomTask); }

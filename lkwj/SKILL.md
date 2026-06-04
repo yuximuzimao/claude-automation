@@ -144,7 +144,7 @@ lkwj/
 }
 ```
 
-- `sprite_progress` — 按 pet ID 索引，`tasks` 为任务完成状态，`forms_collected` 为已收集形态
+- `sprite_progress` — 按 pet ID 索引，`tasks` 为任务完成状态，`forms_collected` 为已收集形态，`fruit_acquired` 为果实已获得状态（boolean）
 - `shiny_progress` — 按 pet ID 索引的异色收集状态（0/1）
 - `items[]` — 非宠物类收集项（家具、外观等）
 
