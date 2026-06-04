@@ -250,6 +250,9 @@ const CATEGORY_META = {
 // 精灵图鉴状态
 let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spriteTaskFilter = null, expandedPet = null;
 
+// 精灵果实状态
+let fruitTypeFilter = null, fruitStatus = 'all';
+
 // 异色炫彩状态
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
 const SHINY_PAGE = 40;
@@ -1204,19 +1207,42 @@ function renderCategoryTab(tab) {
 }
 
 // ═══════════ 精灵果实 Tab ═══════════
+const FRUIT_TYPES = ['课题任务','智慧树苗','剧情任务','通行证契约礼券','赛季作业','限时活动'];
+
 function renderFruitsTab() {
   const el = document.getElementById('tab-fruits');
   const pets = gameData?.pets || {};
-  const withFruit = Object.entries(pets).filter(([, pet]) => pet.fruit);
-  const owned = withFruit.filter(([, pet]) => pet.fruit?.acquired).length;
+  const allFruit = Object.entries(pets).filter(([, pet]) => pet.fruit);
+  const owned = allFruit.filter(([, pet]) => pet.fruit?.acquired).length;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🍎 精灵果实</h3>`;
-  html += `<div class="sprite-stats"><span>共 <strong>${withFruit.length}</strong> 种 · 已获得 <strong>${owned}</strong></span></div>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${allFruit.length}</strong> 种 · 已获得 <strong>${owned}</strong></span></div>`;
 
-  if (!withFruit.length) { html += '<div class="empty-state">暂无果实数据</div>'; el.innerHTML = html; return; }
+  if (!allFruit.length) { html += '<div class="empty-state">暂无果实数据</div>'; el.innerHTML = html; return; }
 
-  const pending = withFruit.filter(([, pet]) => !pet.fruit?.acquired);
-  const done = withFruit.filter(([, pet]) => pet.fruit?.acquired);
+  // 获取方式筛选芯片
+  html += '<div class="chips" style="margin-bottom:6px">';
+  html += `<span class="chip${!fruitTypeFilter ? ' active' : ''}" onclick="setFruitTypeFilter(null)">全部</span>`;
+  FRUIT_TYPES.forEach(t => {
+    html += `<span class="chip${fruitTypeFilter === t ? ' active' : ''}" onclick="setFruitTypeFilter('${t}')">${t}</span>`;
+  });
+  html += '</div>';
+
+  // 进度筛选芯片
+  html += '<div class="chips" style="margin-bottom:10px">';
+  html += renderStatusChips(fruitStatus, 'setFruitStatus');
+  html += '</div>';
+
+  // 应用筛选
+  let list = allFruit;
+  if (fruitTypeFilter) list = list.filter(([, pet]) => pet.fruit?.obtainType === fruitTypeFilter);
+  if (fruitStatus === 'pending') list = list.filter(([, pet]) => !pet.fruit?.acquired);
+  else if (fruitStatus === 'done') list = list.filter(([, pet]) => pet.fruit?.acquired);
+
+  if (!list.length) { html += '<div class="empty-state">没有匹配的果实</div>'; el.innerHTML = html; return; }
+
+  const pending = list.filter(([, pet]) => !pet.fruit?.acquired);
+  const done = list.filter(([, pet]) => pet.fruit?.acquired);
 
   if (pending.length) {
     html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
@@ -1228,6 +1254,9 @@ function renderFruitsTab() {
   }
   el.innerHTML = html;
 }
+
+function setFruitTypeFilter(t) { fruitTypeFilter = t; renderFruitsTab(); }
+function setFruitStatus(s) { fruitStatus = s; renderFruitsTab(); }
 
 function renderFruitRow(petKey, pet, allPets) {
   const acq = pet.fruit?.acquired;
