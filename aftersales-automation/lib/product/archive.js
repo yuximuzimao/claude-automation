@@ -223,8 +223,11 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
             return r;
           }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
           subItems = Array.isArray(raw) ? raw : [];
+          if (!subItems.length) {
+            throw new Error('返回空子品列表');
+          }
         } catch (e) {
-          console.error(`[product-archive] 子品明细读取失败: ${e.message}`);
+          throw new Error(`套装商品子品明细读取失败: ${e.message}`);
         }
       } finally {
         await cdp.eval(targetId, CLOSE_SUB_DIALOG_JS);
