@@ -1,11 +1,27 @@
 # Handoff
 
-更新时间：2026-06-02 13:06
-当前负责人：待定（工作区 Git 整理与远端备份已收尾）
+更新时间：2026-06-08
+当前负责人：Codex
 当前分支：data-model-restructure
-当前焦点：(1) Codex Monitor 第一版已封板，协作材料已归档；(2) product-detect KGOS 第 6 轮 yolov8s 训练仍需后续按日志确认完成状态
+当前焦点：工作区按项目拆分整理中；lkwj 已提交（果实143/任务1882/异色38，其中34条异色课题纳入任务，4个通行证异色无捕捉课题）；codex-monitor 项目推断误分类和 UI 刷新性能修复已完成验证
 
 ## 已完成
+- codex-monitor 项目推断误分类已修复（2026-06-04）：
+  - `reader_common.infer_project_from_handle()` 改为按事件类型加权投票，跳过 Codex `function_call_output`、`function_call`、`token_count`
+  - 默认扫描窗口从 100 行提高到 200 行
+  - 已补 `tests/test_reader_common.py` 覆盖工具输出路径噪声、用户消息权重、Claude Code 格式和边界场景
+  - 验证：`python3 -m unittest discover -s tests -v` 40/40 通过，`python3 -m compileall app tests` 通过
+- Codex 已审查 `codex-monitor` 项目推断误分类修复方案（2026-06-04）：
+  - 请求文件：`docs/codex-handoff/codex-monitor-inference-fix-review.md`
+  - 回复文件：`docs/codex-handoff/codex-monitor-inference-fix-review-response.md`
+  - 收件箱：`docs/codex-handoff/inbox.json` 中 `2026-06-04-codex-monitor-inference-fix` 已移入 `processed`
+  - 结论：方案方向通过；实施时需补 `reader_common` 回归测试，并建议将 `max_lines` 从 100 提高到 200
+- Codex 已按用户原话重写 `lkwj` 数据修正计划审计回复（2026-06-02）：
+  - 回复文件：`docs/codex-handoff/lkwj-data-plan-review-response.md`
+  - 收件箱：`docs/codex-handoff/inbox.json` 中 `2026-06-02-lkwj-plan-review-response` 已移入 `processed`
+  - 历史口径：当时任务只能来自 `课题进度` sheet 并排除 `异色`；2026-06-08 游戏更新后已局部覆盖为 `课题进度` 中 34 条 `异色` 行导入 `capture_shiny`，总任务数 1882
+- `lkwj/SKILL.md` 与 `lkwj/docs/REVIEW_CHECKLIST.md` 已同步 fruit 任务口径：精灵果实课题任务为 96 条；果实图鉴是家族级记录，另算
+- OpenClaw 已确认卸载并清理残留：`/Users/chat/.openclaw` 删除，`/Users/chat/.zshrc` 不再引用 OpenClaw 补全，登录 zsh 验证无报错
 - Git 仓库边界优化：.gitignore 精确排除运行时数据，24 个运行时文件从索引移除（ac377b1）
 - Codex ↔ Claude Code 双向协作收件箱协议落地（61473a3）
   - `docs/codex-handoff/` — 收件箱目录
