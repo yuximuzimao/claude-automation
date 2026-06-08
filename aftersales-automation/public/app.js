@@ -1764,14 +1764,14 @@ async function loadAccounts() {
     const statusLabel = { ok: '正常', expired: '登录失效', error: '扫描异常', unknown: '未扫描' }[statusKey] || '未知';
     const isPending = reloginPending.has(a.num);
     const isConfirm = reloginConfirm.has(a.num);
-    const showReloginBtn = statusKey === 'expired' || statusKey === 'error' || statusKey === 'unknown' || !a.hasFile;
+    const showReloginBtn = AccountReloginState.shouldShowReloginButton(a);
     const lastScan = a.lastScan ? new Date(a.lastScan).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
     let reloginBtn = '';
     if (showReloginBtn) {
       if (isPending) {
         reloginBtn = `<button class="btn-relogin pending" disabled>启动中...</button>`;
       } else if (isConfirm) {
-        reloginBtn = `<button class="btn-relogin confirm" onclick="confirmRelogin(${a.num})">确认保存</button>`;
+        reloginBtn = AccountReloginState.renderConfirmReloginControls(a.num);
       } else {
         reloginBtn = `<button class="btn-relogin" onclick="reloginAccount(${a.num})">${!a.hasFile ? '添加登录' : '重新登录'}</button>`;
       }
@@ -1816,9 +1816,24 @@ async function confirmRelogin(num) {
     setTimeout(loadAccounts, 1000);
   } else {
     showToast(res.error || `账号${num}确认失败`);
-    reloginConfirm.add(num);
+    if (AccountReloginState.shouldKeepConfirmAfterError(res)) {
+      reloginConfirm.add(num);
+    }
     loadAccounts();
   }
+}
+
+async function cancelRelogin(num) {
+  reloginPending.delete(num);
+  reloginConfirm.delete(num);
+  loadAccounts();
+  const res = await api(`/accounts/${num}/relogin-cancel`, { method: 'POST' });
+  if (!res.ok) {
+    showToast(res.error || `账号${num}取消登录失败`);
+  } else {
+    showToast(res.message || `账号${num}已取消登录保存`);
+  }
+  loadAccounts();
 }
 
 async function checkAccountsStatus() {

@@ -259,3 +259,5 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#73 `executedAt` 不等于工单已完成**：skip / auto-archive 也会写 `executedAt`，不能用 simulations 里存在 `executedAt` 来阻止重新入队或重处理；否则扫描能发现工单但无法入队。只在 auto-execute 防重复 approve/reject 的边界使用执行记录。2026-05-30。
 - `[∞]` **#74 重启 server 不等于自动重跑工单**：`/aftersales-restart` 只负责让新 `lib/` 逻辑生效并报告状态，不自动 batch-reprocess。自动重采会覆盖用户已审阅但未执行的决策；是否重采必须由用户手动选择。2026-05-30。
 - `[∞]` **#75 flow-5.3 用户可见拒绝原因使用固定模板**：`INTERCEPT_TIMEOUT` 不能把动态快递单号拼进用户可见 reason。固定模板用 `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`，具体运单和状态放 warnings / 诊断信息。2026-05-30。
+- `[∞]` **#76 多账号扫描必须同步当前 session 缓存**：`scan-all.js` 每次成功注入账号后必须写 `data/current-session.json`。否则实际 Chrome tab 已切到新账号，但 pipeline/op-queue 仍相信旧缓存，后续采集可能跳过注入、读不到工单并误改 queue 状态。2026-06-08。
+- `[∞]` **#77 店铺重新登录状态机**：`hasFile=true + status=unknown` 表示 session 已保存但未扫描验证，只显示「未扫描」，不显示「重新登录」；登录页关闭/取消/port 文件缺失必须清理确认态，恢复按钮，禁止永久卡「确认保存」。2026-06-08。

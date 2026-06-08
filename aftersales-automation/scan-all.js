@@ -15,9 +15,11 @@ const { execSync, spawnSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { addQueueItem, readQueue, updateQueueItem } = require('./lib/server/data');
+const { saveSessionState } = require('./lib/jl-session-state');
 
 const SESSIONS_DIR = path.join(__dirname, '../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
+const SESSION_STATE_FILE = path.join(__dirname, 'data/current-session.json');
 const INJECT_DELAY_MS = 10000;  // 注入后等待页面完全稳定（防风控：每账号注入前后各间隔10秒）
 
 const isDryRun = process.argv.includes('--dry-run');
@@ -33,6 +35,7 @@ function injectAccount(num) {
     encoding: 'utf8',
   });
   if (r.status !== 0) throw new Error(r.stderr || r.stdout || '注入失败');
+  saveSessionState(SESSION_STATE_FILE, num);
   return true;
 }
 

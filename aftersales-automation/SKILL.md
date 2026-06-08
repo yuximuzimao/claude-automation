@@ -40,6 +40,8 @@ entry: cli.js
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
 | `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示 | 改平台提醒逻辑时 |
+| `lib/jl-session-state.js` | 鲸灵当前账号缓存读写（`data/current-session.json`） | 改多账号扫描、采集注入、op-queue 注入判断时 |
+| `lib/jl-account-config.js` | 重新登录保存时合并账号配置，保留 phone/name/note/file | 改店铺管理重登保存逻辑时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
@@ -56,7 +58,7 @@ entry: cli.js
 
 ### 主流程：scan → collect → infer → approve/reject
 
-1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 写入 `data/queue.json` (anchor: listTickets)
+1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 成功注入账号后写 `data/current-session.json` → 写入 `data/queue.json` (anchor: listTickets)
 2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
 3. **infer** — `lib/infer.js` → 规则推理 → 输出 decision (anchor: inferDecision, inferRefundOnly, inferRefundReturn)
 4. **auto-exec?** — `lib/server/auto-exec-confidence.js` → `shouldAutoExecute()` 判定场景是否达标（≥10次+零差评>15天）
@@ -124,6 +126,13 @@ await cdp.navigate(targetId, 'https://...');
 - 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知
 - 详见 `docs/ops-tech.md §3.2`
 
+### 鲸灵账号重新登录机制
+
+- 前端：店铺管理页通过 `POST /api/accounts/:num/relogin` 打开登录页，进入 `reloginConfirm` 后必须同时提供「确认保存」和「取消」。
+- 后端：`/relogin-confirm` 请求临时登录进程 `/save`；`/relogin-cancel` 请求 `/cancel` 并清理 `../sessions/.relogin-port-<num>`。
+- 保存：`../sessions/jl.js --auto-save` 用 `lib/jl-account-config.js` 合并旧账号配置，必须保留 `phone`，否则新登录页无法自动填账号。
+- 状态：`hasFile=true + status=unknown` 是「已保存但未扫描验证」，UI 只显示「未扫描」；只有 `expired/error` 或无 session 文件才显示重新登录。
+
 ## FAILURE PATTERNS
 
 | # | 错误 | 正确做法 |
@@ -149,6 +158,8 @@ await cdp.navigate(targetId, 'https://...');
 | 19 | 全项目重复代码 → 提取共享函数 | pipeline.js、op-queue.js 各自复制了相同的逻辑（快递单号提取、Mac Reminder 创建）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：`extractShippedTrackings()` 提取到 `lib/helpers.js`。2026-05-29：`createReminder()` 同理提取到 `lib/helpers.js`，pipeline.js 和 op-queue.js 共用。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
+| 22 | scan-all 切账号后不写 current-session | 多账号扫描会改变同一个 SCRM tab 的实际账号。成功 `jl.js inject` 后必须写 `data/current-session.json`；否则后续 collect/reprocess 可能误判「已经是目标账号」并跳过注入，读不到工单后错误推进 queue。 |
+| 23 | 登录确认态缺少退出路径 | 用户关闭登录页、点取消或 port 文件不存在时，前端必须清理 `reloginConfirm` 并恢复「重新登录」。`unknown + hasFile` 表示未扫描验证，不是失效。保存 session 时必须保留旧账号 `phone`。 |
 
 ## PATHS
 
@@ -173,6 +184,8 @@ lib/jl/logistics.js
 lib/jl/navigate.js
 lib/jl/read-ticket.js
 lib/jl/reject.js
+lib/jl-account-config.js
+lib/jl-session-state.js
 lib/product/archive.js
 lib/product/match.js
 lib/server/auto-exec-confidence.js
@@ -187,6 +200,7 @@ collect.js
 scan-all.js
 docs/INDEX.md
 public/app.js
+public/account-relogin-state.js
 public/index.html
 public/style.css
 test/

@@ -18,6 +18,7 @@ node scan-all.js        # 扫描所有账号写入队列
 ```
 
 Web 面板功能：工单队列管理、推理结果确认、历史记录、统计复盘、店铺管理。
+店铺管理中的重新登录会先保存 session，再通过扫描或刷新状态验证；已保存但未验证的账号显示为「未扫描」。
 
 ## CLI 命令（17 个）
 
@@ -46,6 +47,7 @@ scan-all.js → queue.json → collect.js → simulations.jsonl → infer.js →
 - **Pipeline**（`lib/server/pipeline.js`）：scan → collect → infer → auto-execute
 - **Op-queue**（`lib/server/op-queue.js`）：全局操作队列，串行化浏览器操作
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
+- **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 

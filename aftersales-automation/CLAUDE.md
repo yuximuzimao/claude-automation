@@ -29,6 +29,7 @@
 - 赠品子订单号禁止推算，必须从 `giftSubBizOrderDetailDTO.subBizOrderId` 读取
 - 截图只用于上传凭证，禁止截图判断操作结果
 - 鲸灵行为操作报错即停（maxRetries=0，域名自动识别）；被动等待（导航）最多重试 1 次（共执行 2 次）。风控信号 → 全局熔断持久化到 `data/circuit-breaker.json`，需人工 `node cli.js reset-circuit`
+- 多账号扫描/采集/队列任一路径成功注入鲸灵账号后，必须同步 `data/current-session.json`；实际 tab 账号和缓存账号不一致会导致跳过注入、读空工单、误改 queue 状态。
 
 ## 相关项目
 
@@ -52,4 +53,4 @@
 **修改 `lib/` 下任何决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server**。
 原因：server 启动时加载模块到内存，不重启新逻辑不生效。重启后只报告工单状态，不自动重跑；是否重采由用户手动选择。
 
-触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/erp/*.js`
+触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/erp/*.js`

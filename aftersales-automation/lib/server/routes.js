@@ -692,6 +692,34 @@ router.post('/accounts/:num/relogin-confirm', async (req, res) => {
   }
 });
 
+router.post('/accounts/:num/relogin-cancel', async (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+
+  const portFile = path.join(SESSIONS_DIR, `.relogin-port-${num}`);
+  const fsSync = require('fs');
+  if (!fsSync.existsSync(portFile)) {
+    return res.json({ ok: true, message: `账号${num}没有待确认的登录会话` });
+  }
+
+  const port = parseInt(fsSync.readFileSync(portFile, 'utf8').trim(), 10);
+  try {
+    await new Promise(resolve => {
+      const req2 = http.request(
+        { hostname: '127.0.0.1', port, path: '/cancel', method: 'POST', timeout: 3000 },
+        r2 => { r2.resume(); r2.on('end', resolve); }
+      );
+      req2.on('error', resolve);
+      req2.on('timeout', () => { req2.destroy(); resolve(); });
+      req2.end();
+    });
+  } finally {
+    if (fsSync.existsSync(portFile)) fsSync.unlinkSync(portFile);
+  }
+
+  res.json({ ok: true, message: `账号${num}已取消登录保存，可重新登录` });
+});
+
 router.post('/accounts/refresh-status', (req, res) => {
   const fsSync = require('fs');
   const accounts = JSON.parse(fsSync.readFileSync(ACCOUNTS_FILE, 'utf8'));

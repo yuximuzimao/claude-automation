@@ -127,6 +127,29 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 );
 ```
 
+### 2.5 鲸灵账号 Session 与重新登录
+
+**多账号切换缓存**：
+- `data/current-session.json` 记录当前 Chrome 中实际注入的鲸灵账号。
+- `scan-all.js`、`lib/server/pipeline.js`、`lib/server/op-queue.js` 任一路径成功执行 `jl.js inject` 后，都必须同步写入该文件。
+- 如果扫描脚本切换了账号但未更新 `current-session.json`，后续采集/重处理会误以为页面仍是旧账号，跳过必要注入，可能读不到当前账号工单并把 live queue 错误推进到完成态。
+
+**店铺管理状态显示**：
+- `hasFile=false`：没有保存 session，显示「添加登录」。
+- `hasFile=true + status=unknown`：已有 session 文件但未扫描验证，显示「未扫描」，不显示「重新登录」。
+- `status=expired/error`：登录失效或扫描异常，显示「重新登录」。
+- 重新登录保存成功后先写 `unknown`，必须通过后续扫描或刷新状态验证成 `ok`。
+
+**重新登录待确认生命周期**：
+1. 前端 `POST /api/accounts/:num/relogin`，后端启动 `../sessions/jl.js --auto-save`，写入 `../sessions/.relogin-port-<num>`。
+2. 用户登录完成后点「确认保存」：前端调用 `POST /api/accounts/:num/relogin-confirm`，后端请求临时登录进程 `/save`，保存 session。
+3. 用户关闭登录页或点「取消」：前端调用 `POST /api/accounts/:num/relogin-cancel` 或 `jl.js` 检测浏览器断开，清理 port 文件，不保存 session。
+4. 如果确认保存时后端返回「没有待确认的登录会话」，前端必须退出确认状态，恢复「重新登录」按钮，不能永久卡在「确认保存」。
+
+**账号配置保存**：
+- 保存 session 时必须用 `lib/jl-account-config.js` 合并旧账号配置，保留 `phone/name/note/file` 等字段。
+- 禁止只写登录过程返回的 session 字段；否则会丢 `phone`，下次打开登录页无法自动填入账号。
+
 ---
 
 ## §3 ERP 操作技术细节
@@ -316,6 +339,9 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 | 鲸灵备注弹窗关闭了但未保存 | 用了错误的按钮点击方式 | 必须用 MouseEvent dispatch（mousedown+mouseup+click），不能用 clickAt+button |
 | ERP 搜索后无结果 | 用了主订单号而非子订单号 | 永远用子订单号（纯数字） |
 | 套件辨识错误 | 靠商品名猜套件 | 必须查档案V2 subItemNum 字段 |
+| 店铺管理一直显示「确认保存」 | 重新登录页已关闭或无待确认 port 文件 | 调 `POST /api/accounts/:num/relogin-cancel` 清理前端状态，恢复「重新登录」 |
+| 重新登录保存后仍显示「重新登录」 | 保存后 `status=unknown` 被当作失效状态 | `unknown + hasFile` 是未扫描，不是失效；执行扫描/刷新状态验证 |
+| 扫描后工单消失 | `scan-all.js` 切账号后未同步 `data/current-session.json` | 成功注入账号后立即写 current-session，再采集/重处理 |
 
 ---
 
@@ -350,6 +376,8 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 - `[∞/永久保留]` **#26 ERP 物流入口**：禁止点 `a[data-name=logistics_info]`（打开快递公司过滤面板）；直接点 `show_detail_dialog`；同次搜索所有行一次性处理完，不重复搜索
 - `[∞/永久保留]` **#34 截图需滚动**：截图前先 `window.scrollBy(0, el.getBoundingClientRect().top - 20)` 让内容贴近视口顶；内容超出视口时分段截图+PIL垂直拼接
 - `[∞/永久保留]` **#41 ERP 登录检测**：ERP 掉线时浮层弹窗不改变 title/hash，检测失败；每次 navigateErp 前先 location.reload()（3秒），再检测 `.inner-login-wrapper`
+- `[∞/永久保留]` **#43 鲸灵多账号切换必须同步 current-session**：任何成功 `jl.js inject` 的路径都要写 `data/current-session.json`，包括 `scan-all.js`。否则实际 tab 账号与缓存账号不一致，后续流程会跳过注入并读错/读空工单。
+- `[∞/永久保留]` **#44 重新登录确认态必须可取消**：登录页关闭、取消或 port 文件不存在时，前端必须清理 `reloginConfirm` 并恢复「重新登录」按钮；`unknown + hasFile` 是保存但未验证，不等于登录失败。
 
 ---
 
