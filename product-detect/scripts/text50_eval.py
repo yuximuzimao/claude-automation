@@ -15,7 +15,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts import ocr_verify, nms_sweep
 
 
-EVALUATED_STATUSES = {"labeled"}
+EVALUATED_STATUSES = {"labeled", "auto_labeled"}
 SKIPPED_STATUSES = {"pending", "ambiguous"}
 
 
@@ -217,7 +217,10 @@ def render_report(result: dict, model_path: Path, ground_truth_path: Path, conf:
 def main() -> None:
     root = PROJECT_ROOT
     parser = argparse.ArgumentParser(description="Evaluate text50 YOLO-first text correction")
-    parser.add_argument("--ground-truth", type=Path, default=root / "datasets/kgos_real_text50/ground_truth.json")
+    _gt_default = root / "docs/text50_ground_truth.json"
+    if not _gt_default.exists():
+        _gt_default = root / "datasets/kgos_real_text50/ground_truth.json"
+    parser.add_argument("--ground-truth", type=Path, default=_gt_default)
     parser.add_argument("--image-dir", type=Path, default=root / "datasets/kgos_real_golden_candidates_v1/images")
     parser.add_argument("--model", type=Path, default=root / "runs/kgos_yolov8s_train7/weights/best.pt")
     parser.add_argument("--conf", type=float, default=0.25)

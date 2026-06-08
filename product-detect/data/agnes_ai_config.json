@@ -1,0 +1,11 @@
+{
+  "base_url": "https://apihub.agnes-ai.com/v1",
+  "model": "agnes-2.0-flash",
+  "keychain_account": "agnes-ai",
+  "keychain_service": "product-detect-api-key",
+  "retrieve_key_cmd": "security find-generic-password -a agnes-ai -s product-detect-api-key -w",
+  "supports_vision": true,
+  "image_input_type": "image_url (public URL or data URI)",
+  "context_window": 262144,
+  "max_output": 65536
+}

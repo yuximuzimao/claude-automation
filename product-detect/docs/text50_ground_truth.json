@@ -1,0 +1,1223 @@
+{
+  "metadata": {
+    "name": "kgos_real_text50",
+    "created": "2026-06-07",
+    "source": "datasets/kgos_real_golden_candidates_v1/images",
+    "policy": "YOLO decides concrete product identity; text only corrects quantity when subtype is exact or visually supported.",
+    "notes": "Initial set has 50 candidates. Labeled samples are evaluated; pending/ambiguous samples are excluded until manually verified."
+  },
+  "images": {
+    "real_001.jpg": {
+      "status": "labeled",
+      "text": "酵素4.0体验装 1 + 腰围卡尺 1",
+      "items": [
+        {
+          "name": "诺丽果红树莓益生元饮 50ml*3袋/盒 体验装",
+          "qty": 1
+        },
+        {
+          "name": "KGOS 三围尺 150cm",
+          "qty": 1
+        }
+      ],
+      "notes": "gift13 1.jpg"
+    },
+    "real_002.jpg": {
+      "status": "labeled",
+      "text": "黑咖体验装 1 + 腰围卡尺 1",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*3 体验装",
+          "qty": 1
+        },
+        {
+          "name": "KGOS 三围尺 150cm",
+          "qty": 1
+        }
+      ],
+      "notes": "gift13 2.jpg"
+    },
+    "real_003.jpg": {
+      "status": "ambiguous",
+      "text": "黑茶体验装1盒(口味随机)+腰围卡尺1个",
+      "items": [],
+      "unresolved": [
+        "黑茶体验装口味随机，图片展示两个备选口味，不能自动映射到单一 ERP 子品"
+      ],
+      "notes": "Excluded from exact-match denominator until business defines random-flavor SKU handling."
+    },
+    "real_004.jpg": {
+      "status": "labeled",
+      "text": "一次性吸管袋 1 + 腰围卡尺 1",
+      "items": [
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        },
+        {
+          "name": "KGOS 三围尺 150cm",
+          "qty": 1
+        }
+      ],
+      "notes": "gift13 4.jpg"
+    },
+    "real_005.jpg": {
+      "status": "labeled",
+      "text": "玉米片 10",
+      "items": [
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "caption is vague; visual shows two flavors"
+    },
+    "real_006.jpg": {
+      "status": "labeled",
+      "text": "益生菌 3 + 玉米片 10",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 3
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "gift13 6.jpg"
+    },
+    "real_007.jpg": {
+      "status": "labeled",
+      "text": "一次性吸管袋 3",
+      "items": [
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 3
+        }
+      ],
+      "notes": "gift13 7.jpg"
+    },
+    "real_008.jpg": {
+      "status": "labeled",
+      "text": "益生菌 1",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 1
+        }
+      ],
+      "notes": "gift13 8.jpg"
+    },
+    "real_009.jpg": {
+      "status": "labeled",
+      "text": "营养粉 1 + 玉米片 10",
+      "items": [
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 1
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "caption is vague; visual shows berry nutrition powder and two corn-chip flavors"
+    },
+    "real_010.jpg": {
+      "status": "labeled",
+      "text": "帆布袋 3 + 玉米片 10",
+      "items": [
+        {
+          "name": "kgos帆布袋",
+          "qty": 3
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "gift13 10.jpg"
+    },
+    "real_011.jpg": {
+      "status": "labeled",
+      "text": "营养粉 3 + 冰霸杯 1 + 玉米片 10",
+      "items": [
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "visual shows berry nutrition powder"
+    },
+    "real_012.jpg": {
+      "status": "labeled",
+      "text": "益生菌 6 + 冰霸杯 1 + 玉米片 10",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "gift13 12.jpg"
+    },
+    "real_013.jpg": {
+      "status": "labeled",
+      "text": "帆布袋 6 + 冰霸杯 1 + 玉米片 10",
+      "items": [
+        {
+          "name": "kgos帆布袋",
+          "qty": 6
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        }
+      ],
+      "notes": "gift13 13.jpg"
+    },
+    "real_014.jpg": {
+      "status": "auto_labeled",
+      "text": "黑茶体验装6盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 6
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_015.jpg": {
+      "status": "auto_labeled",
+      "text": "益生菌3盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_016.jpg": {
+      "status": "auto_labeled",
+      "text": "营养粉1盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_017.jpg": {
+      "status": "auto_labeled",
+      "text": "黑茶体验装12盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 12
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_018.jpg": {
+      "status": "auto_labeled",
+      "text": "益生菌6盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_019.jpg": {
+      "status": "auto_labeled",
+      "text": "营养粉3盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_020.jpg": {
+      "status": "auto_labeled",
+      "text": "营养粉3盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_021.jpg": {
+      "status": "auto_labeled",
+      "text": "益生菌6盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_022.jpg": {
+      "status": "auto_labeled",
+      "text": "黑茶体验装12盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 12
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_023.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_024.jpg": {
+      "status": "auto_labeled",
+      "text": "赠黑茶体验装12盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_025.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠益生菌6盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 18
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_026.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠营养粉3盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 18
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_027.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠营养粉3盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 18
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_028.jpg": {
+      "status": "auto_labeled",
+      "text": "金花黑茶（茉莉味）买15送3，到手18盒赠益生菌6盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 18
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_029.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3, 到手18盒\n赠黑茶体验装12盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_030.jpg": {
+      "status": "auto_labeled",
+      "text": "赠黑茶体验装12盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_031.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠益生菌6盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 18
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_032.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠营养粉3盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 18
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_033.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 18
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_034.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠益生菌6盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 18
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_035.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3, 到手18盒\n赠黑茶体验装12盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_036.jpg": {
+      "status": "auto_labeled",
+      "text": "赠黑茶体验装12盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_037.jpg": {
+      "status": "auto_labeled",
+      "text": "赠营养粉1盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 15
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_038.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠益生菌3盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 15
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 3
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_039.jpg": {
+      "status": "auto_labeled",
+      "text": "买15送3，到手18盒\n赠黑茶体验装6盒+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 15
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）",
+          "qty": 6
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_040.jpg": {
+      "status": "auto_labeled",
+      "text": "赠黑茶体验装12盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 22
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）",
+          "qty": 12
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_041.jpg": {
+      "status": "auto_labeled",
+      "text": "赠益生菌6盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 22
+        },
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 6
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_042.jpg": {
+      "status": "auto_labeled",
+      "text": "赠营养粉3盒+冰霸杯1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 22
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS逐光冰霸杯 900ml",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_043.jpg": {
+      "status": "auto_labeled",
+      "text": "赠营养粉3盒+保温壶1个+玉米片10包+一次性吸管袋1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 22
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*3 三袋体验装",
+          "qty": 3
+        },
+        {
+          "name": "KGOS手提保温壶",
+          "qty": 1
+        },
+        {
+          "name": "KGOS香菜牛肉味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS玉米浓汤味玉米片 30g",
+          "qty": 5
+        },
+        {
+          "name": "KGOS饮料袋 10个/袋",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_044.jpg": {
+      "status": "auto_labeled",
+      "text": "诺丽果红树莓益生元饮10+甘油二酯咖啡12+蛋白多肽营养强化粉4",
+      "items": [
+        {
+          "name": "诺丽果红树莓益生元饮 50ml*10袋/盒",
+          "qty": 1
+        },
+        {
+          "name": "甘油二酯咖啡固体饮料（生椰拿铁味） 8g*12 新包装",
+          "qty": 1
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*3 三袋体验装",
+          "qty": 2
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*3 三袋体验装",
+          "qty": 2
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_045.jpg": {
+      "status": "auto_labeled",
+      "text": "甘油二酯咖啡3盒+蛋白多肽营养强化粉3盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 2
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_046.jpg": {
+      "status": "auto_labeled",
+      "text": "甘油二酯咖啡固体饮料3盒+蛋白多肽营养强化粉2盒",
+      "items": [
+        {
+          "name": "甘油二酯咖啡固体饮料（生椰拿铁味） 8g*12 新包装",
+          "qty": 3
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 2
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_047.jpg": {
+      "status": "auto_labeled",
+      "text": "甘油二酯咖啡5盒+蛋白多肽营养强化粉5盒",
+      "items": [
+        {
+          "name": "甘油二酯咖啡固体饮料（生椰拿铁味） 8g*12 新包装",
+          "qty": 5
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12",
+          "qty": 2
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_048.jpg": {
+      "status": "auto_labeled",
+      "text": "甘油二酯咖啡5盒+蛋白多肽营养强化粉1盒",
+      "items": [
+        {
+          "name": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12",
+          "qty": 5
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（莓果味） 30g*12",
+          "qty": 3
+        },
+        {
+          "name": "KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12",
+          "qty": 2
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_049.jpg": {
+      "status": "auto_labeled",
+      "text": "灵芝金花黑茶固体饮料",
+      "items": [
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21",
+          "qty": 1
+        },
+        {
+          "name": "KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    },
+    "real_050.jpg": {
+      "status": "auto_labeled",
+      "text": "\"\"",
+      "items": [
+        {
+          "name": "KGOS益生菌固体饮料 2g*15",
+          "qty": 1
+        }
+      ],
+      "notes": "auto_labeled by Agnes AI vision — requires human verification"
+    }
+  }
+}

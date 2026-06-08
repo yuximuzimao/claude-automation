@@ -278,6 +278,96 @@ def project_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+# ---------------------------------------------------------------------------
+# Image text extraction (EasyOCR local, Agnes AI fallback)
+# ---------------------------------------------------------------------------
+
+def extract_text_from_image(image_path: Path | str, *, bottom_fraction: float = 0.20) -> str:
+    """
+    Extract visible caption text from a product image.
+
+    Tries EasyOCR (local, no network) first; falls back to Agnes AI vision API
+    if EasyOCR is unavailable or returns nothing useful.
+
+    Returns a raw text string suitable for passing to parse_text_counts().
+    """
+    image_path = Path(image_path)
+    text = _easyocr_extract(image_path, bottom_fraction=bottom_fraction)
+    if text:
+        return text
+    return _agnes_extract(image_path)
+
+
+def _easyocr_extract(image_path: Path, *, bottom_fraction: float) -> str:
+    try:
+        import easyocr  # type: ignore
+        from PIL import Image  # type: ignore
+        import numpy as np  # type: ignore
+
+        if not hasattr(_easyocr_extract, "_reader"):
+            _easyocr_extract._reader = easyocr.Reader(["ch_sim", "en"], gpu=False, verbose=False)
+        reader = _easyocr_extract._reader
+
+        img = Image.open(image_path)
+        w, h = img.size
+        region = img.crop((0, int(h * (1 - bottom_fraction)), w, h))
+        results = reader.readtext(np.array(region), detail=0, paragraph=True)
+        return " ".join(t.strip() for t in results if t.strip())
+    except Exception:
+        return ""
+
+
+def _agnes_extract(image_path: Path) -> str:
+    import base64
+    import subprocess
+    import urllib.request
+
+    try:
+        result = subprocess.run(
+            ["security", "find-generic-password", "-a", "agnes-ai",
+             "-s", "product-detect-api-key", "-w"],
+            capture_output=True, text=True, timeout=5,
+        )
+        api_key = result.stdout.strip()
+        if not api_key:
+            return ""
+
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode()
+
+        import json
+        payload = json.dumps({
+            "model": "agnes-2.0-flash",
+            "messages": [{
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": (
+                            "这是一张产品SKU主图。"
+                            "请仅提取图片底部说明文字区域中描述商品名称和数量的文字内容，"
+                            "原文输出，不要分析。若无说明文字则回复空字符串。"
+                        ),
+                    },
+                    {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + b64}},
+                ],
+            }],
+            "max_tokens": 100,
+            "temperature": 0.1,
+        }).encode()
+        req = urllib.request.Request(
+            "https://apihub.agnes-ai.com/v1/chat/completions",
+            data=payload,
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        )
+        resp = urllib.request.urlopen(req, timeout=30)
+        data = json.loads(resp.read())
+        text = data["choices"][0]["message"]["content"].strip()
+        return "" if text in ('""', "''", "") else text
+    except Exception:
+        return ""
+
+
 def main() -> None:
     root = project_root()
     parser = argparse.ArgumentParser(description="Evaluate YOLO-first text correction on KGOS gift13")
