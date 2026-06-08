@@ -112,3 +112,29 @@ if (d.error) {
 **诊断信号**：
 - `展开: 20/0` → 对应表页面状态异常（表有分页但无数据行），刷新对应表页面
 - `dataList 为空 (count=-1)` 全量出现 → 档案V2 Vue 组件状态丢失，刷新档案V2页面
+
+## L8 resolve-components 部分失败可手工补丁，不必全量重跑（2026-06-04）
+
+**背景**：百浩创展活动跑 resolve-components，48/53 resolved，5条失败：2条因加购表与对应表名称不一致（对应表有赠品括号后缀），3条因商家编码是特殊规格条码（档案V2 查不到）。全量重跑会清空已有的 48 条正确数据，且重跑也不会解决根因。
+
+**解法（三类补丁路径）**：
+
+1. **名称不一致** → 单独调 `queryArchive(erpId, erpCode)` + `querySubItems()` 拿实际子品明细，写入 sku-components.json。对应关系由用户确认。
+2. **特殊规格编码查不到** → 按同货号已有 SKU（2支/4支）的 components 等比反推 1支版本。
+3. **新增单品**（如托特包-蓝）→ 同步追加 product-columns.json，colIndex 接续现有最大值+1。
+
+**补丁完成后必须执行的验证**：
+```javascript
+// 确认 key 数量 == totalSkus
+const keys = Object.keys(sc).filter(k => k !== '_meta');
+assert(keys.length === sc._meta.totalSkus);
+// 确认 resolvedSkus/matchedSkus 已更新为 totalSkus
+assert(sc._meta.resolvedSkus === sc._meta.totalSkus);
+// 确认 warnings 已清空
+assert(sc._meta.warnings.length === 0);
+```
+
+**铁律**：
+- 补丁要同步更新 `_meta`（matchedSkus、resolvedSkus、warnings 清空）并加 `_manualOverrides` 字段记录每条补丁来源
+- 补丁完成后直接跑 `resolve-stock → calculate → report`，不重跑 resolve-components（会清空补丁）
+- 临时 queryArchive 脚本写完即删，不进 git
