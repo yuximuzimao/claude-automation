@@ -4,8 +4,9 @@
 
 ## Session 启动（必做，按顺序）
 1. 读 `SKILL.md` — 项目入口、命令和数据地图
-2. 确认本地服务状态：`lsof -ti :8899`
-3. 按 `SKILL.md` 的 DO FIRST 加载核心数据上下文
+2. 读 `tasks/todo.md` — 确认未处理设计问题和数据修正待办
+3. 确认本地服务状态：`lsof -ti :8899`
+4. 按 `SKILL.md` 的 DO FIRST 加载核心数据上下文
 
 ## 目录说明
 详见 `SKILL.md`。

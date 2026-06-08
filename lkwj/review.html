@@ -537,6 +537,7 @@ body {
             <option value="capture">capture 捕捉</option>
             <option value="capture_gifted">capture_gifted 天分捕捉</option>
             <option value="capture_chromatic">capture_chromatic 炫彩捕捉</option>
+            <option value="capture_shiny">capture_shiny 异色捕捉</option>
             <option value="fruit">fruit 果实</option>
             <option value="skill">skill 技能</option>
             <option value="evolve">evolve 进化</option>
@@ -613,6 +614,7 @@ const TASK_TYPES = [
   { v:'capture', l:'capture 捕捉', tpl:{type:'capture',desc:'捕捉1只'} },
   { v:'capture_gifted', l:'capture_gifted 天分', tpl:{type:'capture_gifted',desc:'捕捉1只了不起天分的'} },
   { v:'capture_chromatic', l:'capture_chromatic 炫彩', tpl:{type:'capture_chromatic',desc:'捕捉1只炫彩突变的'} },
+  { v:'capture_shiny', l:'capture_shiny 异色', tpl:{type:'capture_shiny',desc:'捕捉1只异色突变的精灵'} },
   { v:'evolve', l:'evolve 进化', tpl:{type:'evolve',desc:'成功进化一次'} },
   { v:'leader_evolve', l:'leader_evolve 首领', tpl:{type:'leader_evolve',desc:'进化为首领形态'} },
   { v:'destined_hero', l:'destined_hero 命定', tpl:{type:'destined_hero',desc:'获得命定勇者奖牌'} },
@@ -1376,7 +1378,7 @@ function closeAddModalDirect(){document.getElementById('add-overlay').classList.
 // UTILS
 // ═══════════════════════════════
 function typeLabel(type){
-  return {capture:'捕捉',capture_gifted:'天分捕捉',capture_chromatic:'炫彩捕捉',fruit:'果实',skill:'技能',evolve:'进化',leader_evolve:'首领进化',destined_hero:'命定勇者',affection:'亲密度',confirm_forms:'样子确认'}[type]||type;
+  return {capture:'捕捉',capture_gifted:'天分捕捉',capture_chromatic:'炫彩捕捉',capture_shiny:'异色捕捉',fruit:'果实',skill:'技能',evolve:'进化',leader_evolve:'首领进化',destined_hero:'命定勇者',affection:'亲密度',confirm_forms:'样子确认'}[type]||type;
 }
 function fmtDesc(t){
   if(t.type==='skill') return `使用「${t.skillName||'?'}」${t.count||'?'}次`;

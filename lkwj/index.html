@@ -40,6 +40,13 @@
     .random-btns button:hover { border-color: #4f46e5; color: #4f46e5; }
     .random-btns button.primary { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .random-btns button.primary:hover { background: #4338ca; }
+    .random-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .random-module { border: 1px solid #e8eaf0; border-radius: 8px; padding: 14px; background: #fff; min-height: 142px; }
+    .random-module-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    .random-module-title { font-size: 13px; color: #888; font-weight: 600; }
+    .random-refresh-btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid #e0e0e0; background: #fff; color: #888; cursor: pointer; font-size: 14px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; transition: all 0.12s; flex-shrink: 0; }
+    .random-refresh-btn:hover { border-color: #4f46e5; color: #4f46e5; background: #eef2ff; }
+    .random-module-empty { color: #aaa; font-size: 14px; padding: 8px 0; }
 
     /* 今日完成 / 关联任务列表 */
     .related-tasks { margin-top: 12px; }
@@ -174,6 +181,7 @@
   <button class="active" onclick="switchTab('dashboard')">看板</button>
   <button onclick="switchTab('sprite')">精灵</button>
   <button onclick="switchTab('shiny')">异色炫彩</button>
+  <button onclick="switchTab('forms')">多形态</button>
   <button onclick="switchTab('fruits')">精灵果实</button>
   <button onclick="switchTab('furniture')">家具</button>
   <button onclick="switchTab('clothing')">服装</button>
@@ -195,6 +203,7 @@
     <div id="shiny-toolbar"></div>
     <div id="shiny-content"></div>
   </div>
+  <div id="tab-forms" style="display:none"></div>
   <div id="tab-fruits" style="display:none"></div>
   <div id="tab-furniture" style="display:none"></div>
   <div id="tab-clothing" style="display:none"></div>
@@ -233,7 +242,7 @@
 let data = null, gameData = null, walletData = null, editingId = null, currentTab = 'dashboard';
 
 // 全体品类定义
-const ALL_TABS = ['dashboard','sprite','shiny','fruits','furniture','clothing','titles','stars','dungeons','sidequests','gacha','music'];
+const ALL_TABS = ['dashboard','sprite','shiny','forms','fruits','furniture','clothing','titles','stars','dungeons','sidequests','gacha','music'];
 
 const CATEGORY_META = {
   fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集', csv: '精灵果实图鉴.csv' },
@@ -253,6 +262,9 @@ let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spriteTaskFil
 // 精灵果实状态
 let fruitTypeFilter = null, fruitStatus = 'all';
 
+// 多形态状态
+let formSearch = '', formStatus = 'all', expandedFormPet = null;
+
 // 异色炫彩状态
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
 const SHINY_PAGE = 40;
@@ -262,8 +274,8 @@ let catFilter = {};
 function catStatus(tab) { return catFilter[tab] || 'all'; }
 function setCatStatus(tab, s) { catFilter[tab] = s; renderCategoryTab(tab); }
 
-// 随机任务
-let randomTask = null;
+// 随机任务模块
+let randomTasks = {};
 let randomPicked = false;
 
 // 不出现在随机池的任务类型
@@ -356,6 +368,47 @@ function getTaskProgress(petKey) {
   return (sp[petKey] && sp[petKey].tasks) ? sp[petKey].tasks : {};
 }
 
+function ensureSpriteProgress(petKey) {
+  if (!data.sprite_progress) data.sprite_progress = {};
+  if (!data.sprite_progress[petKey]) data.sprite_progress[petKey] = {};
+  return data.sprite_progress[petKey];
+}
+
+function getCollectibleFormEntries(petKey) {
+  const pet = gameData?.pets?.[petKey];
+  if (!pet?.forms) return [];
+  return Object.entries(pet.forms)
+    .filter(([formKey]) => formKey !== 'basic' && formKey !== 'leader')
+    .map(([formKey, form]) => ({ petKey, pet, formKey, form }));
+}
+
+function getCollectedFormKeys(petKey) {
+  const sp = data.sprite_progress || {};
+  const forms = sp[petKey]?.forms_collected;
+  return Array.isArray(forms) ? forms : [];
+}
+
+function isFormCollected(petKey, formKey) {
+  return getCollectedFormKeys(petKey).includes(formKey);
+}
+
+function getRequiredFormKeys(petKey, task) {
+  if (Array.isArray(task.requiredForms) && task.requiredForms.length) return task.requiredForms;
+  return getCollectibleFormEntries(petKey).slice(0, task.count || 0).map((entry) => entry.formKey);
+}
+
+function isTaskDone(petKey, taskIdx) {
+  const task = petTasks(petKey)[taskIdx];
+  if (!task) return false;
+  if (task.type === 'confirm_forms') {
+    const required = getRequiredFormKeys(petKey, task);
+    if (!required.length) return false;
+    return required.every((formKey) => isFormCollected(petKey, formKey));
+  }
+  const progress = getTaskProgress(petKey);
+  return !!progress[String(taskIdx)];
+}
+
 function renderPendingDoneSections(list, renderFn, doneKey) {
   const pending = list.filter(i => (doneKey ? i[doneKey] : i.status) !== STATUS.DONE);
   const done = list.filter(i => (doneKey ? i[doneKey] : i.status) === STATUS.DONE);
@@ -401,19 +454,43 @@ function renderLimitedTag(item) {
 const DONE_KEY = 'lkwj_done_today';
 const RANDOM_KEY = 'lkwj_random_task';
 
-function saveRandomTask(task) {
-  localStorage.setItem(RANDOM_KEY, JSON.stringify({ date: todayStr(), task: task }));
+function formatPetNo(petKey) {
+  return 'No.' + String(petKey).replace('pet_', '').padStart(3, '0');
 }
-function loadRandomTask() {
+
+function saveRandomTasks(tasks) {
+  localStorage.setItem(RANDOM_KEY, JSON.stringify({ date: todayStr(), tasks }));
+}
+
+function loadRandomTasks() {
   try {
     const raw = localStorage.getItem(RANDOM_KEY);
     if (!raw) return null;
     const d = JSON.parse(raw);
     if (d.date !== todayStr()) { localStorage.removeItem(RANDOM_KEY); return null; }
-    return d.task;
+    if (d.tasks) return d.tasks;
+    if (d.task) return { sprite: d.task };
+    return null;
   } catch { return null; }
 }
-function clearRandomTask() { localStorage.removeItem(RANDOM_KEY); }
+
+function clearRandomTask(moduleKey) {
+  if (!moduleKey) {
+    localStorage.removeItem(RANDOM_KEY);
+    randomTasks = {};
+    return;
+  }
+  delete randomTasks[moduleKey];
+  saveRandomTasks(randomTasks);
+}
+
+function refreshRandomModule(moduleKey) {
+  if (moduleKey === 'sprite') randomTasks.sprite = pickRandomSprite();
+  if (moduleKey === 'form') randomTasks.form = pickRandomForm();
+  if (moduleKey === 'fruit') randomTasks.fruit = pickRandomFruit();
+  saveRandomTasks(randomTasks);
+  renderDashboard();
+}
 
 // ═══════════ 数据加载 ═══════════
 async function init() {
@@ -432,8 +509,11 @@ async function init() {
     }
   }
   document.getElementById('last-updated').textContent = '更新于 ' + (data.meta?.last_updated || '--');
-  randomTask = loadRandomTask();
-  if (!randomTask) { randomTask = pickRandom(); if (randomTask) saveRandomTask(randomTask); }
+  randomTasks = loadRandomTasks() || {};
+  if (!randomTasks.sprite || randomTasks.sprite.type !== 'sprite') randomTasks.sprite = pickRandomSprite();
+  if (!randomTasks.form || randomTasks.form.type !== 'form') randomTasks.form = pickRandomForm();
+  if (!randomTasks.fruit || randomTasks.fruit.type !== 'fruit') randomTasks.fruit = pickRandomFruit();
+  saveRandomTasks(randomTasks);
   randomPicked = true;
   renderDashboard();
 }
@@ -458,15 +538,18 @@ function renderDashboard() {
   let spriteOwned = 0, spriteTotal = allPetKeys.length;
   let yiseTotal = 0, yiseOwned = 0;
   let fruitTotal = 0, fruitOwned = 0;
+  let formTotal = 0, formOwned = 0;
 
   allPetKeys.forEach(petKey => {
     const pet = pets[petKey];
     if (!pet) return;
     const tasks = petTasks(petKey);
-    const progress = getTaskProgress(petKey);
-    if (tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && progress[String(i)])) spriteOwned++;
+    if (tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(petKey, i))) spriteOwned++;
     if (pet.tags?.shiny && isFinalEvolution(petKey)) { yiseTotal++; if (shinyProg[petKey]) yiseOwned++; }
     if (pet.fruit) { fruitTotal++; if (pet.fruit.acquired) fruitOwned++; }
+    const forms = getCollectibleFormEntries(petKey);
+    formTotal += forms.length;
+    formOwned += forms.filter((entry) => isFormCollected(entry.petKey, entry.formKey)).length;
   });
 
   let html = '';
@@ -486,54 +569,20 @@ function renderDashboard() {
   html += `<div class="ds-sep"></div>`;
   html += `<div class="ds-item"><span class="ds-label">异色</span><span class="ds-val">${yiseOwned}</span><span class="ds-total">/ ${yiseTotal}</span></div>`;
   html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">多形态</span><span class="ds-val">${formOwned}</span><span class="ds-total">/ ${formTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
   html += `<div class="ds-item"><span class="ds-label">果实</span><span class="ds-val">${fruitOwned}</span><span class="ds-total">/ ${fruitTotal}</span></div>`;
   html += `<span style="font-size:11px;color:#bbb;margin-left:auto">更新于 ${data.meta?.last_updated || '--'}</span>`;
   html += '</div>';
 
-  // 随机任务 — 用和精灵页一样的勾选形式
+  // 随机任务模块
   html += '<div class="dash-widget accent">';
-  html += '<h3>🎯 随机任务</h3>';
-  if (randomTask && randomTask.type === 'sprite') {
-    const petKey = randomTask.petKey;
-    const pet = pets[petKey];
-    const tasks = petTasks(petKey);
-    const progress = getTaskProgress(petKey);
-    const task = tasks[randomTask.taskIdx];
-
-    html += `<div class="random-task-name">${esc(pet?.name || '?')}</div>`;
-    let mainDesc = task?.type === 'skill' ? `使用${task.skillName}${task.count}次` : (task?.desc || '');
-    html += `<div class="random-task-desc">${esc(mainDesc)}</div>`;
-
-    // 同精灵所有任务 (checkable)
-    if (tasks.length) {
-      const excludeTypes = new Set(['destined_hero', 'confirm_forms']);
-      html += '<div class="related-tasks"><div class="rt-title">📋 可一起完成</div>';
-      tasks.forEach((t, ti) => {
-        if (excludeTypes.has(t.type)) return;
-        const done = !!progress[String(ti)];
-        const desc = t.type === 'skill' ? `使用${t.skillName}${t.count}次` : t.desc;
-        const isMain = (ti === randomTask.taskIdx);
-        html += `<div class="rt-row${done ? ' done' : ''}">`;
-        html += `<div class="task-check${done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask('${petKey}',${ti});clearRandomTask();randomTask=null;renderDashboard()"></div>`;
-        html += `<span>${esc(desc)}${isMain ? ' <span style="color:#6366f1;font-size:11px">← 目标</span>' : ''}</span>`;
-        html += '</div>';
-      });
-      html += '</div>';
-    }
-
-    html += `<div class="random-btns">`;
-    html += `<button class="primary" onclick="viewRandomTask('${petKey}')">去图鉴看</button>`;
-    html += `<button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button>`;
-    html += '</div>';
-  } else if (randomTask && randomTask.type === 'item') {
-    html += `<div class="random-task-name">${esc(randomTask.name)}</div>`;
-    html += `<div class="random-task-desc">${esc(randomTask.desc || '')}</div>`;
-    html += `<div class="random-btns"><button class="primary" onclick="markRandomItemDone()">标记完成</button>`;
-    html += `<button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button></div>`;
-  } else {
-    html += '<div style="color:#aaa;padding:8px 0">暂无未完成的任务，去图鉴看看吧~</div>';
-    html += `<div class="random-btns"><button onclick="randomTask=pickRandom();if(randomTask)saveRandomTask(randomTask);renderDashboard()">🔄 换一个</button></div>`;
-  }
+  html += '<h3>随机任务</h3>';
+  html += '<div class="random-grid">';
+  html += renderRandomModule('sprite', '精灵任务', randomTasks.sprite);
+  html += renderRandomModule('form', '多形态', randomTasks.form);
+  html += renderRandomModule('fruit', '精灵果实', randomTasks.fruit);
+  html += '</div>';
   html += '</div>';
 
   // 今日完成
@@ -554,23 +603,92 @@ function renderDashboard() {
   el.innerHTML = html;
 }
 
+function renderRandomModule(moduleKey, title, task) {
+  let html = `<div class="random-module"><div class="random-module-header">`;
+  html += `<div class="random-module-title">${esc(title)}</div>`;
+  html += `<button class="random-refresh-btn" onclick="event.stopPropagation();refreshRandomModule('${moduleKey}')" aria-label="刷新${esc(title)}" title="刷新">↻</button>`;
+  html += '</div>';
+  if (!task) {
+    html += '<div class="random-module-empty">暂无未完成项</div>';
+    html += '</div>';
+    return html;
+  }
+  if (moduleKey === 'sprite') html += renderRandomSpriteTask(task);
+  if (moduleKey === 'form') html += renderRandomFormTask(task);
+  if (moduleKey === 'fruit') html += renderRandomFruitTask(task);
+  html += '</div>';
+  return html;
+}
+
+function renderRandomSpriteTask(task) {
+  const pet = gameData?.pets?.[task.petKey];
+  const tasks = petTasks(task.petKey);
+  const mainTask = tasks[task.taskIdx];
+  let mainDesc = mainTask?.type === 'skill' ? `使用${mainTask.skillName}${mainTask.count}次` : (mainTask?.desc || task.desc || '');
+  let html = `<div class="random-task-name">${formatPetNo(task.petKey)} ${esc(pet?.name || task.name || '?')}</div>`;
+  html += `<div class="random-task-desc">${esc(mainDesc)}</div>`;
+
+  const checklist = getRandomSpriteChecklist(task);
+  if (checklist.length) {
+    html += '<div class="related-tasks"><div class="rt-title">可一起完成</div>';
+    checklist.forEach(({ ti, desc, done, isMain }) => {
+      html += `<div class="rt-row${done ? ' done' : ''}">`;
+      html += `<div class="task-check${done ? ' checked' : ''}" onclick="event.stopPropagation();markRandomSpriteTask('${task.petKey}',${ti})"></div>`;
+      html += `<span>${esc(desc)}${isMain ? ' <span style="color:#6366f1;font-size:11px">← 目标</span>' : ''}</span>`;
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="random-btns">';
+  html += `<button class="primary" onclick="viewRandomTask('${task.petKey}')">去图鉴看</button>`;
+  html += '</div>';
+  return html;
+}
+
+function renderRandomFormTask(task) {
+  const done = isFormCollected(task.petKey, task.formKey);
+  let html = `<div class="random-task-name">${formatPetNo(task.petKey)} ${esc(task.petName)}</div>`;
+  html += `<div class="rt-row${done ? ' done' : ''}" style="padding-left:0">`;
+  html += `<button class="check-btn${done ? ' checked' : ''}" onclick="event.stopPropagation();markRandomFormTask()"></button>`;
+  html += `<span>${esc(task.formName)}</span>`;
+  html += '</div>';
+  if (task.method) html += `<div class="task-methods">${esc(task.method)}</div>`;
+  html += '<div class="random-btns">';
+  html += `<button class="primary" onclick="viewRandomForm('${task.petKey}')">去多形态看</button>`;
+  html += '</div>';
+  return html;
+}
+
+function renderRandomFruitTask(task) {
+  const done = !!gameData?.pets?.[task.petKey]?.fruit?.acquired;
+  let html = `<div class="random-task-name">${formatPetNo(task.petKey)} ${esc(task.fruitName)}</div>`;
+  html += `<div class="rt-row${done ? ' done' : ''}" style="padding-left:0">`;
+  html += `<button class="check-btn${done ? ' checked' : ''}" onclick="event.stopPropagation();markRandomFruitTask()"></button>`;
+  html += `<span>${esc(task.petName)}</span>`;
+  html += '</div>';
+  if (task.method) html += `<div class="task-methods">${esc(task.method)}</div>`;
+  html += '<div class="random-btns">';
+  html += `<button class="primary" onclick="viewRandomFruit()">去果实看</button>`;
+  html += '</div>';
+  return html;
+}
+
 // ═══════════ 随机抽取 ═══════════
-function pickRandom() {
+function pickRandomSprite() {
   const pool = [];
-  const pets = gameData?.pets || {};
   petEntries().forEach(([petKey, pet]) => {
     const tasks = petTasks(petKey);
-    const progress = getTaskProgress(petKey);
     // Check capture done (prerequisite for evolved form tasks)
     const baseCaptureIdx = tasks.findIndex(t => t.type === 'capture');
-    const baseCaptureDone = baseCaptureIdx < 0 || progress[String(baseCaptureIdx)];
+    const baseCaptureDone = baseCaptureIdx < 0 || isTaskDone(petKey, baseCaptureIdx);
 
     tasks.forEach((t, ti) => {
-      if (progress[String(ti)]) return; // already done
+      if (isTaskDone(petKey, ti)) return; // already done
       if (RANDOM_EXCLUDE.has(t.type)) return;
       // fruit (capture20) requires capture done
       if (t.type === 'fruit') {
-        const captureDone = tasks.some((ct, ci) => ct.type === 'capture' && progress[String(ci)]);
+        const captureDone = tasks.some((ct, ci) => ct.type === 'capture' && isTaskDone(petKey, ci));
         if (!captureDone) return;
       }
       // Non-base form reference — would need pet-level check. Since tasks are form-independent now, all tasks are visible.
@@ -584,26 +702,62 @@ function pickRandom() {
       });
     });
   });
-  // Non-pet items
-  (data.items || []).forEach(item => {
-    if (item.status !== '已完成')
-      pool.push({ type: 'item', id: item.id, name: item.name, desc: item.notes || item.category, category: item.category });
-  });
   if (!pool.length) return null;
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-function getRelatedTasks(petKey) {
-  const tasks = petTasks(petKey);
+function pickRandomForm() {
+  const pool = getFormsList().filter((entry) => !entry.isDone).map((entry) => ({
+    type: 'form',
+    petKey: entry.petKey,
+    petName: entry.pet.name,
+    formKey: entry.formKey,
+    formName: entry.form.formName,
+    method: (entry.form.obtainMethods || []).join('、'),
+  }));
+  if (!pool.length) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function pickRandomFruit() {
+  const pool = Object.entries(gameData?.pets || {})
+    .filter(([, pet]) => pet.fruit && !pet.fruit.acquired)
+    .map(([petKey, pet]) => ({
+      type: 'fruit',
+      petKey,
+      petName: pet.name,
+      fruitName: pet.fruit.name || `${pet.name}果实`,
+      method: pet.fruit.obtainMethod || '',
+    }));
+  if (!pool.length) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function getRandomSpriteChecklist(task) {
+  if (!task || task.type !== 'sprite') return [];
+  const tasks = petTasks(task.petKey);
   if (!tasks.length) return [];
-  const progress = getTaskProgress(petKey);
   const excludeTypes = new Set(['destined_hero', 'confirm_forms']);
   return tasks.map((t, ti) => ({
+    ti,
     desc: (t.type === 'skill') ? `使用${t.skillName}${t.count}次` : t.desc,
     type: t.type,
-    done: !!progress[String(ti)],
-    isMain: false,
+    done: isTaskDone(task.petKey, ti),
+    isMain: ti === task.taskIdx,
   })).filter(r => !excludeTypes.has(r.type));
+}
+
+function isRandomSpriteTaskComplete(task) {
+  const checklist = getRandomSpriteChecklist(task);
+  return checklist.length > 0 && checklist.every((row) => row.done);
+}
+
+function isRandomFormTaskComplete(task) {
+  return !!task && task.type === 'form' && isFormCollected(task.petKey, task.formKey);
+}
+
+function isRandomFruitTaskComplete(task) {
+  return !!task && task.type === 'fruit' && !!gameData?.pets?.[task.petKey]?.fruit?.acquired;
 }
 
 async function viewRandomTask(petKey) {
@@ -617,6 +771,27 @@ async function viewRandomTask(petKey) {
     const card = document.querySelector('#sprite-content .sprite-card.expanded');
     if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 100);
+}
+
+function viewRandomForm(petKey) {
+  switchTab('forms');
+  formSearch = '';
+  formStatus = 'all';
+  expandedFormPet = petKey;
+  renderFormsTab();
+  setTimeout(() => {
+    const cards = Array.from(document.querySelectorAll('#tab-forms .sprite-card'));
+    const idx = getFormsPetGroups().findIndex((group) => group.petKey === petKey);
+    const card = cards[idx];
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+function viewRandomFruit() {
+  switchTab('fruits');
+  fruitTypeFilter = null;
+  fruitStatus = 'pending';
+  renderFruitsTab();
 }
 
 // ═══════════ 今日完成 ═══════════
@@ -657,6 +832,7 @@ function renderSpriteToolbar() {
   html += `<span class="chip${!spriteTaskFilter ? ' active' : ''}" onclick="setSpriteTaskFilter(null)">全部</span>`;
   html += `<span class="chip${spriteTaskFilter === 'fruit' ? ' active' : ''}" onclick="setSpriteTaskFilter('fruit')">果实</span>`;
   html += `<span class="chip${spriteTaskFilter === 'capture_chromatic' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_chromatic')">炫彩</span>`;
+  html += `<span class="chip${spriteTaskFilter === 'capture_shiny' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_shiny')">异色</span>`;
   html += `<span class="chip${spriteTaskFilter === 'skill' ? ' active' : ''}" onclick="setSpriteTaskFilter('skill')">技能</span>`;
   html += '</div></div>';
 
@@ -701,11 +877,10 @@ function renderSpriteContent() {
   if (spriteStatus !== 'all') {
     entries = entries.filter(([petKey]) => {
       const tasks = petTasks(petKey);
-      const progress = getTaskProgress(petKey);
       // 如果有任务类型筛选，只看该类型任务的进度
       const filtered = spriteTaskFilter ? tasks.filter(t => t.type === spriteTaskFilter) : tasks;
-      const hasDone = filtered.some((t) => progress[String(tasks.indexOf(t))]);
-      const hasPending = filtered.some((t) => !progress[String(tasks.indexOf(t))]);
+      const hasDone = filtered.some((t) => isTaskDone(petKey, tasks.indexOf(t)));
+      const hasPending = filtered.some((t) => !isTaskDone(petKey, tasks.indexOf(t)));
       return spriteStatus === 'pending' ? hasPending : hasDone;
     });
   }
@@ -714,8 +889,7 @@ function renderSpriteContent() {
   const progress = spriteProgress();
   const collected = Object.keys(pets).filter(pk => {
     const tasks = petTasks(pk);
-    const p = getTaskProgress(pk);
-    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && p[String(i)]);
+    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
   }).length;
 
   let html = '';
@@ -735,9 +909,8 @@ function renderSpriteContent() {
 
 function renderSpriteCard(petKey, pet) {
   const tasks = petTasks(petKey);
-  const progress = getTaskProgress(petKey);
   const pets = gameData?.pets || {};
-  const totalDone = tasks.filter((t, i) => progress[String(i)]).length;
+  const totalDone = tasks.filter((t, i) => isTaskDone(petKey, i)).length;
   const isExpanded = expandedPet === petKey;
 
   // Tag badges
@@ -766,9 +939,9 @@ function renderSpriteCard(petKey, pet) {
     // Filter by status
     let visibleTasks = tasks;
     if (spriteStatus === 'pending') {
-      visibleTasks = tasks.filter((t, i) => !progress[String(i)]);
+      visibleTasks = tasks.filter((t, i) => !isTaskDone(petKey, i));
     } else if (spriteStatus === 'done') {
-      visibleTasks = tasks.filter((t, i) => progress[String(i)]);
+      visibleTasks = tasks.filter((t, i) => isTaskDone(petKey, i));
     }
 
     if (visibleTasks.length) {
@@ -777,12 +950,14 @@ function renderSpriteCard(petKey, pet) {
         if (g.label) card += `<div class="task-group-label">${g.label}</div>`;
         g.tasks.forEach(t => {
           const origIdx = tasks.indexOf(t);
-          const done = !!progress[String(origIdx)];
+          const done = isTaskDone(petKey, origIdx);
           let desc = t.desc;
           if (t.type === 'skill') desc = `使用${t.skillName}${t.count}次`;
           const methods = getTaskObtainMethods(petKey, t);
           card += `<div class="task-row${done ? ' done' : ''}">`;
-          card += `<div class="task-check${done ? ' checked' : ''}" onclick="event.stopPropagation();toggleTask('${petKey}',${origIdx})"></div>`;
+          const autoTask = t.type === 'confirm_forms';
+          const checkClick = autoTask ? '' : ` onclick="event.stopPropagation();toggleTask('${petKey}',${origIdx})"`;
+          card += `<div class="task-check${done ? ' checked' : ''}${autoTask ? ' noclick' : ''}"${checkClick}></div>`;
           card += `<span style="flex:1">${esc(desc)}`;
           if (methods.length) {
             card += `<div class="task-methods">${methods.map(m => esc(m)).join('<br>')}</div>`;
@@ -816,7 +991,7 @@ function renderSpriteCard(petKey, pet) {
 }
 
 // 按任务类型获取达成方式（统一从pets.json读取）
-const CAPTURE_TYPES = new Set(['capture', 'capture_gifted', 'capture_chromatic', 'fruit']);
+const CAPTURE_TYPES = new Set(['capture', 'capture_gifted', 'capture_chromatic', 'capture_shiny', 'fruit']);
 function getTaskObtainMethods(petKey, task) {
   const pets = gameData?.pets || {};
   const pet = pets[petKey];
@@ -825,8 +1000,9 @@ function getTaskObtainMethods(petKey, task) {
   if (task.type === 'leader_evolve') return pet.forms?.leader?.obtainMethods || [];
   if (task.type === 'confirm_forms') {
     const methods = [];
-    for (const [fk, fv] of Object.entries(pet.forms || {})) {
-      if (fk === 'basic' || fk === 'leader') continue;
+    for (const fk of getRequiredFormKeys(petKey, task)) {
+      const fv = pet.forms?.[fk];
+      if (!fv) continue;
       if (fv.obtainMethods?.length) methods.push(fv.formName + '：' + fv.obtainMethods[0]);
       else methods.push(fv.formName);
     }
@@ -853,7 +1029,7 @@ function getTaskObtainMethods(petKey, task) {
 }
 
 function groupRelatedTasks(tasks) {
-  const captureTypes = ['capture', 'capture_gifted', 'capture_chromatic', 'fruit', 'confirm_forms', 'evolve', 'leader_evolve', 'affection'];
+  const captureTypes = ['capture', 'capture_gifted', 'capture_chromatic', 'capture_shiny', 'fruit', 'confirm_forms', 'evolve', 'leader_evolve', 'affection'];
   const groups = [];
   const used = new Set();
 
@@ -1071,6 +1247,7 @@ async function toggleTask(petKey, taskIdx) {
   const tasks = petTasks(petKey);
   const pet = gameData?.pets?.[petKey];
   if (!tasks[taskIdx] || !pet) return;
+  if (tasks[taskIdx].type === 'confirm_forms') return;
 
   const progress = ensureTaskProgress(petKey, taskIdx);
   const newDone = !progress.tasks[String(taskIdx)];
@@ -1098,19 +1275,32 @@ async function toggleItemStatus(id) {
   if (currentTab === 'dashboard') renderDashboard();
 }
 
-async function markRandomDone() {
-  if (!randomTask || randomTask.type !== 'sprite') return;
-  await toggleTask(randomTask.petKey, randomTask.taskIdx);
-  clearRandomTask();
-  randomTask = null;
+async function markRandomFormTask() {
+  const task = randomTasks.form;
+  if (!task || task.type !== 'form') return;
+  const wasDone = isRandomFormTaskComplete(task);
+  await toggleForm(task.petKey, task.formKey);
+  if (!wasDone && isRandomFormTaskComplete(task)) randomTasks.form = pickRandomForm();
+  saveRandomTasks(randomTasks);
   renderDashboard();
 }
 
-async function markRandomItemDone() {
-  if (!randomTask || randomTask.type !== 'item') return;
-  await toggleItemStatus(randomTask.id);
-  clearRandomTask();
-  randomTask = null;
+async function markRandomSpriteTask(petKey, taskIdx) {
+  await toggleTask(petKey, taskIdx);
+  if (randomTasks.sprite?.petKey === petKey && isRandomSpriteTaskComplete(randomTasks.sprite)) {
+    randomTasks.sprite = pickRandomSprite();
+  }
+  saveRandomTasks(randomTasks);
+  renderDashboard();
+}
+
+async function markRandomFruitTask() {
+  const task = randomTasks.fruit;
+  if (!task || task.type !== 'fruit') return;
+  const wasDone = isRandomFruitTaskComplete(task);
+  await toggleFruit(task.petKey);
+  if (!wasDone && isRandomFruitTaskComplete(task)) randomTasks.fruit = pickRandomFruit();
+  saveRandomTasks(randomTasks);
   renderDashboard();
 }
 
@@ -1152,6 +1342,7 @@ function switchTab(name) {
   if (name === 'dashboard') { renderDashboard(); return; }
   if (name === 'sprite') { renderSpriteTab(); return; }
   if (name === 'shiny') { renderShinyTab(); return; }
+  if (name === 'forms') { renderFormsTab(); return; }
   if (name === 'fruits') { renderFruitsTab(); return; }
   if (CATEGORY_META[name]) { renderCategoryTab(name); return; }
 }
@@ -1204,6 +1395,140 @@ function renderCategoryTab(tab) {
     html += renderCollapsibleDoneSection(done, renderItemRow, done.length);
   }
   el.innerHTML = html;
+}
+
+// ═══════════ 多形态 Tab ═══════════
+function getFormsList() {
+  const list = [];
+  const tasks = gameData?.tasks || {};
+  for (const [petKey, pet] of petEntries()) {
+    const confirmTask = (tasks[petKey] || []).find((task) => task.type === 'confirm_forms');
+    const required = confirmTask ? new Set(getRequiredFormKeys(petKey, confirmTask)) : new Set();
+    for (const entry of getCollectibleFormEntries(petKey)) {
+      const petNum = Number(petKey.replace('pet_', ''));
+      list.push({
+        ...entry,
+        petNum,
+        isDone: isFormCollected(petKey, entry.formKey),
+        countsForTask: required.has(entry.formKey),
+      });
+    }
+  }
+  return list.sort((a, b) => a.petNum - b.petNum || a.form.formName.localeCompare(b.form.formName, 'zh-Hans-CN'));
+}
+
+function getFormsPetGroups() {
+  const groups = new Map();
+  for (const entry of getFormsList()) {
+    if (!groups.has(entry.petKey)) {
+      groups.set(entry.petKey, {
+        petKey: entry.petKey,
+        pet: entry.pet,
+        petNum: entry.petNum,
+        forms: [],
+      });
+    }
+    groups.get(entry.petKey).forms.push(entry);
+  }
+  return [...groups.values()].sort((a, b) => a.petNum - b.petNum);
+}
+
+function renderFormsTab() {
+  const el = document.getElementById('tab-forms');
+  const allGroups = getFormsPetGroups();
+  const allForms = allGroups.flatMap((group) => group.forms);
+  const owned = allForms.filter((entry) => entry.isDone).length;
+
+  let groups = allGroups.map((group) => ({ ...group, forms: [...group.forms] }));
+  if (formSearch) {
+    const q = formSearch.toLowerCase();
+    groups = groups.map((group) => {
+      const pet = group.pet;
+      const petNum = String(group.petNum);
+      const petMatched = pet.name.includes(q) || petNum === q ||
+        (pet.pinyin && (pet.pinyin.full.includes(q) || pet.pinyin.initial.includes(q)));
+      const forms = petMatched ? group.forms : group.forms.filter((entry) => entry.form.formName.includes(q));
+      return { ...group, forms };
+    });
+  }
+  if (formStatus === 'pending') groups = groups.map((group) => ({ ...group, forms: group.forms.filter((entry) => !entry.isDone) }));
+  else if (formStatus === 'done') groups = groups.map((group) => ({ ...group, forms: group.forms.filter((entry) => entry.isDone) }));
+  groups = groups.filter((group) => group.forms.length > 0);
+  const matchedCount = groups.reduce((sum, group) => sum + group.forms.length, 0);
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
+  html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
+  html += `<input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)">`;
+  html += '<div class="chips" style="margin:10px 0">';
+  html += renderStatusChips(formStatus, 'setFormStatus');
+  html += '</div>';
+
+  if (!groups.length) {
+    html += '<div class="empty-state">没有匹配的多形态</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  html += '<div class="sprite-list">';
+  groups.forEach((group) => { html += renderFormPetCard(group); });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderFormPetCard(group) {
+  const allForms = getCollectibleFormEntries(group.petKey);
+  const doneTotal = allForms.filter((entry) => isFormCollected(entry.petKey, entry.formKey)).length;
+  const shownDone = group.forms.filter((entry) => entry.isDone).length;
+  const isExpanded = expandedFormPet === group.petKey || !!formSearch || formStatus !== 'all';
+  const primaryEl = (group.pet.element || ['普'])[0];
+
+  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  card += `<div class="sprite-card-header" onclick="toggleFormPet('${group.petKey}')">`;
+  card += `<span class="si">${formatPetNo(group.petKey)}</span>`;
+  card += `<span class="sn">${esc(group.pet.name)}</span>`;
+  card += `<span class="se el-${primaryEl}">${(group.pet.element || []).join('')}</span>`;
+  card += `<span class="sm">${doneTotal}/${allForms.length}${group.forms.length !== allForms.length ? ` · 显示 ${shownDone}/${group.forms.length}` : ''}</span>`;
+  card += '<span class="sa">▶</span>';
+  card += '</div>';
+  card += '<div class="sprite-card-body">';
+  card += '<div class="item-list" style="margin-top:8px">';
+  group.forms.forEach((entry) => { card += renderFormRow(entry); });
+  card += '</div></div></div>';
+  return card;
+}
+
+function renderFormRow(entry) {
+  const method = (entry.form.obtainMethods || []).join('、');
+  const taskTag = entry.countsForTask ? '<span class="item-category-tag">课题计入</span>' : '<span class="tag-archived">独立收集</span>';
+  return `<div class="item-row${entry.isDone ? ' done' : ''}">
+    <button class="check-btn${entry.isDone ? ' checked' : ''}" onclick="toggleForm('${entry.petKey}','${escAttr(entry.formKey)}')"></button>
+    <div class="item-info">
+      <div class="item-name">No.${entry.petNum} ${esc(entry.pet.name)} · ${esc(entry.form.formName)} ${taskTag}</div>
+      ${method ? `<div class="task-methods">${esc(method)}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function toggleFormPet(petKey) { expandedFormPet = expandedFormPet === petKey ? null : petKey; renderFormsTab(); }
+function onFormSearch(val) { formSearch = val; expandedFormPet = null; renderFormsTab(); }
+function setFormStatus(s) { formStatus = s; expandedFormPet = null; renderFormsTab(); }
+
+async function toggleForm(petKey, formKey) {
+  const pet = gameData?.pets?.[petKey];
+  const form = pet?.forms?.[formKey];
+  if (!pet || !form || formKey === 'basic' || formKey === 'leader') return;
+
+  const progress = ensureSpriteProgress(petKey);
+  const current = Array.isArray(progress.forms_collected) ? progress.forms_collected : [];
+  const exists = current.includes(formKey);
+  progress.forms_collected = exists ? current.filter((key) => key !== formKey) : [...current, formKey];
+
+  if (!exists) addDoneToday({ key: `form_${petKey}_${formKey}`, name: pet.name, desc: form.formName });
+  await saveData();
+
+  if (currentTab === 'forms') renderFormsTab();
+  if (currentTab === 'sprite') renderSpriteContent();
+  if (currentTab === 'dashboard') renderDashboard();
 }
 
 // ═══════════ 精灵果实 Tab ═══════════
@@ -1308,6 +1633,7 @@ async function toggleFruit(petKey) {
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s) { return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // 属性 → 颜色 CSS class（取主属性）
 function elClass(element) {

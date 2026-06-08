@@ -83,7 +83,8 @@ def read_xlsx(path):
 **Excel 来源**：sheet「课题进度」  
 - A 列有值（如 `N.011`）：新精灵开始  
 - A 列为空：该精灵的后续任务行  
-- F 列：任务类型（`捕捉`、`技能`、`进化`、`首领`、`果实`、`炫彩`、`天分`、`奖牌` 等）
+- F 列：任务类型（`捕捉`、`技能`、`进化`、`首领`、`果实`、`炫彩`、`异色`、`天分`、`奖牌` 等）
+- F 列为 `异色` 的行属于世界图鉴课题任务，导入为 `capture_shiny`
 
 **JSON 来源**：`~/claude/lkwj/data/tasks.json`  
 - key 格式：`pet_1`，值为任务数组，每条任务有 `type` 字段
@@ -109,23 +110,72 @@ def read_xlsx(path):
 
 ---
 
-## 核对项目四：果实任务（全量）
+## 核对项目四：精灵果实课题任务（全量）
 
-**Excel 来源**：sheet「果实进度」  
-- A 列：精灵编号范围（如 `N.011` 或 `N.002-N.004`）  
-- C 列：果实获取方式  
-- D 列：备注
+**Excel 来源**：sheet「课题进度」  
+- F 列：任务类型为 `果实`
+- G 列：课题内容，一般对应“捕捉20只”
+- I 列：备注/达成方式
 
 **JSON 来源**：`~/claude/lkwj/data/tasks.json` 中 `type` 为 `"fruit"` 的任务
 
-**核对所有家族**：
-1. 果实进度表中每个编号范围内的精灵，在 tasks.json 中是否有 `type: "fruit"` 任务
-2. 以下家族**不应有**果实任务（表格标注无果实）：
-   - N.150-152（里奥家族）
-   - N.293-295（小帕尔家族）
-   - N.313-316（果冻家族）
-   - N.317-319（星尘虫家族）
-   - N.348-350（钨丝贝贝家族）
+**严格口径**：
+1. fruit 是“精灵果实课题任务”，说人话就是“捕捉20只获得果实”。
+2. 是否有 fruit 任务只以 `课题进度` sheet 为准；`果实进度` sheet 不是任务清单。
+3. `果实进度` sheet 是家族级果实记录，可用于补充已有 fruit 任务的达成方式，不能反向给进化链每个形态生成任务。
+4. 有果实不代表有 fruit 任务；有 fruit 任务一定有果实。
+5. 非最终形态不要因为同家族有果实而新增 fruit 任务，例如 N.239、N.240 当前不应有 fruit 任务。
+
+**核对步骤**：
+1. 从 `课题进度` sheet 统计 F 列 = `果实` 的任务行，预期为 96 条。
+2. 对每个 `课题进度` fruit 行，检查 `tasks.json` 对应 pet 是否有 `type: "fruit"` 任务。
+3. 检查 `tasks.json` 中是否存在不在 `课题进度` fruit 行内的 `type: "fruit"` 任务。
+4. 当前已知错误模式：`type: "fruit" && desc: "获得果实"` 是从果实图鉴/家族果实误生成的伪任务，预期应删除 256 条。
+5. 对已有 fruit 任务的 `obtainMethods`，可参考 `课题进度` I 列和 `果实进度` C/D 列补充，但不得因此新增任务。
+
+---
+
+## 核对项目五：多形态收集与形态课题
+
+**Excel 来源**：
+- sheet「多形态进度」
+  - A 列：精灵编号
+  - B 列：精灵名称
+  - D 列：形态名称
+  - E 列：捕捉方式
+- sheet「课题进度」
+  - F 列：任务类型为 `形态`
+  - G 列：课题内容，如“确认2种不同样子的鸭吉吉”
+  - I 列：课题计入范围备注
+
+**JSON 来源**：
+- `pets.json` 的 `forms`
+- `tasks.json` 中 `type: "confirm_forms"` 的任务
+- `collections.json` 的 `sprite_progress[petKey].forms_collected`
+
+**严格口径**：
+1. `pets.forms` 保存全部可收集形态，不只保存课题计入形态。
+2. `basic` 和 `leader` 不属于多形态独立收集项。
+3. `confirm_forms.requiredForms` 只表示世界图鉴课题计入的形态。
+4. 多形态完成状态来自 `collections.sprite_progress[petKey].forms_collected`，不再单独勾选 `confirm_forms` 任务。
+5. 课题外形态可以出现在「多形态」Tab，但不得反向增加课题任务数量。
+
+**核对步骤**：
+1. 从 `多形态进度` sheet 统计所有形态行，检查 `pets.json` 是否有对应 `forms` 记录。
+2. 对每个 form，检查 `formName` 和 `obtainMethods` 是否覆盖 Excel 的形态名和捕捉方式。
+3. 从 `课题进度` sheet 统计 F 列 = `形态` 的任务行，预期 `tasks.json` 中 `confirm_forms` 为 51 条。
+4. 每条 `confirm_forms.requiredForms` 必须引用同 pet 下真实存在的 form key，且不得包含 `basic` 或 `leader`。
+5. `requiredForms.length` 应等于任务 `count`。如果 `pets.forms` 数量大于 `count`，多出来的是课题外独立收集项。
+6. 重点检查鸭吉吉：`pets.forms` 应有 6 个独立形态，`requiredForms` 只应包含「蓬松的样子」「紧实的样子」。
+7. 重点检查遁地鼠/加油蟹：遁地鼠只应有「储水时的样子」「枯水期的样子」；加油蟹才有「单只海葵的样子」「（双只海葵的样子）」。
+
+**可直接运行的验证脚本**：
+
+```bash
+cd ~/claude/lkwj
+node scripts/validate-multiform-data.js
+node scripts/validate-multiform-ui.js
+```
 
 ---
 
@@ -157,11 +207,19 @@ def read_xlsx(path):
   - pet_xx：进化级别不一致（表格 32级 vs JSON level:40）
   - ...
 
-### 四、果实任务
-- 应有果实的精灵总数：xxx
-- 实际有 fruit 任务：xxx
+### 四、精灵果实课题任务
+- 课题进度 fruit 行数：xxx
+- 实际 fruit 任务数：xxx
 - 缺失列表：
-  - pet_xx（N.xxx）：应有果实但 tasks.json 中无 fruit 任务
+  - pet_xx（N.xxx）：课题进度有 fruit 任务但 tasks.json 中无 fruit 任务
   - ...
-- 无果实精灵误填：有/无（列出误填的 pet_xx）
+- 伪 fruit 任务：有/无（列出不在课题进度 fruit 行内的 pet_xx）
+
+### 五、多形态收集与形态课题
+- 多形态收集项：xxx
+- 有额外形态的精灵：xxx
+- confirm_forms 任务数：xxx
+- requiredForms 引用错误：有/无（列出 pet_xx 和 form key）
+- 课题外独立形态：有/无（列出典型项，如鸭吉吉）
+- 已运行验证脚本：是/否
 ```

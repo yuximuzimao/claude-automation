@@ -249,7 +249,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的鸭吉吉"
+      "desc": "确认2种不同样子的鸭吉吉",
+      "requiredForms": [
+        "蓬松的样子",
+        "紧实的样子"
+      ]
     },
     {
       "type": "leader_evolve",
@@ -301,7 +305,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的板板壳"
+      "desc": "确认2种不同样子的板板壳",
+      "requiredForms": [
+        "本来的样子",
+        "蜕皮时的样子"
+      ]
     }
   ],
   "pet_13": [
@@ -323,7 +331,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的咔咔壳"
+      "desc": "确认2种不同样子的咔咔壳",
+      "requiredForms": [
+        "本来的样子",
+        "蜕皮时的样子"
+      ]
     }
   ],
   "pet_14": [
@@ -342,7 +354,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的水泡壳"
+      "desc": "确认2种不同样子的水泡壳",
+      "requiredForms": [
+        "本来的样子",
+        "蜕皮时的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -464,7 +480,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的雪绒鸟"
+      "desc": "确认4种不同样子的雪绒鸟",
+      "requiredForms": [
+        "本来的样子",
+        "秋天的样子",
+        "春天的样子",
+        "夏天的样子"
+      ]
     }
   ],
   "pet_19": [
@@ -486,7 +508,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的冬羽雀"
+      "desc": "确认4种不同样子的冬羽雀",
+      "requiredForms": [
+        "本来的样子",
+        "秋天的样子",
+        "春天的样子",
+        "夏天的样子"
+      ]
     }
   ],
   "pet_20": [
@@ -505,7 +533,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的岚鸟"
+      "desc": "确认4种不同样子的岚鸟",
+      "requiredForms": [
+        "本来的样子",
+        "秋天的样子",
+        "春天的样子",
+        "夏天的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -619,7 +653,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的石肤蜥"
+      "desc": "确认2种不同样子的石肤蜥",
+      "requiredForms": [
+        "本来的样子",
+        "球球尾巴的样子"
+      ]
     }
   ],
   "pet_25": [
@@ -641,7 +679,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的石刺蜥"
+      "desc": "确认2种不同样子的石刺蜥",
+      "requiredForms": [
+        "本来的样子",
+        "球球尾巴的样子"
+      ]
     }
   ],
   "pet_26": [
@@ -660,7 +702,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的石冠王蜥"
+      "desc": "确认2种不同样子的石冠王蜥",
+      "requiredForms": [
+        "本来的样子",
+        "球球尾巴的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -796,6 +842,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -868,7 +918,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的化蝶"
+      "desc": "确认4种不同样子的化蝶",
+      "requiredForms": [
+        "平常的样子",
+        "幽冥眼的样子",
+        "喵喵的样子",
+        "奇丽花的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -913,6 +969,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "leader_evolve",
@@ -1042,7 +1102,15 @@
     {
       "type": "confirm_forms",
       "count": 6,
-      "desc": "确认6种不同样子的晶石蜗"
+      "desc": "确认6种不同样子的晶石蜗",
+      "requiredForms": [
+        "西瓜碧玺的样子",
+        "莲花刚玉的样子",
+        "星彩榴石的样子",
+        "火山琉璃的样子",
+        "蓝锥矿的样子",
+        "烧蓝黄金的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -1121,6 +1189,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
     },
@@ -1166,7 +1238,12 @@
     {
       "type": "confirm_forms",
       "count": 3,
-      "desc": "确认3种不同样子的丢丢"
+      "desc": "确认3种不同样子的丢丢",
+      "requiredForms": [
+        "沙地附近的样子",
+        "草地附近的样子",
+        "雪山附近的样子"
+      ]
     }
   ],
   "pet_45": [
@@ -1188,7 +1265,12 @@
     {
       "type": "confirm_forms",
       "count": 3,
-      "desc": "确认3种不同样子的卡卡虫"
+      "desc": "确认3种不同样子的卡卡虫",
+      "requiredForms": [
+        "沙地附近的样子",
+        "草地附近的样子",
+        "雪山附近的样子"
+      ]
     }
   ],
   "pet_46": [
@@ -1207,7 +1289,12 @@
     {
       "type": "confirm_forms",
       "count": 3,
-      "desc": "确认3种不同样子的卡瓦重"
+      "desc": "确认3种不同样子的卡瓦重",
+      "requiredForms": [
+        "沙地附近的样子",
+        "草地附近的样子",
+        "雪山附近的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -1406,6 +1493,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -1464,7 +1555,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的暗影灵面"
+      "desc": "确认2种不同样子的暗影灵面",
+      "requiredForms": [
+        "闭眼的样子",
+        "睁眼的样子"
+      ]
     }
   ],
   "pet_57": [
@@ -1647,7 +1742,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的蹦蹦种子"
+      "desc": "确认4种不同样子的蹦蹦种子",
+      "requiredForms": [
+        "彩玉球形态",
+        "短毛球形态",
+        "海神球形态",
+        "象牙花形态"
+      ]
     }
   ],
   "pet_64": [
@@ -1669,7 +1770,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的蹦蹦草"
+      "desc": "确认4种不同样子的蹦蹦草",
+      "requiredForms": [
+        "彩玉球形态",
+        "短毛球形态",
+        "海神球形态",
+        "象牙花形态"
+      ]
     }
   ],
   "pet_65": [
@@ -1688,7 +1795,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的蹦蹦花"
+      "desc": "确认4种不同样子的蹦蹦花",
+      "requiredForms": [
+        "彩玉球形态",
+        "短毛球形态",
+        "海神球形态",
+        "象牙花形态"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -1992,7 +2105,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的海盔虫"
+      "desc": "确认2种不同样子的海盔虫",
+      "requiredForms": [
+        "本来的样子",
+        "磨损的样子"
+      ]
     }
   ],
   "pet_77": [
@@ -2014,7 +2131,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的刺盔虫"
+      "desc": "确认2种不同样子的刺盔虫",
+      "requiredForms": [
+        "本来的样子",
+        "磨损的样子"
+      ]
     }
   ],
   "pet_78": [
@@ -2033,7 +2154,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的千刺盔"
+      "desc": "确认2种不同样子的千刺盔",
+      "requiredForms": [
+        "本来的样子",
+        "磨损的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -2068,6 +2193,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "fruit",
@@ -2109,7 +2238,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的小星光"
+      "desc": "确认2种不同样子的小星光",
+      "requiredForms": [
+        "星光能量的样子",
+        "月光能量的样子"
+      ]
     }
   ],
   "pet_81": [
@@ -2128,7 +2261,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的星光狮"
+      "desc": "确认2种不同样子的星光狮",
+      "requiredForms": [
+        "星光能量的样子",
+        "月光能量的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -2287,6 +2424,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -2436,7 +2577,7 @@
     },
     {
       "type": "skill",
-      "skillName": "风刃",
+      "skillName": "风矢",
       "count": 1,
       "desc": "使用"
     },
@@ -3084,6 +3225,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
     },
@@ -3123,7 +3268,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的旋叶虫"
+      "desc": "确认2种不同样子的旋叶虫",
+      "requiredForms": [
+        "枯叶的样子",
+        "金黄的样子"
+      ]
     }
   ],
   "pet_119": [
@@ -3145,7 +3294,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的蓬叶虫"
+      "desc": "确认2种不同样子的蓬叶虫",
+      "requiredForms": [
+        "枯叶的样子",
+        "金黄的样子"
+      ]
     }
   ],
   "pet_120": [
@@ -3164,7 +3317,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的风滚暮虫"
+      "desc": "确认2种不同样子的风滚暮虫",
+      "requiredForms": [
+        "枯叶的样子",
+        "金黄的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -3461,6 +3618,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
     },
@@ -3647,6 +3808,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -3785,6 +3950,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -3912,6 +4081,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -4210,6 +4383,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -4308,7 +4485,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的小狮鹫"
+      "desc": "确认2种不同样子的小狮鹫",
+      "requiredForms": [
+        "崖间地的样子",
+        "高山地的样子"
+      ]
     }
   ],
   "pet_166": [
@@ -4330,7 +4511,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的神圣狮鹫"
+      "desc": "确认2种不同样子的神圣狮鹫",
+      "requiredForms": [
+        "崖间地的样子",
+        "高山地的样子"
+      ]
     }
   ],
   "pet_167": [
@@ -4349,7 +4534,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的皇家狮鹫"
+      "desc": "确认2种不同样子的皇家狮鹫",
+      "requiredForms": [
+        "崖间地的样子",
+        "高山地的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -4465,7 +4654,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的波波螺"
+      "desc": "确认2种不同样子的波波螺",
+      "requiredForms": [
+        "（本来的样子）",
+        "被污染的样子"
+      ]
     }
   ],
   "pet_172": [
@@ -4487,7 +4680,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的消波螺"
+      "desc": "确认2种不同样子的消波螺",
+      "requiredForms": [
+        "（本来的样子）",
+        "被污染的样子"
+      ]
     }
   ],
   "pet_173": [
@@ -4506,7 +4703,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的嗜波螺"
+      "desc": "确认2种不同样子的嗜波螺",
+      "requiredForms": [
+        "（本来的样子）",
+        "被污染的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -4906,7 +5107,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的棋棋"
+      "desc": "确认2种不同样子的棋棋",
+      "requiredForms": [
+        "白子",
+        "黑子"
+      ]
     }
   ],
   "pet_189": [
@@ -4925,7 +5130,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的棋骑士"
+      "desc": "确认2种不同样子的棋骑士",
+      "requiredForms": [
+        "白子",
+        "黑子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -4967,7 +5176,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的棋齐垒"
+      "desc": "确认2种不同样子的棋齐垒",
+      "requiredForms": [
+        "白子",
+        "黑子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -5009,7 +5222,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的棋祈督"
+      "desc": "确认2种不同样子的棋祈督",
+      "requiredForms": [
+        "白子",
+        "黑子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -5057,7 +5274,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的棋绮后"
+      "desc": "确认2种不同样子的棋绮后",
+      "requiredForms": [
+        "白子",
+        "黑子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -5439,6 +5660,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -5818,7 +6043,13 @@
     {
       "type": "confirm_forms",
       "count": 4,
-      "desc": "确认4种不同样子的海枝枝"
+      "desc": "确认4种不同样子的海枝枝",
+      "requiredForms": [
+        "洋红沙丁",
+        "翠绿纶布",
+        "碧蓝珊瑚",
+        "杏黄百合"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -6207,7 +6438,12 @@
     {
       "type": "confirm_forms",
       "count": 3,
-      "desc": "确认3种不同样子的香草甜甜"
+      "desc": "确认3种不同样子的香草甜甜",
+      "requiredForms": [
+        "（樱桃饰品）",
+        "杨桃饰品",
+        "蓝莓饰品"
+      ]
     }
   ],
   "pet_236": [
@@ -6226,7 +6462,18 @@
     {
       "type": "confirm_forms",
       "count": 9,
-      "desc": "确认9种不同样子的圣代甜甜"
+      "desc": "确认9种不同样子的圣代甜甜",
+      "requiredForms": [
+        "（樱桃巧克力口味）",
+        "樱桃草莓口味",
+        "樱桃抹茶口味",
+        "杨桃巧克力口味",
+        "杨桃草莓口味",
+        "杨桃抹茶口味",
+        "蓝莓巧克力口味",
+        "蓝莓草莓口味",
+        "蓝莓抹茶口味"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -6268,7 +6515,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的刺轮砣"
+      "desc": "确认2种不同样子的刺轮砣",
+      "requiredForms": [
+        "上弦的样子",
+        "下弦的样子"
+      ]
     }
   ],
   "pet_238": [
@@ -6287,7 +6538,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的月亮砣"
+      "desc": "确认2种不同样子的月亮砣",
+      "requiredForms": [
+        "上弦的样子",
+        "下弦的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -6742,6 +6997,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -6783,7 +7042,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的乌达"
+      "desc": "确认2种不同样子的乌达",
+      "requiredForms": [
+        "极昼的样子",
+        "极夜的样子"
+      ]
     }
   ],
   "pet_259": [
@@ -6805,7 +7068,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的迷你乌"
+      "desc": "确认2种不同样子的迷你乌",
+      "requiredForms": [
+        "极昼的样子",
+        "极夜的样子"
+      ]
     }
   ],
   "pet_260": [
@@ -6824,7 +7091,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的乌拉塔"
+      "desc": "确认2种不同样子的乌拉塔",
+      "requiredForms": [
+        "极昼的样子",
+        "极夜的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -6944,6 +7215,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -7241,6 +7516,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -7276,7 +7555,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的地鼠"
+      "desc": "确认2种不同样子的地鼠",
+      "requiredForms": [
+        "枯水期的样子",
+        "储水时的样子"
+      ]
     }
   ],
   "pet_278": [
@@ -7298,7 +7581,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的遁鼠"
+      "desc": "确认2种不同样子的遁鼠",
+      "requiredForms": [
+        "枯水期的样子",
+        "储水时的样子"
+      ]
     }
   ],
   "pet_279": [
@@ -7317,7 +7604,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的遁地鼠"
+      "desc": "确认2种不同样子的遁地鼠",
+      "requiredForms": [
+        "储水时的样子",
+        "枯水期的样子"
+      ]
     },
     {
       "type": "capture_chromatic",
@@ -8414,6 +8705,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -8442,6 +8737,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -8497,6 +8796,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -8548,6 +8851,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -8620,6 +8927,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -8665,6 +8976,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -8731,6 +9046,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -8784,6 +9103,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌",
       "obtainMethods": [
@@ -8815,6 +9138,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -8912,6 +9239,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -9248,6 +9579,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -9295,9 +9630,17 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的加油蟹"
+      "desc": "确认2种不同样子的加油蟹",
+      "requiredForms": [
+        "单只海葵的样子",
+        "（双只海葵的样子）"
+      ]
     },
     {
       "type": "destined_hero",
@@ -9364,6 +9707,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -9409,6 +9756,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -9458,6 +9809,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -9503,6 +9858,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -9552,6 +9911,10 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -9597,6 +9960,10 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "destined_hero",
@@ -9645,7 +10012,11 @@
     {
       "type": "confirm_forms",
       "count": 2,
-      "desc": "确认2种不同样子的幽灵眼"
+      "desc": "确认2种不同样子的幽灵眼",
+      "requiredForms": [
+        "闭眼的样子",
+        "睁眼的样子"
+      ]
     },
     {
       "type": "capture_chromatic",

@@ -8,8 +8,11 @@
 |------|------|
 | 启动本地服务 | `node server.js`（端口 8899） |
 | 打开界面 | 浏览器访问 `http://localhost:8899` |
+| 人类快速接入 | `README.md` |
 | 修改收集进度 | 直接编辑 `data/collections.json` 或通过 UI 勾选 |
+| 后续待办 | `tasks/todo.md` |
 | **人工核对任务/宠物数据** | 浏览器访问 `http://localhost:8899/review.html` |
+| 多形态数据/UI 验证 | `node scripts/validate-multiform-data.js` + `node scripts/validate-multiform-ui.js` |
 | 宠物定义 | `data/pets.json`（373 只，对象 key="pet_N"） |
 | 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
 | 进化链 | `data/evolution-chains.json`（165 链，全覆盖 373 只） |
@@ -30,11 +33,14 @@
 
 ```
 lkwj/
+├── README.md                  # 人类快速接入：运行方式、数据边界、验证命令
 ├── server.js                  # HTTP 服务器，端口 8899
-├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 精灵果实 + 7 品类标签
+├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 多形态 + 精灵果实 + 7 品类标签
 ├── review.html                # 人工核对工具：精灵/任务/形态标注 + 进化链核对，两栏布局
 ├── scripts/
-│   └── fix-shiny-and-chains.js # 异色/炫彩标签修正 + 进化链传播
+│   ├── fix-shiny-and-chains.js       # 异色/炫彩标签修正 + 进化链传播
+│   ├── validate-multiform-data.js    # 多形态 requiredForms / forms 数据约束验证
+│   └── validate-multiform-ui.js      # 多形态 Tab / 随机模块静态结构验证
 └── data/
     ├── pets.json              # 宠物定义（373 只）：形态 + 标签 + 元素数组
     ├── tasks.json             # 任务定义（373 组）：form-independent，desc 不含宠物名
@@ -96,18 +102,20 @@ lkwj/
     { "type": "capture_gifted", "desc": "捕捉1只了不起天分的" },
     { "type": "skill", "desc": "使用", "skillName": "龙卷风", "count": 3 },
     { "type": "fruit", "desc": "捕捉20只精灵" },
+    { "type": "confirm_forms", "desc": "确认4种不同样子的岚鸟", "count": 4, "requiredForms": ["本来的样子", "秋天的样子", "春天的样子", "夏天的样子"] },
     { "type": "leader_evolve", "desc": "进化为首领形态" }
   ]
 }
 ```
 
-任务类型（10 种）：`capture`, `capture_gifted`, `capture_chromatic`(炫彩突变), `fruit`(精灵果实课题任务：捕捉 20 只获得果实，仅课题任务类型的果实有此任务), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
+任务类型（11 种）：`capture`, `capture_gifted`, `capture_chromatic`(炫彩突变), `capture_shiny`(异色突变), `fruit`(精灵果实课题任务：捕捉 20 只获得果实，仅课题任务类型的果实有此任务), `skill`, `evolve`, `leader_evolve`, `destined_hero`, `affection`, `confirm_forms`
 
 关键规则：
 - 任务是**形态无关**的——同一宠物所有形态共享同一份任务进度
-- 任务只来自 Excel `课题进度` sheet，并排除 `异色` 行；`果实进度`、`多形态进度`、`forms.*.obtainMethods` 只能补已有任务的达成方式，不能反向生成任务
+- 任务只来自 Excel `课题进度` sheet；`异色` 行作为 `capture_shiny` 任务纳入；`果实进度`、`多形态进度`、`forms.*.obtainMethods` 只能补已有任务的达成方式，不能反向生成任务
 - `desc` 不含宠物名，前台拼接（如 "岚鸟" + "使用" + "龙卷风" + "3" + "次"）
 - skill 类任务额外提供 `skillName` 和 `count`
+- `confirm_forms.requiredForms` 只表示课题计入形态；全形态收集状态独立保存在 `collections.sprite_progress[petKey].forms_collected`
 - `capture_chromatic` 对应炫彩突变捕捉（所有精灵除迪莫外都有炫彩），与异色（tags.shiny）无关
 - `fruit` 说人话是“精灵果实课题任务”，不是“果实图鉴”。有果实不代表有 fruit 任务；有 fruit 任务一定有果实
 
@@ -179,9 +187,9 @@ lkwj/
 
 ## 数据约束
 
-- **捕捉类任务获取方式（引用机制）**：capture/capture_gifted/capture_chromatic/fruit 四种任务的 obtainMethods **不存在 tasks.json 中**，前端通过 `getCaptureObtainMethods(petKey)` 动态解析，链路：`pets.json forms.basic.obtainMethods` → 进化链上游兜底（`No.{num} {name} {level}级进化获得`）。改获取方式只需改 pets.json 一处。覆盖率 372/373（仅 pet_353 凡鹰无捕捉任务，不适用）
+- **捕捉类任务获取方式（引用机制）**：capture/capture_gifted/capture_chromatic/capture_shiny/fruit 五种任务的 obtainMethods **不存在 tasks.json 中**，前端通过 `getCaptureObtainMethods(petKey)` 动态解析，链路：`pets.json forms.basic.obtainMethods` → 进化链上游兜底（`No.{num} {name} {level}级进化获得`）。改获取方式只需改 pets.json 一处。覆盖率 372/373（仅 pet_353 凡鹰无捕捉任务，不适用）
 - **evolve 类任务归属**：leader_evolve/evolve 只需挂在进化前的 pet 上（form-independent）
-- **capture_chromatic ≠ 异色**：`capture_chromatic` 是炫彩突变捕捉任务（所有精灵除迪莫外都有），与 `tags.shiny`（异色标签，仅限时获取精灵有）完全独立
+- **capture_chromatic ≠ capture_shiny**：`capture_chromatic` 是炫彩突变捕捉任务（所有精灵除迪莫外都有），`capture_shiny` 是 Excel `课题进度` 中 `异色` 行对应的异色突变捕捉任务
 - **异色炫彩展示**：由 `pets.json` 的 `tags.shiny` 驱动，仅展示进化最终形态（标签随进化传递）
 - **异色炫彩进度**：独立统计于 `collections.shiny_progress`，不由任何 task 状态驱动
 - **异色必有限定时间**：`tags.shiny.limitedTime` 不可为"可获取"，异色均为赛季/通行证/活动限定
@@ -189,6 +197,7 @@ lkwj/
 - **随机任务排除**：`destined_hero`、`fruit`、`confirm_forms` 任务类型不出现在随机池
 - **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
 - **果实任务边界**：fruit 任务以 `课题进度` sheet 的“果实”课题行为准；`果实进度` 是家族级果实记录/获取方式来源，不是任务清单
+- **多形态收集边界**：`pets.forms` 保存全部可收集形态；前端「多形态」Tab 独立勾选 `forms_collected`；`confirm_forms` 任务只引用 `requiredForms` 自动判断是否完成
 
 ## 已知数量
 
@@ -196,11 +205,11 @@ lkwj/
 |------|------|
 | 宠物总数 | 373（含 S2，pet_348~375 跳过 351/352） |
 | 形态：basic | 373 |
-| 形态：多形态（非 basic） | 50 只精灵有额外形态 |
+| 形态：多形态（非 basic/leader） | 57 只精灵有额外形态，共 143 个独立形态收集项 |
 | 首领形态（forms.leader） | 27 只（全部已确认名称） |
-| 异色标签 | 38（S1:17, S2:16, 通行证:4, 活动:1；均为进化最终形态） |
+| 异色标签 | 38（S1「暗夜拾光」:17, S2「狂欢怪谈」:16, S1通行证:2, S2通行证:2, 活动限定:1；均为进化最终形态） |
 | 炫彩标签 | 354（所有精灵除迪莫外都有炫彩） |
-| 真实课题任务总数 | 1848（`课题进度` 排除 `异色` 后） |
+| 真实课题任务总数 | 1882（`课题进度` 含 34 条 `异色` 任务） |
 | 进化链 | 165（全覆盖 373 只，无幽灵节点） |
 | 精灵果实课题任务（fruit） | 96 条（任务口径；仅"课题任务"类型的果实有此任务） |
 | 果实图鉴记录 | 143 个家族有果实（7 个无果实：迪莫/传说精灵3只/特殊奇遇2只/学院呱呱）；来源 Excel 果实进度 sheet |
@@ -228,6 +237,7 @@ lkwj/
 - [x] UI 适配新数据模型（全部 Tab 通过）
 - [x] 全量数据核对（对照外部表格）— 2026-06-01：精灵 373 只/任务全量/进化链 165 条/首领形态 27 只
 - [x] 任务口径修正：删除 256 条伪 fruit 任务，tasks.json 闭合 1848 条；fruit 课题任务 96 条 — 2026-06-03
+- [x] 异色任务口径更新：Excel `课题进度` 的 34 条 `异色` 行导入为 `capture_shiny`，tasks.json 闭合 1882 条 — 2026-06-08
 - [x] 5 只精灵首领名确认（叶冕魔力猫/烈火战神/圣水守护/神谕鲨/彩虹独角兽） — 2026-06-03
 - [x] 果实数据全量补充：143 只精灵有果实，6 种获取方式分类，互斥组逻辑 — 2026-06-04
 - [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
