@@ -95,6 +95,65 @@ class GenerateRulesTest(unittest.TestCase):
         for class_name, weight in expected.items():
             self.assertEqual(generate.CLASS_FREQ_WEIGHTS[class_name], weight)
 
+    def test_scene_ratios_include_dense_layouts_and_sum_to_one(self):
+        self.assertAlmostEqual(sum(generate.SCENE_RATIOS.values()), 1.0)
+        self.assertEqual(generate.SCENE_RATIOS[generate.SceneType.ROW_LAYOUT.value], 0.20)
+        self.assertEqual(generate.SCENE_RATIOS[generate.SceneType.GRID_LAYOUT.value], 0.20)
+        self.assertEqual(generate.SCENE_RATIOS[generate.SceneType.GIFT_PACKAGE.value], 0.20)
+
+        scenes = generate.scene_sequence_for_count(100)
+
+        self.assertEqual(scenes.count(generate.SceneType.ROW_LAYOUT), 20)
+        self.assertEqual(scenes.count(generate.SceneType.GRID_LAYOUT), 20)
+        self.assertEqual(scenes.count(generate.SceneType.GIFT_PACKAGE), 20)
+
+    def test_dense_layouts_generate_repeated_instance_labels(self):
+        asset = Image.new("RGBA", (60, 90), (200, 30, 30, 255))
+        assets = {
+            "益生菌": (0, asset),
+            "玉米片-玉米浓汤味": (1, asset),
+            "冰霸杯": (2, asset),
+        }
+
+        row_img, row_labels = generate.generate_one(
+            assets,
+            canvas_size=256,
+            profile=generate.Profile.BUSINESS_VAL,
+            scene_type=generate.SceneType.ROW_LAYOUT,
+        )
+        grid_img, grid_labels = generate.generate_one(
+            assets,
+            canvas_size=256,
+            profile=generate.Profile.BUSINESS_VAL,
+            scene_type=generate.SceneType.GRID_LAYOUT,
+        )
+        gift_img, gift_labels = generate.generate_one(
+            assets,
+            canvas_size=256,
+            profile=generate.Profile.BUSINESS_VAL,
+            scene_type=generate.SceneType.GIFT_PACKAGE,
+        )
+
+        self.assertEqual(row_img.mode, "RGB")
+        self.assertEqual(grid_img.mode, "RGB")
+        self.assertEqual(gift_img.mode, "RGB")
+        self.assertGreaterEqual(len(row_labels), 3)
+        self.assertGreaterEqual(len(grid_labels), 6)
+        self.assertGreaterEqual(len(gift_labels), 6)
+
+    def test_drop_shadow_paints_pixels_outside_product_alpha(self):
+        canvas = Image.new("RGBA", (80, 80), (255, 255, 255, 255))
+        item = Image.new("RGBA", (20, 20), (200, 30, 30, 255))
+
+        generate.paste_with_shadow(canvas, item, 20, 20, enabled=True)
+
+        shadow_pixels = [
+            canvas.getpixel((x, y))
+            for x in range(41, 50)
+            for y in range(41, 50)
+        ]
+        self.assertTrue(any(pixel != (255, 255, 255, 255) for pixel in shadow_pixels))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,6 +13,7 @@
 
 import argparse
 import json
+import math
 import random
 import sys
 from dataclasses import dataclass
@@ -20,7 +21,7 @@ from enum import Enum
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageFilter
 
 
 # ── 配置 ──────────────────────────────────────────────────────────────────────
@@ -34,9 +35,12 @@ MIN_VISIBLE_RATIO = 0.35
 ALPHA_THRESHOLD = 20
 
 SCENE_RATIOS = {
-    "single": 0.20,
-    "mixed_clean": 0.35,
-    "mixed_occluded": 0.45,
+    "single": 0.10,
+    "mixed_clean": 0.15,
+    "mixed_occluded": 0.15,
+    "row_layout": 0.20,
+    "grid_layout": 0.20,
+    "gift_package": 0.20,
 }
 
 OCCLUSION_BUCKETS = (
@@ -66,6 +70,17 @@ SIMILAR_CLASS_GROUPS = {
     "KGO手提袋": ("帆布袋", "新年礼袋"),
 }
 
+DENSE_REPEAT_CLASS_NAMES = (
+    "玉米片-玉米浓汤味",
+    "玉米片-香菜牛肉味",
+    "益生菌",
+    "营养粉-莓果味",
+    "营养粉-牛油果味",
+    "帆布袋",
+    "一次性吸管袋",
+    "腰围卡尺",
+)
+
 
 class Profile(str, Enum):
     TRAIN = "train"
@@ -76,6 +91,9 @@ class SceneType(str, Enum):
     SINGLE = "single"
     MIXED_CLEAN = "mixed_clean"
     MIXED_OCCLUDED = "mixed_occluded"
+    ROW_LAYOUT = "row_layout"
+    GRID_LAYOUT = "grid_layout"
+    GIFT_PACKAGE = "gift_package"
 
 
 @dataclass(frozen=True)
@@ -139,29 +157,33 @@ def weighted_sample_classes(asset_names: list, n: int) -> list:
 
 
 def scene_sequence_for_count(count: int) -> list[SceneType]:
-    """按 20/35/45 生成固定比例场景序列，避免小数据集比例漂移过大。"""
+    """按 SCENE_RATIOS 生成固定比例场景序列，避免小数据集比例漂移过大。"""
     if count <= 0:
         return []
-    single_count = round(count * SCENE_RATIOS[SceneType.SINGLE.value])
-    clean_count = round(count * SCENE_RATIOS[SceneType.MIXED_CLEAN.value])
-    occluded_count = count - single_count - clean_count
-    scenes = (
-        [SceneType.SINGLE] * single_count
-        + [SceneType.MIXED_CLEAN] * clean_count
-        + [SceneType.MIXED_OCCLUDED] * occluded_count
-    )
+    exact_counts = {
+        scene: count * SCENE_RATIOS[scene.value]
+        for scene in SceneType
+    }
+    base_counts = {scene: math.floor(value) for scene, value in exact_counts.items()}
+    remainder = count - sum(base_counts.values())
+    for scene, _fraction in sorted(
+        exact_counts.items(),
+        key=lambda item: item[1] - math.floor(item[1]),
+        reverse=True,
+    )[:remainder]:
+        base_counts[scene] += 1
+
+    scenes = []
+    for scene in SceneType:
+        scenes.extend([scene] * base_counts[scene])
     random.shuffle(scenes)
     return scenes
 
 
 def choose_scene_type() -> SceneType:
     return random.choices(
-        [SceneType.SINGLE, SceneType.MIXED_CLEAN, SceneType.MIXED_OCCLUDED],
-        weights=[
-            SCENE_RATIOS[SceneType.SINGLE.value],
-            SCENE_RATIOS[SceneType.MIXED_CLEAN.value],
-            SCENE_RATIOS[SceneType.MIXED_OCCLUDED.value],
-        ],
+        list(SceneType),
+        weights=[SCENE_RATIOS[scene.value] for scene in SceneType],
         k=1,
     )[0]
 
@@ -229,9 +251,45 @@ def mask_on_canvas(resized: Image.Image, x: int, y: int, canvas_size: int) -> np
     return mask
 
 
+def paste_with_shadow(
+    canvas: Image.Image,
+    item: Image.Image,
+    x: int,
+    y: int,
+    enabled: bool = True,
+) -> None:
+    """Paste an RGBA product, optionally adding a subtle white-background shadow."""
+    if enabled:
+        offset_x = random.randint(3, 6)
+        offset_y = random.randint(3, 6)
+        alpha = item.getchannel("A")
+        shadow_alpha = alpha.filter(ImageFilter.GaussianBlur(radius=random.uniform(4.0, 7.0)))
+        shadow_strength = random.randint(50, 90)
+        shadow = Image.new("RGBA", item.size, (0, 0, 0, shadow_strength))
+        shadow.putalpha(shadow_alpha)
+        canvas.alpha_composite(shadow, (x + offset_x, y + offset_y))
+    canvas.paste(item, (x, y), item)
+
+
 def scale_range_for_scene(scene_type: SceneType, n_total: int) -> tuple[float, float]:
     if scene_type == SceneType.SINGLE:
         return (0.45, 0.72)
+    if scene_type == SceneType.ROW_LAYOUT:
+        if n_total <= 4:
+            return (0.18, 0.28)
+        if n_total <= 8:
+            return (0.13, 0.20)
+        if n_total <= 12:
+            return (0.10, 0.16)
+        return (0.08, 0.13)
+    if scene_type in {SceneType.GRID_LAYOUT, SceneType.GIFT_PACKAGE}:
+        if n_total <= 4:
+            return (0.13, 0.22)
+        if n_total <= 8:
+            return (0.09, 0.16)
+        if n_total <= 12:
+            return (0.07, 0.13)
+        return (0.05, 0.10)
     if n_total <= 3:
         return (0.28, 0.52)
     if n_total <= 6:
@@ -293,8 +351,33 @@ def build_scene_specs(assets: dict, scene_type: SceneType) -> list[InstanceSpec]
     if not asset_names:
         return []
 
-    if scene_type == SceneType.SINGLE or len(asset_names) == 1:
+    if scene_type == SceneType.SINGLE:
         return [InstanceSpec(weighted_sample_classes(asset_names, 1)[0])]
+
+    if scene_type == SceneType.ROW_LAYOUT:
+        dense_names = [name for name in DENSE_REPEAT_CLASS_NAMES if name in assets] or asset_names
+        name = weighted_sample_classes(dense_names, 1)[0]
+        return [InstanceSpec(name, role="row") for _ in range(random.randint(3, 10))]
+
+    if scene_type == SceneType.GRID_LAYOUT:
+        dense_names = [name for name in DENSE_REPEAT_CLASS_NAMES if name in assets] or asset_names
+        n_types = min(random.randint(1, min(2, len(dense_names))), len(dense_names))
+        chosen = weighted_sample_classes(dense_names, n_types)
+        total = random.randint(6, 20)
+        return [InstanceSpec(random.choice(chosen), role="grid") for _ in range(total)]
+
+    if scene_type == SceneType.GIFT_PACKAGE:
+        main_count = random.randint(1, 3)
+        gift_count = random.randint(6, 10)
+        gift_pool = [name for name in DENSE_REPEAT_CLASS_NAMES if name in assets] or asset_names
+        main_names = weighted_sample_classes(asset_names, min(main_count, len(asset_names)))
+        gift_names = weighted_sample_classes(gift_pool, min(2, len(gift_pool)))
+        specs = [InstanceSpec(name, role="main") for name in main_names]
+        specs.extend(InstanceSpec(random.choice(gift_names), role="gift") for _ in range(gift_count))
+        return specs
+
+    if len(asset_names) == 1:
+        return [InstanceSpec(asset_names[0])]
 
     if scene_type == SceneType.MIXED_CLEAN:
         n_types = min(random.randint(2, min(6, len(asset_names))), len(asset_names))
@@ -390,6 +473,83 @@ def load_assets(brand_dir: Path) -> dict:
     return assets
 
 
+def dense_grid_shape(n_total: int, scene_type: SceneType) -> tuple[int, int]:
+    if scene_type == SceneType.ROW_LAYOUT:
+        cols = min(10, max(3, n_total))
+    else:
+        cols = max(3, math.ceil(math.sqrt(n_total * 1.35)))
+    rows = math.ceil(n_total / cols)
+    return rows, cols
+
+
+def clamp_position(
+    x: int,
+    y: int,
+    pw: int,
+    ph: int,
+    canvas_size: int,
+    margin: int | None = None,
+) -> tuple[int, int]:
+    if margin is None:
+        margin = max(8, int(canvas_size * 0.035))
+    return (
+        min(max(x, margin), max(margin, canvas_size - pw - margin)),
+        min(max(y, margin), max(margin, canvas_size - ph - margin)),
+    )
+
+
+def dense_layout_position(
+    canvas_size: int,
+    pw: int,
+    ph: int,
+    index: int,
+    specs: list[InstanceSpec],
+    scene_type: SceneType,
+) -> tuple[int, int]:
+    total = len(specs)
+
+    if scene_type == SceneType.GIFT_PACKAGE and specs[index].role == "main":
+        main_total = sum(1 for spec in specs if spec.role == "main")
+        main_index = sum(1 for spec in specs[:index] if spec.role == "main")
+        x_center = int(canvas_size * (main_index + 1) / (main_total + 1))
+        y_center = int(canvas_size * random.uniform(0.23, 0.36))
+        return clamp_position(x_center - pw // 2, y_center - ph // 2, pw, ph, canvas_size)
+
+    if scene_type == SceneType.GIFT_PACKAGE:
+        gift_indices = [i for i, spec in enumerate(specs) if spec.role == "gift"]
+        local_index = gift_indices.index(index)
+        local_total = len(gift_indices)
+        rows, cols = dense_grid_shape(local_total, SceneType.GRID_LAYOUT)
+        row = local_index // cols
+        col = local_index % cols
+        x_center = int(canvas_size * (col + 1) / (cols + 1))
+        row_gap = max(1, int(ph * random.uniform(0.70, 0.90)))
+        top = int(canvas_size * 0.50)
+        y_center = top + row * row_gap + ph // 2
+        x_jitter = int(random.uniform(-0.025, 0.025) * canvas_size)
+        y_jitter = int(random.uniform(-0.015, 0.015) * canvas_size)
+        return clamp_position(x_center - pw // 2 + x_jitter, y_center - ph // 2 + y_jitter, pw, ph, canvas_size)
+
+    rows, cols = dense_grid_shape(total, scene_type)
+    row = index // cols
+    col = index % cols
+    x_center = int(canvas_size * (col + 1) / (cols + 1))
+
+    if scene_type == SceneType.ROW_LAYOUT:
+        row_gap = int(ph * 0.95)
+        start_y = int(canvas_size * (0.50 - 0.08 * max(rows - 1, 0)))
+        y_center = start_y + row * row_gap
+    else:
+        row_gap = max(1, int(ph * random.uniform(0.70, 0.90)))
+        total_height = row_gap * max(rows - 1, 0) + ph
+        start_y = max(int(canvas_size * 0.16), (canvas_size - total_height) // 2)
+        y_center = start_y + row * row_gap + ph // 2
+
+    x_jitter = int(random.uniform(-0.018, 0.018) * canvas_size)
+    y_jitter = int(random.uniform(-0.012, 0.012) * canvas_size)
+    return clamp_position(x_center - pw // 2 + x_jitter, y_center - ph // 2 + y_jitter, pw, ph, canvas_size)
+
+
 def place_instances(
     assets: dict,
     specs: list[InstanceSpec],
@@ -401,6 +561,7 @@ def place_instances(
     placed_masks = []
     placed_boxes = []
     scale_range = scale_range_for_scene(scene_type, len(specs))
+    dense_scene = scene_type in {SceneType.ROW_LAYOUT, SceneType.GRID_LAYOUT, SceneType.GIFT_PACKAGE}
 
     for index, spec in enumerate(specs):
         class_id, asset_img = assets[spec.class_name]
@@ -422,6 +583,13 @@ def place_instances(
         placed = False
         role = spec.role
 
+        if dense_scene:
+            x, y = dense_layout_position(canvas_size, pw, ph, index, specs, scene_type)
+            paste_with_shadow(canvas, resized, x, y, enabled=True)
+            placed_masks.append(PlacedMask(class_id=class_id, mask=mask_on_canvas(resized, x, y, canvas_size)))
+            placed_boxes.append((x, y, x + pw, y + ph))
+            continue
+
         for attempt in range(MAX_PLACE_ATTEMPTS):
             if scene_type == SceneType.MIXED_OCCLUDED and placed_boxes and (
                 attempt < MAX_PLACE_ATTEMPTS * 0.65 or role in {"foreground", "background"}
@@ -437,7 +605,7 @@ def place_instances(
                 if overlap:
                     continue
 
-            canvas.paste(resized, (x, y), resized)
+            paste_with_shadow(canvas, resized, x, y, enabled=profile == Profile.TRAIN)
             placed_masks.append(PlacedMask(class_id=class_id, mask=mask_on_canvas(resized, x, y, canvas_size)))
             placed_boxes.append(box)
             placed = True
@@ -445,7 +613,7 @@ def place_instances(
 
         if not placed and scene_type != SceneType.MIXED_CLEAN:
             x, y = random_position(canvas_size, pw, ph, role=role)
-            canvas.paste(resized, (x, y), resized)
+            paste_with_shadow(canvas, resized, x, y, enabled=profile == Profile.TRAIN)
             placed_masks.append(PlacedMask(class_id=class_id, mask=mask_on_canvas(resized, x, y, canvas_size)))
             placed_boxes.append((x, y, x + pw, y + ph))
 
@@ -519,6 +687,8 @@ def write_dataset(
         print(f"[preview 模式] 只生成 {count} 张，输出到 {out_dir}/preview/")
         out_images = out_dir / "preview"
         out_images.mkdir(parents=True, exist_ok=True)
+        for stale_preview in out_images.glob("preview_*.jpg"):
+            stale_preview.unlink()
         for i, scene_type in enumerate(scene_sequence_for_count(count)):
             img, _ = generate_one(assets, profile=profile, scene_type=scene_type)
             img.save(out_images / f"preview_{i:04d}_{scene_type.value}.jpg", quality=92)
@@ -545,11 +715,11 @@ def write_dataset(
     for split, n in split_plan:
         scenes = scene_sequence_for_count(n)
         scene_counts = {scene.value: scenes.count(scene) for scene in SceneType}
-        print(
-            f"  {split} 场景: single={scene_counts['single']} "
-            f"mixed_clean={scene_counts['mixed_clean']} "
-            f"mixed_occluded={scene_counts['mixed_occluded']}"
+        scene_summary = " ".join(
+            f"{scene.value}={scene_counts[scene.value]}"
+            for scene in SceneType
         )
+        print(f"  {split} 场景: {scene_summary}")
         for i, scene_type in enumerate(scenes):
             img, labels = generate_one(assets, profile=profile, scene_type=scene_type)
             stem = f"{split}_{i:05d}"
