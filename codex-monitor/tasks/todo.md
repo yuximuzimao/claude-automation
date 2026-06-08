@@ -12,6 +12,20 @@ Claude Code 已正式放行并已完成：
 - 第一版已封板（2026-06-02）：本地 JSONL 读取、近 30 天聚合、Top 项目、tkinter 浮窗、折叠态、macOS `.app` wrapper、LaunchAgent plist 生成和刷新 fallback 已完成。
 - 代码质量：/simplify 通过 — 提取 `reader_common.py`、单次文件 open、`dataclasses.replace`、去 WHAT 注释（27/27 测试，2026-06-01）。
 - 封板验证：`python3.13 -m unittest discover -s tests -v`、`python3.13 -m compileall app tests`、`python3.13 main.py --smoke-aggregate` 均通过（2026-06-02）。
+- 项目推断误分类已修复（2026-06-04）：`reader_common.infer_project_from_handle()` 按事件类型加权，跳过 Codex 工具调用/输出/token_count 噪声，扫描窗口提高到 200 行；`tests/test_reader_common.py` 已覆盖回归场景。
+- UI 卡顿和高 CPU 已修复（2026-06-06）：watcher/polling 触发的聚合读取移出 tkinter 主线程，刷新中请求合并，自动刷新 60 秒节流；`.app` 进程实测空闲 CPU 0.0-0.2%，RSS 约 185-191MB；`python3 -m unittest discover -s tests -v` 43/43 通过，`python3 -m compileall app tests` 通过。
+
+## 未处理问题
+
+- [ ] **P0：项目流量归因仍需复查（2026-06-04）**
+  - 现象：2026-06-04 用户没有用 AI 对鲸灵售后自动化做优化，但流量统计里仍出现售后项目消耗。
+  - 已知进展：Claude 已修复过一轮，修复后一开始统计确实有变化。
+  - 剩余问题：2026-06-04 下班前再次查看，仍有部分统计归因错误。
+  - 下次处理方向：继续排查项目推断逻辑，重点验证是否还有工具输出、历史路径、cwd fallback、session 内容路径或中文项目名映射把无关会话误判进 `aftersales-automation`。
+- [ ] **P2：售后自动化当日 token 统计继续观察（2026-06-06）**
+  - 现象：此前出现过售后自动化今日 token 计算不对。
+  - 2026-06-06 观察：用户反馈未再出现。
+  - 处理策略：暂不改代码，连续观察数日；若复现再按项目归因链路重新定位。
 
 ## 阶段 0：项目初始化
 

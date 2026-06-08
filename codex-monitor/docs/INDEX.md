@@ -31,7 +31,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - 按 `message.model` 动态分桶，不硬编码模型白名单。
 - `<synthetic>` 独立保留为一个模型桶。
 - `cwd` 来自记录顶层字段。
-- `.claude/projects` 当前体量约 3.8GB，UI 主线程不得全量同步扫描。
+- `.claude/projects` 当前体量约 3.9GB，UI 主线程不得全量同步扫描。
 - `read_claude_projects()` 支持 `modified_since` 和 `max_files`，用于 smoke check 和后续 UI 调用前的性能边界。
 - `main.py --smoke-claude` 默认使用 1 天 mtime 窗口且最多读取 200 个 JSONL 文件。
 - `cache_creation.ephemeral_5m_input_tokens` 和 `cache_creation.ephemeral_1h_input_tokens` 必须保留，UI 可暂不展示。
@@ -56,6 +56,9 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - LaunchAgent 路径：`~/Library/LaunchAgents/com.local.codex-monitor.plist`。
 - LaunchAgent 日志路径：`~/Library/Logs/Codex Monitor/stdout.log` 和 `~/Library/Logs/Codex Monitor/stderr.log`。
 - 实时刷新优先使用 `watchdog`；不可用时使用 5 秒轮询 fallback。
+- 文件变化检测、聚合读取和 JSONL 解析不得在 tkinter 主线程执行；主线程只负责旧数据展示、交互和应用后台结果。
+- 自动刷新必须 debounce，并设置 60 秒最小间隔；文件持续写入时宁可数据延迟，也不能连续占满 CPU 或阻塞 UI。
+- 刷新中再次触发自动刷新时只合并为下一次请求，不并发堆叠多个 reader/aggregate worker。
 
 ## 6. 聚合层口径
 
@@ -64,7 +67,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Codex token 使用 `TokenUsage.total_tokens`。
 - Claude token 使用 `ClaudeUsage.total_estimated_tokens`，即 `input + output + cache_creation + cache_read`。
 - Top 10 项目按近 30 天 token 排序；0 token 项目不展示。
-- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容前 100 行的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。
+- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容前 200 行的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层按事件类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude `user` 事件 5x，普通 `message`/`session_meta`/`reasoning` 等 1x，`function_call_output` / `function_call` / `token_count` 不参与投票（weight=0）。
 - 未识别项目统一合并为 `其他`，token 求和后参与 Top 10 排序。
 - Top 项目保留最多 3 个 `sample_cwds`，供 UI tooltip/详情展示完整路径。
 - 项目中文名的维护边界在项目自身说明文件，不在监控软件内维护中心映射表。
@@ -73,5 +76,8 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 
 - Codex `rate_limits` 不在事件顶层；早期临时判断已被真实扫描推翻。
 - 文件路径只能用于扫描优化，今日/近 30 天归属仍以事件 timestamp 为准。
+- Codex `function_call_output` 常包含目录列表，一条记录可能有 50+ 条无关 `/claude/{project}` 路径，若参与投票会完全淹没真实信号（已验证：单条 `function_call_output` 59票 vs `message` 4票）。修复方案见 `app/reader_common.py`：事件类型加权 + 扫描窗口 200 行。回归测试在 `tests/test_reader_common.py`。
+- 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。
+- `watchdog` 不是标准库；未安装时会走 polling fallback。polling 只能做轻量 mtime 检测，不能直接触发主线程聚合或高频后台聚合。
 - 测试 fixture 必须脱敏，只保留结构和 token 数字。
 - 开机自启只生成 plist，不自动 bootstrap；写错 plist 后由用户手动启用/回滚，避免挂起登录态。
