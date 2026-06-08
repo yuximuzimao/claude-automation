@@ -75,6 +75,7 @@ download → read_skus → recognize → annotate → match → read_erp → ver
 - `annotate` 步骤自动注入不可见配件（读 `data/products/{brand}/accessories.json`）
 - 支持 `--from annotate` 从中间步骤续跑；`--brand hee` 指定品牌（默认 `kgos`）
 - `stage` 状态机：`skus_read → images_done → annotated → matched → verified`
+- KGOS 真实 SKU 主图语料在微信文件目录 `.../2026-05/1主图汇总`；用于 product-detect 黄金验证集建设，不提交 Git，不与 HEE 历史 `data/imgs/` 混用
 
 ### 档案V2 查询流程
 

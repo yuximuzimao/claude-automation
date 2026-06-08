@@ -115,6 +115,8 @@
 
 **参考图库**：`data/products/{brand}/*.jpg` — 单品标准图，命名 = 商品名称（如 `data/products/kgos/益生菌.jpg`、`data/products/hee/悦颜霜.jpg`）
 
+**KGOS 真实主图语料**：用户在微信文件目录 `.../2026-05/1主图汇总` 收集了 270 张 KGOS 实际 SKU 主图。该目录用于 product-detect 数据集质量审查和黄金验证集建设；不要直接提交到 Git，也不要把 HEE 历史 `data/imgs/` 当作 KGOS 训练分布。
+
 **配件不识图**：礼盒/礼袋/雪梨纸等不可见配件**不在识图范围内**，由系统在 annotate 步骤读取 `data/products/{brand}/accessories.json` 自动注入。识图时只记录图片中**可见**商品。
 
 ---
