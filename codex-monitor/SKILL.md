@@ -23,6 +23,8 @@ Read these first:
 - Do not call `chatgpt.com/backend-api/wham/usage` for MVP work.
 - Do not output conversation content from JSONL files.
 - Do not scan all of `/Users/chat/.claude/projects` from the UI thread.
+- Do not run JSONL reading, aggregation, or recursive mtime scans on the tkinter main thread.
+- Keep automatic UI refreshes debounced, coalesced, and throttled; prefer stale data over a frozen window or sustained CPU burn.
 - Preserve token breakdown fields even when UI displays only totals.
 
 ## Verification

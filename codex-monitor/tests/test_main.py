@@ -94,6 +94,66 @@ class MainCliTests(unittest.TestCase):
         self.assertEqual(read_claude.call_args.kwargs["modified_since"], 123.0)
         self.assertEqual(read_claude.call_args.kwargs["max_files"], 50)
 
+    def test_runtime_factory_uses_window_async_refresh_for_watcher(self) -> None:
+        parser = main.build_parser()
+        args = parser.parse_args(
+            [
+                "--sessions-root",
+                "/tmp/codex",
+                "--claude-projects-root",
+                "/tmp/claude",
+                "--claude-max-files",
+                "200",
+            ]
+        )
+
+        after_calls: list[tuple[int, object]] = []
+
+        class FakeRoot:
+            def after(self, delay_ms: int, callback: object) -> None:
+                after_calls.append((delay_ms, callback))
+
+            def protocol(self, _name: str, _callback: object) -> None:
+                return None
+
+        class FakeWindow:
+            def __init__(self) -> None:
+                self.requests: list[RefreshRequest] = []
+
+            def refresh_async(self, request: RefreshRequest) -> None:
+                self.requests.append(request)
+
+            def _on_close(self) -> None:
+                return None
+
+        captured_on_change = None
+
+        def fake_start_watchdog(_paths: object, on_change: object) -> object:
+            nonlocal captured_on_change
+            captured_on_change = on_change
+            return object()
+
+        root = FakeRoot()
+        window = FakeWindow()
+        factory = main._build_runtime_factory(args)
+        with (
+            patch("main.start_watchdog_observer", side_effect=fake_start_watchdog),
+            patch("main.time.time", side_effect=[100.0, 100.6]),
+        ):
+            factory(root, window)
+            assert captured_on_change is not None
+            captured_on_change(Path("changed.jsonl"))
+            flush_loop = after_calls[0][1]
+            flush_loop()
+
+        self.assertEqual(len(window.requests), 1)
+        self.assertEqual(window.requests[0].reason, "watcher")
+        self.assertEqual(window.requests[0].claude_max_files, 200)
+        self.assertFalse(
+            any(delay == 0 for delay, _ in after_calls),
+            "watcher refresh must not schedule main-thread aggregate loading",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

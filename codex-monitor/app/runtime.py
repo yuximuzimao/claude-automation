@@ -26,12 +26,15 @@ class DebouncedRefresher:
         delay_seconds: float = 0.5,
         incremental_window_seconds: float = 300.0,
         claude_max_files: int = 50,
+        min_interval_seconds: float = 0.0,
     ) -> None:
         self.refresh_fn = refresh_fn
         self.delay_seconds = delay_seconds
         self.incremental_window_seconds = incremental_window_seconds
         self.claude_max_files = claude_max_files
+        self.min_interval_seconds = min_interval_seconds
         self._pending_due_at: float | None = None
+        self._last_refresh_at: float | None = None
 
     def notify_change(self, _path: Path, *, now: float) -> None:
         self._pending_due_at = now + self.delay_seconds
@@ -39,7 +42,13 @@ class DebouncedRefresher:
     def flush_due(self, *, now: float) -> bool:
         if self._pending_due_at is None or now < self._pending_due_at:
             return False
+        if self._last_refresh_at is not None and self.min_interval_seconds > 0:
+            earliest = self._last_refresh_at + self.min_interval_seconds
+            if now < earliest:
+                self._pending_due_at = earliest
+                return False
         self._pending_due_at = None
+        self._last_refresh_at = now
         self.refresh_fn(
             RefreshRequest(
                 reason="watcher",
@@ -74,8 +83,13 @@ def _latest_mtime(path: Path) -> float | None:
         if path.is_file():
             return path.stat().st_mtime
         if path.is_dir():
-            mtimes = [child.stat().st_mtime for child in path.rglob("*.jsonl")]
-            return max(mtimes, default=path.stat().st_mtime)
+            latest = path.stat().st_mtime
+            for child in path.rglob("*.jsonl"):
+                try:
+                    latest = max(latest, child.stat().st_mtime)
+                except OSError:
+                    continue
+            return latest
         return None
     except OSError:
         return None

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import tempfile
+import threading
+import time
 import unittest
 from pathlib import Path
 
@@ -107,6 +109,57 @@ class TkUiTests(unittest.TestCase):
         import time as _time; _time.sleep(0.1)  # let daemon thread complete
         self.assertEqual(requests, [RefreshRequest.manual()])
         self.assertEqual(applied, [updated])
+
+    def test_refresh_async_coalesces_requests_while_running(self) -> None:
+        aggregate = UsageAggregate(
+            today=TokenTotals(codex_tokens=10, claude_tokens=0),
+            month=TokenTotals(codex_tokens=10, claude_tokens=0),
+            top_projects=(),
+            quota=None,
+            last_updated="old",
+        )
+        updated = UsageAggregate(
+            today=TokenTotals(codex_tokens=20, claude_tokens=0),
+            month=TokenTotals(codex_tokens=20, claude_tokens=0),
+            top_projects=(),
+            quota=None,
+            last_updated="new",
+        )
+
+        first_started = threading.Event()
+        release_first = threading.Event()
+        requests: list[RefreshRequest] = []
+
+        def refresh_fn(request: RefreshRequest) -> UsageAggregate:
+            requests.append(request)
+            if len(requests) == 1:
+                first_started.set()
+                release_first.wait(timeout=1)
+            return updated
+
+        window = object.__new__(CodexMonitorWindow)
+        window.refresh_fn = refresh_fn
+        window.view_model = build_view_model(aggregate)
+        applied: list[UsageAggregate] = []
+        window.apply_aggregate = lambda agg: applied.append(agg)
+        window.root = type("FakeRoot", (), {"after": staticmethod(lambda _ms, fn: fn())})()
+
+        first = RefreshRequest(reason="watcher", claude_modified_since=100.0, claude_max_files=50)
+        second = RefreshRequest(reason="watcher", claude_modified_since=90.0, claude_max_files=200)
+        self.assertTrue(window.refresh_async(first))
+        self.assertTrue(first_started.wait(timeout=1))
+        self.assertFalse(window.refresh_async(second))
+        release_first.set()
+
+        deadline = time.time() + 1
+        while len(requests) < 2 and time.time() < deadline:
+            time.sleep(0.01)
+
+        self.assertEqual(requests, [
+            first,
+            RefreshRequest(reason="watcher", claude_modified_since=90.0, claude_max_files=200),
+        ])
+        self.assertEqual(applied, [updated, updated])
 
 
 if __name__ == "__main__":

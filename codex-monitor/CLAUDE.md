@@ -22,7 +22,7 @@
 ## 相关项目
 - `../docs/codex-handoff/` — Codex 与 Claude Code 对本项目计划、复审、绿灯的协作记录
 - `/Users/chat/.codex/sessions/` — Codex 本地 JSONL 数据源，只读
-- `/Users/chat/.claude/projects/` — Claude Code 本地 JSONL 数据源，只读；UI 和 smoke 路径不得全量同步扫 3.8GB 历史日志
+- `/Users/chat/.claude/projects/` — Claude Code 本地 JSONL 数据源，只读；UI 和 smoke 路径不得全量同步扫 3.9GB 历史日志
 
 ## 目录说明
 | 目录 | 用途 |
@@ -39,3 +39,4 @@
 - 不把历史对话正文写入 UI、日志、测试快照或调试输出。
 - 错误输出只包含文件路径、行号、错误类型，不输出整行 JSONL。
 - UI 运行使用 `python3.13 main.py --demo` 或 `python3.13 main.py --ui`；当前 `python3` 可能缺 `_tkinter`，只用于测试和 smoke。
+- tkinter 主线程不得执行 JSONL 读取、聚合或全树 mtime 扫描；自动刷新必须后台执行、合并并节流。

@@ -30,6 +30,30 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(requests[0].claude_max_files, 50)
         self.assertEqual(requests[0].reason, "watcher")
 
+    def test_debounced_refresher_throttles_repeated_auto_refreshes(self) -> None:
+        requests: list[RefreshRequest] = []
+        refresher = DebouncedRefresher(
+            requests.append,
+            delay_seconds=0.5,
+            incremental_window_seconds=300,
+            claude_max_files=50,
+            min_interval_seconds=60,
+        )
+
+        refresher.notify_change(Path("a.jsonl"), now=100.0)
+        self.assertTrue(refresher.flush_due(now=100.6))
+        self.assertEqual(len(requests), 1)
+
+        refresher.notify_change(Path("b.jsonl"), now=101.0)
+        self.assertFalse(refresher.flush_due(now=101.6))
+        self.assertEqual(len(requests), 1)
+
+        self.assertFalse(refresher.flush_due(now=160.5))
+        self.assertEqual(len(requests), 1)
+
+        self.assertTrue(refresher.flush_due(now=160.6))
+        self.assertEqual(len(requests), 2)
+
     def test_manual_request_keeps_existing_scope(self) -> None:
         request = RefreshRequest.manual()
 

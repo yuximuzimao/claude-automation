@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import time
+import threading
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -253,6 +254,9 @@ class CodexMonitorWindow:
         self._drag_offset = (0, 0)
         self._countdown_after_id: str | None = None
         self._cd_labels: list[Any] = []   # countdown label refs for update
+        self._refresh_lock = threading.Lock()
+        self._refresh_in_progress = False
+        self._queued_refresh: RefreshRequest | None = None
         self.container: Any | None = None
         self.runtime: Any | None = None
         self.fonts = _fonts(root, tkfont)
@@ -532,15 +536,54 @@ class CodexMonitorWindow:
         self._build()
 
     def _refresh(self) -> None:
-        if self.refresh_fn is None:
-            return
-        import threading
+        self.refresh_async(RefreshRequest.manual())
 
+    def refresh_async(self, request: RefreshRequest) -> bool:
+        if self.refresh_fn is None:
+            return False
+        self._ensure_refresh_state()
+
+        with self._refresh_lock:
+            if self._refresh_in_progress:
+                self._queued_refresh = _merge_refresh_requests(self._queued_refresh, request)
+                return False
+            self._refresh_in_progress = True
+
+        self._start_refresh_thread(request)
+        return True
+
+    def _start_refresh_thread(self, request: RefreshRequest) -> None:
         def _run() -> None:
-            updated = self.refresh_fn(RefreshRequest.manual())
-            self.root.after(0, lambda: self.apply_aggregate(updated))
+            try:
+                updated = self.refresh_fn(request)
+            except Exception:
+                self.root.after(0, self._finish_refresh)
+                return
+            self.root.after(0, lambda: self._finish_refresh(updated))
 
         threading.Thread(target=_run, daemon=True).start()
+
+    def _finish_refresh(self, aggregate: UsageAggregate | None = None) -> None:
+        self._ensure_refresh_state()
+        if aggregate is not None:
+            self.apply_aggregate(aggregate)
+
+        with self._refresh_lock:
+            queued = self._queued_refresh
+            self._queued_refresh = None
+            if queued is None:
+                self._refresh_in_progress = False
+                return
+
+        self._start_refresh_thread(queued)
+
+    def _ensure_refresh_state(self) -> None:
+        if not hasattr(self, "_refresh_lock"):
+            self._refresh_lock = threading.Lock()
+        if not hasattr(self, "_refresh_in_progress"):
+            self._refresh_in_progress = False
+        if not hasattr(self, "_queued_refresh"):
+            self._queued_refresh = None
 
     def apply_aggregate(self, aggregate: UsageAggregate) -> None:
         self._cancel_countdown()
@@ -590,6 +633,32 @@ def _action_label(parent: Any, text: str, bg: str, fg: str,
     lbl = tk.Label(parent, text=text, bg=bg, fg=fg, font=font, padx=4, pady=2)
     lbl.bind("<Button-1>", lambda e: command())
     return lbl
+
+
+def _merge_refresh_requests(
+    existing: RefreshRequest | None,
+    incoming: RefreshRequest,
+) -> RefreshRequest:
+    if existing is None:
+        return incoming
+    if existing.reason == "manual" or incoming.reason == "manual":
+        return RefreshRequest.manual()
+
+    modified_values = [
+        value
+        for value in (existing.claude_modified_since, incoming.claude_modified_since)
+        if value is not None
+    ]
+    max_file_values = [
+        value
+        for value in (existing.claude_max_files, incoming.claude_max_files)
+        if value is not None
+    ]
+    return RefreshRequest(
+        reason=incoming.reason,
+        claude_modified_since=min(modified_values) if modified_values else None,
+        claude_max_files=max(max_file_values) if max_file_values else None,
+    )
 
 
 class Tooltip:

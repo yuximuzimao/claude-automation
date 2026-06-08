@@ -69,6 +69,8 @@ Logs go to:
 
 ## Refresh Model
 
-If `watchdog` is installed, the UI listens for local JSONL changes. If it is unavailable, the app falls back to a 5-second mtime poll. UI refreshes preserve the rolling 30-day view, so watcher-triggered Claude refreshes use the same bounded 30-day scope and `--claude-max-files` cap as the initial UI load; they never trigger an unrestricted scan of `.claude/projects`.
+If `watchdog` is installed, the UI listens for local JSONL changes. If it is unavailable, the app falls back to a 5-second mtime poll. File-change detection and aggregate loading run off the tkinter main thread, so the window remains draggable and responsive while data is stale or still loading.
+
+Automatic refreshes are debounced and throttled to at most once every 60 seconds. Manual refresh remains available for on-demand updates. UI refreshes preserve the rolling 30-day view, so watcher-triggered Claude refreshes use the same bounded 30-day scope and `--claude-max-files` cap as the initial UI load; they never trigger an unrestricted scan of `.claude/projects`.
 
 HTTP quota remains intentionally disabled. The app uses local `payload.rate_limits` from Codex logs and does not read `.codex/auth.json`.

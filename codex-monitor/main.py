@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import threading
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -286,20 +287,11 @@ def _build_runtime_factory(args: argparse.Namespace):
     paths = (Path(args.sessions_root), Path(args.claude_projects_root))
 
     def factory(root, window):
-        def _make_watcher_request() -> RefreshRequest:
-            return RefreshRequest(
-                reason="watcher",
-                claude_modified_since=_month_start().timestamp(),
-                claude_max_files=args.claude_max_files,
-            )
-
         refresher = DebouncedRefresher(
-            lambda request: root.after(
-                0,
-                lambda: window.apply_aggregate(_load_aggregate(args, request=request)),
-            ),
+            window.refresh_async,
             incremental_window_seconds=31 * 86400,
             claude_max_files=args.claude_max_files,
+            min_interval_seconds=60,
         )
 
         def notify(path: Path) -> None:
@@ -307,7 +299,7 @@ def _build_runtime_factory(args: argparse.Namespace):
 
         observer = start_watchdog_observer(paths, notify)
         poller = None if observer is not None else PollingWatcher(paths, notify)
-        state = {"stopped": False, "observer": observer}
+        state = {"stopped": False, "observer": observer, "polling": False}
 
         def flush_loop() -> None:
             if state["stopped"]:
@@ -318,7 +310,16 @@ def _build_runtime_factory(args: argparse.Namespace):
         def poll_loop() -> None:
             if state["stopped"] or poller is None:
                 return
-            poller.poll_once()
+            if not state["polling"]:
+                state["polling"] = True
+
+                def run_poll() -> None:
+                    try:
+                        poller.poll_once()
+                    finally:
+                        state["polling"] = False
+
+                threading.Thread(target=run_poll, daemon=True).start()
             root.after(5000, poll_loop)
 
         def close() -> None:
