@@ -88,31 +88,15 @@ Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同�
 <claude-mem-context>
 # Memory Context
 
-# [claude] recent context, 2026-06-01 4:53pm GMT+8
+# [claude] recent context, 2026-06-04 1:29pm GMT+8
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (14,643t read) | 994,765t work | 99% savings
+Stats: 50 obs (15,478t read) | 1,085,380t work | 99% savings
 
 ### May 29, 2026
-1163 10:25p 🔵 CLAUDE.md 与 AGENTS.md / HANDOFF.md 零引用——文档层断裂
-1164 " ✅ CLAUDE.md Git scope 新增 transfer 子项目
-1165 " ✅ CLAUDE.md 新增 Codex 协作章节与 AGENTS.md/HANDOFF.md 引用
-1166 " 🔵 AGENTS.md 同样不引用 HANDOFF.md——双向断裂
-1167 10:26p ✅ AGENTS.md 新增 HANDOFF.md 引用——双向文档断裂修复完成
-1183 10:59p ⚖️ Git backup strategy for AI change recovery
-1184 11:01p ⚖️ Codex Git optimization plan reviewed with risk assessment
-1190 11:06p ✅ .gitignore updated with runtime data, model weights, and Codex internal file exclusions
-1191 " 🔵 Git index unwritable prevents git rm --cached from removing tracked runtime files
-1192 11:10p ✅ .gitignore updated with runtime data, model weights, and Codex internal file exclusions
-1193 " 🔵 Codex sandbox cannot write to .git/index.lock blocking all git write operations
-1194 " 🔵 Tracked runtime data inventory: 85 files identified for git index removal
-1195 " 🔵 Full tracked file inventory under data/products/ and lkwj/ revealed
-1196 11:11p 🔵 Complete tracked data/ inventory: 85+ files across lkwj and product-mapping
-1197 " ✅ .gitignore rewritten from broad negation pattern to targeted per-project exclusion
-1198 " ✅ Aftersales runtime data removed from git index via git rm --cached
 1199 11:12p ✅ Product-mapping image collection files removed from git index
 1200 " ✅ auto-match-log.json removed from git index
 1201 " 🔵 product-mapping/data/imgs/ files already deleted from disk, not just index
@@ -128,15 +112,9 @@ Stats: 50 obs (14,643t read) | 994,765t work | 99% savings
 1243 " 🔵 Root cause area identified: reject.js fills the detailed reason field
 1244 " 🔵 Root cause identified: dynamic rejection text in infer.js overrides fixed template
 1245 12:29a 🔵 CLI reject command flow confirmed for detail text passing
-S399 Fix flow-5.3 (仅退款-已发货) rejection detail text — replace dynamic tracking number concatenation with fixed platform template text in lib/infer.js (May 30 at 12:31 AM)
-S400 Fix flow-5.3 (仅退款-已发货) Step 4 "详细原因" rejection text in lib/infer.js — change dynamic tracking-number-containing text to static template "订单已发出，已通知快递拦截暂未退回，等快递退回我司后再退款" (May 30 at 12:33 AM)
-S401 User reported work orders not appearing in queue; primary session investigated queue state and server health instead of applying the requested infer.js fix (May 30 at 12:43 AM)
 1246 12:46a 🔵 Primary session still investigating queue instead of applying infer.js fix
-S402 User asked why work orders still not appearing in queue after previous changes; primary session continues investigating queue behavior instead of applying the infer.js fix (May 30 at 12:46 AM)
-S403 User reported work orders not appearing in queue; primary session continues server restart loop without applying requested infer.js fix (May 30 at 12:47 AM)
 1247 12:51a 🔵 Queue state unchanged despite multiple server restarts and scan cycles
 1249 " 🔵 Scan cycle completed — 3 new flow-5.3 (仅退款) tickets enqueued, 2 waiting items reset
-S405 Primary session previously claimed "修复生效了" for queue fix after scan cycle — now shifted to exploring project docs instead of applying remaining infer.js fix (May 30 at 12:51 AM)
 1248 12:52a 🔵 Full scan cycle completed across all 12 accounts with zero new queue entries
 S404 Primary session claims "fix took effect" after scan cycle — 3 new tickets enqueued — but the infer.js rejection detail text fix remains unexecuted (May 30 at 12:52 AM)
 1250 12:53a 🔵 All 5 queue items processed through pipeline — 2 full runs, 3 skipped as reprocess
@@ -154,11 +132,36 @@ S406 Primary session continues queue-reprocessing tangent after pipeline.js guar
 1261 12:58a ✅ Server restarted with pipeline.js fix — PID 50852
 1262 " ✅ Pipeline auto-started after restart — 1 item collecting, 4 pending
 S407 修复 flow-5.3 仅退款已发货 Step 4 "详细原因"拒绝文案 — inferRefundOnly() 中 waitingRescan 路径（line 538）和 INTERCEPT_TIMEOUT 路径（line 548）的 reason 字段改为固定模板 "订单已发出，已通知快递拦截暂未退回，等快递退回我司后再退款" (May 30 at 12:58 AM)
+S411 Documentation debt cleanup — user independently identified and fixed SKILL.md missing front-end file entries, synced HANDOFF.md, and updated project memory to reflect the isReturnWaitingAction() refactoring from the prior session (May 30 at 12:59 AM)
 1269 5:10p ✅ End-of-session knowledge cleanup with neat-freak skill
-S411 Documentation debt cleanup — user independently identified and fixed SKILL.md missing front-end file entries, synced HANDOFF.md, and updated project memory to reflect the isReturnWaitingAction() refactoring from the prior session (May 30 at 5:13 PM)
+S412 实现 Codex Monitor 应用的可折叠配额监控 UI，支持双模式（160×160 折叠 + 300×420 展开）、实时倒计时、圆弧配额可视化 (May 30 at 5:13 PM)
 ### May 31, 2026
 1284 11:09p ✅ Codex Monitor 阶段 0/1 审计通过，阶段 2 正式放行
 1285 11:55p ✅ Codex-Handoff 收件箱：阶段审计任务标记完成
+### Jun 1, 2026
+S413 实现 inferred_project 推断流水线：从会话内容扫描识别项目归属，作为三层 fallback 的第三级，降低「其他」占比 (Jun 1 at 5:12 PM)
+1287 5:13p 🟣 Added inferred_project field to CodexUsageEvent model
+1288 6:46p 🟣 Extended inferred_project field to ClaudeUsageEvent model
+1289 6:47p 🟣 Added project name inference regex and skip-list to reader_claude
+1290 " 🟣 Implemented _infer_project function with voting-based project detection
+1291 " 🟣 Added project inference pattern constants to reader_codex module
+S414 实现并验证 inferred_project 推断流水线：从会话内容扫描识别项目归属，作为三层 fallback 的最后一级，降低无法归因的「其他」占比 (Jun 1 at 6:48 PM)
+S415 实现 inferred_project 推断流水线：从会话文件内容扫描识别项目归属，作为三层 fallback 的第三级，将「其他」占比从 35%+ 降至 5% (Jun 1 at 6:53 PM)
+S416 验证前置改进（平台风控页面状态检测）完成情况，准备进入主要工作阶段 (Jun 1 at 6:53 PM)
+### Jun 2, 2026
+1296 10:17a ⚖️ Escalate lkwj data remediation to external audit (Codex agent)
+1295 1:42p 🔄 Refactored listActiveProducts filter logic to detect and conditionally correct filter state
+1297 2:34p ✅ Registered lkwj data audit request in Codex handoff protocol inbox
+S417 Audit lkwj data remediation plan before implementation due to repeated structural errors (fruit task definition confusion, obtainMethods count mismatch, task categorization errors) (Jun 2 at 2:36 PM)
+1298 2:52p 🔵 LKWJ 任务数据质量审计：256 条伪 fruit 任务识别与修复方案
+1299 4:17p 🔵 洛克收集助手数据修正计划：Codex 审计回复约束条件确认
+1300 4:19p 🔵 洛克收集助手 lkwj 数据现状核验：Codex 审计结论已验证
+1301 4:20p 🔵 lkwj 前端 index.html 现状检查：任务分类与形态展示设计确认
+1302 " 🔵 lkwj 数据 obtainMethods 现状：fruit 任务中 95/96 已有 obtainMethods，pet_241 缺失
+1303 4:21p 🔵 lkwj 全景数据检验报告：Codex 审计结论完全验证，七大修正要点确认
+### Jun 4, 2026
+1304 1:17p 🔵 Project inference uses path-based voting in first 100 lines of session files
+1305 " 🔵 Project validation uses CLAUDE.md existence check, enabling path-based misattribution
 
-Access 995k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1085k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
