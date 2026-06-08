@@ -11,7 +11,7 @@
 const SHOP_MAP = [
   { noteKeyword: '汐澜',     erpShop: '汐澜',       supplierId: null },
   { noteKeyword: '展宏妍',   erpShop: '成都展宏妍',  supplierId: null },
-  { noteKeyword: '百浩',     erpShop: '百浩创展',    supplierId: null },
+  { noteKeyword: '百浩',     erpShop: '百浩创展',    supplierId: '41698' },
   { noteKeyword: '蓄力生长', erpShop: '蓄力生长',    supplierId: null },
   { noteKeyword: '共途',     erpShop: '杭州共途',    supplierId: '42528' },
   { noteKeyword: '上海绰绰', erpShop: '上海绰绰',    supplierId: null },
