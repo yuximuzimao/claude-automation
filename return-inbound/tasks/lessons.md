@@ -18,3 +18,8 @@
 
 ## L5: querySelector 必须过滤可见元素
 ERP 同一 selector 存在多个隐藏元素。必须 querySelectorAll + getBoundingClientRect 过滤。
+
+## L6: "未发货仅退款"类型会残留"提示" el-dialog（2026-06-09）
+ERP 搜索"未发货仅退款"快递单号时，除了弹出 `el-message-box`（触发 error 路径）外，还会额外出现一个 `el-dialog__wrapper`（标题"提示"），里面只有"取消"按钮。旧代码的 error 路径只关闭 el-message-box，该 el-dialog 未被关闭，导致弹窗残留。
+**修复**：error 路径关闭 el-message-box 后，额外检查 `.el-dialog__wrapper` 中标题含"提示"的弹窗，点击其"取消"或"关闭"按钮（`catch(() => {})` 保证无弹窗时不报错）。
+**规则**：error 路径返回前，必须清理所有可见的"提示"类 el-dialog，不能只关 el-message-box。

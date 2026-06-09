@@ -160,6 +160,7 @@ await cdp.navigate(targetId, 'https://...');
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 | 22 | scan-all 切账号后不写 current-session | 多账号扫描会改变同一个 SCRM tab 的实际账号。成功 `jl.js inject` 后必须写 `data/current-session.json`；否则后续 collect/reprocess 可能误判「已经是目标账号」并跳过注入，读不到工单后错误推进 queue。 |
 | 23 | 登录确认态缺少退出路径 | 用户关闭登录页、点取消或 port 文件不存在时，前端必须清理 `reloginConfirm` 并恢复「重新登录」。`unknown + hasFile` 表示未扫描验证，不是失效。保存 session 时必须保留旧账号 `phone`。 |
+| 24 | pipeline 历史执行守卫把 skip 误判为"已执行" | `skip` action（工单暂时不可访问）也会写 `executedAt`（自动归档），但它不是真实审批操作。守卫条件 `!!s.executedAt` 会把 skip 误判为"已执行" → 工单恢复后 approve 永久被跳过。**修复**：守卫加 `&& s.decision?.action !== 'skip'`。**规则**：executedAt 语义是"曾被处理"，approve/reject 与 skip 必须分开对待。`pipeline.js:319` |
 
 ## PATHS
 

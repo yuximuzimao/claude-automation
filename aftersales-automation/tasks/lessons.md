@@ -222,6 +222,12 @@ archive.js 子品读取经历了三轮错误修复才找到正确方案：
 server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app AppleEvent 超时 -1712。旧代码静默吞错。
 **修复**：`createReminder(title)` 函数优先 Reminders，失败降级 `display notification`。
 
+## 2026-06-09 session 教训
+
+| # | 教训 |
+|---|------|
+| 61 | **pipeline 历史执行守卫：skip 记录不等于"已执行"**。`pipeline.js` 的自动执行守卫通过 `!!s.executedAt` 检测是否已执行过，但"工单暂时不可访问"时的 skip action 也会写入 `executedAt`（自动归档逻辑）。工单恢复可访问后，新一轮 approve 决策被该 skip 的 `executedAt` 误判为"已执行"，导致永久跳过真正的审批操作。**修复**：守卫条件增加 `&& s.decision?.action !== 'skip'`，只有非 skip 的历史执行记录才阻断重复执行。**规则**：executedAt 代表"该工单曾被处理"，必须区分"真实审批操作"（approve/reject）与"跳过归档"（skip），两者语义不同，不能混用同一守卫。 |
+
 ## 2026-05-22 session 教训（归档重复根因分析）
 
 | # | 教训 | memory |

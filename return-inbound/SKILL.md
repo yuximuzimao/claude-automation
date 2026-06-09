@@ -41,7 +41,7 @@ CLI（`cli.js`）保留用于调试，不用于日常业务。
 2. `ensureFilterCorrect` — 设置筛选：「退货入库」类型 + 快递公司
 3. `fillTracking` — 填入快递单号 + 点搜索
 4. 判断搜索结果：
-   - 无结果（未出库）→ 关闭弹窗，返回 `NOT_SHIPPED`
+   - 无结果（未出库）→ 关闭 `el-message-box`；再检查并关闭残留"提示" el-dialog（如"未发货仅退款"类型）；返回 `NOT_SHIPPED`
    - 有结果 → 继续
 5. `selectWarehouse` — 选择仓库（第1个 el-select 默认值）
 6. `ensureContinueNextChecked` — 勾选「继续下一单」
