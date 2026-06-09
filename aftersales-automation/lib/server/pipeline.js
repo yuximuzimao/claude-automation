@@ -314,9 +314,10 @@ async function processOne(queueItem, options = {}) {
 
   // ── 自动执行：七天无理由退货 approve → 直接同意，无需人工确认 ────
   // 执行前再检查：历史是否已有该工单的执行记录（防止同一工单被第二次采集推理触发重复自动执行）
+  // skip 记录（工单暂时不可访问）不算真实执行，不阻断后续 approve
   if (!hint && shouldAutoExecute(decision, sim.collectedData, freshItem)) {
     const prevExecuted = allSims.some(
-      s => s.workOrderNum === workOrderNum && s.mode === 'live' && s.id !== sim.id && !!s.executedAt
+      s => s.workOrderNum === workOrderNum && s.mode === 'live' && s.id !== sim.id && !!s.executedAt && s.decision?.action !== 'skip'
     );
     if (prevExecuted) {
       log(`[${workOrderNum}] 跳过自动执行 → 已有执行记录，直接归档`);
