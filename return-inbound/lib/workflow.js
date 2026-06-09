@@ -507,11 +507,30 @@ async function processOne(targetId, tracking) {
   process.stdout.write(`[${tracking}] 搜索结果: ${result.type}\n`);
 
   if (result.type === 'error') {
-    // 关闭错误弹窗
+    // 关闭错误弹窗（el-message-box）
     await clickVisibleBtn(targetId, '关闭', 5000).catch(() =>
       clickVisibleBtn(targetId, '确定', 5000)
     );
-    await sleep(500);
+    await sleep(300);
+
+    // 关闭可能残留的"提示"弹窗（如"未发货仅退款"类型会额外弹出 el-dialog，有"取消"按钮）
+    await cdp.eval(targetId, `(function(){
+      var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(w){
+        var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      });
+      var noticeDialog = dialogs.find(function(d){
+        var title = d.querySelector('.el-dialog__title');
+        return title && title.textContent.includes('提示');
+      });
+      if (!noticeDialog) return;
+      var btn = Array.from(noticeDialog.querySelectorAll('button')).find(function(b){
+        var r = b.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && (b.textContent.includes('取消') || b.textContent.includes('关闭'));
+      });
+      if (btn) btn.click();
+    })()`);
+    await sleep(300);
+
     return '未出库无需入库';
   }
 
