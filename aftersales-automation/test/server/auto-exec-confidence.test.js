@@ -95,6 +95,15 @@ describe('buildDimensions', () => {
     assert.equal(dims.ruleType, 'merchant-fault');
   });
 
+  it('卖家发错货 → ruleType=merchant-fault', () => {
+    const sim = makeSim();
+    sim.collectedData.ticket.afterSaleReason = '卖家发错货';
+    const dims = confidence.buildDimensions(sim.collectedData, sim.decision, '退货退款');
+    assert.ok(dims);
+    assert.equal(dims.isMerchantFault, true);
+    assert.equal(dims.ruleType, 'merchant-fault');
+  });
+
   it('换货 → ruleType=exchange', () => {
     const sim = makeSim();
     sim.collectedData.ticket.afterSaleReason = '尺码不合适';
