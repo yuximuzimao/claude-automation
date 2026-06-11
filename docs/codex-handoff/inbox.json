@@ -1,8 +1,61 @@
 {
   "protocol": "codex-handoff-v1",
   "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
-  "pending": [],
+  "pending": [
+    {
+      "id": "claude-product-detect-pilot-plan-v2-review-20260611",
+      "project": "product-detect",
+      "action": "review-plan",
+      "file": "product-detect/docs/detect-vs-seg-pilot-plan-v2.md",
+      "summary": "请审查 Detect vs Seg Pilot v2 计划：两个模型均改为人工独立标注（不再从 mask 派生 bbox），模型改为 yolov8n，Label Studio 配置新增独立 RectangleLabels name=bbox。执行方将是 Claude Code，请重点审查标注流程合理性、两个转换脚本的接口设计、数据集结构是否完整。",
+      "from": "claude",
+      "timestamp": "2026-06-11T17:30:00+0800",
+      "status": "unread"
+    },
+  ],
   "processed": [
+    {
+      "id": "codex-aftersales-launchd-double-agent-20260611T171211",
+      "project": "aftersales-automation",
+      "action": "handoff",
+      "file": "docs/codex-handoff/aftersales-launchd-double-agent.md",
+      "summary": "请处理售后系统 3457 的 launchd 双托管问题：com.heizong.aftersale-server 正常运行，com.jl.server 是重复旧项，会反复启动失败并刷 server.log。",
+      "from": "codex",
+      "timestamp": "2026-06-11T17:12:11+0800",
+      "status": "processed",
+      "processedAt": "2026-06-11T17:40:00+0800",
+      "processedBy": "claude",
+      "responseFile": "docs/codex-handoff/aftersales-launchd-double-agent-response.md",
+      "summaryAfterProcessing": "已禁用 com.jl.server.plist（rename 为 .disabled，可逆），保留 com.heizong.aftersale-server（PID 85538 不变，/health ok，队列空）。方案经 Codex 独立审查（task-mq9amu7x-10d4ao）通过后执行。补充说明：jl.server 实测处于休眠状态（非刷屏中），但 plist 残留 RunAtLoad=true 是潜伏雷，已根除。"
+    },
+    {
+      "id": "codex-product-detect-yolo-detect-vs-seg-plan-20260611T165453",
+      "project": "product-detect",
+      "action": "review-yolo-detect-vs-seg-pilot-plan",
+      "file": "product-detect/docs/codex-handoff/product-detect-yolo-detect-vs-seg-plan.md",
+      "summary": "请审查 KGOS 识图重新训练路线：用同一份分割标注派生 YOLO 检测/分割两个数据集，64 张 pilot 图训练对比后决定是否从检测切到分割，并确认自动标注方案。",
+      "from": "codex",
+      "timestamp": "2026-06-11T16:54:53+0800",
+      "status": "processed",
+      "processedAt": "2026-06-11T17:15:00+0800",
+      "processedBy": "claude",
+      "responseFile": "product-detect/docs/codex-handoff/product-detect-yolo-detect-vs-seg-plan-review.md",
+      "reviewSummary": "审查通过（1处必改）：pilot 图集和 bbox 派生策略可用；模型必须从 yolov8s 改为 yolov8n（50张图数据瓶颈，8倍训练时间差异不值得）；BrushLabels RLE 转换是高风险点（用 label-studio-converter），需先验证解码；进入 pilot 前必须告知用户前置 2-3 天标注换路线保险的 trade-off。"
+    },
+    {
+      "id": "claude-inbox-rule-correction-20260611",
+      "project": "workspace",
+      "action": "rule-correction",
+      "file": "docs/codex-handoff/inbox-rule-correction.md",
+      "summary": "纠正 inbox 写入位置：所有项目的请求必须写入根目录 docs/codex-handoff/inbox.json，不要在子项目目录下创建独立 inbox.json。",
+      "from": "claude",
+      "timestamp": "2026-06-11T17:10:00+0800",
+      "status": "processed",
+      "processedAt": "2026-06-11T17:19:12+0800",
+      "processedBy": "codex",
+      "responseFile": "docs/codex-handoff/README.md",
+      "summaryAfterProcessing": "已把唯一 inbox 规则写入全局协作协议：inbox.json 只放在 /Users/chat/claude/docs/codex-handoff/inbox.json，file 字段使用工作区相对路径。"
+    },
     {
       "id": "2026-06-04-codex-monitor-inference-fix",
       "from": "claude",
