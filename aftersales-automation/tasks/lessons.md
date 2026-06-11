@@ -277,3 +277,16 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 
 **正确方案**：先展开页面上所有子订单（可能有折叠的），再用 `querySelectorAll` 收集**所有**「查看物流」按钮，逐一点击 → 读弹窗 → 关闭，汇总所有子订单的物流。
 **教训**：多子订单 = 多个「查看物流」入口。`find()` 只拿第一个，必须改 `filter()` + 循环处理全部。
+
+### 53. LaunchAgent 双 plist 并存导致日志刷屏（2026-06-11）
+
+`com.heizong.aftersale-server`（2026-04-29）和 `com.jl.server`（2026-05-25）同时存在于 `~/Library/LaunchAgents/`，指向同一 `server.js`。heizong 先抢 lockfile，jl 每 `ThrottleInterval=10` 秒重启一次、读到已有 PID 就退出，日志持续刷 `已有实例运行中 (PID xxxx)，退出`（共 89 条）。
+
+**根因**：创建新 plist 时未删除旧 plist；两者 `RunAtLoad=true` + 不同 `KeepAlive` 配置形成竞争。
+
+**修复**：旧 plist rename 为 `.disabled` 后缀（launchd 只扫 `*.plist`，`.disabled` 不会被加载）。不删除保留后悔药。
+
+**铁律**：
+1. 更换 LaunchAgent plist 时，必须先 `launchctl bootout` 旧项 + rename 旧 plist，再 bootstrap 新项
+2. 诊断时用 `launchctl print gui/$(id -u)/<label>` 而非 `launchctl list`（list 在某些环境不完整）
+3. 新旧 plist 并存且都 `RunAtLoad=true` 的状态随时可能在重启后复现冲突，即使当前安静
