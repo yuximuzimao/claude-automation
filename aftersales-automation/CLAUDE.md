@@ -53,4 +53,13 @@
 **修改 `lib/` 下任何决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server**。
 原因：server 启动时加载模块到内存，不重启新逻辑不生效。重启后只报告工单状态，不自动重跑；是否重采由用户手动选择。
 
-触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/erp/*.js`
+触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/jl-account-config.js` · `lib/erp/*.js`
+
+## 单元测试
+
+| 测试 | 命令 | 何时必跑 |
+|------|------|----------|
+| 推理回归（44条） | `node test/flow-test.js` | 改 `lib/infer.js` 后 |
+| JL 账号/会话/重登（8条） | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/routes.js` 后 |
+
+**注意**：`node --test` 不接受目录路径，必须逐文件列出。

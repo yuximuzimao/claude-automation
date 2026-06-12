@@ -4,18 +4,31 @@
 
 替代 product-mapping 中的 LLM 识图，本地推理，零 token 消耗。
 
-当前结论：`train7` 已完成但不能直接生产；文字结合验证已证明“有用但不能裸合并”。text50 初测中 YOLO+text gated exact=11/12，明显优于 YOLO-only 3/12，但 raw YOLO+text 只有 5/12。下一步应把 gating 升级为正式异常管道，并接入 OCR/LLM 视觉兜底；不要先开启下一轮长训。最终验收输出必须对齐 product-mapping 的 `recognition.items = [{ name: ERP标准商品名, qty }]`，标准名来自 `product-mapping/data/products/kgos/features.json` 的 `erpName`。
+路线调整（2026-06-11）：合成训练集与真实主图分布差距过大，`train7` 在 gift13 上 recall=61.11%，未达生产门槛。当前不要直接把 270 张全部按检测框路线标完；先由 Claude Code 执行 `docs/detect-vs-seg-pilot-plan-v2.md`，用 64 张真实图对比 YOLO Detection 与 YOLO Segmentation 路线。文字结合验证（三层管道计划）暂缓，等视觉基础路线选定后再决定是否继续。最终验收输出必须对齐 product-mapping 的 `recognition.items = [{ name: ERP标准商品名, qty }]`，标准名来自 `product-mapping/data/products/kgos/features.json` 的 `erpName`。
 
-## 工作流程
+## 工作流程（当前阶段：Detect-vs-Seg pilot）
 
 ```
-1. 放素材图  →  assets/kgos/益生菌.jpg  （每类1-3张，白底）
-2. 先建黄金验证集 → docs/dataset-quality.md（真实 KGOS SKU 主图）
-3. 生成/改造合成数据 → 必须贴近真实 SKU 主图分布
-4. 文字/简称只纠正数量或确认已识别子类 →  模糊文字不得直接生成 ERP 子品
-5. 异常 gating + OCR/LLM 视觉兜底 →  先处理 unresolved，再决定是否训练
-6. 需要训练时  →  使用独立 run name 启动，避免覆盖旧 runs/kgos_yolov8s
-7. 推理测试  →  python scripts/infer.py --brand kgos --image xxx.jpg --verbose
+1. Claude Code 执行 pilot 计划 → docs/detect-vs-seg-pilot-plan-v2.md
+   64 张图：gift_001~013、combo_001~040、main_001~011
+   目标：判断检测框路线还是实例分割路线更适合密排计数
+
+2. Label Studio 新建 pilot 项目 → KGOS Detect-vs-Seg Pilot
+   同一批图分别标 BrushLabels mask 与 RectangleLabels bbox
+   ML Backend 自动轮廓标注只辅助 mask，bbox 独立人工标
+
+3. 转换并训练两个 yolov8n pilot
+   datasets/kgos_seg_pilot/ → yolo segment train model=yolov8n-seg.pt
+   datasets/kgos_detect_pilot/ → yolo detect train model=yolov8n.pt
+
+4. 按业务指标评估
+   图片级 exact、ERP item recall/precision、gift/combo 子集表现
+
+5. 路线选定后再推进完整 270 张
+   检测胜出 → 继续 YOLO with Images / train8
+   分割胜出 → 完整 270 张改走 YOLO-seg
+
+6. 推理测试  →  python scripts/infer.py --brand kgos --image xxx.jpg --verbose
 ```
 
 ## 目录结构
@@ -36,6 +49,7 @@ scripts/
   text50_eval.py    ← text50 exact-match / gating 评估
 data/kgos_text_aliases.json  ← 可积累简称表；exact_aliases 可直映，ambiguous_groups 必须视觉确认
 docs/dataset-quality.md  ← KGOS 数据集质量规范与训练门禁
+docs/detect-vs-seg-pilot-plan-v2.md  ← 64 张真实图检测/分割路线对比计划（Claude Code 执行）
 docs/train7-evaluation-report.md  ← train7 真实业务图评估和下一步决策
 docs/text50-evaluation-report.md  ← text50 初测结果与 gating 结论
 ```
@@ -89,7 +103,8 @@ python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
 
 - 素材图文件名直接作为类别名，必须和 features.json 的 key 完全一致
 - **生产门禁**：黄金验证集和三层管道评估通过前，不要覆盖 `models/kgos_best.onnx`
-- **下一步顺序**：先把 text50 gating 升级为正式异常管道，再接真实 OCR/LLM 视觉兜底；不要先开新训练
+- **下一步顺序**：先完成 detect-vs-seg pilot；不要在路线未定前让用户把 270 张都按旧检测框路线标完
+- **Pilot 门禁**：用户正式标 64 张前，先用 `gift_001.jpg` 跑通 ML Backend → mask/bbox 标注 → JSON 导出 → YOLO-seg/detect 转换 → overlay 肉眼确认；每张图的 mask 与 bbox 按 ERP 名聚合数量必须一致
 - **简称规则**：`data/kgos_text_aliases.json` 要持续积累。`exact_aliases` 才能直映 ERP 标准名；`ambiguous_groups` 如“玉米片”“营养粉”“黑茶体验装”必须由 YOLO/LLM/人工视觉确认具体口味后才能落到 ERP 子品
 - **文字口径**：文字描述是辅助纠错，不是事实来源。实际商品以识图结果为准；例如“玉米片 10”只有在视觉确认两种口味各 5 包时，才能拆成两个 ERP 标准名各 5
 - **text50 数据**：`datasets/kgos_real_text50/ground_truth.json` 当前在被 `.gitignore` 忽略的 `datasets/` 下；若要长期版本化，应移动到 `docs/` 或调整 ignore 规则

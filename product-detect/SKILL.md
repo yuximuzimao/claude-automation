@@ -7,46 +7,46 @@
 
 ## 当前状态
 
-- Phase: 3（**密排漏检优化 — 三层管道 v2 计划进行中**）
-- **train7 已完成并复评**：输出 `runs/kgos_yolov8s_train7/`
-  - 默认 val mAP50-95=0.97564；business-val mAP50-95=0.96925
-  - gift13 按 product-mapping ERP 标准名+qty 口径：recall=61.11%，precision=81.48%，exact=3/13
-  - 结论：密排召回比 train6 有提升，但误检增加，未达生产门槛；不要先开下一训，先做文字结合验证
-- **文字结合验证已进入 text50 初测**：
-  - `scripts/ocr_verify.py` 固定 YOLO-first 规则：视觉决定具体商品，文字只纠正数量或确认已识别子类
-  - `scripts/text50_eval.py` 初测 12 张 labeled 样本：YOLO-only exact=3/12，raw YOLO+text exact=5/12，YOLO+text gated exact=11/12
-  - 结论：文字路线有价值，但必须通过 anomaly gating 拦截误检和模糊子类；不能把 raw YOLO+text 直接写入 product-mapping
-- **简称/别名表已建立**：`data/kgos_text_aliases.json`
-  - `exact_aliases`：如“莓果营养粉”“牛油果营养粉”，可直映一个 ERP 标准名
-  - `ambiguous_groups`：如“玉米片”“营养粉”“黑茶体验装”，只给候选组，必须由 YOLO/LLM/人工视觉确认具体口味
-- **第六次训练**：2026-06-01 启动，2026-06-03 完成 100 epochs
-  - 默认 val mAP50-95=0.96728，business-val mAP50-95=0.97000
-  - 真实礼品图密排召回率约 40%，确认问题来自训练分布不贴近真实 SKU 主图
-- **三层管道计划 v2**（2026-06-04 起执行）：
-  - 计划：`~/.claude/plans/nested-mapping-trinket.md`
-  - 目标：98%（OCR 有效率≥90%，YOLO 密排召回≥92%）
-  - 已完成：NMS+conf 扫描、generate.py 密排布局/遮挡/投影阴影、train7 训练与真实口径评估、YOLO-first 文字纠正、text50 gating 初测、简称表
-  - 下一步优先：正式 anomaly pipeline → 真实 OCR/LLM 多模态兜底 → 扩充 text50 标注 → 黄金验证集 100 张 → [TTA/集成按需]
-- **真实 KGOS SKU 主图语料**：微信文件目录 `.../2026-05/1主图汇总`，270 张可读图；规则矩阵、买赠组合、重复排列、赠品角标。详见 `docs/dataset-quality.md`
+- Phase: 3-C（**Detect-vs-Seg pilot 路线选择**）
+- **路线调整（2026-06-11）**：合成训练集分布与真实 SKU 主图差距过大；train7 在 gift13 上 recall=61.11%，未达生产门槛。当前先用 64 张真实图对比 YOLO Detection 与 YOLO Segmentation，再决定完整 270 张走哪条标注/训练路线。
+- **Pilot 计划**：
+  - 计划文件：`docs/detect-vs-seg-pilot-plan-v2.md`
+  - 执行方：Claude Code；Codex 已回复审查材料 `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
+  - 图集：gift_001~013、combo_001~040、main_001~011
+  - 模型：`yolov8n.pt` vs `yolov8n-seg.pt`，路线选定后完整集再上 yolov8s / yolov8s-seg
+  - 标注：同一 Label Studio 项目内同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
+  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend 到导出转换的一图端到端冒烟；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+- **270 张真实图状态**：
+  - 270 张真实图已复制至 `datasets/kgos_real_all/images/`（main_001~183、combo_001~074、gift_001~013）
+  - Label Studio 在 localhost:8080，项目 3（KGOS Train8），270 个任务，pre-annotations 已加载
+  - 当前进度（2026-06-11）：约 3/270 已完成
+  - 28 类（随机杯子移除），标签必须是 ERP 标准名（见 `datasets/kgos_real_all/label_studio_config.xml`）
+  - 标注指南：`datasets/kgos_real_all/标注操作指南.md`
+- **train8 / 完整集训练**：等 pilot 选定路线后再推进；不要在路线未定前继续按旧检测框路线标满 270 张
+- **train7（最新完成训练）**：gift13 ERP 口径 recall=61.11%，exact=3/13，未达生产门槛
+- **文字结合验证（暂缓）**：text50 gated 91.7%，等 train8 结果再决定是否继续三层管道
+  - 相关工具仍保留：`scripts/ocr_verify.py`、`scripts/text50_eval.py`、`data/kgos_text_aliases.json`
+- **真实 KGOS SKU 主图源**：微信文件目录 `.../2026-05/1主图汇总`，270 张，只读参考
 - hee 未开始
 
 ## ENTRY MAP
 
 | 任务 | 入口 |
 |------|------|
-| 生成训练数据 | `python scripts/generate.py --brand kgos --count 4000 --profile train` |
-| 生成业务验收验证集 | `python scripts/generate.py --brand kgos --count 600 --profile business-val` |
+| **标注操作指南** | `datasets/kgos_real_all/标注操作指南.md` |
+| **Label Studio**（标注工具） | http://localhost:8080（需先 `label-studio start`） |
+| Detect-vs-Seg pilot 计划 | `docs/detect-vs-seg-pilot-plan-v2.md` |
+| Codex 对 v2 的审查回复 | `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md` |
 | 数据集质量规范 | `docs/dataset-quality.md` |
+| 查看进度 | `tasks/todo.md` |
+| 生成训练数据（合成） | `python scripts/generate.py --brand kgos --count 4000 --profile train` |
+| 生成业务验收验证集（合成） | `python scripts/generate.py --brand kgos --count 600 --profile business-val` |
 | NMS/conf 扫描 | `python scripts/nms_sweep.py` |
-| YOLO-first 文字纠正试验 | `python scripts/ocr_verify.py` |
-| text50 exact/gating 评估 | `python scripts/text50_eval.py` |
+| YOLO-first 文字纠正（暂缓） | `python scripts/ocr_verify.py` |
+| text50 gating 评估（暂缓） | `python scripts/text50_eval.py` |
 | KGOS 简称/模糊组表 | `data/kgos_text_aliases.json` |
-| 验证标注效果 | `python scripts/verify.py --brand kgos` |
-| 验证业务验收集标注 | `python scripts/verify.py --brand kgos --dataset kgos_business_val --split val --samples 50` |
-| train7 微调 | `python -u scripts/train.py --brand kgos --model yolov8s --finetune runs/kgos_yolov8s_train6/weights/best.pt --name kgos_yolov8s_train7 --epochs 60` |
 | train7 评估报告 | `docs/train7-evaluation-report.md` |
 | 推理测试 | `python scripts/infer.py --brand kgos --image xxx.jpg` |
-| 查看进度 | `tasks/todo.md` |
 | 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep -v` |
 
 ## PATHS
@@ -56,20 +56,28 @@ assets/
   kgos/          ← 单品素材图（文件名=ERP产品名，与 features.json key 一致）
   hee/           ← hee 品牌素材图
 datasets/
-  kgos/          ← generate.py --profile train 输出，含 data.yaml + images/ + labels/
-  kgos_business_val/ ← generate.py --profile business-val 输出，独立业务验收验证集
+  kgos_real_all/         ← 270张真实 SKU 主图 + Label Studio 标注工程
+    images/              ← 270张图（main_001~183, combo_001~074, gift_001~013）
+    labels_pretrain/     ← train7 预标注（conf=0.35, iou=0.45），标注前参考
+    label_studio_config.xml  ← 28类 ERP 标准名 Label Studio 配置
+    label_studio_import.json ← 270个任务导入文件（已导入，无需重复）
+    标注操作指南.md          ← Label Studio 操作步骤与标注规则
+  kgos_seg_pilot/        ← pilot 分割数据集（计划创建）
+  kgos_detect_pilot/     ← pilot 检测数据集（计划创建）
+  kgos/          ← generate.py --profile train 合成集（暂缓使用）
+  kgos_business_val/ ← 合成业务验收验证集（暂缓使用）
   hee/           ← 同上
 models/
-  kgos_best.onnx ← 训练完成后的生产模型
+  kgos_best.onnx ← 训练完成后的生产模型（未更新，等 train8 通过门禁）
   hee_best.onnx
 scripts/
-  generate.py    ← 合成数据生成器（主工具）
+  generate.py    ← 合成数据生成器（暂缓）
   train.py       ← CPU 训练脚本；--finetune 微调；--export-production 才覆盖生产 ONNX
   verify.py      ← 标注可视化验证
   infer.py       ← 生产推理（ProductDetector 类）
   nms_sweep.py   ← NMS/conf 扫描
-  ocr_verify.py  ← YOLO-first 文字纠正规则参考实现
-  text50_eval.py ← text50 exact-match / gating 评估
+  ocr_verify.py  ← YOLO-first 文字纠正规则参考实现（暂缓）
+  text50_eval.py ← text50 exact-match / gating 评估（暂缓）
 data/
   kgos_text_aliases.json ← 可积累简称表，exact/ambiguous 语义分开
 tests/
@@ -89,10 +97,9 @@ runs/            ← 训练日志和权重（git ignore）
 ## DO FIRST（新 session 进入）
 
 1. 读 `tasks/todo.md` 确认当前阶段
-2. 读 `docs/train7-evaluation-report.md`、`docs/text50-evaluation-report.md`、`docs/text-correction-followup-plan.md`
-3. 继续阶段4：把 text50 gating 升级成正式 anomaly pipeline，并接 OCR/LLM 视觉兜底
-4. 扩充 text50 ground truth 前，先处理 `datasets/` 被 git ignore 的持久化位置
-5. 确认 conda yolov8 环境是否就绪
+2. 读 `docs/detect-vs-seg-pilot-plan-v2.md` 和 `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
+3. 当前主线由 Claude Code 执行 pilot；Codex 不要并行改计划或启动训练，除非用户明确转交
+4. 若继续标注，先确认 `gift_001.jpg` 一图端到端冒烟已通过
 
 ## 生成规则
 

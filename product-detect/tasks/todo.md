@@ -1,9 +1,10 @@
 # product-detect 任务台账
 
-## 当前阶段：Phase 3 — 密排漏检优化（三层管道 v2）
+## 当前阶段：Phase 3-C — Detect-vs-Seg pilot 路线选择
 
-完整计划见 `~/.claude/plans/nested-mapping-trinket.md`（v2，已按 DeepSeek 审计修订 2026-06-04）。
-目标：三层管道（YOLO→OCR→LLM）准确率 ≥98%。由 Codex 执行。
+路线调整（2026-06-11）：合成训练集分布与真实 SKU 主图差距过大，先用 64 张真实图做 Detect-vs-Seg pilot，比较 YOLO Detection 与 YOLO Segmentation 在密排 gift/combo 场景的业务计数效果，再决定完整 270 张走检测框还是分割路线。三层管道计划（NMS→OCR→LLM）暂缓，等视觉基础路线选定后重新评估是否需要继续。
+
+三层管道计划见 `~/.claude/plans/nested-mapping-trinket.md`（v2）——暂缓不删。
 
 ### 近期完成
 
@@ -66,7 +67,40 @@
   - 保留当前训练、基线和黄金验证相关目录：`datasets/kgos`、`datasets/kgos_business_val`、`datasets/kgos_real_golden_*`、`runs/kgos_yolov8s_train6`、`runs/kgos_yolov8s_train7`
   - 当前训练日志保留：`runs/kgos_train7.log`、`runs/kgos_train7.err.log`
 
-- [ ] **P3-阶段3** 文字结合验证（进行中；不要先开新训练）
+- [ ] **P3-C-0** Claude Code 执行 Detect-vs-Seg pilot v2
+  - 计划：`docs/detect-vs-seg-pilot-plan-v2.md`
+  - Codex 审查回复：`../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
+  - 图集：gift_001~013、combo_001~040、main_001~011
+  - 标注：同一批图同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
+  - 模型：pilot 用 `yolov8n.pt` 和 `yolov8n-seg.pt`
+  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend → JSON 导出 → YOLO-seg/detect 转换 → overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+
+- [ ] **P3-B-1** 完成完整 270 张真实图标注（等待 P3-C pilot 选定路线后继续；Label Studio localhost:8080，项目 3 当前约 3/270）
+  - 标注规则：逐个框可见主体区域，跳过遮挡 >80% 无法辨认的目标
+  - 标签必须使用 ERP 标准名（28类，见 `datasets/kgos_real_all/label_studio_config.xml`）
+  - 操作指南：`datasets/kgos_real_all/标注操作指南.md`
+  - 如果检测路线胜出：导出格式为 YOLO with Images
+  - 如果分割路线胜出：完整 270 张改走 YOLO-seg 所需的 mask/polygon 转换流程
+
+- [ ] **P3-B-2** 路线选定后构建完整集数据集
+  ```bash
+  # 检测胜出：从 Label Studio 导出 YOLO 格式，整理为 datasets/kgos_real_train8/
+  # 分割胜出：从 Label Studio 原生 JSON 转 YOLO-seg，整理为 datasets/kgos_real_seg_train/
+  # 80/20 split（约 216 train + 54 val）
+  # 加入 5-10 张背景图（空标注，防止误检）
+  ```
+
+- [ ] **P3-B-3** 启动完整集训练（从 COCO 权重重训，不微调 train6/7）
+  ```bash
+  # 检测胜出：从 yolov8s.pt 开始，独立目录 runs/kgos_yolov8s_train8/
+  # 分割胜出：从 yolov8s-seg.pt 开始，独立目录 runs/kgos_yolov8s_seg_train8/
+  ```
+
+- [ ] **P3-B-4** train8 完成后在 gift13 评估 recall，目标 ≥ 85%
+  - 若 recall ≥ 85%：考虑是否还需要三层管道；若达 98% 准确率可跳过
+  - 若 recall < 85%：重启三层管道 / TTA / YOLOv8m 路线
+
+- [ ] **P3-阶段3** 文字结合验证（**暂缓** — 等 train8 基础 recall 结果再决定）
   - [x] 创建 `scripts/ocr_verify.py` 试验入口，先支持可见文字/人工文本输入，不依赖本机 OCR 引擎
   - [x] 固定 YOLO-first 纠正规则：YOLO 决定具体口味/规格；文字只修正数量。模糊文字如“玉米片 10”只能在 YOLO 已识别出具体子类时均分/补数；无法确定子类时标为 unresolved，不生成 ERP 子品。
   - [x] gift13 小集试评估：`docs/text-correction-gift13-report.md`。在可由 YOLO 支持解析的 103 个期望件口径下，YOLO-only recall=0.631、precision=0.802；YOLO+text recall=1.000、precision=0.866。该结果说明文字纠正确实能补密排计数，但不是最终黄金验收。

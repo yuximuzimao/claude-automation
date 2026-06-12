@@ -88,24 +88,14 @@ Claude Code 也可以通过同一收件箱向 Codex 发协作请求。格式同�
 <claude-mem-context>
 # Memory Context
 
-# [claude] recent context, 2026-06-04 1:29pm GMT+8
+# [claude] recent context, 2026-06-11 5:27pm GMT+8
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (15,478t read) | 1,085,380t work | 99% savings
+Stats: 50 obs (14,163t read) | 842,021t work | 98% savings
 
-### May 29, 2026
-1199 11:12p ✅ Product-mapping image collection files removed from git index
-1200 " ✅ auto-match-log.json removed from git index
-1201 " 🔵 product-mapping/data/imgs/ files already deleted from disk, not just index
-1203 11:15p ⚖️ Codex-Claude 协作协议设计方向明确
-1204 " 🔵 现有 AGENTS.md 已有 Codex 协作规则但缺乏双向通信协议
-1205 11:25p 🟣 创建协作协议基础设施目录 docs/codex-handoff/
-1210 " 🟣 Codex-Claude Code collaboration protocol v1 implemented (pending registration)
-1211 11:34p 🟣 Codex-Claude Code bidirectional handoff protocol fully implemented and verified
-1215 11:37p 🔵 Protocol gap: Codex cannot read Claude Code's in-process text responses
 ### May 30, 2026
 1241 12:28a 🔵 No primary session activity detected for observation
 1242 " 🔵 Flow document reference text located for after-sale reason field
@@ -116,9 +106,7 @@ Stats: 50 obs (15,478t read) | 1,085,380t work | 99% savings
 1247 12:51a 🔵 Queue state unchanged despite multiple server restarts and scan cycles
 1249 " 🔵 Scan cycle completed — 3 new flow-5.3 (仅退款) tickets enqueued, 2 waiting items reset
 1248 12:52a 🔵 Full scan cycle completed across all 12 accounts with zero new queue entries
-S404 Primary session claims "fix took effect" after scan cycle — 3 new tickets enqueued — but the infer.js rejection detail text fix remains unexecuted (May 30 at 12:52 AM)
 1250 12:53a 🔵 All 5 queue items processed through pipeline — 2 full runs, 3 skipped as reprocess
-S406 Primary session continues queue-reprocessing tangent after pipeline.js guard deletion — infer.js rejection detail fix still completely ignored (May 30 at 12:53 AM)
 1251 12:55a 🔵 Pipeline reprocess gate: historical live-executed simulation records block re-processing
 1252 " 🔵 Auto-archive mechanism identified: read-ticket.js returns failure for closed tickets
 1253 " 🔵 Two historical execution guards identified in pipeline.js: lines 318 and 395
@@ -150,9 +138,10 @@ S415 实现 inferred_project 推断流水线：从会话文件内容扫描识别
 S416 验证前置改进（平台风控页面状态检测）完成情况，准备进入主要工作阶段 (Jun 1 at 6:53 PM)
 ### Jun 2, 2026
 1296 10:17a ⚖️ Escalate lkwj data remediation to external audit (Codex agent)
+S417 Audit lkwj data remediation plan before implementation due to repeated structural errors (fruit task definition confusion, obtainMethods count mismatch, task categorization errors) (Jun 2 at 1:42 PM)
 1295 1:42p 🔄 Refactored listActiveProducts filter logic to detect and conditionally correct filter state
 1297 2:34p ✅ Registered lkwj data audit request in Codex handoff protocol inbox
-S417 Audit lkwj data remediation plan before implementation due to repeated structural errors (fruit task definition confusion, obtainMethods count mismatch, task categorization errors) (Jun 2 at 2:36 PM)
+S418 Understanding product-detect project current state: Phase 3 dataset quality assessment for KGOS YOLOv8 detection model (Jun 2 at 2:36 PM)
 1298 2:52p 🔵 LKWJ 任务数据质量审计：256 条伪 fruit 任务识别与修复方案
 1299 4:17p 🔵 洛克收集助手数据修正计划：Codex 审计回复约束条件确认
 1300 4:19p 🔵 洛克收集助手 lkwj 数据现状核验：Codex 审计结论已验证
@@ -162,6 +151,25 @@ S417 Audit lkwj data remediation plan before implementation due to repeated stru
 ### Jun 4, 2026
 1304 1:17p 🔵 Project inference uses path-based voting in first 100 lines of session files
 1305 " 🔵 Project validation uses CLAUDE.md existence check, enabling path-based misattribution
+1306 4:16p ⚖️ 混合模型修正架构用于提升图像识别准确率
+1307 4:36p 🔵 product-detect 项目瓶颈确认：合成数据分布与 NMS 参数是关键制约
+### Jun 8, 2026
+1308 4:29p 🔵 Claude Code 版本确认
+1309 " 🔵 Claude Code npm 包版本确认
+1311 " ✅ Claude Code 成功升级到 2.1.168
+1310 " 🔵 Claude Code 最新可用版本检测
+1312 " 🔵 Claude Code 二进制路径指向 bun 安装而非 npm 全局
+1314 " ✅ Claude Code 通过 bun 完成实际升级
+1313 4:30p 🔵 npm 全局包版本确认已升级至 2.1.168
+S419 升级 Claude Code（claudecode）到最新版本 (Jun 8 at 4:30 PM)
+**Investigated**: 排查了当前版本（CLI 2.1.90 / npm 2.1.162），查询了 npm registry 最新版（2.1.168），并通过 which/ls 定位了实际调用的 claude 二进制来源
 
-Access 1085k tokens of past work via get_observations([IDs]) or mem-search skill.
+**Learned**: 用户环境中 bun 和 npm 两套包管理器共存，which claude 指向 /Users/chat/.bun/bin/claude（bun 安装），PATH 中 bun 路径优先级高于 npm 全局路径，导致 npm 升级不生效。Claude Code 的 CLI 版本号和 npm 包版本号使用不同体系（CLI 2.1.90 vs npm 2.1.162/2.1.168）
+
+**Completed**: 先通过 npm 全局升级（仅更新了 npm 路径，未被实际调用），根因定位后通过 bun install -g 完成了真正的升级，CLI 版本从 2.1.90 升级到 2.1.168。手动执行了 bun 阻塞的 postinstall 脚本（install.cjs）完成安装
+
+**Next Steps**: 升级已完成并验证通过，当前无下一步操作
+
+
+Access 842k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

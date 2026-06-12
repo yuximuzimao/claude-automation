@@ -2,7 +2,18 @@
 
 ## 当前结论
 
-截至 2026-06-07，KGOS 已完成真实主图语料审查、NMS/conf 扫描、密排合成器改造和 `train7` 评估。当前重点不是继续刷默认合成 val 或马上开启下一轮训练，而是先做文字结合验证，确认三层管道（YOLO→OCR/文字→LLM）的业务准确率。
+截至 2026-06-11，路线已调整为**真实图优先**，但完整 270 张应先等 Detect-vs-Seg pilot 选定路线。
+
+train7 在密排场景（gift13）的 recall 仅 61.11%，根因是合成训练集分布与真实 SKU 主图差距过大，合成数据继续优化的边际效益已低。  
+**当前行动**：先按 `docs/detect-vs-seg-pilot-plan-v2.md` 标注 64 张真实图，对比 YOLO Detection 与 YOLO Segmentation 在密排 gift/combo 场景的计数效果。pilot 通过后，再把选定路线应用到完整 270 张真实 KGOS SKU 主图。
+
+- Label Studio：localhost:8080，项目 3（KGOS Train8），270 个标注任务已创建
+- 预标注：train7 模型生成（conf=0.35, iou=0.45），存于 `datasets/kgos_real_all/labels_pretrain/`
+- 类别数：28（随机杯子已移除，不做识别）
+- 标注进度（2026-06-11）：用户正在标注中，已完成约 3/270
+- 标注操作指南：`datasets/kgos_real_all/标注操作指南.md`
+- Pilot：新建 `KGOS Detect-vs-Seg Pilot` 项目，64 张图同时标 `BrushLabels mask` 和 `RectangleLabels bbox`；ML Backend 自动轮廓标注只辅助 mask
+- Pilot 模型：`yolov8n.pt` vs `yolov8n-seg.pt`；路线选定后完整集再使用 yolov8s / yolov8s-seg
 
 已确认的真实 KGOS SKU 主图语料在：
 
@@ -23,6 +34,7 @@
 
 在启动下一轮长训、导出生产 ONNX 或接入 product-mapping 前，必须完成以下门禁：
 
+0. 先完成 Detect-vs-Seg pilot，决定完整 270 张使用检测框路线还是实例分割路线；路线未定前不要继续把 270 张都按旧检测框方式标完。
 1. 从真实 KGOS SKU 主图中抽样建立黄金验证集，不进入训练集。
 2. 验收口径必须统一为 product-mapping 当前使用的 `recognition.items`：`[{ name: <ERP标准商品名>, qty: <数量> }]`。标准商品名唯一来源是 `product-mapping/data/products/kgos/features.json` 的 `erpName`；集合比较按 `name×qty` 完全一致，不允许用“玉米片”“营养粉”“黑茶”等临时聚合名替代。
 3. 明确标注规则：标什么、不标什么、遮挡到什么程度算有效目标。
@@ -30,6 +42,23 @@
 5. 保持合成器分布贴近真实 SKU 主图，而不是退回随机散落商品。
 
 未完成门禁时，不要把 `models/kgos_best.onnx` 覆盖为新候选。
+
+## Detect-vs-Seg pilot 门禁
+
+- 用户正式标 64 张前，先用 `gift_001.jpg` 跑通一图端到端冒烟：Label Studio ML Backend 自动轮廓 → 人工 bbox → 原生 JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。
+- 每张图必须检查 `mask` 与 `bbox` 的实例数一致，并且按 ERP 标准名聚合后的 `{name: qty}` 一致；不一致的图片不能进入训练或评估。
+- 本 pilot 只验证密排 gift/combo 场景路线选择，不验证 28 类完整覆盖率。
+
+## 铁律：标注标签必须使用 ERP 标准名
+
+**所有标注工具的标签名（Label Studio、Makesense 等）必须与 `product-mapping/data/products/kgos/features.json` 中的 `erpName` 字段完全一致。**
+
+- 禁止使用内部简称（如"美式咖啡"、"益生菌"、"玉米片-香菜牛肉味"）
+- 理由：标注导出后直接进训练，训练时 class name 与推理输出对齐，推理结果要匹配 `recognition.items[].name`，全链路必须是同一个字符串
+
+当前 28 个 ERP 标准名见 `datasets/kgos_real_all/label_studio_config.xml`（已正确填写，可直接复制使用）。
+
+---
 
 ## 标注规则草案
 

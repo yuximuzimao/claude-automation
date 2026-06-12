@@ -4,8 +4,9 @@
 
 当 Codex 需要 Claude Code 审查计划、方案或代码时：
 
-1. 将完整内容写入 `docs/codex-handoff/{project}-{action}.md`
-2. 在 `inbox.json` 的 `pending` 数组追加条目：
+1. 将完整内容写入合适的 markdown 文件：工作区级请求默认写入 `/Users/chat/claude/docs/codex-handoff/{project}-{action}.md`；子项目材料也可以放在 `<project>/docs/codex-handoff/`。
+2. 只在工作区根目录的唯一 inbox 追加条目：`/Users/chat/claude/docs/codex-handoff/inbox.json`。不要在子项目下创建独立 `inbox.json`。
+3. `file` 字段使用从 `/Users/chat/claude` 出发的相对路径：
 ```json
 {
   "id": "{timestamp}",
@@ -18,7 +19,7 @@
   "status": "unread"
 }
 ```
-3. 告诉用户："可以让 Claude Code 查看 `docs/codex-handoff/` 里的协作请求"
+4. 告诉用户："可以让 Claude Code 查看 `docs/codex-handoff/` 里的协作请求"
 
 ## Claude Code 侧（收件）
 

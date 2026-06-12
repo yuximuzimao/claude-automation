@@ -97,8 +97,8 @@ How to apply:
 - Codex CLI 与本工作区并行使用，`AGENTS.md` 为其入口规则
 - 分工：Claude Code 主驾驶（业务操作+写操作），Codex 审查/救援/补测试/风险挑战
 - 交接：`docs/HANDOFF.md` + git commit 双重握手，启动后先读 HANDOFF.md + git status
-- **Codex 收件箱**：SessionStart hook 自动检查 `docs/codex-handoff/inbox.json`。有未处理条目时注入通知，询问用户是否读全文。协议详见 `docs/codex-handoff/README.md`
-- **向 Codex 发请求**：写入 `docs/codex-handoff/{project}-{action}.md`，在 inbox.json 追加 `{"from": "claude", "status": "unread"}` 条目。完成后移到 processed
+- **Codex 收件箱**：SessionStart hook 只检查工作区根目录 `docs/codex-handoff/inbox.json`。有未处理条目时注入通知，询问用户是否读全文。协议详见 `docs/codex-handoff/README.md`
+- **向 Codex 发请求**：写入合适的 handoff markdown（工作区级默认 `docs/codex-handoff/{project}-{action}.md`，子项目材料可放 `<project>/docs/codex-handoff/`），只在根目录 `docs/codex-handoff/inbox.json` 追加 `{"from": "claude", "status": "unread"}` 条目。完成后移到 processed
 
 ## 新项目开工
 
