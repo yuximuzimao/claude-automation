@@ -64,6 +64,19 @@ def _fmt_countdown(resets_at: Any, window_minutes: int | None) -> str:
     return "--"
 
 
+def _ring_extent(used_pct: float) -> float | None:
+    """Arc extent in degrees (negative = clockwise) for a used percentage.
+
+    Returns None when the slice is too small to draw. The magnitude is capped
+    just below 360 because tkinter renders a blank arc when extent hits exactly
+    ±360 — without this cap a 100% ring shows as empty (looks "reset to zero").
+    """
+    pct = max(0.0, min(100.0, used_pct))
+    if pct < 0.5:
+        return None
+    return -min(pct * 3.6, 359.99)  # negative = clockwise
+
+
 def _draw_ring(cv: Any, cx: float, cy: float, r: float, width: float,
                used_pct: float, color: str) -> None:
     """Draw a ring segment with round line-caps."""
@@ -76,11 +89,9 @@ def _draw_ring(cv: Any, cx: float, cy: float, r: float, width: float,
     # Visible gray track (full circle — use 359.99 to avoid tkinter extent=360 blank-render bug)
     cv.create_arc(*bbox, start=90, extent=-359.99, style=tk.ARC, width=width, outline=TRACK_COLOR)
 
-    pct = max(0.0, min(100.0, used_pct))
-    if pct < 0.5:
+    extent = _ring_extent(used_pct)
+    if extent is None:
         return
-
-    extent = -pct * 3.6  # negative = clockwise
     cv.create_arc(*bbox, start=90, extent=extent, style=tk.ARC, width=width, outline=color)
 
     # Round start cap: always at top (angle 90° on unit circle)

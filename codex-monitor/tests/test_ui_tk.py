@@ -12,6 +12,7 @@ from app.runtime import RefreshRequest
 from app.ui_tk import (
     CodexMonitorWindow,
     WindowState,
+    _ring_extent,
     build_view_model,
     format_millions,
     load_window_state,
@@ -62,6 +63,21 @@ class TkUiTests(unittest.TestCase):
         self.assertEqual(view_model["projects"][0]["percent"], "26.7%")
         self.assertEqual(view_model["projects"][0]["tooltip"], "/Users/chat")
         self.assertNotIn("event_types", view_model)
+
+    def test_ring_extent_full_never_hits_360(self) -> None:
+        # tkinter renders a blank arc at exactly ±360, which made a 100% ring
+        # look empty ("reset to zero"). Extent must stay strictly inside ±360.
+        extent = _ring_extent(100.0)
+        self.assertIsNotNone(extent)
+        self.assertLess(abs(extent), 360.0)
+        self.assertAlmostEqual(extent, -359.99)
+        # Over-100% input is clamped, still safe.
+        self.assertAlmostEqual(_ring_extent(150.0), -359.99)
+
+    def test_ring_extent_partial_and_too_small(self) -> None:
+        self.assertAlmostEqual(_ring_extent(50.0), -180.0)
+        self.assertIsNone(_ring_extent(0.0))
+        self.assertIsNone(_ring_extent(0.4))
 
     def test_window_state_roundtrip(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
