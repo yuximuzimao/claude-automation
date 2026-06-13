@@ -141,9 +141,12 @@ datasets/kgos_real_all/label_studio_seg_pilot_config.xml
 
 **ML Backend 配置**：
 - URL：`http://localhost:9090`
-- 验证：`curl http://localhost:9090` → 返回 `{"status":"UP"}`
+- 验证：`curl --noproxy '*' http://localhost:9090/health` → 返回 `{"status":"UP", ...}`
 - 开启 interactive preannotations（对应 BrushLabels + KeyPoint）
 - auto-accept 保持关闭，每个 mask 人工确认后再保存
+- 当前本机通过 launchd 运行：`com.chat.product-detect-sam-backend`
+- 日志：`/tmp/sam_backend.log`
+- 运行手册：`docs/sam-auto-detect-runbook.md`
 
 如果 ML Backend 或其自动轮廓模型无法启动：**不要放弃 pilot**，改用 Label Studio 内置 Polygon 工具手动画多边形轮廓。矩形框始终手动画。
 
@@ -170,7 +173,7 @@ datasets/kgos_real_all/label_studio_seg_pilot_config.xml
 3. 不一致的图片不能进入训练或评估，必须回 Label Studio 修正
 
 **一图端到端冒烟**：
-正式标 64 张前，先只用 `gift_001.jpg` 跑通：ML Backend 自动轮廓 → 人工 bbox → JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。
+正式标 64 张前，先只用 `gift_001.jpg` 跑通：ML Backend 自动轮廓 → 人工 bbox → JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，不能替代 UI 保存、导出、转换和 overlay 门禁。
 
 ---
 
@@ -187,18 +190,11 @@ datasets/kgos_real_all/label_studio_seg_pilot_config.xml
 **BrushLabels RLE 解码方式（高风险，必须先验证）**：
 
 ```python
-# 优先用官方库
+# 优先用官方库；注意这是 Label Studio brush RLE，不是 COCO RLE
 from label_studio_converter.brush import decode_rle
 
-# 或手动解码（Label Studio 专用格式，非标准 COCO RLE）
-import base64, numpy as np
-
-def decode_ls_brush_rle(rle_str, original_height, original_width):
-    # original_height/width 从 LS JSON 的 original_height/original_width 字段读取
-    # 不要用图像文件实际尺寸（有时不一致）
-    rle_bytes = base64.b64decode(rle_str)
-    mask = np.frombuffer(rle_bytes, dtype=np.uint8).reshape(original_height, original_width)
-    return mask  # binary mask，再用 cv2.findContours 转多边形
+# 当前 SAM 后端返回 value.rle 为 list[int]，不是 base64 字符串。
+# 不要用 base64.b64decode，也不要用 pycocotools COCO RLE 直接解。
 ```
 
 转换后验证：**将解码的 mask 叠到原图上肉眼确认位置和形状正确，再接入训练**。

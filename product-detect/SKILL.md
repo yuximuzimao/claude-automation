@@ -11,11 +11,12 @@
 - **路线调整（2026-06-11）**：合成训练集分布与真实 SKU 主图差距过大；train7 在 gift13 上 recall=61.11%，未达生产门槛。当前先用 64 张真实图对比 YOLO Detection 与 YOLO Segmentation，再决定完整 270 张走哪条标注/训练路线。
 - **Pilot 计划**：
   - 计划文件：`docs/detect-vs-seg-pilot-plan-v2.md`
-  - 执行方：Claude Code；Codex 已回复审查材料 `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
+  - 执行方：Claude Code；协作审查结论已合并进 v2 计划和当前 runbook
   - 图集：gift_001~013、combo_001~040、main_001~011
   - 模型：`yolov8n.pt` vs `yolov8n-seg.pt`，路线选定后完整集再上 yolov8s / yolov8s-seg
   - 标注：同一 Label Studio 项目内同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
-  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend 到导出转换的一图端到端冒烟；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend 到导出转换的一图端到端冒烟；2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，仍需 UI 保存/JSON 导出/转换/overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+  - SAM 自动轮廓 runbook：`docs/sam-auto-detect-runbook.md`
 - **270 张真实图状态**：
   - 270 张真实图已复制至 `datasets/kgos_real_all/images/`（main_001~183、combo_001~074、gift_001~013）
   - Label Studio 在 localhost:8080，项目 3（KGOS Train8），270 个任务，pre-annotations 已加载
@@ -35,8 +36,8 @@
 |------|------|
 | **标注操作指南** | `datasets/kgos_real_all/标注操作指南.md` |
 | **Label Studio**（标注工具） | http://localhost:8080（需先 `label-studio start`） |
+| SAM Auto-Detect Backend | `http://localhost:9090`；launchd `com.chat.product-detect-sam-backend`；手册 `docs/sam-auto-detect-runbook.md` |
 | Detect-vs-Seg pilot 计划 | `docs/detect-vs-seg-pilot-plan-v2.md` |
-| Codex 对 v2 的审查回复 | `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md` |
 | 数据集质量规范 | `docs/dataset-quality.md` |
 | 查看进度 | `tasks/todo.md` |
 | 生成训练数据（合成） | `python scripts/generate.py --brand kgos --count 4000 --profile train` |
@@ -47,7 +48,7 @@
 | KGOS 简称/模糊组表 | `data/kgos_text_aliases.json` |
 | train7 评估报告 | `docs/train7-evaluation-report.md` |
 | 推理测试 | `python scripts/infer.py --brand kgos --image xxx.jpg` |
-| 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep -v` |
+| 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep tests.test_sam_ml_backend -v` |
 
 ## PATHS
 
@@ -97,9 +98,10 @@ runs/            ← 训练日志和权重（git ignore）
 ## DO FIRST（新 session 进入）
 
 1. 读 `tasks/todo.md` 确认当前阶段
-2. 读 `docs/detect-vs-seg-pilot-plan-v2.md` 和 `../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
-3. 当前主线由 Claude Code 执行 pilot；Codex 不要并行改计划或启动训练，除非用户明确转交
-4. 若继续标注，先确认 `gift_001.jpg` 一图端到端冒烟已通过
+2. 读 `docs/detect-vs-seg-pilot-plan-v2.md`
+3. 若处理 Auto-Detect / SAM 标注问题，先读 `docs/sam-auto-detect-runbook.md`，不要只从浏览器图标判断链路是否可用
+4. 当前主线由 Claude Code 执行 pilot；Codex 不要并行改计划或启动训练，除非用户明确转交
+5. 若继续标注，先确认 `gift_001.jpg` 一图端到端冒烟已通过
 
 ## 生成规则
 

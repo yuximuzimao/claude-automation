@@ -16,6 +16,7 @@
 2. Label Studio 新建 pilot 项目 → KGOS Detect-vs-Seg Pilot
    同一批图分别标 BrushLabels mask 与 RectangleLabels bbox
    ML Backend 自动轮廓标注只辅助 mask，bbox 独立人工标
+   SAM backend 运行手册 → docs/sam-auto-detect-runbook.md
 
 3. 转换并训练两个 yolov8n pilot
    datasets/kgos_seg_pilot/ → yolo segment train model=yolov8n-seg.pt
@@ -97,6 +98,10 @@ python scripts/text50_eval.py
 
 # 推理测试
 python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
+
+# SAM 自动轮廓 backend（launchd 正常时无需手动启动）
+curl --noproxy '*' http://localhost:9090/health
+bash start-sam-backend.sh
 ```
 
 ## 注意事项
@@ -104,7 +109,8 @@ python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
 - 素材图文件名直接作为类别名，必须和 features.json 的 key 完全一致
 - **生产门禁**：黄金验证集和三层管道评估通过前，不要覆盖 `models/kgos_best.onnx`
 - **下一步顺序**：先完成 detect-vs-seg pilot；不要在路线未定前让用户把 270 张都按旧检测框路线标完
-- **Pilot 门禁**：用户正式标 64 张前，先用 `gift_001.jpg` 跑通 ML Backend → mask/bbox 标注 → JSON 导出 → YOLO-seg/detect 转换 → overlay 肉眼确认；每张图的 mask 与 bbox 按 ERP 名聚合数量必须一致
+- **Pilot 门禁**：用户正式标 64 张前，先用 `gift_001.jpg` 跑通 ML Backend → mask/bbox 标注 → JSON 导出 → YOLO-seg/detect 转换 → overlay 肉眼确认；每张图的 mask 与 bbox 按 ERP 名聚合数量必须一致。2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，剩余 UI 保存/导出/转换/overlay 门禁仍要做
+- **SAM Auto-Detect**：Label Studio 项目 4 的 `http://localhost:9090` backend 必须 `is_interactive=1`；本机 launchd 服务为 `com.chat.product-detect-sam-backend`，日志 `/tmp/sam_backend.log`
 - **简称规则**：`data/kgos_text_aliases.json` 要持续积累。`exact_aliases` 才能直映 ERP 标准名；`ambiguous_groups` 如“玉米片”“营养粉”“黑茶体验装”必须由 YOLO/LLM/人工视觉确认具体口味后才能落到 ERP 子品
 - **文字口径**：文字描述是辅助纠错，不是事实来源。实际商品以识图结果为准；例如“玉米片 10”只有在视觉确认两种口味各 5 包时，才能拆成两个 ERP 标准名各 5
 - **text50 数据**：`datasets/kgos_real_text50/ground_truth.json` 当前在被 `.gitignore` 忽略的 `datasets/` 下；若要长期版本化，应移动到 `docs/` 或调整 ignore 规则

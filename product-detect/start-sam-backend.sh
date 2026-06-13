@@ -11,5 +11,5 @@ echo "端口：http://localhost:9090"
 echo "（模型在第一次标注时才加载，约 10 秒）"
 echo ""
 
-conda run -n yolov8 python \
+exec /Users/chat/miniconda3/envs/yolov8/bin/python \
   /Users/chat/claude/product-detect/scripts/sam_ml_backend.py

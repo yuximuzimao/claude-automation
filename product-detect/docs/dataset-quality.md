@@ -13,6 +13,7 @@ train7 在密排场景（gift13）的 recall 仅 61.11%，根因是合成训练�
 - 标注进度（2026-06-11）：用户正在标注中，已完成约 3/270
 - 标注操作指南：`datasets/kgos_real_all/标注操作指南.md`
 - Pilot：新建 `KGOS Detect-vs-Seg Pilot` 项目，64 张图同时标 `BrushLabels mask` 和 `RectangleLabels bbox`；ML Backend 自动轮廓标注只辅助 mask
+- SAM 自动轮廓手册：`docs/sam-auto-detect-runbook.md`；backend 为 `http://localhost:9090`，launchd 服务 `com.chat.product-detect-sam-backend`
 - Pilot 模型：`yolov8n.pt` vs `yolov8n-seg.pt`；路线选定后完整集再使用 yolov8s / yolov8s-seg
 
 已确认的真实 KGOS SKU 主图语料在：
@@ -45,7 +46,7 @@ train7 在密排场景（gift13）的 recall 仅 61.11%，根因是合成训练�
 
 ## Detect-vs-Seg pilot 门禁
 
-- 用户正式标 64 张前，先用 `gift_001.jpg` 跑通一图端到端冒烟：Label Studio ML Backend 自动轮廓 → 人工 bbox → 原生 JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。
+- 用户正式标 64 张前，先用 `gift_001.jpg` 跑通一图端到端冒烟：Label Studio ML Backend 自动轮廓 → 人工 bbox → 原生 JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，剩余 UI 保存/导出/转换/overlay 仍需执行。
 - 每张图必须检查 `mask` 与 `bbox` 的实例数一致，并且按 ERP 标准名聚合后的 `{name: qty}` 一致；不一致的图片不能进入训练或评估。
 - 本 pilot 只验证密排 gift/combo 场景路线选择，不验证 28 类完整覆盖率。
 

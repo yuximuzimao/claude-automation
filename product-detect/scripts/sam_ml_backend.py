@@ -7,12 +7,166 @@ SAM ML Backend for Label Studio
 
 import os
 import sys
+import io
+import uuid
+from dataclasses import dataclass
 import numpy as np
 from PIL import Image
 from label_studio_ml.model import LabelStudioMLBase
 
 SAM_CHECKPOINT = os.path.join(os.path.dirname(__file__), "../models/sam/sam_vit_b_01ec64.pth")
 MODEL_TYPE = "vit_b"
+DEFAULT_MASK_LABEL = "object"
+
+
+@dataclass
+class SAMPrompt:
+    point_coords: np.ndarray | None = None
+    point_labels: np.ndarray | None = None
+    box: np.ndarray | None = None
+    label_name: str = DEFAULT_MASK_LABEL
+
+
+def _percent_to_pixel(value: float, size: int) -> float:
+    return float(value) * float(size) / 100.0
+
+
+def _context_results(context):
+    if not context:
+        return []
+    if isinstance(context, dict):
+        result = context.get("result") or context.get("results") or []
+        return result if isinstance(result, list) else [result]
+    if isinstance(context, list):
+        return context
+    return []
+
+
+def _label_from_value(value: dict, context: dict | None) -> str:
+    if isinstance(context, dict):
+        for key in ("selectedLabel", "label", "brushlabel"):
+            label = context.get(key)
+            if isinstance(label, str) and label:
+                return label
+            if isinstance(label, dict) and label.get("value"):
+                return label["value"]
+
+    for key in ("brushlabels", "rectanglelabels", "keypointlabels", "labels"):
+        labels = value.get(key)
+        if labels:
+            return labels[0]
+
+    return DEFAULT_MASK_LABEL
+
+
+def extract_sam_prompt(context, image_width: int, image_height: int) -> SAMPrompt | None:
+    points = []
+    labels = []
+    box = None
+    label_name = DEFAULT_MASK_LABEL
+
+    context_dict = context if isinstance(context, dict) else None
+    for result in _context_results(context):
+        value = result.get("value") or {}
+        result_type = (result.get("type") or "").lower()
+        label_name = _label_from_value(value, context_dict)
+
+        if result_type == "keypointlabels" or "keypointlabels" in value:
+            if "x" not in value or "y" not in value:
+                continue
+            points.append([
+                _percent_to_pixel(value["x"], image_width),
+                _percent_to_pixel(value["y"], image_height),
+            ])
+            labels.append(1 if result.get("is_positive", True) else 0)
+
+        if result_type == "rectanglelabels" or "rectanglelabels" in value:
+            required = ("x", "y", "width", "height")
+            if not all(key in value for key in required):
+                continue
+            x1 = _percent_to_pixel(value["x"], image_width)
+            y1 = _percent_to_pixel(value["y"], image_height)
+            x2 = _percent_to_pixel(value["x"] + value["width"], image_width)
+            y2 = _percent_to_pixel(value["y"] + value["height"], image_height)
+            box = np.array([x1, y1, x2, y2], dtype=float)
+
+    if not points and box is None:
+        return None
+
+    return SAMPrompt(
+        point_coords=np.array(points, dtype=float) if points else None,
+        point_labels=np.array(labels, dtype=int) if labels else None,
+        box=box,
+        label_name=label_name,
+    )
+
+
+def _bits_to_bytes(bits: str) -> list[int]:
+    padded = bits + ("0" * ((8 - len(bits) % 8) % 8))
+    return [int(padded[i:i + 8], 2) for i in range(0, len(padded), 8)]
+
+
+def _base_rle_encode(array: np.ndarray):
+    values = np.asarray(array, dtype=np.uint8)
+    if len(values) == 0:
+        return [], [], []
+    changes = np.flatnonzero(values[1:] != values[:-1]) + 1
+    starts = np.concatenate(([0], changes))
+    ends = np.concatenate((changes, [len(values)]))
+    lengths = ends - starts
+    run_values = values[starts]
+    return lengths, starts, run_values
+
+
+def encode_brush_rle(flattened_rgba: np.ndarray) -> list[int]:
+    values = np.asarray(flattened_rgba, dtype=np.uint8).ravel()
+    header = f"{len(values):032b}" + f"{7:05b}" + "".join(f"{size - 1:04b}" for size in (3, 4, 8, 16))
+    body = []
+
+    for length, value in zip(_base_rle_encode(values)[0], _base_rle_encode(values)[2]):
+        remaining = int(length)
+        while remaining > 0:
+            chunk = min(remaining, 2**16)
+            if chunk == 1:
+                body.append("0" + "00" + "000" + f"{int(value):08b}")
+            elif chunk <= 8:
+                body.append("1" + "00" + f"{chunk - 1:03b}" + f"{int(value):08b}")
+            elif chunk <= 16:
+                body.append("1" + "01" + f"{chunk - 1:04b}" + f"{int(value):08b}")
+            elif chunk <= 256:
+                body.append("1" + "10" + f"{chunk - 1:08b}" + f"{int(value):08b}")
+            else:
+                body.append("1" + "11" + f"{chunk - 1:016b}" + f"{int(value):08b}")
+            remaining -= chunk
+
+    return _bits_to_bytes(header + "".join(body))
+
+
+def mask_to_brush_result(mask, label_name: str, from_name: str = "mask", to_name: str = "image", score: float | None = None):
+    mask_array = np.asarray(mask).astype(bool)
+    height, width = mask_array.shape
+    alpha = np.where(mask_array, 255, 0).astype(np.uint8)
+    rgba = np.zeros((height, width, 4), dtype=np.uint8)
+    rgba[:, :, 3] = alpha
+
+    result = {
+        "id": str(uuid.uuid4())[:8],
+        "from_name": from_name,
+        "to_name": to_name,
+        "type": "brushlabels",
+        "origin": "prediction",
+        "image_rotation": 0,
+        "original_width": width,
+        "original_height": height,
+        "value": {
+            "format": "rle",
+            "rle": encode_brush_rle(rgba.ravel()),
+            "brushlabels": [label_name],
+        },
+    }
+    if score is not None:
+        result["score"] = float(score)
+    return result
 
 
 class SAMBackend(LabelStudioMLBase):
@@ -46,8 +200,31 @@ class SAMBackend(LabelStudioMLBase):
             img_array = np.array(image.convert("RGB"))
             self.predictor.set_image(img_array)
 
-            # 没有 prompt 时返回空，等用户点击触发 interactive 模式
-            results.append({"result": [], "score": 0.0})
+            prompt = extract_sam_prompt(
+                kwargs.get("context"),
+                image_width=img_array.shape[1],
+                image_height=img_array.shape[0],
+            )
+            if prompt is None:
+                results.append({"result": [], "score": 0.0})
+                continue
+
+            masks, scores, _ = self.predictor.predict(
+                point_coords=prompt.point_coords,
+                point_labels=prompt.point_labels,
+                box=prompt.box,
+                multimask_output=True,
+            )
+            best_index = int(np.argmax(scores))
+            best_score = float(scores[best_index])
+            brush_result = mask_to_brush_result(
+                masks[best_index],
+                label_name=prompt.label_name,
+                from_name="mask",
+                to_name="image",
+                score=best_score,
+            )
+            results.append({"result": [brush_result], "score": best_score})
 
         return results
 

@@ -19,6 +19,13 @@
 
 ### 待办
 
+- [x] **P3-C-0a** 修复 Label Studio Auto-Detect / SAM 自动轮廓 backend（2026-06-13）
+  - `scripts/sam_ml_backend.py` 已支持 KeyPoint / Rectangle interactive prompt，读取 `kwargs["context"]` 并返回 `BrushLabels` RLE mask
+  - Label Studio 项目 4 的 `http://localhost:9090` backend 已设为 `is_interactive=1`
+  - 本机 launchd 服务：`com.chat.product-detect-sam-backend`；日志 `/tmp/sam_backend.log`
+  - 已用 `gift_001.jpg` 完成 backend 级 `/setup` + `/predict` smoke，返回非空 `brushlabels`
+  - 使用和排障手册：`docs/sam-auto-detect-runbook.md`
+
 - [x] **P3** 用新白底/混放/遮挡规则重新生成 KGOS 训练集与业务验收集（2026-06-01）
   ```bash
   python scripts/generate.py --brand kgos --count 4000 --profile train
@@ -69,11 +76,11 @@
 
 - [ ] **P3-C-0** Claude Code 执行 Detect-vs-Seg pilot v2
   - 计划：`docs/detect-vs-seg-pilot-plan-v2.md`
-  - Codex 审查回复：`../docs/codex-handoff/product-detect-detect-vs-seg-pilot-plan-v2-codex-review.md`
+  - 协作审查结论已合并进 v2 计划和 `docs/sam-auto-detect-runbook.md`
   - 图集：gift_001~013、combo_001~040、main_001~011
   - 标注：同一批图同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
   - 模型：pilot 用 `yolov8n.pt` 和 `yolov8n-seg.pt`
-  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend → JSON 导出 → YOLO-seg/detect 转换 → overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+  - 门禁：`gift_001.jpg` backend 级 ML Backend smoke 已通过；仍需完成 UI mask 保存 + 人工 bbox → JSON 导出 → YOLO-seg/detect 转换 → overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
 
 - [ ] **P3-B-1** 完成完整 270 张真实图标注（等待 P3-C pilot 选定路线后继续；Label Studio localhost:8080，项目 3 当前约 3/270）
   - 标注规则：逐个框可见主体区域，跳过遮挡 >80% 无法辨认的目标
