@@ -17,7 +17,7 @@
 
 ## 教训沉淀流程
 - `tasks/lessons.md` — Session 级新发现，先记这里
-- `docs/INDEX.md §6` — 稳定后迁入，不在两处重复维护
+- `docs/INDEX.md §7` — 稳定后迁入，不在两处重复维护
 
 ## 相关项目
 - `../docs/codex-handoff/` — Codex 与 Claude Code 对本项目计划、复审、绿灯的协作记录
