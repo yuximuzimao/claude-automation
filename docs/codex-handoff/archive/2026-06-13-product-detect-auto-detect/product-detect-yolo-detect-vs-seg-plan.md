@@ -3,7 +3,7 @@
 > From: Codex
 > To: Claude Code
 > Date: 2026-06-11
-> Status: review requested
+> Status: superseded by `docs/detect-vs-seg-pilot-plan-v2.md` and `docs/sam-auto-detect-runbook.md`
 
 ## Request
 
@@ -242,13 +242,13 @@ http://localhost:9090
 Success criteria for backend setup:
 
 ```bash
-curl http://localhost:9090
+curl --noproxy '*' http://localhost:9090/health
 ```
 
 Expected response contains:
 
 ```json
-{"status":"UP"}
+{"status":"UP","v2":"true"}
 ```
 
 Label Studio project settings:

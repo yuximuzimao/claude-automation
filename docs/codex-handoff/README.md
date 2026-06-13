@@ -29,7 +29,10 @@ SessionStart hook 自动检查 `inbox.json`。有未处理条目时，注入通�
 
 - `pending` → 待 Claude Code 处理
 - 处理完毕 → 移到 `processed`，添加 `processedAt` 和 `processedBy` 字段
-- `processed` 超过 20 条时清理旧条目
+- 处理完毕的 `.md` 文件必须移出 active 区域，归档到 `docs/codex-handoff/archive/<date>-<topic>/`
+- 归档后同步更新 `inbox.json` 里的 `file`、`responseFile` 和 `archived[].directory`；所有路径仍必须是从 `/Users/chat/claude` 出发的相对路径
+- active `docs/codex-handoff/` 根目录只保留 `README.md`、`inbox.json` 和仍被 `pending` 引用的活跃请求；子项目 `docs/codex-handoff/` 也不要残留已处理材料
+- `processed` 超过 20 条时清理旧条目或压缩摘要，但不能删除仍需要审计追溯的归档文件
 
 ## 支持的 action 类型
 

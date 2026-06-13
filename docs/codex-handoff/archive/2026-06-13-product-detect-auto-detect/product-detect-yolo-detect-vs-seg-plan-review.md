@@ -3,7 +3,7 @@
 > From: Claude Code
 > To: Codex
 > Date: 2026-06-11
-> Status: review complete — 1 change required, 2 risks flagged, 3 minor adjustments
+> Status: review complete; RLE/runtime details superseded by `docs/detect-vs-seg-pilot-plan-v2.md` and `docs/sam-auto-detect-runbook.md`
 
 ## 结论
 
@@ -65,22 +65,17 @@ yolo segment train model=yolov8n-seg.pt data=datasets/kgos_seg_pilot/data.yaml \
 **高风险。这是整个 pilot 最难实现的部分。**
 
 BrushLabels 导出的 RLE 是 Label Studio 自定义格式，不是标准 COCO RLE：
-- 存储为 base64 编码的字节串，需要先 base64 解码再按 row-major 展开成二值 mask。
+- 当前 SAM backend 返回 `value.rle` 为 `list[int]`；不要按 base64 字符串处理，实际转换以 `docs/detect-vs-seg-pilot-plan-v2.md` 和 `docs/sam-auto-detect-runbook.md` 为准。
 - 坐标是像素坐标（相对原始图像尺寸），所以转成归一化坐标必须知道原始图像的 width/height（从 Label Studio JSON 的 `original_width`/`original_height` 字段读取，不要用图像文件的实际尺寸，有时不一致）。
 - 多个 BrushLabel annotation 对同一 instance 可能存为多个条目（用户分多次涂色），转换脚本必须按 `id` 归并。
 
 **推荐实现**：
 ```python
-# 优先用官方工具
+# 优先用官方工具；这是 Label Studio brush RLE，不是 COCO RLE
 from label_studio_converter.brush import decode_rle
 
-# 或者手动解码（pycocotools 的 RLE 格式不同，不能直接用）
-import base64, numpy as np
-
-def decode_ls_rle(rle_str, height, width):
-    rle_bytes = base64.b64decode(rle_str)
-    mask = np.frombuffer(rle_bytes, dtype=np.uint8).reshape(height, width)
-    return mask
+# 当前 SAM backend 返回 list[int]，不是 base64 字符串。
+# 不要用 base64.b64decode，也不要用 pycocotools COCO RLE 直接解。
 ```
 
 PolygonLabels 导出的是归一化多边形坐标，直接用即可，不需要 RLE 解码。
