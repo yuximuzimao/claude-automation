@@ -130,12 +130,27 @@ const CLOSE_SUB_DIALOG_JS = `(function(){
 
 // 读子商品明细表格：通过表头文本定位列索引，不做数据特征过滤
 const READ_SUB_ITEMS_JS = `(function(){
-  // 找最新打开的可见 dialog
-  var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
+  var visible = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(d){
     return window.getComputedStyle(d).display !== 'none';
   });
-  if (!dialogs.length) return JSON.stringify({error:'子商品弹窗未打开'});
-  var dialog = dialogs[dialogs.length - 1];
+  if (!visible.length) return JSON.stringify({error:'子商品弹窗未打开'});
+
+  // 精确锁定「子商品信息」弹窗：先按标题，再按「含组合比例表头」兜底。
+  // 禁止用 dialogs[length-1]——collect 全流程里 ERP tab 可能残留/并发其他可见弹窗
+  // （如 erp-logistics 打开的订单详情弹窗），取「最后一个可见」会读错弹窗 → 误报「未找到表头」。
+  function dlgTitle(d){ var t = d.querySelector('.el-dialog__title'); return t ? t.innerText.trim() : ''; }
+  var dialog = visible.find(function(d){ return dlgTitle(d) === '子商品信息'; });
+  if (!dialog) {
+    dialog = visible.find(function(d){
+      return Array.from(d.querySelectorAll('th')).some(function(th){ return th.innerText.trim() === '组合比例'; });
+    });
+  }
+  if (!dialog) {
+    // 诊断埋点：dump 所有可见弹窗的标题/class，定位是谁挤进来了
+    return JSON.stringify({error:'未找到子商品弹窗', visibleDialogs: visible.map(function(d){
+      return { title: dlgTitle(d), cls: d.className };
+    })});
+  }
 
   // 通过表头文本定位列索引
   var ths = dialog.querySelectorAll('th');
@@ -148,7 +163,7 @@ const READ_SUB_ITEMS_JS = `(function(){
   }
   if (colName < 0 || colCode < 0 || colQty < 0) {
     var headerTexts = Array.from(ths).map(function(th){ return th.innerText.trim(); });
-    return JSON.stringify({error:'未找到子品明细表头', headers: headerTexts, colName: colName, colCode: colCode, colQty: colQty});
+    return JSON.stringify({error:'未找到子品明细表头', dialogTitle: dlgTitle(dialog), headers: headerTexts, colName: colName, colCode: colCode, colQty: colQty});
   }
 
   // 读所有数据行
@@ -219,7 +234,14 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
         try {
           const raw = await retry(async () => {
             const r = await cdp.eval(targetId, READ_SUB_ITEMS_JS);
-            if (r.error) throw new Error(r.error);
+            if (r.error) {
+              // 透传诊断信息：丢了 headers/visibleDialogs 就只能靠复现，这个 bug 因此藏了很久
+              const parts = [r.error];
+              if (r.dialogTitle != null) parts.push(`弹窗标题=${JSON.stringify(r.dialogTitle)}`);
+              if (r.headers) parts.push(`实际表头=${JSON.stringify(r.headers)}`);
+              if (r.visibleDialogs) parts.push(`可见弹窗=${JSON.stringify(r.visibleDialogs)}`);
+              throw new Error(parts.join(' | '));
+            }
             return r;
           }, { maxRetries: 3, delayMs: 1000, label: `read-sub-items ${specCode}` });
           subItems = Array.isArray(raw) ? raw : [];

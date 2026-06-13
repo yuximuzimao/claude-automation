@@ -88,4 +88,42 @@ describe('productArchive suite sub-items', () => {
     assert.equal(result.success, false);
     assert.match(result.error, /套装商品子品明细读取失败/);
   });
+
+  it('读子品失败时，错误必须带上实际表头/弹窗诊断信息（不能只丢一个字符串）', async () => {
+    const { productArchive } = loadArchiveWithMocks([
+      { alreadySet: true },
+      { searched: '260605- 8' },
+      { outerId: '260605- 8', title: '套装X', subItemNum: 6, type: '2', hasProduct: false },
+      { clicked: true },
+      // 读到的是错误弹窗：表头不匹配 + 携带实际表头与弹窗标题
+      { error: '未找到子品明细表头', dialogTitle: '订单详情', headers: ['运单号', '物流公司', '状态'] },
+      { closed: 1, remaining: 0 },
+    ]);
+
+    const result = await productArchive('erp-target', '260605- 8');
+
+    assert.equal(result.success, false);
+    assert.match(result.error, /套装商品子品明细读取失败/);
+    // 关键：诊断信息必须透传到最终错误里，下次不用复现就能定位
+    assert.match(result.error, /实际表头/);
+    assert.match(result.error, /运单号/);
+    assert.match(result.error, /订单详情/);
+  });
+
+  it('找不到子商品弹窗时，要 dump 可见弹窗列表（诊断埋点）', async () => {
+    const { productArchive } = loadArchiveWithMocks([
+      { alreadySet: true },
+      { searched: '260605- 8' },
+      { outerId: '260605- 8', title: '套装X', subItemNum: 6, type: '2', hasProduct: false },
+      { clicked: true },
+      { error: '未找到子商品弹窗', visibleDialogs: [{ title: '订单详情', cls: 'el-dialog__wrapper trade-detail-dialog' }] },
+      { closed: 1, remaining: 0 },
+    ]);
+
+    const result = await productArchive('erp-target', '260605- 8');
+
+    assert.equal(result.success, false);
+    assert.match(result.error, /可见弹窗/);
+    assert.match(result.error, /trade-detail-dialog/);
+  });
 });
