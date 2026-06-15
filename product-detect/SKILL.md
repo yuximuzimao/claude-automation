@@ -7,23 +7,21 @@
 
 ## 当前状态
 
-- Phase: 3-C（**Detect-vs-Seg pilot 路线选择**）
-- **路线调整（2026-06-11）**：合成训练集分布与真实 SKU 主图差距过大；train7 在 gift13 上 recall=61.11%，未达生产门槛。当前先用 64 张真实图对比 YOLO Detection 与 YOLO Segmentation，再决定完整 270 张走哪条标注/训练路线。
+- Phase: 3-C（**Detect-vs-Seg pilot 路线选择**；标注工具已切换 X-AnyLabeling）
+- **路线调整（2026-06-11）**：合成训练集分布与真实 SKU 主图差距过大；train7 在 gift13 上 recall=61.11%，未达生产门槛。改用真实图对比 YOLO Detection 与 YOLO Segmentation 路线。
+- **标注工具切换（2026-06-15）**：弃用 Label Studio + 外挂 SAM backend（interactive 链路在本机点击不出 mask），改用 **X-AnyLabeling**（内置 SAM、本地单进程、中文界面）。完整使用手册见 `docs/annotation-tool-xanylabeling.md`。
+- **标注策略（2026-06-15 用户决策）**：每个商品只用 SAM 点一遍多边形，**不手标矩形**；检测框由 `scripts/convert_xanylabeling.py` 从多边形外接矩形自动派生。一份标注出 seg + det 两套数据集。
 - **Pilot 计划**：
-  - 计划文件：`docs/detect-vs-seg-pilot-plan-v2.md`
-  - 执行方：Claude Code；协作审查结论已合并进 v2 计划和当前 runbook
-  - 图集：gift_001~013、combo_001~040、main_001~011
+  - 计划文件：`docs/detect-vs-seg-pilot-plan-v2.md`（2026-06-15 已按"只标一遍多边形"修订）
   - 模型：`yolov8n.pt` vs `yolov8n-seg.pt`，路线选定后完整集再上 yolov8s / yolov8s-seg
-  - 标注：同一 Label Studio 项目内同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
-  - 门禁：先用 `gift_001.jpg` 跑通 ML Backend 到导出转换的一图端到端冒烟；2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，仍需 UI 保存/JSON 导出/转换/overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
-  - SAM 自动轮廓 runbook：`docs/sam-auto-detect-runbook.md`
+  - 一图端到端冒烟（gift_001）：✅ 已通过（SAM 出 mask + 人工标 + Ctrl+S 存 json + 转换脚本生成 seg/det + overlay 确认）
 - **270 张真实图状态**：
-  - 270 张真实图已复制至 `datasets/kgos_real_all/images/`（main_001~183、combo_001~074、gift_001~013）
-  - Label Studio 在 localhost:8080，项目 3（KGOS Train8），270 个任务，pre-annotations 已加载
-  - 当前进度（2026-06-11）：约 3/270 已完成
-  - 28 类（随机杯子移除），标签必须是 ERP 标准名（见 `datasets/kgos_real_all/label_studio_config.xml`）
-  - 标注指南：`datasets/kgos_real_all/标注操作指南.md`
-- **train8 / 完整集训练**：等 pilot 选定路线后再推进；不要在路线未定前继续按旧检测框路线标满 270 张
+  - 270 张真实图位于 `datasets/kgos_real_all/images/`（main_001~183、combo_001~074、gift_001~013）
+  - 标注工具：X-AnyLabeling（启动见 runbook），右下角文件列表直接切图
+  - 当前进度（2026-06-15）：1/270（gift_001 已标，决定全量标 270 张，不去重）
+  - 28 类，标签必须是 ERP 标准名（见 `datasets/kgos_real_all/classes.txt`）
+  - 标注产物：图片同目录 `<name>.json`（X-AnyLabeling 多边形格式）
+- **train8 / 完整集训练**：等 270 张标完 + pilot 选定路线后推进
 - **train7（最新完成训练）**：gift13 ERP 口径 recall=61.11%，exact=3/13，未达生产门槛
 - **文字结合验证（暂缓）**：text50 gated 91.7%，等 train8 结果再决定是否继续三层管道
   - 相关工具仍保留：`scripts/ocr_verify.py`、`scripts/text50_eval.py`、`data/kgos_text_aliases.json`
@@ -34,9 +32,10 @@
 
 | 任务 | 入口 |
 |------|------|
-| **标注操作指南** | `datasets/kgos_real_all/标注操作指南.md` |
-| **Label Studio**（标注工具） | http://localhost:8080（需先 `label-studio start`） |
-| SAM Auto-Detect Backend | `http://localhost:9090`；launchd `com.chat.product-detect-sam-backend`；手册 `docs/sam-auto-detect-runbook.md` |
+| **标注工具 X-AnyLabeling**（含启动/补丁/流程） | `docs/annotation-tool-xanylabeling.md` |
+| 启动标注 GUI | `conda activate x-anylabeling` 后 `xanylabeling --filename <图> --labels datasets/kgos_real_all/classes.txt` |
+| 标注→YOLO 双数据集转换 | `python scripts/convert_xanylabeling.py --images datasets/kgos_real_all/images --classes datasets/kgos_real_all/classes.txt --out-seg datasets/kgos_seg_pilot --out-det datasets/kgos_detect_pilot` |
+| 新图去重 | `python scripts/dedup_images.py --new <新图> --against datasets/kgos_real_all/images` |
 | Detect-vs-Seg pilot 计划 | `docs/detect-vs-seg-pilot-plan-v2.md` |
 | 数据集质量规范 | `docs/dataset-quality.md` |
 | 查看进度 | `tasks/todo.md` |
@@ -48,7 +47,7 @@
 | KGOS 简称/模糊组表 | `data/kgos_text_aliases.json` |
 | train7 评估报告 | `docs/train7-evaluation-report.md` |
 | 推理测试 | `python scripts/infer.py --brand kgos --image xxx.jpg` |
-| 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep tests.test_sam_ml_backend -v` |
+| 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep -v` |
 
 ## PATHS
 
@@ -99,7 +98,7 @@ runs/            ← 训练日志和权重（git ignore）
 
 1. 读 `tasks/todo.md` 确认当前阶段
 2. 读 `docs/detect-vs-seg-pilot-plan-v2.md`
-3. 若处理 Auto-Detect / SAM 标注问题，先读 `docs/sam-auto-detect-runbook.md`，不要只从浏览器图标判断链路是否可用
+3. 若处理标注 / SAM 出图问题，先读 `docs/annotation-tool-xanylabeling.md`（含 3 个已打的本机崩溃补丁说明），不要只从界面图标判断链路是否可用
 4. 当前主线由 Claude Code 执行 pilot；Codex 不要并行改计划或启动训练，除非用户明确转交
 5. 若继续标注，先确认 `gift_001.jpg` 一图端到端冒烟已通过
 
