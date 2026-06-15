@@ -1,8 +1,10 @@
 # product-detect 任务台账
 
-## 当前阶段：Phase 3-C — Detect-vs-Seg pilot 路线选择
+## 当前阶段：Phase 3 — 标注 270 张真实图（X-AnyLabeling）→ Detect-vs-Seg pilot
 
-路线调整（2026-06-11）：合成训练集分布与真实 SKU 主图差距过大，先用 64 张真实图做 Detect-vs-Seg pilot，比较 YOLO Detection 与 YOLO Segmentation 在密排 gift/combo 场景的业务计数效果，再决定完整 270 张走检测框还是分割路线。三层管道计划（NMS→OCR→LLM）暂缓，等视觉基础路线选定后重新评估是否需要继续。
+路线调整（2026-06-11）：合成训练集分布与真实 SKU 主图差距过大，转为标注真实图，比较 YOLO Detection 与 YOLO Segmentation 在密排 gift/combo 场景的业务计数效果。三层管道计划（NMS→OCR→LLM）暂缓，等视觉基础路线选定后重新评估。
+
+标注工具切换（2026-06-15）：弃用 Label Studio + 外挂 SAM backend → 改用 X-AnyLabeling（内置 SAM、本地单进程、中文界面）。标注策略：每商品只标一遍 SAM 多边形，检测框由 `scripts/convert_xanylabeling.py` 自动派生。270 张全量标，不去重。手册 `docs/annotation-tool-xanylabeling.md`。
 
 三层管道计划见 `~/.claude/plans/nested-mapping-trinket.md`（v2）——暂缓不删。
 
@@ -19,12 +21,10 @@
 
 ### 待办
 
-- [x] **P3-C-0a** 修复 Label Studio Auto-Detect / SAM 自动轮廓 backend（2026-06-13）
-  - `scripts/sam_ml_backend.py` 已支持 KeyPoint / Rectangle interactive prompt，读取 `kwargs["context"]` 并返回 `BrushLabels` RLE mask
-  - Label Studio 项目 4 的 `http://localhost:9090` backend 已设为 `is_interactive=1`
-  - 本机 launchd 服务：`com.chat.product-detect-sam-backend`；日志 `/tmp/sam_backend.log`
-  - 已用 `gift_001.jpg` 完成 backend 级 `/setup` + `/predict` smoke，返回非空 `brushlabels`
-  - 使用和排障手册：`docs/sam-auto-detect-runbook.md`
+- [废弃] **P3-C-0a** Label Studio Auto-Detect / SAM backend（2026-06-15 整套方案废弃）
+  - 旧方案：`scripts/sam_ml_backend.py` + Label Studio 外挂 9090 backend。本机 interactive 链路点击不出 mask。
+  - 已删除：sam_ml_backend.py、start-sam-backend.sh、test_sam_ml_backend.py、launchd 服务、LS 数据库。
+  - 取代方案：X-AnyLabeling 内置 SAM，见 `docs/annotation-tool-xanylabeling.md`。
 
 - [x] **P3** 用新白底/混放/遮挡规则重新生成 KGOS 训练集与业务验收集（2026-06-01）
   ```bash
@@ -74,26 +74,22 @@
   - 保留当前训练、基线和黄金验证相关目录：`datasets/kgos`、`datasets/kgos_business_val`、`datasets/kgos_real_golden_*`、`runs/kgos_yolov8s_train6`、`runs/kgos_yolov8s_train7`
   - 当前训练日志保留：`runs/kgos_train7.log`、`runs/kgos_train7.err.log`
 
-- [ ] **P3-C-0** Claude Code 执行 Detect-vs-Seg pilot v2
-  - 计划：`docs/detect-vs-seg-pilot-plan-v2.md`
-  - 协作审查结论已合并进 v2 计划和 `docs/sam-auto-detect-runbook.md`
-  - 图集：gift_001~013、combo_001~040、main_001~011
-  - 标注：同一批图同时做 `BrushLabels name="mask"` 与 `RectangleLabels name="bbox"`；ML Backend 自动轮廓标注只辅助 mask
-  - 模型：pilot 用 `yolov8n.pt` 和 `yolov8n-seg.pt`
-  - 门禁：`gift_001.jpg` backend 级 ML Backend smoke 已通过；仍需完成 UI mask 保存 + 人工 bbox → JSON 导出 → YOLO-seg/detect 转换 → overlay；每张图 mask/bbox 按 ERP 名聚合数量必须一致
+- [进行中] **P3-B-1** 标注 270 张真实图（X-AnyLabeling，全量；当前 1/270，gift_001 已标）
+  - 工具：X-AnyLabeling（conda x-anylabeling），每商品 SAM 点一遍多边形，存图片同名 .json
+  - 标签必须使用 ERP 标准名（28类，见 `datasets/kgos_real_all/classes.txt`）
+  - 流程/补丁/排障：`docs/annotation-tool-xanylabeling.md`
+  - gift_001 一图端到端冒烟已通过（SAM→标注→json→转换→overlay）
 
-- [ ] **P3-B-1** 完成完整 270 张真实图标注（等待 P3-C pilot 选定路线后继续；Label Studio localhost:8080，项目 3 当前约 3/270）
-  - 标注规则：逐个框可见主体区域，跳过遮挡 >80% 无法辨认的目标
-  - 标签必须使用 ERP 标准名（28类，见 `datasets/kgos_real_all/label_studio_config.xml`）
-  - 操作指南：`datasets/kgos_real_all/标注操作指南.md`
-  - 如果检测路线胜出：导出格式为 YOLO with Images
-  - 如果分割路线胜出：完整 270 张改走 YOLO-seg 所需的 mask/polygon 转换流程
+- [ ] **P3-C-0** Detect-vs-Seg pilot（标注积累一批后即可起）
+  - 计划：`docs/detect-vs-seg-pilot-plan-v2.md`（已按"只标一遍多边形"修订）
+  - 转换：`scripts/convert_xanylabeling.py` 一份多边形→seg + det 两套数据集
+  - 模型：pilot 用 `yolov8n.pt` 和 `yolov8n-seg.pt`
+  - 评估：图片级 exact、ERP item recall/precision、gift/combo 子集
 
 - [ ] **P3-B-2** 路线选定后构建完整集数据集
   ```bash
-  # 检测胜出：从 Label Studio 导出 YOLO 格式，整理为 datasets/kgos_real_train8/
-  # 分割胜出：从 Label Studio 原生 JSON 转 YOLO-seg，整理为 datasets/kgos_real_seg_train/
-  # 80/20 split（约 216 train + 54 val）
+  # 用 convert_xanylabeling.py 从 270 张标注生成 seg + det 双数据集
+  # 检测胜出用 det，分割胜出用 seg；80/20 split
   # 加入 5-10 张背景图（空标注，防止误检）
   ```
 

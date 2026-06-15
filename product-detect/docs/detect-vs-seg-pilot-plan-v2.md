@@ -55,190 +55,44 @@
 
 ---
 
-## 第二步：Label Studio 项目配置
+## 第二步：标注（X-AnyLabeling）
 
-新建 Label Studio 项目，**不修改现有项目 3（KGOS Train8）**。
+工具已切换为 X-AnyLabeling，**不再用 Label Studio**。启动、模型加载、本机补丁、操作流程见 `docs/annotation-tool-xanylabeling.md`。
 
-**项目名**：`KGOS Detect-vs-Seg Pilot`
-
-**配置文件路径**：
-```
-datasets/kgos_real_all/label_studio_seg_pilot_config.xml
-```
-
-**配置内容**：
-
-```xml
-<View>
-  <Image name="image" value="$image" zoom="true" zoomControl="true" rotateControl="false"/>
-
-  <Header value="标注说明：① 用 Label Studio ML Backend 自动轮廓标注辅助生成每个商品的 mask（BrushLabels）② 再为同一批商品手动画矩形框（RectangleLabels bbox）③ KeyPoint 仅作自动轮廓提示用，不是训练标签"/>
-
-  <!-- 分割训练标签（ML Backend 自动轮廓标注辅助） -->
-  <BrushLabels name="mask" toName="image" showInline="true">
-    <Label value="KGOS 三围尺 150cm"/>
-    <Label value="KGOS加维诺维生素C泡腾片（甜橙味）4g*20"/>
-    <Label value="KGOS手提保温壶"/>
-    <Label value="KGOS新年礼袋"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）"/>
-    <Label value="KGOS玉米浓汤味玉米片 30g"/>
-    <Label value="KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12"/>
-    <Label value="KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*3 体验装"/>
-    <Label value="KGOS益生菌固体饮料 2g*15"/>
-    <Label value="KGOS绿色圆手柄锤纹杯"/>
-    <Label value="KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12"/>
-    <Label value="KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*3 三袋体验装"/>
-    <Label value="KGOS蛋白多肽营养强化粉（莓果味） 30g*12"/>
-    <Label value="KGOS蛋白多肽营养强化粉（莓果味） 30g*3 三袋体验装"/>
-    <Label value="KGOS逐光冰霸杯 900ml"/>
-    <Label value="KGOS饮料袋 10个/袋"/>
-    <Label value="KGOS香菜牛肉味玉米片 30g"/>
-    <Label value="KGO复合多种压片糖果2.0"/>
-    <Label value="KGO夏季随行咖啡杯"/>
-    <Label value="KGO手提袋"/>
-    <Label value="KGO摇摇杯 500ML"/>
-    <Label value="kgos帆布袋"/>
-    <Label value="甘油二酯咖啡固体饮料（生椰拿铁味） 8g*12 新包装"/>
-    <Label value="诺丽果红树莓益生元饮 50ml*10袋/盒"/>
-    <Label value="诺丽果红树莓益生元饮 50ml*3袋/盒 体验装"/>
-  </BrushLabels>
-
-  <!-- 检测训练标签（人工画框，不是自动轮廓提示） -->
-  <RectangleLabels name="bbox" toName="image" showInline="true">
-    <Label value="KGOS 三围尺 150cm"/>
-    <Label value="KGOS加维诺维生素C泡腾片（甜橙味）4g*20"/>
-    <Label value="KGOS手提保温壶"/>
-    <Label value="KGOS新年礼袋"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（茉莉花茶味）1g*21"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（茉莉花茶味）试用装 5g（1g*5）"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（青柑普洱味）21g（1g*21）"/>
-    <Label value="KGOS灵芝金花黑茶固体饮料（青柑普洱味）试用装 5g（1g*5）"/>
-    <Label value="KGOS玉米浓汤味玉米片 30g"/>
-    <Label value="KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*12"/>
-    <Label value="KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*3 体验装"/>
-    <Label value="KGOS益生菌固体饮料 2g*15"/>
-    <Label value="KGOS绿色圆手柄锤纹杯"/>
-    <Label value="KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*12"/>
-    <Label value="KGOS蛋白多肽营养强化粉（牛油果猕猴桃味） 30g*3 三袋体验装"/>
-    <Label value="KGOS蛋白多肽营养强化粉（莓果味） 30g*12"/>
-    <Label value="KGOS蛋白多肽营养强化粉（莓果味） 30g*3 三袋体验装"/>
-    <Label value="KGOS逐光冰霸杯 900ml"/>
-    <Label value="KGOS饮料袋 10个/袋"/>
-    <Label value="KGOS香菜牛肉味玉米片 30g"/>
-    <Label value="KGO复合多种压片糖果2.0"/>
-    <Label value="KGO夏季随行咖啡杯"/>
-    <Label value="KGO手提袋"/>
-    <Label value="KGO摇摇杯 500ML"/>
-    <Label value="kgos帆布袋"/>
-    <Label value="甘油二酯咖啡固体饮料（生椰拿铁味） 8g*12 新包装"/>
-    <Label value="诺丽果红树莓益生元饮 50ml*10袋/盒"/>
-    <Label value="诺丽果红树莓益生元饮 50ml*3袋/盒 体验装"/>
-  </RectangleLabels>
-
-  <!-- ML Backend 点击提示（仅辅助生成 mask，不作为训练标签） -->
-  <KeyPointLabels name="prompt_point" toName="image" smart="true" showInline="true">
-    <Label value="object"/>
-  </KeyPointLabels>
-
-</View>
-```
-
-**ML Backend 配置**：
-- URL：`http://localhost:9090`
-- 验证：`curl --noproxy '*' http://localhost:9090/health` → 返回 `{"status":"UP", ...}`
-- 开启 interactive preannotations（对应 BrushLabels + KeyPoint）
-- auto-accept 保持关闭，每个 mask 人工确认后再保存
-- 当前本机通过 launchd 运行：`com.chat.product-detect-sam-backend`
-- 日志：`/tmp/sam_backend.log`
-- 运行手册：`docs/sam-auto-detect-runbook.md`
-
-如果 ML Backend 或其自动轮廓模型无法启动：**不要放弃 pilot**，改用 Label Studio 内置 Polygon 工具手动画多边形轮廓。矩形框始终手动画。
-
----
+- conda 环境 `x-anylabeling`，模型 MobileSAM（权重已预置）
+- 图集目录：`datasets/kgos_real_all/images/`，右下角文件列表直接切图
+- 标签来源：`datasets/kgos_real_all/classes.txt`（28 类 ERP 标准名）
 
 ## 第三步：标注流程（每张图）
 
-每张图做两种标注，顺序不强制但建议先 mask 再 bbox：
+**每个商品只标一遍 SAM 多边形**（含盒子等规则形状也用多边形，不手画矩形）：
 
-**Mask 标注（BrushLabels）**：
-1. 对每个真实商品实例，用 Label Studio ML Backend + KeyPoint 提示生成轮廓 mask
-2. 确认 mask 未合并相邻同类商品（密排商品必须各自独立 mask）
-3. 不需要完美边缘，能区分相邻实例即可
-4. 不标：活动文字、价格、"赠"字贴、背景图、包装印刷
+1. 选 MobileSAM 模型 → `pointQ` 在商品上点一下出轮廓
+2. 多框了用 `pointE` 负点修正；满意按 `完成F` 选 ERP 标准标签
+3. 标错标签：右键该轮廓 → 编辑标签（不要用「永久删除此标签文件」）
+4. 每标完一张勾「已检查」当进度条；`Ctrl+S` 保存，生成图片同名 `.json`
+5. 不标：活动文字、价格、"赠"字贴、背景图、包装印刷
 
-**Bbox 标注（RectangleLabels）**：
-1. 为同一批商品实例手动画矩形框
-2. 框的边界与 mask 大致对齐，可以稍留一点空白
-3. 与 mask 标注的实例数量必须一致（同一张图，两种标注的 instance 总数要相同）
-
-**一致性门禁**：
-1. 转换或训练前必须检查每张图的 `mask` 实例数与 `bbox` 实例数一致
-2. 按 ERP 标准名聚合后，`mask` 的 `{name: qty}` 必须与 `bbox` 的 `{name: qty}` 一致
-3. 不一致的图片不能进入训练或评估，必须回 Label Studio 修正
-
-**一图端到端冒烟**：
-正式标 64 张前，先只用 `gift_001.jpg` 跑通：ML Backend 自动轮廓 → 人工 bbox → JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，不能替代 UI 保存、导出、转换和 overlay 门禁。
-
----
+检测框无需手标——由转换脚本从多边形外接矩形自动派生。
 
 ## 第四步：导出与数据集构建
 
-导出时从同一个 Label Studio 项目导出两次：
+X-AnyLabeling 标注产物是图片同目录的 `<name>.json`（多边形 points）。一条命令出两套：
 
-### 分割数据集（供 yolov8n-seg 训练）
-
-导出格式：JSON（Label Studio 原生格式）
-转换脚本：`scripts/convert_labelstudio_seg_export.py`
-输出目录：`datasets/kgos_seg_pilot/`
-
-**BrushLabels RLE 解码方式（高风险，必须先验证）**：
-
-```python
-# 优先用官方库；注意这是 Label Studio brush RLE，不是 COCO RLE
-from label_studio_converter.brush import decode_rle
-
-# 当前 SAM 后端返回 value.rle 为 list[int]，不是 base64 字符串。
-# 不要用 base64.b64decode，也不要用 pycocotools COCO RLE 直接解。
+```bash
+python scripts/convert_xanylabeling.py \
+  --images datasets/kgos_real_all/images \
+  --classes datasets/kgos_real_all/classes.txt \
+  --out-seg datasets/kgos_seg_pilot \
+  --out-det datasets/kgos_detect_pilot \
+  --val-ratio 0.2
 ```
 
-转换后验证：**将解码的 mask 叠到原图上肉眼确认位置和形状正确，再接入训练**。
-
-输出 YOLO seg label 格式（每行一个实例）：
-```
-class_id x1 y1 x2 y2 x3 y3 ...  # 归一化坐标 [0,1]
-```
-
-### 检测数据集（供 yolov8n 训练）
-
-导出格式：JSON（Label Studio 原生格式）
-转换脚本：`scripts/convert_labelstudio_det_export.py`
-输出目录：`datasets/kgos_detect_pilot/`
-
-读取 `RectangleLabels name="bbox"` 的标注（不读 prompt_point）。
-
-输出 YOLO detect label 格式（每行一个实例）：
-```
-class_id x_center y_center width height  # 归一化坐标 [0,1]
-```
-
-### data.yaml（两个数据集各一份）
-
-```yaml
-# datasets/kgos_seg_pilot/data.yaml
-path: /Users/chat/claude/product-detect/datasets/kgos_seg_pilot
-train: images/train
-val: images/val
-nc: 28
-names: [...]  # 28 个 ERP 标准名，顺序与 label_studio_config.xml 一致
-```
-
-两个数据集共用同一套图像文件（软链接或复制均可），split 相同。
+- 分割数据集 `datasets/kgos_seg_pilot/`：YOLO-seg 多边形（给 yolov8n-seg）
+- 检测数据集 `datasets/kgos_detect_pilot/`：YOLO-det 外接矩形（给 yolov8n，自动派生）
+- 两个数据集各带 `data.yaml`，确定性 split（同名图永远落同一侧），未标注的图自动跳过
 
 ---
-
 ## 第五步：训练
 
 Pilot 全程使用 yolov8n（不用 yolov8s）。
@@ -311,32 +165,9 @@ yolo segment train model=yolov8n-seg.pt \
 ## 需要创建的文件
 
 ```
-scripts/prepare_seg_pilot_import.py          ← 生成 64 张图的 LS 导入 JSON
-scripts/convert_labelstudio_seg_export.py    ← LS 导出 → YOLO seg 格式（含 RLE 解码）
-scripts/convert_labelstudio_det_export.py    ← LS 导出 → YOLO detect 格式（读 bbox 标签）
-scripts/evaluate_detect_vs_seg.py            ← 两模型对比评估
-tests/test_convert_labelstudio_seg_export.py ← RLE 解码回归测试
-tests/test_convert_labelstudio_det_export.py ← bbox 转换回归测试
-datasets/kgos_real_all/label_studio_seg_pilot_config.xml  ← Label Studio 配置
-docs/detect-vs-seg-pilot-report.md           ← 评估结果（训练完后填写）
+scripts/convert_xanylabeling.py     ← 已创建：X-AnyLabeling 标注 → YOLO seg+det 双数据集
+scripts/evaluate_detect_vs_seg.py   ← 待创建：两模型对比评估
+docs/detect-vs-seg-pilot-report.md  ← 待创建：评估结果（训练完后填写）
 ```
 
-如需修改：
-```
-CLAUDE.md    ← 更新当前阶段描述
-SKILL.md     ← 更新 PATHS / ENTRY MAP
-tasks/todo.md
-```
-
----
-
-## 相对于 Codex v1 的变更点
-
-| 项目 | Codex v1 | 本计划 v2 |
-|------|----------|-----------|
-| 检测训练标签来源 | 从 mask 自动派生 bbox | 人工独立标注 RectangleLabels |
-| Label Studio 配置 | `prompt_box` 兼作自动轮廓提示和框标签 | 新增独立 `RectangleLabels name="bbox"` |
-| 检测数据集名 | kgos_detect_from_seg_pilot | kgos_detect_pilot |
-| 转换脚本 | 1 个（seg+派生detect） | 2 个独立脚本 |
-| 模型规格 | yolov8s | yolov8n |
-| Inconclusive 处理 | 未明确 | 补标 20 张再评估 |
+> 注：原计划列的 LS 导入/导出/RLE 转换脚本（prepare_seg_pilot_import、convert_labelstudio_*）已随工具切换作废，不再需要。convert_xanylabeling.py 一个脚本即覆盖 seg+det 双输出。
