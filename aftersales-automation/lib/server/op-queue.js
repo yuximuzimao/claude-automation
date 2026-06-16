@@ -7,7 +7,6 @@
  */
 
 const { execFileSync, spawnSync, spawn } = require('child_process');
-const http = require('http');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
@@ -140,7 +139,6 @@ async function executeOp(op) {
     case 'scan':           return execScan(op);
     case 'scan-account':   return execScanAccount(op);
     case 'scan-finalize':  return execScanFinalize(op);
-    case 'check-session':  return execCheckSession(op);
     case 'open-account':   return execOpenAccount(op);
     case 'pipeline':       return execPipeline(op);
     case 'reinfer':        return execReinfer(op);
@@ -221,60 +219,8 @@ function spawnAsync(cmd, args, opts) {
   });
 }
 
-// ── 轻量 session 检测（inject + CDP URL 校验，不拉工单） ────────────
-
-async function execCheckSession(op) {
-  const { accountNum, accountNote } = op.params;
-
-  // Step 1: 注入 session（失败则直接标 expired/error）
-  const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-    timeout: 30000, encoding: 'utf8',
-  });
-  if (inj.status !== 0) {
-    const msg = (inj.stderr || inj.stdout || '').slice(0, 150);
-    const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(msg);
-    updateAccountStatus(accountNum, {
-      status: isExpired ? 'expired' : 'error',
-      lastScan: new Date().toISOString(),
-      error: msg, note: accountNote,
-    });
-    return { accountNum, status: isExpired ? 'expired' : 'error' };
-  }
-
-  // Step 2: 额外等 10s，让页面完成跳转（inject 内已等 2s，对齐 scan 注入间隔）
-  await new Promise(r => setTimeout(r, 10000));
-
-  // Step 3: 用 CDP /json 查 SCRM tab 当前 URL
-  const tabUrl = await new Promise(resolve => {
-    http.get('http://localhost:9222/json', res => {
-      let d = ''; res.on('data', c => d += c);
-      res.on('end', () => {
-        try {
-          const t = JSON.parse(d).find(t => t.url && t.url.includes('scrm.jlsupp.com'));
-          resolve(t ? t.url : null);
-        } catch(e) { resolve(null); }
-      });
-    }).on('error', () => resolve(null));
-  });
-
-  let status, error;
-  if (tabUrl === null) {
-    status = 'error'; error = '鲸灵标签页未找到';
-  } else if (tabUrl.includes('/login')) {
-    status = 'expired'; error = `登录已失效，当前URL: ${tabUrl.slice(0, 100)}`;
-  } else {
-    status = 'ok'; error = null;
-  }
-
-  updateAccountStatus(accountNum, {
-    status, lastScan: new Date().toISOString(), note: accountNote,
-    ...(error ? { error } : { error: null }),
-  });
-
-  // 检测后再等 10s，确保下一次注入前有足够间隔（对齐 scan 的 10s+10s 节奏）
-  await new Promise(r => setTimeout(r, 10000));
-  return { accountNum, status };
-}
+// [removed-2026-06-16] 删除 execCheckSession：刷新状态全链路的一环（多账号连续注入检测=风控红线）。
+// 配套删除 routes.js POST /accounts/refresh-status 与前端"刷新状态"按钮。
 
 async function execOpenAccount(op) {
   const { accountNum, accountNote } = op.params;

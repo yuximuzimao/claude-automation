@@ -93,6 +93,8 @@ app.post('/api/skip-next-scan', (req, res) => {
   res.json({ ok: true, message: '下次扫描将被跳过' });
 });
 
+// [stopped-2026-06-16] 旧自动扫描入口（多账号注入 + scan-finalize 自动入队 reprocess）。
+// 当前不被调用，保留框架供第三步以新注入路径重建。
 function runAutoScan() {
   if (skipNextScan) {
     skipNextScan = false;
@@ -123,6 +125,7 @@ function runAutoScan() {
 // 精确到点的定时调度（8/12/16/20）
 let scanTimer = null;
 
+// [stopped-2026-06-16] 定时调度框架，当前不被调用（启动时不再 scheduleNextScan）。第三步重建时复用。
 function scheduleNextScan() {
   // 先清除可能残留的旧 timer，防止多次调用叠加（resumeScan 连续触发时重复入队根因）
   if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
@@ -148,15 +151,15 @@ function scheduleNextScan() {
   }, ms);
 }
 
-// 供 routes.js 调用的扫描控制（通过 app.locals 传递）
+// [stopped-2026-06-16] 定时扫描已停。stopScan/resumeScan 降级为 no-op：
+// /emergency-stop 与 /resume 现在只控制 op-queue 队列层（紧急停止机制第二三步复用），
+// 不再启停定时器。resumeScan 不再调 scheduleNextScan，避免"恢复运行"按钮重新拉起旧自动扫描。
 app.locals.stopScan = () => {
   if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
   app.locals.nextScanAt = null;
-  console.log('[auto-scan] 定时扫描已暂停');
 };
 app.locals.resumeScan = () => {
-  scheduleNextScan();
-  console.log('[auto-scan] 定时扫描已恢复');
+  // no-op：定时扫描已停，恢复运行只恢复队列处理（见 routes.js /resume → opQueue.resume()）。
 };
 
 app.listen(PORT, async () => {
@@ -200,11 +203,13 @@ app.listen(PORT, async () => {
     }
   })();
 
-  scheduleNextScan();
-  startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
+  // [stopped-2026-06-16] 停旧系统：不再调度定时扫描、不再启动 ERP 心跳保活。
+  // 旧自动路径（多账号注入 + pipeline 自动写鲸灵）已触发风控封 IP，待第二三步以新注入路径重建。
+  // scheduleNextScan();
+  // startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
 
-  // 启动时清理残留状态：collecting/collected（上次进程崩溃留下的）重置为 pending
-  // 然后把所有 pending 工单入队推理
+  // 启动时清理残留状态：collecting/collected/inferring（上次进程崩溃留下的）重置为 pending。
+  // [stopped-2026-06-16] 重置后停在 pending 等人工处理，不再自动入队 reprocess-one（旧路径自动写鲸灵）。
   const db = require('./lib/server/data');
   const stale = (db.readQueue().items || []).filter(i =>
     ['collecting', 'collected', 'inferring'].includes(i.status) && i.mode === 'live'
@@ -212,14 +217,7 @@ app.listen(PORT, async () => {
   for (const item of stale) {
     db.updateQueueItem(item.id, { status: 'pending' });
   }
-  if (stale.length > 0) console.log(`[startup] 重置 ${stale.length} 条残留状态工单为 pending`);
-
-  const pending = (db.readQueue().items || []).filter(i => i.status === 'pending' && i.mode === 'live');
-  for (const item of pending) {
-    const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
-    opQueue.enqueue('reprocess-one', label, { queueItemId: item.id });
-  }
-  if (pending.length > 0) console.log(`[startup] 入队 ${pending.length} 条 pending 工单`);
+  if (stale.length > 0) console.log(`[startup] 重置 ${stale.length} 条残留状态工单为 pending（纯手动模式，不自动处理）`);
 });
 
 // ── 启动时数据清理 ────────────────────────────────────────────────────
@@ -264,6 +262,7 @@ function startupDataCleanup() {
 
 // ── ERP 保活心跳（1小时）─────────────────────────────────────────────
 // 防止 ERP 服务端 session 超时（实测约 4-8h），避免登录恢复失败的情况
+// [stopped-2026-06-16] 心跳保活属后台自动行为，停旧系统期间不启动（启动时不再调用）。函数本体保留。
 function startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown) {
   const HEARTBEAT_INTERVAL = 60 * 60 * 1000; // 1 小时
   const ALERT_REPEAT_MS = 30 * 60 * 1000;    // 30 分钟重复告警

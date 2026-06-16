@@ -721,21 +721,9 @@ router.post('/accounts/:num/relogin-cancel', async (req, res) => {
   res.json({ ok: true, message: `账号${num}已取消登录保存，可重新登录` });
 });
 
-router.post('/accounts/refresh-status', (req, res) => {
-  const fsSync = require('fs');
-  const accounts = JSON.parse(fsSync.readFileSync(ACCOUNTS_FILE, 'utf8'));
-  const nums = Object.keys(accounts).sort((a, b) => Number(a) - Number(b));
-  let queued = 0;
-  for (const num of nums) {
-    const a = accounts[num];
-    if (!fsSync.existsSync(path.join(SESSIONS_DIR, a.file))) continue;
-    opQueue.enqueue('check-session', `检测账号${num}「${a.note || a.name}」登录状态`, {
-      accountNum: parseInt(num), accountNote: a.note || a.name,
-    });
-    queued++;
-  }
-  res.json({ ok: true, queued, message: `已入队检测 ${queued} 个账号，结果实时更新` });
-});
+// [removed-2026-06-16] 删除 POST /accounts/refresh-status：它为每个账号入队 check-session 逐个注入检测，
+// = 多账号短时连续登录，踩"禁止同时多 session 登录"风控红线。后台状态改靠扫描工单自然确认 +
+// 店铺管理"重新登录"按钮（单账号人工）。check-session op 同步删除。
 
 router.post('/accounts/:num/open', (req, res) => {
   const num = parseInt(req.params.num, 10);

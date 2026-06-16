@@ -51,7 +51,7 @@
 ## 代码生效铁律
 
 **修改 `lib/` 下任何决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server**。
-原因：server 启动时加载模块到内存，不重启新逻辑不生效。重启后只报告工单状态，不自动重跑；是否重采由用户手动选择。
+原因：server 启动时加载模块到内存，不重启新逻辑不生效。**停旧系统后（2026-06-16）启动只重置残留状态为 pending、不自动入队处理（纯手动模式）**；是否处理由用户手动选择。定时扫描/ERP心跳已停用。
 
 触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/jl-account-config.js` · `lib/erp/*.js`
 

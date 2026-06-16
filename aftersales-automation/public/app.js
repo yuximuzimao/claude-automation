@@ -8,7 +8,7 @@ function connectSSE() {
   es.addEventListener('connected', () => {
     setConnected(true);
     loadAllLiveTabs();
-    loadNextScanTime();
+    // [stopped-2026-06-16] 定时扫描已停，next-scan-label 已从页面摘除，不再调 loadNextScanTime()。
     loadJlAlerts();
     // 重连后恢复队列面板状态（先同步 lastCompletedOpId，避免弹出历史完成通知）
     api('/op-queue').then(state => {
@@ -1836,18 +1836,8 @@ async function cancelRelogin(num) {
   loadAccounts();
 }
 
-async function checkAccountsStatus() {
-  const btn = document.getElementById('btn-check-status');
-  if (btn) { btn.disabled = true; btn.textContent = '检测中...'; }
-  // 先立即从文件读最新缓存（快速显示当前状态）
-  await loadAccounts();
-  // 再入队真实检测（inject + CDP URL 校验，结果通过 SSE 实时回来）
-  const res = await api('/accounts/refresh-status', { method: 'POST' });
-  showToast(res.message || '检测已启动，结果实时更新');
-  setTimeout(() => {
-    if (btn) { btn.disabled = false; btn.textContent = '刷新状态'; }
-  }, 5000);
-}
+// [removed-2026-06-16] 删除 checkAccountsStatus：刷新状态按钮逻辑（多账号连续注入检测=风控红线）。
+// 账号状态改靠扫描工单自然确认 + 店铺管理"重新登录"按钮（单账号人工）。
 
 async function openAccountStore(num) {
   const res = await api(`/accounts/${num}/open`, { method: 'POST' });

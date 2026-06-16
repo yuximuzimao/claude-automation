@@ -18,7 +18,7 @@ entry: cli.js
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
 | `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
-| `server.js` | Express 服务（port 3457），定时扫描+队列管理+Web 面板 | 改 API/队列/定时任务时 |
+| `server.js` | Express 服务（port 3457），队列管理 + Web 面板。**定时扫描/ERP心跳/启动自动入队已停用（2026-06-16 停旧系统）**，待第二三步以新安全注入路径重建 | 改 API/队列/定时任务时 |
 | `lib/infer.js` | 规则推理引擎（1118行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
@@ -72,7 +72,7 @@ entry: cli.js
 - **鲸灵操禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
 - **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting` 状态，距上次推理 ≥ `RESCAN_INTERVAL_HOURS`(4h) 后下次扫描自动重置为 `pending` 重采。
-- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。重启后只报告工单状态，不自动重跑——由用户手动选择处理。
+- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。**停旧系统后（2026-06-16）启动只重置残留状态为 pending、不再自动入队 reprocess，纯手动模式**——是否处理由用户手动选择。
 
 ### 工单类型路由（`docs/INDEX.md §2`）
 
@@ -126,7 +126,7 @@ await cdp.navigate(targetId, 'https://...');
   - ⚠️ `cdp.clickAt(input)` 会清除输入框内容，禁止在登录页点击任何输入框
 - **Phase 2**：点登录按钮 → 等协议弹窗（`.rc-kmui-com-dlg`）→ 点同意（`input.rc-btn-ok`）→ checkLogin 确认
 - 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
-- 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知
+- 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知。**（2026-06-16 停旧系统：startErpHeartbeat 函数保留但启动时不再调用，心跳已停。ERP session 超时改靠人工触发操作时的登录恢复兜底）**
 - 详见 `docs/ops-tech.md §3.2`
 
 ### 鲸灵账号重新登录机制
@@ -154,9 +154,7 @@ await cdp.navigate(targetId, 'https://...');
 | 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击 `a.ml_15` 时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
 | 13 | Chrome 自动填充只触发一次 | Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试而非 3 次循环；仍失败时进 Phase 2 凭据注入而不是重试 reload。单点依赖 Chrome 自动填充是 ERP session 反复失效的根因。 |
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
-| 15 | "刷新状态"卡死=正常，是串行队列 | `POST /accounts/refresh-status` 为 `../sessions/accounts.json` 中每个账号入队 `check-session` op，当前 11 个账号约 90s，期间 op-queue 被占满。不要以为卡死——等 SSE `accounts-update` 逐个回来即可。触发后不要重复点击，否则会重复入队。 |
-| 16 | check-session URL 检测依赖唯一 SCRM tab | `check-session` 通过 CDP `/json` 取第一个 `scrm.jlsupp.com` tab 的 URL 判断登录状态。若用户同时开了多个 SCRM tab（如手动打开了多个店铺），检测的可能不是刚注入的那个账号 → 误报"正常"。检测时应保持主 Chrome 中只有一个鲸灵 tab。 |
-| 17 | check-session 慢网络下可能误报"正常" | inject 内等 2s + check-session 再等 3s = 共 5s。若网络慢，页面仍在跳转中（URL 尚未到达 `/login`），就会被判为"正常"。实际上 session 已过期，只是跳转还没完成。症状：刷新后显示"正常"，但 scan 时仍报 expired。解法：直接触发全账号扫描（真实 cli.js list 验证）。 |
+| 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原 `POST /accounts/refresh-status` + `check-session` op 为每个账号逐个注入检测 = 多账号短时连续登录，踩"禁止同时多 session 登录"风控红线（曾导致 IP 封禁）。**已彻底删除。账号状态改靠扫描工单自然确认 + 店铺管理"重新登录"按钮（单账号人工）。不要重建任何"批量检测账号状态"功能。** |
 | 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 `inferRefundOnly`（flow-5.3）的 safeToWait 3 条路径在 hoursUntilNextScan 为 null 时直接调用 `.toFixed(1)` → TypeError。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复。注意：flow-5.1 已改为简单阈值（`remaining > REMIND_HOURS`），不涉及 margin 计算。 |
 | 19 | 全项目重复代码 → 提取共享函数 | pipeline.js、op-queue.js 各自复制了相同的逻辑（快递单号提取、Mac Reminder 创建）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：`extractShippedTrackings()` 提取到 `lib/helpers.js`。2026-05-29：`createReminder()` 同理提取到 `lib/helpers.js`，pipeline.js 和 op-queue.js 共用。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
