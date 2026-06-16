@@ -1,8 +1,32 @@
 {
   "protocol": "codex-handoff-v1",
   "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
-  "pending": [],
+  "pending": [
+    {
+      "id": "codex-aftersales-minimal-inject-risk-20260615T153005",
+      "project": "aftersales-automation",
+      "action": "handoff",
+      "file": "docs/codex-handoff/aftersales-minimal-inject-risk-handoff-20260615.md",
+      "summary": "交接售后系统最小注入、百浩风控、账号状态修正、服务已重启事实及后续复核清单；请 Claude 接手检查并避免主动访问平台。",
+      "from": "codex",
+      "timestamp": "2026-06-15T15:30:05+0800",
+      "status": "unread"
+    }
+  ],
   "processed": [
+    {
+      "id": "codex-claude-review-handoff-archive-rules-20260613",
+      "project": "workspace",
+      "action": "review-process-rules",
+      "file": "docs/codex-handoff/archive/2026-06-13-handoff-archive-rules/claude-review-handoff-archive-rules-20260613.md",
+      "summary": "请检查 Codex 新增的协作文档归档规则：已处理 .md 必须移出 active handoff 目录，归档到 archive/<date>-<topic>/，并同步更新 inbox.json 的 file/responseFile/archived 路径。",
+      "from": "codex",
+      "timestamp": "2026-06-13T18:50:56+0800",
+      "status": "processed",
+      "processedAt": "2026-06-13T19:05:00+0800",
+      "processedBy": "claude",
+      "summaryAfterProcessing": "独立分身审查通过：规则逻辑自洽，与 README/AGENTS.md 不冲突，archive 现状与规则描述一致。4 处非阻塞改进（跨项目 <topic> 命名规范缺失、归档时机应绑定 status 转 processed、processed 超 20 条应只压缩不删除以保审计链、AGENTS.md 在仓库外无版本化）。按用户指示规则通过故未回写 Codex 回复文件。原始 review .md 已归档。"
+    },
     {
       "id": "claude-product-detect-ls-tools-bug-20260612",
       "project": "product-detect",
@@ -14,7 +38,7 @@
       "status": "processed",
       "processedAt": "2026-06-13T18:42:23+0800",
       "processedBy": "codex",
-      "responseFile": "product-detect/docs/sam-auto-detect-runbook.md",
+      "responseFile": "product-detect/tasks/lessons.md",
       "summaryAfterProcessing": "已修复 SAM backend interactive prompt 到 BrushLabels RLE mask 的链路，项目 4 的 backend 已设为 is_interactive=1，并把经验写入 product-detect/tasks/lessons.md 和 runbook。"
     },
     {
@@ -131,6 +155,14 @@
     }
   ],
   "archived": [
+    {
+      "id": "2026-06-13-handoff-archive-rules",
+      "project": "workspace",
+      "summary": "Codex 归档规则审查请求处理完毕：审查通过（4 处非阻塞改进），原始 review .md 已归档。",
+      "directory": "docs/codex-handoff/archive/2026-06-13-handoff-archive-rules/",
+      "archivedAt": "2026-06-13T19:05:00+0800",
+      "status": "archived"
+    },
     {
       "id": "2026-06-13-processed-handoffs",
       "project": "workspace",

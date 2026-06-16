@@ -1,11 +1,42 @@
 # Handoff
 
-更新时间：2026-06-08
-当前负责人：Codex
+更新时间：2026-06-16
+当前负责人：Claude Code
 当前分支：data-model-restructure
-当前焦点：工作区按项目拆分整理中；lkwj 已提交（果实143/任务1882/异色38，其中34条异色课题纳入任务，4个通行证异色无捕捉课题）；codex-monitor 项目推断误分类和 UI 刷新性能修复已完成验证
+当前焦点：**鲸灵售后自动化重构方案已批准，待新窗口执行（计划已落盘，尚未动代码）**
+
+## ⏭️ 下一窗口接手：鲸灵售后自动化重构（已批准，未执行）
+
+**计划文件（必读）**：`/Users/chat/.claude/plans/codex-3-2-ip-codex-3-codex-1-1-1-1-code-twinkling-emerson.md`
+**起因**：百浩账号3点"打开后台"卡住、重复点2次→IP被封、平台说"刷接口"。根因=注入不像真人（不清旧态、reload时双身份）+ 内部跳转用 $router.push 非真点击 + 刷新状态多账号连续登录 + 失败不回写状态重复注入。
+
+**当前状态**：方案已与用户逐条对齐、经 Codex 审计、用户批准。**尚未写任何代码，工作区无本次改动。**
+
+**执行铁律（务必遵守）**：
+- worktree 内分步做（触发 worktree 铁律：流程结构+跨项目 inject 脚本）。
+- 鲸灵操作报错即停绝不重试。不能真实访问鲸灵试错。
+- **真实操作走"找/确认/点"三步分离，由用户指挥**：找（纯扫描DOM/截图标记/F12核对，不点击）→ 用户确认点位 → 点（单独最小坐标点击脚本）。点位核对与操作分开。
+- 每完成一步报告并等用户指令，不自行推进到真机点击。
+
+**三步推进（详见计划文件）**：
+1. **第一步 停旧系统**：停所有自动行为（定时扫描/队列自动处理/ERP心跳等所有保活），删"刷新状态"按钮+refresh-status路由+check-session op。server 只剩 Web 面板+手动按钮。纯改造+单测，不碰鲸灵。
+2. **第二步 改 A2"打开店铺后台"走新注入路径**：打开login页→检测当前登录店铺名==目标note？对则跳过注入直接用/错则点退出→等待→注入→等跳转。新增 `lib/jl/inject-plan.js` 纯函数+单测。单点验证安全，期间人工靠它处理工单。
+3. **第三步 扩展 A1 逐账号闭环**：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(tab-manager)+处理完进首页读提醒。
+
+**整系统停止机制**（贯穿二三步，不分级）：任何鲸灵操作报错→停整个售后系统+关非主tab+残留检测+写 circuit-breaker.json+建1分钟Mac提醒。复用扩展现有 `emergencyStop()`。
+
+**Codex 审计已采纳⑤多tab精确过滤；作废①(改检测复用)③(用户定全停)④(固定坐标)⑥(彻底停旧不共存)⑦(删refresh按钮)**。详见计划文件末尾。
+
+**审计材料**：`docs/codex-handoff/aftersales-closure-injection-redesign-review.md`（含旧版方案全文+Codex 7条审计，注：方案后续又按用户反馈改过，以计划文件为准）。
+
+---
 
 ## 已完成
+- 自动化 Chrome 快捷方式已修复（2026-06-15）：
+  - `/Users/chat/Applications/自动化Chrome.app/Contents/MacOS/applet` 改为 shell 入口，绕开 AppleScript `System Events` 进程索引
+  - 启动路径统一为 `claude/sessions/start-chrome-debug.sh` → `127.0.0.1:9222/json/version` 端口检测 → `open -a "Google Chrome"`
+  - 原 AppleScript applet 备份在同目录 `applet.apple-binary.bak-20260615`，原 `main.scpt` 备份在 `Resources/Scripts/main.scpt.bak-20260615`
+  - 文档入口：`sessions/CLAUDE.md` 的“自动化 Chrome”章节
 - codex-monitor 项目推断误分类已修复（2026-06-04）：
   - `reader_common.infer_project_from_handle()` 改为按事件类型加权投票，跳过 Codex `function_call_output`、`function_call`、`token_count`
   - 默认扫描窗口从 100 行提高到 200 行
