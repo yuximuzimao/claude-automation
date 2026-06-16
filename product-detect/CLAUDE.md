@@ -105,9 +105,9 @@ python scripts/text50_eval.py
 # 推理测试
 python scripts/infer.py --brand kgos --image /path/to/combo.jpg --verbose
 
-# 启动 X-AnyLabeling 标注 GUI（详见 docs/annotation-tool-xanylabeling.md）
+# 启动 X-AnyLabeling 标注 GUI（--filename 必须传目录，传单图则文件列表为空）
 conda activate x-anylabeling && xanylabeling \
-  --filename "$PWD/datasets/kgos_real_all/images/gift_001.jpg" \
+  --filename "$PWD/datasets/kgos_real_all/images" \
   --labels "$PWD/datasets/kgos_real_all/classes.txt"
 ```
 

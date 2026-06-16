@@ -16,11 +16,11 @@
 source ~/miniconda3/etc/profile.d/conda.sh && conda activate x-anylabeling
 cd ~/claude/product-detect
 xanylabeling \
-  --filename "$PWD/datasets/kgos_real_all/images/gift_001.jpg" \
+  --filename "$PWD/datasets/kgos_real_all/images" \
   --labels "$PWD/datasets/kgos_real_all/classes.txt"
 ```
 
-传 images 目录里任一张图，GUI 右下角文件列表会列出同目录全部 270 张，可直接点选切图。
+**`--filename` 必须传图片目录，不能传单张图**：传目录时 X-AnyLabeling 走 `osp.isdir()` 判断（源码 `label_widget.py:2447`）→ 自动 `import_image_folder` 扫描整个文件夹，右下角文件列表列出全部 270 张可直接切图；传单张图则只开那一张，文件列表为空。
 
 ## 本机已知坑与已打的补丁（重要）
 
