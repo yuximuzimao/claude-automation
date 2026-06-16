@@ -34,6 +34,7 @@ entry: cli.js
 | `lib/erp/shop-map.js` | 账号→ERP店铺名 + 供应商ID→店铺名映射（sku-calculator 共享） | 需要确定 ERP 店铺时 |
 | `lib/jl/list.js` | 鲸灵工单列表扫描 | 改列表扫描逻辑时 |
 | `lib/jl/read-ticket.js` | 读单条工单详情 | 改工单数据提取时 |
+| `lib/jl/session-filter.js` | 最小注入白名单——`filterAuthCookies`/`filterIdentityLocalStorage`，只搬认证态+账号身份，丢弃设备/网络指纹（跨设备搬指纹触发风控） | 改注入字段白名单时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
@@ -47,6 +48,8 @@ entry: cli.js
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
+| `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
+| `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
 | `lib/server/auto-exec-confidence.js` | 自动执行置信度系统 — 场景指纹+人工反馈驱动 auto 判定 | 查/改自动执行条件时 |
 | `public/app.js` | 前端主逻辑（2026行）— 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
@@ -186,14 +189,17 @@ lib/jl/logistics.js
 lib/jl/navigate.js
 lib/jl/read-ticket.js
 lib/jl/reject.js
+lib/jl/session-filter.js
 lib/jl-account-config.js
 lib/jl-session-state.js
 lib/product/archive.js
 lib/product/match.js
+lib/server/account-session-status.js
 lib/server/auto-exec-confidence.js
 lib/server/data.js
 lib/server/op-queue.js
 lib/server/pipeline.js
+lib/server/pipeline-status.js
 lib/server/routes.js
 lib/server/sse.js
 cli.js
