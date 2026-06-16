@@ -290,3 +290,24 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 1. 更换 LaunchAgent plist 时，必须先 `launchctl bootout` 旧项 + rename 旧 plist，再 bootstrap 新项
 2. 诊断时用 `launchctl print gui/$(id -u)/<label>` 而非 `launchctl list`（list 在某些环境不完整）
 3. 新旧 plist 并存且都 `RunAtLoad=true` 的状态随时可能在重启后复现冲突，即使当前安静
+
+### 54. EnterWorktree 默认从 origin fresh 切，会落后于当前本地分支（2026-06-16）
+
+执行"停旧系统"重构时，在 `data-model-restructure` 分支上 `EnterWorktree`，得到的 worktree 基线却是 `cd555ae`——落后当前分支 30+ commit，缺了百浩风控修复等关键更新。直接合并会污染主分支、丢失这些更新。
+
+**根因**：EnterWorktree 的 `worktree.baseRef` 默认 `fresh`，从 `origin/<默认分支>`（main）切，而不是当前本地工作的分支 HEAD。当本地分支领先 origin 默认分支很多时，worktree 基线就严重过时。在项目 `.claude/settings.json` 设 `worktree.baseRef: head` 后**当前 session 的 EnterWorktree 仍未读取**（设置疑似需重启 session 才加载）。
+
+**正确做法**：不依赖 EnterWorktree 自动切基线。手动 `git worktree add <路径> -b <新分支> <当前分支>` 显式指定基线为当前分支，再 `EnterWorktree({path: <路径>})` 进入已注册的 worktree。
+
+**铁律**：
+1. 开 worktree 前先 `git -C <worktree> log --oneline -1` + `git log --oneline <worktree分支>..<当前分支>` 验证基线（后者应为空）。基线错了立即删掉重开，不要在错基线上写代码。
+2. 当前分支领先 origin 默认分支时，永远手动 `git worktree add ... <当前分支>` 指定基线，不靠 EnterWorktree 默认 fresh。
+3. 合并前确认 fast-forward 可行（`git merge-base --is-ancestor <当前分支> <worktree分支>`），用 `git merge --ff-only` 避免意外 merge commit。
+
+### 55. server.js 由 LaunchAgent KeepAlive 守护，kill 后会自动重启（2026-06-16）
+
+`/aftersales-restart` kill 旧 server PID 后，新 PID（PPID=1，被 launchd 接管）会在 10s 内自动拉起（见 lesson #53 的 `com.jl.server` plist，KeepAlive + ThrottleInterval=10）。
+
+**影响**：重启验证时不能假设"kill 后端口空闲需手动 nohup 启动"——launchd 会自动重启并加载磁盘上的最新 server.js。要验证新进程加载了新代码，看 `ps -p <PID> -o lstart` 确认启动时间晚于 kill 时刻，再从 server.log 最后一次"已启动"横幅截取该进程的日志段（log 是 append 模式，新旧混写）。
+
+**铁律**：grep server 进程用完整路径 `aftersales-automation/server.js`，不用 `node server`（漏匹配 nvm 全路径 node）。lsof -ti:3457 会列出 Chrome 网络进程的连接，需 `ps -p` 辨明真正的 server 监听者。
