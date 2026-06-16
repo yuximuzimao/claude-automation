@@ -106,6 +106,10 @@ function escalate(reason, extra) {
   return { action: 'escalate', reason, confidence: 'low', rulesApplied: [], warnings: [], ...extra };
 }
 
+function isLiveScanItem(sim, queueItem) {
+  return sim.mode === 'live' && queueItem.source === 'scan';
+}
+
 // hint 关键词 → 覆盖 action
 function parseHintAction(hint) {
   if (!hint) return null;
@@ -1023,9 +1027,10 @@ function inferDecision(sim, queueItem) {
     });
   }
 
-  // ── 工单不可访问 → 自动归档（已处理/跨商家/权限问题）──────────
+  // ── 工单不可访问 → 按来源分流 ───────────────────────────────
   // 必须在 validateCollectedData 之前，因为此时 ticket 为 null
-  // "已不在待处理列表"/"已处理或已关闭" → 工单确实已关闭，自动归档
+  // 扫描刚发现的 live 工单：列表反查未命中不是明确终态，保留待复查。
+  // 非扫描来源保留旧行为，避免历史/手工场景重复卡住。
   // 注意："不属于当前商家" 不在此处处理——这是账号注入异常，不是工单终态。
   //       下方 validateCollectedData (ticket=null) 会捕获并 escalate 到人工。
   const goneFromList = (cd.collectErrors || []).find(e =>
@@ -1034,6 +1039,13 @@ function inferDecision(sim, queueItem) {
     )
   );
   if (goneFromList) {
+    if (isLiveScanItem(sim, queueItem)) {
+      s({ type: 'branch', text: `详情页未确认，保留待复查 → ${goneFromList}` });
+      return fin(escalate(`详情页未确认，需复查：${goneFromList}`, {
+        rulesApplied: [{ doc: 'terminal', section: 'gone', summary: '扫描工单详情页未确认→保留待复查' }],
+        warnings: ['扫描刚发现的工单详情页暂时不可确认，未自动归档'],
+      }));
+    }
     s({ type: 'branch', text: `工单不可访问 → ${goneFromList}` });
     return fin({
       action: 'skip',

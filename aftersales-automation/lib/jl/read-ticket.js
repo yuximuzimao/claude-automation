@@ -8,7 +8,7 @@
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { ok, fail } = require('../result');
-const { waitFor } = require('../wait');
+const { sleep, waitFor } = require('../wait');
 
 // 递归读取 Vue orderInfo 的 JS（固定字符串，不动态生成）
 // 从 DOM innerText 补充读取 Vue orderInfo 中缺失的字段
@@ -174,29 +174,48 @@ async function readTicket(targetId, workOrderNum) {
       if (t.includes('售后工单信息') || t.includes('售后类型') || t.includes('售后原因')) return 'ok';
       return 'loading';
     })()`;
-    // 最多等 4s 确认工单号出现在页面上
+    // 最多等 12s 确认工单号出现在页面上。详情页偶发慢渲染，过早反查列表会把新扫到的工单误判为已处理。
     let pageOk = false;
-    for (let i = 0; i < 5; i++) {
-      await new Promise(r => setTimeout(r, 800));
+    let lastVerify = null;
+    for (let i = 0; i < 12; i++) {
+      await sleep(1000);
       try {
         const v = await cdp.eval(targetId, verifyJS);
+        lastVerify = v;
         if (v === 'ok') { pageOk = true; break; }
         if (typeof v === 'string' && v.startsWith('wrong_merchant:')) {
           const mch = v.split(':')[1];
           return fail(`工单 ${workOrderNum} 不属于当前商家（实际归属 [${mch}]），请确认账号是否正确`);
         }
-        if (v === 'notfound' && i >= 2) {
-          // 反查工单列表区分"已处理"vs"切错店铺"
-          await navigate(targetId, '/business/after-sale-list');
-          await new Promise(r => setTimeout(r, 2000));
-          const listText = await cdp.eval(targetId, 'document.body.innerText || ""');
-          const inList = listText.includes(workOrderNum);
-          if (inList) {
-            return fail(`工单 ${workOrderNum} 在列表中可见但详情页加载失败，请重试`);
-          }
-          return fail(`工单 ${workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
-        }
       } catch { /* ignore */ }
+    }
+
+    if (!pageOk) {
+      // 反查工单列表区分"详情页慢/失败"vs"已不在列表"。必须等列表渲染稳定后再读文本。
+      await navigate(targetId, '/business/after-sale-list');
+      let listText = '';
+      try {
+        listText = await waitFor(
+          async () => {
+            const state = await cdp.eval(targetId, 'document.readyState');
+            const url = await cdp.eval(targetId, 'window.location.href');
+            const text = await cdp.eval(targetId, 'document.body.innerText || ""');
+            const listReady = state === 'complete' &&
+              url.includes('after-sale-list') &&
+              text.length > 100 &&
+              (text.includes('售后') || text.includes('工单') || text.includes('待处理'));
+            return listReady ? text : null;
+          },
+          { timeoutMs: 10000, intervalMs: 800, label: `after-sale-list ${workOrderNum}` }
+        );
+      } catch {
+        return fail(`工单 ${workOrderNum} 详情页未确认，列表页未加载完成，请重试`);
+      }
+      const inList = listText.includes(workOrderNum);
+      if (inList) {
+        return fail(`工单 ${workOrderNum} 在列表中可见但详情页加载失败，请重试`);
+      }
+      return fail(`工单 ${workOrderNum} 已不在待处理列表（可能已处理或已关闭，详情页状态未确认：${lastVerify || 'unknown'}）`);
     }
 
     // 等待 API 数据加载完成（mainOrderId 有值才算就绪）

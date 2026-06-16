@@ -1785,7 +1785,7 @@ async function loadAccounts() {
       <div class="account-meta">上次扫描：${lastScan}${a.status === 'ok' && a.count !== undefined ? `　工单：${a.count}` : ''}</div>
       ${a.error ? `<div class="account-error">${h(a.error)}</div>` : ''}
       <div class="account-actions">
-        ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num})">打开店铺后台</button>` : ''}
+        ${a.hasFile && !['expired', 'error'].includes(statusKey) ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num})">打开店铺后台</button>` : ''}
         ${reloginBtn}
       </div>
     </div>`;
@@ -1851,7 +1851,11 @@ async function checkAccountsStatus() {
 
 async function openAccountStore(num) {
   const res = await api(`/accounts/${num}/open`, { method: 'POST' });
-  showToast(res.message || `已打开账号${num}店铺后台`);
+  if (res.ok) showToast(res.message || `已打开账号${num}店铺后台`);
+  else {
+    showToast(res.error || `账号${num}店铺后台打开失败`, 'error');
+    loadAccounts();
+  }
 }
 
 async function addNewAccount() {

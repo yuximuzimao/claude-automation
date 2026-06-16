@@ -7,7 +7,7 @@
  */
 const express = require('express');
 const http = require('http');
-const { execFileSync, spawnSync } = require('child_process');
+const { spawnSync } = require('child_process');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
@@ -15,6 +15,7 @@ const opQueue = require('./op-queue');
 const cdp = require('../cdp');
 const jlAlerts = require('../jl/alerts');
 const confidence = require('./auto-exec-confidence');
+const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
 const { isBatchExecutable } = require('../constants');
 
 const router = express.Router();
@@ -601,7 +602,7 @@ router.get('/accounts', (req, res) => {
     const list = Object.keys(accounts).sort((a, b) => Number(a) - Number(b)).map(num => {
       const a = accounts[num];
       const hasFile = require('fs').existsSync(path.join(SESSIONS_DIR, a.file));
-      const st = statusMap[num] || {};
+      const st = normalizeAccountStatus(statusMap[num] || {});
       return { num: Number(num), name: a.name, note: a.note, hasFile, ...st };
     });
     res.json({ ok: true, accounts: list });
@@ -739,11 +740,33 @@ router.post('/accounts/refresh-status', (req, res) => {
 router.post('/accounts/:num/open', (req, res) => {
   const num = parseInt(req.params.num, 10);
   if (!num) return res.status(400).json({ error: 'invalid num' });
-  const { spawn } = require('child_process');
-  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), String(num)], {
-    detached: true, stdio: 'ignore',
-  }).unref();
-  res.json({ ok: true, message: `已为账号${num}打开鲸灵店铺后台` });
+  const fsSync = require('fs');
+  let accounts;
+  try {
+    accounts = JSON.parse(fsSync.readFileSync(ACCOUNTS_FILE, 'utf8'));
+  } catch (e) {
+    return res.status(500).json({ ok: false, error: `读取账号配置失败: ${e.message}` });
+  }
+  const account = accounts[String(num)];
+  if (!account) return res.status(404).json({ ok: false, error: `账号${num}不存在` });
+  if (!fsSync.existsSync(path.join(SESSIONS_DIR, account.file))) {
+    return res.status(404).json({ ok: false, error: `账号${num} session 文件不存在，请重新登录` });
+  }
+
+  let statusMap = {};
+  try { statusMap = JSON.parse(fsSync.readFileSync(ACCOUNT_STATUS_FILE, 'utf8')); } catch(e) {}
+  const note = account.note || account.name || `账号${num}`;
+  const guard = getAccountOpenGuard(statusMap[String(num)] || {});
+  if (!guard.ok) {
+    opQueue.updateAccountStatus(num, { status: guard.status, error: guard.error, note });
+    return res.status(409).json({ ok: false, error: guard.error });
+  }
+
+  const op = opQueue.enqueue('open-account', `打开账号${num}「${note}」店铺后台`, {
+    accountNum: num,
+    accountNote: note,
+  });
+  res.status(202).json({ ok: true, opId: op.id, message: `账号${num}打开后台已入队` });
 });
 
 // ── 退货入库 ──────────────────────────────────────────────────────

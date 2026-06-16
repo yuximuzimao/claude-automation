@@ -11,6 +11,7 @@ const http = require('http');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
+const { classifySessionFailure } = require('./account-session-status');
 const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
 
@@ -140,6 +141,7 @@ async function executeOp(op) {
     case 'scan-account':   return execScanAccount(op);
     case 'scan-finalize':  return execScanFinalize(op);
     case 'check-session':  return execCheckSession(op);
+    case 'open-account':   return execOpenAccount(op);
     case 'pipeline':       return execPipeline(op);
     case 'reinfer':        return execReinfer(op);
     case 'reprocess-one':  return execReprocessOne(op);
@@ -272,6 +274,32 @@ async function execCheckSession(op) {
   // 检测后再等 10s，确保下一次注入前有足够间隔（对齐 scan 的 10s+10s 节奏）
   await new Promise(r => setTimeout(r, 10000));
   return { accountNum, status };
+}
+
+async function execOpenAccount(op) {
+  const { accountNum, accountNote } = op.params;
+  const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
+    timeout: 30000, encoding: 'utf8',
+  });
+  if (inj.status !== 0) {
+    const msg = (inj.stderr || inj.stdout || `退出码 ${inj.status}`).slice(0, 200);
+    const status = classifySessionFailure(msg);
+    updateAccountStatus(accountNum, {
+      status,
+      lastScan: new Date().toISOString(),
+      error: msg,
+      note: accountNote,
+    });
+    throw new Error(msg);
+  }
+  saveSessionState(accountNum);
+  updateAccountStatus(accountNum, {
+    status: 'ok',
+    lastScan: new Date().toISOString(),
+    error: null,
+    note: accountNote,
+  });
+  return { accountNum, status: 'ok' };
 }
 
 // ── 单账号扫描 ─────────────────────────────────────────────────────

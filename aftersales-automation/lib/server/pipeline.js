@@ -11,6 +11,7 @@ const path = require('path');
 const confidence = require('./auto-exec-confidence');
 const db = require('./data');
 const sse = require('./sse');
+const { getSkipCompletionStatus } = require('./pipeline-status');
 const { inferDecision } = require('../infer');
 const { inferWithAI } = require('../ai-infer');
 const { RETURN_KEYWORDS, getHoursUntilNextScan } = require('../constants');
@@ -265,13 +266,14 @@ async function processOne(queueItem, options = {}) {
   decision.auto = true;
   if (hint) decision.hinted = true;
 
-  // 已退款等终结状态 → 自动归档，无需用户操作
+  // 已退款等终结状态：扫描来源进入"已自动执行"列表，其他来源直接完成。
   if (decision.action === 'skip') {
     const autoClosedAt = new Date().toISOString();
+    const status = getSkipCompletionStatus(queueItem);
     db.updateSimulation(sim.id, { decision, executedAt: autoClosedAt, hint: hint || null });
-    db.updateQueueItem(queueItemId, { status: 'done', hint: hint || null });
-    sse.broadcast('pipeline-update', { stage: 'done', workOrderNum });
-    log(`[${workOrderNum}] 自动归档 → ${decision.reason}`);
+    db.updateQueueItem(queueItemId, { status, hint: hint || null });
+    sse.broadcast('pipeline-update', { stage: status, workOrderNum });
+    log(`[${workOrderNum}] ${status === 'auto_executed' ? '终态归入已自动执行' : '自动归档'} → ${decision.reason}`);
     return;
   }
 
