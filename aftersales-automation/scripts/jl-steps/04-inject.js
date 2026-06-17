@@ -62,10 +62,10 @@ async function inject(accountNum, waitMs = DEFAULT_WAIT_MS) {
     return { success: false, error: `jl.js inject 失败: ${msg}` };
   }
 
-  // 2. 等登录态跳转稳定（规则：等 8s）
+  // 2. 等注入写入稳定（规则：等 8s）
   await new Promise(r => setTimeout(r, waitMs));
 
-  // 3. 找鲸灵 tab，读登录态验证
+  // 3. 找鲸灵 tab
   let targets;
   try {
     targets = await cdp.getTargets();
@@ -76,6 +76,20 @@ async function inject(accountNum, waitMs = DEFAULT_WAIT_MS) {
   if (!jlTab) {
     return { success: false, error: '注入后未找到鲸灵 tab' };
   }
+
+  // 4. 刷新页面让注入的 session 在页面生效。
+  //    jl.js inject 已去掉注入后导航（纯注入只写 cookie/localStorage），页面仍停在注入前
+  //    的 login/未登录态，不重新加载平台就识别不到登录 → 必报"注入后仍未登录"。
+  //    刷新=重新打开当前 URL（带新 cookie 加载，平台自动跳后台），等价用户手动 F5。
+  //    此处页面本就是 login/未登录态，刷新它不违反「复用 tab 禁导航」（那条针对禁止把
+  //    已登录后台页导回 login，方向相反）。报错即停，不重试。
+  try {
+    await cdp.navigate(jlTab.id, jlTab.url);
+  } catch (e) {
+    return { success: false, error: `注入后刷新页面失败: ${e.message}` };
+  }
+  // 5. 再等登录态跳转稳定（规则：等 8s）
+  await new Promise(r => setTimeout(r, waitMs));
 
   let info;
   try {
