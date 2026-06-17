@@ -49,12 +49,47 @@
 - 停扫描后逻辑失真：`constants.js:76`+`pipeline.js:186` `getHoursUntilNextScan`（flow-5.3 安全边际基于不存在的自动扫描周期）
 
 ### 第三步（未开始）—— A1 逐账号扫描处理闭环
-扩展 A1：用第二步的安全打开后台(清cookie+注入)做账号切换基座，串起：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(处理工单新开tab只处理不关闭、操作前搜tab)+整系统停止机制(关tab/残留检测/circuit-breaker/提醒)+处理完进首页读平台提醒。用户设想的完整流程见对话记录(打开注入→点工单按钮→依次处理→处理tab只开不关→完事关窗口)。
+### 第三步（未开始）—— A1 逐账号扫描处理闭环
+
+> ⚠️ 若交给 Codex：先读本节 + `docs/codex-handoff/legacy-conflict-audit.md` + lessons #54~#59 + 第二步章节。下面写到 Codex 冷启动可执行的颗粒度。**第三步是大工程，强烈建议先进 plan 模式逐块设计、小步真机验证，不要一次性大改。**
+
+**目标流程（用户设想，最终形态）**：
+打开账号后台(用第二步安全编排:清cookie+注入) → 点"售后工单"按钮进工单列表 → 依次处理工单 → **处理每个工单时新开 tab、只处理不关闭、下次操作前先搜 tab 复用** → 全部处理完进首页读平台提醒 → 关掉整个窗口(所有 tab 一起关) → 切下一个账号重复。
+
+**复用的现成基座（第二步成果，已真机验证可用）**：
+- 账号切换/打开后台 = `lib/jl/open-account-flow.js openAccountFlow(num)`（tab数量门→读态→复用/清cookie+注入）。第三步切账号直接调它，**不要再自己写 jl.js inject**。
+- 清场 = `scripts/jl-steps/07-clear-jl-data.js`；reload = `cdp.reload`；数/关tab = `05/06`。
+
+**要做的子模块（计划原词，需逐个设计）**：
+1. **点击导航(click-navigate)**：进后台后真点击"售后工单"按钮进列表（不是 URL 导航）。需先真机 inspect 该按钮选择器。
+2. **固定坐标排序**：工单按紧急度/截止排序后逐个处理。
+3. **冒泡处理(bubble-plan)**：单工单处理逻辑（复用现有 collect→infer→approve/reject，见 `lib/server/pipeline.js`）。
+4. **多tab管理**：处理工单新开 tab、只开不关、操作前搜 tab 复用。注意与第二步"tab数量门(收敛到唯一鲸灵tab)"的语义可能冲突——A1 处理态会有多个鲸灵 tab，**需重新设计 tab 管理策略，不能照搬 A2 的"关到剩一个"**。
+5. **整系统停止机制**：关 tab + 残留检测 + circuit-breaker(`data/circuit-breaker.json` 已有，`node cli.js reset-circuit` 重置) + Mac 提醒(`lib/helpers.js createReminder`)。
+6. **处理完进首页读平台提醒**：`lib/jl/alerts.js` 已有平台提醒采集逻辑，复用。
+
+**必须先收口的高风险旧路径（audit 报告高10项，第三步重建时逐个处理，file:line 已现查确认）**：
+- `scan-all.js:33 injectAccount()` + `:143` 多账号循环直接 `jl.js inject` → 绕过 A2 安全编排。第三步改调 openAccountFlow。
+- `collect.js:49 injectAccount()` + `:348` 按 `current-session.json` 10分钟缓存判断否则直接 inject → 缓存非实时登录态，会重复注入/注错号。**注意 `collect.js:64` 注释"inject已完成导航无需reload"是基于旧jl.js(带导航)写的，第二步已去导航，该注释已失真——Codex 勿据此判断**。
+- `lib/server/op-queue.js:271 execScanAccount` + `:546`/`:633 execExecute`(approve/reject前) 直接 inject 只看缓存。
+- `lib/server/pipeline.js:98` 自动执行 approve 前只用缓存判同账号。
+- 旧 API 仍活（前端按钮已摘但后端能触发）：`routes.js` POST `/api/scan`、`/queue/batch-reprocess`、`/simulations/batch-execute` → 第三步前禁用或接安全编排。
+- `constants.js:76 getHoursUntilNextScan` + `pipeline.js:186`：停自动扫描后这个"下次扫描周期"是虚假的，flow-5.3 安全边际据此算等待/拒绝会失真 → 纯手动模式应传 null 或改人工扫描时间。
+
+**已知坑/约束（对话里才知道，文件看不出，Codex 必读）**：
+- **多账号切换 = 多次登录操作，必须串行 + 间隔≥10秒**（lesson #56 风控红线，2026-05-28 并发4tab被封IP）。A1 逐账号循环天然要串行，且每账号处理完关窗口再切下一个。
+- **每个鲸灵操作报错即停绝不重试**（不只是技术异常，可能是风控信号）。
+- 切账号前确认前一账号 tab 已关或确认完成。
+- 验证数据读实时源头（ERP页面/cli.js list），禁止分析 jsonl 历史快照。
+
+**验收标准**：连续多账号扫描处理跑通，每账号切换不触发风控、不重复注入、tab 不泄漏；处理完正确读到平台提醒；整系统停止能干净关闭所有 tab + 残留检测。**测试基线：纯单测必须保持全绿（当前107），新增逻辑配 mock 单测。**
 
 ### 执行铁律
 - 鲸灵操作报错即停绝不重试；不能真机试错；真机"找/确认/点"三步分离由用户指挥
 - server 由 LaunchAgent `com.heizong.aftersale-server` 守护+单实例锁，重启用 `launchctl kickstart -k gui/$(id -u)/com.heizong.aftersale-server`，禁手动 kill+nohup（lesson #34/#55）
+- 改 `lib/` 决策逻辑后必 `/aftersales-restart` 重启加载；改 `lib/infer.js` 必跑 `node test/flow-test.js`
 - worktree 用 `git worktree add ... <当前分支>` 手动指定基线（lesson #54）
+- commit 排除 `data/`、`*.log`、`_sandbox/`；含文件增删移必同步 SKILL.md PATHS+ENTRY MAP
 
 ### 遗留待办
 - 6 个账号(1/3/4/6/11/13)缺 phone 配置 → 重新登录不自动填手机号。**数据缺失非bug，phone真值需用户提供**。可选改进：phone缺失时前端提示而非静默跳过
