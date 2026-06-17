@@ -17,9 +17,9 @@ function makeSteps(loginState, calls) {
       calls.push(`readShopName:${targetId}`);
       return loginState;
     },
-    logout: async (targetId) => {
-      calls.push(`logout:${targetId}`);
-      return { success: true, loggedOut: true };
+    clearJlData: async (targetId) => {
+      calls.push(`clearJlData:${targetId}`);
+      return { success: true, targetId, deletedCount: 3 };
     },
     inject: async (accountNum) => {
       calls.push(`inject:${accountNum}`);
@@ -57,7 +57,7 @@ test('openAccountFlow：匹配目标账号时只打开和读取，禁止注入',
   assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1']);
 });
 
-test('openAccountFlow：已登录但错号时先退出，再注入目标账号', async () => {
+test('openAccountFlow：已登录但错号时先清 cookie 再注入目标账号（不再退出登录）', async () => {
   const calls = [];
   const result = await openAccountFlow(3, {
     note: '百浩-RITEKOKO',
@@ -65,11 +65,13 @@ test('openAccountFlow：已登录但错号时先退出，再注入目标账号',
   });
 
   assert.equal(result.success, true);
-  assert.equal(result.action, 'logout-inject');
-  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'logout:tab-1', 'inject:3']);
+  assert.equal(result.action, 'inject');
+  // 错号现在走 clearJlData → inject，不含 logout
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3']);
+  assert.equal(calls.includes('logout:tab-1'), false);
 });
 
-test('openAccountFlow：确证未登录时直接注入目标账号', async () => {
+test('openAccountFlow：确证未登录时先清 cookie 再注入目标账号', async () => {
   const calls = [];
   const result = await openAccountFlow(3, {
     note: '百浩-RITEKOKO',
@@ -78,10 +80,27 @@ test('openAccountFlow：确证未登录时直接注入目标账号', async () =>
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'inject');
-  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'inject:3']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3']);
 });
 
-test('openAccountFlow：未知登录态报错即停，不退出也不注入', async () => {
+test('openAccountFlow：清理失败则不注入，报错即停', async () => {
+  const calls = [];
+  const steps = makeSteps({ success: true, state: 'logged-out', loggedIn: false }, calls);
+  steps.clearJlData = async (targetId) => {
+    calls.push(`clearJlData:${targetId}`);
+    return { success: false, error: '清理鲸灵数据失败: CDP timeout' };
+  };
+
+  const result = await openAccountFlow(3, { note: '百浩-RITEKOKO', steps });
+
+  assert.equal(result.success, false);
+  assert.match(result.error, /清理/);
+  // clearJlData 失败后绝不调用 inject
+  assert.equal(calls.includes('inject:3'), false);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1']);
+});
+
+test('openAccountFlow：未知登录态报错即停，不清理也不注入', async () => {
   const calls = [];
   const result = await openAccountFlow(3, {
     note: '百浩-RITEKOKO',

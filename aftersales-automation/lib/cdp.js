@@ -263,8 +263,53 @@ function closeTarget(targetId) {
   });
 }
 
+// 清掉指定 tab 上所有鲸灵(*.jlsupp.com)相关的 cookie + localStorage/sessionStorage。
+// 用于切换账号时先清空旧账号残留再注入新账号——保证传给平台的只有注入的认证信息。
+// 关键约束：
+//   - 只删 jlsupp 域，ERP(superboss.cc) 等其他域天然不在名单，零误伤
+//   - getCookies 必须显式传 urls 覆盖全部 jlsupp 子域！默认 getCookies({}) 只返回
+//     "当前 tab URL 适用"的 cookie，看不到 seller-portal.jlsupp.com/merchant 的
+//     JSESSIONID（真正的登录凭证）——漏清它会导致新账号注入后混入旧账号登录态。
+//     (2026-06-17 真机+Codex 审查证实此盲区)
+//   - 取到全集后逐条 deleteCookies(name+domain+path)，domain 原样回传(含前导点)
+//   - 绝不用 Network.clearBrowserCookies(会清掉整个浏览器含 ERP 登录)
+//   - 报错即停，任一调用失败直接抛
+const JL_COOKIE_URLS = [
+  'https://scrm.jlsupp.com/',
+  'https://seller-portal.jlsupp.com/',
+  'https://seller-portal.jlsupp.com/merchant',
+];
+async function clearJlCookiesAndStorage(targetId) {
+  if (!targetId) throw new Error('clearJlCookiesAndStorage 缺少 targetId');
+  const res = await cdp.cdpCall(targetId, 'Network.getCookies', { urls: JL_COOKIE_URLS });
+  const all = (res && res.cookies) || [];
+  const jlCookies = all.filter(c =>
+    typeof c.domain === 'string' &&
+    c.domain.replace(/^\./, '').endsWith('jlsupp.com')
+  );
+  // 去重（不同 urls 可能返回同一 cookie），按 name+domain+path 唯一
+  const seen = new Set();
+  const deleted = [];
+  for (const c of jlCookies) {
+    const key = `${c.name}@${c.domain}${c.path || '/'}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    // domain 原样回传(含前导点)，否则可能删不掉；用 name+domain+path 三元组精确删
+    await cdp.cdpCall(targetId, 'Network.deleteCookies', {
+      name: c.name,
+      domain: c.domain,
+      path: c.path || '/',
+    });
+    deleted.push({ name: c.name, domain: c.domain, path: c.path || '/' });
+  }
+  await cdp.eval(targetId, 'localStorage.clear(); sessionStorage.clear(); "ok"');
+  return { deletedCount: deleted.length, deletedCookies: deleted };
+}
+
 const cdp = {
   eval: evalJs,
+  cdpCall,
+  clearJlCookiesAndStorage,
   clickAt,
   clickPoint,
   screenshot,

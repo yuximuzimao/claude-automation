@@ -13,7 +13,7 @@ function loadDefaultSteps() {
     closeExtraJlTabs: require('../../scripts/jl-steps/06-close-extra-jl-tabs').closeExtraJlTabs,
     openLogin: require('../../scripts/jl-steps/01-open-login').openLogin,
     readShopName: require('../../scripts/jl-steps/02-read-shop-name').readShopName,
-    logout: require('../../scripts/jl-steps/03-logout').logout,
+    clearJlData: require('../../scripts/jl-steps/07-clear-jl-data').clearJlData,
     inject: require('../../scripts/jl-steps/04-inject').inject,
   };
 }
@@ -42,8 +42,10 @@ function decideOpenAccountAction(loginState, accountNote) {
   if (matchShopName(loginState.shopName, accountNote)) {
     return { action: 'reuse' };
   }
+  // 错号：不再用破坏性"退出登录"（会让原账号服务端 session 失效），
+  // 统一走 inject 分支——先清 cookie 再注入目标账号（2026-06-17）
   return {
-    action: 'logout-inject',
+    action: 'inject',
     error: `当前店铺="${loginState.shopName || ''}" 与目标关键字="${shopKeyword(accountNote)}" 不匹配`,
   };
 }
@@ -109,18 +111,12 @@ async function openAccountFlow(accountNum, options = {}) {
       matchedNote: accountNote,
     };
   }
-  if (decision.action === 'logout-inject') {
-    const loggedOut = await steps.logout(targetId);
-    if (!loggedOut || !loggedOut.success) {
-      return { success: false, error: loggedOut && loggedOut.error ? loggedOut.error : '退出登录失败', targetId };
-    }
-    const injected = await steps.inject(accountNum);
-    if (!injected || !injected.success) {
-      return { success: false, error: injected && injected.error ? injected.error : '注入目标账号失败', targetId };
-    }
-    return { ...injected, success: true, action: 'logout-inject', targetId };
+  // inject 分支（未登录 / 错号）：先清当前 tab 旧账号 cookie/storage，再注入目标账号。
+  // 清场保证传给平台的只有新账号认证信息，不混旧账号（替代破坏性的退出登录）。
+  const cleared = await steps.clearJlData(targetId);
+  if (!cleared || !cleared.success) {
+    return { success: false, error: cleared && cleared.error ? cleared.error : '注入前清理失败', targetId };
   }
-
   const injected = await steps.inject(accountNum);
   if (!injected || !injected.success) {
     return { success: false, error: injected && injected.error ? injected.error : '注入目标账号失败', targetId };
