@@ -333,3 +333,23 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 - 对 **A2 仅打开店铺后台**：计划要求「停在注入后平台自动跳转的页面不动，不主动导航别处」。jl.js inject 的强制导航与 A2 本意冲突。
 
 **编排时区分**：A2 复用路径（已登录目标账号）= 不注入、停当前页；A2 错号路径用 jl.js inject 会被带到工单页（可接受，工单页也是后台），但若要严格"停在平台默认跳转页"，需让注入与导航解耦（注入只搬态、导航由平台自跳）。当前先记录此差异，编排 A2 时按需处理。
+
+### 58. 切换鲸灵账号禁用"退出登录"，改清cookie；JSESSIONID在seller-portal域（2026-06-17）
+
+真机验证 A2 错号切换：从账号1界面点账号2"打开后台"→退出账号1→进账号2无反应→回头账号1也失效。**鲸灵"退出登录"是破坏性操作，让原账号服务端 session 失效**，不能用来切账号。
+
+**根因（第一性）**：要的不是"退出"或"隐私窗口"这个形式，本质是「注入前页面没有旧账号残留」。
+
+**铁律**：
+1. 错号/未登录切换账号 = **清当前 tab 的鲸灵 cookie/storage → 注入新账号**，绝不点退出登录。03-logout 已停用。
+2. **清 cookie 必须显式覆盖全部 jlsupp 子域**：真登录凭证 `JSESSIONID` 在 `seller-portal.jlsupp.com/merchant`，`_us` 在 seller-portal+scrm。CDP `Network.getCookies({})` 默认只返回"当前 tab URL 适用"的 cookie，**看不到 seller-portal 的 JSESSIONID → 漏清 → 新账号注入后混旧账号登录态**。必须 `getCookies({urls:[scrm, seller-portal, seller-portal/merchant]})` 取全集再逐条 deleteCookies。
+3. **判"清干净"看登录凭证(JSESSIONID/_us)是否全域清零，不是数 cookie 条数**：WAF/验证码指纹(acw_tc/cdn_sec_tc/_dx_*/ssxmod_*)清掉后页面会立即重种，这是正常的（本应浏览器自生成），不算残留。
+4. 工具：`cdp.clearJlCookiesAndStorage(targetId)` + `scripts/jl-steps/07-clear-jl-data.js`；排查用 `_sandbox/observe-clear-cookies.js`（打印清理前后全域 cookie）。
+
+### 59. 注入后必须刷新页面(Page.reload)让 session 生效，刷新≠导航login URL（2026-06-17）
+
+jl.js inject 去掉"注入后导航"后，注入只写 cookie/localStorage，页面仍停在注入前态（login），平台识别不到登录 → 报"注入后仍未登录"。**必须在注入后刷新页面**让平台用新 cookie 跳转。
+
+**坑**：第一版用 `cdp.navigate(jlTab.id, jlTab.url)` 刷新，但 jlTab.url 是 login 页 URL → 重新加载 login 页平台不跳后台 → 仍失败。正解：`cdp.reload(targetId)`（封装 `Page.reload`，等价 F5，不指定 URL）原地刷新，平台用 cookie 自跳。
+
+**时序铁律**：清cookie → 注入 → reload（注入后才 reload，清完到注入之间绝不 reload，空 cookie reload 会跳登录页种匿名态反而脏）。

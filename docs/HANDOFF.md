@@ -3,58 +3,61 @@
 更新时间：2026-06-17
 当前负责人：Claude Code
 当前分支：data-model-restructure
-当前焦点：**鲸灵售后重构第一步已完成；第二步安全注入路径已完成代码+单测+部分真机验证，待真机端到端验证后接 A2**
+当前焦点：**鲸灵售后重构第一步+第二步(A2 安全打开后台)已全部完成并真机验证；下一窗口接第三步(A1 逐账号扫描闭环)**
 
-## ⏭️ 下一窗口接手：第二步真机端到端验证 + 第三步
+## ⏭️ 下一窗口接手：第三步 A1 逐账号扫描处理闭环
 
 **计划文件**：
 - 总计划：`/Users/chat/.claude/plans/codex-3-2-ip-codex-3-codex-1-1-1-1-code-twinkling-emerson.md`
-- 第一步：`~/.claude/plans/step1-stop-legacy-system.md`
-- 第二步：`~/.claude/plans/step2-a2-safe-inject.md`
+- 第二步清cookie方案：`~/.claude/plans/piped-juggling-giraffe.md`
 
 **起因**：百浩账号3点"打开后台"卡住、重复点2次→IP被封。根因=注入不像真人（不清旧态、reload双身份）+ 失败不回写重复注入 + 刷新状态多账号连续登录。
 
-### ✅ 第一步：停旧系统（已完成并真机验证，commit a66720b）
-- server.js：启动不再 scheduleNextScan / startErpHeartbeat / 自动入队 pending（纯手动模式）
-- 删除刷新状态全链路（refresh-status 路由 + check-session op + 前端按钮）
-- 前端摘除 扫描工单/批量执行/批量重来 入口（保留暂停恢复/紧急停止）
-- 验证：启动日志无任何自动鲸灵请求；npm test 不回归
+### ✅ 第一步：停旧系统（已完成真机验证，commit a66720b）
+- server.js 启动纯手动模式（不自动扫描/心跳/入队）；删刷新状态全链路；前端摘除扫描/批量入口
 
-### ✅ 第二步：A2 安全注入路径（代码+单测完成，部分真机验证，未提交）
+### ✅ 第二步：A2 安全打开店铺后台（已完成 + 真机三场景全过）
+最终方案（多次迭代后定稿）：**tab数量门 → 读登录态 → 复用(匹配)/清cookie+注入(未登录或错号)**
 
-**底层逻辑**：先检测能否复用、已登录目标账号就跳过注入直接用；错号才退出登录（平台正规登出）→注入→验证。**已登录目标账号禁止重复注入（铁律 lesson #56）**。
+真机验证通过的三场景（2026-06-17）：
+1. **已登录目标账号(汐澜)** → reuse 复用，不清不注入 ✓
+2. **错号切换(账号1界面切汐澜)** → 清cookie+注入，原账号不被破坏 ✓
+3. **未登录页注入(账号3百浩)** → 清cookie+注入+reload → 进店铺 ✓
 
-**已完成模块（Claude 真机指挥 + Codex 重构编排）**：
-- `lib/jl/login-state.js` — 三条件登录态判据 + 关键字匹配（单测 13/13）
-- `scripts/jl-steps/01-open-login.js` — 打开 login（真机✓）
-- `scripts/jl-steps/02-read-shop-name.js` — 读登录态（真机✓ 已登录+登出后 false 都验过）
-- `scripts/jl-steps/03-logout.js` — 退出登录真实点击（真机✓ 共途登出成功）
-- `scripts/jl-steps/04-inject.js` — 注入+店铺名关键字匹配（真机✓ 百浩注入成功）
-- `lib/jl/open-account-flow.js` + `scripts/jl-steps/open-account.js` — 四分支编排（Codex 做，单测✓，**未真机**）
-- `sessions/jl.js` inject — 去掉注入后 Page.navigate，纯注入不导航（Codex 做，静态测试防回归✓）
-- `lib/server/op-queue.js` execOpenAccount — 改调安全编排脚本（Codex 做）
+关键模块（commit 93cf0e6→db05941）：
+- `lib/jl/login-state.js` 三条件登录态判据+店铺名匹配（单测）
+- `scripts/jl-steps/01~07`：01开login/02读店铺/03退出(**已停用**)/04注入+reload/05数tab/06关多余tab/07清cookie
+- `lib/jl/open-account-flow.js` `resolveJlTab`(tab数量门)+`openAccountFlow`(复用/清注)
+- `lib/cdp.js` 新增 `reload`(Page.reload)+`clearJlCookiesAndStorage`(全域清)+`closeTarget`+`cdpCall`导出
+- `lib/server/op-queue.js execOpenAccount` 调 open-account.js 编排
 
-**关键已验证事实**（接手必读）：
-- 登录态判据：右上角店铺名 `<p class="readonly">`（任何后台页都在，与所在页无关）；未登录确证=无店铺名+含"商家登录"+"未注册的手机号登录成功后将自动注册"三条同时满足
-- 店铺名匹配：note 取 `-` 前核心词（百浩-RITEKOKO→百浩）子串匹配页面工商全称（合肥百浩创展贸易有限公司）
-- 固定坐标：退出悬停触发点 (1358,28) → 退出按钮 (1328,244)；打开/注入/退出后统一等 8s 再读
-- jl.js inject 已去导航：A1 扫描链路靠 cli.js list 自导航（解耦），A2 用编排不依赖 inject 导航
+**核心铁律（接手必读，血泪换来）**：
+- **切账号禁用"退出登录"**（破坏性，让原账号服务端 session 失效）→ 改清cookie（lesson #58）
+- **清cookie必须显式覆盖全 jlsupp 子域**：真凭证 JSESSIONID 在 `seller-portal.jlsupp.com/merchant`，`getCookies({})` 看不到→漏清→混账号。用 `getCookies({urls:[...]})`（lesson #58）
+- **注入后必须 Page.reload 原地刷新**（不是导航 login URL）让平台用新 cookie 跳转（lesson #59）
+- 已登录目标账号禁止重复注入（lesson #56）
+- 判"清干净"看 JSESSIONID/_us 全域清零，不数 cookie 条数（WAF 指纹重生正常）
+- 注入失败若报"仍未登录"且账号 session 是旧的(如6/7保存)→是 session 过期需 `jl add` 重登，不是流程 bug
+- 排查 cookie 工具：`_sandbox/observe-clear-cookies.js <targetId>`
 
-**⚠️ 待真机端到端验证（4 点，用户指挥）**：
-1. 已登录目标账号点"打开后台"→应复用不注入
-2. 已登录错号→应 03退出+04注入
-3. 未登录→应直接 04注入
-4. jl 去导航后 04 店铺名验证仍通过
-验证前需 `/aftersales-restart`（op-queue.js 改动）。
+**测试基线**：全量纯单测 107/107 通过。
 
-**测试基线**：全量纯单测 87/87 通过。
+### 旧路径冲突审计（第三步的 checklist，commit c963d2f）
+`docs/codex-handoff/legacy-conflict-audit.md` 标记 34 项与新计划冲突点（高10/中15/低9）。第三步重建 A1 时**逐项收口**，重点高风险：
+- 旧 API 仍活：`routes.js` POST `/api/scan`、`/queue/batch-reprocess`、`/simulations/batch-execute`（前端按钮摘了但后端能触发旧不安全链路）
+- 直接 jl.js inject 绕过 A2 安全编排：`scan-all.js:32`、`collect.js:49`、`op-queue.js:546/633`、`pipeline.js:98`（只看缓存不读实时登录态→重复注入/注错tab）
+- 停扫描后逻辑失真：`constants.js:76`+`pipeline.js:186` `getHoursUntilNextScan`（flow-5.3 安全边际基于不存在的自动扫描周期）
 
-### 第三步（未开始）
-扩展 A1 逐账号闭环：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(tab-manager)+整系统停止完整机制(关tab/残留检测/circuit-breaker/提醒)+处理完进首页读提醒。
+### 第三步（未开始）—— A1 逐账号扫描处理闭环
+扩展 A1：用第二步的安全打开后台(清cookie+注入)做账号切换基座，串起：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(处理工单新开tab只处理不关闭、操作前搜tab)+整系统停止机制(关tab/残留检测/circuit-breaker/提醒)+处理完进首页读平台提醒。用户设想的完整流程见对话记录(打开注入→点工单按钮→依次处理→处理tab只开不关→完事关窗口)。
 
 ### 执行铁律
 - 鲸灵操作报错即停绝不重试；不能真机试错；真机"找/确认/点"三步分离由用户指挥
-- 已登录目标账号禁止注入（lesson #56）；worktree 用 `git worktree add ... <当前分支>` 手动指定基线（lesson #54）
+- server 由 LaunchAgent `com.heizong.aftersale-server` 守护+单实例锁，重启用 `launchctl kickstart -k gui/$(id -u)/com.heizong.aftersale-server`，禁手动 kill+nohup（lesson #34/#55）
+- worktree 用 `git worktree add ... <当前分支>` 手动指定基线（lesson #54）
+
+### 遗留待办
+- 6 个账号(1/3/4/6/11/13)缺 phone 配置 → 重新登录不自动填手机号。**数据缺失非bug，phone真值需用户提供**。可选改进：phone缺失时前端提示而非静默跳过
 
 ---
 
