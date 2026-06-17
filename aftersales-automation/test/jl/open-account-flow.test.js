@@ -25,6 +25,14 @@ function makeSteps(loginState, calls) {
       calls.push(`inject:${accountNum}`);
       return { success: true, loggedIn: true, shopName: '合肥百浩创展贸易有限公司', accountNum: String(accountNum) };
     },
+    countJlTabs: async () => {
+      calls.push('countJlTabs');
+      return { success: true, count: 0, tabs: [] };
+    },
+    closeExtraJlTabs: async () => {
+      calls.push('closeExtraJlTabs');
+      return { success: true, count: 1, closed: [], keptTargetId: 'tab-1' };
+    },
   };
 }
 
@@ -46,7 +54,7 @@ test('openAccountFlow：匹配目标账号时只打开和读取，禁止注入',
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'reuse');
-  assert.deepEqual(calls, ['openLogin', 'readShopName:tab-1']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1']);
 });
 
 test('openAccountFlow：已登录但错号时先退出，再注入目标账号', async () => {
@@ -58,7 +66,7 @@ test('openAccountFlow：已登录但错号时先退出，再注入目标账号',
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'logout-inject');
-  assert.deepEqual(calls, ['openLogin', 'readShopName:tab-1', 'logout:tab-1', 'inject:3']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'logout:tab-1', 'inject:3']);
 });
 
 test('openAccountFlow：确证未登录时直接注入目标账号', async () => {
@@ -70,7 +78,7 @@ test('openAccountFlow：确证未登录时直接注入目标账号', async () =>
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'inject');
-  assert.deepEqual(calls, ['openLogin', 'readShopName:tab-1', 'inject:3']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'inject:3']);
 });
 
 test('openAccountFlow：未知登录态报错即停，不退出也不注入', async () => {
@@ -82,7 +90,60 @@ test('openAccountFlow：未知登录态报错即停，不退出也不注入', as
 
   assert.equal(result.success, false);
   assert.match(result.error, /未知页面状态/);
-  assert.deepEqual(calls, ['openLogin', 'readShopName:tab-1']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1']);
+});
+
+test('openAccountFlow：没有鲲灵 tab 时才调用 openLogin 新开', async () => {
+  const calls = [];
+  const steps = makeSteps({ success: true, state: 'logged-in', shopName: '合肥百浩创展贸易有限公司' }, calls);
+
+  const result = await openAccountFlow(3, { note: '百浩-RITEKOKO', steps });
+
+  assert.equal(result.success, true);
+  assert.equal(result.targetId, 'tab-1');
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1']);
+});
+
+test('openAccountFlow：已有唯一鲲灵 tab 时复用且不调用 openLogin', async () => {
+  const calls = [];
+  const steps = makeSteps({ success: true, state: 'logged-in', shopName: '合肥百浩创展贸易有限公司' }, calls);
+  steps.countJlTabs = async () => {
+    calls.push('countJlTabs');
+    return { success: true, count: 1, tabs: [{ id: 'existing-tab', url: 'https://scrm.jlsupp.com/workbench', title: '后台' }] };
+  };
+
+  const result = await openAccountFlow(3, { note: '百浩-RITEKOKO', steps });
+
+  assert.equal(result.success, true);
+  assert.equal(result.targetId, 'existing-tab');
+  assert.deepEqual(calls, ['countJlTabs', 'readShopName:existing-tab']);
+});
+
+test('openAccountFlow：多个鲲灵 tab 时先关闭多余 tab，复用 keptTargetId 且不调用 openLogin', async () => {
+  const calls = [];
+  const steps = makeSteps({ success: true, state: 'logged-in', shopName: '合肥百浩创展贸易有限公司' }, calls);
+  steps.countJlTabs = async () => {
+    calls.push('countJlTabs');
+    return {
+      success: true,
+      count: 3,
+      tabs: [
+        { id: 'kept-tab', url: 'https://scrm.jlsupp.com/workbench', title: '后台' },
+        { id: 'extra-tab-1', url: 'https://scrm.jlsupp.com/login', title: '登录' },
+        { id: 'extra-tab-2', url: 'https://scrm.jlsupp.com/other', title: '其他' },
+      ],
+    };
+  };
+  steps.closeExtraJlTabs = async () => {
+    calls.push('closeExtraJlTabs');
+    return { success: true, count: 3, closed: ['extra-tab-1', 'extra-tab-2'], keptTargetId: 'kept-tab' };
+  };
+
+  const result = await openAccountFlow(3, { note: '百浩-RITEKOKO', steps });
+
+  assert.equal(result.success, true);
+  assert.equal(result.targetId, 'kept-tab');
+  assert.deepEqual(calls, ['countJlTabs', 'closeExtraJlTabs', 'readShopName:kept-tab']);
 });
 
 test('op-queue 打开店铺后台入口使用安全编排脚本，不再盲目 jl inject', () => {

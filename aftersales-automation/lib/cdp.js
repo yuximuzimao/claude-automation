@@ -202,6 +202,31 @@ function activateTarget(targetId) {
   });
 }
 
+// Chrome HTTP API: GET /json/close/{targetId} 关闭指定标签页
+function closeTarget(targetId) {
+  return new Promise((resolve, reject) => {
+    const req = http.request({
+      hostname: 'localhost', port: CHROME_PORT,
+      path: '/json/close/' + encodeURIComponent(targetId),
+      method: 'GET', timeout: 5000,
+    }, (res) => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => {
+        if (res.statusCode && res.statusCode >= 400) {
+          const body = Buffer.concat(chunks).toString().trim();
+          reject(new Error(`closeTarget failed: HTTP ${res.statusCode}${body ? ` ${body}` : ''}`));
+          return;
+        }
+        resolve({ closed: true, targetId });
+      });
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('closeTarget timeout')); });
+    req.end();
+  });
+}
+
 const cdp = {
   eval: evalJs,
   clickAt,
@@ -214,6 +239,7 @@ const cdp = {
   getTargets,
   createTarget,
   activateTarget,
+  closeTarget,
 };
 
 module.exports = cdp;

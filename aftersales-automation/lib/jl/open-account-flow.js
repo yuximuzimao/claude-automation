@@ -9,6 +9,8 @@ const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
 
 function loadDefaultSteps() {
   return {
+    countJlTabs: require('../../scripts/jl-steps/05-count-jl-tabs').countJlTabs,
+    closeExtraJlTabs: require('../../scripts/jl-steps/06-close-extra-jl-tabs').closeExtraJlTabs,
     openLogin: require('../../scripts/jl-steps/01-open-login').openLogin,
     readShopName: require('../../scripts/jl-steps/02-read-shop-name').readShopName,
     logout: require('../../scripts/jl-steps/03-logout').logout,
@@ -46,6 +48,36 @@ function decideOpenAccountAction(loginState, accountNote) {
   };
 }
 
+async function resolveJlTab(steps) {
+  const counted = await steps.countJlTabs();
+  if (!counted || !counted.success) {
+    return { success: false, error: counted && counted.error ? counted.error : '统计鲲灵 tab 失败' };
+  }
+
+  if (counted.count === 0) {
+    const opened = await steps.openLogin();
+    if (!opened || !opened.success) {
+      return { success: false, error: opened && opened.error ? opened.error : '打开 login 页失败' };
+    }
+    return { success: true, targetId: opened.targetId, opened: true };
+  }
+
+  if (counted.count === 1) {
+    const targetId = counted.tabs && counted.tabs[0] && counted.tabs[0].id;
+    if (!targetId) return { success: false, error: '唯一鲲灵 tab 缺少 targetId' };
+    return { success: true, targetId, opened: false };
+  }
+
+  const closed = await steps.closeExtraJlTabs();
+  if (!closed || !closed.success) {
+    return { success: false, error: closed && closed.error ? closed.error : '关闭多余鲲灵 tab 失败' };
+  }
+  if (!closed.keptTargetId) {
+    return { success: false, error: '关闭多余鲲灵 tab 后缺少 keptTargetId' };
+  }
+  return { success: true, targetId: closed.keptTargetId, opened: false };
+}
+
 async function openAccountFlow(accountNum, options = {}) {
   if (!accountNum) return { success: false, error: '缺少 accountNum' };
 
@@ -55,12 +87,12 @@ async function openAccountFlow(accountNum, options = {}) {
     return { success: false, error: `账号 ${accountNum} 缺少 note/name，无法校验店铺名` };
   }
 
-  const opened = await steps.openLogin();
-  if (!opened || !opened.success) {
-    return { success: false, error: opened && opened.error ? opened.error : '打开 login 页失败' };
+  const resolved = await resolveJlTab(steps);
+  if (!resolved || !resolved.success) {
+    return { success: false, error: resolved && resolved.error ? resolved.error : '解析鲲灵 tab 失败' };
   }
 
-  const targetId = opened.targetId;
+  const targetId = resolved.targetId;
   const loginState = await steps.readShopName(targetId);
   const decision = decideOpenAccountAction(loginState, accountNote);
 
@@ -98,6 +130,7 @@ async function openAccountFlow(accountNum, options = {}) {
 
 module.exports = {
   openAccountFlow,
+  resolveJlTab,
   decideOpenAccountAction,
   getAccountNote,
   loadDefaultSteps,
