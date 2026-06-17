@@ -135,6 +135,42 @@ async function navigate(targetId, url) {
   return { navigated: true };
 }
 
+// 刷新当前页（等价 F5/Ctrl+R，不指定 URL），等待 Page.loadEventFired。
+// 用于注入 cookie 后让平台用新 session 自行跳转，而不是导航到新地址。
+async function reload(targetId) {
+  const ws = new WebSocket(`ws://localhost:${CHROME_PORT}/devtools/page/${targetId}`);
+  await new Promise((res, rej) => {
+    ws.addEventListener('open', res);
+    ws.addEventListener('error', rej);
+  });
+  let cmdId = 1;
+  function send(method, params) {
+    return new Promise((resolve, reject) => {
+      const id = cmdId++;
+      const h = (e) => {
+        const m = JSON.parse(e.data);
+        if (m.id === id) { ws.removeEventListener('message', h); resolve(m.result); }
+      };
+      ws.addEventListener('message', h);
+      ws.send(JSON.stringify({ id, method, params: params || {} }));
+      setTimeout(() => { ws.removeEventListener('message', h); reject(new Error('reload timeout')); }, 30000);
+    });
+  }
+  await send('Page.enable');
+  const loadPromise = new Promise(resolve => {
+    const h = (e) => {
+      const m = JSON.parse(e.data);
+      if (m.method === 'Page.loadEventFired') { ws.removeEventListener('message', h); resolve(); }
+    };
+    ws.addEventListener('message', h);
+    setTimeout(resolve, 15000); // 最长等 15s
+  });
+  await send('Page.reload', {});
+  await loadPromise;
+  ws.close();
+  return { reloaded: true };
+}
+
 // 截图
 async function screenshot(targetId, filePath) {
   const result = await cdpCall(targetId, 'Page.captureScreenshot', { format: 'png' });
@@ -233,6 +269,7 @@ const cdp = {
   clickPoint,
   screenshot,
   navigate,
+  reload,
   scroll,
   key,
   typeText,
