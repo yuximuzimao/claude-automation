@@ -116,6 +116,7 @@ Session 级新发现记在这里。稳定后迁入 `docs/INDEX.md §6`，不在�
 
 `pkill -f "node server.js"` 可能杀不到真正监听端口的进程（存在多个同名进程时只杀其中一个）。
 **修复**：重启服务器前先 `lsof -i :PORT` 拿到监听进程 PID，再 `kill <PID>`，再启动新进程。
+**2026-06-17 更新**：server 已由 LaunchAgent `com.heizong.aftersale-server` 接管；重启统一用 `launchctl kickstart -k gui/$(id -u)/com.heizong.aftersale-server`，`lsof` 仅用于排查端口占用和验证监听者。
 
 ## 2026-04-29 session 教训
 
