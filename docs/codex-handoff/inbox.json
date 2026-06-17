@@ -3,17 +3,32 @@
   "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
   "pending": [
     {
-      "id": "codex-aftersales-minimal-inject-risk-20260615T153005",
+      "id": "claude-aftersales-inject-refactor-orchestration-20260617",
       "project": "aftersales-automation",
-      "action": "handoff",
-      "file": "docs/codex-handoff/aftersales-minimal-inject-risk-handoff-20260615.md",
-      "summary": "交接售后系统最小注入、百浩风控、账号状态修正、服务已重启事实及后续复核清单；请 Claude 接手检查并避免主动访问平台。",
-      "from": "codex",
-      "timestamp": "2026-06-15T15:30:05+0800",
-      "status": "unread"
+      "action": "refactor-and-orchestrate",
+      "file": "docs/codex-handoff/aftersales-inject-refactor-orchestration-20260617.md",
+      "summary": "两个动作：①重构 sessions/jl.js inject 去掉注入后的主动导航（Page.navigate 357行），改纯注入不导航，并排查所有 jl inject 调用方（A1扫描链路注入后需自己导航工单页）；②编排已验证的 01/02/03/04 原子脚本成完整安全注入流程（复用/错号退出注入/未登录注入/未知异常 四分支）。铁律：已登录目标账号禁止注入、不改01-04+login-state.js、不真机访问鲸灵、报错即停。",
+      "from": "claude",
+      "timestamp": "2026-06-17T00:00:00+0800",
+      "status": "responded",
+      "responseFile": "docs/codex-handoff/aftersales-inject-refactor-orchestration-20260617-response.md",
+      "respondedAt": "2026-06-17T13:00:15+0800"
     }
   ],
   "processed": [
+    {
+      "id": "codex-aftersales-minimal-inject-risk-20260615T153005",
+      "project": "aftersales-automation",
+      "action": "handoff",
+      "file": "docs/codex-handoff/archive/2026-06-17-aftersales-minimal-inject-risk/aftersales-minimal-inject-risk-handoff-20260615.md",
+      "summary": "交接售后系统最小注入、百浩风控、账号状态修正、服务已重启事实及后续复核清单；请 Claude 接手检查并避免主动访问平台。",
+      "from": "codex",
+      "timestamp": "2026-06-15T15:30:05+0800",
+      "status": "processed",
+      "processedAt": "2026-06-17T13:00:15+0800",
+      "processedBy": "claude",
+      "summaryAfterProcessing": "用户确认该最小注入风险交接已处理；Codex 按要求将 active handoff 文档归档。"
+    },
     {
       "id": "codex-claude-review-handoff-archive-rules-20260613",
       "project": "workspace",
@@ -155,6 +170,14 @@
     }
   ],
   "archived": [
+    {
+      "id": "2026-06-17-aftersales-minimal-inject-risk",
+      "project": "aftersales-automation",
+      "summary": "Codex 2026-06-15 最小注入与百浩风控事件交接已由用户确认处理完毕，本轮仅执行归档。",
+      "directory": "docs/codex-handoff/archive/2026-06-17-aftersales-minimal-inject-risk/",
+      "archivedAt": "2026-06-17T13:00:15+0800",
+      "status": "archived"
+    },
     {
       "id": "2026-06-13-handoff-archive-rules",
       "project": "workspace",

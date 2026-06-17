@@ -224,11 +224,13 @@ function spawnAsync(cmd, args, opts) {
 
 async function execOpenAccount(op) {
   const { accountNum, accountNote } = op.params;
-  const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-    timeout: 30000, encoding: 'utf8',
+  const flow = spawnSync('node', [path.join(BASE, 'scripts/jl-steps/open-account.js'), String(accountNum)], {
+    timeout: 90000, encoding: 'utf8', cwd: BASE,
   });
-  if (inj.status !== 0) {
-    const msg = (inj.stderr || inj.stdout || `退出码 ${inj.status}`).slice(0, 200);
+  let out = null;
+  try { out = JSON.parse(flow.stdout || '{}'); } catch {}
+  if (flow.status !== 0 || !out || !out.success) {
+    const msg = ((out && out.error) || flow.stderr || flow.stdout || `退出码 ${flow.status}`).slice(0, 200);
     const status = classifySessionFailure(msg);
     updateAccountStatus(accountNum, {
       status,
@@ -245,7 +247,7 @@ async function execOpenAccount(op) {
     error: null,
     note: accountNote,
   });
-  return { accountNum, status: 'ok' };
+  return { accountNum, status: 'ok', action: out.action };
 }
 
 // ── 单账号扫描 ─────────────────────────────────────────────────────

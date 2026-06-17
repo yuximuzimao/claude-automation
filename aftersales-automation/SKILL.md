@@ -35,6 +35,13 @@ entry: cli.js
 | `lib/jl/list.js` | 鲸灵工单列表扫描 | 改列表扫描逻辑时 |
 | `lib/jl/read-ticket.js` | 读单条工单详情 | 改工单数据提取时 |
 | `lib/jl/session-filter.js` | 最小注入白名单——`filterAuthCookies`/`filterIdentityLocalStorage`，只搬认证态+账号身份，丢弃设备/网络指纹（跨设备搬指纹触发风控） | 改注入字段白名单时 |
+| `lib/jl/login-state.js` | **安全注入判据（2026-06-17）**——`judgeLoginState`（三条件登录态：店铺名/商家登录/自动注册）+`matchShopName`/`shopKeyword`（note 取 `-` 前核心词与页面工商全称子串匹配）+`READ_LOGIN_STATE_JS` | 改登录态判定/店铺名匹配时 |
+| `lib/jl/open-account-flow.js` | **A2 安全打开账号编排（2026-06-17）**——`openAccountFlow`/`decideOpenAccountAction`，串联 01-04 原子步：打开 login→读态→复用(匹配)/退出注入(错号)/注入(未登录)/异常停(未知)。**已登录目标账号禁止注入** | 改打开后台/安全注入流程时 |
+| `scripts/jl-steps/01-open-login.js` | 原子步：打开 login 页（新开标签直达，不注入不导航现有 tab） | 改打开页逻辑时 |
+| `scripts/jl-steps/02-read-shop-name.js` | 原子步：读登录态（等8s+三条件判据，退出坐标常量 1358,28 / 1328,244） | 改登录态读取时 |
+| `scripts/jl-steps/03-logout.js` | 原子步：退出登录（悬停展开下拉+真实左键点击+等8s三条件确证登出） | 改退出登录时 |
+| `scripts/jl-steps/04-inject.js` | 原子步：注入账号(调 jl.js inject)+等8s+店铺名关键字匹配验证 | 改注入验证时 |
+| `scripts/jl-steps/open-account.js` | A2 编排 CLI 包装（`node scripts/jl-steps/open-account.js <num>`），op-queue execOpenAccount 调它 | 改打开后台入口时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
@@ -188,6 +195,8 @@ lib/jl/navigate.js
 lib/jl/read-ticket.js
 lib/jl/reject.js
 lib/jl/session-filter.js
+lib/jl/login-state.js
+lib/jl/open-account-flow.js
 lib/jl-account-config.js
 lib/jl-session-state.js
 lib/product/archive.js
@@ -204,6 +213,11 @@ cli.js
 server.js
 collect.js
 scan-all.js
+scripts/jl-steps/01-open-login.js
+scripts/jl-steps/02-read-shop-name.js
+scripts/jl-steps/03-logout.js
+scripts/jl-steps/04-inject.js
+scripts/jl-steps/open-account.js
 docs/INDEX.md
 public/app.js
 public/account-relogin-state.js

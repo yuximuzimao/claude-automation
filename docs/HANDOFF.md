@@ -1,33 +1,60 @@
 # Handoff
 
-更新时间：2026-06-16
+更新时间：2026-06-17
 当前负责人：Claude Code
 当前分支：data-model-restructure
-当前焦点：**鲸灵售后自动化重构方案已批准，待新窗口执行（计划已落盘，尚未动代码）**
+当前焦点：**鲸灵售后重构第一步已完成；第二步安全注入路径已完成代码+单测+部分真机验证，待真机端到端验证后接 A2**
 
-## ⏭️ 下一窗口接手：鲸灵售后自动化重构（已批准，未执行）
+## ⏭️ 下一窗口接手：第二步真机端到端验证 + 第三步
 
-**计划文件（必读）**：`/Users/chat/.claude/plans/codex-3-2-ip-codex-3-codex-1-1-1-1-code-twinkling-emerson.md`
-**起因**：百浩账号3点"打开后台"卡住、重复点2次→IP被封、平台说"刷接口"。根因=注入不像真人（不清旧态、reload时双身份）+ 内部跳转用 $router.push 非真点击 + 刷新状态多账号连续登录 + 失败不回写状态重复注入。
+**计划文件**：
+- 总计划：`/Users/chat/.claude/plans/codex-3-2-ip-codex-3-codex-1-1-1-1-code-twinkling-emerson.md`
+- 第一步：`~/.claude/plans/step1-stop-legacy-system.md`
+- 第二步：`~/.claude/plans/step2-a2-safe-inject.md`
 
-**当前状态**：方案已与用户逐条对齐、经 Codex 审计、用户批准。**尚未写任何代码，工作区无本次改动。**
+**起因**：百浩账号3点"打开后台"卡住、重复点2次→IP被封。根因=注入不像真人（不清旧态、reload双身份）+ 失败不回写重复注入 + 刷新状态多账号连续登录。
 
-**执行铁律（务必遵守）**：
-- worktree 内分步做（触发 worktree 铁律：流程结构+跨项目 inject 脚本）。
-- 鲸灵操作报错即停绝不重试。不能真实访问鲸灵试错。
-- **真实操作走"找/确认/点"三步分离，由用户指挥**：找（纯扫描DOM/截图标记/F12核对，不点击）→ 用户确认点位 → 点（单独最小坐标点击脚本）。点位核对与操作分开。
-- 每完成一步报告并等用户指令，不自行推进到真机点击。
+### ✅ 第一步：停旧系统（已完成并真机验证，commit a66720b）
+- server.js：启动不再 scheduleNextScan / startErpHeartbeat / 自动入队 pending（纯手动模式）
+- 删除刷新状态全链路（refresh-status 路由 + check-session op + 前端按钮）
+- 前端摘除 扫描工单/批量执行/批量重来 入口（保留暂停恢复/紧急停止）
+- 验证：启动日志无任何自动鲸灵请求；npm test 不回归
 
-**三步推进（详见计划文件）**：
-1. **第一步 停旧系统**：停所有自动行为（定时扫描/队列自动处理/ERP心跳等所有保活），删"刷新状态"按钮+refresh-status路由+check-session op。server 只剩 Web 面板+手动按钮。纯改造+单测，不碰鲸灵。
-2. **第二步 改 A2"打开店铺后台"走新注入路径**：打开login页→检测当前登录店铺名==目标note？对则跳过注入直接用/错则点退出→等待→注入→等跳转。新增 `lib/jl/inject-plan.js` 纯函数+单测。单点验证安全，期间人工靠它处理工单。
-3. **第三步 扩展 A1 逐账号闭环**：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(tab-manager)+处理完进首页读提醒。
+### ✅ 第二步：A2 安全注入路径（代码+单测完成，部分真机验证，未提交）
 
-**整系统停止机制**（贯穿二三步，不分级）：任何鲸灵操作报错→停整个售后系统+关非主tab+残留检测+写 circuit-breaker.json+建1分钟Mac提醒。复用扩展现有 `emergencyStop()`。
+**底层逻辑**：先检测能否复用、已登录目标账号就跳过注入直接用；错号才退出登录（平台正规登出）→注入→验证。**已登录目标账号禁止重复注入（铁律 lesson #56）**。
 
-**Codex 审计已采纳⑤多tab精确过滤；作废①(改检测复用)③(用户定全停)④(固定坐标)⑥(彻底停旧不共存)⑦(删refresh按钮)**。详见计划文件末尾。
+**已完成模块（Claude 真机指挥 + Codex 重构编排）**：
+- `lib/jl/login-state.js` — 三条件登录态判据 + 关键字匹配（单测 13/13）
+- `scripts/jl-steps/01-open-login.js` — 打开 login（真机✓）
+- `scripts/jl-steps/02-read-shop-name.js` — 读登录态（真机✓ 已登录+登出后 false 都验过）
+- `scripts/jl-steps/03-logout.js` — 退出登录真实点击（真机✓ 共途登出成功）
+- `scripts/jl-steps/04-inject.js` — 注入+店铺名关键字匹配（真机✓ 百浩注入成功）
+- `lib/jl/open-account-flow.js` + `scripts/jl-steps/open-account.js` — 四分支编排（Codex 做，单测✓，**未真机**）
+- `sessions/jl.js` inject — 去掉注入后 Page.navigate，纯注入不导航（Codex 做，静态测试防回归✓）
+- `lib/server/op-queue.js` execOpenAccount — 改调安全编排脚本（Codex 做）
 
-**审计材料**：`docs/codex-handoff/aftersales-closure-injection-redesign-review.md`（含旧版方案全文+Codex 7条审计，注：方案后续又按用户反馈改过，以计划文件为准）。
+**关键已验证事实**（接手必读）：
+- 登录态判据：右上角店铺名 `<p class="readonly">`（任何后台页都在，与所在页无关）；未登录确证=无店铺名+含"商家登录"+"未注册的手机号登录成功后将自动注册"三条同时满足
+- 店铺名匹配：note 取 `-` 前核心词（百浩-RITEKOKO→百浩）子串匹配页面工商全称（合肥百浩创展贸易有限公司）
+- 固定坐标：退出悬停触发点 (1358,28) → 退出按钮 (1328,244)；打开/注入/退出后统一等 8s 再读
+- jl.js inject 已去导航：A1 扫描链路靠 cli.js list 自导航（解耦），A2 用编排不依赖 inject 导航
+
+**⚠️ 待真机端到端验证（4 点，用户指挥）**：
+1. 已登录目标账号点"打开后台"→应复用不注入
+2. 已登录错号→应 03退出+04注入
+3. 未登录→应直接 04注入
+4. jl 去导航后 04 店铺名验证仍通过
+验证前需 `/aftersales-restart`（op-queue.js 改动）。
+
+**测试基线**：全量纯单测 87/87 通过。
+
+### 第三步（未开始）
+扩展 A1 逐账号闭环：真点击导航(click-navigate)+固定坐标排序+冒泡处理(bubble-plan)+多tab管理(tab-manager)+整系统停止完整机制(关tab/残留检测/circuit-breaker/提醒)+处理完进首页读提醒。
+
+### 执行铁律
+- 鲸灵操作报错即停绝不重试；不能真机试错；真机"找/确认/点"三步分离由用户指挥
+- 已登录目标账号禁止注入（lesson #56）；worktree 用 `git worktree add ... <当前分支>` 手动指定基线（lesson #54）
 
 ---
 
