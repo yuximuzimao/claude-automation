@@ -1,21 +1,23 @@
 {
   "protocol": "codex-handoff-v1",
   "description": "Codex -> Claude Code 协作收件箱。根目录只保留活跃请求；已完成材料归档到 docs/codex-handoff/archive/。",
-  "pending": [
+  "pending": [],
+  "processed": [
     {
       "id": "claude-aftersales-inject-refactor-orchestration-20260617",
       "project": "aftersales-automation",
       "action": "refactor-and-orchestrate",
-      "file": "docs/codex-handoff/aftersales-inject-refactor-orchestration-20260617.md",
-      "summary": "两个动作：①重构 sessions/jl.js inject 去掉注入后的主动导航（Page.navigate 357行），改纯注入不导航，并排查所有 jl inject 调用方（A1扫描链路注入后需自己导航工单页）；②编排已验证的 01/02/03/04 原子脚本成完整安全注入流程（复用/错号退出注入/未登录注入/未知异常 四分支）。铁律：已登录目标账号禁止注入、不改01-04+login-state.js、不真机访问鲸灵、报错即停。",
+      "file": "docs/codex-handoff/archive/2026-06-17-aftersales-inject-refactor-orchestration/aftersales-inject-refactor-orchestration-20260617.md",
+      "summary": "两个动作：①重构 sessions/jl.js inject 去掉注入后的主动导航，改纯注入不导航，并排查所有 jl inject 调用方；②编排已验证的 01/02/03/04 原子脚本成完整安全注入流程。Codex 已完成代码与纯单测，未真机访问鲸灵。",
       "from": "claude",
       "timestamp": "2026-06-17T00:00:00+0800",
-      "status": "responded",
-      "responseFile": "docs/codex-handoff/aftersales-inject-refactor-orchestration-20260617-response.md",
-      "respondedAt": "2026-06-17T13:00:15+0800"
-    }
-  ],
-  "processed": [
+      "status": "processed",
+      "respondedAt": "2026-06-17T13:00:15+0800",
+      "processedAt": "2026-06-17T21:06:23+0800",
+      "processedBy": "codex",
+      "responseFile": "docs/codex-handoff/archive/2026-06-17-aftersales-inject-refactor-orchestration/aftersales-inject-refactor-orchestration-20260617-response.md",
+      "summaryAfterProcessing": "Codex 完成 jl inject 去导航、安全打开账号编排、调用方排查和纯单测验证；按用户 neat 归档要求移出 active handoff 根目录。"
+    },
     {
       "id": "codex-aftersales-minimal-inject-risk-20260615T153005",
       "project": "aftersales-automation",
@@ -170,6 +172,22 @@
     }
   ],
   "archived": [
+    {
+      "id": "2026-06-17-aftersales-inject-refactor-orchestration",
+      "project": "aftersales-automation",
+      "summary": "Claude -> Codex 的 jl inject 去导航与安全账号打开编排任务已由 Codex 回复并移入 processed；原始请求和 response 已归档。",
+      "directory": "docs/codex-handoff/archive/2026-06-17-aftersales-inject-refactor-orchestration/",
+      "archivedAt": "2026-06-17T21:06:23+0800",
+      "status": "archived"
+    },
+    {
+      "id": "2026-06-17-aftersales-closure-injection-redesign-review",
+      "project": "aftersales-automation",
+      "summary": "active handoff 根目录中的孤儿审计材料未被 inbox.pending 引用，按 active 根目录清洁规则归档保留；该条不表示已完成审查。",
+      "directory": "docs/codex-handoff/archive/2026-06-17-aftersales-closure-injection-redesign-review/",
+      "archivedAt": "2026-06-17T21:06:23+0800",
+      "status": "archived-unindexed"
+    },
     {
       "id": "2026-06-17-aftersales-minimal-inject-risk",
       "project": "aftersales-automation",
