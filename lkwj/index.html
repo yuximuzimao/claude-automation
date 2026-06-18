@@ -247,7 +247,7 @@ const ALL_TABS = ['dashboard','sprite','shiny','forms','fruits','furniture','clo
 const CATEGORY_META = {
   fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集', csv: '精灵果实图鉴.csv' },
   furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）', csv: '家具图鉴.csv' },
-  clothing:  { name: '服装', icon: '👗', desc: '外观装扮图鉴（皮卡服装店/活动/赛季）', csv: '外观图鉴.csv' },
+  clothing:  { name: '服装', icon: '👗', desc: '服装图鉴（单件/套装/特效配对精灵）', csv: '服装图鉴.csv' },
   titles:    { name: '称号', icon: '🏷️', desc: '称号收集', csv: '其他类别统计.csv' },
   stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集', csv: '其他类别统计.csv' },
   dungeons:  { name: '遗迹（副本）', icon: '🏛️', desc: '遗迹/副本通关与奖励收集', csv: '' },
@@ -539,6 +539,18 @@ function renderDashboard() {
   let yiseTotal = 0, yiseOwned = 0;
   let fruitTotal = 0, fruitOwned = 0;
   let formTotal = 0, formOwned = 0;
+  const furnitureItems = getFurnitureList();
+  const furnitureTotal = furnitureItems.length;
+  const furnitureOwned = furnitureItems.filter(i => i.acquired).length;
+  const clothing = getClothingList();
+  const clothingTotal = clothing.length;
+  const clothingOwned = clothing.filter(i => i.acquired).length;
+  const titles = getTitleList();
+  const titleTotal = titles.length;
+  const titleOwned = titles.filter(i => i.acquired).length;
+  const dungeons = getDungeonList();
+  const dungeonTotal = dungeons.length;
+  const dungeonOwned = dungeons.filter(i => i.completed).length;
 
   allPetKeys.forEach(petKey => {
     const pet = pets[petKey];
@@ -572,6 +584,14 @@ function renderDashboard() {
   html += `<div class="ds-item"><span class="ds-label">多形态</span><span class="ds-val">${formOwned}</span><span class="ds-total">/ ${formTotal}</span></div>`;
   html += `<div class="ds-sep"></div>`;
   html += `<div class="ds-item"><span class="ds-label">果实</span><span class="ds-val">${fruitOwned}</span><span class="ds-total">/ ${fruitTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">家具</span><span class="ds-val">${furnitureOwned}</span><span class="ds-total">/ ${furnitureTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">服装</span><span class="ds-val">${clothingOwned}</span><span class="ds-total">/ ${clothingTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">称号</span><span class="ds-val">${titleOwned}</span><span class="ds-total">/ ${titleTotal}</span></div>`;
+  html += `<div class="ds-sep"></div>`;
+  html += `<div class="ds-item"><span class="ds-label">遗迹</span><span class="ds-val">${dungeonOwned}</span><span class="ds-total">/ ${dungeonTotal}</span></div>`;
   html += `<span style="font-size:11px;color:#bbb;margin-left:auto">更新于 ${data.meta?.last_updated || '--'}</span>`;
   html += '</div>';
 
@@ -1344,13 +1364,17 @@ function switchTab(name) {
   if (name === 'shiny') { renderShinyTab(); return; }
   if (name === 'forms') { renderFormsTab(); return; }
   if (name === 'fruits') { renderFruitsTab(); return; }
+  if (name === 'furniture') { renderFurnitureTab(); return; }
+  if (name === 'clothing') { renderClothingTab(); return; }
+  if (name === 'titles') { renderTitlesTab(); return; }
+  if (name === 'dungeons') { renderDungeonsTab(); return; }
   if (CATEGORY_META[name]) { renderCategoryTab(name); return; }
 }
 
-// ═══════════ 通用品类 Tab（item-based：家具/服装/称号/星星/遗迹/支线/扭蛋/音乐） ═══════════
+// ═══════════ 通用品类 Tab（item-based：星星/支线/扭蛋/音乐） ═══════════
 function getCatItems(catKey) {
   // 品类到 items[] category 的映射
-  const map = { furniture:'家具', clothing:'外观', titles:'称号', stars:'星星', dungeons:'遗迹', sidequests:'支线任务', gacha:'扭蛋机', music:'音乐' };
+  const map = { stars:'星星', sidequests:'支线任务', gacha:'扭蛋机', music:'音乐' };
   const cat = map[catKey] || catKey;
   return (data.items || []).filter(i => i.category === cat);
 }
@@ -1630,6 +1654,321 @@ async function toggleFruit(petKey) {
   data.sprite_progress[petKey].fruit_acquired = pet.fruit.acquired;
   await saveData();
   if (currentTab === 'fruits') renderFruitsTab();
+}
+
+// ═══════════ 家具 Tab ═══════════
+function getFurnitureList() {
+  const progress = data?.furniture_progress || {};
+  return (gameData?.furniture || []).map(item => ({
+    ...item,
+    acquired: !!progress[item.id],
+  }));
+}
+
+function renderFurnitureTab() {
+  const el = document.getElementById('tab-furniture');
+  const items = getFurnitureList();
+  const owned = items.filter(i => i.acquired);
+  const comfortTotal = items.reduce((sum, i) => sum + (Number(i.comfort) || 0), 0);
+  const comfortOwned = owned.reduce((sum, i) => sum + (Number(i.comfort) || 0), 0);
+  const inspirationTotal = items.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
+  const inspirationOwned = owned.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
+  const remainingInspiration = Math.max(0, inspirationTotal - inspirationOwned);
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">🪑 家具</h3>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong></span>`;
+  html += `<span>舒适度 <strong>${comfortOwned}</strong> / ${comfortTotal}</span>`;
+  html += `<span>灵感值 <strong>${inspirationOwned}</strong> / ${inspirationTotal} · 还差 <strong>${remainingInspiration}</strong></span></div>`;
+
+  if (!items.length) {
+    html += '<div class="empty-state">暂无家具数据<small>把名称、舒适度、灵感值补到 data/furniture.json 后会在这里显示</small></div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = items.filter(i => !i.acquired);
+  const done = items.filter(i => i.acquired);
+
+  if (pending.length) {
+    html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(item => { html += renderFurnitureRow(item); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += renderCollapsibleDoneSection(done, renderFurnitureRow, done.length);
+  }
+
+  el.innerHTML = html;
+}
+
+function renderFurnitureRow(item) {
+  return `<div class="item-row${item.acquired ? ' done' : ''}">
+    <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleFurniture('${item.id}')"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(item.name)}</div>
+      <div class="task-methods">舒适度 ${Number(item.comfort) || 0} · 灵感值 ${Number(item.inspiration) || 0}</div>
+    </div>
+  </div>`;
+}
+
+async function toggleFurniture(id) {
+  if (!data.furniture_progress) data.furniture_progress = {};
+  data.furniture_progress[id] = !data.furniture_progress[id];
+  if (data.furniture_progress[id]) {
+    const item = (gameData?.furniture || []).find(i => i.id === id);
+    if (item) addDoneToday({ key: `furniture_${id}`, name: item.name, desc: '家具' });
+  }
+  await saveData();
+  gameData.furniture_progress = data.furniture_progress;
+  if (currentTab === 'furniture') renderFurnitureTab();
+  if (currentTab === 'dashboard') renderDashboard();
+}
+
+// ═══════════ 称号 Tab ═══════════
+function getTitleList() {
+  const progress = data?.title_progress || {};
+  return (gameData?.titles || []).map(item => ({
+    ...item,
+    acquired: !!progress[item.id],
+  }));
+}
+
+function renderTitlesTab() {
+  const el = document.getElementById('tab-titles');
+  const titles = getTitleList();
+  const owned = titles.filter(i => i.acquired);
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">🏷️ 称号</h3>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${titles.length}</strong> 条 · 已收集 <strong>${owned.length}</strong></span></div>`;
+
+  if (!titles.length) {
+    html += '<div class="empty-state">暂无称号数据<small>把称号和获取方式补到 data/titles.json 后会在这里显示</small></div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = titles.filter(i => !i.acquired);
+  const done = titles.filter(i => i.acquired);
+
+  if (pending.length) {
+    html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(item => { html += renderTitleRow(item); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += renderCollapsibleDoneSection(done, renderTitleRow, done.length);
+  }
+
+  el.innerHTML = html;
+}
+
+function formatTitleName(item) {
+  const parts = [item.upper, item.lower].filter(Boolean);
+  return parts.length ? parts.join(' · ') : (item.name || '未填写');
+}
+
+function renderTitleRow(item) {
+  const name = formatTitleName(item);
+  const obtainMethod = item.obtainMethod || '待补充';
+  return `<div class="item-row${item.acquired ? ' done' : ''}">
+    <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleTitle('${item.id}')"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(name)}</div>
+      <div class="task-methods">获取方式：${esc(obtainMethod)}</div>
+    </div>
+  </div>`;
+}
+
+async function toggleTitle(id) {
+  if (!data.title_progress) data.title_progress = {};
+  data.title_progress[id] = !data.title_progress[id];
+  if (data.title_progress[id]) {
+    const item = (gameData?.titles || []).find(i => i.id === id);
+    if (item) addDoneToday({ key: `title_${id}`, name: formatTitleName(item), desc: '称号' });
+  }
+  await saveData();
+  gameData.title_progress = data.title_progress;
+  if (currentTab === 'titles') renderTitlesTab();
+  if (currentTab === 'dashboard') renderDashboard();
+}
+
+// ═══════════ 遗迹副本 Tab ═══════════
+function getDungeonList() {
+  const progress = data?.dungeon_progress || {};
+  return (gameData?.dungeons || []).map(item => ({
+    ...item,
+    completed: !!progress[item.id],
+  }));
+}
+
+function renderDungeonsTab() {
+  const el = document.getElementById('tab-dungeons');
+  const dungeons = getDungeonList();
+  const completed = dungeons.filter(i => i.completed);
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">🏛️ 遗迹副本</h3>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${dungeons.length}</strong> 个 · 已完成 <strong>${completed.length}</strong></span></div>`;
+
+  if (!dungeons.length) {
+    html += '<div class="empty-state">暂无遗迹副本数据<small>把副本名称、位置、奖励补到 data/dungeons.json 后会在这里显示</small></div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = dungeons.filter(i => !i.completed);
+  const done = dungeons.filter(i => i.completed);
+
+  if (pending.length) {
+    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    pending.forEach(item => { html += renderDungeonRow(item); });
+    html += '</div>';
+  }
+  if (done.length) {
+    html += renderCollapsibleDoneSection(done, renderDungeonRow, done.length);
+  }
+
+  el.innerHTML = html;
+}
+
+function renderDungeonRow(item) {
+  const rewards = Array.isArray(item.rewards) ? item.rewards : [];
+  const rewardHtml = rewards.length
+    ? rewards.map(reward => `<span class="item-category-tag">${esc(reward)}</span>`).join(' ')
+    : '<span class="item-category-tag">奖励待补充</span>';
+  return `<div class="item-row${item.completed ? ' done' : ''}">
+    <button class="check-btn${item.completed ? ' checked' : ''}" onclick="toggleDungeon('${item.id}')"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(item.name)}</div>
+      <div class="task-methods">位置：${esc(item.location || '待补充')}</div>
+      <div class="task-methods">副本奖励：${rewardHtml}</div>
+    </div>
+  </div>`;
+}
+
+async function toggleDungeon(id) {
+  if (!data.dungeon_progress) data.dungeon_progress = {};
+  data.dungeon_progress[id] = !data.dungeon_progress[id];
+  if (data.dungeon_progress[id]) {
+    const item = (gameData?.dungeons || []).find(i => i.id === id);
+    if (item) addDoneToday({ key: `dungeon_${id}`, name: item.name, desc: '遗迹副本' });
+  }
+  await saveData();
+  gameData.dungeon_progress = data.dungeon_progress;
+  if (currentTab === 'dungeons') renderDungeonsTab();
+  if (currentTab === 'dashboard') renderDashboard();
+}
+
+// ═══════════ 服装 Tab ═══════════
+function getClothingList() {
+  const progress = data?.clothing_progress || {};
+  const clothing = gameData?.clothing || {};
+  const sets = new Map((clothing.sets || []).map(set => [set.id, set]));
+  return (clothing.pieces || []).map(item => {
+    const set = item.collectionType === 'set' ? sets.get(item.setId) : null;
+    return {
+      ...item,
+      set,
+      acquired: !!progress[item.id],
+    };
+  });
+}
+
+function renderClothingTab() {
+  const el = document.getElementById('tab-clothing');
+  const clothing = getClothingList();
+  const acquired = clothing.filter(i => i.acquired);
+  const setPieces = clothing.filter(i => i.collectionType === 'set');
+  const singlePieces = clothing.filter(i => i.collectionType === 'single');
+
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${clothing.length}</strong> 件 · 已收集 <strong>${acquired.length}</strong></span>`;
+  html += `<span>套装部件 <strong>${setPieces.filter(i => i.acquired).length}</strong> / ${setPieces.length}</span>`;
+  html += `<span>独立单件 <strong>${singlePieces.filter(i => i.acquired).length}</strong> / ${singlePieces.length}</span></div>`;
+
+  if (!clothing.length) {
+    html += '<div class="empty-state">暂无服装数据<small>把套装共享信息和单件收集项补到 data/clothing.json 后会在这里显示</small></div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const setGroups = new Map();
+  setPieces.forEach(item => {
+    const setKey = item.set?.id || item.setId || 'unknown_set';
+    if (!setGroups.has(setKey)) setGroups.set(setKey, { set: item.set || null, pieces: [] });
+    setGroups.get(setKey).pieces.push(item);
+  });
+
+  if (setGroups.size) {
+    html += '<div class="section-title">套装</div>';
+    for (const group of setGroups.values()) {
+      const pieces = group.pieces;
+      const setName = group.set?.name || '未命名套装';
+      const doneCount = pieces.filter(i => i.acquired).length;
+      html += `<div class="task-group-label">${esc(setName)}（${doneCount}/${pieces.length}）</div>`;
+      html += renderClothingSetMeta(group.set);
+      html += '<div class="item-list">';
+      pieces.forEach(item => { html += renderClothingPieceRow(item); });
+      html += '</div>';
+    }
+  }
+
+  if (singlePieces.length) {
+    html += `<div class="section-title">单件（${singlePieces.filter(i => i.acquired).length}/${singlePieces.length}）</div><div class="item-list">`;
+    singlePieces.forEach(item => { html += renderClothingPieceRow(item); });
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+function renderClothingSetMeta(set) {
+  if (!set) return '<div class="task-methods">套装信息：待补充</div>';
+  const pairedPetName = set.pairedPetName || '';
+  const effectText = set.hasEffect
+    ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}`
+    : '特效：无';
+  const methodHtml = set.obtainMethod ? `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>` : '';
+  return `<div class="task-methods">${effectText}</div>${methodHtml}`;
+}
+
+function renderClothingPieceRow(item) {
+  const collectionType = item.collectionType === 'set' ? '套装部件' : '单件';
+  const pieceName = item.pieceName || item.name || '未命名服装';
+  if (item.collectionType === 'set') {
+    return `<div class="item-row${item.acquired ? ' done' : ''}">
+      <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>
+      <div class="item-info">
+        <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${collectionType}</span></div>
+      </div>
+    </div>`;
+  }
+
+  const source = item.collectionType === 'set' ? (item.set || {}) : item;
+  const pairedPetName = source.pairedPetName || '';
+  const effectHtml = source.hasEffect
+    ? `<div class="task-methods">特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}</div>`
+    : '<div class="task-methods">特效：无</div>';
+  return `<div class="item-row${item.acquired ? ' done' : ''}">
+    <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>
+    <div class="item-info">
+      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${collectionType}</span></div>
+      ${effectHtml}
+      ${source.obtainMethod ? `<div class="task-methods">获取方式：${esc(source.obtainMethod)}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+async function toggleClothingPiece(id) {
+  if (!data.clothing_progress) data.clothing_progress = {};
+  data.clothing_progress[id] = !data.clothing_progress[id];
+  if (data.clothing_progress[id]) {
+    const item = (gameData?.clothing?.pieces || []).find(i => i.id === id);
+    if (item) addDoneToday({ key: `clothing_${id}`, name: item.pieceName || item.name || id, desc: item.collectionType === 'set' ? '套装部件' : '单件服装' });
+  }
+  await saveData();
+  gameData.clothing_progress = data.clothing_progress;
+  if (currentTab === 'clothing') renderClothingTab();
+  if (currentTab === 'dashboard') renderDashboard();
 }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }

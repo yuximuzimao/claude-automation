@@ -7,6 +7,10 @@ const DATA_FILE = path.join(__dirname, 'data', 'collections.json');
 const PETS_FILE = path.join(__dirname, 'data', 'pets.json');
 const TASKS_FILE = path.join(__dirname, 'data', 'tasks.json');
 const CHAINS_FILE = path.join(__dirname, 'data', 'evolution-chains.json');
+const FURNITURE_FILE = path.join(__dirname, 'data', 'furniture.json');
+const TITLES_FILE = path.join(__dirname, 'data', 'titles.json');
+const DUNGEONS_FILE = path.join(__dirname, 'data', 'dungeons.json');
+const CLOTHING_FILE = path.join(__dirname, 'data', 'clothing.json');
 const WALLET_FILE = path.join(__dirname, 'data', 'wallet.json');
 const ANNOTATIONS_FILE = path.join(__dirname, 'data', 'annotations.json');
 
@@ -94,20 +98,72 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // API: Merged game data (pets + tasks + chains + progress)
+  // API: Furniture
+  if (req.method === 'GET' && url.pathname === '/api/furniture') {
+    try {
+      serveJSON(res, readJSON(FURNITURE_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Titles
+  if (req.method === 'GET' && url.pathname === '/api/titles') {
+    try {
+      serveJSON(res, readJSON(TITLES_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Dungeons
+  if (req.method === 'GET' && url.pathname === '/api/dungeons') {
+    try {
+      serveJSON(res, readJSON(DUNGEONS_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Clothing
+  if (req.method === 'GET' && url.pathname === '/api/clothing') {
+    try {
+      serveJSON(res, readJSON(CLOTHING_FILE));
+    } catch (e) {
+      serveError(res, 500, e.message);
+    }
+    return;
+  }
+
+  // API: Merged game data (pets + tasks + chains + furniture + titles + dungeons + clothing + progress)
   if (req.method === 'GET' && url.pathname === '/api/game-data') {
     try {
       const pets = readJSON(PETS_FILE);
       const tasks = readJSON(TASKS_FILE);
       const chains = readJSON(CHAINS_FILE);
+      const furniture = readJSON(FURNITURE_FILE);
+      const titles = readJSON(TITLES_FILE);
+      const dungeons = readJSON(DUNGEONS_FILE);
+      const clothing = readJSON(CLOTHING_FILE);
       const collections = readJSON(DATA_FILE);
 
       serveJSON(res, {
         pets,
         tasks,
         evolutionChains: chains,
+        furniture,
+        titles,
+        dungeons,
+        clothing,
         sprite_progress: collections.sprite_progress || {},
         shiny_progress: collections.shiny_progress || {},
+        furniture_progress: collections.furniture_progress || {},
+        title_progress: collections.title_progress || {},
+        dungeon_progress: collections.dungeon_progress || {},
+        clothing_progress: collections.clothing_progress || {},
         categories: collections.categories || {},
         meta: collections.meta || {},
       });

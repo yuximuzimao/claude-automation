@@ -16,7 +16,11 @@
 | 宠物定义 | `data/pets.json`（373 只，对象 key="pet_N"） |
 | 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
 | 进化链 | `data/evolution-chains.json`（165 链，全覆盖 373 只） |
-| 用户进度 | `data/collections.json`（sprite_progress + shiny_progress） |
+| 家具定义 | `data/furniture.json`（数组；名称、舒适度、灵感值） |
+| 服装定义 | `data/clothing.json`（对象；`sets[]` 保存套装共享信息，`pieces[]` 保存单件收集项） |
+| 称号定义 | `data/titles.json`（数组；名称分段、获取方式） |
+| 遗迹副本定义 | `data/dungeons.json`（数组；副本名称、位置、奖励） |
+| 用户进度 | `data/collections.json`（sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
 | 标注数据 | `data/annotations.json`（append-only ops 日志，Claude 批量处理用） |
 | 数据采集需求 | `data/_待采集/README.md` |
@@ -27,7 +31,7 @@
 进入本项目时：
 1. 确认 server 是否已运行：`lsof -ti :8899`（有输出=已运行）
 2. 若未运行：`node server.js &`
-3. 核心数据文件：`data/pets.json` + `data/tasks.json` + `data/evolution-chains.json` + `data/collections.json`
+3. 核心数据文件：`data/pets.json` + `data/tasks.json` + `data/evolution-chains.json` + `data/furniture.json` + `data/clothing.json` + `data/titles.json` + `data/dungeons.json` + `data/collections.json`
 
 ## PATHS
 
@@ -40,12 +44,20 @@ lkwj/
 ├── scripts/
 │   ├── fix-shiny-and-chains.js       # 异色/炫彩标签修正 + 进化链传播
 │   ├── validate-multiform-data.js    # 多形态 requiredForms / forms 数据约束验证
-│   └── validate-multiform-ui.js      # 多形态 Tab / 随机模块静态结构验证
+│   ├── validate-multiform-ui.js      # 多形态 Tab / 随机模块静态结构验证
+│   ├── validate-furniture-ui.js      # 家具独立数据模型 + UI 验证
+│   ├── validate-clothing-ui.js       # 服装单件模型 + UI 验证
+│   ├── validate-title-ui.js          # 称号模型 + UI 验证
+│   └── validate-dungeon-ui.js        # 遗迹副本模型 + UI 验证
 └── data/
     ├── pets.json              # 宠物定义（373 只）：形态 + 标签 + 元素数组
     ├── tasks.json             # 任务定义（373 组）：form-independent，desc 不含宠物名
     ├── evolution-chains.json  # 进化链（165 链）：独立于形态，全覆盖 373 只
-    ├── collections.json       # 用户进度：sprite_progress + shiny_progress
+    ├── furniture.json         # 家具定义：数组，保存名称/舒适度/灵感值
+    ├── clothing.json          # 服装定义：对象，sets[] 保存套装共享信息，pieces[] 保存单件收集项
+    ├── titles.json            # 称号定义：数组，保存名称分段/获取方式
+    ├── dungeons.json          # 遗迹副本定义：数组，保存名称/位置/奖励
+    ├── collections.json       # 用户进度：sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
     ├── annotations.json       # 标注日志（append-only ops，不提交 git）
@@ -148,13 +160,112 @@ lkwj/
     "pet_1": { "tasks": { "0": true, "1": true } },
     "pet_18": { "forms_collected": ["basic", "spring"] }
   },
-  "shiny_progress": { "pet_5": true, "pet_18": false }
+  "shiny_progress": { "pet_5": true, "pet_18": false },
+  "furniture_progress": { "furniture_1": true },
+  "clothing_progress": { "clothing_1": true },
+  "title_progress": { "title_1": true },
+  "dungeon_progress": { "dungeon_1": true }
 }
 ```
 
 - `sprite_progress` — 按 pet ID 索引，`tasks` 为任务完成状态，`forms_collected` 为已收集形态，`fruit_acquired` 为果实已获得状态（boolean）
 - `shiny_progress` — 按 pet ID 索引的异色收集状态（0/1）
-- `items[]` — 非宠物类收集项（家具、外观等）
+- `furniture_progress` — 按 furniture ID 索引的家具收集状态（boolean）
+- `clothing_progress` — 按 clothing ID 索引的单件服装收集状态（boolean）
+- `title_progress` — 按 title ID 索引的称号收集状态（boolean）
+- `dungeon_progress` — 按 dungeon ID 索引的遗迹副本完成状态（boolean）
+- `items[]` — 旧通用品类收集项，家具不再走此字段
+
+### furniture.json — 家具定义（静态）
+
+```json
+[
+  { "id": "furniture_1", "name": "木质衣柜", "comfort": 300, "inspiration": 1200 }
+]
+```
+
+- `id` — 稳定主键，格式 `furniture_N`，新增家具只追加不复用 ID
+- `name` — 游戏内家具名称
+- `comfort` — 舒适度数值，未知时填 `0`
+- `inspiration` — 灵感值数值，用于前端统计已收集/总灵感值和剩余灵感值
+- 第一版不保存分类、来源、尺寸；后续确有需要再扩展静态定义，不写入进度数据
+
+### clothing.json — 服装定义（静态）
+
+```json
+{
+  "sets": [
+    {
+      "id": "clothing_set_1",
+      "name": "木之本樱魔法装扮",
+      "hasEffect": true,
+      "pairedPetName": "小可",
+      "obtainMethod": "洛克王国 x 魔卡少女樱联动活动；待游戏内图鉴核对"
+    }
+  ],
+  "pieces": [
+    {
+      "id": "clothing_1",
+      "collectionType": "set",
+      "setId": "clothing_set_1",
+      "pieceName": "发型"
+    },
+    {
+      "id": "clothing_6",
+      "collectionType": "single",
+      "pieceName": "独立服装样例",
+      "hasEffect": false,
+      "pairedPetName": "",
+      "obtainMethod": "待补充"
+    }
+  ]
+}
+```
+
+- `sets[].id` — 套装稳定主键，格式 `clothing_set_N`，新增套装只追加不复用 ID
+- `sets[].name` — 套装名称
+- `sets[].hasEffect` — 套装是否带特效
+- `sets[].pairedPetName` — 套装带特效时对应配对精灵名称；没有或未知可留空
+- `sets[].obtainMethod` — 套装获取方式，未知时填 `待补充`
+- `pieces[].id` — 单件稳定主键，格式 `clothing_N`，新增单件只追加不复用 ID
+- `pieces[].collectionType` — `set` 表示套装部件，`single` 表示独立单件
+- `pieces[].setId` — 所属套装 ID；`collectionType` 为 `single` 时不填
+- `pieces[].pieceName` — 单件服装名称或部件名称
+- 独立单件可直接在 `pieces[]` 写 `hasEffect`、`pairedPetName`、`obtainMethod`
+- 前端以单件为最小勾选单位；套装信息只在套装标题下显示，不在每个部件行重复显示
+
+### titles.json — 称号定义（静态）
+
+```json
+[
+  { "id": "title_1", "upper": "百分之零", "lower": "魔法师", "obtainMethod": "待补充" }
+]
+```
+
+- `id` — 稳定主键，格式 `title_N`，新增称号只追加不复用 ID
+- `upper` — 称号前段，用于和 `lower` 拼成页面主名称
+- `lower` — 称号后段，用于和 `upper` 拼成页面主名称
+- `obtainMethod` — 获取方式，未知时填 `待补充`
+- 前端只显示一条主称号，格式为 `upper · lower`；不单独展示分段统计
+
+### dungeons.json — 遗迹副本定义（静态）
+
+```json
+[
+  {
+    "id": "dungeon_1",
+    "name": "遗迹副本样例",
+    "location": "待补充",
+    "rewards": ["精灵蛋", "宝箱", "分光水晶", "损坏的国王球", "独角银币", "各系血脉秘药"]
+  }
+]
+```
+
+- `id` — 稳定主键，格式 `dungeon_N`，新增副本只追加不复用 ID
+- `name` — 副本名称
+- `location` — 副本所在位置，未知时填 `待补充`
+- `rewards` — 副本奖励数组，可包含精灵蛋、宝箱、分光水晶、损坏的国王球、独角银币、各系血脉秘药等
+- 第一版不拆奖励完成状态；前端按副本整体勾选
 
 ## 核心设计原则
 
@@ -178,6 +289,10 @@ lkwj/
 ### 数据源不交叉
 - `collections.json` = 进度状态（有/没有）
 - `pets.json` = 世界观定义（静态数据）
+- `furniture.json` = 家具定义（静态数据）
+- `clothing.json` = 服装定义（静态数据）
+- `titles.json` = 称号定义（静态数据）
+- `dungeons.json` = 遗迹副本定义（静态数据）
 - **禁止从 collection 反向生成定义数据**
 
 ### 获取方式
@@ -198,6 +313,10 @@ lkwj/
 - **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
 - **果实任务边界**：fruit 任务以 `课题进度` sheet 的“果实”课题行为准；`果实进度` 是家族级果实记录/获取方式来源，不是任务清单
 - **多形态收集边界**：`pets.forms` 保存全部可收集形态；前端「多形态」Tab 独立勾选 `forms_collected`；`confirm_forms` 任务只引用 `requiredForms` 自动判断是否完成
+- **家具收集边界**：`furniture.json` 保存名称/舒适度/灵感值；`collections.furniture_progress` 只保存是否已收集。第一版不建来源、分类、尺寸字段。
+- **服装收集边界**：`clothing.json` 的 `sets[]` 保存套装共享信息（获取方式、特效、配对精灵），`pieces[]` 保存最小收集单位。`collections.clothing_progress` 只保存单件是否已收集。套装只是分组，不是最小收集单位。
+- **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。页面只显示一条主称号，不拆分显示上下段。
+- **遗迹副本边界**：`dungeons.json` 保存副本名称、位置和奖励数组；`collections.dungeon_progress` 只保存副本是否完成。第一版不拆奖励单项收集。
 
 ## 已知数量
 
@@ -213,6 +332,10 @@ lkwj/
 | 进化链 | 165（全覆盖 373 只，无幽灵节点） |
 | 精灵果实课题任务（fruit） | 96 条（任务口径；仅"课题任务"类型的果实有此任务） |
 | 果实图鉴记录 | 143 个家族有果实（7 个无果实：迪莫/传说精灵3只/特殊奇遇2只/学院呱呱）；来源 Excel 果实进度 sheet |
+| 家具 | 1 件（第一版样例：木质衣柜，舒适度 300，灵感值 1200） |
+| 服装单件 | 6 件（第一版样例：木之本樱魔法装扮 5 件 + 独立服装样例 1 件） |
+| 称号 | 1 条（第一版样例：百分之零 · 魔法师） |
+| 遗迹副本 | 1 个（第一版样例，待替换为真实副本名） |
 | S2 精灵 | 26 只（pet_348~375，跳过 351/352） |
 
 ## API 端点
@@ -222,7 +345,11 @@ lkwj/
 | `GET /api/pets` | 宠物定义 |
 | `GET /api/tasks` | 任务定义 |
 | `GET /api/evolution-chains` | 进化链 |
-| `GET /api/game-data` | 合并数据（pets+tasks+chains+progress） |
+| `GET /api/furniture` | 家具定义 |
+| `GET /api/clothing` | 服装定义 |
+| `GET /api/titles` | 称号定义 |
+| `GET /api/dungeons` | 遗迹副本定义 |
+| `GET /api/game-data` | 合并数据（pets+tasks+chains+furniture+clothing+titles+dungeons+progress） |
 | `GET /api/data` | 原始 collections.json |
 | `POST /api/save` | 保存 collections.json |
 | `GET /api/wallet` | 钱包数据 |
@@ -241,7 +368,9 @@ lkwj/
 - [x] 5 只精灵首领名确认（叶冕魔力猫/烈火战神/圣水守护/神谕鲨/彩虹独角兽） — 2026-06-03
 - [x] 果实数据全量补充：143 只精灵有果实，6 种获取方式分类，互斥组逻辑 — 2026-06-04
 - [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
-- [ ] 家具图鉴：待采集 CSV → 导入 items[]
-- [ ] 外观图鉴：待采集 CSV → 导入 items[]
-- [ ] 称号/星星/遗迹/支线/扭蛋/音乐：待采集
+- [ ] 家具图鉴：已建立独立模型，待继续补充 `data/furniture.json`
+- [ ] 服装图鉴：已建立套装共享信息 + 单件收集项模型，待继续补充 `data/clothing.json`
+- [ ] 称号数据：已建立主名称 + 获取方式模型，待继续补充 `data/titles.json`
+- [ ] 遗迹副本数据：已建立副本名称/位置/奖励模型，待继续补充 `data/dungeons.json`
+- [ ] 星星/支线/扭蛋/音乐：待采集
 - [ ] 炫彩（chromatic）数据采集与录入

@@ -30,6 +30,10 @@ http://localhost:8899/review.html
 | `data/pets.json` | 精灵静态定义：名称、系别、形态、标签、果实 |
 | `data/tasks.json` | 世界图鉴课题任务定义，任务只来自 Excel `课题进度` sheet |
 | `data/evolution-chains.json` | 进化链和进化条件 |
+| `data/furniture.json` | 家具静态定义：名称、舒适度、灵感值 |
+| `data/clothing.json` | 服装静态定义：套装共享信息 + 单件收集项 |
+| `data/titles.json` | 称号静态定义：名称分段、获取方式 |
+| `data/dungeons.json` | 遗迹副本静态定义：副本名称、位置、奖励 |
 | `data/collections.json` | 用户进度：任务、形态、果实、异色和其他收集状态 |
 | `SKILL.md` | Agent 入口地图和数据边界规则 |
 | `docs/REVIEW_CHECKLIST.md` | 对照 Excel 做只读核对的清单 |
@@ -42,6 +46,10 @@ http://localhost:8899/review.html
 - `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
 - `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。
+- `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
+- `clothing.json` 分为 `sets[]` 和 `pieces[]`：套装获取方式、特效、配对精灵只写在 `sets[]`；`pieces[]` 只保存最小勾选单元和 `setId`。`collections.clothing_progress` 只保存单件是否收集。
+- `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
+- `dungeons.json` 保存遗迹副本定义；`collections.dungeon_progress` 只保存是否完成。
 
 ## 当前关键数量
 
@@ -52,6 +60,10 @@ http://localhost:8899/review.html
 | 精灵果实课题任务 | 96 |
 | 果实图鉴记录 | 143 |
 | 多形态收集项 | 143 |
+| 家具 | 1 |
+| 服装单件 | 6 |
+| 称号 | 1 |
+| 遗迹副本 | 1 |
 | 有额外形态的精灵 | 57 |
 | 异色标签 | 38 |
 | 首领形态 | 27 |
@@ -63,7 +75,11 @@ http://localhost:8899/review.html
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-random-task-ui.js
-node -e "for (const f of ['data/pets.json','data/tasks.json','data/collections.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('json ok')"
+node scripts/validate-furniture-ui.js
+node scripts/validate-clothing-ui.js
+node scripts/validate-title-ui.js
+node scripts/validate-dungeon-ui.js
+node -e "for (const f of ['data/pets.json','data/tasks.json','data/evolution-chains.json','data/furniture.json','data/clothing.json','data/titles.json','data/dungeons.json','data/collections.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('json ok')"
 ```
 
 如需验证本地服务：
