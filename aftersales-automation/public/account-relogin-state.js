@@ -17,7 +17,11 @@
 
   function shouldShowReloginButton(account) {
     if (!account || !account.hasFile) return true;
-    return account.status === 'expired' || account.status === 'error';
+    // 正常(ok)/失效(expired)/异常(error) 都保留重新登录入口；
+    // 仅「已保存未扫描」(unknown) 不显示，避免误导为已失效（沿用旧决策）。
+    return account.status === 'ok'
+      || account.status === 'expired'
+      || account.status === 'error';
   }
 
   const api = {

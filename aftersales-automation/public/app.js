@@ -1785,7 +1785,7 @@ async function loadAccounts() {
       <div class="account-meta">上次扫描：${lastScan}${a.status === 'ok' && a.count !== undefined ? `　工单：${a.count}` : ''}</div>
       ${a.error ? `<div class="account-error">${h(a.error)}</div>` : ''}
       <div class="account-actions">
-        ${a.hasFile && !['expired', 'error'].includes(statusKey) ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num})">打开店铺后台</button>` : ''}
+        ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num}, '${statusKey}')">打开店铺后台</button>` : ''}
         ${reloginBtn}
       </div>
     </div>`;
@@ -1839,8 +1839,21 @@ async function cancelRelogin(num) {
 // [removed-2026-06-16] 删除 checkAccountsStatus：刷新状态按钮逻辑（多账号连续注入检测=风控红线）。
 // 账号状态改靠扫描工单自然确认 + 店铺管理"重新登录"按钮（单账号人工）。
 
-async function openAccountStore(num) {
-  const res = await api(`/accounts/${num}/open`, { method: 'POST' });
+async function openAccountStore(num, statusKey) {
+  const abnormal = statusKey === 'expired' || statusKey === 'error';
+  if (abnormal) {
+    const label = { expired: '登录失效', error: '扫描异常' }[statusKey] || '异常';
+    const okToOpen = confirm(
+      `账号${num}当前状态为「${label}」，可能登录已失效。\n\n` +
+      `确认仍要打开店铺后台吗？\n` +
+      `（若打开后页面要求重新登录，请改用「重新登录」按钮）`
+    );
+    if (!okToOpen) return;
+  }
+  const res = await api(`/accounts/${num}/open`, {
+    method: 'POST',
+    body: JSON.stringify({ confirmed: abnormal }),
+  });
   if (res.ok) showToast(res.message || `已打开账号${num}店铺后台`);
   else {
     showToast(res.error || `账号${num}店铺后台打开失败`, 'error');

@@ -39,3 +39,11 @@ test('saved but unscanned account does not show relogin action', () => {
 test('expired account still shows relogin action', () => {
   assert.equal(shouldShowReloginButton({ hasFile: true, status: 'expired' }), true);
 });
+
+test('normal (ok) account also keeps relogin action', () => {
+  assert.equal(shouldShowReloginButton({ hasFile: true, status: 'ok' }), true);
+});
+
+test('error account still shows relogin action', () => {
+  assert.equal(shouldShowReloginButton({ hasFile: true, status: 'error' }), true);
+});

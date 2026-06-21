@@ -745,9 +745,12 @@ router.post('/accounts/:num/open', (req, res) => {
   try { statusMap = JSON.parse(fsSync.readFileSync(ACCOUNT_STATUS_FILE, 'utf8')); } catch(e) {}
   const note = account.note || account.name || `账号${num}`;
   const guard = getAccountOpenGuard(statusMap[String(num)] || {});
-  if (!guard.ok) {
+  // 异常状态默认拦截；前端已弹窗人工确认（confirmed:true）时放行，
+  // 避免「错号被误标异常 → 按钮+后端双重锁死、无法自助恢复」。
+  const confirmed = req.body && req.body.confirmed === true;
+  if (!guard.ok && !confirmed) {
     opQueue.updateAccountStatus(num, { status: guard.status, error: guard.error, note });
-    return res.status(409).json({ ok: false, error: guard.error });
+    return res.status(409).json({ ok: false, error: guard.error, needConfirm: true });
   }
 
   const op = opQueue.enqueue('open-account', `打开账号${num}「${note}」店铺后台`, {
