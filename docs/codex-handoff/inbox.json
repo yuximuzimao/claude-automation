@@ -4,6 +4,20 @@
   "pending": [],
   "processed": [
     {
+      "id": "codex-workspace-codexpro-setup-20260622T072800Z",
+      "project": "workspace",
+      "action": "handoff",
+      "file": "docs/codex-handoff/archive/2026-06-22-codexpro-setup/codexpro-manual-setup-handoff.md",
+      "summary": "CodexPro 已安装但尚未启动；请按中文手册完成 cloudflared、MCP 隧道、ChatGPT Developer Mode、私人 App 和真机读写验收。",
+      "from": "codex",
+      "timestamp": "2026-06-22T07:28:00Z",
+      "status": "processed",
+      "processedAt": "2026-06-22T16:25:00+0800",
+      "processedBy": "claude",
+      "responseFile": "docs/codex-handoff/archive/2026-06-22-codexpro-setup/codexpro-setup-response.md",
+      "summaryAfterProcessing": "CodexPro 全链路接入并验收通过：本地服务+Cloudflare隧道+ChatGPT私人App，读/写能力均验证成功（Pro套餐可写），删除被bash=safe安全拦截（设计如此），测试残留已本地清理。修正了手册中不存在的 --no-open-chatgpt flag。"
+    },
+    {
       "id": "claude-aftersales-inject-refactor-orchestration-20260617",
       "project": "aftersales-automation",
       "action": "refactor-and-orchestrate",
@@ -172,6 +186,14 @@
     }
   ],
   "archived": [
+    {
+      "id": "2026-06-19-aftersales-a1-predecessor-audits",
+      "project": "aftersales-automation",
+      "summary": "A2 tab 数量门规格、旧路径冲突审计任务和审计报告均已完成并被 HANDOFF 吸收；从子项目 active handoff 目录移入统一 archive。",
+      "directory": "docs/codex-handoff/archive/2026-06-19-aftersales-a1-predecessor-audits/",
+      "archivedAt": "2026-06-19T14:00:00+0800",
+      "status": "archived"
+    },
     {
       "id": "2026-06-17-aftersales-inject-refactor-orchestration",
       "project": "aftersales-automation",
