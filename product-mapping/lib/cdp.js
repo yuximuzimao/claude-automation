@@ -143,7 +143,7 @@ const cdp = {
     if (connectionMode === 'direct') {
       directEval(); // 直连不支持
     }
-    return request('GET', `/navigate?target=${targetId}&url=${encodeURIComponent(url)}`);
+    return request('POST', `/navigate?target=${targetId}`, url);
   },
 
   // 滚动页面

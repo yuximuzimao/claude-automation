@@ -325,11 +325,9 @@ async function _readCorrData(erpId, shopName) {
     console.error(`[corr] 第${page}页: ${pageData.length}条，累计${allData.length}条`);
 
     // ── 滚动收集当前页图片（懒加载）─────────────────────────────────────────
-    const scrollHeight = await cdp.eval(erpId, 'document.body.scrollHeight');
-    const IMG_STEPS = 10;
-    for (let i = 0; i <= IMG_STEPS; i++) {
-      await cdp.eval(erpId, `window.scrollTo(0, ${Math.floor(scrollHeight * i / IMG_STEPS)})`);
-      await sleep(800);
+    // 收集单次：扫描全部展开行，回填 imgMap
+    // 优先取 img.src（懒加载已触发），回退取 el-image Vue 组件的 src prop（懒加载前也可读）
+    const collectImgs = async () => {
       const batch = await cdp.eval(erpId,
         '(function(){' +
         '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
@@ -342,7 +340,12 @@ async function _readCorrData(erpId, shopName) {
         '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
         '      if(!pCode) continue;' +
         '      var imgEl=tds[3]?tds[3].querySelector("img"):null;' +
-        '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){map[pCode]=imgEl.src;}' +
+        '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){map[pCode]=imgEl.src;continue;}' +
+        '      var elImg=tds[3]?tds[3].querySelector(".el-image"):null;' +
+        '      if(!elImg) continue;' +
+        '      var vm=elImg.__vue__;var up=6;' +
+        '      while(vm&&!vm.src&&up-->0)vm=vm.$parent;' +
+        '      if(vm&&vm.src&&vm.src.indexOf("http")===0)map[pCode]=vm.src;' +
         '    }' +
         '  }' +
         '  return JSON.stringify(map);' +
@@ -355,8 +358,53 @@ async function _readCorrData(erpId, shopName) {
         }
         if (newCount > 0) process.stderr.write(`+${newCount}`);
       }
+    };
+
+    // 第一轮：逐步滚动触发懒加载。scrollHeight 每步重取（图片撑开行高后页面变长）
+    const IMG_STEPS = 14;
+    for (let i = 0; i <= IMG_STEPS; i++) {
+      const sh = await cdp.eval(erpId, 'document.body.scrollHeight');
+      await cdp.eval(erpId, `window.scrollTo(0, ${Math.floor(sh * i / IMG_STEPS)})`);
+      await sleep(1000);
+      await collectImgs();
     }
     process.stderr.write('\n');
+
+    // 第二轮：确定性补抓——对本页仍缺 src 的展开行，定向滚到该行并等 src 变 http
+    // 判据是「图加载完」，不是「时间到」，根治最后一页时序竞态
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const missingOnPage = await cdp.eval(erpId,
+        '(function(){' +
+        '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+        '  var miss=[];' +
+        '  for(var i=0;i<expCells.length;i++){' +
+        '    var rows=expCells[i].querySelectorAll("tbody tr");' +
+        '    for(var j=0;j<rows.length;j++){' +
+        '      var tds=rows[j].querySelectorAll("td");' +
+        '      if(tds.length<6) continue;' +
+        '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
+        '      if(!pCode) continue;' +
+        '      var imgEl=tds[3]?tds[3].querySelector("img"):null;' +
+        '      var ok=imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0;' +
+        '      if(!ok){' +
+        '        var rect=rows[j].getBoundingClientRect();' +
+        '        miss.push({pCode:pCode, top:rect.top+window.scrollY});' +
+        '      }' +
+        '    }' +
+        '  }' +
+        '  return JSON.stringify(miss);' +
+        '})()'
+      );
+      const miss = Array.isArray(missingOnPage) ? missingOnPage : [];
+      if (miss.length === 0) break;
+      process.stderr.write(`[补图]第${page}页缺${miss.length}张，第${attempt + 1}轮 `);
+      for (const m of miss) {
+        await cdp.eval(erpId, `window.scrollTo(0, ${Math.max(0, Math.floor(m.top - 200))})`);
+        await sleep(1200);
+      }
+      await collectImgs();
+      process.stderr.write('\n');
+    }
 
     // ── 检查是否有下一页 ──────────────────────────────────────────────────────
     const hasNext = await cdp.eval(erpId,

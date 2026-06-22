@@ -45,6 +45,8 @@ async function runCheck(jlId, erpId, shopName) {
     const corrAll = await readAllCorrespondence(erpId, shopName);
     const corrMap = {};
     corrAll.forEach(r => { corrMap[r.productCode] = r.skus; });
+    const corrImgMap = {};
+    corrAll.forEach(r => r.skus.forEach(s => { if (s.imgUrl) corrImgMap[s.platformCode] = s.imgUrl; }));
     console.error(`[check] 对应表共 ${corrAll.length} 条产品记录`);
 
     // 3. 初始化档案V2
@@ -261,7 +263,7 @@ async function runCheck(jlId, erpId, shopName) {
               skuName: sku.skuName || null,
               productCode: prod.productCode,
               shopName,
-              imgUrl: null,
+              imgUrl: corrImgMap[sku.platformCode] || null,
               erpCode: sku.erpCode || null,
               erpName: sku.erpName || null,
               recognition: sku.recognition || null,
