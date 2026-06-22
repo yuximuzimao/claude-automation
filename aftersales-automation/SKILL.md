@@ -36,21 +36,31 @@ entry: cli.js
 | `lib/jl/read-ticket.js` | 读单条工单详情 | 改工单数据提取时 |
 | `lib/jl/session-filter.js` | 最小注入白名单——`filterAuthCookies`/`filterIdentityLocalStorage`，只搬认证态+账号身份，丢弃设备/网络指纹（跨设备搬指纹触发风控） | 改注入字段白名单时 |
 | `lib/jl/login-state.js` | **安全注入判据（2026-06-17）**——`judgeLoginState`（三条件登录态：店铺名/商家登录/自动注册）+`matchShopName`/`shopKeyword`（note 取 `-` 前核心词与页面工商全称子串匹配）+`READ_LOGIN_STATE_JS` | 改登录态判定/店铺名匹配时 |
-| `lib/jl/open-account-flow.js` | **A2 安全打开账号编排（2026-06-17）**——`openAccountFlow`/`resolveJlTab`/`decideOpenAccountAction`，先过 05/06 鲲灵 tab 数量门，再读态→复用(匹配)/清cookie+注入(未登录或错号)/异常停(未知)。**已登录目标账号禁止注入；复用 tab 禁止 navigate/reload；错号不退出登录(破坏性)改清cookie** | 改打开后台/安全注入流程时 |
+| `lib/jl/open-account-flow.js` | **A2 安全打开账号编排（2026-06-17）**——`openAccountFlow`/`resolveJlTab`/`decideOpenAccountAction`，先过 05/06 鲲灵 tab 数量门，再读态→复用(匹配)/清cookie+注入(未登录或错号)/异常停(未知)。注入前必须 `success===true && verified===true`，并把已解析/已清理的 `targetId` 传给 04。**已登录目标账号禁止注入；复用 tab 禁止 navigate/reload；错号不退出登录(破坏性)改清cookie** | 改打开后台/安全注入流程时 |
 | `scripts/jl-steps/01-open-login.js` | 原子步：打开 login 页（新开标签直达，不注入不导航现有 tab） | 改打开页逻辑时 |
 | `scripts/jl-steps/02-read-shop-name.js` | 原子步：读登录态（等8s+三条件判据，退出坐标常量 1358,28 / 1328,244） | 改登录态读取时 |
 | `scripts/jl-steps/03-logout.js` | 原子步：退出登录。**⚠️已停用(2026-06-17)**——鲸灵退出是破坏性操作会让原账号服务端session失效，flow 不再调用，改用 07 清cookie。文件保留仅供退出坐标常量参考 | 一般不用 |
-| `scripts/jl-steps/04-inject.js` | 原子步：注入账号(调 jl.js inject)+等8s+Page.reload刷新+等8s+店铺名关键字匹配验证 | 改注入验证时 |
+| `scripts/jl-steps/04-inject.js` | 原子步：注入账号(调 jl.js inject)+等8s+在显式 `targetId` 上固定导航售后列表+等8s+店铺名关键字匹配验证；CLI 未传 targetId 时只接受唯一鲸灵 tab，多个则报错；禁止 reload 继承旧详情 URL | 改注入验证时 |
 | `scripts/jl-steps/05-count-jl-tabs.js` | 原子步：只读统计鲲灵 tab 数量，过滤 `scrm.jlsupp.com` page target | 改打开后台 tab 数量门时 |
 | `scripts/jl-steps/06-close-extra-jl-tabs.js` | 原子步：关闭多余鲲灵 tab，只保留第一个；关闭失败即停不重试 | 改打开后台 tab 数量门时 |
-| `scripts/jl-steps/07-clear-jl-data.js` | **原子步：注入前清场（2026-06-17）**——清当前tab全部jlsupp子域(scrm+seller-portal)的cookie+localStorage，调 `cdp.clearJlCookiesAndStorage`。真登录凭证JSESSIONID在seller-portal.jlsupp.com/merchant，必须显式覆盖该域否则漏清→混账号。只清jlsupp不碰ERP | 改注入前清理逻辑时 |
+| `scripts/jl-steps/07-clear-jl-data.js` | **原子步：注入前清场**——清当前 tab 全部 jlsupp 子域 cookie/storage，随后二次读取确认 `JSESSIONID/_us` 全域清零；只有 `verified:true` 才允许继续。WAF/设备 Cookie 重生不算失败，只清 jlsupp 不碰 ERP | 改注入前清理逻辑时 |
 | `scripts/jl-steps/open-account.js` | A2 编排 CLI 包装（`node scripts/jl-steps/open-account.js <num>`），op-queue execOpenAccount 调它 | 改打开后台入口时 |
+| `scripts/jl-steps/08-click-after-sale-menu.js` | **A1 原子步：真实鼠标点击左侧「售后工单」菜单**；即使当前已在列表页也不跳过；只进列表不排序不处理 | 改 A1 列表入口时 |
+| `scripts/jl-steps/09-select-overdue-sort.js` | **A1 原子步：真实鼠标选择「按逾期时间最近排序」**；不主动刷新、不点击工单 | 改 A1 排序动作时 |
+| `scripts/jl-steps/10-read-urgent-after-sale-list.js` | **A1 原子步：读取 48 小时内工单**；抓取数据可用 DOM，分页用真实鼠标点下一页，遇到第一条 >48h 早停 | 改 A1 列表读取/分页/时效判断时 |
+| `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
+| `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
+| `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
+| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **未确认草案，禁止运行**：固定清单逐单处理编排；尚未获用户细节确认，质量审查仍有阻断项 | 仅在用户确认后继续开发/复审时读取 |
+| `lib/jl/target-aware-collector.js` | **未确认草案**：显式绑定 JL 详情 tab 和 ERP tab 的采集适配 | 与步骤 14 一起审阅，当前不得作为正式入口 |
+| `lib/server/auto-execution-journal.js` | **未确认草案**：自动执行 intent / completed 防重复日志 | 审阅自动执行异常恢复时；当前不得用于真实工单 |
+| `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | A1 草案的用户确认清单、5 项质量问题和恢复开发门禁 | 继续 A1 前必读 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
-| `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示 | 改平台提醒逻辑时 |
+| `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示。**新 A1 完整闭环目标**：仅在账号工单全部处理后调用，沿用 `.scroll-item` DOM 读取且不主动关弹窗。旧停用 `op-queue.js`/`scan-all.js` 仍会列表读完即调用，恢复前必须由第三步接管或删除 | 改平台提醒逻辑时 |
 | `lib/jl-session-state.js` | 鲸灵当前账号缓存读写（`data/current-session.json`） | 改多账号扫描、采集注入、op-queue 注入判断时 |
 | `lib/jl-account-config.js` | 重新登录保存时合并账号配置，保留 phone/name/note/file | 改店铺管理重登保存逻辑时 |
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
@@ -69,7 +79,14 @@ entry: cli.js
 
 ## CORE FLOWS
 
-### 主流程：scan → collect → infer → approve/reject
+### 当前 A1 重建流程
+
+1. `openAccountFlow`：tab 数量门 → 实时店铺匹配 → 复用或清理验证后注入。
+2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
+3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
+4. 步骤 14 固定清单串联仅为未确认草案。用户确认前禁止运行、修复、接入 UI/队列或据此操作真实工单；恢复入口见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。
+
+### 旧流程（代码保留，当前禁止作为入口）
 
 1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 成功注入账号后写 `data/current-session.json` → 写入 `data/queue.json` (anchor: listTickets)
 2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
@@ -79,9 +96,9 @@ entry: cli.js
 
 ### 重试与重启
 
-- **鲸灵操禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
+- **鲸灵操作禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
 - **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
-- **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting` 状态，距上次推理 ≥ `RESCAN_INTERVAL_HOURS`(4h) 后下次扫描自动重置为 `pending` 重采。
+- **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。旧“下次自动扫描重置”目前不存在；未来只能由新 A1 手动/计划扫描显式重置，禁止假设固定扫描周期。
 - **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。**停旧系统后（2026-06-16）启动只重置残留状态为 pending、不再自动入队 reprocess，纯手动模式**——是否处理由用户手动选择。
 
 ### 工单类型路由（`docs/INDEX.md §2`）
@@ -144,7 +161,11 @@ await cdp.navigate(targetId, 'https://...');
 - 前端：店铺管理页通过 `POST /api/accounts/:num/relogin` 打开登录页，进入 `reloginConfirm` 后必须同时提供「确认保存」和「取消」。
 - 后端：`/relogin-confirm` 请求临时登录进程 `/save`；`/relogin-cancel` 请求 `/cancel` 并清理 `../sessions/.relogin-port-<num>`。
 - 保存：`../sessions/jl.js --auto-save` 用 `lib/jl-account-config.js` 合并旧账号配置，必须保留 `phone`，否则新登录页无法自动填账号。
-- 状态：`hasFile=true + status=unknown` 是「已保存但未扫描验证」，UI 只显示「未扫描」；只有 `expired/error` 或无 session 文件才显示重新登录。
+- 状态：`hasFile=true + status=unknown` 是「已保存但未单账号验证」，UI 只显示「未扫描」、不显示重新登录。验证走安全打开账号或未来新 A1 单账号流程，禁止恢复批量刷新状态。
+- 按钮可见性（`public/account-relogin-state.js` `shouldShowReloginButton` + `public/app.js` 渲染，2026-06-22）：
+  - **重新登录按钮**：`ok`/`expired`/`error` 或无 session 文件都显示；仅 `unknown`（未扫描）不显示。正常账号也能随时手动重登。
+  - **打开店铺后台按钮**：只要 `hasFile=true` 就常显，**不再因 `expired/error` 隐藏**（旧逻辑会把误标异常的账号锁死）。
+  - **异常二次确认**：`status` 为 `expired/error` 时点「打开店铺后台」先 `confirm` 人工确认，确认后请求体带 `confirmed:true`；后端 `/accounts/:num/open` 收到 `confirmed:true` 才放行被 `getAccountOpenGuard` 拦下的异常账号（否则仍 409，附 `needConfirm:true`）。
 
 ## FAILURE PATTERNS
 
@@ -164,7 +185,7 @@ await cdp.navigate(targetId, 'https://...');
 | 12 | DOM 移除 Element UI 弹窗破坏 Vue 内部状态 | `el.parentNode.removeChild(el)` 移除 `.el-dialog__wrapper` 后 Vue 的 `dialogVisible` 仍为 true。下次点击 `a.ml_15` 时 Vue 认为弹窗已打开，跳过打开逻辑 → "子商品弹窗未打开"。必须用 `btn.click()` 触发 Vue close 流程，并轮询等待弹窗从 DOM 消失。案例：2026-05-04 archive.js CLOSE_SUB_DIALOG_JS 用 DOM 移除 → 第二个工单起 subItems 全空 |
 | 13 | Chrome 自动填充只触发一次 | Chrome 密码管理器在同一页面生命周期内只自动填充一次（macOS sleep / Chrome 长时间运行后尤为明显）。`recoverLogin` 必须单次尝试而非 3 次循环；仍失败时进 Phase 2 凭据注入而不是重试 reload。单点依赖 Chrome 自动填充是 ERP session 反复失效的根因。 |
 | 14 | 熔断中不要重试 ERP | `erp-circuit-breaker.json` state=open 时，`erpNav()` 立即返回错误；冷却 15 分钟后进 half_open 允许一次探测。不要在调用侧再包 retry——熔断是全局保护，本地 retry 会绕过它，导致 session 耗尽还以为在"正常重试"。 |
-| 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原 `POST /accounts/refresh-status` + `check-session` op 为每个账号逐个注入检测 = 多账号短时连续登录，踩"禁止同时多 session 登录"风控红线（曾导致 IP 封禁）。**已彻底删除。账号状态改靠扫描工单自然确认 + 店铺管理"重新登录"按钮（单账号人工）。不要重建任何"批量检测账号状态"功能。** |
+| 15 | ~~刷新状态/check-session 全链路~~ **已删除（2026-06-16 停旧系统）** | 原批量检测会短时连续登录多个账号。账号状态只允许通过店铺管理“打开后台”的安全编排或未来新 A1 单账号流程确认；不要重建批量刷新状态功能。 |
 | 18 | hoursUntilNextScan 为 null 时 .toFixed() 崩溃 | infer.js 中 `inferRefundOnly`（flow-5.3）的 safeToWait 3 条路径在 hoursUntilNextScan 为 null 时直接调用 `.toFixed(1)` → TypeError。**规则：所有 `.toFixed()` 调用前必须 null-check**，用 `val != null ? val.toFixed(1) : '?'`。2026-05-21 修复。注意：flow-5.1 已改为简单阈值（`remaining > REMIND_HOURS`），不涉及 margin 计算。 |
 | 19 | 全项目重复代码 → 提取共享函数 | pipeline.js、op-queue.js 各自复制了相同的逻辑（快递单号提取、Mac Reminder 创建）。**规则：发现 ≥2 处相同逻辑时提取共享函数**。2026-05-21：`extractShippedTrackings()` 提取到 `lib/helpers.js`。2026-05-29：`createReminder()` 同理提取到 `lib/helpers.js`，pipeline.js 和 op-queue.js 共用。 |
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
@@ -173,6 +194,7 @@ await cdp.navigate(targetId, 'https://...');
 | 23 | 登录确认态缺少退出路径 | 用户关闭登录页、点取消或 port 文件不存在时，前端必须清理 `reloginConfirm` 并恢复「重新登录」。`unknown + hasFile` 表示未扫描验证，不是失效。保存 session 时必须保留旧账号 `phone`。 |
 | 24 | pipeline 历史执行守卫把 skip 误判为"已执行" | `skip` action（工单暂时不可访问）也会写 `executedAt`（自动归档），但它不是真实审批操作。守卫条件 `!!s.executedAt` 会把 skip 误判为"已执行" → 工单恢复后 approve 永久被跳过。**修复**：守卫加 `&& s.decision?.action !== 'skip'`。**规则**：executedAt 语义是"曾被处理"，approve/reject 与 skip 必须分开对待。`pipeline.js:319` |
 | 25 | 多弹窗共存时用 `dialogs[length-1]` 取"最后一个可见弹窗" | 套装子品明细误报「未找到子品明细表头」根因：`archive.js` READ_SUB_ITEMS_JS 赌"最后一个可见弹窗就是子商品弹窗"。但 collect 全流程里 ERP tab 可能残留/并发其他可见弹窗（如 `erp-logistics` 的 `trade-detail-dialog` 订单详情弹窗未完全关闭），`dialogs[length-1]` 取到它 → 表头不匹配。**单独跑必成功、生产偶发失败**正是此特征（同工单一成一败）。**修复**：按标题 `子商品信息`（或"含组合比例表头"兜底）精确锁定弹窗，禁止赌最后一个。**规则**：多弹窗页面定位目标弹窗必须用标题/特征匹配，不能用 DOM 序位置。失败时务必 dump 所有可见弹窗标题+class（埋点），别只丢错误字符串。`archive.js:138` |
+| 26 | 单次操作报错就把账号标异常，且异常态同时隐藏按钮+后端拦截 → 账号被双重锁死 | 账号12 切换时网络抖动报一次错被标 `error`。旧逻辑下 `error/expired` 既隐藏「打开店铺后台」按钮，后端 `/open` 又直接 409 → 一个其实正常的账号无任何自助恢复路径。**根因**：把"单次失败"等同于"账号失效"，且没留人工兜底通道。**修复（2026-06-22）**：打开后台按钮只要有 session 文件就常显；异常态点击先 `confirm`，确认后带 `confirmed:true` 让后端放行。**规则**：状态标记可降级提示，但不能既挡 UI 又挡后端把入口彻底封死，高风险入口要留「人工确认放行」通道。`routes.js:747` `app.js:openAccountStore` |
 
 ## PATHS
 
@@ -200,12 +222,14 @@ lib/jl/reject.js
 lib/jl/session-filter.js
 lib/jl/login-state.js
 lib/jl/open-account-flow.js
+lib/jl/target-aware-collector.js
 lib/jl-account-config.js
 lib/jl-session-state.js
 lib/product/archive.js
 lib/product/match.js
 lib/server/account-session-status.js
 lib/server/auto-exec-confidence.js
+lib/server/auto-execution-journal.js
 lib/server/data.js
 lib/server/op-queue.js
 lib/server/pipeline.js
@@ -224,7 +248,15 @@ scripts/jl-steps/05-count-jl-tabs.js
 scripts/jl-steps/06-close-extra-jl-tabs.js
 scripts/jl-steps/07-clear-jl-data.js
 scripts/jl-steps/open-account.js
+scripts/jl-steps/08-click-after-sale-menu.js
+scripts/jl-steps/09-select-overdue-sort.js
+scripts/jl-steps/10-read-urgent-after-sale-list.js
+scripts/jl-steps/11-prepare-after-sale-list.js
+scripts/jl-steps/12-click-work-order-action.js
+scripts/jl-steps/13-open-single-account-work-order.js
+scripts/jl-steps/14-process-single-account-fixed-batch.js
 docs/INDEX.md
+docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md
 public/app.js
 public/account-relogin-state.js
 public/index.html

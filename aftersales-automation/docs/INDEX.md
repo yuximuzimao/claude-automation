@@ -261,3 +261,4 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#75 flow-5.3 用户可见拒绝原因使用固定模板**：`INTERCEPT_TIMEOUT` 不能把动态快递单号拼进用户可见 reason。固定模板用 `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`，具体运单和状态放 warnings / 诊断信息。2026-05-30。
 - `[∞]` **#76 多账号扫描必须同步当前 session 缓存**：`scan-all.js` 每次成功注入账号后必须写 `data/current-session.json`。否则实际 Chrome tab 已切到新账号，但 pipeline/op-queue 仍相信旧缓存，后续采集可能跳过注入、读不到工单并误改 queue 状态。2026-06-08。
 - `[∞]` **#77 店铺重新登录状态机**：`hasFile=true + status=unknown` 表示 session 已保存但未扫描验证，只显示「未扫描」，不显示「重新登录」；登录页关闭/取消/port 文件缺失必须清理确认态，恢复按钮，禁止永久卡「确认保存」。2026-06-08。
+- `[∞]` **#78 异常账号不锁死 + 打开后台二次确认**：账号状态标记不能既隐藏 UI 入口又让后端拦截，否则单次报错被误标 `error` 的账号无法自助恢复（案例：账号12 网络抖动报错被锁死）。规则（2026-06-22）：①「重新登录」按钮 `ok/expired/error` 都显示，仅 `unknown` 不显示；②「打开店铺后台」按钮只要 `hasFile=true` 就常显；③异常态（`expired/error`）点「打开店铺后台」前端先 `confirm`，确认后带 `confirmed:true`，后端 `/accounts/:num/open` 凭此放行被 `getAccountOpenGuard` 拦下的账号（否则 409 + `needConfirm:true`）。详见 SKILL.md 失败模式 #26。

@@ -307,7 +307,7 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 
 ### 55. server.js 由 LaunchAgent KeepAlive 守护，kill 后会自动重启（2026-06-16）
 
-`/aftersales-restart` kill 旧 server PID 后，新 PID（PPID=1，被 launchd 接管）会在 10s 内自动拉起（见 lesson #53 的 `com.jl.server` plist，KeepAlive + ThrottleInterval=10）。
+`/aftersales-restart` 重启后，新 PID（PPID=1）由当前 `com.heizong.aftersale-server` LaunchAgent 接管；旧 `com.jl.server.plist` 已改名为 `.disabled`，不得重新加载形成双托管。
 
 **影响**：重启验证时不能假设"kill 后端口空闲需手动 nohup 启动"——launchd 会自动重启并加载磁盘上的最新 server.js。要验证新进程加载了新代码，看 `ps -p <PID> -o lstart` 确认启动时间晚于 kill 时刻，再从 server.log 最后一次"已启动"横幅截取该进程的日志段（log 是 append 模式，新旧混写）。
 
@@ -321,18 +321,14 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 
 **铁律**：
 1. **任何脚本/测试都不得在「已登录且店铺名匹配目标账号」时执行注入**。注入前必须先 02 检测登录态：`logged-in` 且 `matchShopName` 通过 → 直接复用，不注入。
-2. 验证注入脚本本身时，要从「未登录态」起测（先 03 退出或本就未登录），不要为了测试在已登录态强行重注入。
-3. 正确的统一前置流程：打开 login → 读登录态 → 匹配目标则复用 / 错号则退出+注入。复用是常态，注入是例外。
+2. 验证注入脚本本身时，只能使用本就未登录且已获用户许可的场景；禁止为了测试调用已停用的 03 退出，也禁止在已登录态强行重注入。
+3. 正确的统一前置流程：确定唯一 tab → 读登录态 → 匹配目标则复用 / 未登录或错号则清 Cookie 并二次验证后注入。复用是常态，注入是例外。
 
-### 57. jl.js inject 会主动导航到 after-sale-list，A2"仅打开后台"需区分（2026-06-17）
+### 57. 注入与导航必须解耦，导航由安全编排绑定目标 tab（2026-06-19 最终态）
 
-`jl.js inject <num>` 注入后第 357 行主动 `Page.navigate(TARGET_URL)`，TARGET_URL = `account.url || .../after-sale-list`。account3.json 注入信息本身只有 cookies+origins，**无 url**——跳到工单页是 jl.js 写死的主动导航，不是注入态自带。
+`sessions/jl.js inject <num>` 只写认证态，不负责页面跳转。`openAccountFlow` 必须把已经过 tab 数量门、Cookie 清理和二次验证的同一个 `targetId` 传给 `04-inject.js`；04 只对该 tab 固定导航售后列表并校验店铺名。
 
-**影响**：
-- 对 **A1 扫描工单**：注入后就要去工单页，主动导航 after-sale-list 正确。
-- 对 **A2 仅打开店铺后台**：计划要求「停在注入后平台自动跳转的页面不动，不主动导航别处」。jl.js inject 的强制导航与 A2 本意冲突。
-
-**编排时区分**：A2 复用路径（已登录目标账号）= 不注入、停当前页；A2 错号路径用 jl.js inject 会被带到工单页（可接受，工单页也是后台），但若要严格"停在平台默认跳转页"，需让注入与导航解耦（注入只搬态、导航由平台自跳）。当前先记录此差异，编排 A2 时按需处理。
+**铁律**：禁止注入后重新 `.find()` 任意鲸灵 tab；CLI 未显式传 `targetId` 时只接受唯一鲸灵 tab，多个直接报错。
 
 ### 58. 切换鲸灵账号禁用"退出登录"，改清cookie；JSESSIONID在seller-portal域（2026-06-17）
 
@@ -344,12 +340,23 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 1. 错号/未登录切换账号 = **清当前 tab 的鲸灵 cookie/storage → 注入新账号**，绝不点退出登录。03-logout 已停用。
 2. **清 cookie 必须显式覆盖全部 jlsupp 子域**：真登录凭证 `JSESSIONID` 在 `seller-portal.jlsupp.com/merchant`，`_us` 在 seller-portal+scrm。CDP `Network.getCookies({})` 默认只返回"当前 tab URL 适用"的 cookie，**看不到 seller-portal 的 JSESSIONID → 漏清 → 新账号注入后混旧账号登录态**。必须 `getCookies({urls:[scrm, seller-portal, seller-portal/merchant]})` 取全集再逐条 deleteCookies。
 3. **判"清干净"看登录凭证(JSESSIONID/_us)是否全域清零，不是数 cookie 条数**：WAF/验证码指纹(acw_tc/cdn_sec_tc/_dx_*/ssxmod_*)清掉后页面会立即重种，这是正常的（本应浏览器自生成），不算残留。
-4. 工具：`cdp.clearJlCookiesAndStorage(targetId)` + `scripts/jl-steps/07-clear-jl-data.js`；排查用 `_sandbox/observe-clear-cookies.js`（打印清理前后全域 cookie）。
+4. 清理后必须二次 `Network.getCookies({urls:[...]})`；只有 `verified:true` 才允许注入。残留错误只输出 cookie 的 name/domain/path，不输出 value。
+5. 工具：`cdp.clearJlCookiesAndStorage(targetId)` + `scripts/jl-steps/07-clear-jl-data.js`。
 
-### 59. 注入后必须刷新页面(Page.reload)让 session 生效，刷新≠导航login URL（2026-06-17）
+### 59. 注入后禁止原地 reload，固定导航售后列表（2026-06-19 最终态）
 
-jl.js inject 去掉"注入后导航"后，注入只写 cookie/localStorage，页面仍停在注入前态（login），平台识别不到登录 → 报"注入后仍未登录"。**必须在注入后刷新页面**让平台用新 cookie 跳转。
+原地 `Page.reload` 会继承旧 tab URL。若上一账号停在某张工单详情，新认证态刷新后会形成“新店铺身份 + 旧工单路径”的上下文错配风险。
 
-**坑**：第一版用 `cdp.navigate(jlTab.id, jlTab.url)` 刷新，但 jlTab.url 是 login 页 URL → 重新加载 login 页平台不跳后台 → 仍失败。正解：`cdp.reload(targetId)`（封装 `Page.reload`，等价 F5，不指定 URL）原地刷新，平台用 cookie 自跳。
+**最终时序**：确定唯一 `targetId` → 清 jlsupp Cookie/storage → 二次确认 `JSESSIONID/_us` 清零 → 注入该账号认证态 → 对同一 `targetId` 导航固定售后列表 URL → 读取实时店铺名并匹配目标账号。任一步失败立即停止，不重试。
 
-**时序铁律**：清cookie → 注入 → reload（注入后才 reload，清完到注入之间绝不 reload，空 cookie reload 会跳登录页种匿名态反而脏）。
+### 60. 状态标记不能既挡 UI 又挡后端，高风险入口要留人工放行通道（2026-06-22）
+
+账号12（顺链-肺肽）切换时网络抖动报一次错，被写入 `account-status.json` 的 `status:error`。旧逻辑下 `error/expired` **同时**触发两道封锁：前端隐藏「打开店铺后台」按钮 + 后端 `/api/accounts/:num/open` 经 `getAccountOpenGuard` 直接 409。结果一个其实正常的账号被双重锁死，没有任何自助恢复路径——只能手改 JSON。
+
+**根因（第一性）**：把"单次操作失败"等同于"账号已失效"，并且用"既隐藏入口、又拦后端"的双保险把人也挡在外面。状态标记的本意是**降级提示风险**，不是**剥夺操作权**。失败可能只是网络抖动，不是账号真失效。
+
+**铁律**：
+1. 风险状态可以加提示、加确认，但**不能既挡 UI 又挡后端把入口彻底封死**。
+2. 高风险操作入口（打开后台 = 真实登录写操作）必须保留「人工确认放行」通道：前端 `confirm` → 后端凭 `confirmed:true` 放行 `getAccountOpenGuard` 拦下的账号（仍返回 `needConfirm:true` 供前端区分）。
+3. 正常态也保留「重新登录」入口（`shouldShowReloginButton` 对 `ok` 返回 true），随时可手动重登；仅 `unknown`（已保存未扫描）不显示，避免误导为已失效。
+4. 改动文件：`public/account-relogin-state.js`、`public/app.js` `openAccountStore`、`lib/server/routes.js` `/accounts/:num/open`。回归用例见 `test/server/relogin-session.test.js`。
