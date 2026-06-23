@@ -11,6 +11,35 @@ const { execSync } = require('child_process');
 
 const IMG_DIR = path.join(__dirname, '../data/imgs');
 const VERDICTS_FILE = path.join(__dirname, '../data/visual-verdicts.json');
+const SKU_RECORDS_FILE = path.join(__dirname, '../data/sku-records.json');
+
+/**
+ * 将 notes 文本（"商品A×N 商品B×M"）解析为 recognition 结构
+ * 单品：items.length===1；组合装：items.length>1
+ */
+function parseNotesToRecognition(notes) {
+  if (!notes || !notes.trim()) return null;
+  // 按中文顿号、逗号、空格分隔
+  const parts = notes.split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
+  const items = [];
+  for (const p of parts) {
+    // 匹配"商品名×数量"，×可以是全角或半角
+    const m = p.match(/^(.+?)[×x×](\d+)$/);
+    if (m) {
+      items.push({ name: m[1].trim(), qty: parseInt(m[2], 10) });
+    } else if (p) {
+      // 没有数量的视为×1
+      items.push({ name: p, qty: 1 });
+    }
+  }
+  if (!items.length) return null;
+  return {
+    type: items.length === 1 ? '单品' : '组合装',
+    items,
+    raw: notes,
+  };
+}
+
 
 function readJson(filePath, fallback) {
   if (!fs.existsSync(filePath)) return fallback;
@@ -59,6 +88,16 @@ function recordVerdict(platformCode, verdict, notes, matchDetail) {
     reviewTime: new Date().toISOString()
   };
   fs.writeFileSync(VERDICTS_FILE, JSON.stringify(verdicts, null, 2));
+
+  // 同步写入 sku-records.json 的 recognition 字段
+  if (fs.existsSync(SKU_RECORDS_FILE)) {
+    const records = JSON.parse(fs.readFileSync(SKU_RECORDS_FILE, 'utf8'));
+    if (records[platformCode]) {
+      records[platformCode].recognition = parseNotesToRecognition(notes);
+      fs.writeFileSync(SKU_RECORDS_FILE, JSON.stringify(records, null, 2));
+    }
+  }
+
   return verdicts[platformCode];
 }
 
