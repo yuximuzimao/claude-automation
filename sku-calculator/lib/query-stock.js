@@ -126,8 +126,17 @@ async function queryStock(erpId) {
   }
   if (totalRecords === 0) throw new Error('无法获取总记录数，分页信息未加载（超时10秒）');
 
-  // ERP 默认每页 50 条，用总记录数计算总页数（不依赖 btn.disabled，该属性不可靠）
-  const PAGE_SIZE = 50;
+  // 读页面实际 pageSize（每页条数选择器），fallback 50
+  let PAGE_SIZE = 50;
+  try {
+    const psVal = await cdp.eval(erpId, `
+      (function(){
+        var sel = document.querySelector('.el-pagination .el-select .el-input__inner');
+        return sel ? parseInt(sel.value, 10) : 50;
+      })()
+    `);
+    if (psVal && psVal > 0) PAGE_SIZE = psVal;
+  } catch (_) {}
   const totalPages = Math.ceil(totalRecords / PAGE_SIZE);
   console.log(`  共 ${totalPages} 页，每页 ${PAGE_SIZE} 条`);
 

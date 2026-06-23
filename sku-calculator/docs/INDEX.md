@@ -76,3 +76,5 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 - **新供应商接入第一步**：在 `aftersales-automation/lib/erp/shop-map.js` 对应条目补充 `supplierId` 字段
 - **mergeStock 场景**：旧的 KGOS 配置里有将两个 ERP 名合并到同一 displayName 的模式（如玉米片两种口味），动态目录不支持这种合并；如需合并，未来可在 resolve-components 后加一个手动配置覆盖步骤
 - **多项目 ERP 浏览器互扰**（2026-05-23 事故）：`aftersales-automation` 与 `sku-calculator` 共享同一 Chrome ERP tab，售后系统的 DOM 操作会破坏 resolve-components 的 Vue 状态（对应表`展开: 20/0`、档案V2 全量 `count=-1`）。跑 sku-calculator 前先停售后 server；失败后手动刷新对应表和档案V2两个页面
+- **加购 SKU 变体名含平台后缀导致全量 0 匹配**（2026-06-23 L9）：鲸灵平台规格列格式为 `规格名;KGOS`，corrIndex 构建时去分号，但原匹配代码漏掉去分号，导致全部未命中。诊断信号：所有 ⚠️ 中 key 格式为 `货号::…;KGOS`。修复：`resolve-components.js` 匹配前加 `.replace(/;.*$/, '')`
+- **resolve-stock pageSize 硬编码导致翻页重复读取**（2026-06-23 L10）：ERP 库存状态页每页条数设为 200 时，硬编码 `PAGE_SIZE=50` 会导致翻 4 页每次读全量（如 181×4=724）。诊断信号：读取条数 = 期望条数 × 整数倍。修复：运行时读 `.el-pagination .el-select .el-input__inner` 的 value，fallback 50

@@ -141,7 +141,7 @@ async function resolveComponents(erpId, shopName = '澜泽') {
   // 6. 匹配每个 SKU 的 erpCode
   const matched = [];
   for (const sku of allSkus) {
-    const normalizedSkuName = sku.skuName.replace(/\s+/g, ' ').trim();
+    const normalizedSkuName = sku.skuName.replace(/;.*$/, '').replace(/\s+/g, ' ').trim();
     const key = `${sku.huohao}::${normalizedSkuName}`;
     const erpCode = corrIndex.get(key);
     if (!erpCode) {

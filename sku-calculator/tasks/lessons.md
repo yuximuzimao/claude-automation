@@ -138,3 +138,23 @@ assert(sc._meta.warnings.length === 0);
 - 补丁要同步更新 `_meta`（matchedSkus、resolvedSkus、warnings 清空）并加 `_manualOverrides` 字段记录每条补丁来源
 - 补丁完成后直接跑 `resolve-stock → calculate → report`，不重跑 resolve-components（会清空补丁）
 - 临时 queryArchive 脚本写完即删，不进 git
+
+## L9 加购 SKU 变体名含平台后缀导致 resolve-components 全量 0 匹配（2026-06-23）
+
+**背景**：茗瑞 KGOS 首次跑 resolve-components，37/37 全部未命中。
+
+**根因**：鲸灵"商品数据"页面的规格列格式为 `美式风味咖啡 6盒送2盒到手8盒;KGOS`，分号后面是平台标签。`corrIndex` 构建时（第71行）正确地 `.replace(/;.*$/, '')` 去掉了分号，但匹配时（原第144行）只做了空格规范，**漏掉去分号**，导致 key 带着 `;KGOS` 无法命中任何条目。
+
+**修复**：`resolve-components.js` 第144行匹配前同样加 `.replace(/;.*$/, '')`。
+
+**诊断信号**：全部37条警告内容格式均为 `货号::…;KGOS`（带分号后缀）→ 立即检查加购数据来源是否来自鲸灵 SKU 明细页（该平台导出规格名带平台标签）。
+
+## L10 resolve-stock pageSize 硬编码导致翻页重复读取（2026-06-23）
+
+**背景**：`resolve-stock` 连续两次报 `数据不完整: 读取 724 条，ERP 显示共 181 条`。
+
+**根因**：`query-stock.js` 硬编码 `PAGE_SIZE = 50`，但 ERP 库存状态页的每页条数实际被设为 200。`ceil(181/50)=4` 翻了4页，每页都读到全量181条，累计 724。
+
+**修复**：改为运行时读页面实际 pageSize（`.el-pagination .el-select .el-input__inner` 的 value），fallback 50。
+
+**诊断信号**：读取条数 = 期望条数 × N（N 为整数倍）→ 翻页逻辑与实际 pageSize 不符；去 ERP 页面底部核查每页显示条数和总条数。
