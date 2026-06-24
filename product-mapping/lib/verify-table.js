@@ -68,30 +68,27 @@ function generate(report) {
     const isMatch = sku.comparisonResult === 'match';
     const isMismatch = sku.comparisonResult === 'mismatch';
 
-    // 明细行（以档案为准）
-    let detailRows = '';
+    // ERP 明细行
+    let erpRows = '';
     if (sku.archiveType === '2' && sku.subItems && sku.subItems.length > 0) {
-      detailRows = sku.subItems.map(si =>
+      erpRows = sku.subItems.map(si =>
         `<tr><td class="c-name">${esc(si.name)}</td><td class="c-qty">×${si.qty}</td></tr>`
       ).join('');
     } else if (sku.archiveType === '0' && sku.archiveTitle) {
-      detailRows = `<tr><td class="c-name">${esc(sku.archiveTitle)}</td><td class="c-qty">×1</td></tr>`;
+      erpRows = `<tr><td class="c-name">${esc(sku.archiveTitle)}</td><td class="c-qty">×1</td></tr>`;
     } else {
-      detailRows = `<tr><td class="c-name" style="color:#aaa">无档案数据</td><td class="c-qty"></td></tr>`;
+      erpRows = `<tr><td class="c-name" style="color:#aaa">无档案数据</td><td class="c-qty"></td></tr>`;
     }
 
-    // 不一致时额外显示识图结果（含配件注入）用于对比
-    let mismatchBlock = '';
-    if (isMismatch && sku.recognition && sku.recognition.items) {
+    // 识图明细行（含配件注入）
+    let recRows = '';
+    if (sku.recognition && sku.recognition.items && sku.recognition.items.length > 0) {
       const resolvedItems = resolveItems(sku.platformCode, sku.recognition.items, BRAND);
-      const recogRows = resolvedItems.map(it =>
+      recRows = resolvedItems.map(it =>
         `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
       ).join('');
-      mismatchBlock = `
-        <div class="mismatch-section">
-          <div class="mismatch-title">识图结果（与档案不一致）</div>
-          <table class="detail-table">${recogRows}</table>
-        </div>`;
+    } else {
+      recRows = `<tr><td class="c-name" style="color:#aaa">无识图数据</td><td class="c-qty"></td></tr>`;
     }
 
     // 状态标签
@@ -117,8 +114,8 @@ function generate(report) {
             : `<div class="no-img">无图片</div>`}
         </div>
         <div class="info-col">
-          <table class="detail-table">${detailRows}</table>
-          ${mismatchBlock}
+          <div class="view-erp"><table class="detail-table">${erpRows}</table></div>
+          <div class="view-rec"><table class="detail-table">${recRows}</table></div>
         </div>
       </div>
     </div>`;
@@ -165,10 +162,12 @@ h1 { font-size: 20px; margin-bottom: 4px; }
 .detail-table .c-name { font-size: 18px; font-weight: 700; word-break: break-all; }
 .detail-table .c-qty { width: 64px; text-align: right; font-weight: 700; font-size: 22px; white-space: nowrap; padding-left: 16px; }
 
-.mismatch-section { margin-top: 24px; padding-top: 20px; border-top: 2px solid #fecaca; }
-.mismatch-title { font-size: 14px; font-weight: 700; color: #ef4444; margin-bottom: 8px; }
-.mismatch-section .c-name { color: #ef4444; }
-.mismatch-section .c-qty { color: #ef4444; }
+.toggle-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.toggle-bar span { font-size: 13px; color: #888; margin-right: 4px; }
+.toggle-btn { padding: 6px 20px; border: 1.5px solid #d9d9d9; border-radius: 4px; background: #fff; font-size: 14px; cursor: pointer; color: #555; transition: all .15s; }
+.toggle-btn.active { background: #4338ca; border-color: #4338ca; color: #fff; font-weight: 600; }
+body.mode-erp .view-rec { display: none; }
+body.mode-rec .view-erp { display: none; }
 
 @media (max-width: 900px) {
   .card-body { flex-direction: column; }
@@ -188,8 +187,22 @@ h1 { font-size: 20px; margin-bottom: 4px; }
   <div class="stat"><b>${report.summary.recognitionDone || 0}</b> 已识图</div>
 </div>
 
+<div class="toggle-bar">
+  <span>查看：</span>
+  <button class="toggle-btn active" id="btn-erp" onclick="setMode('erp')">ERP 档案</button>
+  <button class="toggle-btn" id="btn-rec" onclick="setMode('rec')">识图结果</button>
+</div>
+
 ${rows}
 
+<script>
+function setMode(mode) {
+  document.body.className = 'mode-' + mode;
+  document.getElementById('btn-erp').className = 'toggle-btn' + (mode === 'erp' ? ' active' : '');
+  document.getElementById('btn-rec').className = 'toggle-btn' + (mode === 'rec' ? ' active' : '');
+}
+document.body.className = 'mode-erp';
+</script>
 </body>
 </html>`;
 }
