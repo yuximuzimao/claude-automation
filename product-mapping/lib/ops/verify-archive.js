@@ -76,14 +76,19 @@ async function verifyArchive(erpId, shopName, productCode) {
     let compDetail;
 
     if (sku.itemType === 'single') {
-      // 单品：识图名称 vs 档案标题
-      const recName = recognition.items[0] ? recognition.items[0].name : '';
-      if (recName === archiveItem.title) {
-        compResult = 'match';
-        compDetail = `识图: ${recName} = 档案: ${archiveItem.title}`;
-      } else {
+      // 单品：识图名称 + 数量 vs 档案标题（单品档案固定×1）
+      const recItem = recognition.items[0];
+      const recName = recItem ? recItem.name : '';
+      const recQty = recItem ? recItem.qty : 0;
+      if (recName !== archiveItem.title) {
         compResult = 'mismatch';
         compDetail = `识图: ${recName} ≠ 档案: ${archiveItem.title}`;
+      } else if (recQty !== 1) {
+        compResult = 'mismatch';
+        compDetail = `识图数量 ×${recQty} ≠ 单品档案 ×1（ERP 未建套件档案）`;
+      } else {
+        compResult = 'match';
+        compDetail = `✓ ${archiveItem.title}`;
       }
     } else {
       // 套件：集合等价比较

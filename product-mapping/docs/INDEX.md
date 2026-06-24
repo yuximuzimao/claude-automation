@@ -69,6 +69,10 @@
 ④ 第二次 check = 重新扫描 + 对比:
    - 同①，此时已匹配 SKU 有 erpCode，sku-records 全量重写后 erpCode 回填
    - comparisonResult: 识图预测 vs 档案实际 → match/mismatch
+   - **比对铁律（禁止简化）**：
+     - 单品（archiveType=0）：识图名称 AND 识图数量=1，两者同时满足才算 match；识图数量≠1 = mismatch（ERP未建套件档案）
+     - 套件（archiveType=2）：识图 items 与 ERP subItems 的 {name, qty} 集合完全一致才算 match
+     - 任何一侧缺数量信息 = mismatch，禁止仅比名称
    - 若有 mismatch，人工核查
 
 ⑤ verify-table（可选，流程末尾兜底）:

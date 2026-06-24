@@ -2,7 +2,7 @@
 
 /**
  * 从报告 SKU 生成期望项列表（精确字符串，用于与识图结果逐一比对）
- * - 单品（archiveType=0）：[archiveTitle×1]
+ * - 单品（archiveType=0）：[archiveTitle×1]（单品档案固定×1，识图qty≠1即为 MISMATCH）
  * - 组合装（archiveType=2）：[subItem.name×qty, ...]
  *
  * @param {object} sku - 报告中的 SKU 对象（含 archiveType, archiveTitle, subItems）

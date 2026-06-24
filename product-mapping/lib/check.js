@@ -161,12 +161,18 @@ async function runCheck(jlId, erpId, shopName) {
         let comparisonResult = null, comparisonDetail = null;
         if (recognition && archiveItem) {
           if (archiveType === '0') {
-            const expected = recognition.items[0]?.name || '';
+            const recItem = recognition.items[0];
+            const expected = recItem?.name || '';
+            const expectedQty = recItem?.qty ?? 0;
             const actual = archiveTitle || '';
-            comparisonResult = expected === actual ? 'match' : 'mismatch';
+            const nameOk = expected === actual;
+            const qtyOk = expectedQty === 1;
+            comparisonResult = (nameOk && qtyOk) ? 'match' : 'mismatch';
             comparisonDetail = comparisonResult === 'match'
               ? `✓ ${actual}`
-              : `✗ 识图:${expected} vs 档案:${actual}`;
+              : !nameOk
+                ? `✗ 识图:${expected} vs 档案:${actual}`
+                : `✗ 识图数量×${expectedQty} vs 单品档案×1（ERP未建套件档案）`;
           } else if (archiveType === '2' && subItems.length > 0) {
             const resolvedItems = resolveItems(sku.platformCode, recognition.items, BRAND);
             const expectedSet = resolvedItems.map(it => `${it.name}×${it.qty}`).sort().join(',');
