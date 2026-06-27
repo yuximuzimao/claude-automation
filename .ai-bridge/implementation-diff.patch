@@ -1,0 +1,330 @@
+diff --git a/codex-monitor/app/models.py b/codex-monitor/app/models.py
+index d74ce69..2e4fa8a 100644
+--- a/codex-monitor/app/models.py
++++ b/codex-monitor/app/models.py
+@@ -2,6 +2,7 @@
+ 
+ from __future__ import annotations
+ 
++import math
+ from dataclasses import dataclass, field
+ from pathlib import Path
+ from typing import Any
+@@ -58,7 +59,7 @@ class RateLimitWindow:
+             return None
+         window_minutes = data.get("window_minutes")
+         return cls(
+-            used_percent=data.get("used_percent"),
++            used_percent=_optional_finite_float(data.get("used_percent")),
+             resets_at=data.get("resets_at"),
+             window_minutes=int(window_minutes) if window_minutes is not None else None,
+         )
+@@ -71,6 +72,18 @@ class RateLimitWindow:
+         }
+ 
+ 
++def _optional_finite_float(value: Any) -> float | None:
++    if value is None or isinstance(value, bool):
++        return None
++    if isinstance(value, str) and not value.strip():
++        return None
++    try:
++        parsed = float(value)
++    except (TypeError, ValueError):
++        return None
++    return parsed if math.isfinite(parsed) else None
++
++
+ @dataclass(frozen=True)
+ class CodexQuota:
+     primary: RateLimitWindow | None
+diff --git a/codex-monitor/app/reader_codex.py b/codex-monitor/app/reader_codex.py
+index b312779..3d70249 100644
+--- a/codex-monitor/app/reader_codex.py
++++ b/codex-monitor/app/reader_codex.py
+@@ -69,7 +69,7 @@ def read_session_file(path: Path) -> CodexSessionResult:
+                 )
+ 
+             quota = _read_quota(payload, timestamp)
+-            if quota is not None:
++            if quota is not None and _quota_has_displayable_percent(quota):
+                 latest_quota = quota
+ 
+     return CodexSessionResult(
+@@ -112,3 +112,11 @@ def _read_quota(payload: dict[str, Any], timestamp: Any) -> CodexQuota | None:
+         secondary=RateLimitWindow.from_mapping(rate_limits.get("secondary")),
+         timestamp=timestamp,
+     )
++
++
++def _quota_has_displayable_percent(quota: CodexQuota) -> bool:
++    return _window_has_percent(quota.primary) or _window_has_percent(quota.secondary)
++
++
++def _window_has_percent(window: RateLimitWindow | None) -> bool:
++    return window is not None and window.used_percent is not None
+diff --git a/codex-monitor/app/ui_tk.py b/codex-monitor/app/ui_tk.py
+index e0efa27..3769b1b 100644
+--- a/codex-monitor/app/ui_tk.py
++++ b/codex-monitor/app/ui_tk.py
+@@ -210,6 +210,21 @@ def _quota_window_view(label: str, window: Any) -> dict[str, Any]:
+     }
+ 
+ 
++def _quota_percent_value(item: dict[str, Any]) -> float | None:
++    value = item.get("percent_value")
++    return float(value) if value is not None else None
++
++
++def _quota_center_text(item: dict[str, Any]) -> str:
++    value = _quota_percent_value(item)
++    return "—" if value is None else f"{value:.0f}%"
++
++
++def _quota_ring_used_pct(item: dict[str, Any]) -> float:
++    value = _quota_percent_value(item)
++    return value if value is not None else 0.0
++
++
+ @dataclass(frozen=True)
+ class Fonts:
+     label: tuple[str, int, str]
+@@ -314,8 +329,8 @@ class CodexMonitorWindow:
+         cv.pack()
+ 
+         quota = self.view_model["quota"]
+-        pct0 = quota[0].get("percent_value") or 0.0   # 5h used %
+-        pct1 = quota[1].get("percent_value") or 0.0   # weekly used %
++        pct0 = _quota_ring_used_pct(quota[0])   # 5h used %
++        pct1 = _quota_ring_used_pct(quota[1])   # weekly used %
+         cx = cy = W // 2  # 95
+ 
+         # ── Rings ─────────────────────────────────────────────────────
+@@ -325,11 +340,11 @@ class CodexMonitorWindow:
+         _draw_ring(cv, cx, cy, 40, 16, pct1, COLOR_WEEK)
+ 
+         # ── Center text: weekly (top, smaller) + 5h (bottom, larger) ──
+-        weekly_text = f"{pct1:.0f}%"
++        weekly_text = _quota_center_text(quota[1])
+         cv.create_text(cx, cy - 14, text=weekly_text,
+                        fill=COLOR_WEEK, font=(self.fonts.num_large[0], 16, "bold"),
+                        anchor="center")
+-        fiveh_text = f"{pct0:.0f}%"
++        fiveh_text = _quota_center_text(quota[0])
+         cv.create_text(cx, cy + 13, text=fiveh_text,
+                        fill=COLOR_5H, font=(self.fonts.num_xlarge[0], 22, "bold"),
+                        anchor="center")
+diff --git a/codex-monitor/docs/INDEX.md b/codex-monitor/docs/INDEX.md
+index cc7a048..74833fb 100644
+--- a/codex-monitor/docs/INDEX.md
++++ b/codex-monitor/docs/INDEX.md
+@@ -23,7 +23,8 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
+   - `reasoning_output_tokens`
+   - `total_tokens`
+ - 同一 session 内增量统计使用 `last_token_usage` 求和，不对 `total_token_usage` 求和。
+-- 限额状态使用最新含 `payload.rate_limits` 的 token_count 事件，并保留该事件 timestamp。
++- 限额状态使用最新可显示 `used_percent` 的 `payload.rate_limits`；如果较新的 `rate_limits` 缺少 `primary/secondary.used_percent`，不得覆盖上一条可显示 quota。
++- `used_percent` 在模型层只接受有限数值；字符串数字可转为 `float`，空值、非数值、`NaN`、`inf` 统一视为未知 `None`。
+ - 真实 `resets_at` 可为 epoch 数字；UI 层负责格式化，不在 reader 中改写原始值。
+ 
+ ## 4. Claude Reader 口径
+@@ -75,6 +76,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
+ ## 7. 已知坑位
+ 
+ - Codex `rate_limits` 不在事件顶层；早期临时判断已被真实扫描推翻。
++- Codex 在 5 小时限额耗尽或临时无法返回完整 quota 时，可能写出较新的空 `rate_limits` 或缺少 `used_percent` 的窗口。未知值不能伪装成真实 `0%`：reader 必须跳过不可显示 quota，折叠态 UI 中心文本用 `—` 表示未知，只有真实 `0.0` 才显示 `0%`。回归测试覆盖 `tests/test_reader_codex.py`、`tests/test_models.py`、`tests/test_ui_tk.py`。
+ - 文件路径只能用于扫描优化，今日/近 30 天归属仍以事件 timestamp 为准。
+ - Codex `function_call_output` 常包含目录列表，一条记录可能有 50+ 条无关 `/claude/{project}` 路径，若参与投票会完全淹没真实信号（已验证：单条 `function_call_output` 59票 vs `message` 4票）。修复方案见 `app/reader_common.py`：事件类型加权 + 扫描窗口 200 行。回归测试在 `tests/test_reader_common.py`。
+ - 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。
+diff --git a/codex-monitor/tasks/todo.md b/codex-monitor/tasks/todo.md
+index a118ee7..dcd4c67 100644
+--- a/codex-monitor/tasks/todo.md
++++ b/codex-monitor/tasks/todo.md
+@@ -14,6 +14,7 @@ Claude Code 已正式放行并已完成：
+ - 封板验证：`python3.13 -m unittest discover -s tests -v`、`python3.13 -m compileall app tests`、`python3.13 main.py --smoke-aggregate` 均通过（2026-06-02）。
+ - 项目推断误分类已修复（2026-06-04）：`reader_common.infer_project_from_handle()` 按事件类型加权，跳过 Codex 工具调用/输出/token_count 噪声，扫描窗口提高到 200 行；`tests/test_reader_common.py` 已覆盖回归场景。
+ - UI 卡顿和高 CPU 已修复（2026-06-06）：watcher/polling 触发的聚合读取移出 tkinter 主线程，刷新中请求合并，自动刷新 60 秒节流；`.app` 进程实测空闲 CPU 0.0-0.2%，RSS 约 185-191MB；`python3 -m unittest discover -s tests -v` 43/43 通过，`python3 -m compileall app tests` 通过。
++- quota 缺失值回退已修复（2026-06-26）：较新的不可显示 `rate_limits` 不再覆盖旧的可显示 quota；折叠态未知值显示 `—`，真实 `0.0` 仍显示 `0%`；`python3 -m unittest discover -s tests -v` 51/51 通过，`python3 -m compileall app tests` 和 `python3 main.py --smoke-aggregate` 通过。
+ 
+ ## 未处理问题
+ 
+diff --git a/codex-monitor/tests/test_reader_codex.py b/codex-monitor/tests/test_reader_codex.py
+index 8cd27da..bb32069 100644
+--- a/codex-monitor/tests/test_reader_codex.py
++++ b/codex-monitor/tests/test_reader_codex.py
+@@ -55,6 +55,72 @@ class CodexReaderTests(unittest.TestCase):
+         self.assertIsNone(result.latest_quota)
+         self.assertEqual(result.last_usage_total.total_tokens, 9)
+ 
++    def test_incomplete_newer_quota_does_not_replace_displayable_quota(self) -> None:
++        with tempfile.TemporaryDirectory() as tmp:
++            path = Path(tmp) / "rollout-a.jsonl"
++            path.write_text(
++                _token_count_line(
++                    "2026-05-31T11:00:00.000Z",
++                    {
++                        "primary": {"used_percent": 35.0, "window_minutes": 300},
++                        "secondary": {"used_percent": 71.0, "window_minutes": 10080},
++                    },
++                    total_tokens=9,
++                )
++                + _token_count_line(
++                    "2026-05-31T11:05:00.000Z",
++                    {
++                        "primary": {"window_minutes": 300},
++                        "secondary": {"window_minutes": 10080},
++                    },
++                    total_tokens=12,
++                ),
++                encoding="utf-8",
++            )
++
++            result = read_session_file(path)
++
++        self.assertIsNotNone(result.latest_quota)
++        self.assertEqual(result.latest_quota.timestamp, "2026-05-31T11:00:00.000Z")
++        self.assertEqual(result.latest_quota.primary.used_percent, 35.0)
++        self.assertEqual(result.latest_quota.secondary.used_percent, 71.0)
++        self.assertEqual(result.token_count_events, 2)
++
++    def test_scan_uses_older_displayable_quota_over_newer_empty_quota(self) -> None:
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            session_dir = root / "2026" / "05" / "31"
++            session_dir.mkdir(parents=True)
++            (session_dir / "rollout-a.jsonl").write_text(
++                _token_count_line(
++                    "2026-05-31T11:00:00.000Z",
++                    {
++                        "primary": {"used_percent": 35.0, "window_minutes": 300},
++                        "secondary": {"used_percent": 71.0, "window_minutes": 10080},
++                    },
++                    total_tokens=9,
++                ),
++                encoding="utf-8",
++            )
++            (session_dir / "rollout-b.jsonl").write_text(
++                _token_count_line(
++                    "2026-05-31T11:05:00.000Z",
++                    {
++                        "primary": {"window_minutes": 300},
++                        "secondary": {"window_minutes": 10080},
++                    },
++                    total_tokens=12,
++                ),
++                encoding="utf-8",
++            )
++
++            result = read_codex_sessions(root)
++
++        latest_quota = result.latest_quota()
++        self.assertIsNotNone(latest_quota)
++        self.assertEqual(latest_quota.timestamp, "2026-05-31T11:00:00.000Z")
++        self.assertEqual(latest_quota.primary.used_percent, 35.0)
++
+     def test_bad_json_line_is_counted_without_exposing_content(self) -> None:
+         with tempfile.TemporaryDirectory() as tmp:
+             path = Path(tmp) / "rollout.jsonl"
+@@ -104,6 +170,30 @@ class CodexReaderTests(unittest.TestCase):
+         self.assertEqual(result.last_usage_total.total_tokens, 400)
+         self.assertEqual(result.latest_quota().primary.used_percent, 13.0)
+ 
++def _token_count_line(
++    timestamp: str,
++    rate_limits: dict[str, object],
++    *,
++    total_tokens: int,
++) -> str:
++    return (
++        json.dumps(
++            {
++                "timestamp": timestamp,
++                "type": "event_msg",
++                "payload": {
++                    "type": "token_count",
++                    "rate_limits": rate_limits,
++                    "info": {
++                        "last_token_usage": {"total_tokens": total_tokens},
++                        "total_token_usage": {"total_tokens": total_tokens},
++                    },
++                },
++            }
++        )
++        + "\n"
++    )
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/codex-monitor/tests/test_ui_tk.py b/codex-monitor/tests/test_ui_tk.py
+index ffde106..47f87d6 100644
+--- a/codex-monitor/tests/test_ui_tk.py
++++ b/codex-monitor/tests/test_ui_tk.py
+@@ -12,6 +12,8 @@ from app.runtime import RefreshRequest
+ from app.ui_tk import (
+     CodexMonitorWindow,
+     WindowState,
++    _quota_center_text,
++    _quota_ring_used_pct,
+     _ring_extent,
+     build_view_model,
+     format_millions,
+@@ -64,6 +66,27 @@ class TkUiTests(unittest.TestCase):
+         self.assertEqual(view_model["projects"][0]["tooltip"], "/Users/chat")
+         self.assertNotIn("event_types", view_model)
+ 
++    def test_view_model_marks_missing_quota_percent_as_unknown(self) -> None:
++        aggregate = UsageAggregate(
++            today=TokenTotals(),
++            month=TokenTotals(),
++            top_projects=(),
++            quota=None,
++            last_updated="2026-06-01T13:00:00+08:00",
++        )
++
++        view_model = build_view_model(aggregate)
++
++        self.assertIsNone(view_model["quota"][0]["percent_value"])
++        self.assertIsNone(view_model["quota"][1]["percent_value"])
++        self.assertEqual(_quota_center_text(view_model["quota"][0]), "—")
++        self.assertEqual(_quota_ring_used_pct(view_model["quota"][0]), 0.0)
++
++    def test_quota_center_text_distinguishes_unknown_from_real_zero(self) -> None:
++        self.assertEqual(_quota_center_text({"percent_value": None}), "—")
++        self.assertEqual(_quota_center_text({"percent_value": 0.0}), "0%")
++        self.assertEqual(_quota_center_text({"percent_value": 42.4}), "42%")
++
+     def test_ring_extent_full_never_hits_360(self) -> None:
+         # tkinter renders a blank arc at exactly ±360, which made a 100% ring
+         # look empty ("reset to zero"). Extent must stay strictly inside ±360.
+diff --git a/codex-monitor/tests/test_models.py b/codex-monitor/tests/test_models.py
+new file mode 100644
+index 0000000..17fb65f
+--- /dev/null
++++ b/codex-monitor/tests/test_models.py
+@@ -0,0 +1,25 @@
++from __future__ import annotations
++
++import unittest
++
++from app.models import RateLimitWindow
++
++
++class ModelTests(unittest.TestCase):
++    def test_rate_limit_window_accepts_numeric_string_percent(self) -> None:
++        window = RateLimitWindow.from_mapping({"used_percent": "42.5"})
++
++        self.assertIsNotNone(window)
++        self.assertEqual(window.used_percent, 42.5)
++
++    def test_rate_limit_window_rejects_invalid_percent_values(self) -> None:
++        for value in ("", "not-a-number", "NaN", float("inf"), object()):
++            with self.subTest(value=value):
++                window = RateLimitWindow.from_mapping({"used_percent": value})
++
++                self.assertIsNotNone(window)
++                self.assertIsNone(window.used_percent)
++
++
++if __name__ == "__main__":
++    unittest.main()
