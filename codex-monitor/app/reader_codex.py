@@ -69,7 +69,7 @@ def read_session_file(path: Path) -> CodexSessionResult:
                 )
 
             quota = _read_quota(payload, timestamp)
-            if quota is not None:
+            if quota is not None and _quota_has_displayable_percent(quota):
                 latest_quota = quota
 
     return CodexSessionResult(
@@ -112,3 +112,11 @@ def _read_quota(payload: dict[str, Any], timestamp: Any) -> CodexQuota | None:
         secondary=RateLimitWindow.from_mapping(rate_limits.get("secondary")),
         timestamp=timestamp,
     )
+
+
+def _quota_has_displayable_percent(quota: CodexQuota) -> bool:
+    return _window_has_percent(quota.primary) or _window_has_percent(quota.secondary)
+
+
+def _window_has_percent(window: RateLimitWindow | None) -> bool:
+    return window is not None and window.used_percent is not None

@@ -12,6 +12,8 @@ from app.runtime import RefreshRequest
 from app.ui_tk import (
     CodexMonitorWindow,
     WindowState,
+    _quota_center_text,
+    _quota_ring_used_pct,
     _ring_extent,
     build_view_model,
     format_millions,
@@ -63,6 +65,27 @@ class TkUiTests(unittest.TestCase):
         self.assertEqual(view_model["projects"][0]["percent"], "26.7%")
         self.assertEqual(view_model["projects"][0]["tooltip"], "/Users/chat")
         self.assertNotIn("event_types", view_model)
+
+    def test_view_model_marks_missing_quota_percent_as_unknown(self) -> None:
+        aggregate = UsageAggregate(
+            today=TokenTotals(),
+            month=TokenTotals(),
+            top_projects=(),
+            quota=None,
+            last_updated="2026-06-01T13:00:00+08:00",
+        )
+
+        view_model = build_view_model(aggregate)
+
+        self.assertIsNone(view_model["quota"][0]["percent_value"])
+        self.assertIsNone(view_model["quota"][1]["percent_value"])
+        self.assertEqual(_quota_center_text(view_model["quota"][0]), "—")
+        self.assertEqual(_quota_ring_used_pct(view_model["quota"][0]), 0.0)
+
+    def test_quota_center_text_distinguishes_unknown_from_real_zero(self) -> None:
+        self.assertEqual(_quota_center_text({"percent_value": None}), "—")
+        self.assertEqual(_quota_center_text({"percent_value": 0.0}), "0%")
+        self.assertEqual(_quota_center_text({"percent_value": 42.4}), "42%")
 
     def test_ring_extent_full_never_hits_360(self) -> None:
         # tkinter renders a blank arc at exactly ±360, which made a 100% ring

@@ -210,6 +210,21 @@ def _quota_window_view(label: str, window: Any) -> dict[str, Any]:
     }
 
 
+def _quota_percent_value(item: dict[str, Any]) -> float | None:
+    value = item.get("percent_value")
+    return float(value) if value is not None else None
+
+
+def _quota_center_text(item: dict[str, Any]) -> str:
+    value = _quota_percent_value(item)
+    return "—" if value is None else f"{value:.0f}%"
+
+
+def _quota_ring_used_pct(item: dict[str, Any]) -> float:
+    value = _quota_percent_value(item)
+    return value if value is not None else 0.0
+
+
 @dataclass(frozen=True)
 class Fonts:
     label: tuple[str, int, str]
@@ -314,8 +329,8 @@ class CodexMonitorWindow:
         cv.pack()
 
         quota = self.view_model["quota"]
-        pct0 = quota[0].get("percent_value") or 0.0   # 5h used %
-        pct1 = quota[1].get("percent_value") or 0.0   # weekly used %
+        pct0 = _quota_ring_used_pct(quota[0])   # 5h used %
+        pct1 = _quota_ring_used_pct(quota[1])   # weekly used %
         cx = cy = W // 2  # 95
 
         # ── Rings ─────────────────────────────────────────────────────
@@ -325,11 +340,11 @@ class CodexMonitorWindow:
         _draw_ring(cv, cx, cy, 40, 16, pct1, COLOR_WEEK)
 
         # ── Center text: weekly (top, smaller) + 5h (bottom, larger) ──
-        weekly_text = f"{pct1:.0f}%"
+        weekly_text = _quota_center_text(quota[1])
         cv.create_text(cx, cy - 14, text=weekly_text,
                        fill=COLOR_WEEK, font=(self.fonts.num_large[0], 16, "bold"),
                        anchor="center")
-        fiveh_text = f"{pct0:.0f}%"
+        fiveh_text = _quota_center_text(quota[0])
         cv.create_text(cx, cy + 13, text=fiveh_text,
                        fill=COLOR_5H, font=(self.fonts.num_xlarge[0], 22, "bold"),
                        anchor="center")

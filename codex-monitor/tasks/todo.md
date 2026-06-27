@@ -14,6 +14,7 @@ Claude Code 已正式放行并已完成：
 - 封板验证：`python3.13 -m unittest discover -s tests -v`、`python3.13 -m compileall app tests`、`python3.13 main.py --smoke-aggregate` 均通过（2026-06-02）。
 - 项目推断误分类已修复（2026-06-04）：`reader_common.infer_project_from_handle()` 按事件类型加权，跳过 Codex 工具调用/输出/token_count 噪声，扫描窗口提高到 200 行；`tests/test_reader_common.py` 已覆盖回归场景。
 - UI 卡顿和高 CPU 已修复（2026-06-06）：watcher/polling 触发的聚合读取移出 tkinter 主线程，刷新中请求合并，自动刷新 60 秒节流；`.app` 进程实测空闲 CPU 0.0-0.2%，RSS 约 185-191MB；`python3 -m unittest discover -s tests -v` 43/43 通过，`python3 -m compileall app tests` 通过。
+- quota 缺失值回退已修复（2026-06-26）：较新的不可显示 `rate_limits` 不再覆盖旧的可显示 quota；折叠态未知值显示 `—`，真实 `0.0` 仍显示 `0%`；`python3 -m unittest discover -s tests -v` 51/51 通过，`python3 -m compileall app tests` 和 `python3 main.py --smoke-aggregate` 通过。
 
 ## 未处理问题
 

@@ -23,7 +23,8 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
   - `reasoning_output_tokens`
   - `total_tokens`
 - 同一 session 内增量统计使用 `last_token_usage` 求和，不对 `total_token_usage` 求和。
-- 限额状态使用最新含 `payload.rate_limits` 的 token_count 事件，并保留该事件 timestamp。
+- 限额状态使用最新可显示 `used_percent` 的 `payload.rate_limits`；如果较新的 `rate_limits` 缺少 `primary/secondary.used_percent`，不得覆盖上一条可显示 quota。
+- `used_percent` 在模型层只接受有限数值；字符串数字可转为 `float`，空值、非数值、`NaN`、`inf` 统一视为未知 `None`。
 - 真实 `resets_at` 可为 epoch 数字；UI 层负责格式化，不在 reader 中改写原始值。
 
 ## 4. Claude Reader 口径
@@ -75,6 +76,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 ## 7. 已知坑位
 
 - Codex `rate_limits` 不在事件顶层；早期临时判断已被真实扫描推翻。
+- Codex 在 5 小时限额耗尽或临时无法返回完整 quota 时，可能写出较新的空 `rate_limits` 或缺少 `used_percent` 的窗口。未知值不能伪装成真实 `0%`：reader 必须跳过不可显示 quota，折叠态 UI 中心文本用 `—` 表示未知，只有真实 `0.0` 才显示 `0%`。回归测试覆盖 `tests/test_reader_codex.py`、`tests/test_models.py`、`tests/test_ui_tk.py`。
 - 文件路径只能用于扫描优化，今日/近 30 天归属仍以事件 timestamp 为准。
 - Codex `function_call_output` 常包含目录列表，一条记录可能有 50+ 条无关 `/claude/{project}` 路径，若参与投票会完全淹没真实信号（已验证：单条 `function_call_output` 59票 vs `message` 4票）。修复方案见 `app/reader_common.py`：事件类型加权 + 扫描窗口 200 行。回归测试在 `tests/test_reader_common.py`。
 - 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。

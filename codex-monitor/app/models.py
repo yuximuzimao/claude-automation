@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -58,7 +59,7 @@ class RateLimitWindow:
             return None
         window_minutes = data.get("window_minutes")
         return cls(
-            used_percent=data.get("used_percent"),
+            used_percent=_optional_finite_float(data.get("used_percent")),
             resets_at=data.get("resets_at"),
             window_minutes=int(window_minutes) if window_minutes is not None else None,
         )
@@ -69,6 +70,18 @@ class RateLimitWindow:
             "resets_at": self.resets_at,
             "window_minutes": self.window_minutes,
         }
+
+
+def _optional_finite_float(value: Any) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, str) and not value.strip():
+        return None
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if math.isfinite(parsed) else None
 
 
 @dataclass(frozen=True)
