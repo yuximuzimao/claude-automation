@@ -3,17 +3,7 @@
 更新时间：2026-06-27
 当前负责人：Claude Code
 当前分支：data-model-restructure
-当前焦点：**售后 A1 账号 14 no-auto 最小整账号固定清单批次已验证；正式 op-queue/API 入口、前端按钮和真实自动执行仍未交付。工作区存在跨项目未提交改动，继续前必须按项目隔离收口。**
-
-## 2026-06-27 工作区未提交改动分组
-
-当前 git 根是 `/Users/chat/claude`，不是单项目仓。继续任何项目开发、审查或提交前，必须按下面分组隔离；不得把无关项目混入售后 A1，也不得回滚用户或其他 agent 的改动。
-
-- `aftersales-automation/`：售后 A1 主线。账号 14 茗瑞-KGOS 的 48 小时 fixed-batch no-auto 最小整账号批次已验证；Step14 文档和小补丁已通过 `npm test` 209/209。下一步只做 Step14 代码质量审查和正式 op-queue/API 入口设计，不接前端按钮、不重启、不真实 approve/reject。
-- `codex-monitor/` + `.ai-bridge/`：Codex Monitor quota 缺失值回退修复。主题是较新的空 `rate_limits` 不再覆盖旧的可显示 quota，未知值 UI 显示 `—` 而不是假 `0%`。验证：`python3 -m unittest discover -s tests -v` 51/51，通过；`python3 -m compileall app tests` 通过。`.ai-bridge/` 是协作记录，当前计划已切回售后 A1，不能混进 codex-monitor 代码提交。
-- `product-mapping/`：悦希/百浩商品匹配核查改动。主题是新增 `lib/compare.js` 纯比较层、`check.js` 使用脚本精确输出 match/mismatch、档案V2 主商家编码查不到时按规格商家编码回退、配件规则改为 platformCode 粒度。验证：`node --test test/**/*.test.js` 3/3 通过。数据文件 `sku-records.json`、`features.json`、`accessories.json` 属同一活动数据包，需与代码一起审。
-- `lkwj/`：洛克收集助手纯进度数据改动，主要是 `data/collections.json` 的宠物/家具进度更新。验证：JSON 解析通过。不要和代码项目提交混在一起；若要提交，先由用户确认这些进度确实是最新状态。
-- `docs/`、`reviews/`：根 handoff 和周回顾材料。`reviews/weekly/2026-W25.md` 是内容文档，不属于任何代码项目；归档/提交前单独处理。
+当前焦点：**售后 A1 账号 14 no-auto 最小整账号固定清单批次已验证；正式 op-queue/API 入口、前端按钮和真实自动执行仍未交付。**
 
 ## ⏭️ 下一窗口接手：第三步 A1 逐账号扫描处理闭环
 
