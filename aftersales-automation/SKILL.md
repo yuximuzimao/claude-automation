@@ -66,6 +66,7 @@ entry: cli.js
 | `lib/product/match.js` | ERP 商品对应表查询 | 查商品匹配时 |
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
+| `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，默认 48h + `disableAutoExecute:true` | 改 A1 后端入口或入队参数时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）；已接 `a1-fixed-batch` op，调用步骤 14 且强制关闭自动执行 | 改队列逻辑时 |
@@ -233,6 +234,7 @@ lib/server/auto-exec-confidence.js
 lib/server/auto-execution-journal.js
 lib/server/a1-fixed-batch-entry.js
 lib/server/data.js
+lib/server/live-batch-scope.js
 lib/server/op-queue.js
 lib/server/pipeline.js
 lib/server/pipeline-status.js

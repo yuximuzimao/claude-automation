@@ -229,6 +229,7 @@ function setConnected(ok) {
 
 // ── Tab ──────────────────────────────────────────────────────────
 let currentTab = 'pending';
+const liveTabStoreFilters = { pending: 'all', waiting: 'all' };
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     currentTab = btn.dataset.tab;
@@ -268,6 +269,68 @@ function timeAgo(isoStr) {
   return `${Math.floor(diff / 86400)}天前`;
 }
 
+function liveStoreKey(item) {
+  const num = Number(item && item.accountNum);
+  return Number.isInteger(num) && num > 0 ? String(num) : null;
+}
+
+function liveStoreLabel(item) {
+  return (item && item.accountNote) || `账号${item && item.accountNum}`;
+}
+
+function setLiveStoreFilter(tabKey, value) {
+  liveTabStoreFilters[tabKey] = value || 'all';
+  loadAllLiveTabs();
+}
+
+function updateLiveStoreFilter(tabKey, items) {
+  const select = document.getElementById(`${tabKey}-store-filter`);
+  if (!select) return 'all';
+
+  const options = new Map();
+  (items || []).forEach(item => {
+    const key = liveStoreKey(item);
+    if (key && !options.has(key)) options.set(key, liveStoreLabel(item));
+  });
+
+  const selected = options.has(liveTabStoreFilters[tabKey]) ? liveTabStoreFilters[tabKey] : 'all';
+  liveTabStoreFilters[tabKey] = selected;
+
+  const storeOptions = [...options.entries()]
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([key, label]) => `<option value="${h(key)}"${key === selected ? ' selected' : ''}>${h(label)}</option>`);
+  select.innerHTML = `<option value="all"${selected === 'all' ? ' selected' : ''}>全部</option>` + storeOptions.join('');
+  select.value = selected;
+  return selected;
+}
+
+function applyLiveStoreFilter(tabKey, items) {
+  const selected = liveTabStoreFilters[tabKey] || 'all';
+  if (selected === 'all') return items;
+  return (items || []).filter(item => liveStoreKey(item) === selected);
+}
+
+function setScopedCount(elementId, shown, total) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  el.textContent = shown === total ? String(total) : `${shown}/${total}`;
+}
+
+function getLiveBatchScope(tabKey) {
+  const selected = liveTabStoreFilters[tabKey] || 'all';
+  const body = { statusScope: tabKey === 'waiting' ? 'waiting' : 'pending' };
+  if (selected !== 'all') body.accountNum = Number(selected);
+  return body;
+}
+
+function getLiveScopeLabel(tabKey) {
+  const selected = liveTabStoreFilters[tabKey] || 'all';
+  if (selected === 'all') return '全部店铺';
+  const select = document.getElementById(`${tabKey}-store-filter`);
+  const selectedOption = select && select.selectedOptions && select.selectedOptions[0];
+  return selectedOption ? selectedOption.textContent : `账号${selected}`;
+}
+
 
 // ── 重新采集推理 ─────────────────────────────────────────────────
 async function reinferSim(simId, btn) {
@@ -288,13 +351,16 @@ async function reinferSim(simId, btn) {
 
 // ── 批量执行 ─────────────────────────────────────────────────────
 async function batchExecute() {
-  if (!confirm('确认批量执行所有同意退款 + 确定性拒绝的工单？（排除等待重查和上报人工）')) return;
+  const scope = getLiveBatchScope('pending');
+  const scopeLabel = getLiveScopeLabel('pending');
+  if (!confirm(`确认批量执行「${scopeLabel}」待确认里的同意退款 + 确定性拒绝工单？（排除等待重查和上报人工）`)) return;
   try {
-    const res = await api('/simulations/batch-execute', { method: 'POST', body: JSON.stringify({}) });
+    const res = await api('/simulations/batch-execute', { method: 'POST', body: JSON.stringify(scope) });
+    if (res.error) throw new Error(res.error);
     const count = res.count || 0;
     const msg = count > 0
-      ? `已将 ${count} 张工单加入执行队列（同意${res.approveCount || 0}张，拒绝${res.rejectCount || 0}张）`
-      : '没有待执行的工单';
+      ? `已将 ${count} 张工单加入执行队列（同意${res.approveCount || 0}张，拒绝${res.rejectCount || 0}张，范围：${scopeLabel}）`
+      : `没有待执行的工单（范围：${scopeLabel}）`;
     showToast(msg);
   } catch (e) {
     showToast('批量执行失败：' + e.message, 'error');
@@ -302,11 +368,15 @@ async function batchExecute() {
 }
 
 // ── 批量重来 ─────────────────────────────────────────────────────
-async function batchReprocess() {
-  if (!confirm('确认重新采集推理所有未执行的实际工单？')) return;
+async function batchReprocess(tabKey = 'pending') {
+  const scope = getLiveBatchScope(tabKey);
+  const scopeLabel = getLiveScopeLabel(tabKey);
+  const tabLabel = tabKey === 'waiting' ? '等待重查' : '待确认';
+  if (!confirm(`确认重新采集推理「${scopeLabel}」${tabLabel}里的实际工单？`)) return;
   try {
-    await api('/queue/batch-reprocess', { method: 'POST', body: JSON.stringify({}) });
-    showToast('批量重来已加入队列，稍后自动处理');
+    const res = await api('/queue/batch-reprocess', { method: 'POST', body: JSON.stringify(scope) });
+    if (res.error) throw new Error(res.error);
+    showToast(`批量重来已加入队列：${res.count || 0} 张（范围：${scopeLabel} / ${tabLabel}）`);
   } catch (e) {
     showToast('操作失败：' + e.message, 'error');
   }
@@ -490,15 +560,16 @@ async function loadAllLiveTabs() {
 
   // Tab 1: 待确认
   const pendingItems = items.filter(i => i.status !== 'waiting' && !AUTO_STATUSES.includes(i.status));
+  updateLiveStoreFilter('pending', pendingItems);
+  const visiblePendingItems = applyLiveStoreFilter('pending', pendingItems);
   const simCount = pendingItems.filter(i => i.status === 'simulated').length;
   const pendingTabBadge = document.getElementById('pending-tab-count');
   if (pendingTabBadge) pendingTabBadge.textContent = simCount || '';
-  const pendingCountEl = document.getElementById('pending-count');
-  if (pendingCountEl) pendingCountEl.textContent = pendingItems.length;
+  setScopedCount('pending-count', visiblePendingItems.length, pendingItems.length);
   const pendingEl = document.getElementById('pending-list');
-  if (pendingEl) pendingEl.innerHTML = pendingItems.length
-    ? pendingItems.map(renderItem).join('')
-    : '<div class="empty-state">暂无待确认工单。点击「扫描工单」检测新工单。</div>';
+  if (pendingEl) pendingEl.innerHTML = visiblePendingItems.length
+    ? visiblePendingItems.map(renderItem).join('')
+    : '<div class="empty-state">当前店铺筛选下暂无待确认工单。</div>';
 
   // Tab 2: 已自动执行
   const autoItems = items.filter(i => AUTO_STATUSES.includes(i.status));
@@ -513,14 +584,15 @@ async function loadAllLiveTabs() {
 
   // Tab 3: 等待重查
   const waitingItems = items.filter(i => i.status === 'waiting');
+  updateLiveStoreFilter('waiting', waitingItems);
+  const visibleWaitingItems = applyLiveStoreFilter('waiting', waitingItems);
   const waitingTabBadge = document.getElementById('waiting-tab-count');
   if (waitingTabBadge) waitingTabBadge.textContent = waitingItems.length || '';
-  const waitingCountEl = document.getElementById('waiting-count');
-  if (waitingCountEl) waitingCountEl.textContent = waitingItems.length;
+  setScopedCount('waiting-count', visibleWaitingItems.length, waitingItems.length);
   const waitingEl = document.getElementById('waiting-list');
-  if (waitingEl) waitingEl.innerHTML = waitingItems.length
-    ? waitingItems.map(renderItem).join('')
-    : '<div class="empty-state">暂无等待重查工单。</div>';
+  if (waitingEl) waitingEl.innerHTML = visibleWaitingItems.length
+    ? visibleWaitingItems.map(renderItem).join('')
+    : '<div class="empty-state">当前店铺筛选下暂无等待重查工单。</div>';
 }
 
 // 兼容旧调用（SSE handlers 里仍然叫 loadLive）

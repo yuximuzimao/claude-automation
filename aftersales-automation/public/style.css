@@ -162,6 +162,21 @@ header {
 }
 .toolbar h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 .toolbar-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.store-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--gray-500);
+}
+.store-filter select {
+  border: 1px solid var(--gray-200);
+  border-radius: 7px;
+  padding: 6px 28px 6px 10px;
+  background: #fff;
+  color: var(--gray-700);
+  font-size: 13px;
+}
 .scan-status-label { font-size: 12px; color: var(--gray-400); font-family: 'SF Mono', 'Fira Code', monospace; }
 
 .count-badge {

@@ -18,7 +18,12 @@ const jlAlerts = require('../jl/alerts');
 const confidence = require('./auto-exec-confidence');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
 const { createA1FixedBatchRouteHandler, validateSessionFile } = require('./a1-fixed-batch-entry');
-const { isBatchExecutable } = require('../constants');
+const {
+  parseBatchExecuteRequest,
+  parseBatchReprocessRequest,
+  selectExecutableSimulations,
+  selectReprocessQueueItems,
+} = require('./live-batch-scope');
 
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
@@ -132,24 +137,20 @@ router.post('/simulations/:id/reinfer', (req, res) => {
 
 // 批量执行（拆成多条 execute 入队，逐一串行）
 router.post('/simulations/batch-execute', (req, res) => {
+  let scope;
+  try {
+    scope = parseBatchExecuteRequest(req.body || {});
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
+
   const sims = db.readSimulations({ mode: 'live' });
   const queue = db.readQueue();
-  const queueMap = new Map((queue.items || []).map(i => [i.id, i]));
-
-  // 按 createdAt 正序排列，Map.set 后面覆盖前面，同 queueItemId 保留最新 simulation
-  const candidates = sims
-    .filter(s => s.decision && !s.executedAt && s.mode === 'live')
-    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
-
-  const latestByQueue = new Map();
-  for (const s of candidates) {
-    const qi = queueMap.get(s.queueItemId);
-    if (!qi) continue; // 孤儿 simulation，无对应 queue item
-    if (isBatchExecutable(s.decision, qi.status)) {
-      latestByQueue.set(s.queueItemId, s);
-    }
-  }
-  const toExec = [...latestByQueue.values()];
+  const toExec = selectExecutableSimulations({
+    simulations: sims,
+    queueItems: queue.items || [],
+    scope,
+  });
 
   let approveCount = 0, rejectCount = 0;
   for (const sim of toExec) {
@@ -159,18 +160,37 @@ router.post('/simulations/batch-execute', (req, res) => {
     const actionLabel = { approve: '同意退款', reject: '拒绝退款' }[action] || action;
     opQueue.enqueue('execute', `执行 ${sim.workOrderNum} ${actionLabel}`, { simId: sim.id, fromBatch: true });
   }
-  res.status(202).json({ ok: true, count: toExec.length, approveCount, rejectCount });
+  res.status(202).json({
+    ok: true,
+    count: toExec.length,
+    approveCount,
+    rejectCount,
+    scopeAccountNum: scope.accountNum,
+    statusScope: scope.statusScope,
+  });
 });
 
 // 批量重来（每条工单单独入队，前端可见每条进度）
 router.post('/queue/batch-reprocess', (req, res) => {
+  let scope;
+  try {
+    scope = parseBatchReprocessRequest(req.body || {});
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
+
   const queue = db.readQueue();
-  const items = (queue.items || []).filter(i => i.mode === 'live' && !['done', 'auto_executed', 'auto_executing'].includes(i.status));
+  const items = selectReprocessQueueItems(queue.items || [], scope);
   for (const item of items) {
     db.updateQueueItem(item.id, { status: 'pending', hint: null });
     opQueue.enqueue('reprocess-one', `${item.workOrderNum} 采集推理`, { queueItemId: item.id });
   }
-  res.status(202).json({ ok: true, count: items.length });
+  res.status(202).json({
+    ok: true,
+    count: items.length,
+    scopeAccountNum: scope.accountNum,
+    statusScope: scope.statusScope,
+  });
 });
 
 // 单条工单重新采集+推理（reset → pending → reprocess-one 入队）

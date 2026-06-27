@@ -48,15 +48,15 @@
 
 Give CodexPro these in order:
 
-1. Task 1: Docs synchronization.
-2. Task 2: Step 14 small safety patch and tests.
-3. Task 3: CLI controllability tests.
-4. Task 4: op-queue/API design review or small implementation plan.
-5. Task 5: Live tab store filter and legacy cleanup review.
+1. Task 1: Docs synchronization. ✅ Completed.
+2. Task 2: Step 14 small safety patch and tests. ✅ Completed.
+3. Task 3: CLI controllability tests. ✅ Completed.
+4. Task 4: op-queue/API design review and backend/frontend no-auto entry. ✅ Completed.
+5. Task 5: Live tab store filter and legacy cleanup review + scoped implementation. ✅ Completed 2026-06-27.
 
-Do not give CodexPro the final frontend button yet. That should wait until the op-queue/API entry is reviewed and verified.
+Current remaining CodexPro-sized work is Task 6: auto-execution journal recovery design. Keep real fixed-batch runs, server restart, and true approve/reject automatic execution under direct user/operator control.
 
-For the 2026-06-27 user request about `待确认` / `等待重查` store filters and old/new logic cleanup, start from `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`. The first pass is review-only: GPT/CodexPro should not edit code until risks and scope are reviewed.
+For the 2026-06-27 user request about `待确认` / `等待重查` store filters and old/new logic cleanup, implementation is now complete. The plan remains archived in place at `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`, with neat handoff at `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
 
 ---
 
@@ -246,12 +246,15 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 5: Review Live Tab Store Filter And Legacy Cleanup
+### Task 5: Review Live Tab Store Filter And Legacy Cleanup ✅ Completed 2026-06-27
 
-**Best fit for CodexPro:** Yes. This is the next review-first task before implementation.
+**Status:** Completed. Review found the expected high-risk issue: UI filtering without backend scope would still batch hidden stores. Implementation now has frontend store filters, explicit request scopes, backend validation, tests, and neat handoff.
 
 **Plan File:**
-- `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
+- `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md` — archived in place, not moved to a new archive directory.
+
+**Handoff:**
+- `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`
 
 **Original User Requirement Summary:**
 - Add `全部` plus store/account filters to `待确认` and `等待重查`.
@@ -392,7 +395,7 @@ Best CodexPro tasks right now:
 2. Step 14 safety patch: small, testable, no browser.
 3. CLI/no-auto tests: useful before op-queue entry.
 4. op-queue/API design: good planning task.
-5. Live tab store filter and legacy cleanup: review first, then implementation.
-6. Auto-exec recovery: design only, not implementation yet.
+5. Live tab store filter and legacy cleanup: completed and archived in place.
+6. Auto-exec recovery: next suitable CodexPro task is design only, not implementation yet.
 
-Do not ask CodexPro to add the frontend button first. The backend entry and tests need to exist before a button is safe.
+Do not ask CodexPro to run real fixed-batch, restart server, or enable true approve/reject automatic execution from this plan. Those remain direct operator-controlled actions.

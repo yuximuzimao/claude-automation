@@ -1,5 +1,7 @@
 # Live Tab Store Filter And Legacy Cleanup Review Plan
 
+> **Status 2026-06-27:** Completed and archived in place. Do not create a local archive directory for this plan. Implementation and handoff are recorded in `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
+>
 > **For GPT/CodexPro reviewers:** This is a review-first plan. Do not edit code during the first pass. Do not run real browser, JL, ERP, scan, collect, approve, reject, fixed-batch, or account-opening commands. Use read-only commands such as `rg`, `sed`, `nl`, `git diff`, `git status`, `node --check`, and unit tests only if explicitly asked after review.
 
 **Goal:** Add store/account-scoped views and batch actions to the existing `待确认` and `等待重查` tabs while preventing old scan/collect/pipeline entry points from confusing the new A1 fixed-batch flow.
@@ -203,10 +205,20 @@ Use this exact prompt for the first GPT/CodexPro review:
 
 ## Acceptance Criteria For Final Implementation
 
-- `待确认` and `等待重查` both have an `全部` plus store selector.
-- Filtering does not change status classification.
-- Filtering does not change deadline/urgency order.
-- Scoped batch actions cannot operate on hidden stores.
-- Backend validates `accountNum` and `statusScope`.
-- Old unsafe scan/multi-account paths are not reused as the new A1 entry.
-- No local archive folder is created; cleanup decisions are represented by git commits and docs.
+- [x] `待确认` and `等待重查` both have an `全部` plus store selector.
+- [x] Filtering does not change status classification.
+- [x] Filtering does not change deadline/urgency order.
+- [x] Scoped batch actions cannot operate on hidden stores.
+- [x] Backend validates `accountNum` and `statusScope`.
+- [x] Old unsafe scan/multi-account paths are not reused as the new A1 entry.
+- [x] No local archive folder is created; cleanup decisions are represented by git commits and docs.
+
+## Completion Record
+
+- Completed on 2026-06-27 by GPT/CodexPro.
+- Frontend changed: `public/index.html`, `public/app.js`, `public/style.css`.
+- Backend changed: `lib/server/routes.js`, new `lib/server/live-batch-scope.js`.
+- Tests changed: `test/server/live-toolbar-frontend.test.js`, new `test/server/live-batch-scope.test.js`.
+- Docs changed: `SKILL.md`, `docs/HANDOFF.md`, `tasks/todo.md`, this plan, and neat handoff.
+- Verification: `npm test` passed 228/228, failure 0.
+- Not performed: no real browser/JL/ERP action, no scan/collect, no fixed-batch run, no approve/reject, no server restart.

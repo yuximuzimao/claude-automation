@@ -1,33 +1,47 @@
-const assert = require('assert');
-const fs = require('fs');
-const path = require('path');
+'use strict';
+
 const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 
-const indexHtml = fs.readFileSync(path.join(__dirname, '../../public/index.html'), 'utf8');
+const BASE = path.join(__dirname, '../..');
+const indexHtml = fs.readFileSync(path.join(BASE, 'public/index.html'), 'utf8');
+const appJs = fs.readFileSync(path.join(BASE, 'public/app.js'), 'utf8');
 
-function sectionHtml(id) {
+function section(id) {
   const start = indexHtml.indexOf(`<section id="${id}"`);
-  assert.notEqual(start, -1, `missing section ${id}`);
-  const next = indexHtml.indexOf('<section ', start + 1);
-  return indexHtml.slice(start, next === -1 ? indexHtml.length : next);
+  assert.notEqual(start, -1, `${id} section exists`);
+  const next = indexHtml.indexOf('</section>', start);
+  assert.notEqual(next, -1, `${id} section closes`);
+  return indexHtml.slice(start, next);
 }
 
-test('pending tab keeps the old top-right operation buttons visible', () => {
-  const html = sectionHtml('tab-pending');
+test('pending toolbar has store filter and batch actions send explicit pending scope', () => {
+  const pending = section('tab-pending');
+  assert.match(pending, /id="pending-store-filter"/);
+  assert.match(pending, /setLiveStoreFilter\('pending', this\.value\)/);
+  assert.match(pending, /batchExecute\(\)/);
+  assert.match(pending, /batchReprocess\('pending'\)/);
 
-  assert.match(html, /<button id="scan-btn" class="btn-primary" onclick="scanTickets\(\)">扫描工单<\/button>/);
-  assert.match(html, /<button class="btn-ghost" onclick="batchExecute\(\)">批量执行<\/button>/);
-  assert.match(html, /<button class="btn-ghost" onclick="batchReprocess\(\)">批量重来<\/button>/);
-
-  const firstButton = html.indexOf('<button id="scan-btn"');
-  const stoppedComment = html.indexOf('[stopped-2026-06-16]');
-  assert.equal(stoppedComment, -1, 'pending toolbar buttons must not remain hidden behind stopped-system comments');
-  assert.ok(firstButton > -1, 'scan button should be in pending toolbar');
+  assert.match(appJs, /function getLiveBatchScope\(tabKey\)/);
+  assert.match(appJs, /statusScope: tabKey === 'waiting' \? 'waiting' : 'pending'/);
+  assert.match(appJs, /batch-execute', \{ method: 'POST', body: JSON\.stringify\(scope\) \}/);
+  assert.match(appJs, /queue\/batch-reprocess', \{ method: 'POST', body: JSON\.stringify\(scope\) \}/);
 });
 
-test('waiting tab keeps the historical guidance text instead of inventing a new batch button', () => {
-  const html = sectionHtml('tab-waiting-tab');
+test('waiting toolbar has store filter and scoped batch reprocess but no batch execute', () => {
+  const waiting = section('tab-waiting-tab');
+  assert.match(waiting, /id="waiting-store-filter"/);
+  assert.match(waiting, /setLiveStoreFilter\('waiting', this\.value\)/);
+  assert.match(waiting, /batchReprocess\('waiting'\)/);
+  assert.doesNotMatch(waiting, /batchExecute\(/);
+});
 
-  assert.match(html, /下次扫描时自动重新采集推理/);
-  assert.doesNotMatch(html, /batchExecute\(\)|batchReprocess\(\)|scanTickets\(\)/);
+test('live tab rendering filters by accountNum without changing sorted item order', () => {
+  assert.match(appJs, /const visiblePendingItems = applyLiveStoreFilter\('pending', pendingItems\)/);
+  assert.match(appJs, /const visibleWaitingItems = applyLiveStoreFilter\('waiting', waitingItems\)/);
+  assert.match(appJs, /setScopedCount\('pending-count', visiblePendingItems\.length, pendingItems\.length\)/);
+  assert.match(appJs, /setScopedCount\('waiting-count', visibleWaitingItems\.length, waitingItems\.length\)/);
+  assert.match(appJs, /return \(items \|\| \[\]\)\.filter\(item => liveStoreKey\(item\) === selected\)/);
 });
