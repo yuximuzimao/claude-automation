@@ -412,7 +412,6 @@ router.delete('/op-queue/:id', (req, res) => {
 // ── Reviews（复盘笔记 CRUD）───────────────────────────────────────
 
 const REVIEWS_PATH = path.join(BASE, 'data/reviews.jsonl');
-const fs = require('fs');
 
 // ── Insights（AI洞察）─────────────────────────────────────────────
 
