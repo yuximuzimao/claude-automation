@@ -253,9 +253,9 @@ async function execOpenAccount(op) {
 
 async function execA1FixedBatch(op) {
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
-  const { accountNum, thresholdHours = 48 } = op.params;
+  const { accountNum } = op.params;
   return processSingleAccountFixedBatch(String(accountNum), {
-    thresholdHours,
+    thresholdHours: 48,
     disableAutoExecute: true,
   });
 }

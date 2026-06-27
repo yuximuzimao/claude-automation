@@ -42,8 +42,8 @@ test('op-queue executes a1-fixed-batch through Step14 with no-auto defaults', as
   const op = opQueue.enqueue('a1-fixed-batch', 'A1固定清单 账号14「茗瑞-KGOS」', {
     accountNum: '14',
     accountNote: '茗瑞-KGOS',
-    thresholdHours: 48,
-    disableAutoExecute: true,
+    thresholdHours: 1,
+    disableAutoExecute: false,
   });
 
   const completed = await waitFor(() => opQueue.getState().lastCompleted);
@@ -52,10 +52,10 @@ test('op-queue executes a1-fixed-batch through Step14 with no-auto defaults', as
   assert.equal(completed.status, 'done');
   assert.deepEqual(calls, [[
     '14',
-    {
-      thresholdHours: 48,
-      disableAutoExecute: true,
-    },
+      {
+        thresholdHours: 48,
+        disableAutoExecute: true,
+      },
   ]]);
   assert.deepEqual(completed.result, { success: true, accountNum: '14', items: [] });
 });

@@ -6,6 +6,7 @@
  * ENTRY: server.js: app.use('/api', routes)
  */
 const express = require('express');
+const fs = require('fs');
 const http = require('http');
 const { spawnSync } = require('child_process');
 const path = require('path');
@@ -16,7 +17,7 @@ const cdp = require('../cdp');
 const jlAlerts = require('../jl/alerts');
 const confidence = require('./auto-exec-confidence');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
-const { createA1FixedBatchRouteHandler } = require('./a1-fixed-batch-entry');
+const { createA1FixedBatchRouteHandler, validateSessionFile } = require('./a1-fixed-batch-entry');
 const { isBatchExecutable } = require('../constants');
 
 const router = express.Router();
@@ -762,8 +763,9 @@ router.post('/accounts/:num/open', (req, res) => {
 });
 
 router.post('/accounts/:num/a1-fixed-batch', createA1FixedBatchRouteHandler({
-  readAccounts: () => JSON.parse(require('fs').readFileSync(ACCOUNTS_FILE, 'utf8')),
-  sessionExists: file => require('fs').existsSync(path.join(SESSIONS_DIR, file)),
+  readAccounts: () => JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8')),
+  readAccountStatus: () => JSON.parse(fs.readFileSync(ACCOUNT_STATUS_FILE, 'utf8')),
+  validateSessionFile: ({ accountNum, file }) => validateSessionFile({ accountNum, file, sessionsDir: SESSIONS_DIR }),
   opQueue,
 }));
 
