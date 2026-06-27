@@ -1765,6 +1765,9 @@ async function loadAccounts() {
     const isPending = reloginPending.has(a.num);
     const isConfirm = reloginConfirm.has(a.num);
     const showReloginBtn = AccountReloginState.shouldShowReloginButton(a);
+    const fixedBatchBtn = AccountReloginState.shouldShowA1FixedBatchButton(a)
+      ? AccountReloginState.renderA1FixedBatchButton(a.num)
+      : '';
     const lastScan = a.lastScan ? new Date(a.lastScan).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
     let reloginBtn = '';
     if (showReloginBtn) {
@@ -1786,6 +1789,7 @@ async function loadAccounts() {
       ${a.error ? `<div class="account-error">${h(a.error)}</div>` : ''}
       <div class="account-actions">
         ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num}, '${statusKey}')">打开店铺后台</button>` : ''}
+        ${fixedBatchBtn}
         ${reloginBtn}
       </div>
     </div>`;
@@ -1858,6 +1862,30 @@ async function openAccountStore(num, statusKey) {
   else {
     showToast(res.error || `账号${num}店铺后台打开失败`, 'error');
     loadAccounts();
+  }
+}
+
+async function runA1FixedBatch(num, btn) {
+  const okToRun = confirm(
+    `确认将账号${num}的48小时固定清单加入队列吗？\n\n` +
+    `本入口只采集、推理并写回待确认，不会自动同意或拒绝退款。`
+  );
+  if (!okToRun) return;
+  const originalText = btn ? btn.textContent : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '入队中...';
+  }
+  const res = await api(`/accounts/${num}/a1-fixed-batch`, { method: 'POST' });
+  if (res.ok) {
+    showToast(res.message || `账号${num}固定清单已入队`);
+    api('/op-queue').then(renderQueuePanel).catch(() => {});
+  } else {
+    showToast(res.error || `账号${num}固定清单入队失败`, 'error');
+  }
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = originalText || 'A1固定清单';
   }
 }
 

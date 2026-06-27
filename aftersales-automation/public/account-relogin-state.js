@@ -24,9 +24,19 @@
       || account.status === 'error';
   }
 
+  function shouldShowA1FixedBatchButton(account) {
+    return !!account && account.hasFile === true && account.status === 'ok';
+  }
+
+  function renderA1FixedBatchButton(num) {
+    return `<button class="btn-ghost btn-sm btn-a1-fixed-batch" onclick="runA1FixedBatch(${num}, this)">A1固定清单</button>`;
+  }
+
   const api = {
     isMissingPendingSession,
+    renderA1FixedBatchButton,
     shouldKeepConfirmAfterError,
+    shouldShowA1FixedBatchButton,
     renderConfirmReloginControls,
     shouldShowReloginButton,
   };

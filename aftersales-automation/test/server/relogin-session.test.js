@@ -2,7 +2,9 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
+  renderA1FixedBatchButton,
   renderConfirmReloginControls,
+  shouldShowA1FixedBatchButton,
   shouldShowReloginButton,
   shouldKeepConfirmAfterError,
 } = require('../../public/account-relogin-state');
@@ -46,4 +48,19 @@ test('normal (ok) account also keeps relogin action', () => {
 
 test('error account still shows relogin action', () => {
   assert.equal(shouldShowReloginButton({ hasFile: true, status: 'error' }), true);
+});
+
+test('A1 fixed-batch button only shows for ok saved accounts', () => {
+  assert.equal(shouldShowA1FixedBatchButton({ hasFile: true, status: 'ok' }), true);
+  assert.equal(shouldShowA1FixedBatchButton({ hasFile: true, status: 'expired' }), false);
+  assert.equal(shouldShowA1FixedBatchButton({ hasFile: true, status: 'error' }), false);
+  assert.equal(shouldShowA1FixedBatchButton({ hasFile: true, status: 'unknown' }), false);
+  assert.equal(shouldShowA1FixedBatchButton({ hasFile: false, status: 'ok' }), false);
+});
+
+test('A1 fixed-batch button renders a single-account no-auto action', () => {
+  const html = renderA1FixedBatchButton(14);
+
+  assert.match(html, /runA1FixedBatch\(14, this\)/);
+  assert.match(html, />A1固定清单</);
 });
