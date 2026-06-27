@@ -1,13 +1,13 @@
 # A1 账号 14 最小整账号固定清单批次交接
 
 > 日期：2026-06-27  
-> 状态：账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 op-queue/API 入口已接入；正式前端按钮和自动执行真实工单仍未交付。
+> 状态：账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 op-queue/API 入口已接入并经审查加固；正式前端按钮和自动执行真实工单仍未交付。
 
 ## 结论
 
 A1 已从“单工单完整采集验证”推进到“单账号最小整账号固定清单批次验证”。这证明步骤 14 的 no-auto 固定清单串行链路可以在真实页面下完成多张工单的列表定位、详情 tab、采集、推理、写回和关闭详情 tab。
 
-但这仍不是可点 UI 交付。当前已接后端 op-queue/API 入口，但没有接前端按钮，没有重启加载正式入口，也没有放开真实 approve/reject。
+但这仍不是可点 UI 交付。当前已接后端 op-queue/API 入口并补齐审查风险，但没有接前端按钮，没有重启加载正式入口，也没有放开真实 approve/reject。
 
 ## 验证对象
 
@@ -63,10 +63,25 @@ A1 已从“单工单完整采集验证”推进到“单账号最小整账号�
 3. 入队走 `op-queue` 串行化，类型为 `a1-fixed-batch`，默认 `thresholdHours:48` 且强制 `disableAutoExecute:true`。
 4. 未接前端按钮、未重启 server、未运行真实浏览器、未访问鲸灵/ERP、未真实 approve/reject。
 
+## 2026-06-27 GPT 审查后加固结果
+
+已完成：
+
+1. 固定清单入口复用账号状态门，读取 `data/account-status.json`；状态读取失败直接 fail-closed，`expired/error` 不支持 `confirmed:true` 绕过。
+2. 入队前预检 session 文件：文件名必须匹配当前账号 `account<num>.json`，realpath 必须在 `../sessions` 内，JSON 必须可解析，且必须包含鲸灵认证 Cookie 和目标域身份 localStorage。
+3. `op-queue` 执行层也强制 `thresholdHours:48` 和 `disableAutoExecute:true`，即使有人绕过 API 注入异常参数也不会放开。
+4. 新增负边界测试覆盖异常账号、状态文件读取失败、坏 session JSON、路径穿越、错号文件名、缺认证信息、body 参数注入和队列层参数篡改。
+
+已验证：
+
+- 窄测：49/49 通过。
+- 全量 `npm test`：216/216 通过。
+- 提交：`52a85fd aftersales: harden fixed-batch entry guards`。
+
 ## 下一步
 
-1. 本地 CLI 先审查后端入口：`POST /api/accounts/:num/a1-fixed-batch` 必须保持单账号、显式账号参数、默认关闭自动执行；不要复用旧 `scan-all.js`、旧 `/api/scan`、旧 `collect.js` / `pipeline.js` 作为 A1 入口。
-2. 后端入口确认无误后，再讨论前端按钮。
+1. 前端按钮接入设计：只做单账号 no-auto 入队，不批量，不传可篡改参数，错误直接展示后端返回。
+2. 前端按钮实现和单测通过后，仍不重启 server、不真实运行，等待用户明确授权。
 3. 自动执行真实工单前，再单独处理 auto-execution journal 的恢复、人工审计和失败闭环。
 
 前端按钮仍应排在后端入口和测试之后。
