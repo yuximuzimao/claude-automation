@@ -1,6 +1,6 @@
 # A1 固定清单逐单处理：用户确认计划
 
-> 状态：**业务口径已于 2026-06-22 用户确认；2026-06-26 已完成账号 14 茗瑞单工单真实页面采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证；2026-06-27 后端 op-queue/API 入口已接入并经审查加固，前端单账号 no-auto 入队按钮代码已接入并通过测试。自动执行真实工单仍未交付。禁止重启加载、禁止真实 approve/reject，直到用户再次授权。**
+> 状态：**业务口径已于 2026-06-22 用户确认；2026-06-26 已完成账号 14 茗瑞单工单真实页面采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证；2026-06-27 后端 op-queue/API 入口已接入并经审查加固，前端单账号 no-auto 入队按钮代码已接入并通过测试；auto-execution journal recovery 已完成设计但未实现。自动执行真实工单仍未交付。禁止重启加载、禁止真实 approve/reject，直到用户再次授权。**
 
 ## 本轮目的
 
@@ -14,9 +14,9 @@ A1 不是重做一套新的售后系统。目标是把“单账号固定清单�
 - `scripts/jl-steps/12-click-work-order-action.js`：精确点击目标工单并识别新增 tab。
 - `scripts/jl-steps/14-process-single-account-fixed-batch.js`：冻结首次清单，逐单定位、采集、推理、自动执行门禁、关闭详情 tab。
 - `lib/jl/target-aware-collector.js`：显式绑定 `detailTargetId` 和 ERP target 的采集草案。
-- `lib/server/auto-execution-journal.js`：自动执行 intent / completed 防重复日志草案。
+- `lib/server/auto-execution-journal.js`：自动执行 intent / completed 防重复日志草案；恢复策略设计见 `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`。
 
-2026-06-26 已在用户授权下运行真实浏览器完成单工单采集验证；2026-06-26/27 已完成账号 14 关闭自动执行的最小整账号固定清单批次验证；2026-06-27 已接入并加固后端 `op-queue/API` 入口，且已接入前端单账号 no-auto 入队按钮代码。验证期间没有重启 server、没有真实 approve/reject。
+2026-06-26 已在用户授权下运行真实浏览器完成单工单采集验证；2026-06-26/27 已完成账号 14 关闭自动执行的最小整账号固定清单批次验证；2026-06-27 已接入并加固后端 `op-queue/API` 入口，且已接入前端单账号 no-auto 入队按钮代码。2026-06-27 已完成 auto-execution journal recovery 设计，明确人工归档必须同步更新 journal、queue、simulation/audit 和执行门禁。验证期间没有重启 server、没有真实 approve/reject。
 
 ## 用户已确认的业务口径（2026-06-22）
 
@@ -58,12 +58,12 @@ A1 不是重做一套新的售后系统。目标是把“单账号固定清单�
 
 ## 收尾风险把控阶段再处理的问题
 
-以下两项用户已决定暂缓到最后收尾阶段单独讨论和设计，不在当前实现批次展开：
+以下风险仍不得扩大自动执行范围或接入真机。2026-06-27 已先完成第 4 项设计，但未实现代码：
 
-4. **自动执行锁可能永久残留**：进程创建 `.lock` 后崩溃会永久阻断，需要可审计 owner / PID / 时间戳和安全恢复策略。
-5. **点击后 target 枚举异常可能遗留 tab**：新 tab 已打开但 `getTargets()` 报错时，当前清理路径可能拿不到 tab ID。
+4. **自动执行锁 / intent 可能永久残留**：recovery 设计已完成，见 `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`。核心要求：人工归档必须同步更新 journal、queue、simulation/audit 和执行门禁，不能只把 journal 标成 resolved；`manually_resolved` 是审计收口，不是自动重试放行。后续仍需实现状态机、CLI/API 恢复入口和测试矩阵。
+5. **点击后 target 枚举异常可能遗留 tab**：新 tab 已打开但 `getTargets()` 报错时，当前清理路径可能拿不到 tab ID；该项仍留到后续单独设计。
 
-当前实现可以保留现有保守失败行为，但不得因为这两项尚未完善而扩大自动执行范围或接入真机。
+当前实现可以保留现有保守失败行为，但不得因为上述风险尚未实现而扩大自动执行范围或接入真机。
 
 ## 当前验证证据
 
@@ -72,7 +72,8 @@ A1 不是重做一套新的售后系统。目标是把“单账号固定清单�
 - 本轮拆分前测试基线：`npm test` 204/204 通过。覆盖点包括排序下拉 3 个可能文案、工单类型归一化，以及仅退款类型不再因 `subBizType=323` 误走商品明细核对。
 - 2026-06-24 本轮复审修正后：`npm test` 193/193 通过；新增覆盖关闭详情 tab 前校验、拒绝关闭非鲸灵/列表主 tab/非当前账号 tab、账号收尾只清当前账号鲸灵额外 tab，以及 `fixed_batch` 来源终态 `skip` 进入原“已自动执行”列表。
 - 2026-06-27 live 三标签店铺筛选 + 批量 scope 加固已完成：`待确认` / `等待重查` 均有 `全部` + 店铺筛选；前端批量操作发送显式 `{statusScope, accountNum?}`；后端校验 `accountNum/statusScope` 并按页面 deadline/urgency 顺序选择候选；`等待重查` 不暴露批量执行。全量 `npm test` 228/228 通过。
-- 测试通过只证明现有用例通过；账号 14 最小整账号批次只证明 no-auto 固定清单串行链路可跑通；后端队列入口、前端单账号 no-auto 按钮代码、live 店铺筛选代码已交付并加固，但不代表已重启加载或自动执行真实工单已可运行。
+- 2026-06-27 auto-execution journal recovery 设计已完成：`docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`。该设计明确区分页动作不确定和本地写回失败；禁止盲重试 approve/reject；人工归档必须同步关闭 journal、queue、simulation/audit 和执行门禁。
+- 测试通过只证明现有用例通过；账号 14 最小整账号批次只证明 no-auto 固定清单串行链路可跑通；后端队列入口、前端单账号 no-auto 按钮代码、live 店铺筛选代码已交付并加固，journal recovery 只是设计完成但尚未实现；这些都不代表已重启加载或自动执行真实工单已可运行。
 
 ## 与原计划差异
 

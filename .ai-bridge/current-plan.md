@@ -1,81 +1,51 @@
-# Aftersales A1 live tab store filter handoff
+# Aftersales Task 6 journal recovery design handoff
 
-Updated: 2026-06-27T08:35:35.317Z
+Updated: 2026-06-27T09:04:00.262Z
 Workspace: /Users/chat/claude
 Target agent: Codex (codex)
 
 ## Plan
 
-# Aftersales A1 — Live tab store filter and scoped batch handoff
+Task 6 is complete as design-only. Do not re-design from scratch unless asked.
 
-## Current state
+Read first:
+1. aftersales-automation/docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md
+2. aftersales-automation/docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md
+3. aftersales-automation/tasks/todo.md
+4. docs/HANDOFF.md
 
-The live tab store filter and scoped batch-action task is complete. Do not re-implement it.
+Key design conclusion:
+- auto-execution-journal is an audit/recovery ledger, not a retry helper.
+- Never blindly retry approve/reject after an unfinished automatic execution intent.
+- Any page-action uncertainty must require human platform verification.
+- Human recovery must close journal + queue + simulation/audit + execution gates together.
+- Marking only journal as manually_resolved is forbidden because it can hide hazardous queue/simulation state.
+- manually_resolved means audit closure, not automatic re-release.
 
-Completed scope:
+Designed states:
+- auto_executing with phases reserved / page_action_started / page_action_succeeded / writeback_failed.
+- auto_executed blocks future automatic execution directly from journal, even if simulations are incomplete.
+- failed is only allowed when page action definitely did not start.
+- manually_resolved requires resolution confirmed_executed / confirmed_not_executed / unknown, operator note, allowAutoRetry:false, and batch/manual gate behavior.
 
-- `待确认` has `全部` + store selector.
-- `等待重查` has `全部` + store selector.
-- Filtering is per-tab view only; it does not create a new status or change original three-tab classification.
-- Filtering keeps the existing deadline/urgency order.
-- `待确认` batch execute posts explicit `{ statusScope:'pending', accountNum? }`.
-- `待确认` batch reprocess posts explicit `{ statusScope:'pending', accountNum? }`.
-- `等待重查` batch reprocess posts explicit `{ statusScope:'waiting', accountNum? }`.
-- `等待重查` has no batch execute button.
-- Backend validates `accountNum` and `statusScope` through `lib/server/live-batch-scope.js`.
-- Scoped batch operations cannot silently operate on hidden stores.
+No code was changed for Task 6. No CLI/API/UI recovery command was implemented. No tests were run for this design-only step. No true approve/reject automatic execution was enabled.
 
-## Important files changed
+Next implementation, only if user explicitly asks, should be phased:
+1. pure journal state machine + unit tests,
+2. Step 14 in-progress state writeback,
+3. local-only CLI recovery list/show/resolve,
+4. execution gate hardening for manual and scoped batch execute,
+5. UI visibility,
+6. separate future authorization before true automatic execution.
 
-- `aftersales-automation/public/index.html`
-- `aftersales-automation/public/app.js`
-- `aftersales-automation/public/style.css`
-- `aftersales-automation/lib/server/routes.js`
-- `aftersales-automation/lib/server/live-batch-scope.js`
-- `aftersales-automation/test/server/live-batch-scope.test.js`
-- `aftersales-automation/test/server/live-toolbar-frontend.test.js`
-- `aftersales-automation/SKILL.md`
-- `aftersales-automation/README.md`
-- `aftersales-automation/tasks/todo.md`
-- `aftersales-automation/docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`
-- `aftersales-automation/docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md`
-- `aftersales-automation/docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
-- `aftersales-automation/docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`
-- `docs/HANDOFF.md`
+Still forbidden unless separately authorized:
+- real fixed-batch run,
+- server restart,
+- approve/reject,
+- scan-all / collect / read-ticket / logistics / ERP commands,
+- any browser/JL/ERP operation.
 
-## Archive / neat status
-
-Do not create another local archive directory. The plan is archived in place:
-
-- `aftersales-automation/docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
-
-Neat handoff:
-
-- `aftersales-automation/docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`
-
-Main progress plan updated:
-
-- `aftersales-automation/docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md`
-
-## Verification
-
-`npm test` was run from `aftersales-automation` and passed 228/228 tests, 0 failed.
-
-No real browser, JL, ERP, scan, collect, fixed-batch, account opening, approve/reject, or server restart was performed.
-
-## Remaining risk boundary
-
-Backend intentionally preserves empty-body legacy broad behavior for compatibility. New frontend sends explicit scope. Treat empty-body broad behavior as transitional legacy until caller audit allows requiring `statusScope` for all callers.
-
-Old `/api/scan`, `scan-all.js`, `collect.js`, and old `pipeline.js` paths are still not safe A1 entry paths.
-
-Server has not been restarted. Do not assume production UI/server has loaded the new code until the user explicitly authorizes restart.
-
-## Suggested next Codex task
-
-Use `aftersales-automation/docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md` Task 6: Auto-Execution Journal Recovery Design.
-
-Task 6 should be design-only unless user explicitly requests implementation. Do not enable true automatic approve/reject. Do not run real fixed-batch. Do not restart server without explicit user authorization.
+Current remaining CodexPro-sized work in the task plan is Task 7: frontend button load/smoke plan only. The single-account no-auto button code already exists; do not add a duplicate button, restart the server, click the real button, or run fixed-batch unless the user explicitly authorizes it.
 
 ## Implementation contract
 

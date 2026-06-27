@@ -58,6 +58,8 @@
 
 **2026-06-27 CodexPro 已完成：live 三标签店铺筛选与批量作用域加固。** `待确认` 和 `等待重查` 均新增 `全部/店铺` 筛选；前端批量执行/批量重来现在必须发送 `{statusScope, accountNum?}`，筛选视角不会再静默作用隐藏店铺。后端新增 `lib/server/live-batch-scope.js` 统一验证 `accountNum/statusScope` 并按页面 deadline/urgency 顺序选择候选；`等待重查` 只开放批量重来，不开放批量执行。原计划已在 `aftersales-automation/docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md` 原地归档；neat 交接见 `aftersales-automation/docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`。已跑 `npm test`，228/228 通过。未重启售后 server，线上加载仍需用户另行授权 `/aftersales-restart`。
 
+**2026-06-27 CodexPro 已完成：auto-execution journal recovery 设计。** 设计文件：`aftersales-automation/docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`。结论：journal 是自动执行审计/恢复账本，不是重试助手；任何页面动作不确定都禁止盲重试 approve/reject；人工归档必须同步关闭 journal、queue、simulation/audit 和执行门禁，不能只把 journal 改成 `manually_resolved` 后让 queue/simulation 残留异常状态。该设计未改 `lib/` 代码、未增加 CLI/API、未启用真实自动执行。
+
 > ⚠️ 若交给 Codex：先读本节 + 已归档的 `docs/codex-handoff/archive/2026-06-19-aftersales-a1-predecessor-audits/legacy-conflict-audit.md` + lessons #54~#59 + 第二步章节。下面写到 Codex 冷启动可执行的颗粒度。**第三步是大工程，必须逐块设计、小步验证，不要一次性大改。**
 
 **当前已完成到哪里（2026-06-18 Codex 真机小步验证）**：

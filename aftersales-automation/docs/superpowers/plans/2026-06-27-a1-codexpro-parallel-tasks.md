@@ -53,10 +53,13 @@ Give CodexPro these in order:
 3. Task 3: CLI controllability tests. ✅ Completed.
 4. Task 4: op-queue/API design review and backend/frontend no-auto entry. ✅ Completed.
 5. Task 5: Live tab store filter and legacy cleanup review + scoped implementation. ✅ Completed 2026-06-27.
+6. Task 6: Auto-execution journal recovery design. ✅ Completed 2026-06-27 as design-only.
 
-Current remaining CodexPro-sized work is Task 6: auto-execution journal recovery design. Keep real fixed-batch runs, server restart, and true approve/reject automatic execution under direct user/operator control.
+Current remaining CodexPro-sized work is Task 7: frontend button load/smoke plan only. Keep real fixed-batch runs, server restart, and true approve/reject automatic execution under direct user/operator control.
 
 For the 2026-06-27 user request about `待确认` / `等待重查` store filters and old/new logic cleanup, implementation is now complete. The plan remains archived in place at `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`, with neat handoff at `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
+
+For Task 6, recovery design is complete at `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`. It explicitly requires manual recovery to update journal + queue + simulation/audit + execution gates together; `manually_resolved` is audit closure, not automatic re-release.
 
 ---
 
@@ -308,9 +311,13 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 6: Auto-Execution Journal Recovery Design
+### Task 6: Auto-Execution Journal Recovery Design ✅ Completed 2026-06-27
 
 **Best fit for CodexPro:** Design/review now; implementation later.
+
+**Status:** Design-only completed at `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`. No code implementation, no CLI recovery command, no true automatic execution enablement.
+
+**Design Conclusion:** `auto-execution-journal` must become an audit/recovery ledger, not a retry helper. Any page-action uncertainty must block blind retry. Human recovery must close journal, queue, simulation/audit, and execution gates together; resolving only the journal is forbidden because it can hide a hazardous queue/simulation state.
 
 **Why Not First:** It affects real refund execution semantics. It should not block a no-auto official entry, but must be solved before expanding true automatic execution.
 
@@ -348,25 +355,27 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 7: Frontend Button Plan Only
+### Task 7: Frontend Button Load/Smoke Plan Only
 
 **Best fit for CodexPro:** Planning only for now.
 
 **Do Not Implement Yet.**
+
+**Current Reality:** The single-account no-auto fixed-batch button code already exists and is covered by tests. The remaining planning task is how to load it safely, smoke-test UI behavior, and avoid duplicating or changing the already implemented button.
 
 **Prompt To Give CodexPro:**
 
 ```text
 你在 /Users/chat/claude/aftersales-automation。请只设计前端入口，不改代码。
 
-目标：未来在店铺管理页给单个账号增加“处理48小时工单”按钮。
+目标：为已经接入代码但尚未重启加载的单账号 no-auto “A1固定清单”按钮做加载/冒烟计划，不新增第二套按钮，不改现有按钮逻辑。
 
 要求：
-- 按钮只出现在有 session 文件的账号。
-- expired/error 状态需要二次确认，沿用“打开店铺后台”的人工确认风格。
-- 点击后调用新的 fixed-batch API，而不是 /api/scan、batch-reprocess、batch-execute。
-- UI 文案必须清楚说明：单账号、48小时固定清单、串行处理、可能写入待确认，不是批量全店铺扫描。
-- 默认不真实自动执行，除非后端已经有单独授权参数。
+- 先核对当前实现：按钮只对 ok + 有 session 文件的账号显示；expired/error/unknown 不得入队 fixed-batch。
+- 点击后只能调用新的 `POST /api/accounts/:num/a1-fixed-batch`，不得调用 `/api/scan`、batch-reprocess、batch-execute。
+- UI 文案必须清楚说明：单账号、48小时固定清单、串行处理、默认关闭真实自动执行、可能写入待确认，不是批量全店铺扫描。
+- 设计 server restart 后的只读/UI smoke 检查步骤，但不要实际重启 server、不要点击真实按钮、不要跑 fixed-batch。
+- 如果发现按钮已偏离旧售后系统功能或现有测试约束，输出风险和补丁建议，不直接改代码。
 
 请输出设计和测试点，不改代码。
 ```
@@ -379,7 +388,7 @@ Keep these out of CodexPro unless explicitly needed:
 
 - Running real fixed-batch against account 14 or any other account.
 - Starting/restarting the launchd server.
-- Connecting final frontend button to production entry.
+- Restarting/loading the frontend button into the running production server or clicking it against a real account.
 - Any true approve/reject automatic execution test.
 - Deciding whether automatic execution should be enabled in the official entry.
 
@@ -396,6 +405,7 @@ Best CodexPro tasks right now:
 3. CLI/no-auto tests: useful before op-queue entry.
 4. op-queue/API design: good planning task.
 5. Live tab store filter and legacy cleanup: completed and archived in place.
-6. Auto-exec recovery: next suitable CodexPro task is design only, not implementation yet.
+6. Auto-exec recovery: design completed; implementation remains future gated work.
+7. Frontend button load/smoke plan: next suitable CodexPro task is planning only, not restart or implementation.
 
 Do not ask CodexPro to run real fixed-batch, restart server, or enable true approve/reject automatic execution from this plan. Those remain direct operator-controlled actions.
