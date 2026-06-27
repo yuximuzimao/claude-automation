@@ -254,6 +254,18 @@ if (d.error) {
 
 ---
 
+## Lesson: check.js 单品比对必须验证名称 AND 数量，不能只验名称（2026-06-24）
+
+**现象**：茗瑞 KGOS 核查报告中，14 条 archiveType=0（单品档案）的 SKU 被误判 match。识图结果是名称×3 或 ×4，但 ERP 档案只有单品×1，核对页面显示明细不一致。
+
+**根因**：`check.js` archiveType=0 分支只做了 `items[0].name === archiveTitle` 的字符串比较，完全没有检查数量。名称匹配就算 match，数量错误静默通过。
+
+**修复**：同时检查名称 (`nameOk`) 和数量 (`qtyOk = qty === 1`)，两者都满足才是 match；数量不为1时报 `识图数量×N vs 单品档案×1（ERP未建套件档案）`。已同步至 `verify-archive.js` 单品分支和 `docs/INDEX.md §2 ④比对铁律`。
+
+**铁律**：单品档案固定表示×1单位。任何识图数量≠1的情况，必须在ERP建对应的套件档案才能 match。
+
+---
+
 ## Lesson: 禁止在生成文件后主动调用 open（2026-06-23）
 
 **现象**：每次重新生成 preview-match HTML 后立即 `open`，导致浏览器累积多个标签页（本次最多3个）。

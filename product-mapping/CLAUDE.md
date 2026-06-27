@@ -32,6 +32,9 @@ node cli.js targets                                        # 检查浏览器连�
 - 写操作（新增匹配）必须人工确认
 - ERP 命令串行，禁止并行
 - 视觉匹配由我亲自执行，不写识别脚本
+- 若用户已手动打开并筛选好鲸灵商品列表，只读当前页面，不自动开页/注入账号；需要 AI 自动开页或注入登录态时，先按 `docs/INDEX.md §2 Step 0` 的 targetId 边界处理
+- 识图必须覆盖本次报告全部 SKU，`recognition` 为空但 ERP 有明细必须判为 mismatch，不能归入 pending
+- 档案V2 主商家编码查不到时，先按规格商家编码回退查询，再判断是否无明细
 - 浏览器自动化通用约束（querySelector可见性/Element UI弹窗/实时验证）→ 见根目录 `CLAUDE.md` 浏览器操作约束区
 
 ## Git 存档规则

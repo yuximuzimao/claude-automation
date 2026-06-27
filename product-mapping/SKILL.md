@@ -20,6 +20,7 @@ entry: cli.js
 |------|------|--------|
 | `cli.js` | CLI 入口，19 个命令路由 | 了解可用命令或新增命令时 |
 | `lib/check.js` | 完整核查流程编排（扫描+标记+生成报告） | 改核查流程时 |
+| `lib/compare.js` | 识图结果 vs ERP 档案明细的精确比较 | 改 match/mismatch 判定时 |
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
 | `lib/cdp.js` | CDP HTTP proxy 客户端（localhost:3456），fallback 直连 | 写浏览器操作时 |
@@ -63,6 +64,10 @@ entry: cli.js
 ③ match --shop <店铺>      → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
 ④ check --shop <店铺>      → 重新扫描+对比报告 (anchor: runCheck)
 ```
+
+- 识图必须覆盖本次报告全部 SKU；`verify-table` 出现「无识图数据」表示流程未完成
+- 比对结果必须由脚本精确输出：空识图但 ERP 有明细 = mismatch，有识图但 ERP 无可比明细 = mismatch
+- 档案V2 主商家编码查不到时，先回退「规格商家编码」查询；不能直接判定档案缺失
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
 
@@ -144,6 +149,10 @@ visible.querySelector('button.el-button--primary').click();
 | 6 | 档案V2 查询前未清筛选残留 | 每次档案操作前检查/清空筛选状态 |
 | 7 | 识图不看 features.json 颜色字段 | 颜色规则优先级高于图片文字标注 |
 | 8 | 搜索 count > 0 宽松匹配 | `count !== 1` 必须报错"名称歧义"，防止套件写为子品 |
+| 9 | 只识别未匹配 SKU | 全量识图，已匹配 SKU 也必须有 recognition 才能核对 |
+| 10 | recognition 为空但 ERP 有明细时归入 pending | 必须输出 mismatch，不能让 AI 人工兜底替代脚本比较 |
+| 11 | 主商家编码查不到就判定无明细 | 先按规格商家编码回退查询商品档案V2 |
+| 12 | 用户已手动打开列表时仍自动开页/注入账号 | 只读当前页面；自动开页/注入登录态前必须先处理 targetId 绑定边界 |
 
 ## PATHS
 
@@ -155,6 +164,7 @@ docs/preflight-brand.md
 lib/archive.js
 lib/auto-match.js
 lib/auto-match2.js
+lib/compare.js
 lib/cdp.js
 lib/check.js
 lib/copy-as-suite.js

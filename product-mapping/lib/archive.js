@@ -36,18 +36,24 @@ const CLICK_EXACT_OPTION_JS =
   '  li.click();return JSON.stringify({clicked:true,via:"li"});' +
   '})()';
 
-function makeSearchSpecCodeJS(specCode) {
-  const escaped = JSON.stringify(specCode);
+function makeSearchCodeJS(code, placeholder) {
+  const escaped = JSON.stringify(code);
+  const targetPlaceholder = JSON.stringify(placeholder);
   return '(function(){' +
     '  var inputs=Array.from(document.querySelectorAll("input.el-input__inner")).filter(function(i){' +
     '    var r=i.getBoundingClientRect();return r.width>0&&r.height>0;' +
     '  });' +
-    '  var mainInp=inputs.find(function(i){return i.placeholder==="主商家编码";});' +
-    '  if(!mainInp) return JSON.stringify({error:"主商家编码输入框不存在"});' +
-    '  mainInp.value=' + escaped + ';' +
-    '  mainInp.dispatchEvent(new Event("input",{bubbles:true}));' +
-    '  mainInp.dispatchEvent(new Event("change",{bubbles:true}));' +
-    '  var el=mainInp;var sv=null;' +
+    '  inputs.forEach(function(i){' +
+    '    if(i.placeholder==="主商家编码"||i.placeholder==="规格商家编码"||i.placeholder==="规格"){' +
+    '      i.value="";i.dispatchEvent(new Event("input",{bubbles:true}));i.dispatchEvent(new Event("change",{bubbles:true}));' +
+    '    }' +
+    '  });' +
+    '  var targetInp=inputs.find(function(i){return i.placeholder===' + targetPlaceholder + ';});' +
+    '  if(!targetInp) return JSON.stringify({error:' + targetPlaceholder + '+"输入框不存在"});' +
+    '  targetInp.value=' + escaped + ';' +
+    '  targetInp.dispatchEvent(new Event("input",{bubbles:true}));' +
+    '  targetInp.dispatchEvent(new Event("change",{bubbles:true}));' +
+    '  var el=targetInp;var sv=null;' +
     '  for(var i=0;i<12;i++){' +
     '    if(!el) break;' +
     '    var v=el.__vue__;' +
@@ -60,9 +66,11 @@ function makeSearchSpecCodeJS(specCode) {
     '})()';
 }
 
-const READ_DATALIST_JS =
+function makeReadDataListJS(placeholder) {
+  const targetPlaceholder = JSON.stringify(placeholder);
+  return (
   '(function(){' +
-  '  var el=Array.from(document.querySelectorAll(".el-input__inner[placeholder=\\"主商家编码\\"]")).find(function(i){var r=i.getBoundingClientRect();return r.width>0&&r.height>0;});' +
+  '  var el=Array.from(document.querySelectorAll(".el-input__inner")).find(function(i){var r=i.getBoundingClientRect();return i.placeholder===' + targetPlaceholder + '&&r.width>0&&r.height>0;});' +
   '  if(!el) return JSON.stringify({error:"未找到输入框"});' +
   '  var v=el;var sv=null;' +
   '  for(var i=0;i<12;i++){' +
@@ -76,7 +84,9 @@ const READ_DATALIST_JS =
   '  }' +
   '  var item=sv.dataList[0];' +
   '  return JSON.stringify({outerId:item.outerId,title:item.title,type:item.type,subItemNum:item.subItemNum||0});' +
-  '})()';
+  '})()'
+  );
+}
 
 /**
  * 初始化：导航到档案V2页面并等待加载完成
@@ -136,20 +146,27 @@ async function queryArchive(erpId, erpCode) {
     }
   }, { maxRetries: 3, delayMs: 800, label: 'set exact query' });
 
-  // Step 2: 输入编码并搜索，读取结果
-  const item = await retry(async () => {
-    const search = await cdp.eval(erpId, makeSearchSpecCodeJS(erpCode));
-    if (search.error) throw new Error(search.error);
-    await sleep(3500);
-    const d = await cdp.eval(erpId, READ_DATALIST_JS);
-    if (d.error) {
-      if (d.count === 0) return null; // 精确查询无结果，真实不存在
-      throw new Error(`${d.error} (count=${d.count})`); // Vue未就绪等瞬态错误，交给 retry
-    }
-    return d;
-  }, { maxRetries: 3, delayMs: 2000, label: `queryArchive ${erpCode}` });
+  async function queryByPlaceholder(placeholder, lookupMode) {
+    const item = await retry(async () => {
+      const search = await cdp.eval(erpId, makeSearchCodeJS(erpCode, placeholder));
+      if (search.error) throw new Error(search.error);
+      await sleep(3500);
+      const d = await cdp.eval(erpId, makeReadDataListJS(placeholder));
+      if (d.error) {
+        if (d.count === 0) return null; // 精确查询无结果，真实不存在
+        throw new Error(`${d.error} (count=${d.count})`); // Vue未就绪等瞬态错误，交给 retry
+      }
+      return d ? { ...d, lookupMode } : null;
+    }, { maxRetries: 3, delayMs: 2000, label: `queryArchive ${erpCode} ${lookupMode}` });
+    return item || null;
+  }
 
-  return item || null;
+  // Step 2: 优先按主商家编码查询；查不到时按规格商家编码回退。
+  const mainItem = await queryByPlaceholder('主商家编码', 'mainOuterId');
+  if (mainItem) return mainItem;
+
+  const specItem = await queryByPlaceholder('规格商家编码', 'specCode');
+  return specItem || null;
 }
 
 // 点击子商品数字链接（a.ml_15）展开单品明细弹窗

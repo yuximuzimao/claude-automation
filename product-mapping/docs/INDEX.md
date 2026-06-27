@@ -25,6 +25,8 @@
 
 > **根因**：JL 标签页登录哪个账号决定「抓哪家店的活动商品」。`--shop` 只控制 ERP 端。账号不对齐，JL 抓出来的是别家的产品，cross-reference 必然全是「不在对应表」。
 
+> **自动开页/注入账号边界（2026-06-26）**：商品匹配当前安全默认是用户手动打开并筛选好鲸灵商品列表，再由脚本读取当前页面。若用户已手动打开正确店铺页面并确认账号态，后续 `jl-products` / `check` 只读商品列表，不触发自动注入错 tab 的风险。若后续需要 AI 自动打开鲸灵页面、自动切换账号或自动注入登录态，不能直接复用未绑定目标 tab 的旧注入逻辑；必须先让用户按操作指引手动完成，或先修复底层注入绑定 `targetId` 后再自动执行。这条是商品匹配项目的操作边界，不是售后工单系统待修项。
+
 **命令序列**（每次新活动按此顺序执行）：
 
 ```
@@ -73,6 +75,8 @@
      - 单品（archiveType=0）：识图名称 AND 识图数量=1，两者同时满足才算 match；识图数量≠1 = mismatch（ERP未建套件档案）
      - 套件（archiveType=2）：识图 items 与 ERP subItems 的 {name, qty} 集合完全一致才算 match
      - 任何一侧缺数量信息 = mismatch，禁止仅比名称
+     - recognition 为空但 ERP 有档案明细 = mismatch，禁止归入 pending；verify-table 出现「无识图数据」即流程未完成
+     - 有 recognition 但 ERP 无可比档案明细 = mismatch；若 erpCode 是规格编码，必须先用「规格商家编码」回退查询档案
    - 若有 mismatch，人工核查
 
 ⑤ verify-table（可选，流程末尾兜底）:
@@ -156,15 +160,15 @@ data/products/
 
 ### accessories.json — 不可见配件规则（悦希专用）
 
-**用途**：声明哪些货号（productCode）在 ERP 套件中含有图片不可见的配件（礼盒/礼袋/雪梨纸等）。
-**更新时机**：每次活动前，由用户直接编辑 `data/products/hee/accessories.json`。
-**注入时机**：annotate 步骤自动读取，追加到 recognition.items，识图不需要手动处理配件。
+**用途**：声明哪些 SKU 在 ERP 套件中含有图片不可见的配件（礼盒/礼袋/雪梨纸等）。
+**更新时机**：每次活动前，先跑 `check --shop <店铺>` 读取活动商品，再根据报告把用户给的货号（productCode）映射到具体平台规格编码（platformCode）。
+**注入时机**：主流程 `match/check` 通过 `resolveItems(platformCode, ...)` 临时叠加配件，不写回 recognition；识图不需要手动处理配件。
 
 ```json
 {
   "_meta": { "campaign": "2026年X月活动", "lastUpdated": "YYYY-MM-DD" },
   "rules": {
-    "yxxh-cx": {
+    "260703-1": {
       "note": "修颜四件组礼盒套装",
       "accessories": [
         { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
@@ -178,9 +182,14 @@ data/products/
 
 **注意**：
 - `erpName` 必须与 features.json 中的 erpName 完全一致（脚本精确匹配）
-- 键 = productCode（货号），同一货号下所有 SKU 共享配件规则
+- 键 = platformCode，不是 productCode。用户只给货号时，必须先从最新 check 报告或 `sku-records.json` 查出该货号下所有 platformCode，再逐个写规则
+- 同一货号有多个 SKU 时，配件数量可能不同；不要只写一个货号级规则，也不要漏掉同货号的第二个 platformCode
 - 配件商品本身也需要在 features.json 中有条目（ERP 搜索时需要精确名称）
 - 示例条目（`_` 开头的键）会被自动过滤，可保留作为格式参考
+
+**本次活动排除项处理（2026-06-25 百浩/悦希）**：
+- 用户明确说某些在售货号“不需要处理”时，仍应先读取列表确认它们存在，再从本次报告和 `sku-records.json` 里剔除；不要删除 `features.json` 或历史参考图
+- 若被排除货号复用同一个 platformCode（如折扣/免费两个活动入口），最终删除的是去重后的 platformCode 数量，不是货号数量
 
 ---
 
@@ -308,6 +317,8 @@ data/products/
 - `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
 - `[1/2026-05-13]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。根治：check 结束时以 ERP 实时对应表数据全量重写，不读旧文件做增量合并。recognition 字段在重写前从旧文件读取并写回（保留识图结果）。
 - `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
+- `[1/2026-06-26]` **单品 erpCode 可能是规格商家编码，不是主商家编码**：商品档案V2按「主商家编码」查不到时，不能直接判定档案未录入；必须回退到「规格商家编码」精确查询。百浩悦希本次已确认 3 个特殊单品：`yxr-1` erpCode `6940079096228` → 主商家编码 `yx005`（悦希舒缓焕颜精华乳100ml）；`yxs-1` erpCode `6940079096211` → 主商家编码 `yx004`（悦希舒缓焕颜精粹水100ml）；`yxjm-1` erpCode `6975183893203` → 主商家编码 `yx003`（悦希氨基酸表活焕颜洁面膏100g）。
+- `[1/2026-06-26]` **comparisonPending 不能掩盖脚本缺陷**：全量识图完成后，正常核对报告应当 `recognitionDone == SKU数` 且 `comparisonPending == 0`。若 recognition 为空但 ERP 有明细，脚本必须输出 mismatch；若有 recognition 但 ERP 无明细，先检查是否需要规格编码回退，仍无明细才输出 mismatch。
 - `[2/2026-05-22]` **check 前必须先对齐 JL 账号**：`--shop 共途` 只控制 ERP 端查哪张对应表，JL 标签页登录的是哪个账号决定抓哪家店的活动商品。账号不对齐时 JL 抓出别家产品，cross-reference 全部「不在对应表」，看起来像新活动未上线。铁律：用户说「<店铺>匹配」→ 先查 `sessions/accounts.json` → `jl <编号>` 注入账号 → 才跑 check。
 - `[1/2026-05-20]` **人工处理某些 SKU 后不能直接续跑 match，必须先重跑 check**：`getTodo()` 的判断条件是 `erpCode === null`，只有 check.js 运行时读 ERP 实时对应表才会回填 erpCode。人工在 ERP 界面完成匹配后，sku-records.json 里该条记录的 erpCode 仍是 null，match 仍视为未匹配并重试，触发重复操作或同样错误。正确流程：**人工处理 → check → match**，不能跳过 check 直接续 match。
 - `[1/2026-05-20]` **同 productCode 多比例套件触发「提示」弹窗**：同一 productCode 下已有已匹配套件（如青柑×10+茉莉×10），尝试为另一 platformCode 配不同比例套件（如青柑×5+茉莉×5）时，ERP 在打开「选择商品」弹窗前插入「提示」弹窗（"该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"）。当前 copy-as-suite.js 无法处理此前置弹窗，脚本报 `Expected 选择商品 dialog, got: 提示`。处置：人工确认/取消提示弹窗后走「人工处理→check→match」流程。

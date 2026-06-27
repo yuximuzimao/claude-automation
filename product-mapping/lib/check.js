@@ -13,7 +13,7 @@ const { initArchiveComp, queryArchive, querySubItems } = require('./archive');
 const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
 const { releaseErpLock } = require('./erp-lock');
-const { resolveItems } = require('./utils/resolve-items');
+const { compareSkuArchive } = require('./compare');
 
 const BRAND = 'hee';
 const REPORT_DIR = path.join(__dirname, '../data/reports');
@@ -130,13 +130,14 @@ async function runCheck(jlId, erpId, shopName) {
         hasMatched = true;
         const archiveItem = await queryArchive(erpId, sku.erpCode);
 
-        let status, archiveType = null, archiveTitle = null, subItemNum = 0;
+        let status, archiveType = null, archiveTitle = null, subItemNum = 0, archiveLookupMode = null;
         if (!archiveItem) {
           status = '已匹配-档案未录入';
         } else {
           archiveType = archiveItem.type; // '0'=单品, '2'=组合装
           archiveTitle = archiveItem.title;
           subItemNum = archiveItem.subItemNum || 0;
+          archiveLookupMode = archiveItem.lookupMode || null;
 
           // 组合装额外获取子品明细（视觉核查比对基准）
           if (archiveType === '2' && subItemNum > 0) {
@@ -156,33 +157,18 @@ async function runCheck(jlId, erpId, shopName) {
         const recognition = rec?.recognition || null;
         const subItems = (archiveItem && archiveItem.subItems) || [];
 
-        // 识图 vs 档案对比（仅在有识图结果且有档案时计算）
-        // 组合装对比时临时注入配件（不写回 recognition）
-        let comparisonResult = null, comparisonDetail = null;
-        if (recognition && archiveItem) {
-          if (archiveType === '0') {
-            const recItem = recognition.items[0];
-            const expected = recItem?.name || '';
-            const expectedQty = recItem?.qty ?? 0;
-            const actual = archiveTitle || '';
-            const nameOk = expected === actual;
-            const qtyOk = expectedQty === 1;
-            comparisonResult = (nameOk && qtyOk) ? 'match' : 'mismatch';
-            comparisonDetail = comparisonResult === 'match'
-              ? `✓ ${actual}`
-              : !nameOk
-                ? `✗ 识图:${expected} vs 档案:${actual}`
-                : `✗ 识图数量×${expectedQty} vs 单品档案×1（ERP未建套件档案）`;
-          } else if (archiveType === '2' && subItems.length > 0) {
-            const resolvedItems = resolveItems(sku.platformCode, recognition.items, BRAND);
-            const expectedSet = resolvedItems.map(it => `${it.name}×${it.qty}`).sort().join(',');
-            const actualSet = subItems.map(s => `${s.name}×${s.qty}`).sort().join(',');
-            comparisonResult = expectedSet === actualSet ? 'match' : 'mismatch';
-            comparisonDetail = comparisonResult === 'match'
-              ? `✓ ${actualSet}`
-              : `✗ 识图:[${expectedSet}] vs 档案:[${actualSet}]`;
-          }
-        }
+        // 识图 vs 档案对比由纯函数统一处理：
+        // - recognition 为空但 ERP 有明细 => mismatch
+        // - 有 recognition 但 ERP 无可比明细 => mismatch
+        // - 组合装对比时临时注入配件（不写回 recognition）
+        const { comparisonResult, comparisonDetail } = compareSkuArchive({
+          platformCode: sku.platformCode,
+          recognition,
+          archiveType,
+          archiveTitle,
+          subItems,
+          brand: BRAND,
+        });
 
         skuResults.push({
           skuName: sku.skuName,
@@ -191,6 +177,7 @@ async function runCheck(jlId, erpId, shopName) {
           erpName: sku.erpName,
           archiveType,
           archiveTitle,
+          archiveLookupMode,
           subItemNum,
           subItems,
           recognition,
