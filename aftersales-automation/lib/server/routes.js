@@ -16,6 +16,7 @@ const cdp = require('../cdp');
 const jlAlerts = require('../jl/alerts');
 const confidence = require('./auto-exec-confidence');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
+const { createA1FixedBatchRouteHandler } = require('./a1-fixed-batch-entry');
 const { isBatchExecutable } = require('../constants');
 
 const router = express.Router();
@@ -759,6 +760,12 @@ router.post('/accounts/:num/open', (req, res) => {
   });
   res.status(202).json({ ok: true, opId: op.id, message: `账号${num}打开后台已入队` });
 });
+
+router.post('/accounts/:num/a1-fixed-batch', createA1FixedBatchRouteHandler({
+  readAccounts: () => JSON.parse(require('fs').readFileSync(ACCOUNTS_FILE, 'utf8')),
+  sessionExists: file => require('fs').existsSync(path.join(SESSIONS_DIR, file)),
+  opQueue,
+}));
 
 // ── 退货入库 ──────────────────────────────────────────────────────
 

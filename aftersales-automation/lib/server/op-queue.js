@@ -147,6 +147,7 @@ async function executeOp(op) {
     case 'open-ticket':    return execOpenTicket(op);
     case 'collect':        return execCollect(op);
     case 'return-inbound': return execReturnInbound(op);
+    case 'a1-fixed-batch': return execA1FixedBatch(op);
   }
 }
 
@@ -248,6 +249,15 @@ async function execOpenAccount(op) {
     note: accountNote,
   });
   return { accountNum, status: 'ok', action: out.action };
+}
+
+async function execA1FixedBatch(op) {
+  const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const { accountNum, thresholdHours = 48 } = op.params;
+  return processSingleAccountFixedBatch(String(accountNum), {
+    thresholdHours,
+    disableAutoExecute: true,
+  });
 }
 
 // ── 单账号扫描 ─────────────────────────────────────────────────────

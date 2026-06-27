@@ -51,8 +51,8 @@ entry: cli.js
 | `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
-| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1 固定清单逐单处理草案**：必须接回原 queue/simulation/三标签页，不得形成独立新系统；2026-06-26 已验证单工单完整采集和模拟写回，2026-06-26/27 已验证账号14最小整账号批次，正式入口仍未交付 | 改 A1 闭环前必读确认计划和 2026-06-27 handoff；禁止直接接前端按钮或自动执行真实工单 |
-| `lib/jl/target-aware-collector.js` | **已过单工单真机验证的适配层**：显式绑定 JL 详情 tab 和 ERP tab 的采集入口；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 一起审阅，正式批处理入口未交付 |
+| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1 固定清单逐单处理草案**：必须接回原 queue/simulation/三标签页，不得形成独立新系统；2026-06-26 已验证单工单完整采集和模拟写回，2026-06-26/27 已验证账号14最小整账号批次，后端入口已接入且默认 no-auto | 改 A1 闭环前必读确认计划和 2026-06-27 handoff；禁止直接接前端按钮或自动执行真实工单 |
+| `lib/jl/target-aware-collector.js` | **已过单工单真机验证的适配层**：显式绑定 JL 详情 tab 和 ERP tab 的采集入口；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅；前端按钮仍未接入 |
 | `lib/server/auto-execution-journal.js` | **草案风险层**：自动执行 intent / completed 防重复日志；锁残留恢复策略留到收尾风险把控阶段 | 审阅自动执行异常恢复时；当前不得用于真实工单 |
 | `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | A1 已确认业务口径、原系统数据流要求、当前质量问题和恢复开发门禁 | 继续 A1 前必读 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
@@ -67,7 +67,8 @@ entry: cli.js
 | `lib/product/archive.js` | ERP 商品档案V2查询 | 查商品档案时 |
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作） | 改队列逻辑时 |
+| `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，默认 48h + `disableAutoExecute:true` | 改 A1 后端入口或入队参数时 |
+| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）；已接 `a1-fixed-batch` op，调用步骤 14 且强制关闭自动执行 | 改队列逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -84,7 +85,7 @@ entry: cli.js
 1. `openAccountFlow`：tab 数量门 → 实时店铺匹配 → 复用或清理验证后注入。
 2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
-4. 步骤 14 固定清单串联的业务口径已确认：首次 `<=48h` 清单为不可变清单；A1 只改变执行顺序，必须接回原 queue/simulation/三标签页，不能落地 `manual_review` 或独立结果系统。2026-06-26 已用账号 14 茗瑞的单个工单完成采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证。下一步是规格审查、代码质量审查和正式 op-queue/API 入口设计。禁止接前端按钮、禁止自动执行真实工单；恢复入口见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` 和 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。
+4. 步骤 14 固定清单串联的业务口径已确认：首次 `<=48h` 清单为不可变清单；A1 只改变执行顺序，必须接回原 queue/simulation/三标签页，不能落地 `manual_review` 或独立结果系统。2026-06-26 已用账号 14 茗瑞的单个工单完成采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证。后端 `op-queue/API` 入口已接入，仍默认关闭自动执行。禁止接前端按钮、禁止自动执行真实工单、禁止未经授权重启加载后运行；恢复入口见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` 和 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。
 
 ### 旧流程（代码保留，当前禁止作为入口）
 
@@ -230,6 +231,7 @@ lib/product/match.js
 lib/server/account-session-status.js
 lib/server/auto-exec-confidence.js
 lib/server/auto-execution-journal.js
+lib/server/a1-fixed-batch-entry.js
 lib/server/data.js
 lib/server/op-queue.js
 lib/server/pipeline.js

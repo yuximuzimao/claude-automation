@@ -77,13 +77,13 @@
 
 ## 2026-06 A1 逐账号扫描闭环待办
 
-> 当前交接入口：`docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。下个 Agent 先读它，再读完整确认计划。账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；下一步是规格审查、代码质量审查和正式 op-queue/API 入口设计。不要先接前端按钮、不要重启加载正式入口、不要真实 approve/reject。
+> 当前交接入口：`docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。下个 Agent 先读它，再读完整确认计划。账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 `op-queue/API` 入口已接入，仍未接前端按钮、未放开真实自动执行。不要先接前端按钮、不要重启加载正式入口、不要真实 approve/reject。
 
 - [x] **A1-atomic-08-12** 真机最小测试并沉淀原子脚本：点击「售后工单」、选择按逾期时间最近排序、读取 48h 内列表、列表准备编排、按指定工单号打开正确处理 tab。验证：相关 node:test 12/12，通过全量 `npm test` 119/119。
 - [x] **A1-chain-single-account-open-ticket** 已新增 `13-open-single-account-work-order.js`，串联 `openAccountFlow(num)` → `prepareAfterSaleList()` → urgent 目标门禁 → `clickWorkOrderAction(workOrderNum)`；只打开并定位正确工单详情 tab，不做同意/拒绝。相关测试 32/32，全量 `npm test` 129/129；真实账号/工单真机验证需用户指定目标后执行。
 - [x] **A1-direct-after-sale-navigation** `04-inject.js` 注入后不再 reload 旧 URL，固定导航售后列表并保留店铺名匹配；`openAccountFlow` 在 Cookie 清理 `verified === true` 后把同一 targetId 传给 04，避免清理 tab A 后导航/验证 tab B；CLI 未传 targetId 时只接受唯一鲸灵 tab。`11-prepare-after-sale-list.js` 对指定 targetId 直接导航列表后再校验/排序/读取，不再依赖首页菜单或弹窗。旧 reload 会继承详情路径并可能造成店铺与工单上下文错配。停止账号 4-14 弹窗枚举测试，本轮不做真实浏览器操作。第二轮 TDD：相关测试先 10/15（5 个预期失败）RED，修改后 15/15 GREEN；关键链路 36/36、全量 `npm test` 138/138。
 - [x] **A1-read-list-total** 列表页“共 N 条”、分页稳定读取、目标工单定位和详情 tab 锁定已进入真实页面链路验证。2026-06-26 用户指定账号 14 茗瑞、工单 `100001782462690101360` 后，步骤 09/10/13 成功完成排序、读取列表、定位目标工单并打开详情 tab。步骤 09 固定执行下拉命中，不因当前值已是目标排序而跳过，并补齐 3 个可能下拉文案的识别。
-- [ ] **A1-single-account-fixed-batch-chain（账号14最小整账号批次已验证；正式入口未交付）** 单账号固定清单逐单串联已有草案实现；排序后首次读取的全部 `<=48h` 工单已确认作为“本轮不可变清单”。2026-06-24 已补 queue/simulation 写回、非自动执行/列表消失回原“待确认”、自动执行回原“已自动执行”、等待重查回原 `waiting`、`fixed_batch` 来源终态 `skip` 也进入原“已自动执行”列表，并加强详情 tab/账号收尾清理校验。2026-06-25 已补自动执行 journal 残留 intent 阻断：发现 `auto_executing` 残留时不再 approve，转回 `simulated` 并写明需人工复核。2026-06-26 用户授权完整采集，并允许写回“待确认/等待重查”后，账号 14 茗瑞、工单 `100001782462690101360` 已完成单工单完整采集、推理和模拟写回：工单类型由 `323` / `仅退款（无需退货）` 归一为 `仅退款`，采集跳过商品明细和退货快递核验，ERP 搜索 2 次、ERP 物流 3 次、物流包裹 2 个，推理结论为 `escalate`，原因是主品已退回但赠品 `YT7629306404466` 在途未拦截成功，需人工确认。写回 queue 状态为 `simulated`，simulation id 为 `manual-collect-1782470482079-100001782462690101360`；用户随后手动删除页面中的推理采集信息，`queue.json` 已无该 active item，但 `simulations.jsonl` 仍保留历史记录。2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次：冻结清单 4 张，4 张均完成列表定位、详情 tab、采集、推理、写回 queue/simulation、关闭详情 tab；queue 均为 `status:"simulated"`、`source:"fixed_batch"`，无 `executedAt`/`autoExecutedAt`，收尾后仅保留 1 个鲸灵售后列表主 tab。仍不得接前端按钮、不得重启加载正式入口、不得真实 approve/reject。
+- [ ] **A1-single-account-fixed-batch-chain（账号14最小整账号批次已验证；后端入口已接入）** 单账号固定清单逐单串联已有草案实现；排序后首次读取的全部 `<=48h` 工单已确认作为“本轮不可变清单”。2026-06-24 已补 queue/simulation 写回、非自动执行/列表消失回原“待确认”、自动执行回原“已自动执行”、等待重查回原 `waiting`、`fixed_batch` 来源终态 `skip` 也进入原“已自动执行”列表，并加强详情 tab/账号收尾清理校验。2026-06-25 已补自动执行 journal 残留 intent 阻断：发现 `auto_executing` 残留时不再 approve，转回 `simulated` 并写明需人工复核。2026-06-26 用户授权完整采集，并允许写回“待确认/等待重查”后，账号 14 茗瑞、工单 `100001782462690101360` 已完成单工单完整采集、推理和模拟写回：工单类型由 `323` / `仅退款（无需退货）` 归一为 `仅退款`，采集跳过商品明细和退货快递核验，ERP 搜索 2 次、ERP 物流 3 次、物流包裹 2 个，推理结论为 `escalate`，原因是主品已退回但赠品 `YT7629306404466` 在途未拦截成功，需人工确认。写回 queue 状态为 `simulated`，simulation id 为 `manual-collect-1782470482079-100001782462690101360`；用户随后手动删除页面中的推理采集信息，`queue.json` 已无该 active item，但 `simulations.jsonl` 仍保留历史记录。2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次：冻结清单 4 张，4 张均完成列表定位、详情 tab、采集、推理、写回 queue/simulation、关闭详情 tab；queue 均为 `status:"simulated"`、`source:"fixed_batch"`，无 `executedAt`/`autoExecutedAt`，收尾后仅保留 1 个鲸灵售后列表主 tab。后端 `POST /api/accounts/:num/a1-fixed-batch` 已接入 `op-queue`，显式单账号入队，默认 48 小时清单且 `disableAutoExecute:true`。仍不得接前端按钮、不得重启加载正式入口、不得真实 approve/reject。
 
   每张固定清单工单严格串行：在列表定位工单号 → 复用步骤 12/13 点击该工单的处理按钮并锁定新 `detailTargetId` → 在该详情 tab 完成采集、推理、自动执行判定 → **写回原售后系统 queue/simulation** → 只有命中现有自动执行范围才直接处理 → 关闭详情 tab 并确认已关闭 → 回到列表 tab → 处理下一单。
 
@@ -100,9 +100,7 @@
 
   **页面与账号收尾**：原待确认/已自动执行/等待重查三类不变；允许在每个标签页下增加店铺筛选（全部/店铺名），但不改变分类。单账号固定清单处理完后等待 5 秒，切首页读取平台提醒；随后兜底关闭当前账号除售后列表主 tab 外的鲸灵 tab，不动 ERP、专属售后系统或非鲸灵 tab，并复核只剩一个当前账号售后列表 tab。
 
-  **当前门禁**：完整确认口径、已编码草案和未闭合范围统一记录在 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。2026-06-26 已验证单工单真实采集和模拟写回；2026-06-26/27 已验证账号 14 关闭自动执行的最小整账号固定清单批次。接入前端按钮、重启加载正式入口或自动执行真实工单前，必须先完成规格审查、代码质量审查和正式 op-queue/API 入口设计。自动执行锁永久残留、target 枚举异常遗留 tab 两项留到最后收尾风险把控时单独讨论。步骤 10 的翻页、步骤 12/13 的目标工单打开与新 tab 定位是既有能力，后续不得重复实现。
-
-  **工作区整理门禁（2026-06-27）**：当前 `/Users/chat/claude` 工作区存在大量未提交、跨项目改动。继续 A1 代码质量复核或接正式 op-queue/API 入口前，必须先整理变更来源和提交边界：区分售后 A1 已验证链路与 CodexPro 文档/Step14 小补丁、历史未提交文件、其他项目（codex-monitor/product-mapping/lkwj 等）改动；不得把无关项目混入售后提交；不得回滚用户或其他 agent 的改动；必要时先用 `git status --short`、`git diff -- <path>` 和窄范围测试确认每组改动归属。
+  **当前门禁**：完整确认口径、已编码草案和未闭合范围统一记录在 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。2026-06-26 已验证单工单真实采集和模拟写回；2026-06-26/27 已验证账号 14 关闭自动执行的最小整账号固定清单批次；2026-06-27 后端 `op-queue/API` 入口已接入且默认 no-auto。接入前端按钮、重启加载正式入口或自动执行真实工单前，必须先审查后端入口、确认用户授权和失败闭环。自动执行锁永久残留、target 枚举异常遗留 tab 两项留到最后收尾风险把控时单独讨论。步骤 10 的翻页、步骤 12/13 的目标工单打开与新 tab 定位是既有能力，后续不得重复实现。
 
 ---
 

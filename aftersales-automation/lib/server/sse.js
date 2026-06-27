@@ -36,11 +36,12 @@ const EVENT_MAP = {
 
 WATCH_FILES.forEach(file => {
   const filePath = path.join(DATA_DIR, file);
-  fs.watchFile(filePath, { interval: 500 }, (curr, prev) => {
+  const watcher = fs.watchFile(filePath, { interval: 500 }, (curr, prev) => {
     if (curr.mtime > prev.mtime) {
       broadcast(EVENT_MAP[file], { file, ts: curr.mtime.toISOString() });
     }
   });
+  if (watcher && typeof watcher.unref === 'function') watcher.unref();
 });
 
 module.exports = { addClient, broadcast };

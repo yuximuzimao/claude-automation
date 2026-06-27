@@ -47,7 +47,7 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 ```text
 安全打开账号 → 固定导航售后列表 → 排序/读取 → 精确打开目标工单
             → 单工单完整采集验证 → 最小整账号固定清单批次验证
-            → 正式 op-queue/API 入口（未交付）
+            → 后端 op-queue/API 入口（已接入，未接前端按钮）
 ```
 
 旧 `scan-all.js → queue → collect → infer → auto-execute` 链路尚未完成安全迁移，不代表当前可用入口。
@@ -58,7 +58,7 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 - **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
 - **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
 - **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗
-- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；正式 UI/队列入口和自动执行真实工单仍未交付
+- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；后端入口 `POST /api/accounts/:num/a1-fixed-batch` 已接入 `op-queue` 且默认关闭自动执行，正式前端按钮和自动执行真实工单仍未交付
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
@@ -75,4 +75,4 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 | [docs/erp-query.md](docs/erp-query.md) | ERP 商品对应表/档案V2 操作规范 |
 | [docs/ops-tech.md](docs/ops-tech.md) | ERP 操作报错/技术排查 |
 | [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 固定清单已确认业务口径、原系统数据流要求和未闭合质量问题 |
-| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 账号14最小整账号批次验证、仍禁止事项和下一步入口设计 |
+| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 账号14最小整账号批次验证、后端入口状态和仍禁止事项 |

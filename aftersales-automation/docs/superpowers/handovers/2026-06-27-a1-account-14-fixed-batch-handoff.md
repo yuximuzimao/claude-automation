@@ -1,13 +1,13 @@
 # A1 账号 14 最小整账号固定清单批次交接
 
 > 日期：2026-06-27  
-> 状态：账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；正式 UI/队列入口和自动执行真实工单仍未交付。
+> 状态：账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 op-queue/API 入口已接入；正式前端按钮和自动执行真实工单仍未交付。
 
 ## 结论
 
 A1 已从“单工单完整采集验证”推进到“单账号最小整账号固定清单批次验证”。这证明步骤 14 的 no-auto 固定清单串行链路可以在真实页面下完成多张工单的列表定位、详情 tab、采集、推理、写回和关闭详情 tab。
 
-但这仍不是正式交付。当前没有接前端按钮，没有接正式 op-queue/API 入口，没有重启加载正式入口，也没有放开真实 approve/reject。
+但这仍不是可点 UI 交付。当前已接后端 op-queue/API 入口，但没有接前端按钮，没有重启加载正式入口，也没有放开真实 approve/reject。
 
 ## 验证对象
 
@@ -37,13 +37,13 @@ A1 已从“单工单完整采集验证”推进到“单账号最小整账号�
 - 不得把步骤 14 做成独立结果系统；仍必须写回原 `queue.json`、`simulations.jsonl` 和原三标签页语义。
 - 不得复用旧 `scan-all.js`、旧 `/api/scan`、旧 `collect.js` / `pipeline.js` 作为 A1 正式入口。
 
-## 2026-06-27 CodexPro 本轮补丁结果
+## 2026-06-27 CodexPro 第一轮补丁结果
 
 本轮只处理 `aftersales-automation`，没有继续修改 Codex Monitor、product-mapping、lkwj 或其他项目。
 
 已完成：
 
-1. 文档同步：`tasks/todo.md`、本确认计划、`README.md`、`SKILL.md` 均已从“最小整账号批次未验证”同步为“账号 14 no-auto 最小整账号批次已验证；正式入口仍未交付”。
+1. 文档同步：`tasks/todo.md`、本确认计划、`README.md`、`SKILL.md` 均已从“最小整账号批次未验证”同步为“账号 14 no-auto 最小整账号批次已验证；当时正式入口仍未交付”。
 2. Step 14 safety patch：复用旧 queue item 时强制修正为 `mode:"live"` / `source:"fixed_batch"`，避免旧来源语义污染固定清单状态流转。
 3. 失败可见性：翻页、详情处理、关闭 tab 等逐单异常会优先写回 `status:"simulated"` 的人工复核 simulation，不再只在进度里标记 `failed` 后直接抛错。
 4. 账号边界 fail-closed：只要当前上下文有目标店铺名，关闭详情 tab 和账号收尾清理都必须具备 `readShopName` 店铺态校验依赖；缺失时拒绝关闭，避免误关其他账号或用户手动鲸灵 tab。
@@ -54,11 +54,19 @@ A1 已从“单工单完整采集验证”推进到“单账号最小整账号�
 - `npm test`：209/209 通过。
 - 未运行真实浏览器、未访问鲸灵/ERP、未重启 server、未接前端按钮、未真实 approve/reject。
 
+## 2026-06-27 CodexPro 第二轮后端入口结果
+
+已完成：
+
+1. 新增后端入口 `POST /api/accounts/:num/a1-fixed-batch`，只接收显式单账号参数。
+2. 入口校验账号存在和 session 文件存在，失败时拒绝入队。
+3. 入队走 `op-queue` 串行化，类型为 `a1-fixed-batch`，默认 `thresholdHours:48` 且强制 `disableAutoExecute:true`。
+4. 未接前端按钮、未重启 server、未运行真实浏览器、未访问鲸灵/ERP、未真实 approve/reject。
+
 ## 下一步
 
-1. 本地 CLI 先做代码质量审查，重点看本轮 Step 14 小补丁是否保持 KISS：queue 复用、失败写回、账号边界清理、no-auto 控制。
-2. 设计正式 op-queue/API 入口：单账号、显式确认、默认关闭自动执行；不要复用旧 `scan-all.js`、旧 `/api/scan`、旧 `collect.js` / `pipeline.js` 作为 A1 入口。
-3. 后端入口有测试后，再讨论前端按钮。
-4. 自动执行真实工单前，再单独处理 auto-execution journal 的恢复、人工审计和失败闭环。
+1. 本地 CLI 先审查后端入口：`POST /api/accounts/:num/a1-fixed-batch` 必须保持单账号、显式账号参数、默认关闭自动执行；不要复用旧 `scan-all.js`、旧 `/api/scan`、旧 `collect.js` / `pipeline.js` 作为 A1 入口。
+2. 后端入口确认无误后，再讨论前端按钮。
+3. 自动执行真实工单前，再单独处理 auto-execution journal 的恢复、人工审计和失败闭环。
 
 前端按钮仍应排在后端入口和测试之后。
