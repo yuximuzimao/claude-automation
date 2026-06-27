@@ -49,13 +49,10 @@
     <div class="toolbar">
       <h2>待确认 <span id="pending-count" class="count-badge">—</span></h2>
       <div class="toolbar-actions">
-        <!-- [stopped-2026-06-16] 停旧系统：扫描工单/批量执行/批量重来 驱动旧多账号注入+pipeline 自动写鲸灵（被封 IP 路径），
-             前端入口已摘除，待第二三步以新安全注入路径重建。对应 JS 函数与后端路由保留为零件，前端不可达。
         <button id="scan-btn" class="btn-primary" onclick="scanTickets()">扫描工单</button>
         <span id="next-scan-label" style="font-size:12px;color:#888;margin-left:4px"></span>
         <button class="btn-ghost" onclick="batchExecute()">批量执行</button>
         <button class="btn-ghost" onclick="batchReprocess()">批量重来</button>
-        -->
       </div>
     </div>
     <div id="pending-list" class="ticket-list"></div>
