@@ -114,14 +114,24 @@ async function openAccountFlow(accountNum, options = {}) {
   // inject 分支（未登录 / 错号）：先清当前 tab 旧账号 cookie/storage，再注入目标账号。
   // 清场保证传给平台的只有新账号认证信息，不混旧账号（替代破坏性的退出登录）。
   const cleared = await steps.clearJlData(targetId);
-  if (!cleared || !cleared.success) {
-    return { success: false, error: cleared && cleared.error ? cleared.error : '注入前清理失败', targetId };
+  if (!cleared || cleared.success !== true || cleared.verified !== true) {
+    return {
+      success: false,
+      error: cleared && cleared.error ? cleared.error : '注入前清理验证失败',
+      targetId,
+    };
   }
-  const injected = await steps.inject(accountNum);
+  const injected = await steps.inject(accountNum, { targetId });
   if (!injected || !injected.success) {
     return { success: false, error: injected && injected.error ? injected.error : '注入目标账号失败', targetId };
   }
-  return { ...injected, success: true, action: 'inject', targetId };
+  return {
+    ...injected,
+    success: true,
+    action: 'inject',
+    targetId,
+    matchedNote: accountNote,
+  };
 }
 
 module.exports = {

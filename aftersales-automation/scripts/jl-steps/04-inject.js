@@ -9,7 +9,7 @@
  * 流程：
  *   1. 调用 sessions/jl.js inject <num>（复用现有注入，保持 CLI 契约）
  *   2. 注入成功后等 8 秒（规则：等登录态跳转稳定）
- *   3. 找鲸灵 tab，用 lib/jl/login-state 判据验证：
+ *   3. 找鲸灵 tab，固定导航售后列表，再用 lib/jl/login-state 判据验证：
  *        state=logged-in 且 店铺名匹配目标账号 → 成功
  *        否则报异常停止（不假装成功）
  *
@@ -20,6 +20,7 @@
  * 用法：
  *   node scripts/jl-steps/04-inject.js <accountNum>            # 默认等 8s
  *   node scripts/jl-steps/04-inject.js <accountNum> <waitMs>   # 自定义等待
+ *   编排调用 inject(accountNum, { targetId })                  # 只操作已解析/已清理 tab
  *
  * 风控铁律：scrm.jlsupp.com 报错即停，绝不重试。真实写操作（注入登录）。
  */
@@ -33,6 +34,7 @@ const { judgeLoginState, matchShopName, shopKeyword, READ_LOGIN_STATE_JS, JL_DOM
 const SESSIONS_DIR = path.join(__dirname, '../../../sessions');
 const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
 const DEFAULT_WAIT_MS = 8000;
+const AFTER_SALE_LIST_URL = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
 
 /** 读账号 note（供店铺名匹配验证用） */
 function getAccountNote(accountNum) {
@@ -45,13 +47,41 @@ function getAccountNote(accountNum) {
   }
 }
 
+function normalizeInjectOptions(waitMsOrOptions) {
+  if (waitMsOrOptions && typeof waitMsOrOptions === 'object') {
+    return {
+      waitMs: waitMsOrOptions.waitMs == null ? DEFAULT_WAIT_MS : Number(waitMsOrOptions.waitMs),
+      targetId: waitMsOrOptions.targetId ? String(waitMsOrOptions.targetId) : null,
+    };
+  }
+  return {
+    waitMs: waitMsOrOptions == null ? DEFAULT_WAIT_MS : Number(waitMsOrOptions),
+    targetId: null,
+  };
+}
+
+function resolveInjectionTargetId(explicitTargetId, targets = []) {
+  if (explicitTargetId) return String(explicitTargetId);
+
+  const jlTabs = targets.filter(t =>
+    t && t.type === 'page' && t.url && t.url.includes(JL_DOMAIN)
+  );
+  if (jlTabs.length === 0) throw new Error('注入后未找到鲸灵 tab');
+  if (jlTabs.length > 1) {
+    throw new Error(`注入后发现多个鲸灵 tab（${jlTabs.length}），必须明确传入 targetId`);
+  }
+  if (!jlTabs[0].id) throw new Error('唯一鲸灵 tab 缺少 targetId');
+  return jlTabs[0].id;
+}
+
 /**
  * 注入目标账号并验证登录。
  * @param {string|number} accountNum 账号编号
- * @param {number} waitMs 注入后等待毫秒（默认 8000）
+ * @param {number|{waitMs?:number,targetId?:string}} waitMsOrOptions 等待时间或编排目标
  */
-async function inject(accountNum, waitMs = DEFAULT_WAIT_MS) {
+async function inject(accountNum, waitMsOrOptions = DEFAULT_WAIT_MS) {
   if (!accountNum) return { success: false, error: '缺少 accountNum' };
+  const { waitMs, targetId: requestedTargetId } = normalizeInjectOptions(waitMsOrOptions);
 
   // 1. 调 jl.js inject（复用现有注入逻辑）
   const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
@@ -65,35 +95,34 @@ async function inject(accountNum, waitMs = DEFAULT_WAIT_MS) {
   // 2. 等注入写入稳定（规则：等 8s）
   await new Promise(r => setTimeout(r, waitMs));
 
-  // 3. 找鲸灵 tab
-  let targets;
-  try {
-    targets = await cdp.getTargets();
-  } catch (e) {
-    return { success: false, error: `列出 tab 失败: ${e.message}` };
+  // 3. 编排调用只使用已解析/已清理 targetId；CLI 兼容路径只接受唯一鲸灵 tab。
+  let targets = [];
+  if (!requestedTargetId) {
+    try {
+      targets = await cdp.getTargets();
+    } catch (e) {
+      return { success: false, error: `列出 tab 失败: ${e.message}` };
+    }
   }
-  const jlTab = (targets || []).find(t => t.type === 'page' && t.url && t.url.includes(JL_DOMAIN));
-  if (!jlTab) {
-    return { success: false, error: '注入后未找到鲸灵 tab' };
+  let targetId;
+  try {
+    targetId = resolveInjectionTargetId(requestedTargetId, targets);
+  } catch (e) {
+    return { success: false, error: e.message };
   }
 
-  // 4. 刷新页面让注入的 session 在页面生效。
-  //    jl.js inject 已去掉注入后导航（纯注入只写 cookie/localStorage），页面仍停在注入前
-  //    的 login/未登录态，不重新加载平台就识别不到登录 → 必报"注入后仍未登录"。
-  //    用 Page.reload 原地刷新（等价用户手动 F5/Ctrl+R，不指定 URL），让平台用注入的
-  //    cookie 自行跳转后台。不导航到指定地址——避免引入新的页面行为，纯刷新最贴近真人。
-  //    报错即停，不重试。
+  // 4. 固定进入售后列表，让新认证态生效且不继承旧详情页上下文。
   try {
-    await cdp.reload(jlTab.id);
+    await cdp.navigate(targetId, AFTER_SALE_LIST_URL);
   } catch (e) {
-    return { success: false, error: `注入后刷新页面失败: ${e.message}` };
+    return { success: false, error: `注入后导航售后列表失败: ${e.message}` };
   }
   // 5. 再等登录态跳转稳定（规则：等 8s）
   await new Promise(r => setTimeout(r, waitMs));
 
   let info;
   try {
-    const raw = await cdp.eval(jlTab.id, READ_LOGIN_STATE_JS);
+    const raw = await cdp.eval(targetId, READ_LOGIN_STATE_JS);
     info = typeof raw === 'string' ? JSON.parse(raw) : raw;
   } catch (e) {
     return { success: false, error: `读取登录态失败: ${e.message}` };
@@ -109,7 +138,7 @@ async function inject(accountNum, waitMs = DEFAULT_WAIT_MS) {
         error: `注入后店铺名不匹配目标账号：页面="${judged.shopName}" 期望含关键字="${shopKeyword(note)}"（note="${note}"）`,
       };
     }
-    return { success: true, loggedIn: true, shopName: judged.shopName, accountNum: String(accountNum), matchedNote: note, url: judged.url, targetId: jlTab.id };
+    return { success: true, loggedIn: true, shopName: judged.shopName, accountNum: String(accountNum), matchedNote: note, url: judged.url, targetId };
   }
   if (judged.success && judged.state === 'logged-out') {
     return { success: false, error: `注入后仍未登录（session 可能失效）: ${judged.url}` };
@@ -132,4 +161,10 @@ if (require.main === module) {
     });
 }
 
-module.exports = { inject, DEFAULT_WAIT_MS };
+module.exports = {
+  inject,
+  normalizeInjectOptions,
+  resolveInjectionTargetId,
+  DEFAULT_WAIT_MS,
+  AFTER_SALE_LIST_URL,
+};

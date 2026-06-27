@@ -272,6 +272,7 @@ function closeTarget(targetId) {
 //     JSESSIONID（真正的登录凭证）——漏清它会导致新账号注入后混入旧账号登录态。
 //     (2026-06-17 真机+Codex 审查证实此盲区)
 //   - 取到全集后逐条 deleteCookies(name+domain+path)，domain 原样回传(含前导点)
+//   - 删除后用相同 urls 复查；仅 JSESSIONID/_us 残留会阻止后续注入
 //   - 绝不用 Network.clearBrowserCookies(会清掉整个浏览器含 ERP 登录)
 //   - 报错即停，任一调用失败直接抛
 const JL_COOKIE_URLS = [
@@ -279,14 +280,18 @@ const JL_COOKIE_URLS = [
   'https://seller-portal.jlsupp.com/',
   'https://seller-portal.jlsupp.com/merchant',
 ];
+const JL_AUTH_COOKIE_NAMES = new Set(['JSESSIONID', '_us']);
+
+function isJlCookie(cookie) {
+  return typeof cookie.domain === 'string' &&
+    cookie.domain.replace(/^\./, '').endsWith('jlsupp.com');
+}
+
 async function clearJlCookiesAndStorage(targetId) {
   if (!targetId) throw new Error('clearJlCookiesAndStorage 缺少 targetId');
   const res = await cdp.cdpCall(targetId, 'Network.getCookies', { urls: JL_COOKIE_URLS });
   const all = (res && res.cookies) || [];
-  const jlCookies = all.filter(c =>
-    typeof c.domain === 'string' &&
-    c.domain.replace(/^\./, '').endsWith('jlsupp.com')
-  );
+  const jlCookies = all.filter(isJlCookie);
   // 去重（不同 urls 可能返回同一 cookie），按 name+domain+path 唯一
   const seen = new Set();
   const deleted = [];
@@ -303,7 +308,27 @@ async function clearJlCookiesAndStorage(targetId) {
     deleted.push({ name: c.name, domain: c.domain, path: c.path || '/' });
   }
   await cdp.eval(targetId, 'localStorage.clear(); sessionStorage.clear(); "ok"');
-  return { deletedCount: deleted.length, deletedCookies: deleted };
+  const verification = await cdp.cdpCall(targetId, 'Network.getCookies', { urls: JL_COOKIE_URLS });
+  const remainingAuthCookies = Array.from(new Map(
+    ((verification && verification.cookies) || [])
+      .filter(c => isJlCookie(c) && JL_AUTH_COOKIE_NAMES.has(c.name))
+      .map(c => {
+        const item = { name: c.name, domain: c.domain, path: c.path || '/' };
+        return [`${item.name}@${item.domain}${item.path}`, item];
+      })
+  ).values());
+  if (remainingAuthCookies.length > 0) {
+    const locations = remainingAuthCookies
+      .map(c => `${c.name}@${c.domain}${c.path}`)
+      .join(', ');
+    throw new Error(`清理后认证 Cookie 验证失败，仍存在: ${locations}`);
+  }
+  return {
+    deletedCount: deleted.length,
+    deletedCookies: deleted,
+    verified: true,
+    remainingAuthCookies: [],
+  };
 }
 
 const cdp = {

@@ -25,3 +25,11 @@ test('jl inject 只注入认证态，不主动导航或依赖导航后页面自�
   assert.equal(source.includes('__vue__'), false);
   assert.equal(source.includes('window.location.href'), false);
 });
+
+test('jl inject 从 9222 json/version 获取同一 Chrome 的 WebSocket 地址', () => {
+  const source = injectSessionSource();
+
+  assert.doesNotMatch(source, /readFileSync\([^\n]*DevToolsActivePort/);
+  assert.match(source, /\/json\/version/);
+  assert.match(source, /webSocketDebuggerUrl/);
+});

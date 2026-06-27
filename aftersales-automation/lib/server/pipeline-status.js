@@ -1,7 +1,8 @@
 'use strict';
 
 function getSkipCompletionStatus(queueItem) {
-  return queueItem && queueItem.source === 'scan' ? 'auto_executed' : 'done';
+  const source = queueItem && queueItem.source;
+  return source === 'scan' || source === 'fixed_batch' ? 'auto_executed' : 'done';
 }
 
 module.exports = { getSkipCompletionStatus };

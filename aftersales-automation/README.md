@@ -1,16 +1,18 @@
 # 鲸灵售后自动化
 
-自动处理鲸灵平台（scrm.jlsupp.com）售后工单——扫描、采集、规则推理、退款审批/拒绝。通过 CDP 直连 Chrome 操作鲸灵 SCRM 和快麦 ERP。
+鲸灵平台（scrm.jlsupp.com）售后工单辅助系统，通过 CDP 直连 Chrome 操作鲸灵 SCRM 和快麦 ERP。当前运行在纯手动模式：旧自动扫描、自动入队和批量执行入口已停用，新 A1 逐账号扫描闭环正在重建。
 
 ## 快速启动
 
 ```bash
 npm install
-npm test                # 运行推理层单元测试
-node scan-all.js        # 扫描所有账号写入队列
+npm test                # 运行全量单元测试
+open http://localhost:3457  # 打开由 launchd 管理的 Web 面板
 ```
 
-**server.js 由 launchd 管理**（`~/Library/LaunchAgents/com.jl.server.plist`），Mac 启动时自动拉起，崩溃自动重启。手动重启用 `/aftersales-restart` skill。
+> `scan-all.js`、旧 `/api/scan` 和批量执行链路仅保留为待迁移代码，禁止作为当前入口运行。安全账号打开必须走店铺管理按钮或 `scripts/jl-steps/open-account.js`。
+
+**server.js 由 launchd 管理**（`~/Library/LaunchAgents/com.heizong.aftersale-server.plist`），Mac 启动时自动拉起，崩溃自动重启；旧 `com.jl.server.plist` 已改名为 `.disabled`。手动重启用 `/aftersales-restart` skill。
 
 ```bash
 # 手动重启（用 skill，不要直接 kill）
@@ -18,9 +20,9 @@ node scan-all.js        # 扫描所有账号写入队列
 ```
 
 Web 面板功能：工单队列管理、推理结果确认、历史记录、统计复盘、店铺管理。
-店铺管理中的重新登录会先保存 session，再通过扫描或刷新状态验证；已保存但未验证的账号显示为「未扫描」。
+店铺管理中的重新登录会先保存 session；已保存但未单账号验证的账号显示为「未扫描」。账号状态通过“打开店铺后台”的安全编排或后续新 A1 单账号流程验证，已删除批量刷新状态功能。
 
-## CLI 命令（17 个）
+## CLI 命令
 
 ```bash
 node cli.js list                              # 读工单列表（≤48h 倒计时）
@@ -35,19 +37,28 @@ node cli.js approve <工单号>                   # 同意退款（自动处理�
 node cli.js reject <工单号> <原因> <详情> [图片] # 拒绝退款（含物流截图上传）
 node cli.js add-note <工单号> <备注>            # 添加内部备注
 node cli.js remind <工单号> <账号> <原因>        # 创建 Mac 提醒事项
+node cli.js reset-circuit                        # 人工确认后清除风控熔断
 ```
 
 ## 架构
 
-```
-scan-all.js → queue.json → collect.js → simulations.jsonl → infer.js → approve/reject
-   (多账号扫描)   (队列)     (数据采集)      (推理结果)     (规则引擎)   (执行)
+当前目标链路：
+
+```text
+安全打开账号 → 固定导航售后列表 → 排序/读取 → 精确打开目标工单
+            → 单工单完整采集验证 → 最小整账号固定清单批次验证
+            → 正式 op-queue/API 入口（未交付）
 ```
 
-- **Pipeline**（`lib/server/pipeline.js`）：scan → collect → infer → auto-execute
+旧 `scan-all.js → queue → collect → infer → auto-execute` 链路尚未完成安全迁移，不代表当前可用入口。
+
+- **Pipeline**（`lib/server/pipeline.js`）：保留 collect → infer → execute 能力；旧 scan/auto-execute 入口停用，等待新 A1 接管
 - **Op-queue**（`lib/server/op-queue.js`）：全局操作队列，串行化浏览器操作
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
 - **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
+- **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
+- **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗
+- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；正式 UI/队列入口和自动执行真实工单仍未交付
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
@@ -63,3 +74,5 @@ scan-all.js → queue.json → collect.js → simulations.jsonl → infer.js →
 | [docs/flow-5.4.md](docs/flow-5.4.md) | 换货流程 |
 | [docs/erp-query.md](docs/erp-query.md) | ERP 商品对应表/档案V2 操作规范 |
 | [docs/ops-tech.md](docs/ops-tech.md) | ERP 操作报错/技术排查 |
+| [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 固定清单已确认业务口径、原系统数据流要求和未闭合质量问题 |
+| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 账号14最小整账号批次验证、仍禁止事项和下一步入口设计 |

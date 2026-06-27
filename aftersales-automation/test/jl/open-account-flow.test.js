@@ -19,10 +19,10 @@ function makeSteps(loginState, calls) {
     },
     clearJlData: async (targetId) => {
       calls.push(`clearJlData:${targetId}`);
-      return { success: true, targetId, deletedCount: 3 };
+      return { success: true, verified: true, remainingAuthCookies: [], targetId, deletedCount: 3 };
     },
-    inject: async (accountNum) => {
-      calls.push(`inject:${accountNum}`);
+    inject: async (accountNum, options) => {
+      calls.push(`inject:${accountNum}:${options && options.targetId}`);
       return { success: true, loggedIn: true, shopName: '合肥百浩创展贸易有限公司', accountNum: String(accountNum) };
     },
     countJlTabs: async () => {
@@ -66,8 +66,9 @@ test('openAccountFlow：已登录但错号时先清 cookie 再注入目标账号
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'inject');
+  assert.equal(result.matchedNote, '百浩-RITEKOKO');
   // 错号现在走 clearJlData → inject，不含 logout
-  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3']);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3:tab-1']);
   assert.equal(calls.includes('logout:tab-1'), false);
 });
 
@@ -80,7 +81,8 @@ test('openAccountFlow：确证未登录时先清 cookie 再注入目标账号', 
 
   assert.equal(result.success, true);
   assert.equal(result.action, 'inject');
-  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3']);
+  assert.equal(result.matchedNote, '百浩-RITEKOKO');
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1', 'inject:3:tab-1']);
 });
 
 test('openAccountFlow：清理失败则不注入，报错即停', async () => {
@@ -96,6 +98,22 @@ test('openAccountFlow：清理失败则不注入，报错即停', async () => {
   assert.equal(result.success, false);
   assert.match(result.error, /清理/);
   // clearJlData 失败后绝不调用 inject
+  assert.equal(calls.includes('inject:3'), false);
+  assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1']);
+});
+
+test('openAccountFlow：清理返回 success:true 但 verified:false 时不得注入', async () => {
+  const calls = [];
+  const steps = makeSteps({ success: true, state: 'logged-out', loggedIn: false }, calls);
+  steps.clearJlData = async (targetId) => {
+    calls.push(`clearJlData:${targetId}`);
+    return { success: true, verified: false, remainingAuthCookies: ['JSESSIONID'] };
+  };
+
+  const result = await openAccountFlow(3, { note: '百浩-RITEKOKO', steps });
+
+  assert.equal(result.success, false);
+  assert.match(result.error, /清理|验证/);
   assert.equal(calls.includes('inject:3'), false);
   assert.deepEqual(calls, ['countJlTabs', 'openLogin', 'readShopName:tab-1', 'clearJlData:tab-1']);
 });

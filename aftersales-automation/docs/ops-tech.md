@@ -136,9 +136,15 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 
 **店铺管理状态显示**：
 - `hasFile=false`：没有保存 session，显示「添加登录」。
-- `hasFile=true + status=unknown`：已有 session 文件但未扫描验证，显示「未扫描」，不显示「重新登录」。
+- `hasFile=true + status=unknown`：已有 session 文件但未单账号验证，显示「未扫描」，不显示「重新登录」。
 - `status=expired/error`：登录失效或扫描异常，显示「重新登录」。
-- 重新登录保存成功后先写 `unknown`，必须通过后续扫描或刷新状态验证成 `ok`。
+- 重新登录保存成功后先写 `unknown`，只能通过店铺管理“打开后台”的安全编排或未来新 A1 单账号流程验证成 `ok`；批量刷新状态功能已删除，禁止恢复。
+
+**安全切换门禁（2026-06-19）**：
+1. `openAccountFlow` 先确定唯一鲸灵 `targetId` 并读取实时店铺名；目标账号已登录时直接复用。
+2. 未登录或错号时，只清 jlsupp 子域 Cookie/storage；删除后再次读取，`JSESSIONID/_us` 任一残留都返回失败。
+3. 只有 `success === true && verified === true` 才调用 04 注入，并把同一个 `targetId` 传入；禁止重新选择“第一个鲸灵 tab”。
+4. 注入后固定导航 `https://scrm.jlsupp.com/micro-customer/business/after-sale-list`，再校验店铺名；禁止 `Page.reload` 继承旧工单详情 URL。
 
 **重新登录待确认生命周期**：
 1. 前端 `POST /api/accounts/:num/relogin`，后端启动 `../sessions/jl.js --auto-save`，写入 `../sessions/.relogin-port-<num>`。
@@ -340,7 +346,7 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 | ERP 搜索后无结果 | 用了主订单号而非子订单号 | 永远用子订单号（纯数字） |
 | 套件辨识错误 | 靠商品名猜套件 | 必须查档案V2 subItemNum 字段 |
 | 店铺管理一直显示「确认保存」 | 重新登录页已关闭或无待确认 port 文件 | 调 `POST /api/accounts/:num/relogin-cancel` 清理前端状态，恢复「重新登录」 |
-| 重新登录保存后仍显示「重新登录」 | 保存后 `status=unknown` 被当作失效状态 | `unknown + hasFile` 是未扫描，不是失效；执行扫描/刷新状态验证 |
+| 重新登录保存后仍显示「重新登录」 | 保存后 `status=unknown` 被当作失效状态 | `unknown + hasFile` 是未单账号验证，不是失效；通过店铺管理“打开后台”安全验证 |
 | 扫描后工单消失 | `scan-all.js` 切账号后未同步 `data/current-session.json` | 成功注入账号后立即写 current-session，再采集/重处理 |
 
 ---

@@ -16,6 +16,16 @@ describe('pipeline terminal skip visibility', () => {
     assert.equal(status, 'auto_executed');
   });
 
+  it('A1 固定清单来源的终态 skip 也进入已自动执行列表', () => {
+    const status = getSkipCompletionStatus({
+      source: 'fixed_batch',
+      mode: 'live',
+      workOrderNum: '100001781000000000003',
+    });
+
+    assert.equal(status, 'auto_executed');
+  });
+
   it('非扫描来源的终态 skip 仍直接完成', () => {
     const status = getSkipCompletionStatus({
       source: 'web',

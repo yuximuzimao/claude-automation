@@ -14,7 +14,7 @@
  * cdp.clearJlCookiesAndStorage 已显式覆盖全部 jlsupp 子域。
  *
  * 输出（stdout，单行 JSON）：
- *   { success:true, targetId, deletedCount }
+ *   { success:true, targetId, deletedCount, verified:true, remainingAuthCookies:[] }
  *   { success:false, error }
  *
  * 用法：node scripts/jl-steps/07-clear-jl-data.js <targetId>
@@ -29,7 +29,15 @@ async function clearJlData(targetId) {
   if (!targetId) return { success: false, error: '缺少 targetId' };
   try {
     const r = await cdp.clearJlCookiesAndStorage(targetId);
-    return { success: true, targetId, deletedCount: r.deletedCount, deletedCookies: r.deletedCookies };
+    if (r.verified !== true) {
+      return {
+        ...r,
+        success: false,
+        targetId,
+        error: '清理鲸灵数据失败: 认证 Cookie 清理验证失败',
+      };
+    }
+    return { ...r, success: true, targetId };
   } catch (e) {
     return { success: false, error: `清理鲸灵数据失败: ${e.message}`, targetId };
   }

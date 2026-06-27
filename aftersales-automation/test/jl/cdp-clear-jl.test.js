@@ -5,13 +5,15 @@ const assert = require('node:assert/strict');
 const cdp = require('../../lib/cdp');
 
 // mock cdp.cdpCall + cdp.eval，验证 clearJlCookiesAndStorage 行为
-function withMockedCdp(getCookiesResult, fn) {
+function withMockedCdp(getCookiesResults, fn) {
   const origCdpCall = cdp.cdpCall;
   const origEval = cdp.eval;
   const calls = { cdpCall: [], eval: [], deleted: [] };
+  const results = Array.isArray(getCookiesResults) ? getCookiesResults : [getCookiesResults, { cookies: [] }];
+  let getCookiesIndex = 0;
   cdp.cdpCall = async (targetId, method, params) => {
     calls.cdpCall.push({ method, params });
-    if (method === 'Network.getCookies') return getCookiesResult;
+    if (method === 'Network.getCookies') return results[getCookiesIndex++] || { cookies: [] };
     if (method === 'Network.deleteCookies') { calls.deleted.push(params); return {}; }
     return {};
   };
@@ -52,11 +54,54 @@ test('clearJlCookiesAndStorage：只删 jlsupp 域，绝不碰 ERP(superboss.cc)
 test('clearJlCookiesAndStorage：getCookies 显式带全 jlsupp 子域 urls', async () => {
   await withMockedCdp(MIXED_COOKIES, async (calls) => {
     await cdp.clearJlCookiesAndStorage('tab-x');
-    const getCall = calls.cdpCall.find(c => c.method === 'Network.getCookies');
-    assert.ok(getCall.params.urls, 'getCookies 必须带 urls（否则漏 seller-portal 的 JSESSIONID）');
-    const urls = getCall.params.urls.join(' ');
-    assert.ok(urls.includes('scrm.jlsupp.com'));
-    assert.ok(urls.includes('seller-portal.jlsupp.com'));
+    const getCalls = calls.cdpCall.filter(c => c.method === 'Network.getCookies');
+    assert.equal(getCalls.length, 2, '删除后必须再次读取 cookie 验证认证态已清除');
+    for (const getCall of getCalls) {
+      assert.ok(getCall.params.urls, 'getCookies 必须带 urls（否则漏 seller-portal 的 JSESSIONID）');
+      const urls = getCall.params.urls.join(' ');
+      assert.ok(urls.includes('scrm.jlsupp.com'));
+      assert.ok(urls.includes('seller-portal.jlsupp.com'));
+    }
+  });
+});
+
+test('clearJlCookiesAndStorage：清理后认证 Cookie 已消失则返回验证结果，WAF/设备 Cookie 可重生', async () => {
+  const regeneratedCookies = {
+    cookies: [
+      { name: 'ssxmod_itna', value: 'waf-regenerated', domain: '.jlsupp.com', path: '/' },
+      { name: 'device_id', value: 'device-regenerated', domain: 'scrm.jlsupp.com', path: '/' },
+    ],
+  };
+  await withMockedCdp([MIXED_COOKIES, regeneratedCookies], async () => {
+    const result = await cdp.clearJlCookiesAndStorage('tab-x');
+    assert.equal(result.verified, true);
+    assert.deepEqual(result.remainingAuthCookies, []);
+  });
+});
+
+test('clearJlCookiesAndStorage：清理后 JSESSIONID 或 _us 仍在则抛错且不泄露 Cookie 值', async () => {
+  const secretSession = 'secret-session-value';
+  const secretUs = 'secret-us-value';
+  const remaining = {
+    cookies: [
+      { name: 'JSESSIONID', value: secretSession, domain: 'seller-portal.jlsupp.com', path: '/merchant' },
+      { name: '_us', value: secretUs, domain: 'seller-portal.jlsupp.com', path: '/' },
+      { name: 'ssxmod_itna', value: 'allowed', domain: '.jlsupp.com', path: '/' },
+    ],
+  };
+  await withMockedCdp([MIXED_COOKIES, remaining], async () => {
+    let error;
+    try {
+      await cdp.clearJlCookiesAndStorage('tab-x');
+    } catch (e) {
+      error = e;
+    }
+    assert.ok(error, '认证 Cookie 仍在时必须阻止后续注入');
+    assert.match(error.message, /认证 Cookie.*JSESSIONID.*_us/);
+    assert.match(error.message, /seller-portal\.jlsupp\.com/);
+    assert.match(error.message, /\/merchant/);
+    assert.equal(error.message.includes(secretSession), false);
+    assert.equal(error.message.includes(secretUs), false);
   });
 });
 

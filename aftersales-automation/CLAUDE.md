@@ -6,7 +6,7 @@
 
 1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
 2. 读 `tasks/todo.md` — 确认当前待办和进度
-3. `node cli.js list` — 获取实时工单，**禁止沿用历史工单号**
+3. 只有处理真实工单时才运行 `node cli.js list` 获取实时列表；文档、单测和静态审查不得为此主动访问平台
 4. 读 `docs/INDEX.md` — 处理规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
 ## 规则文档（渐进式，按需加载）
@@ -30,6 +30,7 @@
 - 截图只用于上传凭证，禁止截图判断操作结果
 - 鲸灵行为操作报错即停（maxRetries=0，域名自动识别）；被动等待（导航）最多重试 1 次（共执行 2 次）。风控信号 → 全局熔断持久化到 `data/circuit-breaker.json`，需人工 `node cli.js reset-circuit`
 - 多账号扫描/采集/队列任一路径成功注入鲸灵账号后，必须同步 `data/current-session.json`；实际 tab 账号和缓存账号不一致会导致跳过注入、读空工单、误改 queue 状态。
+- 安全切换账号必须经过 `openAccountFlow`：清理后 `verified === true` 才能注入；注入必须绑定同一个 `targetId`，随后固定导航售后列表，禁止 `Page.reload` 继承旧工单详情 URL。
 
 ## 相关项目
 
@@ -61,5 +62,6 @@
 |------|------|----------|
 | 推理回归（44条） | `node test/flow-test.js` | 改 `lib/infer.js` 后 |
 | JL 账号/会话/重登（8条） | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/routes.js` 后 |
+| 全量回归 | `npm test` | 改账号切换、CDP、A1 编排或共享模块后 |
 
 **注意**：`node --test` 不接受目录路径，必须逐文件列出。
