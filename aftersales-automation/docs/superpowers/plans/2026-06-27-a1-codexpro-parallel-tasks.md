@@ -52,8 +52,11 @@ Give CodexPro these in order:
 2. Task 2: Step 14 small safety patch and tests.
 3. Task 3: CLI controllability tests.
 4. Task 4: op-queue/API design review or small implementation plan.
+5. Task 5: Live tab store filter and legacy cleanup review.
 
 Do not give CodexPro the final frontend button yet. That should wait until the op-queue/API entry is reviewed and verified.
+
+For the 2026-06-27 user request about `待确认` / `等待重查` store filters and old/new logic cleanup, start from `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`. The first pass is review-only: GPT/CodexPro should not edit code until risks and scope are reviewed.
 
 ---
 
@@ -243,7 +246,66 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 5: Auto-Execution Journal Recovery Design
+### Task 5: Review Live Tab Store Filter And Legacy Cleanup
+
+**Best fit for CodexPro:** Yes. This is the next review-first task before implementation.
+
+**Plan File:**
+- `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
+
+**Original User Requirement Summary:**
+- Add `全部` plus store/account filters to `待确认` and `等待重查`.
+- Preserve current deadline/urgency sorting.
+- When one store is selected, batch actions must apply only to that store, not hidden stores.
+- Review old logic after the new A1 flow has been introduced; classify what is still reused, what is transitional, and what must not be reused.
+- Do not create another local archive directory for old files. Either delete with git history as archive, or keep in place with clear classification.
+
+**Prompt To Give CodexPro:**
+
+```text
+你在 /Users/chat/claude/aftersales-automation。请只做审查，不改代码，不运行真实浏览器或业务脚本。
+
+请审查 docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md，并结合当前源码判断：
+
+1. 需求是否描述完整：待确认/等待重查店铺筛选、全部视角、仍按时效排序、筛选后批量操作只作用于当前店铺。
+2. 推荐解释是否合理：等待重查默认只允许批量重来，不允许批量执行。若你不同意，请说明业务和安全理由。
+3. 前端方案是否会造成“看起来筛选了，实际后端全量执行”的风险；如有，指出必须补的后端门禁。
+4. 后端 batch-execute / batch-reprocess 的 accountNum 和 statusScope 设计是否足够 fail-closed。
+5. 旧逻辑分类是否准确：哪些是新 A1 入口、哪些是仍复用的原系统语义、哪些是 transitional legacy、哪些是禁止作为 A1 入口的旧路径。
+6. 是否有遗漏的测试、文档或迁移风险。
+
+禁止运行：
+- node scripts/jl-steps/14-process-single-account-fixed-batch.js ...
+- node scripts/jl-steps/open-account.js ...
+- node scan-all.js
+- node collect.js
+- node cli.js approve/reject/read-ticket/logistics/erp-*
+- 任何会打开或操作 JL/ERP/Chrome 的命令
+
+允许运行：
+- rg
+- sed
+- nl
+- git diff
+- git status
+- node --check <file>
+
+请输出：
+- 高风险问题（按严重度排序，带文件/行号）
+- 需求歧义或需要用户确认的问题
+- 建议修改计划
+- 不要直接修改文件
+```
+
+**Acceptance Criteria:**
+- GPT review explicitly addresses scoped batch action risk.
+- GPT review distinguishes UI filtering from backend action scope.
+- GPT review challenges or accepts the “waiting tab only batch reprocess” interpretation.
+- GPT review identifies which old paths should be forbidden as A1 entries.
+
+---
+
+### Task 6: Auto-Execution Journal Recovery Design
 
 **Best fit for CodexPro:** Design/review now; implementation later.
 
@@ -283,7 +345,7 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 6: Frontend Button Plan Only
+### Task 7: Frontend Button Plan Only
 
 **Best fit for CodexPro:** Planning only for now.
 
@@ -330,6 +392,7 @@ Best CodexPro tasks right now:
 2. Step 14 safety patch: small, testable, no browser.
 3. CLI/no-auto tests: useful before op-queue entry.
 4. op-queue/API design: good planning task.
-5. Auto-exec recovery: design only, not implementation yet.
+5. Live tab store filter and legacy cleanup: review first, then implementation.
+6. Auto-exec recovery: design only, not implementation yet.
 
 Do not ask CodexPro to add the frontend button first. The backend entry and tests need to exist before a button is safe.
