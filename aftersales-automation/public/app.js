@@ -1939,8 +1939,8 @@ async function openAccountStore(num, statusKey) {
 
 async function runA1FixedBatch(num, btn) {
   const okToRun = confirm(
-    `确认将账号${num}的48小时固定清单加入队列吗？\n\n` +
-    `本入口只采集、推理并写回待确认，不会自动同意或拒绝退款。`
+    `确认处理账号${num}的工单吗？\n\n` +
+    `将采集当前48小时内工单并写回待确认，不会自动同意或拒绝退款。`
   );
   if (!okToRun) return;
   const originalText = btn ? btn.textContent : '';
@@ -1950,14 +1950,14 @@ async function runA1FixedBatch(num, btn) {
   }
   const res = await api(`/accounts/${num}/a1-fixed-batch`, { method: 'POST' });
   if (res.ok) {
-    showToast(res.message || `账号${num}固定清单已入队`);
+    showToast(res.message || `账号${num}工单处理已入队`);
     api('/op-queue').then(renderQueuePanel).catch(() => {});
   } else {
-    showToast(res.error || `账号${num}固定清单入队失败`, 'error');
+    showToast(res.error || `账号${num}工单处理入队失败`, 'error');
   }
   if (btn) {
     btn.disabled = false;
-    btn.textContent = originalText || 'A1固定清单';
+    btn.textContent = originalText || '处理工单';
   }
 }
 

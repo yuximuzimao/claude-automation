@@ -29,7 +29,7 @@
   }
 
   function renderA1FixedBatchButton(num) {
-    return `<button class="btn-ghost btn-sm btn-a1-fixed-batch" onclick="runA1FixedBatch(${num}, this)">A1固定清单</button>`;
+    return `<button class="btn-ghost btn-sm btn-a1-fixed-batch" onclick="runA1FixedBatch(${num}, this)">处理工单</button>`;
   }
 
   const api = {

@@ -62,5 +62,5 @@ test('A1 fixed-batch button renders a single-account no-auto action', () => {
   const html = renderA1FixedBatchButton(14);
 
   assert.match(html, /runA1FixedBatch\(14, this\)/);
-  assert.match(html, />A1固定清单</);
+  assert.match(html, />处理工单</);
 });
