@@ -77,7 +77,7 @@
 
 ## 2026-06 A1 逐账号扫描闭环待办
 
-> 当前交接入口：先读 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`，再读 `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`、`docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md` 和完整确认计划。账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 `op-queue/API` 入口已接入并经审查加固，前端单账号 no-auto 入队按钮代码已接入；live 三标签店铺筛选与批量 scope 加固已完成；auto-execution journal 恢复策略已完成设计但未实现。仍未重启加载、未放开真实自动执行。不要重启加载正式入口、不要真实 approve/reject。
+> 当前交接入口：先读 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`，再读 `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`、`docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`、`docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md` 和完整确认计划。账号 14 茗瑞-KGOS 的关闭自动执行最小整账号固定清单批次已验证；后端 `op-queue/API` 入口已接入并经审查加固，前端单账号 no-auto 入队按钮代码已接入；live 三标签店铺筛选与批量 scope 加固已完成；auto-execution journal 恢复策略已完成设计但未实现；前端按钮加载/只读冒烟计划已完成。仍未重启加载、未放开真实自动执行。不要重启加载正式入口、不要真实点击 A1 按钮、不要真实 approve/reject。
 
 - [x] **A1-atomic-08-12** 真机最小测试并沉淀原子脚本：点击「售后工单」、选择按逾期时间最近排序、读取 48h 内列表、列表准备编排、按指定工单号打开正确处理 tab。验证：相关 node:test 12/12，通过全量 `npm test` 119/119。
 - [x] **A1-chain-single-account-open-ticket** 已新增 `13-open-single-account-work-order.js`，串联 `openAccountFlow(num)` → `prepareAfterSaleList()` → urgent 目标门禁 → `clickWorkOrderAction(workOrderNum)`；只打开并定位正确工单详情 tab，不做同意/拒绝。相关测试 32/32，全量 `npm test` 129/129；真实账号/工单真机验证需用户指定目标后执行。
@@ -100,7 +100,7 @@
 
   **页面与账号收尾**：原待确认/已自动执行/等待重查三类不变；`待确认` / `等待重查` 已增加店铺筛选（全部/店铺名），不改变分类也不改变按时效排序。2026-06-27 用户追加要求已完成：筛选后的店铺视角会同时约束批量操作作用域，避免“页面只看单店铺但后端仍全量批量重来/执行”；计划已在 `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md` 原地归档，交接见 `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`。单账号固定清单处理完后等待 5 秒，切首页读取平台提醒；随后兜底关闭当前账号除售后列表主 tab 外的鲸灵 tab，不动 ERP、专属售后系统或非鲸灵 tab，并复核只剩一个当前账号售后列表 tab。
 
-  **当前门禁**：完整确认口径、已编码草案和未闭合范围统一记录在 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。2026-06-26 已验证单工单真实采集和模拟写回；2026-06-26/27 已验证账号 14 关闭自动执行的最小整账号固定清单批次；2026-06-27 后端 `op-queue/API` 入口已接入、审查并加固，前端单账号 no-auto 入队按钮代码已接入，live 三标签店铺筛选与批量 scope 加固已完成，全量测试 228/228 通过。2026-06-27 auto-execution journal recovery 已完成设计：人工归档必须同步关闭 journal、queue、simulation/audit 和执行门禁，不能只把 journal 改成 resolved；`manually_resolved` 是审计收口，不是自动重试放行。下一步只能在用户明确授权后重启加载并做 UI smoke test；自动执行真实工单前，必须另行实现并验证 journal 恢复和失败闭环。target 枚举异常遗留 tab 留到最后收尾风险把控时单独讨论。步骤 10 的翻页、步骤 12/13 的目标工单打开与新 tab 定位是既有能力，后续不得重复实现。
+  **当前门禁**：完整确认口径、已编码草案和未闭合范围统一记录在 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。2026-06-26 已验证单工单真实采集和模拟写回；2026-06-26/27 已验证账号 14 关闭自动执行的最小整账号固定清单批次；2026-06-27 后端 `op-queue/API` 入口已接入、审查并加固，前端单账号 no-auto 入队按钮代码已接入，live 三标签店铺筛选与批量 scope 加固已完成，全量测试 228/228 通过。2026-06-27 auto-execution journal recovery 已完成设计并完成 Phase 1 代码基础：`auto-execution-journal` 已具备状态/phase/人工归档 helper，新增 `auto-execution-recovery` 本地收口服务，人工归档必须同步关闭 journal、queue、simulation/audit 和执行门禁，不能只把 journal 改成 resolved；`manually_resolved` 是审计收口，不是自动重试放行。2026-06-27 frontend button load/smoke 计划已完成：确认现有按钮只应安全加载和只读冒烟，不重复实现；重启和 smoke 必须另行授权，smoke 不得真实点击按钮或发送 fixed-batch POST。下一步只能在用户明确授权后重启加载并做只读 UI smoke test；自动执行真实工单前，必须另行实现并验证 journal 恢复和失败闭环。target 枚举异常遗留 tab 留到最后收尾风险把控时单独讨论。步骤 10 的翻页、步骤 12/13 的目标工单打开与新 tab 定位是既有能力，后续不得重复实现。
 
 ---
 

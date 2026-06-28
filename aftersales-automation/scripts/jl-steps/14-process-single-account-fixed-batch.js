@@ -185,8 +185,13 @@ function createAutoExecutionGate({ readCircuit, executionJournal, readSimulation
     if (!workOrderNum) throw new Error('自动执行安全门缺少工单号');
     const circuit = readCircuit();
     if (circuit && circuit.tripped) return { allowed: false, reason: '风控熔断中' };
-    const unfinishedIntent = executionJournal.getUnfinishedIntent(workOrderNum);
-    if (unfinishedIntent) return { allowed: false, reason: UNFINISHED_INTENT_BLOCK_REASON };
+    if (typeof executionJournal.getBlockingRecord === 'function') {
+      const blocked = executionJournal.getBlockingRecord(workOrderNum);
+      if (blocked) return { allowed: false, reason: blocked.blockReason || UNFINISHED_INTENT_BLOCK_REASON };
+    } else {
+      const unfinishedIntent = executionJournal.getUnfinishedIntent(workOrderNum);
+      if (unfinishedIntent) return { allowed: false, reason: UNFINISHED_INTENT_BLOCK_REASON };
+    }
     const duplicate = readSimulations().some(simulation =>
       simulation.workOrderNum === workOrderNum &&
       simulation.mode === 'live' &&
@@ -384,8 +389,14 @@ async function processOpenedDetail(context, dependencies) {
   }
   await dependencies.reserveAutoExecution({ ...context, collectedData, decision });
 
+  if (typeof dependencies.markPageActionStarted === 'function') {
+    await dependencies.markPageActionStarted({ ...context, collectedData, decision });
+  }
   const execution = await dependencies.executeDecision({ ...context, collectedData, decision });
   if (!execution || !execution.success) throw stepError('自动执行失败', execution);
+  if (typeof dependencies.markPageActionSucceeded === 'function') {
+    await dependencies.markPageActionSucceeded({ ...context, collectedData, decision, execution });
+  }
   await dependencies.markAutoExecuted({ ...context, collectedData, decision, execution });
   return { status: 'auto_executed', collectedData, decision, execution };
 }
@@ -608,6 +619,8 @@ function loadDefaultDependencies() {
       accountNote: account.matchedNote || '',
       decisionAction: decision.action,
     }),
+    markPageActionStarted: async ({ ticket }) => executionJournal.markPageActionStarted(ticket.workOrderNum),
+    markPageActionSucceeded: async ({ ticket }) => executionJournal.markPageActionSucceeded(ticket.workOrderNum),
     markAutoExecuted: async ({ ticket }) => executionJournal.markExecuted(ticket.workOrderNum),
     ensureQueueItem: createEnsureQueueItem(db),
     persistOutcome: async ({ account, queueItem, ticket, processed }) => {

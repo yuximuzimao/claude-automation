@@ -1,51 +1,46 @@
-# Aftersales Task 6 journal recovery design handoff
+# Aftersales journal recovery review follow-up patched
 
-Updated: 2026-06-27T09:04:00.262Z
+Updated: 2026-06-28T07:27:48.493Z
 Workspace: /Users/chat/claude
 Target agent: Codex (codex)
 
 ## Plan
 
-Task 6 is complete as design-only. Do not re-design from scratch unless asked.
+Codex review follow-up risks for journal recovery Phase 1 are patched and tested. Do not run real browser/JL/ERP/fixed-batch/approve/reject.
 
-Read first:
-1. aftersales-automation/docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md
-2. aftersales-automation/docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md
-3. aftersales-automation/tasks/todo.md
-4. docs/HANDOFF.md
+Patched after Codex review:
+1. Non-executed manual resolutions clear execution terminal fields.
+   - lib/server/auto-execution-recovery.js queuePatchForResolution() now sets executedAt:null, autoExecutedAt:null, execution:null for confirmed_not_executed and unknown.
+   - buildAuditSimulation() also clears executedAt/autoExecutedAt/execution for non-executed resolutions, even if latestSimulation had those fields.
+   - Tests cover inherited old executedAt/autoExecutedAt/execution on queue and simulation.
 
-Key design conclusion:
-- auto-execution-journal is an audit/recovery ledger, not a retry helper.
-- Never blindly retry approve/reject after an unfinished automatic execution intent.
-- Any page-action uncertainty must require human platform verification.
-- Human recovery must close journal + queue + simulation/audit + execution gates together.
-- Marking only journal as manually_resolved is forbidden because it can hide hazardous queue/simulation state.
-- manually_resolved means audit closure, not automatic re-release.
+2. Journal phase transitions now fail-closed.
+   - lib/server/auto-execution-journal.js added assertPhase().
+   - markPageActionStarted only allows phase reserved.
+   - markPageActionSucceeded only allows phase page_action_started.
+   - markExecuted only allows page_action_started or page_action_succeeded.
+   - Legacy auto_executing records without phase can still be manual-resolved but cannot be advanced through page action methods.
+   - Tests cover reserved -> started -> succeeded order and legacy_missing_phase rejection.
 
-Designed states:
-- auto_executing with phases reserved / page_action_started / page_action_succeeded / writeback_failed.
-- auto_executed blocks future automatic execution directly from journal, even if simulations are incomplete.
-- failed is only allowed when page action definitely did not start.
-- manually_resolved requires resolution confirmed_executed / confirmed_not_executed / unknown, operator note, allowAutoRetry:false, and batch/manual gate behavior.
+3. Recovery retry behavior is more predictable.
+   - auto recovery audit simulation id is now stable: auto-recovery-${workOrderNum}-${resolution}.
+   - resolve() skips appendSimulation() if that audit id already exists, avoiding duplicate audit entries on retry after journal resolve failure.
+   - Tests cover journal resolve failure: first attempt throws and leaves journal unresolved; second retry succeeds without duplicate audit simulation.
 
-No code was changed for Task 6. No CLI/API/UI recovery command was implemented. No tests were run for this design-only step. No true approve/reject automatic execution was enabled.
+Verification:
+- npm test passed 242/242, 0 failed.
 
-Next implementation, only if user explicitly asks, should be phased:
-1. pure journal state machine + unit tests,
-2. Step 14 in-progress state writeback,
-3. local-only CLI recovery list/show/resolve,
-4. execution gate hardening for manual and scoped batch execute,
-5. UI visibility,
-6. separate future authorization before true automatic execution.
+Still not implemented / still forbidden:
+- no CLI auto-journal command,
+- no API route,
+- no UI,
+- no server restart,
+- no real fixed-batch run,
+- no browser/JL/ERP action,
+- no approve/reject,
+- no true automatic execution enablement.
 
-Still forbidden unless separately authorized:
-- real fixed-batch run,
-- server restart,
-- approve/reject,
-- scan-all / collect / read-ticket / logistics / ERP commands,
-- any browser/JL/ERP operation.
-
-Current remaining CodexPro-sized work in the task plan is Task 7: frontend button load/smoke plan only. The single-account no-auto button code already exists; do not add a duplicate button, restart the server, click the real button, or run fixed-batch unless the user explicitly authorizes it.
+Next safe slice, only if user asks, remains local-only CLI auto-journal list/show/resolve using the recovery service, with tests and no page action invocation.
 
 ## Implementation contract
 

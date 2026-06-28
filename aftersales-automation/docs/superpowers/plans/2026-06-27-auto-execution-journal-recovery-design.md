@@ -1,6 +1,6 @@
 # Auto-Execution Journal Recovery Design — 2026-06-27
 
-> Status: Design complete. Do not enable true automatic approve/reject from this document. This is a recovery and audit design for future implementation.
+> Status: Design complete; Phase 1 code foundation completed on 2026-06-27. `lib/server/auto-execution-journal.js` now has state/phase/manual-resolution helpers, `lib/server/auto-execution-recovery.js` provides local-only recovery state repair, Codex review follow-up risks were patched, and `npm test` passes 242/242. Do not enable true automatic approve/reject from this document.
 
 ## Scope
 

@@ -54,12 +54,15 @@ Give CodexPro these in order:
 4. Task 4: op-queue/API design review and backend/frontend no-auto entry. ✅ Completed.
 5. Task 5: Live tab store filter and legacy cleanup review + scoped implementation. ✅ Completed 2026-06-27.
 6. Task 6: Auto-execution journal recovery design. ✅ Completed 2026-06-27 as design-only.
+7. Task 7: Frontend button load/smoke plan only. ✅ Completed 2026-06-27 as plan-only.
 
-Current remaining CodexPro-sized work is Task 7: frontend button load/smoke plan only. Keep real fixed-batch runs, server restart, and true approve/reject automatic execution under direct user/operator control.
+Current remaining CodexPro-sized work should stay planning/review only unless the user explicitly authorizes implementation or restart. Keep real fixed-batch runs, server restart, and true approve/reject automatic execution under direct user/operator control.
 
 For the 2026-06-27 user request about `待确认` / `等待重查` store filters and old/new logic cleanup, implementation is now complete. The plan remains archived in place at `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`, with neat handoff at `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
 
 For Task 6, recovery design is complete at `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`. It explicitly requires manual recovery to update journal + queue + simulation/audit + execution gates together; `manually_resolved` is audit closure, not automatic re-release.
+
+For Task 7, frontend button load/smoke plan is complete at `docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md`. It confirms the existing button should be preserved, not duplicated; any restart and read-only UI smoke must be separately authorized and must not click the real button.
 
 ---
 
@@ -355,9 +358,11 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 7: Frontend Button Load/Smoke Plan Only
+### Task 7: Frontend Button Load/Smoke Plan Only ✅ Completed 2026-06-27
 
 **Best fit for CodexPro:** Planning only for now.
+
+**Status:** Plan-only completed at `docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md`. No code changes, no server restart, no real button click, no fixed-batch run.
 
 **Do Not Implement Yet.**
 

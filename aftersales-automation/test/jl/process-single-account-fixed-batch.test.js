@@ -23,7 +23,9 @@ const {
 } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
 const {
   createAutoExecutionJournal,
+  STATUS,
   UNFINISHED_INTENT_BLOCK_REASON,
+  EXECUTED_BLOCK_REASON,
 } = require('../../lib/server/auto-execution-journal');
 
 const ORDER_1 = '100001781188621717210';
@@ -298,6 +300,47 @@ test('approve成功但markExecuted失败留下的intent会阻断下次自动执�
     allowed: false,
     reason: UNFINISHED_INTENT_BLOCK_REASON,
   });
+});
+
+test('journal已有auto_executed即使simulation缺失也阻断自动执行', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'auto-gate-journal-executed-'));
+  const journal = createAutoExecutionJournal({ filePath: path.join(dir, 'journal.json') });
+  journal.reserve(ORDER_1, { accountNote: '测试店铺' });
+  journal.markPageActionStarted(ORDER_1);
+  journal.markExecuted(ORDER_1);
+  const gate = createAutoExecutionGate({
+    readCircuit: () => null,
+    executionJournal: journal,
+    readSimulations: () => assert.fail('journal executed 命中后不应继续读 simulation 历史'),
+  });
+
+  assert.deepEqual(await gate({ ticket: { workOrderNum: ORDER_1 } }), {
+    allowed: false,
+    reason: EXECUTED_BLOCK_REASON,
+  });
+});
+
+test('真实journal自动执行链路写入page action phase后再markExecuted', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'auto-phase-real-journal-'));
+  const journal = createAutoExecutionJournal({ filePath: path.join(dir, 'journal.json') });
+  const fixture = batchDependencies({
+    reserveAutoExecution: async ({ ticket, decision }) => journal.reserve(ticket.workOrderNum, { decisionAction: decision.action }),
+    markPageActionStarted: async ({ ticket }) => journal.markPageActionStarted(ticket.workOrderNum),
+    markPageActionSucceeded: async ({ ticket }) => journal.markPageActionSucceeded(ticket.workOrderNum),
+    markAutoExecuted: async ({ ticket }) => journal.markExecuted(ticket.workOrderNum),
+  });
+
+  const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
+  const record = journal.read()[ORDER_1];
+
+  assert.equal(result.items[0].status, 'auto_executed');
+  assert.equal(record.status, STATUS.AUTO_EXECUTED);
+  assert.deepEqual(record.history.map(event => event.event), [
+    'reserved',
+    'page_action_started',
+    'page_action_succeeded',
+    'auto_executed',
+  ]);
 });
 
 test('intent残留转人工时simulation保留autoBlockedReason', () => {

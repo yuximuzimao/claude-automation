@@ -53,7 +53,8 @@ entry: cli.js
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
 | `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1 固定清单逐单处理草案**：必须接回原 queue/simulation/三标签页，不得形成独立新系统；2026-06-26 已验证单工单完整采集和模拟写回，2026-06-26/27 已验证账号14最小整账号批次，后端入口和前端 no-auto 按钮代码已接入 | 改 A1 闭环前必读确认计划和 2026-06-27 handoff；禁止自动执行真实工单 |
 | `lib/jl/target-aware-collector.js` | **已过单工单真机验证的适配层**：显式绑定 JL 详情 tab 和 ERP tab 的采集入口；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅；前端按钮代码已接入但未重启加载 |
-| `lib/server/auto-execution-journal.js` | **草案风险层**：自动执行 intent / completed 防重复日志；锁残留恢复策略留到收尾风险把控阶段 | 审阅自动执行异常恢复时；当前不得用于真实工单 |
+| `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：记录 `auto_executing/auto_executed/failed/manually_resolved` 和 phase，防重复执行并 fail-closed；不得作为重试助手 | 审阅自动执行异常、journal gate 或人工恢复时；当前不得启用真实自动执行 |
+| `lib/server/auto-execution-recovery.js` | **人工恢复收口服务**：只修本地状态，要求 journal + queue + simulation/audit 一起关闭，避免 journal-only 归档隐藏危险状态；不碰 JL/ERP 页面 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
 | `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | A1 已确认业务口径、原系统数据流要求、当前质量问题和恢复开发门禁 | 继续 A1 前必读 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
@@ -232,6 +233,7 @@ lib/product/match.js
 lib/server/account-session-status.js
 lib/server/auto-exec-confidence.js
 lib/server/auto-execution-journal.js
+lib/server/auto-execution-recovery.js
 lib/server/a1-fixed-batch-entry.js
 lib/server/data.js
 lib/server/live-batch-scope.js
