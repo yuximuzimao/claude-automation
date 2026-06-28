@@ -314,11 +314,11 @@ Only after Task 2/3 are merged, ask it to implement:
 
 ---
 
-### Task 6: Auto-Execution Journal Recovery Design ✅ Completed 2026-06-27
+### Task 6: Auto-Execution Journal Recovery Design + Phase 1 Foundation ✅ Completed 2026-06-27
 
-**Best fit for CodexPro:** Design/review now; implementation later.
+**Best fit for CodexPro:** Design is complete; implementation foundation is complete. Further work should be local-only CLI/API/UI recovery entry slices, not real browser execution.
 
-**Status:** Design-only completed at `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`. No code implementation, no CLI recovery command, no true automatic execution enablement.
+**Status:** Design completed at `docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md`; Phase 1 code foundation completed in `lib/server/auto-execution-journal.js`, `lib/server/auto-execution-recovery.js`, and Step14 gate integration. No CLI recovery command, no API, no UI, no true automatic execution enablement.
 
 **Design Conclusion:** `auto-execution-journal` must become an audit/recovery ledger, not a retry helper. Any page-action uncertainty must block blind retry. Human recovery must close journal, queue, simulation/audit, and execution gates together; resolving only the journal is forbidden because it can hide a hazardous queue/simulation state.
 
@@ -355,6 +355,7 @@ Only after Task 2/3 are merged, ask it to implement:
 - Design distinguishes page-action uncertainty from pure writeback failure.
 - No proposal allows blind retry of approve/reject.
 - There is a human-auditable recovery path.
+- Phase 1 implementation keeps all recovery local-only and blocks repeat automatic execution from journal, including `auto_executed` records even when simulation is missing.
 
 ---
 

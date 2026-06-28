@@ -49,6 +49,7 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
             → 单工单完整采集验证 → 最小整账号固定清单批次验证
             → 后端 op-queue/API 入口 + 前端 no-auto 按钮（代码已接入，未重启加载）
             → live 三标签店铺筛选 + 批量 scope 加固（代码已接入，未重启加载）
+            → auto-execution journal recovery Phase 1 本地状态基础（代码已接入，未开放 CLI/API/UI）
 ```
 
 旧 `scan-all.js → queue → collect → infer → auto-execute` 链路尚未完成安全迁移，不代表当前可用入口。
@@ -59,7 +60,8 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 - **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
 - **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
 - **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗
-- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；后端入口 `POST /api/accounts/:num/a1-fixed-batch` 已接入 `op-queue` 且默认关闭自动执行，前端单账号 no-auto 按钮代码已接入但未重启加载，自动执行真实工单仍未交付
+- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；后端入口 `POST /api/accounts/:num/a1-fixed-batch` 已接入 `op-queue` 且默认关闭自动执行，前端单账号 no-auto 按钮代码已接入但未重启加载，auto-execution journal recovery Phase 1 已具备本地状态机/人工归档服务基础但无 CLI/API/UI，自动执行真实工单仍未交付
+- **自动执行恢复账本**（`lib/server/auto-execution-journal.js`、`lib/server/auto-execution-recovery.js`）：已实现 `auto_executing/auto_executed/failed/manually_resolved`、phase 门禁和本地人工收口服务；`auto_executed` journal 即使 simulation 缺失也阻断重复自动执行。当前只用于本地安全基础，不代表已开放自动 approve/reject、CLI、API 或 UI 恢复入口。
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
@@ -78,3 +80,5 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 | [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 固定清单已确认业务口径、原系统数据流要求和未闭合质量问题 |
 | [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 账号14最小整账号批次验证、后端入口状态和仍禁止事项 |
 | [Live 店铺筛选交接](docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md) | 待确认/等待重查店铺筛选、批量 scope 加固和仍禁止事项 |
+| [自动执行 journal recovery 设计](docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md) | 自动执行账本状态机、人工收口规则和 Phase 1 代码边界 |
+| [前端按钮加载/只读冒烟计划](docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md) | A1 no-auto 按钮加载后的只读 smoke 范围和禁止事项 |

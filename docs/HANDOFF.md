@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-06-27
+更新时间：2026-06-28
 当前负责人：Claude Code
 当前分支：data-model-restructure
-当前焦点：**售后 A1 账号 14 no-auto 最小整账号固定清单批次已验证；正式 op-queue/API 入口、前端按钮和真实自动执行仍未交付。**
+当前焦点：**售后 A1 账号 14 no-auto 最小整账号固定清单批次已验证；op-queue/API、前端 no-auto 按钮、live 店铺筛选和 journal recovery Phase 1 代码基础已交付但未重启加载；真实自动执行仍未交付。**
 
 ## ⏭️ 下一窗口接手：第三步 A1 逐账号扫描处理闭环
 
@@ -64,8 +64,10 @@
 
 > ⚠️ 若交给 Codex：先读本节 + 已归档的 `docs/codex-handoff/archive/2026-06-19-aftersales-a1-predecessor-audits/legacy-conflict-audit.md` + lessons #54~#59 + 第二步章节。下面写到 Codex 冷启动可执行的颗粒度。**第三步是大工程，必须逐块设计、小步验证，不要一次性大改。**
 
-**当前已完成到哪里（2026-06-18 Codex 真机小步验证）**：
-- A2「打开店铺后台」仍是唯一已串入 UI 的按钮；A1 尚未接入旧扫描/队列主链路。
+**当前已完成到哪里**：
+- 截至 2026-06-28，A1 单账号 no-auto 固定清单入口已接入后端 `op-queue/API` 和前端按钮代码，但线上 server 未重启加载；不得把“代码已接入”理解成“可点击正式按钮”。
+- live 三标签店铺筛选与批量 scope 加固已完成；journal recovery Phase 1 本地状态基础已完成；仍没有 CLI/API/UI 恢复入口，也没有真实自动 approve/reject 放开。
+- 以下 2026-06-18 条目是 A1 原子脚本历史验证背景，保留给接手者理解链路来源。
 - 已沉淀 A1 原子脚本 `scripts/jl-steps/08-12`，全部按用户要求先真机最小测试再保存。
 - `08-click-after-sale-menu.js`：保留为独立历史原子工具；扫描准备主链路不再调用，避免依赖首页菜单和弹窗状态。
 - `09-select-overdue-sort.js`：真实鼠标打开排序下拉框，选择「按逾期时间最近排序」；已复测，不主动刷新。
@@ -80,7 +82,7 @@
 - 验证基线（2026-06-19）：关键链路测试 36/36、全量 `npm test` 138/138；targetId 修复有独立 10/15（5 个预期失败）RED → 15/15 GREEN 证据。本轮未做真机。
 
 **下一窗口第一件事**：
-先让用户审阅 `aftersales-automation/docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。未经用户逐项确认，不得继续修复或扩展本轮草案。当前质量审查尚有：初始清单翻页卡片刷新竞态、新 tab 绑定/误清理风险、倒计时解析失败漏单、journal 残留锁、target 枚举异常遗留 tab。不要恢复账号 4-14 弹窗枚举测试；任何真实浏览器操作必须另行明确指定。
+如果用户授权加载正式入口，先按 `aftersales-automation/docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md` 重启后做只读 UI smoke：只看按钮显示、请求是否静默发生、旧入口是否误触发；不得点击真实 A1 按钮或发送 fixed-batch POST。若用户不授权重启，下一批适合做本地-only `auto-journal list/show/resolve` CLI，必须复用 `lib/server/auto-execution-recovery.js`，且不得打开 JL/ERP/浏览器。target 枚举异常遗留 tab 仍留到后续单独设计。
 
 **新 A1 目标流程（流程方向已讨论，实现细节待用户确认）**：
 打开账号后台（用第二步安全编排：清 cookie + 注入并固定导航售后列表）→ 排序并首次读取全部 `<=48h` 工单，冻结为“本轮固定清单” → 按固定顺序逐单处理 → 每单完成后关闭详情 tab、确认关闭并回到列表 tab → 全部处理完才进首页读平台提醒 → 关闭该账号全部 tab 并确认完成 → 间隔至少 10 秒后切下一个账号。
