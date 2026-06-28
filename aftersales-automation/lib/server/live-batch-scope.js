@@ -7,8 +7,9 @@
  */
 
 const { isBatchExecutable } = require('../constants');
+const { STATUS: JOURNAL_STATUS } = require('./auto-execution-journal');
 
-const AUTO_STATUSES = ['auto_executed', 'auto_executing'];
+const AUTO_STATUSES = [JOURNAL_STATUS.AUTO_EXECUTED, JOURNAL_STATUS.AUTO_EXECUTING];
 const FINISHED_STATUSES = ['done', ...AUTO_STATUSES];
 
 function hasOwn(obj, key) {
