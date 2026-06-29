@@ -360,3 +360,61 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 2. 高风险操作入口（打开后台 = 真实登录写操作）必须保留「人工确认放行」通道：前端 `confirm` → 后端凭 `confirmed:true` 放行 `getAccountOpenGuard` 拦下的账号（仍返回 `needConfirm:true` 供前端区分）。
 3. 正常态也保留「重新登录」入口（`shouldShowReloginButton` 对 `ok` 返回 true），随时可手动重登；仅 `unknown`（已保存未扫描）不显示，避免误导为已失效。
 4. 改动文件：`public/account-relogin-state.js`、`public/app.js` `openAccountStore`、`lib/server/routes.js` `/accounts/:num/open`。回归用例见 `test/server/relogin-session.test.js`。
+
+### 61. el-pagination 物理点击失效原因是 viewport 边界，不是 Element UI 结构（2026-06-29）
+
+鲸灵售后列表分页条（`.el-pagination`）`top ≈ 2400px`，CDP `Input.dispatchMouseEvent` 只处理 viewport 内坐标，超出 viewport 的点击被浏览器静默丢弃——诊断时页码停留在第 2 页长达 40 次轮询，物理点击完全无效。
+
+**两类 CDP 点击失效的根因完全不同：**
+
+| 故障 | 现象 | 根因 | 正确修法 |
+|------|------|------|---------|
+| el-select 下拉候选项 | `filter(visible)` 返回空 | dropdown li 的 `getBoundingClientRect().height = 0` | Vue emit `input` + `change` |
+| el-pagination 翻页按钮 | 物理点击静默无效，页码不变 | 分页条在页面底部，超出 CDP viewport 坐标范围 | `mouseWheel` 大幅下滚 → 重读坐标 → 物理点击 |
+
+**铁律**：
+1. 元素坐标超出 viewport → 先 `mouseWheel` 大幅滚动（不用计算精确量，滚到页底即可），重读 `getBoundingClientRect()`，再物理点击（与 step 12 `scrollActionButtonIntoView` 同原则）。
+2. `getBoundingClientRect().height = 0` → 才改用 Vue emit（el-select 专属）。
+3. 绝不因"Vue emit 可用"而跳过物理点击——Vue emit 绕过了真实用户行为信号，应作为最后手段。
+4. 侧边栏固定元素（如"后台首页"`.nav-item`）fixed 定位，始终在 viewport，直接 DOM `.click()` 即可，不需要滚动。
+
+---
+
+## 2026-06-29/30 session — A1 执行/重新采集重构教训
+
+### CDP dispatchMouseEvent 后台 tab 必超时
+- **现象**：`clickWorkOrderAction` 打开详情新 tab 后，列表 tab `Input.dispatchMouseEvent` 卡死 30s
+- **根因**：Chrome 不处理非激活 tab 的 input 事件
+- **修复**：`cdp.dispatchMouseEvent()` 包装函，每次先 `activateTarget` 再发事件
+- **规则**：所有 mouse 操作必须走 `cdp.dispatchMouseEvent`，禁止直接 `cdp.cdpCall(target, 'Input.dispatchMouseEvent', ...)`
+
+### inferDecision 第二参数必须是 queueItem
+- `processOpenedDetail` 回调传 `ctxTicket`（仅 workOrderNum/type/accountNote）→ deadlineAt/urgency 全空 → remainingHours=null → JS 里 null>12=false → 误判
+- **规则**：`inferDecision({ collectedData }, queueItem)` 第二参数必须是完整 queueItem
+
+### waitForNewWorkOrderTarget 只在 URL 匹配后即返回
+- 详情 tab URL 含工单号就判定成功，但 body 可能未渲染
+- 紧接着 `approveTicket(skipNavigation:true)` 直接校验 body → 失败 → 错误处理把详情 tab 导航到列表页
+- **修复**：去掉 skipNavigation，让 approveTicket 自己 navigate（内含 3s wait）
+
+### prepareAfterSaleList 读全量列表 → 多余操作
+- 执行/重新采集只需找单个工单，`readUrgentAfterSaleList` 读了全部页
+- **修复**：改为只做导航+排序，由 `locateWorkOrderOnFreshList` 逐页搜索
+
+### ERP shop-map 名称必须与页面实际标签完全一致
+- SHOP_MAP: `erpShop: '16广州茗瑞'`，页面标签: `广州茗瑞`（无"16"）→ 永远匹配不上
+- 第一条工单（不同店铺）成功通过，掩盖了后续失败
+
+### 重新采集推理的 API 路由 ≠ op 类型
+- 前端按钮调 `POST /simulations/:id/reinfer`（`execReinfer`），不是 `POST /queue/:id/reprocess`（`execReprocessOne`）
+- `execReinfer` 还在走旧的 `pipeline.reprocessOne` → 功能完全无效
+- **规则**：改功能时检查所有触发入口（前端按钮 → 路由 → op 类型 → 执行函数）
+
+### collect.js --workOrderNum 未匹配时 exit 1
+- 旧逻辑 exit 0 → pipeline 拿旧 simulation 数据推理 → 用户看到"秒完成"
+- **修复**：显式指定 workOrderNum 但未找到时 exit 1
+
+### 旧 hint 残留污染新推理
+- pipeline.collect.js 失败时写 `hint: '采集连续失败，需人工核查'` 到 queue item
+- `execReinfer` 没清除 → `inferDecision` 读到非空 hint → 当用户评价指令覆盖推理
+- **修复**：`execReinfer` 把新 hint（空输入则为 null）写入 queue item

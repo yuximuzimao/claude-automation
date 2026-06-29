@@ -70,7 +70,7 @@ entry: cli.js
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，默认 48h + `disableAutoExecute:true` | 改 A1 后端入口或入队参数时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）；已接 `a1-fixed-batch` op，调用步骤 14 且强制关闭自动执行 | 改队列逻辑时 |
+| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js | 改队列/执行/重新采集逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -88,6 +88,10 @@ entry: cli.js
 2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
 4. 步骤 14 固定清单串联的业务口径已确认：首次 `<=48h` 清单为不可变清单；A1 只改变执行顺序，必须接回原 queue/simulation/三标签页，不能落地 `manual_review` 或独立结果系统。2026-06-26 已用账号 14 茗瑞的单个工单完成采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证。后端 `op-queue/API` 入口已接入并审查加固，前端单账号 no-auto 按钮代码已接入但未重启加载。禁止自动执行真实工单、禁止未经授权重启加载后运行；恢复入口见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` 和 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。
+5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
+   - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
+   - `execReinfer` 直接转调 `execReprocessOne`。
+   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单）和 `execScanAccount`（扫描工单）尚待迁移。
 
 ### 旧流程（代码保留，当前禁止作为入口）
 
@@ -198,6 +202,11 @@ await cdp.navigate(targetId, 'https://...');
 | 24 | pipeline 历史执行守卫把 skip 误判为"已执行" | `skip` action（工单暂时不可访问）也会写 `executedAt`（自动归档），但它不是真实审批操作。守卫条件 `!!s.executedAt` 会把 skip 误判为"已执行" → 工单恢复后 approve 永久被跳过。**修复**：守卫加 `&& s.decision?.action !== 'skip'`。**规则**：executedAt 语义是"曾被处理"，approve/reject 与 skip 必须分开对待。`pipeline.js:319` |
 | 25 | 多弹窗共存时用 `dialogs[length-1]` 取"最后一个可见弹窗" | 套装子品明细误报「未找到子品明细表头」根因：`archive.js` READ_SUB_ITEMS_JS 赌"最后一个可见弹窗就是子商品弹窗"。但 collect 全流程里 ERP tab 可能残留/并发其他可见弹窗（如 `erp-logistics` 的 `trade-detail-dialog` 订单详情弹窗未完全关闭），`dialogs[length-1]` 取到它 → 表头不匹配。**单独跑必成功、生产偶发失败**正是此特征（同工单一成一败）。**修复**：按标题 `子商品信息`（或"含组合比例表头"兜底）精确锁定弹窗，禁止赌最后一个。**规则**：多弹窗页面定位目标弹窗必须用标题/特征匹配，不能用 DOM 序位置。失败时务必 dump 所有可见弹窗标题+class（埋点），别只丢错误字符串。`archive.js:138` |
 | 26 | 单次操作报错就把账号标异常，且异常态同时隐藏按钮+后端拦截 → 账号被双重锁死 | 账号12 切换时网络抖动报一次错被标 `error`。旧逻辑下 `error/expired` 既隐藏「打开店铺后台」按钮，后端 `/open` 又直接 409 → 一个其实正常的账号无任何自助恢复路径。**根因**：把"单次失败"等同于"账号失效"，且没留人工兜底通道。**修复（2026-06-22）**：打开后台按钮只要有 session 文件就常显；异常态点击先 `confirm`，确认后带 `confirmed:true` 让后端放行。**规则**：状态标记可降级提示，但不能既挡 UI 又挡后端把入口彻底封死，高风险入口要留「人工确认放行」通道。`routes.js:747` `app.js:openAccountStore` |
+| 27 | CDP `Input.dispatchMouseEvent` 在后台标签页卡死超时 | 流程中 `clickWorkOrderAction` 打开详情新 tab 后 Chrome 焦点切走 → 列表 tab 失焦 → 下次 `dispatchMouseEvent` 永不返回。**修复（2026-06-29）**：`cdp.dispatchMouseEvent()` 每次调用前自动 `activateTarget`。所有调用方从 `cdp.cdpCall(target, 'Input.dispatchMouseEvent', ...)` 迁移到 `cdp.dispatchMouseEvent(target, ...)`。 |
+| 28 | ERP shop-map 店铺名与实际页面不一致 | SHOP_MAP 配 `erpShop: '16广州茗瑞'` 但 ERP 页面标签为 `广州茗瑞`（无"16"前缀）→ `makeCheckShopJS` 的 `tag.includes` 永远 false。第一条工单（百浩，无前缀问题）通过后残留状态掩盖了后续工单（茗瑞）的失败。**修复（2026-06-30）**：SHOP_MAP erpShop 对齐 ERP 实际标签（去"16"前缀）。 |
+| 29 | `inferDecision` 第二参数传错对象 | `processOpenedDetail` 回调传 `ctxTicket`（只有 3 个字段）给 `inferDecision` 作为 `queueItem` → `deadlineAt`/`urgency` 全空 → `remainingHours=null` → JS 里 `null > 12` 为 `false` → 误走「≤8h 立即处理」拒绝路径。**规则**：`inferDecision(sim, queueItem)` 的第二参数必须是完整 queueItem（含 type/deadlineAt/urgency/hoursUntilNextScan）。 |
+| 30 | `readTicket` 退货物流区块异步加载 | 详情页 verifyJS 只等「售后类型」出现，但「退货物流信息」区域异步渲染 → `bodyText` 抓取时退货单号尚未出现 → `returnTracking` 为空 → `inferRefundReturn` 误入「无快递单号→超期无理由退货」分支。**修复（2026-06-30）**：`READ_ORDER_INFO_JS` 前轮询等「退货物流单号/退货物流信息」出现（最多 5s）。 |
+| 31 | RETURN_KEYWORDS 缺少「到达商家仓库」 | 圆通退回件物流写「您的包裹即将到达商家仓库，正在验收中」不写「退回」→ 赠品实际已退回但关键词未命中 → 误判为在途。**修复（2026-06-29）**：新增 `到达商家仓库`。`入站` 被驳回（outbound 配送也出现"入站"导致误判）。 |
 
 ## PATHS
 
