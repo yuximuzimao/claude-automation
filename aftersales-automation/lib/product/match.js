@@ -242,16 +242,6 @@ async function matchWithRetry(targetId, barcode, attr1, shopName, isRetry) {
 
     await navigateErp(targetId, '商品对应表');
 
-    // 商品对应表页面 Vue router 切换后筛选栏可能晚于表格渲染。
-    // navigateErp 的 waitForPageContent 只等了 .el-table，补充等待 shop 选择器出现。
-    for (let i = 0; i < 20; i++) {
-      const found = await cdp.eval(targetId, `(function(){
-        return document.querySelectorAll('.el-select.select-wrap.support-dialog-select').length > 0;
-      })()`);
-      if (found) break;
-      await sleep(500);
-    }
-
     // 设置店铺过滤器：先检测当前店铺，不是目标则切换，切换后再验证。
     // 不信任上次残留状态——因为不同工单可能属于不同店铺。
     // 最多尝试 3 次，3 次仍错必有异常，抛错停止等人工介入。
