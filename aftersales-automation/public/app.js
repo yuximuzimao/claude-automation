@@ -1940,7 +1940,7 @@ async function openAccountStore(num, statusKey) {
 async function runA1FixedBatch(num, btn) {
   const okToRun = confirm(
     `确认处理账号${num}的工单吗？\n\n` +
-    `将采集当前48小时内工单并写回待确认，不会自动同意或拒绝退款。`
+    `将采集当前48小时内工单，符合自动执行条件的工单会直接执行（同意或拒绝退款），其余写入待确认。`
   );
   if (!okToRun) return;
   const originalText = btn ? btn.textContent : '';
