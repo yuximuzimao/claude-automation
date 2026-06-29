@@ -28,7 +28,10 @@ const READ_ORDER_INFO_JS = `(function(){
   var bodyText = document.body.innerText;
 
   // 退货物流单号 + 多次使用检测（页面直接显示可见文本，非 tooltip）
-  var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/);
+  // 兼容多种标签格式：退货物流单号 / 退货物流：圆通 YTxxxx / 物流单号（退货上下文）
+  var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/)
+    || bodyText.match(/退货物流[：:][^\\n]*?([A-Z]{2,4}\\d{8,})/)
+    || bodyText.match(/退[货件]物流[：:][^\\n]*?([A-Z]{2,4}\\d{8,})/);
   var returnTracking = rtMatch ? rtMatch[1] : '';
   var returnTrackingMultiUse = false;
   var returnTrackingUsedBy = [];
