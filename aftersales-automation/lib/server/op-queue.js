@@ -598,6 +598,13 @@ async function execReprocessOne(op) {
   };
   const waitForPage = step14.createWaitForPage(waitFor);
 
+  // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
+  await step14.clickPageOneLikeHuman(listTargetId, {
+    readCurrentPage, sleep, waitForPage,
+    dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
+    eval: (id, js) => cdp.eval(id, js),
+  });
+
   const located = await step14.locateWorkOrderOnFreshList(listTargetId, queueItem.workOrderNum, {
     readCurrentPage,
     clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
@@ -742,6 +749,13 @@ async function execExecute(op) {
       };
     };
     const waitForPage = step14.createWaitForPage(waitFor);
+
+    // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
+    await step14.clickPageOneLikeHuman(listTargetId, {
+      readCurrentPage, sleep, waitForPage,
+      dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
+      eval: (id, js) => cdp.eval(id, js),
+    });
 
     const located = await step14.locateWorkOrderOnFreshList(listTargetId, sim.workOrderNum, {
       readCurrentPage,
