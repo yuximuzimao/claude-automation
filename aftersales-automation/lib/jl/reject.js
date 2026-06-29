@@ -206,10 +206,12 @@ const CLICK_CONFIRM_REJECT_JS = `(function(){
  * @param {string} [imageUrl]   - 已上传的凭证图片 URL（可选，为空则自动截图上传）
  * @param {string} [packageTab] - 多包裹时指定截图的包裹 tab 名（如"包裹2"）
  */
-async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, packageTab) {
+async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, packageTab, opts = {}) {
   try {
-    await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
-    await sleep(2000);
+    if (!opts.skipNavigation) {
+      await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
+      await sleep(2000);
+    }
 
     // ── Step 1: 截图取证（物流弹窗）──────────────────────────────
     let imgUrl = imageUrl;

@@ -566,84 +566,143 @@ async function execExecute(op) {
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
   if (!queueItem) return { skipped: true, reason: '队列项不存在' };
   if (queueItem.status === 'waiting') return { skipped: true, reason: '工单处于等待重查状态，跳过执行' };
+
   const accountNum = queueItem.accountNum;
-  if (accountNum) {
-    if (isSameSession(accountNum)) {
-      log(`[execute] 账号 ${accountNum} 已是当前账号，跳过注入`);
-    } else {
-      const injResult = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-        timeout: 30000, encoding: 'utf8',
-      });
-      if (injResult.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(injResult.stderr || injResult.stdout || '').slice(0, 200)}`);
-      saveSessionState(accountNum);
-    }
+  if (!accountNum) throw new Error('缺少账号编号');
+
+  const cdp = require('../cdp');
+  const { openAccountFlow } = require('../jl/open-account-flow');
+  const { sleep, waitFor } = require('../wait');
+
+  // ── Step 1: 安全打开账号 ──────────────────────────────────────────
+  const accountResult = await openAccountFlow(String(accountNum));
+  if (!accountResult || !accountResult.success) {
+    throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
+  }
+  saveSessionState(accountNum);
+  const listTargetId = accountResult.targetId;
+
+  // ── Step 2: 确保在售后列表页 ─────────────────────────────────────
+  const { prepareAfterSaleList } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const prepared = await prepareAfterSaleList({ targetId: listTargetId, thresholdHours: 48 });
+  if (!prepared || !prepared.success) {
+    throw new Error(`准备售后列表失败: ${(prepared && prepared.error) || '未知错误'}`);
   }
 
   const { action } = sim.decision;
   let result;
 
-  // 用 spawnAsync 替代 execFileSync，避免阻塞事件循环（保证 SSE 队列状态能实时推送）
-  async function runCLI(args) {
-    const { code, stdout } = await spawnAsync('node', [CLI, ...args], { cwd: BASE });
-    let parsed;
-    try { parsed = JSON.parse(stdout); } catch(e) { throw new Error(`CLI 输出解析失败（exit ${code}）: ${stdout.slice(0, 100)}`); }
-    return parsed;
-  }
+  if (action === 'escalate') {
+    // ── escalate：直接在列表页添加备注，无需打开详情 ──────────────────
+    const { addNote } = require('../jl/add-note');
+    result = await addNote(listTargetId, sim.workOrderNum, `【待人工】${sim.decision.reason}`);
+    if (!result.success) throw new Error(result.error || '备注失败');
 
-  if (action === 'approve') {
-    result = await runCLI(['approve', sim.workOrderNum]);
-  } else if (action === 'reject') {
-    const args = ['reject', sim.workOrderNum,
-      rejectReason || sim.decision.rejectReason || sim.decision.reason,
-      rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
-    ];
-    if (rejectImageUrl) args.push(rejectImageUrl);
-    result = await runCLI(args);
-    // 拦截提醒
-    const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
-    if (needsReminder) {
-      try {
-        const cd = sim.collectedData || {};
-        const accountNote = queueItem && queueItem.accountNote || '未知账号';
-        const allShipTrackings = extractShippedTrackings(cd);
-        const erpRows = cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows || [];
-        const internalId = erpRows[0] && erpRows[0].internalId || '';
-        const archiveTitle = cd.productArchive && cd.productArchive.title || '';
-        const subOrderAttr = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].attr1 || '';
-        const goodsName = (archiveTitle || subOrderAttr).slice(0, 30);
-        const qty = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].afterSaleNum || '';
-        const shipTracking = allShipTrackings.join(',');
-        const remindResult = await runCLI(['remind', sim.workOrderNum, accountNote,
-          shipTracking, internalId, goodsName, qty ? String(qty) : '']);
-        if (remindResult) {
-          allShipTrackings.forEach(t => {
-            db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
-            log(`已记录拦截: ${t}`);
-          });
-        }
-      } catch(e) { log(`remind 失败（非致命）: ${e.message}`); }
-    }
-  } else if (action === 'escalate') {
-    result = await runCLI(['add-note', sim.workOrderNum, `【待人工】${sim.decision.reason}`]);
-    // 工单取消 → 清理关联的拦截记录（避免遗留无效拦截提醒）
+    // 工单取消 → 清理关联的拦截记录
     if (sim.decision.reason && sim.decision.reason.includes('取消')) {
       try {
         const cd = sim.collectedData || {};
         const allShipTrackings = extractShippedTrackings(cd);
         allShipTrackings.forEach(t => {
-          if (db.hasIntercept(t)) {
-            db.removeIntercept(t);
-            log(`[${sim.workOrderNum}] 工单取消，已清理拦截: ${t}`);
-          }
+          if (db.hasIntercept(t)) { db.removeIntercept(t); log(`[${sim.workOrderNum}] 工单取消，已清理拦截: ${t}`); }
         });
       } catch(e) { log(`cancel-intercept-cleanup 失败（非致命）: ${e.message}`); }
     }
   } else {
-    throw new Error(`未知 action: ${action}`);
+    // ── approve / reject：物理点击处理按钮，打开详情 tab ─────────────
+    const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
+    const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+    const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
+
+    // Step 3: 定位工单（与扫描时寻找工单流程完全一致）
+    const readCurrentPage = async (targetId) => {
+      const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+      return {
+        tickets: (raw && raw.tickets) || [],
+        loading: Boolean(raw && raw.loading),
+        pagination: step10.normalizePaginationState(raw && raw.pagination),
+      };
+    };
+    const waitForPage = step14.createWaitForPage(waitFor);
+
+    const located = await step14.locateWorkOrderOnFreshList(listTargetId, sim.workOrderNum, {
+      readCurrentPage,
+      clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
+        readCurrentPage, sleep, waitForPage,
+        dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
+        eval: (id, js) => cdp.eval(id, js),
+      }),
+      clickNextPage: step10.clickNextPage,
+      waitForPage,
+    });
+    if (!located || !located.found) {
+      throw new Error(`工单 ${sim.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
+    }
+
+    // Step 4: 点击处理按钮，打开详情 tab
+    const opened = await clickWorkOrderAction(sim.workOrderNum, { targetId: listTargetId });
+    if (!opened || !opened.success || !opened.newTargetId) {
+      throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
+    }
+    const detailTargetId = opened.newTargetId;
+
+    let detailClosed = false;
+    try {
+      // Step 5: 在详情 tab 上执行决策
+      if (action === 'approve') {
+        const { approveTicket } = require('../jl/approve');
+        result = await approveTicket(detailTargetId, sim.workOrderNum, { skipNavigation: true });
+      } else if (action === 'reject') {
+        const { rejectTicket } = require('../jl/reject');
+        result = await rejectTicket(detailTargetId, sim.workOrderNum,
+          rejectReason || sim.decision.rejectReason || sim.decision.reason,
+          rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
+          rejectImageUrl || null, null, { skipNavigation: true });
+
+        // 拦截提醒
+        const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
+        if (needsReminder) {
+          try {
+            const cd = sim.collectedData || {};
+            const accountNote = queueItem && queueItem.accountNote || '未知账号';
+            const allShipTrackings = extractShippedTrackings(cd);
+            const erpRows = cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows || [];
+            const internalId = erpRows[0] && erpRows[0].internalId || '';
+            const archiveTitle = cd.productArchive && cd.productArchive.title || '';
+            const subOrderAttr = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].attr1 || '';
+            const goodsName = (archiveTitle || subOrderAttr).slice(0, 30);
+            const qty = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].afterSaleNum || '';
+            const shipTracking = allShipTrackings.join(',');
+            const remind = createReminder({
+              workOrderNum: sim.workOrderNum, accountName: accountNote,
+              shipTracking, internalId, goodsName, qty: qty ? String(qty) : '',
+            });
+            if (remind) {
+              allShipTrackings.forEach(t => {
+                db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
+                log(`已记录拦截: ${t}`);
+              });
+            }
+          } catch(e) { log(`remind 失败（非致命）: ${e.message}`); }
+        }
+      } else {
+        throw new Error(`未知 action: ${action}`);
+      }
+      if (!result.success) throw new Error(result.error || '执行失败');
+    } finally {
+      // Step 6: 关闭详情 tab（无论成功失败）
+      try {
+        const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
+        await step14.closeAndVerifyDetailTarget(detailTargetId, {
+          getTargets: cdp.getTargets, closeTarget: cdp.closeTarget, sleep,
+          readShopName: (id, waitMs) => readShopName(id, waitMs),
+        }, { account: accountResult, listTargetId });
+        detailClosed = true;
+      } catch(e) { log(`[execute] 关闭详情 tab 失败（非致命）: ${e.message}`); }
+    }
   }
 
-  if (!result.success) throw new Error(result.error || '执行失败');
-
+  // ── 记录执行结果 ──────────────────────────────────────────────────
   db.appendCase({
     id: `case-${Date.now()}`, workOrderNum: sim.workOrderNum, accountNote: sim.accountNote,
     type: sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type,

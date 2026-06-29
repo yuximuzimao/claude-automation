@@ -52,9 +52,11 @@ const CLICK_RISK_CONFIRM_JS = `(function(){
   return JSON.stringify({clicked: true, riskConfirmed: true});
 })()`;
 
-async function approveTicket(targetId, workOrderNum) {
+async function approveTicket(targetId, workOrderNum, opts = {}) {
   try {
-    await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
+    if (!opts.skipNavigation) {
+      await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
+    }
 
     // ── 轮询核验页面是否正确加载了对应工单（最多 10.5s）────────────
     const verifyJS = `(function(){
