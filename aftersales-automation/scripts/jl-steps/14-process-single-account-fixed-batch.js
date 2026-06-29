@@ -653,6 +653,13 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
   const thresholdHours = 48;
   const dependencies = options.dependencies || loadDefaultDependencies();
+  if (typeof options.onTicketProgress === 'function') {
+    const origOnProgress = dependencies.onProgress;
+    dependencies.onProgress = async (item) => {
+      options.onTicketProgress(item);
+      if (typeof origOnProgress === 'function') await origOnProgress(item);
+    };
+  }
 
   const assertBatchAllowed = async () => {
     if (typeof dependencies.assertBatchAllowed !== 'function') throw new Error('批次熔断安全门未装配');

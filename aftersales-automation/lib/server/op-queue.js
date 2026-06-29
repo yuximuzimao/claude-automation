@@ -253,9 +253,18 @@ async function execOpenAccount(op) {
 
 async function execA1FixedBatch(op) {
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
-  const { accountNum } = op.params;
+  const { accountNum, accountNote } = op.params;
+  const note = accountNote || `账号${accountNum}`;
   return processSingleAccountFixedBatch(String(accountNum), {
     thresholdHours: 48,
+    onTicketProgress: (item) => {
+      sse.broadcast('ticket-progress', {
+        accountNum: String(accountNum),
+        note,
+        workOrderNum: item.workOrderNum,
+        status: item.status,
+      });
+    },
   });
 }
 
@@ -440,7 +449,17 @@ async function execScan(op) {
 
     sse.broadcast('scan-progress', { type: 'start', num, note, current: i + 1, total });
     try {
-      const result = await processSingleAccountFixedBatch(String(num), { thresholdHours: 48 });
+      const result = await processSingleAccountFixedBatch(String(num), {
+        thresholdHours: 48,
+        onTicketProgress: (item) => {
+          sse.broadcast('ticket-progress', {
+            accountNum: String(num),
+            note,
+            workOrderNum: item.workOrderNum,
+            status: item.status,
+          });
+        },
+      });
       const count = (result && result.items ? result.items.length : null);
       updateAccountStatus(num, { status: 'ok', lastScan: new Date().toISOString(), note });
       sse.broadcast('scan-progress', { type: 'done', num, note, count });

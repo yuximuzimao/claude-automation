@@ -62,6 +62,18 @@ function connectSSE() {
     } catch(e) {}
     renderQueuePanel(lastQueueState);
   });
+  es.addEventListener('ticket-progress', (e) => {
+    try {
+      const data = JSON.parse(e.data || '{}');
+      if (data.accountNum && data.workOrderNum) {
+        if (!ticketProgress[data.accountNum]) {
+          ticketProgress[data.accountNum] = { note: data.note, tickets: {} };
+        }
+        ticketProgress[data.accountNum].tickets[data.workOrderNum] = data.status;
+      }
+    } catch(e) {}
+    renderQueuePanel(lastQueueState);
+  });
   es.addEventListener('op-queue-update', (e) => {
     const state = JSON.parse(e.data || '{}');
     // 扫描刚结束（running 从 scan 变为 null）→ 更新首页提醒（此时 server 已读完缓存）
@@ -71,6 +83,7 @@ function connectSSE() {
     // 清除已不适用的进度状态
     if (!state.running || state.running.type !== 'scan') scanProgress = null;
     if (!state.running || (state.running.type !== 'pipeline' && state.running.type !== 'reinfer')) pipelineProgress = null;
+    if (!state.running || (state.running.type !== 'a1-fixed-batch' && state.running.type !== 'scan')) ticketProgress = {};
     renderQueuePanel(state);
   });
   es.addEventListener('accounts-update', () => {
@@ -92,6 +105,7 @@ let lastCompletedOpId = null;
 let queuedSimIds = new Set(); // 当前在队列中（running+queued）的 simId 集合
 let lastQueueState = {};      // 缓存最新 queue state，供进度事件触发重绘
 let scanProgress = null;      // {accounts: [{num, note, status, count?}]}
+let ticketProgress = {};      // {accountNum: {note, tickets: {workOrderNum: status}}}
 let pipelineProgress = null;  // {workOrderNum, stage}
 function renderScanProgress(progress) {
   if (!progress || !progress.accounts || !progress.accounts.length) return '';
@@ -161,6 +175,26 @@ function renderQueuePanel(state) {
       const stageMap = { collecting: '采集中', inferring: '推理中', auto_executing: '自动执行中' };
       const stageCN = stageMap[pipelineProgress.stage] || pipelineProgress.stage;
       progressHtml = `<div class="oq-pipeline-status"><span class="oq-pipeline-stage">${stageCN}</span><span class="oq-pipeline-num">${h(pipelineProgress.workOrderNum)}</span></div>`;
+    }
+    // 工单级别进度（a1-fixed-batch 和 scan 都会产生 ticket-progress 事件）
+    let tp = null;
+    if (running.type === 'a1-fixed-batch') {
+      const accountNum = running.params && running.params.accountNum;
+      tp = accountNum ? ticketProgress[String(accountNum)] : null;
+    } else if (running.type === 'scan') {
+      // scan 轮转多账号，取最近一个有数据的账号进度
+      const keys = Object.keys(ticketProgress);
+      if (keys.length) tp = ticketProgress[keys[keys.length - 1]];
+    }
+    if (tp && tp.tickets && Object.keys(tp.tickets).length > 0) {
+      const TICKET_STATUS_CN = { pending: '等待中', processing: '处理中', collecting: '采集中', inferring: '推理中', auto_executing: '执行中', auto_executed: '已执行', simulated: '已推理', waiting: '待确认', done: '已完成', gone_from_pending: '已消失' };
+      const header = running.type === 'scan' && tp.note ? `<span class="oq-ticket-header">${h(tp.note)}</span>` : '';
+      const ticketRows = Object.entries(tp.tickets).map(([num, st]) => {
+        const stCN = TICKET_STATUS_CN[st] || st;
+        const active = ['processing', 'collecting', 'inferring', 'auto_executing'].includes(st);
+        return `<span class="oq-ticket oq-ticket-${st}${active ? ' oq-ticket-active' : ''}">${h(num.slice(-8))} <em>${stCN}</em></span>`;
+      }).join('');
+      progressHtml += `<div class="oq-ticket-list">${header}${ticketRows}</div>`;
     }
     rows.push(`<div class="op-queue-item op-queue-running">
       <span class="oq-dot">●</span>

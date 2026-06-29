@@ -16,12 +16,11 @@ function buildA1FixedBatchOp({ accountNum, accountNote }) {
   const note = String(accountNote || `账号${num}`).trim() || `账号${num}`;
   return {
     type: 'a1-fixed-batch',
-    label: `A1固定清单 账号${num}「${note}」`,
+    label: `处理工单 账号${num}「${note}」`,
     params: {
       accountNum: num,
       accountNote: note,
       thresholdHours: 48,
-      disableAutoExecute: true,
     },
   };
 }

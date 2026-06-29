@@ -62,7 +62,7 @@ async function setMainPageSelect(targetId, optionText) {
   const js = `(function(){
     var optionText = ${JSON.stringify(optionText)};
     var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
-      return !s.closest('.el-dialog__wrapper');
+      return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
     });
     function trySelect(s, i) {
       var inp = s.querySelector('input');

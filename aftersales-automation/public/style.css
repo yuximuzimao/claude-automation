@@ -1011,6 +1011,13 @@ header {
 .oq-pipeline-status { display: flex; gap: 5px; align-items: center; font-size: 11px; }
 .oq-pipeline-stage { color: var(--orange); font-weight: 500; flex-shrink: 0; }
 .oq-pipeline-num { color: var(--gray-600); font-family: 'SF Mono', 'Fira Code', monospace; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oq-ticket-list { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.oq-ticket-header { display: block; width: 100%; font-size: 10px; color: var(--gray-500); margin-bottom: 2px; }
+.oq-ticket { display: inline-flex; gap: 3px; align-items: center; font-size: 10px; font-family: 'SF Mono', 'Fira Code', monospace; padding: 1px 5px; border-radius: 3px; background: var(--gray-100); color: var(--gray-500); }
+.oq-ticket em { font-style: normal; font-size: 10px; }
+.oq-ticket-active { background: #fffbeb; color: var(--orange); font-weight: 500; }
+.oq-ticket-auto_executed, .oq-ticket-done { background: #f0fdf4; color: var(--green); }
+.oq-ticket-waiting, .oq-ticket-simulated { background: #eff6ff; color: #3b82f6; }
 .oq-time { flex-shrink: 0; font-size: 11px; color: var(--gray-400); font-family: 'SF Mono', 'Fira Code', monospace; }
 .oq-cancel {
   flex-shrink: 0;

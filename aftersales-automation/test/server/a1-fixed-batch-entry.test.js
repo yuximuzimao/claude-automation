@@ -24,12 +24,11 @@ test('buildA1FixedBatchOp always defaults to no-auto fixed 48h live batch', () =
   });
 
   assert.equal(op.type, 'a1-fixed-batch');
-  assert.equal(op.label, 'A1固定清单 账号14「茗瑞-KGOS」');
+  assert.equal(op.label, '处理工单 账号14「茗瑞-KGOS」');
   assert.deepEqual(op.params, {
     accountNum: '14',
     accountNote: '茗瑞-KGOS',
     thresholdHours: 48,
-    disableAutoExecute: true,
   });
 });
 
@@ -59,12 +58,11 @@ test('route handler validates account and enqueues single-account fixed batch op
   assert.deepEqual(res.body, { ok: true, opId: 'op-a1-14', message: '账号14固定清单批次已入队' });
   assert.deepEqual(enqueued, [{
     type: 'a1-fixed-batch',
-    label: 'A1固定清单 账号14「茗瑞-KGOS」',
+    label: '处理工单 账号14「茗瑞-KGOS」',
     params: {
       accountNum: '14',
       accountNote: '茗瑞-KGOS',
       thresholdHours: 48,
-      disableAutoExecute: true,
     },
   }]);
 });

@@ -50,11 +50,9 @@ test('op-queue executes a1-fixed-batch through Step14 with no-auto defaults', as
 
   assert.equal(completed.id, op.id);
   assert.equal(completed.status, 'done');
-  assert.deepEqual(calls, [[
-    '14',
-      {
-        thresholdHours: 48,
-      },
-  ]]);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0][0], '14');
+  assert.equal(calls[0][1].thresholdHours, 48);
+  assert.equal(typeof calls[0][1].onTicketProgress, 'function');
   assert.deepEqual(completed.result, { success: true, accountNum: '14', items: [] });
 });
