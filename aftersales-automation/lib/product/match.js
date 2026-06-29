@@ -51,72 +51,41 @@ function makeSelectShopJS(shopName) {
 }
 
 // 在主页 el-select 中设置搜索模式
-// 双通道匹配：优先按 label text 匹配，失败时 fallback 按 Vue option value 匹配
-// ⚠️ 必须用 cdp.clickAt 物理点击才能触发 el-select mousedown 展开，JS .click() 无效
+// ERP 的 el-select dropdown item 在 CDP 环境中高度为 0（getBoundingClientRect 不可靠），
+// 物理点击打开 dropdown 后无法点击菜单项。
+// 改用 Vue emit 直接注入值（同 makeSelectShopJS 方案），绕过 DOM 渲染问题。
 async function setMainPageSelect(targetId, optionText) {
-  // Step 1: 先关闭所有已打开的下拉菜单
   await cdp.eval(targetId, `document.body.click()`);
   await sleep(200);
 
-  // Step 2: 找到目标 select，给它的 input 打标记，再用 cdp.clickAt 物理点击打开
   const js = `(function(){
     var optionText = ${JSON.stringify(optionText)};
     var sels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
       return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
     });
-    function trySelect(s, i) {
-      var inp = s.querySelector('input');
+    for (var i = 0; i < sels.length; i++) {
+      var vm = sels[i].__vue__;
+      if (!vm || !vm.options) continue;
+      var inp = sels[i].querySelector('input');
       if (inp && inp.value === optionText) return JSON.stringify({already: true, idx: i});
-      // 给 input 打唯一标记，供外部 cdp.clickAt 定位
-      var mark = 'km-sel-' + i + '-' + Date.now();
-      if (inp) inp.setAttribute('data-km-mark', mark);
-      return JSON.stringify({needClick: true, idx: i, mark: mark});
+      var targetOpt = Array.from(vm.options).find(function(o){ return (o.label||o.currentLabel||'') === optionText; });
+      if (!targetOpt) continue;
+      vm.$emit('input', targetOpt.value);
+      vm.$emit('change', targetOpt.value);
+      return JSON.stringify({emitted: true, idx: i, value: targetOpt.value});
     }
-    // 通道1: label/currentLabel 精确匹配
-    for (var i = 0; i < sels.length; i++) {
-      var vm = sels[i].__vue__;
-      if (!vm || !vm.options) continue;
-      var hasOpt = Array.from(vm.options).some(function(o){ return (o.label||o.currentLabel||'') === optionText; });
-      if (hasOpt) return trySelect(sels[i], i);
-    }
-    // 通道2: value fallback
-    for (var i = 0; i < sels.length; i++) {
-      var vm = sels[i].__vue__;
-      if (!vm || !vm.options) continue;
-      var hasVal = Array.from(vm.options).some(function(o){ return String(o.value) === optionText; });
-      if (hasVal) return trySelect(sels[i], i);
-    }
-    return JSON.stringify({error:'SELECTOR_BROKEN: 未找到包含选项「' + optionText + '」的 select（text+value 双通道均未命中）'});
+    return JSON.stringify({error:'SELECTOR_BROKEN: 未找到包含选项「' + optionText + '」的 select'});
   })()`;
+
   const r = await cdp.eval(targetId, js);
   if (r.error) throw new Error(r.error);
-  if (r.already) return;
-  // 用物理点击打开 dropdown（JS .click() 不触发 mousedown，el-select 不会展开）
-  await cdp.clickAt(targetId, `input[data-km-mark="${r.mark}"]`);
-  await sleep(500);
-
-  // Step 3: 在可见的 dropdown 中找到匹配项并点击（只找最近弹出的）
-  await cdp.eval(targetId, `(function(){
-    var optionText = ${JSON.stringify(optionText)};
-    var dropdowns = Array.from(document.querySelectorAll('.el-select-dropdown')).filter(function(d){
-      return d.style.display !== 'none' && d.offsetHeight > 0;
-    });
-    for (var d = dropdowns.length - 1; d >= 0; d--) {
-      var items = dropdowns[d].querySelectorAll('.el-select-dropdown__item');
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].innerText.trim() === optionText && items[i].getBoundingClientRect().height > 0) {
-          items[i].click(); return 'clicked:' + optionText;
-        }
-      }
-    }
-    return 'not_found';
-  })()`);
   await sleep(300);
 }
 
 // 按位置设置搜索字段下拉（第 fieldIndex 个非店铺非弹窗 el-select）
 // 不依赖选项文字——ERP 可能改名，但布局位置固定：第2个 = 搜索字段（平台规格商家编码类）
 // 始终重置为第一个选项，确保每次都是正确的字段维度
+// 同 setMainPageSelect：用 Vue emit 注入，绕过 CDP 环境下 dropdown item 高度为 0 的问题
 async function setFieldSelect(targetId, fieldIndex) {
   await cdp.eval(targetId, `document.body.click()`);
   await sleep(200);
@@ -127,31 +96,16 @@ async function setFieldSelect(targetId, fieldIndex) {
     });
     if (sels.length <= ${fieldIndex}) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器未找到（非shop非dialog el-select 数量=' + sels.length + '，需要index=${fieldIndex}）'});
     var sel = sels[${fieldIndex}];
-    var inp = sel.querySelector('input');
-    if (!inp) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器内 input 不存在'});
-    var mark = 'km-field-${fieldIndex}-' + Date.now();
-    inp.setAttribute('data-km-mark', mark);
-    return JSON.stringify({mark: mark, currentValue: inp.value});
+    var vm = sel.__vue__;
+    if (!vm || !vm.options || !vm.options.length) return JSON.stringify({error:'SELECTOR_BROKEN: 字段选择器 Vue vm 不存在或无 options'});
+    var firstOpt = vm.options[0];
+    vm.$emit('input', firstOpt.value);
+    vm.$emit('change', firstOpt.value);
+    return JSON.stringify({emitted: true, value: firstOpt.value, label: firstOpt.label || firstOpt.currentLabel || ''});
   })()`;
 
   const r = await cdp.eval(targetId, js);
   if (r.error) throw new Error(r.error);
-
-  await cdp.clickAt(targetId, `input[data-km-mark="${r.mark}"]`);
-  await sleep(500);
-
-  // 点击当前可见下拉的第一个可见选项（第1个选项 = 平台规格商家编码类，不管文字怎么改）
-  await cdp.eval(targetId, `(function(){
-    var dropdowns = Array.from(document.querySelectorAll('.el-select-dropdown')).filter(function(d){
-      return d.style.display !== 'none' && d.offsetHeight > 0;
-    });
-    for (var d = dropdowns.length - 1; d >= 0; d--) {
-      var items = Array.from(dropdowns[d].querySelectorAll('.el-select-dropdown__item'))
-        .filter(function(item){ return item.getBoundingClientRect().height > 0; });
-      if (items.length > 0) { items[0].click(); return 'clicked:' + items[0].innerText.trim(); }
-    }
-    return 'no-visible-dropdown';
-  })()`);
   await sleep(300);
 }
 
@@ -160,10 +114,13 @@ const CHECK_SEARCH_MODE_JS = `(function(){
   var nonShopSels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
     return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
   });
-  // 双通道：DOM input.value（同步）或 Vue vm.value（响应式，更可靠）
+  // 双通道：DOM input.value（Vue emit 后同步更新）或 Vue option label 匹配（value 可能是 number，不能直接比字符串）
   var hasExact = !!Array.from(document.querySelectorAll('input.el-input__inner')).find(function(i){ return i.value === '精确搜索'; })
-    || !!Array.from(document.querySelectorAll('.el-select')).find(function(s){
-      return s.__vue__ && s.__vue__.value === '精确搜索';
+    || !!nonShopSels.find(function(s){
+      if (!s.__vue__ || !s.__vue__.options) return false;
+      var vm = s.__vue__;
+      var selectedOpt = Array.from(vm.options).find(function(o){ return o.value === vm.value; });
+      return selectedOpt && (selectedOpt.label || selectedOpt.currentLabel || '') === '精确搜索';
     });
   var fieldSel = nonShopSels[1];
   var fieldInp = fieldSel && fieldSel.querySelector('input.el-input__inner');
