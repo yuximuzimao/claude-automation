@@ -1,7 +1,7 @@
 'use strict';
 
 // 退回物流关键词（三处共用：infer.js / pipeline.js / op-queue.js）
-const RETURN_KEYWORDS = ['退回商家', '安排退回', '拒收', '退件', '退回'];
+const RETURN_KEYWORDS = ['退回商家', '安排退回', '拒收', '退件', '退回', '到达商家仓库'];
 
 // 买家签收关键词（非退回）
 // 注意：物流动态首行格式为"签收 YYYY-MM-DD HH:MM:SS"，需覆盖无前缀的"签收"
