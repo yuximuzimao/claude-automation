@@ -625,46 +625,60 @@ async function execReprocessOne(op) {
   // 等待详情页 Vue 组件完全渲染
   await sleep(2000);
 
+  // ── Step 5: 采集 + 推理（直接调用 step 14 已验证的 processOpenedDetail）──
+  const { inferDecision } = require('../infer');
+  const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
+
+  const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
+  const ticket = {
+    workOrderNum: queueItem.workOrderNum,
+    type: queueItem.type,
+    accountNote: queueItem.accountNote || accountResult.matchedNote || '',
+  };
+
+  const processed = await step14.processOpenedDetail({
+    account: accountResult,
+    listTargetId,
+    detailTargetId,
+    erpTargetId,
+    ticket,
+    disableAutoExecute: true,
+  }, {
+    collectDetail: (ctx) => collectTicketTargetAware({
+      detailTargetId: ctx.detailTargetId,
+      erpTargetId: ctx.erpTargetId,
+      workOrderNum: ctx.ticket.workOrderNum,
+      accountNote: ctx.account.matchedNote || ctx.ticket.accountNote || '',
+      type: ctx.ticket.type,
+    }),
+    inferDecision: (collectedData, ctxTicket) => inferDecision({ collectedData }, ctxTicket),
+  });
+
+  // ── 写回结果 ──────────────────────────────────────────────────
+  const now = new Date().toISOString();
+  const sim = {
+    id: `reprocess-${Date.now()}-${queueItem.workOrderNum}`,
+    workOrderNum: queueItem.workOrderNum,
+    queueItemId: queueItem.id,
+    accountNum,
+    accountNote: queueItem.accountNote || accountResult.matchedNote || '',
+    mode: 'live',
+    source: 'reprocess',
+    collectedData: processed.collectedData,
+    decision: processed.decision,
+    createdAt: now,
+  };
+  db.appendSimulation(sim);
+
+  const queueStatus = processed.decision && processed.decision.action === 'skip'
+    ? step14.statusForProcessed({ status: 'simulated', decision: processed.decision }, queueItem)
+    : (processed.decision && processed.decision.waitingRescan ? 'waiting' : 'simulated');
+  db.updateQueueItem(queueItem.id, { status: queueStatus, waitingRescan: !!(processed.decision && processed.decision.waitingRescan) });
+
+  log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
+
   let detailClosed = false;
-  try {
-    // ── Step 5: 采集 + 推理（此处与执行操作不同）────────────────────
-    const { inferDecision } = require('../infer');
-    const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
-
-    const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
-    const collectedData = await collectTicketTargetAware({
-      detailTargetId,
-      erpTargetId,
-      workOrderNum: queueItem.workOrderNum,
-      accountNote: queueItem.accountNote || accountResult.matchedNote || '',
-      type: queueItem.type || null,
-    });
-
-    const decision = inferDecision({ collectedData }, queueItem);
-
-    // ── 写回结果 ──────────────────────────────────────────────────
-    const now = new Date().toISOString();
-    const sim = {
-      id: `reprocess-${Date.now()}-${queueItem.workOrderNum}`,
-      workOrderNum: queueItem.workOrderNum,
-      queueItemId: queueItem.id,
-      accountNum,
-      accountNote: queueItem.accountNote || accountResult.matchedNote || '',
-      mode: 'live',
-      source: 'reprocess',
-      collectedData,
-      decision,
-      createdAt: now,
-    };
-    db.appendSimulation(sim);
-
-    const queueStatus = decision && decision.action === 'skip'
-      ? step14.statusForProcessed({ status: 'simulated', decision }, queueItem)
-      : (decision && decision.waitingRescan ? 'waiting' : 'simulated');
-    db.updateQueueItem(queueItem.id, { status: queueStatus, waitingRescan: !!(decision && decision.waitingRescan) });
-
-    log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${decision.action}${decision.waitingRescan ? ' (等待重查)' : ''}`);
-  } finally {
+  try { /* finally will close */ } finally {
     // Step 6: 关闭详情 tab（无论成功失败）
     try {
       const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
