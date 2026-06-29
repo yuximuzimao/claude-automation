@@ -276,9 +276,15 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
     : [];
   const sortInput = document.querySelector('input[placeholder="排序规则"]');
   const loading = Array.from(document.querySelectorAll('.el-loading-mask')).some(visible);
+  // 读"待商家处理"后面的数字。如果是 0，说明此店铺没有待处理工单，
+  // 调用方应跳过后续翻页/加载检测逻辑，避免误报"仍在加载/读取不完整"。
+  var bodyText = document.body.innerText || '';
+  var pendingMatch = bodyText.match(/待商家处理[^\\d]*(\\d+)/);
+  var pendingCount = pendingMatch ? parseInt(pendingMatch[1], 10) : null;
   return JSON.stringify({
     tickets,
     loading,
+    pendingCount,
     pagination: {
       totalText,
       nextButton: nextBtn ? {
@@ -361,6 +367,24 @@ async function readUrgentAfterSaleList(options = {}) {
   for (let pageIndex = 1; pageIndex <= maxPages; pageIndex++) {
     const pageData = prefetchedPageData || await cdp.eval(target.id, READ_CURRENT_PAGE_TICKETS_JS);
     prefetchedPageData = null;
+    // 第一页"待商家处理"数为 0 → 此店铺没有待处理工单，直接返回空列表
+    if (pageIndex === 1 && pageData && pageData.pendingCount === 0) {
+      return {
+        success: true,
+        complete: true,
+        targetId: target.id,
+        thresholdHours,
+        sortValue: pageData.sortValue || null,
+        urgent: [],
+        totalCollected: 0,
+        totalCount: 0,
+        pagesRead: 1,
+        stoppedEarly: false,
+        stopReason: '待商家处理数为 0，无需读取',
+        stopTicket: null,
+        pagination: normalizePaginationState(pageData.pagination || null),
+      };
+    }
     if (pageData && pageData.loading === true) {
       throw new Error(`售后工单列表第${pageIndex}页仍在加载，停止读取`);
     }

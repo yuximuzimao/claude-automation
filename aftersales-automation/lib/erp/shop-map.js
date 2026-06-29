@@ -19,7 +19,7 @@ const SHOP_MAP = [
   { noteKeyword: '泓砚',     erpShop: '泓砚',        supplierId: null },
   { noteKeyword: '丰瑞宁',   erpShop: '丰瑞宁',      supplierId: null },
   { noteKeyword: '煜嘉轩',   erpShop: '煜嘉轩',      supplierId: null },
-  { noteKeyword: '曼玲',     erpShop: '曼玲',        supplierId: null },
+  { noteKeyword: '曼龄',     erpShop: '曼龄',        supplierId: null },
   { noteKeyword: '顺链',     erpShop: '顺链',        supplierId: null },
   { noteKeyword: '澜泽',     erpShop: '澜泽',        supplierId: null },
   { noteKeyword: '茗瑞',     erpShop: '广州茗瑞',    supplierId: '43011' },
