@@ -11,17 +11,25 @@ const fs = require('fs');
 const cdp = require('../cdp');
 
 const CACHE_FILE = path.join(__dirname, '../../data/jl-alerts-cache.json');
-const HOME_URL = 'https://scrm.jlsupp.com/micro-supplier/business/home';
 
 async function fetchAndCacheAlerts(accountNum, accountNote) {
   const targets = await cdp.getTargets();
   const jl = targets.find(t => t.url && t.url.includes('scrm.jlsupp.com'));
   if (!jl) return readCache();
 
-  // 若当前不在首页，先导航过去
+  // 点左侧导航栏「后台首页」按钮（fixed 定位，不受页面滚动影响）
+  // 用 URL 直跳可能绕过 Vue router 导致弹窗时序问题，点按钮和人工操作行为一致
   const curUrl = await cdp.eval(jl.id, 'window.location.href').catch(() => '');
   if (!curUrl.includes('/business/home')) {
-    await cdp.navigate(jl.id, HOME_URL);
+    await cdp.eval(jl.id, `
+      (() => {
+        const btn = Array.from(document.querySelectorAll('.nav-item')).find(el =>
+          (el.innerText || el.textContent || '').trim() === '后台首页'
+        );
+        if (btn) btn.click();
+        return !!btn;
+      })()
+    `);
     await new Promise(r => setTimeout(r, 4000));
   }
 
