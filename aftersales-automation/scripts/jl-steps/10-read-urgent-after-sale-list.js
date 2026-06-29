@@ -297,82 +297,32 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
 `;
 
 async function clickNextPage(targetId) {
-  // 滚到页面底部确保 pagination 在视口内且不被 loading 遮挡
-  await cdp.eval(targetId, `
-    (() => {
-      const pag = document.querySelector('.el-pagination');
-      if (pag) pag.scrollIntoView({ block: 'nearest', behavior: 'instant' });
-    })()
-  `).catch(() => {});
-  await sleep(300);
+  // 先读完整分页状态（含 pages/li，以便拿到 currentPage）
+  const raw = await cdp.eval(targetId, READ_CURRENT_PAGE_TICKETS_JS);
+  const state = normalizePaginationState(raw && raw.pagination);
 
-  const state = normalizePaginationState(await cdp.eval(targetId, `
-(() => {
-  const btn = document.querySelector('.el-pagination .btn-next');
-  function visible(el) {
-    if (!el) return false;
-    const style = getComputedStyle(el);
-    const rect = el.getBoundingClientRect();
-    return style.display !== 'none' &&
-      style.visibility !== 'hidden' &&
-      rect.width > 0 &&
-      rect.height > 0;
-  }
-  function rectOf(el) {
-    const r = el.getBoundingClientRect();
-    return {
-      left: r.left,
-      top: r.top,
-      width: r.width,
-      height: r.height,
-      centerX: r.left + r.width / 2,
-      centerY: r.top + r.height / 2
-    };
-  }
-  return JSON.stringify({
-    nextButton: btn ? {
-      found: true,
-      visible: visible(btn),
-      disabled: Boolean(btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true'),
-      rect: visible(btn) ? rectOf(btn) : null
-    } : {
-      found: false,
-      visible: false,
-      disabled: true,
-      rect: null
-    },
-    pages: []
-  });
-})()
-`));
-
-  if (!state.hasNext || !state.nextButton || !state.nextButton.rect) {
+  if (!state.hasNext) {
     return { clicked: false, reason: state.reason || '下一页按钮不可点击', pagination: state };
   }
 
-  const { centerX: x, centerY: y } = state.nextButton.rect;
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
-    type: 'mouseMoved',
-    x,
-    y,
-  });
-  await sleep(100 + Math.floor(Math.random() * 101));
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
-    type: 'mousePressed',
-    x,
-    y,
-    button: 'left',
-    clickCount: 1,
-  });
-  await sleep(100 + Math.floor(Math.random() * 101));
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
-    type: 'mouseReleased',
-    x,
-    y,
-    button: 'left',
-    clickCount: 1,
-  });
-  return { clicked: true, reason: null, pagination: state, x, y };
+  // 分页条在页面底部（top ≈ 2400px），物理坐标点击超出 CDP viewport 无效。
+  // 用 Vue emit 'current-change' 直接触发，与 el-select / el-pagination 同方案。
+  const currentPage = state.currentPage;
+  const nextPage = Number.isSafeInteger(currentPage) && currentPage > 0 ? currentPage + 1 : null;
+  if (!nextPage) return { clicked: false, reason: '无法推算下一页页码（currentPage=' + currentPage + '）' };
+
+  const emitResult = await cdp.eval(targetId, `(function(){
+    var nextPage = ${nextPage};
+    var pag = document.querySelector('.el-pagination');
+    var vm = pag && pag.__vue__;
+    if (!vm) { var p = pag && pag.parentElement; vm = p && p.__vue__; }
+    if (!vm) return JSON.stringify({error: '未找到 .el-pagination Vue vm'});
+    vm.$emit('current-change', nextPage);
+    return JSON.stringify({emitted: true, nextPage: nextPage});
+  })()`);
+
+  if (emitResult && emitResult.error) return { clicked: false, reason: emitResult.error };
+  return { clicked: true, reason: null, pagination: state };
 }
 
 async function readUrgentAfterSaleList(options = {}) {

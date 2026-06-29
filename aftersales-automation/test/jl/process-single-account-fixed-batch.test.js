@@ -464,35 +464,36 @@ test('动态分页收缩后从第二页回第一页找到目标工单', async ()
   assert.deepEqual(calls, ['page1']);
 });
 
-test('切回第一页使用真实鼠标事件，并验证页码1已激活', async () => {
-  const events = [];
+test('切回第一页使用 Vue emit current-change，并验证页码1已激活', async () => {
+  const evalCalls = [];
   const states = [
-    page(2, [], { totalCount: 11, pages: [{ text: '1', active: false, rect: { centerX: 20, centerY: 30 } }, { text: '2', active: true }] }),
+    page(2, [], { totalCount: 11, pages: [{ text: '1', active: false }, { text: '2', active: true }] }),
     page(1, [], { totalCount: 11, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
   ];
 
   const result = await clickPageOneLikeHuman('list-tab', {
     readCurrentPage: async () => states.shift(),
-    dispatchMouseEvent: async event => events.push(event),
+    eval: async (id, js) => { evalCalls.push(js); return { emitted: true }; },
     sleep: async () => {},
   });
 
   assert.equal(result.pagination.currentPage, 1);
-  assert.deepEqual(events.map(event => event.type), ['mouseMoved', 'mousePressed', 'mouseReleased']);
+  assert.ok(evalCalls.some(js => js.includes('current-change') && js.includes('1')), '应调用 Vue emit current-change 1');
 });
 
 test('切回第一页时拒绝沿用页码先变但cards仍是旧页的瞬时状态', async () => {
   const oldTicket = { workOrderNum: ORDER_2 };
   const newTicket = { workOrderNum: ORDER_1 };
   const states = [
-    page(2, [oldTicket], { totalCount: 11, pages: [{ text: '1', active: false, rect: { centerX: 20, centerY: 30 } }, { text: '2', active: true }] }),
+    page(2, [oldTicket], { totalCount: 11, pages: [{ text: '1', active: false }, { text: '2', active: true }] }),
     page(1, [oldTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
     page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
     page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
   ];
   const result = await clickPageOneLikeHuman('list-tab', {
     readCurrentPage: async () => states.shift(),
-    dispatchMouseEvent: async () => {}, sleep: async () => {},
+    eval: async () => ({ emitted: true }),
+    sleep: async () => {},
     waitForPage: async (_id, _page, read) => {
       let previous = null;
       while (true) {

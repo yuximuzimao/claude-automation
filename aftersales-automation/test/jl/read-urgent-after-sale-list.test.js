@@ -88,7 +88,7 @@ test('isAscendingByTotalHours requires non-decreasing ticket order', () => {
   ]), false);
 });
 
-test('clickNextPage uses CDP mouse events instead of DOM click', () => {
+test('clickNextPage uses Vue emit current-change instead of CDP mouse events', () => {
   const source = fs.readFileSync(SOURCE_PATH, 'utf8');
   const start = source.indexOf('async function clickNextPage');
   const end = source.indexOf('\nasync function readUrgentAfterSaleList', start);
@@ -97,10 +97,9 @@ test('clickNextPage uses CDP mouse events instead of DOM click', () => {
 
   const body = source.slice(start, end);
   assert.doesNotMatch(body, /\.click\s*\(/);
-  assert.match(body, /Input\.dispatchMouseEvent/);
-  assert.match(body, /mouseMoved/);
-  assert.match(body, /mousePressed/);
-  assert.match(body, /mouseReleased/);
+  assert.doesNotMatch(body, /Input\.dispatchMouseEvent/);
+  assert.match(body, /current-change/);
+  assert.match(body, /\$emit/);
 });
 
 test('normalizePaginationState preserves active current page and visible page rects', () => {

@@ -160,7 +160,7 @@ function createWaitForPage(waitForFn) {
       stableReads = fingerprint === previousFingerprint ? stableReads + 1 : 1;
       previousFingerprint = fingerprint;
       return stableReads >= 2 ? state : null;
-    }, { timeoutMs: 8000, intervalMs: 500, label: `等待售后列表第${expectedPage}页刷新` });
+    }, { timeoutMs: 15000, intervalMs: 500, label: `等待售后列表第${expectedPage}页刷新` });
   };
 }
 
@@ -207,20 +207,24 @@ function createAutoExecutionGate({ readCircuit, executionJournal, readSimulation
 
 async function clickPageOneLikeHuman(targetId, dependencies) {
   const before = await dependencies.readCurrentPage(targetId);
-  const { pagination, pages } = assertTrustedPagination(before);
+  const { pagination } = assertTrustedPagination(before);
   if (pagination.currentPage === 1) return pagination;
 
-  const firstPage = pages.find(item => item.number === 1);
-  if (!firstPage || !firstPage.rect || !Number.isFinite(firstPage.rect.centerX) || !Number.isFinite(firstPage.rect.centerY)) {
-    throw new Error('无法切回第一页: 页码1不可见或缺少点击坐标');
-  }
+  // 分页条在页面底部（top ≈ 2400px），物理坐标点击超出 CDP viewport 无效。
+  // 用 Vue emit 'current-change' 直接触发，与 el-select / match.js 同方案。
+  const evalFn = typeof dependencies.eval === 'function'
+    ? dependencies.eval
+    : (id, js) => cdp.eval(id, js);
+  const emitResult = await evalFn(targetId, `(function(){
+    var pag = document.querySelector('.el-pagination');
+    var vm = pag && pag.__vue__;
+    if (!vm) { var p = pag && pag.parentElement; vm = p && p.__vue__; }
+    if (!vm) return JSON.stringify({error: '未找到 .el-pagination Vue vm'});
+    vm.$emit('current-change', 1);
+    return JSON.stringify({emitted: true});
+  })()`);
+  if (emitResult && emitResult.error) throw new Error(emitResult.error);
 
-  const eventBase = { x: firstPage.rect.centerX, y: firstPage.rect.centerY };
-  await dependencies.dispatchMouseEvent({ type: 'mouseMoved', ...eventBase });
-  await dependencies.sleep(100);
-  await dependencies.dispatchMouseEvent({ type: 'mousePressed', ...eventBase, button: 'left', clickCount: 1 });
-  await dependencies.sleep(100);
-  await dependencies.dispatchMouseEvent({ type: 'mouseReleased', ...eventBase, button: 'left', clickCount: 1 });
   await dependencies.sleep(1500);
 
   const after = typeof dependencies.waitForPage === 'function'
@@ -575,6 +579,7 @@ function loadDefaultDependencies() {
         sleep,
         waitForPage,
         dispatchMouseEvent: event => cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', event),
+        eval: (id, js) => cdp.eval(id, js),
       };
       return locateWorkOrderOnFreshList(targetId, workOrderNum, {
         readCurrentPage,
