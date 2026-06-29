@@ -625,9 +625,14 @@ async function execReprocessOne(op) {
   // 等待详情页 Vue 组件完全渲染
   await sleep(2000);
 
-  // ── Step 5: 采集 + 推理（直接调用 step 14 已验证的 processOpenedDetail）──
+  // ── Step 5: 采集 + 推理 + 自动执行（step 14 processOpenedDetail 完整链路）──
   const { inferDecision } = require('../infer');
   const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
+  const { shouldAutoExecute } = require('../server/auto-exec-confidence');
+  const { createAutoExecutionJournal } = require('../server/auto-execution-journal');
+  const { approveTicket } = require('../jl/approve');
+  const { rejectTicket } = require('../jl/reject');
+  const fs = require('fs');
 
   const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
   const ticket = {
@@ -636,13 +641,16 @@ async function execReprocessOne(op) {
     accountNote: queueItem.accountNote || accountResult.matchedNote || '',
   };
 
+  const circuitFile = path.join(BASE, 'data/circuit-breaker.json');
+  const readCircuit = () => { try { return JSON.parse(fs.readFileSync(circuitFile, 'utf8')); } catch { return null; } };
+  const executionJournal = createAutoExecutionJournal();
+
   const processed = await step14.processOpenedDetail({
     account: accountResult,
     listTargetId,
     detailTargetId,
     erpTargetId,
     ticket,
-    disableAutoExecute: true,
   }, {
     collectDetail: (ctx) => collectTicketTargetAware({
       detailTargetId: ctx.detailTargetId,
@@ -652,6 +660,28 @@ async function execReprocessOne(op) {
       type: ctx.ticket.type,
     }),
     inferDecision: (collectedData, ctxTicket) => inferDecision({ collectedData }, ctxTicket),
+    shouldAutoExecute,
+    assertAutoExecutionAllowed: step14.createAutoExecutionGate({
+      readCircuit,
+      executionJournal,
+      readSimulations: () => db.readSimulations(),
+    }),
+    executeDecision: async ({ detailTargetId: dtId, ticket: t, decision }) => {
+      if (decision && decision.action === 'approve') return approveTicket(dtId, t.workOrderNum);
+      if (decision && decision.action === 'reject') {
+        return rejectTicket(dtId, t.workOrderNum,
+          decision.rejectReason || decision.reason,
+          decision.rejectDetail || decision.rejectReason || decision.reason,
+          decision.imageUrl || null);
+      }
+      throw new Error(`不支持自动执行动作: ${decision && decision.action}`);
+    },
+    reserveAutoExecution: async ({ ticket: t, decision }) => executionJournal.reserve(t.workOrderNum, {
+      accountNote: accountResult.matchedNote || '', decisionAction: decision.action,
+    }),
+    markPageActionStarted: async ({ ticket: t }) => executionJournal.markPageActionStarted(t.workOrderNum),
+    markPageActionSucceeded: async ({ ticket: t }) => executionJournal.markPageActionSucceeded(t.workOrderNum),
+    markAutoExecuted: async ({ ticket: t }) => executionJournal.markExecuted(t.workOrderNum),
   });
 
   // ── 写回结果 ──────────────────────────────────────────────────
@@ -668,14 +698,21 @@ async function execReprocessOne(op) {
     decision: processed.decision,
     createdAt: now,
   };
+  if (processed.status === 'auto_executed') {
+    sim.executedAt = now;
+    sim.autoExecutedAt = now;
+    sim.execution = processed.execution;
+  }
+  if (processed.autoBlockedReason) sim.autoBlockedReason = processed.autoBlockedReason;
   db.appendSimulation(sim);
 
-  const queueStatus = processed.decision && processed.decision.action === 'skip'
-    ? step14.statusForProcessed({ status: 'simulated', decision: processed.decision }, queueItem)
-    : (processed.decision && processed.decision.waitingRescan ? 'waiting' : 'simulated');
-  db.updateQueueItem(queueItem.id, { status: queueStatus, waitingRescan: !!(processed.decision && processed.decision.waitingRescan) });
+  const queueStatus = step14.statusForProcessed(processed, queueItem);
+  db.updateQueueItem(queueItem.id, {
+    status: queueStatus,
+    waitingRescan: !!(processed.decision && processed.decision.waitingRescan),
+  });
 
-  log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
+  log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.status === 'auto_executed' ? ' (已自动执行)' : processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
 
   let detailClosed = false;
   try { /* finally will close */ } finally {
