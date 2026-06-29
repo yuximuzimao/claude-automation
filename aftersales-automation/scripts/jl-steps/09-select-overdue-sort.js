@@ -173,31 +173,29 @@ async function selectOverdueSort(options = {}) {
     };
   }
 
-  await clickPoint(
-    target.id,
-    before.rect.centerX,
-    before.rect.centerY,
-    DROPDOWN_PRESS_DELAY_MS
-  );
-  await sleep(AFTER_DROPDOWN_WAIT_MS);
-
-  // Element UI dropdown DOM 渲染有延迟，轮询直到选项出现或超时
-  let option = null;
-  const pollStart = Date.now();
-  while (!option) {
-    try {
-      option = await findSortOptionRect(target.id);
-    } catch(e) {
-      if (Date.now() - pollStart >= AFTER_DROPDOWN_MAX_WAIT_MS) throw e;
-      await sleep(200);
+  // JL SCRM el-select dropdown item 在 CDP 下 getBoundingClientRect().height = 0，
+  // 物理点击 → 找 visible item → 点 item 的路径失败（item 坐标为 0,0）。
+  // 改用 Vue emit 直接注入值（同 match.js 方案），绕过 DOM 渲染问题。
+  const targetSort = JSON.stringify(TARGET_SORT);
+  const emitResult = await cdp.eval(target.id, `(function(){
+    var targetText = ${targetSort};
+    var inputs = Array.from(document.querySelectorAll('input[placeholder="排序规则"]'));
+    for (var i = 0; i < inputs.length; i++) {
+      var sel = inputs[i].closest('.el-select');
+      var vm = sel && sel.__vue__;
+      if (!vm || !vm.options) continue;
+      var targetOpt = Array.from(vm.options).find(function(o){
+        return (o.label || o.currentLabel || '') === targetText;
+      });
+      if (!targetOpt) continue;
+      vm.$emit('input', targetOpt.value);
+      vm.$emit('change', targetOpt.value);
+      return JSON.stringify({emitted: true, value: targetOpt.value});
     }
-  }
-  await clickPoint(
-    target.id,
-    option.rect.centerX,
-    option.rect.centerY,
-    OPTION_PRESS_DELAY_MS
-  );
+    return JSON.stringify({error: '未找到排序规则 el-select 或目标选项「' + targetText + '」'});
+  })()`);
+
+  if (emitResult && emitResult.error) throw new Error(emitResult.error);
   await sleep(AFTER_SELECT_WAIT_MS);
 
   const after = await findSortDropdownRect(target.id);
@@ -209,7 +207,7 @@ async function selectOverdueSort(options = {}) {
     success: true,
     targetId: target.id,
     before,
-    selected: option,
+    selected: { text: TARGET_SORT, emitted: true, value: emitResult && emitResult.value },
     after,
   };
 }
