@@ -638,8 +638,7 @@ async function execReprocessOne(op) {
       type: queueItem.type || null,
     });
 
-    const ticket = collectedData && collectedData.ticket;
-    const decision = inferDecision({ collectedData }, ticket || {});
+    const decision = inferDecision({ collectedData }, queueItem);
 
     // ── 写回结果 ──────────────────────────────────────────────────
     const now = new Date().toISOString();
