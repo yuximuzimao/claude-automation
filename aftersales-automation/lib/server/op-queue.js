@@ -646,6 +646,10 @@ async function execExecute(op) {
     }
     const detailTargetId = opened.newTargetId;
 
+    // 等待详情页 Vue 组件完全渲染（waitForNewWorkOrderTarget 只校验了 URL 含工单号，
+    // body 可能尚未渲染完成，approveTicket navigate 会再等 3s，但这里多等 2s 更稳妥）
+    await sleep(2000);
+
     let detailClosed = false;
     try {
       // Step 5: 在详情 tab 上执行决策
