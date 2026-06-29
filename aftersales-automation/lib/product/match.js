@@ -242,6 +242,22 @@ async function matchWithRetry(targetId, barcode, attr1, shopName, isRetry) {
 
     await navigateErp(targetId, '商品对应表');
 
+    // navigateErp 在 session 新鲜且已在目标页时跳过刷新，页面可能残留上一次
+    // 搜索的 DOM 状态（select 展开/行展开），导致后续 querySelector 找不到元素。
+    // 预检：shop 选择器不存在 → reload 页面 → 重试一次。
+    const shopCheck = await cdp.eval(targetId, `(function(){
+      var wraps = Array.from(document.querySelectorAll('.el-select.select-wrap.support-dialog-select'));
+      return wraps.length > 0;
+    })()`);
+    if (!shopCheck) {
+      if (!isRetry) {
+        await cdp.eval(targetId, 'location.reload()');
+        await sleep(5000);
+        return matchWithRetry(targetId, barcode, attr1, shopName, true);
+      }
+      throw new Error('UI_NOT_READY: 商品对应表 shop 选择器未渲染（reload 后仍失败）');
+    }
+
     // 设置店铺过滤器：先检测当前店铺，不是目标则切换，切换后再验证。
     // 不信任上次残留状态——因为不同工单可能属于不同店铺。
     // 最多尝试 3 次，3 次仍错必有异常，抛错停止等人工介入。
