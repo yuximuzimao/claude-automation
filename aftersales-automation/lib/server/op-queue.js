@@ -552,8 +552,126 @@ async function execReinfer(op) {
 
 async function execReprocessOne(op) {
   const { queueItemId } = op.params;
-  const pipeline = require('./pipeline');
-  await pipeline.reprocessOne(queueItemId, '');
+
+  const queueItem = (db.readQueue().items || []).find(i => i.id === queueItemId);
+  if (!queueItem) throw new Error('未找到队列项');
+  if (['auto_executed', 'done'].includes(queueItem.status)) {
+    return { skipped: true, reason: '已执行完成，跳过重新采集' };
+  }
+
+  const accountNum = queueItem.accountNum;
+  if (!accountNum) throw new Error('缺少账号编号');
+
+  const cdp = require('../cdp');
+  const { openAccountFlow } = require('../jl/open-account-flow');
+  const { sleep, waitFor } = require('../wait');
+  const { inferDecision } = require('../infer');
+  const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
+
+  // ── Step 1: 安全打开账号 ──────────────────────────────────────────
+  const accountResult = await openAccountFlow(String(accountNum));
+  if (!accountResult || !accountResult.success) {
+    throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
+  }
+  saveSessionState(accountNum);
+  const listTargetId = accountResult.targetId;
+
+  // ── Step 2: 确保在售后列表页 ─────────────────────────────────────
+  const { prepareAfterSaleList } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const prepared = await prepareAfterSaleList({ targetId: listTargetId, thresholdHours: 48 });
+  if (!prepared || !prepared.success) {
+    throw new Error(`准备售后列表失败: ${(prepared && prepared.error) || '未知错误'}`);
+  }
+
+  // ── Step 3: 定位工单 ─────────────────────────────────────────────
+  const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
+  const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
+
+  const readCurrentPage = async (targetId) => {
+    const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+    return {
+      tickets: (raw && raw.tickets) || [],
+      loading: Boolean(raw && raw.loading),
+      pagination: step10.normalizePaginationState(raw && raw.pagination),
+    };
+  };
+  const waitForPage = step14.createWaitForPage(waitFor);
+
+  const located = await step14.locateWorkOrderOnFreshList(listTargetId, queueItem.workOrderNum, {
+    readCurrentPage,
+    clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
+      readCurrentPage, sleep, waitForPage,
+      dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
+      eval: (id, js) => cdp.eval(id, js),
+    }),
+    clickNextPage: step10.clickNextPage,
+    waitForPage,
+  });
+  if (!located || !located.found) {
+    throw new Error(`工单 ${queueItem.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
+  }
+
+  // ── Step 4: 点击处理按钮，打开详情 tab ───────────────────────────
+  const opened = await clickWorkOrderAction(queueItem.workOrderNum, { targetId: listTargetId });
+  if (!opened || !opened.success || !opened.newTargetId) {
+    throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
+  }
+  const detailTargetId = opened.newTargetId;
+
+  // 等待详情页 Vue 渲染完成
+  await sleep(2000);
+
+  let detailClosed = false;
+  try {
+    // ── Step 5: 采集数据 ──────────────────────────────────────────
+    const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
+    const collectedData = await collectTicketTargetAware({
+      detailTargetId,
+      erpTargetId,
+      workOrderNum: queueItem.workOrderNum,
+      accountNote: queueItem.accountNote || accountResult.matchedNote || '',
+      type: queueItem.type || null,
+    });
+
+    // ── Step 6: 推理 ──────────────────────────────────────────────
+    const ticket = collectedData && collectedData.ticket;
+    const decision = inferDecision({ collectedData }, ticket || {});
+
+    // ── Step 7: 写回结果 ──────────────────────────────────────────
+    const now = new Date().toISOString();
+    const sim = {
+      id: `reprocess-${Date.now()}-${queueItem.workOrderNum}`,
+      workOrderNum: queueItem.workOrderNum,
+      queueItemId: queueItem.id,
+      accountNum,
+      accountNote: queueItem.accountNote || accountResult.matchedNote || '',
+      mode: 'live',
+      source: 'reprocess',
+      collectedData,
+      decision,
+      createdAt: now,
+    };
+    db.appendSimulation(sim);
+
+    const queueStatus = decision && decision.action === 'skip'
+      ? step14.statusForProcessed({ status: 'simulated', decision }, queueItem)
+      : (decision && decision.waitingRescan ? 'waiting' : 'simulated');
+    db.updateQueueItem(queueItem.id, { status: queueStatus, waitingRescan: !!(decision && decision.waitingRescan) });
+
+    log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${decision.action}${decision.waitingRescan ? ' (等待重查)' : ''}`);
+  } finally {
+    // ── Step 8: 关闭详情 tab ──────────────────────────────────────
+    try {
+      const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
+      await step14.closeAndVerifyDetailTarget(detailTargetId, {
+        getTargets: cdp.getTargets, closeTarget: cdp.closeTarget, sleep,
+        readShopName: (id, waitMs) => readShopName(id, waitMs),
+      }, { account: accountResult, listTargetId });
+      detailClosed = true;
+    } catch(e) { log(`[reprocess] 关闭详情 tab 失败（非致命）: ${e.message}`); }
+  }
+
   return { done: true };
 }
 
