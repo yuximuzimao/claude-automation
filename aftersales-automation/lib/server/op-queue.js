@@ -576,17 +576,19 @@ async function execReprocessOne(op) {
   saveSessionState(accountNum);
   const listTargetId = accountResult.targetId;
 
-  // ── Step 2: 确保在售后列表页 ─────────────────────────────────────
-  const { prepareAfterSaleList } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
-  const prepared = await prepareAfterSaleList({ targetId: listTargetId, thresholdHours: 48 });
-  if (!prepared || !prepared.success) {
-    throw new Error(`准备售后列表失败: ${(prepared && prepared.error) || '未知错误'}`);
-  }
-
-  // ── Step 3: 定位工单 ─────────────────────────────────────────────
+  // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
   const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
   const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
   const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
+
+  await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
+  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
+  await step11.assertAfterSaleListReady(listTargetId);
+  const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
+  await selectOverdueSort({ targetId: listTargetId });
+  await sleep(step11.AFTER_SORT_WAIT_MS);
+  await step11.readCurrentPageSortCheck(listTargetId);
 
   const readCurrentPage = async (targetId) => {
     const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
@@ -597,13 +599,6 @@ async function execReprocessOne(op) {
     };
   };
   const waitForPage = step14.createWaitForPage(waitFor);
-
-  // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
-  await step14.clickPageOneLikeHuman(listTargetId, {
-    readCurrentPage, sleep, waitForPage,
-    dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
-    eval: (id, js) => cdp.eval(id, js),
-  });
 
   const located = await step14.locateWorkOrderOnFreshList(listTargetId, queueItem.workOrderNum, {
     readCurrentPage,
@@ -707,12 +702,16 @@ async function execExecute(op) {
   saveSessionState(accountNum);
   const listTargetId = accountResult.targetId;
 
-  // ── Step 2: 确保在售后列表页 ─────────────────────────────────────
-  const { prepareAfterSaleList } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
-  const prepared = await prepareAfterSaleList({ targetId: listTargetId, thresholdHours: 48 });
-  if (!prepared || !prepared.success) {
-    throw new Error(`准备售后列表失败: ${(prepared && prepared.error) || '未知错误'}`);
-  }
+  // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
+  const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+
+  await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
+  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
+  await step11.assertAfterSaleListReady(listTargetId);
+  const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
+  await selectOverdueSort({ targetId: listTargetId });
+  await sleep(step11.AFTER_SORT_WAIT_MS);
+  await step11.readCurrentPageSortCheck(listTargetId);
 
   const { action } = sim.decision;
   let result;
