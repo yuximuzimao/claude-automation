@@ -99,6 +99,7 @@ entry: cli.js
 
 ### 重试与重启
 
+- **重启铁律**：服务器启动/重启**禁止触发任何平台页面操作**——禁止 CDP、禁止 spawn 浏览器子进程、禁止 HTTP 请求平台页面。启动只做端口绑定 + 文件清理 + 状态重置。ERP 启动闸门已于 2026-06-29 移除（其 `recoverLogin` 会 reload ERP 页面）。页面操作仅在用户通过 API/前端手动触发时才经 op-queue 调度执行。
 - **鲸灵操作禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
 - **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。旧“下次自动扫描重置”目前不存在；未来只能由新 A1 手动/计划扫描显式重置，禁止假设固定扫描周期。

@@ -24,6 +24,13 @@ process.on('SIGINT', () => { cleanupLock(); process.exit(0); });
 process.on('SIGTERM', () => { cleanupLock(); process.exit(0); });
 process.on('SIGHUP', () => { cleanupLock(); process.exit(0); });
 
+// ===== 铁律：服务器启动/重启禁止触发任何平台页面操作 =====
+// - 禁止 CDP eval/clickAt/navigate/reload/dispatchMouseEvent
+// - 禁止 HTTP 请求鲸灵/ERP 页面
+// - 禁止 spawn jl.js / cli.js 等会操作浏览器的子进程
+// - 启动只做：Express 绑定端口 + 数据文件清理 + 残留状态重置
+// 页面操作仅在用户通过 API/前端手动触发时，经 op-queue 串行调度执行。
+
 // ── 全局崩溃防护（防止 uncaughtException/unhandledRejection 杀死进程）────
 const CRASH_LOG = path.join(__dirname, 'data/crash.log');
 function logCrash(type, err) {
@@ -165,31 +172,10 @@ app.locals.resumeScan = () => {
 app.listen(PORT, async () => {
   console.log(`黑总专属售后系统已启动: http://localhost:${PORT}`);
 
-  // ===== ERP 启动闸门：先校验登录，再开放工单队列 =====
-  const { checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown } = require('./lib/erp/navigate');
-  const { getTargetIds } = require('./lib/targets');
-  let startupErpId = null;
-  try {
-    // 确保 CDP 就绪（Chrome 可能尚未完全启动）
-    for (let i = 0; i < 3; i++) {
-      try { ({ erpId: startupErpId } = await getTargetIds()); break; }
-      catch { await new Promise(r => setTimeout(r, 1000)); }
-    }
-    if (!startupErpId) throw new Error('CDP target 未就绪（Chrome 可能未启动）');
-
-    const status = await checkLogin(startupErpId);
-    if (!status.loggedIn) {
-      console.log('[startup] ERP 未登录，尝试恢复...');
-      await recoverLogin(startupErpId);
-    }
-    updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
-    console.log('[startup] ERP 登录校验通过');
-  } catch (e) {
-    console.error('[startup] ERP 登录校验失败:', e.message);
-    updateErpHealth({ status: 'down', failReason: e.message, lastFailTime: new Date().toISOString() });
-    alertErpDown(e.message); // 告警但不阻止启动（鲸灵扫描仍可运行）
-  }
-  // ===== 闸门结束，以下正常启动 =====
+  // [stopped-2026-06-16] ERP 启动闸门已移除。
+  // 旧逻辑：启动时 checkLogin + recoverLogin 会触发 ERP 页面 reload/navigate，
+  // 在服务器重启时对平台页面产生非用户预期的跳转操作，违反"重启不碰平台"铁律。
+  // ERP session 超时改靠人工触发操作时的登录恢复兜底（lib/erp/navigate.js）。
 
   // ── 启动时数据清理 ────────────────────────────────────────────────
   startupDataCleanup();
