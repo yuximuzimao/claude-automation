@@ -326,7 +326,8 @@ async function main() {
 
   if (!items.length) {
     log('没有待采集的工单（status=pending）');
-    process.exit(0);
+    // 显式指定工单号却没匹配到 → 视为失败，让 pipeline 重试或上报
+    process.exit(workOrderNumFilter ? 1 : 0);
   }
 
   log(`开始采集，共 ${items.length} 条工单`);
