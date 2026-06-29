@@ -391,19 +391,40 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     // 赠品已发货独立校验：计算赠品物流状态，仅在主品全部退回时用于决策（不提前 escalate）
-    // 赠品物流只从 ERP 读取（鲸灵工单详情页不展示赠品包裹）
+    // 交叉验证原则：同一快递单号，鲸灵和 ERP 任一数据源显示「退回」即判退回。
+    // 不再区分"主品/赠品包裹"或"哪个源优先"——退回信息只要存在就算数。
+    const jlReturnedTrackings = new Set(
+      (packages || []).filter(pkg => RETURN_KEYWORDS.some(kw => (pkg.text || '').includes(kw)))
+        .map(pkg => {
+          const m = (pkg.text || '').match(/物流单号[：:]\s*\n?(\S+)/);
+          return m ? m[1] : null;
+        }).filter(Boolean)
+    );
+    const jlSignedTrackings = new Set(
+      (packages || []).filter(pkg => {
+        const text = pkg.text || '';
+        return SIGNED_KEYWORDS.some(kw => text.includes(kw)) && !RETURN_KEYWORDS.some(kw => text.includes(kw));
+      }).map(pkg => {
+        const m = (pkg.text || '').match(/物流单号[：:]\s*\n?(\S+)/);
+        return m ? m[1] : null;
+      }).filter(Boolean)
+    );
     let giftPkgStatuses = [];
     let giftNotReturned = [];
     if (giftShippedRows.length > 0) {
       const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
       giftPkgStatuses = giftTrackings.map(tr => {
         const erpEntry = erpLogResults.find(r => r.tracking === tr);
+        const erpReturned = erpEntry && erpEntry.logisticsText && RETURN_KEYWORDS.some(kw => erpEntry.logisticsText.includes(kw));
+        // 任一数据源显示退回 → 判退回
+        if (jlReturnedTrackings.has(tr) || erpReturned) return { tr, status: 'returned', label: `${tr}已退回` };
+        // 鲸灵显示已签收（且两边都不是退回）
+        if (jlSignedTrackings.has(tr)) return { tr, status: 'signed', label: `${tr}已签收未退回` };
+        // 余下走 ERP 判断
         if (erpEntry && erpEntry.logisticsText) {
           const text = erpEntry.logisticsText;
-          const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
           const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
-          const hasYizhan = !hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw));
-          if (hasReturn) return { tr, status: 'returned', label: `${tr}已退回` };
+          const hasYizhan = !hasSigned && YIZHAN_KEYWORDS.some(kw => text.includes(kw));
           if (hasYizhan) return { tr, status: 'yizhan', label: `${tr}驿站待取件未拦截成功` };
           if (hasSigned) return { tr, status: 'signed', label: `${tr}已签收未退回` };
           return { tr, status: 'transit', label: `${tr}在途未拦截成功需拦截` };

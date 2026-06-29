@@ -210,20 +210,26 @@ async function clickPageOneLikeHuman(targetId, dependencies) {
   const { pagination } = assertTrustedPagination(before);
   if (pagination.currentPage === 1) return pagination;
 
-  // 分页条在页面底部（top ≈ 2400px），物理坐标点击超出 CDP viewport 无效。
-  // 用 Vue emit 'current-change' 直接触发，与 el-select / match.js 同方案。
-  const evalFn = typeof dependencies.eval === 'function'
-    ? dependencies.eval
-    : (id, js) => cdp.eval(id, js);
-  const emitResult = await evalFn(targetId, `(function(){
-    var pag = document.querySelector('.el-pagination');
-    var vm = pag && pag.__vue__;
-    if (!vm) { var p = pag && pag.parentElement; vm = p && p.__vue__; }
-    if (!vm) return JSON.stringify({error: '未找到 .el-pagination Vue vm'});
-    vm.$emit('current-change', 1);
-    return JSON.stringify({emitted: true});
-  })()`);
-  if (emitResult && emitResult.error) throw new Error(emitResult.error);
+  // 分页条在页面底部（top ≈ 2400px），CDP 物理点击只接受 viewport 坐标。
+  // 先向下大幅滚动使分页条进入 viewport，重读坐标，物理点击——与 step 12 / clickNextPage 同原则。
+  await dependencies.dispatchMouseEvent({
+    type: 'mouseWheel', x: 640, y: 400, deltaX: 0, deltaY: 5000, button: 'none',
+  });
+  await dependencies.sleep(400);
+
+  const afterScroll = await dependencies.readCurrentPage(targetId);
+  const { pages } = assertTrustedPagination(afterScroll);
+  const pageOneLi = pages.find(p => p.number === 1 && !p.active);
+  if (!pageOneLi || !pageOneLi.rect || !Number.isFinite(pageOneLi.rect.centerX)) {
+    throw new Error('滚动后未找到第 1 页 li 按钮坐标');
+  }
+
+  const { centerX: x, centerY: y } = pageOneLi.rect;
+  await dependencies.dispatchMouseEvent({ type: 'mouseMoved', x, y, button: 'none' });
+  await dependencies.sleep(150);
+  await dependencies.dispatchMouseEvent({ type: 'mousePressed', x, y, button: 'left', clickCount: 1 });
+  await dependencies.sleep(130);
+  await dependencies.dispatchMouseEvent({ type: 'mouseReleased', x, y, button: 'left', clickCount: 1 });
 
   await dependencies.sleep(1500);
 
@@ -578,7 +584,7 @@ function loadDefaultDependencies() {
         readCurrentPage,
         sleep,
         waitForPage,
-        dispatchMouseEvent: event => cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', event),
+        dispatchMouseEvent: event => cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', event, 10000),
         eval: (id, js) => cdp.eval(id, js),
       };
       return locateWorkOrderOnFreshList(targetId, workOrderNum, {

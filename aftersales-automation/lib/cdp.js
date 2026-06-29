@@ -16,7 +16,7 @@ function cdpCall(targetId, method, params, timeout) {
     const id = Math.floor(Math.random() * 100000);
     const timer = setTimeout(() => {
       ws.close();
-      reject(new Error(`CDP timeout: ${method}`));
+      reject(new Error(`CDP timeout: ${method} (target: ${targetId})`));
     }, timeout || 30000);
 
     ws.addEventListener('open', () => {
