@@ -172,10 +172,28 @@ app.locals.resumeScan = () => {
 app.listen(PORT, async () => {
   console.log(`黑总专属售后系统已启动: http://localhost:${PORT}`);
 
-  // [stopped-2026-06-16] ERP 启动闸门已移除。
-  // 旧逻辑：启动时 checkLogin + recoverLogin 会触发 ERP 页面 reload/navigate，
-  // 在服务器重启时对平台页面产生非用户预期的跳转操作，违反"重启不碰平台"铁律。
-  // ERP session 超时改靠人工触发操作时的登录恢复兜底（lib/erp/navigate.js）。
+  // ===== ERP 启动闸门：先校验登录，再开放工单队列 =====
+  const { checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown } = require('./lib/erp/navigate');
+  const { getTargetIds } = require('./lib/targets');
+  let startupErpId = null;
+  try {
+    for (let i = 0; i < 3; i++) {
+      try { ({ erpId: startupErpId } = await getTargetIds()); break; }
+      catch { await new Promise(r => setTimeout(r, 1000)); }
+    }
+    if (!startupErpId) throw new Error('CDP target 未就绪（Chrome 可能未启动）');
+    const status = await checkLogin(startupErpId);
+    if (!status.loggedIn) {
+      console.log('[startup] ERP 未登录，尝试恢复...');
+      await recoverLogin(startupErpId);
+    }
+    updateErpHealth({ status: 'up', lastOkTime: new Date().toISOString(), consecutiveAuthFail: 0 });
+    console.log('[startup] ERP 登录校验通过');
+  } catch (e) {
+    console.error('[startup] ERP 登录校验失败:', e.message);
+    updateErpHealth({ status: 'down', failReason: e.message, lastFailTime: new Date().toISOString() });
+    alertErpDown(e.message);
+  }
 
   // ── 启动时数据清理 ────────────────────────────────────────────────
   startupDataCleanup();
