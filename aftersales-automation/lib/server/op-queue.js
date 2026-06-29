@@ -565,8 +565,6 @@ async function execReprocessOne(op) {
   const cdp = require('../cdp');
   const { openAccountFlow } = require('../jl/open-account-flow');
   const { sleep, waitFor } = require('../wait');
-  const { inferDecision } = require('../infer');
-  const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
 
   // ── Step 1: 安全打开账号 ──────────────────────────────────────────
   const accountResult = await openAccountFlow(String(accountNum));
@@ -577,10 +575,7 @@ async function execReprocessOne(op) {
   const listTargetId = accountResult.targetId;
 
   // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
-  const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
-  const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
-  const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
 
   await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
   await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
@@ -589,6 +584,11 @@ async function execReprocessOne(op) {
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
   await step11.readCurrentPageSortCheck(listTargetId);
+
+  // ── Step 3: 定位工单（与执行操作完全一致的寻址逻辑）───────────────
+  const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
+  const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
 
   const readCurrentPage = async (targetId) => {
     const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
@@ -614,19 +614,22 @@ async function execReprocessOne(op) {
     throw new Error(`工单 ${queueItem.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
   }
 
-  // ── Step 4: 点击处理按钮，打开详情 tab ───────────────────────────
+  // Step 4: 点击处理按钮，打开详情 tab
   const opened = await clickWorkOrderAction(queueItem.workOrderNum, { targetId: listTargetId });
   if (!opened || !opened.success || !opened.newTargetId) {
     throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
   }
   const detailTargetId = opened.newTargetId;
 
-  // 等待详情页 Vue 渲染完成
+  // 等待详情页 Vue 组件完全渲染
   await sleep(2000);
 
   let detailClosed = false;
   try {
-    // ── Step 5: 采集数据 ──────────────────────────────────────────
+    // ── Step 5: 采集 + 推理（此处与执行操作不同）────────────────────
+    const { inferDecision } = require('../infer');
+    const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
+
     const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
     const collectedData = await collectTicketTargetAware({
       detailTargetId,
@@ -636,11 +639,10 @@ async function execReprocessOne(op) {
       type: queueItem.type || null,
     });
 
-    // ── Step 6: 推理 ──────────────────────────────────────────────
     const ticket = collectedData && collectedData.ticket;
     const decision = inferDecision({ collectedData }, ticket || {});
 
-    // ── Step 7: 写回结果 ──────────────────────────────────────────
+    // ── 写回结果 ──────────────────────────────────────────────────
     const now = new Date().toISOString();
     const sim = {
       id: `reprocess-${Date.now()}-${queueItem.workOrderNum}`,
@@ -663,7 +665,7 @@ async function execReprocessOne(op) {
 
     log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${decision.action}${decision.waitingRescan ? ' (等待重查)' : ''}`);
   } finally {
-    // ── Step 8: 关闭详情 tab ──────────────────────────────────────
+    // Step 6: 关闭详情 tab（无论成功失败）
     try {
       const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
       await step14.closeAndVerifyDetailTarget(detailTargetId, {
