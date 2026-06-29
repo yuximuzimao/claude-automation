@@ -59,10 +59,10 @@ async function clickAt(targetId, selector) {
     return { x: r.left + r.width/2, y: r.top + r.height/2, found: true };
   })()`);
   if (!rect || !rect.found) throw new Error(`Element not found: ${selector}`);
-  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await dispatchMouseEvent(targetId, {
     type: 'mousePressed', x: rect.x, y: rect.y, button: 'left', clickCount: 1,
   });
-  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await dispatchMouseEvent(targetId, {
     type: 'mouseReleased', x: rect.x, y: rect.y, button: 'left', clickCount: 1,
   });
   return { clicked: true, x: rect.x, y: rect.y };
@@ -70,13 +70,20 @@ async function clickAt(targetId, selector) {
 
 // 按屏幕坐标发送真实鼠标点击。用于固定位置控件的后备点击。
 async function clickPoint(targetId, x, y) {
-  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await dispatchMouseEvent(targetId, {
     type: 'mousePressed', x, y, button: 'left', clickCount: 1,
   });
-  await cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await dispatchMouseEvent(targetId, {
     type: 'mouseReleased', x, y, button: 'left', clickCount: 1,
   });
   return { clicked: true, x, y };
+}
+
+// CDP Input.dispatchMouseEvent 在后台标签页会卡死（Chrome 不处理非激活 tab 的 input）。
+// 此包装函在发送任意 mouse 事件前先 HTTP 激活目标标签页，统一解决所有调用方的失焦超时。
+async function dispatchMouseEvent(targetId, event, timeout) {
+  await activateTarget(targetId);
+  return cdpCall(targetId, 'Input.dispatchMouseEvent', event, timeout || 10000);
 }
 
 // 列出所有标签页（Chrome HTTP API）
@@ -347,6 +354,7 @@ const cdp = {
   createTarget,
   activateTarget,
   closeTarget,
+  dispatchMouseEvent,
 };
 
 module.exports = cdp;

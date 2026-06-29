@@ -584,7 +584,7 @@ function loadDefaultDependencies() {
         readCurrentPage,
         sleep,
         waitForPage,
-        dispatchMouseEvent: event => cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', event, 10000),
+        dispatchMouseEvent: event => cdp.dispatchMouseEvent(targetId, event),
         eval: (id, js) => cdp.eval(id, js),
       };
       return locateWorkOrderOnFreshList(targetId, workOrderNum, {

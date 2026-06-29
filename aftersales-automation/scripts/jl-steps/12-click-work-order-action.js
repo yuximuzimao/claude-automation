@@ -273,7 +273,7 @@ async function scrollActionButtonIntoView(targetId, workOrderNum) {
     const deltaY = found.rect && found.rect.centerY < VIEWPORT_MARGIN_PX
       ? -WHEEL_STEP_PX
       : WHEEL_STEP_PX;
-    await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
+    await cdp.dispatchMouseEvent(targetId, {
       type: 'mouseWheel',
       x: clamp(found.rect ? found.rect.centerX : viewport.width / 2, 20, viewport.width - 20),
       y: clamp(viewport.height / 2, 20, viewport.height - 20),
@@ -288,14 +288,14 @@ async function scrollActionButtonIntoView(targetId, workOrderNum) {
 }
 
 async function clickPointLikeHuman(targetId, x, y) {
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseMoved',
     x,
     y,
     button: 'none',
   });
   await sleep(MOVE_DELAY_MS);
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await cdp.dispatchMouseEvent(targetId, {
     type: 'mousePressed',
     x,
     y,
@@ -303,7 +303,7 @@ async function clickPointLikeHuman(targetId, x, y) {
     clickCount: 1,
   });
   await sleep(PRESS_DELAY_MS);
-  await cdp.cdpCall(targetId, 'Input.dispatchMouseEvent', {
+  await cdp.dispatchMouseEvent(targetId, {
     type: 'mouseReleased',
     x,
     y,

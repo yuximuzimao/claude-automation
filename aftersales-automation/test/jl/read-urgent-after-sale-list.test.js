@@ -88,7 +88,7 @@ test('isAscendingByTotalHours requires non-decreasing ticket order', () => {
   ]), false);
 });
 
-test('clickNextPage uses Vue emit current-change instead of CDP mouse events', () => {
+test('clickNextPage 先向下滚动再物理点击，不使用 Vue emit', () => {
   const source = fs.readFileSync(SOURCE_PATH, 'utf8');
   const start = source.indexOf('async function clickNextPage');
   const end = source.indexOf('\nasync function readUrgentAfterSaleList', start);
@@ -96,10 +96,10 @@ test('clickNextPage uses Vue emit current-change instead of CDP mouse events', (
   assert.notEqual(end, -1);
 
   const body = source.slice(start, end);
-  assert.doesNotMatch(body, /\.click\s*\(/);
-  assert.doesNotMatch(body, /Input\.dispatchMouseEvent/);
-  assert.match(body, /current-change/);
-  assert.match(body, /\$emit/);
+  assert.doesNotMatch(body, /\$emit/);
+  assert.match(body, /mouseWheel/);
+  assert.match(body, /dispatchMouseEvent/);
+  assert.match(body, /mousePressed/);
 });
 
 test('normalizePaginationState preserves active current page and visible page rects', () => {

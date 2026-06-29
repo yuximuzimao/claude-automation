@@ -19,6 +19,9 @@ const { sleep, waitFor } = require(path.join(__dirname, '../../lib/wait'));
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const DEFAULT_THRESHOLD_HOURS = 48;
 const MAX_PAGES = 20;
+const MOVE_DELAY_MS = 150;
+const PRESS_DELAY_MS = 130;
+const SCROLL_TO_BOTTOM_DELTA_PX = 5000;
 
 function parseRemainingHours(text) {
   if (!text) return null;
@@ -297,7 +300,6 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
 `;
 
 async function clickNextPage(targetId) {
-  // 先读完整分页状态（含 pages/li，以便拿到 currentPage）
   const raw = await cdp.eval(targetId, READ_CURRENT_PAGE_TICKETS_JS);
   const state = normalizePaginationState(raw && raw.pagination);
 
@@ -305,23 +307,38 @@ async function clickNextPage(targetId) {
     return { clicked: false, reason: state.reason || '下一页按钮不可点击', pagination: state };
   }
 
-  // 分页条在页面底部（top ≈ 2400px），物理坐标点击超出 CDP viewport 无效。
-  // 用 Vue emit 'current-change' 直接触发，与 el-select / el-pagination 同方案。
-  const currentPage = state.currentPage;
-  const nextPage = Number.isSafeInteger(currentPage) && currentPage > 0 ? currentPage + 1 : null;
-  if (!nextPage) return { clicked: false, reason: '无法推算下一页页码（currentPage=' + currentPage + '）' };
+  // 分页条在页面底部（top ≈ 2400px），CDP 物理点击只接受 viewport 坐标。
+  // 先向下大幅滚动使分页条进入 viewport，重读坐标，再物理点击——与 step 12 同原则。
+  await cdp.dispatchMouseEvent(targetId, {
+    type: 'mouseWheel',
+    x: 640,
+    y: 400,
+    deltaX: 0,
+    deltaY: SCROLL_TO_BOTTOM_DELTA_PX,
+    button: 'none',
+  });
+  await sleep(400);
 
-  const emitResult = await cdp.eval(targetId, `(function(){
-    var nextPage = ${nextPage};
-    var pag = document.querySelector('.el-pagination');
-    var vm = pag && pag.__vue__;
-    if (!vm) { var p = pag && pag.parentElement; vm = p && p.__vue__; }
-    if (!vm) return JSON.stringify({error: '未找到 .el-pagination Vue vm'});
-    vm.$emit('current-change', nextPage);
-    return JSON.stringify({emitted: true, nextPage: nextPage});
-  })()`);
+  const raw2 = await cdp.eval(targetId, READ_CURRENT_PAGE_TICKETS_JS);
+  const state2 = normalizePaginationState(raw2 && raw2.pagination);
+  const nextRect = state2 && state2.nextButton && state2.nextButton.rect;
 
-  if (emitResult && emitResult.error) return { clicked: false, reason: emitResult.error };
+  if (!nextRect || !Number.isFinite(nextRect.centerX) || !Number.isFinite(nextRect.centerY)) {
+    return { clicked: false, reason: '滚动后未能获取下一页按钮坐标', pagination: state2 || state };
+  }
+
+  await cdp.dispatchMouseEvent(targetId, {
+    type: 'mouseMoved', x: nextRect.centerX, y: nextRect.centerY, button: 'none',
+  });
+  await sleep(MOVE_DELAY_MS);
+  await cdp.dispatchMouseEvent(targetId, {
+    type: 'mousePressed', x: nextRect.centerX, y: nextRect.centerY, button: 'left', clickCount: 1,
+  });
+  await sleep(PRESS_DELAY_MS);
+  await cdp.dispatchMouseEvent(targetId, {
+    type: 'mouseReleased', x: nextRect.centerX, y: nextRect.centerY, button: 'left', clickCount: 1,
+  });
+
   return { clicked: true, reason: null, pagination: state };
 }
 
