@@ -542,9 +542,11 @@ async function execPipeline(op) {
 }
 
 async function execReinfer(op) {
-  const { simId } = op.params;
+  const { simId, hint = '' } = op.params;
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
+  // 将用户输入的评价指令写入 queue item，同时清除旧 pipeline 残留的自动 hint
+  db.updateQueueItem(sim.queueItemId, { hint: hint || null });
   // 复用 execReprocessOne 的完整 A1 安全链路（openAccountFlow → 定位 → 点击 → 采集 → 推理）
   return execReprocessOne({ params: { queueItemId: sim.queueItemId } });
 }
