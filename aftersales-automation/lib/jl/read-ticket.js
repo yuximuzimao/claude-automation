@@ -28,10 +28,7 @@ const READ_ORDER_INFO_JS = `(function(){
   var bodyText = document.body.innerText;
 
   // 退货物流单号 + 多次使用检测（页面直接显示可见文本，非 tooltip）
-  // 兼容多种标签格式：退货物流单号 / 退货物流：圆通 YTxxxx / 物流单号（退货上下文）
-  var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/)
-    || bodyText.match(/退货物流[：:][^\\n]*?([A-Z]{2,4}\\d{8,})/)
-    || bodyText.match(/退[货件]物流[：:][^\\n]*?([A-Z]{2,4}\\d{8,})/);
+  var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/);
   var returnTracking = rtMatch ? rtMatch[1] : '';
   var returnTrackingMultiUse = false;
   var returnTrackingUsedBy = [];
@@ -219,6 +216,18 @@ async function readTicket(targetId, workOrderNum) {
         return fail(`工单 ${workOrderNum} 在列表中可见但详情页加载失败，请重试`);
       }
       return fail(`工单 ${workOrderNum} 已不在待处理列表（可能已处理或已关闭，详情页状态未确认：${lastVerify || 'unknown'}）`);
+    }
+
+    // 退货物流信息区块可能异步加载晚于主内容，先轮询等它出现（最多 5s）
+    // 超时不报错——仅退款工单没有退货物流区块
+    for (let i = 0; i < 10; i++) {
+      try {
+        const hasReturn = await cdp.eval(targetId,
+          `(function(){ return document.body.innerText.includes('退货物流单号') || document.body.innerText.includes('退货物流信息'); })()`
+        );
+        if (hasReturn) break;
+      } catch { /* ignore */ }
+      await sleep(500);
     }
 
     // 等待 API 数据加载完成（mainOrderId 有值才算就绪）
