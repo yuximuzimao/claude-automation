@@ -542,12 +542,11 @@ async function execPipeline(op) {
 }
 
 async function execReinfer(op) {
-  const { simId, hint = '' } = op.params;
-  const pipeline = require('./pipeline');
+  const { simId } = op.params;
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
-  await pipeline.reprocessOne(sim.queueItemId, hint);
-  return { done: true };
+  // 复用 execReprocessOne 的完整 A1 安全链路（openAccountFlow → 定位 → 点击 → 采集 → 推理）
+  return execReprocessOne({ params: { queueItemId: sim.queueItemId } });
 }
 
 async function execReprocessOne(op) {
