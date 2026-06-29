@@ -651,13 +651,13 @@ async function execExecute(op) {
       // Step 5: 在详情 tab 上执行决策
       if (action === 'approve') {
         const { approveTicket } = require('../jl/approve');
-        result = await approveTicket(detailTargetId, sim.workOrderNum, { skipNavigation: true });
+        result = await approveTicket(detailTargetId, sim.workOrderNum);
       } else if (action === 'reject') {
         const { rejectTicket } = require('../jl/reject');
         result = await rejectTicket(detailTargetId, sim.workOrderNum,
           rejectReason || sim.decision.rejectReason || sim.decision.reason,
           rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
-          rejectImageUrl || null, null, { skipNavigation: true });
+          rejectImageUrl || null);
 
         // 拦截提醒
         const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
