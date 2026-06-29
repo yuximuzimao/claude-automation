@@ -423,15 +423,27 @@ async function execScan(op) {
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
   const total = numsToScan.length;
 
+  // 发 init 事件，前端初始化进度面板
+  sse.broadcast('scan-progress', {
+    type: 'init',
+    accounts: numsToScan.map(n => ({
+      num: n,
+      note: (accountsConfig[String(n)] || {}).note || (accountsConfig[String(n)] || {}).name || `账号${n}`,
+      status: 'pending',
+    })),
+  });
+
   for (let i = 0; i < total; i++) {
     const num = numsToScan[i];
     const cfg = accountsConfig[String(num)] || {};
     const note = cfg.note || cfg.name || `账号${num}`;
 
-    sse.broadcast('scan-progress', { current: i + 1, total, accountNum: num, note, stage: 'start' });
+    sse.broadcast('scan-progress', { type: 'start', num, note, current: i + 1, total });
     try {
-      await processSingleAccountFixedBatch(String(num), { thresholdHours: 48 });
+      const result = await processSingleAccountFixedBatch(String(num), { thresholdHours: 48 });
+      const count = (result && result.items ? result.items.length : null);
       updateAccountStatus(num, { status: 'ok', lastScan: new Date().toISOString(), note });
+      sse.broadcast('scan-progress', { type: 'done', num, note, count });
     } catch(e) {
       const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.message || '');
       updateAccountStatus(num, {
@@ -440,6 +452,7 @@ async function execScan(op) {
         lastScan: new Date().toISOString(),
         note,
       });
+      sse.broadcast('scan-progress', { type: 'error', num, note, error: (e.message || '').slice(0, 100) });
       console.error(`[execScan] 账号${num} 失败:`, e.message);
     }
 

@@ -21,7 +21,7 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
   // 用 URL 直跳可能绕过 Vue router 导致弹窗时序问题，点按钮和人工操作行为一致
   const curUrl = await cdp.eval(jl.id, 'window.location.href').catch(() => '');
   if (!curUrl.includes('/business/home')) {
-    await cdp.eval(jl.id, `
+    const clicked = await cdp.eval(jl.id, `
       (() => {
         const btn = Array.from(document.querySelectorAll('.nav-item')).find(el =>
           (el.innerText || el.textContent || '').trim() === '后台首页'
@@ -29,7 +29,11 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
         if (btn) btn.click();
         return !!btn;
       })()
-    `);
+    `).catch(() => false);
+    if (!clicked) {
+      console.warn('[alerts] 未找到「后台首页」导航按钮，跳过');
+      return readCache();
+    }
     await new Promise(r => setTimeout(r, 4000));
   }
 

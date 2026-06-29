@@ -28,6 +28,7 @@ const DROPDOWN_PRESS_DELAY_MS = 120;
 const OPTION_MOVE_DELAY_MS = 140;
 const OPTION_PRESS_DELAY_MS = 130;
 const AFTER_DROPDOWN_WAIT_MS = 300;
+const AFTER_DROPDOWN_MAX_WAIT_MS = 1800; // dropdown DOM 渲染超时上限
 const AFTER_SELECT_WAIT_MS = 700;
 
 function sleep(ms) {
@@ -180,7 +181,17 @@ async function selectOverdueSort(options = {}) {
   );
   await sleep(AFTER_DROPDOWN_WAIT_MS);
 
-  const option = await findSortOptionRect(target.id);
+  // Element UI dropdown DOM 渲染有延迟，轮询直到选项出现或超时
+  let option = null;
+  const pollStart = Date.now();
+  while (!option) {
+    try {
+      option = await findSortOptionRect(target.id);
+    } catch(e) {
+      if (Date.now() - pollStart >= AFTER_DROPDOWN_MAX_WAIT_MS) throw e;
+      await sleep(200);
+    }
+  }
   await clickPoint(
     target.id,
     option.rect.centerX,

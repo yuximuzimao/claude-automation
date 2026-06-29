@@ -160,7 +160,11 @@ const CHECK_SEARCH_MODE_JS = `(function(){
   var nonShopSels = Array.from(document.querySelectorAll('.el-select')).filter(function(s){
     return !s.closest('.el-dialog__wrapper') && !s.classList.contains('support-dialog-select');
   });
-  var hasExact = !!Array.from(document.querySelectorAll('input.el-input__inner')).find(function(i){ return i.value === '精确搜索'; });
+  // 双通道：DOM input.value（同步）或 Vue vm.value（响应式，更可靠）
+  var hasExact = !!Array.from(document.querySelectorAll('input.el-input__inner')).find(function(i){ return i.value === '精确搜索'; })
+    || !!Array.from(document.querySelectorAll('.el-select')).find(function(s){
+      return s.__vue__ && s.__vue__.value === '精确搜索';
+    });
   var fieldSel = nonShopSels[1];
   var fieldInp = fieldSel && fieldSel.querySelector('input.el-input__inner');
   var hasField = !!(fieldInp && fieldInp.value && fieldInp.value.trim());

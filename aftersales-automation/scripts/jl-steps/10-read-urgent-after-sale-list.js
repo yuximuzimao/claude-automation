@@ -297,6 +297,15 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
 `;
 
 async function clickNextPage(targetId) {
+  // 滚到页面底部确保 pagination 在视口内且不被 loading 遮挡
+  await cdp.eval(targetId, `
+    (() => {
+      const pag = document.querySelector('.el-pagination');
+      if (pag) pag.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    })()
+  `).catch(() => {});
+  await sleep(300);
+
   const state = normalizePaginationState(await cdp.eval(targetId, `
 (() => {
   const btn = document.querySelector('.el-pagination .btn-next');
