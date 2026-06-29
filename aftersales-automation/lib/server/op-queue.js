@@ -659,7 +659,7 @@ async function execReprocessOne(op) {
       accountNote: ctx.account.matchedNote || ctx.ticket.accountNote || '',
       type: ctx.ticket.type,
     }),
-    inferDecision: (collectedData, ctxTicket) => inferDecision({ collectedData }, ctxTicket),
+    inferDecision: (collectedData) => inferDecision({ collectedData }, queueItem),
     shouldAutoExecute,
     assertAutoExecutionAllowed: step14.createAutoExecutionGate({
       readCircuit,
