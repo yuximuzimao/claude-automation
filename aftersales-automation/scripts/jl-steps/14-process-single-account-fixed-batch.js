@@ -318,9 +318,16 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
 async function closeAndVerifyDetailTarget(detailTargetId, dependencies, context = {}) {
   await assertClosableCurrentAccountDetailTarget(detailTargetId, context, dependencies);
   await dependencies.closeTarget(detailTargetId);
-  const targets = await dependencies.getTargets();
+  // Chrome closeTarget HTTP 返回成功后标签页可能尚未从 /json 列表移除，短等待 + 重试一次
+  await dependencies.sleep(300);
+  let targets = await dependencies.getTargets();
   if ((targets || []).some(target => targetIdOf(target) === detailTargetId)) {
-    throw new Error(`详情标签页关闭验证失败: ${detailTargetId}`);
+    await dependencies.closeTarget(detailTargetId);
+    await dependencies.sleep(500);
+    targets = await dependencies.getTargets();
+    if ((targets || []).some(target => targetIdOf(target) === detailTargetId)) {
+      throw new Error(`详情标签页关闭验证失败: ${detailTargetId}`);
+    }
   }
 }
 
@@ -653,6 +660,7 @@ function loadDefaultDependencies() {
     },
     closeTarget: cdp.closeTarget,
     getTargets: cdp.getTargets,
+    sleep,
     onProgress: async () => {},
   };
 }

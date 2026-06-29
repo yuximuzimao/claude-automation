@@ -93,6 +93,7 @@ function batchDependencies(overrides = {}) {
       calls.push(['execute', ticket.workOrderNum, detailTargetId]);
       return { success: true, action: 'approve' };
     },
+    sleep: async () => {},
     closeTarget: async targetId => {
       calls.push(['close', targetId]);
       targets = targets.filter(id => id !== targetId);
@@ -464,35 +465,48 @@ test('动态分页收缩后从第二页回第一页找到目标工单', async ()
   assert.deepEqual(calls, ['page1']);
 });
 
-test('切回第一页使用 Vue emit current-change，并验证页码1已激活', async () => {
-  const evalCalls = [];
+test('切回第一页先滚动到底部再物理点击，不使用 Vue emit', async () => {
+  const events = [];
+  const p1rect = { centerX: 100, centerY: 500, left: 86, top: 486, width: 28, height: 28 };
+  const p2rect = { centerX: 130, centerY: 500, left: 116, top: 486, width: 28, height: 28 };
   const states = [
-    page(2, [], { totalCount: 11, pages: [{ text: '1', active: false }, { text: '2', active: true }] }),
-    page(1, [], { totalCount: 11, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
+    // 1. 初始读取（before）
+    page(2, [], { totalCount: 11, pages: [{ text: '1', active: false, rect: p1rect }, { text: '2', active: true, rect: p2rect }] }),
+    // 2. 滚动后重读（afterScroll）
+    page(2, [], { totalCount: 11, pages: [{ text: '1', active: false, rect: p1rect }, { text: '2', active: true, rect: p2rect }] }),
+    // 3. 点击后读取
+    page(1, [], { totalCount: 11, pages: [{ text: '1', active: true, rect: p1rect }, { text: '2', active: false, rect: p2rect }] }),
   ];
 
   const result = await clickPageOneLikeHuman('list-tab', {
     readCurrentPage: async () => states.shift(),
-    eval: async (id, js) => { evalCalls.push(js); return { emitted: true }; },
+    dispatchMouseEvent: async event => { events.push(event); },
     sleep: async () => {},
   });
 
   assert.equal(result.pagination.currentPage, 1);
-  assert.ok(evalCalls.some(js => js.includes('current-change') && js.includes('1')), '应调用 Vue emit current-change 1');
+  assert.ok(events.some(e => e.type === 'mouseWheel' && e.deltaY > 0), '应先向下滚动');
+  assert.ok(events.some(e => e.type === 'mousePressed' && e.x === p1rect.centerX && e.y === p1rect.centerY), '应物理点击第1页 li');
 });
 
 test('切回第一页时拒绝沿用页码先变但cards仍是旧页的瞬时状态', async () => {
   const oldTicket = { workOrderNum: ORDER_2 };
   const newTicket = { workOrderNum: ORDER_1 };
+  const p1rect = { centerX: 100, centerY: 500, left: 86, top: 486, width: 28, height: 28 };
+  const p2rect = { centerX: 130, centerY: 500, left: 116, top: 486, width: 28, height: 28 };
   const states = [
-    page(2, [oldTicket], { totalCount: 11, pages: [{ text: '1', active: false }, { text: '2', active: true }] }),
-    page(1, [oldTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
-    page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
-    page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true }, { text: '2', active: false }] }),
+    // 1. 初始读取（before）
+    page(2, [oldTicket], { totalCount: 11, pages: [{ text: '1', active: false, rect: p1rect }, { text: '2', active: true, rect: p2rect }] }),
+    // 2. 滚动后重读（afterScroll）—— 仍是第2页，但有 rect
+    page(2, [oldTicket], { totalCount: 11, pages: [{ text: '1', active: false, rect: p1rect }, { text: '2', active: true, rect: p2rect }] }),
+    // 3-5. waitForPage 内多次读取（页码变了但 cards 还是旧的，直到稳定）
+    page(1, [oldTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true, rect: p1rect }, { text: '2', active: false, rect: p2rect }] }),
+    page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true, rect: p1rect }, { text: '2', active: false, rect: p2rect }] }),
+    page(1, [newTicket], { totalCount: 11, hasNext: true, pages: [{ text: '1', active: true, rect: p1rect }, { text: '2', active: false, rect: p2rect }] }),
   ];
   const result = await clickPageOneLikeHuman('list-tab', {
     readCurrentPage: async () => states.shift(),
-    eval: async () => ({ emitted: true }),
+    dispatchMouseEvent: async () => {},
     sleep: async () => {},
     waitForPage: async (_id, _page, read) => {
       let previous = null;
@@ -753,6 +767,7 @@ test('关闭详情tab前必须确认它是当前账号鲸灵详情页，且不�
   const dependencies = {
     getTargets: async () => targets,
     readShopName: async targetId => ({ success: true, state: 'logged-in', shopName: targetId === 'detail-tab' ? '测试店铺旗舰店' : '测试店铺' }),
+    sleep: async () => {},
     closeTarget: async targetId => {
       closed = true;
       targets = targets.filter(target => target.id !== targetId);
