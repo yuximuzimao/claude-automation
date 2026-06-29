@@ -703,10 +703,10 @@ router.post('/accounts/:num/relogin-confirm', async (req, res) => {
       req2.end();
     });
 
-    // session 已保存，清除 expired 状态（改为"未扫描"，等下次扫描验证）
+    // session 已保存，设为正常状态（可直接处理工单）
     const accounts = JSON.parse(require('fs').readFileSync(ACCOUNTS_FILE, 'utf8'));
     const note = accounts[String(num)] ? (accounts[String(num)].note || accounts[String(num)].name) : `账号${num}`;
-    opQueue.updateAccountStatus(num, { status: 'unknown', error: null, note });
+    opQueue.updateAccountStatus(num, { status: 'ok', error: null, note });
 
     res.json({ ok: true, message: `账号${num} session 已保存` });
   } catch (e) {

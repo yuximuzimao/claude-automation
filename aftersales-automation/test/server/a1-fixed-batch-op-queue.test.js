@@ -54,7 +54,6 @@ test('op-queue executes a1-fixed-batch through Step14 with no-auto defaults', as
     '14',
       {
         thresholdHours: 48,
-        disableAutoExecute: true,
       },
   ]]);
   assert.deepEqual(completed.result, { success: true, accountNum: '14', items: [] });

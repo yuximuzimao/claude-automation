@@ -256,7 +256,6 @@ async function execA1FixedBatch(op) {
   const { accountNum } = op.params;
   return processSingleAccountFixedBatch(String(accountNum), {
     thresholdHours: 48,
-    disableAutoExecute: true,
   });
 }
 
@@ -405,81 +404,68 @@ async function execScanFinalize(op) {
 }
 
 async function execScan(op) {
-  const { accounts = [] } = op.params;
-  const args = accounts.length ? accounts.map(String) : [];
-  const { code, stdout } = await new Promise((resolve, reject) => {
-    let stdout = '', stderrBuf = '';
-    const proc = spawn('node', [path.join(BASE, 'scan-all.js'), ...args], {
-      cwd: BASE, stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    activeProc = proc;
-    proc.stdout.on('data', d => { stdout += d; });
-    proc.stderr.on('data', d => {
-      stderrBuf += d;
-      const lines = stderrBuf.split('\n');
-      stderrBuf = lines.pop();
-      for (const line of lines) {
-        if (line.startsWith('SCAN_PROGRESS:')) {
-          try { sse.broadcast('scan-progress', JSON.parse(line.slice(14))); } catch(e) {}
-        } else if (line.trim()) process.stderr.write(line + '\n');
-      }
-    });
-    proc.on('close', code => {
-      if (activeProc === proc) activeProc = null;
-      if (stderrBuf.trim()) {
-        if (stderrBuf.startsWith('SCAN_PROGRESS:')) {
-          try { sse.broadcast('scan-progress', JSON.parse(stderrBuf.slice(14))); } catch(e) {}
-        } else process.stderr.write(stderrBuf + '\n');
-      }
-      resolve({ code, stdout });
-    });
-    proc.on('error', reject);
-  });
-  let result = null;
-  try { result = JSON.parse(stdout); } catch(e) {}
-  const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
-  try { fs.writeFileSync(SCAN_STATUS_FILE, JSON.stringify({ scanning: false, lastScanAt: new Date().toISOString(), lastResult: result })); } catch(e) {}
-  if (result) sse.broadcast('accounts-update', readAccountStatus());
-  if (code !== 0 && !result) throw new Error('scan-all 执行失败');
+  const { accounts: specifiedAccounts = [] } = op.params;
 
-  // 到期预警：从本次扫描结果
-  const warnTickets = (result && result.urgent || []).filter(t => t.totalHours != null && t.totalHours <= REMIND_HOURS);
-  for (const t of warnTickets) {
-    const timeStr = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '未知';
-    const deadlineDate = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
-    const deadlineStr = `截止${(deadlineDate.getMonth()+1).toString().padStart(2,'0')}/${deadlineDate.getDate().toString().padStart(2,'0')} ${deadlineDate.getHours().toString().padStart(2,'0')}:${deadlineDate.getMinutes().toString().padStart(2,'0')}`;
-    const title = `【⚠️即将过期】${t.note || '账号' + t.num} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${deadlineStr}`;
-    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
+  const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
+  let accountsConfig = {};
+  try { accountsConfig = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8')); } catch(e) {}
+  const statusMap = readAccountStatus();
+
+  let numsToScan = Object.keys(accountsConfig)
+    .map(Number)
+    .filter(n => (statusMap[String(n)] || {}).status === 'ok')
+    .sort((a, b) => a - b);
+  if (specifiedAccounts.length > 0) {
+    const specified = new Set(specifiedAccounts.map(Number));
+    numsToScan = numsToScan.filter(n => specified.has(n));
   }
 
-  // 补充：检查队列中扫描未命中的到期工单（waiting/simulated）
-  const scanWarnedNums = new Set(warnTickets.map(t => t.workOrderNum));
+  const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const total = numsToScan.length;
+
+  for (let i = 0; i < total; i++) {
+    const num = numsToScan[i];
+    const cfg = accountsConfig[String(num)] || {};
+    const note = cfg.note || cfg.name || `账号${num}`;
+
+    sse.broadcast('scan-progress', { current: i + 1, total, accountNum: num, note, stage: 'start' });
+    try {
+      await processSingleAccountFixedBatch(String(num), { thresholdHours: 48 });
+      updateAccountStatus(num, { status: 'ok', lastScan: new Date().toISOString(), note });
+    } catch(e) {
+      const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.message || '');
+      updateAccountStatus(num, {
+        status: isExpired ? 'expired' : 'error',
+        error: (e.message || '').slice(0, 200),
+        lastScan: new Date().toISOString(),
+        note,
+      });
+      console.error(`[execScan] 账号${num} 失败:`, e.message);
+    }
+
+    // 风控红线：账号之间间隔 ≥10s
+    if (i < total - 1) {
+      await new Promise(r => setTimeout(r, 10000));
+    }
+  }
+
+  // 到期预警：检查队列中 waiting/simulated 等待人工处理的工单
   const queueItems = (db.readQueue().items || []).filter(i =>
-    i.mode === 'live' && !['done', 'auto_executed'].includes(i.status)
+    i.mode === 'live' && !['done', 'auto_executed', 'auto_executing'].includes(i.status)
   );
   for (const qi of queueItems) {
-    if (scanWarnedNums.has(qi.workOrderNum)) continue;
     if (!qi.deadlineAt) continue;
     const remainingHours = (new Date(qi.deadlineAt).getTime() - Date.now()) / 3600000;
     if (remainingHours > REMIND_HOURS || remainingHours <= 0) continue;
-    const timeStr = remainingHours < 1 ? '<1小时' : `${remainingHours.toFixed(0)}小时`;
+    const timeStr = remainingHours < 1 ? '<1小时' : `${Math.round(remainingHours)}小时`;
     const dl = new Date(qi.deadlineAt);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
     if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
   }
 
-  // 入队推理
-  const pending = (db.readQueue().items || []).filter(i =>
-    (i.status === 'pending' || i.status === 'collected') && i.mode === 'live'
-  );
-  for (const item of pending) {
-    const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
-    enqueue('reprocess-one', label, { queueItemId: item.id });
-  }
-
-  cleanReturnedIntercepts().catch(e => log(`[intercept-clean] 清理失败（非致命）: ${e.message}`));
-  return result;
+  sse.broadcast('accounts-update', readAccountStatus());
+  return { ok: true, scanned: total };
 }
 
 // ── 拦截记录清理 ─────────────────────────────────────────────────

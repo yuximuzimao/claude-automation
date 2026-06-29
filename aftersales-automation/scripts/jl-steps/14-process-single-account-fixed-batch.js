@@ -531,6 +531,7 @@ function loadDefaultDependencies() {
   const { inferDecision } = require('../../lib/infer');
   const { shouldAutoExecute } = require('../../lib/server/auto-exec-confidence');
   const { approveTicket } = require('../../lib/jl/approve');
+  const { rejectTicket } = require('../../lib/jl/reject');
   const db = require('../../lib/server/data');
   const { createAutoExecutionJournal } = require('../../lib/server/auto-execution-journal');
   const fs = require('node:fs');
@@ -610,10 +611,18 @@ function loadDefaultDependencies() {
       readSimulations: () => db.readSimulations(),
     }),
     executeDecision: async ({ detailTargetId, ticket, decision }) => {
-      if (!decision || decision.action !== 'approve') {
-        throw new Error(`不支持自动执行动作: ${decision && decision.action}`);
+      if (decision && decision.action === 'approve') {
+        return approveTicket(detailTargetId, ticket.workOrderNum);
       }
-      return approveTicket(detailTargetId, ticket.workOrderNum);
+      if (decision && decision.action === 'reject') {
+        return rejectTicket(
+          detailTargetId, ticket.workOrderNum,
+          decision.rejectReason || decision.reason,
+          decision.rejectDetail || decision.rejectReason || decision.reason,
+          decision.imageUrl || null
+        );
+      }
+      throw new Error(`不支持自动执行动作: ${decision && decision.action}`);
     },
     reserveAutoExecution: async ({ account, ticket, decision }) => executionJournal.reserve(ticket.workOrderNum, {
       accountNote: account.matchedNote || '',
@@ -810,6 +819,14 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       account: accountResult,
       listTargetId: prepared.targetId,
     }, dependencies);
+  }
+
+  try {
+    const { fetchAndCacheAlerts } = require('../../lib/jl/alerts');
+    const accountNote = (accountResult && accountResult.matchedNote) || `账号${accountNum}`;
+    await fetchAndCacheAlerts(accountNum, accountNote);
+  } catch(e) {
+    console.warn('[step14] fetchAndCacheAlerts 非致命错误:', e.message);
   }
 
   return {
