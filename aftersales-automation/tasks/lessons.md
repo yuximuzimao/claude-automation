@@ -418,3 +418,15 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 - pipeline.collect.js 失败时写 `hint: '采集连续失败，需人工核查'` 到 queue item
 - `execReinfer` 没清除 → `inferDecision` 读到非空 hint → 当用户评价指令覆盖推理
 - **修复**：`execReinfer` 把新 hint（空输入则为 null）写入 queue item
+
+## 2026-06-30 session 教训
+
+### processOpenedDetail 传 raw ticket 给 inferDecision（#29 延伸）
+- SKILL.md #29 记录了 `pipeline.js`/`op-queue.js` 的修复，但 `14-process-single-account-fixed-batch.js` 的 `processOpenedDetail` 仍在传原始扫描 ticket
+- `context.ticket` 只有 totalHours/type/workOrderNum，没有 queueItem 的 deadlineAt/urgency/hoursUntilNextScan → remainingHours=null
+- **规则**：新增 `inferDecision` 调用方时必须检查第二参数是否完整 queueItem。`hoursUntilNextScan` 不在持久化字段中，需 `getHoursUntilNextScan()` 动态追加
+
+### 前端 badge 更新依赖 SSE 事件，切换标签不触发
+- 快递行动红点仅页面加载和 SSE 事件时更新，切标签时 `loadActionBadge()` 不被调用 → badge 停滞
+- `loadActionBadge()` 不查 `/api/action-dismissed` → 已标记处理的条目仍被计入 → 红点虚高
+- **规则**：标签切换时，非当前 tab 的 badge 也要刷新；badge 计数逻辑必须与列表渲染逻辑同源（查同一份 dismissed 数据）

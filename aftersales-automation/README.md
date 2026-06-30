@@ -1,6 +1,6 @@
 # 鲸灵售后自动化
 
-鲸灵平台（scrm.jlsupp.com）售后工单辅助系统，通过 CDP 直连 Chrome 操作鲸灵 SCRM 和快麦 ERP。当前运行在纯手动模式：旧自动扫描、自动入队和批量执行入口已停用，新 A1 逐账号扫描闭环正在重建。
+鲸灵平台（scrm.jlsupp.com）售后工单辅助系统，通过 CDP 直连 Chrome 操作鲸灵 SCRM 和快麦 ERP。定时扫描已恢复（每天 5 次），按店铺开关过滤。
 
 ## 快速启动
 
@@ -10,7 +10,7 @@ npm test                # 运行全量单元测试
 open http://localhost:3457  # 打开由 launchd 管理的 Web 面板
 ```
 
-> `scan-all.js`、旧 `/api/scan` 和批量执行链路仅保留为待迁移代码，禁止作为当前入口运行。安全账号打开必须走店铺管理按钮或 `scripts/jl-steps/open-account.js`。
+> 店铺管理支持单店铺扫描开关（`scanEnabled`），定时扫描和手动「扫描工单」均遵守此开关。安全账号打开走店铺管理按钮或 `scripts/jl-steps/open-account.js`。
 
 **server.js 由 launchd 管理**（`~/Library/LaunchAgents/com.heizong.aftersale-server.plist`），Mac 启动时自动拉起，崩溃自动重启；旧 `com.jl.server.plist` 已改名为 `.disabled`。手动重启用 `/aftersales-restart` skill。
 
