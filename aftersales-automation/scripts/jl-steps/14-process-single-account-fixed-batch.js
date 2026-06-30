@@ -4,6 +4,7 @@
 const { matchShopName } = require('../../lib/jl/login-state');
 const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
+const { getHoursUntilNextScan } = require('../../lib/constants');
 
 const MAX_PAGES = 20;
 const JL_HOST_SUFFIX = 'jlsupp.com';
@@ -378,7 +379,8 @@ async function cleanupCurrentAccountJlTargets(context, dependencies) {
 
 async function processOpenedDetail(context, dependencies) {
   const collectedData = await dependencies.collectDetail(context);
-  const decision = await dependencies.inferDecision(collectedData, context.ticket);
+  const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
+  const decision = await dependencies.inferDecision(collectedData, queueItem);
   if (context && context.disableAutoExecute === true) {
     return {
       status: 'simulated',
@@ -387,7 +389,7 @@ async function processOpenedDetail(context, dependencies) {
       autoBlockedReason: 'fixed_batch 已显式关闭自动执行',
     };
   }
-  const auto = await dependencies.shouldAutoExecute(decision, collectedData, context.ticket);
+  const auto = await dependencies.shouldAutoExecute(decision, collectedData, context.queueItem);
   if (!auto) return { status: 'simulated', collectedData, decision };
   if (typeof dependencies.assertAutoExecutionAllowed === 'function') {
     const gate = await dependencies.assertAutoExecutionAllowed({ ...context, collectedData, decision });
@@ -768,6 +770,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         detailTargetId,
         erpTargetId,
         ticket: item.ticket,
+        queueItem: item.queueItem,
         disableAutoExecute: options.disableAutoExecute === true,
       }, dependencies);
       Object.assign(item, processed);
