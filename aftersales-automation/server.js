@@ -100,39 +100,22 @@ app.post('/api/skip-next-scan', (req, res) => {
   res.json({ ok: true, message: '下次扫描将被跳过' });
 });
 
-// [stopped-2026-06-16] 旧自动扫描入口（多账号注入 + scan-finalize 自动入队 reprocess）。
-// 当前不被调用，保留框架供第三步以新注入路径重建。
+// 恢复定时扫描（2026-06-30）：runAutoScan 不再逐个入队 scan-account，
+// 改为入队单个 scan 操作，由 execScan 统一处理过滤和提醒过期。
 function runAutoScan() {
   if (skipNextScan) {
     skipNextScan = false;
     console.log('[auto-scan] 本次扫描已跳过（手动标记）');
     return;
   }
-  try {
-    const accounts = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8'));
-    const numsToScan = Object.keys(accounts)
-      .map(Number)
-      .filter(n => {
-        const a = accounts[String(n)];
-        return a && fs.existsSync(path.join(SESSIONS_DIR, a.file));
-      })
-      .sort((a, b) => a - b);
-
-    for (const num of numsToScan) {
-      const account = accounts[String(num)];
-      const note = (account && (account.note || account.name)) || `账号${num}`;
-      opQueue.enqueue('scan-account', `扫描 ${note}`, { accountNum: num, accountNote: note });
-    }
-    opQueue.enqueue('scan-finalize', '巡检收尾', {});
-  } catch (e) {
-    console.error(`[auto-scan] 读取账号失败: ${e.message}`);
-  }
+  console.log('[auto-scan] 开始定时扫描');
+  opQueue.enqueue('scan', '定时扫描工单', { accounts: [] });
 }
 
 // 精确到点的定时调度（8/12/16/20）
 let scanTimer = null;
 
-// [stopped-2026-06-16] 定时调度框架，当前不被调用（启动时不再 scheduleNextScan）。第三步重建时复用。
+// 定时调度框架（2026-06-30 恢复）：每天按 SCAN_HOURS 整点触发。
 function scheduleNextScan() {
   // 先清除可能残留的旧 timer，防止多次调用叠加（resumeScan 连续触发时重复入队根因）
   if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
@@ -158,15 +141,13 @@ function scheduleNextScan() {
   }, ms);
 }
 
-// [stopped-2026-06-16] 定时扫描已停。stopScan/resumeScan 降级为 no-op：
-// /emergency-stop 与 /resume 现在只控制 op-queue 队列层（紧急停止机制第二三步复用），
-// 不再启停定时器。resumeScan 不再调 scheduleNextScan，避免"恢复运行"按钮重新拉起旧自动扫描。
+// stopScan/resumeScan：/emergency-stop 暂停定时调度，/resume 恢复
 app.locals.stopScan = () => {
   if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
   app.locals.nextScanAt = null;
 };
 app.locals.resumeScan = () => {
-  // no-op：定时扫描已停，恢复运行只恢复队列处理（见 routes.js /resume → opQueue.resume()）。
+  scheduleNextScan(); // 恢复定时调度
 };
 
 app.listen(PORT, async () => {
@@ -207,13 +188,30 @@ app.listen(PORT, async () => {
     }
   })();
 
-  // [stopped-2026-06-16] 停旧系统：不再调度定时扫描、不再启动 ERP 心跳保活。
-  // 旧自动路径（多账号注入 + pipeline 自动写鲸灵）已触发风控封 IP，待第二三步以新注入路径重建。
-  // scheduleNextScan();
-  // startErpHeartbeat(getTargetIds, checkLogin, recoverLogin, updateErpHealth, loadErpHealth, alertErpDown);
+  // 恢复定时扫描（2026-06-30）：runAutoScan 走 execScan 新路径，遵守 scanEnabled 开关。
+  scheduleNextScan();
+
+  // 启动时补齐老账号 scanEnabled 字段（一次性迁移）
+  (() => {
+    try {
+      if (fs.existsSync(ACCOUNTS_FILE)) {
+        const accounts = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8'));
+        let migrated = 0;
+        for (const [num, acct] of Object.entries(accounts)) {
+          if (acct && acct.scanEnabled === undefined) {
+            acct.scanEnabled = true;
+            migrated++;
+          }
+        }
+        if (migrated > 0) {
+          fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(accounts, null, 2));
+          console.log(`[startup] 补齐 ${migrated} 个账号 scanEnabled = true`);
+        }
+      }
+    } catch(e) { /* 非致命 */ }
+  })();
 
   // 启动时清理残留状态：collecting/collected/inferring（上次进程崩溃留下的）重置为 pending。
-  // [stopped-2026-06-16] 重置后停在 pending 等人工处理，不再自动入队 reprocess-one（旧路径自动写鲸灵）。
   const db = require('./lib/server/data');
   const stale = (db.readQueue().items || []).filter(i =>
     ['collecting', 'collected', 'inferring'].includes(i.status) && i.mode === 'live'

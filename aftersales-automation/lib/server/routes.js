@@ -624,7 +624,7 @@ router.get('/accounts', (req, res) => {
       const a = accounts[num];
       const hasFile = require('fs').existsSync(path.join(SESSIONS_DIR, a.file));
       const st = normalizeAccountStatus(statusMap[num] || {});
-      return { num: Number(num), name: a.name, note: a.note, hasFile, ...st };
+      return { num: Number(num), name: a.name, note: a.note, hasFile, scanEnabled: a.scanEnabled !== false, ...st };
     });
     res.json({ ok: true, accounts: list });
   } catch(e) {
@@ -644,6 +644,7 @@ router.post('/accounts/add', (req, res) => {
       file: `account${newNum}.json`,
       name: `账号${newNum}`,
       note,
+      scanEnabled: true,
     };
     fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(accounts, null, 2));
     const { spawn } = require('child_process');
@@ -740,6 +741,33 @@ router.post('/accounts/:num/relogin-cancel', async (req, res) => {
   }
 
   res.json({ ok: true, message: `账号${num}已取消登录保存，可重新登录` });
+});
+
+// PATCH /api/accounts/:num — 修改账号配置（目前支持 scanEnabled 开关）
+router.patch('/accounts/:num', (req, res) => {
+  const num = parseInt(req.params.num, 10);
+  if (!num) return res.status(400).json({ error: 'invalid num' });
+  const fsSync = require('fs');
+  let accounts;
+  try {
+    accounts = JSON.parse(fsSync.readFileSync(ACCOUNTS_FILE, 'utf8'));
+  } catch (e) {
+    return res.status(500).json({ error: `读取账号配置失败: ${e.message}` });
+  }
+  const account = accounts[String(num)];
+  if (!account) return res.status(404).json({ error: `账号${num}不存在` });
+
+  const { scanEnabled } = req.body || {};
+  if (typeof scanEnabled === 'boolean') {
+    account.scanEnabled = scanEnabled;
+    try {
+      fsSync.writeFileSync(ACCOUNTS_FILE, JSON.stringify(accounts, null, 2));
+    } catch (e) {
+      return res.status(500).json({ error: `写入账号配置失败: ${e.message}` });
+    }
+    return res.json({ ok: true, num, scanEnabled: account.scanEnabled });
+  }
+  return res.status(400).json({ error: 'scanEnabled 必须为 boolean' });
 });
 
 // [removed-2026-06-16] 删除 POST /accounts/refresh-status：它为每个账号入队 check-session 逐个注入检测，

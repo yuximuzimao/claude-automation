@@ -495,6 +495,37 @@ async function loadNextScanTime() {
 
 // ── 扫描工单 ─────────────────────────────────────────────────────
 async function scanTickets() {
+  // 收集本次扫描范围和跳过的店铺
+  const data = await api('/accounts');
+  if (!data.ok) { showToast('获取账号列表失败', 'error'); return; }
+  const accounts = data.accounts || [];
+  const toScan = accounts.filter(a => a.hasFile && a.status === 'ok' && a.scanEnabled !== false);
+  const skipped = accounts.filter(a => {
+    if (!a.hasFile) return false;
+    if (a.status !== 'ok') return true;
+    if (a.scanEnabled === false) return true;
+    return false;
+  });
+
+  // 弹窗确认扫描范围
+  let msg = '本次扫描范围：\n\n';
+  if (toScan.length > 0) {
+    msg += '✓ 将扫描 ' + toScan.length + ' 个店铺：\n';
+    msg += toScan.map(a => '  ' + a.note + '（账号' + a.num + '）').join('\n');
+  } else {
+    msg += '（无符合条件的店铺）';
+  }
+  if (skipped.length > 0) {
+    msg += '\n\n✗ 跳过 ' + skipped.length + ' 个店铺：\n';
+    msg += skipped.map(a => {
+      const reason = a.scanEnabled === false ? '已关闭扫描' : ('session ' + a.status);
+      return '  ' + a.note + '（账号' + a.num + '）— ' + reason;
+    }).join('\n');
+  }
+  msg += '\n\n共扫描 ' + toScan.length + ' 个店铺，跳过 ' + skipped.length + ' 个。确认？';
+
+  if (!confirm(msg)) return;
+
   const btn = document.getElementById('scan-btn');
   btn.disabled = true;
   btn.textContent = '已提交';
@@ -509,6 +540,20 @@ async function scanTickets() {
     showToast('提交失败：' + e.message, 'error');
   }
   setTimeout(() => { btn.textContent = '扫描工单'; btn.disabled = false; }, 2000);
+}
+
+async function toggleAccountScan(num, currentEnabled) {
+  const newValue = !currentEnabled;
+  const res = await api('/accounts/' + num, {
+    method: 'PATCH',
+    body: JSON.stringify({ scanEnabled: newValue }),
+  });
+  if (res.ok) {
+    showToast('账号' + num + ' 扫描已' + (newValue ? '开启' : '关闭'));
+    loadAccounts();
+  } else {
+    showToast('切换失败：' + (res.error || '未知错误'), 'error');
+  }
 }
 
 function showToast(msg, type = 'info') {
@@ -1897,6 +1942,14 @@ async function loadAccounts() {
         ${a.hasFile ? `<button class="btn-ghost btn-sm" onclick="openAccountStore(${a.num}, '${statusKey}')">打开店铺后台</button>` : ''}
         ${fixedBatchBtn}
         ${reloginBtn}
+      </div>
+      <div class="account-scan-toggle">
+        <span class="scan-toggle-label">🔍 扫描</span>
+        <button class="btn-scan-toggle ${a.scanEnabled !== false ? 'on' : 'off'}"
+          onclick="toggleAccountScan(${a.num}, ${a.scanEnabled !== false})"
+          title="${a.scanEnabled !== false ? '点击关闭扫描' : '点击开启扫描'}">
+          ${a.scanEnabled !== false ? '●━━━ 已开启' : '○─── 已关闭'}
+        </button>
       </div>
     </div>`;
   }).join('');

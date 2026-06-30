@@ -13,6 +13,7 @@ const sse = require('./sse');
 const { classifySessionFailure } = require('./account-session-status');
 const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
+const { expireStaleAlerts } = require('../jl/alerts');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -422,7 +423,11 @@ async function execScan(op) {
 
   let numsToScan = Object.keys(accountsConfig)
     .map(Number)
-    .filter(n => (statusMap[String(n)] || {}).status === 'ok')
+    .filter(n => {
+      const statusOk = (statusMap[String(n)] || {}).status === 'ok';
+      const scanOn = accountsConfig[String(n)]?.scanEnabled !== false;
+      return statusOk && scanOn;
+    })
     .sort((a, b) => a - b);
   if (specifiedAccounts.length > 0) {
     const specified = new Set(specifiedAccounts.map(Number));
@@ -497,6 +502,10 @@ async function execScan(op) {
   }
 
   sse.broadcast('accounts-update', readAccountStatus());
+
+  // 扫描完成后清过期的平台提醒（未扫描账号超过 24h → 清空）
+  expireStaleAlerts(numsToScan);
+
   return { ok: true, scanned: total };
 }
 

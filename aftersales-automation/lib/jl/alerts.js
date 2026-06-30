@@ -70,4 +70,42 @@ function readCache() {
 function getCache() { return readCache(); }
 function setCache(v) { try { fs.writeFileSync(CACHE_FILE, JSON.stringify(v)); } catch(e) {} }
 
-module.exports = { fetchAndCacheAlerts, getCache, setCache };
+/**
+ * 每次扫描完成后调：对未扫描的账号做 24h 过期判断。
+ * @param {Set<number>|number[]} scannedNums — 本次被扫描的账号编号
+ */
+function expireStaleAlerts(scannedNums) {
+  const scanned = new Set((scannedNums || []).map(String));
+  const cache = readCache();
+  if (!cache || !cache.byAccount) return;
+  const now = Date.now();
+  const H24 = 24 * 3600000;
+  let changed = false;
+
+  for (const key of Object.keys(cache.byAccount)) {
+    if (scanned.has(key)) continue; // 被扫描的账号不管，扫描时 fetchAndCacheAlerts 已更新
+    const entry = cache.byAccount[key];
+    if (!entry || !entry.fetchedAt) continue;
+    const age = now - new Date(entry.fetchedAt).getTime();
+    if (age >= H24) {
+      // 超过 24h：清空提醒，刷新时间
+      cache.byAccount[key] = {
+        num: entry.num,
+        note: entry.note,
+        items: [],
+        fetchedAt: new Date().toISOString(),
+      };
+      changed = true;
+      console.log(`[alerts] 账号${key} (${entry.note || '未知'}) 提醒已超24h，清空`);
+    }
+    // < 24h：保留旧提醒，不做任何操作
+  }
+
+  if (changed) {
+    cache.updatedAt = new Date().toISOString();
+    try { fs.writeFileSync(CACHE_FILE, JSON.stringify(cache)); } catch(e) {}
+  }
+  return cache;
+}
+
+module.exports = { fetchAndCacheAlerts, getCache, setCache, expireStaleAlerts };
