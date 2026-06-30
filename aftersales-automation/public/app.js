@@ -273,7 +273,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     const tabEl = document.getElementById('tab-' + currentTab);
     if (tabEl) tabEl.classList.add('active');
     if (['pending', 'auto', 'waiting-tab'].includes(currentTab)) loadAllLiveTabs();
-    if (currentTab === 'action') loadActionList();
+    if (currentTab === 'action') loadActionList(); else loadActionBadge();
     if (currentTab === 'return-inbound') { /* 无需加载，等用户操作 */ }
     if (currentTab === 'history') { historyPage = 1; loadHistory(); }
     if (currentTab === 'stats') loadStats();
@@ -1635,7 +1635,11 @@ function isReturnWaitingAction(ticket, decision) {
 
 async function loadActionBadge() {
   try {
-    const [queue, sims] = await Promise.all([api('/queue?mode=live'), api('/simulations?mode=live')]);
+    const [queue, sims, dismissed] = await Promise.all([
+      api('/queue?mode=live'),
+      api('/simulations?mode=live'),
+      api('/action-dismissed').catch(() => ({})),
+    ]);
     const ACTIVE = ['waiting', 'simulated'];
     const items = (queue.items || []).filter(i => ACTIVE.includes(i.status));
     const simsByQueueId = {};
@@ -1649,9 +1653,9 @@ async function loadActionBadge() {
       const reason = sim.decision.reason || '';
       if (sim.decision.action === 'escalate' || sim.decision.action === 'reject') {
         if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
-          count += getShipRows(sim.collectedData).length;
+          count += getShipRows(sim.collectedData).filter(t => !dismissed || !dismissed[t]).length;
         }
-        if (isReturnWaitingAction(ticket, sim.decision)) count++;
+        if (isReturnWaitingAction(ticket, sim.decision) && !(dismissed && dismissed[ticket.returnTracking])) count++;
       }
     }
     const badgeEl = document.getElementById('action-tab-count');
