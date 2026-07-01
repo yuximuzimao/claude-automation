@@ -91,15 +91,7 @@ entry: cli.js
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
    - `execReinfer` 直接转调 `execReprocessOne`。
-   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 已迁移）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount` 已废弃（server.js runAutoScan 不再逐个入队 scan-account）。
-
-### 旧流程（代码保留，当前禁止作为入口）
-
-1. **scan** — `scan-all.js` → 多账号扫描工单列表 → 成功注入账号后写 `data/current-session.json` → 写入 `data/queue.json` (anchor: listTickets)
-2. **collect** — `collect.js` → 读工单详情+ERP数据+商品信息 → 写入 `data/simulations.jsonl` (anchor: readTicket, erpSearch, productMatch, productArchive)
-3. **infer** — `lib/infer.js` → 规则推理 → 输出 decision (anchor: inferDecision, inferRefundOnly, inferRefundReturn)
-4. **auto-exec?** — `lib/server/auto-exec-confidence.js` → `shouldAutoExecute()` 判定场景是否达标（≥10次+零差评>15天）
-5. **execute** — `lib/jl/approve.js` 或 `lib/jl/reject.js` → 执行审批 (anchor: approveTicket, rejectTicket)
+   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 已迁移）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount`（扫描工单，2026-07-01 已删除——无调用方，新扫描走 execScan → processSingleAccountFixedBatch）。
 
 ### 重试与重启
 

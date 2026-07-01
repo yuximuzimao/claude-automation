@@ -138,7 +138,6 @@ function processNext() {
 async function executeOp(op) {
   switch (op.type) {
     case 'scan':           return execScan(op);
-    case 'scan-account':   return execScanAccount(op);
     case 'scan-finalize':  return execScanFinalize(op);
     case 'open-account':   return execOpenAccount(op);
     case 'pipeline':       return execPipeline(op);
@@ -270,91 +269,6 @@ async function execA1FixedBatch(op) {
   });
 }
 
-// ── 单账号扫描 ─────────────────────────────────────────────────────
-
-async function execScanAccount(op) {
-  const { accountNum, accountNote } = op.params;
-  try { return await _execScanAccountInner(accountNum, accountNote); }
-  catch(e) {
-    const msg = e.message || '';
-    const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(msg);
-    updateAccountStatus(accountNum, {
-      status: isExpired ? 'expired' : 'error',
-      lastScan: new Date().toISOString(),
-      error: msg.slice(0, 200), note: accountNote,
-    });
-    throw e;
-  }
-}
-
-async function _execScanAccountInner(accountNum, accountNote) {
-  const inj = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-    timeout: 30000, encoding: 'utf8',
-  });
-  if (inj.status !== 0) throw new Error(`账号 ${accountNum} 注入失败: ${(inj.stderr || inj.stdout || '').slice(0, 100)}`);
-  saveSessionState(accountNum);
-  // 注入完成后等 10 秒，让页面和 session 完全稳定再读列表（防风控 + 防双刷）
-  await new Promise(r => setTimeout(r, 10000));
-
-  const r = spawnSync('node', [path.join(BASE, 'cli.js'), 'list'], {
-    timeout: 120000, encoding: 'utf8', cwd: BASE,
-  });
-  let out;
-  try { out = JSON.parse(r.stdout || '{}'); } catch(e) { throw new Error(`list 输出解析失败: ${(r.stdout || '').slice(0, 100)}`); }
-  if (!out.success) throw new Error(out.error || 'list 失败');
-
-  const urgent = (out.data && out.data.urgent) || [];
-
-  let added = 0, updated = 0, waitingReset = 0;
-  const queue = db.readQueue();
-  for (const t of urgent) {
-    const urgency = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '时间解析失败';
-    const deadlineAt = t.totalHours != null ? (t.deadlineAt || new Date(Date.now() + t.totalHours * 3600000).toISOString()) : null;
-    const existing = queue.items.find(i => i.workOrderNum === t.workOrderNum && i.status !== 'done');
-    if (existing) {
-      if (existing.status === 'waiting') {
-        db.updateQueueItem(existing.id, { status: 'pending', urgency, deadlineAt });
-        waitingReset++;
-      } else {
-        db.updateQueueItem(existing.id, { urgency, deadlineAt });
-        updated++;
-      }
-    } else {
-      const item = db.addQueueItem({
-        workOrderNum: t.workOrderNum, accountNum, accountNote,
-        mode: 'live', source: 'scan', type: t.type || null, urgency, deadlineAt,
-      });
-      if (item) added++;
-    }
-  }
-
-  // 到期预警
-  const warnTickets = urgent.filter(t => t.totalHours != null && t.totalHours <= REMIND_HOURS);
-  for (const t of warnTickets) {
-    const timeStr = t.days !== undefined ? (t.days > 0 ? `${t.days}天${t.hours}小时` : `${t.hours}小时`) : '未知';
-    const dl = t.deadlineAt ? new Date(t.deadlineAt) : new Date(Date.now() + (t.totalHours || 0) * 3600000);
-    const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
-    const title = `【⚠️即将过期】${accountNote} 工单${t.workOrderNum} ${t.type || ''} 剩余${timeStr} ${dlStr}`;
-    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
-  }
-
-  log(`账号${accountNum} ${accountNote}: 采集 ${urgent.length} 条，新增 ${added}，更新 ${updated}，重置等待 ${waitingReset}`);
-  updateAccountStatus(accountNum, { status: 'ok', lastScan: new Date().toISOString(), count: urgent.length, note: accountNote });
-
-  // 读取结束后、切换下一账号前：导航到鲸灵首页读取提醒公告
-  // 利用 10s 防风控间隔中的前 4s 完成导航+读取，不额外增加总耗时
-  try {
-    const { fetchAndCacheAlerts } = require('../jl/alerts');
-    await fetchAndCacheAlerts(accountNum, accountNote); // alerts.js 内部会导航首页并等 3s
-    log(`账号${accountNum} 首页提醒已更新`);
-  } catch(e) {
-    log(`账号${accountNum} 首页提醒读取失败（非阻塞）: ${e.message}`);
-  }
-
-  // 剩余等待时间（总 10s - alerts 约耗 4s = 6s），确保两次注入间隔
-  await new Promise(r => setTimeout(r, 6000));
-  return { accountNum, accountNote, count: urgent.length, added, updated, waitingReset };
-}
 
 // ── 巡检收尾 ─────────────────────────────────────────────────────
 
@@ -915,16 +829,71 @@ async function execExecute(op) {
 async function execOpenTicket(op) {
   const { workOrderNum, accountNum } = op.params;
   if (accountNum) {
-    // A2 安全链路：店铺核验 + 注入（对齐 execExecute，2026-07-01）
+    // A2 安全链路 + 模拟点击（对齐 execExecute 步骤 1-5，2026-07-01）
+    const cdp = require('../cdp');
     const { openAccountFlow } = require('../jl/open-account-flow');
+    const { sleep, waitFor } = require('../wait');
+
     const accountResult = await openAccountFlow(String(accountNum));
     if (!accountResult || !accountResult.success) {
       throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
     }
     saveSessionState(accountNum);
-    const { navigate } = require('../jl/navigate');
-    await navigate(accountResult.targetId, '/business/after-sale-detail', { workOrderNum });
-    return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName };
+    const listTargetId = accountResult.targetId;
+
+    // 导航到售后列表页并排序
+    const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+    await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
+    await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
+    await step11.assertAfterSaleListReady(listTargetId);
+    const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
+    await selectOverdueSort({ targetId: listTargetId });
+    await sleep(step11.AFTER_SORT_WAIT_MS);
+    await step11.readCurrentPageSortCheck(listTargetId);
+
+    // 定位工单
+    const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
+    const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+    const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
+
+    const readCurrentPage = async (targetId) => {
+      const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+      return {
+        tickets: (raw && raw.tickets) || [],
+        loading: Boolean(raw && raw.loading),
+        pagination: step10.normalizePaginationState(raw && raw.pagination),
+      };
+    };
+    const waitForPage = step14.createWaitForPage(waitFor);
+
+    await step14.clickPageOneLikeHuman(listTargetId, {
+      readCurrentPage, sleep, waitForPage,
+      dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
+      eval: (id, js) => cdp.eval(id, js),
+    });
+
+    const located = await step14.locateWorkOrderOnFreshList(listTargetId, workOrderNum, {
+      readCurrentPage,
+      clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
+        readCurrentPage, sleep, waitForPage,
+        dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
+        eval: (id, js) => cdp.eval(id, js),
+      }),
+      clickNextPage: step10.clickNextPage,
+      waitForPage,
+    });
+    if (!located || !located.found) {
+      throw new Error(`工单 ${workOrderNum} 未在待处理列表中找到（可能已处理或已关闭）`);
+    }
+
+    // 点击处理按钮打开详情 tab
+    const opened = await clickWorkOrderAction(workOrderNum, { targetId: listTargetId });
+    if (!opened || !opened.success || !opened.newTargetId) {
+      throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
+    }
+    await sleep(2000);
+
+    return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
   }
   return JSON.parse(execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' }));
 }

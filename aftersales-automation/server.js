@@ -100,8 +100,7 @@ app.post('/api/skip-next-scan', (req, res) => {
   res.json({ ok: true, message: '下次扫描将被跳过' });
 });
 
-// 恢复定时扫描（2026-06-30）：runAutoScan 不再逐个入队 scan-account，
-// 改为入队单个 scan 操作，由 execScan 统一处理过滤和提醒过期。
+// 定时扫描由 execScan 统一处理（2026-06-30），2026-07-01 删除废弃的 execScanAccount
 function runAutoScan() {
   if (skipNextScan) {
     skipNextScan = false;

@@ -456,3 +456,10 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 2. 如果删除列表包含 `data/`、运行状态文件、日志 → 先备份，再 merge
 3. 清理 git 仓库时，如果两个分支对"哪些文件不追踪"不一致 → 先对齐老分支（`git rm --cached`），再 merge
 4. `.gitignore` 只能保护从未追踪过的文件。已追踪文件必须先用 `git rm --cached` 取消追踪，之后 `.gitignore` 才生效
+
+### 🔴 execOpenTicket 修复不完整——表层审查的教训（2026-07-01）
+
+- 声称"已修复 execOpenTicket 并完成全量审查"，但实际修复只做了一半：把裸 `spawnSync inject` 换成了 `openAccountFlow`（注入安全了），但打开工单的方式仍然是 `navigate(targetId, url)`——Vue Router 直接 URL 跳转，没有模拟鼠标点击。
+- 用户点击"查看工单"后，系统直接导航到详情页 URL，而不是：进入列表→找到工单→模拟点击按钮→打开详情 tab。和 `execExecute` 的实际行为不一致。
+- 审查时看到 `openAccountFlow` 就打了勾，没有继续往下读后面的导航逻辑。**审查只看函数签名和 import，没有追踪完整的执行流。**
+- **规则**：审查代码链路时，必须逐行读完整执行流，不能在某一步"看到安全了就停"。审查 = 确认每一个步骤的行为和预期一致，不是确认某个函数被调用了。
