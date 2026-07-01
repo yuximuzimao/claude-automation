@@ -56,3 +56,45 @@
 ## 当前分支
 
 main = ff9fe38 + 7 commits = 3278781，已 push。data-model-restructure 保留为备份。
+
+---
+
+以下为历史积累的铁律、待办和协作规则，保留给接手者。
+
+## 执行铁律
+
+- 鲸灵操作报错即停绝不重试；不能真机试错；真机"找/确认/点"三步分离由用户指挥
+- server 由 LaunchAgent `com.heizong.aftersale-server` 守护+单实例锁，重启用 `launchctl kickstart -k gui/$(id -u)/com.heizong.aftersale-server`，禁手动 kill+nohup（lesson #34/#55）
+- 改 `lib/` 决策逻辑后必重启 server 加载；改 `lib/infer.js` 必跑 `node test/flow-test.js`
+- worktree 用 `git worktree add ... <当前分支>` 手动指定基线（lesson #54）
+- commit 排除 `data/`、`*.log`、`_sandbox/`；含文件增删移必同步 SKILL.md PATHS+ENTRY MAP
+- **merge 前跑 `git diff --diff-filter=D <old> <new>`（2026-07-01 事故铁律）**
+
+## 核心铁律（接手必读，血泪换来）
+
+- **切账号禁用"退出登录"**（破坏性，让原账号服务端 session 失效）→ 改清cookie（lesson #58）
+- **清cookie必须显式覆盖全 jlsupp 子域**：真凭证 JSESSIONID 在 `seller-portal.jlsupp.com/merchant`，`getCookies({})` 看不到→漏清→混账号。用 `getCookies({urls:[...]})`（lesson #58）
+- **注入后禁止 Page.reload 继承旧 URL**：统一 `cdp.navigate` 到售后列表再校验店铺名
+- 已登录目标账号禁止重复注入（lesson #56）
+- 判"清干净"看 JSESSIONID/_us 全域清零，不数 cookie 条数
+- 注入失败若报"仍未登录"且账号 session 是旧的→是 session 过期需 `jl add` 重登，不是流程 bug
+
+## 已知坑/约束（对话里才知道，文件看不出）
+
+- **多账号切换 = 多次登录操作，必须串行 + 间隔≥10秒**（lesson #56 风控红线）
+- **每个鲸灵操作报错即停绝不重试**（不只是技术异常，可能是风控信号）
+- 切账号前确认前一账号 tab 已关或确认完成
+- 验证数据读实时源头（ERP页面/cli.js list），禁止分析 jsonl 历史快照
+
+## 遗留待办
+
+- 6 个账号(1/3/4/6/11/13)缺 phone 配置 → 重新登录不自动填手机号
+- product-mapping 品牌数据重构：图片 jpg→png 迁移，品牌目录整理
+- product-detect/assets/ 16MB 训练素材已从 Git 排除，后续需决定外部存储位置
+- transfer/ 本地目录已从当前仓库忽略；如确认不再需要本地副本，再手动清理
+
+## 新增协作规则
+
+- Codex 需要审查 → 写 `docs/codex-handoff/{project}-{action}.md` → 追加 inbox.json → 告诉用户
+- Claude Code 启动 → SessionStart hook 自动检查 inbox → 有待处理则通知用户
+- 协议详见 `docs/codex-handoff/README.md`
