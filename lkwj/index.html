@@ -260,7 +260,7 @@ const CATEGORY_META = {
 let spriteSearch = '', spriteElement = null, spriteStatus = 'all', spriteTaskFilter = null, expandedPet = null;
 
 // 精灵果实状态
-let fruitTypeFilter = null, fruitStatus = 'all';
+let fruitSearch = '', fruitTypeFilter = null, fruitStatus = 'all';
 
 // 多形态状态
 let formSearch = '', formStatus = 'all', expandedFormPet = null;
@@ -270,12 +270,16 @@ let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
 const SHINY_PAGE = 40;
 
 // 家具状态
-let furnitureStatusFilter = 'all';
+let furnitureSearch = '', furnitureStatusFilter = 'all';
+let titleSearch = '', titleStatusFilter = 'all';
+let dungeonSearch = '', dungeonStatusFilter = 'all';
+let clothingSearch = '', clothingStatusFilter = 'all', clothingTypeFilter = 'all', expandedClothingSet = null;
 
 // 品类 Tab 状态（item-based 品类共用）
-let catFilter = {};
+let catFilter = {}, catSearch = {};
 function catStatus(tab) { return catFilter[tab] || 'all'; }
 function setCatStatus(tab, s) { catFilter[tab] = s; renderCategoryTab(tab); }
+function catSearchTerm(tab) { return catSearch[tab] || ''; }
 
 // 随机任务模块
 let randomTasks = {};
@@ -284,7 +288,7 @@ let randomPicked = false;
 // 不出现在随机池的任务类型
 const RANDOM_EXCLUDE = new Set(['destined_hero', 'fruit', 'confirm_forms']);
 
-const STATUS = { DONE: '已完成', PENDING: '未完成' };
+const STATUS = { DONE: '已收集', PENDING: '未收集' };
 const FILTER = { ALL: 'all', PENDING: 'pending', DONE: 'done' };
 const STATUS_CHIPS = [{v:FILTER.ALL,l:'全部'},{v:FILTER.PENDING,l:STATUS.PENDING},{v:FILTER.DONE,l:STATUS.DONE}];
 
@@ -838,47 +842,50 @@ function addDoneToday(entry) {
 
 // ═══════════ 精灵图鉴 Tab ═══════════
 function renderSpriteTab() {
-  renderSpriteToolbar();
-  renderSpriteContent();
-}
-
-function renderSpriteToolbar() {
-  const el = document.getElementById('sprite-toolbar');
+  const toolbarEl = document.getElementById('sprite-toolbar');
+  const contentEl = document.getElementById('sprite-content');
   const pets = gameData?.pets || {};
   const allElements = [...new Set(Object.values(pets).flatMap(p => p.element || []))].sort();
 
-  let html = '<div class="tb-section">';
-  html += `<input class="sprite-search" type="text" id="sprite-search-input" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="onSpriteSearch(this.value)">`;
-  html += '</div>';
+  // Stats
+  const total = Object.keys(pets).length;
+  const collected = Object.keys(pets).filter(pk => {
+    const tasks = petTasks(pk);
+    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
+  }).length;
 
-  html += '<div class="tb-section"><div class="tb-label">任务筛选</div><div class="chips">';
-  html += `<span class="chip${!spriteTaskFilter ? ' active' : ''}" onclick="setSpriteTaskFilter(null)">全部</span>`;
-  html += `<span class="chip${spriteTaskFilter === 'fruit' ? ' active' : ''}" onclick="setSpriteTaskFilter('fruit')">果实</span>`;
-  html += `<span class="chip${spriteTaskFilter === 'capture_chromatic' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_chromatic')">炫彩</span>`;
-  html += `<span class="chip${spriteTaskFilter === 'capture_shiny' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_shiny')">异色</span>`;
-  html += `<span class="chip${spriteTaskFilter === 'skill' ? ' active' : ''}" onclick="setSpriteTaskFilter('skill')">技能</span>`;
-  html += '</div></div>';
+  // Build toolbar
+  let toolbarHtml = '';
+  toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">🐾 精灵</h3>`;
+  toolbarHtml += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></div>`;
+  toolbarHtml += '<div class="tb-section">';
+  toolbarHtml += `<input class="sprite-search" type="text" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="spriteSearch=this.value;expandedPet=null;renderSpriteTab()">`;
+  toolbarHtml += '</div>';
 
-  html += '<div class="tb-section"><div class="tb-label">元素筛选</div><div class="chips">';
-  html += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
-  html += `<span class="chip${spriteElement === 'destined_hero' ? ' active' : ''}" onclick="setSpriteElement('destined_hero')">命定勇者</span>`;
+  toolbarHtml += '<div class="tb-section"><div class="tb-label">任务筛选</div><div class="chips">';
+  toolbarHtml += `<span class="chip${!spriteTaskFilter ? ' active' : ''}" onclick="setSpriteTaskFilter(null)">全部</span>`;
+  toolbarHtml += `<span class="chip${spriteTaskFilter === 'fruit' ? ' active' : ''}" onclick="setSpriteTaskFilter('fruit')">果实</span>`;
+  toolbarHtml += `<span class="chip${spriteTaskFilter === 'capture_chromatic' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_chromatic')">炫彩</span>`;
+  toolbarHtml += `<span class="chip${spriteTaskFilter === 'capture_shiny' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_shiny')">异色</span>`;
+  toolbarHtml += `<span class="chip${spriteTaskFilter === 'skill' ? ' active' : ''}" onclick="setSpriteTaskFilter('skill')">技能</span>`;
+  toolbarHtml += '</div></div>';
+
+  toolbarHtml += '<div class="tb-section"><div class="tb-label">元素筛选</div><div class="chips">';
+  toolbarHtml += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
+  toolbarHtml += `<span class="chip${spriteElement === 'destined_hero' ? ' active' : ''}" onclick="setSpriteElement('destined_hero')">命定勇者</span>`;
   allElements.forEach(el => {
-    html += `<span class="chip${spriteElement === el ? ' active' : ''}" onclick="setSpriteElement('${el}')">${el}</span>`;
+    toolbarHtml += `<span class="chip${spriteElement === el ? ' active' : ''}" onclick="setSpriteElement('${el}')">${el}</span>`;
   });
-  html += '</div></div>';
+  toolbarHtml += '</div></div>';
 
-  html += '<div class="tb-section"><div class="tb-label">进度</div><div class="chips">';
-  html += renderStatusChips(spriteStatus, 'setSpriteStatus');
-  html += '</div></div>';
+  toolbarHtml += '<div class="tb-section"><div class="tb-label">进度</div><div class="chips">';
+  toolbarHtml += renderStatusChips(spriteStatus, 'setSpriteStatus');
+  toolbarHtml += '</div></div>';
 
-  el.innerHTML = html;
-}
+  toolbarEl.innerHTML = toolbarHtml;
 
-function renderSpriteContent() {
-  const el = document.getElementById('sprite-content');
-  const pets = gameData?.pets || {};
+  // Filter entries
   let entries = petEntries();
-
   if (spriteSearch) {
     const q = spriteSearch.toLowerCase();
     entries = entries.filter(([petKey, pet]) => {
@@ -892,15 +899,12 @@ function renderSpriteContent() {
   } else if (spriteElement) {
     entries = entries.filter(([, pet]) => (pet.element || []).includes(spriteElement));
   }
-
   if (spriteTaskFilter) {
     entries = entries.filter(([petKey]) => petTasks(petKey).some(t => t.type === spriteTaskFilter));
   }
-
   if (spriteStatus !== 'all') {
     entries = entries.filter(([petKey]) => {
       const tasks = petTasks(petKey);
-      // 如果有任务类型筛选，只看该类型任务的进度
       const filtered = spriteTaskFilter ? tasks.filter(t => t.type === spriteTaskFilter) : tasks;
       const hasDone = filtered.some((t) => isTaskDone(petKey, tasks.indexOf(t)));
       const hasPending = filtered.some((t) => !isTaskDone(petKey, tasks.indexOf(t)));
@@ -908,26 +912,20 @@ function renderSpriteContent() {
     });
   }
 
-  const total = Object.keys(pets).length;
-  const progress = spriteProgress();
-  const collected = Object.keys(pets).filter(pk => {
-    const tasks = petTasks(pk);
-    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
-  }).length;
-
-  let html = '';
-  html += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong></div>`;
+  // Build content
+  let contentHtml = '';
+  contentHtml += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong></div>`;
 
   if (!entries.length) {
-    html += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
-    el.innerHTML = html; return;
+    contentHtml += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
+    contentEl.innerHTML = contentHtml; return;
   }
 
-  html += '<div class="sprite-list">';
-  entries.forEach(([petKey, pet]) => { html += renderSpriteCard(petKey, pet); });
-  html += '</div>';
+  contentHtml += '<div class="sprite-list">';
+  entries.forEach(([petKey, pet]) => { contentHtml += renderSpriteCard(petKey, pet); });
+  contentHtml += '</div>';
 
-  el.innerHTML = html;
+  contentEl.innerHTML = contentHtml;
 }
 
 function renderSpriteCard(petKey, pet) {
@@ -1066,7 +1064,6 @@ function groupRelatedTasks(tasks) {
   return groups;
 }
 
-function onSpriteSearch(val) { spriteSearch = val; expandedPet = null; renderSpriteContent(); }
 function setSpriteElement(el) { spriteElement = el; expandedPet = null; renderSpriteTab(); }
 function setSpriteStatus(s) { spriteStatus = s; expandedPet = null; renderSpriteTab(); }
 function setSpriteTaskFilter(f) { spriteTaskFilter = f; expandedPet = null; renderSpriteTab(); }
@@ -1103,69 +1100,68 @@ function getShinyList() {
   return result;
 }
 
-function renderShinyTab() { renderShinyToolbar(); renderShinyContent(); }
-
-function renderShinyToolbar() {
-  const el = document.getElementById('shiny-toolbar');
+function renderShinyTab() {
   const list = getShinyList();
-  const done = list.filter(s => s.isDone).length;
-
-  // Collect unique limitedTime values for season chips
+  const doneCount = list.filter(s => s.isDone).length;
   const seasons = [...new Set(list.map(s => s.limitedTime).filter(Boolean))].sort();
 
-  let html = '';
-  html += `<input class="sprite-search" type="text" id="shiny-search-input" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="onShinySearch(this.value)">`;
-  html += '<div class="chips">';
-  html += `<span class="chip${shinySeason === 'all' ? ' active' : ''}" onclick="setShinySeason('all')">全部</span>`;
-  seasons.forEach(s => {
-    html += `<span class="chip${shinySeason === s ? ' active' : ''}" onclick="setShinySeason('${s}')">${s}</span>`;
-  });
-  html += '</div>';
-  html += '<div class="chips" style="margin-top:4px">';
-  html += renderStatusChips(shinyStatus, 'setShinyStatus');
-  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${list.length} 只 · 已完成 ${done}</span>`;
-  html += '</div>';
-  el.innerHTML = html;
-}
-
-function renderShinyContent() {
-  const el = document.getElementById('shiny-content');
-  let list = getShinyList();
-
+  let filtered = list;
   if (shinySearch) {
     const q = shinySearch.toLowerCase();
-    list = list.filter(s => s.name.includes(q) || (gameData?.pets?.[s.petKey]?.pinyin?.initial || '').includes(q));
+    filtered = filtered.filter(s => s.name.includes(q) || (gameData?.pets?.[s.petKey]?.pinyin?.initial || '').includes(q));
   }
-  if (shinySeason !== 'all') list = list.filter(s => s.limitedTime === shinySeason);
-  if (shinyStatus === 'pending') list = list.filter(s => !s.isDone);
-  else if (shinyStatus === 'done') list = list.filter(s => s.isDone);
+  if (shinySeason !== 'all') filtered = filtered.filter(s => s.limitedTime === shinySeason);
+  if (shinyStatus === 'pending') filtered = filtered.filter(s => !s.isDone);
+  else if (shinyStatus === 'done') filtered = filtered.filter(s => s.isDone);
 
-  const totalPages = Math.ceil(list.length / SHINY_PAGE);
+  const totalPages = Math.ceil(filtered.length / SHINY_PAGE);
   if (shinyPage > totalPages) shinyPage = 1;
-  const pageItems = list.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
+  const pageItems = filtered.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
 
-  let html = '';
-  if (!list.length) { html += '<div class="empty-state">没有匹配的异色炫彩<small>仅显示进化最终形态</small></div>'; el.innerHTML = html; return; }
+  let toolbarHtml = '';
+  toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">✨ 异色炫彩</h3>`;
+  toolbarHtml += `<div class="sprite-stats">共 <strong>${list.length}</strong> 只 · 已收集 <strong>${doneCount}</strong>`;
+  if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 匹配 <strong>${filtered.length}</strong>`;
+  toolbarHtml += '</div>';
+  toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;shinyPage=1;renderShinyTab()"></div>`;
+  toolbarHtml += '<div class="chips" style="margin-bottom:8px">';
+  toolbarHtml += `<span class="chip${shinySeason === 'all' ? ' active' : ''}" onclick="setShinySeason('all')">全部</span>`;
+  seasons.forEach(s => {
+    toolbarHtml += `<span class="chip${shinySeason === s ? ' active' : ''}" onclick="setShinySeason('${s}')">${s}</span>`;
+  });
+  toolbarHtml += '</div>';
+  toolbarHtml += '<div class="chips" style="margin-bottom:8px">';
+  toolbarHtml += renderStatusChips(shinyStatus, 'setShinyStatus');
+  toolbarHtml += '</div>';
+  document.getElementById('shiny-toolbar').innerHTML = toolbarHtml;
+
+  const contentEl = document.getElementById('shiny-content');
+  let contentHtml = '';
+  if (!filtered.length) {
+    contentHtml += '<div class="empty-state">没有匹配的异色炫彩<small>仅显示进化最终形态</small></div>';
+    contentEl.innerHTML = contentHtml;
+    return;
+  }
 
   if (shinyStatus !== 'all') {
-    html += '<div class="item-list">';
-    pageItems.forEach(s => { html += renderShinyRow(s); });
-    html += '</div>';
+    contentHtml += '<div class="item-list">';
+    pageItems.forEach(s => { contentHtml += renderShinyRow(s); });
+    contentHtml += '</div>';
   } else {
     const pending = pageItems.filter(s => !s.isDone);
     const done = pageItems.filter(s => s.isDone);
     if (pending.length) {
-      html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
-      pending.forEach(s => { html += renderShinyRow(s); });
-      html += '</div>';
+      contentHtml += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
+      pending.forEach(s => { contentHtml += renderShinyRow(s); });
+      contentHtml += '</div>';
     }
     if (done.length) {
-      html += renderCollapsibleDoneSection(done, renderShinyRow, done.length);
+      contentHtml += renderCollapsibleDoneSection(done, renderShinyRow, done.length);
     }
   }
 
-  html += renderPagination(shinyPage, totalPages, 'goShinyPage');
-  el.innerHTML = html;
+  contentHtml += renderPagination(shinyPage, totalPages, 'goShinyPage');
+  contentEl.innerHTML = contentHtml;
 }
 
 function renderShinyRow(s) {
@@ -1200,7 +1196,6 @@ async function toggleShinyTask(petKey) {
   renderShinyContent();
 }
 
-function onShinySearch(val) { shinySearch = val; shinyPage = 1; renderShinyContent(); }
 function setShinySeason(s) { shinySeason = s; shinyPage = 1; renderShinyTab(); }
 function setShinyStatus(s) { shinyStatus = s; shinyPage = 1; renderShinyTab(); }
 function goShinyPage(p) {
@@ -1387,10 +1382,15 @@ function renderCategoryTab(tab) {
   const meta = CATEGORY_META[tab] || {};
   const items = getCatItems(tab);
   const st = catStatus(tab);
+  const searchTerm = catSearchTerm(tab);
 
   let list = items;
-  if (st === 'pending') list = items.filter(i => i.status !== '已完成');
-  else if (st === 'done') list = items.filter(i => i.status === '已完成');
+  if (searchTerm.trim()) {
+    const q = searchTerm.trim().toLowerCase();
+    list = list.filter(i => (i.name || '').toLowerCase().includes(q) || (i.desc || '').toLowerCase().includes(q));
+  }
+  if (st === 'pending') list = list.filter(i => i.status !== '已完成');
+  else if (st === 'done') list = list.filter(i => i.status === '已完成');
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">${meta.icon || ''} ${meta.name || tab}</h3>`;
 
@@ -1402,11 +1402,16 @@ function renderCategoryTab(tab) {
   }
 
   const doneCount = items.filter(i => i.status === '已完成').length;
-  html += '<div class="chips" style="margin-bottom:10px">';
+  html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 项 · 已收集 <strong>${doneCount}</strong>`;
+  if (searchTerm.trim()) html += ` · 匹配 <strong>${list.length}</strong>`;
+  html += '</div>';
+
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索..." value="${esc(searchTerm)}" oninput="catSearch['${tab}']=this.value;renderCategoryTab('${tab}')"></div>`;
+
+  html += '<div class="chips" style="margin-bottom:8px">';
   STATUS_CHIPS.forEach(s => {
     html += `<span class="chip${st === s.v ? ' active' : ''}" onclick="setCatStatus('${tab}','${s.v}')">${s.l}</span>`;
   });
-  html += `<span style="font-size:11px;color:#aaa;margin-left:8px;align-self:center">共 ${items.length} 项 · 已完成 ${doneCount}</span>`;
   html += '</div>';
 
   if (!list.length) { html += '<div class="empty-state">没有匹配的收集项</div>'; el.innerHTML = html; return; }
@@ -1414,7 +1419,7 @@ function renderCategoryTab(tab) {
   const pending = list.filter(i => i.status !== '已完成');
   const done = list.filter(i => i.status === '已完成');
   if (pending.length) {
-    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(i => { html += renderItemRow(i); });
     html += '</div>';
   }
@@ -1485,8 +1490,8 @@ function renderFormsTab() {
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
   html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
-  html += `<input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)">`;
-  html += '<div class="chips" style="margin:10px 0">';
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)"></div>`;
+  html += '<div class="chips" style="margin-bottom:8px">';
   html += renderStatusChips(formStatus, 'setFormStatus');
   html += '</div>';
 
@@ -1568,12 +1573,14 @@ function renderFruitsTab() {
   const owned = allFruit.filter(([, pet]) => pet.fruit?.acquired).length;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🍎 精灵果实</h3>`;
-  html += `<div class="sprite-stats"><span>共 <strong>${allFruit.length}</strong> 种 · 已获得 <strong>${owned}</strong></span></div>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${allFruit.length}</strong> 种 · 已收集 <strong>${owned}</strong></span></div>`;
 
   if (!allFruit.length) { html += '<div class="empty-state">暂无果实数据</div>'; el.innerHTML = html; return; }
 
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索果实名称或获取方式..." value="${esc(fruitSearch)}" oninput="fruitSearch=this.value;renderFruitsTab()"></div>`;
+
   // 获取方式筛选芯片
-  html += '<div class="chips" style="margin-bottom:6px">';
+  html += '<div class="chips" style="margin-bottom:8px">';
   html += `<span class="chip${!fruitTypeFilter ? ' active' : ''}" onclick="setFruitTypeFilter(null)">全部</span>`;
   FRUIT_TYPES.forEach(t => {
     html += `<span class="chip${fruitTypeFilter === t ? ' active' : ''}" onclick="setFruitTypeFilter('${t}')">${t}</span>`;
@@ -1581,12 +1588,20 @@ function renderFruitsTab() {
   html += '</div>';
 
   // 进度筛选芯片
-  html += '<div class="chips" style="margin-bottom:10px">';
+  html += '<div class="chips" style="margin-bottom:8px">';
   html += renderStatusChips(fruitStatus, 'setFruitStatus');
   html += '</div>';
 
   // 应用筛选
   let list = allFruit;
+  if (fruitSearch.trim()) {
+    const q = fruitSearch.trim().toLowerCase();
+    list = list.filter(([, pet]) => {
+      const fruitName = (pet.fruit?.name || pet.name + '果实').toLowerCase();
+      const method = (pet.fruit?.obtainMethod || '').toLowerCase();
+      return fruitName.includes(q) || method.includes(q);
+    });
+  }
   if (fruitTypeFilter) list = list.filter(([, pet]) => pet.fruit?.obtainType === fruitTypeFilter);
   if (fruitStatus === 'pending') list = list.filter(([, pet]) => !pet.fruit?.acquired);
   else if (fruitStatus === 'done') list = list.filter(([, pet]) => pet.fruit?.acquired);
@@ -1597,7 +1612,7 @@ function renderFruitsTab() {
   const done = list.filter(([, pet]) => pet.fruit?.acquired);
 
   if (pending.length) {
-    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(([petKey, pet]) => { html += renderFruitRow(petKey, pet, pets); });
     html += '</div>';
   }
@@ -1676,12 +1691,13 @@ function renderFurnitureTab() {
   const remainingInspiration = allPending.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🪑 家具</h3>`;
+  html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong> · 还差 <strong>${remainingInspiration}</strong> 灵感值</div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索家具名称..." value="${esc(furnitureSearch)}" oninput="furnitureSearch=this.value;renderFurnitureTab()"></div>`;
   html += '<div class="chips" style="margin-bottom:8px">';
   html += `<span class="chip${furnitureStatusFilter === 'all' ? ' active' : ''}" onclick="setFurnitureStatusFilter('all')">全部</span>`;
   html += `<span class="chip${furnitureStatusFilter === 'pending' ? ' active' : ''}" onclick="setFurnitureStatusFilter('pending')">未收集</span>`;
   html += `<span class="chip${furnitureStatusFilter === 'done' ? ' active' : ''}" onclick="setFurnitureStatusFilter('done')">已收集</span>`;
   html += '</div>';
-  html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong> · 还差 <strong>${remainingInspiration}</strong> 灵感值</div>`;
 
   if (!items.length) {
     html += '<div class="empty-state">暂无家具数据<small>把名称、舒适度、灵感值补到 data/furniture.json 后会在这里显示</small></div>';
@@ -1692,6 +1708,11 @@ function renderFurnitureTab() {
   let list = items;
   if (furnitureStatusFilter === 'pending') list = allPending;
   else if (furnitureStatusFilter === 'done') list = owned;
+
+  if (furnitureSearch.trim()) {
+    const q = furnitureSearch.trim().toLowerCase();
+    list = list.filter(i => (i.name || '').toLowerCase().includes(q));
+  }
 
   if (!list.length) {
     html += '<div class="empty-state">没有匹配的家具</div>';
@@ -1765,11 +1786,36 @@ function renderTitlesTab() {
     return;
   }
 
-  const pending = titles.filter(i => !i.acquired);
-  const done = titles.filter(i => i.acquired);
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索称号..." value="${esc(titleSearch)}" oninput="titleSearch=this.value;renderTitlesTab()"></div>`;
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${titleStatusFilter === 'all' ? ' active' : ''}" onclick="titleStatusFilter='all';renderTitlesTab()">全部</span>`;
+  html += `<span class="chip${titleStatusFilter === 'pending' ? ' active' : ''}" onclick="titleStatusFilter='pending';renderTitlesTab()">${STATUS.PENDING}</span>`;
+  html += `<span class="chip${titleStatusFilter === 'done' ? ' active' : ''}" onclick="titleStatusFilter='done';renderTitlesTab()">${STATUS.DONE}</span>`;
+  html += '</div>';
+
+  let list = titles;
+  if (titleSearch.trim()) {
+    const q = titleSearch.trim().toLowerCase();
+    list = list.filter(i => {
+      const name = formatTitleName(i).toLowerCase();
+      const method = (i.obtainMethod || '').toLowerCase();
+      return name.includes(q) || method.includes(q);
+    });
+  }
+  if (titleStatusFilter === 'pending') list = list.filter(i => !i.acquired);
+  else if (titleStatusFilter === 'done') list = list.filter(i => i.acquired);
+
+  if (!list.length) {
+    html += '<div class="empty-state">没有匹配的称号</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = list.filter(i => !i.acquired);
+  const done = list.filter(i => i.acquired);
 
   if (pending.length) {
-    html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
+    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(item => { html += renderTitleRow(item); });
     html += '</div>';
   }
@@ -1825,7 +1871,7 @@ function renderDungeonsTab() {
   const completed = dungeons.filter(i => i.completed);
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🏛️ 遗迹副本</h3>`;
-  html += `<div class="sprite-stats"><span>共 <strong>${dungeons.length}</strong> 个 · 已完成 <strong>${completed.length}</strong></span></div>`;
+  html += `<div class="sprite-stats"><span>共 <strong>${dungeons.length}</strong> 个 · 已收集 <strong>${completed.length}</strong></span></div>`;
 
   if (!dungeons.length) {
     html += '<div class="empty-state">暂无遗迹副本数据<small>把副本名称、位置、奖励补到 data/dungeons.json 后会在这里显示</small></div>';
@@ -1833,11 +1879,37 @@ function renderDungeonsTab() {
     return;
   }
 
-  const pending = dungeons.filter(i => !i.completed);
-  const done = dungeons.filter(i => i.completed);
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索副本名称、位置或奖励..." value="${esc(dungeonSearch)}" oninput="dungeonSearch=this.value;renderDungeonsTab()"></div>`;
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${dungeonStatusFilter === 'all' ? ' active' : ''}" onclick="dungeonStatusFilter='all';renderDungeonsTab()">全部</span>`;
+  html += `<span class="chip${dungeonStatusFilter === 'pending' ? ' active' : ''}" onclick="dungeonStatusFilter='pending';renderDungeonsTab()">${STATUS.PENDING}</span>`;
+  html += `<span class="chip${dungeonStatusFilter === 'done' ? ' active' : ''}" onclick="dungeonStatusFilter='done';renderDungeonsTab()">${STATUS.DONE}</span>`;
+  html += '</div>';
+
+  let list = dungeons;
+  if (dungeonSearch.trim()) {
+    const q = dungeonSearch.trim().toLowerCase();
+    list = list.filter(i => {
+      const name = (i.name || '').toLowerCase();
+      const location = (i.location || '').toLowerCase();
+      const rewards = (Array.isArray(i.rewards) ? i.rewards.join(' ') : '').toLowerCase();
+      return name.includes(q) || location.includes(q) || rewards.includes(q);
+    });
+  }
+  if (dungeonStatusFilter === 'pending') list = list.filter(i => !i.completed);
+  else if (dungeonStatusFilter === 'done') list = list.filter(i => i.completed);
+
+  if (!list.length) {
+    html += '<div class="empty-state">没有匹配的遗迹副本</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = list.filter(i => !i.completed);
+  const done = list.filter(i => i.completed);
 
   if (pending.length) {
-    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
+    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(item => { html += renderDungeonRow(item); });
     html += '</div>';
   }
@@ -1897,6 +1969,7 @@ function renderClothingTab() {
   const acquired = clothing.filter(i => i.acquired);
   const setPieces = clothing.filter(i => i.collectionType === 'set');
   const singlePieces = clothing.filter(i => i.collectionType === 'single');
+  const setMap = new Map((gameData?.clothing?.sets || []).map(s => [s.id, s]));
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
   html += `<div class="sprite-stats"><span>共 <strong>${clothing.length}</strong> 件 · 已收集 <strong>${acquired.length}</strong></span>`;
@@ -1909,71 +1982,117 @@ function renderClothingTab() {
     return;
   }
 
-  const setGroups = new Map();
-  setPieces.forEach(item => {
-    const setKey = item.set?.id || item.setId || 'unknown_set';
-    if (!setGroups.has(setKey)) setGroups.set(setKey, { set: item.set || null, pieces: [] });
-    setGroups.get(setKey).pieces.push(item);
-  });
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索服装名称、套装或获取方式..." value="${esc(clothingSearch)}" oninput="clothingSearch=this.value;expandedClothingSet=null;renderClothingTab()"></div>`;
 
-  if (setGroups.size) {
-    html += '<div class="section-title">套装</div>';
-    for (const group of setGroups.values()) {
-      const pieces = group.pieces;
-      const setName = group.set?.name || '未命名套装';
-      const doneCount = pieces.filter(i => i.acquired).length;
-      html += `<div class="task-group-label">${esc(setName)}（${doneCount}/${pieces.length}）</div>`;
-      html += renderClothingSetMeta(group.set);
-      html += '<div class="item-list">';
-      pieces.forEach(item => { html += renderClothingPieceRow(item); });
-      html += '</div>';
+  // 类型筛选
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${clothingTypeFilter === 'all' ? ' active' : ''}" onclick="clothingTypeFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
+  html += `<span class="chip${clothingTypeFilter === 'set' ? ' active' : ''}" onclick="clothingTypeFilter='set';expandedClothingSet=null;renderClothingTab()">套装</span>`;
+  html += `<span class="chip${clothingTypeFilter === 'single' ? ' active' : ''}" onclick="clothingTypeFilter='single';expandedClothingSet=null;renderClothingTab()">单件</span>`;
+  html += '</div>';
+
+  // 进度筛选
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${clothingStatusFilter === 'all' ? ' active' : ''}" onclick="clothingStatusFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'pending' ? ' active' : ''}" onclick="clothingStatusFilter='pending';expandedClothingSet=null;renderClothingTab()">${STATUS.PENDING}</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="clothingStatusFilter='done';expandedClothingSet=null;renderClothingTab()">${STATUS.DONE}</span>`;
+  html += '</div>';
+
+  // Apply filters
+  let list = clothing;
+  if (clothingSearch.trim()) {
+    const q = clothingSearch.trim().toLowerCase();
+    list = list.filter(i => {
+      const pieceName = (i.pieceName || i.name || '').toLowerCase();
+      const setName = (i.set?.name || '').toLowerCase();
+      const method = (i.collectionType === 'single' ? (i.obtainMethod || '') : (i.set?.obtainMethod || '')).toLowerCase();
+      const pairedPet = (i.collectionType === 'single' ? (i.pairedPetName || '') : (i.set?.pairedPetName || '')).toLowerCase();
+      return pieceName.includes(q) || setName.includes(q) || method.includes(q) || pairedPet.includes(q);
+    });
+  }
+  if (clothingTypeFilter === 'set') list = list.filter(i => i.collectionType === 'set');
+  else if (clothingTypeFilter === 'single') list = list.filter(i => i.collectionType === 'single');
+  if (clothingStatusFilter === 'pending') list = list.filter(i => !i.acquired);
+  else if (clothingStatusFilter === 'done') list = list.filter(i => i.acquired);
+
+  if (!list.length) {
+    html += '<div class="empty-state">没有匹配的服装</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // Render: sets as sprite-cards, singles as flat rows, mixed in one list
+  const shownSetIds = new Set();
+  list.forEach(item => {
+    if (item.collectionType === 'set') {
+      const sk = item.set?.id || item.setId || 'unknown_set';
+      if (!shownSetIds.has(sk)) {
+        shownSetIds.add(sk);
+        const setPieces = list.filter(i => i.collectionType === 'set' && (i.set?.id || i.setId) === sk);
+        const set = setMap.get(sk) || setPieces[0]?.set || null;
+        html += renderClothingSetCard(sk, set, setPieces);
+      }
+    } else {
+      html += renderClothingSingleRow(item);
     }
-  }
-
-  if (singlePieces.length) {
-    html += `<div class="section-title">单件（${singlePieces.filter(i => i.acquired).length}/${singlePieces.length}）</div><div class="item-list">`;
-    singlePieces.forEach(item => { html += renderClothingPieceRow(item); });
-    html += '</div>';
-  }
+  });
 
   el.innerHTML = html;
 }
 
-function renderClothingSetMeta(set) {
-  if (!set) return '<div class="task-methods">套装信息：待补充</div>';
-  const pairedPetName = set.pairedPetName || '';
-  const effectText = set.hasEffect
-    ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}`
-    : '特效：无';
-  const methodHtml = set.obtainMethod ? `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>` : '';
-  return `<div class="task-methods">${effectText}</div>${methodHtml}`;
+function renderClothingSetCard(setKey, set, pieces) {
+  const setName = set?.name || '未命名套装';
+  const doneCount = pieces.filter(i => i.acquired).length;
+  const isExpanded = expandedClothingSet === setKey || !!(clothingSearch || clothingTypeFilter !== 'all' || clothingStatusFilter !== 'all');
+  const pairedPetName = set?.pairedPetName || '';
+  const hasEffect = set?.hasEffect;
+
+  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  card += `<div class="sprite-card-header" onclick="toggleClothingSetCard('${setKey}')">`;
+  card += `<span class="sn">${esc(setName)}</span>`;
+  if (pairedPetName) card += `<span class="se">配对：${esc(pairedPetName)}</span>`;
+  card += `<span class="sm">${doneCount}/${pieces.length}</span>`;
+  card += '<span class="sa">▶</span>';
+  card += '</div>';
+
+  card += '<div class="sprite-card-body">';
+  // Set meta
+  const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
+  card += `<div class="task-methods">${effectText}</div>`;
+  if (set?.obtainMethod) card += `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>`;
+  // Pieces
+  card += '<div class="item-list" style="margin-top:8px">';
+  pieces.forEach(item => {
+    const pieceName = item.pieceName || item.name || '未命名部件';
+    card += `<div class="item-row${item.acquired ? ' done' : ''}">`;
+    card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
+    card += `<div class="item-info"><div class="item-name">${esc(pieceName)}</div></div>`;
+    card += '</div>';
+  });
+  card += '</div>';
+
+  card += '</div></div>';
+  return card;
 }
 
-function renderClothingPieceRow(item) {
-  const collectionType = item.collectionType === 'set' ? '套装部件' : '单件';
+function renderClothingSingleRow(item) {
   const pieceName = item.pieceName || item.name || '未命名服装';
-  if (item.collectionType === 'set') {
-    return `<div class="item-row${item.acquired ? ' done' : ''}">
-      <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>
-      <div class="item-info">
-        <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${collectionType}</span></div>
-      </div>
-    </div>`;
-  }
-
-  const source = item.collectionType === 'set' ? (item.set || {}) : item;
-  const pairedPetName = source.pairedPetName || '';
-  const effectHtml = source.hasEffect
-    ? `<div class="task-methods">特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}</div>`
-    : '<div class="task-methods">特效：无</div>';
+  const pairedPetName = item.pairedPetName || '';
+  const hasEffect = item.hasEffect;
+  const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
   return `<div class="item-row${item.acquired ? ' done' : ''}">
     <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>
     <div class="item-info">
-      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${collectionType}</span></div>
-      ${effectHtml}
-      ${source.obtainMethod ? `<div class="task-methods">获取方式：${esc(source.obtainMethod)}</div>` : ''}
+      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">单件</span></div>
+      <div class="task-methods">${effectText}</div>
+      ${item.obtainMethod ? `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>` : ''}
     </div>
   </div>`;
+}
+
+function toggleClothingSetCard(setKey) {
+  expandedClothingSet = expandedClothingSet === setKey ? null : setKey;
+  renderClothingTab();
 }
 
 async function toggleClothingPiece(id) {
