@@ -430,3 +430,29 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 - 快递行动红点仅页面加载和 SSE 事件时更新，切标签时 `loadActionBadge()` 不被调用 → badge 停滞
 - `loadActionBadge()` 不查 `/api/action-dismissed` → 已标记处理的条目仍被计入 → 红点虚高
 - **规则**：标签切换时，非当前 tab 的 badge 也要刷新；badge 计数逻辑必须与列表渲染逻辑同源（查同一份 dismissed 数据）
+
+## 2026-07-01 session 重大事故
+
+### 🔴 级别：严重事故 — git fast-forward merge 删除全部运行时数据
+
+**影响**：merge 后 211 个文件从磁盘消失，包括：
+- `aftersales-automation/data/queue.json`（~1222 条实时工单）
+- `aftersales-automation/data/simulations.jsonl`、`cases.jsonl`、`feedback.jsonl`
+- `product-mapping/data/imgs/` 146 张商品图片
+- `product-mapping/data/products/` 全部产品配置
+
+**根因**：老 main（cd555ae）里 `data/` 文件仍被 git 追踪，但合并目标 data-model-restructure 分支里的 `ac377b1`（5月29日）已通过 `git rm` 删除了这些文件的追踪。fast-forward merge 时，git 发现新 HEAD 里这些文件已被删除 → 物理删除磁盘文件来对齐工作目录。
+
+**为什么 git 会删文件**：
+1. 老 main 里 data 文件是 TRACKED 状态
+2. dev 分支里已被 `git rm` 删除追踪
+3. merge 看到：文件在老 HEAD 追踪、新 HEAD 不追踪 → 执行删除
+4. `.gitignore` 阻止不了——它只管未追踪文件，已追踪文件不受 `.gitignore` 保护
+
+**恢复情况**：产品图片/配置从 git 历史恢复；aftersales 运行时数据只能恢复到 6月8日备份（1026条），6月9日-7月1日的新增数据永久丢失。
+
+**铁律（所有项目通用）**：
+1. merge 前必须跑 `git diff --diff-filter=D <old> <new>`，确认不会删除任何运行时数据文件
+2. 如果删除列表包含 `data/`、运行状态文件、日志 → 先备份，再 merge
+3. 清理 git 仓库时，如果两个分支对"哪些文件不追踪"不一致 → 先对齐老分支（`git rm --cached`），再 merge
+4. `.gitignore` 只能保护从未追踪过的文件。已追踪文件必须先用 `git rm --cached` 取消追踪，之后 `.gitignore` 才生效

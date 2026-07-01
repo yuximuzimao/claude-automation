@@ -79,6 +79,7 @@ How to apply:
 3. 禁止 force push，禁止修改已 push 的 commit
 4. commit 格式：`<type>(<scope>): <描述>`（type: fix/feat/refactor/docs, scope: aftersales/product-mapping/transfer/workspace）
 5. NEVER 提交：`*.log` · `_sandbox/` · `_exports/` · `.server.lock`；`data/` 默认不提交，除非用户明确要求归档已完成业务数据轮次
+6. **merge 前必须跑 `git diff --diff-filter=D <old> <new>`**：确认不会删除任何运行时数据文件（`data/`、日志、状态文件）。如删除列表非空 → 先备份，再 merge。违反本条导致数据丢失 = 严重事故（2026-07-01 教训：fast-forward merge 删除 211 个 data 文件，实时工单数据永久丢失）
 
 ## SKILL.md 同步铁律
 
