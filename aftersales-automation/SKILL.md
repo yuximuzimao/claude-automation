@@ -8,7 +8,7 @@ entry: cli.js
 ## DO FIRST
 
 1. **找 CLI 命令** → `cli.js`（18 个命令，JSON 输出 `{success, data/error}`）
-2. **找流程逻辑** → `lib/server/pipeline.js`（scan→collect→infer→approve/reject）
+2. **找流程逻辑** → `lib/server/op-queue.js`（openAccountFlow → 列表定位 → 执行/采集推理）
 3. **找规则/红线** → `docs/INDEX.md`（错误分级、工单路由、已知坑位 §6）
 4. **不要直接读 `routes.js`**——它是 Express 薄层，业务逻辑在 `lib/` 下
 5. **ERP 操作串行**——所有 ERP 命令用 `&&` 串行，禁止并行
@@ -96,7 +96,6 @@ entry: cli.js
 ### 重试与重启
 
 - **鲸灵操作禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
-- **采集重试**：collect.js 失败（含 SIGTERM kill → exit code null）最多重试 3 次（`collectRetries` 计数器在 `pipeline.js` processOne），第 3 次失败标记 `simulated` 上报人工。成功进入 `inferring` 时计数器清零。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。旧“下次自动扫描重置”目前不存在；未来只能由新 A1 手动/计划扫描显式重置，禁止假设固定扫描周期。
 - **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。**停旧系统后（2026-06-16）启动只重置残留状态为 pending、不再自动入队 reprocess，纯手动模式**——是否处理由用户手动选择。
 

@@ -241,8 +241,8 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#53 决策看安全边际（flow-5.3）**：仅退款已发货流程中，剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。注意：flow-5.1 退货退款使用不同阈值（`REMIND_HOURS=12`），直接比较剩余时效，不计算扫描间隔。
 - `[∞]` **#54 推理文案说人话**：reason 三要素：①根因②无代码变量名③明确建议动作。
 - `[∞]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 交叉校验 accountNum 与 accountNote，不一致拒绝。
-- `[∞]` **#58 collect.js 重试上限 3 次**：`collectRetries` 计数器在 pipeline.js，≥3 次标记 simulated。成功进 inferring 时清零。op-queue.js 路径暂不计数。
-- `[∞]` **#59 spawn timeout 180s 双路径对齐**：pipeline.js 和 op-queue.js 两条 spawn 路径都设 180000ms，改一处必须同步另一处。
+- `[已归档]` **#58 collect.js 重试上限 3 次**：collect.js / pipeline 路径已于 2026-07-01 删除，采集所有路径走 execReprocessOne。
+- `[已归档]` **#59 spawn timeout 180s 双路径对齐**：同上，不再有双路径。
 - `[∞]` **#60 querySelector 禁止选隐藏元素**：→ 见全局 CLAUDE.md 浏览器操作约束。
 - `[∞]` **#61 禁止 DOM 移除 Element UI 弹窗**：→ 见全局 CLAUDE.md 浏览器操作约束。
 - `[∞]` **#62 Chrome 自动填充单次触发不可重试**：`recoverLogin` 单次尝试，失败进凭据注入（Phase 2），禁止循环 reload。
