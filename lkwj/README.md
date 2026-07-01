@@ -47,6 +47,7 @@ http://localhost:8899/review.html
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
 - `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
+- 家具 Tab 顶部只展示总件数、已收集件数和未收集家具的剩余灵感值；舒适度和单件灵感值只在列表行展示。
 - `clothing.json` 分为 `sets[]` 和 `pieces[]`：套装获取方式、特效、配对精灵只写在 `sets[]`；`pieces[]` 只保存最小勾选单元和 `setId`。`collections.clothing_progress` 只保存单件是否收集。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义；`collections.dungeon_progress` 只保存是否完成。
@@ -60,7 +61,10 @@ http://localhost:8899/review.html
 | 精灵果实课题任务 | 96 |
 | 果实图鉴记录 | 143 |
 | 多形态收集项 | 143 |
-| 家具 | 1 |
+| 家具 | 182 |
+| 家具已收集 | 116 |
+| 家具未收集 | 66 |
+| 家具剩余灵感值 | 1545350 |
 | 服装单件 | 6 |
 | 称号 | 1 |
 | 遗迹副本 | 1 |

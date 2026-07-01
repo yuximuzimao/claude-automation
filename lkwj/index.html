@@ -269,6 +269,9 @@ let formSearch = '', formStatus = 'all', expandedFormPet = null;
 let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
 const SHINY_PAGE = 40;
 
+// 家具状态
+let furnitureStatusFilter = 'all';
+
 // 品类 Tab 状态（item-based 品类共用）
 let catFilter = {};
 function catStatus(tab) { return catFilter[tab] || 'all'; }
@@ -1669,16 +1672,16 @@ function renderFurnitureTab() {
   const el = document.getElementById('tab-furniture');
   const items = getFurnitureList();
   const owned = items.filter(i => i.acquired);
-  const comfortTotal = items.reduce((sum, i) => sum + (Number(i.comfort) || 0), 0);
-  const comfortOwned = owned.reduce((sum, i) => sum + (Number(i.comfort) || 0), 0);
-  const inspirationTotal = items.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
-  const inspirationOwned = owned.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
-  const remainingInspiration = Math.max(0, inspirationTotal - inspirationOwned);
+  const allPending = items.filter(i => !i.acquired);
+  const remainingInspiration = allPending.reduce((sum, i) => sum + (Number(i.inspiration) || 0), 0);
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🪑 家具</h3>`;
-  html += `<div class="sprite-stats"><span>共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong></span>`;
-  html += `<span>舒适度 <strong>${comfortOwned}</strong> / ${comfortTotal}</span>`;
-  html += `<span>灵感值 <strong>${inspirationOwned}</strong> / ${inspirationTotal} · 还差 <strong>${remainingInspiration}</strong></span></div>`;
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${furnitureStatusFilter === 'all' ? ' active' : ''}" onclick="setFurnitureStatusFilter('all')">全部</span>`;
+  html += `<span class="chip${furnitureStatusFilter === 'pending' ? ' active' : ''}" onclick="setFurnitureStatusFilter('pending')">未收集</span>`;
+  html += `<span class="chip${furnitureStatusFilter === 'done' ? ' active' : ''}" onclick="setFurnitureStatusFilter('done')">已收集</span>`;
+  html += '</div>';
+  html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong> · 还差 <strong>${remainingInspiration}</strong> 灵感值</div>`;
 
   if (!items.length) {
     html += '<div class="empty-state">暂无家具数据<small>把名称、舒适度、灵感值补到 data/furniture.json 后会在这里显示</small></div>';
@@ -1686,8 +1689,18 @@ function renderFurnitureTab() {
     return;
   }
 
-  const pending = items.filter(i => !i.acquired);
-  const done = items.filter(i => i.acquired);
+  let list = items;
+  if (furnitureStatusFilter === 'pending') list = allPending;
+  else if (furnitureStatusFilter === 'done') list = owned;
+
+  if (!list.length) {
+    html += '<div class="empty-state">没有匹配的家具</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  const pending = list.filter(i => !i.acquired);
+  const done = list.filter(i => i.acquired);
 
   if (pending.length) {
     html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
@@ -1699,6 +1712,11 @@ function renderFurnitureTab() {
   }
 
   el.innerHTML = html;
+}
+
+function setFurnitureStatusFilter(status) {
+  furnitureStatusFilter = status;
+  renderFurnitureTab();
 }
 
 function renderFurnitureRow(item) {

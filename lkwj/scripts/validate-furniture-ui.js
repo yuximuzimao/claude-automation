@@ -8,6 +8,10 @@ const furniturePath = path.join(__dirname, '..', 'data', 'furniture.json');
 const furniture = fs.existsSync(furniturePath)
   ? JSON.parse(fs.readFileSync(furniturePath, 'utf8'))
   : null;
+const furnitureTabBody = html.slice(
+  html.indexOf('function renderFurnitureTab'),
+  html.indexOf('function renderFurnitureRow')
+);
 
 const checks = [
   ['server defines furniture data file', server.includes('FURNITURE_FILE')],
@@ -19,8 +23,9 @@ const checks = [
   ['toggleFurniture exists', /async\s+function\s+toggleFurniture\s*\(/.test(html)],
   ['furniture renderer uses gameData.furniture', html.includes('gameData?.furniture')],
   ['furniture progress is persisted separately', html.includes('furniture_progress')],
-  ['furniture renderer shows comfort total', html.includes('comfortTotal') && html.includes('舒适度')],
-  ['furniture renderer shows inspiration total', html.includes('inspirationTotal') && html.includes('灵感值')],
+  ['furniture tab has status filter controls', html.includes('furnitureStatusFilter') && html.includes('setFurnitureStatusFilter')],
+  ['furniture stats no longer show comfort totals', !furnitureTabBody.includes('comfortTotal') && !furnitureTabBody.includes('comfortOwned')],
+  ['furniture stats no longer show total inspiration', !furnitureTabBody.includes('inspirationTotal') && !furnitureTabBody.includes('inspirationOwned')],
   ['furniture renderer shows remaining inspiration', html.includes('remainingInspiration') && html.includes('还差')],
   ['furniture row does not show source controls', !/renderFurnitureRow[\s\S]*source_url/.test(html) && !/renderFurnitureRow[\s\S]*openModal/.test(html)],
   ['furniture data file exists and is an array', Array.isArray(furniture)],
