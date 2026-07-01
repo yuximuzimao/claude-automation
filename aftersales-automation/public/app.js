@@ -1400,17 +1400,13 @@ async function loadStats() {
   <div class="stat-card"><div class="stat-number red">${stats.negative||0}</div><div class="stat-label">❌ 错误</div></div>
 </div>`;
 
-  // 待洞察反馈区
+  // 待洞察反馈区（洞察生成已改为手动，不通过 API）
   const pendingCount = (pendingInsight || []).length;
   const insightHtml = `
 <div class="chart-section">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
     <h3 style="margin:0">AI 洞察</h3>
-    <button class="btn-primary" style="padding:4px 12px;font-size:13px"
-      onclick="generateInsight(this)"
-      ${pendingCount === 0 ? 'disabled title="暂无待洞察的有说明反馈"' : ''}>
-      ${pendingCount > 0 ? `生成洞察（${pendingCount} 条待处理）` : '暂无待洞察内容'}
-    </button>
+    <span style="font-size:12px;color:var(--gray-500)">通过 Claude Code / Codex 手动生成</span>
   </div>
   ${pendingCount > 0 ? `
   <div style="font-size:13px;color:var(--gray-600);margin-bottom:8px">待洞察反馈：</div>
@@ -1431,7 +1427,7 @@ async function loadStats() {
         ${ins.failed ? '⚠️ 生成失败 · ' : ''}${ins.createdAt}
       </span>
       <div style="display:flex;gap:6px">
-        ${ins.failed ? `<button class="btn-primary" style="font-size:12px;padding:2px 8px" onclick="generateInsight(this)">重新生成</button>` : `<button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>`}
+        ${ins.failed ? `<span style="font-size:12px;color:var(--gray-400)">生成失败</span>` : `<button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>`}
       </div>
     </div>
     ${ins.failed ? '' : `<div style="margin-top:4px;color:var(--gray-700);white-space:pre-wrap">${h(ins.preview)}…</div>`}
