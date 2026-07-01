@@ -228,7 +228,10 @@ async function execOpenAccount(op) {
   const { accountNum, accountNote } = op.params;
   // 直接调用 openAccountFlow，与 execExecute/execReprocessOne 共用同一安全链路（2026-07-01 模块化）
   const { openAccountFlow } = require('../jl/open-account-flow');
-  const out = await openAccountFlow(String(accountNum));
+  const out = await Promise.race([
+    openAccountFlow(String(accountNum)),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('打开账号超时（90s）')), 90000)),
+  ]);
   if (!out || !out.success) {
     const msg = ((out && out.error) || '未知错误').slice(0, 200);
     const status = classifySessionFailure(msg);

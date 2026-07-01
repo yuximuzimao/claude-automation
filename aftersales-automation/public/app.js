@@ -1407,6 +1407,7 @@ async function loadStats() {
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
     <h3 style="margin:0">AI 洞察</h3>
     <span style="font-size:12px;color:var(--gray-500)">通过 Claude Code / Codex 手动生成</span>
+    <span style="font-size:13px;color:${pendingCount > 0 ? 'var(--blue)' : 'var(--gray-400)'}">待洞察：${pendingCount} 条</span>
   </div>
   ${pendingCount > 0 ? `
   <div style="font-size:13px;color:var(--gray-600);margin-bottom:8px">待洞察反馈：</div>
