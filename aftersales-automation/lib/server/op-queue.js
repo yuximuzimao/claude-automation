@@ -914,10 +914,16 @@ async function execExecute(op) {
 async function execOpenTicket(op) {
   const { workOrderNum, accountNum } = op.params;
   if (accountNum) {
-    const injResult = spawnSync('node', [path.join(SESSIONS_DIR, 'jl.js'), 'inject', String(accountNum)], {
-      timeout: 30000, encoding: 'utf8',
-    });
-    if (injResult.status !== 0) throw new Error(`账号 ${accountNum} 注入失败：${(injResult.stderr || injResult.stdout || '').slice(0, 200)}`);
+    // A2 安全链路：店铺核验 + 注入（对齐 execExecute，2026-07-01）
+    const { openAccountFlow } = require('../jl/open-account-flow');
+    const accountResult = await openAccountFlow(String(accountNum));
+    if (!accountResult || !accountResult.success) {
+      throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
+    }
+    saveSessionState(accountNum);
+    const { navigate } = require('../jl/navigate');
+    await navigate(accountResult.targetId, '/business/after-sale-detail', { workOrderNum });
+    return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName };
   }
   return JSON.parse(execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' }));
 }

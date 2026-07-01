@@ -58,7 +58,12 @@ function removeIntercept(shipTracking) {
 function readQueue() {
   try {
     return JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf8'));
-  } catch {
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      process.stderr.write(`[data] WARNING: queue.json 不存在，返回空队列\n`);
+    } else {
+      process.stderr.write(`[data] WARNING: queue.json 读取失败: ${e.message}\n`);
+    }
     return { updatedAt: null, items: [] };
   }
 }
