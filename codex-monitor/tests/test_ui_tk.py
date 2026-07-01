@@ -10,11 +10,32 @@ from app.aggregate import ProjectTotal, TokenTotals, UsageAggregate
 from app.models import CodexQuota, RateLimitWindow
 from app.runtime import RefreshRequest
 from app.ui_tk import (
+    BG_WINDOW,
+    COLLAPSED_H,
+    COLLAPSED_W,
+    COLOR_5H,
+    COLOR_WEEK,
     CodexMonitorWindow,
+    TEXT_ON_GLASS,
+    TRANSPARENT_BG,
     WindowState,
+    _collapsed_panel_layers,
+    _capsule_hit_options,
+    _clamped_window_position,
+    _configure_transparent_chrome,
+    _expanded_spacing,
+    _expanded_toolbar_symbols,
+    _fmt_compact_duration,
+    _macos_frame_from_tk_geometry,
+    _macos_blur_config,
+    _project_popover_uses_native_blur,
+    _project_popover_limit,
     _quota_center_text,
     _quota_ring_used_pct,
     _ring_extent,
+    _rounded_card_shell_options,
+    _show_expanded_footer_actions,
+    _sync_rounded_card,
     build_view_model,
     format_millions,
     load_window_state,
@@ -101,6 +122,166 @@ class TkUiTests(unittest.TestCase):
         self.assertAlmostEqual(_ring_extent(50.0), -180.0)
         self.assertIsNone(_ring_extent(0.0))
         self.assertIsNone(_ring_extent(0.4))
+
+    def test_collapsed_capsule_matches_dock_height_target(self) -> None:
+        self.assertEqual(COLLAPSED_W, 258)
+        self.assertEqual(COLLAPSED_H, 82)
+
+    def test_compact_duration_uses_chinese_units(self) -> None:
+        self.assertEqual(_fmt_compact_duration(172), "2小时52分")
+        self.assertEqual(_fmt_compact_duration(9600), "6天16小时")
+        self.assertEqual(_fmt_compact_duration(45), "45分")
+        self.assertEqual(_fmt_compact_duration(None), "--")
+
+    def test_project_popover_contract(self) -> None:
+        self.assertEqual(_project_popover_limit(), 10)
+        self.assertFalse(_project_popover_uses_native_blur())
+
+    def test_white_frost_palette_uses_dark_text_and_status_colors(self) -> None:
+        self.assertEqual(TEXT_ON_GLASS, "#172326")
+        self.assertEqual(COLOR_5H, "#5FD0C5")
+        self.assertEqual(COLOR_WEEK, "#F2B866")
+
+    def test_capsule_hit_layer_uses_textured_fill_not_solid_black(self) -> None:
+        options = _capsule_hit_options()
+
+        self.assertEqual(options["stipple"], "gray25")
+        self.assertNotEqual(options["fill"], "#0B1416")
+        self.assertEqual(options["fill"], "#F4F8FA")
+
+    def test_rounded_card_shell_overrides_tk_canvas_default_size(self) -> None:
+        options = _rounded_card_shell_options(BG_WINDOW)
+
+        self.assertEqual(options["bg"], BG_WINDOW)
+        self.assertEqual(options["width"], 1)
+        self.assertEqual(options["height"], 1)
+        self.assertEqual(options["highlightthickness"], 0)
+        self.assertEqual(options["bd"], 0)
+
+    def test_sync_rounded_card_runs_attached_size_callback(self) -> None:
+        class FakeShell:
+            def __init__(self) -> None:
+                self.updated = False
+                self.synced = False
+                self._codex_sync_size = self.sync
+
+            def update_idletasks(self) -> None:
+                self.updated = True
+
+            def sync(self) -> None:
+                self.synced = True
+
+        shell = FakeShell()
+
+        _sync_rounded_card(shell)
+
+        self.assertTrue(shell.updated)
+        self.assertTrue(shell.synced)
+
+    def test_expanded_spacing_keeps_content_close_to_window_edges(self) -> None:
+        spacing = _expanded_spacing()
+
+        top_gap = spacing["title_height"] + spacing["quota_pady"][0]
+        bottom_gap = (
+            spacing["footer_divider_pady"][0]
+            + spacing["footer_bar_pady"][0]
+            + spacing["button_pady"] * 2
+            + spacing["footer_bar_pady"][1]
+        )
+
+        self.assertLessEqual(top_gap, 22)
+        self.assertLessEqual(bottom_gap, 26)
+
+    def test_collapsed_panel_uses_single_visible_layer(self) -> None:
+        layers = _collapsed_panel_layers(258, 82)
+
+        self.assertEqual(layers, [])
+
+    def test_macos_blur_config_uses_native_rounded_backdrop(self) -> None:
+        config = _macos_blur_config()
+
+        self.assertEqual(config["material"], "popover")
+        self.assertEqual(config["material_value"], 6)
+        self.assertEqual(config["blending_mode"], "behindWindow")
+        self.assertEqual(config["state"], "active")
+        self.assertGreater(config["alpha"], 0.7)
+        self.assertEqual(config["corner_radius"], 41)
+
+    def test_macos_frame_converts_tk_top_left_to_cocoa_bottom_left(self) -> None:
+        self.assertEqual(
+            _macos_frame_from_tk_geometry(screen_height=1000, x=300, y=220, width=260, height=150),
+            (300, 630, 260, 150),
+        )
+
+    def test_expanded_toolbar_symbols_use_refresh_collapse_and_close(self) -> None:
+        self.assertEqual(_expanded_toolbar_symbols(), ("↺", "↘↖", "×"))
+
+    def test_expanded_footer_text_actions_are_hidden(self) -> None:
+        self.assertFalse(_show_expanded_footer_actions())
+
+    def test_transparent_chrome_uses_system_transparent_when_supported(self) -> None:
+        class FakeRoot:
+            def __init__(self) -> None:
+                self.configured: list[dict[str, str]] = []
+                self.attributes_calls: list[tuple[str, bool]] = []
+
+            def attributes(self, name: str, value: bool) -> None:
+                self.attributes_calls.append((name, value))
+
+            def configure(self, **kwargs: str) -> None:
+                self.configured.append(kwargs)
+
+        root = FakeRoot()
+
+        self.assertEqual(_configure_transparent_chrome(root), TRANSPARENT_BG)
+        self.assertEqual(root.attributes_calls, [("-transparent", True)])
+        self.assertEqual(root.configured, [{"bg": TRANSPARENT_BG}])
+
+    def test_transparent_chrome_falls_back_to_window_background(self) -> None:
+        class FakeRoot:
+            def __init__(self) -> None:
+                self.configured: list[dict[str, str]] = []
+
+            def attributes(self, _name: str, _value: bool) -> None:
+                raise RuntimeError("unsupported")
+
+            def configure(self, **kwargs: str) -> None:
+                self.configured.append(kwargs)
+
+        root = FakeRoot()
+
+        self.assertEqual(_configure_transparent_chrome(root), BG_WINDOW)
+        self.assertEqual(root.configured, [{"bg": BG_WINDOW}])
+
+    def test_clamped_window_position_keeps_expanded_window_visible(self) -> None:
+        class FakeRoot:
+            def winfo_screenwidth(self) -> int:
+                return 2560
+
+            def winfo_screenheight(self) -> int:
+                return 1440
+
+        state = WindowState(x=2324, y=604, collapsed=False)
+
+        self.assertEqual(
+            _clamped_window_position(FakeRoot(), width=360, height=500, state=state),
+            (2200, 604),
+        )
+
+    def test_clamped_window_position_keeps_top_left_non_negative(self) -> None:
+        class FakeRoot:
+            def winfo_screenwidth(self) -> int:
+                return 2560
+
+            def winfo_screenheight(self) -> int:
+                return 1440
+
+        state = WindowState(x=-20, y=-10, collapsed=False)
+
+        self.assertEqual(
+            _clamped_window_position(FakeRoot(), width=360, height=500, state=state),
+            (0, 0),
+        )
 
     def test_window_state_roundtrip(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -199,6 +380,39 @@ class TkUiTests(unittest.TestCase):
             RefreshRequest(reason="watcher", claude_modified_since=90.0, claude_max_files=200),
         ])
         self.assertEqual(applied, [updated, updated])
+
+    def test_capsule_click_shows_project_popover_immediately(self) -> None:
+        window = object.__new__(CodexMonitorWindow)
+        calls: list[str] = []
+        window._show_project_popover = lambda: calls.append("show")
+        window._popover_after_id = None
+        window._capsule_pointer_inside = False
+
+        window._capsule_click()
+
+        self.assertTrue(window._capsule_pointer_inside)
+        self.assertEqual(calls, ["show"])
+
+    def test_capsule_leave_cancels_pending_project_popover(self) -> None:
+        class FakeRoot:
+            def __init__(self) -> None:
+                self.cancelled: list[str] = []
+
+            def after_cancel(self, after_id: str) -> None:
+                self.cancelled.append(after_id)
+
+        window = object.__new__(CodexMonitorWindow)
+        window.root = FakeRoot()
+        window._popover_after_id = "after-1"
+        window._capsule_pointer_inside = True
+        window._popover_pointer_inside = False
+        window._project_popover = None
+
+        window._capsule_leave()
+
+        self.assertFalse(window._capsule_pointer_inside)
+        self.assertIsNone(window._popover_after_id)
+        self.assertEqual(window.root.cancelled, ["after-1"])
 
 
 if __name__ == "__main__":

@@ -18,20 +18,105 @@ if TYPE_CHECKING:
     import tkinter as tk
 
 
-BG_WINDOW = "#F2F2F7"
-BG_SECTION = "#FFFFFF"
-BORDER = "#E0E0E5"
+BG_WINDOW = "#F4F8FA"
+BG_SECTION = "#FBFDFE"
+TRANSPARENT_BG = "systemTransparent"
+BORDER = "#D7E0E3"
+SHADOW = "#DDE7EA"
 TEXT_PRIMARY = "#1D1D1F"
-TEXT_SECONDARY = "#8A8A8E"
+TEXT_SECONDARY = "#7D838C"
 TEXT_MONO = "#333333"
-TRACK_COLOR = "#C8C8CE"   # visible gray track for 0% rings
-COLOR_5H = "#007AFF"      # blue for 5h quota
-COLOR_WEEK = "#AF52DE"    # purple for weekly quota
+TEXT_ON_GLASS = "#172326"
+TEXT_MUTED_GLASS = "#5F6E73"
+TRACK_COLOR = "#B9C7CB"   # subtle track on white glass
+COLOR_5H = "#5FD0C5"      # cyan/teal for 5h quota
+COLOR_WEEK = "#F2B866"    # warm amber for weekly quota
+CAPSULE_HIT_FILL = "#F4F8FA"
+CAPSULE_HIT_STIPPLE = "gray25"
+WINDOW_ALPHA = 1.0
+WINDOW_RADIUS = 41
+CARD_RADIUS = 16
 STATE_PATH = Path(__file__).resolve().parents[1] / "data" / "state.json"
 
-COLLAPSED_W = 190
-COLLAPSED_H = 190
+COLLAPSED_W = 258
+COLLAPSED_H = 82
 EXPANDED_W = 360
+PROJECT_POPOVER_LIMIT = 10
+PROJECT_POPOVER_W = 410
+PROJECT_POPOVER_ALPHA = 0.96
+
+
+def _expanded_spacing() -> dict[str, Any]:
+    return {
+        "side_pad": 16,
+        "title_height": 20,
+        "quota_pady": (2, 4),
+        "project_pady": (6, 0),
+        "footer_divider_pady": (0, 0),
+        "footer_bar_pady": (0, 0),
+        "button_pady": 0,
+    }
+
+
+def _macos_blur_config() -> dict[str, Any]:
+    return {
+        "material": "popover",
+        "material_value": 6,
+        "blending_mode": "behindWindow",
+        "blending_mode_value": 0,
+        "state": "active",
+        "state_value": 1,
+        "alpha": 0.76,
+        "corner_radius": WINDOW_RADIUS,
+    }
+
+
+def _macos_frame_from_tk_geometry(
+    *,
+    screen_height: int,
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+) -> tuple[int, int, int, int]:
+    return (x, screen_height - y - height, width, height)
+
+
+def _expanded_toolbar_symbols() -> tuple[str, str, str]:
+    return ("↺", "↘↖", "×")
+
+
+def _show_expanded_footer_actions() -> bool:
+    return False
+
+
+def _project_popover_limit() -> int:
+    return PROJECT_POPOVER_LIMIT
+
+
+def _project_popover_uses_native_blur() -> bool:
+    return False
+
+
+def _capsule_hit_options() -> dict[str, str]:
+    return {
+        "fill": CAPSULE_HIT_FILL,
+        "outline": BORDER,
+        "stipple": CAPSULE_HIT_STIPPLE,
+    }
+
+
+def _fmt_compact_duration(minutes: int | None) -> str:
+    if minutes is None:
+        return "--"
+    minutes = max(0, int(minutes))
+    days, remainder = divmod(minutes, 1440)
+    hours, mins = divmod(remainder, 60)
+    if days:
+        return f"{days}天{hours}小时" if hours else f"{days}天"
+    if hours:
+        return f"{hours}小时{mins}分" if mins else f"{hours}小时"
+    return f"{mins}分"
 
 
 def format_millions(tokens: int) -> str:
@@ -62,6 +147,23 @@ def _fmt_countdown(resets_at: Any, window_minutes: int | None) -> str:
             return f"{h}h{m}m"
         return f"{h}h" if h else f"{m}m"
     return "--"
+
+
+def _countdown_minutes(resets_at: Any, window_minutes: int | None) -> int | None:
+    if resets_at is not None:
+        try:
+            if isinstance(resets_at, str):
+                ts = datetime.fromisoformat(resets_at.replace("Z", "+00:00")).timestamp()
+            else:
+                ts = float(resets_at)
+            return max(0, int((ts - time.time()) // 60))
+        except Exception:
+            pass
+    return int(window_minutes) if window_minutes else None
+
+
+def _fmt_compact_countdown(resets_at: Any, window_minutes: int | None) -> str:
+    return _fmt_compact_duration(_countdown_minutes(resets_at, window_minutes))
 
 
 def _ring_extent(used_pct: float) -> float | None:
@@ -104,6 +206,188 @@ def _draw_ring(cv: Any, cx: float, cy: float, r: float, width: float,
         ex = cx + r * math.cos(end_rad)
         ey = cy - r * math.sin(end_rad)
         cv.create_oval(ex - cap_r, ey - cap_r, ex + cap_r, ey + cap_r, **cap_kw)
+
+
+def _rounded_rect(canvas: Any, x1: int, y1: int, x2: int, y2: int,
+                  radius: int, **kwargs: Any) -> Any:
+    """Draw a smooth rounded rectangle on a tkinter Canvas."""
+    radius = max(1, min(radius, (x2 - x1) // 2, (y2 - y1) // 2))
+    points = [
+        x1 + radius, y1,
+        x2 - radius, y1,
+        x2, y1,
+        x2, y1 + radius,
+        x2, y2 - radius,
+        x2, y2,
+        x2 - radius, y2,
+        x1 + radius, y2,
+        x1, y2,
+        x1, y2 - radius,
+        x1, y1 + radius,
+        x1, y1,
+    ]
+    return canvas.create_polygon(points, smooth=True, splinesteps=18, **kwargs)
+
+
+def _collapsed_panel_layers(width: int, height: int) -> list[dict[str, Any]]:
+    return []
+
+
+def _configure_transparent_chrome(root: Any) -> str:
+    """Use a transparent outer shell when the current Tk build supports it."""
+    try:
+        root.attributes("-transparent", True)
+    except Exception:
+        root.configure(bg=BG_WINDOW)
+        return BG_WINDOW
+    root.configure(bg=TRANSPARENT_BG)
+    return TRANSPARENT_BG
+
+
+def _install_macos_blur(root: Any, *, radius: int = WINDOW_RADIUS) -> bool:
+    try:
+        from AppKit import (
+            NSApplication,
+            NSBackingStoreBuffered,
+            NSColor,
+            NSMakeRect,
+            NSWindow,
+            NSWindowBelow,
+            NSWindowStyleMaskBorderless,
+            NSViewHeightSizable,
+            NSViewWidthSizable,
+            NSVisualEffectView,
+        )
+    except Exception:
+        return False
+
+    try:
+        root.update_idletasks()
+        tk_window = _find_tk_window(root)
+        if tk_window is None:
+            return False
+        x, y, width, height = _macos_frame_from_tk_geometry(
+            screen_height=root.winfo_screenheight(),
+            x=root.winfo_x(),
+            y=root.winfo_y(),
+            width=max(root.winfo_width(), root.winfo_reqwidth(), 1),
+            height=max(root.winfo_height(), root.winfo_reqheight(), 1),
+        )
+        frame = NSMakeRect(x, y, width, height)
+
+        blur_window = getattr(root, "_codex_blur_window", None)
+        blur = getattr(root, "_codex_blur_view", None)
+        if blur_window is None or blur is None:
+            blur_window = NSWindow.alloc().initWithContentRect_styleMask_backing_defer_(
+                frame,
+                NSWindowStyleMaskBorderless,
+                NSBackingStoreBuffered,
+                False,
+            )
+            blur_window.setOpaque_(False)
+            blur_window.setBackgroundColor_(NSColor.clearColor())
+            blur_window.setIgnoresMouseEvents_(True)
+            blur_window.setLevel_(tk_window.level())
+            blur = NSVisualEffectView.alloc().initWithFrame_(NSMakeRect(0, 0, width, height))
+            blur_window.setContentView_(blur)
+            root._codex_blur_window = blur_window
+            root._codex_blur_view = blur
+        else:
+            blur_window.setFrame_display_(frame, True)
+            blur.setFrame_(NSMakeRect(0, 0, width, height))
+
+        config = _macos_blur_config()
+        blur_window.setAlphaValue_(config["alpha"])
+        blur.setMaterial_(config["material_value"])
+        blur.setBlendingMode_(config["blending_mode_value"])
+        blur.setState_(config["state_value"])
+        blur.setAutoresizingMask_(NSViewWidthSizable | NSViewHeightSizable)
+        blur.setWantsLayer_(True)
+
+        layer = blur.layer()
+        if layer is not None:
+            layer.setCornerRadius_(float(radius))
+            layer.setMasksToBounds_(True)
+
+        blur_window.orderFrontRegardless()
+        root.lift()
+        blur_window.orderWindow_relativeTo_(NSWindowBelow, tk_window.windowNumber())
+        return True
+    except Exception:
+        return False
+
+
+def _find_tk_window(root: Any) -> Any | None:
+    from AppKit import NSApplication
+
+    title = root.title()
+    for window in NSApplication.sharedApplication().windows():
+        try:
+            if str(window.title()) == title:
+                return window
+        except Exception:
+            continue
+    return None
+
+
+def _close_macos_blur(root: Any) -> None:
+    blur_window = getattr(root, "_codex_blur_window", None)
+    if blur_window is None:
+        return
+    try:
+        blur_window.close()
+    except Exception:
+        pass
+    root._codex_blur_window = None
+    root._codex_blur_view = None
+
+
+def _rounded_card_shell_options(background: str) -> dict[str, Any]:
+    return {
+        "bg": background,
+        "width": 1,
+        "height": 1,
+        "highlightthickness": 0,
+        "bd": 0,
+    }
+
+
+def _rounded_card(parent: Any, *, fill: str = TRANSPARENT_BG,
+                  radius: int = CARD_RADIUS, pad_x: int = 10,
+                  pad_y: int = 8, shell_bg: str = TRANSPARENT_BG) -> tuple[Any, Any]:
+    """Return (canvas shell, body frame) with a rounded card background."""
+    import tkinter as tk
+
+    shell = tk.Canvas(parent, **_rounded_card_shell_options(shell_bg))
+    body = tk.Frame(shell, bg=fill)
+    window_id = shell.create_window(pad_x, pad_y, anchor="nw", window=body)
+
+    def redraw(_event: Any | None = None) -> None:
+        width = max(shell.winfo_width(), body.winfo_reqwidth() + pad_x * 2)
+        height = max(shell.winfo_height(), body.winfo_reqheight() + pad_y * 2)
+        shell.delete("card-bg")
+        if fill != TRANSPARENT_BG:
+            _rounded_rect(shell, 1, 1, width - 2, height - 2, radius,
+                          fill=fill, outline=BORDER, tags="card-bg")
+            shell.tag_lower("card-bg")
+        shell.itemconfigure(window_id, width=max(1, width - pad_x * 2 - 4))
+
+    def sync_size(_event: Any | None = None) -> None:
+        shell.configure(height=body.winfo_reqheight() + pad_y * 2 + 4)
+        redraw()
+
+    shell._codex_sync_size = sync_size
+    shell.bind("<Configure>", redraw)
+    body.bind("<Configure>", sync_size)
+    return shell, body
+
+
+def _sync_rounded_card(shell: Any) -> None:
+    sync_size = getattr(shell, "_codex_sync_size", None)
+    if sync_size is None:
+        return
+    shell.update_idletasks()
+    sync_size()
 
 
 def build_view_model(aggregate: UsageAggregate) -> dict[str, Any]:
@@ -263,6 +547,23 @@ def save_window_state(state: WindowState, path: Path = STATE_PATH) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _clamped_window_position(
+    root: Any,
+    *,
+    width: int,
+    height: int,
+    state: WindowState,
+    clamp_y: bool = True,
+) -> tuple[int, int]:
+    screen_w = max(1, int(root.winfo_screenwidth()))
+    screen_h = max(1, int(root.winfo_screenheight()))
+    max_x = max(0, screen_w - width)
+    max_y = max(0, screen_h - height) if clamp_y else max(0, state.y)
+    x = min(max(0, state.x), max_x)
+    y = min(max(0, state.y), max_y)
+    return x, y
+
+
 class CodexMonitorWindow:
     def __init__(
         self,
@@ -277,9 +578,18 @@ class CodexMonitorWindow:
         self.refresh_fn = refresh_fn
         self.state_path = state_path
         self.state = load_window_state(self.state_path)
+        if not self.state.collapsed:
+            self.state.collapsed = True
+            save_window_state(self.state, self.state_path)
         self._drag_offset = (0, 0)
+        self._press_root: tuple[int, int] | None = None
+        self._capsule_dragging = False
         self._countdown_after_id: str | None = None
         self._cd_labels: list[Any] = []   # countdown label refs for update
+        self._popover_after_id: str | None = None
+        self._project_popover: Any | None = None
+        self._popover_pointer_inside = False
+        self._capsule_pointer_inside = False
         self._refresh_lock = threading.Lock()
         self._refresh_in_progress = False
         self._queued_refresh: RefreshRequest | None = None
@@ -287,11 +597,11 @@ class CodexMonitorWindow:
         self.runtime: Any | None = None
         self.fonts = _fonts(root, tkfont)
         root.title("Codex Monitor")
-        root.configure(bg=BG_WINDOW)
+        self.chrome_bg = _configure_transparent_chrome(root)
         # macOS: overrideredirect BEFORE -topmost (order matters)
         root.overrideredirect(True)
         root.attributes("-topmost", True)
-        root.attributes("-alpha", 0.92)
+        root.attributes("-alpha", WINDOW_ALPHA)
         root.geometry(f"+{self.state.x}+{self.state.y}")
         root.bind("<ButtonPress-1>", self._start_drag)
         root.bind("<B1-Motion>", self._on_drag)
@@ -309,84 +619,146 @@ class CodexMonitorWindow:
         import tkinter as tk
 
         self._cd_labels = []
-        self.container = tk.Frame(self.root, bg=BG_WINDOW)
+        self.container = tk.Frame(self.root, bg=self._container_bg())
         self.container.pack(fill="both", expand=True)
 
-        if self.state.collapsed:
-            self._build_collapsed()
-            self._start_countdown()
-        else:
-            self._build_expanded()
+        self._build_collapsed()
+        self._start_countdown()
 
     def _build_collapsed(self) -> None:
         import tkinter as tk
 
-        W = H = COLLAPSED_W
-        self.root.geometry(f"{W}x{H}+{self.state.x}+{self.state.y}")
+        W = COLLAPSED_W
+        H = COLLAPSED_H
+        self._set_window_geometry(W, H)
         self.root.resizable(False, False)
 
-        cv = tk.Canvas(self.container, width=W, height=H, bg=BG_WINDOW, highlightthickness=0)
+        cv = tk.Canvas(
+            self.container,
+            width=W,
+            height=H,
+            bg=self._container_bg(),
+            highlightthickness=0,
+            bd=0,
+        )
         cv.pack()
+        self._bind_capsule_pointer(cv)
+        _rounded_rect(
+            cv,
+            2,
+            2,
+            W - 2,
+            H - 2,
+            H // 2,
+            **_capsule_hit_options(),
+            tags=("capsule-hit",),
+        )
+        for layer in _collapsed_panel_layers(W, H):
+            _rounded_rect(
+                cv,
+                layer["x1"],
+                layer["y1"],
+                layer["x2"],
+                layer["y2"],
+                layer["radius"],
+                fill=layer["fill"],
+                outline=layer["outline"],
+            )
 
         quota = self.view_model["quota"]
         pct0 = _quota_ring_used_pct(quota[0])   # 5h used %
         pct1 = _quota_ring_used_pct(quota[1])   # weekly used %
-        cx = cy = W // 2  # 95
 
-        # ── Rings ─────────────────────────────────────────────────────
-        # Outer: 5h (blue), r=61
-        _draw_ring(cv, cx, cy, 61, 16, pct0, COLOR_5H)
-        # Inner: weekly (purple), r=40
-        _draw_ring(cv, cx, cy, 40, 16, pct1, COLOR_WEEK)
+        left_x = 43
+        right_x = W - 43
+        center_y = H // 2
+        ring_radius = 24
+        ring_width = 8
+        _draw_ring(cv, left_x, center_y, ring_radius, ring_width, pct0, COLOR_5H)
+        _draw_ring(cv, right_x, center_y, ring_radius, ring_width, pct1, COLOR_WEEK)
 
-        # ── Center text: weekly (top, smaller) + 5h (bottom, larger) ──
-        weekly_text = _quota_center_text(quota[1])
-        cv.create_text(cx, cy - 14, text=weekly_text,
-                       fill=COLOR_WEEK, font=(self.fonts.num_large[0], 16, "bold"),
-                       anchor="center")
-        fiveh_text = _quota_center_text(quota[0])
-        cv.create_text(cx, cy + 13, text=fiveh_text,
-                       fill=COLOR_5H, font=(self.fonts.num_xlarge[0], 22, "bold"),
-                       anchor="center")
+        cv.create_text(
+            left_x,
+            center_y - 4,
+            text=_quota_center_text(quota[0]).rstrip("%"),
+            fill=TEXT_ON_GLASS,
+            font=(self.fonts.num_large[0], 17, "bold"),
+            anchor="center",
+        )
+        cv.create_text(
+            left_x,
+            center_y + 13,
+            text="5h",
+            fill=COLOR_5H,
+            font=(self.fonts.caption[0], 9, "normal"),
+            anchor="center",
+        )
+        cv.create_text(
+            right_x,
+            center_y - 4,
+            text=_quota_center_text(quota[1]).rstrip("%"),
+            fill=TEXT_ON_GLASS,
+            font=(self.fonts.num_large[0], 17, "bold"),
+            anchor="center",
+        )
+        cv.create_text(
+            right_x,
+            center_y + 13,
+            text="week",
+            fill=COLOR_WEEK,
+            font=(self.fonts.caption[0], 9, "normal"),
+            anchor="center",
+        )
 
-        # ── Corner buttons ─────────────────────────────────────────────
-        refresh_lbl = _action_label(self.container, "↺", BG_WINDOW, COLOR_5H,
-                                    self.fonts.btn, self._refresh)
-        expand_lbl = _action_label(self.container, "⛶", BG_WINDOW, COLOR_WEEK,
-                                   self.fonts.btn, self._toggle_collapsed)
-        cv.create_window(8, 8, anchor="nw", window=refresh_lbl)
-        cv.create_window(W - 8, 8, anchor="ne", window=expand_lbl)
-
-        # ── Bottom countdowns (colored to match rings) ─────────────────
-        cd0_lbl = tk.Label(self.container, text="--", bg=BG_WINDOW,
-                           fg=COLOR_5H, font=self.fonts.caption)
-        cd1_lbl = tk.Label(self.container, text="--", bg=BG_WINDOW,
-                           fg=COLOR_WEEK, font=self.fonts.caption)
-        cv.create_window(8, H - 8, anchor="sw", window=cd0_lbl)
-        cv.create_window(W - 8, H - 8, anchor="se", window=cd1_lbl)
+        cv.create_line(W // 2 - 40, H // 2, W // 2 + 40, H // 2, fill=BORDER)
+        cd0_lbl = tk.Label(
+            self.container,
+            text="--",
+            bg=self._panel_bg(),
+            fg=COLOR_5H,
+            font=(self.fonts.caption[0], 11, "normal"),
+        )
+        cd1_lbl = tk.Label(
+            self.container,
+            text="--",
+            bg=self._panel_bg(),
+            fg=COLOR_WEEK,
+            font=(self.fonts.caption[0], 11, "normal"),
+        )
+        cv.create_window(W // 2, H // 2 - 13, anchor="center", window=cd0_lbl)
+        cv.create_window(W // 2, H // 2 + 14, anchor="center", window=cd1_lbl)
+        for widget in (cd0_lbl, cd1_lbl):
+            self._bind_capsule_pointer(widget)
         self._cd_labels = [cd0_lbl, cd1_lbl]
 
     def _build_expanded(self) -> None:
         import tkinter as tk
 
         # Set a generous initial height; will be corrected after widgets are built
-        self.root.geometry(f"{EXPANDED_W}x900+{self.state.x}+{self.state.y}")
+        self._set_window_geometry(EXPANDED_W, 900, clamp_y=False)
         self.root.resizable(False, False)
+        spacing = _expanded_spacing()
 
         # ── Title bar: drag handle + × close ──────────────────────────
-        title_bar = tk.Frame(self.container, bg=BG_WINDOW, height=26)
+        title_bar = tk.Frame(self.container, bg=self._container_bg(), height=spacing["title_height"])
         title_bar.pack(fill="x")
         title_bar.pack_propagate(False)
-        close_lbl = tk.Label(title_bar, text="×", bg=BG_WINDOW, fg=TEXT_SECONDARY,
-                             font=self.fonts.btn, padx=8, pady=2)
-        close_lbl.pack(side="right")
-        close_lbl.bind("<Button-1>", lambda e: self._on_close())
+        refresh_symbol, collapse_symbol, close_symbol = _expanded_toolbar_symbols()
+        refresh_lbl = _action_label(title_bar, refresh_symbol, self._panel_bg(), COLOR_5H,
+                                    self.fonts.btn, self._refresh)
+        collapse_lbl = _action_label(title_bar, collapse_symbol, self._panel_bg(), COLOR_WEEK,
+                                     self.fonts.btn, self._toggle_collapsed)
+        close_lbl = _action_label(title_bar, close_symbol, self._panel_bg(), TEXT_SECONDARY,
+                                  self.fonts.btn, self._on_close)
+        refresh_lbl.pack(side="left", padx=(8, 2), pady=1)
+        collapse_lbl.pack(side="left", padx=(2, 0), pady=1)
+        close_lbl.pack(side="right", padx=(0, 8), pady=1)
 
         # ── Quota ──────────────────────────────────────────────────────
         self._quota_expanded(self.container, self.view_model["quota"])
 
         # ── Separator ─────────────────────────────────────────────────
-        tk.Frame(self.container, bg=BORDER, height=1).pack(fill="x", padx=16)
+        tk.Frame(self.container, bg=BORDER, height=1).pack(fill="x", padx=spacing["side_pad"])
 
         # ── Projects ───────────────────────────────────────────────────
         self._projects_expanded(
@@ -402,13 +774,40 @@ class CodexMonitorWindow:
         # Shrink window to actual content height (avoids blank space at bottom)
         self.root.update_idletasks()
         h = self.container.winfo_reqheight()
-        self.root.geometry(f"{EXPANDED_W}x{h}+{self.state.x}+{self.state.y}")
+        self._set_window_geometry(EXPANDED_W, h)
+
+    def _container_bg(self) -> str:
+        if self.chrome_bg == TRANSPARENT_BG:
+            return TRANSPARENT_BG
+        return BG_WINDOW
+
+    def _panel_bg(self) -> str:
+        if self.chrome_bg == TRANSPARENT_BG:
+            return TRANSPARENT_BG
+        return BG_SECTION
+
+    def _set_window_geometry(self, width: int, height: int, *, clamp_y: bool = True) -> None:
+        x, y = _clamped_window_position(
+            self.root,
+            width=width,
+            height=height,
+            state=self.state,
+            clamp_y=clamp_y,
+        )
+        if (x, y) != (self.state.x, self.state.y):
+            self.state.x = x
+            self.state.y = y
+            save_window_state(self.state, self.state_path)
+        self.root.geometry(f"{width}x{height}+{x}+{y}")
+        self.root.after(0, lambda: _install_macos_blur(self.root, radius=WINDOW_RADIUS))
 
     def _quota_expanded(self, parent: "tk.Widget", quota: list[dict[str, Any]]) -> None:
         import tkinter as tk
 
-        outer = tk.Frame(parent, bg=BG_WINDOW)
-        outer.pack(fill="x", padx=16, pady=(10, 10))
+        spacing = _expanded_spacing()
+        bg = self._panel_bg()
+        outer = tk.Frame(parent, bg=self._container_bg())
+        outer.pack(fill="x", padx=spacing["side_pad"], pady=spacing["quota_pady"])
 
         colors = [COLOR_5H, COLOR_WEEK]
         for i, item in enumerate(quota):
@@ -417,29 +816,30 @@ class CodexMonitorWindow:
             used_pct = pct_val if pct_val is not None else None
             remain_pct = (100.0 - pct_val) if pct_val is not None else None
 
-            cell = tk.Frame(outer, bg=BG_SECTION)
-            cell.pack(side="left", fill="x", expand=True,
-                      padx=(0, 10 if i == 0 else 0))
+            cell_shell, cell = _rounded_card(outer)
+            cell_shell.pack(side="left", fill="x", expand=True,
+                            padx=(0, 10 if i == 0 else 0))
 
             # Label
-            tk.Label(cell, text=item["label"], bg=BG_SECTION, fg=color,
+            tk.Label(cell, text=item["label"], bg=bg, fg=color,
                      font=self.fonts.caption, anchor="w").pack(anchor="w", padx=10, pady=(8, 0))
 
             # Large remaining % (centered)
             remain_str = f"{remain_pct:.0f}%" if remain_pct is not None else "—"
-            tk.Label(cell, text=remain_str, bg=BG_SECTION, fg=TEXT_MONO,
+            tk.Label(cell, text=remain_str, bg=bg, fg=TEXT_MONO,
                      font=(self.fonts.num_xlarge[0], 32, "bold"),
                      anchor="center").pack(fill="x", padx=10)
 
             # Used % subtitle
             used_str = f"已使用 {used_pct:.0f}%" if used_pct is not None else "待更新"
-            tk.Label(cell, text=used_str, bg=BG_SECTION, fg=TEXT_SECONDARY,
+            tk.Label(cell, text=used_str, bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor="w").pack(anchor="w", padx=10)
 
             # Countdown
             cd_text = f"↺ {_fmt_countdown(item.get('resets_at'), item.get('window_minutes'))}"
-            tk.Label(cell, text=cd_text, bg=BG_SECTION, fg=TEXT_SECONDARY,
+            tk.Label(cell, text=cd_text, bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor="w").pack(anchor="w", padx=10, pady=(0, 8))
+            _sync_rounded_card(cell_shell)
 
     def _projects_expanded(
         self,
@@ -450,28 +850,31 @@ class CodexMonitorWindow:
     ) -> None:
         import tkinter as tk
 
-        outer = tk.Frame(parent, bg=BG_WINDOW)
-        outer.pack(fill="x", padx=16, pady=(10, 0))
+        spacing = _expanded_spacing()
+        bg = self._panel_bg()
+        outer_shell, outer = _rounded_card(parent, pad_x=12, pad_y=10)
+        outer_shell.pack(fill="x", padx=spacing["side_pad"], pady=spacing["project_pady"])
 
         # Section header
-        sec_hdr = tk.Frame(outer, bg=BG_WINDOW)
+        sec_hdr = tk.Frame(outer, bg=bg)
         sec_hdr.pack(fill="x")
-        tk.Label(sec_hdr, text="项目 Top 10", bg=BG_WINDOW, fg=TEXT_PRIMARY,
+        tk.Label(sec_hdr, text="项目 Top 10", bg=bg, fg=TEXT_PRIMARY,
                  font=self.fonts.title, anchor="w").pack(side="left")
         if month_total or today_total:
             tk.Label(sec_hdr, text=f"30天 {month_total}  今日 {today_total}",
-                     bg=BG_WINDOW, fg=TEXT_SECONDARY,
+                     bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor="e").pack(side="right")
 
         if not projects:
-            tk.Label(outer, text="暂无数据", bg=BG_WINDOW, fg=TEXT_SECONDARY,
+            tk.Label(outer, text="暂无数据", bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.label).pack(anchor="w", pady=8)
-            tk.Label(outer, text="结合 Claude Code 和 Codex 本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
+            tk.Label(outer, text="结合 Claude Code 和 Codex 本地日志估算", bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor="e").pack(anchor="e")
+            _sync_rounded_card(outer_shell)
             return
 
         # Grid for aligned columns
-        grid = tk.Frame(outer, bg=BG_WINDOW)
+        grid = tk.Frame(outer, bg=bg)
         grid.pack(fill="x", pady=(6, 0))
         grid.columnconfigure(0, weight=1)
         grid.columnconfigure(1, minsize=64)
@@ -480,40 +883,47 @@ class CodexMonitorWindow:
 
         # Column headers
         for col, (text, anchor) in enumerate([("项目", "w"), ("今日", "e"), ("30天", "e"), ("占比", "e")]):
-            tk.Label(grid, text=text, bg=BG_WINDOW, fg=TEXT_SECONDARY,
+            tk.Label(grid, text=text, bg=bg, fg=TEXT_SECONDARY,
                      font=self.fonts.caption, anchor=anchor).grid(
                          row=0, column=col, sticky="ew", pady=(2, 4))
 
         for row_i, project in enumerate(projects, start=1):
-            name = tk.Label(grid, text=project["name"], bg=BG_WINDOW, fg=TEXT_PRIMARY,
+            name = tk.Label(grid, text=project["name"], bg=bg, fg=TEXT_PRIMARY,
                             font=self.fonts.label, anchor="w")
             name.grid(row=row_i, column=0, sticky="w", pady=2)
             if project["tooltip"]:
                 Tooltip(name, project["tooltip"])
             for col, key in [(1, "today"), (2, "month"), (3, "percent")]:
-                tk.Label(grid, text=project[key], bg=BG_WINDOW, fg=TEXT_MONO,
+                tk.Label(grid, text=project[key], bg=bg, fg=TEXT_MONO,
                          font=self.fonts.caption, anchor="e").grid(
                              row=row_i, column=col, sticky="e", pady=2)
 
         # Note row: "结合 Claude Code 和 Codex 本地日志估算" right-aligned below project rows
-        note_row = tk.Frame(outer, bg=BG_WINDOW)
+        note_row = tk.Frame(outer, bg=bg)
         note_row.pack(fill="x", pady=(4, 0))
-        tk.Label(note_row, text="结合 Claude Code 和 Codex 本地日志估算", bg=BG_WINDOW, fg=TEXT_SECONDARY,
+        tk.Label(note_row, text="结合 Claude Code 和 Codex 本地日志估算", bg=bg, fg=TEXT_SECONDARY,
                  font=self.fonts.caption, anchor="e").pack(anchor="e")
+        _sync_rounded_card(outer_shell)
 
     def _footer(self, parent: "tk.Widget") -> None:
+        if not _show_expanded_footer_actions():
+            return
         import tkinter as tk
 
-        tk.Frame(parent, bg=BORDER, height=1).pack(fill="x", pady=(8, 0))
+        spacing = _expanded_spacing()
+        tk.Frame(parent, bg=BORDER, height=1).pack(
+            fill="x",
+            pady=spacing["footer_divider_pady"],
+        )
 
         bar = tk.Frame(parent, bg=BG_WINDOW)
-        bar.pack(fill="x", padx=16, pady=(8, 10))
+        bar.pack(fill="x", padx=spacing["side_pad"], pady=spacing["footer_bar_pady"])
 
         btn_kw = dict(
             bg=BG_WINDOW, fg=TEXT_PRIMARY,
             font=self.fonts.label,
             relief="flat", bd=0,
-            padx=14, pady=5,
+            padx=14, pady=spacing["button_pady"],
             cursor="hand2",
             activebackground=BORDER,
             activeforeground=TEXT_PRIMARY,
@@ -544,15 +954,217 @@ class CodexMonitorWindow:
         for i, q in pairs:
             if i < len(self._cd_labels) and self._cd_labels[i] is not None:
                 self._cd_labels[i].configure(
-                    text=_fmt_countdown(q.get("resets_at"), q.get("window_minutes"))
+                    text=_fmt_compact_countdown(q.get("resets_at"), q.get("window_minutes"))
                 )
         self._countdown_after_id = self.root.after(60000, self._do_countdown)
+
+    # ──────────────────────────────────────────────────────────────────
+    # Hover popover
+
+    def _bind_capsule_pointer(self, widget: Any) -> None:
+        widget.bind("<Enter>", self._capsule_enter)
+        widget.bind("<Leave>", self._capsule_leave)
+        widget.bind("<ButtonPress-1>", self._capsule_press)
+        widget.bind("<B1-Motion>", self._capsule_motion)
+        widget.bind("<ButtonRelease-1>", self._capsule_release)
+
+    def _capsule_enter(self, _event: Any | None = None) -> None:
+        self._capsule_pointer_inside = True
+
+    def _capsule_press(self, event: Any) -> str:
+        self._capsule_pointer_inside = True
+        self._capsule_dragging = False
+        self._press_root = (event.x_root, event.y_root)
+        self._drag_offset = (
+            event.x_root - self.root.winfo_x(),
+            event.y_root - self.root.winfo_y(),
+        )
+        return "break"
+
+    def _capsule_motion(self, event: Any) -> str:
+        if self._press_root is None:
+            self._capsule_press(event)
+        start_x, start_y = self._press_root or (event.x_root, event.y_root)
+        if abs(event.x_root - start_x) > 3 or abs(event.y_root - start_y) > 3:
+            self._capsule_dragging = True
+        if self._capsule_dragging:
+            self._on_drag(event)
+        return "break"
+
+    def _capsule_release(self, event: Any) -> str:
+        if self._capsule_dragging:
+            self._end_drag(event)
+        else:
+            self._capsule_click(event)
+        self._press_root = None
+        self._capsule_dragging = False
+        return "break"
+
+    def _capsule_click(self, _event: Any | None = None) -> None:
+        self._capsule_pointer_inside = True
+        self._cancel_project_popover_timer()
+        self._show_project_popover()
+
+    def _capsule_leave(self, _event: Any | None = None) -> None:
+        self._capsule_pointer_inside = False
+        self._cancel_project_popover_timer()
+        self._defer_maybe_hide_project_popover()
+
+    def _popover_enter(self, _event: Any | None = None) -> None:
+        self._popover_pointer_inside = True
+
+    def _popover_leave(self, _event: Any | None = None) -> None:
+        self._popover_pointer_inside = False
+        self._defer_maybe_hide_project_popover()
+
+    def _cancel_project_popover_timer(self) -> None:
+        if self._popover_after_id is None:
+            return
+        try:
+            self.root.after_cancel(self._popover_after_id)
+        except Exception:
+            pass
+        self._popover_after_id = None
+
+    def _defer_maybe_hide_project_popover(self) -> None:
+        after = getattr(self.root, "after", None)
+        if callable(after):
+            after(80, self._maybe_hide_project_popover)
+        else:
+            self._maybe_hide_project_popover()
+
+    def _maybe_hide_project_popover(self) -> None:
+        if self._capsule_pointer_inside or self._popover_pointer_inside:
+            return
+        self._hide_project_popover()
+
+    def _show_project_popover(self) -> None:
+        self._popover_after_id = None
+        if not self._capsule_pointer_inside or self._project_popover is not None:
+            return
+
+        import tkinter as tk
+
+        popover = tk.Toplevel(self.root)
+        popover.title("Codex Monitor Projects")
+        popover.overrideredirect(True)
+        popover.attributes("-topmost", True)
+        popover.attributes("-alpha", PROJECT_POPOVER_ALPHA)
+        bg = BG_WINDOW
+        popover.configure(bg=bg)
+        self._project_popover = popover
+        self._popover_pointer_inside = False
+
+        frame = tk.Frame(popover, bg=bg)
+        frame.pack(fill="both", expand=True, padx=17, pady=14)
+        self._bind_popover_hover(frame)
+
+        header = tk.Frame(frame, bg=bg)
+        header.pack(fill="x", pady=(0, 10))
+        tk.Label(
+            header,
+            text="项目 Top 10",
+            bg=bg,
+            fg=TEXT_ON_GLASS,
+            font=(self.fonts.title[0], 14, "bold"),
+            anchor="w",
+        ).pack(side="left")
+        tk.Label(
+            header,
+            text=f"30天 {self.view_model['month']['total']} · 今日 {self.view_model['today']['total']}",
+            bg=bg,
+            fg=TEXT_MUTED_GLASS,
+            font=(self.fonts.caption[0], 11, "normal"),
+            anchor="e",
+        ).pack(side="right")
+
+        grid = tk.Frame(frame, bg=bg)
+        grid.pack(fill="x")
+        for col, width in [(0, 130), (1, 66), (2, 66), (3, 42)]:
+            grid.columnconfigure(col, minsize=width)
+        headers = [("项目", "w"), ("今日", "e"), ("30天", "e"), ("占比", "e")]
+        for col, (text, anchor) in enumerate(headers):
+            tk.Label(
+                grid,
+                text=text,
+                bg=bg,
+                fg=TEXT_MUTED_GLASS,
+                font=(self.fonts.caption[0], 11, "normal"),
+                anchor=anchor,
+            ).grid(row=0, column=col, sticky="ew", padx=(0, 10 if col < 3 else 0), pady=(0, 6))
+
+        projects = self.view_model["projects"][:_project_popover_limit()]
+        if not projects:
+            tk.Label(
+                grid,
+                text="暂无数据",
+                bg=bg,
+                fg=TEXT_MUTED_GLASS,
+                font=self.fonts.label,
+                anchor="w",
+            ).grid(row=1, column=0, columnspan=4, sticky="w", pady=8)
+        for row_i, project in enumerate(projects, start=1):
+            tk.Label(
+                grid,
+                text=project["name"],
+                bg=bg,
+                fg=TEXT_ON_GLASS,
+                font=(self.fonts.label[0], 12, "normal"),
+                anchor="w",
+            ).grid(row=row_i, column=0, sticky="ew", padx=(0, 10), pady=2)
+            for col, key in [(1, "today"), (2, "month"), (3, "percent")]:
+                tk.Label(
+                    grid,
+                    text=project[key],
+                    bg=bg,
+                    fg=TEXT_ON_GLASS if key != "percent" else TEXT_MUTED_GLASS,
+                    font=(self.fonts.caption[0], 12, "normal"),
+                    anchor="e",
+                ).grid(row=row_i, column=col, sticky="e", padx=(0, 10 if col < 3 else 0), pady=2)
+
+        tk.Label(
+            frame,
+            text="结合 Claude Code 和 Codex 本地日志估算",
+            bg=bg,
+            fg=TEXT_MUTED_GLASS,
+            font=(self.fonts.caption[0], 10, "normal"),
+            anchor="e",
+        ).pack(fill="x", pady=(10, 0))
+
+        popover.update_idletasks()
+        height = max(1, popover.winfo_reqheight())
+        width = PROJECT_POPOVER_W
+        x = self.root.winfo_x()
+        y = max(0, self.root.winfo_y() - height - 10)
+        popover.geometry(f"{width}x{height}+{x}+{y}")
+        popover.bind("<Enter>", self._popover_enter)
+        popover.bind("<Leave>", self._popover_leave)
+        if _project_popover_uses_native_blur():
+            popover.after(0, lambda: _install_macos_blur(popover, radius=26))
+
+    def _bind_popover_hover(self, widget: Any) -> None:
+        widget.bind("<Enter>", self._popover_enter)
+        widget.bind("<Leave>", self._popover_leave)
+
+    def _hide_project_popover(self) -> None:
+        self._cancel_project_popover_timer()
+        popover = self._project_popover
+        if popover is None:
+            return
+        self._project_popover = None
+        self._popover_pointer_inside = False
+        try:
+            _close_macos_blur(popover)
+            popover.destroy()
+        except Exception:
+            pass
 
     # ──────────────────────────────────────────────────────────────────
     # Actions
 
     def _toggle_collapsed(self) -> None:
         self._cancel_countdown()
+        self._hide_project_popover()
         self.state.collapsed = not self.state.collapsed
         save_window_state(self.state, self.state_path)
         if self.container is not None:
@@ -613,6 +1225,7 @@ class CodexMonitorWindow:
 
     def apply_aggregate(self, aggregate: UsageAggregate) -> None:
         self._cancel_countdown()
+        self._hide_project_popover()
         self.view_model = build_view_model(aggregate)
         if self.container is not None:
             self.container.destroy()
@@ -624,6 +1237,7 @@ class CodexMonitorWindow:
     # Drag
 
     def _start_drag(self, event: Any) -> None:
+        self._hide_project_popover()
         self._drag_offset = (
             event.x_root - self.root.winfo_x(),
             event.y_root - self.root.winfo_y(),
@@ -633,6 +1247,7 @@ class CodexMonitorWindow:
         x = event.x_root - self._drag_offset[0]
         y = event.y_root - self._drag_offset[1]
         self.root.geometry(f"+{x}+{y}")
+        _install_macos_blur(self.root, radius=WINDOW_RADIUS)
 
     def _end_drag(self, _event: Any) -> None:
         self.state.x = self.root.winfo_x()
@@ -641,9 +1256,11 @@ class CodexMonitorWindow:
 
     def _on_close(self) -> None:
         self._cancel_countdown()
+        self._hide_project_popover()
         self.state.x = self.root.winfo_x()
         self.state.y = self.root.winfo_y()
         save_window_state(self.state, self.state_path)
+        _close_macos_blur(self.root)
         self.root.destroy()
 
 

@@ -1,2 +1,5 @@
 # Optional: enables filesystem events. The app falls back to 5-second polling when unavailable.
 watchdog>=4.0
+
+# Optional on non-macOS; enables native NSVisualEffectView blur on macOS.
+pyobjc-framework-Cocoa>=12.2.1
