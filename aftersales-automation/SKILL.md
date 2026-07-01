@@ -91,7 +91,7 @@ entry: cli.js
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
    - `execReinfer` 直接转调 `execReprocessOne`。
-   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单）和 `execScanAccount`（扫描工单）尚待迁移。
+   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 已迁移）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount` 已废弃（server.js runAutoScan 不再逐个入队 scan-account）。
 
 ### 旧流程（代码保留，当前禁止作为入口）
 
