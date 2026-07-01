@@ -988,10 +988,7 @@ function renderBody(item, sim, mode) {
 
 function renderActions(item, sim, mode) {
   if (mode === 'sim') {
-    const btns = [];
-    if (item.status === 'pending') btns.push(`<button class="btn-ghost" onclick="collectItem('${item.id}')">采集数据</button>`);
-    btns.push(`<button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>`);
-    return btns.join('');
+    return `<button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>`;
   }
 
   // ── auto_executed：布局与「待确认」一致，操作按钮灰化禁用，好评/差评保留可用 ──
@@ -1224,18 +1221,6 @@ async function judgeInline(simId, workOrderNum, verdict, sid) {
   await submitFeedback(simId, workOrderNum, verdict, reason || null, suggestedAction, doc ? { doc } : null);
 }
 
-// ── 采集单条 ─────────────────────────────────────────────────────
-async function collectItem(queueItemId) {
-  const btn = event.target;
-  btn.disabled = true; btn.textContent = '已加入队列';
-  try {
-    await api('/collect/' + queueItemId, { method: 'POST' });
-    showToast('已加入采集队列');
-  } catch (e) {
-    showToast('异常：' + e.message, 'error');
-    btn.disabled = false; btn.textContent = '采集数据';
-  }
-}
 
 // ── 实际工单操作 ──────────────────────────────────────────────────
 async function confirmSim(simId) {

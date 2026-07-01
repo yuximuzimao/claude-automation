@@ -405,18 +405,6 @@ router.post('/scan', (req, res) => {
   res.status(202).json({ ok: true, opId: op.id });
 });
 
-// ── Collect（触发单条采集）────────────────────────────────────────
-
-router.post('/collect/:queueItemId', (req, res) => {
-  const item = (db.readQueue().items || []).find(i => i.id === req.params.queueItemId);
-  if (!item) return res.status(404).json({ error: '未找到队列项' });
-  if (item.status !== 'pending') return res.status(400).json({ error: `当前状态 ${item.status}，只有 pending 可采集` });
-  const op = opQueue.enqueue('collect', `采集 ${item.workOrderNum}`, {
-    queueItemId: item.id, mode: item.mode, accountNum: item.accountNum,
-  });
-  res.status(202).json({ ok: true, opId: op.id });
-});
-
 // ── Op Queue（操作队列状态 + 取消）───────────────────────────────
 
 router.get('/op-queue', (req, res) => {

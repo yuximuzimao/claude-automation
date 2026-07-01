@@ -140,12 +140,10 @@ async function executeOp(op) {
     case 'scan':           return execScan(op);
     case 'scan-finalize':  return execScanFinalize(op);
     case 'open-account':   return execOpenAccount(op);
-    case 'pipeline':       return execPipeline(op);
     case 'reinfer':        return execReinfer(op);
     case 'reprocess-one':  return execReprocessOne(op);
     case 'execute':        return execExecute(op);
     case 'open-ticket':    return execOpenTicket(op);
-    case 'collect':        return execCollect(op);
     case 'return-inbound': return execReturnInbound(op);
     case 'a1-fixed-batch': return execA1FixedBatch(op);
   }
@@ -457,12 +455,6 @@ async function cleanReturnedIntercepts() {
   }
   if (cleaned > 0) log(`[intercept-clean] 共清除 ${cleaned} 条拦截记录`);
   else log(`[intercept-clean] 检查完毕，无需清除`);
-}
-
-async function execPipeline(op) {
-  const pipeline = require('./pipeline');
-  await pipeline.runPipeline(op.params.mode || 'live');
-  return { done: true };
 }
 
 async function execReinfer(op) {
@@ -896,15 +888,6 @@ async function execOpenTicket(op) {
     return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
   }
   return JSON.parse(execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' }));
-}
-
-async function execCollect(op) {
-  const { queueItemId, mode = 'live', accountNum } = op.params;
-  const args = ['--limit', '1', mode === 'live' ? '--live' : '--sim'];
-  if (accountNum) args.push('--account', String(accountNum));
-  const { code } = await spawnAsync('node', [path.join(BASE, 'collect.js'), ...args], { cwd: BASE, timeout: 180000 });
-  if (code !== 0) throw new Error('采集失败');
-  return { done: true };
 }
 
 module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, updateAccountStatus };
