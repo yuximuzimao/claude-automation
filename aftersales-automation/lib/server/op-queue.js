@@ -226,13 +226,11 @@ function spawnAsync(cmd, args, opts) {
 
 async function execOpenAccount(op) {
   const { accountNum, accountNote } = op.params;
-  const flow = spawnSync('node', [path.join(BASE, 'scripts/jl-steps/open-account.js'), String(accountNum)], {
-    timeout: 90000, encoding: 'utf8', cwd: BASE,
-  });
-  let out = null;
-  try { out = JSON.parse(flow.stdout || '{}'); } catch {}
-  if (flow.status !== 0 || !out || !out.success) {
-    const msg = ((out && out.error) || flow.stderr || flow.stdout || `退出码 ${flow.status}`).slice(0, 200);
+  // 直接调用 openAccountFlow，与 execExecute/execReprocessOne 共用同一安全链路（2026-07-01 模块化）
+  const { openAccountFlow } = require('../jl/open-account-flow');
+  const out = await openAccountFlow(String(accountNum));
+  if (!out || !out.success) {
+    const msg = ((out && out.error) || '未知错误').slice(0, 200);
     const status = classifySessionFailure(msg);
     updateAccountStatus(accountNum, {
       status,
