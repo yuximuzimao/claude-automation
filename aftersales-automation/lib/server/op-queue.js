@@ -6,7 +6,7 @@
  * 必须通过 enqueue() 入队，由内部调度器严格串行执行。
  */
 
-const { execFileSync, spawnSync, spawn } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
@@ -17,8 +17,8 @@ const { expireStaleAlerts } = require('../jl/alerts');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
-const CLI = path.join(BASE, 'cli.js');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
+const { assertAccountNum } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
 
 // ── 当前注入账号状态（跨子进程共享，10分钟TTL）─────────────────────
 const SESSION_STATE_FILE = path.join(BASE, 'data/current-session.json');
@@ -59,6 +59,7 @@ let running = null;
 let lastCompleted = null;
 let paused = false;
 let activeProc = null;
+let abortController = new AbortController();
 
 function log(msg) { process.stdout.write(`[op-queue] ${msg}\n`); }
 
@@ -98,12 +99,15 @@ function emergencyStop() {
   for (let i = queue.length - 1; i >= 0; i--) {
     if (queue[i].status === 'queued') queue.splice(i, 1);
   }
+  // 中断当前正在运行的异步操作
+  abortController.abort();
+  abortController = new AbortController();
   if (activeProc) { try { activeProc.kill('SIGTERM'); } catch(e) {} activeProc = null; }
   log('紧急停止');
   broadcast();
 }
 
-function resume() { paused = false; log('恢复'); broadcast(); processNext(); }
+function resume() { paused = false; abortController = new AbortController(); log('恢复'); broadcast(); processNext(); }
 function isPaused() { return paused; }
 function isRunning() { return !!running; }
 
@@ -116,21 +120,37 @@ function processNext() {
   const next = queue.find(op => op.status === 'queued');
   if (!next) return;
   next.status = 'running'; next.startedAt = new Date().toISOString(); running = next;
+  next._abortSignal = abortController.signal;
   log(`开始 [${next.id}] ${next.label}`); broadcast();
   executeOp(next).then(result => {
     next.status = 'done'; next.result = result; next.doneAt = new Date().toISOString();
     log(`完成 [${next.id}] ${next.label}`);
   }).catch(e => {
-    next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
-    if (next.type === 'execute' && next.params && next.params.simId) {
-      try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
+    if (e.name === 'AbortError' || (e.message || '').includes('操作已被用户停止')) {
+      next.status = 'cancelled'; next.result = { error: '操作已被用户停止' }; next.doneAt = new Date().toISOString();
+      log(`已停止 [${next.id}] ${next.label}`);
+    } else {
+      next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
+      if (next.type === 'execute' && next.params && next.params.simId) {
+        try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
+      }
+      log(`失败 [${next.id}] ${next.label}: ${e.message}`);
     }
-    log(`失败 [${next.id}] ${next.label}: ${e.message}`);
   }).finally(() => {
     running = null; lastCompleted = next;
     const idx = queue.indexOf(next); if (idx !== -1) queue.splice(idx, 1);
     broadcast(); processNext();
   });
+}
+
+// ── 中断检查 ──────────────────────────────────────────────────────
+
+function assertNotAborted(op) {
+  if (op._abortSignal && op._abortSignal.aborted) {
+    const err = new Error('操作已被用户停止');
+    err.name = 'AbortError';
+    throw err;
+  }
 }
 
 // ── 执行分派 ──────────────────────────────────────────────────────
@@ -179,6 +199,7 @@ async function execReturnInbound(op) {
   const results = []; // 严格保持输入顺序
 
   for (let i = 0; i < total; i++) {
+    assertNotAborted(op);
     const tracking = trackingNumbers[i];
 
     // 阶段1: 广播"正在处理"
@@ -251,11 +272,13 @@ async function execOpenAccount(op) {
 }
 
 async function execA1FixedBatch(op) {
+  assertNotAborted(op);
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
   const { accountNum, accountNote } = op.params;
   const note = accountNote || `账号${accountNum}`;
   return processSingleAccountFixedBatch(String(accountNum), {
     thresholdHours: 48,
+    abortSignal: op._abortSignal,
     onTicketProgress: (item) => {
       sse.broadcast('ticket-progress', {
         accountNum: String(accountNum),
@@ -361,6 +384,7 @@ async function execScan(op) {
   });
 
   for (let i = 0; i < total; i++) {
+    assertNotAborted(op);
     const num = numsToScan[i];
     const cfg = accountsConfig[String(num)] || {};
     const note = cfg.note || cfg.name || `账号${num}`;
@@ -369,6 +393,7 @@ async function execScan(op) {
     try {
       const result = await processSingleAccountFixedBatch(String(num), {
         thresholdHours: 48,
+        abortSignal: op._abortSignal,
         onTicketProgress: (item) => {
           sse.broadcast('ticket-progress', {
             accountNum: String(num),
@@ -476,20 +501,20 @@ async function execReprocessOne(op) {
     return { skipped: true, reason: '已执行完成，跳过重新采集' };
   }
 
-  const accountNum = queueItem.accountNum;
-  if (!accountNum) throw new Error('缺少账号编号');
+  const accountNum = assertAccountNum(queueItem.accountNum);
 
   const cdp = require('../cdp');
   const { openAccountFlow } = require('../jl/open-account-flow');
   const { sleep, waitFor } = require('../wait');
 
   // ── Step 1: 安全打开账号 ──────────────────────────────────────────
-  const accountResult = await openAccountFlow(String(accountNum));
+  const accountResult = await openAccountFlow(accountNum);
   if (!accountResult || !accountResult.success) {
     throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
   saveSessionState(accountNum);
   const listTargetId = accountResult.targetId;
+  assertNotAborted(op);
 
   // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
@@ -501,6 +526,7 @@ async function execReprocessOne(op) {
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
   await step11.readCurrentPageSortCheck(listTargetId);
+  assertNotAborted(op);
 
   // ── Step 3: 定位工单（与执行操作完全一致的寻址逻辑）───────────────
   const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
@@ -517,6 +543,13 @@ async function execReprocessOne(op) {
   };
   const waitForPage = step14.createWaitForPage(waitFor);
 
+  // prepareAfterSaleList 读完后分页可能停在最后一页，先回到第 1 页
+  await step14.clickPageOneLikeHuman(listTargetId, {
+    readCurrentPage, sleep, waitForPage,
+    dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
+    eval: (id, js) => cdp.eval(id, js),
+  });
+
   const located = await step14.locateWorkOrderOnFreshList(listTargetId, queueItem.workOrderNum, {
     readCurrentPage,
     clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
@@ -530,6 +563,7 @@ async function execReprocessOne(op) {
   if (!located || !located.found) {
     throw new Error(`工单 ${queueItem.workOrderNum} 已不在待处理列表（可能已处理或已关闭）`);
   }
+  assertNotAborted(op);
 
   // Step 4: 点击处理按钮，打开详情 tab
   const opened = await clickWorkOrderAction(queueItem.workOrderNum, { targetId: listTargetId });
@@ -540,6 +574,7 @@ async function execReprocessOne(op) {
 
   // 等待详情页 Vue 组件完全渲染
   await sleep(2000);
+  assertNotAborted(op);
 
   // ── Step 5: 采集 + 推理 + 自动执行（step 14 processOpenedDetail 完整链路）──
   const { inferDecision } = require('../infer');
@@ -656,20 +691,20 @@ async function execExecute(op) {
   if (!queueItem) return { skipped: true, reason: '队列项不存在' };
   if (queueItem.status === 'waiting') return { skipped: true, reason: '工单处于等待重查状态，跳过执行' };
 
-  const accountNum = queueItem.accountNum;
-  if (!accountNum) throw new Error('缺少账号编号');
+  const accountNum = assertAccountNum(queueItem.accountNum);
 
   const cdp = require('../cdp');
   const { openAccountFlow } = require('../jl/open-account-flow');
   const { sleep, waitFor } = require('../wait');
 
   // ── Step 1: 安全打开账号 ──────────────────────────────────────────
-  const accountResult = await openAccountFlow(String(accountNum));
+  const accountResult = await openAccountFlow(accountNum);
   if (!accountResult || !accountResult.success) {
     throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
   saveSessionState(accountNum);
   const listTargetId = accountResult.targetId;
+  assertNotAborted(op);
 
   // ── Step 2: 导航到售后列表页并排序（不读全量列表，只做页面准备）───
   const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
@@ -681,6 +716,7 @@ async function execExecute(op) {
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
   await step11.readCurrentPageSortCheck(listTargetId);
+  assertNotAborted(op);
 
   const { action } = sim.decision;
   let result;
@@ -749,6 +785,7 @@ async function execExecute(op) {
     // 等待详情页 Vue 组件完全渲染（waitForNewWorkOrderTarget 只校验了 URL 含工单号，
     // body 可能尚未渲染完成，approveTicket navigate 会再等 3s，但这里多等 2s 更稳妥）
     await sleep(2000);
+    assertNotAborted(op);
 
     let detailClosed = false;
     try {
@@ -819,75 +856,77 @@ async function execExecute(op) {
 }
 
 async function execOpenTicket(op) {
-  const { workOrderNum, accountNum } = op.params;
-  if (accountNum) {
-    // A2 安全链路 + 模拟点击（对齐 execExecute 步骤 1-5，2026-07-01）
-    const cdp = require('../cdp');
-    const { openAccountFlow } = require('../jl/open-account-flow');
-    const { sleep, waitFor } = require('../wait');
+  const { workOrderNum, accountNum: rawAccountNum } = op.params;
+  const accountNum = assertAccountNum(rawAccountNum);
 
-    const accountResult = await openAccountFlow(String(accountNum));
-    if (!accountResult || !accountResult.success) {
-      throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
-    }
-    saveSessionState(accountNum);
-    const listTargetId = accountResult.targetId;
+  // A2 安全链路 + 模拟点击（对齐 execExecute 步骤 1-5，2026-07-01）
+  const cdp = require('../cdp');
+  const { openAccountFlow } = require('../jl/open-account-flow');
+  const { sleep, waitFor } = require('../wait');
 
-    // 导航到售后列表页并排序
-    const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
-    await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
-    await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
-    await step11.assertAfterSaleListReady(listTargetId);
-    const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
-    await selectOverdueSort({ targetId: listTargetId });
-    await sleep(step11.AFTER_SORT_WAIT_MS);
-    await step11.readCurrentPageSortCheck(listTargetId);
-
-    // 定位工单
-    const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
-    const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
-    const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
-
-    const readCurrentPage = async (targetId) => {
-      const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
-      return {
-        tickets: (raw && raw.tickets) || [],
-        loading: Boolean(raw && raw.loading),
-        pagination: step10.normalizePaginationState(raw && raw.pagination),
-      };
-    };
-    const waitForPage = step14.createWaitForPage(waitFor);
-
-    await step14.clickPageOneLikeHuman(listTargetId, {
-      readCurrentPage, sleep, waitForPage,
-      dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
-      eval: (id, js) => cdp.eval(id, js),
-    });
-
-    const located = await step14.locateWorkOrderOnFreshList(listTargetId, workOrderNum, {
-      readCurrentPage,
-      clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
-        readCurrentPage, sleep, waitForPage,
-        dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
-        eval: (id, js) => cdp.eval(id, js),
-      }),
-      clickNextPage: step10.clickNextPage,
-      waitForPage,
-    });
-    if (!located || !located.found) {
-      throw new Error(`工单 ${workOrderNum} 未在待处理列表中找到（可能已处理或已关闭）`);
-    }
-
-    // 点击处理按钮打开详情 tab
-    const opened = await clickWorkOrderAction(workOrderNum, { targetId: listTargetId });
-    if (!opened || !opened.success || !opened.newTargetId) {
-      throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
-    }
-    await sleep(2000);
-
-    return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
+  const accountResult = await openAccountFlow(accountNum);
+  if (!accountResult || !accountResult.success) {
+    throw new Error(`打开账号失败: ${(accountResult && accountResult.error) || '未知错误'}`);
   }
-  return JSON.parse(execFileSync('node', [CLI, 'open-ticket', workOrderNum], { cwd: BASE, timeout: 30000, encoding: 'utf8' }));
+  saveSessionState(accountNum);
+  const listTargetId = accountResult.targetId;
+  assertNotAborted(op);
+
+  // 导航到售后列表页并排序
+  const step11 = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  await cdp.navigate(listTargetId, 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list');
+  await sleep(step11.AFTER_NAVIGATION_WAIT_MS);
+  await step11.assertAfterSaleListReady(listTargetId);
+  const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
+  await selectOverdueSort({ targetId: listTargetId });
+  await sleep(step11.AFTER_SORT_WAIT_MS);
+  await step11.readCurrentPageSortCheck(listTargetId);
+  assertNotAborted(op);
+
+  // 定位工单
+  const step10 = require('../../scripts/jl-steps/10-read-urgent-after-sale-list');
+  const step14 = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const { clickWorkOrderAction } = require('../../scripts/jl-steps/12-click-work-order-action');
+
+  const readCurrentPage = async (targetId) => {
+    const raw = await cdp.eval(targetId, step10.READ_CURRENT_PAGE_TICKETS_JS);
+    return {
+      tickets: (raw && raw.tickets) || [],
+      loading: Boolean(raw && raw.loading),
+      pagination: step10.normalizePaginationState(raw && raw.pagination),
+    };
+  };
+  const waitForPage = step14.createWaitForPage(waitFor);
+
+  await step14.clickPageOneLikeHuman(listTargetId, {
+    readCurrentPage, sleep, waitForPage,
+    dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(listTargetId, event),
+    eval: (id, js) => cdp.eval(id, js),
+  });
+
+  const located = await step14.locateWorkOrderOnFreshList(listTargetId, workOrderNum, {
+    readCurrentPage,
+    clickPageOne: (id) => step14.clickPageOneLikeHuman(id, {
+      readCurrentPage, sleep, waitForPage,
+      dispatchMouseEvent: (event) => cdp.dispatchMouseEvent(id, event),
+      eval: (id, js) => cdp.eval(id, js),
+    }),
+    clickNextPage: step10.clickNextPage,
+    waitForPage,
+  });
+  if (!located || !located.found) {
+    throw new Error(`工单 ${workOrderNum} 未在待处理列表中找到（可能已处理或已关闭）`);
+  }
+  assertNotAborted(op);
+
+  // 点击处理按钮打开详情 tab
+  const opened = await clickWorkOrderAction(workOrderNum, { targetId: listTargetId });
+  if (!opened || !opened.success || !opened.newTargetId) {
+    throw new Error(`打开工单失败: ${(opened && opened.error) || '未识别到新标签页'}`);
+  }
+  await sleep(2000);
+
+  return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
 }
 
-module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, updateAccountStatus };
+module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, assertNotAborted, updateAccountStatus };

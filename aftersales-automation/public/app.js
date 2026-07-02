@@ -162,6 +162,9 @@ function renderQueuePanel(state) {
       const errMsg = (lastCompleted.result && lastCompleted.result.error) || '未知错误';
       showToast(`❌ ${lastCompleted.label}失败：${errMsg.slice(0, 60)}`, 'error');
       loadLive();
+    } else if (lastCompleted.status === 'cancelled') {
+      showToast(`⏹️ 已停止：${lastCompleted.label}`);
+      loadLive();
     }
   }
 

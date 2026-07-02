@@ -727,6 +727,11 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     : (options.erpTargetId || null);
 
   for (const item of items) {
+    if (options.abortSignal && options.abortSignal.aborted) {
+      const err = new Error('操作已被用户停止');
+      err.name = 'AbortError';
+      throw err;
+    }
     await assertBatchAllowed();
     item.status = 'processing';
     await reportProgress(dependencies, item);
@@ -893,6 +898,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  assertAccountNum,
   clickPageOneLikeHuman,
   createWaitForPage,
   createCircuitReader,
