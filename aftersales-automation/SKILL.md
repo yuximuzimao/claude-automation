@@ -70,7 +70,7 @@ entry: cli.js
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，默认 48h + `disableAutoExecute:true` | 改 A1 后端入口或入队参数时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js | 改队列/执行/重新采集逻辑时 |
+| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。**紧急停止**：AbortController + 步骤间检查点机制（2026-07-02），前端 🛑 按钮可真正中断运行中操作；详见 `docs/ops-tech.md §8` | 改队列/执行/重新采集/停止逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -91,7 +91,7 @@ entry: cli.js
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
    - `execReinfer` 直接转调 `execReprocessOne`。
-   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 已迁移）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount`（扫描工单，2026-07-01 已删除——无调用方，新扫描走 execScan → processSingleAccountFixedBatch）。
+   - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 初迁→2026-07-02 完成：统一账号校验+删除 CLI fallback+完整对齐 execExecute 步骤 1-5）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount`（扫描工单，2026-07-01 已删除——无调用方，新扫描走 execScan → processSingleAccountFixedBatch）。
 
 ### 重试与重启
 
