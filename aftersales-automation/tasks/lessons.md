@@ -463,3 +463,5 @@ server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app Apple
 - 用户点击"查看工单"后，系统直接导航到详情页 URL，而不是：进入列表→找到工单→模拟点击按钮→打开详情 tab。和 `execExecute` 的实际行为不一致。
 - 审查时看到 `openAccountFlow` 就打了勾，没有继续往下读后面的导航逻辑。**审查只看函数签名和 import，没有追踪完整的执行流。**
 - **规则**：审查代码链路时，必须逐行读完整执行流，不能在某一步"看到安全了就停"。审查 = 确认每一个步骤的行为和预期一致，不是确认某个函数被调用了。
+- **L13** emergencyStop 只杀 spawnAsync 子进程，对 async executor 完全无效 → AbortController + 步骤间检查点。教训：功能「存在」≠「有效」——验证要覆盖实际调用路径，不能只看 API 签名。
+- **2026-07-02 完成修复**：`execOpenTicket` 完整对齐 `execExecute` 步骤 1-5（openAccountFlow → 导航 → 排序 → clickPageOneLikeHuman → locateWorkOrderOnFreshList → clickWorkOrderAction）。同时统一了 `execExecute`/`execReprocessOne`/`execOpenTicket` 三处账号校验为 `assertAccountNum`（正则 `^\d+$`），删除了 execOpenTicket 的 CLI fallback 分支（不再允许无 accountNum 调用）。额外发现 `execReprocessOne` 缺少 `clickPageOneLikeHuman` 预调用（注释写"完全一致"但实际不一致），已补齐。
