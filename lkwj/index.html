@@ -859,7 +859,7 @@ function renderSpriteTab() {
   toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">🐾 精灵</h3>`;
   toolbarHtml += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></div>`;
   toolbarHtml += '<div class="tb-section">';
-  toolbarHtml += `<input class="sprite-search" type="text" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="spriteSearch=this.value;expandedPet=null;renderSpriteTab()">`;
+  toolbarHtml += `<input class="sprite-search" type="text" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="spriteSearch=this.value;expandedPet=null;renderSpriteContent()">`;
   toolbarHtml += '</div>';
 
   toolbarHtml += '<div class="tb-section"><div class="tb-label">任务筛选</div><div class="chips">';
@@ -883,6 +883,18 @@ function renderSpriteTab() {
   toolbarHtml += '</div></div>';
 
   toolbarEl.innerHTML = toolbarHtml;
+
+  renderSpriteContent();
+}
+
+function renderSpriteContent() {
+  const contentEl = document.getElementById('sprite-content');
+  const pets = gameData?.pets || {};
+  const total = Object.keys(pets).length;
+  const collected = Object.keys(pets).filter(pk => {
+    const tasks = petTasks(pk);
+    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
+  }).length;
 
   // Filter entries
   let entries = petEntries();
@@ -1123,7 +1135,7 @@ function renderShinyTab() {
   toolbarHtml += `<div class="sprite-stats">共 <strong>${list.length}</strong> 只 · 已收集 <strong>${doneCount}</strong>`;
   if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 匹配 <strong>${filtered.length}</strong>`;
   toolbarHtml += '</div>';
-  toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;shinyPage=1;renderShinyTab()"></div>`;
+  toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;shinyPage=1;renderShinyContent()"></div>`;
   toolbarHtml += '<div class="chips" style="margin-bottom:8px">';
   toolbarHtml += `<span class="chip${shinySeason === 'all' ? ' active' : ''}" onclick="setShinySeason('all')">全部</span>`;
   seasons.forEach(s => {
@@ -1134,6 +1146,24 @@ function renderShinyTab() {
   toolbarHtml += renderStatusChips(shinyStatus, 'setShinyStatus');
   toolbarHtml += '</div>';
   document.getElementById('shiny-toolbar').innerHTML = toolbarHtml;
+
+  renderShinyContent();
+}
+
+function renderShinyContent() {
+  const list = getShinyList();
+  let filtered = list;
+  if (shinySearch) {
+    const q = shinySearch.toLowerCase();
+    filtered = filtered.filter(s => s.name.includes(q) || (gameData?.pets?.[s.petKey]?.pinyin?.initial || '').includes(q));
+  }
+  if (shinySeason !== 'all') filtered = filtered.filter(s => s.limitedTime === shinySeason);
+  if (shinyStatus === 'pending') filtered = filtered.filter(s => !s.isDone);
+  else if (shinyStatus === 'done') filtered = filtered.filter(s => s.isDone);
+
+  const totalPages = Math.ceil(filtered.length / SHINY_PAGE);
+  if (shinyPage > totalPages) shinyPage = 1;
+  const pageItems = filtered.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
 
   const contentEl = document.getElementById('shiny-content');
   let contentHtml = '';
