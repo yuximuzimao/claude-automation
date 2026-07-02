@@ -25,7 +25,7 @@ http://localhost:8899/review.html
 
 | 文件 | 作用 |
 | --- | --- |
-| `index.html` | 主界面：看板、精灵、异色炫彩、多形态、精灵果实和其他收集 Tab |
+| `index.html` | 主界面：看板 + 精灵 + 异色炫彩 + 多形态 + 精灵果实 + 家具 + 服装 + 称号 + 星星 + 遗迹 + 支线 + 扭蛋 + 音乐；全部收集类 Tab 含搜索和筛选 |
 | `server.js` | 本地 HTTP 服务和 JSON 保存接口 |
 | `data/pets.json` | 精灵静态定义：名称、系别、形态、标签、果实 |
 | `data/tasks.json` | 世界图鉴课题任务定义，任务只来自 Excel `课题进度` sheet |

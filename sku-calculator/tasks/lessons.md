@@ -158,3 +158,30 @@ assert(sc._meta.warnings.length === 0);
 **修复**：改为运行时读页面实际 pageSize（`.el-pagination .el-select .el-input__inner` 的 value），fallback 50。
 
 **诊断信号**：读取条数 = 期望条数 × N（N 为整数倍）→ 翻页逻辑与实际 pageSize 不符；去 ERP 页面底部核查每页显示条数和总条数。
+
+## L11 CDP Session 过期恢复（2026-07-02）
+
+**现象**：`agent-browser --cdp 9222 eval` 全部报 `Session with given id not found`，`tab list` 正常但无法执行任何 eval。
+
+**根因**：Chrome 重启或长时间闲置后 CDP WebSocket session 过期，agent-browser 缓存的 session ID 失效。
+
+**修复**：
+```bash
+agent-browser close   # 清理过期 session，杀掉残留 daemon
+agent-browser --cdp 9222 eval 'document.title'   # 重新连接
+```
+
+**铁律**：agent-browser 操作报 session 错误时不要绕路（写 WebSocket 直连脚本），先 `close` 再重连。
+
+## L12 鲸灵 SKU 明细页使用 Element UI 多 Table 布局（2026-07-02）
+
+**现象**：按 `feedback_sku_cart_scraping.md` 的 td 索引读取，td[2] 返回的是数字（浏览量）而非规格名，td[3-5] 为空。
+
+**根因**：鲸灵商品数据 SKU 明细页使用 Element UI 多 `<table>` 并行渲染，页面有 5 个 tbody，每个 tbody 只渲染部分列。数据列（规格/加购人数/加购件数/支付件数）全部集中在 tbody[4]（0-based），而 tbody[0] 只有排名+商品+浏览量。`document.querySelectorAll('.el-table__row')` 会混合返回所有 tbody 的行，td 索引完全错位。
+
+**修复**：
+1. 先 inspect 各 tbody 的列结构（找哪个 tbody 包含规格/加购件数/支付件数）
+2. 只从目标 tbody 中 querySelectorAll
+3. 列映射：td[1]=商品, td[2]=规格, td[3]=加购人数, td[4]=加购件数, td[5]=支付件数
+
+**诊断信号**：抓取到的 td[2] 是数字而非规格名 → 读错了 tbody。立即 inspect 所有 tbody 的结构。

@@ -3892,6 +3892,30 @@
     "nodes": {
       "pet_353": {
         "evolvesTo": []
+      },
+      "pet_351": {
+        "evolvesTo": [
+          {
+            "toSpeciesId": "pet_352",
+            "condition": {
+              "type": "level",
+              "level": 28,
+              "note": "精灵成长至1星"
+            }
+          }
+        ]
+      },
+      "pet_352": {
+        "evolvesTo": [
+          {
+            "toSpeciesId": "pet_353",
+            "condition": {
+              "type": "level",
+              "level": 40,
+              "note": "精灵成长至2星"
+            }
+          }
+        ]
       }
     }
   },

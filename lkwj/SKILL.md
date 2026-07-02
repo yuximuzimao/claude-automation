@@ -39,7 +39,7 @@
 lkwj/
 ├── README.md                  # 人类快速接入：运行方式、数据边界、验证命令
 ├── server.js                  # HTTP 服务器，端口 8899
-├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 多形态 + 精灵果实 + 7 品类标签
+├── index.html                 # 单页 App：看板 + 精灵图鉴 + 异色炫彩 + 多形态 + 精灵果实 + 家具 + 服装 + 称号 + 星星 + 遗迹 + 支线 + 扭蛋 + 音乐；全部收集类 Tab 布局统一（标题→统计→搜索→筛选→内容）
 ├── review.html                # 人工核对工具：精灵/任务/形态标注 + 进化链核对，两栏布局
 ├── scripts/
 │   ├── fix-shiny-and-chains.js       # 异色/炫彩标签修正 + 进化链传播
@@ -49,6 +49,7 @@ lkwj/
 │   ├── validate-clothing-ui.js       # 服装单件模型 + UI 验证
 │   ├── validate-title-ui.js          # 称号模型 + UI 验证
 │   └── validate-dungeon-ui.js        # 遗迹副本模型 + UI 验证
+│   └── data-compare-report.html      # Excel vs JSON 数据对比报告（2026-07-02）
 └── data/
     ├── pets.json              # 宠物定义（373 只）：形态 + 标签 + 元素数组
     ├── tasks.json             # 任务定义（373 组）：form-independent，desc 不含宠物名
@@ -148,6 +149,82 @@ lkwj/
 - 165 条链，全覆盖 373 只精灵，无幽灵节点
 - 条件类型：`level`（等级，含可选 `note` 字段描述附加条件如"使用15次流星火雨"）
 - 空 `evolvesTo` = 链终点
+
+### Excel → JSON 数据映射规则（AI 模型必读）
+
+> **从 Excel「图鉴课题进度表」更新 JSON 数据时必须遵守的对应关系。违反任一条都会产生数据错位。**
+
+#### 1. Excel 解析规则：用名称列做分组边界
+
+Excel 的 `精灵编号`(A列) 在合并单元格错位时会显示错误编号（如 pet_348 区域的 N.349/N.350 错位），**必须以 `精灵名称`(B列) 作为分组边界**。
+
+```
+正确做法：当 B列出现非空名称时 → 新宠物开始
+错误做法：用 A列精灵编号 forward-fill 分组（合并单元格会产生编号错位）
+```
+
+#### 2. 进化条件归属规则
+
+Excel `课题进度` sheet 中，pet_X 的「进化」任务 + `备注`列 = **pet_X 进化到 pet_X+1 的条件**。
+
+```
+Excel: pet_348 钨丝贝贝 → [进化] 备注="28级+精灵成长至1星进化"
+JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
+      { "type": "level", "level": 28, "note": "精灵成长至1星" }
+      目标: toSpeciesId = "pet_349" (辉光幕机)
+```
+
+**条件属于进化前的宠物，不属于进化后的宠物。**
+
+#### 3. 最终形态判断
+
+进化链末端的宠物 **没有进化任务**。判断方法：
+- 该宠物在 Excel 课题进度 sheet 中无「进化」类型的行 → 最终形态
+- evolution-chains.json 中 `evolvesTo: []` → 链终点
+
+```
+例: pet_350 机幕方舟 → 无进化任务 (最终形态)
+例: pet_353 凡鹰 → 无进化任务 (最终形态)
+```
+
+#### 4. 进化条件 note 与形态数据的边界
+
+`cond.note` **只放进化机制本身的条件**（等级、击败次数、使用技能、道具等）。形态相关的描述放在 `pets.json` 的 `forms` 中。
+
+```
+❌ 错误: cond.note = "(4形态随机)" → 形态信息应放在 pet_34 化蝶的 forms 数据中
+❌ 错误: cond.note = "(睁闭眼看时间)" → 形态信息应放在 pet_55 暗影灵面的 forms 中
+✅ 正确: cond.note = "击败光系精灵3次" → 这是进化机制条件
+✅ 正确: cond.note = "精灵成长至1星" → 这是进化机制条件
+```
+
+#### 5. 已知数据错位模式
+
+| 模式 | 案例 | 修复 |
+|------|------|------|
+| 条件误挂到下一级 | pet_328 有"使用3次勾魂"但实际属于 pet_327 | 核对 Excel 备注，条件归位到正确宠物 |
+| 进化链拆分 | pet_15→pet_16 和 pet_16→pet_17 分属不同 chain | 同一进化链的宠物应合并到一条 chain |
+| 分支进化条件全覆盖 | pet_280 全部3个分支用同一 note | 每个分支独立设 note 描述该分支条件 |
+
+#### 6. 前端渲染对应
+
+前端 3 处渲染进化条件，都必须包含 `cond.note`：
+
+| 位置 | 格式 |
+|------|------|
+| 精灵卡片进化链 | `(Lv28, 击败光系精灵3次)` |
+| 进化任务获取方式 | `28级击败光系精灵3次进化为No.324 XXX` |
+| 捕捉来源进化描述 | `28级击败光系精灵3次进化获得` |
+
+#### 7. 数据校验清单
+
+更新进化数据后必须验证：
+- [ ] 有「进化」任务的 pet_X 在 evolution-chains.json 中有 `evolvesTo` 且 condition.level > 0
+- [ ] 无「进化」任务的 pet_X 在 evolution-chains.json 中 `evolvesTo` 为空
+- [ ] condition.level 数值与 Excel 备注中的等级一致
+- [ ] condition.note 不含形态相关信息（如"随机"、"样子"等形态描述词）
+- [ ] 同一进化链的三段（如有）在同一 chain 内，非独立 chain
+- [ ] 分支进化的每个分支有其独立的 condition
 
 ### collections.json — 用户进度（动态）
 
@@ -313,16 +390,16 @@ lkwj/
 - **随机任务进化约束**：capture 任务需先完成，fruit(原 capture20) 需 capture 先完成
 - **果实任务边界**：fruit 任务以 `课题进度` sheet 的“果实”课题行为准；`果实进度` 是家族级果实记录/获取方式来源，不是任务清单
 - **多形态收集边界**：`pets.forms` 保存全部可收集形态；前端「多形态」Tab 独立勾选 `forms_collected`；`confirm_forms` 任务只引用 `requiredForms` 自动判断是否完成
-- **家具收集边界**：`furniture.json` 保存名称/舒适度/灵感值；`collections.furniture_progress` 只保存是否已收集。家具 Tab 支持全部/未收集/已收集筛选，顶部只显示总件数、已收集件数和未收集家具剩余灵感值；第一版不建来源、分类、尺寸字段。
-- **服装收集边界**：`clothing.json` 的 `sets[]` 保存套装共享信息（获取方式、特效、配对精灵），`pieces[]` 保存最小收集单位。`collections.clothing_progress` 只保存单件是否已收集。套装只是分组，不是最小收集单位。
-- **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。页面只显示一条主称号，不拆分显示上下段。
-- **遗迹副本边界**：`dungeons.json` 保存副本名称、位置和奖励数组；`collections.dungeon_progress` 只保存副本是否完成。第一版不拆奖励单项收集。
+- **家具收集边界**：`furniture.json` 保存名称/舒适度/灵感值；`collections.furniture_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，顶部显示总件数、已收集件数和未收集家具剩余灵感值；第一版不建来源、分类、尺寸字段。
+- **服装收集边界**：`clothing.json` 的 `sets[]` 保存套装共享信息（获取方式、特效、配对精灵），`pieces[]` 保存最小收集单位。`collections.clothing_progress` 只保存单件是否已收集。Tab 采用精灵卡片模式：套装=可展开卡片（显示部件进度 N/M），单品=简单行；套件和单品混合展示，支持关键词搜索 + 套装/单件类型筛选 + 进度筛选。
+- **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，页面显示 `上段 · 下段` 格式主称号。
+- **遗迹副本边界**：`dungeons.json` 保存副本名称、位置和奖励数组；`collections.dungeon_progress` 只保存副本是否完成。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，第一版不拆奖励单项收集。
 
 ## 已知数量
 
 | 层级 | 数量 |
 |------|------|
-| 宠物总数 | 373（含 S2，pet_348~375 跳过 351/352） |
+| 宠物总数 | 375（含 S2，pet_348~375 跳过 351/352 现已有数据，新增 pet_351/352） |
 | 形态：basic | 373 |
 | 形态：多形态（非 basic/leader） | 57 只精灵有额外形态，共 143 个独立形态收集项 |
 | 首领形态（forms.leader） | 27 只（全部已确认名称） |
@@ -369,6 +446,7 @@ lkwj/
 - [x] 果实数据全量补充：143 只精灵有果实，6 种获取方式分类，互斥组逻辑 — 2026-06-04
 - [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
 - [x] 家具图鉴：已录入 182 件，`collections.furniture_progress` 按 1-116 已收集、117-182 未收集初始化
+- [x] UI 统一：全部收集类 Tab 布局对齐（标题→统计→搜索→筛选→内容），服装重构为精灵卡片模式，2026-07-02
 - [ ] 服装图鉴：已建立套装共享信息 + 单件收集项模型，待继续补充 `data/clothing.json`
 - [ ] 称号数据：已建立主名称 + 获取方式模型，待继续补充 `data/titles.json`
 - [ ] 遗迹副本数据：已建立副本名称/位置/奖励模型，待继续补充 `data/dungeons.json`

@@ -1,12 +1,35 @@
 # AI Bridge
 
-Shared planning context for ChatGPT, other planning models, Codex, OpenCode, Pi, or another local implementation agent.
+本目录仅用于 AI Agent 临时协作。
 
-- current-plan.md: plan produced by ChatGPT or another planning model for the implementation agent.
-- agent-status.md: generic implementation notes, touched files, test results, blockers, and review notes.
-- implementation-diff.patch: final review diff from the implementation agent when practical.
-- codex-status.md: legacy Codex-specific status file, kept for existing workflows.
-- decisions.md: architectural decisions that should remain stable.
-- open-questions.md: unresolved questions.
-- execution-log.jsonl: append-only generic agent handoff and execution events.
-- session-log.jsonl: append-only legacy session events.
+可存放：
+
+- 当前任务计划
+- 当前执行状态
+- 临时日志
+- Agent 之间的交接信息
+
+不可存放：
+
+- 项目规则
+- 架构设计文档
+- 长期业务知识
+- 永久任务记录
+- 历史变更记录
+
+长期信息统一维护于：
+
+- AGENTS.md
+- CLAUDE.md
+- SKILL.md
+- docs/
+- Git 历史记录
+
+工作原则：
+
+1. 默认直接修改代码，而不是创建计划文件。
+2. 仅当明确需要方案设计、计划编写或任务交接时，才创建临时计划文件。
+3. Agent 完成任务后，应删除或覆盖临时计划文件。
+4. 不保留历史 status、patch、execution-log 等冗余记录。
+5. Git 是唯一可信的代码变更历史来源。
+6. 本目录应始终保持轻量、可随时清空。
