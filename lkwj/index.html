@@ -318,7 +318,7 @@ function getCaptureObtainMethods(petKey) {
         const num = specId.replace('pet_', '');
         const c = e.condition || {};
         let condText = '';
-        if (c.type === 'level') condText = c.level + '级进化获得';
+        if (c.type === 'level') condText = c.level + '级' + (c.note ? c.note + '进化获得' : '进化获得');
         else if (c.type === 'item') condText = (c.item || '道具') + '进化获得';
         else if (c.bloodline) condText = c.bloodline + '系血脉进化获得';
         else condText = '进化获得';
@@ -1014,6 +1014,7 @@ function renderSpriteCard(petKey, pet) {
         condText = cond.map(c => c.type === 'level' ? `Lv${c.level}` : c.bloodline ? `${c.bloodline}系血脉` : '').filter(Boolean).join(' + ');
       } else if (cond?.type === 'level') {
         condText = `Lv${cond.level}`;
+        if (cond.note) condText += `, ${cond.note}`;
       }
       card += `<div style="font-size:12px;color:#888;padding:2px 0 2px 16px">→ ${targetPet ? esc(targetPet.name) : ev.toSpeciesId}${condText ? ` (${condText})` : ''}</div>`;
     });
@@ -1052,7 +1053,7 @@ function getTaskObtainMethods(petKey, task) {
       const num = e.toSpeciesId.replace('pet_', '');
       const c = e.condition || {};
       let cond = '';
-      if (c.type === 'level') cond = c.level + '级进化为';
+      if (c.type === 'level') cond = c.level + '级' + (c.note ? c.note + '进化为' : '进化为');
       else if (c.bloodline) cond = c.bloodline + '系血脉进化为';
       else cond = '进化为';
       return cond + 'No.' + num + ' ' + (toPet?.name || e.toSpeciesId);
