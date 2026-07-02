@@ -82,12 +82,24 @@ function enqueue(type, label, params) {
 }
 
 function cancel(id) {
+  // 取消排队中的操作
   const idx = queue.findIndex(op => op.id === id && op.status === 'queued');
-  if (idx === -1) return false;
-  queue.splice(idx, 1);
-  log(`取消 [${id}]`);
-  broadcast();
-  return true;
+  if (idx !== -1) {
+    queue.splice(idx, 1);
+    log(`取消 [${id}]`);
+    broadcast();
+    return true;
+  }
+  // 取消正在运行的操作：abort 当前 controller，让运行中的 executor 在下一个检查点抛出 AbortError
+  if (running && running.id === id) {
+    abortController.abort();
+    abortController = new AbortController();
+    if (activeProc) { try { activeProc.kill('SIGTERM'); } catch(e) {} activeProc = null; }
+    log(`强制停止运行中操作 [${id}]`);
+    broadcast();
+    return true;
+  }
+  return false;
 }
 
 function getState() {
@@ -243,6 +255,7 @@ function spawnAsync(cmd, args, opts) {
 // 配套删除 routes.js POST /accounts/refresh-status 与前端"刷新状态"按钮。
 
 async function execOpenAccount(op) {
+  assertNotAborted(op);
   const { accountNum, accountNote } = op.params;
   // 直接调用 openAccountFlow，与 execExecute/execReprocessOne 共用同一安全链路（2026-07-01 模块化）
   const { openAccountFlow } = require('../jl/open-account-flow');
@@ -294,6 +307,7 @@ async function execA1FixedBatch(op) {
 // ── 巡检收尾 ─────────────────────────────────────────────────────
 
 async function execScanFinalize(op) {
+  assertNotAborted(op);
   const fs = require('fs');
   const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
   try {
@@ -303,6 +317,7 @@ async function execScanFinalize(op) {
   } catch(e) {}
 
   await cleanReturnedIntercepts();
+  assertNotAborted(op);
 
   // pending/collected/simulated：无条件重置为 pending
   const allLive = (db.readQueue().items || []).filter(i =>
@@ -341,6 +356,7 @@ async function execScanFinalize(op) {
   );
   // 按账号排序，同账号工单连续处理，减少注入切换次数
   pending.sort((a, b) => (a.accountNum || 0) - (b.accountNum || 0));
+  assertNotAborted(op);
   for (const item of pending) {
     const label = `${item.accountNote || '账号' + item.accountNum} | ${item.workOrderNum}`;
     enqueue('reprocess-one', label, { queueItemId: item.id });
@@ -483,13 +499,14 @@ async function cleanReturnedIntercepts() {
 }
 
 async function execReinfer(op) {
+  assertNotAborted(op);
   const { simId, hint = '' } = op.params;
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   // 将用户输入的评价指令写入 queue item，同时清除旧 pipeline 残留的自动 hint
   db.updateQueueItem(sim.queueItemId, { hint: hint || null });
   // 复用 execReprocessOne 的完整 A1 安全链路（openAccountFlow → 定位 → 点击 → 采集 → 推理）
-  return execReprocessOne({ params: { queueItemId: sim.queueItemId } });
+  return execReprocessOne({ params: { queueItemId: sim.queueItemId }, _abortSignal: op._abortSignal });
 }
 
 async function execReprocessOne(op) {

@@ -206,6 +206,7 @@ function renderQueuePanel(state) {
         ${progressHtml}
       </div>
       <span class="oq-status">运行中</span>
+      <button class="oq-cancel oq-force-stop" onclick="cancelOp('${running.id}')" title="强制停止">⏹</button>
     </div>`);
   }
   queued.forEach(op => {
