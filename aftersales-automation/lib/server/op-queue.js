@@ -58,8 +58,10 @@ const queue = [];
 let running = null;
 let lastCompleted = null;
 let paused = false;
-let activeProc = null;
+const trackedProcs = new Set();
 let abortController = new AbortController();
+
+const STOP_EVENT_FILE = path.join(BASE, 'data/emergency-stop.json');
 
 function log(msg) { process.stdout.write(`[op-queue] ${msg}\n`); }
 
@@ -90,11 +92,11 @@ function cancel(id) {
     broadcast();
     return true;
   }
-  // 取消正在运行的操作：abort 当前 controller，让运行中的 executor 在下一个检查点抛出 AbortError
+  // 取消正在运行的操作
   if (running && running.id === id) {
     abortController.abort();
     abortController = new AbortController();
-    if (activeProc) { try { activeProc.kill('SIGTERM'); } catch(e) {} activeProc = null; }
+    killAllTrackedProcs();
     log(`强制停止运行中操作 [${id}]`);
     broadcast();
     return true;
@@ -106,20 +108,104 @@ function getState() {
   return { running, queued: queue.filter(op => op.status === 'queued'), lastCompleted, paused };
 }
 
+// ── 子进程跟踪与清理 ──────────────────────────────────────────────
+
+function killAllTrackedProcs() {
+  if (trackedProcs.size === 0) return;
+  const procs = [...trackedProcs];
+  log(`正在终止 ${procs.length} 个子进程...`);
+
+  // 第一轮：SIGTERM
+  for (const proc of procs) {
+    try { proc.kill('SIGTERM'); } catch(e) { /* 已退出 */ }
+  }
+
+  // 等待 2 秒让进程优雅退出
+  const deadline = Date.now() + 2000;
+  while (Date.now() < deadline) {
+    const alive = procs.filter(p => { try { p.kill(0); return true; } catch(e) { return false; } });
+    if (alive.length === 0) { log('所有子进程已退出'); trackedProcs.clear(); return; }
+    // busy-wait 太浪费，用同步 sleep 在 Node 不现实，这里依赖短超时
+    break;
+  }
+
+  // 第二轮到点：SIGKILL 强制
+  let forceKilled = 0;
+  for (const proc of procs) {
+    try { proc.kill('SIGKILL'); forceKilled++; } catch(e) { /* 已退出 */ }
+  }
+  if (forceKilled > 0) log(`强制终止 ${forceKilled} 个未响应子进程`);
+  trackedProcs.clear();
+}
+
 function emergencyStop() {
   paused = true;
+  const interrupted = running ? { id: running.id, type: running.type, label: running.label, startedAt: running.startedAt } : null;
+  const clearedCount = queue.filter(op => op.status === 'queued').length;
+
+  // 清空排队中的操作
   for (let i = queue.length - 1; i >= 0; i--) {
     if (queue[i].status === 'queued') queue.splice(i, 1);
   }
+
   // 中断当前正在运行的异步操作
   abortController.abort();
   abortController = new AbortController();
-  if (activeProc) { try { activeProc.kill('SIGTERM'); } catch(e) {} activeProc = null; }
-  log('紧急停止');
+
+  // 终止所有子进程并验证
+  killAllTrackedProcs();
+
+  // 写 stop 事件到磁盘，供 server 重启时识别
+  writeStopEvent(interrupted, clearedCount);
+
+  log(`紧急停止${interrupted ? '（中断: ' + interrupted.label + '）' : ''}，清除 ${clearedCount} 个排队操作`);
   broadcast();
 }
 
-function resume() { paused = false; abortController = new AbortController(); log('恢复'); broadcast(); processNext(); }
+function resume() {
+  // 清除 stop 事件标记
+  clearStopEvent();
+  paused = false; abortController = new AbortController(); log('恢复'); broadcast(); processNext();
+}
+
+// ── Stop 事件持久化 ──────────────────────────────────────────────
+
+function writeStopEvent(interrupted, clearedCount) {
+  try {
+    fs.writeFileSync(STOP_EVENT_FILE, JSON.stringify({
+      stoppedAt: new Date().toISOString(),
+      interrupted: interrupted || null,
+      clearedCount,
+      queueEmpty: queue.length === 0,
+      runningCleared: running === null || running.status === 'cancelled',
+    }, null, 2));
+  } catch(e) { log(`写入 stop 事件失败: ${e.message}`); }
+}
+
+function clearStopEvent() {
+  try { if (fs.existsSync(STOP_EVENT_FILE)) fs.unlinkSync(STOP_EVENT_FILE); } catch(e) {}
+}
+
+function readStopEvent() {
+  try { return JSON.parse(fs.readFileSync(STOP_EVENT_FILE, 'utf8')); } catch { return null; }
+}
+
+// ── Stop 后验证（供 routes 调用，返回验证结果给前端）──────────────
+
+function verifyStopState() {
+  const aliveProcs = [];
+  // 检查是否有未退出的子进程（通过 pid 检测）
+  for (const proc of trackedProcs) {
+    try { proc.kill(0); aliveProcs.push(proc.pid); } catch(e) { /* 已退出 */ }
+  }
+  return {
+    queueEmpty: queue.length === 0,
+    runningCleared: !running || running.status === 'cancelled',
+    aliveProcs: aliveProcs.length > 0 ? aliveProcs : null,
+    paused,
+    allClean: queue.length === 0 && (!running || running.status === 'cancelled') && aliveProcs.length === 0,
+  };
+}
 function isPaused() { return paused; }
 function isRunning() { return !!running; }
 
@@ -244,10 +330,10 @@ function spawnAsync(cmd, args, opts) {
   return new Promise((resolve, reject) => {
     let stdout = '';
     const proc = spawn(cmd, args, { ...opts, stdio: ['ignore', 'pipe', 'inherit'] });
-    activeProc = proc;
+    trackedProcs.add(proc);
     proc.stdout.on('data', d => { stdout += d; });
-    proc.on('close', code => { if (activeProc === proc) activeProc = null; resolve({ code, stdout }); });
-    proc.on('error', err => { if (activeProc === proc) activeProc = null; reject(err); });
+    proc.on('close', code => { trackedProcs.delete(proc); resolve({ code, stdout }); });
+    proc.on('error', err => { trackedProcs.delete(proc); reject(err); });
   });
 }
 
@@ -946,4 +1032,4 @@ async function execOpenTicket(op) {
   return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
 }
 
-module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, assertNotAborted, updateAccountStatus };
+module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, assertNotAborted, verifyStopState, readStopEvent, updateAccountStatus };

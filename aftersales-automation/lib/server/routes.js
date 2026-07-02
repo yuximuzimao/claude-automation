@@ -55,13 +55,20 @@ const ACCOUNT_STATUS_FILE = path.join(BASE, 'data/account-status.json');
 router.post('/emergency-stop', (req, res) => {
   opQueue.emergencyStop();
   if (req.app.locals.stopScan) req.app.locals.stopScan();
-  res.json({ ok: true, paused: true });
+  // 验证停止结果
+  const verify = opQueue.verifyStopState();
+  res.json({ ok: true, paused: true, verify });
 });
 
 router.post('/resume', (req, res) => {
   opQueue.resume();
   if (req.app.locals.resumeScan) req.app.locals.resumeScan();
   res.json({ ok: true, paused: false });
+});
+
+router.get('/stop-event', (req, res) => {
+  const event = opQueue.readStopEvent();
+  res.json(event || { none: true });
 });
 
 // ── Open Ticket（注入账号 + 打开工单详情）────────────────────────

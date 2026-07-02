@@ -210,6 +210,17 @@ app.listen(PORT, async () => {
     } catch(e) { /* 非致命 */ }
   })();
 
+  // 启动时检查上次是否被紧急停止
+  const opQueue = require('./lib/server/op-queue');
+  const stopEvent = opQueue.readStopEvent();
+  if (stopEvent && stopEvent.stoppedAt) {
+    const stoppedTime = new Date(stopEvent.stoppedAt).toLocaleString('zh-CN');
+    const interrupted = stopEvent.interrupted;
+    console.log(`[startup] ⚠️ 检测到上次紧急停止事件（${stoppedTime}）`);
+    if (interrupted) console.log(`[startup] ⚠️ 被中断的操作: ${interrupted.label} (${interrupted.type})`);
+    console.log(`[startup] ⚠️ 队列已清空 (清除 ${stopEvent.clearedCount || 0} 个排队项)，系统处于暂停状态`);
+  }
+
   // 启动时清理残留状态：collecting/collected/inferring（上次进程崩溃留下的）重置为 pending。
   const db = require('./lib/server/data');
   const stale = (db.readQueue().items || []).filter(i =>

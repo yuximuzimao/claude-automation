@@ -234,8 +234,21 @@ async function cancelOp(id) {
 // ── 紧急停止 / 恢复 ───────────────────────────────────────────────
 async function emergencyStop() {
   try {
-    await fetch('/api/emergency-stop', { method: 'POST' });
-  } catch(e) {}
+    const r = await fetch('/api/emergency-stop', { method: 'POST' });
+    const data = await r.json();
+    if (data.verify) {
+      const v = data.verify;
+      if (v.allClean) {
+        showToast('⏹️ 已停止：队列清空，进程已终止');
+      } else {
+        const issues = [];
+        if (!v.queueEmpty) issues.push('队列未完全清空');
+        if (!v.runningCleared) issues.push('运行中操作未清除');
+        if (v.aliveProcs) issues.push(`${v.aliveProcs.length} 个子进程未退出 (PID: ${v.aliveProcs.join(',')})`);
+        showToast(`⚠️ 停止不完整：${issues.join('；')}`, 'error');
+      }
+    }
+  } catch(e) { showToast('停止请求失败', 'error'); }
 }
 
 async function resumeSystem() {
@@ -1870,6 +1883,14 @@ function fallbackCopy(text, cb) {
 
 // ── 初始化 ────────────────────────────────────────────────────────
 connectSSE();
+// 检查上次是否有紧急停止
+fetch('/api/stop-event').then(r => r.json()).then(ev => {
+  if (ev && ev.stoppedAt) {
+    const t = new Date(ev.stoppedAt).toLocaleString('zh-CN');
+    const interrupted = ev.interrupted ? `（中断: ${ev.interrupted.label}）` : '';
+    showToast(`⚠️ 上次紧急停止于 ${t} ${interrupted}`, 'error');
+  }
+}).catch(() => {});
 loadAllLiveTabs();
 loadActionBadge();
 refreshDeadlineAlert();
