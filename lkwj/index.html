@@ -1436,7 +1436,7 @@ function renderCategoryTab(tab) {
   if (searchTerm.trim()) html += ` · 匹配 <strong>${list.length}</strong>`;
   html += '</div>';
 
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索..." value="${esc(searchTerm)}" oninput="catSearch['${tab}']=this.value;renderCategoryTab('${tab}')"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索..." value="${esc(searchTerm)}" oninput="catSearch['${tab}']=this.value;renderCategoryContent('${tab}')"></div>`;
 
   html += '<div class="chips" style="margin-bottom:8px">';
   STATUS_CHIPS.forEach(s => {
@@ -1444,8 +1444,27 @@ function renderCategoryTab(tab) {
   });
   html += '</div>';
 
-  if (!list.length) { html += '<div class="empty-state">没有匹配的收集项</div>'; el.innerHTML = html; return; }
+  html += `<div id="cat-${tab}-content"></div>`;
+  el.innerHTML = html;
+  renderCategoryContent(tab);
+}
 
+function renderCategoryContent(tab) {
+  const el = document.getElementById('cat-' + tab + '-content');
+  if (!el) return;
+  const searchTerm = catSearchTerm(tab);
+  const st = catStatus(tab);
+  let list = getCatItems(tab);
+  if (searchTerm.trim()) {
+    const q = searchTerm.trim().toLowerCase();
+    list = list.filter(i => (i.name || '').toLowerCase().includes(q) || (i.desc || '').toLowerCase().includes(q));
+  }
+  if (st === 'pending') list = list.filter(i => i.status !== '已完成');
+  else if (st === 'done') list = list.filter(i => i.status === '已完成');
+
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的收集项</div>'; return; }
+
+  let html = '';
   const pending = list.filter(i => i.status !== '已完成');
   const done = list.filter(i => i.status === '已完成');
   if (pending.length) {
@@ -1500,7 +1519,23 @@ function renderFormsTab() {
   const allGroups = getFormsPetGroups();
   const allForms = allGroups.flatMap((group) => group.forms);
   const owned = allForms.filter((entry) => entry.isDone).length;
+  const matched = getFilteredFormGroups();
+  const matchedCount = matched.reduce((sum, group) => sum + group.forms.length, 0);
 
+  let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
+  html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)"></div>`;
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += renderStatusChips(formStatus, 'setFormStatus');
+  html += '</div>';
+
+  html += '<div id="forms-content"></div>';
+  el.innerHTML = html;
+  renderFormsContent();
+}
+
+function getFilteredFormGroups() {
+  const allGroups = getFormsPetGroups();
   let groups = allGroups.map((group) => ({ ...group, forms: [...group.forms] }));
   if (formSearch) {
     const q = formSearch.toLowerCase();
@@ -1515,23 +1550,17 @@ function renderFormsTab() {
   }
   if (formStatus === 'pending') groups = groups.map((group) => ({ ...group, forms: group.forms.filter((entry) => !entry.isDone) }));
   else if (formStatus === 'done') groups = groups.map((group) => ({ ...group, forms: group.forms.filter((entry) => entry.isDone) }));
-  groups = groups.filter((group) => group.forms.length > 0);
-  const matchedCount = groups.reduce((sum, group) => sum + group.forms.length, 0);
+  return groups.filter((group) => group.forms.length > 0);
+}
 
-  let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
-  html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)"></div>`;
-  html += '<div class="chips" style="margin-bottom:8px">';
-  html += renderStatusChips(formStatus, 'setFormStatus');
-  html += '</div>';
+function renderFormsContent() {
+  const el = document.getElementById('forms-content');
+  if (!el) return;
+  const groups = getFilteredFormGroups();
 
-  if (!groups.length) {
-    html += '<div class="empty-state">没有匹配的多形态</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!groups.length) { el.innerHTML = '<div class="empty-state">没有匹配的多形态</div>'; return; }
 
-  html += '<div class="sprite-list">';
+  let html = '<div class="sprite-list">';
   groups.forEach((group) => { html += renderFormPetCard(group); });
   html += '</div>';
   el.innerHTML = html;
@@ -1571,8 +1600,8 @@ function renderFormRow(entry) {
   </div>`;
 }
 
-function toggleFormPet(petKey) { expandedFormPet = expandedFormPet === petKey ? null : petKey; renderFormsTab(); }
-function onFormSearch(val) { formSearch = val; expandedFormPet = null; renderFormsTab(); }
+function toggleFormPet(petKey) { expandedFormPet = expandedFormPet === petKey ? null : petKey; renderFormsContent(); }
+function onFormSearch(val) { formSearch = val; expandedFormPet = null; renderFormsContent(); }
 function setFormStatus(s) { formStatus = s; expandedFormPet = null; renderFormsTab(); }
 
 async function toggleForm(petKey, formKey) {
@@ -1607,7 +1636,7 @@ function renderFruitsTab() {
 
   if (!allFruit.length) { html += '<div class="empty-state">暂无果实数据</div>'; el.innerHTML = html; return; }
 
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索果实名称或获取方式..." value="${esc(fruitSearch)}" oninput="fruitSearch=this.value;renderFruitsTab()"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索果实名称或获取方式..." value="${esc(fruitSearch)}" oninput="fruitSearch=this.value;renderFruitsContent()"></div>`;
 
   // 获取方式筛选芯片
   html += '<div class="chips" style="margin-bottom:8px">';
@@ -1622,7 +1651,17 @@ function renderFruitsTab() {
   html += renderStatusChips(fruitStatus, 'setFruitStatus');
   html += '</div>';
 
-  // 应用筛选
+  html += '<div id="fruits-content"></div>';
+  el.innerHTML = html;
+  renderFruitsContent();
+}
+
+function renderFruitsContent() {
+  const el = document.getElementById('fruits-content');
+  if (!el) return;
+  const pets = gameData?.pets || {};
+  const allFruit = Object.entries(pets).filter(([, pet]) => pet.fruit);
+
   let list = allFruit;
   if (fruitSearch.trim()) {
     const q = fruitSearch.trim().toLowerCase();
@@ -1636,11 +1675,11 @@ function renderFruitsTab() {
   if (fruitStatus === 'pending') list = list.filter(([, pet]) => !pet.fruit?.acquired);
   else if (fruitStatus === 'done') list = list.filter(([, pet]) => pet.fruit?.acquired);
 
-  if (!list.length) { html += '<div class="empty-state">没有匹配的果实</div>'; el.innerHTML = html; return; }
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的果实</div>'; return; }
 
   const pending = list.filter(([, pet]) => !pet.fruit?.acquired);
   const done = list.filter(([, pet]) => pet.fruit?.acquired);
-
+  let html = '';
   if (pending.length) {
     html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(([petKey, pet]) => { html += renderFruitRow(petKey, pet, pets); });
@@ -1722,7 +1761,7 @@ function renderFurnitureTab() {
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🪑 家具</h3>`;
   html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong> · 还差 <strong>${remainingInspiration}</strong> 灵感值</div>`;
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索家具名称..." value="${esc(furnitureSearch)}" oninput="furnitureSearch=this.value;renderFurnitureTab()"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索家具名称..." value="${esc(furnitureSearch)}" oninput="furnitureSearch=this.value;renderFurnitureContent()"></div>`;
   html += '<div class="chips" style="margin-bottom:8px">';
   html += `<span class="chip${furnitureStatusFilter === 'all' ? ' active' : ''}" onclick="setFurnitureStatusFilter('all')">全部</span>`;
   html += `<span class="chip${furnitureStatusFilter === 'pending' ? ' active' : ''}" onclick="setFurnitureStatusFilter('pending')">未收集</span>`;
@@ -1735,6 +1774,18 @@ function renderFurnitureTab() {
     return;
   }
 
+  html += '<div id="furniture-content"></div>';
+  el.innerHTML = html;
+  renderFurnitureContent();
+}
+
+function renderFurnitureContent() {
+  const el = document.getElementById('furniture-content');
+  if (!el) return;
+  const items = getFurnitureList();
+  const owned = items.filter(i => i.acquired);
+  const allPending = items.filter(i => !i.acquired);
+
   let list = items;
   if (furnitureStatusFilter === 'pending') list = allPending;
   else if (furnitureStatusFilter === 'done') list = owned;
@@ -1744,15 +1795,11 @@ function renderFurnitureTab() {
     list = list.filter(i => (i.name || '').toLowerCase().includes(q));
   }
 
-  if (!list.length) {
-    html += '<div class="empty-state">没有匹配的家具</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的家具</div>'; return; }
 
   const pending = list.filter(i => !i.acquired);
   const done = list.filter(i => i.acquired);
-
+  let html = '';
   if (pending.length) {
     html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
     pending.forEach(item => { html += renderFurnitureRow(item); });
@@ -1761,7 +1808,6 @@ function renderFurnitureTab() {
   if (done.length) {
     html += renderCollapsibleDoneSection(done, renderFurnitureRow, done.length);
   }
-
   el.innerHTML = html;
 }
 
@@ -1816,12 +1862,22 @@ function renderTitlesTab() {
     return;
   }
 
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索称号..." value="${esc(titleSearch)}" oninput="titleSearch=this.value;renderTitlesTab()"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索称号..." value="${esc(titleSearch)}" oninput="titleSearch=this.value;renderTitlesContent()"></div>`;
   html += '<div class="chips" style="margin-bottom:8px">';
   html += `<span class="chip${titleStatusFilter === 'all' ? ' active' : ''}" onclick="titleStatusFilter='all';renderTitlesTab()">全部</span>`;
   html += `<span class="chip${titleStatusFilter === 'pending' ? ' active' : ''}" onclick="titleStatusFilter='pending';renderTitlesTab()">${STATUS.PENDING}</span>`;
   html += `<span class="chip${titleStatusFilter === 'done' ? ' active' : ''}" onclick="titleStatusFilter='done';renderTitlesTab()">${STATUS.DONE}</span>`;
   html += '</div>';
+
+  html += '<div id="titles-content"></div>';
+  el.innerHTML = html;
+  renderTitlesContent();
+}
+
+function renderTitlesContent() {
+  const el = document.getElementById('titles-content');
+  if (!el) return;
+  const titles = getTitleList();
 
   let list = titles;
   if (titleSearch.trim()) {
@@ -1835,15 +1891,11 @@ function renderTitlesTab() {
   if (titleStatusFilter === 'pending') list = list.filter(i => !i.acquired);
   else if (titleStatusFilter === 'done') list = list.filter(i => i.acquired);
 
-  if (!list.length) {
-    html += '<div class="empty-state">没有匹配的称号</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的称号</div>'; return; }
 
   const pending = list.filter(i => !i.acquired);
   const done = list.filter(i => i.acquired);
-
+  let html = '';
   if (pending.length) {
     html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(item => { html += renderTitleRow(item); });
@@ -1852,7 +1904,6 @@ function renderTitlesTab() {
   if (done.length) {
     html += renderCollapsibleDoneSection(done, renderTitleRow, done.length);
   }
-
   el.innerHTML = html;
 }
 
@@ -1909,12 +1960,22 @@ function renderDungeonsTab() {
     return;
   }
 
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索副本名称、位置或奖励..." value="${esc(dungeonSearch)}" oninput="dungeonSearch=this.value;renderDungeonsTab()"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索副本名称、位置或奖励..." value="${esc(dungeonSearch)}" oninput="dungeonSearch=this.value;renderDungeonsContent()"></div>`;
   html += '<div class="chips" style="margin-bottom:8px">';
   html += `<span class="chip${dungeonStatusFilter === 'all' ? ' active' : ''}" onclick="dungeonStatusFilter='all';renderDungeonsTab()">全部</span>`;
   html += `<span class="chip${dungeonStatusFilter === 'pending' ? ' active' : ''}" onclick="dungeonStatusFilter='pending';renderDungeonsTab()">${STATUS.PENDING}</span>`;
   html += `<span class="chip${dungeonStatusFilter === 'done' ? ' active' : ''}" onclick="dungeonStatusFilter='done';renderDungeonsTab()">${STATUS.DONE}</span>`;
   html += '</div>';
+
+  html += '<div id="dungeons-content"></div>';
+  el.innerHTML = html;
+  renderDungeonsContent();
+}
+
+function renderDungeonsContent() {
+  const el = document.getElementById('dungeons-content');
+  if (!el) return;
+  const dungeons = getDungeonList();
 
   let list = dungeons;
   if (dungeonSearch.trim()) {
@@ -1929,15 +1990,11 @@ function renderDungeonsTab() {
   if (dungeonStatusFilter === 'pending') list = list.filter(i => !i.completed);
   else if (dungeonStatusFilter === 'done') list = list.filter(i => i.completed);
 
-  if (!list.length) {
-    html += '<div class="empty-state">没有匹配的遗迹副本</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的遗迹副本</div>'; return; }
 
   const pending = list.filter(i => !i.completed);
   const done = list.filter(i => i.completed);
-
+  let html = '';
   if (pending.length) {
     html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
     pending.forEach(item => { html += renderDungeonRow(item); });
@@ -1946,7 +2003,6 @@ function renderDungeonsTab() {
   if (done.length) {
     html += renderCollapsibleDoneSection(done, renderDungeonRow, done.length);
   }
-
   el.innerHTML = html;
 }
 
@@ -2012,7 +2068,7 @@ function renderClothingTab() {
     return;
   }
 
-  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索服装名称、套装或获取方式..." value="${esc(clothingSearch)}" oninput="clothingSearch=this.value;expandedClothingSet=null;renderClothingTab()"></div>`;
+  html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索服装名称、套装或获取方式..." value="${esc(clothingSearch)}" oninput="clothingSearch=this.value;expandedClothingSet=null;renderClothingContent()"></div>`;
 
   // 类型筛选
   html += '<div class="chips" style="margin-bottom:8px">';
@@ -2028,7 +2084,17 @@ function renderClothingTab() {
   html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="clothingStatusFilter='done';expandedClothingSet=null;renderClothingTab()">${STATUS.DONE}</span>`;
   html += '</div>';
 
-  // Apply filters
+  html += '<div id="clothing-content"></div>';
+  el.innerHTML = html;
+  renderClothingContent();
+}
+
+function renderClothingContent() {
+  const el = document.getElementById('clothing-content');
+  if (!el) return;
+  const clothing = getClothingList();
+  const setMap = new Map((gameData?.clothing?.sets || []).map(s => [s.id, s]));
+
   let list = clothing;
   if (clothingSearch.trim()) {
     const q = clothingSearch.trim().toLowerCase();
@@ -2045,13 +2111,9 @@ function renderClothingTab() {
   if (clothingStatusFilter === 'pending') list = list.filter(i => !i.acquired);
   else if (clothingStatusFilter === 'done') list = list.filter(i => i.acquired);
 
-  if (!list.length) {
-    html += '<div class="empty-state">没有匹配的服装</div>';
-    el.innerHTML = html;
-    return;
-  }
+  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的服装</div>'; return; }
 
-  // Render: sets as sprite-cards, singles as flat rows, mixed in one list
+  let html = '';
   const shownSetIds = new Set();
   list.forEach(item => {
     if (item.collectionType === 'set') {
@@ -2066,7 +2128,6 @@ function renderClothingTab() {
       html += renderClothingSingleRow(item);
     }
   });
-
   el.innerHTML = html;
 }
 
@@ -2122,7 +2183,7 @@ function renderClothingSingleRow(item) {
 
 function toggleClothingSetCard(setKey) {
   expandedClothingSet = expandedClothingSet === setKey ? null : setKey;
-  renderClothingTab();
+  renderClothingContent();
 }
 
 async function toggleClothingPiece(id) {
