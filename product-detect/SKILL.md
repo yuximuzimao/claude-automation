@@ -33,7 +33,7 @@
 | 任务 | 入口 |
 |------|------|
 | **标注工具 X-AnyLabeling**（含启动/补丁/流程） | `docs/annotation-tool-xanylabeling.md` |
-| 启动标注 GUI | `conda activate x-anylabeling` 后 `xanylabeling --filename <图> --labels datasets/kgos_real_all/classes.txt` |
+| 启动标注 GUI | 当前批量标注默认传图片目录：`conda activate x-anylabeling` 后 `xanylabeling --filename "$PWD/datasets/kgos_real_all/images" --labels "$PWD/datasets/kgos_real_all/classes.txt"`；单图只用于临时冒烟/查看，文件列表为空，不作为 270 张标注入口 |
 | 标注→YOLO 双数据集转换 | `python scripts/convert_xanylabeling.py --images datasets/kgos_real_all/images --classes datasets/kgos_real_all/classes.txt --out-seg datasets/kgos_seg_pilot --out-det datasets/kgos_detect_pilot` |
 | 新图去重 | `python scripts/dedup_images.py --new <新图> --against datasets/kgos_real_all/images` |
 | Detect-vs-Seg pilot 计划 | `docs/detect-vs-seg-pilot-plan-v2.md` |
@@ -56,12 +56,13 @@ assets/
   kgos/          ← 单品素材图（文件名=ERP产品名，与 features.json key 一致）
   hee/           ← hee 品牌素材图
 datasets/
-  kgos_real_all/         ← 270张真实 SKU 主图 + Label Studio 标注工程
-    images/              ← 270张图（main_001~183, combo_001~074, gift_001~013）
+  kgos_real_all/         ← 270张真实 SKU 主图 + X-AnyLabeling 当前标注工作区
+    images/              ← 270张图（main_001~183, combo_001~074, gift_001~013）+ 同名 .json 标注输出
     labels_pretrain/     ← train7 预标注（conf=0.35, iou=0.45），标注前参考
-    label_studio_config.xml  ← 28类 ERP 标准名 Label Studio 配置
-    label_studio_import.json ← 270个任务导入文件（已导入，无需重复）
-    标注操作指南.md          ← Label Studio 操作步骤与标注规则
+    classes.txt          ← 28类 ERP 标准名，X-AnyLabeling 当前标签来源
+    label_studio_config.xml  ← Label Studio 旧方案遗留配置，仅作历史参考，不作为当前入口
+    label_studio_import.json ← Label Studio 旧方案遗留导入文件，不再重复导入
+    标注操作指南.md          ← Label Studio 旧方案操作说明，当前以 docs/annotation-tool-xanylabeling.md 为准
   kgos_seg_pilot/        ← pilot 分割数据集（计划创建）
   kgos_detect_pilot/     ← pilot 检测数据集（计划创建）
   kgos/          ← generate.py --profile train 合成集（暂缓使用）

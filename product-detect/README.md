@@ -8,30 +8,31 @@
 - 任务台账：`tasks/todo.md`
 - 数据质量和训练门禁：`docs/dataset-quality.md`
 - Detect-vs-Seg pilot：`docs/detect-vs-seg-pilot-plan-v2.md`
-- Label Studio SAM 自动轮廓：`docs/sam-auto-detect-runbook.md`
-- 标注操作指南：`datasets/kgos_real_all/标注操作指南.md`（本地数据目录，被 git ignore）
+- X-AnyLabeling 标注工具：`docs/annotation-tool-xanylabeling.md`
+- 旧 Label Studio 指南：`datasets/kgos_real_all/标注操作指南.md`（历史参考；当前不作为入口）
 
 ## 运行速查
 
 ```bash
 # 回归测试
-python3 -m unittest tests.test_generate tests.test_train tests.test_verify tests.test_nms_sweep tests.test_sam_ml_backend -v
+python3 -m unittest tests.test_generate tests.test_train tests.test_verify tests.test_nms_sweep tests.test_ocr_verify tests.test_text50_eval -v
 
-# Label Studio
-LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true \
-LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/Users/chat/claude/product-detect/datasets \
-label-studio start --port 8080
+# X-AnyLabeling 当前标注入口（批量标注传目录，不传单图）
+conda activate x-anylabeling && xanylabeling \
+  --filename "$PWD/datasets/kgos_real_all/images" \
+  --labels "$PWD/datasets/kgos_real_all/classes.txt"
 
-# SAM ML Backend 健康检查
-curl --noproxy '*' http://localhost:9090/health
-
-# 手动启动 SAM ML Backend（launchd 正常运行时不需要）
-bash start-sam-backend.sh
+# 标注转换：一份多边形同时派生 seg + det
+python scripts/convert_xanylabeling.py \
+  --images datasets/kgos_real_all/images \
+  --classes datasets/kgos_real_all/classes.txt \
+  --out-seg datasets/kgos_seg_pilot \
+  --out-det datasets/kgos_detect_pilot
 ```
 
 ## 关键约束
 
 - 训练和标注标签必须使用 ERP 标准商品名，来源为 `product-mapping/data/products/kgos/features.json` 的 `erpName`。
 - `models/kgos_best.onnx` 只有黄金验证集通过后才能覆盖。
-- 64 张 pilot 未完成前，不要让用户把 270 张全部按旧检测框路线标完。
-- SAM 自动轮廓只生成 `BrushLabels name="mask"` 建议；`RectangleLabels name="bbox"` 仍需独立标注，并且每张图的 mask/bbox 数量和 ERP 聚合数量必须一致。
+- Detect-vs-Seg pilot 未完成前，不要让用户把 270 张全部按旧检测框路线标完。
+- 当前只标 X-AnyLabeling 多边形；检测框由 `scripts/convert_xanylabeling.py` 从多边形外接矩形自动派生，并且每张图派生出的 mask/bbox 数量和 ERP 聚合数量必须一致。

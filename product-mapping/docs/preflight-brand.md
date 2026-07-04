@@ -70,4 +70,4 @@
 
 ## 完整流程入口
 
-详细流程见 `docs/INDEX.md §7 品牌建档 SOP`
+详细流程见 `docs/brand-onboarding.md`；`docs/INDEX.md §7` 只保留入口原则。

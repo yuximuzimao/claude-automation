@@ -76,4 +76,8 @@ def infer_project_from_handle(handle: TextIO, *, max_lines: int = 200) -> str | 
                 votes[name] = votes.get(name, 0) + weight
     if not votes:
         return None
-    return max(votes, key=lambda k: votes[k])
+    top_score = max(votes.values())
+    winners = [name for name, score in votes.items() if score == top_score]
+    if len(winners) != 1:
+        return None
+    return winners[0]

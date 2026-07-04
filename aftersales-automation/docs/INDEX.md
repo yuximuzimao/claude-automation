@@ -65,7 +65,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 ### 1.1 处理原则
 
 - 严格串行：工单按顺序处理，不并行，不跳过
-- 每步验证：操作后必须验证结果，失败则 retry
+- 每步验证：操作后必须验证结果；失败处理按 §0.1 分级，鲸灵行为操作失败即停，只有 ERP 可恢复错误允许 retry
 - 不自行决断：规则未覆盖的情况一律上报人工
 - 证据留痕：每次拒绝退款必须上传物流截图
 
@@ -251,7 +251,7 @@ node cli.js erp-aftersale <快递单号>
 - `[∞]` **#53 决策看安全边际（flow-5.3）**：仅退款已发货流程中，剩余时效 - 下次扫描间隔 > 8h → 等待；≤ 8h → 立即拒绝。`SAFETY_MARGIN_HOURS=8` 在 constants.js。注意：flow-5.1 退货退款使用不同阈值（`REMIND_HOURS=12`），直接比较剩余时效，不计算扫描间隔。
 - `[∞]` **#54 推理文案说人话**：reason 三要素：①根因②无代码变量名③明确建议动作。
 - `[∞]` **#55 queue item 校验账号店铺匹配**：`POST /api/queue` 交叉校验 accountNum 与 accountNote，不一致拒绝。
-- `[已归档]` **#58 collect.js 重试上限 3 次**：collect.js / pipeline 路径已于 2026-07-01 删除，采集所有路径走 execReprocessOne。
+- `[已归档]` **#58 旧 collect.js / pipeline 重试路径**：文件仍保留用于历史能力、schema 和少量工具引用，但不再作为 A1/前端采集入口；当前扫描/重采/执行入口走 op-queue 的 A1 安全链路（execScan → processSingleAccountFixedBatch，execReprocessOne/execExecute），禁止把旧 collect.js / pipeline 原样接回。
 - `[已归档]` **#59 spawn timeout 180s 双路径对齐**：同上，不再有双路径。
 - `[∞]` **#60 querySelector 禁止选隐藏元素**：→ 见全局 CLAUDE.md 浏览器操作约束。
 - `[∞]` **#61 禁止 DOM 移除 Element UI 弹窗**：→ 见全局 CLAUDE.md 浏览器操作约束。

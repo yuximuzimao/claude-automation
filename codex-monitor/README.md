@@ -18,7 +18,7 @@ The app reads local JSONL session logs, keeps token usage split by source and mo
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 -m compileall app tests
+python3 -m compileall app tests main.py
 ```
 
 ## Smoke Checks
@@ -45,10 +45,14 @@ Use `python3.13` for the UI because the current `python3` may not include `_tkin
 ## macOS App
 
 ```bash
-python3.13 main.py --install-app
+python3.13 main.py --install-app --python-executable /Users/chat/miniconda3/bin/python3.13
 ```
 
-This creates `~/Applications/Codex Monitor.app` by default. The bundle is a lightweight wrapper around `python3.13 main.py --ui`.
+This creates `~/Applications/Codex Monitor.app` by default.
+
+The app wrapper launches `main.py --ui --visible-app` with the selected Python executable. When the login LaunchAgent is already running, the wrapper temporarily unloads `com.local.codex-monitor` so the visible app can acquire the single-instance lock. When the visible app exits, the wrapper restores the LaunchAgent only if it was running before the app was opened.
+
+The wrapper also asks macOS to show `Codex Monitor` with `CodexMonitor.icns`, but the UI is still a Python/Tk app. If macOS ignores the runtime identity update, the Dock may still show Python/Python3 instead of the bundle name; a fully native bundled runtime would be required for a hard guarantee.
 
 ## Autostart
 
@@ -66,6 +70,8 @@ Logs go to:
 ~/Library/Logs/Codex Monitor/stdout.log
 ~/Library/Logs/Codex Monitor/stderr.log
 ```
+
+The LaunchAgent uses hidden floating-widget mode. Double-clicking the `.app` switches to visible app mode; closing it returns to hidden autostart mode when autostart was active before launch.
 
 ## Refresh Model
 

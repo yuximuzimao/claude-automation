@@ -201,6 +201,8 @@ await cdp.navigate(targetId, 'https://...');
 
 ## PATHS
 
+> Legacy 注意：`collect.js`、`scan-all.js`、`lib/server/pipeline.js` 文件仍保留，但不再作为 A1/前端采集入口；当前扫描/重采/执行入口走 `lib/server/op-queue.js` 的 A1 安全链路。只有明确修复 legacy 行为或引用历史 schema 时才读这些旧文件。
+
 lib/ai-infer.js
 lib/cdp.js
 lib/constants.js

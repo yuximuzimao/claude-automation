@@ -3,8 +3,11 @@ from __future__ import annotations
 import tempfile
 import threading
 import time
+import sys
+import types
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from app.aggregate import ProjectTotal, TokenTotals, UsageAggregate
 from app.models import CodexQuota, RateLimitWindow
@@ -23,6 +26,7 @@ from app.ui_tk import (
     _capsule_hit_options,
     _clamped_window_position,
     _configure_transparent_chrome,
+    _configure_visible_app_identity,
     _expanded_spacing,
     _expanded_toolbar_symbols,
     _fmt_compact_duration,
@@ -253,6 +257,60 @@ class TkUiTests(unittest.TestCase):
         self.assertEqual(_configure_transparent_chrome(root), BG_WINDOW)
         self.assertEqual(root.configured, [{"bg": BG_WINDOW}])
 
+    def test_visible_app_identity_configures_regular_policy_and_icon(self) -> None:
+        calls: list[str] = []
+
+        class FakeApp:
+            def setActivationPolicy_(self, value: int) -> None:
+                calls.append(f"policy:{value}")
+
+            def activateIgnoringOtherApps_(self, value: bool) -> None:
+                calls.append(f"activate:{value}")
+
+            def setApplicationIconImage_(self, _image: object) -> None:
+                calls.append("icon")
+
+        class FakeNSApplication:
+            @staticmethod
+            def sharedApplication() -> FakeApp:
+                return FakeApp()
+
+        class FakeNSProcessInfo:
+            @staticmethod
+            def processInfo() -> "FakeNSProcessInfo":
+                return FakeNSProcessInfo()
+
+            def setProcessName_(self, name: str) -> None:
+                calls.append(f"name:{name}")
+
+        class FakeNSImage:
+            @classmethod
+            def alloc(cls) -> "FakeNSImage":
+                return cls()
+
+            def initWithContentsOfFile_(self, path: str) -> object:
+                calls.append(f"image:{Path(path).name}")
+                return object()
+
+        fake_appkit = types.SimpleNamespace(
+            NSApplication=FakeNSApplication,
+            NSApplicationActivationPolicyRegular=0,
+            NSImage=FakeNSImage,
+            NSProcessInfo=FakeNSProcessInfo,
+        )
+
+        with (
+            patch.dict(sys.modules, {"AppKit": fake_appkit}),
+            patch("app.ui_tk.Path.exists", return_value=True),
+        ):
+            self.assertTrue(_configure_visible_app_identity())
+
+        self.assertIn("policy:0", calls)
+        self.assertIn("activate:True", calls)
+        self.assertIn("name:Codex Monitor", calls)
+        self.assertIn("image:CodexMonitor.icns", calls)
+        self.assertIn("icon", calls)
+
     def test_clamped_window_position_keeps_expanded_window_visible(self) -> None:
         class FakeRoot:
             def winfo_screenwidth(self) -> int:
@@ -392,6 +450,114 @@ class TkUiTests(unittest.TestCase):
 
         self.assertTrue(window._capsule_pointer_inside)
         self.assertEqual(calls, ["show"])
+
+    def test_collapsed_countdown_is_canvas_text_not_embedded_labels(self) -> None:
+        class FakeCanvas:
+            instances: list["FakeCanvas"] = []
+
+            def __init__(self, *_args: object, **_kwargs: object) -> None:
+                self.text_items: list[dict[str, object]] = []
+                self.window_items: list[dict[str, object]] = []
+                FakeCanvas.instances.append(self)
+
+            def pack(self) -> None:
+                return None
+
+            def bind(self, *_args: object) -> None:
+                return None
+
+            def create_polygon(self, *_args: object, **_kwargs: object) -> int:
+                return 1
+
+            def create_arc(self, *_args: object, **_kwargs: object) -> int:
+                return 2
+
+            def create_oval(self, *_args: object, **_kwargs: object) -> int:
+                return 3
+
+            def create_line(self, *_args: object, **_kwargs: object) -> int:
+                return 4
+
+            def create_text(self, *_args: object, **kwargs: object) -> int:
+                self.text_items.append(kwargs)
+                return 100 + len(self.text_items)
+
+            def create_window(self, *_args: object, **kwargs: object) -> int:
+                self.window_items.append(kwargs)
+                return 200 + len(self.window_items)
+
+        class FakeLabel:
+            instances: list["FakeLabel"] = []
+
+            def __init__(self, *_args: object, **_kwargs: object) -> None:
+                FakeLabel.instances.append(self)
+
+            def bind(self, *_args: object) -> None:
+                return None
+
+        fake_tk = types.SimpleNamespace(Canvas=FakeCanvas, Label=FakeLabel, ARC="arc")
+        window = object.__new__(CodexMonitorWindow)
+        window.root = type("FakeRoot", (), {
+            "resizable": lambda *_args: None,
+            "geometry": lambda *_args: None,
+            "after": lambda *_args: None,
+            "winfo_screenwidth": lambda _self: 2560,
+            "winfo_screenheight": lambda _self: 1440,
+        })()
+        window.container = object()
+        window.state = WindowState()
+        window.state_path = Path("/tmp/nonexistent-codex-monitor-state.json")
+        window.chrome_bg = BG_WINDOW
+        window.fonts = type("Fonts", (), {
+            "num_large": ("Helvetica", 17, "bold"),
+            "caption": ("Helvetica", 11, "normal"),
+        })()
+        window.view_model = {
+            "quota": [
+                {"percent_value": 42.0, "resets_at": None, "window_minutes": 300},
+                {"percent_value": 11.0, "resets_at": None, "window_minutes": 10080},
+            ]
+        }
+        window._bind_capsule_pointer = lambda _widget: None
+
+        with patch.dict(sys.modules, {"tkinter": fake_tk}):
+            window._build_collapsed()
+
+        canvas = FakeCanvas.instances[0]
+        self.assertEqual(FakeLabel.instances, [])
+        self.assertEqual(canvas.window_items, [])
+        self.assertEqual(len(window._cd_text_items), 2)
+        self.assertTrue({"5小时", "7天"}.issubset({item["text"] for item in canvas.text_items}))
+
+    def test_countdown_updates_canvas_text_items(self) -> None:
+        class FakeCanvas:
+            def __init__(self) -> None:
+                self.updates: list[tuple[int, dict[str, str]]] = []
+
+            def itemconfigure(self, item_id: int, **kwargs: str) -> None:
+                self.updates.append((item_id, kwargs))
+
+        canvas = FakeCanvas()
+        window = object.__new__(CodexMonitorWindow)
+        window.root = type("FakeRoot", (), {"after": lambda _self, _ms, _fn: "after-1"})()
+        window.view_model = {
+            "quota": [
+                {"resets_at": None, "window_minutes": 172},
+                {"resets_at": None, "window_minutes": 9600},
+            ]
+        }
+        window._countdown_after_id = None
+        window._cd_text_items = [(canvas, 10), (canvas, 11)]
+
+        window._do_countdown()
+
+        self.assertEqual(
+            canvas.updates,
+            [
+                (10, {"text": "2小时52分"}),
+                (11, {"text": "6天16小时"}),
+            ],
+        )
 
     def test_capsule_leave_cancels_pending_project_popover(self) -> None:
         class FakeRoot:

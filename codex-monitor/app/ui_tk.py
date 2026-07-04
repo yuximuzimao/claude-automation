@@ -244,6 +244,32 @@ def _configure_transparent_chrome(root: Any) -> str:
     return TRANSPARENT_BG
 
 
+def _configure_visible_app_identity() -> bool:
+    try:
+        from AppKit import (
+            NSApplication,
+            NSApplicationActivationPolicyRegular,
+            NSImage,
+            NSProcessInfo,
+        )
+    except Exception:
+        return False
+
+    try:
+        app = NSApplication.sharedApplication()
+        app.setActivationPolicy_(NSApplicationActivationPolicyRegular)
+        NSProcessInfo.processInfo().setProcessName_("Codex Monitor")
+        icon_path = Path(__file__).parent / "resources" / "CodexMonitor.icns"
+        if icon_path.exists():
+            icon = NSImage.alloc().initWithContentsOfFile_(str(icon_path))
+            if icon is not None:
+                app.setApplicationIconImage_(icon)
+        app.activateIgnoringOtherApps_(True)
+        return True
+    except Exception:
+        return False
+
+
 def _install_macos_blur(root: Any, *, radius: int = WINDOW_RADIUS) -> bool:
     try:
         from AppKit import (
@@ -404,6 +430,8 @@ def run_ui(
     aggregate: UsageAggregate,
     refresh_fn: Any | None = None,
     runtime_factory: Any | None = None,
+    *,
+    hide_dock_icon: bool = True,
 ) -> None:
     try:
         import tkinter as tk
@@ -416,25 +444,27 @@ def run_ui(
 
     root = tk.Tk(className="CodexMonitor")
 
-    # macOS: suppress Dock icon and app switcher entry for floating-widget style.
-    # Works both when launched directly and via .app bundle (LSUIElement only
-    # applies when the process is the bundle's main process).
-    try:
-        import ctypes, ctypes.util
-        _appkit = ctypes.cdll.LoadLibrary(ctypes.util.find_library("AppKit"))
-        _objc = ctypes.cdll.LoadLibrary(ctypes.util.find_library("objc"))
-        _objc.objc_getClass.restype = ctypes.c_void_p
-        _objc.sel_registerName.restype = ctypes.c_void_p
-        _objc.objc_msgSend.restype = ctypes.c_void_p
-        _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
-        NSApplication = _objc.objc_getClass(b"NSApplication")
-        sel_shared = _objc.sel_registerName(b"sharedApplication")
-        sel_policy = _objc.sel_registerName(b"setActivationPolicy:")
-        app = _objc.objc_msgSend(NSApplication, sel_shared)
-        _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_long]
-        _objc.objc_msgSend(app, sel_policy, 1)  # NSApplicationActivationPolicyAccessory
-    except Exception:
-        pass
+    if hide_dock_icon:
+        # macOS: suppress Dock icon and app switcher entry for floating-widget style.
+        # Works both when launched directly and via .app bundle.
+        try:
+            import ctypes, ctypes.util
+            _appkit = ctypes.cdll.LoadLibrary(ctypes.util.find_library("AppKit"))
+            _objc = ctypes.cdll.LoadLibrary(ctypes.util.find_library("objc"))
+            _objc.objc_getClass.restype = ctypes.c_void_p
+            _objc.sel_registerName.restype = ctypes.c_void_p
+            _objc.objc_msgSend.restype = ctypes.c_void_p
+            _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+            NSApplication = _objc.objc_getClass(b"NSApplication")
+            sel_shared = _objc.sel_registerName(b"sharedApplication")
+            sel_policy = _objc.sel_registerName(b"setActivationPolicy:")
+            app = _objc.objc_msgSend(NSApplication, sel_shared)
+            _objc.objc_msgSend.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_long]
+            _objc.objc_msgSend(app, sel_policy, 1)  # NSApplicationActivationPolicyAccessory
+        except Exception:
+            pass
+    else:
+        _configure_visible_app_identity()
 
     window = CodexMonitorWindow(
         root,
@@ -585,7 +615,7 @@ class CodexMonitorWindow:
         self._press_root: tuple[int, int] | None = None
         self._capsule_dragging = False
         self._countdown_after_id: str | None = None
-        self._cd_labels: list[Any] = []   # countdown label refs for update
+        self._cd_text_items: list[tuple[Any, int]] = []
         self._popover_after_id: str | None = None
         self._project_popover: Any | None = None
         self._popover_pointer_inside = False
@@ -618,7 +648,7 @@ class CodexMonitorWindow:
     def _build(self) -> None:
         import tkinter as tk
 
-        self._cd_labels = []
+        self._cd_text_items = []
         self.container = tk.Frame(self.root, bg=self._container_bg())
         self.container.pack(fill="both", expand=True)
 
@@ -711,25 +741,23 @@ class CodexMonitorWindow:
         )
 
         cv.create_line(W // 2 - 40, H // 2, W // 2 + 40, H // 2, fill=BORDER)
-        cd0_lbl = tk.Label(
-            self.container,
-            text="--",
-            bg=self._panel_bg(),
-            fg=COLOR_5H,
+        cd0_item = cv.create_text(
+            W // 2,
+            H // 2 - 13,
+            text=_fmt_compact_countdown(quota[0].get("resets_at"), quota[0].get("window_minutes")),
+            fill=COLOR_5H,
             font=(self.fonts.caption[0], 11, "normal"),
+            anchor="center",
         )
-        cd1_lbl = tk.Label(
-            self.container,
-            text="--",
-            bg=self._panel_bg(),
-            fg=COLOR_WEEK,
+        cd1_item = cv.create_text(
+            W // 2,
+            H // 2 + 14,
+            text=_fmt_compact_countdown(quota[1].get("resets_at"), quota[1].get("window_minutes")),
+            fill=COLOR_WEEK,
             font=(self.fonts.caption[0], 11, "normal"),
+            anchor="center",
         )
-        cv.create_window(W // 2, H // 2 - 13, anchor="center", window=cd0_lbl)
-        cv.create_window(W // 2, H // 2 + 14, anchor="center", window=cd1_lbl)
-        for widget in (cd0_lbl, cd1_lbl):
-            self._bind_capsule_pointer(widget)
-        self._cd_labels = [cd0_lbl, cd1_lbl]
+        self._cd_text_items = [(cv, cd0_item), (cv, cd1_item)]
 
     def _build_expanded(self) -> None:
         import tkinter as tk
@@ -952,8 +980,10 @@ class CodexMonitorWindow:
         quota = self.view_model["quota"]
         pairs = [(0, quota[0]), (1, quota[1])]
         for i, q in pairs:
-            if i < len(self._cd_labels) and self._cd_labels[i] is not None:
-                self._cd_labels[i].configure(
+            if i < len(self._cd_text_items):
+                canvas, item_id = self._cd_text_items[i]
+                canvas.itemconfigure(
+                    item_id,
                     text=_fmt_compact_countdown(q.get("resets_at"), q.get("window_minutes"))
                 )
         self._countdown_after_id = self.root.after(60000, self._do_countdown)
@@ -1169,7 +1199,7 @@ class CodexMonitorWindow:
         save_window_state(self.state, self.state_path)
         if self.container is not None:
             self.container.destroy()
-        self._cd_labels = []
+        self._cd_text_items = []
         self.container = None
         self._build()
 
@@ -1229,7 +1259,7 @@ class CodexMonitorWindow:
         self.view_model = build_view_model(aggregate)
         if self.container is not None:
             self.container.destroy()
-        self._cd_labels = []
+        self._cd_text_items = []
         self.container = None
         self._build()
 

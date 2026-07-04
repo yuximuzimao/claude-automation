@@ -13,9 +13,9 @@
 | 后续待办 | `tasks/todo.md` |
 | **人工核对任务/宠物数据** | 浏览器访问 `http://localhost:8899/review.html` |
 | 多形态数据/UI 验证 | `node scripts/validate-multiform-data.js` + `node scripts/validate-multiform-ui.js` |
-| 宠物定义 | `data/pets.json`（373 只，对象 key="pet_N"） |
-| 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent） |
-| 进化链 | `data/evolution-chains.json`（165 链，全覆盖 373 只） |
+| 宠物定义 | `data/pets.json`（对象 key="pet_N"；数量以 `README.md` 当前关键数量和 JSON 实测为准） |
+| 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent；数量以 `README.md`/JSON 实测为准） |
+| 进化链 | `data/evolution-chains.json`（链数量和覆盖率以 `README.md`/JSON 实测为准） |
 | 家具定义 | `data/furniture.json`（数组；名称、舒适度、灵感值） |
 | 服装定义 | `data/clothing.json`（对象；`sets[]` 保存套装共享信息，`pieces[]` 保存单件收集项） |
 | 称号定义 | `data/titles.json`（数组；名称分段、获取方式） |
@@ -51,9 +51,9 @@ lkwj/
 │   └── validate-dungeon-ui.js        # 遗迹副本模型 + UI 验证
 │   └── data-compare-report.html      # Excel vs JSON 数据对比报告（2026-07-02）
 └── data/
-    ├── pets.json              # 宠物定义（373 只）：形态 + 标签 + 元素数组
-    ├── tasks.json             # 任务定义（373 组）：form-independent，desc 不含宠物名
-    ├── evolution-chains.json  # 进化链（165 链）：独立于形态，全覆盖 373 只
+    ├── pets.json              # 宠物定义：形态 + 标签 + 元素数组（数量以 README.md/JSON 实测为准）
+    ├── tasks.json             # 任务定义：form-independent，desc 不含宠物名（数量以 README.md/JSON 实测为准）
+    ├── evolution-chains.json  # 进化链：独立于形态（链数量/覆盖率以 README.md/JSON 实测为准）
     ├── furniture.json         # 家具定义：数组，保存名称/舒适度/灵感值
     ├── clothing.json          # 服装定义：对象，sets[] 保存套装共享信息，pieces[] 保存单件收集项
     ├── titles.json            # 称号定义：数组，保存名称分段/获取方式
@@ -146,7 +146,7 @@ lkwj/
 }
 ```
 
-- 165 条链，全覆盖 373 只精灵，无幽灵节点
+- 链数量、覆盖率和幽灵节点检查以 JSON 实测/README 当前关键数量为准；改 `pets.json` 或 `evolution-chains.json` 后必须同步验证
 - 条件类型：`level`（等级，含可选 `note` 字段描述附加条件如"使用15次流星火雨"）
 - 空 `evolvesTo` = 链终点
 
@@ -397,23 +397,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 
 ## 已知数量
 
-| 层级 | 数量 |
-|------|------|
-| 宠物总数 | 375（含 S2，pet_348~375 跳过 351/352 现已有数据，新增 pet_351/352） |
-| 形态：basic | 373 |
-| 形态：多形态（非 basic/leader） | 57 只精灵有额外形态，共 143 个独立形态收集项 |
-| 首领形态（forms.leader） | 27 只（全部已确认名称） |
-| 异色标签 | 38（S1「暗夜拾光」:17, S2「狂欢怪谈」:16, S1通行证:2, S2通行证:2, 活动限定:1；均为进化最终形态） |
-| 炫彩标签 | 354（所有精灵除迪莫外都有炫彩） |
-| 真实课题任务总数 | 1882（`课题进度` 含 34 条 `异色` 任务） |
-| 进化链 | 165（全覆盖 373 只，无幽灵节点） |
-| 精灵果实课题任务（fruit） | 96 条（任务口径；仅"课题任务"类型的果实有此任务） |
-| 果实图鉴记录 | 143 个家族有果实（7 个无果实：迪莫/传说精灵3只/特殊奇遇2只/学院呱呱）；来源 Excel 果实进度 sheet |
-| 家具 | 182 件（进度：已收集 116，未收集 66，剩余灵感值 1545350） |
-| 服装单件 | 6 件（第一版样例：木之本樱魔法装扮 5 件 + 独立服装样例 1 件） |
-| 称号 | 1 条（第一版样例：百分之零 · 魔法师） |
-| 遗迹副本 | 1 个（第一版样例，待替换为真实副本名） |
-| S2 精灵 | 26 只（pet_348~375，跳过 351/352） |
+数量统计不在 SKILL 内重复维护；以 `README.md` 的「当前关键数量」和 JSON 实测为准。修改数据后先运行 README 的验证命令，再同步 README。
 
 ## API 端点
 
@@ -436,19 +420,4 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 
 ## 待完成
 
-- [x] 4 文档体系重构（pets + tasks + evolution-chains + collections）— 2026-05-21
-- [x] 形态语义化键名 + 标签系统 + 进化链独立
-- [x] UI 适配新数据模型（全部 Tab 通过）
-- [x] 全量数据核对（对照外部表格）— 2026-06-01：精灵 373 只/任务全量/进化链 165 条/首领形态 27 只
-- [x] 任务口径修正：删除 256 条伪 fruit 任务，tasks.json 闭合 1848 条；fruit 课题任务 96 条 — 2026-06-03
-- [x] 异色任务口径更新：Excel `课题进度` 的 34 条 `异色` 行导入为 `capture_shiny`，tasks.json 闭合 1882 条 — 2026-06-08
-- [x] 5 只精灵首领名确认（叶冕魔力猫/烈火战神/圣水守护/神谕鲨/彩虹独角兽） — 2026-06-03
-- [x] 果实数据全量补充：143 只精灵有果实，6 种获取方式分类，互斥组逻辑 — 2026-06-04
-- [ ] Workbuddy 全量数据核对（见 docs/REVIEW_CHECKLIST.md）
-- [x] 家具图鉴：已录入 182 件，`collections.furniture_progress` 按 1-116 已收集、117-182 未收集初始化
-- [x] UI 统一：全部收集类 Tab 布局对齐（标题→统计→搜索→筛选→内容），服装重构为精灵卡片模式，2026-07-02
-- [ ] 服装图鉴：已建立套装共享信息 + 单件收集项模型，待继续补充 `data/clothing.json`
-- [ ] 称号数据：已建立主名称 + 获取方式模型，待继续补充 `data/titles.json`
-- [ ] 遗迹副本数据：已建立副本名称/位置/奖励模型，待继续补充 `data/dungeons.json`
-- [ ] 星星/支线/扭蛋/音乐：待采集
-- [ ] 炫彩（chromatic）数据采集与录入
+待办不在 SKILL 内重复维护；当前未完成项以 `tasks/todo.md` 为准。历史完成记录只在需要追溯时查 git 历史或相关变更文档。

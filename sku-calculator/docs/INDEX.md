@@ -39,12 +39,12 @@
 ## §4 可配置参数
 
 - `--reserve 0.2` — 库存余量比例（默认0.2即20%）
-- `--cold-fixed 5` — 零加购 SKU 保底库存（默认5）
+- `--cold-fixed 5` — 所有非赠品正常 SKU 的保底件数（默认 5）；Phase M 先从全量库存预扣，零加购 SKU 在 Phase C 直接取该预扣值
 - `data/gift-sku-config.json` — 满赠SKU固定分配。支持两种格式：
   - **原始格式**（推荐）：`{"giftSkus": [{"huohao": "...", "fixedAllocation": N}]}`，只需货号，`resolve-components` 自动从对应表展开所有 SKU
   - **完整格式**：`{"giftSkus": [{"huohao": "...", "skuName": "...", "fixedAllocation": N}]}`，`resolve-components` 运行后自动写入
   - `calculate` 自动读取，`cli.js gift-config add/list/clear` 辅助维护
-- `--cold-fixed 5` — 所有正常 SKU 保底件数（默认5），Phase M 从全量库存预扣，优先于赠品
+- `--cold-fixed` 只有这一套语义；不要把它理解成 Phase C 的额外冷门分配参数。Phase C 不再消耗库存，只把零加购 SKU 的最终库存设为 Phase M 已预扣的保底值
 
 ## §5 ERP 接入（run-full 流程）
 

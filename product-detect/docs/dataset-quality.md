@@ -7,13 +7,13 @@
 train7 在密排场景（gift13）的 recall 仅 61.11%，根因是合成训练集分布与真实 SKU 主图差距过大，合成数据继续优化的边际效益已低。  
 **当前行动**：先按 `docs/detect-vs-seg-pilot-plan-v2.md` 标注 64 张真实图，对比 YOLO Detection 与 YOLO Segmentation 在密排 gift/combo 场景的计数效果。pilot 通过后，再把选定路线应用到完整 270 张真实 KGOS SKU 主图。
 
-- Label Studio：localhost:8080，项目 3（KGOS Train8），270 个标注任务已创建
-- 预标注：train7 模型生成（conf=0.35, iou=0.45），存于 `datasets/kgos_real_all/labels_pretrain/`
-- 类别数：28（随机杯子已移除，不做识别）
-- 标注进度（2026-06-11）：用户正在标注中，已完成约 3/270
-- 标注操作指南：`datasets/kgos_real_all/标注操作指南.md`
-- Pilot：新建 `KGOS Detect-vs-Seg Pilot` 项目，64 张图同时标 `BrushLabels mask` 和 `RectangleLabels bbox`；ML Backend 自动轮廓标注只辅助 mask
-- SAM 自动轮廓手册：`docs/sam-auto-detect-runbook.md`；backend 为 `http://localhost:9090`，launchd 服务 `com.chat.product-detect-sam-backend`
+- 标注工具：X-AnyLabeling（conda `x-anylabeling`），当前入口见 `docs/annotation-tool-xanylabeling.md`
+- 标注目录：`datasets/kgos_real_all/images/`，图片同目录保存 `<name>.json`（X-AnyLabeling 多边形格式）
+- 预标注：train7 模型生成（conf=0.35, iou=0.45），存于 `datasets/kgos_real_all/labels_pretrain/`，仅作人工参考
+- 类别数：28（随机杯子已移除，不做识别），当前标签来源为 `datasets/kgos_real_all/classes.txt`
+- 标注进度：以 `datasets/kgos_real_all/images/*.json` 实际数量为准
+- Pilot：一份 X-AnyLabeling 多边形标注通过 `scripts/convert_xanylabeling.py` 同时派生 seg + det 两套数据集，不再手标第二套 bbox
+- 旧 Label Studio + 外挂 SAM backend 方案已废弃；`label_studio_config.xml`、`label_studio_import.json`、`标注操作指南.md` 仅作历史参考
 - Pilot 模型：`yolov8n.pt` vs `yolov8n-seg.pt`；路线选定后完整集再使用 yolov8s / yolov8s-seg
 
 已确认的真实 KGOS SKU 主图语料在：
@@ -46,18 +46,18 @@ train7 在密排场景（gift13）的 recall 仅 61.11%，根因是合成训练�
 
 ## Detect-vs-Seg pilot 门禁
 
-- 用户正式标 64 张前，先用 `gift_001.jpg` 跑通一图端到端冒烟：Label Studio ML Backend 自动轮廓 → 人工 bbox → 原生 JSON 导出 → YOLO-seg / YOLO-detect 转换 → overlay 肉眼确认。2026-06-13 已完成 backend 级 `/setup` + `/predict` smoke，剩余 UI 保存/导出/转换/overlay 仍需执行。
+- 用户正式批量标注前，先用 `gift_001.jpg` 跑通一图端到端冒烟：X-AnyLabeling SAM 出多边形 → 保存同名 `.json` → `scripts/convert_xanylabeling.py` 同时生成 YOLO-seg / YOLO-detect → overlay 肉眼确认。当前 `gift_001` 已完成该链路，后续以同一格式继续累积标注。
 - 每张图必须检查 `mask` 与 `bbox` 的实例数一致，并且按 ERP 标准名聚合后的 `{name: qty}` 一致；不一致的图片不能进入训练或评估。
 - 本 pilot 只验证密排 gift/combo 场景路线选择，不验证 28 类完整覆盖率。
 
 ## 铁律：标注标签必须使用 ERP 标准名
 
-**所有标注工具的标签名（Label Studio、Makesense 等）必须与 `product-mapping/data/products/kgos/features.json` 中的 `erpName` 字段完全一致。**
+**所有标注工具的标签名（当前 X-AnyLabeling，历史 Label Studio/Makesense 等）必须与 `product-mapping/data/products/kgos/features.json` 中的 `erpName` 字段完全一致。**
 
 - 禁止使用内部简称（如"美式咖啡"、"益生菌"、"玉米片-香菜牛肉味"）
 - 理由：标注导出后直接进训练，训练时 class name 与推理输出对齐，推理结果要匹配 `recognition.items[].name`，全链路必须是同一个字符串
 
-当前 28 个 ERP 标准名见 `datasets/kgos_real_all/label_studio_config.xml`（已正确填写，可直接复制使用）。
+当前 28 个 ERP 标准名见 `datasets/kgos_real_all/classes.txt`；`label_studio_config.xml` 仅为旧方案历史参考。
 
 ---
 

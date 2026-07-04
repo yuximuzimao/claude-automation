@@ -15,12 +15,15 @@ Claude Code 已正式放行并已完成：
 - 项目推断误分类已修复（2026-06-04）：`reader_common.infer_project_from_handle()` 按事件类型加权，跳过 Codex 工具调用/输出/token_count 噪声，扫描窗口提高到 200 行；`tests/test_reader_common.py` 已覆盖回归场景。
 - UI 卡顿和高 CPU 已修复（2026-06-06）：watcher/polling 触发的聚合读取移出 tkinter 主线程，刷新中请求合并，自动刷新 60 秒节流；`.app` 进程实测空闲 CPU 0.0-0.2%，RSS 约 185-191MB；`python3 -m unittest discover -s tests -v` 43/43 通过，`python3 -m compileall app tests` 通过。
 - quota 缺失值回退已修复（2026-06-26）：较新的不可显示 `rate_limits` 不再覆盖旧的可显示 quota；折叠态未知值显示 `—`，真实 `0.0` 仍显示 `0%`；`python3 -m unittest discover -s tests -v` 51/51 通过，`python3 -m compileall app tests` 和 `python3 main.py --smoke-aggregate` 通过。
+- 折叠态点击灰框与 App 启动体验已修复（2026-07-03）：倒计时改为 Canvas text；`.app` 可见模式会让位/恢复隐藏 LaunchAgent，并使用单实例锁避免双开；本机 App 已重建到 `/Users/chat/Applications/Codex Monitor.app`。验证：`python3.13 -m unittest discover -s tests -v` 81/81 通过，`python3.13 -m compileall app tests main.py` 通过；LaunchAgent 运行正常，日志仅见 macOS 输入法/键盘布局警告，未见业务错误。
+- 今日项目误归因已修复（2026-07-03）：多项目弱信号打平时不再按插入顺序归因到先出现的项目，改为归入 `其他`；已修复 `product-detect` 今日误显示 2100 万+ Codex token 的问题。验证：`tests/test_reader_common.py` 覆盖打平回归，`python3.13 -m unittest discover -s tests -v` 82/82 通过。
 
 ## 未处理问题
 
 - [ ] **P0：项目流量归因仍需复查（2026-06-04）**
   - 现象：2026-06-04 用户没有用 AI 对鲸灵售后自动化做优化，但流量统计里仍出现售后项目消耗。
   - 已知进展：Claude 已修复过一轮，修复后一开始统计确实有变化。
+  - 2026-07-03 进展：已修复 Codex 多项目弱信号打平时任意选首个项目的问题；`product-detect` 今日误归因已归入 `其他`。
   - 剩余问题：2026-06-04 下班前再次查看，仍有部分统计归因错误。
   - 下次处理方向：继续排查项目推断逻辑，重点验证是否还有工具输出、历史路径、cwd fallback、session 内容路径或中文项目名映射把无关会话误判进 `aftersales-automation`。
 - [ ] **P2：售后自动化当日 token 统计继续观察（2026-06-06）**
@@ -98,3 +101,11 @@ Claude Code 已正式放行并已完成：
 - [x] 新增 `.app` bundle wrapper 生成命令
 - [x] `main.py --ui` 接入 watchdog 可选监听和 5 秒轮询 fallback
 - [x] 更新 README / docs / tasks
+
+## 阶段 7：UI 细节与 App 启动体验
+
+- [x] 折叠态倒计时从嵌入 `tk.Label` 迁移到 Canvas text，避免点击后短暂灰框。
+- [x] `.app` 去掉 `LSUIElement`，可见模式尝试设置 Dock 名称和图标。
+- [x] `.app` launcher 使用绝对 Python 路径，避免 GUI 环境 PATH 找不到 `python3.13`。
+- [x] `.app` 启动时让隐藏 LaunchAgent 让位，退出后按原运行状态恢复后台服务。
+- [x] 新增 `SingleInstance` 锁，避免 LaunchAgent 和 App 双开，并让可见 App 短暂等待旧实例释放锁。

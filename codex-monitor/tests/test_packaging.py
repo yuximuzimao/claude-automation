@@ -5,8 +5,9 @@ import plistlib
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from app.packaging import BUNDLE_IDENTIFIER, build_app_bundle
+from app.packaging import BUNDLE_IDENTIFIER, build_app_bundle, choose_python_executable
 
 
 class PackagingTests(unittest.TestCase):
@@ -31,9 +32,26 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue(os.access(launcher_path, os.X_OK))
             plist = plistlib.loads(info_path.read_bytes())
             self.assertEqual(plist["CFBundleIdentifier"], BUNDLE_IDENTIFIER)
+            self.assertFalse(plist.get("LSUIElement", False))
             launcher = launcher_path.read_text(encoding="utf-8")
             self.assertIn(f"cd {project_dir}", launcher)
-            self.assertIn("exec /usr/local/bin/python3.13 main.py --ui", launcher)
+            self.assertIn("AUTOSTART_WAS_RUNNING=0", launcher)
+            self.assertIn('if launchctl print "gui/$(id -u)/com.local.codex-monitor"', launcher)
+            self.assertIn("AUTOSTART_WAS_RUNNING=1", launcher)
+            self.assertIn("restore_autostart()", launcher)
+            self.assertIn("trap restore_autostart EXIT", launcher)
+            self.assertIn('if [ "$AUTOSTART_WAS_RUNNING" = "1" ]; then', launcher)
+            self.assertIn("launchctl bootstrap \"gui/$(id -u)\"", launcher)
+            self.assertIn("launchctl bootout \"gui/$(id -u)/com.local.codex-monitor\"", launcher)
+            self.assertIn("/usr/local/bin/python3.13 main.py --ui --visible-app", launcher)
+            self.assertNotIn("exec /usr/local/bin/python3.13", launcher)
+
+    def test_choose_python_executable_prefers_user_miniconda_python(self) -> None:
+        def exists(path: Path) -> bool:
+            return str(path) == "/Users/chat/miniconda3/bin/python3.13"
+
+        with patch("app.packaging.Path.exists", exists):
+            self.assertEqual(choose_python_executable(), "/Users/chat/miniconda3/bin/python3.13")
 
 
 if __name__ == "__main__":

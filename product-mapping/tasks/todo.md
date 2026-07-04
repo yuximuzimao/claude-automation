@@ -2,7 +2,7 @@
 
 ## 待办（下次 session）
 
-- [ ] **HEE 品牌建档修复计划（v2）落地**：计划文件 `~/.claude/plans/linear-percolating-crab.md`，覆盖品牌作用域隔离（data/brands/{brand}/）、副作用拆分（A2 readCorrespondence）、assertPlatformImageColumn 断言、validate-brand-archive.js 验收脚本、preflight-brand.md 完善。当前止血（imgs 清空+recognition 补填）已做，架构重构待推进。
+- [ ] **HEE 品牌建档修复计划（v2）复核**：计划文件 `~/.claude/plans/linear-percolating-crab.md`。当前脚本已通过 one-brand-per-run + `check` 自动清空/全量重写控制运行态污染；`data/brands/{brand}/` 架构重构暂不推进，除非出现并行品牌处理、长期保留运行态或高频切换需求。剩余可复核项：副作用拆分（A2 readCorrespondence）、assertPlatformImageColumn 断言、validate-brand-archive.js 验收脚本、preflight/brand-onboarding 文档。
 
 ---
 

@@ -51,8 +51,8 @@ node cli.js targets                                        # 检查浏览器连�
 | 我需要参考 | 去哪里找 |
 |-----------|---------|
 | ERP 完整登录恢复（session 过期/全退出） | `../aftersales-automation/lib/erp/navigate.js` 的 `recoverLogin()` |
-| ERP 表格读 el-input-number 值 | `../aftersales-automation/tasks/lessons.md §7` |
-| El-Select 下拉必须 cdp.clickAt | `../aftersales-automation/tasks/lessons.md §3` |
-| 批量操作写入路径漏传参 → 静默错误 | `../aftersales-automation/tasks/lessons.md §16` |
+| 浏览器自动化通用红线：querySelector 只选可见元素、禁止 DOM 移除 Element UI 弹窗 | 根目录 `CLAUDE.md` 浏览器操作约束；售后归档见 `../aftersales-automation/docs/INDEX.md #60/#61` |
+| Element UI 多弹窗并存时必须按 title 精确匹配，不能取第一个可见 wrapper | `../aftersales-automation/docs/INDEX.md #70` |
+| 代码生成后必须自读，清除 placeholder/dead code（如 clickAt(null) 草稿残留） | `../aftersales-automation/docs/INDEX.md #69` |
 
 售后项目参考本项目：el-table clearSelection / 多层 dialog 按钮 / 对应表图片懒加载 → `docs/INDEX.md §6`

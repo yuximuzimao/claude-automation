@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import plistlib
+import shlex
 import shutil
 import stat
 from pathlib import Path
@@ -47,7 +48,6 @@ def _write_info_plist(path: Path) -> None:
         "CFBundleShortVersionString": "1.0",
         "CFBundleVersion": "1.0",
         "LSMinimumSystemVersion": "10.15",
-        "LSUIElement": True,            # floating widget — no Dock icon
         "NSHighResolutionCapable": True,  # Retina support
     }
     path.write_bytes(plistlib.dumps(payload, sort_keys=True))
@@ -69,8 +69,19 @@ def _write_launcher(
         [
             "#!/bin/bash",
             "set -euo pipefail",
-            f"cd {project_dir}",
-            f"exec {python_executable} main.py --ui",
+            f"cd {shlex.quote(str(project_dir))}",
+            "AUTOSTART_WAS_RUNNING=0",
+            'if launchctl print "gui/$(id -u)/com.local.codex-monitor" >/dev/null 2>&1; then',
+            "  AUTOSTART_WAS_RUNNING=1",
+            "fi",
+            "restore_autostart() {",
+            '  if [ "$AUTOSTART_WAS_RUNNING" = "1" ]; then',
+            '    launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.local.codex-monitor.plist" 2>/dev/null || true',
+            "  fi",
+            "}",
+            "trap restore_autostart EXIT",
+            'launchctl bootout "gui/$(id -u)/com.local.codex-monitor" 2>/dev/null || true',
+            f"{shlex.quote(python_executable)} main.py --ui --visible-app",
             "",
         ]
     )
@@ -80,6 +91,7 @@ def _write_launcher(
 
 def choose_python_executable() -> str:
     for candidate in (
+        Path.home() / "miniconda3" / "bin" / "python3.13",
         Path("/opt/homebrew/bin/python3.13"),
         Path("/usr/local/bin/python3.13"),
     ):

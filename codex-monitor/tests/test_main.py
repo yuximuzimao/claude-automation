@@ -19,6 +19,9 @@ class MainCliTests(unittest.TestCase):
 
         args = parser.parse_args(["--install-app"])
         self.assertTrue(args.install_app)
+        args = parser.parse_args(["--ui", "--visible-app"])
+        self.assertTrue(args.ui)
+        self.assertTrue(args.visible_app)
         args = parser.parse_args(["--install-autostart"])
         self.assertTrue(args.install_autostart)
         args = parser.parse_args(["--uninstall-autostart"])
@@ -61,6 +64,61 @@ class MainCliTests(unittest.TestCase):
                     self.assertEqual(main.main(), 0)
 
             self.assertTrue((Path(tmpdir) / "Codex Monitor.app").exists())
+
+    def test_run_ui_keeps_launch_agent_hidden_by_default(self) -> None:
+        aggregate = main._demo_aggregate()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            lock_path = Path(tmpdir) / "monitor.lock"
+            with patch("main.run_ui") as run_ui:
+                self.assertEqual(main._run_ui(aggregate, single_instance_path=lock_path), 0)
+
+        run_ui.assert_called_once()
+        self.assertTrue(run_ui.call_args.kwargs["hide_dock_icon"])
+
+    def test_run_ui_can_show_dock_icon_for_app_launches(self) -> None:
+        aggregate = main._demo_aggregate()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            lock_path = Path(tmpdir) / "monitor.lock"
+            instances: list[main.SingleInstance] = []
+
+            class CapturingSingleInstance(main.SingleInstance):
+                def __init__(self, *args: object, **kwargs: object) -> None:
+                    super().__init__(*args, **kwargs)
+                    instances.append(self)
+
+            with (
+                patch("main.run_ui") as run_ui,
+                patch("main.SingleInstance", CapturingSingleInstance),
+            ):
+                self.assertEqual(
+                    main._run_ui(
+                        aggregate,
+                        visible_app=True,
+                        single_instance_path=lock_path,
+                    ),
+                    0,
+                )
+
+        run_ui.assert_called_once()
+        self.assertFalse(run_ui.call_args.kwargs["hide_dock_icon"])
+        self.assertEqual(instances[0].wait_seconds, 5.0)
+
+    def test_ui_uses_single_instance_lock(self) -> None:
+        aggregate = main._demo_aggregate()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            lock_path = Path(tmpdir) / "monitor.lock"
+            with main.SingleInstance(lock_path) as first:
+                self.assertTrue(first.acquired)
+                with patch("main.run_ui") as run_ui:
+                    self.assertEqual(
+                        main._run_ui(
+                            aggregate,
+                            single_instance_path=lock_path,
+                        ),
+                        0,
+                    )
+
+        run_ui.assert_not_called()
 
     def test_load_aggregate_uses_incremental_gate_for_watcher_refresh(self) -> None:
         parser = main.build_parser()

@@ -100,9 +100,9 @@
 **为什么不用脚本**：组合装图片有多商品、部分遮挡、角度差异，脚本无法做到100%准确。
 
 **执行方式**：
-- `check.js` 下载 SKU 图片到 `data/tmp/imgs/` 并保留 imgUrl
-- 我通过 Read 工具加载图片，直接目视识别内容
-- 对照 `data/products/features.json` 的视觉特征描述辅助判断
+- `check.js` 下载 SKU 图片到 `data/imgs/{platformCode}.jpg`，图片路径由 platformCode 推导；报告保留 imgUrl，不再使用 `data/tmp/imgs/`
+- 我通过 Read 工具加载 `data/imgs/` 中的图片，直接目视识别内容
+- 对照 `data/products/{brand}/features.json` 的视觉特征描述辅助判断
 - 输出结论：商品名称 + 数量 + 置信度（高/低/无法判断）
 
 **识图步骤**：
@@ -261,7 +261,7 @@ data/products/
 1. 点击 `span.ui-datalist_cell-filter-icon` → 下拉列表显示
 2. 点击 `div.ui-datalist_filters-list-item`（文字="普通商品"）
 3. 等待 3000ms，数据刷新
-4. 验证：`sv.pageData.total` 应为 174（普通商品总数），`sv.searchData.itemType === 1`
+4. 验证：`sv.searchData.itemType === 1`，且 `sv.pageData.total` 为页面实时返回的普通商品总数（不要硬编码历史数值；历史 KGOS 曾约 174，只能作异常参考）
 
 **禁止**：用 `sv.searchData.itemType = "0"` 直接赋值——无效，真实 type 值是数字 `1`，且不能绕过 UI 筛选
 
@@ -329,82 +329,11 @@ data/products/
 
 ---
 
-## §7 品牌建档 SOP（新品牌上线前必做）
+## §7 品牌建档 SOP
 
-> **入口**：开始前先读 `docs/preflight-brand.md` checklist，确认全部通过再进入下一步
+品牌建档完整流程已拆到 `docs/brand-onboarding.md`；开始前必须先读 `docs/preflight-brand.md` checklist。
 
-### 什么时候需要做品牌建档？
-
-- 首次对一个品牌做视觉核查（如本次 HEE）
-- 品牌添加了新产品（对 features.json 做增量更新）
-- 数据被污染需要重建
-
-### 完整流程（Step 0 → Step 6）
-
-```
-Step 0: 清空旧数据工作区
-  - 无需手动清空：check 命令开始时自动清空 data/imgs/ 和 data/reports/
-  - 无需手动清空：match 命令开始时自动清空 done[] 和 failed[]
-  - 无需手动清空：sku-records.json 由 check 全量重写
-  - （只需确保 ERP 和鲸灵 Tab 正常打开）
-
-Step 1: 获取全量数据
-  - 跑 node cli.js check --shop <店铺>
-  - 产出：data/imgs/（SKU 图片）+ data/reports/check-{shop}-{date}.json
-  - 注意：check 会自动下载图片，这是唯一合法的图片来源
-
-Step 2: 建立 sku-map（货号→platformCode 追踪台账）
-  - 从 check 报告提取所有产品的 {productCode → [{platformCode, skuName, erpCode, erpName}]}
-  - 存入 data/products/{brand}/sku-map.json
-  - 当前手动执行；第三个品牌建档时实现自动化脚本
-
-Step 3: 下载/整理参考图片
-  - 目标：data/products/{brand}/*.jpg（单品标准图，命名=商品中文名）
-  - 来源：从 data/imgs/ 中找对应 platformCode 的图片复制
-    - 查 sku-map：商品中文名 → 货号 → platformCode
-    - cp data/imgs/{platformCode}.jpg data/products/{brand}/{商品名}.jpg
-  - "不在对应表"的产品：需额外获取图片（见下方异常处理）
-
-Step 4: 建立/完善 features.json
-  - 每个 ERP 活跃产品需要一个条目
-  - erpName 必须与 ERP 档案V2 精确一致（可从 check 报告的 archiveTitle 字段获取）
-  - 颜色 + 特征字段描述视觉识别依据
-  - 如有体验装/正装两个版本，分别建条目
-
-Step 5: 交叉验收（Phase Gate — 全部通过才算建档完成）
-
-  自动可验（可写脚本或人工检查）：
-  ✅ #1 sku-map keys 覆盖所有活动产品（无遗漏）
-  ✅ #2 sku-map 中每个 platformCode 在 data/imgs/ 都有对应图片
-  ✅ #4 features.json 产品数 = ERP 档案V2 该品牌活跃产品数
-  ✅ #6 data/imgs/ 中无跨品牌图片（或确认品牌作用域已隔离）
-  ✅ #7 features.json 每个条目都有对应参考图（data/products/{brand}/{name}.jpg）
-
-  必须人工执行：
-  👁 #3 随机抽 5+ 张图片目视 spot-check，确认内容与产品名一致
-  👁 #5 随机抽 5~10 个 SKU 实跑识图，确认 features.json 可正确匹配
-
-Step 6: 记录建档时间戳
-  - 在 data/products/{brand}/features.json 的 _meta.lastUpdated 更新日期
-```
-
-### "不在对应表"产品的图片获取
-
-有些产品活动期间不通过对应表销售（如礼盒整体包装图），需要特殊处理：
-1. 确认该产品是否在鲸灵活动中（check 报告显示"不在对应表"）
-2. 通过 ERP 档案V2 查询该产品的实物图
-3. 或由用户直接提供参考图片
-
-### 长期架构方向（当前为止血补丁）
-
-**当前问题**：所有品牌数据混在 `data/imgs/` 和 `data/sku-records.json`，品牌切换时需手动清空。
-
-**目标架构**（重构 ticket 已建立，触发条件：第二个品牌建档开始前）：
-```
-data/brands/{brand}/
-  imgs/           ← 该品牌 SKU 图片（隔离）
-  sku-records.json
-  sku-map.json
-  check-report.json
-  ref-imgs/       ← 参考图（原 data/products/{brand}/）
-```
+本文件只保留入口原则：
+- 新品牌、品牌新增产品、数据污染重建时，读 `docs/preflight-brand.md` → `docs/brand-onboarding.md`。
+- 当前多品牌已按 `data/products/{brand}/` 隔离参考资料；运行态仍是 `data/imgs/` / `data/sku-records.json` 全局单槽。
+- 未出现并行品牌处理、长期保留运行态或高频切换需求前，不为“已有第二品牌”单独重构 `data/brands/{brand}/`。

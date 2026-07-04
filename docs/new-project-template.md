@@ -4,6 +4,7 @@
 
 ```
 project/
+  SKILL.md            # Agent 导航地图：入口、文件地图、核心约束、PATHS；进入项目第一步读取
   CLAUDE.md           # Session 启动 + 目录说明 + 相关项目引用 + 教训沉淀流程
   cli.js              # 主命令入口
   lib/                # 核心模块（从其他项目移植时，文件头注明来源）
@@ -24,6 +25,26 @@ project/
 - **每次新建文件必问**：30天后还有用吗？没用 → _sandbox 或不落盘
 - **移植代码**：文件头注明来源，如 `// 移植自 aftersales-automation/lib/erp/navigate.js`
 
+## SKILL.md 必要段落
+
+```markdown
+# <项目名> SKILL.md
+
+## DO FIRST
+1. 读 `tasks/todo.md` — 确认当前待办和进度
+2. 读 `docs/INDEX.md` — 操作规则权威入口
+3. 核心入口：`<cli/server/main 文件>`
+
+## ENTRY MAP
+| 文件 | 用途 | 何时读 |
+
+## CORE FLOWS
+
+## FAILURE PATTERNS
+
+## PATHS
+```
+
 ## CLAUDE.md 必要段落
 
 ```markdown
@@ -32,9 +53,10 @@ project/
 项目中文名：<中文名>
 
 ## Session 启动（必做，按顺序）
-1. 读 `tasks/todo.md` — 确认当前待办和进度
-2. <项目特有的启动命令>
-3. 读 `docs/INDEX.md` — 所有操作规则的权威入口
+1. 读 `SKILL.md` — 项目入口、文件地图和操作边界，禁止跳过
+2. 读 `tasks/todo.md` — 确认当前待办和进度
+3. <项目特有的启动命令>
+4. 读 `docs/INDEX.md` — 所有操作规则的权威入口
 
 ## 规则文档（渐进式，按需加载）
 | 文档 | 加载时机 |

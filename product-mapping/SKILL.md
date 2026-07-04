@@ -12,7 +12,7 @@ entry: cli.js
 3. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
 4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
 5. **写操作（新增匹配）必须人工确认后执行**
-6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/INDEX.md §7`（SOP 完整流程）
+6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 
 ## ENTRY MAP
 

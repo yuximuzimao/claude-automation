@@ -104,6 +104,18 @@ class TestInferProjectSignalWeighting(unittest.TestCase):
         result = infer_project_from_handle(handle)
         self.assertEqual(result, "codex-monitor")
 
+    def test_tied_weak_project_signals_return_none(self) -> None:
+        """Tied generic mentions should not arbitrarily pick the first project."""
+        lines = [
+            _codex_line("message", "/Users/me/claude/product-detect/train.py"),
+            _codex_line("message", "/Users/me/claude/codex-monitor/app/ui_tk.py"),
+            _codex_line("agent_message", "/Users/me/claude/product-detect/runs"),
+            _codex_line("agent_message", "/Users/me/claude/codex-monitor/tests"),
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+        result = infer_project_from_handle(handle)
+        self.assertIsNone(result)
+
 
 class TestInferProjectClaudeCodeFormat(unittest.TestCase):
     """Claude Code JSONL (no payload dict) should work correctly."""

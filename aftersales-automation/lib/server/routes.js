@@ -373,7 +373,7 @@ router.get('/stats', (req, res) => {
   res.json(db.computeStats());
 });
 
-// ── Scan（触发 scan-all.js）────────────────────────────────────────
+// ── Scan（op-queue A1 固定清单入口；不走旧 scan-all.js）──────────────
 
 const SCAN_STATUS_FILE = path.join(BASE, 'data/scan-status.json');
 

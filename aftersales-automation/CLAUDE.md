@@ -46,7 +46,7 @@
 ## Git 存档规则
 
 改动验证通过后立即 commit + push，不攒到 session 结束。
-暂存：`git add lib/ cli.js server.js collect.js scan-all.js public/ tasks/ docs/ test/`
+暂存：`git add lib/ cli.js server.js public/ tasks/ docs/ test/`；旧 `collect.js` / `scan-all.js` 只有明确修复 legacy 行为时单独暂存，日常 A1 入口不走它们
 不提交：`data/`、`*.log`、`.server.lock`
 
 ## 代码生效铁律

@@ -25,6 +25,7 @@ from app.packaging import build_app_bundle, choose_python_executable
 from app.reader_claude import read_claude_projects
 from app.reader_codex import read_codex_sessions
 from app.runtime import DebouncedRefresher, PollingWatcher, RefreshRequest, start_watchdog_observer
+from app.single_instance import SingleInstance
 from app.ui_tk import run_ui
 
 
@@ -54,6 +55,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--ui",
         action="store_true",
         help="Open the tkinter UI with local JSONL aggregate data.",
+    )
+    parser.add_argument(
+        "--visible-app",
+        action="store_true",
+        help="Show Dock/App Switcher entry when launched from Codex Monitor.app.",
     )
     parser.add_argument(
         "--install-app",
@@ -139,7 +145,11 @@ def main() -> int:
         return 0
 
     if args.demo:
-        return _run_ui(_demo_aggregate(), refresh_fn=lambda _request: _demo_aggregate())
+        return _run_ui(
+            _demo_aggregate(),
+            refresh_fn=lambda _request: _demo_aggregate(),
+            visible_app=args.visible_app,
+        )
 
     if args.ui:
         codex, claude = _read_local_data(args)
@@ -147,6 +157,7 @@ def main() -> int:
             aggregate_usage(codex, claude),
             refresh_fn=lambda request: _load_aggregate(args, request=request),
             runtime_factory=_build_runtime_factory(args),
+            visible_app=args.visible_app,
         )
 
     if args.install_app:
@@ -338,12 +349,28 @@ def _build_runtime_factory(args: argparse.Namespace):
     return factory
 
 
-def _run_ui(aggregate: UsageAggregate, refresh_fn=None, runtime_factory=None) -> int:
-    try:
-        run_ui(aggregate, refresh_fn=refresh_fn, runtime_factory=runtime_factory)
-    except RuntimeError as exc:
-        print(str(exc))
-        return 1
+def _run_ui(
+    aggregate: UsageAggregate,
+    refresh_fn=None,
+    runtime_factory=None,
+    *,
+    visible_app: bool = False,
+    single_instance_path: Path | None = None,
+) -> int:
+    lock_wait_seconds = 5.0 if visible_app else 0.0
+    with SingleInstance(single_instance_path, wait_seconds=lock_wait_seconds) as instance:
+        if not instance.acquired:
+            return 0
+        try:
+            run_ui(
+                aggregate,
+                refresh_fn=refresh_fn,
+                runtime_factory=runtime_factory,
+                hide_dock_icon=not visible_app,
+            )
+        except RuntimeError as exc:
+            print(str(exc))
+            return 1
     return 0
 
 
