@@ -21,7 +21,7 @@ function waitFor(predicate) {
   });
 }
 
-test('op-queue executes a1-fixed-batch through Step14 with no-auto defaults', async () => {
+test('op-queue executes a1-fixed-batch through Step14 with fixed 48h defaults', async () => {
   const step14Path = path.join(__dirname, '../../scripts/jl-steps/14-process-single-account-fixed-batch.js');
   const resolvedStep14 = require.resolve(step14Path);
   const calls = [];

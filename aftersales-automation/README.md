@@ -45,23 +45,23 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 当前目标链路：
 
 ```text
-安全打开账号 → 固定导航售后列表 → 排序/读取 → 精确打开目标工单
-            → 单工单完整采集验证 → 最小整账号固定清单批次验证
-            → 后端 op-queue/API 入口 + 前端 no-auto 按钮（代码已接入，未重启加载）
-            → live 三标签店铺筛选 + 批量 scope 加固（代码已接入，未重启加载）
-            → auto-execution journal recovery Phase 1 本地状态基础（代码已接入，未开放 CLI/API/UI）
+安全打开账号 → 固定导航售后列表 → 排序/读取 48h 固定清单
+            → 逐单定位工单 → 打开详情 tab → target-aware 采集
+            → inferDecision → shouldAutoExecute + executionJournal 门禁
+            → 命中自动执行范围则 approve/reject，否则写入待确认/等待重查
+            → 写回原 queue/simulation/三标签页 → 关闭详情 tab → 账号收尾
 ```
 
-旧 `scan-all.js → queue → collect → infer → auto-execute` 链路尚未完成安全迁移，不代表当前可用入口。
+legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作为当前 A1/前端采集处理入口；当前扫描、重采、执行、固定清单处理统一走 op-queue 的 A1 安全链路。
 
-- **Pipeline**（`lib/server/pipeline.js`）：保留 collect → infer → execute 能力；旧 scan/auto-execute 入口停用，等待新 A1 接管
+- **Pipeline**（`lib/server/pipeline.js`）：保留 collect → infer → execute 的历史兼容能力；当前生产入口以 op-queue + A1 安全链路为准
 - **Op-queue**（`lib/server/op-queue.js`）：全局操作队列，串行化浏览器操作
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
 - **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
 - **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
 - **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗
-- **A1 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：业务口径已确认；2026-06-26 已验证单工单完整采集、推理和模拟写回；2026-06-26/27 已验证账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次；后端入口 `POST /api/accounts/:num/a1-fixed-batch` 已接入 `op-queue` 且默认关闭自动执行，前端单账号 no-auto 按钮代码已接入但未重启加载，auto-execution journal recovery Phase 1 已具备本地状态机/人工归档服务基础但无 CLI/API/UI，自动执行真实工单仍未交付
-- **自动执行恢复账本**（`lib/server/auto-execution-journal.js`、`lib/server/auto-execution-recovery.js`）：已实现 `auto_executing/auto_executed/failed/manually_resolved`、phase 门禁和本地人工收口服务；`auto_executed` journal 即使 simulation 缺失也阻断重复自动执行。当前只用于本地安全基础，不代表已开放自动 approve/reject、CLI、API 或 UI 恢复入口。
+- **A1/A2 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：当前生产入口为 `POST /api/accounts/:num/a1-fixed-batch` → `op-queue` → `processSingleAccountFixedBatch`。入口固定单账号 + 48h 清单；前端“处理工单”按钮只在账号 session ok 时显示，点击后二次确认。Step14 严格串行逐单处理，写回原 queue/simulation；命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门时会真实 approve/reject，否则进入待确认/等待重查。
+- **自动执行恢复账本**（`lib/server/auto-execution-journal.js`、`lib/server/auto-execution-recovery.js`）：`executionJournal` 已作为自动执行安全门使用，记录 `auto_executing/auto_executed/failed/manually_resolved` 和 phase，防重复执行并 fail-closed。`auto-execution-recovery` 只是本地状态收口能力，尚无外部 CLI/API/UI recovery 入口；当前实际处理中断工单通常走两条路：重新采集推理覆盖旧状态，或用户手动处理后在页面归档。归档只表示系统不再处理该工单，不代表系统知道平台真实执行结果。
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
@@ -77,8 +77,8 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 | [docs/flow-5.4.md](docs/flow-5.4.md) | 换货流程 |
 | [docs/erp-query.md](docs/erp-query.md) | ERP 商品对应表/档案V2 操作规范 |
 | [docs/ops-tech.md](docs/ops-tech.md) | ERP 操作报错/技术排查 |
-| [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 固定清单已确认业务口径、原系统数据流要求和未闭合质量问题 |
-| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 账号14最小整账号批次验证、后端入口状态和仍禁止事项 |
-| [Live 店铺筛选交接](docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md) | 待确认/等待重查店铺筛选、批量 scope 加固和仍禁止事项 |
-| [自动执行 journal recovery 设计](docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md) | 自动执行账本状态机、人工收口规则和 Phase 1 代码边界 |
-| [前端按钮加载/只读冒烟计划](docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md) | A1 no-auto 按钮加载后的只读 smoke 范围和禁止事项 |
+| [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 历史确认计划，仅用于追溯固定清单口径和早期门禁；当前状态以 README/SKILL/tasks/todo 为准 |
+| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 历史 no-auto 验证阶段交接；当前 fixed-batch 生产入口已继续推进并运行 |
+| [Live 店铺筛选交接](docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md) | 待确认/等待重查店铺筛选、批量 scope 加固和仍有效的作用域边界 |
+| [自动执行 journal recovery 设计](docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md) | 自动执行账本状态机、设计期人工收口规则和 recovery 外部入口未开放边界；实际运营以重采覆盖或手动处理后归档为主 |
+| [前端按钮加载/只读冒烟计划](docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md) | 历史按钮加载/只读冒烟计划；当前前端按钮已是正式“处理工单”入口 |

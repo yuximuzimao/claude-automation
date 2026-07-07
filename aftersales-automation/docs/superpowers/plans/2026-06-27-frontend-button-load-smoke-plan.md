@@ -1,5 +1,7 @@
 # Frontend Button Load/Smoke Plan — 2026-06-27
 
+> 2026-07 状态覆盖：本文件是前端按钮加载/只读冒烟阶段的历史计划。当前前端按钮已成为正式“处理工单”入口，点击后二次确认并调用 `POST /api/accounts/:num/a1-fixed-batch`；当前状态请看 README.md / SKILL.md。
+
 > Status: Plan complete. Do not implement a second button. Do not restart server from this plan. Do not click the real button during planning.
 
 ## Scope

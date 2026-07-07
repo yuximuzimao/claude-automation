@@ -1,155 +1,69 @@
-# 待处理优化项
+# 商品匹配当前有效待办
 
-## 待办（下次 session）
+> 2026-07 状态收口：本文件不再作为 2026-04 模块化测试计划台账。历史 L1/L2/P3 测试细节已由代码、测试和 git 历史保留；当前只列仍会影响下一次实战活动的待办。
 
-- [ ] **HEE 品牌建档修复计划（v2）复核**：计划文件 `~/.claude/plans/linear-percolating-crab.md`。当前脚本已通过 one-brand-per-run + `check` 自动清空/全量重写控制运行态污染；`data/brands/{brand}/` 架构重构暂不推进，除非出现并行品牌处理、长期保留运行态或高频切换需求。剩余可复核项：副作用拆分（A2 readCorrespondence）、assertPlatformImageColumn 断言、validate-brand-archive.js 验收脚本、preflight/brand-onboarding 文档。
+## P0：下次实战前必须看
 
----
+- [ ] **确认本轮店铺/品牌作用域**
+  - 开始前读 `docs/preflight-brand.md` 和 `docs/brand-onboarding.md`。
+  - 当前运行态仍是 one-brand-per-run：`check` 会自动清空 `data/imgs/`、`data/reports/` 并全量重写 `data/sku-records.json`。
+  - 不要为了“已有 KGOS/HEE 两个品牌”主动做 `data/brands/{brand}/` 架构重构；只有出现并行品牌处理、长期保留多品牌运行态、或高频切换且不能接受重跑 `check` 时再启动。
 
-## 当前任务：模块化测试（match-one 流水线）
+## P1：HEE v2 复核
 
-> 计划文件：`~/.claude/plans/peppy-dancing-mango.md`
-> 测试店铺：杭州共途（不是澜泽）
-> ERP 标签页锁定：`1F46BAA92728117C35DD6845CB85FB33`
+- [ ] **HEE 品牌建档修复计划（v2）复核**
+  - 历史计划：`~/.claude/plans/linear-percolating-crab.md`。
+  - 当前判断：品牌作用域隔离暂缓，继续使用 one-brand-per-run + `check` 自动清空/全量重写来控制运行态污染。
+  - 复核项只保留真正可能影响下一轮建档质量的内容：
+    - `readCorrespondence` 副作用拆分是否仍需要；
+    - `assertPlatformImageColumn` 断言是否已覆盖当前 ERP 页面；
+    - `validate-brand-archive.js` 验收脚本是否值得保留或补齐；
+    - `docs/preflight-brand.md` / `docs/brand-onboarding.md` 是否覆盖 HEE/KGOS 当前流程。
 
-### Phase 0: 前置条件
-- [x] 0.1 升级 `lib/navigate.js` — session 缓存 + 自动登录恢复 + 页面轮询等待
-- [x] 0.2 CDP 健康检查 + fallback 直连 9222
-- [x] 0.3 结构化日志（navigate.js 已含 VERBOSE 日志）
+## P2：下次实战覆盖项
 
-### Phase 1: 测试基础设施
-- [x] 1.1 `test/helpers/browser.js` — resetErp/resetJl + 连接锁定
-- [x] 1.2 `test/helpers/fixtures.js` — 数据工厂 + 备份恢复 + assertErpState
-- [x] 1.3 `test/helpers/assertions.js` — 文件/数据/日志断言
-- [x] 1.4 `test/helpers/cdp-mock.js` — L1 层 mock
-- [x] 1.5 `test/schemas.js` — 步骤定义
-- [x] 1.6 `test/run.js` — CLI 测试运行器（--fast / step / all）
+- [ ] **L2-remap-single**
+  - 性质：等待下次包含“单品换绑”的真实活动覆盖。
+  - 不单独为了补测试跑破坏性页面操作；在真实 remap 场景中验证 4 类用例即可。
 
-### Phase 2: L1 单元测试（不需要浏览器）
-- [x] L1-safe-write: 4 用例 × 3 次 = 12/12 ✓
-- [x] L1-annotate: 6 用例 × 3 次 = 18/18 ✓
-- [x] L1-match-one-logic: 3 用例 × 3 次 = 9/9 ✓
+- [ ] **L2-verify-archive**
+  - 性质：等待下次需要 `match-one` / 档案 V2 回读验证的真实活动覆盖。
+  - 当前 `auto-match2` 主流程不直接调用 `verify-archive.js`，所以它不是当前开发阻塞项。
 
-### Phase 3: L2 基础设施测试（需要 Chrome）
-- [x] L2-targets: 5/5 ✓（2026-04-30）
-- [x] L2-cdp: 5/5 ✓（2026-04-30）
-- [x] L2-navigate: 4/5 ✓（2026-04-30，1次 flaky）
+- [ ] **L2-match-one**
+  - 性质：等待下次单品活动覆盖 remap 路径。
+  - 已有套件路径在 2026-05-20 共途/KGOS 39 套件实战中覆盖；后续重点看单品 remap 和断点续跑。
 
-### Phase 4: L2 对应表页面操作测试
-- [x] L2-ensure-corr-page: 3/3 ✓（2026-04-30）
-- [x] L2-read-table-rows: 3/3 ✓（2026-04-30）
-- [x] L2-download-products: 1/1 ✓（2026-04-30，破坏性预检）
+## P3：低优先级技术验证
 
-### Phase 5: L2 SKU 读写测试
-- [x] L2-read-skus: 3/3 ✓（2026-04-30，修复搜索输入框选择器后）
-- [x] L2-read-erp-codes: 3/3 ✓（2026-04-30）
+- [ ] **stop-on-error 实战观察**
+  - 已被 `match` 主流程吸收为“任一 SKU 报错立即停止”原则。
+  - 下次真实错误发生时观察：是否停止、是否保留 done/failed 日志、人工处理后是否必须 `check → match`。
 
-### Phase 6: L2 匹配操作测试
-- [ ] L2-remap-single: 4 用例 × 5 次（待验：需一次含单品换绑的实战活动）
-- [x] L2-create-suite: 5 用例 × 5 次（2026-05-20 共途/KGOS 39 套件实战，0 失败，覆盖超额）
-- [ ] L2-verify-archive: 5 用例 × 3 次（待验：verify-archive.js 在当前 auto-match2 流程中未调用）
+- [ ] **el-table clearSelection() 方案按需验证**
+  - 只有再次出现批量勾选残留、Vue 状态和 DOM 状态不一致时再验证。
+  - 验证通过后再决定是否更新 `auto-match2.js` 或写入 `docs/INDEX.md §6`；没有复现信号时不主动投入。
 
-### Phase 7: L2 编排器测试
-- [ ] L2-match-one: 11 用例 × 3 次（待验：套件路径已实战验证，remap 路径待下次单品活动覆盖）
+## 已转历史，不再作为当前开发待办
 
----
+- [x] **T1 ERP「下载平台商品」按钮**：已被 `check` 主流程和 `lib/correspondence.js` / `lib/ops/download-products.js` 吸收；若 ERP 按钮文案变化，按实际报错修。
+- [x] **T2 check.js 报告格式验证**：已被当前 check/compare/report 流程吸收；改报告字段时再单独验证。
+- [x] **T3 match 命令可访问**：已成为常规入口；下次实战前按需做 `--limit 0` 连通性 smoke，不列为开发任务。
+- [x] **2026-04 L1/L2 测试基础设施台账**：测试框架、L1 单测、L2 基础设施和已完成页面操作测试均归档，不再占据当前待办主线。
 
-### 已修复的关键 bug（2026-04-30 session）
-1. **搜索输入框选择器错误**：主页面搜索输入框是 `.el-input-popup-editor input`，不是 `form-item[4]`（那是下拉框）
-2. **`_setMainPageSelect` 索引错误**：精确搜索=index 4，平台商家编码=index 5（不是 2/3）
-3. **`readTableRows` 首行校验时机**：waitFor 只检查 `count > 0`，应等首行编码匹配
-4. **已修复 5 个模块**：read-skus, read-erp-codes, ensure-corr-page, remap-sku, create-suite
+## 长期架构票据
 
-### 知识库清理（2026-04-30 neat-freak）
-- memory/project_km_product_mapping.md — 更新：测试店铺→杭州共途、ERP tab 锁定、Phase 0-5 进度
-- docs/INDEX.md §6 — 新增搜索输入框选择器坑位
-- tasks/lessons.md — 清空过期待办（已全部完成或迁入 todo.md）
-- `_setMainPageSelect` 下拉框选择后未关闭 — 待修复
+- [ ] **品牌作用域隔离重构（暂缓）**
+  - 触发条件：第二个以上品牌需要并行处理、长期保留多品牌运行态，或频繁切换且不能接受重跑 `check`。
+  - 目标架构仍是：
 
-### ERP 页面布局（form-item 索引）
-| idx | 元素 | 说明 |
-|-----|------|------|
-| 2 | `El-select-shop` | 店铺选择器 |
-| 3 | `el-select` | 平台商品 |
-| 4 | `el-select` | **精确搜索** |
-| 5 | `el-select` | **平台商家编码** |
-| 6 | `el-input-popup-editor` | **搜索输入框**（真正的搜索框！） |
-| 7 | `el-select` | 商品状态 |
-| 8 | button | 查询按钮 |
-| 9 | button | 下载平台商品 |
-
----
-
-### 旧任务存档（架构重构，已完成）
-- [x] 1-13. 树状分支架构重构（match-one 7步闭环）全部完成
-
-### 数据契约快查
-
-sku-records.json 格式：纯平铺 `{ [platformCode]: { platformCode, productCode, shopName, skuName, erpCode, erpName, imgUrl, recognition, scope } }`（check 全量重写，不再有 `{stage, skus:{...}}` 包装层）
-
-matchStatus 四态（match-one 流程用）：`unmatched / matched-original / matched-ai / failed-ai`
-
----
-
-## P1 人工操作
-- [x] 0326zp-9 / 0225zp-4 核查完成（2026-04-22）：实际为青柑普洱味，ERP 映射无误，recognition 已修正回普洱味
-- [x] 260422-73 核查完成（2026-04-22）：子品正确（美式×7+生椰×7+礼袋×2），匹配无误
-
-## P2 架构优化
-- [x] check.js 完成后自动更新 sku-records scope 字段（2026-04-22）
-- [x] sku-records.json 已补全 scope 字段：107 active / 39 history（2026-04-22）
-- [x] 完整流程实现（2026-04-23）：5 个变更已代码落地，等待实际测试验证
-
-## P3 技术验证（下次会话逐步测试）
-
-### 须逐步测试，每步单独验证后再继续
-
-- [ ] **T1: ERP「下载平台商品」按钮**
-  - 运行 `node cli.js check --shop <店铺>` 看第一步是否能找到按钮
-  - 若报错"未找到按钮"→ 看错误信息中的可见元素，修改 `correspondence.js` 的 candidates 列表
-  - 若找到但弹窗结构不对 → 调整弹窗选店铺/全量勾选逻辑
-
-- [ ] **T2: check.js 报告格式验证**
-  - 确认报告 JSON 包含 `recognition`、`comparisonResult`、`comparisonDetail` 字段
-  - 确认 summary 包含 `recognitionDone`、`comparisonMatch`、`comparisonMismatch`
-
-- [ ] **T3: match 命令可访问**
-  - `node cli.js match --shop 澜泽 --limit 0`（limit=0 不实际操作）验证命令连通
-
-- [ ] **T4: stop-on-error 行为验证**
-  - 故意制造匹配错误（或观察首次真实错误），确认 match 立即停止而非继续
-
-- [ ] **T5: el-table clearSelection() 方案测试**
-  - 在 _sandbox/ 写独立测试脚本，验证 `el-table.__vue__.clearSelection()` 能否清除 Vue 状态
-  - 通过后更新 auto-match2.js 并记录到 docs/INDEX.md §6
-
-## 架构重构 Ticket
-
-### TICKET: 品牌作用域隔离重构
-
-**触发条件**：第二个品牌（非 kgos、非 hee）建档开始前，必须先完成此重构。
-
-**当前问题**：所有品牌数据混在全局目录（`data/imgs/`、`data/sku-records.json`），品牌切换依赖人工清空。
-
-**目标架构**：
-```
+```text
 data/brands/{brand}/
-  imgs/              ← 该品牌 SKU 图片（隔离）
-  sku-records.json   ← 该品牌 SKU 元数据
-  sku-map.json       ← 货号→platformCode 映射台账
-  check-report.json  ← 最新 check 快照
-  ref-imgs/          ← 参考图（原 data/products/{brand}/）
+  imgs/
+  sku-records.json
+  sku-map.json
+  check-report.json
+  ref-imgs/
 ```
 
-**影响文件**：`lib/visual.js`（imgPath 函数）、`lib/check.js`（SKU_RECORDS_PATH）、`lib/correspondence.js`、所有读写 `data/imgs/` 的模块（6+ 个文件）。
-
-**sku-map 自动生成**（Step 2 自动化）：第三个品牌建档时，同步实现从 check 报告自动生成 sku-map.json 的脚本。
-
----
-
-## 已完成
-- [x] 澜泽活动 107 SKU 全部完成 auto-match2（2026-04-22）
-- [x] ERP 体验装口味错误 15 条套件子品已由人工修正（2026-04-22）
-- [x] 跨项目知识共享机制建立（2026-04-22）
-- [x] aftersales-automation 文档整理 + lessons.md 精简（2026-04-22）
-- [x] 完整流程 5 项代码变更落地（2026-04-23）
+  - 未触发前，不作为当前必须开发项。

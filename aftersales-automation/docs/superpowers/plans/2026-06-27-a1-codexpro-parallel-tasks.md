@@ -1,5 +1,7 @@
 # A1 CodexPro Parallel Tasks Plan
 
+> 2026-07 状态覆盖：本文件是 2026-06-27 并行任务计划，记录当时 no-auto / 未开放阶段。当前 fixed-batch 生产入口和自动执行已继续推进并运行；本文不再作为当前状态源。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use code review / TDD discipline as appropriate. This plan is for Web CodexPro connected to the local repo. Do not run real browser, JL, ERP, approve, reject, scan, collect, or fixed-batch production commands unless the user gives a separate explicit instruction.
 
 **Goal:** Split the post-verification A1 work into safe, parallel CodexPro-sized tasks: review, test coverage, small patches, and docs synchronization.

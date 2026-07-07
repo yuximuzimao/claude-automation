@@ -18,7 +18,7 @@ entry: cli.js
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
 | `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
-| `server.js` | Express 服务（port 3457），队列管理 + Web 面板。**定时扫描/ERP心跳/启动自动入队已停用（2026-06-16 停旧系统）**，待第二三步以新安全注入路径重建 | 改 API/队列/定时任务时 |
+| `server.js` | Express 服务（port 3457），队列管理 + Web 面板 + 定时扫描调度。定时扫描已恢复，走 opQueue scan 新路径并遵守 scanEnabled；legacy scan-all 不作为当前前端/A1处理入口 | 改 API/队列/定时任务时 |
 | `lib/infer.js` | 规则推理引擎（1118行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
@@ -51,11 +51,11 @@ entry: cli.js
 | `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
-| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1 固定清单逐单处理草案**：必须接回原 queue/simulation/三标签页，不得形成独立新系统；2026-06-26 已验证单工单完整采集和模拟写回，2026-06-26/27 已验证账号14最小整账号批次，后端入口和前端 no-auto 按钮代码已接入 | 改 A1 闭环前必读确认计划和 2026-06-27 handoff；禁止自动执行真实工单 |
-| `lib/jl/target-aware-collector.js` | **已过单工单真机验证的适配层**：显式绑定 JL 详情 tab 和 ERP tab 的采集入口；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅；前端按钮代码已接入但未重启加载 |
-| `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：记录 `auto_executing/auto_executed/failed/manually_resolved` 和 phase，防重复执行并 fail-closed；不得作为重试助手 | 审阅自动执行异常、journal gate 或人工恢复时；当前不得启用真实自动执行 |
-| `lib/server/auto-execution-recovery.js` | **人工恢复收口服务**：只修本地状态，要求 journal + queue + simulation/audit 一起关闭，避免 journal-only 归档隐藏危险状态；不碰 JL/ERP 页面 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
-| `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | A1 已确认业务口径、原系统数据流要求、当前质量问题和恢复开发门禁 | 继续 A1 前必读 |
+| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1/A2 固定清单逐单生产编排**：固定 48h 清单，逐单打开详情 tab，target-aware 采集，inferDecision，shouldAutoExecute + executionJournal 安全门，命中后真实 approve/reject，否则写回待确认/等待重查 | 改 fixed-batch 生产链路、自动执行门禁或写回语义时 |
+| `lib/jl/target-aware-collector.js` | **当前 A1/A2 生产采集入口**：显式绑定 JL 详情 tab 和 ERP tab；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅 |
+| `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
+| `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
+| `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | 历史 A1 确认计划：只用于追溯固定清单口径和早期门禁；当前生产状态以本 SKILL、README 和 tasks/todo 最新状态为准 | 追溯历史设计时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
@@ -69,7 +69,7 @@ entry: cli.js
 | `lib/server/routes.js` | Express API 路由（639行，45 路由） | 改 API 端点时 |
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
-| `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，默认 48h + `disableAutoExecute:true` | 改 A1 后端入口或入队参数时 |
+| `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。**紧急停止**：AbortController + 步骤间检查点机制（2026-07-02），前端 🛑 按钮可真正中断运行中操作；详见 `docs/ops-tech.md §8` | 改队列/执行/重新采集/停止逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
@@ -82,12 +82,12 @@ entry: cli.js
 
 ## CORE FLOWS
 
-### 当前 A1 重建流程
+### 当前 A2 安全编排 / A1 固定清单生产流程
 
 1. `openAccountFlow`：tab 数量门 → 实时店铺匹配 → 复用或清理验证后注入。
 2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
-4. 步骤 14 固定清单串联的业务口径已确认：首次 `<=48h` 清单为不可变清单；A1 只改变执行顺序，必须接回原 queue/simulation/三标签页，不能落地 `manual_review` 或独立结果系统。2026-06-26 已用账号 14 茗瑞的单个工单完成采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证。后端 `op-queue/API` 入口已接入并审查加固，前端单账号 no-auto 按钮代码已接入但未重启加载。禁止自动执行真实工单、禁止未经授权重启加载后运行；恢复入口见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` 和 `docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md`。
+4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门时会真实 approve/reject，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
    - `execReinfer` 直接转调 `execReprocessOne`。
@@ -96,8 +96,8 @@ entry: cli.js
 ### 重试与重启
 
 - **鲸灵操作禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
-- **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。旧“下次自动扫描重置”目前不存在；未来只能由新 A1 手动/计划扫描显式重置，禁止假设固定扫描周期。
-- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。**停旧系统后（2026-06-16）启动只重置残留状态为 pending、不再自动入队 reprocess，纯手动模式**——是否处理由用户手动选择。
+- **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。`scan-finalize` 会按 `lastInferAt` / `collectDoneAt` + `RESCAN_INTERVAL_HOURS` 节流重置为 pending，定时扫描已恢复但仍必须走 op-queue A1 安全路径。
+- **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。当前定时扫描已恢复并遵守 `scanEnabled`；真实浏览器操作必须经 op-queue 串行。
 
 ### 工单类型路由（`docs/INDEX.md §2`）
 

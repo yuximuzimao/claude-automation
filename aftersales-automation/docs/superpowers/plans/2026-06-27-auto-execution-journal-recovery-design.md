@@ -1,5 +1,7 @@
 # Auto-Execution Journal Recovery Design — 2026-06-27
 
+> 2026-07 说明：本文件只定义 recovery / journal 设计边界，不代表当前自动执行状态或当前人工操作方式。当前自动执行已由 Step14 + shouldAutoExecute + executionJournal 生产链路启用；recovery 外部 CLI/API/UI 入口仍未开放。实际处理中断工单通常不是通过本地 recovery 服务确认平台状态，而是重新采集推理覆盖旧状态，或由用户手动处理后归档；归档只表示系统不再处理该工单，不代表系统知道平台真实执行结果。
+
 > Status: Design complete; Phase 1 code foundation completed on 2026-06-27. `lib/server/auto-execution-journal.js` now has state/phase/manual-resolution helpers, `lib/server/auto-execution-recovery.js` provides local-only recovery state repair, Codex review follow-up risks were patched, and `npm test` passes 242/242. Do not enable true automatic approve/reject from this document.
 
 ## Scope

@@ -505,7 +505,7 @@ emergencyStop()
 
 1. server 启动时调用 `readStopEvent()` → 发现文件 → `console.log` 警告（含被中断的操作和清除的排队数）
 2. 启动残留状态清理：`collecting/collected/inferring` → `pending`（与 stop 无关，是崩溃恢复通用逻辑）
-3. **不会自动重新入队**：纯手动模式，用户自行决定是否重新处理
+3. **紧急停止后不会自动恢复被中断任务**：用户自行决定是否重新处理；这不影响 server 的定时扫描调度
 
 ### 8.6 验证停止结果
 

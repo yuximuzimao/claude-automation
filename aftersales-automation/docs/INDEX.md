@@ -55,7 +55,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 - **API**：`POST /api/emergency-stop` — 返回 `verify.allClean` 确认停止完整性
 - **验证**：`GET /api/stop-event` — 查询上次停止事件
 - **恢复**：`POST /api/resume` — 清除 stop 标记，恢复队列调度
-- **重启感知**：server 启动时自动检测上次 stop 事件并输出警告，但不会自动重新入队（纯手动模式）
+- **重启感知**：server 启动时自动检测上次 stop 事件并输出警告；紧急停止后不会自动恢复被中断任务，需用户手动决定是否重新处理
 - 详见 `docs/ops-tech.md §8`
 
 ---

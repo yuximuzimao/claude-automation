@@ -1,5 +1,7 @@
 # A1 固定清单逐单处理：用户确认计划
 
+> 2026-07 状态覆盖：本文件是历史确认计划。其“未重启加载 / 未交付 / 禁止真实 approve/reject”状态已过期。当前生产状态以 README.md、SKILL.md、tasks/todo.md 和代码入口为准：前端“处理工单”按钮已接入正式 fixed-batch 入口，命中 shouldAutoExecute 且通过 executionJournal 门禁时会真实 approve/reject。
+
 > 状态：**业务口径已于 2026-06-22 用户确认；2026-06-26 已完成账号 14 茗瑞单工单真实页面采集、推理和模拟写回验证；2026-06-26/27 已完成账号 14 茗瑞-KGOS 关闭自动执行的最小整账号固定清单批次验证；2026-06-27 后端 op-queue/API 入口已接入并经审查加固，前端单账号 no-auto 入队按钮代码已接入并通过测试；auto-execution journal recovery 已完成设计和 Phase 1 本地状态基础，但未实现 CLI/API/UI 恢复入口。自动执行真实工单仍未交付。禁止重启加载、禁止真实 approve/reject，直到用户再次授权。**
 
 ## 本轮目的

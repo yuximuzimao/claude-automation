@@ -17,7 +17,7 @@ test('parseAccountNum accepts positive numeric account ids only', () => {
   assert.throws(() => parseAccountNum('0'), /invalid accountNum/);
 });
 
-test('buildA1FixedBatchOp always defaults to no-auto fixed 48h live batch', () => {
+test('buildA1FixedBatchOp always builds single-account fixed 48h live batch', () => {
   const op = buildA1FixedBatchOp({
     accountNum: '14',
     accountNote: '茗瑞-KGOS',
