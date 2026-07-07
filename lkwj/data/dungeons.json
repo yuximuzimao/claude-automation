@@ -1,15 +1,464 @@
 [
   {
     "id": "dungeon_1",
-    "name": "遗迹副本样例",
-    "location": "待补充",
-    "rewards": [
-      "精灵蛋",
-      "宝箱",
-      "分光水晶",
-      "损坏的国王球",
-      "独角银币",
-      "各系血脉秘药"
+    "name": "法瑞莎莎的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 9,
+      "spiritEggs": 0,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 3,
+      "searchPoints": 5,
+      "prismaticCrystals": 20,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 200 }
+    }
+  },
+  {
+    "id": "dungeon_2",
+    "name": "麦克达克的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 6,
+      "spiritEggs": 0,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 0,
+      "prismaticCrystals": 5,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 50 }
+    }
+  },
+  {
+    "id": "dungeon_3",
+    "name": "九幽菇的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 35,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 2,
+      "prismaticCrystals": 125,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 200 }
+    },
+    "eggHatches": [
+      { "petName": "菇菇丁", "nature": "平和", "natureEffect": "+生命-魔攻", "growths": ["生命", "物防", "魔防"] }
     ]
+  },
+  {
+    "id": "dungeon_4",
+    "name": "迷迷箱怪的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 25,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 10,
+      "searchPoints": 2,
+      "prismaticCrystals": 200,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 1350 }
+    },
+    "eggHatches": [
+      { "petName": "小箱怪", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["攻击", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_5",
+    "name": "幻影屋",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 3,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 4,
+      "prismaticCrystals": 110,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 450 }
+    },
+    "eggHatches": [
+      { "petName": "小夜", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_6",
+    "name": "尖嘴狐仙的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 12,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 4,
+      "prismaticCrystals": 95,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 300 }
+    },
+    "eggHatches": [
+      { "petName": "灵狐", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_7",
+    "name": "鳗尾兽的守护地",
+    "location": "风眠省",
+    "rewards": ["地之钥"],
+    "resources": {
+      "gameCoins": 22,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 1,
+      "prismaticCrystals": 120,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 150 }
+    },
+    "eggHatches": [
+      { "petName": "花怨鳗", "nature": "沉默", "natureEffect": "+生命-攻击", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_8",
+    "name": "石冠王蜥的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 24,
+      "spiritEggs": 2,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 0,
+      "prismaticCrystals": 135,
+      "regionalCurrency": { "name": "王国徽记", "amount": 300 }
+    },
+    "eggHatches": [
+      { "petName": "石肤蜥", "bloodline": "地", "nature": "平和", "natureEffect": "+生命-魔攻", "growths": ["生命", "物防", "魔防"] },
+      { "petName": "石肤蜥", "bloodline": "火", "nature": "沉默", "natureEffect": "+生命-攻击", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_9",
+    "name": "琉璃水母的守护地",
+    "location": "洛克里安",
+    "rewards": ["水之钥"],
+    "resources": {
+      "gameCoins": 33,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 2,
+      "prismaticCrystals": 125,
+      "regionalCurrency": { "name": "王国徽记", "amount": 200 }
+    },
+    "eggHatches": [
+      { "petName": "翡翠水母", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["魔攻", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_10",
+    "name": "海枝枝的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 30,
+      "spiritEggs": 2,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 2,
+      "prismaticCrystals": 125,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 200 }
+    },
+    "eggHatches": [
+      { "petName": "海枝枝", "bloodline": "幽", "appearance": "碧蓝珊瑚", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["生命", "魔攻", "速度"] },
+      { "petName": "海枝枝", "bloodline": "水", "appearance": "杏黄百合", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["生命", "魔攻", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_11",
+    "name": "镜中世界",
+    "location": "洛克里安",
+    "rewards": ["冰之钥"],
+    "resources": {
+      "gameCoins": 16,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 0,
+      "prismaticCrystals": 125,
+      "regionalCurrency": { "name": "王国徽记", "amount": 200 }
+    },
+    "eggHatches": [
+      { "petName": "呼呼猪", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "物防"] }
+    ]
+  },
+  {
+    "id": "dungeon_12",
+    "name": "雪灵的守护地",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 20,
+      "spiritEggs": 2,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 3,
+      "prismaticCrystals": 130,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "雪娃娃", "bloodline": "冰", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] },
+      { "petName": "雪娃娃", "bloodline": "幽", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_13",
+    "name": "古啦多的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 3,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 0,
+      "prismaticCrystals": 95,
+      "regionalCurrency": { "name": "王国徽记", "amount": 300 }
+    },
+    "eggHatches": [
+      { "petName": "多多", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_14",
+    "name": "怖哭菇的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 25,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 2,
+      "prismaticCrystals": 130,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "哭哭菇", "nature": "沉默", "natureEffect": "+生命-攻击", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_15",
+    "name": "皇家狮鹫的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 20,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 0,
+      "prismaticCrystals": 125,
+      "regionalCurrency": { "name": "王国徽记", "amount": 150 }
+    },
+    "eggHatches": [
+      { "petName": "小狮鹫", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_16",
+    "name": "叮叮恶魔的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 8,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 1,
+      "prismaticCrystals": 130,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "恶魔叮", "nature": "平和", "natureEffect": "+生命-魔攻", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_17",
+    "name": "晶石蜗的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 21,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 2,
+      "searchPoints": 0,
+      "prismaticCrystals": 95,
+      "regionalCurrency": { "name": "王国徽记", "amount": 300 }
+    },
+    "eggHatches": [
+      { "petName": "矿晶虫", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_18",
+    "name": "彼得大道广场下水道",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 19,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 2,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "果冻", "bloodline": "冰", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["生命", "魔攻", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_19",
+    "name": "地下管道",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 3,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 0,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "果冻", "bloodline": "火", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_20",
+    "name": "彼得大道码头下水道",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 12,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 2,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "果冻", "bloodline": "草", "nature": "聪明", "natureEffect": "+魔攻-攻击", "growths": ["生命", "魔攻", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_21",
+    "name": "水晶屋",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 3,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 0,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "记忆石", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_22",
+    "name": "圆号鱼的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 20,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 1,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "号儿鱼", "nature": "沉默", "natureEffect": "+生命-攻击", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_23",
+    "name": "上升管道",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 32,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 0,
+      "prismaticCrystals": 85,
+      "regionalCurrency": { "name": "王国徽记", "amount": 200 }
+    },
+    "eggHatches": [
+      { "petName": "螺旋帕帕", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "速度"] }
+    ]
+  },
+  {
+    "id": "dungeon_24",
+    "name": "斑枭的守护地",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 12,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 0,
+      "searchPoints": 0,
+      "prismaticCrystals": 80,
+      "regionalCurrency": { "name": "王国徽记", "amount": 150 }
+    },
+    "eggHatches": [
+      { "petName": "斑斑", "nature": "固执", "natureEffect": "+攻击-魔攻", "growths": ["生命", "攻击", "物防"] }
+    ]
+  },
+  {
+    "id": "dungeon_25",
+    "name": "大隐于市",
+    "location": "洛克里安",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 3,
+      "spiritEggs": 1,
+      "owlStars": { "color": "yellow", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 1,
+      "prismaticCrystals": 90,
+      "regionalCurrency": { "name": "王国徽记", "amount": 250 }
+    },
+    "eggHatches": [
+      { "petName": "绿草精灵", "nature": "沉默", "natureEffect": "+生命-攻击", "growths": ["生命", "物防", "魔防"] }
+    ]
+  },
+  {
+    "id": "dungeon_26",
+    "name": "风眠圣所",
+    "location": "风眠省",
+    "rewards": [],
+    "resources": {
+      "gameCoins": 8,
+      "spiritEggs": 0,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 3,
+      "searchPoints": 2,
+      "prismaticCrystals": 5,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 50 }
+    }
   }
 ]

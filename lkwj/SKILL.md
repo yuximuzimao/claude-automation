@@ -19,11 +19,11 @@
 | 家具定义 | `data/furniture.json`（数组；名称、舒适度、灵感值） |
 | 服装定义 | `data/clothing.json`（对象；`sets[]` 保存套装共享信息，`pieces[]` 保存单件收集项） |
 | 称号定义 | `data/titles.json`（数组；名称分段、获取方式） |
-| 遗迹副本定义 | `data/dungeons.json`（数组；副本名称、位置、奖励） |
+| 遗迹副本定义 | `data/dungeons.json`（数组；副本名称、位置、资源数量、特殊掉落、精灵蛋孵化属性） |
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
 | 标注数据 | `data/annotations.json`（append-only ops 日志，Claude 批量处理用） |
-| 数据采集需求 | `data/_待采集/README.md` |
+| 数据采集需求 | `data/_待采集/README.md`（只保留仍需补齐的服装、称号、商店商品、地区形态名称、通用品类） |
 | 数据修正 | `scripts/fix-shiny-and-chains.js`（异色/炫彩标签修正、进化链传播） |
 
 ## DO FIRST
@@ -31,7 +31,7 @@
 进入本项目时：
 1. 确认 server 是否已运行：`lsof -ti :8899`（有输出=已运行）
 2. 若未运行：`node server.js &`
-3. 核心数据文件：`data/pets.json` + `data/tasks.json` + `data/evolution-chains.json` + `data/furniture.json` + `data/clothing.json` + `data/titles.json` + `data/dungeons.json` + `data/collections.json`
+3. 核心数据文件：`data/pets.json` + `data/tasks.json` + `data/evolution-chains.json` + `data/furniture.json` + `data/clothing.json` + `data/titles.json` + `data/dungeons.json` + `data/shops.json` + `data/collections.json`
 
 ## PATHS
 
@@ -57,12 +57,12 @@ lkwj/
     ├── furniture.json         # 家具定义：数组，保存名称/舒适度/灵感值
     ├── clothing.json          # 服装定义：对象，sets[] 保存套装共享信息，pieces[] 保存单件收集项
     ├── titles.json            # 称号定义：数组，保存名称分段/获取方式
-    ├── dungeons.json          # 遗迹副本定义：数组，保存名称/位置/奖励
+    ├── dungeons.json          # 遗迹副本定义：数组，保存名称/位置/资源数量/特殊掉落/精灵蛋孵化属性
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
     ├── annotations.json       # 标注日志（append-only ops，不提交 git）
-    └── _待采集/               # 数据采集模板
+    └── _待采集/               # 仍需人工补齐的数据模板；已导入 JSON 的旧模板不保留
 ```
 
 ## 数据模型
@@ -251,7 +251,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - `clothing_progress` — 按 clothing ID 索引的单件服装收集状态（boolean）
 - `title_progress` — 按 title ID 索引的称号收集状态（boolean）
 - `dungeon_progress` — 按 dungeon ID 索引的遗迹副本完成状态（boolean）
-- `items[]` — 旧通用品类收集项，家具不再走此字段
+- `items[]` — 星星、支线任务、扭蛋机、音乐的通用品类收集项，家具/服装/称号/遗迹不走此字段
 
 ### furniture.json — 家具定义（静态）
 
@@ -332,16 +332,49 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
   {
     "id": "dungeon_1",
     "name": "遗迹副本样例",
-    "location": "待补充",
-    "rewards": ["精灵蛋", "宝箱", "分光水晶", "损坏的国王球", "独角银币", "各系血脉秘药"]
+    "location": "风眠省",
+    "rewards": ["地之钥"],
+    "resources": {
+      "gameCoins": 22,
+      "spiritEggs": 1,
+      "owlStars": { "color": "blue", "amount": 1 },
+      "chests": 1,
+      "searchPoints": 1,
+      "prismaticCrystals": 120,
+      "regionalCurrency": { "name": "独角兽银币", "amount": 150 }
+    },
+    "eggHatches": [
+      {
+        "petName": "精灵名",
+        "bloodline": "冰",
+        "appearance": "外观名",
+        "nature": "固执",
+        "natureEffect": "+攻击-魔攻",
+        "growths": ["生命", "攻击", "速度"]
+      }
+    ]
   }
 ]
 ```
 
 - `id` — 稳定主键，格式 `dungeon_N`，新增副本只追加不复用 ID
 - `name` — 副本名称
-- `location` — 副本所在位置，未知时填 `待补充`
-- `rewards` — 副本奖励数组，可包含精灵蛋、宝箱、分光水晶、损坏的国王球、独角银币、各系血脉秘药等
+- `location` — 副本所在位置；只有地区、没有具体坐标时先填地区名，如 `风眠省`
+- `rewards` — 特殊掉落文本数组，只放钥匙等不适合做数值汇总的非精灵蛋项目；精灵蛋数量写入 `resources.spiritEggs`，孵化信息写入 `eggHatches`
+- `resources.gameCoins` — 游戏币数量
+- `resources.spiritEggs` — 精灵蛋数量
+- `resources.owlStars` — 眠枭之星数量与颜色，`color` 为 `blue` 或 `yellow`
+- `resources.chests` — 宝箱数量
+- `resources.searchPoints` — 翻找点数量
+- `resources.prismaticCrystals` — 分光水晶数量，包含宝箱来源
+- `resources.regionalCurrency` — 地区货币；风眠省为 `独角兽银币`，洛克里安为 `王国徽记`
+- `eggHatches` — 精灵蛋孵化属性数组；一个副本/精灵蛋有多种血脉、外观或成长组合时写多条
+- `eggHatches[].petName` — 孵化精灵名
+- `eggHatches[].bloodline` — 血脉获取标注，可选；不是物种形态
+- `eggHatches[].appearance` — 外观形态/颜色补充，可选
+- `eggHatches[].nature` — 性格名称
+- `eggHatches[].natureEffect` — 性格数值倾向，如 `+攻击-魔攻`
+- `eggHatches[].growths` — 成长项数组；`双防` 拆为 `物防`、`魔防`
 - 第一版不拆奖励完成状态；前端按副本整体勾选
 
 ## 核心设计原则
@@ -370,6 +403,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - `clothing.json` = 服装定义（静态数据）
 - `titles.json` = 称号定义（静态数据）
 - `dungeons.json` = 遗迹副本定义（静态数据）
+- `shops.json` = 商店入口和货币定义（静态数据，商品明细待补）
 - **禁止从 collection 反向生成定义数据**
 
 ### 获取方式
@@ -393,7 +427,18 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - **家具收集边界**：`furniture.json` 保存名称/舒适度/灵感值；`collections.furniture_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，顶部显示总件数、已收集件数和未收集家具剩余灵感值；第一版不建来源、分类、尺寸字段。
 - **服装收集边界**：`clothing.json` 的 `sets[]` 保存套装共享信息（获取方式、特效、配对精灵），`pieces[]` 保存最小收集单位。`collections.clothing_progress` 只保存单件是否已收集。Tab 采用精灵卡片模式：套装=可展开卡片（显示部件进度 N/M），单品=简单行；套件和单品混合展示，支持关键词搜索 + 套装/单件类型筛选 + 进度筛选。
 - **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，页面显示 `上段 · 下段` 格式主称号。
-- **遗迹副本边界**：`dungeons.json` 保存副本名称、位置和奖励数组；`collections.dungeon_progress` 只保存副本是否完成。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，第一版不拆奖励单项收集。
+- **遗迹副本边界**：`dungeons.json` 保存副本名称、位置、资源数量、特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存副本是否完成。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，第一版不拆奖励单项收集。
+- **通用品类边界**：星星、支线任务、扭蛋机、音乐复用 `collections.items[]`；当前只有 Tab 结构，真实条目从 `data/_待采集/通用品类收集项.csv` 导入。通用外观、玩具尚未建立独立数据模型。
+
+## 当前数据状态
+
+| 状态 | 数据 |
+|------|------|
+| 已整理可用 | 精灵、课题任务、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 |
+| 结构可用但明细待补 | 商店/货币（36 商店 + 6 货币，商品明细缺失） |
+| 只有示例/占位 | 服装、称号 |
+| 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 |
+| 未建独立结构 | 通用外观、玩具 |
 
 ## 已知数量
 

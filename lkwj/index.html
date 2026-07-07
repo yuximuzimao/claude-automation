@@ -121,6 +121,40 @@
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
     .item-category-tag { font-size: 12px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
 
+    .dungeon-card { background: #fff; border-radius: 8px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
+    .dungeon-card:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .dungeon-card.done { opacity: 0.4; }
+    .dungeon-summary { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 13px 16px; cursor: pointer; }
+    .dungeon-summary .check-btn { margin-top: 0; }
+    .dungeon-title { min-width: 0; }
+    .dungeon-title-main { font-size: 16px; font-weight: 600; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dungeon-title-sub { font-size: 12px; color: #888; margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .dungeon-title-sub span { min-width: 0; overflow-wrap: anywhere; }
+    .dungeon-summary-meta { display: flex; align-items: center; gap: 6px; color: #888; font-size: 12px; white-space: nowrap; }
+    .dungeon-arrow { font-size: 10px; color: #aaa; transition: transform 0.15s; }
+    .dungeon-card.expanded .dungeon-arrow { transform: rotate(90deg); }
+    .dungeon-detail { display: none; border-top: 1px solid #f0f0f5; padding: 12px 16px 14px 52px; background: #fcfcff; }
+    .dungeon-card.expanded .dungeon-detail { display: block; }
+    .dungeon-detail-section + .dungeon-detail-section { margin-top: 12px; }
+    .dungeon-detail-title { font-size: 12px; color: #888; font-weight: 700; margin-bottom: 6px; }
+    .dungeon-resource-grid { display: grid; grid-template-columns: repeat(7, minmax(112px, 128px)); gap: 6px; justify-content: start; overflow-x: auto; padding-bottom: 2px; }
+    .dungeon-resource-cell { min-height: 42px; border: 1px solid #e8eaf0; border-radius: 7px; background: #fff; padding: 7px 9px; }
+    .dungeon-resource-label { font-size: 11px; color: #999; line-height: 1.2; }
+    .dungeon-resource-value { font-size: 15px; color: #1a1a2e; font-weight: 650; line-height: 1.35; margin-top: 2px; }
+    .dungeon-special-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .dungeon-egg-item + .dungeon-egg-item { margin-top: 8px; }
+    .dungeon-egg-name { font-size: 14px; font-weight: 650; color: #1a1a2e; margin-bottom: 5px; }
+    .dungeon-egg-row { display: grid; grid-template-columns: minmax(150px, 170px) minmax(180px, 220px); gap: 6px; align-items: stretch; font-size: 13px; color: #555; margin-bottom: 6px; overflow-x: auto; padding-bottom: 2px; }
+    .dungeon-egg-row.has-form { grid-template-columns: minmax(150px, 170px) minmax(150px, 170px) minmax(180px, 220px); }
+    .dungeon-egg-cell { border: 1px solid #e8eaf0; border-radius: 7px; background: #fff; padding: 7px 9px; min-height: 42px; }
+    .dungeon-egg-label { color: #999; font-size: 11px; display: block; margin-bottom: 1px; }
+    .dungeon-egg-value { color: #555; line-height: 1.35; }
+    @media (max-width: 720px) {
+      .dungeon-summary { grid-template-columns: 24px minmax(0, 1fr); }
+      .dungeon-summary-meta { grid-column: 2; justify-content: flex-start; }
+      .dungeon-detail { padding-left: 16px; }
+    }
+
     .section-header { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; padding: 6px 0; }
     .section-header .arrow { font-size: 10px; transition: transform 0.2s; color: #aaa; }
     .section-header.collapsed .arrow { transform: rotate(-90deg); }
@@ -246,14 +280,14 @@ const ALL_TABS = ['dashboard','sprite','shiny','forms','fruits','furniture','clo
 
 const CATEGORY_META = {
   fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集', csv: '精灵果实图鉴.csv' },
-  furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）', csv: '家具图鉴.csv' },
+  furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）', csv: '' },
   clothing:  { name: '服装', icon: '👗', desc: '服装图鉴（单件/套装/特效配对精灵）', csv: '服装图鉴.csv' },
-  titles:    { name: '称号', icon: '🏷️', desc: '称号收集', csv: '其他类别统计.csv' },
-  stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集', csv: '其他类别统计.csv' },
+  titles:    { name: '称号', icon: '🏷️', desc: '称号收集', csv: '称号图鉴.csv' },
+  stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集', csv: '通用品类收集项.csv' },
   dungeons:  { name: '遗迹（副本）', icon: '🏛️', desc: '遗迹/副本通关与奖励收集', csv: '' },
-  sidequests:{ name: '支线任务', icon: '📋', desc: '支线任务清单', csv: '' },
-  gacha:     { name: '扭蛋机', icon: '🎰', desc: '扭蛋机收集品', csv: '' },
-  music:     { name: '音乐', icon: '🎵', desc: '音乐/乐谱收集', csv: '' },
+  sidequests:{ name: '支线任务', icon: '📋', desc: '支线任务清单', csv: '通用品类收集项.csv' },
+  gacha:     { name: '扭蛋机', icon: '🎰', desc: '扭蛋机收集品', csv: '通用品类收集项.csv' },
+  music:     { name: '音乐', icon: '🎵', desc: '音乐/乐谱收集', csv: '通用品类收集项.csv' },
 };
 
 // 精灵图鉴状态
@@ -272,7 +306,7 @@ const SHINY_PAGE = 40;
 // 家具状态
 let furnitureSearch = '', furnitureStatusFilter = 'all';
 let titleSearch = '', titleStatusFilter = 'all';
-let dungeonSearch = '', dungeonStatusFilter = 'all';
+let dungeonSearch = '', dungeonStatusFilter = 'all', expandedDungeon = null;
 let clothingSearch = '', clothingStatusFilter = 'all', clothingTypeFilter = 'all', expandedClothingSet = null;
 
 // 品类 Tab 状态（item-based 品类共用）
@@ -1985,7 +2019,24 @@ function renderDungeonsContent() {
       const name = (i.name || '').toLowerCase();
       const location = (i.location || '').toLowerCase();
       const rewards = (Array.isArray(i.rewards) ? i.rewards.join(' ') : '').toLowerCase();
-      return name.includes(q) || location.includes(q) || rewards.includes(q);
+      const resources = i.resources ? [
+        i.resources.gameCoins ? `游戏币${i.resources.gameCoins}` : '',
+        i.resources.spiritEggs ? `精灵蛋${i.resources.spiritEggs}` : '',
+        i.resources.owlStars?.amount ? `${i.resources.owlStars.color === 'blue' ? '蓝色' : '黄色'}眠枭之星${i.resources.owlStars.amount}` : '',
+        i.resources.chests ? `宝箱${i.resources.chests}` : '',
+        i.resources.searchPoints ? `翻找点${i.resources.searchPoints}` : '',
+        i.resources.prismaticCrystals ? `分光水晶${i.resources.prismaticCrystals}` : '',
+        i.resources.regionalCurrency?.amount ? `${i.resources.regionalCurrency.name}${i.resources.regionalCurrency.amount}` : '',
+      ].filter(Boolean).join(' ').toLowerCase() : '';
+      const eggHatches = (Array.isArray(i.eggHatches) ? i.eggHatches : []).map(egg => [
+        egg.petName,
+        egg.bloodline,
+        egg.appearance,
+        egg.nature,
+        egg.natureEffect,
+        Array.isArray(egg.growths) ? egg.growths.join(' ') : '',
+      ].filter(Boolean).join(' ')).join(' ').toLowerCase();
+      return name.includes(q) || location.includes(q) || rewards.includes(q) || resources.includes(q) || eggHatches.includes(q);
     });
   }
   if (dungeonStatusFilter === 'pending') list = list.filter(i => !i.completed);
@@ -2009,17 +2060,100 @@ function renderDungeonsContent() {
 
 function renderDungeonRow(item) {
   const rewards = Array.isArray(item.rewards) ? item.rewards : [];
+  const resourceCells = getDungeonResourceCells(item);
+  const resourceHtml = resourceCells.length
+    ? `<div class="dungeon-detail-section">
+        <div class="dungeon-detail-title">副本资源</div>
+        <div class="dungeon-resource-grid">
+          ${resourceCells.map(cell => `<div class="dungeon-resource-cell"><div class="dungeon-resource-label">${esc(cell.label)}</div><div class="dungeon-resource-value">${esc(cell.value)}</div></div>`).join('')}
+        </div>
+      </div>`
+    : '';
   const rewardHtml = rewards.length
-    ? rewards.map(reward => `<span class="item-category-tag">${esc(reward)}</span>`).join(' ')
-    : '<span class="item-category-tag">奖励待补充</span>';
-  return `<div class="item-row${item.completed ? ' done' : ''}">
-    <button class="check-btn${item.completed ? ' checked' : ''}" onclick="toggleDungeon('${item.id}')"></button>
-    <div class="item-info">
-      <div class="item-name">${esc(item.name)}</div>
-      <div class="task-methods">位置：${esc(item.location || '待补充')}</div>
-      <div class="task-methods">副本奖励：${rewardHtml}</div>
+    ? `<div class="dungeon-detail-section"><div class="dungeon-detail-title">特殊掉落</div><div class="dungeon-special-list">${rewards.map(reward => `<span class="item-category-tag">${esc(reward)}</span>`).join(' ')}</div></div>`
+    : '';
+  const eggHatches = Array.isArray(item.eggHatches) ? item.eggHatches : [];
+  const eggHtml = eggHatches.length
+    ? `<div class="dungeon-detail-section">
+        <div class="dungeon-detail-title">精灵蛋属性</div>
+        ${groupEggHatchesByPet(eggHatches).map(group => `<div class="dungeon-egg-item">
+          <div class="dungeon-egg-name">${esc(group.petName)}${group.items.length > 1 ? ` ×${group.items.length}` : ''}</div>
+          ${group.items.map(egg => `<div class="dungeon-egg-row${getDungeonEggFormLabel(egg) ? ' has-form' : ''}">
+            ${getDungeonEggFormLabel(egg) ? `<div class="dungeon-egg-cell"><span class="dungeon-egg-label">血脉 / 形态</span><div class="dungeon-egg-value">${esc(getDungeonEggFormLabel(egg))}</div></div>` : ''}
+            <div class="dungeon-egg-cell"><span class="dungeon-egg-label">性格</span><div class="dungeon-egg-value">${esc(egg.natureEffect ? `${egg.nature}（${egg.natureEffect}）` : egg.nature)}</div></div>
+            <div class="dungeon-egg-cell"><span class="dungeon-egg-label">成长</span><div class="dungeon-egg-value">${esc(Array.isArray(egg.growths) ? egg.growths.join(' / ') : '')}</div></div>
+          </div>`).join('')}
+        </div>`).join('')}
+      </div>`
+    : '';
+  const summary = getDungeonSummary(item);
+  const isExpanded = expandedDungeon === item.id;
+  return `<div class="dungeon-card${item.completed ? ' done' : ''}${isExpanded ? ' expanded' : ''}">
+    <div class="dungeon-summary" onclick="toggleDungeonExpand('${item.id}')">
+      <button class="check-btn${item.completed ? ' checked' : ''}" onclick="event.stopPropagation();toggleDungeon('${item.id}')"></button>
+      <div class="dungeon-title">
+        <div class="dungeon-title-main">${esc(item.name)}</div>
+        <div class="dungeon-title-sub"><span>位置：${esc(item.location || '待补充')}</span>${summary ? `<span>${esc(summary)}</span>` : ''}</div>
+      </div>
+      <div class="dungeon-summary-meta"><span>明细</span><span class="dungeon-arrow">▶</span></div>
+    </div>
+    <div class="dungeon-detail">
+      ${resourceHtml}
+      ${rewardHtml}
+      ${eggHtml}
     </div>
   </div>`;
+}
+
+function toggleDungeonExpand(id) {
+  expandedDungeon = expandedDungeon === id ? null : id;
+  renderDungeonsContent();
+}
+
+function getDungeonResourceCells(item) {
+  const r = item.resources || {};
+  const owlName = r.owlStars?.color === 'blue' ? '蓝色眠枭之星' : '黄色眠枭之星';
+  return [
+    ['游戏币', r.gameCoins],
+    ['精灵蛋', r.spiritEggs],
+    [owlName, r.owlStars?.amount],
+    ['宝箱', r.chests],
+    ['翻找点', r.searchPoints],
+    ['分光水晶', r.prismaticCrystals],
+    [r.regionalCurrency?.name || '地区货币', r.regionalCurrency?.amount],
+  ]
+    .filter(([, value]) => typeof value === 'number' && value > 0)
+    .map(([label, value]) => ({ label, value: String(value) }));
+}
+
+function getDungeonSummary(item) {
+  const resourceSummary = getDungeonResourceCells(item).map(cell => `${cell.label} ${cell.value}`).join(' · ');
+  const rewards = Array.isArray(item.rewards) ? item.rewards : [];
+  const rewardSummary = rewards.map(reward => String(reward)).filter(Boolean).join(' · ');
+  return [
+    resourceSummary ? `资源：${resourceSummary}` : '',
+    rewardSummary ? `收获：${rewardSummary}` : '',
+  ].filter(Boolean).join('；');
+}
+
+function groupEggHatchesByPet(eggHatches) {
+  const groups = [];
+  eggHatches.forEach(egg => {
+    let group = groups.find(item => item.petName === egg.petName);
+    if (!group) {
+      group = { petName: egg.petName, items: [] };
+      groups.push(group);
+    }
+    group.items.push(egg);
+  });
+  return groups;
+}
+
+function getDungeonEggFormLabel(egg) {
+  const parts = [];
+  if (egg.bloodline) parts.push(`${egg.bloodline}血脉`);
+  if (egg.appearance) parts.push(egg.appearance);
+  return parts.join(' / ');
 }
 
 async function toggleDungeon(id) {
