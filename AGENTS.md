@@ -7,9 +7,10 @@
 进入 `/Users/chat/claude` 或任一子项目时：
 
 1. 先读当前目录的 `CLAUDE.md`。
-2. 如果进入子项目，先读该子项目的 `SKILL.md`，再读该子项目的 `CLAUDE.md`。
-3. 再读该子项目的 `tasks/todo.md` 和 `docs/INDEX.md`，按 `SKILL.md` 的 DO FIRST 决定是否继续加载其他文档。
-4. 禁止在读 `SKILL.md` 前先用大范围 grep/glob 搜索业务逻辑。`SKILL.md` 是导航地图，先看地图再走路。
+2. 用户用中文项目名、简称或业务词描述任务时，先查 `docs/project-aliases.md` 定位英文目录；命中后进入该目录读入口文档，未命中才允许搜索。
+3. 如果进入子项目，先读该子项目的 `SKILL.md`，再读该子项目的 `CLAUDE.md`。
+4. 再读该子项目的 `tasks/todo.md` 和 `docs/INDEX.md`，按 `SKILL.md` 的 DO FIRST 决定是否继续加载其他文档。
+5. 禁止在读 `SKILL.md` 前先用大范围 grep/glob 搜索业务逻辑。`SKILL.md` 是导航地图，先看地图再走路。
 
 ## 工作区红线
 
@@ -31,6 +32,8 @@
 
 ## 子项目入口
 
+中文名和触发词只维护在 `docs/project-aliases.md`；本表只维护目录进入后的必读文件。
+
 | 子项目 | 先读 |
 | --- | --- |
 | `aftersales-automation/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
@@ -42,6 +45,7 @@
 | `transfer/` | `SKILL.md`、`CLAUDE.md` |
 | `lkwj/` | `SKILL.md` |
 | `douyin-workout/` | `SKILL.md` |
+| `codex-monitor/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
 
 ## Codex / Claude Code 协作
 

@@ -2,7 +2,7 @@
 
 ## 语义层铁律
 
-进入任一子项目时，第一步读该项目的 `SKILL.md`。禁止先 grep/glob/smart_search 再读 SKILL.md——语义层是导航地图，先看地图再走路。
+用户用中文项目名、简称或业务词描述任务时，先查 `docs/project-aliases.md` 定位英文目录；命中目录后再读该项目 `SKILL.md`。进入任一子项目时，第一步读该项目的 `SKILL.md`。禁止先 grep/glob/smart_search 再读 SKILL.md——语义层是导航地图，先看地图再走路。
 
 ## 浏览器自动化约束（CDP + Element UI）
 
@@ -88,7 +88,7 @@ How to apply:
 
 ## 目录约定
 
-- 根目录：`CLAUDE.md`（Claude Code 项目规则）、`AGENTS.md`（Codex CLI 入口规则）、子项目文件夹。`.txt` / 截图 / 临时脚本一律归属对应目录
+- 根目录：`CLAUDE.md`（Claude Code 项目规则）、`AGENTS.md`（Codex CLI 入口规则）、`docs/project-aliases.md`（中文项目别名路由）、子项目文件夹。`.txt` / 截图 / 临时脚本一律归属对应目录
 - 新子项目第一步写 CLAUDE.md
 - 临时产出放 `_sandbox/`（30 天后还有用→memory 或 docs/，没用→删）
 - `docs/HANDOFF.md`：跨 agent 交接文件，工作区脏或跨 session 未完成时写入；已验证完成的以 git commit 为准
