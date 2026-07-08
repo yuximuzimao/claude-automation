@@ -31,6 +31,31 @@ def _claude_line(event_type: str, text: str = "") -> str:
     return json.dumps({"type": event_type, "message": {"content": text}})
 
 
+def _claude_tool_result_line(text: str) -> str:
+    return json.dumps({
+        "type": "user",
+        "message": {
+            "role": "user",
+            "content": [
+                {
+                    "type": "tool_result",
+                    "tool_use_id": "toolu_1",
+                    "content": text,
+                }
+            ],
+        },
+    })
+
+
+def _claude_hook_line(text: str) -> str:
+    return json.dumps({
+        "attachment": {
+            "type": "hook_system_message",
+            "content": text,
+        }
+    })
+
+
 class TestInferProjectNoisePollution(unittest.TestCase):
     """Core regression: Codex tool outputs must not override real signal."""
 
@@ -143,6 +168,28 @@ class TestInferProjectClaudeCodeFormat(unittest.TestCase):
         handle = io.StringIO("\n".join(lines) + "\n")
         result = infer_project_from_handle(handle)
         self.assertEqual(result, "codex-monitor")
+
+    def test_claude_tool_results_do_not_count_as_user_intent(self) -> None:
+        """Claude Code tool_result payloads are tool output, not human project intent."""
+        lines = [
+            _claude_tool_result_line(
+                "/Users/me/claude/douyin-workout/CLAUDE.md "
+                "/Users/me/claude/douyin-workout/SKILL.md"
+            ),
+            _claude_line("user", "检查 /Users/me/claude/codex-monitor 的统计逻辑"),
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+        result = infer_project_from_handle(handle)
+        self.assertEqual(result, "codex-monitor")
+
+    def test_claude_session_hooks_do_not_count_as_project_signal(self) -> None:
+        """SessionStart hook context can mention many projects and should not drive attribution."""
+        lines = [
+            _claude_hook_line("/Users/me/claude/douyin-workout/CLAUDE.md " * 20),
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+        result = infer_project_from_handle(handle)
+        self.assertIsNone(result)
 
     def test_inference_skip_set_excludes_projects(self) -> None:
         """'projects' is in _INFERENCE_SKIP and is never returned as a project name."""

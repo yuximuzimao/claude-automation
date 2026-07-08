@@ -2,11 +2,12 @@
 
 项目中文名：用量监控软件
 
-## Session 启动（必做，按顺序）
+## Session 启动
 1. 读 `tasks/todo.md` — 确认当前阶段和待办
-2. 运行 `python3 -m unittest discover -s tests -v` — 确认数据层基线
-3. 运行 `python3 -m compileall app tests` — 确认语法基线
-4. 读 `docs/INDEX.md` — 所有规则和安全边界的权威入口
+2. 读 `docs/INDEX.md` — 所有规则和安全边界的权威入口
+3. 若要修改代码、数据口径、UI 行为或运行边界，先运行基线验证：
+   - `python3 -m unittest discover -s tests -v`
+   - `python3 -m compileall app tests`
 
 ## 规则文档（渐进式，按需加载）
 | 文档 | 加载时机 |

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from typing import TextIO
+from typing import Iterable, TextIO
 
 _PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
 _INFERENCE_SKIP = frozenset({"projects", "claude", ".claude"})
@@ -50,8 +50,58 @@ def _line_weight(line: str) -> int:
     # Claude Code format
     event_type = obj.get("type", "")
     if event_type in _CLAUDE_HIGH_SIGNAL_TYPES:
-        return 5
-    return 1
+        return 5 if _claude_has_human_text(obj) else 0
+    if event_type == "assistant":
+        return 1 if _claude_has_human_text(obj) else 0
+    return 0
+
+
+def _line_project_signals(line: str) -> Iterable[tuple[str, int]]:
+    try:
+        obj = json.loads(line)
+    except (json.JSONDecodeError, ValueError):
+        return ()
+    if not isinstance(obj, dict):
+        return ()
+
+    payload = obj.get("payload")
+    if isinstance(payload, dict):
+        sub_type = payload.get("type", "")
+        if sub_type in _CODEX_NOISE_SUBTYPES:
+            return ()
+        weight = 5 if sub_type in _CODEX_HIGH_SIGNAL_SUBTYPES else 1
+        return ((line, weight),)
+
+    event_type = obj.get("type", "")
+    if event_type == "user":
+        return tuple((text, 5) for text in _claude_text_parts(obj))
+    if event_type == "assistant":
+        return tuple((text, 1) for text in _claude_text_parts(obj))
+    return ()
+
+
+def _claude_has_human_text(obj: dict[str, object]) -> bool:
+    return any(True for _ in _claude_text_parts(obj))
+
+
+def _claude_text_parts(obj: dict[str, object]) -> Iterable[str]:
+    message = obj.get("message")
+    if not isinstance(message, dict):
+        return ()
+    content = message.get("content")
+    if isinstance(content, str):
+        return (content,)
+    if not isinstance(content, list):
+        return ()
+
+    texts: list[str] = []
+    for part in content:
+        if not isinstance(part, dict) or part.get("type") != "text":
+            continue
+        text = part.get("text")
+        if isinstance(text, str):
+            texts.append(text)
+    return tuple(texts)
 
 
 def infer_project_from_handle(handle: TextIO, *, max_lines: int = 200) -> str | None:
@@ -67,13 +117,13 @@ def infer_project_from_handle(handle: TextIO, *, max_lines: int = 200) -> str | 
     for i, line in enumerate(handle):
         if i >= max_lines:
             break
-        weight = _line_weight(line)
-        if weight <= 0:
-            continue
-        for m in _PROJECT_PATH_RE.finditer(line):
-            name = m.group(1)
-            if name not in _INFERENCE_SKIP:
-                votes[name] = votes.get(name, 0) + weight
+        for text, weight in _line_project_signals(line):
+            if weight <= 0:
+                continue
+            for m in _PROJECT_PATH_RE.finditer(text):
+                name = m.group(1)
+                if name not in _INFERENCE_SKIP:
+                    votes[name] = votes.get(name, 0) + weight
     if not votes:
         return None
     top_score = max(votes.values())

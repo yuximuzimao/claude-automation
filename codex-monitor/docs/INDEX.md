@@ -36,6 +36,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - `read_claude_projects()` 支持 `modified_since` 和 `max_files`，用于 smoke check 和后续 UI 调用前的性能边界。
 - `main.py --smoke-claude` 默认使用 1 天 mtime 窗口且最多读取 200 个 JSONL 文件。
 - `cache_creation.ephemeral_5m_input_tokens` 和 `cache_creation.ephemeral_1h_input_tokens` 必须保留，UI 可暂不展示。
+- Claude Code 可能在同一 JSONL 中重复写入同一个 assistant `message.id` 和相同 `message.usage`；有 `message.id` 时必须按 id 去重后再累计 token。缺少 id 的旧格式保持逐条统计。
 - UI watcher 触发的 Claude 刷新必须保持近 30 天视图口径，使用近 30 天 `modified_since` 和 `--claude-max-files` 上限重算；禁止因文件变化触发无边界 `.claude/projects` 扫描。
 - 手动刷新可以使用 CLI 参数 `--claude-days` / `--claude-max-files` 指定的范围，但仍不得无边界扫描。
 
@@ -73,7 +74,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Codex token 使用 `TokenUsage.total_tokens`。
 - Claude token 使用 `ClaudeUsage.total_estimated_tokens`，即 `input + output + cache_creation + cache_read`。
 - Top 10 项目按近 30 天 token 排序；0 token 项目不展示。
-- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容前 200 行的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层按事件类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude `user` 事件 5x，普通 `message`/`session_meta`/`reasoning` 等 1x，`function_call_output` / `function_call` / `token_count` 不参与投票（weight=0）。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
+- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容前 200 行的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层按事件类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
 - 未识别项目统一合并为 `其他`，token 求和后参与 Top 10 排序。
 - Top 项目保留最多 3 个 `sample_cwds`，供 UI tooltip/详情展示完整路径。
 - 项目中文名的维护边界在项目自身说明文件，不在监控软件内维护中心映射表。
@@ -84,10 +85,14 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Codex 在 5 小时限额耗尽或临时无法返回完整 quota 时，可能写出较新的空 `rate_limits` 或缺少 `used_percent` 的窗口。未知值不能伪装成真实 `0%`：reader 必须跳过不可显示 quota，折叠态 UI 中心文本用 `—` 表示未知，只有真实 `0.0` 才显示 `0%`。回归测试覆盖 `tests/test_reader_codex.py`、`tests/test_models.py`、`tests/test_ui_tk.py`。
 - 文件路径只能用于扫描优化，今日/近 30 天归属仍以事件 timestamp 为准。
 - Codex `function_call_output` 常包含目录列表，一条记录可能有 50+ 条无关 `/claude/{project}` 路径，若参与投票会完全淹没真实信号（已验证：单条 `function_call_output` 59票 vs `message` 4票）。修复方案见 `app/reader_common.py`：事件类型加权 + 扫描窗口 200 行。回归测试在 `tests/test_reader_common.py`。
+- Claude Code 的 `type:"user"` 也可能只是 `tool_result`，例如工具输出列出其他项目的 `CLAUDE.md` / `SKILL.md`。这些路径不是用户意图，不能按 5x 高权重投票；只扫描 Claude message content 里的 `text` 段。回归测试：`tests/test_reader_common.py::test_claude_tool_results_do_not_count_as_user_intent`、`tests/test_reader_claude.py::test_tool_result_project_list_does_not_infer_workspace_root_session`。
+- Claude Code SessionStart hook 或 attachment 可能注入多项目上下文，只能作为提示给 agent，不能参与项目归因。回归测试：`tests/test_reader_common.py::test_claude_session_hooks_do_not_count_as_project_signal`。
+- Claude Code 同一 assistant `message.id` 可能重复写入 2-5 次；若不去重，30 天 Claude token 会被重复累计。回归测试：`tests/test_reader_claude.py::test_duplicate_assistant_message_id_counts_usage_once`。
 - 多项目摘要型 Codex 会话可能在普通 `message` / `agent_message` / `task_complete` 中弱引用多个项目。若弱信号打平，不能把今日用量挂到先出现的项目（例如误挂到 `product-detect`）；应返回 `None` 并让聚合归入 `其他`。回归测试：`tests/test_reader_common.py::test_tied_weak_project_signals_return_none`。
 - 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。
 - `.app` 与 LaunchAgent 共享单实例锁。调试“双击没打开”时先查 `~/Library/Application Support/Codex Monitor/codex-monitor.lock` 中的 PID，再用 `ps -p <pid>` 判断是否仍有旧 UI 进程占锁。
 - tkinter `create_arc` 的 `extent` 取到 ±360 时整段弧渲染为空白。配额圆环 100% 时 `extent = -100 × 3.6 = -360`，会让满载圆环显示为空（看起来"归零"）。灰色轨道一直用 `-359.99` 规避，但进度弧早期漏了。修复：`app/ui_tk.py::_ring_extent()` 统一把进度弧 clamp 到 `-359.99`，并抽成纯函数以便脱离 tkinter 单测。回归测试 `tests/test_ui_tk.py::test_ring_extent_*`。新增任何 `create_arc` 都不得让 extent 触到 ±360。
+- 测试经验：若用户明确要求 Tk 浮层“移开即隐藏、立刻可再次展开”，反复 create/destroy `Toplevel` 可能触发 macOS/Tk 窗口层事件延迟，表现为快速再点击无响应。同类体验问题可优先验证 `withdraw()` / `deiconify()` 复用窗口；普通模态弹窗或一次性设置窗口不套用此经验。
 - `watchdog` 不是标准库；未安装时会走 polling fallback。polling 只能做轻量 mtime 检测，不能直接触发主线程聚合或高频后台聚合。
 - 测试 fixture 必须脱敏，只保留结构和 token 数字。
 - 开机自启只生成 plist，不自动 bootstrap；写错 plist 后由用户手动启用/回滚，避免挂起登录态。

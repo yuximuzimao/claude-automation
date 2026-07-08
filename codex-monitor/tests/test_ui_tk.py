@@ -580,6 +580,109 @@ class TkUiTests(unittest.TestCase):
         self.assertIsNone(window._popover_after_id)
         self.assertEqual(window.root.cancelled, ["after-1"])
 
+    def test_deferred_project_popover_hide_can_be_cancelled_by_reclick(self) -> None:
+        class FakeRoot:
+            def __init__(self) -> None:
+                self.cancelled: list[str] = []
+
+            def after(self, _ms: int, _fn: object) -> str:
+                return "after-hide"
+
+            def after_cancel(self, after_id: str) -> None:
+                self.cancelled.append(after_id)
+
+        window = object.__new__(CodexMonitorWindow)
+        window.root = FakeRoot()
+        window._popover_after_id = None
+        window._project_popover = object()
+        window._capsule_pointer_inside = False
+        window._popover_pointer_inside = False
+        show_calls: list[str] = []
+        window._show_project_popover = lambda: show_calls.append("show")
+
+        window._defer_maybe_hide_project_popover()
+        window._capsule_click()
+
+        self.assertIsNone(window._popover_after_id)
+        self.assertEqual(window.root.cancelled, ["after-hide"])
+        self.assertEqual(show_calls, ["show"])
+
+    def test_capsule_click_reopens_with_persistent_project_popover(self) -> None:
+        class FakePopover:
+            def __init__(self) -> None:
+                self.calls: list[str] = []
+
+            def deiconify(self) -> None:
+                self.calls.append("deiconify")
+
+            def lift(self) -> None:
+                self.calls.append("lift")
+
+            def attributes(self, *args: object) -> None:
+                self.calls.append(f"attributes:{args[0]}")
+
+            def geometry(self, _value: str) -> None:
+                self.calls.append("geometry")
+
+            def update_idletasks(self) -> None:
+                self.calls.append("update")
+
+            def winfo_reqheight(self) -> int:
+                return 120
+
+        window = object.__new__(CodexMonitorWindow)
+        popover = FakePopover()
+        window.root = type("FakeRoot", (), {
+            "winfo_x": lambda _self: 35,
+            "winfo_y": lambda _self: 1344,
+        })()
+        window._project_popover = popover
+        window._project_popover_body = object()
+        window._project_popover_visible = False
+        window._popover_after_id = "after-1"
+        window._popover_pointer_inside = True
+        window._capsule_pointer_inside = False
+        calls: list[str] = []
+        window._cancel_project_popover_timer = lambda: calls.append("cancel")
+        window._refresh_project_popover_body = lambda: calls.append("refresh")
+
+        window._capsule_click()
+
+        self.assertTrue(window._capsule_pointer_inside)
+        self.assertFalse(window._popover_pointer_inside)
+        self.assertTrue(window._project_popover_visible)
+        self.assertIs(window._project_popover, popover)
+        self.assertEqual(calls, ["cancel", "refresh"])
+        self.assertIn("deiconify", popover.calls)
+
+    def test_hiding_project_popover_withdraws_without_destroying(self) -> None:
+        class FakePopover:
+            def __init__(self) -> None:
+                self.withdrawn = False
+                self.destroyed = False
+
+            def withdraw(self) -> None:
+                self.withdrawn = True
+
+            def destroy(self) -> None:
+                self.destroyed = True
+
+        window = object.__new__(CodexMonitorWindow)
+        popover = FakePopover()
+        window._project_popover = popover
+        window._project_popover_visible = True
+        window._popover_after_id = None
+        window._popover_pointer_inside = True
+        window._cancel_project_popover_timer = lambda: None
+
+        window._hide_project_popover()
+
+        self.assertFalse(window._project_popover_visible)
+        self.assertFalse(window._popover_pointer_inside)
+        self.assertIs(window._project_popover, popover)
+        self.assertTrue(popover.withdrawn)
+        self.assertFalse(popover.destroyed)
+
 
 if __name__ == "__main__":
     unittest.main()

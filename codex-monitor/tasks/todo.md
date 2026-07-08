@@ -17,19 +17,18 @@ Claude Code 已正式放行并已完成：
 - quota 缺失值回退已修复（2026-06-26）：较新的不可显示 `rate_limits` 不再覆盖旧的可显示 quota；折叠态未知值显示 `—`，真实 `0.0` 仍显示 `0%`；`python3 -m unittest discover -s tests -v` 51/51 通过，`python3 -m compileall app tests` 和 `python3 main.py --smoke-aggregate` 通过。
 - 折叠态点击灰框与 App 启动体验已修复（2026-07-03）：倒计时改为 Canvas text；`.app` 可见模式会让位/恢复隐藏 LaunchAgent，并使用单实例锁避免双开；本机 App 已重建到 `/Users/chat/Applications/Codex Monitor.app`。验证：`python3.13 -m unittest discover -s tests -v` 81/81 通过，`python3.13 -m compileall app tests main.py` 通过；LaunchAgent 运行正常，日志仅见 macOS 输入法/键盘布局警告，未见业务错误。
 - 今日项目误归因已修复（2026-07-03）：多项目弱信号打平时不再按插入顺序归因到先出现的项目，改为归入 `其他`；已修复 `product-detect` 今日误显示 2100 万+ Codex token 的问题。验证：`tests/test_reader_common.py` 覆盖打平回归，`python3.13 -m unittest discover -s tests -v` 82/82 通过。
+- Claude 统计和项目明细交互已修复（2026-07-08）：Claude 工具输出 / SessionStart hook 不再参与项目归因，assistant `message.id` 重复事件只统计一次；项目明细 popover 改为持久 `Toplevel` 复用，隐藏后可立即再次展开。验证：`python3 -m unittest discover -s tests -v` 89/89 通过，`python3 -m compileall app tests main.py` 通过，`main.py --ui` 已通过 LaunchAgent 重启到新代码。
 
 ## 未处理问题
 
-- [ ] **P0：项目流量归因仍需复查（2026-06-04）**
-  - 现象：2026-06-04 用户没有用 AI 对鲸灵售后自动化做优化，但流量统计里仍出现售后项目消耗。
-  - 已知进展：Claude 已修复过一轮，修复后一开始统计确实有变化。
-  - 2026-07-03 进展：已修复 Codex 多项目弱信号打平时任意选首个项目的问题；`product-detect` 今日误归因已归入 `其他`。
-  - 剩余问题：2026-06-04 下班前再次查看，仍有部分统计归因错误。
-  - 下次处理方向：继续排查项目推断逻辑，重点验证是否还有工具输出、历史路径、cwd fallback、session 内容路径或中文项目名映射把无关会话误判进 `aftersales-automation`。
-- [ ] **P2：售后自动化当日 token 统计继续观察（2026-06-06）**
-  - 现象：此前出现过售后自动化今日 token 计算不对。
-  - 2026-06-06 观察：用户反馈未再出现。
-  - 处理策略：暂不改代码，连续观察数日；若复现再按项目归因链路重新定位。
+- [ ] **P2：统计准确性继续观察**
+  - 目标：确认 2026-07-08 的 Claude 工具输出过滤、SessionStart hook 过滤和 assistant `message.id` 去重后，项目归因和 30 天用量是否持续符合实际使用感知。
+  - 触发条件：再次出现“某项目明明没处理却出现 token”或“30 天数据突变但无法用日志口径解释”。
+  - 处理方向：先按 `docs/INDEX.md §6-7` 的归因链路复核 `cwd`、session path、前 200 行 text 信号、重复 assistant usage；只有无法溯源时，再考虑做更细的归因解释面板。
+- [ ] **P3：日志规模增长后的性能与增量索引**
+  - 目标：随着 `.claude/projects` 和 `.codex/sessions` 继续增长，保持 UI 刷新稳定、低 CPU、低延迟。
+  - 触发条件：近 30 天重算明显变慢、LaunchAgent 空闲 CPU 异常、手动刷新卡顿，或 smoke aggregate 耗时不可接受。
+  - 处理方向：优先设计增量索引/缓存，避免每次刷新重复解析已处理 JSONL；继续保持 UI 主线程不做 JSONL 读取或全树扫描。
 
 ## 阶段 0：项目初始化
 
@@ -109,3 +108,10 @@ Claude Code 已正式放行并已完成：
 - [x] `.app` launcher 使用绝对 Python 路径，避免 GUI 环境 PATH 找不到 `python3.13`。
 - [x] `.app` 启动时让隐藏 LaunchAgent 让位，退出后按原运行状态恢复后台服务。
 - [x] 新增 `SingleInstance` 锁，避免 LaunchAgent 和 App 双开，并让可见 App 短暂等待旧实例释放锁。
+
+## 阶段 8：统计准确性与明细交互
+
+- [x] Claude 项目归因只扫描真实 text 段，跳过 `tool_result`、hook 和 attachment 噪声。
+- [x] Claude assistant usage 按 `message.id` 去重，避免同一响应重复累计。
+- [x] 项目明细 popover 改为持久窗口复用，隐藏用 `withdraw()`，关闭才 `destroy()`。
+- [x] 增加回归测试覆盖 `健身计划生成` 类工具输出误判、重复 assistant usage、快速再展开弹窗。

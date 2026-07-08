@@ -64,6 +64,84 @@ class ClaudeReaderTests(unittest.TestCase):
         self.assertEqual(result.by_model["<missing>"].input_tokens, 7)
         self.assertEqual(result.by_model["<missing>"].output_tokens, 3)
 
+    def test_tool_result_project_list_does_not_infer_workspace_root_session(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "type": "user",
+                        "message": {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "tool_result",
+                                    "tool_use_id": "toolu_1",
+                                    "content": (
+                                        "/Users/chat/claude/douyin-workout/CLAUDE.md\n"
+                                        "/Users/chat/claude/douyin-workout/SKILL.md"
+                                    ),
+                                }
+                            ],
+                        },
+                    }
+                )
+                + "\n"
+                + json.dumps(
+                    {
+                        "timestamp": "2026-07-07T12:11:18.975Z",
+                        "type": "assistant",
+                        "cwd": "/Users/chat/claude",
+                        "message": {
+                            "model": "claude-sonnet-4-6",
+                            "usage": {"input_tokens": 10, "output_tokens": 5},
+                        },
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            result = read_claude_session_file(path)
+
+        self.assertIsNone(result.usage_events[0].inferred_project)
+
+    def test_duplicate_assistant_message_id_counts_usage_once(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session.jsonl"
+            message = {
+                "id": "msg-1",
+                "model": "claude-sonnet-4-6",
+                "usage": {"input_tokens": 10, "output_tokens": 5},
+            }
+            path.write_text(
+                json.dumps(
+                    {
+                        "timestamp": "2026-07-07T12:11:18.975Z",
+                        "type": "assistant",
+                        "cwd": "/Users/chat/claude/codex-monitor",
+                        "message": message,
+                    }
+                )
+                + "\n"
+                + json.dumps(
+                    {
+                        "timestamp": "2026-07-07T12:11:19.330Z",
+                        "type": "assistant",
+                        "cwd": "/Users/chat/claude/codex-monitor",
+                        "message": message,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            result = read_claude_session_file(path)
+
+        self.assertEqual(result.assistant_events, 1)
+        self.assertEqual(result.by_model["claude-sonnet-4-6"].total_estimated_tokens, 15)
+        self.assertEqual(len(result.usage_events), 1)
+
     def test_bad_json_line_is_counted_without_exposing_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "session.jsonl"

@@ -20,6 +20,7 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
     cwd: str | None = None
     by_model: dict[str, ClaudeUsage] = {}
     usage_events: list[ClaudeUsageEvent] = []
+    seen_message_ids: set[str] = set()
     assistant_events = 0
     parse_errors = 0
 
@@ -43,6 +44,12 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
             usage_data = message.get("usage")
             if not isinstance(usage_data, dict):
                 continue
+
+            message_id = _read_message_id(message)
+            if message_id is not None:
+                if message_id in seen_message_ids:
+                    continue
+                seen_message_ids.add(message_id)
 
             assistant_events += 1
             cwd = _read_cwd(event) or cwd
@@ -134,3 +141,8 @@ def _read_cwd(event: dict[str, Any]) -> str | None:
 def _read_model(message: dict[str, Any]) -> str:
     model = message.get("model")
     return model if isinstance(model, str) and model else "<missing>"
+
+
+def _read_message_id(message: dict[str, Any]) -> str | None:
+    message_id = message.get("id")
+    return message_id if isinstance(message_id, str) and message_id else None

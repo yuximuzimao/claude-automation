@@ -618,6 +618,8 @@ class CodexMonitorWindow:
         self._cd_text_items: list[tuple[Any, int]] = []
         self._popover_after_id: str | None = None
         self._project_popover: Any | None = None
+        self._project_popover_body: Any | None = None
+        self._project_popover_visible = False
         self._popover_pointer_inside = False
         self._capsule_pointer_inside = False
         self._refresh_lock = threading.Lock()
@@ -1033,6 +1035,7 @@ class CodexMonitorWindow:
     def _capsule_click(self, _event: Any | None = None) -> None:
         self._capsule_pointer_inside = True
         self._cancel_project_popover_timer()
+        self._popover_pointer_inside = False
         self._show_project_popover()
 
     def _capsule_leave(self, _event: Any | None = None) -> None:
@@ -1057,22 +1060,33 @@ class CodexMonitorWindow:
         self._popover_after_id = None
 
     def _defer_maybe_hide_project_popover(self) -> None:
+        self._cancel_project_popover_timer()
         after = getattr(self.root, "after", None)
         if callable(after):
-            after(80, self._maybe_hide_project_popover)
+            self._popover_after_id = after(80, self._maybe_hide_project_popover)
         else:
             self._maybe_hide_project_popover()
 
     def _maybe_hide_project_popover(self) -> None:
+        self._popover_after_id = None
         if self._capsule_pointer_inside or self._popover_pointer_inside:
             return
         self._hide_project_popover()
 
     def _show_project_popover(self) -> None:
         self._popover_after_id = None
-        if not self._capsule_pointer_inside or self._project_popover is not None:
+        if not self._capsule_pointer_inside:
             return
+        if self._project_popover is None:
+            self._create_project_popover()
+        self._refresh_project_popover_body()
+        self._position_project_popover()
+        self._project_popover.deiconify()
+        self._project_popover.lift()
+        self._project_popover.attributes("-topmost", True)
+        self._project_popover_visible = True
 
+    def _create_project_popover(self) -> None:
         import tkinter as tk
 
         popover = tk.Toplevel(self.root)
@@ -1087,8 +1101,23 @@ class CodexMonitorWindow:
 
         frame = tk.Frame(popover, bg=bg)
         frame.pack(fill="both", expand=True, padx=17, pady=14)
+        self._project_popover_body = frame
         self._bind_popover_hover(frame)
+        popover.bind("<Enter>", self._popover_enter)
+        popover.bind("<Leave>", self._popover_leave)
+        popover.withdraw()
+        if _project_popover_uses_native_blur():
+            popover.after(0, lambda: _install_macos_blur(popover, radius=26))
 
+    def _refresh_project_popover_body(self) -> None:
+        import tkinter as tk
+
+        frame = self._project_popover_body
+        if frame is None:
+            return
+        for child in frame.winfo_children():
+            child.destroy()
+        bg = BG_WINDOW
         header = tk.Frame(frame, bg=bg)
         header.pack(fill="x", pady=(0, 10))
         tk.Label(
@@ -1161,16 +1190,16 @@ class CodexMonitorWindow:
             anchor="e",
         ).pack(fill="x", pady=(10, 0))
 
+    def _position_project_popover(self) -> None:
+        popover = self._project_popover
+        if popover is None:
+            return
         popover.update_idletasks()
         height = max(1, popover.winfo_reqheight())
         width = PROJECT_POPOVER_W
         x = self.root.winfo_x()
         y = max(0, self.root.winfo_y() - height - 10)
         popover.geometry(f"{width}x{height}+{x}+{y}")
-        popover.bind("<Enter>", self._popover_enter)
-        popover.bind("<Leave>", self._popover_leave)
-        if _project_popover_uses_native_blur():
-            popover.after(0, lambda: _install_macos_blur(popover, radius=26))
 
     def _bind_popover_hover(self, widget: Any) -> None:
         widget.bind("<Enter>", self._popover_enter)
@@ -1181,8 +1210,22 @@ class CodexMonitorWindow:
         popover = self._project_popover
         if popover is None:
             return
-        self._project_popover = None
+        self._project_popover_visible = False
         self._popover_pointer_inside = False
+        try:
+            popover.withdraw()
+        except Exception:
+            pass
+
+    def _destroy_project_popover(self) -> None:
+        self._cancel_project_popover_timer()
+        popover = self._project_popover
+        self._project_popover = None
+        self._project_popover_body = None
+        self._project_popover_visible = False
+        self._popover_pointer_inside = False
+        if popover is None:
+            return
         try:
             _close_macos_blur(popover)
             popover.destroy()
@@ -1286,7 +1329,7 @@ class CodexMonitorWindow:
 
     def _on_close(self) -> None:
         self._cancel_countdown()
-        self._hide_project_popover()
+        self._destroy_project_popover()
         self.state.x = self.root.winfo_x()
         self.state.y = self.root.winfo_y()
         save_window_state(self.state, self.state_path)

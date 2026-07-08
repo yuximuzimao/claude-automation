@@ -13,6 +13,8 @@ The app reads local JSONL session logs, keeps token usage split by source and mo
 - Phase 4: tkinter MVP UI with quota, token totals, Top projects, and cwd tooltip
 - Phase 5: window drag, position persistence, manual refresh, collapse/expand
 - Phase 6: macOS `.app` wrapper, LaunchAgent plist generation, watchdog/polling refresh
+- Phase 7: UI polish, single-instance handling, visible `.app` / hidden LaunchAgent handoff
+- Phase 8: Claude counting accuracy, project attribution hardening, persistent project-detail popover
 
 ## Run Tests
 
@@ -30,6 +32,12 @@ python3 main.py --smoke-aggregate
 ```
 
 The Claude smoke check defaults to a 1-day mtime window and caps reads at 200 files.
+
+## Accuracy Model
+
+Usage numbers are local estimates from JSONL logs, not official billing data. Codex usage is summed from `last_token_usage`; Claude Code usage is summed from assistant `message.usage` after deduplicating repeated `message.id` entries.
+
+Project attribution prefers explicit `cwd`, then decoded Claude project paths, then early-session text signals. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
 
 ## UI
 
