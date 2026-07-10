@@ -7,7 +7,18 @@ import re
 from typing import Iterable, TextIO
 
 _PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
-_INFERENCE_SKIP = frozenset({"projects", "claude", ".claude"})
+_INFERENCE_SKIP = frozenset({
+    "projects",
+    "claude",
+    ".claude",
+    "docs",
+    "scripts",
+    "reviews",
+    "_sandbox",
+    "_exports",
+})
+_DEFAULT_SCAN_LINES = 200
+_EXTENDED_SCAN_LINES = 1000
 
 # Codex event subtypes (payload.type) that carry no project signal —
 # tool call arguments and outputs often reference many unrelated paths.
@@ -104,30 +115,46 @@ def _claude_text_parts(obj: dict[str, object]) -> Iterable[str]:
     return tuple(texts)
 
 
-def infer_project_from_handle(handle: TextIO, *, max_lines: int = 200) -> str | None:
-    """Scan first N lines of an open file for /claude/{project}/ mentions.
+def infer_project_from_handle(
+    handle: TextIO,
+    *,
+    max_lines: int | None = None,
+) -> str | None:
+    """Infer a project from weighted /claude/{project}/ mentions.
 
-    Lines are weighted by event type: tool outputs are skipped (weight 0),
-    user messages count 5x, other events count 1x. This prevents directory
-    listings in tool results from swamping the true project signal.
+    The default path first scans 200 lines for speed. If that window has no
+    unique project signal, it continues up to 1000 lines so long planning
+    sessions can still be attributed when the real project is created later.
+    Passing ``max_lines`` keeps a strict one-window limit for tests/callers.
 
     Does NOT seek back — caller must seek(0) to re-read from the start.
     """
+    scan_limit = max_lines if max_lines is not None else _EXTENDED_SCAN_LINES
+    initial_limit = scan_limit if max_lines is not None else _DEFAULT_SCAN_LINES
     votes: dict[str, int] = {}
+
     for i, line in enumerate(handle):
-        if i >= max_lines:
+        if i >= scan_limit:
             break
         for text, weight in _line_project_signals(line):
             if weight <= 0:
                 continue
-            for m in _PROJECT_PATH_RE.finditer(text):
-                name = m.group(1)
+            for match in _PROJECT_PATH_RE.finditer(text):
+                name = match.group(1)
                 if name not in _INFERENCE_SKIP:
                     votes[name] = votes.get(name, 0) + weight
+
+        if max_lines is None and i + 1 == initial_limit:
+            winner = _unique_project_winner(votes)
+            if winner is not None:
+                return winner
+
+    return _unique_project_winner(votes)
+
+
+def _unique_project_winner(votes: dict[str, int]) -> str | None:
     if not votes:
         return None
     top_score = max(votes.values())
     winners = [name for name, score in votes.items() if score == top_score]
-    if len(winners) != 1:
-        return None
-    return winners[0]
+    return winners[0] if len(winners) == 1 else None

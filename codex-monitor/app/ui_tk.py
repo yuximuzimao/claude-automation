@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import math
 import time
 import threading
 from dataclasses import dataclass
@@ -18,21 +17,26 @@ if TYPE_CHECKING:
     import tkinter as tk
 
 
-BG_WINDOW = "#F4F8FA"
-BG_SECTION = "#FBFDFE"
+BG_WINDOW = "#F2F6F7"
+BG_SECTION = "#F8FAFB"
 TRANSPARENT_BG = "systemTransparent"
-BORDER = "#D7E0E3"
-SHADOW = "#DDE7EA"
-TEXT_PRIMARY = "#1D1D1F"
-TEXT_SECONDARY = "#7D838C"
-TEXT_MONO = "#333333"
-TEXT_ON_GLASS = "#172326"
-TEXT_MUTED_GLASS = "#5F6E73"
-TRACK_COLOR = "#B9C7CB"   # subtle track on white glass
-COLOR_5H = "#5FD0C5"      # cyan/teal for 5h quota
-COLOR_WEEK = "#F2B866"    # warm amber for weekly quota
-CAPSULE_HIT_FILL = "#F4F8FA"
-CAPSULE_HIT_STIPPLE = "gray25"
+BORDER = "#8FA1A4"
+SHADOW = "#65797D"
+TEXT_PRIMARY = "#EEF3F3"
+TEXT_SECONDARY = "#C1CDCF"
+TEXT_MONO = "#E2E9EA"
+TEXT_ON_GLASS = "#F2F5F5"
+TEXT_MUTED_GLASS = "#C7D1D2"
+POPOVER_TEXT = TEXT_ON_GLASS
+POPOVER_MUTED = TEXT_MUTED_GLASS
+TRACK_COLOR = "#819598"
+COLOR_5H = "#DCE7E7"
+COLOR_WEEK = "#C8D4D5"
+COUNTDOWN_5H = TEXT_ON_GLASS
+COUNTDOWN_WEEK = TEXT_MUTED_GLASS
+COUNTDOWN_FONT_SIZE = 12
+CAPSULE_HIT_FILL = ""
+CAPSULE_HIT_STIPPLE = ""
 WINDOW_ALPHA = 1.0
 WINDOW_RADIUS = 41
 CARD_RADIUS = 16
@@ -43,7 +47,7 @@ COLLAPSED_H = 82
 EXPANDED_W = 360
 PROJECT_POPOVER_LIMIT = 10
 PROJECT_POPOVER_W = 410
-PROJECT_POPOVER_ALPHA = 0.96
+PROJECT_POPOVER_ALPHA = 1.0
 
 
 def _expanded_spacing() -> dict[str, Any]:
@@ -58,7 +62,13 @@ def _expanded_spacing() -> dict[str, Any]:
     }
 
 
-def _macos_blur_config() -> dict[str, Any]:
+def _macos_blur_config(surface: str = "capsule") -> dict[str, Any]:
+    profiles = {
+        "capsule": {"alpha": 0.72},
+        "expanded": {"alpha": 0.78},
+        "popover": {"alpha": 0.84},
+    }
+    profile = profiles.get(surface, profiles["capsule"])
     return {
         "material": "popover",
         "material_value": 6,
@@ -66,7 +76,8 @@ def _macos_blur_config() -> dict[str, Any]:
         "blending_mode_value": 0,
         "state": "active",
         "state_value": 1,
-        "alpha": 0.76,
+        "window_background": "clear",
+        "alpha": profile["alpha"],
         "corner_radius": WINDOW_RADIUS,
     }
 
@@ -95,13 +106,13 @@ def _project_popover_limit() -> int:
 
 
 def _project_popover_uses_native_blur() -> bool:
-    return False
+    return True
 
 
 def _capsule_hit_options() -> dict[str, str]:
     return {
         "fill": CAPSULE_HIT_FILL,
-        "outline": BORDER,
+        "outline": "",
         "stipple": CAPSULE_HIT_STIPPLE,
     }
 
@@ -179,33 +190,49 @@ def _ring_extent(used_pct: float) -> float | None:
     return -min(pct * 3.6, 359.99)  # negative = clockwise
 
 
-def _draw_ring(cv: Any, cx: float, cy: float, r: float, width: float,
-               used_pct: float, color: str) -> None:
-    """Draw a ring segment with round line-caps."""
+def _draw_plain_text(
+    cv: Any,
+    x: float,
+    y: float,
+    *,
+    text: str,
+    fill: str,
+    font: Any,
+    anchor: str = "center",
+    tags: Any = None,
+) -> int:
+    """Draw one unoutlined text item on the glass surface."""
+    options = {"text": text, "font": font, "anchor": anchor, "fill": fill}
+    if tags is not None:
+        options["tags"] = tags
+    return cv.create_text(x, y, **options)
+
+
+def _draw_ring(
+    cv: Any,
+    cx: float,
+    cy: float,
+    r: float,
+    width: float,
+    used_pct: float,
+    color: str,
+) -> None:
+    """Draw a restrained progress ring without endpoint circles or edge strokes."""
     import tkinter as tk
 
     bbox = (cx - r, cy - r, cx + r, cy + r)
-    # cap_r slightly smaller than half-width to avoid visual overshoot
-    cap_r = width / 2 - 1
-
-    # Visible gray track (full circle — use 359.99 to avoid tkinter extent=360 blank-render bug)
-    cv.create_arc(*bbox, start=90, extent=-359.99, style=tk.ARC, width=width, outline=TRACK_COLOR)
+    cv.create_arc(
+        *bbox, start=90, extent=-359.99, style=tk.ARC,
+        width=width, outline=TRACK_COLOR,
+    )
 
     extent = _ring_extent(used_pct)
     if extent is None:
         return
-    cv.create_arc(*bbox, start=90, extent=extent, style=tk.ARC, width=width, outline=color)
-
-    # Round start cap: always at top (angle 90° on unit circle)
-    cap_kw = dict(fill=color, outline=color)
-    cv.create_oval(cx - cap_r, cy - r - cap_r, cx + cap_r, cy - r + cap_r, **cap_kw)
-
-    # Round end cap (only if not a full circle)
-    if abs(extent) < 359:
-        end_rad = math.radians(90.0 + extent)   # extent is negative
-        ex = cx + r * math.cos(end_rad)
-        ey = cy - r * math.sin(end_rad)
-        cv.create_oval(ex - cap_r, ey - cap_r, ex + cap_r, ey + cap_r, **cap_kw)
+    cv.create_arc(
+        *bbox, start=90, extent=extent, style=tk.ARC,
+        width=width, outline=color,
+    )
 
 
 def _rounded_rect(canvas: Any, x1: int, y1: int, x2: int, y2: int,
@@ -270,7 +297,20 @@ def _configure_visible_app_identity() -> bool:
         return False
 
 
-def _install_macos_blur(root: Any, *, radius: int = WINDOW_RADIUS) -> bool:
+def _install_macos_blur(
+    root: Any,
+    *,
+    radius: int = WINDOW_RADIUS,
+    surface: str = "capsule",
+) -> bool:
+    state_fn = getattr(root, "state", None)
+    try:
+        if callable(state_fn) and state_fn() == "withdrawn":
+            _hide_macos_blur(root)
+            return False
+    except Exception:
+        pass
+
     try:
         from AppKit import (
             NSApplication,
@@ -313,6 +353,7 @@ def _install_macos_blur(root: Any, *, radius: int = WINDOW_RADIUS) -> bool:
             blur_window.setOpaque_(False)
             blur_window.setBackgroundColor_(NSColor.clearColor())
             blur_window.setIgnoresMouseEvents_(True)
+            blur_window.setHasShadow_(False)
             blur_window.setLevel_(tk_window.level())
             blur = NSVisualEffectView.alloc().initWithFrame_(NSMakeRect(0, 0, width, height))
             blur_window.setContentView_(blur)
@@ -322,11 +363,14 @@ def _install_macos_blur(root: Any, *, radius: int = WINDOW_RADIUS) -> bool:
             blur_window.setFrame_display_(frame, True)
             blur.setFrame_(NSMakeRect(0, 0, width, height))
 
-        config = _macos_blur_config()
+        config = _macos_blur_config(surface)
         blur_window.setAlphaValue_(config["alpha"])
+        blur_window.setBackgroundColor_(NSColor.clearColor())
         blur.setMaterial_(config["material_value"])
         blur.setBlendingMode_(config["blending_mode_value"])
         blur.setState_(config["state_value"])
+        if hasattr(blur, "setEmphasized_"):
+            blur.setEmphasized_(False)
         blur.setAutoresizingMask_(NSViewWidthSizable | NSViewHeightSizable)
         blur.setWantsLayer_(True)
 
@@ -356,10 +400,22 @@ def _find_tk_window(root: Any) -> Any | None:
     return None
 
 
+def _hide_macos_blur(root: Any) -> None:
+    """Hide a native blur backing window without destroying it."""
+    blur_window = getattr(root, "_codex_blur_window", None)
+    if blur_window is None:
+        return
+    try:
+        blur_window.orderOut_(None)
+    except Exception:
+        pass
+
+
 def _close_macos_blur(root: Any) -> None:
     blur_window = getattr(root, "_codex_blur_window", None)
     if blur_window is None:
         return
+    _hide_macos_blur(root)
     try:
         blur_window.close()
     except Exception:
@@ -615,7 +671,7 @@ class CodexMonitorWindow:
         self._press_root: tuple[int, int] | None = None
         self._capsule_dragging = False
         self._countdown_after_id: str | None = None
-        self._cd_text_items: list[tuple[Any, int]] = []
+        self._cd_text_items: list[tuple[Any, int | tuple[int, ...]]] = []
         self._popover_after_id: str | None = None
         self._project_popover: Any | None = None
         self._project_popover_body: Any | None = None
@@ -706,60 +762,73 @@ class CodexMonitorWindow:
         center_y = H // 2
         ring_radius = 24
         ring_width = 8
-        _draw_ring(cv, left_x, center_y, ring_radius, ring_width, pct0, COLOR_5H)
-        _draw_ring(cv, right_x, center_y, ring_radius, ring_width, pct1, COLOR_WEEK)
+        _draw_ring(
+            cv, left_x, center_y, ring_radius, ring_width,
+            pct0, COLOR_5H,
+        )
+        _draw_ring(
+            cv, right_x, center_y, ring_radius, ring_width,
+            pct1, COLOR_WEEK,
+        )
 
-        cv.create_text(
+        _draw_plain_text(
+            cv,
             left_x,
             center_y - 4,
             text=_quota_center_text(quota[0]).rstrip("%"),
             fill=TEXT_ON_GLASS,
-            font=(self.fonts.num_large[0], 17, "bold"),
-            anchor="center",
+            font=(self.fonts.label[0], 18, "bold"),
         )
-        cv.create_text(
+        _draw_plain_text(
+            cv,
             left_x,
             center_y + 13,
             text="5h",
-            fill=COLOR_5H,
-            font=(self.fonts.caption[0], 9, "normal"),
-            anchor="center",
+            fill=TEXT_MUTED_GLASS,
+            font=(self.fonts.caption[0], 9, "bold"),
         )
-        cv.create_text(
+        _draw_plain_text(
+            cv,
             right_x,
             center_y - 4,
             text=_quota_center_text(quota[1]).rstrip("%"),
             fill=TEXT_ON_GLASS,
-            font=(self.fonts.num_large[0], 17, "bold"),
-            anchor="center",
+            font=(self.fonts.label[0], 18, "bold"),
         )
-        cv.create_text(
+        _draw_plain_text(
+            cv,
             right_x,
             center_y + 13,
             text="week",
-            fill=COLOR_WEEK,
-            font=(self.fonts.caption[0], 9, "normal"),
-            anchor="center",
+            fill=TEXT_MUTED_GLASS,
+            font=(self.fonts.caption[0], 9, "bold"),
         )
 
-        cv.create_line(W // 2 - 40, H // 2, W // 2 + 40, H // 2, fill=BORDER)
-        cd0_item = cv.create_text(
+        cv.create_line(
+            W // 2 - 40,
+            H // 2,
+            W // 2 + 40,
+            H // 2,
+            fill=BORDER,
+            width=1,
+        )
+        cd0_items = _draw_plain_text(
+            cv,
             W // 2,
             H // 2 - 13,
             text=_fmt_compact_countdown(quota[0].get("resets_at"), quota[0].get("window_minutes")),
-            fill=COLOR_5H,
-            font=(self.fonts.caption[0], 11, "normal"),
-            anchor="center",
+            fill=COUNTDOWN_5H,
+            font=(self.fonts.caption[0], COUNTDOWN_FONT_SIZE, "bold"),
         )
-        cd1_item = cv.create_text(
+        cd1_items = _draw_plain_text(
+            cv,
             W // 2,
             H // 2 + 14,
             text=_fmt_compact_countdown(quota[1].get("resets_at"), quota[1].get("window_minutes")),
-            fill=COLOR_WEEK,
-            font=(self.fonts.caption[0], 11, "normal"),
-            anchor="center",
+            fill=COUNTDOWN_WEEK,
+            font=(self.fonts.caption[0], COUNTDOWN_FONT_SIZE, "bold"),
         )
-        self._cd_text_items = [(cv, cd0_item), (cv, cd1_item)]
+        self._cd_text_items = [(cv, cd0_items), (cv, cd1_items)]
 
     def _build_expanded(self) -> None:
         import tkinter as tk
@@ -829,7 +898,15 @@ class CodexMonitorWindow:
             self.state.y = y
             save_window_state(self.state, self.state_path)
         self.root.geometry(f"{width}x{height}+{x}+{y}")
-        self.root.after(0, lambda: _install_macos_blur(self.root, radius=WINDOW_RADIUS))
+        surface = "capsule" if self.state.collapsed else "expanded"
+        self.root.after(
+            0,
+            lambda: _install_macos_blur(
+                self.root,
+                radius=WINDOW_RADIUS,
+                surface=surface,
+            ),
+        )
 
     def _quota_expanded(self, parent: "tk.Widget", quota: list[dict[str, Any]]) -> None:
         import tkinter as tk
@@ -983,11 +1060,12 @@ class CodexMonitorWindow:
         pairs = [(0, quota[0]), (1, quota[1])]
         for i, q in pairs:
             if i < len(self._cd_text_items):
-                canvas, item_id = self._cd_text_items[i]
-                canvas.itemconfigure(
-                    item_id,
-                    text=_fmt_compact_countdown(q.get("resets_at"), q.get("window_minutes"))
-                )
+                canvas, item_ids = self._cd_text_items[i]
+                text = _fmt_compact_countdown(q.get("resets_at"), q.get("window_minutes"))
+                if isinstance(item_ids, int):
+                    item_ids = (item_ids,)
+                for item_id in item_ids:
+                    canvas.itemconfigure(item_id, text=text)
         self._countdown_after_id = self.root.after(60000, self._do_countdown)
 
     # ──────────────────────────────────────────────────────────────────
@@ -1084,6 +1162,7 @@ class CodexMonitorWindow:
         self._project_popover.deiconify()
         self._project_popover.lift()
         self._project_popover.attributes("-topmost", True)
+        _install_macos_blur(self._project_popover, radius=26, surface="popover")
         self._project_popover_visible = True
 
     def _create_project_popover(self) -> None:
@@ -1094,7 +1173,9 @@ class CodexMonitorWindow:
         popover.overrideredirect(True)
         popover.attributes("-topmost", True)
         popover.attributes("-alpha", PROJECT_POPOVER_ALPHA)
-        bg = BG_WINDOW
+        bg = TRANSPARENT_BG if _project_popover_uses_native_blur() else BG_WINDOW
+        if _project_popover_uses_native_blur():
+            _configure_transparent_chrome(popover)
         popover.configure(bg=bg)
         self._project_popover = popover
         self._popover_pointer_inside = False
@@ -1106,8 +1187,6 @@ class CodexMonitorWindow:
         popover.bind("<Enter>", self._popover_enter)
         popover.bind("<Leave>", self._popover_leave)
         popover.withdraw()
-        if _project_popover_uses_native_blur():
-            popover.after(0, lambda: _install_macos_blur(popover, radius=26))
 
     def _refresh_project_popover_body(self) -> None:
         import tkinter as tk
@@ -1117,14 +1196,14 @@ class CodexMonitorWindow:
             return
         for child in frame.winfo_children():
             child.destroy()
-        bg = BG_WINDOW
+        bg = TRANSPARENT_BG if _project_popover_uses_native_blur() else BG_WINDOW
         header = tk.Frame(frame, bg=bg)
         header.pack(fill="x", pady=(0, 10))
         tk.Label(
             header,
             text="项目 Top 10",
             bg=bg,
-            fg=TEXT_ON_GLASS,
+            fg=POPOVER_TEXT,
             font=(self.fonts.title[0], 14, "bold"),
             anchor="w",
         ).pack(side="left")
@@ -1132,7 +1211,7 @@ class CodexMonitorWindow:
             header,
             text=f"30天 {self.view_model['month']['total']} · 今日 {self.view_model['today']['total']}",
             bg=bg,
-            fg=TEXT_MUTED_GLASS,
+            fg=POPOVER_MUTED,
             font=(self.fonts.caption[0], 11, "normal"),
             anchor="e",
         ).pack(side="right")
@@ -1147,7 +1226,7 @@ class CodexMonitorWindow:
                 grid,
                 text=text,
                 bg=bg,
-                fg=TEXT_MUTED_GLASS,
+                fg=POPOVER_MUTED,
                 font=(self.fonts.caption[0], 11, "normal"),
                 anchor=anchor,
             ).grid(row=0, column=col, sticky="ew", padx=(0, 10 if col < 3 else 0), pady=(0, 6))
@@ -1158,7 +1237,7 @@ class CodexMonitorWindow:
                 grid,
                 text="暂无数据",
                 bg=bg,
-                fg=TEXT_MUTED_GLASS,
+                fg=POPOVER_MUTED,
                 font=self.fonts.label,
                 anchor="w",
             ).grid(row=1, column=0, columnspan=4, sticky="w", pady=8)
@@ -1167,7 +1246,7 @@ class CodexMonitorWindow:
                 grid,
                 text=project["name"],
                 bg=bg,
-                fg=TEXT_ON_GLASS,
+                fg=POPOVER_TEXT,
                 font=(self.fonts.label[0], 12, "normal"),
                 anchor="w",
             ).grid(row=row_i, column=0, sticky="ew", padx=(0, 10), pady=2)
@@ -1176,7 +1255,7 @@ class CodexMonitorWindow:
                     grid,
                     text=project[key],
                     bg=bg,
-                    fg=TEXT_ON_GLASS if key != "percent" else TEXT_MUTED_GLASS,
+                    fg=POPOVER_TEXT if key != "percent" else POPOVER_MUTED,
                     font=(self.fonts.caption[0], 12, "normal"),
                     anchor="e",
                 ).grid(row=row_i, column=col, sticky="e", padx=(0, 10 if col < 3 else 0), pady=2)
@@ -1185,7 +1264,7 @@ class CodexMonitorWindow:
             frame,
             text="结合 Claude Code 和 Codex 本地日志估算",
             bg=bg,
-            fg=TEXT_MUTED_GLASS,
+            fg=POPOVER_MUTED,
             font=(self.fonts.caption[0], 10, "normal"),
             anchor="e",
         ).pack(fill="x", pady=(10, 0))
@@ -1212,6 +1291,7 @@ class CodexMonitorWindow:
             return
         self._project_popover_visible = False
         self._popover_pointer_inside = False
+        _hide_macos_blur(popover)
         try:
             popover.withdraw()
         except Exception:
@@ -1320,7 +1400,8 @@ class CodexMonitorWindow:
         x = event.x_root - self._drag_offset[0]
         y = event.y_root - self._drag_offset[1]
         self.root.geometry(f"+{x}+{y}")
-        _install_macos_blur(self.root, radius=WINDOW_RADIUS)
+        surface = "capsule" if self.state.collapsed else "expanded"
+        _install_macos_blur(self.root, radius=WINDOW_RADIUS, surface=surface)
 
     def _end_drag(self, _event: Any) -> None:
         self.state.x = self.root.winfo_x()

@@ -141,6 +141,28 @@ class TestInferProjectSignalWeighting(unittest.TestCase):
         result = infer_project_from_handle(handle)
         self.assertIsNone(result)
 
+    def test_shared_workspace_dirs_do_not_count_as_projects(self) -> None:
+        lines = [
+            _codex_line("user_message", "/Users/me/claude/docs/codex-handoff/plan.md"),
+            _codex_line("message", "/Users/me/claude/scripts/helper.py"),
+            _codex_line("message", "/Users/me/claude/reviews/weekly/2026-W28.md"),
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+
+        self.assertIsNone(infer_project_from_handle(handle))
+
+    def test_default_scan_extends_for_late_project_signal(self) -> None:
+        lines = [
+            _codex_line("function_call_output", "no project signal")
+            for _ in range(473)
+        ]
+        lines.append(
+            _codex_line("user_message", "/Users/me/claude/order-review/src/order_review/app.py")
+        )
+        handle = io.StringIO("\n".join(lines) + "\n")
+
+        self.assertEqual(infer_project_from_handle(handle), "order-review")
+
 
 class TestInferProjectClaudeCodeFormat(unittest.TestCase):
     """Claude Code JSONL (no payload dict) should work correctly."""

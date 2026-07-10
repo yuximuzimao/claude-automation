@@ -7,12 +7,13 @@
 2. 读 `docs/INDEX.md` — 所有规则和安全边界的权威入口
 3. 若要修改代码、数据口径、UI 行为或运行边界，先运行基线验证：
    - `python3 -m unittest discover -s tests -v`
-   - `python3 -m compileall app tests`
+   - `python3 -m compileall app tests main.py`
 
 ## 规则文档（渐进式，按需加载）
 | 文档 | 加载时机 |
 |------|----------|
 | `docs/INDEX.md` | 每次 session 启动、修改数据口径或安全边界前 |
+| `docs/FUTURE.md` | 只有讨论原生 macOS UI、SwiftUI/AppKit 迁移或材质上限时 |
 | `tasks/todo.md` | 每次 session 启动、开始/结束阶段任务时 |
 | `tasks/lessons.md` | 记录新坑位或迁移稳定经验时 |
 
@@ -30,7 +31,7 @@
 |------|------|
 | `app/` | 纯 Python 应用代码，reader、模型、聚合和后续 UI 分层放置 |
 | `tests/` | 单元测试与脱敏 fixture，不放对话正文 |
-| `docs/` | 项目规则、数据口径、安全边界 |
+| `docs/` | 稳定规则、数据口径、安全边界、长期方向和阶段归档 |
 | `tasks/` | 当前待办与临时教训 |
 | `data/` | 结构化持久状态，例如窗口位置或后续增量索引；禁止放日志和临时文件 |
 

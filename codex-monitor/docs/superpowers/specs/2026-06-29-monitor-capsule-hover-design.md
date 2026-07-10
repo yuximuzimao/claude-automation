@@ -1,5 +1,7 @@
 # Codex Monitor Capsule Hover Redesign
 
+> **归档状态（2026-07-10）：** 这是已实现方案的历史设计稿，其中青色/琥珀色前景方向已被用户确认的白色/白灰色无描边方案取代。当前规则见 `docs/INDEX.md`，长期原生材质方向见 `docs/FUTURE.md`。
+
 ## Goal
 
 Make the monitor feel like a lightweight desktop status widget instead of a large floating window.

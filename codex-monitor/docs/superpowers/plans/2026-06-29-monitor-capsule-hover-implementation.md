@@ -1,5 +1,7 @@
 # Monitor Capsule Hover Implementation Plan
 
+> **归档状态（2026-07-10）：** 该计划的胶囊、弹层和磨砂实现已经落地，原始配色和未勾选步骤不再代表当前要求。当前视觉规则以 `docs/INDEX.md` 为准；原生 UI 迁移方向见 `docs/FUTURE.md`。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the large floating monitor window with a dock-height glass capsule and a click-triggered popover showing Project Top 10.

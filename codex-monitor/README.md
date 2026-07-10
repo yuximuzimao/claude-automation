@@ -15,6 +15,7 @@ The app reads local JSONL session logs, keeps token usage split by source and mo
 - Phase 6: macOS `.app` wrapper, LaunchAgent plist generation, watchdog/polling refresh
 - Phase 7: UI polish, single-instance handling, visible `.app` / hidden LaunchAgent handoff
 - Phase 8: Claude counting accuracy, project attribution hardening, persistent project-detail popover
+- Phase 9: white/white-gray glass foreground, long-session attribution fallback, consistent rolling 30-day startup/refresh window
 
 ## Run Tests
 
@@ -37,7 +38,7 @@ The Claude smoke check defaults to a 1-day mtime window and caps reads at 200 fi
 
 Usage numbers are local estimates from JSONL logs, not official billing data. Codex usage is summed from `last_token_usage`; Claude Code usage is summed from assistant `message.usage` after deduplicating repeated `message.id` entries.
 
-Project attribution prefers explicit `cwd`, then decoded Claude project paths, then early-session text signals. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
+Project attribution prefers explicit `cwd`, then decoded Claude project paths, then weighted session text signals. The fallback scans 200 lines first and extends to 1000 only when no unique result exists; shared workspace directories such as `docs`, `scripts`, and `reviews` do not count as projects. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
 
 ## UI
 
@@ -49,6 +50,8 @@ python3.13 main.py --ui
 Use `python3.13` for the UI because the current `python3` may not include `_tkinter`.
 
 `python3 main.py --demo` intentionally fails with a clear message when `_tkinter` is unavailable; non-UI smoke checks still work with `python3`.
+
+The current UI combines a Tkinter foreground with a separate AppKit `NSVisualEffectView` backing window. This provides real desktop blur but cannot fully reproduce native macOS vibrancy and text/material composition. A possible future migration keeps the Python data layer and replaces only the UI shell with `NSPanel + SwiftUI/AppKit`; it is intentionally not scheduled while the current UI remains acceptable. See `docs/FUTURE.md`.
 
 ## macOS App
 

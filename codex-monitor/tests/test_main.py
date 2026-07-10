@@ -120,6 +120,29 @@ class MainCliTests(unittest.TestCase):
 
         run_ui.assert_not_called()
 
+    def test_ui_initial_aggregate_uses_rolling_30_day_window(self) -> None:
+        parser = main.build_parser()
+        args = parser.parse_args(["--ui"])
+        codex = CodexScanResult(sessions=())
+        claude = ClaudeScanResult(sessions=())
+        aggregate = main._demo_aggregate()
+        rolling_start = main._month_start()
+
+        with (
+            patch("sys.argv", ["main.py", "--ui"]),
+            patch("main._read_local_data", return_value=(codex, claude)),
+            patch("main._month_start", return_value=rolling_start),
+            patch("main.aggregate_usage", return_value=aggregate) as aggregate_usage,
+            patch("main._run_ui", return_value=0),
+        ):
+            self.assertEqual(main.main(), 0)
+
+        aggregate_usage.assert_called_once_with(
+            codex,
+            claude,
+            month_start=rolling_start,
+        )
+
     def test_load_aggregate_uses_incremental_gate_for_watcher_refresh(self) -> None:
         parser = main.build_parser()
         args = parser.parse_args(

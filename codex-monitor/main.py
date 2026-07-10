@@ -154,7 +154,7 @@ def main() -> int:
     if args.ui:
         codex, claude = _read_local_data(args)
         return _run_ui(
-            aggregate_usage(codex, claude),
+            aggregate_usage(codex, claude, month_start=_month_start()),
             refresh_fn=lambda request: _load_aggregate(args, request=request),
             runtime_factory=_build_runtime_factory(args),
             visible_app=args.visible_app,

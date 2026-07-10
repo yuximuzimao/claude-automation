@@ -18,18 +18,33 @@ from app.ui_tk import (
     COLLAPSED_W,
     COLOR_5H,
     COLOR_WEEK,
+    COUNTDOWN_5H,
+    COUNTDOWN_WEEK,
     CodexMonitorWindow,
+    POPOVER_MUTED,
+    POPOVER_TEXT,
+    PROJECT_POPOVER_ALPHA,
+    TEXT_MONO,
+    TEXT_MUTED_GLASS,
     TEXT_ON_GLASS,
+    TEXT_PRIMARY,
+    TEXT_SECONDARY,
+    TRACK_COLOR,
     TRANSPARENT_BG,
+    WINDOW_ALPHA,
     WindowState,
     _collapsed_panel_layers,
     _capsule_hit_options,
     _clamped_window_position,
     _configure_transparent_chrome,
     _configure_visible_app_identity,
+    _draw_plain_text,
+    _draw_ring,
     _expanded_spacing,
     _expanded_toolbar_symbols,
     _fmt_compact_duration,
+    _hide_macos_blur,
+    _install_macos_blur,
     _macos_frame_from_tk_geometry,
     _macos_blur_config,
     _project_popover_uses_native_blur,
@@ -131,6 +146,9 @@ class TkUiTests(unittest.TestCase):
         self.assertEqual(COLLAPSED_W, 258)
         self.assertEqual(COLLAPSED_H, 82)
 
+    def test_visible_window_keeps_foreground_fully_opaque(self) -> None:
+        self.assertEqual(WINDOW_ALPHA, 1.0)
+
     def test_compact_duration_uses_chinese_units(self) -> None:
         self.assertEqual(_fmt_compact_duration(172), "2小时52分")
         self.assertEqual(_fmt_compact_duration(9600), "6天16小时")
@@ -139,19 +157,85 @@ class TkUiTests(unittest.TestCase):
 
     def test_project_popover_contract(self) -> None:
         self.assertEqual(_project_popover_limit(), 10)
-        self.assertFalse(_project_popover_uses_native_blur())
+        self.assertTrue(_project_popover_uses_native_blur())
 
-    def test_white_frost_palette_uses_dark_text_and_status_colors(self) -> None:
-        self.assertEqual(TEXT_ON_GLASS, "#172326")
-        self.assertEqual(COLOR_5H, "#5FD0C5")
-        self.assertEqual(COLOR_WEEK, "#F2B866")
+    def test_glass_palette_uses_plain_white_and_white_gray_text(self) -> None:
+        self.assertEqual(TEXT_PRIMARY, "#EEF3F3")
+        self.assertEqual(TEXT_SECONDARY, "#C1CDCF")
+        self.assertEqual(TEXT_MONO, "#E2E9EA")
+        self.assertEqual(TEXT_ON_GLASS, "#F2F5F5")
+        self.assertEqual(TEXT_MUTED_GLASS, "#C7D1D2")
+        self.assertEqual(POPOVER_TEXT, TEXT_ON_GLASS)
+        self.assertEqual(POPOVER_MUTED, TEXT_MUTED_GLASS)
+        self.assertEqual(COUNTDOWN_5H, TEXT_ON_GLASS)
+        self.assertEqual(COUNTDOWN_WEEK, TEXT_MUTED_GLASS)
+        self.assertEqual(TRACK_COLOR, "#819598")
+        self.assertEqual(COLOR_5H, "#DCE7E7")
+        self.assertEqual(COLOR_WEEK, "#C8D4D5")
+        self.assertEqual(PROJECT_POPOVER_ALPHA, 1.0)
+
+    def test_plain_text_draws_one_unoutlined_canvas_item(self) -> None:
+        class FakeCanvas:
+            def __init__(self) -> None:
+                self.calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+            def create_text(self, *args: object, **kwargs: object) -> int:
+                self.calls.append((args, kwargs))
+                return len(self.calls)
+
+        canvas = FakeCanvas()
+        item_id = _draw_plain_text(
+            canvas,
+            20,
+            30,
+            text="42",
+            fill=TEXT_ON_GLASS,
+            font=("Helvetica", 18, "bold"),
+        )
+
+        self.assertEqual(item_id, 1)
+        self.assertEqual(len(canvas.calls), 1)
+        self.assertEqual(canvas.calls[0][1]["fill"], TEXT_ON_GLASS)
+        self.assertEqual(canvas.calls[0][0], (20, 30))
+
+    def test_ring_uses_plain_arcs_without_endpoint_circles(self) -> None:
+        class FakeCanvas:
+            def __init__(self) -> None:
+                self.arcs: list[dict[str, object]] = []
+
+            def create_arc(self, *_args: object, **kwargs: object) -> int:
+                self.arcs.append(kwargs)
+                return len(self.arcs)
+
+            def create_oval(self, *_args: object, **kwargs: object) -> int:
+                raise AssertionError("ring endpoint circles must not be drawn")
+
+        canvas = FakeCanvas()
+        fake_tk = types.SimpleNamespace(ARC="arc")
+        with patch.dict(sys.modules, {"tkinter": fake_tk}):
+            _draw_ring(
+                canvas,
+                40,
+                40,
+                24,
+                8,
+                42.0,
+                COLOR_5H,
+            )
+
+        self.assertEqual(
+            [arc["outline"] for arc in canvas.arcs],
+            [TRACK_COLOR, COLOR_5H],
+        )
+        self.assertEqual([arc["width"] for arc in canvas.arcs], [8, 8])
 
     def test_capsule_hit_layer_uses_textured_fill_not_solid_black(self) -> None:
         options = _capsule_hit_options()
 
-        self.assertEqual(options["stipple"], "gray25")
+        self.assertEqual(options["stipple"], "")
+        self.assertEqual(options["outline"], "")
         self.assertNotEqual(options["fill"], "#0B1416")
-        self.assertEqual(options["fill"], "#F4F8FA")
+        self.assertEqual(options["fill"], "")
 
     def test_rounded_card_shell_overrides_tk_canvas_default_size(self) -> None:
         options = _rounded_card_shell_options(BG_WINDOW)
@@ -201,21 +285,65 @@ class TkUiTests(unittest.TestCase):
 
         self.assertEqual(layers, [])
 
-    def test_macos_blur_config_uses_native_rounded_backdrop(self) -> None:
-        config = _macos_blur_config()
+    def test_macos_blur_config_keeps_desktop_visible_through_glass(self) -> None:
+        capsule = _macos_blur_config("capsule")
+        popover = _macos_blur_config("popover")
 
-        self.assertEqual(config["material"], "popover")
-        self.assertEqual(config["material_value"], 6)
-        self.assertEqual(config["blending_mode"], "behindWindow")
-        self.assertEqual(config["state"], "active")
-        self.assertGreater(config["alpha"], 0.7)
-        self.assertEqual(config["corner_radius"], 41)
+        self.assertEqual(capsule["material"], "popover")
+        self.assertEqual(capsule["material_value"], 6)
+        self.assertEqual(capsule["blending_mode"], "behindWindow")
+        self.assertEqual(capsule["state"], "active")
+        self.assertEqual(capsule["state_value"], 1)
+        self.assertEqual(capsule["window_background"], "clear")
+        self.assertNotIn("appearance", capsule)
+        self.assertNotIn("tint_alpha", capsule)
+        self.assertEqual(capsule["corner_radius"], 41)
+        self.assertGreater(capsule["alpha"], 0.65)
+        self.assertLess(capsule["alpha"], 0.8)
+        self.assertGreater(popover["alpha"], capsule["alpha"])
 
     def test_macos_frame_converts_tk_top_left_to_cocoa_bottom_left(self) -> None:
         self.assertEqual(
             _macos_frame_from_tk_geometry(screen_height=1000, x=300, y=220, width=260, height=150),
             (300, 630, 260, 150),
         )
+
+    def test_hiding_native_blur_orders_backing_window_out_without_closing(self) -> None:
+        class FakeBlurWindow:
+            def __init__(self) -> None:
+                self.ordered_out = False
+                self.closed = False
+
+            def orderOut_(self, sender: object | None) -> None:
+                self.ordered_out = sender is None
+
+            def close(self) -> None:
+                self.closed = True
+
+        blur_window = FakeBlurWindow()
+        root = type("FakeRoot", (), {"_codex_blur_window": blur_window})()
+
+        _hide_macos_blur(root)
+
+        self.assertTrue(blur_window.ordered_out)
+        self.assertFalse(blur_window.closed)
+
+    def test_install_blur_keeps_withdrawn_tk_window_hidden(self) -> None:
+        class FakeBlurWindow:
+            def __init__(self) -> None:
+                self.ordered_out = False
+
+            def orderOut_(self, sender: object | None) -> None:
+                self.ordered_out = sender is None
+
+        blur_window = FakeBlurWindow()
+        root = type("FakeRoot", (), {
+            "_codex_blur_window": blur_window,
+            "state": lambda _self: "withdrawn",
+        })()
+
+        self.assertFalse(_install_macos_blur(root))
+        self.assertTrue(blur_window.ordered_out)
 
     def test_expanded_toolbar_symbols_use_refresh_collapse_and_close(self) -> None:
         self.assertEqual(_expanded_toolbar_symbols(), ("↺", "↘↖", "×"))
@@ -509,7 +637,8 @@ class TkUiTests(unittest.TestCase):
         window.state_path = Path("/tmp/nonexistent-codex-monitor-state.json")
         window.chrome_bg = BG_WINDOW
         window.fonts = type("Fonts", (), {
-            "num_large": ("Helvetica", 17, "bold"),
+            "label": ("Helvetica", 13, "normal"),
+            "num_large": ("Menlo", 17, "bold"),
             "caption": ("Helvetica", 11, "normal"),
         })()
         window.view_model = {
@@ -528,6 +657,24 @@ class TkUiTests(unittest.TestCase):
         self.assertEqual(canvas.window_items, [])
         self.assertEqual(len(window._cd_text_items), 2)
         self.assertTrue({"5小时", "7天"}.issubset({item["text"] for item in canvas.text_items}))
+        countdown_items = {
+            item["text"]: item
+            for item in canvas.text_items
+            if item.get("text") in {"5小时", "7天"}
+        }
+        center_items = {
+            item["text"]: item
+            for item in canvas.text_items
+            if item.get("text") in {"42", "11"}
+        }
+        self.assertEqual(center_items["42"]["fill"], TEXT_ON_GLASS)
+        self.assertEqual(center_items["11"]["fill"], TEXT_ON_GLASS)
+        self.assertEqual(center_items["42"]["font"], ("Helvetica", 18, "bold"))
+        self.assertEqual(center_items["11"]["font"], ("Helvetica", 18, "bold"))
+        self.assertEqual(countdown_items["5小时"]["fill"], COUNTDOWN_5H)
+        self.assertEqual(countdown_items["7天"]["fill"], COUNTDOWN_WEEK)
+        self.assertEqual(countdown_items["5小时"]["font"], ("Helvetica", 12, "bold"))
+        self.assertEqual(countdown_items["7天"]["font"], ("Helvetica", 12, "bold"))
 
     def test_countdown_updates_canvas_text_items(self) -> None:
         class FakeCanvas:
@@ -547,7 +694,7 @@ class TkUiTests(unittest.TestCase):
             ]
         }
         window._countdown_after_id = None
-        window._cd_text_items = [(canvas, 10), (canvas, 11)]
+        window._cd_text_items = [(canvas, (10, 11)), (canvas, (12, 13))]
 
         window._do_countdown()
 
@@ -555,7 +702,9 @@ class TkUiTests(unittest.TestCase):
             canvas.updates,
             [
                 (10, {"text": "2小时52分"}),
-                (11, {"text": "6天16小时"}),
+                (11, {"text": "2小时52分"}),
+                (12, {"text": "6天16小时"}),
+                (13, {"text": "6天16小时"}),
             ],
         )
 
@@ -646,8 +795,10 @@ class TkUiTests(unittest.TestCase):
         window._cancel_project_popover_timer = lambda: calls.append("cancel")
         window._refresh_project_popover_body = lambda: calls.append("refresh")
 
-        window._capsule_click()
+        with patch("app.ui_tk._install_macos_blur", return_value=True) as install_blur:
+            window._capsule_click()
 
+        install_blur.assert_called_once_with(popover, radius=26, surface="popover")
         self.assertTrue(window._capsule_pointer_inside)
         self.assertFalse(window._popover_pointer_inside)
         self.assertTrue(window._project_popover_visible)
@@ -675,8 +826,10 @@ class TkUiTests(unittest.TestCase):
         window._popover_pointer_inside = True
         window._cancel_project_popover_timer = lambda: None
 
-        window._hide_project_popover()
+        with patch("app.ui_tk._hide_macos_blur") as hide_blur:
+            window._hide_project_popover()
 
+        hide_blur.assert_called_once_with(popover)
         self.assertFalse(window._project_popover_visible)
         self.assertFalse(window._popover_pointer_inside)
         self.assertIs(window._project_popover, popover)

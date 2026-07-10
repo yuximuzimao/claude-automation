@@ -15,7 +15,8 @@ Read these first:
 
 1. `tasks/todo.md`
 2. `docs/INDEX.md`
-3. Relevant handoff files in `../docs/codex-handoff/` when changing approved scope
+3. `docs/FUTURE.md` only when discussing native macOS UI or material migration
+4. Relevant handoff files in `../docs/codex-handoff/` when changing approved scope
 
 ## Hard Rules
 
@@ -33,7 +34,7 @@ Run before reporting completion:
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 -m compileall app tests
+python3 -m compileall app tests main.py
 python3 main.py --smoke-aggregate
 ```
 

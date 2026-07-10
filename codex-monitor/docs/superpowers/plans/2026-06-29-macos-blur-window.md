@@ -1,5 +1,7 @@
 # macOS Blur Window Implementation Plan
 
+> **归档状态（2026-07-10）：** 该计划已被后续实现吸收，不再作为待执行清单。当前稳定规则以 `docs/INDEX.md` 为准；原生 macOS 材质迁移只作为 `docs/FUTURE.md` 中的长期方向。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace Codex Monitor's rectangular translucent background with a macOS native rounded blur window and simplify expanded controls.

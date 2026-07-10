@@ -66,15 +66,16 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - 刷新中再次触发自动刷新时只合并为下一次请求，不并发堆叠多个 reader/aggregate worker。
 - 折叠态倒计时文本必须使用 Canvas text item，并由 `itemconfigure(text=...)` 更新；不要在胶囊 Canvas 中嵌入 `tk.Label`，否则点击/hover 后 macOS/Tk 可能短暂绘制灰色 Label 背景。
 - UI 入口必须持有 `SingleInstance` 文件锁。后台 LaunchAgent 获取锁失败应立即退出；可见 App 可短暂等待锁释放，避免刚切换后台实例时静默打不开。
+- 当前材质实现是 Tkinter 前景 + 独立 AppKit `NSVisualEffectView` backing window，两条渲染链路无法完全复现原生 vibrancy、字体合成和动态材质。现阶段保持当前稳定实现；只有触发长期迁移条件时才按 `docs/FUTURE.md` 评估 `NSPanel + SwiftUI/AppKit` 原生前端，不把该方向当作当前待办。
 
 ## 6. 聚合层口径
 
 - 聚合层只消费 reader 输出的结构化 usage event，不读取原始 JSONL。
-- 今日/近 30 天归属按事件 `timestamp` 转为 `Asia/Shanghai` 后判断。
+- 今日/近 30 天归属按事件 `timestamp` 转为 `Asia/Shanghai` 后判断。`--ui` 首次启动、手动刷新、watcher 刷新和 `--smoke-aggregate` 必须全部显式传入同一个滚动 30 天起点；不得让首次启动省略 `month_start` 而退回自然月口径。
 - Codex token 使用 `TokenUsage.total_tokens`。
 - Claude token 使用 `ClaudeUsage.total_estimated_tokens`，即 `input + output + cache_creation + cache_read`。
 - Top 10 项目按近 30 天 token 排序；0 token 项目不展示。
-- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容前 200 行的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层按事件类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
+- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层默认先扫描 200 行；若没有唯一可靠结果，自适应继续到 1000 行，以覆盖在长规划会话中后段才创建/进入项目的情况。`docs`、`scripts`、`reviews` 等工作区共享目录不参与项目投票。事件按类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
 - 未识别项目统一合并为 `其他`，token 求和后参与 Top 10 排序。
 - Top 项目保留最多 3 个 `sample_cwds`，供 UI tooltip/详情展示完整路径。
 - 项目中文名的维护边界在项目自身说明文件，不在监控软件内维护中心映射表。
@@ -93,6 +94,9 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - `.app` 与 LaunchAgent 共享单实例锁。调试“双击没打开”时先查 `~/Library/Application Support/Codex Monitor/codex-monitor.lock` 中的 PID，再用 `ps -p <pid>` 判断是否仍有旧 UI 进程占锁。
 - tkinter `create_arc` 的 `extent` 取到 ±360 时整段弧渲染为空白。配额圆环 100% 时 `extent = -100 × 3.6 = -360`，会让满载圆环显示为空（看起来"归零"）。灰色轨道一直用 `-359.99` 规避，但进度弧早期漏了。修复：`app/ui_tk.py::_ring_extent()` 统一把进度弧 clamp 到 `-359.99`，并抽成纯函数以便脱离 tkinter 单测。回归测试 `tests/test_ui_tk.py::test_ring_extent_*`。新增任何 `create_arc` 都不得让 extent 触到 ±360。
 - 测试经验：若用户明确要求 Tk 浮层“移开即隐藏、立刻可再次展开”，反复 create/destroy `Toplevel` 可能触发 macOS/Tk 窗口层事件延迟，表现为快速再点击无响应。同类体验问题可优先验证 `withdraw()` / `deiconify()` 复用窗口；普通模态弹窗或一次性设置窗口不套用此经验。
+- 磨砂 UI 不要用反复调 `WINDOW_ALPHA` / Canvas `stipple` 当主方案：前者会把文字和圆环一起变淡，后者不是真 alpha。原生 blur backing window 必须保持 `NSColor.clearColor()`，禁止叠半透明白色背景或强制 `Aqua + inactive`，否则壁纸采样会变成均匀灰板。当前基线使用 `NSVisualEffectMaterialPopover + behindWindow + active`，主胶囊、展开态、项目弹层只通过 blur window alpha 区分，Tk 前景保持 `alpha=1.0`。
+- 当前 Tk 前端的视觉基线以用户提供的 macOS 桌面组件截图为准：收起态、展开态和项目弹层统一使用无描边的白色/白灰色文字；不要添加 halo、阴影字或深色字边。配额圆环只绘制一层灰色轨道和一层白灰色进度弧，不额外绘制起点/终点圆形端帽。磨砂材质与前景样式分开调试，字体修正时不要顺带改动 blur 参数。
+- 原生 `NSVisualEffectView` 使用独立 backing `NSWindow` 时，必须和 Tk `Toplevel` 生命周期绑定：撤回状态不得安装；`deiconify()` 后再安装/恢复；临时隐藏调用 `orderOut_()` 且保留实例；彻底销毁时才 `close()` 并清空引用。禁止在 `withdraw()` 后排队异步 `orderFront`，否则会出现无内容的磨砂残影。
 - `watchdog` 不是标准库；未安装时会走 polling fallback。polling 只能做轻量 mtime 检测，不能直接触发主线程聚合或高频后台聚合。
 - 测试 fixture 必须脱敏，只保留结构和 token 数字。
 - 开机自启只生成 plist，不自动 bootstrap；写错 plist 后由用户手动启用/回滚，避免挂起登录态。
