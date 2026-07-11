@@ -10,9 +10,9 @@ const clothing = fs.existsSync(clothingPath)
   : null;
 const sets = clothing?.sets || [];
 const pieces = clothing?.pieces || [];
-const setSample = sets.find(i => i.id === 'clothing_set_1');
-const setPieceSample = pieces.find(i => i.id === 'clothing_1');
-const singleSample = pieces.find(i => i.id === 'clothing_6');
+const setSample = sets.find(i => i.name === '熔岩布丁印象');
+const setPieceSample = pieces.find(i => i.pieceName === '连衣-熔岩布丁印象');
+const singleSample = pieces.find(i => i.pieceName === '初始法杖');
 
 const checks = [
   ['server defines clothing data file', server.includes('CLOTHING_FILE')],
@@ -34,17 +34,11 @@ const checks = [
   ['clothing UI shows set-level paired pet in card', html.includes('pairedPetName') && html.includes('配对精灵')],
   ['set card pieces do not duplicate shared set fields', html.includes("toggleClothingPiece('${item.id}')") && html.includes('pieceName')],
   ['clothing data file exists as sets and pieces object', Array.isArray(sets) && Array.isArray(pieces)],
-  ['set sample stores shared effect and method once', !!setSample && setSample.name === '木之本樱魔法装扮' && setSample.hasEffect === true && setSample.pairedPetName === '小可' && setSample.obtainMethod],
-  ['set piece sample references set without duplicated shared fields', !!setPieceSample && setPieceSample.collectionType === 'set' && setPieceSample.setId === 'clothing_set_1' && setPieceSample.pieceName === '发型' && !hasSharedSetFields(setPieceSample)],
-  ['single sample is a standalone collectible piece with own method', !!singleSample && singleSample.collectionType === 'single' && !singleSample.setId && singleSample.obtainMethod],
+  ['real set sample stores gorgeous magic contract', !!setSample && setSample.requiredPieceCount === 6 && setSample.gorgeousMagicPetName === '熔岩布丁' && !!setSample.obtainMethod],
+  ['real set piece sample follows set detail contract', !!setPieceSample && setPieceSample.collectionType === 'set' && setPieceSample.setId === setSample?.id && setPieceSample.category === '玩偶服/连衣' && setPieceSample.setRole === 'magic_required' && setPieceSample.obtainType === 'standard'],
+  ['real single sample follows standalone detail contract', !!singleSample && singleSample.collectionType === 'single' && !Object.prototype.hasOwnProperty.call(singleSample, 'setId') && !Object.prototype.hasOwnProperty.call(singleSample, 'setRole') && singleSample.category === '法杖' && singleSample.obtainType === 'standard' && !!singleSample.obtainMethod],
   ['collections has clothing_progress object', collections.clothing_progress && typeof collections.clothing_progress === 'object' && !Array.isArray(collections.clothing_progress)],
 ];
-
-function hasSharedSetFields(item) {
-  return Object.prototype.hasOwnProperty.call(item, 'obtainMethod')
-    || Object.prototype.hasOwnProperty.call(item, 'pairedPetName')
-    || Object.prototype.hasOwnProperty.call(item, 'hasEffect');
-}
 
 const failures = checks.filter(([, ok]) => !ok).map(([name]) => name);
 if (failures.length) {
