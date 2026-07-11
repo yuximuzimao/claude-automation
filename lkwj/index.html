@@ -2176,9 +2176,10 @@ function isClothingTargetPiece(item) {
 }
 
 function getGorgeousMagicProgress(set, pieces) {
-  if (!set?.gorgeousMagicPetName || set.requiredPieceCount < 1) return null;
+  const requiredTotal = Number(set?.requiredPieceCount || 0);
+  if (!set?.gorgeousMagicPetName || !Number.isFinite(requiredTotal) || requiredTotal < 1) return null;
   const acquired = pieces.filter(item => item.setRole === 'magic_required' && item.acquired).length;
-  const total = set.requiredPieceCount;
+  const total = requiredTotal;
   return {
     acquired,
     total,
@@ -2326,8 +2327,10 @@ function renderClothingSetCard(setKey, set, visiblePieces) {
 
   card += '<div class="sprite-card-body">';
   // Set meta
-  const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
-  card += `<div class="task-methods">${effectText}</div>`;
+  if (typeof hasEffect === 'boolean') {
+    const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
+    card += `<div class="task-methods">${effectText}</div>`;
+  }
   if (set?.obtainMethod) card += `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>`;
   if (requiredPieceCount > 0) {
     card += `<div class="task-methods">华丽魔法必需部件：已记录 ${recordedRequiredNames}/${requiredPieceCount}${recordedRequiredNames < requiredPieceCount ? ' · 资料待补' : ''}</div>`;
@@ -2361,12 +2364,14 @@ function renderClothingSingleRow(item) {
   const pieceName = item.pieceName || item.name || '未命名服装';
   const pairedPetName = item.pairedPetName || '';
   const hasEffect = item.hasEffect;
-  const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
+  const effectText = typeof hasEffect === 'boolean'
+    ? (hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无')
+    : '';
   return `<div class="item-row${item.acquired ? ' done' : ''}">
     ${item.obtainType === 'paid' ? '<span class="item-category-tag">付费 · 非收集目标</span>' : `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`}
     <div class="item-info">
       <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${esc(item.category || '单件')}</span></div>
-      <div class="task-methods">${effectText}</div>
+      ${effectText ? `<div class="task-methods">${effectText}</div>` : ''}
       ${item.obtainMethod ? `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>` : ''}
     </div>
   </div>`;
