@@ -241,7 +241,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
   },
   "shiny_progress": { "pet_5": true, "pet_18": false },
   "furniture_progress": { "furniture_1": true },
-  "clothing_progress": { "clothing_1": true },
+  "clothing_progress": { "clothing_23": true },
   "title_progress": { "title_1": true },
   "dungeon_progress": { "dungeon_1": true }
 }
@@ -250,7 +250,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - `sprite_progress` — 按 pet ID 索引，`tasks` 为任务完成状态，`forms_collected` 为已收集形态，`fruit_acquired` 为果实已获得状态（boolean）
 - `shiny_progress` — 按 pet ID 索引的异色收集状态（0/1）
 - `furniture_progress` — 按 furniture ID 索引的家具收集状态（boolean）
-- `clothing_progress` — 按 clothing ID 索引的单件服装收集状态（boolean）
+- `clothing_progress` — 按 clothing ID 索引的单件服装收集状态（boolean）；只能引用 `data/clothing.json` 中当前存在且 `obtainType="standard"` 的部件 ID，`paid` 部件 ID 不得出现
 - `title_progress` — 按 title ID 索引的称号收集状态（boolean）
 - `dungeon_progress` — 按 dungeon ID 索引的遗迹副本完成状态（boolean）
 - `items[]` — 星星、支线任务、扭蛋机、音乐的通用品类收集项，家具/服装/称号/遗迹不走此字段
