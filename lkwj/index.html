@@ -307,7 +307,7 @@ const SHINY_PAGE = 40;
 let furnitureSearch = '', furnitureStatusFilter = 'all';
 let titleSearch = '', titleStatusFilter = 'all';
 let dungeonSearch = '', dungeonStatusFilter = 'all', expandedDungeon = null;
-let clothingSearch = '', clothingStatusFilter = 'all', clothingTypeFilter = 'all', expandedClothingSet = null;
+let clothingSearch = '', clothingStatusFilter = 'all', clothingTypeFilter = 'all', clothingCategoryFilter = 'all', expandedClothingSet = null;
 
 // 品类 Tab 状态（item-based 品类共用）
 let catFilter = {}, catSearch = {};
@@ -584,8 +584,9 @@ function renderDashboard() {
   const furnitureTotal = furnitureItems.length;
   const furnitureOwned = furnitureItems.filter(i => i.acquired).length;
   const clothing = getClothingList();
-  const clothingTotal = clothing.length;
-  const clothingOwned = clothing.filter(i => i.acquired).length;
+  const targetClothing = clothing.filter(isClothingTargetPiece);
+  const clothingTotal = targetClothing.length;
+  const clothingOwned = targetClothing.filter(i => i.acquired).length;
   const titles = getTitleList();
   const titleTotal = titles.length;
   const titleOwned = titles.filter(i => i.acquired).length;
@@ -2170,6 +2171,22 @@ async function toggleDungeon(id) {
 }
 
 // ═══════════ 服装 Tab ═══════════
+function isClothingTargetPiece(item) {
+  return !!item && item.obtainType !== 'paid';
+}
+
+function getGorgeousMagicProgress(set, pieces) {
+  if (!set?.gorgeousMagicPetName || set.requiredPieceCount < 1) return null;
+  const acquired = pieces.filter(item => item.setRole === 'magic_required' && item.acquired).length;
+  const total = set.requiredPieceCount;
+  return {
+    acquired,
+    total,
+    unlocked: acquired >= total,
+    petName: set.gorgeousMagicPetName,
+  };
+}
+
 function getClothingList() {
   const progress = data?.clothing_progress || {};
   const clothing = gameData?.clothing || {};
@@ -2187,15 +2204,25 @@ function getClothingList() {
 function renderClothingTab() {
   const el = document.getElementById('tab-clothing');
   const clothing = getClothingList();
-  const acquired = clothing.filter(i => i.acquired);
-  const setPieces = clothing.filter(i => i.collectionType === 'set');
-  const singlePieces = clothing.filter(i => i.collectionType === 'single');
-  const setMap = new Map((gameData?.clothing?.sets || []).map(s => [s.id, s]));
+  const targetClothing = clothing.filter(isClothingTargetPiece);
+  const acquired = targetClothing.filter(i => i.acquired);
+  const setPieces = targetClothing.filter(i => i.collectionType === 'set');
+  const singlePieces = targetClothing.filter(i => i.collectionType === 'single');
+  const paidPieces = clothing.filter(i => i.obtainType === 'paid');
+  const categories = [...new Set(clothing.map(i => i.category).filter(Boolean))];
+  const definitions = gameData?.clothing?.definitions || {};
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
-  html += `<div class="sprite-stats"><span>共 <strong>${clothing.length}</strong> 件 · 已收集 <strong>${acquired.length}</strong></span>`;
+  html += `<div class="sprite-stats"><span>目标共 <strong>${targetClothing.length}</strong> 件 · 已收集 <strong>${acquired.length}</strong></span>`;
   html += `<span>套装部件 <strong>${setPieces.filter(i => i.acquired).length}</strong> / ${setPieces.length}</span>`;
-  html += `<span>独立单件 <strong>${singlePieces.filter(i => i.acquired).length}</strong> / ${singlePieces.length}</span></div>`;
+  html += `<span>独立单件 <strong>${singlePieces.filter(i => i.acquired).length}</strong> / ${singlePieces.length}</span>`;
+  html += `<span>付费资料 <strong>${paidPieces.length}</strong> 件</span></div>`;
+
+  html += '<details style="margin:10px 0 12px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa">';
+  html += '<summary style="cursor:pointer;font-weight:600">华丽徽章说明</summary>';
+  if (definitions.gorgeousBadge) html += `<div class="task-methods" style="margin-top:8px"><strong>${esc(definitions.gorgeousBadge.name || '华丽徽章')}</strong>：${esc(definitions.gorgeousBadge.description || '')}</div>`;
+  if (definitions.gorgeousMagic) html += `<div class="task-methods" style="margin-top:6px"><strong>${esc(definitions.gorgeousMagic.name || '华丽魔法')}</strong>：${esc(definitions.gorgeousMagic.description || '')}</div>`;
+  html += '</details>';
 
   if (!clothing.length) {
     html += '<div class="empty-state">暂无服装数据<small>把套装共享信息和单件收集项补到 data/clothing.json 后会在这里显示</small></div>';
@@ -2219,6 +2246,14 @@ function renderClothingTab() {
   html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="clothingStatusFilter='done';expandedClothingSet=null;renderClothingTab()">${STATUS.DONE}</span>`;
   html += '</div>';
 
+  // 部件分类筛选（由真实数据动态生成）
+  html += '<div class="chips" style="margin-bottom:8px">';
+  html += `<span class="chip${clothingCategoryFilter === 'all' ? ' active' : ''}" onclick="clothingCategoryFilter='all';expandedClothingSet=null;renderClothingContent()">全部分类</span>`;
+  categories.forEach(category => {
+    html += `<span class="chip${clothingCategoryFilter === category ? ' active' : ''}" onclick="clothingCategoryFilter='${escAttr(category)}';expandedClothingSet=null;renderClothingContent()">${esc(category)}</span>`;
+  });
+  html += '</div>';
+
   html += '<div id="clothing-content"></div>';
   el.innerHTML = html;
   renderClothingContent();
@@ -2236,15 +2271,18 @@ function renderClothingContent() {
     list = list.filter(i => {
       const pieceName = (i.pieceName || i.name || '').toLowerCase();
       const setName = (i.set?.name || '').toLowerCase();
-      const method = (i.collectionType === 'single' ? (i.obtainMethod || '') : (i.set?.obtainMethod || '')).toLowerCase();
+      const method = `${i.obtainMethod || ''} ${i.set?.obtainMethod || ''}`.toLowerCase();
       const pairedPet = (i.collectionType === 'single' ? (i.pairedPetName || '') : (i.set?.pairedPetName || '')).toLowerCase();
-      return pieceName.includes(q) || setName.includes(q) || method.includes(q) || pairedPet.includes(q);
+      const category = (i.category || '').toLowerCase();
+      const gorgeousMagicPet = (i.set?.gorgeousMagicPetName || '').toLowerCase();
+      return pieceName.includes(q) || setName.includes(q) || method.includes(q) || pairedPet.includes(q) || category.includes(q) || gorgeousMagicPet.includes(q);
     });
   }
   if (clothingTypeFilter === 'set') list = list.filter(i => i.collectionType === 'set');
   else if (clothingTypeFilter === 'single') list = list.filter(i => i.collectionType === 'single');
-  if (clothingStatusFilter === 'pending') list = list.filter(i => !i.acquired);
-  else if (clothingStatusFilter === 'done') list = list.filter(i => i.acquired);
+  if (clothingCategoryFilter !== 'all') list = list.filter(item => item.category === clothingCategoryFilter);
+  if (clothingStatusFilter === 'pending') list = list.filter(i => isClothingTargetPiece(i) && !i.acquired);
+  else if (clothingStatusFilter === 'done') list = list.filter(i => isClothingTargetPiece(i) && i.acquired);
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的服装</div>'; return; }
 
@@ -2266,18 +2304,23 @@ function renderClothingContent() {
   el.innerHTML = html;
 }
 
-function renderClothingSetCard(setKey, set, pieces) {
+function renderClothingSetCard(setKey, set, visiblePieces) {
   const setName = set?.name || '未命名套装';
-  const doneCount = pieces.filter(i => i.acquired).length;
-  const isExpanded = expandedClothingSet === setKey || !!(clothingSearch || clothingTypeFilter !== 'all' || clothingStatusFilter !== 'all');
+  const pieces = getClothingList().filter(i => i.collectionType === 'set' && (i.set?.id || i.setId) === setKey);
+  const targetPieces = pieces.filter(isClothingTargetPiece);
+  const doneCount = targetPieces.filter(i => i.acquired).length;
+  const isExpanded = expandedClothingSet === setKey || !!(clothingSearch || clothingTypeFilter !== 'all' || clothingStatusFilter !== 'all' || clothingCategoryFilter !== 'all');
   const pairedPetName = set?.pairedPetName || '';
   const hasEffect = set?.hasEffect;
+  const requiredPieceCount = set?.requiredPieceCount || 0;
+  const recordedRequiredNames = new Set(pieces.filter(i => i.setRole === 'magic_required').map(i => i.pieceName || i.name).filter(Boolean)).size;
+  const magicProgress = getGorgeousMagicProgress(set, pieces);
 
   let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="toggleClothingSetCard('${setKey}')">`;
   card += `<span class="sn">${esc(setName)}</span>`;
   if (pairedPetName) card += `<span class="se">配对：${esc(pairedPetName)}</span>`;
-  card += `<span class="sm">${doneCount}/${pieces.length}</span>`;
+  card += `<span class="sm">${doneCount}/${targetPieces.length}</span>`;
   card += '<span class="sa">▶</span>';
   card += '</div>';
 
@@ -2286,13 +2329,26 @@ function renderClothingSetCard(setKey, set, pieces) {
   const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
   card += `<div class="task-methods">${effectText}</div>`;
   if (set?.obtainMethod) card += `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>`;
+  if (requiredPieceCount > 0) {
+    card += `<div class="task-methods">华丽魔法必需部件：已记录 ${recordedRequiredNames}/${requiredPieceCount}${recordedRequiredNames < requiredPieceCount ? ' · 资料待补' : ''}</div>`;
+  }
+  if (magicProgress) {
+    const magicStatus = magicProgress.unlocked ? '已解锁' : `${magicProgress.acquired}/${magicProgress.total}`;
+    card += `<div class="task-methods">华丽魔法：${magicStatus} · ${esc(magicProgress.petName)}</div>`;
+  }
   // Pieces
   card += '<div class="item-list" style="margin-top:8px">';
-  pieces.forEach(item => {
+  visiblePieces.forEach(item => {
     const pieceName = item.pieceName || item.name || '未命名部件';
     card += `<div class="item-row${item.acquired ? ' done' : ''}">`;
-    card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
-    card += `<div class="item-info"><div class="item-name">${esc(pieceName)}</div></div>`;
+    if (item.obtainType === 'paid') {
+      card += '<span class="item-category-tag">付费 · 非收集目标</span>';
+    } else {
+      card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
+    }
+    card += `<div class="item-info"><div class="item-name">${esc(pieceName)}${item.category ? ` <span class="item-category-tag">${esc(item.category)}</span>` : ''}</div>`;
+    if (item.obtainMethod) card += `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>`;
+    card += '</div>';
     card += '</div>';
   });
   card += '</div>';
@@ -2307,9 +2363,9 @@ function renderClothingSingleRow(item) {
   const hasEffect = item.hasEffect;
   const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
   return `<div class="item-row${item.acquired ? ' done' : ''}">
-    <button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>
+    ${item.obtainType === 'paid' ? '<span class="item-category-tag">付费 · 非收集目标</span>' : `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`}
     <div class="item-info">
-      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">单件</span></div>
+      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${esc(item.category || '单件')}</span></div>
       <div class="task-methods">${effectText}</div>
       ${item.obtainMethod ? `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>` : ''}
     </div>
@@ -2322,11 +2378,12 @@ function toggleClothingSetCard(setKey) {
 }
 
 async function toggleClothingPiece(id) {
+  const item = (gameData?.clothing?.pieces || []).find(i => i.id === id);
+  if (!item || !isClothingTargetPiece(item)) return;
   if (!data.clothing_progress) data.clothing_progress = {};
   data.clothing_progress[id] = !data.clothing_progress[id];
   if (data.clothing_progress[id]) {
-    const item = (gameData?.clothing?.pieces || []).find(i => i.id === id);
-    if (item) addDoneToday({ key: `clothing_${id}`, name: item.pieceName || item.name || id, desc: item.collectionType === 'set' ? '套装部件' : '单件服装' });
+    addDoneToday({ key: `clothing_${id}`, name: item.pieceName || item.name || id, desc: item.collectionType === 'set' ? '套装部件' : '单件服装' });
   }
   await saveData();
   gameData.clothing_progress = data.clothing_progress;
