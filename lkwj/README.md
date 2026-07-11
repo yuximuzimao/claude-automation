@@ -50,7 +50,9 @@ http://localhost:8899/review.html
 - `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
 - 家具 Tab 顶部只展示总件数、已收集件数和未收集家具的剩余灵感值；舒适度和单件灵感值只在列表行展示。
-- `clothing.json` 分为 `sets[]` 和 `pieces[]`：套装获取方式、特效、配对精灵只写在 `sets[]`；`pieces[]` 只保存最小勾选单元和 `setId`。`collections.clothing_progress` 只保存单件是否收集。
+- `clothing.json` 分为 `definitions`、`sets[]` 和 `pieces[]`：规则说明写在 `definitions`，套装必需部件数、华丽魔法对应精灵和套装获取方式写在 `sets[]`，最小收集单元及其分类、套装角色、获取类型和获取方式写在 `pieces[]`。
+- 服装个人目标只包含 `obtainType="standard"` 的部件；`obtainType="paid"` 的付费件可以浏览，但不进入目标数量、完成进度或 `collections.clothing_progress`。
+- 华丽魔法进度根据 `setRole="magic_required"` 的已拥有必需部件与 `requiredPieceCount` 自动计算，不单独保存；缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义、资源数量、钥匙类特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存是否完成。
 - `shops.json` 已保存商店入口和货币类型；商品明细尚未建入 JSON，待 `data/_待采集/商店与货币.csv` 补齐。
@@ -69,7 +71,11 @@ http://localhost:8899/review.html
 | 家具已收集 | 125 |
 | 家具未收集 | 58 |
 | 家具剩余灵感值 | 1506950 |
-| 服装单件 | 6 |
+| 服装套装 | 77 |
+| 服装部件 | 378 |
+| 服装个人目标 / 已拥有 | 242 / 242 |
+| 服装付费非目标 | 136 |
+| 必需部件名称待补套装 | 53 |
 | 称号 | 1 |
 | 遗迹副本 | 26 |
 | 遗迹孵化属性 | 26 |
@@ -86,8 +92,9 @@ http://localhost:8899/review.html
 | 状态 | 标签 / 数据 | 说明 |
 |------|-------------|------|
 | 已整理可用 | 精灵、课题任务、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 | 已有真实数据和对应前端展示；可继续日常勾选 |
+| 首批真实数据可用、明细继续补充 | 服装 | 已导入 77 套、378 个部件；242 个个人目标均已拥有，136 个付费件仅展示。53 套尚缺完整必需部件名称，但现有套装和部件可正常使用 |
 | 结构可用但明细待补 | 商店/货币 | 36 个商店和 6 种货币已入库，商品明细未采集 |
-| 只有示例/占位 | 服装、称号 | 前端和 JSON 结构已搭好，但 `clothing.json` / `titles.json` 仍主要是示例数据 |
+| 只有示例/占位 | 称号 | 前端和 JSON 结构已搭好，但 `titles.json` 仍主要是示例数据 |
 | 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 | Tab 使用 `collections.items`，当前 0 条 |
 | 未建独立结构 | 通用外观、玩具 | 只有旧 `collections.categories` 总量占位；服装不等于完整外观图鉴 |
 
@@ -100,6 +107,7 @@ node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-random-task-ui.js
 node scripts/validate-furniture-ui.js
+node scripts/validate-clothing-data.js
 node scripts/validate-clothing-ui.js
 node scripts/validate-title-ui.js
 node scripts/validate-dungeon-ui.js

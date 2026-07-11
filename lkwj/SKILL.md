@@ -13,11 +13,12 @@
 | 后续待办 | `tasks/todo.md` |
 | **人工核对任务/宠物数据** | 浏览器访问 `http://localhost:8899/review.html` |
 | 多形态数据/UI 验证 | `node scripts/validate-multiform-data.js` + `node scripts/validate-multiform-ui.js` |
+| 服装数据验证 | `node scripts/validate-clothing-data.js`（53 条已知 warning 允许存在，结构错误会退出 1） |
 | 宠物定义 | `data/pets.json`（对象 key="pet_N"；数量以 `README.md` 当前关键数量和 JSON 实测为准） |
 | 任务定义 | `data/tasks.json`（按 pet ID 索引，form-independent；数量以 `README.md`/JSON 实测为准） |
 | 进化链 | `data/evolution-chains.json`（链数量和覆盖率以 `README.md`/JSON 实测为准） |
 | 家具定义 | `data/furniture.json`（数组；名称、舒适度、灵感值） |
-| 服装定义 | `data/clothing.json`（对象；`sets[]` 保存套装共享信息，`pieces[]` 保存单件收集项） |
+| 服装定义 | `data/clothing.json`（对象；`definitions` 保存规则说明，`sets[]` 保存套装信息，`pieces[]` 保存部件明细） |
 | 称号定义 | `data/titles.json`（数组；名称分段、获取方式） |
 | 遗迹副本定义 | `data/dungeons.json`（数组；副本名称、位置、资源数量、特殊掉落、精灵蛋孵化属性） |
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress） |
@@ -46,6 +47,7 @@ lkwj/
 │   ├── validate-multiform-data.js    # 多形态 requiredForms / forms 数据约束验证
 │   ├── validate-multiform-ui.js      # 多形态 Tab / 随机模块静态结构验证
 │   ├── validate-furniture-ui.js      # 家具独立数据模型 + UI 验证
+│   ├── validate-clothing-data.js     # 服装 definitions / 套装 / 部件 / 进度 / CSV 一致性验证
 │   ├── validate-clothing-ui.js       # 服装单件模型 + UI 验证
 │   ├── validate-title-ui.js          # 称号模型 + UI 验证
 │   └── validate-dungeon-ui.js        # 遗迹副本模型 + UI 验证
@@ -55,7 +57,7 @@ lkwj/
     ├── tasks.json             # 任务定义：form-independent，desc 不含宠物名（数量以 README.md/JSON 实测为准）
     ├── evolution-chains.json  # 进化链：独立于形态（链数量/覆盖率以 README.md/JSON 实测为准）
     ├── furniture.json         # 家具定义：数组，保存名称/舒适度/灵感值
-    ├── clothing.json          # 服装定义：对象，sets[] 保存套装共享信息，pieces[] 保存单件收集项
+    ├── clothing.json          # 服装定义：对象，definitions + sets[] + pieces[]
     ├── titles.json            # 称号定义：数组，保存名称分段/获取方式
     ├── dungeons.json          # 遗迹副本定义：数组，保存名称/位置/资源数量/特殊掉落/精灵蛋孵化属性
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress
@@ -271,45 +273,67 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 
 ```json
 {
+  "definitions": {
+    "gorgeousBadge": {
+      "name": "华丽徽章",
+      "description": "解锁时装炫彩染料、精灵亲昵互动，以及自定义搭配下的华丽魔法效果"
+    },
+    "gorgeousMagic": {
+      "name": "华丽魔法",
+      "description": "集齐套装指定的全部必需部件后解锁特殊登场演出"
+    }
+  },
   "sets": [
     {
-      "id": "clothing_set_1",
-      "name": "木之本樱魔法装扮",
-      "hasEffect": true,
-      "pairedPetName": "小可",
-      "obtainMethod": "洛克王国 x 魔卡少女樱联动活动；待游戏内图鉴核对"
+      "id": "clothing_set_15",
+      "name": "熔岩布丁印象",
+      "requiredPieceCount": 6,
+      "gorgeousMagicPetName": "熔岩布丁",
+      "obtainMethod": "待补充"
     }
   ],
   "pieces": [
     {
-      "id": "clothing_1",
+      "id": "clothing_23",
       "collectionType": "set",
-      "setId": "clothing_set_1",
-      "pieceName": "发型"
+      "setId": "clothing_set_15",
+      "pieceName": "连衣-熔岩布丁印象",
+      "category": "玩偶服/连衣",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充"
     },
     {
-      "id": "clothing_6",
-      "collectionType": "single",
-      "pieceName": "独立服装样例",
-      "hasEffect": false,
-      "pairedPetName": "",
-      "obtainMethod": "待补充"
+      "id": "clothing_252",
+      "collectionType": "set",
+      "setId": "clothing_set_8",
+      "pieceName": "华丽徽章-音速犬",
+      "category": "华丽徽章",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "单独充值购买解锁"
     }
   ]
 }
 ```
 
+- `definitions` — 保存华丽徽章、华丽魔法等规则说明，供前端直接展示；不保存个人进度
 - `sets[].id` — 套装稳定主键，格式 `clothing_set_N`，新增套装只追加不复用 ID
 - `sets[].name` — 套装名称
-- `sets[].hasEffect` — 套装是否带特效
-- `sets[].pairedPetName` — 套装带特效时对应配对精灵名称；没有或未知可留空
+- `sets[].requiredPieceCount` — 解锁该套装华丽魔法所需的必需部件总数；已记录名称少于此数时是待补 warning，不代表套装结构错误
+- `sets[].gorgeousMagicPetName` — 华丽魔法对应精灵名称；空字符串表示当前资料未声明对应精灵
 - `sets[].obtainMethod` — 套装获取方式，未知时填 `待补充`
 - `pieces[].id` — 单件稳定主键，格式 `clothing_N`，新增单件只追加不复用 ID
 - `pieces[].collectionType` — `set` 表示套装部件，`single` 表示独立单件
 - `pieces[].setId` — 所属套装 ID；`collectionType` 为 `single` 时不填
 - `pieces[].pieceName` — 单件服装名称或部件名称
-- 独立单件可直接在 `pieces[]` 写 `hasEffect`、`pairedPetName`、`obtainMethod`
+- `pieces[].category` — 部件分类，只能使用：`玩偶服/连衣`、`上衣`、`下装`、`头饰/帽子`、`发型`、`手饰`、`面饰`、`鞋子`、`袜子`、`背包`、`包挂饰`、`法杖`、`华丽徽章`
+- `pieces[].setRole` — 套装部件角色：`magic_required` 为华丽魔法必需部件，`optional` 为可选部件；独立单件不填
+- `pieces[].obtainType` — `standard` 为个人收集目标，`paid` 为展示用的付费非目标；付费件不得写入 `collections.clothing_progress`
+- `pieces[].obtainMethod` — 部件具体获取方式，未知时填 `待补充`
 - 前端以单件为最小勾选单位；套装信息只在套装标题下显示，不在每个部件行重复显示
+- 华丽魔法进度由同一套装中 `setRole="magic_required"` 的已拥有部件数与 `requiredPieceCount` 自动计算，不手工保存结果
+- `hasEffect` 是兼容旧资料的可选字段；只有明确为 boolean 时才能显示“有/无”，字段缺失表示未知，不能当作“无特效”
 
 ### titles.json — 称号定义（静态）
 
@@ -425,7 +449,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - **果实任务边界**：fruit 任务以 `课题进度` sheet 的“果实”课题行为准；`果实进度` 是家族级果实记录/获取方式来源，不是任务清单
 - **多形态收集边界**：`pets.forms` 保存全部可收集形态；前端「多形态」Tab 独立勾选 `forms_collected`；`confirm_forms` 任务只引用 `requiredForms` 自动判断是否完成
 - **家具收集边界**：`furniture.json` 保存名称/舒适度/灵感值；`collections.furniture_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，顶部显示总件数、已收集件数和未收集家具剩余灵感值；第一版不建来源、分类、尺寸字段。
-- **服装收集边界**：`clothing.json` 的 `sets[]` 保存套装共享信息（获取方式、特效、配对精灵），`pieces[]` 保存最小收集单位。`collections.clothing_progress` 只保存单件是否已收集。Tab 采用精灵卡片模式：套装=可展开卡片（显示部件进度 N/M），单品=简单行；套件和单品混合展示，支持关键词搜索 + 套装/单件类型筛选 + 进度筛选。
+- **服装收集边界**：`clothing.json` 的 `definitions` 保存华丽徽章/华丽魔法规则说明，`sets[]` 保存套装名称、必需部件数、对应精灵和套装获取方式，`pieces[]` 保存最小收集单位。`obtainType="paid"` 的 136 个付费件只展示并单独统计付费资料，不进入个人目标数量、已拥有完成统计或 `collections.clothing_progress`；个人目标和进度只包含 242 个 `standard` 部件。华丽魔法由 `magic_required` 必需部件进度自动计算。`hasEffect` 缺失表示未知，不能按“无特效”处理。Tab 采用精灵卡片模式：套装=可展开卡片（显示部件进度 N/M），单品=简单行；套件和单品混合展示，支持关键词搜索 + 套装/单件类型筛选 + 分类筛选 + 进度筛选。
 - **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，页面显示 `上段 · 下段` 格式主称号。
 - **遗迹副本边界**：`dungeons.json` 保存副本名称、位置、资源数量、特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存副本是否完成。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，第一版不拆奖励单项收集。
 - **通用品类边界**：星星、支线任务、扭蛋机、音乐复用 `collections.items[]`；当前只有 Tab 结构，真实条目从 `data/_待采集/通用品类收集项.csv` 导入。通用外观、玩具尚未建立独立数据模型。
@@ -435,8 +459,9 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 | 状态 | 数据 |
 |------|------|
 | 已整理可用 | 精灵、课题任务、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 |
+| 首批真实数据可用、明细继续补充 | 服装（77 套、378 部件；53 套的必需部件名称尚未补全） |
 | 结构可用但明细待补 | 商店/货币（36 商店 + 6 货币，商品明细缺失） |
-| 只有示例/占位 | 服装、称号 |
+| 只有示例/占位 | 称号 |
 | 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 |
 | 未建独立结构 | 通用外观、玩具 |
 
