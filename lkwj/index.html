@@ -584,9 +584,9 @@ function renderDashboard() {
   const furnitureTotal = furnitureItems.length;
   const furnitureOwned = furnitureItems.filter(i => i.acquired).length;
   const clothing = getClothingList();
-  const targetClothing = clothing.filter(isClothingTargetPiece);
-  const clothingTotal = targetClothing.length;
-  const clothingOwned = targetClothing.filter(i => i.acquired).length;
+  const clothingStats = getClothingStats(clothing);
+  const clothingTotal = clothingStats.targetTotal;
+  const clothingOwned = clothingStats.targetOwned;
   const titles = getTitleList();
   const titleTotal = titles.length;
   const titleOwned = titles.filter(i => i.acquired).length;
@@ -2172,13 +2172,28 @@ async function toggleDungeon(id) {
 
 // ═══════════ 服装 Tab ═══════════
 function isClothingTargetPiece(item) {
-  return !!item && item.obtainType !== 'paid';
+  return !!item && item.obtainType === 'standard';
+}
+
+function getClothingStats(items) {
+  const targetPieces = items.filter(isClothingTargetPiece);
+  const setPieces = targetPieces.filter(item => item.collectionType === 'set');
+  const singlePieces = targetPieces.filter(item => item.collectionType === 'single');
+  return {
+    targetTotal: targetPieces.length,
+    targetOwned: targetPieces.filter(item => item.acquired).length,
+    paidTotal: items.filter(item => item.obtainType === 'paid').length,
+    setTotal: setPieces.length,
+    setOwned: setPieces.filter(item => item.acquired).length,
+    singleTotal: singlePieces.length,
+    singleOwned: singlePieces.filter(item => item.acquired).length,
+  };
 }
 
 function getGorgeousMagicProgress(set, pieces) {
   const requiredTotal = Number(set?.requiredPieceCount || 0);
   if (!set?.gorgeousMagicPetName || !Number.isFinite(requiredTotal) || requiredTotal < 1) return null;
-  const acquired = pieces.filter(item => item.setRole === 'magic_required' && item.acquired).length;
+  const acquired = pieces.filter(item => isClothingTargetPiece(item) && item.setRole === 'magic_required' && item.acquired).length;
   const total = requiredTotal;
   return {
     acquired,
@@ -2205,19 +2220,15 @@ function getClothingList() {
 function renderClothingTab() {
   const el = document.getElementById('tab-clothing');
   const clothing = getClothingList();
-  const targetClothing = clothing.filter(isClothingTargetPiece);
-  const acquired = targetClothing.filter(i => i.acquired);
-  const setPieces = targetClothing.filter(i => i.collectionType === 'set');
-  const singlePieces = targetClothing.filter(i => i.collectionType === 'single');
-  const paidPieces = clothing.filter(i => i.obtainType === 'paid');
+  const clothingStats = getClothingStats(clothing);
   const categories = [...new Set(clothing.map(i => i.category).filter(Boolean))];
   const definitions = gameData?.clothing?.definitions || {};
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
-  html += `<div class="sprite-stats"><span>目标共 <strong>${targetClothing.length}</strong> 件 · 已收集 <strong>${acquired.length}</strong></span>`;
-  html += `<span>套装部件 <strong>${setPieces.filter(i => i.acquired).length}</strong> / ${setPieces.length}</span>`;
-  html += `<span>独立单件 <strong>${singlePieces.filter(i => i.acquired).length}</strong> / ${singlePieces.length}</span>`;
-  html += `<span>付费资料 <strong>${paidPieces.length}</strong> 件</span></div>`;
+  html += `<div class="sprite-stats"><span>目标共 <strong>${clothingStats.targetTotal}</strong> 件 · 已收集 <strong>${clothingStats.targetOwned}</strong></span>`;
+  html += `<span>套装部件 <strong>${clothingStats.setOwned}</strong> / ${clothingStats.setTotal}</span>`;
+  html += `<span>独立单件 <strong>${clothingStats.singleOwned}</strong> / ${clothingStats.singleTotal}</span>`;
+  html += `<span>付费资料 <strong>${clothingStats.paidTotal}</strong> 件</span></div>`;
 
   html += '<details style="margin:10px 0 12px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa">';
   html += '<summary style="cursor:pointer;font-weight:600">华丽徽章说明</summary>';
