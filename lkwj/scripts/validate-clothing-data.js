@@ -188,7 +188,9 @@ if (fs.existsSync(collectionsPath)) {
   }
 }
 
-if (fs.existsSync(csvPath)) {
+if (!fs.existsSync(csvPath)) {
+  errors.push('missing clothing CSV');
+} else {
   let rows;
   try {
     rows = parseCsv(fs.readFileSync(csvPath, 'utf8'));
@@ -241,6 +243,14 @@ if (fs.existsSync(csvPath)) {
         }
         if (record.gorgeousMagicPetName !== set.gorgeousMagicPetName) {
           errors.push(`set-only field mismatch gorgeousMagicPetName: row ${rowIndex + 1} ${set.name}`);
+        }
+        if (record.obtainMethod !== set.obtainMethod) {
+          errors.push(`set-only field mismatch obtainMethod: row ${rowIndex + 1} ${set.name}`);
+        }
+        for (const field of ['category', 'setRole', 'obtainType', 'obtained']) {
+          if (record[field] !== '') {
+            errors.push(`set-only field must be empty ${field}: row ${rowIndex + 1} ${set.name}`);
+          }
         }
         continue;
       }
