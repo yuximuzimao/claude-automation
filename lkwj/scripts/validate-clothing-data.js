@@ -173,12 +173,12 @@ if (fs.existsSync(collectionsPath)) {
   const collections = JSON.parse(fs.readFileSync(collectionsPath, 'utf8'));
   clothingProgress = collections.clothing_progress || {};
   const piecesById = new Map(pieces.map(piece => [piece.id, piece]));
-  for (const [id, obtained] of Object.entries(clothingProgress)) {
+  for (const id of Object.keys(clothingProgress)) {
     const piece = piecesById.get(id);
     if (!piece) {
       errors.push(`unknown clothing progress id: ${id}`);
-    } else if (obtained && piece.obtainType === 'paid') {
-      errors.push(`paid clothing progress cannot be truthy: ${id}`);
+    } else if (piece.obtainType === 'paid') {
+      errors.push(`paid piece cannot appear in clothing_progress: ${id}`);
     }
   }
 }
