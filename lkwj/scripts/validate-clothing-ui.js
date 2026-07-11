@@ -140,6 +140,7 @@ async function validateUi(html) {
     ['dashboard and clothing tab share clothing stats', dashboardSource.includes('getClothingStats(clothing)') && tabSource.includes('getClothingStats(clothing)')],
     ['clothing UI renders paid non-target label conditionally', html.includes('付费 · 非收集目标') && /item\.obtainType\s*===\s*['"]paid['"]/.test(html)],
     ['clothing UI filters by piece category', /\bclothingCategoryFilter\s*=\s*['"]all['"]/.test(html) && /item\.category\s*===\s*clothingCategoryFilter/.test(html)],
+    ['UI no longer points to legacy pending CSV templates', !html.includes('data/_待采集/') && !/\bcsv\s*:/.test(html)],
     ['clothing UI shows set-level paired pet in card', html.includes('pairedPetName') && html.includes('配对精灵')],
     ['set card pieces do not duplicate shared set fields', html.includes("toggleClothingPiece('${item.id}')") && html.includes('pieceName')],
     ['clothing data file exists as sets and pieces object', Array.isArray(sets) && Array.isArray(pieces)],

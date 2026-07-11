@@ -36,9 +36,9 @@ http://localhost:8899/review.html
 | `data/dungeons.json` | 遗迹副本静态定义：副本名称、位置、资源数量、特殊掉落、精灵蛋孵化属性 |
 | `data/shops.json` | 商店和货币静态定义：商店入口、货币类型、待核对商店 |
 | `data/collections.json` | 用户进度：任务、形态、果实、异色和其他收集状态 |
-| `data/_待采集/` | 仍需人工补齐的数据模板；已导入 JSON 的旧模板不再保留 |
 | `SKILL.md` | Agent 入口地图和数据边界规则 |
 | `docs/REVIEW_CHECKLIST.md` | 对照 Excel 做只读核对的清单 |
+| `tasks/todo.md` | 所有尚未补齐、待核对和待规划的数据任务 |
 
 ## 数据边界
 
@@ -55,7 +55,7 @@ http://localhost:8899/review.html
 - 华丽魔法进度根据 `setRole="magic_required"` 的已拥有必需部件与 `requiredPieceCount` 自动计算，不单独保存；缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义、资源数量、钥匙类特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存是否完成。
-- `shops.json` 已保存商店入口和货币类型；商品明细尚未建入 JSON，待 `data/_待采集/商店与货币.csv` 补齐。
+- `shops.json` 已保存商店入口和货币类型；商品明细尚未建入 JSON，后续补充要求统一维护在 `tasks/todo.md`。
 - `collections.items` 是星星、支线任务、扭蛋机、音乐的通用收集项入口；当前为空。
 
 ## 当前关键数量
@@ -98,7 +98,7 @@ http://localhost:8899/review.html
 | 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 | Tab 使用 `collections.items`，当前 0 条 |
 | 未建独立结构 | 通用外观、玩具 | 只有旧 `collections.categories` 总量占位；服装不等于完整外观图鉴 |
 
-当前仍需人工采集的模板见 `data/_待采集/README.md`。
+所有未完成的数据补录与规划统一见 `tasks/todo.md`；项目不再维护 `_待采集` CSV 模板目录。
 
 ## 验证
 

@@ -24,7 +24,7 @@
 | 用户进度 | `data/collections.json`（sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress） |
 | 商店与货币 | `data/shops.json`（36 商店+6 货币）+ `data/wallet.json` |
 | 标注数据 | `data/annotations.json`（append-only ops 日志，Claude 批量处理用） |
-| 数据采集需求 | `data/_待采集/README.md`（只保留仍需补齐的服装、称号、商店商品、地区形态名称、通用品类） |
+| 数据补录与规划 | `tasks/todo.md`（所有未完成的数据补充、核对和建模任务统一维护在这里） |
 | 数据修正 | `scripts/fix-shiny-and-chains.js`（异色/炫彩标签修正、进化链传播） |
 
 ## DO FIRST
@@ -47,11 +47,10 @@ lkwj/
 │   ├── validate-multiform-data.js    # 多形态 requiredForms / forms 数据约束验证
 │   ├── validate-multiform-ui.js      # 多形态 Tab / 随机模块静态结构验证
 │   ├── validate-furniture-ui.js      # 家具独立数据模型 + UI 验证
-│   ├── validate-clothing-data.js     # 服装 definitions / 套装 / 部件 / 进度 / CSV 一致性验证
+│   ├── validate-clothing-data.js     # 服装 definitions / 套装 / 部件 / 进度一致性验证
 │   ├── validate-clothing-ui.js       # 服装单件模型 + UI 验证
 │   ├── validate-title-ui.js          # 称号模型 + UI 验证
 │   └── validate-dungeon-ui.js        # 遗迹副本模型 + UI 验证
-│   └── data-compare-report.html      # Excel vs JSON 数据对比报告（2026-07-02）
 └── data/
     ├── pets.json              # 宠物定义：形态 + 标签 + 元素数组（数量以 README.md/JSON 实测为准）
     ├── tasks.json             # 任务定义：form-independent，desc 不含宠物名（数量以 README.md/JSON 实测为准）
@@ -63,8 +62,7 @@ lkwj/
     ├── collections.json       # 用户进度：sprite_progress + shiny_progress + furniture_progress + clothing_progress + title_progress + dungeon_progress
     ├── shops.json             # 商店清单：36 商店 × 6 货币
     ├── wallet.json            # 用户货币持有量（dynamic，不提交 git）
-    ├── annotations.json       # 标注日志（append-only ops，不提交 git）
-    └── _待采集/               # 仍需人工补齐的数据模板；已导入 JSON 的旧模板不保留
+    └── annotations.json       # 标注日志（append-only ops，不提交 git）
 ```
 
 ## 数据模型
@@ -334,6 +332,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - 前端以单件为最小勾选单位；套装信息只在套装标题下显示，不在每个部件行重复显示
 - 华丽魔法进度由同一套装中 `setRole="magic_required"` 的已拥有部件数与 `requiredPieceCount` 自动计算，不手工保存结果
 - `hasEffect` 是兼容旧资料的可选字段；只有明确为 boolean 时才能显示“有/无”，字段缺失表示未知，不能当作“无特效”
+- 服装后续补录不经过 CSV 或中间模板：用户确认资料后直接更新 `data/clothing.json`，个人已拥有状态只更新 `data/collections.json`；未确认事项维护在 `tasks/todo.md`
 
 ### titles.json — 称号定义（静态）
 
@@ -437,7 +436,9 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 
 ## 数据约束
 
-- **捕捉类任务获取方式（引用机制）**：capture/capture_gifted/capture_chromatic/capture_shiny/fruit 五种任务的 obtainMethods **不存在 tasks.json 中**，前端通过 `getCaptureObtainMethods(petKey)` 动态解析，链路：`pets.json forms.basic.obtainMethods` → 进化链上游兜底（`No.{num} {name} {level}级进化获得`）。改获取方式只需改 pets.json 一处。覆盖率 372/373（仅 pet_353 凡鹰无捕捉任务，不适用）
+- **补录入口**：项目不维护 `_待采集` 目录或 CSV 模板；所有未完成事项先写入 `tasks/todo.md`，确认真实资料后直接更新对应 JSON 并运行校验。
+
+- **捕捉类任务获取方式（引用机制）**：capture/capture_gifted/capture_chromatic/capture_shiny/fruit 五种任务的 obtainMethods **不存在 tasks.json 中**，前端通过 `getCaptureObtainMethods(petKey)` 动态解析，链路：`pets.json forms.basic.obtainMethods` → 进化链上游兜底（`No.{num} {name} {level}级进化获得`）。改获取方式只需改 pets.json 一处；覆盖率以当前 `pets.json` / `tasks.json` 实测为准。
 - **evolve 类任务归属**：leader_evolve/evolve 只需挂在进化前的 pet 上（form-independent）
 - **capture_chromatic ≠ capture_shiny**：`capture_chromatic` 是炫彩突变捕捉任务（所有精灵除迪莫外都有），`capture_shiny` 是 Excel `课题进度` 中 `异色` 行对应的异色突变捕捉任务
 - **异色炫彩展示**：由 `pets.json` 的 `tags.shiny` 驱动，仅展示进化最终形态（标签随进化传递）
@@ -452,7 +453,7 @@ JSON:  evolution-chains.json → nodes["pet_348"].evolvesTo[0].condition
 - **服装收集边界**：`clothing.json` 的 `definitions` 保存华丽徽章/华丽魔法规则说明，`sets[]` 保存套装名称、必需部件数、对应精灵和套装获取方式，`pieces[]` 保存最小收集单位。`obtainType="paid"` 的 136 个付费件只展示并单独统计付费资料，不进入个人目标数量、已拥有完成统计或 `collections.clothing_progress`；个人目标和进度只包含 242 个 `standard` 部件。华丽魔法由 `magic_required` 必需部件进度自动计算。`hasEffect` 缺失表示未知，不能按“无特效”处理。Tab 采用精灵卡片模式：套装=可展开卡片（显示部件进度 N/M），单品=简单行；套件和单品混合展示，支持关键词搜索 + 套装/单件类型筛选 + 分类筛选 + 进度筛选。
 - **称号收集边界**：`titles.json` 保存名称分段和获取方式；`collections.title_progress` 只保存是否已收集。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，页面显示 `上段 · 下段` 格式主称号。
 - **遗迹副本边界**：`dungeons.json` 保存副本名称、位置、资源数量、特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存副本是否完成。Tab 支持关键词搜索 + 全部/未收集/已收集筛选，第一版不拆奖励单项收集。
-- **通用品类边界**：星星、支线任务、扭蛋机、音乐复用 `collections.items[]`；当前只有 Tab 结构，真实条目从 `data/_待采集/通用品类收集项.csv` 导入。通用外观、玩具尚未建立独立数据模型。
+- **通用品类边界**：星星、支线任务、扭蛋机、音乐复用 `collections.items[]`；当前只有 Tab 结构，后续补充字段和建模任务维护在 `tasks/todo.md`。通用外观、玩具尚未建立独立数据模型。
 
 ## 当前数据状态
 

@@ -279,15 +279,15 @@ let data = null, gameData = null, walletData = null, editingId = null, currentTa
 const ALL_TABS = ['dashboard','sprite','shiny','forms','fruits','furniture','clothing','titles','stars','dungeons','sidequests','gacha','music'];
 
 const CATEGORY_META = {
-  fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集', csv: '精灵果实图鉴.csv' },
-  furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）', csv: '' },
-  clothing:  { name: '服装', icon: '👗', desc: '服装图鉴（单件/套装/特效配对精灵）', csv: '服装图鉴.csv' },
-  titles:    { name: '称号', icon: '🏷️', desc: '称号收集', csv: '称号图鉴.csv' },
-  stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集', csv: '通用品类收集项.csv' },
-  dungeons:  { name: '遗迹（副本）', icon: '🏛️', desc: '遗迹/副本通关与奖励收集', csv: '' },
-  sidequests:{ name: '支线任务', icon: '📋', desc: '支线任务清单', csv: '通用品类收集项.csv' },
-  gacha:     { name: '扭蛋机', icon: '🎰', desc: '扭蛋机收集品', csv: '通用品类收集项.csv' },
-  music:     { name: '音乐', icon: '🎵', desc: '音乐/乐谱收集', csv: '通用品类收集项.csv' },
+  fruits:    { name: '精灵果实', icon: '🍎', desc: '精灵对应的果实收集' },
+  furniture: { name: '家具', icon: '🪑', desc: '家园家具图鉴（古拉拉商店/打造/活动）' },
+  clothing:  { name: '服装', icon: '👗', desc: '服装图鉴（分类、华丽魔法与付费资料）' },
+  titles:    { name: '称号', icon: '🏷️', desc: '称号收集' },
+  stars:     { name: '星星（眠枭之星）', icon: '⭐', desc: '眠枭之星收集' },
+  dungeons:  { name: '遗迹（副本）', icon: '🏛️', desc: '遗迹/副本通关与奖励收集' },
+  sidequests:{ name: '支线任务', icon: '📋', desc: '支线任务清单' },
+  gacha:     { name: '扭蛋机', icon: '🎰', desc: '扭蛋机收集品' },
+  music:     { name: '音乐', icon: '🎵', desc: '音乐/乐谱收集' },
 };
 
 // 精灵图鉴状态
@@ -1461,9 +1461,7 @@ function renderCategoryTab(tab) {
   let html = `<h3 style="font-size:15px;margin-bottom:10px">${meta.icon || ''} ${meta.name || tab}</h3>`;
 
   if (!items.length) {
-    html += `<div class="empty-state">暂无数据<small>${meta.desc || '待采集'}`;
-    if (meta.csv) html += `<br>模板：data/_待采集/${meta.csv}`;
-    html += '</small></div>';
+    html += `<div class="empty-state">暂无数据<small>${meta.desc || '待后续规划补充'}</small></div>`;
     el.innerHTML = html; return;
   }
 
