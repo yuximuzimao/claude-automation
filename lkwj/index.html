@@ -2355,10 +2355,12 @@ function renderClothingSetCard(setKey, set, visiblePieces) {
   visiblePieces.forEach(item => {
     const pieceName = item.pieceName || item.name || '未命名部件';
     card += `<div class="item-row${item.acquired ? ' done' : ''}">`;
-    if (item.obtainType === 'paid') {
+    if (isClothingTargetPiece(item)) {
+      card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
+    } else if (item.obtainType === 'paid') {
       card += '<span class="item-category-tag">付费 · 非收集目标</span>';
     } else {
-      card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
+      card += '<span class="item-category-tag">资料异常 · 不可操作</span>';
     }
     card += `<div class="item-info"><div class="item-name">${esc(pieceName)}${item.category ? ` <span class="item-category-tag">${esc(item.category)}</span>` : ''}</div>`;
     if (item.obtainMethod) card += `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>`;
@@ -2379,7 +2381,9 @@ function renderClothingSingleRow(item) {
     ? (hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无')
     : '';
   return `<div class="item-row${item.acquired ? ' done' : ''}">
-    ${item.obtainType === 'paid' ? '<span class="item-category-tag">付费 · 非收集目标</span>' : `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`}
+    ${isClothingTargetPiece(item)
+      ? `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`
+      : `<span class="item-category-tag">${item.obtainType === 'paid' ? '付费 · 非收集目标' : '资料异常 · 不可操作'}</span>`}
     <div class="item-info">
       <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${esc(item.category || '单件')}</span></div>
       ${effectText ? `<div class="task-methods">${effectText}</div>` : ''}

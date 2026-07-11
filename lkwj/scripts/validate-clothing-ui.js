@@ -237,11 +237,31 @@ async function validateUi(html) {
     const unknownSingle = production.api.renderClothingSingleRow(singleBase);
     const trueSingle = production.api.renderClothingSingleRow({ ...singleBase, hasEffect: true });
     const falseSingle = production.api.renderClothingSingleRow({ ...singleBase, hasEffect: false });
+    const paidPiece = { ...syntheticPiece, id: 'paid_piece', obtainType: 'paid' };
+    const unknownPiece = { ...syntheticPiece, id: 'unknown_piece', obtainType: 'unknown' };
+    const missingTypePiece = { ...syntheticPiece, id: 'missing_type_piece', obtainType: undefined };
+    const standardSetRow = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装' }, [syntheticPiece]);
+    const paidSetRow = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装' }, [paidPiece]);
+    const unknownSetRow = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装' }, [unknownPiece]);
+    const missingTypeSetRow = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装' }, [missingTypePiece]);
+    const paidSingle = production.api.renderClothingSingleRow({ ...singleBase, id: 'paid_single', obtainType: 'paid' });
+    const unknownTypeSingle = production.api.renderClothingSingleRow({ ...singleBase, id: 'unknown_single', obtainType: 'unknown' });
+    const missingTypeSingle = production.api.renderClothingSingleRow({ ...singleBase, id: 'missing_single', obtainType: undefined });
     checks.push(
       ['set effect metadata distinguishes unknown true and false',
         !unknownSet.includes('特效：') && trueSet.includes('特效：有') && falseSet.includes('特效：无')],
       ['single effect metadata distinguishes unknown true and false',
         !unknownSingle.includes('特效：') && trueSingle.includes('特效：有') && falseSingle.includes('特效：无')],
+      ['set piece controls distinguish standard paid and invalid metadata',
+        standardSetRow.includes('check-btn')
+        && !paidSetRow.includes('check-btn') && paidSetRow.includes('付费 · 非收集目标')
+        && !unknownSetRow.includes('check-btn') && unknownSetRow.includes('资料异常 · 不可操作')
+        && !missingTypeSetRow.includes('check-btn') && missingTypeSetRow.includes('资料异常 · 不可操作')],
+      ['single controls distinguish standard paid and invalid metadata',
+        production.api.renderClothingSingleRow(singleBase).includes('check-btn')
+        && !paidSingle.includes('check-btn') && paidSingle.includes('付费 · 非收集目标')
+        && !unknownTypeSingle.includes('check-btn') && unknownTypeSingle.includes('资料异常 · 不可操作')
+        && !missingTypeSingle.includes('check-btn') && missingTypeSingle.includes('资料异常 · 不可操作')],
     );
   } catch (error) {
     checks.push(['production clothing functions execute in sandbox', false]);
