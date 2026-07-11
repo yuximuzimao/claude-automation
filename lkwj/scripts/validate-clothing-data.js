@@ -24,6 +24,11 @@ const pieceIds = new Set();
 const pieceNames = new Set();
 const setIdPattern = /^clothing_set_[1-9]\d*$/;
 const pieceIdPattern = /^clothing_[1-9]\d*$/;
+const csvHeaders = [
+  'collectionType', 'setName', 'requiredPieceCount', 'gorgeousMagicPetName',
+  'pieceName', 'category', 'setRole', 'obtainType', 'obtainMethod',
+  'obtained', 'rawText', 'notes',
+];
 
 function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -192,49 +197,119 @@ if (fs.existsSync(csvPath)) {
     rows = [];
   }
 
-  if (rows.length) {
-    const headers = rows[0];
-    const headerIndex = new Map(headers.map((header, index) => [header, index]));
-    for (const requiredHeader of ['collectionType', 'setName', 'pieceName', 'obtainType', 'obtained']) {
-      if (!headerIndex.has(requiredHeader)) errors.push(`clothing CSV missing header: ${requiredHeader}`);
+  const headerMatches = rows.length > 0
+    && rows[0].length === csvHeaders.length
+    && rows[0].every((header, index) => header === csvHeaders[index]);
+  if (!headerMatches) {
+    errors.push('clothing CSV header must exactly match required 12 columns');
+  }
+  for (let rowIndex = 1; rowIndex < rows.length; rowIndex += 1) {
+    if (rows[rowIndex].length !== csvHeaders.length) {
+      errors.push(`clothing CSV row ${rowIndex + 1}: expected 12 columns, got ${rows[rowIndex].length}`);
+    }
+  }
+
+  if (headerMatches) {
+    const setsByName = new Map(sets.map(set => [set.name, set]));
+    const piecesByIdentity = new Map(pieces.map(piece => [
+      `${piece.collectionType}|${piece.setId || ''}|${piece.pieceName}`,
+      piece,
+    ]));
+    const csvPiecesByIdentity = new Map();
+    const setOnlyRowsBySetId = new Map();
+
+    for (let rowIndex = 1; rowIndex < rows.length; rowIndex += 1) {
+      const row = rows[rowIndex];
+      if (row.length !== csvHeaders.length) continue;
+      const record = Object.fromEntries(csvHeaders.map((header, index) => [header, row[index]]));
+      const set = setsByName.get(record.setName);
+
+      if (!record.pieceName) {
+        if (record.collectionType !== 'set') {
+          errors.push(`set-only declaration must use collectionType=set: row ${rowIndex + 1}`);
+          continue;
+        }
+        if (!set) {
+          errors.push(`set-only declaration references unknown set: row ${rowIndex + 1} ${record.setName}`);
+          continue;
+        }
+        const declarations = setOnlyRowsBySetId.get(set.id) || [];
+        declarations.push({ rowIndex: rowIndex + 1, record });
+        setOnlyRowsBySetId.set(set.id, declarations);
+        if (record.requiredPieceCount !== String(set.requiredPieceCount)) {
+          errors.push(`set-only field mismatch requiredPieceCount: row ${rowIndex + 1} ${set.name}`);
+        }
+        if (record.gorgeousMagicPetName !== set.gorgeousMagicPetName) {
+          errors.push(`set-only field mismatch gorgeousMagicPetName: row ${rowIndex + 1} ${set.name}`);
+        }
+        continue;
+      }
+
+      const setId = record.collectionType === 'set' ? set?.id || '' : '';
+      const identity = `${record.collectionType}|${setId}|${record.pieceName}`;
+      const csvEntries = csvPiecesByIdentity.get(identity) || [];
+      csvEntries.push({ rowIndex: rowIndex + 1, record });
+      csvPiecesByIdentity.set(identity, csvEntries);
+      if (csvEntries.length > 1) errors.push(`duplicate CSV piece: ${identity}`);
+
+      const piece = piecesByIdentity.get(identity);
+      if (!piece) {
+        errors.push(`CSV piece has no matching JSON piece: ${identity}`);
+        continue;
+      }
+      const pieceSet = piece.collectionType === 'set' ? setsById.get(piece.setId) : null;
+      const expectedFields = {
+        collectionType: piece.collectionType,
+        setName: pieceSet?.name || '',
+        requiredPieceCount: pieceSet ? String(pieceSet.requiredPieceCount) : '',
+        gorgeousMagicPetName: pieceSet?.gorgeousMagicPetName || '',
+        pieceName: piece.pieceName,
+        category: piece.category,
+        setRole: piece.setRole || '',
+        obtainType: piece.obtainType,
+        obtainMethod: piece.obtainMethod,
+      };
+      for (const [field, expected] of Object.entries(expectedFields)) {
+        if (record[field] !== expected) {
+          errors.push(`CSV field mismatch ${field}: row ${rowIndex + 1} ${piece.pieceName}; expected ${JSON.stringify(expected)}, got ${JSON.stringify(record[field])}`);
+        }
+      }
+
+      if (piece.obtainType === 'paid' && record.obtained !== '否') {
+        errors.push(`paid CSV row must be obtained=否: row ${rowIndex + 1} ${piece.pieceName}`);
+      }
+      if (clothingProgress) {
+        const hasProgressKey = Object.prototype.hasOwnProperty.call(clothingProgress, piece.id);
+        const progressIsTrue = clothingProgress[piece.id] === true;
+        const obtainedMatches = record.obtained === '是'
+          ? progressIsTrue
+          : record.obtained === '否' && !hasProgressKey;
+        if (!obtainedMatches) {
+          errors.push(`CSV obtained/progress mismatch: row ${rowIndex + 1} ${piece.pieceName}`);
+        }
+      }
     }
 
-    if (['collectionType', 'setName', 'pieceName', 'obtainType', 'obtained'].every(header => headerIndex.has(header))) {
-      const setsByName = new Map(sets.map(set => [set.name, set]));
-      const piecesByIdentity = new Map(pieces.map(piece => [
-        `${piece.collectionType}|${piece.setId || ''}|${piece.pieceName}`,
-        piece,
-      ]));
-      for (let rowIndex = 1; rowIndex < rows.length; rowIndex += 1) {
-        const row = rows[rowIndex];
-        if (row.length === 1 && row[0] === '') continue;
-        if (row.length !== headers.length) {
-          errors.push(`clothing CSV row ${rowIndex + 1}: expected ${headers.length} columns, got ${row.length}`);
-          continue;
+    for (const [identity, piece] of piecesByIdentity) {
+      const csvEntries = csvPiecesByIdentity.get(identity) || [];
+      if (csvEntries.length === 0) errors.push(`JSON piece missing from CSV: ${identity}`);
+      if (csvEntries.length > 1) errors.push(`JSON piece appears multiple times in CSV: ${identity}`);
+      if (clothingProgress && Object.prototype.hasOwnProperty.call(clothingProgress, piece.id)) {
+        if (clothingProgress[piece.id] !== true) {
+          errors.push(`clothing_progress value must be true: ${piece.id}`);
         }
-        const value = header => row[headerIndex.get(header)] || '';
-        const pieceName = value('pieceName');
-        if (!pieceName) continue;
-        const obtainType = value('obtainType');
-        const obtained = value('obtained');
-        if (obtainType === 'paid' && obtained === '是') {
-          errors.push(`paid CSV row cannot be obtained=是: row ${rowIndex + 1} ${pieceName}`);
+        if (csvEntries.length === 1 && csvEntries[0].record.obtained !== '是') {
+          errors.push(`clothing_progress ID must map to CSV obtained=是: ${piece.id}`);
         }
-        if (obtained !== '是') continue;
-        if (obtainType !== 'standard') {
-          errors.push(`obtained CSV row must be standard: row ${rowIndex + 1} ${pieceName}`);
-          continue;
-        }
-        const collectionType = value('collectionType');
-        const setId = collectionType === 'set' ? setsByName.get(value('setName'))?.id || '' : '';
-        const piece = piecesByIdentity.get(`${collectionType}|${setId}|${pieceName}`);
-        if (!piece) {
-          errors.push(`obtained CSV row has no matching piece: row ${rowIndex + 1} ${pieceName}`);
-        } else if (piece.obtainType !== 'standard') {
-          errors.push(`obtained CSV row matches non-standard piece: row ${rowIndex + 1} ${pieceName}`);
-        } else if (clothingProgress && clothingProgress[piece.id] !== true) {
-          errors.push(`obtained CSV row missing truthy clothing progress: row ${rowIndex + 1} ${pieceName}`);
-        }
+      }
+    }
+
+    const pieceSetIds = new Set(pieces.filter(piece => piece.collectionType === 'set').map(piece => piece.setId));
+    for (const set of sets) {
+      const declarations = setOnlyRowsBySetId.get(set.id) || [];
+      const expectedCount = pieceSetIds.has(set.id) ? 0 : 1;
+      if (declarations.length !== expectedCount) {
+        errors.push(`set-only declaration count mismatch: ${set.name} expected ${expectedCount}, got ${declarations.length}`);
       }
     }
   }
