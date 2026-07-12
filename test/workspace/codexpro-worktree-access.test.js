@@ -70,18 +70,18 @@ test('CodexPro launcher locks roots against a polluted caller environment', (t) 
   fs.writeFileSync(fakeCodexProPath, fakeCodexPro);
   fs.chmodSync(fakeCodexProPath, 0o755);
 
+  const probeEnvironment = {
+    CODEXPRO_ROOT: '/Users/chat/.config',
+    CODEBASE_BRIDGE_REPO_ROOT: '/Users/chat',
+    CODEXPRO_ALLOW_HOME: '1',
+    CODEBASE_BRIDGE_ALLOWED_ROOTS: '/Users/chat:/Users/chat/.config',
+    CODEXPRO_CAPTURE_PATH: capturePath,
+    PATH: [temporaryDirectory, process.env.PATH].filter(Boolean).join(path.delimiter),
+  };
   const result = spawnSync('bash', [launcherPath], {
     cwd: repositoryRoot,
     encoding: 'utf8',
-    env: {
-      CODEXPRO_ROOT: '/Users/chat/.config',
-      CODEBASE_BRIDGE_REPO_ROOT: '/Users/chat',
-      CODEXPRO_ALLOW_HOME: '1',
-      CODEBASE_BRIDGE_ALLOWED_ROOTS: '/Users/chat:/Users/chat/.config',
-      CODEXPRO_CAPTURE_PATH: capturePath,
-      PATH: [temporaryDirectory, process.env.PATH].filter(Boolean).join(path.delimiter),
-      [testSentinelName]: '',
-    },
+    env: probeEnvironment,
   });
 
   assert.equal(result.error, undefined);
@@ -102,4 +102,8 @@ test('CodexPro launcher locks roots against a polluted caller environment', (t) 
     },
   );
   assert.equal(capture.environment[testSentinelName], '');
+  assert.doesNotMatch(
+    fs.readFileSync(__filename, 'utf8'),
+    /\.\.\.\s*process\.env/,
+  );
 });
