@@ -10,10 +10,11 @@
 
 - 默认工作区根目录：`/Users/chat/claude`。启动脚本仍先进入此目录，所以 `open_current_workspace` 打开的始终是主工作区。
 - 附加允许根：`/Users/chat/.config/superpowers/worktrees`。它覆盖现有和未来的 Superpowers worktree；处理具体隔离分支时，GPT 必须用 `open_workspace` 打开该分支的绝对路径。
+- 启动入口会清除 `CODEXPRO_ROOT`、`CODEBASE_BRIDGE_REPO_ROOT`、`CODEXPRO_ALLOW_HOME` 和 `CODEBASE_BRIDGE_ALLOWED_ROOTS`，防止调用者遗留环境覆盖默认根或与允许根合并。
 - 内置文件工具受上述允许根约束；CodexPro 默认仍会屏蔽 `.env`、私钥、`.git` 内部文件、依赖目录、构建缓存，以及指向允许根外部的软链接。
 - 不使用 `--allow-home`，也不把整个 `/Users/chat/.config` 作为允许根，避免未来把无关配置自动纳入访问范围。
 
-用户明确保留 `bash=full`。因此这是“受信任的本机开发代理”模式，而不是操作系统级目录沙箱：内置文件工具会遵守允许根，完整 Bash 则不应被理解为对工作区外路径的绝对隔离。
+用户明确保留 `bash=full`。因此这是“受信任的本机开发代理”模式，而不是操作系统级目录沙箱：内置文件工具会遵守允许根，完整 Bash 则不应被理解为对工作区外路径的绝对隔离。启动入口清除根环境变量只锁定 CodexPro 内置文件工具的根配置，不改变完整 Bash 的系统权限。
 
 ## 每次开工时如何获得上下文
 
@@ -34,6 +35,7 @@ CodexPro 会自动识别 `AGENTS.md` 类文件。`CLAUDE.md` 不会被自动当�
 - 工作模式：直接处理项目
 - 工具范围：完整工具集
 - 写入权限：工作区写入；内置文件工具的允许根为主工作区和 Superpowers worktree 根
+- 启动覆盖防护：固定 `/Users/chat/claude` 为启动 cwd，清除四个根覆盖环境变量后只传入 worktree 附加根
 - 命令权限：`bash=full`（用户已确认的受信任本机代理模式，不是路径沙箱）
 - 公网连接：Cloudflare quick tunnel 提供的带随机密钥 HTTPS 隧道
 - 本地监听：仅 `127.0.0.1`
@@ -53,7 +55,7 @@ Cloudflare quick tunnel 重启后会生成新的连接地址；在网页 Setting
 
 1. CodexPro 本地服务和带密钥的 HTTPS 隧道健康。
 2. ChatGPT 成功扫描并显示 CodexPro 工具。
-3. `server_config.allowedRoots` 显示 `/Users/chat/claude` 与 `/Users/chat/.config/superpowers/worktrees`，且不包含 `--allow-home` 或整个 `/Users/chat/.config`。
+3. `server_config.allowedRoots` 显示 `/Users/chat/claude` 与 `/Users/chat/.config/superpowers/worktrees`，且不包含 `--allow-home` 或整个 `/Users/chat/.config`；带污染根环境变量启动时也必须得到同样结果。
 4. ChatGPT 能打开 `/Users/chat/claude` 并识别根 `AGENTS.md`。
 5. ChatGPT 能通过 `open_workspace` 打开目标 worktree，并读取其中的交接文档、计划和 `tasks/todo.md`。
 6. ChatGPT 进入售后项目前先读取 `aftersales-automation/SKILL.md` 和 `CLAUDE.md`。

@@ -1,92 +1,95 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
-const launcherPath = path.resolve(__dirname, '..', '..', 'scripts', 'start-codexpro-full.sh');
-const WIDE_ALLOW_ROOTS = new Set([
-  '/Users/chat',
-  '/Users/chat/.config',
-  '$HOME',
-  '$HOME/.config',
-  '~',
-  '~/.config',
-]);
-const ALLOW_ROOT_ARGUMENT_PATTERN =
-  /--allow-root(?:\s+|=)(?:"([^"]+)"|'([^']+)'|([^\s\\]+))/g;
-
-function findWideAllowRoot(source) {
-  for (const match of source.matchAll(ALLOW_ROOT_ARGUMENT_PATTERN)) {
-    const rawRoot = match[1] ?? match[2] ?? match[3];
-    const normalizedRoot = rawRoot.replace(/\/+$/, '');
-
-    if (WIDE_ALLOW_ROOTS.has(normalizedRoot)) {
-      return normalizedRoot;
-    }
-  }
-
-  return undefined;
-}
-
-const unsafeAllowRootVariants = [
-  {
-    argument: '--allow-root "/Users/chat/.config/"',
-    expected: '/Users/chat/.config',
-    name: 'quoted config root with a trailing slash',
-  },
-  {
-    argument: "--allow-root='/Users/chat/.config'",
-    expected: '/Users/chat/.config',
-    name: 'equals form with a quoted config root',
-  },
-  {
-    argument: '--allow-root /Users/chat',
-    expected: '/Users/chat',
-    name: 'user directory root',
-  },
-  {
-    argument: '--allow-root "$HOME/.config/"',
-    expected: '$HOME/.config',
-    name: 'HOME config root with a trailing slash',
-  },
-  {
-    argument: '--allow-root=~/.config/',
-    expected: '~/.config',
-    name: 'tilde config root with a trailing slash',
-  },
-  {
-    argument: '--allow-root=$HOME',
-    expected: '$HOME',
-    name: 'HOME directory root',
-  },
-  {
-    argument: '--allow-root ~',
-    expected: '~',
-    name: 'tilde directory root',
-  },
+const repositoryRoot = path.resolve(__dirname, '..', '..');
+const launcherPath = path.join('scripts', 'start-codexpro-full.sh');
+const worktreeRoot = '/Users/chat/.config/superpowers/worktrees';
+const rootEnvironmentNames = [
+  'CODEXPRO_ROOT',
+  'CODEBASE_BRIDGE_REPO_ROOT',
+  'CODEXPRO_ALLOW_HOME',
+  'CODEBASE_BRIDGE_ALLOWED_ROOTS',
 ];
 
-test('CodexPro launcher permanently allows Superpowers worktrees only', () => {
-  const launcher = fs.readFileSync(launcherPath, 'utf8');
+const fakeCodexPro = [
+  '#!/usr/bin/env bash',
+  'set -e',
+  '',
+  '{',
+  "  printf '%s\\0' \"$PWD\"",
+  "  printf '%s\\0' \"$@\"",
+  "  printf '\\0'",
+  "  printf '%s\\0' \"$CODEXPRO_ROOT\"",
+  "  printf '%s\\0' \"$CODEBASE_BRIDGE_REPO_ROOT\"",
+  "  printf '%s\\0' \"$CODEXPRO_ALLOW_HOME\"",
+  "  printf '%s\\0' \"$CODEBASE_BRIDGE_ALLOWED_ROOTS\"",
+  '} > "$CODEXPRO_CAPTURE_PATH"',
+  '',
+].join('\n');
 
-  assert.match(
-    launcher,
-    /readonly SUPERPOWERS_WORKTREE_ROOT="\/Users\/chat\/\.config\/superpowers\/worktrees"/,
+function readCapture(capturePath) {
+  const fields = fs.readFileSync(capturePath, 'utf8').split('\0');
+
+  assert.equal(fields.pop(), '', 'fake capture must end with a NUL byte');
+
+  const argvEnd = fields.indexOf('');
+  assert.notEqual(argvEnd, -1, 'fake capture must delimit argv with an empty field');
+  assert.equal(
+    fields.length,
+    argvEnd + 1 + rootEnvironmentNames.length,
+    'fake capture must contain exactly the requested root environment values',
   );
-  assert.match(
-    launcher,
-    /exec codexpro start\s+\\\s*\n\s*--allow-root "\$SUPERPOWERS_WORKTREE_ROOT"/,
-  );
-  assert.doesNotMatch(launcher, /--allow-home\b/);
-  assert.equal(findWideAllowRoot(launcher), undefined);
-});
 
-test('CodexPro wide allow-root variants are rejected', () => {
-  for (const { argument, expected, name } of unsafeAllowRootVariants) {
-    const candidate = ['exec codexpro start \\', '  ' + argument].join('\n');
+  return {
+    cwd: fields[0],
+    argv: fields.slice(1, argvEnd),
+    rootEnvironment: Object.fromEntries(
+      rootEnvironmentNames.map((name, index) => [name, fields[argvEnd + 1 + index]]),
+    ),
+  };
+}
 
-    assert.equal(findWideAllowRoot(candidate), expected, name);
-  }
+test('CodexPro launcher locks roots against a polluted caller environment', (t) => {
+  const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'codexpro-launcher-'));
+  const capturePath = path.join(temporaryDirectory, 'capture');
+  const fakeCodexProPath = path.join(temporaryDirectory, 'codexpro');
+
+  t.after(() => fs.rmSync(temporaryDirectory, { force: true, recursive: true }));
+  fs.writeFileSync(fakeCodexProPath, fakeCodexPro);
+  fs.chmodSync(fakeCodexProPath, 0o755);
+
+  const result = spawnSync('bash', [launcherPath], {
+    cwd: repositoryRoot,
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      CODEXPRO_ROOT: '/Users/chat/.config',
+      CODEBASE_BRIDGE_REPO_ROOT: '/Users/chat',
+      CODEXPRO_ALLOW_HOME: '1',
+      CODEBASE_BRIDGE_ALLOWED_ROOTS: '/Users/chat:/Users/chat/.config',
+      CODEXPRO_CAPTURE_PATH: capturePath,
+      PATH: [temporaryDirectory, process.env.PATH].filter(Boolean).join(path.delimiter),
+    },
+  });
+
+  assert.equal(result.error, undefined);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(fs.existsSync(capturePath), true, 'fake codexpro should write its capture');
+
+  const capture = readCapture(capturePath);
+
+  assert.equal(capture.cwd, '/Users/chat/claude');
+  assert.deepEqual(capture.argv, ['start', '--allow-root', worktreeRoot]);
+  assert.deepEqual(capture.rootEnvironment, {
+    CODEXPRO_ROOT: '',
+    CODEBASE_BRIDGE_REPO_ROOT: '',
+    CODEXPRO_ALLOW_HOME: '',
+    CODEBASE_BRIDGE_ALLOWED_ROOTS: '',
+  });
 });

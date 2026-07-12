@@ -2,47 +2,25 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 让 `scripts/start-codexpro-full.sh` 每次启动都允许 GPT 打开全部 Superpowers worktree，同时保留用户已确认的 `bash=full` 信任模式。
+**Goal:** 让 `scripts/start-codexpro-full.sh` 每次启动都允许 GPT 打开全部 Superpowers worktree，并清除会覆盖或合并根配置的调用者环境变量，同时保留用户已确认的 `bash=full` 信任模式。
 
-**Architecture:** 启动脚本继续以 `/Users/chat/claude` 为默认根，但固定传入唯一的附加允许根 `/Users/chat/.config/superpowers/worktrees`。ChatGPT 仍需通过 `open_workspace` 打开具体分支；文件工具会受该根约束，完整 Bash 的非隔离语义会被明确写入共享工作区设计文档。
+**Architecture:** 启动脚本先进入 `/Users/chat/claude`，清除 `CODEXPRO_ROOT`、`CODEBASE_BRIDGE_REPO_ROOT`、`CODEXPRO_ALLOW_HOME` 和 `CODEBASE_BRIDGE_ALLOWED_ROOTS`，再固定传入唯一的附加允许根 `/Users/chat/.config/superpowers/worktrees`。ChatGPT 仍需通过 `open_workspace` 打开具体分支；这会锁定 CodexPro 内置文件工具的根配置，完整 Bash 的非隔离语义会被明确写入共享工作区设计文档。
 
 **Tech Stack:** Bash、Node.js `node:test`、CodexPro 0.28.5。
 
 ---
 
-### Task 1: 为启动边界建立回归测试
+### Task 1: 为真实启动边界建立回归测试
 
 **Files:**
 - Create: `test/workspace/codexpro-worktree-access.test.js`
 - Read: `scripts/start-codexpro-full.sh`
 
-- [ ] **Step 1: 写失败测试，锁定允许根和禁止项**
+- [ ] **Step 1: 写失败测试，锁定真实 child 配置**
 
-```js
-'use strict';
+使用 Node `child_process.spawnSync` 运行 `bash scripts/start-codexpro-full.sh`。测试在临时目录创建并 PATH 前置 fake `codexpro`；fake 只捕获 PWD、NUL 分隔 argv，以及 `CODEXPRO_ROOT`、`CODEBASE_BRIDGE_REPO_ROOT`、`CODEXPRO_ALLOW_HOME`、`CODEBASE_BRIDGE_ALLOWED_ROOTS`。
 
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const test = require('node:test');
-
-const launcherPath = path.resolve(__dirname, '..', '..', 'scripts', 'start-codexpro-full.sh');
-
-test('CodexPro launcher permanently allows Superpowers worktrees only', () => {
-  const launcher = fs.readFileSync(launcherPath, 'utf8');
-
-  assert.match(
-    launcher,
-    /readonly SUPERPOWERS_WORKTREE_ROOT="\/Users\/chat\/\.config\/superpowers\/worktrees"/,
-  );
-  assert.match(
-    launcher,
-    /exec codexpro start\s+\\\s*\n\s*--allow-root "\$SUPERPOWERS_WORKTREE_ROOT"/,
-  );
-  assert.doesNotMatch(launcher, /--allow-home\b/);
-  assert.doesNotMatch(launcher, /--allow-root\s+\/Users\/chat\/\.config\b/);
-});
-```
+以污染的父环境启动 launcher，并断言 fake child 的 PWD 精确为 `/Users/chat/claude`，argv 精确为 `['start', '--allow-root', '/Users/chat/.config/superpowers/worktrees']`，四个根变量均为空。这样能同时发现额外 `--allow-root`、`--allow-home`、宽 cwd 和环境根泄露，而不只检查源码字符串。
 
 - [ ] **Step 2: 运行测试并确认 RED**
 
@@ -52,17 +30,23 @@ Run:
 node --test test/workspace/codexpro-worktree-access.test.js
 ```
 
-Expected: FAIL，因为现有启动脚本尚未定义 `SUPERPOWERS_WORKTREE_ROOT`，也未传入 `--allow-root`。
+Expected: FAIL，因为原启动脚本会把污染的根变量完整传给 `codexpro` child，允许它覆盖默认根或合并宽根。
 
-### Task 2: 固化启动参数
+### Task 2: 锁定启动根并固化附加参数
 
 **Files:**
 - Modify: `scripts/start-codexpro-full.sh`
 - Test: `test/workspace/codexpro-worktree-access.test.js`
 
-- [ ] **Step 1: 在环境变量设置后定义唯一的 worktree 根**
+- [ ] **Step 1: 在 `cd` 后清除根覆盖环境变量，并定义唯一的 worktree 根**
 
 ```bash
+cd /Users/chat/claude
+unset CODEXPRO_ROOT
+unset CODEBASE_BRIDGE_REPO_ROOT
+unset CODEXPRO_ALLOW_HOME
+unset CODEBASE_BRIDGE_ALLOWED_ROOTS
+
 # Keep every Claude/Codex isolated project worktree available to the ChatGPT MCP app.
 # CodexPro profiles do not persist --allow-root, so this belongs in the launcher.
 readonly SUPERPOWERS_WORKTREE_ROOT="/Users/chat/.config/superpowers/worktrees"
@@ -75,7 +59,7 @@ exec codexpro start \
   --allow-root "$SUPERPOWERS_WORKTREE_ROOT"
 ```
 
-保留现有 `cd /Users/chat/claude`、搜索结果上限、环境继承默认值和 profile 中的 `mode/write/tool-mode/bash` 设置；不加入 `--allow-home`，不覆盖用户已选择的 `bash=full`。
+保留搜索结果上限、环境继承默认值和 profile 中的 `mode/write/tool-mode/bash` 设置；不加入 `--allow-home`，不覆盖用户已选择的 `bash=full`。四条 `unset` 只防止调用者扩大 CodexPro 内置文件工具的根范围，不为 Bash 引入操作系统级沙箱。
 
 - [ ] **Step 3: 运行定向测试和 Shell 语法检查**
 
@@ -86,7 +70,7 @@ node --test test/workspace/codexpro-worktree-access.test.js
 bash -n scripts/start-codexpro-full.sh
 ```
 
-Expected: 测试通过，Shell 语法检查无输出且退出码为 0。
+Expected: 测试通过，fake child 只看到精确 cwd/argv 且四个根变量均为空；Shell 语法检查无输出且退出码为 0。
 
 ### Task 3: 同步使用边界和切换流程
 
@@ -96,7 +80,7 @@ Expected: 测试通过，Shell 语法检查无输出且退出码为 0。
 
 - [ ] **Step 1: 更新访问范围**
 
-将原先“仅 `/Users/chat/claude`”替换为主根加附加 worktree 根；说明内置文件工具可通过 `open_workspace` 打开具体 worktree，而 `bash=full` 是用户接受的受信任本机代理模式，不是操作系统级目录沙箱。
+将原先“仅 `/Users/chat/claude`”替换为主根加附加 worktree 根；说明快捷入口会清除四个根覆盖环境变量，内置文件工具可通过 `open_workspace` 打开具体 worktree，而 `bash=full` 是用户接受的受信任本机代理模式，不是操作系统级目录沙箱。
 
 - [ ] **Step 2: 更新开工流程**
 
@@ -121,21 +105,22 @@ Run:
 node --test test/workspace/codexpro-worktree-access.test.js
 bash -n scripts/start-codexpro-full.sh
 git diff --check
-git diff --name-only main...HEAD
+git diff --check main...HEAD
+git status --short
 ```
 
-Expected: 定向测试通过，Shell 无语法错误，diff 无空白错误，变更仅包含启动脚本、测试和相关文档。
+Expected: 定向测试通过，Shell 无语法错误，当前与分支 diff 均无空白错误，工作树干净；变更仅包含启动脚本、测试和相关文档。
 
 - [ ] **Step 2: 提交实现**
 
 ```bash
-git add scripts/start-codexpro-full.sh test/workspace/codexpro-worktree-access.test.js docs/superpowers/specs/2026-06-22-codexpro-shared-workspace-design.md docs/superpowers/plans/2026-07-13-codexpro-permanent-worktree-access.md
-git commit -m "feat(workspace): allow CodexPro Superpowers worktrees"
+git add scripts/start-codexpro-full.sh test/workspace/codexpro-worktree-access.test.js docs/superpowers/specs/2026-06-22-codexpro-shared-workspace-design.md docs/superpowers/specs/2026-07-13-codexpro-permanent-worktree-access-design.md docs/superpowers/plans/2026-07-13-codexpro-permanent-worktree-access.md
+git commit -m "fix(workspace): lock CodexPro launcher roots"
 ```
 
 - [ ] **Step 3: 合入主工作区前检查**
 
-在 `/Users/chat/claude` 中先确认这四个路径没有用户未提交改动；仅当无重叠时把实现提交 cherry-pick 回 main，绝不覆盖用户现有变更。
+在 `/Users/chat/claude` 中先确认这五个路径没有用户未提交改动；仅当无重叠时把实现提交 cherry-pick 回 main，绝不覆盖用户现有变更。
 
 - [ ] **Step 4: 交付网页侧验收步骤**
 

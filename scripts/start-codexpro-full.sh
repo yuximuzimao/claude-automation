@@ -3,6 +3,13 @@ set -euo pipefail
 
 cd /Users/chat/claude
 
+# This launcher fixes the primary root and the only additional worktree root.
+# Do not let caller environment leftovers expand CodexPro file-tool access.
+unset CODEXPRO_ROOT
+unset CODEBASE_BRIDGE_REPO_ROOT
+unset CODEXPRO_ALLOW_HOME
+unset CODEBASE_BRIDGE_ALLOWED_ROOTS
+
 # Search-heavy monorepo default. CodexPro clamps this to 2000 internally.
 export CODEXPRO_MAX_SEARCH_RESULTS="${CODEXPRO_MAX_SEARCH_RESULTS:-1000}"
 
