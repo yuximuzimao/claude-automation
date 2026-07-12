@@ -16,6 +16,9 @@ const rootEnvironmentNames = [
   'CODEXPRO_ALLOW_HOME',
   'CODEBASE_BRIDGE_ALLOWED_ROOTS',
 ];
+const testSentinelName = 'UNRELATED_TEST_SENTINEL';
+const testSentinelValue = 'caller-only';
+const capturedEnvironmentNames = [...rootEnvironmentNames, testSentinelName];
 
 const fakeCodexPro = [
   '#!/usr/bin/env bash',
@@ -29,6 +32,7 @@ const fakeCodexPro = [
   "  printf '%s\\0' \"$CODEBASE_BRIDGE_REPO_ROOT\"",
   "  printf '%s\\0' \"$CODEXPRO_ALLOW_HOME\"",
   "  printf '%s\\0' \"$CODEBASE_BRIDGE_ALLOWED_ROOTS\"",
+  "  printf '%s\\0' \"$UNRELATED_TEST_SENTINEL\"",
   '} > "$CODEXPRO_CAPTURE_PATH"',
   '',
 ].join('\n');
@@ -42,15 +46,15 @@ function readCapture(capturePath) {
   assert.notEqual(argvEnd, -1, 'fake capture must delimit argv with an empty field');
   assert.equal(
     fields.length,
-    argvEnd + 1 + rootEnvironmentNames.length,
-    'fake capture must contain exactly the requested root environment values',
+    argvEnd + 1 + capturedEnvironmentNames.length,
+    'fake capture must contain exactly the requested environment values',
   );
 
   return {
     cwd: fields[0],
     argv: fields.slice(1, argvEnd),
-    rootEnvironment: Object.fromEntries(
-      rootEnvironmentNames.map((name, index) => [name, fields[argvEnd + 1 + index]]),
+    environment: Object.fromEntries(
+      capturedEnvironmentNames.map((name, index) => [name, fields[argvEnd + 1 + index]]),
     ),
   };
 }
@@ -60,6 +64,8 @@ test('CodexPro launcher locks roots against a polluted caller environment', (t) 
   const capturePath = path.join(temporaryDirectory, 'capture');
   const fakeCodexProPath = path.join(temporaryDirectory, 'codexpro');
 
+  process.env[testSentinelName] = testSentinelValue;
+  t.after(() => delete process.env[testSentinelName]);
   t.after(() => fs.rmSync(temporaryDirectory, { force: true, recursive: true }));
   fs.writeFileSync(fakeCodexProPath, fakeCodexPro);
   fs.chmodSync(fakeCodexProPath, 0o755);
@@ -68,13 +74,13 @@ test('CodexPro launcher locks roots against a polluted caller environment', (t) 
     cwd: repositoryRoot,
     encoding: 'utf8',
     env: {
-      ...process.env,
       CODEXPRO_ROOT: '/Users/chat/.config',
       CODEBASE_BRIDGE_REPO_ROOT: '/Users/chat',
       CODEXPRO_ALLOW_HOME: '1',
       CODEBASE_BRIDGE_ALLOWED_ROOTS: '/Users/chat:/Users/chat/.config',
       CODEXPRO_CAPTURE_PATH: capturePath,
       PATH: [temporaryDirectory, process.env.PATH].filter(Boolean).join(path.delimiter),
+      [testSentinelName]: '',
     },
   });
 
@@ -86,10 +92,14 @@ test('CodexPro launcher locks roots against a polluted caller environment', (t) 
 
   assert.equal(capture.cwd, '/Users/chat/claude');
   assert.deepEqual(capture.argv, ['start', '--allow-root', worktreeRoot]);
-  assert.deepEqual(capture.rootEnvironment, {
-    CODEXPRO_ROOT: '',
-    CODEBASE_BRIDGE_REPO_ROOT: '',
-    CODEXPRO_ALLOW_HOME: '',
-    CODEBASE_BRIDGE_ALLOWED_ROOTS: '',
-  });
+  assert.deepEqual(
+    Object.fromEntries(rootEnvironmentNames.map((name) => [name, capture.environment[name]])),
+    {
+      CODEXPRO_ROOT: '',
+      CODEBASE_BRIDGE_REPO_ROOT: '',
+      CODEXPRO_ALLOW_HOME: '',
+      CODEBASE_BRIDGE_ALLOWED_ROOTS: '',
+    },
+  );
+  assert.equal(capture.environment[testSentinelName], '');
 });
