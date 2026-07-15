@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=lib/codexpro-startup-guard.sh
+source "$SCRIPT_DIR/lib/codexpro-startup-guard.sh"
+
+codexpro_stop_stale_server 8787
+
 cd /Users/chat/claude
 
 # Search-heavy monorepo default. CodexPro clamps this to 2000 internally.
