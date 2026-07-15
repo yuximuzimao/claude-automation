@@ -76,5 +76,6 @@ if lsof -nP -iTCP:"$MANAGED_PORT" -sTCP:LISTEN -t >/dev/null 2>&1; then
 fi
 
 grep -Fq 'codexpro_stop_stale_server 8787' "$ROOT_DIR/scripts/start-codexpro-full.sh" || fail "launcher does not call the startup guard"
+grep -Fq 'unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy' "$ROOT_DIR/scripts/start-codexpro-full.sh" || fail "launcher does not isolate ngrok from proxy variables"
 
 printf 'PASS: CodexPro startup guard boundaries verified\n'

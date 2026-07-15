@@ -25,8 +25,9 @@
 1. 用户输入 shell 函数 `codexpro`。
 2. `~/.zshrc` 调用 `/Users/chat/claude/scripts/start-codexpro-full.sh`。
 3. 启动脚本进入 `/Users/chat/claude`，加载该工作区保存的 CodexPro profile。
-4. CodexPro 在 `127.0.0.1:8787` 启动 MCP 服务，并通过保存的 ngrok dev domain 暴露固定 HTTPS 地址。
-5. GPT 应用始终连接同一个 `https://<dev-domain>/mcp?codexpro_token=<stable-token>`。
+4. 启动脚本清除 shell 快捷函数注入的 HTTP/SOCKS 代理变量，避免 ngrok 免费 agent 触发 `ERR_NGROK_9009`；其他带参数的 CodexPro 子命令仍保留原代理行为。
+5. CodexPro 在 `127.0.0.1:8787` 启动 MCP 服务，并通过保存的 ngrok dev domain 暴露固定 HTTPS 地址。
+6. GPT 应用始终连接同一个 `https://<dev-domain>/mcp?codexpro_token=<stable-token>`。
 
 断网期间不增加后台重连、launchd 常驻或自动开机启动。网络恢复后，用户主动输入一次 `codexpro` 即可恢复，避免引入不需要的长期进程管理。
 
@@ -55,11 +56,13 @@
 - 复用当前工作区已有的 48 位 CodexPro token，切换隧道时不重新生成。
 - ngrok authtoken 只进入 ngrok 官方配置文件；任何命令输出、测试 fixture、Git diff 和设计文档都不得包含真实 token。
 - CodexPro 保持只监听 `127.0.0.1`，公网访问继续由带 token 的 HTTPS MCP URL 保护。
+- 只在无参数日常启动链路中清除 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 及其小写形式；不修改用户全局代理配置。
 - 保留现有工作区根目录、额外 worktree 根目录、工具模式和环境继承限制，不扩大 GPT 的文件或命令权限。
 
 ## 错误反馈
 
 - 未安装或未认证 ngrok：终端给出一次性配置提示，不回退到会变地址的 Cloudflare Quick Tunnel。
+- ngrok 报 `ERR_NGROK_9009`：启动脚本必须清除继承的代理变量后再启动，不要求用户购买付费代理能力。
 - 固定域名无法连通：启动失败并保留 hostname 配置，用户修复网络后再次运行 `codexpro`；不创建临时替代 URL。
 - 端口被非 CodexPro 程序占用：停止并报告具体占用者，不自动处理。
 

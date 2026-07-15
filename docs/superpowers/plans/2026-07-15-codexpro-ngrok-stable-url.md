@@ -145,6 +145,7 @@ if lsof -nP -iTCP:"$MANAGED_PORT" -sTCP:LISTEN -t >/dev/null 2>&1; then
 fi
 
 grep -Fq 'codexpro_stop_stale_server 8787' "$ROOT_DIR/scripts/start-codexpro-full.sh" || fail "launcher does not call the startup guard"
+grep -Fq 'unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy' "$ROOT_DIR/scripts/start-codexpro-full.sh" || fail "launcher does not isolate ngrok from proxy variables"
 
 printf 'PASS: CodexPro startup guard boundaries verified\n'
 ```
@@ -235,6 +236,11 @@ export CODEXPRO_MAX_SEARCH_RESULTS="${CODEXPRO_MAX_SEARCH_RESULTS:-1000}"
 # values to ChatGPT-triggered bash commands.
 export CODEXPRO_INHERIT_ENV="${CODEXPRO_INHERIT_ENV:-0}"
 
+# ngrok's free agent rejects inherited HTTP/SOCKS proxy settings (ERR_NGROK_9009).
+# Keep the shell shortcut's proxy behavior for other CodexPro subcommands, but let
+# the local server and ngrok tunnel use the machine's direct network path.
+unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
+
 exec codexpro start \
   --allow-root /Users/chat/.config/superpowers/worktrees
 ```
@@ -249,7 +255,7 @@ bash -n scripts/lib/codexpro-startup-guard.sh
 bash -n scripts/start-codexpro-full.sh
 ```
 
-Expected: 测试输出 `PASS: CodexPro startup guard boundaries verified`，两个语法检查退出码均为 0。
+Expected: 测试输出 `PASS: CodexPro startup guard boundaries verified`，两个语法检查退出码均为 0；由 shell 快捷函数注入的代理变量不会传给 ngrok，因此不会触发 `ERR_NGROK_9009`。
 
 - [ ] **Step 6: 提交守卫与测试**
 
