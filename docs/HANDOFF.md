@@ -18,3 +18,11 @@
 - Codex 需要审查 → 写 `docs/codex-handoff/{project}-{action}.md` → 追加 inbox.json → 告诉用户
 - Claude Code 启动 → SessionStart hook 自动检查 inbox → 有待处理则通知用户
 - 协议详见 `docs/codex-handoff/README.md`
+
+## CodexPro 固定地址（2026-07-15）
+
+- `/Users/chat/claude` 已切换到 ngrok 账号固定 dev domain；GPT App Server URL 不再随 CodexPro 重启变化。
+- 日常恢复：网络可用后在终端输入一次 `codexpro`。
+- 启动脚本会自动 TERM 当前用户残留的 CodexPro `dist/http.js`，但拒绝处理任何无法确认身份的 8787 端口占用者。
+- 启动脚本会清除 shell 快捷函数注入的代理变量，避免 ngrok 免费 agent 触发 `ERR_NGROK_9009`，但不会修改用户的全局代理配置。
+- ngrok authtoken 只保存在 ngrok 官方本机配置；CodexPro token 只保存在 `~/.codexpro` profile，文档和 Git 不记录真实值。
