@@ -1,5 +1,7 @@
 # CodexPro 共享工作区接入实施计划
 
+> **历史状态：已被固定地址方案取代。** 本文保留 2026-06-22 首次接入时的 Cloudflare 临时地址步骤；当前实施结果以 [CodexPro ngrok 固定地址计划](2026-07-15-codexpro-ngrok-stable-url.md) 与 `docs/HANDOFF.md` 为准。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 将 ChatGPT 网页版安全连接到 `/Users/chat/claude`，并通过真实工具调用验证它能按 Claude/Codex 的共享规则处理项目。

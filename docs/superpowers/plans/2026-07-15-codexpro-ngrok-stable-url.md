@@ -1,5 +1,7 @@
 # CodexPro ngrok Stable URL Implementation Plan
 
+> **状态：已完成（2026-07-15）。** 固定域名为 `atop-chewing-tidiness.ngrok-free.dev`；两次启动的 endpoint 与 token 哈希一致，公网未鉴权请求返回 401、正确鉴权返回 200，用户已在 GPT 网页端创建应用并实测连接成功。下方未勾选项保留为实施时的原始执行清单，不代表当前待办。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 让 `/Users/chat/claude` 的 CodexPro 使用同一个 ngrok HTTPS 地址，并让无参数 `codexpro` 能安全重启断线后残留的本地 CodexPro 服务。
@@ -187,10 +189,8 @@ codexpro_is_managed_server() {
   owner_uid="$(ps -p "$pid" -o uid= 2>/dev/null | tr -d ' ')"
   [ "$owner_uid" = "$(id -u)" ] || return 1
   command_line="$(codexpro_process_command "$pid")"
-  case "$command_line" in
-    *'/node '*'/'lib/node_modules/codexpro/dist/http.js'*) return 0 ;;
-    *) return 1 ;;
-  esac
+  [[ "$command_line" == "node "* || "$command_line" == *"/node "* ]] || return 1
+  [[ "$command_line" == *"/lib/node_modules/codexpro/dist/http.js"* ]]
 }
 
 codexpro_stop_stale_server() {
@@ -276,7 +276,7 @@ Expected: commit 只包含上述 3 个文件。
 ### Task 3: 安装 ngrok 并保存固定 profile
 
 **Files:**
-- Modify outside repository: `~/.config/ngrok/ngrok.yml`
+- Modify outside repository: ngrok CLI 报告的用户配置文件（macOS 当前为 `~/Library/Application Support/ngrok/ngrok.yml`）
 - Modify outside repository: `~/.codexpro/profiles/*.json` for root `/Users/chat/claude`
 
 - [ ] **Step 1: 安装官方 ngrok CLI**
@@ -304,7 +304,7 @@ Expected: ngrok reports a valid config file under the user's home directory.
 
 - [ ] **Step 3: 读取账号分配的固定 dev domain**
 
-Open `https://dashboard.ngrok.com/domains` in the authenticated browser tab and read the single account-assigned `ngrok-free.app` dev domain. Store it only as the runtime shell variable `NGROK_DOMAIN`; it is not a secret.
+Open `https://dashboard.ngrok.com/domains` in the authenticated browser tab and read the account-assigned dev domain. Store it only as the runtime shell variable `NGROK_DOMAIN`; it is not a secret.
 
 - [ ] **Step 4: 保存 CodexPro ngrok profile，同时证明 token 没变**
 

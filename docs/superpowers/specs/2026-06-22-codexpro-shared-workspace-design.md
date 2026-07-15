@@ -1,5 +1,7 @@
 # CodexPro 共享工作区设计
 
+> **历史状态：已被固定地址方案取代。** 本文保留 2026-06-22 首次接入时的 Cloudflare quick tunnel 设计记录；当前公网连接和日常启动方式以 [CodexPro ngrok 固定地址设计](2026-07-15-codexpro-ngrok-stable-url-design.md) 与 `docs/HANDOFF.md` 为准。
+
 ## 目标
 
 通过 CodexPro 把 ChatGPT 网页版连接到主工作区 `/Users/chat/claude`，并允许它按需打开 `/Users/chat/.config/superpowers/worktrees` 下的 Superpowers 隔离 worktree。这样 ChatGPT 能和 Claude Code、Codex 共享同一套项目规则、源代码、Git 状态、交接文档和已安装 Skills。
