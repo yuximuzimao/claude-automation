@@ -21,7 +21,7 @@ codexpro_is_managed_server() {
 
 codexpro_stop_stale_server() {
   local port="${1:-8787}" pid command_line attempt=0
-  pid="$(codexpro_port_owner_pid "$port")"
+  pid="$(codexpro_port_owner_pid "$port" || true)"
   [ -n "$pid" ] || return 0
 
   if ! codexpro_is_managed_server "$pid"; then

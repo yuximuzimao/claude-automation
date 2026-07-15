@@ -42,6 +42,11 @@ wait_for_listener() {
 # shellcheck source=/dev/null
 source "$GUARD"
 
+EMPTY_PORT="$(free_port)"
+if ! bash -euo pipefail -c 'source "$1"; codexpro_stop_stale_server "$2"' _ "$GUARD" "$EMPTY_PORT"; then
+  fail "guard failed when the port was already free"
+fi
+
 UNRELATED_PORT="$(free_port)"
 node -e 'require("http").createServer((_,res)=>res.end("ok")).listen(Number(process.argv[1]),"127.0.0.1")' "$UNRELATED_PORT" &
 UNRELATED_PID=$!
