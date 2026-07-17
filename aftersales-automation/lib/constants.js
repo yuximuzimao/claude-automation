@@ -3,6 +3,19 @@
 // 退回物流关键词（三处共用：infer.js / pipeline.js / op-queue.js）
 const RETURN_KEYWORDS = ['退回商家', '安排退回', '拒收', '退件', '退回', '到达商家仓库'];
 
+const PENDING_RETURN_CONFIRMATION_RE = /收件人要求退回[，,]\s*等待发件人确认[！!]?/g;
+
+function hasConfirmedReturn(text) {
+  const original = String(text || '');
+  if (!original.includes('收件人要求退回')) {
+    return RETURN_KEYWORDS.some(keyword => original.includes(keyword));
+  }
+  const withoutPendingRequest = original
+    .replace(PENDING_RETURN_CONFIRMATION_RE, '')
+    .replace(/退回件/g, '');
+  return RETURN_KEYWORDS.some(keyword => withoutPendingRequest.includes(keyword));
+}
+
 // 买家签收关键词（非退回）
 // 注意：物流动态首行格式为"签收 YYYY-MM-DD HH:MM:SS"，需覆盖无前缀的"签收"
 // 快递柜/菜鸟驿站属于"待取件"（可拦截），不算签收，放在 YIZHAN_KEYWORDS
@@ -91,4 +104,4 @@ function isMerchantFaultReason(afterSaleReason) {
   return MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
 }
 
-module.exports = { RETURN_KEYWORDS, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };
+module.exports = { RETURN_KEYWORDS, hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };

@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const { MERCHANT_FAULT_REASONS, RETURN_KEYWORDS, SIGNED_KEYWORDS, isMerchantFaultReason } = require('../constants');
+const { MERCHANT_FAULT_REASONS, hasConfirmedReturn, SIGNED_KEYWORDS, isMerchantFaultReason } = require('../constants');
 const db = require('./data');
 
 const DATA_DIR = path.join(__dirname, '../../data');
@@ -48,7 +48,7 @@ function extractLogisticsState(logistics) {
 
   const allText = packages.map(p => p.text || '').join(' ');
 
-  if (RETURN_KEYWORDS.some(kw => allText.includes(kw))) return '已退回';
+  if (hasConfirmedReturn(allText)) return '已退回';
   if (SIGNED_KEYWORDS.some(kw => allText.includes(kw))) return '已签收';
   if (allText.includes('暂无信息')) return '无物流';
   if (/在途|运输中|转运中/.test(allText)) return '在途';

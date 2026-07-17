@@ -86,6 +86,42 @@ test('后续带单号行已有退回节点时允许退款', () => {
   assert.equal(checkedLogistics(decision), true);
 });
 
+test('只有“收件人要求退回，等待发件人确认”时不算已退回', () => {
+  const tracking = 'TEST-TRACK-PENDING-RETURN';
+  const pending = '包裹异常\n收件人要求退回，等待发件人确认！';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', tracking)],
+    erpLogs: [{ tracking, logisticsText: pending }],
+    packages: [packageText(tracking, pending)],
+  });
+
+  assert.notEqual(decision.action, 'approve');
+});
+
+test('待发件人确认之后另有明确退回节点时仍算已退回', () => {
+  const tracking = 'TEST-TRACK-CONFIRMED-RETURN';
+  const confirmed = '包裹异常\n收件人要求退回，等待发件人确认！\n退回\n您的快件已被安排退回';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', tracking)],
+    erpLogs: [{ tracking, logisticsText: confirmed }],
+    packages: [packageText(tracking, confirmed)],
+  });
+
+  assert.equal(decision.action, 'approve');
+});
+
+test('两边重复待确认文案加退回件标签仍不算第二个退回节点', () => {
+  const tracking = 'TEST-TRACK-DUPLICATE-PENDING';
+  const pending = '退回件\n包裹异常\n收件人要求退回，等待发件人确认！';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', tracking)],
+    erpLogs: [{ tracking, logisticsText: pending }],
+    packages: [packageText(tracking, pending)],
+  });
+
+  assert.notEqual(decision.action, 'approve');
+});
+
 test('有单号但物流明确尚未揽收时仍按未发货退款', () => {
   const tracking = 'TEST-TRACK-NOT-PICKED';
   const decision = makeDecision({

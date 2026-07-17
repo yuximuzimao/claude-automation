@@ -14,7 +14,7 @@ const sse = require('./sse');
 const { getSkipCompletionStatus } = require('./pipeline-status');
 const { inferDecision } = require('../infer');
 const { inferWithAI } = require('../ai-infer');
-const { RETURN_KEYWORDS, getHoursUntilNextScan } = require('../constants');
+const { hasConfirmedReturn, getHoursUntilNextScan } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
 
 const BASE = path.join(__dirname, '../..');
@@ -228,7 +228,7 @@ async function processOne(queueItem, options = {}) {
     if (interceptRecord) {
       // 检查物流是否已有退回节点——若已退回则清除拦截记录，不再上报人工
       const packages = sim.collectedData.logistics && sim.collectedData.logistics.packages || [];
-      const hasReturned = packages.some(p => RETURN_KEYWORDS.some(kw => (p.text || '').includes(kw)));
+      const hasReturned = packages.some(p => hasConfirmedReturn(p.text));
       if (hasReturned) {
         log(`[${workOrderNum}] 快递 ${shipTracking} 已退回，清除拦截记录`);
         db.removeIntercept(shipTracking);

@@ -11,7 +11,7 @@
  * 变更任一读取字段必须同步更新该文档。
  */
 
-const { RETURN_KEYWORDS, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
+const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
 
 // 免退配件关键词（不计入应退/实退数量）
 const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
@@ -86,7 +86,7 @@ function evaluateRefundOnlyTrackings(cd, rows) {
       ...erpResults.filter(result => result.tracking === tracking).map(result => result.logisticsText || ''),
       ...packages.filter(pkg => getPackageTracking(pkg) === tracking).map(pkg => pkg.text || ''),
     ].filter(Boolean);
-    const hasReturn = texts.some(text => RETURN_KEYWORDS.some(keyword => text.includes(keyword)));
+    const hasReturn = texts.some(hasConfirmedReturn);
     if (hasReturn) return { tracking, outcome: 'returned' };
 
     const hasNotPickedUp = texts.some(text => NOT_PICKED_UP_KEYWORDS.some(keyword => text.includes(keyword)));
@@ -126,9 +126,7 @@ function getAggregatedErpStatus(cd, field) {
 // 检查所有包裹是否都有退回物流节点
 function allPackagesReturned(packages) {
   if (!packages || !packages.length) return false;
-  return packages.every(pkg =>
-    RETURN_KEYWORDS.some(kw => (pkg.text || '').includes(kw))
-  );
+  return packages.every(pkg => hasConfirmedReturn(pkg.text));
 }
 
 // 检查是否有包裹已被买家签收（且无退回节点）
@@ -136,7 +134,7 @@ function anyPackageSignedByBuyer(packages) {
   if (!packages || !packages.length) return false;
   return packages.some(pkg => {
     const text = pkg.text || '';
-    const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+    const hasReturn = hasConfirmedReturn(text);
     const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
     return hasSigned && !hasReturn;
   });
@@ -295,7 +293,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
           const erpEntry = erpLogResults.find(r => r.tracking === tr);
           if (erpEntry && erpEntry.logisticsText) {
             const text = erpEntry.logisticsText;
-            if (RETURN_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'returned', label: `${tr}（已退回）` };
+            if (hasConfirmedReturn(text)) return { tr, status: 'returned', label: `${tr}（已退回）` };
             if (SIGNED_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'signed', label: `${tr}（已签收）` };
             if (YIZHAN_KEYWORDS.some(kw => text.includes(kw))) return { tr, status: 'yizhan', label: `${tr}（驿站待取件）` };
             return { tr, status: 'transit', label: `${tr}（在途）` };
@@ -385,11 +383,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     );
     // 修正：所有有物流信息的行都必须有退回关键词才算全部退回（之前 .some() 导致部分退回误判为全部退回）
     const erpLogsWithText = erpLogResults.filter(r => r.logisticsText);
-    const erpReturned = erpLogsWithText.length > 0 && erpLogsWithText.every(r => RETURN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
+    const erpReturned = erpLogsWithText.length > 0 && erpLogsWithText.every(r => hasConfirmedReturn(r.logisticsText));
     // 逐运单物流状态（替代原来的 tracking 列表 + '?'）
     const erpTrackingStatuses = erpLogResults.filter(r => r.tracking).map(r => {
       const text = r.logisticsText || '';
-      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasReturn = hasConfirmedReturn(text);
       const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
       const status = hasReturn ? '已退回' : hasSigned ? '已签收' : '在途';
       return `${r.tracking}：${status}`;
@@ -426,7 +424,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     const pkgSummary = packages.map(p => {
       const text = p.text || '';
-      const hasRet = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasRet = hasConfirmedReturn(text);
       const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
       const numMatch = text.match(/物流单号[：:]\s*\n?(\S+)/);
       const num = numMatch ? numMatch[1] : (p.tab || '?');
@@ -477,7 +475,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     // 交叉验证原则：同一快递单号，鲸灵和 ERP 任一数据源显示「退回」即判退回。
     // 不再区分"主品/赠品包裹"或"哪个源优先"——退回信息只要存在就算数。
     const jlReturnedTrackings = new Set(
-      (packages || []).filter(pkg => RETURN_KEYWORDS.some(kw => (pkg.text || '').includes(kw)))
+      (packages || []).filter(pkg => hasConfirmedReturn(pkg.text))
         .map(pkg => {
           const m = (pkg.text || '').match(/物流单号[：:]\s*\n?(\S+)/);
           return m ? m[1] : null;
@@ -486,7 +484,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const jlSignedTrackings = new Set(
       (packages || []).filter(pkg => {
         const text = pkg.text || '';
-        return SIGNED_KEYWORDS.some(kw => text.includes(kw)) && !RETURN_KEYWORDS.some(kw => text.includes(kw));
+        return SIGNED_KEYWORDS.some(kw => text.includes(kw)) && !hasConfirmedReturn(text);
       }).map(pkg => {
         const m = (pkg.text || '').match(/物流单号[：:]\s*\n?(\S+)/);
         return m ? m[1] : null;
@@ -500,7 +498,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         .filter(tracking => shippedFlowTrackings.has(tracking));
       giftPkgStatuses = giftTrackings.map(tr => {
         const erpEntry = erpLogResults.find(r => r.tracking === tr);
-        const erpReturned = erpEntry && erpEntry.logisticsText && RETURN_KEYWORDS.some(kw => erpEntry.logisticsText.includes(kw));
+        const erpReturned = erpEntry && erpEntry.logisticsText && hasConfirmedReturn(erpEntry.logisticsText);
         // 任一数据源显示退回 → 判退回
         if (jlReturnedTrackings.has(tr) || erpReturned) return { tr, status: 'returned', label: `${tr}已退回` };
         // 鲸灵显示已签收（且两边都不是退回）
@@ -550,7 +548,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const returnedPkgs = [];
     packages.forEach(pkg => {
       const text = pkg.text || '';
-      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasReturn = hasConfirmedReturn(text);
       const hasSigned = SIGNED_KEYWORDS.some(kw => text.includes(kw));
       const numMatch = text.match(/物流单号[：:]\s*([A-Za-z0-9]+)/);
       const tracking = numMatch ? numMatch[1] : (pkg.num || '?');
@@ -604,7 +602,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     const yizhanPkgs = [];
     packages.forEach(pkg => {
       const text = pkg.text || '';
-      const hasReturn = RETURN_KEYWORDS.some(kw => text.includes(kw));
+      const hasReturn = hasConfirmedReturn(text);
       if (!hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw))) {
         const numMatch = text.match(/物流单号[：:]\n(\S+)/);
         yizhanPkgs.push(numMatch ? numMatch[1] : '?');

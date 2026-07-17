@@ -10,6 +10,28 @@ const { navigateErp, checkLogin, recoverLogin, CLOSE_ALL_DIALOGS_JS } = require(
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
+function parsePlatformOrderIds(text) {
+  return String(text || '')
+    .split(/[；;]/)
+    .map(id => id.trim())
+    .filter(Boolean);
+}
+
+function validatePlatformOrderRows(rows, subOrderId) {
+  const expected = String(subOrderId);
+  rows.forEach((row, index) => {
+    const ids = Array.isArray(row.platformOrderIds)
+      ? row.platformOrderIds.map(String)
+      : parsePlatformOrderIds(row.platformTradeText);
+    if (!ids.length) {
+      throw new Error(`ERP搜索结果第${index + 1}行未读取到平台交易号`);
+    }
+    if (!ids.includes(expected)) {
+      throw new Error(`ERP搜索结果第${index + 1}行平台交易号不包含搜索子订单 ${expected}（实际：${ids.join('；')}）`);
+    }
+  });
+}
+
 // 填入子订单号并搜索，返回所有行信息
 function makeSearchJS(subOrderId) {
   return `(function(){
@@ -50,6 +72,14 @@ const READ_ROWS_JS = `(function(){
     totalCount: totalCount,
     rows: rows.map(function(row){
       var text = row.innerText;
+      var platformCell = row.querySelector('.trade-cell.trade-ptid[data-field="ptid"]') || row.querySelector('.trade-cell.trade-ptid');
+      var platformTradeText = platformCell ? platformCell.innerText.trim() : '';
+      var platformOrderIds = platformCell
+        ? Array.from(platformCell.querySelectorAll('span')).map(function(span){ return span.innerText.trim(); }).filter(Boolean)
+        : [];
+      if (!platformOrderIds.length && platformTradeText) {
+        platformOrderIds = platformTradeText.split(/[；;]/).map(function(id){ return id.trim(); }).filter(Boolean);
+      }
       // 内部单号（ERP内部编号，纯数字9位左右）
       var internalId = (text.match(/\\t(\\d{9,12})\\t/) || [])[1];
       // 快递单号：提取所有"物流 复制"前的快递单号（分包时同一行可能有多个）
@@ -64,12 +94,12 @@ const READ_ROWS_JS = `(function(){
       else if (text.includes('卖家已发货')) status = '卖家已发货';
       else if (text.includes('交易成功')) status = '交易成功';
       else if (text.includes('交易关闭')) status = '交易关闭';
-      return { internalId, tracking, trackings, status, textSnippet: text.substring(0, 150) };
+      return { internalId, platformTradeText, platformOrderIds, tracking, trackings, status, textSnippet: text.substring(0, 150) };
     })
   });
 })()`;
 
-async function erpSearch(targetId, subOrderId) {
+async function erpSearch(targetId, subOrderId, options = {}) {
   try {
     const loginStatus = await checkLogin(targetId);
     if (!loginStatus.loggedIn) await recoverLogin(targetId);
@@ -92,10 +122,18 @@ async function erpSearch(targetId, subOrderId) {
     }, { maxRetries: 8, delayMs: 1200, label: 'check mixKey' });
 
     // 填值搜索
+    let rows;
     await retry(async () => {
       // 先 clickAt 激活搜索框
       await cdp.clickAt(targetId, 'input.el-input__inner');
       await sleep(800);
+
+      // 记录搜索前的整表指纹，之后必须看到结果变化（不依赖「共N条」文案）
+      const FINGERPRINT_JS = `(function(){
+        var items = Array.from(document.querySelectorAll('.module-trade-list-item'));
+        return items.map(function(r){ return r.innerText.substring(0,30); }).join('|');
+      })()`;
+      const prevFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
 
       const fill = await cdp.eval(targetId, makeSearchJS(subOrderId));
       if (fill.error) throw new Error(fill.error);
@@ -103,14 +141,6 @@ async function erpSearch(targetId, subOrderId) {
       if (!fill.placeholder || !fill.placeholder.includes('系统单号')) {
         throw new Error(`填入字段不正确，placeholder: ${fill.placeholder}，期望含「系统单号」`);
       }
-
-      // 整表指纹判断搜索完成（不依赖「共N条」文案，防旧结果穿透）
-      // 记录搜索前的指纹：所有列表项前30字符拼接
-      const FINGERPRINT_JS = `(function(){
-        var items = Array.from(document.querySelectorAll('.module-trade-list-item'));
-        return items.map(function(r){ return r.innerText.substring(0,30); }).join('|');
-      })()`;
-      const prevFingerprint = await cdp.eval(targetId, FINGERPRINT_JS);
 
       // 轮询等待指纹变化（最多 10s）
       let newFingerprint = '';
@@ -127,13 +157,17 @@ async function erpSearch(targetId, subOrderId) {
         const countText = await cdp.eval(targetId, `(document.body.innerText.match(/共\\d+条/) || [''])[0]`);
         if (!countText) throw new Error('搜索未执行（指纹未变且无共N条文字）');
       }
+
+      rows = await cdp.eval(targetId, READ_ROWS_JS);
+      if (options.validatePlatformOrderId !== false) {
+        validatePlatformOrderRows(rows.rows || [], subOrderId);
+      }
     }, { maxRetries: 3, delayMs: 2000, label: `erp-search ${subOrderId}` });
 
-    const rows = await cdp.eval(targetId, READ_ROWS_JS);
     return ok({ subOrderId, rows });
   } catch (e) {
     return fail(e);
   }
 }
 
-module.exports = { erpSearch };
+module.exports = { erpSearch, parsePlatformOrderIds, validatePlatformOrderRows };

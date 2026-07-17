@@ -11,7 +11,7 @@ const path = require('path');
 const db = require('./data');
 const sse = require('./sse');
 const { classifySessionFailure } = require('./account-session-status');
-const { RETURN_KEYWORDS, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
+const { hasConfirmedReturn, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
 const { expireStaleAlerts } = require('../jl/alerts');
 
@@ -572,10 +572,10 @@ async function cleanReturnedIntercepts() {
   const remaining = Object.keys(db.readIntercepts());
   for (const tracking of remaining) {
     try {
-      const res = await erpSearch(erpId, tracking);
+      const res = await erpSearch(erpId, tracking, { validatePlatformOrderId: false });
       if (!res.success) { log(`[intercept-clean] ERP 查 ${tracking} 失败: ${res.error}`); continue; }
       const rows = res.data && res.data.rows && res.data.rows.rows || [];
-      const hasReturned = rows.some(r => RETURN_KEYWORDS.some(kw => (r.textSnippet || '').includes(kw)));
+      const hasReturned = rows.some(r => hasConfirmedReturn(r.textSnippet));
       if (hasReturned) { db.removeIntercept(tracking); log(`[intercept-clean] ${tracking} ERP显示已退回，已清除`); cleaned++; }
       else log(`[intercept-clean] ${tracking} 未退回，保留`);
     } catch(e) { log(`[intercept-clean] 查询 ${tracking} 异常: ${e.message}`); }
