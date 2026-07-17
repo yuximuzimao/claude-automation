@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Iterable, TextIO
+from typing import Callable, Iterable, TextIO
 
 _PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
 _INFERENCE_SKIP = frozenset({
@@ -119,13 +119,16 @@ def infer_project_from_handle(
     handle: TextIO,
     *,
     max_lines: int | None = None,
+    early_candidate_is_valid: Callable[[str], bool] | None = None,
 ) -> str | None:
     """Infer a project from weighted /claude/{project}/ mentions.
 
     The default path first scans 200 lines for speed. If that window has no
     unique project signal, it continues up to 1000 lines so long planning
     sessions can still be attributed when the real project is created later.
-    Passing ``max_lines`` keeps a strict one-window limit for tests/callers.
+    Callers may reject an invalid early candidate so the scan continues to
+    1000 lines. Passing ``max_lines`` keeps a strict one-window limit for
+    tests/callers.
 
     Does NOT seek back — caller must seek(0) to re-read from the start.
     """
@@ -146,7 +149,10 @@ def infer_project_from_handle(
 
         if max_lines is None and i + 1 == initial_limit:
             winner = _unique_project_winner(votes)
-            if winner is not None:
+            if winner is not None and (
+                early_candidate_is_valid is None
+                or early_candidate_is_valid(winner)
+            ):
                 return winner
 
     return _unique_project_winner(votes)

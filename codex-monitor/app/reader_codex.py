@@ -28,7 +28,10 @@ def read_session_file(path: Path) -> CodexSessionResult:
     parse_errors = 0
 
     with path.open("r", encoding="utf-8", errors="replace") as handle:
-        inferred_project = infer_project_from_handle(handle)
+        inferred_project = infer_project_from_handle(
+            handle,
+            early_candidate_is_valid=_project_metadata_exists,
+        )
         handle.seek(0)
         for line in handle:
             try:
@@ -87,6 +90,10 @@ def read_session_file(path: Path) -> CodexSessionResult:
 def read_codex_sessions(root: Path) -> CodexScanResult:
     session_results = tuple(read_session_file(path) for path in _iter_session_files(root))
     return CodexScanResult(sessions=session_results)
+
+
+def _project_metadata_exists(project: str) -> bool:
+    return (Path.home() / "claude" / project / "CLAUDE.md").is_file()
 
 
 def _iter_session_files(root: Path) -> Iterable[Path]:

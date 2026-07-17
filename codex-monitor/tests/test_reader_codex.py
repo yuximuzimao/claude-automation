@@ -4,6 +4,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from app.reader_codex import read_codex_sessions, read_session_file
 
@@ -169,6 +170,60 @@ class CodexReaderTests(unittest.TestCase):
         self.assertEqual(result.token_count_events, 4)
         self.assertEqual(result.last_usage_total.total_tokens, 400)
         self.assertEqual(result.latest_quota().primary.used_percent, 13.0)
+
+    def test_invalid_early_candidate_uses_late_known_project(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "rollout.jsonl"
+            lines = [
+                json.dumps(
+                    {
+                        "timestamp": "2026-07-17T08:00:00.000Z",
+                        "type": "event_msg",
+                        "payload": {
+                            "type": "message",
+                            "message": "/Users/me/claude/temporary-task/task.md",
+                        },
+                    }
+                ),
+                *[
+                    json.dumps(
+                        {
+                            "timestamp": "2026-07-17T08:00:00.000Z",
+                            "type": "event_msg",
+                            "payload": {"type": "function_call_output"},
+                        }
+                    )
+                    for _ in range(199)
+                ],
+                json.dumps(
+                    {
+                        "timestamp": "2026-07-17T08:01:00.000Z",
+                        "type": "event_msg",
+                        "payload": {
+                            "type": "user_message",
+                            "message": "/Users/me/claude/aftersales-automation/CLAUDE.md",
+                        },
+                    }
+                ),
+                _token_count_line(
+                    "2026-07-17T08:02:00.000Z",
+                    {},
+                    total_tokens=9,
+                ).rstrip("\n"),
+            ]
+            path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+            with patch(
+                "app.reader_codex._project_metadata_exists",
+                side_effect=lambda project: project == "aftersales-automation",
+            ):
+                result = read_session_file(path)
+
+        self.assertEqual(
+            result.usage_events[0].inferred_project,
+            "aftersales-automation",
+        )
+
 
 def _token_count_line(
     timestamp: str,

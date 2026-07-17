@@ -163,6 +163,30 @@ class TestInferProjectSignalWeighting(unittest.TestCase):
 
         self.assertEqual(infer_project_from_handle(handle), "order-review")
 
+    def test_invalid_early_candidate_extends_to_late_valid_project(self) -> None:
+        lines = [
+            _codex_line(
+                "message",
+                "/Users/me/claude/aftersales-confidence-safety-v1/task.md",
+            ),
+            *[
+                _codex_line("function_call_output", "no project signal")
+                for _ in range(199)
+            ],
+            _codex_line(
+                "user_message",
+                "/Users/me/claude/aftersales-automation/CLAUDE.md",
+            ),
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+
+        result = infer_project_from_handle(
+            handle,
+            early_candidate_is_valid=lambda project: project == "aftersales-automation",
+        )
+
+        self.assertEqual(result, "aftersales-automation")
+
 
 class TestInferProjectClaudeCodeFormat(unittest.TestCase):
     """Claude Code JSONL (no payload dict) should work correctly."""
