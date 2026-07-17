@@ -345,6 +345,7 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 | 商品档案V2 DOM 空白但不报错 | DOM 未渲染，但 Vue dataList 有数据 | 直接从 Vue sv.dataList 读（脚本已处理） |
 | 鲸灵备注弹窗关闭了但未保存 | 用了错误的按钮点击方式 | 必须用 MouseEvent dispatch（mousedown+mouseup+click），不能用 clickAt+button |
 | ERP 搜索后无结果 | 用了主订单号而非子订单号 | 永远用子订单号（纯数字） |
+| ERP 搜索返回其他订单 | 搜索未生效或读到残留结果 | 逐行核验“平台交易号”；只重搜一次，第二次仍不匹配则报错停止 |
 | 套件辨识错误 | 靠商品名猜套件 | 必须查档案V2 subItemNum 字段 |
 | 店铺管理一直显示「确认保存」 | 重新登录页已关闭或无待确认 port 文件 | 点「取消」并等「取消中...」结束；仍不恢复时再检查 `/relogin-cancel` 响应和 `.relogin-port-<num>` |
 | 重新登录保存后仍显示「重新登录」 | 保存后 `status=unknown` 被当作失效状态 | `unknown + hasFile` 是未单账号验证，不是失效；通过店铺管理“打开后台”安全验证 |
@@ -385,6 +386,7 @@ curl -s "http://localhost:3456/eval?target=$JLID" \
 - `[∞/永久保留]` **#41 ERP 登录检测**：ERP 掉线时浮层弹窗不改变 title/hash，检测失败；每次 navigateErp 前先 location.reload()（3秒），再检测 `.inner-login-wrapper`
 - `[∞/永久保留]` **#43 鲸灵多账号切换必须同步 current-session**：任何成功 `jl.js inject` 的路径都要写 `data/current-session.json`，包括 `scan-all.js`。否则实际 tab 账号与缓存账号不一致，后续流程会跳过注入并读错/读空工单。
 - `[∞/永久保留]` **#44 重新登录取消必须等后端收口**：点击取消后用 `reloginCancelling` 锁住确认/取消并显示「取消中...」；只有 `/relogin-cancel` 成功才清理 `reloginConfirm`、恢复「重新登录」，失败或请求抛错必须保留确认态。禁止先恢复按钮再异步取消，否则用户再次登录会让旧进程失去可追踪入口。`unknown + hasFile` 是保存但未验证，不等于登录失败。
+- `[∞/永久保留]` **#45 ERP 搜索结果逐行验单**：每行“平台交易号”必须包含本次搜索的子订单号；合并订单用 `；` 或 `;` 拆分。结果错误只允许重搜一次，总共 2 次，第二次仍失败立即报错，不继续采集或推理。
 
 ---
 
