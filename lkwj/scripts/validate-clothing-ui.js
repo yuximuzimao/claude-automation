@@ -96,9 +96,12 @@ function createClothingSandbox(html, options = {}) {
       getClothingStats,
       getGorgeousMagicProgress,
       getClothingList,
+      sortClothingPieces,
+      buildClothingDisplayEntries,
       renderClothingTab,
       renderClothingSetCard,
       renderClothingSingleRow,
+      setClothingCategoryFilter,
       toggleClothingPiece,
       escAttr,
     };
@@ -140,6 +143,12 @@ async function validateUi(html) {
     ['dashboard and clothing tab share clothing stats', dashboardSource.includes('getClothingStats(clothing)') && tabSource.includes('getClothingStats(clothing)')],
     ['clothing UI renders paid non-target label conditionally', html.includes('付费 · 非收集目标') && /item\.obtainType\s*===\s*['"]paid['"]/.test(html)],
     ['clothing UI filters by piece category', /\bclothingCategoryFilter\s*=\s*['"]all['"]/.test(html) && /item\.category\s*===\s*clothingCategoryFilter/.test(html)],
+    ['category filter rerenders toolbar selection state', /function\s+setClothingCategoryFilter\s*\(/.test(html) && html.includes("setClothingCategoryFilter('all')")],
+    ['clothing names have leading set and single type labels', html.includes('clothing-kind-tag set') && html.includes('clothing-kind-tag single')],
+    ['shared obtain method is rendered inline with clothing names', html.includes('clothing-name-note')],
+    ['set cards expand manually like sprite cards', /const\s+isExpanded\s*=\s*expandedClothingSet\s*===\s*setKey\s*;/.test(html)],
+    ['clothing UI uses shared tab hierarchy while preserving detailed cards', tabSource.includes('sprite-stats') && tabSource.includes('sprite-search') && tabSource.includes('tb-section') && html.includes('clothing-set-card') && html.includes('clothing-piece-row')],
+    ['clothing UI exposes deterministic piece sorting helpers', /function\s+sortClothingPieces\s*\(/.test(html) && /function\s+buildClothingDisplayEntries\s*\(/.test(html)],
     ['UI no longer points to legacy pending CSV templates', !html.includes('data/_待采集/') && !/\bcsv\s*:/.test(html)],
     ['clothing UI shows set-level paired pet in card', html.includes('pairedPetName') && html.includes('配对精灵')],
     ['set card pieces do not duplicate shared set fields', html.includes("toggleClothingPiece('${item.id}')") && html.includes('pieceName')],
@@ -165,17 +174,61 @@ async function validateUi(html) {
     const stats = production.api.getClothingStats(list);
     production.api.renderClothingTab();
     const tabHtml = elements['tab-clothing'].innerHTML;
+    const contentHtml = elements['clothing-content'].innerHTML;
+    production.api.setClothingCategoryFilter('鞋子');
+    const categorySelectedHtml = elements['tab-clothing'].innerHTML;
     checks.push(
       ['target predicate rejects paid unknown and missing types',
         production.api.isClothingTargetPiece({ obtainType: 'standard' })
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 242 owned targets and 136 paid references',
-        stats.targetTotal === 242 && stats.targetOwned === 242 && stats.paidTotal === 136],
+      ['real clothing stats are 242 owned of 265 targets with 148 paid references',
+        stats.targetTotal === 265 && stats.targetOwned === 242 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>242</strong> 件 · 已收集 <strong>242</strong>')
-        && tabHtml.includes('付费资料 <strong>136</strong> 件')],
+        tabHtml.includes('目标共 <strong>265</strong> 件 · 已收集 <strong>242</strong>')
+        && tabHtml.includes('付费资料 <strong>148</strong> 件')],
+      ['clothing tab follows title stats search filters content order without legacy wrappers',
+        tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
+        && tabHtml.indexOf('sprite-stats') < tabHtml.indexOf('sprite-search')
+        && tabHtml.indexOf('sprite-search') < tabHtml.indexOf('展示类型')
+        && !tabHtml.includes('clothing-overview') && !tabHtml.includes('clothing-toolbar')],
+      ['definition-only sets remain visible as incomplete set cards',
+        contentHtml.includes('异色朔夜伊芙印象')
+        && contentHtml.includes('鎏金礼赞')
+        && contentHtml.includes('<span class="sm">0/6</span>')
+        && contentHtml.includes('<span class="sm">0/4</span>')],
+      ['confirmed clothing corrections and new data are present',
+        sets.some(set => set.name === '精灵学分院服' && set.requiredPieceCount === 4)
+        && sets.some(set => set.name === '炼金学分院服' && set.requiredPieceCount === 4)
+        && sets.some(set => set.name === '宁静星愿' && set.requiredPieceCount === 6)
+        && pieces.some(item => item.pieceName === '眼型-花魁蜂后印象')
+        && pieces.some(item => item.pieceName === '华丽徽章-小丑公爵')],
+      ['category filter refreshes the active chip state',
+        categorySelectedHtml.includes('chip active')
+        && categorySelectedHtml.includes("setClothingCategoryFilter('鞋子')\">鞋子</span>")],
+    );
+
+    const sortedPieces = production.api.sortClothingPieces([
+      { id: 'clothing_9', pieceName: '付费头饰', category: '头饰/帽子', obtainType: 'paid', setRole: 'optional' },
+      { id: 'clothing_4', pieceName: '标准鞋子', category: '鞋子', obtainType: 'standard', setRole: 'magic_required' },
+      { id: 'clothing_3', pieceName: '标准上衣', category: '上衣', obtainType: 'standard', setRole: 'magic_required' },
+      { id: 'clothing_2', pieceName: '标准连衣', category: '玩偶服/连衣', obtainType: 'standard', setRole: 'magic_required' },
+      { id: 'clothing_8', pieceName: '可选法杖', category: '法杖', obtainType: 'standard', setRole: 'optional' },
+    ]);
+    const displayEntries = production.api.buildClothingDisplayEntries([
+      { id: 'clothing_40', collectionType: 'single', pieceName: '独立鞋子', category: '鞋子', obtainType: 'standard' },
+      { id: 'clothing_11', collectionType: 'set', setId: 'clothing_set_2', pieceName: '套装二上衣', category: '上衣', obtainType: 'standard', set: { id: 'clothing_set_2', name: '二号套装' } },
+      { id: 'clothing_10', collectionType: 'set', setId: 'clothing_set_1', pieceName: '套装一鞋子', category: '鞋子', obtainType: 'standard', set: { id: 'clothing_set_1', name: '一号套装' } },
+      { id: 'clothing_9', collectionType: 'set', setId: 'clothing_set_1', pieceName: '套装一上衣', category: '上衣', obtainType: 'standard', set: { id: 'clothing_set_1', name: '一号套装' } },
+      { id: 'clothing_41', collectionType: 'single', pieceName: '独立上衣', category: '上衣', obtainType: 'standard' },
+    ]);
+    checks.push(
+      ['set pieces sort target required items before optional and paid references',
+        sortedPieces.map(item => item.id).join(',') === 'clothing_2,clothing_3,clothing_4,clothing_8,clothing_9'],
+      ['display entries group sets before singles and keep deterministic order',
+        displayEntries.map(entry => entry.type === 'set' ? entry.setKey : entry.item.id).join(',') === 'clothing_set_1,clothing_set_2,clothing_41,clothing_40'
+        && displayEntries[0].pieces.map(item => item.id).join(',') === 'clothing_9,clothing_10'],
     );
 
     const dashboardHtml = renderDashboardInSandbox(
@@ -185,7 +238,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">242</span><span class="ds-total">/ 242</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">242</span><span class="ds-total">/ 265</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);
@@ -230,12 +283,15 @@ async function validateUi(html) {
     const syntheticPiece = {
       id: 'synthetic_piece', collectionType: 'set', setId: 'synthetic_set',
       pieceName: '测试部件', category: '上衣', obtainType: 'standard', acquired: false,
+      obtainMethod: '不应在部件下重复显示',
     };
-    const unknownSet = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装' }, [syntheticPiece]);
-    const trueSet = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装', hasEffect: true }, [syntheticPiece]);
-    const falseSet = production.api.renderClothingSetCard('synthetic_set', { id: 'synthetic_set', name: '测试套装', hasEffect: false }, [syntheticPiece]);
-    const singleBase = { id: 'synthetic_single', collectionType: 'single', pieceName: '测试单件', category: '上衣', obtainType: 'standard' };
+    const syntheticSet = { id: 'synthetic_set', name: '测试套装', obtainMethod: '套装统一获取方式' };
+    const unknownSet = production.api.renderClothingSetCard('synthetic_set', syntheticSet, [syntheticPiece]);
+    const trueSet = production.api.renderClothingSetCard('synthetic_set', { ...syntheticSet, hasEffect: true }, [syntheticPiece]);
+    const falseSet = production.api.renderClothingSetCard('synthetic_set', { ...syntheticSet, hasEffect: false }, [syntheticPiece]);
+    const singleBase = { id: 'synthetic_single', collectionType: 'single', pieceName: '测试单件', category: '上衣', obtainType: 'standard', obtainMethod: '单品获取方式' };
     const unknownSingle = production.api.renderClothingSingleRow(singleBase);
+    const pendingMethodSingle = production.api.renderClothingSingleRow({ ...singleBase, obtainMethod: '待补充' });
     const trueSingle = production.api.renderClothingSingleRow({ ...singleBase, hasEffect: true });
     const falseSingle = production.api.renderClothingSingleRow({ ...singleBase, hasEffect: false });
     const paidPiece = { ...syntheticPiece, id: 'paid_piece', obtainType: 'paid' };
@@ -253,6 +309,16 @@ async function validateUi(html) {
         !unknownSet.includes('特效：') && trueSet.includes('特效：有') && falseSet.includes('特效：无')],
       ['single effect metadata distinguishes unknown true and false',
         !unknownSingle.includes('特效：') && trueSingle.includes('特效：有') && falseSingle.includes('特效：无')],
+      ['set and single type labels appear before their names',
+        unknownSet.indexOf('clothing-kind-tag set') < unknownSet.indexOf('测试套装')
+        && unknownSingle.indexOf('clothing-kind-tag single') < unknownSingle.indexOf('测试单件')],
+      ['set obtain method is inline once and not repeated under pieces',
+        unknownSet.includes('clothing-name-note') && unknownSet.includes('套装统一获取方式')
+        && !unknownSet.includes('不应在部件下重复显示')],
+      ['single obtain method is inline with its name',
+        unknownSingle.includes('clothing-name-note') && unknownSingle.includes('单品获取方式')],
+      ['pending obtain method placeholders stay hidden',
+        !pendingMethodSingle.includes('clothing-name-note') && !pendingMethodSingle.includes('待补充')],
       ['set piece controls distinguish standard paid and invalid metadata',
         standardSetRow.includes('check-btn')
         && !paidSetRow.includes('check-btn') && paidSetRow.includes('付费 · 非收集目标')

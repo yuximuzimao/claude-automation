@@ -261,7 +261,7 @@
       "requiredPieceCount": 7,
       "gorgeousMagicPetName": "魔草巫灵",
       "obtainMethod": "待补充",
-      "notes": "待核对：用户服装资料为“魔草巫灵”，pets.json 主名称为“魔草精灵”"
+      "notes": "服装名称以“魔草巫灵”为准"
     },
     {
       "id": "clothing_set_38",
@@ -335,27 +335,24 @@
     },
     {
       "id": "clothing_set_48",
-      "name": "宁静星原",
+      "name": "宁静星愿",
       "requiredPieceCount": 6,
       "gorgeousMagicPetName": "",
-      "obtainMethod": "待补充",
-      "notes": "已有单品使用“宁静星愿”，名称不一致，未自动归入"
+      "obtainMethod": "待补充"
     },
     {
       "id": "clothing_set_49",
-      "name": "精灵学院分院服",
+      "name": "精灵学分院服",
       "requiredPieceCount": 4,
       "gorgeousMagicPetName": "",
-      "obtainMethod": "待补充",
-      "notes": "已有单品使用“精灵学分院服”，名称不一致，未自动归入"
+      "obtainMethod": "待补充"
     },
     {
       "id": "clothing_set_50",
-      "name": "炼金学院分院服",
+      "name": "炼金学分院服",
       "requiredPieceCount": 4,
       "gorgeousMagicPetName": "",
-      "obtainMethod": "待补充",
-      "notes": "已有单品使用“炼金学分院服”，名称不一致，未自动归入"
+      "obtainMethod": "待补充"
     },
     {
       "id": "clothing_set_51",
@@ -380,14 +377,14 @@
     },
     {
       "id": "clothing_set_54",
-      "name": "异色獠牙猪",
+      "name": "异色獠牙猪印象",
       "requiredPieceCount": 6,
       "gorgeousMagicPetName": "",
       "obtainMethod": "待补充"
     },
     {
       "id": "clothing_set_55",
-      "name": "异色红绒十字",
+      "name": "异色红绒十字印象",
       "requiredPieceCount": 6,
       "gorgeousMagicPetName": "",
       "obtainMethod": "待补充"
@@ -408,7 +405,7 @@
     },
     {
       "id": "clothing_set_58",
-      "name": "异色雪影娃娃",
+      "name": "异色雪影娃娃印象",
       "requiredPieceCount": 6,
       "gorgeousMagicPetName": "",
       "obtainMethod": "待补充"
@@ -516,8 +513,7 @@
       "name": "小丑公爵印象",
       "requiredPieceCount": 7,
       "gorgeousMagicPetName": "",
-      "obtainMethod": "待补充",
-      "notes": "组件原文为“魔法徽章-小丑公爵”，徽章名称待核对"
+      "obtainMethod": "待补充"
     },
     {
       "id": "clothing_set_74",
@@ -553,6 +549,62 @@
       "requiredPieceCount": 3,
       "gorgeousMagicPetName": "",
       "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_79",
+      "name": "朔夜伊芙印象",
+      "requiredPieceCount": 6,
+      "gorgeousMagicPetName": "朔夜伊芙",
+      "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_80",
+      "name": "异色朔夜伊芙印象",
+      "requiredPieceCount": 6,
+      "gorgeousMagicPetName": "",
+      "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_81",
+      "name": "乌拉塔印象",
+      "requiredPieceCount": 6,
+      "gorgeousMagicPetName": "乌拉塔",
+      "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_82",
+      "name": "裘卡印象",
+      "requiredPieceCount": 6,
+      "gorgeousMagicPetName": "裘卡",
+      "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_83",
+      "name": "鎏金礼赞",
+      "requiredPieceCount": 4,
+      "gorgeousMagicPetName": "",
+      "obtainMethod": "待补充"
+    },
+    {
+      "id": "clothing_set_84",
+      "name": "鸢尾黄昏",
+      "requiredPieceCount": 5,
+      "gorgeousMagicPetName": "",
+      "obtainMethod": "S3幻梦通行证奖励"
+    },
+    {
+      "id": "clothing_set_85",
+      "name": "鸢尾童话",
+      "requiredPieceCount": 5,
+      "gorgeousMagicPetName": "",
+      "obtainMethod": "S3幻梦通行证奖励"
+    },
+    {
+      "id": "clothing_set_86",
+      "name": "鸢尾映像",
+      "requiredPieceCount": 5,
+      "gorgeousMagicPetName": "",
+      "obtainMethod": "S3幻梦通行证奖励"
     }
   ],
   "pieces": [
@@ -577,21 +629,23 @@
       "id": "clothing_8"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_49",
       "pieceName": "连衣-精灵学分院服",
       "category": "玩偶服/连衣",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“精灵学院分院服”名称不一致，未自动合并",
       "id": "clothing_9"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_50",
       "pieceName": "连衣-炼金学分院服",
       "category": "玩偶服/连衣",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“炼金学院分院服”名称不一致，未自动合并",
       "id": "clothing_10"
     },
     {
@@ -635,12 +689,13 @@
       "id": "clothing_14"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "连衣-宁静星愿",
       "category": "玩偶服/连衣",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_15"
     },
     {
@@ -859,7 +914,6 @@
       "category": "下装",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；“回忆/追忆”名称差异未自动合并",
       "id": "clothing_37"
     },
     {
@@ -878,7 +932,6 @@
       "category": "下装",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；“回忆/追忆”名称差异未自动合并",
       "id": "clothing_39"
     },
     {
@@ -967,7 +1020,6 @@
       "category": "下装",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；“回忆/追忆”名称差异未自动合并",
       "id": "clothing_48"
     },
     {
@@ -986,7 +1038,6 @@
       "category": "下装",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；“回忆/追忆”名称差异未自动合并",
       "id": "clothing_50"
     },
     {
@@ -1005,7 +1056,6 @@
       "category": "下装",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；“回忆/追忆”名称差异未自动合并",
       "id": "clothing_52"
     },
     {
@@ -1019,21 +1069,23 @@
       "id": "clothing_53"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_49",
       "pieceName": "帽子-精灵学分院服",
       "category": "头饰/帽子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“精灵学院分院服”名称不一致，未自动合并",
       "id": "clothing_54"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_50",
       "pieceName": "帽子-炼金学分院服",
       "category": "头饰/帽子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“炼金学院分院服”名称不一致，未自动合并",
       "id": "clothing_55"
     },
     {
@@ -1077,12 +1129,13 @@
       "id": "clothing_59"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "帽子-宁静星愿",
       "category": "头饰/帽子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_60"
     },
     {
@@ -1271,7 +1324,7 @@
       "category": "头饰/帽子",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_79"
     },
     {
@@ -1280,7 +1333,7 @@
       "category": "头饰/帽子",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_80"
     },
     {
@@ -1474,12 +1527,13 @@
       "id": "clothing_99"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "手饰-宁静星愿",
       "category": "手饰",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_100"
     },
     {
@@ -1658,7 +1712,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_118"
     },
     {
@@ -1667,7 +1721,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_119"
     },
     {
@@ -1676,7 +1730,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_120"
     },
     {
@@ -1685,7 +1739,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_121"
     },
     {
@@ -1749,21 +1803,23 @@
       "id": "clothing_127"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_49",
       "pieceName": "鞋子-精灵学分院服",
       "category": "鞋子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“精灵学院分院服”名称不一致，未自动合并",
       "id": "clothing_128"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_50",
       "pieceName": "鞋子-炼金学分院服",
       "category": "鞋子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“炼金学院分院服”名称不一致，未自动合并",
       "id": "clothing_129"
     },
     {
@@ -1867,12 +1923,13 @@
       "id": "clothing_139"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "鞋子-宁静星愿",
       "category": "鞋子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_140"
     },
     {
@@ -2186,12 +2243,13 @@
       "id": "clothing_171"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "袜子-宁静星愿",
       "category": "袜子",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_172"
     },
     {
@@ -2465,21 +2523,23 @@
       "id": "clothing_199"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_49",
       "pieceName": "背包-精灵学分院服",
       "category": "背包",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“精灵学院分院服”名称不一致，未自动合并",
       "id": "clothing_200"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_50",
       "pieceName": "背包-炼金学分院服",
       "category": "背包",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“炼金学院分院服”名称不一致，未自动合并",
       "id": "clothing_201"
     },
     {
@@ -2583,12 +2643,13 @@
       "id": "clothing_211"
     },
     {
-      "collectionType": "single",
+      "collectionType": "set",
+      "setId": "clothing_set_48",
       "pieceName": "背包-宁静星愿",
       "category": "背包",
+      "setRole": "magic_required",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属；与套装“宁静星原”名称不一致，未自动合并",
       "id": "clothing_212"
     },
     {
@@ -2767,7 +2828,7 @@
       "category": "包挂饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_230"
     },
     {
@@ -2776,7 +2837,7 @@
       "category": "包挂饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_231"
     },
     {
@@ -2785,7 +2846,7 @@
       "category": "包挂饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_232"
     },
     {
@@ -2794,7 +2855,7 @@
       "category": "包挂饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_233"
     },
     {
@@ -2803,7 +2864,7 @@
       "category": "法杖",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_234"
     },
     {
@@ -2812,7 +2873,7 @@
       "category": "法杖",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_235"
     },
     {
@@ -2821,7 +2882,7 @@
       "category": "法杖",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_236"
     },
     {
@@ -2830,7 +2891,7 @@
       "category": "法杖",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "已确认独立单品",
       "id": "clothing_237"
     },
     {
@@ -2839,7 +2900,7 @@
       "category": "发型",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_238"
     },
     {
@@ -2848,7 +2909,7 @@
       "category": "发型",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_239"
     },
     {
@@ -2857,7 +2918,7 @@
       "category": "发型",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_240"
     },
     {
@@ -2866,7 +2927,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_241"
     },
     {
@@ -2875,7 +2936,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_242"
     },
     {
@@ -2884,7 +2945,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_243"
     },
     {
@@ -2893,7 +2954,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_244"
     },
     {
@@ -2902,7 +2963,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_245"
     },
     {
@@ -2911,7 +2972,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_246"
     },
     {
@@ -2920,7 +2981,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_247"
     },
     {
@@ -2929,7 +2990,7 @@
       "category": "面饰",
       "obtainType": "standard",
       "obtainMethod": "待补充",
-      "notes": "待核对套装归属",
+      "notes": "系统默认新手独立单品",
       "id": "clothing_248"
     },
     {
@@ -2939,7 +3000,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_249"
     },
     {
@@ -2949,7 +3010,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_250"
     },
     {
@@ -2959,7 +3020,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_251"
     },
     {
@@ -2969,7 +3030,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_252"
     },
     {
@@ -2979,7 +3040,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_253"
     },
     {
@@ -2989,7 +3050,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_254"
     },
     {
@@ -2999,7 +3060,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_255"
     },
     {
@@ -3009,7 +3070,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_256"
     },
     {
@@ -3019,7 +3080,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_257"
     },
     {
@@ -3029,7 +3090,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_258"
     },
     {
@@ -3039,7 +3100,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_259"
     },
     {
@@ -3049,7 +3110,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_260"
     },
     {
@@ -3059,7 +3120,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_261"
     },
     {
@@ -3069,7 +3130,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_262"
     },
     {
@@ -3079,7 +3140,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_263"
     },
     {
@@ -3089,7 +3150,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_264"
     },
     {
@@ -3099,7 +3160,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_265"
     },
     {
@@ -3109,7 +3170,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_266"
     },
     {
@@ -3119,7 +3180,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_267"
     },
     {
@@ -3129,7 +3190,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_268"
     },
     {
@@ -3139,7 +3200,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_269"
     },
     {
@@ -3149,7 +3210,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_270"
     },
     {
@@ -3159,7 +3220,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_271"
     },
     {
@@ -3169,7 +3230,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_272"
     },
     {
@@ -3179,7 +3240,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_273"
     },
     {
@@ -3189,7 +3250,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_274"
     },
     {
@@ -3199,7 +3260,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_275"
     },
     {
@@ -3209,7 +3270,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_276"
     },
     {
@@ -3219,7 +3280,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_277"
     },
     {
@@ -3229,7 +3290,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_278"
     },
     {
@@ -3239,7 +3300,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_279"
     },
     {
@@ -3249,7 +3310,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_280"
     },
     {
@@ -3259,7 +3320,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_281"
     },
     {
@@ -3269,7 +3330,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_282"
     },
     {
@@ -3279,7 +3340,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_283"
     },
     {
@@ -3289,7 +3350,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_284"
     },
     {
@@ -3299,7 +3360,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_285"
     },
     {
@@ -3309,7 +3370,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_286"
     },
     {
@@ -3319,7 +3380,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_287"
     },
     {
@@ -3329,7 +3390,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_288"
     },
     {
@@ -3339,7 +3400,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_289"
     },
     {
@@ -3349,18 +3410,17 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_290"
     },
     {
       "collectionType": "set",
       "setId": "clothing_set_31",
-      "pieceName": "组件-花魁蜂后印象",
+      "pieceName": "眼型-花魁蜂后印象",
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
-      "notes": "待核对具体面部类型",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_291"
     },
     {
@@ -3370,7 +3430,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_292"
     },
     {
@@ -3380,7 +3440,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_293"
     },
     {
@@ -3390,7 +3450,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_294"
     },
     {
@@ -3400,7 +3460,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_295"
     },
     {
@@ -3410,7 +3470,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_296"
     },
     {
@@ -3420,7 +3480,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_297"
     },
     {
@@ -3430,7 +3490,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_298"
     },
     {
@@ -3440,7 +3500,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_299"
     },
     {
@@ -3450,7 +3510,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_300"
     },
     {
@@ -3460,7 +3520,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_301"
     },
     {
@@ -3470,7 +3530,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_302"
     },
     {
@@ -3480,7 +3540,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_303"
     },
     {
@@ -3490,7 +3550,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_304"
     },
     {
@@ -3500,7 +3560,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_305"
     },
     {
@@ -3510,7 +3570,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_306"
     },
     {
@@ -3520,7 +3580,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_307"
     },
     {
@@ -3530,7 +3590,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_308"
     },
     {
@@ -3540,7 +3600,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_309"
     },
     {
@@ -3550,7 +3610,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_310"
     },
     {
@@ -3560,7 +3620,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_311"
     },
     {
@@ -3570,7 +3630,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_312"
     },
     {
@@ -3580,7 +3640,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_313"
     },
     {
@@ -3590,7 +3650,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_314"
     },
     {
@@ -3600,7 +3660,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_315"
     },
     {
@@ -3610,7 +3670,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_316"
     },
     {
@@ -3620,7 +3680,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_317"
     },
     {
@@ -3630,7 +3690,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_318"
     },
     {
@@ -3640,7 +3700,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_319"
     },
     {
@@ -3650,7 +3710,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_320"
     },
     {
@@ -3660,7 +3720,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_321"
     },
     {
@@ -3670,7 +3730,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_322"
     },
     {
@@ -3680,7 +3740,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_323"
     },
     {
@@ -3690,7 +3750,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_324"
     },
     {
@@ -3700,7 +3760,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_325"
     },
     {
@@ -3710,7 +3770,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_326"
     },
     {
@@ -3720,7 +3780,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_327"
     },
     {
@@ -3730,7 +3790,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_328"
     },
     {
@@ -3740,7 +3800,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_329"
     },
     {
@@ -3750,7 +3810,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_330"
     },
     {
@@ -3760,7 +3820,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_331"
     },
     {
@@ -3770,7 +3830,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_332"
     },
     {
@@ -3780,7 +3840,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_333"
     },
     {
@@ -3790,7 +3850,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_334"
     },
     {
@@ -3800,7 +3860,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_335"
     },
     {
@@ -3810,7 +3870,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_336"
     },
     {
@@ -3820,7 +3880,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_337"
     },
     {
@@ -3830,7 +3890,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_338"
     },
     {
@@ -3840,7 +3900,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_339"
     },
     {
@@ -3850,7 +3910,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_340"
     },
     {
@@ -3860,7 +3920,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_341"
     },
     {
@@ -3870,7 +3930,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_342"
     },
     {
@@ -3880,7 +3940,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_343"
     },
     {
@@ -3890,7 +3950,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_344"
     },
     {
@@ -3900,7 +3960,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_345"
     },
     {
@@ -3910,7 +3970,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_346"
     },
     {
@@ -3920,7 +3980,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_347"
     },
     {
@@ -3930,7 +3990,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_348"
     },
     {
@@ -3940,7 +4000,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_349"
     },
     {
@@ -3950,7 +4010,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_350"
     },
     {
@@ -3960,7 +4020,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_351"
     },
     {
@@ -3970,7 +4030,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_352"
     },
     {
@@ -3980,7 +4040,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_353"
     },
     {
@@ -3990,7 +4050,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_354"
     },
     {
@@ -4000,7 +4060,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_355"
     },
     {
@@ -4010,7 +4070,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_356"
     },
     {
@@ -4020,7 +4080,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_357"
     },
     {
@@ -4030,7 +4090,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_358"
     },
     {
@@ -4040,7 +4100,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_359"
     },
     {
@@ -4050,7 +4110,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_360"
     },
     {
@@ -4060,7 +4120,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_361"
     },
     {
@@ -4070,7 +4130,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_362"
     },
     {
@@ -4080,7 +4140,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_363"
     },
     {
@@ -4090,7 +4150,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_364"
     },
     {
@@ -4100,7 +4160,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_365"
     },
     {
@@ -4110,7 +4170,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_366"
     },
     {
@@ -4120,7 +4180,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_367"
     },
     {
@@ -4130,7 +4190,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_368"
     },
     {
@@ -4140,7 +4200,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_369"
     },
     {
@@ -4150,7 +4210,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_370"
     },
     {
@@ -4160,18 +4220,17 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_371"
     },
     {
       "collectionType": "set",
       "setId": "clothing_set_73",
-      "pieceName": "魔法徽章-小丑公爵",
+      "pieceName": "华丽徽章-小丑公爵",
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
-      "notes": "待核对徽章名称",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_372"
     },
     {
@@ -4181,7 +4240,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_373"
     },
     {
@@ -4191,7 +4250,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_374"
     },
     {
@@ -4201,7 +4260,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_375"
     },
     {
@@ -4211,7 +4270,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_376"
     },
     {
@@ -4221,7 +4280,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_377"
     },
     {
@@ -4231,7 +4290,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_378"
     },
     {
@@ -4241,7 +4300,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_379"
     },
     {
@@ -4251,7 +4310,7 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_380"
     },
     {
@@ -4261,7 +4320,7 @@
       "category": "面饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_381"
     },
     {
@@ -4271,7 +4330,7 @@
       "category": "发型",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_382"
     },
     {
@@ -4281,7 +4340,7 @@
       "category": "包挂饰",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_383"
     },
     {
@@ -4291,8 +4350,352 @@
       "category": "华丽徽章",
       "setRole": "optional",
       "obtainType": "paid",
-      "obtainMethod": "单独充值购买解锁",
+      "obtainMethod": "积分卡解锁",
       "id": "clothing_384"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_28",
+      "pieceName": "背包-奇丽花印象",
+      "category": "背包",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充",
+      "id": "clothing_385"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_33",
+      "pieceName": "鞋子-梦悠悠印象",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充",
+      "id": "clothing_386"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_37",
+      "pieceName": "鞋子-魔草巫灵印象",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充",
+      "id": "clothing_387"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_41",
+      "pieceName": "手饰-花衣蝶印象",
+      "category": "手饰",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充",
+      "id": "clothing_388"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_53",
+      "pieceName": "鞋子-烈火守护印象",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "待补充",
+      "id": "clothing_389"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_79",
+      "pieceName": "瞳孔-朔夜伊芙印象",
+      "category": "面饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_390"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_79",
+      "pieceName": "秘密潜入计划发型-朔夜伊芙",
+      "category": "发型",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_391"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_79",
+      "pieceName": "包挂饰-小夜",
+      "category": "包挂饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_392"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_79",
+      "pieceName": "华丽徽章-朔夜伊芙",
+      "category": "华丽徽章",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_393"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_81",
+      "pieceName": "面妆-乌拉塔印象",
+      "category": "面饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_394"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_81",
+      "pieceName": "秘密潜入计划发型-乌拉塔",
+      "category": "发型",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_395"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_81",
+      "pieceName": "包挂饰-乌达",
+      "category": "包挂饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_396"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_81",
+      "pieceName": "华丽徽章-乌拉塔",
+      "category": "华丽徽章",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_397"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_82",
+      "pieceName": "瞳孔-裘卡印象",
+      "category": "面饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_398"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_82",
+      "pieceName": "秘密潜入计划发型-裘卡",
+      "category": "发型",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_399"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_82",
+      "pieceName": "包挂饰-裘洛",
+      "category": "包挂饰",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_400"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_82",
+      "pieceName": "华丽徽章-裘卡",
+      "category": "华丽徽章",
+      "setRole": "optional",
+      "obtainType": "paid",
+      "obtainMethod": "积分卡解锁",
+      "id": "clothing_401"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_84",
+      "pieceName": "帽子-鸢尾黄昏",
+      "category": "头饰/帽子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_402"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_84",
+      "pieceName": "鞋子-鸢尾黄昏",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_403"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_84",
+      "pieceName": "袜子-鸢尾黄昏",
+      "category": "袜子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_404"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_84",
+      "pieceName": "连衣-鸢尾黄昏",
+      "category": "玩偶服/连衣",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_405"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_84",
+      "pieceName": "背包-鸢尾黄昏",
+      "category": "背包",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_406"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_85",
+      "pieceName": "帽子-鸢尾童话",
+      "category": "头饰/帽子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_407"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_85",
+      "pieceName": "鞋子-鸢尾童话",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_408"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_85",
+      "pieceName": "袜子-鸢尾童话",
+      "category": "袜子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_409"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_85",
+      "pieceName": "连衣-鸢尾童话",
+      "category": "玩偶服/连衣",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_410"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_85",
+      "pieceName": "背包-鸢尾童话",
+      "category": "背包",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_411"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_86",
+      "pieceName": "帽子-鸢尾映像",
+      "category": "头饰/帽子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_412"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_86",
+      "pieceName": "鞋子-鸢尾映像",
+      "category": "鞋子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_413"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_86",
+      "pieceName": "袜子-鸢尾映像",
+      "category": "袜子",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_414"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_86",
+      "pieceName": "连衣-鸢尾映像",
+      "category": "玩偶服/连衣",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_415"
+    },
+    {
+      "collectionType": "set",
+      "setId": "clothing_set_86",
+      "pieceName": "背包-鸢尾映像",
+      "category": "背包",
+      "setRole": "magic_required",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_416"
+    },
+    {
+      "collectionType": "single",
+      "pieceName": "面饰-鸢尾研究员",
+      "category": "面饰",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_417"
+    },
+    {
+      "collectionType": "single",
+      "pieceName": "星落繁花法杖",
+      "category": "法杖",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_418"
+    },
+    {
+      "collectionType": "single",
+      "pieceName": "包挂饰-万花镜",
+      "category": "包挂饰",
+      "obtainType": "standard",
+      "obtainMethod": "S3幻梦通行证奖励",
+      "id": "clothing_419"
     }
   ]
 }

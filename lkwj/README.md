@@ -36,8 +36,11 @@ http://localhost:8899/review.html
 | `data/dungeons.json` | 遗迹副本静态定义：副本名称、位置、资源数量、特殊掉落、精灵蛋孵化属性 |
 | `data/shops.json` | 商店和货币静态定义：商店入口、货币类型、待核对商店 |
 | `data/collections.json` | 用户进度：任务、形态、果实、异色和其他收集状态 |
-| `SKILL.md` | Agent 入口地图和数据边界规则 |
+| `SKILL.md` | Agent 入口地图、命令速查和必须遵守的边界 |
+| `docs/INDEX.md` | 项目文档索引 |
+| `docs/DATA_MODEL.md` | 静态定义、用户进度和各收集品类的数据边界 |
 | `docs/REVIEW_CHECKLIST.md` | 对照 Excel 做只读核对的清单 |
+| `docs/archive/` | 已完成阶段的决策与数据基线归档 |
 | `tasks/todo.md` | 所有尚未补齐、待核对和待规划的数据任务 |
 
 ## 数据边界
@@ -51,8 +54,10 @@ http://localhost:8899/review.html
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
 - 家具 Tab 顶部只展示总件数、已收集件数和未收集家具的剩余灵感值；舒适度和单件灵感值只在列表行展示。
 - `clothing.json` 分为 `definitions`、`sets[]` 和 `pieces[]`：规则说明写在 `definitions`，套装必需部件数、华丽魔法对应精灵和套装获取方式写在 `sets[]`，最小收集单元及其分类、套装角色、获取类型和获取方式写在 `pieces[]`。
-- 服装个人目标只包含 `obtainType="standard"` 的部件；`obtainType="paid"` 的付费件可以浏览，但不进入目标数量、完成进度或 `collections.clothing_progress`。
-- 华丽魔法进度根据 `setRole="magic_required"` 的已拥有必需部件与 `requiredPieceCount` 自动计算，不单独保存；缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。
+- 服装个人目标只包含 `obtainType="standard"` 的部件；`obtainType="paid"` 的积分卡额外组件可以浏览，但不进入目标数量、完成进度或 `collections.clothing_progress`。
+- `requiredPieceCount` 以游戏内套装件数为准，不包含 `setRole="optional"` 的付费额外组件；华丽魔法进度只根据 `magic_required` 必需部件自动计算。
+- 套装名称匹配且必需件数吻合后才能归套装；随机商店部件只录入实际看到的名称，只有明确购买后才更新进度。
+- 缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。完整服装命名和补录规则见 `docs/DATA_MODEL.md`。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义、资源数量、钥匙类特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存是否完成。
 - `shops.json` 已保存商店入口和货币类型；商品明细尚未建入 JSON，后续补充要求统一维护在 `tasks/todo.md`。
@@ -71,11 +76,11 @@ http://localhost:8899/review.html
 | 家具已收集 | 125 |
 | 家具未收集 | 58 |
 | 家具剩余灵感值 | 1506950 |
-| 服装套装 | 77 |
-| 服装部件 | 378 |
-| 服装个人目标 / 已拥有 | 242 / 242 |
-| 服装付费非目标 | 136 |
-| 必需部件名称待补套装 | 53 |
+| 服装套装 | 85 |
+| 服装部件 | 413 |
+| 服装个人目标 / 已拥有 | 265 / 242 |
+| 服装付费非目标 | 148 |
+| 必需部件名称待补套装 | 55 |
 | 称号 | 1 |
 | 遗迹副本 | 26 |
 | 遗迹孵化属性 | 26 |
@@ -92,7 +97,7 @@ http://localhost:8899/review.html
 | 状态 | 标签 / 数据 | 说明 |
 |------|-------------|------|
 | 已整理可用 | 精灵、课题任务、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 | 已有真实数据和对应前端展示；可继续日常勾选 |
-| 首批真实数据可用、明细继续补充 | 服装 | 已导入 77 套、378 个部件；242 个个人目标均已拥有，136 个付费件仅展示。53 套尚缺完整必需部件名称，但现有套装和部件可正常使用 |
+| 真实数据可用、明细持续补充 | 服装 | 已导入 85 套、413 个部件；265 个个人目标中已拥有 242 个，148 个积分卡组件仅展示。55 套尚缺完整必需部件名称，随机商店刷新后继续按实际名称补录 |
 | 结构可用但明细待补 | 商店/货币 | 36 个商店和 6 种货币已入库，商品明细未采集 |
 | 只有示例/占位 | 称号 | 前端和 JSON 结构已搭好，但 `titles.json` 仍主要是示例数据 |
 | 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 | Tab 使用 `collections.items`，当前 0 条 |

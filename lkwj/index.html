@@ -121,6 +121,70 @@
     .add-source:hover { color: #4f46e5; border-color: #4f46e5; }
     .item-category-tag { font-size: 12px; color: #6366f1; background: #eef2ff; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
 
+    /* 服装：沿用精灵卡片交互，增加服装专属的信息层级 */
+    .clothing-overview { display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 8px; margin: 8px 0 12px; }
+    .clothing-stat-card { min-height: 68px; padding: 10px 12px; background: #fff; border: 1px solid #e8eaf0; border-radius: 9px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+    .clothing-stat-card.primary { border-color: #c7d2fe; background: #fafaff; }
+    .clothing-stat-label { color: #9a9caf; font-size: 11px; font-weight: 650; letter-spacing: 0.05em; }
+    .clothing-stat-value { color: #5f6272; font-size: 13px; line-height: 1.45; }
+    .clothing-stat-value strong { color: #4f46e5; font-size: 17px; font-weight: 700; }
+    .clothing-info-panel { margin: 0 0 12px; padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 9px; background: #fbfbfd; }
+    .clothing-info-panel summary { cursor: pointer; color: #55586a; font-size: 13px; font-weight: 650; }
+    .clothing-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 9px; }
+    .clothing-info-item { padding: 8px 10px; border-radius: 7px; background: #fff; border: 1px solid #eceef4; font-size: 12px; color: #73768a; line-height: 1.55; }
+    .clothing-info-item strong { color: #4f46e5; }
+    .clothing-toolbar { padding: 12px 14px; margin-bottom: 12px; background: #fff; border: 1px solid #e8eaf0; border-radius: 10px; }
+    .clothing-toolbar .tb-section { margin-bottom: 0; }
+    .clothing-toolbar .tb-section + .tb-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f1f5; }
+    .clothing-list { display: flex; flex-direction: column; gap: 8px; }
+    .clothing-list-section + .clothing-list-section { margin-top: 12px; }
+    .clothing-section-title { display: flex; align-items: baseline; gap: 6px; margin: 0 2px 7px; color: #5f6272; font-size: 13px; font-weight: 650; }
+    .clothing-section-title span { color: #aaa; font-size: 11px; font-weight: 500; }
+    .clothing-set-card { border-color: #dfe2ee; }
+    .clothing-set-card:hover { box-shadow: 0 2px 8px rgba(37, 42, 68, 0.07); }
+    .clothing-set-card .sprite-card-header { min-height: 58px; padding: 12px 15px; background: #fff; }
+    .clothing-set-card.expanded .sprite-card-header { background: #fafaff; }
+    .clothing-set-main { flex: 1; min-width: 0; }
+    .clothing-set-title-line { display: flex; align-items: center; gap: 7px; min-width: 0; }
+    .clothing-set-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .clothing-kind-tag { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 700; line-height: 1.4; white-space: nowrap; flex-shrink: 0; }
+    .clothing-kind-tag.set { color: #4f46e5; background: #eef2ff; }
+    .clothing-kind-tag.single { color: #0f766e; background: #ecfdf5; }
+    .clothing-name-note { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #a0a2b0; font-size: 11px; font-weight: 400; }
+    .clothing-set-subtitle { display: flex; flex-wrap: wrap; gap: 5px 10px; margin-top: 4px; color: #9699aa; font-size: 11px; line-height: 1.35; }
+    .clothing-set-badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 7px; color: #6366f1; background: #eef2ff; font-size: 11px; white-space: nowrap; }
+    .clothing-set-badge.magic { color: #9a6700; background: #fff8db; }
+    .clothing-set-card .sm { min-width: 54px; color: #8d90a1; text-align: right; }
+    .clothing-set-card .sm strong { color: #4f46e5; font-size: 15px; }
+    .clothing-set-card .sprite-card-body { padding: 0 15px 14px; background: #fcfcff; }
+    .clothing-set-meta { display: flex; flex-wrap: wrap; gap: 5px 7px; padding: 9px 2px 7px; color: #8d90a1; }
+    .clothing-meta-item { padding: 0; border: 0; background: transparent; color: inherit; font-size: 11px; line-height: 1.4; }
+    .clothing-meta-item + .clothing-meta-item::before { content: '·'; margin-right: 7px; color: #c5c7d0; }
+    .clothing-piece-list { gap: 0; overflow: hidden; border: 1px solid #e8eaf0; border-radius: 7px; background: #fff; }
+    .clothing-piece-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 9px; padding: 7px 10px; border: 0; border-bottom: 1px solid #f0f1f5; border-radius: 0; background: transparent; box-shadow: none; }
+    .clothing-piece-row:last-child { border-bottom: 0; }
+    .clothing-piece-row:hover { background: #f8f9fc; box-shadow: none; }
+    .clothing-piece-row.done, .clothing-single-row.done { opacity: 0.72; }
+    .clothing-piece-row .check-btn, .clothing-single-row .check-btn { margin-top: 0; }
+    .clothing-piece-row .item-name { font-size: 14px; font-weight: 550; line-height: 1.35; }
+    .clothing-piece-marker { width: 22px; height: 22px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: #f3f4f7; color: #8a8d9e; font-size: 10px; font-weight: 700; }
+    .clothing-piece-marker.paid { color: #9a6700; background: #fff8db; }
+    .clothing-piece-marker.invalid { color: #b42318; background: #fff1f0; }
+    .clothing-piece-note { margin-left: 7px; color: #9a6700; font-size: 11px; font-weight: 500; white-space: nowrap; }
+    .clothing-category-pill { padding: 3px 8px; border-radius: 7px; background: #f2f3f8; color: #73768a; font-size: 11px; white-space: nowrap; }
+    .clothing-single-row { align-items: center; padding: 11px 13px; border-left: 3px solid #dfe4ff; }
+    .clothing-single-row .item-name { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 15px; font-weight: 550; }
+    @media (max-width: 860px) {
+      .clothing-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .clothing-info-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .clothing-overview { grid-template-columns: 1fr; }
+      .clothing-piece-row { grid-template-columns: 24px minmax(0, 1fr); }
+      .clothing-category-pill { grid-column: 2; justify-self: start; }
+      .clothing-set-subtitle { display: none; }
+    }
+
     .dungeon-card { background: #fff; border-radius: 8px; border: 1px solid #e8eaf0; overflow: hidden; transition: box-shadow 0.1s; }
     .dungeon-card:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .dungeon-card.done { opacity: 0.4; }
@@ -2215,26 +2279,79 @@ function getClothingList() {
   });
 }
 
+const CLOTHING_CATEGORY_ORDER = [
+  '玩偶服/连衣', '上衣', '下装', '头饰/帽子', '发型', '手饰', '面饰',
+  '鞋子', '袜子', '背包', '包挂饰', '法杖', '华丽徽章',
+];
+const CLOTHING_CATEGORY_RANK = new Map(CLOTHING_CATEGORY_ORDER.map((category, index) => [category, index]));
+
+function getClothingStableNumber(value) {
+  const match = String(value || '').match(/(\d+)$/);
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
+function compareClothingPieces(a, b) {
+  const targetRank = item => item.obtainType === 'standard' ? 0 : item.obtainType === 'paid' ? 1 : 2;
+  const roleRank = item => item.setRole === 'magic_required' ? 0 : item.setRole === 'optional' ? 1 : 2;
+  const categoryRank = item => CLOTHING_CATEGORY_RANK.get(item.category) ?? CLOTHING_CATEGORY_ORDER.length;
+  return targetRank(a) - targetRank(b)
+    || roleRank(a) - roleRank(b)
+    || categoryRank(a) - categoryRank(b)
+    || String(a.pieceName || a.name || '').localeCompare(String(b.pieceName || b.name || ''), 'zh-Hans-CN')
+    || getClothingStableNumber(a.id) - getClothingStableNumber(b.id);
+}
+
+function sortClothingPieces(items) {
+  return [...items].sort(compareClothingPieces);
+}
+
+function getClothingDisplayMethod(method) {
+  const text = String(method || '').trim();
+  return text && text !== '待补充' ? text : '';
+}
+
+function buildClothingDisplayEntries(items, definitionOnlySets = []) {
+  const setGroups = new Map();
+  const singles = [];
+  definitionOnlySets.forEach(set => {
+    if (!set?.id) return;
+    setGroups.set(set.id, { type: 'set', setKey: set.id, set, pieces: [] });
+  });
+  items.forEach(item => {
+    if (item.collectionType !== 'set') {
+      singles.push(item);
+      return;
+    }
+    const setKey = item.set?.id || item.setId || 'unknown_set';
+    if (!setGroups.has(setKey)) {
+      setGroups.set(setKey, { type: 'set', setKey, set: item.set || null, pieces: [] });
+    }
+    setGroups.get(setKey).pieces.push(item);
+  });
+
+  const setEntries = [...setGroups.values()]
+    .map(entry => ({ ...entry, pieces: sortClothingPieces(entry.pieces) }))
+    .sort((a, b) => getClothingStableNumber(a.setKey) - getClothingStableNumber(b.setKey)
+      || String(a.set?.name || '').localeCompare(String(b.set?.name || ''), 'zh-Hans-CN'));
+  const singleEntries = sortClothingPieces(singles).map(item => ({ type: 'single', item }));
+  return [...setEntries, ...singleEntries];
+}
+
 function renderClothingTab() {
   const el = document.getElementById('tab-clothing');
   const clothing = getClothingList();
   const clothingStats = getClothingStats(clothing);
-  const categories = [...new Set(clothing.map(i => i.category).filter(Boolean))];
+  const setDefinitions = gameData?.clothing?.sets || [];
+  const categories = [...new Set(clothing.map(i => i.category).filter(Boolean))]
+    .sort((a, b) => (CLOTHING_CATEGORY_RANK.get(a) ?? CLOTHING_CATEGORY_ORDER.length)
+      - (CLOTHING_CATEGORY_RANK.get(b) ?? CLOTHING_CATEGORY_ORDER.length)
+      || a.localeCompare(b, 'zh-Hans-CN'));
   const definitions = gameData?.clothing?.definitions || {};
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
-  html += `<div class="sprite-stats"><span>目标共 <strong>${clothingStats.targetTotal}</strong> 件 · 已收集 <strong>${clothingStats.targetOwned}</strong></span>`;
-  html += `<span>套装部件 <strong>${clothingStats.setOwned}</strong> / ${clothingStats.setTotal}</span>`;
-  html += `<span>独立单件 <strong>${clothingStats.singleOwned}</strong> / ${clothingStats.singleTotal}</span>`;
-  html += `<span>付费资料 <strong>${clothingStats.paidTotal}</strong> 件</span></div>`;
+  html += `<div class="sprite-stats"><span>目标共 <strong>${clothingStats.targetTotal}</strong> 件 · 已收集 <strong>${clothingStats.targetOwned}</strong> · 套装部件 <strong>${clothingStats.setOwned}</strong> / ${clothingStats.setTotal} · 独立单件 <strong>${clothingStats.singleOwned}</strong> / ${clothingStats.singleTotal} · 付费资料 <strong>${clothingStats.paidTotal}</strong> 件</span></div>`;
 
-  html += '<details style="margin:10px 0 12px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa">';
-  html += '<summary style="cursor:pointer;font-weight:600">华丽徽章说明</summary>';
-  if (definitions.gorgeousBadge) html += `<div class="task-methods" style="margin-top:8px"><strong>${esc(definitions.gorgeousBadge.name || '华丽徽章')}</strong>：${esc(definitions.gorgeousBadge.description || '')}</div>`;
-  if (definitions.gorgeousMagic) html += `<div class="task-methods" style="margin-top:6px"><strong>${esc(definitions.gorgeousMagic.name || '华丽魔法')}</strong>：${esc(definitions.gorgeousMagic.description || '')}</div>`;
-  html += '</details>';
-
-  if (!clothing.length) {
+  if (!clothing.length && !setDefinitions.length) {
     html += '<div class="empty-state">暂无服装数据<small>把套装共享信息和单件收集项补到 data/clothing.json 后会在这里显示</small></div>';
     el.innerHTML = html;
     return;
@@ -2242,42 +2359,55 @@ function renderClothingTab() {
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索服装名称、套装或获取方式..." value="${esc(clothingSearch)}" oninput="clothingSearch=this.value;expandedClothingSet=null;renderClothingContent()"></div>`;
 
-  // 类型筛选
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="tb-label">展示类型</div><div class="chips">';
   html += `<span class="chip${clothingTypeFilter === 'all' ? ' active' : ''}" onclick="clothingTypeFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
   html += `<span class="chip${clothingTypeFilter === 'set' ? ' active' : ''}" onclick="clothingTypeFilter='set';expandedClothingSet=null;renderClothingTab()">套装</span>`;
   html += `<span class="chip${clothingTypeFilter === 'single' ? ' active' : ''}" onclick="clothingTypeFilter='single';expandedClothingSet=null;renderClothingTab()">单件</span>`;
-  html += '</div>';
+  html += '</div></div>';
 
-  // 进度筛选
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="tb-label">收集进度</div><div class="chips">';
   html += `<span class="chip${clothingStatusFilter === 'all' ? ' active' : ''}" onclick="clothingStatusFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
   html += `<span class="chip${clothingStatusFilter === 'pending' ? ' active' : ''}" onclick="clothingStatusFilter='pending';expandedClothingSet=null;renderClothingTab()">${STATUS.PENDING}</span>`;
   html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="clothingStatusFilter='done';expandedClothingSet=null;renderClothingTab()">${STATUS.DONE}</span>`;
-  html += '</div>';
+  html += '</div></div>';
 
-  // 部件分类筛选（由真实数据动态生成）
-  html += '<div class="chips" style="margin-bottom:8px">';
-  html += `<span class="chip${clothingCategoryFilter === 'all' ? ' active' : ''}" onclick="clothingCategoryFilter='all';expandedClothingSet=null;renderClothingContent()">全部分类</span>`;
+  html += '<div class="tb-section"><div class="tb-label">部件分类</div><div class="chips">';
+  html += `<span class="chip${clothingCategoryFilter === 'all' ? ' active' : ''}" onclick="setClothingCategoryFilter('all')">全部分类</span>`;
   categories.forEach(category => {
-    html += `<span class="chip${clothingCategoryFilter === category ? ' active' : ''}" onclick="clothingCategoryFilter='${escAttr(category)}';expandedClothingSet=null;renderClothingContent()">${esc(category)}</span>`;
+    html += `<span class="chip${clothingCategoryFilter === category ? ' active' : ''}" onclick="setClothingCategoryFilter('${escAttr(category)}')">${esc(category)}</span>`;
   });
-  html += '</div>';
+  html += '</div></div>';
+
+  html += '<details class="clothing-info-panel">';
+  html += '<summary>华丽徽章说明</summary><div class="clothing-info-grid">';
+  if (definitions.gorgeousBadge) html += `<div class="clothing-info-item"><strong>${esc(definitions.gorgeousBadge.name || '华丽徽章')}</strong><br>${esc(definitions.gorgeousBadge.description || '')}</div>`;
+  if (definitions.gorgeousMagic) html += `<div class="clothing-info-item"><strong>${esc(definitions.gorgeousMagic.name || '华丽魔法')}</strong><br>${esc(definitions.gorgeousMagic.description || '')}</div>`;
+  html += '</div></details>';
 
   html += '<div id="clothing-content"></div>';
   el.innerHTML = html;
   renderClothingContent();
 }
 
+function setClothingCategoryFilter(category) {
+  clothingCategoryFilter = category;
+  expandedClothingSet = null;
+  renderClothingTab();
+}
+
 function renderClothingContent() {
   const el = document.getElementById('clothing-content');
   if (!el) return;
   const clothing = getClothingList();
-  const setMap = new Map((gameData?.clothing?.sets || []).map(s => [s.id, s]));
+  const setDefinitions = gameData?.clothing?.sets || [];
+  const setIdsWithPieces = new Set(clothing
+    .filter(item => item.collectionType === 'set')
+    .map(item => item.set?.id || item.setId)
+    .filter(Boolean));
+  const query = clothingSearch.trim().toLowerCase();
 
   let list = clothing;
-  if (clothingSearch.trim()) {
-    const q = clothingSearch.trim().toLowerCase();
+  if (query) {
     list = list.filter(i => {
       const pieceName = (i.pieceName || i.name || '').toLowerCase();
       const setName = (i.set?.name || '').toLowerCase();
@@ -2285,7 +2415,7 @@ function renderClothingContent() {
       const pairedPet = (i.collectionType === 'single' ? (i.pairedPetName || '') : (i.set?.pairedPetName || '')).toLowerCase();
       const category = (i.category || '').toLowerCase();
       const gorgeousMagicPet = (i.set?.gorgeousMagicPetName || '').toLowerCase();
-      return pieceName.includes(q) || setName.includes(q) || method.includes(q) || pairedPet.includes(q) || category.includes(q) || gorgeousMagicPet.includes(q);
+      return pieceName.includes(query) || setName.includes(query) || method.includes(query) || pairedPet.includes(query) || category.includes(query) || gorgeousMagicPet.includes(query);
     });
   }
   if (clothingTypeFilter === 'set') list = list.filter(i => i.collectionType === 'set');
@@ -2294,75 +2424,114 @@ function renderClothingContent() {
   if (clothingStatusFilter === 'pending') list = list.filter(i => isClothingTargetPiece(i) && !i.acquired);
   else if (clothingStatusFilter === 'done') list = list.filter(i => isClothingTargetPiece(i) && i.acquired);
 
-  if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的服装</div>'; return; }
+  const canShowDefinitionOnlySets = clothingTypeFilter !== 'single'
+    && clothingCategoryFilter === 'all'
+    && clothingStatusFilter === 'all';
+  const definitionOnlySets = canShowDefinitionOnlySets
+    ? setDefinitions.filter(set => {
+      if (setIdsWithPieces.has(set.id)) return false;
+      if (!query) return true;
+      const searchText = `${set.name || ''} ${set.obtainMethod || ''} ${set.pairedPetName || ''} ${set.gorgeousMagicPetName || ''}`.toLowerCase();
+      return searchText.includes(query);
+    })
+    : [];
 
-  let html = '';
-  const shownSetIds = new Set();
-  list.forEach(item => {
-    if (item.collectionType === 'set') {
-      const sk = item.set?.id || item.setId || 'unknown_set';
-      if (!shownSetIds.has(sk)) {
-        shownSetIds.add(sk);
-        const setPieces = list.filter(i => i.collectionType === 'set' && (i.set?.id || i.setId) === sk);
-        const set = setMap.get(sk) || setPieces[0]?.set || null;
-        html += renderClothingSetCard(sk, set, setPieces);
-      }
-    } else {
-      html += renderClothingSingleRow(item);
-    }
-  });
+  if (!list.length && !definitionOnlySets.length) {
+    el.innerHTML = '<div class="empty-state">没有匹配的服装</div>';
+    return;
+  }
+
+  const entries = buildClothingDisplayEntries(list, definitionOnlySets);
+  const setEntries = entries.filter(entry => entry.type === 'set');
+  const singleEntries = entries.filter(entry => entry.type === 'single');
+  let html = '<div class="clothing-list">';
+  if (setEntries.length) {
+    html += `<div class="clothing-list-section"><div class="clothing-section-title">套装 <span>${setEntries.length} 套</span></div>`;
+    setEntries.forEach(entry => { html += renderClothingSetCard(entry.setKey, entry.set, entry.pieces); });
+    html += '</div>';
+  }
+  if (singleEntries.length) {
+    html += `<div class="clothing-list-section"><div class="clothing-section-title">独立单件 <span>${singleEntries.length} 件</span></div>`;
+    singleEntries.forEach(entry => { html += renderClothingSingleRow(entry.item); });
+    html += '</div>';
+  }
+  html += '</div>';
   el.innerHTML = html;
 }
 
 function renderClothingSetCard(setKey, set, visiblePieces) {
   const setName = set?.name || '未命名套装';
-  const pieces = getClothingList().filter(i => i.collectionType === 'set' && (i.set?.id || i.setId) === setKey);
+  const pieces = sortClothingPieces(getClothingList().filter(i => i.collectionType === 'set' && (i.set?.id || i.setId) === setKey));
   const targetPieces = pieces.filter(isClothingTargetPiece);
+  const paidPieces = pieces.filter(item => item.obtainType === 'paid');
   const doneCount = targetPieces.filter(i => i.acquired).length;
-  const isExpanded = expandedClothingSet === setKey || !!(clothingSearch || clothingTypeFilter !== 'all' || clothingStatusFilter !== 'all' || clothingCategoryFilter !== 'all');
+  const isExpanded = expandedClothingSet === setKey;
   const pairedPetName = set?.pairedPetName || '';
   const hasEffect = set?.hasEffect;
+  const setObtainMethod = getClothingDisplayMethod(set?.obtainMethod);
   const requiredPieceCount = set?.requiredPieceCount || 0;
+  const progressTotal = requiredPieceCount || targetPieces.length;
   const recordedRequiredNames = new Set(pieces.filter(i => i.setRole === 'magic_required').map(i => i.pieceName || i.name).filter(Boolean)).size;
   const magicProgress = getGorgeousMagicProgress(set, pieces);
+  const sortedVisiblePieces = sortClothingPieces(visiblePieces);
 
-  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  let card = `<div class="sprite-card clothing-set-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="toggleClothingSetCard('${setKey}')">`;
-  card += `<span class="sn">${esc(setName)}</span>`;
-  if (pairedPetName) card += `<span class="se">配对：${esc(pairedPetName)}</span>`;
-  card += `<span class="sm">${doneCount}/${targetPieces.length}</span>`;
+  card += '<div class="clothing-set-main">';
+  card += `<div class="clothing-set-title-line"><span class="clothing-kind-tag set">套装</span><span class="sn clothing-set-title">${esc(setName)}</span>`;
+  if (setObtainMethod) card += `<span class="clothing-name-note">${esc(setObtainMethod)}</span>`;
+  if (magicProgress) {
+    const magicLabel = magicProgress.unlocked ? '华丽魔法已解锁' : `华丽魔法 ${magicProgress.acquired}/${magicProgress.total}`;
+    card += `<span class="clothing-set-badge magic">${magicLabel}</span>`;
+  }
+  card += '</div><div class="clothing-set-subtitle">';
+  if (pairedPetName) card += `<span>配对精灵：${esc(pairedPetName)}</span>`;
+  card += `<span>${targetPieces.length} 个收集部件</span>`;
+  if (paidPieces.length) card += `<span>${paidPieces.length} 个付费资料</span>`;
+  card += '</div></div>';
+  card += `<span class="sm">${doneCount}/${progressTotal}</span>`;
   card += '<span class="sa">▶</span>';
   card += '</div>';
 
   card += '<div class="sprite-card-body">';
-  // Set meta
+  const metaItems = [];
   if (typeof hasEffect === 'boolean') {
-    const effectText = hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无';
-    card += `<div class="task-methods">${effectText}</div>`;
+    metaItems.push(hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无');
   }
-  if (set?.obtainMethod) card += `<div class="task-methods">获取方式：${esc(set.obtainMethod)}</div>`;
   if (requiredPieceCount > 0) {
-    card += `<div class="task-methods">华丽魔法必需部件：已记录 ${recordedRequiredNames}/${requiredPieceCount}${recordedRequiredNames < requiredPieceCount ? ' · 资料待补' : ''}</div>`;
+    metaItems.push(`必需部件资料：${recordedRequiredNames}/${requiredPieceCount}${recordedRequiredNames < requiredPieceCount ? ' · 待补' : ''}`);
   }
   if (magicProgress) {
     const magicStatus = magicProgress.unlocked ? '已解锁' : `${magicProgress.acquired}/${magicProgress.total}`;
-    card += `<div class="task-methods">华丽魔法：${magicStatus} · ${esc(magicProgress.petName)}</div>`;
+    metaItems.push(`华丽魔法：${magicStatus} · ${esc(magicProgress.petName)}`);
   }
-  // Pieces
-  card += '<div class="item-list" style="margin-top:8px">';
-  visiblePieces.forEach(item => {
+  if (metaItems.length) {
+    card += '<div class="clothing-set-meta">';
+    metaItems.forEach(text => { card += `<span class="clothing-meta-item">${text}</span>`; });
+    card += '</div>';
+  }
+
+  card += '<div class="item-list clothing-piece-list" style="margin-top:8px">';
+  if (!sortedVisiblePieces.length) {
+    card += '<div class="task-methods" style="padding:10px 12px">尚未记录具体部件，待商店刷新后补充</div>';
+  }
+  sortedVisiblePieces.forEach(item => {
     const pieceName = item.pieceName || item.name || '未命名部件';
-    card += `<div class="item-row${item.acquired ? ' done' : ''}">`;
+    const paid = item.obtainType === 'paid';
+    const invalid = !isClothingTargetPiece(item) && !paid;
+    card += `<div class="item-row clothing-piece-row${item.acquired ? ' done' : ''}">`;
     if (isClothingTargetPiece(item)) {
       card += `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`;
-    } else if (item.obtainType === 'paid') {
-      card += '<span class="item-category-tag">付费 · 非收集目标</span>';
+    } else if (paid) {
+      card += '<span class="clothing-piece-marker paid">付</span>';
     } else {
-      card += '<span class="item-category-tag">资料异常 · 不可操作</span>';
+      card += '<span class="clothing-piece-marker invalid">!</span>';
     }
-    card += `<div class="item-info"><div class="item-name">${esc(pieceName)}${item.category ? ` <span class="item-category-tag">${esc(item.category)}</span>` : ''}</div>`;
-    if (item.obtainMethod) card += `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>`;
-    card += '</div>';
+    card += `<div class="item-info"><div class="item-name">${esc(pieceName)}`;
+    if (paid) card += '<span class="clothing-piece-note">付费 · 非收集目标</span>';
+    else if (invalid) card += '<span class="clothing-piece-note">资料异常 · 不可操作</span>';
+    card += '</div></div>';
+    card += `<span class="clothing-category-pill">${esc(item.category || '未分类')}</span>`;
     card += '</div>';
   });
   card += '</div>';
@@ -2375,18 +2544,21 @@ function renderClothingSingleRow(item) {
   const pieceName = item.pieceName || item.name || '未命名服装';
   const pairedPetName = item.pairedPetName || '';
   const hasEffect = item.hasEffect;
+  const obtainMethod = getClothingDisplayMethod(item.obtainMethod);
+  const paid = item.obtainType === 'paid';
+  const invalid = !isClothingTargetPiece(item) && !paid;
   const effectText = typeof hasEffect === 'boolean'
     ? (hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无')
     : '';
-  return `<div class="item-row${item.acquired ? ' done' : ''}">
+  return `<div class="item-row clothing-single-row${item.acquired ? ' done' : ''}">
     ${isClothingTargetPiece(item)
       ? `<button class="check-btn${item.acquired ? ' checked' : ''}" onclick="toggleClothingPiece('${item.id}')"></button>`
-      : `<span class="item-category-tag">${item.obtainType === 'paid' ? '付费 · 非收集目标' : '资料异常 · 不可操作'}</span>`}
+      : `<span class="clothing-piece-marker ${paid ? 'paid' : 'invalid'}">${paid ? '付' : '!'}</span>`}
     <div class="item-info">
-      <div class="item-name">${esc(pieceName)} <span class="item-category-tag">${esc(item.category || '单件')}</span></div>
+      <div class="item-name"><span class="clothing-kind-tag single">单品</span><span>${esc(pieceName)}</span>${obtainMethod ? `<span class="clothing-name-note">${esc(obtainMethod)}</span>` : ''}${paid ? '<span class="clothing-piece-note">付费 · 非收集目标</span>' : ''}${invalid ? '<span class="clothing-piece-note">资料异常 · 不可操作</span>' : ''}</div>
       ${effectText ? `<div class="task-methods">${effectText}</div>` : ''}
-      ${item.obtainMethod ? `<div class="task-methods">获取方式：${esc(item.obtainMethod)}</div>` : ''}
     </div>
+    <span class="clothing-category-pill">${esc(item.category || '单件')}</span>
   </div>`;
 }
 
