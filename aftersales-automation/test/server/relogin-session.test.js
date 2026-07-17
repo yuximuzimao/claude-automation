@@ -5,10 +5,83 @@ const {
   renderA1FixedBatchButton,
   renderCancellingReloginControl,
   renderConfirmReloginControls,
+  runReloginCancellation,
   shouldShowA1FixedBatchButton,
   shouldShowReloginButton,
   shouldKeepConfirmAfterError,
 } = require('../../public/account-relogin-state');
+
+function makeCancelButton() {
+  const controls = [{ disabled: false }, { disabled: false }];
+  const button = {
+    textContent: '取消',
+    closest: () => ({ querySelectorAll: () => controls }),
+  };
+  return { button, controls };
+}
+
+test('pending cancellation immediately disables controls and keeps relogin blocked', async () => {
+  const cancelling = new Set();
+  const confirm = new Set([3]);
+  const { button, controls } = makeCancelButton();
+  let finishRequest;
+  const request = new Promise(resolve => { finishRequest = resolve; });
+
+  const resultPromise = runReloginCancellation({
+    num: 3,
+    button,
+    cancelling,
+    confirm,
+    requestCancel: () => request,
+  });
+
+  assert.equal(cancelling.has(3), true);
+  assert.equal(confirm.has(3), true);
+  assert.equal(button.textContent, '取消中...');
+  assert.deepEqual(controls.map(control => control.disabled), [true, true]);
+
+  finishRequest({ ok: true });
+  assert.deepEqual(await resultPromise, { ok: true });
+  assert.equal(cancelling.has(3), false);
+  assert.equal(confirm.has(3), false);
+});
+
+test('failed cancellation restores controls by preserving confirm state', async () => {
+  const cancelling = new Set();
+  const confirm = new Set([3]);
+  const { button } = makeCancelButton();
+
+  const result = await runReloginCancellation({
+    num: 3,
+    button,
+    cancelling,
+    confirm,
+    requestCancel: async () => ({ ok: false, error: '取消失败' }),
+  });
+
+  assert.deepEqual(result, { ok: false, error: '取消失败' });
+  assert.equal(cancelling.has(3), false);
+  assert.equal(confirm.has(3), true);
+});
+
+test('thrown cancellation request does not leave account stuck cancelling', async () => {
+  const cancelling = new Set();
+  const confirm = new Set([3]);
+  const { button } = makeCancelButton();
+
+  const result = await runReloginCancellation({
+    num: 3,
+    button,
+    cancelling,
+    confirm,
+    requestCancel: async () => { throw new Error('server disconnected'); },
+  });
+
+  assert.equal(result.ok, false);
+  assert.match(result.error, /server disconnected/);
+  assert.equal(cancelling.has(3), false);
+  assert.equal(confirm.has(3), true);
+});
 
 test('cancelling state blocks relogin until backend confirms cancellation', () => {
   const html = renderCancellingReloginControl();
@@ -22,7 +95,7 @@ test('confirm state renders both save and cancel actions', () => {
   const html = renderConfirmReloginControls(5);
 
   assert.match(html, /confirmRelogin\(5\)/);
-  assert.match(html, /cancelRelogin\(5\)/);
+  assert.match(html, /cancelRelogin\(5, this\)/);
 });
 
 test('missing pending relogin session returns to relogin button', () => {

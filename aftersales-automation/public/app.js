@@ -2001,16 +2001,19 @@ async function confirmRelogin(num) {
   }
 }
 
-async function cancelRelogin(num) {
+async function cancelRelogin(num, button) {
   reloginPending.delete(num);
-  reloginCancelling.add(num);
-  loadAccounts();
-  const res = await api(`/accounts/${num}/relogin-cancel`, { method: 'POST' });
-  reloginCancelling.delete(num);
+  const res = await AccountReloginState.runReloginCancellation({
+    num,
+    button,
+    cancelling: reloginCancelling,
+    confirm: reloginConfirm,
+    requestCancel: () => api(`/accounts/${num}/relogin-cancel`, { method: 'POST' }),
+  });
+  if (res.ignored) return;
   if (!res.ok) {
     showToast(res.error || `账号${num}取消登录失败`);
   } else {
-    reloginConfirm.delete(num);
     showToast(res.message || `账号${num}已取消登录保存`);
   }
   loadAccounts();

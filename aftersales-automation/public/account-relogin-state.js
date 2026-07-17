@@ -11,12 +11,36 @@
   function renderConfirmReloginControls(num) {
     return [
       `<button class="btn-relogin confirm" onclick="confirmRelogin(${num})">确认保存</button>`,
-      `<button class="btn-relogin cancel" onclick="cancelRelogin(${num})">取消</button>`,
+      `<button class="btn-relogin cancel" onclick="cancelRelogin(${num}, this)">取消</button>`,
     ].join('');
   }
 
   function renderCancellingReloginControl() {
     return '<button class="btn-relogin pending" disabled>取消中...</button>';
+  }
+
+  async function runReloginCancellation({ num, button, cancelling, confirm, requestCancel }) {
+    if (cancelling.has(num)) return { ok: false, ignored: true };
+
+    cancelling.add(num);
+    const actions = button && typeof button.closest === 'function'
+      ? button.closest('.account-actions')
+      : null;
+    const controls = actions && typeof actions.querySelectorAll === 'function'
+      ? actions.querySelectorAll('.btn-relogin')
+      : [];
+    Array.from(controls).forEach(control => { control.disabled = true; });
+    if (button) button.textContent = '取消中...';
+
+    try {
+      const result = await requestCancel();
+      if (result && result.ok) confirm.delete(num);
+      return result || { ok: false, error: '取消登录失败：后端未返回结果' };
+    } catch (error) {
+      return { ok: false, error: `取消登录失败：${error.message}` };
+    } finally {
+      cancelling.delete(num);
+    }
   }
 
   function shouldShowReloginButton(account) {
@@ -40,6 +64,7 @@
     isMissingPendingSession,
     renderA1FixedBatchButton,
     renderCancellingReloginControl,
+    runReloginCancellation,
     shouldKeepConfirmAfterError,
     shouldShowA1FixedBatchButton,
     renderConfirmReloginControls,
