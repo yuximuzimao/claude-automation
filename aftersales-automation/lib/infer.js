@@ -675,14 +675,20 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   s({ type: 'read', label: '退货快递单号', value: returnTracking || '无' });
 
   if (!returnTracking) {
-    // 无快递单号时：多层判断是否为超售后期的无理由诉求（可自动拒绝）
+    // 七天无理由退货无单号固定人工；其他原因保留原超期判断
     const reason = ticket.afterSaleReason || '';
     const remark = ticket.buyerRemark || '';
 
     s({ type: 'read', label: '售后原因', value: reason || '无' });
     s({ type: 'read', label: '售后说明', value: remark || '无' });
 
-    // 平台标准非商责原因（无理由/个人原因类），无快递单号→直接拒绝
+    if (reason.includes('七天无理由退货')) {
+      const manualReason = '无退货快递单号，可能为超期特殊退货或次品特殊处理，请人工查询并判断是否可以同意提前无理由退货';
+      s({ type: 'branch', text: `上报 → ${manualReason}` });
+      return fin(escalate(manualReason));
+    }
+
+    // 其他平台标准非商责原因（无理由/个人原因类），无快递单号→直接拒绝
     const isNonQualityReason = NON_MERCHANT_REASONS.some(kw => reason.includes(kw));
 
     // 售后原因是"质量问题"/"其他"但buyerRemark含超期/无理由关键词（实为个人原因）
