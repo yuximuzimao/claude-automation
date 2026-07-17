@@ -40,6 +40,7 @@ function emptyCollectedData() {
     productMatches: [],
     productArchives: [],
     giftErpSearch: null,
+    giftErpSearches: [],
     giftProductMatch: null,
     giftProductArchive: null,
     collectErrors: [],
@@ -195,17 +196,20 @@ async function collectTicketTargetAware(context, customDependencies) {
     collected.collectErrors.push('erp-aftersale: 无退货快递单号，跳过');
   }
 
-  const gift = (ticket.gifts || [])[0];
-  if (gift && gift.id) {
-    collected.giftErpSearch = await collectErpOrder(
+  const giftsToCollect = type === '仅退款' ? (ticket.gifts || []) : (ticket.gifts || []).slice(0, 1);
+  for (const gift of giftsToCollect) {
+    if (!gift.id) continue;
+    const search = await collectErpOrder(
       context,
       gift.id,
-      'erp-search: 赠品',
+      `erp-search: 赠品 ${gift.id}`,
       collected,
       dependencies,
       logisticsResults
     );
+    if (search) collected.giftErpSearches.push({ subOrderId: gift.id, ...search });
   }
+  collected.giftErpSearch = collected.giftErpSearches[0] || null;
 
   if (logisticsResults.length) collected.erpLogistics = { results: logisticsResults };
   return collected;

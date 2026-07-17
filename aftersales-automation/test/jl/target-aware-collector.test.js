@@ -62,6 +62,46 @@ test('采集全程显式绑定详情tab和ERP tab，不选择任意鲸灵tab', a
   assert.deepEqual(result.collectErrors, ['product-detail: 跳过（工单类型=仅退款，无需核对商品明细）', 'erp-aftersale: 无退货快递单号，跳过']);
 });
 
+test('仅退款依次采集全部赠品子订单及其ERP物流', async () => {
+  const calls = [];
+  const dependencies = {
+    readTicket: async () => ok({
+      subOrders: [{ id: 'main-1' }],
+      gifts: [{ id: 'gift-1' }, { id: 'gift-2' }],
+      subBizType: '仅退款',
+    }),
+    erpSearch: async (_targetId, subOrderId) => {
+      calls.push(['erpSearch', subOrderId]);
+      return ok({ rows: { rows: [{ status: '待审核' }] } });
+    },
+    readAllErpLogistics: async () => {
+      calls.push(['erpLogistics']);
+      return ok({ results: [] });
+    },
+    getLogistics: async () => ok({ packages: [] }),
+    erpAftersale: async () => assert.fail('无退货单号不应查ERP售后'),
+    productMatch: async () => assert.fail('仅退款不应查商品对应表'),
+    productArchive: async () => assert.fail('仅退款不应查商品档案'),
+    getErpShop: () => assert.fail('仅退款不需要ERP店铺映射'),
+  };
+
+  const result = await collectTicketTargetAware({
+    detailTargetId: 'detail-tab',
+    erpTargetId: 'erp-tab',
+    workOrderNum: WORK_ORDER,
+    accountNote: '顺链-KGOS',
+    type: '仅退款',
+  }, dependencies);
+
+  assert.deepEqual(
+    calls.filter(call => call[0] === 'erpSearch').map(call => call[1]),
+    ['main-1', 'gift-1', 'gift-2']
+  );
+  assert.equal(calls.filter(call => call[0] === 'erpLogistics').length, 3);
+  assert.deepEqual(result.giftErpSearches.map(item => item.subOrderId), ['gift-1', 'gift-2']);
+  assert.equal(result.giftErpSearch.subOrderId, 'gift-1');
+});
+
 test('退货退款遍历全部主子订单和赠品，并复用同一ERP targetId', async () => {
   const calls = [];
   const dependencies = {

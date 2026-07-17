@@ -49,18 +49,71 @@ function getErpRows(cd, field) {
   if (field === 'erpSearch' && cd.erpSearches && cd.erpSearches.length > 0) {
     return cd.erpSearches.flatMap(s => (s.rows && s.rows.rows) || []);
   }
+  // 赠品 ERP：优先合并 giftErpSearches（所有赠品子订单），fallback 到 giftErpSearch
+  if (field === 'giftErpSearch' && cd.giftErpSearches && cd.giftErpSearches.length > 0) {
+    return cd.giftErpSearches.flatMap(s => (s.rows && s.rows.rows) || []);
+  }
   return (cd[field] && cd[field].rows && cd[field].rows.rows) || [];
+}
+
+function getRowTrackings(row) {
+  const trackings = [
+    ...((row && Array.isArray(row.trackings)) ? row.trackings : []),
+    row && row.tracking,
+  ];
+  return [...new Set(trackings.filter(Boolean))];
+}
+
+function getPackageTracking(pkg) {
+  const match = ((pkg && pkg.text) || '').match(/物流单号[：:]\s*\n?(\S+)/);
+  return match ? match[1] : null;
+}
+
+const NOT_PICKED_UP_KEYWORDS = ['未揽收', '等待揽收', '尚未揽收'];
+const ACTUAL_SHIPMENT_RE = /揽收|在途|派件|签收|入站|到达|离开|运输/;
+
+function evaluateRefundOnlyTrackings(cd, rows) {
+  const trackings = [...new Set(rows.flatMap(getRowTrackings))];
+  const erpResults = cd.erpLogistics && Array.isArray(cd.erpLogistics.results)
+    ? cd.erpLogistics.results
+    : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+  const packages = (cd.logistics && cd.logistics.packages) || [];
+  const packageTrackings = packages.map(getPackageTracking).filter(Boolean);
+  const missingFromErpRows = packageTrackings.filter(tracking => !trackings.includes(tracking));
+
+  const outcomes = trackings.map(tracking => {
+    const texts = [
+      ...erpResults.filter(result => result.tracking === tracking).map(result => result.logisticsText || ''),
+      ...packages.filter(pkg => getPackageTracking(pkg) === tracking).map(pkg => pkg.text || ''),
+    ].filter(Boolean);
+    const hasReturn = texts.some(text => RETURN_KEYWORDS.some(keyword => text.includes(keyword)));
+    if (hasReturn) return { tracking, outcome: 'returned' };
+
+    const hasNotPickedUp = texts.some(text => NOT_PICKED_UP_KEYWORDS.some(keyword => text.includes(keyword)));
+    const hasActualShipment = texts.some(text => {
+      let withoutNotPickedUp = text;
+      NOT_PICKED_UP_KEYWORDS.forEach(keyword => {
+        withoutNotPickedUp = withoutNotPickedUp.split(keyword).join('');
+      });
+      return ACTUAL_SHIPMENT_RE.test(withoutNotPickedUp);
+    });
+    if (hasActualShipment) return { tracking, outcome: 'shipped' };
+    if (hasNotPickedUp) return { tracking, outcome: 'not_picked_up' };
+    return { tracking, outcome: 'unknown' };
+  });
+
+  return { trackings, outcomes, missingFromErpRows };
 }
 
 // 聚合所有行的发货状态，替代只读第一行的 getErpStatus()
 // 已发货状态：卖家已发货 / 交易成功 / 交易关闭（订单已关闭但曾是发货状态）
-// 未发货状态：待审核 / 待打印快递单
+// 无快递单号时可确认未发货的状态：待审核 / 待打印快递单 / 待发货
 function getAggregatedErpStatus(cd, field) {
   const rows = getErpRows(cd, field);
   if (!rows.length) return { raw: null, statuses: [], hasShipped: false, allNotShipped: false, hasTracking: false };
   const statuses = [...new Set(rows.map(r => r.status).filter(Boolean))];
   const SHIPPED = ['卖家已发货', '交易成功', '交易关闭'];
-  const NOT_SHIPPED = ['待审核', '待打印快递单'];
+  const NOT_SHIPPED = ['待审核', '待打印快递单', '待发货'];
   return {
     raw: rows[0].status || null,
     statuses,
@@ -136,6 +189,11 @@ function validateCollectedData(cd, type) {
 function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
   const erpAgg = getAggregatedErpStatus(cd, 'erpSearch');
   const erpStatus = erpAgg.raw;
+  const gifts = ticket.gifts || [];
+  const giftAgg = gifts.length > 0 ? getAggregatedErpStatus(cd, 'giftErpSearch') : null;
+  const mainRows = getErpRows(cd, 'erpSearch');
+  const giftRows = getErpRows(cd, 'giftErpSearch');
+  const allRows = [...mainRows, ...giftRows];
   s({ type: 'read', label: 'ERP主商品状态', value: erpAgg.statuses.length ? erpAgg.statuses.join('/') : '未获取' });
 
   if (!erpStatus && !erpAgg.statuses.length) {
@@ -143,34 +201,67 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate('未获取到ERP状态，需人工核查'));
   }
 
-  // 5.2：未发货
-  // 待审核：订单未审核，可退款
-  // 待打印快递单：已审核，分两种情况：有快递单号→需拦截，无快递单号→可退款
-  const isNotShipped = erpAgg.allNotShipped;
-  s({ type: 'check', condition: `所有ERP行 ∈ [待审核, 待打印快递单]（全部未发货）`, result: isNotShipped });
+  if (gifts.length > 0 && giftRows.length === 0) {
+    s({ type: 'branch', text: '上报 → 赠品ERP状态未获取' });
+    return fin(escalate('赠品ERP状态未获取，需人工核查'));
+  }
 
-  if (isNotShipped) {
-    // 待打印快递单时检查是否已有快递单号（扫所有行，防止分包场景只读 rows[0] 漏判）
-    if (erpStatus === '待打印快递单') {
-      const printReadyRow = getErpRows(cd, 'erpSearch').find(r =>
-        r.status === '待打印快递单' && (r.tracking || (r.trackings && r.trackings.length))
-      );
-      const mainTracking = printReadyRow && (printReadyRow.tracking || (printReadyRow.trackings && printReadyRow.trackings[0]));
-      s({ type: 'read', label: '主商品快递单号', value: mainTracking || '无' });
-      if (mainTracking) {
-        s({ type: 'branch', text: `上报 → 待打印快递单且已有快递单号 ${mainTracking}，需人工拦截` });
-        return fin(escalate(`订单已审核且快递单号已生成(${mainTracking})，需人工拦截后退款`, {
-          rulesApplied: [{ doc: 'flow-5.2', section: 'Step4b', summary: '待打印快递单+有运单号→上报人工拦截' }],
-        }));
-      }
+  const noTrackingStatuses = ['待审核', '待打印快递单', '待发货'];
+  const abnormalNoTrackingRow = allRows.find(row =>
+    getRowTrackings(row).length === 0 && !noTrackingStatuses.includes(row.status)
+  );
+  if (abnormalNoTrackingRow) {
+    const status = abnormalNoTrackingRow.status || '未知';
+    s({ type: 'branch', text: `上报 → ERP状态${status}但无快递单号，属于数据异常` });
+    return fin(escalate(`ERP状态为「${status}」但无快递单号，数据异常，需人工核查`));
+  }
+
+  const trackingEvaluation = evaluateRefundOnlyTrackings(cd, allRows);
+  if (trackingEvaluation.trackings.length > 0) {
+    const outcomeCounts = trackingEvaluation.outcomes.reduce((counts, item) => {
+      counts[item.outcome] = (counts[item.outcome] || 0) + 1;
+      return counts;
+    }, {});
+    s({
+      type: 'read',
+      label: '逐行物流核验',
+      value: `单号${trackingEvaluation.trackings.length}个：已退回${outcomeCounts.returned || 0}、未揽收${outcomeCounts.not_picked_up || 0}、已发货未退回${outcomeCounts.shipped || 0}、未知${outcomeCounts.unknown || 0}`,
+    });
+
+    if (trackingEvaluation.missingFromErpRows.length > 0) {
+      s({ type: 'branch', text: '上报 → 鲸灵存在未包含在ERP行中的快递单号，采集不完整' });
+      return fin(escalate('物流采集不完整：鲸灵存在ERP行中未采集到的快递单号，需人工核查'));
     }
 
+    const hasUnknownTracking = trackingEvaluation.outcomes.some(item => item.outcome === 'unknown');
+    const hasShippedTracking = trackingEvaluation.outcomes.some(item => item.outcome === 'shipped');
+    if (hasUnknownTracking && !hasShippedTracking) {
+      s({ type: 'branch', text: '上报 → 有快递单号但物流结果不明' });
+      return fin(escalate('有快递单号但未读取到明确物流结果，需人工核查'));
+    }
+
+    const allTrackingSafe = trackingEvaluation.outcomes.every(item =>
+      item.outcome === 'returned' || item.outcome === 'not_picked_up'
+    );
+    if (allTrackingSafe) {
+      s({ type: 'branch', text: '同意退款 → 所有ERP行均未发货或物流已退回' });
+      return fin(approve(
+        '主商品和赠品全部ERP行均未发货或物流已退回',
+        [{ doc: 'flow-5.2', section: 'Step4', summary: '全部ERP行逐行核验通过→同意退款' }]
+      ));
+    }
+  }
+
+  // 5.2：未发货
+  // 待审核 / 待打印快递单 / 待发货：所有行都无快递单号时可退款
+  const isNotShipped = erpAgg.allNotShipped && trackingEvaluation.trackings.length === 0;
+  s({ type: 'check', condition: `所有ERP行 ∈ [待审核, 待打印快递单, 待发货] 且全部无快递单号`, result: isNotShipped });
+
+  if (isNotShipped) {
     s({ type: 'branch', text: '进入「仅退款-未发货」流程 (flow-5.2)' });
-    const gifts = ticket.gifts || [];
     s({ type: 'read', label: '赠品数量', value: `${gifts.length} 件` });
 
     if (gifts.length > 0) {
-      const giftAgg = getAggregatedErpStatus(cd, 'giftErpSearch');
       const giftErpStatus = giftAgg.raw;
       s({ type: 'read', label: 'ERP赠品状态', value: giftAgg.statuses.length ? giftAgg.statuses.join('/') : '未获取' });
 
@@ -179,7 +270,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         return fin(escalate('赠品ERP状态未获取，需人工核查'));
       }
       const giftOk = giftAgg.allNotShipped;
-      s({ type: 'check', condition: `赠品所有ERP行 ∈ [待审核, 待打印快递单]（全部未发货）`, result: giftOk });
+      s({ type: 'check', condition: `赠品所有ERP行 ∈ [待审核, 待打印快递单, 待发货]（全部未发货）`, result: giftOk });
 
       if (!giftOk && giftAgg.hasShipped) {
         // 赠品有已发货行 → 读 ERP 物流判断是否可等待（与 flow-5.3 赠品逻辑一致）
@@ -249,20 +340,6 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         return fin(escalate(`赠品ERP状态异常: ${giftAgg.statuses.join('/')}，需人工核查`));
       }
 
-      // 赠品待打印快递单时同样检查快递单号（扫所有行）
-      if (giftOk && giftErpStatus === '待打印快递单') {
-        const printReadyGiftRow = getErpRows(cd, 'giftErpSearch').find(r =>
-          r.status === '待打印快递单' && (r.tracking || (r.trackings && r.trackings.length))
-        );
-        const giftTracking = printReadyGiftRow && (printReadyGiftRow.tracking || (printReadyGiftRow.trackings && printReadyGiftRow.trackings[0]));
-        s({ type: 'read', label: '赠品快递单号', value: giftTracking || '无' });
-        if (giftTracking) {
-          s({ type: 'branch', text: `上报 → 赠品已有快递单号 ${giftTracking}，需人工拦截` });
-          return fin(escalate(`赠品快递单号已生成(${giftTracking})，需人工拦截后退款`, {
-            rulesApplied: [{ doc: 'flow-5.2', section: 'Step4b', summary: '赠品待打印快递单+有运单号→上报人工拦截' }],
-          }));
-        }
-      }
     }
 
     s({ type: 'branch', text: `同意退款 → 主商品${gifts.length ? '+赠品' : ''}均未发货（无快递单号）` });
@@ -272,24 +349,17 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     ));
   }
 
-  // 待发货（补发单或人工备货中）→ 一般上报人工
-  // 例外：若 ERP 行中有快递单号，说明实际已发货（可能因退款导致状态未回传平台）→ 进入已发货流程
-  if (erpStatus === '待发货' && !erpAgg.hasTracking) {
-    s({ type: 'branch', text: '上报 → ERP状态为待发货且无快递单号，可能为补发单正在备货，需人工确认' });
-    return fin(escalate('ERP状态为「待发货」，可能存在补发单正在备货，请人工确认后操作', {
-      rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '待发货→可能补发单→上报人工' }],
-    }));
-  }
-  if (erpStatus === '待发货' && erpAgg.hasTracking) {
-    s({ type: 'branch', text: '注意 → ERP状态待发货但已有快递单号，可能因退款导致状态未同步，按已发货处理' });
-  }
-
-  // 5.3：已发货（卖家已发货 / 交易成功 / 交易关闭 / 待发货但有快递单号）
-  const isShipped = erpAgg.hasShipped || (erpStatus === '待发货' && erpAgg.hasTracking);
-  s({ type: 'check', condition: `ERP有已发货行（卖家已发货/交易成功/交易关闭）或待发货+有快递`, result: isShipped });
+  // 5.3：任意主品或赠品单号已有实际发货节点 → 进入现有已发货处理流程
+  const isShipped = trackingEvaluation.outcomes.some(item => item.outcome === 'shipped');
+  s({ type: 'check', condition: `主品或赠品任意快递单已有实际发货节点`, result: isShipped });
 
   if (isShipped) {
     s({ type: 'branch', text: '进入「仅退款-已发货」流程 (flow-5.3)' });
+    const shippedFlowTrackings = new Set(
+      trackingEvaluation.outcomes
+        .filter(item => item.outcome !== 'not_picked_up')
+        .map(item => item.tracking)
+    );
 
     // 已拦截记录仅影响输出文案和快递行动，不影响物流验证流程
     if (cd.intercepted) {
@@ -297,14 +367,22 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'read', label: '拦截记录', value: `快递 ${it.tracking} 已拦截（首次工单 ${it.workOrderNum}，${it.executedAt ? it.executedAt.slice(0, 10) : '未知时间'}）` });
     }
 
-    const packages = cd.logistics && cd.logistics.packages;
+    const packages = cd.logistics && cd.logistics.packages
+      ? cd.logistics.packages.filter(pkg => {
+        const tracking = getPackageTracking(pkg);
+        return !tracking || shippedFlowTrackings.has(tracking);
+      })
+      : null;
     s({ type: 'read', label: '物流包裹数', value: packages ? `${packages.length} 个` : '未获取' });
 
     // ERP双源：同时检查 ERP 物流文本（鲸灵有时不更新退回状态）
     // erpLogistics 格式：{ results: [{ tracking, logisticsText }, ...] }（多行）或旧格式 { logisticsText }（单行兼容）
-    const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
+    const allErpLogResults = cd.erpLogistics && cd.erpLogistics.results
       ? cd.erpLogistics.results
       : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+    const erpLogResults = allErpLogResults.filter(result =>
+      !result.tracking || shippedFlowTrackings.has(result.tracking)
+    );
     // 修正：所有有物流信息的行都必须有退回关键词才算全部退回（之前 .some() 导致部分退回误判为全部退回）
     const erpLogsWithText = erpLogResults.filter(r => r.logisticsText);
     const erpReturned = erpLogsWithText.length > 0 && erpLogsWithText.every(r => RETURN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
@@ -319,7 +397,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'read', label: '各运单物流状态', value: erpTrackingStatuses.length ? erpTrackingStatuses.join('；') : '未采集' });
 
     if (!packages || !packages.length) {
-      if (erpReturned) {
+      if (erpReturned && !trackingEvaluation.outcomes.some(item => item.outcome === 'unknown')) {
         s({ type: 'branch', text: '同意退款 → 鲸灵物流未读到，但ERP物流显示已退回' });
         return fin(approve(
           '物流显示已退回',
@@ -358,14 +436,19 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     // 交叉核查：合并 ERP 全部 tracking（主品+赠品）+ 鲸灵全部包裹 tracking → 去重
     // 鲸灵工单详情页不显示赠品物流，因此必须从 ERP 补充赠品 tracking
-    const mainShippedRows = getErpRows(cd, 'erpSearch').filter(r => ['卖家已发货', '交易成功', '交易关闭'].includes(r.status));
-    const giftShippedRows = getErpRows(cd, 'giftErpSearch').filter(r => ['卖家已发货', '交易成功', '交易关闭'].includes(r.status));
+    const mainShippedRows = getErpRows(cd, 'erpSearch').filter(r =>
+      getRowTrackings(r).some(tracking => shippedFlowTrackings.has(tracking))
+    );
+    const giftShippedRows = getErpRows(cd, 'giftErpSearch').filter(r =>
+      getRowTrackings(r).some(tracking => shippedFlowTrackings.has(tracking))
+    );
     const totalShipRows = mainShippedRows.length + giftShippedRows.length;
     s({ type: 'read', label: 'ERP发货行总数', value: `${totalShipRows}（主品${mainShippedRows.length}+赠品${giftShippedRows.length}）` });
 
     // 提取所有已知 tracking：ERP主品 + ERP赠品 + 鲸灵物流包裹
     const erpTrackings = [...mainShippedRows, ...giftShippedRows]
-      .flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
+      .flatMap(getRowTrackings)
+      .filter(tracking => shippedFlowTrackings.has(tracking));
     const jlTrackings = (packages || []).map(p => {
       const m = (p.text || '').match(/物流单号：\n(\S+)/);
       return m ? m[1] : null;
@@ -412,7 +495,9 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     let giftPkgStatuses = [];
     let giftNotReturned = [];
     if (giftShippedRows.length > 0) {
-      const giftTrackings = giftShippedRows.flatMap(r => r.trackings || (r.tracking ? [r.tracking] : []));
+      const giftTrackings = giftShippedRows
+        .flatMap(getRowTrackings)
+        .filter(tracking => shippedFlowTrackings.has(tracking));
       giftPkgStatuses = giftTrackings.map(tr => {
         const erpEntry = erpLogResults.find(r => r.tracking === tr);
         const erpReturned = erpEntry && erpEntry.logisticsText && RETURN_KEYWORDS.some(kw => erpEntry.logisticsText.includes(kw));
@@ -441,6 +526,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     s({ type: 'check', condition: `全部包裹有退回物流节点（鲸灵:${allJLReturned}，ERP:${erpReturned}，采集完整:${collectionComplete}）`, result: allReturned });
 
     if (allReturned) {
+      if (trackingEvaluation.outcomes.some(item => item.outcome === 'unknown')) {
+        s({ type: 'branch', text: '上报 → 部分快递单物流结果不明，不能按全部退回处理' });
+        return fin(escalate('部分快递单未读取到明确物流结果，无法确认全部退回，需人工核查'));
+      }
       if (giftNotReturned.length > 0) {
         const giftDesc = giftPkgStatuses.map(p => p.label).join('；');
         s({ type: 'branch', text: `上报 → 主品全部退回，但赠品未退回: ${giftDesc}` });

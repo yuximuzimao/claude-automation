@@ -10,13 +10,15 @@
 ```js
 {
   ticket:         Object | null,   // 必填（read-ticket 失败时为 null，infer 会 escalate）
-  erpSearch:      Object | null,   // 仅退款必填；退货退款不需要
+  erpSearch:      Object | null,   // 第一个主商品子订单结果（旧字段兼容）
+  erpSearches:    Object[],        // 全部主商品子订单 ERP 搜索结果
   erpLogistics:   Object | null,   // 可选，仅退款-已发货补充物流源
   logistics:      Object | null,   // 可选，鲸灵发货物流
   erpAftersale:   Object | null,   // 退货退款必填（有 returnTracking 时）
   productMatch:   Object | null,   // 可选，商品对应表结果
   productArchive: Object | null,   // 可选，商品档案V2
-  giftErpSearch:  Object | null,   // 可选，赠品 ERP 搜索结果
+  giftErpSearch:  Object | null,   // 第一个赠品子订单结果（旧字段兼容）
+  giftErpSearches: Object[],       // 全部赠品子订单 ERP 搜索结果
   intercepted:    Object | null,   // 可选，已拦截记录
   collectErrors:  string[],        // 必填（可为空数组），各步骤错误信息
 }
@@ -45,21 +47,26 @@
 
 ---
 
-## `erpSearch` / `giftErpSearch` 字段（erp-search 采集）
+## `erpSearches` / `giftErpSearches` 字段（erp-search 采集）
 
 ```js
-{
-  rows: {
-    rows: [
-      {
-        status:    string,   // "卖家已发货"/"交易成功"/"待审核"/"待打印快递单"/"待发货"
-        tracking:  string,   // 快递单号（可选）
-        trackings: string[], // 多快递单号列表（可选）
-      }
-    ]
+[
+  {
+    subOrderId: string,
+    rows: {
+      rows: [
+        {
+          status:    string,   // "卖家已发货"/"交易成功"/"待审核"/"待打印快递单"/"待发货"
+          tracking:  string,   // 快递单号（可选）
+          trackings: string[], // 多快递单号列表（可选）
+        }
+      ]
+    }
   }
-}
+]
 ```
+
+`erpSearch` 和 `giftErpSearch` 分别保留数组第一项，供旧快照和旧读取路径兼容。新推理必须优先合并数组中的全部子订单、全部行。
 
 ---
 
@@ -103,9 +110,17 @@
 
 ```js
 {
-  logisticsText: string,  // 完整文本，用 RETURN_KEYWORDS 检测退回状态
+  results: [
+    {
+      rowIndex: number,
+      tracking: string,
+      logisticsText: string,  // 完整文本，用物流节点判断未揽收/已发货/已退回
+    }
+  ]
 }
 ```
+
+旧快照 `{ logisticsText: string }` 继续兼容。
 
 ---
 
