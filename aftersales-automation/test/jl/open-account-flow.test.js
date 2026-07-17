@@ -186,11 +186,12 @@ test('openAccountFlow：多个鲲灵 tab 时先关闭多余 tab，复用 keptTar
 test('op-queue 打开店铺后台入口使用安全编排脚本，不再盲目 jl inject', () => {
   const source = fs.readFileSync(path.join(__dirname, '../../lib/server/op-queue.js'), 'utf8');
   const start = source.indexOf('async function execOpenAccount');
-  const end = source.indexOf('// ── 单账号扫描');
+  const end = source.indexOf('async function execA1FixedBatch', start);
   assert.notEqual(start, -1, '找不到 execOpenAccount');
   assert.notEqual(end, -1, '找不到 execOpenAccount 结束边界');
   const body = source.slice(start, end);
 
-  assert.match(body, /scripts[\\/]+jl-steps[\\/]+open-account\.js/);
+  assert.match(body, /require\('\.\.\/jl\/open-account-flow'\)/);
+  assert.match(body, /openAccountFlow\(String\(accountNum\)\)/);
   assert.equal(body.includes("jl.js'), 'inject'"), false);
 });
