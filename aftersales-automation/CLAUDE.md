@@ -60,8 +60,8 @@
 
 | 测试 | 命令 | 何时必跑 |
 |------|------|----------|
-| 推理回归（44条） | `node test/flow-test.js` | 改 `lib/infer.js` 后 |
-| JL 账号/会话/重登（8条） | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/routes.js` 后 |
+| 推理回归 | `node test/flow-test.js` | 改 `lib/infer.js` 后 |
+| JL 账号/会话/重登 | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/routes.js` 后 |
 | 全量回归 | `npm test` | 改账号切换、CDP、A1 编排或共享模块后 |
 
 **注意**：`node --test` 不接受目录路径，必须逐文件列出。

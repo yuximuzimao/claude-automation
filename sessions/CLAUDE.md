@@ -41,17 +41,19 @@ jl inject <编号>     # 把 session 注入 9222 自动化 Chrome 并导航到�
 
 `jl add <编号>` 和后台 `--auto-save` 模式：
 1. 用 Playwright 打开独立浏览器，自动跳到 `scrm.jlsupp.com/.../login`
-2. 从 `accounts.json` 读取 `phone` 字段，自动填入手机号输入框（等 6 秒 input 出现）
+2. 从 `accounts.json` 读取该账号的登录手机号 `phone`，自动填入手机号输入框（等 6 秒 input 出现）
 3. 用户输入密码、完成登录、关闭教程弹窗
 4. 在**售后系统网页**点击"确认保存"按钮（HTTP POST 触发 session 保存，浏览器自动关闭）
 
 **禁止**用 Enter / stdin 触发保存——该模式靠 HTTP server（jl.js 内部在随机端口）等待前端请求。
 
+`accounts.json.phone` 是登录账号本身，换登录账号时需要手动更新；它不等于 session 里的店铺/供应商联系人。`supplierInfo.supplierMobileList`、`contactMobile`、`supplierMobile` 可以在店铺信息不变时继续保留旧号码，禁止用这些字段自动覆盖登录手机号。重新登录保存只更新 session，并保留现有 `phone`。
+
 ## 文件说明
 
 | 文件 | 用途 |
 |------|------|
-| `accounts.json` | 账号索引（编号→名称→phone→file 映射）。phone 来源：`account{N}.json` → `supplierMobileList[0]`（注意 `contactMobile`/`supplierMobile` 可能过期） |
+| `accounts.json` | 账号索引（编号→名称→登录手机号 `phone`→file 映射）。`phone` 独立维护，不从 `account{N}.json` 的 `supplierMobileList` / `contactMobile` / `supplierMobile` 反推 |
 | `account*.json` | 各账号 Cookie（Playwright storageState 格式，以 `accounts.json` 为准；不要按连续编号推断） |
 | `jl.js` | 主命令入口（已安装到全局 PATH） |
 | `.relogin-port-<n>` | jl.js 写入的临时 HTTP confirm 端口文件（用后自动删除） |

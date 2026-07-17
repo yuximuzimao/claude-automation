@@ -19,7 +19,7 @@ entry: cli.js
 |------|------|--------|
 | `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
 | `server.js` | Express 服务（port 3457），队列管理 + Web 面板 + 定时扫描调度。定时扫描已恢复，走 opQueue scan 新路径并遵守 scanEnabled；legacy scan-all 不作为当前前端/A1处理入口 | 改 API/队列/定时任务时 |
-| `lib/infer.js` | 规则推理引擎（1118行），主入口 `inferDecision()` | 改决策逻辑/文案时 |
+| `lib/infer.js` | 规则推理引擎，主入口 `inferDecision()` | 改决策逻辑/文案时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
@@ -75,7 +75,7 @@ entry: cli.js
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
 | `lib/server/auto-exec-confidence.js` | 自动执行置信度系统 — 场景指纹+人工反馈驱动 auto 判定 | 查/改自动执行条件时 |
-| `public/app.js` | 前端主逻辑（2026行）— 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
+| `public/app.js` | 前端主逻辑 — 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
 | `public/index.html` | 前端 HTML 骨架 — 8 Tab 结构、模版、header 控件 | 改页面结构时 |
 | `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
 | `../return-inbound/SKILL.md` | 退货入库项目导航地图（跨目录） | 调试/改退货入库 op 时；op-queue 的 `return-inbound` case 调用 `../return-inbound/lib/workflow.js` |
@@ -158,6 +158,7 @@ await cdp.navigate(targetId, 'https://...');
 
 - 前端：店铺管理页通过 `POST /api/accounts/:num/relogin` 打开登录页，进入 `reloginConfirm` 后必须同时提供「确认保存」和「取消」。
 - 后端：`/relogin-confirm` 请求临时登录进程 `/save`；`/relogin-cancel` 请求 `/cancel` 并清理 `../sessions/.relogin-port-<num>`。
+- 取消：点击后立即进入 `reloginCancelling`，禁用确认/取消并显示「取消中...」；只有后端成功返回才清理 `reloginConfirm`、恢复「重新登录」，失败则保留确认态供重试。不要用固定秒数判断，以按钮恢复为完成信号。
 - 保存：`../sessions/jl.js --auto-save` 用 `lib/jl-account-config.js` 合并旧账号配置，必须保留 `phone`，否则新登录页无法自动填账号。
 - 状态：`hasFile=true + status=unknown` 是「已保存但未单账号验证」，UI 只显示「未扫描」、不显示重新登录。验证走安全打开账号或未来新 A1 单账号流程，禁止恢复批量刷新状态。
 - 按钮可见性（`public/account-relogin-state.js` `shouldShowReloginButton` + `public/app.js` 渲染，2026-06-22）：
@@ -189,7 +190,7 @@ await cdp.navigate(targetId, 'https://...');
 | 20 | `warnings.includes('X')` 是严格相等而非子串匹配 | `Array.includes()` 做 `===` 比较，不会做子串搜索。意图是判断"已有类似警告" → `some(w => w.includes('X'))`。2026-05-21 修复。 |
 | 21 | 鲸灵页面操作报错后自动重试 → IP 封禁 | 2026-05-29 mimo 模型操作鲸灵页面报错后 `retry({ maxRetries: 3 })` 触发风控封禁。**根因：系统默认把"失败"视为技术异常去恢复，没有识别"失败可能是安全信号"。** 修复：`lib/wait.js` 内置域名自动识别强制 maxRetries=0 + 风控信号就地熔断 + `data/circuit-breaker.json` 持久化。规则见 CLAUDE.md "鲸灵页面操作铁律"。 |
 | 22 | scan-all 切账号后不写 current-session | 多账号扫描会改变同一个 SCRM tab 的实际账号。成功 `jl.js inject` 后必须写 `data/current-session.json`；否则后续 collect/reprocess 可能误判「已经是目标账号」并跳过注入，读不到工单后错误推进 queue。 |
-| 23 | 登录确认态缺少退出路径 | 用户关闭登录页、点取消或 port 文件不存在时，前端必须清理 `reloginConfirm` 并恢复「重新登录」。`unknown + hasFile` 表示未扫描验证，不是失效。保存 session 时必须保留旧账号 `phone`。 |
+| 23 | 登录确认态过早退出或没有退出路径 | 点取消后必须先进入 `reloginCancelling` 并锁住按钮，等 `/relogin-cancel` 成功后再清理 `reloginConfirm`、恢复「重新登录」；失败保留确认态。提前恢复会让用户再次启动登录，旧进程失去可追踪入口。登录页关闭或 port 文件不存在时也要退出确认态，不能永久卡住。`unknown + hasFile` 表示未扫描验证，不是失效；保存 session 时必须保留旧账号 `phone`。 |
 | 24 | pipeline 历史执行守卫把 skip 误判为"已执行" | `skip` action（工单暂时不可访问）也会写 `executedAt`（自动归档），但它不是真实审批操作。守卫条件 `!!s.executedAt` 会把 skip 误判为"已执行" → 工单恢复后 approve 永久被跳过。**修复**：守卫加 `&& s.decision?.action !== 'skip'`。**规则**：executedAt 语义是"曾被处理"，approve/reject 与 skip 必须分开对待。`pipeline.js:319` |
 | 25 | 多弹窗共存时用 `dialogs[length-1]` 取"最后一个可见弹窗" | 套装子品明细误报「未找到子品明细表头」根因：`archive.js` READ_SUB_ITEMS_JS 赌"最后一个可见弹窗就是子商品弹窗"。但 collect 全流程里 ERP tab 可能残留/并发其他可见弹窗（如 `erp-logistics` 的 `trade-detail-dialog` 订单详情弹窗未完全关闭），`dialogs[length-1]` 取到它 → 表头不匹配。**单独跑必成功、生产偶发失败**正是此特征（同工单一成一败）。**修复**：按标题 `子商品信息`（或"含组合比例表头"兜底）精确锁定弹窗，禁止赌最后一个。**规则**：多弹窗页面定位目标弹窗必须用标题/特征匹配，不能用 DOM 序位置。失败时务必 dump 所有可见弹窗标题+class（埋点），别只丢错误字符串。`archive.js:138` |
 | 26 | 单次操作报错就把账号标异常，且异常态同时隐藏按钮+后端拦截 → 账号被双重锁死 | 账号12 切换时网络抖动报一次错被标 `error`。旧逻辑下 `error/expired` 既隐藏「打开店铺后台」按钮，后端 `/open` 又直接 409 → 一个其实正常的账号无任何自助恢复路径。**根因**：把"单次失败"等同于"账号失效"，且没留人工兜底通道。**修复（2026-06-22）**：打开后台按钮只要有 session 文件就常显；异常态点击先 `confirm`，确认后带 `confirmed:true` 让后端放行。**规则**：状态标记可降级提示，但不能既挡 UI 又挡后端把入口彻底封死，高风险入口要留「人工确认放行」通道。`routes.js:747` `app.js:openAccountStore` |
