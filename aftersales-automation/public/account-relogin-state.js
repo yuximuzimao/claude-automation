@@ -15,6 +15,10 @@
     ].join('');
   }
 
+  function renderCancellingReloginControl() {
+    return '<button class="btn-relogin pending" disabled>取消中...</button>';
+  }
+
   function shouldShowReloginButton(account) {
     if (!account || !account.hasFile) return true;
     // 正常(ok)/失效(expired)/异常(error) 都保留重新登录入口；
@@ -35,6 +39,7 @@
   const api = {
     isMissingPendingSession,
     renderA1FixedBatchButton,
+    renderCancellingReloginControl,
     shouldKeepConfirmAfterError,
     shouldShowA1FixedBatchButton,
     renderConfirmReloginControls,

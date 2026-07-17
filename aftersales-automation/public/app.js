@@ -1910,6 +1910,7 @@ setInterval(function() {
 // ── 店铺管理 ─────────────────────────────────────────────────────
 const reloginPending = new Set();   // 正在启动窗口（等待后端返回 port）
 const reloginConfirm = new Set();   // 窗口已打开，等待用户点击"确认保存"
+const reloginCancelling = new Set(); // 正在等待后端确认取消完成
 
 async function loadAccounts() {
   const el = document.getElementById('accounts-list');
@@ -1926,6 +1927,7 @@ async function loadAccounts() {
     const statusLabel = { ok: '正常', expired: '登录失效', error: '扫描异常', unknown: '未扫描' }[statusKey] || '未知';
     const isPending = reloginPending.has(a.num);
     const isConfirm = reloginConfirm.has(a.num);
+    const isCancelling = reloginCancelling.has(a.num);
     const showReloginBtn = AccountReloginState.shouldShowReloginButton(a);
     const fixedBatchBtn = AccountReloginState.shouldShowA1FixedBatchButton(a)
       ? AccountReloginState.renderA1FixedBatchButton(a.num)
@@ -1933,7 +1935,9 @@ async function loadAccounts() {
     const lastScan = a.lastScan ? new Date(a.lastScan).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
     let reloginBtn = '';
     if (showReloginBtn) {
-      if (isPending) {
+      if (isCancelling) {
+        reloginBtn = AccountReloginState.renderCancellingReloginControl();
+      } else if (isPending) {
         reloginBtn = `<button class="btn-relogin pending" disabled>启动中...</button>`;
       } else if (isConfirm) {
         reloginBtn = AccountReloginState.renderConfirmReloginControls(a.num);
@@ -1999,12 +2003,14 @@ async function confirmRelogin(num) {
 
 async function cancelRelogin(num) {
   reloginPending.delete(num);
-  reloginConfirm.delete(num);
+  reloginCancelling.add(num);
   loadAccounts();
   const res = await api(`/accounts/${num}/relogin-cancel`, { method: 'POST' });
+  reloginCancelling.delete(num);
   if (!res.ok) {
     showToast(res.error || `账号${num}取消登录失败`);
   } else {
+    reloginConfirm.delete(num);
     showToast(res.message || `账号${num}已取消登录保存`);
   }
   loadAccounts();

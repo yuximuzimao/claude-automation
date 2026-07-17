@@ -3,11 +3,20 @@ const assert = require('node:assert/strict');
 
 const {
   renderA1FixedBatchButton,
+  renderCancellingReloginControl,
   renderConfirmReloginControls,
   shouldShowA1FixedBatchButton,
   shouldShowReloginButton,
   shouldKeepConfirmAfterError,
 } = require('../../public/account-relogin-state');
+
+test('cancelling state blocks relogin until backend confirms cancellation', () => {
+  const html = renderCancellingReloginControl();
+
+  assert.match(html, /disabled/);
+  assert.match(html, />取消中\.\.\.</);
+  assert.doesNotMatch(html, /reloginAccount|confirmRelogin|cancelRelogin/);
+});
 
 test('confirm state renders both save and cancel actions', () => {
   const html = renderConfirmReloginControls(5);
