@@ -379,6 +379,13 @@ async function cleanupCurrentAccountJlTargets(context, dependencies) {
 
 async function processOpenedDetail(context, dependencies) {
   const collectedData = await dependencies.collectDetail(context);
+  if (collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
+      typeof dependencies.resolveSharedReturnGroup === 'function') {
+    collectedData.sharedReturnGroup = await dependencies.resolveSharedReturnGroup(
+      collectedData,
+      context.ticket && context.ticket.workOrderNum
+    );
+  }
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
   const decision = await dependencies.inferDecision(collectedData, queueItem);
   if (context && context.disableAutoExecute === true) {
@@ -548,6 +555,7 @@ function loadDefaultDependencies() {
   const { readShopName } = require('./02-read-shop-name');
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
+  const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
   const { shouldAutoExecute } = require('../../lib/server/auto-exec-confidence');
   const { approveTicket } = require('../../lib/jl/approve');
   const { rejectTicket } = require('../../lib/jl/reject');
@@ -618,6 +626,8 @@ function loadDefaultDependencies() {
       type: context.ticket.type,
     }),
     inferDecision: (collectedData, ticket) => inferDecision({ collectedData }, ticket),
+    resolveSharedReturnGroup: (collectedData, workOrderNum) =>
+      resolveSharedReturnGroup(collectedData, db.readSimulations(), workOrderNum),
     shouldAutoExecute,
     assertBatchAllowed: async () => {
       const circuit = readCircuit();

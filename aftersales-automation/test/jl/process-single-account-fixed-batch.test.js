@@ -13,6 +13,7 @@ const {
   createAutoExecutionGate,
   loadDefaultDependencies,
   locateWorkOrderOnFreshList,
+  processOpenedDetail,
   processSingleAccountFixedBatch,
   closeAndVerifyDetailTarget,
   cleanupCurrentAccountJlTargets,
@@ -128,6 +129,38 @@ test('冻结首次48小时清单，并严格按快照顺序逐单处理', async 
   );
   assert.deepEqual(result.items.map(item => item.status), ['auto_executed', 'simulated']);
   assert.deepEqual(fixture.getTargets(), ['list-tab']);
+});
+
+test('平台提示重复退货单时，先解析关联工单再进行推理', async () => {
+  const calls = [];
+  const collectedData = {
+    ticket: {
+      workOrderNum: ORDER_1,
+      returnTrackingMultiUse: true,
+      returnTrackingUsedBy: [ORDER_2],
+    },
+  };
+  const result = await processOpenedDetail({
+    ticket: { workOrderNum: ORDER_1 },
+    queueItem: { workOrderNum: ORDER_1 },
+    disableAutoExecute: true,
+  }, {
+    collectDetail: async () => collectedData,
+    resolveSharedReturnGroup: async data => {
+      calls.push(['resolve', data.ticket.workOrderNum]);
+      return { mode: 'same_suborders_only', ignoredWorkOrderNums: [ORDER_2] };
+    },
+    inferDecision: async data => {
+      calls.push(['infer', data.sharedReturnGroup.mode]);
+      return { action: 'approve' };
+    },
+  });
+
+  assert.equal(result.status, 'simulated');
+  assert.deepEqual(calls, [
+    ['resolve', ORDER_1],
+    ['infer', 'same_suborders_only'],
+  ]);
 });
 
 test('自动执行只发生在 shouldAutoExecute 命中时，其他工单进入原待确认状态', async () => {
@@ -854,6 +887,7 @@ test('默认依赖装配真实target-aware采集器，不走旧collect或pipelin
 
   assert.equal(typeof dependencies.collectDetail, 'function');
   assert.equal(typeof dependencies.resolveErpTargetId, 'function');
+  assert.equal(typeof dependencies.resolveSharedReturnGroup, 'function');
   assert.doesNotMatch(String(dependencies.collectDetail), /尚未接通/);
   assert.doesNotMatch(source, /require\(['"]\.\.\/\.\.\/collect\.js['"]\)/);
   assert.doesNotMatch(source, /require\(['"].*pipeline['"]\)/);

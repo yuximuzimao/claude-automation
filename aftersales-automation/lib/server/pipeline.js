@@ -13,6 +13,7 @@ const db = require('./data');
 const sse = require('./sse');
 const { getSkipCompletionStatus } = require('./pipeline-status');
 const { inferDecision } = require('../infer');
+const { resolveSharedReturnGroup } = require('../return-tracking-group');
 const { inferWithAI } = require('../ai-infer');
 const { hasConfirmedReturn, getHoursUntilNextScan } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
@@ -166,7 +167,7 @@ async function processOne(queueItem, options = {}) {
   db.updateQueueItem(queueItemId, { status: 'inferring', collectRetries: 0 });
   sse.broadcast('pipeline-update', { stage: 'inferring', workOrderNum });
 
-  // 一次读取，供 getLatestSim 和多次使用检测共用
+  // 一次读取，供 getLatestSim、关联工单记录和重复执行检测共用
   const allSims = db.readSimulations();
   const sim = [...allSims].reverse().find(s => s.queueItemId === queueItemId) || null;
   if (!sim || !sim.collectedData) {
@@ -186,37 +187,13 @@ async function processOne(queueItem, options = {}) {
   const hoursUntilNextScan = getHoursUntilNextScan();
   const itemWithHint = { ...freshItem, hoursUntilNextScan, ...(hint ? { hint } : {}) };
 
-  // ── 退货快递单号多次使用检测（双来源：页面可见文本 + DB交叉比对）──
-  const returnTracking = sim.collectedData.ticket && sim.collectedData.ticket.returnTracking;
-  if (returnTracking) {
-    // 来源1：采集时页面已标注「多次使用」（主来源，含平台已知关联工单号）
-    const pageMultiUse = sim.collectedData.ticket.returnTrackingMultiUse || false;
-    const pageUsedBy = sim.collectedData.ticket.returnTrackingUsedBy || [];
-
-    // 来源2：DB交叉比对（补充：找本系统内其他工单使用同一快递单号）
-    const dbConflictNums = [];
-    const currentSubOrderIds = new Set(
-      ((sim.collectedData.ticket && sim.collectedData.ticket.subOrders) || []).map(o => String(o.id || o))
-    );
-    allSims.forEach(s => {
-      if (s.id === sim.id) return;
-      if (s.workOrderNum === workOrderNum) return;  // 同一工单的历史sim不算冲突
-      const rt = s.collectedData && s.collectedData.ticket && s.collectedData.ticket.returnTracking;
-      if (!rt || rt !== returnTracking) return;
-      // 同一子订单（同一笔订单的多个售后工单）不算冲突
-      const otherSubOrderIds = ((s.collectedData.ticket.subOrders) || []).map(o => String(o.id || o));
-      if (otherSubOrderIds.some(id => currentSubOrderIds.has(id))) return;
-      dbConflictNums.push(s.workOrderNum);
-    });
-
-    // 合并两个来源（去重），过滤 pageUsedBy 中的自身工单号
-    const filteredPageUsedBy = pageUsedBy.filter(n => n !== workOrderNum);
-    const allUsedBy = [...new Set([...filteredPageUsedBy, ...dbConflictNums])];
-    if (pageMultiUse || allUsedBy.length > 0) {
-      log(`[${workOrderNum}] 退货快递单 ${returnTracking} 多次使用（页面标注:${pageMultiUse}，关联工单:${allUsedBy.join('、') || '无'}）`);
-      sim.collectedData.ticket.returnTrackingMultiUse = true;
-      sim.collectedData.ticket.returnTrackingUsedBy = allUsedBy;
-    }
+  // ── 重复退货单只认平台详情提示，不主动扫描历史单号建立关联 ──────
+  const ticketData = sim.collectedData.ticket;
+  if (ticketData && ticketData.returnTrackingMultiUse) {
+    const pageUsedBy = (ticketData.returnTrackingUsedBy || []).filter(n => String(n) !== String(workOrderNum));
+    ticketData.returnTrackingUsedBy = pageUsedBy;
+    sim.collectedData.sharedReturnGroup = resolveSharedReturnGroup(sim.collectedData, allSims, workOrderNum);
+    log(`[${workOrderNum}] 平台提示退货单 ${ticketData.returnTracking} 多次使用，关联工单:${pageUsedBy.join('、') || '无'}`);
   }
 
   // ── 已拦截检测：同快递单号已经创建过拦截提醒 → 注入标记 ──────────

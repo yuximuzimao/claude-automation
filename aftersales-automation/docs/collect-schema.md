@@ -45,6 +45,8 @@
 | `gifts` | array | 否 | 赠品子订单列表 |
 | `gifts[].id` | string | 是 | 赠品子订单号 |
 
+`returnTrackingMultiUse` 和 `returnTrackingUsedBy` 只来自平台详情提示，禁止通过扫描历史相同退货单号自行补充。生产推理会在采集后生成顶层 `sharedReturnGroup`：相同子订单标记为重复申请；不同子订单保存合并后的逐规格应退明细；平台列出的工单记录缺失时标记为 `incomplete` 并转人工。
+
 ---
 
 ## `erpSearches` / `giftErpSearches` 字段（erp-search 采集）

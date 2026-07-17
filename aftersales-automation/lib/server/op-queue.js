@@ -681,6 +681,7 @@ async function execReprocessOne(op) {
 
   // ── Step 5: 采集 + 推理 + 自动执行（step 14 processOpenedDetail 完整链路）──
   const { inferDecision } = require('../infer');
+  const { resolveSharedReturnGroup } = require('../return-tracking-group');
   const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
   const { shouldAutoExecute } = require('../server/auto-exec-confidence');
   const { createAutoExecutionJournal } = require('../server/auto-execution-journal');
@@ -714,6 +715,8 @@ async function execReprocessOne(op) {
       type: ctx.ticket.type,
     }),
     inferDecision: (collectedData) => inferDecision({ collectedData }, queueItem),
+    resolveSharedReturnGroup: (collectedData, workOrderNum) =>
+      resolveSharedReturnGroup(collectedData, db.readSimulations(), workOrderNum),
     shouldAutoExecute,
     assertAutoExecutionAllowed: step14.createAutoExecutionGate({
       readCircuit,

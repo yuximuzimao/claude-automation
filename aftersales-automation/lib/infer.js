@@ -723,14 +723,30 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     return fin(escalate(`退货退款无快递单号，售后原因：${reason || '未知'}，需人工核查`));
   }
 
-  // 退货快递单号被多个工单共用 → 人工核查（防止一单两退）
+  const sharedReturnGroup = cd.sharedReturnGroup;
+
+  // 只根据平台详情给出的关联工单处理重复退货单号
   if (ticket.returnTrackingMultiUse) {
     const usedBy = ticket.returnTrackingUsedBy && ticket.returnTrackingUsedBy.length
       ? `，已关联工单：${ticket.returnTrackingUsedBy.join('、')}`
       : '';
     s({ type: 'check', condition: '退货快递单号是否被多个售后工单使用', result: true });
-    s({ type: 'branch', text: `上报 → 快递单号多次使用${usedBy}，防止一单两退` });
-    return fin(escalate(`退货快递单号已被多个工单共用${usedBy}，需人工核查防止重复退款`));
+    if (!sharedReturnGroup) {
+      s({ type: 'branch', text: `上报 → 平台提示快递单号多次使用${usedBy}，但关联记录尚未核对` });
+      return fin(escalate(`退货快递单号已被多个工单共用${usedBy}，系统没有完成关联记录核对，需人工处理`));
+    }
+    if (sharedReturnGroup.mode === 'incomplete') {
+      s({ type: 'branch', text: `上报 → ${sharedReturnGroup.reason}` });
+      return fin(escalate(sharedReturnGroup.reason));
+    }
+    if (sharedReturnGroup.mode === 'same_suborders_only') {
+      s({ type: 'read', label: '重复退货单处理', value: '关联工单为相同子订单的重复申请，只核对当前工单' });
+    } else if (sharedReturnGroup.mode === 'distinct_suborders') {
+      s({ type: 'read', label: '重复退货单处理', value: '关联工单包含不同子订单，合并应退商品后核对' });
+    } else {
+      s({ type: 'branch', text: '上报 → 重复退货单关联结果无法识别' });
+      return fin(escalate('重复退货单关联结果无法识别，需人工核对'));
+    }
   }
 
   const aftersale = cd.erpAftersale;
@@ -776,9 +792,10 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
   }
 
   // 必须有「卖家已收到退货」状态
-  const hasConfirmedReceipt = aftersale.rows.some(row =>
-    row.goodsStatus && row.goodsStatus.includes('已收到退货')
+  const receivedRows = aftersale.rows.filter(row =>
+    row.goodsStatus && row.goodsStatus.includes('卖家已收到退货')
   );
+  const hasConfirmedReceipt = receivedRows.length > 0;
   const statusList = aftersale.rows.map(r => r.goodsStatus || '?').join('；');
   s({ type: 'check', condition: `存在「卖家已收到退货」状态的入库行（实际：${statusList}）`, result: hasConfirmedReceipt });
 
@@ -813,12 +830,13 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
   // ── 收集入库明细 ─────────────────────────────────────────────────
   const receivedItems = [];  // { name, qtyGood, qtyBad }
-  aftersale.rows.forEach(row => {
+  receivedRows.forEach(row => {
     (row.items || []).forEach(item => {
       const name = item.name || '';
       if (EXEMPT_ACCESSORY_KEYWORDS.some(kw => name.includes(kw))) return;
       receivedItems.push({
         name,
+        specCode: item.specCode || '',
         qtyGood: parseInt(item.qtyGood) || 0,
         qtyBad: parseInt(item.qtyBad) || 0,
       });
@@ -837,6 +855,79 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     const badDesc = badItems.map(i => `${i.name}（次品${i.qtyBad}件）`).join('、');
     s({ type: 'branch', text: `上报 → 次品：${badDesc}` });
     issues.push({ type: 'qtyBad', message: `退货含次品：${badDesc}` });
+  }
+
+  // 不同子订单共用同一退货单：按平台关联到的工单记录合并逐规格核对
+  if (sharedReturnGroup && sharedReturnGroup.mode === 'distinct_suborders') {
+    const expectedItems = sharedReturnGroup.expectedItems || [];
+    const expectedBySpec = new Map();
+    for (const item of expectedItems) {
+      const specCode = String(item.specCode || '').trim();
+      const qty = Number(item.qty);
+      if (!specCode || !Number.isFinite(qty) || qty <= 0) {
+        return fin(escalate('共用退货单的应退商品记录不完整，需人工核对'));
+      }
+      const existing = expectedBySpec.get(specCode);
+      if (existing) existing.qty += qty;
+      else expectedBySpec.set(specCode, { specCode, name: item.name || specCode, qty });
+    }
+    if (!expectedBySpec.size) return fin(escalate('共用退货单没有可核对的应退商品记录'));
+
+    const receivedBySpec = new Map();
+    const missingSpecItems = [];
+    for (const item of receivedItems) {
+      const specCode = String(item.specCode || '').trim();
+      if (!specCode && (item.qtyGood > 0 || item.qtyBad > 0)) {
+        missingSpecItems.push(item.name || '未知商品');
+        continue;
+      }
+      if (!specCode) continue;
+      const existing = receivedBySpec.get(specCode) || {
+        specCode,
+        name: item.name || specCode,
+        qtyGood: 0,
+        qtyBad: 0,
+      };
+      existing.qtyGood += item.qtyGood;
+      existing.qtyBad += item.qtyBad;
+      receivedBySpec.set(specCode, existing);
+    }
+    if (missingSpecItems.length) {
+      return fin(escalate(`共用退货单的入库商品缺少规格编码：${missingSpecItems.join('、')}`));
+    }
+    if (issues.length) {
+      return fin(escalate(issues.map(issue => issue.message).join('；'), {
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '共用退货单含次品→上报人工' }],
+      }));
+    }
+
+    const shortages = [];
+    for (const expected of expectedBySpec.values()) {
+      const received = receivedBySpec.get(expected.specCode);
+      const actual = received ? received.qtyGood : 0;
+      if (actual < expected.qty) shortages.push(`${expected.name}（退了${actual}件，应退${expected.qty}件）`);
+    }
+    if (shortages.length) {
+      return fin(escalate(`共用退货单退货数量不足：${shortages.join('、')}`, {
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '共用退货单逐规格不足→上报人工' }],
+      }));
+    }
+
+    const extras = [];
+    for (const received of receivedBySpec.values()) {
+      const expected = expectedBySpec.get(received.specCode);
+      const extraQty = received.qtyGood - (expected ? expected.qty : 0);
+      if (extraQty > 0) extras.push(`${received.name}多${extraQty}件`);
+    }
+    const summary = [...expectedBySpec.values()].map(item => `${item.name}×${item.qty}`).join('、');
+    const decision = approve(
+      `共用退货单逐规格核对通过：${summary}${extras.length ? `；确认多退：${extras.join('、')}` : ''}`,
+      [{ doc: 'flow-5.1', section: 'Step4', summary: '不同子订单共用退货单，合并逐规格核对通过→同意退款' }]
+    );
+    if (extras.length) decision.warnings = [`客户实际多退：${extras.join('、')}`];
+    return fin(decision);
   }
 
   // ── 逐商品对比（有 productArchive 时）────────────────────────────
