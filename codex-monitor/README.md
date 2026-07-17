@@ -16,6 +16,7 @@ The app reads local JSONL session logs, keeps token usage split by source and mo
 - Phase 7: UI polish, single-instance handling, visible `.app` / hidden LaunchAgent handoff
 - Phase 8: Claude counting accuracy, project attribution hardening, persistent project-detail popover
 - Phase 9: white/white-gray glass foreground, long-session attribution fallback, consistent rolling 30-day startup/refresh window
+- Phase 10: invalid early project candidates no longer block later real-project attribution
 
 ## Run Tests
 
@@ -38,7 +39,7 @@ The Claude smoke check defaults to a 1-day mtime window and caps reads at 200 fi
 
 Usage numbers are local estimates from JSONL logs, not official billing data. Codex usage is summed from `last_token_usage`; Claude Code usage is summed from assistant `message.usage` after deduplicating repeated `message.id` entries.
 
-Project attribution prefers explicit `cwd`, then decoded Claude project paths, then weighted session text signals. The fallback scans 200 lines first and extends to 1000 only when no unique result exists; shared workspace directories such as `docs`, `scripts`, and `reviews` do not count as projects. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
+Project attribution prefers explicit `cwd`, then decoded Claude project paths, then weighted session text signals. The fallback scans 200 lines first and extends to 1000 when no unique result exists or when the early candidate has no project `CLAUDE.md`; shared workspace directories such as `docs`, `scripts`, and `reviews` do not count as projects. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
 
 ## UI
 

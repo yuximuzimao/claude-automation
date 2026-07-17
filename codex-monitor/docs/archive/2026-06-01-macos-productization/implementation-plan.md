@@ -1,5 +1,7 @@
 # Codex Monitor macOS Productization Implementation Plan
 
+> **归档状态：** 已实现并由当前代码、`docs/INDEX.md` 和 `README.md` 吸收，不再作为待执行清单。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Turn Codex Monitor from a tkinter MVP into a local macOS app that can run in the background, start at login, and refresh from file changes without reading credentials or conversation content.

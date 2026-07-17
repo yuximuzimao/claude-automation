@@ -1,5 +1,7 @@
 # Project Display Names Implementation Plan
 
+> **归档状态：** 已实现并由当前聚合逻辑与 `docs/INDEX.md` 吸收，不再作为待执行清单。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make Codex Monitor read Chinese project names from each project's own `CLAUDE.md`, and make that declaration part of new project initialization.

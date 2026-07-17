@@ -1,5 +1,7 @@
 # Invalid Early Project Candidate Implementation Plan
 
+> **归档状态：** 已完成；代码提交为 `b1bffa1`，稳定规则文档提交为 `703ebd2`。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 当 Codex 会话前 200 行只命中不存在的任务名时继续扫描到 1000 行，把主要售后用量归回真实项目，同时保持有效项目的现有快速路径。
