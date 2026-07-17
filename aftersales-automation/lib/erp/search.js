@@ -162,7 +162,7 @@ async function erpSearch(targetId, subOrderId, options = {}) {
       if (options.validatePlatformOrderId !== false) {
         validatePlatformOrderRows(rows.rows || [], subOrderId);
       }
-    }, { maxRetries: 3, delayMs: 2000, label: `erp-search ${subOrderId}` });
+    }, { maxRetries: 1, delayMs: 2000, label: `erp-search ${subOrderId}` });
 
     return ok({ subOrderId, rows });
   } catch (e) {
