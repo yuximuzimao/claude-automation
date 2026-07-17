@@ -75,7 +75,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Codex token 使用 `TokenUsage.total_tokens`。
 - Claude token 使用 `ClaudeUsage.total_estimated_tokens`，即 `input + output + cache_creation + cache_read`。
 - Top 10 项目按近 30 天 token 排序；0 token 项目不展示。
-- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层默认先扫描 200 行；若没有唯一可靠结果，自适应继续到 1000 行，以覆盖在长规划会话中后段才创建/进入项目的情况。`docs`、`scripts`、`reviews` 等工作区共享目录不参与项目投票。事件按类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
+- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层默认先扫描 200 行；没有唯一结果，或唯一候选不存在对应项目 `CLAUDE.md` 时，自适应继续到 1000 行，以覆盖长规划会话中后段才创建/进入项目，以及任务名先于真实项目出现的情况。`docs`、`scripts`、`reviews` 等工作区共享目录不参与项目投票。事件按类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
 - 未识别项目统一合并为 `其他`，token 求和后参与 Top 10 排序。
 - Top 项目保留最多 3 个 `sample_cwds`，供 UI tooltip/详情展示完整路径。
 - 项目中文名的维护边界在项目自身说明文件，不在监控软件内维护中心映射表。
@@ -90,6 +90,7 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Claude Code SessionStart hook 或 attachment 可能注入多项目上下文，只能作为提示给 agent，不能参与项目归因。回归测试：`tests/test_reader_common.py::test_claude_session_hooks_do_not_count_as_project_signal`。
 - Claude Code 同一 assistant `message.id` 可能重复写入 2-5 次；若不去重，30 天 Claude token 会被重复累计。回归测试：`tests/test_reader_claude.py::test_duplicate_assistant_message_id_counts_usage_once`。
 - 多项目摘要型 Codex 会话可能在普通 `message` / `agent_message` / `task_complete` 中弱引用多个项目。若弱信号打平，不能把今日用量挂到先出现的项目（例如误挂到 `product-detect`）；应返回 `None` 并让聚合归入 `其他`。回归测试：`tests/test_reader_common.py::test_tied_weak_project_signals_return_none`。
+- 工作区根目录启动的长会话可能在前 200 行把任务名识别成唯一候选，但该名称并不是实际项目目录。Codex reader 必须先验证候选对应的 `CLAUDE.md`；无效候选不得触发早返回，应继续扫描到 1000 行。真实案例中 `aftersales-confidence-safety-v1` 抢占了后段才出现的 `aftersales-automation`，导致约 43M token 落入“其他”。回归测试：`tests/test_reader_common.py::test_invalid_early_candidate_extends_to_late_valid_project`、`tests/test_reader_codex.py::test_invalid_early_candidate_uses_late_known_project`。
 - 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。
 - `.app` 与 LaunchAgent 共享单实例锁。调试“双击没打开”时先查 `~/Library/Application Support/Codex Monitor/codex-monitor.lock` 中的 PID，再用 `ps -p <pid>` 判断是否仍有旧 UI 进程占锁。
 - tkinter `create_arc` 的 `extent` 取到 ±360 时整段弧渲染为空白。配额圆环 100% 时 `extent = -100 × 3.6 = -360`，会让满载圆环显示为空（看起来"归零"）。灰色轨道一直用 `-359.99` 规避，但进度弧早期漏了。修复：`app/ui_tk.py::_ring_extent()` 统一把进度弧 clamp 到 `-359.99`，并抽成纯函数以便脱离 tkinter 单测。回归测试 `tests/test_ui_tk.py::test_ring_extent_*`。新增任何 `create_arc` 都不得让 extent 触到 ±360。
