@@ -47,13 +47,13 @@ jl inject <编号>     # 把 session 注入 9222 自动化 Chrome 并导航到�
 
 **禁止**用 Enter / stdin 触发保存——该模式靠 HTTP server（jl.js 内部在随机端口）等待前端请求。
 
-`accounts.json.phone` 是登录账号本身，换登录账号时需要手动更新；它不等于 session 里的店铺/供应商联系人。`supplierInfo.supplierMobileList`、`contactMobile`、`supplierMobile` 可以在店铺信息不变时继续保留旧号码，禁止用这些字段自动覆盖登录手机号。重新登录保存只更新 session，并保留现有 `phone`。
+`accounts.json.phone` 是当前登录手机号，也是重新登录时的最高优先级来源。只有该字段为空或不存在时，才允许从 `account{N}.json` 的 `supplierInfo.supplierMobileList[0]` 读取店铺联系人手机号作为初始值；一旦 `phone` 已填写或手动修改，后续都以 `accounts.json` 当前值为准，禁止再用 session 里的联系人号码覆盖。重新登录保存只更新 session，并保留现有 `phone`。
 
 ## 文件说明
 
 | 文件 | 用途 |
 |------|------|
-| `accounts.json` | 账号索引（编号→名称→登录手机号 `phone`→file 映射）。`phone` 独立维护，不从 `account{N}.json` 的 `supplierMobileList` / `contactMobile` / `supplierMobile` 反推 |
+| `accounts.json` | 账号索引（编号→名称→登录手机号 `phone`→file 映射）。`phone` 缺失时可从 `account{N}.json` 的 `supplierInfo.supplierMobileList[0]` 初始化；已有值（含手动修改）时始终以当前值为准 |
 | `account*.json` | 各账号 Cookie（Playwright storageState 格式，以 `accounts.json` 为准；不要按连续编号推断） |
 | `jl.js` | 主命令入口（已安装到全局 PATH） |
 | `.relogin-port-<n>` | jl.js 写入的临时 HTTP confirm 端口文件（用后自动删除） |
