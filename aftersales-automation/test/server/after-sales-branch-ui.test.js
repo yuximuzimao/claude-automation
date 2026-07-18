@@ -85,3 +85,31 @@ test('售后分支先显示概览，并优先展开需关注和已授权原因',
   assert.match(html, /真实自动成功 4/);
   assert.match(html, /class="branch-row-detail-content"/);
 });
+
+test('同一售后原因同时标出需关注和已授权结果', () => {
+  const { renderAfterSalesBranches } = loadStatsHelpers();
+  const html = renderAfterSalesBranches({
+    uniqueWorkOrders: 2,
+    unregisteredCount: 0,
+    cases: [
+      {
+        afterSaleReason: '七天无理由退货（不喜欢/不合适）', branchLabel: '精确退回',
+        registered: true, automationStatus: 'enabled', occurrenceCount: 1,
+        positiveCount: 1, negativeCount: 0, missingFacts: [], notes: [],
+      },
+      {
+        afterSaleReason: '七天无理由退货（不喜欢/不合适）', branchLabel: '资料不全',
+        registered: false, automationStatus: 'manual_only', occurrenceCount: 1,
+        positiveCount: 0, negativeCount: 1, missingFacts: ['ERP 行缺失'], notes: [],
+      },
+    ],
+  });
+
+  assert.match(html, /branch-group-flag attention">需关注/);
+  assert.match(html, /branch-group-flag enabled">含自动/);
+});
+
+test('窄屏概览卡片允许收缩，不产生固定最小宽度', () => {
+  const css = fs.readFileSync(path.join(__dirname, '../../public/style.css'), 'utf8');
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.branch-overview\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+});

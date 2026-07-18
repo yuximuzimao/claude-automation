@@ -1546,11 +1546,11 @@ function renderAfterSalesBranches(report) {
         </details>
       </div>`;
       }).join('');
-    const groupFlags = group.hasAttention
-      ? '<span class="branch-group-flag attention">需关注</span>'
-      : group.hasEnabled
-        ? '<span class="branch-group-flag enabled">含自动</span>'
-        : '<span class="branch-group-flag manual">仅人工</span>';
+    const groupFlags = [
+      group.hasAttention ? '<span class="branch-group-flag attention">需关注</span>' : '',
+      group.hasEnabled ? '<span class="branch-group-flag enabled">含自动</span>' : '',
+      !group.hasAttention && !group.hasEnabled ? '<span class="branch-group-flag manual">仅人工</span>' : '',
+    ].join('');
     return `
     <details class="branch-reason-group"${group.hasAttention || group.hasEnabled ? ' open' : ''}>
       <summary class="branch-reason-summary">
