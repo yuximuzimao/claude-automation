@@ -212,6 +212,9 @@ test('未揽收单号与在途单号混合时只要求拦截实际在途件', ()
   assert.notEqual(decision.action, 'approve');
   assert.match(decision.reason, new RegExp(inTransit));
   assert.doesNotMatch(decision.reason, new RegExp(notPickedUp));
+  const logisticsStep = decision.steps.find(step => step.label === '逐行物流核验');
+  assert.match(logisticsStep.value, new RegExp(`${notPickedUp}：未揽收`));
+  assert.match(logisticsStep.value, new RegExp(`${inTransit}：已发货未退回`));
 });
 
 test('驿站待取件且时效充足时先拦截并等待重查', () => {
