@@ -1,5 +1,7 @@
 # 售后分支统计页清晰化 Implementation Plan
 
+> 归档状态（2026-07-19）：已完成并被后续“自动化优先”展示计划收口。本文件只用于追溯第一轮页面改造。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 把售后分支统计页改成“概览 → 售后原因 → 最小结果 → 详情”的清晰层级，并隐藏没有具体评论内容的反馈明细。

@@ -4,5 +4,6 @@
 
 - `2026-06-a1/`：A1 固定清单、安全账号入口、店铺筛选与 journal recovery 的历史计划和阶段交接。
 - `2026-07-existing-fixes/`：ERP 全行验单、无退货单号、多退/共享退货单、驿站与提醒汇总等前置修复的完成记录。
+- `2026-07-branch-automation-ui/`：固定最小分支统计页的设计、两轮实现计划和自动化优先展示完成记录。
 
-当前下一阶段唯一方案：`../specs/2026-07-16-after-sales-branch-automation-design.md`。
+当前生效口径：`../specs/2026-07-16-after-sales-branch-automation-design.md`。目前没有待执行的实施计划。

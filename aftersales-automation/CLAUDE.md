@@ -19,7 +19,7 @@
 | `docs/flow-5.3.md` | 工单类型 = 仅退款（已发货） |
 | `docs/flow-5.4.md` | 工单类型 = 换货 |
 | `docs/erp-query.md` | 涉及退货核验，需查商品对应表/档案V2 |
-| `docs/ops-tech.md` | ERP 操作报错/页面异常 |
+| `docs/ops-tech.md` | 技术排查总入口（再按鲸灵、ERP、测试、队列分流） |
 
 > 工单类型确认后只加载对应 flow 文档，不全量加载。
 

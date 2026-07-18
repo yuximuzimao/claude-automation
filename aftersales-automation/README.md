@@ -65,6 +65,8 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
+统计页的售后分支按“已授权自动 → 可评估自动化 → 仅人工”展示。只进入采集和归类完整的固定分支；资料缺失、未登记等异常历史仍保留在原始记录中，但不参与自动化评估。历史会在打开页面、切回页面或收到现有实时事件时重新读取，无需人工定期更新，也不会根据次数自动开放权限。
+
 ## 文档
 
 | 文档 | 说明 |
@@ -76,6 +78,10 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 | [docs/flow-5.3.md](docs/flow-5.3.md) | 仅退款-已发货（含拦截）流程 |
 | [docs/flow-5.4.md](docs/flow-5.4.md) | 换货流程 |
 | [docs/erp-query.md](docs/erp-query.md) | ERP 商品对应表/档案V2 操作规范 |
-| [docs/ops-tech.md](docs/ops-tech.md) | ERP 操作报错/技术排查 |
-| [售后分支清单与自动处理设计](docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md) | 当前下一阶段唯一方案：不自动学习，按最小最终分支独立统计并由用户手动启用 |
+| [docs/ops-tech.md](docs/ops-tech.md) | 技术排查总入口与常见问题速查 |
+| [docs/ops-jingling.md](docs/ops-jingling.md) | 鲸灵页面、CDP、备注与账号 Session |
+| [docs/ops-erp.md](docs/ops-erp.md) | ERP 导航、登录恢复、物流弹窗与凭证上传 |
+| [docs/ops-testing.md](docs/ops-testing.md) | CLI 与采集链路的分步测试规范 |
+| [docs/ops-queue.md](docs/ops-queue.md) | 队列紧急停止、验证与恢复 |
+| [售后分支清单与自动处理设计](docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md) | 当前生效口径：不自动学习，按最小最终分支独立统计并由用户明确授权 |
 | [历史设计归档](docs/superpowers/archive/README.md) | 2026-06 A1 计划/交接与 2026-07 已完成修复，仅供追溯，不作为当前实施依据 |

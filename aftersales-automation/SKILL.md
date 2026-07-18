@@ -73,7 +73,7 @@ entry: cli.js
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。**紧急停止**：AbortController + 步骤间检查点机制（2026-07-02），前端 🛑 按钮可真正中断运行中操作；详见 `docs/ops-tech.md §8` | 改队列/执行/重新采集/停止逻辑时 |
+| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。**紧急停止**：AbortController + 步骤间检查点机制（2026-07-02），前端 🛑 按钮可真正中断运行中操作；详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -155,7 +155,7 @@ await cdp.navigate(targetId, 'https://...');
 - **Phase 2**：点登录按钮 → 等协议弹窗（`.rc-kmui-com-dlg`）→ 点同意（`input.rc-btn-ok`）→ checkLogin 确认
 - 熔断：连续 3 次认证失败 → `erp-circuit-breaker.json` state=open，15 分钟冷却后 half_open
 - 保活：每 1 小时心跳，fetch 续期 session，失败则 recoverLogin；30 分钟重复 macOS 通知。**（2026-06-16 停旧系统：startErpHeartbeat 函数保留但启动时不再调用，心跳已停。ERP session 超时改靠人工触发操作时的登录恢复兜底）**
-- 详见 `docs/ops-tech.md §3.2`
+- 详见 `docs/ops-erp.md §2`
 
 ### 鲸灵账号重新登录机制
 

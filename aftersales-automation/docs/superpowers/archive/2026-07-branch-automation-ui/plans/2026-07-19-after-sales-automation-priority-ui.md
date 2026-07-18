@@ -1,6 +1,8 @@
 # After-Sales Automation Priority UI Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> 归档状态（2026-07-19）：全部完成，代码已合并到主干提交 `57d8937`，完整测试 295/295 通过。本文件只用于追溯实施过程。
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 把售后分支统计页改成以自动化价值为主线的详细分支卡片，并从本页彻底排除采集或归类异常的数据。
 
@@ -15,7 +17,7 @@
 - Modify: `test/server/after-sales-branch-ui.test.js` — 用真实渲染结果锁定过滤、分区、排序、字段和窄屏规则。
 - Modify: `public/app.js` — 过滤异常分支，拆分固定条件路径，渲染三层分支卡片。
 - Modify: `public/style.css` — 用绿、蓝、灰建立自动化优先级，并保证窄屏可读。
-- Reference: `docs/superpowers/specs/2026-07-18-after-sales-branch-ui-design.md` — 已确认的产品口径，不在实现中扩展范围。
+- Reference: [售后分支统计页清晰化设计](../specs/2026-07-18-after-sales-branch-ui-design.md) — 已确认的产品口径，不在实现中扩展范围。
 
 不创建新的组件文件，不改后端接口，不改 `lib/server/after-sales-auto-gate.js`，不增加自动评分或自动授权。
 
@@ -25,7 +27,7 @@
 - Modify: `test/server/after-sales-branch-ui.test.js:49-119`
 - Test: `test/server/after-sales-branch-ui.test.js`
 
-- [ ] **Step 1: 将旧的“异常优先”测试改成新的数据边界测试**
+- [x] **Step 1: 将旧的“异常优先”测试改成新的数据边界测试**
 
 测试数据同时放入已授权、候选、仅人工、未登记和资料缺失五类分支。断言只有前三类出现在页面中，并且顶部数量不包含异常分支：
 
@@ -84,7 +86,7 @@ test('分支页只展示采集和归类正常的数据，并按自动化价值�
 });
 ```
 
-- [ ] **Step 2: 增加卡片明细与候选排序测试**
+- [x] **Step 2: 增加卡片明细与候选排序测试**
 
 同一候选层放入两个分支，验证真实自动成功较多的分支排在前面，并直接看到原因、类型、条件、结果、五项历史数字和备注分布：
 
@@ -123,7 +125,7 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
 });
 ```
 
-- [ ] **Step 3: 运行定向测试并确认先失败**
+- [x] **Step 3: 运行定向测试并确认先失败**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
@@ -135,7 +137,7 @@ Expected: FAIL；旧页面仍显示异常数据、四项概览和“查看详情
 - Modify: `public/app.js:1470-1578`
 - Test: `test/server/after-sales-branch-ui.test.js`
 
-- [ ] **Step 1: 在渲染函数内加入正常分支过滤和证据排序**
+- [x] **Step 1: 在渲染函数内加入正常分支过滤和证据排序**
 
 使用现有字段，不修改接口：
 
@@ -158,7 +160,7 @@ const tiers = {
 
 人话结果：未登记和缺资料的数据连计数都不参与；排序只是展示顺序，不写回状态、不开放权限。
 
-- [ ] **Step 2: 从固定分支名称拆出类型、条件和结果**
+- [x] **Step 2: 从固定分支名称拆出类型、条件和结果**
 
 ```js
 function splitBranchPath(item) {
@@ -173,7 +175,7 @@ function splitBranchPath(item) {
 
 这里仅拆开现有固定文字。例如“退货退款 / 已入库 / 精确退回 / 同意退款”会显示为类型“退货退款”、条件“已入库、精确退回”、结果“同意退款”。
 
-- [ ] **Step 3: 将一行结果改成直接展开的分支卡片**
+- [x] **Step 3: 将一行结果改成直接展开的分支卡片**
 
 每张卡片使用以下稳定结构，所有动态文本继续经过 `h()`：
 
@@ -205,7 +207,7 @@ function renderBranchCard(item, tier) {
 }
 ```
 
-- [ ] **Step 4: 渲染已授权、候选和仅人工三个区域**
+- [x] **Step 4: 渲染已授权、候选和仅人工三个区域**
 
 已授权和候选直接展开，仅人工使用没有 `open` 属性的 `<details>`。顶部只保留两项重点数量，其他数字成为辅助说明：
 
@@ -239,13 +241,13 @@ return `<div class="chart-section">
 
 空分区显示一句简短空状态，不制造额外卡片；整个页面没有正常分支时显示“最近30天暂无可评估的正常分支”。
 
-- [ ] **Step 5: 运行定向测试并确认逻辑通过**
+- [x] **Step 5: 运行定向测试并确认逻辑通过**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: 新增的过滤、层级、卡片字段和排序断言 PASS；窄屏样式测试暂未调整时可以继续失败。
 
-- [ ] **Step 6: 提交渲染逻辑和测试**
+- [x] **Step 6: 提交渲染逻辑和测试**
 
 ```bash
 git add public/app.js test/server/after-sales-branch-ui.test.js
@@ -259,7 +261,7 @@ git commit -m "feat(aftersales): prioritize automatable branches"
 - Modify: `public/style.css:1352-1491`
 - Test: `test/server/after-sales-branch-ui.test.js`
 
-- [ ] **Step 1: 先把窄屏和无红色重点规则写成失败测试**
+- [x] **Step 1: 先把窄屏和无红色重点规则写成失败测试**
 
 ```js
 test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为单列', () => {
@@ -272,13 +274,13 @@ test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为单列',
 });
 ```
 
-- [ ] **Step 2: 运行定向测试并确认样式断言失败**
+- [x] **Step 2: 运行定向测试并确认样式断言失败**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: FAIL；新卡片还没有完整三层样式和窄屏两列指标。
 
-- [ ] **Step 3: 用专用卡片样式替换旧原因折叠行样式**
+- [x] **Step 3: 用专用卡片样式替换旧原因折叠行样式**
 
 样式只承担信息层级，不增加动画、图表或交互：
 
@@ -311,7 +313,7 @@ Expected: FAIL；新卡片还没有完整三层样式和窄屏两列指标。
 
 候选状态文字改用蓝色；仅人工折叠摘要和内部卡片降低对比度。删除 `.is-attention`、`.has-negative`、`.branch-detail-warning` 等旧异常重点规则。
 
-- [ ] **Step 4: 加入窄屏规则**
+- [x] **Step 4: 加入窄屏规则**
 
 ```css
 @media (max-width: 760px) {
@@ -324,13 +326,13 @@ Expected: FAIL；新卡片还没有完整三层样式和窄屏两列指标。
 }
 ```
 
-- [ ] **Step 5: 运行定向测试**
+- [x] **Step 5: 运行定向测试**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: PASS，全部售后分支 UI 测试通过。
 
-- [ ] **Step 6: 提交样式和测试**
+- [x] **Step 6: 提交样式和测试**
 
 ```bash
 git add public/style.css test/server/after-sales-branch-ui.test.js
@@ -344,29 +346,29 @@ git commit -m "style(aftersales): clarify branch automation tiers"
 - Verify: `public/style.css`
 - Verify: `test/server/after-sales-branch-ui.test.js`
 
-- [ ] **Step 1: 运行完整测试**
+- [x] **Step 1: 运行完整测试**
 
 Run: `npm test`
 
 Expected: 全部测试 PASS，无失败、无跳过增加。
 
-- [ ] **Step 2: 检查差异和无关文件**
+- [x] **Step 2: 检查差异和无关文件**
 
 Run: `git diff --check && git status --short`
 
 Expected: 当前功能分支干净；没有把主工作区既有的无关改动带入提交。
 
-- [ ] **Step 3: 对照设计做只读审查**
+- [x] **Step 3: 对照设计做只读审查**
 
 逐项确认：异常分支已排除；已授权最前；候选第二且证据排序；仅人工折叠；卡片条件和结果没有重新推理；没有自动授权写操作；没有红色异常重点；AI 洞察过滤保持不变。
 
-- [ ] **Step 4: 重启现有服务，不触发扫描**
+- [x] **Step 4: 重启现有服务，不触发扫描**
 
 Run: `launchctl kickstart -k gui/501/com.heizong.aftersale-server`
 
 Expected: launchd 完成服务重启；不运行任何扫描命令。
 
-- [ ] **Step 5: 验证服务和真实接口**
+- [x] **Step 5: 验证服务和真实接口**
 
 Run: `curl --noproxy '*' -sS http://127.0.0.1:3457/health`
 

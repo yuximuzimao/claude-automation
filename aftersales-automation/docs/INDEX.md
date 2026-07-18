@@ -56,7 +56,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 - **验证**：`GET /api/stop-event` — 查询上次停止事件
 - **恢复**：`POST /api/resume` — 清除 stop 标记，恢复队列调度
 - **重启感知**：server 启动时自动检测上次 stop 事件并输出警告；紧急停止后不会自动恢复被中断任务，需用户手动决定是否重新处理
-- 详见 `docs/ops-tech.md §8`
+- 详见 `docs/ops-queue.md`
 
 ---
 
@@ -102,7 +102,11 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 | 仅退款（已发货） | ERP 状态：卖家已发货 | `docs/flow-5.3.md` |
 | 换货 | subBizType = 换货 | `docs/flow-5.4.md` |
 | 需商品对应表/档案V2 | 涉及退货核验时 | `docs/erp-query.md` |
-| ERP 技术问题 | 操作报错/页面异常 | `docs/ops-tech.md` |
+| 鲸灵/CDP 技术问题 | 页面异常、备注、账号切换 | `docs/ops-jingling.md` |
+| ERP 技术问题 | 导航、登录、物流弹窗、凭证上传 | `docs/ops-erp.md` |
+| 测试与验收 | CLI、采集或 ERP 逻辑修改后 | `docs/ops-testing.md` |
+| 队列停止与恢复 | 操作卡住或需立即中断 | `docs/ops-queue.md` |
+| 其他技术问题 | 先查总入口和常见故障 | `docs/ops-tech.md` |
 
 > ⚠️ 仅退款时，必须先通过 ERP 搜索确认发货状态，再决定走 flow-5.2 还是 flow-5.3。
 
