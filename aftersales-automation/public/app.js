@@ -1468,113 +1468,112 @@ async function loadStats() {
 function renderAfterSalesBranches(report) {
   const statusLabels = {
     enabled: '已授权自动',
-    candidate: '候选，仍人工',
-    manual_only: '永不自动',
+    candidate: '可评估自动化',
+    manual_only: '仅人工',
   };
   const actionLabels = {
-    approve: '同意',
-    reject: '拒绝',
-    wait: '等待',
+    approve: '同意退款',
+    reject: '拒绝退款',
+    wait: '等待重查',
     escalate: '人工处理',
-    skip: '不操作',
+    skip: '无操作归档',
   };
-  const cases = report.cases || [];
-  const needsAttention = item =>
-    item.registered === false
-    || Number(item.negativeCount || 0) > 0
-    || (item.missingFacts || []).length > 0;
-  const itemPriority = item => needsAttention(item)
-    ? 0
-    : item.automationStatus === 'enabled' ? 1 : 2;
-  const enabledCount = cases.filter(item => item.automationStatus === 'enabled').length;
-  const attentionCount = cases.filter(needsAttention).length;
+  const cases = (report.cases || []).filter(item =>
+    item.registered !== false && (item.missingFacts || []).length === 0
+  );
+  const evidenceSort = (a, b) =>
+    Number(b.autoSuccessCount || 0) - Number(a.autoSuccessCount || 0)
+    || Number(b.positiveCount || 0) - Number(a.positiveCount || 0)
+    || Number(a.negativeCount || 0) - Number(b.negativeCount || 0)
+    || Number(b.occurrenceCount || 0) - Number(a.occurrenceCount || 0)
+    || String(a.branchLabel || '').localeCompare(String(b.branchLabel || ''), 'zh-CN');
+  const tiers = {
+    enabled: cases.filter(item => item.automationStatus === 'enabled').sort(evidenceSort),
+    candidate: cases.filter(item => item.automationStatus === 'candidate').sort(evidenceSort),
+    manual_only: cases
+      .filter(item => !['enabled', 'candidate'].includes(item.automationStatus))
+      .sort(evidenceSort),
+  };
 
-  const groups = new Map();
-  for (const item of cases) {
-    const reason = item.afterSaleReason || '原因缺失';
-    if (!groups.has(reason)) groups.set(reason, []);
-    groups.get(reason).push(item);
+  function splitBranchPath(item) {
+    const parts = String(item.branchLabel || '')
+      .split('/')
+      .map(value => value.trim())
+      .filter(Boolean);
+    if (parts[0] === item.orderType) parts.shift();
+    const result = parts.pop() || actionLabels[item.expectedAction] || '人工处理';
+    return { conditions: parts, result };
   }
-  const reasonGroups = [...groups.entries()].map(([reason, items]) => ({
-    reason,
-    items,
-    total: items.reduce((sum, item) => sum + (item.occurrenceCount || 0), 0),
-    hasAttention: items.some(needsAttention),
-    hasEnabled: items.some(item => item.automationStatus === 'enabled'),
-  })).sort((a, b) => {
-    const priority = group => group.hasAttention ? 0 : group.hasEnabled ? 1 : 2;
-    return priority(a) - priority(b)
-      || b.total - a.total
-      || a.reason.localeCompare(b.reason, 'zh-CN');
-  });
 
-  const content = reasonGroups.map(group => {
-    const rows = [...group.items]
-      .sort((a, b) => itemPriority(a) - itemPriority(b)
-        || (b.occurrenceCount || 0) - (a.occurrenceCount || 0)
-        || String(a.branchLabel || '').localeCompare(String(b.branchLabel || ''), 'zh-CN'))
-      .map(item => {
-        const status = statusLabels[item.automationStatus] ? item.automationStatus : 'manual_only';
-        const missingFacts = (item.missingFacts || []).length
-          ? `<div class="branch-detail-warning">缺少：${(item.missingFacts || []).map(h).join('、')}</div>`
-          : '';
-        const notes = (item.notes || []).map(note => `${h(note.value)}（${note.count}）`).join('；');
-        const notesHtml = notes
-          ? `<div class="branch-detail-notes"><span>备注分布：</span>${notes}</div>`
-          : '';
-        return `
-      <div class="branch-result-row${needsAttention(item) ? ' is-attention' : ''}">
-        <div class="branch-result-main">
-          <span class="branch-result-name">${h(item.branchLabel)}</span>
-          <div class="branch-result-counts">
-            <span>${item.occurrenceCount || 0} 单</span>
-            <span>好评 ${item.positiveCount || 0}</span>
-            <span${item.negativeCount ? ' class="has-negative"' : ''}>差评 ${item.negativeCount || 0}</span>
-          </div>
-          <span class="branch-status ${status}">${statusLabels[status]}</span>
+  function renderBranchCard(item, tier) {
+    const path = splitBranchPath(item);
+    const conditions = path.conditions.length
+      ? path.conditions
+        .map(value => `<span class="branch-condition">${h(value)}</span>`)
+        .join('<span class="branch-arrow">→</span>')
+      : '<span class="branch-condition">无额外条件</span>';
+    const notes = (item.notes || [])
+      .map(note => `${h(note.value)}（${Number(note.count || 0)}）`)
+      .join('；');
+    return `<article class="branch-card branch-card-${tier}">
+      <header class="branch-card-header">
+        <div>
+          <div class="branch-card-reason">${h(item.afterSaleReason)}</div>
+          <div class="branch-card-type">售后类型 · ${h(item.orderType)}</div>
         </div>
-        <details class="branch-row-details">
-          <summary>查看详情</summary>
-          <div class="branch-row-detail-content">
-            <div class="branch-detail-metrics">
-              <span>真实自动成功 ${item.autoSuccessCount || 0}</span>
-              <span>人工处理 ${item.manualHandledCount || 0}</span>
-              <span>历史结果：${h(actionLabels[item.expectedAction] || item.expectedAction || '未知')}</span>
-            </div>
-            ${missingFacts}${notesHtml}
-          </div>
-        </details>
-      </div>`;
-      }).join('');
-    const groupFlags = [
-      group.hasAttention ? '<span class="branch-group-flag attention">需关注</span>' : '',
-      group.hasEnabled ? '<span class="branch-group-flag enabled">含自动</span>' : '',
-      !group.hasAttention && !group.hasEnabled ? '<span class="branch-group-flag manual">仅人工</span>' : '',
-    ].join('');
-    return `
-    <details class="branch-reason-group"${group.hasAttention || group.hasEnabled ? ' open' : ''}>
-      <summary class="branch-reason-summary">
-        <span class="branch-reason-name">${h(group.reason)}</span>
-        <span class="branch-reason-meta">${group.total} 单 · ${group.items.length} 个结果</span>
-        ${groupFlags}
-      </summary>
-      <div class="branch-result-list">${rows}</div>
-    </details>`;
-  }).join('');
+        <span class="branch-status ${tier}">${statusLabels[tier]}</span>
+      </header>
+      <div class="branch-path">
+        <div>
+          <span class="branch-field-label">必须满足</span>
+          <div class="branch-conditions">${conditions}</div>
+        </div>
+        <div class="branch-outcome">
+          <span class="branch-field-label">处理结果</span>
+          <strong>${h(path.result)}</strong>
+        </div>
+      </div>
+      <div class="branch-metrics">
+        <div><span>出现次数</span><strong>${Number(item.occurrenceCount || 0)}</strong></div>
+        <div><span>真实自动成功</span><strong>${Number(item.autoSuccessCount || 0)}</strong></div>
+        <div><span>好评</span><strong>${Number(item.positiveCount || 0)}</strong></div>
+        <div><span>差评</span><strong>${Number(item.negativeCount || 0)}</strong></div>
+        <div><span>人工处理</span><strong>${Number(item.manualHandledCount || 0)}</strong></div>
+      </div>
+      ${notes ? `<div class="branch-notes"><span>历史备注</span>${notes}</div>` : ''}
+    </article>`;
+  }
+
+  const renderCards = (items, tier) => items.map(item => renderBranchCard(item, tier)).join('');
+  const enabledHtml = `<section class="branch-tier branch-tier-enabled">
+    <div class="branch-tier-heading"><h4>已授权自动</h4><span>${tiers.enabled.length} 个分支</span></div>
+    <div class="branch-card-list">${renderCards(tiers.enabled, 'enabled') || '<div class="branch-tier-empty">暂无已授权分支</div>'}</div>
+  </section>`;
+  const candidateHtml = `<section class="branch-tier branch-tier-candidate">
+    <div class="branch-tier-heading"><h4>可评估自动化</h4><span>${tiers.candidate.length} 个分支</span></div>
+    <div class="branch-card-list">${renderCards(tiers.candidate, 'candidate') || '<div class="branch-tier-empty">暂无候选分支</div>'}</div>
+  </section>`;
+  const manualHtml = `<details class="branch-tier branch-tier-manual">
+    <summary class="branch-tier-heading"><h4>仅人工</h4><span>${tiers.manual_only.length} 个分支</span></summary>
+    <div class="branch-card-list">${renderCards(tiers.manual_only, 'manual_only') || '<div class="branch-tier-empty">暂无仅人工分支</div>'}</div>
+  </details>`;
+  const validWorkOrders = cases.reduce(
+    (sum, item) => sum + Number(item.occurrenceCount || 0),
+    0
+  );
 
   return `<div class="chart-section">
-    <h3>售后分支清单（最近30天）</h3>
+    <h3>售后自动化分支（最近30天）</h3>
     <div class="branch-section-note">
-      按“售后原因 → 最小结果”查看。历史会随工单和评价自动刷新，不会自动学习或自行开放权限。
-      ${report.unregisteredCount ? `<span class="branch-unregistered">${report.unregisteredCount} 单未登记，保持人工。</span>` : ''}
+      最近30天有效工单 ${validWorkOrders} 单 · 正常固定分支 ${cases.length} 个。历史会自动刷新，但不会自动学习或自行开放权限。
     </div>
     <div class="branch-overview">
-      <div class="branch-overview-card"><div class="branch-overview-value">${report.uniqueWorkOrders || 0}</div><div class="branch-overview-label">最近30天工单</div></div>
-      <div class="branch-overview-card"><div class="branch-overview-value">${cases.length}</div><div class="branch-overview-label">最小结果分支</div></div>
-      <div class="branch-overview-card is-enabled"><div class="branch-overview-value">${enabledCount}</div><div class="branch-overview-label">已授权分支</div></div>
-      <div class="branch-overview-card${attentionCount ? ' is-attention' : ''}"><div class="branch-overview-value">${attentionCount}</div><div class="branch-overview-label">需要关注</div></div>
+      <div class="branch-overview-card is-enabled"><div class="branch-overview-value">${tiers.enabled.length}</div><div class="branch-overview-label">已授权自动</div></div>
+      <div class="branch-overview-card is-candidate"><div class="branch-overview-value">${tiers.candidate.length}</div><div class="branch-overview-label">可评估自动化</div></div>
     </div>
-    ${content || '<div style="font-size:13px;color:var(--gray-400)">最近30天暂无历史工单。</div>'}
+    ${cases.length
+      ? enabledHtml + candidateHtml + manualHtml
+      : '<div class="branch-tier-empty">最近30天暂无可评估的正常分支。</div>'}
   </div>`;
 }
 
