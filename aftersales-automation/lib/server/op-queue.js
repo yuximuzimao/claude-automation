@@ -65,6 +65,47 @@ const STOP_EVENT_FILE = path.join(BASE, 'data/emergency-stop.json');
 
 function log(msg) { process.stdout.write(`[op-queue] ${msg}\n`); }
 
+function createScanReminderState() {
+  return { needsIntercept: false, needsCancelIntercept: false };
+}
+
+function getInterceptMark(tracking) {
+  const intercept = db.hasIntercept(tracking);
+  if (intercept) return intercept;
+  const dismissed = db.readDismissed()[tracking];
+  return dismissed && dismissed.type === 'intercept' && db.isDismissed(tracking) ? dismissed : null;
+}
+
+function updateScanReminderState(state, items, hasIntercept = () => null) {
+  for (const item of items || []) {
+    const decision = item && item.decision || {};
+    const collectedData = item && item.collectedData || {};
+    const warnings = decision.warnings || [];
+    const trackings = extractShippedTrackings(collectedData);
+    const hasNewIntercept = warnings.some(warning => warning.includes('拦截提醒') || warning.includes('退回提醒')) &&
+      (trackings.length === 0 || trackings.some(tracking => !hasIntercept(tracking)));
+    if (hasNewIntercept) state.needsIntercept = true;
+
+    const needsCancel = decision.action === 'wait_archive' ||
+      warnings.some(warning => warning.includes('取消快递拦截'));
+    const hasMarkedIntercept = Boolean(collectedData.intercepted) ||
+      trackings.some(tracking => Boolean(hasIntercept(tracking)));
+    if (needsCancel && hasMarkedIntercept) state.needsCancelIntercept = true;
+  }
+  return state;
+}
+
+function sendScanSummaryReminders(state, sendReminder = createReminder) {
+  const results = [];
+  if (state.needsIntercept) {
+    results.push(sendReminder('【售后待办】有快递需要拦截，请打开售后系统“快递行动”查看'));
+  }
+  if (state.needsCancelIntercept) {
+    results.push(sendReminder('【售后待办】有已取消工单需要取消快递拦截，请打开售后系统查看'));
+  }
+  return results;
+}
+
 // ── 公共 API ──────────────────────────────────────────────────────
 
 function enqueue(type, label, params) {
@@ -453,6 +494,7 @@ async function execScanFinalize(op) {
 
 async function execScan(op) {
   const { accounts: specifiedAccounts = [] } = op.params;
+  const scanReminderState = createScanReminderState();
 
   const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
   let accountsConfig = {};
@@ -505,10 +547,12 @@ async function execScan(op) {
           });
         },
       });
+      updateScanReminderState(scanReminderState, result && result.items, getInterceptMark);
       const count = (result && result.items ? result.items.length : null);
       updateAccountStatus(num, { status: 'ok', lastScan: new Date().toISOString(), note });
       sse.broadcast('scan-progress', { type: 'done', num, note, count });
     } catch(e) {
+      updateScanReminderState(scanReminderState, e.batch && e.batch.items, getInterceptMark);
       const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.message || '');
       updateAccountStatus(num, {
         status: isExpired ? 'expired' : 'error',
@@ -526,6 +570,11 @@ async function execScan(op) {
     }
   }
 
+  const summaryReminderResults = sendScanSummaryReminders(scanReminderState);
+  if (summaryReminderResults.some(result => !result)) {
+    log('[预警] 扫描汇总待办快捷指令执行失败，已降级系统通知');
+  }
+
   // 到期预警：检查队列中 waiting/simulated 等待人工处理的工单
   const queueItems = (db.readQueue().items || []).filter(i =>
     i.mode === 'live' && !['done', 'auto_executed', 'auto_executing'].includes(i.status)
@@ -538,7 +587,7 @@ async function execScan(op) {
     const dl = new Date(qi.deadlineAt);
     const dlStr = `截止${(dl.getMonth()+1).toString().padStart(2,'0')}/${dl.getDate().toString().padStart(2,'0')} ${dl.getHours().toString().padStart(2,'0')}:${dl.getMinutes().toString().padStart(2,'0')}`;
     const title = `【⚠️即将过期】${qi.accountNote || ''} 工单${qi.workOrderNum} ${qi.type || ''} 剩余${timeStr} ${dlStr}`;
-    if (!createReminder(title)) log(`[预警] Reminders 失败已降级通知: ${title}`);
+    if (!createReminder(title)) log(`[预警] 待办快捷指令失败已降级通知: ${title}`);
   }
 
   sse.broadcast('accounts-update', readAccountStatus());
@@ -894,6 +943,8 @@ async function execExecute(op) {
     assertNotAborted(op);
 
     let detailClosed = false;
+    let interceptTrackingsToRecord = [];
+    let interceptAccountNote = '';
     try {
       // Step 5: 在详情 tab 上执行决策
       if (action === 'approve') {
@@ -906,36 +957,23 @@ async function execExecute(op) {
           rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
           rejectImageUrl || null);
 
-        // 拦截提醒
+        // 拒绝成功后记录具体拦截单号；扫描结束统一提醒，不在这里逐单提醒
         const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
         if (needsReminder) {
           try {
             const cd = sim.collectedData || {};
-            const accountNote = queueItem && queueItem.accountNote || '未知账号';
-            const allShipTrackings = extractShippedTrackings(cd);
-            const erpRows = cd.erpSearch && cd.erpSearch.rows && cd.erpSearch.rows.rows || [];
-            const internalId = erpRows[0] && erpRows[0].internalId || '';
-            const archiveTitle = cd.productArchive && cd.productArchive.title || '';
-            const subOrderAttr = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].attr1 || '';
-            const goodsName = (archiveTitle || subOrderAttr).slice(0, 30);
-            const qty = cd.ticket && cd.ticket.subOrders && cd.ticket.subOrders[0] && cd.ticket.subOrders[0].afterSaleNum || '';
-            const shipTracking = allShipTrackings.join(',');
-            const remind = createReminder({
-              workOrderNum: sim.workOrderNum, accountName: accountNote,
-              shipTracking, internalId, goodsName, qty: qty ? String(qty) : '',
-            });
-            if (remind) {
-              allShipTrackings.forEach(t => {
-                db.addIntercept({ shipTracking: t, workOrderNum: sim.workOrderNum, accountNote });
-                log(`已记录拦截: ${t}`);
-              });
-            }
-          } catch(e) { log(`remind 失败（非致命）: ${e.message}`); }
+            interceptTrackingsToRecord = extractShippedTrackings(cd);
+            interceptAccountNote = queueItem && queueItem.accountNote || '未知账号';
+          } catch(e) { log(`提取拦截单号失败（非致命）: ${e.message}`); }
         }
       } else {
         throw new Error(`未知 action: ${action}`);
       }
       if (!result.success) throw new Error(result.error || '执行失败');
+      interceptTrackingsToRecord.forEach(tracking => {
+        db.addIntercept({ shipTracking: tracking, workOrderNum: sim.workOrderNum, accountNote: interceptAccountNote });
+        log(`已记录拦截: ${tracking}`);
+      });
     } finally {
       // Step 6: 关闭详情 tab（无论成功失败）
       try {
@@ -1035,4 +1073,19 @@ async function execOpenTicket(op) {
   return { opened: true, workOrderNum, accountNum, shopName: accountResult.shopName, detailTargetId: opened.newTargetId };
 }
 
-module.exports = { enqueue, cancel, getState, isRunning, emergencyStop, resume, isPaused, assertNotAborted, verifyStopState, readStopEvent, updateAccountStatus };
+module.exports = {
+  enqueue,
+  cancel,
+  getState,
+  isRunning,
+  emergencyStop,
+  resume,
+  isPaused,
+  assertNotAborted,
+  verifyStopState,
+  readStopEvent,
+  updateAccountStatus,
+  createScanReminderState,
+  updateScanReminderState,
+  sendScanSummaryReminders,
+};

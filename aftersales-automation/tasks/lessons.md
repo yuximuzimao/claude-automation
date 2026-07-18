@@ -60,7 +60,7 @@ Session 级新发现记在这里。稳定后迁入 `docs/INDEX.md §6`，不在�
 | # | 教训 | memory |
 |---|------|--------|
 | 11 | **批量执行用状态白名单，不用黑名单**：routes.js 未过滤 queue item 状态 → waiting 工单被批量执行拾取。修复：`BATCH_EXECUTABLE_STATUSES = ['simulated']` 白名单 + `isBatchExecutable()` 函数。新增状态默认不可执行，比"排除 waiting"更安全。 | feedback_jingling_dev.md §67 |
-| 12 | **拒绝分类用 reasonCode，禁止 substring 匹配 message**：reject() 调用站点补 `reasonCode` 字段（`SIGNED_NO_INTERCEPT`/`AT_STATION`/`INTERCEPT_TIMEOUT`/`OVERDUE_RETURN`），批量执行白名单 `BATCH_SAFE_REJECT_CODES` 通过 reasonCode 判断，文本可改而枚举稳定。 | feedback_jingling_dev.md §68 |
+| 12 | **拒绝分类用 reasonCode，禁止 substring 匹配 message**：reject() 调用站点补 `reasonCode` 字段（当前安全白名单为 `SIGNED_NO_INTERCEPT`/`INTERCEPT_TIMEOUT`/`OVERDUE_RETURN`），批量执行白名单 `BATCH_SAFE_REJECT_CODES` 通过 reasonCode 判断，文本可改而枚举稳定。驿站待取件已改为与在途相同的时效分支，旧 `AT_STATION` 不再允许执行。 | feedback_jingling_dev.md §68 |
 | 13 | **ERP tab URL 匹配用 includes，不用 startsWith 硬编码子域名**：`viperp.superboss.cc` 打开后重定向到 `erpb.superboss.cc`。用 startsWith('https://viperp...') → 找不到已有 tab → 创建新 tab → 3 次调用堆 3 个 ERP tab。修复：`t.url.includes('superboss.cc')`。 | feedback_jingling_dev.md §69 |
 | 14 | **op-queue.js execExecute 内禁止 execFileSync**：execFileSync 阻塞整个 Node.js 事件循环，SSE 无法 flush → 批量执行期间队列面板完全冻结，前端看不到进度，失败 toast 也被覆盖。改用 spawnAsync（已有函数）。 | feedback_jingling_dev.md §70 |
 | 15 | **历史记录 source 字段区分批量/手动**：批量执行 `source:'batch_executed'`，手动执行 `source:'executed'`；入队时传 `fromBatch:true`。否则历史记录无法按来源维度复盘。 | feedback_jingling_dev.md §71 |
@@ -218,10 +218,9 @@ archive.js 子品读取经历了三轮错误修复才找到正确方案：
 
 **教训**：判断数据是否正确 → 从数据源头重新读取（ERP 页面、CLI 命令），不分析已有采集结果。验证单一环节用 CLI 直调，不走完整 pipeline。
 
-### 50. 后台进程 osascript Reminders 失败需降级通知（2026-05-02）
+### 50. 后台待办统一走快捷指令（2026-07-18 更新）
 
-server 进程无 TTY（PPID=1, TTY=??）时 osascript 操作 Reminders.app AppleEvent 超时 -1712。旧代码静默吞错。
-**修复**：`createReminder(title)` 函数优先 Reminders，失败降级 `display notification`。
+server 进程通过 AppleScript 直接操作 Reminders.app 曾出现超时 -1712，且无日期待办不易被看到。现在 `createReminder()` 统一写入「创建提醒」快捷指令的输入文件并运行快捷指令，提醒时间固定为创建时刻后 5 分钟；快捷指令失败才降级系统通知。快递拦截和取消拦截按整轮扫描分别汇总一次，禁止逐工单轰炸提醒。
 
 ## 2026-06-09 session 教训
 

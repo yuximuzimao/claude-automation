@@ -542,9 +542,10 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ));
     }
 
-    // 逐包裹分类：已签收 vs 在途（可拦截）
+    // 逐包裹分类：已签收 vs 在途/驿站待取件（可拦截）
     const signedPkgs = [];
     const inTransitPkgs = [];
+    const yizhanPkgs = [];
     const returnedPkgs = [];
     packages.forEach(pkg => {
       const text = pkg.text || '';
@@ -554,14 +555,16 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const tracking = numMatch ? numMatch[1] : (pkg.num || '?');
       if (hasReturn) returnedPkgs.push(tracking);
       else if (hasSigned) signedPkgs.push(tracking);
+      else if (YIZHAN_KEYWORDS.some(kw => text.includes(kw))) yizhanPkgs.push(tracking);
       else inTransitPkgs.push(tracking);
     });
-    s({ type: 'read', label: '包裹分类', value: `已签收:${signedPkgs.join(',') || '无'} 在途:${inTransitPkgs.join(',') || '无'} 已退回:${returnedPkgs.join(',') || '无'}` });
+    s({ type: 'read', label: '包裹分类', value: `已签收:${signedPkgs.join(',') || '无'} 在途:${inTransitPkgs.join(',') || '无'} 驿站待取:${yizhanPkgs.join(',') || '无'} 已退回:${returnedPkgs.join(',') || '无'}` });
 
     // 构建统一物流行动摘要（主品 + 赠品），用于 reason 输出
     const mainActionParts = [];
     if (returnedPkgs.length) mainActionParts.push(`${returnedPkgs.join('、')}已退回`);
     if (inTransitPkgs.length) mainActionParts.push(`${inTransitPkgs.join('、')}在途未拦截成功需拦截`);
+    if (yizhanPkgs.length) mainActionParts.push(`${yizhanPkgs.join('、')}驿站待取件未拦截成功需拦截`);
     if (signedPkgs.length) mainActionParts.push(`${signedPkgs.join('、')}已签收未退回`);
     const giftActionParts = [];
     giftPkgStatuses.forEach(p => {
@@ -577,15 +580,16 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     ].filter(Boolean).join('；');
 
     const anySigned = signedPkgs.length > 0;
+    const interceptablePkgs = [...inTransitPkgs, ...yizhanPkgs];
 
     if (anySigned) {
-      // 有包裹已签收：如果同时有在途包裹 → escalate（需拦截在途件+已签收需退货退款）
+      // 有包裹已签收：如果同时有可拦截包裹 → escalate（需拦截+已签收需退货退款）
       // 如果全部已签收 → reject（无件可拦截）
-      if (inTransitPkgs.length > 0) {
-        const desc = `已签收包裹（${signedPkgs.join('、')}）需买家申请退货退款；在途包裹（${inTransitPkgs.join('、')}）需拦截`;
+      if (interceptablePkgs.length > 0) {
+        const desc = `已签收包裹（${signedPkgs.join('、')}）需买家申请退货退款；未签收包裹（${interceptablePkgs.join('、')}）需拦截`;
         s({ type: 'branch', text: `上报 → 混合状态：${desc}` });
         return fin(escalate(desc, {
-          rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '部分签收+部分在途→拦截在途件+签收件走退货退款' }],
+          rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '部分签收+部分可拦截→拦截未签收件+签收件走退货退款' }],
         }));
       }
       // 全部已签收，无在途件
@@ -597,31 +601,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       ), reasonCode: 'SIGNED_NO_INTERCEPT' });
     }
 
-    // 驿站/快递柜待取件：货到了买家未取，应拒绝并通知拦截（驿站/快递柜可退件）
-    // 快递柜品牌：巧目、丰巢、中邮、菜鸟
-    const yizhanPkgs = [];
-    packages.forEach(pkg => {
-      const text = pkg.text || '';
-      const hasReturn = hasConfirmedReturn(text);
-      if (!hasReturn && YIZHAN_KEYWORDS.some(kw => text.includes(kw))) {
-        const numMatch = text.match(/物流单号[：:]\n(\S+)/);
-        yizhanPkgs.push(numMatch ? numMatch[1] : '?');
-      }
-    });
-    const anyAtYizhan = yizhanPkgs.length > 0;
-    s({ type: 'check', condition: '有包裹处于驿站/快递柜待取件状态（未签收）', result: anyAtYizhan });
-
-    if (anyAtYizhan) {
-      const desc = `快递（${yizhanPkgs.join('、')}）已到驿站/快递柜待取件，可联系快递公司拦截退件，拦截成功后退款`;
-      s({ type: 'branch', text: `拒绝退款 → ${desc}` });
-      return fin({ ...reject(
-        desc,
-        interceptWarnings(cd),
-        [{ doc: 'flow-5.3', section: 'Step4', summary: '驿站待取件→拒绝+创建拦截提醒' }]
-      ), reasonCode: 'AT_STATION' });
-    }
-
-    // 时间分支：剩余时效 - 下次扫描间隔 > 8h → 等待重查；≤ 8h → 拒绝
+    // 在途和驿站待取件使用同一时间分支：时效充足先拦截等待，时效不足再拒绝
     const remainingHours = queueItem.deadlineAt
       ? Math.max(0, (new Date(queueItem.deadlineAt).getTime() - Date.now()) / 3600000)
       : parseUrgencyHours(queueItem.urgency);
@@ -649,7 +629,8 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         action: 'reject',
         reason: `${actionSummary}，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
         confidence: 'high',
-        rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描>8h→自动等待重查' }],
+        rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途/驿站拦截件+剩余-扫描>8h→自动等待重查' }],
+        warnings: interceptWarnings(cd),
         waitingRescan: true,
       });
     }
@@ -659,7 +640,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     return fin({ ...reject(
       `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`,
       interceptWarnings(cd),
-      [{ doc: 'flow-5.3', section: 'Step4', summary: '在途拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
+      [{ doc: 'flow-5.3', section: 'Step4', summary: '在途/驿站拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
     ), reasonCode: 'INTERCEPT_TIMEOUT' });
   }
 

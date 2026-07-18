@@ -56,7 +56,7 @@ const MERCHANT_FAULT_REASONS = [
 // 自动扫描时间点（server.js 和 pipeline.js 共用）
 const SCAN_HOURS = [0, 8, 12, 16, 20];
 
-// 到期提醒阈值（小时）：工单剩余时效 ≤ 此值时自动创建 Mac 提醒事项
+// 到期提醒阈值（小时）：工单剩余时效 ≤ 此值时自动创建快捷指令待办
 const REMIND_HOURS = 12;
 
 // waiting 重查最小间隔（小时）：距上次推理完成 ≥ 此值才允许重置为 pending
@@ -71,7 +71,6 @@ const BATCH_EXECUTABLE_STATUSES = ['simulated'];
 // 批量执行：允许自动批量执行的 reject reasonCode 白名单
 const BATCH_SAFE_REJECT_CODES = [
   'SIGNED_NO_INTERCEPT',  // 已签收，无法拦截，请改退货退款
-  'AT_STATION',           // 已到驿站待取件，可联系驿站拦截
   'INTERCEPT_TIMEOUT',    // 在途拦截件时效不足，立即处理
   'OVERDUE_RETURN',       // 超售后期无理由退货
 ];

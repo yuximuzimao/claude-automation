@@ -16,7 +16,7 @@ const { inferDecision } = require('../infer');
 const { resolveSharedReturnGroup } = require('../return-tracking-group');
 const { inferWithAI } = require('../ai-infer');
 const { hasConfirmedReturn, getHoursUntilNextScan } = require('../constants');
-const { extractShippedTrackings, createReminder } = require('../helpers');
+const { extractShippedTrackings } = require('../helpers');
 
 const BASE = path.join(__dirname, '../..');
 const SESSIONS_DIR = path.join(BASE, '../sessions');
@@ -254,18 +254,11 @@ async function processOne(queueItem, options = {}) {
     return;
   }
 
-  // 工单取消 → 等待人工归档，创建提醒取消拦截
+  // 工单取消 → 等待人工归档；当前扫描主流程会在整轮结束后汇总提醒取消拦截
   if (decision.action === 'wait_archive') {
     db.updateSimulation(sim.id, { decision, hint: hint || null });
     db.updateQueueItem(queueItemId, { status: 'simulated', hint: hint || null });
     sse.broadcast('pipeline-update', { stage: 'simulated', workOrderNum });
-
-    // 创建 Mac 提醒
-    const remindTitle = `[${workOrderNum}] 客户取消退款，请确认并取消快递拦截后归档`;
-    try {
-      const ok = createReminder(remindTitle);
-      log(`[${workOrderNum}] ${ok ? '已创建提醒' : 'Reminders 失败已降级通知'}: ${remindTitle}`);
-    } catch (e) { log(`[${workOrderNum}] 创建提醒失败: ${e.message}`); }
 
     // 清理关联的拦截记录
     try {

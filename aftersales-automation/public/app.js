@@ -1617,7 +1617,9 @@ function getShipRows(cd) {
     });
   }
   addFrom(cd.erpSearch);
+  (cd.erpSearches || []).forEach(addFrom);
   addFrom(cd.giftErpSearch);
+  (cd.giftErpSearches || []).forEach(addFrom);
   return result;
 }
 

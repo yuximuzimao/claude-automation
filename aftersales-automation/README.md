@@ -36,7 +36,7 @@ node cli.js product-archive <规格编码>          # ERP 商品档案V2查询
 node cli.js approve <工单号>                   # 同意退款（自动处理三层弹窗）
 node cli.js reject <工单号> <原因> <详情> [图片] # 拒绝退款（含物流截图上传）
 node cli.js add-note <工单号> <备注>            # 添加内部备注
-node cli.js remind <工单号> <账号> <原因>        # 创建 Mac 提醒事项
+node cli.js remind <工单号> <账号> <原因>        # 快捷指令创建5分钟后提醒的待办
 node cli.js reset-circuit                        # 人工确认后清除风控熔断
 ```
 

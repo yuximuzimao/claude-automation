@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { inferDecision } = require('../../lib/infer');
 
-function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], intercepted }) {
+function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], intercepted, queueItemOverrides = {} }) {
   const gifts = giftRows.length ? [{ id: 'gift-1' }] : [];
   const collectedData = {
     ticket: {
@@ -33,6 +33,7 @@ function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], in
     workOrderNum: 'work-order-test',
     urgency: '1天',
     hoursUntilNextScan: 1,
+    ...queueItemOverrides,
   };
   return inferDecision({ mode: 'live', collectedData }, queueItem);
 }
@@ -211,4 +212,35 @@ test('未揽收单号与在途单号混合时只要求拦截实际在途件', ()
   assert.notEqual(decision.action, 'approve');
   assert.match(decision.reason, new RegExp(inTransit));
   assert.doesNotMatch(decision.reason, new RegExp(notPickedUp));
+});
+
+test('驿站待取件且时效充足时先拦截并等待重查', () => {
+  const tracking = 'TEST-AT-STATION-WAIT';
+  const station = '入站\n您的快件已到达菜鸟驿站，请及时取件';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', tracking)],
+    erpLogs: [{ tracking, logisticsText: station }],
+    packages: [packageText(tracking, station)],
+    queueItemOverrides: { urgency: '1天', hoursUntilNextScan: 1 },
+  });
+
+  assert.equal(decision.waitingRescan, true);
+  assert.match(decision.reason, /驿站待取件.*需拦截/);
+  assert.ok(decision.warnings.some(warning => warning.includes('拦截提醒')));
+});
+
+test('驿站待取件只有时效不足时才拒绝退款', () => {
+  const tracking = 'TEST-AT-STATION-TIMEOUT';
+  const station = '入站\n您的快件已到达菜鸟驿站，请及时取件';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', tracking)],
+    erpLogs: [{ tracking, logisticsText: station }],
+    packages: [packageText(tracking, station)],
+    queueItemOverrides: { urgency: '9小时', hoursUntilNextScan: 1 },
+  });
+
+  assert.equal(decision.action, 'reject');
+  assert.equal(decision.waitingRescan, undefined);
+  assert.equal(decision.reasonCode, 'INTERCEPT_TIMEOUT');
+  assert.ok(decision.warnings.some(warning => warning.includes('拦截')));
 });

@@ -19,7 +19,7 @@ const USAGE = `
   approve <工单号>                  同意退款
   reject <工单号> <原因> <详情>     拒绝退款
   add-note <工单号> <备注内容>      添加内部备注
-  remind <工单号> <账号名> <原因>   创建Mac提醒事项（人工上报用）
+  remind <工单号> <账号名> <原因>   通过快捷指令创建5分钟后提醒的待办
   logistics <工单号>               读物流信息
   reset-circuit                      清除风控熔断状态（人工确认后执行）
 
@@ -79,38 +79,21 @@ async function main() {
 
   // remind 命令不需要浏览器，单独处理
   if (cmd === 'remind') {
-    const { execSync } = require('child_process');
+    const { createReminder } = require('./lib/helpers');
     const workOrderNum = args[1];
     const accountName = args[2] || '未知账号';
     if (!workOrderNum) {
-      console.log(JSON.stringify(fail('用法: remind <工单号> <账号名> [快递单号] [子订单号] [商品名] [数量] [收件人] [省市]')));
+      console.log(JSON.stringify(fail('用法: remind <工单号> <账号名> [原因]')));
       process.exit(1);
     }
 
-    // 新格式（拦截提醒）：有快递单号时用详细格式
-    const shipTracking = args[3] || '';
-    const internalId   = args[4] || '';
-    const goodsName    = args[5] || '';
-    const qty          = args[6] || '';
+    const reason = args[3] || '';
+    const title = `【待人工】${accountName} 工单${workOrderNum}${reason ? ` / ${reason}` : ''}`;
 
-    let title;
-    if (shipTracking) {
-      // 格式：【拦截】YT7612...（圆通）/ 百浩-RITEKOKO / 子订单737081117 / 生椰拿铁×7
-      const carrierMap = { SF: '顺丰', YT: '圆通', ZT: '中通', STO: '申通', YD: '韵达', JD: '京东', EMS: '邮政', KY: '跨越', BS: '百世' };
-      const carrierPrefix = shipTracking.match(/^([A-Z]{2,4})/)?.[1] || '';
-      const carrier = carrierMap[carrierPrefix] || carrierPrefix;
-      const parts = [`【拦截】${shipTracking}${carrier ? `（${carrier}）` : ''}`];
-      parts.push(accountName);
-      if (internalId) parts.push(`子订单${internalId}`);
-      if (goodsName) parts.push(qty ? `${goodsName}×${qty}` : goodsName);
-      title = parts.join(' / ');
-    } else {
-      title = `【待人工】${accountName} 工单${workOrderNum}`;
+    if (!createReminder(title)) {
+      console.log(JSON.stringify(fail('创建提醒快捷指令执行失败，已降级为系统通知')));
+      process.exit(1);
     }
-
-    // 不设 remind me date，避免 AppleScript 超时 (-1712)
-    const script = `tell application "Reminders" to make new reminder at end of list "待办" of default account with properties {name:"${title.replace(/"/g, '\\"')}"}`;
-    execSync(`osascript -e '${script}'`);
     const result = ok({ reminded: true, title });
     console.log(JSON.stringify(result, null, 2));
     process.exit(0);
