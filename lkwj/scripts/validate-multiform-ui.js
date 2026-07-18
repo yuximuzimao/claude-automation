@@ -16,6 +16,15 @@ const checks = [
   ['random supports form module', /function\s+pickRandomForm\s*\(/.test(html) && /markRandomFormTask/.test(html)],
   ['random supports fruit module', /function\s+pickRandomFruit\s*\(/.test(html) && /markRandomFruitTask/.test(html)],
   ['random displays pet number', html.includes('formatPetNo')],
+  ['confirm_forms task renders jump action', html.includes('去多形态') && /jumpToForms\('\$\{petKey\}'\)/.test(html)],
+  ['jump action targets and expands the matching pet', /function\s+jumpToForms\s*\(\s*petKey\s*\)/.test(html)
+    && /formSearch\s*=\s*pet\.name/.test(html)
+    && /formStatus\s*=\s*['"]all['"]/.test(html)
+    && /expandedFormPet\s*=\s*petKey/.test(html)
+    && /switchTab\(['"]forms['"]\)/.test(html)],
+  ['jump action scrolls to stable form card anchor', html.includes('form-pet-${group.petKey}')
+    && html.includes('form-pet-${petKey}')
+    && html.includes('scrollIntoView')],
 ];
 
 const failures = checks.filter(([, ok]) => !ok).map(([name]) => name);

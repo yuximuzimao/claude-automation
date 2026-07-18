@@ -46,6 +46,18 @@ if (!duckTask || JSON.stringify(duckTask.requiredForms) !== JSON.stringify(['蓬
   errors.push('pet_11 鸭吉吉: requiredForms must be 蓬松的样子 + 紧实的样子');
 }
 
+const dreamForms = formKeysForTask(pets.pet_58 || {});
+if (JSON.stringify(dreamForms) !== JSON.stringify(['穿旧睡衣的样子', '穿星星睡衣的样子'])) {
+  errors.push('pet_58 梦悠悠: forms must be 穿旧睡衣的样子 + 穿星星睡衣的样子');
+}
+const dreamTask = (tasks.pet_58 || []).find((task) => task.type === 'confirm_forms');
+if (!dreamTask
+  || dreamTask.count !== 2
+  || dreamTask.desc !== '确认2种不同样子的梦悠悠'
+  || JSON.stringify(dreamTask.requiredForms) !== JSON.stringify(dreamForms)) {
+  errors.push('pet_58 梦悠悠: confirm_forms task must require both pajama forms');
+}
+
 const moleForms = formKeysForTask(pets.pet_279 || {});
 for (const wrongForm of ['单只海葵的样子', '（双只海葵的样子）']) {
   if (moleForms.includes(wrongForm)) {

@@ -97,6 +97,8 @@
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
     .task-row .task-check.noclick { cursor: default; pointer-events: none; }
     .task-methods { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.5; }
+    .task-jump-btn { flex-shrink: 0; border: 1px solid #c7d2fe; border-radius: 6px; padding: 4px 8px; background: #eef2ff; color: #4f46e5; font-size: 12px; cursor: pointer; text-decoration: none; }
+    .task-jump-btn:hover { background: #e0e7ff; border-color: #a5b4fc; }
 
     .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin: 6px 0 2px; }
     .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
@@ -1096,6 +1098,9 @@ function renderSpriteCard(petKey, pet) {
             card += `<div class="task-methods">${methods.map(m => esc(m)).join('<br>')}</div>`;
           }
           card += `</span>`;
+          if (autoTask) {
+            card += `<button class="task-jump-btn" onclick="event.stopPropagation();jumpToForms('${petKey}')">去多形态</button>`;
+          }
           card += '</div>';
         });
       });
@@ -1578,6 +1583,18 @@ function renderCategoryContent(tab) {
 }
 
 // ═══════════ 多形态 Tab ═══════════
+function jumpToForms(petKey) {
+  const pet = gameData?.pets?.[petKey];
+  if (!pet) return;
+  formSearch = pet.name;
+  formStatus = 'all';
+  expandedFormPet = petKey;
+  switchTab('forms');
+  requestAnimationFrame(() => {
+    document.getElementById(`form-pet-${petKey}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
 function getFormsList() {
   const list = [];
   const tasks = gameData?.tasks || {};
@@ -1672,7 +1689,7 @@ function renderFormPetCard(group) {
   const isExpanded = expandedFormPet === group.petKey || !!formSearch || formStatus !== 'all';
   const primaryEl = (group.pet.element || ['普'])[0];
 
-  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  let card = `<div id="form-pet-${group.petKey}" class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="toggleFormPet('${group.petKey}')">`;
   card += `<span class="si">${formatPetNo(group.petKey)}</span>`;
   card += `<span class="sn">${esc(group.pet.name)}</span>`;

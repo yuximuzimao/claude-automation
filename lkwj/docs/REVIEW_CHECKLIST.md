@@ -163,11 +163,12 @@ def read_xlsx(path):
 **核对步骤**：
 1. 从 `多形态进度` sheet 统计所有形态行，检查 `pets.json` 是否有对应 `forms` 记录。
 2. 对每个 form，检查 `formName` 和 `obtainMethods` 是否覆盖 Excel 的形态名和捕捉方式。
-3. 从 `课题进度` sheet 统计 F 列 = `形态` 的任务行，预期 `tasks.json` 中 `confirm_forms` 为 51 条。
+3. 从 `课题进度` sheet 统计 F 列 = `形态` 的任务行，预期 `tasks.json` 中 `confirm_forms` 为 52 条。
 4. 每条 `confirm_forms.requiredForms` 必须引用同 pet 下真实存在的 form key，且不得包含 `basic` 或 `leader`。
 5. `requiredForms.length` 应等于任务 `count`。如果 `pets.forms` 数量大于 `count`，多出来的是课题外独立收集项。
 6. 重点检查鸭吉吉：`pets.forms` 应有 6 个独立形态，`requiredForms` 只应包含「蓬松的样子」「紧实的样子」。
-7. 重点检查遁地鼠/加油蟹：遁地鼠只应有「储水时的样子」「枯水期的样子」；加油蟹才有「单只海葵的样子」「（双只海葵的样子）」。
+7. 重点检查梦悠悠：应包含「穿旧睡衣的样子」「穿星星睡衣的样子」，且 `confirm_forms.count` 为 2。
+8. 重点检查遁地鼠/加油蟹：遁地鼠只应有「储水时的样子」「枯水期的样子」；加油蟹才有「单只海葵的样子」「（双只海葵的样子）」。
 
 **可直接运行的验证脚本**：
 

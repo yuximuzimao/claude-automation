@@ -48,7 +48,7 @@ http://localhost:8899/review.html
 - `pets.json` 保存世界定义，不能从用户进度反向生成。
 - `tasks.json` 只保存世界图鉴课题任务，任务来源只能是 Excel `课题进度` sheet；`异色` 行作为 `capture_shiny` 任务纳入。
 - `collections.json` 保存用户勾选进度，包括 `sprite_progress[petKey].forms_collected` 和 `fruit_acquired`。
-- `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。
+- `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。精灵任务行提供“去多形态”跳转，会自动筛选、展开并定位对应精灵。
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
 - `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
@@ -69,10 +69,10 @@ http://localhost:8899/review.html
 | 项目 | 数量 |
 | --- | ---: |
 | 精灵 | 375 |
-| 课题任务 | 1894 |
+| 课题任务 | 1895 |
 | 精灵果实课题任务 | 96 |
 | 果实图鉴记录 | 143 |
-| 多形态收集项 | 137 |
+| 多形态收集项 | 139 |
 | 家具 | 191 |
 | 家具已收集 | 133 |
 | 家具未收集 | 58 |
