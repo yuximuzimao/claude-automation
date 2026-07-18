@@ -133,7 +133,12 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
   assert.doesNotMatch(html, /查看详情|需要关注|is-attention|has-negative/);
 });
 
-test('窄屏概览卡片允许收缩，不产生固定最小宽度', () => {
+test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为两列指标', () => {
   const css = fs.readFileSync(path.join(__dirname, '../../public/style.css'), 'utf8');
+  assert.match(css, /\.branch-tier-enabled[\s\S]*var\(--green\)/);
+  assert.match(css, /\.branch-tier-candidate[\s\S]*var\(--blue\)/);
+  assert.match(css, /\.branch-tier-manual[\s\S]*var\(--gray-400\)/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.branch-overview\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.branch-metrics\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  assert.doesNotMatch(css, /branch-(?:card|tier)[^\n{]*attention|branch-result-counts \.has-negative/);
 });
