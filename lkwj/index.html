@@ -154,6 +154,7 @@
     .clothing-set-subtitle { display: flex; flex-wrap: wrap; gap: 5px 10px; margin-top: 4px; color: #9699aa; font-size: 11px; line-height: 1.35; }
     .clothing-set-badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 7px; color: #6366f1; background: #eef2ff; font-size: 11px; white-space: nowrap; }
     .clothing-set-badge.magic { color: #9a6700; background: #fff8db; }
+    .clothing-set-badge.missing { color: #b45309; background: #fff7ed; }
     .clothing-set-card .sm { min-width: 54px; color: #8d90a1; text-align: right; }
     .clothing-set-card .sm strong { color: #4f46e5; font-size: 15px; }
     .clothing-set-card .sprite-card-body { padding: 0 15px 14px; background: #fcfcff; }
@@ -2310,6 +2311,33 @@ function getClothingDisplayMethod(method) {
   return text && text !== '待补充' ? text : '';
 }
 
+function getClothingSetInfoStatus(set, pieces) {
+  const requiredTotal = Number(set?.requiredPieceCount || 0);
+  const recordedRequiredNames = new Set((pieces || [])
+    .filter(item => isClothingTargetPiece(item) && item.setRole === 'magic_required')
+    .map(item => item.pieceName || item.name)
+    .filter(Boolean)).size;
+  return {
+    recorded: recordedRequiredNames,
+    total: Number.isFinite(requiredTotal) && requiredTotal > 0 ? requiredTotal : 0,
+    missing: Number.isFinite(requiredTotal) && requiredTotal > recordedRequiredNames,
+  };
+}
+
+function getClothingMissingSetIds(sets, items) {
+  const piecesBySetId = new Map();
+  (items || []).forEach(item => {
+    if (item.collectionType !== 'set') return;
+    const setId = item.set?.id || item.setId;
+    if (!setId) return;
+    if (!piecesBySetId.has(setId)) piecesBySetId.set(setId, []);
+    piecesBySetId.get(setId).push(item);
+  });
+  return new Set((sets || [])
+    .filter(set => getClothingSetInfoStatus(set, piecesBySetId.get(set.id) || []).missing)
+    .map(set => set.id));
+}
+
 function buildClothingDisplayEntries(items, definitionOnlySets = []) {
   const setGroups = new Map();
   const singles = [];
@@ -2347,9 +2375,10 @@ function renderClothingTab() {
       - (CLOTHING_CATEGORY_RANK.get(b) ?? CLOTHING_CATEGORY_ORDER.length)
       || a.localeCompare(b, 'zh-Hans-CN'));
   const definitions = gameData?.clothing?.definitions || {};
+  const missingSetCount = getClothingMissingSetIds(setDefinitions, clothing).size;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
-  html += `<div class="sprite-stats"><span>目标共 <strong>${clothingStats.targetTotal}</strong> 件 · 已收集 <strong>${clothingStats.targetOwned}</strong> · 套装部件 <strong>${clothingStats.setOwned}</strong> / ${clothingStats.setTotal} · 独立单件 <strong>${clothingStats.singleOwned}</strong> / ${clothingStats.singleTotal} · 付费资料 <strong>${clothingStats.paidTotal}</strong> 件</span></div>`;
+  html += `<div class="sprite-stats"><span>目标共 <strong>${clothingStats.targetTotal}</strong> 件 · 已收集 <strong>${clothingStats.targetOwned}</strong> · 套装部件 <strong>${clothingStats.setOwned}</strong> / ${clothingStats.setTotal} · 独立单件 <strong>${clothingStats.singleOwned}</strong> / ${clothingStats.singleTotal} · 信息缺失套装 <strong>${missingSetCount}</strong> · 付费资料 <strong>${clothingStats.paidTotal}</strong> 件</span></div>`;
 
   if (!clothing.length && !setDefinitions.length) {
     html += '<div class="empty-state">暂无服装数据<small>把套装共享信息和单件收集项补到 data/clothing.json 后会在这里显示</small></div>';
@@ -2366,9 +2395,10 @@ function renderClothingTab() {
   html += '</div></div>';
 
   html += '<div class="tb-section"><div class="tb-label">收集进度</div><div class="chips">';
-  html += `<span class="chip${clothingStatusFilter === 'all' ? ' active' : ''}" onclick="clothingStatusFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
-  html += `<span class="chip${clothingStatusFilter === 'pending' ? ' active' : ''}" onclick="clothingStatusFilter='pending';expandedClothingSet=null;renderClothingTab()">${STATUS.PENDING}</span>`;
-  html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="clothingStatusFilter='done';expandedClothingSet=null;renderClothingTab()">${STATUS.DONE}</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'all' ? ' active' : ''}" onclick="setClothingStatusFilter('all')">全部</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'pending' ? ' active' : ''}" onclick="setClothingStatusFilter('pending')">${STATUS.PENDING}</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'missing' ? ' active' : ''}" onclick="setClothingStatusFilter('missing')">信息缺失 ${missingSetCount}</span>`;
+  html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="setClothingStatusFilter('done')">${STATUS.DONE}</span>`;
   html += '</div></div>';
 
   html += '<div class="tb-section"><div class="tb-label">部件分类</div><div class="chips">';
@@ -2389,6 +2419,12 @@ function renderClothingTab() {
   renderClothingContent();
 }
 
+function setClothingStatusFilter(status) {
+  clothingStatusFilter = status;
+  expandedClothingSet = null;
+  renderClothingTab();
+}
+
 function setClothingCategoryFilter(category) {
   clothingCategoryFilter = category;
   expandedClothingSet = null;
@@ -2400,6 +2436,7 @@ function renderClothingContent() {
   if (!el) return;
   const clothing = getClothingList();
   const setDefinitions = gameData?.clothing?.sets || [];
+  const missingSetIds = getClothingMissingSetIds(setDefinitions, clothing);
   const setIdsWithPieces = new Set(clothing
     .filter(item => item.collectionType === 'set')
     .map(item => item.set?.id || item.setId)
@@ -2421,15 +2458,28 @@ function renderClothingContent() {
   if (clothingTypeFilter === 'set') list = list.filter(i => i.collectionType === 'set');
   else if (clothingTypeFilter === 'single') list = list.filter(i => i.collectionType === 'single');
   if (clothingCategoryFilter !== 'all') list = list.filter(item => item.category === clothingCategoryFilter);
-  if (clothingStatusFilter === 'pending') list = list.filter(i => isClothingTargetPiece(i) && !i.acquired);
-  else if (clothingStatusFilter === 'done') list = list.filter(i => isClothingTargetPiece(i) && i.acquired);
+  if (clothingStatusFilter === 'pending') {
+    list = list.filter(item => {
+      if (isClothingTargetPiece(item) && !item.acquired) return true;
+      const setId = item.collectionType === 'set' ? (item.set?.id || item.setId) : '';
+      return !!setId && missingSetIds.has(setId);
+    });
+  } else if (clothingStatusFilter === 'missing') {
+    list = list.filter(item => {
+      const setId = item.collectionType === 'set' ? (item.set?.id || item.setId) : '';
+      return !!setId && missingSetIds.has(setId);
+    });
+  } else if (clothingStatusFilter === 'done') {
+    list = list.filter(i => isClothingTargetPiece(i) && i.acquired);
+  }
 
   const canShowDefinitionOnlySets = clothingTypeFilter !== 'single'
     && clothingCategoryFilter === 'all'
-    && clothingStatusFilter === 'all';
+    && ['all', 'pending', 'missing'].includes(clothingStatusFilter);
   const definitionOnlySets = canShowDefinitionOnlySets
     ? setDefinitions.filter(set => {
       if (setIdsWithPieces.has(set.id)) return false;
+      if (clothingStatusFilter !== 'all' && !missingSetIds.has(set.id)) return false;
       if (!query) return true;
       const searchText = `${set.name || ''} ${set.obtainMethod || ''} ${set.pairedPetName || ''} ${set.gorgeousMagicPetName || ''}`.toLowerCase();
       return searchText.includes(query);
@@ -2469,9 +2519,9 @@ function renderClothingSetCard(setKey, set, visiblePieces) {
   const pairedPetName = set?.pairedPetName || '';
   const hasEffect = set?.hasEffect;
   const setObtainMethod = getClothingDisplayMethod(set?.obtainMethod);
-  const requiredPieceCount = set?.requiredPieceCount || 0;
+  const infoStatus = getClothingSetInfoStatus(set, pieces);
+  const requiredPieceCount = infoStatus.total;
   const progressTotal = requiredPieceCount || targetPieces.length;
-  const recordedRequiredNames = new Set(pieces.filter(i => i.setRole === 'magic_required').map(i => i.pieceName || i.name).filter(Boolean)).size;
   const magicProgress = getGorgeousMagicProgress(set, pieces);
   const sortedVisiblePieces = sortClothingPieces(visiblePieces);
 
@@ -2480,6 +2530,9 @@ function renderClothingSetCard(setKey, set, visiblePieces) {
   card += '<div class="clothing-set-main">';
   card += `<div class="clothing-set-title-line"><span class="clothing-kind-tag set">套装</span><span class="sn clothing-set-title">${esc(setName)}</span>`;
   if (setObtainMethod) card += `<span class="clothing-name-note">${esc(setObtainMethod)}</span>`;
+  if (infoStatus.missing) {
+    card += `<span class="clothing-set-badge missing">信息缺失 ${infoStatus.recorded}/${infoStatus.total}</span>`;
+  }
   if (magicProgress) {
     const magicLabel = magicProgress.unlocked ? '华丽魔法已解锁' : `华丽魔法 ${magicProgress.acquired}/${magicProgress.total}`;
     card += `<span class="clothing-set-badge magic">${magicLabel}</span>`;
@@ -2499,7 +2552,7 @@ function renderClothingSetCard(setKey, set, visiblePieces) {
     metaItems.push(hasEffect ? `特效：有${pairedPetName ? ` · 配对精灵：${esc(pairedPetName)}` : ''}` : '特效：无');
   }
   if (requiredPieceCount > 0) {
-    metaItems.push(`必需部件资料：${recordedRequiredNames}/${requiredPieceCount}${recordedRequiredNames < requiredPieceCount ? ' · 待补' : ''}`);
+    metaItems.push(`必需部件资料：${infoStatus.recorded}/${requiredPieceCount}${infoStatus.missing ? ' · 待补' : ''}`);
   }
   if (magicProgress) {
     const magicStatus = magicProgress.unlocked ? '已解锁' : `${magicProgress.acquired}/${magicProgress.total}`;

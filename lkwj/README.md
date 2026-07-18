@@ -57,6 +57,7 @@ http://localhost:8899/review.html
 - 服装个人目标只包含 `obtainType="standard"` 的部件；`obtainType="paid"` 的积分卡额外组件可以浏览，但不进入目标数量、完成进度或 `collections.clothing_progress`。
 - `requiredPieceCount` 以游戏内套装件数为准，不包含 `setRole="optional"` 的付费额外组件；华丽魔法进度只根据 `magic_required` 必需部件自动计算。
 - 套装名称匹配且必需件数吻合后才能归套装；随机商店部件只录入实际看到的名称，只有明确购买后才更新进度。
+- 服装页的“信息缺失”筛选显示已记录必需部件数少于 `requiredPieceCount` 的套装；这些套装也保留在“未收集”筛选中，便于集中查找和补录。
 - 缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。完整服装命名和补录规则见 `docs/DATA_MODEL.md`。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义、资源数量、钥匙类特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存是否完成。

@@ -96,11 +96,14 @@ function createClothingSandbox(html, options = {}) {
       getClothingStats,
       getGorgeousMagicProgress,
       getClothingList,
+      getClothingSetInfoStatus,
+      getClothingMissingSetIds,
       sortClothingPieces,
       buildClothingDisplayEntries,
       renderClothingTab,
       renderClothingSetCard,
       renderClothingSingleRow,
+      setClothingStatusFilter,
       setClothingCategoryFilter,
       toggleClothingPiece,
       escAttr,
@@ -172,9 +175,16 @@ async function validateUi(html) {
     });
     const list = production.api.getClothingList();
     const stats = production.api.getClothingStats(list);
+    const missingSetIds = production.api.getClothingMissingSetIds(sets, list);
     production.api.renderClothingTab();
     const tabHtml = elements['tab-clothing'].innerHTML;
     const contentHtml = elements['clothing-content'].innerHTML;
+    production.api.setClothingStatusFilter('missing');
+    const missingTabHtml = elements['tab-clothing'].innerHTML;
+    const missingContentHtml = elements['clothing-content'].innerHTML;
+    production.api.setClothingStatusFilter('pending');
+    const pendingContentHtml = elements['clothing-content'].innerHTML;
+    production.api.setClothingStatusFilter('all');
     production.api.setClothingCategoryFilter('鞋子');
     const categorySelectedHtml = elements['tab-clothing'].innerHTML;
     checks.push(
@@ -187,6 +197,7 @@ async function validateUi(html) {
         stats.targetTotal === 275 && stats.targetOwned === 256 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
         tabHtml.includes('目标共 <strong>275</strong> 件 · 已收集 <strong>256</strong>')
+        && tabHtml.includes('信息缺失套装 <strong>54</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
@@ -198,6 +209,18 @@ async function validateUi(html) {
         && contentHtml.includes('鎏金礼赞')
         && contentHtml.includes('<span class="sm">0/6</span>')
         && contentHtml.includes('<span class="sm">0/4</span>')],
+      ['missing information filter reports and selects all 54 incomplete sets',
+        missingSetIds.size === 54
+        && missingTabHtml.includes('chip active')
+        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 54</span>")],
+      ['missing information filter includes partial and definition-only sets but excludes complete sets',
+        missingContentHtml.includes('翠顶夫人印象')
+        && missingContentHtml.includes('异色朔夜伊芙印象')
+        && missingContentHtml.includes('clothing-set-badge missing')
+        && !missingContentHtml.includes('电球咩咩印象')],
+      ['pending filter also keeps acquired sets whose required piece information is incomplete',
+        pendingContentHtml.includes('翠顶夫人印象')
+        && pendingContentHtml.includes('信息缺失 3/6')],
       ['confirmed clothing corrections and new data are present',
         sets.some(set => set.name === '精灵学分院服' && set.requiredPieceCount === 4)
         && sets.some(set => set.name === '炼金学分院服' && set.requiredPieceCount === 4)
