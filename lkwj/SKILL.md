@@ -45,6 +45,8 @@ lkwj/
 ├── tasks/
 │   └── todo.md                # 唯一待办入口
 ├── scripts/                   # 数据和 UI 校验脚本
+│   ├── validate-shiny-ui.js   # 异色多形态拆分和进度键校验
+│   └── validate-search-expand-ui.js # 单搜索结果自动展开校验
 └── data/
     ├── pets.json
     ├── tasks.json
@@ -74,8 +76,12 @@ lkwj/
 - 任务只来自 Excel `课题进度` sheet；同一宠物所有形态共享任务。
 - `fruit` 是果实课题任务，不得从果实图鉴反向生成。
 - `capture_chromatic` 与 `capture_shiny` 不能混用。
+- 异色页只展示进化链最终形态；分支进化的每个最终分支分别展示。`capture_shiny` 只按官方课题资料挂在最终形态，不能从 `tags.shiny` 自动生成。
+- 通行证异色只有异色收集项，没有 `capture_shiny` 任务；S3 正式赛季标签使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
+- 所有带异色标签的多形态精灵都在异色页拆分为“默认外观 + 每个可收集形态”；默认进度键为 `petKey`，形态进度键为 `petKey::formKey`。
 - `confirm_forms.requiredForms` 只表示课题计入形态；完整形态收集使用 `forms_collected`。
 - 获取方式只写直接来源，禁止写“由某精灵进化”。
+- 折叠型页面统一执行单搜索结果自动展开：精灵、多形态、遗迹、服装套装只剩一个搜索结果时直接展开，多结果不展开。
 
 ### 服装
 
@@ -88,7 +94,11 @@ lkwj/
 - 服装侧使用“魔草巫灵”；异色套装统一保留“印象”后缀。
 - “追忆”和“回忆”可能是不同单品。
 - `初始发型1` 至 `初始发型3`、`面妆1` 至 `面妆8` 是正式名称，属于系统默认新手独立单品。
-- 随机商店部件只录入用户实际看到的名称；只有明确购买后才修改收集进度。
+- 随机商店部件只录入用户实际看到的名称；主号和小号信息合并为同一静态定义，不记录账号来源。
+- 每次补录先对输入去重，再按完整 `pieceName` 全局精确查重；已有名称不重复新增，也不改变原收集状态。
+- 新随机商店套装部件默认 `standard + magic_required + 未收集`；只有用户明确说明购买/已收集时才写进度。部分指定已收集时只更新指定项。
+- 套装归属必须精确匹配套装名；不能根据近似名称猜测。随机商店信息不得推断付费、可选部件、特效、配对精灵或华丽魔法。
+- 已记录必需件数小于 `requiredPieceCount` 即信息缺失；该套装同时保留在“未收集”和“信息缺失”筛选中，补齐后自动移出。
 
 ### 其他收集项
 
@@ -103,6 +113,8 @@ lkwj/
 ```bash
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
+node scripts/validate-shiny-ui.js
+node scripts/validate-search-expand-ui.js
 node scripts/validate-random-task-ui.js
 node scripts/validate-furniture-ui.js
 node scripts/validate-clothing-data.js

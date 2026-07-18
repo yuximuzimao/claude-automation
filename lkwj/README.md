@@ -46,18 +46,20 @@ http://localhost:8899/review.html
 ## 数据边界
 
 - `pets.json` 保存世界定义，不能从用户进度反向生成。
-- `tasks.json` 只保存世界图鉴课题任务，任务来源只能是 Excel `课题进度` sheet；`异色` 行作为 `capture_shiny` 任务纳入。
+- `tasks.json` 只保存世界图鉴课题任务，任务来源只能是 Excel `课题进度` sheet；`异色` 行作为 `capture_shiny` 任务纳入，并固定挂在最终进化形态。存在异色标签不代表自动存在异色任务，通行证异色没有 `capture_shiny`。
 - `collections.json` 保存用户勾选进度，包括 `sprite_progress[petKey].forms_collected` 和 `fruit_acquired`。
 - `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。精灵任务行提供“去多形态”跳转，会自动筛选、展开并定位对应精灵。
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
-- `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。
+- `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。所有异色多形态精灵自动拆成默认外观和各形态；默认键为 `petKey`，形态键为 `petKey::formKey`。
+- 异色页沿用现有赛季筛选：S3 常驻/奇遇使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
+- 精灵、多形态、遗迹和服装套装在搜索与其他筛选后只剩一个卡片时自动展开；多结果保持折叠。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
 - 家具 Tab 顶部只展示总件数、已收集件数和未收集家具的剩余灵感值；舒适度和单件灵感值只在列表行展示。
 - `clothing.json` 分为 `definitions`、`sets[]` 和 `pieces[]`：规则说明写在 `definitions`，套装必需部件数、华丽魔法对应精灵和套装获取方式写在 `sets[]`，最小收集单元及其分类、套装角色、获取类型和获取方式写在 `pieces[]`。
 - 服装个人目标只包含 `obtainType="standard"` 的部件；`obtainType="paid"` 的积分卡额外组件可以浏览，但不进入目标数量、完成进度或 `collections.clothing_progress`。
 - `requiredPieceCount` 以游戏内套装件数为准，不包含 `setRole="optional"` 的付费额外组件；华丽魔法进度只根据 `magic_required` 必需部件自动计算。
-- 套装名称匹配且必需件数吻合后才能归套装；随机商店部件只录入实际看到的名称，只有明确购买后才更新进度。
-- 服装页的“信息缺失”筛选显示已记录必需部件数少于 `requiredPieceCount` 的套装；这些套装也保留在“未收集”筛选中，便于集中查找和补录。
+- 套装名称匹配且必需件数吻合后才能归套装。随机商店补录先对本次输入去重，再按完整名称全局查重；主号和小号信息合并，不记录账号来源。新部件默认未收集，只有明确购买/已收集时才更新指定进度，已有部件未被指定时保留原状态。
+- 服装页的“信息缺失”筛选显示已记录必需部件数少于 `requiredPieceCount` 的套装；这些套装也保留在“未收集”筛选中，便于集中查找和补录。完整流程见 `docs/DATA_MODEL.md`。
 - 缺失 `hasEffect` 表示资料未知，不能显示为“无特效”。完整服装命名和补录规则见 `docs/DATA_MODEL.md`。
 - `titles.json` 保存称号定义；页面按 `上段 · 下段` 显示一条称号，并展示获取方式；`collections.title_progress` 只保存是否收集。
 - `dungeons.json` 保存遗迹副本定义、资源数量、钥匙类特殊掉落和精灵蛋孵化属性；`collections.dungeon_progress` 只保存是否完成。
@@ -88,8 +90,9 @@ http://localhost:8899/review.html
 | 商店入口 | 36 |
 | 商店货币类型 | 6 |
 | 通用品类收集项 | 0 |
-| 有额外形态的精灵 | 51 |
-| 异色标签 | 38 |
+| 有额外形态的精灵 | 52 |
+| 异色最终形态标签 | 38 |
+| 异色收集项（含形态拆分） | 40 |
 | 首领形态 | 27 |
 | 进化链 | 165 |
 
@@ -111,6 +114,8 @@ http://localhost:8899/review.html
 ```bash
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
+node scripts/validate-shiny-ui.js
+node scripts/validate-search-expand-ui.js
 node scripts/validate-random-task-ui.js
 node scripts/validate-furniture-ui.js
 node scripts/validate-clothing-data.js

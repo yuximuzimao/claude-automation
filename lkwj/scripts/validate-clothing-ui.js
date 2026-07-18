@@ -87,6 +87,10 @@ function createClothingSandbox(html, options = {}) {
     let clothingCategoryFilter = 'all';
     let expandedClothingSet = null;
     const STATUS = { DONE: '已收集', PENDING: '未收集' };
+    function resolveSingleSearchExpansion(searchValue, items, getKey, currentExpanded) {
+      if (!String(searchValue || '').trim()) return currentExpanded;
+      return items.length === 1 ? getKey(items[0]) : null;
+    }
     async function saveData() { return globalThis.__saveData(); }
     function addDoneToday(entry) { return globalThis.__addDoneToday(entry); }
     function renderDashboard() {}
