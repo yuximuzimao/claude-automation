@@ -1349,3 +1349,143 @@ details[open] .action-dismissed-summary::before { content: '▼ '; }
 .btn-scan-toggle.on  { color: #16a34a; }
 .btn-scan-toggle.off { color: #9ca3af; }
 .btn-scan-toggle:hover { background: #f3f4f6; }
+
+/* ── 售后分支统计 ─────────────────────────────────── */
+.branch-section-note {
+  margin-top: 5px;
+  color: var(--gray-600);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.branch-unregistered { color: var(--red); }
+.branch-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+.branch-overview-card {
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: var(--gray-50);
+}
+.branch-overview-card.is-enabled { border-left: 3px solid var(--green); }
+.branch-overview-card.is-attention { border-left: 3px solid var(--red); }
+.branch-overview-value {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.branch-overview-label {
+  margin-top: 5px;
+  color: var(--gray-600);
+  font-size: 11px;
+}
+.branch-reason-group {
+  margin-bottom: 8px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+}
+.branch-reason-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+.branch-reason-summary::-webkit-details-marker { display: none; }
+.branch-reason-summary::before {
+  content: '›';
+  color: var(--gray-400);
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .12s ease;
+}
+.branch-reason-group[open] > .branch-reason-summary::before { transform: rotate(90deg); }
+.branch-reason-summary:hover { background: var(--gray-50); }
+.branch-reason-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.branch-reason-meta {
+  color: var(--gray-600);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.branch-group-flag,
+.branch-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 99px;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.branch-group-flag.attention { background: var(--red-light); color: var(--red); }
+.branch-group-flag.enabled,
+.branch-status.enabled { background: var(--green-light); color: var(--green); }
+.branch-group-flag.manual,
+.branch-status.manual_only { background: var(--gray-100); color: var(--gray-600); }
+.branch-status.candidate { background: var(--orange-light); color: var(--orange); }
+.branch-result-list {
+  padding: 0 12px;
+  border-top: 1px solid var(--gray-100);
+}
+.branch-result-row {
+  padding: 10px 0 10px 8px;
+  border-bottom: 1px solid var(--gray-100);
+  border-left: 2px solid transparent;
+}
+.branch-result-row.is-attention { border-left-color: var(--red); }
+.branch-result-row:last-child { border-bottom: 0; }
+.branch-result-main {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+}
+.branch-result-name { font-weight: 500; line-height: 1.5; }
+.branch-result-counts {
+  display: flex;
+  gap: 10px;
+  color: var(--gray-600);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.branch-result-counts .has-negative { color: var(--red); font-weight: 600; }
+.branch-row-details {
+  margin-top: 7px;
+  color: var(--gray-600);
+  font-size: 12px;
+}
+.branch-row-details > summary { cursor: pointer; width: fit-content; }
+.branch-row-detail-content {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--gray-50);
+  line-height: 1.6;
+}
+.branch-detail-metrics { display: flex; flex-wrap: wrap; gap: 5px 16px; }
+.branch-detail-warning { margin-top: 4px; color: var(--red); }
+.branch-detail-notes { margin-top: 4px; white-space: pre-wrap; }
+.branch-detail-notes > span { color: var(--gray-400); }
+
+@media (max-width: 760px) {
+  .branch-overview { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+  .branch-reason-summary { align-items: flex-start; flex-wrap: wrap; }
+  .branch-reason-name { flex-basis: calc(100% - 28px); }
+  .branch-reason-meta { margin-left: 25px; }
+  .branch-result-main { grid-template-columns: 1fr; gap: 6px; }
+  .branch-result-counts { flex-wrap: wrap; }
+  .branch-status { width: fit-content; }
+}
