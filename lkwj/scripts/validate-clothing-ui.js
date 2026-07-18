@@ -193,11 +193,11 @@ async function validateUi(html) {
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 256 owned of 275 targets with 148 paid references',
-        stats.targetTotal === 275 && stats.targetOwned === 256 && stats.paidTotal === 148],
+      ['real clothing stats are 257 owned of 284 targets with 148 paid references',
+        stats.targetTotal === 284 && stats.targetOwned === 257 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>275</strong> 件 · 已收集 <strong>256</strong>')
-        && tabHtml.includes('信息缺失套装 <strong>54</strong>')
+        tabHtml.includes('目标共 <strong>284</strong> 件 · 已收集 <strong>257</strong>')
+        && tabHtml.includes('信息缺失套装 <strong>53</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
@@ -209,10 +209,10 @@ async function validateUi(html) {
         && contentHtml.includes('鎏金礼赞')
         && contentHtml.includes('<span class="sm">0/6</span>')
         && contentHtml.includes('<span class="sm">0/4</span>')],
-      ['missing information filter reports and selects all 54 incomplete sets',
-        missingSetIds.size === 54
+      ['missing information filter reports and selects all 53 incomplete sets',
+        missingSetIds.size === 53
         && missingTabHtml.includes('chip active')
-        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 54</span>")],
+        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 53</span>")],
       ['missing information filter includes partial and definition-only sets but excludes complete sets',
         missingContentHtml.includes('翠顶夫人印象')
         && missingContentHtml.includes('异色朔夜伊芙印象')
@@ -261,7 +261,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">256</span><span class="ds-total">/ 275</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 284</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);
