@@ -1382,6 +1382,10 @@ document.getElementById('modal').addEventListener('click', e => {
 });
 
 // ── 统计复盘 ─────────────────────────────────────────────────────
+function hasSpecificFeedbackComment(feedback) {
+  return Boolean(String(feedback && feedback.reason || '').trim());
+}
+
 async function loadStats() {
   const [stats, feedbacks, pendingInsight, recentInsights, confData] = await Promise.all([
     api('/stats'),
@@ -1402,7 +1406,8 @@ async function loadStats() {
 </div>`;
 
   // 待洞察反馈区（洞察生成已改为手动，不通过 API）
-  const pendingCount = (pendingInsight || []).length;
+  const visiblePendingInsight = (pendingInsight || []).filter(hasSpecificFeedbackComment);
+  const pendingCount = visiblePendingInsight.length;
   const insightHtml = `
 <div class="chart-section">
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
@@ -1412,7 +1417,7 @@ async function loadStats() {
   </div>
   ${pendingCount > 0 ? `
   <div style="font-size:13px;color:var(--gray-600);margin-bottom:8px">待洞察反馈：</div>
-  ${(pendingInsight||[]).map(f => `
+  ${visiblePendingInsight.map(f => `
   <div class="feedback-item" style="margin-bottom:6px">
     <div class="fb-icon">${f.verdict==='positive'?'✅':'❌'}</div>
     <div class="fb-content">
@@ -1437,7 +1442,7 @@ async function loadStats() {
 </div>`;
 
   // 最近有说明的反馈记录（已洞察的也展示，供回顾）
-  const recentFb = (feedbacks || []).filter(f => (f.reason||'').trim()).reverse();
+  const recentFb = (feedbacks || []).filter(hasSpecificFeedbackComment).reverse();
   const fbHtml = recentFb.length ? `
 <div class="chart-section"><h3>反馈记录（有说明）</h3>
   ${recentFb.map(f => `
