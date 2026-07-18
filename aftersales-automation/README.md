@@ -77,8 +77,5 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 | [docs/flow-5.4.md](docs/flow-5.4.md) | 换货流程 |
 | [docs/erp-query.md](docs/erp-query.md) | ERP 商品对应表/档案V2 操作规范 |
 | [docs/ops-tech.md](docs/ops-tech.md) | ERP 操作报错/技术排查 |
-| [A1 用户确认计划](docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md) | 历史确认计划，仅用于追溯固定清单口径和早期门禁；当前状态以 README/SKILL/tasks/todo 为准 |
-| [A1 账号14整账号批次交接](docs/superpowers/handovers/2026-06-27-a1-account-14-fixed-batch-handoff.md) | 历史 no-auto 验证阶段交接；当前 fixed-batch 生产入口已继续推进并运行 |
-| [Live 店铺筛选交接](docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md) | 待确认/等待重查店铺筛选、批量 scope 加固和仍有效的作用域边界 |
-| [自动执行 journal recovery 设计](docs/superpowers/plans/2026-06-27-auto-execution-journal-recovery-design.md) | 自动执行账本状态机、设计期人工收口规则和 recovery 外部入口未开放边界；实际运营以重采覆盖或手动处理后归档为主 |
-| [前端按钮加载/只读冒烟计划](docs/superpowers/plans/2026-06-27-frontend-button-load-smoke-plan.md) | 历史按钮加载/只读冒烟计划；当前前端按钮已是正式“处理工单”入口 |
+| [售后分支清单与自动处理设计](docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md) | 当前下一阶段唯一方案：不自动学习，按最小最终分支独立统计并由用户手动启用 |
+| [历史设计归档](docs/superpowers/archive/README.md) | 2026-06 A1 计划/交接与 2026-07 已完成修复，仅供追溯，不作为当前实施依据 |

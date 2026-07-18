@@ -55,7 +55,7 @@ entry: cli.js
 | `lib/jl/target-aware-collector.js` | **当前 A1/A2 生产采集入口**：显式绑定 JL 详情 tab 和 ERP tab；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅 |
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
-| `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md` | 历史 A1 确认计划：只用于追溯固定清单口径和早期门禁；当前生产状态以本 SKILL、README 和 tasks/todo 最新状态为准 | 追溯历史设计时 |
+| `docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md` | 当前分支登记方案：不自动学习，按售后原因与最小最终结果独立统计，只允许用户手动启用 | 继续自动处理管理改造时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
@@ -266,7 +266,7 @@ scripts/jl-steps/12-click-work-order-action.js
 scripts/jl-steps/13-open-single-account-work-order.js
 scripts/jl-steps/14-process-single-account-fixed-batch.js
 docs/INDEX.md
-docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md
+docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md
 public/app.js
 public/account-relogin-state.js
 public/index.html
