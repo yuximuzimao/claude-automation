@@ -23,7 +23,7 @@
 - Modify: `test/server/after-sales-branch-ui.test.js`
 - Modify: `public/app.js:1380-1460`
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 在 `test/server/after-sales-branch-ui.test.js` 中加入：
 
@@ -54,13 +54,13 @@ test('AI 洞察明细只保留填写了具体评论的反馈', () => {
 });
 ```
 
-- [ ] **Step 2: 运行测试并确认失败原因正确**
+- [x] **Step 2: 运行测试并确认失败原因正确**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: FAIL，提示找不到 `hasSpecificFeedbackComment`。
 
-- [ ] **Step 3: 写最小实现**
+- [x] **Step 3: 写最小实现**
 
 在 `loadStats()` 前加入：
 
@@ -84,13 +84,13 @@ const recentFb = (feedbacks || [])
 
 总体正确率、好评数、差评数和历史反馈数据保持不变。
 
-- [ ] **Step 4: 运行目标测试**
+- [x] **Step 4: 运行目标测试**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: PASS。
 
-- [ ] **Step 5: 提交独立修改**
+- [x] **Step 5: 提交独立修改**
 
 ```bash
 git add aftersales-automation/public/app.js aftersales-automation/test/server/after-sales-branch-ui.test.js
@@ -104,7 +104,7 @@ git commit -m "fix(aftersales): hide empty feedback details"
 - Modify: `public/app.js:1460-1535`
 - Modify: `public/style.css`
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 扩展 `loadStatsHelpers()`，同时暴露 `renderAfterSalesBranches`，并加入真实渲染断言：
 
@@ -155,13 +155,13 @@ test('售后分支先显示概览，并优先展开需关注和已授权原因',
 
 同时保留原测试对“最近 30 天”“不会自动学习”和三种权限状态的断言。
 
-- [ ] **Step 2: 运行测试并确认失败原因正确**
+- [x] **Step 2: 运行测试并确认失败原因正确**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: FAIL，缺少 `branch-overview` 或排序、详情结构不符合预期。
 
-- [ ] **Step 3: 写最小渲染实现**
+- [x] **Step 3: 写最小渲染实现**
 
 在 `renderAfterSalesBranches(report)` 中：
 
@@ -191,7 +191,7 @@ return priority(a) - priority(b)
 
 概览使用四个 `.branch-overview-card`，原因、结果和详情分别使用 `.branch-reason-group`、`.branch-result-row`、`.branch-row-details`。
 
-- [ ] **Step 4: 增加专用 CSS**
+- [x] **Step 4: 增加专用 CSS**
 
 在 `public/style.css` 末尾新增：
 
@@ -218,13 +218,13 @@ return priority(a) - priority(b)
 }
 ```
 
-- [ ] **Step 5: 运行目标测试**
+- [x] **Step 5: 运行目标测试**
 
 Run: `node --test test/server/after-sales-branch-ui.test.js`
 
 Expected: PASS。
 
-- [ ] **Step 6: 提交独立修改**
+- [x] **Step 6: 提交独立修改**
 
 ```bash
 git add aftersales-automation/public/app.js aftersales-automation/public/style.css aftersales-automation/test/server/after-sales-branch-ui.test.js
@@ -236,7 +236,7 @@ git commit -m "feat(aftersales): clarify branch stats hierarchy"
 **Files:**
 - Verify only: `public/app.js`, `public/style.css`, `test/server/after-sales-branch-ui.test.js`
 
-- [ ] **Step 1: 运行语法和格式检查**
+- [x] **Step 1: 运行语法和格式检查**
 
 Run: `node --check public/app.js`
 
@@ -246,19 +246,19 @@ Run: `git diff --check HEAD~2`
 
 Expected: 无输出，exit code 0。
 
-- [ ] **Step 2: 运行完整测试**
+- [x] **Step 2: 运行完整测试**
 
 Run: `npm test`
 
 Expected: 全部测试通过，无失败或跳过。
 
-- [ ] **Step 3: 重启服务，不运行扫描**
+- [x] **Step 3: 重启服务，不运行扫描**
 
 Run: `launchctl kickstart -k gui/501/com.heizong.aftersale-server`
 
 Expected: 服务重新启动，命令无报错。
 
-- [ ] **Step 4: 验证服务和只读接口**
+- [x] **Step 4: 验证服务和只读接口**
 
 Run: `curl --noproxy '*' -sS http://127.0.0.1:3457/health`
 
