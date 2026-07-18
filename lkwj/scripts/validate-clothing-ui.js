@@ -183,10 +183,10 @@ async function validateUi(html) {
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 242 owned of 265 targets with 148 paid references',
-        stats.targetTotal === 265 && stats.targetOwned === 242 && stats.paidTotal === 148],
+      ['real clothing stats are 256 owned of 271 targets with 148 paid references',
+        stats.targetTotal === 271 && stats.targetOwned === 256 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>265</strong> 件 · 已收集 <strong>242</strong>')
+        tabHtml.includes('目标共 <strong>271</strong> 件 · 已收集 <strong>256</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
@@ -238,7 +238,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">242</span><span class="ds-total">/ 265</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">256</span><span class="ds-total">/ 271</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);
