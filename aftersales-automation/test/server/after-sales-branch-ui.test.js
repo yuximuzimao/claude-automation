@@ -130,6 +130,8 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
   assert.match(html, /差评[\s\S]*0/);
   assert.match(html, /人工处理[\s\S]*1/);
   assert.match(html, /真正空值（12）[\s\S]*不要了（4）/);
+  assert.match(html, /<div class="branch-card-header">/);
+  assert.doesNotMatch(html, /<header class="branch-card-header">/);
   assert.doesNotMatch(html, /查看详情|需要关注|is-attention|has-negative/);
 });
 

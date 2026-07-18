@@ -1516,13 +1516,13 @@ function renderAfterSalesBranches(report) {
       .map(note => `${h(note.value)}（${Number(note.count || 0)}）`)
       .join('；');
     return `<article class="branch-card branch-card-${tier}">
-      <header class="branch-card-header">
+      <div class="branch-card-header">
         <div>
           <div class="branch-card-reason">${h(item.afterSaleReason)}</div>
           <div class="branch-card-type">售后类型 · ${h(item.orderType)}</div>
         </div>
         <span class="branch-status ${tier}">${statusLabels[tier]}</span>
-      </header>
+      </div>
       <div class="branch-path">
         <div>
           <span class="branch-field-label">必须满足</span>
