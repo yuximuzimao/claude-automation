@@ -732,7 +732,7 @@ async function execReprocessOne(op) {
   const { inferDecision } = require('../infer');
   const { resolveSharedReturnGroup } = require('../return-tracking-group');
   const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
-  const { shouldAutoExecute } = require('../server/auto-exec-confidence');
+  const { shouldAutoExecute } = require('../server/after-sales-auto-gate');
   const { createAutoExecutionJournal } = require('../server/auto-execution-journal');
   const { approveTicket } = require('../jl/approve');
   const { rejectTicket } = require('../jl/reject');

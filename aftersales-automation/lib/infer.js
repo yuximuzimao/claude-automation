@@ -11,10 +11,7 @@
  * 变更任一读取字段必须同步更新该文档。
  */
 
-const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
-
-// 免退配件关键词（不计入应退/实退数量）
-const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
+const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
 function parseUrgencyHours(urgency) {

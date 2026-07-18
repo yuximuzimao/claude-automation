@@ -140,7 +140,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 - 应退主商品单品数 = 档案V2.subItemNum × afterSaleNum
 - afterSaleNum=1 → 退1件套装（正常）
 - afterSaleNum=2 → 退2件套装（如4盒套×2=应退8盒）
-- **赠品数量始终1份，不随 afterSaleNum 倍增**
+- 赠品子订单通常未提供 afterSaleNum，此时按 1 份；若页面明确提供 afterSaleNum，则使用该子订单自己的数量，不能固定写死为 1
 
 ### 3.5 退回成功判断（满足任意一条）
 

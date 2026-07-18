@@ -18,10 +18,9 @@ function connectSSE() {
   });
   es.onerror = () => setConnected(false);
   es.addEventListener('queue-update', () => { loadLive(); loadSim(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
-  es.addEventListener('simulation-update', () => { loadLive(); loadSim(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
+  es.addEventListener('simulation-update', () => { loadLive(); loadSim(); if (currentTab === 'stats') loadStats(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
   es.addEventListener('feedback-new', () => { if (currentTab === 'stats') loadStats(); });
-  es.addEventListener('confidence-update', () => { if (currentTab === 'stats') loadStats(); });
-  es.addEventListener('cases-update', () => { if (currentTab === 'history') loadHistory(); });
+  es.addEventListener('cases-update', () => { if (currentTab === 'history') loadHistory(); if (currentTab === 'stats') loadStats(); });
   es.addEventListener('insight-ready', () => { if (currentTab === 'stats') loadStats(); showToast('洞察已生成，已刷新统计页'); });
   es.addEventListener('insight-error', (e) => {
     try { const d = JSON.parse(e.data); showToast('洞察生成失败：' + (d.error || '未知错误') + '，请重新生成', 'error'); } catch {}
@@ -1452,50 +1451,84 @@ async function loadStats() {
   </div>`).join('')}
 </div>` : '';
 
-  // 自动执行置信度
-  const scenes = confData && confData.scenes ? Object.values(confData.scenes) : [];
-  const confHtml = scenes.length ? renderAutoExecConfidence(scenes) : '';
+  // 最近 30 天售后分支清单（只读，不自动学习）
+  const confHtml = confData && Array.isArray(confData.cases)
+    ? renderAfterSalesBranches(confData)
+    : '';
 
   el.innerHTML = cardsHtml + confHtml + insightHtml + fbHtml;
 }
 
-// ── 自动执行置信度展示 ──────────────────────────────────────────────
-function renderAutoExecConfidence(scenes) {
-  const sorted = scenes.sort((a, b) => b.totalExecutions - a.totalExecutions);
-  const rows = sorted.map(s => {
-    const daysSinceNeg = s.lastNegativeAt
-      ? Math.floor((Date.now() - new Date(s.lastNegativeAt).getTime()) / 86400000)
-      : null;
-    const progressPct = Math.min(100, Math.round((s.totalExecutions / 10) * 100));
-    const daysOk = !s.lastNegativeAt || daysSinceNeg > 15;
-    const thresholdMet = s.totalExecutions >= 10 && daysOk;
-    const statusBadge = s.status === 'auto'
-      ? '<span style="background:#dcfce7;color:#166534;padding:1px 6px;border-radius:4px;font-size:11px">自动执行</span>'
-      : thresholdMet
-        ? '<span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:4px;font-size:11px">即将启用</span>'
-        : '<span style="background:#f3f4f6;color:#6b7280;padding:1px 6px;border-radius:4px;font-size:11px">待积累</span>';
+// ── 最近 30 天售后分支清单 ──────────────────────────────────────────
+function renderAfterSalesBranches(report) {
+  const statusLabels = {
+    enabled: ['已授权自动', '#dcfce7', '#166534'],
+    candidate: ['候选，仍人工', '#fef3c7', '#92400e'],
+    manual_only: ['永不自动', '#f3f4f6', '#6b7280'],
+  };
+  const actionLabels = {
+    approve: '同意',
+    reject: '拒绝',
+    wait: '等待',
+    escalate: '人工处理',
+    skip: '不操作',
+  };
+  const groups = new Map();
+  for (const item of report.cases || []) {
+    const reason = item.afterSaleReason || '原因缺失';
+    if (!groups.has(reason)) groups.set(reason, []);
+    groups.get(reason).push(item);
+  }
+  const reasonGroups = [...groups.entries()].sort((a, b) => {
+    const totalA = a[1].reduce((sum, item) => sum + (item.occurrenceCount || 0), 0);
+    const totalB = b[1].reduce((sum, item) => sum + (item.occurrenceCount || 0), 0);
+    return totalB - totalA || a[0].localeCompare(b[0], 'zh-CN');
+  });
 
+  const content = reasonGroups.map(([reason, items], groupIndex) => {
+    const total = items.reduce((sum, item) => sum + (item.occurrenceCount || 0), 0);
+    const rows = items
+      .sort((a, b) => (b.occurrenceCount || 0) - (a.occurrenceCount || 0))
+      .map(item => {
+        const badge = statusLabels[item.automationStatus] || statusLabels.manual_only;
+        const missingFacts = (item.missingFacts || []).length
+          ? `<div style="margin-top:5px;color:var(--red);font-size:12px">缺少：${(item.missingFacts || []).map(h).join('、')}</div>`
+          : '';
+        const notes = (item.notes || []).map(note => `${h(note.value)}（${note.count}）`).join('；');
+        const notesHtml = notes
+          ? `<details style="margin-top:5px;font-size:12px;color:var(--gray-500)"><summary>备注分布（${item.notes.length} 类）</summary><div style="margin-top:4px;white-space:pre-wrap">${notes}</div></details>`
+          : '';
+        return `
+      <div style="border-top:1px solid var(--gray-100);padding:9px 0;font-size:13px">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+          <span style="font-weight:500;line-height:1.5">${h(item.branchLabel)}</span>
+          <span style="background:${badge[1]};color:${badge[2]};padding:1px 6px;border-radius:4px;font-size:11px;white-space:nowrap">${badge[0]}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:5px;font-size:12px;color:var(--gray-500)">
+          <span>出现 ${item.occurrenceCount || 0} 次</span>
+          <span>好评 ${item.positiveCount || 0}</span>
+          <span${item.negativeCount ? ' style="color:var(--red)"' : ''}>差评 ${item.negativeCount || 0}</span>
+          <span>真实自动成功 ${item.autoSuccessCount || 0}</span>
+          <span>人工处理 ${item.manualHandledCount || 0}</span>
+          <span>历史结果：${h(actionLabels[item.expectedAction] || item.expectedAction || '未知')}</span>
+        </div>
+        ${missingFacts}${notesHtml}
+      </div>`;
+      }).join('');
     return `
-  <div style="border:1px solid var(--gray-200);border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <span style="font-weight:500">${h(s.sceneLabel)}</span>
-      ${statusBadge}
-    </div>
-    <div style="display:flex;gap:16px;font-size:12px;color:var(--gray-500);margin-bottom:4px">
-      <span>执行 ${s.totalExecutions} 次</span>
-      ${s.negativeCount > 0 ? `<span style="color:var(--red)">差评 ${s.negativeCount} 次</span>` : '<span>零差评</span>'}
-      ${s.lastNegativeAt ? `<span>最后差评: ${new Date(s.lastNegativeAt).toLocaleDateString('zh-CN')} (${daysSinceNeg}天前)</span>` : ''}
-    </div>
-    <div style="background:var(--gray-100);border-radius:4px;height:4px;overflow:hidden">
-      <div style="width:${progressPct}%;height:100%;background:${thresholdMet ? 'var(--green)' : 'var(--gray-400)'};border-radius:4px;transition:width 0.3s"></div>
-    </div>
-  </div>`;
+    <details ${groupIndex < 3 ? 'open' : ''} style="border:1px solid var(--gray-200);border-radius:6px;padding:8px 12px;margin-bottom:8px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:600">${h(reason)}（${total} 单，${items.length} 个结果）</summary>
+      ${rows}
+    </details>`;
   }).join('');
 
   return `<div class="chart-section">
-    <h3>自动执行置信度</h3>
-    <div style="font-size:12px;color:var(--gray-500);margin-bottom:8px">达标条件：执行 ≥10 次 && 无差评或距上次差评 &gt;15 天</div>
-    ${rows}
+    <h3>售后分支清单（最近30天）</h3>
+    <div style="font-size:12px;color:var(--gray-500);margin-bottom:8px">
+      共 ${report.uniqueWorkOrders || 0} 个工单、${(report.cases || []).length} 个最小结果分支。只按固定分支统计，不会自动学习；候选达到次数仍需人工启用。
+      ${report.unregisteredCount ? `<span style="color:var(--red)">另有 ${report.unregisteredCount} 单未登记，保持人工。</span>` : ''}
+    </div>
+    ${content || '<div style="font-size:13px;color:var(--gray-400)">最近30天暂无历史工单。</div>'}
   </div>`;
 }
 

@@ -82,18 +82,24 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 {
   rows: [
     {
+      erpOrderId: string,    // ERP 售后工单号；已收货行必须存在且不得重复
       goodsStatus: string,   // "卖家已收到退货"/"在途"等
+      tracking: string,      // ERP 退货单号；必须与鲸灵工单 returnTracking 一致
+      returnQty: number,     // 本行实退总数；必须等于明细 qtyGood + qtyBad 合计
       items: [
         {
           name:    string,   // 商品名称
-          qtyGood: string,   // 良品数量（字符串，需 parseInt）
-          qtyBad:  string,   // 次品数量（字符串，需 parseInt）
+          specCode: string,  // 主商家规格编码；严格核对只认该字段
+          qtyGood: number,   // 良品数量
+          qtyBad:  number,   // 次品数量
         }
       ]
     }
   ]
 }
 ```
+
+自动同意的严格证明只统计 `goodsStatus` 明确为“卖家已收到退货”的行。任一已收货行缺商品明细、售后工单号重复、退货单号冲突、`returnQty` 与明细合计不一致，或本次采集存在任何错误时，固定转人工。
 
 ---
 

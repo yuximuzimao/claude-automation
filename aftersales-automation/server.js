@@ -178,15 +178,6 @@ app.listen(PORT, async () => {
   // ── 启动时数据清理 ────────────────────────────────────────────────
   startupDataCleanup();
 
-  // ── 自动执行置信度文件初始化 ──────────────────────────────────────
-  (() => {
-    const confPath = path.join(__dirname, 'data/auto-exec-confidence.json');
-    if (!fs.existsSync(confPath)) {
-      fs.writeFileSync(confPath, JSON.stringify({ scenes: {} }, null, 2));
-      console.log('[startup] 初始化 auto-exec-confidence.json');
-    }
-  })();
-
   // 恢复定时扫描（2026-06-30）：runAutoScan 走 execScan 新路径，遵守 scanEnabled 开关。
   scheduleNextScan();
 

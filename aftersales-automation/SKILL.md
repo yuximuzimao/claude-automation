@@ -56,6 +56,9 @@ entry: cli.js
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
 | `docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md` | 当前分支登记方案：不自动学习，按售后原因与最小最终结果独立统计，只允许用户手动启用 | 继续自动处理管理改造时 |
+| `lib/server/after-sales-branch-history.js` | 固定售后分支注册表、最近 30 天去重分类和备注脱敏汇总；不同原因、不同最小结果分别累计 | 查分支清单或历史计数时 |
+| `lib/server/after-sales-auto-gate.js` | 当前唯一自动门禁：只允许七天无理由退货的严格精确退回分支自动同意 | 查/改自动执行条件时 |
+| `lib/return-item-proof.js` | 按规格编码严格证明精确退回/多退/少退/次品/未匹配/证据不完整 | 查退货商品核对边界时 |
 | `lib/jl/approve.js` | 同意退款（处理三层弹窗） | 改审批流程时 |
 | `lib/jl/reject.js` | 拒绝退款（含物流截图上传） | 改拒绝流程时 |
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
@@ -74,7 +77,6 @@ entry: cli.js
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
-| `lib/server/auto-exec-confidence.js` | 自动执行置信度系统 — 场景指纹+人工反馈驱动 auto 判定 | 查/改自动执行条件时 |
 | `public/app.js` | 前端主逻辑 — 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
 | `public/index.html` | 前端 HTML 骨架 — 8 Tab 结构、模版、header 控件 | 改页面结构时 |
 | `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
@@ -235,7 +237,8 @@ lib/jl-session-state.js
 lib/product/archive.js
 lib/product/match.js
 lib/server/account-session-status.js
-lib/server/auto-exec-confidence.js
+lib/server/after-sales-auto-gate.js
+lib/server/after-sales-branch-history.js
 lib/server/auto-execution-journal.js
 lib/server/auto-execution-recovery.js
 lib/server/a1-fixed-batch-entry.js

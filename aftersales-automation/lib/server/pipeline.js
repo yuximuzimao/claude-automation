@@ -8,7 +8,7 @@
 
 const { spawn, execFileSync, spawnSync } = require('child_process');
 const path = require('path');
-const confidence = require('./auto-exec-confidence');
+const { shouldAutoExecute } = require('./after-sales-auto-gate');
 const db = require('./data');
 const sse = require('./sse');
 const { getSkipCompletionStatus } = require('./pipeline-status');
@@ -83,12 +83,6 @@ function saveSessionState(num) {
 }
 
 function log(msg) { process.stdout.write(`[pipeline] ${msg}\n`); }
-
-// ── 自动执行条件判断 ──────────────────────────────────────────────
-// 基于"沉默=正确"模型：场景指纹在 15 天内执行 ≥10 次且零差评 → 自动执行
-function shouldAutoExecute(decision, collectedData, queueItem) {
-  return confidence.shouldAutoExecute(decision, collectedData, queueItem);
-}
 
 async function autoExecuteApprove(workOrderNum, accountNum) {
   const EXEC_OPTS = { cwd: BASE, timeout: 90000, encoding: 'utf8' };

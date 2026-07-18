@@ -556,7 +556,7 @@ function loadDefaultDependencies() {
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
   const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
-  const { shouldAutoExecute } = require('../../lib/server/auto-exec-confidence');
+  const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
   const { approveTicket } = require('../../lib/jl/approve');
   const { rejectTicket } = require('../../lib/jl/reject');
   const db = require('../../lib/server/data');

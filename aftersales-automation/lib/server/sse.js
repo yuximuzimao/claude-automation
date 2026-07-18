@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '../../data');
-const WATCH_FILES = ['queue.json', 'simulations.jsonl', 'feedback.jsonl', 'cases.jsonl', 'auto-exec-confidence.json'];
+const WATCH_FILES = ['queue.json', 'simulations.jsonl', 'feedback.jsonl', 'cases.jsonl'];
 
 const clients = new Set();
 
@@ -31,7 +31,6 @@ const EVENT_MAP = {
   'simulations.jsonl': 'simulation-update',
   'feedback.jsonl': 'feedback-new',
   'cases.jsonl': 'cases-update',
-  'auto-exec-confidence.json': 'confidence-update',
 };
 
 WATCH_FILES.forEach(file => {

@@ -25,6 +25,9 @@ const SIGNED_KEYWORDS = ['已签收', '签收成功', '本人签收', '代签收
 // 驿站/快递柜待取件关键词（包裹可联系驿站拦截，未正式签收）
 const YIZHAN_KEYWORDS = ['驿站待取件', '已到驿站', '驿站自提', '到驿站', '投递驿站', '快递柜', '菜鸟驿站', '菜鸟', '代收点', '巧目', '丰巢', '中邮快递柜'];
 
+// 商品档案中的包装耗材不要求客户退回，不参与应退/实退数量核对。
+const EXEMPT_ACCESSORY_KEYWORDS = ['悦希雪梨纸', '悦希印花礼袋', '悦希印花礼盒'];
+
 // 平台标准非商责原因（无理由/个人原因类）
 // 来源：鲸灵工单列表筛选项「售后原因」完整枚举（2026-04）
 const NON_MERCHANT_REASONS = [
@@ -97,10 +100,10 @@ function getHoursUntilNextScan() {
   return (next.getTime() - now.getTime()) / 3600000;
 }
 
-// 判断售后原因是否商责（infer.js + auto-exec-confidence.js 共用）
+// 判断售后原因是否商责
 function isMerchantFaultReason(afterSaleReason) {
   if (!afterSaleReason) return false;
   return MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
 }
 
-module.exports = { RETURN_KEYWORDS, hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };
+module.exports = { RETURN_KEYWORDS, hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, SCAN_HOURS, REMIND_HOURS, RESCAN_INTERVAL_HOURS, SAFETY_MARGIN_HOURS, getHoursUntilNextScan, BATCH_EXECUTABLE_STATUSES, BATCH_SAFE_REJECT_CODES, isBatchExecutable, isMerchantFaultReason };

@@ -15,7 +15,7 @@ const sse = require('./sse');
 const opQueue = require('./op-queue');
 const cdp = require('../cdp');
 const jlAlerts = require('../jl/alerts');
-const confidence = require('./auto-exec-confidence');
+const { summarizeHistory } = require('./after-sales-branch-history');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
 const { createA1FixedBatchRouteHandler, validateSessionFile } = require('./a1-fixed-batch-entry');
 const {
@@ -28,6 +28,16 @@ const {
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
 const BASE = path.join(__dirname, '../..');
+const AUTO_EXECUTION_JOURNAL_PATH = path.join(BASE, 'data/auto-execution-journal.json');
+
+function readAutoExecutionJournal() {
+  try {
+    return JSON.parse(fs.readFileSync(AUTO_EXECUTION_JOURNAL_PATH, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') return {};
+    throw error;
+  }
+}
 
 // 构建归档 case 数据（archive-manual 和 batch-archive-auto 共用）
 function buildCasePayload(id, queueItem, sim, source) {
@@ -283,18 +293,6 @@ router.post('/feedback', (req, res) => {
   const { simulationId, workOrderNum, verdict, reason, suggestedAction, ruleImpact } = req.body;
   if (!simulationId || !verdict) return res.status(400).json({ error: 'simulationId + verdict required' });
   const fb = db.appendFeedback({ simulationId, workOrderNum, verdict, reason, suggestedAction, ruleImpact });
-
-  // 更新自动执行置信度（仅 approve 决策参与）
-  const sim = db.getSimulation(simulationId);
-  if (sim) {
-    try {
-      // 从 queue item 取 orderType，避免 confidence 模块内部重复读 queue.json
-      const queue = db.readQueue();
-      const qi = queue.items.find(i => i.id === sim.queueItemId);
-      confidence.onFeedback(sim, verdict, qi ? qi.type : null);
-    } catch (e) { /* 静默：置信度更新失败不阻塞 feedback */ }
-  }
-
   res.json(fb);
 });
 
@@ -328,16 +326,26 @@ router.post('/queue/batch-archive-auto', (req, res) => {
   res.json({ ok: true, count: autoItems.length });
 });
 
-// ── Auto-Exec Confidence ───────────────────────────────────────────
+// ── 售后分支历史（只读）────────────────────────────────────────────
 
 router.get('/auto-exec-confidence', (req, res) => {
-  res.json({ scenes: confidence.getAllScenes() });
+  try {
+    const queue = db.readQueue();
+    const archivedCases = db.readCases({ limit: Number.MAX_SAFE_INTEGER }).items;
+    res.json(summarizeHistory({
+      simulations: db.readSimulations(),
+      feedbacks: db.readFeedback(),
+      queueItems: queue.items || [],
+      archivedCases,
+      journal: readAutoExecutionJournal(),
+    }));
+  } catch (error) {
+    res.status(500).json({ error: `售后分支历史读取失败: ${error.message}` });
+  }
 });
 
 router.post('/auto-exec-confidence/recalculate', (req, res) => {
-  const data = confidence.recalculate();
-  const count = Object.keys(data.scenes).length;
-  res.json({ ok: true, scenes: count });
+  res.status(410).json({ error: '旧置信重算已停用；当前分支统计会在读取时按最近30天实时计算' });
 });
 
 // ── Action Dismiss ────────────────────────────────────────────────
