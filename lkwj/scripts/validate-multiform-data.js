@@ -59,7 +59,7 @@ if (!dreamTask
 }
 
 const moleForms = formKeysForTask(pets.pet_279 || {});
-for (const wrongForm of ['单只海葵的样子', '（双只海葵的样子）']) {
+for (const wrongForm of ['单只海葵的样子', '双只海葵的样子']) {
   if (moleForms.includes(wrongForm)) {
     errors.push(`pet_279 遁地鼠: must not contain 加油蟹 form ${wrongForm}`);
   }

@@ -34,7 +34,7 @@ const checks = [
   ['current 38 shiny finals expand to 39 collection entries', shinyFinals.length === 38 && shinyEntries.length === 39],
   ['加油蟹 has exactly two form-level shiny keys and no basic entry', !shinyEntries.includes('pet_361')
     && shinyEntries.includes('pet_361::单只海葵的样子')
-    && shinyEntries.includes('pet_361::（双只海葵的样子）')
+    && shinyEntries.includes('pet_361::双只海葵的样子')
     && shinyEntries.filter(key => key.startsWith('pet_361')).length === 2],
 ];
 

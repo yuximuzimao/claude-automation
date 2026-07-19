@@ -25,6 +25,7 @@
 - 对象 key 使用 `pet_N`。
 - `element` 必须是数组，双元素使用两个完整名称。
 - `forms` 表示同一物种的外观变体，不表示进化阶段。
+- `formKey` 与 `formName` 使用干净的正式形态名称，不额外包裹用于说明或分组的括号；只有官方名称本身包含括号时才保留。
 - 推荐形态键：`basic`、`spring`、`summer`、`autumn`、`winter`、`molting`、`leader`、`variant_N`。
 - `tags` 保存 `shiny`（异色）、`chromatic`（炫彩）和 `boss`（首领）。标签与形态独立，可以共存。
 - `obtainMethods` 只写直接获取方式，禁止写“由某精灵进化”。进化来源只写入 `evolution-chains.json`。
