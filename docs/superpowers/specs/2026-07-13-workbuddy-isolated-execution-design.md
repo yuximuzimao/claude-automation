@@ -22,7 +22,7 @@ Codex 负责创建真实隔离分支、生成最小投影、启动本地看门�
 ```text
 用户任务
   -> Codex 检查源分支干净、记录 base SHA
-  -> Codex 在 /private/tmp 创建真实 integration worktree（仅 Codex 可用）
+  -> Codex 在 /private/tmp/codex-workbuddy/<run-id>/integration/repo 创建真实 integration worktree（仅 Codex 可用）
   -> Codex 从 allowlist 生成最小 projection；源仓库 .git 不复制，临时 baseline 元数据对 WorkBuddy 不可见
   -> WorkBuddy 只改 projection，不能运行 Bash、Git、浏览器、MCP 或子代理
   -> 本地 watchdog 写状态与补丁，不轮询 Codex
@@ -42,9 +42,9 @@ Codex 负责创建真实隔离分支、生成最小投影、启动本地看门�
 
 ### CLI 宿主进程是最小可信计算基
 
-本机 WorkBuddy CLI 必须使用真实 `HOME=/Users/chat` 才能读取已有登录状态。包装器会以 `env -i` 清空父进程环境，只保留 `HOME`、Node 所需 `PATH`、`TMPDIR`、语言环境和本次显式安全变量；不会把调用 Codex 的 token、代理、云账号或其他环境变量传入。
+本机 WorkBuddy CLI 必须使用真实 `HOME=/Users/chat` 才能读取已有登录状态。包装器以显式最小环境启动，只保留 `HOME`、Node 所需 `PATH`、`TMPDIR`、语言环境和本次显式安全变量；不会把调用 Codex 的 token、代理、云账号或其他环境变量传入。
 
-这不等于 WorkBuddy 二进制本身获得了“零权限”。任何以用户身份运行的第三方桌面 CLI 都属于可信计算基。若未来要把这个边界再降低到“即使 WorkBuddy 二进制被攻陷也不能读 Home”，必须使用独立 macOS 用户或外部容器；这不在本 Skill 中自动创建或修改。
+这不等于 WorkBuddy 二进制本身获得了“零权限”。任何以用户身份运行的第三方桌面 CLI 都属于可信计算基。实测中，强制拒绝主用户 `HOME` 的 `sandbox-exec` 配置会使已登录 WorkBuddy 的认证路径失效，因此不能把干净工具清单表述成进程级安全证明。涉及密钥、客户原始数据、生产系统或无法承受同用户进程风险的任务，必须使用独立 macOS 用户或虚拟机，并在其中单独登录 WorkBuddy；这不在本 Skill 中自动创建或修改。
 
 模型层的实际能力由最小投影、无 Bash、严格工具白名单、空 MCP、关闭插件和路径权限共同约束。
 
@@ -54,8 +54,8 @@ Codex 负责创建真实隔离分支、生成最小投影、启动本地看门�
 
 | 目录 | 内容 | 可访问者 |
 | --- | --- | --- |
-| `/private/tmp/codex-workbuddy/integrations/<run-id>/repo` | 完整 Git integration worktree、真实分支和最终测试环境 | 仅 Codex |
-| `/private/tmp/codex-workbuddy/projections/<run-id>/workspace` | 本次 allowlist 内的 Git 已跟踪文件、选定的项目 `AGENTS.md`、临时 baseline Git 元数据 | WorkBuddy 仅能通过受限工具访问 |
+| `/private/tmp/codex-workbuddy/<run-id>/integration/repo` | 完整 Git integration worktree、真实分支和最终测试环境 | 仅 Codex |
+| `/private/tmp/codex-workbuddy/<run-id>/projection/workspace` | 本次 allowlist 内的 Git 已跟踪文件、选定的项目 `AGENTS.md`、临时 baseline Git 元数据 | WorkBuddy 仅能通过受限工具访问 |
 
 两个目录都是在 `/private/tmp` 下新建，父目录由包装器创建且不含 `AGENTS.md`。因此 WorkBuddy 不会继承 `/Users/chat/AGENTS.md` 或主工作区的其他祖先规则。
 
@@ -63,17 +63,18 @@ Codex 负责创建真实隔离分支、生成最小投影、启动本地看门�
 
 每份派工单必须有两个相对路径 allowlist：
 
-- `read_paths`：WorkBuddy 可以读取的文件或目录。
-- `write_paths`：WorkBuddy 可以改动或新建的文件或目录；它必须是 `read_paths` 的子集。
+- `readPaths`：WorkBuddy 可以读取的文件或目录。
+- `writePaths`：WorkBuddy 可以改动或新建的文件或目录；它必须是 `readPaths` 的子集。
 
 Codex 在启动前执行以下规则：
 
 1. 将路径规范化，拒绝绝对路径、`..`、空路径和符号链接。
 2. 只从 `git ls-files` 取 Git 已跟踪文件；不复制未跟踪、忽略或 Home 文件。
 3. 永远排除 `.git`、`.mcp.json`、`.codebuddy/`、`.env`、密钥和认证文件；即使路径被误写入 allowlist 也拒绝任务。
-4. 默认复制目标项目中位于 `read_paths` 内的 `AGENTS.md` / `AGENTS.mdc`，以保留项目编码约定；这些规则文件永远不在 `write_paths` 中。
-5. 不复制其他工作区级文件、父目录规则、WorkBuddy 设置、插件、会话、记忆或依赖缓存。
-6. 若任务需要符号链接、子模块、未跟踪生成物、额外依赖或未列入范围的文件，停止自动委派，改由 Codex 处理或让用户扩展 allowlist。
+4. 当前账户的 manifest 必须明确写入 `dataClassification: "non_sensitive"`；缺失或 `sensitive` 一律在投影前拒绝。选中的文本和最终补丁还会经过疑似凭据扫描，但扫描只是一层补充，不能把敏感任务视为安全。
+5. 默认复制目标项目中位于 `readPaths` 内的 `AGENTS.md` / `AGENTS.mdc`，以保留项目编码约定；这些规则文件永远不在 `writePaths` 中。
+6. 不复制其他工作区级文件、父目录规则、WorkBuddy 设置、插件、会话、记忆或依赖缓存。
+7. 若任务需要符号链接、子模块、未跟踪生成物、额外依赖或未列入范围的文件，停止自动委派，改由 Codex 处理或让用户扩展 allowlist。
 
 投影目录内会由 Codex 建一个临时 baseline Git 提交，只用于生成二进制安全补丁。WorkBuddy 没有 Bash 和 Git 工具，且其权限明确拒绝读取或写入 `.git`。
 
@@ -81,7 +82,7 @@ Codex 在启动前执行以下规则：
 
 WorkBuddy 结束后，Codex：
 
-1. 检查投影的变更路径全部属于 `write_paths`，并拒绝所有异常新增、删除、重命名、符号链接和 Git 元数据变更。
+1. 检查投影的变更路径全部属于 `writePaths`，并拒绝所有异常新增、删除、重命名、符号链接和 Git 元数据变更。
 2. 从投影 baseline 导出 `patch.diff`；新文件先以 intent-to-add 纳入补丁。
 3. 对真实 integration worktree 执行 `git apply --check --whitespace=error`，成功后才应用。
 4. 再次检查 integration worktree 的 diff 范围、`git diff --check`、任务验收测试和人工代码审阅。
@@ -102,8 +103,8 @@ Read, Grep, Glob, Write, Edit, MultiEdit
 
 临时权限配置按 `pwd -P` 得到的物理 projection 路径生成：
 
-- `Read`、`Grep`、`Glob` 只允许 `read_paths` 对应的物理路径。
-- `Write`、`Edit`、`MultiEdit` 分别只允许 `write_paths` 对应的物理路径。
+- `Read`、`Grep`、`Glob` 只允许 `readPaths` 对应的物理路径。
+- `Write`、`Edit`、`MultiEdit` 分别只允许 `writePaths` 对应的物理路径。
 - 显式拒绝 `.git`、`.env`、密钥、Home、WorkBuddy 配置、AGENTS 写入和投影外的所有路径。
 - 不使用泛化 `Write` 规则，也不使用 `--allowedTools Write`，因为它们实测会扩大为目录外写权限。
 
@@ -132,7 +133,7 @@ Read, Grep, Glob, Write, Edit, MultiEdit
 ### 允许委派
 
 - 多文件功能、跨模块缺陷修复、已有明确验收点的重构。
-- Codex 能在任务开始前列出最小 `read_paths`、`write_paths`，并能明确最终验证命令。
+- Codex 能在任务开始前列出最小 `readPaths`、`writePaths`，并能明确最终验证命令。
 
 ### 不允许委派
 
@@ -144,11 +145,12 @@ Read, Grep, Glob, Write, Edit, MultiEdit
 
 每份派工单必须包含：
 
-1. 仓库、base SHA、integration 分支与 projection 路径。
-2. `read_paths`、`write_paths`、允许新增文件名和明确禁止范围。
+1. 仓库、`baseRef`（派发时记录为 base SHA）、integration 分支与 projection 路径。
+2. `readPaths`、`writePaths`、允许新增文件名和明确禁止范围。
 3. 任务目标、关键接口、完成标准与项目 `AGENTS.md` 是否纳入。
-4. 不联网、不浏览器、不 MCP、不 Bash、不 Git、不新增依赖、不读密钥、不触及业务系统。
-5. Codex 的最终验证命令和合并门槛。
+4. `dataClassification: "non_sensitive"`；敏感或不确定任务在当前账户直接拒绝。
+5. 不联网、不浏览器、不 MCP、不 Bash、不 Git、不新增依赖、不读密钥、不触及业务系统。
+6. Codex 的最终验证命令和合并门槛。
 
 ## 看门狗与状态
 
@@ -158,25 +160,25 @@ Read, Grep, Glob, Write, Edit, MultiEdit
 - `policy.json`、`mcp-empty.json`、`prompt.md`：每次生成的会话材料。
 - `output.jsonl`、`stderr.log`：CLI 输出。
 - `status.json`：`running`、`stalled`、`finished`、`failed` 或 `cancelled`。
-- `watchdog.log`：进程、日志长度、输出时间和 projection diff 的采样摘要。
+- `status.json` 内的 `observations`：进程、日志长度、输出时间和 projection diff 的低频采样摘要；不单独创建 `watchdog.log`。
 - `patch.diff`：导入前的完整补丁。
 
-看门狗是本地后台进程，不会让 Codex 每分钟轮询。它只按以下节奏采样并在满足“进程存活但日志、输出和 diff 都持续无活动”时终止：
+看门狗是本地后台进程，不会让 Codex 每分钟轮询。免费模型的长时间静默可能只是排队，因此它只按以下节奏采样；到达长队列阈值只写入 `slow_or_queued`，**不会**自动终止或重试：
 
-| 任务类型 | 首次建议查看 | 后续建议查看 | 本地采样 | 卡死阈值 |
+| 任务类型 | 首次建议查看 | 后续建议查看 | 本地采样 | 长队列提示 |
 | --- | ---: | ---: | ---: | ---: |
-| 中型（3–8 文件） | 18 分钟 | 每 25 分钟 | 10 分钟 | 两次无活动且累计 40 分钟 |
-| 大型（跨层/9–20 文件） | 28 分钟 | 每 40 分钟 | 15 分钟 | 两次无活动且累计 60 分钟 |
-| 超大任务 | 必须拆分 | 按大型子任务 | 15 分钟 | 同上 |
+| 中型（3–8 文件） | 30 分钟 | 每 45 分钟 | 15 分钟 | 120 分钟后仅标记长队列 |
+| 大型（跨层/9–20 文件） | 45 分钟 | 每 60 分钟 | 20 分钟 | 180 分钟后仅标记长队列 |
+| 超大任务 | 必须拆分 | 按大型子任务 | 20 分钟 | 同上 |
 
-Codex 不能在没有会话时主动唤醒自己，因此 `next_check_at` 是“用户下一次询问或本会话继续时的最低检查时点”，不是承诺自动发消息。用户随时说“看 WorkBuddy 状态”都能读取状态；不满一分钟时只返回最近一次本地采样，不触发额外轮询。
+Codex 不能在没有会话时主动唤醒自己，因此 `nextCheckAt` 是“用户下一次询问或本会话继续时的最低检查时点”，不是承诺自动发消息。用户随时说“看 WorkBuddy 状态”都能读取状态；不满一分钟时只返回 `status.json` 中最后一条本地采样，不触发额外轮询。
 
 ## Codex 验收、合并与回档
 
 只有全部通过才能合并：
 
 1. 目标分支干净，且仍停在记录的 base SHA。
-2. 投影补丁和 integration diff 都只改 `write_paths`；没有设置、密钥、浏览器、MCP、依赖或锁文件的意外变化。
+2. 投影补丁和 integration diff 都只改 `writePaths`；没有设置、密钥、浏览器、MCP、依赖或锁文件的意外变化。
 3. `git diff --check`、补丁应用检查和指定测试全部通过。
 4. Codex 完成 diff 审阅，确认实现与目标一致；没有测试时只能交付补丁，不能自动合并。
 5. Codex 在 integration 分支创建提交，再在目标分支执行 `git merge --no-ff`。
@@ -189,15 +191,15 @@ Codex 不能在没有会话时主动唤醒自己，因此 `next_check_at` 是“
 git revert -m 1 <merge-commit>
 ```
 
-默认保留分支、worktree 和状态 14 天；不自动删除 Git 分支或工作目录，除非用户明确要求。
+不自动删除分支、worktree、状态或补丁；保留多久与何时清理均由用户明确决定。
 
 ## 完成标准
 
 1. 自然语言请求能创建一个最小投影 WorkBuddy 任务。
-2. 每次任务都有独立 `read_paths` / `write_paths`，且投影不含主工作区的其他文件。
+2. 每次任务都有独立 `readPaths` / `writePaths`，且投影不含主工作区的其他文件。
 3. WorkBuddy 能看到选定的项目 `AGENTS.md`，但不能继承 `/Users/chat` 父目录规则或其他工作区内容。
 4. WorkBuddy 不能调用浏览器、网页、MCP、桌面、插件、子代理、工作流、Bash 或 Git。
-5. WorkBuddy 只能在 projection 的允许路径读写；无法写入 Home 的受控探针。
-6. 看门狗按任务量采样，不会出现 Codex 每分钟查一次的行为。
+5. WorkBuddy 只能在 projection 的允许路径读写；已验证投影外受控探针被拒绝，但这不取代同一 macOS 用户下必须遵守的严格模式边界。
+6. 看门狗按任务量低频采样，不会出现 Codex 每分钟查一次、因长队列自动终止或自动重试的行为。
 7. 只有 Codex 能把已验证补丁导入、提交和合并；失败任务绝不影响目标分支。
 8. 每次合并能由记录的 merge commit 和 patch 回档。

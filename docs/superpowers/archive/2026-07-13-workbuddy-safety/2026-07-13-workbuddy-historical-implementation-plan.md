@@ -1,5 +1,7 @@
 # WorkBuddy 最小投影执行 Skill Implementation Plan
 
+> **归档于 2026-07-13：仅供追溯。** 此计划记录了最初的 TDD 过程，包含已废弃的看门狗阈值、测试注入和实现草稿；不得执行其中的命令或把它当作当前规则。请改读 `docs/superpowers/README.md` 与个人 Skill。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 在 Codex 个人 Skill 中提供一个可测试的 WorkBuddy 派工流程：模型只能编辑一次性最小文件投影，Codex 才能把通过验收的补丁导入、提交和合并。
@@ -32,6 +34,12 @@
 | `tests/watchdog-status.test.mjs` | 10/15 分钟采样、40/60 分钟卡死阈值与无一分钟轮询测试。 |
 
 用户级 Skill 目录不是 Git 仓库；实施时**不初始化仓库、不提交、不 push**。设计与实现计划已经在 `/Users/chat/claude` 的 Git 仓库留有审计提交。
+
+## 实施后安全修订（以最终 Skill 为准）
+
+本计划中的逐步示例记录了最初的 TDD 过程；其中旧的 `18 / 25 / 10 / 40` 与 `28 / 40 / 15 / 60` 看门狗数字已经被免费模型长队列实测推翻，不得照搬。最终固定为：中型任务 `30 / 45 / 15 / 120` 分钟、大型任务 `45 / 60 / 20 / 180` 分钟（首次检查 / 后续检查 / 本地采样 / 长队列提示）。静默只标记 `slow_or_queued`，不会自动终止或重试。
+
+同一 macOS 用户下的最小投影模式只适用于无敏感数据的普通代码任务；涉及密钥、客户原始数据或生产系统时，最终 Skill 要求独立 macOS 用户或虚拟机，不能把工具白名单当成原生进程隔离证明。
 
 ### Manifest 合同
 
