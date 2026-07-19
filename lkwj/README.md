@@ -50,7 +50,7 @@ http://localhost:8899/review.html
 - `collections.json` 保存用户勾选进度，包括 `sprite_progress[petKey].forms_collected` 和 `fruit_acquired`。
 - `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。精灵任务行提供“去多形态”跳转，会自动筛选、展开并定位对应精灵。
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
-- `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。所有异色多形态精灵自动拆成默认外观和各形态；默认键为 `petKey`，形态键为 `petKey::formKey`。
+- `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。异色多形态精灵只按实际可收集形态拆分，`basic` 不额外计数；无额外形态时使用 `petKey`，形态项使用 `petKey::formKey`。旧多形态 `petKey` 进度需人工确认后迁移。
 - 异色页沿用现有赛季筛选：S3 常驻/奇遇使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
 - 精灵、多形态、遗迹和服装套装在搜索与其他筛选后只剩一个卡片时自动展开；多结果保持折叠。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
@@ -92,7 +92,7 @@ http://localhost:8899/review.html
 | 通用品类收集项 | 0 |
 | 有额外形态的精灵 | 52 |
 | 异色最终形态标签 | 38 |
-| 异色收集项（含形态拆分） | 40 |
+| 异色收集项（含形态拆分） | 39 |
 | 首领形态 | 27 |
 | 进化链 | 165 |
 

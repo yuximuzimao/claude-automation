@@ -42,8 +42,8 @@
 - 异色页只展示进化链终点；直线进化展示最终形态，分支进化的每个最终分支分别展示。基础形态和中间形态不单独列出。
 - `capture_shiny` 只在官方课题资料明确存在“异色”任务时录入，并固定挂在对应的最终进化物种上。不能因为某精灵存在异色外观就自动生成任务。
 - 通行证异色只有独立异色收集项，没有 `capture_shiny` 任务；以后仍以官方课题资料为准，不能自行补任务。
-- 多形态精灵在异色页必须自动拆开：默认外观作为一项，每个非 `basic`、非 `leader` 的可收集形态各作为一项。特殊形态不复制课题任务，只增加独立的异色收集进度。
-- 普通异色进度键沿用 `petKey`；形态级异色进度键使用 `petKey::formKey`。该规则保证旧进度仍对应默认外观，新形态可以分别勾选。
+- 多形态精灵在异色页必须自动拆开：只展示每个非 `basic`、非 `leader` 的实际可收集形态，不再额外增加一个“默认外观”。`basic` 是数据占位，不是第三种形态。没有额外形态的精灵才使用默认外观这一项。
+- 无额外形态的普通异色进度键沿用 `petKey`；形态级异色进度键使用 `petKey::formKey`。旧结构中多形态精灵遗留的 `petKey` 进度无法判断具体形态，必须保留待人工确认，不能自动分配给任一形态。
 - `shiny_progress` 与任务完成状态无关；完成 `capture_shiny` 不会自动勾选异色收集，勾选异色收集也不会自动完成课题。
 
 `tags.shiny.limitedTime` 同时承担异色页的赛季/来源筛选标签，沿用现有分类体系，不新增平行字段：
@@ -89,7 +89,7 @@ Excel 合并单元格可能导致编号列错位。解析时必须以精灵名�
 - `sprite_progress[petKey].tasks`：课题完成状态。
 - `sprite_progress[petKey].forms_collected`：完整形态收集状态。
 - `sprite_progress[petKey].fruit_acquired`：果实是否获得。
-- `shiny_progress`：异色收集状态，不由任务状态驱动。默认外观使用 `petKey`，形态级异色使用 `petKey::formKey`。
+- `shiny_progress`：异色收集状态，不由任务状态驱动。无额外形态时使用 `petKey`；存在实际可收集形态时，每个形态使用 `petKey::formKey`，不额外创建 `basic` 收集项。
 - `furniture_progress`：家具是否收集。
 - `clothing_progress`：服装标准部件是否收集。
 - `title_progress`：称号是否收集。

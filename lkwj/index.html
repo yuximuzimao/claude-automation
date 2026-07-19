@@ -1203,10 +1203,7 @@ function getShinyProgressKey(petKey, formKey) {
 function getShinyFormEntries(petKey, pet) {
   const variants = getCollectibleFormEntries(petKey);
   if (!variants.length) return [{ petKey, pet, formKey: 'basic', formName: '' }];
-  return [
-    { petKey, pet, formKey: 'basic', formName: '' },
-    ...variants.map(entry => ({ ...entry, formName: entry.form.formName || entry.formKey })),
-  ];
+  return variants.map(entry => ({ ...entry, formName: entry.form.formName || entry.formKey }));
 }
 
 function getShinyList() {
