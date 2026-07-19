@@ -14,3 +14,4 @@
 | 洛克王国收集助手 | 洛克、洛克助手、收集助手 | `lkwj/` |
 | 抖音健身视频处理 | 健身视频、训练计划 | `douyin-workout/` |
 | Codex Monitor | 用量统计、额度监控 | `codex-monitor/` |
+| 订单审核系统 | 审单、订单审核 | `order-review/` |
