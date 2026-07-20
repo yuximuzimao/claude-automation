@@ -77,7 +77,7 @@
 - 支持的主要类型：`capture`、`capture_gifted`、`capture_chromatic`、`capture_shiny`、`fruit`、`skill`、`evolve`、`leader_evolve`、`destined_hero`、`affection`、`confirm_forms`。
 - `capture_chromatic` 表示炫彩突变捕捉；`capture_shiny` 对应课题表中的异色行，两者不能混用。
 - `fruit` 表示“捕捉指定数量获得果实”的课题任务。是否存在该任务只以 `课题进度` 为准，不能从果实图鉴反向生成。
-- `confirm_forms.requiredForms` 只表示课题计入形态；完整形态收集由 `forms_collected` 独立维护。
+- `confirm_forms.requiredForms` 是课题允许计入的形态候选池，`count` 是完成阈值；`requiredForms.length` 可以大于 `count`，表示候选池中任选 `count` 个。完整形态收集由 `forms_collected` 独立维护。
 - `destined_hero`、`fruit`、`confirm_forms` 不进入随机任务池。
 
 ### Excel 分组规则

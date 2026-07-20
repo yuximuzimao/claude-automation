@@ -79,7 +79,7 @@ lkwj/
 - 异色页只展示进化链最终形态；分支进化的每个最终分支分别展示。`capture_shiny` 只按官方课题资料挂在最终形态，不能从 `tags.shiny` 自动生成。
 - 通行证异色只有异色收集项，没有 `capture_shiny` 任务；S3 正式赛季标签使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
 - 所有带异色标签的多形态精灵都在异色页只拆分实际可收集形态，`basic` 不额外计数；无额外形态时进度键为 `petKey`，形态进度键为 `petKey::formKey`。旧多形态 `petKey` 进度必须人工确认后迁移。
-- `confirm_forms.requiredForms` 只表示课题计入形态；完整形态收集使用 `forms_collected`。
+- `confirm_forms.requiredForms` 是课题允许计入的形态候选池，`count` 是完成阈值；候选池可以大于 `count`（例如四种地区形态任选三种）。完整形态收集仍使用 `forms_collected`。
 - 获取方式只写直接来源，禁止写“由某精灵进化”。
 - 官方家族介绍图只允许先录入编号、名称、元素、家族顺序、明确来源和异色存在性；箭头不能推断进化等级，技能介绍不能生成课题。未知课题保留空数组，未知进化条件使用 `unknown`。
 - 图片中多个“样子/形态”属于同一物种的 `forms`，不得按立绘数量新建精灵；只有独立正式名称并由进化/分支箭头连接时才建立多个物种。多批图片必须全部处理完后才能读取 Excel 补任务和编号。
@@ -113,9 +113,9 @@ lkwj/
 ## 验证速查
 
 ```bash
-node scripts/validate-s3-partial-pets.js
-node scripts/validate-s3-image-batch2.js
-node scripts/validate-s3-image-batch3.js
+python3 scripts/read-latest-excel.py
+python3 scripts/audit-latest-excel.py
+node scripts/validate-s3-excel-sync.js
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-shiny-ui.js

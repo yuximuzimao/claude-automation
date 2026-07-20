@@ -26,8 +26,8 @@ for (const [petKey, taskList] of Object.entries(tasks)) {
       continue;
     }
 
-    if (task.requiredForms.length !== task.count) {
-      errors.push(`${petKey} ${pet.name}: requiredForms length ${task.requiredForms.length} != count ${task.count}`);
+    if (task.requiredForms.length < task.count) {
+      errors.push(`${petKey} ${pet.name}: requiredForms length ${task.requiredForms.length} < count ${task.count}`);
     }
 
     for (const formKey of task.requiredForms) {
@@ -58,6 +58,27 @@ if (!dreamTask
   errors.push('pet_58 梦悠悠: confirm_forms task must require both pajama forms');
 }
 
+const dreamBaseForms = formKeysForTask(pets.pet_57 || {});
+const dreamBaseTask = (tasks.pet_57 || []).find((task) => task.type === 'confirm_forms');
+if (JSON.stringify(dreamBaseForms) !== JSON.stringify(['穿旧睡衣的样子', '穿星星睡衣的样子'])
+  || !dreamBaseTask
+  || dreamBaseTask.count !== 2
+  || JSON.stringify(dreamBaseTask.requiredForms) !== JSON.stringify(dreamBaseForms)) {
+  errors.push('pet_57 梦游: must contain both pajama forms and a count-2 confirm_forms task');
+}
+
+const regionalForms = ['沙地附近的样子', '草地附近的样子', '雪山附近的样子', '火山附近的样子'];
+for (const petKey of ['pet_44', 'pet_45', 'pet_46']) {
+  const formKeys = formKeysForTask(pets[petKey] || {});
+  const formTask = (tasks[petKey] || []).find((task) => task.type === 'confirm_forms');
+  if (JSON.stringify(formKeys) !== JSON.stringify(regionalForms)
+    || !formTask
+    || formTask.count !== 3
+    || JSON.stringify(formTask.requiredForms) !== JSON.stringify(regionalForms)) {
+    errors.push(`${petKey}: must support any 3 of the 4 regional forms`);
+  }
+}
+
 const moleForms = formKeysForTask(pets.pet_279 || {});
 for (const wrongForm of ['单只海葵的样子', '双只海葵的样子']) {
   if (moleForms.includes(wrongForm)) {
@@ -66,8 +87,12 @@ for (const wrongForm of ['单只海葵的样子', '双只海葵的样子']) {
 }
 
 const moleTask = (tasks.pet_279 || []).find((task) => task.type === 'confirm_forms');
-if (!moleTask || JSON.stringify(moleTask.requiredForms) !== JSON.stringify(['储水时的样子', '枯水期的样子'])) {
-  errors.push('pet_279 遁地鼠: requiredForms must be 储水时的样子 + 枯水期的样子');
+const expectedMoleForms = ['储水时的样子', '枯水期的样子'];
+if (!moleTask
+  || moleTask.count !== 2
+  || moleTask.requiredForms.length !== 2
+  || expectedMoleForms.some((formKey) => !moleTask.requiredForms.includes(formKey))) {
+  errors.push('pet_279 遁地鼠: requiredForms must contain 储水时的样子 + 枯水期的样子');
 }
 
 const coneSweetForms = formKeysForTask(pets.pet_234 || {});

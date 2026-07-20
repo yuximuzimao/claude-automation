@@ -27,6 +27,10 @@
       "skillName": "光刃",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_2": [
@@ -842,10 +846,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -866,6 +866,14 @@
       "skillName": "暗箱操作",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_32": [
@@ -971,10 +979,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
     },
@@ -993,6 +997,10 @@
       "skillName": "彗星",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_36": [
@@ -1242,7 +1250,8 @@
       "requiredForms": [
         "沙地附近的样子",
         "草地附近的样子",
-        "雪山附近的样子"
+        "雪山附近的样子",
+        "火山附近的样子"
       ]
     }
   ],
@@ -1269,7 +1278,8 @@
       "requiredForms": [
         "沙地附近的样子",
         "草地附近的样子",
-        "雪山附近的样子"
+        "雪山附近的样子",
+        "火山附近的样子"
       ]
     }
   ],
@@ -1293,7 +1303,8 @@
       "requiredForms": [
         "沙地附近的样子",
         "草地附近的样子",
-        "雪山附近的样子"
+        "雪山附近的样子",
+        "火山附近的样子"
       ]
     },
     {
@@ -1493,10 +1504,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -1517,6 +1524,10 @@
       "skillName": "剧毒",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_54": [
@@ -1562,6 +1573,55 @@
       ]
     }
   ],
+  "pet_56": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "confirm_forms",
+      "count": 2,
+      "desc": "确认2种不同样子的幽灵眼",
+      "requiredForms": [
+        "闭眼的样子",
+        "睁眼的样子"
+      ]
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "背袭",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "嘲弄",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "降灵",
+      "count": 3,
+      "desc": "使用"
+    }
+  ],
   "pet_57": [
     {
       "type": "capture",
@@ -1576,6 +1636,15 @@
       "desc": "成功进化一次",
       "obtainMethods": [
         "32级进化"
+      ]
+    },
+    {
+      "type": "confirm_forms",
+      "count": 2,
+      "desc": "确认2种不同样子的梦游",
+      "requiredForms": [
+        "穿旧睡衣的样子",
+        "穿星星睡衣的样子"
       ]
     }
   ],
@@ -1597,15 +1666,6 @@
       "desc": "捕捉20只精灵"
     },
     {
-      "type": "confirm_forms",
-      "count": 2,
-      "desc": "确认2种不同样子的梦悠悠",
-      "requiredForms": [
-        "穿旧睡衣的样子",
-        "穿星星睡衣的样子"
-      ]
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -1620,6 +1680,15 @@
       "skillName": "幽灵爆发",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "confirm_forms",
+      "count": 2,
+      "desc": "确认2种不同样子的梦悠悠",
+      "requiredForms": [
+        "穿旧睡衣的样子",
+        "穿星星睡衣的样子"
+      ]
     }
   ],
   "pet_59": [
@@ -2019,6 +2088,10 @@
       "skillName": "纤维化",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_73": [
@@ -2188,6 +2261,10 @@
       "skillName": "涌泉",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_79": [
@@ -2202,10 +2279,6 @@
     {
       "type": "capture_chromatic",
       "desc": "捕捉1只炫彩突变的"
-    },
-    {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
     },
     {
       "type": "fruit",
@@ -2226,6 +2299,10 @@
       "skillName": "击鼓传花",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_80": [
@@ -2433,10 +2510,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -2457,6 +2530,10 @@
       "skillName": "黑手",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_88": [
@@ -2512,10 +2589,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用翠顶夫人、黑羽夫人其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -2545,10 +2619,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用翠顶夫人、黑羽夫人其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -2836,6 +2907,10 @@
       "skillName": "网缚",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_102": [
@@ -3234,10 +3309,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
     },
@@ -3256,6 +3327,10 @@
       "skillName": "漫反射",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_118": [
@@ -3357,6 +3432,10 @@
       "skillName": "聒噪",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_121": [
@@ -4092,10 +4171,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -4116,6 +4191,10 @@
       "skillName": "易燃物质",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_150": [
@@ -4392,10 +4471,6 @@
       "desc": "捕捉1只炫彩突变的"
     },
     {
-      "type": "capture_shiny",
-      "desc": "捕捉1只异色突变的精灵"
-    },
-    {
       "type": "destined_hero",
       "desc": "获得命定勇者奖牌"
     },
@@ -4416,6 +4491,10 @@
       "skillName": "天旋地转",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_163": [
@@ -4665,7 +4744,7 @@
       "count": 2,
       "desc": "确认2种不同样子的波波螺",
       "requiredForms": [
-        "（本来的样子）",
+        "本来的样子",
         "被污染的样子"
       ]
     }
@@ -4691,7 +4770,7 @@
       "count": 2,
       "desc": "确认2种不同样子的消波螺",
       "requiredForms": [
-        "（本来的样子）",
+        "本来的样子",
         "被污染的样子"
       ]
     }
@@ -4714,7 +4793,7 @@
       "count": 2,
       "desc": "确认2种不同样子的嗜波螺",
       "requiredForms": [
-        "（本来的样子）",
+        "本来的样子",
         "被污染的样子"
       ]
     },
@@ -4862,6 +4941,10 @@
       "skillName": "风起",
       "count": 3,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_179": [
@@ -5151,10 +5234,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用棋骑士、棋齐垒、棋祈督、棋绮后其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "leader_evolve",
@@ -5197,10 +5277,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用棋骑士、棋齐垒、棋祈督、棋绮后其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "leader_evolve",
@@ -5243,10 +5320,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用棋骑士、棋齐垒、棋祈督、棋绮后其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "leader_evolve",
@@ -5295,10 +5369,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用棋骑士、棋齐垒、棋祈督、棋绮后其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "leader_evolve",
@@ -5693,6 +5764,10 @@
       "skillName": "飞踢",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_207": [
@@ -6409,6 +6484,10 @@
     {
       "type": "leader_evolve",
       "desc": "使用进化之力，将精灵进化为首领"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_234": [
@@ -6449,7 +6528,7 @@
       "count": 3,
       "desc": "确认3种不同样子的香草甜甜",
       "requiredForms": [
-        "（樱桃饰品）",
+        "樱桃饰品",
         "杨桃饰品",
         "蓝莓饰品"
       ]
@@ -6473,7 +6552,7 @@
       "count": 9,
       "desc": "确认9种不同样子的圣代甜甜",
       "requiredForms": [
-        "（樱桃巧克力口味）",
+        "樱桃巧克力口味",
         "樱桃草莓口味",
         "樱桃抹茶口味",
         "杨桃巧克力口味",
@@ -6652,6 +6731,10 @@
       "skillName": "天洪",
       "count": 3,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_242": [
@@ -7247,7 +7330,7 @@
     },
     {
       "type": "skill",
-      "skillName": "轴支撑",
+      "skillName": "轴承支撑",
       "count": 2,
       "desc": "使用"
     }
@@ -7305,10 +7388,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用绅士鸡、武者鸡其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -7321,6 +7401,10 @@
       "skillName": "流火",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_269": [
@@ -7338,10 +7422,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用绅士鸡、武者鸡其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -7354,6 +7435,10 @@
       "skillName": "闪燃",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_270": [
@@ -7615,8 +7700,8 @@
       "count": 2,
       "desc": "确认2种不同样子的遁地鼠",
       "requiredForms": [
-        "储水时的样子",
-        "枯水期的样子"
+        "枯水期的样子",
+        "储水时的样子"
       ]
     },
     {
@@ -7644,6 +7729,10 @@
       "skillName": "裂石",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
     }
   ],
   "pet_280": [
@@ -7678,10 +7767,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用混乱鱿彩、秩序鱿墨其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -7711,10 +7797,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用混乱鱿彩、秩序鱿墨其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -7886,6 +7969,10 @@
       "skillName": "疾风刺",
       "count": 2,
       "desc": "使用"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_289": [
@@ -7981,7 +8068,7 @@
     },
     {
       "type": "skill",
-      "skillName": "毒针",
+      "skillName": "连续毒针",
       "count": 2,
       "desc": "使用"
     },
@@ -8098,10 +8185,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用捕尘长绒、食尘短绒其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8131,10 +8215,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用捕尘长绒、食尘短绒其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8202,10 +8283,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用画间法师手、画间沉铁兽其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8241,10 +8319,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用画间法师手、画间沉铁兽其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8318,10 +8393,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用古卷执政官、古卷匣魔像其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8351,10 +8423,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用古卷执政官、古卷匣魔像其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8529,10 +8598,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用抹茶布丁、椰浆布丁、熔岩布丁其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8562,10 +8628,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用抹茶布丁、椰浆布丁、熔岩布丁其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8595,10 +8658,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用抹茶布丁、椰浆布丁、熔岩布丁其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -8954,6 +9014,10 @@
       "skillName": "灵光",
       "count": 1,
       "desc": "使用"
+    },
+    {
+      "type": "leader_evolve",
+      "desc": "使用进化之力，将精灵进化为首领"
     }
   ],
   "pet_330": [
@@ -9117,10 +9181,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用粉耳星兔、落陨星兔其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -9154,10 +9215,7 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得命定勇者奖牌",
-      "obtainMethods": [
-        "用粉耳星兔、落陨星兔其中一种获得「命定勇者」奖牌即可完成"
-      ]
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
@@ -9208,7 +9266,7 @@
     },
     {
       "type": "skill",
-      "skillName": "子对撞",
+      "skillName": "粒子对撞",
       "count": 1,
       "desc": "使用"
     },
@@ -9462,6 +9520,40 @@
       "desc": "使用"
     }
   ],
+  "pet_351": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "28级+精灵成长至1星进化"
+      ]
+    }
+  ],
+  "pet_352": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级+精灵成长至2星进化"
+      ]
+    }
+  ],
   "pet_353": [
     {
       "type": "capture",
@@ -9477,19 +9569,19 @@
     },
     {
       "type": "destined_hero",
-      "desc": "获得「命定勇者」奖牌"
+      "desc": "获得命定勇者奖牌"
     },
     {
       "type": "skill",
-      "desc": "使用",
       "skillName": "飞箭",
-      "count": 2
+      "count": 2,
+      "desc": "使用"
     },
     {
       "type": "skill",
-      "desc": "使用",
       "skillName": "俯冲",
-      "count": 2
+      "count": 2,
+      "desc": "使用"
     }
   ],
   "pet_354": [
@@ -10034,7 +10126,41 @@
       "desc": "获得命定勇者奖牌"
     }
   ],
-  "pet_56": [
+  "pet_376": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "25级进化"
+      ]
+    }
+  ],
+  "pet_377": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "35级进化"
+      ]
+    }
+  ],
+  "pet_378": [
     {
       "type": "capture",
       "desc": "捕捉1只"
@@ -10048,13 +10174,55 @@
       "desc": "捕捉20只精灵"
     },
     {
-      "type": "confirm_forms",
-      "count": 2,
-      "desc": "确认2种不同样子的幽灵眼",
-      "requiredForms": [
-        "闭眼的样子",
-        "睁眼的样子"
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "花火",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "试飞",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_379": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
       ]
+    }
+  ],
+  "pet_380": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
     },
     {
       "type": "capture_chromatic",
@@ -10066,24 +10234,788 @@
     },
     {
       "type": "skill",
-      "skillName": "背袭",
+      "skillName": "锁芯",
       "count": 1,
       "desc": "使用"
     },
     {
       "type": "skill",
-      "skillName": "嘲弄",
+      "skillName": "振翅",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_381": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "20级进化"
+      ]
+    }
+  ],
+  "pet_382": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级进化"
+      ]
+    }
+  ],
+  "pet_383": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "扬尘",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "沙石阵",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_384": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "28级进化"
+      ]
+    }
+  ],
+  "pet_385": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级进化"
+      ]
+    }
+  ],
+  "pet_386": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "丰收",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "补觉",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_387": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "22级进化"
+      ]
+    }
+  ],
+  "pet_388": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级进化"
+      ]
+    }
+  ],
+  "pet_389": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "惊雷",
       "count": 2,
       "desc": "使用"
     },
     {
       "type": "skill",
-      "skillName": "降灵",
+      "skillName": "通电",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_390": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
+      ]
+    }
+  ],
+  "pet_391": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "46级进化"
+      ]
+    }
+  ],
+  "pet_392": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "雪原狩猎",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "冰裂",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_393": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "28级进化"
+      ]
+    }
+  ],
+  "pet_394": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级进化"
+      ]
+    }
+  ],
+  "pet_395": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "焚身",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "野火",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_396": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
+      ]
+    }
+  ],
+  "pet_397": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "缓一缓",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "友谊满溢",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_398": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级进化"
+      ]
+    }
+  ],
+  "pet_399": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "可爱",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "龙守望",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_400": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "28级进化"
+      ]
+    }
+  ],
+  "pet_401": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "38级进化"
+      ]
+    }
+  ],
+  "pet_402": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "困兽",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "拟寄生",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_403": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "16级+夜晚进化"
+      ]
+    }
+  ],
+  "pet_404": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级+夜晚进化"
+      ]
+    }
+  ],
+  "pet_405": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "血契",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "超声波",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_406": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "30级进化"
+      ]
+    }
+  ],
+  "pet_407": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "50级进化"
+      ]
+    }
+  ],
+  "pet_408": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "沉溺",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "下注",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_409": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "星痕",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "远行",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_410": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级进化"
+      ]
+    }
+  ],
+  "pet_411": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "fruit",
+      "desc": "捕捉20只精灵"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "转圈圈",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "蹦跶",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_412": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级+夜晚进化"
+      ]
+    }
+  ],
+  "pet_413": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "铰轮",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "许愿池",
       "count": 3,
       "desc": "使用"
     }
   ],
-  "pet_351": [
+  "pet_414": [
     {
       "type": "capture",
       "desc": "捕捉1只"
@@ -10094,10 +11026,13 @@
     },
     {
       "type": "evolve",
-      "desc": "成功进化一次"
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "28级+精灵成长至1星进化"
+      ]
     }
   ],
-  "pet_352": [
+  "pet_415": [
     {
       "type": "capture",
       "desc": "捕捉1只"
@@ -10108,71 +11043,548 @@
     },
     {
       "type": "evolve",
-      "desc": "成功进化一次"
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级+精灵成长至2星进化，改萌系血脉进化为加尔，改幽系血脉进化为黑化加尔"
+      ]
     }
   ],
-  "pet_422": [],
-  "pet_423": [],
-  "pet_424": [],
-  "pet_425": [],
-  "pet_426": [],
-  "pet_427": [],
-  "pet_428": [],
-  "pet_429": [],
-  "pet_430": [],
-  "pet_431": [],
-  "pet_432": [],
-  "pet_433": [],
-  "pet_434": [],
-  "pet_435": [],
-  "pet_436": [],
-  "pet_437": [],
-  "pet_438": [],
-  "pet_439": [],
-  "pet_440": [],
-  "pet_441": [],
-  "pet_442": [],
-  "pet_443": [],
-  "pet_444": [],
-  "pet_445": [],
-  "pet_446": [],
-  "pet_447": [],
-  "pet_448": [],
-  "pet_449": [],
-  "pet_450": [],
-  "pet_451": [],
-  "pet_452": [],
-  "pet_453": [],
-  "pet_454": [],
-  "pet_455": [],
-  "pet_456": [],
-  "pet_457": [],
-  "pet_458": [],
-  "pet_459": [],
-  "pet_460": [],
-  "pet_461": [],
-  "pet_462": [],
-  "pet_463": [],
-  "pet_464": [],
-  "pet_465": [],
-  "pet_466": [],
-  "pet_467": [],
-  "pet_468": [],
-  "pet_469": [],
-  "pet_470": [],
-  "pet_471": [],
-  "pet_472": [],
-  "pet_473": [],
-  "pet_474": [],
-  "pet_475": [],
-  "pet_476": [],
-  "pet_477": [],
-  "pet_478": [],
-  "pet_479": [],
-  "pet_480": [],
-  "pet_481": [],
-  "pet_482": [],
-  "pet_483": [],
-  "pet_484": [],
-  "pet_485": []
+  "pet_416": [],
+  "pet_417": [],
+  "pet_418": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级+击败6次咬咬小子进化"
+      ]
+    }
+  ],
+  "pet_419": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "蒸汽进行曲",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "轮班",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_420": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级+击败6次足尖元件进化"
+      ]
+    }
+  ],
+  "pet_421": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "六自由度",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "薄纱环",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_422": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
+      ]
+    }
+  ],
+  "pet_423": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "50级进化"
+      ]
+    }
+  ],
+  "pet_424": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "毒誓",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "拆礼物",
+      "count": 3,
+      "desc": "使用"
+    }
+  ],
+  "pet_425": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
+      ]
+    }
+  ],
+  "pet_426": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "撒花",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "暖气",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_427": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "24级+雨天进化"
+      ]
+    }
+  ],
+  "pet_428": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级进化"
+      ]
+    }
+  ],
+  "pet_429": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "叠浪",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "马步",
+      "count": 3,
+      "desc": "使用"
+    }
+  ],
+  "pet_430": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级进化"
+      ]
+    }
+  ],
+  "pet_431": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "限时特惠",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "纺纱",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_432": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级进化"
+      ]
+    }
+  ],
+  "pet_433": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "点亮",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "透镜实验",
+      "count": 2,
+      "desc": "使用"
+    }
+  ],
+  "pet_434": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "36级+撞击3次果树进化"
+      ]
+    }
+  ],
+  "pet_435": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "甜蜜陷阱",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "魔镜",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_436": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "40级+击败翼系精灵3次进化"
+      ]
+    }
+  ],
+  "pet_437": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "委屈",
+      "count": 2,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "驱赶",
+      "count": 1,
+      "desc": "使用"
+    }
+  ],
+  "pet_438": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "evolve",
+      "desc": "成功进化一次",
+      "obtainMethods": [
+        "32级进化"
+      ]
+    }
+  ],
+  "pet_439": [
+    {
+      "type": "capture",
+      "desc": "捕捉1只"
+    },
+    {
+      "type": "capture_gifted",
+      "desc": "捕捉1只了不起天分的"
+    },
+    {
+      "type": "capture_chromatic",
+      "desc": "捕捉1只炫彩突变的"
+    },
+    {
+      "type": "capture_shiny",
+      "desc": "捕捉1只异色突变的精灵"
+    },
+    {
+      "type": "destined_hero",
+      "desc": "获得命定勇者奖牌"
+    },
+    {
+      "type": "skill",
+      "skillName": "过敏源",
+      "count": 1,
+      "desc": "使用"
+    },
+    {
+      "type": "skill",
+      "skillName": "溶解",
+      "count": 2,
+      "desc": "使用"
+    }
+  ]
 }

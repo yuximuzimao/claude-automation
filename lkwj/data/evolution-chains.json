@@ -305,8 +305,7 @@
             "toSpeciesId": "pet_34",
             "condition": {
               "type": "level",
-              "level": 35,
-              "note": ""
+              "level": 35
             }
           }
         ]
@@ -511,8 +510,7 @@
             "toSpeciesId": "pet_55",
             "condition": {
               "type": "level",
-              "level": 20,
-              "note": ""
+              "level": 20
             }
           }
         ]
@@ -523,8 +521,7 @@
             "toSpeciesId": "pet_56",
             "condition": {
               "type": "level",
-              "level": 32,
-              "note": ""
+              "level": 32
             }
           }
         ]
@@ -2122,7 +2119,8 @@
             "toSpeciesId": "pet_235",
             "condition": {
               "type": "level",
-              "level": 28
+              "level": 28,
+              "note": "随机"
             }
           }
         ]
@@ -2133,7 +2131,8 @@
             "toSpeciesId": "pet_236",
             "condition": {
               "type": "level",
-              "level": 40
+              "level": 40,
+              "note": "随机"
             }
           }
         ]
@@ -2153,8 +2152,7 @@
             "toSpeciesId": "pet_238",
             "condition": {
               "type": "level",
-              "level": 36,
-              "note": ""
+              "level": 36
             }
           }
         ]
@@ -3065,8 +3063,7 @@
             "toSpeciesId": "pet_329",
             "condition": {
               "type": "level",
-              "level": 50,
-              "note": ""
+              "level": 50
             }
           }
         ]
@@ -3949,8 +3946,8 @@
           {
             "toSpeciesId": "pet_423",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
@@ -3960,8 +3957,8 @@
           {
             "toSpeciesId": "pet_424",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 50
             }
           }
         ]
@@ -3980,8 +3977,8 @@
           {
             "toSpeciesId": "pet_426",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
@@ -4000,8 +3997,9 @@
           {
             "toSpeciesId": "pet_428",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 24,
+              "note": "雨天"
             }
           }
         ]
@@ -4011,8 +4009,8 @@
           {
             "toSpeciesId": "pet_429",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40
             }
           }
         ]
@@ -4031,8 +4029,8 @@
           {
             "toSpeciesId": "pet_431",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36
             }
           }
         ]
@@ -4051,8 +4049,8 @@
           {
             "toSpeciesId": "pet_433",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36
             }
           }
         ]
@@ -4071,8 +4069,9 @@
           {
             "toSpeciesId": "pet_435",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36,
+              "note": "撞击3次果树"
             }
           }
         ]
@@ -4091,8 +4090,9 @@
           {
             "toSpeciesId": "pet_437",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40,
+              "note": "击败翼系精灵3次"
             }
           }
         ]
@@ -4111,8 +4111,8 @@
           {
             "toSpeciesId": "pet_439",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
@@ -4124,469 +4124,477 @@
   },
   {
     "chainId": 190,
-    "baseSpeciesId": "pet_440",
+    "baseSpeciesId": "pet_414",
     "nodes": {
-      "pet_440": {
+      "pet_414": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_441",
+            "toSpeciesId": "pet_415",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 28,
+              "note": "精灵成长至1星"
             }
           }
         ]
       },
-      "pet_441": {
+      "pet_415": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_442",
+            "toSpeciesId": "pet_416",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40,
+              "note": "精灵成长至2星，改萌系血脉进化为加尔"
             }
           },
           {
-            "toSpeciesId": "pet_443",
+            "toSpeciesId": "pet_417",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40,
+              "note": "精灵成长至2星，改幽系血脉进化为黑化加尔"
             }
           }
         ]
       },
-      "pet_442": {
+      "pet_416": {
         "evolvesTo": []
       },
-      "pet_443": {
+      "pet_417": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 191,
-    "baseSpeciesId": "pet_444",
+    "baseSpeciesId": "pet_420",
     "nodes": {
-      "pet_444": {
+      "pet_420": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_445",
+            "toSpeciesId": "pet_421",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36,
+              "note": "击败6次足尖元件"
             }
           }
         ]
       },
-      "pet_445": {
+      "pet_421": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 192,
-    "baseSpeciesId": "pet_446",
+    "baseSpeciesId": "pet_418",
     "nodes": {
-      "pet_446": {
+      "pet_418": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_447",
+            "toSpeciesId": "pet_419",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36,
+              "note": "击败6次咬咬小子"
             }
           }
         ]
       },
-      "pet_447": {
+      "pet_419": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 193,
-    "baseSpeciesId": "pet_448",
+    "baseSpeciesId": "pet_412",
     "nodes": {
-      "pet_448": {
+      "pet_412": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_449",
+            "toSpeciesId": "pet_413",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36,
+              "note": "夜晚"
             }
           }
         ]
       },
-      "pet_449": {
+      "pet_413": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 194,
-    "baseSpeciesId": "pet_450",
+    "baseSpeciesId": "pet_398",
     "nodes": {
-      "pet_450": {
+      "pet_398": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_451",
+            "toSpeciesId": "pet_399",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36
             }
           }
         ]
       },
-      "pet_451": {
+      "pet_399": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 195,
-    "baseSpeciesId": "pet_452",
+    "baseSpeciesId": "pet_396",
     "nodes": {
-      "pet_452": {
+      "pet_396": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_453",
+            "toSpeciesId": "pet_397",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
       },
-      "pet_453": {
+      "pet_397": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 196,
-    "baseSpeciesId": "pet_454",
+    "baseSpeciesId": "pet_410",
     "nodes": {
-      "pet_454": {
+      "pet_410": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_455",
+            "toSpeciesId": "pet_411",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 36
             }
           }
         ]
       },
-      "pet_455": {
+      "pet_411": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 197,
-    "baseSpeciesId": "pet_456",
+    "baseSpeciesId": "pet_387",
     "nodes": {
-      "pet_456": {
+      "pet_387": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_457",
+            "toSpeciesId": "pet_388",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 22
             }
           }
         ]
       },
-      "pet_457": {
+      "pet_388": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_458",
+            "toSpeciesId": "pet_389",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40
             }
           }
         ]
       },
-      "pet_458": {
+      "pet_389": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 198,
-    "baseSpeciesId": "pet_459",
+    "baseSpeciesId": "pet_406",
     "nodes": {
-      "pet_459": {
+      "pet_406": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_460",
+            "toSpeciesId": "pet_407",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 30
             }
           }
         ]
       },
-      "pet_460": {
+      "pet_407": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_461",
+            "toSpeciesId": "pet_408",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 50
             }
           }
         ]
       },
-      "pet_461": {
+      "pet_408": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 199,
-    "baseSpeciesId": "pet_462",
+    "baseSpeciesId": "pet_376",
     "nodes": {
-      "pet_462": {
+      "pet_376": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_463",
+            "toSpeciesId": "pet_377",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 25
             }
           }
         ]
       },
-      "pet_463": {
+      "pet_377": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_464",
+            "toSpeciesId": "pet_378",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 35
             }
           }
         ]
       },
-      "pet_464": {
+      "pet_378": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 200,
-    "baseSpeciesId": "pet_465",
+    "baseSpeciesId": "pet_379",
     "nodes": {
-      "pet_465": {
+      "pet_379": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_466",
+            "toSpeciesId": "pet_380",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
       },
-      "pet_466": {
+      "pet_380": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 201,
-    "baseSpeciesId": "pet_467",
+    "baseSpeciesId": "pet_403",
     "nodes": {
-      "pet_467": {
+      "pet_403": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_468",
+            "toSpeciesId": "pet_404",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 16,
+              "note": "夜晚"
             }
           }
         ]
       },
-      "pet_468": {
+      "pet_404": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_469",
+            "toSpeciesId": "pet_405",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32,
+              "note": "夜晚"
             }
           }
         ]
       },
-      "pet_469": {
+      "pet_405": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 202,
-    "baseSpeciesId": "pet_470",
+    "baseSpeciesId": "pet_393",
     "nodes": {
-      "pet_470": {
+      "pet_393": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_471",
+            "toSpeciesId": "pet_394",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 28
             }
           }
         ]
       },
-      "pet_471": {
+      "pet_394": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_472",
+            "toSpeciesId": "pet_395",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40
             }
           }
         ]
       },
-      "pet_472": {
+      "pet_395": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 203,
-    "baseSpeciesId": "pet_473",
+    "baseSpeciesId": "pet_409",
     "nodes": {
-      "pet_473": {
+      "pet_409": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 204,
-    "baseSpeciesId": "pet_474",
+    "baseSpeciesId": "pet_384",
     "nodes": {
-      "pet_474": {
+      "pet_384": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_475",
+            "toSpeciesId": "pet_385",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 28
             }
           }
         ]
       },
-      "pet_475": {
+      "pet_385": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_476",
+            "toSpeciesId": "pet_386",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40
             }
           }
         ]
       },
-      "pet_476": {
+      "pet_386": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 205,
-    "baseSpeciesId": "pet_477",
+    "baseSpeciesId": "pet_390",
     "nodes": {
-      "pet_477": {
+      "pet_390": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_478",
+            "toSpeciesId": "pet_391",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 32
             }
           }
         ]
       },
-      "pet_478": {
+      "pet_391": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_479",
+            "toSpeciesId": "pet_392",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 46
             }
           }
         ]
       },
-      "pet_479": {
+      "pet_392": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 206,
-    "baseSpeciesId": "pet_480",
+    "baseSpeciesId": "pet_400",
     "nodes": {
-      "pet_480": {
+      "pet_400": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_481",
+            "toSpeciesId": "pet_401",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 28
             }
           }
         ]
       },
-      "pet_481": {
+      "pet_401": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_482",
+            "toSpeciesId": "pet_402",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 38
             }
           }
         ]
       },
-      "pet_482": {
+      "pet_402": {
         "evolvesTo": []
       }
     }
   },
   {
     "chainId": 207,
-    "baseSpeciesId": "pet_483",
+    "baseSpeciesId": "pet_381",
     "nodes": {
-      "pet_483": {
+      "pet_381": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_484",
+            "toSpeciesId": "pet_382",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 20
             }
           }
         ]
       },
-      "pet_484": {
+      "pet_382": {
         "evolvesTo": [
           {
-            "toSpeciesId": "pet_485",
+            "toSpeciesId": "pet_383",
             "condition": {
-              "type": "unknown",
-              "note": "进化条件待补充"
+              "type": "level",
+              "level": 40
             }
           }
         ]
       },
-      "pet_485": {
+      "pet_383": {
         "evolvesTo": []
       }
     }

@@ -516,7 +516,9 @@ function isTaskDone(petKey, taskIdx) {
   if (task.type === 'confirm_forms') {
     const required = getRequiredFormKeys(petKey, task);
     if (!required.length) return false;
-    return required.every((formKey) => isFormCollected(petKey, formKey));
+    const targetCount = Math.min(task.count || required.length, required.length);
+    const collectedCount = required.filter((formKey) => isFormCollected(petKey, formKey)).length;
+    return collectedCount >= targetCount;
   }
   const progress = getTaskProgress(petKey);
   return !!progress[String(taskIdx)];
