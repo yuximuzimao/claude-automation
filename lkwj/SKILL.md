@@ -115,6 +115,7 @@ lkwj/
 ```bash
 node scripts/validate-s3-partial-pets.js
 node scripts/validate-s3-image-batch2.js
+node scripts/validate-s3-image-batch3.js
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-shiny-ui.js
