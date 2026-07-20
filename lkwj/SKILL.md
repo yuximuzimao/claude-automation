@@ -81,6 +81,7 @@ lkwj/
 - 所有带异色标签的多形态精灵都在异色页只拆分实际可收集形态，`basic` 不额外计数；无额外形态时进度键为 `petKey`，形态进度键为 `petKey::formKey`。旧多形态 `petKey` 进度必须人工确认后迁移。
 - `confirm_forms.requiredForms` 只表示课题计入形态；完整形态收集使用 `forms_collected`。
 - 获取方式只写直接来源，禁止写“由某精灵进化”。
+- 官方家族介绍图只允许先录入编号、名称、元素、家族顺序、明确来源和异色存在性；箭头不能推断进化等级，技能介绍不能生成课题。未知课题保留空数组，未知进化条件使用 `unknown`。
 - 折叠型页面统一执行单搜索结果自动展开：精灵、多形态、遗迹、服装套装只剩一个搜索结果时直接展开，多结果不展开。
 
 ### 服装
@@ -111,6 +112,7 @@ lkwj/
 ## 验证速查
 
 ```bash
+node scripts/validate-s3-partial-pets.js
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-shiny-ui.js
