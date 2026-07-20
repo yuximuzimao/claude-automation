@@ -82,6 +82,7 @@ lkwj/
 - `confirm_forms.requiredForms` 只表示课题计入形态；完整形态收集使用 `forms_collected`。
 - 获取方式只写直接来源，禁止写“由某精灵进化”。
 - 官方家族介绍图只允许先录入编号、名称、元素、家族顺序、明确来源和异色存在性；箭头不能推断进化等级，技能介绍不能生成课题。未知课题保留空数组，未知进化条件使用 `unknown`。
+- 图片中多个“样子/形态”属于同一物种的 `forms`，不得按立绘数量新建精灵；只有独立正式名称并由进化/分支箭头连接时才建立多个物种。多批图片必须全部处理完后才能读取 Excel 补任务和编号。
 - 折叠型页面统一执行单搜索结果自动展开：精灵、多形态、遗迹、服装套装只剩一个搜索结果时直接展开，多结果不展开。
 
 ### 服装
@@ -113,6 +114,7 @@ lkwj/
 
 ```bash
 node scripts/validate-s3-partial-pets.js
+node scripts/validate-s3-image-batch2.js
 node scripts/validate-multiform-data.js
 node scripts/validate-multiform-ui.js
 node scripts/validate-shiny-ui.js

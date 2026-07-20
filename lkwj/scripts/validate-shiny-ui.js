@@ -31,7 +31,7 @@ const checks = [
     && /toggleShinyTask\('\$\{s\.petKey\}','\$\{escAttr\(s\.formKey\)\}'\)/.test(html)],
   ['shiny toggle persists by progress key rather than only pet id', /const\s+progressKey\s*=\s*getShinyProgressKey\(petKey,\s*formKey\)/.test(html)
     && /data\.shiny_progress\[progressKey\]/.test(html)],
-  ['current 46 shiny finals expand to 47 collection entries', shinyFinals.length === 46 && shinyEntries.length === 47],
+  ['current 48 shiny finals expand to 49 collection entries', shinyFinals.length === 48 && shinyEntries.length === 49],
   ['加油蟹 has exactly two form-level shiny keys and no basic entry', !shinyEntries.includes('pet_361')
     && shinyEntries.includes('pet_361::单只海葵的样子')
     && shinyEntries.includes('pet_361::双只海葵的样子')
