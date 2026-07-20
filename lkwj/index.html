@@ -1244,12 +1244,8 @@ function getShinyList() {
   return result;
 }
 
-function renderShinyTab() {
-  const list = getShinyList();
-  const doneCount = list.filter(s => s.isDone).length;
-  const seasons = [...new Set(list.map(s => s.limitedTime).filter(Boolean))].sort();
-
-  let filtered = list;
+function getFilteredShinyList() {
+  let filtered = getShinyList();
   if (shinySearch) {
     const q = shinySearch.toLowerCase();
     filtered = filtered.filter(s => s.name.includes(q) || (gameData?.pets?.[s.petKey]?.pinyin?.initial || '').includes(q));
@@ -1257,10 +1253,39 @@ function renderShinyTab() {
   if (shinySeason !== 'all') filtered = filtered.filter(s => s.limitedTime === shinySeason);
   if (shinyStatus === 'pending') filtered = filtered.filter(s => !s.isDone);
   else if (shinyStatus === 'done') filtered = filtered.filter(s => s.isDone);
+  return filtered;
+}
 
-  const totalPages = Math.ceil(filtered.length / SHINY_PAGE);
+function getShinyDisplayPage(filtered) {
+  if (shinyStatus === 'all') {
+    const pending = filtered.filter(s => !s.isDone);
+    const done = filtered.filter(s => s.isDone);
+    const totalPages = Math.max(1, Math.ceil(done.length / SHINY_PAGE));
+    if (shinyPage > totalPages) shinyPage = 1;
+    return {
+      pendingItems: pending,
+      doneItems: done.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE),
+      totalDone: done.length,
+      totalPages,
+    };
+  }
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / SHINY_PAGE));
   if (shinyPage > totalPages) shinyPage = 1;
   const pageItems = filtered.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
+  return {
+    pendingItems: shinyStatus === 'pending' ? pageItems : [],
+    doneItems: shinyStatus === 'done' ? pageItems : [],
+    totalDone: shinyStatus === 'done' ? filtered.length : 0,
+    totalPages,
+  };
+}
+
+function renderShinyTab() {
+  const list = getShinyList();
+  const filtered = getFilteredShinyList();
+  const doneCount = list.filter(s => s.isDone).length;
+  const seasons = [...new Set(list.map(s => s.limitedTime).filter(Boolean))].sort();
 
   let toolbarHtml = '';
   toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">✨ 异色炫彩</h3>`;
@@ -1283,19 +1308,8 @@ function renderShinyTab() {
 }
 
 function renderShinyContent() {
-  const list = getShinyList();
-  let filtered = list;
-  if (shinySearch) {
-    const q = shinySearch.toLowerCase();
-    filtered = filtered.filter(s => s.name.includes(q) || (gameData?.pets?.[s.petKey]?.pinyin?.initial || '').includes(q));
-  }
-  if (shinySeason !== 'all') filtered = filtered.filter(s => s.limitedTime === shinySeason);
-  if (shinyStatus === 'pending') filtered = filtered.filter(s => !s.isDone);
-  else if (shinyStatus === 'done') filtered = filtered.filter(s => s.isDone);
-
-  const totalPages = Math.ceil(filtered.length / SHINY_PAGE);
-  if (shinyPage > totalPages) shinyPage = 1;
-  const pageItems = filtered.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
+  const filtered = getFilteredShinyList();
+  const display = getShinyDisplayPage(filtered);
 
   const contentEl = document.getElementById('shiny-content');
   let contentHtml = '';
@@ -1306,23 +1320,22 @@ function renderShinyContent() {
   }
 
   if (shinyStatus !== 'all') {
+    const pageItems = shinyStatus === 'pending' ? display.pendingItems : display.doneItems;
     contentHtml += '<div class="item-list">';
     pageItems.forEach(s => { contentHtml += renderShinyRow(s); });
     contentHtml += '</div>';
   } else {
-    const pending = pageItems.filter(s => !s.isDone);
-    const done = pageItems.filter(s => s.isDone);
-    if (pending.length) {
-      contentHtml += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-      pending.forEach(s => { contentHtml += renderShinyRow(s); });
+    if (display.pendingItems.length) {
+      contentHtml += `<div class="section-title">${STATUS.PENDING}（${display.pendingItems.length}）</div><div class="item-list">`;
+      display.pendingItems.forEach(s => { contentHtml += renderShinyRow(s); });
       contentHtml += '</div>';
     }
-    if (done.length) {
-      contentHtml += renderCollapsibleDoneSection(done, renderShinyRow, done.length);
+    if (display.doneItems.length) {
+      contentHtml += renderCollapsibleDoneSection(display.doneItems, renderShinyRow, display.totalDone);
     }
   }
 
-  contentHtml += renderPagination(shinyPage, totalPages, 'goShinyPage');
+  contentHtml += renderPagination(shinyPage, display.totalPages, 'goShinyPage');
   contentEl.innerHTML = contentHtml;
 }
 
@@ -1369,7 +1382,7 @@ async function toggleShinyTask(petKey, formKey = 'basic') {
 function setShinySeason(s) { shinySeason = s; shinyPage = 1; renderShinyTab(); }
 function setShinyStatus(s) { shinyStatus = s; shinyPage = 1; renderShinyTab(); }
 function goShinyPage(p) {
-  const totalPages = Math.ceil(getShinyList().length / SHINY_PAGE);
+  const totalPages = getShinyDisplayPage(getFilteredShinyList()).totalPages;
   if (p < 1 || p > totalPages) return;
   shinyPage = p; renderShinyContent();
 }

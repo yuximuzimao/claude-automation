@@ -7,8 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKBOOK = ROOT / "图鉴课题进度表（另存或存为副本使用）.xlsx"
-REPORT = ROOT / "tasks" / "latest-excel-audit.md"
-REPORT_JSON = ROOT / "tasks" / "latest-excel-audit.json"
+REPORT = ROOT / "_sandbox" / "latest-excel-audit.md"
+REPORT_JSON = ROOT / "_sandbox" / "latest-excel-audit.json"
 
 reader = runpy.run_path(str(ROOT / "scripts" / "read-latest-excel.py"))
 read_xlsx = reader["read_xlsx"]
@@ -18,6 +18,22 @@ sheets = read_xlsx(WORKBOOK)
 pets = json.loads((ROOT / "data" / "pets.json").read_text(encoding="utf-8"))
 tasks = json.loads((ROOT / "data" / "tasks.json").read_text(encoding="utf-8"))
 chains = json.loads((ROOT / "data" / "evolution-chains.json").read_text(encoding="utf-8"))
+
+COMPLETE_MAX_NUMBER = 439
+VERIFIED_TEXT_REPLACEMENTS = {
+    "幽灵眼": "幽冥眼",
+    "饮血狂兽": "饮雪狂兽",
+    "斜眼巨魔": "邪眼巨魔",
+    "象牙花形态": "象牙球形态",
+}
+PARTIAL_PETS = {440: "睡铃雪影娃娃"}
+
+
+def apply_verified_text_corrections(value):
+    corrected = str(value or "")
+    for wrong, right in VERIFIED_TEXT_REPLACEMENTS.items():
+        corrected = corrected.replace(wrong, right)
+    return corrected
 
 
 def pkey(number):
@@ -34,7 +50,7 @@ def split_elements(value):
 
 
 def canonical_form_name(value):
-    value = str(value or "").strip()
+    value = apply_verified_text_corrections(value).strip()
     if value.startswith("（") and value.endswith("）"):
         return value[1:-1].strip()
     return value
@@ -113,9 +129,7 @@ def parse_fruit_ranges(value):
 def find_fruit_target(numbers, description):
     match = re.search(r"捕捉\d+只(.+)$", str(description or "").strip())
     if match:
-        target_name = match.group(1).strip()
-        aliases = {"幽灵眼": "幽冥眼", "饮血狂兽": "饮雪狂兽", "斜眼巨魔": "邪眼巨魔"}
-        target_name = aliases.get(target_name, target_name)
+        target_name = apply_verified_text_corrections(match.group(1)).strip()
         for number in range(min(numbers), max(numbers) + 1):
             if pets.get(pkey(number), {}).get("name") == target_name:
                 return number
@@ -157,7 +171,10 @@ def condition_summary(condition):
 
 
 task_groups_all = group_tasks(sheets["课题进度"])
-valid_groups = [group for group in task_groups_all if group.get("number") and group["number"] <= 439]
+valid_groups = [
+    group for group in task_groups_all
+    if group.get("number") and group["number"] <= COMPLETE_MAX_NUMBER
+]
 group_by_number = {group["number"]: group for group in valid_groups}
 
 results = {
@@ -198,16 +215,29 @@ for group in valid_groups:
             "issue": f"D列课题总数为空，但存在 {len(actual_rows)} 条任务行",
         })
 
-# Incomplete N.440 placeholder.
-extra_groups = [group for group in task_groups_all if group.get("number") and group["number"] > 439]
+# User-approved partial rows are stored as name-only placeholders; later rows remain errors.
+extra_groups = [
+    group for group in task_groups_all
+    if group.get("number") and group["number"] > COMPLETE_MAX_NUMBER
+]
 for group in extra_groups:
+    number = group["number"]
+    if number in PARTIAL_PETS:
+        pet = pets.get(pkey(number))
+        expected_name = PARTIAL_PETS[number]
+        if not pet or pet.get("name") != expected_name or tasks.get(pkey(number)) != []:
+            results["nameElement"].append({
+                "pet": group["code"],
+                "issue": f"已确认占位精灵应仅保留名称“{expected_name}”和空任务",
+            })
+        continue
     results["excelInternal"].append({
         "pet": group["code"],
-        "issue": f"Excel存在未完整条目“{group.get('name')}”，系别/课题尚未提供，不应入库",
+        "issue": f"Excel存在未完整条目“{group.get('name')}”，尚未获得人工确认",
     })
 
 # Names/elements and tasks.
-for number in range(1, 440):
+for number in range(1, COMPLETE_MAX_NUMBER + 1):
     group = group_by_number.get(number)
     pet = pets.get(pkey(number))
     if not group:
@@ -217,13 +247,12 @@ for number in range(1, 440):
         results["nameElement"].append({"pet": group["code"], "issue": "JSON缺少精灵定义"})
         continue
 
-    if pet.get("name") != group.get("name"):
-        issue = {
+    expected_name = apply_verified_text_corrections(group.get("name")).strip()
+    if pet.get("name") != expected_name:
+        results["nameElement"].append({
             "pet": group["code"],
-            "issue": f"名称：Excel“{group.get('name')}” vs JSON“{pet.get('name')}”",
-        }
-        if number not in (392, 402):
-            results["nameElement"].append(issue)
+            "issue": f"名称：校准后Excel“{expected_name}” vs JSON“{pet.get('name')}”",
+        })
 
     expected_elements = split_elements(group.get("element"))
     actual_elements = pet.get("element") or []
@@ -463,25 +492,31 @@ for number in sorted(shiny_tag_numbers - shiny_task_numbers):
             "issue": f"有异色世界定义（{label}），但无capture_shiny课题；若非通行证需核对",
         })
 
-# Explicit source conflicts known from the supplied official images.
+# User-verified calibration rules. These are permanent and must not be reopened.
 results["acceptedSourceConflicts"].extend([
     {
+        "pet": "N.056",
+        "issue": "Excel写“幽灵眼”；用户确认正式名称为“幽冥眼”，名称、形态课题和果实说明统一校准为“幽冥眼”",
+    },
+    {
+        "pet": "N.063–N.065",
+        "issue": "多地区形态表写“象牙花形态”；用户确认正式名称为“象牙球形态”，三阶段及形态课题统一校准",
+    },
+    {
         "pet": "N.392",
-        "issue": "官方图片为“饮雪狂兽”，Excel课题/果实表写“饮血狂兽”；助手保留图片名称“饮雪狂兽”",
+        "issue": "官方图片为“饮雪狂兽”，Excel课题/果实表写“饮血狂兽”；统一校准为“饮雪狂兽”",
     },
     {
         "pet": "N.402",
-        "issue": "官方图片为“邪眼巨魔”，Excel课题/果实表写“斜眼巨魔”；助手保留图片名称“邪眼巨魔”",
-    },
-])
-results["unresolvedSourceConflicts"].extend([
-    {
-        "pet": "N.063–N.065",
-        "issue": "蹦蹦种子家族的多地区形态表写“象牙花形态”，课题备注写“象牙球形态”。助手暂保留形态明细表名称“象牙花形态”，课题候选池按全部四种形态处理，正式名称需人工确认。",
+        "issue": "官方图片为“邪眼巨魔”，Excel课题/果实表写“斜眼巨魔”；统一校准为“邪眼巨魔”",
     },
     {
         "pet": "N.427–N.429",
-        "issue": "十字蝌蚪家族图片显示第二系别图标，但Excel结构化系别为：十字蝌蚪=水、十字蛙=水、深渊蛙=水+武。助手暂按Excel，需人工确认图片中的第二图标含义。",
+        "issue": "游戏介绍图第二系别图标显示异常；用户确认按Excel：十字蝌蚪=水、十字蛙=水、深渊蛙=水+武",
+    },
+    {
+        "pet": "N.440",
+        "issue": "用户确认先建立名称“睡铃雪影娃娃”的占位精灵；系别、课题、进化、果实等字段等待后续资料",
     },
 ])
 
@@ -522,8 +557,8 @@ def render_issue(item):
 
 section_titles = [
     ("excelInternal", "一、Excel 自身结构或内容问题"),
-    ("acceptedSourceConflicts", "二、图片优先、已按图片修正的来源冲突"),
-    ("unresolvedSourceConflicts", "三、仍需人工确认的图片 / Excel 冲突"),
+    ("acceptedSourceConflicts", "二、已人工核对并固化的校准规则"),
+    ("unresolvedSourceConflicts", "三、仍需人工确认的来源冲突"),
     ("nameElement", "四、精灵名称与系别差异"),
     ("tasks", "五、课题任务差异"),
     ("evolution", "六、进化链与进化条件差异"),
@@ -536,8 +571,9 @@ lines = [
     "# 最新图鉴 Excel 全量审计",
     "",
     f"- 来源：`{WORKBOOK.name}`",
-    "- 范围：N.001–N.439；N.440 仅作为不完整占位单独报告",
+    "- 范围：N.001–N.439 完整同步；N.440 按用户确认建立名称占位",
     "- 规则：按 B 列精灵名称识别分组边界，避免合并单元格导致 A 列编号错位",
+    "- 已人工确认的差异按固定校准表自动覆盖，不再重复询问",
     "- 本报告只列差异和来源冲突；不会从任务反向生成异色世界定义",
     "",
     "## 汇总",
@@ -561,6 +597,7 @@ for key, title in section_titles:
     else:
         lines.extend(render_issue(item) for item in items)
 
+REPORT.parent.mkdir(parents=True, exist_ok=True)
 REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 REPORT_JSON.write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 print(json.dumps({

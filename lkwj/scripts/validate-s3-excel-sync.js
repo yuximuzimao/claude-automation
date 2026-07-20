@@ -26,7 +26,7 @@ if (groups.length !== 64) errors.push(`expected 64 S3 groups, got ${groups.lengt
 
 for (const petKey of Object.keys(pets)) {
   const number = Number(petKey.replace('pet_', ''));
-  if (number >= 440 && number <= 485) errors.push(`temporary pet remains: ${petKey}`);
+  if (number >= 441 && number <= 485) errors.push(`temporary pet remains: ${petKey}`);
 }
 
 for (const group of groups) {
@@ -89,14 +89,38 @@ for (const number of [72, 78, 101, 178, 233, 241, 268, 269, 279, 424, 426, 429, 
 }
 
 const expectedCorrections = {
+  pet_56: '幽冥眼',
   pet_392: '饮雪狂兽',
   pet_402: '邪眼巨魔',
   pet_411: '珀尔鼬',
   pet_423: '铆钉毛毛',
   pet_424: '徘徊爪爪',
+  pet_440: '睡铃雪影娃娃',
 };
 for (const [petKey, expectedName] of Object.entries(expectedCorrections)) {
   if (pets[petKey]?.name !== expectedName) errors.push(`${petKey}: expected corrected name ${expectedName}`);
+}
+
+for (const petKey of ['pet_63', 'pet_64', 'pet_65']) {
+  const forms = Object.keys(pets[petKey]?.forms || {});
+  const formTask = (tasks[petKey] || []).find(task => task.type === 'confirm_forms');
+  if (!forms.includes('象牙球形态') || forms.includes('象牙花形态')
+    || !formTask?.requiredForms?.includes('象牙球形态')) {
+    errors.push(`${petKey}: must use verified 象牙球形态 calibration`);
+  }
+}
+
+const frogElements = { pet_427: ['水'], pet_428: ['水'], pet_429: ['水', '武'] };
+for (const [petKey, expected] of Object.entries(frogElements)) {
+  if (JSON.stringify(pets[petKey]?.element) !== JSON.stringify(expected)) {
+    errors.push(`${petKey}: verified frog element calibration mismatch`);
+  }
+}
+
+if (JSON.stringify(pets.pet_440?.element) !== JSON.stringify([])
+  || JSON.stringify(tasks.pet_440) !== JSON.stringify([])
+  || Object.keys(pets.pet_440?.forms || {}).join(',') !== 'basic') {
+  errors.push('pet_440 must remain a name-only placeholder with empty tasks');
 }
 
 const regionalForms = ['沙地附近的样子', '草地附近的样子', '雪山附近的样子', '火山附近的样子'];
@@ -124,7 +148,7 @@ const allTasks = Object.values(tasks).flat();
 const multiformItems = Object.values(pets)
   .flatMap(pet => Object.keys(pet.forms || {}).filter(formKey => !['basic', 'leader'].includes(formKey))).length;
 const expectedTotals = {
-  pets: 439,
+  pets: 440,
   tasks: 2192,
   fruitTasks: 108,
   fruitRecords: 170,

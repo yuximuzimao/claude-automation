@@ -22,6 +22,33 @@ old_tasks = json.loads(TASKS_PATH.read_text(encoding="utf-8"))
 chains = json.loads(CHAINS_PATH.read_text(encoding="utf-8"))
 collections_data = json.loads(COLLECTIONS_PATH.read_text(encoding="utf-8"))
 
+COMPLETE_MAX_NUMBER = 439
+VERIFIED_TEXT_REPLACEMENTS = {
+    "幽灵眼": "幽冥眼",
+    "饮血狂兽": "饮雪狂兽",
+    "斜眼巨魔": "邪眼巨魔",
+    "象牙花形态": "象牙球形态",
+}
+PARTIAL_PETS = {
+    440: {
+        "name": "睡铃雪影娃娃",
+        "element": [],
+        "forms": {
+            "basic": {
+                "formName": "基础形态",
+                "obtainMethods": [],
+            },
+        },
+    },
+}
+
+
+def apply_verified_text_corrections(value):
+    corrected = str(value or "")
+    for wrong, right in VERIFIED_TEXT_REPLACEMENTS.items():
+        corrected = corrected.replace(wrong, right)
+    return corrected
+
 
 def pkey(number):
     return f"pet_{number}"
@@ -33,7 +60,7 @@ def number_from_code(value):
 
 
 def canonical_name(value):
-    value = str(value or "").strip()
+    value = apply_verified_text_corrections(value).strip()
     if value.startswith("（") and value.endswith("）"):
         value = value[1:-1].strip()
     return value.replace("两只海葵的样子", "双只海葵的样子")
@@ -76,8 +103,8 @@ def form_aliases(form_name, pet_name):
 
 def parse_task(row, number, pet, form_groups):
     kind = row.get("type")
-    content = str(row.get("content") or "").strip()
-    note = str(row.get("note") or "").strip()
+    content = apply_verified_text_corrections(row.get("content")).strip()
+    note = apply_verified_text_corrections(row.get("note")).strip()
     if kind == "捕捉":
         return {"type": "capture", "desc": "捕捉1只"}
     if kind == "天分":
@@ -186,7 +213,7 @@ def migrate_task_progress(pet_key, old_list, new_list):
 
 
 def clean_condition_note(note, level):
-    value = str(note or "").strip()
+    value = apply_verified_text_corrections(note).strip()
     value = value.replace("（两只海葵的样子）", "双只海葵的样子")
     value = value.replace("加油蟹（两只海葵的样子）", "双只海葵的样子")
     if level is not None:
@@ -211,13 +238,7 @@ def find_named_target(numbers, description):
     match = re.search(r"捕捉\d+只(.+)$", str(description or "").strip())
     if not match:
         return None
-    target_name = match.group(1).strip()
-    aliases = {
-        "幽灵眼": "幽冥眼",
-        "饮血狂兽": "饮雪狂兽",
-        "斜眼巨魔": "邪眼巨魔",
-    }
-    target_name = aliases.get(target_name, target_name)
+    target_name = apply_verified_text_corrections(match.group(1)).strip()
     for number in range(min(numbers), max(numbers) + 1):
         if pets.get(pkey(number), {}).get("name") == target_name:
             return number
@@ -242,10 +263,7 @@ def fruit_obtain_type(source):
 
 
 def normalize_source_names(value):
-    return (str(value or "")
-            .replace("幽灵眼", "幽冥眼")
-            .replace("饮血狂兽", "饮雪狂兽")
-            .replace("斜眼巨魔", "邪眼巨魔"))
+    return apply_verified_text_corrections(value)
 
 
 form_groups = parse_form_groups(sheets.get("多地区形态进度", []))
@@ -296,11 +314,11 @@ for pet_key, progress in collections_data.get("sprite_progress", {}).items():
 groups = group_tasks(sheets["课题进度"])
 group_by_number = {
     group["number"]: group for group in groups
-    if group.get("number") and group["number"] <= 439
+    if group.get("number") and group["number"] <= COMPLETE_MAX_NUMBER
 }
 new_tasks = collections.OrderedDict()
 progress_stats = {"mapped": 0, "unmapped": 0}
-for number in range(1, 440):
+for number in range(1, COMPLETE_MAX_NUMBER + 1):
     pet_key = pkey(number)
     pet = pets.get(pet_key)
     group = group_by_number.get(number)
@@ -315,6 +333,11 @@ for number in range(1, 440):
     progress_stats["mapped"] += stats["mapped"]
     progress_stats["unmapped"] += stats["unmapped"]
     new_tasks[pet_key] = expected
+
+# Keep user-verified partial Excel rows as append-only placeholders until full fields arrive.
+for number, definition in PARTIAL_PETS.items():
+    pets[pkey(number)] = definition
+    new_tasks[pkey(number)] = []
 
 # Sync every evolution condition from the latest Excel.
 evolution_updates = 0
@@ -359,7 +382,7 @@ for row in sheets.get("果实进度", [])[1:]:
     if description.startswith("无果实"):
         continue
     target_number = fruit_target(row)
-    if target_number is None or target_number > 439:
+    if target_number is None or target_number > COMPLETE_MAX_NUMBER:
         continue
     pet = pets.get(pkey(target_number))
     if not pet:
@@ -382,7 +405,7 @@ s3_existing_shiny = [72, 78, 101, 178, 233, 241, 268, 269, 279]
 for number in s3_existing_shiny:
     pets[pkey(number)].setdefault("tags", {})["shiny"] = dict(S3_SHINY)
 
-collections_data.setdefault("meta", {})["last_updated"] = "2026-07-20"
+collections_data.setdefault("meta", {})["last_updated"] = "2026-07-21"
 
 PETS_PATH.write_text(json.dumps(pets, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 TASKS_PATH.write_text(json.dumps(new_tasks, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
