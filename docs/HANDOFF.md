@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-07-15
+更新时间：2026-07-21
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
-当前焦点：售后文档状态已收口，主线转为 LKWJ 数据补齐和商品匹配下次实战复核。LKWJ 需补齐 `data/_待采集/README.md` 中列出的采集项，并清理 `clothing.json` / `titles.json` 的 `待补充`；商品匹配需按当前有效待办推进 HEE v2 复核、L2 实战覆盖项和低优先级技术验证。
+当前焦点：售后文档状态已收口，主线为 LKWJ 剩余明细补录和商品匹配下次实战复核。LKWJ 的精灵、任务、进化、果实、家具、服装和遗迹基线已整理，剩余事项只看 `lkwj/tasks/todo.md`；商品匹配按当前有效待办推进 HEE v2 复核、L2 实战覆盖项和低优先级技术验证。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 

@@ -7,8 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKBOOK = ROOT / "图鉴课题进度表（另存或存为副本使用）.xlsx"
-REPORT = ROOT / "_sandbox" / "latest-excel-audit.md"
-REPORT_JSON = ROOT / "_sandbox" / "latest-excel-audit.json"
+REPORT = ROOT.parent / "_sandbox" / "lkwj-latest-excel-audit.md"
+REPORT_JSON = ROOT.parent / "_sandbox" / "lkwj-latest-excel-audit.json"
 
 reader = runpy.run_path(str(ROOT / "scripts" / "read-latest-excel.py"))
 read_xlsx = reader["read_xlsx"]

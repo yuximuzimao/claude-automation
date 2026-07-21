@@ -1,5 +1,7 @@
 # 果实导入与收集列表布局 Implementation Plan
 
+> 状态：已完成并归档。本文保留实施过程，未勾选框不再代表当前待办。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 正确读取 Excel 果实候选记录并展示家族编号，同时让所有收集列表按固定顺序平铺且不分页。

@@ -47,12 +47,13 @@ http://localhost:8899/review.html
 
 - `pets.json` 保存世界定义，不能从用户进度反向生成。
 - `tasks.json` 只保存世界图鉴课题任务，任务来源只能是 Excel `课题进度` sheet；`异色` 行作为 `capture_shiny` 任务纳入，并固定挂在最终进化形态。存在异色标签不代表自动存在异色任务，通行证异色没有 `capture_shiny`。
-- `collections.json` 保存用户勾选进度，包括 `sprite_progress[petKey].forms_collected` 和 `fruit_acquired`。
+- `collections.json` 保存用户勾选进度，包括 `sprite_progress[petKey].forms_collected`、`fruit_acquired` 和 `additional_fruits_acquired`。
 - `confirm_forms.requiredForms` 只声明课题计入的形态；完整多形态收集独立显示在「多形态」Tab。精灵任务行提供“去多形态”跳转，会自动筛选、展开并定位对应精灵。
 - `fruit` 任务是“精灵果实课题任务”，不是果实图鉴。有果实不代表有 fruit 任务。
 - `shiny_progress` 是异色收集进度，不由任何 task 状态驱动。异色多形态精灵只按实际可收集形态拆分，`basic` 不额外计数；无额外形态时使用 `petKey`，形态项使用 `petKey::formKey`。旧多形态 `petKey` 进度需人工确认后迁移。
 - 异色页沿用现有赛季筛选：S3 常驻/奇遇使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
 - 精灵、多形态、遗迹和服装套装在搜索与其他筛选后只剩一个卡片时自动展开；多结果保持折叠。
+- 所有收集列表按固定业务顺序连续展示，不分页、不按已收集/未收集重复分组；有筛选条件时统计统一显示“已收集 / 筛选”。
 - `furniture.json` 保存家具定义；`collections.furniture_progress` 只保存是否收集，不能把舒适度/灵感值写进进度。
 - 家具 Tab 顶部只展示总件数、已收集件数和未收集家具的剩余灵感值；舒适度和单件灵感值只在列表行展示。
 - `clothing.json` 分为 `definitions`、`sets[]` 和 `pieces[]`：规则说明写在 `definitions`，套装必需部件数、华丽魔法对应精灵和套装获取方式写在 `sets[]`，最小收集单元及其分类、套装角色、获取类型和获取方式写在 `pieces[]`。
@@ -73,7 +74,9 @@ http://localhost:8899/review.html
 | 精灵 | 440 |
 | 课题任务 | 2192 |
 | 精灵果实课题任务 | 108 |
-| 果实图鉴记录 | 168 |
+| 家族果实记录 | 168 |
+| 形态专属果实记录 | 1 |
+| 果实已收集 / 总数 | 62 / 169 |
 | 多形态收集项 | 144 |
 | 家具 | 191 |
 | 家具已收集 | 133 |
@@ -131,6 +134,8 @@ node scripts/validate-title-ui.js
 node scripts/validate-dungeon-ui.js
 node -e "for (const f of ['data/pets.json','data/tasks.json','data/evolution-chains.json','data/furniture.json','data/clothing.json','data/titles.json','data/dungeons.json','data/shops.json','data/collections.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('json ok')"
 ```
+
+`audit-latest-excel.py` 的临时报告写入工作区 `_sandbox/lkwj-latest-excel-audit.*`；确认后的快照再移入 `docs/archive/`，项目根不保留临时目录。
 
 如需验证本地服务：
 

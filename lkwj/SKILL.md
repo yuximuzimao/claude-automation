@@ -15,6 +15,7 @@
 | 未完成事项 | `tasks/todo.md` |
 | Excel 只读核对 | `docs/REVIEW_CHECKLIST.md` |
 | S3 图片 / Excel 同步归档 | `docs/archive/2026-07-21-s3-image-excel-sync.md` |
+| 果实导入与列表布局归档 | `docs/archive/2026-07-21-fruit-import-and-list-layout/` |
 | 用户进度 | `data/collections.json` |
 | 服装定义 | `data/clothing.json` |
 
@@ -75,7 +76,9 @@ lkwj/
 - 形态是同一物种的外观变体；标签是异色、炫彩、首领等稀有度标记。
 - 进化只改变物种 ID，形态和标签默认继承。
 - 任务只来自 Excel `课题进度` sheet；同一宠物所有形态共享任务。
-- `fruit` 是果实课题任务，不得从果实图鉴反向生成。
+- 任务中的 `type="fruit"` 是果实课题任务，不得从果实图鉴反向生成。
+- `pet.fruit` 是家族果实定义，名称统一使用家族第一形态名；同一精灵需要独立计数的形态专属果实写入 `additionalFruits`。
+- 家族果实进度写入 `fruit_acquired`，形态专属果实进度写入 `additional_fruits_acquired`；当前是否可获取由果实定义的 `availability` 单独表达，不能覆盖已收集状态。
 - `capture_chromatic` 与 `capture_shiny` 不能混用。
 - 异色页只展示进化链最终形态；分支进化的每个最终分支分别展示。`capture_shiny` 只按官方课题资料挂在最终形态，不能从 `tags.shiny` 自动生成。
 - 通行证异色只有异色收集项，没有 `capture_shiny` 任务；S3 正式赛季标签使用 `S3「铅字幻梦」`，通行证使用 `S3通行证`。
@@ -86,7 +89,8 @@ lkwj/
 - 图片中多个“样子/形态”属于同一物种的 `forms`，不得按立绘数量新建精灵；只有独立正式名称并由进化/分支箭头连接时才建立多个物种。多批图片必须全部处理完后才能读取 Excel 补任务和编号。
 - Excel 是外部维护资料，人工核对后的固定校准值统一维护在 `docs/REVIEW_CHECKLIST.md`；同步和审计必须先应用校准，已确认差异不得重复询问。仅有编号和名称的不完整行可以建立名称占位，其他字段保持未知。
 - 折叠型页面统一执行单搜索结果自动展开：精灵、多形态、遗迹、服装套装只剩一个搜索结果时直接展开，多结果不展开。
-- 异色炫彩页“状态=全部”时必须完整展示所有未收集项，分页只作用于已收集折叠区。
+- 所有收集标签页使用固定顺序的连续列表，不分页；“状态=全部”时不拆成已收集/未收集分组。
+- 有搜索或筛选条件时，统计文案统一使用“已收集 / 筛选”，避免把结果数量写成含义不清的“匹配”。
 
 ### 服装
 
@@ -134,7 +138,7 @@ node scripts/validate-title-ui.js
 node scripts/validate-dungeon-ui.js
 ```
 
-服装校验中，已知部件名称少于 `requiredPieceCount` 会输出 warning；warning 表示资料待补。结构错误必须退出失败。
+服装校验发现部件名称少于 `requiredPieceCount` 时会输出 warning；warning 表示资料待补。结构错误必须退出失败。
 
 ## API 端点
 
