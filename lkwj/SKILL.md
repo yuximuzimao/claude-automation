@@ -127,6 +127,8 @@ node scripts/validate-random-task-ui.js
 node scripts/validate-furniture-ui.js
 node scripts/validate-clothing-data.js
 node scripts/validate-clothing-ui.js
+node scripts/validate-pet-badges-ui.js
+node scripts/validate-tab-consistency-ui.js
 node scripts/validate-title-ui.js
 node scripts/validate-dungeon-ui.js
 ```

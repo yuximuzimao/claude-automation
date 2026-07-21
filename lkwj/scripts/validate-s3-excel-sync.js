@@ -6,6 +6,8 @@ const pets = JSON.parse(fs.readFileSync(path.join(root, 'data', 'pets.json'), 'u
 const tasks = JSON.parse(fs.readFileSync(path.join(root, 'data', 'tasks.json'), 'utf8'));
 const chains = JSON.parse(fs.readFileSync(path.join(root, 'data', 'evolution-chains.json'), 'utf8'));
 const extract = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'fixtures', 's3-excel-extract.json'), 'utf8'));
+const syncSource = fs.readFileSync(path.join(root, 'scripts', 'sync-latest-excel.py'), 'utf8');
+const auditSource = fs.readFileSync(path.join(root, 'scripts', 'audit-latest-excel.py'), 'utf8');
 
 const nameOverrides = {
   392: '饮雪狂兽',
@@ -24,6 +26,9 @@ function elements(value) {
 }
 
 const errors = [];
+if (!syncSource.includes('NO_FRUIT_SOURCES') || !auditSource.includes('NO_FRUIT_SOURCES')) {
+  errors.push('sync and audit must share the verified no-fruit source exclusions');
+}
 const groups = extract.s3Groups.filter(group => group.number >= 376 && group.number <= 439);
 if (groups.length !== 64) errors.push(`expected 64 S3 groups, got ${groups.length}`);
 
@@ -78,6 +83,26 @@ if (s3Tasks.filter(task => task.type === 'capture_shiny').length !== 8) errors.p
 
 const s3FruitRecords = groups.filter(group => pets[key(group.number)]?.fruit).length;
 if (s3FruitRecords !== 25) errors.push(`S3 fruit record total ${s3FruitRecords} != 25`);
+
+for (const number of [1, 375]) {
+  if (pets[key(number)]?.fruit) errors.push(`${key(number)} must not have a fruit definition`);
+}
+const fruitTypes = new Set(Object.values(pets).flatMap(pet => pet.fruit ? [pet.fruit.obtainType] : []));
+const expectedFruitTypes = ['课题任务', '智慧树苗', '剧情任务', '通行证契约礼券', '赛季作业', '限时活动'];
+if (JSON.stringify([...fruitTypes].sort()) !== JSON.stringify([...expectedFruitTypes].sort())) {
+  errors.push(`fruit types must match the six UI filters: ${JSON.stringify([...fruitTypes])}`);
+}
+const expectedFruitGroups = {
+  starter_gen1: [4, 7, 10], starter_gen2: [155, 158, 161],
+  pass_s1: [309, 312], pass_s2: [355, 357], pass_s3: [419, 421],
+};
+for (const [group, numbers] of Object.entries(expectedFruitGroups)) {
+  for (const number of numbers) {
+    if (pets[key(number)]?.fruit?.exclusiveGroup !== group) {
+      errors.push(`${key(number)} fruit must belong to ${group}`);
+    }
+  }
+}
 
 for (const number of [419, 421]) {
   const pet = pets[key(number)];
@@ -160,7 +185,7 @@ const expectedTotals = {
   pets: 440,
   tasks: 2192,
   fruitTasks: 108,
-  fruitRecords: 170,
+  fruitRecords: 168,
   confirmForms: 53,
   multiformItems: 144,
   chains: 191,

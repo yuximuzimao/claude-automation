@@ -270,9 +270,25 @@ def fruit_obtain_type(source):
     source = str(source or "").strip()
     if source == "捕捉20只精灵":
         return "课题任务"
+    if source.startswith("智慧树苗"):
+        return "智慧树苗"
+    if source in {"一代御三家", "二代御三家"}:
+        return "剧情任务"
+    if source == "通行证契约礼券":
+        return "通行证契约礼券"
     if source.startswith("赛季作业·"):
         return "赛季作业"
-    return source
+    return "限时活动"
+
+
+NO_FRUIT_SOURCES = {"传说精灵", "特殊奇遇", "开局必送", "呱呱上学记"}
+FRUIT_EXCLUSIVE_GROUPS = {
+    4: "starter_gen1", 7: "starter_gen1", 10: "starter_gen1",
+    155: "starter_gen2", 158: "starter_gen2", 161: "starter_gen2",
+    309: "pass_s1", 312: "pass_s1",
+    355: "pass_s2", 357: "pass_s2",
+    419: "pass_s3", 421: "pass_s3",
+}
 
 
 def normalize_source_names(value):
@@ -392,7 +408,8 @@ for pet in pets.values():
 fruit_records = 0
 for row in sheets.get("果实进度", [])[1:]:
     description = str(row.get("D") or "")
-    if description.startswith("无果实"):
+    source = str(row.get("C") or "").strip()
+    if source in NO_FRUIT_SOURCES or description.startswith("无果实"):
         continue
     target_number = fruit_target(row)
     if target_number is None or target_number > COMPLETE_MAX_NUMBER:
@@ -400,15 +417,14 @@ for row in sheets.get("果实进度", [])[1:]:
     pet = pets.get(pkey(target_number))
     if not pet:
         continue
-    source = str(row.get("C") or "")
     fruit = {
         "name": f"{pet['name']}果实",
         "acquired": False,
         "obtainMethod": normalize_source_names(description),
         "obtainType": fruit_obtain_type(source),
     }
-    if source == "通行证契约礼券":
-        fruit["exclusiveGroup"] = "pass_s3" if target_number >= 418 else "pass_s2"
+    if target_number in FRUIT_EXCLUSIVE_GROUPS:
+        fruit["exclusiveGroup"] = FRUIT_EXCLUSIVE_GROUPS[target_number]
     pet["fruit"] = fruit
     fruit_records += 1
 

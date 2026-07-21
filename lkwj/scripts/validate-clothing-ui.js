@@ -143,7 +143,7 @@ async function validateUi(html) {
     ['clothing renderer uses gameData.clothing sets and pieces', html.includes('gameData?.clothing') && html.includes('.sets') && html.includes('.pieces')],
     ['clothing progress is persisted separately', html.includes('clothing_progress')],
     ['clothing UI has type filter chips', html.includes('clothingTypeFilter') && html.includes('套装') && html.includes('单件')],
-    ['clothing UI explains gorgeous badge from definitions', html.includes('华丽徽章说明') && /(?:gameData\?\.clothing|clothing)(?:\?\.|\.)definitions/.test(html) && html.includes('gorgeousBadge') && html.includes('gorgeousMagic')],
+    ['clothing UI keeps internal gorgeous badge rules out of the user interface', !html.includes('华丽徽章说明') && !tabSource.includes('definitions')],
     ['clothing UI computes and renders gorgeous magic progress', /function\s+getGorgeousMagicProgress\s*\(\s*set\s*,\s*pieces\s*\)/.test(html) && /(?:const|let)\s+\w+\s*=\s*getGorgeousMagicProgress\s*\(\s*set\s*,\s*pieces\s*\)/.test(html) && html.includes('requiredPieceCount') && html.includes('magic_required')],
     ['clothing targets fail closed to standard pieces', /function\s+isClothingTargetPiece\s*\(\s*item\s*\)/.test(html) && /item\.obtainType\s*===\s*['"]standard['"]/.test(html)],
     ['clothing stats helper exists', /function\s+getClothingStats\s*\(\s*items\s*\)/.test(html)],
@@ -197,16 +197,17 @@ async function validateUi(html) {
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 257 owned of 284 targets with 148 paid references',
-        stats.targetTotal === 284 && stats.targetOwned === 257 && stats.paidTotal === 148],
+      ['real clothing stats are 257 owned of 292 targets with 148 paid references',
+        stats.targetTotal === 292 && stats.targetOwned === 257 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>284</strong> 件 · 已收集 <strong>257</strong>')
+        tabHtml.includes('目标共 <strong>292</strong> 件 · 已收集 <strong>257</strong>')
         && tabHtml.includes('信息缺失套装 <strong>53</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
         && tabHtml.indexOf('sprite-stats') < tabHtml.indexOf('sprite-search')
-        && tabHtml.indexOf('sprite-search') < tabHtml.indexOf('展示类型')
+        && tabHtml.indexOf('sprite-search') < tabHtml.indexOf('class="chips"')
+        && !tabHtml.includes('tb-label')
         && !tabHtml.includes('clothing-overview') && !tabHtml.includes('clothing-toolbar')],
       ['definition-only sets remain visible as incomplete set cards',
         contentHtml.includes('异色朔夜伊芙印象')
@@ -230,7 +231,10 @@ async function validateUi(html) {
         && sets.some(set => set.name === '炼金学分院服' && set.requiredPieceCount === 4)
         && sets.some(set => set.name === '宁静星愿' && set.requiredPieceCount === 6)
         && pieces.some(item => item.pieceName === '眼型-花魁蜂后印象')
-        && pieces.some(item => item.pieceName === '华丽徽章-小丑公爵')],
+        && pieces.some(item => item.pieceName === '华丽徽章-小丑公爵')
+        && ['背包-千棘盔印象', '鞋子-嘟嘟锅印象', '下装-魔眷鸟印象', '背包-翠顶夫人印象',
+          '袜子-迷迷箱怪印象', '鞋子-高脚鹬印象', '连衣-千棘盔印象', '头饰-花衣蝶印象']
+          .every(name => pieces.some(item => item.pieceName === name))],
       ['category filter refreshes the active chip state',
         categorySelectedHtml.includes('chip active')
         && categorySelectedHtml.includes("setClothingCategoryFilter('鞋子')\">鞋子</span>")],
@@ -265,7 +269,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 284</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 292</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);

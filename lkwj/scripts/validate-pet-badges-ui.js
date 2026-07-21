@@ -20,7 +20,7 @@ const officialElementColors = {
   冰: '#63aeda', 武: '#ff9531', 萌: '#ff7cb1', 光: '#4fc0ff', 龙: '#e84a60', 机械: '#24b9a3',
   幽: '#9446ec', 恶: '#cf467a', 虫: '#9ece21', 普通: '#3f89b4', 翼: '#3ec7ca', 地: '#987d44',
 };
-const statusColors = { boss: '#e84a60', shiny: '#e5ca00', chromatic: '#4fc0ff' };
+const statusColors = { boss: '#dc2626', shiny: '#a16207', chromatic: '#7c3aed' };
 
 if (!/function\s+renderElementBadges\s*\(/.test(html)
   || !/class="element-badge el-\$\{/.test(html)) {
@@ -60,14 +60,11 @@ for (const element of elements) {
 
 for (const tag of ['boss', 'shiny', 'chromatic']) {
   const rule = selectorRule(`.pet-status-badge.tag-${tag}`);
-  const background = colorFrom(rule, 'background');
   const foreground = colorFrom(rule, 'color');
-  if (!background || !foreground) {
-    errors.push(`${tag}: missing independent background or text color`);
-  } else if (foreground.toLowerCase() !== '#ffffff') {
-    errors.push(`${tag}: badge text must be white`);
-  } else if (background.toLowerCase() !== statusColors[tag]) {
-    errors.push(`${tag}: background must use the matching official reference color`);
+  if (!/background\s*:\s*transparent/.test(rule) || !/border\s*:\s*1px\s+solid\s+currentColor/.test(rule)) {
+    errors.push(`${tag}: status tag must use a transparent outlined style`);
+  } else if (!foreground || foreground.toLowerCase() !== statusColors[tag]) {
+    errors.push(`${tag}: status tag must use its vivid semantic text color`);
   }
 }
 
@@ -76,4 +73,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(JSON.stringify({ elements: elements.length, statusTags: 3, palette: 'official-original' }, null, 2));
+console.log(JSON.stringify({ elements: elements.length, statusTags: 3, palette: 'official-elements-with-outlined-status' }, null, 2));

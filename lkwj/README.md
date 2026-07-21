@@ -73,15 +73,15 @@ http://localhost:8899/review.html
 | 精灵 | 440 |
 | 课题任务 | 2192 |
 | 精灵果实课题任务 | 108 |
-| 果实图鉴记录 | 170 |
+| 果实图鉴记录 | 168 |
 | 多形态收集项 | 144 |
 | 家具 | 191 |
 | 家具已收集 | 133 |
 | 家具未收集 | 58 |
 | 家具剩余灵感值 | 1506950 |
 | 服装套装 | 85 |
-| 服装部件 | 432 |
-| 服装个人目标 / 已拥有 | 284 / 257 |
+| 服装部件 | 440 |
+| 服装个人目标 / 已拥有 | 292 / 257 |
 | 服装付费非目标 | 148 |
 | 必需部件名称待补套装 | 53 |
 | 称号 | 1 |
@@ -100,9 +100,9 @@ http://localhost:8899/review.html
 
 | 状态 | 标签 / 数据 | 说明 |
 |------|-------------|------|
-| 已整理可用 | 精灵、课题、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 | 最新 Excel 的 N.001–N.439 已完整同步；N.440“睡铃雪影娃娃”已建立名称占位。现有 440 只精灵、2192 条课题、191 条进化链、170 条果实记录和 144 个多形态项 |
+| 已整理可用 | 精灵、课题、进化链、异色炫彩、多形态、精灵果实、家具、遗迹 | 最新 Excel 的 N.001–N.439 已完整同步；N.440“睡铃雪影娃娃”已建立名称占位。现有 440 只精灵、2192 条课题、191 条进化链、168 条有效果实记录和 144 个多形态项 |
 | 已归档 | S3 官方图片与最新 Excel 审计 | 用户已确认幽冥眼、象牙球形态和十字蝌蚪家族系别。固定校准表见 `docs/REVIEW_CHECKLIST.md`，本轮归档见 `docs/archive/2026-07-21-s3-image-excel-sync.md` |
-| 真实数据可用、明细持续补充 | 服装 | 已导入 85 套、432 个部件；284 个个人目标中已拥有 257 个，148 个积分卡组件仅展示。53 套尚缺完整必需部件名称，随机商店刷新后继续按实际名称补录 |
+| 真实数据可用、明细持续补充 | 服装 | 已导入 85 套、440 个部件；292 个个人目标中已拥有 257 个，148 个积分卡组件仅展示。53 套尚缺完整必需部件名称，随机商店刷新后继续按实际名称补录 |
 | 结构可用但明细待补 | 商店/货币 | 36 个商店和 6 种货币已入库，商品明细未采集 |
 | 只有示例/占位 | 称号 | 前端和 JSON 结构已搭好，但 `titles.json` 仍主要是示例数据 |
 | 有通用结构但无数据 | 星星、支线任务、扭蛋机、音乐 | Tab 使用 `collections.items`，当前 0 条 |
@@ -124,6 +124,8 @@ node scripts/validate-random-task-ui.js
 node scripts/validate-furniture-ui.js
 node scripts/validate-clothing-data.js
 node scripts/validate-clothing-ui.js
+node scripts/validate-pet-badges-ui.js
+node scripts/validate-tab-consistency-ui.js
 node scripts/validate-title-ui.js
 node scripts/validate-dungeon-ui.js
 node -e "for (const f of ['data/pets.json','data/tasks.json','data/evolution-chains.json','data/furniture.json','data/clothing.json','data/titles.json','data/dungeons.json','data/shops.json','data/collections.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('json ok')"

@@ -28,6 +28,7 @@ VERIFIED_TEXT_REPLACEMENTS = {
 }
 PARTIAL_PETS = {440: "睡铃雪影娃娃"}
 VERIFIED_EVOLUTION_LEVELS = {430: 40}
+NO_FRUIT_SOURCES = {"传说精灵", "特殊奇遇", "开局必送", "呱呱上学记"}
 
 
 def apply_verified_text_corrections(value):
@@ -347,7 +348,10 @@ for row in sheets.get("果实进度", [])[1:]:
     final_number = find_fruit_target(numbers, row.get("D"))
     if final_number > 439:
         continue
-    no_fruit = str(row.get("D") or "").startswith("无果实")
+    no_fruit = (
+        str(row.get("C") or "").strip() in NO_FRUIT_SOURCES
+        or str(row.get("D") or "").startswith("无果实")
+    )
     if no_fruit:
         continue
     expected_fruit_targets[final_number] = row

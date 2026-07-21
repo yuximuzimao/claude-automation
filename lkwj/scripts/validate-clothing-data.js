@@ -21,6 +21,16 @@ const setIds = new Set();
 const setNames = new Set();
 const pieceIds = new Set();
 const pieceNames = new Set();
+const todayRandomShopPieces = [
+  ['背包-千棘盔印象', 'clothing_set_76', '背包'],
+  ['鞋子-嘟嘟锅印象', 'clothing_set_38', '鞋子'],
+  ['下装-魔眷鸟印象', 'clothing_set_47', '下装'],
+  ['背包-翠顶夫人印象', 'clothing_set_11', '背包'],
+  ['袜子-迷迷箱怪印象', 'clothing_set_77', '袜子'],
+  ['鞋子-高脚鹬印象', 'clothing_set_44', '鞋子'],
+  ['连衣-千棘盔印象', 'clothing_set_76', '玩偶服/连衣'],
+  ['头饰-花衣蝶印象', 'clothing_set_41', '头饰/帽子'],
+];
 const setIdPattern = /^clothing_set_[1-9]\d*$/;
 const pieceIdPattern = /^clothing_[1-9]\d*$/;
 function isNonEmptyString(value) {
@@ -73,6 +83,19 @@ for (const set of sets) {
   if (!isNonEmptyString(set.obtainMethod)) errors.push(`${set.name || set.id || 'unknown set'}: missing obtainMethod`);
   if (typeof set.gorgeousMagicPetName !== 'string') {
     errors.push(`${set.name || set.id || 'unknown set'}: missing gorgeousMagicPetName`);
+  }
+}
+
+for (const [pieceName, setId, category] of todayRandomShopPieces) {
+  const matches = pieces.filter(piece => piece.pieceName === pieceName);
+  if (matches.length !== 1) {
+    errors.push(`${pieceName}: expected exactly one random-shop definition`);
+    continue;
+  }
+  const piece = matches[0];
+  if (piece.setId !== setId || piece.category !== category || piece.collectionType !== 'set'
+    || piece.setRole !== 'magic_required' || piece.obtainType !== 'standard') {
+    errors.push(`${pieceName}: random-shop definition fields mismatch`);
   }
 }
 

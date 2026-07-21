@@ -15,12 +15,6 @@
     "pinyin": {
       "full": "dimo",
       "initial": "dm"
-    },
-    "fruit": {
-      "name": "迪莫果实",
-      "acquired": false,
-      "obtainMethod": "唯一的迪莫",
-      "obtainType": "开局必送"
     }
   },
   "pet_2": {
@@ -101,7 +95,8 @@
       "name": "魔力猫果实",
       "acquired": false,
       "obtainMethod": "开局三选一",
-      "obtainType": "一代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
     }
   },
   "pet_5": {
@@ -182,7 +177,8 @@
       "name": "火神果实",
       "acquired": false,
       "obtainMethod": "开局三选一",
-      "obtainType": "一代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
     }
   },
   "pet_8": {
@@ -263,7 +259,8 @@
       "name": "水灵果实",
       "acquired": false,
       "obtainMethod": "开局三选一",
-      "obtainType": "一代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen1"
     }
   },
   "pet_11": {
@@ -2001,7 +1998,7 @@
       "name": "巨噬针鼹果实",
       "acquired": false,
       "obtainMethod": "解锁风眠省8个精灵图鉴\n-学院驻地海边智慧树苗处获得果实",
-      "obtainType": "智慧树苗·风眠省"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_63": {
@@ -3078,7 +3075,7 @@
       "name": "咔咔鸟果实",
       "acquired": false,
       "obtainMethod": "解锁风眠省30个精灵图鉴-隐秘滩涂南边智慧树苗处获得果实",
-      "obtainType": "智慧树苗·风眠省"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_99": {
@@ -3537,7 +3534,7 @@
       "name": "仪式巨像果实",
       "acquired": false,
       "obtainMethod": "解锁风眠省60个精灵图鉴-风息山口魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·风眠省"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_116": {
@@ -3773,7 +3770,7 @@
       "name": "黑猫巫师果实",
       "acquired": false,
       "obtainMethod": "解锁风眠省90个精灵图鉴-叽叽喳喳台地魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·风眠省"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_123": {
@@ -4361,7 +4358,7 @@
       "name": "雪影娃娃果实",
       "acquired": false,
       "obtainMethod": "解锁风眠省120个精灵图鉴-星霜崖地破船旁边智慧树苗处获得果实",
-      "obtainType": "智慧树苗·风眠省"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_145": {
@@ -4634,7 +4631,8 @@
       "name": "针叶巡林果实",
       "acquired": false,
       "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
-      "obtainType": "二代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_156": {
@@ -4709,7 +4707,8 @@
       "name": "炽焰勇狮果实",
       "acquired": false,
       "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
-      "obtainType": "二代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_159": {
@@ -4784,7 +4783,8 @@
       "name": "游蛇魔使果实",
       "acquired": false,
       "obtainMethod": "完成学院作业-洛克里安第一章，三选一",
-      "obtainType": "二代御三家"
+      "obtainType": "剧情任务",
+      "exclusiveGroup": "starter_gen2"
     }
   },
   "pet_162": {
@@ -6070,7 +6070,7 @@
       "name": "伊兰亚龙果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安120个精灵图鉴-银河蛇口魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_205": {
@@ -6592,7 +6592,7 @@
       "name": "波多西果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安60个精灵图鉴-二叠山丘魔地下一层（圆号鱼的守护地附近）智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_224": {
@@ -6646,7 +6646,7 @@
       "name": "翼龙果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安70个精灵图鉴-监管区魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_226": {
@@ -7342,7 +7342,7 @@
       "name": "裘卡果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安100个精灵图鉴-望风半岛魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_249": {
@@ -7413,7 +7413,7 @@
       "name": "火焰猿果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安40个精灵图鉴-港口驻地魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_252": {
@@ -7486,7 +7486,7 @@
       "name": "冰钻布鲁斯果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安60个精灵图鉴-向日葵海岸魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_255": {
@@ -7806,7 +7806,7 @@
       "name": "立方人果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安80个精灵图鉴-拾荒港口魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_266": {
@@ -7994,7 +7994,7 @@
       "name": "噼啪鸟果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安60个精灵图鉴-圣所前哨魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_273": {
@@ -8024,7 +8024,7 @@
       "name": "深蓝鲸果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安100个精灵图鉴-沉船旋涡魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_274": {
@@ -8288,7 +8288,7 @@
       "name": "秩序鱿墨果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安50个精灵图鉴-圣所前哨魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_283": {
@@ -8400,7 +8400,7 @@
       "name": "圣剑-X果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安80个精灵图鉴-风息山口的魔力之源智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_287": {
@@ -8560,7 +8560,7 @@
       "name": "厉毒修萝果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安140个精灵图鉴-厄水沼泽魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_293": {
@@ -8974,7 +8974,7 @@
       "acquired": false,
       "obtainMethod": "购买S1赛季通行证契约礼券获取，二选一",
       "obtainType": "通行证契约礼券",
-      "exclusiveGroup": "pass_s2"
+      "exclusiveGroup": "pass_s1"
     }
   },
   "pet_310": {
@@ -9051,7 +9051,7 @@
       "acquired": false,
       "obtainMethod": "购买S1赛季通行证契约礼券获取，二选一",
       "obtainType": "通行证契约礼券",
-      "exclusiveGroup": "pass_s2"
+      "exclusiveGroup": "pass_s1"
     }
   },
   "pet_313": {
@@ -9773,7 +9773,7 @@
       "name": "上岸蛙果实",
       "acquired": false,
       "obtainMethod": "通过官网下载后领取果实",
-      "obtainType": "官网下载"
+      "obtainType": "限时活动"
     }
   },
   "pet_340": {
@@ -9828,7 +9828,7 @@
       "name": "雅丹鬃果实",
       "acquired": false,
       "obtainMethod": "完成联动限定「火红迎新」活动剧情获得果实",
-      "obtainType": "火红迎新"
+      "obtainType": "限时活动"
     }
   },
   "pet_342": {
@@ -9903,7 +9903,7 @@
       "name": "春花兔果实",
       "acquired": false,
       "obtainMethod": "001期，捕捉10只春花兔家族",
-      "obtainType": "洛克筑梦师"
+      "obtainType": "限时活动"
     }
   },
   "pet_345": {
@@ -9978,7 +9978,7 @@
       "name": "暮星辰果实",
       "acquired": false,
       "obtainMethod": "002期，捕捉10只幽星光家族",
-      "obtainType": "洛克筑梦师"
+      "obtainType": "限时活动"
     }
   },
   "pet_348": {
@@ -10639,13 +10639,7 @@
     "name": "学院呱呱",
     "element": [
       "武"
-    ],
-    "fruit": {
-      "name": "学院呱呱果实",
-      "acquired": false,
-      "obtainMethod": "参与活动「呱呱上学记」达到100研学绩点获得蛋",
-      "obtainType": "呱呱上学记"
-    }
+    ]
   },
   "pet_376": {
     "forms": {
@@ -11202,7 +11196,7 @@
       "name": "友爱星飞果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安215个精灵图鉴-巨人裂谷南魔力之源附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_398": {
@@ -11256,7 +11250,7 @@
       "name": "克莱因龙果实",
       "acquired": false,
       "obtainMethod": "解锁洛克里安190个精灵图鉴-美愿树附近智慧树苗处获得果实",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_400": {
@@ -11624,7 +11618,7 @@
       "name": "溯源钟果实",
       "acquired": false,
       "obtainMethod": "进入不咕钟守护地获得果实（解锁洛克里安10个精灵图鉴）",
-      "obtainType": "智慧树苗·洛克里安"
+      "obtainType": "智慧树苗"
     }
   },
   "pet_414": {

@@ -62,7 +62,6 @@
     /* ── 工具栏 ── */
     .tb-section { margin-bottom: 10px; }
     .tb-section:last-child { margin-bottom: 0; }
-    .tb-label { font-size: 12px; color: #aaa; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
     .sprite-search { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; background: #fff; color: #1a1a2e; font-family: inherit; }
     .sprite-search:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
     .chips { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -97,6 +96,10 @@
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
     .task-row .task-check.noclick { cursor: default; pointer-events: none; }
     .task-methods { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.5; }
+    .fruit-method { white-space: nowrap; }
+    @media (max-width: 720px) {
+      .fruit-method { white-space: normal; }
+    }
     .task-inline-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: #4f46e5; font-size: 15px; cursor: pointer; text-decoration: none; }
     .task-inline-link:hover { text-decoration: underline; }
     .task-inline-link:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 2px; }
@@ -138,11 +141,6 @@
     .clothing-stat-label { color: #9a9caf; font-size: 11px; font-weight: 650; letter-spacing: 0.05em; }
     .clothing-stat-value { color: #5f6272; font-size: 13px; line-height: 1.45; }
     .clothing-stat-value strong { color: #4f46e5; font-size: 17px; font-weight: 700; }
-    .clothing-info-panel { margin: 0 0 12px; padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 9px; background: #fbfbfd; }
-    .clothing-info-panel summary { cursor: pointer; color: #55586a; font-size: 13px; font-weight: 650; }
-    .clothing-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 9px; }
-    .clothing-info-item { padding: 8px 10px; border-radius: 7px; background: #fff; border: 1px solid #eceef4; font-size: 12px; color: #73768a; line-height: 1.55; }
-    .clothing-info-item strong { color: #4f46e5; }
     .clothing-toolbar { padding: 12px 14px; margin-bottom: 12px; background: #fff; border: 1px solid #e8eaf0; border-radius: 10px; }
     .clothing-toolbar .tb-section { margin-bottom: 0; }
     .clothing-toolbar .tb-section + .tb-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #f0f1f5; }
@@ -187,7 +185,6 @@
     .clothing-single-row .item-name { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 15px; font-weight: 550; }
     @media (max-width: 860px) {
       .clothing-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .clothing-info-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 620px) {
       .clothing-overview { grid-template-columns: 1fr; }
@@ -275,9 +272,9 @@
     .element-badge.el-翼 { background: #3ec7ca; color: #ffffff; }
     .element-badge.el-普通 { background: #3f89b4; color: #ffffff; }
     .element-badge.el-机械 { background: #24b9a3; color: #ffffff; }
-    .pet-status-badge.tag-boss { background: #e84a60; color: #ffffff; }
-    .pet-status-badge.tag-shiny { background: #e5ca00; color: #ffffff; }
-    .pet-status-badge.tag-chromatic { background: #4fc0ff; color: #ffffff; }
+    .pet-status-badge.tag-boss { background: transparent; color: #dc2626; border: 1px solid currentColor; }
+    .pet-status-badge.tag-shiny { background: transparent; color: #a16207; border: 1px solid currentColor; }
+    .pet-status-badge.tag-chromatic { background: transparent; color: #7c3aed; border: 1px solid currentColor; }
   </style>
 </head>
 <body>
@@ -1053,12 +1050,12 @@ function renderSpriteTab() {
   // Build toolbar
   let toolbarHtml = '';
   toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">🐾 精灵</h3>`;
-  toolbarHtml += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></div>`;
+  toolbarHtml += `<div id="sprite-stats" class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong></div>`;
   toolbarHtml += '<div class="tb-section">';
   toolbarHtml += `<input class="sprite-search" type="text" placeholder="搜索精灵（编号/名称/元素/拼音）..." value="${esc(spriteSearch)}" oninput="spriteSearch=this.value;expandedPet=null;renderSpriteContent()">`;
   toolbarHtml += '</div>';
 
-  toolbarHtml += '<div class="tb-section"><div class="tb-label">任务筛选</div><div class="chips">';
+  toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += `<span class="chip${!spriteTaskFilter ? ' active' : ''}" onclick="setSpriteTaskFilter(null)">全部</span>`;
   toolbarHtml += `<span class="chip${spriteTaskFilter === 'fruit' ? ' active' : ''}" onclick="setSpriteTaskFilter('fruit')">果实</span>`;
   toolbarHtml += `<span class="chip${spriteTaskFilter === 'capture_chromatic' ? ' active' : ''}" onclick="setSpriteTaskFilter('capture_chromatic')">炫彩</span>`;
@@ -1066,7 +1063,7 @@ function renderSpriteTab() {
   toolbarHtml += `<span class="chip${spriteTaskFilter === 'skill' ? ' active' : ''}" onclick="setSpriteTaskFilter('skill')">技能</span>`;
   toolbarHtml += '</div></div>';
 
-  toolbarHtml += '<div class="tb-section"><div class="tb-label">元素筛选</div><div class="chips">';
+  toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += `<span class="chip${!spriteElement ? ' active' : ''}" onclick="setSpriteElement(null)">全部</span>`;
   toolbarHtml += `<span class="chip${spriteElement === 'destined_hero' ? ' active' : ''}" onclick="setSpriteElement('destined_hero')">命定勇者</span>`;
   allElements.forEach(el => {
@@ -1074,7 +1071,7 @@ function renderSpriteTab() {
   });
   toolbarHtml += '</div></div>';
 
-  toolbarHtml += '<div class="tb-section"><div class="tb-label">进度</div><div class="chips">';
+  toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += renderStatusChips(spriteStatus, 'setSpriteStatus');
   toolbarHtml += '</div></div>';
 
@@ -1086,12 +1083,6 @@ function renderSpriteTab() {
 function renderSpriteContent() {
   const contentEl = document.getElementById('sprite-content');
   const pets = gameData?.pets || {};
-  const total = Object.keys(pets).length;
-  const collected = Object.keys(pets).filter(pk => {
-    const tasks = petTasks(pk);
-    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
-  }).length;
-
   // Filter entries
   let entries = petEntries();
   if (spriteSearch) {
@@ -1120,11 +1111,18 @@ function renderSpriteContent() {
     });
   }
 
+  const total = Object.keys(pets).length;
+  const collected = Object.keys(pets).filter(pk => {
+    const tasks = petTasks(pk);
+    return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
+  }).length;
+  const statsEl = document.getElementById('sprite-stats');
+  if (statsEl) statsEl.innerHTML = `共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong>`;
+
   expandedPet = resolveSingleSearchExpansion(spriteSearch, entries, ([petKey]) => petKey, expandedPet);
 
   // Build content
   let contentHtml = '';
-  contentHtml += `<div class="sprite-stats">共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong></div>`;
 
   if (!entries.length) {
     contentHtml += '<div class="empty-state">没有匹配的精灵<small>试试拼音首字母？</small></div>';
@@ -1378,15 +1376,15 @@ function renderShinyTab() {
   if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 匹配 <strong>${filtered.length}</strong>`;
   toolbarHtml += '</div>';
   toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;shinyPage=1;renderShinyContent()"></div>`;
-  toolbarHtml += '<div class="chips" style="margin-bottom:8px">';
+  toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += `<span class="chip${shinySeason === 'all' ? ' active' : ''}" onclick="setShinySeason('all')">全部</span>`;
   seasons.forEach(s => {
     toolbarHtml += `<span class="chip${shinySeason === s ? ' active' : ''}" onclick="setShinySeason('${s}')">${s}</span>`;
   });
-  toolbarHtml += '</div>';
-  toolbarHtml += '<div class="chips" style="margin-bottom:8px">';
+  toolbarHtml += '</div></div>';
+  toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += renderStatusChips(shinyStatus, 'setShinyStatus');
-  toolbarHtml += '</div>';
+  toolbarHtml += '</div></div>';
   document.getElementById('shiny-toolbar').innerHTML = toolbarHtml;
 
   renderShinyContent();
@@ -1674,11 +1672,11 @@ function renderCategoryTab(tab) {
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索..." value="${esc(searchTerm)}" oninput="catSearch['${tab}']=this.value;renderCategoryContent('${tab}')"></div>`;
 
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   STATUS_CHIPS.forEach(s => {
     html += `<span class="chip${st === s.v ? ' active' : ''}" onclick="setCatStatus('${tab}','${s.v}')">${s.l}</span>`;
   });
-  html += '</div>';
+  html += '</div></div>';
 
   html += `<div id="cat-${tab}-content"></div>`;
   el.innerHTML = html;
@@ -1797,9 +1795,9 @@ function renderFormsTab() {
   let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
   html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)"></div>`;
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += renderStatusChips(formStatus, 'setFormStatus');
-  html += '</div>';
+  html += '</div></div>';
 
   html += '<div id="forms-content"></div>';
   el.innerHTML = html;
@@ -1913,17 +1911,17 @@ function renderFruitsTab() {
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索果实名称或获取方式..." value="${esc(fruitSearch)}" oninput="fruitSearch=this.value;renderFruitsContent()"></div>`;
 
   // 获取方式筛选芯片
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${!fruitTypeFilter ? ' active' : ''}" onclick="setFruitTypeFilter(null)">全部</span>`;
   FRUIT_TYPES.forEach(t => {
     html += `<span class="chip${fruitTypeFilter === t ? ' active' : ''}" onclick="setFruitTypeFilter('${t}')">${t}</span>`;
   });
-  html += '</div>';
+  html += '</div></div>';
 
   // 进度筛选芯片
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += renderStatusChips(fruitStatus, 'setFruitStatus');
-  html += '</div>';
+  html += '</div></div>';
 
   html += '<div id="fruits-content"></div>';
   el.innerHTML = html;
@@ -1981,17 +1979,16 @@ function renderFruitRow(petKey, pet, allPets) {
     );
   }
 
-  // 获取方式文本
-  let methodHtml = '';
-  if (fruit?.obtainMethod) {
-    const methodText = esc(fruit.obtainMethod);
-    methodHtml = `<div class="task-methods">${methodText}</div>`;
-    // 课题任务类型额外显示捕捉地点
-    if (fruit.obtainType === '课题任务') {
-      const loc = getCaptureObtainMethods(petKey);
-      if (loc.length) methodHtml += `<div class="task-methods">${loc.map(esc).join('、')}</div>`;
-    }
+  // 获取方式和捕捉地点合并成一行，避免同类果实出现一行/两行两种布局。
+  const methodParts = fruit?.obtainMethod ? [fruit.obtainMethod] : [];
+  if (fruit?.obtainType === '课题任务') {
+    const locations = getCaptureObtainMethods(petKey);
+    if (locations.length) methodParts.push(locations.join('、'));
   }
+  const methodText = methodParts.join(' · ');
+  const methodHtml = methodText
+    ? `<div class="task-methods fruit-method" title="${escAttr(methodText)}">${esc(methodText)}</div>`
+    : '';
 
   const blockedStyle = exclusiveBlocked ? ' style="opacity:0.45"' : '';
   const blockedNote = exclusiveBlocked ? `<div class="task-methods" style="color:#f60">已不可获取（同赛季/同代二选一/三选一）</div>` : '';
@@ -2036,11 +2033,11 @@ function renderFurnitureTab() {
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🪑 家具</h3>`;
   html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 件 · 已收集 <strong>${owned.length}</strong> · 还差 <strong>${remainingInspiration}</strong> 灵感值</div>`;
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索家具名称..." value="${esc(furnitureSearch)}" oninput="furnitureSearch=this.value;renderFurnitureContent()"></div>`;
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${furnitureStatusFilter === 'all' ? ' active' : ''}" onclick="setFurnitureStatusFilter('all')">全部</span>`;
   html += `<span class="chip${furnitureStatusFilter === 'pending' ? ' active' : ''}" onclick="setFurnitureStatusFilter('pending')">未收集</span>`;
   html += `<span class="chip${furnitureStatusFilter === 'done' ? ' active' : ''}" onclick="setFurnitureStatusFilter('done')">已收集</span>`;
-  html += '</div>';
+  html += '</div></div>';
 
   if (!items.length) {
     html += '<div class="empty-state">暂无家具数据<small>把名称、舒适度、灵感值补到 data/furniture.json 后会在这里显示</small></div>';
@@ -2137,11 +2134,11 @@ function renderTitlesTab() {
   }
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索称号..." value="${esc(titleSearch)}" oninput="titleSearch=this.value;renderTitlesContent()"></div>`;
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${titleStatusFilter === 'all' ? ' active' : ''}" onclick="titleStatusFilter='all';renderTitlesTab()">全部</span>`;
   html += `<span class="chip${titleStatusFilter === 'pending' ? ' active' : ''}" onclick="titleStatusFilter='pending';renderTitlesTab()">${STATUS.PENDING}</span>`;
   html += `<span class="chip${titleStatusFilter === 'done' ? ' active' : ''}" onclick="titleStatusFilter='done';renderTitlesTab()">${STATUS.DONE}</span>`;
-  html += '</div>';
+  html += '</div></div>';
 
   html += '<div id="titles-content"></div>';
   el.innerHTML = html;
@@ -2235,11 +2232,11 @@ function renderDungeonsTab() {
   }
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索副本名称、位置或奖励..." value="${esc(dungeonSearch)}" oninput="dungeonSearch=this.value;expandedDungeon=null;renderDungeonsContent()"></div>`;
-  html += '<div class="chips" style="margin-bottom:8px">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${dungeonStatusFilter === 'all' ? ' active' : ''}" onclick="dungeonStatusFilter='all';renderDungeonsTab()">全部</span>`;
   html += `<span class="chip${dungeonStatusFilter === 'pending' ? ' active' : ''}" onclick="dungeonStatusFilter='pending';renderDungeonsTab()">${STATUS.PENDING}</span>`;
   html += `<span class="chip${dungeonStatusFilter === 'done' ? ' active' : ''}" onclick="dungeonStatusFilter='done';renderDungeonsTab()">${STATUS.DONE}</span>`;
-  html += '</div>';
+  html += '</div></div>';
 
   html += '<div id="dungeons-content"></div>';
   el.innerHTML = html;
@@ -2551,7 +2548,6 @@ function renderClothingTab() {
     .sort((a, b) => (CLOTHING_CATEGORY_RANK.get(a) ?? CLOTHING_CATEGORY_ORDER.length)
       - (CLOTHING_CATEGORY_RANK.get(b) ?? CLOTHING_CATEGORY_ORDER.length)
       || a.localeCompare(b, 'zh-Hans-CN'));
-  const definitions = gameData?.clothing?.definitions || {};
   const missingSetCount = getClothingMissingSetIds(setDefinitions, clothing).size;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">👗 服装</h3>`;
@@ -2565,31 +2561,25 @@ function renderClothingTab() {
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索服装名称、套装或获取方式..." value="${esc(clothingSearch)}" oninput="clothingSearch=this.value;expandedClothingSet=null;renderClothingContent()"></div>`;
 
-  html += '<div class="tb-section"><div class="tb-label">展示类型</div><div class="chips">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${clothingTypeFilter === 'all' ? ' active' : ''}" onclick="clothingTypeFilter='all';expandedClothingSet=null;renderClothingTab()">全部</span>`;
   html += `<span class="chip${clothingTypeFilter === 'set' ? ' active' : ''}" onclick="clothingTypeFilter='set';expandedClothingSet=null;renderClothingTab()">套装</span>`;
   html += `<span class="chip${clothingTypeFilter === 'single' ? ' active' : ''}" onclick="clothingTypeFilter='single';expandedClothingSet=null;renderClothingTab()">单件</span>`;
   html += '</div></div>';
 
-  html += '<div class="tb-section"><div class="tb-label">收集进度</div><div class="chips">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${clothingStatusFilter === 'all' ? ' active' : ''}" onclick="setClothingStatusFilter('all')">全部</span>`;
   html += `<span class="chip${clothingStatusFilter === 'pending' ? ' active' : ''}" onclick="setClothingStatusFilter('pending')">${STATUS.PENDING}</span>`;
   html += `<span class="chip${clothingStatusFilter === 'missing' ? ' active' : ''}" onclick="setClothingStatusFilter('missing')">信息缺失 ${missingSetCount}</span>`;
   html += `<span class="chip${clothingStatusFilter === 'done' ? ' active' : ''}" onclick="setClothingStatusFilter('done')">${STATUS.DONE}</span>`;
   html += '</div></div>';
 
-  html += '<div class="tb-section"><div class="tb-label">部件分类</div><div class="chips">';
+  html += '<div class="tb-section"><div class="chips">';
   html += `<span class="chip${clothingCategoryFilter === 'all' ? ' active' : ''}" onclick="setClothingCategoryFilter('all')">全部分类</span>`;
   categories.forEach(category => {
     html += `<span class="chip${clothingCategoryFilter === category ? ' active' : ''}" onclick="setClothingCategoryFilter('${escAttr(category)}')">${esc(category)}</span>`;
   });
   html += '</div></div>';
-
-  html += '<details class="clothing-info-panel">';
-  html += '<summary>华丽徽章说明</summary><div class="clothing-info-grid">';
-  if (definitions.gorgeousBadge) html += `<div class="clothing-info-item"><strong>${esc(definitions.gorgeousBadge.name || '华丽徽章')}</strong><br>${esc(definitions.gorgeousBadge.description || '')}</div>`;
-  if (definitions.gorgeousMagic) html += `<div class="clothing-info-item"><strong>${esc(definitions.gorgeousMagic.name || '华丽魔法')}</strong><br>${esc(definitions.gorgeousMagic.description || '')}</div>`;
-  html += '</div></details>';
 
   html += '<div id="clothing-content"></div>';
   el.innerHTML = html;
