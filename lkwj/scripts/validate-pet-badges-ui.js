@@ -15,16 +15,12 @@ function colorFrom(rule, property) {
   return rule.match(new RegExp(`(?:^|;)\\s*${property}\\s*:\\s*(#[0-9a-fA-F]{6})`))?.[1];
 }
 
-function luminance(hex) {
-  const channels = hex.slice(1).match(/.{2}/g).map(part => parseInt(part, 16) / 255)
-    .map(value => value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
-  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
-}
-
-function contrast(foreground, background) {
-  const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
-  return (values[0] + 0.05) / (values[1] + 0.05);
-}
+const officialElementColors = {
+  草: '#4ebc73', 水: '#62a8ff', 火: '#df561e', 电: '#e5ca00', 毒: '#ba62e0', 幻: '#9ca9ff',
+  冰: '#63aeda', 武: '#ff9531', 萌: '#ff7cb1', 光: '#4fc0ff', 龙: '#e84a60', 机械: '#24b9a3',
+  幽: '#9446ec', 恶: '#cf467a', 虫: '#9ece21', 普通: '#3f89b4', 翼: '#3ec7ca', 地: '#987d44',
+};
+const statusColors = { boss: '#e84a60', shiny: '#e5ca00', chromatic: '#4fc0ff' };
 
 if (!/function\s+renderElementBadges\s*\(/.test(html)
   || !/class="element-badge el-\$\{/.test(html)) {
@@ -57,8 +53,8 @@ for (const element of elements) {
     errors.push(`${element}: missing independent background or text color`);
   } else if (foreground.toLowerCase() !== '#ffffff') {
     errors.push(`${element}: badge text must be white`);
-  } else if (contrast(foreground, background) < 4.5) {
-    errors.push(`${element}: text contrast below 4.5:1`);
+  } else if (background.toLowerCase() !== officialElementColors[element]) {
+    errors.push(`${element}: background must use the official original color`);
   }
 }
 
@@ -70,8 +66,8 @@ for (const tag of ['boss', 'shiny', 'chromatic']) {
     errors.push(`${tag}: missing independent background or text color`);
   } else if (foreground.toLowerCase() !== '#ffffff') {
     errors.push(`${tag}: badge text must be white`);
-  } else if (contrast(foreground, background) < 4.5) {
-    errors.push(`${tag}: text contrast below 4.5:1`);
+  } else if (background.toLowerCase() !== statusColors[tag]) {
+    errors.push(`${tag}: background must use the matching official reference color`);
   }
 }
 
@@ -80,4 +76,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(JSON.stringify({ elements: elements.length, statusTags: 3, minContrast: 4.5 }, null, 2));
+console.log(JSON.stringify({ elements: elements.length, statusTags: 3, palette: 'official-original' }, null, 2));
