@@ -79,7 +79,7 @@
     .sprite-card-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; cursor: pointer; user-select: none; }
     .sprite-card-header .si { font-size: 15px; font-weight: 600; flex-shrink: 0; color: #1a1a2e; min-width: 36px; text-align: right; margin-right: 6px; }
     .sprite-card-header .sn { font-size: 16px; font-weight: 600; }
-    .sprite-card-header .se { font-size: 11px; padding: 2px 7px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+    .sprite-card-header .pet-badges { flex-shrink: 1; }
     .sprite-card-header .sm { font-size: 12px; color: #aaa; white-space: nowrap; flex-shrink: 0; margin-left: auto; margin-right: 6px; }
     .sprite-card-header .sa { font-size: 10px; color: #ccc; transition: transform 0.15s; flex-shrink: 0; }
     .sprite-card.expanded .sa { transform: rotate(90deg); }
@@ -254,28 +254,29 @@
     .empty-state { text-align: center; padding: 48px 20px; color: #bbb; font-size: 16px; }
     .empty-state small { display: block; margin-top: 6px; font-size: 14px; color: #ccc; }
 
-    .se { color: #6366f1; background: #eef2ff; }
-    .se.el-火 { color: #dc2626; background: #fef2f2; }
-    .se.el-水 { color: #2563eb; background: #eff6ff; }
-    .se.el-草 { color: #16a34a; background: #f0fdf4; }
-    .se.el-光 { color: #ca8a04; background: #fefce8; }
-    .se.el-电 { color: #d97706; background: #fefce8; }
-    .se.el-冰 { color: #0891b2; background: #f0f9ff; }
-    .se.el-地 { color: #b45309; background: #fef7ed; }
-    .se.el-幽 { color: #9333ea; background: #faf5ff; }
-    .se.el-幻 { color: #db2777; background: #fdf2f8; }
-    .se.el-恶 { color: #7c3aed; background: #faf5ff; }
-    .se.el-毒 { color: #be185d; background: #fdf2f8; }
-    .se.el-武 { color: #e85d04; background: #fef2f2; }
-    .se.el-虫 { color: #65a30d; background: #f7fee7; }
-    .se.el-萌 { color: #ec4899; background: #fdf2f8; }
-    .se.el-龙 { color: #8b5cf6; background: #faf5ff; }
-    .se.el-翼 { color: #0e7490; background: #f0f9ff; }
-    .se.el-普 { color: #6b7280; background: #f5f6fa; }
-    .se.el-机 { color: #52525b; background: #f5f5f6; }
-    .tag-boss { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#fef2f2;color:#dc2626;margin-left:4px;font-weight:600; }
-    .tag-shiny { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#fefce8;color:#ca8a04;margin-left:2px;font-weight:600; }
-    .tag-chromatic { display:inline-block;font-size:10px;padding:1px 5px;border-radius:6px;background:#f0f9ff;color:#0891b2;margin-left:2px;font-weight:600; }
+    .pet-badges { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; background: transparent; min-width: 0; }
+    .element-badge, .pet-status-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; padding: 2px 6px; border-radius: 5px; font-size: 11px; font-weight: 700; line-height: 1.35; white-space: nowrap; }
+    .element-badge.el-火 { background: #c2410c; color: #ffffff; }
+    .element-badge.el-水 { background: #1d4ed8; color: #ffffff; }
+    .element-badge.el-草 { background: #15803d; color: #ffffff; }
+    .element-badge.el-光 { background: #a16207; color: #ffffff; }
+    .element-badge.el-电 { background: #facc15; color: #422006; }
+    .element-badge.el-冰 { background: #0e7490; color: #ffffff; }
+    .element-badge.el-地 { background: #92400e; color: #ffffff; }
+    .element-badge.el-幽 { background: #7e22ce; color: #ffffff; }
+    .element-badge.el-幻 { background: #be185d; color: #ffffff; }
+    .element-badge.el-恶 { background: #5b21b6; color: #ffffff; }
+    .element-badge.el-毒 { background: #86198f; color: #ffffff; }
+    .element-badge.el-武 { background: #b91c1c; color: #ffffff; }
+    .element-badge.el-虫 { background: #4d7c0f; color: #ffffff; }
+    .element-badge.el-萌 { background: #a21caf; color: #ffffff; }
+    .element-badge.el-龙 { background: #6d28d9; color: #ffffff; }
+    .element-badge.el-翼 { background: #0f766e; color: #ffffff; }
+    .element-badge.el-普通 { background: #4b5563; color: #ffffff; }
+    .element-badge.el-机械 { background: #3f3f46; color: #ffffff; }
+    .pet-status-badge.tag-boss { background: #b91c1c; color: #ffffff; }
+    .pet-status-badge.tag-shiny { background: #f59e0b; color: #451a03; }
+    .pet-status-badge.tag-chromatic { background: #0e7490; color: #ffffff; }
   </style>
 </head>
 <body>
@@ -1136,26 +1137,37 @@ function renderSpriteContent() {
   contentEl.innerHTML = contentHtml;
 }
 
+function renderElementBadges(elements) {
+  return (elements || []).map((element) =>
+    `<span class="element-badge el-${escAttr(element)}">${esc(element)}</span>`
+  ).join('');
+}
+
+function renderPetTagBadges(tags = {}) {
+  let html = '';
+  if (tags.boss) html += '<span class="pet-status-badge tag-boss">首领</span>';
+  if (tags.shiny) html += '<span class="pet-status-badge tag-shiny">异色</span>';
+  if (tags.chromatic) html += '<span class="pet-status-badge tag-chromatic">炫彩</span>';
+  return html;
+}
+
+function renderPetBadges(pet, includeStatusTags = true) {
+  const content = renderElementBadges(pet.element)
+    + (includeStatusTags ? renderPetTagBadges(pet.tags) : '');
+  return content ? `<span class="pet-badges">${content}</span>` : '';
+}
+
 function renderSpriteCard(petKey, pet) {
   const tasks = petTasks(petKey);
   const totalDone = tasks.filter((t, i) => isTaskDone(petKey, i)).length;
   const isExpanded = expandedPet === petKey;
-
-  // Tag badges
-  let tagsHtml = '';
-  const tags = pet.tags || {};
-  if (tags.boss) tagsHtml += '<span class="tag-boss">首领</span>';
-  if (tags.shiny) tagsHtml += '<span class="tag-shiny">异色</span>';
-  if (tags.chromatic) tagsHtml += '<span class="tag-chromatic">炫彩</span>';
-
-  const primaryEl = (pet.element || ['普'])[0];
 
   let card = `<div id="sprite-pet-${petKey}" class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="togglePet('${petKey}')">`;
   const petNum = petKey.replace('pet_', '');
   card += `<span class="si">No.${petNum}</span>`;
   card += `<span class="sn">${esc(pet.name)}</span>`;
-  card += `<span class="se el-${primaryEl}">${(pet.element || []).join('')}${tagsHtml}</span>`;
+  card += renderPetBadges(pet);
   card += `<span class="sm">${totalDone}/${tasks.length}</span>`;
   card += `<span class="sa">▶</span>`;
   card += '</div>';
@@ -1306,7 +1318,7 @@ function getShinyList() {
         formName: entry.formName,
         progressKey,
         baseName,
-        element: (pet.element || ['普']).join(''),
+        elements: pet.element || [],
         limitedTime: pet.tags.shiny.limitedTime || '',
         isDone: !!shinyProg[progressKey],
       });
@@ -1423,7 +1435,7 @@ function renderShinyRow(s) {
   return `<div class="item-row${isDone ? ' done' : ''}">
     <button class="check-btn${isDone ? ' checked' : ''}" onclick="toggleShinyTask('${s.petKey}','${escAttr(s.formKey)}')"></button>
     <div class="item-info">
-      <div class="item-name">${esc(s.petName)}${formTag}${baseNote} <span class="item-category-tag">${s.element}</span> ${seasonTag}</div>
+      <div class="item-name">${esc(s.petName)}${formTag}${baseNote} <span class="pet-badges">${renderElementBadges(s.elements)}</span> ${seasonTag}</div>
     </div>
   </div>`;
 }
@@ -1831,13 +1843,11 @@ function renderFormPetCard(group) {
   const doneTotal = allForms.filter((entry) => isFormCollected(entry.petKey, entry.formKey)).length;
   const shownDone = group.forms.filter((entry) => entry.isDone).length;
   const isExpanded = expandedFormPet === group.petKey || (!formSearch && formStatus !== 'all');
-  const primaryEl = (group.pet.element || ['普'])[0];
-
   let card = `<div id="form-pet-${group.petKey}" class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="toggleFormPet('${group.petKey}')">`;
   card += `<span class="si">${formatPetNo(group.petKey)}</span>`;
   card += `<span class="sn">${esc(group.pet.name)}</span>`;
-  card += `<span class="se el-${primaryEl}">${(group.pet.element || []).join('')}</span>`;
+  card += renderPetBadges(group.pet, false);
   card += `<span class="sm">${doneTotal}/${allForms.length}${group.forms.length !== allForms.length ? ` · 显示 ${shownDone}/${group.forms.length}` : ''}</span>`;
   card += '<span class="sa">▶</span>';
   card += '</div>';
@@ -2809,13 +2819,7 @@ async function toggleClothingPiece(id) {
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function escAttr(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// 属性 → 颜色 CSS class（取主属性）
-function elClass(element) {
-  if (!element || !element.length) return '';
-  const primary = element[0];
-  return ' el-' + primary;
-}
-
+// 属性 → 颜色 CSS class（校验脚本源码边界）
 init();
 </script>
 </body>
