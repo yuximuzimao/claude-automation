@@ -1082,7 +1082,7 @@ function renderSpriteContent() {
     return tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(pk, i));
   }).length;
   const statsEl = document.getElementById('sprite-stats');
-  if (statsEl) statsEl.innerHTML = `共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 匹配 <strong>${entries.length}</strong>`;
+  if (statsEl) statsEl.innerHTML = `共 <strong>${total}</strong> 只 · 已收集 <strong>${collected}</strong> · 筛选 <strong>${entries.length}</strong>`;
 
   expandedPet = resolveSingleSearchExpansion(spriteSearch, entries, ([petKey]) => petKey, expandedPet);
 
@@ -1316,7 +1316,7 @@ function renderShinyTab() {
   let toolbarHtml = '';
   toolbarHtml += `<h3 style="font-size:15px;margin-bottom:10px">✨ 异色炫彩</h3>`;
   toolbarHtml += `<div class="sprite-stats">共 <strong>${list.length}</strong> 只 · 已收集 <strong>${doneCount}</strong>`;
-  if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 匹配 <strong>${filtered.length}</strong>`;
+  if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 筛选 <strong>${filtered.length}</strong>`;
   toolbarHtml += '</div>';
   toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;renderShinyContent()"></div>`;
   toolbarHtml += '<div class="tb-section"><div class="chips">';
@@ -1577,7 +1577,7 @@ function renderCategoryTab(tab) {
 
   const doneCount = items.filter(i => i.status === '已完成').length;
   html += `<div class="sprite-stats">共 <strong>${items.length}</strong> 项 · 已收集 <strong>${doneCount}</strong>`;
-  if (searchTerm.trim()) html += ` · 匹配 <strong>${list.length}</strong>`;
+  if (searchTerm.trim()) html += ` · 筛选 <strong>${list.length}</strong>`;
   html += '</div>';
 
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索..." value="${esc(searchTerm)}" oninput="catSearch['${tab}']=this.value;renderCategoryContent('${tab}')"></div>`;
@@ -1692,7 +1692,7 @@ function renderFormsTab() {
   const matchedCount = matched.reduce((sum, group) => sum + group.forms.length, 0);
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">多形态</h3>`;
-  html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 匹配 <strong>${matchedCount}</strong></div>`;
+  html += `<div class="sprite-stats">共 <strong>${allGroups.length}</strong> 只精灵 · <strong>${allForms.length}</strong> 个形态 · 已收集 <strong>${owned}</strong> · 筛选 <strong>${matchedCount}</strong></div>`;
   html += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索精灵或形态..." value="${esc(formSearch)}" oninput="onFormSearch(this.value)"></div>`;
   html += '<div class="tb-section"><div class="chips">';
   html += renderStatusChips(formStatus, 'setFormStatus');

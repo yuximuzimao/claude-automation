@@ -34,8 +34,11 @@ if (/class="chips"\s+style="margin-bottom:8px"/.test(html)) {
 if (/class="sprite-stats"/.test(spriteContent)) {
   errors.push('sprite content must not render a second statistics row');
 }
-if (!/id="sprite-stats"/.test(spriteTab) || !/getElementById\('sprite-stats'\)/.test(spriteContent) || !/匹配/.test(spriteContent)) {
+if (!/id="sprite-stats"/.test(spriteTab) || !/getElementById\('sprite-stats'\)/.test(spriteContent) || !/筛选/.test(spriteContent)) {
   errors.push('sprite filters must update the single toolbar statistics row');
+}
+if (/· 匹配 <strong>/.test(html)) {
+  errors.push('filtered statistics must use 筛选 instead of 匹配');
 }
 if (!/class="task-methods fruit-method"/.test(fruitRow) || (fruitRow.match(/class="task-methods fruit-method"/g) || []).length !== 1) {
   errors.push('fruit acquisition method and location must share one small-text row');
