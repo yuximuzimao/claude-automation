@@ -124,7 +124,7 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 );
 ```
 
-### 2.5 鲸灵账号 Session 与重新登录
+### 2.5 鲸灵账号 Session、新增与重新登录
 
 **多账号切换缓存**：
 - `data/current-session.json` 记录当前 Chrome 中实际注入的鲸灵账号。
@@ -135,7 +135,7 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 - `hasFile=false`：没有保存 session，显示「添加登录」。
 - `hasFile=true + status=unknown`：已有 session 文件但未单账号验证，显示「未扫描」，不显示「重新登录」。
 - `status=expired/error`：登录失效或扫描异常，显示「重新登录」。
-- 重新登录保存成功后先写 `unknown`，只能通过店铺管理“打开后台”的安全编排或未来新 A1 单账号流程验证成 `ok`；批量刷新状态功能已删除，禁止恢复。
+- 新增或重新登录确认保存成功后写 `ok`。历史或其他流程写入的 `unknown` 只能通过店铺管理“打开后台”的安全编排或 A1 单账号流程验证；批量刷新状态功能已删除，禁止恢复。
 
 **安全切换门禁（2026-06-19）**：
 1. `openAccountFlow` 先确定唯一鲸灵 `targetId` 并读取实时店铺名；目标账号已登录时直接复用。
@@ -143,16 +143,17 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 3. 只有 `success === true && verified === true` 才调用 04 注入，并把同一个 `targetId` 传入；禁止重新选择“第一个鲸灵 tab”。
 4. 注入后固定导航 `https://scrm.jlsupp.com/micro-customer/business/after-sale-list`，再校验店铺名；禁止 `Page.reload` 继承旧工单详情 URL。
 
-**重新登录待确认生命周期**：
-1. 前端 `POST /api/accounts/:num/relogin`，后端启动 `../sessions/jl.js --auto-save`，写入 `../sessions/.relogin-port-<num>`。
-2. 用户登录完成后点「确认保存」：前端调用 `POST /api/accounts/:num/relogin-confirm`，后端请求临时登录进程 `/save`，保存 session。
+**新增与重新登录的待确认生命周期**：
+1. 新增店铺调用 `POST /api/accounts/add` 创建账号并返回账号编号；重新登录调用 `POST /api/accounts/:num/relogin`。后端统一启动 `../sessions/jl.js --auto-save`，等待写入 `../sessions/.relogin-port-<num>`，前端随后显示同一组「确认保存/取消」按钮。
+2. 用户登录完成后点「确认保存」：前端调用 `POST /api/accounts/:num/relogin-confirm`，后端请求临时登录进程 `/confirm`，保存 session。
 3. 用户点「取消」：前端先进入 `reloginCancelling`，立即把确认/取消按钮禁用并显示「取消中...」，再等待 `POST /api/accounts/:num/relogin-cancel` 返回。只有成功后才能清理 `reloginConfirm` 并恢复「重新登录」；失败时保留确认态，允许再次取消或确认。
 4. 用户关闭登录页：`jl.js` 检测浏览器断开，清理 port 文件，不保存 session。若此后确认保存返回「没有待确认的登录会话」，前端退出确认态并恢复「重新登录」，不能永久卡在「确认保存」。
 5. 正常操作不需要估算等待秒数：以页面从「取消中...」变回「重新登录」为完成信号；按钮恢复前不要重复点击登录。
 
 **账号配置保存**：
 - 保存 session 时必须用 `lib/jl-account-config.js` 合并旧账号配置，保留 `phone/name/note/file` 等字段。
-- 禁止只写登录过程返回的 session 字段；否则会丢 `phone`，下次打开登录页无法自动填入账号。
+- 仅在首次新增且账号 Session 文件尚不存在时传 `--initialize-phone`；确认保存后从 `accountN.json` 的 storageState 中读取 `https://scrm.jlsupp.com` localStorage 里的 `supplierInfo.supplierMobileList[0]`，仅将有效 11 位值初始化到缺失的 `accounts.json.phone`，供下次重新登录自动填写。认证数据没有可用手机号时不阻断 Session 保存。
+- 已有 Session 的普通重新登录不提取、不覆盖手机号。禁止只写登录过程返回的 session 字段；否则会丢 `phone`，下次打开登录页无法自动填入账号。
 - 直接维护重新登录自动填写手机号时，只修改 `../sessions/accounts.json` 对应账号的 `phone` 并读回验证；这不是网页操作，不启动 CDP、不运行 `jl add`、不触发登录，也不修改 `accountN.json`。只有用户明确要求立即重新登录或在平台实际修改手机号时，才进入重新登录流程。
 
 ---

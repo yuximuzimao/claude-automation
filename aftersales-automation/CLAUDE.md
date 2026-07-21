@@ -54,14 +54,14 @@
 **修改 `lib/` 下任何决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server**。
 原因：server 启动时加载模块到内存，不重启新逻辑不生效。当前定时扫描已恢复，由 `server.js` `scheduleNextScan` → `opQueue scan` 触发，并遵守账号 `scanEnabled`；真实处理入口仍由用户点击“处理工单”或队列操作触发，所有浏览器操作必须经 op-queue 串行。
 
-触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/jl-account-config.js` · `lib/erp/*.js`
+触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/server/relogin-session.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/jl-account-config.js` · `lib/erp/*.js`
 
 ## 单元测试
 
 | 测试 | 命令 | 何时必跑 |
 |------|------|----------|
 | 推理回归 | `node test/flow-test.js` | 改 `lib/infer.js` 后 |
-| JL 账号/会话/重登 | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/routes.js` 后 |
+| JL 账号/会话/重登 | `node --test test/jl/account-config.test.js test/jl/session-state.test.js test/server/relogin-session.test.js test/server/relogin-session-launcher.test.js` | 改 `lib/jl-account-config.js` / `lib/jl-session-state.js` / `lib/server/relogin-session.js` / `lib/server/routes.js` 后 |
 | 全量回归 | `npm test` | 改账号切换、CDP、A1 编排或共享模块后 |
 
 **注意**：`node --test` 不接受目录路径，必须逐文件列出。
