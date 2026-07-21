@@ -6,7 +6,7 @@ const clothingPath = path.join(dataDir, 'clothing.json');
 const collectionsPath = path.join(dataDir, 'collections.json');
 const clothing = JSON.parse(fs.readFileSync(clothingPath, 'utf8'));
 const categories = new Set([
-  '玩偶服/连衣', '上衣', '下装', '头饰/帽子', '发型', '手饰', '面饰',
+  '连衣', '玩偶服', '上衣', '下装', '帽子', '发型', '手饰', '面饰',
   '鞋子', '袜子', '背包', '包挂饰', '法杖', '华丽徽章',
 ]);
 const roles = new Set(['magic_required', 'optional']);
@@ -28,8 +28,64 @@ const todayRandomShopPieces = [
   ['背包-翠顶夫人印象', 'clothing_set_11', '背包'],
   ['袜子-迷迷箱怪印象', 'clothing_set_77', '袜子'],
   ['鞋子-高脚鹬印象', 'clothing_set_44', '鞋子'],
-  ['连衣-千棘盔印象', 'clothing_set_76', '玩偶服/连衣'],
-  ['头饰-花衣蝶印象', 'clothing_set_41', '头饰/帽子'],
+  ['连衣-千棘盔印象', 'clothing_set_76', '连衣'],
+  ['帽子-花衣蝶印象', 'clothing_set_41', '帽子'],
+];
+const confirmedMissingPieces = [
+  ['鞋子-翠顶夫人印象', 'clothing_set_11', '鞋子'],
+  ['帽子-翠顶夫人印象', 'clothing_set_11', '帽子'],
+  ['手饰-獠牙猪印象', 'clothing_set_13', '手饰'],
+  ['上衣-奇丽花印象', 'clothing_set_28', '上衣'],
+  ['袜子-奇丽花印象', 'clothing_set_28', '袜子'],
+  ['手饰-奇丽花印象', 'clothing_set_28', '手饰'],
+  ['连衣-星光狮印象', 'clothing_set_29', '连衣'],
+  ['手饰-星光狮印象', 'clothing_set_29', '手饰'],
+  ['连衣-皇家狮鹫印象', 'clothing_set_30', '连衣'],
+  ['背包-花魁蜂后印象', 'clothing_set_31', '背包'],
+  ['连衣-花魁蜂后印象', 'clothing_set_31', '连衣'],
+  ['鞋子-花魁蜂后印象', 'clothing_set_31', '鞋子'],
+  ['手饰-卡洛儿印象', 'clothing_set_32', '手饰'],
+  ['连衣-梦悠悠印象', 'clothing_set_33', '连衣'],
+  ['背包-雪影娃娃印象', 'clothing_set_35', '背包'],
+  ['手饰-雪影娃娃印象', 'clothing_set_35', '手饰'],
+  ['鞋子-雪影娃娃印象', 'clothing_set_35', '鞋子'],
+  ['袜子-魔草巫灵印象', 'clothing_set_37', '袜子'],
+  ['背包-魔草巫灵印象', 'clothing_set_37', '背包'],
+  ['上衣-魔草巫灵印象', 'clothing_set_37', '上衣'],
+  ['下装-魔草巫灵印象', 'clothing_set_37', '下装'],
+  ['帽子-魔草巫灵印象', 'clothing_set_37', '帽子'],
+  ['连衣-嘟嘟锅印象', 'clothing_set_38', '连衣'],
+  ['帽子-嘟嘟锅印象', 'clothing_set_38', '帽子'],
+  ['背包-嘟嘟锅印象', 'clothing_set_38', '背包'],
+  ['帽子-九幽菇印象', 'clothing_set_39', '帽子'],
+  ['背包-九幽菇印象', 'clothing_set_39', '背包'],
+  ['连衣-九幽菇印象', 'clothing_set_39', '连衣'],
+  ['手饰-蒲公英娃娃印象', 'clothing_set_40', '手饰'],
+  ['袜子-蒲公英娃娃印象', 'clothing_set_40', '袜子'],
+  ['连衣-蒲公英娃娃印象', 'clothing_set_40', '连衣'],
+  ['帽子-蒲公英娃娃印象', 'clothing_set_40', '帽子'],
+  ['袜子-花衣蝶印象', 'clothing_set_41', '袜子'],
+  ['连衣-花衣蝶印象', 'clothing_set_41', '连衣'],
+  ['背包-红绒十字印象', 'clothing_set_42', '背包'],
+  ['手饰-红绒十字印象', 'clothing_set_42', '手饰'],
+  ['帽子-红绒十字印象', 'clothing_set_42', '帽子'],
+  ['连衣-红绒十字印象', 'clothing_set_42', '连衣'],
+  ['背包-白金独角兽印象', 'clothing_set_43', '背包'],
+  ['手饰-白金独角兽印象', 'clothing_set_43', '手饰'],
+  ['连衣-白金独角兽印象', 'clothing_set_43', '连衣'],
+  ['帽子-白金独角兽印象', 'clothing_set_43', '帽子'],
+  ['上衣-高脚鹬印象', 'clothing_set_44', '上衣'],
+  ['帽子-高脚鹬印象', 'clothing_set_44', '帽子'],
+  ['连衣-琉璃水母印象', 'clothing_set_45', '连衣'],
+  ['帽子-琉璃水母印象', 'clothing_set_45', '帽子'],
+  ['背包-琉璃水母印象', 'clothing_set_45', '背包'],
+  ['手饰-琉璃水母印象', 'clothing_set_45', '手饰'],
+  ['鞋子-琉璃水母印象', 'clothing_set_45', '鞋子'],
+  ['袜子-雪灵印象', 'clothing_set_46', '袜子'],
+  ['鞋子-雪灵印象', 'clothing_set_46', '鞋子'],
+  ['连衣-雪灵印象', 'clothing_set_46', '连衣'],
+  ['帽子-雪灵印象', 'clothing_set_46', '帽子'],
+  ['手饰-雪灵印象', 'clothing_set_46', '手饰'],
 ];
 const setIdPattern = /^clothing_set_[1-9]\d*$/;
 const pieceIdPattern = /^clothing_[1-9]\d*$/;
@@ -99,12 +155,26 @@ for (const [pieceName, setId, category] of todayRandomShopPieces) {
   }
 }
 
+for (const [pieceName, setId, category] of confirmedMissingPieces) {
+  const matches = pieces.filter(piece => piece.pieceName === pieceName);
+  if (matches.length !== 1) {
+    errors.push(`${pieceName}: expected exactly one confirmed definition`);
+    continue;
+  }
+  const piece = matches[0];
+  if (piece.setId !== setId || piece.category !== category || piece.collectionType !== 'set'
+    || piece.setRole !== 'magic_required' || piece.obtainType !== 'standard') {
+    errors.push(`${pieceName}: confirmed definition fields mismatch`);
+  }
+}
+
 for (const piece of pieces) {
   if (!piece || typeof piece !== 'object' || Array.isArray(piece)) {
     errors.push('piece must be an object');
     continue;
   }
   const label = piece.pieceName || piece.id || 'unknown piece';
+  if (piece.pieceName?.startsWith('头饰-')) errors.push(`${label}: piece name must use 帽子`);
   if (!isNonEmptyString(piece.id)) {
     errors.push(`${label}: missing id`);
   } else if (!pieceIdPattern.test(piece.id)) {

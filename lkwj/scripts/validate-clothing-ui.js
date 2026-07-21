@@ -161,7 +161,7 @@ async function validateUi(html) {
     ['set card pieces do not duplicate shared set fields', html.includes("toggleClothingPiece('${item.id}')") && html.includes('pieceName')],
     ['clothing data file exists as sets and pieces object', Array.isArray(sets) && Array.isArray(pieces)],
     ['real set sample stores gorgeous magic contract', !!setSample && setSample.requiredPieceCount === 6 && setSample.gorgeousMagicPetName === '熔岩布丁' && !!setSample.obtainMethod],
-    ['real set piece sample follows set detail contract', !!setPieceSample && setPieceSample.collectionType === 'set' && setPieceSample.setId === setSample?.id && setPieceSample.category === '玩偶服/连衣' && setPieceSample.setRole === 'magic_required' && setPieceSample.obtainType === 'standard'],
+    ['real set piece sample follows set detail contract', !!setPieceSample && setPieceSample.collectionType === 'set' && setPieceSample.setId === setSample?.id && setPieceSample.category === '连衣' && setPieceSample.setRole === 'magic_required' && setPieceSample.obtainType === 'standard'],
     ['real single sample follows standalone detail contract', !!singleSample && singleSample.collectionType === 'single' && !Object.prototype.hasOwnProperty.call(singleSample, 'setId') && !Object.prototype.hasOwnProperty.call(singleSample, 'setRole') && singleSample.category === '法杖' && singleSample.obtainType === 'standard' && !!singleSample.obtainMethod],
     ['collections has clothing_progress object', collections.clothing_progress && typeof collections.clothing_progress === 'object' && !Array.isArray(collections.clothing_progress)],
   ];
@@ -197,11 +197,11 @@ async function validateUi(html) {
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 257 owned of 292 targets with 148 paid references',
-        stats.targetTotal === 292 && stats.targetOwned === 257 && stats.paidTotal === 148],
+      ['real clothing stats are 257 owned of 346 targets with 148 paid references',
+        stats.targetTotal === 346 && stats.targetOwned === 257 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>292</strong> 件 · 已收集 <strong>257</strong>')
-        && tabHtml.includes('信息缺失套装 <strong>53</strong>')
+        tabHtml.includes('目标共 <strong>346</strong> 件 · 已收集 <strong>257</strong>')
+        && tabHtml.includes('信息缺失套装 <strong>34</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
@@ -214,18 +214,17 @@ async function validateUi(html) {
         && contentHtml.includes('鎏金礼赞')
         && contentHtml.includes('<span class="sm">0/6</span>')
         && contentHtml.includes('<span class="sm">0/4</span>')],
-      ['missing information filter reports and selects all 53 incomplete sets',
-        missingSetIds.size === 53
+      ['missing information filter reports and selects all 34 incomplete sets',
+        missingSetIds.size === 34
         && missingTabHtml.includes('chip active')
-        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 53</span>")],
+        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 34</span>")],
       ['missing information filter includes partial and definition-only sets but excludes complete sets',
-        missingContentHtml.includes('翠顶夫人印象')
-        && missingContentHtml.includes('异色朔夜伊芙印象')
+        missingContentHtml.includes('异色朔夜伊芙印象')
         && missingContentHtml.includes('clothing-set-badge missing')
+        && !missingContentHtml.includes('翠顶夫人印象')
         && !missingContentHtml.includes('电球咩咩印象')],
-      ['pending filter also keeps acquired sets whose required piece information is incomplete',
-        pendingContentHtml.includes('翠顶夫人印象')
-        && pendingContentHtml.includes('信息缺失 3/6')],
+      ['pending filter keeps complete-information sets with uncollected pieces',
+        pendingContentHtml.includes('翠顶夫人印象')],
       ['confirmed clothing corrections and new data are present',
         sets.some(set => set.name === '精灵学分院服' && set.requiredPieceCount === 4)
         && sets.some(set => set.name === '炼金学分院服' && set.requiredPieceCount === 4)
@@ -233,7 +232,7 @@ async function validateUi(html) {
         && pieces.some(item => item.pieceName === '眼型-花魁蜂后印象')
         && pieces.some(item => item.pieceName === '华丽徽章-小丑公爵')
         && ['背包-千棘盔印象', '鞋子-嘟嘟锅印象', '下装-魔眷鸟印象', '背包-翠顶夫人印象',
-          '袜子-迷迷箱怪印象', '鞋子-高脚鹬印象', '连衣-千棘盔印象', '头饰-花衣蝶印象']
+          '袜子-迷迷箱怪印象', '鞋子-高脚鹬印象', '连衣-千棘盔印象', '帽子-花衣蝶印象']
           .every(name => pieces.some(item => item.pieceName === name))],
       ['category filter refreshes the active chip state',
         categorySelectedHtml.includes('chip active')
@@ -241,10 +240,10 @@ async function validateUi(html) {
     );
 
     const sortedPieces = production.api.sortClothingPieces([
-      { id: 'clothing_9', pieceName: '付费头饰', category: '头饰/帽子', obtainType: 'paid', setRole: 'optional' },
+      { id: 'clothing_9', pieceName: '付费帽子', category: '帽子', obtainType: 'paid', setRole: 'optional' },
       { id: 'clothing_4', pieceName: '标准鞋子', category: '鞋子', obtainType: 'standard', setRole: 'magic_required' },
       { id: 'clothing_3', pieceName: '标准上衣', category: '上衣', obtainType: 'standard', setRole: 'magic_required' },
-      { id: 'clothing_2', pieceName: '标准连衣', category: '玩偶服/连衣', obtainType: 'standard', setRole: 'magic_required' },
+      { id: 'clothing_2', pieceName: '标准连衣', category: '连衣', obtainType: 'standard', setRole: 'magic_required' },
       { id: 'clothing_8', pieceName: '可选法杖', category: '法杖', obtainType: 'standard', setRole: 'optional' },
     ]);
     const displayEntries = production.api.buildClothingDisplayEntries([
@@ -269,7 +268,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 292</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 346</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);
