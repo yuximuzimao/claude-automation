@@ -5,6 +5,7 @@ const root = path.join(__dirname, '..');
 const pets = JSON.parse(fs.readFileSync(path.join(root, 'data', 'pets.json'), 'utf8'));
 const tasks = JSON.parse(fs.readFileSync(path.join(root, 'data', 'tasks.json'), 'utf8'));
 const chains = JSON.parse(fs.readFileSync(path.join(root, 'data', 'evolution-chains.json'), 'utf8'));
+const collections = JSON.parse(fs.readFileSync(path.join(root, 'data', 'collections.json'), 'utf8'));
 const extract = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'fixtures', 's3-excel-extract.json'), 'utf8'));
 const syncSource = fs.readFileSync(path.join(root, 'scripts', 'sync-latest-excel.py'), 'utf8');
 const auditSource = fs.readFileSync(path.join(root, 'scripts', 'audit-latest-excel.py'), 'utf8');
@@ -34,6 +35,16 @@ const correctedFruitNames = {
   pet_31: '恶魔叮的果实',
   pet_107: '阿米亚特的果实',
 };
+const confirmedOwnedFruitPrefixes = [
+  '喵喵', '恶魔叮', '鸭吉吉', '阿米亚特', '蹦蹦种子', '奇丽草', '蒲公英', '板板壳',
+  '小独角兽', '幽影树', '格兰种子', '灵狐', '治愈兔', '仪使者', '风铃鲨', '大耳帽兜',
+  '小夜', '空空颅', '裘洛', '春团', '伏地兽', '拉特', '粉粉星', '机械方方', '贝瑟',
+  '小翼龙', '伊雷龙', '菊花梨', '牵线木偶', '布鲁斯', '呼呼猪', '犀角鸟', '粉星仔',
+  '海盔虫', '深蓝鲸', '双灯鱼', '厉毒小萝', '梦游', '柴渣虫', '幽星光', '公平鸽',
+  '小黑猫', '松仔', '嗜光嗡嗡', '小丑豆豆', '爆焰仔', '墨鱿士', '火红尾', '猴麦仔',
+  '加油海葵', '烟花团', '咕咕帽', '炫光迪迪', '小鼓象', '咬咬小子', '咔咔羽毛',
+  '恶魔狼', '月牙雪熊', '多西', '噼啪鸟',
+];
 if (!readerSource.includes('NO_FRUIT_SOURCES')
   || !syncSource.includes('classify_fruit_row')
   || !auditSource.includes('classify_fruit_row')) {
@@ -114,6 +125,11 @@ for (const [petKey, pet] of Object.entries(pets)) {
   const range = pet.fruit.familyNumberRange;
   if (!Array.isArray(range) || range.length !== 2 || !range.every(Number.isInteger) || range[0] > range[1]) {
     errors.push(`${petKey}: fruit must keep its valid Excel family number range`);
+  } else {
+    const familyFirstName = pets[key(range[0])]?.name;
+    if (pet.fruit.name !== `${familyFirstName}的果实`) {
+      errors.push(`${petKey}: fruit name must use family first form ${familyFirstName}`);
+    }
   }
 }
 for (const [petKey, expectedName] of Object.entries(correctedFruitNames)) {
@@ -121,11 +137,27 @@ for (const [petKey, expectedName] of Object.entries(correctedFruitNames)) {
     errors.push(`${petKey}: fruit name must be ${expectedName}`);
   }
 }
-if (!syncSource.includes('FRUIT_NAME_OVERRIDES') || !syncSource.includes("的果实")) {
-  errors.push('Excel sync must preserve verified fruit aliases and the 的果实 naming rule');
+if (!syncSource.includes('fruit_info["familyNumberRange"][0]') || !syncSource.includes("的果实")) {
+  errors.push('Excel sync must generate fruit names from the family first form');
 }
-if (!legacyFruitUpdaterSource.includes("pet.name + '的果实'")) {
-  errors.push('legacy fruit updater must use the 的果实 naming rule');
+if (!legacyFruitUpdaterSource.includes("pets['pet_' + firstNum]?.name")) {
+  errors.push('legacy fruit updater must generate fruit names from the family first form');
+}
+for (const prefix of confirmedOwnedFruitPrefixes) {
+  const memberEntry = Object.entries(pets).find(([, pet]) => pet.name === prefix);
+  const memberNumber = Number(memberEntry?.[0].replace('pet_', ''));
+  const fruitEntry = Object.entries(pets).find(([, pet]) => {
+    const range = pet.fruit?.familyNumberRange;
+    return range && memberNumber >= range[0] && memberNumber <= range[1];
+  });
+  if (!fruitEntry) {
+    errors.push(`${prefix}: confirmed owned fruit cannot be mapped to a family`);
+  } else if (collections.sprite_progress?.[fruitEntry[0]]?.fruit_acquired !== true) {
+    errors.push(`${prefix}: confirmed owned fruit must be marked acquired`);
+  }
+}
+if (!collections.sprite_progress?.pet_11?.forms_collected?.includes('燃了鸭')) {
+  errors.push('pet_11: 燃了鸭 fruit form must remain collected separately from the family fruit');
 }
 if (JSON.stringify(pets.pet_7?.fruit?.familyNumberRange) !== JSON.stringify([5, 7])) {
   errors.push('pet_7 fire fruit family range must be [5, 7]');

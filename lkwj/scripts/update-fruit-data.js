@@ -141,7 +141,8 @@ for (const line of dataLines) {
   }
 
   // 构建果实名
-  const fruitName = pet.fruit?.name || (pet.name + '的果实');
+  const familyFirstName = pets['pet_' + firstNum]?.name || pet.name;
+  const fruitName = pet.fruit?.name || (familyFirstName + '的果实');
 
   // 构建新 fruit 对象
   const newFruit = {
