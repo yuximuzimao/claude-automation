@@ -153,5 +153,6 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 **账号配置保存**：
 - 保存 session 时必须用 `lib/jl-account-config.js` 合并旧账号配置，保留 `phone/name/note/file` 等字段。
 - 禁止只写登录过程返回的 session 字段；否则会丢 `phone`，下次打开登录页无法自动填入账号。
+- 直接维护重新登录自动填写手机号时，只修改 `../sessions/accounts.json` 对应账号的 `phone` 并读回验证；这不是网页操作，不启动 CDP、不运行 `jl add`、不触发登录，也不修改 `accountN.json`。只有用户明确要求立即重新登录或在平台实际修改手机号时，才进入重新登录流程。
 
 ---

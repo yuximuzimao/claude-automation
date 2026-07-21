@@ -49,6 +49,8 @@ jl inject <编号>     # 把 session 注入 9222 自动化 Chrome 并导航到�
 
 `accounts.json.phone` 是当前登录手机号，也是重新登录时的最高优先级来源。只有该字段为空或不存在时，才允许从 `account{N}.json` 的 `supplierInfo.supplierMobileList[0]` 读取店铺联系人手机号作为初始值；一旦 `phone` 已填写或手动修改，后续都以 `accounts.json` 当前值为准，禁止再用 session 里的联系人号码覆盖。重新登录保存只更新 session，并保留现有 `phone`。
 
+用户要求“账号 N 更新手机号”，且说明用于重新登录自动填写时，按本地配置维护处理：只改 `accounts.json` 中键 `N` 的 `phone`，再校验 JSON 和 `name/note/file/phone` 映射。不要打开网页、不要运行 `jl add`、不要触发重新登录，也不要改 `accountN.json`；除非用户明确要求立即重新登录或在平台实际修改手机号。
+
 ## 文件说明
 
 | 文件 | 用途 |
