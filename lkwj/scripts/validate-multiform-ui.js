@@ -2,6 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const evolutionChains = Object.values(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'evolution-chains.json'), 'utf8')));
+const getEvolutionPathsSource = html.match(/function\s+getEvolutionPaths\s*\(petKey\)\s*\{[\s\S]*?\n\}\n\nfunction\s+formatEvolutionCondition/)?.[0]
+  .replace(/\n\nfunction\s+formatEvolutionCondition$/, '');
+const runtimeGameData = { evolutionChains };
+const runtimeGetChain = (petKey) => evolutionChains.find((chain) => chain.nodes?.[petKey]);
+const runtimeGetEvolutionPaths = getEvolutionPathsSource
+  ? new Function('gameData', 'getChain', `${getEvolutionPathsSource}; return getEvolutionPaths;`)(runtimeGameData, runtimeGetChain)
+  : () => [];
 
 const checks = [
   ['nav has multiform tab', /switchTab\('forms'\)[\s\S]*多形态/.test(html)],
@@ -32,10 +40,16 @@ const checks = [
     && html.includes('scrollIntoView')],
   ['full evolution chain is rendered in sprite and multiform details', /function\s+getEvolutionPaths\s*\(/.test(html)
     && /function\s+renderEvolutionChain\s*\(/.test(html)
+    && /paths\.some\(\(path\)\s*=>\s*path\.length\s*>\s*1\)/.test(html)
+    && html.includes('>进化链</div>')
     && /renderEvolutionChain\(petKey,\s*['"]sprite['"]\)/.test(html)
     && /renderEvolutionChain\(group\.petKey,\s*['"]forms['"]\)/.test(html)],
-  ['evolution chain links search exact pets in the current tab', /function\s+jumpToChainPet\s*\(/.test(html)
-    && /jumpToChainPet\('\$\{nodePetKey\}',\s*'\$\{tabName\}'\)/.test(html)],
+  ['evolution chain links search exact pets in the appropriate tab', /function\s+jumpToChainPet\s*\(/.test(html)
+    && /jumpToChainPet\('\$\{nodePetKey\}',\s*'\$\{targetTab\}'\)/.test(html)],
+  ['multiform chain links fall back to sprite for pets without forms', /tabName\s*===\s*['"]forms['"][\s\S]*getCollectibleFormEntries\(nodePetKey\)\.length[\s\S]*['"]sprite['"]/.test(html)],
+  ['full evolution chain keeps evolution conditions', /function\s+formatEvolutionCondition\s*\(/.test(html)],
+  ['split evolution records still produce one complete chain', runtimeGetEvolutionPaths('pet_18')
+    .some((path) => JSON.stringify(path) === JSON.stringify(['pet_18', 'pet_19', 'pet_20']))],
 ];
 
 const failures = checks.filter(([, ok]) => !ok).map(([name]) => name);

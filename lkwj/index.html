@@ -97,8 +97,17 @@
     .task-check.checked::after { content: '✓'; color: #fff; font-size: 9px; font-weight: 700; }
     .task-row .task-check.noclick { cursor: default; pointer-events: none; }
     .task-methods { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.5; }
-    .task-jump-btn { flex-shrink: 0; border: 1px solid #c7d2fe; border-radius: 6px; padding: 4px 8px; background: #eef2ff; color: #4f46e5; font-size: 12px; cursor: pointer; text-decoration: none; }
-    .task-jump-btn:hover { background: #e0e7ff; border-color: #a5b4fc; }
+    .task-inline-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: #4f46e5; font-size: 15px; cursor: pointer; text-decoration: none; }
+    .task-inline-link:hover { text-decoration: underline; }
+    .task-inline-link:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 2px; }
+    .evolution-chain { margin-top: 8px; }
+    .evolution-path { font-size: 12px; color: #888; padding: 2px 0 2px 16px; line-height: 1.6; }
+    .evolution-current { color: #111; font-weight: 700; }
+    .evolution-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: #4f46e5; font-size: 12px; cursor: pointer; text-decoration: none; }
+    .evolution-link:hover { text-decoration: underline; }
+    .evolution-link:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 2px; }
+    .evolution-arrow { color: #aaa; margin: 0 2px; }
+    .evolution-condition { color: #888; }
 
     .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin: 6px 0 2px; }
     .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
@@ -395,7 +404,7 @@ const STATUS_CHIPS = [{v:FILTER.ALL,l:'全部'},{v:FILTER.PENDING,l:STATUS.PENDI
 
 function resolveSingleSearchExpansion(searchValue, items, getKey, currentExpanded) {
   if (!String(searchValue || '').trim()) return currentExpanded;
-  return items.length === 1 ? getKey(items[0]) : null;
+  return items.length === 1 ? getKey(items[0]) : currentExpanded;
 }
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
@@ -439,6 +448,105 @@ function isFinalEvolution(petKey) {
   if (!chain) return true;
   const node = chain.nodes[petKey];
   return !node || !node.evolvesTo || node.evolvesTo.length === 0;
+}
+
+// 合并所有进化记录的边，从当前精灵所在连通家族生成完整根到叶路径
+function getEvolutionPaths(petKey) {
+  const chains = gameData?.evolutionChains || [];
+  const outgoing = new Map();
+  const incoming = new Map();
+  const adjacent = new Map();
+  const ensureNode = (nodeKey) => {
+    if (!outgoing.has(nodeKey)) outgoing.set(nodeKey, []);
+    if (!incoming.has(nodeKey)) incoming.set(nodeKey, new Set());
+    if (!adjacent.has(nodeKey)) adjacent.set(nodeKey, new Set());
+  };
+  for (const chain of chains) {
+    for (const [fromPetKey, node] of Object.entries(chain.nodes || {})) {
+      ensureNode(fromPetKey);
+      for (const edge of (node.evolvesTo || [])) {
+        const toPetKey = edge.toSpeciesId;
+        ensureNode(toPetKey);
+        if (!outgoing.get(fromPetKey).includes(toPetKey)) outgoing.get(fromPetKey).push(toPetKey);
+        incoming.get(toPetKey).add(fromPetKey);
+        adjacent.get(fromPetKey).add(toPetKey);
+        adjacent.get(toPetKey).add(fromPetKey);
+      }
+    }
+  }
+  if (!adjacent.has(petKey)) return [];
+
+  const family = new Set([petKey]);
+  const pending = [petKey];
+  while (pending.length) {
+    const currentKey = pending.pop();
+    for (const relatedKey of adjacent.get(currentKey)) {
+      if (family.has(relatedKey)) continue;
+      family.add(relatedKey);
+      pending.push(relatedKey);
+    }
+  }
+
+  const roots = [...family].filter((nodeKey) =>
+    ![...incoming.get(nodeKey)].some((fromPetKey) => family.has(fromPetKey))
+  );
+  const paths = [];
+  function dfs(currentKey, path, onPath) {
+    if (onPath.has(currentKey)) return; // 仅用当前递归路径防循环，合法分支可分别遍历
+    onPath.add(currentKey);
+    path.push(currentKey);
+    const nextKeys = (outgoing.get(currentKey) || []).filter((toPetKey) => family.has(toPetKey));
+    if (!nextKeys.length) {
+      paths.push([...path]);
+    } else {
+      for (const toPetKey of nextKeys) dfs(toPetKey, path, onPath);
+    }
+    path.pop();
+    onPath.delete(currentKey);
+  }
+  for (const rootPetKey of (roots.length ? roots : [petKey])) dfs(rootPetKey, [], new Set());
+  return paths;
+}
+
+function formatEvolutionCondition(fromPetKey, toPetKey) {
+  let edge = null;
+  for (const chain of (gameData?.evolutionChains || [])) {
+    edge = chain.nodes?.[fromPetKey]?.evolvesTo?.find((item) => item.toSpeciesId === toPetKey);
+    if (edge) break;
+  }
+  const formatOne = (condition) => {
+    if (!condition) return '';
+    if (condition.type === 'level') return `Lv${condition.level}${condition.note ? `, ${condition.note}` : ''}`;
+    if (condition.type === 'item') return condition.item || '道具';
+    if (condition.bloodline) return `${condition.bloodline}系血脉`;
+    return '';
+  };
+  return Array.isArray(edge?.condition)
+    ? edge.condition.map(formatOne).filter(Boolean).join(' + ')
+    : formatOne(edge?.condition);
+}
+
+// 直线链一行，分支每条根到叶路径一行；当前节点加粗不可点，其他节点为文字链接
+function renderEvolutionChain(petKey, tabName) {
+  const paths = getEvolutionPaths(petKey);
+  if (!paths.some((path) => path.length > 1)) return '';
+  const pets = gameData?.pets || {};
+  const renderPath = (path) => path.map((nodePetKey, index) => {
+    const p = pets[nodePetKey];
+    const name = p?.name || nodePetKey;
+    const targetTab = tabName === 'forms' && !getCollectibleFormEntries(nodePetKey).length ? 'sprite' : tabName;
+    const nodeHtml = nodePetKey === petKey
+      ? `<span class="evolution-current">${formatPetNo(nodePetKey)} ${esc(name)}</span>`
+      : `<button type="button" class="evolution-link" onclick="jumpToChainPet('${nodePetKey}', '${targetTab}')">${formatPetNo(nodePetKey)} ${esc(name)}</button>`;
+    if (index === 0) return nodeHtml;
+    const condition = formatEvolutionCondition(path[index - 1], nodePetKey);
+    if (condition) {
+      return `<span class="evolution-arrow"> → <span class="evolution-condition">(${esc(condition)})</span> </span>${nodeHtml}`;
+    }
+    return `<span class="evolution-arrow"> → </span>${nodeHtml}`;
+  }).join('');
+  const lines = paths.map((p) => `<div class="evolution-path">${renderPath(p)}</div>`);
+  return `<div class="evolution-chain"><div class="form-label">进化链</div>${lines.join('')}</div>`;
 }
 
 // ── 共享工具函数 ──
@@ -1053,7 +1161,6 @@ function renderSpriteContent() {
 
 function renderSpriteCard(petKey, pet) {
   const tasks = petTasks(petKey);
-  const pets = gameData?.pets || {};
   const totalDone = tasks.filter((t, i) => isTaskDone(petKey, i)).length;
   const isExpanded = expandedPet === petKey;
 
@@ -1066,7 +1173,7 @@ function renderSpriteCard(petKey, pet) {
 
   const primaryEl = (pet.element || ['普'])[0];
 
-  let card = `<div class="sprite-card${isExpanded ? ' expanded' : ''}">`;
+  let card = `<div id="sprite-pet-${petKey}" class="sprite-card${isExpanded ? ' expanded' : ''}">`;
   card += `<div class="sprite-card-header" onclick="togglePet('${petKey}')">`;
   const petNum = petKey.replace('pet_', '');
   card += `<span class="si">No.${petNum}</span>`;
@@ -1102,14 +1209,16 @@ function renderSpriteCard(petKey, pet) {
           const autoTask = t.type === 'confirm_forms';
           const checkClick = autoTask ? '' : ` onclick="event.stopPropagation();toggleTask('${petKey}',${origIdx})"`;
           card += `<div class="task-check${done ? ' checked' : ''}${autoTask ? ' noclick' : ''}"${checkClick}></div>`;
-          card += `<span style="flex:1">${esc(desc)}`;
+          card += `<span style="flex:1">`;
+          if (autoTask) {
+            card += `<button type="button" class="task-inline-link" onclick="event.stopPropagation();jumpToForms('${petKey}')">${esc(desc)}</button>`;
+          } else {
+            card += `${esc(desc)}`;
+          }
           if (methods.length) {
             card += `<div class="task-methods">${methods.map(m => esc(m)).join('<br>')}</div>`;
           }
           card += `</span>`;
-          if (autoTask) {
-            card += `<button class="task-jump-btn" onclick="event.stopPropagation();jumpToForms('${petKey}')">去多形态</button>`;
-          }
           card += '</div>';
         });
       });
@@ -1117,22 +1226,8 @@ function renderSpriteCard(petKey, pet) {
   }
 
   // Evolution chain info
-  const chain = getChain(petKey);
-  if (chain && chain.nodes[petKey]?.evolvesTo?.length) {
-    card += '<div class="form-label" style="color:#4f46e5;margin-top:8px">进化链</div>';
-    chain.nodes[petKey].evolvesTo.forEach(ev => {
-      const targetPet = pets[ev.toSpeciesId];
-      const cond = ev.condition;
-      let condText = '';
-      if (Array.isArray(cond)) {
-        condText = cond.map(c => c.type === 'level' ? `Lv${c.level}` : c.bloodline ? `${c.bloodline}系血脉` : '').filter(Boolean).join(' + ');
-      } else if (cond?.type === 'level') {
-        condText = `Lv${cond.level}`;
-        if (cond.note) condText += `, ${cond.note}`;
-      }
-      card += `<div style="font-size:12px;color:#888;padding:2px 0 2px 16px">→ ${targetPet ? esc(targetPet.name) : ev.toSpeciesId}${condText ? ` (${condText})` : ''}</div>`;
-    });
-  }
+  const evoHtml = renderEvolutionChain(petKey, 'sprite');
+  if (evoHtml) card += evoHtml;
 
   card += '</div></div>';
   return card;
@@ -1633,13 +1728,37 @@ function renderCategoryContent(tab) {
 function jumpToForms(petKey) {
   const pet = gameData?.pets?.[petKey];
   if (!pet) return;
-  formSearch = pet.name;
+  formSearch = petKey.replace('pet_', '');
   formStatus = 'all';
   expandedFormPet = petKey;
   switchTab('forms');
   requestAnimationFrame(() => {
     document.getElementById(`form-pet-${petKey}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
+}
+
+// 在指定当前 tab 按精确编号搜索并定位
+function jumpToChainPet(petKey, tabName) {
+  const num = String(petKey).replace('pet_', '');
+  if (tabName === 'sprite') {
+    spriteSearch = num;
+    spriteElement = null;
+    spriteStatus = 'all';
+    spriteTaskFilter = null;
+    expandedPet = petKey;
+    switchTab('sprite');
+    requestAnimationFrame(() => {
+      document.getElementById(`sprite-pet-${petKey}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  } else if (tabName === 'forms') {
+    formSearch = num;
+    formStatus = 'all';
+    expandedFormPet = petKey;
+    switchTab('forms');
+    requestAnimationFrame(() => {
+      document.getElementById(`form-pet-${petKey}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
 }
 
 function getFormsList() {
@@ -1748,7 +1867,10 @@ function renderFormPetCard(group) {
   card += '<div class="sprite-card-body">';
   card += '<div class="item-list" style="margin-top:8px">';
   group.forms.forEach((entry) => { card += renderFormRow(entry); });
-  card += '</div></div></div>';
+  card += '</div>';
+  const evoHtml = renderEvolutionChain(group.petKey, 'forms');
+  if (evoHtml) card += evoHtml;
+  card += '</div></div>';
   return card;
 }
 
