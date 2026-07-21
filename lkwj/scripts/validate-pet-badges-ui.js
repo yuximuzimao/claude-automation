@@ -8,7 +8,7 @@ const errors = [];
 
 function selectorRule(selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return html.match(new RegExp(`(?:^|})\\s*${escaped}\\s*\\{([^}]*)\\}`))?.[1] || '';
+  return html.match(new RegExp(`(?:^|[}\\n])\\s*${escaped}\\s*\\{([^}]*)\\}`))?.[1] || '';
 }
 
 function colorFrom(rule, property) {
@@ -55,6 +55,8 @@ for (const element of elements) {
   const foreground = colorFrom(rule, 'color');
   if (!background || !foreground) {
     errors.push(`${element}: missing independent background or text color`);
+  } else if (foreground.toLowerCase() !== '#ffffff') {
+    errors.push(`${element}: badge text must be white`);
   } else if (contrast(foreground, background) < 4.5) {
     errors.push(`${element}: text contrast below 4.5:1`);
   }
@@ -66,6 +68,8 @@ for (const tag of ['boss', 'shiny', 'chromatic']) {
   const foreground = colorFrom(rule, 'color');
   if (!background || !foreground) {
     errors.push(`${tag}: missing independent background or text color`);
+  } else if (foreground.toLowerCase() !== '#ffffff') {
+    errors.push(`${tag}: badge text must be white`);
   } else if (contrast(foreground, background) < 4.5) {
     errors.push(`${tag}: text contrast below 4.5:1`);
   }
