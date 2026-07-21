@@ -11,6 +11,9 @@ const nameOverrides = {
   392: '饮雪狂兽',
   402: '邪眼巨魔',
 };
+const evolutionLevelOverrides = {
+  430: 40,
+};
 
 function key(number) {
   return `pet_${number}`;
@@ -53,13 +56,19 @@ for (const group of groups) {
     if (!evolutions.length) {
       errors.push(`${petKey} ${pet.name}: evolve task has no chain target`);
     }
-    const level = Number((/(\d+)级/.exec(evolveRow.note || '') || [])[1]);
+    const level = evolutionLevelOverrides[group.number]
+      || Number((/(\d+)级/.exec(evolveRow.note || '') || [])[1]);
     for (const evolution of evolutions) {
       if (!level || evolution.condition?.level !== level || evolution.condition?.type !== 'level') {
         errors.push(`${petKey} ${pet.name}: evolution condition does not match ${evolveRow.note}`);
       }
     }
   }
+}
+
+const pet430EvolveTask = (tasks.pet_430 || []).find(task => task.type === 'evolve');
+if (JSON.stringify(pet430EvolveTask?.obtainMethods) !== JSON.stringify(['40级进化'])) {
+  errors.push('pet_430: verified evolution task must use 40级进化');
 }
 
 const s3Tasks = groups.flatMap(group => tasks[key(group.number)] || []);

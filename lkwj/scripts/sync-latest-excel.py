@@ -41,12 +41,23 @@ PARTIAL_PETS = {
         },
     },
 }
+VERIFIED_EVOLUTION_LEVELS = {
+    430: 40,
+}
 
 
 def apply_verified_text_corrections(value):
     corrected = str(value or "")
     for wrong, right in VERIFIED_TEXT_REPLACEMENTS.items():
         corrected = corrected.replace(wrong, right)
+    return corrected
+
+
+def apply_verified_evolution_correction(number, value):
+    corrected = str(value or "")
+    level = VERIFIED_EVOLUTION_LEVELS.get(number)
+    if level is not None:
+        corrected = re.sub(r"\d+级", f"{level}级", corrected, count=1)
     return corrected
 
 
@@ -105,6 +116,8 @@ def parse_task(row, number, pet, form_groups):
     kind = row.get("type")
     content = apply_verified_text_corrections(row.get("content")).strip()
     note = apply_verified_text_corrections(row.get("note")).strip()
+    if kind == "进化":
+        note = apply_verified_evolution_correction(number, note)
     if kind == "捕捉":
         return {"type": "capture", "desc": "捕捉1只"}
     if kind == "天分":
@@ -350,7 +363,7 @@ for number, group in group_by_number.items():
     evolutions = (chain or {}).get("nodes", {}).get(pet_key, {}).get("evolvesTo", [])
     if not evolutions:
         continue
-    note = str(evolve_row.get("note") or "")
+    note = apply_verified_evolution_correction(number, evolve_row.get("note"))
     level_match = re.search(r"(\d+)级", note)
     level = int(level_match.group(1)) if level_match else None
     mechanism = clean_condition_note(note, level)

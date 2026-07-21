@@ -3,8 +3,11 @@ const path = require('path');
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const evolutionChains = Object.values(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'evolution-chains.json'), 'utf8')));
-const getEvolutionPathsSource = html.match(/function\s+getEvolutionPaths\s*\(petKey\)\s*\{[\s\S]*?\n\}\n\nfunction\s+formatEvolutionCondition/)?.[0]
-  .replace(/\n\nfunction\s+formatEvolutionCondition$/, '');
+const getEvolutionPathsStart = html.indexOf('function getEvolutionPaths(petKey)');
+const getEvolutionPathsEnd = html.indexOf('\n// 直线链', getEvolutionPathsStart);
+const getEvolutionPathsSource = getEvolutionPathsStart >= 0 && getEvolutionPathsEnd > getEvolutionPathsStart
+  ? html.slice(getEvolutionPathsStart, getEvolutionPathsEnd)
+  : '';
 const runtimeGameData = { evolutionChains };
 const runtimeGetChain = (petKey) => evolutionChains.find((chain) => chain.nodes?.[petKey]);
 const runtimeGetEvolutionPaths = getEvolutionPathsSource
@@ -47,7 +50,9 @@ const checks = [
   ['evolution chain links search exact pets in the appropriate tab', /function\s+jumpToChainPet\s*\(/.test(html)
     && /jumpToChainPet\('\$\{nodePetKey\}',\s*'\$\{targetTab\}'\)/.test(html)],
   ['multiform chain links fall back to sprite for pets without forms', /tabName\s*===\s*['"]forms['"][\s\S]*getCollectibleFormEntries\(nodePetKey\)\.length[\s\S]*['"]sprite['"]/.test(html)],
-  ['full evolution chain keeps evolution conditions', /function\s+formatEvolutionCondition\s*\(/.test(html)],
+  ['evolution chain keeps pet numbers but excludes evolution conditions', /\$\{formatPetNo\(nodePetKey\)\}/.test(html)
+    && !/function\s+formatEvolutionCondition\s*\(/.test(html)
+    && !/evolution-condition/.test(html)],
   ['split evolution records still produce one complete chain', runtimeGetEvolutionPaths('pet_18')
     .some((path) => JSON.stringify(path) === JSON.stringify(['pet_18', 'pet_19', 'pet_20']))],
 ];

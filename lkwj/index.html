@@ -107,7 +107,6 @@
     .evolution-link:hover { text-decoration: underline; }
     .evolution-link:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 2px; }
     .evolution-arrow { color: #aaa; margin: 0 2px; }
-    .evolution-condition { color: #888; }
 
     .form-label { font-size: 13px; font-weight: 600; color: #6366f1; margin: 6px 0 2px; }
     .form-label .fc { font-size: 11px; color: #10b981; margin-left: 6px; }
@@ -508,24 +507,6 @@ function getEvolutionPaths(petKey) {
   return paths;
 }
 
-function formatEvolutionCondition(fromPetKey, toPetKey) {
-  let edge = null;
-  for (const chain of (gameData?.evolutionChains || [])) {
-    edge = chain.nodes?.[fromPetKey]?.evolvesTo?.find((item) => item.toSpeciesId === toPetKey);
-    if (edge) break;
-  }
-  const formatOne = (condition) => {
-    if (!condition) return '';
-    if (condition.type === 'level') return `Lv${condition.level}${condition.note ? `, ${condition.note}` : ''}`;
-    if (condition.type === 'item') return condition.item || '道具';
-    if (condition.bloodline) return `${condition.bloodline}系血脉`;
-    return '';
-  };
-  return Array.isArray(edge?.condition)
-    ? edge.condition.map(formatOne).filter(Boolean).join(' + ')
-    : formatOne(edge?.condition);
-}
-
 // 直线链一行，分支每条根到叶路径一行；当前节点加粗不可点，其他节点为文字链接
 function renderEvolutionChain(petKey, tabName) {
   const paths = getEvolutionPaths(petKey);
@@ -539,10 +520,6 @@ function renderEvolutionChain(petKey, tabName) {
       ? `<span class="evolution-current">${formatPetNo(nodePetKey)} ${esc(name)}</span>`
       : `<button type="button" class="evolution-link" onclick="jumpToChainPet('${nodePetKey}', '${targetTab}')">${formatPetNo(nodePetKey)} ${esc(name)}</button>`;
     if (index === 0) return nodeHtml;
-    const condition = formatEvolutionCondition(path[index - 1], nodePetKey);
-    if (condition) {
-      return `<span class="evolution-arrow"> → <span class="evolution-condition">(${esc(condition)})</span> </span>${nodeHtml}`;
-    }
     return `<span class="evolution-arrow"> → </span>${nodeHtml}`;
   }).join('');
   const lines = paths.map((p) => `<div class="evolution-path">${renderPath(p)}</div>`);

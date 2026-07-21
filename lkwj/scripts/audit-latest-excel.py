@@ -27,6 +27,7 @@ VERIFIED_TEXT_REPLACEMENTS = {
     "象牙花形态": "象牙球形态",
 }
 PARTIAL_PETS = {440: "睡铃雪影娃娃"}
+VERIFIED_EVOLUTION_LEVELS = {430: 40}
 
 
 def apply_verified_text_corrections(value):
@@ -293,8 +294,12 @@ for group in valid_groups:
         })
         continue
     note = str(evolve_row.get("note") or "").strip()
+    if number in VERIFIED_EVOLUTION_LEVELS:
+        note = re.sub(r"\d+级", f"{VERIFIED_EVOLUTION_LEVELS[number]}级", note, count=1)
     level_match = re.search(r"(\d+)级", note)
-    expected_level = int(level_match.group(1)) if level_match else None
+    expected_level = VERIFIED_EVOLUTION_LEVELS.get(number)
+    if expected_level is None:
+        expected_level = int(level_match.group(1)) if level_match else None
     for evolution in evolutions:
         condition = evolution.get("condition") or {}
         if expected_level is not None and condition.get("level") != expected_level:
@@ -517,6 +522,10 @@ results["acceptedSourceConflicts"].extend([
     {
         "pet": "N.440",
         "issue": "用户确认先建立名称“睡铃雪影娃娃”的占位精灵；系别、课题、进化、果实等字段等待后续资料",
+    },
+    {
+        "pet": "N.430",
+        "issue": "Excel写36级进化；用户确认卡波应在40级进化为卡拉波斯，任务与进化链统一校准为40级",
     },
 ])
 
