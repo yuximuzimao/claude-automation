@@ -5,11 +5,30 @@ const {
   renderA1FixedBatchButton,
   renderCancellingReloginControl,
   renderConfirmReloginControls,
+  registerCreatedAccountConfirmation,
   runReloginCancellation,
   shouldShowA1FixedBatchButton,
   shouldShowReloginButton,
   shouldKeepConfirmAfterError,
 } = require('../../public/account-relogin-state');
+
+test('new account response enters the existing confirm-save state', () => {
+  const confirm = new Set();
+
+  const num = registerCreatedAccountConfirmation({ ok: true, num: 15 }, confirm);
+
+  assert.equal(num, 15);
+  assert.equal(confirm.has(15), true);
+});
+
+test('new account response without an account number does not change confirm state', () => {
+  const confirm = new Set([3]);
+
+  const num = registerCreatedAccountConfirmation({ ok: true }, confirm);
+
+  assert.equal(num, null);
+  assert.deepEqual([...confirm], [3]);
+});
 
 function makeCancelButton() {
   const controls = [{ disabled: false }, { disabled: false }];

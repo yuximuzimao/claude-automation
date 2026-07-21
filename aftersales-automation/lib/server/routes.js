@@ -19,6 +19,10 @@ const { summarizeHistory } = require('./after-sales-branch-history');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
 const { createA1FixedBatchRouteHandler, validateSessionFile } = require('./a1-fixed-batch-entry');
 const {
+  shouldInitializePhoneForAccount,
+  startReloginSession,
+} = require('./relogin-session');
+const {
   parseBatchExecuteRequest,
   parseBatchReprocessRequest,
   selectExecutableSimulations,
@@ -635,7 +639,7 @@ router.get('/accounts', (req, res) => {
   }
 });
 
-router.post('/accounts/add', (req, res) => {
+router.post('/accounts/add', async (req, res) => {
   const note = (req.body && req.body.note || '').trim();
   if (!note) return res.status(400).json({ error: 'note is required' });
   try {
@@ -650,11 +654,12 @@ router.post('/accounts/add', (req, res) => {
       scanEnabled: true,
     };
     fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(accounts, null, 2));
-    const { spawn } = require('child_process');
-    spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(newNum), '--auto-save'], {
-      detached: true, stdio: 'ignore',
-    }).unref();
-    res.json({ ok: true, message: `已创建账号${newNum}「${note}」，请在弹出的浏览器中完成登录` });
+    await startReloginSession({
+      num: newNum,
+      sessionsDir: SESSIONS_DIR,
+      initializePhone: true,
+    });
+    res.json({ ok: true, num: newNum, message: `已创建账号${newNum}「${note}」，请在弹出的浏览器中完成登录` });
   } catch(e) {
     res.status(500).json({ error: e.message });
   }
@@ -664,26 +669,17 @@ router.post('/accounts/:num/relogin', async (req, res) => {
   const num = parseInt(req.params.num, 10);
   if (!num) return res.status(400).json({ error: 'invalid num' });
 
-  const portFile = path.join(SESSIONS_DIR, `.relogin-port-${num}`);
-  const fsSync = require('fs');
-  if (fsSync.existsSync(portFile)) fsSync.unlinkSync(portFile);
-
-  const { spawn } = require('child_process');
-  spawn('node', [path.join(SESSIONS_DIR, 'jl.js'), 'add', String(num), '--auto-save'], {
-    detached: true, stdio: 'ignore',
-  }).unref();
-
-  // 等待 jl.js 写入 port file（HTTP server 启动后写入）
-  let waited = 0;
-  while (!fsSync.existsSync(portFile) && waited < 8000) {
-    await new Promise(r => setTimeout(r, 200));
-    waited += 200;
+  try {
+    const accounts = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8'));
+    const initializePhone = shouldInitializePhoneForAccount({
+      account: accounts[String(num)],
+      sessionsDir: SESSIONS_DIR,
+    });
+    await startReloginSession({ num, sessionsDir: SESSIONS_DIR, initializePhone });
+    res.json({ ok: true, message: `账号${num}登录窗口已打开，登录成功后点击"确认保存"` });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: e.message });
   }
-  if (!fsSync.existsSync(portFile)) {
-    return res.status(500).json({ ok: false, error: '登录窗口启动失败，请重试' });
-  }
-
-  res.json({ ok: true, message: `账号${num}登录窗口已打开，登录成功后点击"确认保存"` });
 });
 
 router.post('/accounts/:num/relogin-confirm', async (req, res) => {

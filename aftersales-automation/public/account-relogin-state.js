@@ -19,6 +19,13 @@
     return '<button class="btn-relogin pending" disabled>取消中...</button>';
   }
 
+  function registerCreatedAccountConfirmation(result, confirm) {
+    const num = Number(result && result.num);
+    if (!Number.isInteger(num) || num <= 0) return null;
+    confirm.add(num);
+    return num;
+  }
+
   async function runReloginCancellation({ num, button, cancelling, confirm, requestCancel }) {
     if (cancelling.has(num)) return { ok: false, ignored: true };
 
@@ -64,6 +71,7 @@
     isMissingPendingSession,
     renderA1FixedBatchButton,
     renderCancellingReloginControl,
+    registerCreatedAccountConfirmation,
     runReloginCancellation,
     shouldKeepConfirmAfterError,
     shouldShowA1FixedBatchButton,

@@ -2154,7 +2154,8 @@ async function addNewAccount() {
   const res = await api('/accounts/add', { method: 'POST', body: JSON.stringify({ note: note.trim() }) });
   if (res.ok) {
     showToast(res.message || '新店铺已创建，正在启动登录窗口');
-    setTimeout(loadAccounts, 2000);
+    AccountReloginState.registerCreatedAccountConfirmation(res, reloginConfirm);
+    loadAccounts();
   } else {
     showToast(res.error || '创建失败', 'error');
   }
