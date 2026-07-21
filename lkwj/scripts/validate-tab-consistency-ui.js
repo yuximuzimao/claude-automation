@@ -15,6 +15,14 @@ const spriteContent = sourceBetween('function renderSpriteContent()', 'function 
 const spriteTab = sourceBetween('function renderSpriteTab()', 'function renderSpriteContent()');
 const fruitRow = sourceBetween('function renderFruitRow(', 'async function toggleFruit(');
 const clothingTab = sourceBetween('function renderClothingTab()', 'function setClothingStatusFilter(');
+const flatCollectionRenderers = [
+  ['shiny', sourceBetween('function renderShinyContent()', 'function renderShinyRow(')],
+  ['category', sourceBetween('function renderCategoryContent(', '// ═══════════ 多形态 Tab')],
+  ['fruits', sourceBetween('function renderFruitsContent()', 'function setFruitTypeFilter(')],
+  ['furniture', sourceBetween('function renderFurnitureContent()', 'function setFurnitureStatusFilter(')],
+  ['titles', sourceBetween('function renderTitlesContent()', 'function formatTitleName(')],
+  ['dungeons', sourceBetween('function renderDungeonsContent()', 'function renderDungeonRow(')],
+];
 
 if (/class="tb-label"/.test(html)) {
   errors.push('filter rows must not display redundant group labels');
@@ -34,12 +42,39 @@ if (!/class="task-methods fruit-method"/.test(fruitRow) || (fruitRow.match(/clas
 if (!/title="\$\{escAttr\(/.test(fruitRow)) {
   errors.push('single-line fruit methods must retain the full text as a tooltip');
 }
-if (/\.fruit-method\s*\{[^}]*overflow\s*:\s*hidden/.test(html)
-  || !/@media\s*\(max-width:\s*720px\)[\s\S]*?\.fruit-method\s*\{[^}]*white-space\s*:\s*normal/.test(html)) {
-  errors.push('fruit methods must stay complete: one line on desktop and wrapping on narrow screens');
+if (!/\.fruit-method\s*\{[^}]*white-space\s*:\s*nowrap/.test(html)
+  || /@media\s*\(max-width:\s*720px\)[\s\S]*?\.fruit-method\s*\{[^}]*white-space\s*:\s*normal/.test(html)) {
+  errors.push('fruit methods must stay on one complete line in the desktop layout');
+}
+if (!/\.split-tab-toolbar\s*\{[^}]*margin-bottom\s*:\s*14px/.test(html)
+  || !/id="sprite-toolbar"\s+class="split-tab-toolbar"/.test(html)
+  || !/id="shiny-toolbar"\s+class="split-tab-toolbar"/.test(html)) {
+  errors.push('sprite and shiny filters must share the desktop content gap');
 }
 if (/clothing-info-panel|华丽徽章说明/.test(clothingTab)) {
   errors.push('internal gorgeous badge rules must not be shown in the clothing tab');
+}
+if (!/const\s+petEntries\s*=\s*\(\)\s*=>[\s\S]*?\.sort\(\(a,\s*b\)\s*=>\s*petNumberFromKey/.test(html)) {
+  errors.push('all pet-based lists must start from an explicit numeric pet order');
+}
+for (const [name, source] of flatCollectionRenderers) {
+  if (/renderCollapsibleDoneSection|class="section-title"/.test(source)) {
+    errors.push(`${name}: filtered results must render as one flat list without collection-status groups`);
+  }
+}
+if (/\bSHINY_PAGE\b|\bshinyPage\b|function\s+getShinyDisplayPage|function\s+renderPagination|function\s+goShinyPage/.test(html)) {
+  errors.push('collection tabs must not keep pagination state or rendering');
+}
+if (!/function\s+formatFruitFamilyRange\s*\(/.test(html)
+  || !/fruit\.familyNumberRange/.test(fruitRow)
+  || !/const\s+allFruit\s*=\s*petEntries\(\)\.filter/.test(html)) {
+  errors.push('fruit rows must show and sort by their Excel family number range');
+}
+if (!/function\s+compareStableItems\s*\(/.test(html)
+  || !/getFurnitureList\([\s\S]*?\.sort\(compareStableItems\)/.test(html)
+  || !/getTitleList\([\s\S]*?\.sort\(compareStableItems\)/.test(html)
+  || !/getDungeonList\([\s\S]*?\.sort\(compareStableItems\)/.test(html)) {
+  errors.push('non-pet collection tabs must use an explicit stable item order');
 }
 
 if (errors.length) {

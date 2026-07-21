@@ -60,6 +60,7 @@
     .alert-bar { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 14px; color: #92400e; }
 
     /* ── 工具栏 ── */
+    .split-tab-toolbar { margin-bottom: 14px; }
     .tb-section { margin-bottom: 10px; }
     .tb-section:last-child { margin-bottom: 0; }
     .sprite-search { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; background: #fff; color: #1a1a2e; font-family: inherit; }
@@ -97,9 +98,6 @@
     .task-row .task-check.noclick { cursor: default; pointer-events: none; }
     .task-methods { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.5; }
     .fruit-method { white-space: nowrap; }
-    @media (max-width: 720px) {
-      .fruit-method { white-space: normal; }
-    }
     .task-inline-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: #4f46e5; font-size: 15px; cursor: pointer; text-decoration: none; }
     .task-inline-link:hover { text-decoration: underline; }
     .task-inline-link:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 2px; }
@@ -304,11 +302,11 @@
 <div class="container">
   <div id="tab-dashboard"></div>
   <div id="tab-sprite" style="display:none">
-    <div id="sprite-toolbar"></div>
+    <div id="sprite-toolbar" class="split-tab-toolbar"></div>
     <div id="sprite-content"></div>
   </div>
   <div id="tab-shiny" style="display:none">
-    <div id="shiny-toolbar"></div>
+    <div id="shiny-toolbar" class="split-tab-toolbar"></div>
     <div id="shiny-content"></div>
   </div>
   <div id="tab-forms" style="display:none"></div>
@@ -374,8 +372,7 @@ let fruitSearch = '', fruitTypeFilter = null, fruitStatus = 'all';
 let formSearch = '', formStatus = 'all', expandedFormPet = null;
 
 // 异色炫彩状态
-let shinySearch = '', shinyStatus = 'all', shinySeason = 'all', shinyPage = 1;
-const SHINY_PAGE = 40;
+let shinySearch = '', shinyStatus = 'all', shinySeason = 'all';
 
 // 家具状态
 let furnitureSearch = '', furnitureStatusFilter = 'all';
@@ -407,11 +404,19 @@ function resolveSingleSearchExpansion(searchValue, items, getKey, currentExpande
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 
-// Quick lookup: petKey → pet object
-const petEntries = () => Object.entries(gameData?.pets || {});
+// 所有精灵相关列表显式按世界图鉴编号排序，不依赖 JSON 对象插入顺序。
+function petNumberFromKey(petKey) { return Number(String(petKey).replace('pet_', '')); }
+const petEntries = () => Object.entries(gameData?.pets || {})
+  .sort((a, b) => petNumberFromKey(a[0]) - petNumberFromKey(b[0]));
 const petTasks = (petKey) => gameData?.tasks?.[petKey] || [];
 const spriteProgress = () => gameData?.sprite_progress || {};
 const shinyProgress = () => gameData?.shiny_progress || {};
+
+function compareStableItems(a, b) {
+  const number = item => Number((String(item?.id || '').match(/\d+$/) || [Number.MAX_SAFE_INTEGER])[0]);
+  return number(a) - number(b)
+    || String(a?.id || a?.name || '').localeCompare(String(b?.id || b?.name || ''), 'zh-Hans-CN');
+}
 
 // Evolution chain helpers
 function getChain(petKey) { return (gameData?.evolutionChains || []).find(c => c.nodes[petKey]); }
@@ -532,21 +537,6 @@ function renderStatusChips(current, onClick) {
   ).join('');
 }
 
-function renderPagination(currentPage, totalPages, onClick) {
-  if (totalPages <= 1) return '';
-  let h = '<div class="pagination">';
-  h += `<button onclick="${onClick}(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''}>◀</button>`;
-  for (let p = 1; p <= totalPages; p++) {
-    if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= 2)
-      h += `<button class="${p === currentPage ? 'active' : ''}" onclick="${onClick}(${p})">${p}</button>`;
-    else if (Math.abs(p - currentPage) === 3)
-      h += '<span style="padding:0 2px;color:#ccc">...</span>';
-  }
-  h += `<button onclick="${onClick}(${currentPage + 1})" ${currentPage >= totalPages ? 'disabled' : ''}>▶</button>`;
-  h += '</div>';
-  return h;
-}
-
 function ensureTaskProgress(petKey, taskIdx) {
   if (!data.sprite_progress) data.sprite_progress = {};
   if (!data.sprite_progress[petKey]) data.sprite_progress[petKey] = {};
@@ -608,39 +598,12 @@ function isTaskDone(petKey, taskIdx) {
   return !!progress[String(taskIdx)];
 }
 
-function renderPendingDoneSections(list, renderFn, doneKey) {
-  const pending = list.filter(i => (doneKey ? i[doneKey] : i.status) !== STATUS.DONE);
-  const done = list.filter(i => (doneKey ? i[doneKey] : i.status) === STATUS.DONE);
+function renderFlatItemList(list, renderFn) {
   let h = '';
-  if (pending.length) {
-    h += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(i => { h += renderFn(i); });
-    h += '</div>';
-  }
-  if (done.length) {
-    h += renderCollapsibleDoneSection(done, renderFn, done.length);
-  }
-  return h;
-}
-
-function renderCollapsibleDoneSection(items, renderFn, count) {
-  const id = 'done-' + Math.random().toString(36).slice(2, 8);
-  let h = '';
-  h += `<div class="section-title section-header" style="margin-top:16px" onclick="toggleDoneSection('${id}')" id="${id}-header">`;
-  h += `<span class="arrow">▼</span> ${STATUS.DONE}（${count || items.length}）`;
+  h += '<div class="item-list">';
+  list.forEach(i => { h += renderFn(i); });
   h += '</div>';
-  h += `<div class="section-body" id="${id}-body"><div class="item-list">`;
-  items.forEach(i => { h += renderFn(i); });
-  h += '</div></div>';
   return h;
-}
-
-function toggleDoneSection(id) {
-  const body = document.getElementById(id + '-body');
-  const header = document.getElementById(id + '-header');
-  if (!body || !header) return;
-  body.classList.toggle('collapsed');
-  header.classList.toggle('collapsed');
 }
 
 function renderLimitedTag(item) {
@@ -1297,7 +1260,7 @@ function getShinyList() {
   const chains = gameData?.evolutionChains || [];
   const result = [];
 
-  Object.entries(pets).forEach(([petKey, pet]) => {
+  petEntries().forEach(([petKey, pet]) => {
     if (!pet.tags?.shiny || !isFinalEvolution(petKey)) return;
 
     let baseName = '';
@@ -1324,7 +1287,10 @@ function getShinyList() {
     });
   });
 
-  return result;
+  return result.sort((a, b) =>
+    petNumberFromKey(a.petKey) - petNumberFromKey(b.petKey)
+    || a.formName.localeCompare(b.formName, 'zh-Hans-CN')
+  );
 }
 
 function getFilteredShinyList() {
@@ -1339,31 +1305,6 @@ function getFilteredShinyList() {
   return filtered;
 }
 
-function getShinyDisplayPage(filtered) {
-  if (shinyStatus === 'all') {
-    const pending = filtered.filter(s => !s.isDone);
-    const done = filtered.filter(s => s.isDone);
-    const totalPages = Math.max(1, Math.ceil(done.length / SHINY_PAGE));
-    if (shinyPage > totalPages) shinyPage = 1;
-    return {
-      pendingItems: pending,
-      doneItems: done.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE),
-      totalDone: done.length,
-      totalPages,
-    };
-  }
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / SHINY_PAGE));
-  if (shinyPage > totalPages) shinyPage = 1;
-  const pageItems = filtered.slice((shinyPage - 1) * SHINY_PAGE, shinyPage * SHINY_PAGE);
-  return {
-    pendingItems: shinyStatus === 'pending' ? pageItems : [],
-    doneItems: shinyStatus === 'done' ? pageItems : [],
-    totalDone: shinyStatus === 'done' ? filtered.length : 0,
-    totalPages,
-  };
-}
-
 function renderShinyTab() {
   const list = getShinyList();
   const filtered = getFilteredShinyList();
@@ -1375,7 +1316,7 @@ function renderShinyTab() {
   toolbarHtml += `<div class="sprite-stats">共 <strong>${list.length}</strong> 只 · 已收集 <strong>${doneCount}</strong>`;
   if (shinySearch || shinySeason !== 'all' || shinyStatus !== 'all') toolbarHtml += ` · 匹配 <strong>${filtered.length}</strong>`;
   toolbarHtml += '</div>';
-  toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;shinyPage=1;renderShinyContent()"></div>`;
+  toolbarHtml += `<div class="tb-section"><input class="sprite-search" type="text" placeholder="搜索异色炫彩..." value="${esc(shinySearch)}" oninput="shinySearch=this.value;renderShinyContent()"></div>`;
   toolbarHtml += '<div class="tb-section"><div class="chips">';
   toolbarHtml += `<span class="chip${shinySeason === 'all' ? ' active' : ''}" onclick="setShinySeason('all')">全部</span>`;
   seasons.forEach(s => {
@@ -1392,33 +1333,14 @@ function renderShinyTab() {
 
 function renderShinyContent() {
   const filtered = getFilteredShinyList();
-  const display = getShinyDisplayPage(filtered);
-
   const contentEl = document.getElementById('shiny-content');
-  let contentHtml = '';
   if (!filtered.length) {
-    contentHtml += '<div class="empty-state">没有匹配的异色炫彩<small>仅显示进化最终形态</small></div>';
-    contentEl.innerHTML = contentHtml;
+    contentEl.innerHTML = '<div class="empty-state">没有匹配的异色炫彩<small>仅显示进化最终形态</small></div>';
     return;
   }
-
-  if (shinyStatus !== 'all') {
-    const pageItems = shinyStatus === 'pending' ? display.pendingItems : display.doneItems;
-    contentHtml += '<div class="item-list">';
-    pageItems.forEach(s => { contentHtml += renderShinyRow(s); });
-    contentHtml += '</div>';
-  } else {
-    if (display.pendingItems.length) {
-      contentHtml += `<div class="section-title">${STATUS.PENDING}（${display.pendingItems.length}）</div><div class="item-list">`;
-      display.pendingItems.forEach(s => { contentHtml += renderShinyRow(s); });
-      contentHtml += '</div>';
-    }
-    if (display.doneItems.length) {
-      contentHtml += renderCollapsibleDoneSection(display.doneItems, renderShinyRow, display.totalDone);
-    }
-  }
-
-  contentHtml += renderPagination(shinyPage, display.totalPages, 'goShinyPage');
+  let contentHtml = '<div class="item-list">';
+  filtered.forEach(s => { contentHtml += renderShinyRow(s); });
+  contentHtml += '</div>';
   contentEl.innerHTML = contentHtml;
 }
 
@@ -1462,13 +1384,8 @@ async function toggleShinyTask(petKey, formKey = 'basic') {
   if (currentTab === 'dashboard') renderDashboard();
 }
 
-function setShinySeason(s) { shinySeason = s; shinyPage = 1; renderShinyTab(); }
-function setShinyStatus(s) { shinyStatus = s; shinyPage = 1; renderShinyTab(); }
-function goShinyPage(p) {
-  const totalPages = getShinyDisplayPage(getFilteredShinyList()).totalPages;
-  if (p < 1 || p > totalPages) return;
-  shinyPage = p; renderShinyContent();
-}
+function setShinySeason(s) { shinySeason = s; renderShinyTab(); }
+function setShinyStatus(s) { shinyStatus = s; renderShinyTab(); }
 
 // ═══════════ 背包 Tab ═══════════
 function renderBackpack() {
@@ -1491,16 +1408,7 @@ function renderBackpack() {
 
   if (!list.length) { html += '<div class="empty-state">没有匹配的收集项</div>'; el.innerHTML = html; return; }
 
-  const pending = list.filter(i => i.status !== '已完成');
-  const done = list.filter(i => i.status === '已完成');
-  if (pending.length) {
-    html += `<div class="section-title">未完成（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(i => { html += renderItemRow(i); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, renderItemRow, done.length);
-  }
+  html += renderFlatItemList(list.sort(compareStableItems), renderItemRow);
   el.innerHTML = html;
 }
 
@@ -1640,7 +1548,7 @@ function getCatItems(catKey) {
   // 品类到 items[] category 的映射
   const map = { stars:'星星', sidequests:'支线任务', gacha:'扭蛋机', music:'音乐' };
   const cat = map[catKey] || catKey;
-  return (data.items || []).filter(i => i.category === cat);
+  return (data.items || []).filter(i => i.category === cat).sort(compareStableItems);
 }
 
 function renderCategoryTab(tab) {
@@ -1698,18 +1606,7 @@ function renderCategoryContent(tab) {
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的收集项</div>'; return; }
 
-  let html = '';
-  const pending = list.filter(i => i.status !== '已完成');
-  const done = list.filter(i => i.status === '已完成');
-  if (pending.length) {
-    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(i => { html += renderItemRow(i); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, renderItemRow, done.length);
-  }
-  el.innerHTML = html;
+  el.innerHTML = renderFlatItemList(list, renderItemRow);
 }
 
 // ═══════════ 多形态 Tab ═══════════
@@ -1899,8 +1796,7 @@ const FRUIT_TYPES = ['课题任务','智慧树苗','剧情任务','通行证契�
 
 function renderFruitsTab() {
   const el = document.getElementById('tab-fruits');
-  const pets = gameData?.pets || {};
-  const allFruit = Object.entries(pets).filter(([, pet]) => pet.fruit);
+  const allFruit = petEntries().filter(([, pet]) => pet.fruit);
   const owned = allFruit.filter(([, pet]) => pet.fruit?.acquired).length;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🍎 精灵果实</h3>`;
@@ -1932,7 +1828,7 @@ function renderFruitsContent() {
   const el = document.getElementById('fruits-content');
   if (!el) return;
   const pets = gameData?.pets || {};
-  const allFruit = Object.entries(pets).filter(([, pet]) => pet.fruit);
+  const allFruit = petEntries().filter(([, pet]) => pet.fruit);
 
   let list = allFruit;
   if (fruitSearch.trim()) {
@@ -1949,26 +1845,22 @@ function renderFruitsContent() {
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的果实</div>'; return; }
 
-  const pending = list.filter(([, pet]) => !pet.fruit?.acquired);
-  const done = list.filter(([, pet]) => pet.fruit?.acquired);
-  let html = '';
-  if (pending.length) {
-    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(([petKey, pet]) => { html += renderFruitRow(petKey, pet, pets); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, ([petKey, pet]) => renderFruitRow(petKey, pet, pets), done.length);
-  }
-  el.innerHTML = html;
+  el.innerHTML = renderFlatItemList(list, ([petKey, pet]) => renderFruitRow(petKey, pet, pets));
 }
 
 function setFruitTypeFilter(t) { fruitTypeFilter = t; renderFruitsTab(); }
 function setFruitStatus(s) { fruitStatus = s; renderFruitsTab(); }
 
+function formatFruitFamilyRange(petKey, familyNumberRange) {
+  const fallback = petNumberFromKey(petKey);
+  const [start, end] = familyNumberRange || [fallback, fallback];
+  return start === end ? `No.${start}` : `No.${start}-No.${end}`;
+}
+
 function renderFruitRow(petKey, pet, allPets) {
   const acq = pet.fruit?.acquired;
   const fruit = pet.fruit;
+  const familyNo = formatFruitFamilyRange(petKey, fruit && fruit.familyNumberRange);
   allPets = allPets || gameData?.pets || {};
 
   // 互斥逻辑：检查同组是否有其他已勾选的
@@ -1996,7 +1888,7 @@ function renderFruitRow(petKey, pet, allPets) {
   return `<div class="item-row${acq ? ' done' : ''}"${blockedStyle}>
     <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit('${petKey}')"${exclusiveBlocked ? ' disabled' : ''}></button>
     <div class="item-info">
-      <div class="item-name">${esc(fruit?.name || pet.name + '果实')}</div>
+      <div class="item-name"><span class="fruit-family-no">${familyNo}</span> ${esc(fruit?.name || pet.name + '果实')}</div>
       ${methodHtml}${blockedNote}
     </div>
   </div>`;
@@ -2020,7 +1912,7 @@ function getFurnitureList() {
   return (gameData?.furniture || []).map(item => ({
     ...item,
     acquired: !!progress[item.id],
-  }));
+  })).sort(compareStableItems);
 }
 
 function renderFurnitureTab() {
@@ -2068,18 +1960,7 @@ function renderFurnitureContent() {
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的家具</div>'; return; }
 
-  const pending = list.filter(i => !i.acquired);
-  const done = list.filter(i => i.acquired);
-  let html = '';
-  if (pending.length) {
-    html += `<div class="section-title">未收集（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(item => { html += renderFurnitureRow(item); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, renderFurnitureRow, done.length);
-  }
-  el.innerHTML = html;
+  el.innerHTML = renderFlatItemList(list, renderFurnitureRow);
 }
 
 function setFurnitureStatusFilter(status) {
@@ -2116,7 +1997,7 @@ function getTitleList() {
   return (gameData?.titles || []).map(item => ({
     ...item,
     acquired: !!progress[item.id],
-  }));
+  })).sort(compareStableItems);
 }
 
 function renderTitlesTab() {
@@ -2164,18 +2045,7 @@ function renderTitlesContent() {
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的称号</div>'; return; }
 
-  const pending = list.filter(i => !i.acquired);
-  const done = list.filter(i => i.acquired);
-  let html = '';
-  if (pending.length) {
-    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(item => { html += renderTitleRow(item); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, renderTitleRow, done.length);
-  }
-  el.innerHTML = html;
+  el.innerHTML = renderFlatItemList(list, renderTitleRow);
 }
 
 function formatTitleName(item) {
@@ -2214,7 +2084,7 @@ function getDungeonList() {
   return (gameData?.dungeons || []).map(item => ({
     ...item,
     completed: !!progress[item.id],
-  }));
+  })).sort(compareStableItems);
 }
 
 function renderDungeonsTab() {
@@ -2282,18 +2152,7 @@ function renderDungeonsContent() {
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的遗迹副本</div>'; return; }
 
-  const pending = list.filter(i => !i.completed);
-  const done = list.filter(i => i.completed);
-  let html = '';
-  if (pending.length) {
-    html += `<div class="section-title">${STATUS.PENDING}（${pending.length}）</div><div class="item-list">`;
-    pending.forEach(item => { html += renderDungeonRow(item); });
-    html += '</div>';
-  }
-  if (done.length) {
-    html += renderCollapsibleDoneSection(done, renderDungeonRow, done.length);
-  }
-  el.innerHTML = html;
+  el.innerHTML = renderFlatItemList(list, renderDungeonRow);
 }
 
 function renderDungeonRow(item) {

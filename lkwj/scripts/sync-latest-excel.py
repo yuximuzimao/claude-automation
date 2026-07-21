@@ -15,6 +15,8 @@ COLLECTIONS_PATH = ROOT / "data" / "collections.json"
 reader = runpy.run_path(str(ROOT / "scripts" / "read-latest-excel.py"))
 read_xlsx = reader["read_xlsx"]
 group_tasks = reader["group_tasks"]
+classify_fruit_row = reader["classify_fruit_row"]
+parse_range_numbers = reader["parse_fruit_numbers"]
 
 sheets = read_xlsx(WORKBOOK)
 pets = json.loads(PETS_PATH.read_text(encoding="utf-8"))
@@ -243,10 +245,6 @@ def chain_for(pet_key):
     return next((chain for chain in chains if pet_key in chain.get("nodes", {})), None)
 
 
-def parse_range_numbers(value):
-    return [int(item) for item in re.findall(r"N[\.,](\d+)", str(value or ""))]
-
-
 def find_named_target(numbers, description):
     match = re.search(r"捕捉\d+只(.+)$", str(description or "").strip())
     if not match:
@@ -266,22 +264,6 @@ def fruit_target(row):
     return named if named is not None else max(numbers)
 
 
-def fruit_obtain_type(source):
-    source = str(source or "").strip()
-    if source == "捕捉20只精灵":
-        return "课题任务"
-    if source.startswith("智慧树苗"):
-        return "智慧树苗"
-    if source in {"一代御三家", "二代御三家"}:
-        return "剧情任务"
-    if source == "通行证契约礼券":
-        return "通行证契约礼券"
-    if source.startswith("赛季作业·"):
-        return "赛季作业"
-    return "限时活动"
-
-
-NO_FRUIT_SOURCES = {"传说精灵", "特殊奇遇", "开局必送", "呱呱上学记"}
 FRUIT_EXCLUSIVE_GROUPS = {
     4: "starter_gen1", 7: "starter_gen1", 10: "starter_gen1",
     155: "starter_gen2", 158: "starter_gen2", 161: "starter_gen2",
@@ -407,10 +389,10 @@ for pet in pets.values():
     pet.pop("fruit", None)
 fruit_records = 0
 for row in sheets.get("果实进度", [])[1:]:
-    description = str(row.get("D") or "")
-    source = str(row.get("C") or "").strip()
-    if source in NO_FRUIT_SOURCES or description.startswith("无果实"):
+    fruit_info = classify_fruit_row(row)
+    if fruit_info is None:
         continue
+    description = str(row.get("D") or "")
     target_number = fruit_target(row)
     if target_number is None or target_number > COMPLETE_MAX_NUMBER:
         continue
@@ -421,7 +403,8 @@ for row in sheets.get("果实进度", [])[1:]:
         "name": f"{pet['name']}果实",
         "acquired": False,
         "obtainMethod": normalize_source_names(description),
-        "obtainType": fruit_obtain_type(source),
+        "obtainType": fruit_info["obtainType"],
+        "familyNumberRange": fruit_info["familyNumberRange"],
     }
     if target_number in FRUIT_EXCLUSIVE_GROUPS:
         fruit["exclusiveGroup"] = FRUIT_EXCLUSIVE_GROUPS[target_number]

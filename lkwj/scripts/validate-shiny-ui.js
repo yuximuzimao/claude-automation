@@ -31,8 +31,11 @@ const checks = [
     && /toggleShinyTask\('\$\{s\.petKey\}','\$\{escAttr\(s\.formKey\)\}'\)/.test(html)],
   ['shiny toggle persists by progress key rather than only pet id', /const\s+progressKey\s*=\s*getShinyProgressKey\(petKey,\s*formKey\)/.test(html)
     && /data\.shiny_progress\[progressKey\]/.test(html)],
-  ['all-status view never paginates away pending shiny entries', /function\s+getShinyDisplayPage\s*\(/.test(html)
-    && /if\s*\(shinyStatus\s*===\s*['"]all['"]\)[\s\S]*?pendingItems:\s*pending[\s\S]*?doneItems:\s*done\.slice/.test(html)],
+  ['shiny list is fully rendered in numeric pet order without pagination', /function\s+getShinyList\s*\(/.test(html)
+    && /petEntries\(\)\.forEach/.test(html)
+    && /return\s+result\.sort\(\(a,\s*b\)\s*=>\s*petNumberFromKey\(a\.petKey\)/.test(html)
+    && /filtered\.forEach\(s\s*=>/.test(html)
+    && !/\bSHINY_PAGE\b|\bshinyPage\b|renderPagination|getShinyDisplayPage/.test(html)],
   ['current 57 shiny finals expand to 60 collection entries', shinyFinals.length === 57 && shinyEntries.length === 60],
   ['加油蟹 has exactly two form-level shiny keys and no basic entry', !shinyEntries.includes('pet_361')
     && shinyEntries.includes('pet_361::单只海葵的样子')

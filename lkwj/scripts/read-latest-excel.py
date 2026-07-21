@@ -9,6 +9,9 @@ from xml.etree import ElementTree as ET
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
 PKG_REL_NS = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+NO_FRUIT_SOURCES = {"传说精灵", "特殊奇遇", "开局必送", "呱呱上学记"}
+NO_FRUIT_DESCRIPTIONS = {"唯一的迪莫", "达到100研学绩点获得蛋"}
+LIMITED_FRUIT_SOURCES = {"官网下载", "火红迎新", "洛克筑梦师"}
 
 
 def read_xlsx(path: Path):
@@ -70,6 +73,47 @@ def read_xlsx(path: Path):
 def number_from_code(code):
     match = re.fullmatch(r"N\.(\d+)", str(code or "").strip())
     return int(match.group(1)) if match else None
+
+
+def parse_fruit_numbers(value):
+    return [int(item) for item in re.findall(r"N[\.,](\d+)", str(value or ""))]
+
+
+def map_fruit_obtain_type(source):
+    source = str(source or "").strip()
+    if source == "捕捉20只精灵":
+        return "课题任务"
+    if source.startswith("智慧树苗"):
+        return "智慧树苗"
+    if source in {"一代御三家", "二代御三家"}:
+        return "剧情任务"
+    if source == "通行证契约礼券":
+        return "通行证契约礼券"
+    if source.startswith("赛季作业"):
+        return "赛季作业"
+    if source in LIMITED_FRUIT_SOURCES:
+        return "限时活动"
+    raise ValueError(f"未知果实来源：{source or '空值'}")
+
+
+def classify_fruit_row(row):
+    source = str(row.get("C") or "").strip()
+    description = str(row.get("D") or "").strip()
+    numbers = parse_fruit_numbers(row.get("A"))
+    if not numbers:
+        raise ValueError(f"果实编号范围无法解析：{row.get('A')}")
+    if source in NO_FRUIT_SOURCES or description.startswith("无果实"):
+        return None
+    if not description:
+        raise ValueError(f"果实获取说明为空：{row.get('A')}")
+    obtain_type = map_fruit_obtain_type(source)
+    if description in NO_FRUIT_DESCRIPTIONS:
+        return None
+    return {
+        "numbers": numbers,
+        "familyNumberRange": [min(numbers), max(numbers)],
+        "obtainType": obtain_type,
+    }
 
 
 def group_tasks(rows):

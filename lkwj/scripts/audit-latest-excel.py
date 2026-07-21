@@ -13,6 +13,7 @@ REPORT_JSON = ROOT / "_sandbox" / "latest-excel-audit.json"
 reader = runpy.run_path(str(ROOT / "scripts" / "read-latest-excel.py"))
 read_xlsx = reader["read_xlsx"]
 group_tasks = reader["group_tasks"]
+classify_fruit_row = reader["classify_fruit_row"]
 
 sheets = read_xlsx(WORKBOOK)
 pets = json.loads((ROOT / "data" / "pets.json").read_text(encoding="utf-8"))
@@ -28,7 +29,6 @@ VERIFIED_TEXT_REPLACEMENTS = {
 }
 PARTIAL_PETS = {440: "睡铃雪影娃娃"}
 VERIFIED_EVOLUTION_LEVELS = {430: 40}
-NO_FRUIT_SOURCES = {"传说精灵", "特殊奇遇", "开局必送", "呱呱上学记"}
 
 
 def apply_verified_text_corrections(value):
@@ -122,10 +122,6 @@ def parse_form_groups(rows):
                 "method": row.get("E"),
             })
     return list(groups.values())
-
-
-def parse_fruit_ranges(value):
-    return [int(match) for match in re.findall(r"N[\.,](\d+)", str(value or ""))]
 
 
 def find_fruit_target(numbers, description):
@@ -342,19 +338,14 @@ for chain in chains:
 # Fruit definitions.
 expected_fruit_targets = {}
 for row in sheets.get("果实进度", [])[1:]:
-    numbers = parse_fruit_ranges(row.get("A"))
-    if not numbers:
+    fruit_info = classify_fruit_row(row)
+    if fruit_info is None:
         continue
+    numbers = fruit_info["numbers"]
     final_number = find_fruit_target(numbers, row.get("D"))
     if final_number > 439:
         continue
-    no_fruit = (
-        str(row.get("C") or "").strip() in NO_FRUIT_SOURCES
-        or str(row.get("D") or "").startswith("无果实")
-    )
-    if no_fruit:
-        continue
-    expected_fruit_targets[final_number] = row
+    expected_fruit_targets[final_number] = {"row": row, "fruit_info": fruit_info}
 
 actual_fruit_targets = {
     int(key.split("_")[1]): pet.get("fruit")
@@ -362,7 +353,9 @@ actual_fruit_targets = {
     if pet.get("fruit") and int(key.split("_")[1]) <= 439
 }
 
-for number, row in expected_fruit_targets.items():
+for number, expected in expected_fruit_targets.items():
+    row = expected["row"]
+    fruit_info = expected["fruit_info"]
     fruit = actual_fruit_targets.get(number)
     if not fruit:
         results["fruit"].append({
@@ -381,6 +374,16 @@ for number, row in expected_fruit_targets.items():
         results["fruit"].append({
             "pet": f"N.{number:03d}",
             "issue": f"果实获取说明：Excel“{expected_method}” vs JSON“{actual_method}”",
+        })
+    if fruit.get("obtainType") != fruit_info["obtainType"]:
+        results["fruit"].append({
+            "pet": f"N.{number:03d}",
+            "issue": f"果实来源分类：Excel“{fruit_info['obtainType']}” vs JSON“{fruit.get('obtainType')}”",
+        })
+    if fruit.get("familyNumberRange") != fruit_info["familyNumberRange"]:
+        results["fruit"].append({
+            "pet": f"N.{number:03d}",
+            "issue": f"果实家族编号：Excel“{fruit_info['familyNumberRange']}” vs JSON“{fruit.get('familyNumberRange')}”",
         })
 
 for number in sorted(set(actual_fruit_targets) - set(expected_fruit_targets)):

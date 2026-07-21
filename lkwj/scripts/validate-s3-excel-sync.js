@@ -8,6 +8,7 @@ const chains = JSON.parse(fs.readFileSync(path.join(root, 'data', 'evolution-cha
 const extract = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'fixtures', 's3-excel-extract.json'), 'utf8'));
 const syncSource = fs.readFileSync(path.join(root, 'scripts', 'sync-latest-excel.py'), 'utf8');
 const auditSource = fs.readFileSync(path.join(root, 'scripts', 'audit-latest-excel.py'), 'utf8');
+const readerSource = fs.readFileSync(path.join(root, 'scripts', 'read-latest-excel.py'), 'utf8');
 
 const nameOverrides = {
   392: '饮雪狂兽',
@@ -26,8 +27,14 @@ function elements(value) {
 }
 
 const errors = [];
-if (!syncSource.includes('NO_FRUIT_SOURCES') || !auditSource.includes('NO_FRUIT_SOURCES')) {
-  errors.push('sync and audit must share the verified no-fruit source exclusions');
+if (!readerSource.includes('NO_FRUIT_SOURCES')
+  || !syncSource.includes('classify_fruit_row')
+  || !auditSource.includes('classify_fruit_row')) {
+  errors.push('reader, sync and audit must share the verified fruit row classifier');
+}
+if (!auditSource.includes('fruit_info["obtainType"]')
+  || !auditSource.includes('fruit_info["familyNumberRange"]')) {
+  errors.push('Excel audit must compare every fruit obtain type and family number range');
 }
 const groups = extract.s3Groups.filter(group => group.number >= 376 && group.number <= 439);
 if (groups.length !== 64) errors.push(`expected 64 S3 groups, got ${groups.length}`);
@@ -91,6 +98,16 @@ const fruitTypes = new Set(Object.values(pets).flatMap(pet => pet.fruit ? [pet.f
 const expectedFruitTypes = ['课题任务', '智慧树苗', '剧情任务', '通行证契约礼券', '赛季作业', '限时活动'];
 if (JSON.stringify([...fruitTypes].sort()) !== JSON.stringify([...expectedFruitTypes].sort())) {
   errors.push(`fruit types must match the six UI filters: ${JSON.stringify([...fruitTypes])}`);
+}
+for (const [petKey, pet] of Object.entries(pets)) {
+  if (!pet.fruit) continue;
+  const range = pet.fruit.familyNumberRange;
+  if (!Array.isArray(range) || range.length !== 2 || !range.every(Number.isInteger) || range[0] > range[1]) {
+    errors.push(`${petKey}: fruit must keep its valid Excel family number range`);
+  }
+}
+if (JSON.stringify(pets.pet_7?.fruit?.familyNumberRange) !== JSON.stringify([5, 7])) {
+  errors.push('pet_7 fire fruit family range must be [5, 7]');
 }
 const expectedFruitGroups = {
   starter_gen1: [4, 7, 10], starter_gen2: [155, 158, 161],

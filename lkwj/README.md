@@ -114,6 +114,7 @@ http://localhost:8899/review.html
 
 ```bash
 python3 scripts/read-latest-excel.py
+python3 scripts/validate-fruit-excel-rules.py
 python3 scripts/audit-latest-excel.py
 node scripts/validate-s3-excel-sync.js
 node scripts/validate-multiform-data.js
