@@ -46,6 +46,9 @@ PARTIAL_PETS = {
 VERIFIED_EVOLUTION_LEVELS = {
     430: 40,
 }
+FRUIT_AVAILABILITY = {
+    339: "渠道限定 · 当前不可获取",
+}
 
 
 def apply_verified_text_corrections(value):
@@ -410,6 +413,8 @@ for row in sheets.get("果实进度", [])[1:]:
     }
     if target_number in FRUIT_EXCLUSIVE_GROUPS:
         fruit["exclusiveGroup"] = FRUIT_EXCLUSIVE_GROUPS[target_number]
+    if target_number in FRUIT_AVAILABILITY:
+        fruit["availability"] = FRUIT_AVAILABILITY[target_number]
     pet["fruit"] = fruit
     fruit_records += 1
 

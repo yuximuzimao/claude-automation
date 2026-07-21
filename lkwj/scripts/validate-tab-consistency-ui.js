@@ -13,6 +13,7 @@ function sourceBetween(startMarker, endMarker) {
 
 const spriteContent = sourceBetween('function renderSpriteContent()', 'function renderSpriteCard(');
 const spriteTab = sourceBetween('function renderSpriteTab()', 'function renderSpriteContent()');
+const fruitList = sourceBetween('function getFruitList()', 'function renderFruitsTab()');
 const fruitRow = sourceBetween('function renderFruitRow(', 'async function toggleFruit(');
 const clothingTab = sourceBetween('function renderClothingTab()', 'function setClothingStatusFilter(');
 const flatCollectionRenderers = [
@@ -67,8 +68,17 @@ if (/\bSHINY_PAGE\b|\bshinyPage\b|function\s+getShinyDisplayPage|function\s+rend
 }
 if (!/function\s+formatFruitFamilyRange\s*\(/.test(html)
   || !/fruit\.familyNumberRange/.test(fruitRow)
-  || !/const\s+allFruit\s*=\s*petEntries\(\)\.filter/.test(html)) {
+  || !/function\s+getFruitList\s*\(/.test(html)) {
   errors.push('fruit rows must show and sort by their Excel family number range');
+}
+if (!/additionalFruits/.test(fruitList)
+  || !/additional_fruits_acquired/.test(fruitList)
+  || !/getFruitList\(\)/.test(sourceBetween('function renderFruitsTab()', '// ═══════════ 家具 Tab'))
+  || !/toggleFruit\('\$\{item\.petKey\}','\$\{item\.fruitId/.test(fruitRow)) {
+  errors.push('fruit list must count and toggle additional form fruits independently');
+}
+if (!/fruit\?\.availability/.test(fruitRow) || !/tag-limited/.test(fruitRow)) {
+  errors.push('fruit rows must display explicit channel availability without changing ownership');
 }
 if (!/function\s+compareStableItems\s*\(/.test(html)
   || !/getFurnitureList\([\s\S]*?\.sort\(compareStableItems\)/.test(html)

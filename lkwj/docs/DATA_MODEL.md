@@ -30,6 +30,8 @@
 - `tags` 保存 `shiny`（异色）、`chromatic`（炫彩）和 `boss`（首领）。标签与形态独立，可以共存。
 - `obtainMethods` 只写直接获取方式，禁止写“由某精灵进化”。进化来源只写入 `evolution-chains.json`。
 - `fruit` 是果实图鉴记录，不等于课题任务。
+- `additionalFruits` 只用于同一精灵下需要独立计数的形态专属果实；每条必须有稳定 `id`，进度写入 `sprite_progress[petKey].additional_fruits_acquired`，不能与家族 `fruit_acquired` 合并。
+- 果实的 `availability` 只表示当前获取状态，不影响是否已收集；小号已有但当前渠道关闭时，同时保留已收集进度并显示“渠道限定 · 当前不可获取”。
 
 ### 官方精灵家族介绍图的部分录入规则
 

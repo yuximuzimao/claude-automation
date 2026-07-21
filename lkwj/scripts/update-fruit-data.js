@@ -156,6 +156,9 @@ for (const line of dataLines) {
   if (EXCLUSIVE_GROUPS[fruitPetId]) {
     newFruit.exclusiveGroup = EXCLUSIVE_GROUPS[fruitPetId];
   }
+  if (pet.fruit?.availability) {
+    newFruit.availability = pet.fruit.availability;
+  }
 
   const existed = !!pet.fruit;
   pet.fruit = newFruit;

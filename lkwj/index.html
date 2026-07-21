@@ -700,7 +700,9 @@ function renderDashboard() {
   const shinyItems = getShinyList();
   const yiseTotal = shinyItems.length;
   const yiseOwned = shinyItems.filter(item => item.isDone).length;
-  let fruitTotal = 0, fruitOwned = 0;
+  const fruits = getFruitList();
+  const fruitTotal = fruits.length;
+  const fruitOwned = fruits.filter(item => item.acquired).length;
   let formTotal = 0, formOwned = 0;
   const furnitureItems = getFurnitureList();
   const furnitureTotal = furnitureItems.length;
@@ -721,7 +723,6 @@ function renderDashboard() {
     if (!pet) return;
     const tasks = petTasks(petKey);
     if (tasks.some((t, i) => (t.type === 'capture' || t.type === 'capture_gifted') && isTaskDone(petKey, i))) spriteOwned++;
-    if (pet.fruit) { fruitTotal++; if (pet.fruit.acquired) fruitOwned++; }
     const forms = getCollectibleFormEntries(petKey);
     formTotal += forms.length;
     formOwned += forms.filter((entry) => isFormCollected(entry.petKey, entry.formKey)).length;
@@ -844,7 +845,7 @@ function renderRandomFormTask(task) {
 }
 
 function renderRandomFruitTask(task) {
-  const done = !!gameData?.pets?.[task.petKey]?.fruit?.acquired;
+  const done = isFruitAcquired(task.petKey, task.fruitId || '');
   let html = `<div class="random-task-name">${formatPetNo(task.petKey)} ${esc(task.fruitName)}</div>`;
   html += `<div class="rt-row${done ? ' done' : ''}" style="padding-left:0">`;
   html += `<button class="check-btn${done ? ' checked' : ''}" onclick="event.stopPropagation();markRandomFruitTask()"></button>`;
@@ -903,14 +904,15 @@ function pickRandomForm() {
 }
 
 function pickRandomFruit() {
-  const pool = Object.entries(gameData?.pets || {})
-    .filter(([, pet]) => pet.fruit && !pet.fruit.acquired)
-    .map(([petKey, pet]) => ({
+  const pool = getFruitList()
+    .filter(item => !item.acquired)
+    .map(item => ({
       type: 'fruit',
-      petKey,
-      petName: pet.name,
-      fruitName: pet.fruit.name || `${pet.name}果实`,
-      method: pet.fruit.obtainMethod || '',
+      petKey: item.petKey,
+      fruitId: item.fruitId,
+      petName: item.pet.name,
+      fruitName: item.fruit.name || `${item.pet.name}的果实`,
+      method: item.fruit.obtainMethod || '',
     }));
   if (!pool.length) return null;
   return pool[Math.floor(Math.random() * pool.length)];
@@ -940,7 +942,7 @@ function isRandomFormTaskComplete(task) {
 }
 
 function isRandomFruitTaskComplete(task) {
-  return !!task && task.type === 'fruit' && !!gameData?.pets?.[task.petKey]?.fruit?.acquired;
+  return !!task && task.type === 'fruit' && isFruitAcquired(task.petKey, task.fruitId || '');
 }
 
 async function viewRandomTask(petKey) {
@@ -1490,7 +1492,7 @@ async function markRandomFruitTask() {
   const task = randomTasks.fruit;
   if (!task || task.type !== 'fruit') return;
   const wasDone = isRandomFruitTaskComplete(task);
-  await toggleFruit(task.petKey);
+  await toggleFruit(task.petKey, task.fruitId || '');
   if (!wasDone && isRandomFruitTaskComplete(task)) randomTasks.fruit = pickRandomFruit();
   saveRandomTasks(randomTasks);
   renderDashboard();
@@ -1794,10 +1796,36 @@ async function toggleForm(petKey, formKey) {
 // ═══════════ 精灵果实 Tab ═══════════
 const FRUIT_TYPES = ['课题任务','智慧树苗','剧情任务','通行证契约礼券','赛季作业','限时活动'];
 
+function getFruitList() {
+  const progress = data?.sprite_progress || {};
+  return petEntries().flatMap(([petKey, pet]) => {
+    const items = [];
+    if (pet.fruit) {
+      const acquired = progress[petKey]?.fruit_acquired ?? !!pet.fruit.acquired;
+      items.push({ petKey, fruitId: '', pet, fruit: pet.fruit, acquired });
+    }
+    const acquiredAdditional = progress[petKey]?.additional_fruits_acquired || [];
+    (pet.additionalFruits || []).forEach(fruit => {
+      items.push({
+        petKey,
+        fruitId: fruit.id,
+        pet,
+        fruit,
+        acquired: acquiredAdditional.includes(fruit.id),
+      });
+    });
+    return items;
+  });
+}
+
+function isFruitAcquired(petKey, fruitId = '') {
+  return !!getFruitList().find(item => item.petKey === petKey && item.fruitId === fruitId)?.acquired;
+}
+
 function renderFruitsTab() {
   const el = document.getElementById('tab-fruits');
-  const allFruit = petEntries().filter(([, pet]) => pet.fruit);
-  const owned = allFruit.filter(([, pet]) => pet.fruit?.acquired).length;
+  const allFruit = getFruitList();
+  const owned = allFruit.filter(item => item.acquired).length;
 
   let html = `<h3 style="font-size:15px;margin-bottom:10px">🍎 精灵果实</h3>`;
   html += `<div class="sprite-stats"><span>共 <strong>${allFruit.length}</strong> 种 · 已收集 <strong>${owned}</strong></span></div>`;
@@ -1827,25 +1855,24 @@ function renderFruitsTab() {
 function renderFruitsContent() {
   const el = document.getElementById('fruits-content');
   if (!el) return;
-  const pets = gameData?.pets || {};
-  const allFruit = petEntries().filter(([, pet]) => pet.fruit);
+  const allFruit = getFruitList();
 
   let list = allFruit;
   if (fruitSearch.trim()) {
     const q = fruitSearch.trim().toLowerCase();
-    list = list.filter(([, pet]) => {
-      const fruitName = (pet.fruit?.name || pet.name + '果实').toLowerCase();
-      const method = (pet.fruit?.obtainMethod || '').toLowerCase();
+    list = list.filter(item => {
+      const fruitName = (item.fruit?.name || item.pet.name + '的果实').toLowerCase();
+      const method = (item.fruit?.obtainMethod || '').toLowerCase();
       return fruitName.includes(q) || method.includes(q);
     });
   }
-  if (fruitTypeFilter) list = list.filter(([, pet]) => pet.fruit?.obtainType === fruitTypeFilter);
-  if (fruitStatus === 'pending') list = list.filter(([, pet]) => !pet.fruit?.acquired);
-  else if (fruitStatus === 'done') list = list.filter(([, pet]) => pet.fruit?.acquired);
+  if (fruitTypeFilter) list = list.filter(item => item.fruit?.obtainType === fruitTypeFilter);
+  if (fruitStatus === 'pending') list = list.filter(item => !item.acquired);
+  else if (fruitStatus === 'done') list = list.filter(item => item.acquired);
 
   if (!list.length) { el.innerHTML = '<div class="empty-state">没有匹配的果实</div>'; return; }
 
-  el.innerHTML = renderFlatItemList(list, ([petKey, pet]) => renderFruitRow(petKey, pet, pets));
+  el.innerHTML = renderFlatItemList(list, item => renderFruitRow(item));
 }
 
 function setFruitTypeFilter(t) { fruitTypeFilter = t; renderFruitsTab(); }
@@ -1857,17 +1884,17 @@ function formatFruitFamilyRange(petKey, familyNumberRange) {
   return start === end ? `No.${start}` : `No.${start}-No.${end}`;
 }
 
-function renderFruitRow(petKey, pet, allPets) {
-  const acq = pet.fruit?.acquired;
-  const fruit = pet.fruit;
+function renderFruitRow(item) {
+  const { petKey, pet, fruit } = item;
+  const acq = item.acquired;
   const familyNo = formatFruitFamilyRange(petKey, fruit && fruit.familyNumberRange);
-  allPets = allPets || gameData?.pets || {};
 
   // 互斥逻辑：检查同组是否有其他已勾选的
   let exclusiveBlocked = false;
   if (fruit?.exclusiveGroup && !acq) {
-    exclusiveBlocked = Object.entries(allPets).some(([k, p]) =>
-      k !== petKey && p.fruit?.exclusiveGroup === fruit.exclusiveGroup && p.fruit?.acquired
+    exclusiveBlocked = getFruitList().some(other =>
+      (other.petKey !== item.petKey || other.fruitId !== item.fruitId)
+      && other.fruit?.exclusiveGroup === fruit.exclusiveGroup && other.acquired
     );
   }
 
@@ -1884,24 +1911,35 @@ function renderFruitRow(petKey, pet, allPets) {
 
   const blockedStyle = exclusiveBlocked ? ' style="opacity:0.45"' : '';
   const blockedNote = exclusiveBlocked ? `<div class="task-methods" style="color:#f60">已不可获取（同赛季/同代二选一/三选一）</div>` : '';
+  const availabilityTag = fruit?.availability ? `<span class="tag-limited">${esc(fruit.availability)}</span>` : '';
 
   return `<div class="item-row${acq ? ' done' : ''}"${blockedStyle}>
-    <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit('${petKey}')"${exclusiveBlocked ? ' disabled' : ''}></button>
+    <button class="check-btn${acq ? ' checked' : ''}" onclick="toggleFruit('${item.petKey}','${item.fruitId || ''}')"${exclusiveBlocked ? ' disabled' : ''}></button>
     <div class="item-info">
-      <div class="item-name"><span class="fruit-family-no">${familyNo}</span> ${esc(fruit?.name || pet.name + '果实')}</div>
+      <div class="item-name"><span class="fruit-family-no">${familyNo}</span> ${esc(fruit?.name || pet.name + '的果实')} ${availabilityTag}</div>
       ${methodHtml}${blockedNote}
     </div>
   </div>`;
 }
 
-async function toggleFruit(petKey) {
+async function toggleFruit(petKey, fruitId = '') {
   const pets = gameData?.pets || {};
   const pet = pets[petKey];
-  if (!pet || !pet.fruit) return;
-  pet.fruit.acquired = !pet.fruit.acquired;
+  if (!pet) return;
   if (!data.sprite_progress) data.sprite_progress = {};
   if (!data.sprite_progress[petKey]) data.sprite_progress[petKey] = {};
-  data.sprite_progress[petKey].fruit_acquired = pet.fruit.acquired;
+  if (fruitId) {
+    if (!(pet.additionalFruits || []).some(fruit => fruit.id === fruitId)) return;
+    const current = data.sprite_progress[petKey].additional_fruits_acquired || [];
+    data.sprite_progress[petKey].additional_fruits_acquired = current.includes(fruitId)
+      ? current.filter(id => id !== fruitId)
+      : [...current, fruitId];
+  } else {
+    if (!pet.fruit) return;
+    const current = data.sprite_progress[petKey].fruit_acquired ?? !!pet.fruit.acquired;
+    pet.fruit.acquired = !current;
+    data.sprite_progress[petKey].fruit_acquired = pet.fruit.acquired;
+  }
   await saveData();
   if (currentTab === 'fruits') renderFruitsTab();
 }

@@ -109,6 +109,30 @@ if (s3Tasks.filter(task => task.type === 'capture_shiny').length !== 8) errors.p
 const s3FruitRecords = groups.filter(group => pets[key(group.number)]?.fruit).length;
 if (s3FruitRecords !== 25) errors.push(`S3 fruit record total ${s3FruitRecords} != 25`);
 
+const additionalFruits = Object.entries(pets).flatMap(([petKey, pet]) =>
+  (pet.additionalFruits || []).map(fruit => ({ petKey, fruit }))
+);
+if (additionalFruits.length !== 1) {
+  errors.push(`additional fruit record total ${additionalFruits.length} != 1`);
+} else {
+  const [{ petKey, fruit }] = additionalFruits;
+  if (petKey !== 'pet_11' || fruit.id !== 'burning_duck'
+    || fruit.name !== '鸭吉吉-燃了鸭的果实' || fruit.formName !== '燃了鸭'
+    || fruit.obtainType !== '限时活动' || fruit.obtainMethod !== '公测礼') {
+    errors.push('pet_11: 燃了鸭 additional fruit definition mismatch');
+  }
+}
+if (!collections.sprite_progress?.pet_11?.additional_fruits_acquired?.includes('burning_duck')) {
+  errors.push('pet_11: 燃了鸭 additional fruit must be marked acquired');
+}
+if (pets.pet_339?.fruit?.availability !== '渠道限定 · 当前不可获取'
+  || collections.sprite_progress?.pet_339?.fruit_acquired !== true) {
+  errors.push('pet_339: 布瓜蝌 fruit must stay acquired and show its unavailable channel status');
+}
+if (!syncSource.includes('FRUIT_AVAILABILITY') || !syncSource.includes('339: "渠道限定 · 当前不可获取"')) {
+  errors.push('Excel sync must preserve the unavailable channel status for 布瓜蝌 fruit');
+}
+
 for (const number of [1, 375]) {
   if (pets[key(number)]?.fruit) errors.push(`${key(number)} must not have a fruit definition`);
 }
@@ -282,5 +306,6 @@ console.log(JSON.stringify({
   groups: groups.length,
   s3Tasks: s3Tasks.length,
   s3FruitRecords,
+  additionalFruitRecords: additionalFruits.length,
   totals,
 }, null, 2));
