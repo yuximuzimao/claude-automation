@@ -9,6 +9,7 @@ const extract = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'fixtures'
 const syncSource = fs.readFileSync(path.join(root, 'scripts', 'sync-latest-excel.py'), 'utf8');
 const auditSource = fs.readFileSync(path.join(root, 'scripts', 'audit-latest-excel.py'), 'utf8');
 const readerSource = fs.readFileSync(path.join(root, 'scripts', 'read-latest-excel.py'), 'utf8');
+const legacyFruitUpdaterSource = fs.readFileSync(path.join(root, 'scripts', 'update-fruit-data.js'), 'utf8');
 
 const nameOverrides = {
   392: '饮雪狂兽',
@@ -27,6 +28,12 @@ function elements(value) {
 }
 
 const errors = [];
+const correctedFruitNames = {
+  pet_4: '喵喵的果实',
+  pet_11: '鸭吉吉的果实',
+  pet_31: '恶魔叮的果实',
+  pet_107: '阿米亚特的果实',
+};
 if (!readerSource.includes('NO_FRUIT_SOURCES')
   || !syncSource.includes('classify_fruit_row')
   || !auditSource.includes('classify_fruit_row')) {
@@ -101,10 +108,24 @@ if (JSON.stringify([...fruitTypes].sort()) !== JSON.stringify([...expectedFruitT
 }
 for (const [petKey, pet] of Object.entries(pets)) {
   if (!pet.fruit) continue;
+  if (!pet.fruit.name.endsWith('的果实')) {
+    errors.push(`${petKey}: fruit name must end with 的果实`);
+  }
   const range = pet.fruit.familyNumberRange;
   if (!Array.isArray(range) || range.length !== 2 || !range.every(Number.isInteger) || range[0] > range[1]) {
     errors.push(`${petKey}: fruit must keep its valid Excel family number range`);
   }
+}
+for (const [petKey, expectedName] of Object.entries(correctedFruitNames)) {
+  if (pets[petKey]?.fruit?.name !== expectedName) {
+    errors.push(`${petKey}: fruit name must be ${expectedName}`);
+  }
+}
+if (!syncSource.includes('FRUIT_NAME_OVERRIDES') || !syncSource.includes("的果实")) {
+  errors.push('Excel sync must preserve verified fruit aliases and the 的果实 naming rule');
+}
+if (!legacyFruitUpdaterSource.includes("pet.name + '的果实'")) {
+  errors.push('legacy fruit updater must use the 的果实 naming rule');
 }
 if (JSON.stringify(pets.pet_7?.fruit?.familyNumberRange) !== JSON.stringify([5, 7])) {
   errors.push('pet_7 fire fruit family range must be [5, 7]');

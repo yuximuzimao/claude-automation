@@ -46,6 +46,11 @@ PARTIAL_PETS = {
 VERIFIED_EVOLUTION_LEVELS = {
     430: 40,
 }
+FRUIT_NAME_OVERRIDES = {
+    4: "喵喵的果实",
+    31: "恶魔叮的果实",
+    107: "阿米亚特的果实",
+}
 
 
 def apply_verified_text_corrections(value):
@@ -400,7 +405,7 @@ for row in sheets.get("果实进度", [])[1:]:
     if not pet:
         continue
     fruit = {
-        "name": f"{pet['name']}果实",
+        "name": FRUIT_NAME_OVERRIDES.get(target_number, f"{pet['name']}的果实"),
         "acquired": False,
         "obtainMethod": normalize_source_names(description),
         "obtainType": fruit_info["obtainType"],
