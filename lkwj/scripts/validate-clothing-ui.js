@@ -197,11 +197,11 @@ async function validateUi(html) {
         && !production.api.isClothingTargetPiece({ obtainType: 'paid' })
         && !production.api.isClothingTargetPiece({ obtainType: 'unknown' })
         && !production.api.isClothingTargetPiece({})],
-      ['real clothing stats are 257 owned of 346 targets with 148 paid references',
-        stats.targetTotal === 346 && stats.targetOwned === 257 && stats.paidTotal === 148],
+      ['real clothing stats are 257 owned of 423 targets with 148 paid references',
+        stats.targetTotal === 423 && stats.targetOwned === 257 && stats.paidTotal === 148],
       ['clothing tab renders shared clothing stats',
-        tabHtml.includes('目标共 <strong>346</strong> 件 · 已收集 <strong>257</strong>')
-        && tabHtml.includes('信息缺失套装 <strong>34</strong>')
+        tabHtml.includes('目标共 <strong>423</strong> 件 · 已收集 <strong>257</strong>')
+        && tabHtml.includes('信息缺失套装 <strong>21</strong>')
         && tabHtml.includes('付费资料 <strong>148</strong> 件')],
       ['clothing tab follows title stats search filters content order without legacy wrappers',
         tabHtml.indexOf('👗 服装') < tabHtml.indexOf('sprite-stats')
@@ -214,10 +214,10 @@ async function validateUi(html) {
         && contentHtml.includes('鎏金礼赞')
         && contentHtml.includes('<span class="sm">0/6</span>')
         && contentHtml.includes('<span class="sm">0/4</span>')],
-      ['missing information filter reports and selects all 34 incomplete sets',
-        missingSetIds.size === 34
+      ['missing information filter reports and selects all 21 incomplete sets',
+        missingSetIds.size === 21
         && missingTabHtml.includes('chip active')
-        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 34</span>")],
+        && missingTabHtml.includes("setClothingStatusFilter('missing')\">信息缺失 21</span>")],
       ['missing information filter includes partial and definition-only sets but excludes complete sets',
         missingContentHtml.includes('异色朔夜伊芙印象')
         && missingContentHtml.includes('clothing-set-badge missing')
@@ -268,7 +268,7 @@ async function validateUi(html) {
     );
     checks.push(
       ['dashboard renders shared target-only clothing stats',
-        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 346</span>')],
+        dashboardHtml.includes('<span class="ds-label">服装</span><span class="ds-val">257</span><span class="ds-total">/ 423</span>')],
     );
 
     const lavaPieces = list.filter(item => item.setId === setSample.id);

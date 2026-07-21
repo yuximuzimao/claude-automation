@@ -86,6 +86,54 @@ const confirmedMissingPieces = [
   ['连衣-雪灵印象', 'clothing_set_46', '连衣'],
   ['帽子-雪灵印象', 'clothing_set_46', '帽子'],
   ['手饰-雪灵印象', 'clothing_set_46', '手饰'],
+  ['帽子-魔眷鸟印象', 'clothing_set_47', '帽子'],
+  ['手饰-魔眷鸟印象', 'clothing_set_47', '手饰'],
+  ['袜子-魔眷鸟印象', 'clothing_set_47', '袜子'],
+  ['鞋子-魔眷鸟印象', 'clothing_set_47', '鞋子'],
+  ['上衣-橙花的追忆', 'clothing_set_51', '上衣'],
+  ['下装-橙花的追忆', 'clothing_set_51', '下装'],
+  ['帽子-橙花的追忆', 'clothing_set_51', '帽子'],
+  ['背包-橙花的追忆', 'clothing_set_51', '背包'],
+  ['手饰-橙花的追忆', 'clothing_set_51', '手饰'],
+  ['袜子-橙花的追忆', 'clothing_set_51', '袜子'],
+  ['鞋子-橙花的追忆', 'clothing_set_51', '鞋子'],
+  ['上衣-唱诗班的礼赞', 'clothing_set_52', '上衣'],
+  ['下装-唱诗班的礼赞', 'clothing_set_52', '下装'],
+  ['帽子-唱诗班的礼赞', 'clothing_set_52', '帽子'],
+  ['背包-唱诗班的礼赞', 'clothing_set_52', '背包'],
+  ['鞋子-唱诗班的礼赞', 'clothing_set_52', '鞋子'],
+  ['帽子-烈火守护印象', 'clothing_set_53', '帽子'],
+  ['背包-烈火守护印象', 'clothing_set_53', '背包'],
+  ['手饰-烈火守护印象', 'clothing_set_53', '手饰'],
+  ['上衣-圆号鱼印象', 'clothing_set_60', '上衣'],
+  ['下装-圆号鱼印象', 'clothing_set_60', '下装'],
+  ['帽子-圆号鱼印象', 'clothing_set_60', '帽子'],
+  ['手饰-圆号鱼印象', 'clothing_set_60', '手饰'],
+  ['袜子-圆号鱼印象', 'clothing_set_60', '袜子'],
+  ['鞋子-圆号鱼印象', 'clothing_set_60', '鞋子'],
+  ['背包-圆号鱼印象', 'clothing_set_60', '背包'],
+  ['上衣-蹦床松鼠印象', 'clothing_set_61', '上衣'],
+  ['下装-蹦床松鼠印象', 'clothing_set_61', '下装'],
+  ['帽子-蹦床松鼠印象', 'clothing_set_61', '帽子'],
+  ['手饰-蹦床松鼠印象', 'clothing_set_61', '手饰'],
+  ['袜子-蹦床松鼠印象', 'clothing_set_61', '袜子'],
+  ['鞋子-蹦床松鼠印象', 'clothing_set_61', '鞋子'],
+  ['背包-蹦床松鼠印象', 'clothing_set_61', '背包'],
+  ['上衣-卡瓦重印象', 'clothing_set_62', '上衣'],
+  ['下装-卡瓦重印象', 'clothing_set_62', '下装'],
+  ['帽子-卡瓦重印象', 'clothing_set_62', '帽子'],
+  ['背包-卡瓦重印象', 'clothing_set_62', '背包'],
+  ['手饰-卡瓦重印象', 'clothing_set_62', '手饰'],
+  ['袜子-卡瓦重印象', 'clothing_set_62', '袜子'],
+  ['鞋子-卡瓦重印象', 'clothing_set_62', '鞋子'],
+];
+const confirmedChromaticPairs = [
+  ['clothing_set_13', 'clothing_set_54'],
+  ['clothing_set_42', 'clothing_set_55'],
+  ['clothing_set_43', 'clothing_set_56'],
+  ['clothing_set_28', 'clothing_set_57'],
+  ['clothing_set_35', 'clothing_set_58'],
+  ['clothing_set_38', 'clothing_set_59'],
 ];
 const setIdPattern = /^clothing_set_[1-9]\d*$/;
 const pieceIdPattern = /^clothing_[1-9]\d*$/;
@@ -165,6 +213,21 @@ for (const [pieceName, setId, category] of confirmedMissingPieces) {
   if (piece.setId !== setId || piece.category !== category || piece.collectionType !== 'set'
     || piece.setRole !== 'magic_required' || piece.obtainType !== 'standard') {
     errors.push(`${pieceName}: confirmed definition fields mismatch`);
+  }
+}
+
+for (const [normalSetId, chromaticSetId] of confirmedChromaticPairs) {
+  const normalSet = setsById.get(normalSetId);
+  const chromaticSet = setsById.get(chromaticSetId);
+  const normalPieces = pieces.filter(piece => piece.setId === normalSetId && piece.setRole === 'magic_required');
+  for (const normalPiece of normalPieces) {
+    const expectedName = normalPiece.pieceName.replace(normalSet.name, chromaticSet.name);
+    const matches = pieces.filter(piece => piece.setId === chromaticSetId && piece.pieceName === expectedName);
+    if (matches.length !== 1 || matches[0].category !== normalPiece.category
+      || matches[0].collectionType !== 'set' || matches[0].setRole !== 'magic_required'
+      || matches[0].obtainType !== 'standard') {
+      errors.push(`${expectedName}: chromatic definition must match the normal set piece`);
+    }
   }
 }
 
