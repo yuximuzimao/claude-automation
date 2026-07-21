@@ -19,15 +19,23 @@ const checks = [
   ['random supports form module', /function\s+pickRandomForm\s*\(/.test(html) && /markRandomFormTask/.test(html)],
   ['random supports fruit module', /function\s+pickRandomFruit\s*\(/.test(html) && /markRandomFruitTask/.test(html)],
   ['random displays pet number', html.includes('formatPetNo')],
-  ['confirm_forms task renders jump action', html.includes('去多形态') && /jumpToForms\('\$\{petKey\}'\)/.test(html)],
+  ['confirm_forms task title is the inline jump action', /task-inline-link/.test(html)
+    && /jumpToForms\('\$\{petKey\}'\)/.test(html)
+    && !/<button class="task-jump-btn"/.test(html)],
   ['jump action targets and expands the matching pet', /function\s+jumpToForms\s*\(\s*petKey\s*\)/.test(html)
-    && /formSearch\s*=\s*pet\.name/.test(html)
+    && /formSearch\s*=\s*petKey\.replace\(['"]pet_['"],\s*['"]['"]\)/.test(html)
     && /formStatus\s*=\s*['"]all['"]/.test(html)
     && /expandedFormPet\s*=\s*petKey/.test(html)
     && /switchTab\(['"]forms['"]\)/.test(html)],
   ['jump action scrolls to stable form card anchor', html.includes('form-pet-${group.petKey}')
     && html.includes('form-pet-${petKey}')
     && html.includes('scrollIntoView')],
+  ['full evolution chain is rendered in sprite and multiform details', /function\s+getEvolutionPaths\s*\(/.test(html)
+    && /function\s+renderEvolutionChain\s*\(/.test(html)
+    && /renderEvolutionChain\(petKey,\s*['"]sprite['"]\)/.test(html)
+    && /renderEvolutionChain\(group\.petKey,\s*['"]forms['"]\)/.test(html)],
+  ['evolution chain links search exact pets in the current tab', /function\s+jumpToChainPet\s*\(/.test(html)
+    && /jumpToChainPet\('\$\{nodePetKey\}',\s*'\$\{tabName\}'\)/.test(html)],
 ];
 
 const failures = checks.filter(([, ok]) => !ok).map(([name]) => name);
