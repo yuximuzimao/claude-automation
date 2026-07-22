@@ -5,6 +5,7 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from app.reader_claude import read_claude_projects, read_claude_session_file
 
@@ -105,6 +106,121 @@ class ClaudeReaderTests(unittest.TestCase):
             result = read_claude_session_file(path)
 
         self.assertIsNone(result.usage_events[0].inferred_project)
+
+    def test_local_tool_input_assigns_root_event_to_unique_project(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session.jsonl"
+            path.write_text(
+                json.dumps(
+                    {
+                        "timestamp": "2026-07-22T08:00:00.000Z",
+                        "type": "assistant",
+                        "cwd": "/Users/chat/claude",
+                        "message": {
+                            "model": "claude-sonnet-4-6",
+                            "usage": {"input_tokens": 10, "output_tokens": 5},
+                            "content": [
+                                {
+                                    "type": "tool_use",
+                                    "name": "Read",
+                                    "input": {
+                                        "file_path": (
+                                            "/Users/chat/claude/codex-monitor/"
+                                            "README.md"
+                                        )
+                                    },
+                                }
+                            ],
+                        },
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            with patch(
+                "app.reader_claude._project_metadata_exists",
+                side_effect=lambda project: project == "codex-monitor",
+            ):
+                result = read_claude_session_file(path)
+
+        self.assertEqual(result.usage_events[0].inferred_project, "codex-monitor")
+
+    def test_workspace_root_events_between_one_project_are_backfilled(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session.jsonl"
+            rows = []
+            for index, cwd in enumerate(
+                [
+                    "/Users/chat/claude",
+                    "/Users/chat/claude/aftersales-automation",
+                    "/Users/chat/claude",
+                    "/Users/chat/claude/aftersales-automation",
+                    "/Users/chat/claude",
+                ]
+            ):
+                rows.append(
+                    json.dumps(
+                        {
+                            "timestamp": f"2026-07-22T08:00:0{index}.000Z",
+                            "type": "assistant",
+                            "cwd": cwd,
+                            "message": {
+                                "id": f"msg-{index}",
+                                "model": "claude-sonnet-4-6",
+                                "usage": {"input_tokens": 10, "output_tokens": 5},
+                            },
+                        }
+                    )
+                )
+            path.write_text("\n".join(rows) + "\n", encoding="utf-8")
+
+            with patch(
+                "app.reader_claude._project_metadata_exists",
+                side_effect=lambda project: project == "aftersales-automation",
+            ):
+                result = read_claude_session_file(path)
+
+        self.assertEqual(
+            [event.inferred_project for event in result.usage_events],
+            [None, None, "aftersales-automation", None, None],
+        )
+
+    def test_workspace_root_events_are_not_backfilled_across_two_projects(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session.jsonl"
+            rows = []
+            for index, cwd in enumerate(
+                [
+                    "/Users/chat/claude/aftersales-automation",
+                    "/Users/chat/claude",
+                    "/Users/chat/claude/codex-monitor",
+                ]
+            ):
+                rows.append(
+                    json.dumps(
+                        {
+                            "timestamp": f"2026-07-22T08:00:0{index}.000Z",
+                            "type": "assistant",
+                            "cwd": cwd,
+                            "message": {
+                                "id": f"msg-{index}",
+                                "model": "claude-sonnet-4-6",
+                                "usage": {"input_tokens": 10, "output_tokens": 5},
+                            },
+                        }
+                    )
+                )
+            path.write_text("\n".join(rows) + "\n", encoding="utf-8")
+
+            with patch(
+                "app.reader_claude._project_metadata_exists",
+                side_effect=lambda project: project
+                in {"aftersales-automation", "codex-monitor"},
+            ):
+                result = read_claude_session_file(path)
+
+        self.assertIsNone(result.usage_events[1].inferred_project)
 
     def test_duplicate_assistant_message_id_counts_usage_once(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

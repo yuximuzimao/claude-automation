@@ -23,6 +23,13 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
   - `reasoning_output_tokens`
   - `total_tokens`
 - 同一 session 内增量统计使用 `last_token_usage` 求和，不对 `total_token_usage` 求和。
+- 项目归属按 `user_message` 分轮，不再给整段 session 强行套一个项目。一个从 `/Users/chat` 启动的长会话可以按实际操作分到多个项目；同一轮中先产生、后确认项目的 token 在轮次结束时回填。
+- 归属证据优先使用正式项目 `cwd`、用户明确给出的正式项目路径和工具调用的真实 `workdir`。工具输出、普通助手示例文字和不存在 `CLAUDE.md` 的占位目录不作为 Codex 轮次归属依据。
+- 新版 `exec` 可能把真实调用包在 `custom_tool_call.input` 中。只对 `exec`、`exec_command`、`apply_patch`、`view_image` 等本地文件操作读取已验证的正式项目路径；`update_plan`、代理调度、等待等协调工具不提供项目证据。实际 `workdir` 权重始终高于普通工具参数路径。
+- 项目迁移后可在新项目自身的 `CLAUDE.md` 声明 `项目历史路径：/绝对/旧路径`。reader 动态读取该元数据，把旧日志归到当前项目；禁止在监控代码中维护个人项目硬编码映射。冲突声明不得启用。
+- Superpowers/CodexPro 历史工作树形如 `.../worktrees/claude/<临时任务>/<正式项目>/...`。reader 可从日志建立唯一的临时名到正式项目映射；映射冲突或正式项目元数据不存在时不得猜测。
+- 子代理在自身没有更强证据时，继承父会话在启动时刻已确认的项目；自身明确的正式项目 `workdir` 可以覆盖继承值。
+- 明确的 `/neat`、`/sync`、`整理一下`、`收尾` 等收尾轮次可作为单项目会话总结：只纠正未知或单纯沿用的弱归属。若会话已经确认过多个项目，不得用最后一次 neat 覆盖已有分段。
 - 限额状态使用最新可显示 `used_percent` 的 `payload.rate_limits`；如果较新的 `rate_limits` 缺少 `primary/secondary.used_percent`，不得覆盖上一条可显示 quota。
 - `used_percent` 在模型层只接受有限数值；字符串数字可转为 `float`，空值、非数值、`NaN`、`inf` 统一视为未知 `None`。
 - 真实 `resets_at` 可为 epoch 数字；UI 层负责格式化，不在 reader 中改写原始值。
@@ -37,6 +44,8 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - `main.py --smoke-claude` 默认使用 1 天 mtime 窗口且最多读取 200 个 JSONL 文件。
 - `cache_creation.ephemeral_5m_input_tokens` 和 `cache_creation.ephemeral_1h_input_tokens` 必须保留，UI 可暂不展示。
 - Claude Code 可能在同一 JSONL 中重复写入同一个 assistant `message.id` 和相同 `message.usage`；有 `message.id` 时必须按 id 去重后再累计 token。缺少 id 的旧格式保持逐条统计。
+- Claude 的 `Bash`、`Read`、`Edit`、`Write`、`Glob`、`Grep` 等本地文件工具输入若只出现一个已验证项目路径，可作为该 assistant usage event 的直接证据；tool result、Skill/Agent 调度和多项目输入不参与。
+- Claude 会话若通过真实事件 `cwd` 只确认一个项目，只回填首次与末次确认事件之间、且 `cwd` 仍是 `/Users/chat` 或 `/Users/chat/claude` 的根目录事件。确认区间外和确认过多个项目的会话保持原归属，避免把工作区讨论整段强塞给最后一个项目。
 - UI watcher 触发的 Claude 刷新必须保持近 30 天视图口径，使用近 30 天 `modified_since` 和 `--claude-max-files` 上限重算；禁止因文件变化触发无边界 `.claude/projects` 扫描。
 - 手动刷新可以使用 CLI 参数 `--claude-days` / `--claude-max-files` 指定的范围，但仍不得无边界扫描。
 
@@ -75,10 +84,11 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Codex token 使用 `TokenUsage.total_tokens`。
 - Claude token 使用 `ClaudeUsage.total_estimated_tokens`，即 `input + output + cache_creation + cache_read`。
 - Top 10 项目按近 30 天 token 排序；0 token 项目不展示。
-- 项目身份按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码出项目子目录名；(3) 从 session 内容的 `/claude/{project}/` 路径模式中推断（需该项目存在 `CLAUDE.md`）。第 3 层默认先扫描 200 行；没有唯一结果，或唯一候选不存在对应项目 `CLAUDE.md` 时，自适应继续到 1000 行，以覆盖长规划会话中后段才创建/进入项目，以及任务名先于真实项目出现的情况。`docs`、`scripts`、`reviews` 等工作区共享目录不参与项目投票。事件按类型加权（`app/reader_common.py::infer_project_from_handle`）：Codex `user_message` 和 Claude 用户 text 段 5x，Claude assistant text 段 1x；Codex `function_call_output` / `function_call` / `token_count` 和 Claude `tool_result` / hook / attachment 不参与投票。若最高票项目打平，必须返回未知并归入 `其他`，不能按插入顺序任意选择项目。
+- Codex reader 已按轮次产出 `inferred_project`，聚合层依次使用事件 `cwd` 和该轮推断值。Claude 项目身份继续按三级 fallback 解析：(1) `cwd` 向上遍历，找到含 `项目中文名：` 的 `CLAUDE.md`；(2) 从 `session_path`（`.claude/projects/` 编码目录名）中解码项目；(3) 从人类文本中的 `/claude/{project}/` 路径做有界加权推断。Claude tool result、hook、attachment 和共享目录不参与投票；打平时归入 `其他`。
 - 未识别项目统一合并为 `其他`，token 求和后参与 Top 10 排序。
 - Top 项目保留最多 3 个 `sample_cwds`，供 UI tooltip/详情展示完整路径。
 - 项目中文名的维护边界在项目自身说明文件，不在监控软件内维护中心映射表。
+- 项目历史路径也由当前项目自身的 `CLAUDE.md` 维护；例如目录迁移后，旧日志仍可跟随当前项目名称显示。
 
 ## 7. 已知坑位
 
@@ -91,6 +101,11 @@ Codex Monitor 用本地 JSONL 日志展示 Codex 与 Claude Code 的限额和 to
 - Claude Code 同一 assistant `message.id` 可能重复写入 2-5 次；若不去重，30 天 Claude token 会被重复累计。回归测试：`tests/test_reader_claude.py::test_duplicate_assistant_message_id_counts_usage_once`。
 - 多项目摘要型 Codex 会话可能在普通 `message` / `agent_message` / `task_complete` 中弱引用多个项目。若弱信号打平，不能把今日用量挂到先出现的项目（例如误挂到 `product-detect`）；应返回 `None` 并让聚合归入 `其他`。回归测试：`tests/test_reader_common.py::test_tied_weak_project_signals_return_none`。
 - 工作区根目录启动的长会话可能在前 200 行把任务名识别成唯一候选，但该名称并不是实际项目目录。Codex reader 必须先验证候选对应的 `CLAUDE.md`；无效候选不得触发早返回，应继续扫描到 1000 行。真实案例中 `aftersales-confidence-safety-v1` 抢占了后段才出现的 `aftersales-automation`，导致约 43M token 落入“其他”。回归测试：`tests/test_reader_common.py::test_invalid_early_candidate_extends_to_late_valid_project`、`tests/test_reader_codex.py::test_invalid_early_candidate_uses_late_known_project`。
+- `某项目` 不是实际项目。它来自 WorkBuddy 文档中的示例路径 `/Users/chat/claude/某项目`；不存在对应项目元数据时必须忽略，不能因中文字符满足路径正则就当作项目。
+- 实际工作树路径可能是 `~/.config/superpowers/worktrees/claude/aftersales-confidence-safety-v1/aftersales-automation`。第一段是临时任务名，最后一段才是正式项目。不得按名称前缀猜测；只使用日志中完整路径建立唯一映射。
+- neat 是收尾确认而不是逐轮证据替代品。它可以纠正未知和过期继承值，但真实跨项目工具操作必须保留分段；讨论 neat 本身不算总结标记，只有明确的收尾指令才触发。
+- 新版 Codex `exec` 是外层 JavaScript 调度器，真实 `workdir` 可能使用未加引号的 `workdir:`，项目路径也可能只存在于内层本地文件工具参数。解析这类输入时只接受存在 `CLAUDE.md` 的项目，并排除协调工具；否则会把诊断脚本里提到的其他项目误当成当前项目。
+- Claude 根会话不能因为“后来只出现过一个项目”就无边界回填。安全范围只能是首次与末次真实项目 `cwd` 之间；这能覆盖项目执行期间的根调度开销，同时保留开始前、结束后及跨项目讨论。
 - 代码修改后必须重启 app 进程才能生效（`python3.13 main.py --ui` 是长驻进程，不热重载）。
 - `.app` 与 LaunchAgent 共享单实例锁。调试“双击没打开”时先查 `~/Library/Application Support/Codex Monitor/codex-monitor.lock` 中的 PID，再用 `ps -p <pid>` 判断是否仍有旧 UI 进程占锁。
 - tkinter `create_arc` 的 `extent` 取到 ±360 时整段弧渲染为空白。配额圆环 100% 时 `extent = -100 × 3.6 = -360`，会让满载圆环显示为空（看起来"归零"）。灰色轨道一直用 `-359.99` 规避，但进度弧早期漏了。修复：`app/ui_tk.py::_ring_extent()` 统一把进度弧 clamp 到 `-359.99`，并抽成纯函数以便脱离 tkinter 单测。回归测试 `tests/test_ui_tk.py::test_ring_extent_*`。新增任何 `create_arc` 都不得让 extent 触到 ±360。

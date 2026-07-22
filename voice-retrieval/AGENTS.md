@@ -5,6 +5,7 @@
 ## 项目边界
 
 - 这个项目解决的是“手机公网语音输入 -> 本机按键或浮窗读取 latest”的最短链路，不做历史记录、队列、轮询或多设备同步。
+- `CLAUDE.md` 顶部的 `项目中文名：语音取回` 和 `项目历史路径：/Users/chat/phone-voice-paste` 是用量统计元数据；迁移目录时必须同步更新，不能删除后在监控项目里写死映射。
 - Cloudflare Worker 只暴露 `GET /`、`POST /push`、`POST /latest`；`/latest` 必须保持 POST-only。
 - latest 存在同一个 Durable Object 实例：`VOICE_DO.idFromName("default")`。不要改用 Workers KV，KV 的最终一致性不适合刚写马上读。
 - 认证只用 `SECRET`。token 优先走 `Authorization: Bearer <token>`，兼容 JSON body 的 `token` 字段；未授权响应不能返回文本内容。

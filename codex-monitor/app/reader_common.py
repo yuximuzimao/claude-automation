@@ -155,7 +155,14 @@ def infer_project_from_handle(
             ):
                 return winner
 
-    return _unique_project_winner(votes)
+    winner = _unique_project_winner(votes)
+    if (
+        winner is not None
+        and early_candidate_is_valid is not None
+        and not early_candidate_is_valid(winner)
+    ):
+        return None
+    return winner
 
 
 def _unique_project_winner(votes: dict[str, int]) -> str | None:

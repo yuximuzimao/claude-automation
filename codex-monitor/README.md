@@ -17,6 +17,8 @@ The app reads local JSONL session logs, keeps token usage split by source and mo
 - Phase 8: Claude counting accuracy, project attribution hardening, persistent project-detail popover
 - Phase 9: white/white-gray glass foreground, long-session attribution fallback, consistent rolling 30-day startup/refresh window
 - Phase 10: invalid early project candidates no longer block later real-project attribution
+- Phase 11: turn-level Codex attribution, verified worktree aliases, parent-project inheritance, and neat summary correction
+- Phase 12: nested tool-path evidence, project-declared legacy paths, and bounded Claude workspace-root backfill
 
 ## Run Tests
 
@@ -39,7 +41,11 @@ The Claude smoke check defaults to a 1-day mtime window and caps reads at 200 fi
 
 Usage numbers are local estimates from JSONL logs, not official billing data. Codex usage is summed from `last_token_usage`; Claude Code usage is summed from assistant `message.usage` after deduplicating repeated `message.id` entries.
 
-Project attribution prefers explicit `cwd`, then decoded Claude project paths, then weighted session text signals. The fallback scans 200 lines first and extends to 1000 when no unique result exists or when the early candidate has no project `CLAUDE.md`; shared workspace directories such as `docs`, `scripts`, and `reviews` do not count as projects. Claude tool results, SessionStart hook context, and other tool-output payloads are intentionally ignored because they can list unrelated project paths and would otherwise inflate the wrong project.
+Codex attribution is resolved per user turn, so one session launched from `/Users/chat` may legitimately contribute to multiple projects. A direct project `cwd`, an explicit project path in the user request, the turn's actual tool `workdir`, or a verified path inside a local file-operation tool can confirm the project; token events emitted before the first tool call in that turn are backfilled after the turn is resolved. Coordination tools and tool outputs never count as project evidence. Subagents inherit the parent's confirmed project when they have no stronger evidence. Historical Superpowers/CodexPro worktree paths are mapped only when the logs contain one unique `<temporary-task>/<real-project>` relationship and the real project still owns a `CLAUDE.md`.
+
+A project may declare `项目历史路径：/absolute/old/path` in its own `CLAUDE.md`; old log paths then follow the current project without adding a central hard-coded mapping. Claude local file-tool inputs can provide per-event project evidence. For a Claude session that confirms exactly one project through real event `cwd` values, only workspace-root events located between the first and last confirmed project events are backfilled; events outside that interval and all multi-project sessions stay unchanged.
+
+An explicit `/neat`, `/sync`, `整理一下`, or `收尾` turn acts as a single-project session summary. It may fill unknown or stale inherited portions only when the session has no conflicting confirmed project; it never overwrites already confirmed cross-project turns. Claude attribution continues to prefer explicit `cwd`, decoded Claude project paths, and bounded weighted text inference. Unverified placeholders such as `某项目`, tool outputs, hooks, and ambiguous multi-project sessions stay in `其他`.
 
 ## UI
 

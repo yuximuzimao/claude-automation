@@ -187,6 +187,29 @@ class TestInferProjectSignalWeighting(unittest.TestCase):
 
         self.assertEqual(result, "aftersales-automation")
 
+    def test_invalid_final_candidate_is_rejected(self) -> None:
+        lines = [
+            json.dumps(
+                {
+                    "timestamp": "2026-06-04T00:00:00.000Z",
+                    "type": "event_msg",
+                    "payload": {
+                        "type": "agent_message",
+                        "message": "/Users/me/claude/某项目 是示例路径，不是真实项目",
+                    },
+                },
+                ensure_ascii=False,
+            )
+        ]
+        handle = io.StringIO("\n".join(lines) + "\n")
+
+        result = infer_project_from_handle(
+            handle,
+            early_candidate_is_valid=lambda project: project == "codex-monitor",
+        )
+
+        self.assertIsNone(result)
+
 
 class TestInferProjectClaudeCodeFormat(unittest.TestCase):
     """Claude Code JSONL (no payload dict) should work correctly."""

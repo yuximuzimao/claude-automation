@@ -1,3 +1,6 @@
 # 语音取回 Claude Notes
 
+项目中文名：语音取回
+项目历史路径：/Users/chat/phone-voice-paste
+
 项目规则见 [AGENTS.md](/Users/chat/claude/voice-retrieval/AGENTS.md)。不要在这里复制一份，避免 Codex 和 Claude 两边规则漂移。

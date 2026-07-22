@@ -12,3 +12,4 @@
 | 2026-06-29 | [monitor-capsule-hover](./2026-06-29-monitor-capsule-hover/design.md) | 胶囊与项目弹层已实现，旧配色方案已废弃 |
 | 2026-07-10 | [UI、归因与窗口口径](./2026-07-10-ui-attribution-and-window-consistency.md) | UI、长会话归因与滚动 30 天口径阶段记录 |
 | 2026-07-17 | [invalid-early-project-candidate](./2026-07-17-invalid-early-project-candidate/design.md) | 无效早期任务名不再阻断真实项目归因 |
+| 2026-07-22 | [按轮次归属与 neat 收尾](./2026-07-22-turn-attribution-and-neat-summary.md) | 主目录/CodexPro 工作流按真实项目操作归属，neat 只纠正弱归属 |

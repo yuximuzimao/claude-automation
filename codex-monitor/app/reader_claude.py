@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import dataclasses
 import json
+import re
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -25,7 +27,10 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
     parse_errors = 0
 
     with path.open("r", encoding="utf-8", errors="replace") as handle:
-        inferred_project = infer_project_from_handle(handle)
+        inferred_project = infer_project_from_handle(
+            handle,
+            early_candidate_is_valid=_project_metadata_exists,
+        )
         handle.seek(0)
         for line in handle:
             try:
@@ -58,6 +63,7 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
             by_model[model] = by_model.get(model, ClaudeUsage()).plus(usage)
             timestamp = event.get("timestamp")
             if isinstance(timestamp, str):
+                tool_project = _tool_input_project(message)
                 usage_events.append(
                     ClaudeUsageEvent(
                         timestamp=timestamp,
@@ -65,9 +71,11 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
                         model=model,
                         usage=usage,
                         session_path=str(path),
-                        inferred_project=inferred_project,
+                        inferred_project=tool_project or inferred_project,
                     )
                 )
+
+    usage_events = _backfill_workspace_root_events(usage_events)
 
     return ClaudeSessionResult(
         path=path,
@@ -77,6 +85,89 @@ def read_claude_session_file(path: Path) -> ClaudeSessionResult:
         assistant_events=assistant_events,
         parse_errors=parse_errors,
     )
+
+
+_PROJECT_PATH_RE = re.compile(r"/claude/([\w][\w-]*)")
+_LOCAL_FILE_TOOL_NAMES = frozenset({
+    "Bash",
+    "Edit",
+    "Glob",
+    "Grep",
+    "NotebookEdit",
+    "Read",
+    "Write",
+})
+
+
+def _tool_input_project(message: dict[str, Any]) -> str | None:
+    content = message.get("content")
+    if not isinstance(content, list):
+        return None
+    projects: set[str] = set()
+    for block in content:
+        if (
+            not isinstance(block, dict)
+            or block.get("type") != "tool_use"
+            or block.get("name") not in _LOCAL_FILE_TOOL_NAMES
+        ):
+            continue
+        try:
+            value = json.dumps(block.get("input"), ensure_ascii=False)
+        except (TypeError, ValueError):
+            continue
+        for project in _PROJECT_PATH_RE.findall(value):
+            if _project_metadata_exists(project):
+                projects.add(project)
+    return next(iter(projects)) if len(projects) == 1 else None
+
+
+def _backfill_workspace_root_events(
+    events: list[ClaudeUsageEvent],
+) -> list[ClaudeUsageEvent]:
+    confirmed: list[tuple[int, str]] = []
+    for index, event in enumerate(events):
+        project = _project_from_cwd(event.cwd)
+        if project is not None:
+            confirmed.append((index, project))
+    projects = {project for _, project in confirmed}
+    if len(projects) != 1:
+        return events
+
+    project = next(iter(projects))
+    first_index = confirmed[0][0]
+    last_index = confirmed[-1][0]
+    for index in range(first_index, last_index + 1):
+        event = events[index]
+        if (
+            _is_workspace_root(event.cwd)
+            and not _project_metadata_exists(event.inferred_project)
+        ):
+            events[index] = dataclasses.replace(event, inferred_project=project)
+    return events
+
+
+def _project_from_cwd(cwd: str | None) -> str | None:
+    if not isinstance(cwd, str):
+        return None
+    root = Path.home() / "claude"
+    try:
+        relative = Path(cwd).relative_to(root)
+    except ValueError:
+        return None
+    if not relative.parts:
+        return None
+    project = relative.parts[0]
+    return project if _project_metadata_exists(project) else None
+
+
+def _is_workspace_root(cwd: str | None) -> bool:
+    return cwd in {str(Path.home()), str(Path.home() / "claude")}
+
+
+def _project_metadata_exists(project: object) -> bool:
+    return isinstance(project, str) and (
+        Path.home() / "claude" / project / "CLAUDE.md"
+    ).is_file()
 
 
 def read_claude_projects(
