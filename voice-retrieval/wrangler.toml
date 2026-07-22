@@ -1,0 +1,11 @@
+name = "phone-voice-paste"
+main = "src/index.js"
+compatibility_date = "2026-06-29"
+
+[[durable_objects.bindings]]
+name = "VOICE_DO"
+class_name = "VoiceMailbox"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["VoiceMailbox"]
