@@ -70,6 +70,7 @@ lkwj/
 - 静态定义写入对应 `data/*.json`；个人完成状态只写入 `data/collections.json`。
 - 禁止从 collection 进度反向生成精灵、任务、套装或其他世界定义。
 - 稳定 ID 只追加，不复用、不重排。
+- `/api/save` 是 `collections.json` 的整份快照保存。调用方必须先 `GET /api/data`，保留响应 `ETag`，再用 `If-Match` 保存；`428` 表示缺少版本，`409` 表示快照已过期。遇到冲突必须重新读取并重做本次操作，禁止无条件覆盖。
 
 ### 精灵、任务和进化
 
@@ -152,8 +153,8 @@ node scripts/validate-dungeon-ui.js
 | `GET /api/titles` | 称号定义 |
 | `GET /api/dungeons` | 遗迹副本定义 |
 | `GET /api/game-data` | 合并静态定义与用户进度 |
-| `GET /api/data` | 原始 `collections.json` |
-| `POST /api/save` | 保存 `collections.json` |
+| `GET /api/data` | 原始 `collections.json`，响应头返回当前 `ETag` |
+| `POST /api/save` | 整份保存 `collections.json`；必须携带本轮 `GET /api/data` 取得的 `If-Match`，缺失返回 428、冲突返回 409 |
 | `GET /api/wallet` | 钱包数据 |
 | `POST /api/wallet` | 保存钱包 |
 | `GET /api/annotations` | 标注日志 |
