@@ -8,6 +8,7 @@ const cdp = require('../../lib/cdp');
 
 const {
   readUrgentAfterSaleList,
+  READ_CURRENT_PAGE_TICKETS_JS,
   parseRemainingHours,
   parseTotalCount,
   collectUrgentTicketsFromPages,
@@ -21,6 +22,11 @@ test('parseRemainingHours parses days hours and minutes', () => {
   assert.equal(parseRemainingHours('1 天 5 小时 51 分 后自动退货退款'), 29 + 51 / 60);
   assert.equal(parseRemainingHours('47 小时 30 分 后自动退货退款'), 47.5);
   assert.equal(parseRemainingHours('2 天 0 小时 1 分 后自动退货退款'), 48 + 1 / 60);
+});
+
+test('列表读取支持供应商处理超时倒计时', () => {
+  assert.equal(parseRemainingHours('0 天 15 小时 24 分 后供应商处理超时'), 15.4);
+  assert.match(READ_CURRENT_PAGE_TICKETS_JS, /供应商处理超时/);
 });
 
 test('parseTotalCount parses pagination totals with or without spaces', () => {

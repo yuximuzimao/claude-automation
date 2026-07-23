@@ -228,7 +228,7 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
       (text.match(/100001\\d{12,}/) || [])[0] || null;
     const orderNo = (text.match(/订单号[:：]\\s*([A-Za-z0-9]+)/) || [])[1] || null;
     const applyTime = (text.match(/申请时间[:：]\\s*(\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})/) || [])[1] || null;
-    const remaining = lines.find(l => /后自动/.test(l)) || null;
+    const remaining = lines.find(l => /后(?:自动|供应商处理超时)/.test(l)) || null;
     const totalHours = parseRemainingHours(remaining);
       const type = lines.map(normalizeType).find(Boolean) || null;
     const status = lines.find(l => /^商家-/.test(l)) || null;
