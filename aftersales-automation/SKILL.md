@@ -203,6 +203,7 @@ await cdp.navigate(targetId, 'https://...');
 | 29 | `inferDecision` 第二参数传错对象 | `processOpenedDetail` (14-step) 传 `context.ticket`（原始扫描 ticket，只有 totalHours/type/workOrderNum）给 `inferDecision` 作为 `queueItem` → `deadlineAt`/`urgency`/`hoursUntilNextScan` 全空 → `remainingHours=null` → safeToWait/margin 检查被跳过 → 拦截件误入 reject 而非 waitingRescan。**规则**：`inferDecision(sim, queueItem)` 的第二参数必须是完整 queueItem（含 type/deadlineAt/urgency/hoursUntilNextScan）。`hoursUntilNextScan` 不在 queue item 持久化字段中，需调用 `getHoursUntilNextScan()` 动态追加。 |
 | 30 | `readTicket` 退货物流区块异步加载 | 详情页 verifyJS 只等「售后类型」出现，但「退货物流信息」区域异步渲染 → `bodyText` 抓取时退货单号尚未出现 → `returnTracking` 为空 → `inferRefundReturn` 误入「无快递单号→超期无理由退货」分支。**修复（2026-06-30）**：`READ_ORDER_INFO_JS` 前轮询等「退货物流单号/退货物流信息」出现（最多 5s）。 |
 | 31 | RETURN_KEYWORDS 缺少「到达商家仓库」 | 圆通退回件物流写「您的包裹即将到达商家仓库，正在验收中」不写「退回」→ 赠品实际已退回但关键词未命中 → 误判为在途。**修复（2026-06-29）**：新增 `到达商家仓库`。`入站` 被驳回（outbound 配送也出现"入站"导致误判）。 |
+| 32 | 工单列表倒计时只识别「后自动…」 | 换货等工单会显示 `X 天 X 小时 X 分 后供应商处理超时`，数字格式相同但后缀不同。Step 10 必须同时识别 `后自动…` 和 `后供应商处理超时`；有工单号却解析不到倒计时时仍保持 fail-closed，停止冻结 48 小时清单，禁止静默漏单。 |
 
 ## PATHS
 
