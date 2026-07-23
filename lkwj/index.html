@@ -345,7 +345,7 @@
 </div>
 
 <script>
-let data = null, gameData = null, walletData = null, editingId = null, currentTab = 'dashboard';
+let data = null, gameData = null, walletData = null, dataRevision = null, editingId = null, currentTab = 'dashboard';
 
 // 全体品类定义
 const ALL_TABS = ['dashboard','sprite','shiny','forms','fruits','furniture','clothing','titles','stars','dungeons','sidequests','gacha','music'];
@@ -661,6 +661,7 @@ async function init() {
   ]);
   gameData = await gdRes.json();
   data = await dRes.json();
+  dataRevision = dRes.headers.get('ETag');
   walletData = await wRes.json();
   // 回填果实进度：sprite_progress.fruit_acquired → pet.fruit.acquired
   if (gameData?.pets && data?.sprite_progress) {
@@ -683,11 +684,36 @@ async function init() {
 async function saveData() {
   data.meta = data.meta || {};
   data.meta.last_updated = new Date().toISOString().slice(0, 10);
-  await fetch('/api/save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+  const res = await fetch('/api/save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'If-Match': dataRevision || '',
+    },
+    body: JSON.stringify(data),
+  });
+  if (res.status === 409 || res.status === 428) {
+    const latestRes = await fetch('/api/data');
+    data = await latestRes.json();
+    dataRevision = latestRes.headers.get('ETag');
+    if (gameData) {
+      gameData.sprite_progress = data.sprite_progress || {};
+      gameData.shiny_progress = data.shiny_progress || {};
+      gameData.furniture_progress = data.furniture_progress || {};
+      gameData.title_progress = data.title_progress || {};
+      gameData.dungeon_progress = data.dungeon_progress || {};
+      gameData.clothing_progress = data.clothing_progress || {};
+    }
+    alert('收集进度已在其他页面更新，当前页面已载入最新数据。请重新操作一次。');
+    return false;
+  }
+  if (!res.ok) throw new Error((await res.json()).error || '保存失败');
+  dataRevision = res.headers.get('ETag');
   document.getElementById('last-updated').textContent = '更新于 ' + data.meta.last_updated;
   const ind = document.getElementById('save-indicator');
   ind.classList.add('show');
   setTimeout(() => ind.classList.remove('show'), 1500);
+  return true;
 }
 
 // ═══════════ 看板 Tab ═══════════
@@ -1937,8 +1963,7 @@ async function toggleFruit(petKey, fruitId = '') {
   } else {
     if (!pet.fruit) return;
     const current = data.sprite_progress[petKey].fruit_acquired ?? !!pet.fruit.acquired;
-    pet.fruit.acquired = !current;
-    data.sprite_progress[petKey].fruit_acquired = pet.fruit.acquired;
+    data.sprite_progress[petKey].fruit_acquired = !current;
   }
   await saveData();
   if (currentTab === 'fruits') renderFruitsTab();

@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const PORT = 8899;
 const DATA_FILE = path.join(__dirname, 'data', 'collections.json');
@@ -27,14 +28,22 @@ function readJSON(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-function serveJSON(res, data) {
-  res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+function serveJSON(res, data, headers = {}) {
+  res.writeHead(200, {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    ...headers,
+  });
   res.end(JSON.stringify(data));
 }
 
 function serveError(res, code, msg) {
-  res.writeHead(code);
+  res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
   res.end(JSON.stringify({ error: msg }));
+}
+
+function revisionOf(content) {
+  return `"${crypto.createHash('sha256').update(content).digest('hex')}"`;
 }
 
 const server = http.createServer((req, res) => {
@@ -46,9 +55,21 @@ const server = http.createServer((req, res) => {
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       try {
+        const currentContent = fs.readFileSync(DATA_FILE, 'utf8');
+        const currentRevision = revisionOf(currentContent);
+        const expectedRevision = req.headers['if-match'];
+        if (!expectedRevision) {
+          serveError(res, 428, '页面版本过旧，请刷新后重试');
+          return;
+        }
+        if (expectedRevision !== currentRevision) {
+          serveError(res, 409, '收集进度已在其他页面更新，已拒绝覆盖');
+          return;
+        }
         const parsed = JSON.parse(body);
-        fs.writeFileSync(DATA_FILE, JSON.stringify(parsed, null, 2), 'utf8');
-        serveJSON(res, { ok: true });
+        const nextContent = JSON.stringify(parsed, null, 2);
+        fs.writeFileSync(DATA_FILE, nextContent, 'utf8');
+        serveJSON(res, { ok: true }, { ETag: revisionOf(nextContent) });
       } catch (e) {
         serveError(res, 400, e.message);
       }
@@ -60,7 +81,11 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/data') {
     try {
       const content = fs.readFileSync(DATA_FILE, 'utf8');
-      res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        ETag: revisionOf(content),
+      });
       res.end(content);
     } catch (e) {
       serveError(res, 500, e.message);
