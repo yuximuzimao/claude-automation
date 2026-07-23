@@ -47,7 +47,7 @@ entry: cli.js
 | `scripts/jl-steps/open-account.js` | A2 编排 CLI 包装（`node scripts/jl-steps/open-account.js <num>`），op-queue execOpenAccount 调它 | 改打开后台入口时 |
 | `scripts/jl-steps/08-click-after-sale-menu.js` | **A1 原子步：真实鼠标点击左侧「售后工单」菜单**；即使当前已在列表页也不跳过；只进列表不排序不处理 | 改 A1 列表入口时 |
 | `scripts/jl-steps/09-select-overdue-sort.js` | **A1 原子步：真实鼠标选择「按逾期时间最近排序」**；不主动刷新、不点击工单 | 改 A1 排序动作时 |
-| `scripts/jl-steps/10-read-urgent-after-sale-list.js` | **A1 原子步：读取 48 小时内工单**；抓取数据可用 DOM，分页用真实鼠标点下一页，遇到第一条 >48h 早停 | 改 A1 列表读取/分页/时效判断时 |
+| `scripts/jl-steps/10-read-urgent-after-sale-list.js` | **A1 原子步：读取 48 小时内工单**；倒计时从可见卡片 `.el-timer` 组件读取，不依赖后缀文案；分页用真实鼠标点下一页，遇到第一条 >48h 早停 | 改 A1 列表读取/分页/时效判断时 |
 | `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
@@ -74,7 +74,7 @@ entry: cli.js
 | `lib/server/live-batch-scope.js` | live 三标签批量操作的 account/store + statusScope 解析和候选筛选，防止筛选视角下批量误作用隐藏店铺 | 改批量执行/批量重来作用域时 |
 | `lib/server/data.js` | JSON/jsonl 数据持久化 | 改数据读写时 |
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
-| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。**紧急停止**：AbortController + 步骤间检查点机制（2026-07-02），前端 🛑 按钮可真正中断运行中操作；详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止逻辑时 |
+| `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。固定批次失败会持久写入账号 `error/expired` 状态；紧急停止使用 AbortController + 步骤间检查点，详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止逻辑时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |
@@ -203,7 +203,7 @@ await cdp.navigate(targetId, 'https://...');
 | 29 | `inferDecision` 第二参数传错对象 | `processOpenedDetail` (14-step) 传 `context.ticket`（原始扫描 ticket，只有 totalHours/type/workOrderNum）给 `inferDecision` 作为 `queueItem` → `deadlineAt`/`urgency`/`hoursUntilNextScan` 全空 → `remainingHours=null` → safeToWait/margin 检查被跳过 → 拦截件误入 reject 而非 waitingRescan。**规则**：`inferDecision(sim, queueItem)` 的第二参数必须是完整 queueItem（含 type/deadlineAt/urgency/hoursUntilNextScan）。`hoursUntilNextScan` 不在 queue item 持久化字段中，需调用 `getHoursUntilNextScan()` 动态追加。 |
 | 30 | `readTicket` 退货物流区块异步加载 | 详情页 verifyJS 只等「售后类型」出现，但「退货物流信息」区域异步渲染 → `bodyText` 抓取时退货单号尚未出现 → `returnTracking` 为空 → `inferRefundReturn` 误入「无快递单号→超期无理由退货」分支。**修复（2026-06-30）**：`READ_ORDER_INFO_JS` 前轮询等「退货物流单号/退货物流信息」出现（最多 5s）。 |
 | 31 | RETURN_KEYWORDS 缺少「到达商家仓库」 | 圆通退回件物流写「您的包裹即将到达商家仓库，正在验收中」不写「退回」→ 赠品实际已退回但关键词未命中 → 误判为在途。**修复（2026-06-29）**：新增 `到达商家仓库`。`入站` 被驳回（outbound 配送也出现"入站"导致误判）。 |
-| 32 | 工单列表倒计时只识别「后自动…」 | 换货等工单会显示 `X 天 X 小时 X 分 后供应商处理超时`，数字格式相同但后缀不同。Step 10 必须同时识别 `后自动…` 和 `后供应商处理超时`；有工单号却解析不到倒计时时仍保持 fail-closed，停止冻结 48 小时清单，禁止静默漏单。 |
+| 32 | 工单列表倒计时按后缀白名单定位 | 平台后缀存在 `后自动退款`、`后供应商处理超时`、`后流转至客服` 等且可能继续新增。Step 10 必须从可见工单卡片的 `.el-timer` 组件读取完整文本，只严格解析数字主体；有工单号却解析不到倒计时时仍保持 fail-closed，停止冻结 48 小时清单，禁止静默漏单。 |
 
 ## PATHS
 
