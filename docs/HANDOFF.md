@@ -7,6 +7,8 @@
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 
+LKWJ 进度保护：2026-07-23 已从 Codex 会话恢复果实个人进度 62/169；其他标签页进度与 2026-07-21 基线一致。`/api/save` 现使用 ETag/If-Match 拒绝旧标签页整文件覆盖，服务已重启并完成 428/409/200 在线验证。
+
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`。Codex **不需要**再调度或触发备份任务——这事已经不走大模型。
