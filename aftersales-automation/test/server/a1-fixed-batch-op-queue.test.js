@@ -21,6 +21,37 @@ function waitFor(predicate) {
   });
 }
 
+test('a1-fixed-batch失败会生成账号级持久异常状态', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildA1FixedBatchFailureStatus } = require('../../lib/server/op-queue');
+  const failure = buildA1FixedBatchFailureStatus({
+    type: 'a1-fixed-batch',
+    params: { accountNum: '3', accountNote: '百浩-RITEKOKO' },
+  }, new Error('售后工单 100001784549334112734 倒计时解析失败，停止冻结48小时清单'),
+  () => '2026-07-23T10:00:00.000Z');
+
+  assert.deepEqual(failure, {
+    accountNum: '3',
+    patch: {
+      status: 'error',
+      error: '售后工单 100001784549334112734 倒计时解析失败，停止冻结48小时清单',
+      lastScan: '2026-07-23T10:00:00.000Z',
+      note: '百浩-RITEKOKO',
+    },
+  });
+});
+
+test('a1-fixed-batch登录异常仍归类为登录失效', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildA1FixedBatchFailureStatus } = require('../../lib/server/op-queue');
+  const failure = buildA1FixedBatchFailureStatus({
+    type: 'a1-fixed-batch',
+    params: { accountNum: '3', accountNote: '百浩-RITEKOKO' },
+  }, new Error('注入后仍跳转到登录页'));
+
+  assert.equal(failure.patch.status, 'expired');
+});
+
 test('op-queue executes a1-fixed-batch through Step14 with fixed 48h defaults', async () => {
   const step14Path = path.join(__dirname, '../../scripts/jl-steps/14-process-single-account-fixed-batch.js');
   const resolvedStep14 = require.resolve(step14Path);

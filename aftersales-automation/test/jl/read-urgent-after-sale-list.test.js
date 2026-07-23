@@ -10,6 +10,7 @@ const {
   readUrgentAfterSaleList,
   READ_CURRENT_PAGE_TICKETS_JS,
   parseRemainingHours,
+  extractRemainingTimerText,
   parseTotalCount,
   collectUrgentTicketsFromPages,
   isAscendingByTotalHours,
@@ -24,9 +25,22 @@ test('parseRemainingHours parses days hours and minutes', () => {
   assert.equal(parseRemainingHours('2 天 0 小时 1 分 后自动退货退款'), 48 + 1 / 60);
 });
 
-test('列表读取支持供应商处理超时倒计时', () => {
+test('列表从倒计时组件读取文本，不依赖平台后缀白名单', () => {
+  const hiddenTimer = { innerText: '0 天 1 小时 0 分 后自动退款', visible: false };
+  const visibleTimer = { innerText: '1 天 14 小时 45 分 后流转至客服', visible: true };
+  const card = {
+    querySelectorAll(selector) {
+      assert.equal(selector, '.el-timer');
+      return [hiddenTimer, visibleTimer];
+    },
+  };
+
+  const remaining = extractRemainingTimerText(card, timer => timer.visible);
+  assert.equal(remaining, '1 天 14 小时 45 分 后流转至客服');
+  assert.equal(parseRemainingHours(remaining), 38.75);
   assert.equal(parseRemainingHours('0 天 15 小时 24 分 后供应商处理超时'), 15.4);
-  assert.match(READ_CURRENT_PAGE_TICKETS_JS, /供应商处理超时/);
+  assert.match(READ_CURRENT_PAGE_TICKETS_JS, /querySelectorAll\(['"]\.el-timer['"]\)/);
+  assert.doesNotMatch(READ_CURRENT_PAGE_TICKETS_JS, /后自动|供应商处理超时|流转至客服/);
 });
 
 test('parseTotalCount parses pagination totals with or without spaces', () => {

@@ -53,6 +53,20 @@ function updateAccountStatus(num, patch) {
   sse.broadcast('accounts-update', readAccountStatus());
 }
 
+function buildA1FixedBatchFailureStatus(op, error, now = () => new Date().toISOString()) {
+  if (!op || op.type !== 'a1-fixed-batch' || !op.params || !op.params.accountNum) return null;
+  const message = ((error && error.message) || String(error || '未知错误')).slice(0, 200);
+  return {
+    accountNum: op.params.accountNum,
+    patch: {
+      status: classifySessionFailure(message),
+      error: message,
+      lastScan: now(),
+      note: op.params.accountNote || `账号${op.params.accountNum}`,
+    },
+  };
+}
+
 let counter = 0;
 const queue = [];
 let running = null;
@@ -272,6 +286,14 @@ function processNext() {
       next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
       if (next.type === 'execute' && next.params && next.params.simId) {
         try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
+      }
+      const accountFailure = buildA1FixedBatchFailureStatus(next, e);
+      if (accountFailure) {
+        try {
+          updateAccountStatus(accountFailure.accountNum, accountFailure.patch);
+        } catch (statusError) {
+          log(`预警 [${next.id}] 账号异常状态写入失败: ${statusError.message}`);
+        }
       }
       log(`失败 [${next.id}] ${next.label}: ${e.message}`);
     }
@@ -1085,6 +1107,7 @@ module.exports = {
   verifyStopState,
   readStopEvent,
   updateAccountStatus,
+  buildA1FixedBatchFailureStatus,
   createScanReminderState,
   updateScanReminderState,
   sendScanSummaryReminders,

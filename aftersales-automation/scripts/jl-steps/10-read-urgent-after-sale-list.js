@@ -40,6 +40,14 @@ function parseRemainingHours(text) {
   return null;
 }
 
+function extractRemainingTimerText(card, isVisible = () => true) {
+  if (!card || typeof card.querySelectorAll !== 'function') return null;
+  const timer = Array.from(card.querySelectorAll('.el-timer')).find(isVisible);
+  if (!timer) return null;
+  const text = timer.innerText || timer.textContent || '';
+  return String(text).replace(/\s+/g, ' ').trim() || null;
+}
+
 function parseTotalCount(text) {
   if (!text) return null;
   const match = String(text).match(/共\s*(\d+)\s*条/);
@@ -196,6 +204,7 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
       centerY: r.top + r.height / 2
     };
   }
+  ${extractRemainingTimerText.toString()}
   function parseRemainingHours(text) {
     if (!text) return null;
     let m = String(text).match(/(\\d+)\\s*天\\s*(\\d+)\\s*小时\\s*(\\d+)\\s*分/);
@@ -228,7 +237,7 @@ const READ_CURRENT_PAGE_TICKETS_JS = `
       (text.match(/100001\\d{12,}/) || [])[0] || null;
     const orderNo = (text.match(/订单号[:：]\\s*([A-Za-z0-9]+)/) || [])[1] || null;
     const applyTime = (text.match(/申请时间[:：]\\s*(\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})/) || [])[1] || null;
-    const remaining = lines.find(l => /后(?:自动|供应商处理超时)/.test(l)) || null;
+    const remaining = extractRemainingTimerText(card, visible);
     const totalHours = parseRemainingHours(remaining);
       const type = lines.map(normalizeType).find(Boolean) || null;
     const status = lines.find(l => /^商家-/.test(l)) || null;
@@ -499,6 +508,7 @@ module.exports = {
   clickNextPage,
   READ_CURRENT_PAGE_TICKETS_JS,
   parseRemainingHours,
+  extractRemainingTimerText,
   parseTotalCount,
   collectUrgentTicketsFromPages,
   isAscendingByTotalHours,
