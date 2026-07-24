@@ -12,6 +12,7 @@ const { sleep, waitFor } = require('../wait');
 const { ensureCorrPage } = require('./ensure-corr-page');
 const { readTableRows } = require('./read-table-rows');
 const { safeWriteJson } = require('../utils/safe-write');
+const { requireKnownBrand } = require('../brand-scope');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../../data/sku-records.json');
 
@@ -70,6 +71,7 @@ async function _setMainPageSelect(erpId, selectIdx, optionText) {
  * @returns {Promise<{ok: true, data: {skuCount, matchedCount, unmatchedCount}}>}
  */
 async function readSkus(erpId, shopName, productCode, opts = {}) {
+  const brand = requireKnownBrand(opts.brand, 'read-skus ');
   await ensureCorrPage(erpId);
 
   // 0. 等待页面渲染完成（确保 form-item[4] 的搜索输入框存在）
@@ -167,7 +169,7 @@ async function readSkus(erpId, shopName, productCode, opts = {}) {
     };
   }
 
-  const record = { stage: 'skus_read', shopName, productCode, brand: opts.brand || 'kgos', skus };
+  const record = { stage: 'skus_read', shopName, productCode, brand, skus };
   safeWriteJson(SKU_RECORDS_PATH, record);
 
   console.error(`[read-skus] ${productCode}：${subRows.length} SKU，已匹配 ${matchedCount}，待匹配 ${unmatchedCount}`);

@@ -17,23 +17,10 @@ const { navigateErp } = require('./navigate');
 const { remapSku } = require('./remap-sku');
 const { addProductToDialog, confirmDialog } = require('./copy-as-suite');
 const { resolveItems } = require('./utils/resolve-items');
+const { requireRecordBrand, assertSameBrand } = require('./brand-scope');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 const LOG_PATH = path.join(__dirname, '../data/auto-match-log.json');
-const PRODUCTS_DIR = path.join(__dirname, '../data/products');
-
-function detectBrand(platformCode) {
-  try {
-    for (const brand of fs.readdirSync(PRODUCTS_DIR)) {
-      const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
-      if (!fs.existsSync(accFile)) continue;
-      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
-      if (acc.rules && acc.rules[platformCode]) return brand;
-    }
-  } catch {}
-  return 'kgos';
-}
-
 function loadLog() {
   if (!fs.existsSync(LOG_PATH)) return { done: [], failed: [] };
   return JSON.parse(fs.readFileSync(LOG_PATH, 'utf8'));
@@ -360,9 +347,13 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
   console.error(`[copy] ${platformCode} 完成`);
 }
 
-async function main(erpId, shopName = '澜泽', limit = Infinity) {
+async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand) {
   const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
   const records = (raw.skus && typeof raw.skus === 'object') ? raw.skus : raw;
+  const recordBrand = requireRecordBrand(records, shopName);
+  const brand = expectedBrand
+    ? assertSameBrand(expectedBrand, recordBrand, 'sku-records')
+    : recordBrand;
   const eligibleCodes = Object.values(records)
     .filter(r =>
       r && typeof r === 'object' &&
@@ -385,7 +376,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
   const bundles = todo.filter(r => r.recognition.type === '组合装').slice(0, limit);
   const singles = todo.filter(r => r.recognition.type === '单品').slice(0, bundles.length < limit ? limit - bundles.length : 0);
 
-  console.error(`[auto-match2] 组合装: ${bundles.length}, 单品: ${singles.length}`);
+  console.error(`[auto-match2] 品牌=${brand}，组合装: ${bundles.length}, 单品: ${singles.length}`);
 
   // ══ Phase 1：组合装（每个 bundle 独立走：搜索→勾选→标记套件→复制为套件）══
   if (bundles.length > 0) {
@@ -445,7 +436,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
       console.error(`\n── Phase 1d：复制为套件 ──`);
       try {
         await copyOneSku(erpId, shopName, r.productCode, r.platformCode,
-          resolveItems(r.platformCode, r.recognition.items, detectBrand(r.platformCode)));
+          resolveItems(r.platformCode, r.recognition.items, brand));
         log.failed = log.failed.filter(f => f.platformCode !== r.platformCode);
         log.done.push(r.platformCode);
         saveLog(log);

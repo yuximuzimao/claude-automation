@@ -12,6 +12,7 @@
  */
 const path = require('path');
 const fs = require('fs');
+const { requireKnownBrand } = require('../brand-scope');
 
 const PRODUCTS_DIR = path.join(__dirname, '../../data/products');
 
@@ -34,7 +35,8 @@ function loadAccessories(brand) {
  * @returns {Array<{name:string,qty:number}>}
  */
 function resolveItems(platformCode, recognitionItems, brand) {
-  const rules = loadAccessories(brand || 'hee');
+  const exactBrand = requireKnownBrand(brand, '配件解析 ');
+  const rules = loadAccessories(exactBrand);
   if (!rules || !rules[platformCode]) return recognitionItems.slice();
 
   const rule = rules[platformCode];

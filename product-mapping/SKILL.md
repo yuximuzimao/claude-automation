@@ -19,7 +19,8 @@ entry: cli.js
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
 | `cli.js` | CLI 入口，19 个命令路由 | 了解可用命令或新增命令时 |
-| `lib/check.js` | 完整核查流程编排（扫描+标记+生成报告） | 改核查流程时 |
+| `lib/check.js` | 完整核查流程编排（扫描+标记+生成结构化比较事实） | 改核查流程时 |
+| `lib/brand-scope.js` | 首次指定品牌、后续继承与冲突拦截 | 改品牌作用域时 |
 | `lib/compare.js` | 识图结果 vs ERP 档案明细的精确比较 | 改 match/mismatch 判定时 |
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
@@ -30,7 +31,7 @@ entry: cli.js
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
-| `lib/preview-match.js` | 匹配前核对 HTML 生成（已匹配明细 + 待匹配识图结论） | 识图完成后、match 前生成核对表时 |
+| `lib/preview-match.js` | 匹配前识图核对 HTML（全部 SKU 只展示人工识图结论） | 识图完成后、match 前生成核对表时 |
 | `lib/verify-table.js` | 识图核对表 HTML 生成（图片+ERP明细一一对应） | 流程末尾人工兜底核对时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
 | `lib/jl-sku-detail.js` | 鲸灵 SKU 详情读取 | 查单个 SKU 时 |
@@ -59,11 +60,12 @@ entry: cli.js
 ### 核查主流程（`docs/INDEX.md §2`）
 
 ```
-① check --shop <店铺>      → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
+① check --shop <店铺> --brand <品牌> → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
 ② 识图（Claude 手动）      → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
-②.5 preview-match          → 生成匹配前核对 HTML（已匹配项 ERP 明细 + 未匹配项识图结论），人工确认 (anchor: main in preview-match.js)
+②.3 check --reuse-active --skip-download → 同一 check 输出；AI 核对已匹配 SKU，未匹配视为正常待处理
+②.5 preview-match          → 全部 SKU 只展示识图结论，人工确认一次 (anchor: main in preview-match.js)
 ③ match --shop <店铺>      → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
-④ check --shop <店铺>      → 重新扫描+对比报告 (anchor: runCheck)
+④ check --shop <店铺> --reuse-active --skip-download → 最终自动对比 (anchor: runCheck)
 ```
 
 - 平台商品已经更新且活动范围/识图已人工确认时，匹配后使用
@@ -72,6 +74,8 @@ entry: cli.js
 - 识图必须覆盖本次报告全部 SKU；`verify-table` 出现「无识图数据」表示流程未完成
 - 比对结果必须由脚本精确输出：空识图但 ERP 有明细 = mismatch，有识图但 ERP 无可比明细 = mismatch
 - 档案V2 主商家编码查不到时，先回退「规格商家编码」查询；不能直接判定档案缺失
+- 品牌必须在首次 check 明确传入，并存入报告和每条 sku-record；后续流程自动继承，缺失/冲突即停止
+- 匹配前 check 的门禁：`matchedComparisonMatch == matchedSkuCount` 且 `matchedComparisonMismatch == 0`；`unmatchedAwaitingMatch` 可大于 0
 - 完成门禁：`recognitionDone == comparisonMatch == SKU总数`，且 mismatch/pending/pendingVisualReview 全为 0
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
@@ -83,7 +87,7 @@ download → read_skus → recognize → annotate → match → read_erp → ver
 
 - `recognize` 步骤由 Claude 手动执行，脚本到此暂停（**只识图片可见商品，不识配件**）
 - `annotate` 步骤自动注入不可见配件（读 `data/products/{brand}/accessories.json`）
-- 支持 `--from annotate` 从中间步骤续跑；`--brand hee` 指定品牌（默认 `kgos`）
+- 支持 `--from annotate` 从中间步骤续跑；`--brand <品牌>` 必须明确指定，断点续跑时与记录品牌不一致会停止
 - `stage` 状态机：`skus_read → images_done → annotated → matched → verified`
 - KGOS 真实 SKU 主图语料在微信文件目录 `.../2026-05/1主图汇总`；用于 product-detect 黄金验证集建设，不提交 Git，不与 HEE 历史 `data/imgs/` 混用
 
@@ -161,6 +165,7 @@ visible.querySelector('button.el-button--primary').click();
 | 12 | 用户已手动打开列表时仍自动开页/注入账号 | 只读当前页面；自动开页/注入登录态前必须先处理 targetId 绑定边界 |
 | 13 | 只清 DOM checkbox 就认为弹窗已归零 | 同时清 `TableItem.multipleSelection`，并验证“已选择商品：0” |
 | 14 | 中断后从头重复标记套件 | 先识别“复制为套件”中间态，已有则直接续配置子品 |
+| 15 | 未指定品牌时静默使用 kgos/hee | 首次 check 必须 `--brand`；后续从记录继承并验证唯一性 |
 
 ## PATHS
 
@@ -170,6 +175,7 @@ data/products/hee/accessories.json
 data/products/hee/sku-map.json
 docs/preflight-brand.md
 docs/matching-stability.md
+lib/brand-scope.js
 lib/archive.js
 lib/auto-match.js
 lib/auto-match2.js

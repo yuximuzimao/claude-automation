@@ -1,26 +1,6 @@
 'use strict';
-const fs = require('fs');
-const path = require('path');
 const { getTargetIds, getErpTargetId } = require('./lib/targets');
 const { ok, fail } = require('./lib/result');
-
-/**
- * 自动推断品牌：扫描所有 data/products\/{brand}\/accessories.json
- * 找到 rules[productCode] 的 brand 即为目标品牌
- * 找不到则返回 'kgos'（无配件可注入，brand 无关紧要）
- */
-function detectBrand(productCode) {
-  const productsDir = path.join(__dirname, 'data/products');
-  try {
-    for (const brand of fs.readdirSync(productsDir)) {
-      const accFile = path.join(productsDir, brand, 'accessories.json');
-      if (!fs.existsSync(accFile)) continue;
-      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
-      if (acc.rules && acc.rules[productCode]) return brand;
-    }
-  } catch {}
-  return 'kgos';
-}
 
 const [,, cmd, ...args] = process.argv;
 
@@ -29,6 +9,7 @@ async function main() {
   const opts = {};
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--shop') opts.shop = args[++i];
+    else if (args[i] === '--brand') opts.brand = args[++i];
     else if (!opts._cmd) opts._cmd = args[i];
   }
 
@@ -38,7 +19,7 @@ async function main() {
   node cli.js jl-products                     — 抓取鲸灵活动商品列表
   node cli.js km-read <货号>                  — 查商品对应表
   node cli.js km-archive <编码>               — 查商品档案V2
-  node cli.js check --shop <店铺>             — 完整核查流程
+  node cli.js check --shop <店铺> --brand <品牌> — 首次完整核查（品牌必填）
   node cli.js check --shop <店铺> --reuse-active --skip-download — 后置核查（复用活动范围，不下载平台商品）
   node cli.js visual-pending --shop <店铺>    — 列出待视觉核查的组合装
   node cli.js visual-ok <平台编码> "<描述>"   — 记录识图确认（图片内容正确）
@@ -47,8 +28,9 @@ async function main() {
   node cli.js fetch-archive-names             — 读取档案V2普通商品全列表（含简称）
   node cli.js mark-suite <店铺> <货号> <平台编码> — 对应表标记套件（只处理单个SKU）
   node cli.js download-products --shop <店铺>   — 仅下载平台商品（只需 ERP tab，不需鲸灵）
-  node cli.js preview-match                       — 匹配前核对表（识图后、match 前）
-  node cli.js verify-table                        — 匹配后核对表（match 后）
+  node cli.js match-one <货号> --shop <店铺> --brand <品牌> [--from <步骤>] — 单货号匹配
+  node cli.js preview-match                       — 匹配前识图核对表（不展示 ERP 明细）
+  node cli.js verify-table                        — 匹配后异常兜底核对表
   node cli.js match --shop <店铺> [--limit N]    — 自动匹配（组合装套件+单品，任何异常立即停止）`);
     process.exit(0);
   }
@@ -174,7 +156,7 @@ async function main() {
     const { main: matchMain } = require('./lib/auto-match2');
     const { releaseErpLock } = require('./lib/erp-lock');
     try {
-      await matchMain(erpId, opts.shop, limit);
+      await matchMain(erpId, opts.shop, limit, opts.brand);
     } finally {
       await releaseErpLock();
     }
@@ -189,6 +171,7 @@ async function main() {
     const result = await runCheck(null, erpId, opts.shop, {
       reuseActiveScope: true,
       skipDownload: args.includes('--skip-download'),
+      brand: opts.brand,
     });
     console.log(JSON.stringify(result, null, 2));
     return;
@@ -231,9 +214,12 @@ async function main() {
       break;
     }
     case 'check': {
-      if (!opts.shop) { console.error('用法: node cli.js check --shop <店铺名>'); process.exit(1); }
+      if (!opts.shop || !opts.brand) {
+        console.error('用法: node cli.js check --shop <店铺名> --brand <品牌>');
+        process.exit(1);
+      }
       const { runCheck } = require('./lib/check');
-      const result = await runCheck(jlId, erpId, opts.shop);
+      const result = await runCheck(jlId, erpId, opts.shop, { brand: opts.brand });
       console.log(JSON.stringify(result, null, 2));
       break;
     }
@@ -259,15 +245,14 @@ async function main() {
       const brandIdx = args.indexOf('--brand');
       const explicitBrand = brandIdx >= 0 ? args[brandIdx + 1] : null;
       const productCode = args.find(a => !a.startsWith('--') && a !== opts.shop && a !== fromStep && a !== explicitBrand);
-      const brandArg = explicitBrand || detectBrand(productCode);
-      if (!opts.shop || !productCode) {
+      if (!opts.shop || !productCode || !explicitBrand) {
         console.error('用法: node cli.js match-one <货号> --shop <店铺> [--from <步骤>] [--brand <品牌>]');
         console.error('步骤可选值: download, read_skus, recognize, annotate, match, read_erp, verify');
-        console.error('品牌可选值: kgos（默认）, hee');
+        console.error('品牌必须明确指定，例如: kgos, hee, ritekoko');
         process.exit(1);
       }
       const { matchOne } = require('./lib/match-one');
-      const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep, brand: brandArg });
+      const result = await matchOne(erpId, jlId, opts.shop, productCode, { from: fromStep, brand: explicitBrand });
       console.log(JSON.stringify(result, null, 2));
       break;
     }

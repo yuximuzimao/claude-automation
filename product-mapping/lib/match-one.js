@@ -18,6 +18,7 @@ const { readErpCodes } = require('./ops/read-erp-codes');
 const { verifyArchive } = require('./ops/verify-archive');
 const { safeWriteJson } = require('./utils/safe-write');
 const { releaseErpLock } = require('./erp-lock');
+const { requireKnownBrand, assertSameBrand } = require('./brand-scope');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 
@@ -51,7 +52,8 @@ function stageAtLeast(current, required) {
  */
 async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
   try {
-    const { from, brand = 'kgos' } = opts;
+    const { from } = opts;
+    const brand = requireKnownBrand(opts.brand, 'match-one ');
 
     // --from 非法值校验
     if (from && !STEPS.includes(from)) {
@@ -74,6 +76,7 @@ async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
         if (data.productCode !== productCode) {
           throw new Error(`sku-records.json 货号=${data.productCode}，与指定货号=${productCode} 不一致`);
         }
+        assertSameBrand(brand, data.brand, 'sku-records');
       }
     }
 

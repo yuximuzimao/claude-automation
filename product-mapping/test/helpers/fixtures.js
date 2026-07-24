@@ -35,11 +35,12 @@ function makeSkuRecord(overrides = {}) {
 /**
  * 创建完整的 sku-records.json fixture
  */
-function makeSkuRecordsJson({ stage, shopName, productCode, skus }) {
+function makeSkuRecordsJson({ stage, shopName, productCode, brand = 'kgos', skus }) {
   return {
     stage,
     shopName,
     productCode,
+    brand,
     skus,
   };
 }

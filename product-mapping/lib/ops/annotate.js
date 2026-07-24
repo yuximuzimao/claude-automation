@@ -10,6 +10,7 @@
 const path = require('path');
 const fs = require('fs');
 const { safeWriteJson } = require('../utils/safe-write');
+const { requireKnownBrand } = require('../brand-scope');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../../data/sku-records.json');
 const PRODUCTS_DIR = path.join(__dirname, '../../data/products');
@@ -25,7 +26,7 @@ async function annotate() {
   }
 
   // 加载品牌配件规则（如有）
-  const brand = record.brand || 'kgos';
+  const brand = requireKnownBrand(record.brand, 'annotate ');
   const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
   let accRules = null;
   if (fs.existsSync(accFile)) {
@@ -52,8 +53,8 @@ async function annotate() {
     }
 
     // 注入不可见配件（accessories overlay）
-    if (accRules && sku.productCode && accRules[sku.productCode]) {
-      const rule = accRules[sku.productCode];
+    if (accRules && accRules[platformCode]) {
+      const rule = accRules[platformCode];
       const existing = new Set(sku.recognition.items.map(i => i.name));
       const toInject = rule.accessories.filter(acc => !existing.has(acc.erpName));
       for (const acc of toInject) {

@@ -31,45 +31,48 @@
 
 ```
 0  jl <账号编号>                         ← 必须先对齐 JL 账号
-① node cli.js check --shop <店铺>       ← 扫描+标记（自动完成以下子步骤）
+① node cli.js check --shop <店铺> --brand <品牌> ← 首次扫描，品牌只指定这一次
 ② 我（Claude）识图                       ← 人工步骤，写入 sku-records.json
-②.5 node cli.js preview-match           ← 生成匹配前核对 HTML（已匹配明细+待匹配识图），人工确认后再 match
+②.3 node cli.js check --shop <店铺> --reuse-active --skip-download
+                                         ← 同一 check；我判断已匹配异常，未匹配是正常待处理
+②.5 node cli.js preview-match           ← 全部 SKU 只展示识图结果，人工确认一次
 ③ node cli.js match --shop <店铺>       ← 自动匹配（异常立即停止）
-④ node cli.js check --shop <店铺>       ← 重新扫描+对比报告
+④ node cli.js check --shop <店铺> --reuse-active --skip-download
+                                         ← 最终自动核对全部 SKU
 ```
 
-若平台商品已更新、匹配前核对页已由用户确认，且匹配后不需要重新下载平台商品，可将第④步替换为：
-
-```bash
-node cli.js check --shop <店铺> --reuse-active --skip-download
-```
-
-该模式会用上一份 check 报告和当前 `sku-records.json` 精确核对同一组 platformCode，
+`--reuse-active --skip-download` 会用上一份 check 报告和当前 `sku-records.json` 精确核对同一组 platformCode，
 只读 ERP 当前对应表并完整查询档案 V2；两边活动范围不一致时会在写报告前停止。
+品牌从首次 check 的报告和每条 SKU 记录自动继承，任一处缺失或冲突都会在 ERP 写入前停止。
 
 **各步骤明细**：
 
 ```
-① check 内部流程:
+① 首次 check 内部流程:
    0. 【自动清空】data/imgs/ 和 data/reports/（旧活动数据对下次无用）
    1.1 鲸灵商品列表 → 筛选「特卖在售中」→ 抓取活动货号（处理范围）
    1.2 ERP 商品对应表 → 下载平台商品（选店铺+全量下载+等待完成）
    1.3 ERP 商品对应表 → 选店铺 → 展开所有行 → 读SKU映射 + 图片URL
    1.4 下载 SKU 图片到 data/imgs/，标记匹配/未匹配
    1.5 商品档案V2 → 按ERP编码查类型+子品明细
-   1.6 合并识图结论（已有 recognition 从旧 sku-records 读取保留）→ 保存报告
-   1.7 【全量重写】sku-records.json（以 ERP 实时对应表为唯一数据源，保留 recognition）
+   1.6 仅在旧记录品牌与本轮品牌一致时保留 recognition → 保存报告
+   1.7 【全量重写】sku-records.json（以 ERP 实时对应表为唯一数据源，写入 brand）
    报告输出：recognition + comparisonResult + comparisonDetail 字段
 
 ② 我识图:
    - Read 工具加载 data/imgs/ 中的图片，对照 features.json 规则
    - 写入 sku-records.json 的 recognition 字段
 
-②.5 preview-match（核对后再 match）:
-   - 读取 sku-records.json + 最新 check 报告
-   - Part 1 已匹配：图片 + ERP 档案明细（subItems/archiveTitle）
-   - Part 2 待匹配：图片 + 识图结论（recognition.items + accessories 注入）
-   - 人工确认两部分内容正确后再执行 match
+②.3 匹配前 check（同一个 check 脚本，由我按阶段判断）:
+   - matchedComparisonMatch 必须等于 matchedSkuCount
+   - matchedComparisonMismatch 必须为 0；有异常时我只报告具体 SKU 和差异
+   - unmatchedAwaitingMatch 是正常待处理，不在此阶段算失败
+
+②.5 preview-match（确认识图后再 match）:
+   - 只读取 sku-records.json
+   - 已匹配和未匹配都只展示图片 + 人工识图结论（含本品牌配件注入）
+   - 不展示 ERP 档案，不让用户重复人工比较
+   - recognition 未覆盖全部 SKU 或品牌缺失/冲突时拒绝生成
 
 ③ match 内部流程:
    0. 【自动清空】done[] 和 failed[]（新任务，历史记录对本次无意义）
@@ -77,8 +80,8 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
    - Phase 2: 单品 → 逐个 remapSku（getTodo 过滤：erpCode=null + 有recognition）
    - 任何错误立即停止（stop-on-error）
 
-④ 第二次 check = 重新扫描 + 对比:
-   - 同①，此时已匹配 SKU 有 erpCode，sku-records 全量重写后 erpCode 回填
+④ 最终 check = 复用活动范围 + 对比:
+   - 此时全部 SKU 应有 erpCode，sku-records 全量重写后回填 ERP 实况
    - comparisonResult: 识图预测 vs 档案实际 → match/mismatch
    - **比对铁律（禁止简化）**：
      - 单品（archiveType=0）：识图名称 AND 识图数量=1，两者同时满足才算 match；识图数量≠1 = mismatch（ERP未建套件档案）
@@ -86,7 +89,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
      - 任何一侧缺数量信息 = mismatch，禁止仅比名称
      - recognition 为空但 ERP 有档案明细 = mismatch，禁止归入 pending；verify-table 出现「无识图数据」即流程未完成
      - 有 recognition 但 ERP 无可比档案明细 = mismatch；若 erpCode 是规格编码，必须先用「规格商家编码」回退查询档案
-   - 若有 mismatch，人工核查
+   - 若有 mismatch，由我先定位并报告异常；用户只处理明确指出的 SKU
 
 ⑤ verify-table（可选，流程末尾兜底）:
    - 读取最新 check 报告，将每个 SKU 的图片与 ERP 档案明细并排展示
@@ -101,7 +104,8 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 - match 任何 SKU 报错 → 立即 throw 停止；先按 `docs/matching-stability.md §4` 判断 ERP 中间状态，再决定续跑
 - 人工在 ERP 完成任何匹配后 → 必须先跑 check 回读 ERP，不能直接续 match
 - check 读取异常（ERP 未登录、页面无法访问）→ navigateErp 已处理，手动刷新登录后重跑
-- comparisonMismatch > 0 → check 报告会警告，需人工核查后继续
+- 匹配前 `matchedComparisonMismatch > 0` → 我主动报告已匹配异常，用户不需要自行翻查全部 ERP 明细
+- 最终 mismatch/pending/未匹配任一项大于 0 → 不能判定本轮完成
 
 ---
 
@@ -171,7 +175,7 @@ data/products/
 ### accessories.json — 不可见配件规则（悦希专用）
 
 **用途**：声明哪些 SKU 在 ERP 套件中含有图片不可见的配件（礼盒/礼袋/雪梨纸等）。
-**更新时机**：每次活动前，先跑 `check --shop <店铺>` 读取活动商品，再根据报告把用户给的货号（productCode）映射到具体平台规格编码（platformCode）。
+**更新时机**：每次活动前，先跑 `check --shop <店铺> --brand <品牌>` 读取活动商品，再根据报告把用户给的货号（productCode）映射到具体平台规格编码（platformCode）。
 **注入时机**：主流程 `match/check` 通过 `resolveItems(platformCode, ...)` 临时叠加配件，不写回 recognition；识图不需要手动处理配件。
 
 ```json
@@ -241,13 +245,14 @@ data/products/
 ### SKU 数据文件规范
 
 - **`data/sku-records.json`**：单文件存全量 SKU 元数据 + 识图结果，按 platformCode 索引（纯平铺格式 `{platformCode→rec}`）
-- **字段**：`platformCode / productCode / shopName / skuName / erpCode / erpName / imgUrl / recognition / scope`
+- **字段**：`platformCode / productCode / shopName / brand / skuName / erpCode / erpName / imgUrl / recognition / scope`
 - **写入时机**：check 结束时**全量重写**（以 ERP 实时对应表为唯一来源，erpCode 回填实况值，recognition 从旧文件保留）
 - **`scope` 字段**：
   - `"active-YYYY-MM-DD"` = 该日期 check 运行时确认的活动在售 SKU
   - `"history"` = 历史活动遗留，不在当前核查范围（旧格式遗留，全量重写后不再产生）
 - **`recognition` 字段**：识图后写入，格式 `{type:"单品"|"组合装", items:[{name,qty}], raw:"描述"}`
 - **禁止**：在 JSON 里存 `imgPath`（可从 platformCode 推导，存了是冗余）
+- **品牌作用域**：首次 check 必须显式 `--brand`；每条 SKU 与报告都写入 brand，后续 preview/match/check 只能继承且必须一致，禁止静默兜底
 - **`data/visual-verdicts.json`**：识图结论（ok/mismatch），独立于 sku-records.json（legacy，当前流程直接写 sku-records）
 
 ### 视觉匹配数据契约
@@ -328,7 +333,7 @@ data/products/
 - `[1/2026-05-13]` **全量下载选择是 el-radio，不是 el-checkbox**：下载平台商品弹窗里「全量下载」「增量下载」「指定下载」三个选项是 `el-radio` 组，默认选中「增量下载（value=2）」。代码若用 `.el-checkbox` + `input[type=checkbox]` 查找，永远 null，全量下载永远不被选中，静默跑增量。正确：`.el-radio` + `input[type=radio]`，查 checked 状态再 click。
 - `[1/2026-05-13]` **ensureCorrPage 跳过 reload 导致残留 dialog 叠加超时**：`ensureCorrPage` 检测到 hash 已匹配时跳过 reload，仅清空搜索框。若前一次操作（如手动 inspect）留有未关闭 dialog，新 download dialog 叠加在顶层但 gone 检测（等所有 dialog 消失）永远不通过，导致 60s 超时。根治：download 操作前必须用 `navigateErp()`（强制 full reload），不能用 `ensureCorrPage`。
 - `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
-- `[1/2026-05-13]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。根治：check 结束时以 ERP 实时对应表数据全量重写，不读旧文件做增量合并。recognition 字段在重写前从旧文件读取并写回（保留识图结果）。
+- `[1/2026-05-13，2026-07-25 加品牌门禁]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。check 结束时以 ERP 实时对应表数据全量重写；只有旧记录 brand 与本轮一致时才保留 recognition，防止同 platformCode 跨品牌串数据。
 - `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
 - `[1/2026-06-26]` **单品 erpCode 可能是规格商家编码，不是主商家编码**：商品档案V2按「主商家编码」查不到时，不能直接判定档案未录入；必须回退到「规格商家编码」精确查询。百浩悦希本次已确认 3 个特殊单品：`yxr-1` erpCode `6940079096228` → 主商家编码 `yx005`（悦希舒缓焕颜精华乳100ml）；`yxs-1` erpCode `6940079096211` → 主商家编码 `yx004`（悦希舒缓焕颜精粹水100ml）；`yxjm-1` erpCode `6975183893203` → 主商家编码 `yx003`（悦希氨基酸表活焕颜洁面膏100g）。
 - `[1/2026-06-26]` **comparisonPending 不能掩盖脚本缺陷**：全量识图完成后，正常核对报告应当 `recognitionDone == SKU数` 且 `comparisonPending == 0`。若 recognition 为空但 ERP 有明细，脚本必须输出 mismatch；若有 recognition 但 ERP 无明细，先检查是否需要规格编码回退，仍无明细才输出 mismatch。

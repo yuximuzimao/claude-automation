@@ -19,9 +19,9 @@
 ## 命令速查
 
 ```bash
-node cli.js match-one <货号> --shop <店铺> [--from 步骤]  # 单货号匹配（断点续跑）
+node cli.js match-one <货号> --shop <店铺> --brand <品牌> [--from 步骤] # 单货号匹配（品牌必填）
 node cli.js match-batch --shop <店铺>                      # 批量匹配
-node cli.js check --shop <店铺>                            # 完整核查流程（扫描+标记+下载图片+生成报告）
+node cli.js check --shop <店铺> --brand <品牌>             # 首次核查（品牌必填，扫描+下载+生成报告）
 node cli.js check --shop <店铺> --reuse-active --skip-download # 匹配后核查（复用已确认范围，不下载平台商品）
 node cli.js match --shop <店铺> [--limit N]                # 自动匹配（组合装套件+单品，异常停止）
 node cli.js verify-table                                   # 生成识图核对表 HTML（流程末尾人工兜底核对）
@@ -33,6 +33,7 @@ node cli.js targets                                        # 检查浏览器连�
 ## 进入工作前确认（详细规则见 `docs/INDEX.md §1`）
 - 写操作（新增匹配）必须人工确认
 - ERP 命令串行，禁止并行
+- 品牌在首次 check 时明确指定并写入本轮记录；preview/match/后置 check 必须继承同一品牌，禁止 kgos/hee 静默兜底
 - 视觉匹配由我亲自执行，不写识别脚本
 - 若用户已手动打开并筛选好鲸灵商品列表，只读当前页面，不自动开页/注入账号；需要 AI 自动开页或注入登录态时，先按 `docs/INDEX.md §2 Step 0` 的 targetId 边界处理
 - 识图必须覆盖本次报告全部 SKU，`recognition` 为空但 ERP 有明细必须判为 mismatch，不能归入 pending

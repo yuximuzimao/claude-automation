@@ -11,6 +11,7 @@
 
 - [ ] **按稳定性手册执行状态门禁**
   - 开始自动匹配或处理中断前读 `docs/matching-stability.md`。
+  - 首次 check 明确指定品牌；后续记录、报告和命令品牌必须完全一致。
   - 任一 SKU 写入异常立即停止；先判断 `erpCode` / “复制为套件”中间状态，再恢复。
   - 最终必须满足全部 SKU `comparisonMatch`，且 mismatch/pending/pendingVisualReview 都为 0。
 

@@ -18,7 +18,7 @@ Step 0: 清空旧数据工作区
   - 只需确保 ERP 和鲸灵 Tab 正常打开
 
 Step 1: 获取全量数据
-  - 跑 node cli.js check --shop <店铺>
+  - 跑 node cli.js check --shop <店铺> --brand <品牌目录名>
   - 产出：data/imgs/（SKU 图片）+ data/reports/check-{shop}-{date}.json
   - 注意：check 会自动下载图片，这是唯一合法的图片来源
 

@@ -2,7 +2,7 @@
 /**
  * WHAT: 完整核查流程编排（扫描+标记+下载图片+生成报告）
  * WHERE: CLI check 命令 → 此模块
- * WHY: 4 步核查流程的自动化编排入口，输出 comparison 报告用于人工核查
+ * WHY: 4 步核查流程的自动化编排入口，输出结构化 comparison 事实供 AI 按阶段判断
  * ENTRY: cli.js: check 命令
  */
 const path = require('path');
@@ -14,22 +14,10 @@ const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
 const { releaseErpLock } = require('./erp-lock');
 const { compareSkuArchive } = require('./compare');
+const { requireKnownBrand, requireRecordBrand, assertSameBrand } = require('./brand-scope');
 
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
-const PRODUCTS_DIR = path.join(__dirname, '../data/products');
-
-function detectBrand(platformCode) {
-  try {
-    for (const brand of fs.readdirSync(PRODUCTS_DIR)) {
-      const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
-      if (!fs.existsSync(accFile)) continue;
-      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
-      if (acc.rules && acc.rules[platformCode]) return brand;
-    }
-  } catch {}
-  return 'kgos';
-}
 
 function loadSkuRecords() {
   try {
@@ -38,6 +26,27 @@ function loadSkuRecords() {
   } catch (_) {
     return {};
   }
+}
+
+function summarizeSkuComparisons(allSkus) {
+  const compMatch = allSkus.filter(s => s.comparisonResult === 'match').length;
+  const compMismatch = allSkus.filter(s => s.comparisonResult === 'mismatch').length;
+  const recognitionDone = allSkus.filter(s => s.recognition).length;
+  const pendingVisualReview = allSkus.filter(s => !s.recognition).length;
+  const matchedSkus = allSkus.filter(s => s.erpCode);
+  const unmatchedSkus = allSkus.filter(s => !s.erpCode);
+
+  return {
+    pendingVisualReview,
+    recognitionDone,
+    comparisonMatch: compMatch,
+    comparisonMismatch: compMismatch,
+    comparisonPending: recognitionDone - compMatch - compMismatch,
+    matchedSkuCount: matchedSkus.length,
+    matchedComparisonMatch: matchedSkus.filter(s => s.comparisonResult === 'match').length,
+    matchedComparisonMismatch: matchedSkus.filter(s => s.comparisonResult === 'mismatch').length,
+    unmatchedAwaitingMatch: unmatchedSkus.length,
+  };
 }
 
 function loadReusableActiveProducts(shopName, skuRecords) {
@@ -69,11 +78,14 @@ function loadReusableActiveProducts(shopName, skuRecords) {
     );
   }
 
-  return products.map(p => ({
-    code: p.productCode,
-    name: p.productName,
-    productId: p.productId,
-  }));
+  return {
+    previous,
+    products: products.map(p => ({
+      code: p.productCode,
+      name: p.productName,
+      productId: p.productId,
+    })),
+  };
 }
 
 /**
@@ -87,22 +99,39 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
   try {
     const reuseActiveScope = options.reuseActiveScope === true;
     const skipDownload = options.skipDownload === true;
+
+    // 读取识图记录（sku-records.json），用于活动范围复用和报告对比
+    const skuRecords = loadSkuRecords();
+    let reusable = null;
+    let brand;
+    if (reuseActiveScope) {
+      const recordBrand = requireRecordBrand(skuRecords, shopName);
+      brand = options.brand
+        ? assertSameBrand(options.brand, recordBrand, 'sku-records')
+        : recordBrand;
+      reusable = loadReusableActiveProducts(shopName, skuRecords);
+      if (!reusable.previous.brand) {
+        throw new Error('历史 check 报告缺少品牌，请重新运行首次 check --shop <店铺> --brand <品牌>');
+      }
+      assertSameBrand(brand, reusable.previous.brand, '历史 check 报告');
+    } else {
+      brand = requireKnownBrand(options.brand, '首次 check ');
+    }
+
     const report = {
       shop: shopName,
+      brand,
       checkTime: new Date().toISOString(),
       summary: {},
       products: []
     };
 
-    // 读取识图记录（sku-records.json），用于活动范围复用和报告对比
-    const skuRecords = loadSkuRecords();
-
     // 1. 获取活动商品列表；后置 check 可复用已经人工确认的活动范围
     console.error(`[check] 1/4 ${reuseActiveScope ? '复用已确认活动范围' : '获取鲸灵活动商品列表'}...`);
     const jlProducts = reuseActiveScope
-      ? loadReusableActiveProducts(shopName, skuRecords)
+      ? reusable.products
       : await listActiveProducts(jlId);
-    console.error(`[check] 共 ${jlProducts.length} 个活动商品`);
+    console.error(`[check] 品牌=${brand}，共 ${jlProducts.length} 个活动商品`);
 
     // 2. 读取对应表全量数据；后置 check 不重复下载平台商品
     console.error(`[check] 2/4 读取商品对应表${skipDownload ? '（跳过平台商品下载）' : ''}...`);
@@ -173,6 +202,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
         if (!sku.erpCode) {
           hasUnmatched = true;
           const rec0 = skuRecords[sku.platformCode];
+          const recognition = rec0?.brand === brand ? rec0.recognition || null : null;
           skuResults.push({
             skuName: sku.skuName,
             platformCode: sku.platformCode,
@@ -180,7 +210,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
             erpName: '',
             archiveType: null,
             archiveTitle: null,
-            recognition: rec0?.recognition || null,
+            recognition,
             status: '未匹配'
           });
           continue;
@@ -212,7 +242,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
         }
 
         const rec = skuRecords[sku.platformCode];
-        const recognition = rec?.recognition || null;
+        const recognition = rec?.brand === brand ? rec.recognition || null : null;
         const subItems = (archiveItem && archiveItem.subItems) || [];
 
         // 识图 vs 档案对比由纯函数统一处理：
@@ -225,7 +255,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
           archiveType,
           archiveTitle,
           subItems,
-          brand: detectBrand(sku.platformCode),
+          brand,
         });
 
         skuResults.push({
@@ -270,10 +300,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
 
     // 统计识图 vs 档案对比结果
     const allSkus = report.products.flatMap(p => p.skus);
-    const compMatch = allSkus.filter(s => s.comparisonResult === 'match').length;
-    const compMismatch = allSkus.filter(s => s.comparisonResult === 'mismatch').length;
-    const recognitionDone = allSkus.filter(s => s.recognition).length;
-    const pendingVisualCount = allSkus.filter(s => !s.recognition).length;
+    const comparisonSummary = summarizeSkuComparisons(allSkus);
 
     report.summary = {
       total: jlProducts.length,
@@ -281,11 +308,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
       fullyMatched: matchedCount,
       partiallyMatched: partialCount,
       fullyUnmatched: unmatchedCount,
-      pendingVisualReview: pendingVisualCount,
-      recognitionDone,
-      comparisonMatch: compMatch,
-      comparisonMismatch: compMismatch,
-      comparisonPending: recognitionDone - compMatch - compMismatch
+      ...comparisonSummary,
     };
 
     // 保存报告
@@ -294,11 +317,11 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
     const reportPath = path.join(REPORT_DIR, `check-${shopName}-${dateStr}.json`);
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
     console.error(`[check] 报告已保存: ${reportPath}`);
-    if (compMismatch > 0) {
-      console.error(`[check] ⚠️ ${compMismatch} 个 SKU 识图与档案不一致，请人工核查`);
+    if (comparisonSummary.comparisonMismatch > 0) {
+      console.error(`[check] ⚠️ ${comparisonSummary.comparisonMismatch} 个 SKU 识图与档案不一致，需先定位并报告差异`);
     }
-    if (pendingVisualCount > 0) {
-      console.error(`[check] ⚠️ ${pendingVisualCount} 个组合装待视觉核查，运行 visual-pending 查看`);
+    if (comparisonSummary.pendingVisualReview > 0) {
+      console.error(`[check] ⚠️ ${comparisonSummary.pendingVisualReview} 个 SKU 待完成识图`);
     }
 
     if (activePlatformCodes.size > 0) {
@@ -315,6 +338,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
               skuName: sku.skuName || null,
               productCode: prod.productCode,
               shopName,
+              brand,
               imgUrl: corrImgMap[sku.platformCode] || null,
               erpCode: sku.erpCode || null,
               erpName: sku.erpName || null,
@@ -336,4 +360,4 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
   }
 }
 
-module.exports = { runCheck };
+module.exports = { runCheck, summarizeSkuComparisons };

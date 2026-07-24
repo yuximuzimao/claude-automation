@@ -5,8 +5,9 @@
  * WHY: match 是写操作，执行前需确认识图结论无误；已匹配项同时复核
  *
  * 输出两部分（卡片格式与 verify-table 一致）：
- *   Part 1 已匹配 — 图片 + ERP 档案明细（来自 check 报告 subItems/archiveTitle）
- *   Part 2 待匹配 — 图片 + 识图结论 + 配件注入（来自 sku-records recognition）
+ *   Part 1 已匹配 — 图片 + 人工识图结论（来自 sku-records recognition）
+ *   Part 2 待匹配 — 图片 + 人工识图结论（来自 sku-records recognition）
+ * ERP 档案数据只用于区分绑定状态，不得替代人工识图明细。
  *
  * 生命周期：每次生成时清空旧 preview-match-*.html
  */
@@ -18,30 +19,7 @@ const { resolveItems } = require('./utils/resolve-items');
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const IMGS_DIR = path.join(__dirname, '../data/imgs');
 const SKU_RECORDS = path.join(__dirname, '../data/sku-records.json');
-const PRODUCTS_DIR = path.join(__dirname, '../data/products');
-
-/** 自动推断品牌：扫描 accessories.json 查找 platformCode 对应品牌 */
-function detectBrand(platformCode) {
-  try {
-    for (const brand of fs.readdirSync(PRODUCTS_DIR)) {
-      const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
-      if (!fs.existsSync(accFile)) continue;
-      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
-      if (acc.rules && acc.rules[platformCode]) return brand;
-    }
-  } catch {}
-  return 'hee';
-}
-
-/** 读取最新 check 报告 */
-function latestCheckReport() {
-  if (!fs.existsSync(REPORT_DIR)) return null;
-  const files = fs.readdirSync(REPORT_DIR)
-    .filter(f => f.startsWith('check-') && f.endsWith('.json'))
-    .sort();
-  if (!files.length) return null;
-  return JSON.parse(fs.readFileSync(path.join(REPORT_DIR, files[files.length - 1]), 'utf8'));
-}
+const { requireRecordBrand } = require('./brand-scope');
 
 /** 将图片文件编码为 base64 data URI */
 function imgDataUri(platformCode) {
@@ -53,6 +31,17 @@ function imgDataUri(platformCode) {
 /** 转义 HTML 特殊字符 */
 function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/** 识图明细统一渲染：已匹配和待匹配都必须以 recognition 为准 */
+function renderRecognitionRows(sku, brand) {
+  if (!sku.recognition || !Array.isArray(sku.recognition.items) || sku.recognition.items.length === 0) {
+    return `<tr><td class="c-name" style="color:#aaa">识图未填写</td><td class="c-qty"></td></tr>`;
+  }
+  const resolved = resolveItems(sku.platformCode, sku.recognition.items, brand);
+  return resolved.map(it =>
+    `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
+  ).join('');
 }
 
 /** 渲染单张卡片（与 verify-table 同款布局） */
@@ -75,6 +64,7 @@ function renderCard(sku, detailRows, badgeClass, badgeText) {
           : '<div class="no-img">无图片</div>'}
       </div>
       <div class="info-col">
+        <div class="detail-label">人工识图结果</div>
         <table class="detail-table">${detailRows}</table>
       </div>
     </div>
@@ -84,23 +74,18 @@ function renderCard(sku, detailRows, badgeClass, badgeText) {
 /** 主入口 */
 function main() {
   if (!fs.existsSync(SKU_RECORDS)) {
-    throw new Error('sku-records.json 不存在，请先运行 node cli.js check --shop <店铺>');
+    throw new Error('sku-records.json 不存在，请先运行 node cli.js check --shop <店铺> --brand <品牌>');
   }
 
   const skuRecords = JSON.parse(fs.readFileSync(SKU_RECORDS, 'utf8'));
-
-  // 从 check 报告建立 platformCode → archive 数据的 lookup
-  const archiveLookup = {};
-  const report = latestCheckReport();
-  if (report) {
-    for (const prod of report.products) {
-      for (const sku of prod.skus) {
-        archiveLookup[sku.platformCode] = sku;
-      }
-    }
-  }
-
   const shopName = Object.values(skuRecords)[0]?.shopName || '未知店铺';
+  const brand = requireRecordBrand(skuRecords, shopName);
+  const missingRecognition = Object.values(skuRecords)
+    .filter(sku => !sku.recognition || !Array.isArray(sku.recognition.items) || sku.recognition.items.length === 0)
+    .map(sku => sku.platformCode);
+  if (missingRecognition.length) {
+    throw new Error(`识图未完成：${missingRecognition.length} 个 SKU 缺少 recognition`);
+  }
 
   // 分成已匹配 / 待匹配两组
   const matched = [];
@@ -109,37 +94,15 @@ function main() {
     (rec.erpCode ? matched : unmatched).push(rec);
   }
 
-  // ── Part 1：已匹配项，档案明细来自 check 报告 ──
-  const matchedCards = matched.map(sku => {
-    const a = archiveLookup[sku.platformCode];
-    let detailRows;
-    if (a && a.archiveType === '2' && a.subItems && a.subItems.length > 0) {
-      detailRows = a.subItems.map(si =>
-        `<tr><td class="c-name">${esc(si.name)}</td><td class="c-qty">×${si.qty}</td></tr>`
-      ).join('');
-    } else if (a && a.archiveType === '0' && a.archiveTitle) {
-      detailRows = `<tr><td class="c-name">${esc(a.archiveTitle)}</td><td class="c-qty">×1</td></tr>`;
-    } else {
-      // 无档案数据时退化为 erpName
-      detailRows = `<tr><td class="c-name">${esc(sku.erpName || sku.erpCode)}</td><td class="c-qty">×1</td></tr>`;
-    }
-    return renderCard(sku, detailRows, 'cmp-ok', '✓ 已匹配');
-  }).join('\n');
+  // ── Part 1：已匹配项，主明细仍然只展示人工识图结果 ──
+  const matchedCards = matched.map(sku =>
+    renderCard(sku, renderRecognitionRows(sku, brand), 'cmp-ok', '✓ 已匹配')
+  ).join('\n');
 
-  // ── Part 2：待匹配项，明细来自识图结论 + 配件注入 ──
-  const unmatchedCards = unmatched.map(sku => {
-    let detailRows;
-    if (sku.recognition && sku.recognition.items && sku.recognition.items.length > 0) {
-      const brand = detectBrand(sku.platformCode);
-      const resolved = resolveItems(sku.platformCode, sku.recognition.items, brand);
-      detailRows = resolved.map(it =>
-        `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
-      ).join('');
-    } else {
-      detailRows = `<tr><td class="c-name" style="color:#aaa">识图未填写</td><td class="c-qty"></td></tr>`;
-    }
-    return renderCard(sku, detailRows, 'cmp-pending', '⏳ 待匹配');
-  }).join('\n');
+  // ── Part 2：待匹配项，同样展示人工识图结果 ──
+  const unmatchedCards = unmatched.map(sku =>
+    renderCard(sku, renderRecognitionRows(sku, brand), 'cmp-pending', '⏳ 待匹配')
+  ).join('\n');
 
   // ── 拼 HTML（样式与 verify-table 保持一致） ──
   const dateLabel = new Date().toISOString().slice(0, 10);
@@ -179,6 +142,7 @@ h1 { font-size: 20px; margin-bottom: 4px; }
 .img-col img { max-width: 500px; max-height: 500px; object-fit: contain; border-radius: 4px; }
 .no-img { color: #bbb; font-size: 16px; }
 .info-col { flex: 1; padding: 24px 28px; min-width: 0; }
+.detail-label { color: #64748b; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
 
 .detail-table { width: 100%; border-collapse: collapse; }
 .detail-table td { padding: 8px 0; border-bottom: 1px solid #ccc; }
@@ -195,7 +159,7 @@ h1 { font-size: 20px; margin-bottom: 4px; }
 <body>
 
 <h1>匹配前核对</h1>
-<div class="sub">${esc(shopName)} · ${dateLabel} · 共 ${Object.keys(skuRecords).length} 个 SKU</div>
+<div class="sub">${esc(shopName)} · ${esc(brand)} · ${dateLabel} · 共 ${Object.keys(skuRecords).length} 个 SKU</div>
 
 <div class="summary">
   <div class="stat good"><b>${matched.length}</b> 已匹配</div>
@@ -227,7 +191,7 @@ ${unmatchedCards}
   if (!fs.existsSync(REPORT_DIR)) fs.mkdirSync(REPORT_DIR, { recursive: true });
   fs.writeFileSync(outPath, html);
 
-  return { path: outPath, name: outName, matched: matched.length, unmatched: unmatched.length };
+  return { path: outPath, name: outName, brand, matched: matched.length, unmatched: unmatched.length };
 }
 
 module.exports = { main };

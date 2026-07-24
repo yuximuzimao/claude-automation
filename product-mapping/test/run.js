@@ -209,21 +209,37 @@ const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
       assert.strictEqual(r3.data.singles, 2);
       assert.strictEqual(r3.data.suites, 1);
 
-      // 用例 4: stage 错误
+      // 用例 4: HEE 配件规则按 platformCode 精确注入
+      writeFixture(makeSkuRecordsJson({
+        stage: 'images_done', shopName: 'T', productCode: 'yx001', brand: 'hee',
+        skus: {
+          '260703-1': makeSkuRecord({
+            platformCode: '260703-1',
+            productCode: 'yx001',
+            recognition: { type: '单品', items: [{ name: '主商品', qty: 1 }], raw: '' },
+          }),
+        },
+      }));
+      const r4 = await annotate.annotate();
+      const d4 = JSON.parse(fs.readFileSync(skuRecordsPath, 'utf8'));
+      assert.strictEqual(r4.data.injected, 1);
+      assert.ok(d4.skus['260703-1'].recognition.items.some(item => item.name === 'HEE悦希印花礼盒（天地盖）白色'));
+
+      // 用例 5: stage 错误
       writeFixture(makeSkuRecordsJson({
         stage: 'skus_read', shopName: 'T', productCode: 'T',
         skus: { '006': makeSkuRecord({ platformCode: '006', recognition: { items: [{ qty: 1 }] } }) },
       }));
       await assertThrows(() => annotate.annotate(), 'images_done');
 
-      // 用例 5: recognition 缺失
+      // 用例 6: recognition 缺失
       writeFixture(makeSkuRecordsJson({
         stage: 'images_done', shopName: 'T', productCode: 'T',
         skus: { '007': makeSkuRecord({ platformCode: '007', recognition: null }) },
       }));
       await assertThrows(() => annotate.annotate(), 'recognition');
 
-      // 用例 6: 总数量为 0
+      // 用例 7: 总数量为 0
       writeFixture(makeSkuRecordsJson({
         stage: 'images_done', shopName: 'T', productCode: 'T',
         skus: { '008': makeSkuRecord({ platformCode: '008', recognition: { items: [{ qty: 0 }] } }) },
@@ -261,19 +277,19 @@ const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
       try { original = fs.readFileSync(skuRecordsPath, 'utf8'); } catch {}
 
       // 用例 1: 无效 --from
-      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'bogus' }), '非法步骤');
+      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'bogus', brand: 'kgos' }), '非法步骤');
 
       // 用例 2: stage 太低
       writeFixture(makeSkuRecordsJson({
         stage: 'skus_read', shopName: 'T', productCode: 'T', skus: {},
       }));
-      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'match' }), 'annotated');
+      await assertThrows(() => matchOne('x', 'x', 'T', 'T', { from: 'match', brand: 'kgos' }), 'annotated');
 
       // 用例 3: 编码不匹配
       writeFixture(makeSkuRecordsJson({
         stage: 'annotated', shopName: 'T', productCode: 'WRONG', skus: {},
       }));
-      await assertThrows(() => matchOne('x', 'x', 'T', 'RIGHT', { from: 'match' }), '不一致');
+      await assertThrows(() => matchOne('x', 'x', 'T', 'RIGHT', { from: 'match', brand: 'kgos' }), '不一致');
 
       // 用例 4: 暂停在 recognize — 移到 L2（需要真实浏览器执行 download 步骤）
       // L1 只验证纯逻辑，不执行实际 pipeline
@@ -566,10 +582,10 @@ const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
       await resetErp(erpId);
 
       // 用例 1: 店铺不存在 → 抛错 "左侧店铺未找到"
-      await assertThrows(() => readSkus(erpId, '不存在的店铺', 'any-code'), '未找到');
+      await assertThrows(() => readSkus(erpId, '不存在的店铺', 'any-code', { brand: 'kgos' }), '未找到');
 
       // 用例 2: 读取杭州共途固定货号
-      const result = await readSkus(erpId, '杭州共途', 'kgossynt-cx');
+      const result = await readSkus(erpId, '杭州共途', 'kgossynt-cx', { brand: 'kgos' });
       assertOk(result);
       assert.ok(result.data.skuCount > 0, 'skuCount 应 > 0');
       assert.strictEqual(result.data.matchedCount + result.data.unmatchedCount, result.data.skuCount,
@@ -620,7 +636,7 @@ const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
       const erpId = await getErpId();
 
       clearSessionCache();
-      await withRetry(() => readSkus(erpId, '杭州共途', 'kgossynt-cx'), 'readSkus');
+      await withRetry(() => readSkus(erpId, '杭州共途', 'kgossynt-cx', { brand: 'kgos' }), 'readSkus');
 
       // 用例 1: stage=skus_read → 应报错 "要求 matched 或 verified"
       await assertThrows(() => readErpCodes(erpId, '杭州共途', 'kgossynt-cx'), '要求 matched 或 verified');
@@ -785,7 +801,7 @@ const SKU_PATH = path.join(PROJECT_ROOT, 'data/sku-records.json');
 
       // 用例 1: stage=skus_read → 应报错
       // 不调用 resetErp，让 readSkus 内部的 ensureCorrPage 处理导航
-      await withRetry(() => readSkus(erpId, '杭州共途', 'kgossynt-cx'), 'readSkus');
+      await withRetry(() => readSkus(erpId, '杭州共途', 'kgossynt-cx', { brand: 'kgos' }), 'readSkus');
       await assertThrows(() => verifyArchive(erpId, '杭州共途', 'kgossynt-cx'), '要求 matched 或 verified');
 
       // 用例 2: 无 erpCode 的 SKU 应被跳过

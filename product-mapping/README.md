@@ -5,8 +5,9 @@
 ## 标准流程
 
 ```bash
-node cli.js check --shop <店铺>
+node cli.js check --shop <店铺> --brand <品牌>
 # 完成全量识图后：
+node cli.js check --shop <店铺> --reuse-active --skip-download
 node cli.js preview-match
 # 用户确认核对页后：
 node cli.js match --shop <店铺>
@@ -22,6 +23,12 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 
 只要有一项不满足，就不能把本轮商品匹配判为完成。
 
+识图后的匹配前 `check` 使用同一个脚本，由 AI 按当前阶段判断：
+
+- 已匹配 SKU 必须全部自动比对一致；
+- 未匹配 SKU 记为 `unmatchedAwaitingMatch`，此时属于正常待处理；
+- AI 只向用户报告异常 SKU，不要求用户人工复核 ERP 明细。
+
 ## 开始前必读
 
 | 文档 | 用途 |
@@ -35,6 +42,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 ## 安全边界
 
 - ERP 写操作必须先获得用户对识图/匹配方案的明确确认。
+- 品牌只在首次 `check --brand <品牌>` 指定一次，随后写入本轮记录并自动继承；缺失或冲突立即停止。
 - 同一个 ERP 标签页只能有一个商品匹配进程操作，禁止并行调试。
 - `match` 任一 SKU 失败必须立即停止；先判断 ERP 当前中间状态，再决定续跑。
 - 默认不提交 `data/` 运行时产物；只提交代码、规则和文档。

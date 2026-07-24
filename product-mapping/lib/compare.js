@@ -12,7 +12,7 @@ function hasArchiveDetails(archiveType, archiveTitle, subItems) {
   return false;
 }
 
-function compareSkuArchive({ platformCode, recognition, archiveType, archiveTitle, subItems = [], brand = 'hee' }) {
+function compareSkuArchive({ platformCode, recognition, archiveType, archiveTitle, subItems = [], brand }) {
   if (!recognition || !Array.isArray(recognition.items) || recognition.items.length === 0) {
     if (hasArchiveDetails(archiveType, archiveTitle, subItems)) {
       return {

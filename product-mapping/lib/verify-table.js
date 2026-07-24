@@ -11,8 +11,8 @@
 const path = require('path');
 const fs = require('fs');
 const { resolveItems } = require('./utils/resolve-items');
+const { requireKnownBrand } = require('./brand-scope');
 
-const BRAND = 'hee';
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const IMGS_DIR = path.join(__dirname, '../data/imgs');
 const OUT_DIR = path.join(__dirname, '../data/reports');
@@ -49,6 +49,7 @@ function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
  * 生成 HTML 核对表
  */
 function generate(report) {
+  const brand = requireKnownBrand(report.brand, 'check 报告');
   const allSkus = [];
   for (const prod of report.products) {
     for (const sku of prod.skus) {
@@ -83,7 +84,7 @@ function generate(report) {
     // 识图明细行（含配件注入）
     let recRows = '';
     if (sku.recognition && sku.recognition.items && sku.recognition.items.length > 0) {
-      const resolvedItems = resolveItems(sku.platformCode, sku.recognition.items, BRAND);
+      const resolvedItems = resolveItems(sku.platformCode, sku.recognition.items, brand);
       recRows = resolvedItems.map(it =>
         `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
       ).join('');
@@ -212,7 +213,7 @@ document.body.className = 'mode-erp';
  */
 function main() {
   const report = latestReport();
-  if (!report) throw new Error('未找到 check 报告，请先运行 node cli.js check --shop <店铺>');
+  if (!report) throw new Error('未找到 check 报告，请先运行 node cli.js check --shop <店铺> --brand <品牌>');
 
   // 清空旧核对表（与 check 清空 imgs/reports 一致，旧表对下次无用）
   if (fs.existsSync(OUT_DIR)) {
