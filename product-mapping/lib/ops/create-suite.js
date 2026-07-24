@@ -158,11 +158,8 @@ async function createSuite(erpId, sku) {
   // 搜索并展开货号行
   await _searchAndExpand(erpId, shopName, productCode);
 
-  // 层2（执行中）：标记套件（markOneSuite 内部已验证选中数=1）
-  await markOneSuite(erpId, platformCode);
-
-  // 验证「复制为套件」按钮已出现
-  const hasCopyBtn = await cdp.eval(erpId,
+  // 层2（执行中）：先识别上次失败遗留的“已标记”中间态，避免重复标记
+  let hasCopyBtn = await cdp.eval(erpId,
     '(function(){' +
     '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
     '  for(var c=0;c<expCells.length;c++){' +
@@ -178,6 +175,24 @@ async function createSuite(erpId, sku) {
     '  return false;' +
     '})()'
   );
+  if (!hasCopyBtn) {
+    await markOneSuite(erpId, platformCode);
+    hasCopyBtn = await cdp.eval(erpId,
+      '(function(){' +
+      '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+      '  for(var c=0;c<expCells.length;c++){' +
+      '    var rows=expCells[c].querySelectorAll("tbody tr");' +
+      '    for(var i=0;i<rows.length;i++){' +
+      '      var tds=rows[i].querySelectorAll("td");' +
+      '      if(tds.length>=6&&tds[5].innerText.trim()===' + JSON.stringify(platformCode) + '){' +
+      '        return Array.from(rows[i].querySelectorAll("a")).some(function(a){return a.innerText.trim()==="复制为套件";});' +
+      '      }' +
+      '    }' +
+      '  }' +
+      '  return false;' +
+      '})()'
+    );
+  }
   if (!hasCopyBtn) throw new Error(`标记套件后「复制为套件」按钮未出现（${platformCode}）`);
 
   // 关闭任何遗留的「选择商品」弹窗（上一次失败运行可能留下未关闭的弹窗带旧数据）

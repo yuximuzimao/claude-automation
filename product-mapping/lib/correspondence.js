@@ -225,28 +225,59 @@ async function _readCorrData(erpId, shopName) {
     '    var opts=vm.options||[];' +
     '    if(opts.length>0){vm.$emit("input",opts[0].value);vm.$emit("change",opts[0].value);}' +
     '  });' +
-    // 清空 el-input-popup-editor 搜索框（正确 selector，非 placeholder 匹配——以前的代码找不到此输入框）
-    '  var editor=document.querySelector(".el-input-popup-editor");' +
-    '  if(!editor) return;' +
-    '  var inp=editor.querySelector("input");' +
-    '  if(!inp) return;' +
-    '  inp.value="";' +
-    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
     '})()'
   );
   await sleep(800);
-  // 触发全量搜索（空条件回车）
+
+  // select 重置会异步重建输入框；必须等重建后重新查询 DOM，再清空并触发全量搜索
   await cdp.eval(erpId,
     '(function(){' +
     '  var editor=document.querySelector(".el-input-popup-editor");' +
     '  if(!editor) return;' +
     '  var inp=editor.querySelector("input");' +
     '  if(!inp) return;' +
+    '  inp.value="";' +
+    '  inp.dispatchEvent(new Event("input",{bubbles:true}));' +
     '  inp.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",keyCode:13,bubbles:true}));' +
     '  inp.dispatchEvent(new KeyboardEvent("keyup",{key:"Enter",keyCode:13,bubbles:true}));' +
     '})()'
   );
   await sleep(2000);
+
+  // 强制回到第 1 页，避免沿用匹配阶段留下的分页状态
+  const pageReset = await cdp.eval(erpId,
+    '(function(){' +
+    '  var pager=document.querySelector(".el-pagination .el-pager");' +
+    '  if(!pager)return "no-pager";' +
+    '  var active=pager.querySelector("li.active");' +
+    '  if(active&&active.innerText.trim()==="1")return "already-first";' +
+    '  var first=Array.from(pager.querySelectorAll("li.number")).find(function(li){return li.innerText.trim()==="1";});' +
+    '  if(!first)return "first-not-found";' +
+    '  first.click();return "clicked-first";' +
+    '})()'
+  );
+  if (pageReset === 'clicked-first') await sleep(2500);
+  if (pageReset === 'no-pager' || pageReset === 'first-not-found') {
+    throw new Error(`对应表分页重置失败: ${pageReset}`);
+  }
+
+  const paginationInfo = await cdp.eval(erpId,
+    '(function(){' +
+    '  var p=document.querySelector(".el-pagination");' +
+    '  var pager=p&&p.querySelector(".el-pager");' +
+    '  var active=pager&&pager.querySelector("li.active");' +
+    '  var vm=p&&p.__vue__;' +
+    '  var total=vm&&Number.isFinite(Number(vm.total))?Number(vm.total):0;' +
+    '  var pageSize=vm&&Number.isFinite(Number(vm.internalPageSize))?Number(vm.internalPageSize):0;' +
+    '  if(!total){var t=p&&p.querySelector(".el-pagination__total");var m=t&&t.innerText.match(/(\\d+)/);total=m?parseInt(m[1]):0;}' +
+    '  return JSON.stringify({current:active?parseInt(active.innerText):0,total:total,pageSize:pageSize||20});' +
+    '})()'
+  );
+  if (!paginationInfo || paginationInfo.current !== 1 || paginationInfo.total <= 0) {
+    throw new Error(`对应表分页状态异常: ${JSON.stringify(paginationInfo)}`);
+  }
+  const totalPages = Math.ceil(paginationInfo.total / paginationInfo.pageSize);
+  console.error(`[corr] 分页已重置：共${paginationInfo.total}条，每页${paginationInfo.pageSize}条，${totalPages}页`);
 
   // 翻页循环读取全部数据（对应表每页 20 条，共可能 70+ 条）
   const allData = [];
@@ -406,20 +437,19 @@ async function _readCorrData(erpId, shopName) {
       process.stderr.write('\n');
     }
 
-    // ── 检查是否有下一页 ──────────────────────────────────────────────────────
-    const hasNext = await cdp.eval(erpId,
-      '(function(){' +
-      '  var btn=document.querySelector("button.btn-next");' +
-      '  if(!btn) return false;' +
-      '  return !btn.disabled && btn.getBoundingClientRect().width>0 && !btn.classList.contains("is-disabled");' +
-      '})()'
-    );
-    if (!hasNext) break;
+    // ── 按总条数计算的准确页数翻页（btn-next 在末页可能不禁用）────────────────
+    if (page >= totalPages) break;
 
     // 翻到下一页
     await cdp.eval(erpId, '(function(){var btn=document.querySelector("button.btn-next");if(btn&&!btn.disabled)btn.click();})()')
     await sleep(2500); // 等新页渲染
     page++;
+    const currentPage = await cdp.eval(erpId,
+      '(function(){var a=document.querySelector(".el-pagination .el-pager li.active");return a?parseInt(a.innerText):0;})()'
+    );
+    if (currentPage !== page) {
+      throw new Error(`对应表翻页失败：期望第${page}页，实际第${currentPage}页`);
+    }
   }
 
   // ── 合并图片 URL 回数据 ────────────────────────────────────────────────────

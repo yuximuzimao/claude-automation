@@ -28,6 +28,33 @@ const FIND_REBIND_DIALOG =
   'var t=d.querySelector(\'.el-dialog__title\');' +
   'return t&&t.innerText.trim()===\'换对应商品\'&&d.getBoundingClientRect().height>0;})';
 
+async function clearSelectedProducts(erpId) {
+  const cleared = await cdp.eval(erpId,
+    `(function(){var w=${FIND_SELECT_DIALOG};` +
+    `if(!w)return JSON.stringify({error:'选择商品 dialog not visible'});` +
+    `var grid=w.querySelector('.el-table');` +
+    `var gridVm=grid&&grid.__vue__;` +
+    `var itemVm=gridVm&&gridVm.$parent;` +
+    `if(!itemVm||typeof itemVm.clearSelection!=='function'||typeof itemVm.updateCheckRows!=='function')` +
+    `return JSON.stringify({error:'商品选择表组件不可用'});` +
+    `itemVm.clearSelection();` +
+    `itemVm.updateCheckRows([]);` +
+    `return JSON.stringify({cleared:true});})()`,
+  );
+  if (!cleared || cleared.error) throw new Error(cleared ? cleared.error : '清空商品选择失败');
+
+  await sleep(300);
+  const verified = await cdp.eval(erpId,
+    `(function(){var w=${FIND_SELECT_DIALOG};` +
+    `if(!w)return JSON.stringify({error:'选择商品 dialog not visible'});` +
+    `var m=w.innerText.match(/已选择商品：\\s*(\\d+)/);` +
+    `return JSON.stringify({kinds:m?parseInt(m[1]):-1});})()`,
+  );
+  if (!verified || verified.kinds !== 0) {
+    throw new Error(`清空商品选择失败：期望 0，实际 ${verified ? verified.kinds : 'N/A'}`);
+  }
+}
+
 async function clickCopyAsSuite(erpId, platformCode) {
   const r = await cdp.eval(erpId, `(function(){
     var expCells = document.querySelectorAll('.el-table__expanded-cell');
@@ -98,6 +125,9 @@ async function addProductToDialog(erpId, productName, amount, expectedCount) {
   if (r2.count !== 1 && !r2.hasExact) throw new Error(`搜索「${productName}」返回 ${r2.count} 条结果，无精确匹配行，请修正名称后重试`);
   console.log(`  搜索结果 ${r2.count} 条，首行: ${r2.first}`);
   await sleep(500); // 结果已刷新，等 UI 稳定再操作
+
+  // 初始列表 watcher 会异步恢复上次选择；必须等首个搜索结果稳定后再清空
+  if (expectedCount === 1) await clearSelectedProducts(erpId);
 
   // 找精确匹配商品名的行（防止多结果时误选套件），无精确匹配才退化到第一行
   const r3 = await cdp.eval(erpId,
@@ -303,4 +333,4 @@ async function main(erpId, shopName, productCode, platformCode, products) {
 }
 
 if (require.main === module) { main().catch(e => { console.error('[ERROR]', e.message); process.exit(1); }); }
-module.exports = { main, addProductToDialog, confirmDialog };
+module.exports = { main, addProductToDialog, confirmDialog, clearSelectedProducts };

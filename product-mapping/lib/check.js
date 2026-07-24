@@ -8,16 +8,73 @@
 const path = require('path');
 const fs = require('fs');
 const { listActiveProducts } = require('./jl-products');
-const { readAllCorrespondence } = require('./correspondence');
+const { readAllCorrespondence, readCorrWithoutDownload } = require('./correspondence');
 const { initArchiveComp, queryArchive, querySubItems } = require('./archive');
 const { imgPath, downloadImg, mergeVerdicts } = require('./visual');
 const { sleep } = require('./wait');
 const { releaseErpLock } = require('./erp-lock');
 const { compareSkuArchive } = require('./compare');
 
-const BRAND = 'hee';
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
+const PRODUCTS_DIR = path.join(__dirname, '../data/products');
+
+function detectBrand(platformCode) {
+  try {
+    for (const brand of fs.readdirSync(PRODUCTS_DIR)) {
+      const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
+      if (!fs.existsSync(accFile)) continue;
+      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
+      if (acc.rules && acc.rules[platformCode]) return brand;
+    }
+  } catch {}
+  return 'kgos';
+}
+
+function loadSkuRecords() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+    return raw.skus || raw;
+  } catch (_) {
+    return {};
+  }
+}
+
+function loadReusableActiveProducts(shopName, skuRecords) {
+  const files = fs.existsSync(REPORT_DIR)
+    ? fs.readdirSync(REPORT_DIR)
+      .filter(f => f.startsWith(`check-${shopName}-`) && f.endsWith('.json'))
+      .sort()
+    : [];
+  if (!files.length) throw new Error(`后置 check 缺少 ${shopName} 的历史 check 报告`);
+
+  const previous = JSON.parse(fs.readFileSync(path.join(REPORT_DIR, files[files.length - 1]), 'utf8'));
+  const products = Array.isArray(previous.products) ? previous.products : [];
+  const recordCodes = new Set(Object.values(skuRecords)
+    .filter(r => r && r.shopName === shopName && String(r.scope || '').startsWith('active-'))
+    .map(r => r.platformCode)
+    .filter(Boolean));
+  const reportCodes = new Set(products
+    .flatMap(p => Array.isArray(p.skus) ? p.skus : [])
+    .map(s => s.platformCode)
+    .filter(Boolean));
+
+  const missingInReport = [...recordCodes].filter(code => !reportCodes.has(code));
+  const missingInRecords = [...reportCodes].filter(code => !recordCodes.has(code));
+  if (!recordCodes.size || missingInReport.length || missingInRecords.length) {
+    throw new Error(
+      `后置 check 活动范围不一致：records=${recordCodes.size} report=${reportCodes.size}`
+      + ` missingInReport=${missingInReport.join(',') || '-'}`
+      + ` missingInRecords=${missingInRecords.join(',') || '-'}`
+    );
+  }
+
+  return products.map(p => ({
+    code: p.productCode,
+    name: p.productName,
+    productId: p.productId,
+  }));
+}
 
 /**
  * 主核查流程
@@ -26,8 +83,10 @@ const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
  * @param {string} shopName - 店铺名，如「澜泽」
  * @returns {Promise<object>} 核查报告
  */
-async function runCheck(jlId, erpId, shopName) {
+async function runCheck(jlId, erpId, shopName, options = {}) {
   try {
+    const reuseActiveScope = options.reuseActiveScope === true;
+    const skipDownload = options.skipDownload === true;
     const report = {
       shop: shopName,
       checkTime: new Date().toISOString(),
@@ -35,14 +94,21 @@ async function runCheck(jlId, erpId, shopName) {
       products: []
     };
 
-    // 1. 获取鲸灵活动商品列表
-    console.error('[check] 1/4 获取鲸灵活动商品列表...');
-    const jlProducts = await listActiveProducts(jlId);
+    // 读取识图记录（sku-records.json），用于活动范围复用和报告对比
+    const skuRecords = loadSkuRecords();
+
+    // 1. 获取活动商品列表；后置 check 可复用已经人工确认的活动范围
+    console.error(`[check] 1/4 ${reuseActiveScope ? '复用已确认活动范围' : '获取鲸灵活动商品列表'}...`);
+    const jlProducts = reuseActiveScope
+      ? loadReusableActiveProducts(shopName, skuRecords)
+      : await listActiveProducts(jlId);
     console.error(`[check] 共 ${jlProducts.length} 个活动商品`);
 
-    // 2. 读取对应表全量数据
-    console.error('[check] 2/4 读取商品对应表...');
-    const corrAll = await readAllCorrespondence(erpId, shopName);
+    // 2. 读取对应表全量数据；后置 check 不重复下载平台商品
+    console.error(`[check] 2/4 读取商品对应表${skipDownload ? '（跳过平台商品下载）' : ''}...`);
+    const corrAll = skipDownload
+      ? await readCorrWithoutDownload(erpId, shopName)
+      : await readAllCorrespondence(erpId, shopName);
     const corrMap = {};
     corrAll.forEach(r => { corrMap[r.productCode] = r.skus; });
     const corrImgMap = {};
@@ -53,31 +119,24 @@ async function runCheck(jlId, erpId, shopName) {
     console.error('[check] 3/4 初始化商品档案V2...');
     await initArchiveComp(erpId);
 
-    // 4. 清空并重建图片目录、清空旧报告（对下次匹配无用，保留只会积累干扰）
+    // 4. 正常新活动清空运行态；后置 check 保留已确认图片和旧报告，成功后再覆盖报告
     const imgsDir = path.join(__dirname, '../data/imgs');
-    if (fs.existsSync(imgsDir)) {
+    fs.mkdirSync(imgsDir, { recursive: true });
+    if (!reuseActiveScope && fs.existsSync(imgsDir)) {
       fs.readdirSync(imgsDir).forEach(f => fs.unlinkSync(path.join(imgsDir, f)));
     }
-    fs.mkdirSync(imgsDir, { recursive: true });
-    if (fs.existsSync(REPORT_DIR)) {
+    if (!reuseActiveScope && fs.existsSync(REPORT_DIR)) {
       fs.readdirSync(REPORT_DIR).forEach(f => {
         if (f.endsWith('.json')) fs.unlinkSync(path.join(REPORT_DIR, f));
       });
     }
-    console.error('[check] 清空 imgs/ 和 reports/（全新开始）');
-
-    // 读取识图记录（sku-records.json），用于报告对比
-    // 兼容两种格式：match-one 格式 {stage,skus:{platformCode→rec}} 和旧平铺格式 {platformCode→rec}
-    let skuRecords = {};
-    try {
-      const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
-      skuRecords = raw.skus || raw;
-    } catch (_) {}
+    console.error(reuseActiveScope
+      ? '[check] 保留已确认 imgs/ 和旧报告（后置核查）'
+      : '[check] 清空 imgs/ 和 reports/（全新开始）');
 
     // 5. 逐产品核查
     console.error('[check] 4/4 逐产品核查...');
     let matchedCount = 0, unmatchedCount = 0, partialCount = 0, notInCorrCount = 0;
-    let pendingVisualCount = 0;
     const activePlatformCodes = new Set();
 
     for (const p of jlProducts) {
@@ -150,7 +209,6 @@ async function runCheck(jlId, erpId, shopName) {
           }
 
           status = '已匹配-待视觉核查';
-          pendingVisualCount++;
         }
 
         const rec = skuRecords[sku.platformCode];
@@ -167,7 +225,7 @@ async function runCheck(jlId, erpId, shopName) {
           archiveType,
           archiveTitle,
           subItems,
-          brand: BRAND,
+          brand: detectBrand(sku.platformCode),
         });
 
         skuResults.push({
@@ -215,6 +273,7 @@ async function runCheck(jlId, erpId, shopName) {
     const compMatch = allSkus.filter(s => s.comparisonResult === 'match').length;
     const compMismatch = allSkus.filter(s => s.comparisonResult === 'mismatch').length;
     const recognitionDone = allSkus.filter(s => s.recognition).length;
+    const pendingVisualCount = allSkus.filter(s => !s.recognition).length;
 
     report.summary = {
       total: jlProducts.length,

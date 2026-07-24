@@ -65,6 +65,9 @@ entry: cli.js
 ④ check --shop <店铺>      → 重新扫描+对比报告 (anchor: runCheck)
 ```
 
+- 平台商品已经更新且活动范围/识图已人工确认时，匹配后使用
+  `check --shop <店铺> --reuse-active --skip-download`：复用上一份 check 报告与
+  `sku-records.json` 交叉验证后的活动范围，只读 ERP 对应表，不重复下载平台商品
 - 识图必须覆盖本次报告全部 SKU；`verify-table` 出现「无识图数据」表示流程未完成
 - 比对结果必须由脚本精确输出：空识图但 ERP 有明细 = mismatch，有识图但 ERP 无可比明细 = mismatch
 - 档案V2 主商家编码查不到时，先回退「规格商家编码」查询；不能直接判定档案缺失

@@ -13,6 +13,36 @@ const { sleep } = require('./wait');
 
 const ERP_ID = '075D3D5770F69781F17A14C418D00338';
 
+async function clickMarkSuiteMenu(erpId) {
+  const marked = await cdp.eval(erpId,
+    '(function(){' +
+    '  var btns=Array.from(document.querySelectorAll("button.el-dropdown-selfdefine"));' +
+    '  var t=btns.find(function(b){return b.innerText&&b.innerText.includes("套件处理")&&b.getBoundingClientRect().width>0;});' +
+    '  if(!t)return false;' +
+    '  t.setAttribute("data-km-suite-trigger","1");return true;' +
+    '})()'
+  );
+  if (!marked) throw new Error('套件处理 not found');
+  await cdp.clickAt(erpId, 'button[data-km-suite-trigger="1"]');
+
+  let menuReady = false;
+  for (let i = 0; i < 6; i++) {
+    await sleep(500);
+    menuReady = await cdp.eval(erpId,
+      '(function(){' +
+      '  var items=Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
+      '  var t=items.find(function(i){return i.innerText.trim()==="标记套件"&&i.getBoundingClientRect().height>0;});' +
+      '  if(!t)return false;' +
+      '  t.setAttribute("data-km-mark-suite","1");return true;' +
+      '})()'
+    );
+    if (menuReady) break;
+  }
+  if (!menuReady) throw new Error('标记套件 not found');
+  await cdp.clickAt(erpId, 'li[data-km-mark-suite="1"]');
+  await sleep(2000);
+}
+
 async function main(erpId, shopName, productCode, platformCode) {
   // 直接运行时从命令行参数取
   if (!shopName) [shopName, productCode, platformCode] = process.argv.slice(2);
@@ -88,31 +118,8 @@ async function main(erpId, shopName, productCode, platformCode) {
   if (r4 && r4.error) throw new Error(r4.error);
   await sleep(500);
 
-  // Step6: 点「套件处理」下拉
-  const r5 = await cdp.eval(erpId,
-    '(function(){' +
-    '  var btns = Array.from(document.querySelectorAll("span, button"));' +
-    '  var t = btns.find(function(b){ return b.innerText && b.innerText.includes("套件处理") && b.getBoundingClientRect().width > 0; });' +
-    '  if(!t) return JSON.stringify({error:"套件处理 not found"});' +
-    '  t.click(); return JSON.stringify({clicked:"套件处理"});' +
-    '})()'
-  );
-  console.log('[suite-btn]', r5);
-  if (r5 && r5.error) throw new Error(r5.error);
-  await sleep(800);
-
-  // Step7: 点「标记套件」
-  const r6 = await cdp.eval(erpId,
-    '(function(){' +
-    '  var items = Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
-    '  var t = items.find(function(i){ return i.innerText.trim()==="标记套件"; });' +
-    '  if(!t) return JSON.stringify({error:"标记套件 not found"});' +
-    '  t.click(); return JSON.stringify({clicked:"标记套件"});' +
-    '})()'
-  );
-  console.log('[mark-suite]', r6);
-  if (r6 && r6.error) throw new Error(r6.error);
-  await sleep(2000);
+  // Step6+7: hover 下拉必须走真实鼠标事件，再点「标记套件」
+  await clickMarkSuiteMenu(erpId);
 
   console.log(`[done] ${platformCode} 已标记为套件`);
 }
@@ -161,29 +168,8 @@ async function markOneSuite(erpId, platformCode) {
   }
   await sleep(500);
 
-  // Step6: 点「套件处理」下拉
-  const r5 = await cdp.eval(erpId,
-    '(function(){' +
-    '  var btns = Array.from(document.querySelectorAll("span, button"));' +
-    '  var t = btns.find(function(b){ return b.innerText && b.innerText.includes("套件处理") && b.getBoundingClientRect().width > 0; });' +
-    '  if(!t) return JSON.stringify({error:"套件处理 not found"});' +
-    '  t.click(); return JSON.stringify({clicked:"套件处理"});' +
-    '})()'
-  );
-  if (r5 && r5.error) throw new Error(r5.error);
-  await sleep(800);
-
-  // Step7: 点「标记套件」
-  const r6 = await cdp.eval(erpId,
-    '(function(){' +
-    '  var items = Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
-    '  var t = items.find(function(i){ return i.innerText.trim()==="标记套件"; });' +
-    '  if(!t) return JSON.stringify({error:"标记套件 not found"});' +
-    '  t.click(); return JSON.stringify({clicked:"标记套件"});' +
-    '})()'
-  );
-  if (r6 && r6.error) throw new Error(r6.error);
-  await sleep(2000);
+  // Step6+7: hover 下拉必须走真实鼠标事件，再点「标记套件」
+  await clickMarkSuiteMenu(erpId);
 
   console.log(`[markOneSuite] ${platformCode} 已标记为套件`);
 }

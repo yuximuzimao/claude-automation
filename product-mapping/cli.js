@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const { getTargetIds } = require('./lib/targets');
+const { getTargetIds, getErpTargetId } = require('./lib/targets');
 const { ok, fail } = require('./lib/result');
 
 /**
@@ -39,6 +39,7 @@ async function main() {
   node cli.js km-read <货号>                  — 查商品对应表
   node cli.js km-archive <编码>               — 查商品档案V2
   node cli.js check --shop <店铺>             — 完整核查流程
+  node cli.js check --shop <店铺> --reuse-active --skip-download — 后置核查（复用活动范围，不下载平台商品）
   node cli.js visual-pending --shop <店铺>    — 列出待视觉核查的组合装
   node cli.js visual-ok <平台编码> "<描述>"   — 记录识图确认（图片内容正确）
   node cli.js visual-flag <平台编码> "<描述>" — 记录识图不符（图片内容有误）
@@ -164,6 +165,35 @@ async function main() {
     return;
   }
 
+  // match 只操作 ERP，对已确认的 sku-records 执行写入；不应被无关的鲸灵 tab 阻塞
+  if (cmd === 'match') {
+    if (!opts.shop) { console.error('用法: node cli.js match --shop <店铺> [--limit N]'); process.exit(1); }
+    const limitIdx = args.indexOf('--limit');
+    const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1]) : Infinity;
+    const erpId = await getErpTargetId();
+    const { main: matchMain } = require('./lib/auto-match2');
+    const { releaseErpLock } = require('./lib/erp-lock');
+    try {
+      await matchMain(erpId, opts.shop, limit);
+    } finally {
+      await releaseErpLock();
+    }
+    return;
+  }
+
+  // 匹配后的 check 可复用已确认活动范围，只需 ERP tab
+  if (cmd === 'check' && args.includes('--reuse-active')) {
+    if (!opts.shop) { console.error('用法: node cli.js check --shop <店铺> --reuse-active --skip-download'); process.exit(1); }
+    const erpId = await getErpTargetId();
+    const { runCheck } = require('./lib/check');
+    const result = await runCheck(null, erpId, opts.shop, {
+      reuseActiveScope: true,
+      skipDownload: args.includes('--skip-download'),
+    });
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
   // ── 其他命令需要两个浏览器标签页 ID ──
   const { jlId, erpId } = await getTargetIds();
 
@@ -220,14 +250,6 @@ async function main() {
       }
       const { main: markMain } = require('./lib/mark-suite');
       await markMain(erpId, shopName, productCode, platformCode);
-      break;
-    }
-    case 'match': {
-      if (!opts.shop) { console.error('用法: node cli.js match --shop <店铺> [--limit N]'); process.exit(1); }
-      const limitIdx = args.indexOf('--limit');
-      const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1]) : Infinity;
-      const { main: matchMain } = require('./lib/auto-match2');
-      await matchMain(erpId, opts.shop, limit);
       break;
     }
     case 'match-one': {

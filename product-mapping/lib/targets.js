@@ -6,6 +6,14 @@ const PINNED_ERP_ID = '1F46BAA92728117C35DD6845CB85FB33';
 
 let cached = null;
 
+async function getErpTargetId() {
+  const targets = await cdp.getTargets();
+  const erp = targets.find(t => t.targetId === PINNED_ERP_ID)
+    || targets.find(t => t.url && t.url.includes('superboss.cc'));
+  if (!erp) throw new Error('ERP标签页未找到，请确认浏览器已打开对应页面');
+  return erp.targetId || erp.id;
+}
+
 async function getTargetIds(force) {
   if (cached && !force) return cached;
   const targets = await cdp.getTargets();
@@ -25,4 +33,4 @@ async function getTargetIds(force) {
   return cached;
 }
 
-module.exports = { getTargetIds };
+module.exports = { getTargetIds, getErpTargetId };

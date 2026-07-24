@@ -18,9 +18,21 @@ const { remapSku } = require('./remap-sku');
 const { addProductToDialog, confirmDialog } = require('./copy-as-suite');
 const { resolveItems } = require('./utils/resolve-items');
 
-const BRAND = 'hee';
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 const LOG_PATH = path.join(__dirname, '../data/auto-match-log.json');
+const PRODUCTS_DIR = path.join(__dirname, '../data/products');
+
+function detectBrand(platformCode) {
+  try {
+    for (const brand of fs.readdirSync(PRODUCTS_DIR)) {
+      const accFile = path.join(PRODUCTS_DIR, brand, 'accessories.json');
+      if (!fs.existsSync(accFile)) continue;
+      const acc = JSON.parse(fs.readFileSync(accFile, 'utf8'));
+      if (acc.rules && acc.rules[platformCode]) return brand;
+    }
+  } catch {}
+  return 'kgos';
+}
 
 function loadLog() {
   if (!fs.existsSync(LOG_PATH)) return { done: [], failed: [] };
@@ -72,6 +84,8 @@ async function processCurrentPage(erpId, productCodes, platformCodes) {
     '(function(){' +
     '  var targets=new Set(' + pCodes + ');' +
     '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+    '  var oldChecked=document.querySelectorAll(".el-table__expanded-cell tbody tr input[type=checkbox]:checked");' +
+    '  for(var x=0;x<oldChecked.length;x++){oldChecked[x].click();}' +
     '  var checked=0, notFound=[];' +
     '  for(var c=0;c<expCells.length;c++){' +
     '    var rows=expCells[c].querySelectorAll("tbody tr");' +
@@ -81,11 +95,12 @@ async function processCurrentPage(erpId, productCodes, platformCodes) {
     '      var pCode=tds[5].innerText.trim();' +
     '      if(!targets.has(pCode)) continue;' +
     '      var cb=rows[i].querySelector("input[type=checkbox]");' +
-    '      if(cb){cb.click();checked++;}' +
+    '      if(cb){if(!cb.checked)cb.click();if(cb.checked)checked++;}' +
     '      else notFound.push(pCode);' +
     '    }' +
     '  }' +
-    '  return JSON.stringify({checked:checked,notFound:notFound});' +
+    '  var selectedCount=document.querySelectorAll(".el-table__expanded-cell tbody tr input[type=checkbox]:checked").length;' +
+    '  return JSON.stringify({checked:checked,selectedCount:selectedCount,notFound:notFound});' +
     '})()'
   );
   const r = typeof checkResult === 'string' ? JSON.parse(checkResult) : checkResult;
@@ -117,24 +132,67 @@ async function clickNextPage(erpId) {
 }
 
 // ── Phase 1b：点套件处理 → 标记套件 ──
-async function clickMarkSuite(erpId) {
-  await cdp.eval(erpId,
+async function hasCopyAsSuiteButton(erpId, platformCode) {
+  return !!(await cdp.eval(erpId,
     '(function(){' +
-    '  var btns=Array.from(document.querySelectorAll("span,button"));' +
+    '  var rows=document.querySelectorAll(".el-table__expanded-cell tbody tr");' +
+    '  for(var i=0;i<rows.length;i++){' +
+    '    var tds=rows[i].querySelectorAll("td");' +
+    '    if(tds.length<6||tds[5].innerText.trim()!==' + JSON.stringify(platformCode) + ')continue;' +
+    '    return Array.from(rows[i].querySelectorAll("a")).some(function(a){return a.innerText.trim()==="复制为套件";});' +
+    '  }' +
+    '  return false;' +
+    '})()'
+  ));
+}
+
+async function clickMarkSuite(erpId, platformCode) {
+  const buttonResult = await cdp.eval(erpId,
+    '(function(){' +
+    '  var btns=Array.from(document.querySelectorAll("button.el-dropdown-selfdefine"));' +
     '  var t=btns.find(function(b){return b.innerText&&b.innerText.includes("套件处理")&&b.getBoundingClientRect().width>0;});' +
-    '  if(t) t.click();' +
+    '  if(!t)return "not-found";' +
+    '  t.setAttribute("data-km-suite-trigger","1");return "marked";' +
     '})()'
   );
-  await sleep(800);
-  await cdp.eval(erpId,
-    '(function(){' +
-    '  var items=Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
-    '  var t=items.find(function(i){return i.innerText.trim()==="标记套件";});' +
-    '  if(t) t.click();' +
-    '})()'
-  );
-  await sleep(2000);
-  console.error('[mark-suite] 标记套件完成');
+  if (buttonResult !== 'marked') throw new Error('套件处理按钮未找到');
+  await cdp.clickAt(erpId, 'button[data-km-suite-trigger="1"]');
+
+  let menuReady = false;
+  for (let i = 0; i < 6; i++) {
+    await sleep(500);
+    menuReady = await cdp.eval(erpId,
+      '(function(){' +
+      '  var items=Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
+      '  var t=items.find(function(i){return i.innerText.trim()==="标记套件"&&i.getBoundingClientRect().height>0;});' +
+      '  if(!t)return false;' +
+      '  t.setAttribute("data-km-mark-suite","1");return true;' +
+      '})()'
+    );
+    if (menuReady) break;
+  }
+  if (!menuReady) throw new Error('标记套件菜单未出现');
+  await cdp.clickAt(erpId, 'li[data-km-mark-suite="1"]');
+
+  for (let i = 0; i < 20; i++) {
+    await sleep(500);
+    const marked = await cdp.eval(erpId,
+      '(function(){' +
+      '  var rows=document.querySelectorAll(".el-table__expanded-cell tbody tr");' +
+      '  for(var i=0;i<rows.length;i++){' +
+      '    var tds=rows[i].querySelectorAll("td");' +
+      '    if(tds.length<6||tds[5].innerText.trim()!==' + JSON.stringify(platformCode) + ')continue;' +
+      '    return Array.from(rows[i].querySelectorAll("a")).some(function(a){return a.innerText.trim()==="复制为套件";});' +
+      '  }' +
+      '  return false;' +
+      '})()'
+    );
+    if (marked) {
+      console.error('[mark-suite] 标记套件完成');
+      return;
+    }
+  }
+  throw new Error(`标记套件后「复制为套件」按钮未出现（${platformCode}）`);
 }
 
 // ── Phase 1c：逐个复制为套件（不离开当前页，用搜索框过滤） ──
@@ -180,7 +238,7 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
   await closeSelectDialogIfOpen(erpId);
   await sleep(300);
 
-  // 搜索货号过滤表格（用 .el-input-popup-editor input，无 placeholder，INDEX.md §5）
+  // 当前 ERP 对应表搜索框按货号过滤（2026-07-24 实时 DOM 验证）
   await cdp.eval(erpId,
     '(function(){' +
     '  var inp=document.querySelector(".el-input-popup-editor input");' +
@@ -209,25 +267,30 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
   );
   await sleep(1500);
 
-  // 点复制为套件（精确匹配 tds[5]）
-  const r = await cdp.eval(erpId,
-    '(function(){' +
-    '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
-    '  for(var c=0;c<expCells.length;c++){' +
-    '    var rows=expCells[c].querySelectorAll("tbody tr");' +
-    '    for(var i=0;i<rows.length;i++){' +
-    '      var tds=rows[i].querySelectorAll("td");' +
-    '      if(tds.length>=6&&tds[5].innerText.trim()===' + JSON.stringify(platformCode) + '){' +
-    '        var links=Array.from(rows[i].querySelectorAll("a"));' +
-    '        var btn=links.find(function(a){return a.innerText.trim()==="复制为套件";});' +
-    '        if(!btn) return "no-btn";' +
-    '        btn.click(); return "clicked";' +
-    '      }' +
-    '    }' +
-    '  }' +
-    '  return "not-found";' +
-    '})()'
-  );
+  // 点复制为套件（精确匹配 tds[5]，等待 Vue 刷新按钮）
+  let r = 'not-found';
+  for (let attempt = 0; attempt < 20; attempt++) {
+    r = await cdp.eval(erpId,
+      '(function(){' +
+      '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+      '  for(var c=0;c<expCells.length;c++){' +
+      '    var rows=expCells[c].querySelectorAll("tbody tr");' +
+      '    for(var i=0;i<rows.length;i++){' +
+      '      var tds=rows[i].querySelectorAll("td");' +
+      '      if(tds.length>=6&&tds[5].innerText.trim()===' + JSON.stringify(platformCode) + '){' +
+      '        var links=Array.from(rows[i].querySelectorAll("a"));' +
+      '        var btn=links.find(function(a){return a.innerText.trim()==="复制为套件";});' +
+      '        if(!btn) return "no-btn";' +
+      '        btn.click(); return "clicked";' +
+      '      }' +
+      '    }' +
+      '  }' +
+      '  return "not-found";' +
+      '})()'
+    );
+    if (r === 'clicked') break;
+    await sleep(500);
+  }
   if (r !== 'clicked') throw new Error(`复制为套件 not found for ${platformCode}: ${r}`);
   await sleep(1500);
 
@@ -240,20 +303,6 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
     '})()'
   );
   if (!title.includes('选择商品')) throw new Error(`Expected 选择商品 dialog, got: ${title}`);
-
-  // 取消勾选 dialog 内所有已选中的 checkbox（防止 Vue 组件保留上次的选中状态）
-  await cdp.eval(erpId,
-    '(function(){' +
-    '  var ds=document.querySelectorAll(".el-dialog__wrapper");' +
-    '  for(var i=0;i<ds.length;i++){' +
-    '    if(ds[i].getBoundingClientRect().height<=0)continue;' +
-    '    var cbs=ds[i].querySelectorAll("input[type=checkbox]:checked");' +
-    '    for(var j=0;j<cbs.length;j++){cbs[j].click();}' +
-    '    return;' +
-    '  }' +
-    '})()'
-  );
-  await sleep(300);
 
   // 清空主商家编码输入框（防止残留内容干扰搜索，不点清空按钮避免触发全量刷新）
   await cdp.eval(erpId,
@@ -312,13 +361,25 @@ async function copyOneSku(erpId, shopName, productCode, platformCode, products) 
 }
 
 async function main(erpId, shopName = '澜泽', limit = Infinity) {
+  const raw = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
+  const records = (raw.skus && typeof raw.skus === 'object') ? raw.skus : raw;
+  const eligibleCodes = Object.values(records)
+    .filter(r =>
+      r && typeof r === 'object' &&
+      r.shopName === shopName &&
+      !r.erpCode &&
+      r.recognition && Array.isArray(r.recognition.items) && r.recognition.items.length > 0
+    )
+    .map(r => r.platformCode)
+    .sort();
+  const scope = `${shopName}:${eligibleCodes.join(',')}`;
   const log = loadLog();
-  // 每次新任务开始前清空 done[] 和 failed[]：
-  // - done[] 旧记录对新活动 platformCode 无效，留着只会误过滤
-  // - failed[] 历史错误对本次无意义，干扰统计排查
-  log.done = [];
-  log.failed = [];
-  saveLog(log);
+  if (log.scope !== scope) {
+    log.scope = scope;
+    log.done = [];
+    log.failed = [];
+    saveLog(log);
+  }
 
   const todo = getTodo(shopName);
   const bundles = todo.filter(r => r.recognition.type === '组合装').slice(0, limit);
@@ -348,7 +409,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
       const r = bundles[i];
       console.error(`\n── Phase 1 [${i + 1}/${bundles.length}] ${r.platformCode} ──`);
 
-      // Step A: 用货号搜索，定位到目标行所在页
+      // Step A: 用货号搜索，定位到目标行
       await cdp.eval(erpId,
         '(function(){' +
         '  var inp=document.querySelector(".el-input-popup-editor input");' +
@@ -363,7 +424,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
 
       // Step B: 展开目标货号行并勾选目标 SKU（只在当前页操作，不翻页）
       const pageResult = await processCurrentPage(erpId, [r.productCode], [r.platformCode]);
-      if (pageResult.checked === 0) {
+      if (pageResult.checked !== 1 || pageResult.selectedCount !== 1) {
         const err = `展开+勾选失败: productCode=${r.productCode} platformCode=${r.platformCode}`;
         log.failed.push({ platformCode: r.platformCode, type: '组合装', error: err, time: new Date().toISOString() });
         saveLog(log);
@@ -371,16 +432,21 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
       }
       console.error(`[Phase1] 勾选成功，立即标记套件`);
 
-      // Step C: 标记套件（在当前页勾选状态未丢失时立即执行）
-      console.error(`\n── Phase 1c：套件处理 → 标记套件 ──`);
-      await sleep(500);
-      await clickMarkSuite(erpId);
+      // Step C: 已标记的中间态直接续跑；否则在勾选状态未丢失时立即标记
+      if (await hasCopyAsSuiteButton(erpId, r.platformCode)) {
+        console.error(`\n── Phase 1c：已标记套件，跳过重复标记 ──`);
+      } else {
+        console.error(`\n── Phase 1c：套件处理 → 标记套件 ──`);
+        await sleep(500);
+        await clickMarkSuite(erpId, r.platformCode);
+      }
 
       // Step D: 复制为套件
       console.error(`\n── Phase 1d：复制为套件 ──`);
       try {
         await copyOneSku(erpId, shopName, r.productCode, r.platformCode,
-          resolveItems(r.platformCode, r.recognition.items, BRAND));
+          resolveItems(r.platformCode, r.recognition.items, detectBrand(r.platformCode)));
+        log.failed = log.failed.filter(f => f.platformCode !== r.platformCode);
         log.done.push(r.platformCode);
         saveLog(log);
       } catch (e) {
@@ -403,6 +469,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity) {
     console.error(`[${i + 1}/${singles.length}] ${r.platformCode} → ${erpName}`);
     try {
       await remapSku(erpId, r.platformCode, erpName, { confirm: true });
+      log.failed = log.failed.filter(f => f.platformCode !== r.platformCode);
       log.done.push(r.platformCode);
       saveLog(log);
       console.error(`[${r.platformCode}] ✅`);
