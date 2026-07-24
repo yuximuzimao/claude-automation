@@ -4,7 +4,7 @@
 
 ## §1 角色与红线
 
-- **写操作（新增匹配）必须人工确认后执行**，脚本只读不写
+- **写操作（新增匹配）必须人工确认后执行**；确认后由脚本写入，异常必须 stop-on-error
 - ERP 查询命令必须串行，禁止并行（对应表 + 档案V2 顺序执行）
 - 每次查询等待 2000ms
 
@@ -12,9 +12,9 @@
 
 ## §2 核查流程（完整端到端）
 
-**Step 0（必做）：确认 JL 账号对齐**
+**Step 0（首次 check 必做）：确认 JL 账号对齐**
 
-每次用户说「<店铺名>的匹配」，**第一步**查 `sessions/accounts.json` 确认 JL 账号并注入，再跑任何命令。
+新活动首次运行 `check` 时，先查 `sessions/accounts.json` 确认 JL 账号；用户已经手动打开并确认正确店铺页面时只读当前页，不重复注入。`match` 和 `check --reuse-active --skip-download` 只依赖 ERP，不需要鲸灵标签页。
 
 | 账号 | 店铺 | 品牌 |
 |------|------|------|
@@ -98,7 +98,8 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 ```
 
 **异常处理原则**：
-- match 任何 SKU 报错 → 立即 throw 停止，人工处理后重跑（done 列表仅在本次 match 任务内有效）
+- match 任何 SKU 报错 → 立即 throw 停止；先按 `docs/matching-stability.md §4` 判断 ERP 中间状态，再决定续跑
+- 人工在 ERP 完成任何匹配后 → 必须先跑 check 回读 ERP，不能直接续 match
 - check 读取异常（ERP 未登录、页面无法访问）→ navigateErp 已处理，手动刷新登录后重跑
 - comparisonMismatch > 0 → check 报告会警告，需人工核查后继续
 
@@ -285,11 +286,12 @@ data/products/
 **流程**：
 1. navigateErp → 商品对应表
 2. 点左侧店铺名（如「澜泽」）
-3. 平台商家编码输入框回车刷新（placeholder：`请输入商家编码，多个商家编码请以英文逗号分隔`）
-4. 找货号行展开（点 `.el-table__expand-icon`）
-5. **只勾选目标 SKU 那一行的复选框**，不勾选其他行
-6. 点「套件处理」下拉 → 点 `li.el-dropdown-menu__item` 文字="标记套件"
-7. 验证：目标行出现「复制为套件」按钮即成功
+3. 在 `.el-input-popup-editor input` 输入 productCode（货号）并回车
+4. 用 `tds[6]` 精确确认货号行并展开（点 `.el-table__expand-icon`）
+5. 清除展开区全部旧勾选，再按子行 `tds[5]` 精确定位 platformCode
+6. **只勾选目标 SKU 那一行**，并验证选中数严格等于 1
+7. 用 `cdp.clickAt()` 触发「套件处理」hover 下拉，再点“标记套件”
+8. 验证：目标行出现“复制为套件”按钮才算成功
 
 **⚠️ 红线**：每次只处理当前要匹配的那一个 SKU，严禁批量勾选整个货号所有子行。每个 SKU 是独立的商品/组合，必须单独处理。
 
@@ -298,6 +300,10 @@ data/products/
 ## §6 已知坑位
 
 > 格式：`[触发次数/最后触发]` — 说明
+>
+> 连续 SKU、隐藏 Vue 状态、中断恢复和“立即修/先观察”的判断标准见
+> `docs/matching-stability.md`；2026-07-24 澜泽实战证据见
+> `docs/archive/2026-07-25-lanze-match/README.md`。
 
 - `[1/2026-04]` **翻页溢出**：btn-next 不变灰，必须用"共X条"判断结束，否则死循环（实测抓558条，实际174条）
 - `[1/2026-04]` **图片内容核查**：预存参考图片不可信任，每张图上线前必须打开目视确认
@@ -305,20 +311,18 @@ data/products/
 - `[2/2026-04]` **档案V2 直接赋值失效**：`window.__sv.searchData = code` 不触发 Vue 响应，必须 DOM 输入法（见§5）
 - `[1/2026-04]` **ERP 状态残留**：跳过 reload 直接操作读到上次的数据，所有页面操作前必须走 navigateErp()
 - `[1/2026-04]` **对应表只读1条**：空搜索后未展开所有行，或页面状态未重置，导致只读到当前可见行
-- `[1/2026-04→2026-05-27 修正]` **对应表搜索框字段类型**：`el-input-popup-editor input` = **平台规格商家编码**（platformCode）搜索框，填 platformCode 有效（返回1行）；填 productCode（货号）会返回 0 行。`tds[6]` = 平台商家编码（productCode），用于展开目标货号行——与搜索框类型不同，不要混用
+- `[2/2026-05-27→2026-07-24 结论反转]` **对应表搜索维度会随 ERP 页面变化**：当前实测 `.el-input-popup-editor input` 填 productCode（货号）有效，填 platformCode 返回 0 行；用 `tds[6]` 精确确认货号行，展开后用 `tds[5]` 精确确认 platformCode。再次出现 0 行时必须同页 A/B 实测，禁止凭历史文档猜字段
 - `[1/2026-04]` **多层嵌套 dialog 确定按钮点错**：Element UI 多弹窗叠加时 querySelector 取到第一个隐藏 footer，必须用 `querySelectorAll('.el-dialog__footer')` 遍历取 `getBoundingClientRect().height > 0` 的那个，再点其 `el-button--primary`。禁止用 innerText 文字匹配（有的按钮是"确 定"带空格）
 - `[1/2026-04]` **弹窗操作前未验证弹窗可见**：操作 dialog 内元素前必须先确认 wrapper 的 `getBoundingClientRect().height > 0`，否则操作到隐藏层
 - `[1/2026-04]` **档案V2 查询前筛选残留**：`fetch-archive-names` 等操作会留下"普通商品"筛选，下次 `km-archive` 查组合装时返回 null。`initArchiveComp` 现已加「清空条件」步骤；通用原则：每次档案操作前必须检查/清空筛选状态
 - `[1/2026-04]` **识图颜色规则必须执行**：features.json 记录了体验装口味颜色（浅绿=茉莉，淡黄=青柑），识图时若只看图片文字"黑茶体验装"而不看盒子颜色，会批量识别错误。规则：识图前必须逐条比对 features.json 颜色字段，视觉特征 > 文字标注
 - `[1/2026-04]` **搜索 count 必须精确等于1**：自动匹配时 `count > 0` 宽松匹配会选中套件商品写为子品，早期 260422-73 等因此可能错误。规则：count !== 1 直接报错"名称歧义"，不继续
-- `[1/2026-04]` **「选择商品」dialog v-show 状态残留**：dialog 关闭后 Vue 保留上次勾选（v-show 不销毁实例），再次打开时旧勾选仍在。每次打开弹窗后立即全选反选清零（`querySelectorAll("input[type=checkbox]:checked").click()`），再添加子品
 - `[1/2026-04]` **商品类型下拉不能 UI 点击**：el-select 下拉 input 展开后 portal 在 dialog 外生成，触发 close-on-click-modal 关闭弹窗。正确做法：直接 Vue emit：`vm.$emit("input", value); vm.$emit("change", value)`
 - `[1/2026-04]` **脚本长时间运行用 run_in_background**：`node lib/auto-match2.js` 同步跑时全量 stderr 输出消耗大量 token。正确：`run_in_background: true`，结束后只读 `data/auto-match-log.json` 的 done/failed 数字
-- `[1/2026-04-30, 修正2026-05-27]` **对应表搜索输入框是 `.el-input-popup-editor input` = 平台规格商家编码（platformCode）**：form-item[4]=精确搜索下拉，form-item[5]=平台商家编码下拉，form-item[6] 的 `el-input-popup-editor` 才是文本搜索框，搜索维度是 platformCode（平台规格商家编码），不是 productCode（货号）。搜索时填 platformCode → 1行结果；填 productCode → 0行。展开目标行用 `tds[6]`（值=productCode）做精确匹配
 - `[∞/永久保留]` **#48 读表数据用<th>表头定位，禁用正则/长度过滤**：子品弹窗表读取必须通过 `<th>` 表头文本（"商品名称"/"商家编码"/"组合比例"）定位列索引。禁止硬编码固定位置 [1][3][10]，禁止对 specCode/name 做正则匹配过滤——会把非数字编码（kgoxnld等）合法行当垃圾误杀。
 - `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
 - `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
-- `[1/2026-05-07]` **readAllCorrespondence 有副作用**：内部硬编码调用 downloadPlatformProducts()，不是只读操作。仅查询数据时用 readCorrespondence()（待实现），需要刷新数据时才用 readAllCorrespondence()。
+- `[1/2026-05-07，已拆分]` **readAllCorrespondence 有下载副作用**：需要刷新数据时用 `readAllCorrespondence()`；仅查询用 `readCorrWithoutDownload()` 或 `readCorrespondence()`，禁止为只读需求触发平台商品下载
 - `[1/2026-05-08]` **「选择商品」弹窗搜索返回2条结果不等于名称歧义**：气垫霜正装和替换装名称都包含"亮肤色"，ERP 弹窗是子串搜索，count=2 是正常的。wait-loop break 条件必须同时检查 `hasExact`（任意 td 的 innerText 精确等于 productName 即命中），不能只靠 count===1，否则10s 超时。行选择（r3）本就精确匹配，无需另改。
 - `[1/2026-05-08]` **matched-original SKU 的 recognition 必须补填，不能留 null**：重跑 `--from annotate` 时，matched-original + recognition=null 会被 annotate 跳过，导致 itemType=null。识图阶段需要按 erpName/skuName 为这些条目补填 recognition.items，让 annotate 能正常生成 itemType。
 - `[1/2026-05-13]` **全量下载选择是 el-radio，不是 el-checkbox**：下载平台商品弹窗里「全量下载」「增量下载」「指定下载」三个选项是 `el-radio` 组，默认选中「增量下载（value=2）」。代码若用 `.el-checkbox` + `input[type=checkbox]` 查找，永远 null，全量下载永远不被选中，静默跑增量。正确：`.el-radio` + `input[type=radio]`，查 checked 状态再 click。
@@ -328,7 +332,7 @@ data/products/
 - `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
 - `[1/2026-06-26]` **单品 erpCode 可能是规格商家编码，不是主商家编码**：商品档案V2按「主商家编码」查不到时，不能直接判定档案未录入；必须回退到「规格商家编码」精确查询。百浩悦希本次已确认 3 个特殊单品：`yxr-1` erpCode `6940079096228` → 主商家编码 `yx005`（悦希舒缓焕颜精华乳100ml）；`yxs-1` erpCode `6940079096211` → 主商家编码 `yx004`（悦希舒缓焕颜精粹水100ml）；`yxjm-1` erpCode `6975183893203` → 主商家编码 `yx003`（悦希氨基酸表活焕颜洁面膏100g）。
 - `[1/2026-06-26]` **comparisonPending 不能掩盖脚本缺陷**：全量识图完成后，正常核对报告应当 `recognitionDone == SKU数` 且 `comparisonPending == 0`。若 recognition 为空但 ERP 有明细，脚本必须输出 mismatch；若有 recognition 但 ERP 无明细，先检查是否需要规格编码回退，仍无明细才输出 mismatch。
-- `[2/2026-05-22]` **check 前必须先对齐 JL 账号**：`--shop 共途` 只控制 ERP 端查哪张对应表，JL 标签页登录的是哪个账号决定抓哪家店的活动商品。账号不对齐时 JL 抓出别家产品，cross-reference 全部「不在对应表」，看起来像新活动未上线。铁律：用户说「<店铺>匹配」→ 先查 `sessions/accounts.json` → `jl <编号>` 注入账号 → 才跑 check。
+- `[2/2026-05-22]` **首次 check 前必须对齐 JL 账号**：`--shop 共途` 只控制 ERP 端查哪张对应表，JL 当前页面决定抓哪家店的活动商品。用户已手动打开并确认正确页面时直接只读；否则先查 `sessions/accounts.json` 再按安全边界切换账号。`match` 和后置 `check --reuse-active` 不需要 JL。
 - `[1/2026-05-20]` **人工处理某些 SKU 后不能直接续跑 match，必须先重跑 check**：`getTodo()` 的判断条件是 `erpCode === null`，只有 check.js 运行时读 ERP 实时对应表才会回填 erpCode。人工在 ERP 界面完成匹配后，sku-records.json 里该条记录的 erpCode 仍是 null，match 仍视为未匹配并重试，触发重复操作或同样错误。正确流程：**人工处理 → check → match**，不能跳过 check 直接续 match。
 - `[1/2026-05-20]` **同 productCode 多比例套件触发「提示」弹窗**：同一 productCode 下已有已匹配套件（如青柑×10+茉莉×10），尝试为另一 platformCode 配不同比例套件（如青柑×5+茉莉×5）时，ERP 在打开「选择商品」弹窗前插入「提示」弹窗（"该商品有未完成的订单，换绑是否将关联订单状态置为对应关系变更？"）。当前 copy-as-suite.js 无法处理此前置弹窗，脚本报 `Expected 选择商品 dialog, got: 提示`。处置：人工确认/取消提示弹窗后走「人工处理→check→match」流程。
 - `[1/2026-05-22]` **downloadPlatformProducts 弹窗必须选含 .el-select 的 dialog**：ERP 对应表页面可能同时存在旧的进度弹窗（含 `.el-progress`）和新的下载配置弹窗，两者都 visible。取第一个可见 dialog 会错选进度弹窗，后续找不到店铺 el-select 报错。正确：`Array.from(ds).find(d => d.getBoundingClientRect().height>0 && d.querySelector('.el-select'))`。等待下载完成的终止条件是 `.el-progress` 消失，不是所有 dialog 消失（配置弹窗在确认后保持打开）。已同步处理：目标店铺已是唯一选项时跳过（`already-selected`），否则先清除多余 el-tag 再触发 `handleOptionSelect`。
@@ -339,6 +343,8 @@ data/products/
 - `[1/2026-07-24]` **选择商品弹窗会跨搜索保留隐藏选择**：只取消当前 DOM 的 checked checkbox 无法清掉 `TableItem.multipleSelection`。第一个子品搜索结果稳定后，调用 `TableItem.clearSelection()` + `updateCheckRows([])`，并验证“已选择商品：0”，再勾选本次商品。清理过早会被初始化 watcher 重新灌回旧选择。
 - `[1/2026-07-24]` **套件标记是可恢复的中间状态**：匹配在配置子品阶段失败时，目标 SKU 可能已出现“复制为套件”。重试前先读目标行；已有按钮就跳过重复标记，直接续配置子品。
 - `[1/2026-07-24]` **纯读取对应表也必须重置筛选和真实页码**：重置搜索下拉会异步重建输入框，必须等待后重新查询 DOM、清空并搜索；随后强制回第 1 页，用 ERP 实时总条数和 pageSize 计算总页数，每次翻页验证 active 页码。禁止依赖 btn-next 禁用状态。
+- `[1/2026-07-24]` **动作依赖不能由 CLI 外层猜测**：`match` 和后置 `check` 只需要 ERP，不能因无关的鲸灵 tab 缺失而阻塞；新增入口前先 trace 目标函数的真实依赖
+- `[1/2026-07-24]` **ERP lock 必须 finally 释放**：任何成功或异常出口都要恢复售后项目；Node 进程长时间不退出时先查锁生命周期
 
 ---
 

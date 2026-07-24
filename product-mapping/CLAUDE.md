@@ -6,7 +6,7 @@
 
 1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
 2. 读 `tasks/todo.md` — 确认当前待办和进度
-3. 确认 Chrome 已打开鲸灵和快麦 ERP 两个标签页
+3. 按命令确认浏览器依赖：首次 `check` 需要鲸灵+ERP；`match` 和后置 `check --reuse-active` 只需要 ERP
 4. 读 `docs/INDEX.md` — 操作规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
 ## 规则文档（渐进式，按需加载）
@@ -14,6 +14,7 @@
 | 文档 | 加载时机 |
 |------|---------|
 | `docs/INDEX.md` | **每次必读**：流程、视觉匹配规则、技术规范、坑位 |
+| `docs/matching-stability.md` | 自动匹配、断点恢复、页面异常时必读：状态机、故障优先级、恢复顺序 |
 
 ## 命令速查
 
@@ -41,7 +42,7 @@ node cli.js targets                                        # 检查浏览器连�
 ## Git 存档规则
 
 改动验证通过后立即 commit + push，不攒到 session 结束。
-暂存：`git add lib/ cli.js docs/ tasks/`
+暂存：`git add AGENTS.md README.md CLAUDE.md SKILL.md lib/ cli.js docs/ tasks/`
 默认不提交：`data/`（sku-records.json / imgs/ / reports/ 等）
 例外：用户明确确认“一轮商品匹配已完成，可以归档”时，`data/sku-records.json` 可单独提交；仍禁止提交 `data/imgs/`、`data/reports/` 等运行时产物。
 
@@ -57,3 +58,5 @@ node cli.js targets                                        # 检查浏览器连�
 | 代码生成后必须自读，清除 placeholder/dead code（如 clickAt(null) 草稿残留） | `../aftersales-automation/docs/INDEX.md #69` |
 
 售后项目参考本项目：el-table clearSelection / 多层 dialog 按钮 / 对应表图片懒加载 → `docs/INDEX.md §6`
+
+商品匹配本项目的连续 SKU、Vue 隐藏选择和中断恢复规则 → `docs/matching-stability.md`

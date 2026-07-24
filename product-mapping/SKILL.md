@@ -24,7 +24,7 @@ entry: cli.js
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
 | `lib/cdp.js` | CDP HTTP proxy 客户端（localhost:3456），fallback 直连 | 写浏览器操作时 |
-| `lib/targets.js` | 查找 ERP 浏览器 tab ID（固定 `1F46BAA...`） | 需要定位 ERP 标签时 |
+| `lib/targets.js` | 查找 ERP 浏览器 tab ID（优先 pinned，失效时按 URL 回退） | 需要定位 ERP 标签时 |
 | `lib/navigate.js` | ERP 页面导航（reload→登录→切tab） | ERP 页面跳转时 |
 | `lib/erp-lock.js` | ERP 操作锁（acquireErpLock/releaseErpLock）暂停 aftersales | 任何 ERP 操作（navigateErp 自动调用） |
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
@@ -52,6 +52,7 @@ entry: cli.js
 | `lib/ops/create-suite.js` | 对应表创建套件 | match 流程 step match |
 | `lib/ops/remap-single.js` | 单品 SKU 重映射 | match 流程 step match |
 | `lib/ops/read-erp-codes.js` | 重新读 ERP 编码验证 | match 流程 step read_erp |
+| `docs/matching-stability.md` | 套件状态机、故障优先级、断点恢复与回归用例 | 自动匹配或排障时 |
 
 ## CORE FLOWS
 
@@ -71,6 +72,7 @@ entry: cli.js
 - 识图必须覆盖本次报告全部 SKU；`verify-table` 出现「无识图数据」表示流程未完成
 - 比对结果必须由脚本精确输出：空识图但 ERP 有明细 = mismatch，有识图但 ERP 无可比明细 = mismatch
 - 档案V2 主商家编码查不到时，先回退「规格商家编码」查询；不能直接判定档案缺失
+- 完成门禁：`recognitionDone == comparisonMatch == SKU总数`，且 mismatch/pending/pendingVisualReview 全为 0
 
 ### 7 步闭环（`lib/match-one.js`，单 SKU）
 
@@ -125,8 +127,9 @@ vm.handleQuery();
 
 ### 对应表操作规则
 
-- **搜索框** (`el-input-popup-editor input`) = **平台规格商家编码**（platformCode）搜索框，填 platformCode → 1行结果；填 productCode（货号）→ 0行
+- **搜索框** (`el-input-popup-editor input`)：当前 ERP 实测按 productCode（货号）搜索有效；2026-05-27 的 platformCode 旧结论已失效。再次 0 行时先做同页 A/B 探针
 - **展开目标行**：用 `tds[6].innerText`（值=productCode）精确匹配后展开
+- **定位目标 SKU**：展开后用子行 `tds[5].innerText` 精确匹配 platformCode
 - **套件标记**：每次只处理一个 SKU，严禁批量勾选整个货号所有子行
 - **图片列 class** 动态变化，逐段滚动（12 步）触发懒加载
 
@@ -146,7 +149,7 @@ visible.querySelector('button.el-button--primary').click();
 |---|------|---------|
 | 1 | ERP 操作前跳过 reload | 必须走完整 `navigateErp()`（reload→登录→切tab→验hash→等mount） |
 | 2 | 档案V2 直接赋值 `window.__sv.searchData` | 必须 DOM 输入法 + dispatch input/change 事件 |
-| 3 | 对应表搜索框填 productCode（货号） | 搜不到（0行）；搜索框是 platformCode 维度，填 platformCode → 1行，再用 `tds[6]`（=productCode）展开 |
+| 3 | 沿用旧文档，按 platformCode 搜对应表 | 当前 ERP 返回 0 行；按 productCode 搜索并用 `tds[6]` 精确展开，字段行为变化时先 A/B 实测 |
 | 4 | 多层弹窗取第一个 footer | 必须遍历 `querySelectorAll` 找 `getBoundingClientRect().height > 0` 的 |
 | 5 | 翻页用按钮状态判断结束 | 必须用"共X条"总数推算总页数 |
 | 6 | 档案V2 查询前未清筛选残留 | 每次档案操作前检查/清空筛选状态 |
@@ -156,6 +159,8 @@ visible.querySelector('button.el-button--primary').click();
 | 10 | recognition 为空但 ERP 有明细时归入 pending | 必须输出 mismatch，不能让 AI 人工兜底替代脚本比较 |
 | 11 | 主商家编码查不到就判定无明细 | 先按规格商家编码回退查询商品档案V2 |
 | 12 | 用户已手动打开列表时仍自动开页/注入账号 | 只读当前页面；自动开页/注入登录态前必须先处理 targetId 绑定边界 |
+| 13 | 只清 DOM checkbox 就认为弹窗已归零 | 同时清 `TableItem.multipleSelection`，并验证“已选择商品：0” |
+| 14 | 中断后从头重复标记套件 | 先识别“复制为套件”中间态，已有则直接续配置子品 |
 
 ## PATHS
 
@@ -164,6 +169,7 @@ data/products/hee/features.json
 data/products/hee/accessories.json
 data/products/hee/sku-map.json
 docs/preflight-brand.md
+docs/matching-stability.md
 lib/archive.js
 lib/auto-match.js
 lib/auto-match2.js

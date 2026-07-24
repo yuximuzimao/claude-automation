@@ -9,16 +9,25 @@
   - 当前运行态仍是 one-brand-per-run：`check` 会自动清空 `data/imgs/`、`data/reports/` 并全量重写 `data/sku-records.json`。
   - 不要为了“已有 KGOS/HEE 两个品牌”主动做 `data/brands/{brand}/` 架构重构；只有出现并行品牌处理、长期保留多品牌运行态、或高频切换且不能接受重跑 `check` 时再启动。
 
-## P1：HEE v2 复核
+- [ ] **按稳定性手册执行状态门禁**
+  - 开始自动匹配或处理中断前读 `docs/matching-stability.md`。
+  - 任一 SKU 写入异常立即停止；先判断 `erpCode` / “复制为套件”中间状态，再恢复。
+  - 最终必须满足全部 SKU `comparisonMatch`，且 mismatch/pending/pendingVisualReview 都为 0。
 
-- [ ] **HEE 品牌建档修复计划（v2）复核**
-  - 历史计划：`~/.claude/plans/linear-percolating-crab.md`。
-  - 当前判断：品牌作用域隔离暂缓，继续使用 one-brand-per-run + `check` 自动清空/全量重写来控制运行态污染。
-  - 复核项只保留真正可能影响下一轮建档质量的内容：
-    - `readCorrespondence` 副作用拆分是否仍需要；
-    - `assertPlatformImageColumn` 断言是否已覆盖当前 ERP 页面；
-    - `validate-brand-archive.js` 验收脚本是否值得保留或补齐；
-    - `docs/preflight-brand.md` / `docs/brand-onboarding.md` 是否覆盖 HEE/KGOS 当前流程。
+## P1：值得在下次相关改动时完成
+
+- [ ] **统一套件页面操作实现**
+  - 触发条件：下一次需要修改 `auto-match2.js`、`mark-suite.js` 或 `ops/create-suite.js` 任一套件流程。
+  - 目标：搜索、单选、hover 标记、中间态恢复、弹窗清理和结果验证只保留一个权威实现。
+  - 原因：相似逻辑分散会造成一处已修、其他入口继续复现旧问题。
+
+- [ ] **补连续状态 live smoke**
+  - 覆盖连续两个组合装、已标记后中断恢复、隐藏选择残留、筛选/页码残留、异常释放 ERP lock。
+  - 不为测试单独制造无业务授权的 ERP 写入；在下一次已确认的真实活动中覆盖。
+
+- [ ] **HEE 品牌建档质量复核**
+  - `readCorrWithoutDownload` 已完成，不再作为待办。
+  - 仍需在下一次 HEE 建档时确认图片列断言、品牌验收脚本价值，以及 preflight/SOP 是否覆盖当前页面。
 
 ## P2：下次实战覆盖项
 
@@ -34,15 +43,11 @@
   - 性质：等待下次单品活动覆盖 remap 路径。
   - 已有套件路径在 2026-05-20 共途/KGOS 39 套件实战中覆盖；后续重点看单品 remap 和断点续跑。
 
-## P3：低优先级技术验证
+## P3：观察后再决定
 
-- [ ] **stop-on-error 实战观察**
-  - 已被 `match` 主流程吸收为“任一 SKU 报错立即停止”原则。
-  - 下次真实错误发生时观察：是否停止、是否保留 done/failed 日志、人工处理后是否必须 `check → match`。
-
-- [ ] **el-table clearSelection() 方案按需验证**
-  - 只有再次出现批量勾选残留、Vue 状态和 DOM 状态不一致时再验证。
-  - 验证通过后再决定是否更新 `auto-match2.js` 或写入 `docs/INDEX.md §6`；没有复现信号时不主动投入。
+- [ ] **特殊订单“提示”弹窗**
+  - 当前 stop-on-error 会在不确定状态下停止，不会自动确认。
+  - 只有该提示再次进入常规活动路径，才纳入自动状态机；单次特例不提前扩展。
 
 ## 已转历史，不再作为当前开发待办
 
@@ -50,6 +55,8 @@
 - [x] **T2 check.js 报告格式验证**：已被当前 check/compare/report 流程吸收；改报告字段时再单独验证。
 - [x] **T3 match 命令可访问**：已成为常规入口；下次实战前按需做 `--limit 0` 连通性 smoke，不列为开发任务。
 - [x] **2026-04 L1/L2 测试基础设施台账**：测试框架、L1 单测、L2 基础设施和已完成页面操作测试均归档，不再占据当前待办主线。
+- [x] **stop-on-error 实战观察**：2026-07-24 澜泽批量中多次异常均在 ERP 最终确认前停止，没有继续写后续 SKU。
+- [x] **Vue 隐藏选择清理**：已验证必须 `clearSelection()` + `updateCheckRows([])` 并等待 watcher 稳定，规则已进入稳定性手册。
 
 ## 长期架构票据
 
