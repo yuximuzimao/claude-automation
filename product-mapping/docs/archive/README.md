@@ -13,4 +13,4 @@
 
 | 归档 | 内容 |
 |---|---|
-| `2026-07-25-lanze-match/` | 澜泽 64 SKU 匹配、九类故障修复、自动核对结果和旧 lessons 快照 |
+| `2026-07-25-lanze-match/` | 澜泽 64 SKU 匹配、九类业务故障修复、自动核对结果、旧 lessons 快照，以及 ChatGPT + CodexPro 操作层记录 |

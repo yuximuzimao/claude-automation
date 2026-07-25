@@ -29,7 +29,7 @@ async function main() {
   node cli.js mark-suite <店铺> <货号> <平台编码> — 对应表标记套件（只处理单个SKU）
   node cli.js download-products --shop <店铺>   — 仅下载平台商品（只需 ERP tab，不需鲸灵）
   node cli.js match-one <货号> --shop <店铺> --brand <品牌> [--from <步骤>] — 单货号匹配
-  node cli.js preview-match                       — 匹配前识图核对表（不展示 ERP 明细）
+  node cli.js preview-match                       — 匹配前最终明细核对表（AI识图+自动配件，不展示 ERP 当前档案）
   node cli.js verify-table                        — 匹配后异常兜底核对表
   node cli.js match --shop <店铺> [--limit N]    — 自动匹配（组合装套件+单品，任何异常立即停止）`);
     process.exit(0);

@@ -13,7 +13,7 @@
 ```text
 Step 0: 清空旧数据工作区
   - 无需手动清空：check 命令开始时自动清空 data/imgs/ 和 data/reports/
-  - 无需手动清空：match 命令开始时自动清空 done[] 和 failed[]
+  - 无需手动清空匹配日志：match 会按店铺+待匹配 platformCode 集合生成 scope；新活动自动重置，同活动中断重跑保留 done[] 进度
   - 无需手动清空：sku-records.json 由 check 全量重写
   - 只需确保 ERP 和鲸灵 Tab 正常打开
 

@@ -37,6 +37,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 | `SKILL.md` | 代码入口和运行时导航 |
 | `docs/INDEX.md` | 完整业务流程与数据契约 |
 | `docs/matching-stability.md` | ERP 状态机、故障优先级和恢复方法 |
+| `docs/chatgpt-codexpro-operations.md` | ChatGPT 通过 CodexPro 操作时的图片桥接、时间边界和本地 Codex 交接 |
 | `docs/preflight-brand.md` | 新品牌建档门禁 |
 
 ## 安全边界

@@ -32,10 +32,10 @@
 ```
 0  jl <账号编号>                         ← 必须先对齐 JL 账号
 ① node cli.js check --shop <店铺> --brand <品牌> ← 首次扫描，品牌只指定这一次
-② 我（Claude）识图                       ← 人工步骤，写入 sku-records.json
+② 当前具备视觉能力的对话模型进行 AI 识图 ← AI 步骤，写入 sku-records.json
 ②.3 node cli.js check --shop <店铺> --reuse-active --skip-download
                                          ← 同一 check；我判断已匹配异常，未匹配是正常待处理
-②.5 node cli.js preview-match           ← 全部 SKU 只展示识图结果，人工确认一次
+②.5 node cli.js preview-match           ← 全部 SKU 展示最终匹配明细（AI 识图+自动配件），由用户确认一次
 ③ node cli.js match --shop <店铺>       ← 自动匹配（异常立即停止）
 ④ node cli.js check --shop <店铺> --reuse-active --skip-download
                                          ← 最终自动核对全部 SKU
@@ -59,23 +59,26 @@
    1.7 【全量重写】sku-records.json（以 ERP 实时对应表为唯一数据源，写入 brand）
    报告输出：recognition + comparisonResult + comparisonDetail 字段
 
-② 我识图:
-   - Read 工具加载 data/imgs/ 中的图片，对照 features.json 规则
-   - 写入 sku-records.json 的 recognition 字段
+② AI 识图:
+   - 由当前具备视觉能力的对话模型对照 `features.json` 判断图片可见商品
+   - 本地执行端若能直接查看图片，可读取 `data/imgs/`；ChatGPT + CodexPro 不能把本地图片像素直接送入视觉通道，必须按 `docs/chatgpt-codexpro-operations.md` 生成联系表并桥接为当前对话附件
+   - 写入 sku-records.json 的 recognition 字段；用户要求当前对话模型完成识图时，OCR/本地视觉模型不得替代该 AI 的识图结论
 
 ②.3 匹配前 check（同一个 check 脚本，由我按阶段判断）:
    - matchedComparisonMatch 必须等于 matchedSkuCount
    - matchedComparisonMismatch 必须为 0；有异常时我只报告具体 SKU 和差异
    - unmatchedAwaitingMatch 是正常待处理，不在此阶段算失败
 
-②.5 preview-match（确认识图后再 match）:
+②.5 preview-match（确认 AI 识图后再 match）:
    - 只读取 sku-records.json
-   - 已匹配和未匹配都只展示图片 + 人工识图结论（含本品牌配件注入）
-   - 不展示 ERP 档案，不让用户重复人工比较
+   - 已匹配和未匹配都展示“最终匹配明细”：`recognition.items` 的 AI 识图商品 + 本品牌自动注入配件
+   - AI 识图商品与配件放在同一张明细表中；配件仅用不同字体颜色标识来源，不能从最终明细中拆除或降级为可选项
+   - 用户核对的是最终将写入 ERP、并在后置 check 中逐项比较的完整商品名称和数量
+   - 不展示 ERP 当前档案，不让用户在匹配前把历史绑定明细误认为识图结果
    - recognition 未覆盖全部 SKU 或品牌缺失/冲突时拒绝生成
 
 ③ match 内部流程:
-   0. 【自动清空】done[] 和 failed[]（新任务，历史记录对本次无意义）
+   0. 按当前店铺和待匹配 platformCode 集合生成任务 scope；scope 变化才清空 done[]/failed[]，同 scope 重跑保留已完成进度并从 ERP 当前中间状态恢复
    - Phase 1: 组合装 → 勾选 → 标记套件 → 逐个复制为套件
    - Phase 2: 单品 → 逐个 remapSku（getTodo 过滤：erpCode=null + 有recognition）
    - 任何错误立即停止（stop-on-error）
@@ -91,13 +94,13 @@
      - 有 recognition 但 ERP 无可比档案明细 = mismatch；若 erpCode 是规格编码，必须先用「规格商家编码」回退查询档案
    - 若有 mismatch，由我先定位并报告异常；用户只处理明确指出的 SKU
 
-⑤ verify-table（可选，流程末尾兜底）:
-   - 读取最新 check 报告，将每个 SKU 的图片与 ERP 档案明细并排展示
+⑤ verify-table（仅最终自动核对异常时使用）:
+   - 读取最新 check 报告，将各 SKU 的图片与 ERP 档案明细并排展示，供人工定位异常；全部自动比对一致时不要求用户重复核对
    - 图片嵌入 base64，HTML 自包含，生成后自动打开浏览器
    - 每次生成前自动清空旧 verify-*.html（与 check 清空 imgs/reports 一致，旧表对下次无用，不保留存档）
    - 用途：核对对比结论，防止识图错误漏过
    - 对比结果用颜色标注：绿色=一致，红色=不一致
-   - **注意**：preview-match（②.5）已在 match 前完成人工确认，verify-table 为可选兜底步骤，正常流程可跳过
+   - **注意**：preview-match（②.5）已在 match 前由用户确认最终匹配明细，verify-table 仅在自动核对异常时使用，正常流程跳过
 ```
 
 **异常处理原则**：
@@ -321,9 +324,9 @@ data/products/
 - `[1/2026-04]` **弹窗操作前未验证弹窗可见**：操作 dialog 内元素前必须先确认 wrapper 的 `getBoundingClientRect().height > 0`，否则操作到隐藏层
 - `[1/2026-04]` **档案V2 查询前筛选残留**：`fetch-archive-names` 等操作会留下"普通商品"筛选，下次 `km-archive` 查组合装时返回 null。`initArchiveComp` 现已加「清空条件」步骤；通用原则：每次档案操作前必须检查/清空筛选状态
 - `[1/2026-04]` **识图颜色规则必须执行**：features.json 记录了体验装口味颜色（浅绿=茉莉，淡黄=青柑），识图时若只看图片文字"黑茶体验装"而不看盒子颜色，会批量识别错误。规则：识图前必须逐条比对 features.json 颜色字段，视觉特征 > 文字标注
-- `[1/2026-04]` **搜索 count 必须精确等于1**：自动匹配时 `count > 0` 宽松匹配会选中套件商品写为子品，早期 260422-73 等因此可能错误。规则：count !== 1 直接报错"名称歧义"，不继续
+- `[1/2026-04，已被 2026-05-08 精确行规则替代]` **不能只用 count > 0 宽松选首行**：早期实现可能把套件商品写为子品。当前规则不是强制 `count===1`，而是在任意结果数下查找某个 td 与完整 ERP 商品名精确相等的行；无精确行才报错
 - `[1/2026-04]` **商品类型下拉不能 UI 点击**：el-select 下拉 input 展开后 portal 在 dialog 外生成，触发 close-on-click-modal 关闭弹窗。正确做法：直接 Vue emit：`vm.$emit("input", value); vm.$emit("change", value)`
-- `[1/2026-04]` **脚本长时间运行用 run_in_background**：`node lib/auto-match2.js` 同步跑时全量 stderr 输出消耗大量 token。正确：`run_in_background: true`，结束后只读 `data/auto-match-log.json` 的 done/failed 数字
+- `[1/2026-04，执行端相关]` **长脚本不要占用受限前台调用**：本地 Codex 或支持后台会话的本地工具可用后台运行并通过 `auto-match-log.json` 监控；ChatGPT + CodexPro 没有可承诺持续运行的后台任务，单次前台调用还有时间上限，应把长批量交给本地 Codex，见 `docs/chatgpt-codexpro-operations.md`
 - `[∞/永久保留]` **#48 读表数据用<th>表头定位，禁用正则/长度过滤**：子品弹窗表读取必须通过 `<th>` 表头文本（"商品名称"/"商家编码"/"组合比例"）定位列索引。禁止硬编码固定位置 [1][3][10]，禁止对 specCode/name 做正则匹配过滤——会把非数字编码（kgoxnld等）合法行当垃圾误杀。
 - `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
 - `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
@@ -334,7 +337,7 @@ data/products/
 - `[1/2026-05-13]` **ensureCorrPage 跳过 reload 导致残留 dialog 叠加超时**：`ensureCorrPage` 检测到 hash 已匹配时跳过 reload，仅清空搜索框。若前一次操作（如手动 inspect）留有未关闭 dialog，新 download dialog 叠加在顶层但 gone 检测（等所有 dialog 消失）永远不通过，导致 60s 超时。根治：download 操作前必须用 `navigateErp()`（强制 full reload），不能用 `ensureCorrPage`。
 - `[1/2026-05-13]` **店铺侧边栏匹配必须用 .includes()，不能用 ===**：ERP 侧边栏文字是「百浩创展」，传入 shopName「百浩」，`===` 精确匹配失败。所有操作 ERP 店铺侧边栏的代码一律用 `.includes(shopName)`，禁止 `===`（已修复 copy-as-suite/mark-suite/create-suite/read-erp-codes/read-skus/remap-sku 共 6 个文件）
 - `[1/2026-05-13，2026-07-25 加品牌门禁]` **check 必须全量重写 sku-records，不能 patch**：旧 patch 逻辑导致 erpCode=null 的已匹配 SKU 被 getTodo() 误判为未匹配。check 结束时以 ERP 实时对应表数据全量重写；只有旧记录 brand 与本轮一致时才保留 recognition，防止同 platformCode 跨品牌串数据。
-- `[1/2026-05-13]` **match 任务开始时必须清空 done[] 和 failed[]**：旧 done[] 里的 platformCode 对新活动无效，留着只会误过滤 getTodo()；failed[] 历史错误干扰本次统计排查。两者均已在 auto-match2.js main() 开头自动清空。
+- `[1/2026-05-13，2026-07-25 改为 scope 门禁]` **新活动必须清理旧匹配进度，同活动重跑必须保留进度**：`auto-match2.js` 以店铺和当前待匹配 platformCode 集合生成 scope；scope 变化才清空 done[]/failed[]，同 scope 中断恢复继续跳过已完成项
 - `[1/2026-06-26]` **单品 erpCode 可能是规格商家编码，不是主商家编码**：商品档案V2按「主商家编码」查不到时，不能直接判定档案未录入；必须回退到「规格商家编码」精确查询。百浩悦希本次已确认 3 个特殊单品：`yxr-1` erpCode `6940079096228` → 主商家编码 `yx005`（悦希舒缓焕颜精华乳100ml）；`yxs-1` erpCode `6940079096211` → 主商家编码 `yx004`（悦希舒缓焕颜精粹水100ml）；`yxjm-1` erpCode `6975183893203` → 主商家编码 `yx003`（悦希氨基酸表活焕颜洁面膏100g）。
 - `[1/2026-06-26]` **comparisonPending 不能掩盖脚本缺陷**：全量识图完成后，正常核对报告应当 `recognitionDone == SKU数` 且 `comparisonPending == 0`。若 recognition 为空但 ERP 有明细，脚本必须输出 mismatch；若有 recognition 但 ERP 无明细，先检查是否需要规格编码回退，仍无明细才输出 mismatch。
 - `[2/2026-05-22]` **首次 check 前必须对齐 JL 账号**：`--shop 共途` 只控制 ERP 端查哪张对应表，JL 当前页面决定抓哪家店的活动商品。用户已手动打开并确认正确页面时直接只读；否则先查 `sessions/accounts.json` 再按安全边界切换账号。`match` 和后置 `check --reuse-active` 不需要 JL。

@@ -6,8 +6,9 @@
 
 1. **读 `SKILL.md`** — 运行时上下文入口，禁止跳过。禁止先 grep / glob / smart_search 再回来读
 2. 读 `tasks/todo.md` — 确认当前待办和进度
-3. 按命令确认浏览器依赖：首次 `check` 需要鲸灵+ERP；`match` 和后置 `check --reuse-active` 只需要 ERP
-4. 读 `docs/INDEX.md` — 操作规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
+3. 若当前由 ChatGPT 通过 CodexPro 操作，先读 `docs/chatgpt-codexpro-operations.md`，提前确定图片桥接和长任务交接方式
+4. 按命令确认浏览器依赖：首次 `check` 需要鲸灵+ERP；`match` 和后置 `check --reuse-active` 只需要 ERP
+5. 读 `docs/INDEX.md` — 操作规则，按需加载（SKILL.md 的 DO FIRST 会告诉你看什么）
 
 ## 规则文档（渐进式，按需加载）
 
@@ -15,6 +16,7 @@
 |------|---------|
 | `docs/INDEX.md` | **每次必读**：流程、视觉匹配规则、技术规范、坑位 |
 | `docs/matching-stability.md` | 自动匹配、断点恢复、页面异常时必读：状态机、故障优先级、恢复顺序 |
+| `docs/chatgpt-codexpro-operations.md` | 仅 ChatGPT + CodexPro 模式必读：图片桥接、有限前台时长（本轮 180 秒）、target 刷新和本地 Codex 交接 |
 
 ## 命令速查
 
@@ -24,7 +26,7 @@ node cli.js match-batch --shop <店铺>                      # 批量匹配
 node cli.js check --shop <店铺> --brand <品牌>             # 首次核查（品牌必填，扫描+下载+生成报告）
 node cli.js check --shop <店铺> --reuse-active --skip-download # 匹配后核查（复用已确认范围，不下载平台商品）
 node cli.js match --shop <店铺> [--limit N]                # 自动匹配（组合装套件+单品，异常停止）
-node cli.js verify-table                                   # 生成识图核对表 HTML（流程末尾人工兜底核对）
+node cli.js verify-table                                   # 仅自动核对异常时生成图片+ERP明细人工诊断表
 node cli.js targets                                        # 检查浏览器连通性
 ```
 

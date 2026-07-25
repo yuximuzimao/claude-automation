@@ -1,7 +1,8 @@
 # 2026-07-24～2026-07-25 澜泽商品匹配归档
 
-> 这是一次实战证据归档，不是当前运行手册。当前规则以
-> `docs/matching-stability.md`、`docs/INDEX.md` 和代码为准。
+> 这是一次实战证据归档，不是当前运行手册。当前业务规则以
+> `docs/matching-stability.md`、`docs/INDEX.md` 和代码为准；ChatGPT + CodexPro 的操作层边界见
+> `docs/chatgpt-codexpro-operations.md`，本轮原始记录见 `chatgpt-codexpro-session.md`。
 
 ## 范围与结果
 
@@ -41,12 +42,13 @@
 4. 套件操作分散在多个实现中，一处修复不会自动传播到所有入口。
 5. ERP 前端行为会变化。2026-05-27 的搜索字段观察与本轮实测相反，历史经验必须服从当前页面证据。
 
-stop-on-error 在本轮发挥了正确作用：每次异常都发生在最终 ERP 确认前，批量立即停止，没有把不确定状态当成功继续写。
+stop-on-error 在本轮记录到的异常中发挥了正确作用：异常 SKU 没有被当作成功继续执行后续项。该结论只描述本轮证据，不代表未来所有异常都会自动回滚；中断后仍必须回读 `erpCode`、“复制为套件”和弹窗内部状态。
 
 ## 验证证据
 
-- `data/auto-match-log.json` 当轮结果：`doneCount=50`、`failedCount=0`。
-- 后置 check：20 个产品全部完全匹配，64 个 SKU 全部识图完成且自动比对一致。
+- 冻结结果见 `result-summary.json`：当轮 `doneCount=50`、`failedCount=0`；后置 check 为 20 个产品全部完全匹配，64 个 SKU 全部识图完成且自动比对一致。
+- 原始来源是当轮 `data/auto-match-log.json` 和 `data/reports/check-澜泽-2026-07-24.json`，其 SHA-256 已写入快照。
+- **兼容性警告**：源 report 和 sku-records 生成于品牌门禁完全落地前，缺少 `brand` 字段，只能作为历史证据，不能直接供当前 `--reuse-active` 或 `preview-match` 续跑。
 - 快速测试：L1-safe-write、L1-annotate、L1-match-one-logic 各 3 次，共 9/9 通过。
 - 比较测试：`node --test test/compare.test.js`，3/3 通过。
 - 语法检查与 `git diff --check` 通过。

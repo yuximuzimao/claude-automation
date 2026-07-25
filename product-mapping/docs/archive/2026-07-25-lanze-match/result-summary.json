@@ -1,0 +1,39 @@
+{
+  "archive": "2026-07-24～2026-07-25 澜泽商品匹配",
+  "shop": "澜泽",
+  "brand": "kgos",
+  "activity": {
+    "productCount": 20,
+    "skuCount": 64,
+    "originallyMatchedSkuCount": 14,
+    "newlyMatchedSkuCount": 50,
+    "newSuiteCount": 41,
+    "newSingleCount": 9
+  },
+  "autoMatch": {
+    "doneCount": 50,
+    "failedCount": 0,
+    "source": "data/auto-match-log.json",
+    "sourceSha256": "a9332813bcbc09ec8f0c4f0c562f855a9920ea36c2d24ceda8b5c9f7f412b137"
+  },
+  "postCheck": {
+    "checkTime": "2026-07-24T16:03:50.694Z",
+    "fullyMatchedProducts": 20,
+    "partiallyMatchedProducts": 0,
+    "fullyUnmatchedProducts": 0,
+    "recognitionDone": 64,
+    "comparisonMatch": 64,
+    "comparisonMismatch": 0,
+    "comparisonPending": 0,
+    "pendingVisualReview": 0,
+    "source": "data/reports/check-澜泽-2026-07-24.json",
+    "sourceSha256": "a11f28abd4909552d7edfdd5175fcc520fc5af73249290f2529029e9fb65f2eb"
+  },
+  "compatibility": {
+    "historicalEvidenceOnly": true,
+    "sourceReportHasBrandField": false,
+    "sourceSkuRecordsHaveBrandField": false,
+    "recognitionSourceTerminologyNormalized": "2026-07-25 将‘当前模型人工目视’统一更正为‘当前对话模型AI识图’，未改变任何识图商品、数量或比较结果",
+    "note": "brand=kgos 来自本轮已确认活动上下文。源运行时文件生成于品牌门禁完全落地之前，不能直接作为当前 --reuse-active 或 preview-match 输入；需要按当前代码重新运行首次 check --brand kgos。"
+  }
+}

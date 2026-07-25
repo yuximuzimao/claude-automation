@@ -13,6 +13,7 @@ entry: cli.js
 4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
 5. **写操作（新增匹配）必须人工确认后执行**
 6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
+7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
 
 ## ENTRY MAP
 
@@ -31,8 +32,8 @@ entry: cli.js
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
 | `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
-| `lib/preview-match.js` | 匹配前识图核对 HTML（全部 SKU 只展示人工识图结论） | 识图完成后、match 前生成核对表时 |
-| `lib/verify-table.js` | 识图核对表 HTML 生成（图片+ERP明细一一对应） | 流程末尾人工兜底核对时 |
+| `lib/preview-match.js` | 匹配前最终明细核对 HTML（AI 识图商品 + 自动注入配件同表展示，配件变色） | 识图完成后、match 前生成核对表时 |
+| `lib/verify-table.js` | 图片+ERP明细诊断表 HTML 生成 | 最终自动核对出现异常、需要人工定位时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
 | `lib/jl-sku-detail.js` | 鲸灵 SKU 详情读取 | 查单个 SKU 时 |
 | `lib/auto-match.js` | 自动批量匹配 v1 | —（历史版本） |
@@ -54,6 +55,7 @@ entry: cli.js
 | `lib/ops/remap-single.js` | 单品 SKU 重映射 | match 流程 step match |
 | `lib/ops/read-erp-codes.js` | 重新读 ERP 编码验证 | match 流程 step read_erp |
 | `docs/matching-stability.md` | 套件状态机、故障优先级、断点恢复与回归用例 | 自动匹配或排障时 |
+| `docs/chatgpt-codexpro-operations.md` | ChatGPT + CodexPro 专属运行边界与图片桥接 | 通过 CodexPro 连接本地工作区时 |
 
 ## CORE FLOWS
 
@@ -61,9 +63,9 @@ entry: cli.js
 
 ```
 ① check --shop <店铺> --brand <品牌> → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
-② 识图（Claude 手动）      → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
+② AI 识图（当前具备视觉能力的对话模型） → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
 ②.3 check --reuse-active --skip-download → 同一 check 输出；AI 核对已匹配 SKU，未匹配视为正常待处理
-②.5 preview-match          → 全部 SKU 只展示识图结论，人工确认一次 (anchor: main in preview-match.js)
+②.5 preview-match          → 全部 SKU 展示最终匹配明细（AI 识图 + 自动配件同表，配件变色），由用户确认一次 (anchor: main in preview-match.js)
 ③ match --shop <店铺>      → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
 ④ check --shop <店铺> --reuse-active --skip-download → 最终自动对比 (anchor: runCheck)
 ```
@@ -85,7 +87,7 @@ download → read_skus → recognize → annotate → match → read_erp → ver
 (anchor: downloadProducts, readSkus, annotate, remapSingle, createSuite, readErpCodes, verifyArchive)
 ```
 
-- `recognize` 步骤由 Claude 手动执行，脚本到此暂停（**只识图片可见商品，不识配件**）
+- `recognize` 步骤由当前具备视觉能力的对话模型执行 AI 识图，脚本到此暂停（**只识图片可见商品，不识配件**）；ChatGPT + CodexPro 模式按 `docs/chatgpt-codexpro-operations.md` 桥接本地图片
 - `annotate` 步骤自动注入不可见配件（读 `data/products/{brand}/accessories.json`）
 - 支持 `--from annotate` 从中间步骤续跑；`--brand <品牌>` 必须明确指定，断点续跑时与记录品牌不一致会停止
 - `stage` 状态机：`skus_read → images_done → annotated → matched → verified`
@@ -158,7 +160,7 @@ visible.querySelector('button.el-button--primary').click();
 | 5 | 翻页用按钮状态判断结束 | 必须用"共X条"总数推算总页数 |
 | 6 | 档案V2 查询前未清筛选残留 | 每次档案操作前检查/清空筛选状态 |
 | 7 | 识图不看 features.json 颜色字段 | 颜色规则优先级高于图片文字标注 |
-| 8 | 搜索 count > 0 宽松匹配 | `count !== 1` 必须报错"名称歧义"，防止套件写为子品 |
+| 8 | 搜索结果只看数量或首行 | 多结果时必须找到某个 td 与完整 ERP 商品名精确相等；无精确行才报错，不能把合法的子串多结果误判为歧义 |
 | 9 | 只识别未匹配 SKU | 全量识图，已匹配 SKU 也必须有 recognition 才能核对 |
 | 10 | recognition 为空但 ERP 有明细时归入 pending | 必须输出 mismatch，不能让 AI 人工兜底替代脚本比较 |
 | 11 | 主商家编码查不到就判定无明细 | 先按规格商家编码回退查询商品档案V2 |

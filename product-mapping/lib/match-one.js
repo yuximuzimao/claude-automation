@@ -93,7 +93,7 @@ async function matchOne(erpId, jlId, shopName, productCode, opts = {}) {
       console.error(`[match-one] SKU 数: ${r.data.skuCount}`);
     }
 
-    // 步骤 2：识图（暂停，由 Claude 手动执行）
+    // 步骤 2：识图（暂停，由当前具备视觉能力的对话模型人工执行）
     if (startIdx <= 2) {
       const data = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
       const pendingSkus = Object.values(data.skus).map(s => ({

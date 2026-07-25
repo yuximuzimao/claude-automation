@@ -5,9 +5,11 @@
  * WHY: match 是写操作，执行前需确认识图结论无误；已匹配项同时复核
  *
  * 输出两部分（卡片格式与 verify-table 一致）：
- *   Part 1 已匹配 — 图片 + 人工识图结论（来自 sku-records recognition）
- *   Part 2 待匹配 — 图片 + 人工识图结论（来自 sku-records recognition）
- * ERP 档案数据只用于区分绑定状态，不得替代人工识图明细。
+ *   Part 1 已匹配 — 图片 + 最终匹配明细
+ *   Part 2 待匹配 — 图片 + 最终匹配明细
+ * 最终匹配明细 = AI 识图结果（sku-records recognition）+ 自动注入配件。
+ * 配件与识图商品必须放在同一明细表中，只用字体颜色区分来源；两者都属于最终匹配和自动核对范围。
+ * ERP 档案数据只用于区分绑定状态，不得替代已确认的最终匹配明细。
  *
  * 生命周期：每次生成时清空旧 preview-match-*.html
  */
@@ -33,19 +35,37 @@ function esc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/** 识图明细统一渲染：已匹配和待匹配都必须以 recognition 为准 */
-function renderRecognitionRows(sku, brand) {
-  if (!sku.recognition || !Array.isArray(sku.recognition.items) || sku.recognition.items.length === 0) {
-    return `<tr><td class="c-name" style="color:#aaa">识图未填写</td><td class="c-qty"></td></tr>`;
+/** 渲染最终匹配明细行；配件只通过字体颜色区分来源 */
+function renderItemRows(items, rowClass = '', emptyText = '') {
+  if (!Array.isArray(items) || items.length === 0) {
+    return emptyText
+      ? `<tr><td class="c-name empty-row">${esc(emptyText)}</td><td class="c-qty"></td></tr>`
+      : '';
   }
-  const resolved = resolveItems(sku.platformCode, sku.recognition.items, brand);
-  return resolved.map(it =>
-    `<tr><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
+  const classAttr = rowClass ? ` class="${rowClass}"` : '';
+  return items.map(it =>
+    `<tr${classAttr}><td class="c-name">${esc(it.name)}</td><td class="c-qty">×${it.qty}</td></tr>`
   ).join('');
 }
 
+/** 最终匹配明细 = AI 识图商品 + 自动注入配件，全部进入同一张核对表 */
+function getPreviewDetails(sku, brand) {
+  const recognitionItems = sku.recognition?.items || [];
+  const visibleNames = new Set(recognitionItems.map(item => item.name));
+  const accessoryItems = resolveItems(sku.platformCode, recognitionItems, brand)
+    .filter(item => !visibleNames.has(item.name));
+  return {
+    recognitionItems,
+    accessoryItems,
+    finalRows: [
+      renderItemRows(recognitionItems, 'recognition-row', 'AI 识图未填写'),
+      renderItemRows(accessoryItems, 'accessory-row'),
+    ].join(''),
+  };
+}
+
 /** 渲染单张卡片（与 verify-table 同款布局） */
-function renderCard(sku, detailRows, badgeClass, badgeText) {
+function renderCard(sku, details, badgeClass, badgeText) {
   const imgSrc = imgDataUri(sku.platformCode);
   return `
   <div class="card">
@@ -64,8 +84,11 @@ function renderCard(sku, detailRows, badgeClass, badgeText) {
           : '<div class="no-img">无图片</div>'}
       </div>
       <div class="info-col">
-        <div class="detail-label">人工识图结果</div>
-        <table class="detail-table">${detailRows}</table>
+        <div class="detail-label">最终匹配明细（AI 识图 + 自动注入配件）</div>
+        <table class="detail-table">${details.finalRows}</table>
+        ${details.accessoryItems.length
+          ? '<div class="detail-note"><span class="accessory-swatch"></span>棕色文字为自动注入配件，和 AI 识图商品一样必须参与最终匹配与核对</div>'
+          : ''}
       </div>
     </div>
   </div>`;
@@ -94,14 +117,14 @@ function main() {
     (rec.erpCode ? matched : unmatched).push(rec);
   }
 
-  // ── Part 1：已匹配项，主明细仍然只展示人工识图结果 ──
+  // ── Part 1：已匹配项，展示最终匹配明细（AI 识图 + 自动注入配件） ──
   const matchedCards = matched.map(sku =>
-    renderCard(sku, renderRecognitionRows(sku, brand), 'cmp-ok', '✓ 已匹配')
+    renderCard(sku, getPreviewDetails(sku, brand), 'cmp-ok', '✓ 已匹配')
   ).join('\n');
 
-  // ── Part 2：待匹配项，同样展示人工识图结果 ──
+  // ── Part 2：待匹配项，同样展示最终匹配明细 ──
   const unmatchedCards = unmatched.map(sku =>
-    renderCard(sku, renderRecognitionRows(sku, brand), 'cmp-pending', '⏳ 待匹配')
+    renderCard(sku, getPreviewDetails(sku, brand), 'cmp-pending', '⏳ 待匹配')
   ).join('\n');
 
   // ── 拼 HTML（样式与 verify-table 保持一致） ──
@@ -143,11 +166,15 @@ h1 { font-size: 20px; margin-bottom: 4px; }
 .no-img { color: #bbb; font-size: 16px; }
 .info-col { flex: 1; padding: 24px 28px; min-width: 0; }
 .detail-label { color: #64748b; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.detail-note { margin-top: 10px; color: #8a5a00; font-size: 12px; line-height: 1.5; }
+.accessory-swatch { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: #9a6700; }
 
 .detail-table { width: 100%; border-collapse: collapse; }
 .detail-table td { padding: 8px 0; border-bottom: 1px solid #ccc; }
 .detail-table .c-name { font-size: 18px; font-weight: 700; word-break: break-all; }
 .detail-table .c-qty { width: 64px; text-align: right; font-weight: 700; font-size: 22px; white-space: nowrap; padding-left: 16px; }
+.detail-table .accessory-row td { color: #9a6700; }
+.detail-table .empty-row { color: #aaa; }
 
 @media (max-width: 900px) {
   .card-body { flex-direction: column; }
@@ -194,4 +221,4 @@ ${unmatchedCards}
   return { path: outPath, name: outName, brand, matched: matched.length, unmatched: unmatched.length };
 }
 
-module.exports = { main };
+module.exports = { main, getPreviewDetails };
