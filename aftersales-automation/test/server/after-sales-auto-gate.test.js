@@ -5,7 +5,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
+const {
+  proveRefundOnlyUnshipped,
+  shouldAutoExecute,
+} = require('../../lib/server/after-sales-auto-gate');
 
 function exactCollectedData(reason = '七天无理由退货（不喜欢/不合适）') {
   return {
@@ -39,6 +42,45 @@ function approveDecision(overrides = {}) {
     rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '逐商品对比通过→同意退款' }],
     ...overrides,
   };
+}
+
+function refundOnlyUnshippedData(reason = '多拍/拍错/不想要') {
+  return {
+    ticket: {
+      afterSaleReason: reason,
+      returnTracking: '',
+      subOrders: [{ id: 'MAIN-1' }, { id: 'MAIN-2' }],
+      gifts: [{ id: 'GIFT-1' }],
+    },
+    erpSearches: [
+      {
+        subOrderId: 'MAIN-1',
+        rows: { rows: [{ status: '待审核', tracking: null, trackings: [], platformOrderIds: ['MAIN-1'] }] },
+      },
+      {
+        subOrderId: 'MAIN-2',
+        rows: { rows: [{ status: '待发货', tracking: null, trackings: [], platformOrderIds: ['MAIN-2'] }] },
+      },
+    ],
+    giftErpSearches: [{
+      subOrderId: 'GIFT-1',
+      rows: { rows: [{ status: '待打印快递单', tracking: null, trackings: [], platformOrderIds: ['GIFT-1'] }] },
+    }],
+    logistics: { packages: [{ text: '查看物流\n暂无信息\n关闭' }] },
+    erpLogistics: { results: [{ tracking: '', logisticsText: '暂无物流信息' }] },
+    collectErrors: [
+      'product-detail: 跳过（工单类型=仅退款，无需核对商品明细）',
+      'erp-aftersale: 无退货快递单号，跳过',
+    ],
+  };
+}
+
+function refundOnlyDecision(overrides = {}) {
+  return approveDecision({
+    reason: '主商品+赠品均未发货（无快递单号）',
+    rulesApplied: [{ doc: 'flow-5.2', section: 'Step4', summary: '主商品+赠品未发货→同意退款' }],
+    ...overrides,
+  });
 }
 
 test('只允许七天无理由退货的严格精确退回分支自动执行', () => {
@@ -110,18 +152,49 @@ test('人工 hint 覆盖的同意决定永远不能进入自动门禁', () => {
   ), false);
 });
 
-test('旧置信文件的 auto 状态不参与新门禁', () => {
-  const refundOnlyDecision = {
-    action: 'approve',
-    reason: '全部未发货',
-    rulesApplied: [{ doc: 'flow-5.2', section: 'Step4', summary: '主商品+赠品未发货→同意退款' }],
-    warnings: [],
-  };
+test('多拍拍错仅退款的主品和赠品均严格证明未发货时允许自动执行', () => {
+  const data = refundOnlyUnshippedData();
+
+  assert.equal(proveRefundOnlyUnshipped(data), true);
+  assert.equal(shouldAutoExecute(refundOnlyDecision(), data, { type: '仅退款' }), true);
+});
+
+test('相同未发货分支的其他售后原因没有授权，仍保持人工', () => {
+  const data = refundOnlyUnshippedData('拒收');
+
+  assert.equal(shouldAutoExecute(refundOnlyDecision(), data, { type: '仅退款' }), false);
+});
+
+test('任一赠品搜索缺失、平台交易号不匹配或出现运单时禁止自动执行', () => {
+  const missingGift = refundOnlyUnshippedData();
+  missingGift.giftErpSearches = [];
+  assert.equal(proveRefundOnlyUnshipped(missingGift), false);
+
+  const wrongOrder = refundOnlyUnshippedData();
+  wrongOrder.erpSearches[1].rows.rows[0].platformOrderIds = ['OTHER'];
+  assert.equal(proveRefundOnlyUnshipped(wrongOrder), false);
+
+  const tracked = refundOnlyUnshippedData();
+  tracked.giftErpSearches[0].rows.rows[0].tracking = 'TRACK-1';
+  assert.equal(proveRefundOnlyUnshipped(tracked), false);
+});
+
+test('出现额外采集错误或鲸灵侧存在ERP行外运单时禁止自动执行', () => {
+  const collectError = refundOnlyUnshippedData();
+  collectError.collectErrors.push('erp-search: 子订单 MAIN-2 读取失败');
+  assert.equal(proveRefundOnlyUnshipped(collectError), false);
+
+  const jlTracking = refundOnlyUnshippedData();
+  jlTracking.logistics.packages[0].text = '物流单号：TRACK-OUTSIDE-ERP';
+  assert.equal(proveRefundOnlyUnshipped(jlTracking), false);
+});
+
+test('旧决定只有分支文案但没有逐子订单证明时仍禁止自动执行', () => {
   const refundOnlyData = {
     ticket: { afterSaleReason: '多拍/拍错/不想要' },
   };
 
-  assert.equal(shouldAutoExecute(refundOnlyDecision, refundOnlyData, { type: '仅退款' }), false);
+  assert.equal(shouldAutoExecute(refundOnlyDecision(), refundOnlyData, { type: '仅退款' }), false);
 });
 
 test('所有生产自动执行入口都使用新分支门禁，不再读取旧置信模块', () => {

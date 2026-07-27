@@ -3,8 +3,9 @@
 const crypto = require('crypto');
 const { proveReturnItems } = require('../return-item-proof');
 
-const ENABLED_AFTER_SALE_REASONS = new Set([
-  '七天无理由退货（不喜欢/不合适）',
+const ENABLED_AUTOMATION_CASES = new Set([
+  'refund_return.received.exact.approve\u0000七天无理由退货（不喜欢/不合适）',
+  'refund_only.unshipped.approve\u0000多拍/拍错/不想要',
 ]);
 
 const BRANCHES = Object.freeze({
@@ -357,8 +358,7 @@ function classifySimulation(simulation, queueItem = {}) {
   }
 
   const branch = BRANCHES[branchId];
-  const enabled = branchId === 'refund_return.received.exact.approve'
-    && ENABLED_AFTER_SALE_REASONS.has(String(reason));
+  const enabled = ENABLED_AUTOMATION_CASES.has(`${branchId}\u0000${String(reason)}`);
   return {
     registered: true,
     caseId: `${branchId}.${stableToken(reason)}`,
@@ -522,6 +522,7 @@ function summarizeHistory({
 
 module.exports = {
   BRANCHES,
+  ENABLED_AUTOMATION_CASES,
   REGISTERED_RULE_SUMMARIES,
   classifySimulation,
   redactNote,

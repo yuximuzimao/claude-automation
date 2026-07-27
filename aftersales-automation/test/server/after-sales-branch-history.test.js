@@ -122,6 +122,37 @@ test('相同最终分支但售后原因不同，必须使用不同 caseId', () =
   assert.equal(trial.automationStatus, 'candidate');
 });
 
+test('仅开放多拍拍错的主品赠品均未发货分支，其他原因保持候选', () => {
+  const makeRefundOnlySimulation = afterSaleReason => ({
+    collectedData: { ticket: { afterSaleReason } },
+    decision: {
+      action: 'approve',
+      reason: '主商品+赠品均未发货（无快递单号）',
+      warnings: [],
+      rulesApplied: [{
+        doc: 'flow-5.2',
+        section: 'Step4',
+        summary: '主商品+赠品未发货→同意退款',
+      }],
+    },
+  });
+
+  const enabled = classifySimulation(
+    makeRefundOnlySimulation('多拍/拍错/不想要'),
+    { type: '仅退款' },
+  );
+  const candidate = classifySimulation(
+    makeRefundOnlySimulation('拒收'),
+    { type: '仅退款' },
+  );
+
+  assert.equal(enabled.branchId, 'refund_only.unshipped.approve');
+  assert.equal(enabled.automationStatus, 'enabled');
+  assert.equal(candidate.branchId, 'refund_only.unshipped.approve');
+  assert.equal(candidate.automationStatus, 'candidate');
+  assert.notEqual(enabled.caseId, candidate.caseId);
+});
+
 test('无法识别的旧结果明确列为未登记，不得猜测或允许自动处理', () => {
   const result = classifySimulation(makeSimulation({ noRule: true }), { type: '退货退款' });
 
