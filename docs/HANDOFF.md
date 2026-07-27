@@ -11,7 +11,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 ## 系统级配置（Codex 启动时注意）
 
-- **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`。Codex **不需要**再调度或触发备份任务——这事已经不走大模型。
+- **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认按时间保留 8 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
 - **claude-mem**：已完全卸载（2026-07-15）。hooks 清空、插件禁用、数据已删除。Codex 无需关心 claude-mem 相关状态。
 - **Codex ↔ Claude 协作**：handoff 协议（inbox.json）照常运作，不受上述变更影响。
 

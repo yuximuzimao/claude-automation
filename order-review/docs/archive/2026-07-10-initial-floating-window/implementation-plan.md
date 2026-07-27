@@ -1,6 +1,6 @@
 # Order Review Floating Window Implementation Plan
 
-> Archived on 2026-07-10. This plan has been completed and is kept only as implementation history. Current design and operating notes live in `../../2026-07-09-order-review-floating-window-design.md`, `../../../README.md`, and `../../../AGENTS.md`.
+> Archived on 2026-07-10. This plan has been completed and is kept only as implementation history. Current direction and operating notes live in `../../2026-07-22-approximate-recommendation-direction.md`, `../../../README.md`, and `../../../AGENTS.md`; the completed package-plan requirements are archived at `../2026-07-22-package-plan/requirements.md`.
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
