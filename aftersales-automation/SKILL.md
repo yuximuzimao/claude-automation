@@ -51,7 +51,7 @@ entry: cli.js
 | `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
-| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1/A2 固定清单逐单生产编排**：固定 48h 清单，逐单打开详情 tab，target-aware 采集，inferDecision，shouldAutoExecute + executionJournal 安全门，命中后真实 approve/reject，否则写回待确认/等待重查 | 改 fixed-batch 生产链路、自动执行门禁或写回语义时 |
+| `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1/A2 固定清单逐单生产编排**：固定 48h 清单，逐单打开详情 tab，target-aware 采集，inferDecision，shouldAutoExecute + executionJournal 安全门；当前命中后只会自动 approve，否则写回待确认/等待重查 | 改 fixed-batch 生产链路、自动执行门禁或写回语义时 |
 | `lib/jl/target-aware-collector.js` | **当前 A1/A2 生产采集入口**：显式绑定 JL 详情 tab 和 ERP tab；只解决 targetId-aware 采集，不替代原系统持久化/状态流转 | 与步骤 14 和后端入口一起审阅 |
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
@@ -90,7 +90,7 @@ entry: cli.js
 1. `openAccountFlow`：tab 数量门 → 实时店铺匹配 → 复用或清理验证后注入。
 2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
-4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门时会真实 approve/reject，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
+4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
    - `openAccountFlow` → `prepareAfterSaleList`（仅导航+排序，不读全量列表）→ `locateWorkOrderOnFreshList` → `clickWorkOrderAction` → 执行决策（approve/reject/escalate）或 `collectTicketTargetAware` + `inferDecision`。
    - 换货/商责的“必须人工确认”只阻断扫描中的无人自动执行，不移除单笔或人工发起的批量执行入口。严格退回核验通过且有明确动作时设置 `humanTriggeredExecutionAllowed: true`；核验异常、缺少依据或没有确定动作时不得进入批量 approve/reject。
