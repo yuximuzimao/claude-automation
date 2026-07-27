@@ -255,6 +255,13 @@ async function checkLogin(targetId) {
   return typeof raw === 'string' ? JSON.parse(raw) : raw;
 }
 
+function invalidateSessionCache(targetId) {
+  const cache = loadSessionCache();
+  if (!Object.prototype.hasOwnProperty.call(cache, targetId)) return;
+  delete cache[targetId];
+  saveSessionCache(cache);
+}
+
 // ============================================================
 // 登录恢复
 // 场景 A: Session 超时弹窗（.inner-login-wrapper）→ 勾协议 + 点登录
@@ -457,6 +464,37 @@ async function navigateErp(targetId, pageName) {
   saveSessionCache(cache);
 }
 
+// 强制重建 ERP 页面状态。
+// 用于定时扫描前 readiness，以及搜索读到空条件默认列表后的单次恢复。
+async function forceReloadErpPage(targetId, pageName) {
+  if (!PAGE_MAP[pageName]) {
+    throw new Error(`未知页面: ${pageName}，可用: ${Object.keys(PAGE_MAP).join(', ')}`);
+  }
+
+  await cdp.eval(targetId, CLOSE_ALL_DIALOGS_JS);
+  await cdp.reload(targetId);
+  invalidateSessionCache(targetId);
+  // ERP 的 session 失效浮层可能晚于 loadEventFired 挂载；过早检查会把旧 title/hash
+  // 误判为已登录。保留固定 3 秒观察窗，再进入结构化轮询。
+  await sleep(3000);
+
+  let status = null;
+  for (let i = 0; i < 20; i++) {
+    try {
+      status = await checkLogin(targetId);
+      if (status.loggedIn || status.sessionExpired || (status.url && status.url.includes('login'))) break;
+    } catch {}
+    await sleep(500);
+  }
+  if (!status) status = await checkLogin(targetId);
+  if (!status.loggedIn) await recoverLogin(targetId);
+
+  await navigateErp(targetId, pageName);
+  const finalStatus = await checkLogin(targetId);
+  if (!finalStatus.loggedIn) throw new Error(`ERP 强制刷新后登录状态无效: ${pageName}`);
+  return { page: pageName, hash: PAGE_MAP[pageName], reloaded: true };
+}
+
 // ============================================================
 // erpNav: 对外入口，含熔断器保护
 // ============================================================
@@ -499,6 +537,6 @@ async function erpNav(targetId, pageName) {
 }
 
 module.exports = {
-  navigateErp, checkLogin, recoverLogin, erpNav, CLOSE_ALL_DIALOGS_JS,
+  navigateErp, forceReloadErpPage, checkLogin, recoverLogin, erpNav, CLOSE_ALL_DIALOGS_JS,
   updateErpHealth, loadErpHealth, alertErpDown,
 };

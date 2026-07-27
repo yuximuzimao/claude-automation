@@ -99,7 +99,7 @@ entry: cli.js
 ### 重试与重启
 
 - **鲸灵操作禁止重试**：`lib/wait.js` 内置 `FORCE_NO_RETRY_DOMAINS = ['scrm.jlsupp.com']`，所有鲸灵行为操作（点击/提交/填写/上传）传 `domain: 'scrm.jlsupp.com'` 后强制 maxRetries=0——报错即停，绝不重试。被动等待（导航/DOM ready）最多重试 1 次（共执行 2 次）。风控信号（HTTP 426/ratelimit/captcha）→ 就地熔断，写入 `data/circuit-breaker.json`（持久化，重启不丢失），需人工 `node cli.js reset-circuit`。
-- **ERP 订单搜索错误只重搜一次**：`erpSearch()` 逐行核验“平台交易号”包含本次子订单号；首次结果错误只重新执行搜索，总共最多 2 次。第二次仍失败立即报错，不继续物流采集、推理或整张工单流程。
+- **ERP 订单搜索错误只重搜一次**：ERP 存在无法仅靠 DOM 提前识别的隐性异常，因此定时扫描开始前无条件刷新一次；刷新后只验证登录、订单管理页、可见“系统单号”搜索框和 `mixKey` 已重新挂载。`erpSearch()` 保持原有 Enter 搜索，并逐行核验“平台交易号”包含本次子订单号；首次结果错误先强制刷新订单页再搜一次，总共最多 2 次。第二次仍失败立即报错，不继续物流采集、推理或整张工单流程。
 - **延迟重查**：推理返回 `waitingRescan: true` 时工单进入 `waiting`。`scan-finalize` 会按 `lastInferAt` / `collectDoneAt` + `RESCAN_INTERVAL_HOURS` 节流重置为 pending，定时扫描已恢复但仍必须走 op-queue A1 安全路径。
 - **代码生效**：修改 `lib/` 下决策逻辑文件后，必须执行 `/aftersales-restart` 重启 server（server 启动时加载模块到内存，不重启新逻辑不生效）。当前定时扫描已恢复并遵守 `scanEnabled`；真实浏览器操作必须经 op-queue 串行。
 

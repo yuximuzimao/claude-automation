@@ -464,3 +464,11 @@ server 进程通过 AppleScript 直接操作 Reminders.app 曾出现超时 -1712
 - **规则**：审查代码链路时，必须逐行读完整执行流，不能在某一步"看到安全了就停"。审查 = 确认每一个步骤的行为和预期一致，不是确认某个函数被调用了。
 - **L13** emergencyStop 只杀 spawnAsync 子进程，对 async executor 完全无效 → AbortController + 步骤间检查点。教训：功能「存在」≠「有效」——验证要覆盖实际调用路径，不能只看 API 签名。
 - **2026-07-02 完成修复**：`execOpenTicket` 完整对齐 `execExecute` 步骤 1-5（openAccountFlow → 导航 → 排序 → clickPageOneLikeHuman → locateWorkOrderOnFreshList → clickWorkOrderAction）。同时统一了 `execExecute`/`execReprocessOne`/`execOpenTicket` 三处账号校验为 `assertAccountNum`（正则 `^\d+$`），删除了 execOpenTicket 的 CLI fallback 分支（不再允许无 accountNum 调用）。额外发现 `execReprocessOne` 缺少 `clickPageOneLikeHuman` 预调用（注释写"完全一致"但实际不一致），已补齐。
+
+## 2026-07-27 session 教训
+
+### ERP 空搜索默认列表不能当作搜索完成
+
+- **现象**：多个有间隔的工单搜索不同子订单号，却连续读到同一个平台交易号；该订单正是空搜索框默认展示的待审核订单。
+- **根因**：ERP 长期空置后可能进入隐性异常：页面能切标签、输入框和 radio 也可见，Enter 也已发送，但内部查询链路没有正常工作。当前没有可靠的前端规律能在搜索前证明页面已异常。
+- **规则**：不猜测异常信号；定时扫描前无条件 reload。刷新后只做登录和基础控件检查，不能把它描述成深层健康证明。保留原有 Enter；首次验单失败先强制刷新页面再重搜一次，禁止在失效页面原地重复。

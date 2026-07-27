@@ -539,6 +539,19 @@ async function execScan(op) {
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
   const total = numsToScan.length;
 
+  // ERP 的隐性异常无法仅靠 DOM 提前识别：页面和控件可能看似正常，但查询链路已失效。
+  // 因此整轮扫描开始前无条件刷新一次；后续检查只证明登录和基础控件已重新挂载。
+  // 刷新失败则整轮 fail-fast，避免每个账号/工单重复产生同一批不可信采集结果。
+  if (total > 0) {
+    assertNotAborted(op);
+    const { resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
+    const { prepareErpOrderPage } = require('../erp/search');
+    const erpTargetId = await resolveUniqueErpTargetId({ getTargets: require('../cdp').getTargets }, null);
+    await prepareErpOrderPage(erpTargetId, { forceReload: true });
+    assertNotAborted(op);
+    log('定时扫描前 ERP 已刷新，登录和订单页基础控件检查通过');
+  }
+
   // 发 init 事件，前端初始化进度面板
   sse.broadcast('scan-progress', {
     type: 'init',
