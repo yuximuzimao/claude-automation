@@ -4,6 +4,7 @@ const { classifySimulation } = require('./after-sales-branch-history');
 
 function shouldAutoExecute(decision, collectedData, queueItem) {
   if (!decision || decision.action !== 'approve') return false;
+  if (decision.manualOnly) return false;
   if (!collectedData || !queueItem || queueItem.type !== '退货退款') return false;
   if (decision.hinted || queueItem.hint) return false;
 

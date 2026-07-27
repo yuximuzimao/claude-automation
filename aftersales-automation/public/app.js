@@ -586,6 +586,11 @@ function showToast(msg, type = 'info') {
 // ── 常量 ─────────────────────────────────────────────────────────
 const DECISION_LABELS = { approve: '同意退款', reject: '拒绝退款', escalate: '上报人工', pending: '待推理', skip: '已退款归档' };
 const DECISION_ICONS  = { approve: '✅', reject: '❌', escalate: '⚠️', pending: '○', skip: '🔄' };
+
+function decisionDisplayLabel(decision) {
+  if (!decision) return DECISION_LABELS.pending;
+  return decision.recommendedActionLabel || DECISION_LABELS[decision.action] || decision.action || '待推理';
+}
 const STATUS_CN = {
   pending: '待采集', collecting: '采集中', collected: '已采集',
   inferring: '推理中', simulated: '已推理', confirmed: '已确认', executed: '已执行', done: '已完成',
@@ -980,7 +985,7 @@ function renderBody(item, sim, mode) {
 
   const decisionHtml = sim.decision ? `
 <div class="decision-box ${sim.decision.action}">
-  <div class="decision-box-title">${DECISION_ICONS[sim.decision.action]} ${DECISION_LABELS[sim.decision.action]}
+  <div class="decision-box-title">${DECISION_ICONS[sim.decision.action]} ${h(decisionDisplayLabel(sim.decision))}
     ${sim.decision.confidence ? `<span class="confidence-indicator ${sim.decision.confidence}" style="margin-left:6px"></span>` : ''}
     ${sim.decision.aiPowered ? `<span class="ai-badge">🤖 AI</span>` : ''}
   </div>
@@ -1067,7 +1072,8 @@ function renderActions(item, sim, mode) {
     ${canReinfer ? `<button class="btn-ghost" onclick="reinferSim('${sim.id}',this)">重新采集推理</button>` : ''}
     ${!executed && item.status !== 'waiting' ? `<button class="btn-ghost" onclick="markWaiting('${item.id}',this)" title="下次扫描时自动重新采集">标记等待中</button>` : ''}
     ${item.status === 'waiting' ? `<span style="font-size:12px;color:var(--gray-400);padding:0 6px">⏳ 等待下次扫描重查</span>` : ''}
-    ${!executed ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : '▶ 执行操作'}</button>` : ''}
+    ${!executed && sim.decision.manualOnly ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">⚠️ 仅允许在工单页面逐单人工处理</span>` : ''}
+    ${!executed && !sim.decision.manualOnly ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : '▶ 执行操作'}</button>` : ''}
     ${!executed ? `<button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button>` : ''}
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>
@@ -1189,7 +1195,7 @@ function renderPrevSims(prevSims) {
                   : '';
       const hint = s.hint || '';
       return `<div class="prev-sim-item">
-        <span class="prev-sim-action ${d.action}">${ICONS[d.action]} ${DECISION_LABELS[d.action]}</span>
+        <span class="prev-sim-action ${d.action}">${ICONS[d.action]} ${h(decisionDisplayLabel(d))}</span>
         ${d.aiPowered ? '<span class="ai-badge" style="font-size:10px">🤖</span>' : ''}
         <span class="prev-sim-reason">${h(d.reason || '')}</span>
         ${hint ? `<span class="prev-sim-hint">「${h(hint.slice(0, 40))}${hint.length > 40 ? '…' : ''}」</span>` : ''}
@@ -1268,6 +1274,7 @@ function showExecResult(btn, success, msg) {
 
 async function executeSim(simId, btn) {
   if (!confirm('确认执行此操作？将真正同意/拒绝退款，不可撤销。')) return;
+  const originalButtonText = btn ? btn.textContent : '';
   if (btn) { btn.disabled = true; btn.textContent = '已加入队列'; }
   try {
     const res = await fetch('/api/simulations/' + simId + '/execute', {
@@ -1284,12 +1291,12 @@ async function executeSim(simId, btn) {
         showToast('已在执行队列中，请稍候');
       } else {
         showToast(data.error || `服务器错误 ${res.status}`, 'error');
-        if (btn) { btn.disabled = false; btn.textContent = '▶ 执行操作'; }
+        if (btn) { btn.disabled = false; btn.textContent = originalButtonText; }
       }
     }
   } catch (e) {
     showToast('请求失败：' + e.message, 'error');
-    if (btn) { btn.disabled = false; btn.textContent = '▶ 执行操作'; }
+    if (btn) { btn.disabled = false; btn.textContent = originalButtonText; }
   }
 }
 

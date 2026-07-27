@@ -152,6 +152,34 @@ const BRANCHES = Object.freeze({
     label: '换货 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'exchange.return.exact.manual_approve': {
+    label: '换货 / 有退货单号 / 精确退回 / 推荐人工同意换货',
+    automationStatus: 'manual_only',
+  },
+  'exchange.return.review.manual': {
+    label: '换货 / 有退货单号 / 退回核验异常 / 人工确认',
+    automationStatus: 'manual_only',
+  },
+  'exchange.no_tracking.manual': {
+    label: '换货 / 无退货单号 / 人工处理',
+    automationStatus: 'manual_only',
+  },
+  'merchant_fault.refund_return.exact.manual_approve': {
+    label: '商责退货退款 / 有退货单号 / 精确退回 / 推荐人工同意退款',
+    automationStatus: 'manual_only',
+  },
+  'merchant_fault.refund_return.review.manual': {
+    label: '商责退货退款 / 退回核验异常或无单号 / 人工确认',
+    automationStatus: 'manual_only',
+  },
+  'merchant_fault.exchange.exact.manual_approve': {
+    label: '商责换货 / 有退货单号 / 精确退回 / 推荐人工同意换货',
+    automationStatus: 'manual_only',
+  },
+  'merchant_fault.exchange.review.manual': {
+    label: '商责换货 / 退回核验异常或无单号 / 人工确认',
+    automationStatus: 'manual_only',
+  },
   'global.order_type_missing.manual': {
     label: '历史数据缺少工单类型 / 人工处理',
     automationStatus: 'manual_only',
@@ -168,6 +196,15 @@ const RULE_BRANCHES = Object.freeze({
   '工单不可访问→自动归档': 'global.gone.skip',
   '扫描工单详情页未确认→保留待复查': 'global.gone_scan.manual',
   '换货→上报人工': 'global.exchange.manual',
+  '换货退回核验通过→推荐人工同意换货': 'exchange.return.exact.manual_approve',
+  '换货退回核验异常→人工确认': 'exchange.return.review.manual',
+  '换货无退货单号→人工处理': 'exchange.no_tracking.manual',
+  '商责退货退款核验通过→推荐人工同意退款': 'merchant_fault.refund_return.exact.manual_approve',
+  '商责退货退款退回核验异常→人工确认': 'merchant_fault.refund_return.review.manual',
+  '商责退货退款无退货单号→人工处理': 'merchant_fault.refund_return.review.manual',
+  '商责换货退回核验通过→推荐人工同意换货': 'merchant_fault.exchange.exact.manual_approve',
+  '商责换货退回核验异常→人工确认': 'merchant_fault.exchange.review.manual',
+  '商责换货无退货单号→人工处理': 'merchant_fault.exchange.review.manual',
   '有记录未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '有记录未入库+剩余≤12h→拒绝': 'refund_return.not_received.timeout_reject',
@@ -258,11 +295,30 @@ function classifySimulation(simulation, queueItem = {}) {
     && String(decision.reason || '').includes('可能为超期特殊退货或次品特殊处理');
   const terminalSkip = decision?.action === 'skip'
     && /^工单状态：/.test(String(decision.reason || ''));
-  const ruleClassification = specialNoTracking
-    ? { branchId: 'refund_return.no_tracking.special.manual' }
-    : terminalSkip
-      ? { branchId: 'global.terminal.skip' }
-      : decision && classifyRule(decision, simulation?.collectedData);
+  const manualReviewBranches = {
+    exchange_return_exact: 'exchange.return.exact.manual_approve',
+    exchange_return_review: 'exchange.return.review.manual',
+    exchange_no_tracking: 'exchange.no_tracking.manual',
+    merchant_refund_return_exact: 'merchant_fault.refund_return.exact.manual_approve',
+    merchant_refund_return_review: 'merchant_fault.refund_return.review.manual',
+    merchant_refund_return_no_tracking: 'merchant_fault.refund_return.review.manual',
+    merchant_exchange_return_exact: 'merchant_fault.exchange.exact.manual_approve',
+    merchant_exchange_return_review: 'merchant_fault.exchange.review.manual',
+    merchant_exchange_no_tracking: 'merchant_fault.exchange.review.manual',
+  };
+  const manualReviewBranchId = decision?.manualOnly
+    ? manualReviewBranches[decision.manualReviewKind]
+    : null;
+  let ruleClassification = null;
+  if (manualReviewBranchId) {
+    ruleClassification = { branchId: manualReviewBranchId };
+  } else if (specialNoTracking) {
+    ruleClassification = { branchId: 'refund_return.no_tracking.special.manual' };
+  } else if (terminalSkip) {
+    ruleClassification = { branchId: 'global.terminal.skip' };
+  } else if (decision) {
+    ruleClassification = classifyRule(decision, simulation?.collectedData);
+  }
   const branchId = ruleClassification && ruleClassification.branchId;
   const missingFacts = [];
   if (!reason) missingFacts.push('售后原因');

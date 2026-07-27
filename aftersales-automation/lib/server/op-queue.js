@@ -876,6 +876,9 @@ async function execExecute(op) {
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
+  if (sim.decision?.manualOnly) {
+    throw new Error('该工单属于换货或商责，仅允许在工单页面逐单人工处理，禁止系统执行');
+  }
 
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
   if (!queueItem) return { skipped: true, reason: '队列项不存在' };

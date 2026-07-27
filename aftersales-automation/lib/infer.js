@@ -12,6 +12,7 @@
  */
 
 const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
+const { proveReturnItems } = require('./return-item-proof');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
 function parseUrgencyHours(urgency) {
@@ -152,6 +153,129 @@ function interceptWarnings(cd) {
 
 function escalate(reason, extra) {
   return { action: 'escalate', reason, confidence: 'low', rulesApplied: [], warnings: [], ...extra };
+}
+
+function summarizeReceivedReturnItems(cd) {
+  const grouped = new Map();
+  const receivedRows = (cd.erpAftersale?.rows || []).filter(row =>
+    String(row?.goodsStatus || '').includes('卖家已收到退货')
+  );
+  for (const row of receivedRows) {
+    for (const item of row.items || []) {
+      const name = String(item?.name || item?.specCode || '未知商品').trim();
+      const current = grouped.get(name) || { qtyGood: 0, qtyBad: 0 };
+      current.qtyGood += Number(item?.qtyGood) || 0;
+      current.qtyBad += Number(item?.qtyBad) || 0;
+      grouped.set(name, current);
+    }
+  }
+  if (!grouped.size) return '尚未取得已收货商品明细';
+  return [...grouped.entries()].map(([name, qty]) => {
+    const parts = [];
+    if (qty.qtyGood) parts.push(`良品${qty.qtyGood}件`);
+    if (qty.qtyBad) parts.push(`次品${qty.qtyBad}件`);
+    return `${name}（${parts.join('、') || '数量为0'}）`;
+  }).join('、');
+}
+
+function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFault }) {
+  const type = queueItem.type;
+  const isExchange = type === '换货';
+  const reviewTitle = isMerchantFault
+    ? (isExchange ? '商责换货' : '商责退货退款')
+    : '换货';
+  const recommendedActionLabel = isExchange ? '同意换货' : '同意退款';
+  const merchantReasonText = isMerchantFault
+    ? `，售后原因「${ticket.afterSaleReason || '未知'}」`
+    : '';
+  const manualReasons = [
+    ...(isMerchantFault ? ['商责'] : []),
+    ...(isExchange ? ['换货'] : []),
+  ];
+
+  s({ type: 'read', label: '人工确认类型', value: reviewTitle });
+  s({ type: 'read', label: '退货快递单号', value: ticket.returnTracking || '无' });
+
+  if (!ticket.returnTracking) {
+    s({ type: 'branch', text: `${reviewTitle}无退货单号，无法核验退回商品 → 人工处理` });
+    return fin(escalate(`【${reviewTitle}｜人工确认】无退货单号${merchantReasonText}，无法核验客户实际退回商品，请人工处理`, {
+      manualOnly: true,
+      manualReviewKind: isMerchantFault
+        ? (isExchange ? 'merchant_exchange_no_tracking' : 'merchant_refund_return_no_tracking')
+        : 'exchange_no_tracking',
+      manualReviewReasons: manualReasons,
+      rulesApplied: [{
+        doc: isExchange ? 'flow-5.4' : 'INDEX.md',
+        section: '人工确认',
+        summary: `${reviewTitle}无退货单号→人工处理`,
+      }],
+      warnings: [`⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`],
+    }));
+  }
+
+  const proof = proveReturnItems(cd);
+  const receivedSummary = summarizeReceivedReturnItems(cd);
+  const outcomeLabels = {
+    exact: '规格、数量及良次品核对一致',
+    excess: '存在多退商品',
+    short: '存在少退商品',
+    damaged: '退回商品含次品',
+    unmatched: '退回商品规格与订单不符',
+    incomplete: `核验依据不完整：${(proof.missingFacts || []).join('；') || '未知缺失项'}`,
+  };
+  const outcomeLabel = outcomeLabels[proof.outcome] || `核验结果未知（${proof.outcome || 'unknown'}）`;
+  s({ type: 'read', label: '仓库实际退回', value: receivedSummary });
+  s({ type: 'check', condition: '退回商品严格核验', result: outcomeLabel });
+
+  if (proof.outcome === 'exact') {
+    const manualReviewKind = isMerchantFault
+      ? (isExchange ? 'merchant_exchange_return_exact' : 'merchant_refund_return_exact')
+      : 'exchange_return_exact';
+    const summary = isMerchantFault
+      ? (isExchange
+        ? '商责换货退回核验通过→推荐人工同意换货'
+        : '商责退货退款核验通过→推荐人工同意退款')
+      : '换货退回核验通过→推荐人工同意换货';
+    const consequence = isExchange
+      ? '同意后会生成新的发货单'
+      : '商责案件涉及责任及罚款风险';
+    s({ type: 'branch', text: `退回商品核对无误 → 推荐人工${recommendedActionLabel}，但禁止系统执行` });
+    return fin({
+      action: 'approve',
+      reason: `【${reviewTitle}｜推荐人工${recommendedActionLabel}】退回商品核对无误：${receivedSummary}${merchantReasonText}；${consequence}，请再次确认`,
+      confidence: 'high',
+      manualOnly: true,
+      manualReviewKind,
+      manualReviewReasons: manualReasons,
+      recommendedActionLabel,
+      rulesApplied: [{
+        doc: isExchange ? 'flow-5.4' : 'INDEX.md',
+        section: '有退货单号',
+        summary,
+      }],
+      warnings: [
+        `⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`,
+        ...(isExchange ? ['同意换货将生成新的发货单，请确认退回商品无误'] : []),
+      ],
+    });
+  }
+
+  const manualReviewKind = isMerchantFault
+    ? (isExchange ? 'merchant_exchange_return_review' : 'merchant_refund_return_review')
+    : 'exchange_return_review';
+  s({ type: 'branch', text: `${outcomeLabel} → 不推荐直接同意，转人工确认` });
+  return fin(escalate(`【${reviewTitle}｜人工确认】${outcomeLabel}；仓库实际退回：${receivedSummary}${merchantReasonText}，请人工核对后处理`, {
+    confidence: proof.outcome === 'incomplete' ? 'low' : 'high',
+    manualOnly: true,
+    manualReviewKind,
+    manualReviewReasons: manualReasons,
+    rulesApplied: [{
+      doc: isExchange ? 'flow-5.4' : 'INDEX.md',
+      section: '有退货单号',
+      summary: `${reviewTitle}退回核验异常→人工确认`,
+    }],
+    warnings: [`⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`],
+  }));
 }
 
 function isLiveScanItem(sim, queueItem) {
@@ -1181,6 +1305,10 @@ function inferDecision(sim, queueItem) {
   function s(step) { steps.push(step); return step; }
   function fin(decision) { return { ...decision, steps }; }
 
+  const cd = sim.collectedData || {};
+  const type = queueItem.type;
+  const ticket = cd.ticket || {};
+
   // ── hint 覆盖 ─────────────────────────────────────────────────
   const hint = queueItem.hint || '';
   if (hint) {
@@ -1189,21 +1317,30 @@ function inferDecision(sim, queueItem) {
     s({ type: 'check', condition: '解析评价指令', result: hintAction ? `→ ${hintAction}` : '未识别' });
     if (hintAction) {
       s({ type: 'branch', text: `执行评价指令覆盖 → ${hintAction}` });
-      return fin({
+      const constrainedReasons = [
+        ...(MERCHANT_FAULT_REASONS.some(kw => String(ticket.afterSaleReason || '').includes(kw)) ? ['商责'] : []),
+        ...(type === '换货' ? ['换货'] : []),
+      ];
+      const hintedDecision = {
         action: hintAction,
         reason: `根据评价内容调整：${hint}`,
         confidence: 'high',
         rulesApplied: [],
         warnings: [],
         hinted: true,
-      });
+      };
+      if (constrainedReasons.length) {
+        hintedDecision.manualOnly = true;
+        hintedDecision.manualReviewReasons = constrainedReasons;
+        hintedDecision.recommendedActionLabel = type === '换货' && hintAction === 'approve'
+          ? '同意换货'
+          : undefined;
+        hintedDecision.warnings = [`⚠️ ${constrainedReasons.join('+')}工单禁止系统执行，请打开工单在平台页面逐单人工处理`];
+      }
+      return fin(hintedDecision);
     }
     s({ type: 'branch', text: '评价指令未识别为操作，继续规则推理' });
   }
-
-  const cd = sim.collectedData || {};
-  const type = queueItem.type;
-  const ticket = cd.ticket || {};
 
   // ── 平台终态检测（优先于一切校验）────────────────────────────────
   // 工单已终结（退款成功/已关闭等）→ 无需操作，自动归档
@@ -1286,22 +1423,20 @@ function inferDecision(sim, queueItem) {
     return fin(escalate(`关键数据采集失败：${criticalErrors[0]}`));
   }
 
-  // ── 商责售后原因前置拦截（有罚款风险，一律人工）────────────────
+  // ── 操作约束不阻断事实采集：换货/商责有退货单号时先核验退回商品 ──
   const afterSaleReason = ticket.afterSaleReason || '';
   const isMerchantFault = MERCHANT_FAULT_REASONS.some(kw => afterSaleReason.includes(kw));
+  const isReturnReviewType = type === '换货' || type === '退货退款';
+  if (isReturnReviewType && (type === '换货' || isMerchantFault)) {
+    return inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFault });
+  }
+
+  // ── 其他商责售后原因仍固定人工 ─────────────────────────────────
   if (isMerchantFault) {
     s({ type: 'read', label: '售后原因', value: afterSaleReason });
     s({ type: 'branch', text: `上报 → 商责售后原因「${afterSaleReason}」，有罚款风险，需人工处理` });
     return fin(escalate(`商责售后原因「${afterSaleReason}」，需人工核实处理（商责有罚款风险）`, {
       rulesApplied: [{ doc: 'INDEX.md', section: '商责拦截', summary: '商责原因→上报人工' }],
-    }));
-  }
-
-  // ── 换货 → 始终人工 ───────────────────────────────────────────
-  if (type === '换货') {
-    s({ type: 'branch', text: '换货类型固定上报人工 (flow-5.4)' });
-    return fin(escalate('换货类型，需人工处理', {
-      rulesApplied: [{ doc: 'flow-5.4', section: '总则', summary: '换货→上报人工' }],
     }));
   }
 

@@ -162,6 +162,50 @@ test('退货退款遍历全部主子订单和赠品，并复用同一ERP targetI
   assert.equal(result.erpLogistics.results.length, 3);
 });
 
+test('换货有退货单号时采集商品对应表、商品档案和ERP退货明细', async () => {
+  const calls = [];
+  const dependencies = {
+    readTicket: async () => ok({
+      subOrders: [{ id: 'sub-exchange', sku: 'sku-exchange', attr1: '规格A', afterSaleNum: 1 }],
+      gifts: [],
+      returnTracking: 'RETURN-EXCHANGE',
+      subBizType: '换货',
+    }),
+    getLogistics: async () => ok({ packages: [] }),
+    erpSearch: async () => ok({ rows: { rows: [{ status: '卖家已发货' }] } }),
+    readAllErpLogistics: async () => ok({ results: [] }),
+    erpAftersale: async (targetId, tracking) => {
+      calls.push(['erpAftersale', targetId, tracking]);
+      return ok({ rows: [] });
+    },
+    productMatch: async (targetId, sku, attr1, shop) => {
+      calls.push(['productMatch', targetId, sku, attr1, shop]);
+      return ok({ matched: true, specCode: 'SPEC-EXCHANGE' });
+    },
+    productArchive: async (targetId, specCode) => {
+      calls.push(['productArchive', targetId, specCode]);
+      return ok({ title: '换货商品', outerId: specCode, subItems: [] });
+    },
+    getErpShop: () => '百浩',
+  };
+
+  const result = await collectTicketTargetAware({
+    detailTargetId: 'detail-tab',
+    erpTargetId: 'erp-tab',
+    workOrderNum: WORK_ORDER,
+    accountNote: '百浩-RITEKOKO',
+    type: '换货',
+  }, dependencies);
+
+  assert.deepEqual(calls, [
+    ['productMatch', 'erp-tab', 'sku-exchange', '规格A', '百浩'],
+    ['productArchive', 'erp-tab', 'SPEC-EXCHANGE'],
+    ['erpAftersale', 'erp-tab', 'RETURN-EXCHANGE'],
+  ]);
+  assert.equal(result.productArchives[0].outerId, 'SPEC-EXCHANGE');
+  assert.equal(result.collectErrors.some(error => error.includes('工单类型=换货')), false);
+});
+
 test('鲸灵详情读取失败立即抛错停止批次', async () => {
   const dependencies = {
     readTicket: async () => ({ success: false, error: '详情加载失败' }),

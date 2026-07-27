@@ -47,6 +47,23 @@ test('batch execute excludes waiting, pending-not-simulated, hidden stores, and 
   assert.equal(selected.some(s => s.queueItemId === 'q-missing-account'), false);
 });
 
+test('需要逐单人工确认的推荐同意结果禁止进入批量执行', () => {
+  const guardedSimulations = simulations.map(simulation =>
+    simulation.id === 's-14-late'
+      ? { ...simulation, decision: { action: 'approve', manualOnly: true, recommendedActionLabel: '同意换货' } }
+      : simulation
+  );
+  const scope = parseBatchExecuteRequest({ statusScope: 'pending', accountNum: 14 });
+  const selected = selectExecutableSimulations({
+    simulations: guardedSimulations,
+    queueItems,
+    scope,
+  });
+
+  assert.equal(selected.some(simulation => simulation.id === 's-14-late'), false);
+});
+
+
 test('batch reprocess waiting scope selects only waiting items for the requested account', () => {
   const scope = parseBatchReprocessRequest({ statusScope: 'waiting', accountNum: 14 });
   const selected = selectReprocessQueueItems(queueItems, scope);

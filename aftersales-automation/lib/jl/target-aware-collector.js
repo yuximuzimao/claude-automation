@@ -178,7 +178,9 @@ async function collectTicketTargetAware(context, customDependencies) {
   collected.logistics = resultData(logisticsResult, 'logistics', collected);
 
   const type = normalizeAfterSaleType(context.type) || normalizeAfterSaleType(ticket.subBizType) || '';
-  const skipProductDetail = type === '仅退款' || type === '换货';
+  // 换货有退货单号时同样需要证明客户实际退回了什么商品。
+  // 是否换货/商责只限制最终执行，不应阻断商品事实采集。
+  const skipProductDetail = type === '仅退款';
   if (skipProductDetail) {
     collected.collectErrors.push(`product-detail: 跳过（工单类型=${type}，无需核对商品明细）`);
   } else {

@@ -110,7 +110,7 @@ entry: cli.js
 | 退货退款 | `docs/flow-5.1.md` | `inferRefundReturn()` (anchor: inferRefundReturn) |
 | 仅退款（未发货） | `docs/flow-5.2.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
 | 仅退款（已发货） | `docs/flow-5.3.md` | `inferRefundOnly()` (anchor: inferRefundOnly) |
-| 换货 | `docs/flow-5.4.md` | — |
+| 换货 | `docs/flow-5.4.md` | `inferManualReturnReview()` |
 
 ### ERP 操作流程
 

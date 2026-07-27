@@ -265,6 +265,9 @@ router.post('/simulations/:id/execute', (req, res) => {
   if (sim.mode !== 'live') return res.status(400).json({ error: '仅 live 工单支持 execute' });
   if (!sim.decision) return res.status(400).json({ error: '尚未有决策结果' });
   if (sim.executedAt) return res.status(409).json({ error: '已执行' });
+  if (sim.decision.manualOnly) {
+    return res.status(400).json({ error: '该工单属于换货或商责，仅允许在工单页面逐单人工处理，禁止系统执行' });
+  }
 
   // 防重复入队：同 simId 已在队列（running 或 queued）则直接返回
   const qstate = opQueue.getState();
@@ -274,7 +277,9 @@ router.post('/simulations/:id/execute', (req, res) => {
   );
   if (alreadyQueued) return res.status(409).json({ error: '已在队列中', alreadyQueued: true });
 
-  const actionLabel = { approve: '同意退款', reject: '拒绝退款', escalate: '上报人工' }[sim.decision.action] || sim.decision.action;
+  const actionLabel = sim.decision.recommendedActionLabel
+    || { approve: '同意退款', reject: '拒绝退款', escalate: '上报人工' }[sim.decision.action]
+    || sim.decision.action;
   const { rejectReason, rejectDetail, rejectImageUrl } = req.body;
   const op = opQueue.enqueue('execute', `执行 ${sim.workOrderNum} ${actionLabel}`, {
     simId: sim.id, rejectReason, rejectDetail, rejectImageUrl,

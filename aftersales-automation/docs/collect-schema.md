@@ -14,7 +14,7 @@
   erpSearches:    Object[],        // 全部主商品子订单 ERP 搜索结果
   erpLogistics:   Object | null,   // 可选，仅退款-已发货补充物流源
   logistics:      Object | null,   // 可选，鲸灵发货物流
-  erpAftersale:   Object | null,   // 退货退款必填（有 returnTracking 时）
+  erpAftersale:   Object | null,   // 退货退款/换货有 returnTracking 时必填
   productMatch:   Object | null,   // 可选，商品对应表结果
   productArchive: Object | null,   // 可选，商品档案V2
   giftErpSearch:  Object | null,   // 第一个赠品子订单结果（旧字段兼容）
@@ -34,7 +34,7 @@
 | `afterSaleReason` | string | 是 | 售后原因，如"多拍/拍错/不想要"/"商品漏发" |
 | `buyerRemark` | string | 否 | 买家售后说明 |
 | `images` | array | 否 | 买家上传图片列表 |
-| `returnTracking` | string | 否 | 退货快递单号（退货退款类型时有值） |
+| `returnTracking` | string | 否 | 退货快递单号（退货退款或已进入退回验收阶段的换货可能有值） |
 | `returnTrackingMultiUse` | boolean | 否 | 退货快递是否被多个工单共用 |
 | `returnTrackingUsedBy` | string[] | 否 | 共用该快递的其他工单号列表 |
 | `subOrders` | array | 是 | 子订单列表（至少1条） |
@@ -99,7 +99,7 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 }
 ```
 
-自动同意的严格证明只统计 `goodsStatus` 明确为“卖家已收到退货”的行。任一已收货行缺商品明细、售后工单号重复、退货单号冲突、`returnQty` 与明细合计不一致，或本次采集存在任何错误时，固定转人工。
+严格退回证明只统计 `goodsStatus` 明确为“卖家已收到退货”的行。任一已收货行缺商品明细、售后工单号重复、退货单号冲突、`returnQty` 与明细合计不一致，或本次采集存在任何错误时，固定转人工。换货和商责即使严格证明通过，也只能推荐人工同意，不得进入定时自动、批量或系统单张执行。
 
 ---
 
