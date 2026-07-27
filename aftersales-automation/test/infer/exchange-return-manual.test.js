@@ -41,17 +41,20 @@ function infer(type, collectedData) {
   );
 }
 
-test('普通换货有退货单号且严格核对一致时，推荐人工同意换货但禁止自动和批量执行', () => {
+test('普通换货严格核对一致时禁止无人自动，但允许人工确认后单笔或批量同意换货', () => {
   const data = exactCollectedData();
   const decision = infer('换货', data);
 
   assert.equal(decision.action, 'approve');
   assert.equal(decision.recommendedActionLabel, '同意换货');
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
   assert.match(decision.reason, /换货.*推荐人工同意换货/);
   assert.match(decision.reason, /悦颜精粹水/);
+  assert.match(decision.warnings.join('；'), /提前补发/);
   assert.equal(shouldAutoExecute(decision, data, { type: '换货' }), false);
-  assert.equal(isBatchExecutable(decision, 'simulated'), false);
+  assert.equal(isBatchExecutable(decision, 'simulated'), true);
 });
 
 test('商责换货保留双重醒目标记，核对一致后仍只推荐人工同意换货', () => {
@@ -59,7 +62,9 @@ test('商责换货保留双重醒目标记，核对一致后仍只推荐人工�
   const decision = infer('换货', data);
 
   assert.equal(decision.action, 'approve');
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
   assert.deepEqual(decision.manualReviewReasons, ['商责', '换货']);
   assert.equal(decision.manualReviewKind, 'merchant_exchange_return_exact');
   assert.match(decision.reason, /商责换货/);
@@ -77,11 +82,13 @@ test('商责退货退款有退货单号且核对一致时，推荐人工同意�
 
   assert.equal(decision.action, 'approve');
   assert.equal(decision.recommendedActionLabel, '同意退款');
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
   assert.equal(decision.manualReviewKind, 'merchant_refund_return_exact');
   assert.match(decision.reason, /商责退货退款/);
   assert.equal(shouldAutoExecute(decision, data, { type: '退货退款' }), false);
-  assert.equal(isBatchExecutable(decision, 'simulated'), false);
+  assert.equal(isBatchExecutable(decision, 'simulated'), true);
 });
 
 test('换货退回规格不符时列出实际退回商品并转人工，不推荐同意', () => {
@@ -95,7 +102,8 @@ test('换货退回规格不符时列出实际退回商品并转人工，不推�
   const decision = infer('换货', data);
 
   assert.equal(decision.action, 'escalate');
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, false);
   assert.equal(decision.manualReviewKind, 'exchange_return_review');
   assert.match(decision.reason, /规格与订单不符/);
   assert.match(decision.reason, /其他商品/);
@@ -108,12 +116,13 @@ test('换货无退货单号时保持人工，不伪造退回核验结论', () =>
   const decision = infer('换货', data);
 
   assert.equal(decision.action, 'escalate');
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, false);
   assert.equal(decision.manualReviewKind, 'exchange_no_tracking');
   assert.match(decision.reason, /无退货单号/);
 });
 
-test('人工评价指令也不能让换货绕过逐单确认进入批量执行', () => {
+test('人工评价指令不能进入无人自动，但可作为人工确认后的系统执行动作', () => {
   const data = exactCollectedData();
   const decision = inferDecision(
     { mode: 'live', collectedData: data },
@@ -122,7 +131,9 @@ test('人工评价指令也不能让换货绕过逐单确认进入批量执行',
 
   assert.equal(decision.action, 'approve');
   assert.equal(decision.hinted, true);
-  assert.equal(decision.manualOnly, true);
+  assert.equal(decision.requiresHumanReview, true);
+  assert.equal(decision.autoExecutionBlocked, true);
+  assert.equal(decision.humanTriggeredExecutionAllowed, true);
   assert.equal(decision.recommendedActionLabel, '同意换货');
-  assert.equal(isBatchExecutable(decision, 'simulated'), false);
+  assert.equal(isBatchExecutable(decision, 'simulated'), true);
 });

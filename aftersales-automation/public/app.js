@@ -1072,8 +1072,8 @@ function renderActions(item, sim, mode) {
     ${canReinfer ? `<button class="btn-ghost" onclick="reinferSim('${sim.id}',this)">重新采集推理</button>` : ''}
     ${!executed && item.status !== 'waiting' ? `<button class="btn-ghost" onclick="markWaiting('${item.id}',this)" title="下次扫描时自动重新采集">标记等待中</button>` : ''}
     ${item.status === 'waiting' ? `<span style="font-size:12px;color:var(--gray-400);padding:0 6px">⏳ 等待下次扫描重查</span>` : ''}
-    ${!executed && sim.decision.manualOnly ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">⚠️ 仅允许在工单页面逐单人工处理</span>` : ''}
-    ${!executed && !sim.decision.manualOnly ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : '▶ 执行操作'}</button>` : ''}
+    ${!executed && (sim.decision.requiresHumanReview || sim.decision.manualOnly) ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">⚠️ 需人工核对后执行</span>` : ''}
+    ${!executed ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : '▶ 执行操作'}</button>` : ''}
     ${!executed ? `<button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button>` : ''}
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>

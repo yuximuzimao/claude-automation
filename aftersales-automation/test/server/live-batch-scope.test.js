@@ -47,10 +47,19 @@ test('batch execute excludes waiting, pending-not-simulated, hidden stores, and 
   assert.equal(selected.some(s => s.queueItemId === 'q-missing-account'), false);
 });
 
-test('需要逐单人工确认的推荐同意结果禁止进入批量执行', () => {
+test('已严格核验且要求人工确认的推荐同意结果可由人工发起批量执行', () => {
   const guardedSimulations = simulations.map(simulation =>
     simulation.id === 's-14-late'
-      ? { ...simulation, decision: { action: 'approve', manualOnly: true, recommendedActionLabel: '同意换货' } }
+      ? {
+          ...simulation,
+          decision: {
+            action: 'approve',
+            requiresHumanReview: true,
+            autoExecutionBlocked: true,
+            humanTriggeredExecutionAllowed: true,
+            recommendedActionLabel: '同意换货',
+          },
+        }
       : simulation
   );
   const scope = parseBatchExecuteRequest({ statusScope: 'pending', accountNum: 14 });
@@ -59,6 +68,26 @@ test('需要逐单人工确认的推荐同意结果禁止进入批量执行', ()
     queueItems,
     scope,
   });
+
+  assert.equal(selected.some(simulation => simulation.id === 's-14-late'), true);
+});
+
+test('核验未通过且无确定动作的人工分支不进入批量执行', () => {
+  const guardedSimulations = simulations.map(simulation =>
+    simulation.id === 's-14-late'
+      ? {
+          ...simulation,
+          decision: {
+            action: 'approve',
+            requiresHumanReview: true,
+            autoExecutionBlocked: true,
+            humanTriggeredExecutionAllowed: false,
+          },
+        }
+      : simulation
+  );
+  const scope = parseBatchExecuteRequest({ statusScope: 'pending', accountNum: 14 });
+  const selected = selectExecutableSimulations({ simulations: guardedSimulations, queueItems, scope });
 
   assert.equal(selected.some(simulation => simulation.id === 's-14-late'), false);
 });

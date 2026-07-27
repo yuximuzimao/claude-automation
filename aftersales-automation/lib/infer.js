@@ -199,7 +199,9 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
   if (!ticket.returnTracking) {
     s({ type: 'branch', text: `${reviewTitle}无退货单号，无法核验退回商品 → 人工处理` });
     return fin(escalate(`【${reviewTitle}｜人工确认】无退货单号${merchantReasonText}，无法核验客户实际退回商品，请人工处理`, {
-      manualOnly: true,
+      requiresHumanReview: true,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: false,
       manualReviewKind: isMerchantFault
         ? (isExchange ? 'merchant_exchange_no_tracking' : 'merchant_refund_return_no_tracking')
         : 'exchange_no_tracking',
@@ -209,7 +211,7 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
         section: '人工确认',
         summary: `${reviewTitle}无退货单号→人工处理`,
       }],
-      warnings: [`⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`],
+      warnings: [`⚠️ ${reviewTitle}缺少退货核验依据，请人工打开工单确认后处理`],
     }));
   }
 
@@ -237,14 +239,16 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
         : '商责退货退款核验通过→推荐人工同意退款')
       : '换货退回核验通过→推荐人工同意换货';
     const consequence = isExchange
-      ? '同意后会生成新的发货单'
+      ? '同意后会生成新的发货单；还必须确认正确商品没有被提前人工补发'
       : '商责案件涉及责任及罚款风险';
-    s({ type: 'branch', text: `退回商品核对无误 → 推荐人工${recommendedActionLabel}，但禁止系统执行` });
+    s({ type: 'branch', text: `退回商品核对无误 → 推荐人工确认后${recommendedActionLabel}，禁止无人自动执行` });
     return fin({
       action: 'approve',
-      reason: `【${reviewTitle}｜推荐人工${recommendedActionLabel}】退回商品核对无误：${receivedSummary}${merchantReasonText}；${consequence}，请再次确认`,
+      reason: `【${reviewTitle}｜推荐人工${recommendedActionLabel}】退回商品核对无误：${receivedSummary}${merchantReasonText}；${consequence}，请人工核对后再执行`,
       confidence: 'high',
-      manualOnly: true,
+      requiresHumanReview: true,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: true,
       manualReviewKind,
       manualReviewReasons: manualReasons,
       recommendedActionLabel,
@@ -254,8 +258,11 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
         summary,
       }],
       warnings: [
-        `⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`,
-        ...(isExchange ? ['同意换货将生成新的发货单，请确认退回商品无误'] : []),
+        `⚠️ ${reviewTitle}禁止无人自动执行；人工核对无误后，可使用单笔或批量执行`,
+        ...(isExchange ? [
+          '⚠️ 请先确认正确商品是否已提前补发/换出：若已发出，应拒绝换货并手动归档；只有未提前发出时才执行同意换货',
+          '同意换货将生成新的发货单，请确认退回商品无误',
+        ] : []),
       ],
     });
   }
@@ -266,7 +273,9 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
   s({ type: 'branch', text: `${outcomeLabel} → 不推荐直接同意，转人工确认` });
   return fin(escalate(`【${reviewTitle}｜人工确认】${outcomeLabel}；仓库实际退回：${receivedSummary}${merchantReasonText}，请人工核对后处理`, {
     confidence: proof.outcome === 'incomplete' ? 'low' : 'high',
-    manualOnly: true,
+    requiresHumanReview: true,
+    autoExecutionBlocked: true,
+    humanTriggeredExecutionAllowed: false,
     manualReviewKind,
     manualReviewReasons: manualReasons,
     rulesApplied: [{
@@ -274,7 +283,7 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
       section: '有退货单号',
       summary: `${reviewTitle}退回核验异常→人工确认`,
     }],
-    warnings: [`⚠️ ${reviewTitle}禁止系统执行，请打开工单在平台页面逐单人工处理`],
+    warnings: [`⚠️ ${reviewTitle}退回核验未通过，不能直接执行推荐同意；请人工确认实际处理动作`],
   }));
 }
 
@@ -1330,12 +1339,17 @@ function inferDecision(sim, queueItem) {
         hinted: true,
       };
       if (constrainedReasons.length) {
-        hintedDecision.manualOnly = true;
+        hintedDecision.requiresHumanReview = true;
+        hintedDecision.autoExecutionBlocked = true;
+        hintedDecision.humanTriggeredExecutionAllowed = hintAction === 'approve' || hintAction === 'reject';
         hintedDecision.manualReviewReasons = constrainedReasons;
         hintedDecision.recommendedActionLabel = type === '换货' && hintAction === 'approve'
           ? '同意换货'
-          : undefined;
-        hintedDecision.warnings = [`⚠️ ${constrainedReasons.join('+')}工单禁止系统执行，请打开工单在平台页面逐单人工处理`];
+          : (type === '换货' && hintAction === 'reject' ? '拒绝换货' : undefined);
+        hintedDecision.warnings = [
+          `⚠️ ${constrainedReasons.join('+')}工单禁止无人自动执行；当前动作只能由人工确认后触发`,
+          ...(type === '换货' ? ['请确认正确商品是否已提前补发/换出，避免再次生成发货单'] : []),
+        ];
       }
       return fin(hintedDecision);
     }

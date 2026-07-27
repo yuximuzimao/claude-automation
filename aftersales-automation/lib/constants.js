@@ -82,7 +82,7 @@ const BATCH_SAFE_REJECT_CODES = [
 function isBatchExecutable(decision, queueItemStatus) {
   if (!queueItemStatus || !BATCH_EXECUTABLE_STATUSES.includes(queueItemStatus)) return false;
   if (!decision) return false;
-  if (decision.manualOnly) return false;
+  if (decision.humanTriggeredExecutionAllowed === false) return false;
   if (decision.action === 'approve') return true;
   if (decision.action === 'reject') return BATCH_SAFE_REJECT_CODES.includes(decision.reasonCode);
   return false;

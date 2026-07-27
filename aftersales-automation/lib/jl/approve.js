@@ -1,6 +1,6 @@
 'use strict';
 /**
- * WHAT: 鲸灵同意退款（处理三层弹窗）
+ * WHAT: 鲸灵同意退款/换货（处理确认弹窗）
  * WHERE: pipeline.js autoExecute → cli.js approve 命令 → 此模块
  * WHY: 三层弹窗（确认→确认同意→风险提示）必须严格按序处理，不能跳过
  * ENTRY: cli.js: approve 命令, pipeline.js: autoExecuteApprove()
@@ -10,9 +10,11 @@ const { navigate } = require('./navigate');
 const { sleep, retry, waitFor } = require('../wait');
 const { ok, fail } = require('../result');
 
-const CLICK_APPROVE_JS = `(function(){
+function makeClickApproveJS(actionLabel) {
+  const expected = JSON.stringify(actionLabel);
+  return `(function(){
   var btn = Array.from(document.querySelectorAll('button')).find(function(b){
-    return b.innerText.trim() === '同意退款' && b.getBoundingClientRect().width > 0;
+    return b.innerText.trim() === ${expected} && b.getBoundingClientRect().width > 0;
   });
   if (!btn) {
     // 读取页面状态文字，提供有意义的错误信息
@@ -23,20 +25,24 @@ const CLICK_APPROVE_JS = `(function(){
     else if (bodyText.includes('已关闭') || bodyText.includes('工单关闭')) statusHint = '工单已关闭';
     else if (bodyText.includes('已退款') || bodyText.includes('退款成功')) statusHint = '退款已完成';
     else if (bodyText.includes('审核中')) statusHint = '工单审核中，非待操作状态';
-    return JSON.stringify({error: statusHint ? ('未找到同意退款按钮：' + statusHint) : '未找到同意退款按钮（工单可能已处理或状态已变更）'});
+    return JSON.stringify({error: statusHint ? ('未找到${actionLabel}按钮：' + statusHint) : '未找到${actionLabel}按钮（工单可能已处理、状态已变更或工单类型不匹配）'});
   }
   btn.click();
   return JSON.stringify({clicked: true});
 })()`;
+}
 
-const CLICK_CONFIRM_JS = `(function(){
+function makeClickConfirmJS(confirmActionLabel) {
+  const expected = JSON.stringify(confirmActionLabel);
+  return `(function(){
   var btn = Array.from(document.querySelectorAll('button')).find(function(b){
-    return b.innerText.trim() === '确认同意退款' && b.getBoundingClientRect().width > 0;
+    return b.innerText.trim() === ${expected} && b.getBoundingClientRect().width > 0;
   });
-  if (!btn) return JSON.stringify({error:'未找到确认同意退款按钮'});
+  if (!btn) return JSON.stringify({error:'未找到${confirmActionLabel}按钮'});
   btn.click();
   return JSON.stringify({clicked: true});
 })()`;
+}
 
 // 第三层风险提示弹窗（仅退款-已发货时出现）：
 // "若您的货物已经发出，且订单无法拦截，点击同意后将有资损的风险？"
@@ -52,7 +58,9 @@ const CLICK_RISK_CONFIRM_JS = `(function(){
   return JSON.stringify({clicked: true, riskConfirmed: true});
 })()`;
 
-async function approveTicket(targetId, workOrderNum) {
+async function approveTicket(targetId, workOrderNum, options = {}) {
+  const actionLabel = options.actionLabel || '同意退款';
+  const confirmActionLabel = options.confirmActionLabel || '确认同意退款';
   try {
     await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
 
@@ -97,14 +105,14 @@ async function approveTicket(targetId, workOrderNum) {
     }
 
     await retry(async () => {
-      const step1 = await cdp.eval(targetId, CLICK_APPROVE_JS);
-      if (step1.error) throw new Error(`点同意退款: ${step1.error}`);
+      const step1 = await cdp.eval(targetId, makeClickApproveJS(actionLabel));
+      if (step1.error) throw new Error(`点${actionLabel}: ${step1.error}`);
     }, { maxRetries: 3, delayMs: 1500, label: `approve-step1 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(1500);
 
     await retry(async () => {
-      const step2 = await cdp.eval(targetId, CLICK_CONFIRM_JS);
-      if (step2.error) throw new Error(`点确认同意退款: ${step2.error}`);
+      const step2 = await cdp.eval(targetId, makeClickConfirmJS(confirmActionLabel));
+      if (step2.error) throw new Error(`点${confirmActionLabel}: ${step2.error}`);
     }, { maxRetries: 3, delayMs: 1500, label: `approve-step2 ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(2000);
 
@@ -113,7 +121,7 @@ async function approveTicket(targetId, workOrderNum) {
     if (step3.error) throw new Error(`点风险确认: ${step3.error}`);
     await sleep(3000);
 
-    return ok({ workOrderNum, approved: true, riskConfirmed: !!step3.riskConfirmed });
+    return ok({ workOrderNum, approved: true, actionLabel, riskConfirmed: !!step3.riskConfirmed });
   } catch (e) {
     return fail(e);
   }

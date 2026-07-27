@@ -557,8 +557,7 @@ function loadDefaultDependencies() {
   const { inferDecision } = require('../../lib/infer');
   const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
   const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
-  const { approveTicket } = require('../../lib/jl/approve');
-  const { rejectTicket } = require('../../lib/jl/reject');
+  const { executeTicketDecision } = require('../../lib/jl/execute-decision');
   const db = require('../../lib/server/data');
   const { createAutoExecutionJournal } = require('../../lib/server/auto-execution-journal');
   const fs = require('node:fs');
@@ -641,18 +640,12 @@ function loadDefaultDependencies() {
       readSimulations: () => db.readSimulations(),
     }),
     executeDecision: async ({ detailTargetId, ticket, decision }) => {
-      if (decision && decision.action === 'approve') {
-        return approveTicket(detailTargetId, ticket.workOrderNum);
-      }
-      if (decision && decision.action === 'reject') {
-        return rejectTicket(
-          detailTargetId, ticket.workOrderNum,
-          decision.rejectReason || decision.reason,
-          decision.rejectDetail || decision.rejectReason || decision.reason,
-          decision.imageUrl || null
-        );
-      }
-      throw new Error(`不支持自动执行动作: ${decision && decision.action}`);
+      return executeTicketDecision({
+        targetId: detailTargetId,
+        workOrderNum: ticket.workOrderNum,
+        type: ticket.type,
+        decision,
+      });
     },
     reserveAutoExecution: async ({ account, ticket, decision }) => executionJournal.reserve(ticket.workOrderNum, {
       accountNote: account.matchedNote || '',

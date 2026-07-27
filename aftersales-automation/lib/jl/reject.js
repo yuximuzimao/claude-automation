@@ -98,16 +98,20 @@ function uploadImage(cookie, filePath) {
   return url;
 }
 
-// 点「拒绝退款」或「拒绝退货」
-const CLICK_REJECT_BTN_JS = `(function(){
+// 精确点击当前售后类型的拒绝按钮；找不到时失败，不跨类型兜底。
+function makeClickRejectButtonJS(actionLabels) {
+  const expected = JSON.stringify(actionLabels);
+  return `(function(){
+  var labels = ${expected};
   var btn = Array.from(document.querySelectorAll('button')).find(function(b){
     var txt = b.innerText.trim();
-    return (txt === '拒绝退款' || txt === '拒绝退货') && b.getBoundingClientRect().width > 0;
+    return labels.includes(txt) && b.getBoundingClientRect().width > 0;
   });
-  if (!btn) return JSON.stringify({error:'未找到拒绝退款/退货按钮'});
+  if (!btn) return JSON.stringify({error:'未找到按钮：' + labels.join('/')});
   btn.click();
-  return JSON.stringify({clicked: true});
+  return JSON.stringify({clicked: true, label: btn.innerText.trim()});
 })()`;
+}
 
 // 查找「拒绝原因」下拉 input 的 CSS selector（用于 cdp.clickAt 真实点击）
 // JS .click() 只触发 click 事件，不触发 mousedown，El-Select 用 mousedown 监听展开
@@ -186,16 +190,19 @@ function makeInjectImageJS(imgUrl) {
   })()`;
 }
 
-// 点「确认拒绝退款」或「确认拒绝退货」
-const CLICK_CONFIRM_REJECT_JS = `(function(){
+function makeClickConfirmRejectJS(confirmActionLabels) {
+  const expected = JSON.stringify(confirmActionLabels);
+  return `(function(){
+  var labels = ${expected};
   var btn = Array.from(document.querySelectorAll('button')).find(function(b){
     var txt = b.innerText.trim();
-    return (txt === '确认拒绝退款' || txt === '确认拒绝退货') && b.getBoundingClientRect().width > 0;
+    return labels.includes(txt) && b.getBoundingClientRect().width > 0;
   });
-  if (!btn) return JSON.stringify({error:'未找到确认拒绝退款/退货按钮'});
+  if (!btn) return JSON.stringify({error:'未找到按钮：' + labels.join('/')});
   btn.click();
-  return JSON.stringify({clicked: true});
+  return JSON.stringify({clicked: true, label: btn.innerText.trim()});
 })()`;
+}
 
 /**
  * 拒绝退款
@@ -206,7 +213,9 @@ const CLICK_CONFIRM_REJECT_JS = `(function(){
  * @param {string} [imageUrl]   - 已上传的凭证图片 URL（可选，为空则自动截图上传）
  * @param {string} [packageTab] - 多包裹时指定截图的包裹 tab 名（如"包裹2"）
  */
-async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, packageTab) {
+async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, packageTab, options = {}) {
+  const actionLabels = options.actionLabels || ['拒绝退款', '拒绝退货'];
+  const confirmActionLabels = options.confirmActionLabels || ['确认拒绝退款', '确认拒绝退货'];
   try {
     await navigate(targetId, '/business/after-sale-detail', { workOrderNum });
     await sleep(2000);
@@ -258,18 +267,19 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
     }
 
     // ── Step 2: 打开拒绝表单 ─────────────────────────────────────
-    // 若已显示「确认拒绝退款」则表单已打开（前次操作残留），否则点「拒绝退款」
-    const alreadyOpen = await cdp.eval(targetId, `
-      !!Array.from(document.querySelectorAll('button')).find(function(b){
+    // 若已显示对应确认按钮则表单已打开（前次操作残留），否则点对应拒绝按钮。
+    const alreadyOpen = await cdp.eval(targetId, `(function(){
+      var labels = ${JSON.stringify(confirmActionLabels)};
+      return !!Array.from(document.querySelectorAll('button')).find(function(b){
         var txt = b.innerText.trim();
-        return (txt === '确认拒绝退款' || txt === '确认拒绝退货') && b.getBoundingClientRect().width > 0;
-      })
-    `);
+        return labels.includes(txt) && b.getBoundingClientRect().width > 0;
+      });
+    })()`);
 
     if (!alreadyOpen) {
       await retry(async () => {
-        const rejectRes = await cdp.eval(targetId, CLICK_REJECT_BTN_JS);
-        if (rejectRes.error) throw new Error(`点拒绝退款: ${rejectRes.error}`);
+        const rejectRes = await cdp.eval(targetId, makeClickRejectButtonJS(actionLabels));
+        if (rejectRes.error) throw new Error(`点拒绝操作: ${rejectRes.error}`);
       }, { maxRetries: 3, delayMs: 1500, label: `reject-open-form ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
       await sleep(2000);
     }
@@ -314,8 +324,8 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
 
     // ── Step 6: 确认拒绝 ─────────────────────────────────────────
     await retry(async () => {
-      const confirmRes = await cdp.eval(targetId, CLICK_CONFIRM_REJECT_JS);
-      if (confirmRes.error) throw new Error(`确认拒绝退款: ${confirmRes.error}`);
+      const confirmRes = await cdp.eval(targetId, makeClickConfirmRejectJS(confirmActionLabels));
+      if (confirmRes.error) throw new Error(`确认拒绝操作: ${confirmRes.error}`);
     }, { maxRetries: 3, delayMs: 1500, label: `reject-confirm ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
     await sleep(3000);
 

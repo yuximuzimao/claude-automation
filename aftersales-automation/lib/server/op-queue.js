@@ -769,8 +769,7 @@ async function execReprocessOne(op) {
   const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
   const { shouldAutoExecute } = require('../server/after-sales-auto-gate');
   const { createAutoExecutionJournal } = require('../server/auto-execution-journal');
-  const { approveTicket } = require('../jl/approve');
-  const { rejectTicket } = require('../jl/reject');
+  const { executeTicketDecision } = require('../jl/execute-decision');
   const fs = require('fs');
 
   const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
@@ -808,14 +807,12 @@ async function execReprocessOne(op) {
       readSimulations: () => db.readSimulations(),
     }),
     executeDecision: async ({ detailTargetId: dtId, ticket: t, decision }) => {
-      if (decision && decision.action === 'approve') return approveTicket(dtId, t.workOrderNum);
-      if (decision && decision.action === 'reject') {
-        return rejectTicket(dtId, t.workOrderNum,
-          decision.rejectReason || decision.reason,
-          decision.rejectDetail || decision.rejectReason || decision.reason,
-          decision.imageUrl || null);
-      }
-      throw new Error(`不支持自动执行动作: ${decision && decision.action}`);
+      return executeTicketDecision({
+        targetId: dtId,
+        workOrderNum: t.workOrderNum,
+        type: t.type,
+        decision,
+      });
     },
     reserveAutoExecution: async ({ ticket: t, decision }) => executionJournal.reserve(t.workOrderNum, {
       accountNote: accountResult.matchedNote || '', decisionAction: decision.action,
@@ -876,8 +873,9 @@ async function execExecute(op) {
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
-  if (sim.decision?.manualOnly) {
-    throw new Error('该工单属于换货或商责，仅允许在工单页面逐单人工处理，禁止系统执行');
+  if (['approve', 'reject'].includes(sim.decision?.action)
+    && sim.decision?.humanTriggeredExecutionAllowed === false) {
+    throw new Error('当前退回核验未通过，尚无可安全执行的同意或拒绝动作');
   }
 
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
@@ -985,18 +983,21 @@ async function execExecute(op) {
     let interceptAccountNote = '';
     try {
       // Step 5: 在详情 tab 上执行决策
-      if (action === 'approve') {
-        const { approveTicket } = require('../jl/approve');
-        result = await approveTicket(detailTargetId, sim.workOrderNum);
-      } else if (action === 'reject') {
-        const { rejectTicket } = require('../jl/reject');
-        result = await rejectTicket(detailTargetId, sim.workOrderNum,
-          rejectReason || sim.decision.rejectReason || sim.decision.reason,
-          rejectDetail || sim.decision.rejectDetail || sim.decision.reason,
-          rejectImageUrl || null);
+      if (action === 'approve' || action === 'reject') {
+        const { executeTicketDecision } = require('../jl/execute-decision');
+        result = await executeTicketDecision({
+          targetId: detailTargetId,
+          workOrderNum: sim.workOrderNum,
+          type: queueItem.type,
+          decision: sim.decision,
+          rejectReason,
+          rejectDetail,
+          rejectImageUrl,
+        });
 
         // 拒绝成功后记录具体拦截单号；扫描结束统一提醒，不在这里逐单提醒
-        const needsReminder = (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
+        const needsReminder = action === 'reject'
+          && (sim.decision.warnings || []).some(w => w.includes('拦截提醒') || w.includes('退回提醒'));
         if (needsReminder) {
           try {
             const cd = sim.collectedData || {};

@@ -306,7 +306,7 @@ function classifySimulation(simulation, queueItem = {}) {
     merchant_exchange_return_review: 'merchant_fault.exchange.review.manual',
     merchant_exchange_no_tracking: 'merchant_fault.exchange.review.manual',
   };
-  const manualReviewBranchId = decision?.manualOnly
+  const manualReviewBranchId = (decision?.requiresHumanReview || decision?.manualOnly)
     ? manualReviewBranches[decision.manualReviewKind]
     : null;
   let ruleClassification = null;
