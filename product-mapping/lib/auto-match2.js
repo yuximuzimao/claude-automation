@@ -18,6 +18,7 @@ const { remapSku } = require('./remap-sku');
 const { addProductToDialog, confirmDialog } = require('./copy-as-suite');
 const { resolveItems } = require('./utils/resolve-items');
 const { requireRecordBrand, assertSameBrand } = require('./brand-scope');
+const { recordKey } = require('./sku-identity');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 const LOG_PATH = path.join(__dirname, '../data/auto-match-log.json');
@@ -38,7 +39,7 @@ function getTodo(shopName) {
     r.shopName === shopName &&
     !r.erpCode &&
     r.recognition && r.recognition.items && r.recognition.items.length > 0 &&
-    !done.has(r.platformCode)
+    !done.has(recordKey(r.productCode, r.platformCode))
   );
 }
 
@@ -139,27 +140,38 @@ async function clickMarkSuite(erpId, platformCode) {
     '  var btns=Array.from(document.querySelectorAll("button.el-dropdown-selfdefine"));' +
     '  var t=btns.find(function(b){return b.innerText&&b.innerText.includes("套件处理")&&b.getBoundingClientRect().width>0;});' +
     '  if(!t)return "not-found";' +
-    '  t.setAttribute("data-km-suite-trigger","1");return "marked";' +
+    '  var menuId=t.getAttribute("aria-controls")||"";' +
+    '  t.setAttribute("data-km-suite-menu",menuId);' +
+    '  t.dispatchEvent(new MouseEvent("mouseenter",{view:window,bubbles:false,cancelable:true}));' +
+    '  t.click();return "marked";' +
     '})()'
   );
   if (buttonResult !== 'marked') throw new Error('套件处理按钮未找到');
-  await cdp.clickAt(erpId, 'button[data-km-suite-trigger="1"]');
 
-  let menuReady = false;
+  // Element UI 在后台标签页偶尔会把下拉动画卡在 height=0，但菜单节点和事件已就绪。
+  // 用触发按钮的 aria-controls 精确找到所属菜单，避免扫描并误点其他隐藏下拉项。
+  let menuResult = 'not-ready';
   for (let i = 0; i < 6; i++) {
     await sleep(500);
-    menuReady = await cdp.eval(erpId,
+    menuResult = await cdp.eval(erpId,
       '(function(){' +
-      '  var items=Array.from(document.querySelectorAll("li.el-dropdown-menu__item"));' +
-      '  var t=items.find(function(i){return i.innerText.trim()==="标记套件"&&i.getBoundingClientRect().height>0;});' +
-      '  if(!t)return false;' +
-      '  t.setAttribute("data-km-mark-suite","1");return true;' +
+      '  var trigger=Array.from(document.querySelectorAll("button.el-dropdown-selfdefine")).find(function(b){' +
+      '    return b.innerText&&b.innerText.includes("套件处理")&&b.getBoundingClientRect().width>0;' +
+      '  });' +
+      '  if(!trigger)return "no-trigger";' +
+      '  var menuId=trigger.getAttribute("data-km-suite-menu")||trigger.getAttribute("aria-controls");' +
+      '  var menu=menuId?document.getElementById(menuId):null;' +
+      '  if(!menu)return "no-menu";' +
+      '  var item=Array.from(menu.querySelectorAll("li.el-dropdown-menu__item")).find(function(i){' +
+      '    return i.innerText.trim()==="标记套件";' +
+      '  });' +
+      '  if(!item)return "no-item";' +
+      '  item.click();return "clicked";' +
       '})()'
     );
-    if (menuReady) break;
+    if (menuResult === 'clicked') break;
   }
-  if (!menuReady) throw new Error('标记套件菜单未出现');
-  await cdp.clickAt(erpId, 'li[data-km-mark-suite="1"]');
+  if (menuResult !== 'clicked') throw new Error(`标记套件菜单未就绪: ${menuResult}`);
 
   for (let i = 0; i < 20; i++) {
     await sleep(500);
@@ -354,16 +366,16 @@ async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand)
   const brand = expectedBrand
     ? assertSameBrand(expectedBrand, recordBrand, 'sku-records')
     : recordBrand;
-  const eligibleCodes = Object.values(records)
+  const eligibleKeys = Object.values(records)
     .filter(r =>
       r && typeof r === 'object' &&
       r.shopName === shopName &&
       !r.erpCode &&
       r.recognition && Array.isArray(r.recognition.items) && r.recognition.items.length > 0
     )
-    .map(r => r.platformCode)
+    .map(r => recordKey(r.productCode, r.platformCode))
     .sort();
-  const scope = `${shopName}:${eligibleCodes.join(',')}`;
+  const scope = `${shopName}:${eligibleKeys.join(',')}`;
   const log = loadLog();
   if (log.scope !== scope) {
     log.scope = scope;
@@ -398,6 +410,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand)
 
     for (let i = 0; i < bundles.length; i++) {
       const r = bundles[i];
+      const taskKey = recordKey(r.productCode, r.platformCode);
       console.error(`\n── Phase 1 [${i + 1}/${bundles.length}] ${r.platformCode} ──`);
 
       // Step A: 用货号搜索，定位到目标行
@@ -417,7 +430,7 @@ async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand)
       const pageResult = await processCurrentPage(erpId, [r.productCode], [r.platformCode]);
       if (pageResult.checked !== 1 || pageResult.selectedCount !== 1) {
         const err = `展开+勾选失败: productCode=${r.productCode} platformCode=${r.platformCode}`;
-        log.failed.push({ platformCode: r.platformCode, type: '组合装', error: err, time: new Date().toISOString() });
+        log.failed.push({ recordKey: taskKey, productCode: r.productCode, platformCode: r.platformCode, type: '组合装', error: err, time: new Date().toISOString() });
         saveLog(log);
         throw new Error(err);
       }
@@ -437,12 +450,12 @@ async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand)
       try {
         await copyOneSku(erpId, shopName, r.productCode, r.platformCode,
           resolveItems(r.platformCode, r.recognition.items, brand));
-        log.failed = log.failed.filter(f => f.platformCode !== r.platformCode);
-        log.done.push(r.platformCode);
+        log.failed = log.failed.filter(f => (f.recordKey || f.platformCode) !== taskKey);
+        log.done.push(taskKey);
         saveLog(log);
       } catch (e) {
         console.error(`[${r.platformCode}] ❌ ${e.message}`);
-        log.failed.push({ platformCode: r.platformCode, type: '组合装', error: e.message, time: new Date().toISOString() });
+        log.failed.push({ recordKey: taskKey, productCode: r.productCode, platformCode: r.platformCode, type: '组合装', error: e.message, time: new Date().toISOString() });
         saveLog(log);
         console.error(`\n[STOP] 匹配异常，已停止。已完成: ${log.done.length}, 失败: ${log.failed.length}`);
         console.error(`[STOP] 失败 SKU: ${r.platformCode}, 原因: ${e.message}`);
@@ -456,17 +469,22 @@ async function main(erpId, shopName = '澜泽', limit = Infinity, expectedBrand)
   console.error(`\n── Phase 2：单品 ${singles.length} 个 ──`);
   for (let i = 0; i < singles.length; i++) {
     const r = singles[i];
+    const taskKey = recordKey(r.productCode, r.platformCode);
     const erpName = r.recognition.items[0].name;
     console.error(`[${i + 1}/${singles.length}] ${r.platformCode} → ${erpName}`);
     try {
-      await remapSku(erpId, r.platformCode, erpName, { confirm: true });
-      log.failed = log.failed.filter(f => f.platformCode !== r.platformCode);
-      log.done.push(r.platformCode);
+      await remapSku(erpId, r.platformCode, erpName, {
+        confirm: true,
+        productCode: r.productCode,
+        shopName: r.shopName,
+      });
+      log.failed = log.failed.filter(f => (f.recordKey || f.platformCode) !== taskKey);
+      log.done.push(taskKey);
       saveLog(log);
       console.error(`[${r.platformCode}] ✅`);
     } catch (e) {
       console.error(`[${r.platformCode}] ❌ ${e.message}`);
-      log.failed.push({ platformCode: r.platformCode, type: '单品', error: e.message, time: new Date().toISOString() });
+      log.failed.push({ recordKey: taskKey, productCode: r.productCode, platformCode: r.platformCode, type: '单品', error: e.message, time: new Date().toISOString() });
       saveLog(log);
       console.error(`\n[STOP] 匹配异常，已停止。已完成: ${log.done.length}, 失败: ${log.failed.length}`);
       console.error(`[STOP] 失败 SKU: ${r.platformCode}, 原因: ${e.message}`);

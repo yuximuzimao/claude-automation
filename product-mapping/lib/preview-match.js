@@ -22,10 +22,11 @@ const REPORT_DIR = path.join(__dirname, '../data/reports');
 const IMGS_DIR = path.join(__dirname, '../data/imgs');
 const SKU_RECORDS = path.join(__dirname, '../data/sku-records.json');
 const { requireRecordBrand } = require('./brand-scope');
+const { imageFileName } = require('./sku-identity');
 
 /** 将图片文件编码为 base64 data URI */
-function imgDataUri(platformCode) {
-  const imgPath = path.join(IMGS_DIR, `${platformCode}.jpg`);
+function imgDataUri(productCode, platformCode) {
+  const imgPath = path.join(IMGS_DIR, imageFileName(productCode, platformCode));
   if (!fs.existsSync(imgPath)) return null;
   return `data:image/jpeg;base64,${fs.readFileSync(imgPath).toString('base64')}`;
 }
@@ -66,7 +67,7 @@ function getPreviewDetails(sku, brand) {
 
 /** 渲染单张卡片（与 verify-table 同款布局） */
 function renderCard(sku, details, badgeClass, badgeText) {
-  const imgSrc = imgDataUri(sku.platformCode);
+  const imgSrc = imgDataUri(sku.productCode, sku.platformCode);
   return `
   <div class="card">
     <div class="card-header">

@@ -66,8 +66,9 @@ function makeSearchCodeJS(code, placeholder) {
     '})()';
 }
 
-function makeReadDataListJS(placeholder) {
+function makeReadDataListJS(placeholder, expectedCode) {
   const targetPlaceholder = JSON.stringify(placeholder);
+  const expected = JSON.stringify(String(expectedCode));
   return (
   '(function(){' +
   '  var el=Array.from(document.querySelectorAll(".el-input__inner")).find(function(i){var r=i.getBoundingClientRect();return i.placeholder===' + targetPlaceholder + '&&r.width>0&&r.height>0;});' +
@@ -82,7 +83,18 @@ function makeReadDataListJS(placeholder) {
   '  if(!sv||!sv.dataList||!sv.dataList.length){' +
   '    return JSON.stringify({error:"dataList 为空",count:sv?sv.dataList.length:-1});' +
   '  }' +
-  '  var item=sv.dataList[0];' +
+  '  var expected=' + expected + ';' +
+  '  function containsExact(value,depth){' +
+  '    if(depth<0||value===null||value===undefined)return false;' +
+  '    if(typeof value!=="object")return String(value).trim()===expected;' +
+  '    if(Array.isArray(value))return value.some(function(v){return containsExact(v,depth-1);});' +
+  '    return Object.keys(value).some(function(k){return containsExact(value[k],depth-1);});' +
+  '  }' +
+  '  var item=sv.dataList.find(function(candidate){' +
+  '    if(' + targetPlaceholder + '==="主商家编码")return String(candidate.outerId||"").trim()===expected;' +
+  '    return containsExact(candidate,4);' +
+  '  });' +
+  '  if(!item)return JSON.stringify({error:"dataList 未包含查询编码",count:sv.dataList.length,expected:expected});' +
   '  return JSON.stringify({outerId:item.outerId,title:item.title,type:item.type,subItemNum:item.subItemNum||0});' +
   '})()'
   );
@@ -151,7 +163,7 @@ async function queryArchive(erpId, erpCode) {
       const search = await cdp.eval(erpId, makeSearchCodeJS(erpCode, placeholder));
       if (search.error) throw new Error(search.error);
       await sleep(3500);
-      const d = await cdp.eval(erpId, makeReadDataListJS(placeholder));
+      const d = await cdp.eval(erpId, makeReadDataListJS(placeholder, erpCode));
       if (d.error) {
         if (d.count === 0) return null; // 精确查询无结果，真实不存在
         throw new Error(`${d.error} (count=${d.count})`); // Vue未就绪等瞬态错误，交给 retry
@@ -230,19 +242,23 @@ const CLOSE_SUB_DIALOG_JS =
  * @returns {Promise<Array<{name, specCode, qty}>>}
  */
 async function querySubItems(erpId, subItemNum) {
-  try {
-    const clickRes = await cdp.eval(erpId, makeClickSubItemLinkJS(subItemNum));
-    if (clickRes && clickRes.error) {
-      console.error(`[archive] ⚠️ 点击子品链接失败: ${clickRes.error}`);
-      return [];
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const clickRes = await cdp.eval(erpId, makeClickSubItemLinkJS(subItemNum));
+      if (clickRes && clickRes.error) {
+        console.error(`[archive] ⚠️ 点击子品链接失败（${attempt}/2）: ${clickRes.error}`);
+      } else {
+        await sleep(attempt === 1 ? 1500 : 2200);
+        const raw = await cdp.eval(erpId, READ_SUB_ITEMS_JS);
+        if (Array.isArray(raw) && raw.length > 0) return raw;
+        console.error(`[archive] ⚠️ 子品弹窗返回空明细（${attempt}/2），准备重试`);
+      }
+    } finally {
+      await cdp.eval(erpId, CLOSE_SUB_DIALOG_JS);
+      await sleep(600);
     }
-    await sleep(1500);
-    const raw = await cdp.eval(erpId, READ_SUB_ITEMS_JS);
-    return Array.isArray(raw) ? raw : [];
-  } finally {
-    await cdp.eval(erpId, CLOSE_SUB_DIALOG_JS);
-    await sleep(600);
   }
+  return [];
 }
 
 module.exports = { initArchiveComp, queryArchive, querySubItems };

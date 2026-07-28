@@ -1,9 +1,10 @@
 {
   "_meta": {
     "brand": "悦希",
-    "campaign": "260703活动（2026年7月）",
-    "lastUpdated": "2026-06-25",
-    "note": "配件规则：key = platformCode（精确匹配），不再依赖 productCode 或 skuNameContains 模糊匹配。识图只记录图片中可见商品，不可见配件由此文件在 match 和 check 时临时注入（不写回 recognition）。erpName 必须与 ERP 档案精确一致（可从 features.json 复制）。",
+    "campaign": "百浩悦希活动（2026-07-28）",
+    "lastUpdated": "2026-07-28",
+    "fullGift": "无",
+    "note": "本次无满赠。配件规则按 platformCode 精确匹配；识图只记录图片中可见商品，不可见配件由此文件在 match 和 check 时临时注入（不写回 recognition）。",
     "accessoryList": [
       "HEE悦希印花礼袋-白",
       "HEE悦希印花礼盒（天地盖）白色",
@@ -12,27 +13,7 @@
     ]
   },
   "rules": {
-    "260605- 6": {
-      "note": "货号0605zh-1 悦颜3件组*2套+眼膜*2盒：带白色印花礼盒×2+礼袋×2+雪梨纸×2",
-      "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 2 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 2 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 2 }
-      ]
-    },
-    "260605- 7": {
-      "note": "货号yxxhtz 修护四件组*4组+眼膜*2盒：带修颜礼袋×4",
-      "accessories": [
-        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 4 }
-      ]
-    },
-    "260605-9": {
-      "note": "货号yxxhtz 修护套组*2组：带修颜礼袋×2",
-      "accessories": [
-        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
-      ]
-    },
-    "260703-1": {
+    "260805-4": {
       "note": "货号yx001 焕颜四件组：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
       "accessories": [
         { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
@@ -40,56 +21,12 @@
         { "erpName": "HEE悦希雪梨纸", "qty": 1 }
       ]
     },
-    "260703-2": {
-      "note": "货号0703zt1 焕颜四件组*2+精油：带白色印花礼盒×2+礼袋×2+雪梨纸×2",
-      "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 2 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 2 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 2 }
-      ]
-    },
-    "721zh2": {
-      "note": "货号yyzh4 悦颜3件组：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "yxhyzh1x": {
+      "note": "货号yxhyzh1 眼霜3.0款2瓶+眼油1瓶：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
       "accessories": [
         { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
         { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
         { "erpName": "HEE悦希雪梨纸", "qty": 1 }
-      ]
-    },
-    "260605-10": {
-      "note": "货号yxlhy-2 兰花油*2+悦颜水20ml体验装*10+化妆棉*1：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
-      "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
-      ]
-    },
-    "260605-11": {
-      "note": "货号yxlhy-2 兰花油*2瓶赠5抗精华：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
-      "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
-      ]
-    },
-    "260605-12": {
-      "note": "货号0409-6 悦颜3件组*1组+胶原饮*8盒：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
-      "accessories": [
-        { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
-        { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },
-        { "erpName": "HEE悦希雪梨纸", "qty": 1 }
-      ]
-    },
-    "260605-13": {
-      "note": "货号0308-1 修护四件组+祛痘三件+特修霜1瓶：带修颜礼袋×1",
-      "accessories": [
-        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 1 }
-      ]
-    },
-    "260605-14": {
-      "note": "货号0509-1 修护套组*2组+修护霜*2瓶：带修颜礼袋×2",
-      "accessories": [
-        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
       ]
     },
     "yx820-1": {
@@ -100,6 +37,12 @@
         { "erpName": "HEE悦希雪梨纸", "qty": 1 }
       ]
     },
+    "260605-9": {
+      "note": "货号yxxhtz 修护套组*2组：带修颜礼袋×2",
+      "accessories": [
+        { "erpName": "HEE悦希修颜礼盒(蓝色)手提袋礼袋", "qty": 2 }
+      ]
+    },
     "yyzh26": {
       "note": "货号yyzh26 悦颜3件组：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
       "accessories": [
@@ -108,8 +51,8 @@
         { "erpName": "HEE悦希雪梨纸", "qty": 1 }
       ]
     },
-    "yxhyzh1x": {
-      "note": "货号yxhyzh1 眼霜3.0款2瓶+眼油1瓶：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
+    "260605-11": {
+      "note": "货号yxlhy-2 兰花油*2瓶赠5抗精华：带白色印花礼盒×1+礼袋×1+雪梨纸×1",
       "accessories": [
         { "erpName": "HEE悦希印花礼盒（天地盖）白色", "qty": 1 },
         { "erpName": "HEE悦希印花礼袋-白", "qty": 1 },

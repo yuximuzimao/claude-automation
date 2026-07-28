@@ -12,6 +12,7 @@ const path = require('path');
 const fs = require('fs');
 const { resolveItems } = require('./utils/resolve-items');
 const { requireKnownBrand } = require('./brand-scope');
+const { imageFileName, recordKey } = require('./sku-identity');
 
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const IMGS_DIR = path.join(__dirname, '../data/imgs');
@@ -32,8 +33,8 @@ function latestReport() {
 /**
  * 将图片文件编码为 base64 data URI
  */
-function imgDataUri(platformCode) {
-  const imgPath = path.join(IMGS_DIR, `${platformCode}.jpg`);
+function imgDataUri(productCode, platformCode) {
+  const imgPath = path.join(IMGS_DIR, imageFileName(productCode, platformCode));
   if (!fs.existsSync(imgPath)) return null;
   const buf = fs.readFileSync(imgPath);
   const b64 = buf.toString('base64');
@@ -60,11 +61,12 @@ function generate(report) {
   // 预加载所有图片（避免 map 内逐个 I/O）
   const imgCache = {};
   for (const sku of allSkus) {
-    imgCache[sku.platformCode] = imgDataUri(sku.platformCode);
+    const key = recordKey(sku._productCode, sku.platformCode);
+    imgCache[key] = imgDataUri(sku._productCode, sku.platformCode);
   }
 
   const rows = allSkus.map(sku => {
-    const imgSrc = imgCache[sku.platformCode];
+    const imgSrc = imgCache[recordKey(sku._productCode, sku.platformCode)];
     const hasImg = !!imgSrc;
     const isMatch = sku.comparisonResult === 'match';
     const isMismatch = sku.comparisonResult === 'mismatch';

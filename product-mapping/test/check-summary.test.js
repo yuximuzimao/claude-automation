@@ -34,3 +34,14 @@ test('final summary has no awaiting or pending SKU when all mappings match', () 
   assert.equal(summary.comparisonPending, 0);
   assert.equal(summary.pendingVisualReview, 0);
 });
+
+test('missing recognition is a mismatch without making comparisonPending negative', () => {
+  const summary = summarizeSkuComparisons([
+    { platformCode: 'missing', erpCode: 'ERP-1', recognition: null, comparisonResult: 'mismatch' },
+  ]);
+
+  assert.equal(summary.recognitionDone, 0);
+  assert.equal(summary.comparisonMismatch, 1);
+  assert.equal(summary.comparisonPending, 0);
+  assert.equal(summary.pendingVisualReview, 1);
+});

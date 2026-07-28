@@ -15,6 +15,7 @@ const { sleep } = require('./wait');
 const { releaseErpLock } = require('./erp-lock');
 const { compareSkuArchive } = require('./compare');
 const { requireKnownBrand, requireRecordBrand, assertSameBrand } = require('./brand-scope');
+const { recordKey, findRecord } = require('./sku-identity');
 
 const REPORT_DIR = path.join(__dirname, '../data/reports');
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
@@ -33,6 +34,11 @@ function summarizeSkuComparisons(allSkus) {
   const compMismatch = allSkus.filter(s => s.comparisonResult === 'mismatch').length;
   const recognitionDone = allSkus.filter(s => s.recognition).length;
   const pendingVisualReview = allSkus.filter(s => !s.recognition).length;
+  const comparisonPending = allSkus.filter(s =>
+    s.recognition &&
+    s.comparisonResult !== 'match' &&
+    s.comparisonResult !== 'mismatch'
+  ).length;
   const matchedSkus = allSkus.filter(s => s.erpCode);
   const unmatchedSkus = allSkus.filter(s => !s.erpCode);
 
@@ -41,7 +47,7 @@ function summarizeSkuComparisons(allSkus) {
     recognitionDone,
     comparisonMatch: compMatch,
     comparisonMismatch: compMismatch,
-    comparisonPending: recognitionDone - compMatch - compMismatch,
+    comparisonPending,
     matchedSkuCount: matchedSkus.length,
     matchedComparisonMatch: matchedSkus.filter(s => s.comparisonResult === 'match').length,
     matchedComparisonMismatch: matchedSkus.filter(s => s.comparisonResult === 'mismatch').length,
@@ -61,11 +67,11 @@ function loadReusableActiveProducts(shopName, skuRecords) {
   const products = Array.isArray(previous.products) ? previous.products : [];
   const recordCodes = new Set(Object.values(skuRecords)
     .filter(r => r && r.shopName === shopName && String(r.scope || '').startsWith('active-'))
-    .map(r => r.platformCode)
+    .map(r => recordKey(r.productCode, r.platformCode))
     .filter(Boolean));
   const reportCodes = new Set(products
-    .flatMap(p => Array.isArray(p.skus) ? p.skus : [])
-    .map(s => s.platformCode)
+    .flatMap(p => (Array.isArray(p.skus) ? p.skus : [])
+      .map(s => recordKey(p.productCode, s.platformCode)))
     .filter(Boolean));
 
   const missingInReport = [...recordCodes].filter(code => !reportCodes.has(code));
@@ -141,7 +147,9 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
     const corrMap = {};
     corrAll.forEach(r => { corrMap[r.productCode] = r.skus; });
     const corrImgMap = {};
-    corrAll.forEach(r => r.skus.forEach(s => { if (s.imgUrl) corrImgMap[s.platformCode] = s.imgUrl; }));
+    corrAll.forEach(r => r.skus.forEach(s => {
+      if (s.imgUrl) corrImgMap[recordKey(r.productCode, s.platformCode)] = s.imgUrl;
+    }));
     console.error(`[check] 对应表共 ${corrAll.length} 条产品记录`);
 
     // 3. 初始化档案V2
@@ -166,7 +174,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
     // 5. 逐产品核查
     console.error('[check] 4/4 逐产品核查...');
     let matchedCount = 0, unmatchedCount = 0, partialCount = 0, notInCorrCount = 0;
-    const activePlatformCodes = new Set();
+    const activeRecordKeys = new Set();
 
     for (const p of jlProducts) {
       const skus = corrMap[p.code];
@@ -188,10 +196,10 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
       let hasMatched = false;
 
       for (const sku of skus) {
-        if (sku.platformCode) activePlatformCodes.add(sku.platformCode);
+        if (sku.platformCode) activeRecordKeys.add(recordKey(p.code, sku.platformCode));
         // 所有 SKU 都下载图片（文件名 = platformCode，不存在才下载）
         if (sku.imgUrl) {
-          const dest = imgPath(sku.platformCode);
+          const dest = imgPath(p.code, sku.platformCode);
           if (!fs.existsSync(dest)) {
             try { downloadImg(sku.imgUrl, dest); } catch (e) {
               console.error(`[check] ⚠️ 图片下载失败: ${sku.platformCode} ${e.message}`);
@@ -201,7 +209,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
 
         if (!sku.erpCode) {
           hasUnmatched = true;
-          const rec0 = skuRecords[sku.platformCode];
+          const rec0 = findRecord(skuRecords, p.code, sku.platformCode);
           const recognition = rec0?.brand === brand ? rec0.recognition || null : null;
           skuResults.push({
             skuName: sku.skuName,
@@ -241,7 +249,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
           status = '已匹配-待视觉核查';
         }
 
-        const rec = skuRecords[sku.platformCode];
+        const rec = findRecord(skuRecords, p.code, sku.platformCode);
         const recognition = rec?.brand === brand ? rec.recognition || null : null;
         const subItems = (archiveItem && archiveItem.subItems) || [];
 
@@ -324,7 +332,7 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
       console.error(`[check] ⚠️ ${comparisonSummary.pendingVisualReview} 个 SKU 待完成识图`);
     }
 
-    if (activePlatformCodes.size > 0) {
+    if (activeRecordKeys.size > 0) {
       try {
         const activeScope = `active-${dateStr}`;
         // 全量重写 sku-records.json：以本次 check 的活跃 SKU 为唯一数据源
@@ -333,13 +341,15 @@ async function runCheck(jlId, erpId, shopName, options = {}) {
         for (const prod of report.products) {
           for (const sku of prod.skus) {
             if (!sku.platformCode) continue;
-            newRecords[sku.platformCode] = {
+            const key = recordKey(prod.productCode, sku.platformCode);
+            newRecords[key] = {
+              recordKey: key,
               platformCode: sku.platformCode,
               skuName: sku.skuName || null,
               productCode: prod.productCode,
               shopName,
               brand,
-              imgUrl: corrImgMap[sku.platformCode] || null,
+              imgUrl: corrImgMap[key] || null,
               erpCode: sku.erpCode || null,
               erpName: sku.erpName || null,
               recognition: sku.recognition || null,

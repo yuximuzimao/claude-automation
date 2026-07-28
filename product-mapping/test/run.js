@@ -213,8 +213,8 @@ const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
       writeFixture(makeSkuRecordsJson({
         stage: 'images_done', shopName: 'T', productCode: 'yx001', brand: 'hee',
         skus: {
-          '260703-1': makeSkuRecord({
-            platformCode: '260703-1',
+          '260805-4': makeSkuRecord({
+            platformCode: '260805-4',
             productCode: 'yx001',
             recognition: { type: '单品', items: [{ name: '主商品', qty: 1 }], raw: '' },
           }),
@@ -223,7 +223,7 @@ const skuRecordsPath = path.join(PROJECT_ROOT, 'data/sku-records.json');
       const r4 = await annotate.annotate();
       const d4 = JSON.parse(fs.readFileSync(skuRecordsPath, 'utf8'));
       assert.strictEqual(r4.data.injected, 1);
-      assert.ok(d4.skus['260703-1'].recognition.items.some(item => item.name === 'HEE悦希印花礼盒（天地盖）白色'));
+      assert.ok(d4.skus['260805-4'].recognition.items.some(item => item.name === 'HEE悦希印花礼盒（天地盖）白色'));
 
       // 用例 5: stage 错误
       writeFixture(makeSkuRecordsJson({

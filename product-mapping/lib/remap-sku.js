@@ -19,6 +19,7 @@ const fs = require('fs');
 const cdp = require('./cdp');
 const { sleep, waitFor } = require('./wait');
 const { navigateErp } = require('./navigate');
+const { findRecord } = require('./sku-identity');
 
 const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
 
@@ -32,15 +33,24 @@ const SKU_RECORDS_PATH = path.join(__dirname, '../data/sku-records.json');
  * @returns {Promise<{ok:boolean, erpCode:string, erpName:string, message:string}>}
  */
 async function remapSku(erpId, platformCode, erpName, opts = {}) {
-  const { confirm = false, itemType = '普通商品', skipNav = false } = opts;
+  const {
+    confirm = false,
+    itemType = '普通商品',
+    skipNav = false,
+    productCode: expectedProductCode = null,
+    shopName: expectedShopName = null,
+  } = opts;
 
   // Step 1: 从 sku-records.json 查出 productCode（货号）和 shopName
   // 支持新格式（{stage, skus:{...}}）和旧格式（{platformCode:{...}}）
   const rawRecords = JSON.parse(fs.readFileSync(SKU_RECORDS_PATH, 'utf8'));
   const records = rawRecords.skus || rawRecords;
-  const skuRecord = records[platformCode];
+  const skuRecord = expectedProductCode
+    ? findRecord(records, expectedProductCode, platformCode)
+    : Object.values(records).find(record => record && record.platformCode === platformCode);
   if (!skuRecord) throw new Error(`platformCode ${platformCode} not found in sku-records.json`);
-  const { productCode, shopName } = skuRecord;
+  const productCode = expectedProductCode || skuRecord.productCode;
+  const shopName = expectedShopName || skuRecord.shopName;
   console.error(`[remap] ${platformCode} → productCode=${productCode}, shop=${shopName}`);
 
   // Step 2: 导航到商品对应表（skipNav=true 时跳过，调用方已就绪）

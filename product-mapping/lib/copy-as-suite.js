@@ -190,23 +190,24 @@ async function confirmDialog(erpId) {
     `})()`,
   );
   if (r && r.error) throw new Error(r.error);
-  await sleep(2000);
-
-  // 验证「选择商品」弹窗关闭（此处不加 height 检测：需要找到 wrapper 来确认它已变为 height=0）
-  const r2 = await cdp.eval(erpId, `(function(){
-    var w = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
-      return (w.querySelector('.el-dialog__title')||{}).innerText === '选择商品';
-    });
-    if(!w) return JSON.stringify({closed:true});
-    return JSON.stringify({closed: w.getBoundingClientRect().height === 0});
-  })()`);
-  // 「换对应商品」会叠在「选择商品」之上，后者 height>0 不代表未关闭
-  // 只有在换对应商品也未出现时，才是真正的异常
-  if (!r2 || !r2.closed) {
-    const rebind = await cdp.eval(erpId,
-      `(function(){var w=${FIND_REBIND_DIALOG};return JSON.stringify({appeared:!!w});})()`,
+  // ERP 保存成功后的关闭时间会随页面负载波动，不能用固定 2 秒做一次性判断。
+  // 最多轮询 10 秒；「选择商品」关闭或「换对应商品」出现都表示确认已被接收。
+  let confirmState = null;
+  for (let attempt = 0; attempt < 20; attempt++) {
+    await sleep(500);
+    confirmState = await cdp.eval(erpId,
+      `(function(){` +
+      `var select=Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){` +
+      `  return (w.querySelector('.el-dialog__title')||{}).innerText==='选择商品';` +
+      `});` +
+      `var rebind=${FIND_REBIND_DIALOG};` +
+      `return JSON.stringify({selectClosed:!select||select.getBoundingClientRect().height===0,rebindAppeared:!!rebind});` +
+      `})()`,
     );
-    if (!rebind || !rebind.appeared) throw new Error('点确定后弹窗未关闭');
+    if (confirmState && (confirmState.selectClosed || confirmState.rebindAppeared)) break;
+  }
+  if (!confirmState || (!confirmState.selectClosed && !confirmState.rebindAppeared)) {
+    throw new Error('点确定后弹窗 10 秒内未关闭');
   }
 
   // 检查是否出现「换对应商品」弹窗（已有同比例套件时触发）

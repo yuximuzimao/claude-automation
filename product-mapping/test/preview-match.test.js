@@ -6,7 +6,7 @@ const { getPreviewDetails } = require('../lib/preview-match');
 
 test('preview combines AI recognition and injected accessories in the final detail table', () => {
   const details = getPreviewDetails({
-    platformCode: '260703-1',
+    platformCode: '260805-4',
     recognition: {
       items: [{ name: '基础商品', qty: 1 }],
     },

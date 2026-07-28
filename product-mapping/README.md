@@ -17,6 +17,7 @@ node cli.js check --shop <店铺> --reuse-active --skip-download
 最后一次 `check` 必须满足：
 
 - 活动范围与匹配前已确认范围完全一致；
+- 不同活动链接即使复用同一 `platformCode`，也必须按 `productCode + platformCode` 分别计数和核对；
 - `recognitionDone` 等于 SKU 总数；
 - `comparisonMatch` 等于 SKU 总数；
 - `comparisonMismatch`、`comparisonPending`、`pendingVisualReview` 都为 `0`。

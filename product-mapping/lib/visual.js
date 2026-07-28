@@ -12,6 +12,7 @@ const { execSync } = require('child_process');
 const IMG_DIR = path.join(__dirname, '../data/imgs');
 const VERDICTS_FILE = path.join(__dirname, '../data/visual-verdicts.json');
 const SKU_RECORDS_FILE = path.join(__dirname, '../data/sku-records.json');
+const { recordKey, imageFileName } = require('./sku-identity');
 
 /**
  * 将 notes 文本（"商品A×N 商品B×M"）解析为 recognition 结构
@@ -47,10 +48,10 @@ function readJson(filePath, fallback) {
 }
 
 /**
- * 图片路径：data/imgs/{platformCode}.jpg（由 platformCode 直接推导，不需要索引）
+ * 图片路径：data/imgs/{productCode}__{platformCode}.jpg（由商品链接身份直接推导）
  */
-function imgPath(platformCode) {
-  return path.join(IMG_DIR, platformCode + '.jpg');
+function imgPath(productCode, platformCode) {
+  return path.join(IMG_DIR, imageFileName(productCode, platformCode));
 }
 
 /**
@@ -79,26 +80,94 @@ function loadVerdicts() {
  * @param {string} notes - 我识别到的内容描述
  * @param {string} [matchDetail] - match.js 输出的比对结论
  */
-function recordVerdict(platformCode, verdict, notes, matchDetail) {
+function recordVerdict(platformCode, verdict, notes, matchDetail, productCode = null) {
   const verdicts = loadVerdicts();
-  verdicts[platformCode] = {
-    verdict,        // 'ok' | 'mismatch' | 'uncertain'
-    notes,          // 我看到的内容，如"益生菌×6、冰霸杯×1、玉米片×10、吸管袋×1"
-    matchDetail,    // match.js 输出，如"MATCH" 或 "MISMATCH: 缺少 保温壶×1"
+  const value = {
+    verdict,
+    notes,
+    matchDetail,
     reviewTime: new Date().toISOString()
   };
-  fs.writeFileSync(VERDICTS_FILE, JSON.stringify(verdicts, null, 2));
 
-  // 同步写入 sku-records.json 的 recognition 字段
   if (fs.existsSync(SKU_RECORDS_FILE)) {
     const records = JSON.parse(fs.readFileSync(SKU_RECORDS_FILE, 'utf8'));
-    if (records[platformCode]) {
-      records[platformCode].recognition = parseNotesToRecognition(notes);
-      fs.writeFileSync(SKU_RECORDS_FILE, JSON.stringify(records, null, 2));
+    const matches = Object.values(records).filter(record =>
+      record &&
+      record.platformCode === platformCode &&
+      (!productCode || record.productCode === productCode)
+    );
+    for (const record of matches) {
+      verdicts[recordKey(record.productCode, record.platformCode)] = value;
+      record.recognition = parseNotesToRecognition(notes);
     }
+    fs.writeFileSync(SKU_RECORDS_FILE, JSON.stringify(records, null, 2));
+  } else if (productCode) {
+    verdicts[recordKey(productCode, platformCode)] = value;
+  } else {
+    verdicts[platformCode] = value;
+  }
+  fs.writeFileSync(VERDICTS_FILE, JSON.stringify(verdicts, null, 2));
+
+  return value;
+}
+
+/**
+ * 结构化写入单个商品链接的识图结果。
+ *
+ * WHY: ERP 标准商品名经常包含空格，不能经过 notes 文本分词；同时重复
+ * platformCode 的活动链接必须按 productCode + platformCode 独立保存。
+ *
+ * @param {string} productCode
+ * @param {string} platformCode
+ * @param {Array<{name:string,qty:number}>} items
+ * @param {'ok'|'mismatch'|'uncertain'} [verdict]
+ * @param {string} [matchDetail]
+ */
+function recordRecognition(productCode, platformCode, items, verdict = 'ok', matchDetail = '') {
+  if (!productCode || !platformCode) {
+    throw new Error('recordRecognition 需要 productCode 和 platformCode');
+  }
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new Error(`recordRecognition ${productCode}::${platformCode} 缺少识图明细`);
   }
 
-  return verdicts[platformCode];
+  const normalizedItems = items.map((item, index) => {
+    const name = typeof item?.name === 'string' ? item.name.trim() : '';
+    const qty = Number(item?.qty);
+    if (!name || !Number.isInteger(qty) || qty <= 0) {
+      throw new Error(`recordRecognition ${productCode}::${platformCode} 第 ${index + 1} 项无效`);
+    }
+    return { name, qty };
+  });
+  const notes = normalizedItems.map(item => `${item.name}×${item.qty}`).join('；');
+  const recognition = {
+    type: normalizedItems.length === 1 ? '单品' : '组合装',
+    items: normalizedItems,
+    raw: notes,
+  };
+  const value = {
+    verdict,
+    notes,
+    matchDetail,
+    reviewTime: new Date().toISOString(),
+  };
+  const key = recordKey(productCode, platformCode);
+  const records = readJson(SKU_RECORDS_FILE, {});
+  const record = records[key] || Object.values(records).find(candidate =>
+    candidate?.productCode === productCode && candidate?.platformCode === platformCode
+  );
+  if (!record) {
+    throw new Error(`未找到商品链接记录: ${key}`);
+  }
+
+  record.recognition = recognition;
+  records[key] = record;
+  fs.writeFileSync(SKU_RECORDS_FILE, JSON.stringify(records, null, 2));
+
+  const verdicts = loadVerdicts();
+  verdicts[key] = value;
+  fs.writeFileSync(VERDICTS_FILE, JSON.stringify(verdicts, null, 2));
+  return { ...value, recognition };
 }
 
 /**
@@ -111,7 +180,8 @@ function listPending(report) {
   const pending = [];
   for (const p of report.products) {
     for (const sku of p.skus) {
-      if (sku.status === '已匹配-待视觉核查' && !verdicts[sku.platformCode]) {
+      const key = recordKey(p.productCode, sku.platformCode);
+      if (sku.status === '已匹配-待视觉核查' && !verdicts[key] && !verdicts[sku.platformCode]) {
         pending.push({
           productCode: p.productCode,
           productName: p.productName,
@@ -119,7 +189,7 @@ function listPending(report) {
           platformCode: sku.platformCode,
           erpCode: sku.erpCode,
           erpName: sku.erpName,
-          imgPath: imgPath(sku.platformCode)
+          imgPath: imgPath(p.productCode, sku.platformCode)
         });
       }
     }
@@ -136,15 +206,16 @@ function mergeVerdicts(report) {
   const verdicts = loadVerdicts();
   for (const p of report.products) {
     for (const sku of p.skus) {
-      if (verdicts[sku.platformCode]) {
-        sku.visualVerdict = verdicts[sku.platformCode].verdict;
-        sku.visualNotes = verdicts[sku.platformCode].notes;
-        sku.matchDetail = verdicts[sku.platformCode].matchDetail;
+      const saved = verdicts[recordKey(p.productCode, sku.platformCode)] || verdicts[sku.platformCode];
+      if (saved) {
+        sku.visualVerdict = saved.verdict;
+        sku.visualNotes = saved.notes;
+        sku.matchDetail = saved.matchDetail;
         // 更新 status
         if (sku.status === '已匹配-待视觉核查') {
-          sku.status = verdicts[sku.platformCode].verdict === 'ok'
+          sku.status = saved.verdict === 'ok'
             ? '已匹配-视觉确认'
-            : verdicts[sku.platformCode].verdict === 'mismatch'
+            : saved.verdict === 'mismatch'
               ? '已匹配-视觉不符'
               : '已匹配-无法判断';
         }
@@ -154,4 +225,12 @@ function mergeVerdicts(report) {
   return report;
 }
 
-module.exports = { imgPath, downloadImg, loadVerdicts, recordVerdict, listPending, mergeVerdicts };
+module.exports = {
+  imgPath,
+  downloadImg,
+  loadVerdicts,
+  recordVerdict,
+  recordRecognition,
+  listPending,
+  mergeVerdicts,
+};
