@@ -146,6 +146,17 @@ function reject(reason, warnings, rulesApplied) {
   return { action: 'reject', reason, confidence: 'high', warnings: warnings || [], rulesApplied: rulesApplied || [] };
 }
 
+const INTERCEPT_REJECT_REASON = '包裹未退回';
+const INTERCEPT_REJECT_DETAIL = '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款';
+
+function withInterceptRejectCopy(decision) {
+  return {
+    ...decision,
+    rejectReason: INTERCEPT_REJECT_REASON,
+    rejectDetail: INTERCEPT_REJECT_DETAIL,
+  };
+}
+
 // 有拦截记录时不创建重复拦截提醒
 function interceptWarnings(cd) {
   return cd.intercepted ? [] : ['需创建快递拦截提醒'];
@@ -455,14 +466,16 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
           // 在途 → 等待重查（主商品可先不退款，等赠品退回后一起处理）
           const giftDesc = `赠品${giftStatuses52.map(p => p.label).join('；')}`;
           s({ type: 'branch', text: `等待重查 → 主商品未发货，${giftDesc}，等快递退回后再同意退款` });
-          return fin({
+          return fin(withInterceptRejectCopy({
             action: 'reject',
             waitingRescan: true,
-            reason: `主商品未发货，${giftDesc}，等快递退回后处理`,
+            manualExecutionAllowedWhileWaiting: true,
+            reasonCode: 'INTERCEPT_WAITING',
+            reason: `主商品未发货，${giftDesc}，赠品拦截尚未退回，当前等待重查；人工可提前按“包裹未退回”拒绝`,
             confidence: 'medium',
-            rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '赠品在途→等待重查' }],
-            warnings: [],
-          });
+            rulesApplied: [{ doc: 'flow-5.2', section: 'Step4c', summary: '赠品在途→等待重查，可人工提前拒绝' }],
+            warnings: interceptWarnings(cd),
+          }));
         }
         // 赠品全退回 → 继续走主商品未发货 → approve
         s({ type: 'branch', text: '赠品全部已退回 → 继续走主商品未发货→同意退款' });
@@ -553,10 +566,15 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
         }
         // 在途 → 等待重查
         s({ type: 'branch', text: `等待重查 → 鲸灵物流未读到，ERP显示在途：${erpDesc}` });
-        return fin({ action: 'reject', waitingRescan: true,
-          reason: `鲸灵物流未读到，ERP显示${erpDesc}，等快递退回后处理`,
-          rulesApplied: [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP在途→等待重查' }],
-        });
+        return fin(withInterceptRejectCopy({
+          action: 'reject',
+          waitingRescan: true,
+          manualExecutionAllowedWhileWaiting: true,
+          reasonCode: 'INTERCEPT_WAITING',
+          reason: `鲸灵物流未读到，ERP显示${erpDesc}，拦截尚未退回，当前等待重查；人工可提前按“包裹未退回”拒绝`,
+          rulesApplied: [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP在途→等待重查，可人工提前拒绝' }],
+          warnings: interceptWarnings(cd),
+        }));
       }
       s({ type: 'branch', text: '上报 → 已发货但无法读取物流信息' });
       return fin(escalate('已发货但无法读取物流信息'));
@@ -782,23 +800,25 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       const scanStr = hoursUntilNextScan != null ? `${hoursUntilNextScan.toFixed(1)}h` : '?h';
       const marginStr = margin != null ? margin.toFixed(1) : '?';
       s({ type: 'branch', text: `自动标记等待重查 → 剩余${remainingHours.toFixed(1)}h - 扫描${scanStr} = ${marginStr}h > ${SAFETY_MARGIN_HOURS}h安全边际` });
-      return fin({
+      return fin(withInterceptRejectCopy({
         action: 'reject',
-        reason: `${actionSummary}，剩余${remainingHours.toFixed(1)}h，等拦截退回后下次扫描自动重查`,
+        reason: `${actionSummary}；剩余${remainingHours.toFixed(1)}h，距下次扫描${scanStr}，安全边际${marginStr}h，当前等待拦截退回后重查；人工可提前按“包裹未退回”拒绝`,
         confidence: 'high',
-        rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途/驿站拦截件+剩余-扫描>8h→自动等待重查' }],
+        rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '在途/驿站拦截件+剩余-扫描>8h→自动等待重查，可人工提前拒绝' }],
         warnings: interceptWarnings(cd),
         waitingRescan: true,
-      });
+        manualExecutionAllowedWhileWaiting: true,
+        reasonCode: 'INTERCEPT_WAITING',
+      }));
     }
 
     const marginStr = margin != null ? margin.toFixed(1) : '?';
     s({ type: 'branch', text: `拒绝退款 → 剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h - 扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h = ${marginStr}h ≤ ${SAFETY_MARGIN_HOURS}h安全边际，立即处理防止超时自动退款` });
-    return fin({ ...reject(
-      `订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款`,
+    return fin(withInterceptRejectCopy({ ...reject(
+      `${actionSummary}；剩余${remainingHours != null ? remainingHours.toFixed(1) : '?'}h，距下次扫描${hoursUntilNextScan != null ? hoursUntilNextScan.toFixed(1) : '?'}h，安全边际${marginStr}h，时效不足，需立即拒绝防止超时自动退款`,
       interceptWarnings(cd),
       [{ doc: 'flow-5.3', section: 'Step4', summary: '在途/驿站拦截件+剩余-扫描≤8h→拒绝+创建拦截提醒' }]
-    ), reasonCode: 'INTERCEPT_TIMEOUT' });
+    ), reasonCode: 'INTERCEPT_TIMEOUT' }));
   }
 
   s({ type: 'branch', text: `上报 → ERP状态未识别: ${erpStatus}` });

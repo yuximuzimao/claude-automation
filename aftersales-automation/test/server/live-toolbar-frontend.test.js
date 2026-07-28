@@ -8,6 +8,8 @@ const path = require('node:path');
 const BASE = path.join(__dirname, '../..');
 const indexHtml = fs.readFileSync(path.join(BASE, 'public/index.html'), 'utf8');
 const appJs = fs.readFileSync(path.join(BASE, 'public/app.js'), 'utf8');
+const routesJs = fs.readFileSync(path.join(BASE, 'lib/server/routes.js'), 'utf8');
+const opQueueJs = fs.readFileSync(path.join(BASE, 'lib/server/op-queue.js'), 'utf8');
 
 function section(id) {
   const start = indexHtml.indexOf(`<section id="${id}"`);
@@ -44,4 +46,21 @@ test('live tab rendering filters by accountNum without changing sorted item orde
   assert.match(appJs, /setScopedCount\('pending-count', visiblePendingItems\.length, pendingItems\.length\)/);
   assert.match(appJs, /setScopedCount\('waiting-count', visibleWaitingItems\.length, waitingItems\.length\)/);
   assert.match(appJs, /return \(items \|\| \[\]\)\.filter\(item => liveStoreKey\(item\) === selected\)/);
+});
+
+test('等待重查卡片只为显式拦截件保留人工提前拒绝按钮', () => {
+  assert.match(appJs, /const isWaitingIntercept = item\.status === 'waiting'/);
+  assert.match(appJs, /manualExecutionAllowedWhileWaiting === true/);
+  assert.match(appJs, /reasonCode === 'INTERCEPT_WAITING'/);
+  assert.match(appJs, /const canExecute = !executed && \(item\.status !== 'waiting' \|\| isWaitingIntercept\)/);
+  assert.match(appJs, /执行操作（提前拒绝）/);
+});
+
+test('历史记录复用待处理详情渲染并优先使用完整归档决策', () => {
+  assert.match(appJs, /const historyDecision = c\.decision \|\|/);
+  assert.match(appJs, /const historyBody = c\.collectedData/);
+  assert.match(appJs, /renderBody\(/);
+  assert.match(appJs, /该历史记录未保存采集详情/);
+  assert.match(routesJs, /decision: decision \|\| null/);
+  assert.match(opQueueJs, /decision: sim\.decision/);
 });

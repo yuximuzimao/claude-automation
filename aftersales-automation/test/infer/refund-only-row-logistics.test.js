@@ -164,6 +164,10 @@ test('赠品带单号且仍在途时与主品使用相同规则并阻止退款',
   });
 
   assert.notEqual(decision.action, 'approve');
+  assert.equal(decision.waitingRescan, true);
+  assert.equal(decision.manualExecutionAllowedWhileWaiting, true);
+  assert.equal(decision.reasonCode, 'INTERCEPT_WAITING');
+  assert.equal(decision.rejectReason, '包裹未退回');
   assert.equal(checkedLogistics(decision), true);
 });
 
@@ -228,7 +232,13 @@ test('驿站待取件且时效充足时先拦截并等待重查', () => {
   });
 
   assert.equal(decision.waitingRescan, true);
+  assert.equal(decision.manualExecutionAllowedWhileWaiting, true);
+  assert.equal(decision.reasonCode, 'INTERCEPT_WAITING');
+  assert.equal(decision.rejectReason, '包裹未退回');
+  assert.equal(decision.rejectDetail, '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款');
   assert.match(decision.reason, /驿站待取件.*需拦截/);
+  assert.match(decision.reason, /人工可提前/);
+  assert.notEqual(decision.reason, decision.rejectDetail);
   assert.ok(decision.warnings.some(warning => warning.includes('拦截提醒')));
 });
 
@@ -245,5 +255,9 @@ test('驿站待取件只有时效不足时才拒绝退款', () => {
   assert.equal(decision.action, 'reject');
   assert.equal(decision.waitingRescan, undefined);
   assert.equal(decision.reasonCode, 'INTERCEPT_TIMEOUT');
+  assert.equal(decision.rejectReason, '包裹未退回');
+  assert.equal(decision.rejectDetail, '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款');
+  assert.match(decision.reason, /驿站待取件.*时效不足/);
+  assert.notEqual(decision.reason, decision.rejectDetail);
   assert.ok(decision.warnings.some(warning => warning.includes('拦截')));
 });

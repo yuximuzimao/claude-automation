@@ -56,6 +56,7 @@ function buildCasePayload(id, queueItem, sim, source) {
       reason: (decision && decision.reason) || (source === 'auto_executed' ? '自动处理归档' : '手动处理归档'),
       source,
     },
+    decision: decision || null,
     collectedData: sim && sim.collectedData,
     addedAt: new Date().toISOString(),
   };
@@ -265,6 +266,13 @@ router.post('/simulations/:id/execute', (req, res) => {
   if (sim.mode !== 'live') return res.status(400).json({ error: '仅 live 工单支持 execute' });
   if (!sim.decision) return res.status(400).json({ error: '尚未有决策结果' });
   if (sim.executedAt) return res.status(409).json({ error: '已执行' });
+
+  const queueItem = (db.readQueue().items || []).find(item => item.id === sim.queueItemId);
+  if (!queueItem) return res.status(404).json({ error: '队列项不存在' });
+  if (queueItem.status === 'waiting' && !opQueue.canManuallyExecuteWaitingIntercept(queueItem, sim.decision)) {
+    return res.status(400).json({ error: '等待重查工单仅允许拦截件人工提前拒绝' });
+  }
+
   if (['approve', 'reject'].includes(sim.decision.action)
     && sim.decision.humanTriggeredExecutionAllowed === false) {
     return res.status(400).json({ error: '当前退回核验未通过，尚无可安全执行的同意或拒绝动作' });

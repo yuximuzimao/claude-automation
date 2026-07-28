@@ -52,6 +52,31 @@ test('a1-fixed-batch登录异常仍归类为登录失效', () => {
   assert.equal(failure.patch.status, 'expired');
 });
 
+test('等待重查仅拦截件允许人工提前拒绝', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { canManuallyExecuteWaitingIntercept } = require('../../lib/server/op-queue');
+  const queueItem = { status: 'waiting' };
+
+  assert.equal(canManuallyExecuteWaitingIntercept(queueItem, {
+    action: 'reject',
+    waitingRescan: true,
+    manualExecutionAllowedWhileWaiting: true,
+    reasonCode: 'INTERCEPT_WAITING',
+  }), true);
+
+  assert.equal(canManuallyExecuteWaitingIntercept(queueItem, {
+    action: 'reject',
+    waitingRescan: true,
+    reasonCode: 'WAREHOUSE_NOT_RECEIVED',
+  }), false);
+  assert.equal(canManuallyExecuteWaitingIntercept({ status: 'simulated' }, {
+    action: 'reject',
+    waitingRescan: true,
+    manualExecutionAllowedWhileWaiting: true,
+    reasonCode: 'INTERCEPT_WAITING',
+  }), false);
+});
+
 test('op-queue executes a1-fixed-batch through Step14 with fixed 48h defaults', async () => {
   const step14Path = path.join(__dirname, '../../scripts/jl-steps/14-process-single-account-fixed-batch.js');
   const resolvedStep14 = require.resolve(step14Path);

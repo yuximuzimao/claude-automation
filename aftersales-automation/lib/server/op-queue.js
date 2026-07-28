@@ -868,6 +868,18 @@ async function execReprocessOne(op) {
   return { done: true };
 }
 
+function canManuallyExecuteWaitingIntercept(queueItem, decision) {
+  return Boolean(
+    queueItem
+    && queueItem.status === 'waiting'
+    && decision
+    && decision.action === 'reject'
+    && decision.waitingRescan === true
+    && decision.manualExecutionAllowedWhileWaiting === true
+    && decision.reasonCode === 'INTERCEPT_WAITING'
+  );
+}
+
 async function execExecute(op) {
   const { simId, rejectReason, rejectDetail, rejectImageUrl, fromBatch } = op.params;
   const sim = db.getSimulation(simId);
@@ -880,7 +892,9 @@ async function execExecute(op) {
 
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);
   if (!queueItem) return { skipped: true, reason: '队列项不存在' };
-  if (queueItem.status === 'waiting') return { skipped: true, reason: '工单处于等待重查状态，跳过执行' };
+  if (queueItem.status === 'waiting' && !canManuallyExecuteWaitingIntercept(queueItem, sim.decision)) {
+    return { skipped: true, reason: '工单处于等待重查状态，只有拦截件允许人工提前拒绝' };
+  }
 
   const accountNum = assertAccountNum(queueItem.accountNum);
 
@@ -1031,6 +1045,7 @@ async function execExecute(op) {
     id: `case-${Date.now()}`, workOrderNum: sim.workOrderNum, accountNote: sim.accountNote,
     type: sim.collectedData && sim.collectedData.ticket && sim.collectedData.ticket.type,
     groundTruth: { action, reason: sim.decision.reason, source: fromBatch ? 'batch_executed' : 'executed' },
+    decision: sim.decision,
     collectedData: sim.collectedData, addedAt: new Date().toISOString(),
   });
   db.updateSimulation(simId, { executedAt: new Date().toISOString() });
@@ -1124,6 +1139,7 @@ module.exports = {
   verifyStopState,
   readStopEvent,
   updateAccountStatus,
+  canManuallyExecuteWaitingIntercept,
   buildA1FixedBatchFailureStatus,
   createScanReminderState,
   updateScanReminderState,

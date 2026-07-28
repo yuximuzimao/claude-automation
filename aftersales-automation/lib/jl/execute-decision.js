@@ -21,6 +21,26 @@ function getExecutionLabels(type, action) {
   throw new Error(`不支持的平台执行动作: ${action || '空'}`);
 }
 
+function resolveRejectCopy({ decision, rejectReason, rejectDetail }) {
+  const requiresSeparatedCopy = ['INTERCEPT_WAITING', 'INTERCEPT_TIMEOUT'].includes(decision.reasonCode);
+
+  if (requiresSeparatedCopy) {
+    if (!decision.rejectReason || !decision.rejectDetail) {
+      throw new Error('拦截件拒绝缺少独立的拒绝原因或拒绝文案，禁止使用推理结果兜底');
+    }
+    return {
+      reason: decision.rejectReason,
+      detail: decision.rejectDetail,
+    };
+  }
+
+  const reason = rejectReason || decision.rejectReason || decision.reason;
+  return {
+    reason,
+    detail: rejectDetail || decision.rejectDetail || reason,
+  };
+}
+
 async function executeTicketDecision({
   targetId,
   workOrderNum,
@@ -40,11 +60,12 @@ async function executeTicketDecision({
     );
   }
   if (decision.action === 'reject') {
+    const rejectCopy = resolveRejectCopy({ decision, rejectReason, rejectDetail });
     return rejectTicket(
       targetId,
       workOrderNum,
-      rejectReason || decision.rejectReason || decision.reason,
-      rejectDetail || decision.rejectDetail || decision.rejectReason || decision.reason,
+      rejectCopy.reason,
+      rejectCopy.detail,
       rejectImageUrl || decision.imageUrl || null,
       packageTab,
       getExecutionLabels(type, 'reject'),
@@ -53,4 +74,4 @@ async function executeTicketDecision({
   throw new Error(`不支持的平台执行动作: ${decision.action || '空'}`);
 }
 
-module.exports = { getExecutionLabels, executeTicketDecision };
+module.exports = { getExecutionLabels, resolveRejectCopy, executeTicketDecision };

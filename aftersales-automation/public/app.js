@@ -819,22 +819,22 @@ function renderHistoryCard(c, latestFb) {
   ${latestFb.reason ? `<span style="margin-left:6px">${h(latestFb.reason)}</span>` : ''}
 </div>` : '';
 
-  // 买家申请信息（同 renderBody）
-  const ticket = (c.collectedData && c.collectedData.ticket) || {};
-  const applyItems = [
-    ['售后原因', ticket.afterSaleReason],
-    ['申请金额', ticket.amount ? `¥${ticket.amount}` : null],
-    ['买家说明', ticket.buyerRemark && ticket.buyerRemark !== '无' ? ticket.buyerRemark : null],
-  ].filter(([, v]) => v);
-
-  const applyHtml = applyItems.length ? `
-<div class="ticket-summary" style="margin:6px 0">
-  ${applyItems.map(([l, v]) => `<div class="summary-item"><span class="summary-label">${l}</span><span class="summary-value apply-value">${h(String(v))}</span></div>`).join('')}
-</div>` : '';
-
-  // 推理理由
-  const reasonHtml = gt && gt.reason && gt.reason !== '待确认'
-    ? `<p style="font-size:13px;color:var(--gray-600);margin:4px 0">${h(gt.reason)}</p>` : '';
+  const historyDecision = c.decision || (gt ? {
+    action: gt.action,
+    reason: gt.reason,
+    confidence: null,
+    rulesApplied: [],
+    warnings: [],
+  } : null);
+  const historyBody = c.collectedData
+    ? renderBody(
+        { status: 'done', type: c.type, workOrderNum: c.workOrderNum, accountNote: c.accountNote },
+        { collectedData: c.collectedData, decision: historyDecision },
+        'history',
+      )
+    : (gt && gt.reason && gt.reason !== '待确认'
+      ? `<p style="font-size:13px;color:var(--gray-600);margin:4px 0">${h(gt.reason)}</p>`
+      : '<p style="font-size:13px;color:var(--gray-400);margin:4px 0">该历史记录未保存采集详情</p>');
 
   return `
 <div class="ticket-card">
@@ -850,8 +850,7 @@ function renderHistoryCard(c, latestFb) {
     </div>
   </div>
   <div class="ticket-body">
-    ${applyHtml}
-    ${reasonHtml}
+    ${historyBody}
     ${fbHtml}
   </div>
 </div>`;
@@ -1057,6 +1056,12 @@ function renderActions(item, sim, mode) {
     const execErr = !executed && sim.executeError;
 
     const canReinfer = !executed;
+    const isWaitingIntercept = item.status === 'waiting'
+      && sim.decision.action === 'reject'
+      && sim.decision.waitingRescan === true
+      && sim.decision.manualExecutionAllowedWhileWaiting === true
+      && sim.decision.reasonCode === 'INTERCEPT_WAITING';
+    const canExecute = !executed && (item.status !== 'waiting' || isWaitingIntercept);
     return `
 <div class="live-actions">
   ${execErr ? `<div class="execute-error-bar">⚠️ 执行失败：${execErr}　<button class="btn-ghost btn-sm" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button></div>` : ''}
@@ -1071,9 +1076,9 @@ function renderActions(item, sim, mode) {
       ${posActive ? `style="opacity:0.5"` : ''}>${negActive ? '已差评 ❌' : '差评'}</button>
     ${canReinfer ? `<button class="btn-ghost" onclick="reinferSim('${sim.id}',this)">重新采集推理</button>` : ''}
     ${!executed && item.status !== 'waiting' ? `<button class="btn-ghost" onclick="markWaiting('${item.id}',this)" title="下次扫描时自动重新采集">标记等待中</button>` : ''}
-    ${item.status === 'waiting' ? `<span style="font-size:12px;color:var(--gray-400);padding:0 6px">⏳ 等待下次扫描重查</span>` : ''}
+    ${item.status === 'waiting' ? `<span style="font-size:12px;color:var(--gray-400);padding:0 6px">⏳ ${isWaitingIntercept ? '等待重查，可人工提前拒绝' : '等待下次扫描重查'}</span>` : ''}
     ${!executed && (sim.decision.requiresHumanReview || sim.decision.manualOnly) ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">⚠️ 需人工核对后执行</span>` : ''}
-    ${!executed ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : '▶ 执行操作'}</button>` : ''}
+    ${canExecute ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : (isWaitingIntercept ? '▶ 执行操作（提前拒绝）' : '▶ 执行操作')}</button>` : ''}
     ${!executed ? `<button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button>` : ''}
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>
