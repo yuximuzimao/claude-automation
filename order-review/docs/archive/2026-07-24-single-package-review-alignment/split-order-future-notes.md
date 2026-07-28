@@ -2,7 +2,7 @@
 
 日期：2026-07-24  
 状态：方向已讨论，真实页面事实不足，暂不实施  
-前置活动方案：`../../../docs/2026-07-24-single-package-order-review-execution-v1.md`
+前置单包方案归档：`../2026-07-28-single-package-audit-v1/execution-plan.md`
 
 ## 1. 当前结论
 

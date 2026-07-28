@@ -67,7 +67,7 @@
 
 根工作区 `backup-workspace.sh` 已改为：
 
-- 默认保留最近 8 代 `workspace-*.tar.gz`。
+- 默认按时间保留 8 代 `workspace-*.tar.gz`。
 - 正常情况下归档：
   - 工作区内容。
   - `order-review-data/cases.json`。
@@ -75,12 +75,12 @@
 - 正式案例损坏时：
   - 保存为 `cases.invalid.json`。
   - 写入 `ORDER_REVIEW_CASES_INVALID.txt`。
-  - 附带最近 3 个有效应用内案例备份。
+  - 附带时间最新的 3 个有效应用内案例备份。
   - 健康状态写为 `degraded`。
   - 归档其他项目后返回退出码 3。
 - 正式案例缺失时：
   - 写入 `ORDER_REVIEW_CASES_MISSING.txt`。
-  - 附带最近有效应用内备份。
+  - 附带时间最新的有效应用内备份。
   - 健康状态写为 `degraded`。
   - 归档其他项目后返回退出码 3。
 - 推荐事件损坏时：
@@ -235,8 +235,8 @@ bash -n backup-workspace.sh
 
 阶段 A 完成后，项目转入单订单业务操作路线：
 
-- 可行性审计：`../../../docs/2026-07-23-single-order-workflow-feasibility.md`
-- 当前活动实施方案：`../../../docs/2026-07-24-single-package-order-review-execution-v1.md`
+- 可行性审计归档：`../2026-07-28-single-package-audit-v1/feasibility-audit.md`
+- 单包审核完成归档：`../2026-07-28-single-package-audit-v1/neat-handoff.md`
 - 本次业务对齐证据：`../2026-07-24-single-package-review-alignment/README.md`
 
 ## 7. 工作区说明

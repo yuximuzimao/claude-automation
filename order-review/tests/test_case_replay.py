@@ -105,6 +105,69 @@ def test_replay_only_uses_earlier_independent_orders(tmp_path):
     assert exact_metrics["accuracyRate"] == 1.0
 
 
+def test_replay_aggregates_equivalent_flavor_rows_inside_one_package(tmp_path):
+    path = tmp_path / "cases.json"
+    repository = JsonCaseRepository(path)
+    historical = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(
+            is_expanded=True,
+            order_numbers=("ORDER-1",),
+            products=[
+                Product(
+                    title="美式咖啡正装",
+                    standard_name="美式咖啡正装",
+                    short_name="美式咖啡正装",
+                    quantity=2,
+                    merchant_code="6977987940138",
+                    platform_order_number="ORDER-1",
+                )
+            ],
+        )
+    )
+    current = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(
+            is_expanded=True,
+            order_numbers=("ORDER-2",),
+            products=[
+                Product(
+                    title="美式咖啡正装",
+                    standard_name="美式咖啡正装",
+                    short_name="美式咖啡正装",
+                    quantity=1,
+                    merchant_code="6977987940138",
+                    platform_order_number="ORDER-2",
+                ),
+                Product(
+                    title="生椰拿铁正装",
+                    standard_name="生椰拿铁正装",
+                    short_name="生椰拿铁正装",
+                    quantity=1,
+                    merchant_code="6979151090014",
+                    platform_order_number="ORDER-2",
+                ),
+            ],
+        )
+    )
+    repository.confirm(
+        historical,
+        PackageDraft.single_package(historical).confirm(historical),
+        Decision(DecisionSource.MANUAL),
+        confirmed_at="2026-07-23T01:00:00Z",
+    )
+    repository.confirm(
+        current,
+        PackageDraft.single_package(current).confirm(current),
+        Decision(DecisionSource.MANUAL),
+        confirmed_at="2026-07-23T02:00:00Z",
+    )
+
+    report = build_replay_report(path)
+
+    assert report.recommended_targets == 1
+    assert report.actual_in_candidates_targets == 1
+    assert report.wrong_recommendation_targets == 0
+
+
 def test_same_order_versions_and_rule_adoptions_do_not_inflate_full_samples(
     tmp_path,
 ):

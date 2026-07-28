@@ -66,7 +66,7 @@
 `cases.json` 继续向后兼容旧的 `schemaVersion: 1`，并新增可选根字段：
 
 - `orderAssignments`：当前订单到案例/规则的关联和版本链。
-- `ruleStats`：规则直接采用次数、人工修改次数和最近使用时间。
+- `ruleStats`：规则直接采用次数、人工修改次数和最后使用时间。
 
 确认案例新增：
 

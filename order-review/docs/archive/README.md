@@ -32,11 +32,19 @@
 - `2026-07-24-single-package-review-alignment/README.md`：单包订单普通审核的业务前提、列表操作栏与右键方案取舍、多层提交核对、异常停止和分阶段授权。
 - `2026-07-24-single-package-review-alignment/erp-page-evidence.md`：真实待审核页只读样本、系统订单号 `uniqueid` / `sid` 对应关系、审核弹窗截图转录和仍缺失的 DOM 事实。
 - `2026-07-24-single-package-review-alignment/split-order-future-notes.md`：拆分后当前页识别、两行/三行可能状态、结果订单关联证据、样本采集要求和后续实施门禁。
-- 当前活动实施依据仍是 `../2026-07-24-single-package-order-review-execution-v1.md`；业务对齐归档只解释决策来源，不能替代活动方案。
+- 后续实现与最终验收已归档到 `2026-07-28-single-package-audit-v1/`；本目录只解释决策来源。
 
 ## 2026-07-27 物流独立标记与单件默认草稿
 
 - `2026-07-27-freight-and-single-item-default/neat-handoff.md`：物流运输决策与普通包裹方案隔离、首批案例迁移、70 件人工复核提醒、提醒文案修复和总数量 1 非套件默认单包草稿的阶段收尾记录。
 - 物流案例只提供人工运输决策证据，不证明系统具备箱规、体积或包裹数估算能力。
 
-遇到归档内容与 `AGENTS.md`、根本规则、当前方向、活动实施方案或代码事实冲突时，以后者为准。
+## 2026-07-28 单包普通审核 v1 与等体积口味白名单
+
+- `2026-07-28-single-package-audit-v1/neat-handoff.md`：单包普通审核保护链路、手动/自动刷新双模式、500ms 状态驱动探测、六个等体积规格组和实际使用验证摘要。
+- `2026-07-28-single-package-audit-v1/post-v1-roadmap.md`：阶段 A 数据安全与单订单路线的原始推进评审。
+- `2026-07-28-single-package-audit-v1/feasibility-audit.md`：进入真实执行前的只读可行性审计。
+- `2026-07-28-single-package-audit-v1/execution-plan.md`：单包普通审核 v1 的完整实施、真实样本和验收记录。
+- 单包审核已完成实际使用验证；下一阶段拆分订单必须基于新的真实样本另立方案并先做只读采集与 dry-run。
+
+遇到归档内容与 `AGENTS.md`、根本规则、当前方向或代码事实冲突时，以后者为准。

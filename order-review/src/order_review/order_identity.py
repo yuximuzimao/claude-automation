@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 import hashlib
 import json
-from typing import TypeAlias
+from typing import Callable, TypeAlias
 
 from .package_plan import SourceProduct, SourceSnapshot
 
@@ -19,6 +19,11 @@ TotalProductSignature: TypeAlias = ProductGroupSignature
 def product_key(product: SourceProduct) -> ProductKey:
     """返回不依赖页面行位置的结构化商品身份。"""
     return product.match_key
+
+
+def package_product_key(product: SourceProduct) -> ProductKey:
+    """返回仅用于包裹方案复用的商品身份。"""
+    return product.package_match_key
 
 
 def same_order_signature(source: SourceSnapshot) -> SameOrderSignature | None:
@@ -42,6 +47,20 @@ def same_order_signature(source: SourceSnapshot) -> SameOrderSignature | None:
 
 def order_structure_signature(source: SourceSnapshot) -> OrderStructureSignature:
     """忽略平台单号具体值，但保留各平台子订单的商品构成多重集合。"""
+    return _order_structure_signature(source, product_key)
+
+
+def package_order_structure_signature(
+    source: SourceSnapshot,
+) -> OrderStructureSignature:
+    """按等体积白名单规范化后，保留各平台子订单的商品构成。"""
+    return _order_structure_signature(source, package_product_key)
+
+
+def _order_structure_signature(
+    source: SourceSnapshot,
+    key_for_product: Callable[[SourceProduct], ProductKey],
+) -> OrderStructureSignature:
     fallback_order = _single_snapshot_order(source)
     grouped: defaultdict[str, defaultdict[ProductKey, int]] = defaultdict(
         lambda: defaultdict(int)
@@ -53,15 +72,27 @@ def order_structure_signature(source: SourceSnapshot) -> OrderStructureSignature
             or product.source_group.strip()
             or "__ungrouped__"
         )
-        grouped[group_key][product_key(product)] += product.quantity
+        grouped[group_key][key_for_product(product)] += product.quantity
     return tuple(sorted(_product_totals_signature(totals) for totals in grouped.values()))
 
 
 def total_product_signature(source: SourceSnapshot) -> TotalProductSignature:
     """忽略平台子订单结构，汇总整个待处理订单的商品身份和数量。"""
+    return _total_product_signature(source, product_key)
+
+
+def package_total_product_signature(source: SourceSnapshot) -> TotalProductSignature:
+    """按等体积白名单规范化后，汇总整个订单的包裹规划商品数量。"""
+    return _total_product_signature(source, package_product_key)
+
+
+def _total_product_signature(
+    source: SourceSnapshot,
+    key_for_product: Callable[[SourceProduct], ProductKey],
+) -> TotalProductSignature:
     totals: defaultdict[ProductKey, int] = defaultdict(int)
     for product in source.products:
-        totals[product_key(product)] += product.quantity
+        totals[key_for_product(product)] += product.quantity
     return _product_totals_signature(totals)
 
 
@@ -83,12 +114,24 @@ def order_structure_signature_key(source: SourceSnapshot) -> str:
     return signature_key(order_structure_signature(source))
 
 
+def package_order_structure_signature_key(source: SourceSnapshot) -> str:
+    return signature_key(package_order_structure_signature(source))
+
+
 def total_product_signature_key(source: SourceSnapshot) -> str:
     return signature_key(total_product_signature(source))
 
 
+def package_total_product_signature_key(source: SourceSnapshot) -> str:
+    return signature_key(package_total_product_signature(source))
+
+
 def _single_snapshot_order(source: SourceSnapshot) -> str:
-    values = tuple(dict.fromkeys(item.strip() for item in source.platform_order_numbers if item.strip()))
+    values = tuple(
+        dict.fromkeys(
+            item.strip() for item in source.platform_order_numbers if item.strip()
+        )
+    )
     return values[0] if len(values) == 1 else ""
 
 

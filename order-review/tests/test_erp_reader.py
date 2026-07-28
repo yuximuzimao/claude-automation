@@ -1,8 +1,14 @@
+import pytest
+
 from order_review.erp_reader import (
+    SequenceOneIdentityProbe,
     build_expand_sequence_one_js,
     build_read_sequence_one_js,
+    build_sequence_one_identity_probe_js,
     find_erp_toaudit_target,
+    read_sequence_one_identity,
     read_sequence_one_order,
+    resolve_system_order_id,
     snapshot_from_payload,
 )
 from order_review.window_position import ChromeActiveTab
@@ -42,6 +48,19 @@ def test_find_erp_target_does_not_read_background_toaudit_tab():
     assert target_id == ""
 
 
+def test_find_erp_target_requires_unique_matching_cdp_page():
+    url = "https://erpb.superboss.cc/index.html#/trade/toaudit/"
+    target_id = find_erp_toaudit_target(
+        [
+            {"targetId": "first", "type": "page", "url": url},
+            {"targetId": "second", "type": "page", "url": url},
+        ],
+        active_tab=ChromeActiveTab(title="快麦ERP--待审核订单", url=url),
+    )
+
+    assert target_id == ""
+
+
 def test_reader_js_targets_sequence_one_and_requires_expanded_row():
     js = build_read_sequence_one_js()
 
@@ -59,6 +78,7 @@ def test_reader_js_targets_sequence_one_and_requires_expanded_row():
     assert "rowAttributes" in js
     assert "sourceGroupIndex" in js
     assert "scopeDataset" in js
+    assert "visibleSystemOrderId" in js
 
 
 def test_expand_js_only_clicks_sequence_one_left_expand_control():
@@ -69,6 +89,38 @@ def test_expand_js_only_clicks_sequence_one_left_expand_control():
     assert "trigger.click()" in js
     assert "module-trade-list-item-open" in js
     assert "tr.order-temp, .item-snapshot-itemname" in js
+
+
+def test_identity_probe_is_read_only_and_blocks_unsafe_page_states():
+    js = build_sequence_one_identity_probe_js()
+
+    assert "seq(row) === '1'" in js
+    assert "visibleDialogCount" in js
+    assert "selectedRowCount" in js
+    assert ".click(" not in js
+    assert SequenceOneIdentityProbe("ORDER-1", 0, 0, 0).safe_to_auto_refresh
+    assert not SequenceOneIdentityProbe("ORDER-1", 1, 0, 0).safe_to_auto_refresh
+    assert not SequenceOneIdentityProbe("ORDER-1", 0, 1, 0).safe_to_auto_refresh
+    assert not SequenceOneIdentityProbe("ORDER-1", 0, 0, 1).safe_to_auto_refresh
+
+
+def test_identity_reader_requires_consistent_system_order_id(monkeypatch):
+    monkeypatch.setattr(
+        "order_review.erp_reader.cdp.eval_js",
+        lambda _target_id, _js: {
+            "ok": True,
+            "rowAttributes": {"uniqueid": "ORDER-1", "sid": "ORDER-1"},
+            "visibleSystemOrderId": "ORDER-1",
+            "loadingCount": 0,
+            "visibleDialogCount": 0,
+            "selectedRowCount": 0,
+        },
+    )
+
+    probe = read_sequence_one_identity("target-1")
+
+    assert probe.system_order_id == "ORDER-1"
+    assert probe.safe_to_auto_refresh
 
 
 def test_reader_expands_unexpanded_order_then_reads_details(monkeypatch):
@@ -94,6 +146,30 @@ def test_reader_expands_unexpanded_order_then_reads_details(monkeypatch):
     assert calls[1] == ("target-1", build_expand_sequence_one_js())
 
 
+def test_auto_reader_stops_before_expand_if_order_changed_again(monkeypatch):
+    calls = []
+
+    def fake_eval_js(target_id, js):
+        calls.append((target_id, js))
+        return {
+            "ok": True,
+            "isExpanded": False,
+            "rowAttributes": {"uniqueid": "ORDER-2", "sid": "ORDER-2"},
+            "visibleSystemOrderId": "ORDER-2",
+            "products": [],
+        }
+
+    monkeypatch.setattr("order_review.erp_reader.cdp.eval_js", fake_eval_js)
+
+    with pytest.raises(RuntimeError, match="展开前再次变化"):
+        read_sequence_one_order(
+            "target-1",
+            expected_system_order_id="ORDER-1",
+        )
+
+    assert len(calls) == 1
+
+
 def test_reader_keeps_manual_expand_message_when_expand_control_is_unavailable(
     monkeypatch,
 ):
@@ -111,6 +187,34 @@ def test_reader_keeps_manual_expand_message_when_expand_control_is_unavailable(
     snapshot = read_sequence_one_order("target-1")
 
     assert snapshot.is_expanded is False
+
+
+def test_passive_reader_never_clicks_expand(monkeypatch):
+    calls = []
+    payload = {
+        "ok": True,
+        "isExpanded": False,
+        "rowAttributes": {"uniqueid": "ORDER-1", "sid": "ORDER-1"},
+        "visibleSystemOrderId": "ORDER-1",
+        "products": [],
+    }
+
+    def fake_eval_js(target_id, js):
+        calls.append((target_id, js))
+        return payload
+
+    monkeypatch.setattr("order_review.erp_reader.cdp.eval_js", fake_eval_js)
+
+    snapshot = read_sequence_one_order(
+        "target-1",
+        expected_system_order_id="ORDER-1",
+        expand_if_needed=False,
+    )
+
+    assert snapshot.system_order_id == "ORDER-1"
+    assert snapshot.is_expanded is False
+    assert len(calls) == 1
+    assert calls[0][1] == build_read_sequence_one_js()
 
 
 def test_snapshot_from_unexpanded_payload_has_no_products():
@@ -216,3 +320,21 @@ def test_snapshot_preserves_order_groups_identifiers_and_raw_payload():
     assert product.sku_id == "PLATFORM-SKU-1"
     assert product.raw_dataset["numiid"] == "PLATFORM-ITEM-1"
     assert "平台ID" in product.raw_text
+
+
+def test_system_order_id_requires_uniqueid_sid_and_visible_text_to_agree():
+    payload = {
+        "rowAttributes": {
+            "uniqueid": "5945697152129529",
+            "sid": "5945697152129529",
+        },
+        "visibleSystemOrderId": "5945697152129529",
+    }
+
+    assert resolve_system_order_id(payload) == "5945697152129529"
+    assert snapshot_from_payload(
+        {"ok": True, "isExpanded": False, **payload}
+    ).system_order_id == "5945697152129529"
+
+    payload["visibleSystemOrderId"] = "DIFFERENT"
+    assert resolve_system_order_id(payload) == ""

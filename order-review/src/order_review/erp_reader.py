@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 from . import cdp
@@ -10,6 +11,23 @@ from .window_position import ChromeActiveTab, get_chrome_active_tab
 
 TOAUDIT_ROUTE = "#/trade/toaudit/"
 TOAUDIT_TITLE = "快麦ERP--待审核订单"
+
+
+@dataclass(frozen=True)
+class SequenceOneIdentityProbe:
+    system_order_id: str
+    loading_count: int
+    visible_dialog_count: int
+    selected_row_count: int
+
+    @property
+    def safe_to_auto_refresh(self) -> bool:
+        return (
+            bool(self.system_order_id)
+            and self.loading_count == 0
+            and self.visible_dialog_count == 0
+            and self.selected_row_count == 0
+        )
 
 
 def is_toaudit_tab(tab: ChromeActiveTab | None) -> bool:
@@ -26,10 +44,31 @@ def find_erp_toaudit_target(
     if not is_toaudit_tab(active_tab):
         return ""
     targets = targets if targets is not None else cdp.list_targets()
-    for target in targets:
-        if target.get("url", "") == active_tab.url:
-            return target.get("targetId") or target.get("id") or ""
-    return ""
+    matching = [
+        target.get("targetId") or target.get("id") or ""
+        for target in targets
+        if target.get("url", "") == active_tab.url
+        and (not target.get("type") or target.get("type") == "page")
+    ]
+    matching = [target_id for target_id in matching if target_id]
+    return matching[0] if len(matching) == 1 else ""
+
+
+def resolve_system_order_id(payload: dict[str, Any]) -> str:
+    """只在 uniqueid、sid 与可见系统订单号不冲突时返回稳定身份。"""
+    dataset = _string_dict(payload.get("rowDataset"))
+    attributes = _string_dict(payload.get("rowAttributes"))
+    explicit = str(payload.get("visibleSystemOrderId", "")).strip()
+    attribute_candidates = [
+        attributes.get("uniqueid", "").strip(),
+        attributes.get("sid", "").strip(),
+        dataset.get("uniqueid", "").strip(),
+        dataset.get("sid", "").strip(),
+    ]
+    unique = tuple(dict.fromkeys(value for value in attribute_candidates if value))
+    if len(unique) != 1:
+        return ""
+    return unique[0] if not explicit or explicit == unique[0] else ""
 
 
 def build_read_sequence_one_js() -> str:
@@ -94,6 +133,13 @@ def build_read_sequence_one_js() -> str:
   function groupKey(group, index){
     return group.platformOrderNumber || group.orderNumbers[0] || ('group-' + (index + 1));
   }
+  function visibleSystemOrderId(sourceLines){
+    for (var i = 0; i < sourceLines.length; i += 1) {
+      var match = sourceLines[i].match(/(?:系统订单号|系统单号)[：:\s]*([A-Za-z0-9_-]{6,})/);
+      if (match) return match[1];
+    }
+    return '';
+  }
 
   var rows = Array.from(document.querySelectorAll('.module-trade-list-item')).filter(visible);
   var row = rows.find(function(row){ return seq(row)==='1'; });
@@ -109,6 +155,7 @@ def build_read_sequence_one_js() -> str:
     rowLines:rowLines,
     rowDataset:dataset(row),
     rowAttributes:attributes(row),
+    visibleSystemOrderId:visibleSystemOrderId(rowLines),
     orderNumbers:extractOrderNumbers(rowLines),
     hasCanMergeMark:row.querySelectorAll('.trade-icon-canmerged,[data-name="trade-icon-canmerged"]').length > 0
   };
@@ -212,6 +259,64 @@ def build_read_sequence_one_js() -> str:
 })()"""
 
 
+def build_sequence_one_identity_probe_js() -> str:
+    return r"""(function(){
+  function visible(el){
+    if (!el || !el.getBoundingClientRect) return false;
+    var r = el.getBoundingClientRect();
+    var s = getComputedStyle(el);
+    return r.width > 0 && r.height > 0 &&
+      s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0';
+  }
+  function clean(value){ return String(value || '').replace(/\s+/g, ' ').trim(); }
+  function lines(value){
+    return String(value || '').split(/\n+/).map(clean).filter(Boolean);
+  }
+  function seq(row){
+    return lines(row.innerText || row.textContent)
+      .find(function(value){ return /^\d+$/.test(value); }) || '';
+  }
+  function checked(row){
+    return Array.from(row.querySelectorAll(
+      'input.J_Checkbox[data-name="check_select_item"],input[type="checkbox"]'
+    )).some(function(input){ return input.checked; });
+  }
+  if (location.hash.indexOf('#/trade/toaudit/') !== 0 ||
+      document.title.indexOf('快麦ERP--待审核订单') < 0) {
+    return JSON.stringify({ok:false,error:'NOT_TOAUDIT_PAGE'});
+  }
+  var rows = Array.from(document.querySelectorAll('.module-trade-list-item'))
+    .filter(visible);
+  var firstRows = rows.filter(function(row){ return seq(row) === '1'; });
+  if (firstRows.length !== 1) {
+    return JSON.stringify({ok:false,error:'SEQ_ONE_NOT_UNIQUE'});
+  }
+  var row = firstRows[0];
+  var rowLines = lines(row.innerText || row.textContent);
+  var visibleId = '';
+  rowLines.some(function(value){
+    var match = value.match(/(?:系统订单号|系统单号)[：:\s]*([A-Za-z0-9_-]{6,})/);
+    if (match) visibleId = match[1];
+    return Boolean(match);
+  });
+  return JSON.stringify({
+    ok:true,
+    rowAttributes:{
+      uniqueid:clean(row.getAttribute('uniqueid') || row.dataset.uniqueid),
+      sid:clean(row.getAttribute('sid') || row.dataset.sid)
+    },
+    visibleSystemOrderId:visibleId,
+    loadingCount:Array.from(document.querySelectorAll(
+      '.el-loading-mask,.ivu-spin-fix,.ant-spin-spinning,[aria-busy="true"]'
+    )).filter(visible).length,
+    visibleDialogCount:Array.from(new Set(Array.from(document.querySelectorAll(
+      '[role="dialog"],.el-message-box__wrapper'
+    )))).filter(visible).length,
+    selectedRowCount:rows.filter(checked).length
+  });
+})()"""
+
+
 def build_expand_sequence_one_js() -> str:
     return r"""(function(){
   if (location.hash.indexOf('#/trade/toaudit/') !== 0) {
@@ -262,7 +367,12 @@ def build_expand_sequence_one_js() -> str:
 })()"""
 
 
-def read_sequence_one_order(target_id: str | None = None) -> OrderSnapshot:
+def read_sequence_one_order(
+    target_id: str | None = None,
+    *,
+    expected_system_order_id: str = "",
+    expand_if_needed: bool = True,
+) -> OrderSnapshot:
     target_id = target_id or find_erp_toaudit_target()
     if not target_id:
         raise RuntimeError("请先把 Chrome 当前标签页切换到快麦 ERP「订单处理 → 待审核订单」")
@@ -273,13 +383,50 @@ def read_sequence_one_order(target_id: str | None = None) -> OrderSnapshot:
         if payload.get("error") == "NOT_TOAUDIT_PAGE":
             raise RuntimeError("当前标签页不是快麦 ERP「订单处理 → 待审核订单」")
         raise RuntimeError(payload.get("error") or "读取 ERP 订单失败")
-    if not payload.get("isExpanded"):
+    observed_system_order_id = resolve_system_order_id(payload)
+    if (
+        expected_system_order_id
+        and observed_system_order_id != expected_system_order_id
+    ):
+        raise RuntimeError("当前第 1 单在展开前再次变化，已停止自动读取")
+    if not payload.get("isExpanded") and expand_if_needed:
         expanded = cdp.eval_js(target_id, build_expand_sequence_one_js())
         if isinstance(expanded, dict) and expanded.get("expanded"):
             payload = cdp.eval_js(target_id, build_read_sequence_one_js())
             if not isinstance(payload, dict) or not payload.get("ok"):
                 raise RuntimeError("展开订单后读取 ERP 订单失败")
     return snapshot_from_payload(payload)
+
+
+def read_sequence_one_order_if_matches(
+    expected_system_order_id: str,
+) -> OrderSnapshot:
+    return read_sequence_one_order(
+        expected_system_order_id=expected_system_order_id,
+        expand_if_needed=True,
+    )
+
+
+def read_sequence_one_order_without_expand() -> OrderSnapshot:
+    return read_sequence_one_order(expand_if_needed=False)
+
+
+def read_sequence_one_identity(
+    target_id: str | None = None,
+) -> SequenceOneIdentityProbe:
+    target_id = target_id or find_erp_toaudit_target()
+    if not target_id:
+        raise RuntimeError("当前前台不是快麦 ERP 待审核页面")
+    payload = cdp.eval_js(target_id, build_sequence_one_identity_probe_js())
+    if not isinstance(payload, dict) or not payload.get("ok"):
+        detail = payload.get("error") if isinstance(payload, dict) else ""
+        raise RuntimeError(detail or "读取当前订单身份失败")
+    return SequenceOneIdentityProbe(
+        system_order_id=resolve_system_order_id(payload),
+        loading_count=int(payload.get("loadingCount") or 0),
+        visible_dialog_count=int(payload.get("visibleDialogCount") or 0),
+        selected_row_count=int(payload.get("selectedRowCount") or 0),
+    )
 
 
 def _string_dict(value: Any) -> dict[str, str]:
@@ -349,6 +496,7 @@ def snapshot_from_payload(payload: dict[str, Any]) -> OrderSnapshot:
 
     return OrderSnapshot(
         is_expanded=bool(payload.get("isExpanded")),
+        system_order_id=resolve_system_order_id(payload),
         products=products,
         groups=groups,
         order_numbers=_string_tuple(payload.get("orderNumbers")),

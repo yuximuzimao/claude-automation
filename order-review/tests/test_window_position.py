@@ -20,6 +20,15 @@ def test_panel_geometry_clamps_to_screen_left_edge():
     assert geometry == "340x760+0+80"
 
 
+def test_panel_geometry_can_match_browser_height():
+    geometry = panel_geometry_from_browser_bounds(
+        (400, 80, 1450, 1000),
+        panel_width=360,
+    )
+
+    assert geometry == "360x920+32+80"
+
+
 def test_parse_applescript_bounds():
     assert parse_applescript_bounds("313, 40, 1763, 1191") == (313, 40, 1763, 1191)
 

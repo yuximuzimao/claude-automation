@@ -2,16 +2,37 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from dataclasses import dataclass, field
+import queue
+import threading
+import time
 import tkinter as tk
 from tkinter import ttk
 from typing import Callable
 
+from .audit_runner import (
+    SingleOrderAuditReport,
+    run_single_order_audit,
+)
 from .case_repository import JsonCaseRepository
-from .erp_reader import read_sequence_one_order
+from .audit_probe import (
+    AuditExecutionLogStore,
+    default_audit_log_path,
+)
+from .erp_reader import (
+    SequenceOneIdentityProbe,
+    read_sequence_one_identity,
+    read_sequence_one_order,
+    read_sequence_one_order_if_matches,
+    read_sequence_one_order_without_expand,
+)
 from .models import OrderSnapshot, Product
 from .package_plan import PackagePlanValidationError
 from .package_workflow import PackagePlanWorkflow
-from .recommendations import MATCH_SINGLE_PACKAGE_CAPACITY
+from .recommendations import (
+    MATCH_EXACT_STRUCTURE,
+    MATCH_SINGLE_PACKAGE_CAPACITY,
+    MATCH_SINGLE_PACKAGE_TOTAL,
+)
 from .rules import judge
 from .window_position import (
     get_chrome_window_bounds,
@@ -24,6 +45,10 @@ WINDOW_WIDTH = 360
 WINDOW_HEIGHT = 760
 WINDOW_GAP = 8
 WINDOW_FOLLOW_INTERVAL_MS = 1500
+ORDER_WATCH_INTERVAL_MS = 500
+ORDER_CHANGE_STABLE_OBSERVATIONS = 2
+ORDER_CHANGE_STABLE_SECONDS = 0.5
+POST_AUDIT_REFRESH_DELAY_SECONDS = 0.0
 FONT_FAMILY = "Helvetica Neue"
 MACOS_THEME = {
     "window_bg": "#f6f7f9",
@@ -376,10 +401,22 @@ class OrderReviewWindow:
         self,
         root: tk.Tk,
         reader: Callable[[], OrderSnapshot] = read_sequence_one_order,
+        passive_reader: Callable[[], OrderSnapshot] = (
+            read_sequence_one_order_without_expand
+        ),
         repository: JsonCaseRepository | None = None,
+        audit_executor: Callable[..., SingleOrderAuditReport] = run_single_order_audit,
+        order_identity_reader: Callable[[], SequenceOneIdentityProbe] = (
+            read_sequence_one_identity
+        ),
+        auto_refresh_reader: Callable[[str], OrderSnapshot] = (
+            read_sequence_one_order_if_matches
+        ),
+        monotonic: Callable[[], float] = time.monotonic,
     ) -> None:
         self.root = root
         self.reader = reader
+        self.passive_reader = passive_reader
         self.root.title("审单悬浮窗")
         self.root.geometry(self._initial_geometry())
         self.root.resizable(False, True)
@@ -392,17 +429,52 @@ class OrderReviewWindow:
         self._current_view: SidebarView | None = None
         self.current_snapshot: OrderSnapshot | None = None
         self.package_workflow = PackagePlanWorkflow(repository)
+        self.audit_executor = audit_executor
+        self.order_identity_reader = order_identity_reader
+        self.auto_refresh_reader = auto_refresh_reader
+        self.monotonic = monotonic
+        self.audit_log_store = AuditExecutionLogStore(
+            default_audit_log_path(self.package_workflow.repository.path)
+        )
         self.root.protocol("WM_DELETE_WINDOW", self.close)
         self._package_feedback = ""
+        self._audit_feedback = ""
+        self._audit_running = False
+        self._audit_progress = ""
+        self._audit_completed_system_order_id = ""
+        self._audit_thread: threading.Thread | None = None
+        self._audit_events: queue.Queue[tuple[str, object]] = queue.Queue()
+        self._audit_poll_job: str | None = None
+        self._show_package_editor = False
+        self._order_watch_events: queue.Queue[tuple[str, object]] = queue.Queue()
+        self._order_watch_thread: threading.Thread | None = None
+        self._order_watch_job: str | None = None
+        self._order_watch_generation = 0
+        self._order_change_candidate_id = ""
+        self._order_change_candidate_count = 0
+        self._order_change_candidate_since = 0.0
+        self._auto_refresh_not_before = 0.0
+        self._auto_refresh_enabled = False
+        self._auto_refresh_paused = False
+        self._auto_refresh_same_order_id = ""
+        self._auto_refresh_attempted_order_ids: set[str] = set()
         self._active_package_id: str | None = None
         self._quantity_commit_jobs: dict[tuple[str, str], str] = {}
         self._last_browser_bounds: tuple[int, int, int, int] | None = None
         self._browser_was_minimized: bool | None = None
+        self._follow_browser_job: str | None = None
         self._build()
         self._initial_refresh_job: str | None = self.root.after(
             300, self._run_initial_refresh
         )
-        self.root.after(WINDOW_FOLLOW_INTERVAL_MS, self._follow_browser_window)
+        self._follow_browser_job = self.root.after(
+            WINDOW_FOLLOW_INTERVAL_MS,
+            self._follow_browser_window,
+        )
+        self._order_watch_job = self.root.after(
+            ORDER_WATCH_INTERVAL_MS,
+            self._poll_order_watch,
+        )
 
     def _initial_geometry(self) -> str:
         bounds = get_chrome_window_bounds()
@@ -411,12 +483,12 @@ class OrderReviewWindow:
         return panel_geometry_from_browser_bounds(
             bounds,
             panel_width=WINDOW_WIDTH,
-            panel_height=WINDOW_HEIGHT,
             gap=WINDOW_GAP,
         )
 
     def _follow_browser_window(self) -> None:
         if not self.root.winfo_exists():
+            self._follow_browser_job = None
             return
         state = get_chrome_window_state()
         if state is None or state.minimized:
@@ -434,13 +506,161 @@ class OrderReviewWindow:
                     panel_geometry_from_browser_bounds(
                         state.bounds,
                         panel_width=WINDOW_WIDTH,
-                        panel_height=WINDOW_HEIGHT,
                         gap=WINDOW_GAP,
                     )
                 )
             self._last_browser_bounds = state.bounds
             self._browser_was_minimized = False
-        self.root.after(WINDOW_FOLLOW_INTERVAL_MS, self._follow_browser_window)
+        self._follow_browser_job = self.root.after(
+            WINDOW_FOLLOW_INTERVAL_MS,
+            self._follow_browser_window,
+        )
+
+    def _poll_order_watch(self) -> None:
+        self._order_watch_job = None
+        if not self.root.winfo_exists():
+            return
+        while True:
+            try:
+                event, payload = self._order_watch_events.get_nowait()
+            except queue.Empty:
+                break
+            self._order_watch_thread = None
+            if event == "identity" and isinstance(payload, tuple):
+                generation, probe = payload
+                if (
+                    generation == self._order_watch_generation
+                    and isinstance(probe, SequenceOneIdentityProbe)
+                ):
+                    self._handle_order_identity(probe)
+            elif event == "error" and isinstance(payload, tuple):
+                generation, _detail = payload
+                if generation != self._order_watch_generation:
+                    continue
+                self._reset_order_change_candidate()
+
+        if self._can_poll_order_identity() and self._order_watch_thread is None:
+            generation = self._order_watch_generation
+
+            def worker() -> None:
+                try:
+                    probe = self.order_identity_reader()
+                    self._order_watch_events.put(
+                        ("identity", (generation, probe))
+                    )
+                except Exception as exc:
+                    self._order_watch_events.put(
+                        ("error", (generation, str(exc)))
+                    )
+
+            self._order_watch_thread = threading.Thread(
+                target=worker,
+                name="order-review-identity-watch",
+                daemon=True,
+            )
+            self._order_watch_thread.start()
+
+        self._order_watch_job = self.root.after(
+            ORDER_WATCH_INTERVAL_MS,
+            self._poll_order_watch,
+        )
+
+    def _can_poll_order_identity(self) -> bool:
+        if (
+            not self._auto_refresh_enabled
+            or self._audit_running
+            or self._auto_refresh_paused
+            or self.monotonic() < self._auto_refresh_not_before
+            or self.package_workflow.freight_pending
+        ):
+            return False
+        if self.package_workflow.draft is not None:
+            return (
+                not self._show_package_editor
+                and self._compact_reliable_single_plan() is not None
+            )
+        return True
+
+    def _handle_order_identity(self, probe: SequenceOneIdentityProbe) -> None:
+        if not self._can_poll_order_identity() or not probe.safe_to_auto_refresh:
+            self._reset_order_change_candidate()
+            return
+        current_system_order_id = (
+            self.current_snapshot.system_order_id
+            if self.current_snapshot is not None
+            else ""
+        )
+        observed = probe.system_order_id
+        same_order_refresh_allowed = (
+            observed == self._auto_refresh_same_order_id
+        )
+        if (
+            not observed
+            or (
+                observed == current_system_order_id
+                and not same_order_refresh_allowed
+            )
+            or observed in self._auto_refresh_attempted_order_ids
+        ):
+            self._reset_order_change_candidate()
+            return
+        if observed == self._order_change_candidate_id:
+            self._order_change_candidate_count += 1
+        else:
+            self._order_change_candidate_id = observed
+            self._order_change_candidate_count = 1
+            self._order_change_candidate_since = self.monotonic()
+        if (
+            self._order_change_candidate_count < ORDER_CHANGE_STABLE_OBSERVATIONS
+            or self.monotonic() - self._order_change_candidate_since
+            < ORDER_CHANGE_STABLE_SECONDS
+        ):
+            return
+
+        self._auto_refresh_attempted_order_ids.add(observed)
+        self._auto_refresh_same_order_id = ""
+        self._reset_order_change_candidate()
+        self.refresh(
+            automatic=True,
+            expected_system_order_id=observed,
+        )
+
+    def _reset_order_change_candidate(self) -> None:
+        self._order_change_candidate_id = ""
+        self._order_change_candidate_count = 0
+        self._order_change_candidate_since = 0.0
+
+    def _toggle_auto_refresh(self) -> None:
+        self._set_auto_refresh_enabled(not self._auto_refresh_enabled)
+
+    def _set_auto_refresh_enabled(self, enabled: bool) -> None:
+        self._auto_refresh_enabled = enabled
+        self._auto_refresh_paused = False
+        self._order_watch_generation += 1
+        self._auto_refresh_attempted_order_ids.clear()
+        self._reset_order_change_candidate()
+        current = self.current_snapshot
+        self._auto_refresh_same_order_id = (
+            current.system_order_id
+            if enabled
+            and current is not None
+            and not current.is_expanded
+            else ""
+        )
+        if hasattr(self, "auto_refresh_button"):
+            self.auto_refresh_button.configure(
+                text="停止自动刷新" if enabled else "自动刷新",
+                bg=(
+                    MACOS_THEME["accent_soft"]
+                    if enabled
+                    else MACOS_THEME["surface_soft"]
+                ),
+                fg=(
+                    MACOS_THEME["accent"]
+                    if enabled
+                    else MACOS_THEME["secondary_text"]
+                ),
+            )
 
     def _build(self) -> None:
         self.root.configure(bg=MACOS_THEME["window_bg"])
@@ -499,7 +719,7 @@ class OrderReviewWindow:
             anchor="w",
         ).pack(side="left", padx=(8, 0))
 
-        tk.Button(
+        self.refresh_button = tk.Button(
             header,
             text=MACOS_THEME["refresh_text"],
             command=self.refresh,
@@ -514,7 +734,25 @@ class OrderReviewWindow:
             pady=2,
             font=(FONT_FAMILY, 9, "bold"),
             cursor="hand2",
-        ).pack(side="right", padx=12, pady=8)
+        )
+        self.refresh_button.pack(side="right", padx=(6, 12), pady=8)
+        self.auto_refresh_button = tk.Button(
+            header,
+            text="自动刷新",
+            command=self._toggle_auto_refresh,
+            bg=MACOS_THEME["surface_soft"],
+            fg=MACOS_THEME["secondary_text"],
+            activebackground=MACOS_THEME["accent_border"],
+            activeforeground=MACOS_THEME["primary_text"],
+            relief="flat",
+            borderwidth=0,
+            highlightthickness=0,
+            padx=7,
+            pady=2,
+            font=(FONT_FAMILY, 9, "bold"),
+            cursor="hand2",
+        )
+        self.auto_refresh_button.pack(side="right", pady=8)
 
     def _build_overview(self) -> None:
         self.overview = tk.Frame(
@@ -568,9 +806,30 @@ class OrderReviewWindow:
 
     def _run_initial_refresh(self) -> None:
         self._initial_refresh_job = None
-        self.refresh()
+        self.refresh(passive=True)
 
-    def refresh(self) -> None:
+    def refresh(
+        self,
+        *,
+        automatic: bool = False,
+        passive: bool = False,
+        expected_system_order_id: str = "",
+    ) -> None:
+        if self._audit_running:
+            self._audit_feedback = "审核正在进行，完成前不会刷新或切换订单。"
+            self._rerender_current_snapshot()
+            return
+        if not automatic:
+            self._order_watch_generation += 1
+            self._auto_refresh_paused = False
+            self._auto_refresh_not_before = 0.0
+            self._auto_refresh_attempted_order_ids.clear()
+            self._reset_order_change_candidate()
+        elif (
+            not expected_system_order_id
+            or self.monotonic() < self._auto_refresh_not_before
+        ):
+            return
         if self._initial_refresh_job is not None:
             try:
                 self.root.after_cancel(self._initial_refresh_job)
@@ -578,17 +837,37 @@ class OrderReviewWindow:
                 pass
             self._initial_refresh_job = None
         try:
-            snapshot = self.reader()
+            snapshot = (
+                self.auto_refresh_reader(expected_system_order_id)
+                if automatic
+                else (self.passive_reader() if passive else self.reader())
+            )
             self.current_snapshot = snapshot
             self.package_workflow.load_order(snapshot)
             self._active_package_id = None
+            self._show_package_editor = False
             self._package_feedback = self.package_workflow.recommendation_error
+            self._audit_feedback = ""
+            self._auto_refresh_paused = False
+            self._reset_order_change_candidate()
             self._render_view(build_sidebar_view(snapshot))
         except Exception as exc:
             self.current_snapshot = None
             self.package_workflow.clear_order()
             self._active_package_id = None
+            self._show_package_editor = False
             self._package_feedback = ""
+            self._audit_feedback = ""
+            self._auto_refresh_paused = True
+            if self._auto_refresh_enabled:
+                self._set_auto_refresh_enabled(False)
+            self._reset_order_change_candidate()
+            detail = str(exc)
+            if automatic:
+                detail = (
+                    f"自动读取已停止：{detail}。"
+                    "后台不会点击或重试展开；需要时请手动点击刷新。"
+                )
             self._render_view(
                 SidebarView(
                     status="判断：读取失败",
@@ -596,7 +875,7 @@ class OrderReviewWindow:
                     aggregate_products=[],
                     order_groups=[],
                     package_plan=_empty_package_plan(),
-                    footer_note=str(exc),
+                    footer_note=detail,
                 )
             )
 
@@ -686,7 +965,6 @@ class OrderReviewWindow:
         if self._current_view is not None:
             scroll_position = self.canvas.yview()[0]
             self._render_view(self._current_view, reset_scroll=False)
-            self.root.update_idletasks()
             self.canvas.yview_moveto(scroll_position)
 
     def _render_metrics(self, metrics: list[MetricView]) -> None:
@@ -1038,9 +1316,12 @@ class OrderReviewWindow:
             self._render_package_plan_placeholder(placeholder)
             return
 
+        compact_reliable_plan = self._compact_reliable_single_plan()
         status = "待选择"
         if workflow.freight_pending:
             status = "待确认物流"
+        elif compact_reliable_plan is not None and not self._show_package_editor:
+            status = "已有单包方案"
         elif workflow.draft is not None:
             status = "编辑中"
         elif workflow.historical_case is not None and workflow.historical_case.is_freight:
@@ -1060,6 +1341,19 @@ class OrderReviewWindow:
             return
 
         if workflow.draft is not None:
+            if compact_reliable_plan is not None and not self._show_package_editor:
+                self._render_readonly_package_plan(compact_reliable_plan)
+                self._render_package_notice(
+                    workflow.load_notice
+                    or "已找到可靠的历史单包方案。",
+                    tone="success",
+                )
+                self._render_single_order_audit(
+                    compact_reliable_plan,
+                    edit_command=self._open_current_draft_editor,
+                    confirm_before_audit=True,
+                )
+                return
             self._render_package_draft()
             return
 
@@ -1078,12 +1372,21 @@ class OrderReviewWindow:
                 ),
                 tone="success",
             )
-            self._action_button(
-                self.content_frame,
-                "修改已保存方案",
-                lambda: self._package_action(self._edit_historical_plan),
-                accented=True,
-            ).pack(fill="x", pady=(0, 8))
+            if len(workflow.historical_plan.packages) == 1:
+                self._render_single_order_audit(
+                    workflow.historical_plan,
+                    edit_command=lambda: self._package_action(
+                        self._edit_historical_plan
+                    ),
+                )
+            else:
+                self._action_button(
+                    self.content_frame,
+                    "修改方案",
+                    lambda: self._package_action(self._edit_historical_plan),
+                    accented=True,
+                    enabled=not self._audit_running,
+                ).pack(fill="x", pady=(0, 8))
             return
 
         if workflow.confirmed_case is not None and workflow.confirmed_case.is_freight:
@@ -1096,6 +1399,7 @@ class OrderReviewWindow:
                 f"{workflow.confirmation_note} 未操作 ERP。",
                 tone="success",
             )
+            self._render_single_order_audit(workflow.confirmed_plan)
             return
 
         if workflow.freight_reminder is not None:
@@ -1107,6 +1411,26 @@ class OrderReviewWindow:
         self._render_package_entry_actions()
         if self._package_feedback:
             self._render_package_notice(self._package_feedback, tone="warning")
+
+    def _compact_reliable_single_plan(self):
+        workflow = self.package_workflow
+        source = workflow.source_snapshot
+        draft = workflow.draft
+        candidate = workflow.selected_recommendation
+        if (
+            source is None
+            or draft is None
+            or candidate is None
+            or not workflow.auto_adopted_recommendation
+            or candidate.match_type
+            not in {MATCH_EXACT_STRUCTURE, MATCH_SINGLE_PACKAGE_TOTAL}
+        ):
+            return None
+        try:
+            plan = draft.confirm(source)
+        except PackagePlanValidationError:
+            return None
+        return plan if len(plan.packages) == 1 else None
 
     def _render_readonly_package_plan(self, plan) -> None:
         source = self.package_workflow.source_snapshot
@@ -1132,6 +1456,252 @@ class OrderReviewWindow:
                     products=products,
                 ),
             )
+
+    def _render_single_order_audit(
+        self,
+        plan,
+        *,
+        edit_command: Callable[[], None] | None = None,
+        confirm_before_audit: bool = False,
+    ) -> None:
+        if len(plan.packages) != 1:
+            return
+        source = self.package_workflow.source_snapshot
+        if source is None:
+            return
+        card = tk.Frame(
+            self.content_frame,
+            bg=MACOS_THEME["surface"],
+            highlightbackground=MACOS_THEME["border"],
+            highlightthickness=1,
+            padx=9,
+            pady=9,
+        )
+        card.pack(fill="x", pady=(0, 8))
+        tk.Label(
+            card,
+            text="单订单审核",
+            bg=MACOS_THEME["surface"],
+            fg=MACOS_THEME["primary_text"],
+            font=(FONT_FAMILY, 10, "bold"),
+            anchor="w",
+        ).pack(fill="x")
+        target_text = source.system_order_id or "未识别"
+        status_text = "等待开始"
+        status_color = MACOS_THEME["muted_text"]
+        if self._audit_running:
+            status_text = self._audit_progress or "正在准备审核"
+            status_color = MACOS_THEME["warning"]
+        elif self._audit_completed_system_order_id == source.system_order_id:
+            status_text = "本单审核成功"
+            status_color = MACOS_THEME["success"]
+        tk.Label(
+            card,
+            text=status_text,
+            bg=MACOS_THEME["surface"],
+            fg=status_color,
+            font=(FONT_FAMILY, 8, "bold"),
+            anchor="e",
+        ).place(relx=1.0, x=-1, y=0, anchor="ne")
+        self._selectable_text(
+            card,
+            f"目标订单：{target_text}",
+            background=MACOS_THEME["surface"],
+            foreground=MACOS_THEME["secondary_text"],
+            font=(FONT_FAMILY, 9),
+            wrap_chars=40,
+        ).pack(fill="x", pady=(5, 7))
+        actions = tk.Frame(card, bg=MACOS_THEME["surface"])
+        actions.pack(fill="x")
+        if edit_command is not None:
+            self._action_button(
+                actions,
+                "修改方案",
+                edit_command,
+                accented=True,
+                compact=True,
+                enabled=not self._audit_running,
+            ).pack(side="left", padx=(0, 8))
+        can_audit = bool(source.system_order_id) and not self._audit_running and (
+            self._audit_completed_system_order_id != source.system_order_id
+        )
+        self._action_button(
+            actions,
+            "审核当前订单",
+            lambda: self._start_single_order_audit(
+                plan,
+                confirm_before_audit=confirm_before_audit,
+            ),
+            danger=True,
+            enabled=can_audit,
+        ).pack(
+            side="right" if edit_command is not None else "top",
+            fill="x",
+            expand=edit_command is not None,
+        )
+        action_note = (
+            "点击审核即采用当前方案；系统会先自动检查，不会继续下一单。"
+            if confirm_before_audit
+            else "点击后自动检查，只处理当前已确认的 1 单，不会继续下一单。"
+        )
+        tk.Label(
+            card,
+            text=action_note,
+            bg=MACOS_THEME["surface"],
+            fg=MACOS_THEME["muted_text"],
+            font=(FONT_FAMILY, 8),
+            anchor="w",
+            justify="left",
+        ).pack(fill="x", pady=(6, 0))
+        if not source.system_order_id:
+            self._render_package_notice(
+                "当前订单缺少可靠的系统订单号，无法开始审核。",
+                tone="warning",
+            )
+        elif self._audit_feedback:
+            tone = "info"
+            if "成功" in self._audit_feedback:
+                tone = "success"
+            elif "停止" in self._audit_feedback or "不确定" in self._audit_feedback:
+                tone = "warning"
+            self._render_package_notice(self._audit_feedback, tone=tone)
+
+    def _start_single_order_audit(
+        self,
+        plan,
+        *,
+        confirm_before_audit: bool = False,
+    ) -> None:
+        if self._audit_running:
+            return
+        if confirm_before_audit:
+            try:
+                self.package_workflow.confirm()
+                plan = self.package_workflow.confirmed_plan
+                self._show_package_editor = False
+                self._package_feedback = self.package_workflow.confirmation_note
+            except (PackagePlanValidationError, RuntimeError) as exc:
+                self._audit_feedback = (
+                    f"当前方案无法确认：{exc}。没有执行 ERP 审核。"
+                )
+                self._rerender_current_snapshot()
+                return
+            if plan is None:
+                self._audit_feedback = "当前方案确认失败，没有执行 ERP 审核。"
+                self._rerender_current_snapshot()
+                return
+        source = self.package_workflow.source_snapshot
+        if source is None:
+            self._audit_feedback = "当前没有已确认的订单方案，无法开始审核。"
+            self._rerender_current_snapshot()
+            return
+        if len(plan.packages) != 1:
+            self._audit_feedback = "当前不是单包方案，不能使用单订单审核。"
+            self._rerender_current_snapshot()
+            return
+        if not source.system_order_id:
+            self._audit_feedback = "当前订单缺少可靠系统订单号，无法开始审核。"
+            self._rerender_current_snapshot()
+            return
+        confirmation_reference_id = (
+            self.package_workflow.confirmed_case.case_id
+            if self.package_workflow.confirmed_case is not None
+            else (
+                self.package_workflow.historical_case.case_id
+                if self.package_workflow.historical_case is not None
+                else ""
+            )
+        )
+        self._audit_running = True
+        self._order_watch_generation += 1
+        self._audit_progress = "正在自动检查"
+        self._audit_feedback = "审核进行中：正在自动检查当前订单。"
+        self._auto_refresh_paused = False
+        self._reset_order_change_candidate()
+        self._rerender_current_snapshot()
+
+        def progress(state, detail) -> None:
+            self._audit_events.put(("progress", (state, detail)))
+
+        def worker() -> None:
+            try:
+                report = self.audit_executor(
+                    target_system_order_id=source.system_order_id,
+                    expected_source=source,
+                    confirmation_reference_id=confirmation_reference_id,
+                    target_package_count=len(plan.packages),
+                    progress_callback=progress,
+                    log_store=self.audit_log_store,
+                )
+                self._audit_events.put(("finished", report))
+            except Exception as exc:
+                self._audit_events.put(("error", str(exc)))
+
+        self._audit_thread = threading.Thread(
+            target=worker,
+            name="order-review-audit",
+            daemon=True,
+        )
+        self._audit_thread.start()
+        if self._audit_poll_job is None:
+            self._audit_poll_job = self.root.after(50, self._drain_audit_events)
+
+    def _drain_audit_events(self) -> None:
+        self._audit_poll_job = None
+        rerender = False
+        while True:
+            try:
+                event, payload = self._audit_events.get_nowait()
+            except queue.Empty:
+                break
+            if event == "progress":
+                _state, detail = payload
+                self._audit_progress = str(detail)
+                self._audit_feedback = f"审核进行中：{detail}"
+                rerender = True
+            elif event == "finished":
+                report = payload
+                self._audit_running = False
+                self._audit_thread = None
+                self._audit_progress = ""
+                self._audit_feedback = report.render_text()
+                if report.successful:
+                    self._audit_completed_system_order_id = (
+                        report.target_system_order_id
+                    )
+                    self._auto_refresh_not_before = (
+                        self.monotonic() + POST_AUDIT_REFRESH_DELAY_SECONDS
+                    )
+                    self._auto_refresh_paused = False
+                    if self._auto_refresh_enabled:
+                        self._audit_feedback = (
+                            f"审核成功：订单 {report.target_system_order_id} "
+                            "已离开待审核列表。正在快速确认新订单状态；"
+                            "确认稳定后会自动刷新下一单。"
+                        )
+                    else:
+                        self._audit_feedback = (
+                            f"审核成功：订单 {report.target_system_order_id} "
+                            "已离开待审核列表。自动刷新未开启，请手动刷新下一单。"
+                        )
+                else:
+                    self._set_auto_refresh_enabled(False)
+                self._reset_order_change_candidate()
+                rerender = True
+            elif event == "error":
+                self._audit_running = False
+                self._audit_thread = None
+                self._audit_progress = ""
+                self._set_auto_refresh_enabled(False)
+                self._reset_order_change_candidate()
+                self._audit_feedback = (
+                    f"审核已停止：{payload}。没有继续执行后续动作。"
+                )
+                rerender = True
+        if rerender:
+            self._rerender_current_snapshot()
+        if self._audit_running or not self._audit_events.empty():
+            self._audit_poll_job = self.root.after(50, self._drain_audit_events)
 
     def _render_freight_confirmation(self) -> None:
         source = self.package_workflow.source_snapshot
@@ -1660,29 +2230,42 @@ class OrderReviewWindow:
     def _confirm_package_plan(self) -> None:
         self.package_workflow.confirm()
         self._package_feedback = self.package_workflow.confirmation_note
+        self._audit_feedback = ""
 
     def _confirm_freight(self) -> None:
         self.package_workflow.confirm_freight()
         self._package_feedback = self.package_workflow.confirmation_note
 
+    def _open_current_draft_editor(self) -> None:
+        draft = self.package_workflow.draft
+        if draft is None:
+            raise PackagePlanValidationError("当前没有可修改的包裹方案")
+        self._show_package_editor = True
+        self._active_package_id = draft.packages[0].package_id
+
     def _edit_historical_plan(self) -> None:
         self.package_workflow.edit_historical_plan()
+        self._show_package_editor = True
         self._active_package_id = self.package_workflow.draft.packages[0].package_id
 
     def _start_single_package(self) -> None:
         self.package_workflow.start_single_package()
+        self._show_package_editor = True
         self._active_package_id = self.package_workflow.draft.packages[0].package_id
 
     def _start_split(self) -> None:
         self.package_workflow.start_split()
+        self._show_package_editor = True
         self._active_package_id = self.package_workflow.draft.packages[0].package_id
 
     def _start_freight(self) -> None:
         self.package_workflow.start_freight()
+        self._show_package_editor = False
         self._active_package_id = None
 
     def _adopt_recommendation(self, recommendation_id: str) -> None:
         self.package_workflow.adopt_recommendation(recommendation_id)
+        self._show_package_editor = True
         self._active_package_id = self.package_workflow.draft.packages[0].package_id
 
     def _activate_package(self, package_id: str) -> None:
@@ -1708,6 +2291,7 @@ class OrderReviewWindow:
 
     def _cancel_package_plan(self) -> None:
         self.package_workflow.cancel()
+        self._show_package_editor = False
         self._active_package_id = None
 
     def _set_package_quantity(
@@ -1808,6 +2392,10 @@ class OrderReviewWindow:
         self._quantity_commit_jobs.clear()
 
     def _package_action(self, action: Callable[[], None]) -> None:
+        if self._audit_running:
+            self._audit_feedback = "审核正在进行，完成前不能修改包裹方案。"
+            self._rerender_current_snapshot()
+            return
         self._package_feedback = ""
         try:
             action()
@@ -1820,7 +2408,6 @@ class OrderReviewWindow:
             return
         scroll_position = self.canvas.yview()[0]
         self._render_view(build_sidebar_view(self.current_snapshot), reset_scroll=False)
-        self.root.update_idletasks()
         self.canvas.yview_moveto(scroll_position)
 
     def _render_unassigned_pool(self, kind_count: int, quantity: int) -> None:
@@ -2046,6 +2633,28 @@ class OrderReviewWindow:
         self.root.geometry(f"+{x}+{y}")
 
     def close(self) -> None:
+        if self._audit_running:
+            self._audit_feedback = "审核正在进行，完成前不能关闭悬浮窗。"
+            self._rerender_current_snapshot()
+            return
+        if self._audit_poll_job is not None:
+            try:
+                self.root.after_cancel(self._audit_poll_job)
+            except tk.TclError:
+                pass
+            self._audit_poll_job = None
+        if self._follow_browser_job is not None:
+            try:
+                self.root.after_cancel(self._follow_browser_job)
+            except tk.TclError:
+                pass
+            self._follow_browser_job = None
+        if self._order_watch_job is not None:
+            try:
+                self.root.after_cancel(self._order_watch_job)
+            except tk.TclError:
+                pass
+            self._order_watch_job = None
         self.package_workflow.close()
         self.root.destroy()
 
