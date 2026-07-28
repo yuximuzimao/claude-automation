@@ -51,10 +51,12 @@ def panel_geometry_from_browser_bounds(
     bounds: tuple[int, int, int, int],
     *,
     panel_width: int,
-    panel_height: int,
+    panel_height: int | None = None,
     gap: int = 8,
 ) -> str:
-    left, top, _right, _bottom = bounds
+    left, top, _right, bottom = bounds
+    if panel_height is None:
+        panel_height = max(1, bottom - top)
     x = max(0, left - panel_width - gap)
     y = max(0, top)
     return f"{panel_width}x{panel_height}+{x}+{y}"

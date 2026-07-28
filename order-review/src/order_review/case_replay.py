@@ -300,14 +300,11 @@ def _plan_key(case: ConfirmedCase) -> str:
     products = case.source_snapshot.product_by_id
     packages: list[list[tuple[tuple[str, ...], int]]] = []
     for package in case.package_plan.packages:
-        items = sorted(
-            (
-                products[item.source_product_id].match_key,
-                item.quantity,
-            )
-            for item in package.items
-        )
-        packages.append(items)
+        totals: dict[tuple[str, ...], int] = {}
+        for item in package.items:
+            key = products[item.source_product_id].package_match_key
+            totals[key] = totals.get(key, 0) + item.quantity
+        packages.append(sorted(totals.items()))
     return json.dumps(
         sorted(packages),
         ensure_ascii=False,

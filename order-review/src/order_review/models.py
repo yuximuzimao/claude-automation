@@ -44,6 +44,7 @@ class OrderDetailGroup:
 @dataclass(frozen=True)
 class OrderSnapshot:
     is_expanded: bool
+    system_order_id: str = ""
     products: list[Product] = field(default_factory=list)
     groups: list[OrderDetailGroup] = field(default_factory=list)
     order_numbers: tuple[str, ...] = ()

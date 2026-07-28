@@ -8,6 +8,10 @@ from types import MappingProxyType
 from typing import Any, Mapping
 
 from .models import OrderSnapshot, Product
+from .package_equivalence import (
+    PACKAGE_EQUIVALENCE_KEY_PREFIX,
+    package_equivalence_group,
+)
 
 
 SCHEMA_VERSION = 1
@@ -106,7 +110,7 @@ class SourceProduct:
 
     @property
     def match_key(self) -> tuple[str, ...]:
-        """用于包裹规则匹配的稳定商品身份。"""
+        """用于订单身份和原商品引用的稳定商品身份。"""
         return (
             self.merchant_code,
             self.main_merchant_code or "",
@@ -115,6 +119,20 @@ class SourceProduct:
             self.standard_name,
             self.platform_spec,
             self.platform_name,
+        )
+
+    @property
+    def package_match_key(self) -> tuple[str, ...]:
+        """用于包裹方案复用的身份；仅对白名单内等体积口味做归组。"""
+        group = package_equivalence_group(
+            self.merchant_code,
+            self.main_merchant_code,
+        )
+        if group is None:
+            return self.match_key
+        return (
+            PACKAGE_EQUIVALENCE_KEY_PREFIX,
+            group,
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -128,6 +146,7 @@ class SourceProduct:
 class SourceSnapshot:
     snapshot_id: str
     captured_at: str
+    system_order_id: str
     platform_order_numbers: tuple[str, ...]
     products: tuple[SourceProduct, ...]
     _snapshot_json: str = field(repr=False)
@@ -173,6 +192,7 @@ class SourceSnapshot:
             )
         )
         immutable_content = {
+            "systemOrderId": snapshot.system_order_id,
             "platformOrderNumbers": list(platform_orders),
             "isExpanded": snapshot.is_expanded,
             "hasCanMergeMark": snapshot.has_can_merge_mark,
@@ -197,6 +217,7 @@ class SourceSnapshot:
         return cls(
             snapshot_id=snapshot_id,
             captured_at=captured_at,
+            system_order_id=snapshot.system_order_id,
             platform_order_numbers=platform_orders,
             products=tuple(source_products),
             _snapshot_json=_canonical_json(stored),
@@ -232,6 +253,7 @@ class SourceSnapshot:
         return cls(
             snapshot_id=str(copied["snapshotId"]),
             captured_at=str(copied.get("capturedAt", "")),
+            system_order_id=str(copied.get("systemOrderId", "")),
             platform_order_numbers=tuple(copied.get("platformOrderNumbers", [])),
             products=products,
             _snapshot_json=_canonical_json(copied),

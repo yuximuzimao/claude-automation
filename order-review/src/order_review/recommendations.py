@@ -8,10 +8,11 @@ from typing import Mapping
 
 from .case_repository import ConfirmedCase, RuleStats
 from .order_identity import (
-    order_structure_signature,
-    order_structure_signature_key,
+    package_order_structure_signature,
+    package_order_structure_signature_key,
+    package_total_product_signature,
+    package_total_product_signature_key,
     total_product_signature,
-    total_product_signature_key,
 )
 from .package_plan import (
     Package,
@@ -21,10 +22,13 @@ from .package_plan import (
     SourceProduct,
     SourceSnapshot,
 )
+from .package_equivalence import PACKAGE_EQUIVALENCE_KEY_PREFIX
 
 
 RECOMMENDATION_ALGORITHM_VERSION = 1
+PACKAGE_EQUIVALENT_RECOMMENDATION_ALGORITHM_VERSION = 2
 SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 2
+PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 3
 FREIGHT_REMINDER_ALGORITHM_VERSION = 1
 MATCH_EXACT_STRUCTURE = "exact_structure"
 MATCH_SINGLE_PACKAGE_TOTAL = "single_package_total"
@@ -105,7 +109,11 @@ def find_freight_reminder(
     )
 
 
-def _template(case: ConfirmedCase) -> tuple[RecommendationPackage, ...]:
+def _template(
+    case: ConfirmedCase,
+    *,
+    use_package_equivalence: bool = True,
+) -> tuple[RecommendationPackage, ...]:
     products = case.source_snapshot.product_by_id
     packages: list[RecommendationPackage] = []
     for package in case.package_plan.packages:
@@ -115,8 +123,13 @@ def _template(case: ConfirmedCase) -> tuple[RecommendationPackage, ...]:
             product = products.get(item.source_product_id)
             if product is None:
                 raise PackagePlanValidationError("历史案例引用了不存在的原商品")
-            totals[product.match_key] += item.quantity
-            names[product.match_key] = item.product_name or product.display_name
+            key = (
+                product.package_match_key
+                if use_package_equivalence
+                else product.match_key
+            )
+            totals[key] += item.quantity
+            names[key] = item.product_name or product.display_name
         packages.append(
             RecommendationPackage(
                 items=tuple(
@@ -152,13 +165,14 @@ def _rule_id(
     match_type: str,
 ) -> str:
     scope = (
-        order_structure_signature_key(source)
+        package_order_structure_signature_key(source)
         if match_type == MATCH_EXACT_STRUCTURE
-        else total_product_signature_key(source)
+        else package_total_product_signature_key(source)
     )
     payload = f"{match_type}:{scope}:{_template_key(packages)}"
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20]
-    return f"rule-v1-{digest}"
+    version = _recommendation_algorithm_version(packages)
+    return f"rule-v{version}-{digest}"
 
 
 def _build_result(
@@ -178,10 +192,11 @@ def _build_result(
 
     candidates: list[RecommendationCandidate] = []
     for key, grouped_cases in grouped.items():
-        packages = templates[key]
+        packages = _project_template_names(source, templates[key])
         rule_id = _rule_id(source, packages, match_type)
         stats = (rule_stats or {}).get(rule_id)
         usage_count = len(grouped_cases) + (stats.direct_use_count if stats else 0)
+        algorithm_version = _recommendation_algorithm_version(packages)
         candidates.append(
             RecommendationCandidate(
                 recommendation_id=rule_id,
@@ -190,6 +205,7 @@ def _build_result(
                 packages=packages,
                 source_case_ids=tuple(case.case_id for case in grouped_cases),
                 usage_count=usage_count,
+                algorithm_version=algorithm_version,
             )
         )
     candidates.sort(key=lambda item: (-item.usage_count, item.recommendation_id))
@@ -204,12 +220,12 @@ def find_exact_recommendations(
     cases: list[ConfirmedCase],
     rule_stats: Mapping[str, RuleStats] | None = None,
 ) -> RecommendationResult:
-    signature = order_structure_signature(source)
+    signature = package_order_structure_signature(source)
     matching = [
         case
         for case in cases
         if not case.is_freight
-        and order_structure_signature(case.source_snapshot) == signature
+        and package_order_structure_signature(case.source_snapshot) == signature
     ]
     return _build_result(
         source,
@@ -229,13 +245,13 @@ def find_recommendations(
     if exact.candidates:
         return exact
 
-    total_signature = total_product_signature(source)
+    total_signature = package_total_product_signature(source)
     matching_single = [
         case
         for case in cases
         if not case.is_freight
         and len(case.package_plan.packages) == 1
-        and total_product_signature(case.source_snapshot) == total_signature
+        and package_total_product_signature(case.source_snapshot) == total_signature
     ]
     single_total = _build_result(
         source,
@@ -255,7 +271,7 @@ def find_single_package_capacity_recommendations(
     rule_stats: Mapping[str, RuleStats] | None = None,
 ) -> RecommendationResult:
     """只复用数量不超过已确认历史容量的单包案例。"""
-    current_signature = total_product_signature(source)
+    current_signature = package_total_product_signature(source)
     current_totals = dict(current_signature)
     current_keys = tuple(key for key, _ in current_signature)
     matching_by_capacity: defaultdict[
@@ -265,7 +281,7 @@ def find_single_package_capacity_recommendations(
     for case in cases:
         if case.is_freight or len(case.package_plan.packages) != 1:
             continue
-        historical_signature = total_product_signature(case.source_snapshot)
+        historical_signature = package_total_product_signature(case.source_snapshot)
         if historical_signature == current_signature:
             continue
         if tuple(key for key, _ in historical_signature) != current_keys:
@@ -296,7 +312,11 @@ def find_single_package_capacity_recommendations(
     selected_capacity = min(matching_by_capacity, key=capacity_rank)
     matching = matching_by_capacity[selected_capacity]
     packages = _current_single_package_template(source)
-    rule_id = _capacity_rule_id(selected_capacity)
+    algorithm_version = _capacity_algorithm_version(selected_capacity)
+    rule_id = _capacity_rule_id(
+        selected_capacity,
+        algorithm_version=algorithm_version,
+    )
     stats = (rule_stats or {}).get(rule_id)
     source_case_ids = tuple(sorted(case.case_id for case in matching))
 
@@ -310,7 +330,7 @@ def find_single_package_capacity_recommendations(
                 source_case_ids=source_case_ids,
                 usage_count=len(matching)
                 + (stats.direct_use_count if stats else 0),
-                algorithm_version=SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION,
+                algorithm_version=algorithm_version,
                 quantity_note=_capacity_note(
                     source,
                     current_totals=current_totals,
@@ -328,8 +348,8 @@ def _current_single_package_template(
     totals: defaultdict[tuple[str, ...], int] = defaultdict(int)
     names: dict[tuple[str, ...], str] = {}
     for product in source.products:
-        totals[product.match_key] += product.quantity
-        names.setdefault(product.match_key, product.display_name)
+        totals[product.package_match_key] += product.quantity
+        names.setdefault(product.package_match_key, product.display_name)
     return (
         RecommendationPackage(
             items=tuple(
@@ -342,13 +362,15 @@ def _current_single_package_template(
 
 def _capacity_rule_id(
     capacity_signature: tuple[tuple[tuple[str, ...], int], ...],
+    *,
+    algorithm_version: int,
 ) -> str:
     payload = (
         f"{MATCH_SINGLE_PACKAGE_CAPACITY}:"
         f"{json.dumps(capacity_signature, ensure_ascii=False, separators=(',', ':'))}"
     )
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20]
-    return f"rule-v2-{digest}"
+    return f"rule-v{algorithm_version}-{digest}"
 
 
 def _capacity_note(
@@ -359,7 +381,7 @@ def _capacity_note(
 ) -> str:
     names: dict[tuple[str, ...], str] = {}
     for product in source.products:
-        names.setdefault(product.match_key, product.display_name)
+        names.setdefault(product.package_match_key, product.display_name)
     historical = "、".join(
         f"{names[key]} ×{historical_totals[key]}" for key in sorted(current_totals)
     )
@@ -372,10 +394,17 @@ def _capacity_note(
 def apply_recommendation(
     source: SourceSnapshot,
     candidate: RecommendationCandidate,
+    *,
+    use_package_equivalence: bool = True,
 ) -> PackageDraft:
     available: dict[tuple[str, ...], list[list[SourceProduct | int]]] = defaultdict(list)
     for product in source.products:
-        available[product.match_key].append([product, product.quantity])
+        key = (
+            product.package_match_key
+            if use_package_equivalence
+            else product.match_key
+        )
+        available[key].append([product, product.quantity])
 
     packages: list[Package] = []
     for package_index, template_package in enumerate(candidate.packages, start=1):
@@ -410,7 +439,7 @@ def apply_recommendation(
 
 
 def apply_case_plan(source: SourceSnapshot, case: ConfirmedCase) -> PackageDraft:
-    packages = _template(case)
+    packages = _template(case, use_package_equivalence=False)
     candidate = RecommendationCandidate(
         recommendation_id=f"history-{case.case_id}",
         rule_id=f"history-{case.case_id}",
@@ -419,4 +448,57 @@ def apply_case_plan(source: SourceSnapshot, case: ConfirmedCase) -> PackageDraft
         source_case_ids=(case.case_id,),
         usage_count=1,
     )
-    return apply_recommendation(source, candidate)
+    return apply_recommendation(
+        source,
+        candidate,
+        use_package_equivalence=False,
+    )
+
+
+def _project_template_names(
+    source: SourceSnapshot,
+    packages: tuple[RecommendationPackage, ...],
+) -> tuple[RecommendationPackage, ...]:
+    current_names: defaultdict[tuple[str, ...], list[str]] = defaultdict(list)
+    for product in source.products:
+        names = current_names[product.package_match_key]
+        if product.display_name not in names:
+            names.append(product.display_name)
+
+    return tuple(
+        RecommendationPackage(
+            items=tuple(
+                RecommendationItem(
+                    item.match_key,
+                    " / ".join(current_names[item.match_key]) or item.product_name,
+                    item.quantity,
+                )
+                for item in package.items
+            )
+        )
+        for package in packages
+    )
+
+
+def _recommendation_algorithm_version(
+    packages: tuple[RecommendationPackage, ...],
+) -> int:
+    if any(
+        _is_package_equivalence_key(item.match_key)
+        for package in packages
+        for item in package.items
+    ):
+        return PACKAGE_EQUIVALENT_RECOMMENDATION_ALGORITHM_VERSION
+    return RECOMMENDATION_ALGORITHM_VERSION
+
+
+def _capacity_algorithm_version(
+    capacity_signature: tuple[tuple[tuple[str, ...], int], ...],
+) -> int:
+    if any(_is_package_equivalence_key(key) for key, _ in capacity_signature):
+        return PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION
+    return SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION
+
+
+def _is_package_equivalence_key(key: tuple[str, ...]) -> bool:
+    return bool(key) and key[0] == PACKAGE_EQUIVALENCE_KEY_PREFIX

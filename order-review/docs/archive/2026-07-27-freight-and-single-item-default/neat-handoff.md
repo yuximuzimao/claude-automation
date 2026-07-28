@@ -104,7 +104,7 @@ recommendation_event_audit
 
 下一阶段回到“人工点击触发的单包订单普通审核 v1”：
 
-- 活动实施方案：`../../../docs/2026-07-24-single-package-order-review-execution-v1.md`
+- 后续完成记录：`../2026-07-28-single-package-audit-v1/neat-handoff.md`
 - 当前只允许第 16 节阶段 1：结构化只读探测、状态机、日志、UI 和 dry-run。
 - 不得勾选真实订单、打开真实审核弹窗或点击确定。
 - 物流订单继续排除在普通单包审核流程之外。
