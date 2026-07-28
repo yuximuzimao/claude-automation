@@ -10,25 +10,28 @@ async function main() {
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--shop') opts.shop = args[++i];
     else if (args[i] === '--brand') opts.brand = args[++i];
+    else if (args[i] === '--product') opts.product = args[++i];
     else if (!opts._cmd) opts._cmd = args[i];
   }
 
   if (!cmd || cmd === '--help') {
     console.log(`用法:
   node cli.js targets                         — 检查浏览器标签页连通性
+  node cli.js sku-detail <spuId>              — 读取鲸灵单个商品的 SKU 明细
   node cli.js jl-products                     — 抓取鲸灵活动商品列表
   node cli.js km-read <货号>                  — 查商品对应表
   node cli.js km-archive <编码>               — 查商品档案V2
   node cli.js check --shop <店铺> --brand <品牌> — 首次完整核查（品牌必填）
   node cli.js check --shop <店铺> --reuse-active --skip-download — 后置核查（复用活动范围，不下载平台商品）
   node cli.js visual-pending --shop <店铺>    — 列出待视觉核查的组合装
-  node cli.js visual-ok <平台编码> "<描述>"   — 记录识图确认（图片内容正确）
-  node cli.js visual-flag <平台编码> "<描述>" — 记录识图不符（图片内容有误）
+  node cli.js visual-ok <平台编码> "<商品A×N；商品B×N>" [--product <货号>]   — 记录识图确认
+  node cli.js visual-flag <平台编码> "<商品A×N；商品B×N>" [--product <货号>] — 记录识图不符
   node cli.js match-test "<SKU名>" "<识图描述>" — 测试 SKU名 vs 识图结果比对
   node cli.js fetch-archive-names             — 读取档案V2普通商品全列表（含简称）
   node cli.js mark-suite <店铺> <货号> <平台编码> — 对应表标记套件（只处理单个SKU）
   node cli.js download-products --shop <店铺>   — 仅下载平台商品（只需 ERP tab，不需鲸灵）
   node cli.js match-one <货号> --shop <店铺> --brand <品牌> [--from <步骤>] — 单货号匹配
+  node cli.js match-batch --shop <店铺>          — 批量入口（当前尚未实现）
   node cli.js preview-match                       — 匹配前最终明细核对表（AI识图+自动配件，不展示 ERP 当前档案）
   node cli.js verify-table                        — 匹配后异常兜底核对表
   node cli.js match --shop <店铺> [--limit N]    — 自动匹配（组合装套件+单品，任何异常立即停止）`);
@@ -92,7 +95,7 @@ async function main() {
     const platformCode = args[0];
     const notes = args[1] || '';
     if (!platformCode) {
-      console.error(`用法: node cli.js ${cmd} <平台编码> "<识图描述>"`);
+      console.error(`用法: node cli.js ${cmd} <平台编码> "<识图描述>" [--product <货号>]`);
       process.exit(1);
     }
     const { recordVerdict } = require('./lib/visual');
@@ -107,7 +110,12 @@ async function main() {
       : [];
     if (files.length) {
       const report = JSON.parse(fs.readFileSync(path.join(reportDir, files[files.length - 1]), 'utf8'));
-      skuObj = report.products.flatMap(p => p.skus).find(s => s.platformCode === platformCode) || null;
+      skuObj = report.products
+        .flatMap(p => p.skus.map(s => ({ ...s, productCode: p.productCode })))
+        .find(s =>
+          s.platformCode === platformCode &&
+          (!opts.product || s.productCode === opts.product)
+        ) || null;
     }
     const verdict = cmd === 'visual-ok' ? 'ok' : 'mismatch';
     let matchDetail = '';
@@ -115,8 +123,8 @@ async function main() {
       const r = matchSku(skuObj, notes);
       matchDetail = r.detail;
     }
-    const saved = recordVerdict(platformCode, verdict, notes, matchDetail);
-    console.log(JSON.stringify(ok({ platformCode, ...saved }), null, 2));
+    const saved = recordVerdict(platformCode, verdict, notes, matchDetail, opts.product || null);
+    console.log(JSON.stringify(ok({ productCode: opts.product || null, platformCode, ...saved }), null, 2));
     return;
   }
 

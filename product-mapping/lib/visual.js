@@ -15,17 +15,17 @@ const SKU_RECORDS_FILE = path.join(__dirname, '../data/sku-records.json');
 const { recordKey, imageFileName } = require('./sku-identity');
 
 /**
- * 将 notes 文本（"商品A×N 商品B×M"）解析为 recognition 结构
+ * 将 notes 文本（"商品A×N；商品B×M"）解析为 recognition 结构
  * 单品：items.length===1；组合装：items.length>1
  */
 function parseNotesToRecognition(notes) {
   if (!notes || !notes.trim()) return null;
-  // 按中文顿号、逗号、空格分隔
-  const parts = notes.split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
+  // ERP 标准商品名经常包含空格，项目之间只用明确分隔符或换行切项。
+  const parts = notes.split(/[、,，;；\n]+/).map(s => s.trim()).filter(Boolean);
   const items = [];
   for (const p of parts) {
-    // 匹配"商品名×数量"，×可以是全角或半角
-    const m = p.match(/^(.+?)[×x×](\d+)$/);
+    // 匹配"商品名×数量"，×可以是全角或半角。
+    const m = p.match(/^(.+?)[×xX]\s*(\d+)$/);
     if (m) {
       items.push({ name: m[1].trim(), qty: parseInt(m[2], 10) });
     } else if (p) {
@@ -73,6 +73,27 @@ function loadVerdicts() {
   return readJson(VERDICTS_FILE, {});
 }
 
+function selectVerdictRecords(records, platformCode, productCode = null) {
+  const matches = Object.values(records).filter(record =>
+    record &&
+    record.platformCode === platformCode &&
+    (!productCode || record.productCode === productCode)
+  );
+  if (!productCode && matches.length > 1) {
+    const productCodes = [...new Set(matches.map(record => record.productCode).filter(Boolean))];
+    throw new Error(
+      `平台编码 ${platformCode} 对应多个商品链接（${productCodes.join('、')}），请指定 productCode`
+    );
+  }
+  if (productCode && matches.length === 0) {
+    throw new Error(`未找到商品链接记录: ${recordKey(productCode, platformCode)}`);
+  }
+  if (!productCode && matches.length === 0) {
+    throw new Error(`未找到平台编码记录: ${platformCode}`);
+  }
+  return matches;
+}
+
 /**
  * 记录识图判断结果
  * @param {string} platformCode
@@ -91,11 +112,7 @@ function recordVerdict(platformCode, verdict, notes, matchDetail, productCode = 
 
   if (fs.existsSync(SKU_RECORDS_FILE)) {
     const records = JSON.parse(fs.readFileSync(SKU_RECORDS_FILE, 'utf8'));
-    const matches = Object.values(records).filter(record =>
-      record &&
-      record.platformCode === platformCode &&
-      (!productCode || record.productCode === productCode)
-    );
+    const matches = selectVerdictRecords(records, platformCode, productCode);
     for (const record of matches) {
       verdicts[recordKey(record.productCode, record.platformCode)] = value;
       record.recognition = parseNotesToRecognition(notes);
@@ -231,6 +248,8 @@ module.exports = {
   loadVerdicts,
   recordVerdict,
   recordRecognition,
+  parseNotesToRecognition,
+  selectVerdictRecords,
   listPending,
   mergeVerdicts,
 };

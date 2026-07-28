@@ -7,7 +7,7 @@ entry: cli.js
 
 ## DO FIRST
 
-1. **找 CLI 命令** → `cli.js`（19 个命令，JSON 输出）
+1. **找 CLI 命令** → `cli.js`（命令路由和 JSON 输出）
 2. **找流程** → `docs/INDEX.md §2`（5 步核查流程：check→识图→match→check→verify-table）
 3. **找单 SKU 匹配** → `lib/match-one.js`（7 步闭环，支持 `--from` 断点续跑）
 4. **ERP 操作前必走完整导航** → `lib/navigate.js`（reload→登录检测→切tab→验hash→等Vue mount）
@@ -19,7 +19,7 @@ entry: cli.js
 
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
-| `cli.js` | CLI 入口，19 个命令路由 | 了解可用命令或新增命令时 |
+| `cli.js` | CLI 命令入口 | 了解可用命令或新增命令时 |
 | `lib/check.js` | 完整核查流程编排（扫描+标记+生成结构化比较事实） | 改核查流程时 |
 | `lib/brand-scope.js` | 首次指定品牌、后续继承与冲突拦截 | 改品牌作用域时 |
 | `lib/compare.js` | 识图结果 vs ERP 档案明细的精确比较 | 改 match/mismatch 判定时 |
@@ -31,7 +31,8 @@ entry: cli.js
 | `lib/erp-lock.js` | ERP 操作锁（acquireErpLock/releaseErpLock）暂停 aftersales | 任何 ERP 操作（navigateErp 自动调用） |
 | `lib/correspondence.js` | 商品对应表读取（`readCorrWithoutDownload`=纯读取；`readAllCorrespondence`=含下载副作用） | 查对应表数据时 |
 | `lib/archive.js` | 商品档案V2查询 | 查档案数据时 |
-| `lib/visual.js` | 视觉识别结论管理 | 查/写识图结果时 |
+| `lib/sku-identity.js` | `productCode + platformCode` 记录键和图片文件名 | 处理重复平台编码或图片路径时 |
+| `lib/visual.js` | 视觉识别结论管理；重复平台编码必须带 productCode | 查/写识图结果时 |
 | `lib/preview-match.js` | 匹配前最终明细核对 HTML（AI 识图商品 + 自动注入配件同表展示，配件变色） | 识图完成后、match 前生成核对表时 |
 | `lib/verify-table.js` | 图片+ERP明细诊断表 HTML 生成 | 最终自动核对出现异常、需要人工定位时 |
 | `lib/jl-products.js` | 鲸灵活动商品列表抓取 | 获取商品清单时 |
@@ -63,7 +64,7 @@ entry: cli.js
 
 ```
 ① check --shop <店铺> --brand <品牌> → 扫描+标记+下载图片+生成报告 (anchor: runCheck, listActiveProducts, readAllCorrespondence)
-② AI 识图（当前具备视觉能力的对话模型） → visual-ok / visual-flag 记录结论 (anchor: recordVerdict, listPending)
+② AI 识图（当前具备视觉能力的对话模型） → 按商品链接记录结构化结论 (anchor: recordRecognition, listPending)
 ②.3 check --reuse-active --skip-download → 同一 check 输出；AI 核对已匹配 SKU，未匹配视为正常待处理
 ②.5 preview-match          → 全部 SKU 展示最终匹配明细（AI 识图 + 自动配件同表，配件变色），由用户确认一次 (anchor: main in preview-match.js)
 ③ match --shop <店铺>      → 自动匹配（套件+单品，异常停止） (anchor: matchOne, matchSku)
@@ -97,7 +98,7 @@ download → read_skus → recognize → annotate → match → read_erp → ver
 
 1. `navigateErp` → 商品档案V2（必须 reload→登录检测→切tab）
 2. DOM 输入法设编码（非 `window.__sv` 直接赋值）
-3. 点搜索 → 等结果 → 读子品明细（cells[1/3/10]）
+3. 点搜索 → 从返回列表中精确找到查询编码 → 按表头读取子品明细；空明细重试一次
 4. 关闭弹窗用 `button.el-dialog__closeBtn`
 
 ## NON-STANDARD PATTERNS
@@ -168,6 +169,7 @@ visible.querySelector('button.el-button--primary').click();
 | 13 | 只清 DOM checkbox 就认为弹窗已归零 | 同时清 `TableItem.multipleSelection`，并验证“已选择商品：0” |
 | 14 | 中断后从头重复标记套件 | 先识别“复制为套件”中间态，已有则直接续配置子品 |
 | 15 | 未指定品牌时静默使用 kgos/hee | 首次 check 必须 `--brand`；后续从记录继承并验证唯一性 |
+| 16 | 重复 platformCode 仍用单编码写识图 | 使用 `productCode + platformCode`；CLI 必须传 `--product <货号>` |
 
 ## PATHS
 
@@ -198,6 +200,7 @@ lib/navigate.js
 lib/preview-match.js
 lib/remap-sku.js
 lib/result.js
+lib/sku-identity.js
 lib/targets.js
 lib/visual.js
 lib/verify-table.js

@@ -13,7 +13,7 @@
 ```text
 Step 0: 清空旧数据工作区
   - 无需手动清空：check 命令开始时自动清空 data/imgs/ 和 data/reports/
-  - 无需手动清空匹配日志：match 会按店铺+待匹配 platformCode 集合生成 scope；新活动自动重置，同活动中断重跑保留 done[] 进度
+  - 无需手动清空匹配日志：match 会按店铺+待匹配 `productCode + platformCode` 链接集合生成 scope；新活动自动重置，同活动中断重跑保留 done[] 进度
   - 无需手动清空：sku-records.json 由 check 全量重写
   - 只需确保 ERP 和鲸灵 Tab 正常打开
 
@@ -29,9 +29,9 @@ Step 2: 建立 sku-map（货号→platformCode 追踪台账）
 
 Step 3: 下载/整理参考图片
   - 目标：data/products/{brand}/*.jpg（单品标准图，命名=商品中文名）
-  - 来源：从 data/imgs/ 中找对应 platformCode 的图片复制
+  - 来源：从 data/imgs/ 中按 productCode + platformCode 找对应图片复制
     - 查 sku-map：商品中文名 → 货号 → platformCode
-    - cp data/imgs/{platformCode}.jpg data/products/{brand}/{商品名}.jpg
+    - cp data/imgs/{productCode}__{platformCode}.jpg data/products/{brand}/{商品名}.jpg
   - “不在对应表”的产品：需额外获取图片（见下方异常处理）
 
 Step 4: 建立/完善 features.json
@@ -44,7 +44,7 @@ Step 5: 交叉验收（Phase Gate — 全部通过才算建档完成）
 
   自动可验（可写脚本或人工检查）：
   ✅ #1 sku-map keys 覆盖所有活动产品（无遗漏）
-  ✅ #2 sku-map 中每个 platformCode 在 data/imgs/ 都有对应图片
+  ✅ #2 sku-map 中每个 productCode + platformCode 在 data/imgs/ 都有对应图片
   ✅ #4 features.json 产品数 = ERP 档案V2 该品牌活跃产品数
   ✅ #6 data/imgs/ 中无跨品牌图片（或确认品牌作用域已隔离）
   ✅ #7 features.json 每个条目都有对应参考图（data/products/{brand}/{name}.jpg）

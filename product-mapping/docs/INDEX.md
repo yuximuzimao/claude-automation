@@ -6,7 +6,7 @@
 
 - **写操作（新增匹配）必须人工确认后执行**；确认后由脚本写入，异常必须 stop-on-error
 - ERP 查询命令必须串行，禁止并行（对应表 + 档案V2 顺序执行）
-- 每次查询等待 2000ms
+- 页面等待按具体状态轮询，不用单一固定时长代替成功验证
 
 ---
 
@@ -70,6 +70,7 @@
    - 由当前具备视觉能力的对话模型对照 `features.json` 判断图片可见商品
    - 本地执行端若能直接查看图片，可读取 `data/imgs/`；ChatGPT + CodexPro 不能把本地图片像素直接送入视觉通道，必须按 `docs/chatgpt-codexpro-operations.md` 生成联系表并桥接为当前对话附件
    - 写入 sku-records.json 的 recognition 字段；用户要求当前对话模型完成识图时，OCR/本地视觉模型不得替代该 AI 的识图结论
+   - 重复 platformCode 必须按 productCode 分别写入；优先调用结构化 `recordRecognition()`，CLI 使用 `visual-ok/visual-flag ... --product <货号>`，多商品描述用中文分号分隔
 
 ②.3 匹配前 check（同一个 check 脚本，由我按阶段判断）:
    - matchedComparisonMatch 必须等于 matchedSkuCount
@@ -136,7 +137,7 @@
 2. Read 工具加载图片
 3. 对照 features.json 描述逐一确认图中每个商品
 4. 报告：每个商品是否在图中可见，数量是否一致
-5. **erpName 校验（必做）**：写 visual-ok notes 前，查 features.json 确认每个商品的 `erpName` 精确字符串，notes 中的商品名必须等于 erpName，不能用简称、别名或自造名称。脚本做 Set 等值比对，一字之差全部 mismatch。
+5. **erpName 校验（必做）**：写识图结果前，查 features.json 确认每个商品的 `erpName` 精确字符串；结构化写入优先，多商品文本必须用中文分号分隔，不能用空格拆项。脚本做 Set 等值比对，一字之差全部 mismatch。
 
 **形状判别铁律（2026-05-23 酵素4.0教训）**：
 - 同款商品有正装/体验装两个版本时，**盒子形状是第一识别线索**：体验装=窄长条（长宽比约2:1），正装=偏方形（长宽比约1:1）
@@ -241,18 +242,18 @@ data/products/
 
 ### 子品明细读取
 
-列索引固定：`cells[1]`=商品名称，`cells[3]`=商家编码，`cells[10]`=组合数量。关闭弹窗用 `button.el-dialog__closeBtn`（不是 `el-dialog__headerbtn`）。
+通过表头文本“商品名称 / 商家编码 / 组合比例”定位列，不硬编码列号；弹窗空明细重试一次。关闭弹窗用 `button.el-dialog__closeBtn`（不是 `el-dialog__headerbtn`）。
 
 ### 对应表图片收集
 
-图片列 class 名每次导航后动态变化，不能硬编码。正确方式：逐段滚动（12步）触发懒加载，用 `platformCode`（cells[5].innerText）作为 key 建立 imgUrl 索引。
+图片列 class 名每次导航后动态变化，不能硬编码。正确方式：逐段滚动（12步）触发懒加载，用 `productCode + platformCode` 建立 imgUrl 索引。
 
 ### 图片存储规范
 
 - **统一路径**：`data/imgs/{productCode}__{platformCode}.jpg`，货号与平台规格编码共同组成文件名
 - **覆盖范围**：`check.js` 对**所有 SKU**（包括未匹配）都下载图片，不只是已匹配的
 - **查找方式**：知道 productCode 与 platformCode 后直接拼路径，不需要在 JSON 里存 imgPath
-- **禁止**：用 `dl_` 前缀或 `safeCode` 替换字符做文件名（历史遗留，已废除）
+- **生成入口**：统一调用 `lib/sku-identity.js` 的 `imageFileName()`；只替换路径不安全字符，保留编码中的空格等业务字符
 
 ### SKU 数据文件规范
 
@@ -292,7 +293,7 @@ data/products/
 
 **禁止**：用 `sv.searchData.itemType = "0"` 直接赋值——无效，真实 type 值是数字 `1`，且不能绕过 UI 筛选
 
-**识图前必读**：`data/products/features.json`（含 erpName 精确名称 + 视觉特征）
+**识图前必读**：`data/products/{brand}/features.json`（含 erpName 精确名称 + 视觉特征）
 - `erpName` = ERP 档案里的精确商品名称，脚本做 Set 等值比对，必须完全一致
 - 识图输出格式：`erpName×数量`，每个子品一条，逗号分隔
 
@@ -307,7 +308,7 @@ data/products/
 4. 用 `tds[6]` 精确确认货号行并展开（点 `.el-table__expand-icon`）
 5. 清除展开区全部旧勾选，再按子行 `tds[5]` 精确定位 platformCode
 6. **只勾选目标 SKU 那一行**，并验证选中数严格等于 1
-7. 用 `cdp.clickAt()` 触发「套件处理」hover 下拉，再点“标记套件”
+7. 从触发按钮的 `aria-controls` 精确定位所属菜单，再点击“标记套件”；后台标签页菜单动画可能停在高度 0，不能只按可见高度找菜单
 8. 验证：目标行出现“复制为套件”按钮才算成功
 
 **⚠️ 红线**：每次只处理当前要匹配的那一个 SKU，严禁批量勾选整个货号所有子行。每个 SKU 是独立的商品/组合，必须单独处理。
@@ -338,7 +339,7 @@ data/products/
 - `[1/2026-04，执行端相关]` **长脚本不要占用受限前台调用**：本地 Codex 或支持后台会话的本地工具可用后台运行并通过 `auto-match-log.json` 监控；ChatGPT + CodexPro 没有可承诺持续运行的后台任务，单次前台调用还有时间上限，应把长批量交给本地 Codex，见 `docs/chatgpt-codexpro-operations.md`
 - `[∞/永久保留]` **#48 读表数据用<th>表头定位，禁用正则/长度过滤**：子品弹窗表读取必须通过 `<th>` 表头文本（"商品名称"/"商家编码"/"组合比例"）定位列索引。禁止硬编码固定位置 [1][3][10]，禁止对 specCode/name 做正则匹配过滤——会把非数字编码（kgoxnld等）合法行当垃圾误杀。
 - `[1/2026-05-07]` **对应表图片列 = td[3]（左侧平台侧）**：sub-row 中 `imgs[0]` 在 td index 3，parent class `el-image el-popover__reference`。ERP 产品图若存在在 td[12]+（右侧）。`querySelector("img")` 取平台 SKU 图是正确行为。assertPlatformImageColumn() 断言：`img.closest("td")` 在同行所有 td 中 indexOf = 3。
-- `[1/2026-05-07]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的主键；platformCode（如 0509-1）是 SKU 级别标识，也是 data/imgs/ 的文件名。用货号查图片必须先查对应表获取 platformCode，不能直接拼路径。
+- `[1/2026-05-07，2026-07-28 更新]` **货号 ≠ platformCode**：货号（productCode，如 yxxhtz）是 ERP 对应表的产品链接标识；platformCode（如 0509-1）是规格编码。图片文件名必须同时包含两者，不能用任一单字段直接定位。
 - `[1/2026-07-28]` **platformCode 不是商品链接唯一键**：折扣、免费、秒杀等不同活动链接可能复用同一个 platformCode。运行态、核查范围、匹配日志和图片文件名都必须使用 `productCode + platformCode`；禁止只按 platformCode 去重。
 - `[1/2026-05-07，已拆分]` **readAllCorrespondence 有下载副作用**：需要刷新数据时用 `readAllCorrespondence()`；仅查询用 `readCorrWithoutDownload()` 或 `readCorrespondence()`，禁止为只读需求触发平台商品下载
 - `[1/2026-05-08]` **「选择商品」弹窗搜索返回2条结果不等于名称歧义**：气垫霜正装和替换装名称都包含"亮肤色"，ERP 弹窗是子串搜索，count=2 是正常的。wait-loop break 条件必须同时检查 `hasExact`（任意 td 的 innerText 精确等于 productName 即命中），不能只靠 count===1，否则10s 超时。行选择（r3）本就精确匹配，无需另改。
@@ -357,7 +358,9 @@ data/products/
 - `[1/2026-05-22]` **识图必须三步走：实物→数量自检→底部文字兜底**：只看实物摆放会漏掉赠品小件（如玉米片×10）。更危险的盲区：漏识图→错误绑定→check 时识图与档案同步错误→静默通过，永远发现不了。铁律：①看实物写 recognition.items（口味/规格由实物图决定，不从文字推断）②自检：数图中所有商品总件数，与 items.qty 加总对比，不一致必有漏项 ③底部文字做品类完整性兜底（只验证品类是否齐全，不推断规格/口味）。有疑问先告知用户确认，不擅自修改数据文件。
 - `[1/2026-05-23]` **识图形状必须判别：正装 vs 体验装靠长宽比**：酵素4.0 正装（50ml×10袋）盒子接近方形，体验装（50ml×3袋）盒子为窄长条。同款商品有正装/体验装双版本时，第一步必须看形状/比例。features.json 已拆分 酵素4.0 和 酵素4.0体验装 两条，分别记录形状特征。
 - `[1/2026-05-23]` **营养粉/益生菌买赠 SKU 图片必含酵素4.0体验装赠品**：kgosyyf-44 货号下含「4盒」的 SKU（0525-4/0525-5/0525-6）和 KGOSYSJ-30 的 0525-7（益生菌买3送1到手4盒），图片中均附带酵素4.0体验装×1 作为赠品展示。体验装小盒易被大盒营养粉/益生菌遮挡或挤到角落。识图时数完主商品盒数后，扫一遍图片四角和边缘。
-- `[1/2026-07-24]` **套件处理是 hover 下拉，JS click 不可靠**：`ElDropdown.trigger="hover"`，必须给可见按钮打临时属性后用 `cdp.clickAt()` 触发真实鼠标事件，轮询可见的“标记套件”菜单项后再 `clickAt()`；点击后必须等待目标行出现“复制为套件”，禁止只凭“已调用 click”报成功。
+- `[2/2026-07-24→2026-07-28]` **套件处理菜单不能只靠 click 或可见高度判断**：先触发可见的“套件处理”按钮，再读取其 `aria-controls` 精确定位所属菜单。后台标签页可能把菜单动画卡在 `height=0`，但节点与事件已就绪；点击菜单项后仍必须等待目标行出现“复制为套件”。
+- `[1/2026-07-28]` **确认套件不能固定等待 2 秒后一次性判断**：ERP 已接受保存时，“选择商品”弹窗可能稍后才关闭，或先出现“换对应商品”。确认后最多轮询 10 秒；任一状态出现都表示请求已被接收，超时才停止。
+- `[1/2026-07-28]` **档案查询不能默认采用 dataList 首行**：主商家编码必须与 `outerId` 精确一致，规格商家编码回退也必须在返回对象中找到查询编码；子品弹窗空明细重试一次，仍为空才按异常处理。
 - `[1/2026-07-24]` **选择商品弹窗会跨搜索保留隐藏选择**：只取消当前 DOM 的 checked checkbox 无法清掉 `TableItem.multipleSelection`。第一个子品搜索结果稳定后，调用 `TableItem.clearSelection()` + `updateCheckRows([])`，并验证“已选择商品：0”，再勾选本次商品。清理过早会被初始化 watcher 重新灌回旧选择。
 - `[1/2026-07-24]` **套件标记是可恢复的中间状态**：匹配在配置子品阶段失败时，目标 SKU 可能已出现“复制为套件”。重试前先读目标行；已有按钮就跳过重复标记，直接续配置子品。
 - `[1/2026-07-24]` **纯读取对应表也必须重置筛选和真实页码**：重置搜索下拉会异步重建输入框，必须等待后重新查询 DOM、清空并搜索；随后强制回第 1 页，用 ERP 实时总条数和 pageSize 计算总页数，每次翻页验证 active 页码。禁止依赖 btn-next 禁用状态。

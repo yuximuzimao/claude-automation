@@ -14,3 +14,4 @@
 | 归档 | 内容 |
 |---|---|
 | `2026-07-25-lanze-match/` | 澜泽 64 SKU 匹配、九类业务故障修复、自动核对结果、旧 lessons 快照，以及 ChatGPT + CodexPro 操作层记录 |
+| `2026-07-28-baihao-hee-match/` | 百浩/悦希 57 个商品链接核对，重复 platformCode 复合身份、人工修正边界及菜单/确认状态修复 |

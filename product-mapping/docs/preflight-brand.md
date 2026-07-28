@@ -59,7 +59,7 @@
 | # | 验收项 | 验证方法 |
 |---|--------|---------|
 | 1 | ERP 活跃产品全部存在 sku-map | sku-map.json keys vs check 报告 products |
-| 2 | sku-map 全部 platformCode 有图片 | 遍历 sku-map，`ls data/imgs/{platformCode}.jpg` |
+| 2 | sku-map 全部商品链接有图片 | 遍历 sku-map，检查 `data/imgs/{productCode}__{platformCode}.jpg` |
 | 3 | 随机 5+ 张图片人工 spot-check | Read 工具加载图片目视确认内容与名称一致 |
 | 4 | features.json 产品数 = ERP 活跃产品数 | 数量对比 |
 | 5 | 随机 5~10 个 SKU 实跑识图验证 | 对参考图执行识图，确认 features.json 可正确匹配 |

@@ -39,6 +39,8 @@ node cli.js targets                                        # 检查浏览器连�
 - 视觉匹配由我亲自执行，不写识别脚本
 - 若用户已手动打开并筛选好鲸灵商品列表，只读当前页面，不自动开页/注入账号；需要 AI 自动开页或注入登录态时，先按 `docs/INDEX.md §2 Step 0` 的 targetId 边界处理
 - 识图必须覆盖本次报告全部 SKU，`recognition` 为空但 ERP 有明细必须判为 mismatch，不能归入 pending
+- 商品链接身份固定为 `productCode + platformCode`；重复 platformCode 不得合并，识图 CLI 必须带 `--product <货号>`
+- 已有匹配异常只报告并等待用户在平台人工修正；修正后先定向回读或 check，禁止自动换绑覆盖
 - 档案V2 主商家编码查不到时，先按规格商家编码回退查询，再判断是否无明细
 - 浏览器自动化通用约束（querySelector可见性/Element UI弹窗/实时验证）→ 见根目录 `CLAUDE.md` 浏览器操作约束区
 
