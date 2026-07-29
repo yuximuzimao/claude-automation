@@ -32,6 +32,7 @@
 - 鲸灵行为操作报错即停（maxRetries=0，域名自动识别）；被动等待（导航）最多重试 1 次（共执行 2 次）。风控信号 → 全局熔断持久化到 `data/circuit-breaker.json`，需人工 `node cli.js reset-circuit`
 - 多账号扫描/采集/队列任一路径成功注入鲸灵账号后，必须同步 `data/current-session.json`；实际 tab 账号和缓存账号不一致会导致跳过注入、读空工单、误改 queue 状态。
 - 安全切换账号必须经过 `openAccountFlow`：清理后 `verified === true` 才能注入；注入必须绑定同一个 `targetId`，随后固定导航售后列表，禁止 `Page.reload` 继承旧工单详情 URL。
+- 平台拒绝原因是“工单类型 × 业务分支”的已确认枚举，禁止为了复用而跨分支统一成一个常量。推理说明与平台写入字段必须分层；安全关键分支由 `decision` 提供唯一写入值，执行层禁止被路由参数覆盖，字段缺失时 fail-closed。
 
 ## 相关项目
 
