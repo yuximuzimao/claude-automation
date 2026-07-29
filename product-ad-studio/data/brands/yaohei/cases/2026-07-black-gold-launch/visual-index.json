@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "case_id": "2026-07-black-gold-launch",
+  "purpose": "记录本次对话中所有图片的角色、已确认含义、本地归档状态和去重关系，使未来账号无需重新询问图片身份。",
+  "images": [
+    {
+      "order": 1,
+      "conversation_file_id": "file_00000000a4d481f5a400a317d6e6321a",
+      "chat_filename": "c6f659dfe18e9a3f21b0ce53be071ee6.png",
+      "dimensions": [1763, 1348],
+      "role": "product_set",
+      "description": "三件产品同框的原始组合透明素材。",
+      "binary_status": "canonical_local_asset",
+      "local_asset_id": "yaohei-set-three-primary",
+      "dedup_action": "对话附件与本地 PNG 内容完全相同，本地只保留一份规范命名的二进制文件。"
+    },
+    {
+      "order": 2,
+      "conversation_file_id": "file_00000000186081f588093f296a75a229",
+      "chat_filename": "75ea51a47839ce61455bbfd107dc1c99.png",
+      "dimensions": [756, 1827],
+      "role": "product_source",
+      "description": "黑色高瓶单品原始透明素材。",
+      "binary_status": "canonical_local_asset",
+      "local_asset_id": "yaohei-product-serum-single",
+      "dedup_action": "对话附件与本地 PNG 内容完全相同，本地只保留一份规范命名的二进制文件。"
+    },
+    {
+      "order": 3,
+      "conversation_file_id": "file_0000000095b081fd95deae7362de291e",
+      "chat_filename": "3b034bfb3885be528ad18c62842e49df.png",
+      "dimensions": [1836, 1506],
+      "role": "product_source",
+      "description": "黑色面霜罐单品原始透明素材。",
+      "binary_status": "canonical_local_variant",
+      "local_asset_id": "yaohei-product-cream-single",
+      "dedup_action": "对话附件与本地文件为同一产品和同尺寸，但文件内容并非逐字节一致；本地版本作为规范资产，对话版本不再另存。"
+    },
+    {
+      "order": 4,
+      "conversation_file_id": "file_00000000f6c481fda96004b58ea60e18",
+      "chat_filename": "12a11a851600e1d3d9a32e02011f4eb5.png",
+      "dimensions": [452, 1828],
+      "role": "product_source",
+      "description": "黑色细高瓶单品原始透明素材。",
+      "binary_status": "canonical_local_asset",
+      "local_asset_id": "yaohei-product-toner-single",
+      "dedup_action": "对话附件与本地 PNG 内容完全相同，本地只保留一份规范命名的二进制文件。"
+    },
+    {
+      "order": 5,
+      "conversation_file_id": "file_000000000e6481f8b3f4137d07afdcfd",
+      "chat_filename": "89f4801b75e0e7bfad281442d4bb856e.png",
+      "dimensions": [1978, 1924],
+      "role": "product_set",
+      "description": "另一套三件产品组合透明素材。",
+      "binary_status": "canonical_local_variant",
+      "local_asset_id": "yaohei-set-three-secondary",
+      "dedup_action": "对话附件与本地文件为同一组合和同尺寸，但文件内容并非逐字节一致；本地版本作为规范资产，对话版本不再另存。"
+    },
+    {
+      "order": 6,
+      "conversation_file_id": "file_00000000967c81f59904cf1290598e8b",
+      "chat_filename": "52bcefe7535b2710ab81c88263f64d67.png",
+      "dimensions": [535, 715],
+      "role": "demo_layout",
+      "description": "新品预热类 Demo 截图；Excel 原文可复制，截图用于理解信息层级和大致布局。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 7,
+      "conversation_file_id": "file_00000000cc2081fd853d6f992bea6c4f",
+      "chat_filename": "4bed57cd8dcb20958f4502575bb5765f.png",
+      "dimensions": [540, 801],
+      "role": "demo_layout",
+      "description": "五条线索类 Demo 截图；最终文字位置可根据产品摆放重构。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 8,
+      "conversation_file_id": "file_000000008a7c81fd89009d494bf5a79f",
+      "chat_filename": "56054a2aeab476ae373e49ff98805269.png",
+      "dimensions": [541, 723],
+      "role": "demo_layout",
+      "description": "新品上线类 Demo 截图。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 9,
+      "conversation_file_id": "file_0000000061d081fdb34f11d92ab10ded",
+      "chat_filename": "4bb5af0fcd62f3997728171c1119660e.png",
+      "dimensions": [546, 807],
+      "role": "demo_layout",
+      "description": "五项评分 / WHO 类 Demo 截图。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 10,
+      "conversation_file_id": "file_00000000087881f594dbb93a2a19b0b5",
+      "chat_filename": "17d6d1a07bb5aa6cdce2410bac5bd5ab.jpg",
+      "dimensions": [1024, 1024],
+      "role": "style_reference",
+      "description": "其他品牌黑金护肤品参考图之一；小红书水印和账号必须忽略。",
+      "extract_only": ["黑金背景", "兰花样式", "强光影", "高级感", "主体突出"],
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 11,
+      "conversation_file_id": "file_00000000e11081f5a74388e54a254a9e",
+      "chat_filename": "50a5d43d399069f6ccdf754f4ef14077.jpg",
+      "dimensions": [1280, 1639],
+      "role": "style_reference",
+      "description": "其他品牌黑金护肤品参考图之一；小红书水印和账号必须忽略。",
+      "extract_only": ["暖金逆光", "黑色高光材质", "产品居中放大", "视觉冲击"],
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 12,
+      "conversation_file_id": "file_00000000ead881fdacf37c4fdd91701e",
+      "chat_filename": "c21a81cdf7581a38da1e41707405bcf6.jpg",
+      "dimensions": [1280, 1706],
+      "role": "style_reference",
+      "description": "其他品牌黑金护肤品参考图之一；小红书水印和账号必须忽略。",
+      "extract_only": ["兰花背景", "暗部层次", "产品展品感", "克制留白"],
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 13,
+      "conversation_file_id": "file_000000000dfc81f5b4644446e6ea2d3f",
+      "chat_filename": "a23845a3b6050c8d2b40cbf4103b3fb2.jpg",
+      "dimensions": [1280, 1707],
+      "role": "style_reference",
+      "description": "其他品牌黑金护肤品参考图之一；小红书水印和账号必须忽略。",
+      "extract_only": ["黑金氛围", "轮廓光", "主体放大", "奢华抗衰气质"],
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 14,
+      "conversation_file_id": "file_00000000ebb881f5b4f909b76b809e71",
+      "chat_filename": "1809a2fce1255c9107019ba80d9bb719.jpg",
+      "dimensions": [1200, 2000],
+      "role": "designer_output",
+      "description": "五项评分成品。设计师认为文字排布不够好，五边形过于花哨，应更简洁高级。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 15,
+      "conversation_file_id": "file_00000000b94881fdb2c71f4a1cdd9610",
+      "chat_filename": "68d0b76da311e299226dd22bef723e31.jpg",
+      "dimensions": [1200, 2000],
+      "role": "designer_output",
+      "description": "新品预热成品。问题是遮挡过多、Logo 面被挡、产品过黑、边缘反光折射层次不足。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 16,
+      "conversation_file_id": "file_00000000fb9881f885f02bff15d2cd68",
+      "chat_filename": "9dc20dcf8642f9052ade1983853f74c4(1).jpg",
+      "dimensions": [1200, 2000],
+      "role": "designer_output",
+      "description": "手托产品五线索成品，设计师认为四张中最好；问题是线索排布杂乱、缺少视觉引导、产品过黑。",
+      "binary_status": "chat_only_pending_local_import"
+    },
+    {
+      "order": 17,
+      "conversation_file_id": "file_00000000fcd081fdbbd9ad7afc1ccc19",
+      "chat_filename": "2e4d9d45d5a418d4e18503392f794b9b(1).jpg",
+      "dimensions": [1200, 2000],
+      "role": "designer_output",
+      "description": "新品上线成品。问题是产品排布呆板，需交错和适度遮挡增加层次，背景光线简单，可增加克制金粉点缀。",
+      "binary_status": "chat_only_pending_local_import"
+    }
+  ],
+  "local_logo": {
+    "asset_id": "yaohei-logo-primary",
+    "source": "用户放入 .ai-bridge 的独立 PNG",
+    "note": "该 Logo 未作为本次对话图片附件展示，但已归档并登记。"
+  }
+}

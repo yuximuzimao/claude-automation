@@ -65,6 +65,7 @@
 - 品牌素材目录：`data/brands/<brand>/asset-catalog.json`
 - 品牌规则：`data/brands/<brand>/brand-profile.json`
 - 历史案例：`data/brands/<brand>/cases/`
+- 案例图片索引：`data/brands/<brand>/cases/<case-id>/visual-index.json`
 - 任务：`jobs/<job-id>/`
 - Schema：`schemas/`
 - 当前待办：`tasks/todo.md`
