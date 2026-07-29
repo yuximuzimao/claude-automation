@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-intent.schema.json",
+  "title": "Product Ad Studio Design Intent",
+  "type": "object",
+  "required": ["objective", "canvas", "asset_ids", "content_hierarchy", "product_constraints", "exact_copy"],
+  "properties": {
+    "objective": {"type": "string"},
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "asset_ids": {"type": "array", "items": {"type": "string"}},
+    "content_hierarchy": {"type": "array", "items": {"type": "string"}},
+    "layout_freedom": {"enum": ["low", "medium", "high"]},
+    "product_constraints": {"type": "object"},
+    "style_features": {"type": "array", "items": {"type": "string"}},
+    "forbidden_reference_elements": {"type": "array", "items": {"type": "string"}},
+    "exact_copy": {"type": "array", "items": {"type": "string"}},
+    "open_questions": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "asset-catalog.schema.json",
+  "title": "Product Ad Studio Asset Catalog",
+  "type": "object",
+  "required": ["version", "brand", "assets"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1},
+    "brand": {"type": "string", "minLength": 1},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["asset_id", "role", "path", "description", "fingerprint"],
+        "properties": {
+          "asset_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "role": {
+            "enum": ["product_source", "product_set", "brand_logo", "demo_layout", "style_reference", "designer_output", "edit_target", "generated_draft"]
+          },
+          "path": {"type": "string"},
+          "description": {"type": "string", "minLength": 1},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "protection": {"type": "object"},
+          "fingerprint": {
+            "type": "object",
+            "required": ["sha256", "dhash", "width", "height", "has_alpha"],
+            "properties": {
+              "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+              "dhash": {"type": "string"},
+              "width": {"type": "integer", "minimum": 1},
+              "height": {"type": "integer", "minimum": 1},
+              "has_alpha": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

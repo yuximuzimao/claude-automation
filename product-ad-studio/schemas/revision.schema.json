@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "revision.schema.json",
+  "title": "Product Ad Studio Revision Entry",
+  "type": "object",
+  "required": ["revision_id", "change", "preserve", "reason", "status"],
+  "properties": {
+    "revision_id": {"type": "string"},
+    "change": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "preserve": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "reason": {"type": "string"},
+    "source_asset": {"type": ["string", "null"]},
+    "result_asset": {"type": ["string", "null"]},
+    "qa": {"type": "object"},
+    "status": {"enum": ["planned", "executed", "rejected", "approved"]}
+  }
+}

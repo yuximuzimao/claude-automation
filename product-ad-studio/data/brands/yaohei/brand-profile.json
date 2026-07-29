@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "brand_id": "yaohei",
+  "brand_name": "钥黑",
+  "default_canvas": {
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "aspect_ratio": "9:16"
+  },
+  "typography": {
+    "common_font": "阿里巴巴普惠体",
+    "rule": "字体可根据整体画面和设计需求调整；宣传文字必须使用确定性排版，禁止生成乱码。"
+  },
+  "product_rules": {
+    "preserve_geometry": true,
+    "preserve_relative_scale": true,
+    "avoid_perspective": true,
+    "allow_scale_translate_minor_rotation": true,
+    "allow_partial_overlap": true,
+    "protect_logo_and_signature_features": true,
+    "product_ratio_source": "原始产品图或已确认组合图"
+  },
+  "known_visual_direction": {
+    "name": "高级黑金抗衰视觉",
+    "features": [
+      "黑色主背景与暖金强调",
+      "黑兰花或兰花形态作为可选背景元素",
+      "产品居中、主体放大、增强视觉冲击",
+      "产品光影层次强，黑色瓶体仍需清晰可辨",
+      "克制使用金粉、光束、倒影和高光地面",
+      "奢华、沉稳、神秘、细胞抗衰感"
+    ],
+    "avoid": [
+      "复杂花哨的多边形装饰",
+      "产品正面过黑导致 Logo 不可识别",
+      "无阅读路径的分散文案",
+      "三个产品机械等距并排",
+      "廉价或过量的粒子效果"
+    ]
+  },
+  "demo_interpretation": "Demo 主要提供必须出现的文字、信息层级、分组和大致关系；最终坐标根据产品实际摆放和视觉舒适度重新决定。",
+  "quality_priorities": [
+    "宣传文字完全准确",
+    "产品比例与标志性特征真实",
+    "排版阅读舒适",
+    "黑色产品光影层次丰富",
+    "整体高级且克制"
+  ],
+  "source": "2026-07-29 用户与设计师对首个黑金案例的确认"
+}

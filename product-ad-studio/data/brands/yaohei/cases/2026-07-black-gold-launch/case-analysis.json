@@ -1,0 +1,86 @@
+{
+  "case_id": "2026-07-black-gold-launch",
+  "brand": "yaohei",
+  "status": "analysis_confirmed_binary_partial",
+  "input_roles": {
+    "products": "三件套组合图、三张单品图、另一张产品组合图",
+    "demo": "Excel 原始文件的截图，共四种信息需求；Excel 文字可复制",
+    "style_references": "其他品牌黑金护肤品案例，含小红书水印，水印不属于设计内容",
+    "designer_outputs": "四张竖版黑金成品"
+  },
+  "reference_features_confirmed_by_designer": [
+    "黑金背景",
+    "背景中的兰花样式",
+    "强烈的产品光影",
+    "产品居中并放大突出",
+    "增强视觉冲击感"
+  ],
+  "designer_authored_decisions": [
+    "文字具体排版",
+    "根据文字数量调整实际布局",
+    "产品实际摆放和排布",
+    "在 Demo 信息层级基础上寻找更合适的展示方式"
+  ],
+  "demo_rule": "仅代表信息层级；最终文字位置主要根据产品实际摆放决定。",
+  "product_transform_rule": {
+    "scale": "allowed",
+    "translation": "allowed",
+    "minor_rotation": "allowed",
+    "perspective": "almost_never",
+    "overlap": "allowed_if_logo_and_signature_features_remain_visible",
+    "relative_scale": "must_match_reality_and_source_images"
+  },
+  "output_reviews": [
+    {
+      "order": 1,
+      "type": "五项评分信息页",
+      "issues": [
+        "文字排布不够好",
+        "背景五边形过于花哨",
+        "应更简洁高级"
+      ]
+    },
+    {
+      "order": 2,
+      "type": "新品预热页",
+      "issues": [
+        "产品遮挡过多",
+        "Logo 面应避免遮挡",
+        "产品过黑",
+        "边缘虽有光但反光折射层次不足"
+      ]
+    },
+    {
+      "order": 3,
+      "type": "手托产品五线索页",
+      "rank": "designer_preferred",
+      "issues": [
+        "五个线索位置较乱",
+        "缺少线条或其他视觉引导",
+        "产品过黑，光影层次不足"
+      ]
+    },
+    {
+      "order": 4,
+      "type": "新品上线页",
+      "issues": [
+        "产品排布呆板",
+        "可前后交错并局部遮挡增加层次",
+        "背景光线过于简单",
+        "可增加少量金粉等克制点缀"
+      ]
+    }
+  ],
+  "highest_priority_for_ai": [
+    "文字不能生成乱码",
+    "产品比例与产品图一致",
+    "产品 Logo 和标志性特征不能被遮挡",
+    "黑色产品必须有真实丰富的光影层次",
+    "排版和整体视觉需要舒适高级"
+  ],
+  "binary_archive": {
+    "local_product_and_logo_assets": "archived_in_asset_catalog",
+    "chat_only_demo_reference_and_output_images": "metadata_only_pending_local_import",
+    "reason": "ChatGPT 对话附件与 CodexPro 工作区没有自动二进制桥接"
+  }
+}
