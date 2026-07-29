@@ -30,13 +30,13 @@ test('退货退款保持原退款执行按钮', () => {
   });
 });
 
-test('拦截件执行时使用独立拒绝文案，不把含单号的推理结果写入平台', () => {
+test('拦截件执行使用分支对应原因，拒绝外部参数覆盖', () => {
   const copy = resolveRejectCopy({
     decision: {
       action: 'reject',
       reasonCode: 'INTERCEPT_WAITING',
       reason: 'YT123456789在途未退回，剩余20小时，当前等待重查',
-      rejectReason: '包裹未退回',
+      rejectReason: '已通知快递拦截暂未退回',
       rejectDetail: '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
     },
     rejectReason: '其他',
@@ -44,13 +44,27 @@ test('拦截件执行时使用独立拒绝文案，不把含单号的推理结�
   });
 
   assert.deepEqual(copy, {
-    reason: '包裹未退回',
+    reason: '已通知快递拦截暂未退回',
     detail: '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
   });
   assert.doesNotMatch(copy.detail, /YT123456789/);
 });
 
-test('拦截件缺少独立拒绝文案时禁止用推理结果兜底', () => {
+test('驿站拦截件保留驿站专属拒绝原因', () => {
+  const copy = resolveRejectCopy({
+    decision: {
+      action: 'reject',
+      reasonCode: 'INTERCEPT_TIMEOUT',
+      reason: '驿站待取件，时效不足',
+      rejectReason: '已到驿站待取件',
+      rejectDetail: '订单已发出，已通知快递拦截暂未退回，等快递退返回我司后再退款',
+    },
+  });
+
+  assert.equal(copy.reason, '已到驿站待取件');
+});
+
+test('拦截件缺少分支拒绝原因或独立文案时禁止兜底', () => {
   assert.throws(() => resolveRejectCopy({
     decision: {
       action: 'reject',

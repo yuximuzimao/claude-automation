@@ -133,7 +133,7 @@ const CHECK_SELECT_OPEN_JS = `(function(){
   return JSON.stringify({open: items.length > 0, visibleCount: items.length, allOptions: allOptions});
 })()`;
 
-// 点击下拉选项「包裹未退回」
+// 点击当前工单已确认的拒绝原因选项
 function makeClickReasonOptionJS(optionText) {
   return `(function(){
     var li = Array.from(document.querySelectorAll('li.el-select-dropdown__item')).find(function(e){
@@ -208,7 +208,7 @@ function makeClickConfirmRejectJS(confirmActionLabels) {
  * 拒绝退款
  * @param {string} targetId   - 鲸灵页面 target
  * @param {string} workOrderNum - 工单号
- * @param {string} reason       - 拒绝原因文字（如"包裹未退回"）
+ * @param {string} reason       - 当前工单类型已确认的拒绝原因文字
  * @param {string} detail       - 详细原因文案
  * @param {string} [imageUrl]   - 已上传的凭证图片 URL（可选，为空则自动截图上传）
  * @param {string} [packageTab] - 多包裹时指定截图的包裹 tab 名（如"包裹2"）

@@ -26,7 +26,7 @@ function resolveRejectCopy({ decision, rejectReason, rejectDetail }) {
 
   if (requiresSeparatedCopy) {
     if (!decision.rejectReason || !decision.rejectDetail) {
-      throw new Error('拦截件拒绝缺少独立的拒绝原因或拒绝文案，禁止使用推理结果兜底');
+      throw new Error('拦截件拒绝缺少分支对应的拒绝原因或独立详细文案，禁止使用推理结果兜底');
     }
     return {
       reason: decision.rejectReason,
