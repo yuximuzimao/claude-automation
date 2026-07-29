@@ -26,8 +26,8 @@
 | `data/brands/<brand>/cases/` | 参考历史案例与设计师反馈 |
 
 ## 教训沉淀流程
-- `tasks/lessons.md` — Session 级新发现，先记这里。
-- `docs/INDEX.md §8` — 规则稳定后迁入，不在两处重复维护。
+- `tasks/lessons.md` — 只保存尚未归档的 Session 级新发现。
+- 规则稳定后迁入 `docs/INDEX.md` 的对应章节，并从 `tasks/lessons.md` 删除，禁止重复维护。
 
 ## 相关项目
 - 无强依赖。可以由 ChatGPT + CodexPro、ChatGPT App Work 或本地 Codex CLI 读取同一目录。

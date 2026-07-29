@@ -92,7 +92,7 @@ def build_parser() -> argparse.ArgumentParser:
     import_parser.add_argument("--move", action="store_true", help="成功后移动源文件而不是复制")
     import_parser.set_defaults(func=command_import_assets)
 
-    demo_parser = subparsers.add_parser("parse-demo", help="提取 Excel 文案、合并单元格和相对布局")
+    demo_parser = subparsers.add_parser("parse-demo", help="可选：辅助提取下载后的 Excel 文案和结构")
     demo_parser.add_argument("--source", required=True)
     demo_parser.add_argument("--output")
     demo_parser.set_defaults(func=command_parse_demo)

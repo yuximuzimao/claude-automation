@@ -39,7 +39,7 @@ python3 cli.py import-assets \
   --tags '产品,单品,透明底'
 ```
 
-解析 Excel Demo：
+可选：辅助解析下载后的 Excel Demo。默认仍以截图理解结构、以可复制文字作为内容真值：
 
 ```bash
 python3 cli.py parse-demo \
