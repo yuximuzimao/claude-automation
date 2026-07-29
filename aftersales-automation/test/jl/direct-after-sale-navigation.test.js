@@ -153,3 +153,72 @@ test('11 对指定 targetId 直接导航售后列表，再校验、排序和读�
     }
   }
 });
+
+test('11 售后列表首次未渲染时持续只读等待，稍后就绪则继续', async () => {
+  const cdp = require('../../lib/cdp');
+  const preparePath = require.resolve('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const originalEval = cdp.eval;
+  const statuses = [
+    { success: false, hasTitle: false, hasPendingFilter: false },
+    { success: false, hasTitle: true, hasPendingFilter: false },
+    { success: true, hasTitle: true, hasPendingFilter: true },
+  ];
+  const sleepCalls = [];
+
+  try {
+    cdp.eval = async () => statuses.shift();
+    delete require.cache[preparePath];
+    const { assertAfterSaleListReady } = require(preparePath);
+
+    const result = await assertAfterSaleListReady('slow-tab', {
+      maxAttempts: 3,
+      intervalMs: 750,
+      sleep: async ms => sleepCalls.push(ms),
+    });
+
+    assert.equal(result.success, true);
+    assert.deepEqual(sleepCalls, [750, 750]);
+    assert.equal(statuses.length, 0);
+  } finally {
+    cdp.eval = originalEval;
+    delete require.cache[preparePath];
+  }
+});
+
+test('11 售后列表持续未渲染时到达上限仍安全失败', async () => {
+  const cdp = require('../../lib/cdp');
+  const preparePath = require.resolve('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const originalEval = cdp.eval;
+  const sleepCalls = [];
+  let evalCalls = 0;
+
+  try {
+    cdp.eval = async () => {
+      evalCalls += 1;
+      return {
+        success: false,
+        title: '鲸灵商家后台',
+        url: AFTER_SALE_LIST_URL,
+        hasTitle: false,
+        hasPendingFilter: false,
+      };
+    };
+    delete require.cache[preparePath];
+    const { assertAfterSaleListReady } = require(preparePath);
+
+    await assert.rejects(
+      assertAfterSaleListReady('stuck-tab', {
+        maxAttempts: 3,
+        intervalMs: 500,
+        sleep: async ms => sleepCalls.push(ms),
+      }),
+      /未到售后列表页:.*"hasTitle":false.*"hasPendingFilter":false/
+    );
+
+    assert.equal(evalCalls, 3);
+    assert.deepEqual(sleepCalls, [500, 500]);
+  } finally {
+    cdp.eval = originalEval;
+    delete require.cache[preparePath];
+  }
+});

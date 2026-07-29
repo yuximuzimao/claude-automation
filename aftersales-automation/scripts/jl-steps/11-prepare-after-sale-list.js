@@ -5,7 +5,7 @@
  *
  * 串联流程：
  *   1. 对目标 tab 直接导航固定售后列表 URL。
- *   2. 等 3 秒，检测页面标题「售后工单」和快捷筛选「待商家处理」。
+ *   2. 有上限地等待页面标题「售后工单」和快捷筛选「待商家处理」实际渲染。
  *   3. 点击排序下拉框，选择「按逾期时间最近排序」。
  *   4. 等 5 秒，检测下拉框值已切换，且当前列表时效从小到大。
  *   5. 读取 48 小时内工单列表；遇到超过 48 小时即停止。
@@ -23,14 +23,16 @@ const {
 
 const AFTER_NAVIGATION_WAIT_MS = 3000;
 const AFTER_SORT_WAIT_MS = 5000;
+const LIST_READY_MAX_ATTEMPTS = 16;
+const LIST_READY_INTERVAL_MS = 1000;
 const AFTER_SALE_LIST_URL = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function assertAfterSaleListReady(targetId) {
-  const status = await cdp.eval(targetId, `
+async function readAfterSaleListStatus(targetId) {
+  return cdp.eval(targetId, `
 (() => {
   const bodyText = document.body ? document.body.innerText || '' : '';
   const hasTitle = bodyText.includes('售后工单');
@@ -44,10 +46,25 @@ async function assertAfterSaleListReady(targetId) {
   });
 })()
 `);
-  if (!status || !status.success) {
-    throw new Error(`未到售后列表页: ${JSON.stringify(status)}`);
+}
+
+async function assertAfterSaleListReady(targetId, options = {}) {
+  const maxAttempts = Number.isSafeInteger(options.maxAttempts) && options.maxAttempts > 0
+    ? options.maxAttempts
+    : LIST_READY_MAX_ATTEMPTS;
+  const intervalMs = Number.isFinite(options.intervalMs) && options.intervalMs >= 0
+    ? options.intervalMs
+    : LIST_READY_INTERVAL_MS;
+  const sleepFn = options.sleep || sleep;
+  let status = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    status = await readAfterSaleListStatus(targetId);
+    if (status && status.success) return status;
+    if (attempt < maxAttempts) await sleepFn(intervalMs);
   }
-  return status;
+
+  throw new Error(`未到售后列表页: ${JSON.stringify(status)}`);
 }
 
 async function readCurrentPageSortCheck(targetId) {
@@ -104,8 +121,6 @@ async function prepareAfterSaleList(options = {}) {
   if (!targetId) throw new Error('缺少目标鲸灵 targetId');
 
   await cdp.navigate(targetId, AFTER_SALE_LIST_URL);
-  await sleep(AFTER_NAVIGATION_WAIT_MS);
-
   const listReady = await assertAfterSaleListReady(targetId);
   const sorted = await selectOverdueSort({ targetId });
   await sleep(AFTER_SORT_WAIT_MS);
@@ -142,9 +157,12 @@ if (require.main === module) {
 
 module.exports = {
   prepareAfterSaleList,
+  readAfterSaleListStatus,
   assertAfterSaleListReady,
   readCurrentPageSortCheck,
   AFTER_NAVIGATION_WAIT_MS,
   AFTER_SORT_WAIT_MS,
+  LIST_READY_MAX_ATTEMPTS,
+  LIST_READY_INTERVAL_MS,
   AFTER_SALE_LIST_URL,
 };
