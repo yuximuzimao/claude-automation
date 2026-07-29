@@ -29,7 +29,7 @@
 
 ### 新设计任务
 1. 创建任务目录：`cli.py new-job`。
-2. 导入 Demo Excel：`cli.py parse-demo`，文字以 Excel 为真值，截图仅辅助理解布局。
+2. Demo 默认使用“截图 + 可复制文字”：截图用于理解信息层级和大致布局，用户提供的可复制文字作为内容真值。共享 Excel 或结构混乱的原文档不要求直接解析；下载后的 Excel 只做可选归档和辅助核对。
 3. GPT 结合 Demo、产品资产、参考图和用户短要求，输出：
    - `human-alignment.md`：设计师可快速判断的简洁复述；
    - `design-intent.json`：机器执行规格；
