@@ -10,6 +10,8 @@
 
 当前账户只派发 `dataClassification: "non_sensitive"` 的受限代码任务。含密钥、客户原始数据、生产系统或无法确认敏感性的任务必须转到独立 macOS 用户或虚拟机；文件投影和工具白名单不是同用户进程隔离。
 
+Home 与工作区卫生同样属于固定边界：所有 WorkBuddy 调用必须走派工器，工作目录固定为 `/private/tmp/codex-workbuddy/<run-id>/projection/workspace`；权限探针、测试和中间产物只能位于该 run 目录或系统临时目录，不得在 `/Users/chat`、`/Users/chat/claude` 或真实仓库创建 `.workbuddy-*-probe*`、`.workbuddy-*-tmp*`。恢复或迁移时应保持 `/Users/chat/AGENTS.md`、`/Users/chat/CLAUDE.md`、`~/.workbuddy/CODEBUDDY.md`、`~/.codebuddy/CODEBUDDY.md` 四处规则一致；`~/.workbuddy`、`~/.codebuddy` 与 `.workbuddy-key-fallback` 是正常持久数据，不按探针垃圾清理。
+
 ## 历史归档
 
 `archive/2026-07-13-workbuddy-safety/` 保存已经完成的 TDD 实施计划及 RED/GREEN 压力测试。它们用于追溯决策，**不得**当作当前操作手册；尤其不能复用其中旧的看门狗阈值、环境变量测试注入或自动终止设想。
