@@ -1,4 +1,4 @@
-# 新对话交接：任务路线与坐标导航专项优化
+# 新对话交接：1—80级极简任务路线实跑审计
 
 ## 当前分支
 
@@ -6,106 +6,77 @@
 feat/wow-quest-route
 ```
 
-## 用户最终确认的模型
+## 用户最终确认的目标
 
-- 五个角色始终按一个主控号的移动路线处理；
-- 另外四个角色只在必须逐号拾取、点击、接取或交付时提醒切换；
-- 不建模五条路线，不计算五个角色的独立移动成本；
-- 不安装自制游戏内插件；
-- 不采集移动轨迹；
-- 不使用输入广播、自动化或客户端注入；
-- Questie和WTF只作为退出游戏后的只读离线数据源。
+- 最终用户入口只有`data/routes/simple-leveling-route.html`；
+- 页面只展示一条从血精灵出生点到80级的推荐路线；
+- 顶部按实际地图名称切换，一次只显示当前地图的编号清单；
+- 一个主控号负责移动和普通击杀，另外四个角色始终跟随；
+- 只有接交、个人拾取、点击或技能必须逐号执行时才显示简短提醒；
+- 不恢复坐标导航器、68区域页面、抽象地图、任务链图、候选评分或全地图全清目标。
 
 ## 当前成果
 
-### 逐日岛人工版
-
 ```text
-data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
+data/routes/simple-leveling-route.html
+docs/NEAT_SIMPLE_LEVELING_ROUTE.md
+data/route-specs/simple-leveling-route.json
+lib/simple_route.py
+tests/test_simple_route.py
 ```
 
-V3不再显示没有底图的圆圈和路线图。页面改为：
+生成命令：
 
-1. 选择小区域与步骤；
-2. 输入主控号当前地图X/Y；
-3. 从目标的全部Questie刷新点中选最近的具体点；
-4. 显示目标坐标；
-5. 显示北/东北/东/东南/南/西南/西/西北方向；
-6. 显示X/Y应增加或减少多少；
-7. 大字号显示当前任务的前置、当前和后续任务。
-
-### 全量自动候选版
-
-```text
-data/routes/world-candidate/index.html
+```bash
+python3 cli.py build-simple \
+  --questie-source ../_sandbox/wow-quest-route/Questie.zip \
+  --rxp-source /Users/chat/claude/.ai-bridge/RXPGuides.lua
 ```
 
-当前统计：
+当前生成结果：
 
-- 68个户外区域；
-- 2852个可定位候选任务；
-- 东部王国、卡利姆多、外域、诺森德；
-- 排除副本、团队、日常、周常、重复、节日和专业限定任务；
-- 保留城市任务及少量血精灵圣骑士可接的中立跨区任务；
-- 每个区域独立HTML并自动拆成小区块。
+- 42个非空连续地图阶段；
+- 831个可勾选步骤，773个选入任务；
+- 60个唯一`【打怪掉物·必做】`任务；
+- 197个唯一`【打怪掉物·可跳】`任务；
+- 所有257个掉落任务均能反查到用户页面中的对应标签；
+- 前置闭包补入10个任务，删除143个前置不可达任务，最终未满足前置为0；
+- 13项单元测试通过；页面JavaScript通过`node --check`。
 
-自动算法当前使用：
+## 数据边界
 
-- 血精灵种族位掩码；
-- 圣骑士职业位掩码；
-- 任务发布NPC是否对部落友好；
-- 前置任务深度；
-- 5级等级波次；
-- 接取、目标、交付三个阶段；
-- 坐标半径聚类；
-- 最近邻步骤排序；
-- 多刷新点导航时选择离用户当前坐标最近的具体点。
+### Questie
 
-## 关键文件
+- v11.32.3是任务存在、血精灵/圣骑士条件、前置关系和任务目标类型的主要依据；
+- 当前仍使用基础数据库，WotLK Quest/NPC/Object/Item修正层尚未完整应用；
+- 68区域候选JSON只作为任务清单和接取/目标/交付顺序来源，旧HTML界面未复用。
 
-```text
-README.md
-cli.py
-lib/questie_source.py
-lib/route_builder.py
-lib/navigator_renderer.py
-lib/world_builder.py
-data/route-specs/sunstrider-isle.json
-data/observations/fivebox-task-types.json
-data/journey/current-paladin.json
-data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
-data/routes/world-candidate/manifest.json
-data/routes/world-candidate/index.html
-tasks/todo.md
-```
+### RXP
 
-## 已确认的逐日岛实测
-
-- 打怪任务由主号击杀时五号同步增加；
-- 山猫项圈需要逐号查看和拾取，同一尸体不保证每号都有；
-- 奥术薄片需要逐号拾取；
-- 索兰尼亚三个物品需要逐号点击；
-- 达斯雷玛神殿只需主号交互一次，队伍同步；
-- 被污染的奥术薄片五号都能触发，位置在建筑上层；
-- P01人物历程确认完成8325时已达到2级。
-
-## 当前局限
-
-1. 全量版是自动覆盖，不是68个区域均已人工证明最优；
-2. Questie基础数据库已解析，但WotLK修正层尚未完整应用；
-3. 中立跨区任务可能出现在非主练级区域；
-4. 自动路线不知道山体、道路、楼层和洞穴入口；
-5. 没有移动轨迹，后续只能结合人物历程和用户少量反馈优化接交顺序；
-6. 逐日岛步骤8、9仍需用户实际验证；
-7. 全量区域的小区块标题由首个目标自动生成，部分名称可能不够直观。
-
-## 新对话建议开场
+主工作区文件：
 
 ```text
-通过CodexPro打开魔兽世界任务路线项目，先阅读：
-- wow-quest-route/docs/NEXT_CHAT_HANDOFF.md
-- wow-quest-route/tasks/todo.md
-- wow-quest-route/README.md
-
-先检查逐日岛V3坐标导航页面是否符合“输入当前坐标→直接告诉方向和目标坐标”的需求。不要恢复抽象地图、移动轨迹或自制游戏插件。然后针对步骤8、9和全量自动路线算法做专项审计。
+/Users/chat/claude/.ai-bridge/RXPGuides.lua
 ```
+
+已确认：
+
+- 当前指南组为`RestedXP 部落 1-30`；
+- 当前指南为`01-06 永歌森林`；
+- 有213项指南元数据，可参考等级段、地图顺序和下一指南；
+- 没有`.accept/.goto/.turnin/.complete`或步骤表，不能虚构完整RXP路线；
+- 当前AddOns没有安装RXP，该文件仅是历史SavedVariables。
+
+## 人工验证状态
+
+- 逐日岛1—6级：人工编排并有部分五开实测；西侧树人/神殿顺序与菲伦德雷徽记仍需确认。
+- 永歌森林6—12、幽魂之地12—20：RXP地图顺序约束下的Questie自动推导，尚未人工逐步审计。
+- 20—80级：均为自动推导，尚未完整实跑；不能宣称已验证最优或绝对不断链。
+
+## 下一步
+
+1. 实际打开单页HTML，先验证字号、标签切换、勾选保存和逐日岛步骤是否直观。
+2. 将永歌森林、幽魂之地升级为人工审计版，优先检查接交批次和可跳掉落任务。
+3. 按20—30、30—45、45—60、60—70、70—80逐段实跑并记录断链、回头和经验不足。
+4. 完整应用Questie WotLK修正层后重新生成并比较差异。
+5. 只修正当前实跑地图，不继续扩展旧导航器。
