@@ -1,0 +1,699 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-3487-candidate",
+  "title": "银月城（Silvermoon City）坐标导航候选版",
+  "output_basename": "zone-3487",
+  "zone": "银月城",
+  "zone_en": "Silvermoon City",
+  "map_area_id": 3487,
+  "quest_zone_or_sort": 3487,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "索瑞姆·轻歌周边",
+      "steps": [
+        1,
+        2
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "洛瑟玛·塞隆周边",
+      "steps": [
+        3
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "索瑞姆·轻歌周边",
+      "steps": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        10359
+      ],
+      "quests": [
+        {
+          "quest_id": 10359,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处接取：捐献毛料。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "交付",
+      "quest_ids": [
+        10359
+      ],
+      "quests": [
+        {
+          "quest_id": 10359,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处交付：捐献毛料。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        9627
+      ],
+      "quests": [
+        {
+          "quest_id": 9627,
+          "name": "部落的盟约",
+          "raw_name": "Allegiance to the Horde",
+          "required_level": 15,
+          "quest_level": 21,
+          "required_races": 512,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [
+            9626
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "回到银月城，向洛瑟玛·塞隆复命。"
+        }
+      ],
+      "instruction": "到洛瑟玛·塞隆处交付：部落的盟约。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 53.8,
+          "y": 20.23
+        },
+        "entities": [
+          {
+            "id": 16802,
+            "kind": "npc",
+            "name": "洛瑟玛·塞隆",
+            "coordinates": [
+              {
+                "x": 53.8,
+                "y": 20.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.8,
+                "y": 20.23
+              },
+              "bounds": {
+                "min_x": 53.8,
+                "max_x": 53.8,
+                "min_y": 20.23,
+                "max_y": 20.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        10360
+      ],
+      "quests": [
+        {
+          "quest_id": 10360,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处接取：捐献丝绸。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "交付",
+      "quest_ids": [
+        10360
+      ],
+      "quests": [
+        {
+          "quest_id": 10360,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处交付：捐献丝绸。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "接取",
+      "quest_ids": [
+        10361
+      ],
+      "quests": [
+        {
+          "quest_id": 10361,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处接取：捐献魔纹布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        10361
+      ],
+      "quests": [
+        {
+          "quest_id": 10361,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处交付：捐献魔纹布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        10362
+      ],
+      "quests": [
+        {
+          "quest_id": 10362,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处接取：捐献符文布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        10362
+      ],
+      "quests": [
+        {
+          "quest_id": 10362,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 3487,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到索瑞姆·轻歌处交付：捐献符文布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.56,
+          "y": 52.46
+        },
+        "entities": [
+          {
+            "id": 20612,
+            "kind": "npc",
+            "name": "索瑞姆·轻歌",
+            "coordinates": [
+              {
+                "x": 56.56,
+                "y": 52.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.56,
+                "y": 52.46
+              },
+              "bounds": {
+                "min_x": 56.56,
+                "max_x": 56.56,
+                "min_y": 52.46,
+                "max_y": 52.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 9627,
+      "name": "部落的盟约",
+      "raw_name": "Allegiance to the Horde",
+      "required_level": 15,
+      "quest_level": 21,
+      "required_races": 512,
+      "required_classes": null,
+      "zone_or_sort": 3487,
+      "pre_single": [
+        9626
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "回到银月城，向洛瑟玛·塞隆复命。"
+    },
+    {
+      "quest_id": 10359,
+      "name": "捐献毛料",
+      "raw_name": "A Donation of Wool",
+      "required_level": 12,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 3487,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 10360,
+      "name": "捐献丝绸",
+      "raw_name": "A Donation of Silk",
+      "required_level": 26,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 3487,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 10361,
+      "name": "捐献魔纹布",
+      "raw_name": "A Donation of Mageweave",
+      "required_level": 40,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 3487,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 10362,
+      "name": "捐献符文布",
+      "raw_name": "A Donation of Runecloth",
+      "required_level": 50,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 3487,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    }
+  ],
+  "fivebox_observations": {
+    "9627": {
+      "status": "not_classified"
+    },
+    "10359": {
+      "status": "not_classified"
+    },
+    "10360": {
+      "status": "not_classified"
+    },
+    "10361": {
+      "status": "not_classified"
+    },
+    "10362": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 5,
+    "step_count": 9,
+    "min_level": 12,
+    "max_level": 50
+  }
+}

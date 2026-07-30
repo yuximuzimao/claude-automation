@@ -1,0 +1,1000 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-46-candidate",
+  "title": "燃烧平原（Burning Steppes）坐标导航候选版",
+  "output_basename": "zone-46",
+  "zone": "燃烧平原",
+  "zone_en": "Burning Steppes",
+  "map_area_id": 46,
+  "quest_zone_or_sort": 46,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "麦克斯沃特·尤博格林周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "塞勒斯·萨雷芬图斯周边",
+      "steps": [
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "Fractured Elemental Shard来源：巨型黑曜石元素周边",
+      "steps": [
+        6
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "塞勒斯·萨雷芬图斯周边",
+      "steps": [
+        7
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "丁奇·斯迪波尔周边",
+      "steps": [
+        8
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        4296,
+        4726
+      ],
+      "quests": [
+        {
+          "quest_id": 4296,
+          "name": "七贤石板",
+          "raw_name": "Tablet of the Seven",
+          "required_level": 50,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "取得石板拓文。"
+        },
+        {
+          "quest_id": 4726,
+          "name": "雏龙精华",
+          "raw_name": "Broodling Essence",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4808,
+          "objective_text": "将龙灵采集器900型和8份雏龙精华交给燃烧平原烈焰峰的丁奇-斯迪波尔。"
+        }
+      ],
+      "instruction": "到麦克斯沃特·尤博格林、丁奇·斯迪波尔处接取：七贤石板、雏龙精华。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 65.195,
+          "y": 23.955
+        },
+        "entities": [
+          {
+            "id": 9536,
+            "kind": "npc",
+            "name": "麦克斯沃特·尤博格林",
+            "coordinates": [
+              {
+                "x": 65.15,
+                "y": 23.91
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.15,
+                "y": 23.91
+              },
+              "bounds": {
+                "min_x": 65.15,
+                "max_x": 65.15,
+                "min_y": 23.91,
+                "max_y": 23.91
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10267,
+            "kind": "npc",
+            "name": "丁奇·斯迪波尔",
+            "coordinates": [
+              {
+                "x": 65.24,
+                "y": 24.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.24,
+                "y": 24.0
+              },
+              "bounds": {
+                "min_x": 65.24,
+                "max_x": 65.24,
+                "min_y": 24.0,
+                "max_y": 24.0
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        3822
+      ],
+      "quests": [
+        {
+          "quest_id": 3822,
+          "name": "克罗格鲁尔",
+          "raw_name": "Krom'Grul",
+          "required_level": 48,
+          "quest_level": 53,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [
+            3821
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "从克罗格鲁尔手中拿回沙妮的鼻环，把它还给卡加斯的萨特拉克。搜寻巨槌石的每一处山洞和矿井。"
+        }
+      ],
+      "instruction": "在Sha'ni's Nose-Ring来源：克罗格鲁尔周边完成：克罗格鲁尔。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 79.66,
+          "y": 47.43
+        },
+        "entities": [
+          {
+            "id": 8977,
+            "kind": "npc",
+            "name": "Sha'ni's Nose-Ring来源：克罗格鲁尔",
+            "coordinates": [
+              {
+                "x": 79.66,
+                "y": 47.43
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 79.66,
+                "y": 47.43
+              },
+              "bounds": {
+                "min_x": 79.66,
+                "max_x": 79.66,
+                "min_y": 47.43,
+                "max_y": 47.43
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        4296,
+        4726
+      ],
+      "quests": [
+        {
+          "quest_id": 4296,
+          "name": "七贤石板",
+          "raw_name": "Tablet of the Seven",
+          "required_level": 50,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "取得石板拓文。"
+        },
+        {
+          "quest_id": 4726,
+          "name": "雏龙精华",
+          "raw_name": "Broodling Essence",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4808,
+          "objective_text": "将龙灵采集器900型和8份雏龙精华交给燃烧平原烈焰峰的丁奇-斯迪波尔。"
+        }
+      ],
+      "instruction": "到麦克斯沃特·尤博格林、丁奇·斯迪波尔处交付：七贤石板、雏龙精华。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 65.195,
+          "y": 23.955
+        },
+        "entities": [
+          {
+            "id": 9536,
+            "kind": "npc",
+            "name": "麦克斯沃特·尤博格林",
+            "coordinates": [
+              {
+                "x": 65.15,
+                "y": 23.91
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.15,
+                "y": 23.91
+              },
+              "bounds": {
+                "min_x": 65.15,
+                "max_x": 65.15,
+                "min_y": 23.91,
+                "max_y": 23.91
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10267,
+            "kind": "npc",
+            "name": "丁奇·斯迪波尔",
+            "coordinates": [
+              {
+                "x": 65.24,
+                "y": 24.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.24,
+                "y": 24.0
+              },
+              "bounds": {
+                "min_x": 65.24,
+                "max_x": 65.24,
+                "min_y": 24.0,
+                "max_y": 24.0
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        4808
+      ],
+      "quests": [
+        {
+          "quest_id": 4808,
+          "name": "菲诺克",
+          "raw_name": "Felnok Steelspring",
+          "required_level": 50,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [
+            4726
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4809,
+          "objective_text": "把丁奇的信交给冬泉谷永望镇的菲诺克。"
+        }
+      ],
+      "instruction": "到丁奇·斯迪波尔处接取：菲诺克。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 65.24,
+          "y": 24.0
+        },
+        "entities": [
+          {
+            "id": 10267,
+            "kind": "npc",
+            "name": "丁奇·斯迪波尔",
+            "coordinates": [
+              {
+                "x": 65.24,
+                "y": 24.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.24,
+                "y": 24.0
+              },
+              "bounds": {
+                "min_x": 65.24,
+                "max_x": 65.24,
+                "min_y": 24.0,
+                "max_y": 24.0
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        4022,
+        4023
+      ],
+      "quests": [
+        {
+          "quest_id": 4022,
+          "name": "烈焰精华",
+          "raw_name": "A Taste of Flame",
+          "required_level": 52,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [
+            3481
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4024,
+          "objective_text": "向塞勒斯·萨雷芬图斯展示你从威拉罗克·温布雷那里得到的黑龙皮。"
+        },
+        {
+          "quest_id": 4023,
+          "name": "烈焰精华",
+          "raw_name": "A Taste of Flame",
+          "required_level": 52,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4024,
+          "objective_text": "向塞勒斯·萨雷芬图斯证明你的价值。 /  / 你感觉到塞勒斯似乎对你不屑一顾。"
+        }
+      ],
+      "instruction": "到塞勒斯·萨雷芬图斯处接取：烈焰精华、烈焰精华。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 95.09,
+          "y": 31.56
+        },
+        "entities": [
+          {
+            "id": 9459,
+            "kind": "npc",
+            "name": "塞勒斯·萨雷芬图斯",
+            "coordinates": [
+              {
+                "x": 95.09,
+                "y": 31.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 95.09,
+                "y": 31.56
+              },
+              "bounds": {
+                "min_x": 95.09,
+                "max_x": 95.09,
+                "min_y": 31.56,
+                "max_y": 31.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "完成目标",
+      "quest_ids": [
+        4061
+      ],
+      "quests": [
+        {
+          "quest_id": 4061,
+          "name": "机器的崛起",
+          "raw_name": "The Rise of the Machines",
+          "required_level": 52,
+          "quest_level": 54,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4062,
+          "objective_text": "到燃烧平原去为塞朵拉·穆瓦丹尼收集10块断裂的元素碎片。 /  / 塞朵拉曾经说过，那里的机械傀儡和元素生物是这种碎片的主要来源。"
+        }
+      ],
+      "instruction": "在Fractured Elemental Shard来源：巨型黑曜石元素、Fractured Elemental Shard来源：战争掠夺者、Fractured Elemental Shard来源：失控的掠夺者周边完成：机器的崛起。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 61.36,
+          "y": 45.99
+        },
+        "entities": [
+          {
+            "id": 7032,
+            "kind": "npc",
+            "name": "Fractured Elemental Shard来源：巨型黑曜石元素",
+            "coordinates": [
+              {
+                "x": 66.34,
+                "y": 31.55
+              },
+              {
+                "x": 55.47,
+                "y": 49.02
+              },
+              {
+                "x": 41.08,
+                "y": 43.5
+              },
+              {
+                "x": 61.94,
+                "y": 31.82
+              },
+              {
+                "x": 35.66,
+                "y": 61.08
+              },
+              {
+                "x": 54.83,
+                "y": 62.52
+              },
+              {
+                "x": 44.09,
+                "y": 43.64
+              },
+              {
+                "x": 29.06,
+                "y": 62.33
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.46,
+                "y": 46.33
+              },
+              "bounds": {
+                "min_x": 29.06,
+                "max_x": 66.34,
+                "min_y": 31.55,
+                "max_y": 62.52
+              },
+              "spawn_count": 8
+            }
+          },
+          {
+            "id": 7039,
+            "kind": "npc",
+            "name": "Fractured Elemental Shard来源：战争掠夺者",
+            "coordinates": [
+              {
+                "x": 67.43,
+                "y": 37.57
+              },
+              {
+                "x": 62.14,
+                "y": 40.46
+              },
+              {
+                "x": 68.64,
+                "y": 38.89
+              },
+              {
+                "x": 61.66,
+                "y": 40.45
+              },
+              {
+                "x": 66.68,
+                "y": 36.27
+              },
+              {
+                "x": 65.87,
+                "y": 36.55
+              },
+              {
+                "x": 62.77,
+                "y": 34.99
+              },
+              {
+                "x": 66.78,
+                "y": 40.37
+              },
+              {
+                "x": 54.6,
+                "y": 35.86
+              },
+              {
+                "x": 56.91,
+                "y": 34.64
+              },
+              {
+                "x": 59.4,
+                "y": 37.85
+              },
+              {
+                "x": 60.85,
+                "y": 35.05
+              },
+              {
+                "x": 58.29,
+                "y": 38.28
+              },
+              {
+                "x": 55.7,
+                "y": 40.5
+              },
+              {
+                "x": 56.49,
+                "y": 33.97
+              },
+              {
+                "x": 64.48,
+                "y": 41.74
+              },
+              {
+                "x": 60.79,
+                "y": 43.01
+              },
+              {
+                "x": 52.51,
+                "y": 38.26
+              },
+              {
+                "x": 68.34,
+                "y": 37.71
+              },
+              {
+                "x": 61.06,
+                "y": 35.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.36,
+                "y": 37.78
+              },
+              "bounds": {
+                "min_x": 52.51,
+                "max_x": 68.64,
+                "min_y": 33.97,
+                "max_y": 43.01
+              },
+              "spawn_count": 20
+            }
+          },
+          {
+            "id": 8981,
+            "kind": "npc",
+            "name": "Fractured Elemental Shard来源：失控的掠夺者",
+            "coordinates": [
+              {
+                "x": 79.17,
+                "y": 29.71
+              },
+              {
+                "x": 90.02,
+                "y": 45.99
+              },
+              {
+                "x": 88.06,
+                "y": 31.77
+              },
+              {
+                "x": 85.81,
+                "y": 57.07
+              },
+              {
+                "x": 88.6,
+                "y": 57.35
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 88.06,
+                "y": 45.99
+              },
+              "bounds": {
+                "min_x": 79.17,
+                "max_x": 90.02,
+                "min_y": 29.71,
+                "max_y": 57.35
+              },
+              "spawn_count": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        4022,
+        4023
+      ],
+      "quests": [
+        {
+          "quest_id": 4022,
+          "name": "烈焰精华",
+          "raw_name": "A Taste of Flame",
+          "required_level": 52,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [
+            3481
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4024,
+          "objective_text": "向塞勒斯·萨雷芬图斯展示你从威拉罗克·温布雷那里得到的黑龙皮。"
+        },
+        {
+          "quest_id": 4023,
+          "name": "烈焰精华",
+          "raw_name": "A Taste of Flame",
+          "required_level": 52,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4024,
+          "objective_text": "向塞勒斯·萨雷芬图斯证明你的价值。 /  / 你感觉到塞勒斯似乎对你不屑一顾。"
+        }
+      ],
+      "instruction": "到塞勒斯·萨雷芬图斯处交付：烈焰精华、烈焰精华。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 95.09,
+          "y": 31.56
+        },
+        "entities": [
+          {
+            "id": 9459,
+            "kind": "npc",
+            "name": "塞勒斯·萨雷芬图斯",
+            "coordinates": [
+              {
+                "x": 95.09,
+                "y": 31.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 95.09,
+                "y": 31.56
+              },
+              "bounds": {
+                "min_x": 95.09,
+                "max_x": 95.09,
+                "min_y": 31.56,
+                "max_y": 31.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        5522
+      ],
+      "quests": [
+        {
+          "quest_id": 5522,
+          "name": "莱尼德·巴萨罗梅",
+          "raw_name": "Leonid Barthalomew",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 46,
+          "pre_single": [
+            4735
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5531,
+          "objective_text": "把冰冻的龙蛋交给东瘟疫之地的莱尼德·巴萨罗梅。"
+        }
+      ],
+      "instruction": "到丁奇·斯迪波尔处接取：莱尼德·巴萨罗梅。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 65.24,
+          "y": 24.0
+        },
+        "entities": [
+          {
+            "id": 10267,
+            "kind": "npc",
+            "name": "丁奇·斯迪波尔",
+            "coordinates": [
+              {
+                "x": 65.24,
+                "y": 24.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.24,
+                "y": 24.0
+              },
+              "bounds": {
+                "min_x": 65.24,
+                "max_x": 65.24,
+                "min_y": 24.0,
+                "max_y": 24.0
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 3822,
+      "name": "克罗格鲁尔",
+      "raw_name": "Krom'Grul",
+      "required_level": 48,
+      "quest_level": 53,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [
+        3821
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "从克罗格鲁尔手中拿回沙妮的鼻环，把它还给卡加斯的萨特拉克。搜寻巨槌石的每一处山洞和矿井。"
+    },
+    {
+      "quest_id": 4022,
+      "name": "烈焰精华",
+      "raw_name": "A Taste of Flame",
+      "required_level": 52,
+      "quest_level": 54,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [
+        3481
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4024,
+      "objective_text": "向塞勒斯·萨雷芬图斯展示你从威拉罗克·温布雷那里得到的黑龙皮。"
+    },
+    {
+      "quest_id": 4023,
+      "name": "烈焰精华",
+      "raw_name": "A Taste of Flame",
+      "required_level": 52,
+      "quest_level": 54,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4024,
+      "objective_text": "向塞勒斯·萨雷芬图斯证明你的价值。 /  / 你感觉到塞勒斯似乎对你不屑一顾。"
+    },
+    {
+      "quest_id": 4061,
+      "name": "机器的崛起",
+      "raw_name": "The Rise of the Machines",
+      "required_level": 52,
+      "quest_level": 54,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4062,
+      "objective_text": "到燃烧平原去为塞朵拉·穆瓦丹尼收集10块断裂的元素碎片。 /  / 塞朵拉曾经说过，那里的机械傀儡和元素生物是这种碎片的主要来源。"
+    },
+    {
+      "quest_id": 4296,
+      "name": "七贤石板",
+      "raw_name": "Tablet of the Seven",
+      "required_level": 50,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "取得石板拓文。"
+    },
+    {
+      "quest_id": 4726,
+      "name": "雏龙精华",
+      "raw_name": "Broodling Essence",
+      "required_level": 50,
+      "quest_level": 52,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4808,
+      "objective_text": "将龙灵采集器900型和8份雏龙精华交给燃烧平原烈焰峰的丁奇-斯迪波尔。"
+    },
+    {
+      "quest_id": 4808,
+      "name": "菲诺克",
+      "raw_name": "Felnok Steelspring",
+      "required_level": 50,
+      "quest_level": 54,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [
+        4726
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4809,
+      "objective_text": "把丁奇的信交给冬泉谷永望镇的菲诺克。"
+    },
+    {
+      "quest_id": 5522,
+      "name": "莱尼德·巴萨罗梅",
+      "raw_name": "Leonid Barthalomew",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 46,
+      "pre_single": [
+        4735
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5531,
+      "objective_text": "把冰冻的龙蛋交给东瘟疫之地的莱尼德·巴萨罗梅。"
+    }
+  ],
+  "fivebox_observations": {
+    "3822": {
+      "status": "not_classified"
+    },
+    "4022": {
+      "status": "not_classified"
+    },
+    "4023": {
+      "status": "not_classified"
+    },
+    "4061": {
+      "status": "not_classified"
+    },
+    "4296": {
+      "status": "not_classified"
+    },
+    "4726": {
+      "status": "not_classified"
+    },
+    "4808": {
+      "status": "not_classified"
+    },
+    "5522": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 8,
+    "step_count": 8,
+    "min_level": 48,
+    "max_level": 57
+  }
+}

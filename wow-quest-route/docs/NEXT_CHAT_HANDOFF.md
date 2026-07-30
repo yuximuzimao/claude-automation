@@ -1,78 +1,111 @@
-# 新对话交接：路线算法专项优化
+# 新对话交接：任务路线与坐标导航专项优化
 
-## 当前状态
-
-项目分支：`feat/wow-quest-route`
-
-当前可运行成果：
-
-- Questie v11.32.3原始数据库解析；
-- 逐日岛候选路线V2；
-- 逐日岛A–E五个小区域；
-- 单文件交互HTML；
-- P01人物历程；
-- 五开实测规则；
-- WoW Route Logger及每日匿名导出脚本。
-
-核心文件：
+## 当前分支
 
 ```text
+feat/wow-quest-route
+```
+
+## 用户最终确认的模型
+
+- 五个角色始终按一个主控号的移动路线处理；
+- 另外四个角色只在必须逐号拾取、点击、接取或交付时提醒切换；
+- 不建模五条路线，不计算五个角色的独立移动成本；
+- 不安装自制游戏内插件；
+- 不采集移动轨迹；
+- 不使用输入广播、自动化或客户端注入；
+- Questie和WTF只作为退出游戏后的只读离线数据源。
+
+## 当前成果
+
+### 逐日岛人工版
+
+```text
+data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
+```
+
+V3不再显示没有底图的圆圈和路线图。页面改为：
+
+1. 选择小区域与步骤；
+2. 输入主控号当前地图X/Y；
+3. 从目标的全部Questie刷新点中选最近的具体点；
+4. 显示目标坐标；
+5. 显示北/东北/东/东南/南/西南/西/西北方向；
+6. 显示X/Y应增加或减少多少；
+7. 大字号显示当前任务的前置、当前和后续任务。
+
+### 全量自动候选版
+
+```text
+data/routes/world-candidate/index.html
+```
+
+当前统计：
+
+- 68个户外区域；
+- 2852个可定位候选任务；
+- 东部王国、卡利姆多、外域、诺森德；
+- 排除副本、团队、日常、周常、重复、节日和专业限定任务；
+- 保留城市任务及少量血精灵圣骑士可接的中立跨区任务；
+- 每个区域独立HTML并自动拆成小区块。
+
+自动算法当前使用：
+
+- 血精灵种族位掩码；
+- 圣骑士职业位掩码；
+- 任务发布NPC是否对部落友好；
+- 前置任务深度；
+- 5级等级波次；
+- 接取、目标、交付三个阶段；
+- 坐标半径聚类；
+- 最近邻步骤排序；
+- 多刷新点导航时选择离用户当前坐标最近的具体点。
+
+## 关键文件
+
+```text
+README.md
+cli.py
+lib/questie_source.py
+lib/route_builder.py
+lib/navigator_renderer.py
+lib/world_builder.py
 data/route-specs/sunstrider-isle.json
 data/observations/fivebox-task-types.json
 data/journey/current-paladin.json
-data/routes/horde/blood-elf/sunstrider-isle-v2.html
-lib/questie_source.py
-lib/route_builder.py
-lib/html_renderer.py
-addon/WoWRouteLogger/
-tools/Install-WoWRouteLogger.ps1
-tools/Export-WoWRouteLog.ps1
+data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
+data/routes/world-candidate/manifest.json
+data/routes/world-candidate/index.html
+tasks/todo.md
 ```
 
-## 已确认事实
+## 已确认的逐日岛实测
 
-- 当前未安装RXP；路线不能依赖RXP。
-- Questie数据库存储AreaID下的0–100区域坐标。
-- Questie将AreaID转换为UiMapID，并把坐标除以100交给HereBeDragons画世界地图/小地图图标。
-- P01历程：2026-07-28，等级1→6，完成8325时已经2级；记录在接取8334时结束。
-- 五个账号的Questie账号级SavedVariables几乎相同，不能用其区分五个当前角色。
-- 打怪任务五号同步增加。
-- 山猫项圈、奥术薄片需要逐号拾取；同一尸体不保证每号都有山猫项圈。
-- 索兰尼亚三个物品需要逐号点击。
-- 达斯雷玛神殿只需一次交互，队伍进度同步。
-- 被污染的奥术薄片五号均成功触发，目标在建筑上层。
+- 打怪任务由主号击杀时五号同步增加；
+- 山猫项圈需要逐号查看和拾取，同一尸体不保证每号都有；
+- 奥术薄片需要逐号拾取；
+- 索兰尼亚三个物品需要逐号点击；
+- 达斯雷玛神殿只需主号交互一次，队伍同步；
+- 被污染的奥术薄片五号都能触发，位置在建筑上层；
+- P01人物历程确认完成8325时已达到2级。
 
-## 当前路线的局限
+## 当前局限
 
-V2仍然是“数据支持的候选路线”，不是经过数学优化证明的最优路线：
+1. 全量版是自动覆盖，不是68个区域均已人工证明最优；
+2. Questie基础数据库已解析，但WotLK修正层尚未完整应用；
+3. 中立跨区任务可能出现在非主练级区域；
+4. 自动路线不知道山体、道路、楼层和洞穴入口；
+5. 没有移动轨迹，后续只能结合人物历程和用户少量反馈优化接交顺序；
+6. 逐日岛步骤8、9仍需用户实际验证；
+7. 全量区域的小区块标题由首个目标自动生成，部分名称可能不够直观。
 
-1. 步骤顺序由人工根据任务依赖和坐标编排；
-2. 多刷新点目标当前使用平均代表坐标，可能偏离密度峰值或实际入口；
-3. 连线只表示访问顺序，不表示道路可直线通行；
-4. 没有正式目标函数和路线评分；
-5. 未建模五号切窗口、个人拾取、任务交互和等级门槛的时间成本；
-6. P01人物历程无移动轨迹，无法验证实际道路；
-7. 8334以后没有本次人物历程验证。
-
-## 新对话应集中解决
-
-1. 定义路线优化目标函数和权重；
-2. 审计A–E分区边界；
-3. 审计每个区块内部步骤顺序；
-4. 为多刷新点目标选择更合理的代表点或目标区域模型；
-5. 区分固定NPC/物体点、怪物分布区、掉落来源区、建筑楼层；
-6. 设计任务依赖约束下的候选路线生成与评分算法；
-7. 确定首次扩展范围：永歌森林第一个任务中心，还是整个永歌森林；
-8. 确定是否在HTML中加入候选路线A/B比较和每区块完成按钮。
-
-## 建议的新对话开场
+## 新对话建议开场
 
 ```text
 通过CodexPro打开魔兽世界任务路线项目，先阅读：
 - wow-quest-route/docs/NEXT_CHAT_HANDOFF.md
 - wow-quest-route/tasks/todo.md
-- wow-quest-route/data/route-specs/sunstrider-isle.json
-- wow-quest-route/data/routes/horde/blood-elf/sunstrider-isle-v2.html
+- wow-quest-route/README.md
 
-这次不要继续扩展区域，先针对逐日岛路线算法、A–E分区和步骤顺序做一次专项审计。明确目标函数、约束、候选生成方式和当前V2可能不优的地方，再提出可验证的V3方案。
+先检查逐日岛V3坐标导航页面是否符合“输入当前坐标→直接告诉方向和目标坐标”的需求。不要恢复抽象地图、移动轨迹或自制游戏插件。然后针对步骤8、9和全量自动路线算法做专项审计。
 ```

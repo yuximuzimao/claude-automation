@@ -1,69 +1,94 @@
 # 魔兽世界任务路线
 
-面向国服泰坦重铸“时光”服的五开任务路线项目。Questie提供任务依赖和区域坐标，路线层负责分区与顺序，实测层记录个人拾取、逐号点击、楼层、实际轨迹和后续修正。
+面向国服泰坦重铸“时光”服的任务路线项目。路线只按一个主控角色计算，另外四个角色始终视为跟随；只有任务必须逐号拾取、点击、接取或交付时，页面才显示切换提醒。
+
+## 安全边界
+
+- 只离线读取用户已提供的Questie插件文件和退出游戏后保存的Questie人物历程；
+- 不安装自制游戏内插件；
+- 不采集移动轨迹；
+- 不注入客户端、不读内存、不抓包、不自动接交任务；
+- 不进行输入广播、同步按键或自动控制角色。
 
 ## 当前成果
 
 - Questie v11.32.3 Lua数据库解析器；
-- 支持读取Questie完整ZIP或已解压插件目录；
-- 血精灵圣骑士逐日岛候选路线V2；
-- 逐日岛拆分为5个可单独执行的小区域；
-- 单文件交互HTML：坐标图、步骤链、任务链、实际历程和路线对比；
-- 支持在HTML中选择本地游戏大地图截图作为底图，不上传图片；
-- 五开共享、个人拾取和个人交互规则；
-- WoW Route Logger只读记录插件及匿名每日导出脚本。
+- 支持读取Questie完整ZIP或已解压目录；
+- 逐日岛人工编排候选路线V3；
+- 逐日岛拆分为5个小区域；
+- 坐标导航HTML：输入当前X/Y，直接显示下一目标、具体坐标和东南西北方向；
+- 多刷新点目标不画大圈，只选择离当前坐标最近的具体Questie点；
+- 当前任务链改为大字号“前置→当前→后续”纵向列表；
+- 血精灵圣骑士1–80户外区域全量自动候选版：68个区域、2852个可定位任务。
 
-## 生成路线
+## 逐日岛V3
 
-在项目目录运行：
+生成：
 
 ```bash
 python3 cli.py build-sunstrider \
   --questie-source ../_sandbox/wow-quest-route/Questie.zip
 ```
 
-输出：
+主要输出：
 
 ```text
-data/routes/horde/blood-elf/sunstrider-isle-v2.html
-data/routes/horde/blood-elf/sunstrider-isle-v2.md
-data/routes/horde/blood-elf/sunstrider-isle-v2.json
+data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
 ```
 
-日常使用优先打开HTML。页面默认只显示一个小区域，可以切换：
+使用方式：
 
-- A：太阳之塔起步；
-- B：南侧山猫与任务物品环；
-- C：西侧树人与神殿环；
-- D：法瑟林学院；
-- E：出岛信使链。
+1. 选择当前小区域和步骤；
+2. 在游戏地图上查看主控号当前X/Y坐标；
+3. 输入HTML顶部；
+4. 页面显示“向北/东北/东/东南/南/西南/西/西北”、目标坐标和X/Y差值；
+5. 多个目标分别显示，点击目标即可切换导航。
 
-地图坐标复刻Questie的绘制方式：数据库坐标为区域内0–100坐标，页面按百分比直接标点和连线。路线连线是候选顺序，不代表中间一定可以直线通行。
+页面不再尝试用没有底图的圆圈表达怪区。
 
-## 每日实测记录
+## 全世界区域候选版
 
-Questie人物历程只能记录接取、完成、放弃、升级、等级和时间戳，不能记录移动轨迹、事件坐标、任务目标完成位置或五个角色各自进度。
+生成：
 
-项目附带`WoW Route Logger`，仅记录本地任务事件和移动坐标，不发送按键、不控制角色、不自动接交任务。
-
-安装：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\Install-WoWRouteLogger.ps1
+```bash
+python3 cli.py build-world \
+  --questie-source ../_sandbox/wow-quest-route/Questie.zip
 ```
 
-当天结束后完全退出游戏，再匿名导出：
+索引：
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\Export-WoWRouteLog.ps1 `
-  -BridgePath "你的bridge目录"
+```text
+data/routes/world-candidate/index.html
 ```
 
-详见：
+当前自动生成范围：
 
-- `addon/README.md`
-- `docs/DAILY_ITERATION.md`
-- `docs/JOURNEY_EXPORT.md`
+- 东部王国、卡利姆多、外域、诺森德；
+- 血精灵种族与圣骑士职业条件可用的普通户外任务；
+- 排除副本、团队、日常、周常、重复、节日和专业限定任务；
+- 城市任务和少量可接的中立跨区任务会保留；
+- 每个区域独立HTML，并自动拆为小区块。
+
+全量版的作用是先完成覆盖，不代表68个区域都已经人工证明为最优。当前自动算法使用：任务前置深度、5级等级波次、接取/目标/交付阶段、坐标聚类和最近邻排序。
+
+## 人物历程
+
+Questie人物历程可用于离线复盘：
+
+- 接取；
+- 完成/交付；
+- 放弃；
+- 升级；
+- 时间戳；
+- 事件发生时的等级。
+
+它不记录移动轨迹、目标完成坐标、打怪过程和五个角色各自的实时进度。后续只使用人物历程检查任务顺序和回头交接，不再尝试采集移动轨迹。
+
+导出说明见：
+
+```text
+docs/JOURNEY_EXPORT.md
+```
 
 ## 测试
 
@@ -71,8 +96,14 @@ powershell -ExecutionPolicy Bypass -File .\tools\Export-WoWRouteLog.ps1 `
 python3 -m unittest discover -s tests
 ```
 
-HTML脚本另外使用`node --check`做JavaScript语法检查。
+导航页JavaScript另外使用`node --check`检查。
 
-## 迭代原则
+## 下一阶段
 
-先按Questie为各区域生成候选路线，再按任务中心、前置关系和目标坐标拆成小区域。每次只执行一个小区域；跑完后用日志、轨迹和少量异常备注优化该区域，并把已确认的通用规则迁移到后续区域。
+新对话应先审计：
+
+- 逐日岛V3的步骤是否符合用户操作直觉；
+- 全量自动算法是否错误合并任务波次；
+- 中立跨区任务是否应从主索引移到“可选任务”；
+- Questie修正层如何完整应用到基础数据库；
+- 永歌森林与幽魂之地如何从自动候选升级为人工可执行版本。

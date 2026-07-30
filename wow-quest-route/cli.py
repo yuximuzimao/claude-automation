@@ -4,9 +4,10 @@ import argparse
 import sys
 from pathlib import Path
 
-from lib.html_renderer import write_html
+from lib.navigator_renderer import write_navigator_html
 from lib.questie_source import load_questie
 from lib.route_builder import build_route, write_route
+from lib.world_builder import build_world_routes
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -30,6 +31,14 @@ def build_parser() -> argparse.ArgumentParser:
     build.add_argument("--observations", default=str(DEFAULT_OBSERVATIONS), help="五开实测JSON")
     build.add_argument("--journey", default=str(DEFAULT_JOURNEY), help="脱敏人物历程JSON")
     build.add_argument("--output", default=str(DEFAULT_OUTPUT), help="输出目录")
+
+    world = subparsers.add_parser("build-world", help="生成血精灵圣骑士1-80全部户外区域候选导航")
+    world.add_argument("--questie-source", required=True, help="Questie完整ZIP，或已解压的Questie目录")
+    world.add_argument(
+        "--output",
+        default=str(PROJECT_ROOT / "data/routes/world-candidate"),
+        help="全区域输出目录",
+    )
     return parser
 
 
@@ -41,11 +50,19 @@ def main(argv: list[str] | None = None) -> int:
             route = build_route(data, Path(args.spec), Path(args.observations))
             output = Path(args.output)
             markdown_path, json_path = write_route(route, output)
-            html_path = write_html(route, output, Path(args.journey))
+            navigator_path = write_navigator_html(route, output, Path(args.journey))
             print(f"Questie版本: {data.version}")
             print(f"已生成: {markdown_path}")
             print(f"已生成: {json_path}")
-            print(f"已生成: {html_path}")
+            print(f"已生成: {navigator_path}")
+            return 0
+        if args.command == "build-world":
+            data = load_questie(args.questie_source)
+            manifest = build_world_routes(data, args.questie_source, Path(args.output))
+            print(f"Questie版本: {data.version}")
+            print(f"已生成区域: {manifest['zone_count']}")
+            print(f"候选任务总数: {manifest['quest_count']}")
+            print(f"索引: {Path(args.output) / manifest['index']}")
             return 0
     except (FileNotFoundError, ValueError, KeyError) as exc:
         print(f"错误: {exc}", file=sys.stderr)

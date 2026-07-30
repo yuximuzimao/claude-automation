@@ -1,0 +1,480 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-141-candidate",
+  "title": "泰达希尔（Teldrassil）坐标导航候选版",
+  "output_basename": "zone-141",
+  "zone": "泰达希尔",
+  "zone_en": "Teldrassil",
+  "map_area_id": 141,
+  "quest_zone_or_sort": 141,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "Strange Fronded Plant周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "Strange Fruited Plant周边",
+      "steps": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        931
+      ],
+      "quests": [
+        {
+          "quest_id": 931,
+          "name": "发光的树叶",
+          "raw_name": "The Shimmering Frond",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给奥拉密斯湖畔的德纳兰带去1片发光的树叶。"
+        }
+      ],
+      "instruction": "到Strange Fronded Plant处接取：发光的树叶。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 34.61,
+          "y": 28.76
+        },
+        "entities": [
+          {
+            "id": 6752,
+            "kind": "object",
+            "name": "Strange Fronded Plant",
+            "coordinates": [
+              {
+                "x": 34.61,
+                "y": 28.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 34.61,
+                "y": 28.76
+              },
+              "bounds": {
+                "min_x": 34.61,
+                "max_x": 34.61,
+                "min_y": 28.76,
+                "max_y": 28.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        930
+      ],
+      "quests": [
+        {
+          "quest_id": 930,
+          "name": "发光的水果",
+          "raw_name": "The Glowing Fruit",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把这颗发光的水果交给奥拉密斯湖的德纳兰。"
+        }
+      ],
+      "instruction": "到Strange Fruited Plant处接取：发光的水果。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 42.61,
+          "y": 76.19
+        },
+        "entities": [
+          {
+            "id": 6751,
+            "kind": "object",
+            "name": "Strange Fruited Plant",
+            "coordinates": [
+              {
+                "x": 42.61,
+                "y": 76.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.61,
+                "y": 76.19
+              },
+              "bounds": {
+                "min_x": 42.61,
+                "max_x": 42.61,
+                "min_y": 76.19,
+                "max_y": 76.19
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        927,
+        930,
+        931
+      ],
+      "quests": [
+        {
+          "quest_id": 927,
+          "name": "布满苔藓的心脏",
+          "raw_name": "The Moss-twined Heart",
+          "required_level": 5,
+          "quest_level": 12,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将布满苔藓的心脏交给奥拉密斯湖畔的德纳兰。"
+        },
+        {
+          "quest_id": 930,
+          "name": "发光的水果",
+          "raw_name": "The Glowing Fruit",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把这颗发光的水果交给奥拉密斯湖的德纳兰。"
+        },
+        {
+          "quest_id": 931,
+          "name": "发光的树叶",
+          "raw_name": "The Shimmering Frond",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给奥拉密斯湖畔的德纳兰带去1片发光的树叶。"
+        }
+      ],
+      "instruction": "到德纳兰处交付：布满苔藓的心脏、发光的水果、发光的树叶。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 60.9,
+          "y": 68.49
+        },
+        "entities": [
+          {
+            "id": 2080,
+            "kind": "npc",
+            "name": "德纳兰",
+            "coordinates": [
+              {
+                "x": 60.9,
+                "y": 68.49
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.9,
+                "y": 68.49
+              },
+              "bounds": {
+                "min_x": 60.9,
+                "max_x": 60.9,
+                "min_y": 68.49,
+                "max_y": 68.49
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        2399
+      ],
+      "quests": [
+        {
+          "quest_id": 2399,
+          "name": "发芽的树叶",
+          "raw_name": "The Sprouted Fronds",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [
+            931
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到Sprouted Frond处接取：发芽的树叶。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 60.78,
+          "y": 68.59
+        },
+        "entities": [
+          {
+            "id": 7510,
+            "kind": "object",
+            "name": "Sprouted Frond",
+            "coordinates": [
+              {
+                "x": 60.75,
+                "y": 68.56
+              },
+              {
+                "x": 60.78,
+                "y": 68.59
+              },
+              {
+                "x": 60.82,
+                "y": 68.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.78,
+                "y": 68.59
+              },
+              "bounds": {
+                "min_x": 60.75,
+                "max_x": 60.82,
+                "min_y": 68.56,
+                "max_y": 68.61
+              },
+              "spawn_count": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "交付",
+      "quest_ids": [
+        2399
+      ],
+      "quests": [
+        {
+          "quest_id": 2399,
+          "name": "发芽的树叶",
+          "raw_name": "The Sprouted Fronds",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 141,
+          "pre_single": [
+            931
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到Sprouted Frond处交付：发芽的树叶。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 60.78,
+          "y": 68.59
+        },
+        "entities": [
+          {
+            "id": 7510,
+            "kind": "object",
+            "name": "Sprouted Frond",
+            "coordinates": [
+              {
+                "x": 60.75,
+                "y": 68.56
+              },
+              {
+                "x": 60.78,
+                "y": 68.59
+              },
+              {
+                "x": 60.82,
+                "y": 68.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.78,
+                "y": 68.59
+              },
+              "bounds": {
+                "min_x": 60.75,
+                "max_x": 60.82,
+                "min_y": 68.56,
+                "max_y": 68.61
+              },
+              "spawn_count": 3
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 927,
+      "name": "布满苔藓的心脏",
+      "raw_name": "The Moss-twined Heart",
+      "required_level": 5,
+      "quest_level": 12,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 141,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将布满苔藓的心脏交给奥拉密斯湖畔的德纳兰。"
+    },
+    {
+      "quest_id": 930,
+      "name": "发光的水果",
+      "raw_name": "The Glowing Fruit",
+      "required_level": 4,
+      "quest_level": 10,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 141,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把这颗发光的水果交给奥拉密斯湖的德纳兰。"
+    },
+    {
+      "quest_id": 931,
+      "name": "发光的树叶",
+      "raw_name": "The Shimmering Frond",
+      "required_level": 4,
+      "quest_level": 10,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 141,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "给奥拉密斯湖畔的德纳兰带去1片发光的树叶。"
+    },
+    {
+      "quest_id": 2399,
+      "name": "发芽的树叶",
+      "raw_name": "The Sprouted Fronds",
+      "required_level": 4,
+      "quest_level": 10,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 141,
+      "pre_single": [
+        931
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    }
+  ],
+  "fivebox_observations": {
+    "927": {
+      "status": "not_classified"
+    },
+    "930": {
+      "status": "not_classified"
+    },
+    "931": {
+      "status": "not_classified"
+    },
+    "2399": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 4,
+    "step_count": 5,
+    "min_level": 4,
+    "max_level": 5
+  }
+}

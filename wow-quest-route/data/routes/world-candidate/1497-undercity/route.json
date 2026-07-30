@@ -1,0 +1,3192 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-1497-candidate",
+  "title": "幽暗城（Undercity）坐标导航候选版",
+  "output_basename": "zone-1497",
+  "zone": "幽暗城",
+  "zone_en": "Undercity",
+  "map_area_id": 1497,
+  "quest_zone_or_sort": 1497,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "比索·埃斯沙德周边",
+      "steps": [
+        1,
+        2
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "药剂师金格周边",
+      "steps": [
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "莱斯顿·法斯雷周边",
+      "steps": [
+        5,
+        6
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "希尔瓦娜斯·风行者周边",
+      "steps": [
+        7
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "看守者贝尔杜加周边",
+      "steps": [
+        8,
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "F",
+      "title": "莱斯顿·法斯雷周边",
+      "steps": [
+        10,
+        11,
+        12
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "G",
+      "title": "看守者贝尔杜加周边",
+      "steps": [
+        13
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "H",
+      "title": "沙琳德拉周边",
+      "steps": [
+        14,
+        15
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "I",
+      "title": "莱斯顿·法斯雷周边",
+      "steps": [
+        16,
+        17
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "J",
+      "title": "奥雷萨多·卢卡周边",
+      "steps": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "K",
+      "title": "瑟尔萨·风歌周边",
+      "steps": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "L",
+      "title": "皇家管理人巴哈乌斯周边",
+      "steps": [
+        31,
+        32,
+        33
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "M",
+      "title": "化学家弗雷周边",
+      "steps": [
+        34,
+        35
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "N",
+      "title": "莱斯顿·法斯雷周边",
+      "steps": [
+        36,
+        37
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "O",
+      "title": "化学家弗雷周边",
+      "steps": [
+        38,
+        39
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "P",
+      "title": "预言者巴萨扎德周边",
+      "steps": [
+        40
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        357
+      ],
+      "quests": [
+        {
+          "quest_id": 357,
+          "name": "巫妖的身份",
+          "raw_name": "The Lich's Identity",
+          "required_level": 5,
+          "quest_level": 8,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            405
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 366,
+          "objective_text": "把巫妖的法术书带给幽暗城的比索·埃斯沙德。"
+        }
+      ],
+      "instruction": "到比索·埃斯沙德处接取：巫妖的身份。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 84.07,
+          "y": 17.45
+        },
+        "entities": [
+          {
+            "id": 1498,
+            "kind": "npc",
+            "name": "比索·埃斯沙德",
+            "coordinates": [
+              {
+                "x": 84.07,
+                "y": 17.45
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 84.07,
+                "y": 17.45
+              },
+              "bounds": {
+                "min_x": 84.07,
+                "max_x": 84.07,
+                "min_y": 17.45,
+                "max_y": 17.45
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "交付",
+      "quest_ids": [
+        357
+      ],
+      "quests": [
+        {
+          "quest_id": 357,
+          "name": "巫妖的身份",
+          "raw_name": "The Lich's Identity",
+          "required_level": 5,
+          "quest_level": 8,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            405
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 366,
+          "objective_text": "把巫妖的法术书带给幽暗城的比索·埃斯沙德。"
+        }
+      ],
+      "instruction": "到比索·埃斯沙德处交付：巫妖的身份。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 84.07,
+          "y": 17.45
+        },
+        "entities": [
+          {
+            "id": 1498,
+            "kind": "npc",
+            "name": "比索·埃斯沙德",
+            "coordinates": [
+              {
+                "x": 84.07,
+                "y": 17.45
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 84.07,
+                "y": 17.45
+              },
+              "bounds": {
+                "min_x": 84.07,
+                "max_x": 84.07,
+                "min_y": 17.45,
+                "max_y": 17.45
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        1359
+      ],
+      "quests": [
+        {
+          "quest_id": 1359,
+          "name": "给金格的货物",
+          "raw_name": "Zinge's Delivery",
+          "required_level": 10,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            3221
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1358,
+          "objective_text": "将狼心样本交给幽暗城的药剂师金格。"
+        }
+      ],
+      "instruction": "到药剂师金格处交付：给金格的货物。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 50.14,
+          "y": 67.97
+        },
+        "entities": [
+          {
+            "id": 5204,
+            "kind": "npc",
+            "name": "药剂师金格",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 67.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 67.97
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 67.97,
+                "max_y": 67.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        1358
+      ],
+      "quests": [
+        {
+          "quest_id": 1358,
+          "name": "给赫布瑞姆的样本",
+          "raw_name": "Sample for Helbrim",
+          "required_level": 10,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            1359
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把一箱蜘蛛毒带给贫瘠之地的药剂师赫布瑞姆。"
+        }
+      ],
+      "instruction": "到药剂师金格处接取：给赫布瑞姆的样本。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 50.14,
+          "y": 67.97
+        },
+        "entities": [
+          {
+            "id": 5204,
+            "kind": "npc",
+            "name": "药剂师金格",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 67.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 67.97
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 67.97,
+                "max_y": 67.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        7813
+      ],
+      "quests": [
+        {
+          "quest_id": 7813,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处接取：捐献毛料。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "交付",
+      "quest_ids": [
+        7813
+      ],
+      "quests": [
+        {
+          "quest_id": 7813,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处交付：捐献毛料。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        9180,
+        9621
+      ],
+      "quests": [
+        {
+          "quest_id": 9180,
+          "name": "幽暗城之旅",
+          "raw_name": "Journey to Undercity",
+          "required_level": 15,
+          "quest_level": 15,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            9175
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将女王的项链交给幽暗城皇家区的希尔瓦娜斯·风行者。"
+        },
+        {
+          "quest_id": 9621,
+          "name": "部落的特使",
+          "raw_name": "Envoy to the Horde",
+          "required_level": 15,
+          "quest_level": 21,
+          "required_races": 512,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            9328
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 9626,
+          "objective_text": "到提瑞斯法林地去，将洛瑟玛·塞隆的信交给被遗忘者的首都幽暗城中的希尔瓦娜斯·风行者。"
+        }
+      ],
+      "instruction": "到希尔瓦娜斯·风行者处交付：幽暗城之旅、部落的特使。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 58.05,
+          "y": 91.79
+        },
+        "entities": [
+          {
+            "id": 10181,
+            "kind": "npc",
+            "name": "希尔瓦娜斯·风行者",
+            "coordinates": [
+              {
+                "x": 58.05,
+                "y": 91.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.05,
+                "y": 91.79
+              },
+              "bounds": {
+                "min_x": 58.05,
+                "max_x": 58.05,
+                "min_y": 91.79,
+                "max_y": 91.79
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        736
+      ],
+      "quests": [
+        {
+          "quest_id": 736,
+          "name": "星，手，心",
+          "raw_name": "The Star, the Hand and the Heart",
+          "required_level": 30,
+          "quest_level": 44,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            728
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 737,
+          "objective_text": "把贝尔杜加的便笺上列出的东西带给幽暗城的看守者贝尔杜加。"
+        }
+      ],
+      "instruction": "到看守者贝尔杜加处接取：星，手，心。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 53.74,
+          "y": 54.46
+        },
+        "entities": [
+          {
+            "id": 2934,
+            "kind": "npc",
+            "name": "看守者贝尔杜加",
+            "coordinates": [
+              {
+                "x": 53.74,
+                "y": 54.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.74,
+                "y": 54.46
+              },
+              "bounds": {
+                "min_x": 53.74,
+                "max_x": 53.74,
+                "min_y": 54.46,
+                "max_y": 54.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "接取",
+      "quest_ids": [
+        1164
+      ],
+      "quests": [
+        {
+          "quest_id": 1164,
+          "name": "科娜塔一家",
+          "raw_name": "To Steal From Thieves",
+          "required_level": 27,
+          "quest_level": 36,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科娜塔、法迪尔和马塞尔的徽记交给幽暗城的吉纳维·卡隆。"
+        }
+      ],
+      "instruction": "到吉纳维·卡隆处接取：科娜塔一家。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 63.83,
+          "y": 49.45
+        },
+        "entities": [
+          {
+            "id": 4486,
+            "kind": "npc",
+            "name": "吉纳维·卡隆",
+            "coordinates": [
+              {
+                "x": 63.83,
+                "y": 49.45
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 63.83,
+                "y": 49.45
+              },
+              "bounds": {
+                "min_x": 63.83,
+                "max_x": 63.83,
+                "min_y": 49.45,
+                "max_y": 49.45
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "接取",
+      "quest_ids": [
+        7814
+      ],
+      "quests": [
+        {
+          "quest_id": 7814,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处接取：捐献丝绸。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "交付",
+      "quest_ids": [
+        7814
+      ],
+      "quests": [
+        {
+          "quest_id": 7814,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处交付：捐献丝绸。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "交付",
+      "quest_ids": [
+        1164
+      ],
+      "quests": [
+        {
+          "quest_id": 1164,
+          "name": "科娜塔一家",
+          "raw_name": "To Steal From Thieves",
+          "required_level": 27,
+          "quest_level": 36,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科娜塔、法迪尔和马塞尔的徽记交给幽暗城的吉纳维·卡隆。"
+        }
+      ],
+      "instruction": "到吉纳维·卡隆处交付：科娜塔一家。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 63.83,
+          "y": 49.45
+        },
+        "entities": [
+          {
+            "id": 4486,
+            "kind": "npc",
+            "name": "吉纳维·卡隆",
+            "coordinates": [
+              {
+                "x": 63.83,
+                "y": 49.45
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 63.83,
+                "y": 49.45
+              },
+              "bounds": {
+                "min_x": 63.83,
+                "max_x": 63.83,
+                "min_y": 49.45,
+                "max_y": 49.45
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 13,
+      "action": "交付",
+      "quest_ids": [
+        736
+      ],
+      "quests": [
+        {
+          "quest_id": 736,
+          "name": "星，手，心",
+          "raw_name": "The Star, the Hand and the Heart",
+          "required_level": 30,
+          "quest_level": 44,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            728
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 737,
+          "objective_text": "把贝尔杜加的便笺上列出的东西带给幽暗城的看守者贝尔杜加。"
+        }
+      ],
+      "instruction": "到看守者贝尔杜加处交付：星，手，心。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 53.74,
+          "y": 54.46
+        },
+        "entities": [
+          {
+            "id": 2934,
+            "kind": "npc",
+            "name": "看守者贝尔杜加",
+            "coordinates": [
+              {
+                "x": 53.74,
+                "y": 54.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.74,
+                "y": 54.46
+              },
+              "bounds": {
+                "min_x": 53.74,
+                "max_x": 53.74,
+                "min_y": 54.46,
+                "max_y": 54.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "action": "接取",
+      "quest_ids": [
+        495
+      ],
+      "quests": [
+        {
+          "quest_id": 495,
+          "name": "意志之冠",
+          "raw_name": "The Crown of Will",
+          "required_level": 34,
+          "quest_level": 39,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 518,
+          "objective_text": "到希尔斯布莱德丘陵去，向塔伦米尔的梅里萨拉报到。"
+        }
+      ],
+      "instruction": "到沙琳德拉处接取：意志之冠。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 57.63,
+          "y": 93.8
+        },
+        "entities": [
+          {
+            "id": 2227,
+            "kind": "npc",
+            "name": "沙琳德拉",
+            "coordinates": [
+              {
+                "x": 57.63,
+                "y": 93.8
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.63,
+                "y": 93.8
+              },
+              "bounds": {
+                "min_x": 57.63,
+                "max_x": 57.63,
+                "min_y": 93.8,
+                "max_y": 93.8
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 15,
+      "action": "接取",
+      "quest_ids": [
+        232
+      ],
+      "quests": [
+        {
+          "quest_id": 232,
+          "name": "金格的货物",
+          "raw_name": "Errand for Apothecary Zinge",
+          "required_level": 38,
+          "quest_level": 45,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 238,
+          "objective_text": "把订货单交给幽暗城的奥雷萨多·卢卡。"
+        }
+      ],
+      "instruction": "到药剂师金格处接取：金格的货物。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 50.14,
+          "y": 67.97
+        },
+        "entities": [
+          {
+            "id": 5204,
+            "kind": "npc",
+            "name": "药剂师金格",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 67.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 67.97
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 67.97,
+                "max_y": 67.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "action": "接取",
+      "quest_ids": [
+        7817
+      ],
+      "quests": [
+        {
+          "quest_id": 7817,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处接取：捐献魔纹布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 17,
+      "action": "交付",
+      "quest_ids": [
+        7817
+      ],
+      "quests": [
+        {
+          "quest_id": 7817,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处交付：捐献魔纹布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 18,
+      "action": "交付",
+      "quest_ids": [
+        232
+      ],
+      "quests": [
+        {
+          "quest_id": 232,
+          "name": "金格的货物",
+          "raw_name": "Errand for Apothecary Zinge",
+          "required_level": 38,
+          "quest_level": 45,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 238,
+          "objective_text": "把订货单交给幽暗城的奥雷萨多·卢卡。"
+        }
+      ],
+      "instruction": "到奥雷萨多·卢卡处交付：金格的货物。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 58.61,
+          "y": 54.68
+        },
+        "entities": [
+          {
+            "id": 7683,
+            "kind": "npc",
+            "name": "奥雷萨多·卢卡",
+            "coordinates": [
+              {
+                "x": 58.61,
+                "y": 54.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.61,
+                "y": 54.68
+              },
+              "bounds": {
+                "min_x": 58.61,
+                "max_x": 58.61,
+                "min_y": 54.68,
+                "max_y": 54.68
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 19,
+      "action": "交付",
+      "quest_ids": [
+        864
+      ],
+      "quests": [
+        {
+          "quest_id": 864,
+          "name": "向药剂师金格回报",
+          "raw_name": "Return to Apothecary Zinge",
+          "required_level": 38,
+          "quest_level": 46,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            654
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把实验工具包带给幽暗城的药剂师金格。"
+        }
+      ],
+      "instruction": "到药剂师金格处交付：向药剂师金格回报。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 50.14,
+          "y": 67.97
+        },
+        "entities": [
+          {
+            "id": 5204,
+            "kind": "npc",
+            "name": "药剂师金格",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 67.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 67.97
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 67.97,
+                "max_y": 67.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 20,
+      "action": "接取",
+      "quest_ids": [
+        238
+      ],
+      "quests": [
+        {
+          "quest_id": 238,
+          "name": "金格的货物",
+          "raw_name": "Errand for Apothecary Zinge",
+          "required_level": 38,
+          "quest_level": 45,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            232
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 243,
+          "objective_text": "把采样工具包交给幽暗城的药剂师金格。"
+        }
+      ],
+      "instruction": "到奥雷萨多·卢卡处接取：金格的货物。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 58.61,
+          "y": 54.68
+        },
+        "entities": [
+          {
+            "id": 7683,
+            "kind": "npc",
+            "name": "奥雷萨多·卢卡",
+            "coordinates": [
+              {
+                "x": 58.61,
+                "y": 54.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.61,
+                "y": 54.68
+              },
+              "bounds": {
+                "min_x": 58.61,
+                "max_x": 58.61,
+                "min_y": 54.68,
+                "max_y": 54.68
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 21,
+      "action": "交付",
+      "quest_ids": [
+        238
+      ],
+      "quests": [
+        {
+          "quest_id": 238,
+          "name": "金格的货物",
+          "raw_name": "Errand for Apothecary Zinge",
+          "required_level": 38,
+          "quest_level": 45,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            232
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 243,
+          "objective_text": "把采样工具包交给幽暗城的药剂师金格。"
+        }
+      ],
+      "instruction": "到药剂师金格处交付：金格的货物。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 50.14,
+          "y": 67.97
+        },
+        "entities": [
+          {
+            "id": 5204,
+            "kind": "npc",
+            "name": "药剂师金格",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 67.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 67.97
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 67.97,
+                "max_y": 67.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 22,
+      "action": "接取",
+      "quest_ids": [
+        3568
+      ],
+      "quests": [
+        {
+          "quest_id": 3568,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在艾萨拉的埃达拉斯废墟旁的海潮之池中收集4瓶水，然后回到药剂师科雷那儿。"
+        }
+      ],
+      "instruction": "到药剂师科雷处接取：堕落之水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 48.71,
+          "y": 71.39
+        },
+        "entities": [
+          {
+            "id": 8390,
+            "kind": "npc",
+            "name": "药剂师科雷",
+            "coordinates": [
+              {
+                "x": 48.71,
+                "y": 71.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.71,
+                "y": 71.39
+              },
+              "bounds": {
+                "min_x": 48.71,
+                "max_x": 48.71,
+                "min_y": 71.39,
+                "max_y": 71.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 23,
+      "action": "接取",
+      "quest_ids": [
+        2995
+      ],
+      "quests": [
+        {
+          "quest_id": 2995,
+          "name": "联络中心",
+          "raw_name": "Lines of Communication",
+          "required_level": 42,
+          "quest_level": 47,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "幽暗城的奥兰·斯内克威瑟让你到辛特兰去烧毁高原精灵记录、高原精灵报告和高原精灵信件。"
+        }
+      ],
+      "instruction": "到奥兰·斯内克威瑟处接取：联络中心。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 73.06,
+          "y": 32.85
+        },
+        "entities": [
+          {
+            "id": 7825,
+            "kind": "npc",
+            "name": "奥兰·斯内克威瑟",
+            "coordinates": [
+              {
+                "x": 73.06,
+                "y": 32.85
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 73.06,
+                "y": 32.85
+              },
+              "bounds": {
+                "min_x": 73.06,
+                "max_x": 73.06,
+                "min_y": 32.85,
+                "max_y": 32.85
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 24,
+      "action": "交付",
+      "quest_ids": [
+        2995
+      ],
+      "quests": [
+        {
+          "quest_id": 2995,
+          "name": "联络中心",
+          "raw_name": "Lines of Communication",
+          "required_level": 42,
+          "quest_level": 47,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "幽暗城的奥兰·斯内克威瑟让你到辛特兰去烧毁高原精灵记录、高原精灵报告和高原精灵信件。"
+        }
+      ],
+      "instruction": "到奥兰·斯内克威瑟处交付：联络中心。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 73.06,
+          "y": 32.85
+        },
+        "entities": [
+          {
+            "id": 7825,
+            "kind": "npc",
+            "name": "奥兰·斯内克威瑟",
+            "coordinates": [
+              {
+                "x": 73.06,
+                "y": 32.85
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 73.06,
+                "y": 32.85
+              },
+              "bounds": {
+                "min_x": 73.06,
+                "max_x": 73.06,
+                "min_y": 32.85,
+                "max_y": 32.85
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 25,
+      "action": "交付",
+      "quest_ids": [
+        3568
+      ],
+      "quests": [
+        {
+          "quest_id": 3568,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在艾萨拉的埃达拉斯废墟旁的海潮之池中收集4瓶水，然后回到药剂师科雷那儿。"
+        }
+      ],
+      "instruction": "到药剂师科雷处交付：堕落之水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 48.71,
+          "y": 71.39
+        },
+        "entities": [
+          {
+            "id": 8390,
+            "kind": "npc",
+            "name": "药剂师科雷",
+            "coordinates": [
+              {
+                "x": 48.71,
+                "y": 71.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.71,
+                "y": 71.39
+              },
+              "bounds": {
+                "min_x": 48.71,
+                "max_x": 48.71,
+                "min_y": 71.39,
+                "max_y": 71.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "action": "接取",
+      "quest_ids": [
+        3569
+      ],
+      "quests": [
+        {
+          "quest_id": 3569,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            3568
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科雷的药剂交给幽暗城的瑟尔萨·风歌。"
+        }
+      ],
+      "instruction": "到药剂师科雷处接取：堕落之水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 48.71,
+          "y": 71.39
+        },
+        "entities": [
+          {
+            "id": 8390,
+            "kind": "npc",
+            "name": "药剂师科雷",
+            "coordinates": [
+              {
+                "x": 48.71,
+                "y": 71.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.71,
+                "y": 71.39
+              },
+              "bounds": {
+                "min_x": 48.71,
+                "max_x": 48.71,
+                "min_y": 71.39,
+                "max_y": 71.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "action": "交付",
+      "quest_ids": [
+        3569
+      ],
+      "quests": [
+        {
+          "quest_id": 3569,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            3568
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科雷的药剂交给幽暗城的瑟尔萨·风歌。"
+        }
+      ],
+      "instruction": "到瑟尔萨·风歌处交付：堕落之水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 49.04,
+          "y": 70.8
+        },
+        "entities": [
+          {
+            "id": 8393,
+            "kind": "npc",
+            "name": "瑟尔萨·风歌",
+            "coordinates": [
+              {
+                "x": 49.04,
+                "y": 70.8
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.04,
+                "y": 70.8
+              },
+              "bounds": {
+                "min_x": 49.04,
+                "max_x": 49.04,
+                "min_y": 70.8,
+                "max_y": 70.8
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 28,
+      "action": "接取",
+      "quest_ids": [
+        3570
+      ],
+      "quests": [
+        {
+          "quest_id": 3570,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            3569
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到药剂师科雷处接取：堕落之水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 48.71,
+          "y": 71.39
+        },
+        "entities": [
+          {
+            "id": 8390,
+            "kind": "npc",
+            "name": "药剂师科雷",
+            "coordinates": [
+              {
+                "x": 48.71,
+                "y": 71.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.71,
+                "y": 71.39
+              },
+              "bounds": {
+                "min_x": 48.71,
+                "max_x": 48.71,
+                "min_y": 71.39,
+                "max_y": 71.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 29,
+      "action": "交付",
+      "quest_ids": [
+        3570
+      ],
+      "quests": [
+        {
+          "quest_id": 3570,
+          "name": "堕落之水",
+          "raw_name": "Seeping Corruption",
+          "required_level": 45,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            3569
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到药剂师科雷处交付：堕落之水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 48.71,
+          "y": 71.39
+        },
+        "entities": [
+          {
+            "id": 8390,
+            "kind": "npc",
+            "name": "药剂师科雷",
+            "coordinates": [
+              {
+                "x": 48.71,
+                "y": 71.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.71,
+                "y": 71.39
+              },
+              "bounds": {
+                "min_x": 48.71,
+                "max_x": 48.71,
+                "min_y": 71.39,
+                "max_y": 71.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 30,
+      "action": "接取",
+      "quest_ids": [
+        4293,
+        4294
+      ],
+      "quests": [
+        {
+          "quest_id": 4293,
+          "name": "软泥怪的样本...",
+          "raw_name": "A Sample of Slime...",
+          "required_level": 48,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            4661
+          ],
+          "next_quest": null,
+          "objective_text": "从费伍德的软泥怪身上收集费伍德软泥怪样本，然后使用幽暗城的化学家弗雷身旁的测试设备来检测你所收集的样本中哪一份被腐化的程度最深。给化学家弗雷带去5个被腐化的费伍德样本。"
+        },
+        {
+          "quest_id": 4294,
+          "name": "一大堆软泥怪",
+          "raw_name": "... and a Batch of Ooze",
+          "required_level": 48,
+          "quest_level": 56,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            4561
+          ],
+          "next_quest": null,
+          "objective_text": "从安戈洛尔环形山那里任何泥浆怪身上收集安戈洛泥浆怪样本。使用幽暗城的化学家弗雷身旁的测试仪器来检验你所采集到的样本的纯度。把5份纯净的安戈洛样本送到化学家弗雷那里去。"
+        }
+      ],
+      "instruction": "到化学家弗雷处接取：软泥怪的样本...、一大堆软泥怪。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.45,
+          "y": 73.35
+        },
+        "entities": [
+          {
+            "id": 10136,
+            "kind": "npc",
+            "name": "化学家弗雷",
+            "coordinates": [
+              {
+                "x": 47.45,
+                "y": 73.35
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.45,
+                "y": 73.35
+              },
+              "bounds": {
+                "min_x": 47.45,
+                "max_x": 47.45,
+                "min_y": 73.35,
+                "max_y": 73.35
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 31,
+      "action": "接取",
+      "quest_ids": [
+        5049
+      ],
+      "quests": [
+        {
+          "quest_id": 5049,
+          "name": "杰雷米亚的忧伤",
+          "raw_name": "The Jeremiah Blues",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            5023
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5050,
+          "objective_text": "在幽暗城找到杰雷米亚·派森并查明他是否就是你要找的杰雷米亚·费尔斯通。如果他是的话，那么他可能会想要拿到詹妮丝·费尔斯通寄给他的包裹。"
+        }
+      ],
+      "instruction": "到皇家管理人巴哈乌斯处接取：杰雷米亚的忧伤。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 69.79,
+          "y": 43.16
+        },
+        "entities": [
+          {
+            "id": 10781,
+            "kind": "npc",
+            "name": "皇家管理人巴哈乌斯",
+            "coordinates": [
+              {
+                "x": 69.79,
+                "y": 43.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 69.79,
+                "y": 43.16
+              },
+              "bounds": {
+                "min_x": 69.79,
+                "max_x": 69.79,
+                "min_y": 43.16,
+                "max_y": 43.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 32,
+      "action": "接取",
+      "quest_ids": [
+        3784
+      ],
+      "quests": [
+        {
+          "quest_id": 3784,
+          "name": "协助大德鲁伊",
+          "raw_name": "Assisting Arch Druid Runetotem",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3761,
+          "objective_text": "与雷霆崖的大德鲁伊哈缪尔·符文图腾谈一谈。"
+        }
+      ],
+      "instruction": "到旅店老板诺曼处接取：协助大德鲁伊。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 67.74,
+          "y": 37.89
+        },
+        "entities": [
+          {
+            "id": 6741,
+            "kind": "npc",
+            "name": "旅店老板诺曼",
+            "coordinates": [
+              {
+                "x": 67.74,
+                "y": 37.89
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 67.74,
+                "y": 37.89
+              },
+              "bounds": {
+                "min_x": 67.74,
+                "max_x": 67.74,
+                "min_y": 37.89,
+                "max_y": 37.89
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 33,
+      "action": "交付",
+      "quest_ids": [
+        5049
+      ],
+      "quests": [
+        {
+          "quest_id": 5049,
+          "name": "杰雷米亚的忧伤",
+          "raw_name": "The Jeremiah Blues",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            5023
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5050,
+          "objective_text": "在幽暗城找到杰雷米亚·派森并查明他是否就是你要找的杰雷米亚·费尔斯通。如果他是的话，那么他可能会想要拿到詹妮丝·费尔斯通寄给他的包裹。"
+        }
+      ],
+      "instruction": "到杰雷米亚·派森处交付：杰雷米亚的忧伤。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 67.6,
+          "y": 44.16
+        },
+        "entities": [
+          {
+            "id": 8403,
+            "kind": "npc",
+            "name": "杰雷米亚·派森",
+            "coordinates": [
+              {
+                "x": 67.6,
+                "y": 44.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 67.6,
+                "y": 44.16
+              },
+              "bounds": {
+                "min_x": 67.6,
+                "max_x": 67.6,
+                "min_y": 44.16,
+                "max_y": 44.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 34,
+      "action": "交付",
+      "quest_ids": [
+        4293,
+        4294
+      ],
+      "quests": [
+        {
+          "quest_id": 4293,
+          "name": "软泥怪的样本...",
+          "raw_name": "A Sample of Slime...",
+          "required_level": 48,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            4661
+          ],
+          "next_quest": null,
+          "objective_text": "从费伍德的软泥怪身上收集费伍德软泥怪样本，然后使用幽暗城的化学家弗雷身旁的测试设备来检测你所收集的样本中哪一份被腐化的程度最深。给化学家弗雷带去5个被腐化的费伍德样本。"
+        },
+        {
+          "quest_id": 4294,
+          "name": "一大堆软泥怪",
+          "raw_name": "... and a Batch of Ooze",
+          "required_level": 48,
+          "quest_level": 56,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            4561
+          ],
+          "next_quest": null,
+          "objective_text": "从安戈洛尔环形山那里任何泥浆怪身上收集安戈洛泥浆怪样本。使用幽暗城的化学家弗雷身旁的测试仪器来检验你所采集到的样本的纯度。把5份纯净的安戈洛样本送到化学家弗雷那里去。"
+        }
+      ],
+      "instruction": "到化学家弗雷处交付：软泥怪的样本...、一大堆软泥怪。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 47.45,
+          "y": 73.35
+        },
+        "entities": [
+          {
+            "id": 10136,
+            "kind": "npc",
+            "name": "化学家弗雷",
+            "coordinates": [
+              {
+                "x": 47.45,
+                "y": 73.35
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.45,
+                "y": 73.35
+              },
+              "bounds": {
+                "min_x": 47.45,
+                "max_x": 47.45,
+                "min_y": 73.35,
+                "max_y": 73.35
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 35,
+      "action": "接取",
+      "quest_ids": [
+        4642
+      ],
+      "quests": [
+        {
+          "quest_id": 4642,
+          "name": "融合软泥怪",
+          "raw_name": "Melding of Influences",
+          "required_level": 48,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [
+            4293,
+            4294
+          ],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把一块融合的软泥怪样本交给幽暗城的化学家弗雷。"
+        }
+      ],
+      "instruction": "到化学家弗雷处接取：融合软泥怪。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.45,
+          "y": 73.35
+        },
+        "entities": [
+          {
+            "id": 10136,
+            "kind": "npc",
+            "name": "化学家弗雷",
+            "coordinates": [
+              {
+                "x": 47.45,
+                "y": 73.35
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.45,
+                "y": 73.35
+              },
+              "bounds": {
+                "min_x": 47.45,
+                "max_x": 47.45,
+                "min_y": 73.35,
+                "max_y": 73.35
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 36,
+      "action": "接取",
+      "quest_ids": [
+        7818
+      ],
+      "quests": [
+        {
+          "quest_id": 7818,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            7813,
+            7814,
+            7817
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处接取：捐献符文布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 37,
+      "action": "交付",
+      "quest_ids": [
+        7818
+      ],
+      "quests": [
+        {
+          "quest_id": 7818,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [
+            7813,
+            7814,
+            7817
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到莱斯顿·法斯雷处交付：捐献符文布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.66,
+          "y": 29.23
+        },
+        "entities": [
+          {
+            "id": 14729,
+            "kind": "npc",
+            "name": "莱斯顿·法斯雷",
+            "coordinates": [
+              {
+                "x": 71.66,
+                "y": 29.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.66,
+                "y": 29.23
+              },
+              "bounds": {
+                "min_x": 71.66,
+                "max_x": 71.66,
+                "min_y": 29.23,
+                "max_y": 29.23
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 38,
+      "action": "交付",
+      "quest_ids": [
+        4642
+      ],
+      "quests": [
+        {
+          "quest_id": 4642,
+          "name": "融合软泥怪",
+          "raw_name": "Melding of Influences",
+          "required_level": 48,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [
+            4293,
+            4294
+          ],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把一块融合的软泥怪样本交给幽暗城的化学家弗雷。"
+        }
+      ],
+      "instruction": "到化学家弗雷处交付：融合软泥怪。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 47.45,
+          "y": 73.35
+        },
+        "entities": [
+          {
+            "id": 10136,
+            "kind": "npc",
+            "name": "化学家弗雷",
+            "coordinates": [
+              {
+                "x": 47.45,
+                "y": 73.35
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.45,
+                "y": 73.35
+              },
+              "bounds": {
+                "min_x": 47.45,
+                "max_x": 47.45,
+                "min_y": 73.35,
+                "max_y": 73.35
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 39,
+      "action": "接取",
+      "quest_ids": [
+        5961
+      ],
+      "quests": [
+        {
+          "quest_id": 5961,
+          "name": "女妖之王的勇士",
+          "raw_name": "The Champion of the Banshee Queen",
+          "required_level": 54,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与东瘟疫之地的纳萨诺斯·凋零者谈一谈。据说他居住在玛瑞斯农场。"
+        }
+      ],
+      "instruction": "到希尔瓦娜斯·风行者处接取：女妖之王的勇士。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 58.05,
+          "y": 91.79
+        },
+        "entities": [
+          {
+            "id": 10181,
+            "kind": "npc",
+            "name": "希尔瓦娜斯·风行者",
+            "coordinates": [
+              {
+                "x": 58.05,
+                "y": 91.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.05,
+                "y": 91.79
+              },
+              "bounds": {
+                "min_x": 58.05,
+                "max_x": 58.05,
+                "min_y": 91.79,
+                "max_y": 91.79
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 40,
+      "action": "接取",
+      "quest_ids": [
+        1004
+      ],
+      "quests": [
+        {
+          "quest_id": 1004,
+          "name": "新的边疆",
+          "raw_name": "The New Frontier",
+          "required_level": 54,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1497,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1123,
+          "objective_text": "与雷霆崖长者高地的大德鲁伊哈缪尔·符文图腾谈一谈关于议会号召部落成员探索卡利姆多大陆的事情。"
+        }
+      ],
+      "instruction": "到预言者巴萨扎德处接取：新的边疆。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 68.64,
+          "y": 48.05
+        },
+        "entities": [
+          {
+            "id": 10879,
+            "kind": "npc",
+            "name": "预言者巴萨扎德",
+            "coordinates": [
+              {
+                "x": 68.64,
+                "y": 48.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 68.64,
+                "y": 48.05
+              },
+              "bounds": {
+                "min_x": 68.64,
+                "max_x": 68.64,
+                "min_y": 48.05,
+                "max_y": 48.05
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 232,
+      "name": "金格的货物",
+      "raw_name": "Errand for Apothecary Zinge",
+      "required_level": 38,
+      "quest_level": 45,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 238,
+      "objective_text": "把订货单交给幽暗城的奥雷萨多·卢卡。"
+    },
+    {
+      "quest_id": 238,
+      "name": "金格的货物",
+      "raw_name": "Errand for Apothecary Zinge",
+      "required_level": 38,
+      "quest_level": 45,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        232
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 243,
+      "objective_text": "把采样工具包交给幽暗城的药剂师金格。"
+    },
+    {
+      "quest_id": 357,
+      "name": "巫妖的身份",
+      "raw_name": "The Lich's Identity",
+      "required_level": 5,
+      "quest_level": 8,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        405
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 366,
+      "objective_text": "把巫妖的法术书带给幽暗城的比索·埃斯沙德。"
+    },
+    {
+      "quest_id": 495,
+      "name": "意志之冠",
+      "raw_name": "The Crown of Will",
+      "required_level": 34,
+      "quest_level": 39,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 518,
+      "objective_text": "到希尔斯布莱德丘陵去，向塔伦米尔的梅里萨拉报到。"
+    },
+    {
+      "quest_id": 736,
+      "name": "星，手，心",
+      "raw_name": "The Star, the Hand and the Heart",
+      "required_level": 30,
+      "quest_level": 44,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        728
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 737,
+      "objective_text": "把贝尔杜加的便笺上列出的东西带给幽暗城的看守者贝尔杜加。"
+    },
+    {
+      "quest_id": 864,
+      "name": "向药剂师金格回报",
+      "raw_name": "Return to Apothecary Zinge",
+      "required_level": 38,
+      "quest_level": 46,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        654
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把实验工具包带给幽暗城的药剂师金格。"
+    },
+    {
+      "quest_id": 1004,
+      "name": "新的边疆",
+      "raw_name": "The New Frontier",
+      "required_level": 54,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1123,
+      "objective_text": "与雷霆崖长者高地的大德鲁伊哈缪尔·符文图腾谈一谈关于议会号召部落成员探索卡利姆多大陆的事情。"
+    },
+    {
+      "quest_id": 1164,
+      "name": "科娜塔一家",
+      "raw_name": "To Steal From Thieves",
+      "required_level": 27,
+      "quest_level": 36,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将科娜塔、法迪尔和马塞尔的徽记交给幽暗城的吉纳维·卡隆。"
+    },
+    {
+      "quest_id": 1358,
+      "name": "给赫布瑞姆的样本",
+      "raw_name": "Sample for Helbrim",
+      "required_level": 10,
+      "quest_level": 15,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        1359
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把一箱蜘蛛毒带给贫瘠之地的药剂师赫布瑞姆。"
+    },
+    {
+      "quest_id": 1359,
+      "name": "给金格的货物",
+      "raw_name": "Zinge's Delivery",
+      "required_level": 10,
+      "quest_level": 15,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        3221
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1358,
+      "objective_text": "将狼心样本交给幽暗城的药剂师金格。"
+    },
+    {
+      "quest_id": 2995,
+      "name": "联络中心",
+      "raw_name": "Lines of Communication",
+      "required_level": 42,
+      "quest_level": 47,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "幽暗城的奥兰·斯内克威瑟让你到辛特兰去烧毁高原精灵记录、高原精灵报告和高原精灵信件。"
+    },
+    {
+      "quest_id": 3568,
+      "name": "堕落之水",
+      "raw_name": "Seeping Corruption",
+      "required_level": 45,
+      "quest_level": 52,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在艾萨拉的埃达拉斯废墟旁的海潮之池中收集4瓶水，然后回到药剂师科雷那儿。"
+    },
+    {
+      "quest_id": 3569,
+      "name": "堕落之水",
+      "raw_name": "Seeping Corruption",
+      "required_level": 45,
+      "quest_level": 52,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        3568
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将科雷的药剂交给幽暗城的瑟尔萨·风歌。"
+    },
+    {
+      "quest_id": 3570,
+      "name": "堕落之水",
+      "raw_name": "Seeping Corruption",
+      "required_level": 45,
+      "quest_level": 52,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        3569
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 3784,
+      "name": "协助大德鲁伊",
+      "raw_name": "Assisting Arch Druid Runetotem",
+      "required_level": 47,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 3761,
+      "objective_text": "与雷霆崖的大德鲁伊哈缪尔·符文图腾谈一谈。"
+    },
+    {
+      "quest_id": 4293,
+      "name": "软泥怪的样本...",
+      "raw_name": "A Sample of Slime...",
+      "required_level": 48,
+      "quest_level": 52,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [
+        4661
+      ],
+      "next_quest": null,
+      "objective_text": "从费伍德的软泥怪身上收集费伍德软泥怪样本，然后使用幽暗城的化学家弗雷身旁的测试设备来检测你所收集的样本中哪一份被腐化的程度最深。给化学家弗雷带去5个被腐化的费伍德样本。"
+    },
+    {
+      "quest_id": 4294,
+      "name": "一大堆软泥怪",
+      "raw_name": "... and a Batch of Ooze",
+      "required_level": 48,
+      "quest_level": 56,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [
+        4561
+      ],
+      "next_quest": null,
+      "objective_text": "从安戈洛尔环形山那里任何泥浆怪身上收集安戈洛泥浆怪样本。使用幽暗城的化学家弗雷身旁的测试仪器来检验你所采集到的样本的纯度。把5份纯净的安戈洛样本送到化学家弗雷那里去。"
+    },
+    {
+      "quest_id": 4642,
+      "name": "融合软泥怪",
+      "raw_name": "Melding of Influences",
+      "required_level": 48,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [
+        4293,
+        4294
+      ],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把一块融合的软泥怪样本交给幽暗城的化学家弗雷。"
+    },
+    {
+      "quest_id": 5049,
+      "name": "杰雷米亚的忧伤",
+      "raw_name": "The Jeremiah Blues",
+      "required_level": 50,
+      "quest_level": 52,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        5023
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5050,
+      "objective_text": "在幽暗城找到杰雷米亚·派森并查明他是否就是你要找的杰雷米亚·费尔斯通。如果他是的话，那么他可能会想要拿到詹妮丝·费尔斯通寄给他的包裹。"
+    },
+    {
+      "quest_id": 5961,
+      "name": "女妖之王的勇士",
+      "raw_name": "The Champion of the Banshee Queen",
+      "required_level": 54,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "与东瘟疫之地的纳萨诺斯·凋零者谈一谈。据说他居住在玛瑞斯农场。"
+    },
+    {
+      "quest_id": 7813,
+      "name": "捐献毛料",
+      "raw_name": "A Donation of Wool",
+      "required_level": 12,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7814,
+      "name": "捐献丝绸",
+      "raw_name": "A Donation of Silk",
+      "required_level": 26,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7817,
+      "name": "捐献魔纹布",
+      "raw_name": "A Donation of Mageweave",
+      "required_level": 40,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7818,
+      "name": "捐献符文布",
+      "raw_name": "A Donation of Runecloth",
+      "required_level": 50,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        7813,
+        7814,
+        7817
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 9180,
+      "name": "幽暗城之旅",
+      "raw_name": "Journey to Undercity",
+      "required_level": 15,
+      "quest_level": 15,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        9175
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将女王的项链交给幽暗城皇家区的希尔瓦娜斯·风行者。"
+    },
+    {
+      "quest_id": 9621,
+      "name": "部落的特使",
+      "raw_name": "Envoy to the Horde",
+      "required_level": 15,
+      "quest_level": 21,
+      "required_races": 512,
+      "required_classes": null,
+      "zone_or_sort": 1497,
+      "pre_single": [
+        9328
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 9626,
+      "objective_text": "到提瑞斯法林地去，将洛瑟玛·塞隆的信交给被遗忘者的首都幽暗城中的希尔瓦娜斯·风行者。"
+    }
+  ],
+  "fivebox_observations": {
+    "232": {
+      "status": "not_classified"
+    },
+    "238": {
+      "status": "not_classified"
+    },
+    "357": {
+      "status": "not_classified"
+    },
+    "495": {
+      "status": "not_classified"
+    },
+    "736": {
+      "status": "not_classified"
+    },
+    "864": {
+      "status": "not_classified"
+    },
+    "1004": {
+      "status": "not_classified"
+    },
+    "1164": {
+      "status": "not_classified"
+    },
+    "1358": {
+      "status": "not_classified"
+    },
+    "1359": {
+      "status": "not_classified"
+    },
+    "2995": {
+      "status": "not_classified"
+    },
+    "3568": {
+      "status": "not_classified"
+    },
+    "3569": {
+      "status": "not_classified"
+    },
+    "3570": {
+      "status": "not_classified"
+    },
+    "3784": {
+      "status": "not_classified"
+    },
+    "4293": {
+      "status": "not_classified"
+    },
+    "4294": {
+      "status": "not_classified"
+    },
+    "4642": {
+      "status": "not_classified"
+    },
+    "5049": {
+      "status": "not_classified"
+    },
+    "5961": {
+      "status": "not_classified"
+    },
+    "7813": {
+      "status": "not_classified"
+    },
+    "7814": {
+      "status": "not_classified"
+    },
+    "7817": {
+      "status": "not_classified"
+    },
+    "7818": {
+      "status": "not_classified"
+    },
+    "9180": {
+      "status": "not_classified"
+    },
+    "9621": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 26,
+    "step_count": 40,
+    "min_level": 5,
+    "max_level": 54
+  }
+}

@@ -1,0 +1,7390 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-405-candidate",
+  "title": "凄凉之地（Desolace）坐标导航候选版",
+  "output_basename": "zone-405",
+  "zone": "凄凉之地",
+  "zone_en": "Desolace",
+  "map_area_id": 405,
+  "quest_zone_or_sort": 405,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "玛乌林·碎骨周边",
+      "steps": [
+        1,
+        2
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "Shadowstalker Scalp来源：怨怒巡影者周边",
+      "steps": [
+        3
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "玛乌林·碎骨周边",
+      "steps": [
+        4,
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "Oracle Crystal来源：滑刃智者周边",
+      "steps": [
+        6
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "玛乌林·碎骨周边",
+      "steps": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "F",
+      "title": "阿佐尔·奥达蒙特周边",
+      "steps": [
+        16
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "G",
+      "title": "鲁恩·蛮鬃周边",
+      "steps": [
+        17
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "H",
+      "title": "Kodo Bone来源：Kodo Bones周边",
+      "steps": [
+        18,
+        19
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "I",
+      "title": "Sceptre of Light来源：火刃先知周边",
+      "steps": [
+        20,
+        21
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "J",
+      "title": "Rackmore's Chest周边",
+      "steps": [
+        22,
+        23
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "K",
+      "title": "比布里·弗斯巴克周边",
+      "steps": [
+        24,
+        25,
+        26
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "L",
+      "title": "瓦鲁格周边",
+      "steps": [
+        27
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "M",
+      "title": "智者乌泰克周边",
+      "steps": [
+        28,
+        29
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "N",
+      "title": "费古尔·双刃周边",
+      "steps": [
+        30,
+        31
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "O",
+      "title": "阿佐尔·奥达蒙特周边",
+      "steps": [
+        32
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "P",
+      "title": "Centaur Ear来源：科卡尔半人马周边",
+      "steps": [
+        33
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "Q",
+      "title": "Crudely Dried Meat来源：Sack of Meat周边",
+      "steps": [
+        34
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "R",
+      "title": "Broken Tears来源：吉尔吉斯逐风者周边",
+      "steps": [
+        35,
+        36
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "S",
+      "title": "费古尔·双刃周边",
+      "steps": [
+        37,
+        38
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "T",
+      "title": "阿佐尔·奥达蒙特周边",
+      "steps": [
+        39
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "U",
+      "title": "智者乌泰克周边",
+      "steps": [
+        40
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "V",
+      "title": "瓦鲁格周边",
+      "steps": [
+        41,
+        42
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "W",
+      "title": "智者乌泰克周边",
+      "steps": [
+        43,
+        44
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "X",
+      "title": "瓦鲁格周边",
+      "steps": [
+        45,
+        46
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "Y",
+      "title": "Khan Shaka's Head来源：沙卡可汗周边",
+      "steps": [
+        47,
+        48
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "Z",
+      "title": "瓦鲁格周边",
+      "steps": [
+        49,
+        50
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "27",
+      "title": "智者乌泰克周边",
+      "steps": [
+        51,
+        52
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "28",
+      "title": "瓦鲁格周边",
+      "steps": [
+        53,
+        54,
+        55
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "29",
+      "title": "泰迦·慧鬃周边",
+      "steps": [
+        56,
+        57
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "30",
+      "title": "Soft-shelled Clam Meat来源：深海巨人周边",
+      "steps": [
+        58
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "31",
+      "title": "纳塔卡·长角周边",
+      "steps": [
+        59,
+        60
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "32",
+      "title": "泰迦·慧鬃周边",
+      "steps": [
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "交付",
+      "quest_ids": [
+        1480
+      ],
+      "quests": [
+        {
+          "quest_id": 1480,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1481,
+          "objective_text": "把恶魔之皮拿给凄凉之地的玛乌林·碎骨看看。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处交付：堕落者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        1481
+      ],
+      "quests": [
+        {
+          "quest_id": 1481,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1480
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1482,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一张巡影者的头皮。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处接取：堕落者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "完成目标",
+      "quest_ids": [
+        1481
+      ],
+      "quests": [
+        {
+          "quest_id": 1481,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1480
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1482,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一张巡影者的头皮。"
+        }
+      ],
+      "instruction": "在Shadowstalker Scalp来源：怨怒巡影者周边完成：堕落者。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 76.48,
+          "y": 21.26
+        },
+        "entities": [
+          {
+            "id": 4674,
+            "kind": "npc",
+            "name": "Shadowstalker Scalp来源：怨怒巡影者",
+            "coordinates": [
+              {
+                "x": 79.26,
+                "y": 21.25
+              },
+              {
+                "x": 75.65,
+                "y": 26.62
+              },
+              {
+                "x": 77.58,
+                "y": 24.69
+              },
+              {
+                "x": 76.1,
+                "y": 26.66
+              },
+              {
+                "x": 76.68,
+                "y": 27.91
+              },
+              {
+                "x": 76.04,
+                "y": 15.73
+              },
+              {
+                "x": 76.47,
+                "y": 23.63
+              },
+              {
+                "x": 76.49,
+                "y": 23.87
+              },
+              {
+                "x": 77.0,
+                "y": 18.05
+              },
+              {
+                "x": 75.33,
+                "y": 21.26
+              },
+              {
+                "x": 79.27,
+                "y": 15.85
+              },
+              {
+                "x": 70.11,
+                "y": 15.58
+              },
+              {
+                "x": 79.37,
+                "y": 16.22
+              },
+              {
+                "x": 72.65,
+                "y": 13.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 76.48,
+                "y": 21.26
+              },
+              "bounds": {
+                "min_x": 70.11,
+                "max_x": 79.37,
+                "min_y": 13.23,
+                "max_y": 27.91
+              },
+              "spawn_count": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "交付",
+      "quest_ids": [
+        1481
+      ],
+      "quests": [
+        {
+          "quest_id": 1481,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1480
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1482,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一张巡影者的头皮。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处交付：堕落者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        1482
+      ],
+      "quests": [
+        {
+          "quest_id": 1482,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1481
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一块神谕水晶。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处接取：堕落者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "完成目标",
+      "quest_ids": [
+        1482
+      ],
+      "quests": [
+        {
+          "quest_id": 1482,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1481
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一块神谕水晶。"
+        }
+      ],
+      "instruction": "在Oracle Crystal来源：滑刃智者周边完成：堕落者。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 31.57,
+          "y": 10.15
+        },
+        "entities": [
+          {
+            "id": 4718,
+            "kind": "npc",
+            "name": "Oracle Crystal来源：滑刃智者",
+            "coordinates": [
+              {
+                "x": 27.69,
+                "y": 7.92
+              },
+              {
+                "x": 28.58,
+                "y": 6.61
+              },
+              {
+                "x": 31.57,
+                "y": 15.6
+              },
+              {
+                "x": 32.97,
+                "y": 22.12
+              },
+              {
+                "x": 33.89,
+                "y": 10.15
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 31.57,
+                "y": 10.15
+              },
+              "bounds": {
+                "min_x": 27.69,
+                "max_x": 33.89,
+                "min_y": 6.61,
+                "max_y": 22.12
+              },
+              "spawn_count": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        1482
+      ],
+      "quests": [
+        {
+          "quest_id": 1482,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1481
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给凄凉之地的玛乌林·碎骨带回一块神谕水晶。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处交付：堕落者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        1484
+      ],
+      "quests": [
+        {
+          "quest_id": 1484,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1482
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与凄凉之地的塔卡塔·钢刃谈一谈。"
+        }
+      ],
+      "instruction": "到玛乌林·碎骨处接取：堕落者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 52.25,
+          "y": 53.44
+        },
+        "entities": [
+          {
+            "id": 4498,
+            "kind": "npc",
+            "name": "玛乌林·碎骨",
+            "coordinates": [
+              {
+                "x": 52.25,
+                "y": 53.44
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.25,
+                "y": 53.44
+              },
+              "bounds": {
+                "min_x": 52.25,
+                "max_x": 52.25,
+                "min_y": 53.44,
+                "max_y": 53.44
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        1484
+      ],
+      "quests": [
+        {
+          "quest_id": 1484,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1482
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与凄凉之地的塔卡塔·钢刃谈一谈。"
+        }
+      ],
+      "instruction": "到塔卡塔·钢刃处交付：堕落者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 52.57,
+          "y": 54.39
+        },
+        "entities": [
+          {
+            "id": 5641,
+            "kind": "npc",
+            "name": "塔卡塔·钢刃",
+            "coordinates": [
+              {
+                "x": 52.57,
+                "y": 54.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.57,
+                "y": 54.39
+              },
+              "bounds": {
+                "min_x": 52.57,
+                "max_x": 52.57,
+                "min_y": 54.39,
+                "max_y": 54.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "接取",
+      "quest_ids": [
+        1488
+      ],
+      "quests": [
+        {
+          "quest_id": 1488,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 40,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1484
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀掉魔王阿兹雷索克和祖格卡，然后向凄凉之地的塔卡塔·钢刃复命。"
+        }
+      ],
+      "instruction": "到塔卡塔·钢刃处接取：堕落者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 52.57,
+          "y": 54.39
+        },
+        "entities": [
+          {
+            "id": 5641,
+            "kind": "npc",
+            "name": "塔卡塔·钢刃",
+            "coordinates": [
+              {
+                "x": 52.57,
+                "y": 54.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.57,
+                "y": 54.39
+              },
+              "bounds": {
+                "min_x": 52.57,
+                "max_x": 52.57,
+                "min_y": 54.39,
+                "max_y": 54.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "完成目标",
+      "quest_ids": [
+        1488
+      ],
+      "quests": [
+        {
+          "quest_id": 1488,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 40,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1484
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀掉魔王阿兹雷索克和祖格卡，然后向凄凉之地的塔卡塔·钢刃复命。"
+        }
+      ],
+      "instruction": "在魔王阿兹雷索克、祖格卡周边完成：堕落者。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 56.43,
+          "y": 76.75
+        },
+        "entities": [
+          {
+            "id": 5760,
+            "kind": "npc",
+            "name": "魔王阿兹雷索克",
+            "coordinates": [
+              {
+                "x": 56.95,
+                "y": 75.74
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.95,
+                "y": 75.74
+              },
+              "bounds": {
+                "min_x": 56.95,
+                "max_x": 56.95,
+                "min_y": 75.74,
+                "max_y": 75.74
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 5771,
+            "kind": "npc",
+            "name": "祖格卡",
+            "coordinates": [
+              {
+                "x": 55.91,
+                "y": 77.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.91,
+                "y": 77.76
+              },
+              "bounds": {
+                "min_x": 55.91,
+                "max_x": 55.91,
+                "min_y": 77.76,
+                "max_y": 77.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "交付",
+      "quest_ids": [
+        1488
+      ],
+      "quests": [
+        {
+          "quest_id": 1488,
+          "name": "堕落者",
+          "raw_name": "The Corrupter",
+          "required_level": 25,
+          "quest_level": 40,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1484
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀掉魔王阿兹雷索克和祖格卡，然后向凄凉之地的塔卡塔·钢刃复命。"
+        }
+      ],
+      "instruction": "到塔卡塔·钢刃处交付：堕落者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 52.57,
+          "y": 54.39
+        },
+        "entities": [
+          {
+            "id": 5641,
+            "kind": "npc",
+            "name": "塔卡塔·钢刃",
+            "coordinates": [
+              {
+                "x": 52.57,
+                "y": 54.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.57,
+                "y": 54.39
+              },
+              "bounds": {
+                "min_x": 52.57,
+                "max_x": 52.57,
+                "min_y": 54.39,
+                "max_y": 54.39
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 13,
+      "action": "接取",
+      "quest_ids": [
+        1365,
+        1367,
+        1368
+      ],
+      "quests": [
+        {
+          "quest_id": 1365,
+          "name": "戴兹帕可汗",
+          "raw_name": "Khan Dez'hepah",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把戴兹帕可汗的徽记交给凄凉之地的费古尔·双刃。"
+        },
+        {
+          "quest_id": 1367,
+          "name": "玛格拉姆部族",
+          "raw_name": "Magram Alliance",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1369,
+          "objective_text": "和玛格拉姆部族建立良好的关系，然后和瓦鲁格谈一谈。"
+        },
+        {
+          "quest_id": 1368,
+          "name": "吉尔吉斯部族",
+          "raw_name": "Gelkis Alliance",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1370,
+          "objective_text": "和吉尔吉斯部族建立良好的关系，然后和智者乌泰克谈一谈。"
+        }
+      ],
+      "instruction": "到费古尔·双刃、古尔达·蛮鬃处接取：戴兹帕可汗、玛格拉姆部族、吉尔吉斯部族。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.239999999999995,
+          "y": 59.625
+        },
+        "entities": [
+          {
+            "id": 5395,
+            "kind": "npc",
+            "name": "费古尔·双刃",
+            "coordinates": [
+              {
+                "x": 56.19,
+                "y": 59.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.19,
+                "y": 59.57
+              },
+              "bounds": {
+                "min_x": 56.19,
+                "max_x": 56.19,
+                "min_y": 59.57,
+                "max_y": 59.57
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 5412,
+            "kind": "npc",
+            "name": "古尔达·蛮鬃",
+            "coordinates": [
+              {
+                "x": 56.29,
+                "y": 59.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.29,
+                "y": 59.68
+              },
+              "bounds": {
+                "min_x": 56.29,
+                "max_x": 56.29,
+                "min_y": 59.68,
+                "max_y": 59.68
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "action": "接取",
+      "quest_ids": [
+        5561
+      ],
+      "quests": [
+        {
+          "quest_id": 5561,
+          "name": "诱捕科多兽",
+          "raw_name": "Kodo Roundup",
+          "required_level": 30,
+          "quest_level": 34,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科多兽诱引器和5头被驯服的科多兽交给瑟卡布斯库的营地中的斯米德·瑟卡布斯库。"
+        }
+      ],
+      "instruction": "到斯米德·瑟卡布斯库处接取：诱捕科多兽。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 60.86,
+          "y": 61.86
+        },
+        "entities": [
+          {
+            "id": 11596,
+            "kind": "npc",
+            "name": "斯米德·瑟卡布斯库",
+            "coordinates": [
+              {
+                "x": 60.86,
+                "y": 61.86
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.86,
+                "y": 61.86
+              },
+              "bounds": {
+                "min_x": 60.86,
+                "max_x": 60.86,
+                "min_y": 61.86,
+                "max_y": 61.86
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 15,
+      "action": "接取",
+      "quest_ids": [
+        5501
+      ],
+      "quests": [
+        {
+          "quest_id": 5501,
+          "name": "集骨者",
+          "raw_name": "Bone Collector",
+          "required_level": 29,
+          "quest_level": 32,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "从科多墓地收集10根科多兽骨，把它们交给兽人小屋的比布里·弗斯巴克。"
+        }
+      ],
+      "instruction": "到比布里·弗斯巴克处接取：集骨者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 62.33,
+          "y": 38.99
+        },
+        "entities": [
+          {
+            "id": 11438,
+            "kind": "npc",
+            "name": "比布里·弗斯巴克",
+            "coordinates": [
+              {
+                "x": 62.33,
+                "y": 38.99
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 62.33,
+                "y": 38.99
+              },
+              "bounds": {
+                "min_x": 62.33,
+                "max_x": 62.33,
+                "min_y": 38.99,
+                "max_y": 38.99
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "action": "接取",
+      "quest_ids": [
+        5741,
+        6161
+      ],
+      "quests": [
+        {
+          "quest_id": 5741,
+          "name": "圣光节杖",
+          "raw_name": "Sceptre of Light",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6027,
+          "objective_text": "拿到圣光节杖，并将它交给艾瑟雷索塔里的阿佐尔·奥达蒙特。"
+        },
+        {
+          "quest_id": 6161,
+          "name": "拉克摩尔的财宝！",
+          "raw_name": "Claim Rackmore's Treasure!",
+          "required_level": 30,
+          "quest_level": 36,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到拉克摩尔的银钥匙和金钥匙。找到并打开拉克摩尔的箱子。"
+        }
+      ],
+      "instruction": "到阿佐尔·奥达蒙特、Rackmore's Log处接取：圣光节杖、拉克摩尔的财宝！。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 37.475,
+          "y": 28.785
+        },
+        "entities": [
+          {
+            "id": 11863,
+            "kind": "npc",
+            "name": "阿佐尔·奥达蒙特",
+            "coordinates": [
+              {
+                "x": 38.88,
+                "y": 27.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.88,
+                "y": 27.16
+              },
+              "bounds": {
+                "min_x": 38.88,
+                "max_x": 38.88,
+                "min_y": 27.16,
+                "max_y": 27.16
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 177787,
+            "kind": "object",
+            "name": "Rackmore's Log",
+            "coordinates": [
+              {
+                "x": 36.07,
+                "y": 30.41
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.07,
+                "y": 30.41
+              },
+              "bounds": {
+                "min_x": 36.07,
+                "max_x": 36.07,
+                "min_y": 30.41,
+                "max_y": 30.41
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 17,
+      "action": "接取",
+      "quest_ids": [
+        5763
+      ],
+      "quests": [
+        {
+          "quest_id": 5763,
+          "name": "荆棘谷狩猎",
+          "raw_name": "Hunting in Stranglethorn",
+          "required_level": 28,
+          "quest_level": 31,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将鲁恩的科多兽角送到荆棘谷的赫米特·奈辛瓦里二世那里。"
+        }
+      ],
+      "instruction": "到鲁恩·蛮鬃处接取：荆棘谷狩猎。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 25.05,
+          "y": 72.27
+        },
+        "entities": [
+          {
+            "id": 11877,
+            "kind": "npc",
+            "name": "鲁恩·蛮鬃",
+            "coordinates": [
+              {
+                "x": 25.05,
+                "y": 72.27
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.05,
+                "y": 72.27
+              },
+              "bounds": {
+                "min_x": 25.05,
+                "max_x": 25.05,
+                "min_y": 72.27,
+                "max_y": 72.27
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 18,
+      "action": "完成目标",
+      "quest_ids": [
+        5501
+      ],
+      "quests": [
+        {
+          "quest_id": 5501,
+          "name": "集骨者",
+          "raw_name": "Bone Collector",
+          "required_level": 29,
+          "quest_level": 32,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "从科多墓地收集10根科多兽骨，把它们交给兽人小屋的比布里·弗斯巴克。"
+        }
+      ],
+      "instruction": "在Kodo Bone来源：Kodo Bones、Kodo Bone来源：Kodo Bones周边完成：集骨者。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 51.83,
+          "y": 58.82
+        },
+        "entities": [
+          {
+            "id": 176751,
+            "kind": "object",
+            "name": "Kodo Bone来源：Kodo Bones",
+            "coordinates": [
+              {
+                "x": 52.86,
+                "y": 57.07
+              },
+              {
+                "x": 46.18,
+                "y": 61.34
+              },
+              {
+                "x": 54.41,
+                "y": 60.38
+              },
+              {
+                "x": 54.2,
+                "y": 58.94
+              },
+              {
+                "x": 53.26,
+                "y": 61.24
+              },
+              {
+                "x": 52.18,
+                "y": 58.57
+              },
+              {
+                "x": 54.44,
+                "y": 63.83
+              },
+              {
+                "x": 50.79,
+                "y": 58.7
+              },
+              {
+                "x": 48.97,
+                "y": 60.09
+              },
+              {
+                "x": 48.89,
+                "y": 58.81
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.52,
+                "y": 59.52
+              },
+              "bounds": {
+                "min_x": 46.18,
+                "max_x": 54.44,
+                "min_y": 57.07,
+                "max_y": 63.83
+              },
+              "spawn_count": 10
+            }
+          },
+          {
+            "id": 176752,
+            "kind": "object",
+            "name": "Kodo Bone来源：Kodo Bones",
+            "coordinates": [
+              {
+                "x": 47.41,
+                "y": 57.67
+              },
+              {
+                "x": 53.89,
+                "y": 58.12
+              },
+              {
+                "x": 54.38,
+                "y": 62.78
+              },
+              {
+                "x": 49.68,
+                "y": 57.08
+              },
+              {
+                "x": 51.14,
+                "y": 60.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.14,
+                "y": 58.12
+              },
+              "bounds": {
+                "min_x": 47.41,
+                "max_x": 54.38,
+                "min_y": 57.08,
+                "max_y": 62.78
+              },
+              "spawn_count": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 19,
+      "action": "完成目标",
+      "quest_ids": [
+        1365
+      ],
+      "quests": [
+        {
+          "quest_id": 1365,
+          "name": "戴兹帕可汗",
+          "raw_name": "Khan Dez'hepah",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把戴兹帕可汗的徽记交给凄凉之地的费古尔·双刃。"
+        }
+      ],
+      "instruction": "在Khan Dez'hepah's Head来源：戴兹帕可汗周边完成：戴兹帕可汗。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 73.38,
+          "y": 41.62
+        },
+        "entities": [
+          {
+            "id": 5600,
+            "kind": "npc",
+            "name": "Khan Dez'hepah's Head来源：戴兹帕可汗",
+            "coordinates": [
+              {
+                "x": 73.38,
+                "y": 41.62
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 73.38,
+                "y": 41.62
+              },
+              "bounds": {
+                "min_x": 73.38,
+                "max_x": 73.38,
+                "min_y": 41.62,
+                "max_y": 41.62
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 20,
+      "action": "完成目标",
+      "quest_ids": [
+        5741
+      ],
+      "quests": [
+        {
+          "quest_id": 5741,
+          "name": "圣光节杖",
+          "raw_name": "Sceptre of Light",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6027,
+          "objective_text": "拿到圣光节杖，并将它交给艾瑟雷索塔里的阿佐尔·奥达蒙特。"
+        }
+      ],
+      "instruction": "在Sceptre of Light来源：火刃先知周边完成：圣光节杖。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 55.17,
+          "y": 30.15
+        },
+        "entities": [
+          {
+            "id": 13019,
+            "kind": "npc",
+            "name": "Sceptre of Light来源：火刃先知",
+            "coordinates": [
+              {
+                "x": 55.17,
+                "y": 30.15
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.17,
+                "y": 30.15
+              },
+              "bounds": {
+                "min_x": 55.17,
+                "max_x": 55.17,
+                "min_y": 30.15,
+                "max_y": 30.15
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 21,
+      "action": "完成目标",
+      "quest_ids": [
+        6161
+      ],
+      "quests": [
+        {
+          "quest_id": 6161,
+          "name": "拉克摩尔的财宝！",
+          "raw_name": "Claim Rackmore's Treasure!",
+          "required_level": 30,
+          "quest_level": 36,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到拉克摩尔的银钥匙和金钥匙。找到并打开拉克摩尔的箱子。"
+        }
+      ],
+      "instruction": "在Rackmore's Silver Key来源：枯钳龙虾人、Rackmore's Silver Key来源：枯钳巨螯龙虾人、Rackmore's Golden Key来源：滑刃纳迦、Rackmore's Golden Key来源：滑刃巫师等10个目标周边完成：拉克摩尔的财宝！。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 30.91,
+          "y": 18.11
+        },
+        "entities": [
+          {
+            "id": 11562,
+            "kind": "npc",
+            "name": "Rackmore's Silver Key来源：枯钳龙虾人",
+            "coordinates": [
+              {
+                "x": 31.58,
+                "y": 31.17
+              },
+              {
+                "x": 33.77,
+                "y": 34.74
+              },
+              {
+                "x": 35.13,
+                "y": 34.3
+              },
+              {
+                "x": 34.71,
+                "y": 33.45
+              },
+              {
+                "x": 33.39,
+                "y": 30.1
+              },
+              {
+                "x": 31.4,
+                "y": 27.86
+              },
+              {
+                "x": 34.88,
+                "y": 31.41
+              },
+              {
+                "x": 26.56,
+                "y": 76.56
+              },
+              {
+                "x": 18.78,
+                "y": 82.43
+              },
+              {
+                "x": 19.1,
+                "y": 77.55
+              },
+              {
+                "x": 18.44,
+                "y": 77.44
+              },
+              {
+                "x": 24.7,
+                "y": 78.72
+              },
+              {
+                "x": 31.34,
+                "y": 35.76
+              },
+              {
+                "x": 17.98,
+                "y": 75.4
+              },
+              {
+                "x": 24.08,
+                "y": 81.87
+              },
+              {
+                "x": 23.26,
+                "y": 80.34
+              },
+              {
+                "x": 22.93,
+                "y": 84.11
+              },
+              {
+                "x": 20.41,
+                "y": 69.94
+              },
+              {
+                "x": 19.58,
+                "y": 72.16
+              },
+              {
+                "x": 18.52,
+                "y": 79.05
+              },
+              {
+                "x": 23.37,
+                "y": 82.5
+              },
+              {
+                "x": 24.01,
+                "y": 79.61
+              },
+              {
+                "x": 25.03,
+                "y": 80.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 24.08,
+                "y": 76.56
+              },
+              "bounds": {
+                "min_x": 17.98,
+                "max_x": 35.13,
+                "min_y": 27.86,
+                "max_y": 84.11
+              },
+              "spawn_count": 23
+            }
+          },
+          {
+            "id": 11563,
+            "kind": "npc",
+            "name": "Rackmore's Silver Key来源：枯钳巨螯龙虾人",
+            "coordinates": [
+              {
+                "x": 33.67,
+                "y": 28.99
+              },
+              {
+                "x": 31.47,
+                "y": 33.49
+              },
+              {
+                "x": 32.26,
+                "y": 34.61
+              },
+              {
+                "x": 33.01,
+                "y": 35.48
+              },
+              {
+                "x": 33.02,
+                "y": 31.1
+              },
+              {
+                "x": 32.3,
+                "y": 29.7
+              },
+              {
+                "x": 32.04,
+                "y": 27.92
+              },
+              {
+                "x": 23.21,
+                "y": 77.96
+              },
+              {
+                "x": 25.61,
+                "y": 81.72
+              },
+              {
+                "x": 30.82,
+                "y": 34.75
+              },
+              {
+                "x": 17.5,
+                "y": 79.53
+              },
+              {
+                "x": 21.82,
+                "y": 82.04
+              },
+              {
+                "x": 24.95,
+                "y": 79.33
+              },
+              {
+                "x": 20.99,
+                "y": 77.6
+              },
+              {
+                "x": 21.17,
+                "y": 83.7
+              },
+              {
+                "x": 17.67,
+                "y": 72.03
+              },
+              {
+                "x": 22.09,
+                "y": 84.55
+              },
+              {
+                "x": 21.89,
+                "y": 78.97
+              },
+              {
+                "x": 20.5,
+                "y": 77.74
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 24.95,
+                "y": 77.6
+              },
+              "bounds": {
+                "min_x": 17.5,
+                "max_x": 33.67,
+                "min_y": 27.92,
+                "max_y": 84.55
+              },
+              "spawn_count": 19
+            }
+          },
+          {
+            "id": 4711,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃纳迦",
+            "coordinates": [
+              {
+                "x": 36.72,
+                "y": 21.31
+              },
+              {
+                "x": 38.13,
+                "y": 21.25
+              },
+              {
+                "x": 35.16,
+                "y": 27.79
+              },
+              {
+                "x": 35.79,
+                "y": 23.8
+              },
+              {
+                "x": 35.29,
+                "y": 26.63
+              },
+              {
+                "x": 35.97,
+                "y": 27.06
+              },
+              {
+                "x": 38.46,
+                "y": 23.68
+              },
+              {
+                "x": 36.48,
+                "y": 20.4
+              },
+              {
+                "x": 36.85,
+                "y": 24.4
+              },
+              {
+                "x": 38.88,
+                "y": 21.4
+              },
+              {
+                "x": 36.69,
+                "y": 24.24
+              },
+              {
+                "x": 36.25,
+                "y": 23.14
+              },
+              {
+                "x": 41.78,
+                "y": 20.03
+              },
+              {
+                "x": 41.61,
+                "y": 18.78
+              },
+              {
+                "x": 35.4,
+                "y": 22.01
+              },
+              {
+                "x": 37.0,
+                "y": 21.91
+              },
+              {
+                "x": 32.74,
+                "y": 23.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.69,
+                "y": 23.14
+              },
+              "bounds": {
+                "min_x": 32.74,
+                "max_x": 41.78,
+                "min_y": 18.78,
+                "max_y": 27.79
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 4712,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃巫师",
+            "coordinates": [
+              {
+                "x": 38.97,
+                "y": 20.12
+              },
+              {
+                "x": 27.77,
+                "y": 6.7
+              },
+              {
+                "x": 31.42,
+                "y": 22.13
+              },
+              {
+                "x": 32.94,
+                "y": 23.32
+              },
+              {
+                "x": 35.91,
+                "y": 28.84
+              },
+              {
+                "x": 36.05,
+                "y": 24.78
+              },
+              {
+                "x": 31.57,
+                "y": 17.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.94,
+                "y": 22.13
+              },
+              "bounds": {
+                "min_x": 27.77,
+                "max_x": 38.97,
+                "min_y": 6.7,
+                "max_y": 28.84
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 4713,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃战士",
+            "coordinates": [
+              {
+                "x": 27.86,
+                "y": 5.75
+              },
+              {
+                "x": 36.93,
+                "y": 26.25
+              },
+              {
+                "x": 34.48,
+                "y": 21.38
+              },
+              {
+                "x": 34.48,
+                "y": 25.64
+              },
+              {
+                "x": 34.59,
+                "y": 22.4
+              },
+              {
+                "x": 34.55,
+                "y": 23.24
+              },
+              {
+                "x": 32.12,
+                "y": 21.47
+              },
+              {
+                "x": 32.22,
+                "y": 19.85
+              },
+              {
+                "x": 32.26,
+                "y": 24.37
+              },
+              {
+                "x": 33.85,
+                "y": 13.62
+              },
+              {
+                "x": 33.04,
+                "y": 15.03
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 33.85,
+                "y": 21.47
+              },
+              "bounds": {
+                "min_x": 27.86,
+                "max_x": 36.93,
+                "min_y": 5.75,
+                "max_y": 26.25
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 4714,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃侍从",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 6.77
+              },
+              {
+                "x": 29.96,
+                "y": 12.2
+              },
+              {
+                "x": 33.75,
+                "y": 22.38
+              },
+              {
+                "x": 31.74,
+                "y": 23.07
+              },
+              {
+                "x": 32.18,
+                "y": 23.38
+              },
+              {
+                "x": 32.53,
+                "y": 22.47
+              },
+              {
+                "x": 31.41,
+                "y": 17.67
+              },
+              {
+                "x": 27.03,
+                "y": 10.25
+              },
+              {
+                "x": 30.87,
+                "y": 19.2
+              },
+              {
+                "x": 28.51,
+                "y": 7.77
+              },
+              {
+                "x": 32.2,
+                "y": 6.6
+              },
+              {
+                "x": 29.93,
+                "y": 16.55
+              },
+              {
+                "x": 29.2,
+                "y": 13.31
+              },
+              {
+                "x": 34.43,
+                "y": 14.81
+              },
+              {
+                "x": 31.97,
+                "y": 18.97
+              },
+              {
+                "x": 33.03,
+                "y": 9.44
+              },
+              {
+                "x": 34.58,
+                "y": 17.63
+              },
+              {
+                "x": 32.9,
+                "y": 5.99
+              },
+              {
+                "x": 33.89,
+                "y": 7.72
+              },
+              {
+                "x": 32.74,
+                "y": 14.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.08,
+                "y": 14.75
+              },
+              "bounds": {
+                "min_x": 27.03,
+                "max_x": 34.58,
+                "min_y": 5.99,
+                "max_y": 23.38
+              },
+              "spawn_count": 20
+            }
+          },
+          {
+            "id": 4715,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃刺尾纳迦",
+            "coordinates": [
+              {
+                "x": 28.55,
+                "y": 10.16
+              },
+              {
+                "x": 30.24,
+                "y": 8.83
+              },
+              {
+                "x": 30.75,
+                "y": 8.93
+              },
+              {
+                "x": 29.2,
+                "y": 7.94
+              },
+              {
+                "x": 30.65,
+                "y": 15.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.24,
+                "y": 8.93
+              },
+              "bounds": {
+                "min_x": 28.55,
+                "max_x": 30.75,
+                "min_y": 7.94,
+                "max_y": 15.78
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 4716,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃潮行者",
+            "coordinates": [
+              {
+                "x": 28.52,
+                "y": 9.01
+              },
+              {
+                "x": 28.58,
+                "y": 11.06
+              },
+              {
+                "x": 29.99,
+                "y": 7.8
+              },
+              {
+                "x": 29.94,
+                "y": 15.94
+              },
+              {
+                "x": 33.23,
+                "y": 10.51
+              },
+              {
+                "x": 33.99,
+                "y": 8.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 29.96,
+                "y": 9.76
+              },
+              "bounds": {
+                "min_x": 28.52,
+                "max_x": 33.99,
+                "min_y": 7.8,
+                "max_y": 15.94
+              },
+              "spawn_count": 6
+            }
+          },
+          {
+            "id": 4718,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃智者",
+            "coordinates": [
+              {
+                "x": 27.69,
+                "y": 7.92
+              },
+              {
+                "x": 28.58,
+                "y": 6.61
+              },
+              {
+                "x": 31.57,
+                "y": 15.6
+              },
+              {
+                "x": 32.97,
+                "y": 22.12
+              },
+              {
+                "x": 33.89,
+                "y": 10.15
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 31.57,
+                "y": 10.15
+              },
+              "bounds": {
+                "min_x": 27.69,
+                "max_x": 33.89,
+                "min_y": 6.61,
+                "max_y": 22.12
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 4719,
+            "kind": "npc",
+            "name": "Rackmore's Golden Key来源：滑刃海巫",
+            "coordinates": [
+              {
+                "x": 30.8,
+                "y": 7.92
+              },
+              {
+                "x": 27.79,
+                "y": 10.14
+              },
+              {
+                "x": 27.73,
+                "y": 9.09
+              },
+              {
+                "x": 29.96,
+                "y": 11.15
+              },
+              {
+                "x": 30.7,
+                "y": 10.98
+              },
+              {
+                "x": 27.66,
+                "y": 12.58
+              },
+              {
+                "x": 29.15,
+                "y": 9.03
+              },
+              {
+                "x": 30.93,
+                "y": 9.77
+              },
+              {
+                "x": 29.16,
+                "y": 11.34
+              },
+              {
+                "x": 30.54,
+                "y": 16.4
+              },
+              {
+                "x": 28.66,
+                "y": 12.5
+              },
+              {
+                "x": 34.53,
+                "y": 9.92
+              },
+              {
+                "x": 34.97,
+                "y": 16.77
+              },
+              {
+                "x": 34.36,
+                "y": 8.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.25,
+                "y": 10.56
+              },
+              "bounds": {
+                "min_x": 27.66,
+                "max_x": 34.97,
+                "min_y": 7.92,
+                "max_y": 16.77
+              },
+              "spawn_count": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 22,
+      "action": "交付",
+      "quest_ids": [
+        6161
+      ],
+      "quests": [
+        {
+          "quest_id": 6161,
+          "name": "拉克摩尔的财宝！",
+          "raw_name": "Claim Rackmore's Treasure!",
+          "required_level": 30,
+          "quest_level": 36,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到拉克摩尔的银钥匙和金钥匙。找到并打开拉克摩尔的箱子。"
+        }
+      ],
+      "instruction": "到Rackmore's Chest处交付：拉克摩尔的财宝！。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 30.0,
+          "y": 8.71
+        },
+        "entities": [
+          {
+            "id": 177786,
+            "kind": "object",
+            "name": "Rackmore's Chest",
+            "coordinates": [
+              {
+                "x": 30.0,
+                "y": 8.71
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.0,
+                "y": 8.71
+              },
+              "bounds": {
+                "min_x": 30.0,
+                "max_x": 30.0,
+                "min_y": 8.71,
+                "max_y": 8.71
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 23,
+      "action": "交付",
+      "quest_ids": [
+        5741
+      ],
+      "quests": [
+        {
+          "quest_id": 5741,
+          "name": "圣光节杖",
+          "raw_name": "Sceptre of Light",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6027,
+          "objective_text": "拿到圣光节杖，并将它交给艾瑟雷索塔里的阿佐尔·奥达蒙特。"
+        }
+      ],
+      "instruction": "到阿佐尔·奥达蒙特处交付：圣光节杖。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.88,
+          "y": 27.16
+        },
+        "entities": [
+          {
+            "id": 11863,
+            "kind": "npc",
+            "name": "阿佐尔·奥达蒙特",
+            "coordinates": [
+              {
+                "x": 38.88,
+                "y": 27.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.88,
+                "y": 27.16
+              },
+              "bounds": {
+                "min_x": 38.88,
+                "max_x": 38.88,
+                "min_y": 27.16,
+                "max_y": 27.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 24,
+      "action": "交付",
+      "quest_ids": [
+        5501
+      ],
+      "quests": [
+        {
+          "quest_id": 5501,
+          "name": "集骨者",
+          "raw_name": "Bone Collector",
+          "required_level": 29,
+          "quest_level": 32,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "从科多墓地收集10根科多兽骨，把它们交给兽人小屋的比布里·弗斯巴克。"
+        }
+      ],
+      "instruction": "到比布里·弗斯巴克处交付：集骨者。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 62.33,
+          "y": 38.99
+        },
+        "entities": [
+          {
+            "id": 11438,
+            "kind": "npc",
+            "name": "比布里·弗斯巴克",
+            "coordinates": [
+              {
+                "x": 62.33,
+                "y": 38.99
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 62.33,
+                "y": 38.99
+              },
+              "bounds": {
+                "min_x": 62.33,
+                "max_x": 62.33,
+                "min_y": 38.99,
+                "max_y": 38.99
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 25,
+      "action": "交付",
+      "quest_ids": [
+        1362,
+        1365
+      ],
+      "quests": [
+        {
+          "quest_id": 1362,
+          "name": "凄凉之地的科卡尔部族",
+          "raw_name": "The Kolkar of Desolace",
+          "required_level": 30,
+          "quest_level": 32,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "和凄凉之地幽灵岗哨的费古尔·双刃谈一谈。"
+        },
+        {
+          "quest_id": 1365,
+          "name": "戴兹帕可汗",
+          "raw_name": "Khan Dez'hepah",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把戴兹帕可汗的徽记交给凄凉之地的费古尔·双刃。"
+        }
+      ],
+      "instruction": "到费古尔·双刃处交付：凄凉之地的科卡尔部族、戴兹帕可汗。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.19,
+          "y": 59.57
+        },
+        "entities": [
+          {
+            "id": 5395,
+            "kind": "npc",
+            "name": "费古尔·双刃",
+            "coordinates": [
+              {
+                "x": 56.19,
+                "y": 59.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.19,
+                "y": 59.57
+              },
+              "bounds": {
+                "min_x": 56.19,
+                "max_x": 56.19,
+                "min_y": 59.57,
+                "max_y": 59.57
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "action": "交付",
+      "quest_ids": [
+        5561
+      ],
+      "quests": [
+        {
+          "quest_id": 5561,
+          "name": "诱捕科多兽",
+          "raw_name": "Kodo Roundup",
+          "required_level": 30,
+          "quest_level": 34,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将科多兽诱引器和5头被驯服的科多兽交给瑟卡布斯库的营地中的斯米德·瑟卡布斯库。"
+        }
+      ],
+      "instruction": "到斯米德·瑟卡布斯库处交付：诱捕科多兽。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 60.86,
+          "y": 61.86
+        },
+        "entities": [
+          {
+            "id": 11596,
+            "kind": "npc",
+            "name": "斯米德·瑟卡布斯库",
+            "coordinates": [
+              {
+                "x": 60.86,
+                "y": 61.86
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.86,
+                "y": 61.86
+              },
+              "bounds": {
+                "min_x": 60.86,
+                "max_x": 60.86,
+                "min_y": 61.86,
+                "max_y": 61.86
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "action": "交付",
+      "quest_ids": [
+        1367
+      ],
+      "quests": [
+        {
+          "quest_id": 1367,
+          "name": "玛格拉姆部族",
+          "raw_name": "Magram Alliance",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1369,
+          "objective_text": "和玛格拉姆部族建立良好的关系，然后和瓦鲁格谈一谈。"
+        }
+      ],
+      "instruction": "到瓦鲁格处交付：玛格拉姆部族。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 28,
+      "action": "交付",
+      "quest_ids": [
+        1368
+      ],
+      "quests": [
+        {
+          "quest_id": 1368,
+          "name": "吉尔吉斯部族",
+          "raw_name": "Gelkis Alliance",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1370,
+          "objective_text": "和吉尔吉斯部族建立良好的关系，然后和智者乌泰克谈一谈。"
+        }
+      ],
+      "instruction": "到智者乌泰克处交付：吉尔吉斯部族。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 29,
+      "action": "接取",
+      "quest_ids": [
+        1370
+      ],
+      "quests": [
+        {
+          "quest_id": 1370,
+          "name": "偷取物资",
+          "raw_name": "Stealing Supplies",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1368,
+            1384
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1373,
+          "objective_text": "把6包粗制干肉交给吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处接取：偷取物资。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 30,
+      "action": "接取",
+      "quest_ids": [
+        1366
+      ],
+      "quests": [
+        {
+          "quest_id": 1366,
+          "name": "悬赏半人马",
+          "raw_name": "Centaur Bounty",
+          "required_level": 30,
+          "quest_level": 31,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1365
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集15只半人马的耳朵，把它们交给凄凉之地的费古尔·双刃。"
+        }
+      ],
+      "instruction": "到费古尔·双刃处接取：悬赏半人马。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.19,
+          "y": 59.57
+        },
+        "entities": [
+          {
+            "id": 5395,
+            "kind": "npc",
+            "name": "费古尔·双刃",
+            "coordinates": [
+              {
+                "x": 56.19,
+                "y": 59.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.19,
+                "y": 59.57
+              },
+              "bounds": {
+                "min_x": 56.19,
+                "max_x": 56.19,
+                "min_y": 59.57,
+                "max_y": 59.57
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 31,
+      "action": "接取",
+      "quest_ids": [
+        1369
+      ],
+      "quests": [
+        {
+          "quest_id": 1369,
+          "name": "破碎之泪",
+          "raw_name": "Broken Tears",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1367,
+            1386
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1371,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把3块破碎之泪交给玛格拉姆村庄的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处接取：破碎之泪。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 32,
+      "action": "接取",
+      "quest_ids": [
+        6027
+      ],
+      "quests": [
+        {
+          "quest_id": 6027,
+          "name": "上古之书",
+          "raw_name": "Book of the Ancients",
+          "required_level": 30,
+          "quest_level": 38,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            5741
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "拿到上古之书，将其交给艾瑟雷索塔中的阿佐尔·奥达蒙特。"
+        }
+      ],
+      "instruction": "到阿佐尔·奥达蒙特处接取：上古之书。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 38.88,
+          "y": 27.16
+        },
+        "entities": [
+          {
+            "id": 11863,
+            "kind": "npc",
+            "name": "阿佐尔·奥达蒙特",
+            "coordinates": [
+              {
+                "x": 38.88,
+                "y": 27.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.88,
+                "y": 27.16
+              },
+              "bounds": {
+                "min_x": 38.88,
+                "max_x": 38.88,
+                "min_y": 27.16,
+                "max_y": 27.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 33,
+      "action": "完成目标",
+      "quest_ids": [
+        1366
+      ],
+      "quests": [
+        {
+          "quest_id": 1366,
+          "name": "悬赏半人马",
+          "raw_name": "Centaur Bounty",
+          "required_level": 30,
+          "quest_level": 31,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1365
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集15只半人马的耳朵，把它们交给凄凉之地的费古尔·双刃。"
+        }
+      ],
+      "instruction": "在Centaur Ear来源：科卡尔半人马、Centaur Ear来源：科卡尔斥候、Centaur Ear来源：科卡尔虐待者、Centaur Ear来源：科卡尔逐风者等8个目标周边完成：悬赏半人马。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 70.725,
+          "y": 46.8
+        },
+        "entities": [
+          {
+            "id": 4632,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔半人马",
+            "coordinates": [
+              {
+                "x": 69.23,
+                "y": 51.0
+              },
+              {
+                "x": 68.55,
+                "y": 52.17
+              },
+              {
+                "x": 68.67,
+                "y": 47.94
+              },
+              {
+                "x": 69.35,
+                "y": 46.87
+              },
+              {
+                "x": 68.63,
+                "y": 43.57
+              },
+              {
+                "x": 70.11,
+                "y": 41.16
+              },
+              {
+                "x": 69.35,
+                "y": 42.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 69.23,
+                "y": 46.87
+              },
+              "bounds": {
+                "min_x": 68.55,
+                "max_x": 70.11,
+                "min_y": 41.16,
+                "max_y": 52.17
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 4633,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔斥候",
+            "coordinates": [
+              {
+                "x": 70.12,
+                "y": 49.94
+              },
+              {
+                "x": 70.06,
+                "y": 45.53
+              },
+              {
+                "x": 69.3,
+                "y": 48.95
+              },
+              {
+                "x": 69.39,
+                "y": 44.42
+              },
+              {
+                "x": 68.62,
+                "y": 45.66
+              },
+              {
+                "x": 68.47,
+                "y": 38.82
+              },
+              {
+                "x": 69.3,
+                "y": 40.13
+              },
+              {
+                "x": 68.58,
+                "y": 41.22
+              },
+              {
+                "x": 68.7,
+                "y": 50.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 69.3,
+                "y": 45.53
+              },
+              "bounds": {
+                "min_x": 68.47,
+                "max_x": 70.12,
+                "min_y": 38.82,
+                "max_y": 50.0
+              },
+              "spawn_count": 9
+            }
+          },
+          {
+            "id": 4634,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔虐待者",
+            "coordinates": [
+              {
+                "x": 73.71,
+                "y": 43.1
+              },
+              {
+                "x": 72.15,
+                "y": 42.39
+              },
+              {
+                "x": 71.44,
+                "y": 43.76
+              },
+              {
+                "x": 70.9,
+                "y": 50.62
+              },
+              {
+                "x": 70.92,
+                "y": 46.71
+              },
+              {
+                "x": 74.44,
+                "y": 47.43
+              },
+              {
+                "x": 71.54,
+                "y": 45.46
+              },
+              {
+                "x": 72.26,
+                "y": 44.71
+              },
+              {
+                "x": 72.25,
+                "y": 40.17
+              },
+              {
+                "x": 73.05,
+                "y": 45.74
+              },
+              {
+                "x": 70.75,
+                "y": 43.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 72.15,
+                "y": 44.71
+              },
+              "bounds": {
+                "min_x": 70.75,
+                "max_x": 74.44,
+                "min_y": 40.17,
+                "max_y": 50.62
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 4635,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔逐风者",
+            "coordinates": [
+              {
+                "x": 72.72,
+                "y": 42.37
+              },
+              {
+                "x": 73.8,
+                "y": 46.95
+              },
+              {
+                "x": 73.48,
+                "y": 48.47
+              },
+              {
+                "x": 73.02,
+                "y": 47.9
+              },
+              {
+                "x": 69.6,
+                "y": 40.62
+              },
+              {
+                "x": 70.14,
+                "y": 47.92
+              },
+              {
+                "x": 71.65,
+                "y": 41.91
+              },
+              {
+                "x": 72.9,
+                "y": 40.23
+              },
+              {
+                "x": 70.86,
+                "y": 40.2
+              },
+              {
+                "x": 70.06,
+                "y": 39.31
+              },
+              {
+                "x": 72.36,
+                "y": 46.56
+              },
+              {
+                "x": 74.55,
+                "y": 51.05
+              },
+              {
+                "x": 70.86,
+                "y": 49.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 72.36,
+                "y": 46.56
+              },
+              "bounds": {
+                "min_x": 69.6,
+                "max_x": 74.55,
+                "min_y": 39.31,
+                "max_y": 51.05
+              },
+              "spawn_count": 13
+            }
+          },
+          {
+            "id": 4636,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔队长",
+            "coordinates": [
+              {
+                "x": 73.81,
+                "y": 44.71
+              },
+              {
+                "x": 71.52,
+                "y": 47.97
+              },
+              {
+                "x": 74.4,
+                "y": 46.11
+              },
+              {
+                "x": 74.54,
+                "y": 46.79
+              },
+              {
+                "x": 70.94,
+                "y": 42.03
+              },
+              {
+                "x": 71.54,
+                "y": 41.3
+              },
+              {
+                "x": 72.93,
+                "y": 46.68
+              },
+              {
+                "x": 74.18,
+                "y": 49.1
+              },
+              {
+                "x": 74.26,
+                "y": 49.99
+              },
+              {
+                "x": 74.12,
+                "y": 49.66
+              },
+              {
+                "x": 73.85,
+                "y": 50.54
+              },
+              {
+                "x": 73.07,
+                "y": 43.09
+              },
+              {
+                "x": 70.42,
+                "y": 43.18
+              },
+              {
+                "x": 71.7,
+                "y": 50.58
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 73.44,
+                "y": 46.73
+              },
+              "bounds": {
+                "min_x": 70.42,
+                "max_x": 74.54,
+                "min_y": 41.3,
+                "max_y": 50.58
+              },
+              "spawn_count": 14
+            }
+          },
+          {
+            "id": 4637,
+            "kind": "npc",
+            "name": "Centaur Ear来源：科卡尔摧毁者",
+            "coordinates": [
+              {
+                "x": 73.26,
+                "y": 42.36
+              },
+              {
+                "x": 70.86,
+                "y": 44.29
+              },
+              {
+                "x": 74.7,
+                "y": 48.77
+              },
+              {
+                "x": 73.13,
+                "y": 50.26
+              },
+              {
+                "x": 73.58,
+                "y": 52.11
+              },
+              {
+                "x": 71.64,
+                "y": 49.99
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 73.19,
+                "y": 49.38
+              },
+              "bounds": {
+                "min_x": 70.86,
+                "max_x": 74.7,
+                "min_y": 42.36,
+                "max_y": 52.11
+              },
+              "spawn_count": 6
+            }
+          },
+          {
+            "id": 4638,
+            "kind": "npc",
+            "name": "Centaur Ear来源：玛格拉姆斥候",
+            "coordinates": [
+              {
+                "x": 67.09,
+                "y": 74.5
+              },
+              {
+                "x": 70.13,
+                "y": 69.1
+              },
+              {
+                "x": 66.22,
+                "y": 75.55
+              },
+              {
+                "x": 72.14,
+                "y": 68.92
+              },
+              {
+                "x": 65.59,
+                "y": 70.3
+              },
+              {
+                "x": 73.8,
+                "y": 65.69
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 68.61,
+                "y": 69.7
+              },
+              "bounds": {
+                "min_x": 65.59,
+                "max_x": 73.8,
+                "min_y": 65.69,
+                "max_y": 75.55
+              },
+              "spawn_count": 6
+            }
+          },
+          {
+            "id": 4639,
+            "kind": "npc",
+            "name": "Centaur Ear来源：玛格拉姆前锋",
+            "coordinates": [
+              {
+                "x": 67.86,
+                "y": 70.21
+              },
+              {
+                "x": 65.7,
+                "y": 74.58
+              },
+              {
+                "x": 71.51,
+                "y": 66.95
+              },
+              {
+                "x": 67.08,
+                "y": 69.98
+              },
+              {
+                "x": 66.52,
+                "y": 69.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 67.08,
+                "y": 69.98
+              },
+              "bounds": {
+                "min_x": 65.7,
+                "max_x": 71.51,
+                "min_y": 66.95,
+                "max_y": 74.58
+              },
+              "spawn_count": 5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 34,
+      "action": "完成目标",
+      "quest_ids": [
+        1370
+      ],
+      "quests": [
+        {
+          "quest_id": 1370,
+          "name": "偷取物资",
+          "raw_name": "Stealing Supplies",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1368,
+            1384
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1373,
+          "objective_text": "把6包粗制干肉交给吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "在Crudely Dried Meat来源：Sack of Meat周边完成：偷取物资。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 71.67,
+          "y": 76.35
+        },
+        "entities": [
+          {
+            "id": 22245,
+            "kind": "object",
+            "name": "Crudely Dried Meat来源：Sack of Meat",
+            "coordinates": [
+              {
+                "x": 73.6,
+                "y": 74.26
+              },
+              {
+                "x": 73.67,
+                "y": 72.91
+              },
+              {
+                "x": 74.07,
+                "y": 72.64
+              },
+              {
+                "x": 73.47,
+                "y": 73.81
+              },
+              {
+                "x": 70.9,
+                "y": 75.44
+              },
+              {
+                "x": 69.21,
+                "y": 77.26
+              },
+              {
+                "x": 73.17,
+                "y": 75.08
+              },
+              {
+                "x": 70.0,
+                "y": 78.62
+              },
+              {
+                "x": 72.43,
+                "y": 78.51
+              },
+              {
+                "x": 66.53,
+                "y": 80.54
+              },
+              {
+                "x": 66.41,
+                "y": 81.11
+              },
+              {
+                "x": 65.82,
+                "y": 80.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.67,
+                "y": 76.35
+              },
+              "bounds": {
+                "min_x": 65.82,
+                "max_x": 74.07,
+                "min_y": 72.64,
+                "max_y": 81.11
+              },
+              "spawn_count": 12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 35,
+      "action": "完成目标",
+      "quest_ids": [
+        1369
+      ],
+      "quests": [
+        {
+          "quest_id": 1369,
+          "name": "破碎之泪",
+          "raw_name": "Broken Tears",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1367,
+            1386
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1371,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把3块破碎之泪交给玛格拉姆村庄的瓦鲁格。"
+        }
+      ],
+      "instruction": "在Broken Tears来源：吉尔吉斯逐风者、Broken Tears来源：吉尔吉斯唤地者、Broken Tears来源：Tear of Theradras周边完成：破碎之泪。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 38.5,
+          "y": 90.88
+        },
+        "entities": [
+          {
+            "id": 4649,
+            "kind": "npc",
+            "name": "Broken Tears来源：吉尔吉斯逐风者",
+            "coordinates": [
+              {
+                "x": 40.28,
+                "y": 83.51
+              },
+              {
+                "x": 40.55,
+                "y": 87.69
+              },
+              {
+                "x": 34.4,
+                "y": 85.49
+              },
+              {
+                "x": 37.41,
+                "y": 82.17
+              },
+              {
+                "x": 37.4,
+                "y": 81.38
+              },
+              {
+                "x": 36.66,
+                "y": 79.2
+              },
+              {
+                "x": 36.86,
+                "y": 80.13
+              },
+              {
+                "x": 35.13,
+                "y": 80.3
+              },
+              {
+                "x": 36.06,
+                "y": 82.21
+              },
+              {
+                "x": 35.88,
+                "y": 83.4
+              },
+              {
+                "x": 40.45,
+                "y": 84.48
+              },
+              {
+                "x": 40.39,
+                "y": 85.48
+              },
+              {
+                "x": 38.69,
+                "y": 91.98
+              },
+              {
+                "x": 37.92,
+                "y": 85.34
+              },
+              {
+                "x": 38.42,
+                "y": 95.61
+              },
+              {
+                "x": 36.98,
+                "y": 89.44
+              },
+              {
+                "x": 40.39,
+                "y": 93.05
+              },
+              {
+                "x": 35.83,
+                "y": 90.27
+              },
+              {
+                "x": 39.15,
+                "y": 95.97
+              },
+              {
+                "x": 36.97,
+                "y": 84.64
+              },
+              {
+                "x": 39.23,
+                "y": 94.33
+              },
+              {
+                "x": 34.6,
+                "y": 90.4
+              },
+              {
+                "x": 35.23,
+                "y": 89.93
+              },
+              {
+                "x": 39.32,
+                "y": 93.57
+              },
+              {
+                "x": 36.49,
+                "y": 87.07
+              },
+              {
+                "x": 38.44,
+                "y": 97.09
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 37.41,
+                "y": 86.28
+              },
+              "bounds": {
+                "min_x": 34.4,
+                "max_x": 40.55,
+                "min_y": 79.2,
+                "max_y": 97.09
+              },
+              "spawn_count": 26
+            }
+          },
+          {
+            "id": 4651,
+            "kind": "npc",
+            "name": "Broken Tears来源：吉尔吉斯唤地者",
+            "coordinates": [
+              {
+                "x": 36.43,
+                "y": 82.38
+              },
+              {
+                "x": 36.08,
+                "y": 80.98
+              },
+              {
+                "x": 37.42,
+                "y": 80.95
+              },
+              {
+                "x": 37.9,
+                "y": 95.68
+              },
+              {
+                "x": 40.11,
+                "y": 92.58
+              },
+              {
+                "x": 39.67,
+                "y": 96.33
+              },
+              {
+                "x": 39.13,
+                "y": 87.44
+              },
+              {
+                "x": 38.53,
+                "y": 93.87
+              },
+              {
+                "x": 36.6,
+                "y": 88.54
+              },
+              {
+                "x": 38.71,
+                "y": 96.47
+              },
+              {
+                "x": 40.96,
+                "y": 87.51
+              },
+              {
+                "x": 38.63,
+                "y": 91.44
+              },
+              {
+                "x": 37.55,
+                "y": 90.32
+              },
+              {
+                "x": 38.46,
+                "y": 92.53
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.5,
+                "y": 90.88
+              },
+              "bounds": {
+                "min_x": 36.08,
+                "max_x": 40.96,
+                "min_y": 80.95,
+                "max_y": 96.47
+              },
+              "spawn_count": 14
+            }
+          },
+          {
+            "id": 22246,
+            "kind": "object",
+            "name": "Broken Tears来源：Tear of Theradras",
+            "coordinates": [
+              {
+                "x": 38.54,
+                "y": 92.1
+              },
+              {
+                "x": 39.65,
+                "y": 93.3
+              },
+              {
+                "x": 40.55,
+                "y": 93.68
+              },
+              {
+                "x": 39.9,
+                "y": 95.81
+              },
+              {
+                "x": 40.5,
+                "y": 91.92
+              },
+              {
+                "x": 40.31,
+                "y": 95.04
+              },
+              {
+                "x": 38.53,
+                "y": 93.35
+              },
+              {
+                "x": 39.65,
+                "y": 94.9
+              },
+              {
+                "x": 40.6,
+                "y": 95.92
+              },
+              {
+                "x": 39.31,
+                "y": 93.98
+              },
+              {
+                "x": 39.04,
+                "y": 91.84
+              },
+              {
+                "x": 40.83,
+                "y": 94.75
+              },
+              {
+                "x": 38.55,
+                "y": 90.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.65,
+                "y": 93.68
+              },
+              "bounds": {
+                "min_x": 38.53,
+                "max_x": 40.83,
+                "min_y": 90.92,
+                "max_y": 95.92
+              },
+              "spawn_count": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 36,
+      "action": "交付",
+      "quest_ids": [
+        1370
+      ],
+      "quests": [
+        {
+          "quest_id": 1370,
+          "name": "偷取物资",
+          "raw_name": "Stealing Supplies",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1368,
+            1384
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1373,
+          "objective_text": "把6包粗制干肉交给吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处交付：偷取物资。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 37,
+      "action": "交付",
+      "quest_ids": [
+        1366
+      ],
+      "quests": [
+        {
+          "quest_id": 1366,
+          "name": "悬赏半人马",
+          "raw_name": "Centaur Bounty",
+          "required_level": 30,
+          "quest_level": 31,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1365
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集15只半人马的耳朵，把它们交给凄凉之地的费古尔·双刃。"
+        }
+      ],
+      "instruction": "到费古尔·双刃处交付：悬赏半人马。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.19,
+          "y": 59.57
+        },
+        "entities": [
+          {
+            "id": 5395,
+            "kind": "npc",
+            "name": "费古尔·双刃",
+            "coordinates": [
+              {
+                "x": 56.19,
+                "y": 59.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.19,
+                "y": 59.57
+              },
+              "bounds": {
+                "min_x": 56.19,
+                "max_x": 56.19,
+                "min_y": 59.57,
+                "max_y": 59.57
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 38,
+      "action": "交付",
+      "quest_ids": [
+        1369
+      ],
+      "quests": [
+        {
+          "quest_id": 1369,
+          "name": "破碎之泪",
+          "raw_name": "Broken Tears",
+          "required_level": 30,
+          "quest_level": 33,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1367,
+            1386
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1371,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把3块破碎之泪交给玛格拉姆村庄的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处交付：破碎之泪。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 39,
+      "action": "交付",
+      "quest_ids": [
+        6027
+      ],
+      "quests": [
+        {
+          "quest_id": 6027,
+          "name": "上古之书",
+          "raw_name": "Book of the Ancients",
+          "required_level": 30,
+          "quest_level": 38,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            5741
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "拿到上古之书，将其交给艾瑟雷索塔中的阿佐尔·奥达蒙特。"
+        }
+      ],
+      "instruction": "到阿佐尔·奥达蒙特处交付：上古之书。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.88,
+          "y": 27.16
+        },
+        "entities": [
+          {
+            "id": 11863,
+            "kind": "npc",
+            "name": "阿佐尔·奥达蒙特",
+            "coordinates": [
+              {
+                "x": 38.88,
+                "y": 27.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.88,
+                "y": 27.16
+              },
+              "bounds": {
+                "min_x": 38.88,
+                "max_x": 38.88,
+                "min_y": 27.16,
+                "max_y": 27.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 40,
+      "action": "接取",
+      "quest_ids": [
+        1373
+      ],
+      "quests": [
+        {
+          "quest_id": 1373,
+          "name": "盎格库尔",
+          "raw_name": "Ongeku",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1370
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1374,
+          "objective_text": "继续和吉尔吉斯部族保持良好的关系，并把德莱尼水晶碎片交给凄凉之地吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处接取：盎格库尔。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 41,
+      "action": "接取",
+      "quest_ids": [
+        1371
+      ],
+      "quests": [
+        {
+          "quest_id": 1371,
+          "name": "瓦鲁格的玩具",
+          "raw_name": "Gizmo for Warug",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1369
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，给玛格拉姆村的瓦鲁格找到一个高级假人。"
+        }
+      ],
+      "instruction": "到瓦鲁格处接取：瓦鲁格的玩具。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 42,
+      "action": "交付",
+      "quest_ids": [
+        1371
+      ],
+      "quests": [
+        {
+          "quest_id": 1371,
+          "name": "瓦鲁格的玩具",
+          "raw_name": "Gizmo for Warug",
+          "required_level": 30,
+          "quest_level": 35,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1369
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，给玛格拉姆村的瓦鲁格找到一个高级假人。"
+        }
+      ],
+      "instruction": "到瓦鲁格处交付：瓦鲁格的玩具。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 43,
+      "action": "交付",
+      "quest_ids": [
+        1373
+      ],
+      "quests": [
+        {
+          "quest_id": 1373,
+          "name": "盎格库尔",
+          "raw_name": "Ongeku",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1370
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1374,
+          "objective_text": "继续和吉尔吉斯部族保持良好的关系，并把德莱尼水晶碎片交给凄凉之地吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处交付：盎格库尔。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 44,
+      "action": "接取",
+      "quest_ids": [
+        1374
+      ],
+      "quests": [
+        {
+          "quest_id": 1374,
+          "name": "杰恩可汗",
+          "raw_name": "Khan Jehn",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1373
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1380,
+          "objective_text": "把杰恩可汗的徽记交给凄凉之地吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处接取：杰恩可汗。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 45,
+      "action": "接取",
+      "quest_ids": [
+        1375
+      ],
+      "quests": [
+        {
+          "quest_id": 1375,
+          "name": "沙卡可汗",
+          "raw_name": "Khan Shaka",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1371
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1381,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把沙卡可汗的徽记交给凄凉之地玛格拉姆村的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处接取：沙卡可汗。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 46,
+      "action": "完成目标",
+      "quest_ids": [
+        1374
+      ],
+      "quests": [
+        {
+          "quest_id": 1374,
+          "name": "杰恩可汗",
+          "raw_name": "Khan Jehn",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1373
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1380,
+          "objective_text": "把杰恩可汗的徽记交给凄凉之地吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "在Khan Jehn's Head来源：杰恩可汗周边完成：杰恩可汗。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 65.95,
+          "y": 80.41
+        },
+        "entities": [
+          {
+            "id": 5601,
+            "kind": "npc",
+            "name": "Khan Jehn's Head来源：杰恩可汗",
+            "coordinates": [
+              {
+                "x": 65.95,
+                "y": 80.41
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 65.95,
+                "y": 80.41
+              },
+              "bounds": {
+                "min_x": 65.95,
+                "max_x": 65.95,
+                "min_y": 80.41,
+                "max_y": 80.41
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 47,
+      "action": "完成目标",
+      "quest_ids": [
+        1375
+      ],
+      "quests": [
+        {
+          "quest_id": 1375,
+          "name": "沙卡可汗",
+          "raw_name": "Khan Shaka",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1371
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1381,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把沙卡可汗的徽记交给凄凉之地玛格拉姆村的瓦鲁格。"
+        }
+      ],
+      "instruction": "在Khan Shaka's Head来源：沙卡可汗周边完成：沙卡可汗。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 40.49,
+          "y": 95.49
+        },
+        "entities": [
+          {
+            "id": 5602,
+            "kind": "npc",
+            "name": "Khan Shaka's Head来源：沙卡可汗",
+            "coordinates": [
+              {
+                "x": 40.49,
+                "y": 95.49
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.49,
+                "y": 95.49
+              },
+              "bounds": {
+                "min_x": 40.49,
+                "max_x": 40.49,
+                "min_y": 95.49,
+                "max_y": 95.49
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 48,
+      "action": "交付",
+      "quest_ids": [
+        1374
+      ],
+      "quests": [
+        {
+          "quest_id": 1374,
+          "name": "杰恩可汗",
+          "raw_name": "Khan Jehn",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1373
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1380,
+          "objective_text": "把杰恩可汗的徽记交给凄凉之地吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处交付：杰恩可汗。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 49,
+      "action": "交付",
+      "quest_ids": [
+        1375
+      ],
+      "quests": [
+        {
+          "quest_id": 1375,
+          "name": "沙卡可汗",
+          "raw_name": "Khan Shaka",
+          "required_level": 30,
+          "quest_level": 37,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1371
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1381,
+          "objective_text": "继续和玛格拉姆部族保持良好的关系，把沙卡可汗的徽记交给凄凉之地玛格拉姆村的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处交付：沙卡可汗。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 50,
+      "action": "接取",
+      "quest_ids": [
+        1381
+      ],
+      "quests": [
+        {
+          "quest_id": 1381,
+          "name": "赫鲁萨可汗",
+          "raw_name": "Khan Hratha",
+          "required_level": 30,
+          "quest_level": 42,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1375
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "和玛格拉姆保持良好的关系，把玛洛迪钥匙碎片交给凄凉之地玛格拉姆村的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处接取：赫鲁萨可汗。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 51,
+      "action": "接取",
+      "quest_ids": [
+        1380
+      ],
+      "quests": [
+        {
+          "quest_id": 1380,
+          "name": "赫鲁萨可汗",
+          "raw_name": "Khan Hratha",
+          "required_level": 30,
+          "quest_level": 42,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1374
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "继续和吉尔吉斯部族保持良好的关系，把玛洛迪钥匙碎片交给吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处接取：赫鲁萨可汗。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 52,
+      "action": "交付",
+      "quest_ids": [
+        1380
+      ],
+      "quests": [
+        {
+          "quest_id": 1380,
+          "name": "赫鲁萨可汗",
+          "raw_name": "Khan Hratha",
+          "required_level": 30,
+          "quest_level": 42,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1374
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "继续和吉尔吉斯部族保持良好的关系，把玛洛迪钥匙碎片交给吉尔吉斯村的智者乌泰克。"
+        }
+      ],
+      "instruction": "到智者乌泰克处交付：赫鲁萨可汗。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 36.22,
+          "y": 79.25
+        },
+        "entities": [
+          {
+            "id": 5397,
+            "kind": "npc",
+            "name": "智者乌泰克",
+            "coordinates": [
+              {
+                "x": 36.22,
+                "y": 79.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.22,
+                "y": 79.25
+              },
+              "bounds": {
+                "min_x": 36.22,
+                "max_x": 36.22,
+                "min_y": 79.25,
+                "max_y": 79.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 53,
+      "action": "交付",
+      "quest_ids": [
+        1381
+      ],
+      "quests": [
+        {
+          "quest_id": 1381,
+          "name": "赫鲁萨可汗",
+          "raw_name": "Khan Hratha",
+          "required_level": 30,
+          "quest_level": 42,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            1375
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "和玛格拉姆保持良好的关系，把玛洛迪钥匙碎片交给凄凉之地玛格拉姆村的瓦鲁格。"
+        }
+      ],
+      "instruction": "到瓦鲁格处交付：赫鲁萨可汗。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 74.97,
+          "y": 68.16
+        },
+        "entities": [
+          {
+            "id": 5398,
+            "kind": "npc",
+            "name": "瓦鲁格",
+            "coordinates": [
+              {
+                "x": 74.97,
+                "y": 68.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 74.97,
+                "y": 68.16
+              },
+              "bounds": {
+                "min_x": 74.97,
+                "max_x": 74.97,
+                "min_y": 68.16,
+                "max_y": 68.16
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 54,
+      "action": "接取",
+      "quest_ids": [
+        5386
+      ],
+      "quests": [
+        {
+          "quest_id": 5386,
+          "name": "食鱼度日",
+          "raw_name": "Catch of the Day",
+          "required_level": 32,
+          "quest_level": 37,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            5421
+          ],
+          "next_quest": null,
+          "objective_text": "与葬影村的吉纳泽林谈话，然后将2条血肚鱼交给纳塔卡·长角。"
+        }
+      ],
+      "instruction": "到纳塔卡·长角处接取：食鱼度日。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 55.41,
+          "y": 55.81
+        },
+        "entities": [
+          {
+            "id": 11259,
+            "kind": "npc",
+            "name": "纳塔卡·长角",
+            "coordinates": [
+              {
+                "x": 55.41,
+                "y": 55.81
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.41,
+                "y": 55.81
+              },
+              "bounds": {
+                "min_x": 55.41,
+                "max_x": 55.41,
+                "min_y": 55.81,
+                "max_y": 55.81
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 55,
+      "action": "接取",
+      "quest_ids": [
+        6134
+      ],
+      "quests": [
+        {
+          "quest_id": 6134,
+          "name": "幽灵电浆",
+          "raw_name": "Ghost-o-plasm Round Up",
+          "required_level": 34,
+          "quest_level": 39,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把幽灵磁铁箱和8份幽灵电浆交给凄凉之地的霍恩尼兹。"
+        }
+      ],
+      "instruction": "到霍恩尼兹处接取：幽灵电浆。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.83,
+          "y": 61.83
+        },
+        "entities": [
+          {
+            "id": 6019,
+            "kind": "npc",
+            "name": "霍恩尼兹",
+            "coordinates": [
+              {
+                "x": 47.83,
+                "y": 61.83
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.83,
+                "y": 61.83
+              },
+              "bounds": {
+                "min_x": 47.83,
+                "max_x": 47.83,
+                "min_y": 61.83,
+                "max_y": 61.83
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 56,
+      "action": "接取",
+      "quest_ids": [
+        5381
+      ],
+      "quests": [
+        {
+          "quest_id": 5381,
+          "name": "埃鲁索斯之手",
+          "raw_name": "Hand of Iruxos",
+          "required_level": 32,
+          "quest_level": 38,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5581,
+          "objective_text": "在雷斧堡垒中找到恶魔之盒，把它和恶魔之锄一起交给葬影村的泰迦·慧鬃。"
+        }
+      ],
+      "instruction": "到泰迦·慧鬃处接取：埃鲁索斯之手。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 25.82,
+          "y": 68.21
+        },
+        "entities": [
+          {
+            "id": 11624,
+            "kind": "npc",
+            "name": "泰迦·慧鬃",
+            "coordinates": [
+              {
+                "x": 25.82,
+                "y": 68.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.82,
+                "y": 68.21
+              },
+              "bounds": {
+                "min_x": 25.82,
+                "max_x": 25.82,
+                "min_y": 68.21,
+                "max_y": 68.21
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 57,
+      "action": "接取",
+      "quest_ids": [
+        6142,
+        6143
+      ],
+      "quests": [
+        {
+          "quest_id": 6142,
+          "name": "蚌肉鱼饵",
+          "raw_name": "Clam Bait",
+          "required_level": 31,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到10块软壳蚌肉，把它们交给葬影村的麦拉斯。"
+        },
+        {
+          "quest_id": 6143,
+          "name": "另一种鱼",
+          "raw_name": "Other Fish to Fry",
+          "required_level": 32,
+          "quest_level": 36,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7个滑刃侍从、7个滑刃纳迦，以及5个滑刃巫师，然后与葬影村的杜泽加尔谈谈。"
+        }
+      ],
+      "instruction": "到麦拉斯、杜泽加尔处接取：蚌肉鱼饵、另一种鱼。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 22.98,
+          "y": 72.42
+        },
+        "entities": [
+          {
+            "id": 12031,
+            "kind": "npc",
+            "name": "麦拉斯",
+            "coordinates": [
+              {
+                "x": 22.64,
+                "y": 71.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 22.64,
+                "y": 71.97
+              },
+              "bounds": {
+                "min_x": 22.64,
+                "max_x": 22.64,
+                "min_y": 71.97,
+                "max_y": 71.97
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 12340,
+            "kind": "npc",
+            "name": "杜泽加尔",
+            "coordinates": [
+              {
+                "x": 23.32,
+                "y": 72.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 23.32,
+                "y": 72.87
+              },
+              "bounds": {
+                "min_x": 23.32,
+                "max_x": 23.32,
+                "min_y": 72.87,
+                "max_y": 72.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 58,
+      "action": "完成目标",
+      "quest_ids": [
+        6142,
+        6143
+      ],
+      "quests": [
+        {
+          "quest_id": 6142,
+          "name": "蚌肉鱼饵",
+          "raw_name": "Clam Bait",
+          "required_level": 31,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到10块软壳蚌肉，把它们交给葬影村的麦拉斯。"
+        },
+        {
+          "quest_id": 6143,
+          "name": "另一种鱼",
+          "raw_name": "Other Fish to Fry",
+          "required_level": 32,
+          "quest_level": 36,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7个滑刃侍从、7个滑刃纳迦，以及5个滑刃巫师，然后与葬影村的杜泽加尔谈谈。"
+        }
+      ],
+      "instruction": "在Soft-shelled Clam Meat来源：深海巨人、Soft-shelled Clam Meat来源：深海搜寻者、Soft-shelled Clam Meat来源：滑刃纳迦、Soft-shelled Clam Meat来源：滑刃巫师等11个目标周边完成：蚌肉鱼饵、另一种鱼。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 32.94,
+          "y": 22.13
+        },
+        "entities": [
+          {
+            "id": 4686,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：深海巨人",
+            "coordinates": [
+              {
+                "x": 66.26,
+                "y": 32.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 66.26,
+                "y": 32.79
+              },
+              "bounds": {
+                "min_x": 66.26,
+                "max_x": 66.26,
+                "min_y": 32.79,
+                "max_y": 32.79
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 4687,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：深海搜寻者",
+            "coordinates": [
+              {
+                "x": 32.07,
+                "y": 24.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.07,
+                "y": 24.66
+              },
+              "bounds": {
+                "min_x": 32.07,
+                "max_x": 32.07,
+                "min_y": 24.66,
+                "max_y": 24.66
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 4711,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：滑刃纳迦",
+            "coordinates": [
+              {
+                "x": 36.72,
+                "y": 21.31
+              },
+              {
+                "x": 38.13,
+                "y": 21.25
+              },
+              {
+                "x": 35.16,
+                "y": 27.79
+              },
+              {
+                "x": 35.79,
+                "y": 23.8
+              },
+              {
+                "x": 35.29,
+                "y": 26.63
+              },
+              {
+                "x": 35.97,
+                "y": 27.06
+              },
+              {
+                "x": 38.46,
+                "y": 23.68
+              },
+              {
+                "x": 36.48,
+                "y": 20.4
+              },
+              {
+                "x": 36.85,
+                "y": 24.4
+              },
+              {
+                "x": 38.88,
+                "y": 21.4
+              },
+              {
+                "x": 36.69,
+                "y": 24.24
+              },
+              {
+                "x": 36.25,
+                "y": 23.14
+              },
+              {
+                "x": 41.78,
+                "y": 20.03
+              },
+              {
+                "x": 41.61,
+                "y": 18.78
+              },
+              {
+                "x": 35.4,
+                "y": 22.01
+              },
+              {
+                "x": 37.0,
+                "y": 21.91
+              },
+              {
+                "x": 32.74,
+                "y": 23.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.69,
+                "y": 23.14
+              },
+              "bounds": {
+                "min_x": 32.74,
+                "max_x": 41.78,
+                "min_y": 18.78,
+                "max_y": 27.79
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 4712,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：滑刃巫师",
+            "coordinates": [
+              {
+                "x": 38.97,
+                "y": 20.12
+              },
+              {
+                "x": 27.77,
+                "y": 6.7
+              },
+              {
+                "x": 31.42,
+                "y": 22.13
+              },
+              {
+                "x": 32.94,
+                "y": 23.32
+              },
+              {
+                "x": 35.91,
+                "y": 28.84
+              },
+              {
+                "x": 36.05,
+                "y": 24.78
+              },
+              {
+                "x": 31.57,
+                "y": 17.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.94,
+                "y": 22.13
+              },
+              "bounds": {
+                "min_x": 27.77,
+                "max_x": 38.97,
+                "min_y": 6.7,
+                "max_y": 28.84
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 4713,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：滑刃战士",
+            "coordinates": [
+              {
+                "x": 27.86,
+                "y": 5.75
+              },
+              {
+                "x": 36.93,
+                "y": 26.25
+              },
+              {
+                "x": 34.48,
+                "y": 21.38
+              },
+              {
+                "x": 34.48,
+                "y": 25.64
+              },
+              {
+                "x": 34.59,
+                "y": 22.4
+              },
+              {
+                "x": 34.55,
+                "y": 23.24
+              },
+              {
+                "x": 32.12,
+                "y": 21.47
+              },
+              {
+                "x": 32.22,
+                "y": 19.85
+              },
+              {
+                "x": 32.26,
+                "y": 24.37
+              },
+              {
+                "x": 33.85,
+                "y": 13.62
+              },
+              {
+                "x": 33.04,
+                "y": 15.03
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 33.85,
+                "y": 21.47
+              },
+              "bounds": {
+                "min_x": 27.86,
+                "max_x": 36.93,
+                "min_y": 5.75,
+                "max_y": 26.25
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 4714,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：滑刃侍从",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 6.77
+              },
+              {
+                "x": 29.96,
+                "y": 12.2
+              },
+              {
+                "x": 33.75,
+                "y": 22.38
+              },
+              {
+                "x": 31.74,
+                "y": 23.07
+              },
+              {
+                "x": 32.18,
+                "y": 23.38
+              },
+              {
+                "x": 32.53,
+                "y": 22.47
+              },
+              {
+                "x": 31.41,
+                "y": 17.67
+              },
+              {
+                "x": 27.03,
+                "y": 10.25
+              },
+              {
+                "x": 30.87,
+                "y": 19.2
+              },
+              {
+                "x": 28.51,
+                "y": 7.77
+              },
+              {
+                "x": 32.2,
+                "y": 6.6
+              },
+              {
+                "x": 29.93,
+                "y": 16.55
+              },
+              {
+                "x": 29.2,
+                "y": 13.31
+              },
+              {
+                "x": 34.43,
+                "y": 14.81
+              },
+              {
+                "x": 31.97,
+                "y": 18.97
+              },
+              {
+                "x": 33.03,
+                "y": 9.44
+              },
+              {
+                "x": 34.58,
+                "y": 17.63
+              },
+              {
+                "x": 32.9,
+                "y": 5.99
+              },
+              {
+                "x": 33.89,
+                "y": 7.72
+              },
+              {
+                "x": 32.74,
+                "y": 14.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.08,
+                "y": 14.75
+              },
+              "bounds": {
+                "min_x": 27.03,
+                "max_x": 34.58,
+                "min_y": 5.99,
+                "max_y": 23.38
+              },
+              "spawn_count": 20
+            }
+          },
+          {
+            "id": 4718,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：滑刃智者",
+            "coordinates": [
+              {
+                "x": 27.69,
+                "y": 7.92
+              },
+              {
+                "x": 28.58,
+                "y": 6.61
+              },
+              {
+                "x": 31.57,
+                "y": 15.6
+              },
+              {
+                "x": 32.97,
+                "y": 22.12
+              },
+              {
+                "x": 33.89,
+                "y": 10.15
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 31.57,
+                "y": 10.15
+              },
+              "bounds": {
+                "min_x": 27.69,
+                "max_x": 33.89,
+                "min_y": 6.61,
+                "max_y": 22.12
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 11562,
+            "kind": "npc",
+            "name": "Soft-shelled Clam Meat来源：枯钳龙虾人",
+            "coordinates": [
+              {
+                "x": 31.58,
+                "y": 31.17
+              },
+              {
+                "x": 33.77,
+                "y": 34.74
+              },
+              {
+                "x": 35.13,
+                "y": 34.3
+              },
+              {
+                "x": 34.71,
+                "y": 33.45
+              },
+              {
+                "x": 33.39,
+                "y": 30.1
+              },
+              {
+                "x": 31.4,
+                "y": 27.86
+              },
+              {
+                "x": 34.88,
+                "y": 31.41
+              },
+              {
+                "x": 26.56,
+                "y": 76.56
+              },
+              {
+                "x": 18.78,
+                "y": 82.43
+              },
+              {
+                "x": 19.1,
+                "y": 77.55
+              },
+              {
+                "x": 18.44,
+                "y": 77.44
+              },
+              {
+                "x": 24.7,
+                "y": 78.72
+              },
+              {
+                "x": 31.34,
+                "y": 35.76
+              },
+              {
+                "x": 17.98,
+                "y": 75.4
+              },
+              {
+                "x": 24.08,
+                "y": 81.87
+              },
+              {
+                "x": 23.26,
+                "y": 80.34
+              },
+              {
+                "x": 22.93,
+                "y": 84.11
+              },
+              {
+                "x": 20.41,
+                "y": 69.94
+              },
+              {
+                "x": 19.58,
+                "y": 72.16
+              },
+              {
+                "x": 18.52,
+                "y": 79.05
+              },
+              {
+                "x": 23.37,
+                "y": 82.5
+              },
+              {
+                "x": 24.01,
+                "y": 79.61
+              },
+              {
+                "x": 25.03,
+                "y": 80.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 24.08,
+                "y": 76.56
+              },
+              "bounds": {
+                "min_x": 17.98,
+                "max_x": 35.13,
+                "min_y": 27.86,
+                "max_y": 84.11
+              },
+              "spawn_count": 23
+            }
+          },
+          {
+            "id": 4714,
+            "kind": "npc",
+            "name": "滑刃侍从",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 6.77
+              },
+              {
+                "x": 29.96,
+                "y": 12.2
+              },
+              {
+                "x": 33.75,
+                "y": 22.38
+              },
+              {
+                "x": 31.74,
+                "y": 23.07
+              },
+              {
+                "x": 32.18,
+                "y": 23.38
+              },
+              {
+                "x": 32.53,
+                "y": 22.47
+              },
+              {
+                "x": 31.41,
+                "y": 17.67
+              },
+              {
+                "x": 27.03,
+                "y": 10.25
+              },
+              {
+                "x": 30.87,
+                "y": 19.2
+              },
+              {
+                "x": 28.51,
+                "y": 7.77
+              },
+              {
+                "x": 32.2,
+                "y": 6.6
+              },
+              {
+                "x": 29.93,
+                "y": 16.55
+              },
+              {
+                "x": 29.2,
+                "y": 13.31
+              },
+              {
+                "x": 34.43,
+                "y": 14.81
+              },
+              {
+                "x": 31.97,
+                "y": 18.97
+              },
+              {
+                "x": 33.03,
+                "y": 9.44
+              },
+              {
+                "x": 34.58,
+                "y": 17.63
+              },
+              {
+                "x": 32.9,
+                "y": 5.99
+              },
+              {
+                "x": 33.89,
+                "y": 7.72
+              },
+              {
+                "x": 32.74,
+                "y": 14.68
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.08,
+                "y": 14.75
+              },
+              "bounds": {
+                "min_x": 27.03,
+                "max_x": 34.58,
+                "min_y": 5.99,
+                "max_y": 23.38
+              },
+              "spawn_count": 20
+            }
+          },
+          {
+            "id": 4711,
+            "kind": "npc",
+            "name": "滑刃纳迦",
+            "coordinates": [
+              {
+                "x": 36.72,
+                "y": 21.31
+              },
+              {
+                "x": 38.13,
+                "y": 21.25
+              },
+              {
+                "x": 35.16,
+                "y": 27.79
+              },
+              {
+                "x": 35.79,
+                "y": 23.8
+              },
+              {
+                "x": 35.29,
+                "y": 26.63
+              },
+              {
+                "x": 35.97,
+                "y": 27.06
+              },
+              {
+                "x": 38.46,
+                "y": 23.68
+              },
+              {
+                "x": 36.48,
+                "y": 20.4
+              },
+              {
+                "x": 36.85,
+                "y": 24.4
+              },
+              {
+                "x": 38.88,
+                "y": 21.4
+              },
+              {
+                "x": 36.69,
+                "y": 24.24
+              },
+              {
+                "x": 36.25,
+                "y": 23.14
+              },
+              {
+                "x": 41.78,
+                "y": 20.03
+              },
+              {
+                "x": 41.61,
+                "y": 18.78
+              },
+              {
+                "x": 35.4,
+                "y": 22.01
+              },
+              {
+                "x": 37.0,
+                "y": 21.91
+              },
+              {
+                "x": 32.74,
+                "y": 23.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.69,
+                "y": 23.14
+              },
+              "bounds": {
+                "min_x": 32.74,
+                "max_x": 41.78,
+                "min_y": 18.78,
+                "max_y": 27.79
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 4712,
+            "kind": "npc",
+            "name": "滑刃巫师",
+            "coordinates": [
+              {
+                "x": 38.97,
+                "y": 20.12
+              },
+              {
+                "x": 27.77,
+                "y": 6.7
+              },
+              {
+                "x": 31.42,
+                "y": 22.13
+              },
+              {
+                "x": 32.94,
+                "y": 23.32
+              },
+              {
+                "x": 35.91,
+                "y": 28.84
+              },
+              {
+                "x": 36.05,
+                "y": 24.78
+              },
+              {
+                "x": 31.57,
+                "y": 17.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 32.94,
+                "y": 22.13
+              },
+              "bounds": {
+                "min_x": 27.77,
+                "max_x": 38.97,
+                "min_y": 6.7,
+                "max_y": 28.84
+              },
+              "spawn_count": 7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 59,
+      "action": "交付",
+      "quest_ids": [
+        5386
+      ],
+      "quests": [
+        {
+          "quest_id": 5386,
+          "name": "食鱼度日",
+          "raw_name": "Catch of the Day",
+          "required_level": 32,
+          "quest_level": 37,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [
+            5421
+          ],
+          "next_quest": null,
+          "objective_text": "与葬影村的吉纳泽林谈话，然后将2条血肚鱼交给纳塔卡·长角。"
+        }
+      ],
+      "instruction": "到纳塔卡·长角处交付：食鱼度日。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 55.41,
+          "y": 55.81
+        },
+        "entities": [
+          {
+            "id": 11259,
+            "kind": "npc",
+            "name": "纳塔卡·长角",
+            "coordinates": [
+              {
+                "x": 55.41,
+                "y": 55.81
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.41,
+                "y": 55.81
+              },
+              "bounds": {
+                "min_x": 55.41,
+                "max_x": 55.41,
+                "min_y": 55.81,
+                "max_y": 55.81
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 60,
+      "action": "交付",
+      "quest_ids": [
+        6134
+      ],
+      "quests": [
+        {
+          "quest_id": 6134,
+          "name": "幽灵电浆",
+          "raw_name": "Ghost-o-plasm Round Up",
+          "required_level": 34,
+          "quest_level": 39,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把幽灵磁铁箱和8份幽灵电浆交给凄凉之地的霍恩尼兹。"
+        }
+      ],
+      "instruction": "到霍恩尼兹处交付：幽灵电浆。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 47.83,
+          "y": 61.83
+        },
+        "entities": [
+          {
+            "id": 6019,
+            "kind": "npc",
+            "name": "霍恩尼兹",
+            "coordinates": [
+              {
+                "x": 47.83,
+                "y": 61.83
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.83,
+                "y": 61.83
+              },
+              "bounds": {
+                "min_x": 47.83,
+                "max_x": 47.83,
+                "min_y": 61.83,
+                "max_y": 61.83
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 61,
+      "action": "交付",
+      "quest_ids": [
+        5381
+      ],
+      "quests": [
+        {
+          "quest_id": 5381,
+          "name": "埃鲁索斯之手",
+          "raw_name": "Hand of Iruxos",
+          "required_level": 32,
+          "quest_level": 38,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5581,
+          "objective_text": "在雷斧堡垒中找到恶魔之盒，把它和恶魔之锄一起交给葬影村的泰迦·慧鬃。"
+        }
+      ],
+      "instruction": "到泰迦·慧鬃处交付：埃鲁索斯之手。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 25.82,
+          "y": 68.21
+        },
+        "entities": [
+          {
+            "id": 11624,
+            "kind": "npc",
+            "name": "泰迦·慧鬃",
+            "coordinates": [
+              {
+                "x": 25.82,
+                "y": 68.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.82,
+                "y": 68.21
+              },
+              "bounds": {
+                "min_x": 25.82,
+                "max_x": 25.82,
+                "min_y": 68.21,
+                "max_y": 68.21
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 62,
+      "action": "交付",
+      "quest_ids": [
+        6142,
+        6143
+      ],
+      "quests": [
+        {
+          "quest_id": 6142,
+          "name": "蚌肉鱼饵",
+          "raw_name": "Clam Bait",
+          "required_level": 31,
+          "quest_level": 35,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到10块软壳蚌肉，把它们交给葬影村的麦拉斯。"
+        },
+        {
+          "quest_id": 6143,
+          "name": "另一种鱼",
+          "raw_name": "Other Fish to Fry",
+          "required_level": 32,
+          "quest_level": 36,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7个滑刃侍从、7个滑刃纳迦，以及5个滑刃巫师，然后与葬影村的杜泽加尔谈谈。"
+        }
+      ],
+      "instruction": "到麦拉斯、杜泽加尔处交付：蚌肉鱼饵、另一种鱼。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 22.98,
+          "y": 72.42
+        },
+        "entities": [
+          {
+            "id": 12031,
+            "kind": "npc",
+            "name": "麦拉斯",
+            "coordinates": [
+              {
+                "x": 22.64,
+                "y": 71.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 22.64,
+                "y": 71.97
+              },
+              "bounds": {
+                "min_x": 22.64,
+                "max_x": 22.64,
+                "min_y": 71.97,
+                "max_y": 71.97
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 12340,
+            "kind": "npc",
+            "name": "杜泽加尔",
+            "coordinates": [
+              {
+                "x": 23.32,
+                "y": 72.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 23.32,
+                "y": 72.87
+              },
+              "bounds": {
+                "min_x": 23.32,
+                "max_x": 23.32,
+                "min_y": 72.87,
+                "max_y": 72.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 63,
+      "action": "接取",
+      "quest_ids": [
+        5581
+      ],
+      "quests": [
+        {
+          "quest_id": 5581,
+          "name": "燃烧军团的传送门",
+          "raw_name": "Portals of the Legion",
+          "required_level": 32,
+          "quest_level": 38,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            5381
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "放逐6个玛诺洛克集会所的传送门，然后回到葬影村的泰迦·慧鬃那里。"
+        }
+      ],
+      "instruction": "到泰迦·慧鬃处接取：燃烧军团的传送门。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 25.82,
+          "y": 68.21
+        },
+        "entities": [
+          {
+            "id": 11624,
+            "kind": "npc",
+            "name": "泰迦·慧鬃",
+            "coordinates": [
+              {
+                "x": 25.82,
+                "y": 68.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.82,
+                "y": 68.21
+              },
+              "bounds": {
+                "min_x": 25.82,
+                "max_x": 25.82,
+                "min_y": 68.21,
+                "max_y": 68.21
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 64,
+      "action": "交付",
+      "quest_ids": [
+        5581
+      ],
+      "quests": [
+        {
+          "quest_id": 5581,
+          "name": "燃烧军团的传送门",
+          "raw_name": "Portals of the Legion",
+          "required_level": 32,
+          "quest_level": 38,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            5381
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "放逐6个玛诺洛克集会所的传送门，然后回到葬影村的泰迦·慧鬃那里。"
+        }
+      ],
+      "instruction": "到泰迦·慧鬃处交付：燃烧军团的传送门。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 25.82,
+          "y": 68.21
+        },
+        "entities": [
+          {
+            "id": 11624,
+            "kind": "npc",
+            "name": "泰迦·慧鬃",
+            "coordinates": [
+              {
+                "x": 25.82,
+                "y": 68.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.82,
+                "y": 68.21
+              },
+              "bounds": {
+                "min_x": 25.82,
+                "max_x": 25.82,
+                "min_y": 68.21,
+                "max_y": 68.21
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 65,
+      "action": "接取",
+      "quest_ids": [
+        6568
+      ],
+      "quests": [
+        {
+          "quest_id": 6568,
+          "name": "幻术的欺诈",
+          "raw_name": "Mistress of Deception",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 405,
+          "pre_single": [
+            6567
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6569,
+          "objective_text": "把罗卡鲁的信交给西瘟疫之地的巫女麦兰达。"
+        }
+      ],
+      "instruction": "到罗卡鲁处接取：幻术的欺诈。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 25.74,
+          "y": 70.06
+        },
+        "entities": [
+          {
+            "id": 10182,
+            "kind": "npc",
+            "name": "罗卡鲁",
+            "coordinates": [
+              {
+                "x": 25.74,
+                "y": 70.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.74,
+                "y": 70.06
+              },
+              "bounds": {
+                "min_x": 25.74,
+                "max_x": 25.74,
+                "min_y": 70.06,
+                "max_y": 70.06
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 1362,
+      "name": "凄凉之地的科卡尔部族",
+      "raw_name": "The Kolkar of Desolace",
+      "required_level": 30,
+      "quest_level": 32,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "和凄凉之地幽灵岗哨的费古尔·双刃谈一谈。"
+    },
+    {
+      "quest_id": 1365,
+      "name": "戴兹帕可汗",
+      "raw_name": "Khan Dez'hepah",
+      "required_level": 30,
+      "quest_level": 35,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把戴兹帕可汗的徽记交给凄凉之地的费古尔·双刃。"
+    },
+    {
+      "quest_id": 1366,
+      "name": "悬赏半人马",
+      "raw_name": "Centaur Bounty",
+      "required_level": 30,
+      "quest_level": 31,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1365
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集15只半人马的耳朵，把它们交给凄凉之地的费古尔·双刃。"
+    },
+    {
+      "quest_id": 1367,
+      "name": "玛格拉姆部族",
+      "raw_name": "Magram Alliance",
+      "required_level": 30,
+      "quest_level": 33,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1369,
+      "objective_text": "和玛格拉姆部族建立良好的关系，然后和瓦鲁格谈一谈。"
+    },
+    {
+      "quest_id": 1368,
+      "name": "吉尔吉斯部族",
+      "raw_name": "Gelkis Alliance",
+      "required_level": 30,
+      "quest_level": 33,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1370,
+      "objective_text": "和吉尔吉斯部族建立良好的关系，然后和智者乌泰克谈一谈。"
+    },
+    {
+      "quest_id": 1369,
+      "name": "破碎之泪",
+      "raw_name": "Broken Tears",
+      "required_level": 30,
+      "quest_level": 33,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1367,
+        1386
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1371,
+      "objective_text": "继续和玛格拉姆部族保持良好的关系，把3块破碎之泪交给玛格拉姆村庄的瓦鲁格。"
+    },
+    {
+      "quest_id": 1370,
+      "name": "偷取物资",
+      "raw_name": "Stealing Supplies",
+      "required_level": 30,
+      "quest_level": 35,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1368,
+        1384
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1373,
+      "objective_text": "把6包粗制干肉交给吉尔吉斯村的智者乌泰克。"
+    },
+    {
+      "quest_id": 1371,
+      "name": "瓦鲁格的玩具",
+      "raw_name": "Gizmo for Warug",
+      "required_level": 30,
+      "quest_level": 35,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1369
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "继续和玛格拉姆部族保持良好的关系，给玛格拉姆村的瓦鲁格找到一个高级假人。"
+    },
+    {
+      "quest_id": 1373,
+      "name": "盎格库尔",
+      "raw_name": "Ongeku",
+      "required_level": 30,
+      "quest_level": 37,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1370
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1374,
+      "objective_text": "继续和吉尔吉斯部族保持良好的关系，并把德莱尼水晶碎片交给凄凉之地吉尔吉斯村的智者乌泰克。"
+    },
+    {
+      "quest_id": 1374,
+      "name": "杰恩可汗",
+      "raw_name": "Khan Jehn",
+      "required_level": 30,
+      "quest_level": 37,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1373
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1380,
+      "objective_text": "把杰恩可汗的徽记交给凄凉之地吉尔吉斯村的智者乌泰克。"
+    },
+    {
+      "quest_id": 1375,
+      "name": "沙卡可汗",
+      "raw_name": "Khan Shaka",
+      "required_level": 30,
+      "quest_level": 37,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1371
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1381,
+      "objective_text": "继续和玛格拉姆部族保持良好的关系，把沙卡可汗的徽记交给凄凉之地玛格拉姆村的瓦鲁格。"
+    },
+    {
+      "quest_id": 1380,
+      "name": "赫鲁萨可汗",
+      "raw_name": "Khan Hratha",
+      "required_level": 30,
+      "quest_level": 42,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1374
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "继续和吉尔吉斯部族保持良好的关系，把玛洛迪钥匙碎片交给吉尔吉斯村的智者乌泰克。"
+    },
+    {
+      "quest_id": 1381,
+      "name": "赫鲁萨可汗",
+      "raw_name": "Khan Hratha",
+      "required_level": 30,
+      "quest_level": 42,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1375
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "和玛格拉姆保持良好的关系，把玛洛迪钥匙碎片交给凄凉之地玛格拉姆村的瓦鲁格。"
+    },
+    {
+      "quest_id": 1480,
+      "name": "堕落者",
+      "raw_name": "The Corrupter",
+      "required_level": 25,
+      "quest_level": 33,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1481,
+      "objective_text": "把恶魔之皮拿给凄凉之地的玛乌林·碎骨看看。"
+    },
+    {
+      "quest_id": 1481,
+      "name": "堕落者",
+      "raw_name": "The Corrupter",
+      "required_level": 25,
+      "quest_level": 33,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1480
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1482,
+      "objective_text": "给凄凉之地的玛乌林·碎骨带回一张巡影者的头皮。"
+    },
+    {
+      "quest_id": 1482,
+      "name": "堕落者",
+      "raw_name": "The Corrupter",
+      "required_level": 25,
+      "quest_level": 35,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1481
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "给凄凉之地的玛乌林·碎骨带回一块神谕水晶。"
+    },
+    {
+      "quest_id": 1484,
+      "name": "堕落者",
+      "raw_name": "The Corrupter",
+      "required_level": 25,
+      "quest_level": 33,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1482
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "与凄凉之地的塔卡塔·钢刃谈一谈。"
+    },
+    {
+      "quest_id": 1488,
+      "name": "堕落者",
+      "raw_name": "The Corrupter",
+      "required_level": 25,
+      "quest_level": 40,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        1484
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "杀掉魔王阿兹雷索克和祖格卡，然后向凄凉之地的塔卡塔·钢刃复命。"
+    },
+    {
+      "quest_id": 5381,
+      "name": "埃鲁索斯之手",
+      "raw_name": "Hand of Iruxos",
+      "required_level": 32,
+      "quest_level": 38,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5581,
+      "objective_text": "在雷斧堡垒中找到恶魔之盒，把它和恶魔之锄一起交给葬影村的泰迦·慧鬃。"
+    },
+    {
+      "quest_id": 5386,
+      "name": "食鱼度日",
+      "raw_name": "Catch of the Day",
+      "required_level": 32,
+      "quest_level": 37,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [
+        5421
+      ],
+      "next_quest": null,
+      "objective_text": "与葬影村的吉纳泽林谈话，然后将2条血肚鱼交给纳塔卡·长角。"
+    },
+    {
+      "quest_id": 5501,
+      "name": "集骨者",
+      "raw_name": "Bone Collector",
+      "required_level": 29,
+      "quest_level": 32,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "从科多墓地收集10根科多兽骨，把它们交给兽人小屋的比布里·弗斯巴克。"
+    },
+    {
+      "quest_id": 5561,
+      "name": "诱捕科多兽",
+      "raw_name": "Kodo Roundup",
+      "required_level": 30,
+      "quest_level": 34,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将科多兽诱引器和5头被驯服的科多兽交给瑟卡布斯库的营地中的斯米德·瑟卡布斯库。"
+    },
+    {
+      "quest_id": 5581,
+      "name": "燃烧军团的传送门",
+      "raw_name": "Portals of the Legion",
+      "required_level": 32,
+      "quest_level": 38,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        5381
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "放逐6个玛诺洛克集会所的传送门，然后回到葬影村的泰迦·慧鬃那里。"
+    },
+    {
+      "quest_id": 5741,
+      "name": "圣光节杖",
+      "raw_name": "Sceptre of Light",
+      "required_level": 30,
+      "quest_level": 33,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 6027,
+      "objective_text": "拿到圣光节杖，并将它交给艾瑟雷索塔里的阿佐尔·奥达蒙特。"
+    },
+    {
+      "quest_id": 5763,
+      "name": "荆棘谷狩猎",
+      "raw_name": "Hunting in Stranglethorn",
+      "required_level": 28,
+      "quest_level": 31,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将鲁恩的科多兽角送到荆棘谷的赫米特·奈辛瓦里二世那里。"
+    },
+    {
+      "quest_id": 6027,
+      "name": "上古之书",
+      "raw_name": "Book of the Ancients",
+      "required_level": 30,
+      "quest_level": 38,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        5741
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "拿到上古之书，将其交给艾瑟雷索塔中的阿佐尔·奥达蒙特。"
+    },
+    {
+      "quest_id": 6134,
+      "name": "幽灵电浆",
+      "raw_name": "Ghost-o-plasm Round Up",
+      "required_level": 34,
+      "quest_level": 39,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把幽灵磁铁箱和8份幽灵电浆交给凄凉之地的霍恩尼兹。"
+    },
+    {
+      "quest_id": 6142,
+      "name": "蚌肉鱼饵",
+      "raw_name": "Clam Bait",
+      "required_level": 31,
+      "quest_level": 35,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "找到10块软壳蚌肉，把它们交给葬影村的麦拉斯。"
+    },
+    {
+      "quest_id": 6143,
+      "name": "另一种鱼",
+      "raw_name": "Other Fish to Fry",
+      "required_level": 32,
+      "quest_level": 36,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "杀死7个滑刃侍从、7个滑刃纳迦，以及5个滑刃巫师，然后与葬影村的杜泽加尔谈谈。"
+    },
+    {
+      "quest_id": 6161,
+      "name": "拉克摩尔的财宝！",
+      "raw_name": "Claim Rackmore's Treasure!",
+      "required_level": 30,
+      "quest_level": 36,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "找到拉克摩尔的银钥匙和金钥匙。找到并打开拉克摩尔的箱子。"
+    },
+    {
+      "quest_id": 6568,
+      "name": "幻术的欺诈",
+      "raw_name": "Mistress of Deception",
+      "required_level": 55,
+      "quest_level": 60,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 405,
+      "pre_single": [
+        6567
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 6569,
+      "objective_text": "把罗卡鲁的信交给西瘟疫之地的巫女麦兰达。"
+    }
+  ],
+  "fivebox_observations": {
+    "1362": {
+      "status": "not_classified"
+    },
+    "1365": {
+      "status": "not_classified"
+    },
+    "1366": {
+      "status": "not_classified"
+    },
+    "1367": {
+      "status": "not_classified"
+    },
+    "1368": {
+      "status": "not_classified"
+    },
+    "1369": {
+      "status": "not_classified"
+    },
+    "1370": {
+      "status": "not_classified"
+    },
+    "1371": {
+      "status": "not_classified"
+    },
+    "1373": {
+      "status": "not_classified"
+    },
+    "1374": {
+      "status": "not_classified"
+    },
+    "1375": {
+      "status": "not_classified"
+    },
+    "1380": {
+      "status": "not_classified"
+    },
+    "1381": {
+      "status": "not_classified"
+    },
+    "1480": {
+      "status": "not_classified"
+    },
+    "1481": {
+      "status": "not_classified"
+    },
+    "1482": {
+      "status": "not_classified"
+    },
+    "1484": {
+      "status": "not_classified"
+    },
+    "1488": {
+      "status": "not_classified"
+    },
+    "5381": {
+      "status": "not_classified"
+    },
+    "5386": {
+      "status": "not_classified"
+    },
+    "5501": {
+      "status": "not_classified"
+    },
+    "5561": {
+      "status": "not_classified"
+    },
+    "5581": {
+      "status": "not_classified"
+    },
+    "5741": {
+      "status": "not_classified"
+    },
+    "5763": {
+      "status": "not_classified"
+    },
+    "6027": {
+      "status": "not_classified"
+    },
+    "6134": {
+      "status": "not_classified"
+    },
+    "6142": {
+      "status": "not_classified"
+    },
+    "6143": {
+      "status": "not_classified"
+    },
+    "6161": {
+      "status": "not_classified"
+    },
+    "6568": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 31,
+    "step_count": 65,
+    "min_level": 25,
+    "max_level": 55
+  }
+}
