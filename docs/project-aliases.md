@@ -16,3 +16,4 @@
 | Codex Monitor | 用量统计、额度监控 | `codex-monitor/` |
 | 订单审核系统 | 审单、订单审核 | `order-review/` |
 | 商品宣传图工作台 | 广告图、宣传图、功效图、商品海报、产品图设计 | `product-ad-studio/` |
+| 魔兽世界任务路线 | 魔兽、魔兽任务、五开路线、Questie路线 | `wow-quest-route/` |

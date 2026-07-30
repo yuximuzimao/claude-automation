@@ -1,0 +1,159 @@
+{
+  "route_id": "horde-blood-elf-paladin-sunstrider-isle-v1",
+  "title": "部落·血精灵圣骑士五开：逐日岛候选全清路线 V1",
+  "zone": "逐日岛",
+  "map_area_id": 3430,
+  "quest_zone_or_sort": 3431,
+  "assumptions": [
+    "五个角色均为血精灵圣骑士",
+    "战斗阶段先只控制主号，其他角色保持跟随",
+    "不使用按键广播或自动化输入",
+    "地图坐标用于节点定位，不代表绝对可走直线"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [8325],
+      "anchor": {"type": "npc", "id": 15278},
+      "instruction": "五号分别从玛基斯特莉克丝·艾罗娜接取任务。保持跟随时，只要距离足够近，逐窗口点NPC即可。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [8325],
+      "anchor": {"type": "npc_cluster", "ids": [15274]},
+      "instruction": "从塔楼向法力浮龙密集区移动，由主号击杀8只。离开前检查五号任务进度是否都同步完成。",
+      "fivebox": "kill_shared_expected",
+      "confidence": "medium"
+    },
+    {
+      "step": 3,
+      "action": "交付并接取",
+      "quest_ids": [8325, 8326, 9676],
+      "anchor": {"type": "npc", "id": 15278},
+      "instruction": "返回艾罗娜，五号分别交付8325，并接取8326和圣骑士训练9676。随后检查五号等级；若有人仍未到2级，先在塔边补杀法力浮龙，全部到2级后再执行下一步的4个等级2任务。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 4,
+      "action": "训练与集中接取",
+      "quest_ids": [9676, 8330, 8345, 8336, 8346],
+      "anchor": {"type": "cluster", "ids": [15280, 15295, 15296, 15297]},
+      "instruction": "在太阳之塔周边依次完成圣骑士训练，并从索兰尼亚、伊萨纳斯、海雷恩接齐4个任务。五号逐个操作，但NPC距离很近，不要离开任务中心后再补接。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 5,
+      "action": "第一目标环",
+      "quest_ids": [8326, 8330, 8336, 8346],
+      "anchor": {"type": "path", "ids": [15274, 15366, 15372, 180512, 180510]},
+      "instruction": "从塔楼向南偏西走：每号对法力浮龙使用奥术洪流；顺手拾取索兰尼亚的日记；击杀山猫并让五号分别拾满8个项圈；继续向南偏西拾取占卜宝珠。沿途有法力生物就补奥术薄片。",
+      "fivebox": "mixed_personal",
+      "confidence": "medium"
+    },
+    {
+      "step": 6,
+      "action": "返回任务中心",
+      "quest_ids": [8326, 8327, 9676, 8336, 8346],
+      "anchor": {"type": "npc", "id": 15278},
+      "instruction": "返回太阳之塔，五号交付8326并接取8327；交付圣骑士训练和渴求魔法。若奥术薄片已满6个，也在附近交付8336；未满则保留到后面。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 7,
+      "action": "交付并接取",
+      "quest_ids": [8327, 8334],
+      "anchor": {"type": "npc", "id": 15281},
+      "instruction": "沿西侧道路找到兰萨恩·派雷隆，五号交付报告并接取侵略。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 8,
+      "action": "西南目标环",
+      "quest_ids": [8330, 8345, 8334, 8336],
+      "anchor": {"type": "path", "ids": [15271, 15294, 180511, 180516]},
+      "instruction": "从兰萨恩处向西推进，边杀树人嫩苗和凶猛的树人嫩苗，边拾取天灾魔法卷轴；再向西北到达斯雷玛神殿阅读铭牌。奥术生物掉落的薄片继续逐号拾取。不要做完击杀后再单独折返拿卷轴或神殿。",
+      "fivebox": "mixed_personal",
+      "confidence": "medium"
+    },
+    {
+      "step": 9,
+      "action": "交付并接取",
+      "quest_ids": [8334, 8335],
+      "anchor": {"type": "npc", "id": 15281},
+      "instruction": "从神殿沿树人分布区向东返回，补足两类击杀后回到兰萨恩，五号交付8334并接取放逐者菲伦德雷。",
+      "fivebox": "dialogue_personal",
+      "confidence": "medium"
+    },
+    {
+      "step": 10,
+      "action": "学院目标环",
+      "quest_ids": [8335, 8336, 8338],
+      "anchor": {"type": "path", "ids": [15273, 15298, 15367]},
+      "instruction": "进入法瑟林学院，主号完成奥术怨灵、被污染的奥术怨灵和菲伦德雷击杀。五号分别检查并拾取菲伦德雷的徽记/首级、剩余奥术薄片，以及被污染的奥术碎片；拿到碎片后每号分别接受物品触发任务8338。",
+      "fivebox": "mixed_personal",
+      "confidence": "medium"
+    },
+    {
+      "step": 11,
+      "action": "交付并接取",
+      "quest_ids": [8335, 8347],
+      "anchor": {"type": "npc", "id": 15281},
+      "instruction": "返回兰萨恩，五号交付8335并接取帮助信使。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 12,
+      "action": "清空太阳之塔任务",
+      "quest_ids": [8330, 8345, 8336, 8338, 8346],
+      "anchor": {"type": "cluster", "ids": [15295, 15296, 15297]},
+      "instruction": "离开逐日岛前回太阳之塔集中交付：索兰尼亚的物品、达斯雷玛神殿、奥术薄片、被污染的奥术碎片，以及尚未交付的渴求魔法。五号分别核对任务日志，避免进入永歌森林后折返。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 13,
+      "action": "过桥交接",
+      "quest_ids": [8347, 9704],
+      "anchor": {"type": "npc", "id": 15301},
+      "instruction": "向南到桥边找到信使阿拉里恩，五号交付8347并接取被失心者杀死。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 14,
+      "action": "寻找倒下的信使",
+      "quest_ids": [9704, 9705],
+      "anchor": {"type": "npc", "id": 17849},
+      "instruction": "继续向南进入黎明之路，找到倒下的信使；五号分别交付9704并接取找回包裹9705。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 15,
+      "action": "返回并接取交付任务",
+      "quest_ids": [9705, 8350],
+      "anchor": {"type": "npc", "id": 15301},
+      "instruction": "返回阿拉里恩，五号交付包裹并接取完成订单8350。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    },
+    {
+      "step": 16,
+      "action": "进入永歌森林",
+      "quest_ids": [8350],
+      "anchor": {"type": "npc", "id": 15433},
+      "instruction": "沿道路前往鹰翼广场旅店，五号分别把包裹交给旅店老板德兰妮尔。逐日岛路线结束，下一版从鹰翼广场集中接任务开始。",
+      "fivebox": "dialogue_personal",
+      "confidence": "high"
+    }
+  ]
+}
