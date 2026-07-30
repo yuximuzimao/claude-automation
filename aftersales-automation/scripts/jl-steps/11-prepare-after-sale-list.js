@@ -8,6 +8,7 @@
  *   2. 有上限地等待页面标题「售后工单」和快捷筛选「待商家处理」实际渲染。
  *   3. 点击排序下拉框，选择「按逾期时间最近排序」。
  *   4. 等 5 秒，检测下拉框值已切换，且当前列表时效从小到大。
+ *      若仅列表顺序异常，等 2 秒后刷新当前列表一次并复核，不重复点击排序。
  *   5. 读取 48 小时内工单列表；遇到超过 48 小时即停止。
  *
  * 本步不点击任何工单「处理」按钮。
@@ -23,9 +24,11 @@ const {
 
 const AFTER_NAVIGATION_WAIT_MS = 3000;
 const AFTER_SORT_WAIT_MS = 5000;
+const SORT_RECOVERY_WAIT_MS = 2000;
 const LIST_READY_MAX_ATTEMPTS = 16;
 const LIST_READY_INTERVAL_MS = 1000;
 const AFTER_SALE_LIST_URL = 'https://scrm.jlsupp.com/micro-customer/business/after-sale-list';
+const SORT_ORDER_UNSTABLE_CODE = 'SORT_ORDER_UNSTABLE';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -97,7 +100,10 @@ async function readCurrentPageSortCheck(targetId) {
       const text = card.innerText || card.textContent || '';
       const workOrderNum = (text.match(/售后工单号[:：]\\s*(100001\\d{12,})/) || text.match(/100001\\d{12,}/) || [])[1] ||
         (text.match(/100001\\d{12,}/) || [])[0] || null;
-      const remaining = (text.split(/\\n/).map(s => s.trim()).find(l => /后自动/.test(l))) || null;
+      const timer = Array.from(card.querySelectorAll('.el-timer')).find(visible);
+      const remaining = timer
+        ? String(timer.innerText || timer.textContent || '').replace(/\\s+/g, ' ').trim() || null
+        : null;
       return { workOrderNum, remaining, totalHours: parseRemainingHours(remaining) };
     })
     .filter(t => t.workOrderNum);
@@ -110,9 +116,45 @@ async function readCurrentPageSortCheck(targetId) {
   const sortOk = data && data.sortValue === TARGET_SORT;
   const ascending = isAscendingByTotalHours(data && data.tickets);
   if (!sortOk || !ascending) {
-    throw new Error(`排序校验失败: ${JSON.stringify({ sortValue: data && data.sortValue, sortOk, ascending, tickets: data && data.tickets })}`);
+    const details = {
+      sortValue: data && data.sortValue,
+      sortOk,
+      ascending,
+      tickets: data && data.tickets,
+    };
+    const error = new Error(`排序校验失败: ${JSON.stringify(details)}`);
+    error.code = sortOk && !ascending
+      ? SORT_ORDER_UNSTABLE_CODE
+      : 'SORT_VALUE_MISMATCH';
+    error.sortCheck = details;
+    throw error;
   }
   return { ...data, ascending };
+}
+
+async function verifySortWithRefreshRecovery(targetId, options = {}) {
+  const sleepFn = options.sleep || sleep;
+  const reloadFn = options.reload || cdp.reload;
+  const readyFn = options.assertReady || assertAfterSaleListReady;
+  const checkFn = options.readSortCheck || readCurrentPageSortCheck;
+  const recoveryWaitMs = Number.isFinite(options.recoveryWaitMs) && options.recoveryWaitMs >= 0
+    ? options.recoveryWaitMs
+    : SORT_RECOVERY_WAIT_MS;
+
+  try {
+    const sortCheck = await checkFn(targetId);
+    return { ...sortCheck, recoveredByRefresh: false };
+  } catch (error) {
+    if (!error || error.code !== SORT_ORDER_UNSTABLE_CODE) throw error;
+
+    await sleepFn(recoveryWaitMs);
+    await reloadFn(targetId);
+    await readyFn(targetId);
+    await sleepFn(recoveryWaitMs);
+
+    const sortCheck = await checkFn(targetId);
+    return { ...sortCheck, recoveredByRefresh: true };
+  }
 }
 
 async function prepareAfterSaleList(options = {}) {
@@ -125,7 +167,7 @@ async function prepareAfterSaleList(options = {}) {
   const sorted = await selectOverdueSort({ targetId });
   await sleep(AFTER_SORT_WAIT_MS);
 
-  const sortCheck = await readCurrentPageSortCheck(targetId);
+  const sortCheck = await verifySortWithRefreshRecovery(targetId);
   const list = await readUrgentAfterSaleList({
     targetId,
     thresholdHours,
@@ -160,9 +202,12 @@ module.exports = {
   readAfterSaleListStatus,
   assertAfterSaleListReady,
   readCurrentPageSortCheck,
+  verifySortWithRefreshRecovery,
   AFTER_NAVIGATION_WAIT_MS,
   AFTER_SORT_WAIT_MS,
+  SORT_RECOVERY_WAIT_MS,
   LIST_READY_MAX_ATTEMPTS,
   LIST_READY_INTERVAL_MS,
   AFTER_SALE_LIST_URL,
+  SORT_ORDER_UNSTABLE_CODE,
 };

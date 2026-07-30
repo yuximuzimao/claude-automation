@@ -222,3 +222,157 @@ test('11 售后列表持续未渲染时到达上限仍安全失败', async () =>
     delete require.cache[preparePath];
   }
 });
+
+test('11 将“排序值正确但列表乱序”标记为可刷新恢复的瞬时异常', async () => {
+  const cdp = require('../../lib/cdp');
+  const preparePath = require.resolve('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const originalEval = cdp.eval;
+
+  try {
+    cdp.eval = async () => ({
+      sortValue: '按逾期时间最近排序',
+      tickets: [
+        { workOrderNum: '100001700000000000001', totalHours: 42 },
+        { workOrderNum: '100001700000000000002', totalHours: 40 },
+      ],
+    });
+    delete require.cache[preparePath];
+    const {
+      readCurrentPageSortCheck,
+      SORT_ORDER_UNSTABLE_CODE,
+    } = require(preparePath);
+
+    await assert.rejects(
+      readCurrentPageSortCheck('mixed-list-tab'),
+      error => {
+        assert.equal(error.code, SORT_ORDER_UNSTABLE_CODE);
+        assert.equal(error.sortCheck.sortOk, true);
+        assert.equal(error.sortCheck.ascending, false);
+        return true;
+      }
+    );
+  } finally {
+    cdp.eval = originalEval;
+    delete require.cache[preparePath];
+  }
+});
+
+test('11 排序校验从倒计时组件读取文本，不依赖“后自动”文案', () => {
+  const source = fs.readFileSync(
+    path.join(PROJECT_ROOT, 'scripts/jl-steps/11-prepare-after-sale-list.js'),
+    'utf8'
+  );
+  const start = source.indexOf('async function readCurrentPageSortCheck');
+  const end = source.indexOf('\nasync function verifySortWithRefreshRecovery', start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+
+  const body = source.slice(start, end);
+  assert.match(body, /querySelectorAll\(['"]\.el-timer['"]\)/);
+  assert.doesNotMatch(body, /后自动/);
+});
+
+test('11 瞬时乱序时等待2秒、只刷新一次并在页面就绪后复核', async () => {
+  const {
+    verifySortWithRefreshRecovery,
+    SORT_ORDER_UNSTABLE_CODE,
+    SORT_RECOVERY_WAIT_MS,
+  } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const calls = [];
+  let checkCount = 0;
+
+  const result = await verifySortWithRefreshRecovery('mixed-list-tab', {
+    sleep: async ms => calls.push(['sleep', ms]),
+    reload: async targetId => calls.push(['reload', targetId]),
+    assertReady: async targetId => calls.push(['ready', targetId]),
+    readSortCheck: async targetId => {
+      calls.push(['check', targetId]);
+      checkCount += 1;
+      if (checkCount === 1) {
+        const error = new Error('排序校验失败');
+        error.code = SORT_ORDER_UNSTABLE_CODE;
+        throw error;
+      }
+      return {
+        sortValue: '按逾期时间最近排序',
+        ascending: true,
+        tickets: [],
+      };
+    },
+  });
+
+  assert.deepEqual(calls, [
+    ['check', 'mixed-list-tab'],
+    ['sleep', SORT_RECOVERY_WAIT_MS],
+    ['reload', 'mixed-list-tab'],
+    ['ready', 'mixed-list-tab'],
+    ['sleep', SORT_RECOVERY_WAIT_MS],
+    ['check', 'mixed-list-tab'],
+  ]);
+  assert.equal(result.recoveredByRefresh, true);
+  assert.equal(result.ascending, true);
+});
+
+test('11 排序值错误时不刷新、不重试排序校验', async () => {
+  const {
+    verifySortWithRefreshRecovery,
+  } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  const calls = [];
+  const mismatch = new Error('排序校验失败');
+  mismatch.code = 'SORT_VALUE_MISMATCH';
+
+  await assert.rejects(
+    verifySortWithRefreshRecovery('wrong-sort-tab', {
+      sleep: async ms => calls.push(['sleep', ms]),
+      reload: async targetId => calls.push(['reload', targetId]),
+      assertReady: async targetId => calls.push(['ready', targetId]),
+      readSortCheck: async targetId => {
+        calls.push(['check', targetId]);
+        throw mismatch;
+      },
+    }),
+    error => error === mismatch
+  );
+
+  assert.deepEqual(calls, [['check', 'wrong-sort-tab']]);
+});
+
+test('11 刷新复核后仍乱序时安全停止，禁止循环刷新', async () => {
+  const {
+    verifySortWithRefreshRecovery,
+    SORT_ORDER_UNSTABLE_CODE,
+  } = require('../../scripts/jl-steps/11-prepare-after-sale-list');
+  let checkCount = 0;
+  let reloadCount = 0;
+
+  await assert.rejects(
+    verifySortWithRefreshRecovery('still-mixed-tab', {
+      sleep: async () => {},
+      reload: async () => {
+        reloadCount += 1;
+      },
+      assertReady: async () => {},
+      readSortCheck: async () => {
+        checkCount += 1;
+        const error = new Error('排序校验失败');
+        error.code = SORT_ORDER_UNSTABLE_CODE;
+        throw error;
+      },
+    }),
+    /排序校验失败/
+  );
+
+  assert.equal(checkCount, 2);
+  assert.equal(reloadCount, 1);
+});
+
+test('A1 单笔入口统一使用排序刷新恢复门禁', () => {
+  const source = fs.readFileSync(
+    path.join(PROJECT_ROOT, 'lib/server/op-queue.js'),
+    'utf8'
+  );
+  const recoveryCalls = source.match(/step11\.verifySortWithRefreshRecovery\(listTargetId\)/g) || [];
+
+  assert.equal(recoveryCalls.length, 3);
+  assert.doesNotMatch(source, /step11\.readCurrentPageSortCheck\(listTargetId\)/);
+});

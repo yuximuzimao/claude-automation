@@ -712,7 +712,7 @@ async function execReprocessOne(op) {
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.readCurrentPageSortCheck(listTargetId);
+  await step11.verifySortWithRefreshRecovery(listTargetId);
   assertNotAborted(op);
 
   // ── Step 3: 定位工单（与执行操作完全一致的寻址逻辑）───────────────
@@ -920,7 +920,7 @@ async function execExecute(op) {
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.readCurrentPageSortCheck(listTargetId);
+  await step11.verifySortWithRefreshRecovery(listTargetId);
   assertNotAborted(op);
 
   const { action } = sim.decision;
@@ -1078,7 +1078,7 @@ async function execOpenTicket(op) {
   const { selectOverdueSort } = require('../../scripts/jl-steps/09-select-overdue-sort');
   await selectOverdueSort({ targetId: listTargetId });
   await sleep(step11.AFTER_SORT_WAIT_MS);
-  await step11.readCurrentPageSortCheck(listTargetId);
+  await step11.verifySortWithRefreshRecovery(listTargetId);
   assertNotAborted(op);
 
   // 定位工单
