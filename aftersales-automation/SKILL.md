@@ -48,7 +48,7 @@ entry: cli.js
 | `scripts/jl-steps/08-click-after-sale-menu.js` | **A1 原子步：真实鼠标点击左侧「售后工单」菜单**；即使当前已在列表页也不跳过；只进列表不排序不处理 | 改 A1 列表入口时 |
 | `scripts/jl-steps/09-select-overdue-sort.js` | **A1 原子步：真实鼠标选择「按逾期时间最近排序」**；不主动刷新、不点击工单 | 改 A1 排序动作时 |
 | `scripts/jl-steps/10-read-urgent-after-sale-list.js` | **A1 原子步：读取 48 小时内工单**；倒计时从可见卡片 `.el-timer` 组件读取，不依赖后缀文案；分页用真实鼠标点下一页，遇到第一条 >48h 早停 | 改 A1 列表读取/分页/时效判断时 |
-| `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→检测「售后工单」+「待商家处理」→09→校验排序值+时效升序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
+| `scripts/jl-steps/11-prepare-after-sale-list.js` | **A1 列表准备编排**：对指定 targetId 固定导航售后列表→有界轮询「售后工单」+「待商家处理」业务 DOM→09→校验排序值+时效升序；仅当排序值正确但列表乱序时，等 2 秒后刷新当前列表一次并复核，不重复点击排序→10；不依赖首页菜单/弹窗，不点击处理按钮 | 串联 A1 列表准备时 |
 | `scripts/jl-steps/12-click-work-order-action.js` | **A1 原子步：按指定工单号定位并真实鼠标点击该工单自己的处理按钮**；按钮不在视口则 mouseWheel 滚入，打开后校验新 tab 属于目标工单 | 改 A1 打开指定工单详情时 |
 | `scripts/jl-steps/13-open-single-account-work-order.js` | **A1 单账号打开工单编排**：打开账号→准备 48 小时待处理列表→确认目标在列表→只打开目标工单详情 tab；不审批不拒绝，处理完成前不导航首页 | 串联 A1 单账号工单入口时 |
 | `scripts/jl-steps/14-process-single-account-fixed-batch.js` | **A1/A2 固定清单逐单生产编排**：固定 48h 清单，逐单打开详情 tab，target-aware 采集，inferDecision，shouldAutoExecute + executionJournal 安全门；当前命中后只会自动 approve，否则写回待确认/等待重查 | 改 fixed-batch 生产链路、自动执行门禁或写回语义时 |
@@ -88,7 +88,7 @@ entry: cli.js
 ### 当前 A2 安全编排 / A1 固定清单生产流程
 
 1. `openAccountFlow`：tab 数量门 → 实时店铺匹配 → 复用或清理验证后注入。
-2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 页面门禁 → 逾期排序 → 读取 48h 列表。
+2. `11-prepare-after-sale-list.js`：固定导航售后列表 → 有界等待业务 DOM 就绪 → 页面门禁 → 逾期排序；若仅列表乱序则等 2 秒刷新一次并复核，不重复点排序 → 读取 48h 列表。
 3. `13-open-single-account-work-order.js`：确认目标工单在 urgent 列表后，精确打开其详情 tab；当前不审批、不拒绝。
 4. 步骤 14 是当前固定清单生产入口：首次读取 `<=48h` 清单作为不可变快照；逐单定位、打开详情 tab、采集、推理、自动执行判定、写回原 queue/simulation、关闭详情 tab。前端“处理工单”按钮已接入正式入口；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，未命中则写回 simulated/waiting。自动执行中断后的 recovery 仅有本地状态收口能力，无外部 CLI/API/UI；当前实际处理以重采覆盖或手动处理后归档为主。
 5. **执行操作 & 重新采集推理**（2026-06-29 重构）：`execExecute` 和 `execReprocessOne` 已迁移到 A1 安全编排链路，复用与步骤 14 相同的核心函数：
@@ -206,6 +206,7 @@ await cdp.navigate(targetId, 'https://...');
 | 30 | `readTicket` 退货物流区块异步加载 | 详情页 verifyJS 只等「售后类型」出现，但「退货物流信息」区域异步渲染 → `bodyText` 抓取时退货单号尚未出现 → `returnTracking` 为空 → `inferRefundReturn` 误入「无快递单号→超期无理由退货」分支。**修复（2026-06-30）**：`READ_ORDER_INFO_JS` 前轮询等「退货物流单号/退货物流信息」出现（最多 5s）。 |
 | 31 | RETURN_KEYWORDS 缺少「到达商家仓库」 | 圆通退回件物流写「您的包裹即将到达商家仓库，正在验收中」不写「退回」→ 赠品实际已退回但关键词未命中 → 误判为在途。**修复（2026-06-29）**：新增 `到达商家仓库`。`入站` 被驳回（outbound 配送也出现"入站"导致误判）。 |
 | 32 | 工单列表倒计时按后缀白名单定位 | 平台后缀存在 `后自动退款`、`后供应商处理超时`、`后流转至客服` 等且可能继续新增。Step 10 必须从可见工单卡片的 `.el-timer` 组件读取完整文本，只严格解析数字主体；有工单号却解析不到倒计时时仍保持 fail-closed，停止冻结 48 小时清单，禁止静默漏单。 |
+| 33 | 排序值正确但列表仍混入旧顺序就直接判账号异常 | 这是平台列表异步渲染状态不一致，不是排序选择失败或 Session 失效。排序校验必须从卡片 `.el-timer` 读取全部倒计时后缀。Step 11 只在 `sortOk=true && ascending=false` 时等待 2 秒、刷新当前已确认的售后列表一次，业务 DOM 就绪后再等 2 秒复核；不重复点击排序、不重跑账号切换、不重试写操作。刷新后仍异常继续 fail-closed，禁止循环刷新。 |
 
 ## PATHS
 

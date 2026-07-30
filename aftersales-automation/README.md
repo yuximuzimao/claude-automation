@@ -45,7 +45,7 @@ node cli.js reset-circuit                        # 人工确认后清除风控�
 当前目标链路：
 
 ```text
-安全打开账号 → 固定导航售后列表 → 排序/读取 48h 固定清单
+安全打开账号 → 固定导航售后列表 → 排序校验（瞬时乱序仅刷新一次）/读取 48h 固定清单
             → 逐单定位工单 → 打开详情 tab → target-aware 采集
             → inferDecision → shouldAutoExecute + executionJournal 门禁
             → 命中已授权最小案例则自动 approve，否则写入待确认/等待重查
@@ -59,7 +59,7 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 - **CDP**（`lib/cdp.js`）：直连 Chrome port 9222，物理点击/JS eval/页面导航
 - **JL session state**（`lib/jl-session-state.js`）：记录当前 SCRM tab 实际账号，避免多账号扫描后跳过必要注入
 - **安全账号编排**（`lib/jl/open-account-flow.js`）：匹配账号则复用；切换时清理并复查认证 Cookie，将同一 `targetId` 交给注入步骤
-- **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗
+- **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗；排序值正确但列表乱序时，只等待 2 秒并刷新当前列表一次，重新就绪后复核，不重复点击排序
 - **A1/A2 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：当前生产入口为 `POST /api/accounts/:num/a1-fixed-batch` → `op-queue` → `processSingleAccountFixedBatch`。入口固定单账号 + 48h 清单；前端“处理工单”按钮只在账号 session ok 时显示，点击后二次确认。Step14 严格串行逐单处理，写回原 queue/simulation；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，其余进入待确认/等待重查。
 - **已授权自动分支**：授权粒度与统计复盘中的最小 `caseId` 一致，不按单号或粗场景放开。当前包括“七天无理由（不喜欢/不合适）＋退货退款＋严格精确退回”和“多拍/拍错/不想要＋仅退款＋主品赠品全部未发货”。后者执行前重新核验每个主品/赠品子订单的 ERP 结果、平台交易号、未发货状态及无运单事实。
 - **人工确认执行边界**：换货及商责分支始终设置 `requiresHumanReview + autoExecutionBlocked`，不会进入扫描中的无人自动执行。退回规格、数量、良次品严格一致并给出明确 approve/reject 动作时，人工核对后仍可点击单笔“执行操作”或主动发起批量执行；换货由 `execute-decision.js` 精确分派到“同意换货/拒绝换货”，找不到对应类型按钮即停止，不会借用退款按钮。
