@@ -485,51 +485,24 @@ def _objective_group(profile: dict[str, bool], loot_class: str | None) -> str:
 
 def _objective_text(data: QuestieData, group: str, qids: list[int], anchor: str) -> tuple[str, list[str]]:
     names = _name_list(data, qids)
-    place = f"在{anchor}" if anchor else "在当前任务区域"
+    place = f"{anchor}：" if anchor else ""
     if group == "loot_must":
-        return f"{place}击杀目标并拾取{names}所需任务物品，按五号最低进度完成", ["打怪掉物·必做", "五号分别拾取"]
+        return f"{place}完成{names}，五号分别拾取到齐", ["打怪掉物·必做", "五号分别拾取"]
     if group == "loot_optional":
-        return f"经验不足时，{place}击杀目标并拾取{names}所需任务物品；经验足够可跳过", ["打怪掉物·可跳", "五号分别拾取"]
+        return f"{place}经验不足再做{names}；五号分别拾取", ["打怪掉物·可跳", "五号分别拾取"]
     if group == "ability":
-        return f"{place}完成{names}的技能或特殊操作", ["五号分别使用技能"]
+        return f"{place}五号分别完成{names}的技能操作", ["五号分别使用技能"]
     if group == "object":
-        return f"{place}完成{names}的点击或拾取目标", ["五号分别点击"]
-    return f"{place}由主号完成{names}的击杀目标，四个跟随号保持跟随", []
-
-
-def _short_next(step: dict[str, Any] | None, next_name: str) -> str:
-    if step is None:
-        return f"前往{next_name}" if next_name else "到达80级后结束路线"
-    tags = set(step.get("tags", []))
-    text = str(step.get("text", ""))
-    if "五号分别接取" in tags:
-        return "继续集中接任务"
-    if "五号分别交付" in tags:
-        return "继续集中交任务"
-    if "打怪掉物·必做" in tags:
-        return "继续处理必做任务物品"
-    if "打怪掉物·可跳" in tags:
-        return "按当前经验决定是否补做可跳任务"
-    if "五号分别点击" in tags:
-        return "继续处理附近点击目标"
-    if "五号分别使用技能" in tags:
-        return "继续处理附近特殊操作"
-    if text.startswith("经验足够") or text.startswith("达到80级"):
-        return text.split("。", 1)[0]
-    if text:
-        return text.split("；", 1)[0].rstrip("。")
-    return f"前往{next_name}" if next_name else "继续下一步"
+        return f"{place}五号分别完成{names}的点击或拾取", ["五号分别点击"]
+    return f"{place}主号完成{names}的击杀目标", []
 
 
 def _finalize_step_flow(steps: list[dict[str, Any]], next_name: str) -> list[dict[str, Any]]:
-    result: list[dict[str, Any]] = []
-    for index, step in enumerate(steps):
-        text = str(step["text"]).rstrip("。；")
-        if "之后：" not in text:
-            next_step = steps[index + 1] if index + 1 < len(steps) else None
-            text += f"；之后：{_short_next(next_step, next_name)}"
-        result.append({**step, "text": text + "。"})
-    return result
+    del next_name
+    return [
+        {**step, "text": str(step["text"]).rstrip("。；") + "。"}
+        for step in steps
+    ]
 
 
 def _auto_steps(
@@ -547,18 +520,45 @@ def _auto_steps(
     events: list[dict[str, Any]] = []
     objective_seen: set[int] = set()
 
-    def add_event(kind: str, qids: list[int], anchor: str) -> None:
+    def add_event(kind: str, qids: list[int], anchor: str, anchor_key: tuple[Any, ...]) -> None:
         unique_qids = list(dict.fromkeys(qids))
         if not unique_qids:
             return
-        if events and events[-1]["kind"] == kind:
+        same_area = False
+        if events and len(events[-1]["anchor_key"]) == 3 and len(anchor_key) == 3:
+            previous_x, previous_y = events[-1]["anchor_key"][1:]
+            current_x, current_y = anchor_key[1:]
+            if all(
+                isinstance(value, (int, float)) and value > -900
+                for value in (previous_x, previous_y, current_x, current_y)
+            ):
+                same_area = (
+                    (float(previous_x) - float(current_x)) ** 2
+                    + (float(previous_y) - float(current_y)) ** 2
+                    <= 6.25
+                )
+        if (
+            events
+            and events[-1]["kind"] == kind
+            and (events[-1]["anchor_key"] == anchor_key or same_area)
+        ):
             merged = list(dict.fromkeys(events[-1]["qids"] + unique_qids))
-            if len(merged) <= 8:
+            if len(merged) <= 4:
                 events[-1]["qids"] = merged
-                if anchor and anchor not in events[-1]["anchors"]:
-                    events[-1]["anchors"].append(anchor)
+                previous_anchors = [
+                    value for value in str(events[-1]["anchor"]).split("、") if value
+                ]
+                if anchor and anchor not in previous_anchors and len(previous_anchors) < 2:
+                    events[-1]["anchor"] = "、".join(previous_anchors + [anchor])
                 return
-        events.append({"kind": kind, "qids": unique_qids, "anchors": [anchor] if anchor else []})
+        events.append(
+            {
+                "kind": kind,
+                "qids": unique_qids,
+                "anchor": anchor,
+                "anchor_key": anchor_key,
+            }
+        )
 
     for candidate_step in candidate.get("steps", []):
         qids = [qid for qid in candidate_step.get("quest_ids", []) if qid in selected_qids]
@@ -566,15 +566,26 @@ def _auto_steps(
             continue
         action = str(candidate_step.get("action", ""))
         anchor = _anchor_name(candidate_step)
+        representative = candidate_step.get("anchor_details", {}).get("representative", {})
+        anchor_key = (
+            anchor,
+            round(float(representative.get("x", -999.0)), 1),
+            round(float(representative.get("y", -999.0)), 1),
+        )
         if action == "接取":
-            add_event("accept", qids, anchor)
+            add_event("accept", qids, anchor, anchor_key)
             continue
         if action == "交付":
             for quest_id in qids:
                 if quest_id in loot_class and quest_id not in objective_seen:
-                    add_event(f"loot_{loot_class[quest_id]}", [quest_id], "")
+                    add_event(
+                        f"loot_{loot_class[quest_id]}",
+                        [quest_id],
+                        "",
+                        ("synthetic", quest_id),
+                    )
                     objective_seen.add(quest_id)
-            add_event("turnin", qids, anchor)
+            add_event("turnin", qids, anchor, anchor_key)
             continue
 
         grouped: dict[str, list[int]] = {}
@@ -587,17 +598,21 @@ def _auto_steps(
                 group_order.append(group)
             grouped[group].append(quest_id)
         for group in group_order:
-            add_event(group, grouped[group], anchor)
+            add_event(group, grouped[group], anchor, anchor_key)
             objective_seen.update(grouped[group])
 
     for quest_id in sorted(loot_class):
         if quest_id in selected_qids and quest_id not in objective_seen:
-            add_event(f"loot_{loot_class[quest_id]}", [quest_id], "")
+            add_event(
+                f"loot_{loot_class[quest_id]}",
+                [quest_id],
+                "",
+                ("synthetic", quest_id),
+            )
             objective_seen.add(quest_id)
 
     for event in events:
-        anchors = event["anchors"]
-        anchor = anchors[0] if len(anchors) == 1 else "当前任务带"
+        anchor = event["anchor"]
         qids = event["qids"]
         kind = event["kind"]
         if kind == "accept":
@@ -613,31 +628,52 @@ def _auto_steps(
     optional_count = sum(1 for value in loot_class.values() if value == "optional")
     if next_name:
         if optional_count:
-            branch = f"经验足够：直接前往{next_name}。经验不足：补做本地区标记为【打怪掉物·可跳】的任务"
+            branch = f"经验足够：前往{next_name}；经验不足：补做本地区尚未完成的支线任务"
         else:
-            branch = f"经验足够：直接前往{next_name}。经验不足：完成本地区尚未勾选的集中任务"
+            branch = f"经验足够：前往{next_name}；经验不足：完成本地区剩余任务"
     else:
-        branch = "达到80级：路线结束。经验不足：完成冰冠冰川尚未勾选的集中任务"
+        branch = "达到80级：路线结束；经验不足：完成冰冠冰川剩余任务"
     steps.append(_make_step(branch, []))
     return _finalize_step_flow(steps, next_name)
 
 
-def _manual_steps(segment: dict[str, Any], next_name: str) -> list[dict[str, Any]]:
-    steps = [
+def _steps_from_spec(raw_steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
         _make_step(
             str(step["text"]),
             [str(tag) for tag in step.get("tags", [])],
             [int(value) for value in step.get("quest_ids", [])],
         )
-        for step in segment.get("manual_steps", [])
+        for step in raw_steps
     ]
+
+
+def _manual_steps(segment: dict[str, Any], next_name: str) -> list[dict[str, Any]]:
+    steps = _steps_from_spec(segment.get("manual_steps", []))
     steps.append(
         _make_step(
-            f"经验足够：直接前往{next_name}。经验不足：补做本地区标记为【打怪掉物·可跳】的任务",
+            f"经验足够：前往{next_name}；经验不足：补做本地区尚未完成的任务",
             [],
         )
     )
     return _finalize_step_flow(steps, next_name)
+
+
+def _annotate_quest_kinds(data: QuestieData, steps: list[dict[str, Any]]) -> None:
+    for step in steps:
+        quest_kinds: dict[str, str] = {}
+        for quest_id in step.get("quest_ids", []):
+            profile = _objective_profile(data, int(quest_id))
+            is_collection = (
+                profile["kill_drop"]
+                or profile["object"]
+                or profile["object_drop"]
+                or profile["item_trigger"]
+            )
+            quest_kinds[_quest_name(data, int(quest_id))] = (
+                "collect" if is_collection else "simple"
+            )
+        step["quest_kinds"] = quest_kinds
 
 
 def _build_loot_classifications(
@@ -709,6 +745,15 @@ def build_simple_route(
         candidate_path = _candidate_path(candidate_root, int(segment["zone_id"]))
         candidate = json.loads(candidate_path.read_text(encoding="utf-8"))
         selected, selected_quests, skipped = _select_quests(data, candidate, segment, used_qids)
+        candidate_qids = {
+            int(quest["quest_id"])
+            for quest in candidate.get("quest_catalog", [])
+            if isinstance(quest, dict) and isinstance(quest.get("quest_id"), int)
+        }
+        prefix_qids = {
+            int(value) for value in segment.get("manual_prefix_quest_ids", [])
+        }
+        selected.update(prefix_qids & candidate_qids)
         used_qids.update(selected)
         builds.append(SegmentBuild(segment, candidate, selected, selected_quests, skipped, [], []))
 
@@ -729,14 +774,59 @@ def build_simple_route(
         next_name = str(builds[index + 1].spec["name"]) if index + 1 < len(builds) else ""
         if segment.get("manual_steps"):
             steps = _manual_steps(segment, next_name)
-            loot_tasks = [dict(record) for record in segment.get("loot_tasks", [])]
+            public_steps = list(steps)
+            loot_tasks = _loot_records(
+                data, build.selected_qids, classifications, manual_overrides
+            )
             selected_count = len(build.selected_qids)
         else:
             assert build.candidate is not None
-            local_class = {qid: classifications[qid] for qid in build.selected_qids if qid in classifications}
-            steps = _auto_steps(data, build.candidate, build.selected_qids, local_class, segment, next_name)
-            loot_tasks = _loot_records(data, build.selected_qids, classifications, manual_overrides)
+            local_class = {
+                qid: classifications[qid]
+                for qid in build.selected_qids
+                if qid in classifications
+            }
+            prefix_qids = {
+                int(value) for value in segment.get("manual_prefix_quest_ids", [])
+            }
+            prefix_steps = _steps_from_spec(
+                segment.get("manual_prefix_steps", [])
+            )
+            auto_segment = dict(segment)
+            if prefix_steps:
+                auto_segment.pop("entry", None)
+            auto_qids = build.selected_qids - prefix_qids
+            auto_class = {
+                qid: value for qid, value in local_class.items() if qid in auto_qids
+            }
+            steps = prefix_steps + _auto_steps(
+                data,
+                build.candidate,
+                auto_qids,
+                auto_class,
+                auto_segment,
+                next_name,
+            )
+            if prefix_steps:
+                public_steps = prefix_steps + [
+                    _make_step(
+                        "本地图后半段尚未人工实跑，暂不提供路线",
+                        [],
+                    )
+                ]
+            else:
+                public_steps = [
+                    _make_step(
+                        "本地图尚未人工实跑，暂不提供路线",
+                        [],
+                    )
+                ]
+            loot_tasks = _loot_records(
+                data, build.selected_qids, classifications, manual_overrides
+            )
             selected_count = len(build.selected_qids)
+        _annotate_quest_kinds(data, steps)
+        _annotate_quest_kinds(data, public_steps)
         build.steps = steps
         build.loot_tasks = loot_tasks
         segments.append(
@@ -747,6 +837,7 @@ def build_simple_route(
                 "level_max": int(segment["level_max"]),
                 "audit": segment["audit"],
                 "steps": steps,
+                "public_steps": public_steps,
                 "loot_tasks": loot_tasks,
                 "selected_quest_ids": sorted(build.selected_qids),
                 "selected_quest_count": selected_count,
@@ -791,6 +882,9 @@ def build_simple_route(
         "stats": {
             "segment_count": len(segments),
             "step_count": sum(len(segment["steps"]) for segment in segments),
+            "public_step_count": sum(
+                len(segment["public_steps"]) for segment in segments
+            ),
             "selected_quest_count": sum(segment["selected_quest_count"] for segment in segments),
             "prerequisite_added_count": prerequisite_audit["added_count"],
             "prerequisite_removed_count": prerequisite_audit["removed_count"],
@@ -829,13 +923,21 @@ def validate_simple_route(route: dict[str, Any]) -> None:
                 raise ValueError(f"掉落任务未在页面步骤中显示标签: {quest_id} {record['name']}")
 
 
-def _tag_html(tag: str) -> str:
-    kind = "five"
-    if tag == "打怪掉物·必做":
-        kind = "must"
-    elif tag == "打怪掉物·可跳":
-        kind = "optional"
-    return f'<span class="tag tag-{kind}">【{html.escape(tag)}】</span>'
+def _step_text_html(step: dict[str, Any]) -> str:
+    text = str(step.get("text", ""))
+    quest_kinds = step.get("quest_kinds", {})
+    parts: list[str] = []
+    position = 0
+    for match in re.finditer(r"《([^》]+)》", text):
+        parts.append(html.escape(text[position:match.start()]))
+        quest_name = match.group(1)
+        kind = quest_kinds.get(quest_name, "simple")
+        parts.append(
+            f'<span class="quest-name quest-{kind}">《{html.escape(quest_name)}》</span>'
+        )
+        position = match.end()
+    parts.append(html.escape(text[position:]))
+    return "".join(parts)
 
 
 def render_simple_html(route: dict[str, Any]) -> str:
@@ -849,13 +951,13 @@ def render_simple_html(route: dict[str, Any]) -> str:
             f'<strong>{html.escape(segment["name"])}</strong><small>{segment["level_min"]}—{segment["level_max"]}</small></button>'
         )
         items: list[str] = []
-        for step_index, step in enumerate(segment["steps"], 1):
+        visible_steps = segment.get("public_steps", segment["steps"])
+        for step_index, step in enumerate(visible_steps, 1):
             step_id = f'{segment["id"]}-{step_index}'
-            tags = "".join(_tag_html(tag) for tag in step.get("tags", []))
             items.append(
                 f'<li class="route-step" data-step="{html.escape(step_id)}">'
                 f'<label><input type="checkbox" aria-label="完成步骤{step_index}"><span class="step-number">{step_index}</span>'
-                f'<span class="step-copy">{html.escape(step["text"])}<span class="tags">{tags}</span></span></label></li>'
+                f'<span class="step-copy">{_step_text_html(step)}</span></label></li>'
             )
         hidden = "" if active else " hidden"
         panels.append(
@@ -868,9 +970,9 @@ def render_simple_html(route: dict[str, Any]) -> str:
         )
 
     css = """
-:root{--paper:#f7f3e8;--ink:#201d18;--muted:#6f675b;--line:#d8cfbd;--blood:#8f2434;--blood-dark:#641724;--gold:#a96f13;--soft:#eee5d2;--must:#9b1c31;--optional:#8b6818;--done:#8c9785}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{padding:34px 24px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbf8f0 0%,var(--paper) 100%)}.top-inner{max-width:980px;margin:auto}.eyebrow{margin:0 0 8px;color:var(--blood);font-size:14px;font-weight:800;letter-spacing:.14em}.top h1{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.04em}.lede{max-width:760px;margin:16px 0 18px;color:var(--muted)}.route-status{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.progress-pill{display:inline-flex;gap:7px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);background:#fffaf0;border-radius:999px}.progress-pill strong{font-size:22px;color:var(--blood)}.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(247,243,232,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.map-tabs{max-width:100%;display:flex;gap:8px;overflow-x:auto;padding:12px max(18px,calc((100vw - 980px)/2));scrollbar-width:thin}.map-tab{flex:0 0 auto;display:grid;gap:1px;min-width:112px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fffaf1;color:var(--ink);text-align:left}.map-tab strong{font-size:16px}.map-tab small{color:var(--muted);font-size:12px}.map-tab[aria-selected="true"]{border-color:var(--blood);background:var(--blood);color:white;box-shadow:0 5px 16px rgba(100,23,36,.18)}.map-tab[aria-selected="true"] small{color:#f4dfe3}.map-tab:focus-visible,.route-step input:focus-visible,.panel-nav button:focus-visible,.reset:focus-visible{outline:3px solid #2b68b8;outline-offset:3px}main{max-width:980px;margin:0 auto;padding:34px 20px 80px}.map-panel[hidden]{display:none}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--ink)}.map-heading p{margin:0 0 2px;color:var(--blood);font-size:14px;font-weight:800}.map-heading h2{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(32px,5vw,48px)}.map-progress{color:var(--muted);font-variant-numeric:tabular-nums}ol{list-style:none;margin:0;padding:0;counter-reset:route}.route-step{border-bottom:1px solid var(--line)}.route-step label{display:grid;grid-template-columns:30px 52px minmax(0,1fr);align-items:start;gap:8px;padding:17px 8px;cursor:pointer}.route-step:hover{background:rgba(238,229,210,.55)}.route-step input{width:22px;height:22px;margin-top:5px;accent-color:var(--blood)}.step-number{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-weight:800;font-variant-numeric:tabular-nums}.step-copy{padding-top:3px;font-size:clamp(18px,2.5vw,22px);font-weight:650}.tags{display:inline-flex;flex-wrap:wrap;gap:5px;margin-left:8px;vertical-align:middle}.tag{display:inline-block;font-size:13px;font-weight:800;white-space:nowrap}.tag-must{color:var(--must)}.tag-optional{color:var(--optional)}.tag-five{color:var(--blood-dark)}.route-step.done{color:var(--done)}.route-step.done .step-copy{text-decoration:line-through;text-decoration-thickness:1px}.route-step.done .tag{opacity:.55}.panel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.panel-nav button{min-width:140px;padding:11px 16px;border:1px solid var(--line);border-radius:7px;background:#fffaf1;color:var(--ink);font-weight:800}.panel-nav button:disabled{opacity:.35;cursor:not-allowed}.next-map{margin-left:auto;background:var(--blood)!important;border-color:var(--blood)!important;color:white!important}.noscript{max-width:980px;margin:20px auto;padding:14px 20px;background:#fff0cf;border:1px solid #d3a651}
-@media(max-width:620px){body{font-size:16px}.top{padding:26px 18px 18px}.route-step label{grid-template-columns:28px 42px minmax(0,1fr);padding:15px 2px}.step-number{width:34px;height:34px}.tags{display:flex;margin:7px 0 0}.map-heading{align-items:start}.panel-nav button{min-width:0;flex:1}}
+:root{--paper:#f7f3e8;--ink:#201d18;--muted:#6f675b;--line:#d8cfbd;--blood:#8f2434;--blood-dark:#641724;--gold:#a96f13;--soft:#eee5d2;--collect:#b51f32;--simple:#27823d;--done:#8c9785}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{padding:34px 24px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbf8f0 0%,var(--paper) 100%)}.top-inner{max-width:980px;margin:auto}.eyebrow{margin:0 0 8px;color:var(--blood);font-size:14px;font-weight:800;letter-spacing:.14em}.top h1{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.04em}.lede{max-width:760px;margin:16px 0 18px;color:var(--muted)}.route-status{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.progress-pill{display:inline-flex;gap:7px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);background:#fffaf0;border-radius:999px}.progress-pill strong{font-size:22px;color:var(--blood)}.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(247,243,232,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.map-tabs{max-width:100%;display:flex;gap:8px;overflow-x:auto;padding:12px max(18px,calc((100vw - 980px)/2));scrollbar-width:thin}.map-tab{flex:0 0 auto;display:grid;gap:1px;min-width:112px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fffaf1;color:var(--ink);text-align:left}.map-tab strong{font-size:16px}.map-tab small{color:var(--muted);font-size:12px}.map-tab[aria-selected="true"]{border-color:var(--blood);background:var(--blood);color:white;box-shadow:0 5px 16px rgba(100,23,36,.18)}.map-tab[aria-selected="true"] small{color:#f4dfe3}.map-tab:focus-visible,.route-step input:focus-visible,.panel-nav button:focus-visible,.reset:focus-visible{outline:3px solid #2b68b8;outline-offset:3px}main{max-width:980px;margin:0 auto;padding:34px 20px 80px}.map-panel[hidden]{display:none}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--ink)}.map-heading p{margin:0 0 2px;color:var(--blood);font-size:14px;font-weight:800}.map-heading h2{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(32px,5vw,48px)}.map-progress{color:var(--muted);font-variant-numeric:tabular-nums}ol{list-style:none;margin:0;padding:0;counter-reset:route}.route-step{border-bottom:1px solid var(--line)}.route-step label{display:grid;grid-template-columns:30px 52px minmax(0,1fr);align-items:start;gap:8px;padding:17px 8px;cursor:pointer}.route-step:hover{background:rgba(238,229,210,.55)}.route-step input{width:22px;height:22px;margin-top:5px;accent-color:var(--blood)}.step-number{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-weight:800;font-variant-numeric:tabular-nums}.step-copy{padding-top:3px;font-size:clamp(18px,2.5vw,22px);font-weight:650}.quest-name{font-weight:900}.quest-collect{color:var(--collect)}.quest-simple{color:var(--simple)}.route-step.done{color:var(--done)}.route-step.done .step-copy{text-decoration:line-through;text-decoration-thickness:1px}.route-step.done .quest-name{opacity:.55}.panel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.panel-nav button{min-width:140px;padding:11px 16px;border:1px solid var(--line);border-radius:7px;background:#fffaf1;color:var(--ink);font-weight:800}.panel-nav button:disabled{opacity:.35;cursor:not-allowed}.next-map{margin-left:auto;background:var(--blood)!important;border-color:var(--blood)!important;color:white!important}.noscript{max-width:980px;margin:20px auto;padding:14px 20px;background:#fff0cf;border:1px solid #d3a651}
+@media(max-width:620px){body{font-size:16px}.top{padding:26px 18px 18px}.route-step label{grid-template-columns:28px 42px minmax(0,1fr);padding:15px 2px}.step-number{width:34px;height:34px}.map-heading{align-items:start}.panel-nav button{min-width:0;flex:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 """
     script = """
@@ -959,7 +1061,7 @@ def render_simple_html(route: dict[str, Any]) -> str:
 <header class="top"><div class="top-inner">
 <p class="eyebrow">五开号 · 单一路线</p>
 <h1>{html.escape(route["title"])}</h1>
-<p class="lede">主号负责移动和普通击杀，另外四个角色保持跟随。只有看到步骤末尾的逐号提醒时，才切换窗口操作。</p>
+<p class="lede">红色任务名需要逐号收集或点击；绿色任务名是普通击杀、接交或简单流程。每一步只处理一个实际地点。</p>
 <div class="route-status"><span class="progress-pill"><strong id="done-count">0</strong><span>/</span><span id="total-count">0</span><span>已完成</span></span><button class="reset" type="button">清空勾选</button></div>
 </div></header>
 <div class="tabs-wrap"><nav class="map-tabs" role="tablist" aria-label="练级地图">{''.join(tabs)}</nav></div>
@@ -988,10 +1090,11 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         "",
         "## N — 最终目标和路线策略",
         "",
-        "- 最终用户界面只有一个HTML文件和一条推荐路线。",
-        "- 五个角色按一个主控号移动；普通击杀默认由主号完成，只有个人接交、拾取、点击和技能操作才提醒逐号切换。",
+        "- 最终用户入口只有一个HTML文件，但未经实跑的自动阶段只能视为审阅草稿，不能称为可用攻略。",
+        "- 五个角色按一个主控号移动；普通击杀默认由主号完成，个人拾取和点击以五号最低进度为准。",
+        "- 收集或点击类任务名直接标红，普通击杀、接交和简单流程标绿；用户页面不显示独立分类标签。",
         "- 第一轮目标是连续升到80级，而不是全地图清空或金币最大化。",
-        "- RXP只决定地图顺序、等级重叠和换区时机；Questie决定任务存在、角色条件、任务前置和目标类型。",
+        "- RXP只参考地图阶段；Questie提供任务候选和前置；实际顺序必须由道路、炉石、飞行与实跑决定。",
         f"- 最终地图顺序：{sequence}",
         "",
         "## E — 使用的数据",
@@ -1012,17 +1115,17 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         "## T — 测试结果和尚未验证的问题",
         "",
         f"- 生成地图阶段：{stats['segment_count']}。",
-        f"- 生成清单步骤：{stats['step_count']}。",
-        f"- 进入主路线的Questie任务：{stats['selected_quest_count']}。",
+        f"- 内部候选步骤：{stats['step_count']}；用户页面公开步骤：{stats['public_step_count']}。",
+        f"- 进入主路线候选的Questie任务：{stats['selected_quest_count']}。",
         f"- 自动补入可达前置：{stats['prerequisite_added_count']} 个；因主路线无法满足前置而删除：{stats['prerequisite_removed_count']} 个。",
         f"- 最终未满足前置：{stats['unresolved_prerequisite_count']} 条。`preQuestGroup`按全部完成，`preQuestSingle`按任选其一校验。",
-        f"- `【打怪掉物·必做】`：{stats['loot_must_count']} 个唯一任务。",
-        f"- `【打怪掉物·可跳】`：{stats['loot_optional_count']} 个唯一任务。",
+        f"- 内部仍分类为必做掉落 {stats['loot_must_count']} 个、可跳掉落 {stats['loot_optional_count']} 个，但用户页面只通过任务名红/绿着色表达操作重点。",
         "- 逐日岛1—6级为人工编排，其中西侧树人/神殿顺序和菲伦德雷任务物品的五开行为仍需继续实跑。",
-        "- 6—80级目前仍是RXP地图顺序约束下的Questie自动推导，尚未经过完整人工逐步实跑；不能宣称已经验证最优或保证一次无断链。",
+        "- 永歌森林鹰翼广场至晴风村已根据2026-07-31实测反馈人工修订：加入炉石，拆分鱼头、军备、书页、法力水晶，并把豹皮并入游侠萨蕾恩路线。",
+        "- 永歌森林后半段及12—80级仍是自动候选草稿；取消跨地点动作合并后步骤数明显增加，证明其不能直接作为攻略发布。",
         "- Questie WotLK修正层尚未完整叠加到基础库；若实际任务与页面不一致，应先核对修正层再改路线。",
-        "- 静态校验会检查：单HTML、地图标签、步骤非空、掉落任务二选一分类、页面不含旧导航器字段。",
-        "- 2026-07-30验证：`python3 -m unittest discover -s tests` 共13项通过；提取页面脚本后执行 `node --check` 通过。",
+        "- 静态校验会检查：单HTML、地图标签、步骤非空、掉落任务内部分类完整、页面不含旧导航器字段与旧分类标签。",
+        "- 2026-07-31验证：`python3 -m unittest discover -s tests` 共13项通过；最终提交前需再次执行页面脚本 `node --check`。",
         "",
         "## RXP与Questie不一致或需要解释的地方",
         "",

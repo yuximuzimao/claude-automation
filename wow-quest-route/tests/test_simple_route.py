@@ -119,9 +119,10 @@ class SimpleRouteTests(unittest.TestCase):
                     "level_max": 2,
                     "steps": [
                         {
-                            "text": "接取测试任务；之后：前往目标区域。",
+                            "text": "接取《测试任务》。",
                             "tags": ["五号分别接取"],
                             "quest_ids": [1],
+                            "quest_kinds": {"测试任务": "simple"},
                         }
                     ],
                     "loot_tasks": [],
@@ -133,6 +134,7 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertIn('role="tablist"', rendered)
         self.assertIn('type="checkbox"', rendered)
         self.assertIn("localStorage", rendered)
+        self.assertIn('class="quest-name quest-simple"', rendered)
         for term in FORBIDDEN_HTML_TERMS:
             self.assertNotIn(term, rendered)
 
@@ -159,8 +161,15 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertEqual(rendered.count('class="map-panel"'), 42)
         self.assertIn("逐日岛", rendered)
         self.assertIn("冰冠冰川", rendered)
-        self.assertIn("【打怪掉物·必做】", rendered)
-        self.assertIn("【打怪掉物·可跳】", rendered)
+        self.assertIn('class="quest-name quest-collect"', rendered)
+        self.assertIn('class="quest-name quest-simple"', rendered)
+        self.assertEqual(rendered.count('type="checkbox"'), 82)
+        self.assertIn("本地图尚未人工实跑，暂不提供路线", rendered)
+        self.assertIn("炉石绑定在这里", rendered)
+        self.assertNotIn("到学徒梅雷多尔集中接取《学徒的欺瞒》", rendered)
+        self.assertNotIn("【打怪掉物·必做】", rendered)
+        self.assertNotIn("【打怪掉物·可跳】", rendered)
+        self.assertNotIn("之后：", rendered)
         self.assertNotIn("Questie", rendered)
         self.assertNotIn("RXP", rendered)
         for term in FORBIDDEN_HTML_TERMS:
