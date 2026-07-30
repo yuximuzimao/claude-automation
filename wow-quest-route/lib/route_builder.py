@@ -170,10 +170,12 @@ def build_route(
     return {
         "route_id": spec["route_id"],
         "title": spec["title"],
+        "output_basename": spec.get("output_basename", "sunstrider-isle"),
         "zone": spec["zone"],
         "map_area_id": map_area_id,
         "quest_zone_or_sort": spec["quest_zone_or_sort"],
         "assumptions": spec["assumptions"],
+        "segments": spec.get("segments", []),
         "source": {
             "questie_version": data.version,
             "source_sha256": data.source_sha256,
@@ -184,14 +186,7 @@ def build_route(
             str(quest_id): task_observations.get(str(quest_id), {"status": "not_classified"})
             for quest_id in sorted(all_quest_ids)
         },
-        "verification_required": [
-            "五号交付8325后是否全部达到2级；若否，需要补杀多少只法力浮龙",
-            "击杀任务的五号共享进度",
-            "山猫项圈、奥术薄片和首级是否可由五号从同一尸体分别拾取",
-            "三个索兰尼亚物品和达斯雷玛神殿是否必须逐号交互",
-            "被污染的奥术碎片是否五号都能在一次学院路线中获得",
-            "西南目标环与法瑟林学院之间的实际可走道路和跟随卡点",
-        ],
+        "verification_required": spec.get("verification_required", []),
     }
 
 
@@ -256,7 +251,7 @@ def render_markdown(route: dict[str, Any]) -> str:
             f"- **{quest_id} {quest['name']}**：`{observation.get('type')}` — {observation.get('note', '')}"
         )
 
-    lines.extend(["", "## V1实测清单", ""])
+    lines.extend(["", "## 仍需验证", ""])
     lines.extend(f"- [ ] {item}" for item in route["verification_required"])
     lines.extend(
         [
@@ -272,8 +267,9 @@ def render_markdown(route: dict[str, Any]) -> str:
 
 def write_route(route: dict[str, Any], output_dir: Path) -> tuple[Path, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
-    json_path = output_dir / "sunstrider-isle-v1.json"
-    markdown_path = output_dir / "sunstrider-isle-v1.md"
+    basename = route.get("output_basename", "sunstrider-isle")
+    json_path = output_dir / f"{basename}.json"
+    markdown_path = output_dir / f"{basename}.md"
     json_path.write_text(json.dumps(route, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(render_markdown(route), encoding="utf-8")
     return markdown_path, json_path

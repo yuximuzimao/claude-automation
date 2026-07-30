@@ -3,49 +3,49 @@
   "updated_at": "2026-07-30",
   "tasks": {
     "8325": {
-      "type": "kill_shared_expected",
-      "status": "needs_verification",
-      "note": "预计组队击杀共享；离开前检查五号进度。"
+      "type": "kill_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "打怪任务五号同步增加；主号击杀即可推进全队进度。"
     },
     "8326": {
-      "type": "loot_personal_expected",
-      "status": "needs_verification",
-      "note": "山猫项圈按角色任务物品处理，以五号最低数量为准。"
+      "type": "loot_personal_variable",
+      "status": "user_confirmed",
+      "note": "山猫项圈需要逐号查看和拾取；同一尸体不保证每个号都有任务物品，以五号最低数量8个为离开条件。"
     },
     "8330": {
-      "type": "object_personal_expected",
-      "status": "needs_verification",
-      "note": "三个固定物体预计五号分别拾取。"
+      "type": "object_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "索兰尼亚的三个固定物品需要五个角色分别点击/拾取。"
     },
     "8334": {
-      "type": "kill_shared_expected",
-      "status": "needs_verification",
-      "note": "两类看守者击杀预计共享。"
+      "type": "kill_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "打怪任务五号同步增加。"
     },
     "8335": {
-      "type": "mixed_personal",
-      "status": "needs_verification",
-      "note": "击杀预计共享；首级/徽记与任务物品需逐号确认。"
+      "type": "mixed_shared_kill_personal_loot",
+      "status": "partially_confirmed",
+      "note": "击杀部分按用户反馈可视为同步；首级/任务物品仍应逐号检查。"
     },
     "8336": {
-      "type": "loot_personal_expected",
-      "status": "needs_verification",
-      "note": "奥术薄片预计逐号拾取。"
+      "type": "loot_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "奥术薄片需要五个角色分别拾取，以最低进度为准。"
     },
     "8338": {
-      "type": "item_trigger_personal_expected",
-      "status": "needs_verification",
-      "note": "被污染的奥术碎片预计每号拾取并分别接受任务。"
+      "type": "item_trigger_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "五个角色都顺利获得并触发被污染的奥术薄片任务；目标位于建筑上层。"
     },
     "8345": {
-      "type": "object_personal_expected",
-      "status": "needs_verification",
-      "note": "神殿铭牌预计五号分别交互。"
+      "type": "object_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "达斯雷玛神殿只需主号阅读一次，队伍进度同步，不需要五号分别交互。"
     },
     "8346": {
       "type": "ability_personal",
       "status": "database_confirmed",
-      "note": "任务要求使用角色自身种族技能；五号必须分别操作。"
+      "note": "任务要求角色自身使用种族技能，五个角色分别操作。"
     }
   }
 }

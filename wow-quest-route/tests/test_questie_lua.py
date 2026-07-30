@@ -32,6 +32,10 @@ class LuaTableParserTests(unittest.TestCase):
         self.assertEqual(steps, list(range(1, len(steps) + 1)))
         self.assertEqual(spec["map_area_id"], 3430)
         self.assertEqual(spec["quest_zone_or_sort"], 3431)
+        segmented_steps = [step for segment in spec["segments"] for step in segment["steps"]]
+        self.assertEqual(segmented_steps, steps)
+        self.assertEqual(len(set(segmented_steps)), len(steps))
+        self.assertEqual([segment["id"] for segment in spec["segments"]], list("ABCDE"))
 
 
 if __name__ == "__main__":
