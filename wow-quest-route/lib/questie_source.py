@@ -3,11 +3,11 @@ from __future__ import annotations
 import hashlib
 import re
 import zipfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
-from .questie_lua import parse_embedded_table_text
+from .questie_lua import LuaTableParser, parse_embedded_table_text
 
 
 TABLE_PATHS = {
@@ -20,6 +20,7 @@ TABLE_PATHS = {
     "object_names": "Localization/lookups/Wotlk/lookupObjects/zhCN.lua",
     "item_names": "Localization/lookups/Wotlk/lookupItems/zhCN.lua",
 }
+QUEST_XP_PATH = "Database/QuestXP/DB/xpDB-wotlk.lua"
 
 
 @dataclass(frozen=True)
@@ -34,6 +35,7 @@ class QuestieData:
     item_names: dict[Any, Any]
     version: str
     source_sha256: str
+    quest_xp: dict[Any, Any] = field(default_factory=dict)
 
     @staticmethod
     def local_name(table: dict[Any, Any], entity_id: int, fallback: str) -> str:
@@ -81,6 +83,17 @@ def _directory_reader(path: Path) -> tuple[Callable[[str], str], str, str]:
     return read, version, digest
 
 
+def _parse_quest_xp(text: str, source: str) -> dict[Any, Any]:
+    marker = text.find("QuestXP.db")
+    start = text.find("{", marker)
+    if marker == -1 or start == -1:
+        raise ValueError(f"Questie经验数据库格式异常: {source}")
+    parsed = LuaTableParser(text[start:]).parse()
+    if not isinstance(parsed, dict):
+        raise ValueError(f"Questie经验数据库不是Lua table: {source}")
+    return parsed
+
+
 def load_questie(source: str | Path) -> QuestieData:
     path = Path(source).expanduser().resolve()
     if not path.exists():
@@ -95,6 +108,7 @@ def load_questie(source: str | Path) -> QuestieData:
     parsed: dict[str, dict[Any, Any]] = {}
     for key, relative in TABLE_PATHS.items():
         parsed[key] = parse_embedded_table_text(read(relative), relative)
+    quest_xp = _parse_quest_xp(read(QUEST_XP_PATH), QUEST_XP_PATH)
 
     return QuestieData(
         quests=parsed["quests"],
@@ -107,4 +121,5 @@ def load_questie(source: str | Path) -> QuestieData:
         item_names=parsed["item_names"],
         version=version,
         source_sha256=digest,
+        quest_xp=quest_xp,
     )

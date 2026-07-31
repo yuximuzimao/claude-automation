@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | `cli.py` | 命令入口 | 运行或增加命令时 |
 | `lib/questie_lua.py` | 解析 Questie 内嵌 Lua table | 数据读取失败或扩展字段时 |
-| `lib/questie_source.py` | 从 ZIP/目录加载 Questie 数据 | 更换插件来源时 |
+| `lib/questie_source.py` | 从 ZIP/目录加载 Questie任务、中文名和WotLK经验数据库 | 更换插件来源或经验字段时 |
 | `lib/route_builder.py` | 历史逐日岛路线骨架解析、数据补全和输出 | 修改旧逐日岛生成逻辑时 |
 | `lib/simple_route.py` | 单页路线生成、前置闭包、地点合并和任务名着色 | 修改当前单页路线时 |
 | `data/route-specs/simple-leveling-route.json` | 当前1—80地图阶段与人工审计步骤 | 调整任务顺序、炉石或实跑路段时 |
@@ -21,7 +21,7 @@
 ## CORE FLOWS
 
 ### 生成候选路线
-`Questie ZIP/目录 → 解析任务/NPC/物体/物品/中文名 → 读取 route spec → 补全坐标与任务关系 → 输出 Markdown + JSON`
+`Questie ZIP/目录 → 解析任务/NPC/物体/物品/中文名/任务经验 → 读取 route spec → 补全前置、坐标、距离档位和补经验清单 → 输出 HTML + 内部归档`
 
 ### 实测修正
 `用户异常记录 → observations → 调整 route spec 或任务类型 → 重新生成路线 → 保留版本`

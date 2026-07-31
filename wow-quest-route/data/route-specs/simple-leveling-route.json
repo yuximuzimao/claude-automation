@@ -49,28 +49,162 @@
       "level_max": 6,
       "zone_id": 3430,
       "audit": "人工编排并有部分五开实测",
-      "manual_quest_ids": [8325, 8326, 9676, 10068, 8330, 8345, 8336, 8346, 8327, 8334, 8335, 8338, 8347, 9704, 9705, 8350],
+      "manual_quest_ids": [
+        8325,
+        8326,
+        9676,
+        10068,
+        8330,
+        8345,
+        8336,
+        8346,
+        8327,
+        8334,
+        8335,
+        8338,
+        8347,
+        9704,
+        9705,
+        8350
+      ],
       "manual_steps": [
-        {"text": "从玛基斯特莉克丝·艾罗娜接取《夺回逐日岛》；之后去塔外清理法力浮龙。", "tags": ["五号分别接取"]},
-        {"text": "主号击杀8只法力浮龙，四个跟随号同步进度；之后返回艾罗娜。", "tags": []},
-        {"text": "交付《夺回逐日岛》，接取《令人遗憾的措施》和圣骑士训练；之后进入太阳之塔。", "tags": ["五号分别交付", "五号分别接取"]},
-        {"text": "完成圣骑士训练，从耶泰尼斯接取《护井者索兰尼亚》并交给索兰尼亚；再集中接取《索兰尼亚的物品》《达斯雷玛的神龛》《奥术薄片》《无尽的渴求》；之后向塔外南侧移动。", "tags": ["五号分别接取", "五号分别交付"], "quest_ids": [9676, 10068, 8330, 8345, 8336, 8346]},
-        {"text": "沿南侧路线完成奥术洪流、索兰尼亚日记和占卜宝珠；击杀山猫并拾取8个项圈，同时收集奥术薄片；之后返回太阳之塔。", "tags": ["打怪掉物·必做", "打怪掉物·可跳", "五号分别拾取", "五号分别点击", "五号分别使用技能"], "quest_ids": [8326, 8336]},
-        {"text": "交付《令人遗憾的措施》和训练任务，接取《向兰萨恩·派雷隆报到》；奥术薄片满6个时顺便交付；之后沿西侧道路前进。", "tags": ["五号分别交付", "五号分别接取"]},
-        {"text": "向兰萨恩交付报告并接取《攻势》；之后向西推进。", "tags": ["五号分别交付", "五号分别接取"]},
-        {"text": "主号击杀两类树人，沿途逐号取得天灾魔法卷轴，并由主号阅读达斯雷玛神龛；之后返回兰萨恩。", "tags": ["五号分别拾取"]},
-        {"text": "交付《攻势》并接取《放逐者菲伦德雷》；之后进入法瑟林学院。", "tags": ["五号分别交付", "五号分别接取"]},
-        {"text": "在学院完成怨灵和菲伦德雷击杀，逐号拾取菲伦德雷的徽记；顺路取得被污染的奥术薄片；之后返回兰萨恩。", "tags": ["打怪掉物·必做", "打怪掉物·可跳", "五号分别拾取"], "quest_ids": [8335, 8338]},
-        {"text": "交付《放逐者菲伦德雷》并接取《帮助信使》；之后回太阳之塔集中清任务。", "tags": ["五号分别交付", "五号分别接取"]},
-        {"text": "集中交付索兰尼亚物品、神龛、奥术薄片和被污染的奥术薄片；之后向南过桥。", "tags": ["五号分别交付"]},
-        {"text": "完成桥边信使链和倒下的信使包裹往返；之后沿道路前往鹰翼广场。", "tags": ["五号分别接取", "五号分别交付"]},
-        {"text": "在鹰翼广场旅店交付包裹，逐日岛结束；之后从鹰翼广场开始永歌森林路线。", "tags": ["五号分别交付"]}
+        {
+          "text": "从玛基斯特莉克丝·艾罗娜接取《夺回逐日岛》；之后去塔外清理法力浮龙。",
+          "tags": [
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "主号击杀8只法力浮龙，四个跟随号同步进度；之后返回艾罗娜。",
+          "tags": []
+        },
+        {
+          "text": "交付《夺回逐日岛》，接取《令人遗憾的措施》和圣骑士训练；之后进入太阳之塔。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "完成圣骑士训练，从耶泰尼斯接取《护井者索兰尼亚》并交给索兰尼亚；再集中接取《索兰尼亚的物品》《达斯雷玛的神龛》《奥术薄片》《无尽的渴求》；之后向塔外南侧移动。",
+          "tags": [
+            "五号分别接取",
+            "五号分别交付"
+          ],
+          "quest_ids": [
+            9676,
+            10068,
+            8330,
+            8345,
+            8336,
+            8346
+          ]
+        },
+        {
+          "text": "沿南侧路线完成奥术洪流、索兰尼亚日记和占卜宝珠；击杀山猫并拾取8个项圈，同时收集奥术薄片；之后返回太阳之塔。",
+          "tags": [
+            "打怪掉物·必做",
+            "打怪掉物·可跳",
+            "五号分别拾取",
+            "五号分别点击",
+            "五号分别使用技能"
+          ],
+          "quest_ids": [
+            8326,
+            8336
+          ]
+        },
+        {
+          "text": "交付《令人遗憾的措施》和训练任务，接取《向兰萨恩·派雷隆报到》；奥术薄片满6个时顺便交付；之后沿西侧道路前进。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "向兰萨恩交付报告并接取《攻势》；之后向西推进。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "主号击杀两类树人，沿途逐号取得天灾魔法卷轴，并由主号阅读达斯雷玛神龛；之后返回兰萨恩。",
+          "tags": [
+            "五号分别拾取"
+          ]
+        },
+        {
+          "text": "交付《攻势》并接取《放逐者菲伦德雷》；之后进入法瑟林学院。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "在学院完成怨灵和菲伦德雷击杀，逐号拾取菲伦德雷的徽记；顺路取得被污染的奥术薄片；之后返回兰萨恩。",
+          "tags": [
+            "打怪掉物·必做",
+            "打怪掉物·可跳",
+            "五号分别拾取"
+          ],
+          "quest_ids": [
+            8335,
+            8338
+          ]
+        },
+        {
+          "text": "交付《放逐者菲伦德雷》并接取《帮助信使》；之后回太阳之塔集中清任务。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ]
+        },
+        {
+          "text": "集中交付索兰尼亚物品、神龛、奥术薄片和被污染的奥术薄片；之后向南过桥。",
+          "tags": [
+            "五号分别交付"
+          ]
+        },
+        {
+          "text": "完成桥边信使链和倒下的信使包裹往返；之后沿道路前往鹰翼广场。",
+          "tags": [
+            "五号分别接取",
+            "五号分别交付"
+          ]
+        },
+        {
+          "text": "在鹰翼广场旅店交付包裹，逐日岛结束；之后从鹰翼广场开始永歌森林路线。",
+          "tags": [
+            "五号分别交付"
+          ]
+        }
       ],
       "loot_tasks": [
-        {"quest_id": 8326, "name": "令人遗憾的措施", "classification": "must", "reason": "后续信使主链前置"},
-        {"quest_id": 8335, "name": "放逐者菲伦德雷", "classification": "must", "reason": "后续出岛任务前置"},
-        {"quest_id": 8336, "name": "奥术薄片", "classification": "optional", "reason": "叶子任务，不阻断出岛主链"},
-        {"quest_id": 8338, "name": "被污染的奥术薄片", "classification": "optional", "reason": "物品触发叶子任务，不阻断出岛主链"}
+        {
+          "quest_id": 8326,
+          "name": "令人遗憾的措施",
+          "classification": "must",
+          "reason": "后续信使主链前置"
+        },
+        {
+          "quest_id": 8335,
+          "name": "放逐者菲伦德雷",
+          "classification": "must",
+          "reason": "后续出岛任务前置"
+        },
+        {
+          "quest_id": 8336,
+          "name": "奥术薄片",
+          "classification": "optional",
+          "reason": "叶子任务，不阻断出岛主链"
+        },
+        {
+          "quest_id": 8338,
+          "name": "被污染的奥术薄片",
+          "classification": "optional",
+          "reason": "物品触发叶子任务，不阻断出岛主链"
+        }
       ],
       "entry": "从血精灵出生点开始。",
       "exit": "沿南路进入永歌森林，在鹰翼广场继续。"
@@ -84,76 +218,902 @@
       "quest_min": 4,
       "quest_max": 12,
       "max_quests": 34,
-      "audit": "鹰翼广场至晴风村已按实测反馈人工修订；后半段仍需实跑",
-      "manual_prefix_quest_ids": [8463, 8468, 8472, 8482, 8475, 9035, 9062, 8491, 8480, 8886, 8887, 8884, 8885, 9076, 9252, 9358],
+      "audit": "鹰翼广场至晴风村主流程已按实测反馈重排；高负担支线移至补经验清单；后半段仍需实跑",
+      "manual_prefix_quest_ids": [
+        8463,
+        8468,
+        8472,
+        8482,
+        8475,
+        9035,
+        9062,
+        8491,
+        8480,
+        8886,
+        8887,
+        8884,
+        8885,
+        9076,
+        9252,
+        9358
+      ],
       "manual_prefix_steps": [
-        {"text": "鹰翼广场旅店：先把炉石绑定在这里", "tags": [], "quest_ids": []},
-        {"text": "鹰翼广场：接《不稳定的法力水晶》《通缉：饥饿者泰里斯》《失效的傀儡》", "tags": ["五号分别接取"], "quest_ids": [8463, 8468, 8472]},
-        {"text": "鹰翼广场北侧：完成《不稳定的法力水晶》《通缉：饥饿者泰里斯》《失效的傀儡》；掉出《秘密文件》时一并接取", "tags": ["打怪掉物·必做", "打怪掉物·可跳", "五号分别拾取", "五号分别点击"], "quest_ids": [8463, 8468, 8472, 8482]},
-        {"text": "回鹰翼广场：交《不稳定的法力水晶》《通缉：饥饿者泰里斯》《失效的傀儡》《秘密文件》", "tags": ["五号分别交付"], "quest_ids": [8463, 8468, 8472, 8482]},
-        {"text": "游侠杰拉：接《死亡之痕》", "tags": ["五号分别接取"], "quest_ids": [8475]},
-        {"text": "死亡之痕：主号清理骨骸，完成《死亡之痕》", "tags": [], "quest_ids": [8475]},
-        {"text": "学徒拉尔雷：接《打探匪情》", "tags": ["五号分别接取"], "quest_ids": [9035]},
-        {"text": "学徒梅雷多尔：接《浸水的书页》；书页就在旁边水边，不和北面的法力水晶合并", "tags": ["五号分别接取"], "quest_ids": [9062]},
-        {"text": "梅雷多尔旁边水边：五号分别拿《浸水的书页》", "tags": ["五号分别点击"], "quest_ids": [9062]},
-        {"text": "晴风村：接《收集豹皮》，先保留；等游侠萨蕾恩一组任务时一起完成", "tags": ["五号分别接取"], "quest_ids": [8491]},
-        {"text": "西侧营地：接《失落的军备》《暗鳞强盗！》", "tags": ["五号分别接取"], "quest_ids": [8480, 8886]},
-        {"text": "营地南侧：单独完成《失落的军备》；这里和鱼头区域距离较远", "tags": ["五号分别点击"], "quest_ids": [8480]},
-        {"text": "哈斯温里奥：接《鱼头......》", "tags": ["五号分别接取"], "quest_ids": [8884]},
-        {"text": "西海岸：完成《鱼头......》《暗鳞强盗！》；鱼头按五号最低进度拾取，掉出《凯莉森德拉船长的航海图》时一并接取", "tags": ["打怪掉物·必做", "打怪掉物·可跳", "五号分别拾取"], "quest_ids": [8884, 8886, 8887]},
-        {"text": "哈斯温里奥：交《鱼头......》，接《呜啦哇啦的戒指》", "tags": ["五号分别交付", "五号分别接取"], "quest_ids": [8884, 8885]},
-        {"text": "西海岸呜啦哇啦附近：五号分别拾取《呜啦哇啦的戒指》", "tags": ["打怪掉物·可跳", "五号分别拾取"], "quest_ids": [8885]},
-        {"text": "哈斯温里奥：交《呜啦哇啦的戒指》", "tags": ["五号分别交付"], "quest_ids": [8885]},
-        {"text": "西侧营地：交《失落的军备》《暗鳞强盗！》《凯莉森德拉船长的航海图》，接《失心者的领袖》", "tags": ["五号分别交付", "五号分别接取"], "quest_ids": [8480, 8886, 8887, 9076]},
-        {"text": "军备区域附近：完成《失心者的领袖》，五号分别拾取任务物品", "tags": ["打怪掉物·可跳", "五号分别拾取"], "quest_ids": [9076]},
-        {"text": "西侧营地：交《失心者的领袖》", "tags": ["五号分别交付"], "quest_ids": [9076]},
-        {"text": "晴风村：接《保卫晴风村》《游侠萨蕾恩》", "tags": ["五号分别接取"], "quest_ids": [9252, 9358]},
-        {"text": "晴风村周围：同一圈完成《收集豹皮》《保卫晴风村》", "tags": ["打怪掉物·可跳", "五号分别拾取"], "quest_ids": [8491, 9252]},
-        {"text": "晴风村：交《收集豹皮》《保卫晴风村》《游侠萨蕾恩》", "tags": ["五号分别交付"], "quest_ids": [8491, 9252, 9358]},
-        {"text": "学徒梅雷多尔：交《打探匪情》《浸水的书页》", "tags": ["五号分别交付"], "quest_ids": [9035, 9062]},
-        {"text": "游侠杰拉：交《死亡之痕》", "tags": ["五号分别交付"], "quest_ids": [8475]},
-        {"text": "使用炉石回鹰翼广场；后续远端任务清完仍可回这里", "tags": [], "quest_ids": []}
-      ]
+        {
+          "location": "鹰翼广场旅店",
+          "npc": "旅店老板",
+          "action": "把炉石绑定在鹰翼广场",
+          "coords": [
+            48.1,
+            46.5
+          ],
+          "text": "鹰翼广场旅店：把炉石绑定在这里。",
+          "tags": [],
+          "quest_ids": [],
+          "note": "后续远端任务结束后可以直接回到鹰翼广场。"
+        },
+        {
+          "location": "鹰翼广场",
+          "npc": "通缉布告",
+          "action": "接取《通缉：饥饿者泰里斯》",
+          "coords": [
+            47.8,
+            46.6
+          ],
+          "text": "鹰翼广场：接取《通缉：饥饿者泰里斯》。",
+          "tags": [
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            8468
+          ]
+        },
+        {
+          "location": "鹰翼广场北侧废墟",
+          "target": "饥饿者泰里斯",
+          "action": "击杀后五个角色各拾取一次，完成《通缉：饥饿者泰里斯》",
+          "coords": [
+            45.0,
+            37.7
+          ],
+          "text": "鹰翼广场北侧废墟：完成《通缉：饥饿者泰里斯》。",
+          "tags": [
+            "五号分别拾取"
+          ],
+          "quest_ids": [
+            8468
+          ]
+        },
+        {
+          "location": "鹰翼广场",
+          "npc": "坎雷中士",
+          "action": "交付《通缉：饥饿者泰里斯》",
+          "coords": [
+            47.8,
+            46.6
+          ],
+          "text": "鹰翼广场：交付《通缉：饥饿者泰里斯》。",
+          "tags": [
+            "五号分别交付"
+          ],
+          "quest_ids": [
+            8468
+          ]
+        },
+        {
+          "location": "死亡之痕北侧",
+          "npc": "游侠杰拉",
+          "action": "接取《死亡之痕》",
+          "coords": [
+            50.34,
+            50.77
+          ],
+          "text": "游侠杰拉：接取《死亡之痕》。",
+          "tags": [
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            8475
+          ]
+        },
+        {
+          "location": "死亡之痕南侧",
+          "target": "瘟疫骨骸",
+          "action": "主号击杀8只，完成《死亡之痕》",
+          "coords": [
+            50.3,
+            56.7
+          ],
+          "text": "死亡之痕南侧：完成《死亡之痕》。",
+          "tags": [],
+          "quest_ids": [
+            8475
+          ]
+        },
+        {
+          "location": "死亡之痕北侧",
+          "npc": "游侠杰拉",
+          "action": "交付《死亡之痕》",
+          "coords": [
+            50.34,
+            50.77
+          ],
+          "text": "游侠杰拉：交付《死亡之痕》。",
+          "tags": [
+            "五号分别交付"
+          ],
+          "quest_ids": [
+            8475
+          ]
+        },
+        {
+          "location": "银月城外南路",
+          "npc": "学徒拉尔雷",
+          "action": "接取《打探匪情》",
+          "coords": [
+            45.19,
+            56.43
+          ],
+          "text": "学徒拉尔雷：接取《打探匪情》。",
+          "tags": [
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            9035
+          ]
+        },
+        {
+          "location": "南路桥边",
+          "npc": "学徒梅雷多尔",
+          "action": "交付《打探匪情》，接取《浸水的书页》",
+          "coords": [
+            44.88,
+            61.03
+          ],
+          "text": "学徒梅雷多尔：交付《打探匪情》，接取《浸水的书页》。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            9035,
+            9062
+          ]
+        },
+        {
+          "location": "梅雷多尔旁边的桥下水域",
+          "target": "安瑟隆的元素魔典",
+          "action": "五个角色各点击或拾取一次，完成《浸水的书页》",
+          "coords": [
+            44.34,
+            61.99
+          ],
+          "text": "桥下水域：完成《浸水的书页》。",
+          "tags": [
+            "五号分别点击"
+          ],
+          "quest_ids": [
+            9062
+          ]
+        },
+        {
+          "location": "南路桥边",
+          "npc": "学徒梅雷多尔",
+          "action": "交付《浸水的书页》",
+          "coords": [
+            44.88,
+            61.03
+          ],
+          "text": "学徒梅雷多尔：交付《浸水的书页》。",
+          "tags": [
+            "五号分别交付"
+          ],
+          "quest_ids": [
+            9062
+          ]
+        },
+        {
+          "location": "晴风村旅店",
+          "npc": "玛尼尔·琥珀之光",
+          "action": "接取《游侠萨蕾恩》",
+          "coords": [
+            43.67,
+            71.31
+          ],
+          "text": "晴风村旅店：接取《游侠萨蕾恩》。",
+          "tags": [
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            9358
+          ]
+        },
+        {
+          "location": "晴风村东南侧",
+          "npc": "游侠萨蕾恩",
+          "action": "交付《游侠萨蕾恩》，接取《保卫晴风村》",
+          "coords": [
+            46.93,
+            71.79
+          ],
+          "text": "游侠萨蕾恩：交付《游侠萨蕾恩》，接取《保卫晴风村》。",
+          "tags": [
+            "五号分别交付",
+            "五号分别接取"
+          ],
+          "quest_ids": [
+            9358,
+            9252
+          ]
+        },
+        {
+          "location": "晴风村东南侧周围",
+          "target": "腐肢劫掠者、黑暗怨灵",
+          "action": "主号分别击杀4只，完成《保卫晴风村》",
+          "coords": [
+            46.5,
+            73.0
+          ],
+          "text": "晴风村东南侧周围：完成《保卫晴风村》。",
+          "tags": [],
+          "quest_ids": [
+            9252
+          ]
+        },
+        {
+          "location": "晴风村东南侧",
+          "npc": "游侠萨蕾恩",
+          "action": "交付《保卫晴风村》",
+          "coords": [
+            46.93,
+            71.79
+          ],
+          "text": "游侠萨蕾恩：交付《保卫晴风村》。",
+          "tags": [
+            "五号分别交付"
+          ],
+          "quest_ids": [
+            9252
+          ]
+        },
+        {
+          "location": "晴风村",
+          "action": "使用炉石返回鹰翼广场",
+          "text": "使用炉石返回鹰翼广场。",
+          "tags": [],
+          "quest_ids": [],
+          "note": "传送步骤不按地图直线距离评价。"
+        }
+      ],
+      "public_optional_quest_ids": [
+        8463,
+        8472,
+        8482,
+        8491,
+        8480,
+        8886,
+        8887,
+        8884,
+        8885,
+        9076
+      ],
+      "quest_kind_overrides": {
+        "8463": "collect",
+        "8468": "simple",
+        "8472": "collect",
+        "8482": "collect",
+        "8475": "simple",
+        "9035": "simple",
+        "9062": "simple",
+        "8491": "collect",
+        "8480": "collect",
+        "8886": "collect",
+        "8887": "collect",
+        "8884": "collect",
+        "8885": "simple",
+        "9076": "simple",
+        "9252": "simple",
+        "9358": "simple"
+      },
+      "loot_tasks": [
+        {
+          "quest_id": 8468,
+          "name": "通缉：饥饿者泰里斯",
+          "classification": "must",
+          "reason": "当前已验证主流程；固定命名怪单个必掉物"
+        },
+        {
+          "quest_id": 8463,
+          "name": "不稳定的法力水晶",
+          "classification": "optional",
+          "reason": "6个地面物品乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8472,
+          "name": "失效的傀儡",
+          "classification": "optional",
+          "reason": "6个怪物掉落物乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8482,
+          "name": "秘密文件",
+          "classification": "optional",
+          "reason": "随机掉落触发任务，不为它单独等待"
+        },
+        {
+          "quest_id": 8491,
+          "name": "收集豹皮",
+          "classification": "optional",
+          "reason": "6张豹皮乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8480,
+          "name": "失落的军备",
+          "classification": "optional",
+          "reason": "8件地面军备乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8886,
+          "name": "暗鳞强盗！",
+          "classification": "optional",
+          "reason": "6份货物乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8887,
+          "name": "凯莉森德拉船长的航海图",
+          "classification": "optional",
+          "reason": "随机掉落触发任务，只在顺路掉落时完成"
+        },
+        {
+          "quest_id": 8884,
+          "name": "鱼头......",
+          "classification": "optional",
+          "reason": "8个鱼人任务物品乘以5个角色，移至补经验清单"
+        },
+        {
+          "quest_id": 8885,
+          "name": "呜啦哇啦的戒指",
+          "classification": "optional",
+          "reason": "单个必掉物负担低，但必须先做高负担鱼头且目标长距离巡逻"
+        },
+        {
+          "quest_id": 9076,
+          "name": "失心者的领袖",
+          "classification": "optional",
+          "reason": "单个命名怪必掉物负担低，但必须先做高负担失落的军备"
+        }
+      ],
+      "quest_details": {
+        "8468": {
+          "location": "鹰翼广场 → 北侧废墟 → 鹰翼广场",
+          "flow": "在鹰翼广场通缉布告接取，去北侧废墟击杀饥饿者泰里斯，五个角色各拾取一次，再回坎雷中士交付。",
+          "fivebox": "固定命名怪只需要1个任务物品；五个角色各摸尸体一次，不属于高负担收集。"
+        },
+        "8475": {
+          "location": "游侠杰拉 → 死亡之痕南侧 → 游侠杰拉",
+          "flow": "接取后向南清理8只瘟疫骨骸，再原路返回交付。",
+          "fivebox": "普通击杀任务，预计组队共享；以五个角色任务进度都完成为准。"
+        },
+        "9035": {
+          "location": "学徒拉尔雷 → 学徒梅雷多尔",
+          "flow": "接取后沿南路找到学徒梅雷多尔并直接交付。",
+          "fivebox": "纯跑腿任务，五个角色分别接取和交付。"
+        },
+        "9062": {
+          "location": "学徒梅雷多尔旁边的桥下水域",
+          "flow": "在梅雷多尔处接取，下桥到旁边水里找到元素魔典，五个角色各点击或拾取一次，再回梅雷多尔交付。",
+          "fivebox": "固定地点只需要1个物品；虽然要逐号操作，但每号只有一次，不属于高负担收集。"
+        },
+        "9358": {
+          "location": "晴风村旅店 → 游侠萨蕾恩",
+          "flow": "从旅店老板接取，去晴风村东南侧向游侠萨蕾恩报到。",
+          "fivebox": "纯跑腿任务，五个角色分别接取和交付。"
+        },
+        "9252": {
+          "location": "游侠萨蕾恩周围",
+          "flow": "接取后在附近分别击杀4个腐肢劫掠者和4个黑暗怨灵，再回萨蕾恩交付。",
+          "fivebox": "普通击杀任务，预计组队共享；以五个角色进度都完成为准。"
+        },
+        "8463": {
+          "location": "鹰翼广场北侧废墟",
+          "flow": "在艾尔杜·炙痕处接取，在北侧废墟收集6块不稳定的法力水晶，再回鹰翼广场交付。",
+          "fivebox": "6个地面物品需要五个角色分别取得，相当于最多30次个人收集，标红并移至补经验。"
+        },
+        "8472": {
+          "location": "鹰翼广场北侧废墟",
+          "flow": "在魔导师亚隆尼斯处接取，击杀奥术巡逻者并收集6枚奥术核心，再回鹰翼广场交付。",
+          "fivebox": "普通怪掉落6个任务物品，五个角色分别计算，随机掉落与数量同时放大，属于高负担收集。"
+        },
+        "8482": {
+          "location": "阳帆港东北侧的达纳苏斯斥候区域",
+          "flow": "击杀达纳苏斯斥候时可能掉落秘密文件；拾取后触发任务，回鹰翼广场交给艾尔杜·炙痕。",
+          "fivebox": "随机掉落触发任务；只在顺路掉落时接，不建议为了它反复刷怪。"
+        },
+        "8491": {
+          "location": "晴风村周围的魔泉豹区域",
+          "flow": "在维兰·布雷托克处接取，收集6张魔泉豹皮后返回交付。",
+          "fivebox": "普通怪掉落6张豹皮，五个角色分别计算，属于高负担收集。"
+        },
+        "8480": {
+          "location": "阳帆港东侧营地 → 营地西南侧军备区域",
+          "flow": "在维雷迪斯·雪晨处接取，到军备区域收集8件辛多雷军备，再回营地交付。",
+          "fivebox": "8件地面军备需要五个角色分别取得，相当于最多40次个人收集，属于高负担任务。"
+        },
+        "8886": {
+          "location": "阳帆港东侧营地 → 西海岸鱼人区域",
+          "flow": "在凯莉森德拉船长处接取，夺回6份货物后返回营地交付。",
+          "fivebox": "6份货物需要五个角色分别完成，属于高负担收集。"
+        },
+        "8887": {
+          "location": "西海岸鱼人区域 → 阳帆港东侧营地",
+          "flow": "击杀暗鳞鱼人时可能掉落航海图；拾取后触发任务，交给凯莉森德拉船长。",
+          "fivebox": "随机掉落触发任务；只在做其他鱼人任务时顺路完成，不建议单独等待。"
+        },
+        "8884": {
+          "location": "哈斯温里奥 → 西海岸鱼人区域 → 哈斯温里奥",
+          "flow": "从哈斯温里奥处接取，在西海岸收集8个鱼人任务物品，再返回交付。",
+          "fivebox": "8个普通怪掉落物需要五个角色分别收集，随机掉落与总数量乘以5，属于典型高负担任务。"
+        },
+        "8885": {
+          "location": "哈斯温里奥（29.89,58.43）→ 西海岸巡逻线（约26.16,66.15至24.37,74.31）",
+          "flow": "必须先完成《鱼头......》并在哈斯温里奥处接取；沿西海岸向南寻找巡逻的呜啦哇啦，击杀后五个角色各拾取一次，再回哈斯温里奥交付。",
+          "fivebox": "固定命名怪只需要1枚戒指，拾取本身负担低；耗时主要来自长巡逻路线和可能等待刷新。",
+          "note": "地图上的多个标记代表任务区域或巡逻路径，不是四个固定NPC。"
+        },
+        "9076": {
+          "location": "阳帆港东侧营地 → 鲁莽的奥尔达隆（约32.8,69.4）→ 营地",
+          "flow": "必须先完成《失落的军备》；在维雷迪斯·雪晨处接取，击杀鲁莽的奥尔达隆，五个角色各拾取一次，再返回交付。",
+          "fivebox": "固定命名怪只需要1个任务物品，本身负担低；但它依赖高负担的《失落的军备》。"
+        }
+      }
     },
-    {"id":"ghostlands-12-20","name":"幽魂之地","zone_id":3433,"level_min":12,"level_max":20,"quest_min":9,"quest_max":20,"max_quests":42,"audit":"自动推导","entry":"沿永歌森林南路进入幽魂之地，在塔奎林集中接任务并开启飞行点。"},
-    {"id":"barrens-20-22","name":"贫瘠之地","zone_id":17,"level_min":20,"level_max":22,"quest_min":17,"quest_max":22,"max_quests":24,"audit":"自动推导","entry":"返回银月城，经传送宝珠到幽暗城，再乘飞艇到奥格瑞玛后前往贫瘠之地。"},
-    {"id":"stonetalon-22-24","name":"石爪山脉","zone_id":406,"level_min":22,"level_max":24,"quest_min":18,"quest_max":24,"max_quests":22,"audit":"自动推导"},
-    {"id":"ashenvale-24-27","name":"灰谷","zone_id":331,"level_min":24,"level_max":27,"quest_min":20,"quest_max":27,"max_quests":24,"audit":"自动推导"},
-    {"id":"thousand-needles-27-30","name":"千针石林","zone_id":400,"level_min":27,"level_max":30,"quest_min":23,"quest_max":30,"max_quests":26,"audit":"自动推导"},
-    {"id":"hillsbrad-30-32","name":"希尔斯布莱德丘陵","zone_id":267,"level_min":30,"level_max":32,"quest_min":27,"quest_max":32,"max_quests":24,"audit":"自动推导","entry":"返回东部王国，从幽暗城方向进入希尔斯布莱德丘陵。"},
-    {"id":"arathi-32-33","name":"阿拉希高地","zone_id":45,"level_min":32,"level_max":33,"quest_min":29,"quest_max":33,"max_quests":18,"audit":"自动推导"},
-    {"id":"shimmering-33-34","name":"闪光平原","zone_id":400,"level_min":33,"level_max":34,"quest_min":31,"quest_max":34,"max_quests":16,"audit":"自动推导","entry":"返回卡利姆多，前往千针石林东部的闪光平原任务中心。"},
-    {"id":"stranglethorn-34-36","name":"荆棘谷","zone_id":33,"level_min":34,"level_max":36,"quest_min":31,"quest_max":36,"max_quests":24,"audit":"自动推导","entry":"前往格罗姆高营地，开启飞行点后集中接任务。"},
-    {"id":"dustwallow-36-39","name":"尘泥沼泽","zone_id":15,"level_min":36,"level_max":39,"quest_min":33,"quest_max":39,"max_quests":28,"audit":"自动推导"},
-    {"id":"alterac-39-40","name":"奥特兰克山脉","zone_id":36,"level_min":39,"level_max":40,"quest_min":29,"quest_max":40,"max_quests":12,"audit":"自动推导"},
-    {"id":"arathi-40","name":"阿拉希高地","zone_id":45,"level_min":40,"level_max":40,"quest_min":34,"quest_max":40,"max_quests":14,"audit":"自动推导"},
-    {"id":"badlands-40-43","name":"荒芜之地","zone_id":3,"level_min":40,"level_max":43,"quest_min":35,"quest_max":43,"max_quests":28,"audit":"自动推导"},
-    {"id":"stranglethorn-43-45","name":"荆棘谷","zone_id":33,"level_min":43,"level_max":45,"quest_min":39,"quest_max":45,"max_quests":22,"audit":"自动推导"},
-    {"id":"tanaris-45-47","name":"塔纳利斯","zone_id":440,"level_min":45,"level_max":47,"quest_min":40,"quest_max":47,"max_quests":26,"audit":"自动推导"},
-    {"id":"feralas-47-49","name":"菲拉斯","zone_id":357,"level_min":47,"level_max":49,"quest_min":42,"quest_max":49,"max_quests":24,"audit":"自动推导"},
-    {"id":"hinterlands-49-51","name":"辛特兰","zone_id":47,"level_min":49,"level_max":51,"quest_min":44,"quest_max":51,"max_quests":24,"audit":"自动推导"},
-    {"id":"searing-51","name":"灼热峡谷","zone_id":51,"level_min":51,"level_max":51,"quest_min":45,"quest_max":51,"max_quests":18,"audit":"自动推导"},
-    {"id":"burning-51-52","name":"燃烧平原","zone_id":46,"level_min":51,"level_max":52,"quest_min":47,"quest_max":52,"max_quests":16,"audit":"自动推导"},
-    {"id":"ungoro-52-54","name":"安戈洛环形山","zone_id":490,"level_min":52,"level_max":54,"quest_min":47,"quest_max":54,"max_quests":26,"audit":"自动推导"},
-    {"id":"azshara-54","name":"艾萨拉","zone_id":16,"level_min":54,"level_max":54,"quest_min":45,"quest_max":54,"max_quests":16,"audit":"自动推导"},
-    {"id":"felwood-54-55","name":"费伍德森林","zone_id":361,"level_min":54,"level_max":55,"quest_min":48,"quest_max":55,"max_quests":20,"audit":"自动推导"},
-    {"id":"winterspring-55-56","name":"冬泉谷","zone_id":618,"level_min":55,"level_max":56,"quest_min":49,"quest_max":56,"max_quests":20,"audit":"自动推导"},
-    {"id":"western-plaguelands-56-58","name":"西瘟疫之地","zone_id":28,"level_min":56,"level_max":58,"quest_min":50,"quest_max":58,"max_quests":28,"audit":"自动推导"},
-    {"id":"eastern-plaguelands-58-60","name":"东瘟疫之地","zone_id":139,"level_min":58,"level_max":60,"quest_min":52,"quest_max":60,"max_quests":30,"audit":"自动推导"},
-    {"id":"hellfire-60-61","name":"地狱火半岛","zone_id":3483,"level_min":60,"level_max":61,"quest_min":55,"quest_max":61,"max_quests":32,"audit":"自动推导","entry":"前往诅咒之地，穿过黑暗之门进入地狱火半岛，并先开启部落据点飞行点。"},
-    {"id":"zangarmarsh-61-63","name":"赞加沼泽","zone_id":3521,"level_min":61,"level_max":63,"quest_min":58,"quest_max":63,"max_quests":30,"audit":"自动推导"},
-    {"id":"terokkar-63-64","name":"泰罗卡森林","zone_id":3519,"level_min":63,"level_max":64,"quest_min":60,"quest_max":64,"max_quests":28,"audit":"自动推导"},
-    {"id":"nagrand-64-65","name":"纳格兰","zone_id":3518,"level_min":64,"level_max":65,"quest_min":62,"quest_max":65,"max_quests":28,"audit":"自动推导"},
-    {"id":"shattrath-65","name":"沙塔斯城","zone_id":3703,"level_min":65,"level_max":65,"quest_min":60,"quest_max":65,"max_quests":8,"audit":"自动推导","entry":"进入沙塔斯城，开启飞行点并处理阵营引导；不要清城市里的无关任务。"},
-    {"id":"blades-edge-65-67","name":"刀锋山","zone_id":3522,"level_min":65,"level_max":67,"quest_min":61,"quest_max":67,"max_quests":32,"audit":"自动推导"},
-    {"id":"netherstorm-67-69","name":"虚空风暴","zone_id":3523,"level_min":67,"level_max":69,"quest_min":64,"quest_max":69,"max_quests":34,"audit":"自动推导"},
-    {"id":"howling-fjord-69-71","name":"嚎风峡湾","zone_id":495,"level_min":69,"level_max":71,"quest_min":68,"quest_max":71,"max_quests":34,"audit":"自动推导","entry":"回到主城，经幽暗城乘飞艇前往复仇港，开始嚎风峡湾路线。"},
-    {"id":"borean-71-72","name":"北风苔原","zone_id":3537,"level_min":71,"level_max":72,"quest_min":68,"quest_max":72,"max_quests":32,"audit":"自动推导","entry":"回奥格瑞玛乘飞艇前往战歌要塞，开始北风苔原路线。"},
-    {"id":"dragonblight-72-74","name":"龙骨荒野","zone_id":65,"level_min":72,"level_max":74,"quest_min":70,"quest_max":74,"max_quests":36,"audit":"自动推导"},
-    {"id":"grizzly-74-75","name":"灰熊丘陵","zone_id":394,"level_min":74,"level_max":75,"quest_min":72,"quest_max":75,"max_quests":28,"audit":"自动推导"},
-    {"id":"zuldrak-75-77","name":"祖达克","zone_id":66,"level_min":75,"level_max":77,"quest_min":73,"quest_max":77,"max_quests":34,"audit":"自动推导"},
-    {"id":"sholazar-77-78","name":"索拉查盆地","zone_id":3711,"level_min":77,"level_max":78,"quest_min":75,"quest_max":78,"max_quests":30,"audit":"自动推导"},
-    {"id":"storm-peaks-78-79","name":"风暴峭壁","zone_id":67,"level_min":78,"level_max":79,"quest_min":77,"quest_max":79,"max_quests":32,"audit":"自动推导"},
-    {"id":"icecrown-79-80","name":"冰冠冰川","zone_id":210,"level_min":79,"level_max":80,"quest_min":77,"quest_max":80,"max_quests":36,"audit":"自动推导"}
+    {
+      "id": "ghostlands-12-20",
+      "name": "幽魂之地",
+      "zone_id": 3433,
+      "level_min": 12,
+      "level_max": 20,
+      "quest_min": 9,
+      "quest_max": 20,
+      "max_quests": 42,
+      "audit": "自动推导",
+      "entry": "沿永歌森林南路进入幽魂之地，在塔奎林集中接任务并开启飞行点。"
+    },
+    {
+      "id": "barrens-20-22",
+      "name": "贫瘠之地",
+      "zone_id": 17,
+      "level_min": 20,
+      "level_max": 22,
+      "quest_min": 17,
+      "quest_max": 22,
+      "max_quests": 24,
+      "audit": "自动推导",
+      "entry": "返回银月城，经传送宝珠到幽暗城，再乘飞艇到奥格瑞玛后前往贫瘠之地。"
+    },
+    {
+      "id": "stonetalon-22-24",
+      "name": "石爪山脉",
+      "zone_id": 406,
+      "level_min": 22,
+      "level_max": 24,
+      "quest_min": 18,
+      "quest_max": 24,
+      "max_quests": 22,
+      "audit": "自动推导"
+    },
+    {
+      "id": "ashenvale-24-27",
+      "name": "灰谷",
+      "zone_id": 331,
+      "level_min": 24,
+      "level_max": 27,
+      "quest_min": 20,
+      "quest_max": 27,
+      "max_quests": 24,
+      "audit": "自动推导"
+    },
+    {
+      "id": "thousand-needles-27-30",
+      "name": "千针石林",
+      "zone_id": 400,
+      "level_min": 27,
+      "level_max": 30,
+      "quest_min": 23,
+      "quest_max": 30,
+      "max_quests": 26,
+      "audit": "自动推导"
+    },
+    {
+      "id": "hillsbrad-30-32",
+      "name": "希尔斯布莱德丘陵",
+      "zone_id": 267,
+      "level_min": 30,
+      "level_max": 32,
+      "quest_min": 27,
+      "quest_max": 32,
+      "max_quests": 24,
+      "audit": "自动推导",
+      "entry": "返回东部王国，从幽暗城方向进入希尔斯布莱德丘陵。"
+    },
+    {
+      "id": "arathi-32-33",
+      "name": "阿拉希高地",
+      "zone_id": 45,
+      "level_min": 32,
+      "level_max": 33,
+      "quest_min": 29,
+      "quest_max": 33,
+      "max_quests": 18,
+      "audit": "自动推导"
+    },
+    {
+      "id": "shimmering-33-34",
+      "name": "闪光平原",
+      "zone_id": 400,
+      "level_min": 33,
+      "level_max": 34,
+      "quest_min": 31,
+      "quest_max": 34,
+      "max_quests": 16,
+      "audit": "自动推导",
+      "entry": "返回卡利姆多，前往千针石林东部的闪光平原任务中心。"
+    },
+    {
+      "id": "stranglethorn-34-36",
+      "name": "荆棘谷",
+      "zone_id": 33,
+      "level_min": 34,
+      "level_max": 36,
+      "quest_min": 31,
+      "quest_max": 36,
+      "max_quests": 24,
+      "audit": "自动推导",
+      "entry": "前往格罗姆高营地，开启飞行点后集中接任务。"
+    },
+    {
+      "id": "dustwallow-36-39",
+      "name": "尘泥沼泽",
+      "zone_id": 15,
+      "level_min": 36,
+      "level_max": 39,
+      "quest_min": 33,
+      "quest_max": 39,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "alterac-39-40",
+      "name": "奥特兰克山脉",
+      "zone_id": 36,
+      "level_min": 39,
+      "level_max": 40,
+      "quest_min": 29,
+      "quest_max": 40,
+      "max_quests": 12,
+      "audit": "自动推导"
+    },
+    {
+      "id": "arathi-40",
+      "name": "阿拉希高地",
+      "zone_id": 45,
+      "level_min": 40,
+      "level_max": 40,
+      "quest_min": 34,
+      "quest_max": 40,
+      "max_quests": 14,
+      "audit": "自动推导"
+    },
+    {
+      "id": "badlands-40-43",
+      "name": "荒芜之地",
+      "zone_id": 3,
+      "level_min": 40,
+      "level_max": 43,
+      "quest_min": 35,
+      "quest_max": 43,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "stranglethorn-43-45",
+      "name": "荆棘谷",
+      "zone_id": 33,
+      "level_min": 43,
+      "level_max": 45,
+      "quest_min": 39,
+      "quest_max": 45,
+      "max_quests": 22,
+      "audit": "自动推导"
+    },
+    {
+      "id": "tanaris-45-47",
+      "name": "塔纳利斯",
+      "zone_id": 440,
+      "level_min": 45,
+      "level_max": 47,
+      "quest_min": 40,
+      "quest_max": 47,
+      "max_quests": 26,
+      "audit": "自动推导"
+    },
+    {
+      "id": "feralas-47-49",
+      "name": "菲拉斯",
+      "zone_id": 357,
+      "level_min": 47,
+      "level_max": 49,
+      "quest_min": 42,
+      "quest_max": 49,
+      "max_quests": 24,
+      "audit": "自动推导"
+    },
+    {
+      "id": "hinterlands-49-51",
+      "name": "辛特兰",
+      "zone_id": 47,
+      "level_min": 49,
+      "level_max": 51,
+      "quest_min": 44,
+      "quest_max": 51,
+      "max_quests": 24,
+      "audit": "自动推导"
+    },
+    {
+      "id": "searing-51",
+      "name": "灼热峡谷",
+      "zone_id": 51,
+      "level_min": 51,
+      "level_max": 51,
+      "quest_min": 45,
+      "quest_max": 51,
+      "max_quests": 18,
+      "audit": "自动推导"
+    },
+    {
+      "id": "burning-51-52",
+      "name": "燃烧平原",
+      "zone_id": 46,
+      "level_min": 51,
+      "level_max": 52,
+      "quest_min": 47,
+      "quest_max": 52,
+      "max_quests": 16,
+      "audit": "自动推导"
+    },
+    {
+      "id": "ungoro-52-54",
+      "name": "安戈洛环形山",
+      "zone_id": 490,
+      "level_min": 52,
+      "level_max": 54,
+      "quest_min": 47,
+      "quest_max": 54,
+      "max_quests": 26,
+      "audit": "自动推导"
+    },
+    {
+      "id": "azshara-54",
+      "name": "艾萨拉",
+      "zone_id": 16,
+      "level_min": 54,
+      "level_max": 54,
+      "quest_min": 45,
+      "quest_max": 54,
+      "max_quests": 16,
+      "audit": "自动推导"
+    },
+    {
+      "id": "felwood-54-55",
+      "name": "费伍德森林",
+      "zone_id": 361,
+      "level_min": 54,
+      "level_max": 55,
+      "quest_min": 48,
+      "quest_max": 55,
+      "max_quests": 20,
+      "audit": "自动推导"
+    },
+    {
+      "id": "winterspring-55-56",
+      "name": "冬泉谷",
+      "zone_id": 618,
+      "level_min": 55,
+      "level_max": 56,
+      "quest_min": 49,
+      "quest_max": 56,
+      "max_quests": 20,
+      "audit": "自动推导"
+    },
+    {
+      "id": "western-plaguelands-56-58",
+      "name": "西瘟疫之地",
+      "zone_id": 28,
+      "level_min": 56,
+      "level_max": 58,
+      "quest_min": 50,
+      "quest_max": 58,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "eastern-plaguelands-58-60",
+      "name": "东瘟疫之地",
+      "zone_id": 139,
+      "level_min": 58,
+      "level_max": 60,
+      "quest_min": 52,
+      "quest_max": 60,
+      "max_quests": 30,
+      "audit": "自动推导"
+    },
+    {
+      "id": "hellfire-60-61",
+      "name": "地狱火半岛",
+      "zone_id": 3483,
+      "level_min": 60,
+      "level_max": 61,
+      "quest_min": 55,
+      "quest_max": 61,
+      "max_quests": 32,
+      "audit": "自动推导",
+      "entry": "前往诅咒之地，穿过黑暗之门进入地狱火半岛，并先开启部落据点飞行点。"
+    },
+    {
+      "id": "zangarmarsh-61-63",
+      "name": "赞加沼泽",
+      "zone_id": 3521,
+      "level_min": 61,
+      "level_max": 63,
+      "quest_min": 58,
+      "quest_max": 63,
+      "max_quests": 30,
+      "audit": "自动推导"
+    },
+    {
+      "id": "terokkar-63-64",
+      "name": "泰罗卡森林",
+      "zone_id": 3519,
+      "level_min": 63,
+      "level_max": 64,
+      "quest_min": 60,
+      "quest_max": 64,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "nagrand-64-65",
+      "name": "纳格兰",
+      "zone_id": 3518,
+      "level_min": 64,
+      "level_max": 65,
+      "quest_min": 62,
+      "quest_max": 65,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "shattrath-65",
+      "name": "沙塔斯城",
+      "zone_id": 3703,
+      "level_min": 65,
+      "level_max": 65,
+      "quest_min": 60,
+      "quest_max": 65,
+      "max_quests": 8,
+      "audit": "自动推导",
+      "entry": "进入沙塔斯城，开启飞行点并处理阵营引导；不要清城市里的无关任务。"
+    },
+    {
+      "id": "blades-edge-65-67",
+      "name": "刀锋山",
+      "zone_id": 3522,
+      "level_min": 65,
+      "level_max": 67,
+      "quest_min": 61,
+      "quest_max": 67,
+      "max_quests": 32,
+      "audit": "自动推导"
+    },
+    {
+      "id": "netherstorm-67-69",
+      "name": "虚空风暴",
+      "zone_id": 3523,
+      "level_min": 67,
+      "level_max": 69,
+      "quest_min": 64,
+      "quest_max": 69,
+      "max_quests": 34,
+      "audit": "自动推导"
+    },
+    {
+      "id": "howling-fjord-69-71",
+      "name": "嚎风峡湾",
+      "zone_id": 495,
+      "level_min": 69,
+      "level_max": 71,
+      "quest_min": 68,
+      "quest_max": 71,
+      "max_quests": 34,
+      "audit": "自动推导",
+      "entry": "回到主城，经幽暗城乘飞艇前往复仇港，开始嚎风峡湾路线。"
+    },
+    {
+      "id": "borean-71-72",
+      "name": "北风苔原",
+      "zone_id": 3537,
+      "level_min": 71,
+      "level_max": 72,
+      "quest_min": 68,
+      "quest_max": 72,
+      "max_quests": 32,
+      "audit": "自动推导",
+      "entry": "回奥格瑞玛乘飞艇前往战歌要塞，开始北风苔原路线。"
+    },
+    {
+      "id": "dragonblight-72-74",
+      "name": "龙骨荒野",
+      "zone_id": 65,
+      "level_min": 72,
+      "level_max": 74,
+      "quest_min": 70,
+      "quest_max": 74,
+      "max_quests": 36,
+      "audit": "自动推导"
+    },
+    {
+      "id": "grizzly-74-75",
+      "name": "灰熊丘陵",
+      "zone_id": 394,
+      "level_min": 74,
+      "level_max": 75,
+      "quest_min": 72,
+      "quest_max": 75,
+      "max_quests": 28,
+      "audit": "自动推导"
+    },
+    {
+      "id": "zuldrak-75-77",
+      "name": "祖达克",
+      "zone_id": 66,
+      "level_min": 75,
+      "level_max": 77,
+      "quest_min": 73,
+      "quest_max": 77,
+      "max_quests": 34,
+      "audit": "自动推导"
+    },
+    {
+      "id": "sholazar-77-78",
+      "name": "索拉查盆地",
+      "zone_id": 3711,
+      "level_min": 77,
+      "level_max": 78,
+      "quest_min": 75,
+      "quest_max": 78,
+      "max_quests": 30,
+      "audit": "自动推导"
+    },
+    {
+      "id": "storm-peaks-78-79",
+      "name": "风暴峭壁",
+      "zone_id": 67,
+      "level_min": 78,
+      "level_max": 79,
+      "quest_min": 77,
+      "quest_max": 79,
+      "max_quests": 32,
+      "audit": "自动推导"
+    },
+    {
+      "id": "icecrown-79-80",
+      "name": "冰冠冰川",
+      "zone_id": 210,
+      "level_min": 79,
+      "level_max": 80,
+      "quest_min": 77,
+      "quest_max": 80,
+      "max_quests": 36,
+      "audit": "自动推导"
+    }
   ]
 }

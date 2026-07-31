@@ -10,6 +10,7 @@ from lib.simple_route import (
     SegmentBuild,
     _build_loot_classifications,
     _close_route_prerequisites,
+    _distance_band,
     parse_rxp_saved_variables,
     render_simple_html,
     validate_simple_route,
@@ -138,21 +139,31 @@ class SimpleRouteTests(unittest.TestCase):
         for term in FORBIDDEN_HTML_TERMS:
             self.assertNotIn(term, rendered)
 
-    def test_validation_requires_visible_loot_label(self) -> None:
+    def test_validation_rejects_optional_task_inside_public_flow(self) -> None:
         route = {
             "segments": [
                 {
                     "id": "zone-a",
                     "name": "测试地图",
                     "steps": [{"text": "完成任务。", "tags": [], "quest_ids": [1]}],
+                    "public_steps": [{"text": "完成任务。", "tags": [], "quest_ids": [1]}],
+                    "optional_tasks": [{"quest_id": 1, "name": "测试掉落"}],
                     "loot_tasks": [
-                        {"quest_id": 1, "name": "测试掉落", "classification": "must", "reason": "test"}
+                        {"quest_id": 1, "name": "测试掉落", "classification": "optional", "reason": "test"}
                     ],
                 }
             ]
         }
-        with self.assertRaisesRegex(ValueError, "未在页面步骤中显示标签"):
+        with self.assertRaisesRegex(ValueError, "可选任务仍混在主流程中"):
             validate_simple_route(route)
+
+    def test_distance_bands_use_review_thresholds(self) -> None:
+        self.assertEqual(_distance_band(2.5), ("same", "同一区域"))
+        self.assertEqual(_distance_band(2.51), ("near", "附近"))
+        self.assertEqual(_distance_band(5), ("near", "附近"))
+        self.assertEqual(_distance_band(5.01), ("separate", "不同任务点"))
+        self.assertEqual(_distance_band(8), ("separate", "不同任务点"))
+        self.assertEqual(_distance_band(8.01), ("far", "较远"))
 
     def test_generated_page_contract(self) -> None:
         path = PROJECT_ROOT / "data/routes/simple-leveling-route.html"
@@ -163,9 +174,21 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertIn("冰冠冰川", rendered)
         self.assertIn('class="quest-name quest-collect"', rendered)
         self.assertIn('class="quest-name quest-simple"', rendered)
-        self.assertEqual(rendered.count('type="checkbox"'), 82)
+        self.assertEqual(rendered.count('<input type="checkbox"'), 72)
         self.assertIn("本地图尚未人工实跑，暂不提供路线", rendered)
-        self.assertIn("炉石绑定在这里", rendered)
+        self.assertIn("把炉石绑定在鹰翼广场", rendered)
+        self.assertIn('<details class="quest-detail', rendered)
+        self.assertIn("补经验任务", rendered)
+        self.assertIn("980 经验", rendered)
+        self.assertIn("必须先完成：《鱼头......》", rendered)
+        self.assertIn("标记过远", rendered)
+        self.assertIn("复制过远标记", rendered)
+        self.assertIn("同一区域 · 0.3", rendered)
+        eversong = rendered.split('id="panel-eversong-6-12"', 1)[1].split('</section>', 1)[0]
+        main_flow = eversong.split('<ol>', 1)[1].split('</ol>', 1)[0]
+        self.assertNotIn("鱼头......", main_flow)
+        self.assertNotIn("失落的军备", main_flow)
+        self.assertNotIn("收集豹皮", main_flow)
         self.assertNotIn("到学徒梅雷多尔集中接取《学徒的欺瞒》", rendered)
         self.assertNotIn("【打怪掉物·必做】", rendered)
         self.assertNotIn("【打怪掉物·可跳】", rendered)
