@@ -1,0 +1,684 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-4080-candidate",
+  "title": "血精灵死亡骑士 · 奎尔丹纳斯岛（Isle of Quel'Danas）任务候选版",
+  "output_basename": "zone-4080",
+  "zone": "奎尔丹纳斯岛",
+  "zone_en": "Isle of Quel'Danas",
+  "map_area_id": 4080,
+  "quest_zone_or_sort": 4080,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "艾尔达拉·晨行者周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        11554,
+        11555,
+        11556,
+        11557
+      ],
+      "quests": [
+        {
+          "quest_id": 11554,
+          "name": "前线的伙伴",
+          "raw_name": "A Friend in the Frontlines",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11555,
+          "name": "盟友的尊敬",
+          "raw_name": "Honored by Your Allies",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11556,
+          "name": "战友的景仰",
+          "raw_name": "Revered in the Field of Battle",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11557,
+          "name": "勇冠三军",
+          "raw_name": "Exalted Among All Combatants",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到艾尔达拉·晨行者处接取：前线的伙伴、盟友的尊敬、战友的景仰、勇冠三军。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.25,
+          "y": 30.81
+        },
+        "entities": [
+          {
+            "id": 25032,
+            "kind": "npc",
+            "name": "艾尔达拉·晨行者",
+            "coordinates": [
+              {
+                "x": 47.25,
+                "y": 30.81
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.25,
+                "y": 30.81
+              },
+              "bounds": {
+                "min_x": 47.25,
+                "max_x": 47.25,
+                "min_y": 30.81,
+                "max_y": 30.81
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        11549
+      ],
+      "quests": [
+        {
+          "quest_id": 11549,
+          "name": "慷慨的捐赠者",
+          "raw_name": "A Magnanimous Benefactor",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "学者卡伊索斯希望你捐献1000枚金币以协助学者艾尤莉的事业。若完成这个任务，你将会获得\"破碎残阳的Sharmon\"的称号。"
+        }
+      ],
+      "instruction": "到学者卡伊索斯处接取：慷慨的捐赠者。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.18,
+          "y": 33.12
+        },
+        "entities": [
+          {
+            "id": 25163,
+            "kind": "npc",
+            "name": "学者卡伊索斯",
+            "coordinates": [
+              {
+                "x": 51.18,
+                "y": 33.12
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.18,
+                "y": 33.12
+              },
+              "bounds": {
+                "min_x": 51.18,
+                "max_x": 51.18,
+                "min_y": 33.12,
+                "max_y": 33.12
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        11481,
+        11482,
+        11549,
+        11550,
+        11554,
+        11555,
+        11556,
+        11557
+      ],
+      "quests": [
+        {
+          "quest_id": 11481,
+          "name": "太阳之井的危机",
+          "raw_name": "Crisis at the Sunwell",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 11488,
+          "objective_text": "沙塔斯城奥尔多高地的圣光护卫者阿德因要求你前往太阳之井高地，与主教拉雷索尔谈一谈。"
+        },
+        {
+          "quest_id": 11482,
+          "name": "使命的召唤",
+          "raw_name": "Duty Calls",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 11488,
+          "objective_text": "沙塔斯城占星者之台的达斯雷·射日者要求你前往太阳之井高地，与主教拉雷索尔谈一谈。"
+        },
+        {
+          "quest_id": 11549,
+          "name": "慷慨的捐赠者",
+          "raw_name": "A Magnanimous Benefactor",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "学者卡伊索斯希望你捐献1000枚金币以协助学者艾尤莉的事业。若完成这个任务，你将会获得\"破碎残阳的Sharmon\"的称号。"
+        },
+        {
+          "quest_id": 11550,
+          "name": "欺诈者降临",
+          "raw_name": "Enter, the Deceiver...",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "前往奎尔萨拉斯正北方的奎尔丹纳斯岛，向大法师奈苏尔报到。 /  / 铁炉堡和银月城的飞行管理员可以将你送到目的地。"
+        },
+        {
+          "quest_id": 11554,
+          "name": "前线的伙伴",
+          "raw_name": "A Friend in the Frontlines",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11555,
+          "name": "盟友的尊敬",
+          "raw_name": "Honored by Your Allies",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11556,
+          "name": "战友的景仰",
+          "raw_name": "Revered in the Field of Battle",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 11557,
+          "name": "勇冠三军",
+          "raw_name": "Exalted Among All Combatants",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到主教拉雷索尔、学者卡伊索斯、大法师奈苏尔、艾尔达拉·晨行者处交付：太阳之井的危机、使命的召唤、慷慨的捐赠者、欺诈者降临、前线的伙伴、盟友的尊敬、战友的景仰、勇冠三军。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 48.78,
+          "y": 30.775
+        },
+        "entities": [
+          {
+            "id": 24813,
+            "kind": "npc",
+            "name": "主教拉雷索尔",
+            "coordinates": [
+              {
+                "x": 47.42,
+                "y": 30.74
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.42,
+                "y": 30.74
+              },
+              "bounds": {
+                "min_x": 47.42,
+                "max_x": 47.42,
+                "min_y": 30.74,
+                "max_y": 30.74
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 25163,
+            "kind": "npc",
+            "name": "学者卡伊索斯",
+            "coordinates": [
+              {
+                "x": 51.18,
+                "y": 33.12
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.18,
+                "y": 33.12
+              },
+              "bounds": {
+                "min_x": 51.18,
+                "max_x": 51.18,
+                "min_y": 33.12,
+                "max_y": 33.12
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 25169,
+            "kind": "npc",
+            "name": "大法师奈苏尔",
+            "coordinates": [
+              {
+                "x": 50.14,
+                "y": 28.24
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.14,
+                "y": 28.24
+              },
+              "bounds": {
+                "min_x": 50.14,
+                "max_x": 50.14,
+                "min_y": 28.24,
+                "max_y": 28.24
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 25032,
+            "kind": "npc",
+            "name": "艾尔达拉·晨行者",
+            "coordinates": [
+              {
+                "x": 47.25,
+                "y": 30.81
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.25,
+                "y": 30.81
+              },
+              "bounds": {
+                "min_x": 47.25,
+                "max_x": 47.25,
+                "min_y": 30.81,
+                "max_y": 30.81
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        11526
+      ],
+      "quests": [
+        {
+          "quest_id": 11526,
+          "name": "失踪的魔导师",
+          "raw_name": "The Missing Magistrix",
+          "required_level": 70,
+          "quest_level": 70,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4080,
+          "pre_single": [
+            11550
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在黎明广场的传送门附近使用军团传送卷轴。穿越传送门之后，立刻找到魔导师瑟伊拉。"
+        }
+      ],
+      "instruction": "到瑟里斯·黎明之心处接取：失踪的魔导师。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.47,
+          "y": 30.56
+        },
+        "entities": [
+          {
+            "id": 24967,
+            "kind": "npc",
+            "name": "瑟里斯·黎明之心",
+            "coordinates": [
+              {
+                "x": 47.47,
+                "y": 30.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.47,
+                "y": 30.56
+              },
+              "bounds": {
+                "min_x": 47.47,
+                "max_x": 47.47,
+                "min_y": 30.56,
+                "max_y": 30.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 11481,
+      "name": "太阳之井的危机",
+      "raw_name": "Crisis at the Sunwell",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 11488,
+      "objective_text": "沙塔斯城奥尔多高地的圣光护卫者阿德因要求你前往太阳之井高地，与主教拉雷索尔谈一谈。"
+    },
+    {
+      "quest_id": 11482,
+      "name": "使命的召唤",
+      "raw_name": "Duty Calls",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 11488,
+      "objective_text": "沙塔斯城占星者之台的达斯雷·射日者要求你前往太阳之井高地，与主教拉雷索尔谈一谈。"
+    },
+    {
+      "quest_id": 11526,
+      "name": "失踪的魔导师",
+      "raw_name": "The Missing Magistrix",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [
+        11550
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在黎明广场的传送门附近使用军团传送卷轴。穿越传送门之后，立刻找到魔导师瑟伊拉。"
+    },
+    {
+      "quest_id": 11549,
+      "name": "慷慨的捐赠者",
+      "raw_name": "A Magnanimous Benefactor",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "学者卡伊索斯希望你捐献1000枚金币以协助学者艾尤莉的事业。若完成这个任务，你将会获得\"破碎残阳的Sharmon\"的称号。"
+    },
+    {
+      "quest_id": 11550,
+      "name": "欺诈者降临",
+      "raw_name": "Enter, the Deceiver...",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "前往奎尔萨拉斯正北方的奎尔丹纳斯岛，向大法师奈苏尔报到。 /  / 铁炉堡和银月城的飞行管理员可以将你送到目的地。"
+    },
+    {
+      "quest_id": 11554,
+      "name": "前线的伙伴",
+      "raw_name": "A Friend in the Frontlines",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 11555,
+      "name": "盟友的尊敬",
+      "raw_name": "Honored by Your Allies",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 11556,
+      "name": "战友的景仰",
+      "raw_name": "Revered in the Field of Battle",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 11557,
+      "name": "勇冠三军",
+      "raw_name": "Exalted Among All Combatants",
+      "required_level": 70,
+      "quest_level": 70,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4080,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    }
+  ],
+  "fivebox_observations": {
+    "11481": {
+      "status": "not_classified"
+    },
+    "11482": {
+      "status": "not_classified"
+    },
+    "11526": {
+      "status": "not_classified"
+    },
+    "11549": {
+      "status": "not_classified"
+    },
+    "11550": {
+      "status": "not_classified"
+    },
+    "11554": {
+      "status": "not_classified"
+    },
+    "11555": {
+      "status": "not_classified"
+    },
+    "11556": {
+      "status": "not_classified"
+    },
+    "11557": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 9,
+    "step_count": 4,
+    "min_level": 70,
+    "max_level": 70
+  }
+}

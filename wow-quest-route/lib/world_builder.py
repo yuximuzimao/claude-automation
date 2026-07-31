@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import shutil
 import zipfile
 from collections import defaultdict
 from pathlib import Path
@@ -37,6 +38,24 @@ ITEM = {"name": 1, "npc_drops": 2, "object_drops": 3}
 
 BLOOD_ELF_RACE_FLAG = 2 ** (10 - 1)
 PALADIN_CLASS_FLAG = 2 ** (2 - 1)
+DEATH_KNIGHT_CLASS_FLAG = 2 ** (6 - 1)
+DEATH_KNIGHT_START_SORT = -372
+DEATH_KNIGHT_START_ZONE = 4298
+CHARACTER_PROFILES = {
+    "paladin": {
+        "race_flag": BLOOD_ELF_RACE_FLAG,
+        "class_flag": PALADIN_CLASS_FLAG,
+        "slug": "blood-elf-paladin",
+        "label": "血精灵圣骑士",
+    },
+    "death-knight": {
+        "race_flag": BLOOD_ELF_RACE_FLAG,
+        "class_flag": DEATH_KNIGHT_CLASS_FLAG,
+        "slug": "blood-elf-death-knight",
+        "label": "血精灵死亡骑士",
+        "special_zone_sorts": {DEATH_KNIGHT_START_SORT: DEATH_KNIGHT_START_ZONE},
+    },
+}
 QUEST_FLAG_RAID = 64
 QUEST_FLAG_DAILY = 4096
 QUEST_FLAG_WEEKLY = 32768
@@ -151,18 +170,26 @@ def _bit_allowed(mask: Any, flag: int) -> bool:
     return mask % (flag * 2) >= flag
 
 
-def _eligible(data: QuestieData, row: Any) -> bool:
+def _eligible(
+    data: QuestieData,
+    row: Any,
+    race_flag: int = BLOOD_ELF_RACE_FLAG,
+    class_flag: int = PALADIN_CLASS_FLAG,
+    allowed_zone_sorts: set[int] | None = None,
+) -> bool:
     if not isinstance(row, dict):
         return False
     zone = row.get(QUEST["zone_or_sort"])
-    if not isinstance(zone, int) or zone <= 0:
+    if not isinstance(zone, int):
+        return False
+    if zone <= 0 and zone not in (allowed_zone_sorts or set()):
         return False
     level = row.get(QUEST["required_level"])
     if isinstance(level, int) and level > 80:
         return False
-    if not _bit_allowed(row.get(QUEST["required_races"]), BLOOD_ELF_RACE_FLAG):
+    if not _bit_allowed(row.get(QUEST["required_races"]), race_flag):
         return False
-    if not _bit_allowed(row.get(QUEST["required_classes"]), PALADIN_CLASS_FLAG):
+    if not _bit_allowed(row.get(QUEST["required_classes"]), class_flag):
         return False
     if row.get(QUEST["required_skill"]):
         return False
@@ -172,15 +199,16 @@ def _eligible(data: QuestieData, row: Any) -> bool:
     sflags = row.get(QUEST["special_flags"])
     if isinstance(sflags, int) and sflags & (SPECIAL_REPEATABLE | SPECIAL_EVENT):
         return False
-    starters = row.get(QUEST["started_by"])
-    npc_starters = _ids(starters, 1)
-    if npc_starters:
-        friendly = []
-        for npc_id in npc_starters:
+    for group_key in ("started_by", "finished_by"):
+        npc_ids = _ids(row.get(QUEST[group_key]), 1)
+        if not npc_ids:
+            continue
+        factions = []
+        for npc_id in npc_ids:
             npc = data.npcs.get(npc_id)
             if isinstance(npc, dict):
-                friendly.append(npc.get(13))
-        if friendly and not any(isinstance(value, str) and "H" in value for value in friendly):
+                factions.append(npc.get(13))
+        if factions and not any(isinstance(value, str) and "H" in value for value in factions):
             return False
     return True
 
@@ -478,7 +506,15 @@ def _segments(steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return segments
 
 
-def build_zone_route(data: QuestieData, zone_id: int, zone_name: str, zone_name_zh: str, quests: dict[int, dict[Any, Any]]) -> dict[str, Any] | None:
+def build_zone_route(
+    data: QuestieData,
+    zone_id: int,
+    zone_name: str,
+    zone_name_zh: str,
+    quests: dict[int, dict[Any, Any]],
+    profile_slug: str = "blood-elf-paladin",
+    profile_label: str = "血精灵圣骑士",
+) -> dict[str, Any] | None:
     actionable: dict[int, dict[Any, Any]] = {}
     for qid, row in quests.items():
         if (
@@ -542,8 +578,8 @@ def build_zone_route(data: QuestieData, zone_id: int, zone_name: str, zone_name_
         levels = [1]
     basename = f"zone-{zone_id}"
     route = {
-        "route_id": f"horde-blood-elf-paladin-{basename}-candidate",
-        "title": f"{zone_name_zh}（{zone_name}）坐标导航候选版",
+        "route_id": f"horde-{profile_slug}-{basename}-candidate",
+        "title": f"{profile_label} · {zone_name_zh}（{zone_name}）任务候选版",
         "output_basename": basename,
         "zone": zone_name_zh,
         "zone_en": zone_name,
@@ -574,28 +610,60 @@ def _slug_safe(value: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_-]+", "-", value).strip("-").lower() or "zone"
 
 
-def _write_index(entries: list[dict[str, Any]], output: Path) -> Path:
+def _reset_output_dir(output: Path) -> None:
+    if output.exists():
+        shutil.rmtree(output)
+    output.mkdir(parents=True, exist_ok=True)
+
+
+def _write_index(
+    entries: list[dict[str, Any]],
+    output: Path,
+    profile_label: str = "血精灵圣骑士",
+) -> Path:
     rows = []
     for e in entries:
         rows.append(
             f'<tr><td>{e["continent"]}</td><td><a href="{e["file"]}">{e["name_zh"]}</a><div class="en">{e["name_en"]}</div></td>'
             f'<td>{e["min_level"]}–{e["max_level"]}</td><td>{e["quest_count"]}</td><td>{e["segment_count"]}</td></tr>'
         )
-    text = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>血精灵圣骑士1–80区域路线索引</title><style>
-body{{margin:0;background:#0c1118;color:#e7edf5;font:16px/1.5 system-ui,"Microsoft YaHei";padding:24px}}h1{{margin-top:0}}.note{{background:#20170e;border:1px solid #8a5c18;padding:12px;border-radius:9px;margin-bottom:18px}}table{{width:100%;border-collapse:collapse;background:#121923}}th,td{{padding:10px;border-bottom:1px solid #2d3a49;text-align:left}}th{{position:sticky;top:0;background:#18212c}}a{{color:#22d3ee;font-weight:800}}.en{{font-size:12px;color:#94a3b8}}</style></head><body><h1>血精灵圣骑士1–80区域路线索引</h1><div class="note">这是Questie静态数据库自动生成的全量候选版。每个区域已拆成小区块，并提供坐标方向计算；它覆盖范围广，但不代表每个区域已经人工证明最优。</div><table><thead><tr><th>大陆</th><th>区域</th><th>最低等级</th><th>任务数</th><th>小区块</th></tr></thead><tbody>{''.join(rows)}</tbody></table></body></html>'''
+    text = f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{profile_label} 1–80区域路线索引</title><style>
+body{{margin:0;background:#0c1118;color:#e7edf5;font:16px/1.5 system-ui,"Microsoft YaHei";padding:24px}}h1{{margin-top:0}}.note{{background:#20170e;border:1px solid #8a5c18;padding:12px;border-radius:9px;margin-bottom:18px}}table{{width:100%;border-collapse:collapse;background:#121923}}th,td{{padding:10px;border-bottom:1px solid #2d3a49;text-align:left}}th{{position:sticky;top:0;background:#18212c}}a{{color:#22d3ee;font-weight:800}}.en{{font-size:12px;color:#94a3b8}}</style></head><body><h1>{profile_label} 1–80区域路线索引</h1><div class="note">这是Questie静态数据库自动生成的全量候选版。每个区域已拆成小区块，并提供坐标方向计算；它覆盖范围广，但不代表每个区域已经人工证明最优。</div><table><thead><tr><th>大陆</th><th>区域</th><th>最低等级</th><th>任务数</th><th>小区块</th></tr></thead><tbody>{''.join(rows)}</tbody></table></body></html>'''
     path = output / "index.html"
     path.write_text(text, encoding="utf-8")
     return path
 
 
-def build_world_routes(data: QuestieData, source: str | Path, output: Path) -> dict[str, Any]:
+def build_world_routes(
+    data: QuestieData,
+    source: str | Path,
+    output: Path,
+    profile: str = "paladin",
+) -> dict[str, Any]:
+    if profile not in CHARACTER_PROFILES:
+        raise ValueError(f"未知角色配置: {profile}")
+    profile_config = CHARACTER_PROFILES[profile]
+    race_flag = int(profile_config["race_flag"])
+    class_flag = int(profile_config["class_flag"])
+    profile_slug = str(profile_config["slug"])
+    profile_label = str(profile_config["label"])
+    special_zone_sorts = {
+        int(sort_id): int(zone_id)
+        for sort_id, zone_id in dict(profile_config.get("special_zone_sorts", {})).items()
+    }
     meta = _parse_zone_metadata(source)
     grouped: dict[int, dict[int, dict[Any, Any]]] = defaultdict(dict)
     for qid, row in data.quests.items():
-        if not isinstance(qid, int) or not _eligible(data, row):
+        if not isinstance(qid, int) or not _eligible(
+            data,
+            row,
+            race_flag,
+            class_flag,
+            set(special_zone_sorts),
+        ):
             continue
         raw_zone = int(row[QUEST["zone_or_sort"]])
-        zone_id = _parent_zone(raw_zone, meta["parents"])
+        zone_id = special_zone_sorts.get(raw_zone, _parent_zone(raw_zone, meta["parents"]))
         if zone_id in meta["dungeons"]:
             continue
         zone_name = meta["names"].get(zone_id)
@@ -603,12 +671,20 @@ def build_world_routes(data: QuestieData, source: str | Path, output: Path) -> d
             continue
         grouped[zone_id][qid] = row
 
-    output.mkdir(parents=True, exist_ok=True)
+    _reset_output_dir(output)
     entries: list[dict[str, Any]] = []
     for zone_id, quests in sorted(grouped.items(), key=lambda item: min(int(r.get(QUEST["required_level"]) or 1) for r in item[1].values())):
         zone_name = meta["names"].get(zone_id, f"Zone {zone_id}")
         zone_name_zh = meta["zh"].get(zone_name, zone_name)
-        route = build_zone_route(data, zone_id, zone_name, zone_name_zh, quests)
+        route = build_zone_route(
+            data,
+            zone_id,
+            zone_name,
+            zone_name_zh,
+            quests,
+            profile_slug=profile_slug,
+            profile_label=profile_label,
+        )
         if not route:
             continue
         zone_dir = output / f"{zone_id}-{_slug_safe(zone_name)}"
@@ -629,8 +705,10 @@ def build_world_routes(data: QuestieData, source: str | Path, output: Path) -> d
         })
 
     entries.sort(key=lambda e: (e["min_level"], e["continent"], e["name_zh"]))
-    index = _write_index(entries, output)
+    index = _write_index(entries, output, profile_label)
     manifest = {
+        "profile": profile,
+        "profile_label": profile_label,
         "questie_version": data.version,
         "zone_count": len(entries),
         "quest_count": sum(e["quest_count"] for e in entries),

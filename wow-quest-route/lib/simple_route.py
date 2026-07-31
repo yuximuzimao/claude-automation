@@ -998,7 +998,9 @@ def build_simple_route(
                 auto_segment,
                 next_name,
             )
-            if prefix_steps:
+            if segment.get("publish_auto_steps"):
+                public_steps = list(steps)
+            elif prefix_steps:
                 public_steps = prefix_steps + _steps_from_spec(
                     [
                         {
@@ -1283,12 +1285,18 @@ def _optional_tasks_html(segment: dict[str, Any]) -> str:
 def render_simple_html(route: dict[str, Any]) -> str:
     tabs: list[str] = []
     panels: list[str] = []
+    eyebrow = str(route.get("eyebrow") or "五开号 · 单一路线")
+    lede = str(
+        route.get("lede")
+        or "红色任务名表示需要反复逐号收集、数量较多或掉落不稳定；绿色包括共享击杀、单个必掉物和单次点击。展开任务名只看前置、重点目标和最短流程。"
+    )
+    storage_suffix = re.sub(r"[^a-zA-Z0-9_-]+", "-", str(route.get("route_id", "route"))).strip("-") or "route"
     for index, segment in enumerate(route["segments"]):
         active = index == 0
         tabs.append(
             f'<button class="map-tab" role="tab" aria-selected="{str(active).lower()}" '
             f'aria-controls="panel-{html.escape(segment["id"])}" data-panel="{html.escape(segment["id"])}">'
-            f'<strong>{html.escape(segment["name"])}</strong><small>{segment["level_min"]}—{segment["level_max"]}</small></button>'
+            f'<strong>{html.escape(segment["name"])}</strong><small>{html.escape(str(segment.get("continent", "")) + " · " if segment.get("continent") else "")}{segment["level_min"]}—{segment["level_max"]}</small></button>'
         )
         items: list[str] = []
         visible_steps = segment.get("public_steps", segment["steps"])
@@ -1313,7 +1321,7 @@ def render_simple_html(route: dict[str, Any]) -> str:
         panels.append(
             f'<section id="panel-{html.escape(segment["id"])}" class="map-panel" role="tabpanel" '
             f'data-panel-id="{html.escape(segment["id"])}"{hidden}>'
-            f'<header class="map-heading"><div><p>等级 {segment["level_min"]}—{segment["level_max"]}</p>'
+            f'<header class="map-heading"><div><p>{html.escape(str(segment.get("continent", "")) + " · " if segment.get("continent") else "")}等级 {segment["level_min"]}—{segment["level_max"]}</p>'
             f'<h2>{html.escape(segment["name"])}</h2></div><span class="map-progress">0 / {len(items)}</span></header>'
             f'<ol>{"".join(items)}</ol>{_optional_tasks_html(segment)}'
             f'<div class="panel-nav"><button class="prev-map">上一地图</button>'
@@ -1328,8 +1336,8 @@ def render_simple_html(route: dict[str, Any]) -> str:
 """
     script = """
 (() => {
-  const storageKey = 'wow-simple-route-v2';
-  const farStorageKey = 'wow-simple-route-far-v1';
+  const storageKey = 'wow-route-__STORAGE_SUFFIX__-v1';
+  const farStorageKey = 'wow-route-__STORAGE_SUFFIX__-far-v1';
   const tabs = [...document.querySelectorAll('.map-tab')];
   const panels = [...document.querySelectorAll('.map-panel')];
   const allSteps = [...document.querySelectorAll('.route-step')];
@@ -1453,6 +1461,7 @@ def render_simple_html(route: dict[str, Any]) -> str:
   updateProgress();
 })();
 """
+    script = script.replace("__STORAGE_SUFFIX__", storage_suffix)
     rendered = f'''<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -1463,9 +1472,9 @@ def render_simple_html(route: dict[str, Any]) -> str:
 </head>
 <body>
 <header class="top"><div class="top-inner">
-<p class="eyebrow">五开号 · 单一路线</p>
+<p class="eyebrow">{html.escape(eyebrow)}</p>
 <h1>{html.escape(route["title"])}</h1>
-<p class="lede">红色任务名表示需要反复逐号收集、数量较多或掉落不稳定；绿色包括共享击杀、单个必掉物和单次点击。展开任务名只看前置、重点目标和最短流程。</p>
+<p class="lede">{html.escape(lede)}</p>
 <div class="distance-legend" aria-label="地图坐标距离分级"><span class="distance distance-same">0—2.5 同一区域</span><span class="distance distance-near">2.5—5 附近</span><span class="distance distance-separate">5—8 不同任务点</span><span class="distance distance-far">大于8 较远</span></div>
 <div class="route-status"><span class="progress-pill"><strong id="done-count">0</strong><span>/</span><span id="total-count">0</span><span>已完成</span></span><button class="copy-far" type="button">复制过远标记</button><button class="reset" type="button">清空勾选</button></div>
 </div></header>
@@ -1491,35 +1500,33 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
     stats = route["stats"]
     sequence = " → ".join(segment["name"] for segment in route["segments"])
     lines = [
-        "# NEAT：1—80级极简任务路线内部归档",
+        "# NEAT：首组血精灵圣骑士实跑参考内部归档",
         "",
-        "## N — 最终目标和路线策略",
+        "## N — 当前目标和路线策略",
         "",
-        "- 最终用户入口只有一个HTML文件，但未经实跑的自动阶段只能视为审阅草稿，不能称为可用攻略。",
+        "- 当前有两份HTML入口：圣骑士参考页与死亡骑士全任务母版；未经实跑的自动阶段只能视为审阅草稿，不能称为稳定攻略。",
         "- 五个角色按一个主控号移动；普通击杀默认由主号完成，个人拾取和点击以五号最低进度为准。",
         "- 红色只表示多数量、随机掉落或重复个人操作造成的高五开负担；单个必掉物和单次固定点击保持绿色。",
-        "- 第一轮目标是连续升到80级，而不是全地图清空或金币最大化。",
+        "- 首组圣骑士当前只要求稳定升到55级，用于解锁后续死亡骑士；不再以1—80速通或一小时20级作为验收标准。",
         "- RXP只参考地图阶段；Questie提供任务候选和前置；实际顺序必须由道路、炉石、飞行与实跑决定。",
         f"- 最终地图顺序：{sequence}",
         "",
-        "## N2 — 2026-07-31会话冻结决策与下一窗口优先级",
+        "## N2 — 2026-07-31项目目标调整",
         "",
-        "- 当前阶段暂不以‘最终可用’或‘已经实跑’作为继续整理后续地图的阻塞条件；下一窗口应直接继续完成石爪山脉至冰冠冰川的全部剩余地图。",
-        "- 继续完成不等于允许自动发布：每张地图仍必须逐任务人工取舍、人工组织任务中心与移动顺序，自动候选只提供任务目录、坐标、前置、经验和实体信息。",
-        "- 不要求用户先完成永歌森林、幽魂之地或贫瘠之地实跑后才能继续；实跑反馈作为后续统一优化阶段，不阻断全地图初版整理。",
-        "- 每张新地图必须拆成主流程与地图末尾补经验清单。主流程优先保留共享击杀、固定单次点击、单个命名怪必掉物、关键前置链和顺路跑腿；高数量个人收集、随机触发、偏远支线、巡逻等待和高前置成本任务优先放入补经验清单。",
-        "- 补经验任务按Questie同级基础经验从高到低排列，但不能只按经验选任务；展开详情必须显式显示高成本前置，使用户能同时判断收益与完成成本。",
-        "- 红绿颜色与是否可跳过是两个独立维度：红色表示五开操作负担高；绿色任务也可能因巡逻、距离或昂贵前置而进入补经验清单。",
-        "- 用户详情不显示底层五开判断，也不显示‘无前置’、经验计算说明或完整Questie描述；只显示标题旁经验、突出前置、地点、重点目标、最短流程和必要提醒。",
-        "- 前置行使用独立警示颜色；怪物名、任务物品名和固定交互目标使用关键词高亮；所有地图统一使用地点/NPC/目标/操作结构。",
-        "- 距离继续采用0—2.5同一区域、2.5—5附近、5—8不同任务点、大于8较远；它只作为候选提示和用户反馈标记，不能替代道路与地形判断。",
-        "- 每完成一张地图都必须运行前置闭包、静态页面契约、Python测试和JavaScript语法检查；最终未满足前置必须保持为0。",
-        "- 推荐逐图工作流：审阅Questie候选与等级价值 → 核对所有前置和任务链 → 提取NPC/怪物/物品/物体坐标 → 划分任务中心与实际任务点 → 人工编排接取/目标/交付/炉石/飞行 → 划分主流程与补经验 → 补充简短详情和重点词 → 生成并验证。",
+        "- 当前首组五个血精灵圣骑士只承担稳定升到55级并解锁死亡骑士的任务；本页继续保留为实跑参考，不再要求先把圣骑士22—80全部人工优化。",
+        "- 《飞往银月城》已在当前实跑中确认无法进入银月城并阻断交付，原因尚未确定；该任务记录为阻断并直接跳过，不能影响升到55级。",
+        "- 《幽光矿洞的麻烦》已根据实跑改到矿洞西侧约24,50的外部稀疏区域，禁止按任务名称直接进入高密度矿洞。",
+        "- 后续标准循环改为五个55级血精灵死亡骑士。独立页面`dk-55-80-world-tasks.html`已经覆盖死亡骑士出生链及55—80世界任务，并剔除联盟不可交付区域，共42张地图、1858个任务和2855个执行步骤。",
+        "- 死亡骑士母版第一轮优先全任务覆盖，不预先猜测最终打金图；实跑记录每张地图的耗时、任务金币、掉落收益、死亡、折返和逐号操作。",
+        "- 第一轮后把地图和任务分成固定主流程、次要补充与明确跳过；第二组及后续死亡骑士复跑同一路线，直到主要打金图流程稳定。",
+        "- 红绿颜色与是否跳过仍是两个维度：红色表示五开个人操作负担高；绿色任务也可能因封闭入口、洞穴密度、巡逻、距离或动态位面而跳过。",
+        "- 用户详情继续只显示经验、前置、地点、重点目标、流程与必要提醒；Questie静态坐标不能替代道路、洞穴入口、建筑楼层和服务器状态。",
+        "- 两份页面都必须执行Python编译、单元测试和页面JavaScript语法检查，并使用独立浏览器存储键保存勾选进度。",
         "",
         "## E — 使用的数据",
         "",
         f"- Questie：v{route['source']['questie_version']}，SHA256 `{route['source']['questie_sha256']}`。",
-        "- Questie候选数据：现有68区域候选JSON，仅作为任务清单和接取/目标/交付顺序来源；旧导航页面未复用。",
+        "- Questie候选数据：历史圣骑士候选库为68个区域，当前死亡骑士候选库经职业与阵营过滤后为65个可用区域；候选JSON只作为任务清单和接取/目标/交付顺序来源。",
         "- 逐日岛：人工步骤骨架、五开实测分类和脱敏人物历程。",
         f"- RXP SavedVariables：`{rxp.source}`。当前指南组 `{rxp.current_group}`，当前指南 `{rxp.current_guide}`。",
         f"- RXP指南元数据共 {rxp.metadata_count} 项；本路线预期链命中 {len(rxp.matched_chain)} 项，缺少 {len(rxp.missing_chain)} 项。",
@@ -1529,7 +1536,7 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         "",
         "- 不恢复坐标输入、方向计算、抽象地图、圆圈、连线、任务链图、候选评分或实际历程面板。",
         "- 不恢复自制游戏内插件、移动轨迹采集、自动接交、输入广播、自动切窗、客户端注入、内存读取或抓包。",
-        "- 不再生成68个区域页面；旧页面保留为历史产物，但新路线不依赖其界面。",
+        "- 不把分区域候选页面恢复为日常执行入口；候选库可继续生成供任务覆盖与审阅使用。",
         "",
         "## T — 测试结果和尚未验证的问题",
         "",
@@ -1541,13 +1548,13 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         f"- 内部仍分类为必做掉落 {stats['loot_must_count']} 个、可跳掉落 {stats['loot_optional_count']} 个；五开判断保留在数据层，不在用户详情中显示。",
         "- 用户详情只显示经验、突出前置、重点目标、地点和最短流程；怪物与任务物品名称单独高亮。",
         "- 逐日岛1—6级已统一为地点/NPC/目标/操作格式；西侧树人/神殿顺序和菲伦德雷任务物品仍需继续实跑。",
-        "- 永歌森林鹰翼广场至晴风村已根据2026-07-31实测反馈人工修订；后半段仍未人工整理。",
+        "- 永歌森林鹰翼广场至晴风村已根据2026-07-31实测反馈人工修订；后半段已直接公开Questie自动任务步骤，尚未实跑。",
         "- 幽魂之地12—20与贫瘠之地20—22已依据Questie前置、任务点和任务负担人工编排，但尚未实跑，不能宣称为最终最优路线。",
-        "- 石爪山脉及22—80级当前仍只显示未人工整理占位，不发布自动候选顺序。",
-        "- 下一窗口的首要任务不是等待前三张地图实跑，而是按同一人工标准依次完成所有剩余地图；每整理完一张就替换该地图占位。",
+        "- 石爪山脉及22—80级在圣骑士参考页中继续保留占位；它们不再是当前优先开发对象，也不影响首组升到55级。",
+        "- 完整55—80任务覆盖已经迁移到独立死亡骑士母版；下一步优先使用第一组死亡骑士实跑筛选主要打金地图，而不是继续扩写圣骑士占位。",
         "- Questie WotLK修正层尚未完整叠加到基础库；若实际任务与页面不一致，应先核对修正层再改路线。",
         "- 静态校验会检查：单HTML、地图标签、步骤非空、可选任务不混入主流程、重点样式存在、页面不含五开判断与旧导航器字段。",
-        "- 2026-07-31验证：`python3 -m unittest discover -s tests` 共14项通过；最终提交前需再次执行页面脚本 `node --check`。",
+        "- 2026-07-31验证：`python3 -m unittest discover -s tests` 共18项通过；两份页面脚本均已执行 `node --check`。",
         "",
         "## RXP与Questie不一致或需要解释的地方",
         "",

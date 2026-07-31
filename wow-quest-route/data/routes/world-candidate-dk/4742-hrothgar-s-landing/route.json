@@ -1,0 +1,121 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-4742-candidate",
+  "title": "血精灵死亡骑士 · 洛斯加尔登陆点（Hrothgar's Landing）任务候选版",
+  "output_basename": "zone-4742",
+  "zone": "洛斯加尔登陆点",
+  "zone_en": "Hrothgar's Landing",
+  "map_area_id": 4742,
+  "quest_zone_or_sort": 4742,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "Heart of the Mists来源：Heart of the Mists周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "完成目标",
+      "quest_ids": [
+        24442
+      ],
+      "quests": [
+        {
+          "quest_id": 24442,
+          "name": "克瓦迪尔的进攻计划",
+          "raw_name": "Battle Plans Of The Kvaldir",
+          "required_level": 77,
+          "quest_level": 80,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4769,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "取得迷雾之心，将它和克瓦迪尔进攻计划一同交给银色比武场的裁决者玛蕾尔·图哈特。"
+        }
+      ],
+      "instruction": "在Heart of the Mists来源：Heart of the Mists周边完成：克瓦迪尔的进攻计划。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 43.95,
+          "y": 24.25
+        },
+        "entities": [
+          {
+            "id": 201367,
+            "kind": "object",
+            "name": "Heart of the Mists来源：Heart of the Mists",
+            "coordinates": [
+              {
+                "x": 43.95,
+                "y": 24.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.95,
+                "y": 24.25
+              },
+              "bounds": {
+                "min_x": 43.95,
+                "max_x": 43.95,
+                "min_y": 24.25,
+                "max_y": 24.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 24442,
+      "name": "克瓦迪尔的进攻计划",
+      "raw_name": "Battle Plans Of The Kvaldir",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4769,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "取得迷雾之心，将它和克瓦迪尔进攻计划一同交给银色比武场的裁决者玛蕾尔·图哈特。"
+    }
+  ],
+  "fivebox_observations": {
+    "24442": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 1,
+    "min_level": 77,
+    "max_level": 77
+  }
+}

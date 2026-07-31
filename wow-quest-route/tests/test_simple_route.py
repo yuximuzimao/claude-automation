@@ -174,7 +174,7 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertIn("冰冠冰川", rendered)
         self.assertIn('class="quest-name quest-collect"', rendered)
         self.assertIn('class="quest-name quest-simple"', rendered)
-        self.assertEqual(rendered.count('<input type="checkbox"'), 132)
+        self.assertEqual(rendered.count('<input type="checkbox"'), 168)
         self.assertIn("尚未人工整理，暂不提供路线", rendered)
         self.assertIn("把炉石绑定在鹰翼广场", rendered)
         self.assertIn('<details class="quest-detail', rendered)
@@ -204,8 +204,10 @@ class SimpleRouteTests(unittest.TestCase):
                 "stonetalon-22-24",
             )
         }
-        for panel_id in ("sunstrider-1-6", "eversong-6-12", "ghostlands-12-20", "barrens-20-22"):
+        for panel_id in ("sunstrider-1-6", "ghostlands-12-20", "barrens-20-22"):
             self.assertNotIn('class="legacy-step-text"', panels[panel_id])
+        self.assertNotIn("尚未人工整理", panels["eversong-6-12"])
+        self.assertIn("学徒的欺瞒", panels["eversong-6-12"])
         self.assertNotIn("尚未人工整理", panels["ghostlands-12-20"])
         self.assertNotIn("尚未人工整理", panels["barrens-20-22"])
         self.assertIn("尚未人工整理", panels["stonetalon-22-24"])
@@ -218,7 +220,7 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertNotIn("鱼头......", eversong_main)
         self.assertNotIn("失落的军备", eversong_main)
         self.assertNotIn("收集豹皮", eversong_main)
-        self.assertNotIn("到学徒梅雷多尔集中接取《学徒的欺瞒》", rendered)
+        self.assertIn("学徒的欺瞒", eversong_main)
         self.assertNotIn("【打怪掉物·必做】", rendered)
         self.assertNotIn("【打怪掉物·可跳】", rendered)
         self.assertNotIn("之后：", rendered)

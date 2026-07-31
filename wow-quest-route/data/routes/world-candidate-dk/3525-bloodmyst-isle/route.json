@@ -1,0 +1,377 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-3525-candidate",
+  "title": "血精灵死亡骑士 · 秘血岛（Bloodmyst Isle）任务候选版",
+  "output_basename": "zone-3525",
+  "zone": "秘血岛",
+  "zone_en": "Bloodmyst Isle",
+  "map_area_id": 3525,
+  "quest_zone_or_sort": 3525,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "纳兹维安萨特周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "完成目标",
+      "quest_ids": [
+        9568
+      ],
+      "quests": [
+        {
+          "quest_id": 9568,
+          "name": "DEPRECATED",
+          "raw_name": "On the Offensive",
+          "required_level": 13,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 3525,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 9569,
+          "objective_text": "秘血岗哨的Vindicator Aalesia要你杀掉10个Nazzivus Satyr，5个Nazzivus Rogues和5个Nazzivus Felsworn。"
+        }
+      ],
+      "instruction": "在纳兹维安萨特、纳兹维安盗贼、纳兹维安魔誓者周边完成：DEPRECATED。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 36.09,
+          "y": 77.32
+        },
+        "entities": [
+          {
+            "id": 17337,
+            "kind": "npc",
+            "name": "纳兹维安萨特",
+            "coordinates": [
+              {
+                "x": 39.98,
+                "y": 79.29
+              },
+              {
+                "x": 39.02,
+                "y": 77.22
+              },
+              {
+                "x": 35.84,
+                "y": 81.69
+              },
+              {
+                "x": 36.09,
+                "y": 78.98
+              },
+              {
+                "x": 37.35,
+                "y": 77.35
+              },
+              {
+                "x": 37.26,
+                "y": 76.89
+              },
+              {
+                "x": 38.93,
+                "y": 74.6
+              },
+              {
+                "x": 41.17,
+                "y": 76.23
+              },
+              {
+                "x": 35.01,
+                "y": 76.08
+              },
+              {
+                "x": 34.91,
+                "y": 73.13
+              },
+              {
+                "x": 33.41,
+                "y": 71.36
+              },
+              {
+                "x": 33.19,
+                "y": 71.79
+              },
+              {
+                "x": 32.05,
+                "y": 79.28
+              },
+              {
+                "x": 32.81,
+                "y": 82.23
+              },
+              {
+                "x": 39.49,
+                "y": 73.08
+              },
+              {
+                "x": 35.06,
+                "y": 77.71
+              },
+              {
+                "x": 38.32,
+                "y": 73.33
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.09,
+                "y": 76.89
+              },
+              "bounds": {
+                "min_x": 32.05,
+                "max_x": 41.17,
+                "min_y": 71.36,
+                "max_y": 82.23
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 17338,
+            "kind": "npc",
+            "name": "纳兹维安盗贼",
+            "coordinates": [
+              {
+                "x": 38.87,
+                "y": 83.39
+              },
+              {
+                "x": 40.78,
+                "y": 80.56
+              },
+              {
+                "x": 40.82,
+                "y": 79.58
+              },
+              {
+                "x": 38.05,
+                "y": 77.96
+              },
+              {
+                "x": 35.7,
+                "y": 76.65
+              },
+              {
+                "x": 36.87,
+                "y": 76.44
+              },
+              {
+                "x": 34.1,
+                "y": 82.82
+              },
+              {
+                "x": 33.77,
+                "y": 79.7
+              },
+              {
+                "x": 40.69,
+                "y": 78.12
+              },
+              {
+                "x": 38.24,
+                "y": 76.69
+              },
+              {
+                "x": 37.99,
+                "y": 76.32
+              },
+              {
+                "x": 37.83,
+                "y": 75.02
+              },
+              {
+                "x": 41.06,
+                "y": 79.2
+              },
+              {
+                "x": 35.04,
+                "y": 74.74
+              },
+              {
+                "x": 34.38,
+                "y": 71.57
+              },
+              {
+                "x": 32.18,
+                "y": 80.99
+              },
+              {
+                "x": 32.08,
+                "y": 82.03
+              },
+              {
+                "x": 39.67,
+                "y": 75.22
+              },
+              {
+                "x": 38.97,
+                "y": 72.31
+              },
+              {
+                "x": 40.21,
+                "y": 72.94
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.02,
+                "y": 77.32
+              },
+              "bounds": {
+                "min_x": 32.08,
+                "max_x": 41.06,
+                "min_y": 71.57,
+                "max_y": 83.39
+              },
+              "spawn_count": 20
+            }
+          },
+          {
+            "id": 17339,
+            "kind": "npc",
+            "name": "纳兹维安魔誓者",
+            "coordinates": [
+              {
+                "x": 40.15,
+                "y": 79.58
+              },
+              {
+                "x": 38.76,
+                "y": 78.92
+              },
+              {
+                "x": 36.79,
+                "y": 82.46
+              },
+              {
+                "x": 37.0,
+                "y": 81.11
+              },
+              {
+                "x": 36.11,
+                "y": 82.02
+              },
+              {
+                "x": 35.96,
+                "y": 80.25
+              },
+              {
+                "x": 38.24,
+                "y": 77.72
+              },
+              {
+                "x": 34.83,
+                "y": 77.32
+              },
+              {
+                "x": 35.8,
+                "y": 77.13
+              },
+              {
+                "x": 40.39,
+                "y": 78.28
+              },
+              {
+                "x": 34.84,
+                "y": 76.34
+              },
+              {
+                "x": 33.82,
+                "y": 73.03
+              },
+              {
+                "x": 34.26,
+                "y": 76.6
+              },
+              {
+                "x": 33.81,
+                "y": 74.74
+              },
+              {
+                "x": 32.38,
+                "y": 80.57
+              },
+              {
+                "x": 33.33,
+                "y": 80.77
+              },
+              {
+                "x": 38.52,
+                "y": 72.88
+              },
+              {
+                "x": 32.9,
+                "y": 73.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 35.88,
+                "y": 78.0
+              },
+              "bounds": {
+                "min_x": 32.38,
+                "max_x": 40.39,
+                "min_y": 72.88,
+                "max_y": 82.46
+              },
+              "spawn_count": 18
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 9568,
+      "name": "DEPRECATED",
+      "raw_name": "On the Offensive",
+      "required_level": 13,
+      "quest_level": 15,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 3525,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 9569,
+      "objective_text": "秘血岗哨的Vindicator Aalesia要你杀掉10个Nazzivus Satyr，5个Nazzivus Rogues和5个Nazzivus Felsworn。"
+    }
+  ],
+  "fivebox_observations": {
+    "9568": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 1,
+    "min_level": 13,
+    "max_level": 13
+  }
+}

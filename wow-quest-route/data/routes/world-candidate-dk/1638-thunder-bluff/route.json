@@ -1,0 +1,3748 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-1638-candidate",
+  "title": "血精灵死亡骑士 · 雷霆崖（Thunder Bluff）任务候选版",
+  "output_basename": "zone-1638",
+  "zone": "雷霆崖",
+  "zone_en": "Thunder Bluff",
+  "map_area_id": 1638,
+  "quest_zone_or_sort": 1638,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "维尔伦·陆行者周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "Bronze Feather来源：风怒女族长周边",
+      "steps": [
+        6
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "伊恩·鹰爪周边",
+      "steps": [
+        7,
+        8
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "克拉莉斯·弗斯特周边",
+      "steps": [
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "玛加萨·野性图腾周边",
+      "steps": [
+        10
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "F",
+      "title": "拉姆斯塔格周边",
+      "steps": [
+        11
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "G",
+      "title": "药剂师扎玛周边",
+      "steps": [
+        12,
+        13
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "H",
+      "title": "雷霆崖信使斯塔德尔周边",
+      "steps": [
+        14,
+        15,
+        16
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "I",
+      "title": "梅洛·石蹄周边",
+      "steps": [
+        17,
+        18
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "J",
+      "title": "赞金·石蹄周边",
+      "steps": [
+        19
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "K",
+      "title": "梅洛·石蹄周边",
+      "steps": [
+        20
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "L",
+      "title": "拉姆斯塔格周边",
+      "steps": [
+        21,
+        22
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "M",
+      "title": "梅洛·石蹄周边",
+      "steps": [
+        23,
+        24
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "N",
+      "title": "拉姆斯塔格周边",
+      "steps": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "O",
+      "title": "纳拉·蛮鬃周边",
+      "steps": [
+        29,
+        30
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "P",
+      "title": "圣者图希克周边",
+      "steps": [
+        31,
+        32
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "Q",
+      "title": "纳拉·蛮鬃周边",
+      "steps": [
+        33,
+        34,
+        35
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "R",
+      "title": "旅店老板帕拉周边",
+      "steps": [
+        36
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "S",
+      "title": "大德鲁伊哈缪尔·符文图腾周边",
+      "steps": [
+        37,
+        38,
+        39
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "T",
+      "title": "拉姆斯塔格周边",
+      "steps": [
+        40,
+        41
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "U",
+      "title": "巴珊娜·符文图腾周边",
+      "steps": [
+        42,
+        43,
+        44,
+        45
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "V",
+      "title": "雷霆崖信使斯塔德尔周边",
+      "steps": [
+        46
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "W",
+      "title": "大德鲁伊哈缪尔·符文图腾周边",
+      "steps": [
+        47,
+        48
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        768
+      ],
+      "quests": [
+        {
+          "quest_id": 768,
+          "name": "收集皮革",
+          "raw_name": "Gathering Leather",
+          "required_level": 4,
+          "quest_level": 8,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集12块轻皮，把它们交给雷霆崖的维尔伦·陆行者。"
+        }
+      ],
+      "instruction": "到维尔伦·陆行者处接取：收集皮革。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.39,
+          "y": 44.7
+        },
+        "entities": [
+          {
+            "id": 3050,
+            "kind": "npc",
+            "name": "维尔伦·陆行者",
+            "coordinates": [
+              {
+                "x": 44.39,
+                "y": 44.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.39,
+                "y": 44.7
+              },
+              "bounds": {
+                "min_x": 44.39,
+                "max_x": 44.39,
+                "min_y": 44.7,
+                "max_y": 44.7
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "交付",
+      "quest_ids": [
+        768
+      ],
+      "quests": [
+        {
+          "quest_id": 768,
+          "name": "收集皮革",
+          "raw_name": "Gathering Leather",
+          "required_level": 4,
+          "quest_level": 8,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集12块轻皮，把它们交给雷霆崖的维尔伦·陆行者。"
+        }
+      ],
+      "instruction": "到维尔伦·陆行者处交付：收集皮革。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 44.39,
+          "y": 44.7
+        },
+        "entities": [
+          {
+            "id": 3050,
+            "kind": "npc",
+            "name": "维尔伦·陆行者",
+            "coordinates": [
+              {
+                "x": 44.39,
+                "y": 44.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.39,
+                "y": 44.7
+              },
+              "bounds": {
+                "min_x": 44.39,
+                "max_x": 44.39,
+                "min_y": 44.7,
+                "max_y": 44.7
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "接取",
+      "quest_ids": [
+        769
+      ],
+      "quests": [
+        {
+          "quest_id": 769,
+          "name": "科多兽皮包",
+          "raw_name": "Kodo Hide Bag",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            768
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给雷霆崖的维尔伦·陆行者带去4块轻皮和4份粗线。"
+        }
+      ],
+      "instruction": "到维尔伦·陆行者处接取：科多兽皮包。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.39,
+          "y": 44.7
+        },
+        "entities": [
+          {
+            "id": 3050,
+            "kind": "npc",
+            "name": "维尔伦·陆行者",
+            "coordinates": [
+              {
+                "x": 44.39,
+                "y": 44.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.39,
+                "y": 44.7
+              },
+              "bounds": {
+                "min_x": 44.39,
+                "max_x": 44.39,
+                "min_y": 44.7,
+                "max_y": 44.7
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "交付",
+      "quest_ids": [
+        769
+      ],
+      "quests": [
+        {
+          "quest_id": 769,
+          "name": "科多兽皮包",
+          "raw_name": "Kodo Hide Bag",
+          "required_level": 4,
+          "quest_level": 10,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            768
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给雷霆崖的维尔伦·陆行者带去4块轻皮和4份粗线。"
+        }
+      ],
+      "instruction": "到维尔伦·陆行者处交付：科多兽皮包。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 44.39,
+          "y": 44.7
+        },
+        "entities": [
+          {
+            "id": 3050,
+            "kind": "npc",
+            "name": "维尔伦·陆行者",
+            "coordinates": [
+              {
+                "x": 44.39,
+                "y": 44.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.39,
+                "y": 44.7
+              },
+              "bounds": {
+                "min_x": 44.39,
+                "max_x": 44.39,
+                "min_y": 44.7,
+                "max_y": 44.7
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        744
+      ],
+      "quests": [
+        {
+          "quest_id": 744,
+          "name": "准备典礼",
+          "raw_name": "Preparation for Ceremony",
+          "required_level": 7,
+          "quest_level": 11,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集6根碧蓝色的羽毛和6根古铜色的羽毛，把它们交给雷霆崖的伊恩·鹰爪。"
+        }
+      ],
+      "instruction": "到伊恩·鹰爪处接取：准备典礼。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 37.69,
+          "y": 59.56
+        },
+        "entities": [
+          {
+            "id": 2987,
+            "kind": "npc",
+            "name": "伊恩·鹰爪",
+            "coordinates": [
+              {
+                "x": 37.69,
+                "y": 59.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 37.69,
+                "y": 59.56
+              },
+              "bounds": {
+                "min_x": 37.69,
+                "max_x": 37.69,
+                "min_y": 59.56,
+                "max_y": 59.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "完成目标",
+      "quest_ids": [
+        744
+      ],
+      "quests": [
+        {
+          "quest_id": 744,
+          "name": "准备典礼",
+          "raw_name": "Preparation for Ceremony",
+          "required_level": 7,
+          "quest_level": 11,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集6根碧蓝色的羽毛和6根古铜色的羽毛，把它们交给雷霆崖的伊恩·鹰爪。"
+        }
+      ],
+      "instruction": "在Bronze Feather来源：风怒女族长周边完成：准备典礼。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 13.17,
+          "y": 23.17
+        },
+        "entities": [
+          {
+            "id": 2965,
+            "kind": "npc",
+            "name": "Bronze Feather来源：风怒女族长",
+            "coordinates": [
+              {
+                "x": 13.17,
+                "y": 23.17
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 13.17,
+                "y": 23.17
+              },
+              "bounds": {
+                "min_x": 13.17,
+                "max_x": 13.17,
+                "min_y": 23.17,
+                "max_y": 23.17
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        744
+      ],
+      "quests": [
+        {
+          "quest_id": 744,
+          "name": "准备典礼",
+          "raw_name": "Preparation for Ceremony",
+          "required_level": 7,
+          "quest_level": 11,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集6根碧蓝色的羽毛和6根古铜色的羽毛，把它们交给雷霆崖的伊恩·鹰爪。"
+        }
+      ],
+      "instruction": "到伊恩·鹰爪处交付：准备典礼。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 37.69,
+          "y": 59.56
+        },
+        "entities": [
+          {
+            "id": 2987,
+            "kind": "npc",
+            "name": "伊恩·鹰爪",
+            "coordinates": [
+              {
+                "x": 37.69,
+                "y": 59.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 37.69,
+                "y": 59.56
+              },
+              "bounds": {
+                "min_x": 37.69,
+                "max_x": 37.69,
+                "min_y": 59.56,
+                "max_y": 59.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        7820
+      ],
+      "quests": [
+        {
+          "quest_id": 7820,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处接取：捐献毛料。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "接取",
+      "quest_ids": [
+        264
+      ],
+      "quests": [
+        {
+          "quest_id": 264,
+          "name": "至死方休",
+          "raw_name": "Until Death Do Us Part",
+          "required_level": 12,
+          "quest_level": 15,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把克拉莉斯的坠饰放在银松森林尤瑞夫的坟墓上。"
+        }
+      ],
+      "instruction": "到克拉莉斯·弗斯特处接取：至死方休。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 28.87,
+          "y": 26.4
+        },
+        "entities": [
+          {
+            "id": 5543,
+            "kind": "npc",
+            "name": "克拉莉斯·弗斯特",
+            "coordinates": [
+              {
+                "x": 28.87,
+                "y": 26.4
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 28.87,
+                "y": 26.4
+              },
+              "bounds": {
+                "min_x": 28.87,
+                "max_x": 28.87,
+                "min_y": 26.4,
+                "max_y": 26.4
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "接取",
+      "quest_ids": [
+        1064
+      ],
+      "quests": [
+        {
+          "quest_id": 1064,
+          "name": "被遗忘者的援助",
+          "raw_name": "Forsaken Aid",
+          "required_level": 13,
+          "quest_level": 18,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1063
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1065,
+          "objective_text": "和预见之池的药剂师扎玛谈一谈。"
+        }
+      ],
+      "instruction": "到玛加萨·野性图腾处接取：被遗忘者的援助。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 69.85,
+          "y": 30.91
+        },
+        "entities": [
+          {
+            "id": 4046,
+            "kind": "npc",
+            "name": "玛加萨·野性图腾",
+            "coordinates": [
+              {
+                "x": 69.85,
+                "y": 30.91
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 69.85,
+                "y": 30.91
+              },
+              "bounds": {
+                "min_x": 69.85,
+                "max_x": 69.85,
+                "min_y": 30.91,
+                "max_y": 30.91
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "交付",
+      "quest_ids": [
+        7820
+      ],
+      "quests": [
+        {
+          "quest_id": 7820,
+          "name": "捐献毛料",
+          "raw_name": "A Donation of Wool",
+          "required_level": 12,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处交付：捐献毛料。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "交付",
+      "quest_ids": [
+        1064,
+        1067
+      ],
+      "quests": [
+        {
+          "quest_id": 1064,
+          "name": "被遗忘者的援助",
+          "raw_name": "Forsaken Aid",
+          "required_level": 13,
+          "quest_level": 18,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1063
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1065,
+          "objective_text": "和预见之池的药剂师扎玛谈一谈。"
+        },
+        {
+          "quest_id": 1067,
+          "name": "返回雷霆崖",
+          "raw_name": "Return to Thunder Bluff",
+          "required_level": 13,
+          "quest_level": 23,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1066
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把林度恩的毒药交给雷霆崖的药剂师扎玛。"
+        }
+      ],
+      "instruction": "到药剂师扎玛处交付：被遗忘者的援助、返回雷霆崖。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 22.81,
+          "y": 20.89
+        },
+        "entities": [
+          {
+            "id": 3419,
+            "kind": "npc",
+            "name": "药剂师扎玛",
+            "coordinates": [
+              {
+                "x": 22.81,
+                "y": 20.89
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 22.81,
+                "y": 20.89
+              },
+              "bounds": {
+                "min_x": 22.81,
+                "max_x": 22.81,
+                "min_y": 20.89,
+                "max_y": 20.89
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 13,
+      "action": "接取",
+      "quest_ids": [
+        1065
+      ],
+      "quests": [
+        {
+          "quest_id": 1065,
+          "name": "塔伦米尔之旅",
+          "raw_name": "Journey to Tarren Mill",
+          "required_level": 13,
+          "quest_level": 18,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1064
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1066,
+          "objective_text": "把扎玛的信带给塔伦米尔的林度恩。"
+        }
+      ],
+      "instruction": "到药剂师扎玛处接取：塔伦米尔之旅。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 22.81,
+          "y": 20.89
+        },
+        "entities": [
+          {
+            "id": 3419,
+            "kind": "npc",
+            "name": "药剂师扎玛",
+            "coordinates": [
+              {
+                "x": 22.81,
+                "y": 20.89
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 22.81,
+                "y": 20.89
+              },
+              "bounds": {
+                "min_x": 22.81,
+                "max_x": 22.81,
+                "min_y": 20.89,
+                "max_y": 20.89
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "action": "接取",
+      "quest_ids": [
+        742
+      ],
+      "quests": [
+        {
+          "quest_id": 742,
+          "name": "灰谷狩猎",
+          "raw_name": "The Ashenvale Hunt",
+          "required_level": 20,
+          "quest_level": 20,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与灰谷碎木哨岗的塞娜尼·雷心谈一谈。"
+        }
+      ],
+      "instruction": "到雷霆崖信使斯塔德尔处接取：灰谷狩猎。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.33,
+          "y": 58.76
+        },
+        "entities": [
+          {
+            "id": 10881,
+            "kind": "npc",
+            "name": "雷霆崖信使斯塔德尔",
+            "coordinates": [
+              {
+                "x": 44.33,
+                "y": 58.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.33,
+                "y": 58.76
+              },
+              "bounds": {
+                "min_x": 44.33,
+                "max_x": 44.33,
+                "min_y": 58.76,
+                "max_y": 58.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 15,
+      "action": "接取",
+      "quest_ids": [
+        1195
+      ],
+      "quests": [
+        {
+          "quest_id": 1195,
+          "name": "神圣之火",
+          "raw_name": "The Sacred Flame",
+          "required_level": 20,
+          "quest_level": 25,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1196,
+          "objective_text": "把装满水的蚀刻瓶交给雷霆崖的赞金·石蹄。"
+        }
+      ],
+      "instruction": "到赞金·石蹄处接取：神圣之火。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 54.97,
+          "y": 51.41
+        },
+        "entities": [
+          {
+            "id": 4721,
+            "kind": "npc",
+            "name": "赞金·石蹄",
+            "coordinates": [
+              {
+                "x": 54.97,
+                "y": 51.41
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.97,
+                "y": 51.41
+              },
+              "bounds": {
+                "min_x": 54.97,
+                "max_x": 54.97,
+                "min_y": 51.41,
+                "max_y": 51.41
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "action": "交付",
+      "quest_ids": [
+        1195
+      ],
+      "quests": [
+        {
+          "quest_id": 1195,
+          "name": "神圣之火",
+          "raw_name": "The Sacred Flame",
+          "required_level": 20,
+          "quest_level": 25,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1196,
+          "objective_text": "把装满水的蚀刻瓶交给雷霆崖的赞金·石蹄。"
+        }
+      ],
+      "instruction": "到赞金·石蹄处交付：神圣之火。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 54.97,
+          "y": 51.41
+        },
+        "entities": [
+          {
+            "id": 4721,
+            "kind": "npc",
+            "name": "赞金·石蹄",
+            "coordinates": [
+              {
+                "x": 54.97,
+                "y": 51.41
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.97,
+                "y": 51.41
+              },
+              "bounds": {
+                "min_x": 54.97,
+                "max_x": 54.97,
+                "min_y": 51.41,
+                "max_y": 51.41
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 17,
+      "action": "交付",
+      "quest_ids": [
+        1130
+      ],
+      "quests": [
+        {
+          "quest_id": 1130,
+          "name": "梅洛的关注",
+          "raw_name": "Melor Sends Word",
+          "required_level": 20,
+          "quest_level": 30,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1131,
+          "objective_text": "和雷霆崖的梅洛·石蹄交谈。"
+        }
+      ],
+      "instruction": "到梅洛·石蹄处交付：梅洛的关注。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 61.54,
+          "y": 80.92
+        },
+        "entities": [
+          {
+            "id": 3441,
+            "kind": "npc",
+            "name": "梅洛·石蹄",
+            "coordinates": [
+              {
+                "x": 61.54,
+                "y": 80.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.54,
+                "y": 80.92
+              },
+              "bounds": {
+                "min_x": 61.54,
+                "max_x": 61.54,
+                "min_y": 80.92,
+                "max_y": 80.92
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 18,
+      "action": "接取",
+      "quest_ids": [
+        1131
+      ],
+      "quests": [
+        {
+          "quest_id": 1131,
+          "name": "钢齿土狼",
+          "raw_name": "Steelsnap",
+          "required_level": 20,
+          "quest_level": 30,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1130
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把钢齿土狼的肋骨带给雷霆崖的梅洛。"
+        }
+      ],
+      "instruction": "到梅洛·石蹄处接取：钢齿土狼。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 61.54,
+          "y": 80.92
+        },
+        "entities": [
+          {
+            "id": 3441,
+            "kind": "npc",
+            "name": "梅洛·石蹄",
+            "coordinates": [
+              {
+                "x": 61.54,
+                "y": 80.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.54,
+                "y": 80.92
+              },
+              "bounds": {
+                "min_x": 61.54,
+                "max_x": 61.54,
+                "min_y": 80.92,
+                "max_y": 80.92
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 19,
+      "action": "接取",
+      "quest_ids": [
+        1196
+      ],
+      "quests": [
+        {
+          "quest_id": 1196,
+          "name": "神圣之火",
+          "raw_name": "The Sacred Flame",
+          "required_level": 20,
+          "quest_level": 29,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1195
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1197,
+          "objective_text": "把装满水的蚀刻瓶交给乱风岗的劳恩·峭壁行者。"
+        }
+      ],
+      "instruction": "到赞金·石蹄处接取：神圣之火。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 54.97,
+          "y": 51.41
+        },
+        "entities": [
+          {
+            "id": 4721,
+            "kind": "npc",
+            "name": "赞金·石蹄",
+            "coordinates": [
+              {
+                "x": 54.97,
+                "y": 51.41
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.97,
+                "y": 51.41
+              },
+              "bounds": {
+                "min_x": 54.97,
+                "max_x": 54.97,
+                "min_y": 51.41,
+                "max_y": 51.41
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 20,
+      "action": "交付",
+      "quest_ids": [
+        1131
+      ],
+      "quests": [
+        {
+          "quest_id": 1131,
+          "name": "钢齿土狼",
+          "raw_name": "Steelsnap",
+          "required_level": 20,
+          "quest_level": 30,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1130
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把钢齿土狼的肋骨带给雷霆崖的梅洛。"
+        }
+      ],
+      "instruction": "到梅洛·石蹄处交付：钢齿土狼。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 61.54,
+          "y": 80.92
+        },
+        "entities": [
+          {
+            "id": 3441,
+            "kind": "npc",
+            "name": "梅洛·石蹄",
+            "coordinates": [
+              {
+                "x": 61.54,
+                "y": 80.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.54,
+                "y": 80.92
+              },
+              "bounds": {
+                "min_x": 61.54,
+                "max_x": 61.54,
+                "min_y": 80.92,
+                "max_y": 80.92
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 21,
+      "action": "接取",
+      "quest_ids": [
+        7821
+      ],
+      "quests": [
+        {
+          "quest_id": 7821,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处接取：捐献丝绸。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 22,
+      "action": "交付",
+      "quest_ids": [
+        7821
+      ],
+      "quests": [
+        {
+          "quest_id": 7821,
+          "name": "捐献丝绸",
+          "raw_name": "A Donation of Silk",
+          "required_level": 26,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处交付：捐献丝绸。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 23,
+      "action": "接取",
+      "quest_ids": [
+        1136
+      ],
+      "quests": [
+        {
+          "quest_id": 1136,
+          "name": "霜喉雪人",
+          "raw_name": "Frostmaw",
+          "required_level": 26,
+          "quest_level": 37,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1131
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把霜喉雪人的鬃毛带给雷霆崖的梅洛·石蹄。"
+        }
+      ],
+      "instruction": "到梅洛·石蹄处接取：霜喉雪人。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 61.54,
+          "y": 80.92
+        },
+        "entities": [
+          {
+            "id": 3441,
+            "kind": "npc",
+            "name": "梅洛·石蹄",
+            "coordinates": [
+              {
+                "x": 61.54,
+                "y": 80.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.54,
+                "y": 80.92
+              },
+              "bounds": {
+                "min_x": 61.54,
+                "max_x": 61.54,
+                "min_y": 80.92,
+                "max_y": 80.92
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 24,
+      "action": "交付",
+      "quest_ids": [
+        1136
+      ],
+      "quests": [
+        {
+          "quest_id": 1136,
+          "name": "霜喉雪人",
+          "raw_name": "Frostmaw",
+          "required_level": 26,
+          "quest_level": 37,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            1131
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把霜喉雪人的鬃毛带给雷霆崖的梅洛·石蹄。"
+        }
+      ],
+      "instruction": "到梅洛·石蹄处交付：霜喉雪人。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 61.54,
+          "y": 80.92
+        },
+        "entities": [
+          {
+            "id": 3441,
+            "kind": "npc",
+            "name": "梅洛·石蹄",
+            "coordinates": [
+              {
+                "x": 61.54,
+                "y": 80.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 61.54,
+                "y": 80.92
+              },
+              "bounds": {
+                "min_x": 61.54,
+                "max_x": 61.54,
+                "min_y": 80.92,
+                "max_y": 80.92
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 25,
+      "action": "接取",
+      "quest_ids": [
+        7822
+      ],
+      "quests": [
+        {
+          "quest_id": 7822,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处接取：捐献魔纹布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "action": "接取",
+      "quest_ids": [
+        2440
+      ],
+      "quests": [
+        {
+          "quest_id": 2440,
+          "name": "白金圆盘",
+          "raw_name": "The Platinum Discs",
+          "required_level": 40,
+          "quest_level": 47,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2280
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把报酬凭证交给雷霆崖的本娜·冰蹄。"
+        }
+      ],
+      "instruction": "到圣者图希克处接取：白金圆盘。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 34.4,
+          "y": 46.87
+        },
+        "entities": [
+          {
+            "id": 3978,
+            "kind": "npc",
+            "name": "圣者图希克",
+            "coordinates": [
+              {
+                "x": 34.4,
+                "y": 46.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 34.4,
+                "y": 46.87
+              },
+              "bounds": {
+                "min_x": 34.4,
+                "max_x": 34.4,
+                "min_y": 46.87,
+                "max_y": 46.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "action": "交付",
+      "quest_ids": [
+        7822
+      ],
+      "quests": [
+        {
+          "quest_id": 7822,
+          "name": "捐献魔纹布",
+          "raw_name": "A Donation of Mageweave",
+          "required_level": 40,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处交付：捐献魔纹布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 28,
+      "action": "交付",
+      "quest_ids": [
+        2440
+      ],
+      "quests": [
+        {
+          "quest_id": 2440,
+          "name": "白金圆盘",
+          "raw_name": "The Platinum Discs",
+          "required_level": 40,
+          "quest_level": 47,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2280
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把报酬凭证交给雷霆崖的本娜·冰蹄。"
+        }
+      ],
+      "instruction": "到本娜·冰蹄处交付：白金圆盘。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 46.62,
+          "y": 33.17
+        },
+        "entities": [
+          {
+            "id": 3009,
+            "kind": "npc",
+            "name": "本娜·冰蹄",
+            "coordinates": [
+              {
+                "x": 46.62,
+                "y": 33.17
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 46.62,
+                "y": 33.17
+              },
+              "bounds": {
+                "min_x": 46.62,
+                "max_x": 46.62,
+                "min_y": 33.17,
+                "max_y": 33.17
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 29,
+      "action": "交付",
+      "quest_ids": [
+        2967
+      ],
+      "quests": [
+        {
+          "quest_id": 2967,
+          "name": "返回雷霆崖",
+          "raw_name": "Return to Thunder Bluff",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2954
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 2968,
+          "objective_text": "与雷霆崖的纳拉·蛮鬃谈一谈。"
+        }
+      ],
+      "instruction": "到纳拉·蛮鬃处交付：返回雷霆崖。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 75.65,
+          "y": 31.61
+        },
+        "entities": [
+          {
+            "id": 5770,
+            "kind": "npc",
+            "name": "纳拉·蛮鬃",
+            "coordinates": [
+              {
+                "x": 75.65,
+                "y": 31.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 75.65,
+                "y": 31.61
+              },
+              "bounds": {
+                "min_x": 75.65,
+                "max_x": 75.65,
+                "min_y": 31.61,
+                "max_y": 31.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 30,
+      "action": "接取",
+      "quest_ids": [
+        2968
+      ],
+      "quests": [
+        {
+          "quest_id": 2968,
+          "name": "进一步的任务",
+          "raw_name": "A Future Task",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2967
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与雷霆崖的圣者图希克谈一谈。"
+        }
+      ],
+      "instruction": "到纳拉·蛮鬃处接取：进一步的任务。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 75.65,
+          "y": 31.61
+        },
+        "entities": [
+          {
+            "id": 5770,
+            "kind": "npc",
+            "name": "纳拉·蛮鬃",
+            "coordinates": [
+              {
+                "x": 75.65,
+                "y": 31.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 75.65,
+                "y": 31.61
+              },
+              "bounds": {
+                "min_x": 75.65,
+                "max_x": 75.65,
+                "min_y": 31.61,
+                "max_y": 31.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 31,
+      "action": "接取",
+      "quest_ids": [
+        2965
+      ],
+      "quests": [
+        {
+          "quest_id": 2965,
+          "name": "奥丹姆的线索",
+          "raw_name": "Portents of Uldum",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2440
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 2966,
+          "objective_text": "与雷霆崖长者高地的纳拉·蛮鬃谈一谈。"
+        }
+      ],
+      "instruction": "到圣者图希克处接取：奥丹姆的线索。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 34.4,
+          "y": 46.87
+        },
+        "entities": [
+          {
+            "id": 3978,
+            "kind": "npc",
+            "name": "圣者图希克",
+            "coordinates": [
+              {
+                "x": 34.4,
+                "y": 46.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 34.4,
+                "y": 46.87
+              },
+              "bounds": {
+                "min_x": 34.4,
+                "max_x": 34.4,
+                "min_y": 46.87,
+                "max_y": 46.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 32,
+      "action": "交付",
+      "quest_ids": [
+        2968
+      ],
+      "quests": [
+        {
+          "quest_id": 2968,
+          "name": "进一步的任务",
+          "raw_name": "A Future Task",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2967
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与雷霆崖的圣者图希克谈一谈。"
+        }
+      ],
+      "instruction": "到圣者图希克处交付：进一步的任务。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 34.4,
+          "y": 46.87
+        },
+        "entities": [
+          {
+            "id": 3978,
+            "kind": "npc",
+            "name": "圣者图希克",
+            "coordinates": [
+              {
+                "x": 34.4,
+                "y": 46.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 34.4,
+                "y": 46.87
+              },
+              "bounds": {
+                "min_x": 34.4,
+                "max_x": 34.4,
+                "min_y": 46.87,
+                "max_y": 46.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 33,
+      "action": "交付",
+      "quest_ids": [
+        2965
+      ],
+      "quests": [
+        {
+          "quest_id": 2965,
+          "name": "奥丹姆的线索",
+          "raw_name": "Portents of Uldum",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2440
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 2966,
+          "objective_text": "与雷霆崖长者高地的纳拉·蛮鬃谈一谈。"
+        }
+      ],
+      "instruction": "到纳拉·蛮鬃处交付：奥丹姆的线索。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 75.65,
+          "y": 31.61
+        },
+        "entities": [
+          {
+            "id": 5770,
+            "kind": "npc",
+            "name": "纳拉·蛮鬃",
+            "coordinates": [
+              {
+                "x": 75.65,
+                "y": 31.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 75.65,
+                "y": 31.61
+              },
+              "bounds": {
+                "min_x": 75.65,
+                "max_x": 75.65,
+                "min_y": 31.61,
+                "max_y": 31.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 34,
+      "action": "接取",
+      "quest_ids": [
+        2966
+      ],
+      "quests": [
+        {
+          "quest_id": 2966,
+          "name": "拭目以待",
+          "raw_name": "Seeing What Happens",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            2965
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将迷你白金圆盘拿到塔纳利斯的奥丹姆大门去，找出两者之间的联系。"
+        }
+      ],
+      "instruction": "到纳拉·蛮鬃处接取：拭目以待。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 75.65,
+          "y": 31.61
+        },
+        "entities": [
+          {
+            "id": 5770,
+            "kind": "npc",
+            "name": "纳拉·蛮鬃",
+            "coordinates": [
+              {
+                "x": 75.65,
+                "y": 31.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 75.65,
+                "y": 31.61
+              },
+              "bounds": {
+                "min_x": 75.65,
+                "max_x": 75.65,
+                "min_y": 31.61,
+                "max_y": 31.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 35,
+      "action": "接取",
+      "quest_ids": [
+        3761
+      ],
+      "quests": [
+        {
+          "quest_id": 3761,
+          "name": "安戈洛的泥土",
+          "raw_name": "Un'Goro Soil",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集20份安戈洛的泥土，把它们交给雷霆崖的格德。"
+        }
+      ],
+      "instruction": "到大德鲁伊哈缪尔·符文图腾处接取：安戈洛的泥土。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 78.62,
+          "y": 28.56
+        },
+        "entities": [
+          {
+            "id": 5769,
+            "kind": "npc",
+            "name": "大德鲁伊哈缪尔·符文图腾",
+            "coordinates": [
+              {
+                "x": 78.62,
+                "y": 28.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.62,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 78.62,
+                "max_x": 78.62,
+                "min_y": 28.56,
+                "max_y": 28.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 36,
+      "action": "接取",
+      "quest_ids": [
+        3762
+      ],
+      "quests": [
+        {
+          "quest_id": 3762,
+          "name": "协助大德鲁伊",
+          "raw_name": "Assisting Arch Druid Runetotem",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3761,
+          "objective_text": "与雷霆崖的大德鲁伊哈缪尔·符文图腾谈一谈。"
+        }
+      ],
+      "instruction": "到旅店老板帕拉处接取：协助大德鲁伊。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 45.81,
+          "y": 64.71
+        },
+        "entities": [
+          {
+            "id": 6746,
+            "kind": "npc",
+            "name": "旅店老板帕拉",
+            "coordinates": [
+              {
+                "x": 45.81,
+                "y": 64.71
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 45.81,
+                "y": 64.71
+              },
+              "bounds": {
+                "min_x": 45.81,
+                "max_x": 45.81,
+                "min_y": 64.71,
+                "max_y": 64.71
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 37,
+      "action": "交付",
+      "quest_ids": [
+        3762
+      ],
+      "quests": [
+        {
+          "quest_id": 3762,
+          "name": "协助大德鲁伊",
+          "raw_name": "Assisting Arch Druid Runetotem",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3761,
+          "objective_text": "与雷霆崖的大德鲁伊哈缪尔·符文图腾谈一谈。"
+        }
+      ],
+      "instruction": "到大德鲁伊哈缪尔·符文图腾处交付：协助大德鲁伊。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 78.62,
+          "y": 28.56
+        },
+        "entities": [
+          {
+            "id": 5769,
+            "kind": "npc",
+            "name": "大德鲁伊哈缪尔·符文图腾",
+            "coordinates": [
+              {
+                "x": 78.62,
+                "y": 28.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.62,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 78.62,
+                "max_x": 78.62,
+                "min_y": 28.56,
+                "max_y": 28.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 38,
+      "action": "交付",
+      "quest_ids": [
+        3761
+      ],
+      "quests": [
+        {
+          "quest_id": 3761,
+          "name": "安戈洛的泥土",
+          "raw_name": "Un'Goro Soil",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集20份安戈洛的泥土，把它们交给雷霆崖的格德。"
+        }
+      ],
+      "instruction": "到格德处交付：安戈洛的泥土。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 77.46,
+          "y": 21.97
+        },
+        "entities": [
+          {
+            "id": 9076,
+            "kind": "npc",
+            "name": "格德",
+            "coordinates": [
+              {
+                "x": 77.46,
+                "y": 21.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 77.46,
+                "y": 21.97
+              },
+              "bounds": {
+                "min_x": 77.46,
+                "max_x": 77.46,
+                "min_y": 21.97,
+                "max_y": 21.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 39,
+      "action": "接取",
+      "quest_ids": [
+        3782
+      ],
+      "quests": [
+        {
+          "quest_id": 3782,
+          "name": "晨光麦研究",
+          "raw_name": "Morrowgrain Research",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            3761
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3786,
+          "objective_text": "将草种购买券交给雷霆崖的巴珊娜·符文图腾。"
+        }
+      ],
+      "instruction": "到大德鲁伊哈缪尔·符文图腾处接取：晨光麦研究。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 78.62,
+          "y": 28.56
+        },
+        "entities": [
+          {
+            "id": 5769,
+            "kind": "npc",
+            "name": "大德鲁伊哈缪尔·符文图腾",
+            "coordinates": [
+              {
+                "x": 78.62,
+                "y": 28.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.62,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 78.62,
+                "max_x": 78.62,
+                "min_y": 28.56,
+                "max_y": 28.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 40,
+      "action": "接取",
+      "quest_ids": [
+        7823
+      ],
+      "quests": [
+        {
+          "quest_id": 7823,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            7820,
+            7821,
+            7822
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处接取：捐献符文布。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 41,
+      "action": "交付",
+      "quest_ids": [
+        7823
+      ],
+      "quests": [
+        {
+          "quest_id": 7823,
+          "name": "捐献符文布",
+          "raw_name": "A Donation of Runecloth",
+          "required_level": 50,
+          "quest_level": -1,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            7820,
+            7821,
+            7822
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到拉姆斯塔格处交付：捐献符文布。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 43.05,
+          "y": 42.72
+        },
+        "entities": [
+          {
+            "id": 14728,
+            "kind": "npc",
+            "name": "拉姆斯塔格",
+            "coordinates": [
+              {
+                "x": 43.05,
+                "y": 42.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.05,
+                "y": 42.72
+              },
+              "bounds": {
+                "min_x": 43.05,
+                "max_x": 43.05,
+                "min_y": 42.72,
+                "max_y": 42.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 42,
+      "action": "交付",
+      "quest_ids": [
+        3782
+      ],
+      "quests": [
+        {
+          "quest_id": 3782,
+          "name": "晨光麦研究",
+          "raw_name": "Morrowgrain Research",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            3761
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3786,
+          "objective_text": "将草种购买券交给雷霆崖的巴珊娜·符文图腾。"
+        }
+      ],
+      "instruction": "到巴珊娜·符文图腾处交付：晨光麦研究。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.06,
+          "y": 34.19
+        },
+        "entities": [
+          {
+            "id": 9087,
+            "kind": "npc",
+            "name": "巴珊娜·符文图腾",
+            "coordinates": [
+              {
+                "x": 71.06,
+                "y": 34.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.06,
+                "y": 34.19
+              },
+              "bounds": {
+                "min_x": 71.06,
+                "max_x": 71.06,
+                "min_y": 34.19,
+                "max_y": 34.19
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 43,
+      "action": "接取",
+      "quest_ids": [
+        3786
+      ],
+      "quests": [
+        {
+          "quest_id": 3786,
+          "name": "晨光麦研究",
+          "raw_name": "Morrowgrain Research",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            3782
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "用一个常青袋、一包萨伦迪斯种子以及两份安戈洛的泥土来尝试种植晨光麦。 /  / 将10株晨光麦交给雷霆崖的巴珊娜·符文图腾。"
+        }
+      ],
+      "instruction": "到巴珊娜·符文图腾处接取：晨光麦研究。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 71.06,
+          "y": 34.19
+        },
+        "entities": [
+          {
+            "id": 9087,
+            "kind": "npc",
+            "name": "巴珊娜·符文图腾",
+            "coordinates": [
+              {
+                "x": 71.06,
+                "y": 34.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.06,
+                "y": 34.19
+              },
+              "bounds": {
+                "min_x": 71.06,
+                "max_x": 71.06,
+                "min_y": 34.19,
+                "max_y": 34.19
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 44,
+      "action": "交付",
+      "quest_ids": [
+        3786
+      ],
+      "quests": [
+        {
+          "quest_id": 3786,
+          "name": "晨光麦研究",
+          "raw_name": "Morrowgrain Research",
+          "required_level": 47,
+          "quest_level": 50,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [
+            3782
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "用一个常青袋、一包萨伦迪斯种子以及两份安戈洛的泥土来尝试种植晨光麦。 /  / 将10株晨光麦交给雷霆崖的巴珊娜·符文图腾。"
+        }
+      ],
+      "instruction": "到巴珊娜·符文图腾处交付：晨光麦研究。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 71.06,
+          "y": 34.19
+        },
+        "entities": [
+          {
+            "id": 9087,
+            "kind": "npc",
+            "name": "巴珊娜·符文图腾",
+            "coordinates": [
+              {
+                "x": 71.06,
+                "y": 34.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.06,
+                "y": 34.19
+              },
+              "bounds": {
+                "min_x": 71.06,
+                "max_x": 71.06,
+                "min_y": 34.19,
+                "max_y": 34.19
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 45,
+      "action": "接取",
+      "quest_ids": [
+        1123
+      ],
+      "quests": [
+        {
+          "quest_id": 1123,
+          "name": "拉比恩·萨图纳",
+          "raw_name": "Rabine Saturna",
+          "required_level": 54,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1124,
+          "objective_text": "与月光林地永夜港的拉比恩·萨图纳谈一谈。月光林地在费伍德森林和冬泉谷之间，可以从木喉要塞中的一条通道抵达那里。"
+        }
+      ],
+      "instruction": "到大德鲁伊哈缪尔·符文图腾处接取：拉比恩·萨图纳。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 78.62,
+          "y": 28.56
+        },
+        "entities": [
+          {
+            "id": 5769,
+            "kind": "npc",
+            "name": "大德鲁伊哈缪尔·符文图腾",
+            "coordinates": [
+              {
+                "x": 78.62,
+                "y": 28.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.62,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 78.62,
+                "max_x": 78.62,
+                "min_y": 28.56,
+                "max_y": 28.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 46,
+      "action": "接取",
+      "quest_ids": [
+        1000
+      ],
+      "quests": [
+        {
+          "quest_id": 1000,
+          "name": "新的边疆",
+          "raw_name": "The New Frontier",
+          "required_level": 54,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1123,
+          "objective_text": "与雷霆崖长者高地的大德鲁伊哈缪尔·符文图腾谈一谈关于议会号召部落成员探索卡利姆多大陆的事情。"
+        }
+      ],
+      "instruction": "到雷霆崖信使斯塔德尔处接取：新的边疆。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.33,
+          "y": 58.76
+        },
+        "entities": [
+          {
+            "id": 10881,
+            "kind": "npc",
+            "name": "雷霆崖信使斯塔德尔",
+            "coordinates": [
+              {
+                "x": 44.33,
+                "y": 58.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.33,
+                "y": 58.76
+              },
+              "bounds": {
+                "min_x": 44.33,
+                "max_x": 44.33,
+                "min_y": 58.76,
+                "max_y": 58.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 47,
+      "action": "交付",
+      "quest_ids": [
+        1000
+      ],
+      "quests": [
+        {
+          "quest_id": 1000,
+          "name": "新的边疆",
+          "raw_name": "The New Frontier",
+          "required_level": 54,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1123,
+          "objective_text": "与雷霆崖长者高地的大德鲁伊哈缪尔·符文图腾谈一谈关于议会号召部落成员探索卡利姆多大陆的事情。"
+        }
+      ],
+      "instruction": "到大德鲁伊哈缪尔·符文图腾处交付：新的边疆。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 78.62,
+          "y": 28.56
+        },
+        "entities": [
+          {
+            "id": 5769,
+            "kind": "npc",
+            "name": "大德鲁伊哈缪尔·符文图腾",
+            "coordinates": [
+              {
+                "x": 78.62,
+                "y": 28.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.62,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 78.62,
+                "max_x": 78.62,
+                "min_y": 28.56,
+                "max_y": 28.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 48,
+      "action": "交付",
+      "quest_ids": [
+        13986
+      ],
+      "quests": [
+        {
+          "quest_id": 13986,
+          "name": "受伤的同伴",
+          "raw_name": "An Injured Colleague",
+          "required_level": 71,
+          "quest_level": 73,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 1638,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将破旧的部族护盾交给奥伯妮·亮鬃。她就在雷霆崖里的长者高地。"
+        }
+      ],
+      "instruction": "到奥伯妮·亮鬃处交付：受伤的同伴。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 76.97,
+          "y": 28.75
+        },
+        "entities": [
+          {
+            "id": 34526,
+            "kind": "npc",
+            "name": "奥伯妮·亮鬃",
+            "coordinates": [
+              {
+                "x": 76.97,
+                "y": 28.75
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 76.97,
+                "y": 28.75
+              },
+              "bounds": {
+                "min_x": 76.97,
+                "max_x": 76.97,
+                "min_y": 28.75,
+                "max_y": 28.75
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 264,
+      "name": "至死方休",
+      "raw_name": "Until Death Do Us Part",
+      "required_level": 12,
+      "quest_level": 15,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把克拉莉斯的坠饰放在银松森林尤瑞夫的坟墓上。"
+    },
+    {
+      "quest_id": 742,
+      "name": "灰谷狩猎",
+      "raw_name": "The Ashenvale Hunt",
+      "required_level": 20,
+      "quest_level": 20,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "与灰谷碎木哨岗的塞娜尼·雷心谈一谈。"
+    },
+    {
+      "quest_id": 744,
+      "name": "准备典礼",
+      "raw_name": "Preparation for Ceremony",
+      "required_level": 7,
+      "quest_level": 11,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集6根碧蓝色的羽毛和6根古铜色的羽毛，把它们交给雷霆崖的伊恩·鹰爪。"
+    },
+    {
+      "quest_id": 768,
+      "name": "收集皮革",
+      "raw_name": "Gathering Leather",
+      "required_level": 4,
+      "quest_level": 8,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集12块轻皮，把它们交给雷霆崖的维尔伦·陆行者。"
+    },
+    {
+      "quest_id": 769,
+      "name": "科多兽皮包",
+      "raw_name": "Kodo Hide Bag",
+      "required_level": 4,
+      "quest_level": 10,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        768
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "给雷霆崖的维尔伦·陆行者带去4块轻皮和4份粗线。"
+    },
+    {
+      "quest_id": 1000,
+      "name": "新的边疆",
+      "raw_name": "The New Frontier",
+      "required_level": 54,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1123,
+      "objective_text": "与雷霆崖长者高地的大德鲁伊哈缪尔·符文图腾谈一谈关于议会号召部落成员探索卡利姆多大陆的事情。"
+    },
+    {
+      "quest_id": 1064,
+      "name": "被遗忘者的援助",
+      "raw_name": "Forsaken Aid",
+      "required_level": 13,
+      "quest_level": 18,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1063
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1065,
+      "objective_text": "和预见之池的药剂师扎玛谈一谈。"
+    },
+    {
+      "quest_id": 1065,
+      "name": "塔伦米尔之旅",
+      "raw_name": "Journey to Tarren Mill",
+      "required_level": 13,
+      "quest_level": 18,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1064
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1066,
+      "objective_text": "把扎玛的信带给塔伦米尔的林度恩。"
+    },
+    {
+      "quest_id": 1067,
+      "name": "返回雷霆崖",
+      "raw_name": "Return to Thunder Bluff",
+      "required_level": 13,
+      "quest_level": 23,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1066
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把林度恩的毒药交给雷霆崖的药剂师扎玛。"
+    },
+    {
+      "quest_id": 1123,
+      "name": "拉比恩·萨图纳",
+      "raw_name": "Rabine Saturna",
+      "required_level": 54,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1124,
+      "objective_text": "与月光林地永夜港的拉比恩·萨图纳谈一谈。月光林地在费伍德森林和冬泉谷之间，可以从木喉要塞中的一条通道抵达那里。"
+    },
+    {
+      "quest_id": 1130,
+      "name": "梅洛的关注",
+      "raw_name": "Melor Sends Word",
+      "required_level": 20,
+      "quest_level": 30,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1131,
+      "objective_text": "和雷霆崖的梅洛·石蹄交谈。"
+    },
+    {
+      "quest_id": 1131,
+      "name": "钢齿土狼",
+      "raw_name": "Steelsnap",
+      "required_level": 20,
+      "quest_level": 30,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1130
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把钢齿土狼的肋骨带给雷霆崖的梅洛。"
+    },
+    {
+      "quest_id": 1136,
+      "name": "霜喉雪人",
+      "raw_name": "Frostmaw",
+      "required_level": 26,
+      "quest_level": 37,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1131
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把霜喉雪人的鬃毛带给雷霆崖的梅洛·石蹄。"
+    },
+    {
+      "quest_id": 1195,
+      "name": "神圣之火",
+      "raw_name": "The Sacred Flame",
+      "required_level": 20,
+      "quest_level": 25,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1196,
+      "objective_text": "把装满水的蚀刻瓶交给雷霆崖的赞金·石蹄。"
+    },
+    {
+      "quest_id": 1196,
+      "name": "神圣之火",
+      "raw_name": "The Sacred Flame",
+      "required_level": 20,
+      "quest_level": 29,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        1195
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1197,
+      "objective_text": "把装满水的蚀刻瓶交给乱风岗的劳恩·峭壁行者。"
+    },
+    {
+      "quest_id": 2440,
+      "name": "白金圆盘",
+      "raw_name": "The Platinum Discs",
+      "required_level": 40,
+      "quest_level": 47,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        2280
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把报酬凭证交给雷霆崖的本娜·冰蹄。"
+    },
+    {
+      "quest_id": 2965,
+      "name": "奥丹姆的线索",
+      "raw_name": "Portents of Uldum",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        2440
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 2966,
+      "objective_text": "与雷霆崖长者高地的纳拉·蛮鬃谈一谈。"
+    },
+    {
+      "quest_id": 2966,
+      "name": "拭目以待",
+      "raw_name": "Seeing What Happens",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        2965
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将迷你白金圆盘拿到塔纳利斯的奥丹姆大门去，找出两者之间的联系。"
+    },
+    {
+      "quest_id": 2967,
+      "name": "返回雷霆崖",
+      "raw_name": "Return to Thunder Bluff",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        2954
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 2968,
+      "objective_text": "与雷霆崖的纳拉·蛮鬃谈一谈。"
+    },
+    {
+      "quest_id": 2968,
+      "name": "进一步的任务",
+      "raw_name": "A Future Task",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        2967
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "与雷霆崖的圣者图希克谈一谈。"
+    },
+    {
+      "quest_id": 3761,
+      "name": "安戈洛的泥土",
+      "raw_name": "Un'Goro Soil",
+      "required_level": 47,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集20份安戈洛的泥土，把它们交给雷霆崖的格德。"
+    },
+    {
+      "quest_id": 3762,
+      "name": "协助大德鲁伊",
+      "raw_name": "Assisting Arch Druid Runetotem",
+      "required_level": 47,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 3761,
+      "objective_text": "与雷霆崖的大德鲁伊哈缪尔·符文图腾谈一谈。"
+    },
+    {
+      "quest_id": 3782,
+      "name": "晨光麦研究",
+      "raw_name": "Morrowgrain Research",
+      "required_level": 47,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        3761
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 3786,
+      "objective_text": "将草种购买券交给雷霆崖的巴珊娜·符文图腾。"
+    },
+    {
+      "quest_id": 3786,
+      "name": "晨光麦研究",
+      "raw_name": "Morrowgrain Research",
+      "required_level": 47,
+      "quest_level": 50,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        3782
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "用一个常青袋、一包萨伦迪斯种子以及两份安戈洛的泥土来尝试种植晨光麦。 /  / 将10株晨光麦交给雷霆崖的巴珊娜·符文图腾。"
+    },
+    {
+      "quest_id": 7820,
+      "name": "捐献毛料",
+      "raw_name": "A Donation of Wool",
+      "required_level": 12,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7821,
+      "name": "捐献丝绸",
+      "raw_name": "A Donation of Silk",
+      "required_level": 26,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7822,
+      "name": "捐献魔纹布",
+      "raw_name": "A Donation of Mageweave",
+      "required_level": 40,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 7823,
+      "name": "捐献符文布",
+      "raw_name": "A Donation of Runecloth",
+      "required_level": 50,
+      "quest_level": -1,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [
+        7820,
+        7821,
+        7822
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 13986,
+      "name": "受伤的同伴",
+      "raw_name": "An Injured Colleague",
+      "required_level": 71,
+      "quest_level": 73,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 1638,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将破旧的部族护盾交给奥伯妮·亮鬃。她就在雷霆崖里的长者高地。"
+    }
+  ],
+  "fivebox_observations": {
+    "264": {
+      "status": "not_classified"
+    },
+    "742": {
+      "status": "not_classified"
+    },
+    "744": {
+      "status": "not_classified"
+    },
+    "768": {
+      "status": "not_classified"
+    },
+    "769": {
+      "status": "not_classified"
+    },
+    "1000": {
+      "status": "not_classified"
+    },
+    "1064": {
+      "status": "not_classified"
+    },
+    "1065": {
+      "status": "not_classified"
+    },
+    "1067": {
+      "status": "not_classified"
+    },
+    "1123": {
+      "status": "not_classified"
+    },
+    "1130": {
+      "status": "not_classified"
+    },
+    "1131": {
+      "status": "not_classified"
+    },
+    "1136": {
+      "status": "not_classified"
+    },
+    "1195": {
+      "status": "not_classified"
+    },
+    "1196": {
+      "status": "not_classified"
+    },
+    "2440": {
+      "status": "not_classified"
+    },
+    "2965": {
+      "status": "not_classified"
+    },
+    "2966": {
+      "status": "not_classified"
+    },
+    "2967": {
+      "status": "not_classified"
+    },
+    "2968": {
+      "status": "not_classified"
+    },
+    "3761": {
+      "status": "not_classified"
+    },
+    "3762": {
+      "status": "not_classified"
+    },
+    "3782": {
+      "status": "not_classified"
+    },
+    "3786": {
+      "status": "not_classified"
+    },
+    "7820": {
+      "status": "not_classified"
+    },
+    "7821": {
+      "status": "not_classified"
+    },
+    "7822": {
+      "status": "not_classified"
+    },
+    "7823": {
+      "status": "not_classified"
+    },
+    "13986": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 29,
+    "step_count": 48,
+    "min_level": 4,
+    "max_level": 71
+  }
+}

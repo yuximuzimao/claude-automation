@@ -1,0 +1,557 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-10-candidate",
+  "title": "血精灵死亡骑士 · 暮色森林（Duskwood）任务候选版",
+  "output_basename": "zone-10",
+  "zone": "暮色森林",
+  "zone_en": "Duskwood",
+  "map_area_id": 10,
+  "quest_zone_or_sort": 10,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "亡灵哨兵莱度斯周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        1372
+      ],
+      "quests": [
+        {
+          "quest_id": 1372,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1383,
+          "objective_text": "到乞丐鬼屋去和药剂师法奥斯丁谈一谈。"
+        }
+      ],
+      "instruction": "到亡灵哨兵莱度斯处接取：真言药水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 87.81,
+          "y": 35.63
+        },
+        "entities": [
+          {
+            "id": 5418,
+            "kind": "npc",
+            "name": "亡灵哨兵莱度斯",
+            "coordinates": [
+              {
+                "x": 87.81,
+                "y": 35.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.81,
+                "y": 35.63
+              },
+              "bounds": {
+                "min_x": 87.81,
+                "max_x": 87.81,
+                "min_y": 35.63,
+                "max_y": 35.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "交付",
+      "quest_ids": [
+        1372
+      ],
+      "quests": [
+        {
+          "quest_id": 1372,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1383,
+          "objective_text": "到乞丐鬼屋去和药剂师法奥斯丁谈一谈。"
+        }
+      ],
+      "instruction": "到药剂师法奥斯丁处交付：真言药水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 87.45,
+          "y": 35.25
+        },
+        "entities": [
+          {
+            "id": 5414,
+            "kind": "npc",
+            "name": "药剂师法奥斯丁",
+            "coordinates": [
+              {
+                "x": 87.45,
+                "y": 35.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.45,
+                "y": 35.25
+              },
+              "bounds": {
+                "min_x": 87.45,
+                "max_x": 87.45,
+                "min_y": 35.25,
+                "max_y": 35.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "接取",
+      "quest_ids": [
+        1383
+      ],
+      "quests": [
+        {
+          "quest_id": 1383,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [
+            1372
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "乞丐鬼屋的药剂师法奥斯丁需要5颗暗影黑豹的心脏、1颗泥沼之王的蘑菇和一些绿色雏龙之血。"
+        }
+      ],
+      "instruction": "到药剂师法奥斯丁处接取：真言药水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 87.45,
+          "y": 35.25
+        },
+        "entities": [
+          {
+            "id": 5414,
+            "kind": "npc",
+            "name": "药剂师法奥斯丁",
+            "coordinates": [
+              {
+                "x": 87.45,
+                "y": 35.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.45,
+                "y": 35.25
+              },
+              "bounds": {
+                "min_x": 87.45,
+                "max_x": 87.45,
+                "min_y": 35.25,
+                "max_y": 35.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "交付",
+      "quest_ids": [
+        1383
+      ],
+      "quests": [
+        {
+          "quest_id": 1383,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [
+            1372
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "乞丐鬼屋的药剂师法奥斯丁需要5颗暗影黑豹的心脏、1颗泥沼之王的蘑菇和一些绿色雏龙之血。"
+        }
+      ],
+      "instruction": "到药剂师法奥斯丁处交付：真言药水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 87.45,
+          "y": 35.25
+        },
+        "entities": [
+          {
+            "id": 5414,
+            "kind": "npc",
+            "name": "药剂师法奥斯丁",
+            "coordinates": [
+              {
+                "x": 87.45,
+                "y": 35.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.45,
+                "y": 35.25
+              },
+              "bounds": {
+                "min_x": 87.45,
+                "max_x": 87.45,
+                "min_y": 35.25,
+                "max_y": 35.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        1388
+      ],
+      "quests": [
+        {
+          "quest_id": 1388,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [
+            1383
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1391,
+          "objective_text": "把法奥斯丁的真言药水交给乞丐鬼屋的亡灵哨兵莱度斯。"
+        }
+      ],
+      "instruction": "到药剂师法奥斯丁处接取：真言药水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 87.45,
+          "y": 35.25
+        },
+        "entities": [
+          {
+            "id": 5414,
+            "kind": "npc",
+            "name": "药剂师法奥斯丁",
+            "coordinates": [
+              {
+                "x": 87.45,
+                "y": 35.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.45,
+                "y": 35.25
+              },
+              "bounds": {
+                "min_x": 87.45,
+                "max_x": 87.45,
+                "min_y": 35.25,
+                "max_y": 35.25
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "交付",
+      "quest_ids": [
+        1388
+      ],
+      "quests": [
+        {
+          "quest_id": 1388,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [
+            1383
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1391,
+          "objective_text": "把法奥斯丁的真言药水交给乞丐鬼屋的亡灵哨兵莱度斯。"
+        }
+      ],
+      "instruction": "到亡灵哨兵莱度斯处交付：真言药水。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 87.81,
+          "y": 35.63
+        },
+        "entities": [
+          {
+            "id": 5418,
+            "kind": "npc",
+            "name": "亡灵哨兵莱度斯",
+            "coordinates": [
+              {
+                "x": 87.81,
+                "y": 35.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.81,
+                "y": 35.63
+              },
+              "bounds": {
+                "min_x": 87.81,
+                "max_x": 87.81,
+                "min_y": 35.63,
+                "max_y": 35.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "接取",
+      "quest_ids": [
+        1391
+      ],
+      "quests": [
+        {
+          "quest_id": 1391,
+          "name": "真言药水",
+          "raw_name": "Nothing But The Truth",
+          "required_level": 37,
+          "quest_level": 42,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 10,
+          "pre_single": [
+            1388
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把莱度斯的酒带给斯通纳德的间谍玛克森。"
+        }
+      ],
+      "instruction": "到亡灵哨兵莱度斯处接取：真言药水。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 87.81,
+          "y": 35.63
+        },
+        "entities": [
+          {
+            "id": 5418,
+            "kind": "npc",
+            "name": "亡灵哨兵莱度斯",
+            "coordinates": [
+              {
+                "x": 87.81,
+                "y": 35.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 87.81,
+                "y": 35.63
+              },
+              "bounds": {
+                "min_x": 87.81,
+                "max_x": 87.81,
+                "min_y": 35.63,
+                "max_y": 35.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 1372,
+      "name": "真言药水",
+      "raw_name": "Nothing But The Truth",
+      "required_level": 37,
+      "quest_level": 42,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 10,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1383,
+      "objective_text": "到乞丐鬼屋去和药剂师法奥斯丁谈一谈。"
+    },
+    {
+      "quest_id": 1383,
+      "name": "真言药水",
+      "raw_name": "Nothing But The Truth",
+      "required_level": 37,
+      "quest_level": 42,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 10,
+      "pre_single": [
+        1372
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "乞丐鬼屋的药剂师法奥斯丁需要5颗暗影黑豹的心脏、1颗泥沼之王的蘑菇和一些绿色雏龙之血。"
+    },
+    {
+      "quest_id": 1388,
+      "name": "真言药水",
+      "raw_name": "Nothing But The Truth",
+      "required_level": 37,
+      "quest_level": 42,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 10,
+      "pre_single": [
+        1383
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1391,
+      "objective_text": "把法奥斯丁的真言药水交给乞丐鬼屋的亡灵哨兵莱度斯。"
+    },
+    {
+      "quest_id": 1391,
+      "name": "真言药水",
+      "raw_name": "Nothing But The Truth",
+      "required_level": 37,
+      "quest_level": 42,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 10,
+      "pre_single": [
+        1388
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把莱度斯的酒带给斯通纳德的间谍玛克森。"
+    }
+  ],
+  "fivebox_observations": {
+    "1372": {
+      "status": "not_classified"
+    },
+    "1383": {
+      "status": "not_classified"
+    },
+    "1388": {
+      "status": "not_classified"
+    },
+    "1391": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 4,
+    "step_count": 7,
+    "min_level": 37,
+    "max_level": 37
+  }
+}

@@ -12,19 +12,24 @@
 | `lib/questie_lua.py` | 解析 Questie 内嵌 Lua table | 数据读取失败或扩展字段时 |
 | `lib/questie_source.py` | 从 ZIP/目录加载 Questie任务、中文名和WotLK经验数据库 | 更换插件来源或经验字段时 |
 | `lib/route_builder.py` | 历史逐日岛路线骨架解析、数据补全和输出 | 修改旧逐日岛生成逻辑时 |
-| `lib/simple_route.py` | 单页路线生成、前置闭包、可选任务分离、详情重点渲染和距离反馈 | 修改当前单页路线时 |
-| `data/route-specs/simple-leveling-route.json` | 当前1—80地图阶段与人工审计步骤 | 调整任务顺序、炉石或实跑路段时 |
-| `data/route-specs/sunstrider-isle.json` | 历史逐日岛 V1 步骤骨架 | 调整旧路线时 |
+| `lib/simple_route.py` | 共用单页渲染、首组圣骑士路线、任务详情和距离反馈 | 修改页面结构或首组参考路线时 |
+| `lib/world_builder.py` | 按角色配置生成圣骑士/死亡骑士全区域候选任务库 | 修改种族职业过滤或区域候选时 |
+| `lib/world_review.py` | 将死亡骑士55—80全任务合并为当前样式单页 | 修改打金任务母版时 |
+| `data/route-specs/simple-leveling-route.json` | 首组圣骑士1—55实跑参考与历史1—80阶段 | 调整首组任务顺序、炉石或实跑路段时 |
+| `data/observations/blocked-tasks.json` | 无法进入、无法接交、服务器位面异常任务 | 用户反馈阻断时必须更新 |
 | `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
-| `data/routes/horde/blood-elf/` | 生成路线 | 审阅当前成品时 |
+| `data/routes/dk-55-80-world-tasks.html` | 当前死亡骑士主任务母版 | 审阅55—80全任务覆盖时 |
 
 ## CORE FLOWS
 
-### 生成候选路线
-`Questie ZIP/目录 → 解析任务/NPC/物体/物品/中文名/任务经验 → 读取 route spec → 补全前置、坐标、距离档位和补经验清单 → 输出 HTML + 内部归档`
+### 首组圣骑士参考页
+`Questie ZIP/目录 → 读取人工 route spec → 补全前置、坐标、距离档位和补经验清单 → 输出 simple-leveling-route.html`
+
+### 死亡骑士打金母版
+`Questie ZIP/目录 → death-knight角色与阵营过滤 → 65个可用区域候选JSON → 选择出生链及55—80级可执行任务 → 按接取/目标/交付整理 → 输出 dk-55-80-world-tasks.html + 内部归档`
 
 ### 实测修正
-`用户异常记录 → observations → 调整 route spec 或任务类型 → 重新生成路线 → 保留版本`
+`用户异常记录 → blocked-tasks/lessons/人物历程 → 修正任务或地图步骤 → 重新生成 → 下一组死亡骑士复跑验证`
 
 ### 人物历程
 `脱敏 Questie SavedVariables → 接取/完成事件 → 与候选路线对比 → 定位回头路和遗漏`

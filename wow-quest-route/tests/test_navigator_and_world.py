@@ -1,9 +1,17 @@
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 
 from lib.navigator_renderer import render_navigator_html
-from lib.world_builder import _bit_allowed, _segments
+from lib.world_builder import (
+    DEATH_KNIGHT_CLASS_FLAG,
+    PALADIN_CLASS_FLAG,
+    _bit_allowed,
+    _reset_output_dir,
+    _segments,
+)
 
 
 class NavigatorAndWorldTests(unittest.TestCase):
@@ -49,6 +57,11 @@ class NavigatorAndWorldTests(unittest.TestCase):
         self.assertTrue(_bit_allowed(blood_elf_horde_mask, blood_elf_flag))
         self.assertTrue(_bit_allowed(0, blood_elf_flag))
 
+    def test_death_knight_class_bitmask_is_distinct_from_paladin(self) -> None:
+        self.assertTrue(_bit_allowed(DEATH_KNIGHT_CLASS_FLAG, DEATH_KNIGHT_CLASS_FLAG))
+        self.assertFalse(_bit_allowed(PALADIN_CLASS_FLAG, DEATH_KNIGHT_CLASS_FLAG))
+        self.assertTrue(_bit_allowed(0, DEATH_KNIGHT_CLASS_FLAG))
+
     def test_segments_cover_all_steps_once(self) -> None:
         steps = []
         for index in range(1, 20):
@@ -65,6 +78,18 @@ class NavigatorAndWorldTests(unittest.TestCase):
         flattened = [step for segment in segments for step in segment["steps"]]
         self.assertEqual(flattened, list(range(1, 20)))
         self.assertEqual(len(flattened), len(set(flattened)))
+
+    def test_reset_output_dir_removes_stale_generated_files(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "generated"
+            stale = output / "stale-zone" / "route.json"
+            stale.parent.mkdir(parents=True)
+            stale.write_text("stale", encoding="utf-8")
+
+            _reset_output_dir(output)
+
+            self.assertTrue(output.is_dir())
+            self.assertEqual(list(output.iterdir()), [])
 
 
 if __name__ == "__main__":

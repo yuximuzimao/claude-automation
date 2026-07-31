@@ -1,0 +1,247 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-36-candidate",
+  "title": "血精灵死亡骑士 · 奥特兰克山脉（Alterac Mountains）任务候选版",
+  "output_basename": "zone-36",
+  "zone": "奥特兰克山脉",
+  "zone_en": "Alterac Mountains",
+  "map_area_id": 36,
+  "quest_zone_or_sort": 36,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "仆从瓦里克周边",
+      "steps": [
+        1,
+        2,
+        3
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        535
+      ],
+      "quests": [
+        {
+          "quest_id": 535,
+          "name": "仆从瓦里克",
+          "raw_name": "Valik",
+          "required_level": 29,
+          "quest_level": 34,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 36,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给辛迪加营地里的瓦里克带去一杯南海镇烈酒。"
+        }
+      ],
+      "instruction": "到仆从瓦里克处接取：仆从瓦里克。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 57.17,
+          "y": 69.51
+        },
+        "entities": [
+          {
+            "id": 2333,
+            "kind": "npc",
+            "name": "仆从瓦里克",
+            "coordinates": [
+              {
+                "x": 57.17,
+                "y": 69.51
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.17,
+                "y": 69.51
+              },
+              "bounds": {
+                "min_x": 57.17,
+                "max_x": 57.17,
+                "min_y": 69.51,
+                "max_y": 69.51
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        535
+      ],
+      "quests": [
+        {
+          "quest_id": 535,
+          "name": "仆从瓦里克",
+          "raw_name": "Valik",
+          "required_level": 29,
+          "quest_level": 34,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 36,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给辛迪加营地里的瓦里克带去一杯南海镇烈酒。"
+        }
+      ],
+      "instruction": "在Southshore Stout来源：醉酒的劫匪周边完成：仆从瓦里克。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 58.98,
+          "y": 68.48
+        },
+        "entities": [
+          {
+            "id": 2440,
+            "kind": "npc",
+            "name": "Southshore Stout来源：醉酒的劫匪",
+            "coordinates": [
+              {
+                "x": 58.66,
+                "y": 67.21
+              },
+              {
+                "x": 59.3,
+                "y": 69.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.98,
+                "y": 68.48
+              },
+              "bounds": {
+                "min_x": 58.66,
+                "max_x": 59.3,
+                "min_y": 67.21,
+                "max_y": 69.76
+              },
+              "spawn_count": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        535
+      ],
+      "quests": [
+        {
+          "quest_id": 535,
+          "name": "仆从瓦里克",
+          "raw_name": "Valik",
+          "required_level": 29,
+          "quest_level": 34,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 36,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给辛迪加营地里的瓦里克带去一杯南海镇烈酒。"
+        }
+      ],
+      "instruction": "到仆从瓦里克处交付：仆从瓦里克。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 57.17,
+          "y": 69.51
+        },
+        "entities": [
+          {
+            "id": 2333,
+            "kind": "npc",
+            "name": "仆从瓦里克",
+            "coordinates": [
+              {
+                "x": 57.17,
+                "y": 69.51
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.17,
+                "y": 69.51
+              },
+              "bounds": {
+                "min_x": 57.17,
+                "max_x": 57.17,
+                "min_y": 69.51,
+                "max_y": 69.51
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 535,
+      "name": "仆从瓦里克",
+      "raw_name": "Valik",
+      "required_level": 29,
+      "quest_level": 34,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 36,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "给辛迪加营地里的瓦里克带去一杯南海镇烈酒。"
+    }
+  ],
+  "fivebox_observations": {
+    "535": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 3,
+    "min_level": 29,
+    "max_level": 29
+  }
+}

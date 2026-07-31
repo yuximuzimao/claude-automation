@@ -1,0 +1,329 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-1-candidate",
+  "title": "血精灵死亡骑士 · 丹莫罗（Dun Morogh）任务候选版",
+  "output_basename": "zone-1",
+  "zone": "丹莫罗",
+  "zone_en": "Dun Morogh",
+  "map_area_id": 1,
+  "quest_zone_or_sort": 1,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "Grime-Encrusted Object来源：洞窟入侵者周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "完成目标",
+      "quest_ids": [
+        2951,
+        4601,
+        4602
+      ],
+      "quests": [
+        {
+          "quest_id": 2951,
+          "name": "超级清洁器5200型！",
+          "raw_name": "The Sparklematic 5200!",
+          "required_level": 25,
+          "quest_level": 30,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 133,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+        },
+        {
+          "quest_id": 4601,
+          "name": "超级清洁器5200型！",
+          "raw_name": "The Sparklematic 5200!",
+          "required_level": 25,
+          "quest_level": 30,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 133,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+        },
+        {
+          "quest_id": 4602,
+          "name": "超级清洁器5200型！",
+          "raw_name": "The Sparklematic 5200!",
+          "required_level": 25,
+          "quest_level": 30,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 133,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+        }
+      ],
+      "instruction": "在Grime-Encrusted Object来源：洞窟入侵者、Grime-Encrusted Object来源：洞窟强夺者、Grime-Encrusted Object来源：洞窟抢劫者、Grime-Encrusted Object来源：辐射入侵者等5个目标周边完成：超级清洁器5200型！、超级清洁器5200型！、超级清洁器5200型！。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 20.9,
+          "y": 36.02
+        },
+        "entities": [
+          {
+            "id": 6208,
+            "kind": "npc",
+            "name": "Grime-Encrusted Object来源：洞窟入侵者",
+            "coordinates": [
+              {
+                "x": 21.79,
+                "y": 33.13
+              },
+              {
+                "x": 21.73,
+                "y": 34.04
+              },
+              {
+                "x": 18.1,
+                "y": 39.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 21.73,
+                "y": 34.04
+              },
+              "bounds": {
+                "min_x": 18.1,
+                "max_x": 21.79,
+                "min_y": 33.13,
+                "max_y": 39.25
+              },
+              "spawn_count": 3
+            }
+          },
+          {
+            "id": 6209,
+            "kind": "npc",
+            "name": "Grime-Encrusted Object来源：洞窟强夺者",
+            "coordinates": [
+              {
+                "x": 18.71,
+                "y": 38.66
+              },
+              {
+                "x": 22.98,
+                "y": 31.94
+              },
+              {
+                "x": 19.34,
+                "y": 36.57
+              },
+              {
+                "x": 21.08,
+                "y": 31.52
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 20.21,
+                "y": 34.26
+              },
+              "bounds": {
+                "min_x": 18.71,
+                "max_x": 22.98,
+                "min_y": 31.52,
+                "max_y": 38.66
+              },
+              "spawn_count": 4
+            }
+          },
+          {
+            "id": 6210,
+            "kind": "npc",
+            "name": "Grime-Encrusted Object来源：洞窟抢劫者",
+            "coordinates": [
+              {
+                "x": 21.79,
+                "y": 33.69
+              },
+              {
+                "x": 20.61,
+                "y": 36.96
+              },
+              {
+                "x": 18.76,
+                "y": 39.16
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 20.61,
+                "y": 36.96
+              },
+              "bounds": {
+                "min_x": 18.76,
+                "max_x": 21.79,
+                "min_y": 33.69,
+                "max_y": 39.16
+              },
+              "spawn_count": 3
+            }
+          },
+          {
+            "id": 6213,
+            "kind": "npc",
+            "name": "Grime-Encrusted Object来源：辐射入侵者",
+            "coordinates": [
+              {
+                "x": 20.9,
+                "y": 36.02
+              },
+              {
+                "x": 22.09,
+                "y": 34.14
+              },
+              {
+                "x": 19.68,
+                "y": 36.71
+              },
+              {
+                "x": 19.32,
+                "y": 38.8
+              },
+              {
+                "x": 21.81,
+                "y": 32.2
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 20.9,
+                "y": 36.02
+              },
+              "bounds": {
+                "min_x": 19.32,
+                "max_x": 22.09,
+                "min_y": 32.2,
+                "max_y": 38.8
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 6391,
+            "kind": "npc",
+            "name": "Grime-Encrusted Object来源：躲起来的战士",
+            "coordinates": [
+              {
+                "x": 71.0,
+                "y": 38.01
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 71.0,
+                "y": 38.01
+              },
+              "bounds": {
+                "min_x": 71.0,
+                "max_x": 71.0,
+                "min_y": 38.01,
+                "max_y": 38.01
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 2951,
+      "name": "超级清洁器5200型！",
+      "raw_name": "The Sparklematic 5200!",
+      "required_level": 25,
+      "quest_level": 30,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 133,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+    },
+    {
+      "quest_id": 4601,
+      "name": "超级清洁器5200型！",
+      "raw_name": "The Sparklematic 5200!",
+      "required_level": 25,
+      "quest_level": 30,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 133,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+    },
+    {
+      "quest_id": 4602,
+      "name": "超级清洁器5200型！",
+      "raw_name": "The Sparklematic 5200!",
+      "required_level": 25,
+      "quest_level": 30,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 133,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将脏兮兮的东西放入超级清洁器5200型，记得要用三枚银币来启动机器。"
+    }
+  ],
+  "fivebox_observations": {
+    "2951": {
+      "status": "not_classified"
+    },
+    "4601": {
+      "status": "not_classified"
+    },
+    "4602": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 3,
+    "step_count": 1,
+    "min_level": 25,
+    "max_level": 25
+  }
+}
