@@ -249,6 +249,8 @@ def _quest_detail(
             for parent in sorted(required_one)
         ],
         "objective": str(override.get("objective") or _localized_objective(data, quest_id)),
+        "target_summary": str(override.get("target_summary") or ""),
+        "focus_terms": [str(value) for value in override.get("focus_terms", [])],
         "flow": str(override.get("flow") or "按任务目标完成后返回交付。"),
         "fivebox": str(override.get("fivebox") or "尚未实测五开操作，按五号最低进度确认。"),
         "location": str(override.get("location") or ""),
@@ -773,7 +775,16 @@ def _steps_from_spec(raw_steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
             [str(tag) for tag in raw.get("tags", [])],
             [int(value) for value in raw.get("quest_ids", [])],
         )
-        for key in ("location", "npc", "target", "action", "coords", "note"):
+        for key in (
+            "location",
+            "npc",
+            "target",
+            "action",
+            "coords",
+            "note",
+            "detail_quest_ids",
+            "show_details",
+        ):
             if key in raw:
                 step[key] = raw[key]
         steps.append(step)
@@ -782,12 +793,21 @@ def _steps_from_spec(raw_steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _manual_steps(segment: dict[str, Any], next_name: str) -> list[dict[str, Any]]:
     steps = _steps_from_spec(segment.get("manual_steps", []))
-    steps.append(
-        _make_step(
-            f"经验足够：前往{next_name}；经验不足：补做本地区尚未完成的任务",
-            [],
+    exit_step = segment.get("exit_step")
+    if isinstance(exit_step, dict):
+        steps.extend(_steps_from_spec([exit_step]))
+    else:
+        steps.extend(
+            _steps_from_spec(
+                [
+                    {
+                        "location": "当前地图出口",
+                        "action": f"经验足够前往{next_name}；经验不足时查看本页末尾的补经验任务",
+                        "text": f"经验足够前往{next_name}；经验不足时查看本页末尾的补经验任务",
+                    }
+                ]
+            )
         )
-    )
     return _finalize_step_flow(steps, next_name)
 
 
@@ -806,11 +826,12 @@ def _annotate_quest_kinds(
         int(key): str(value)
         for key, value in segment.get("quest_kind_overrides", {}).items()
     }
+    detail_seen: set[int] = set()
     for step in steps:
         quest_kinds: dict[str, str] = {}
-        quest_details: list[dict[str, Any]] = []
-        for raw_quest_id in step.get("quest_ids", []):
-            quest_id = int(raw_quest_id)
+        details_by_id: dict[int, dict[str, Any]] = {}
+        quest_ids = [int(value) for value in step.get("quest_ids", [])]
+        for quest_id in quest_ids:
             detail = _quest_detail(
                 data,
                 quest_id,
@@ -818,7 +839,22 @@ def _annotate_quest_kinds(
                 kind_overrides.get(quest_id),
             )
             quest_kinds[detail["name"]] = detail["kind"]
-            quest_details.append(detail)
+            details_by_id[quest_id] = detail
+
+        explicit_detail_ids = step.get("detail_quest_ids")
+        if isinstance(explicit_detail_ids, list):
+            detail_ids = [int(value) for value in explicit_detail_ids]
+        elif step.get("show_details") is False:
+            detail_ids = []
+        else:
+            detail_ids = [quest_id for quest_id in quest_ids if quest_id not in detail_seen]
+
+        quest_details = [
+            details_by_id[quest_id]
+            for quest_id in detail_ids
+            if quest_id in details_by_id
+        ]
+        detail_seen.update(detail_ids)
         step["quest_kinds"] = quest_kinds
         step["quest_details"] = quest_details
 
@@ -963,19 +999,25 @@ def build_simple_route(
                 next_name,
             )
             if prefix_steps:
-                public_steps = prefix_steps + [
-                    _make_step(
-                        "本地图后半段尚未人工实跑，暂不提供路线",
-                        [],
-                    )
-                ]
+                public_steps = prefix_steps + _steps_from_spec(
+                    [
+                        {
+                            "location": "当前地图",
+                            "action": "后半段尚未人工整理，暂不提供路线",
+                            "text": "本地图后半段尚未人工整理，暂不提供路线",
+                        }
+                    ]
+                )
             else:
-                public_steps = [
-                    _make_step(
-                        "本地图尚未人工实跑，暂不提供路线",
-                        [],
-                    )
-                ]
+                public_steps = _steps_from_spec(
+                    [
+                        {
+                            "location": "当前地图",
+                            "action": "尚未人工整理，暂不提供路线",
+                            "text": "本地图尚未人工整理，暂不提供路线",
+                        }
+                    ]
+                )
             loot_tasks = _loot_records(
                 data, build.selected_qids, classifications, manual_overrides
             )
@@ -1113,6 +1155,25 @@ def _colored_quest_text(text: str, quest_kinds: dict[str, str]) -> str:
     return "".join(parts)
 
 
+def _highlight_text(text: str, terms: list[str]) -> str:
+    unique_terms = sorted(
+        {term.strip() for term in terms if term.strip()},
+        key=len,
+        reverse=True,
+    )
+    if not unique_terms:
+        return html.escape(text)
+    pattern = re.compile("(" + "|".join(re.escape(term) for term in unique_terms) + ")")
+    parts: list[str] = []
+    position = 0
+    for match in pattern.finditer(text):
+        parts.append(html.escape(text[position:match.start()]))
+        parts.append(f'<mark class="focus-term">{html.escape(match.group(0))}</mark>')
+        position = match.end()
+    parts.append(html.escape(text[position:]))
+    return "".join(parts)
+
+
 def _prerequisite_html(detail: dict[str, Any]) -> str:
     required_all = detail.get("required_all", [])
     required_one = detail.get("required_one", [])
@@ -1127,8 +1188,8 @@ def _prerequisite_html(detail: dict[str, Any]) -> str:
         )
         if len(required_one) == 1:
             return f"必须先完成：{names}"
-        return f"前置任务（任选其一）：{names}"
-    return "无前置任务"
+        return f"前置任务任选其一：{names}"
+    return ""
 
 
 def _quest_detail_html(detail: dict[str, Any], extra_class: str = "") -> str:
@@ -1136,25 +1197,32 @@ def _quest_detail_html(detail: dict[str, Any], extra_class: str = "") -> str:
     name = html.escape(str(detail.get("name", "未知任务")))
     xp = detail.get("base_xp")
     xp_text = f"{int(xp)} 经验" if isinstance(xp, int) else "经验未知"
-    level = detail.get("xp_level")
-    xp_note = (
-        f"任务等级 {int(level)} 的同级基础经验；角色等级变化和临时经验加成会改变实际值。"
-        if isinstance(level, int)
-        else "未记录可用的经验等级。"
-    )
     location = str(detail.get("location", "")).strip()
+    target_summary = str(detail.get("target_summary", "")).strip()
+    if not target_summary:
+        target_summary = str(detail.get("objective", "")).strip()
+    flow = str(detail.get("flow", "")).strip()
     note = str(detail.get("note", "")).strip()
-    rows = [
-        f'<div><dt>经验</dt><dd><strong>{html.escape(xp_text)}</strong><small>{html.escape(xp_note)}</small></dd></div>',
-        f'<div><dt>前置</dt><dd>{_prerequisite_html(detail)}</dd></div>',
-        f'<div><dt>流程</dt><dd>{html.escape(str(detail.get("flow", "")))}</dd></div>',
-        f'<div><dt>五开判断</dt><dd>{html.escape(str(detail.get("fivebox", "")))}</dd></div>',
-        f'<div><dt>任务目标</dt><dd>{html.escape(str(detail.get("objective", "")))}</dd></div>',
-    ]
+    focus_terms = [str(value) for value in detail.get("focus_terms", [])]
+    prerequisite = _prerequisite_html(detail)
+
+    rows: list[str] = []
+    if prerequisite:
+        rows.append(
+            f'<div class="detail-prerequisite"><dt>前置</dt><dd>{prerequisite}</dd></div>'
+        )
     if location:
-        rows.insert(2, f'<div><dt>地点</dt><dd>{html.escape(location)}</dd></div>')
+        rows.append(f'<div><dt>地点</dt><dd>{html.escape(location)}</dd></div>')
+    if target_summary:
+        rows.append(
+            f'<div class="detail-target"><dt>重点目标</dt><dd>{_highlight_text(target_summary, focus_terms)}</dd></div>'
+        )
+    if flow:
+        rows.append(
+            f'<div><dt>流程</dt><dd>{_highlight_text(flow, focus_terms)}</dd></div>'
+        )
     if note:
-        rows.append(f'<div><dt>备注</dt><dd>{html.escape(note)}</dd></div>')
+        rows.append(f'<div class="detail-note"><dt>提醒</dt><dd>{html.escape(note)}</dd></div>')
     class_name = "quest-detail" + (f" {extra_class}" if extra_class else "")
     return (
         f'<details class="{class_name}"><summary>'
@@ -1174,8 +1242,11 @@ def _step_text_html(step: dict[str, Any]) -> str:
             value = str(step.get(key, "")).strip()
             if not value:
                 continue
+            rendered_value = _colored_quest_text(value, quest_kinds)
+            if key == "target":
+                rendered_value = f'<mark class="target-focus">{rendered_value}</mark>'
             fields.append(
-                f'<div class="step-field"><span>{label}</span><b>{_colored_quest_text(value, quest_kinds)}</b></div>'
+                f'<div class="step-field step-field-{key}"><span>{label}</span><b>{rendered_value}</b></div>'
             )
         blocks.append(f'<div class="step-fields">{"".join(fields)}</div>')
     else:
@@ -1204,7 +1275,7 @@ def _optional_tasks_html(segment: dict[str, Any]) -> str:
         '<section class="optional-section">'
         '<header><div><p>经验不足时再做</p><h3>补经验任务</h3></div>'
         f'<span>{len(tasks)} 个任务</span></header>'
-        '<p class="optional-intro">不计入主流程进度，已按同级基础经验从高到低排列。展开任务名可查看前置、路线和五开操作。</p>'
+        '<p class="optional-intro">不计入主流程进度，已按同级基础经验从高到低排列。展开任务名可查看前置、重点目标和最短流程。</p>'
         f'<div class="optional-list">{cards}</div></section>'
     )
 
@@ -1251,7 +1322,7 @@ def render_simple_html(route: dict[str, Any]) -> str:
 
     css = """
 :root{--paper:#f7f3e8;--ink:#201d18;--muted:#6f675b;--line:#d8cfbd;--blood:#8f2434;--blood-dark:#641724;--gold:#a96f13;--soft:#eee5d2;--collect:#b51f32;--simple:#27823d;--done:#8c9785;--same:#4f7a56;--near:#7d7023;--separate:#a45f18;--far:#9a2f35}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{padding:34px 24px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbf8f0 0%,var(--paper) 100%)}.top-inner{max-width:980px;margin:auto}.eyebrow{margin:0 0 8px;color:var(--blood);font-size:14px;font-weight:800;letter-spacing:.14em}.top h1{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.04em}.lede{max-width:760px;margin:16px 0 18px;color:var(--muted)}.route-status{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.progress-pill{display:inline-flex;gap:7px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);background:#fffaf0;border-radius:999px}.progress-pill strong{font-size:22px;color:var(--blood)}.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(247,243,232,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.map-tabs{max-width:100%;display:flex;gap:8px;overflow-x:auto;padding:12px max(18px,calc((100vw - 980px)/2));scrollbar-width:thin}.map-tab{flex:0 0 auto;display:grid;gap:1px;min-width:112px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fffaf1;color:var(--ink);text-align:left}.map-tab strong{font-size:16px}.map-tab small{color:var(--muted);font-size:12px}.map-tab[aria-selected="true"]{border-color:var(--blood);background:var(--blood);color:white;box-shadow:0 5px 16px rgba(100,23,36,.18)}.map-tab[aria-selected="true"] small{color:#f4dfe3}.map-tab:focus-visible,.route-step input:focus-visible,.panel-nav button:focus-visible,.reset:focus-visible,.copy-far:focus-visible,.far-mark:focus-visible,.quest-detail summary:focus-visible{outline:3px solid #2b68b8;outline-offset:3px}main{max-width:980px;margin:0 auto;padding:34px 20px 80px}.map-panel[hidden]{display:none}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--ink)}.map-heading p{margin:0 0 2px;color:var(--blood);font-size:14px;font-weight:800}.map-heading h2{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(32px,5vw,48px)}.map-progress{color:var(--muted);font-variant-numeric:tabular-nums}ol{list-style:none;margin:0;padding:0;counter-reset:route}.route-step{border-bottom:1px solid var(--line)}.route-step:hover{background:rgba(238,229,210,.4)}.step-layout{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:start;gap:12px;padding:18px 8px}.step-check{display:grid;grid-template-columns:28px 42px;align-items:start;gap:8px;cursor:pointer}.route-step input{width:22px;height:22px;margin-top:7px;accent-color:var(--blood)}.step-number{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-weight:800;font-variant-numeric:tabular-nums}.step-copy{min-width:0;font-size:clamp(17px,2.2vw,20px)}.step-fields{display:grid;gap:7px}.step-field{display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;align-items:start}.step-field>span{padding-top:2px;color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.08em}.step-field>b{font-weight:700}.legacy-step-text{font-weight:650}.step-quests{display:grid;gap:7px;margin-top:12px}.quest-name{font-weight:900}.quest-collect{color:var(--collect)}.quest-simple{color:var(--simple)}.quest-detail{border:1px solid var(--line);border-radius:8px;background:#fffaf1}.quest-detail summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;cursor:pointer;list-style:none}.quest-detail summary::-webkit-details-marker{display:none}.quest-detail summary:before{content:'＋';flex:0 0 auto;color:var(--muted);font-weight:800}.quest-detail[open] summary:before{content:'－'}.quest-detail summary .quest-name{margin-right:auto}.xp-chip{flex:0 0 auto;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;font-weight:800}.quest-detail dl{display:grid;gap:0;margin:0;padding:0 12px 12px}.quest-detail dl>div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line)}.quest-detail dt{color:var(--muted);font-size:13px;font-weight:800}.quest-detail dd{margin:0;font-size:15px}.quest-detail dd small{display:block;margin-top:3px;color:var(--muted);font-size:12px}.step-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.distance{display:inline-flex;padding:4px 9px;border-radius:999px;background:#fff;font-size:12px;font-weight:800}.distance-same{color:var(--same);border:1px solid color-mix(in srgb,var(--same) 40%,transparent)}.distance-near{color:var(--near);border:1px solid color-mix(in srgb,var(--near) 40%,transparent)}.distance-separate{color:var(--separate);border:1px solid color-mix(in srgb,var(--separate) 40%,transparent)}.distance-far{color:var(--far);border:1px solid color-mix(in srgb,var(--far) 40%,transparent)}.far-mark{padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:12px;font-weight:800}.far-mark[aria-pressed="true"]{border-color:var(--far);background:#fff0f1;color:var(--far)}.step-note{margin:10px 0 0;padding:8px 10px;border-left:3px solid var(--gold);background:#fff6df;color:var(--muted);font-size:14px}.route-step.done>.step-layout{opacity:.55}.route-step.done .step-number{background:var(--soft)}.optional-section{margin-top:42px;padding:24px;border:1px solid var(--line);border-radius:12px;background:#f0eadc}.optional-section>header{display:flex;align-items:end;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}.optional-section>header p{margin:0;color:var(--blood);font-size:13px;font-weight:800;letter-spacing:.08em}.optional-section h3{margin:2px 0 0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:30px}.optional-section>header>span{color:var(--muted);font-size:13px;font-weight:800}.optional-intro{margin:14px 0;color:var(--muted);font-size:14px}.optional-list{display:grid;gap:9px}.optional-task{background:#fbf7ed}.distance-legend{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 18px}.distance-legend .distance{background:#fffaf0}.copy-far,.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.panel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.panel-nav button{min-width:140px;padding:11px 16px;border:1px solid var(--line);border-radius:7px;background:#fffaf1;color:var(--ink);font-weight:800}.panel-nav button:disabled{opacity:.35;cursor:not-allowed}.next-map{margin-left:auto;background:var(--blood)!important;border-color:var(--blood)!important;color:white!important}.noscript{max-width:980px;margin:20px auto;padding:14px 20px;background:#fff0cf;border:1px solid #d3a651}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{padding:34px 24px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbf8f0 0%,var(--paper) 100%)}.top-inner{max-width:980px;margin:auto}.eyebrow{margin:0 0 8px;color:var(--blood);font-size:14px;font-weight:800;letter-spacing:.14em}.top h1{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.04em}.lede{max-width:760px;margin:16px 0 18px;color:var(--muted)}.route-status{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.progress-pill{display:inline-flex;gap:7px;align-items:baseline;padding:8px 12px;border:1px solid var(--line);background:#fffaf0;border-radius:999px}.progress-pill strong{font-size:22px;color:var(--blood)}.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(247,243,232,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.map-tabs{max-width:100%;display:flex;gap:8px;overflow-x:auto;padding:12px max(18px,calc((100vw - 980px)/2));scrollbar-width:thin}.map-tab{flex:0 0 auto;display:grid;gap:1px;min-width:112px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fffaf1;color:var(--ink);text-align:left}.map-tab strong{font-size:16px}.map-tab small{color:var(--muted);font-size:12px}.map-tab[aria-selected="true"]{border-color:var(--blood);background:var(--blood);color:white;box-shadow:0 5px 16px rgba(100,23,36,.18)}.map-tab[aria-selected="true"] small{color:#f4dfe3}.map-tab:focus-visible,.route-step input:focus-visible,.panel-nav button:focus-visible,.reset:focus-visible,.copy-far:focus-visible,.far-mark:focus-visible,.quest-detail summary:focus-visible{outline:3px solid #2b68b8;outline-offset:3px}main{max-width:980px;margin:0 auto;padding:34px 20px 80px}.map-panel[hidden]{display:none}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--ink)}.map-heading p{margin:0 0 2px;color:var(--blood);font-size:14px;font-weight:800}.map-heading h2{margin:0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:clamp(32px,5vw,48px)}.map-progress{color:var(--muted);font-variant-numeric:tabular-nums}ol{list-style:none;margin:0;padding:0;counter-reset:route}.route-step{border-bottom:1px solid var(--line)}.route-step:hover{background:rgba(238,229,210,.4)}.step-layout{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:start;gap:12px;padding:18px 8px}.step-check{display:grid;grid-template-columns:28px 42px;align-items:start;gap:8px;cursor:pointer}.route-step input{width:22px;height:22px;margin-top:7px;accent-color:var(--blood)}.step-number{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;font-weight:800;font-variant-numeric:tabular-nums}.step-copy{min-width:0;font-size:clamp(17px,2.2vw,20px)}.step-fields{display:grid;gap:7px}.step-field{display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;align-items:start}.step-field>span{padding-top:2px;color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.08em}.step-field>b{font-weight:700}.target-focus{display:inline;padding:2px 7px;border-radius:5px;background:#fff0c7;color:#4f3510;font-weight:900}.legacy-step-text{font-weight:650}.step-quests{display:grid;gap:7px;margin-top:12px}.quest-name{font-weight:900}.quest-collect{color:var(--collect)}.quest-simple{color:var(--simple)}.quest-detail{border:1px solid var(--line);border-radius:8px;background:#fffaf1}.quest-detail summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;cursor:pointer;list-style:none}.quest-detail summary::-webkit-details-marker{display:none}.quest-detail summary:before{content:'＋';flex:0 0 auto;color:var(--muted);font-weight:800}.quest-detail[open] summary:before{content:'－'}.quest-detail summary .quest-name{margin-right:auto}.xp-chip{flex:0 0 auto;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;font-weight:800}.quest-detail dl{display:grid;gap:0;margin:0;padding:0 12px 12px}.quest-detail dl>div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line)}.quest-detail dt{color:var(--muted);font-size:13px;font-weight:800}.quest-detail dd{margin:0;font-size:15px}.detail-prerequisite{margin:8px -4px 0;padding:10px 8px!important;border:1px solid #e0b15d!important;border-radius:7px;background:#fff2c9}.detail-prerequisite dt,.detail-prerequisite dd{color:#6f4300!important;font-weight:900}.detail-target dd{font-size:16px;font-weight:850}.focus-term{padding:1px 4px;border-radius:4px;background:#ffe0a3;color:#573400;font-weight:900}.detail-note dd{color:var(--blood);font-weight:750}.step-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.distance{display:inline-flex;padding:4px 9px;border-radius:999px;background:#fff;font-size:12px;font-weight:800}.distance-same{color:var(--same);border:1px solid color-mix(in srgb,var(--same) 40%,transparent)}.distance-near{color:var(--near);border:1px solid color-mix(in srgb,var(--near) 40%,transparent)}.distance-separate{color:var(--separate);border:1px solid color-mix(in srgb,var(--separate) 40%,transparent)}.distance-far{color:var(--far);border:1px solid color-mix(in srgb,var(--far) 40%,transparent)}.far-mark{padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:12px;font-weight:800}.far-mark[aria-pressed="true"]{border-color:var(--far);background:#fff0f1;color:var(--far)}.step-note{margin:10px 0 0;padding:8px 10px;border-left:3px solid var(--gold);background:#fff6df;color:var(--muted);font-size:14px}.route-step.done>.step-layout{opacity:.55}.route-step.done .step-number{background:var(--soft)}.optional-section{margin-top:42px;padding:24px;border:1px solid var(--line);border-radius:12px;background:#f0eadc}.optional-section>header{display:flex;align-items:end;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}.optional-section>header p{margin:0;color:var(--blood);font-size:13px;font-weight:800;letter-spacing:.08em}.optional-section h3{margin:2px 0 0;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:30px}.optional-section>header>span{color:var(--muted);font-size:13px;font-weight:800}.optional-intro{margin:14px 0;color:var(--muted);font-size:14px}.optional-list{display:grid;gap:9px}.optional-task{background:#fbf7ed}.distance-legend{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 18px}.distance-legend .distance{background:#fffaf0}.copy-far,.reset{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.panel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.panel-nav button{min-width:140px;padding:11px 16px;border:1px solid var(--line);border-radius:7px;background:#fffaf1;color:var(--ink);font-weight:800}.panel-nav button:disabled{opacity:.35;cursor:not-allowed}.next-map{margin-left:auto;background:var(--blood)!important;border-color:var(--blood)!important;color:white!important}.noscript{max-width:980px;margin:20px auto;padding:14px 20px;background:#fff0cf;border:1px solid #d3a651}
 @media(max-width:620px){body{font-size:16px}.top{padding:26px 18px 18px}.step-layout{grid-template-columns:66px minmax(0,1fr);gap:7px;padding:15px 2px}.step-check{grid-template-columns:24px 36px;gap:5px}.route-step input{width:20px;height:20px}.step-number{width:34px;height:34px}.step-field{grid-template-columns:48px minmax(0,1fr);gap:8px}.quest-detail summary{align-items:flex-start;flex-wrap:wrap}.xp-chip{margin-left:28px}.quest-detail dl>div{grid-template-columns:1fr;gap:3px}.optional-section{padding:18px 14px}.map-heading{align-items:start}.panel-nav button{min-width:0;flex:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 """
@@ -1394,7 +1465,7 @@ def render_simple_html(route: dict[str, Any]) -> str:
 <header class="top"><div class="top-inner">
 <p class="eyebrow">五开号 · 单一路线</p>
 <h1>{html.escape(route["title"])}</h1>
-<p class="lede">红色任务名表示需要反复逐号收集、数量较多或掉落不稳定；绿色包括共享击杀、单个必掉物和单次点击。任务名可展开查看前置、经验和完整流程。</p>
+<p class="lede">红色任务名表示需要反复逐号收集、数量较多或掉落不稳定；绿色包括共享击杀、单个必掉物和单次点击。展开任务名只看前置、重点目标和最短流程。</p>
 <div class="distance-legend" aria-label="地图坐标距离分级"><span class="distance distance-same">0—2.5 同一区域</span><span class="distance distance-near">2.5—5 附近</span><span class="distance distance-separate">5—8 不同任务点</span><span class="distance distance-far">大于8 较远</span></div>
 <div class="route-status"><span class="progress-pill"><strong id="done-count">0</strong><span>/</span><span id="total-count">0</span><span>已完成</span></span><button class="copy-far" type="button">复制过远标记</button><button class="reset" type="button">清空勾选</button></div>
 </div></header>
@@ -1426,7 +1497,7 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         "",
         "- 最终用户入口只有一个HTML文件，但未经实跑的自动阶段只能视为审阅草稿，不能称为可用攻略。",
         "- 五个角色按一个主控号移动；普通击杀默认由主号完成，个人拾取和点击以五号最低进度为准。",
-        "- 收集或点击类任务名直接标红，普通击杀、接交和简单流程标绿；用户页面不显示独立分类标签。",
+        "- 红色只表示多数量、随机掉落或重复个人操作造成的高五开负担；单个必掉物和单次固定点击保持绿色。",
         "- 第一轮目标是连续升到80级，而不是全地图清空或金币最大化。",
         "- RXP只参考地图阶段；Questie提供任务候选和前置；实际顺序必须由道路、炉石、飞行与实跑决定。",
         f"- 最终地图顺序：{sequence}",
@@ -1453,13 +1524,15 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         f"- 进入主路线候选的Questie任务：{stats['selected_quest_count']}。",
         f"- 自动补入可达前置：{stats['prerequisite_added_count']} 个；因主路线无法满足前置而删除：{stats['prerequisite_removed_count']} 个。",
         f"- 最终未满足前置：{stats['unresolved_prerequisite_count']} 条。`preQuestGroup`按全部完成，`preQuestSingle`按任选其一校验。",
-        f"- 内部仍分类为必做掉落 {stats['loot_must_count']} 个、可跳掉落 {stats['loot_optional_count']} 个，但用户页面只通过任务名红/绿着色表达操作重点。",
-        "- 逐日岛1—6级为人工编排，其中西侧树人/神殿顺序和菲伦德雷任务物品的五开行为仍需继续实跑。",
-        "- 永歌森林鹰翼广场至晴风村已根据2026-07-31实测反馈人工修订：加入炉石，拆分鱼头、军备、书页、法力水晶，并把豹皮并入游侠萨蕾恩路线。",
-        "- 永歌森林后半段及12—80级仍是自动候选草稿；取消跨地点动作合并后步骤数明显增加，证明其不能直接作为攻略发布。",
+        f"- 内部仍分类为必做掉落 {stats['loot_must_count']} 个、可跳掉落 {stats['loot_optional_count']} 个；五开判断保留在数据层，不在用户详情中显示。",
+        "- 用户详情只显示经验、突出前置、重点目标、地点和最短流程；怪物与任务物品名称单独高亮。",
+        "- 逐日岛1—6级已统一为地点/NPC/目标/操作格式；西侧树人/神殿顺序和菲伦德雷任务物品仍需继续实跑。",
+        "- 永歌森林鹰翼广场至晴风村已根据2026-07-31实测反馈人工修订；后半段仍未人工整理。",
+        "- 幽魂之地12—20与贫瘠之地20—22已依据Questie前置、任务点和任务负担人工编排，但尚未实跑，不能宣称为最终最优路线。",
+        "- 石爪山脉及22—80级仍只显示未人工整理占位，不发布自动候选顺序。",
         "- Questie WotLK修正层尚未完整叠加到基础库；若实际任务与页面不一致，应先核对修正层再改路线。",
-        "- 静态校验会检查：单HTML、地图标签、步骤非空、掉落任务内部分类完整、页面不含旧导航器字段与旧分类标签。",
-        "- 2026-07-31验证：`python3 -m unittest discover -s tests` 共13项通过；最终提交前需再次执行页面脚本 `node --check`。",
+        "- 静态校验会检查：单HTML、地图标签、步骤非空、可选任务不混入主流程、重点样式存在、页面不含五开判断与旧导航器字段。",
+        "- 2026-07-31验证：`python3 -m unittest discover -s tests` 共14项通过；最终提交前需再次执行页面脚本 `node --check`。",
         "",
         "## RXP与Questie不一致或需要解释的地方",
         "",

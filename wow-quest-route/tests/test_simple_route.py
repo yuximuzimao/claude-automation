@@ -174,21 +174,50 @@ class SimpleRouteTests(unittest.TestCase):
         self.assertIn("冰冠冰川", rendered)
         self.assertIn('class="quest-name quest-collect"', rendered)
         self.assertIn('class="quest-name quest-simple"', rendered)
-        self.assertEqual(rendered.count('<input type="checkbox"'), 72)
-        self.assertIn("本地图尚未人工实跑，暂不提供路线", rendered)
+        self.assertEqual(rendered.count('<input type="checkbox"'), 132)
+        self.assertIn("尚未人工整理，暂不提供路线", rendered)
         self.assertIn("把炉石绑定在鹰翼广场", rendered)
         self.assertIn('<details class="quest-detail', rendered)
         self.assertIn("补经验任务", rendered)
         self.assertIn("980 经验", rendered)
         self.assertIn("必须先完成：《鱼头......》", rendered)
+        self.assertIn("必须先完成：《戴索姆之战》", rendered)
+        self.assertIn("必须先完成：《科卡尔首领》", rendered)
+        self.assertIn("必须先完成：《野猪人的内战》", rendered)
+        self.assertIn('class="detail-prerequisite"', rendered)
+        self.assertIn('class="focus-term"', rendered)
+        self.assertIn('class="target-focus"', rendered)
+        self.assertNotIn("五开判断", rendered)
+        self.assertNotIn("无前置任务", rendered)
+        self.assertNotIn("任务等级 9 的同级基础经验", rendered)
         self.assertIn("标记过远", rendered)
         self.assertIn("复制过远标记", rendered)
         self.assertIn("同一区域 · 0.3", rendered)
-        eversong = rendered.split('id="panel-eversong-6-12"', 1)[1].split('</section>', 1)[0]
-        main_flow = eversong.split('<ol>', 1)[1].split('</ol>', 1)[0]
-        self.assertNotIn("鱼头......", main_flow)
-        self.assertNotIn("失落的军备", main_flow)
-        self.assertNotIn("收集豹皮", main_flow)
+
+        panels = {
+            panel_id: rendered.split(f'id="panel-{panel_id}"', 1)[1].split('</section>', 1)[0]
+            for panel_id in (
+                "sunstrider-1-6",
+                "eversong-6-12",
+                "ghostlands-12-20",
+                "barrens-20-22",
+                "stonetalon-22-24",
+            )
+        }
+        for panel_id in ("sunstrider-1-6", "eversong-6-12", "ghostlands-12-20", "barrens-20-22"):
+            self.assertNotIn('class="legacy-step-text"', panels[panel_id])
+        self.assertNotIn("尚未人工整理", panels["ghostlands-12-20"])
+        self.assertNotIn("尚未人工整理", panels["barrens-20-22"])
+        self.assertIn("尚未人工整理", panels["stonetalon-22-24"])
+        self.assertIn("达尔坎·德拉希尔", panels["ghostlands-12-20"])
+        self.assertIn("曼科里克的妻子", panels["barrens-20-22"])
+        self.assertIn("十字路口西侧营地", panels["barrens-20-22"])
+        self.assertIn("雷戈萨·死门", panels["barrens-20-22"])
+
+        eversong_main = panels["eversong-6-12"].split('<ol>', 1)[1].split('</ol>', 1)[0]
+        self.assertNotIn("鱼头......", eversong_main)
+        self.assertNotIn("失落的军备", eversong_main)
+        self.assertNotIn("收集豹皮", eversong_main)
         self.assertNotIn("到学徒梅雷多尔集中接取《学徒的欺瞒》", rendered)
         self.assertNotIn("【打怪掉物·必做】", rendered)
         self.assertNotIn("【打怪掉物·可跳】", rendered)

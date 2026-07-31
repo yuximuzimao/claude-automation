@@ -12,7 +12,7 @@
 | `lib/questie_lua.py` | 解析 Questie 内嵌 Lua table | 数据读取失败或扩展字段时 |
 | `lib/questie_source.py` | 从 ZIP/目录加载 Questie任务、中文名和WotLK经验数据库 | 更换插件来源或经验字段时 |
 | `lib/route_builder.py` | 历史逐日岛路线骨架解析、数据补全和输出 | 修改旧逐日岛生成逻辑时 |
-| `lib/simple_route.py` | 单页路线生成、前置闭包、地点合并和任务名着色 | 修改当前单页路线时 |
+| `lib/simple_route.py` | 单页路线生成、前置闭包、可选任务分离、详情重点渲染和距离反馈 | 修改当前单页路线时 |
 | `data/route-specs/simple-leveling-route.json` | 当前1—80地图阶段与人工审计步骤 | 调整任务顺序、炉石或实跑路段时 |
 | `data/route-specs/sunstrider-isle.json` | 历史逐日岛 V1 步骤骨架 | 调整旧路线时 |
 | `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
