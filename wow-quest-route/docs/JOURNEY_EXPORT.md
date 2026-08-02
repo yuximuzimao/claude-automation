@@ -14,7 +14,7 @@ C:\Program Files (x86)\World of Warcraft\_classic_titan_\WTF\Account
 定位最近修改的账号级 SavedVariables\Questie.lua。
 不要上传整个WTF，不要修改原文件。
 
-从 QuestieConfig 的 profiles 中定位我本次新建的血精灵圣骑士对应profile，判断依据：
+该文件是账号级容器。请从 `QuestieConfig.char` 的多个角色条目中定位我本次新建的血精灵圣骑士对应条目，不能把整个文件当作单一角色日志。判断依据：
 - 最近修改；
 - 低等级；
 - journey中包含任务8325、8326等逐日岛任务；
@@ -28,9 +28,9 @@ C:\Program Files (x86)\World of Warcraft\_classic_titan_\WTF\Account
 - 原始事件顺序index
 - complete任务ID集合
 
-删除账号名、服务器名、角色名、profileKey、GUID和所有其他配置。
+删除账号名、服务器名、角色名、`profileKeys`、角色键、GUID和所有其他配置。
 将文件放到bridge目录。
-如果找不到2026年的记录，列出每个候选profile的最新时间、最低/最高等级和是否包含8325，但仍不得输出角色名。
+如果找不到2026年的记录，列出每个候选角色条目的最新时间、最低/最高等级和是否包含8325，但仍不得输出角色名或角色键。
 ```
 
 3. 把生成的 `journey-current-sanitized.json` 放到bridge目录并告知ChatGPT。

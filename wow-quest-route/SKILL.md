@@ -16,6 +16,9 @@
 | `lib/world_builder.py` | 按角色配置生成圣骑士/死亡骑士全区域候选任务库 | 修改种族职业过滤或区域候选时 |
 | `lib/world_review.py` | 将死亡骑士55—80全任务合并为当前样式单页 | 修改打金任务母版时 |
 | `data/route-specs/simple-leveling-route.json` | 首组圣骑士1—55实跑参考与历史1—80阶段 | 调整首组任务顺序、炉石或实跑路段时 |
+| `data/journey/current-paladin.json` | 当前账号级日志中最新角色条目的脱敏历程 | 对比实跑顺序或继续追加历程时 |
+| `data/journey/2026-07-31-account-journey-analysis.md` | 6—20级历程、保存点差异、长空档与放弃任务分析 | 复盘本轮死亡和路线问题时 |
+| `data/journey/account-container-audit.md` | Questie账号级容器、`char`条目和脱敏边界 | 再次导入账号级日志时 |
 | `data/observations/blocked-tasks.json` | 无法进入、无法接交、服务器位面异常任务 | 用户反馈阻断时必须更新 |
 | `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
 | `data/routes/dk-55-80-world-tasks.html` | 当前死亡骑士主任务母版 | 审阅55—80全任务覆盖时 |
@@ -32,7 +35,7 @@
 `用户异常记录 → blocked-tasks/lessons/人物历程 → 修正任务或地图步骤 → 重新生成 → 下一组死亡骑士复跑验证`
 
 ### 人物历程
-`脱敏 Questie SavedVariables → 接取/完成事件 → 与候选路线对比 → 定位回头路和遗漏`
+`账号级 QuestieConfig.char[*].journey → 脱敏接取/完成事件 → 与候选路线对比 → 定位回头路和遗漏`
 
 ## FAILURE PATTERNS
 - 不把 Questie 地图坐标当成道路导航；山、桥、洞穴和跟随卡点必须实测。

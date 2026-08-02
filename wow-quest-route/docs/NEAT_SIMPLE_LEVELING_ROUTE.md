@@ -21,6 +21,14 @@
 - 用户详情继续只显示经验、前置、地点、重点目标、流程与必要提醒；Questie静态坐标不能替代道路、洞穴入口、建筑楼层和服务器状态。
 - 两份页面都必须执行Python编译、单元测试和页面JavaScript语法检查，并使用独立浏览器存储键保存勾选进度。
 
+## N3 — 已验证路线小文档入口
+
+- 当前节点、通用生成规则和逐段实跑结果已迁移到`docs/verified-routes/`；本NEAT只保留项目级生成审计，不再堆积持续变化的逐任务细节。
+- 新对话先读`docs/verified-routes/README.md`，再读`CURRENT.md`、`RULES.md`和当前等级相邻的一份`segments/*.md`。
+- 五开等级与经验始终以五个角色中等级/经验最低的角色为准；HTML只保留历史参考，执行路线使用短分区任务单。
+- 2026-08-02已完成24—25级石爪收尾与塔伦米尔转场归档，详见`docs/verified-routes/segments/24-25-stonetalon-capitals-tarren.md`；飞行点长期状态独立维护在`docs/verified-routes/FLIGHT-POINTS.md`。
+- 同日已归档25—26级希尔斯布莱德农场、镇政厅、矿洞和辛迪加实跑，详见`docs/verified-routes/segments/25-26-hillsbrad-farms-mine-syndicate.md`；本次路线错误与输出规范复盘见`docs/verified-routes/sessions/2026-08-02-hillsbrad-neat.md`。
+
 ## E — 使用的数据
 
 - Questie：v11.32.3，SHA256 `067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228`。
