@@ -1,0 +1,121 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-1519-candidate",
+  "title": "暴风城（Stormwind City）坐标导航候选版",
+  "output_basename": "zone-1519",
+  "zone": "暴风城",
+  "zone_en": "Stormwind City",
+  "map_area_id": 1519,
+  "quest_zone_or_sort": 1519,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "黑爪加尔德斯周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "交付",
+      "quest_ids": [
+        24428
+      ],
+      "quests": [
+        {
+          "quest_id": 24428,
+          "name": "诡秘的事件",
+          "raw_name": "A Most Puzzling Circumstance",
+          "required_level": 80,
+          "quest_level": 80,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1519,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将奥妮克希亚的头颅交给黑爪加尔德斯。他就在已宰的羔羊旅店的地下室里。"
+        }
+      ],
+      "instruction": "到黑爪加尔德斯处交付：诡秘的事件。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 40.14,
+          "y": 85.31
+        },
+        "entities": [
+          {
+            "id": 1435,
+            "kind": "npc",
+            "name": "黑爪加尔德斯",
+            "coordinates": [
+              {
+                "x": 40.14,
+                "y": 85.31
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.14,
+                "y": 85.31
+              },
+              "bounds": {
+                "min_x": 40.14,
+                "max_x": 40.14,
+                "min_y": 85.31,
+                "max_y": 85.31
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 24428,
+      "name": "诡秘的事件",
+      "raw_name": "A Most Puzzling Circumstance",
+      "required_level": 80,
+      "quest_level": 80,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1519,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将奥妮克希亚的头颅交给黑爪加尔德斯。他就在已宰的羔羊旅店的地下室里。"
+    }
+  ],
+  "fivebox_observations": {
+    "24428": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 1,
+    "min_level": 80,
+    "max_level": 80
+  }
+}

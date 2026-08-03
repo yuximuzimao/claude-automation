@@ -1,0 +1,2191 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-40-candidate",
+  "title": "西部荒野（Westfall）坐标导航候选版",
+  "output_basename": "zone-40",
+  "zone": "西部荒野",
+  "zone_en": "Westfall",
+  "map_area_id": 40,
+  "quest_zone_or_sort": 40,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "葛瑞森船长周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "滩行鱼人周边",
+      "steps": [
+        2,
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "葛瑞森船长周边",
+      "steps": [
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "Captain's Footlocker周边",
+      "steps": [
+        6,
+        7,
+        8
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "Old Jug周边",
+      "steps": [
+        9,
+        10,
+        11
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "F",
+      "title": "葛瑞森船长周边",
+      "steps": [
+        12,
+        13,
+        14
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        103,
+        152
+      ],
+      "quests": [
+        {
+          "quest_id": 103,
+          "name": "长明的灯塔",
+          "raw_name": "Keeper of the Flame",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给西部荒野灯塔中的葛瑞森船长带回5瓶灯油。"
+        },
+        {
+          "quest_id": 152,
+          "name": "清理海岸",
+          "raw_name": "The Coast Isn't Clear",
+          "required_level": 10,
+          "quest_level": 19,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7只鱼人潮行者、7只鱼人战士、7只鱼人智者，还有7只鱼人滩行者，然后向西部荒野灯塔中的葛瑞森船长复命。"
+        }
+      ],
+      "instruction": "到葛瑞森船长处接取：长明的灯塔、清理海岸。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 30.01,
+          "y": 86.02
+        },
+        "entities": [
+          {
+            "id": 392,
+            "kind": "npc",
+            "name": "葛瑞森船长",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 86.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.01,
+                "y": 86.02
+              },
+              "bounds": {
+                "min_x": 30.01,
+                "max_x": 30.01,
+                "min_y": 86.02,
+                "max_y": 86.02
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        152
+      ],
+      "quests": [
+        {
+          "quest_id": 152,
+          "name": "清理海岸",
+          "raw_name": "The Coast Isn't Clear",
+          "required_level": 10,
+          "quest_level": 19,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7只鱼人潮行者、7只鱼人战士、7只鱼人智者，还有7只鱼人滩行者，然后向西部荒野灯塔中的葛瑞森船长复命。"
+        }
+      ],
+      "instruction": "在滩行鱼人、鱼人战士、潮行鱼人、鱼人智者周边完成：清理海岸。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 28.174999999999997,
+          "y": 51.46
+        },
+        "entities": [
+          {
+            "id": 126,
+            "kind": "npc",
+            "name": "滩行鱼人",
+            "coordinates": [
+              {
+                "x": 43.92,
+                "y": 7.93
+              },
+              {
+                "x": 44.9,
+                "y": 8.18
+              },
+              {
+                "x": 53.24,
+                "y": 11.12
+              },
+              {
+                "x": 53.13,
+                "y": 8.86
+              },
+              {
+                "x": 54.11,
+                "y": 9.58
+              },
+              {
+                "x": 45.37,
+                "y": 8.21
+              },
+              {
+                "x": 55.91,
+                "y": 7.58
+              },
+              {
+                "x": 44.47,
+                "y": 8.75
+              },
+              {
+                "x": 42.0,
+                "y": 12.12
+              },
+              {
+                "x": 47.41,
+                "y": 9.38
+              },
+              {
+                "x": 47.38,
+                "y": 9.94
+              },
+              {
+                "x": 44.69,
+                "y": 7.87
+              },
+              {
+                "x": 42.48,
+                "y": 12.34
+              },
+              {
+                "x": 42.7,
+                "y": 12.33
+              },
+              {
+                "x": 56.47,
+                "y": 8.81
+              },
+              {
+                "x": 41.97,
+                "y": 9.71
+              },
+              {
+                "x": 43.23,
+                "y": 8.14
+              },
+              {
+                "x": 42.78,
+                "y": 8.99
+              },
+              {
+                "x": 53.42,
+                "y": 11.2
+              },
+              {
+                "x": 45.02,
+                "y": 8.89
+              },
+              {
+                "x": 42.54,
+                "y": 11.38
+              },
+              {
+                "x": 55.72,
+                "y": 8.95
+              },
+              {
+                "x": 56.28,
+                "y": 9.59
+              },
+              {
+                "x": 55.78,
+                "y": 8.15
+              },
+              {
+                "x": 51.99,
+                "y": 9.26
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 45.37,
+                "y": 8.99
+              },
+              "bounds": {
+                "min_x": 41.97,
+                "max_x": 56.47,
+                "min_y": 7.58,
+                "max_y": 12.34
+              },
+              "spawn_count": 25
+            }
+          },
+          {
+            "id": 171,
+            "kind": "npc",
+            "name": "鱼人战士",
+            "coordinates": [
+              {
+                "x": 29.26,
+                "y": 32.94
+              },
+              {
+                "x": 31.76,
+                "y": 26.12
+              },
+              {
+                "x": 26.52,
+                "y": 40.58
+              },
+              {
+                "x": 27.69,
+                "y": 39.08
+              },
+              {
+                "x": 28.8,
+                "y": 35.47
+              },
+              {
+                "x": 28.98,
+                "y": 35.57
+              },
+              {
+                "x": 28.42,
+                "y": 33.41
+              },
+              {
+                "x": 28.44,
+                "y": 32.85
+              },
+              {
+                "x": 28.36,
+                "y": 32.99
+              },
+              {
+                "x": 29.37,
+                "y": 27.27
+              },
+              {
+                "x": 30.42,
+                "y": 26.66
+              },
+              {
+                "x": 29.39,
+                "y": 28.62
+              },
+              {
+                "x": 28.99,
+                "y": 27.64
+              },
+              {
+                "x": 25.34,
+                "y": 48.01
+              },
+              {
+                "x": 24.62,
+                "y": 48.33
+              },
+              {
+                "x": 24.72,
+                "y": 48.89
+              },
+              {
+                "x": 25.24,
+                "y": 49.79
+              },
+              {
+                "x": 26.01,
+                "y": 47.4
+              },
+              {
+                "x": 32.18,
+                "y": 26.65
+              },
+              {
+                "x": 29.02,
+                "y": 34.03
+              },
+              {
+                "x": 26.69,
+                "y": 38.13
+              },
+              {
+                "x": 27.72,
+                "y": 33.68
+              },
+              {
+                "x": 28.2,
+                "y": 33.18
+              },
+              {
+                "x": 28.33,
+                "y": 29.42
+              },
+              {
+                "x": 28.26,
+                "y": 28.19
+              },
+              {
+                "x": 24.99,
+                "y": 48.88
+              },
+              {
+                "x": 25.91,
+                "y": 50.07
+              },
+              {
+                "x": 25.79,
+                "y": 47.95
+              },
+              {
+                "x": 26.15,
+                "y": 49.53
+              },
+              {
+                "x": 35.37,
+                "y": 21.8
+              },
+              {
+                "x": 29.16,
+                "y": 31.86
+              },
+              {
+                "x": 35.65,
+                "y": 20.76
+              },
+              {
+                "x": 34.9,
+                "y": 20.92
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 28.36,
+                "y": 33.41
+              },
+              "bounds": {
+                "min_x": 24.62,
+                "max_x": 35.65,
+                "min_y": 20.76,
+                "max_y": 50.07
+              },
+              "spawn_count": 33
+            }
+          },
+          {
+            "id": 127,
+            "kind": "npc",
+            "name": "潮行鱼人",
+            "coordinates": [
+              {
+                "x": 28.44,
+                "y": 70.33
+              },
+              {
+                "x": 26.85,
+                "y": 73.17
+              },
+              {
+                "x": 25.9,
+                "y": 73.72
+              },
+              {
+                "x": 27.93,
+                "y": 74.54
+              },
+              {
+                "x": 26.63,
+                "y": 73.84
+              },
+              {
+                "x": 26.22,
+                "y": 71.7
+              },
+              {
+                "x": 26.46,
+                "y": 74.78
+              },
+              {
+                "x": 27.99,
+                "y": 69.19
+              },
+              {
+                "x": 28.19,
+                "y": 69.29
+              },
+              {
+                "x": 34.14,
+                "y": 86.33
+              },
+              {
+                "x": 34.58,
+                "y": 84.31
+              },
+              {
+                "x": 34.85,
+                "y": 84.49
+              },
+              {
+                "x": 34.77,
+                "y": 84.22
+              },
+              {
+                "x": 25.51,
+                "y": 74.04
+              },
+              {
+                "x": 26.77,
+                "y": 72.12
+              },
+              {
+                "x": 27.06,
+                "y": 71.73
+              },
+              {
+                "x": 26.59,
+                "y": 71.99
+              },
+              {
+                "x": 27.99,
+                "y": 75.67
+              },
+              {
+                "x": 35.35,
+                "y": 84.24
+              },
+              {
+                "x": 35.05,
+                "y": 85.29
+              },
+              {
+                "x": 35.04,
+                "y": 85.41
+              },
+              {
+                "x": 34.58,
+                "y": 86.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 27.99,
+                "y": 74.29
+              },
+              "bounds": {
+                "min_x": 25.51,
+                "max_x": 35.35,
+                "min_y": 69.19,
+                "max_y": 86.33
+              },
+              "spawn_count": 22
+            }
+          },
+          {
+            "id": 517,
+            "kind": "npc",
+            "name": "鱼人智者",
+            "coordinates": [
+              {
+                "x": 27.72,
+                "y": 68.77
+              },
+              {
+                "x": 26.97,
+                "y": 55.34
+              },
+              {
+                "x": 26.92,
+                "y": 54.21
+              },
+              {
+                "x": 33.75,
+                "y": 83.18
+              },
+              {
+                "x": 27.69,
+                "y": 70.02
+              },
+              {
+                "x": 26.76,
+                "y": 70.21
+              },
+              {
+                "x": 27.39,
+                "y": 52.47
+              },
+              {
+                "x": 26.12,
+                "y": 74.44
+              },
+              {
+                "x": 28.03,
+                "y": 73.06
+              },
+              {
+                "x": 27.11,
+                "y": 72.74
+              },
+              {
+                "x": 26.0,
+                "y": 72.25
+              },
+              {
+                "x": 27.93,
+                "y": 59.99
+              },
+              {
+                "x": 28.17,
+                "y": 69.0
+              },
+              {
+                "x": 26.81,
+                "y": 59.46
+              },
+              {
+                "x": 26.09,
+                "y": 58.99
+              },
+              {
+                "x": 26.92,
+                "y": 53.44
+              },
+              {
+                "x": 27.26,
+                "y": 58.75
+              },
+              {
+                "x": 27.28,
+                "y": 75.54
+              },
+              {
+                "x": 26.08,
+                "y": 73.65
+              },
+              {
+                "x": 27.18,
+                "y": 74.38
+              },
+              {
+                "x": 23.66,
+                "y": 57.09
+              },
+              {
+                "x": 33.93,
+                "y": 84.84
+              },
+              {
+                "x": 26.69,
+                "y": 58.18
+              },
+              {
+                "x": 27.53,
+                "y": 53.64
+              },
+              {
+                "x": 34.6,
+                "y": 85.32
+              },
+              {
+                "x": 27.74,
+                "y": 52.89
+              },
+              {
+                "x": 33.66,
+                "y": 84.36
+              },
+              {
+                "x": 34.54,
+                "y": 85.94
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 27.27,
+                "y": 69.51
+              },
+              "bounds": {
+                "min_x": 23.66,
+                "max_x": 34.6,
+                "min_y": 52.47,
+                "max_y": 85.94
+              },
+              "spawn_count": 28
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "完成目标",
+      "quest_ids": [
+        103
+      ],
+      "quests": [
+        {
+          "quest_id": 103,
+          "name": "长明的灯塔",
+          "raw_name": "Keeper of the Flame",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给西部荒野灯塔中的葛瑞森船长带回5瓶灯油。"
+        }
+      ],
+      "instruction": "在Flask of Oil来源：麦田傀儡、Flask of Oil来源：看守傀儡、Flask of Oil来源：收割傀儡、Flask of Oil来源：生锈的麦田傀儡等5个目标周边完成：长明的灯塔。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 48.59,
+          "y": 36.23
+        },
+        "entities": [
+          {
+            "id": 36,
+            "kind": "npc",
+            "name": "Flask of Oil来源：麦田傀儡",
+            "coordinates": [
+              {
+                "x": 47.11,
+                "y": 67.64
+              },
+              {
+                "x": 35.81,
+                "y": 45.9
+              },
+              {
+                "x": 34.46,
+                "y": 46.05
+              },
+              {
+                "x": 32.51,
+                "y": 36.36
+              },
+              {
+                "x": 48.98,
+                "y": 33.82
+              },
+              {
+                "x": 32.92,
+                "y": 37.29
+              },
+              {
+                "x": 56.84,
+                "y": 35.72
+              },
+              {
+                "x": 36.13,
+                "y": 46.93
+              },
+              {
+                "x": 47.88,
+                "y": 33.47
+              },
+              {
+                "x": 46.54,
+                "y": 69.08
+              },
+              {
+                "x": 50.32,
+                "y": 33.96
+              },
+              {
+                "x": 34.33,
+                "y": 47.79
+              },
+              {
+                "x": 35.35,
+                "y": 47.2
+              },
+              {
+                "x": 33.42,
+                "y": 36.19
+              },
+              {
+                "x": 48.74,
+                "y": 32.34
+              },
+              {
+                "x": 47.46,
+                "y": 66.53
+              },
+              {
+                "x": 46.7,
+                "y": 65.92
+              },
+              {
+                "x": 46.87,
+                "y": 67.03
+              },
+              {
+                "x": 56.85,
+                "y": 34.26
+              },
+              {
+                "x": 33.56,
+                "y": 46.66
+              },
+              {
+                "x": 32.93,
+                "y": 35.52
+              },
+              {
+                "x": 57.29,
+                "y": 35.37
+              },
+              {
+                "x": 57.16,
+                "y": 33.97
+              },
+              {
+                "x": 56.52,
+                "y": 35.1
+              },
+              {
+                "x": 56.34,
+                "y": 35.94
+              },
+              {
+                "x": 56.97,
+                "y": 36.27
+              },
+              {
+                "x": 49.67,
+                "y": 32.97
+              },
+              {
+                "x": 48.67,
+                "y": 32.19
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.28,
+                "y": 36.23
+              },
+              "bounds": {
+                "min_x": 32.51,
+                "max_x": 57.29,
+                "min_y": 32.19,
+                "max_y": 69.08
+              },
+              "spawn_count": 28
+            }
+          },
+          {
+            "id": 114,
+            "kind": "npc",
+            "name": "Flask of Oil来源：看守傀儡",
+            "coordinates": [
+              {
+                "x": 38.0,
+                "y": 47.84
+              },
+              {
+                "x": 38.99,
+                "y": 54.81
+              },
+              {
+                "x": 49.88,
+                "y": 21.29
+              },
+              {
+                "x": 39.01,
+                "y": 49.31
+              },
+              {
+                "x": 50.09,
+                "y": 22.56
+              },
+              {
+                "x": 52.99,
+                "y": 23.11
+              },
+              {
+                "x": 40.76,
+                "y": 52.19
+              },
+              {
+                "x": 51.48,
+                "y": 24.89
+              },
+              {
+                "x": 38.14,
+                "y": 50.79
+              },
+              {
+                "x": 37.44,
+                "y": 49.32
+              },
+              {
+                "x": 50.98,
+                "y": 23.16
+              },
+              {
+                "x": 38.05,
+                "y": 53.51
+              },
+              {
+                "x": 36.14,
+                "y": 50.85
+              },
+              {
+                "x": 40.01,
+                "y": 50.99
+              },
+              {
+                "x": 39.14,
+                "y": 52.09
+              },
+              {
+                "x": 39.89,
+                "y": 53.5
+              },
+              {
+                "x": 52.01,
+                "y": 23.44
+              },
+              {
+                "x": 37.15,
+                "y": 52.26
+              },
+              {
+                "x": 51.7,
+                "y": 21.73
+              },
+              {
+                "x": 51.09,
+                "y": 20.12
+              },
+              {
+                "x": 43.65,
+                "y": 35.13
+              },
+              {
+                "x": 45.04,
+                "y": 33.28
+              },
+              {
+                "x": 45.61,
+                "y": 33.21
+              },
+              {
+                "x": 46.91,
+                "y": 35.12
+              },
+              {
+                "x": 45.9,
+                "y": 36.14
+              },
+              {
+                "x": 43.8,
+                "y": 36.52
+              },
+              {
+                "x": 53.9,
+                "y": 35.16
+              },
+              {
+                "x": 52.23,
+                "y": 32.39
+              },
+              {
+                "x": 54.01,
+                "y": 30.98
+              },
+              {
+                "x": 43.04,
+                "y": 36.02
+              },
+              {
+                "x": 54.35,
+                "y": 32.19
+              },
+              {
+                "x": 53.15,
+                "y": 30.63
+              },
+              {
+                "x": 53.29,
+                "y": 33.63
+              },
+              {
+                "x": 44.66,
+                "y": 37.98
+              },
+              {
+                "x": 55.29,
+                "y": 33.7
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 45.61,
+                "y": 35.13
+              },
+              "bounds": {
+                "min_x": 36.14,
+                "max_x": 55.29,
+                "min_y": 20.12,
+                "max_y": 54.81
+              },
+              "spawn_count": 35
+            }
+          },
+          {
+            "id": 115,
+            "kind": "npc",
+            "name": "Flask of Oil来源：收割傀儡",
+            "coordinates": [
+              {
+                "x": 65.74,
+                "y": 61.1
+              },
+              {
+                "x": 65.64,
+                "y": 62.08
+              },
+              {
+                "x": 64.61,
+                "y": 61.86
+              },
+              {
+                "x": 65.23,
+                "y": 61.27
+              },
+              {
+                "x": 60.92,
+                "y": 60.91
+              },
+              {
+                "x": 62.97,
+                "y": 57.68
+              },
+              {
+                "x": 62.29,
+                "y": 59.2
+              },
+              {
+                "x": 65.03,
+                "y": 60.33
+              },
+              {
+                "x": 63.64,
+                "y": 61.35
+              },
+              {
+                "x": 61.58,
+                "y": 62.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 64.12,
+                "y": 61.19
+              },
+              "bounds": {
+                "min_x": 60.92,
+                "max_x": 65.74,
+                "min_y": 57.68,
+                "max_y": 62.08
+              },
+              "spawn_count": 10
+            }
+          },
+          {
+            "id": 480,
+            "kind": "npc",
+            "name": "Flask of Oil来源：生锈的麦田傀儡",
+            "coordinates": [
+              {
+                "x": 53.9,
+                "y": 25.11
+              },
+              {
+                "x": 57.13,
+                "y": 21.18
+              },
+              {
+                "x": 55.32,
+                "y": 24.57
+              },
+              {
+                "x": 54.39,
+                "y": 25.59
+              },
+              {
+                "x": 57.41,
+                "y": 19.83
+              },
+              {
+                "x": 57.09,
+                "y": 20.08
+              },
+              {
+                "x": 54.37,
+                "y": 24.37
+              },
+              {
+                "x": 56.58,
+                "y": 20.99
+              },
+              {
+                "x": 54.98,
+                "y": 25.08
+              },
+              {
+                "x": 53.38,
+                "y": 25.56
+              },
+              {
+                "x": 53.42,
+                "y": 24.99
+              },
+              {
+                "x": 58.25,
+                "y": 16.64
+              },
+              {
+                "x": 59.06,
+                "y": 18.25
+              },
+              {
+                "x": 57.47,
+                "y": 18.15
+              },
+              {
+                "x": 58.19,
+                "y": 19.01
+              },
+              {
+                "x": 57.46,
+                "y": 20.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.84,
+                "y": 21.09
+              },
+              "bounds": {
+                "min_x": 53.38,
+                "max_x": 59.06,
+                "min_y": 16.64,
+                "max_y": 25.59
+              },
+              "spawn_count": 16
+            }
+          },
+          {
+            "id": 573,
+            "kind": "npc",
+            "name": "Flask of Oil来源：死神4000型",
+            "coordinates": [
+              {
+                "x": 44.82,
+                "y": 35.38
+              },
+              {
+                "x": 51.38,
+                "y": 68.38
+              },
+              {
+                "x": 50.52,
+                "y": 69.26
+              },
+              {
+                "x": 50.09,
+                "y": 67.11
+              },
+              {
+                "x": 47.67,
+                "y": 68.93
+              },
+              {
+                "x": 47.29,
+                "y": 67.04
+              },
+              {
+                "x": 46.4,
+                "y": 66.04
+              },
+              {
+                "x": 46.21,
+                "y": 63.24
+              },
+              {
+                "x": 53.94,
+                "y": 63.06
+              },
+              {
+                "x": 50.76,
+                "y": 65.24
+              },
+              {
+                "x": 40.61,
+                "y": 49.56
+              },
+              {
+                "x": 40.09,
+                "y": 51.93
+              },
+              {
+                "x": 38.39,
+                "y": 54.29
+              },
+              {
+                "x": 37.9,
+                "y": 52.0
+              },
+              {
+                "x": 36.03,
+                "y": 51.34
+              },
+              {
+                "x": 38.03,
+                "y": 49.4
+              },
+              {
+                "x": 33.24,
+                "y": 52.89
+              },
+              {
+                "x": 34.33,
+                "y": 51.3
+              },
+              {
+                "x": 44.47,
+                "y": 45.52
+              },
+              {
+                "x": 44.68,
+                "y": 38.92
+              },
+              {
+                "x": 43.92,
+                "y": 36.71
+              },
+              {
+                "x": 42.57,
+                "y": 35.49
+              },
+              {
+                "x": 44.7,
+                "y": 32.66
+              },
+              {
+                "x": 46.34,
+                "y": 33.36
+              },
+              {
+                "x": 46.94,
+                "y": 35.53
+              },
+              {
+                "x": 48.59,
+                "y": 30.1
+              },
+              {
+                "x": 49.24,
+                "y": 27.43
+              },
+              {
+                "x": 50.46,
+                "y": 26.61
+              },
+              {
+                "x": 51.39,
+                "y": 25.42
+              },
+              {
+                "x": 52.46,
+                "y": 22.89
+              },
+              {
+                "x": 51.09,
+                "y": 22.2
+              },
+              {
+                "x": 49.42,
+                "y": 21.94
+              },
+              {
+                "x": 50.66,
+                "y": 19.3
+              },
+              {
+                "x": 53.52,
+                "y": 27.56
+              },
+              {
+                "x": 54.3,
+                "y": 25.78
+              },
+              {
+                "x": 62.41,
+                "y": 58.04
+              },
+              {
+                "x": 63.78,
+                "y": 59.55
+              },
+              {
+                "x": 64.95,
+                "y": 61.32
+              },
+              {
+                "x": 63.38,
+                "y": 62.02
+              },
+              {
+                "x": 62.12,
+                "y": 62.38
+              },
+              {
+                "x": 61.25,
+                "y": 60.14
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.59,
+                "y": 51.3
+              },
+              "bounds": {
+                "min_x": 33.24,
+                "max_x": 64.95,
+                "min_y": 19.3,
+                "max_y": 69.26
+              },
+              "spawn_count": 41
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "交付",
+      "quest_ids": [
+        136
+      ],
+      "quests": [
+        {
+          "quest_id": 136,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 138,
+          "objective_text": "找到杉德尔船长的手提箱，在箱子中寻找下一条线索。"
+        }
+      ],
+      "instruction": "到Captain's Footlocker处交付：杉德尔船长的宝藏。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 25.91,
+          "y": 47.75
+        },
+        "entities": [
+          {
+            "id": 35,
+            "kind": "object",
+            "name": "Captain's Footlocker",
+            "coordinates": [
+              {
+                "x": 25.91,
+                "y": 47.75
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.91,
+                "y": 47.75
+              },
+              "bounds": {
+                "min_x": 25.91,
+                "max_x": 25.91,
+                "min_y": 47.75,
+                "max_y": 47.75
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "交付",
+      "quest_ids": [
+        103,
+        152
+      ],
+      "quests": [
+        {
+          "quest_id": 103,
+          "name": "长明的灯塔",
+          "raw_name": "Keeper of the Flame",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "给西部荒野灯塔中的葛瑞森船长带回5瓶灯油。"
+        },
+        {
+          "quest_id": 152,
+          "name": "清理海岸",
+          "raw_name": "The Coast Isn't Clear",
+          "required_level": 10,
+          "quest_level": 19,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死7只鱼人潮行者、7只鱼人战士、7只鱼人智者，还有7只鱼人滩行者，然后向西部荒野灯塔中的葛瑞森船长复命。"
+        }
+      ],
+      "instruction": "到葛瑞森船长处交付：长明的灯塔、清理海岸。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 30.01,
+          "y": 86.02
+        },
+        "entities": [
+          {
+            "id": 392,
+            "kind": "npc",
+            "name": "葛瑞森船长",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 86.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.01,
+                "y": 86.02
+              },
+              "bounds": {
+                "min_x": 30.01,
+                "max_x": 30.01,
+                "min_y": 86.02,
+                "max_y": 86.02
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "接取",
+      "quest_ids": [
+        138
+      ],
+      "quests": [
+        {
+          "quest_id": 138,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            136
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 139,
+          "objective_text": "找到废弃烟囱旁的老木桶，在桶里寻找下一条线索。"
+        }
+      ],
+      "instruction": "到Captain's Footlocker处接取：杉德尔船长的宝藏。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 25.91,
+          "y": 47.75
+        },
+        "entities": [
+          {
+            "id": 35,
+            "kind": "object",
+            "name": "Captain's Footlocker",
+            "coordinates": [
+              {
+                "x": 25.91,
+                "y": 47.75
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.91,
+                "y": 47.75
+              },
+              "bounds": {
+                "min_x": 25.91,
+                "max_x": 25.91,
+                "min_y": 47.75,
+                "max_y": 47.75
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        138
+      ],
+      "quests": [
+        {
+          "quest_id": 138,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            136
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 139,
+          "objective_text": "找到废弃烟囱旁的老木桶，在桶里寻找下一条线索。"
+        }
+      ],
+      "instruction": "到Broken Barrel处交付：杉德尔船长的宝藏。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 40.52,
+          "y": 47.79
+        },
+        "entities": [
+          {
+            "id": 36,
+            "kind": "object",
+            "name": "Broken Barrel",
+            "coordinates": [
+              {
+                "x": 40.52,
+                "y": 47.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.52,
+                "y": 47.79
+              },
+              "bounds": {
+                "min_x": 40.52,
+                "max_x": 40.52,
+                "min_y": 47.79,
+                "max_y": 47.79
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        139
+      ],
+      "quests": [
+        {
+          "quest_id": 139,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            138
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 140,
+          "objective_text": "在风车旁的一个空水罐里寻找下一条线索。"
+        }
+      ],
+      "instruction": "到Broken Barrel处接取：杉德尔船长的宝藏。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 40.52,
+          "y": 47.79
+        },
+        "entities": [
+          {
+            "id": 36,
+            "kind": "object",
+            "name": "Broken Barrel",
+            "coordinates": [
+              {
+                "x": 40.52,
+                "y": 47.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.52,
+                "y": 47.79
+              },
+              "bounds": {
+                "min_x": 40.52,
+                "max_x": 40.52,
+                "min_y": 47.79,
+                "max_y": 47.79
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        139
+      ],
+      "quests": [
+        {
+          "quest_id": 139,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            138
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 140,
+          "objective_text": "在风车旁的一个空水罐里寻找下一条线索。"
+        }
+      ],
+      "instruction": "到Old Jug处交付：杉德尔船长的宝藏。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 40.63,
+          "y": 17.03
+        },
+        "entities": [
+          {
+            "id": 34,
+            "kind": "object",
+            "name": "Old Jug",
+            "coordinates": [
+              {
+                "x": 40.63,
+                "y": 17.03
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.63,
+                "y": 17.03
+              },
+              "bounds": {
+                "min_x": 40.63,
+                "max_x": 40.63,
+                "min_y": 17.03,
+                "max_y": 17.03
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "接取",
+      "quest_ids": [
+        140
+      ],
+      "quests": [
+        {
+          "quest_id": 140,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            139
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到杉德尔船长的箱子并打开它，取得你的奖励。"
+        }
+      ],
+      "instruction": "到Old Jug处接取：杉德尔船长的宝藏。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 40.63,
+          "y": 17.03
+        },
+        "entities": [
+          {
+            "id": 34,
+            "kind": "object",
+            "name": "Old Jug",
+            "coordinates": [
+              {
+                "x": 40.63,
+                "y": 17.03
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.63,
+                "y": 17.03
+              },
+              "bounds": {
+                "min_x": 40.63,
+                "max_x": 40.63,
+                "min_y": 17.03,
+                "max_y": 17.03
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "交付",
+      "quest_ids": [
+        140
+      ],
+      "quests": [
+        {
+          "quest_id": 140,
+          "name": "杉德尔船长的宝藏",
+          "raw_name": "Captain Sanders' Hidden Treasure",
+          "required_level": 10,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [
+            139
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到杉德尔船长的箱子并打开它，取得你的奖励。"
+        }
+      ],
+      "instruction": "到Locked Chest处交付：杉德尔船长的宝藏。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 25.97,
+          "y": 16.91
+        },
+        "entities": [
+          {
+            "id": 33,
+            "kind": "object",
+            "name": "Locked Chest",
+            "coordinates": [
+              {
+                "x": 25.97,
+                "y": 16.91
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 25.97,
+                "y": 16.91
+              },
+              "bounds": {
+                "min_x": 25.97,
+                "max_x": 25.97,
+                "min_y": 16.91,
+                "max_y": 16.91
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "接取",
+      "quest_ids": [
+        104
+      ],
+      "quests": [
+        {
+          "quest_id": 104,
+          "name": "海岸上的威胁",
+          "raw_name": "The Coastal Menace",
+          "required_level": 15,
+          "quest_level": 20,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将老瞎眼的鳞片交给西部荒野灯塔旁的葛瑞森船长。"
+        }
+      ],
+      "instruction": "到葛瑞森船长处接取：海岸上的威胁。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 30.01,
+          "y": 86.02
+        },
+        "entities": [
+          {
+            "id": 392,
+            "kind": "npc",
+            "name": "葛瑞森船长",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 86.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.01,
+                "y": 86.02
+              },
+              "bounds": {
+                "min_x": 30.01,
+                "max_x": 30.01,
+                "min_y": 86.02,
+                "max_y": 86.02
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 13,
+      "action": "完成目标",
+      "quest_ids": [
+        104
+      ],
+      "quests": [
+        {
+          "quest_id": 104,
+          "name": "海岸上的威胁",
+          "raw_name": "The Coastal Menace",
+          "required_level": 15,
+          "quest_level": 20,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将老瞎眼的鳞片交给西部荒野灯塔旁的葛瑞森船长。"
+        }
+      ],
+      "instruction": "在Scale of Old Murk-Eye来源：老瞎眼周边完成：海岸上的威胁。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 29.27,
+          "y": 75.95
+        },
+        "entities": [
+          {
+            "id": 391,
+            "kind": "npc",
+            "name": "Scale of Old Murk-Eye来源：老瞎眼",
+            "coordinates": [
+              {
+                "x": 29.27,
+                "y": 75.95
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 29.27,
+                "y": 75.95
+              },
+              "bounds": {
+                "min_x": 29.27,
+                "max_x": 29.27,
+                "min_y": 75.95,
+                "max_y": 75.95
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "action": "交付",
+      "quest_ids": [
+        104
+      ],
+      "quests": [
+        {
+          "quest_id": 104,
+          "name": "海岸上的威胁",
+          "raw_name": "The Coastal Menace",
+          "required_level": 15,
+          "quest_level": 20,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 40,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将老瞎眼的鳞片交给西部荒野灯塔旁的葛瑞森船长。"
+        }
+      ],
+      "instruction": "到葛瑞森船长处交付：海岸上的威胁。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 30.01,
+          "y": 86.02
+        },
+        "entities": [
+          {
+            "id": 392,
+            "kind": "npc",
+            "name": "葛瑞森船长",
+            "coordinates": [
+              {
+                "x": 30.01,
+                "y": 86.02
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 30.01,
+                "y": 86.02
+              },
+              "bounds": {
+                "min_x": 30.01,
+                "max_x": 30.01,
+                "min_y": 86.02,
+                "max_y": 86.02
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 103,
+      "name": "长明的灯塔",
+      "raw_name": "Keeper of the Flame",
+      "required_level": 10,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "给西部荒野灯塔中的葛瑞森船长带回5瓶灯油。"
+    },
+    {
+      "quest_id": 104,
+      "name": "海岸上的威胁",
+      "raw_name": "The Coastal Menace",
+      "required_level": 15,
+      "quest_level": 20,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将老瞎眼的鳞片交给西部荒野灯塔旁的葛瑞森船长。"
+    },
+    {
+      "quest_id": 136,
+      "name": "杉德尔船长的宝藏",
+      "raw_name": "Captain Sanders' Hidden Treasure",
+      "required_level": 10,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 138,
+      "objective_text": "找到杉德尔船长的手提箱，在箱子中寻找下一条线索。"
+    },
+    {
+      "quest_id": 138,
+      "name": "杉德尔船长的宝藏",
+      "raw_name": "Captain Sanders' Hidden Treasure",
+      "required_level": 10,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [
+        136
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 139,
+      "objective_text": "找到废弃烟囱旁的老木桶，在桶里寻找下一条线索。"
+    },
+    {
+      "quest_id": 139,
+      "name": "杉德尔船长的宝藏",
+      "raw_name": "Captain Sanders' Hidden Treasure",
+      "required_level": 10,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [
+        138
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 140,
+      "objective_text": "在风车旁的一个空水罐里寻找下一条线索。"
+    },
+    {
+      "quest_id": 140,
+      "name": "杉德尔船长的宝藏",
+      "raw_name": "Captain Sanders' Hidden Treasure",
+      "required_level": 10,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [
+        139
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "找到杉德尔船长的箱子并打开它，取得你的奖励。"
+    },
+    {
+      "quest_id": 152,
+      "name": "清理海岸",
+      "raw_name": "The Coast Isn't Clear",
+      "required_level": 10,
+      "quest_level": 19,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 40,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "杀死7只鱼人潮行者、7只鱼人战士、7只鱼人智者，还有7只鱼人滩行者，然后向西部荒野灯塔中的葛瑞森船长复命。"
+    }
+  ],
+  "fivebox_observations": {
+    "103": {
+      "status": "not_classified"
+    },
+    "104": {
+      "status": "not_classified"
+    },
+    "136": {
+      "status": "not_classified"
+    },
+    "138": {
+      "status": "not_classified"
+    },
+    "139": {
+      "status": "not_classified"
+    },
+    "140": {
+      "status": "not_classified"
+    },
+    "152": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 7,
+    "step_count": 14,
+    "min_level": 10,
+    "max_level": 15
+  }
+}

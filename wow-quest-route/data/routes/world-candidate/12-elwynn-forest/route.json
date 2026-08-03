@@ -1,0 +1,560 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-12-candidate",
+  "title": "艾尔文森林（Elwynn Forest）坐标导航候选版",
+  "output_basename": "zone-12",
+  "zone": "艾尔文森林",
+  "zone_en": "Elwynn Forest",
+  "map_area_id": 12,
+  "quest_zone_or_sort": 12,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "狗头人歹徒周边",
+      "steps": [
+        1,
+        2
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "完成目标",
+      "quest_ids": [
+        14032
+      ],
+      "quests": [
+        {
+          "quest_id": 14032,
+          "name": "清剿狗头人营地",
+          "raw_name": "Kobold Camp Cleanup",
+          "required_level": 1,
+          "quest_level": 2,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 9,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "消灭8个狗头人歹徒，然后回去见治安官玛克布莱德。"
+        }
+      ],
+      "instruction": "在狗头人歹徒、鱼人强盗周边完成：清剿狗头人营地。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 63.71,
+          "y": 46.230000000000004
+        },
+        "entities": [
+          {
+            "id": 6,
+            "kind": "npc",
+            "name": "狗头人歹徒",
+            "coordinates": [
+              {
+                "x": 48.89,
+                "y": 36.44
+              },
+              {
+                "x": 49.55,
+                "y": 36.06
+              },
+              {
+                "x": 49.27,
+                "y": 37.05
+              },
+              {
+                "x": 48.1,
+                "y": 36.96
+              },
+              {
+                "x": 48.37,
+                "y": 36.59
+              },
+              {
+                "x": 49.32,
+                "y": 35.81
+              },
+              {
+                "x": 48.87,
+                "y": 35.14
+              },
+              {
+                "x": 49.87,
+                "y": 36.3
+              },
+              {
+                "x": 48.52,
+                "y": 36.13
+              },
+              {
+                "x": 46.93,
+                "y": 35.67
+              },
+              {
+                "x": 47.58,
+                "y": 35.94
+              },
+              {
+                "x": 47.65,
+                "y": 36.91
+              },
+              {
+                "x": 47.86,
+                "y": 36.26
+              },
+              {
+                "x": 47.57,
+                "y": 36.37
+              },
+              {
+                "x": 47.62,
+                "y": 35.75
+              },
+              {
+                "x": 47.67,
+                "y": 34.92
+              },
+              {
+                "x": 47.22,
+                "y": 36.0
+              },
+              {
+                "x": 47.95,
+                "y": 35.4
+              },
+              {
+                "x": 49.79,
+                "y": 35.17
+              },
+              {
+                "x": 49.44,
+                "y": 35.34
+              },
+              {
+                "x": 50.04,
+                "y": 35.46
+              },
+              {
+                "x": 51.3,
+                "y": 36.5
+              },
+              {
+                "x": 51.61,
+                "y": 35.68
+              },
+              {
+                "x": 50.49,
+                "y": 37.61
+              },
+              {
+                "x": 50.98,
+                "y": 37.58
+              },
+              {
+                "x": 51.29,
+                "y": 37.43
+              },
+              {
+                "x": 51.36,
+                "y": 37.02
+              },
+              {
+                "x": 51.81,
+                "y": 36.94
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.08,
+                "y": 36.2
+              },
+              "bounds": {
+                "min_x": 46.93,
+                "max_x": 51.81,
+                "min_y": 34.92,
+                "max_y": 37.61
+              },
+              "spawn_count": 28
+            }
+          },
+          {
+            "id": 46,
+            "kind": "npc",
+            "name": "鱼人强盗",
+            "coordinates": [
+              {
+                "x": 68.64,
+                "y": 85.46
+              },
+              {
+                "x": 68.62,
+                "y": 85.39
+              },
+              {
+                "x": 65.78,
+                "y": 84.42
+              },
+              {
+                "x": 64.73,
+                "y": 83.0
+              },
+              {
+                "x": 61.87,
+                "y": 80.56
+              },
+              {
+                "x": 56.36,
+                "y": 85.21
+              },
+              {
+                "x": 52.34,
+                "y": 86.73
+              },
+              {
+                "x": 57.0,
+                "y": 84.24
+              },
+              {
+                "x": 59.3,
+                "y": 82.43
+              },
+              {
+                "x": 61.17,
+                "y": 82.38
+              },
+              {
+                "x": 63.36,
+                "y": 82.8
+              },
+              {
+                "x": 67.93,
+                "y": 83.69
+              },
+              {
+                "x": 69.98,
+                "y": 84.08
+              },
+              {
+                "x": 76.72,
+                "y": 82.77
+              },
+              {
+                "x": 76.79,
+                "y": 85.94
+              },
+              {
+                "x": 76.6,
+                "y": 85.57
+              },
+              {
+                "x": 77.25,
+                "y": 85.18
+              },
+              {
+                "x": 77.56,
+                "y": 85.95
+              },
+              {
+                "x": 76.16,
+                "y": 84.87
+              },
+              {
+                "x": 77.78,
+                "y": 86.13
+              },
+              {
+                "x": 79.34,
+                "y": 57.2
+              },
+              {
+                "x": 79.26,
+                "y": 56.87
+              },
+              {
+                "x": 79.65,
+                "y": 55.22
+              },
+              {
+                "x": 79.43,
+                "y": 56.36
+              },
+              {
+                "x": 78.8,
+                "y": 55.73
+              },
+              {
+                "x": 78.44,
+                "y": 56.65
+              },
+              {
+                "x": 78.45,
+                "y": 56.16
+              },
+              {
+                "x": 78.93,
+                "y": 55.01
+              },
+              {
+                "x": 79.34,
+                "y": 54.08
+              },
+              {
+                "x": 79.24,
+                "y": 54.22
+              },
+              {
+                "x": 79.46,
+                "y": 50.74
+              },
+              {
+                "x": 79.42,
+                "y": 47.96
+              },
+              {
+                "x": 79.46,
+                "y": 48.2
+              },
+              {
+                "x": 79.16,
+                "y": 47.39
+              },
+              {
+                "x": 79.36,
+                "y": 47.7
+              },
+              {
+                "x": 80.31,
+                "y": 45.24
+              },
+              {
+                "x": 79.19,
+                "y": 45.21
+              },
+              {
+                "x": 79.12,
+                "y": 45.99
+              },
+              {
+                "x": 79.48,
+                "y": 45.36
+              },
+              {
+                "x": 79.34,
+                "y": 45.25
+              },
+              {
+                "x": 79.54,
+                "y": 47.18
+              },
+              {
+                "x": 79.51,
+                "y": 46.31
+              },
+              {
+                "x": 79.96,
+                "y": 46.28
+              },
+              {
+                "x": 78.83,
+                "y": 44.53
+              },
+              {
+                "x": 77.95,
+                "y": 45.11
+              },
+              {
+                "x": 78.6,
+                "y": 44.91
+              },
+              {
+                "x": 78.23,
+                "y": 44.87
+              },
+              {
+                "x": 79.47,
+                "y": 43.52
+              },
+              {
+                "x": 78.57,
+                "y": 43.17
+              },
+              {
+                "x": 77.9,
+                "y": 44.36
+              },
+              {
+                "x": 77.74,
+                "y": 44.28
+              },
+              {
+                "x": 77.31,
+                "y": 44.1
+              },
+              {
+                "x": 78.56,
+                "y": 42.09
+              },
+              {
+                "x": 79.39,
+                "y": 58.05
+              },
+              {
+                "x": 75.56,
+                "y": 86.58
+              },
+              {
+                "x": 76.27,
+                "y": 86.46
+              },
+              {
+                "x": 75.86,
+                "y": 85.94
+              },
+              {
+                "x": 74.74,
+                "y": 85.27
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 78.34,
+                "y": 56.26
+              },
+              "bounds": {
+                "min_x": 52.34,
+                "max_x": 80.31,
+                "min_y": 42.09,
+                "max_y": 86.73
+              },
+              "spawn_count": 58
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "交付",
+      "quest_ids": [
+        14079
+      ],
+      "quests": [
+        {
+          "quest_id": 14079,
+          "name": "驰骋在艾尔文森林",
+          "raw_name": "Learn to Ride in Elwynn Forest",
+          "required_level": 20,
+          "quest_level": 20,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 12,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将这本小册子交还给艾尔文森林东谷伐木场的兰达尔·亨特。"
+        }
+      ],
+      "instruction": "到兰达尔·亨特处交付：驰骋在艾尔文森林。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 84.32,
+          "y": 64.87
+        },
+        "entities": [
+          {
+            "id": 4732,
+            "kind": "npc",
+            "name": "兰达尔·亨特",
+            "coordinates": [
+              {
+                "x": 84.32,
+                "y": 64.87
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 84.32,
+                "y": 64.87
+              },
+              "bounds": {
+                "min_x": 84.32,
+                "max_x": 84.32,
+                "min_y": 64.87,
+                "max_y": 64.87
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 14032,
+      "name": "清剿狗头人营地",
+      "raw_name": "Kobold Camp Cleanup",
+      "required_level": 1,
+      "quest_level": 2,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 9,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "消灭8个狗头人歹徒，然后回去见治安官玛克布莱德。"
+    },
+    {
+      "quest_id": 14079,
+      "name": "驰骋在艾尔文森林",
+      "raw_name": "Learn to Ride in Elwynn Forest",
+      "required_level": 20,
+      "quest_level": 20,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 12,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将这本小册子交还给艾尔文森林东谷伐木场的兰达尔·亨特。"
+    }
+  ],
+  "fivebox_observations": {
+    "14032": {
+      "status": "not_classified"
+    },
+    "14079": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 2,
+    "step_count": 2,
+    "min_level": 1,
+    "max_level": 20
+  }
+}

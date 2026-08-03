@@ -1,0 +1,121 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-3524-candidate",
+  "title": "秘蓝岛（Azuremyst Isle）坐标导航候选版",
+  "output_basename": "zone-3524",
+  "zone": "秘蓝岛",
+  "zone_en": "Azuremyst Isle",
+  "map_area_id": 3524,
+  "quest_zone_or_sort": 3524,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "亚埃雷尔周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "交付",
+      "quest_ids": [
+        9278
+      ],
+      "quests": [
+        {
+          "quest_id": 9278,
+          "name": "欢迎！",
+          "raw_name": "Welcome!",
+          "required_level": 1,
+          "quest_level": 1,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 3526,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将碧蓝岗哨礼品券交给碧蓝岗哨的亚埃雷尔。"
+        }
+      ],
+      "instruction": "到亚埃雷尔处交付：欢迎！。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 49.11,
+          "y": 50.82
+        },
+        "entities": [
+          {
+            "id": 16476,
+            "kind": "npc",
+            "name": "亚埃雷尔",
+            "coordinates": [
+              {
+                "x": 49.11,
+                "y": 50.82
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.11,
+                "y": 50.82
+              },
+              "bounds": {
+                "min_x": 49.11,
+                "max_x": 49.11,
+                "min_y": 50.82,
+                "max_y": 50.82
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 9278,
+      "name": "欢迎！",
+      "raw_name": "Welcome!",
+      "required_level": 1,
+      "quest_level": 1,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 3526,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将碧蓝岗哨礼品券交给碧蓝岗哨的亚埃雷尔。"
+    }
+  ],
+  "fivebox_observations": {
+    "9278": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 1,
+    "min_level": 1,
+    "max_level": 1
+  }
+}

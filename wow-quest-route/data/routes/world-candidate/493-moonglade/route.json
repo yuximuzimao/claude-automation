@@ -1,0 +1,705 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-493-candidate",
+  "title": "月光林地（Moonglade）坐标导航候选版",
+  "output_basename": "zone-493",
+  "zone": "月光林地",
+  "zone_en": "Moonglade",
+  "map_area_id": 493,
+  "quest_zone_or_sort": 493,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "阿姆伯尔周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        6845
+      ],
+      "quests": [
+        {
+          "quest_id": 6845,
+          "name": "发现过去的秘密",
+          "raw_name": "Uncovering Past Secrets",
+          "required_level": 54,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            6844
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与月光林地永夜港的拉比恩·萨图纳谈一谈。"
+        }
+      ],
+      "instruction": "到阿姆伯尔处接取：发现过去的秘密。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.88,
+          "y": 35.6
+        },
+        "entities": [
+          {
+            "id": 11939,
+            "kind": "npc",
+            "name": "阿姆伯尔",
+            "coordinates": [
+              {
+                "x": 44.88,
+                "y": 35.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.88,
+                "y": 35.6
+              },
+              "bounds": {
+                "min_x": 44.88,
+                "max_x": 44.88,
+                "min_y": 35.6,
+                "max_y": 35.6
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        1124
+      ],
+      "quests": [
+        {
+          "quest_id": 1124,
+          "name": "废土",
+          "raw_name": "Wasteland",
+          "required_level": 54,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            1123,
+            6762
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1125,
+          "objective_text": "在希利苏斯的勇士之墓附近找莱耶·星击谈谈，把拉比恩的信交给他。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处接取：废土。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        6845
+      ],
+      "quests": [
+        {
+          "quest_id": 6845,
+          "name": "发现过去的秘密",
+          "raw_name": "Uncovering Past Secrets",
+          "required_level": 54,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            6844
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "与月光林地永夜港的拉比恩·萨图纳谈一谈。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处交付：发现过去的秘密。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        1185
+      ],
+      "quests": [
+        {
+          "quest_id": 1185,
+          "name": "壳中的东西...",
+          "raw_name": "Under the Chitin Was...",
+          "required_level": 54,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            6845
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到阿姆伯尔处接取：壳中的东西...。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 44.88,
+          "y": 35.6
+        },
+        "entities": [
+          {
+            "id": 11939,
+            "kind": "npc",
+            "name": "阿姆伯尔",
+            "coordinates": [
+              {
+                "x": 44.88,
+                "y": 35.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.88,
+                "y": 35.6
+              },
+              "bounds": {
+                "min_x": 44.88,
+                "max_x": 44.88,
+                "min_y": 35.6,
+                "max_y": 35.6
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "交付",
+      "quest_ids": [
+        1185
+      ],
+      "quests": [
+        {
+          "quest_id": 1185,
+          "name": "壳中的东西...",
+          "raw_name": "Under the Chitin Was...",
+          "required_level": 54,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            6845
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到阿姆伯尔处交付：壳中的东西...。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 44.88,
+          "y": 35.6
+        },
+        "entities": [
+          {
+            "id": 11939,
+            "kind": "npc",
+            "name": "阿姆伯尔",
+            "coordinates": [
+              {
+                "x": 44.88,
+                "y": 35.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.88,
+                "y": 35.6
+              },
+              "bounds": {
+                "min_x": 44.88,
+                "max_x": 44.88,
+                "min_y": 35.6,
+                "max_y": 35.6
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "接取",
+      "quest_ids": [
+        5527
+      ],
+      "quests": [
+        {
+          "quest_id": 5527,
+          "name": "净化之匣",
+          "raw_name": "A Reliquary of Purity",
+          "required_level": 56,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5526,
+          "objective_text": "到希利苏斯的南风村去寻找净化之匣。然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处接取：净化之匣。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "交付",
+      "quest_ids": [
+        5527
+      ],
+      "quests": [
+        {
+          "quest_id": 5527,
+          "name": "净化之匣",
+          "raw_name": "A Reliquary of Purity",
+          "required_level": 56,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5526,
+          "objective_text": "到希利苏斯的南风村去寻找净化之匣。然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处交付：净化之匣。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "接取",
+      "quest_ids": [
+        5526
+      ],
+      "quests": [
+        {
+          "quest_id": 5526,
+          "name": "魔藤碎片",
+          "raw_name": "Shards of the Felvine",
+          "required_level": 56,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            5527
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在厄运之槌中找到魔藤，然后从它上面采集一块碎片。只有干掉了奥兹恩之后，你才能进行采集工作。使用净化之匣安全地封印碎片，然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处接取：魔藤碎片。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        5526
+      ],
+      "quests": [
+        {
+          "quest_id": 5526,
+          "name": "魔藤碎片",
+          "raw_name": "Shards of the Felvine",
+          "required_level": 56,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 493,
+          "pre_single": [
+            5527
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在厄运之槌中找到魔藤，然后从它上面采集一块碎片。只有干掉了奥兹恩之后，你才能进行采集工作。使用净化之匣安全地封印碎片，然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+        }
+      ],
+      "instruction": "到拉比恩·萨图纳处交付：魔藤碎片。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.69,
+          "y": 45.1
+        },
+        "entities": [
+          {
+            "id": 11801,
+            "kind": "npc",
+            "name": "拉比恩·萨图纳",
+            "coordinates": [
+              {
+                "x": 51.69,
+                "y": 45.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.69,
+                "y": 45.1
+              },
+              "bounds": {
+                "min_x": 51.69,
+                "max_x": 51.69,
+                "min_y": 45.1,
+                "max_y": 45.1
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 1124,
+      "name": "废土",
+      "raw_name": "Wasteland",
+      "required_level": 54,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 493,
+      "pre_single": [
+        1123,
+        6762
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1125,
+      "objective_text": "在希利苏斯的勇士之墓附近找莱耶·星击谈谈，把拉比恩的信交给他。"
+    },
+    {
+      "quest_id": 1185,
+      "name": "壳中的东西...",
+      "raw_name": "Under the Chitin Was...",
+      "required_level": 54,
+      "quest_level": 57,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 493,
+      "pre_single": [
+        6845
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 5526,
+      "name": "魔藤碎片",
+      "raw_name": "Shards of the Felvine",
+      "required_level": 56,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 493,
+      "pre_single": [
+        5527
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在厄运之槌中找到魔藤，然后从它上面采集一块碎片。只有干掉了奥兹恩之后，你才能进行采集工作。使用净化之匣安全地封印碎片，然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+    },
+    {
+      "quest_id": 5527,
+      "name": "净化之匣",
+      "raw_name": "A Reliquary of Purity",
+      "required_level": 56,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 493,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5526,
+      "objective_text": "到希利苏斯的南风村去寻找净化之匣。然后将其交给月光林地永夜港的拉比恩·萨图纳。"
+    },
+    {
+      "quest_id": 6845,
+      "name": "发现过去的秘密",
+      "raw_name": "Uncovering Past Secrets",
+      "required_level": 54,
+      "quest_level": 57,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 493,
+      "pre_single": [
+        6844
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "与月光林地永夜港的拉比恩·萨图纳谈一谈。"
+    }
+  ],
+  "fivebox_observations": {
+    "1124": {
+      "status": "not_classified"
+    },
+    "1185": {
+      "status": "not_classified"
+    },
+    "5526": {
+      "status": "not_classified"
+    },
+    "5527": {
+      "status": "not_classified"
+    },
+    "6845": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 5,
+    "step_count": 9,
+    "min_level": 54,
+    "max_level": 56
+  }
+}

@@ -1,0 +1,6611 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-28-candidate",
+  "title": "西瘟疫之地（Western Plaguelands）坐标导航候选版",
+  "output_basename": "zone-28",
+  "zone": "西瘟疫之地",
+  "zone_en": "Western Plaguelands",
+  "map_area_id": 28,
+  "quest_zone_or_sort": 28,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "科尔斯塔·迪普沙东周边",
+      "steps": [
+        1,
+        2
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "詹妮丝·费尔斯通周边",
+      "steps": [
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "银色黎明军官普尔哈特周边",
+      "steps": [
+        5,
+        6
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "血色医者周边",
+      "steps": [
+        7,
+        8,
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "E",
+      "title": "银色黎明军官普尔哈特周边",
+      "steps": [
+        10
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "F",
+      "title": "科尔斯塔·迪普沙东周边",
+      "steps": [
+        11,
+        12
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "G",
+      "title": "Janice's Parcel周边",
+      "steps": [
+        13
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "H",
+      "title": "猎人莱德雷周边",
+      "steps": [
+        14,
+        15
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "I",
+      "title": "詹妮丝·费尔斯通周边",
+      "steps": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "J",
+      "title": "银色黎明军需官莱斯巴克周边",
+      "steps": [
+        25
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "K",
+      "title": "Mrs. Dalson's Diary周边",
+      "steps": [
+        26,
+        27,
+        28
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "L",
+      "title": "Head of Weldon Barov来源：维尔顿·巴罗夫周边",
+      "steps": [
+        29
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "M",
+      "title": "Mark of the Lightbringer来源：Holy Coffer周边",
+      "steps": [
+        30,
+        31
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "N",
+      "title": "穆格雷斯·深水周边",
+      "steps": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "O",
+      "title": "生病的灰熊周边",
+      "steps": [
+        41,
+        42,
+        43
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "P",
+      "title": "大领主泰兰·弗丁周边",
+      "steps": [
+        44
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "Q",
+      "title": "穆格雷斯·深水周边",
+      "steps": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "R",
+      "title": "耶兹巴周边",
+      "steps": [
+        54
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        6004
+      ],
+      "quests": [
+        {
+          "quest_id": 6004,
+          "name": "未竟的事业",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6023,
+          "objective_text": "杀死2个血色医护员、2个血色猎人、2个血色魔法师和2个血色骑士，然后回到西瘟疫之地的科尔斯塔·迪普沙东那儿。"
+        }
+      ],
+      "instruction": "到科尔斯塔·迪普沙东处接取：未竟的事业。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.92,
+          "y": 28.06
+        },
+        "entities": [
+          {
+            "id": 11610,
+            "kind": "npc",
+            "name": "科尔斯塔·迪普沙东",
+            "coordinates": [
+              {
+                "x": 51.92,
+                "y": 28.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.92,
+                "y": 28.06
+              },
+              "bounds": {
+                "min_x": 51.92,
+                "max_x": 51.92,
+                "min_y": 28.06,
+                "max_y": 28.06
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        6390
+      ],
+      "quests": [
+        {
+          "quest_id": 6390,
+          "name": "瘟疫与你",
+          "raw_name": "A Plague Upon Thee",
+          "required_level": 48,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5902
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "使用北山伐木场里的铁棍放出那里的瘟疫白蚁，然后向提瑞斯法林地亡灵壁垒的米克·莱文报告。"
+        }
+      ],
+      "instruction": "到Termite Barrel处接取：瘟疫与你。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 48.35,
+          "y": 32.0
+        },
+        "entities": [
+          {
+            "id": 177491,
+            "kind": "object",
+            "name": "Termite Barrel",
+            "coordinates": [
+              {
+                "x": 48.35,
+                "y": 32.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.35,
+                "y": 32.0
+              },
+              "bounds": {
+                "min_x": 48.35,
+                "max_x": 48.35,
+                "min_y": 32.0,
+                "max_y": 32.0
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "接取",
+      "quest_ids": [
+        5021
+      ],
+      "quests": [
+        {
+          "quest_id": 5021,
+          "name": "迟到总比不到好",
+          "raw_name": "Better Late Than Never",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "这个女人的幽灵告诉你她要送出一只包裹。她说那只包裹就在她的马旁边。至于马在哪里或者包裹要送到哪里去，她却根本没有说。"
+        }
+      ],
+      "instruction": "到詹妮丝·费尔斯通处接取：迟到总比不到好。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 38.4,
+          "y": 54.05
+        },
+        "entities": [
+          {
+            "id": 10778,
+            "kind": "npc",
+            "name": "詹妮丝·费尔斯通",
+            "coordinates": [
+              {
+                "x": 38.4,
+                "y": 54.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.4,
+                "y": 54.05
+              },
+              "bounds": {
+                "min_x": 38.4,
+                "max_x": 38.4,
+                "min_y": 54.05,
+                "max_y": 54.05
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        5154
+      ],
+      "quests": [
+        {
+          "quest_id": 5154,
+          "name": "达隆郡的历史",
+          "raw_name": "The Annals of Darrowshire",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5153
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把《达隆郡的历史》交给安多哈尔的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处接取：达隆郡的历史。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "接取",
+      "quest_ids": [
+        5401,
+        5405
+      ],
+      "quests": [
+        {
+          "quest_id": 5401,
+          "name": "银色黎明委任徽章",
+          "raw_name": "Argent Dawn Commission",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 5405,
+          "name": "银色黎明委任徽章",
+          "raw_name": "Argent Dawn Commission",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到银色黎明军官普尔哈特、银色黎明军需官莱斯巴克处接取：银色黎明委任徽章、银色黎明委任徽章。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 42.905,
+          "y": 83.63499999999999
+        },
+        "entities": [
+          {
+            "id": 10840,
+            "kind": "npc",
+            "name": "银色黎明军官普尔哈特",
+            "coordinates": [
+              {
+                "x": 42.97,
+                "y": 83.55
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.97,
+                "y": 83.55
+              },
+              "bounds": {
+                "min_x": 42.97,
+                "max_x": 42.97,
+                "min_y": 83.55,
+                "max_y": 83.55
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10857,
+            "kind": "npc",
+            "name": "银色黎明军需官莱斯巴克",
+            "coordinates": [
+              {
+                "x": 42.84,
+                "y": 83.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.84,
+                "y": 83.72
+              },
+              "bounds": {
+                "min_x": 42.84,
+                "max_x": 42.84,
+                "min_y": 83.72,
+                "max_y": 83.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "完成目标",
+      "quest_ids": [
+        5098,
+        5154
+      ],
+      "quests": [
+        {
+          "quest_id": 5098,
+          "name": "标记哨塔",
+          "raw_name": "All Along the Watchtowers",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5096
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "使用信号火炬为安多哈尔城中的四座哨塔做上标记，你必须站在哨塔门口才能成功地进行标记。 /  / 在做完了标记之后，将信号火炬还给西瘟疫之地亡灵壁垒的高级执行官德灵顿。"
+        },
+        {
+          "quest_id": 5154,
+          "name": "达隆郡的历史",
+          "raw_name": "The Annals of Darrowshire",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5153
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把《达隆郡的历史》交给安多哈尔的克罗米。"
+        }
+      ],
+      "instruction": "在安多哈尔一号哨塔、安多哈尔二号哨塔、安多哈尔三号哨塔、安多哈尔四号哨塔等5个目标周边完成：标记哨塔、达隆郡的历史。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 43.46,
+          "y": 69.3
+        },
+        "entities": [
+          {
+            "id": 10902,
+            "kind": "npc",
+            "name": "安多哈尔一号哨塔",
+            "coordinates": [
+              {
+                "x": 40.05,
+                "y": 71.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.05,
+                "y": 71.6
+              },
+              "bounds": {
+                "min_x": 40.05,
+                "max_x": 40.05,
+                "min_y": 71.6,
+                "max_y": 71.6
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10903,
+            "kind": "npc",
+            "name": "安多哈尔二号哨塔",
+            "coordinates": [
+              {
+                "x": 42.33,
+                "y": 66.24
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.33,
+                "y": 66.24
+              },
+              "bounds": {
+                "min_x": 42.33,
+                "max_x": 42.33,
+                "min_y": 66.24,
+                "max_y": 66.24
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10904,
+            "kind": "npc",
+            "name": "安多哈尔三号哨塔",
+            "coordinates": [
+              {
+                "x": 44.3,
+                "y": 63.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.3,
+                "y": 63.25
+              },
+              "bounds": {
+                "min_x": 44.3,
+                "max_x": 44.3,
+                "min_y": 63.25,
+                "max_y": 63.25
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10905,
+            "kind": "npc",
+            "name": "安多哈尔四号哨塔",
+            "coordinates": [
+              {
+                "x": 46.62,
+                "y": 71.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 46.62,
+                "y": 71.05
+              },
+              "bounds": {
+                "min_x": 46.62,
+                "max_x": 46.62,
+                "min_y": 71.05,
+                "max_y": 71.05
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 176150,
+            "kind": "object",
+            "name": "Annals of Darrowshire来源：Musty Tome",
+            "coordinates": [
+              {
+                "x": 43.39,
+                "y": 69.69
+              },
+              {
+                "x": 43.59,
+                "y": 69.3
+              },
+              {
+                "x": 43.46,
+                "y": 70.12
+              },
+              {
+                "x": 43.41,
+                "y": 69.22
+              },
+              {
+                "x": 43.59,
+                "y": 68.82
+              },
+              {
+                "x": 43.37,
+                "y": 69.51
+              },
+              {
+                "x": 43.53,
+                "y": 69.12
+              },
+              {
+                "x": 43.42,
+                "y": 68.78
+              },
+              {
+                "x": 43.6,
+                "y": 69.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.46,
+                "y": 69.3
+              },
+              "bounds": {
+                "min_x": 43.37,
+                "max_x": 43.6,
+                "min_y": 68.78,
+                "max_y": 70.12
+              },
+              "spawn_count": 9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "完成目标",
+      "quest_ids": [
+        6004
+      ],
+      "quests": [
+        {
+          "quest_id": 6004,
+          "name": "未竟的事业",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6023,
+          "objective_text": "杀死2个血色医护员、2个血色猎人、2个血色魔法师和2个血色骑士，然后回到西瘟疫之地的科尔斯塔·迪普沙东那儿。"
+        }
+      ],
+      "instruction": "在血色医者、血色猎人、血色法师、血色骑士周边完成：未竟的事业。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 48.83,
+          "y": 44.47
+        },
+        "entities": [
+          {
+            "id": 10605,
+            "kind": "npc",
+            "name": "血色医者",
+            "coordinates": [
+              {
+                "x": 40.53,
+                "y": 51.4
+              },
+              {
+                "x": 40.27,
+                "y": 52.16
+              },
+              {
+                "x": 38.67,
+                "y": 55.94
+              },
+              {
+                "x": 40.8,
+                "y": 51.92
+              },
+              {
+                "x": 47.28,
+                "y": 51.28
+              },
+              {
+                "x": 52.05,
+                "y": 44.8
+              },
+              {
+                "x": 51.89,
+                "y": 44.61
+              },
+              {
+                "x": 51.76,
+                "y": 44.83
+              },
+              {
+                "x": 43.67,
+                "y": 67.8
+              },
+              {
+                "x": 41.03,
+                "y": 51.91
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.35,
+                "y": 51.66
+              },
+              "bounds": {
+                "min_x": 38.67,
+                "max_x": 52.05,
+                "min_y": 44.61,
+                "max_y": 67.8
+              },
+              "spawn_count": 10
+            }
+          },
+          {
+            "id": 1831,
+            "kind": "npc",
+            "name": "血色猎人",
+            "coordinates": [
+              {
+                "x": 41.01,
+                "y": 52.43
+              },
+              {
+                "x": 40.73,
+                "y": 52.62
+              },
+              {
+                "x": 38.64,
+                "y": 55.97
+              },
+              {
+                "x": 47.33,
+                "y": 51.38
+              },
+              {
+                "x": 40.69,
+                "y": 52.18
+              },
+              {
+                "x": 51.45,
+                "y": 44.14
+              },
+              {
+                "x": 51.7,
+                "y": 44.03
+              },
+              {
+                "x": 51.63,
+                "y": 44.53
+              },
+              {
+                "x": 52.24,
+                "y": 44.6
+              },
+              {
+                "x": 52.2,
+                "y": 43.96
+              },
+              {
+                "x": 43.67,
+                "y": 67.8
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.33,
+                "y": 51.38
+              },
+              "bounds": {
+                "min_x": 38.64,
+                "max_x": 52.24,
+                "min_y": 43.96,
+                "max_y": 67.8
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 1826,
+            "kind": "npc",
+            "name": "血色法师",
+            "coordinates": [
+              {
+                "x": 57.57,
+                "y": 35.65
+              },
+              {
+                "x": 51.3,
+                "y": 40.48
+              },
+              {
+                "x": 52.83,
+                "y": 36.65
+              },
+              {
+                "x": 51.03,
+                "y": 40.21
+              },
+              {
+                "x": 52.77,
+                "y": 37.56
+              },
+              {
+                "x": 53.6,
+                "y": 37.67
+              },
+              {
+                "x": 57.41,
+                "y": 36.09
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.83,
+                "y": 37.56
+              },
+              "bounds": {
+                "min_x": 51.03,
+                "max_x": 57.57,
+                "min_y": 35.65,
+                "max_y": 40.48
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 1833,
+            "kind": "npc",
+            "name": "血色骑士",
+            "coordinates": [
+              {
+                "x": 50.43,
+                "y": 41.06
+              },
+              {
+                "x": 53.26,
+                "y": 37.43
+              },
+              {
+                "x": 49.61,
+                "y": 33.19
+              },
+              {
+                "x": 45.77,
+                "y": 34.44
+              },
+              {
+                "x": 48.77,
+                "y": 34.46
+              },
+              {
+                "x": 50.33,
+                "y": 40.45
+              },
+              {
+                "x": 50.72,
+                "y": 41.26
+              },
+              {
+                "x": 49.83,
+                "y": 41.61
+              },
+              {
+                "x": 53.18,
+                "y": 36.97
+              },
+              {
+                "x": 50.76,
+                "y": 40.47
+              },
+              {
+                "x": 57.7,
+                "y": 36.41
+              },
+              {
+                "x": 50.23,
+                "y": 42.22
+              },
+              {
+                "x": 47.05,
+                "y": 34.4
+              },
+              {
+                "x": 47.35,
+                "y": 31.89
+              },
+              {
+                "x": 53.19,
+                "y": 36.28
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.33,
+                "y": 36.97
+              },
+              "bounds": {
+                "min_x": 45.77,
+                "max_x": 57.7,
+                "min_y": 31.89,
+                "max_y": 42.22
+              },
+              "spawn_count": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "交付",
+      "quest_ids": [
+        5021,
+        5050,
+        5229
+      ],
+      "quests": [
+        {
+          "quest_id": 5021,
+          "name": "迟到总比不到好",
+          "raw_name": "Better Late Than Never",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "这个女人的幽灵告诉你她要送出一只包裹。她说那只包裹就在她的马旁边。至于马在哪里或者包裹要送到哪里去，她却根本没有说。"
+        },
+        {
+          "quest_id": 5050,
+          "name": "好运护符",
+          "raw_name": "Good Luck Charm",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5048,
+            5049
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5051,
+          "objective_text": "把半个好运护符还给西瘟疫之地的詹妮丝-费尔斯通。"
+        },
+        {
+          "quest_id": 5229,
+          "name": "目标：费尔斯通农场",
+          "raw_name": "Target: Felstone Field",
+          "required_level": 50,
+          "quest_level": 53,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5228
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5230,
+          "objective_text": "到西瘟疫之地的费尔斯通农场去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带费尔斯通农场的空瓶来采集瘟疫之锅中的毒药样本。"
+        }
+      ],
+      "instruction": "到Janice's Parcel、詹妮丝·费尔斯通、Scourge Cauldron处交付：迟到总比不到好、好运护符、目标：费尔斯通农场。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.4,
+          "y": 55.24
+        },
+        "entities": [
+          {
+            "id": 175894,
+            "kind": "object",
+            "name": "Janice's Parcel",
+            "coordinates": [
+              {
+                "x": 38.73,
+                "y": 55.24
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.73,
+                "y": 55.24
+              },
+              "bounds": {
+                "min_x": 38.73,
+                "max_x": 38.73,
+                "min_y": 55.24,
+                "max_y": 55.24
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10778,
+            "kind": "npc",
+            "name": "詹妮丝·费尔斯通",
+            "coordinates": [
+              {
+                "x": 38.4,
+                "y": 54.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.4,
+                "y": 54.05
+              },
+              "bounds": {
+                "min_x": 38.4,
+                "max_x": 38.4,
+                "min_y": 54.05,
+                "max_y": 54.05
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 176361,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 37.25,
+                "y": 56.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 37.25,
+                "y": 56.78
+              },
+              "bounds": {
+                "min_x": 37.25,
+                "max_x": 37.25,
+                "min_y": 56.78,
+                "max_y": 56.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        5154
+      ],
+      "quests": [
+        {
+          "quest_id": 5154,
+          "name": "达隆郡的历史",
+          "raw_name": "The Annals of Darrowshire",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5153
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把《达隆郡的历史》交给安多哈尔的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处交付：达隆郡的历史。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "交付",
+      "quest_ids": [
+        5401,
+        5405
+      ],
+      "quests": [
+        {
+          "quest_id": 5401,
+          "name": "银色黎明委任徽章",
+          "raw_name": "Argent Dawn Commission",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 5405,
+          "name": "银色黎明委任徽章",
+          "raw_name": "Argent Dawn Commission",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到银色黎明军官普尔哈特、银色黎明军需官莱斯巴克处交付：银色黎明委任徽章、银色黎明委任徽章。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 42.905,
+          "y": 83.63499999999999
+        },
+        "entities": [
+          {
+            "id": 10840,
+            "kind": "npc",
+            "name": "银色黎明军官普尔哈特",
+            "coordinates": [
+              {
+                "x": 42.97,
+                "y": 83.55
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.97,
+                "y": 83.55
+              },
+              "bounds": {
+                "min_x": 42.97,
+                "max_x": 42.97,
+                "min_y": 83.55,
+                "max_y": 83.55
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10857,
+            "kind": "npc",
+            "name": "银色黎明军需官莱斯巴克",
+            "coordinates": [
+              {
+                "x": 42.84,
+                "y": 83.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.84,
+                "y": 83.72
+              },
+              "bounds": {
+                "min_x": 42.84,
+                "max_x": 42.84,
+                "min_y": 83.72,
+                "max_y": 83.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "交付",
+      "quest_ids": [
+        6004
+      ],
+      "quests": [
+        {
+          "quest_id": 6004,
+          "name": "未竟的事业",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6023,
+          "objective_text": "杀死2个血色医护员、2个血色猎人、2个血色魔法师和2个血色骑士，然后回到西瘟疫之地的科尔斯塔·迪普沙东那儿。"
+        }
+      ],
+      "instruction": "到科尔斯塔·迪普沙东处交付：未竟的事业。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.92,
+          "y": 28.06
+        },
+        "entities": [
+          {
+            "id": 11610,
+            "kind": "npc",
+            "name": "科尔斯塔·迪普沙东",
+            "coordinates": [
+              {
+                "x": 51.92,
+                "y": 28.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.92,
+                "y": 28.06
+              },
+              "bounds": {
+                "min_x": 51.92,
+                "max_x": 51.92,
+                "min_y": 28.06,
+                "max_y": 28.06
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "接取",
+      "quest_ids": [
+        6023
+      ],
+      "quests": [
+        {
+          "quest_id": 6023,
+          "name": "未完的任务",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            6004
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6025,
+          "objective_text": "杀掉猎人莱德雷和骑士杜尔根，然后向西瘟疫之地的科尔斯塔·迪普沙东复命。"
+        }
+      ],
+      "instruction": "到科尔斯塔·迪普沙东处接取：未完的任务。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.92,
+          "y": 28.06
+        },
+        "entities": [
+          {
+            "id": 11610,
+            "kind": "npc",
+            "name": "科尔斯塔·迪普沙东",
+            "coordinates": [
+              {
+                "x": 51.92,
+                "y": 28.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.92,
+                "y": 28.06
+              },
+              "bounds": {
+                "min_x": 51.92,
+                "max_x": 51.92,
+                "min_y": 28.06,
+                "max_y": 28.06
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 13,
+      "action": "接取",
+      "quest_ids": [
+        5023,
+        5051,
+        5230
+      ],
+      "quests": [
+        {
+          "quest_id": 5023,
+          "name": "迟到总比不到好",
+          "raw_name": "Better Late Than Never",
+          "required_level": 50,
+          "quest_level": 52,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5021
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5049,
+          "objective_text": "与幽暗城的皇家管理人巴哈乌斯协商，查找杰雷米亚·费尔斯通的下落。通常在公会注册处附近会有一个人口普查官。"
+        },
+        {
+          "quest_id": 5051,
+          "name": "两半合一",
+          "raw_name": "Two Halves Become One",
+          "required_level": 50,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5050
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在西瘟疫之地的费尔斯通农场某地找到另外一半好运护符，并把两半护符合并。 /  / 把好运护符交给西瘟疫之地费尔斯通农场的詹妮丝·费尔斯通。"
+        },
+        {
+          "quest_id": 5230,
+          "name": "返回亡灵壁垒",
+          "raw_name": "Return to the Bulwark",
+          "required_level": 50,
+          "quest_level": 53,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5229
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5231,
+          "objective_text": "把费尔斯通农场的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+        }
+      ],
+      "instruction": "到Janice's Parcel、詹妮丝·费尔斯通、Scourge Cauldron处接取：迟到总比不到好、两半合一、返回亡灵壁垒。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 38.4,
+          "y": 55.24
+        },
+        "entities": [
+          {
+            "id": 175894,
+            "kind": "object",
+            "name": "Janice's Parcel",
+            "coordinates": [
+              {
+                "x": 38.73,
+                "y": 55.24
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.73,
+                "y": 55.24
+              },
+              "bounds": {
+                "min_x": 38.73,
+                "max_x": 38.73,
+                "min_y": 55.24,
+                "max_y": 55.24
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 10778,
+            "kind": "npc",
+            "name": "詹妮丝·费尔斯通",
+            "coordinates": [
+              {
+                "x": 38.4,
+                "y": 54.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.4,
+                "y": 54.05
+              },
+              "bounds": {
+                "min_x": 38.4,
+                "max_x": 38.4,
+                "min_y": 54.05,
+                "max_y": 54.05
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 176361,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 37.25,
+                "y": 56.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 37.25,
+                "y": 56.78
+              },
+              "bounds": {
+                "min_x": 37.25,
+                "max_x": 37.25,
+                "min_y": 56.78,
+                "max_y": 56.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 14,
+      "action": "完成目标",
+      "quest_ids": [
+        6023
+      ],
+      "quests": [
+        {
+          "quest_id": 6023,
+          "name": "未完的任务",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            6004
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6025,
+          "objective_text": "杀掉猎人莱德雷和骑士杜尔根，然后向西瘟疫之地的科尔斯塔·迪普沙东复命。"
+        }
+      ],
+      "instruction": "在猎人莱德雷、骑士杜尔根周边完成：未完的任务。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 56.489999999999995,
+          "y": 29.86
+        },
+        "entities": [
+          {
+            "id": 11613,
+            "kind": "npc",
+            "name": "猎人莱德雷",
+            "coordinates": [
+              {
+                "x": 57.83,
+                "y": 36.1
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.83,
+                "y": 36.1
+              },
+              "bounds": {
+                "min_x": 57.83,
+                "max_x": 57.83,
+                "min_y": 36.1,
+                "max_y": 36.1
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 11611,
+            "kind": "npc",
+            "name": "骑士杜尔根",
+            "coordinates": [
+              {
+                "x": 55.15,
+                "y": 23.62
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.15,
+                "y": 23.62
+              },
+              "bounds": {
+                "min_x": 55.15,
+                "max_x": 55.15,
+                "min_y": 23.62,
+                "max_y": 23.62
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 15,
+      "action": "交付",
+      "quest_ids": [
+        6023
+      ],
+      "quests": [
+        {
+          "quest_id": 6023,
+          "name": "未完的任务",
+          "raw_name": "Unfinished Business",
+          "required_level": 50,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            6004
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 6025,
+          "objective_text": "杀掉猎人莱德雷和骑士杜尔根，然后向西瘟疫之地的科尔斯塔·迪普沙东复命。"
+        }
+      ],
+      "instruction": "到科尔斯塔·迪普沙东处交付：未完的任务。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.92,
+          "y": 28.06
+        },
+        "entities": [
+          {
+            "id": 11610,
+            "kind": "npc",
+            "name": "科尔斯塔·迪普沙东",
+            "coordinates": [
+              {
+                "x": 51.92,
+                "y": 28.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.92,
+                "y": 28.06
+              },
+              "bounds": {
+                "min_x": 51.92,
+                "max_x": 51.92,
+                "min_y": 28.06,
+                "max_y": 28.06
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 16,
+      "action": "交付",
+      "quest_ids": [
+        5051
+      ],
+      "quests": [
+        {
+          "quest_id": 5051,
+          "name": "两半合一",
+          "raw_name": "Two Halves Become One",
+          "required_level": 50,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5050
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在西瘟疫之地的费尔斯通农场某地找到另外一半好运护符，并把两半护符合并。 /  / 把好运护符交给西瘟疫之地费尔斯通农场的詹妮丝·费尔斯通。"
+        }
+      ],
+      "instruction": "到詹妮丝·费尔斯通处交付：两半合一。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.4,
+          "y": 54.05
+        },
+        "entities": [
+          {
+            "id": 10778,
+            "kind": "npc",
+            "name": "詹妮丝·费尔斯通",
+            "coordinates": [
+              {
+                "x": 38.4,
+                "y": 54.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.4,
+                "y": 54.05
+              },
+              "bounds": {
+                "min_x": 38.4,
+                "max_x": 38.4,
+                "min_y": 54.05,
+                "max_y": 54.05
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 17,
+      "action": "交付",
+      "quest_ids": [
+        5231
+      ],
+      "quests": [
+        {
+          "quest_id": 5231,
+          "name": "目标：达尔松之泪",
+          "raw_name": "Target: Dalson's Tears",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5230
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5232,
+          "objective_text": "到西瘟疫之地的达尔松之泪去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带达尔松之泪的空瓶来采集瘟疫之锅中的毒药样本。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处交付：目标：达尔松之泪。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 46.18,
+          "y": 51.9
+        },
+        "entities": [
+          {
+            "id": 177289,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 46.18,
+                "y": 51.9
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 46.18,
+                "y": 51.9
+              },
+              "bounds": {
+                "min_x": 46.18,
+                "max_x": 46.18,
+                "min_y": 51.9,
+                "max_y": 51.9
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 18,
+      "action": "接取",
+      "quest_ids": [
+        5232
+      ],
+      "quests": [
+        {
+          "quest_id": 5232,
+          "name": "返回亡灵壁垒",
+          "raw_name": "Return to the Bulwark",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5231
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5233,
+          "objective_text": "把装满的达尔松眼泪之瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处接取：返回亡灵壁垒。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 46.18,
+          "y": 51.9
+        },
+        "entities": [
+          {
+            "id": 177289,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 46.18,
+                "y": 51.9
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 46.18,
+                "y": 51.9
+              },
+              "bounds": {
+                "min_x": 46.18,
+                "max_x": 46.18,
+                "min_y": 51.9,
+                "max_y": 51.9
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 19,
+      "action": "交付",
+      "quest_ids": [
+        5233
+      ],
+      "quests": [
+        {
+          "quest_id": 5233,
+          "name": "目标：嚎哭鬼屋",
+          "raw_name": "Target: Writhing Haunt",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5232
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5234,
+          "objective_text": "到西瘟疫之地的嚎哭鬼屋去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带嚎哭鬼屋的空瓶来采集瘟疫之锅中的毒药样本。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处交付：目标：嚎哭鬼屋。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 53.02,
+          "y": 65.61
+        },
+        "entities": [
+          {
+            "id": 176393,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 53.02,
+                "y": 65.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.02,
+                "y": 65.61
+              },
+              "bounds": {
+                "min_x": 53.02,
+                "max_x": 53.02,
+                "min_y": 65.61,
+                "max_y": 65.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 20,
+      "action": "接取",
+      "quest_ids": [
+        5234
+      ],
+      "quests": [
+        {
+          "quest_id": 5234,
+          "name": "返回亡灵壁垒",
+          "raw_name": "Return to the Bulwark",
+          "required_level": 50,
+          "quest_level": 55,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5233
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5235,
+          "objective_text": "把嚎哭鬼屋的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处接取：返回亡灵壁垒。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 53.02,
+          "y": 65.61
+        },
+        "entities": [
+          {
+            "id": 176393,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 53.02,
+                "y": 65.61
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.02,
+                "y": 65.61
+              },
+              "bounds": {
+                "min_x": 53.02,
+                "max_x": 53.02,
+                "min_y": 65.61,
+                "max_y": 65.61
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 21,
+      "action": "交付",
+      "quest_ids": [
+        5235
+      ],
+      "quests": [
+        {
+          "quest_id": 5235,
+          "name": "目标：盖罗恩农场",
+          "raw_name": "Target: Gahrron's Withering",
+          "required_level": 50,
+          "quest_level": 58,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5234
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5236,
+          "objective_text": "到西瘟疫之地的盖罗恩农场去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带盖罗恩农场的空瓶来采集瘟疫之锅中的毒药样本。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处交付：目标：盖罗恩农场。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 62.54,
+          "y": 58.47
+        },
+        "entities": [
+          {
+            "id": 176392,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 62.54,
+                "y": 58.47
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 62.54,
+                "y": 58.47
+              },
+              "bounds": {
+                "min_x": 62.54,
+                "max_x": 62.54,
+                "min_y": 58.47,
+                "max_y": 58.47
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 22,
+      "action": "接取",
+      "quest_ids": [
+        5236
+      ],
+      "quests": [
+        {
+          "quest_id": 5236,
+          "name": "返回亡灵壁垒",
+          "raw_name": "Return to the Bulwark",
+          "required_level": 50,
+          "quest_level": 58,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5235
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把盖罗恩农场的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+        }
+      ],
+      "instruction": "到Scourge Cauldron处接取：返回亡灵壁垒。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 62.54,
+          "y": 58.47
+        },
+        "entities": [
+          {
+            "id": 176392,
+            "kind": "object",
+            "name": "Scourge Cauldron",
+            "coordinates": [
+              {
+                "x": 62.54,
+                "y": 58.47
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 62.54,
+                "y": 58.47
+              },
+              "bounds": {
+                "min_x": 62.54,
+                "max_x": 62.54,
+                "min_y": 58.47,
+                "max_y": 58.47
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 23,
+      "action": "接取",
+      "quest_ids": [
+        4984
+      ],
+      "quests": [
+        {
+          "quest_id": 4984,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4985,
+          "objective_text": "消灭8只生病的狼，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "到穆格雷斯·深水处接取：大自然的苦楚。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 53.73,
+          "y": 64.66
+        },
+        "entities": [
+          {
+            "id": 10739,
+            "kind": "npc",
+            "name": "穆格雷斯·深水",
+            "coordinates": [
+              {
+                "x": 53.73,
+                "y": 64.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.73,
+                "y": 64.66
+              },
+              "bounds": {
+                "min_x": 53.73,
+                "max_x": 53.73,
+                "min_y": 64.66,
+                "max_y": 64.66
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 24,
+      "action": "接取",
+      "quest_ids": [
+        4971
+      ],
+      "quests": [
+        {
+          "quest_id": 4971,
+          "name": "时间问题",
+          "raw_name": "A Matter of Time",
+          "required_level": 53,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在安多哈尔的一处仓库附近使用时光置换器，使时光寄生虫现身。 /  / 杀掉10只时光寄生虫，然后将时光置换器还给西瘟疫之地安多哈尔旅店的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处接取：时间问题。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 25,
+      "action": "接取",
+      "quest_ids": [
+        5507,
+        5521
+      ],
+      "quests": [
+        {
+          "quest_id": 5507,
+          "name": "黎明衬肩",
+          "raw_name": "Mantles of the Dawn",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把10个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+        },
+        {
+          "quest_id": 5521,
+          "name": "多彩黎明衬肩",
+          "raw_name": "Chromatic Mantle of the Dawn",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把25个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+        }
+      ],
+      "instruction": "到银色黎明军需官莱斯巴克处接取：黎明衬肩、多彩黎明衬肩。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 42.84,
+          "y": 83.72
+        },
+        "entities": [
+          {
+            "id": 10857,
+            "kind": "npc",
+            "name": "银色黎明军需官莱斯巴克",
+            "coordinates": [
+              {
+                "x": 42.84,
+                "y": 83.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.84,
+                "y": 83.72
+              },
+              "bounds": {
+                "min_x": 42.84,
+                "max_x": 42.84,
+                "min_y": 83.72,
+                "max_y": 83.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 26,
+      "action": "接取",
+      "quest_ids": [
+        5058,
+        5060
+      ],
+      "quests": [
+        {
+          "quest_id": 5058,
+          "name": "达尔松夫人的日记",
+          "raw_name": "Mrs. Dalson's Diary",
+          "required_level": 52,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 5060,
+          "name": "被锁起来的农夫",
+          "raw_name": "Locked Away",
+          "required_level": 52,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到Mrs. Dalson's Diary、Locked Cabinet处接取：达尔松夫人的日记、被锁起来的农夫。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 47.575,
+          "y": 50.150000000000006
+        },
+        "entities": [
+          {
+            "id": 175926,
+            "kind": "object",
+            "name": "Mrs. Dalson's Diary",
+            "coordinates": [
+              {
+                "x": 47.8,
+                "y": 50.67
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.8,
+                "y": 50.67
+              },
+              "bounds": {
+                "min_x": 47.8,
+                "max_x": 47.8,
+                "min_y": 50.67,
+                "max_y": 50.67
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 175924,
+            "kind": "object",
+            "name": "Locked Cabinet",
+            "coordinates": [
+              {
+                "x": 47.35,
+                "y": 49.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.35,
+                "y": 49.63
+              },
+              "bounds": {
+                "min_x": 47.35,
+                "max_x": 47.35,
+                "min_y": 49.63,
+                "max_y": 49.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 27,
+      "action": "完成目标",
+      "quest_ids": [
+        4984
+      ],
+      "quests": [
+        {
+          "quest_id": 4984,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4985,
+          "objective_text": "消灭8只生病的狼，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "在生病的狼周边完成：大自然的苦楚。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 47.28,
+          "y": 44.91
+        },
+        "entities": [
+          {
+            "id": 1817,
+            "kind": "npc",
+            "name": "生病的狼",
+            "coordinates": [
+              {
+                "x": 52.53,
+                "y": 70.45
+              },
+              {
+                "x": 44.95,
+                "y": 40.28
+              },
+              {
+                "x": 46.41,
+                "y": 59.88
+              },
+              {
+                "x": 51.14,
+                "y": 53.08
+              },
+              {
+                "x": 48.95,
+                "y": 36.7
+              },
+              {
+                "x": 43.46,
+                "y": 55.16
+              },
+              {
+                "x": 48.03,
+                "y": 47.27
+              },
+              {
+                "x": 45.79,
+                "y": 46.0
+              },
+              {
+                "x": 51.09,
+                "y": 64.35
+              },
+              {
+                "x": 47.42,
+                "y": 43.73
+              },
+              {
+                "x": 51.84,
+                "y": 46.96
+              },
+              {
+                "x": 44.97,
+                "y": 32.12
+              },
+              {
+                "x": 44.95,
+                "y": 59.83
+              },
+              {
+                "x": 51.51,
+                "y": 60.52
+              },
+              {
+                "x": 42.59,
+                "y": 56.29
+              },
+              {
+                "x": 46.47,
+                "y": 42.65
+              },
+              {
+                "x": 45.68,
+                "y": 43.87
+              },
+              {
+                "x": 44.39,
+                "y": 45.87
+              },
+              {
+                "x": 45.88,
+                "y": 36.71
+              },
+              {
+                "x": 47.23,
+                "y": 46.01
+              },
+              {
+                "x": 48.58,
+                "y": 60.24
+              },
+              {
+                "x": 43.14,
+                "y": 46.77
+              },
+              {
+                "x": 44.91,
+                "y": 42.5
+              },
+              {
+                "x": 48.78,
+                "y": 39.0
+              },
+              {
+                "x": 44.78,
+                "y": 47.03
+              },
+              {
+                "x": 44.95,
+                "y": 37.63
+              },
+              {
+                "x": 49.38,
+                "y": 59.55
+              },
+              {
+                "x": 47.36,
+                "y": 39.04
+              },
+              {
+                "x": 49.81,
+                "y": 35.61
+              },
+              {
+                "x": 51.23,
+                "y": 50.64
+              },
+              {
+                "x": 51.02,
+                "y": 32.93
+              },
+              {
+                "x": 46.62,
+                "y": 37.81
+              },
+              {
+                "x": 48.57,
+                "y": 58.47
+              },
+              {
+                "x": 41.13,
+                "y": 48.4
+              },
+              {
+                "x": 45.7,
+                "y": 48.29
+              },
+              {
+                "x": 47.28,
+                "y": 28.28
+              },
+              {
+                "x": 44.82,
+                "y": 44.78
+              },
+              {
+                "x": 42.53,
+                "y": 54.11
+              },
+              {
+                "x": 48.92,
+                "y": 28.33
+              },
+              {
+                "x": 43.5,
+                "y": 40.18
+              },
+              {
+                "x": 46.57,
+                "y": 47.1
+              },
+              {
+                "x": 49.65,
+                "y": 37.78
+              },
+              {
+                "x": 47.35,
+                "y": 41.27
+              },
+              {
+                "x": 48.12,
+                "y": 27.24
+              },
+              {
+                "x": 47.25,
+                "y": 48.33
+              },
+              {
+                "x": 46.58,
+                "y": 29.67
+              },
+              {
+                "x": 50.33,
+                "y": 46.94
+              },
+              {
+                "x": 49.64,
+                "y": 27.25
+              },
+              {
+                "x": 48.76,
+                "y": 26.11
+              },
+              {
+                "x": 48.05,
+                "y": 40.12
+              },
+              {
+                "x": 50.31,
+                "y": 63.45
+              },
+              {
+                "x": 48.89,
+                "y": 61.92
+              },
+              {
+                "x": 50.38,
+                "y": 36.44
+              },
+              {
+                "x": 52.03,
+                "y": 34.21
+              },
+              {
+                "x": 50.34,
+                "y": 34.49
+              },
+              {
+                "x": 46.6,
+                "y": 40.22
+              },
+              {
+                "x": 44.88,
+                "y": 49.51
+              },
+              {
+                "x": 51.18,
+                "y": 30.95
+              },
+              {
+                "x": 46.52,
+                "y": 44.91
+              },
+              {
+                "x": 39.64,
+                "y": 48.46
+              },
+              {
+                "x": 51.95,
+                "y": 61.01
+              },
+              {
+                "x": 44.14,
+                "y": 56.51
+              },
+              {
+                "x": 45.74,
+                "y": 41.42
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.28,
+                "y": 44.91
+              },
+              "bounds": {
+                "min_x": 39.64,
+                "max_x": 52.53,
+                "min_y": 26.11,
+                "max_y": 70.45
+              },
+              "spawn_count": 63
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 28,
+      "action": "完成目标",
+      "quest_ids": [
+        964
+      ],
+      "quests": [
+        {
+          "quest_id": 964,
+          "name": "骸骨碎片",
+          "raw_name": "Skeletal Fragments",
+          "required_level": 55,
+          "quest_level": 57,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            838
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5514,
+          "objective_text": "将15块骸骨碎片交给西瘟疫之地亡灵壁垒的药剂师迪瑟斯。"
+        }
+      ],
+      "instruction": "在Skeletal Fragments来源：骷髅剥皮者、Skeletal Fragments来源：骷髅巫师、Skeletal Fragments来源：恐惧骸骨、Skeletal Fragments来源：骷髅刽子手等6个目标周边完成：骸骨碎片。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 44.445,
+          "y": 63.0
+        },
+        "entities": [
+          {
+            "id": 1783,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：骷髅剥皮者",
+            "coordinates": [
+              {
+                "x": 38.29,
+                "y": 56.44
+              },
+              {
+                "x": 38.12,
+                "y": 53.81
+              },
+              {
+                "x": 49.27,
+                "y": 81.3
+              },
+              {
+                "x": 49.61,
+                "y": 76.62
+              },
+              {
+                "x": 48.12,
+                "y": 82.81
+              },
+              {
+                "x": 49.4,
+                "y": 77.07
+              },
+              {
+                "x": 50.79,
+                "y": 76.1
+              },
+              {
+                "x": 54.54,
+                "y": 80.88
+              },
+              {
+                "x": 54.63,
+                "y": 79.67
+              },
+              {
+                "x": 53.92,
+                "y": 80.17
+              },
+              {
+                "x": 53.99,
+                "y": 79.94
+              },
+              {
+                "x": 38.11,
+                "y": 55.11
+              },
+              {
+                "x": 37.83,
+                "y": 55.15
+              },
+              {
+                "x": 47.37,
+                "y": 81.79
+              },
+              {
+                "x": 49.47,
+                "y": 77.79
+              },
+              {
+                "x": 54.66,
+                "y": 81.03
+              },
+              {
+                "x": 53.98,
+                "y": 80.28
+              },
+              {
+                "x": 53.95,
+                "y": 80.99
+              },
+              {
+                "x": 38.82,
+                "y": 56.75
+              },
+              {
+                "x": 37.07,
+                "y": 58.36
+              },
+              {
+                "x": 36.85,
+                "y": 54.54
+              },
+              {
+                "x": 37.61,
+                "y": 58.49
+              },
+              {
+                "x": 36.58,
+                "y": 55.66
+              },
+              {
+                "x": 48.06,
+                "y": 80.72
+              },
+              {
+                "x": 48.93,
+                "y": 81.79
+              },
+              {
+                "x": 48.15,
+                "y": 78.6
+              },
+              {
+                "x": 50.77,
+                "y": 80.55
+              },
+              {
+                "x": 50.43,
+                "y": 75.35
+              },
+              {
+                "x": 38.6,
+                "y": 57.11
+              },
+              {
+                "x": 39.05,
+                "y": 55.9
+              },
+              {
+                "x": 37.28,
+                "y": 59.38
+              },
+              {
+                "x": 36.79,
+                "y": 56.77
+              },
+              {
+                "x": 47.37,
+                "y": 84.3
+              },
+              {
+                "x": 47.3,
+                "y": 80.5
+              },
+              {
+                "x": 38.99,
+                "y": 54.47
+              },
+              {
+                "x": 36.05,
+                "y": 58.49
+              },
+              {
+                "x": 37.4,
+                "y": 55.12
+              },
+              {
+                "x": 37.56,
+                "y": 56.55
+              },
+              {
+                "x": 38.35,
+                "y": 54.13
+              },
+              {
+                "x": 38.88,
+                "y": 54.93
+              },
+              {
+                "x": 37.65,
+                "y": 58.05
+              },
+              {
+                "x": 36.64,
+                "y": 57.74
+              },
+              {
+                "x": 36.52,
+                "y": 54.8
+              },
+              {
+                "x": 35.95,
+                "y": 55.87
+              },
+              {
+                "x": 35.63,
+                "y": 57.01
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.99,
+                "y": 58.49
+              },
+              "bounds": {
+                "min_x": 35.63,
+                "max_x": 54.66,
+                "min_y": 53.81,
+                "max_y": 84.3
+              },
+              "spawn_count": 45
+            }
+          },
+          {
+            "id": 1784,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：骷髅巫师",
+            "coordinates": [
+              {
+                "x": 35.74,
+                "y": 56.2
+              },
+              {
+                "x": 35.57,
+                "y": 56.52
+              },
+              {
+                "x": 39.28,
+                "y": 54.91
+              },
+              {
+                "x": 38.54,
+                "y": 53.96
+              },
+              {
+                "x": 37.52,
+                "y": 54.08
+              },
+              {
+                "x": 54.21,
+                "y": 79.83
+              },
+              {
+                "x": 54.14,
+                "y": 79.4
+              },
+              {
+                "x": 53.97,
+                "y": 80.34
+              },
+              {
+                "x": 36.95,
+                "y": 57.12
+              },
+              {
+                "x": 37.38,
+                "y": 57.25
+              },
+              {
+                "x": 36.22,
+                "y": 57.38
+              },
+              {
+                "x": 54.7,
+                "y": 80.17
+              },
+              {
+                "x": 53.92,
+                "y": 79.92
+              },
+              {
+                "x": 54.72,
+                "y": 79.92
+              },
+              {
+                "x": 53.95,
+                "y": 79.97
+              },
+              {
+                "x": 37.14,
+                "y": 54.43
+              },
+              {
+                "x": 54.78,
+                "y": 79.75
+              },
+              {
+                "x": 54.78,
+                "y": 79.93
+              },
+              {
+                "x": 53.91,
+                "y": 80.92
+              },
+              {
+                "x": 54.8,
+                "y": 80.87
+              },
+              {
+                "x": 54.62,
+                "y": 79.89
+              },
+              {
+                "x": 38.76,
+                "y": 55.96
+              },
+              {
+                "x": 37.36,
+                "y": 56.33
+              },
+              {
+                "x": 37.99,
+                "y": 54.17
+              },
+              {
+                "x": 37.57,
+                "y": 59.56
+              },
+              {
+                "x": 38.68,
+                "y": 55.03
+              },
+              {
+                "x": 38.52,
+                "y": 57.47
+              },
+              {
+                "x": 37.75,
+                "y": 54.56
+              },
+              {
+                "x": 36.59,
+                "y": 54.31
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.68,
+                "y": 57.38
+              },
+              "bounds": {
+                "min_x": 35.57,
+                "max_x": 54.8,
+                "min_y": 53.96,
+                "max_y": 80.92
+              },
+              "spawn_count": 29
+            }
+          },
+          {
+            "id": 1785,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：恐惧骸骨",
+            "coordinates": [
+              {
+                "x": 45.04,
+                "y": 52.0
+              },
+              {
+                "x": 48.1,
+                "y": 51.2
+              },
+              {
+                "x": 47.74,
+                "y": 49.94
+              },
+              {
+                "x": 47.25,
+                "y": 50.09
+              },
+              {
+                "x": 45.82,
+                "y": 51.67
+              },
+              {
+                "x": 45.89,
+                "y": 50.53
+              },
+              {
+                "x": 47.54,
+                "y": 51.36
+              },
+              {
+                "x": 47.11,
+                "y": 50.51
+              },
+              {
+                "x": 47.91,
+                "y": 50.59
+              },
+              {
+                "x": 46.55,
+                "y": 51.53
+              },
+              {
+                "x": 47.37,
+                "y": 49.82
+              },
+              {
+                "x": 46.11,
+                "y": 49.47
+              },
+              {
+                "x": 45.17,
+                "y": 51.17
+              },
+              {
+                "x": 47.67,
+                "y": 51.06
+              },
+              {
+                "x": 47.25,
+                "y": 49.42
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.25,
+                "y": 50.59
+              },
+              "bounds": {
+                "min_x": 45.04,
+                "max_x": 48.1,
+                "min_y": 49.42,
+                "max_y": 52.0
+              },
+              "spawn_count": 15
+            }
+          },
+          {
+            "id": 1787,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：骷髅刽子手",
+            "coordinates": [
+              {
+                "x": 45.75,
+                "y": 67.23
+              },
+              {
+                "x": 39.38,
+                "y": 72.27
+              },
+              {
+                "x": 44.48,
+                "y": 68.65
+              },
+              {
+                "x": 44.6,
+                "y": 68.54
+              },
+              {
+                "x": 44.52,
+                "y": 68.87
+              },
+              {
+                "x": 45.86,
+                "y": 69.43
+              },
+              {
+                "x": 45.88,
+                "y": 69.13
+              },
+              {
+                "x": 44.7,
+                "y": 69.88
+              },
+              {
+                "x": 44.54,
+                "y": 69.82
+              },
+              {
+                "x": 45.67,
+                "y": 75.03
+              },
+              {
+                "x": 50.4,
+                "y": 67.93
+              },
+              {
+                "x": 46.63,
+                "y": 69.32
+              },
+              {
+                "x": 48.8,
+                "y": 69.07
+              },
+              {
+                "x": 40.22,
+                "y": 65.64
+              },
+              {
+                "x": 46.65,
+                "y": 70.95
+              },
+              {
+                "x": 49.65,
+                "y": 66.82
+              },
+              {
+                "x": 48.76,
+                "y": 70.24
+              },
+              {
+                "x": 41.5,
+                "y": 72.87
+              },
+              {
+                "x": 38.72,
+                "y": 68.27
+              },
+              {
+                "x": 42.68,
+                "y": 69.99
+              },
+              {
+                "x": 43.95,
+                "y": 62.37
+              },
+              {
+                "x": 45.8,
+                "y": 62.63
+              },
+              {
+                "x": 48.64,
+                "y": 69.65
+              },
+              {
+                "x": 44.1,
+                "y": 64.59
+              },
+              {
+                "x": 43.17,
+                "y": 63.59
+              },
+              {
+                "x": 41.84,
+                "y": 61.99
+              },
+              {
+                "x": 45.74,
+                "y": 72.48
+              },
+              {
+                "x": 44.5,
+                "y": 71.18
+              },
+              {
+                "x": 47.26,
+                "y": 69.12
+              },
+              {
+                "x": 41.82,
+                "y": 68.36
+              },
+              {
+                "x": 39.69,
+                "y": 67.57
+              },
+              {
+                "x": 48.08,
+                "y": 63.19
+              },
+              {
+                "x": 48.01,
+                "y": 69.26
+              },
+              {
+                "x": 42.64,
+                "y": 74.93
+              },
+              {
+                "x": 41.12,
+                "y": 69.22
+              },
+              {
+                "x": 44.99,
+                "y": 66.93
+              },
+              {
+                "x": 38.85,
+                "y": 71.15
+              },
+              {
+                "x": 44.44,
+                "y": 64.98
+              },
+              {
+                "x": 48.05,
+                "y": 71.25
+              },
+              {
+                "x": 38.69,
+                "y": 70.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.57,
+                "y": 69.12
+              },
+              "bounds": {
+                "min_x": 38.69,
+                "max_x": 50.4,
+                "min_y": 61.99,
+                "max_y": 75.03
+              },
+              "spawn_count": 40
+            }
+          },
+          {
+            "id": 1788,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：骷髅军官",
+            "coordinates": [
+              {
+                "x": 45.12,
+                "y": 68.75
+              },
+              {
+                "x": 45.15,
+                "y": 69.56
+              },
+              {
+                "x": 43.83,
+                "y": 63.07
+              },
+              {
+                "x": 42.65,
+                "y": 65.71
+              },
+              {
+                "x": 46.72,
+                "y": 71.66
+              },
+              {
+                "x": 40.44,
+                "y": 71.85
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.47,
+                "y": 69.16
+              },
+              "bounds": {
+                "min_x": 40.44,
+                "max_x": 46.72,
+                "min_y": 63.07,
+                "max_y": 71.85
+              },
+              "spawn_count": 6
+            }
+          },
+          {
+            "id": 1789,
+            "kind": "npc",
+            "name": "Skeletal Fragments来源：骷髅侍僧",
+            "coordinates": [
+              {
+                "x": 49.54,
+                "y": 63.51
+              },
+              {
+                "x": 39.87,
+                "y": 67.93
+              },
+              {
+                "x": 47.13,
+                "y": 71.69
+              },
+              {
+                "x": 45.94,
+                "y": 69.28
+              },
+              {
+                "x": 44.51,
+                "y": 69.62
+              },
+              {
+                "x": 42.61,
+                "y": 71.34
+              },
+              {
+                "x": 46.74,
+                "y": 74.23
+              },
+              {
+                "x": 43.46,
+                "y": 64.5
+              },
+              {
+                "x": 39.9,
+                "y": 71.37
+              },
+              {
+                "x": 48.99,
+                "y": 64.84
+              },
+              {
+                "x": 42.17,
+                "y": 66.47
+              },
+              {
+                "x": 48.76,
+                "y": 63.44
+              },
+              {
+                "x": 48.2,
+                "y": 65.44
+              },
+              {
+                "x": 43.4,
+                "y": 74.87
+              },
+              {
+                "x": 41.89,
+                "y": 68.2
+              },
+              {
+                "x": 41.74,
+                "y": 73.18
+              },
+              {
+                "x": 41.8,
+                "y": 74.9
+              },
+              {
+                "x": 47.16,
+                "y": 61.19
+              },
+              {
+                "x": 40.22,
+                "y": 69.12
+              },
+              {
+                "x": 46.21,
+                "y": 71.8
+              },
+              {
+                "x": 41.83,
+                "y": 69.35
+              },
+              {
+                "x": 47.24,
+                "y": 72.48
+              },
+              {
+                "x": 41.11,
+                "y": 74.9
+              },
+              {
+                "x": 44.65,
+                "y": 72.59
+              },
+              {
+                "x": 44.33,
+                "y": 67.1
+              },
+              {
+                "x": 43.77,
+                "y": 63.74
+              },
+              {
+                "x": 42.68,
+                "y": 67.08
+              },
+              {
+                "x": 41.82,
+                "y": 64.57
+              },
+              {
+                "x": 42.85,
+                "y": 65.16
+              },
+              {
+                "x": 47.37,
+                "y": 63.47
+              },
+              {
+                "x": 42.67,
+                "y": 62.72
+              },
+              {
+                "x": 49.51,
+                "y": 68.09
+              },
+              {
+                "x": 41.49,
+                "y": 65.86
+              },
+              {
+                "x": 45.91,
+                "y": 70.31
+              },
+              {
+                "x": 39.56,
+                "y": 67.92
+              },
+              {
+                "x": 49.54,
+                "y": 65.78
+              },
+              {
+                "x": 39.5,
+                "y": 70.43
+              },
+              {
+                "x": 46.82,
+                "y": 66.39
+              },
+              {
+                "x": 45.07,
+                "y": 65.54
+              },
+              {
+                "x": 44.34,
+                "y": 65.73
+              },
+              {
+                "x": 47.46,
+                "y": 62.44
+              },
+              {
+                "x": 42.6,
+                "y": 69.21
+              },
+              {
+                "x": 45.79,
+                "y": 73.39
+              },
+              {
+                "x": 45.68,
+                "y": 61.02
+              },
+              {
+                "x": 45.55,
+                "y": 61.81
+              },
+              {
+                "x": 44.27,
+                "y": 74.91
+              },
+              {
+                "x": 46.58,
+                "y": 64.56
+              },
+              {
+                "x": 48.05,
+                "y": 66.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.42,
+                "y": 67.51
+              },
+              "bounds": {
+                "min_x": 39.5,
+                "max_x": 49.54,
+                "min_y": 61.02,
+                "max_y": 74.91
+              },
+              "spawn_count": 48
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 29,
+      "action": "完成目标",
+      "quest_ids": [
+        5342
+      ],
+      "quests": [
+        {
+          "quest_id": 5342,
+          "name": "巴罗夫的继承人",
+          "raw_name": "The Last Barov",
+          "required_level": 52,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5341
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "到冰风岗——联盟的领地——去暗杀维尔顿-巴罗夫。把他的脑袋交给阿莱克斯-巴罗夫。 /  / 要多加小心，联盟也许对维尔顿实施了严密的保护。"
+        }
+      ],
+      "instruction": "在Head of Weldon Barov来源：维尔顿·巴罗夫周边完成：巴罗夫的继承人。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 43.45,
+          "y": 83.73
+        },
+        "entities": [
+          {
+            "id": 11023,
+            "kind": "npc",
+            "name": "Head of Weldon Barov来源：维尔顿·巴罗夫",
+            "coordinates": [
+              {
+                "x": 43.45,
+                "y": 83.73
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.45,
+                "y": 83.73
+              },
+              "bounds": {
+                "min_x": 43.45,
+                "max_x": 43.45,
+                "min_y": 83.73,
+                "max_y": 83.73
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 30,
+      "action": "完成目标",
+      "quest_ids": [
+        9443
+      ],
+      "quests": [
+        {
+          "quest_id": 9443,
+          "name": "所谓的光明使者印记",
+          "raw_name": "The So-Called Mark of the Lightbringer",
+          "required_level": 55,
+          "quest_level": 58,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 9444,
+          "objective_text": "拿到光明使者的印记，把它交给西瘟疫之地亡灵壁垒的麦拉·黎明之刃。"
+        }
+      ],
+      "instruction": "在Mark of the Lightbringer来源：Holy Coffer周边完成：所谓的光明使者印记。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 55.19,
+          "y": 23.51
+        },
+        "entities": [
+          {
+            "id": 181629,
+            "kind": "object",
+            "name": "Mark of the Lightbringer来源：Holy Coffer",
+            "coordinates": [
+              {
+                "x": 55.19,
+                "y": 23.51
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.19,
+                "y": 23.51
+              },
+              "bounds": {
+                "min_x": 55.19,
+                "max_x": 55.19,
+                "min_y": 23.51,
+                "max_y": 23.51
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 31,
+      "action": "交付",
+      "quest_ids": [
+        5058,
+        5060
+      ],
+      "quests": [
+        {
+          "quest_id": 5058,
+          "name": "达尔松夫人的日记",
+          "raw_name": "Mrs. Dalson's Diary",
+          "required_level": 52,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        },
+        {
+          "quest_id": 5060,
+          "name": "被锁起来的农夫",
+          "raw_name": "Locked Away",
+          "required_level": 52,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": ""
+        }
+      ],
+      "instruction": "到Mrs. Dalson's Diary、Locked Cabinet处交付：达尔松夫人的日记、被锁起来的农夫。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 47.575,
+          "y": 50.150000000000006
+        },
+        "entities": [
+          {
+            "id": 175926,
+            "kind": "object",
+            "name": "Mrs. Dalson's Diary",
+            "coordinates": [
+              {
+                "x": 47.8,
+                "y": 50.67
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.8,
+                "y": 50.67
+              },
+              "bounds": {
+                "min_x": 47.8,
+                "max_x": 47.8,
+                "min_y": 50.67,
+                "max_y": 50.67
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 175924,
+            "kind": "object",
+            "name": "Locked Cabinet",
+            "coordinates": [
+              {
+                "x": 47.35,
+                "y": 49.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.35,
+                "y": 49.63
+              },
+              "bounds": {
+                "min_x": 47.35,
+                "max_x": 47.35,
+                "min_y": 49.63,
+                "max_y": 49.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 32,
+      "action": "交付",
+      "quest_ids": [
+        4984
+      ],
+      "quests": [
+        {
+          "quest_id": 4984,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 54,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 4985,
+          "objective_text": "消灭8只生病的狼，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "到穆格雷斯·深水处交付：大自然的苦楚。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 53.73,
+          "y": 64.66
+        },
+        "entities": [
+          {
+            "id": 10739,
+            "kind": "npc",
+            "name": "穆格雷斯·深水",
+            "coordinates": [
+              {
+                "x": 53.73,
+                "y": 64.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.73,
+                "y": 64.66
+              },
+              "bounds": {
+                "min_x": 53.73,
+                "max_x": 53.73,
+                "min_y": 64.66,
+                "max_y": 64.66
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 33,
+      "action": "交付",
+      "quest_ids": [
+        5861
+      ],
+      "quests": [
+        {
+          "quest_id": 5861,
+          "name": "寻找麦兰达",
+          "raw_name": "Find Myranda",
+          "required_level": 52,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5848
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5862,
+          "objective_text": "到瘟疫之地南部的乌瑟尔之墓去，将提里奥的礼物交给巫女麦兰达。"
+        }
+      ],
+      "instruction": "到巫女麦兰达处交付：寻找麦兰达。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 50.79,
+          "y": 77.85
+        },
+        "entities": [
+          {
+            "id": 11872,
+            "kind": "npc",
+            "name": "巫女麦兰达",
+            "coordinates": [
+              {
+                "x": 50.79,
+                "y": 77.85
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.79,
+                "y": 77.85
+              },
+              "bounds": {
+                "min_x": 50.79,
+                "max_x": 50.79,
+                "min_y": 77.85,
+                "max_y": 77.85
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 34,
+      "action": "交付",
+      "quest_ids": [
+        5507,
+        5521
+      ],
+      "quests": [
+        {
+          "quest_id": 5507,
+          "name": "黎明衬肩",
+          "raw_name": "Mantles of the Dawn",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把10个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+        },
+        {
+          "quest_id": 5521,
+          "name": "多彩黎明衬肩",
+          "raw_name": "Chromatic Mantle of the Dawn",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "把25个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+        }
+      ],
+      "instruction": "到银色黎明军需官莱斯巴克处交付：黎明衬肩、多彩黎明衬肩。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 42.84,
+          "y": 83.72
+        },
+        "entities": [
+          {
+            "id": 10857,
+            "kind": "npc",
+            "name": "银色黎明军需官莱斯巴克",
+            "coordinates": [
+              {
+                "x": 42.84,
+                "y": 83.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.84,
+                "y": 83.72
+              },
+              "bounds": {
+                "min_x": 42.84,
+                "max_x": 42.84,
+                "min_y": 83.72,
+                "max_y": 83.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 35,
+      "action": "交付",
+      "quest_ids": [
+        4971
+      ],
+      "quests": [
+        {
+          "quest_id": 4971,
+          "name": "时间问题",
+          "raw_name": "A Matter of Time",
+          "required_level": 53,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在安多哈尔的一处仓库附近使用时光置换器，使时光寄生虫现身。 /  / 杀掉10只时光寄生虫，然后将时光置换器还给西瘟疫之地安多哈尔旅店的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处交付：时间问题。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 36,
+      "action": "接取",
+      "quest_ids": [
+        4972
+      ],
+      "quests": [
+        {
+          "quest_id": 4972,
+          "name": "找回时间",
+          "raw_name": "Counting Out Time",
+          "required_level": 53,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4971
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在安多哈尔城中四处散落的保险箱里找到5只安多哈尔怀表，然后把它们交给西瘟疫之地安多哈尔旅店里的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处接取：找回时间。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 37,
+      "action": "接取",
+      "quest_ids": [
+        4985
+      ],
+      "quests": [
+        {
+          "quest_id": 4985,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4984
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "消灭8只生病的灰熊，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "到穆格雷斯·深水处接取：大自然的苦楚。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 53.73,
+          "y": 64.66
+        },
+        "entities": [
+          {
+            "id": 10739,
+            "kind": "npc",
+            "name": "穆格雷斯·深水",
+            "coordinates": [
+              {
+                "x": 53.73,
+                "y": 64.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.73,
+                "y": 64.66
+              },
+              "bounds": {
+                "min_x": 53.73,
+                "max_x": 53.73,
+                "min_y": 64.66,
+                "max_y": 64.66
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 38,
+      "action": "接取",
+      "quest_ids": [
+        5862
+      ],
+      "quests": [
+        {
+          "quest_id": 5862,
+          "name": "血色幻象",
+          "raw_name": "Scarlet Subterfuge",
+          "required_level": 52,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5861
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "和巫女麦兰达交谈以获得血色幻象的效果。在血色幻象的掩护下深入壁炉谷，将提里奥的礼物交给大领主泰兰·弗丁。 /  / 壁炉谷在北方，泰兰应该在玛登霍尔德城堡里面。"
+        }
+      ],
+      "instruction": "到巫女麦兰达处接取：血色幻象。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 50.79,
+          "y": 77.85
+        },
+        "entities": [
+          {
+            "id": 11872,
+            "kind": "npc",
+            "name": "巫女麦兰达",
+            "coordinates": [
+              {
+                "x": 50.79,
+                "y": 77.85
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.79,
+                "y": 77.85
+              },
+              "bounds": {
+                "min_x": 50.79,
+                "max_x": 50.79,
+                "min_y": 77.85,
+                "max_y": 77.85
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 39,
+      "action": "完成目标",
+      "quest_ids": [
+        9444
+      ],
+      "quests": [
+        {
+          "quest_id": 9444,
+          "name": "亵渎乌瑟尔之墓",
+          "raw_name": "Defiling Uther's Tomb",
+          "required_level": 55,
+          "quest_level": 58,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            9443
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "亵渎乌瑟尔之墓，并向西瘟疫之地亡灵壁垒的麦拉·黎明之刃复命。"
+        }
+      ],
+      "instruction": "在Temp Uther's Statue周边完成：亵渎乌瑟尔之墓。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 52.13,
+          "y": 83.5
+        },
+        "entities": [
+          {
+            "id": 181653,
+            "kind": "object",
+            "name": "Temp Uther's Statue",
+            "coordinates": [
+              {
+                "x": 52.13,
+                "y": 83.5
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.13,
+                "y": 83.5
+              },
+              "bounds": {
+                "min_x": 52.13,
+                "max_x": 52.13,
+                "min_y": 83.5,
+                "max_y": 83.5
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 40,
+      "action": "完成目标",
+      "quest_ids": [
+        4972
+      ],
+      "quests": [
+        {
+          "quest_id": 4972,
+          "name": "找回时间",
+          "raw_name": "Counting Out Time",
+          "required_level": 53,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4971
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在安多哈尔城中四处散落的保险箱里找到5只安多哈尔怀表，然后把它们交给西瘟疫之地安多哈尔旅店里的克罗米。"
+        }
+      ],
+      "instruction": "在Andorhal Watch来源：Small Lockbox周边完成：找回时间。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 42.77,
+          "y": 69.7
+        },
+        "entities": [
+          {
+            "id": 175802,
+            "kind": "object",
+            "name": "Andorhal Watch来源：Small Lockbox",
+            "coordinates": [
+              {
+                "x": 40.85,
+                "y": 67.12
+              },
+              {
+                "x": 43.59,
+                "y": 73.5
+              },
+              {
+                "x": 42.38,
+                "y": 68.77
+              },
+              {
+                "x": 48.71,
+                "y": 69.78
+              },
+              {
+                "x": 42.84,
+                "y": 73.93
+              },
+              {
+                "x": 41.28,
+                "y": 69.87
+              },
+              {
+                "x": 41.89,
+                "y": 72.17
+              },
+              {
+                "x": 38.27,
+                "y": 69.63
+              },
+              {
+                "x": 46.61,
+                "y": 66.48
+              },
+              {
+                "x": 42.93,
+                "y": 68.32
+              },
+              {
+                "x": 45.21,
+                "y": 73.73
+              },
+              {
+                "x": 40.25,
+                "y": 68.15
+              },
+              {
+                "x": 45.0,
+                "y": 65.95
+              },
+              {
+                "x": 42.69,
+                "y": 69.6
+              },
+              {
+                "x": 38.9,
+                "y": 68.03
+              },
+              {
+                "x": 44.82,
+                "y": 70.43
+              },
+              {
+                "x": 46.4,
+                "y": 72.96
+              },
+              {
+                "x": 40.32,
+                "y": 66.47
+              },
+              {
+                "x": 44.84,
+                "y": 72.84
+              },
+              {
+                "x": 41.78,
+                "y": 73.58
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.77,
+                "y": 69.7
+              },
+              "bounds": {
+                "min_x": 38.27,
+                "max_x": 48.71,
+                "min_y": 65.95,
+                "max_y": 73.93
+              },
+              "spawn_count": 20
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 41,
+      "action": "完成目标",
+      "quest_ids": [
+        4985
+      ],
+      "quests": [
+        {
+          "quest_id": 4985,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4984
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "消灭8只生病的灰熊，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "在生病的灰熊周边完成：大自然的苦楚。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 59.01,
+          "y": 51.68
+        },
+        "entities": [
+          {
+            "id": 1816,
+            "kind": "npc",
+            "name": "生病的灰熊",
+            "coordinates": [
+              {
+                "x": 67.2,
+                "y": 48.19
+              },
+              {
+                "x": 63.3,
+                "y": 46.42
+              },
+              {
+                "x": 54.98,
+                "y": 50.7
+              },
+              {
+                "x": 67.55,
+                "y": 46.1
+              },
+              {
+                "x": 66.25,
+                "y": 47.78
+              },
+              {
+                "x": 55.8,
+                "y": 63.56
+              },
+              {
+                "x": 60.85,
+                "y": 51.04
+              },
+              {
+                "x": 65.72,
+                "y": 53.62
+              },
+              {
+                "x": 53.37,
+                "y": 50.55
+              },
+              {
+                "x": 55.65,
+                "y": 54.0
+              },
+              {
+                "x": 68.11,
+                "y": 48.47
+              },
+              {
+                "x": 59.11,
+                "y": 59.56
+              },
+              {
+                "x": 52.68,
+                "y": 51.68
+              },
+              {
+                "x": 54.93,
+                "y": 62.23
+              },
+              {
+                "x": 62.21,
+                "y": 48.48
+              },
+              {
+                "x": 55.8,
+                "y": 58.59
+              },
+              {
+                "x": 57.85,
+                "y": 52.95
+              },
+              {
+                "x": 52.86,
+                "y": 49.52
+              },
+              {
+                "x": 58.05,
+                "y": 60.12
+              },
+              {
+                "x": 60.47,
+                "y": 51.95
+              },
+              {
+                "x": 56.73,
+                "y": 62.08
+              },
+              {
+                "x": 58.88,
+                "y": 53.91
+              },
+              {
+                "x": 58.82,
+                "y": 50.54
+              },
+              {
+                "x": 63.55,
+                "y": 45.17
+              },
+              {
+                "x": 60.44,
+                "y": 54.11
+              },
+              {
+                "x": 54.96,
+                "y": 45.82
+              },
+              {
+                "x": 65.5,
+                "y": 55.13
+              },
+              {
+                "x": 66.57,
+                "y": 56.44
+              },
+              {
+                "x": 63.73,
+                "y": 49.75
+              },
+              {
+                "x": 57.14,
+                "y": 51.0
+              },
+              {
+                "x": 66.68,
+                "y": 47.79
+              },
+              {
+                "x": 54.39,
+                "y": 51.88
+              },
+              {
+                "x": 61.88,
+                "y": 47.03
+              },
+              {
+                "x": 52.24,
+                "y": 54.3
+              },
+              {
+                "x": 56.56,
+                "y": 59.99
+              },
+              {
+                "x": 55.99,
+                "y": 53.44
+              },
+              {
+                "x": 62.71,
+                "y": 50.32
+              },
+              {
+                "x": 65.12,
+                "y": 46.43
+              },
+              {
+                "x": 57.12,
+                "y": 53.45
+              },
+              {
+                "x": 66.74,
+                "y": 53.38
+              },
+              {
+                "x": 64.45,
+                "y": 47.71
+              },
+              {
+                "x": 59.01,
+                "y": 51.61
+              },
+              {
+                "x": 61.89,
+                "y": 51.83
+              },
+              {
+                "x": 60.79,
+                "y": 53.54
+              },
+              {
+                "x": 55.81,
+                "y": 49.58
+              },
+              {
+                "x": 62.86,
+                "y": 49.89
+              },
+              {
+                "x": 67.44,
+                "y": 55.32
+              },
+              {
+                "x": 65.02,
+                "y": 53.03
+              },
+              {
+                "x": 66.8,
+                "y": 49.94
+              },
+              {
+                "x": 57.71,
+                "y": 58.44
+              },
+              {
+                "x": 54.27,
+                "y": 47.12
+              },
+              {
+                "x": 54.33,
+                "y": 49.41
+              },
+              {
+                "x": 56.04,
+                "y": 51.39
+              },
+              {
+                "x": 58.16,
+                "y": 62.14
+              },
+              {
+                "x": 64.39,
+                "y": 47.01
+              },
+              {
+                "x": 56.59,
+                "y": 50.71
+              },
+              {
+                "x": 55.93,
+                "y": 60.97
+              },
+              {
+                "x": 64.38,
+                "y": 49.72
+              },
+              {
+                "x": 65.97,
+                "y": 57.43
+              },
+              {
+                "x": 53.4,
+                "y": 60.05
+              },
+              {
+                "x": 52.53,
+                "y": 58.41
+              },
+              {
+                "x": 54.16,
+                "y": 61.15
+              },
+              {
+                "x": 53.36,
+                "y": 62.03
+              },
+              {
+                "x": 56.63,
+                "y": 57.52
+              },
+              {
+                "x": 58.99,
+                "y": 61.01
+              },
+              {
+                "x": 66.41,
+                "y": 54.55
+              },
+              {
+                "x": 60.53,
+                "y": 49.43
+              },
+              {
+                "x": 55.37,
+                "y": 53.0
+              },
+              {
+                "x": 55.16,
+                "y": 64.54
+              },
+              {
+                "x": 66.11,
+                "y": 45.81
+              },
+              {
+                "x": 65.3,
+                "y": 50.29
+              },
+              {
+                "x": 65.87,
+                "y": 44.02
+              },
+              {
+                "x": 68.05,
+                "y": 45.53
+              },
+              {
+                "x": 53.41,
+                "y": 48.3
+              },
+              {
+                "x": 60.17,
+                "y": 50.52
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.01,
+                "y": 51.68
+              },
+              "bounds": {
+                "min_x": 52.24,
+                "max_x": 68.11,
+                "min_y": 44.02,
+                "max_y": 64.54
+              },
+              "spawn_count": 75
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 42,
+      "action": "交付",
+      "quest_ids": [
+        4985
+      ],
+      "quests": [
+        {
+          "quest_id": 4985,
+          "name": "大自然的苦楚",
+          "raw_name": "The Wildlife Suffers Too",
+          "required_level": 51,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4984
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "消灭8只生病的灰熊，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+        }
+      ],
+      "instruction": "到穆格雷斯·深水处交付：大自然的苦楚。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 53.73,
+          "y": 64.66
+        },
+        "entities": [
+          {
+            "id": 10739,
+            "kind": "npc",
+            "name": "穆格雷斯·深水",
+            "coordinates": [
+              {
+                "x": 53.73,
+                "y": 64.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.73,
+                "y": 64.66
+              },
+              "bounds": {
+                "min_x": 53.73,
+                "max_x": 53.73,
+                "min_y": 64.66,
+                "max_y": 64.66
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 43,
+      "action": "交付",
+      "quest_ids": [
+        4972
+      ],
+      "quests": [
+        {
+          "quest_id": 4972,
+          "name": "找回时间",
+          "raw_name": "Counting Out Time",
+          "required_level": 53,
+          "quest_level": 56,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4971
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在安多哈尔城中四处散落的保险箱里找到5只安多哈尔怀表，然后把它们交给西瘟疫之地安多哈尔旅店里的克罗米。"
+        }
+      ],
+      "instruction": "到克罗米处交付：找回时间。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.46,
+          "y": 66.76
+        },
+        "entities": [
+          {
+            "id": 10667,
+            "kind": "npc",
+            "name": "克罗米",
+            "coordinates": [
+              {
+                "x": 39.46,
+                "y": 66.76
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.46,
+                "y": 66.76
+              },
+              "bounds": {
+                "min_x": 39.46,
+                "max_x": 39.46,
+                "min_y": 66.76,
+                "max_y": 66.76
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 44,
+      "action": "交付",
+      "quest_ids": [
+        5862
+      ],
+      "quests": [
+        {
+          "quest_id": 5862,
+          "name": "血色幻象",
+          "raw_name": "Scarlet Subterfuge",
+          "required_level": 52,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5861
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "和巫女麦兰达交谈以获得血色幻象的效果。在血色幻象的掩护下深入壁炉谷，将提里奥的礼物交给大领主泰兰·弗丁。 /  / 壁炉谷在北方，泰兰应该在玛登霍尔德城堡里面。"
+        }
+      ],
+      "instruction": "到大领主泰兰·弗丁处交付：血色幻象。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 42.02,
+          "y": 14.79
+        },
+        "entities": [
+          {
+            "id": 1842,
+            "kind": "npc",
+            "name": "大领主泰兰·弗丁",
+            "coordinates": [
+              {
+                "x": 42.02,
+                "y": 14.79
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.02,
+                "y": 14.79
+              },
+              "bounds": {
+                "min_x": 42.02,
+                "max_x": 42.02,
+                "min_y": 14.79,
+                "max_y": 14.79
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 45,
+      "action": "接取",
+      "quest_ids": [
+        4987
+      ],
+      "quests": [
+        {
+          "quest_id": 4987,
+          "name": "雕文橡木枝",
+          "raw_name": "Glyphed Oaken Branch",
+          "required_level": 51,
+          "quest_level": 56,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            4985
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "根据雕文橡木枝上面所附加的魔法，这个牛头人德鲁伊本来准备把它交给雷霆崖的塞纳里奥议会。看来你应该到那里去找一个德鲁伊，并寻求他的帮助。"
+        }
+      ],
+      "instruction": "到穆格雷斯·深水处接取：雕文橡木枝。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 53.73,
+          "y": 64.66
+        },
+        "entities": [
+          {
+            "id": 10739,
+            "kind": "npc",
+            "name": "穆格雷斯·深水",
+            "coordinates": [
+              {
+                "x": 53.73,
+                "y": 64.66
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 53.73,
+                "y": 64.66
+              },
+              "bounds": {
+                "min_x": 53.73,
+                "max_x": 53.73,
+                "min_y": 64.66,
+                "max_y": 64.66
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 46,
+      "action": "接取",
+      "quest_ids": [
+        5461
+      ],
+      "quests": [
+        {
+          "quest_id": 5461,
+          "name": "莱斯·霜语",
+          "raw_name": "The Human, Ras Frostwhisper",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5384
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5462,
+          "objective_text": "到阿拉希高地的激流堡遗迹里面寻找巫妖生前的遗物。如果你能找到这样的东西，就把它交给马杜克镇长。"
+        }
+      ],
+      "instruction": "到马杜克镇长处接取：莱斯·霜语。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 70.57,
+          "y": 74.11
+        },
+        "entities": [
+          {
+            "id": 11286,
+            "kind": "npc",
+            "name": "马杜克镇长",
+            "coordinates": [
+              {
+                "x": 70.57,
+                "y": 74.11
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 70.57,
+                "y": 74.11
+              },
+              "bounds": {
+                "min_x": 70.57,
+                "max_x": 70.57,
+                "min_y": 74.11,
+                "max_y": 74.11
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 47,
+      "action": "交付",
+      "quest_ids": [
+        5461,
+        5465
+      ],
+      "quests": [
+        {
+          "quest_id": 5461,
+          "name": "莱斯·霜语",
+          "raw_name": "The Human, Ras Frostwhisper",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5384
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5462,
+          "objective_text": "到阿拉希高地的激流堡遗迹里面寻找巫妖生前的遗物。如果你能找到这样的东西，就把它交给马杜克镇长。"
+        },
+        {
+          "quest_id": 5465,
+          "name": "禁锢灵魂的遗物",
+          "raw_name": "Soulbound Keepsake",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5464
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5466,
+          "objective_text": "回到凯尔达隆的马杜克镇长那里，把禁锢灵魂的遗物交给他。"
+        }
+      ],
+      "instruction": "到马杜克镇长处交付：莱斯·霜语、禁锢灵魂的遗物。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 70.57,
+          "y": 74.11
+        },
+        "entities": [
+          {
+            "id": 11286,
+            "kind": "npc",
+            "name": "马杜克镇长",
+            "coordinates": [
+              {
+                "x": 70.57,
+                "y": 74.11
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 70.57,
+                "y": 74.11
+              },
+              "bounds": {
+                "min_x": 70.57,
+                "max_x": 70.57,
+                "min_y": 74.11,
+                "max_y": 74.11
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 48,
+      "action": "交付",
+      "quest_ids": [
+        5162
+      ],
+      "quests": [
+        {
+          "quest_id": 5162,
+          "name": "蓝龙之怒",
+          "raw_name": "Wrath of the Blue Flight",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5161
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5164,
+          "objective_text": "与瘟疫之地的耶兹巴交谈。他居住在安多哈尔。"
+        }
+      ],
+      "instruction": "到耶兹巴处交付：蓝龙之怒。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.37,
+          "y": 66.78
+        },
+        "entities": [
+          {
+            "id": 10976,
+            "kind": "npc",
+            "name": "耶兹巴",
+            "coordinates": [
+              {
+                "x": 39.37,
+                "y": 66.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.37,
+                "y": 66.78
+              },
+              "bounds": {
+                "min_x": 39.37,
+                "max_x": 39.37,
+                "min_y": 66.78,
+                "max_y": 66.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 49,
+      "action": "接取",
+      "quest_ids": [
+        5164
+      ],
+      "quests": [
+        {
+          "quest_id": 5164,
+          "name": "游荡者目录",
+          "raw_name": "Catalogue of the Wayward",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5162
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "阅读游荡者目录。"
+        }
+      ],
+      "instruction": "到耶兹巴处接取：游荡者目录。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 39.37,
+          "y": 66.78
+        },
+        "entities": [
+          {
+            "id": 10976,
+            "kind": "npc",
+            "name": "耶兹巴",
+            "coordinates": [
+              {
+                "x": 39.37,
+                "y": 66.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.37,
+                "y": 66.78
+              },
+              "bounds": {
+                "min_x": 39.37,
+                "max_x": 39.37,
+                "min_y": 66.78,
+                "max_y": 66.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 50,
+      "action": "接取",
+      "quest_ids": [
+        5462
+      ],
+      "quests": [
+        {
+          "quest_id": 5462,
+          "name": "亡灵莱斯·霜语",
+          "raw_name": "The Dying, Ras Frostwhisper",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5461
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 5463,
+          "objective_text": "到东瘟疫之地的圣光之愿礼拜堂去找到莱尼德·巴萨罗梅，给他看看巫妖生前的遗物，并告诉他你收集到的情报。"
+        }
+      ],
+      "instruction": "到马杜克镇长处接取：亡灵莱斯·霜语。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 70.57,
+          "y": 74.11
+        },
+        "entities": [
+          {
+            "id": 11286,
+            "kind": "npc",
+            "name": "马杜克镇长",
+            "coordinates": [
+              {
+                "x": 70.57,
+                "y": 74.11
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 70.57,
+                "y": 74.11
+              },
+              "bounds": {
+                "min_x": 70.57,
+                "max_x": 70.57,
+                "min_y": 74.11,
+                "max_y": 74.11
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 51,
+      "action": "交付",
+      "quest_ids": [
+        5164
+      ],
+      "quests": [
+        {
+          "quest_id": 5164,
+          "name": "游荡者目录",
+          "raw_name": "Catalogue of the Wayward",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5162
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "阅读游荡者目录。"
+        }
+      ],
+      "instruction": "到Catalogue of the Wayward处交付：游荡者目录。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.35,
+          "y": 66.6
+        },
+        "entities": [
+          {
+            "id": 176192,
+            "kind": "object",
+            "name": "Catalogue of the Wayward",
+            "coordinates": [
+              {
+                "x": 39.35,
+                "y": 66.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.35,
+                "y": 66.6
+              },
+              "bounds": {
+                "min_x": 39.35,
+                "max_x": 39.35,
+                "min_y": 66.6,
+                "max_y": 66.6
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 52,
+      "action": "接取",
+      "quest_ids": [
+        5166,
+        5167
+      ],
+      "quests": [
+        {
+          "quest_id": 5166,
+          "name": "多彩巨龙胸甲",
+          "raw_name": "Breastplate of the Chromatic Flight",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩巨龙胸甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 10块磨损的憎恶缝合线。"
+        },
+        {
+          "quest_id": 5167,
+          "name": "多彩挑战者腿甲",
+          "raw_name": "Legplates of the Chromatic Defier",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩挑战者腿甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 5块暗影之皮。"
+        }
+      ],
+      "instruction": "到Catalogue of the Wayward处接取：多彩巨龙胸甲、多彩挑战者腿甲。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 39.35,
+          "y": 66.6
+        },
+        "entities": [
+          {
+            "id": 176192,
+            "kind": "object",
+            "name": "Catalogue of the Wayward",
+            "coordinates": [
+              {
+                "x": 39.35,
+                "y": 66.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.35,
+                "y": 66.6
+              },
+              "bounds": {
+                "min_x": 39.35,
+                "max_x": 39.35,
+                "min_y": 66.6,
+                "max_y": 66.6
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 53,
+      "action": "完成目标",
+      "quest_ids": [
+        5166,
+        5167
+      ],
+      "quests": [
+        {
+          "quest_id": 5166,
+          "name": "多彩巨龙胸甲",
+          "raw_name": "Breastplate of the Chromatic Flight",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩巨龙胸甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 10块磨损的憎恶缝合线。"
+        },
+        {
+          "quest_id": 5167,
+          "name": "多彩挑战者腿甲",
+          "raw_name": "Legplates of the Chromatic Defier",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩挑战者腿甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 5块暗影之皮。"
+        }
+      ],
+      "instruction": "在Blood of Heroes来源：Blood of Heroes周边完成：多彩巨龙胸甲、多彩挑战者腿甲。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 51.04,
+          "y": 44.12
+        },
+        "entities": [
+          {
+            "id": 176213,
+            "kind": "object",
+            "name": "Blood of Heroes来源：Blood of Heroes",
+            "coordinates": [
+              {
+                "x": 49.73,
+                "y": 33.28
+              },
+              {
+                "x": 52.35,
+                "y": 54.95
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.04,
+                "y": 44.12
+              },
+              "bounds": {
+                "min_x": 49.73,
+                "max_x": 52.35,
+                "min_y": 33.28,
+                "max_y": 54.95
+              },
+              "spawn_count": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 54,
+      "action": "交付",
+      "quest_ids": [
+        5166,
+        5167
+      ],
+      "quests": [
+        {
+          "quest_id": 5166,
+          "name": "多彩巨龙胸甲",
+          "raw_name": "Breastplate of the Chromatic Flight",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩巨龙胸甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 10块磨损的憎恶缝合线。"
+        },
+        {
+          "quest_id": 5167,
+          "name": "多彩挑战者腿甲",
+          "raw_name": "Legplates of the Chromatic Defier",
+          "required_level": 57,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 28,
+          "pre_single": [
+            5164
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "为了铸造多彩挑战者腿甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 5块暗影之皮。"
+        }
+      ],
+      "instruction": "到耶兹巴处交付：多彩巨龙胸甲、多彩挑战者腿甲。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 39.37,
+          "y": 66.78
+        },
+        "entities": [
+          {
+            "id": 10976,
+            "kind": "npc",
+            "name": "耶兹巴",
+            "coordinates": [
+              {
+                "x": 39.37,
+                "y": 66.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.37,
+                "y": 66.78
+              },
+              "bounds": {
+                "min_x": 39.37,
+                "max_x": 39.37,
+                "min_y": 66.78,
+                "max_y": 66.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 964,
+      "name": "骸骨碎片",
+      "raw_name": "Skeletal Fragments",
+      "required_level": 55,
+      "quest_level": 57,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        838
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5514,
+      "objective_text": "将15块骸骨碎片交给西瘟疫之地亡灵壁垒的药剂师迪瑟斯。"
+    },
+    {
+      "quest_id": 4971,
+      "name": "时间问题",
+      "raw_name": "A Matter of Time",
+      "required_level": 53,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在安多哈尔的一处仓库附近使用时光置换器，使时光寄生虫现身。 /  / 杀掉10只时光寄生虫，然后将时光置换器还给西瘟疫之地安多哈尔旅店的克罗米。"
+    },
+    {
+      "quest_id": 4972,
+      "name": "找回时间",
+      "raw_name": "Counting Out Time",
+      "required_level": 53,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        4971
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在安多哈尔城中四处散落的保险箱里找到5只安多哈尔怀表，然后把它们交给西瘟疫之地安多哈尔旅店里的克罗米。"
+    },
+    {
+      "quest_id": 4984,
+      "name": "大自然的苦楚",
+      "raw_name": "The Wildlife Suffers Too",
+      "required_level": 51,
+      "quest_level": 54,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 4985,
+      "objective_text": "消灭8只生病的狼，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+    },
+    {
+      "quest_id": 4985,
+      "name": "大自然的苦楚",
+      "raw_name": "The Wildlife Suffers Too",
+      "required_level": 51,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        4984
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "消灭8只生病的灰熊，然后去找西瘟疫之地嚎哭鬼屋的穆格雷斯·深水。"
+    },
+    {
+      "quest_id": 4987,
+      "name": "雕文橡木枝",
+      "raw_name": "Glyphed Oaken Branch",
+      "required_level": 51,
+      "quest_level": 56,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        4985
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "根据雕文橡木枝上面所附加的魔法，这个牛头人德鲁伊本来准备把它交给雷霆崖的塞纳里奥议会。看来你应该到那里去找一个德鲁伊，并寻求他的帮助。"
+    },
+    {
+      "quest_id": 5021,
+      "name": "迟到总比不到好",
+      "raw_name": "Better Late Than Never",
+      "required_level": 50,
+      "quest_level": 52,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "这个女人的幽灵告诉你她要送出一只包裹。她说那只包裹就在她的马旁边。至于马在哪里或者包裹要送到哪里去，她却根本没有说。"
+    },
+    {
+      "quest_id": 5023,
+      "name": "迟到总比不到好",
+      "raw_name": "Better Late Than Never",
+      "required_level": 50,
+      "quest_level": 52,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5021
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5049,
+      "objective_text": "与幽暗城的皇家管理人巴哈乌斯协商，查找杰雷米亚·费尔斯通的下落。通常在公会注册处附近会有一个人口普查官。"
+    },
+    {
+      "quest_id": 5050,
+      "name": "好运护符",
+      "raw_name": "Good Luck Charm",
+      "required_level": 50,
+      "quest_level": 52,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5048,
+        5049
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5051,
+      "objective_text": "把半个好运护符还给西瘟疫之地的詹妮丝-费尔斯通。"
+    },
+    {
+      "quest_id": 5051,
+      "name": "两半合一",
+      "raw_name": "Two Halves Become One",
+      "required_level": 50,
+      "quest_level": 54,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5050
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在西瘟疫之地的费尔斯通农场某地找到另外一半好运护符，并把两半护符合并。 /  / 把好运护符交给西瘟疫之地费尔斯通农场的詹妮丝·费尔斯通。"
+    },
+    {
+      "quest_id": 5058,
+      "name": "达尔松夫人的日记",
+      "raw_name": "Mrs. Dalson's Diary",
+      "required_level": 52,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 5060,
+      "name": "被锁起来的农夫",
+      "raw_name": "Locked Away",
+      "required_level": 52,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 5098,
+      "name": "标记哨塔",
+      "raw_name": "All Along the Watchtowers",
+      "required_level": 50,
+      "quest_level": 56,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5096
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "使用信号火炬为安多哈尔城中的四座哨塔做上标记，你必须站在哨塔门口才能成功地进行标记。 /  / 在做完了标记之后，将信号火炬还给西瘟疫之地亡灵壁垒的高级执行官德灵顿。"
+    },
+    {
+      "quest_id": 5154,
+      "name": "达隆郡的历史",
+      "raw_name": "The Annals of Darrowshire",
+      "required_level": 50,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5153
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把《达隆郡的历史》交给安多哈尔的克罗米。"
+    },
+    {
+      "quest_id": 5162,
+      "name": "蓝龙之怒",
+      "raw_name": "Wrath of the Blue Flight",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5161
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5164,
+      "objective_text": "与瘟疫之地的耶兹巴交谈。他居住在安多哈尔。"
+    },
+    {
+      "quest_id": 5164,
+      "name": "游荡者目录",
+      "raw_name": "Catalogue of the Wayward",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5162
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "阅读游荡者目录。"
+    },
+    {
+      "quest_id": 5166,
+      "name": "多彩巨龙胸甲",
+      "raw_name": "Breastplate of the Chromatic Flight",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5164
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "为了铸造多彩巨龙胸甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 10块磨损的憎恶缝合线。"
+    },
+    {
+      "quest_id": 5167,
+      "name": "多彩挑战者腿甲",
+      "raw_name": "Legplates of the Chromatic Defier",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5164
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "为了铸造多彩挑战者腿甲，你必须把以下材料交给雕刻者耶兹巴： /  / 1块多彩龙鳞。 /  / 10块闪亮的彩色龙鳞。 /  / 10份英雄之血。 /  / 5块暗影之皮。"
+    },
+    {
+      "quest_id": 5229,
+      "name": "目标：费尔斯通农场",
+      "raw_name": "Target: Felstone Field",
+      "required_level": 50,
+      "quest_level": 53,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5228
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5230,
+      "objective_text": "到西瘟疫之地的费尔斯通农场去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带费尔斯通农场的空瓶来采集瘟疫之锅中的毒药样本。"
+    },
+    {
+      "quest_id": 5230,
+      "name": "返回亡灵壁垒",
+      "raw_name": "Return to the Bulwark",
+      "required_level": 50,
+      "quest_level": 53,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5229
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5231,
+      "objective_text": "把费尔斯通农场的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+    },
+    {
+      "quest_id": 5231,
+      "name": "目标：达尔松之泪",
+      "raw_name": "Target: Dalson's Tears",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5230
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5232,
+      "objective_text": "到西瘟疫之地的达尔松之泪去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带达尔松之泪的空瓶来采集瘟疫之锅中的毒药样本。"
+    },
+    {
+      "quest_id": 5232,
+      "name": "返回亡灵壁垒",
+      "raw_name": "Return to the Bulwark",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5231
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5233,
+      "objective_text": "把装满的达尔松眼泪之瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+    },
+    {
+      "quest_id": 5233,
+      "name": "目标：嚎哭鬼屋",
+      "raw_name": "Target: Writhing Haunt",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5232
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5234,
+      "objective_text": "到西瘟疫之地的嚎哭鬼屋去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带嚎哭鬼屋的空瓶来采集瘟疫之锅中的毒药样本。"
+    },
+    {
+      "quest_id": 5234,
+      "name": "返回亡灵壁垒",
+      "raw_name": "Return to the Bulwark",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5233
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5235,
+      "objective_text": "把嚎哭鬼屋的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+    },
+    {
+      "quest_id": 5235,
+      "name": "目标：盖罗恩农场",
+      "raw_name": "Target: Gahrron's Withering",
+      "required_level": 50,
+      "quest_level": 58,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5234
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5236,
+      "objective_text": "到西瘟疫之地的盖罗恩农场去，找到并击败那里的护锅者，用它的钥匙打开瘟疫之锅。你必须随身携带盖罗恩农场的空瓶来采集瘟疫之锅中的毒药样本。"
+    },
+    {
+      "quest_id": 5236,
+      "name": "返回亡灵壁垒",
+      "raw_name": "Return to the Bulwark",
+      "required_level": 50,
+      "quest_level": 58,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5235
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把盖罗恩农场的样本瓶交给西瘟疫之地亡灵壁垒的暗影牧师范蒂丝。"
+    },
+    {
+      "quest_id": 5342,
+      "name": "巴罗夫的继承人",
+      "raw_name": "The Last Barov",
+      "required_level": 52,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5341
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "到冰风岗——联盟的领地——去暗杀维尔顿-巴罗夫。把他的脑袋交给阿莱克斯-巴罗夫。 /  / 要多加小心，联盟也许对维尔顿实施了严密的保护。"
+    },
+    {
+      "quest_id": 5401,
+      "name": "银色黎明委任徽章",
+      "raw_name": "Argent Dawn Commission",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 5405,
+      "name": "银色黎明委任徽章",
+      "raw_name": "Argent Dawn Commission",
+      "required_level": 50,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": ""
+    },
+    {
+      "quest_id": 5461,
+      "name": "莱斯·霜语",
+      "raw_name": "The Human, Ras Frostwhisper",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5384
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5462,
+      "objective_text": "到阿拉希高地的激流堡遗迹里面寻找巫妖生前的遗物。如果你能找到这样的东西，就把它交给马杜克镇长。"
+    },
+    {
+      "quest_id": 5462,
+      "name": "亡灵莱斯·霜语",
+      "raw_name": "The Dying, Ras Frostwhisper",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5461
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5463,
+      "objective_text": "到东瘟疫之地的圣光之愿礼拜堂去找到莱尼德·巴萨罗梅，给他看看巫妖生前的遗物，并告诉他你收集到的情报。"
+    },
+    {
+      "quest_id": 5465,
+      "name": "禁锢灵魂的遗物",
+      "raw_name": "Soulbound Keepsake",
+      "required_level": 57,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5464
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5466,
+      "objective_text": "回到凯尔达隆的马杜克镇长那里，把禁锢灵魂的遗物交给他。"
+    },
+    {
+      "quest_id": 5507,
+      "name": "黎明衬肩",
+      "raw_name": "Mantles of the Dawn",
+      "required_level": 55,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把10个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+    },
+    {
+      "quest_id": 5521,
+      "name": "多彩黎明衬肩",
+      "raw_name": "Chromatic Mantle of the Dawn",
+      "required_level": 55,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "把25个银色黎明勇气勋章交给西瘟疫之地冰风营地的银色黎明军需官莱斯巴克。"
+    },
+    {
+      "quest_id": 5861,
+      "name": "寻找麦兰达",
+      "raw_name": "Find Myranda",
+      "required_level": 52,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5848
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 5862,
+      "objective_text": "到瘟疫之地南部的乌瑟尔之墓去，将提里奥的礼物交给巫女麦兰达。"
+    },
+    {
+      "quest_id": 5862,
+      "name": "血色幻象",
+      "raw_name": "Scarlet Subterfuge",
+      "required_level": 52,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5861
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "和巫女麦兰达交谈以获得血色幻象的效果。在血色幻象的掩护下深入壁炉谷，将提里奥的礼物交给大领主泰兰·弗丁。 /  / 壁炉谷在北方，泰兰应该在玛登霍尔德城堡里面。"
+    },
+    {
+      "quest_id": 6004,
+      "name": "未竟的事业",
+      "raw_name": "Unfinished Business",
+      "required_level": 50,
+      "quest_level": 56,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 6023,
+      "objective_text": "杀死2个血色医护员、2个血色猎人、2个血色魔法师和2个血色骑士，然后回到西瘟疫之地的科尔斯塔·迪普沙东那儿。"
+    },
+    {
+      "quest_id": 6023,
+      "name": "未完的任务",
+      "raw_name": "Unfinished Business",
+      "required_level": 50,
+      "quest_level": 57,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        6004
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 6025,
+      "objective_text": "杀掉猎人莱德雷和骑士杜尔根，然后向西瘟疫之地的科尔斯塔·迪普沙东复命。"
+    },
+    {
+      "quest_id": 6390,
+      "name": "瘟疫与你",
+      "raw_name": "A Plague Upon Thee",
+      "required_level": 48,
+      "quest_level": 55,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        5902
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "使用北山伐木场里的铁棍放出那里的瘟疫白蚁，然后向提瑞斯法林地亡灵壁垒的米克·莱文报告。"
+    },
+    {
+      "quest_id": 9443,
+      "name": "所谓的光明使者印记",
+      "raw_name": "The So-Called Mark of the Lightbringer",
+      "required_level": 55,
+      "quest_level": 58,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 9444,
+      "objective_text": "拿到光明使者的印记，把它交给西瘟疫之地亡灵壁垒的麦拉·黎明之刃。"
+    },
+    {
+      "quest_id": 9444,
+      "name": "亵渎乌瑟尔之墓",
+      "raw_name": "Defiling Uther's Tomb",
+      "required_level": 55,
+      "quest_level": 58,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 28,
+      "pre_single": [
+        9443
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "亵渎乌瑟尔之墓，并向西瘟疫之地亡灵壁垒的麦拉·黎明之刃复命。"
+    }
+  ],
+  "fivebox_observations": {
+    "964": {
+      "status": "not_classified"
+    },
+    "4971": {
+      "status": "not_classified"
+    },
+    "4972": {
+      "status": "not_classified"
+    },
+    "4984": {
+      "status": "not_classified"
+    },
+    "4985": {
+      "status": "not_classified"
+    },
+    "4987": {
+      "status": "not_classified"
+    },
+    "5021": {
+      "status": "not_classified"
+    },
+    "5023": {
+      "status": "not_classified"
+    },
+    "5050": {
+      "status": "not_classified"
+    },
+    "5051": {
+      "status": "not_classified"
+    },
+    "5058": {
+      "status": "not_classified"
+    },
+    "5060": {
+      "status": "not_classified"
+    },
+    "5098": {
+      "status": "not_classified"
+    },
+    "5154": {
+      "status": "not_classified"
+    },
+    "5162": {
+      "status": "not_classified"
+    },
+    "5164": {
+      "status": "not_classified"
+    },
+    "5166": {
+      "status": "not_classified"
+    },
+    "5167": {
+      "status": "not_classified"
+    },
+    "5229": {
+      "status": "not_classified"
+    },
+    "5230": {
+      "status": "not_classified"
+    },
+    "5231": {
+      "status": "not_classified"
+    },
+    "5232": {
+      "status": "not_classified"
+    },
+    "5233": {
+      "status": "not_classified"
+    },
+    "5234": {
+      "status": "not_classified"
+    },
+    "5235": {
+      "status": "not_classified"
+    },
+    "5236": {
+      "status": "not_classified"
+    },
+    "5342": {
+      "status": "not_classified"
+    },
+    "5401": {
+      "status": "not_classified"
+    },
+    "5405": {
+      "status": "not_classified"
+    },
+    "5461": {
+      "status": "not_classified"
+    },
+    "5462": {
+      "status": "not_classified"
+    },
+    "5465": {
+      "status": "not_classified"
+    },
+    "5507": {
+      "status": "not_classified"
+    },
+    "5521": {
+      "status": "not_classified"
+    },
+    "5861": {
+      "status": "not_classified"
+    },
+    "5862": {
+      "status": "not_classified"
+    },
+    "6004": {
+      "status": "not_classified"
+    },
+    "6023": {
+      "status": "not_classified"
+    },
+    "6390": {
+      "status": "not_classified"
+    },
+    "9443": {
+      "status": "not_classified"
+    },
+    "9444": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 41,
+    "step_count": 54,
+    "min_level": 48,
+    "max_level": 57
+  }
+}

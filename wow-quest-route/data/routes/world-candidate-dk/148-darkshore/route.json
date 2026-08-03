@@ -1,0 +1,1825 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-148-candidate",
+  "title": "血精灵死亡骑士 · 黑海岸（Darkshore）任务候选版",
+  "output_basename": "zone-148",
+  "zone": "黑海岸",
+  "zone_en": "Darkshore",
+  "map_area_id": 148,
+  "quest_zone_or_sort": 148,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "Buzzbox 827周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "Moonstalker Fang来源：月夜猛虎周边",
+      "steps": [
+        5
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "Buzzbox 323周边",
+      "steps": [
+        6,
+        7
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "D",
+      "title": "Grizzled Scalp来源：灰斑蓟熊周边",
+      "steps": [
+        8,
+        9,
+        10
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        1001
+      ],
+      "quests": [
+        {
+          "quest_id": 1001,
+          "name": "传声盒411号",
+          "raw_name": "Buzzbox 411",
+          "required_level": 7,
+          "quest_level": 12,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            983
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1002,
+          "objective_text": "从位于传声盒411号附近的深海中收集3颗黑海岸蛇颈龙的眼球。"
+        }
+      ],
+      "instruction": "到Buzzbox 827处接取：传声盒411号。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 36.64,
+          "y": 46.26
+        },
+        "entities": [
+          {
+            "id": 17182,
+            "kind": "object",
+            "name": "Buzzbox 827",
+            "coordinates": [
+              {
+                "x": 36.64,
+                "y": 46.26
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 36.64,
+                "y": 46.26
+              },
+              "bounds": {
+                "min_x": 36.64,
+                "max_x": 36.64,
+                "min_y": 46.26,
+                "max_y": 46.26
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        1001
+      ],
+      "quests": [
+        {
+          "quest_id": 1001,
+          "name": "传声盒411号",
+          "raw_name": "Buzzbox 411",
+          "required_level": 7,
+          "quest_level": 12,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            983
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1002,
+          "objective_text": "从位于传声盒411号附近的深海中收集3颗黑海岸蛇颈龙的眼球。"
+        }
+      ],
+      "instruction": "在Thresher Eye来源：黑海岸蛇颈龙、Thresher Eye来源：老年深海蛇颈龙周边完成：传声盒411号。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 33.43,
+          "y": 55.644999999999996
+        },
+        "entities": [
+          {
+            "id": 2185,
+            "kind": "npc",
+            "name": "Thresher Eye来源：黑海岸蛇颈龙",
+            "coordinates": [
+              {
+                "x": 30.82,
+                "y": 59.25
+              },
+              {
+                "x": 34.52,
+                "y": 35.36
+              },
+              {
+                "x": 35.81,
+                "y": 38.24
+              },
+              {
+                "x": 29.51,
+                "y": 46.34
+              },
+              {
+                "x": 31.91,
+                "y": 59.99
+              },
+              {
+                "x": 33.61,
+                "y": 35.62
+              },
+              {
+                "x": 33.4,
+                "y": 59.97
+              },
+              {
+                "x": 31.82,
+                "y": 38.46
+              },
+              {
+                "x": 33.77,
+                "y": 38.38
+              },
+              {
+                "x": 35.47,
+                "y": 57.55
+              },
+              {
+                "x": 34.85,
+                "y": 37.09
+              },
+              {
+                "x": 33.54,
+                "y": 32.6
+              },
+              {
+                "x": 32.42,
+                "y": 56.97
+              },
+              {
+                "x": 30.88,
+                "y": 55.37
+              },
+              {
+                "x": 32.51,
+                "y": 33.89
+              },
+              {
+                "x": 31.49,
+                "y": 60.29
+              },
+              {
+                "x": 32.67,
+                "y": 35.93
+              },
+              {
+                "x": 33.64,
+                "y": 35.74
+              },
+              {
+                "x": 34.88,
+                "y": 52.68
+              },
+              {
+                "x": 34.94,
+                "y": 31.06
+              },
+              {
+                "x": 33.57,
+                "y": 28.69
+              },
+              {
+                "x": 34.64,
+                "y": 58.77
+              },
+              {
+                "x": 32.51,
+                "y": 36.0
+              },
+              {
+                "x": 34.4,
+                "y": 37.04
+              },
+              {
+                "x": 34.58,
+                "y": 36.05
+              },
+              {
+                "x": 34.35,
+                "y": 56.49
+              },
+              {
+                "x": 31.45,
+                "y": 56.84
+              },
+              {
+                "x": 32.06,
+                "y": 58.31
+              },
+              {
+                "x": 32.7,
+                "y": 58.47
+              },
+              {
+                "x": 34.0,
+                "y": 58.95
+              },
+              {
+                "x": 32.2,
+                "y": 38.49
+              },
+              {
+                "x": 33.22,
+                "y": 40.16
+              },
+              {
+                "x": 31.96,
+                "y": 39.39
+              },
+              {
+                "x": 35.9,
+                "y": 24.24
+              },
+              {
+                "x": 34.56,
+                "y": 53.69
+              },
+              {
+                "x": 33.93,
+                "y": 34.16
+              },
+              {
+                "x": 36.44,
+                "y": 29.24
+              },
+              {
+                "x": 36.8,
+                "y": 27.65
+              },
+              {
+                "x": 34.96,
+                "y": 34.0
+              },
+              {
+                "x": 36.05,
+                "y": 30.86
+              },
+              {
+                "x": 34.39,
+                "y": 29.63
+              },
+              {
+                "x": 33.85,
+                "y": 31.08
+              },
+              {
+                "x": 35.92,
+                "y": 28.07
+              },
+              {
+                "x": 33.9,
+                "y": 39.97
+              },
+              {
+                "x": 32.25,
+                "y": 43.24
+              },
+              {
+                "x": 32.57,
+                "y": 41.25
+              },
+              {
+                "x": 33.59,
+                "y": 41.55
+              },
+              {
+                "x": 35.44,
+                "y": 29.47
+              },
+              {
+                "x": 35.97,
+                "y": 36.49
+              },
+              {
+                "x": 39.66,
+                "y": 29.76
+              },
+              {
+                "x": 33.94,
+                "y": 59.3
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 33.85,
+                "y": 38.38
+              },
+              "bounds": {
+                "min_x": 29.51,
+                "max_x": 39.66,
+                "min_y": 24.24,
+                "max_y": 60.29
+              },
+              "spawn_count": 51
+            }
+          },
+          {
+            "id": 2187,
+            "kind": "npc",
+            "name": "Thresher Eye来源：老年深海蛇颈龙",
+            "coordinates": [
+              {
+                "x": 30.94,
+                "y": 82.66
+              },
+              {
+                "x": 29.96,
+                "y": 88.72
+              },
+              {
+                "x": 55.91,
+                "y": 10.45
+              },
+              {
+                "x": 57.69,
+                "y": 9.57
+              },
+              {
+                "x": 30.41,
+                "y": 85.14
+              },
+              {
+                "x": 51.63,
+                "y": 18.83
+              },
+              {
+                "x": 30.86,
+                "y": 81.25
+              },
+              {
+                "x": 30.44,
+                "y": 79.03
+              },
+              {
+                "x": 30.76,
+                "y": 80.41
+              },
+              {
+                "x": 53.85,
+                "y": 17.09
+              },
+              {
+                "x": 31.01,
+                "y": 72.91
+              },
+              {
+                "x": 31.49,
+                "y": 81.96
+              },
+              {
+                "x": 30.49,
+                "y": 76.54
+              },
+              {
+                "x": 30.6,
+                "y": 88.22
+              },
+              {
+                "x": 30.84,
+                "y": 79.23
+              },
+              {
+                "x": 30.16,
+                "y": 74.45
+              },
+              {
+                "x": 33.01,
+                "y": 86.0
+              },
+              {
+                "x": 30.72,
+                "y": 84.77
+              },
+              {
+                "x": 49.23,
+                "y": 10.49
+              },
+              {
+                "x": 48.39,
+                "y": 12.52
+              },
+              {
+                "x": 48.76,
+                "y": 12.79
+              },
+              {
+                "x": 49.4,
+                "y": 11.27
+              },
+              {
+                "x": 48.27,
+                "y": 11.7
+              },
+              {
+                "x": 48.58,
+                "y": 10.9
+              },
+              {
+                "x": 47.67,
+                "y": 18.62
+              },
+              {
+                "x": 49.3,
+                "y": 12.13
+              },
+              {
+                "x": 49.43,
+                "y": 9.39
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 33.01,
+                "y": 72.91
+              },
+              "bounds": {
+                "min_x": 29.96,
+                "max_x": 57.69,
+                "min_y": 9.39,
+                "max_y": 88.72
+              },
+              "spawn_count": 27
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        1001
+      ],
+      "quests": [
+        {
+          "quest_id": 1001,
+          "name": "传声盒411号",
+          "raw_name": "Buzzbox 411",
+          "required_level": 7,
+          "quest_level": 12,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            983
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1002,
+          "objective_text": "从位于传声盒411号附近的深海中收集3颗黑海岸蛇颈龙的眼球。"
+        }
+      ],
+      "instruction": "到Buzzbox 411处交付：传声盒411号。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 41.96,
+          "y": 28.62
+        },
+        "entities": [
+          {
+            "id": 17183,
+            "kind": "object",
+            "name": "Buzzbox 411",
+            "coordinates": [
+              {
+                "x": 41.96,
+                "y": 28.62
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 41.96,
+                "y": 28.62
+              },
+              "bounds": {
+                "min_x": 41.96,
+                "max_x": 41.96,
+                "min_y": 28.62,
+                "max_y": 28.62
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "接取",
+      "quest_ids": [
+        1002
+      ],
+      "quests": [
+        {
+          "quest_id": 1002,
+          "name": "传声盒323号",
+          "raw_name": "Buzzbox 323",
+          "required_level": 7,
+          "quest_level": 14,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1001
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1003,
+          "objective_text": "收集6颗月夜猛虎的牙齿，把它们放进传声盒323号。"
+        }
+      ],
+      "instruction": "到Buzzbox 411处接取：传声盒323号。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 41.96,
+          "y": 28.62
+        },
+        "entities": [
+          {
+            "id": 17183,
+            "kind": "object",
+            "name": "Buzzbox 411",
+            "coordinates": [
+              {
+                "x": 41.96,
+                "y": 28.62
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 41.96,
+                "y": 28.62
+              },
+              "bounds": {
+                "min_x": 41.96,
+                "max_x": 41.96,
+                "min_y": 28.62,
+                "max_y": 28.62
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "完成目标",
+      "quest_ids": [
+        1002
+      ],
+      "quests": [
+        {
+          "quest_id": 1002,
+          "name": "传声盒323号",
+          "raw_name": "Buzzbox 323",
+          "required_level": 7,
+          "quest_level": 14,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1001
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1003,
+          "objective_text": "收集6颗月夜猛虎的牙齿，把它们放进传声盒323号。"
+        }
+      ],
+      "instruction": "在Moonstalker Fang来源：月夜猛虎、Moonstalker Fang来源：月夜猛虎幼崽、Moonstalker Fang来源：月夜雌虎、Moonstalker Fang来源：月夜雄虎周边完成：传声盒323号。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 42.05,
+          "y": 74.455
+        },
+        "entities": [
+          {
+            "id": 2069,
+            "kind": "npc",
+            "name": "Moonstalker Fang来源：月夜猛虎",
+            "coordinates": [
+              {
+                "x": 55.12,
+                "y": 21.43
+              },
+              {
+                "x": 55.42,
+                "y": 20.85
+              },
+              {
+                "x": 55.51,
+                "y": 21.55
+              },
+              {
+                "x": 54.67,
+                "y": 21.93
+              },
+              {
+                "x": 44.35,
+                "y": 67.39
+              },
+              {
+                "x": 43.59,
+                "y": 69.93
+              },
+              {
+                "x": 44.55,
+                "y": 68.7
+              },
+              {
+                "x": 40.15,
+                "y": 67.45
+              },
+              {
+                "x": 42.66,
+                "y": 72.09
+              },
+              {
+                "x": 40.58,
+                "y": 70.03
+              },
+              {
+                "x": 40.02,
+                "y": 69.35
+              },
+              {
+                "x": 39.02,
+                "y": 72.43
+              },
+              {
+                "x": 39.7,
+                "y": 69.32
+              },
+              {
+                "x": 39.93,
+                "y": 70.62
+              },
+              {
+                "x": 52.74,
+                "y": 29.42
+              },
+              {
+                "x": 43.53,
+                "y": 67.77
+              },
+              {
+                "x": 37.47,
+                "y": 63.38
+              },
+              {
+                "x": 41.0,
+                "y": 67.37
+              },
+              {
+                "x": 39.19,
+                "y": 69.23
+              },
+              {
+                "x": 40.04,
+                "y": 65.98
+              },
+              {
+                "x": 37.47,
+                "y": 78.99
+              },
+              {
+                "x": 39.44,
+                "y": 67.76
+              },
+              {
+                "x": 44.64,
+                "y": 24.76
+              },
+              {
+                "x": 38.98,
+                "y": 66.76
+              },
+              {
+                "x": 38.6,
+                "y": 64.52
+              },
+              {
+                "x": 41.87,
+                "y": 67.67
+              },
+              {
+                "x": 37.97,
+                "y": 59.74
+              },
+              {
+                "x": 43.14,
+                "y": 67.5
+              },
+              {
+                "x": 44.08,
+                "y": 66.05
+              },
+              {
+                "x": 55.5,
+                "y": 23.29
+              },
+              {
+                "x": 50.55,
+                "y": 27.04
+              },
+              {
+                "x": 38.05,
+                "y": 77.46
+              },
+              {
+                "x": 39.02,
+                "y": 70.64
+              },
+              {
+                "x": 48.98,
+                "y": 27.75
+              },
+              {
+                "x": 49.36,
+                "y": 26.65
+              },
+              {
+                "x": 41.77,
+                "y": 71.48
+              },
+              {
+                "x": 39.38,
+                "y": 63.84
+              },
+              {
+                "x": 37.54,
+                "y": 77.25
+              },
+              {
+                "x": 42.36,
+                "y": 64.22
+              },
+              {
+                "x": 53.26,
+                "y": 27.2
+              },
+              {
+                "x": 53.79,
+                "y": 27.85
+              },
+              {
+                "x": 54.94,
+                "y": 30.1
+              },
+              {
+                "x": 50.78,
+                "y": 28.56
+              },
+              {
+                "x": 43.81,
+                "y": 65.65
+              },
+              {
+                "x": 48.87,
+                "y": 25.47
+              },
+              {
+                "x": 42.2,
+                "y": 67.37
+              },
+              {
+                "x": 38.55,
+                "y": 77.51
+              },
+              {
+                "x": 49.2,
+                "y": 32.46
+              },
+              {
+                "x": 51.74,
+                "y": 25.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.66,
+                "y": 66.05
+              },
+              "bounds": {
+                "min_x": 37.47,
+                "max_x": 55.51,
+                "min_y": 20.85,
+                "max_y": 78.99
+              },
+              "spawn_count": 49
+            }
+          },
+          {
+            "id": 2070,
+            "kind": "npc",
+            "name": "Moonstalker Fang来源：月夜猛虎幼崽",
+            "coordinates": [
+              {
+                "x": 47.21,
+                "y": 40.85
+              },
+              {
+                "x": 61.04,
+                "y": 13.04
+              },
+              {
+                "x": 47.25,
+                "y": 44.52
+              },
+              {
+                "x": 44.13,
+                "y": 43.82
+              },
+              {
+                "x": 44.82,
+                "y": 42.65
+              },
+              {
+                "x": 43.57,
+                "y": 28.95
+              },
+              {
+                "x": 45.17,
+                "y": 28.01
+              },
+              {
+                "x": 42.9,
+                "y": 90.32
+              },
+              {
+                "x": 39.41,
+                "y": 39.07
+              },
+              {
+                "x": 41.0,
+                "y": 43.04
+              },
+              {
+                "x": 37.47,
+                "y": 92.99
+              },
+              {
+                "x": 47.92,
+                "y": 40.12
+              },
+              {
+                "x": 44.31,
+                "y": 27.66
+              },
+              {
+                "x": 44.75,
+                "y": 41.21
+              },
+              {
+                "x": 48.66,
+                "y": 24.26
+              },
+              {
+                "x": 40.49,
+                "y": 41.22
+              },
+              {
+                "x": 46.5,
+                "y": 54.2
+              },
+              {
+                "x": 48.26,
+                "y": 38.8
+              },
+              {
+                "x": 40.26,
+                "y": 41.08
+              },
+              {
+                "x": 46.41,
+                "y": 52.43
+              },
+              {
+                "x": 42.64,
+                "y": 43.19
+              },
+              {
+                "x": 39.62,
+                "y": 33.44
+              },
+              {
+                "x": 42.01,
+                "y": 48.18
+              },
+              {
+                "x": 46.38,
+                "y": 42.13
+              },
+              {
+                "x": 43.96,
+                "y": 55.73
+              },
+              {
+                "x": 45.25,
+                "y": 58.79
+              },
+              {
+                "x": 40.07,
+                "y": 33.21
+              },
+              {
+                "x": 35.17,
+                "y": 89.68
+              },
+              {
+                "x": 44.59,
+                "y": 55.68
+              },
+              {
+                "x": 45.02,
+                "y": 57.24
+              },
+              {
+                "x": 42.04,
+                "y": 54.49
+              },
+              {
+                "x": 39.73,
+                "y": 40.42
+              },
+              {
+                "x": 39.4,
+                "y": 39.69
+              },
+              {
+                "x": 40.08,
+                "y": 50.06
+              },
+              {
+                "x": 45.26,
+                "y": 57.61
+              },
+              {
+                "x": 44.53,
+                "y": 58.19
+              },
+              {
+                "x": 42.99,
+                "y": 26.12
+              },
+              {
+                "x": 46.17,
+                "y": 23.72
+              },
+              {
+                "x": 42.66,
+                "y": 25.9
+              },
+              {
+                "x": 39.18,
+                "y": 34.29
+              },
+              {
+                "x": 43.15,
+                "y": 54.65
+              },
+              {
+                "x": 39.58,
+                "y": 37.76
+              },
+              {
+                "x": 44.66,
+                "y": 24.31
+              },
+              {
+                "x": 45.49,
+                "y": 33.28
+              },
+              {
+                "x": 39.76,
+                "y": 91.77
+              },
+              {
+                "x": 39.55,
+                "y": 90.54
+              },
+              {
+                "x": 42.06,
+                "y": 45.27
+              },
+              {
+                "x": 45.1,
+                "y": 24.77
+              },
+              {
+                "x": 45.69,
+                "y": 31.72
+              },
+              {
+                "x": 44.86,
+                "y": 29.28
+              },
+              {
+                "x": 46.26,
+                "y": 23.99
+              },
+              {
+                "x": 45.16,
+                "y": 56.13
+              },
+              {
+                "x": 38.77,
+                "y": 50.73
+              },
+              {
+                "x": 38.06,
+                "y": 36.86
+              },
+              {
+                "x": 43.55,
+                "y": 24.25
+              },
+              {
+                "x": 38.87,
+                "y": 48.78
+              },
+              {
+                "x": 38.04,
+                "y": 50.06
+              },
+              {
+                "x": 61.0,
+                "y": 11.86
+              },
+              {
+                "x": 59.61,
+                "y": 11.75
+              },
+              {
+                "x": 62.61,
+                "y": 6.99
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.05,
+                "y": 41.14
+              },
+              "bounds": {
+                "min_x": 35.17,
+                "max_x": 62.61,
+                "min_y": 6.99,
+                "max_y": 92.99
+              },
+              "spawn_count": 60
+            }
+          },
+          {
+            "id": 2071,
+            "kind": "npc",
+            "name": "Moonstalker Fang来源：月夜雌虎",
+            "coordinates": [
+              {
+                "x": 60.92,
+                "y": 13.41
+              },
+              {
+                "x": 43.03,
+                "y": 90.77
+              },
+              {
+                "x": 37.21,
+                "y": 93.4
+              },
+              {
+                "x": 34.99,
+                "y": 88.84
+              },
+              {
+                "x": 36.47,
+                "y": 90.45
+              },
+              {
+                "x": 36.89,
+                "y": 89.68
+              },
+              {
+                "x": 39.41,
+                "y": 91.8
+              },
+              {
+                "x": 39.85,
+                "y": 90.34
+              },
+              {
+                "x": 59.9,
+                "y": 11.78
+              },
+              {
+                "x": 60.96,
+                "y": 11.87
+              },
+              {
+                "x": 62.92,
+                "y": 7.31
+              },
+              {
+                "x": 62.5,
+                "y": 6.67
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 41.44,
+                "y": 89.26
+              },
+              "bounds": {
+                "min_x": 34.99,
+                "max_x": 62.92,
+                "min_y": 6.67,
+                "max_y": 93.4
+              },
+              "spawn_count": 12
+            }
+          },
+          {
+            "id": 2237,
+            "kind": "npc",
+            "name": "Moonstalker Fang来源：月夜雄虎",
+            "coordinates": [
+              {
+                "x": 43.75,
+                "y": 81.85
+              },
+              {
+                "x": 36.17,
+                "y": 82.11
+              },
+              {
+                "x": 39.32,
+                "y": 94.5
+              },
+              {
+                "x": 44.65,
+                "y": 92.03
+              },
+              {
+                "x": 60.07,
+                "y": 13.37
+              },
+              {
+                "x": 36.59,
+                "y": 91.5
+              },
+              {
+                "x": 39.8,
+                "y": 70.69
+              },
+              {
+                "x": 37.6,
+                "y": 83.9
+              },
+              {
+                "x": 39.89,
+                "y": 81.36
+              },
+              {
+                "x": 40.14,
+                "y": 82.87
+              },
+              {
+                "x": 44.08,
+                "y": 81.33
+              },
+              {
+                "x": 41.67,
+                "y": 83.34
+              },
+              {
+                "x": 43.82,
+                "y": 83.12
+              },
+              {
+                "x": 43.98,
+                "y": 79.96
+              },
+              {
+                "x": 38.53,
+                "y": 90.5
+              },
+              {
+                "x": 40.39,
+                "y": 90.82
+              },
+              {
+                "x": 42.55,
+                "y": 88.09
+              },
+              {
+                "x": 37.53,
+                "y": 91.93
+              },
+              {
+                "x": 61.4,
+                "y": 11.16
+              },
+              {
+                "x": 43.24,
+                "y": 81.99
+              },
+              {
+                "x": 43.2,
+                "y": 82.85
+              },
+              {
+                "x": 38.32,
+                "y": 77.17
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 41.03,
+                "y": 82.86
+              },
+              "bounds": {
+                "min_x": 36.17,
+                "max_x": 61.4,
+                "min_y": 11.16,
+                "max_y": 94.5
+              },
+              "spawn_count": 22
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "交付",
+      "quest_ids": [
+        1002
+      ],
+      "quests": [
+        {
+          "quest_id": 1002,
+          "name": "传声盒323号",
+          "raw_name": "Buzzbox 323",
+          "required_level": 7,
+          "quest_level": 14,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1001
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 1003,
+          "objective_text": "收集6颗月夜猛虎的牙齿，把它们放进传声盒323号。"
+        }
+      ],
+      "instruction": "到Buzzbox 323处交付：传声盒323号。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.29,
+          "y": 24.57
+        },
+        "entities": [
+          {
+            "id": 17184,
+            "kind": "object",
+            "name": "Buzzbox 323",
+            "coordinates": [
+              {
+                "x": 51.29,
+                "y": 24.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.29,
+                "y": 24.57
+              },
+              "bounds": {
+                "min_x": 51.29,
+                "max_x": 51.29,
+                "min_y": 24.57,
+                "max_y": 24.57
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "接取",
+      "quest_ids": [
+        1003
+      ],
+      "quests": [
+        {
+          "quest_id": 1003,
+          "name": "传声盒525号",
+          "raw_name": "Buzzbox 525",
+          "required_level": 7,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1002
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集4块灰色头皮，然后把它们放在传声盒525号中。"
+        }
+      ],
+      "instruction": "到Buzzbox 323处接取：传声盒525号。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.29,
+          "y": 24.57
+        },
+        "entities": [
+          {
+            "id": 17184,
+            "kind": "object",
+            "name": "Buzzbox 323",
+            "coordinates": [
+              {
+                "x": 51.29,
+                "y": 24.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.29,
+                "y": 24.57
+              },
+              "bounds": {
+                "min_x": 51.29,
+                "max_x": 51.29,
+                "min_y": 24.57,
+                "max_y": 24.57
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "完成目标",
+      "quest_ids": [
+        1003
+      ],
+      "quests": [
+        {
+          "quest_id": 1003,
+          "name": "传声盒525号",
+          "raw_name": "Buzzbox 525",
+          "required_level": 7,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1002
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集4块灰色头皮，然后把它们放在传声盒525号中。"
+        }
+      ],
+      "instruction": "在Grizzled Scalp来源：灰斑蓟熊、Grizzled Scalp来源：雌蓟熊周边完成：传声盒525号。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 45.39,
+          "y": 59.69499999999999
+        },
+        "entities": [
+          {
+            "id": 2165,
+            "kind": "npc",
+            "name": "Grizzled Scalp来源：灰斑蓟熊",
+            "coordinates": [
+              {
+                "x": 45.05,
+                "y": 81.41
+              },
+              {
+                "x": 40.29,
+                "y": 75.88
+              },
+              {
+                "x": 38.04,
+                "y": 82.05
+              },
+              {
+                "x": 37.54,
+                "y": 82.03
+              },
+              {
+                "x": 40.47,
+                "y": 81.77
+              },
+              {
+                "x": 40.08,
+                "y": 79.78
+              },
+              {
+                "x": 40.43,
+                "y": 81.13
+              },
+              {
+                "x": 38.61,
+                "y": 82.44
+              },
+              {
+                "x": 38.23,
+                "y": 71.1
+              },
+              {
+                "x": 39.07,
+                "y": 69.96
+              },
+              {
+                "x": 39.8,
+                "y": 80.77
+              },
+              {
+                "x": 39.72,
+                "y": 82.05
+              },
+              {
+                "x": 39.3,
+                "y": 81.36
+              },
+              {
+                "x": 39.14,
+                "y": 76.33
+              },
+              {
+                "x": 37.83,
+                "y": 78.61
+              },
+              {
+                "x": 38.6,
+                "y": 80.49
+              },
+              {
+                "x": 41.06,
+                "y": 81.28
+              },
+              {
+                "x": 37.67,
+                "y": 79.82
+              },
+              {
+                "x": 42.96,
+                "y": 82.45
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 39.3,
+                "y": 81.13
+              },
+              "bounds": {
+                "min_x": 37.54,
+                "max_x": 45.05,
+                "min_y": 69.96,
+                "max_y": 82.45
+              },
+              "spawn_count": 19
+            }
+          },
+          {
+            "id": 6788,
+            "kind": "npc",
+            "name": "Grizzled Scalp来源：雌蓟熊",
+            "coordinates": [
+              {
+                "x": 51.48,
+                "y": 38.26
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.48,
+                "y": 38.26
+              },
+              "bounds": {
+                "min_x": 51.48,
+                "max_x": 51.48,
+                "min_y": 38.26,
+                "max_y": 38.26
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        1003
+      ],
+      "quests": [
+        {
+          "quest_id": 1003,
+          "name": "传声盒525号",
+          "raw_name": "Buzzbox 525",
+          "required_level": 7,
+          "quest_level": 16,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            1002
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集4块灰色头皮，然后把它们放在传声盒525号中。"
+        }
+      ],
+      "instruction": "到Buzzbox 525处交付：传声盒525号。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 41.39,
+          "y": 80.56
+        },
+        "entities": [
+          {
+            "id": 17185,
+            "kind": "object",
+            "name": "Buzzbox 525",
+            "coordinates": [
+              {
+                "x": 41.39,
+                "y": 80.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 41.39,
+                "y": 80.56
+              },
+              "bounds": {
+                "min_x": 41.39,
+                "max_x": 41.39,
+                "min_y": 80.56,
+                "max_y": 80.56
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "交付",
+      "quest_ids": [
+        949
+      ],
+      "quests": [
+        {
+          "quest_id": 949,
+          "name": "暮光之锤的营地",
+          "raw_name": "The Twilight Camp",
+          "required_level": 12,
+          "quest_level": 17,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 148,
+          "pre_single": [
+            944
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 950,
+          "objective_text": "到位于主宰之剑的暮光之锤营地去寻找线索。"
+        }
+      ],
+      "instruction": "到Twilight Tome处交付：暮光之锤的营地。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.54,
+          "y": 86.05
+        },
+        "entities": [
+          {
+            "id": 12666,
+            "kind": "object",
+            "name": "Twilight Tome",
+            "coordinates": [
+              {
+                "x": 38.54,
+                "y": 86.05
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.54,
+                "y": 86.05
+              },
+              "bounds": {
+                "min_x": 38.54,
+                "max_x": 38.54,
+                "min_y": 86.05,
+                "max_y": 86.05
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 949,
+      "name": "暮光之锤的营地",
+      "raw_name": "The Twilight Camp",
+      "required_level": 12,
+      "quest_level": 17,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 148,
+      "pre_single": [
+        944
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 950,
+      "objective_text": "到位于主宰之剑的暮光之锤营地去寻找线索。"
+    },
+    {
+      "quest_id": 1001,
+      "name": "传声盒411号",
+      "raw_name": "Buzzbox 411",
+      "required_level": 7,
+      "quest_level": 12,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 148,
+      "pre_single": [
+        983
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1002,
+      "objective_text": "从位于传声盒411号附近的深海中收集3颗黑海岸蛇颈龙的眼球。"
+    },
+    {
+      "quest_id": 1002,
+      "name": "传声盒323号",
+      "raw_name": "Buzzbox 323",
+      "required_level": 7,
+      "quest_level": 14,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 148,
+      "pre_single": [
+        1001
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 1003,
+      "objective_text": "收集6颗月夜猛虎的牙齿，把它们放进传声盒323号。"
+    },
+    {
+      "quest_id": 1003,
+      "name": "传声盒525号",
+      "raw_name": "Buzzbox 525",
+      "required_level": 7,
+      "quest_level": 16,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 148,
+      "pre_single": [
+        1002
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集4块灰色头皮，然后把它们放在传声盒525号中。"
+    }
+  ],
+  "fivebox_observations": {
+    "949": {
+      "status": "not_classified"
+    },
+    "1001": {
+      "status": "not_classified"
+    },
+    "1002": {
+      "status": "not_classified"
+    },
+    "1003": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 4,
+    "step_count": 10,
+    "min_level": 7,
+    "max_level": 12
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-44-candidate",
+  "title": "赤脊山（Redridge Mountains）坐标导航候选版",
+  "output_basename": "zone-44",
+  "zone": "赤脊山",
+  "zone_en": "Redridge Mountains",
+  "map_area_id": 44,
+  "quest_zone_or_sort": 44,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "肖恩周边",
+      "steps": [
+        1,
+        2,
+        3
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        3741
+      ],
+      "quests": [
+        {
+          "quest_id": 3741,
+          "name": "希拉里的项链",
+          "raw_name": "Hilary's Necklace",
+          "required_level": 12,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 44,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到希拉里的项链，将其还给湖畔镇的希拉里。"
+        }
+      ],
+      "instruction": "到肖恩处接取：希拉里的项链。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 29.32,
+          "y": 53.64
+        },
+        "entities": [
+          {
+            "id": 8965,
+            "kind": "npc",
+            "name": "肖恩",
+            "coordinates": [
+              {
+                "x": 29.32,
+                "y": 53.64
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 29.32,
+                "y": 53.64
+              },
+              "bounds": {
+                "min_x": 29.32,
+                "max_x": 29.32,
+                "min_y": 53.64,
+                "max_y": 53.64
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        3741
+      ],
+      "quests": [
+        {
+          "quest_id": 3741,
+          "name": "希拉里的项链",
+          "raw_name": "Hilary's Necklace",
+          "required_level": 12,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 44,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到希拉里的项链，将其还给湖畔镇的希拉里。"
+        }
+      ],
+      "instruction": "在Hilary's Necklace来源：Glinting Mud周边完成：希拉里的项链。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 27.19,
+          "y": 54.24
+        },
+        "entities": [
+          {
+            "id": 154357,
+            "kind": "object",
+            "name": "Hilary's Necklace来源：Glinting Mud",
+            "coordinates": [
+              {
+                "x": 30.99,
+                "y": 54.23
+              },
+              {
+                "x": 19.16,
+                "y": 51.74
+              },
+              {
+                "x": 36.92,
+                "y": 54.25
+              },
+              {
+                "x": 26.53,
+                "y": 51.19
+              },
+              {
+                "x": 33.76,
+                "y": 55.31
+              },
+              {
+                "x": 38.04,
+                "y": 54.49
+              },
+              {
+                "x": 21.72,
+                "y": 53.17
+              },
+              {
+                "x": 25.74,
+                "y": 54.02
+              },
+              {
+                "x": 24.11,
+                "y": 54.74
+              },
+              {
+                "x": 27.84,
+                "y": 56.08
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 27.19,
+                "y": 54.24
+              },
+              "bounds": {
+                "min_x": 19.16,
+                "max_x": 38.04,
+                "min_y": 51.19,
+                "max_y": 56.08
+              },
+              "spawn_count": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        3741
+      ],
+      "quests": [
+        {
+          "quest_id": 3741,
+          "name": "希拉里的项链",
+          "raw_name": "Hilary's Necklace",
+          "required_level": 12,
+          "quest_level": 15,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 44,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "找到希拉里的项链，将其还给湖畔镇的希拉里。"
+        }
+      ],
+      "instruction": "到希拉里处交付：希拉里的项链。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 29.24,
+          "y": 53.63
+        },
+        "entities": [
+          {
+            "id": 8962,
+            "kind": "npc",
+            "name": "希拉里",
+            "coordinates": [
+              {
+                "x": 29.24,
+                "y": 53.63
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 29.24,
+                "y": 53.63
+              },
+              "bounds": {
+                "min_x": 29.24,
+                "max_x": 29.24,
+                "min_y": 53.63,
+                "max_y": 53.63
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 3741,
+      "name": "希拉里的项链",
+      "raw_name": "Hilary's Necklace",
+      "required_level": 12,
+      "quest_level": 15,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 44,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "找到希拉里的项链，将其还给湖畔镇的希拉里。"
+    }
+  ],
+  "fivebox_observations": {
+    "3741": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 3,
+    "min_level": 12,
+    "max_level": 12
+  }
+}

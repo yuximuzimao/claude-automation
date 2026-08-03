@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-02",
+  "tasks": {
+    "8325": {
+      "type": "kill_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "打怪任务五号同步增加；主号击杀即可推进全队进度。"
+    },
+    "8326": {
+      "type": "loot_personal_variable",
+      "status": "user_confirmed",
+      "note": "山猫项圈需要逐号查看和拾取；同一尸体不保证每个号都有任务物品，以五号最低数量8个为离开条件。"
+    },
+    "8330": {
+      "type": "object_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "索兰尼亚的三个固定物品需要五个角色分别点击/拾取。"
+    },
+    "8334": {
+      "type": "kill_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "打怪任务五号同步增加。"
+    },
+    "8335": {
+      "type": "mixed_shared_kill_personal_loot",
+      "status": "partially_confirmed",
+      "note": "击杀部分按用户反馈可视为同步；首级/任务物品仍应逐号检查。"
+    },
+    "8336": {
+      "type": "loot_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "奥术薄片需要五个角色分别拾取，以最低进度为准。"
+    },
+    "8338": {
+      "type": "item_trigger_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "五个角色都顺利获得并触发被污染的奥术薄片任务；目标位于建筑上层。"
+    },
+    "8345": {
+      "type": "object_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "达斯雷玛神殿只需主号阅读一次，队伍进度同步，不需要五号分别交互。"
+    },
+    "8346": {
+      "type": "ability_personal",
+      "status": "database_confirmed",
+      "note": "任务要求角色自身使用种族技能，五个角色分别操作。"
+    },
+    "6542": {
+      "type": "travel_low_xp_follow_pathing_blocked",
+      "status": "user_confirmed",
+      "note": "《向卡德拉克报到》实跑仅约300经验；交付NPC在北贫瘠之地哨塔上层，骑乘跟随号难以上塔并会断跟随。后续五开路线直接跳过，不因道路顺路而保留。"
+    },
+    "6503": {
+      "type": "kill_shared_stealthed_patrol_search",
+      "status": "user_confirmed",
+      "note": "《灰谷先驱者》的目标是隐身巡逻怪，不能按普通定点怪处理。主号需要在任务区域各处主动巡查并靠近，让怪现身攻击；路线说明必须明确这一机制，并把搜索等待时间计入任务效率。"
+    },
+    "4904": {
+      "type": "escort_route_overlap_confirmed",
+      "status": "user_confirmed",
+      "note": "《终获解救》在阿纳克附近接取。首组实跑确认护送路线与黑云峰下山路线重合，途中本来就需要清怪；不能仅因任务类型是护送而排除。后续执行前应让五个角色都接到任务，并在结束时逐号核对完成状态。"
+    },
+    "9431": {
+      "type": "loot_personal_low_count_route_viable",
+      "status": "user_confirmed",
+      "note": "《另一条路》每个角色只需2份纯净之土。虽然目标区偏远，但可与白沙岗哨西部路线合并；低数量个人拾取不能与10—30件收集任务同等降权。"
+    },
+    "5151": {
+      "type": "named_elite_single_kill_multi_person_loot",
+      "status": "user_confirmed",
+      "note": "《超适应齿轮》距离白沙岗哨近、任务经验高。首组实跑确认只需击杀一次被激怒的黑豹，同一具尸体可供五个角色分别拾取任务物品。"
+    },
+    "1149": {
+      "type": "personal_trigger_jump_hidden_slope_entrance",
+      "status": "user_confirmed",
+      "note": "《信仰的试炼》的多恩位于山顶洞穴，真正入口是山壁旁不明显的斜坡。新手只看NPC坐标很难发现入口；路线必须写斜坡、上山和洞穴，五号逐号传送并从木板末端跳下。"
+    },
+    "1150": {
+      "type": "named_mob_cave_completed_loot_mode_unrecorded",
+      "status": "user_confirmed_partial",
+      "note": "《耐力的试炼》首组五号已经完成并交付，属于西部经验补足环。当前没有单独记录格林卡尸体是否一次供五号拾取，后续复跑仍需验证该细节。"
+    }
+  }
+}

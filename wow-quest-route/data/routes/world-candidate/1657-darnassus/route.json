@@ -1,0 +1,121 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-1657-candidate",
+  "title": "达纳苏斯（Darnassus）坐标导航候选版",
+  "output_basename": "zone-1657",
+  "zone": "达纳苏斯",
+  "zone_en": "Darnassus",
+  "map_area_id": 1657,
+  "quest_zone_or_sort": 1657,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "贾萨姆周边",
+      "steps": [
+        1
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "交付",
+      "quest_ids": [
+        14085
+      ],
+      "quests": [
+        {
+          "quest_id": 14085,
+          "name": "驰骋在达纳苏斯",
+          "raw_name": "Learn to Ride in Darnassus",
+          "required_level": 20,
+          "quest_level": 20,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 1657,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将这本小册子交给达纳苏斯塞纳里奥区的贾萨姆。"
+        }
+      ],
+      "instruction": "到贾萨姆处交付：驰骋在达纳苏斯。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 38.69,
+          "y": 15.84
+        },
+        "entities": [
+          {
+            "id": 4753,
+            "kind": "npc",
+            "name": "贾萨姆",
+            "coordinates": [
+              {
+                "x": 38.69,
+                "y": 15.84
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 38.69,
+                "y": 15.84
+              },
+              "bounds": {
+                "min_x": 38.69,
+                "max_x": 38.69,
+                "min_y": 15.84,
+                "max_y": 15.84
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 14085,
+      "name": "驰骋在达纳苏斯",
+      "raw_name": "Learn to Ride in Darnassus",
+      "required_level": 20,
+      "quest_level": 20,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 1657,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将这本小册子交给达纳苏斯塞纳里奥区的贾萨姆。"
+    }
+  ],
+  "fivebox_observations": {
+    "14085": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 1,
+    "step_count": 1,
+    "min_level": 20,
+    "max_level": 20
+  }
+}

@@ -1,0 +1,644 @@
+{
+  "route_id": "horde-blood-elf-death-knight-zone-4395-candidate",
+  "title": "血精灵死亡骑士 · 达拉然（Dalaran）任务候选版",
+  "output_basename": "zone-4395",
+  "zone": "达拉然",
+  "zone_en": "Dalaran",
+  "map_area_id": 4395,
+  "quest_zone_or_sort": 4395,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "大法师塞琳德拉周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        12790
+      ],
+      "quests": [
+        {
+          "quest_id": 12790,
+          "name": "来去如风",
+          "raw_name": "Learning to Leave and Return: the Magical Way",
+          "required_level": 68,
+          "quest_level": 74,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "达拉然紫罗兰之门的大法师塞琳德拉要求你使用通向达拉然下方废墟的传送水晶和通向达拉然的传送水晶。"
+        }
+      ],
+      "instruction": "到大法师塞琳德拉处接取：来去如风。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 56.3,
+          "y": 46.72
+        },
+        "entities": [
+          {
+            "id": 29156,
+            "kind": "npc",
+            "name": "大法师塞琳德拉",
+            "coordinates": [
+              {
+                "x": 56.3,
+                "y": 46.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.3,
+                "y": 46.72
+              },
+              "bounds": {
+                "min_x": 56.3,
+                "max_x": 56.3,
+                "min_y": 46.72,
+                "max_y": 46.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "完成目标",
+      "quest_ids": [
+        12790
+      ],
+      "quests": [
+        {
+          "quest_id": 12790,
+          "name": "来去如风",
+          "raw_name": "Learning to Leave and Return: the Magical Way",
+          "required_level": 68,
+          "quest_level": 74,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "达拉然紫罗兰之门的大法师塞琳德拉要求你使用通向达拉然下方废墟的传送水晶和通向达拉然的传送水晶。"
+        }
+      ],
+      "instruction": "在Teleport to Violet Stand Crystal周边完成：来去如风。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 55.93,
+          "y": 46.78
+        },
+        "entities": [
+          {
+            "id": 191229,
+            "kind": "object",
+            "name": "Teleport to Violet Stand Crystal",
+            "coordinates": [
+              {
+                "x": 55.93,
+                "y": 46.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.93,
+                "y": 46.78
+              },
+              "bounds": {
+                "min_x": 55.93,
+                "max_x": 55.93,
+                "min_y": 46.78,
+                "max_y": 46.78
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "交付",
+      "quest_ids": [
+        12790
+      ],
+      "quests": [
+        {
+          "quest_id": 12790,
+          "name": "来去如风",
+          "raw_name": "Learning to Leave and Return: the Magical Way",
+          "required_level": 68,
+          "quest_level": 74,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "达拉然紫罗兰之门的大法师塞琳德拉要求你使用通向达拉然下方废墟的传送水晶和通向达拉然的传送水晶。"
+        }
+      ],
+      "instruction": "到大法师塞琳德拉处交付：来去如风。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.3,
+          "y": 46.72
+        },
+        "entities": [
+          {
+            "id": 29156,
+            "kind": "npc",
+            "name": "大法师塞琳德拉",
+            "coordinates": [
+              {
+                "x": 56.3,
+                "y": 46.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.3,
+                "y": 46.72
+              },
+              "bounds": {
+                "min_x": 56.3,
+                "max_x": 56.3,
+                "min_y": 46.72,
+                "max_y": 46.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "交付",
+      "quest_ids": [
+        24431
+      ],
+      "quests": [
+        {
+          "quest_id": 24431,
+          "name": "被浸透的配方",
+          "raw_name": "Waterlogged Recipe",
+          "required_level": 70,
+          "quest_level": 80,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4613,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "将被浸透的配方交给达拉然城中的克莉丝蒂·斯多克顿。"
+        }
+      ],
+      "instruction": "到克莉丝蒂·斯多克顿处交付：被浸透的配方。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 54.0,
+          "y": 32.26
+        },
+        "entities": [
+          {
+            "id": 32337,
+            "kind": "npc",
+            "name": "克莉丝蒂·斯多克顿",
+            "coordinates": [
+              {
+                "x": 54.0,
+                "y": 32.26
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.0,
+                "y": 32.26
+              },
+              "bounds": {
+                "min_x": 54.0,
+                "max_x": 54.0,
+                "min_y": 32.26,
+                "max_y": 32.26
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "交付",
+      "quest_ids": [
+        12791,
+        12796
+      ],
+      "quests": [
+        {
+          "quest_id": 12791,
+          "name": "魔法王国达拉然",
+          "raw_name": "The Magical Kingdom of Dalaran",
+          "required_level": 74,
+          "quest_level": 74,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 12790,
+          "objective_text": "将肯瑞托徽记之戒交给达拉然紫罗兰之门的大法师塞琳德拉。"
+        },
+        {
+          "quest_id": 12796,
+          "name": "魔法王国达拉然",
+          "raw_name": "The Magical Kingdom of Dalaran",
+          "required_level": 74,
+          "quest_level": 74,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 12790,
+          "objective_text": "将肯瑞托徽记之戒交给达拉然紫罗兰之门的大法师塞琳德拉。"
+        }
+      ],
+      "instruction": "到大法师塞琳德拉处交付：魔法王国达拉然、魔法王国达拉然。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 56.3,
+          "y": 46.72
+        },
+        "entities": [
+          {
+            "id": 29156,
+            "kind": "npc",
+            "name": "大法师塞琳德拉",
+            "coordinates": [
+              {
+                "x": 56.3,
+                "y": 46.72
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 56.3,
+                "y": 46.72
+              },
+              "bounds": {
+                "min_x": 56.3,
+                "max_x": 56.3,
+                "min_y": 46.72,
+                "max_y": 46.72
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "接取",
+      "quest_ids": [
+        24557
+      ],
+      "quests": [
+        {
+          "quest_id": 24557,
+          "name": "银色盟约的计谋",
+          "raw_name": "The Silver Covenant's Scheme",
+          "required_level": 80,
+          "quest_level": 80,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [
+            24555
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 24556,
+          "objective_text": "取得银色盟约命令。"
+        }
+      ],
+      "instruction": "到魔导师哈瑟尔处接取：银色盟约的计谋。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 70.05,
+          "y": 31.46
+        },
+        "entities": [
+          {
+            "id": 36670,
+            "kind": "npc",
+            "name": "魔导师哈瑟尔",
+            "coordinates": [
+              {
+                "x": 70.05,
+                "y": 31.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 70.05,
+                "y": 31.46
+              },
+              "bounds": {
+                "min_x": 70.05,
+                "max_x": 70.05,
+                "min_y": 31.46,
+                "max_y": 31.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "完成目标",
+      "quest_ids": [
+        24557
+      ],
+      "quests": [
+        {
+          "quest_id": 24557,
+          "name": "银色盟约的计谋",
+          "raw_name": "The Silver Covenant's Scheme",
+          "required_level": 80,
+          "quest_level": 80,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [
+            24555
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 24556,
+          "objective_text": "取得银色盟约命令。"
+        }
+      ],
+      "instruction": "在Silver Covenant Orders来源：银色盟约密探周边完成：银色盟约的计谋。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 40.67,
+          "y": 55.33
+        },
+        "entities": [
+          {
+            "id": 36774,
+            "kind": "npc",
+            "name": "Silver Covenant Orders来源：银色盟约密探",
+            "coordinates": [
+              {
+                "x": 40.67,
+                "y": 55.33
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.67,
+                "y": 55.33
+              },
+              "bounds": {
+                "min_x": 40.67,
+                "max_x": 40.67,
+                "min_y": 55.33,
+                "max_y": 55.33
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "交付",
+      "quest_ids": [
+        24557
+      ],
+      "quests": [
+        {
+          "quest_id": 24557,
+          "name": "银色盟约的计谋",
+          "raw_name": "The Silver Covenant's Scheme",
+          "required_level": 80,
+          "quest_level": 80,
+          "required_races": 690,
+          "required_classes": null,
+          "zone_or_sort": 4395,
+          "pre_single": [
+            24555
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 24556,
+          "objective_text": "取得银色盟约命令。"
+        }
+      ],
+      "instruction": "到魔导师哈瑟尔处交付：银色盟约的计谋。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 70.05,
+          "y": 31.46
+        },
+        "entities": [
+          {
+            "id": 36670,
+            "kind": "npc",
+            "name": "魔导师哈瑟尔",
+            "coordinates": [
+              {
+                "x": 70.05,
+                "y": 31.46
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 70.05,
+                "y": 31.46
+              },
+              "bounds": {
+                "min_x": 70.05,
+                "max_x": 70.05,
+                "min_y": 31.46,
+                "max_y": 31.46
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 12790,
+      "name": "来去如风",
+      "raw_name": "Learning to Leave and Return: the Magical Way",
+      "required_level": 68,
+      "quest_level": 74,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4395,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "达拉然紫罗兰之门的大法师塞琳德拉要求你使用通向达拉然下方废墟的传送水晶和通向达拉然的传送水晶。"
+    },
+    {
+      "quest_id": 12791,
+      "name": "魔法王国达拉然",
+      "raw_name": "The Magical Kingdom of Dalaran",
+      "required_level": 74,
+      "quest_level": 74,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 4395,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 12790,
+      "objective_text": "将肯瑞托徽记之戒交给达拉然紫罗兰之门的大法师塞琳德拉。"
+    },
+    {
+      "quest_id": 12796,
+      "name": "魔法王国达拉然",
+      "raw_name": "The Magical Kingdom of Dalaran",
+      "required_level": 74,
+      "quest_level": 74,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4395,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 12790,
+      "objective_text": "将肯瑞托徽记之戒交给达拉然紫罗兰之门的大法师塞琳德拉。"
+    },
+    {
+      "quest_id": 24431,
+      "name": "被浸透的配方",
+      "raw_name": "Waterlogged Recipe",
+      "required_level": 70,
+      "quest_level": 80,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4613,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "将被浸透的配方交给达拉然城中的克莉丝蒂·斯多克顿。"
+    },
+    {
+      "quest_id": 24557,
+      "name": "银色盟约的计谋",
+      "raw_name": "The Silver Covenant's Scheme",
+      "required_level": 80,
+      "quest_level": 80,
+      "required_races": 690,
+      "required_classes": null,
+      "zone_or_sort": 4395,
+      "pre_single": [
+        24555
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 24556,
+      "objective_text": "取得银色盟约命令。"
+    }
+  ],
+  "fivebox_observations": {
+    "12790": {
+      "status": "not_classified"
+    },
+    "12791": {
+      "status": "not_classified"
+    },
+    "12796": {
+      "status": "not_classified"
+    },
+    "24431": {
+      "status": "not_classified"
+    },
+    "24557": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 5,
+    "step_count": 8,
+    "min_level": 68,
+    "max_level": 80
+  }
+}

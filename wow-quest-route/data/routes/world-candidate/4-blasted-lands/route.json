@@ -1,0 +1,4092 @@
+{
+  "route_id": "horde-blood-elf-paladin-zone-4-candidate",
+  "title": "诅咒之地（Blasted Lands）坐标导航候选版",
+  "output_basename": "zone-4",
+  "zone": "诅咒之地",
+  "zone_en": "Blasted Lands",
+  "map_area_id": 4,
+  "quest_zone_or_sort": 4,
+  "assumptions": [
+    "只按一个主控角色计算路线，另外四个角色视为持续跟随",
+    "仅使用Questie静态数据库离线生成，不安装自制游戏内插件",
+    "当前是全量自动候选版，未经过该区域实跑审计"
+  ],
+  "segments": [
+    {
+      "id": "A",
+      "title": "血法师德拉吉亚周边",
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "B",
+      "title": "血法师德拉吉亚周边",
+      "steps": [
+        10
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    },
+    {
+      "id": "C",
+      "title": "银色使者普罗维尔周边",
+      "steps": [
+        11,
+        12
+      ],
+      "goal": "只执行本小区域内的接取、目标和交付"
+    }
+  ],
+  "source": {
+    "questie_version": "11.32.3",
+    "source_sha256": "067af50fb3839da9fe681ae12ca025edb172a651adb0e4b06ebec5387300f228"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "接取",
+      "quest_ids": [
+        2581,
+        2583,
+        2585,
+        2601,
+        2603
+      ],
+      "quests": [
+        {
+          "quest_id": 2581,
+          "name": "弯牙土狼的颚骨",
+          "raw_name": "Snickerfang Jowls",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个弯牙土狼的颚骨、2片诅咒之地的野猪肺和1个厚甲蝎螯，把它们交给血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2583,
+          "name": "野猪的活力",
+          "raw_name": "A Boar's Vitality",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3片诅咒之地的野猪肺、2个厚甲蝎螯和1颗石化蜥蜴的大脑，把它们交给血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2585,
+          "name": "决定性的打击",
+          "raw_name": "The Decisive Striker",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个厚甲蝎螯、2个秃鹫的砂囊和1片诅咒之地的野猪肺，把它们血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2601,
+          "name": "石化蜥蜴的大脑",
+          "raw_name": "The Basilisk's Bite",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10颗石化蜥蜴的大脑和2个秃鹫的砂囊，把它们交给血法师莱诺雷。"
+        },
+        {
+          "quest_id": 2603,
+          "name": "秃鹫的活力",
+          "raw_name": "Vulture's Vigor",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10个秃鹫的砂囊和2块弯牙土狼的颚骨，把它们交给血法师莱诺雷。"
+        }
+      ],
+      "instruction": "到血法师德拉吉亚、血法师莱诺雷处接取：弯牙土狼的颚骨、野猪的活力、决定性的打击、石化蜥蜴的大脑、秃鹫的活力。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 50.595,
+          "y": 14.25
+        },
+        "entities": [
+          {
+            "id": 7505,
+            "kind": "npc",
+            "name": "血法师德拉吉亚",
+            "coordinates": [
+              {
+                "x": 50.55,
+                "y": 14.2
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.55,
+                "y": 14.2
+              },
+              "bounds": {
+                "min_x": 50.55,
+                "max_x": 50.55,
+                "min_y": 14.2,
+                "max_y": 14.2
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 7506,
+            "kind": "npc",
+            "name": "血法师莱诺雷",
+            "coordinates": [
+              {
+                "x": 50.64,
+                "y": 14.3
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.64,
+                "y": 14.3
+              },
+              "bounds": {
+                "min_x": 50.64,
+                "max_x": 50.64,
+                "min_y": 14.3,
+                "max_y": 14.3
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "action": "接取",
+      "quest_ids": [
+        2521,
+        3501
+      ],
+      "quests": [
+        {
+          "quest_id": 2521,
+          "name": "为库米沙效力",
+          "raw_name": "To Serve Kum'isha",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在你探索诅咒之地的旅程中，如果碰巧发现了无瑕的德莱尼水晶球，就把它交给收藏家库米沙。 /  / 你要知道，这种宝石是整个艾泽拉斯最珍稀的水晶。诅咒之地上的任何一种生物都有可能带着一颗无瑕的德莱尼水晶球。 /  / 每找到一颗，你都会得到相应的酬劳。"
+        },
+        {
+          "quest_id": 3501,
+          "name": "多多益善",
+          "raw_name": "Everything Counts In Large Amounts",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3502,
+          "objective_text": "将有瑕疵的德莱尼水晶碎片交给库米沙，你就可以得到相应的回报。"
+        }
+      ],
+      "instruction": "到收藏家库米沙处接取：为库米沙效力、多多益善。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 51.98,
+          "y": 35.65
+        },
+        "entities": [
+          {
+            "id": 7363,
+            "kind": "npc",
+            "name": "收藏家库米沙",
+            "coordinates": [
+              {
+                "x": 51.98,
+                "y": 35.65
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.98,
+                "y": 35.65
+              },
+              "bounds": {
+                "min_x": 51.98,
+                "max_x": 51.98,
+                "min_y": 35.65,
+                "max_y": 35.65
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 3,
+      "action": "完成目标",
+      "quest_ids": [
+        2603
+      ],
+      "quests": [
+        {
+          "quest_id": 2603,
+          "name": "秃鹫的活力",
+          "raw_name": "Vulture's Vigor",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10个秃鹫的砂囊和2块弯牙土狼的颚骨，把它们交给血法师莱诺雷。"
+        }
+      ],
+      "instruction": "在Vulture Gizzard来源：黑色屠戮者、Vulture Gizzard来源：拾骨者、Vulture Gizzard来源：斯比弗雷尔、Snickerfang Jowl来源：饥饿的弯牙土狼等6个目标周边完成：秃鹫的活力。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 52.84,
+          "y": 36.965
+        },
+        "entities": [
+          {
+            "id": 5982,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：黑色屠戮者",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 28.33
+              },
+              {
+                "x": 56.72,
+                "y": 37.49
+              },
+              {
+                "x": 56.0,
+                "y": 36.46
+              },
+              {
+                "x": 62.73,
+                "y": 26.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.67,
+                "y": 32.39
+              },
+              "bounds": {
+                "min_x": 56.0,
+                "max_x": 62.73,
+                "min_y": 26.54,
+                "max_y": 37.49
+              },
+              "spawn_count": 4
+            }
+          },
+          {
+            "id": 5983,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：拾骨者",
+            "coordinates": [
+              {
+                "x": 54.92,
+                "y": 44.62
+              },
+              {
+                "x": 54.69,
+                "y": 44.25
+              },
+              {
+                "x": 45.42,
+                "y": 35.57
+              },
+              {
+                "x": 54.46,
+                "y": 36.29
+              },
+              {
+                "x": 53.56,
+                "y": 39.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.46,
+                "y": 39.07
+              },
+              "bounds": {
+                "min_x": 45.42,
+                "max_x": 54.92,
+                "min_y": 35.57,
+                "max_y": 44.62
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 8299,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：斯比弗雷尔",
+            "coordinates": [
+              {
+                "x": 58.75,
+                "y": 42.61
+              },
+              {
+                "x": 61.75,
+                "y": 46.36
+              },
+              {
+                "x": 61.26,
+                "y": 43.88
+              },
+              {
+                "x": 60.42,
+                "y": 42.32
+              },
+              {
+                "x": 61.0,
+                "y": 40.98
+              },
+              {
+                "x": 60.67,
+                "y": 39.78
+              },
+              {
+                "x": 60.16,
+                "y": 37.6
+              },
+              {
+                "x": 61.11,
+                "y": 36.19
+              },
+              {
+                "x": 62.72,
+                "y": 32.48
+              },
+              {
+                "x": 61.94,
+                "y": 31.74
+              },
+              {
+                "x": 61.91,
+                "y": 30.48
+              },
+              {
+                "x": 59.73,
+                "y": 35.53
+              },
+              {
+                "x": 58.4,
+                "y": 35.97
+              },
+              {
+                "x": 57.55,
+                "y": 33.6
+              },
+              {
+                "x": 57.79,
+                "y": 42.32
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.67,
+                "y": 37.6
+              },
+              "bounds": {
+                "min_x": 57.55,
+                "max_x": 62.72,
+                "min_y": 30.48,
+                "max_y": 46.36
+              },
+              "spawn_count": 15
+            }
+          },
+          {
+            "id": 5984,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：饥饿的弯牙土狼",
+            "coordinates": [
+              {
+                "x": 43.93,
+                "y": 25.55
+              },
+              {
+                "x": 45.47,
+                "y": 21.37
+              },
+              {
+                "x": 46.67,
+                "y": 20.94
+              },
+              {
+                "x": 47.77,
+                "y": 19.72
+              },
+              {
+                "x": 50.77,
+                "y": 28.09
+              },
+              {
+                "x": 48.3,
+                "y": 17.84
+              },
+              {
+                "x": 47.77,
+                "y": 23.53
+              },
+              {
+                "x": 45.78,
+                "y": 17.5
+              },
+              {
+                "x": 48.62,
+                "y": 24.52
+              },
+              {
+                "x": 56.04,
+                "y": 17.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.77,
+                "y": 21.16
+              },
+              "bounds": {
+                "min_x": 43.93,
+                "max_x": 56.04,
+                "min_y": 17.5,
+                "max_y": 28.09
+              },
+              "spawn_count": 10
+            }
+          },
+          {
+            "id": 5985,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：弯牙土狼",
+            "coordinates": [
+              {
+                "x": 54.85,
+                "y": 42.57
+              },
+              {
+                "x": 51.03,
+                "y": 36.46
+              },
+              {
+                "x": 49.1,
+                "y": 36.56
+              },
+              {
+                "x": 46.11,
+                "y": 35.19
+              },
+              {
+                "x": 44.91,
+                "y": 33.79
+              },
+              {
+                "x": 51.22,
+                "y": 40.0
+              },
+              {
+                "x": 51.61,
+                "y": 38.8
+              },
+              {
+                "x": 53.16,
+                "y": 38.12
+              },
+              {
+                "x": 52.39,
+                "y": 57.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.22,
+                "y": 38.12
+              },
+              "bounds": {
+                "min_x": 44.91,
+                "max_x": 54.85,
+                "min_y": 33.79,
+                "max_y": 57.23
+              },
+              "spawn_count": 9
+            }
+          },
+          {
+            "id": 8300,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：毁灭",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 35.63
+              },
+              {
+                "x": 46.4,
+                "y": 34.19
+              },
+              {
+                "x": 46.42,
+                "y": 35.87
+              },
+              {
+                "x": 45.5,
+                "y": 36.09
+              },
+              {
+                "x": 45.77,
+                "y": 37.33
+              },
+              {
+                "x": 47.13,
+                "y": 37.1
+              },
+              {
+                "x": 48.47,
+                "y": 37.68
+              },
+              {
+                "x": 48.61,
+                "y": 35.58
+              },
+              {
+                "x": 50.22,
+                "y": 36.86
+              },
+              {
+                "x": 60.24,
+                "y": 35.39
+              },
+              {
+                "x": 60.24,
+                "y": 37.99
+              },
+              {
+                "x": 60.83,
+                "y": 38.96
+              },
+              {
+                "x": 61.48,
+                "y": 36.56
+              },
+              {
+                "x": 61.46,
+                "y": 35.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.41,
+                "y": 36.33
+              },
+              "bounds": {
+                "min_x": 45.5,
+                "max_x": 61.48,
+                "min_y": 34.19,
+                "max_y": 38.96
+              },
+              "spawn_count": 14
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 4,
+      "action": "完成目标",
+      "quest_ids": [
+        2581
+      ],
+      "quests": [
+        {
+          "quest_id": 2581,
+          "name": "弯牙土狼的颚骨",
+          "raw_name": "Snickerfang Jowls",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个弯牙土狼的颚骨、2片诅咒之地的野猪肺和1个厚甲蝎螯，把它们交给血法师德拉吉亚。"
+        }
+      ],
+      "instruction": "在Snickerfang Jowl来源：饥饿的弯牙土狼、Snickerfang Jowl来源：弯牙土狼、Snickerfang Jowl来源：毁灭、Blasted Boar Lung来源：灰鬃野猪等8个目标周边完成：弯牙土狼的颚骨。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 51.705,
+          "y": 32.33
+        },
+        "entities": [
+          {
+            "id": 5984,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：饥饿的弯牙土狼",
+            "coordinates": [
+              {
+                "x": 43.93,
+                "y": 25.55
+              },
+              {
+                "x": 45.47,
+                "y": 21.37
+              },
+              {
+                "x": 46.67,
+                "y": 20.94
+              },
+              {
+                "x": 47.77,
+                "y": 19.72
+              },
+              {
+                "x": 50.77,
+                "y": 28.09
+              },
+              {
+                "x": 48.3,
+                "y": 17.84
+              },
+              {
+                "x": 47.77,
+                "y": 23.53
+              },
+              {
+                "x": 45.78,
+                "y": 17.5
+              },
+              {
+                "x": 48.62,
+                "y": 24.52
+              },
+              {
+                "x": 56.04,
+                "y": 17.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.77,
+                "y": 21.16
+              },
+              "bounds": {
+                "min_x": 43.93,
+                "max_x": 56.04,
+                "min_y": 17.5,
+                "max_y": 28.09
+              },
+              "spawn_count": 10
+            }
+          },
+          {
+            "id": 5985,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：弯牙土狼",
+            "coordinates": [
+              {
+                "x": 54.85,
+                "y": 42.57
+              },
+              {
+                "x": 51.03,
+                "y": 36.46
+              },
+              {
+                "x": 49.1,
+                "y": 36.56
+              },
+              {
+                "x": 46.11,
+                "y": 35.19
+              },
+              {
+                "x": 44.91,
+                "y": 33.79
+              },
+              {
+                "x": 51.22,
+                "y": 40.0
+              },
+              {
+                "x": 51.61,
+                "y": 38.8
+              },
+              {
+                "x": 53.16,
+                "y": 38.12
+              },
+              {
+                "x": 52.39,
+                "y": 57.23
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.22,
+                "y": 38.12
+              },
+              "bounds": {
+                "min_x": 44.91,
+                "max_x": 54.85,
+                "min_y": 33.79,
+                "max_y": 57.23
+              },
+              "spawn_count": 9
+            }
+          },
+          {
+            "id": 8300,
+            "kind": "npc",
+            "name": "Snickerfang Jowl来源：毁灭",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 35.63
+              },
+              {
+                "x": 46.4,
+                "y": 34.19
+              },
+              {
+                "x": 46.42,
+                "y": 35.87
+              },
+              {
+                "x": 45.5,
+                "y": 36.09
+              },
+              {
+                "x": 45.77,
+                "y": 37.33
+              },
+              {
+                "x": 47.13,
+                "y": 37.1
+              },
+              {
+                "x": 48.47,
+                "y": 37.68
+              },
+              {
+                "x": 48.61,
+                "y": 35.58
+              },
+              {
+                "x": 50.22,
+                "y": 36.86
+              },
+              {
+                "x": 60.24,
+                "y": 35.39
+              },
+              {
+                "x": 60.24,
+                "y": 37.99
+              },
+              {
+                "x": 60.83,
+                "y": 38.96
+              },
+              {
+                "x": 61.48,
+                "y": 36.56
+              },
+              {
+                "x": 61.46,
+                "y": 35.06
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.41,
+                "y": 36.33
+              },
+              "bounds": {
+                "min_x": 45.5,
+                "max_x": 61.48,
+                "min_y": 34.19,
+                "max_y": 38.96
+              },
+              "spawn_count": 14
+            }
+          },
+          {
+            "id": 5992,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：灰鬃野猪",
+            "coordinates": [
+              {
+                "x": 62.86,
+                "y": 27.75
+              },
+              {
+                "x": 58.25,
+                "y": 27.28
+              },
+              {
+                "x": 61.78,
+                "y": 28.99
+              },
+              {
+                "x": 59.34,
+                "y": 35.99
+              },
+              {
+                "x": 58.22,
+                "y": 30.36
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.34,
+                "y": 28.99
+              },
+              "bounds": {
+                "min_x": 58.22,
+                "max_x": 62.86,
+                "min_y": 27.28,
+                "max_y": 35.99
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5993,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：地狱野猪",
+            "coordinates": [
+              {
+                "x": 58.9,
+                "y": 45.31
+              },
+              {
+                "x": 60.98,
+                "y": 45.64
+              },
+              {
+                "x": 53.58,
+                "y": 50.46
+              },
+              {
+                "x": 50.25,
+                "y": 55.19
+              },
+              {
+                "x": 52.0,
+                "y": 53.24
+              },
+              {
+                "x": 50.65,
+                "y": 55.71
+              },
+              {
+                "x": 51.49,
+                "y": 53.2
+              },
+              {
+                "x": 52.38,
+                "y": 58.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.19,
+                "y": 53.22
+              },
+              "bounds": {
+                "min_x": 50.25,
+                "max_x": 60.98,
+                "min_y": 45.31,
+                "max_y": 58.0
+              },
+              "spawn_count": 8
+            }
+          },
+          {
+            "id": 8303,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：格朗特",
+            "coordinates": [
+              {
+                "x": 56.08,
+                "y": 31.13
+              },
+              {
+                "x": 52.36,
+                "y": 28.88
+              },
+              {
+                "x": 52.27,
+                "y": 27.39
+              },
+              {
+                "x": 54.13,
+                "y": 28.57
+              },
+              {
+                "x": 54.87,
+                "y": 30.49
+              },
+              {
+                "x": 55.59,
+                "y": 28.39
+              },
+              {
+                "x": 57.64,
+                "y": 30.15
+              },
+              {
+                "x": 57.7,
+                "y": 27.61
+              },
+              {
+                "x": 59.13,
+                "y": 26.14
+              },
+              {
+                "x": 60.51,
+                "y": 26.03
+              },
+              {
+                "x": 61.38,
+                "y": 28.19
+              },
+              {
+                "x": 62.29,
+                "y": 26.71
+              },
+              {
+                "x": 63.27,
+                "y": 28.11
+              },
+              {
+                "x": 62.52,
+                "y": 29.81
+              },
+              {
+                "x": 59.27,
+                "y": 28.56
+              },
+              {
+                "x": 56.82,
+                "y": 28.59
+              },
+              {
+                "x": 57.06,
+                "y": 33.2
+              },
+              {
+                "x": 56.04,
+                "y": 34.28
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.35,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 52.27,
+                "max_x": 63.27,
+                "min_y": 26.03,
+                "max_y": 34.28
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 5988,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：厚甲毒刺蝎",
+            "coordinates": [
+              {
+                "x": 44.01,
+                "y": 29.09
+              },
+              {
+                "x": 44.91,
+                "y": 27.73
+              },
+              {
+                "x": 49.76,
+                "y": 21.96
+              },
+              {
+                "x": 45.48,
+                "y": 24.7
+              },
+              {
+                "x": 43.95,
+                "y": 23.06
+              },
+              {
+                "x": 47.73,
+                "y": 18.8
+              },
+              {
+                "x": 48.75,
+                "y": 19.43
+              },
+              {
+                "x": 50.2,
+                "y": 17.38
+              },
+              {
+                "x": 49.96,
+                "y": 17.01
+              },
+              {
+                "x": 49.33,
+                "y": 16.78
+              },
+              {
+                "x": 44.68,
+                "y": 20.01
+              },
+              {
+                "x": 52.47,
+                "y": 30.5
+              },
+              {
+                "x": 50.85,
+                "y": 29.98
+              },
+              {
+                "x": 56.55,
+                "y": 21.92
+              },
+              {
+                "x": 55.75,
+                "y": 25.18
+              },
+              {
+                "x": 56.74,
+                "y": 23.39
+              },
+              {
+                "x": 46.68,
+                "y": 14.42
+              },
+              {
+                "x": 57.09,
+                "y": 18.83
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.55,
+                "y": 21.94
+              },
+              "bounds": {
+                "min_x": 43.95,
+                "max_x": 57.09,
+                "min_y": 14.42,
+                "max_y": 30.5
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 8301,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：掠夺者科拉克",
+            "coordinates": [
+              {
+                "x": 48.33,
+                "y": 38.69
+              },
+              {
+                "x": 47.58,
+                "y": 35.67
+              },
+              {
+                "x": 49.83,
+                "y": 36.47
+              },
+              {
+                "x": 51.57,
+                "y": 36.87
+              },
+              {
+                "x": 52.75,
+                "y": 38.13
+              },
+              {
+                "x": 54.03,
+                "y": 35.67
+              },
+              {
+                "x": 54.23,
+                "y": 32.8
+              },
+              {
+                "x": 54.1,
+                "y": 30.87
+              },
+              {
+                "x": 54.52,
+                "y": 29.12
+              },
+              {
+                "x": 55.58,
+                "y": 29.91
+              },
+              {
+                "x": 57.72,
+                "y": 35.84
+              },
+              {
+                "x": 58.48,
+                "y": 34.91
+              },
+              {
+                "x": 59.61,
+                "y": 35.29
+              },
+              {
+                "x": 60.86,
+                "y": 35.37
+              },
+              {
+                "x": 58.83,
+                "y": 37.02
+              },
+              {
+                "x": 56.48,
+                "y": 36.22
+              },
+              {
+                "x": 53.77,
+                "y": 37.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.23,
+                "y": 35.67
+              },
+              "bounds": {
+                "min_x": 47.58,
+                "max_x": 60.86,
+                "min_y": 29.12,
+                "max_y": 38.69
+              },
+              "spawn_count": 17
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "action": "完成目标",
+      "quest_ids": [
+        2583
+      ],
+      "quests": [
+        {
+          "quest_id": 2583,
+          "name": "野猪的活力",
+          "raw_name": "A Boar's Vitality",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3片诅咒之地的野猪肺、2个厚甲蝎螯和1颗石化蜥蜴的大脑，把它们交给血法师德拉吉亚。"
+        }
+      ],
+      "instruction": "在Blasted Boar Lung来源：灰鬃野猪、Blasted Boar Lung来源：地狱野猪、Blasted Boar Lung来源：格朗特、Scorpok Pincer来源：厚甲毒刺蝎等8个目标周边完成：野猪的活力。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 55.79,
+          "y": 29.02
+        },
+        "entities": [
+          {
+            "id": 5992,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：灰鬃野猪",
+            "coordinates": [
+              {
+                "x": 62.86,
+                "y": 27.75
+              },
+              {
+                "x": 58.25,
+                "y": 27.28
+              },
+              {
+                "x": 61.78,
+                "y": 28.99
+              },
+              {
+                "x": 59.34,
+                "y": 35.99
+              },
+              {
+                "x": 58.22,
+                "y": 30.36
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.34,
+                "y": 28.99
+              },
+              "bounds": {
+                "min_x": 58.22,
+                "max_x": 62.86,
+                "min_y": 27.28,
+                "max_y": 35.99
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5993,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：地狱野猪",
+            "coordinates": [
+              {
+                "x": 58.9,
+                "y": 45.31
+              },
+              {
+                "x": 60.98,
+                "y": 45.64
+              },
+              {
+                "x": 53.58,
+                "y": 50.46
+              },
+              {
+                "x": 50.25,
+                "y": 55.19
+              },
+              {
+                "x": 52.0,
+                "y": 53.24
+              },
+              {
+                "x": 50.65,
+                "y": 55.71
+              },
+              {
+                "x": 51.49,
+                "y": 53.2
+              },
+              {
+                "x": 52.38,
+                "y": 58.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.19,
+                "y": 53.22
+              },
+              "bounds": {
+                "min_x": 50.25,
+                "max_x": 60.98,
+                "min_y": 45.31,
+                "max_y": 58.0
+              },
+              "spawn_count": 8
+            }
+          },
+          {
+            "id": 8303,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：格朗特",
+            "coordinates": [
+              {
+                "x": 56.08,
+                "y": 31.13
+              },
+              {
+                "x": 52.36,
+                "y": 28.88
+              },
+              {
+                "x": 52.27,
+                "y": 27.39
+              },
+              {
+                "x": 54.13,
+                "y": 28.57
+              },
+              {
+                "x": 54.87,
+                "y": 30.49
+              },
+              {
+                "x": 55.59,
+                "y": 28.39
+              },
+              {
+                "x": 57.64,
+                "y": 30.15
+              },
+              {
+                "x": 57.7,
+                "y": 27.61
+              },
+              {
+                "x": 59.13,
+                "y": 26.14
+              },
+              {
+                "x": 60.51,
+                "y": 26.03
+              },
+              {
+                "x": 61.38,
+                "y": 28.19
+              },
+              {
+                "x": 62.29,
+                "y": 26.71
+              },
+              {
+                "x": 63.27,
+                "y": 28.11
+              },
+              {
+                "x": 62.52,
+                "y": 29.81
+              },
+              {
+                "x": 59.27,
+                "y": 28.56
+              },
+              {
+                "x": 56.82,
+                "y": 28.59
+              },
+              {
+                "x": 57.06,
+                "y": 33.2
+              },
+              {
+                "x": 56.04,
+                "y": 34.28
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.35,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 52.27,
+                "max_x": 63.27,
+                "min_y": 26.03,
+                "max_y": 34.28
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 5988,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：厚甲毒刺蝎",
+            "coordinates": [
+              {
+                "x": 44.01,
+                "y": 29.09
+              },
+              {
+                "x": 44.91,
+                "y": 27.73
+              },
+              {
+                "x": 49.76,
+                "y": 21.96
+              },
+              {
+                "x": 45.48,
+                "y": 24.7
+              },
+              {
+                "x": 43.95,
+                "y": 23.06
+              },
+              {
+                "x": 47.73,
+                "y": 18.8
+              },
+              {
+                "x": 48.75,
+                "y": 19.43
+              },
+              {
+                "x": 50.2,
+                "y": 17.38
+              },
+              {
+                "x": 49.96,
+                "y": 17.01
+              },
+              {
+                "x": 49.33,
+                "y": 16.78
+              },
+              {
+                "x": 44.68,
+                "y": 20.01
+              },
+              {
+                "x": 52.47,
+                "y": 30.5
+              },
+              {
+                "x": 50.85,
+                "y": 29.98
+              },
+              {
+                "x": 56.55,
+                "y": 21.92
+              },
+              {
+                "x": 55.75,
+                "y": 25.18
+              },
+              {
+                "x": 56.74,
+                "y": 23.39
+              },
+              {
+                "x": 46.68,
+                "y": 14.42
+              },
+              {
+                "x": 57.09,
+                "y": 18.83
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.55,
+                "y": 21.94
+              },
+              "bounds": {
+                "min_x": 43.95,
+                "max_x": 57.09,
+                "min_y": 14.42,
+                "max_y": 30.5
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 8301,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：掠夺者科拉克",
+            "coordinates": [
+              {
+                "x": 48.33,
+                "y": 38.69
+              },
+              {
+                "x": 47.58,
+                "y": 35.67
+              },
+              {
+                "x": 49.83,
+                "y": 36.47
+              },
+              {
+                "x": 51.57,
+                "y": 36.87
+              },
+              {
+                "x": 52.75,
+                "y": 38.13
+              },
+              {
+                "x": 54.03,
+                "y": 35.67
+              },
+              {
+                "x": 54.23,
+                "y": 32.8
+              },
+              {
+                "x": 54.1,
+                "y": 30.87
+              },
+              {
+                "x": 54.52,
+                "y": 29.12
+              },
+              {
+                "x": 55.58,
+                "y": 29.91
+              },
+              {
+                "x": 57.72,
+                "y": 35.84
+              },
+              {
+                "x": 58.48,
+                "y": 34.91
+              },
+              {
+                "x": 59.61,
+                "y": 35.29
+              },
+              {
+                "x": 60.86,
+                "y": 35.37
+              },
+              {
+                "x": 58.83,
+                "y": 37.02
+              },
+              {
+                "x": 56.48,
+                "y": 36.22
+              },
+              {
+                "x": 53.77,
+                "y": 37.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.23,
+                "y": 35.67
+              },
+              "bounds": {
+                "min_x": 47.58,
+                "max_x": 60.86,
+                "min_y": 29.12,
+                "max_y": 38.69
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 5990,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：红石蜥蜴",
+            "coordinates": [
+              {
+                "x": 61.14,
+                "y": 30.38
+              },
+              {
+                "x": 60.94,
+                "y": 27.83
+              },
+              {
+                "x": 61.82,
+                "y": 26.17
+              },
+              {
+                "x": 55.02,
+                "y": 29.05
+              },
+              {
+                "x": 60.09,
+                "y": 35.11
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.94,
+                "y": 29.05
+              },
+              "bounds": {
+                "min_x": 55.02,
+                "max_x": 61.82,
+                "min_y": 26.17,
+                "max_y": 35.11
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5991,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：红石晶鳞蜥蜴",
+            "coordinates": [
+              {
+                "x": 61.11,
+                "y": 36.61
+              },
+              {
+                "x": 59.46,
+                "y": 37.76
+              },
+              {
+                "x": 59.03,
+                "y": 44.12
+              },
+              {
+                "x": 60.88,
+                "y": 44.34
+              },
+              {
+                "x": 58.59,
+                "y": 41.02
+              },
+              {
+                "x": 59.72,
+                "y": 42.31
+              },
+              {
+                "x": 60.16,
+                "y": 38.34
+              },
+              {
+                "x": 46.52,
+                "y": 51.06
+              },
+              {
+                "x": 47.08,
+                "y": 49.39
+              },
+              {
+                "x": 45.31,
+                "y": 54.95
+              },
+              {
+                "x": 64.1,
+                "y": 52.48
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.46,
+                "y": 44.12
+              },
+              "bounds": {
+                "min_x": 45.31,
+                "max_x": 64.1,
+                "min_y": 36.61,
+                "max_y": 54.95
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 8302,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：死眼",
+            "coordinates": [
+              {
+                "x": 50.17,
+                "y": 20.72
+              },
+              {
+                "x": 48.46,
+                "y": 20.34
+              },
+              {
+                "x": 47.03,
+                "y": 22.07
+              },
+              {
+                "x": 45.99,
+                "y": 20.36
+              },
+              {
+                "x": 45.02,
+                "y": 19.59
+              },
+              {
+                "x": 45.96,
+                "y": 17.8
+              },
+              {
+                "x": 45.19,
+                "y": 18.27
+              },
+              {
+                "x": 44.04,
+                "y": 25.01
+              },
+              {
+                "x": 45.15,
+                "y": 25.14
+              },
+              {
+                "x": 44.46,
+                "y": 26.36
+              },
+              {
+                "x": 45.17,
+                "y": 28.15
+              },
+              {
+                "x": 43.48,
+                "y": 27.89
+              },
+              {
+                "x": 44.53,
+                "y": 30.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 45.17,
+                "y": 22.07
+              },
+              "bounds": {
+                "min_x": 43.48,
+                "max_x": 50.17,
+                "min_y": 17.8,
+                "max_y": 30.21
+              },
+              "spawn_count": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "完成目标",
+      "quest_ids": [
+        2585,
+        2601
+      ],
+      "quests": [
+        {
+          "quest_id": 2585,
+          "name": "决定性的打击",
+          "raw_name": "The Decisive Striker",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个厚甲蝎螯、2个秃鹫的砂囊和1片诅咒之地的野猪肺，把它们血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2601,
+          "name": "石化蜥蜴的大脑",
+          "raw_name": "The Basilisk's Bite",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10颗石化蜥蜴的大脑和2个秃鹫的砂囊，把它们交给血法师莱诺雷。"
+        }
+      ],
+      "instruction": "在Scorpok Pincer来源：厚甲毒刺蝎、Scorpok Pincer来源：掠夺者科拉克、Vulture Gizzard来源：黑色屠戮者、Vulture Gizzard来源：拾骨者等11个目标周边完成：决定性的打击、石化蜥蜴的大脑。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 57.35,
+          "y": 32.39
+        },
+        "entities": [
+          {
+            "id": 5988,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：厚甲毒刺蝎",
+            "coordinates": [
+              {
+                "x": 44.01,
+                "y": 29.09
+              },
+              {
+                "x": 44.91,
+                "y": 27.73
+              },
+              {
+                "x": 49.76,
+                "y": 21.96
+              },
+              {
+                "x": 45.48,
+                "y": 24.7
+              },
+              {
+                "x": 43.95,
+                "y": 23.06
+              },
+              {
+                "x": 47.73,
+                "y": 18.8
+              },
+              {
+                "x": 48.75,
+                "y": 19.43
+              },
+              {
+                "x": 50.2,
+                "y": 17.38
+              },
+              {
+                "x": 49.96,
+                "y": 17.01
+              },
+              {
+                "x": 49.33,
+                "y": 16.78
+              },
+              {
+                "x": 44.68,
+                "y": 20.01
+              },
+              {
+                "x": 52.47,
+                "y": 30.5
+              },
+              {
+                "x": 50.85,
+                "y": 29.98
+              },
+              {
+                "x": 56.55,
+                "y": 21.92
+              },
+              {
+                "x": 55.75,
+                "y": 25.18
+              },
+              {
+                "x": 56.74,
+                "y": 23.39
+              },
+              {
+                "x": 46.68,
+                "y": 14.42
+              },
+              {
+                "x": 57.09,
+                "y": 18.83
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 49.55,
+                "y": 21.94
+              },
+              "bounds": {
+                "min_x": 43.95,
+                "max_x": 57.09,
+                "min_y": 14.42,
+                "max_y": 30.5
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 8301,
+            "kind": "npc",
+            "name": "Scorpok Pincer来源：掠夺者科拉克",
+            "coordinates": [
+              {
+                "x": 48.33,
+                "y": 38.69
+              },
+              {
+                "x": 47.58,
+                "y": 35.67
+              },
+              {
+                "x": 49.83,
+                "y": 36.47
+              },
+              {
+                "x": 51.57,
+                "y": 36.87
+              },
+              {
+                "x": 52.75,
+                "y": 38.13
+              },
+              {
+                "x": 54.03,
+                "y": 35.67
+              },
+              {
+                "x": 54.23,
+                "y": 32.8
+              },
+              {
+                "x": 54.1,
+                "y": 30.87
+              },
+              {
+                "x": 54.52,
+                "y": 29.12
+              },
+              {
+                "x": 55.58,
+                "y": 29.91
+              },
+              {
+                "x": 57.72,
+                "y": 35.84
+              },
+              {
+                "x": 58.48,
+                "y": 34.91
+              },
+              {
+                "x": 59.61,
+                "y": 35.29
+              },
+              {
+                "x": 60.86,
+                "y": 35.37
+              },
+              {
+                "x": 58.83,
+                "y": 37.02
+              },
+              {
+                "x": 56.48,
+                "y": 36.22
+              },
+              {
+                "x": 53.77,
+                "y": 37.78
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.23,
+                "y": 35.67
+              },
+              "bounds": {
+                "min_x": 47.58,
+                "max_x": 60.86,
+                "min_y": 29.12,
+                "max_y": 38.69
+              },
+              "spawn_count": 17
+            }
+          },
+          {
+            "id": 5982,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：黑色屠戮者",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 28.33
+              },
+              {
+                "x": 56.72,
+                "y": 37.49
+              },
+              {
+                "x": 56.0,
+                "y": 36.46
+              },
+              {
+                "x": 62.73,
+                "y": 26.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.67,
+                "y": 32.39
+              },
+              "bounds": {
+                "min_x": 56.0,
+                "max_x": 62.73,
+                "min_y": 26.54,
+                "max_y": 37.49
+              },
+              "spawn_count": 4
+            }
+          },
+          {
+            "id": 5983,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：拾骨者",
+            "coordinates": [
+              {
+                "x": 54.92,
+                "y": 44.62
+              },
+              {
+                "x": 54.69,
+                "y": 44.25
+              },
+              {
+                "x": 45.42,
+                "y": 35.57
+              },
+              {
+                "x": 54.46,
+                "y": 36.29
+              },
+              {
+                "x": 53.56,
+                "y": 39.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 54.46,
+                "y": 39.07
+              },
+              "bounds": {
+                "min_x": 45.42,
+                "max_x": 54.92,
+                "min_y": 35.57,
+                "max_y": 44.62
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 8299,
+            "kind": "npc",
+            "name": "Vulture Gizzard来源：斯比弗雷尔",
+            "coordinates": [
+              {
+                "x": 58.75,
+                "y": 42.61
+              },
+              {
+                "x": 61.75,
+                "y": 46.36
+              },
+              {
+                "x": 61.26,
+                "y": 43.88
+              },
+              {
+                "x": 60.42,
+                "y": 42.32
+              },
+              {
+                "x": 61.0,
+                "y": 40.98
+              },
+              {
+                "x": 60.67,
+                "y": 39.78
+              },
+              {
+                "x": 60.16,
+                "y": 37.6
+              },
+              {
+                "x": 61.11,
+                "y": 36.19
+              },
+              {
+                "x": 62.72,
+                "y": 32.48
+              },
+              {
+                "x": 61.94,
+                "y": 31.74
+              },
+              {
+                "x": 61.91,
+                "y": 30.48
+              },
+              {
+                "x": 59.73,
+                "y": 35.53
+              },
+              {
+                "x": 58.4,
+                "y": 35.97
+              },
+              {
+                "x": 57.55,
+                "y": 33.6
+              },
+              {
+                "x": 57.79,
+                "y": 42.32
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.67,
+                "y": 37.6
+              },
+              "bounds": {
+                "min_x": 57.55,
+                "max_x": 62.72,
+                "min_y": 30.48,
+                "max_y": 46.36
+              },
+              "spawn_count": 15
+            }
+          },
+          {
+            "id": 5992,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：灰鬃野猪",
+            "coordinates": [
+              {
+                "x": 62.86,
+                "y": 27.75
+              },
+              {
+                "x": 58.25,
+                "y": 27.28
+              },
+              {
+                "x": 61.78,
+                "y": 28.99
+              },
+              {
+                "x": 59.34,
+                "y": 35.99
+              },
+              {
+                "x": 58.22,
+                "y": 30.36
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.34,
+                "y": 28.99
+              },
+              "bounds": {
+                "min_x": 58.22,
+                "max_x": 62.86,
+                "min_y": 27.28,
+                "max_y": 35.99
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5993,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：地狱野猪",
+            "coordinates": [
+              {
+                "x": 58.9,
+                "y": 45.31
+              },
+              {
+                "x": 60.98,
+                "y": 45.64
+              },
+              {
+                "x": 53.58,
+                "y": 50.46
+              },
+              {
+                "x": 50.25,
+                "y": 55.19
+              },
+              {
+                "x": 52.0,
+                "y": 53.24
+              },
+              {
+                "x": 50.65,
+                "y": 55.71
+              },
+              {
+                "x": 51.49,
+                "y": 53.2
+              },
+              {
+                "x": 52.38,
+                "y": 58.0
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 52.19,
+                "y": 53.22
+              },
+              "bounds": {
+                "min_x": 50.25,
+                "max_x": 60.98,
+                "min_y": 45.31,
+                "max_y": 58.0
+              },
+              "spawn_count": 8
+            }
+          },
+          {
+            "id": 8303,
+            "kind": "npc",
+            "name": "Blasted Boar Lung来源：格朗特",
+            "coordinates": [
+              {
+                "x": 56.08,
+                "y": 31.13
+              },
+              {
+                "x": 52.36,
+                "y": 28.88
+              },
+              {
+                "x": 52.27,
+                "y": 27.39
+              },
+              {
+                "x": 54.13,
+                "y": 28.57
+              },
+              {
+                "x": 54.87,
+                "y": 30.49
+              },
+              {
+                "x": 55.59,
+                "y": 28.39
+              },
+              {
+                "x": 57.64,
+                "y": 30.15
+              },
+              {
+                "x": 57.7,
+                "y": 27.61
+              },
+              {
+                "x": 59.13,
+                "y": 26.14
+              },
+              {
+                "x": 60.51,
+                "y": 26.03
+              },
+              {
+                "x": 61.38,
+                "y": 28.19
+              },
+              {
+                "x": 62.29,
+                "y": 26.71
+              },
+              {
+                "x": 63.27,
+                "y": 28.11
+              },
+              {
+                "x": 62.52,
+                "y": 29.81
+              },
+              {
+                "x": 59.27,
+                "y": 28.56
+              },
+              {
+                "x": 56.82,
+                "y": 28.59
+              },
+              {
+                "x": 57.06,
+                "y": 33.2
+              },
+              {
+                "x": 56.04,
+                "y": 34.28
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.35,
+                "y": 28.56
+              },
+              "bounds": {
+                "min_x": 52.27,
+                "max_x": 63.27,
+                "min_y": 26.03,
+                "max_y": 34.28
+              },
+              "spawn_count": 18
+            }
+          },
+          {
+            "id": 5990,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：红石蜥蜴",
+            "coordinates": [
+              {
+                "x": 61.14,
+                "y": 30.38
+              },
+              {
+                "x": 60.94,
+                "y": 27.83
+              },
+              {
+                "x": 61.82,
+                "y": 26.17
+              },
+              {
+                "x": 55.02,
+                "y": 29.05
+              },
+              {
+                "x": 60.09,
+                "y": 35.11
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 60.94,
+                "y": 29.05
+              },
+              "bounds": {
+                "min_x": 55.02,
+                "max_x": 61.82,
+                "min_y": 26.17,
+                "max_y": 35.11
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5991,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：红石晶鳞蜥蜴",
+            "coordinates": [
+              {
+                "x": 61.11,
+                "y": 36.61
+              },
+              {
+                "x": 59.46,
+                "y": 37.76
+              },
+              {
+                "x": 59.03,
+                "y": 44.12
+              },
+              {
+                "x": 60.88,
+                "y": 44.34
+              },
+              {
+                "x": 58.59,
+                "y": 41.02
+              },
+              {
+                "x": 59.72,
+                "y": 42.31
+              },
+              {
+                "x": 60.16,
+                "y": 38.34
+              },
+              {
+                "x": 46.52,
+                "y": 51.06
+              },
+              {
+                "x": 47.08,
+                "y": 49.39
+              },
+              {
+                "x": 45.31,
+                "y": 54.95
+              },
+              {
+                "x": 64.1,
+                "y": 52.48
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 59.46,
+                "y": 44.12
+              },
+              "bounds": {
+                "min_x": 45.31,
+                "max_x": 64.1,
+                "min_y": 36.61,
+                "max_y": 54.95
+              },
+              "spawn_count": 11
+            }
+          },
+          {
+            "id": 8302,
+            "kind": "npc",
+            "name": "Basilisk Brain来源：死眼",
+            "coordinates": [
+              {
+                "x": 50.17,
+                "y": 20.72
+              },
+              {
+                "x": 48.46,
+                "y": 20.34
+              },
+              {
+                "x": 47.03,
+                "y": 22.07
+              },
+              {
+                "x": 45.99,
+                "y": 20.36
+              },
+              {
+                "x": 45.02,
+                "y": 19.59
+              },
+              {
+                "x": 45.96,
+                "y": 17.8
+              },
+              {
+                "x": 45.19,
+                "y": 18.27
+              },
+              {
+                "x": 44.04,
+                "y": 25.01
+              },
+              {
+                "x": 45.15,
+                "y": 25.14
+              },
+              {
+                "x": 44.46,
+                "y": 26.36
+              },
+              {
+                "x": 45.17,
+                "y": 28.15
+              },
+              {
+                "x": 43.48,
+                "y": 27.89
+              },
+              {
+                "x": 44.53,
+                "y": 30.21
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 45.17,
+                "y": 22.07
+              },
+              "bounds": {
+                "min_x": 43.48,
+                "max_x": 50.17,
+                "min_y": 17.8,
+                "max_y": 30.21
+              },
+              "spawn_count": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 7,
+      "action": "完成目标",
+      "quest_ids": [
+        2681
+      ],
+      "quests": [
+        {
+          "quest_id": 2681,
+          "name": "禁锢我们的石头",
+          "raw_name": "The Stones That Bind Us",
+          "required_level": 45,
+          "quest_level": 57,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [
+            2801
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 2702,
+          "objective_text": "解救九个拉瑟莱克的仆从、三个瑟温妮的仆从、三个奥利斯塔的仆从和三个戈洛尔的仆从。完成任务后，回到部落英雄的灵魂这里。"
+        }
+      ],
+      "instruction": "在拉瑟莱克的仆从、戈洛尔的仆从、奥利斯塔的仆从、瑟温妮的仆从周边完成：禁锢我们的石头。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 49.215,
+          "y": 40.46
+        },
+        "entities": [
+          {
+            "id": 7668,
+            "kind": "npc",
+            "name": "拉瑟莱克的仆从",
+            "coordinates": [
+              {
+                "x": 62.84,
+                "y": 56.81
+              },
+              {
+                "x": 63.09,
+                "y": 55.73
+              },
+              {
+                "x": 53.27,
+                "y": 58.82
+              },
+              {
+                "x": 51.72,
+                "y": 57.12
+              },
+              {
+                "x": 54.09,
+                "y": 52.49
+              },
+              {
+                "x": 61.79,
+                "y": 51.17
+              },
+              {
+                "x": 55.05,
+                "y": 48.55
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 55.05,
+                "y": 55.73
+              },
+              "bounds": {
+                "min_x": 51.72,
+                "max_x": 63.09,
+                "min_y": 48.55,
+                "max_y": 58.82
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 7669,
+            "kind": "npc",
+            "name": "戈洛尔的仆从",
+            "coordinates": [
+              {
+                "x": 48.33,
+                "y": 42.93
+              },
+              {
+                "x": 43.38,
+                "y": 10.64
+              },
+              {
+                "x": 41.22,
+                "y": 14.43
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 43.38,
+                "y": 14.43
+              },
+              "bounds": {
+                "min_x": 41.22,
+                "max_x": 48.33,
+                "min_y": 10.64,
+                "max_y": 42.93
+              },
+              "spawn_count": 3
+            }
+          },
+          {
+            "id": 7670,
+            "kind": "npc",
+            "name": "奥利斯塔的仆从",
+            "coordinates": [
+              {
+                "x": 63.33,
+                "y": 40.83
+              },
+              {
+                "x": 64.28,
+                "y": 46.82
+              },
+              {
+                "x": 64.37,
+                "y": 34.25
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 64.28,
+                "y": 40.83
+              },
+              "bounds": {
+                "min_x": 63.33,
+                "max_x": 64.37,
+                "min_y": 34.25,
+                "max_y": 46.82
+              },
+              "spawn_count": 3
+            }
+          },
+          {
+            "id": 7671,
+            "kind": "npc",
+            "name": "瑟温妮的仆从",
+            "coordinates": [
+              {
+                "x": 43.3,
+                "y": 40.73
+              },
+              {
+                "x": 38.24,
+                "y": 33.88
+              },
+              {
+                "x": 40.99,
+                "y": 40.09
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.99,
+                "y": 40.09
+              },
+              "bounds": {
+                "min_x": 38.24,
+                "max_x": 43.3,
+                "min_y": 33.88,
+                "max_y": 40.73
+              },
+              "spawn_count": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 8,
+      "action": "完成目标",
+      "quest_ids": [
+        2521,
+        3501,
+        3627
+      ],
+      "quests": [
+        {
+          "quest_id": 2521,
+          "name": "为库米沙效力",
+          "raw_name": "To Serve Kum'isha",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在你探索诅咒之地的旅程中，如果碰巧发现了无瑕的德莱尼水晶球，就把它交给收藏家库米沙。 /  / 你要知道，这种宝石是整个艾泽拉斯最珍稀的水晶。诅咒之地上的任何一种生物都有可能带着一颗无瑕的德莱尼水晶球。 /  / 每找到一颗，你都会得到相应的酬劳。"
+        },
+        {
+          "quest_id": 3501,
+          "name": "多多益善",
+          "raw_name": "Everything Counts In Large Amounts",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3502,
+          "objective_text": "将有瑕疵的德莱尼水晶碎片交给库米沙，你就可以得到相应的回报。"
+        },
+        {
+          "quest_id": 3627,
+          "name": "收集破碎的护符",
+          "raw_name": "Uniting the Shattered Amulet",
+          "required_level": 45,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [
+            3626
+          ],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3628,
+          "objective_text": "杀掉毁灭者戈洛尔、瑟温妮，以及大法师奥利斯塔。从他们到尸体上拿到戈洛尔的护符、瑟温妮的护符和奥利斯塔的护符。 /  / 记住使用你的魔化艾萨拉水晶武器来削弱他们，否则他们是无法被杀死的——你必须小心谨慎地使用你的武器......"
+        }
+      ],
+      "instruction": "在Flawless Draenethyst Sphere来源：巨槌食人魔、Flawless Draenethyst Sphere来源：巨槌食人魔法师、Flawless Draenethyst Sphere来源：巨槌蛮兵、Flawless Draenethyst Sphere来源：巨槌战士等19个目标周边完成：为库米沙效力、多多益善、收集破碎的护符。路线只按主控号移动；需要个人拾取或点击时再切换跟随号。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "objective",
+        "representative": {
+          "x": 44.73,
+          "y": 29.24
+        },
+        "entities": [
+          {
+            "id": 5974,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：巨槌食人魔",
+            "coordinates": [
+              {
+                "x": 43.86,
+                "y": 14.78
+              },
+              {
+                "x": 43.26,
+                "y": 15.38
+              },
+              {
+                "x": 42.21,
+                "y": 12.65
+              },
+              {
+                "x": 42.98,
+                "y": 12.91
+              },
+              {
+                "x": 41.7,
+                "y": 14.64
+              },
+              {
+                "x": 41.14,
+                "y": 12.45
+              },
+              {
+                "x": 42.18,
+                "y": 15.27
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.21,
+                "y": 14.64
+              },
+              "bounds": {
+                "min_x": 41.14,
+                "max_x": 43.86,
+                "min_y": 12.45,
+                "max_y": 15.38
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 5975,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：巨槌食人魔法师",
+            "coordinates": [
+              {
+                "x": 44.13,
+                "y": 12.1
+              },
+              {
+                "x": 42.4,
+                "y": 13.5
+              },
+              {
+                "x": 42.26,
+                "y": 12.72
+              },
+              {
+                "x": 43.07,
+                "y": 10.87
+              },
+              {
+                "x": 42.85,
+                "y": 12.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.85,
+                "y": 12.57
+              },
+              "bounds": {
+                "min_x": 42.26,
+                "max_x": 44.13,
+                "min_y": 10.87,
+                "max_y": 13.5
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5976,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：巨槌蛮兵",
+            "coordinates": [
+              {
+                "x": 42.49,
+                "y": 12.35
+              },
+              {
+                "x": 41.21,
+                "y": 11.71
+              },
+              {
+                "x": 43.73,
+                "y": 11.54
+              },
+              {
+                "x": 44.2,
+                "y": 12.61
+              },
+              {
+                "x": 41.28,
+                "y": 13.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.49,
+                "y": 12.35
+              },
+              "bounds": {
+                "min_x": 41.21,
+                "max_x": 44.2,
+                "min_y": 11.54,
+                "max_y": 13.56
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5977,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：巨槌战士",
+            "coordinates": [
+              {
+                "x": 48.1,
+                "y": 41.1
+              },
+              {
+                "x": 48.86,
+                "y": 43.23
+              },
+              {
+                "x": 47.72,
+                "y": 43.36
+              },
+              {
+                "x": 48.09,
+                "y": 45.12
+              },
+              {
+                "x": 47.86,
+                "y": 41.96
+              },
+              {
+                "x": 49.11,
+                "y": 40.9
+              },
+              {
+                "x": 47.04,
+                "y": 42.98
+              },
+              {
+                "x": 47.13,
+                "y": 40.97
+              },
+              {
+                "x": 49.69,
+                "y": 42.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.09,
+                "y": 42.56
+              },
+              "bounds": {
+                "min_x": 47.04,
+                "max_x": 49.69,
+                "min_y": 40.9,
+                "max_y": 45.12
+              },
+              "spawn_count": 9
+            }
+          },
+          {
+            "id": 5978,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：巨槌术士",
+            "coordinates": [
+              {
+                "x": 46.95,
+                "y": 43.7
+              },
+              {
+                "x": 48.33,
+                "y": 42.99
+              },
+              {
+                "x": 47.33,
+                "y": 45.54
+              },
+              {
+                "x": 48.61,
+                "y": 45.91
+              },
+              {
+                "x": 48.07,
+                "y": 44.25
+              },
+              {
+                "x": 47.57,
+                "y": 44.84
+              },
+              {
+                "x": 50.06,
+                "y": 41.14
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.07,
+                "y": 44.25
+              },
+              "bounds": {
+                "min_x": 46.95,
+                "max_x": 50.06,
+                "min_y": 41.14,
+                "max_y": 45.91
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 5979,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：悲惨的失落者",
+            "coordinates": [
+              {
+                "x": 48.3,
+                "y": 23.24
+              },
+              {
+                "x": 46.52,
+                "y": 19.36
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.41,
+                "y": 21.3
+              },
+              "bounds": {
+                "min_x": 46.52,
+                "max_x": 48.3,
+                "min_y": 19.36,
+                "max_y": 23.24
+              },
+              "spawn_count": 2
+            }
+          },
+          {
+            "id": 5981,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：传送门搜寻者",
+            "coordinates": [
+              {
+                "x": 45.16,
+                "y": 35.16
+              },
+              {
+                "x": 44.31,
+                "y": 33.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.73,
+                "y": 34.38
+              },
+              "bounds": {
+                "min_x": 44.31,
+                "max_x": 45.16,
+                "min_y": 33.6,
+                "max_y": 35.16
+              },
+              "spawn_count": 2
+            }
+          },
+          {
+            "id": 5982,
+            "kind": "npc",
+            "name": "Flawless Draenethyst Sphere来源：黑色屠戮者",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 28.33
+              },
+              {
+                "x": 56.72,
+                "y": 37.49
+              },
+              {
+                "x": 56.0,
+                "y": 36.46
+              },
+              {
+                "x": 62.73,
+                "y": 26.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.67,
+                "y": 32.39
+              },
+              "bounds": {
+                "min_x": 56.0,
+                "max_x": 62.73,
+                "min_y": 26.54,
+                "max_y": 37.49
+              },
+              "spawn_count": 4
+            }
+          },
+          {
+            "id": 5974,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：巨槌食人魔",
+            "coordinates": [
+              {
+                "x": 43.86,
+                "y": 14.78
+              },
+              {
+                "x": 43.26,
+                "y": 15.38
+              },
+              {
+                "x": 42.21,
+                "y": 12.65
+              },
+              {
+                "x": 42.98,
+                "y": 12.91
+              },
+              {
+                "x": 41.7,
+                "y": 14.64
+              },
+              {
+                "x": 41.14,
+                "y": 12.45
+              },
+              {
+                "x": 42.18,
+                "y": 15.27
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.21,
+                "y": 14.64
+              },
+              "bounds": {
+                "min_x": 41.14,
+                "max_x": 43.86,
+                "min_y": 12.45,
+                "max_y": 15.38
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 5975,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：巨槌食人魔法师",
+            "coordinates": [
+              {
+                "x": 44.13,
+                "y": 12.1
+              },
+              {
+                "x": 42.4,
+                "y": 13.5
+              },
+              {
+                "x": 42.26,
+                "y": 12.72
+              },
+              {
+                "x": 43.07,
+                "y": 10.87
+              },
+              {
+                "x": 42.85,
+                "y": 12.57
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.85,
+                "y": 12.57
+              },
+              "bounds": {
+                "min_x": 42.26,
+                "max_x": 44.13,
+                "min_y": 10.87,
+                "max_y": 13.5
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5976,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：巨槌蛮兵",
+            "coordinates": [
+              {
+                "x": 42.49,
+                "y": 12.35
+              },
+              {
+                "x": 41.21,
+                "y": 11.71
+              },
+              {
+                "x": 43.73,
+                "y": 11.54
+              },
+              {
+                "x": 44.2,
+                "y": 12.61
+              },
+              {
+                "x": 41.28,
+                "y": 13.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.49,
+                "y": 12.35
+              },
+              "bounds": {
+                "min_x": 41.21,
+                "max_x": 44.2,
+                "min_y": 11.54,
+                "max_y": 13.56
+              },
+              "spawn_count": 5
+            }
+          },
+          {
+            "id": 5977,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：巨槌战士",
+            "coordinates": [
+              {
+                "x": 48.1,
+                "y": 41.1
+              },
+              {
+                "x": 48.86,
+                "y": 43.23
+              },
+              {
+                "x": 47.72,
+                "y": 43.36
+              },
+              {
+                "x": 48.09,
+                "y": 45.12
+              },
+              {
+                "x": 47.86,
+                "y": 41.96
+              },
+              {
+                "x": 49.11,
+                "y": 40.9
+              },
+              {
+                "x": 47.04,
+                "y": 42.98
+              },
+              {
+                "x": 47.13,
+                "y": 40.97
+              },
+              {
+                "x": 49.69,
+                "y": 42.56
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.09,
+                "y": 42.56
+              },
+              "bounds": {
+                "min_x": 47.04,
+                "max_x": 49.69,
+                "min_y": 40.9,
+                "max_y": 45.12
+              },
+              "spawn_count": 9
+            }
+          },
+          {
+            "id": 5978,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：巨槌术士",
+            "coordinates": [
+              {
+                "x": 46.95,
+                "y": 43.7
+              },
+              {
+                "x": 48.33,
+                "y": 42.99
+              },
+              {
+                "x": 47.33,
+                "y": 45.54
+              },
+              {
+                "x": 48.61,
+                "y": 45.91
+              },
+              {
+                "x": 48.07,
+                "y": 44.25
+              },
+              {
+                "x": 47.57,
+                "y": 44.84
+              },
+              {
+                "x": 50.06,
+                "y": 41.14
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 48.07,
+                "y": 44.25
+              },
+              "bounds": {
+                "min_x": 46.95,
+                "max_x": 50.06,
+                "min_y": 41.14,
+                "max_y": 45.91
+              },
+              "spawn_count": 7
+            }
+          },
+          {
+            "id": 5979,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：悲惨的失落者",
+            "coordinates": [
+              {
+                "x": 48.3,
+                "y": 23.24
+              },
+              {
+                "x": 46.52,
+                "y": 19.36
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 47.41,
+                "y": 21.3
+              },
+              "bounds": {
+                "min_x": 46.52,
+                "max_x": 48.3,
+                "min_y": 19.36,
+                "max_y": 23.24
+              },
+              "spawn_count": 2
+            }
+          },
+          {
+            "id": 5981,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：传送门搜寻者",
+            "coordinates": [
+              {
+                "x": 45.16,
+                "y": 35.16
+              },
+              {
+                "x": 44.31,
+                "y": 33.6
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 44.73,
+                "y": 34.38
+              },
+              "bounds": {
+                "min_x": 44.31,
+                "max_x": 45.16,
+                "min_y": 33.6,
+                "max_y": 35.16
+              },
+              "spawn_count": 2
+            }
+          },
+          {
+            "id": 5982,
+            "kind": "npc",
+            "name": "Imperfect Draenethyst Fragment来源：黑色屠戮者",
+            "coordinates": [
+              {
+                "x": 58.63,
+                "y": 28.33
+              },
+              {
+                "x": 56.72,
+                "y": 37.49
+              },
+              {
+                "x": 56.0,
+                "y": 36.46
+              },
+              {
+                "x": 62.73,
+                "y": 26.54
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 57.67,
+                "y": 32.39
+              },
+              "bounds": {
+                "min_x": 56.0,
+                "max_x": 62.73,
+                "min_y": 26.54,
+                "max_y": 37.49
+              },
+              "spawn_count": 4
+            }
+          },
+          {
+            "id": 7666,
+            "kind": "npc",
+            "name": "Amulet of Allistarj来源：大法师奥利斯塔",
+            "coordinates": [
+              {
+                "x": 66.69,
+                "y": 29.24
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 66.69,
+                "y": 29.24
+              },
+              "bounds": {
+                "min_x": 66.69,
+                "max_x": 66.69,
+                "min_y": 29.24,
+                "max_y": 29.24
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 7665,
+            "kind": "npc",
+            "name": "Amulet of Grol来源：毁灭者戈洛尔",
+            "coordinates": [
+              {
+                "x": 42.57,
+                "y": 13.01
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 42.57,
+                "y": 13.01
+              },
+              "bounds": {
+                "min_x": 42.57,
+                "max_x": 42.57,
+                "min_y": 13.01,
+                "max_y": 13.01
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 7667,
+            "kind": "npc",
+            "name": "Amulet of Sevine来源：瑟温妮",
+            "coordinates": [
+              {
+                "x": 40.75,
+                "y": 29.97
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 40.75,
+                "y": 29.97
+              },
+              "bounds": {
+                "min_x": 40.75,
+                "max_x": 40.75,
+                "min_y": 29.97,
+                "max_y": 29.97
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 9,
+      "action": "交付",
+      "quest_ids": [
+        2521,
+        3501
+      ],
+      "quests": [
+        {
+          "quest_id": 2521,
+          "name": "为库米沙效力",
+          "raw_name": "To Serve Kum'isha",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "在你探索诅咒之地的旅程中，如果碰巧发现了无瑕的德莱尼水晶球，就把它交给收藏家库米沙。 /  / 你要知道，这种宝石是整个艾泽拉斯最珍稀的水晶。诅咒之地上的任何一种生物都有可能带着一颗无瑕的德莱尼水晶球。 /  / 每找到一颗，你都会得到相应的酬劳。"
+        },
+        {
+          "quest_id": 3501,
+          "name": "多多益善",
+          "raw_name": "Everything Counts In Large Amounts",
+          "required_level": 45,
+          "quest_level": 55,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": 3502,
+          "objective_text": "将有瑕疵的德莱尼水晶碎片交给库米沙，你就可以得到相应的回报。"
+        }
+      ],
+      "instruction": "到收藏家库米沙处交付：为库米沙效力、多多益善。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 51.98,
+          "y": 35.65
+        },
+        "entities": [
+          {
+            "id": 7363,
+            "kind": "npc",
+            "name": "收藏家库米沙",
+            "coordinates": [
+              {
+                "x": 51.98,
+                "y": 35.65
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 51.98,
+                "y": 35.65
+              },
+              "bounds": {
+                "min_x": 51.98,
+                "max_x": 51.98,
+                "min_y": 35.65,
+                "max_y": 35.65
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 10,
+      "action": "交付",
+      "quest_ids": [
+        2581,
+        2583,
+        2585,
+        2601,
+        2603
+      ],
+      "quests": [
+        {
+          "quest_id": 2581,
+          "name": "弯牙土狼的颚骨",
+          "raw_name": "Snickerfang Jowls",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个弯牙土狼的颚骨、2片诅咒之地的野猪肺和1个厚甲蝎螯，把它们交给血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2583,
+          "name": "野猪的活力",
+          "raw_name": "A Boar's Vitality",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3片诅咒之地的野猪肺、2个厚甲蝎螯和1颗石化蜥蜴的大脑，把它们交给血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2585,
+          "name": "决定性的打击",
+          "raw_name": "The Decisive Striker",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集3个厚甲蝎螯、2个秃鹫的砂囊和1片诅咒之地的野猪肺，把它们血法师德拉吉亚。"
+        },
+        {
+          "quest_id": 2601,
+          "name": "石化蜥蜴的大脑",
+          "raw_name": "The Basilisk's Bite",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10颗石化蜥蜴的大脑和2个秃鹫的砂囊，把它们交给血法师莱诺雷。"
+        },
+        {
+          "quest_id": 2603,
+          "name": "秃鹫的活力",
+          "raw_name": "Vulture's Vigor",
+          "required_level": 45,
+          "quest_level": 50,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "收集10个秃鹫的砂囊和2块弯牙土狼的颚骨，把它们交给血法师莱诺雷。"
+        }
+      ],
+      "instruction": "到血法师德拉吉亚、血法师莱诺雷处交付：弯牙土狼的颚骨、野猪的活力、决定性的打击、石化蜥蜴的大脑、秃鹫的活力。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 50.595,
+          "y": 14.25
+        },
+        "entities": [
+          {
+            "id": 7505,
+            "kind": "npc",
+            "name": "血法师德拉吉亚",
+            "coordinates": [
+              {
+                "x": 50.55,
+                "y": 14.2
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.55,
+                "y": 14.2
+              },
+              "bounds": {
+                "min_x": 50.55,
+                "max_x": 50.55,
+                "min_y": 14.2,
+                "max_y": 14.2
+              },
+              "spawn_count": 1
+            }
+          },
+          {
+            "id": 7506,
+            "kind": "npc",
+            "name": "血法师莱诺雷",
+            "coordinates": [
+              {
+                "x": 50.64,
+                "y": 14.3
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 50.64,
+                "y": 14.3
+              },
+              "bounds": {
+                "min_x": 50.64,
+                "max_x": 50.64,
+                "min_y": 14.3,
+                "max_y": 14.3
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 11,
+      "action": "接取",
+      "quest_ids": [
+        10259
+      ],
+      "quests": [
+        {
+          "quest_id": 10259,
+          "name": "勇往直前",
+          "raw_name": "Into the Breach",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死6个入侵的恶魔卫士，然后向银色使者普罗维尔复命。"
+        }
+      ],
+      "instruction": "到银色使者普罗维尔处接取：勇往直前。其他跟随号只需在NPC附近逐个切换接取。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "accept",
+        "representative": {
+          "x": 58.24,
+          "y": 55.07
+        },
+        "entities": [
+          {
+            "id": 19942,
+            "kind": "npc",
+            "name": "银色使者普罗维尔",
+            "coordinates": [
+              {
+                "x": 58.24,
+                "y": 55.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.24,
+                "y": 55.07
+              },
+              "bounds": {
+                "min_x": 58.24,
+                "max_x": 58.24,
+                "min_y": 55.07,
+                "max_y": 55.07
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": 12,
+      "action": "交付",
+      "quest_ids": [
+        10259
+      ],
+      "quests": [
+        {
+          "quest_id": 10259,
+          "name": "勇往直前",
+          "raw_name": "Into the Breach",
+          "required_level": 55,
+          "quest_level": 60,
+          "required_races": 0,
+          "required_classes": null,
+          "zone_or_sort": 4,
+          "pre_single": [],
+          "pre_group": [],
+          "child_quests": [],
+          "next_quest": null,
+          "objective_text": "杀死6个入侵的恶魔卫士，然后向银色使者普罗维尔复命。"
+        }
+      ],
+      "instruction": "到银色使者普罗维尔处交付：勇往直前。其他跟随号在附近逐个切换交付。",
+      "confidence": "database_candidate",
+      "fivebox": "main_route_followers_note_only",
+      "anchor_details": {
+        "type": "turnin",
+        "representative": {
+          "x": 58.24,
+          "y": 55.07
+        },
+        "entities": [
+          {
+            "id": 19942,
+            "kind": "npc",
+            "name": "银色使者普罗维尔",
+            "coordinates": [
+              {
+                "x": 58.24,
+                "y": 55.07
+              }
+            ],
+            "coordinate_summary": {
+              "representative": {
+                "x": 58.24,
+                "y": 55.07
+              },
+              "bounds": {
+                "min_x": 58.24,
+                "max_x": 58.24,
+                "min_y": 55.07,
+                "max_y": 55.07
+              },
+              "spawn_count": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "quest_catalog": [
+    {
+      "quest_id": 2521,
+      "name": "为库米沙效力",
+      "raw_name": "To Serve Kum'isha",
+      "required_level": 45,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "在你探索诅咒之地的旅程中，如果碰巧发现了无瑕的德莱尼水晶球，就把它交给收藏家库米沙。 /  / 你要知道，这种宝石是整个艾泽拉斯最珍稀的水晶。诅咒之地上的任何一种生物都有可能带着一颗无瑕的德莱尼水晶球。 /  / 每找到一颗，你都会得到相应的酬劳。"
+    },
+    {
+      "quest_id": 2581,
+      "name": "弯牙土狼的颚骨",
+      "raw_name": "Snickerfang Jowls",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集3个弯牙土狼的颚骨、2片诅咒之地的野猪肺和1个厚甲蝎螯，把它们交给血法师德拉吉亚。"
+    },
+    {
+      "quest_id": 2583,
+      "name": "野猪的活力",
+      "raw_name": "A Boar's Vitality",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集3片诅咒之地的野猪肺、2个厚甲蝎螯和1颗石化蜥蜴的大脑，把它们交给血法师德拉吉亚。"
+    },
+    {
+      "quest_id": 2585,
+      "name": "决定性的打击",
+      "raw_name": "The Decisive Striker",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集3个厚甲蝎螯、2个秃鹫的砂囊和1片诅咒之地的野猪肺，把它们血法师德拉吉亚。"
+    },
+    {
+      "quest_id": 2601,
+      "name": "石化蜥蜴的大脑",
+      "raw_name": "The Basilisk's Bite",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集10颗石化蜥蜴的大脑和2个秃鹫的砂囊，把它们交给血法师莱诺雷。"
+    },
+    {
+      "quest_id": 2603,
+      "name": "秃鹫的活力",
+      "raw_name": "Vulture's Vigor",
+      "required_level": 45,
+      "quest_level": 50,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "收集10个秃鹫的砂囊和2块弯牙土狼的颚骨，把它们交给血法师莱诺雷。"
+    },
+    {
+      "quest_id": 2681,
+      "name": "禁锢我们的石头",
+      "raw_name": "The Stones That Bind Us",
+      "required_level": 45,
+      "quest_level": 57,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [
+        2801
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 2702,
+      "objective_text": "解救九个拉瑟莱克的仆从、三个瑟温妮的仆从、三个奥利斯塔的仆从和三个戈洛尔的仆从。完成任务后，回到部落英雄的灵魂这里。"
+    },
+    {
+      "quest_id": 3501,
+      "name": "多多益善",
+      "raw_name": "Everything Counts In Large Amounts",
+      "required_level": 45,
+      "quest_level": 55,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 3502,
+      "objective_text": "将有瑕疵的德莱尼水晶碎片交给库米沙，你就可以得到相应的回报。"
+    },
+    {
+      "quest_id": 3627,
+      "name": "收集破碎的护符",
+      "raw_name": "Uniting the Shattered Amulet",
+      "required_level": 45,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [
+        3626
+      ],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": 3628,
+      "objective_text": "杀掉毁灭者戈洛尔、瑟温妮，以及大法师奥利斯塔。从他们到尸体上拿到戈洛尔的护符、瑟温妮的护符和奥利斯塔的护符。 /  / 记住使用你的魔化艾萨拉水晶武器来削弱他们，否则他们是无法被杀死的——你必须小心谨慎地使用你的武器......"
+    },
+    {
+      "quest_id": 10259,
+      "name": "勇往直前",
+      "raw_name": "Into the Breach",
+      "required_level": 55,
+      "quest_level": 60,
+      "required_races": 0,
+      "required_classes": null,
+      "zone_or_sort": 4,
+      "pre_single": [],
+      "pre_group": [],
+      "child_quests": [],
+      "next_quest": null,
+      "objective_text": "杀死6个入侵的恶魔卫士，然后向银色使者普罗维尔复命。"
+    }
+  ],
+  "fivebox_observations": {
+    "2521": {
+      "status": "not_classified"
+    },
+    "2581": {
+      "status": "not_classified"
+    },
+    "2583": {
+      "status": "not_classified"
+    },
+    "2585": {
+      "status": "not_classified"
+    },
+    "2601": {
+      "status": "not_classified"
+    },
+    "2603": {
+      "status": "not_classified"
+    },
+    "2681": {
+      "status": "not_classified"
+    },
+    "3501": {
+      "status": "not_classified"
+    },
+    "3627": {
+      "status": "not_classified"
+    },
+    "10259": {
+      "status": "not_classified"
+    }
+  },
+  "verification_required": [
+    "任务顺序、道路和建筑楼层需要实际游戏验证"
+  ],
+  "stats": {
+    "quest_count": 10,
+    "step_count": 12,
+    "min_level": 45,
+    "max_level": 55
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "updated_at": "2026-08-01",
+  "records": [
+    {
+      "quest_id": 9133,
+      "name": "飞往银月城",
+      "character_group": "首组血精灵圣骑士",
+      "status": "completed_after_temporary_block",
+      "observed_level": 20,
+      "symptom": "早期实跑到达银月城外时入口呈黑色，无法穿过城门进入城市，因而无法找到交付NPC。",
+      "confirmed_cause": null,
+      "resolution_evidence": "账号级Questie历程显示该任务于2026-08-01 04:59:30（UTC+8）在等级20完成。日志不记录实际进入方式，因此不能推断黑门问题如何恢复。",
+      "route_action": "不再标记为永久不可完成；在找到可重复的稳定进入方式前仍保持可跳，不作为升级主线硬前置。",
+      "verification": "下一组角色重新记录进入银月城的方法、入口状态和是否需要传送或飞行。"
+    },
+    {
+      "quest_id": 9214,
+      "name": "暗松巨魔的武器",
+      "character_group": "首组血精灵圣骑士",
+      "status": "journey_repeated_abandon_skip_candidate",
+      "observed_levels": [
+        15,
+        16,
+        19,
+        20
+      ],
+      "symptom": "账号级Questie历程中接取4次、放弃4次、完成0次；多次接取后数秒内立即放弃。",
+      "confirmed_cause": null,
+      "route_action": "当前作为强跳过候选，不主动纳入稳定升级路线；检查是否由掉落物反复触发或五开个人收集成本过高。",
+      "verification": "下一轮若再次触发，记录触发物、任务目标、五号是否分别需要物品，以及主动放弃原因。"
+    }
+  ]
+}
