@@ -2,6 +2,8 @@
 
 > 适用场景：修改 CLI、采集、ERP 或物流逻辑后的分步验证。完整单元测试仍使用 `npm test`。
 
+`npm test` 必须同时覆盖 `test/*.test.js` 和 `test/**/*.test.js`。不要把脚本改回只跑递归 glob；部分 shell/Node glob 组合会静默漏掉 `test/` 根目录用例。
+
 > 框架入口：`node test.js`，代码在 `test/schemas.js` + `test/runner.js`
 
 ## 1. 触发时机（以下情况必须跑）
