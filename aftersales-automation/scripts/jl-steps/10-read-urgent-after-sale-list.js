@@ -15,6 +15,7 @@
 const path = require('path');
 const cdp = require(path.join(__dirname, '../../lib/cdp'));
 const { sleep, waitFor } = require(path.join(__dirname, '../../lib/wait'));
+const { createPlatformStageObservation } = require(path.join(__dirname, '../../lib/after-sales-platform-stage'));
 
 const JL_DOMAIN = 'scrm.jlsupp.com';
 const DEFAULT_THRESHOLD_HOURS = 48;
@@ -54,6 +55,13 @@ function parseTotalCount(text) {
   if (!match) return null;
   const totalCount = Number(match[1]);
   return Number.isSafeInteger(totalCount) && totalCount >= 0 ? totalCount : null;
+}
+
+function attachPlatformStageObservations(tickets, observedAt = new Date().toISOString()) {
+  return (tickets || []).map(ticket => ({
+    ...ticket,
+    platformStage: createPlatformStageObservation(ticket && ticket.status, observedAt),
+  }));
 }
 
 function collectUrgentTicketsFromPages(pages, thresholdHours = DEFAULT_THRESHOLD_HOURS) {
@@ -397,7 +405,7 @@ async function readUrgentAfterSaleList(options = {}) {
     if (pageData && pageData.loading === true) {
       throw new Error(`售后工单列表第${pageIndex}页仍在加载，停止读取`);
     }
-    const tickets = pageData.tickets || [];
+    const tickets = attachPlatformStageObservations(pageData.tickets || []);
     const invalidTimer = tickets.find(ticket => ticket && ticket.workOrderNum && ticket.totalHours == null);
     if (invalidTimer) {
       throw new Error(`售后工单 ${invalidTimer.workOrderNum} 倒计时解析失败，停止冻结48小时清单`);
@@ -510,6 +518,7 @@ module.exports = {
   parseRemainingHours,
   extractRemainingTimerText,
   parseTotalCount,
+  attachPlatformStageObservations,
   collectUrgentTicketsFromPages,
   isAscendingByTotalHours,
   normalizePaginationState,

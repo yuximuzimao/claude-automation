@@ -20,6 +20,7 @@ entry: cli.js
 | `cli.js` | CLI 入口，18 个命令的路由分发 | 需要了解可用命令或新增命令时 |
 | `server.js` | Express 服务（port 3457），队列管理 + Web 面板 + 定时扫描调度。定时扫描已恢复，走 opQueue scan 新路径并遵守 scanEnabled；legacy scan-all 不作为当前前端/A1处理入口 | 改 API/队列/定时任务时 |
 | `lib/infer.js` | 规则推理引擎，主入口 `inferDecision()` | 改决策逻辑/文案时 |
+| `lib/after-sales-platform-stage.js` | 平台工单阶段观察与窄状态分类；所有阶段留存，当前只让“换货+待商家二次发货”进入人工观察分支 | 改平台阶段留存、分类或观察期升级时 |
 | `lib/ai-infer.js` | AI 推理集成（Anthropic API） | 调 AI 推理参数/prompt 时 |
 | `lib/cdp.js` | CDP 直连 Chrome（WebSocket port 9222），`eval/clickAt/navigate` | 写/改浏览器操作时 |
 | `lib/targets.js` | 查找鲸灵+ERP 浏览器 tab ID | 需要定位浏览器标签时 |
@@ -97,6 +98,7 @@ entry: cli.js
    - `lib/jl/execute-decision.js` 按工单类型分派平台按钮：换货只认“同意换货/拒绝换货”，退款只认退款/退货按钮；精确按钮缺失时失败即停，禁止跨类型兜底。
    - `execReinfer` 直接转调 `execReprocessOne`。
    - 重新采集推理已接入 `shouldAutoExecute` + executionJournal 自动执行链路。`execOpenTicket`（查看工单，2026-07-01 初迁→2026-07-02 完成：统一账号校验+删除 CLI fallback+完整对齐 execExecute 步骤 1-5）、`execOpenAccount`（打开店铺，2026-07-01 已模块化直接调 openAccountFlow）。`execScanAccount`（扫描工单，2026-07-01 已删除——无调用方，新扫描走 execScan → processSingleAccountFixedBatch）。
+6. **平台阶段观察（2026-08-10）**：步骤 10 为所有 48 小时工单保存列表原始 `商家-*` 阶段，步骤 14 写入 queue/simulation。默认只展示和复盘；当前唯一决策分支是“换货+商家-待商家二次发货”，观察期仍完整采集并保存原综合推理，只输出“无需处理、人工确认后手动归档”。执行按钮置灰，后端同时拒绝执行，不写平台备注、不自动归档。
 
 ### 重试与重启
 
@@ -213,6 +215,7 @@ await cdp.navigate(targetId, 'https://...');
 > Legacy 注意：`collect.js`、`scan-all.js`、`lib/server/pipeline.js` 文件仍保留，但不再作为 A1/前端采集入口；当前扫描/重采/执行入口走 `lib/server/op-queue.js` 的 A1 安全链路。只有明确修复 legacy 行为或引用历史 schema 时才读这些旧文件。
 
 lib/ai-infer.js
+lib/after-sales-platform-stage.js
 lib/cdp.js
 lib/constants.js
 lib/helpers.js

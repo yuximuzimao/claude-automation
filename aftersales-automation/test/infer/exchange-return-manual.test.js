@@ -122,6 +122,20 @@ test('换货无退货单号时保持人工，不伪造退回核验结论', () =>
   assert.match(decision.reason, /无退货单号/);
 });
 
+test('商责换货无退货单号时描述为申请阶段，不误称退回核验缺失', () => {
+  const data = exactCollectedData('卖家发错货');
+  delete data.ticket.returnTracking;
+  data.erpAftersale = null;
+  const decision = infer('换货', data);
+
+  assert.equal(decision.action, 'escalate');
+  assert.equal(decision.manualReviewKind, 'merchant_exchange_no_tracking');
+  assert.equal(decision.humanTriggeredExecutionAllowed, false);
+  assert.match(decision.reason, /客户申请「卖家发错货」退货/);
+  assert.match(decision.reason, /确认商责情况是否属实/);
+  assert.doesNotMatch(decision.reason, /无法核验客户实际退回商品/);
+});
+
 test('人工评价指令不能进入无人自动，但可作为人工确认后的系统执行动作', () => {
   const data = exactCollectedData();
   const decision = inferDecision(

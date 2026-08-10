@@ -18,4 +18,9 @@ test('换货或商责显示人工核对提醒并保留系统执行入口', () =>
   assert.match(queueSource, /humanTriggeredExecutionAllowed === false/);
   assert.match(routesSource, /尚无可安全执行/);
   assert.match(queueSource, /尚无可安全执行/);
+  assert.match(appSource, /manualArchiveOnly/);
+  assert.match(appSource, /请人工确认后归档/);
+  assert.match(appSource, /当前无需平台操作，请人工确认后手动归档/);
+  assert.match(routesSource, /当前无需平台操作，请人工确认后手动归档/);
+  assert.match(queueSource, /当前无需平台操作，请人工确认后手动归档/);
 });

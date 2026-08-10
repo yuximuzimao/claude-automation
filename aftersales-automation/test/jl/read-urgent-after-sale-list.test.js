@@ -12,6 +12,7 @@ const {
   parseRemainingHours,
   extractRemainingTimerText,
   parseTotalCount,
+  attachPlatformStageObservations,
   collectUrgentTicketsFromPages,
   isAscendingByTotalHours,
   normalizePaginationState,
@@ -55,6 +56,28 @@ test('parseTotalCount returns null for missing or malformed pagination text', ()
   assert.equal(parseTotalCount('第 1 页'), null);
   assert.equal(parseTotalCount('共五条'), null);
   assert.equal(parseTotalCount('共 -1 条'), null);
+});
+
+test('列表扫描为所有工单保存平台阶段，缺失时也显式标记', () => {
+  const tickets = attachPlatformStageObservations([
+    { workOrderNum: '100001700000000000001', status: '商家-待商家二次发货' },
+    { workOrderNum: '100001700000000000002', status: null },
+  ], '2026-08-10T00:00:00.000Z');
+
+  assert.deepEqual(tickets.map(ticket => ticket.platformStage), [
+    {
+      raw: '商家-待商家二次发货',
+      observedAt: '2026-08-10T00:00:00.000Z',
+      source: 'after-sale-list',
+      readState: 'read',
+    },
+    {
+      raw: null,
+      observedAt: '2026-08-10T00:00:00.000Z',
+      source: 'after-sale-list',
+      readState: 'missing',
+    },
+  ]);
 });
 
 test('collectUrgentTicketsFromPages stops at first ticket over 48 hours and skips later pages', () => {
@@ -168,6 +191,34 @@ test('readUrgentAfterSaleList returns structured totalCount from pagination text
     const result = await readUrgentAfterSaleList({ targetId: 'test-target' });
     assert.equal(result.totalCount, 21);
     assert.equal(result.complete, true);
+  } finally {
+    cdp.eval = originalEval;
+  }
+});
+
+test('readUrgentAfterSaleList 主入口返回的平台阶段已随48小时清单留存', async () => {
+  const originalEval = cdp.eval;
+  cdp.eval = async () => ({
+    tickets: [{
+      workOrderNum: '100001700000000000001',
+      type: '换货',
+      status: '商家-待商家二次发货',
+      totalHours: 1,
+    }],
+    loading: false,
+    pagination: {
+      totalText: '共1条',
+      nextButton: { found: true, visible: true, disabled: true, rect: null },
+      pages: [{ text: '1', active: true, rect: null }],
+    },
+    sortValue: '按逾期时间最近排序',
+  });
+
+  try {
+    const result = await readUrgentAfterSaleList({ targetId: 'test-target' });
+    assert.equal(result.urgent.length, 1);
+    assert.equal(result.urgent[0].platformStage.raw, '商家-待商家二次发货');
+    assert.equal(result.urgent[0].platformStage.readState, 'read');
   } finally {
     cdp.eval = originalEval;
   }

@@ -163,6 +163,33 @@ test('平台提示重复退货单时，先解析关联工单再进行推理', as
   ]);
 });
 
+test('换货待商家二次发货保留原推理作对照，最终进入无需处理人工归档', async () => {
+  let executed = false;
+  const result = await processOpenedDetail({
+    ticket: {
+      workOrderNum: ORDER_1,
+      type: '换货',
+      status: '商家-待商家二次发货',
+    },
+    queueItem: { workOrderNum: ORDER_1, type: '换货' },
+  }, {
+    collectDetail: async () => ({ ticket: { workOrderNum: ORDER_1 }, collectErrors: [] }),
+    inferDecision: async () => ({ action: 'approve', reason: '原综合推理建议同意换货', confidence: 'high' }),
+    shouldAutoExecute: async decision => {
+      assert.equal(decision.action, 'skip');
+      return false;
+    },
+    executeDecision: async () => { executed = true; return { success: true }; },
+  });
+
+  assert.equal(result.status, 'simulated');
+  assert.equal(result.decision.action, 'skip');
+  assert.equal(result.decision.manualArchiveOnly, true);
+  assert.equal(result.collectedData.platformStage.raw, '商家-待商家二次发货');
+  assert.equal(result.collectedData.platformStageAssessment.baselineDecision.action, 'approve');
+  assert.equal(executed, false);
+});
+
 test('自动执行只发生在 shouldAutoExecute 命中时，其他工单进入原待确认状态', async () => {
   const fixture = batchDependencies();
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
@@ -214,6 +241,30 @@ test('复用旧queue item时强制修正mode和source为live/fixed_batch', async
   assert.equal(updates[0][0], 'q-existing');
   assert.equal(updates[0][1].mode, 'live');
   assert.equal(updates[0][1].source, 'fixed_batch');
+  assert.equal(updates[0][1].platformStage.readState, 'missing');
+});
+
+test('queue item 保存列表读取到的平台阶段', async () => {
+  let added = null;
+  const ensureQueueItem = createEnsureQueueItem({
+    readQueue: () => ({ items: [] }),
+    updateQueueItem: () => assert.fail('没有旧 queue item 时不应更新'),
+    addQueueItem: item => { added = { id: 'q-new', ...item }; return added; },
+  });
+
+  const item = await ensureQueueItem({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    ticket: {
+      workOrderNum: ORDER_1,
+      type: '换货',
+      status: '商家-待商家二次发货',
+      totalHours: 8,
+    },
+  });
+
+  assert.equal(item.platformStage.raw, '商家-待商家二次发货');
+  assert.equal(item.platformStage.readState, 'read');
+  assert.equal(added.platformStage.source, 'after-sale-list');
 });
 
 test('disableAutoExecute=true时命中approve也只写待确认，不调用自动执行链路', async () => {
@@ -282,6 +333,25 @@ test('fixed_batch 来源的终态 skip 沿用原系统语义进入已自动执�
   });
   assert.equal(Boolean(sim.executedAt), true);
   assert.equal(Boolean(sim.autoExecutedAt), true);
+});
+
+test('观察期无需处理 skip 保持待确认，不提前进入已自动执行', () => {
+  const processed = {
+    status: 'simulated',
+    collectedData: { ticket: { workOrderNum: ORDER_1 } },
+    decision: { action: 'skip', manualArchiveOnly: true, reason: '待商家二次发货，无需处理' },
+  };
+  const queueItem = { id: `q-${ORDER_1}`, source: 'fixed_batch', workOrderNum: ORDER_1 };
+
+  assert.equal(statusForProcessed(processed, queueItem), 'simulated');
+  const sim = buildSimulationPayload({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    queueItem,
+    ticket: { workOrderNum: ORDER_1 },
+    processed,
+  });
+  assert.equal(Boolean(sim.executedAt), false);
+  assert.equal(Boolean(sim.autoExecutedAt), false);
 });
 
 test('非扫描来源的终态 skip 仍直接 done，不误进已自动执行', () => {

@@ -924,6 +924,7 @@ function renderBody(item, sim, mode) {
 
   const cd = sim.collectedData;
   const ticket = cd.ticket || {};
+  const platformStage = cd.platformStage || item.platformStage || null;
   const errors = (cd.collectErrors || []).filter(e => !e.includes('正常')).length;
   const subOrder = ticket.subOrders && ticket.subOrders[0];
   const allSubOrderIds = (ticket.subOrders || []).map(function(s){ return s.id; }).filter(Boolean).join(', ');
@@ -973,6 +974,7 @@ function renderBody(item, sim, mode) {
     ['退货快递', ticket.returnTracking],
     ['发货快递', allShipTrackings.length ? allShipTrackings.join(', ') : null],
     ['历史售后', ticket.afterSaleCount ? `${ticket.afterSaleCount} 次` : null],
+    ['平台阶段', platformStage ? (platformStage.raw || '未读取到') : null],
     ['ERP状态', cd.erpSearch && cd.erpSearch.status],
     ['物流包裹', cd.logistics && cd.logistics.packages && `${cd.logistics.packages.length} 个`],
   ].filter(([, v]) => v);
@@ -1061,7 +1063,14 @@ function renderActions(item, sim, mode) {
       && sim.decision.waitingRescan === true
       && sim.decision.manualExecutionAllowedWhileWaiting === true
       && sim.decision.reasonCode === 'INTERCEPT_WAITING';
-    const canExecute = !executed && (item.status !== 'waiting' || isWaitingIntercept);
+    const manualArchiveOnly = sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true;
+    const canExecute = !executed && !manualArchiveOnly && (item.status !== 'waiting' || isWaitingIntercept);
+    const humanReviewHint = manualArchiveOnly
+      ? '⚠️ 请人工确认后归档'
+      : ((sim.decision.requiresHumanReview || sim.decision.manualOnly)
+          && sim.decision.humanTriggeredExecutionAllowed !== false
+        ? '⚠️ 需人工核对后执行'
+        : '');
     return `
 <div class="live-actions">
   ${execErr ? `<div class="execute-error-bar">⚠️ 执行失败：${execErr}　<button class="btn-ghost btn-sm" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button></div>` : ''}
@@ -1077,8 +1086,9 @@ function renderActions(item, sim, mode) {
     ${canReinfer ? `<button class="btn-ghost" onclick="reinferSim('${sim.id}',this)">重新采集推理</button>` : ''}
     ${!executed && item.status !== 'waiting' ? `<button class="btn-ghost" onclick="markWaiting('${item.id}',this)" title="下次扫描时自动重新采集">标记等待中</button>` : ''}
     ${item.status === 'waiting' ? `<span style="font-size:12px;color:var(--gray-400);padding:0 6px">⏳ ${isWaitingIntercept ? '等待重查，可人工提前拒绝' : '等待下次扫描重查'}</span>` : ''}
-    ${!executed && (sim.decision.requiresHumanReview || sim.decision.manualOnly) ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">⚠️ 需人工核对后执行</span>` : ''}
+    ${!executed && humanReviewHint ? `<span style="font-size:12px;color:var(--orange);padding:0 6px">${humanReviewHint}</span>` : ''}
     ${canExecute ? `<button class="btn-primary" onclick="executeSim('${sim.id}', this)" ${inQueue ? 'disabled' : ''}>${inQueue ? '排队中…' : (isWaitingIntercept ? '▶ 执行操作（提前拒绝）' : '▶ 执行操作')}</button>` : ''}
+    ${!executed && manualArchiveOnly ? `<button class="btn-primary" disabled style="opacity:0.45;cursor:not-allowed" title="当前无需平台操作，请人工确认后手动归档">▶ 执行操作</button>` : ''}
     ${!executed ? `<button class="btn-ghost" onclick="archiveManual('${item.id}','${sim.id}')">手动归档</button>` : ''}
     <button class="btn-ghost" onclick="openTicket('${item.workOrderNum}',${item.accountNum || 'null'},this)">🔍 查看工单</button>
     <button class="btn-ghost" style="margin-left:auto" onclick="deleteItem('${item.id}')">删除</button>

@@ -777,6 +777,7 @@ async function execReprocessOne(op) {
     workOrderNum: queueItem.workOrderNum,
     type: queueItem.type,
     accountNote: queueItem.accountNote || accountResult.matchedNote || '',
+    platformStage: queueItem.platformStage || null,
   };
 
   const circuitFile = path.join(BASE, 'data/circuit-breaker.json');
@@ -885,6 +886,9 @@ async function execExecute(op) {
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
+  if (sim.decision?.action === 'skip' && sim.decision?.manualArchiveOnly === true) {
+    throw new Error('当前无需平台操作，请人工确认后手动归档');
+  }
   if (['approve', 'reject'].includes(sim.decision?.action)
     && sim.decision?.humanTriggeredExecutionAllowed === false) {
     throw new Error('当前退回核验未通过，尚无可安全执行的同意或拒绝动作');

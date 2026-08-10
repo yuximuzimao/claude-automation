@@ -269,6 +269,9 @@ router.post('/simulations/:id/execute', (req, res) => {
 
   const queueItem = (db.readQueue().items || []).find(item => item.id === sim.queueItemId);
   if (!queueItem) return res.status(404).json({ error: '队列项不存在' });
+  if (sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true) {
+    return res.status(400).json({ error: '当前无需平台操作，请人工确认后手动归档' });
+  }
   if (queueItem.status === 'waiting' && !opQueue.canManuallyExecuteWaitingIntercept(queueItem, sim.decision)) {
     return res.status(400).json({ error: '等待重查工单仅允许拦截件人工提前拒绝' });
   }

@@ -5,6 +5,10 @@ const { matchShopName } = require('../../lib/jl/login-state');
 const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
 const { getHoursUntilNextScan } = require('../../lib/constants');
+const {
+  getTicketPlatformStage,
+  applyPlatformStageObservation,
+} = require('../../lib/after-sales-platform-stage');
 
 const MAX_PAGES = 20;
 const JL_HOST_SUFFIX = 'jlsupp.com';
@@ -379,6 +383,8 @@ async function cleanupCurrentAccountJlTargets(context, dependencies) {
 
 async function processOpenedDetail(context, dependencies) {
   const collectedData = await dependencies.collectDetail(context);
+  const platformStage = getTicketPlatformStage(context && context.ticket);
+  collectedData.platformStage = platformStage;
   if (collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
       typeof dependencies.resolveSharedReturnGroup === 'function') {
     collectedData.sharedReturnGroup = await dependencies.resolveSharedReturnGroup(
@@ -387,7 +393,14 @@ async function processOpenedDetail(context, dependencies) {
     );
   }
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
-  const decision = await dependencies.inferDecision(collectedData, queueItem);
+  const baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+  const stageResult = applyPlatformStageObservation({
+    type: context && context.ticket && context.ticket.type,
+    platformStage,
+    baselineDecision,
+  });
+  const decision = stageResult.decision;
+  if (stageResult.assessment) collectedData.platformStageAssessment = stageResult.assessment;
   if (context && context.disableAutoExecute === true) {
     return {
       status: 'simulated',
@@ -466,6 +479,7 @@ function createEnsureQueueItem(db) {
       type: ticket.type || null,
       urgency: buildUrgency(ticket),
       deadlineAt: buildDeadlineAt(ticket),
+      platformStage: getTicketPlatformStage(ticket),
     };
     if (existing) return db.updateQueueItem(existing.id, patch) || { ...existing, ...patch };
     const added = db.addQueueItem({
@@ -516,6 +530,7 @@ function buildFailureProcessed(ticket, error) {
 
 function statusForProcessed(processed, queueItem) {
   const decision = processed && processed.decision;
+  if (decision && decision.action === 'skip' && decision.manualArchiveOnly === true) return 'simulated';
   if (decision && decision.action === 'skip') return getSkipCompletionStatus(queueItem);
   if (decision && decision.waitingRescan) return 'waiting';
   if (processed && processed.status === 'auto_executed') return 'auto_executed';

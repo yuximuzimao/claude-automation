@@ -209,6 +209,23 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
   s({ type: 'read', label: '退货快递单号', value: ticket.returnTracking || '无' });
 
   if (!ticket.returnTracking) {
+    if (isMerchantFault && isExchange) {
+      const merchantReason = ticket.afterSaleReason || '未知';
+      s({ type: 'branch', text: `客户申请「${merchantReason}」退货，尚未提供退货单号 → 人工核实商责情况` });
+      return fin(escalate(`【商责换货｜人工确认】客户申请「${merchantReason}」退货，请确认商责情况是否属实，需人工处理。`, {
+        requiresHumanReview: true,
+        autoExecutionBlocked: true,
+        humanTriggeredExecutionAllowed: false,
+        manualReviewKind: 'merchant_exchange_no_tracking',
+        manualReviewReasons: manualReasons,
+        rulesApplied: [{
+          doc: 'flow-5.4',
+          section: '商责换货申请阶段',
+          summary: '商责换货无退货单号→人工核实商责情况',
+        }],
+        warnings: [`⚠️ 请人工确认售后原因「${merchantReason}」是否属于商责`],
+      }));
+    }
     s({ type: 'branch', text: `${reviewTitle}无退货单号，无法核验退回商品 → 人工处理` });
     return fin(escalate(`【${reviewTitle}｜人工确认】无退货单号${merchantReasonText}，无法核验客户实际退回商品，请人工处理`, {
       requiresHumanReview: true,

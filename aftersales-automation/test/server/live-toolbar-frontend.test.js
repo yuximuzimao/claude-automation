@@ -52,7 +52,8 @@ test('等待重查卡片只为显式拦截件保留人工提前拒绝按钮', ()
   assert.match(appJs, /const isWaitingIntercept = item\.status === 'waiting'/);
   assert.match(appJs, /manualExecutionAllowedWhileWaiting === true/);
   assert.match(appJs, /reasonCode === 'INTERCEPT_WAITING'/);
-  assert.match(appJs, /const canExecute = !executed && \(item\.status !== 'waiting' \|\| isWaitingIntercept\)/);
+  assert.match(appJs, /const manualArchiveOnly = sim\.decision\.action === 'skip' && sim\.decision\.manualArchiveOnly === true/);
+  assert.match(appJs, /const canExecute = !executed && !manualArchiveOnly && \(item\.status !== 'waiting' \|\| isWaitingIntercept\)/);
   assert.match(appJs, /执行操作（提前拒绝）/);
 });
 

@@ -10,6 +10,8 @@
 ```js
 {
   ticket:         Object | null,   // 必填（read-ticket 失败时为 null，infer 会 escalate）
+  platformStage:  Object,          // 必填，售后列表读取到的平台阶段观察；缺失也显式记录
+  platformStageAssessment: Object | null, // 可选，命中观察期状态分支时保存原综合推理对照
   erpSearch:      Object | null,   // 第一个主商品子订单结果（旧字段兼容）
   erpSearches:    Object[],        // 全部主商品子订单 ERP 搜索结果
   erpLogistics:   Object | null,   // 可选，仅退款-已发货补充物流源
@@ -23,6 +25,19 @@
   collectErrors:  string[],        // 必填（可为空数组），各步骤错误信息
 }
 ```
+
+### `platformStage` 字段（售后列表观察）
+
+```js
+{
+  raw:        string | null, // 列表原始 `商家-*` 文案；未读取到时为 null
+  observedAt: string,        // 本次列表读取时间（ISO）
+  source:     'after-sale-list',
+  readState:  'read' | 'missing',
+}
+```
+
+该字段对所有进入 48 小时清单的工单保存。默认只用于前端展示和历史复盘，不参与推理。当前只有 `换货 + 商家-待商家二次发货` 命中观察期分支；命中时 `platformStageAssessment.baselineDecision` 保存原综合推理摘要，最终决策固定为“无需处理、人工确认后手动归档”。
 
 ---
 

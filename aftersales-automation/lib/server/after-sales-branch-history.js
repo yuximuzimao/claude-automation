@@ -206,6 +206,7 @@ const RULE_BRANCHES = Object.freeze({
   '商责换货退回核验通过→推荐人工同意换货': 'merchant_fault.exchange.exact.manual_approve',
   '商责换货退回核验异常→人工确认': 'merchant_fault.exchange.review.manual',
   '商责换货无退货单号→人工处理': 'merchant_fault.exchange.review.manual',
+  '商责换货无退货单号→人工核实商责情况': 'merchant_fault.exchange.review.manual',
   '有记录未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '有记录未入库+剩余≤12h→拒绝': 'refund_return.not_received.timeout_reject',
