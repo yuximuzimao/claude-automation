@@ -809,8 +809,11 @@ function renderHistoryCard(c, latestFb) {
   const gtAction = gt && gt.action;
   const gtSource = gt && gt.source;
 
-  const gtBadge = gtAction ? `<span class="decision-tag ${gtAction}">${DECISION_ICONS[gtAction]} ${DECISION_LABELS[gtAction]}</span>` : '';
-  const sourceBadge = `<span class="tag tag-type">${gtSource === 'auto_executed' ? '自动处理' : gtSource === 'batch_executed' ? '批量执行' : gtSource === 'executed' ? '手动执行' : gtSource === 'manual_handled' ? '手动归档' : gtSource === 'manual' ? '手动录入' : '导入'}</span>`;
+  const gtLabel = c.decision && c.decision.recommendedActionLabel
+    ? c.decision.recommendedActionLabel
+    : DECISION_LABELS[gtAction];
+  const gtBadge = gtAction ? `<span class="decision-tag ${gtAction}">${DECISION_ICONS[gtAction]} ${h(gtLabel || gtAction)}</span>` : '';
+  const sourceBadge = `<span class="tag tag-type">${gtSource === 'auto_executed' ? '自动处理' : gtSource === 'batch_executed' ? '批量执行' : gtSource === 'executed' ? '手动执行' : gtSource === 'confirmed_no_action' ? '人工确认无需处理' : gtSource === 'manual_handled' ? '手动归档' : gtSource === 'manual' ? '手动录入' : '导入'}</span>`;
 
   // 反馈（只取最新一条）
   const fbHtml = latestFb ? `
@@ -861,6 +864,9 @@ function renderCard(item, sim, mode, prevSims = [], seqNum = null) {
   // pending 状态不使用旧 sim 的决策（批量重扫时清掉旧标签）
   const activeSim = item.status === 'pending' ? null : sim;
   const action = activeSim && activeSim.decision && activeSim.decision.action || 'pending';
+  const actionLabel = activeSim && activeSim.decision
+    ? decisionDisplayLabel(activeSim.decision)
+    : DECISION_LABELS.pending;
   const fbStatus = activeSim && activeSim.feedbackStatus || 'pending';
   const statusClass = 'tag-status-' + item.status;
 
@@ -878,7 +884,7 @@ function renderCard(item, sim, mode, prevSims = [], seqNum = null) {
       <span class="tag tag-${item.mode}">${item.mode === 'live' ? '实际' : '训练'}</span>
       ${(function(){ if (['auto_executed','auto_executing'].includes(item.status)) return ''; var cd = item.deadlineAt ? formatCountdown(item.deadlineAt) : null; if (cd) return '<span class="tag tag-urgency ' + cd.className + '" data-deadline="' + item.deadlineAt + '">\u23f0 ' + cd.text + '</span>'; return item.urgency ? '<span class="tag tag-urgency">\u23f0 ' + item.urgency + '</span>' : ''; })()}
       <span class="tag ${statusClass}">${STATUS_CN[item.status] || item.status}</span>
-      <span class="decision-tag ${action}">${DECISION_ICONS[action]} ${DECISION_LABELS[action] || action}</span>
+      <span class="decision-tag ${action}">${DECISION_ICONS[action]} ${h(actionLabel || action)}</span>
       ${fbTagHtml}
     </div>
   </div>
@@ -1136,14 +1142,19 @@ async function markWaiting(queueItemId, btn) {
 }
 
 async function archiveManual(queueItemId, simId) {
-  if (!confirm('确认将该工单标记为「已手动处理」并归档到历史记录？\n归档后将从实际工单列表移除。')) return;
+  const card = document.getElementById('card-' + queueItemId);
+  const isNoAction = Boolean(card && card.querySelector('button[disabled][title*="无需平台操作"]'));
+  const promptText = isNoAction
+    ? '确认该工单无需平台操作并归档？\n相同阶段后续扫描不会重复进入待确认，阶段变化后会重新出现。'
+    : '确认将该工单标记为「已手动处理」并归档到历史记录？\n归档后将从实际工单列表移除。';
+  if (!confirm(promptText)) return;
   try {
     const res = await api('/queue/' + queueItemId + '/archive-manual', {
       method: 'POST',
       body: JSON.stringify({ simId }),
     });
     if (res.error) { showToast('归档失败：' + res.error, 'error'); return; }
-    showToast('已归档到历史记录');
+    showToast(isNoAction ? '已确认无需处理并归档' : '已归档到历史记录');
     loadLive();
   } catch (e) {
     showToast('归档失败：' + e.message, 'error');
@@ -1561,6 +1572,7 @@ function renderAfterSalesBranches(report) {
         <div><span>好评</span><strong>${Number(item.positiveCount || 0)}</strong></div>
         <div><span>差评</span><strong>${Number(item.negativeCount || 0)}</strong></div>
         <div><span>人工处理</span><strong>${Number(item.manualHandledCount || 0)}</strong></div>
+        <div><span>确认无需处理</span><strong>${Number(item.confirmedNoActionCount || 0)}</strong></div>
       </div>
       ${notes ? `<div class="branch-notes"><span>历史备注</span>${notes}</div>` : ''}
     </article>`;

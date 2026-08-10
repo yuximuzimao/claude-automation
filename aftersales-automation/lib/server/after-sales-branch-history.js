@@ -165,6 +165,10 @@ const BRANCHES = Object.freeze({
     label: '换货 / 无退货单号 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'exchange.waiting_merchant_reship.confirm_no_action': {
+    label: '换货 / 待商家二次发货 / 人工确认无需处理',
+    automationStatus: 'manual_only',
+  },
   'merchant_fault.refund_return.exact.manual_approve': {
     label: '商责退货退款 / 有退货单号 / 精确退回 / 推荐人工同意退款',
     automationStatus: 'manual_only',
@@ -207,6 +211,7 @@ const RULE_BRANCHES = Object.freeze({
   '商责换货退回核验异常→人工确认': 'merchant_fault.exchange.review.manual',
   '商责换货无退货单号→人工处理': 'merchant_fault.exchange.review.manual',
   '商责换货无退货单号→人工核实商责情况': 'merchant_fault.exchange.review.manual',
+  '待商家二次发货（观察期）→无需平台操作，人工确认后归档': 'exchange.waiting_merchant_reship.confirm_no_action',
   '有记录未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '未入库+剩余>12h→等待重查': 'refund_return.not_received.wait',
   '有记录未入库+剩余≤12h→拒绝': 'refund_return.not_received.timeout_reject',
@@ -300,6 +305,11 @@ function classifySimulation(simulation, queueItem = {}) {
     && String(decision.reason || '').includes('可能为超期特殊退货或次品特殊处理');
   const terminalSkip = decision?.action === 'skip'
     && /^工单状态：/.test(String(decision.reason || ''));
+  const platformStageBranchId = decision?.action === 'skip'
+    && decision?.manualArchiveOnly === true
+    && decision?.platformStageCaseId === 'exchange_waiting_merchant_reship'
+    ? 'exchange.waiting_merchant_reship.confirm_no_action'
+    : null;
   const manualReviewBranches = {
     exchange_return_exact: 'exchange.return.exact.manual_approve',
     exchange_return_review: 'exchange.return.review.manual',
@@ -315,7 +325,13 @@ function classifySimulation(simulation, queueItem = {}) {
     ? manualReviewBranches[decision.manualReviewKind]
     : null;
   let ruleClassification = null;
-  if (manualReviewBranchId) {
+  if (platformStageBranchId) {
+    ruleClassification = {
+      branchId: platformStageBranchId,
+      caseId: `platform_stage.${decision.platformStageCaseId}`,
+      platformStage: true,
+    };
+  } else if (manualReviewBranchId) {
     ruleClassification = { branchId: manualReviewBranchId };
   } else if (specialNoTracking) {
     ruleClassification = { branchId: 'refund_return.no_tracking.special.manual' };
@@ -326,7 +342,7 @@ function classifySimulation(simulation, queueItem = {}) {
   }
   const branchId = ruleClassification && ruleClassification.branchId;
   const missingFacts = [];
-  if (!reason) missingFacts.push('售后原因');
+  if (!reason && !ruleClassification?.platformStage) missingFacts.push('售后原因');
   if (!orderType) missingFacts.push('工单类型');
   if (!decision) missingFacts.push('最终决定');
   if (decision && !branchId) missingFacts.push('已登记的最终规则结果');
@@ -362,13 +378,14 @@ function classifySimulation(simulation, queueItem = {}) {
   }
 
   const branch = BRANCHES[branchId];
+  const effectiveReason = ruleClassification?.platformStage ? '平台阶段观察' : reason;
   const enabled = ENABLED_AUTOMATION_CASES.has(`${branchId}\u0000${String(reason)}`);
   return {
     registered: true,
-    caseId: `${branchId}.${stableToken(reason)}`,
+    caseId: ruleClassification?.caseId || `${branchId}.${stableToken(reason)}`,
     branchId,
     branchLabel: branch.label,
-    afterSaleReason: reason,
+    afterSaleReason: effectiveReason,
     orderType,
     expectedAction: decision.action,
     automationStatus: enabled ? 'enabled' : branch.automationStatus,
@@ -484,6 +501,7 @@ function summarizeHistory({
         negativeCount: 0,
         autoSuccessCount: 0,
         manualHandledCount: 0,
+        confirmedNoActionCount: 0,
         noteCounts: new Map(),
       });
     }
@@ -501,6 +519,7 @@ function summarizeHistory({
     const archivedSource = caseByWorkOrder.get(String(simulation.workOrderNum || ''))?.groundTruth?.source;
     const archivedAsManual = ['manual_handled', 'executed', 'batch_executed'].includes(archivedSource);
     if ((simulation.executedAt && !simulation.autoExecutedAt) || archivedAsManual) group.manualHandledCount += 1;
+    if (archivedSource === 'confirmed_no_action') group.confirmedNoActionCount += 1;
 
     const note = redactNote(simulation.collectedData?.ticket?.buyerRemark);
     group.noteCounts.set(note, (group.noteCounts.get(note) || 0) + 1);

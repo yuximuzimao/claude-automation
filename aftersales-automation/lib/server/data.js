@@ -75,6 +75,25 @@ function writeQueue(data) {
   fs.renameSync(tmp, QUEUE_PATH);
 }
 
+function buildQueueItem(item, id = `q-${Date.now()}`, addedAt = new Date().toISOString()) {
+  return {
+    id,
+    workOrderNum: item.workOrderNum,
+    accountNum: item.accountNum || null,
+    accountNote: item.accountNote || '',
+    mode: item.mode || 'sim',
+    source: item.source || 'web',
+    addedAt,
+    status: 'pending',
+    type: item.type || null,
+    urgency: item.urgency || null,
+    deadlineAt: item.deadlineAt || null,
+    groundTruth: item.groundTruth || null,
+    platformStage: item.platformStage || null,
+    confirmedNoAction: item.confirmedNoAction || null,
+  };
+}
+
 function addQueueItem(item) {
   const queue = readQueue();
   const exists = queue.items.some(
@@ -83,20 +102,7 @@ function addQueueItem(item) {
   if (exists) return null;
 
   const id = `q-${Date.now()}-${queue.items.length}`;
-  const newItem = {
-    id,
-    workOrderNum: item.workOrderNum,
-    accountNum: item.accountNum || null,
-    accountNote: item.accountNote || '',
-    mode: item.mode || 'sim',
-    source: item.source || 'web',
-    addedAt: new Date().toISOString(),
-    status: 'pending',
-    type: item.type || null,
-    urgency: item.urgency || null,
-    deadlineAt: item.deadlineAt || null,
-    groundTruth: item.groundTruth || null,
-  };
+  const newItem = buildQueueItem(item, id);
   queue.items.push(newItem);
   writeQueue(queue);
   return newItem;
@@ -353,7 +359,7 @@ function removeDismissed(tracking) {
 }
 
 module.exports = {
-  readQueue, writeQueue, addQueueItem, updateQueueItem, deleteQueueItem,
+  readQueue, writeQueue, buildQueueItem, addQueueItem, updateQueueItem, deleteQueueItem,
   readSimulations, getSimulation, appendSimulation, updateSimulation,
   readFeedback, appendFeedback, revokeFeedback, markFeedbackInsighted, unmarkFeedbackInsighted,
   readCases, appendCase,

@@ -77,6 +77,30 @@ test('等待重查仅拦截件允许人工提前拒绝', () => {
   }), false);
 });
 
+test('重新采集使用本次列表定位到的新阶段，不沿用 queue 旧阶段', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildFreshReprocessTicket } = require('../../lib/server/op-queue');
+  const ticket = buildFreshReprocessTicket({
+    workOrderNum: '100001785233662360131',
+    type: '换货',
+    accountNote: '测试店铺',
+    platformStage: {
+      raw: '商家-待商家处理',
+      observedAt: '2026-08-10T03:00:00.000Z',
+      source: 'after-sale-list',
+      readState: 'read',
+    },
+  }, {
+    workOrderNum: '100001785233662360131',
+    type: '换货',
+    status: '商家-待商家二次发货',
+  });
+
+  assert.equal(ticket.platformStage.raw, '商家-待商家二次发货');
+  assert.equal(ticket.platformStage.readState, 'read');
+  assert.notEqual(ticket.platformStage.observedAt, '2026-08-10T03:00:00.000Z');
+});
+
 test('op-queue executes a1-fixed-batch through Step14 with fixed 48h defaults', async () => {
   const step14Path = path.join(__dirname, '../../scripts/jl-steps/14-process-single-account-fixed-batch.js');
   const resolvedStep14 = require.resolve(step14Path);

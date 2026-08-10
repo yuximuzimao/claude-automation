@@ -7,6 +7,7 @@ const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execut
 const { getHoursUntilNextScan } = require('../../lib/constants');
 const {
   getTicketPlatformStage,
+  matchesConfirmedNoAction,
   applyPlatformStageObservation,
 } = require('../../lib/after-sales-platform-stage');
 
@@ -125,8 +126,12 @@ function assertTrustedPagination(pageData) {
 }
 
 function containsWorkOrder(pageData, workOrderNum) {
+  return Boolean(findWorkOrderTicket(pageData, workOrderNum));
+}
+
+function findWorkOrderTicket(pageData, workOrderNum) {
   return (pageData && Array.isArray(pageData.tickets) ? pageData.tickets : [])
-    .some(ticket => ticket && String(ticket.workOrderNum) === workOrderNum);
+    .find(ticket => ticket && String(ticket.workOrderNum) === workOrderNum) || null;
 }
 
 function isConfirmedSinglePage(pagination, pages) {
@@ -255,7 +260,13 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
   let trusted = assertTrustedPagination(current);
 
   if (containsWorkOrder(current, order)) {
-    return { found: true, workOrderNum: order, page: trusted.pagination.currentPage, pagesChecked: [trusted.pagination.currentPage] };
+    return {
+      found: true,
+      workOrderNum: order,
+      ticket: findWorkOrderTicket(current, order),
+      page: trusted.pagination.currentPage,
+      pagesChecked: [trusted.pagination.currentPage],
+    };
   }
   if (isConfirmedSinglePage(trusted.pagination, trusted.pages)) {
     return {
@@ -283,7 +294,13 @@ async function locateWorkOrderOnFreshList(targetId, workOrderNum, dependencies, 
     const pageNumber = trusted.pagination.currentPage;
     if (!pagesChecked.includes(pageNumber)) pagesChecked.push(pageNumber);
     if (containsWorkOrder(current, order)) {
-      return { found: true, workOrderNum: order, page: pageNumber, pagesChecked };
+      return {
+        found: true,
+        workOrderNum: order,
+        ticket: findWorkOrderTicket(current, order),
+        page: pageNumber,
+        pagesChecked,
+      };
     }
 
     if (!trusted.pagination.hasNext) {
@@ -470,6 +487,7 @@ function createEnsureQueueItem(db) {
   }
   return async ({ account, ticket }) => {
     const queue = db.readQueue();
+    const platformStage = getTicketPlatformStage(ticket);
     const existing = (queue.items || []).find(item => item.workOrderNum === ticket.workOrderNum && item.status !== 'done');
     const patch = {
       mode: 'live',
@@ -479,9 +497,22 @@ function createEnsureQueueItem(db) {
       type: ticket.type || null,
       urgency: buildUrgency(ticket),
       deadlineAt: buildDeadlineAt(ticket),
-      platformStage: getTicketPlatformStage(ticket),
+      platformStage,
     };
     if (existing) return db.updateQueueItem(existing.id, patch) || { ...existing, ...patch };
+    const confirmed = [...(queue.items || [])].reverse().find(item =>
+      item.workOrderNum === ticket.workOrderNum
+      && item.status === 'done'
+      && matchesConfirmedNoAction({
+        type: ticket.type,
+        platformStage,
+        confirmedNoAction: item.confirmedNoAction,
+      })
+    );
+    if (confirmed) {
+      const updated = db.updateQueueItem(confirmed.id, { platformStage }) || { ...confirmed, platformStage };
+      return { ...updated, suppressConfirmedNoAction: true };
+    }
     const added = db.addQueueItem({
       workOrderNum: ticket.workOrderNum,
       ...patch,
@@ -731,20 +762,23 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
     const workOrderNum = assertWorkOrderNum(ticket.workOrderNum);
     const queueItem = await dependencies.ensureQueueItem({ account: accountResult, ticket: { ...ticket, workOrderNum } });
     if (!queueItem || !queueItem.id) throw new Error(`工单 ${workOrderNum} 缺少原系统 queue item`);
+    const suppressConfirmedNoAction = queueItem.suppressConfirmedNoAction === true;
     items.push({
       workOrderNum,
-      status: 'pending',
+      status: suppressConfirmedNoAction ? 'done' : 'pending',
       ticket: { ...ticket, workOrderNum },
       queueItemId: queueItem.id,
       queueItem,
+      suppressConfirmedNoAction,
     });
   }
   for (const item of items) await reportProgress(dependencies, item);
-  const erpTargetId = snapshot.length && typeof dependencies.resolveErpTargetId === 'function'
+  const processableItems = items.filter(item => !item.suppressConfirmedNoAction);
+  const erpTargetId = processableItems.length && typeof dependencies.resolveErpTargetId === 'function'
     ? await dependencies.resolveErpTargetId(options.erpTargetId)
     : (options.erpTargetId || null);
 
-  for (const item of items) {
+  for (const item of processableItems) {
     if (options.abortSignal && options.abortSignal.aborted) {
       const err = new Error('操作已被用户停止');
       err.name = 'AbortError';

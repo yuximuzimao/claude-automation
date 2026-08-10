@@ -267,6 +267,106 @@ test('queue item 保存列表读取到的平台阶段', async () => {
   assert.equal(added.platformStage.source, 'after-sale-list');
 });
 
+test('同一工单同一阶段已确认后只刷新观察时间，不重复进入待确认', async () => {
+  const updates = [];
+  let added = false;
+  const ensureQueueItem = createEnsureQueueItem({
+    readQueue: () => ({
+      items: [{
+        id: 'q-confirmed',
+        workOrderNum: ORDER_1,
+        status: 'done',
+        type: '换货',
+        confirmedNoAction: {
+          caseId: 'exchange_waiting_merchant_reship',
+          stage: '商家-待商家二次发货',
+          confirmedAt: '2026-08-10T04:00:00.000Z',
+        },
+      }],
+    }),
+    updateQueueItem: (id, patch) => {
+      updates.push([id, patch]);
+      return { id, workOrderNum: ORDER_1, status: 'done', ...patch };
+    },
+    addQueueItem: () => { added = true; return null; },
+  });
+
+  const item = await ensureQueueItem({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    ticket: { workOrderNum: ORDER_1, type: '换货', status: '商家-待商家二次发货', totalHours: 8 },
+  });
+
+  assert.equal(item.suppressConfirmedNoAction, true);
+  assert.equal(item.platformStage.raw, '商家-待商家二次发货');
+  assert.equal(updates.length, 1);
+  assert.equal(updates[0][0], 'q-confirmed');
+  assert.equal(added, false);
+});
+
+test('已确认工单的平台阶段变化后创建新 queue item 重新判断', async () => {
+  let added = null;
+  const ensureQueueItem = createEnsureQueueItem({
+    readQueue: () => ({
+      items: [{
+        id: 'q-confirmed',
+        workOrderNum: ORDER_1,
+        status: 'done',
+        type: '换货',
+        confirmedNoAction: {
+          caseId: 'exchange_waiting_merchant_reship',
+          stage: '商家-待商家二次发货',
+          confirmedAt: '2026-08-10T04:00:00.000Z',
+        },
+      }],
+    }),
+    updateQueueItem: () => assert.fail('阶段变化后不应更新旧确认记录'),
+    addQueueItem: item => { added = { id: 'q-new', status: 'pending', ...item }; return added; },
+  });
+
+  const item = await ensureQueueItem({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    ticket: { workOrderNum: ORDER_1, type: '换货', status: '商家-待商家处理', totalHours: 8 },
+  });
+
+  assert.equal(item.id, 'q-new');
+  assert.equal(item.suppressConfirmedNoAction, undefined);
+  assert.equal(added.platformStage.raw, '商家-待商家处理');
+});
+
+test('固定批次遇到同阶段已确认项时不打开详情、不解析ERP，仍返回扫描留痕', async () => {
+  const fixture = batchDependencies({
+    prepareAfterSaleList: async () => ({
+      success: true,
+      targetId: 'list-tab',
+      list: {
+        urgent: [{ workOrderNum: ORDER_1, type: '换货', status: '商家-待商家二次发货', totalHours: 8 }],
+        totalCount: 1,
+        complete: true,
+      },
+    }),
+    ensureQueueItem: async () => ({
+      id: 'q-confirmed',
+      workOrderNum: ORDER_1,
+      status: 'done',
+      suppressConfirmedNoAction: true,
+    }),
+    resolveErpTargetId: async () => assert.fail('全部为已确认同阶段时不应解析 ERP target'),
+    locateWorkOrder: async () => assert.fail('已确认同阶段时不应再次定位工单'),
+    clickWorkOrderAction: async () => assert.fail('已确认同阶段时不应打开详情'),
+    collectDetail: async () => assert.fail('已确认同阶段时不应重新采集'),
+  });
+
+  const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
+
+  assert.equal(result.items.length, 1);
+  assert.equal(result.items[0].status, 'done');
+  assert.equal(result.items[0].suppressConfirmedNoAction, true);
+  assert.deepEqual(
+    fixture.calls.filter(call => call[0] === 'progress').map(call => call.slice(1)),
+    [[ORDER_1, 'done']]
+  );
+});
+
 test('disableAutoExecute=true时命中approve也只写待确认，不调用自动执行链路', async () => {
   const fixture = batchDependencies({
     shouldAutoExecute: async () => assert.fail('disableAutoExecute=true 时不应调用 shouldAutoExecute'),
@@ -565,6 +665,7 @@ test('动态分页收缩后从第二页回第一页找到目标工单', async ()
 
   assert.equal(result.found, true);
   assert.equal(result.page, 1);
+  assert.equal(result.ticket.workOrderNum, ORDER_1);
   assert.deepEqual(calls, ['page1']);
 });
 

@@ -23,4 +23,8 @@ test('换货或商责显示人工核对提醒并保留系统执行入口', () =>
   assert.match(appSource, /当前无需平台操作，请人工确认后手动归档/);
   assert.match(routesSource, /当前无需平台操作，请人工确认后手动归档/);
   assert.match(queueSource, /当前无需平台操作，请人工确认后手动归档/);
+  assert.match(appSource, /人工确认无需处理/);
+  assert.match(appSource, /相同阶段后续扫描不会重复进入待确认/);
+  assert.match(routesSource, /resolveManualArchiveOutcome/);
+  assert.match(routesSource, /confirmedNoAction/);
 });

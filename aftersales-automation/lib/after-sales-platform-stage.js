@@ -38,6 +38,9 @@ function getTicketPlatformStage(ticket, observedAt) {
 
 function classifyPlatformStage({ type, platformStage }) {
   if (type !== '换货') return null;
+  if (!platformStage
+    || platformStage.source !== PLATFORM_STAGE_SOURCE
+    || platformStage.readState !== 'read') return null;
   if (normalizeStageText(platformStage && platformStage.raw) !== normalizeStageText(EXCHANGE_WAITING_MERCHANT_RESHIP)) {
     return null;
   }
@@ -49,14 +52,41 @@ function classifyPlatformStage({ type, platformStage }) {
   };
 }
 
-function summarizeBaselineDecision(decision) {
+function cloneBaselineDecision(decision) {
   if (!decision) return null;
+  return JSON.parse(JSON.stringify(decision));
+}
+
+function createConfirmedNoAction(decision, platformStage, confirmedAt = new Date().toISOString()) {
+  if (!decision
+    || decision.action !== 'skip'
+    || decision.manualArchiveOnly !== true
+    || decision.platformStageCaseId !== EXCHANGE_WAITING_MERCHANT_RESHIP_CASE_ID) return null;
+  const raw = cleanRawStage(platformStage && platformStage.raw);
+  if (normalizeStageText(raw) !== normalizeStageText(EXCHANGE_WAITING_MERCHANT_RESHIP)) return null;
   return {
-    action: decision.action || null,
-    reason: decision.reason || '',
-    confidence: decision.confidence || null,
-    manualReviewKind: decision.manualReviewKind || null,
+    caseId: decision.platformStageCaseId,
+    stage: raw,
+    confirmedAt,
   };
+}
+
+function resolveManualArchiveOutcome({ queueStatus, decision, platformStage, archivedAt }) {
+  if (queueStatus === 'auto_executed') {
+    return { confirmedNoAction: null, source: 'auto_executed' };
+  }
+  const confirmedNoAction = createConfirmedNoAction(decision, platformStage, archivedAt);
+  return {
+    confirmedNoAction,
+    source: confirmedNoAction ? 'confirmed_no_action' : 'manual_handled',
+  };
+}
+
+function matchesConfirmedNoAction({ type, platformStage, confirmedNoAction }) {
+  if (!confirmedNoAction) return false;
+  const classification = classifyPlatformStage({ type, platformStage });
+  if (!classification || confirmedNoAction.caseId !== classification.caseId) return false;
+  return normalizeStageText(confirmedNoAction.stage) === normalizeStageText(platformStage && platformStage.raw);
 }
 
 function applyPlatformStageObservation({ type, platformStage, baselineDecision }) {
@@ -93,7 +123,7 @@ function applyPlatformStageObservation({ type, platformStage, baselineDecision }
       caseId: classification.caseId,
       rollout: classification.rollout,
       meaning: classification.meaning,
-      baselineDecision: summarizeBaselineDecision(baselineDecision),
+      baselineDecision: cloneBaselineDecision(baselineDecision),
     },
   };
 }
@@ -105,5 +135,8 @@ module.exports = {
   createPlatformStageObservation,
   getTicketPlatformStage,
   classifyPlatformStage,
+  createConfirmedNoAction,
+  resolveManualArchiveOutcome,
+  matchesConfirmedNoAction,
   applyPlatformStageObservation,
 };

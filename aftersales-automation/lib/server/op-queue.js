@@ -14,6 +14,7 @@ const { classifySessionFailure } = require('./account-session-status');
 const { hasConfirmedReturn, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../constants');
 const { extractShippedTrackings, createReminder } = require('../helpers');
 const { expireStaleAlerts } = require('../jl/alerts');
+const { getTicketPlatformStage } = require('../after-sales-platform-stage');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -773,12 +774,11 @@ async function execReprocessOne(op) {
   const fs = require('fs');
 
   const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
-  const ticket = {
-    workOrderNum: queueItem.workOrderNum,
-    type: queueItem.type,
-    accountNote: queueItem.accountNote || accountResult.matchedNote || '',
-    platformStage: queueItem.platformStage || null,
-  };
+  const ticket = buildFreshReprocessTicket(queueItem, located.ticket, accountResult.matchedNote);
+  db.updateQueueItem(queueItem.id, {
+    type: ticket.type || null,
+    platformStage: ticket.platformStage,
+  });
 
   const circuitFile = path.join(BASE, 'data/circuit-breaker.json');
   const readCircuit = () => { try { return JSON.parse(fs.readFileSync(circuitFile, 'utf8')); } catch { return null; } };
@@ -879,6 +879,16 @@ function canManuallyExecuteWaitingIntercept(queueItem, decision) {
     && decision.manualExecutionAllowedWhileWaiting === true
     && decision.reasonCode === 'INTERCEPT_WAITING'
   );
+}
+
+function buildFreshReprocessTicket(queueItem, locatedTicket, matchedNote = '') {
+  const freshTicket = locatedTicket || {};
+  return {
+    workOrderNum: queueItem.workOrderNum,
+    type: freshTicket.type || queueItem.type,
+    accountNote: queueItem.accountNote || matchedNote || '',
+    platformStage: getTicketPlatformStage(freshTicket),
+  };
 }
 
 async function execExecute(op) {
@@ -1144,6 +1154,7 @@ module.exports = {
   readStopEvent,
   updateAccountStatus,
   canManuallyExecuteWaitingIntercept,
+  buildFreshReprocessTicket,
   buildA1FixedBatchFailureStatus,
   createScanReminderState,
   updateScanReminderState,

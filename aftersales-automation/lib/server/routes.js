@@ -15,6 +15,7 @@ const sse = require('./sse');
 const opQueue = require('./op-queue');
 const cdp = require('../cdp');
 const jlAlerts = require('../jl/alerts');
+const { resolveManualArchiveOutcome } = require('../after-sales-platform-stage');
 const { summarizeHistory } = require('./after-sales-branch-history');
 const { getAccountOpenGuard, normalizeAccountStatus } = require('./account-session-status');
 const { createA1FixedBatchRouteHandler, validateSessionFile } = require('./a1-fixed-batch-entry');
@@ -248,12 +249,21 @@ router.post('/queue/:id/archive-manual', (req, res) => {
 
   const simId = req.body.simId;
   const sim = simId ? db.getSimulation(simId) : null;
-  const source = queueItem.status === 'auto_executed' ? 'auto_executed' : 'manual_handled';
+  if (simId && (!sim || sim.queueItemId !== queueItem.id)) {
+    return res.status(400).json({ error: '归档记录与当前工单不匹配' });
+  }
+  const archivedAt = new Date().toISOString();
+  const { confirmedNoAction, source } = resolveManualArchiveOutcome({
+    queueStatus: queueItem.status,
+    decision: sim && sim.decision,
+    platformStage: sim && sim.collectedData && sim.collectedData.platformStage,
+    archivedAt,
+  });
 
   db.appendCase(buildCasePayload(`case-${Date.now()}`, queueItem, sim, source));
 
-  db.updateQueueItem(queueItem.id, { status: 'done' });
-  if (sim) db.updateSimulation(sim.id, { archivedAt: new Date().toISOString() });
+  db.updateQueueItem(queueItem.id, { status: 'done', confirmedNoAction });
+  if (sim) db.updateSimulation(sim.id, { archivedAt });
 
   sse.broadcast('cases-update', {});
   res.json({ ok: true });

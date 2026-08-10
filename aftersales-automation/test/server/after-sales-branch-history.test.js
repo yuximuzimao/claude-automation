@@ -303,6 +303,81 @@ test('已手动处理归档按工单计入人工处理次数', () => {
   assert.equal(report.cases[0].manualHandledCount, 1);
 });
 
+test('待商家二次发货使用稳定独立分支，不归入未登记', () => {
+  const simulation = {
+    id: 'sim-stage',
+    workOrderNum: 'wo-stage',
+    queueItemId: 'queue-stage',
+    createdAt: '2026-07-12T00:00:00.000Z',
+    collectedData: {
+      ticket: { buyerRemark: '' },
+      platformStage: {
+        raw: '商家-待商家二次发货',
+        observedAt: '2026-07-12T00:00:00.000Z',
+        source: 'after-sale-list',
+        readState: 'read',
+      },
+    },
+    decision: {
+      action: 'skip',
+      manualArchiveOnly: true,
+      platformStageCaseId: 'exchange_waiting_merchant_reship',
+    },
+  };
+
+  const result = classifySimulation(simulation, { type: '换货' });
+  assert.equal(result.registered, true);
+  assert.equal(result.caseId, 'platform_stage.exchange_waiting_merchant_reship');
+  assert.equal(result.branchId, 'exchange.waiting_merchant_reship.confirm_no_action');
+  assert.equal(result.afterSaleReason, '平台阶段观察');
+});
+
+test('只有无需处理人工归档决定能进入阶段观察分支', () => {
+  const malformed = {
+    id: 'sim-stage-malformed',
+    workOrderNum: 'wo-stage-malformed',
+    createdAt: '2026-07-12T00:00:00.000Z',
+    collectedData: { ticket: {} },
+    decision: {
+      action: 'approve',
+      manualArchiveOnly: false,
+      platformStageCaseId: 'exchange_waiting_merchant_reship',
+    },
+  };
+  const result = classifySimulation(malformed, { type: '换货' });
+  assert.notEqual(result.branchId, 'exchange.waiting_merchant_reship.confirm_no_action');
+  assert.equal(result.registered, false);
+});
+
+test('人工确认无需处理单独计数，不混入人工执行次数', () => {
+  const simulation = {
+    id: 'sim-stage',
+    workOrderNum: 'wo-stage',
+    queueItemId: 'queue-stage',
+    createdAt: '2026-07-12T00:00:00.000Z',
+    collectedData: { ticket: { buyerRemark: '' } },
+    decision: {
+      action: 'skip',
+      manualArchiveOnly: true,
+      platformStageCaseId: 'exchange_waiting_merchant_reship',
+    },
+  };
+  const report = summarizeHistory({
+    simulations: [simulation],
+    queueItems: [{ id: 'queue-stage', workOrderNum: 'wo-stage', type: '换货' }],
+    archivedCases: [{
+      workOrderNum: 'wo-stage',
+      type: '换货',
+      addedAt: '2026-07-12T01:00:00.000Z',
+      groundTruth: { source: 'confirmed_no_action' },
+    }],
+    now: new Date('2026-07-18T00:00:00.000Z'),
+  });
+
+  assert.equal(report.cases[0].confirmedNoActionCount, 1);
+  assert.equal(report.cases[0].manualHandledCount, 0);
+});
+
 test('旧 simulation 的 queueItemId 失效时，按同一工单号恢复工单类型', () => {
   const simulation = makeSimulation({ queueItemId: 'missing-queue-id' });
   const report = summarizeHistory({
