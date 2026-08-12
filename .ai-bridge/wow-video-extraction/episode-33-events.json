@@ -1,0 +1,430 @@
+{
+  "episode": 33,
+  "title": "纳格兰 68",
+  "bvid": "BV1dziXBAEjY",
+  "duration_seconds": 4424.88,
+  "playlist_duration_seconds": 4425,
+  "display_duration": "1:13:45",
+  "series_index": "33/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "audit_mode": "task_window_system_chat_tracker_questie_level_cross_check",
+  "screenshots": {
+    "formal_batches": {
+      "coarse_a": 37,
+      "coarse_b": 38,
+      "fine20_a": 45,
+      "fine20_b": 45,
+      "fine20_c": 45,
+      "fine20_d": 45,
+      "fine20_e": 42,
+      "refined_early": 29,
+      "refined_hub1a": 61,
+      "refined_hub1b": 60,
+      "refined_mid_a": 41,
+      "refined_mid_b": 45,
+      "refined_arena": 41,
+      "refined_hub2": 56,
+      "refined_hub3": 56,
+      "refined_corki": 41,
+      "refined_final": 63
+    },
+    "formal_total": 790,
+    "manifest_count": 17,
+    "all_formal_batches_verified_paused": true,
+    "diagnostic_derivative_images_excluded": true
+  },
+  "starting_evidence": {
+    "level": 67,
+    "basis": "第32集约57:08完成9859《狩猎塔布羊》第三阶段后有连续升级证据；第33集开场角色仍为67级。"
+  },
+  "cross_episode_corrections": [
+    {
+      "quest_id": 9849,
+      "quest_name": "打碎外壳",
+      "finding": "第32集片尾只确认任务窗口打开；第33集开场追踪栏明确显示该任务和目标，因此确认在两集之间的未录片段中已接受。",
+      "exact_acceptance_time_confirmed": false
+    }
+  ],
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "22600/11300",
+      "23300/11650",
+      "28300/14150",
+      "29200/14600",
+      "34900/17450",
+      "35900/17950"
+    ]
+  },
+  "events": [
+    {
+      "time_range": "01:20-01:28",
+      "action": "accept_from_loot_item",
+      "quest_id": 9871,
+      "quest_name": "暗血入侵者",
+      "trigger_item": "暗血入侵计划",
+      "confidence": "high"
+    },
+    {
+      "time_range": "16:00-17:36",
+      "action": "complete_and_accept_next",
+      "quest_id": 9922,
+      "quest_name": "纳格兰的峡谷",
+      "experience_shown": 28300,
+      "next_quest_id": 10108,
+      "next_quest_name": "外交手段",
+      "faction_variant": "Alliance",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:24-18:08",
+      "action": "complete_and_accept_next",
+      "quest_id": 9871,
+      "quest_name": "暗血入侵者",
+      "experience_shown": 23300,
+      "next_quest_id": 9873,
+      "next_quest_name": "奥托尔，我的老朋友……",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:24-19:28",
+      "action": "complete_and_accept_next",
+      "quest_id": 10109,
+      "quest_name": "我想要这些鸟蛋！",
+      "experience_shown": 22600,
+      "next_quest_id": 10111,
+      "next_quest_name": "给我鸟蛋！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "20:08-21:04",
+      "action": "complete",
+      "quest_id": 10111,
+      "quest_name": "给我鸟蛋！",
+      "experience_shown": 28300,
+      "items_obtained": [
+        "风鹏皇后之爪",
+        "损坏的面具"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:24-22:40",
+      "action": "complete_and_accept_new_quests",
+      "quest_id": 10108,
+      "quest_name": "外交手段",
+      "faction_variant": "Alliance",
+      "experience_observed_exact": false,
+      "experience_calibrated": 17100,
+      "experience_note": "完成动作清晰；原始奖励数字和放大OCR仍不完整，17100来自Questie基础8550与本视频稳定2倍倍率。",
+      "new_quests": [
+        {
+          "quest_id": 9928,
+          "quest_name": "欺诈所需的军备"
+        },
+        {
+          "quest_id": 9927,
+          "quest_name": "无情的计谋"
+        }
+      ],
+      "confidence": "high_for_action_calibrated_for_experience"
+    },
+    {
+      "time_range": "27:28-28:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 9928,
+      "quest_name": "欺诈所需的军备",
+      "experience_shown": 22600,
+      "next_quest_id": 9931,
+      "next_quest_name": "以牙还牙",
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:04-28:24",
+      "action": "complete_and_accept_next",
+      "quest_id": 9927,
+      "quest_name": "无情的计谋",
+      "experience_shown": 22600,
+      "next_quest_id": 9932,
+      "next_quest_name": "尸证",
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:28-28:40",
+      "action": "complete",
+      "quest_id": 9852,
+      "quest_name": "终极挑战",
+      "experience_shown": 35900,
+      "achievement_obtained": "白色雷象一般的山丘",
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:56-30:20",
+      "action": "complete_and_open_next",
+      "quest_id": 9849,
+      "quest_name": "打碎外壳",
+      "experience_shown": 34900,
+      "next_quest_id": 9853,
+      "next_quest_name": "侵占者古罗克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:20-31:32",
+      "action": "complete",
+      "quest_id": 9810,
+      "quest_name": "污染的灵魂",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:20-32:12",
+      "action": "accept",
+      "quest_id": 9853,
+      "quest_name": "侵占者古罗克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "37:00-37:40",
+      "action": "accept",
+      "quest_id": 9962,
+      "quest_name": "鲜血竞技场：断蹄",
+      "confidence": "high"
+    },
+    {
+      "time_range": "37:00-38:20",
+      "action": "fail",
+      "quest_id": 9962,
+      "quest_name": "鲜血竞技场：断蹄",
+      "completed": false,
+      "next_stage_unlocked": false,
+      "abandoned_confirmed": false,
+      "confidence": "high"
+    },
+    {
+      "time_range": "46:04-46:48",
+      "action": "complete",
+      "quest_id": 9873,
+      "quest_name": "奥托尔，我的老朋友……",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "46:28-47:28",
+      "action": "complete_and_accept_next",
+      "quest_id": 9923,
+      "quest_name": "救命啊！",
+      "experience_shown": 22000,
+      "acceptance_time_confirmed": false,
+      "next_quest_id": 9924,
+      "next_quest_name": "考尔奇又走丢了！",
+      "confidence": "high_for_completion_acceptance_time_unknown"
+    },
+    {
+      "time_range": "47:44-48:24",
+      "action": "complete_and_accept_next",
+      "quest_id": 9931,
+      "quest_name": "以牙还牙",
+      "experience_shown": 22600,
+      "next_quest_id": 9933,
+      "next_quest_name": "回到塔拉",
+      "confidence": "high"
+    },
+    {
+      "time_range": "48:00-48:36",
+      "action": "complete",
+      "quest_id": 9932,
+      "quest_name": "尸证",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:00-49:08",
+      "action": "complete",
+      "quest_id": 9853,
+      "quest_name": "侵占者古罗克",
+      "experience_shown": 34900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:04",
+      "action": "level_up",
+      "from_level": 67,
+      "level": 68,
+      "trigger_quest_id": 9853,
+      "trigger_quest_name": "侵占者古罗克",
+      "evidence": [
+        "9853完成窗口后立即显示任务完成和34900经验",
+        "同一连续系统消息明确显示祝贺升到68级",
+        "随后显示属性、生命值和法力值增长",
+        "片尾角色面板再次显示等级68，但不是升级触发点"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "54:16-55:40",
+      "action": "complete",
+      "quest_id": 9924,
+      "quest_name": "考尔奇又走丢了！",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "54:16-55:48",
+      "action": "complete",
+      "quest_id": 9933,
+      "quest_name": "回到塔拉",
+      "experience_shown": 28300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:48-56:08",
+      "action": "accept",
+      "quest_id": 9954,
+      "quest_name": "考尔奇的赎金",
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:48-56:08",
+      "action": "complete",
+      "quest_id": 10076,
+      "quest_name": "沃舒古水晶尘",
+      "npc": "主研究员卡托斯",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:12-57:40",
+      "action": "complete",
+      "quest_id": 10077,
+      "quest_name": "沃舒古水晶尘样本",
+      "npc": "主研究员卡托斯",
+      "experience_observed_exact": false,
+      "experience_calibrated": 17500,
+      "experience_note": "画面读数接近17500且Questie基础为8750；按稳定2倍倍率校准。",
+      "confidence": "high_for_action_calibrated_for_experience"
+    },
+    {
+      "time_range": "60:00-62:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 9954,
+      "quest_name": "考尔奇的赎金",
+      "experience_shown": 23300,
+      "next_quest_id": 9955,
+      "next_quest_name": "掠夺者考瓦尔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "72:48-73:32",
+      "action": "complete",
+      "quest_id": 9955,
+      "quest_name": "掠夺者考瓦尔",
+      "experience_shown": 29200,
+      "triggered_level_up": false,
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "from_level": 67,
+      "to_level": 68,
+      "time_range": "49:04",
+      "trigger_quest_id": 9853,
+      "trigger_quest_name": "侵占者古罗克",
+      "confidence": "high",
+      "note": "升级祝贺、34900经验和属性/生命/法力增长均在9853交付后的连续画面中；不是片尾9955触发。"
+    }
+  ],
+  "completed_quests": [
+    9922,
+    9871,
+    10109,
+    10111,
+    10108,
+    9928,
+    9927,
+    9852,
+    9849,
+    9810,
+    9873,
+    9923,
+    9931,
+    9932,
+    9853,
+    9924,
+    9933,
+    10076,
+    10077,
+    9954,
+    9955
+  ],
+  "failed_quests": [
+    {
+      "quest_id": 9962,
+      "quest_name": "鲜血竞技场：断蹄",
+      "state": "接受后挑战失败；未完成、无奖励、未进入下一阶段；是否保留或放弃不确认。"
+    }
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 10004,
+      "quest_name": "耐心与理解",
+      "state": "第32集已接取；第33集没有交付或放弃证据。"
+    },
+    {
+      "quest_id": 9900,
+      "quest_name": "加瓦克希",
+      "state": "第32集已接取；第33集没有交付或放弃证据。"
+    },
+    {
+      "quest_id": 9925,
+      "quest_name": "安全问题",
+      "state": "第32集已接取；第33集没有交付或放弃证据。"
+    },
+    {
+      "quest_id": 9882,
+      "quest_name": "偷盗贼的东西……能算偷么？",
+      "state": "第32集已接取；第33集没有交付或放弃证据。"
+    },
+    {
+      "quest_id": 9937,
+      "quest_name": "通缉：饥饿者杜恩",
+      "state": "联盟版本；第32集已接取，第33集没有明确完成或放弃证据。"
+    },
+    {
+      "quest_id": 9869,
+      "quest_name": "元素王座",
+      "state": "第31集接受明确；截至第33集仍没有独立最终奖励或明确完成提示。"
+    },
+    {
+      "quest_id": 10810,
+      "quest_name": "损坏的面具",
+      "state": "明确获得任务触发物，后续追踪文字可见；点击接受的具体时点和交付均未清晰捕获。"
+    },
+    {
+      "quest_id": 9962,
+      "quest_name": "鲜血竞技场：断蹄",
+      "state": "接受后失败；片尾是否仍保留或已经放弃不确认。"
+    }
+  ],
+  "next_episode": {
+    "episode": 34,
+    "title": "北风苔原 69-70",
+    "bvid": "BV11qiQB1ET2",
+    "duration_seconds": 3842,
+    "duration": "1:04:02",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 20,
+  "notes": [
+    "第33集开场确认9849在两集之间已接受，但不能回填具体点击秒数。",
+    "67到68由9853《侵占者古罗克》在49:04触发；9955只在片尾提供29200经验。",
+    "9873的23300与9923的22000在同一NPC处重叠显示，已拆分。",
+    "9849的34900与9810的22600在元素王座处重叠显示，已通过诊断裁剪拆分。",
+    "10108完成动作明确，经验17100属于Questie×2校准值而非清晰独立OCR读数。",
+    "9962只确认接受和失败，不能记为完成或默认放弃。",
+    "10076/10077由主研究员卡托斯确认，不能混用10074/10075。",
+    "第34集信息来自合集状态；本轮未导航、播放、截图或处理第34集。"
+  ]
+}

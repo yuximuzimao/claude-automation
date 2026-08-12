@@ -1,6 +1,36 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-02",
+  "updated_at": "2026-08-08",
+  "global_observations": {
+    "party_converted_to_raid_blocks_normal_quest_drops": {
+      "status": "user_confirmed",
+      "note": "2026-08-05 21:00—约22:00误把五人小队转换为团队，普通任务物品无法正常获取。路线开始前必须确认队伍仍为普通小队；该时段不得计入有效任务效率。"
+    },
+    "free_for_all_sequential_personal_quest_loot": {
+      "status": "user_confirmed",
+      "note": "自由拾取模式下，同一尸体可由一个角色先拾取完自己的任务物品，再由其余角色依次拾取各自可见的任务物品。后续个人任务物品估时先按一次总击杀、五号逐尸拾取测试；第一具尸体仍需验证所有角色是否都可获得。"
+    },
+    "escort_party_offer_popup_shared_acceptance": {
+      "status": "user_confirmed",
+      "note": "普通小队中，一个角色领取可共享的护送任务时，其余队员会收到是否接受的弹窗。路线执行时由主控领取，确认另外四号全部接受后再启动护送；护送不再因需要五号分别找NPC接取而降权。"
+    },
+    "main_character_control_is_not_uniform_overhead": {
+      "status": "user_confirmed",
+      "note": "主号本来就承担打怪、跑路和路线控制，因此不能把所有‘需要主号操作’统一计为五开额外成本。主号短跳、一次使用任务物、短暂绕障碍或从高台跳下若只需数秒且不造成跟随号丢失，应按低增量成本处理，可能属于高效率任务。真正需要加权的是逐号切换、逐号走位、断跟随、重复定位、刷新等待和失败重跑。"
+    },
+    "interaction_cost_taxonomy": {
+      "status": "user_confirmed_model_rule",
+      "note": "估时必须分四类：①基线主控（打怪、骑乘、普通路线）不额外惩罚；②短暂主控偏离只计真实秒数；③逐号串行操作按切号次数和单次交互计；④破坏队形操作按重新集结、卡地形、等待与失败风险计。禁止再用‘主号操作’作为统一降权标签。"
+    },
+    "corpse_or_scene_item_use_does_not_require_simultaneous_input": {
+      "status": "user_confirmed_model_rule",
+      "note": "对尸体或场景物使用任务道具时，不应假设五号必须同时按键。实际只会出现两种可接受结果：主号完成后队伍同步完成，或物体提示正在被使用、随后按顺序操作/等待正常刷新。此类机制本身不构成高风险；仍需评估目标分布、总击杀数、逐号切换秒数和路线重叠。"
+    },
+    "single_character_video_is_not_fivebox_speed_baseline": {
+      "status": "user_confirmed_model_rule",
+      "note": "单号视频用于证明任务、地点、入口、顺序和机制可行，不用于证明五开最优路线或完成时间。单号杀怪慢、任务经验利用方式不同；老手五开能达到相近总升级时间，说明视频任务集合仍有五开专属优化空间。最终优化器必须从部落全任务池独立选块。"
+    }
+  },
   "tasks": {
     "8325": {
       "type": "kill_shared_confirmed",
@@ -81,6 +111,31 @@
       "type": "named_mob_cave_completed_loot_mode_unrecorded",
       "status": "user_confirmed_partial",
       "note": "《耐力的试炼》首组五号已经完成并交付，属于西部经验补足环。当前没有单独记录格林卡尸体是否一次供五号拾取，后续复跑仍需验证该细节。"
+    },
+    "571": {
+      "type": "single_creature_personal_drop_server_rate_unviable",
+      "status": "user_confirmed",
+      "note": "《摩克萨尔丁的魔法》成年大猩猩肌腱在时光服实跑约2%—5%掉率；自由拾取并未消除低掉率瓶颈。约1小时仅2/5角色完成，另外三号未完成。后续五开速度路线直接放弃，不为开启573继续刷。"
+    },
+    "2975_2987_block": {
+      "type": "shared_kill_plus_random_mound_collection_viable",
+      "status": "user_confirmed",
+      "note": "《菲拉斯的食人魔》（2975）与《戈杜尼钴矿石》（2987）首组实跑合计约30分钟，整体简单、路线重叠良好，应保留为菲拉斯首圈任务块。不得再因2987含随机土堆产出而整体降权。"
+    },
+    "2978": {
+      "type": "single_instance_world_container_random_respawn_one_character_only",
+      "status": "user_confirmed",
+      "note": "《戈杜尼卷轴》（2978）的卷轴属于非定时随机重生的容器类地面物。一次实例只能一个角色接取；首组一个角色拾取后等待5分钟仍未刷新。任务40级交付约5000经验。若已返回莫沙彻，不应为其余角色专程往返并等待多次随机刷新；以后仅在路线自然经过、卷轴当场可见时让最低未完成角色拾取，不原地等待。"
+    },
+    "2767": {
+      "type": "escort_short_cleared_path_route_viable",
+      "status": "user_confirmed",
+      "note": "《拯救OOX-22/FE！》（2767）首组五号已完成护送目标。用户实跑确认路程较短，进场寻找机器人时已经清过沿途怪，护送出来没有额外难度；以后同路线应保留，不因‘护送’标签机械排除。完成后任务必须保留到藏宝海湾向奥格索普·奥布诺提斯交付。"
+    },
+    "3123": {
+      "type": "corpse_item_use_sequential_fivebox_unknown",
+      "status": "needs_live_test",
+      "note": "《测试容器》（3123）在本版本目标为菲拉斯铁鬃熊/长牙奔跑者。公开玩家资料对同一尸体多角色使用存在‘需近乎同时使用、尸体会消失’的提示，不能套用通用尸体操作经验。首具尸体必须测试五号顺序使用；若不能依次推进，立即跳过《测试容器》（3123）及后续灵魂容器链。"
     }
   }
 }

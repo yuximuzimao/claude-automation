@@ -1,34 +1,47 @@
-# 已验证练级路线索引
+# 已验证路线索引
 
-本目录只保存首组五开血精灵圣骑士已经实跑确认的路线规则、当前节点和小段路线。未经实跑的候选任务不得写成“已验证”。
+本目录只保存已经通过实跑、静态数据交叉检查或明确人工审计的路线与机制记录。玩家实际执行时必须先看`CURRENT.md`，再进入其中指定的唯一执行主档。
 
-## 新对话最小读取顺序
+## 当前执行入口
 
-1. `CURRENT.md`：读取五个角色中等级/经验最低角色的当前状态、身上关键任务和下一步。
-2. `RULES.md`：读取路线选择、输出格式、五开负担和接续规则。
-3. 只读取与当前等级相邻的一份 `segments/*.md`，不要一次加载全部历史路线。
-4. 再按需读取下一地区的Questie候选JSON、任务经验和前置数据。
+- 当前唯一执行入口为[`CURRENT.md`](CURRENT.md)：首组已进入时光服地狱火半岛并推进到61级，继续按现场可接任务与实跑反馈推进。历史艾萨拉、费伍德→冬泉和旧安戈洛方案均只保留作比较证据，不得覆盖当前真实状态。
+- [`sessions/2026-08-12-hellfire-58-61-midrun-neat.md`](sessions/2026-08-12-hellfire-58-61-midrun-neat.md)：最新阶段归档；记录时光服地狱火58→61首跑中段、五号经验、任务推进、老手2—2.5张图到68基线、分圈方法修正及经验积累型项目规则。
+- [`sessions/2026-08-11-level55-58-felwood-winterspring-closure-neat.md`](sessions/2026-08-11-level55-58-felwood-winterspring-closure-neat.md)：55→58首组实跑闭合；记录费伍德→冬泉实际经验、时间结构、怪物经验与预算错误。
+- [`sessions/2026-08-09-level50-55-ungoro-silithus-closure-neat.md`](sessions/2026-08-09-level50-55-ungoro-silithus-closure-neat.md)：50→55历史阶段闭合；确认安戈洛→希利苏斯实跑结果，并记录20/40级雕文购买遗漏。
+- [`VETERAN-LEVELING-BACKBONE.md`](VETERAN-LEVELING-BACKBONE.md)：当前50—80地图主轴；50—58现固定理解为安戈洛→希利苏斯→艾萨拉三段，外域与诺森德继续按连续地图轴推进。
+- [`sessions/2026-08-09-level50-silvermoon-riding-to-ungoro-v1.md`](sessions/2026-08-09-level50-silvermoon-riding-to-ungoro-v1.md)：上一段转场历史，只负责灼热峡谷→银月骑术→加基森，不再作为安戈洛内部执行稿。
+- [`sessions/2026-08-08-actual-leveling-map-route-neat.md`](sessions/2026-08-08-actual-leveling-map-route-neat.md)：首组实际地图历程基线，用于和老手连续清图主轴对照，定位旧路线的地图振荡成本。
+- [`sessions/2026-08-07-level40-feralas-route-format-neat.md`](sessions/2026-08-07-level40-feralas-route-format-neat.md)：40级阶段历史NEAT归档，固化玩家可执行性复审、菲拉斯首趟顺序、卷轴随机重生机制、五号骑术与背包经济约束。
 
-`docs/NEXT_CHAT_HANDOFF.md`保留项目级交接；`docs/NEAT_SIMPLE_LEVELING_ROUTE.md`保留生成审计与项目背景，不再持续堆积逐任务实跑细节。
+## 长期规则与恢复点
 
-## 当前有效文档
+- [`CURRENT.md`](CURRENT.md)：当前等级、位置、炉石、路线轴和唯一执行入口。
+- [`RULES.md`](RULES.md)：任务路线编写、实跑记录、机制验证和人类可执行性复审规则。
+- [`ERROR-BOOK.md`](ERROR-BOOK.md)：已发现的路线错误、错误原因及禁止复发项。
+- [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组五开的飞行点状态；未列出的点按未开启处理。
+- [`PALADIN-COMBAT-NOTES.md`](PALADIN-COMBAT-NOTES.md)：圣骑士战斗、圣印与天赋记录。
 
-- [`CURRENT.md`](CURRENT.md)：当前首组实跑节点。
-- [`RULES.md`](RULES.md)：后续生成路线时必须遵守的规则。
-- [`segments/20-23-stonetalon-ratchet-ashenvale.md`](segments/20-23-stonetalon-ratchet-ashenvale.md)：石爪山脉、棘齿城、灰谷东部的已验证路线和经验样本。
-- [`segments/23-south-barrens.md`](segments/23-south-barrens.md)：南贫瘠之地《野猪人的内战》、血岩碎片顺交机制与《加恩的报复》的实跑记录。
-- [`segments/24-25-stonetalon-capitals-tarren.md`](segments/24-25-stonetalon-capitals-tarren.md)：石爪收尾、雷霆崖/奥格瑞玛补点、幽暗城—瑟伯切尔—塔伦米尔转场及494《进攻的时机》的已验证记录。
-- [`segments/25-26-hillsbrad-farms-mine-syndicate.md`](segments/25-26-hillsbrad-farms-mine-syndicate.md)：希尔斯布莱德农场、镇政厅、矿洞、辛迪加任务、经验检查点和错误修正。
-- [`sessions/2026-08-02-hillsbrad-neat.md`](sessions/2026-08-02-hillsbrad-neat.md)：本次希尔斯布莱德会话的NEAT复盘、错误原因和新对话执行约束。
-- [`segments/27-29-thousand-needles-west-darkcloud.md`](segments/27-29-thousand-needles-west-darkcloud.md)：千针石林西部、黑云峰、信仰试炼入口和西部补足环的已验证记录。
-- [`sessions/2026-08-02-thousand-needles-neat.md`](sessions/2026-08-02-thousand-needles-neat.md)：千针石林阶段NEAT归档，包含任务分区、护送、斜坡入口、拾取机制和经验预算修正。
-- [`PALADIN-COMBAT-NOTES.md`](PALADIN-COMBAT-NOTES.md)：命令圣印、洗点结果和后续惩戒天赋顺序。
-- [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组五开的长期飞行点状态；未列出的点一律按未开启处理。
+## 已验证分段与会话
+
+- [`segments/20-23-stonetalon-ratchet-ashenvale.md`](segments/20-23-stonetalon-ratchet-ashenvale.md)：石爪山脉、棘齿城和灰谷东部。
+- [`segments/23-south-barrens.md`](segments/23-south-barrens.md)：南贫瘠之地与血岩碎片机制。
+- [`segments/24-25-stonetalon-capitals-tarren.md`](segments/24-25-stonetalon-capitals-tarren.md)：石爪收尾、主城补点和塔伦米尔转场。
+- [`segments/25-26-hillsbrad-farms-mine-syndicate.md`](segments/25-26-hillsbrad-farms-mine-syndicate.md)：希尔斯布莱德任务块。
+- [`segments/27-29-thousand-needles-west-darkcloud.md`](segments/27-29-thousand-needles-west-darkcloud.md)：千针石林西部、黑云峰与试炼任务。
+- [`sessions/2026-08-02-hillsbrad-neat.md`](sessions/2026-08-02-hillsbrad-neat.md)：希尔斯布莱德会话复盘。
+- [`sessions/2026-08-02-thousand-needles-neat.md`](sessions/2026-08-02-thousand-needles-neat.md)：千针石林会话复盘。
+- [`sessions/2026-08-04-30-33-timing-and-route-corrections.md`](sessions/2026-08-04-30-33-timing-and-route-corrections.md)：30—33级实跑时间线与修正。
+- [`sessions/2026-08-04-33-35-stranglethorn-swamp-transition.md`](sessions/2026-08-04-33-35-stranglethorn-swamp-transition.md)：33—35级荆棘谷与悲伤沼泽转场。
+
+## 已废弃但保留作资料的版本
+
+- 旧39→55完整攻略与42→55区域中心攻略已收缩为跳转页，不再保留可误执行正文；历史内容从Git或工作区备份追溯。
+- [`sessions/2026-08-06-level39-feralas-tanaris-speed-route-v2.md`](sessions/2026-08-06-level39-feralas-tanaris-speed-route-v2.md)：39—45历史机制来源。
+- [`sessions/2026-08-06-level39-stv-stop-loss-and-39-45-route.md`](sessions/2026-08-06-level39-stv-stop-loss-and-39-45-route.md)：早期保守历史稿。
 
 ## 文档维护规则
 
-- 每份路线段尽量只覆盖2—4级或一个明确跨区闭环。
-- 文件名包含等级段与主要区域，便于按需读取。
-- 当前状态只在`CURRENT.md`维护；历史路线段不反复改写当前等级。
-- 通用方法只在`RULES.md`维护；路线段只记录本段任务、机制、经验和实跑修正。
-- 新发现的隐身、巡逻、楼层、洞穴入口、跟随卡点、个人拾取等机制，必须写入对应路线段，并在必要时同步到`data/observations/`。
+1. 当前执行入口只能有一份。
+2. 新版本必须完成玩家视角可执行性复审后，才能替换当前入口。
+3. 旧版本必须明确标记为历史资料，避免新对话误用。
+4. 用户实跑反馈优先级高于静态模型，确认后写入观察、规则与当前路线。

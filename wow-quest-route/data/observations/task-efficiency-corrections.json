@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "purpose": "任务效率库纠错流水；当前有效值写入效率库，旧值和修改原因在这里追加保留。",
+  "corrections": [
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 606,
+      "scope": "route_decision",
+      "previous": "作为荆棘谷顺路任务保留",
+      "corrected": "47级主路线跳过；已完成可交，未完成立即放弃",
+      "reason": "41级任务在47级开始衰减到约1800经验，且五号累计需要25份40%参考掉落的内脏。",
+      "source": "用户最新46—47级状态＋本地Questie/AzerothCore参考数据"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 208,
+      "scope": "route_budget",
+      "previous": "计入荆棘谷经验预算",
+      "corrected": "从当前路线和经验预算删除",
+      "reason": "当前路线没有接取步骤，Questie历程也没有已接状态，缺少完整接取与交付闭环。",
+      "source": "当前V5正文＋单角色Questie历程"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 3443,
+      "scope": "route_instruction",
+      "previous": "完成12名黑铁矮人",
+      "corrected": "每个角色收集8把瑟银匕首，五号合计40把；参考掉率80%",
+      "reason": "旧正文把个人任务物错误写成共享击杀数量。",
+      "source": "Questie v11.32.3任务目标＋AzerothCore参考掉率"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 348,
+      "scope": "route_instruction",
+      "previous": "准备10颗猩猩牙启动事件",
+      "corrected": "当前WotLK资料按主号1颗猩猩牙启动一次，五号都持有任务并拾取莫克之心",
+      "reason": "旧Classic机制与当前WotLK机制混用。当前服务器仍以首次现场结果为最高优先级。",
+      "source": "Questie v11.32.3＋WotLK公开任务资料"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 3444,
+      "scope": "quest_chain",
+      "previous": "作为卡拉然火炬链3481结束后的加基森交付",
+      "corrected": "从当前路线删除；任务物在棘齿城箱子内，3444属于沉没的神庙前置，不是3481后续",
+      "reason": "旧正文把两个互不相干的任务链拼接在一起；玩家若没有先在棘齿城取石环，到加基森没有可交内容。",
+      "source": "Questie前置数据＋WotLK 3444任务页"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 8273,
+      "scope": "follow_up_omission",
+      "previous": "交2782《林吉的秘密》后直接离开",
+      "corrected": "交2782后继续与奥兰对话，原地完成8273《奥兰的感谢》",
+      "reason": "8273没有新增移动，54级仍约7200经验，属于必须闭合的即时后续。",
+      "source": "Questie前置数据＋公开任务链资料"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 5021,
+      "scope": "route_instruction",
+      "previous": "到费尔斯通农场直接拿固定包裹",
+      "corrected": "先到东北房屋二楼找贾妮丝接5021，再到谷仓点击包裹完成5021，并再次点击包裹接部落后续5023",
+      "reason": "旧正文漏掉接取NPC和第二次点击，玩家只看攻略会卡在包裹或断掉幽暗城后续。",
+      "source": "Questie起终点数据＋WotLK/Classic任务页玩家步骤"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 5059,
+      "scope": "route_instruction",
+      "previous": "杀屋内游荡的达尔松夫人的食尸鬼拿厕所钥匙",
+      "corrected": "先读谷仓日记，再杀屋外厕所附近的游荡骷髅拿厕所钥匙",
+      "reason": "目标名称、怪物类型和位置均写错；未先读日记时钥匙还不会掉。",
+      "source": "WotLK 5058/5059任务页与玩家步骤"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 6004,
+      "scope": "route_decision",
+      "previous": "作为55级前的优先稳定补缺任务",
+      "corrected": "从保证路线删除；第三、第四座瘟疫之锅优先，6004只在四类目标碰巧齐全时顺手",
+      "reason": "法师、猎人等目标稀少并与其他职业共享刷新，公开实跑存在明显等待长尾，不能承担到55闭环。",
+      "source": "Questie目标数据＋WotLK 6004玩家反馈"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 4301,
+      "scope": "route_decision",
+      "previous": "在南口交4289后接4301，再返回东北猩猩洞杀尤尔查",
+      "corrected": "当前单圈路线跳过4301；在南口交4289和4292后直接离开安戈洛",
+      "reason": "前置4289的目标本来就在东北洞，直到南口交付后才开放4301；再去东北洞并回南口构成一次完整跨图折返。",
+      "source": "Questie接取/目标/交付坐标＋本次人工环线复核"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 7728,
+      "scope": "route_decision",
+      "previous": "列在大熔炉同圈保证完成项",
+      "corrected": "改为自然获得才完成；既定路线结束仍缺鼓风机或望远镜就放弃",
+      "reason": "对应怪物数量少，公开玩家反馈从首杀到40—100杀不等，不能把参考数据库的理想掉落当成保证。",
+      "source": "WotLK/Classic 7728任务页与任务物玩家反馈"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 3442,
+      "scope": "fivebox_loot_instruction",
+      "previous": "每具尸体让五个角色依次检查",
+      "corrected": "按普通FFA收集物执行：每具尸体只由一个当前缺材料的角色拾取，轮换最慢号",
+      "reason": "旧正文与当前服已经验证的普通多数量任务物规则冲突，会造成无效切窗，并错误暗示一具尸体可供五号重复获取。",
+      "source": "当前项目RULES.md的用户实测FFA规则＋本次逐任务对抗复审"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 7830,
+      "scope": "fivebox_loot_instruction",
+      "previous": "五号逐个检查每具狮鹫尸体",
+      "corrected": "每具尸体只切一个缺任务羽毛的角色拾取；同时保留可交易的细长狮鹫羽毛供7842使用",
+      "reason": "7830是普通任务物，7842所需物又可在接任务前获得；旧写法既增加切窗，也漏掉提前备料带来的原地接交机会。",
+      "source": "当前项目RULES.md的用户实测FFA规则＋WotLK 7842任务页"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 4289,
+      "scope": "fivebox_loot_instruction",
+      "previous": "三类猩猩毛皮参考100%，五号逐尸检查",
+      "corrected": "每号各需三类毛皮2张；按普通FFA一尸一号轮换拾取，100%不等于一尸五份",
+      "reason": "旧写法把数据库掉率和组队分配机制混为一谈，会低估五号实际击杀数并增加无效切窗。",
+      "source": "当前项目RULES.md的用户实测FFA规则＋本次逐任务对抗复审"
+    },
+    {
+      "recorded_at": "2026-08-08T00:00:00+08:00",
+      "quest_id": 7815,
+      "scope": "zone_route_order",
+      "previous": "西部外圈后返回恶齿村，再做东海岸，再向西去辛萨罗，最后再次回村",
+      "corrected": "先做村北乌龟并解锁7816，再一次向西完成外圈、林吉和辛萨罗，随后一路向东收海岸目标并回村总交付",
+      "reason": "7842所需羽毛可在接任务前获得，西部结束后没有必须先回村的前置；旧顺序因此产生两次无必要的整图横穿。",
+      "source": "WotLK 7842物品机制＋本次从地理顺序重新冷读"
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "episode": 23,
+  "title": "安戈洛环形山 53-54",
+  "bvid": "BV1mGvdBsENa",
+  "duration_seconds": 2936,
+  "display_duration": "48:56",
+  "series_index": "23/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 49,
+    "fine5_opening": 73,
+    "fine5_mid": 121,
+    "fine5_ame": 97,
+    "fine5_late": 101,
+    "total": 441,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 53,
+    "basis": "00:00—00:15画面角色等级已显示53；本集没有53级升级提示，因此本集从53级开始。",
+    "continuity_warning": "第22集没有捕捉到52→53的明确升级提示；只能确认第23集开场已经是53级，不能为跨集空白补造精确升级时间。"
+  },
+  "events": [
+    {
+      "time_range": "02:45-03:05",
+      "action": "complete",
+      "quest_id": 4289,
+      "quest_name": "安戈洛的猩猩",
+      "experience_shown": 16300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "02:45-03:10",
+      "action": "complete",
+      "quest_id": 4291,
+      "quest_name": "拉克维的气味",
+      "experience_expected_from_video_context": 16300,
+      "confidence": "medium_high",
+      "basis": "托尔瓦·寻路者交互、随后出现《拉克维的诱饵》以及Questie链4291→4292联合校准；同一时间段系统文字与《安戈洛的猩猩》奖励重叠。"
+    },
+    {
+      "time_range": "02:50-03:10",
+      "action": "accept",
+      "quest_id": 4292,
+      "quest_name": "拉克维的诱饵",
+      "confidence": "medium_high",
+      "basis": "任务窗口和随后目标推进明确，Questie前置为4291。"
+    },
+    {
+      "time_range": "03:05-03:30",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 4292,
+      "quest_name": "拉克维的诱饵",
+      "objective": "使用诱饵并击杀拉克维",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "04:05-04:20",
+      "action": "complete",
+      "quest_id": 4292,
+      "quest_name": "拉克维的诱饵",
+      "experience_shown": 6300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:05-04:20",
+      "action": "accept",
+      "quest_id": 4301,
+      "quest_name": "强大的尤尔查",
+      "confidence": "high"
+    },
+    {
+      "time_range": "15:50-16:10",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 974,
+      "quest_name": "究根问底",
+      "objective": "找到火羽山最热的区域",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:50-18:10",
+      "action": "accept",
+      "quest_id": 4491,
+      "quest_name": "朋友的帮助",
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:25-21:45",
+      "action": "complete",
+      "quest_id": 4491,
+      "quest_name": "朋友的帮助",
+      "experience_shown": 16300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:40-22:00",
+      "action": "complete",
+      "quest_id": 3881,
+      "quest_name": "抢救物资",
+      "experience_shown": 15200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:10-22:30",
+      "action": "accept",
+      "quest_id": 4284,
+      "quest_name": "能量水晶",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:35-22:55",
+      "action": "complete",
+      "quest_id": 4284,
+      "quest_name": "能量水晶",
+      "experience_shown": 15200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:50-23:15",
+      "action": "accept",
+      "quest_id": 4285,
+      "quest_name": "北部水晶塔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:50-23:20",
+      "action": "accept",
+      "quest_id": 4287,
+      "quest_name": "东部水晶塔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:50-23:20",
+      "action": "accept",
+      "quest_id": 4288,
+      "quest_name": "西部水晶塔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:10-23:40",
+      "action": "complete",
+      "quest_id": 4141,
+      "quest_name": "穆尔金和拉瑞安",
+      "experience_shown": 14700,
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:30-29:10",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 4301,
+      "quest_name": "强大的尤尔查",
+      "objective": "取得尤尔查的毛皮",
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:30-29:45",
+      "action": "complete",
+      "quest_id": 4243,
+      "quest_name": "找回A-Me 01",
+      "stage": 1,
+      "experience_shown": 7600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:30-29:45",
+      "action": "accept",
+      "quest_id": 4244,
+      "quest_name": "找回A-Me 01",
+      "stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:35-29:50",
+      "action": "complete",
+      "quest_id": 4244,
+      "quest_name": "找回A-Me 01",
+      "stage": 2,
+      "experience_shown": 11400,
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:35-29:50",
+      "action": "accept",
+      "quest_id": 4245,
+      "quest_name": "找回A-Me 01",
+      "stage": 3,
+      "confidence": "high"
+    },
+    {
+      "time_range": "34:00-34:15",
+      "action": "complete",
+      "quest_id": 4245,
+      "quest_name": "找回A-Me 01",
+      "stage": 3,
+      "experience_shown": 19000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:35-36:50",
+      "action": "complete",
+      "quest_id": 4301,
+      "quest_name": "强大的尤尔查",
+      "experience_shown": 16300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:40-36:55",
+      "action": "accept",
+      "quest_id": 980,
+      "quest_name": "新的泉水",
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:55-37:05",
+      "action": "level_up_explicit",
+      "level": 54,
+      "confidence": "high",
+      "best_frame_seconds": 2220
+    },
+    {
+      "time_range": "41:00-41:10",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 4287,
+      "quest_name": "东部水晶塔",
+      "objective": "发现东部水晶塔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:30-43:45",
+      "action": "complete",
+      "quest_id": 4285,
+      "quest_name": "北部水晶塔",
+      "experience_shown": 11400,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:30-43:45",
+      "action": "complete",
+      "quest_id": 4287,
+      "quest_name": "东部水晶塔",
+      "experience_shown": 11400,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:30-43:45",
+      "action": "complete",
+      "quest_id": 4288,
+      "quest_name": "西部水晶塔",
+      "experience_shown": 11400,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:35-43:50",
+      "action": "accept_and_immediate_complete",
+      "quest_id": 4321,
+      "quest_name": "分析水晶塔",
+      "experience_shown": 1500,
+      "confidence": "high",
+      "note": "任务目标仅为稍后再次与科琳交谈，视频中接取后立即完成；OCR数字约1500，与Questie基础760的服务器加成口径相符。"
+    }
+  ],
+  "same_name_chain_note": {
+    "quest_ids": [4243, 4244, 4245],
+    "quest_name": "找回A-Me 01",
+    "calibration": "依据Questie前后置关系和视频中连续出现的7600、11400、19000经验提示，将同名任务拆分为找回、修复、护送三段，不能合并为一次完成。"
+  },
+  "task_log_observations": [
+    {
+      "time_range": "00:15-00:25",
+      "quest_id": 3908,
+      "quest_name": "无人知晓的秘密",
+      "state": "仍在任务日志中，目标是把林克的剑交给冬泉谷多诺瓦·雪山。"
+    },
+    {
+      "time_range": "00:15-00:25",
+      "quest_id": 4243,
+      "quest_name": "找回A-Me 01",
+      "state": "第一段在日志中显示可交；约29:35才出现可靠的最终交付和后续接取证据。"
+    },
+    {
+      "time_range": "43:50-44:10",
+      "quest_id": 8415,
+      "quest_name": "冰风岗",
+      "state": "追踪栏可见前往西瘟疫之地冰风岗的指挥官任务；未捕捉到清晰接取系统提示，因此只登记日志观察。"
+    },
+    {
+      "time_range": "43:50-44:10",
+      "quest_id": 3908,
+      "quest_name": "无人知晓的秘密",
+      "state": "任务日志仍显示完成目标但未交付；奖励窗口未出现，不能把日志中的“完成”标记当成最终交付。"
+    }
+  ],
+  "explicit_end_state": [
+    {
+      "quest_id": 3908,
+      "quest_name": "无人知晓的秘密",
+      "state": "待到冬泉谷交多诺瓦·雪山。"
+    },
+    {
+      "quest_id": 974,
+      "quest_name": "究根问底",
+      "state": "目标已完成，未见最终交付。"
+    },
+    {
+      "quest_id": 980,
+      "quest_name": "新的泉水",
+      "state": "已接取，要求到冬泉谷与多诺瓦·雪山交谈。"
+    },
+    {
+      "quest_id": 8415,
+      "quest_name": "冰风岗",
+      "state": "追踪栏可见；接取动作时间不清。"
+    }
+  ],
+  "continuity_unresolved_without_new_action": [
+    {
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "note": "第21集结束时四塔已点燃、待交侍卫玛特拉克；第22—23集均未见交付、放弃或日志证据。"
+    },
+    {
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "note": "此前待藏宝海湾交付；本集未见新动作。"
+    },
+    {
+      "quest_id": 162,
+      "quest_name": "异种蝎的威胁",
+      "note": "此前待达纳苏斯交付；本集未见新动作。"
+    }
+  ],
+  "next_episode": {
+    "episode": 24,
+    "title": "西瘟 54-56",
+    "bvid": "BV1jiirBiE2L",
+    "duration": "01:05:09",
+    "processed": false
+  },
+  "notes": [
+    "本集开场已经是53级；跨集52→53的精确升级时间未被视频证据捕捉。",
+    "《究根问底》约16分钟只完成目标，本集没有奖励经验或NPC交付证据。",
+    "约43:35—43:45三座水晶塔连续交付；随后《分析水晶塔》接取后立即完成。",
+    "第24集BVID来自当前页面__INITIAL_STATE__.videoData.ugc_season，本轮未导航、播放或截图第24集。"
+  ]
+}

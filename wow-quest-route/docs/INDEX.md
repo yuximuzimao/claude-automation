@@ -2,17 +2,22 @@
 
 ## §1 目标
 
-项目采用两阶段策略：首组五个血精灵圣骑士只要求安全、稳定地升到55级并解锁死亡骑士；后续每轮创建五个55级血精灵死亡骑士，先以55—80级全任务母版完成覆盖，再依据实跑耗时、金币、掉落、死亡、折返和逐号操作筛选主要打金图并冻结稳定流程。路线只按一个主控角色移动，另外四个角色持续跟随。
+当前唯一主线目标是把首组五个血精灵圣骑士连续升到80级；死亡骑士计划暂缓。50级以后采用成熟地图主轴依次推进，并以“当前任务中心尽量全清、最少转圈、自然衔接下一地图、只排除当前缺前置/职业不可接/多日不可一次清空内容”为主要路线方法。老手给出的地图等级数字先作为连续阶段检查点，必须经本地图可执行经验核验后才能解释成单图离图等级；任务已经清空但未到口述数字时，不在原图无任务刷怪，顺势进入下一任务中心。路线只按一个主控角色移动，另外四个角色持续跟随。
 
-当前有两个HTML参考入口：`data/routes/simple-leveling-route.html`保存首组圣骑士历史参考，`data/routes/dk-55-80-world-tasks.html`保存死亡骑士出生链及55—80全任务审阅母版。HTML不再作为首组选路的主要执行格式；当前五开已验证路线采用`docs/verified-routes/`下的小文档与分区任务单。旧坐标导航器和分区域候选页只作为内部数据来源。
+`data/routes/simple-leveling-route.html`保存圣骑士历史参考，`data/routes/dk-55-80-world-tasks.html`保存死亡骑士后续母版；两者都不是当前50—80玩家路线的唯一执行真值。当前执行采用`docs/verified-routes/CURRENT.md`指向的小文档与分区任务单；旧坐标导航器和分区域候选页只作为内部召回/数据来源。
 
 ## §2 文档读取入口
 
 - 新对话先读`docs/verified-routes/README.md`。
 - 当前等级、经验和身上关键任务只读`docs/verified-routes/CURRENT.md`。
+- 当前玩家攻略只执行`CURRENT.md`指定的一份；旧完整攻略只保留跳转页，不提供可误执行正文。
+- 继续、生成、修订或审计路线先读`docs/verified-routes/ROUTE-DESIGN-PROCESS.md`，并复用`docs/task-library/`中已核验的逐任务事实。
+- 每次生成、修订或审计路线前必须读`docs/verified-routes/ERROR-BOOK.md`并执行固定复查清单。
 - 路线生成方法只读`docs/verified-routes/RULES.md`。
 - 历史实跑只按当前等级读取一份相关`docs/verified-routes/segments/*.md`，不要一次加载全部历史。
-- `docs/NEAT_SIMPLE_LEVELING_ROUTE.md`保存生成审计和项目背景；`docs/NEXT_CHAT_HANDOFF.md`保存项目级交接，不作为逐任务路线正文。
+- `docs/NEAT_SIMPLE_LEVELING_ROUTE.md`保存生成审计和项目背景；`docs/NEXT_CHAT_HANDOFF.md`只保存工作流分流入口，不复制当前状态。
+- 逐集视频拆解新对话先读`docs/video-extraction/README.md`和`docs/video-extraction/CURRENT.md`；不得先加载实时路线状态或全部已完成集。阶段性错误与恢复状态审计保存在`docs/video-extraction/sessions/`，仅按需读取最新一份NEAT归档。
+- 全部视频结束后的整合顺序固定读`docs/video-extraction/POST-EXTRACTION-PLAN.md`。
 
 ## §3 数据分层
 
@@ -21,6 +26,7 @@
 3. **五开实测层**：击杀是否共享、物品是否个人、每号是否需点击、跟随卡点和地形。
 4. **人物历程层**：当前角色实际接取/完成顺序，用于比较而非替代任务关系。
 5. **RXP参考层**：只读取历史SavedVariables中实际存在的指南名称、等级段和衔接；没有逐步路线正文时不得推测接取或移动步骤。
+6. **视频事实层**：逐集保存任务动作、目标进度、剪辑缺口和交通实例；只作为第二阶段映射与优化证据，不直接覆盖Questie、当前人物状态或五开实测。
 
 任何实测结论不得写回Questie基础层；RXP与Questie冲突只记录在内部归档，不进入用户页面。
 
@@ -77,3 +83,4 @@
 6. Questie的`preQuestSingle`表示任意完成其中一个，`preQuestGroup`表示全部完成；最终路线必须跨地图做前置闭包，并删除无法由主路线满足前置的后续任务。
 7. 死亡骑士出生链使用特殊任务分类`zoneOrSort=-372`，生成时必须映射到区域4298“东瘟疫之地：血色领地”；普通正数区域筛选会漏掉整条出生链。
 8. 部落候选任务必须同时核对接取NPC与交付NPC阵营；只检查接取端会把暴风城等联盟不可交付任务混入母版。
+9. 自动`world-candidate`区域候选不是完整任务清单。2026-08-03确认《回家》（4770）未进入任何自动候选目录；野外护送、跨区归属、特殊分类、物品/物体触发和现场NPC任务必须通过`ERROR-BOOK.md`的候选并集与差集审计补查。

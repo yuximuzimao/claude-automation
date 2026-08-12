@@ -12,6 +12,21 @@ const { erpNav } = require('./navigate');
 
 const RESULTS_FILE = path.join(__dirname, '../data/results.txt');
 
+// ERP 页面依赖 Vue 异步渲染和接口请求，节奏宁可保守一些，避免页面仍在切换时操作下一步。
+const TIMING = Object.freeze({
+  pollIntervalMs: 800,
+  slowPollIntervalMs: 1000,
+  standardTimeoutMs: 15000,
+  dropdownTimeoutMs: 12000,
+  searchResultTimeoutMs: 30000,
+  associationLoadTimeoutMs: 45000,
+  submitTimeoutMs: 45000,
+  actionSettleMs: 800,
+  inputSettleMs: 1000,
+  networkSettleMs: 1500,
+  submitSettleMs: 2000,
+});
+
 // ============================================================
 // 工具函数
 // ============================================================
@@ -26,7 +41,7 @@ const FIND_VISIBLE_BTN_JS = (text) => `(function(){
 })()`;
 
 // 找可见按钮并点击（JS click）
-async function clickVisibleBtn(targetId, text, timeoutMs = 8000) {
+async function clickVisibleBtn(targetId, text, timeoutMs = TIMING.standardTimeoutMs) {
   await waitFor(async () => {
     const clicked = await cdp.eval(targetId, `(function(){
       var btns = Array.from(document.querySelectorAll('button'));
@@ -38,7 +53,7 @@ async function clickVisibleBtn(targetId, text, timeoutMs = 8000) {
       return false;
     })()`);
     return clicked;
-  }, { timeoutMs, intervalMs: 500, label: `clickVisibleBtn(${text})` });
+  }, { timeoutMs, intervalMs: TIMING.pollIntervalMs, label: `clickVisibleBtn(${text})` });
 }
 
 // 物理点击可见元素（by selector in container）
@@ -57,7 +72,7 @@ async function physicalClickVisible(targetId, containerSel, itemSel) {
     var el = container ? container.querySelector(${JSON.stringify(itemSel)}) : document.querySelector(${JSON.stringify(itemSel)});
     if (el) el.scrollIntoView({ block: 'center' });
   })()`);
-  await sleep(200);
+  await sleep(TIMING.actionSettleMs);
   const rect2 = await cdp.eval(targetId, `(function(){
     var container = document.querySelector(${JSON.stringify(containerSel)});
     var el = container ? container.querySelector(${JSON.stringify(itemSel)}) : document.querySelector(${JSON.stringify(itemSel)});
@@ -87,11 +102,15 @@ async function ensureDialogOpen(targetId) {
   if (isOpen) return;
 
   // 点"新建售后工单"按钮
-  await clickVisibleBtn(targetId, '新建售后工单', 10000);
+  await clickVisibleBtn(targetId, '新建售后工单', TIMING.standardTimeoutMs);
   await waitFor(async () => {
     return await cdp.eval(targetId, `!!(${FIND_MAIN})`);
-  }, { timeoutMs: 10000, intervalMs: 500, label: '等待新建售后工单弹窗打开' });
-  await sleep(150);              // 弹窗 DOM 到 Vue mounted 的最后一段渲染
+  }, {
+    timeoutMs: TIMING.standardTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '等待新建售后工单弹窗打开',
+  });
+  await sleep(TIMING.actionSettleMs); // 弹窗 DOM 到 Vue mounted 的最后一段渲染
 }
 
 // ============================================================
@@ -149,7 +168,7 @@ async function ensureFilterCorrect(targetId) {
     var inp = sel && sel.querySelector('.el-input__inner');
     if (inp) inp.click();
   })()`);
-  await sleep(600);
+  await sleep(TIMING.actionSettleMs);
 
   // 等对应面板展开（包含"原订单运单号"选项，且该选项 visible）
   await waitFor(async () => {
@@ -167,7 +186,11 @@ async function ensureFilterCorrect(targetId) {
       return false;
     })()`);
     return clicked;
-  }, { timeoutMs: 5000, intervalMs: 300, label: '选择原订单运单号' });
+  }, {
+    timeoutMs: TIMING.dropdownTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '选择原订单运单号',
+  });
 
   // 确认切换成功
   await waitFor(async () => {
@@ -184,7 +207,11 @@ async function ensureFilterCorrect(targetId) {
       var inp = sel && sel.querySelector('.el-input__inner');
       return inp && inp.value === '原订单运单号';
     })()`);
-  }, { timeoutMs: 5000, intervalMs: 300, label: '确认筛选已切换' });
+  }, {
+    timeoutMs: TIMING.dropdownTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '确认筛选已切换',
+  });
 }
 
 // ============================================================
@@ -225,14 +252,15 @@ async function fillTracking(targetId, tracking) {
     });
     if (inp) { inp.focus(); inp.select(); }
   })()`);
-  await sleep(200);
+  await sleep(TIMING.actionSettleMs);
 
   // 用 Input.insertText 填入（必须通过 cdp typeText）
   await cdp.typeText(targetId, tracking);
-  await sleep(500);              // 等 Vue input handler 处理完输入再回车
+  await sleep(TIMING.inputSettleMs); // 等 Vue input handler 处理完输入再回车
 
   // 回车
   await cdp.key(targetId, 'Enter');
+  await sleep(TIMING.networkSettleMs); // 给搜索请求和加载状态留出启动时间
 }
 
 // ============================================================
@@ -274,7 +302,11 @@ async function waitForSearchResult(targetId) {
       }
       return null;
     })()`);
-  }, { timeoutMs: 20000, intervalMs: 600, label: '等待搜索结果' });
+  }, {
+    timeoutMs: TIMING.searchResultTimeoutMs,
+    intervalMs: TIMING.slowPollIntervalMs,
+    label: '等待搜索结果',
+  });
 }
 
 // ============================================================
@@ -294,8 +326,12 @@ async function selectRefusalType(targetId) {
       lbl.click(); return true;
     })()`);
     return clicked;
-  }, { timeoutMs: 8000, intervalMs: 500, label: '点击拒收退货' });
-  await sleep(500);
+  }, {
+    timeoutMs: TIMING.standardTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '点击拒收退货',
+  });
+  await sleep(TIMING.actionSettleMs);
 }
 
 // ============================================================
@@ -325,7 +361,7 @@ async function selectWarehouse(targetId) {
     var sel = formItem && formItem.querySelector('.el-select');
     if (sel) sel.click();
   })()`);
-  await sleep(600);
+  await sleep(TIMING.actionSettleMs);
 
   // 等下拉出现后点"锦福仓"
   await waitFor(async () => {
@@ -339,7 +375,11 @@ async function selectWarehouse(targetId) {
       return false;
     })()`);
     return clicked;
-  }, { timeoutMs: 6000, intervalMs: 400, label: '选择锦福仓' });
+  }, {
+    timeoutMs: TIMING.dropdownTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '选择锦福仓',
+  });
 
   // 确认仓库已切换
   await waitFor(async () => {
@@ -350,7 +390,11 @@ async function selectWarehouse(targetId) {
       var inp = formItem && formItem.querySelector('.el-select .el-input__inner');
       return inp && inp.value.includes('锦福仓');
     })()`);
-  }, { timeoutMs: 5000, intervalMs: 400, label: '确认锦福仓已选中' });
+  }, {
+    timeoutMs: TIMING.dropdownTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '确认锦福仓已选中',
+  });
 }
 
 // ============================================================
@@ -377,7 +421,7 @@ async function ensureContinueNextChecked(targetId) {
     var checkbox = lbl.closest('.el-checkbox') || lbl;
     checkbox.click();
   })()`);
-  await sleep(300);
+  await sleep(TIMING.actionSettleMs);
 }
 
 // ============================================================
@@ -407,8 +451,12 @@ async function selectAllItems(targetId) {
       return false;
     })()`);
     return clicked;
-  }, { timeoutMs: 10000, intervalMs: 500, label: '全选商品' });
-  await sleep(400);
+  }, {
+    timeoutMs: TIMING.standardTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '全选商品',
+  });
+  await sleep(TIMING.actionSettleMs);
 
   // 验证：确认行已被选中（至少有 1 行 checked）
   const verified = await cdp.eval(targetId, `(function(){
@@ -452,7 +500,7 @@ async function createAndReceive(targetId) {
   })()`);
 
   // 短暂等待，可能弹出二次确认框
-  await sleep(1500);
+  await sleep(TIMING.submitSettleMs);
 
   // 处理可能的确认弹窗（"该快递单号被工单xxx关联过N次，确定继续创建工单吗？"）
   const hasConfirm = await cdp.eval(targetId, `(function(){
@@ -464,8 +512,8 @@ async function createAndReceive(targetId) {
     });
   })()`);
   if (hasConfirm) {
-    await clickVisibleBtn(targetId, '确定', 5000);
-    await sleep(500);
+    await clickVisibleBtn(targetId, '确定', TIMING.standardTimeoutMs);
+    await sleep(TIMING.actionSettleMs);
   }
 
   // 等成功信号：输入框为空 + 表格行数=0（弹窗重置为空白状态）
@@ -486,7 +534,41 @@ async function createAndReceive(targetId) {
       var rows = wrapper.querySelectorAll('.el-table__body tbody tr');
       return inputEmpty && rows.length === 0;
     })()`);
-  }, { timeoutMs: 30000, intervalMs: 800, label: '等待创建成功' });
+  }, {
+    timeoutMs: TIMING.submitTimeoutMs,
+    intervalMs: TIMING.slowPollIntervalMs,
+    label: '等待创建成功',
+  });
+}
+
+// 点击“继续关联”后，必须同时确认关联提示已消失、主弹窗订单表格已有数据。
+// 独立成函数便于对慢加载路径做回归测试。
+async function waitForAssociationOrderLoad(targetId, options = {}) {
+  const timeoutMs = options.timeoutMs ?? TIMING.associationLoadTimeoutMs;
+  const intervalMs = options.intervalMs ?? TIMING.slowPollIntervalMs;
+
+  return await waitFor(async () => {
+    return await cdp.eval(targetId, `(function(){
+      var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(w){
+        var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+      });
+      var hasAssoc = dialogs.some(function(d){
+        var title = d.querySelector('.el-dialog__title');
+        if (!title || !title.textContent.includes('提示')) return false;
+        return Array.from(d.querySelectorAll('button')).some(function(b){
+          return b.textContent.replace(/\\s/g,'').includes('继续关联');
+        });
+      });
+      if (hasAssoc) return false;
+      var mainDialog = dialogs.find(function(d){
+        var title = d.querySelector('.el-dialog__title');
+        return title && title.textContent.includes('新建售后工单');
+      });
+      if (!mainDialog) return false;
+      var rows = mainDialog.querySelectorAll('.el-table__body tbody tr');
+      return rows.length > 0;
+    })()`);
+  }, { timeoutMs, intervalMs, label: '等关联弹窗消失+订单加载' });
 }
 
 // ============================================================
@@ -496,10 +578,10 @@ async function processOne(targetId, tracking) {
   process.stdout.write(`[${tracking}] 开始处理\n`);
 
   await ensureDialogOpen(targetId);
-  await sleep(200);              // 等 Vue 完成弹窗 mount 初始化
+  await sleep(TIMING.actionSettleMs); // 等 Vue 完成弹窗 mount 初始化
 
   await ensureFilterCorrect(targetId);
-  await sleep(200);              // 等 Vue 提交筛选维度变更
+  await sleep(TIMING.actionSettleMs); // 等 Vue 提交筛选维度变更
 
   await fillTracking(targetId, tracking);
 
@@ -508,10 +590,10 @@ async function processOne(targetId, tracking) {
 
   if (result.type === 'error') {
     // 关闭错误弹窗（el-message-box）
-    await clickVisibleBtn(targetId, '关闭', 5000).catch(() =>
-      clickVisibleBtn(targetId, '确定', 5000)
+    await clickVisibleBtn(targetId, '关闭', TIMING.standardTimeoutMs).catch(() =>
+      clickVisibleBtn(targetId, '确定', TIMING.standardTimeoutMs)
     );
-    await sleep(300);
+    await sleep(TIMING.actionSettleMs);
 
     // 关闭可能残留的"提示"弹窗（如"未发货仅退款"类型会额外弹出 el-dialog，有"取消"按钮）
     await cdp.eval(targetId, `(function(){
@@ -529,7 +611,7 @@ async function processOne(targetId, tracking) {
       });
       if (btn) btn.click();
     })()`);
-    await sleep(300);
+    await sleep(TIMING.actionSettleMs);
 
     return '未出库无需入库';
   }
@@ -574,29 +656,16 @@ async function processOne(targetId, tracking) {
       if (btn) btn.click();
     })()`);
 
-    // 等关联弹窗消失 + 订单加载
-    await waitFor(async () => {
-      return await cdp.eval(targetId, `(function(){
-        var dialogs = Array.from(document.querySelectorAll('.el-dialog__wrapper')).filter(function(w){
-          var r = w.getBoundingClientRect(); return r.width > 0 && r.height > 0;
-        });
-        var hasAssoc = dialogs.some(function(d){
-          var title = d.querySelector('.el-dialog__title');
-          return title && title.textContent.includes('提示');
-        });
-        if (hasAssoc) return false;
-        var mainDialog = dialogs[0];
-        if (!mainDialog) return false;
-        var rows = mainDialog.querySelectorAll('.el-table__body tbody tr');
-        return rows.length > 0;
-      })()`);
-    }, { timeoutMs: 12000, intervalMs: 600, label: '等关联弹窗消失+订单加载' });
+    // 先让关闭动画和订单接口启动，再用更宽裕的窗口等待慢加载。
+    await sleep(TIMING.networkSettleMs);
+    await waitForAssociationOrderLoad(targetId);
+    await sleep(TIMING.actionSettleMs);
   }
 
   // 订单已加载
   await selectRefusalType(targetId);
   await selectWarehouse(targetId);
-  await sleep(300);              // 等退货仓库变更后表格可能的重渲染稳定
+  await sleep(TIMING.actionSettleMs); // 等退货仓库变更后表格可能的重渲染稳定
   await ensureContinueNextChecked(targetId);
   await selectAllItems(targetId);
   await createAndReceive(targetId);
@@ -647,4 +716,9 @@ async function processAll(trackingNumbers) {
   process.stdout.write(`\n全部完成，结果写入 data/results.txt\n`);
 }
 
-module.exports = { processAll, processOne, findErpTarget };
+module.exports = {
+  processAll,
+  processOne,
+  findErpTarget,
+  _test: { TIMING, waitForAssociationOrderLoad },
+};

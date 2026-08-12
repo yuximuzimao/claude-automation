@@ -1,9 +1,11 @@
 # 魔兽世界任务路线 SKILL.md
 
 ## DO FIRST
-1. 读 `tasks/todo.md` — 确认当前区域、版本和待验证项
-2. 读 `docs/INDEX.md` — 路线规则、数据层级和置信度定义
-3. 核心入口：`cli.py`
+1. 读 `tasks/todo.md` — 确认当前工作流和待办。
+2. 若用户要求继续视频拆解：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；不要先加载实时路线或全部视频历史。
+3. 若用户要求继续现有路线：读 `docs/verified-routes/README.md`、`CURRENT.md` 和其中指定的唯一执行稿。
+4. 若用户要求生成、修订或审计路线：再读 `ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md`、相关 `docs/task-library/` 任务卡和 `docs/INDEX.md`，执行逐任务复核与冷启动对抗复走。
+5. 代码与数据生成的核心入口：`cli.py`；纯攻略修订不先运行生成器，也不让脚本替代人工判断。
 
 ## ENTRY MAP
 | 文件 | 用途 | 何时读 |
@@ -21,6 +23,12 @@
 | `data/journey/account-container-audit.md` | Questie账号级容器、`char`条目和脱敏边界 | 再次导入账号级日志时 |
 | `data/observations/blocked-tasks.json` | 无法进入、无法接交、服务器位面异常任务 | 用户反馈阻断时必须更新 |
 | `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
+| `docs/verified-routes/ERROR-BOOK.md` | 漏任务、额外往返和自动候选覆盖错误的错题本 | 每次生成、修订或审计执行路线前 |
+| `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` | 从任务库复用、逐任务核验、成稿后对抗复走的强制流程 | 继续、修订或审计路线前 |
+| `docs/task-library/README.md` | 任务卡字段、证据和纠错写回规则 | 查询已核验任务或新增任务卡时 |
+| `docs/video-extraction/README.md` | 视频逐集提取方法、证据优先级与完成定义 | 处理任意视频集前 |
+| `docs/video-extraction/CURRENT.md` | 已完成集、下一集和最小恢复点 | 继续视频拆解时 |
+| `docs/video-extraction/POST-EXTRACTION-PLAN.md` | 全集完成后的合并、映射、优化与实跑闭环 | 第53集完成后 |
 | `data/routes/dk-55-80-world-tasks.html` | 当前死亡骑士主任务母版 | 审阅55—80全任务覆盖时 |
 
 ## CORE FLOWS
@@ -37,12 +45,20 @@
 ### 人物历程
 `账号级 QuestieConfig.char[*].journey → 脱敏接取/完成事件 → 与候选路线对比 → 定位回头路和遗漏`
 
+### 视频拆解
+`导航前禁止自动播放 → 全集时长粗扫 → 任务中心/日志/剪辑处精查 → Questie校准名称与ID → 单集Markdown+JSON检查点 → 更新CURRENT并停止`
+
 ## FAILURE PATTERNS
+- 不把自动区域候选、Questie区域分类或当前任务日志当作完整覆盖证明；必须执行错题本中的NPC、现场任务、任务链和差集复查。
 - 不把 Questie 地图坐标当成道路导航；山、桥、洞穴和跟随卡点必须实测。
 - 不把击杀共享推断到拾取、点击、技能或任务物品。
+- 不按“护送、掉落、低等级”等固定任务类型整类排除；逐任务比较真实剩余路程、掉率、地形、等级差、五开机制和后续重叠。
+- 不重复从零计算已核验任务；先复用任务库，发现错误时同步修改任务卡与执行稿，再在错题本保留错误原因。
 - 不使用历史 RXP SavedVariables 作为当前插件或当前角色证据。
 - 不直接上传或提交完整 WTF；先脱敏人物历程。
 - 修正层可能改变基础数据库；生成结果必须记录 Questie 版本和来源哈希。
+- 视频第一遍只提取事实；`目标(N)`不是完整任务数，剪辑缺口不得补写，任务目标完成不得误记为已交付。
+- 每次只处理用户指定的一集，写独立检查点并关闭标签；不得自动开始下一集。
 
 ## PATHS
 | 路径 | 说明 |

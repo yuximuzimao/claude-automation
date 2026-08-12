@@ -1,0 +1,74 @@
+{
+  "execution_mode": "layered_composite",
+  "use_case": "ads-marketing",
+  "output": {
+    "version": "v1",
+    "format": "png",
+    "path": "output/yaohei-black-gold-orchid-base-v1.png"
+  },
+  "background": {
+    "method": "image_generation",
+    "notes": "生成 1080×1920 黑金竖版背景：黑色台面位于下部，巨大黑兰花占据中后景，花瓣边缘有极细暖金轮廓光；空气中仅有少量细腻金粉。背景不得包含任何产品、包装、文字、Logo、水印或账号，避免产品层被模型重绘。",
+    "prompt_focus": [
+      "deep black and restrained warm gold luxury palette",
+      "monumental black orchid in the background",
+      "subtle gold rim light on petal edges",
+      "sparse fine gold dust",
+      "black display pedestal with controlled reflections",
+      "slightly low camera angle",
+      "premium anti-aging cosmetics campaign atmosphere"
+    ]
+  },
+  "product": {
+    "method": "use_original_assets",
+    "asset_id": "yaohei-set-three-primary",
+    "notes": "直接使用真实透明产品组合，不让生成模型重绘包装。产品组居中偏下，大幅放大至画面宽度约 88%–96%；保持三件产品几何、相对比例、正面标志性区域和真实边缘。允许整体缩放和平移，不做透视变形。"
+  },
+  "integration": {
+    "method": "layered_lighting_and_shadows",
+    "notes": "在不改动产品像素结构的前提下增加环境融合：台面接触阴影、极弱倒影、暖金侧缘高光、顶部柔和主光、局部冷黑反射和背景环境色。高光必须服从瓶体曲面，不能形成均匀外发光。",
+    "operations": [
+      "match black level without crushing product detail",
+      "add restrained warm rim light on camera-facing outer edges",
+      "add soft contact shadow under every product footprint",
+      "add low-opacity blurred reflection on the black pedestal",
+      "preserve original product alpha edges and packaging pixels"
+    ]
+  },
+  "composition": {
+    "camera": "slightly low-angle close hero shot",
+    "framing": "产品组近距离撑满竖版画面，关键轮廓完整，台面只保留必要承托区域",
+    "depth": "产品为前景一级主体，兰花为中后景二级主体，金粉仅作远近层次",
+    "avoid": [
+      "wide empty margins",
+      "top-down view",
+      "extreme perspective",
+      "mechanical equal spacing",
+      "orchid covering product logos",
+      "cropping signature product outlines"
+    ]
+  },
+  "graphics": {
+    "method": "none",
+    "notes": "本次是基底图，不添加几何图形、边框、装饰多边形或额外光效组件。"
+  },
+  "text": {
+    "method": "none",
+    "notes": "不添加标题、卖点、说明文字或独立品牌 Logo；产品包装自身信息由原始产品素材保留。"
+  },
+  "qa": [
+    "canvas_is_1080x1920_portrait",
+    "product_source_pixels_not_regenerated",
+    "product_geometry_preserved",
+    "relative_product_scale_preserved",
+    "signature_features_and_logo_area_visible",
+    "product_group_fills_frame_with_strong_impact",
+    "low_angle_is_subtle_and_non_distorting",
+    "black_product_has_readable_light_layers",
+    "orchid_is_large_but_secondary",
+    "gold_dust_is_sparse_and_refined",
+    "no_added_copy_or_independent_logo",
+    "no_other_brand_product_text_watermark_or_account",
+    "no_dense_particles_cheap_flare_or_polygon_decoration"
+  ]
+}

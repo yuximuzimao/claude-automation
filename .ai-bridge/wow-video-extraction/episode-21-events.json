@@ -1,0 +1,338 @@
+{
+  "episode": 21,
+  "title": "灼热峡谷49-51",
+  "bvid": "BV1CziKB2EaC",
+  "duration_seconds": 3321,
+  "series_index": "21/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse_a": 28,
+    "coarse_b": 28,
+    "fine5_opening_hub": 29,
+    "fine5_mid_hub": 37,
+    "fine5_late_hub": 37,
+    "fine5_end_chain": 66,
+    "fine5_final": 64,
+    "total": 289,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 48,
+    "level_evidence_time": "06:15",
+    "basis": "第20集明确升至48级；本集03:45-06:15区间仍可见48级信息。",
+    "warning": "开场追踪栏只显示被追踪目标，不能当完整任务日志。"
+  },
+  "events": [
+    {
+      "time_range": "04:35-04:50",
+      "action": "accept",
+      "quest_id": 3441,
+      "quest_name": "神圣的惩戒",
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:35-04:50",
+      "action": "accept",
+      "quest_id": 7701,
+      "quest_name": "悬赏：工头玛托留斯",
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:35-04:50",
+      "action": "accept",
+      "quest_id": 7728,
+      "quest_name": "被盗：鼓风机和望远镜",
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:35-04:50",
+      "action": "accept",
+      "quest_id": 7729,
+      "quest_name": "工作机会：肃清竞争对手",
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:50-05:15",
+      "action": "accept",
+      "quest_id": 7702,
+      "quest_name": "让他们失眠！",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "04:50-05:15",
+      "action": "accept",
+      "quest_id": 7723,
+      "quest_name": "该死的手指头！",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "04:50-05:15",
+      "action": "accept",
+      "quest_id": 7724,
+      "quest_name": "熔岩蜘蛛的威胁！",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "04:50-05:15",
+      "action": "accept",
+      "quest_id": 7727,
+      "quest_name": "熏火龙",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "04:50-05:15",
+      "action": "accept",
+      "quest_id": 7722,
+      "quest_name": "绝密配方！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:45-06:15",
+      "action": "complete",
+      "quest_id": 3441,
+      "quest_name": "神圣的惩戒",
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:50-06:15",
+      "action": "accept",
+      "quest_id": 3442,
+      "quest_name": "无瑕之焰",
+      "confidence": "high"
+    },
+    {
+      "time_range": "06:15-54:40",
+      "action": "level_transition_unlocated",
+      "level": 49,
+      "confidence": "medium",
+      "basis": "06:15仍为48级，54:40明确升至51级；未捕获可可靠定位的49级系统数字。"
+    },
+    {
+      "time_range": "06:15-54:40",
+      "action": "level_transition_unlocated",
+      "level": 50,
+      "confidence": "medium",
+      "basis": "06:15仍为48级，54:40明确升至51级；未捕获可可靠定位的50级系统数字。"
+    },
+    {
+      "time_range": "21:45-22:00",
+      "action": "complete",
+      "quest_id": 3442,
+      "quest_name": "无瑕之焰",
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:45-22:00",
+      "action": "accept",
+      "quest_id": 3443,
+      "quest_name": "铸造火炬杆",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:20-22:30",
+      "action": "complete",
+      "quest_id": 7723,
+      "quest_name": "该死的手指头！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:20-22:30",
+      "action": "complete",
+      "quest_id": 7724,
+      "quest_name": "熔岩蜘蛛的威胁！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:50-23:05",
+      "action": "complete",
+      "quest_id": 7728,
+      "quest_name": "被盗：鼓风机和望远镜",
+      "confidence": "high"
+    },
+    {
+      "time_range": "41:40-42:05",
+      "action": "complete",
+      "quest_id": 3443,
+      "quest_name": "铸造火炬杆",
+      "confidence": "high"
+    },
+    {
+      "time_range": "41:40-42:05",
+      "action": "accept",
+      "quest_id": 3452,
+      "quest_name": "烈焰之盒",
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:30-44:00",
+      "action": "complete",
+      "quest_id": 3452,
+      "quest_name": "烈焰之盒",
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:30-44:00",
+      "action": "accept",
+      "quest_id": 3453,
+      "quest_name": "惩戒火炬",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:05-44:20",
+      "action": "complete",
+      "quest_id": 7701,
+      "quest_name": "悬赏：工头玛托留斯",
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:15-44:30",
+      "action": "complete",
+      "quest_id": 7702,
+      "quest_name": "让他们失眠！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:25-44:35",
+      "action": "complete",
+      "quest_id": 7727,
+      "quest_name": "熏火龙",
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:40-45:15",
+      "action": "complete",
+      "quest_id": 7729,
+      "quest_name": "工作机会：肃清竞争对手",
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:40-45:15",
+      "action": "complete",
+      "quest_id": 7722,
+      "quest_name": "绝密配方！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "46:40-47:15",
+      "action": "complete",
+      "quest_id": 3453,
+      "quest_name": "惩戒火炬",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "46:40-47:15",
+      "action": "accept",
+      "quest_id": 3454,
+      "quest_name": "惩戒火炬",
+      "stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:30-47:50",
+      "action": "complete",
+      "quest_id": 3454,
+      "quest_name": "惩戒火炬",
+      "stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:30-47:50",
+      "action": "accept",
+      "quest_id": 3462,
+      "quest_name": "侍卫玛特拉克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:55-48:15",
+      "action": "complete",
+      "quest_id": 3462,
+      "quest_name": "侍卫玛特拉克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:55-48:15",
+      "action": "accept",
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "48:15-51:15",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "objective": "点燃东、西、南、北四座哨塔",
+      "remaining": "返回侍卫玛特拉克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:55-50:10",
+      "action": "area_discovery",
+      "area": "灰烬之海",
+      "experience_shown": 815,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:15-51:25",
+      "action": "area_discovery",
+      "area": "煤渣挖掘场",
+      "experience_shown": 550,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:25-51:40",
+      "action": "complete",
+      "quest_id": 4451,
+      "quest_name": "自由的钥匙",
+      "accept_evidence": "物品触发接取发生在此前战斗/拾取阶段，未捕获可靠接取秒数",
+      "confidence": "high_for_completion"
+    },
+    {
+      "time_range": "54:40",
+      "action": "level_up_explicit",
+      "level": 51,
+      "confidence": "high",
+      "basis": "系统升级文字中的数字1被OCR识别为感叹号；结合连续等级与标题可明确为51级。"
+    }
+  ],
+  "same_name_chain_note": {
+    "quest_ids": [3453, 3454],
+    "quest_name": "惩戒火炬",
+    "calibration": "两项中文同名；依据Questie前后置关系、NPC/物体交付目标和视频先后顺序区分。"
+  },
+  "explicit_end_tracker": [
+    {
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "state": "四座哨塔目标已完成，待返回侍卫玛特拉克；视频结束前未展示最终交付。"
+    }
+  ],
+  "continuity_unresolved_without_new_action": [
+    {
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "note": "第20集结束时待藏宝海湾交付；本集未见完成或放弃证据。"
+    },
+    {
+      "quest_id": 162,
+      "quest_name": "异种蝎的威胁",
+      "note": "第20集结束时待达纳苏斯交付；本集未见完成或放弃证据。"
+    }
+  ],
+  "next_episode": {
+    "episode": 22,
+    "title": "安戈洛环形山 52",
+    "bvid": "BV1p2iMBDEMw",
+    "duration": "01:02:06",
+    "processed": false
+  },
+  "notes": [
+    "结尾没有打开完整任务日志，explicit_end_tracker只表示最后追踪栏能够明确确认的任务。",
+    "49级和50级必然在本集发生，但没有可靠系统数字帧，因此不虚构具体秒数。",
+    "约46分钟画面短暂打开WeakAuras设置；任务系统日志仍连续存在，不构成任务剪辑缺口。",
+    "第22集BVID来自合集内部结构；本轮没有导航、播放、截图或处理第22集。"
+  ]
+}

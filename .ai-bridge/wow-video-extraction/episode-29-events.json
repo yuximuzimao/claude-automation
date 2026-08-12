@@ -1,0 +1,392 @@
+{
+  "episode": 29,
+  "title": "地狱火半岛 64",
+  "bvid": "BV1MtqcBCEZs",
+  "duration_seconds": 2327.28,
+  "playlist_duration_seconds": 2328,
+  "display_duration": "38:48",
+  "series_index": "29/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse_a": 21,
+      "coarse_b": 19,
+      "fine20_a": 31,
+      "fine20_b": 30,
+      "fine20_c": 30,
+      "fine20_d": 27,
+      "refined_a": 51,
+      "refined_b": 31,
+      "refined_c": 47,
+      "refined_d": 63,
+      "refined_e": 61,
+      "refined_f": 46,
+      "refined_g": 54
+    },
+    "formal_total": 511,
+    "manifest_count": 13,
+    "all_formal_batches_verified_paused": true,
+    "auxiliary_not_counted": {
+      "level_badge_crops": true,
+      "level_number_variants": true
+    }
+  },
+  "starting_evidence": {
+    "level": 63,
+    "basis": "第28集约78:14交付9399《残忍的监工》时明确升到63级。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "2000/1000",
+      "2100/1050",
+      "5100/2550",
+      "10800/5400",
+      "19600/9800",
+      "20100/10050",
+      "20800/10400",
+      "25900/12950"
+    ]
+  },
+  "events": [
+    {
+      "time_range": "00:40-00:48",
+      "action": "complete",
+      "quest_id": 10057,
+      "quest_name": "寻找首领",
+      "experience_shown": 19600,
+      "money_shown": "2金币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:38-00:48",
+      "action": "skill_and_achievement",
+      "riding_skill": 225,
+      "achievement": "向远方奔跑",
+      "confidence": "high"
+    },
+    {
+      "time_range": "07:20-07:32",
+      "action": "complete_and_accept_next",
+      "quest_id": 9390,
+      "quest_name": "寻找瑟丹",
+      "experience_shown": 5100,
+      "next_quest_id": 9423,
+      "next_quest_name": "返回欧巴迪身边",
+      "confidence": "high"
+    },
+    {
+      "time_range": "07:20-07:32",
+      "action": "complete_and_accept_next",
+      "quest_id": 9426,
+      "quest_name": "阿苟纳之池",
+      "experience_shown": 20100,
+      "next_quest_id": 9427,
+      "next_quest_name": "净化水体",
+      "confidence": "high"
+    },
+    {
+      "time_range": "07:32-07:44",
+      "action": "area_discovery",
+      "area": "玛格汉台地",
+      "experience_shown": 1000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "07:36-07:44",
+      "action": "complete_and_accept_next",
+      "quest_id": 9423,
+      "quest_name": "返回欧巴迪身边",
+      "experience_shown": 5100,
+      "next_quest_id": 9424,
+      "next_quest_name": "玛库鲁的复仇",
+      "confidence": "high"
+    },
+    {
+      "time_range": "14:50-15:00",
+      "action": "complete",
+      "quest_id": 9424,
+      "quest_name": "玛库鲁的复仇",
+      "experience_shown": 20800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "15:35-15:45",
+      "action": "complete_and_accept_next",
+      "quest_id": 9543,
+      "quest_name": "救赎",
+      "experience_shown": 2100,
+      "next_quest_id": 9430,
+      "next_quest_name": "沙纳尔圣物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "15:45-15:55",
+      "action": "complete",
+      "quest_id": 9427,
+      "quest_name": "净化水体",
+      "experience_shown": 20100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "20:52-21:04",
+      "action": "complete",
+      "quest_id": 10132,
+      "quest_name": "巨人的威胁",
+      "experience_shown": 25900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:20-21:28",
+      "action": "complete",
+      "quest_id": 10349,
+      "quest_name": "缚地者",
+      "experience_shown": 2100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:10-22:20",
+      "action": "accept",
+      "quest_id": 10351,
+      "quest_name": "自然的治愈",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:40-23:52",
+      "action": "complete",
+      "quest_id": 10351,
+      "quest_name": "自然的治愈",
+      "experience_shown": 25900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:20-27:30",
+      "action": "complete_and_accept_next",
+      "quest_id": 9430,
+      "quest_name": "沙纳尔圣物",
+      "experience_shown_approx": 20800,
+      "next_quest_id": 9545,
+      "next_quest_name": "先知的圣物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:35-29:45",
+      "action": "complete",
+      "quest_id": 9545,
+      "quest_name": "先知的圣物",
+      "experience_shown": 25900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:40-31:12",
+      "action": "accept_and_complete",
+      "quest_id": 9785,
+      "quest_name": "古树的祝福",
+      "experience_shown": 10800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9802,
+      "quest_name": "赞加沼泽的植物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9747,
+      "quest_name": "暗泽部族",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9817,
+      "quest_name": "血鳞纳迦的领袖",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9728,
+      "quest_name": "热情的欢迎",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9697,
+      "quest_name": "观察者莉萨奥",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9957,
+      "quest_name": "塞纳里奥树林出事了？",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:45-31:55",
+      "action": "accept_after_cut",
+      "quest_id": 9895,
+      "quest_name": "崩溃的平衡",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:50-31:56",
+      "action": "complete",
+      "quest_id": 9912,
+      "quest_name": "塞纳里奥远征队",
+      "experience_shown": 2000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:50-32:00",
+      "action": "accept",
+      "quest_id": 9716,
+      "quest_name": "暗泽湖的异常",
+      "confidence": "high"
+    },
+    {
+      "time_range": "34:00-35:00",
+      "action": "accept_and_start_escort",
+      "quest_id": 9752,
+      "quest_name": "逃离暗泽村",
+      "escort_npc": "凯拉·长鬃",
+      "confidence": "medium_high",
+      "note": "接取弹窗未捕获；追踪状态、护送对白和终点对白构成连续证据。"
+    },
+    {
+      "time_range": "37:50-38:00",
+      "action": "escort_objective_complete_not_confirmed_turnin",
+      "quest_id": 9752,
+      "quest_name": "逃离暗泽村",
+      "escort_npc": "凯拉·长鬃",
+      "confidence": "high",
+      "note": "凯拉明确抵达塞纳里奥庇护所并表示伊谢尔会奖励玩家；没有独立任务奖励窗或经验提示。"
+    },
+    {
+      "time_range": "38:05-38:15",
+      "action": "complete",
+      "quest_id": 9895,
+      "quest_name": "崩溃的平衡",
+      "experience_shown": null,
+      "confidence": "high",
+      "note": "奖励窗口标题和完成按钮清晰；经验数字未稳定识别。"
+    }
+  ],
+  "level_events": [
+    {
+      "level": 64,
+      "time": null,
+      "trigger": null,
+      "confidence": "medium",
+      "state": "系列连续性和本集标题表明本集进入64级阶段，但系统升级提示未被截图/OCR证据保留；头像等级数字识别结果互相冲突，不能指定精确触发。"
+    }
+  ],
+  "completed_quests": [
+    10057,
+    9390,
+    9426,
+    9423,
+    9424,
+    9543,
+    9427,
+    10132,
+    10349,
+    10351,
+    9430,
+    9545,
+    9785,
+    9912,
+    9895
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 9747,
+      "quest_name": "暗泽部族",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9802,
+      "quest_name": "赞加沼泽的植物",
+      "state": "已接取，片尾未完成。"
+    },
+    {
+      "quest_id": 9817,
+      "quest_name": "血鳞纳迦的领袖",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9728,
+      "quest_name": "热情的欢迎",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9697,
+      "quest_name": "观察者莉萨奥",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9957,
+      "quest_name": "塞纳里奥树林出事了？",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9716,
+      "quest_name": "暗泽湖的异常",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9752,
+      "quest_name": "逃离暗泽村",
+      "state": "护送目标完成并抵达塞纳里奥庇护所，最终NPC交付未确认。"
+    },
+    {
+      "quest_id": 9385,
+      "quest_name": "钢牙掠食者",
+      "state": "前集遗留；本集没有最终完成或放弃证据。"
+    },
+    {
+      "quest_id": 10400,
+      "quest_name": "霸王",
+      "state": "本集多次仍显示残酷的阿拉修斯0/1。"
+    },
+    {
+      "quest_id": 9607,
+      "quest_name": "愤怒之心",
+      "state": "前集遗留；本集没有鲜血熔炉动作。"
+    },
+    {
+      "quest_id": 10916,
+      "quest_name": "挖掘念珠",
+      "state": "前集遗留；本集没有独立交付证据。"
+    }
+  ],
+  "ending_items_or_unresolved_triggers": [
+    {
+      "item_name": "不祥的信件",
+      "state": "此前已获得；本集仍没有打开或触发后续任务的证据。"
+    }
+  ],
+  "next_episode": {
+    "episode": 30,
+    "title": "赞加沼泽 65",
+    "bvid": "BV1hHqcBmEoY",
+    "duration_seconds": 2597,
+    "duration": "43:17",
+    "processed": false
+  },
+  "notes": [
+    "第28集只完成10057《寻找首领》的击杀目标；第29集开场才最终交付。",
+    "骑术225和《向远方奔跑》是技能/成就事件，不是等级提升提示。",
+    "63到64的精确升级触发没有可复核证据，不能从标题或经验总量倒推。",
+    "赞加沼泽任务中心存在剪辑；任务持有状态明确，但多个NPC的精确逐秒接取顺序不补猜。",
+    "9752《逃离暗泽村》只确认护送目标完成；片尾明确交付的是9895《崩溃的平衡》。",
+    "第30集信息来自合集状态；本轮未导航、播放、截图或处理第30集。"
+  ]
+}

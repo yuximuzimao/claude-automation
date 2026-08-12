@@ -1,0 +1,79 @@
+{
+  "episode": 18,
+  "title": "荆棘谷 44 终于有钱学大马了",
+  "bvid": "BV1YBvHBzE2f",
+  "duration_seconds": 2857,
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 48,
+    "fine5_start": 37,
+    "fine10_jungle": 61,
+    "fine5_booty": 49,
+    "fine5_stormwind": 61,
+    "fine5_theramore": 49,
+    "fine20_end": 30,
+    "fine5_final": 10,
+    "fine1_debt_followup": 31,
+    "fine1_abandon": 18,
+    "fine1_booty_cleanup": 31,
+    "fine20_middle": 52,
+    "fine1_post_booty": 61,
+    "total": 538,
+    "all_verified_paused": true
+  },
+  "cross_episode_state": {
+    "quest_id": 608,
+    "quest_name": "血帆海盗",
+    "episode_17_end": "斯蒂沃特0/1；尼哈鲁1/1；菲尔拉伦1/1",
+    "episode_18_start": "全部目标完成，任务已变为返回藏宝海湾交付",
+    "classification": "off_camera_or_between_episodes",
+    "note": "视频没有展示斯蒂沃特船长的完成过程，不分配本集击杀时间戳。"
+  },
+  "events": [
+    {"time_range":"00:35-00:45","action":"complete","quest_id":594,"quest_name":"瓶中信","objective":"找到信件作者","confidence":"high"},
+    {"time_range":"00:35-00:50","action":"accept","quest_id":630,"quest_name":"瓶中信","objective":"击杀穆克拉并取得钥匙","confidence":"high"},
+    {"time_range":"00:40","action":"level_up","level":44,"confidence":"high"},
+    {"time_range":"01:25-01:35","action":"complete","quest_id":630,"quest_name":"瓶中信","objective":"击杀穆克拉并取得钥匙","confidence":"high"},
+    {"time_range":"05:40-06:00","action":"subobjective_complete","quest_id":609,"quest_name":"讨债行动","objective":"苏克的巨型戒指","confidence":"high"},
+    {"time_range":"06:20-06:40","action":"subobjective_complete","quest_id":609,"quest_name":"讨债行动","objective":"乔乔的金色望远镜","confidence":"high"},
+    {"time_range":"07:20-07:40","action":"subobjective_complete","quest_id":609,"quest_name":"讨债行动","objective":"玛雷的畸形足","confidence":"high"},
+    {"time_range":"09:30-10:00","action":"objective_complete_not_turnin","quest_id":208,"quest_name":"王牌猎人","objective":"取得邦加拉什的徽记","confidence":"high"},
+    {"time_range":"11:50-12:00","action":"complete","quest_id":208,"quest_name":"王牌猎人","confidence":"high"},
+    {"time_range":"15:37-15:40","action":"complete","quest_id":609,"quest_name":"讨债行动","confidence":"high"},
+    {"time_range":"15:48-15:51","action":"accept","quest_id":613,"quest_name":"玛雷的腿","objective":"玛雷的钥匙0/1","confidence":"high"},
+    {"time_range":"16:02-16:05","action":"complete","quest_id":608,"quest_name":"血帆海盗","objective":"三名船长","confidence":"high"},
+    {"time_range":"17:13-17:14","action":"abandon","quest_id":206,"quest_name":"麦佐斯","state_before":"心灵之眼0/1","confidence":"high"},
+    {"time_range":"17:16-17:17","action":"abandon","quest_id":613,"quest_name":"玛雷的腿","state_before":"玛雷的钥匙0/1","confidence":"high"},
+    {"time_range":"24:10","action":"mount_added","mount_name":"战马","confidence":"high"},
+    {"time_range":"24:10-26:00","action":"learn_spells","spells":["愤怒之锤","驱邪术（等级4）","智慧祝福（等级4）"],"confidence":"high"},
+    {"time_range":"35:50-36:15","action":"complete","quest_id":623,"quest_name":"一捆海蛇草","confidence":"high"},
+    {"time_range":"36:30","action":"accept","quest_id":11214,"quest_name":"前往泥链镇","objective":"与德拉兹特·迪普瓦尔交谈","confidence":"high"},
+    {"time_range":"36:39-36:40","action":"abandon","quest_id":685,"quest_name":"通缉：奥图和法库雷斯特","confidence":"high"},
+    {"time_range":"36:43-36:46","action":"abandon","quest_id":602,"quest_name":"魔法分析","confidence":"high"},
+    {"time_range":"36:49-36:50","action":"abandon","quest_id":11214,"quest_name":"前往泥链镇","confidence":"high"},
+    {"time_range":"41:40-42:00","action":"achievement","achievement_name":"失足坠落？","confidence":"high"},
+    {"time_range":"42:50-43:10","action":"discover","location":"黑云峰","confidence":"high"},
+    {"time_range":"44:50-45:20","action":"skill_increase","skill":"采矿","value":102,"confidence":"high"},
+    {"time_range":"46:55","action":"accept","quest_id":2770,"quest_name":"加兹瑞拉","objective":"加兹瑞拉的鳞片0/1","confidence":"high"}
+  ],
+  "explicitly_held_at_episode_end": [
+    {"quest_id":2872,"quest_name":"斯杜雷的债务","state":"与热砂港的斯杜雷交谈"},
+    {"quest_id":2864,"quest_name":"特兰雷克","state":"与加基森的特兰雷克交谈"},
+    {"quest_id":580,"quest_name":"威士忌斯利姆的酒","state":"进行中"},
+    {"quest_id":2770,"quest_name":"加兹瑞拉","state":"加兹瑞拉的鳞片0/1"}
+  ],
+  "abandoned_in_episode": [
+    {"quest_id":206,"quest_name":"麦佐斯"},
+    {"quest_id":613,"quest_name":"玛雷的腿"},
+    {"quest_id":685,"quest_name":"通缉：奥图和法库雷斯特"},
+    {"quest_id":602,"quest_name":"魔法分析"},
+    {"quest_id":11214,"quest_name":"前往泥链镇"}
+  ],
+  "notes": [
+    "前往泥链镇在36:30接取，但约19秒后被主动放弃。",
+    "塞拉摩任务清理时任务数依次从6降到5、4、3，三次放弃均有确认窗口。",
+    "结尾接取加兹瑞拉后，明确持有任务数为4。",
+    "拍卖行、WeakAuras设置、插件提示和NPC环境对白未计为任务事件。"
+  ]
+}

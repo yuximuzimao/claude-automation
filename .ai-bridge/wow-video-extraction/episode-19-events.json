@@ -1,0 +1,104 @@
+{
+  "episode": 19,
+  "title": "加基森 45-46",
+  "bvid": "BV1hxveBTEek",
+  "duration_seconds": 2750,
+  "series_index": "19/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 46,
+    "fine5_start": 37,
+    "fine20_first_combat": 22,
+    "fine5_first_hub": 31,
+    "fine20_main_combat": 65,
+    "fine5_final_hubs": 57,
+    "fine10_end": 45,
+    "total": 303,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "tracked_objectives_only": [
+      {"quest_id": 2872, "quest_name": "斯杜雷的债务"},
+      {"quest_id": 2770, "quest_name": "加兹瑞拉", "state": "加兹瑞拉的鳞片0/1"}
+    ],
+    "warning": "目标(N)是当前追踪目标数量，不是完整任务日志。"
+  },
+  "events": [
+    {"time_range":"00:10-00:15","action":"accept","quest_id":3022,"quest_name":"小心运送","confidence":"high"},
+    {"time_range":"00:35-00:45","action":"accept","quest_id":2781,"quest_name":"通缉：卡利夫·斯科比斯汀","confidence":"high"},
+    {"time_range":"00:45-00:55","action":"accept","quest_id":1690,"quest_name":"废土的公正","stage":1,"confidence":"medium_high"},
+    {"time_range":"01:00-01:10","action":"accept","quest_id":2875,"quest_name":"通缉：安德雷·费尔比德","confidence":"high"},
+    {"time_range":"01:15-01:25","action":"complete","quest_id":2864,"quest_name":"特兰雷克","confidence":"high"},
+    {"time_range":"01:15-01:30","action":"accept","quest_id":2865,"quest_name":"圣甲虫的壳","confidence":"high"},
+    {"time_range":"01:15-01:30","action":"accept","quest_id":3042,"quest_name":"巨魔调和剂","confidence":"high"},
+    {"time_range":"01:20-01:35","action":"accept","quest_id":1707,"quest_name":"收集水袋","confidence":"high"},
+    {"time_range":"01:20-01:40","action":"accept","quest_id":992,"quest_name":"加基森水业公司","confidence":"high"},
+    {"time_range":"10:05-10:20","action":"complete","quest_id":1707,"quest_name":"收集水袋","confidence":"high"},
+    {"time_range":"10:10-10:25","action":"complete","quest_id":1690,"quest_name":"废土的公正","stage":1,"confidence":"high"},
+    {"time_range":"10:10-10:25","action":"accept","quest_id":1691,"quest_name":"废土的公正","stage":2,"confidence":"high"},
+    {"time_range":"10:15","action":"level_up_inferred","level":45,"confidence":"medium_high","basis":"第18集明确以44级结束，本集出现第一次升级动画和属性变化；数字OCR不稳定。"},
+    {"time_range":"10:15-10:25","action":"achievement","achievement_name":"完成250个任务","confidence":"high"},
+    {"time_range":"around 10:35 cut","action":"complete_and_accept_off_camera","completed_quest_id":2872,"completed_quest_name":"斯杜雷的债务","accepted_quest_id":2873,"accepted_quest_name":"斯杜雷的货物","confidence":"high","exact_time_known":false},
+    {"time_range":"around 10:35 cut","action":"accept_off_camera","quest_id":8365,"quest_name":"海盗的帽子！","confidence":"high","exact_time_known":false},
+    {"time_range":"around 10:35 cut","action":"accept_off_camera","quest_id":8366,"quest_name":"南海复仇","confidence":"high","exact_time_known":false},
+    {"time_range":"20:20-20:40","action":"objective_complete_not_turnin","quest_id":2781,"quest_name":"通缉：卡利夫·斯科比斯汀","objective":"取得卡利夫的徽记","confidence":"high"},
+    {"time_range":"32:00-33:30","action":"objective_complete_not_turnin","quest_id":2873,"quest_name":"斯杜雷的货物","objective":"取得斯杜雷的货物","confidence":"high"},
+    {"time_range":"33:00-34:40","action":"objectives_complete_not_turnin","quest_ids":[8365,8366],"quest_names":["海盗的帽子！","南海复仇"],"confidence":"high"},
+    {"time_range":"34:50-35:00","action":"complete","quest_id":8365,"quest_name":"海盗的帽子！","confidence":"high"},
+    {"time_range":"34:50-35:00","action":"complete","quest_id":8366,"quest_name":"南海复仇","confidence":"high"},
+    {"time_range":"35:00-35:10","action":"complete","quest_id":2873,"quest_name":"斯杜雷的货物","confidence":"high"},
+    {"time_range":"35:05-35:15","action":"accept","quest_id":2874,"quest_name":"给马克基雷的货物","confidence":"high"},
+    {"time_range":"35:15","action":"level_up_inferred","level":46,"confidence":"medium_high","basis":"本集第二次升级提示，承接本集第一次推定45级；数字OCR不稳定。"},
+    {"time_range":"37:40-38:05","action":"complete","quest_id":1691,"quest_name":"废土的公正","stage":2,"confidence":"high"},
+    {"time_range":"37:45-38:15","action":"complete","quest_id":2781,"quest_name":"通缉：卡利夫·斯科比斯汀","confidence":"high"},
+    {"time_range":"around 40:00","action":"accept","quest_id":5863,"quest_name":"砂槌食人魔","confidence":"medium_high"},
+    {"time_range":"42:20-43:20","action":"view_and_reject","quest_id":351,"quest_name":"寻找OOX-17/TN！","confidence":"high"},
+    {"time_range":"43:15-43:30","action":"accept","quest_id":82,"quest_name":"腐化之巢","confidence":"high"},
+    {"time_range":"44:30-44:50","action":"objective_complete_not_turnin","quest_id":992,"quest_name":"加基森水业公司","confidence":"high"},
+    {"time_range":"44:40-45:50","action":"objective_progress","quest_id":82,"quest_name":"腐化之巢","objective":"森提帕尔昆虫肢体","final_count":"uncertain_due_to_ocr","confidence":"high_for_progress"}
+  ],
+  "cut_gaps": [
+    {
+      "time_range":"around 10:35",
+      "before":"斯杜雷的债务仍在任务栏",
+      "after":"斯杜雷的货物、海盗的帽子！、南海复仇已经在任务栏",
+      "rule":"确认状态变化，但不虚构未展示的NPC交互顺序和秒级时间。"
+    }
+  ],
+  "present_in_log_without_reliable_accept_frame": [
+    {"quest_id":3520,"quest_name":"尖啸者的灵魂"},
+    {"quest_id":2768,"quest_name":"探水棒"},
+    {"quest_id":3362,"quest_name":"灌木谷"},
+    {"quest_id":2605,"quest_name":"口渴的地精","note":"后半段进入追踪栏，但没有可靠完整接取窗口。"}
+  ],
+  "explicit_end_tracker": [
+    {"quest_id":2605,"quest_name":"口渴的地精","state":"饱满的露水腺0/1"},
+    {"quest_id":5863,"quest_name":"砂槌食人魔","state":"进行中"},
+    {"quest_id":3362,"quest_name":"灌木谷","state":"进行中"},
+    {"quest_id":82,"quest_name":"腐化之巢","state":"已开始收集森提帕尔昆虫肢体，精确终值未确认"}
+  ],
+  "known_unfinished_not_all_tracked_at_end": [
+    {"quest_id":992,"quest_name":"加基森水业公司","state":"野外目标完成，未交付"},
+    {"quest_id":2874,"quest_name":"给马克基雷的货物"},
+    {"quest_id":3520,"quest_name":"尖啸者的灵魂"},
+    {"quest_id":2768,"quest_name":"探水棒"},
+    {"quest_id":2770,"quest_name":"加兹瑞拉"},
+    {"quest_id":2865,"quest_name":"圣甲虫的壳"},
+    {"quest_id":3042,"quest_name":"巨魔调和剂"},
+    {"quest_id":3022,"quest_name":"小心运送"}
+  ],
+  "next_episode": {
+    "episode": 20,
+    "title": "菲拉斯 47-48",
+    "bvid": "BV1eFiTBAENF",
+    "duration":"53:48",
+    "processed": false
+  },
+  "notes": [
+    "视频结尾没有打开完整任务日志，因此explicit_end_tracker不是完整持有任务清单。",
+    "目标(N)始终只表示追踪目标数量。",
+    "等级45和46为跨集连续性推定，原始系统数字未被OCR稳定读出。",
+    "寻找OOX-17/TN任务窗口显示拒绝，未记录为接取。"
+  ]
+}

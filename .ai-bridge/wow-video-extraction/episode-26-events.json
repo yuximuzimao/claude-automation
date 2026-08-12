@@ -1,0 +1,88 @@
+{
+  "episode": 26,
+  "title": "地狱火半岛59-60",
+  "bvid": "BV12XijBmEhq",
+  "duration_seconds": 3220.39433,
+  "display_duration": "53:41",
+  "series_index": "26/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 55,
+    "fine10_a": 101,
+    "fine10_b": 100,
+    "fine10_c": 100,
+    "fine10_d": 22,
+    "refined": 155,
+    "total": 533,
+    "manifest_count": 6,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 58,
+    "basis": "第25集47:18-47:21明确升到58级；本集从诅咒之地黑暗之门前开始。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "note": "4800/2400、19600/9800、20100/10050、25200/12600均形成双倍对应。"
+  },
+  "events": [
+    {"time_range":"00:25-00:35","action":"accept","quest_id":10119,"quest_name":"跨越黑暗之门","confidence":"high"},
+    {"time_range":"00:35-00:45","action":"complete_and_accept_next","quest_id":10119,"quest_name":"跨越黑暗之门","experience_shown":4800,"next_quest_id":10288,"next_quest_name":"抵达外域","confidence":"high"},
+    {"time_range":"00:45-01:00","action":"complete_and_accept_next","quest_id":10288,"quest_name":"抵达外域","experience_shown":4800,"next_quest_id":10140,"next_quest_name":"荣耀堡之旅","confidence":"high"},
+    {"time_range":"02:10-03:00","action":"complete_and_accept_next","quest_id":10140,"quest_name":"荣耀堡之旅","experience_shown":4800,"next_quest_id":10254,"next_quest_name":"指挥官达纳斯","confidence":"high"},
+    {"time_range":"03:05-03:15","action":"complete","quest_id":10254,"quest_name":"指挥官达纳斯","experience_shown":1900,"confidence":"high"},
+    {"time_range":"03:10-04:00","action":"accept","quest_ids":[10141,10160,10055],"quest_names":["重生的军团","知己知彼","回收材料"],"confidence":"medium_high"},
+    {"time_range":"04:00-04:20","action":"complete_and_accept_next","quest_id":10141,"quest_name":"重生的军团","experience_shown":1950,"next_quest_id":10142,"next_quest_name":"苦痛之路","confidence":"high"},
+    {"time_range":"04:00-04:20","action":"complete_and_accept_next","quest_id":10160,"quest_name":"知己知彼","experience_shown":4800,"next_quest_id":10482,"next_quest_name":"邪兽人清理者","confidence":"high"},
+    {"time_range":"04:20-13:00","action":"objectives_progress_and_complete","quest_ids":[10142,10482,10055],"quest_names":["苦痛之路","邪兽人清理者","回收材料"],"confidence":"high"},
+    {"time_range":"12:50-13:10","action":"area_discovery","area":"荣耀之路","experience_shown":900,"confidence":"high"},
+    {"time_range":"12:50-13:20","action":"complete_and_accept_next","quest_id":10142,"quest_name":"苦痛之路","experience_shown":19600,"next_quest_id":10143,"next_quest_name":"远征军岗哨","confidence":"medium_high"},
+    {"time_range":"16:10-16:20","action":"complete_and_accept_next","quest_id":10055,"quest_name":"回收材料","experience_shown":19600,"next_quest_id":10078,"next_quest_name":"烧毁掷刀车","confidence":"high"},
+    {"time_range":"16:10-16:35","action":"complete_and_accept_next","quest_id":10482,"quest_name":"邪兽人清理者","experience_shown":18000,"next_quest_id":10483,"next_quest_name":"邪恶的咒语","confidence":"high"},
+    {"time_range":"16:20-16:50","action":"accept_or_track","quest_id":10047,"quest_name":"荣耀之路","confidence":"medium_high"},
+    {"time_range":"20:40","action":"complete","quest_id":10078,"quest_name":"烧毁掷刀车","experience_shown":19600,"confidence":"high"},
+    {"time_range":"23:30","action":"complete_and_accept_next","quest_id":10143,"quest_name":"远征军岗哨","experience_shown":1950,"next_quest_id":10144,"next_quest_name":"阻断援军","confidence":"high"},
+    {"time_range":"23:30-28:40","action":"objectives_complete_not_turnin","quest_id":10144,"quest_name":"阻断援军","objective":"破坏格里姆与凯勒兹传送门","confidence":"high"},
+    {"time_range":"28:49","action":"complete_and_level_up","quest_id":10144,"quest_name":"阻断援军","experience_shown":20100,"level":59,"next_quest_id":10146,"next_quest_name":"任务：穆尔凯斯和沙德拉兹之门","confidence":"high"},
+    {"time_range":"29:10-30:35","action":"objectives_complete_not_turnin","quest_id":10146,"quest_name":"任务：穆尔凯斯和沙德拉兹之门","objective":"空中轰炸两座传送门","confidence":"high"},
+    {"time_range":"30:35-30:50","action":"complete_and_accept_next","quest_id":10146,"quest_name":"任务：穆尔凯斯和沙德拉兹之门","experience_shown":25200,"next_quest_id":10340,"next_quest_name":"破碎岗哨","confidence":"high"},
+    {"time_range":"35:50","action":"complete_and_accept_next","quest_id":10483,"quest_name":"邪恶的咒语","next_quest_id":10484,"next_quest_name":"被诅咒的护符","confidence":"medium_high"},
+    {"time_range":"35:50-46:05","action":"objectives_complete_not_turnin","quest_id":10484,"quest_name":"被诅咒的护符","objective":"收集12个被诅咒的护符","confidence":"high"},
+    {"time_range":"46:05-46:50","action":"complete_and_accept_next","quest_id":10484,"quest_name":"被诅咒的护符","experience_shown":18000,"next_quest_id":10485,"next_quest_name":"血环督军","confidence":"high"},
+    {"time_range":"46:50-48:45","action":"objectives_complete_not_turnin","quest_id":10485,"quest_name":"血环督军","objective":"取得督军莫克的破碎护甲","confidence":"high"},
+    {"time_range":"48:45-49:05","action":"complete_and_accept_next","quest_id":10485,"quest_name":"血环督军","experience_shown":19100,"next_quest_id":10903,"next_quest_name":"返回荣耀堡","confidence":"high"},
+    {"time_range":"49:40-50:00","action":"area_discovery","area":"破碎岗哨","experience_shown":900,"confidence":"high"},
+    {"time_range":"49:50-50:05","action":"complete_and_accept_next","quest_id":10340,"quest_name":"破碎岗哨","experience_shown":1900,"next_quest_id":10344,"next_quest_name":"空军指挥官格莱芬加尔","confidence":"high"},
+    {"time_range":"49:55-50:20","action":"complete_and_accept_next","quest_id":10344,"quest_name":"空军指挥官格莱芬加尔","experience_shown":1900,"next_quest_id":10162,"next_quest_name":"任务：地狱岩床","confidence":"high"},
+    {"time_range":"50:20-53:10","action":"objectives_complete_not_turnin","quest_id":10162,"quest_name":"任务：地狱岩床","objective":"击杀甘尔葛苦工和莫尔葛监工，摧毁邪能火炮","confidence":"high"},
+    {"time_range":"53:16-53:20","action":"complete_and_level_up","quest_id":10162,"quest_name":"任务：地狱岩床","experience_shown":20100,"level":60,"next_quest_id":10382,"next_quest_name":"奔赴前线","confidence":"high"}
+  ],
+  "ending_active_quests": [
+    {"quest_id":10382,"quest_name":"奔赴前线","state":"已接取，尚未乘狮鹫前往荣耀岗哨与巴洛克元帅交谈。"},
+    {"quest_id":10903,"quest_name":"返回荣耀堡","state":"《血环督军》后续，本集没有返回荣耀堡交付证据。"}
+  ],
+  "ending_uncertain": [
+    {"quest_id":10047,"quest_name":"荣耀之路","state":"追踪与目标操作可见，但没有单独捕捉到最终交付奖励。"},
+    {"quest_id":10346,"quest_name":"返回地狱岩床","state":"片尾出现近似文字，无法确认是否真正接取。"}
+  ],
+  "level_events": [
+    {"time":"28:49","level":59,"trigger":"交付阻断援军","experience_shown":20100,"confidence":"high"},
+    {"time_range":"53:16-53:20","level":60,"trigger":"交付任务：地狱岩床","experience_shown":20100,"confidence":"high"}
+  ],
+  "next_episode": {
+    "episode": 27,
+    "title": "地狱火半岛 城墙 61",
+    "bvid": "BV1j8ijBeEfZ",
+    "duration_seconds": 2789,
+    "duration": "46:29",
+    "processed": false
+  },
+  "notes": [
+    "本集开场等级为58，视频中先后升到59和60。",
+    "重生的军团是引导任务，实际三组恶魔击杀属于苦痛之路。",
+    "被诅咒的护符链包含先交1个护符的邪恶的咒语，以及后续收集12个护符的独立任务。",
+    "第27集信息来自合集状态；本轮未导航、播放、截图或处理第27集。"
+  ]
+}

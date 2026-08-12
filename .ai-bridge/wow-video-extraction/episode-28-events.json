@@ -1,0 +1,437 @@
+{
+  "episode": 28,
+  "title": "地狱火半岛 62-63",
+  "bvid": "BV17uqcBdEWu",
+  "duration_seconds": 4810.12,
+  "display_duration": "80:11",
+  "series_index": "28/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse_a": 31,
+      "coarse_b": 30,
+      "coarse_c": 21,
+      "fine20_a": 61,
+      "fine20_b": 60,
+      "fine20_c": 60,
+      "fine20_d": 61,
+      "refined_a": 129,
+      "refined_b": 143,
+      "refined_c": 144,
+      "refined_d": 186,
+      "refined_e": 81
+    },
+    "formal_total": 1007,
+    "manifest_count": 12,
+    "all_formal_batches_verified_paused": true,
+    "auxiliary_not_counted": {
+      "timed_out_coarse_frames_without_complete_manifest": 71,
+      "coarse_tail_duplicate_frames": 11,
+      "level_region_crops": true
+    }
+  },
+  "starting_evidence": {
+    "level": 61,
+    "basis": "第27集39:01左右在地狱火城墙中明确升到61级；本集直接承接其片尾任务状态。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "1950/970",
+      "19600/9800",
+      "20100/10050",
+      "20800/10400",
+      "25200/12600",
+      "25900/12950"
+    ]
+  },
+  "events": [
+    {
+      "time_range": "12:20-12:40",
+      "action": "accept_from_drop",
+      "quest_id": 9373,
+      "quest_name": "遗失的信件",
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:30-30:40",
+      "action": "failed_boss_attempt",
+      "quest_id": 10400,
+      "quest_name": "霸王",
+      "boss": "残酷的阿拉修斯",
+      "objective_state_after_attempt": "0/1",
+      "player_death_observed": true,
+      "confidence": "high",
+      "note": "没有击杀、任务完成或交付奖励证据。"
+    },
+    {
+      "time": "33:20",
+      "action": "accept",
+      "quest_id": 9398,
+      "quest_name": "致命的猎手",
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:00-36:40",
+      "action": "complete_and_accept",
+      "quest_id": 10093,
+      "quest_name": "塔哈玛特神殿",
+      "experience_shown_approx": 5200,
+      "accepted_quest_id": 9383,
+      "accepted_quest_name": "艰巨的计划",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:15-38:30",
+      "action": "complete",
+      "quest_id": 10058,
+      "quest_name": "古老的礼物",
+      "experience_shown": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:40-39:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 10909,
+      "quest_name": "邪灵",
+      "experience_shown": 19600,
+      "next_quest_id": 10935,
+      "next_quest_name": "尤勒斯的驱魔仪式",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:36-42:48",
+      "action": "complete_and_accept_next",
+      "quest_id": 10935,
+      "quest_name": "尤勒斯的驱魔仪式",
+      "experience_shown": 24400,
+      "next_quest_id": 10936,
+      "next_quest_name": "托尔贝恩在找你",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:56-43:20",
+      "action": "complete",
+      "quest_id": 10106,
+      "quest_name": "地狱火半岛的工事",
+      "experience_shown": 14300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:28-44:20",
+      "action": "complete",
+      "quest_id": 10399,
+      "quest_name": "黑暗之心",
+      "experience_shown": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:28-44:20",
+      "action": "complete_and_accept_next",
+      "quest_id": 10936,
+      "quest_name": "托尔贝恩在找你",
+      "experience_shown": 1950,
+      "next_quest_id": 10937,
+      "next_quest_name": "教官祖罗克",
+      "confidence": "high"
+    },
+    {
+      "time_range": "45:14-46:08",
+      "action": "complete",
+      "quest_id": 9355,
+      "quest_name": "聪明人的工作",
+      "experience_shown_approx": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "45:14-46:08",
+      "action": "complete_and_accept_next",
+      "quest_id": 10050,
+      "quest_name": "阴魂不散",
+      "experience_shown_approx": 19600,
+      "next_quest_id": 10057,
+      "next_quest_name": "寻找首领",
+      "confidence": "high"
+    },
+    {
+      "time_range": "45:35-46:00",
+      "action": "area_discovery",
+      "area": "地狱火堡垒",
+      "experience_shown_approx": 1000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:00-49:20",
+      "action": "complete",
+      "quest_id": 10937,
+      "quest_name": "教官祖罗克",
+      "experience_shown": 25200,
+      "confidence": "high"
+    },
+    {
+      "time": "51:00",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 10057,
+      "quest_name": "寻找首领",
+      "objective_state": "两名首领均完成",
+      "confidence": "high",
+      "note": "片尾任务日志仍显示可交付，没有NPC交付和奖励。"
+    },
+    {
+      "time": "57:44",
+      "action": "complete_and_accept_next",
+      "quest_id": 9558,
+      "quest_name": "长须兄弟",
+      "experience_shown_approx": 2000,
+      "next_quest_id": 9417,
+      "next_quest_name": "鸦人的威胁",
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:44-58:00",
+      "action": "accept",
+      "quest_id": 9385,
+      "quest_name": "钢牙掠食者",
+      "confidence": "high"
+    },
+    {
+      "time_range": "61:24-61:40",
+      "action": "complete",
+      "quest_id": 9417,
+      "quest_name": "鸦人的威胁",
+      "experience_shown": 20800,
+      "confidence": "high"
+    },
+    {
+      "time": "64:30",
+      "action": "complete",
+      "quest_id": 9373,
+      "quest_name": "遗失的信件",
+      "experience_shown_approx": 19600,
+      "confidence": "high"
+    },
+    {
+      "time": "65:00",
+      "action": "complete",
+      "quest_id": 10442,
+      "quest_name": "帮助塞纳里奥哨站",
+      "experience_shown": 1950,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:45-65:10",
+      "action": "accept",
+      "quest_id": 10132,
+      "quest_name": "巨人的威胁",
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:45-65:10",
+      "action": "accept",
+      "quest_id": 9912,
+      "quest_name": "塞纳里奥远征队",
+      "confidence": "high"
+    },
+    {
+      "time": "67:40",
+      "action": "complete_and_accept_next",
+      "quest_id": 9372,
+      "quest_name": "恶魔的玷污",
+      "experience_shown": 20800,
+      "next_quest_id": 10255,
+      "next_quest_name": "测试解毒剂",
+      "confidence": "high"
+    },
+    {
+      "time": "68:15",
+      "action": "complete",
+      "quest_id": 10255,
+      "quest_name": "测试解毒剂",
+      "experience_shown": 20800,
+      "confidence": "high"
+    },
+    {
+      "time": "69:32",
+      "action": "accept",
+      "quest_id": 10403,
+      "quest_name": "纳拉杜",
+      "confidence": "high"
+    },
+    {
+      "time_range": "69:52-70:04",
+      "action": "complete_and_accept_next",
+      "quest_id": 10403,
+      "quest_name": "纳拉杜",
+      "experience_shown_approx": 5100,
+      "next_quest_id": 10367,
+      "next_quest_name": "叛徒",
+      "confidence": "high"
+    },
+    {
+      "time": "70:48",
+      "action": "complete_and_accept_next",
+      "quest_id": 10367,
+      "quest_name": "叛徒",
+      "key_item_obtained": "沙纳尔钥匙",
+      "experience_shown": 20100,
+      "next_quest_id": 10368,
+      "next_quest_name": "残冠长者",
+      "confidence": "high"
+    },
+    {
+      "time_range": "71:56-72:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 10368,
+      "quest_name": "残冠长者",
+      "reward_item_obtained": "残冠长者法杖",
+      "experience_shown": null,
+      "next_quest_id": 10369,
+      "next_quest_name": "阿尔泽斯之死",
+      "confidence": "high",
+      "note": "交付闭环由法杖奖励和后续任务接取证明，经验弹窗未完整捕获。"
+    },
+    {
+      "time_range": "73:04-73:20",
+      "action": "complete",
+      "quest_id": 10369,
+      "quest_name": "阿尔泽斯之死",
+      "experience_shown": 25200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "78:14-78:45",
+      "action": "complete_and_level_up",
+      "quest_id": 9399,
+      "quest_name": "残忍的监工",
+      "experience_shown": 20800,
+      "level": 63,
+      "confidence": "high"
+    },
+    {
+      "time_range": "79:03-79:05",
+      "action": "complete",
+      "quest_id": 9490,
+      "quest_name": "剥石者的女王",
+      "experience_shown_approx": 25900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "79:08-79:20",
+      "action": "complete",
+      "quest_id": 9398,
+      "quest_name": "致命的猎手",
+      "experience_shown": 20100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "79:42-80:03",
+      "action": "complete",
+      "quest_id": 9383,
+      "quest_name": "艰巨的计划",
+      "experience_shown": 20800,
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "level": 62,
+      "time": null,
+      "trigger": null,
+      "confidence": "medium",
+      "state": "本集中段已经达到62级，但精确系统提示、任务或击杀触发未被视频截图/OCR证据保留。"
+    },
+    {
+      "level": 63,
+      "time_range": "78:14-78:26",
+      "trigger": "交付9399《残忍的监工》，获得20800经验",
+      "confidence": "high"
+    }
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 9912,
+      "quest_name": "塞纳里奥远征队",
+      "state": "已接取，前往赞加沼泽塞纳里奥庇护所。"
+    },
+    {
+      "quest_id": 10132,
+      "quest_name": "巨人的威胁",
+      "state": "已接取，片尾进度0/5。"
+    },
+    {
+      "quest_id": 10057,
+      "quest_name": "寻找首领",
+      "state": "目标全部完成，但没有NPC交付。"
+    },
+    {
+      "quest_id": 9385,
+      "quest_name": "钢牙掠食者",
+      "state": "已接取，野外段最高可见约9/10，没有最终完成或交付证据。"
+    },
+    {
+      "quest_id": 10400,
+      "quest_name": "霸王",
+      "state": "残酷的阿拉修斯0/1；战斗失败后没有成功击杀证据。"
+    },
+    {
+      "quest_id": 9607,
+      "quest_name": "愤怒之心",
+      "state": "没有进入鲜血熔炉，继续保留。"
+    },
+    {
+      "quest_id": 10916,
+      "quest_name": "挖掘念珠",
+      "state": "画面只出现驱魔仪式用念珠，没有独立完成或交付证据。"
+    }
+  ],
+  "ending_items_or_unresolved_triggers": [
+    {
+      "item_name": "不祥的信件",
+      "state": "第27集已获得；本集仍没有打开或接取后续任务的证据。"
+    }
+  ],
+  "completed_quests": [
+    9373,
+    10093,
+    9383,
+    10058,
+    10909,
+    10935,
+    10106,
+    10399,
+    10936,
+    10937,
+    9355,
+    10050,
+    9558,
+    9417,
+    10442,
+    9372,
+    10255,
+    10403,
+    10367,
+    10368,
+    10369,
+    9399,
+    9490,
+    9398
+  ],
+  "next_episode": {
+    "episode": 29,
+    "title": "地狱火半岛 64",
+    "bvid": "BV1MtqcBCEZs",
+    "duration_seconds": 2328,
+    "duration": "38:48",
+    "processed": false
+  },
+  "notes": [
+    "本集从61级开始并明确在78:14左右升到63级。",
+    "61到62确定发生于本集，但精确触发没有可复核证据，因此不指定时间或来源。",
+    "霸王只出现失败战斗，目标保持0/1，不能补记完成。",
+    "寻找首领只完成目标，没有最终交付。",
+    "挖掘念珠没有独立交付证据，仪式念珠不能替代该任务的完成证明。",
+    "第29集信息来自合集状态；本轮未导航、播放、截图或处理第29集。"
+  ]
+}

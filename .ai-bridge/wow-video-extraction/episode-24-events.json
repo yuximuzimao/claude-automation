@@ -1,0 +1,484 @@
+{
+  "episode": 24,
+  "title": "西瘟 54-56",
+  "bvid": "BV1jiirBiE2L",
+  "duration_seconds": 3908.96,
+  "display_duration": "01:05:09",
+  "series_index": "24/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 66,
+    "fine10_a": 98,
+    "fine10_b": 98,
+    "fine10_c": 98,
+    "fine10_d": 97,
+    "detail_opening": 41,
+    "detail_level55": 31,
+    "detail_time_unfinished": 31,
+    "detail_level56": 31,
+    "detail_unknown47": 41,
+    "detail_lightbringer": 36,
+    "detail_escort_end": 16,
+    "detail_chillwind_end": 41,
+    "detail_level57": 50,
+    "total": 775,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 54,
+    "basis": "第23集约37:00明确升到54级，本集12:23前没有新的升级提示；本集从54级开始。",
+    "continuity_warning": "第23集末尾追踪栏出现8415《冰风岗》。本集开场立即能从其后续NPC接取8414《驱散邪恶》，说明8415已在开场交付，但未捕捉到清晰奖励文字，故仅作中高置信链路推断。"
+  },
+  "events": [
+    {
+      "time_range": "00:00-00:15",
+      "action": "complete_inferred_from_chain",
+      "quest_id": 8415,
+      "quest_name": "冰风岗",
+      "confidence": "medium_high",
+      "basis": "第23集末尾持有8415；本集开场已在冰风岗NPC处并可接其后续8414。"
+    },
+    {
+      "time_range": "00:15-00:22",
+      "action": "accept",
+      "quest_id": 5903,
+      "quest_name": "瘟疫与你",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:17-00:20",
+      "action": "accept",
+      "quest_id": 5092,
+      "quest_name": "扫清道路",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:21-00:36",
+      "action": "accept",
+      "quest_id": 8414,
+      "quest_name": "驱散邪恶",
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:20-05:40",
+      "action": "complete",
+      "quest_id": 5092,
+      "quest_name": "扫清道路",
+      "experience_shown": 14700,
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:25-05:45",
+      "action": "accept",
+      "quest_id": 5097,
+      "quest_name": "标记哨塔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:30-05:50",
+      "action": "complete",
+      "quest_id": 5215,
+      "quest_name": "瘟疫之锅",
+      "experience_shown": 1500,
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:30-05:50",
+      "action": "accept",
+      "quest_id": 5216,
+      "quest_name": "目标：费尔斯通农场",
+      "confidence": "high"
+    },
+    {
+      "time_range": "08:50-09:10",
+      "action": "complete",
+      "quest_id": 5216,
+      "quest_name": "目标：费尔斯通农场",
+      "experience_shown": 15200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "08:50-09:10",
+      "action": "accept",
+      "quest_id": 5217,
+      "quest_name": "返回冰风岗",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:30-12:22",
+      "action": "complete",
+      "quest_id": 5021,
+      "quest_name": "迟到总比不到好",
+      "experience_shown": 7300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:23-12:24",
+      "action": "level_up_explicit",
+      "level": 55,
+      "confidence": "high",
+      "best_frame_seconds": 743
+    },
+    {
+      "time_range": "16:50-17:20",
+      "action": "complete",
+      "quest_id": 5097,
+      "quest_name": "标记哨塔",
+      "experience_shown": 16900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:00-17:30",
+      "action": "accept",
+      "quest_id": 211,
+      "quest_name": "啊，安多哈尔！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:20-18:10",
+      "action": "complete",
+      "quest_id": 5217,
+      "quest_name": "返回冰风岗",
+      "stage": 1,
+      "experience_shown": 7600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:20-18:10",
+      "action": "accept",
+      "quest_id": 5219,
+      "quest_name": "目标：达尔松之泪",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:40-19:10",
+      "action": "accept",
+      "quest_id": 9474,
+      "quest_name": "光明使者的印记",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:40-24:10",
+      "action": "complete",
+      "quest_id": 5219,
+      "quest_name": "目标：达尔松之泪",
+      "experience_shown": 16300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:40-24:10",
+      "action": "accept",
+      "quest_id": 5220,
+      "quest_name": "返回冰风岗",
+      "stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:10-27:30",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 8414,
+      "quest_name": "驱散邪恶",
+      "objective": "收集20个爪牙的天灾石",
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:40-28:20",
+      "action": "complete",
+      "quest_id": 5058,
+      "quest_name": "达尔松夫人的日记",
+      "source": "world_object_interaction",
+      "confidence": "high"
+    },
+    {
+      "time_range": "37:30-37:45",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 9474,
+      "quest_name": "光明使者的印记",
+      "objective": "取得光明使者的印记",
+      "confidence": "high"
+    },
+    {
+      "time_range": "39:54-40:02",
+      "action": "complete",
+      "quest_id": 4971,
+      "quest_name": "时间问题",
+      "experience_shown": 16900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "39:56-40:04",
+      "action": "accept",
+      "quest_id": 6023,
+      "quest_name": "未完的任务",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "40:02-40:10",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 6023,
+      "quest_name": "未完的任务",
+      "stage": 1,
+      "confidence": "high",
+      "note": "系统完成提示出现后任务仍在追踪栏，约43:00才出现NPC奖励窗口。"
+    },
+    {
+      "time_range": "42:59-43:01",
+      "action": "complete",
+      "quest_id": 6023,
+      "quest_name": "未完的任务",
+      "stage": 1,
+      "experience_shown": 17500,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:00-43:02",
+      "action": "accept",
+      "quest_id": 6025,
+      "quest_name": "未完的任务",
+      "stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "43:00-43:01",
+      "action": "level_up_explicit",
+      "level": 56,
+      "confidence": "high",
+      "best_frame_seconds": 2580
+    },
+    {
+      "time_range": "45:20-45:40",
+      "action": "area_discovery",
+      "area": "壁炉谷",
+      "experience_shown": 845,
+      "confidence": "high"
+    },
+    {
+      "time_range": "45:20-45:40",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 6025,
+      "quest_name": "未完的任务",
+      "stage": 2,
+      "objective": "侦察壁炉谷",
+      "confidence": "high"
+    },
+    {
+      "time_range": "46:54-46:56",
+      "action": "complete",
+      "quest_id": 6025,
+      "quest_name": "未完的任务",
+      "stage": 2,
+      "experience_shown": 18000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:06-49:10",
+      "action": "complete",
+      "quest_id": 9474,
+      "quest_name": "光明使者的印记",
+      "experience_shown": 18000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:08-49:20",
+      "action": "accept",
+      "quest_id": 9446,
+      "quest_name": "光明使者之墓",
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:12-49:18",
+      "action": "complete",
+      "quest_id": 5220,
+      "quest_name": "返回冰风岗",
+      "stage": 2,
+      "experience_shown": 8100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:16-49:24",
+      "action": "accept",
+      "quest_id": 5222,
+      "quest_name": "目标：嚎哭鬼屋",
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:08-55:20",
+      "action": "complete",
+      "quest_id": 8414,
+      "quest_name": "驱散邪恶",
+      "experience_shown": 14700,
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:18-55:30",
+      "action": "accept",
+      "quest_id": 8416,
+      "quest_name": "惰性天灾石",
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:24-55:30",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 9446,
+      "quest_name": "光明使者之墓",
+      "objective": "护送学者特卢恩抵达乌瑟之墓",
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:50-56:56",
+      "action": "complete",
+      "quest_id": 8416,
+      "quest_name": "惰性天灾石",
+      "experience_shown": 7300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:28-57:40",
+      "action": "accept",
+      "quest_id": 8418,
+      "quest_name": "铸造力量之石",
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:28-57:32",
+      "action": "complete",
+      "quest_id": 9446,
+      "quest_name": "光明使者之墓",
+      "experience_shown": 22500,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:20-64:24",
+      "action": "complete",
+      "quest_id": 5222,
+      "quest_name": "目标：嚎哭鬼屋",
+      "experience_shown": 16300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:20-64:25",
+      "action": "accept",
+      "quest_id": 5223,
+      "quest_name": "返回冰风岗",
+      "stage": 3,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:25-64:28",
+      "action": "complete",
+      "quest_id": 5223,
+      "quest_name": "返回冰风岗",
+      "stage": 3,
+      "experience_shown": 8100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:25-64:30",
+      "action": "accept",
+      "quest_id": 5225,
+      "quest_name": "目标：盖罗恩农场",
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:33-64:41",
+      "action": "complete",
+      "quest_id": 211,
+      "quest_name": "啊，安多哈尔！",
+      "experience_shown": 23800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "64:41-64:43",
+      "action": "level_up_explicit",
+      "level": 57,
+      "confidence": "high",
+      "best_frame_seconds": 3881
+    }
+  ],
+  "same_name_chain_notes": [
+    {
+      "quest_ids": [5217, 5220, 5223],
+      "quest_name": "返回冰风岗",
+      "calibration": "依据前一项瘟疫之锅目标、样本瓶名称和Questie前后置链区分费尔斯通、达尔松之泪和嚎哭鬼屋三次返回。"
+    },
+    {
+      "quest_ids": [6023, 6025],
+      "quest_name": "未完的任务",
+      "calibration": "第一段击杀血色精英并在43:00交付；第二段侦察壁炉谷并在46:54交付。系统同名提示不能合并。"
+    }
+  ],
+  "task_log_observations": [
+    {
+      "time_range": "00:15-00:22",
+      "quest_id": 5903,
+      "quest_name": "瘟疫与你",
+      "state": "开场明确接取并取得空白蚁瓶；本集没有可靠的最终交付或5904后续接取证据。"
+    },
+    {
+      "time_range": "57:30-65:09",
+      "quest_id": 8418,
+      "quest_name": "铸造力量之石",
+      "state": "已接取，需要沉没的神庙三色羽毛，本集未完成。"
+    },
+    {
+      "time_range": "64:25-65:09",
+      "quest_id": 5225,
+      "quest_name": "目标：盖罗恩农场",
+      "state": "已接取并取得盖罗恩农场空瓶，本集未推进至完成。"
+    },
+    {
+      "time_range": "64:30-65:09",
+      "quest_name": "通灵学院",
+      "state": "结尾追踪栏可见，但没有捕捉到清晰接取系统提示，不分配任务ID。"
+    }
+  ],
+  "continuity_unresolved_without_new_action": [
+    {
+      "quest_id": 3908,
+      "quest_name": "无人知晓的秘密",
+      "note": "第23集待冬泉谷交付；本集未见新动作。"
+    },
+    {
+      "quest_id": 974,
+      "quest_name": "究根问底",
+      "note": "第23集目标已完成但未交付；本集未见新动作。"
+    },
+    {
+      "quest_id": 980,
+      "quest_name": "新的泉水",
+      "note": "第23集已接取并指向冬泉谷；本集未见新动作。"
+    },
+    {
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "note": "第21集待最终交付，第22—24集仍无新动作证据。"
+    },
+    {
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "note": "此前待藏宝海湾交付；本集未见新动作。"
+    },
+    {
+      "quest_id": 162,
+      "quest_name": "异种蝎的威胁",
+      "note": "此前待达纳苏斯交付；本集未见新动作。"
+    }
+  ],
+  "next_episode": {
+    "episode": 25,
+    "title": "东瘟57-58",
+    "bvid": "BV1iVi7BPEtL",
+    "duration": "47:50",
+    "processed": false
+  },
+  "notes": [
+    "视频标题标注54-56，但64:41明确升到57级。",
+    "《驱散邪恶》在约27:20先完成收集目标，55:10才最终交付。",
+    "《光明使者之墓》在乌瑟之墓完成护送目标后，57:28返回冰风岗最终交付。",
+    "第25集信息来自当前页面__INITIAL_STATE__.videoData.ugc_season；本轮未导航、播放、截图或处理第25集。"
+  ]
+}

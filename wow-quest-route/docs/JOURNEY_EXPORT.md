@@ -35,6 +35,23 @@ C:\Program Files (x86)\World of Warcraft\_classic_titan_\WTF\Account
 
 3. 把生成的 `journey-current-sanitized.json` 放到bridge目录并告知ChatGPT。
 
+## 工作区内直接解析原文件
+
+如果原始`Questie.lua`已经放到工作区根目录的`.ai-bridge/`，可在`wow-quest-route`项目根目录执行：
+
+```bash
+python -m scripts.analyze_questie_journey ../.ai-bridge/Questie.lua --preview 40 --latest-only
+```
+
+该命令会：
+
+- 从账号级`QuestieConfig.char[*].journey`中按最新时间定位当前候选角色；
+- 输出事件数量、等级范围、当前在途任务、最近完成任务和末尾事件；
+- 不输出账号名、服务器名、角色名、GUID或角色键；
+- 容忍SavedVariables中的少量非UTF-8文本字节，替换异常文本但保留任务ID、等级和时间戳结构。
+
+原文件仍只作为临时只读输入，不提交到项目仓库。
+
 ## 直接提供原文件的风险
 
 账号级 `Questie.lua` 通常不含密码或Token，但可能包含：

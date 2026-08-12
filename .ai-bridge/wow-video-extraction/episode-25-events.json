@@ -1,0 +1,340 @@
+{
+  "episode": 25,
+  "title": "东瘟57-58",
+  "bvid": "BV1iVi7BPEtL",
+  "duration_seconds": 2869.8,
+  "display_duration": "47:50",
+  "series_index": "25/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 48,
+    "fine10_1": 48,
+    "fine10_2": 48,
+    "fine10_3": 48,
+    "fine10_4": 48,
+    "fine10_5": 48,
+    "fine10_6a": 24,
+    "fine10_6b": 24,
+    "detail_opening": 81,
+    "detail_pamela": 111,
+    "detail_lightshope": 81,
+    "detail_zaeldarr_hameya": 96,
+    "detail_hameya_progress": 51,
+    "detail_level58": 70,
+    "total": 826,
+    "all_verified_paused": true,
+    "excluded_duplicate_directory": "fine10-a（首轮10秒扫描超时，无完整manifest，92张重复帧未计入）"
+  },
+  "starting_evidence": {
+    "level": 57,
+    "basis": "第24集64:41明确升到57级。本集00:10仍显示的57级升级文字是上一集事件残留，不是本集新升级。"
+  },
+  "events": [
+    {
+      "time_range": "02:00-02:02",
+      "action": "complete",
+      "quest_id": 5225,
+      "quest_name": "目标：盖罗恩农场",
+      "experience_shown": 18000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "02:00-02:40",
+      "action": "accept",
+      "quest_id": 5226,
+      "quest_name": "返回冰风岗",
+      "stage": "盖罗恩农场",
+      "confidence": "high"
+    },
+    {
+      "time_range": "03:50-04:00",
+      "action": "complete",
+      "quest_id": 5226,
+      "quest_name": "返回冰风岗",
+      "stage": "盖罗恩农场",
+      "experience_shown": 9000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "06:30-06:50",
+      "action": "flight_path_discovered",
+      "location": "西瘟疫之地飞行点",
+      "confidence": "medium",
+      "note": "系统明确显示发现新的飞行路线，但该帧地点名不够清晰。"
+    },
+    {
+      "time_range": "08:00-08:20",
+      "action": "accept",
+      "quest_id": 5542,
+      "quest_name": "恶魔之犬",
+      "confidence": "high"
+    },
+    {
+      "time_range": "08:10-08:40",
+      "action": "accept",
+      "quest_id": 5543,
+      "quest_name": "血染的天空",
+      "confidence": "high"
+    },
+    {
+      "time_range": "08:10-08:40",
+      "action": "accept",
+      "quest_id": 5544,
+      "quest_name": "腐肉虫",
+      "confidence": "high"
+    },
+    {
+      "time_range": "08:00-08:20",
+      "action": "area_discovery",
+      "area": "索多里尔河",
+      "experience_shown": 815,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:20-13:00",
+      "action": "area_discovery",
+      "area": "玛瑞斯农场、达隆郡",
+      "confidence": "high"
+    },
+    {
+      "time_range": "13:42-13:50",
+      "action": "complete",
+      "quest_id": 5142,
+      "quest_name": "小帕米拉",
+      "experience_shown": 8100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "13:42-13:50",
+      "action": "accept",
+      "quest_id": 5149,
+      "quest_name": "帕米拉的洋娃娃",
+      "confidence": "high"
+    },
+    {
+      "time_range": "14:50-15:00",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 5149,
+      "quest_name": "帕米拉的洋娃娃",
+      "objective": "取得并组合洋娃娃的左身、右身和脑袋",
+      "confidence": "high"
+    },
+    {
+      "time_range": "16:18-16:28",
+      "action": "complete",
+      "quest_id": 5149,
+      "quest_name": "帕米拉的洋娃娃",
+      "experience_shown": 8100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "16:18-16:28",
+      "action": "accept",
+      "quest_id": 5152,
+      "quest_name": "玛莱恩姑妈",
+      "confidence": "high"
+    },
+    {
+      "time_range": "16:18-16:28",
+      "action": "accept",
+      "quest_id": 5241,
+      "quest_name": "卡林叔叔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:40-18:06",
+      "action": "area_discovery",
+      "area": "圣光之愿礼拜堂",
+      "experience_shown": 900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:44-18:06",
+      "action": "accept",
+      "quest_id": 6021,
+      "quest_name": "流亡者塞达尔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:06-18:34",
+      "action": "accept",
+      "quest_id": 5281,
+      "quest_name": "永不安息的灵魂",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:06-18:30",
+      "action": "complete",
+      "quest_id": 5241,
+      "quest_name": "卡林叔叔",
+      "experience_shown": 8400,
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:06-18:34",
+      "action": "accept",
+      "quest_id": 5211,
+      "quest_name": "达隆郡的保卫者",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:30-20:00",
+      "action": "accept",
+      "quest_id": 9664,
+      "quest_name": "建立新据点",
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:00-23:00",
+      "action": "area_discovery",
+      "area": "米雷达尔湖、考林路口",
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:20-30:20",
+      "action": "area_discovery",
+      "area": "黑木湖、病木林、皇冠哨塔",
+      "confidence": "medium_high",
+      "note": "OCR对部分中文地点名有近似字，但地图顺序和系统经验提示可互相校准。"
+    },
+    {
+      "time_range": "33:10-33:20",
+      "action": "accept",
+      "quest_id": 6024,
+      "quest_name": "哈米亚的请求",
+      "source": "掉落物品触发",
+      "confidence": "high"
+    },
+    {
+      "time_range": "35:42-35:50",
+      "action": "complete",
+      "quest_id": 6021,
+      "quest_name": "流亡者塞达尔",
+      "experience_shown": 12200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:50-37:50",
+      "action": "area_discovery",
+      "area": "东墙哨塔、北谷、祖玛沙尔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "41:55-42:00",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 6024,
+      "quest_name": "哈米亚的请求",
+      "objective": "击杀渗透者哈米亚并取得哈米亚的钥匙",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:00-47:50",
+      "action": "objective_pending",
+      "quest_id": 6024,
+      "quest_name": "哈米亚的请求",
+      "objective": "用钥匙打开辛特兰墓穴后方的一堆泥土",
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:18-47:21",
+      "action": "level_up_explicit",
+      "level": 58,
+      "trigger": "普通战斗击杀经验",
+      "confidence": "high",
+      "note": "47:18开始出现属性提升，47:21首次完整显示‘升到了58级’；附近没有任务交付窗口。"
+    }
+  ],
+  "ending_active_quests": [
+    {
+      "quest_id": 6024,
+      "quest_name": "哈米亚的请求",
+      "state": "已取得钥匙，仍需前往辛特兰墓穴后方的一堆泥土。"
+    },
+    {
+      "quest_id": 5544,
+      "quest_name": "腐肉虫",
+      "state": "片尾追踪约8/15，未完成。"
+    },
+    {
+      "quest_id": 5211,
+      "quest_name": "达隆郡的保卫者",
+      "state": "持续推进灵魂目标，本集未交付。"
+    },
+    {
+      "quest_id": 5281,
+      "quest_name": "永不安息的灵魂",
+      "state": "持续释放灵魂，本集未交付。"
+    },
+    {
+      "quest_id": 5542,
+      "quest_name": "恶魔之犬",
+      "state": "部分击杀进度，本集未交付。"
+    },
+    {
+      "quest_id": 5543,
+      "quest_name": "血染的天空",
+      "state": "部分击杀进度，本集未交付。"
+    },
+    {
+      "quest_id": 5152,
+      "quest_name": "玛莱恩姑妈",
+      "state": "已接取，本集未交付。"
+    },
+    {
+      "quest_id": 9664,
+      "quest_name": "建立新据点",
+      "state": "已接取，本集未完成。"
+    },
+    {
+      "quest_id": 5903,
+      "quest_name": "瘟疫与你",
+      "state": "第24集接取，本集任务日志仍可见，没有最终交付证据。"
+    }
+  ],
+  "continuity_unresolved_without_new_action": [
+    {
+      "quest_id": 8418,
+      "quest_name": "铸造力量之石",
+      "note": "第24集已接取，本集没有新完成或交付证据。"
+    },
+    {
+      "quest_name": "通灵学院",
+      "note": "第24集结尾可见，本集没有可证实的新动作。"
+    },
+    {
+      "quest_id": 3908,
+      "quest_name": "无人知晓的秘密",
+      "note": "仍待冬泉谷交付，本集无新动作。"
+    },
+    {
+      "quest_id": 974,
+      "quest_name": "究根问底",
+      "note": "此前目标完成但未交付，本集无新动作。"
+    },
+    {
+      "quest_id": 980,
+      "quest_name": "新的泉水",
+      "note": "指向冬泉谷，本集无新动作。"
+    },
+    {
+      "quest_id": 3463,
+      "quest_name": "烧掉它们！",
+      "note": "第21集后一直缺少最终交付证据。"
+    }
+  ],
+  "next_episode": {
+    "episode": 26,
+    "title": "地狱火半岛59-60",
+    "bvid": "BV12XijBmEhq",
+    "duration": "53:41",
+    "processed": false
+  },
+  "notes": [
+    "本集开场显示的57级升级文字是第24集残留，不得记成新升级。",
+    "《帕米拉的洋娃娃》约14:50先完成物品组合目标，约16:18才出现奖励与后续任务接取。",
+    "《哈米亚的请求》本集只完成击杀和取钥匙阶段，未在土堆最终交付。",
+    "58级由普通战斗经验触发，不是交任务触发。",
+    "第26集信息来自当前页面合集状态；本轮未导航、播放、截图或处理第26集。"
+  ]
+}

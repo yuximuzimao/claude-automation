@@ -1,0 +1,105 @@
+{
+  "episode": 38,
+  "title": "北风苔原72.5",
+  "bvid": "BV19NrhByEMe",
+  "duration_seconds": 3081,
+  "display_duration": "51:21",
+  "series_index": "38/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 52,
+      "fine20_a": 78,
+      "fine20_b": 77,
+      "fine5_a": 65,
+      "fine5_b": 79,
+      "fine5_c": 54,
+      "fine5_d": 62,
+      "fine5_e": 42
+    },
+    "formal_total": 509,
+    "manifest_count": 8,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_range": "episode_metadata",
+      "level": 72.5,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "标题为北风苔原72.5；本集未捕获清晰玩家等级数字或升级祝贺消息。"
+    },
+    {
+      "time_range": "next_episode_metadata",
+      "level": 73,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "下一集合集标题为北风苔原73，只作为系列连续性元数据。"
+    }
+  ],
+  "events": [
+    {"time_range":"01:00 approx","action":"complete_and_accept_next","quest_id":11650,"quest_name":"还要一些东西……","experience_shown":40200,"next_quest_id":11653,"next_quest_name":"大块头","confidence":"high"},
+    {"time_range":"05:00 approx","action":"complete_and_accept_next","quest_id":11653,"quest_name":"大块头","experience_shown":40200,"next_quest_id":11658,"next_quest_name":"B计划","confidence":"high"},
+    {"time_range":"10:45 approx","action":"complete_and_accept_next","quest_id":11725,"quest_name":"寻找“尾旋”","experience_shown":4000,"next_quest_id":11726,"next_quest_name":"一点辣椒","confidence":"high"},
+    {"time_range":"13:30-14:10","action":"complete_and_accept_next","quest_id":11726,"quest_name":"一点辣椒","experience_shown":40200,"next_quest_id":11728,"next_quest_name":"狼的排泄物","confidence":"high"},
+    {"time_range":"20:05-20:30","action":"complete_and_accept_next","quest_id":11728,"quest_name":"狼的排泄物","experience_shown":40200,"next_quest_id":11795,"next_quest_name":"紧急情况守则：第8章，第2节，第3段","confidence":"high"},
+    {"time_range":"21:50-22:00","action":"complete_and_accept_next","quest_id":11795,"quest_name":"紧急情况守则：第8章，第2节，第3段","experience_calibrated":40200,"next_quest_id":11796,"next_quest_name":"紧急情况守则：第8章，第2节，第4段","confidence":"high_for_completion_and_chain_calibrated_for_experience"},
+    {"time_range":"24:00-24:55","action":"complete_and_accept_next","quest_id":11796,"quest_name":"紧急情况守则：第8章，第2节，第4段","experience_shown":40200,"next_quest_id":11873,"next_quest_name":"通知菲兹兰克","confidence":"high"},
+    {"time_range":"26:25-26:40","action":"complete_and_accept_next","quest_id":11788,"quest_name":"左膀右臂","experience_shown":50300,"next_quest_id":11798,"next_quest_name":"机甲专家麦卡佐德","confidence":"high"},
+    {"time_range":"26:45-27:15","action":"complete","quest_id":11730,"quest_name":"主与仆","experience_shown":50300,"confidence":"high"},
+    {"time_range":"27:20-28:25","action":"complete_and_accept_next","quest_id":11873,"quest_name":"通知菲兹兰克","experience_shown":50300,"next_quest_id":11713,"next_quest_name":"侦查虫孔","confidence":"high"},
+    {"time_range":"30:45-32:15","action":"complete_and_accept_next","quest_id":11658,"quest_name":"B计划","experience_shown":40200,"next_quest_id":11670,"next_quest_name":"是兽人干的！真的！","confidence":"high"},
+    {"time_range":"40:35-40:45","action":"complete","quest_id":11670,"quest_name":"是兽人干的！真的！","experience_shown":50800,"confidence":"high"},
+    {"time_range":"40:50-41:20","action":"complete","quest_id":11673,"quest_name":"带我出去！","experience_shown":50800,"confidence":"high"},
+    {"time_range":"44:20-46:00","action":"objective_complete_not_turnin","quest_id":11798,"quest_name":"机甲专家麦卡佐德","objectives":["研究机甲专家的手册 1/1","获得麦卡佐德的徽记"],"state":"ready_to_turn_in","confidence":"high"},
+    {"time_range":"by 47:25","action":"objective_complete_not_turnin","quest_id":11713,"quest_name":"侦查虫孔","objective":"三个虫孔位置均已标记，追踪状态转为返回菲兹兰克机场","state":"ready_to_turn_in","confidence":"high"},
+    {"time_range":"48:00 approx","action":"complete_and_accept_next","quest_id":11692,"quest_name":"寻找比希","experience_shown":4000,"next_quest_id":11693,"next_quest_name":"好极了……天灾猛犸人！","confidence":"high"},
+    {"time_range":"51:05-51:15","action":"complete_and_accept_next","quest_id":11693,"quest_name":"好极了……天灾猛犸人！","experience_calibrated":40200,"next_quest_id":11694,"next_quest_name":"山洞中的瘟疫","confidence":"high_for_chain_not_direct_system_completion","evidence_note":"11693交付窗口出现；随后11693从任务列表消失、11694出现；Questie确认11694严格前置为11693。"}
+  ],
+  "completed_quests": [11650,11653,11725,11726,11728,11795,11796,11788,11730,11873,11658,11670,11673,11692,11693],
+  "completed_quest_count": 15,
+  "calibrated_completed_quest_xp_total": 582100,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":11798,"quest_name":"机甲专家麦卡佐德","state":"本集已完成研究手册与徽记目标，追踪状态要求回菲兹兰克机场；未见最终交付，优先在第39集核验。"},
+    {"quest_id":11713,"quest_name":"侦查虫孔","state":"本集已完成三个虫孔标记，追踪状态要求回菲兹兰克机场；未见最终交付，优先在第39集核验。"},
+    {"quest_id":11694,"quest_name":"山洞中的瘟疫","state":"片尾由11693严格后续开启，本集尚未完成。"},
+    {"quest_id":11938,"quest_name":"争取时间","state":"第37集遗留；本集无完成或放弃证据。"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"更早遗留；本集无最终交付证据。"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"更早遗留；本集无直接任务名完成证据，不能与11730主与仆混同。"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":10004,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9900,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9925,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9882,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9937,"state":"联盟版本；更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9869,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":10810,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9962,"state":"此前明确失败；是否保留或放弃仍不确认。"}
+  ],
+  "closed_from_previous_unresolved": [11650,11730,11692],
+  "next_episode": {
+    "episode": 39,
+    "title": "北风苔原73",
+    "bvid": "BV1fdraBbE9B",
+    "duration_seconds": 2709,
+    "duration": "45:09",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 15,
+  "notes": [
+    "本集没有直接玩家等级证据，72.5与下一集73只作系列连续性元数据。",
+    "第37集遗留11650还要一些东西、11730主与仆、11692寻找比希均在本集闭环；11938争取时间仍无完成或放弃证据。",
+    "11798机甲专家麦卡佐德和11713侦查虫孔均已完成目标但尚未最终交付，必须作为第39集高优先级连续性任务。",
+    "11693好极了……天灾猛犸人！的最终完成由交付窗口、任务列表变化和11694严格前置共同确认，未捕获单独系统完成聊天，因此经验用Questie×2校准。",
+    "第39集只从当前合集状态只读查询元数据，未导航、播放、截图或处理。"
+  ]
+}

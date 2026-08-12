@@ -1,0 +1,397 @@
+{
+  "episode": 32,
+  "title": "纳格兰 67",
+  "bvid": "BV14aiSB3EJ6",
+  "duration_seconds": 3572.885333,
+  "playlist_duration_seconds": 3574,
+  "display_duration": "59:34",
+  "series_index": "32/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 60,
+      "fine20_a": 40,
+      "fine20_b": 40,
+      "fine20_c": 40,
+      "fine20_d": 40,
+      "fine20_e": 19,
+      "refined_forge_open": 23,
+      "refined_forge_turnin": 63,
+      "refined_ancestor": 48,
+      "refined_midturn": 33,
+      "refined_telaar": 61,
+      "refined_tail": 54,
+      "refined_final1s": 45
+    },
+    "formal_total": 566,
+    "manifest_count": 13,
+    "all_formal_batches_verified_paused": true,
+    "diagnostic_derivative_images_excluded": true
+  },
+  "starting_evidence": {
+    "level": 66,
+    "basis": "第31集约51:50完成9819《被折磨的地灵》后有明确66级升级证据。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "22000/11000",
+      "22600/11300",
+      "23300/11650",
+      "28300/14150",
+      "29200/14600"
+    ]
+  },
+  "discoveries": [
+    {
+      "time_range": "17:08-17:20",
+      "name": "铸魔营地：仇恨",
+      "experience_shown_approx": 1130,
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:20-27:52",
+      "name": "日泉岗哨",
+      "experience_shown_approx": 1100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "34:56",
+      "name": "先祖之地",
+      "experience_shown_approx": 1130,
+      "confidence": "high"
+    },
+    {
+      "time_range": "52:44-53:00",
+      "name": "氏族岗哨",
+      "experience_shown": 1080,
+      "confidence": "high"
+    }
+  ],
+  "events": [
+    {
+      "time_range": "17:08-17:20",
+      "action": "complete_and_accept_next",
+      "quest_id": 9991,
+      "quest_name": "侦查大地",
+      "experience_shown_approx": 6100,
+      "next_quest_id": 9999,
+      "next_quest_name": "争取时间",
+      "confidence": "high"
+    },
+    {
+      "time_range": "26:40-27:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 9999,
+      "quest_name": "争取时间",
+      "experience_shown": 24000,
+      "next_quest_id": 10001,
+      "next_quest_name": "主规划师",
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:20-27:52",
+      "action": "complete_and_accept_next",
+      "quest_id": 10001,
+      "quest_name": "主规划师",
+      "experience_shown": 24000,
+      "next_quest_id": 10004,
+      "next_quest_name": "耐心与理解",
+      "items_obtained": [
+        "主规划师的蓝图"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "35:40",
+      "action": "accept",
+      "quest_id": 9900,
+      "quest_name": "加瓦克希",
+      "confidence": "high"
+    },
+    {
+      "time_range": "35:44-36:12",
+      "action": "accept",
+      "quest_id": 9925,
+      "quest_name": "安全问题",
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:32-37:20",
+      "action": "accept",
+      "quest_id": 9882,
+      "quest_name": "偷盗贼的东西……能算偷么？",
+      "confidence": "high"
+    },
+    {
+      "time_range": "36:56-37:28",
+      "action": "accept",
+      "quest_id": 9914,
+      "quest_name": "象牙生意",
+      "confidence": "high"
+    },
+    {
+      "time_range": "39:12-40:00",
+      "action": "complete",
+      "quest_id": 9914,
+      "quest_name": "象牙生意",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "50:48",
+      "action": "complete",
+      "quest_id": 9956,
+      "quest_name": "不幸的商队",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:00",
+      "action": "complete",
+      "quest_id": 9935,
+      "quest_name": "通缉：巫婆吉塞尔达",
+      "faction_variant": "Alliance",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:00",
+      "action": "complete",
+      "quest_id": 9939,
+      "quest_name": "通缉：顾问佐尔布",
+      "faction_variant": "Alliance",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:04",
+      "action": "complete",
+      "quest_id": 10476,
+      "quest_name": "强悍的敌人",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:28",
+      "action": "complete_and_accept_new",
+      "quest_id": 9874,
+      "quest_name": "阻止污染",
+      "experience_shown": 23300,
+      "new_quest_id": 9937,
+      "new_quest_name": "通缉：饥饿者杜恩",
+      "faction_variant": "Alliance",
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:32-51:40",
+      "action": "complete_and_accept_next",
+      "quest_id": 9921,
+      "quest_name": "火刃废墟",
+      "experience_shown": 22000,
+      "next_quest_id": 9922,
+      "next_quest_name": "纳格兰的峡谷",
+      "confidence": "high"
+    },
+    {
+      "time_range": "52:44-53:00",
+      "action": "complete",
+      "quest_id": 9878,
+      "quest_name": "解决问题",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "52:44-53:00",
+      "action": "accept",
+      "quest_id": 10109,
+      "quest_name": "我想要这些鸟蛋！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:48-56:52",
+      "action": "complete",
+      "quest_id": 9851,
+      "quest_name": "狩猎裂蹄牛",
+      "stage": 3,
+      "experience_shown": 29200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:00-57:08",
+      "action": "complete",
+      "quest_id": 9859,
+      "quest_name": "狩猎塔布羊",
+      "stage": 3,
+      "experience_shown": 28300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:08",
+      "action": "level_up",
+      "from_level": 66,
+      "level": 67,
+      "trigger_quest_id": 9859,
+      "trigger_quest_name": "狩猎塔布羊",
+      "evidence": [
+        "9859完成并显示28300经验后立即出现属性增长",
+        "在下一项9856仍显示完成按钮时，前一系统消息序列明确显示获得一个天赋点",
+        "9856直到之后才完成"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:16-57:32",
+      "action": "complete",
+      "quest_id": 9856,
+      "quest_name": "狩猎风鹏",
+      "stage": 3,
+      "experience_shown": 29200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "57:32-58:28",
+      "action": "accept",
+      "quest_id": 9852,
+      "quest_name": "终极挑战",
+      "confidence": "high"
+    },
+    {
+      "time_range": "58:52-59:20",
+      "action": "complete_and_accept_next",
+      "quest_id": 9805,
+      "quest_name": "伊森拉图斯的祝福",
+      "experience_shown": 22000,
+      "next_quest_id": 9810,
+      "next_quest_name": "污染的灵魂",
+      "confidence": "high"
+    },
+    {
+      "time_range": "59:04-59:22",
+      "action": "complete",
+      "quest_id": 9862,
+      "quest_name": "暗血腐蚀者",
+      "experience_shown": 23300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "59:24-59:28",
+      "action": "complete_and_open_next",
+      "quest_id": 9821,
+      "quest_name": "吞食诅咒",
+      "experience_shown": 22600,
+      "next_quest_id": 9849,
+      "next_quest_name": "打碎外壳",
+      "next_acceptance_confirmed": false,
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "from_level": 66,
+      "to_level": 67,
+      "time_range": "57:08",
+      "trigger_quest_id": 9859,
+      "trigger_quest_name": "狩猎塔布羊",
+      "confidence": "high",
+      "note": "未清晰捕获完整的升到67级句子，但任务完成、属性增长、天赋点和下一任务尚未完成的连续画面足以锁定触发来源。"
+    }
+  ],
+  "completed_quests": [
+    9991,
+    9999,
+    10001,
+    9914,
+    9956,
+    9935,
+    9939,
+    10476,
+    9874,
+    9921,
+    9878,
+    9851,
+    9859,
+    9856,
+    9805,
+    9862,
+    9821
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 10004,
+      "quest_name": "耐心与理解",
+      "state": "已接取，未捕获交付证据。"
+    },
+    {
+      "quest_id": 9900,
+      "quest_name": "加瓦克希",
+      "state": "已接取，未捕获交付证据。"
+    },
+    {
+      "quest_id": 9925,
+      "quest_name": "安全问题",
+      "state": "已接取，未捕获交付证据。"
+    },
+    {
+      "quest_id": 9882,
+      "quest_name": "偷盗贼的东西……能算偷么？",
+      "state": "已接取，未捕获交付证据。"
+    },
+    {
+      "quest_id": 9937,
+      "quest_name": "通缉：饥饿者杜恩",
+      "state": "联盟版本，已接取，目标未完成。"
+    },
+    {
+      "quest_id": 9922,
+      "quest_name": "纳格兰的峡谷",
+      "state": "已接取，目标未完成。"
+    },
+    {
+      "quest_id": 10109,
+      "quest_name": "我想要这些鸟蛋！",
+      "state": "已接取，目标未完成。"
+    },
+    {
+      "quest_id": 9852,
+      "quest_name": "终极挑战",
+      "state": "已接取，塔丝克之心0/1。"
+    },
+    {
+      "quest_id": 9810,
+      "quest_name": "污染的灵魂",
+      "state": "片尾新接取，目标未完成。"
+    },
+    {
+      "quest_id": 9869,
+      "quest_name": "元素王座",
+      "state": "第31集接受明确；第31—32集均未捕获独立最终奖励或明确完成提示。"
+    },
+    {
+      "quest_id": 9849,
+      "quest_name": "打碎外壳",
+      "state": "后续任务窗口已打开，但接受未确认。"
+    }
+  ],
+  "next_episode": {
+    "episode": 33,
+    "title": "纳格兰 68",
+    "bvid": "BV1dziXBAEjY",
+    "duration_seconds": 4425,
+    "duration": "1:13:45",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 21,
+  "notes": [
+    "三条奈辛瓦里狩猎链每一阶段名称相同，必须用任务ID区分。",
+    "66到67由9859《狩猎塔布羊》第三阶段触发；属性与天赋点出现在9856完成之前。",
+    "9935、9939和9937均为联盟版本。",
+    "9900、9925、9882只有接取证据，不能因追踪栏消失而判完成。",
+    "9805与9862在片尾重叠交付，1秒加密帧确认两者分别为22000和23300经验。",
+    "9821明确完成；9849只确认打开任务窗口，未确认接受。",
+    "9869《元素王座》仍缺少独立最终交付证据。",
+    "第33集信息来自合集状态；本轮未导航、播放、截图或处理第33集。"
+  ]
+}

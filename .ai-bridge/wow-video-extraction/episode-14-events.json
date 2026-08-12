@@ -1,0 +1,56 @@
+{
+  "episode": 14,
+  "title": "奥达曼 38",
+  "bvid": "BV1o8vkBvEAc",
+  "duration_seconds": 1393,
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 24,
+    "fine_10_seconds": 39,
+    "fine_5_seconds": 41,
+    "total": 104,
+    "all_verified_paused": true
+  },
+  "segments": [
+    {"time_range":"00:00-18:20","type":"dungeon_combat","location":"奥达曼","quest_actions_detected":false},
+    {"time_range":"18:20-19:50","type":"travel_and_exploration","location":"荆棘谷至藏宝海湾"},
+    {"time_range":"19:50-23:13","type":"quest_batching","location":"藏宝海湾"}
+  ],
+  "events": [
+    {"time_range":"19:50-20:10","action":"accept","quest_id":614,"quest_name":"船长的箱子","confidence":"high"},
+    {"time_range":"20:00-20:10","action":"accept","quest_id":595,"quest_name":"血帆海盗","objective":"侦察藏宝海湾北边海滩","confidence":"high"},
+    {"time_range":"20:10-20:20","action":"accept","quest_id":605,"quest_name":"歌唱水晶碎片","confidence":"high"},
+    {"time_range":"20:10-20:25","action":"accept","quest_id":621,"quest_name":"赞吉尔的秘密","confidence":"high"},
+    {"time_range":"20:25-20:40","action":"complete","quest_id":210,"quest_name":"克拉兹克的烹调锅","confidence":"high"},
+    {"time_range":"20:25-20:40","action":"accept","quest_id":627,"quest_name":"克拉兹克的要求","confidence":"high"},
+    {"time_range":"20:25-20:40","action":"held_objective_complete_not_turnin","quest_id":201,"quest_name":"调查营地","confidence":"high"},
+    {"time_range":"20:25-20:40","action":"accept","quest_id":198,"quest_name":"列兵索尔森的补给物资","confidence":"high"},
+    {"time_range":"20:25-20:40","action":"accept","quest_id":189,"quest_name":"血顶巨魔的耳朵","confidence":"high"},
+    {"time_range":"20:30-20:40","action":"accept","quest_id":616,"quest_name":"幽灵岛","confidence":"high"},
+    {"time_range":"21:20-21:50","action":"accept","quest_id":606,"quest_name":"吓唬病鬼","confidence":"high"},
+    {"time_range":"22:15-22:30","action":"abandon","quest_id":621,"quest_name":"赞吉尔的秘密","reason_visible":"任务日志25/25，需要腾出任务栏位置","confidence":"high"},
+    {"time_range":"22:55-23:05","action":"accept","quest_id":617,"quest_name":"一捆海蛇草","confidence":"high"}
+  ],
+  "explicitly_held_at_episode_end": [
+    {"quest_id":595,"quest_name":"血帆海盗"},
+    {"quest_id":605,"quest_name":"歌唱水晶碎片"},
+    {"quest_id":614,"quest_name":"船长的箱子"},
+    {"quest_id":627,"quest_name":"克拉兹克的要求"},
+    {"quest_id":201,"quest_name":"调查营地","note":"目标完成但尚未交付"},
+    {"quest_id":198,"quest_name":"列兵索尔森的补给物资"},
+    {"quest_id":189,"quest_name":"血顶巨魔的耳朵"},
+    {"quest_id":616,"quest_name":"幽灵岛"},
+    {"quest_id":606,"quest_name":"吓唬病鬼"},
+    {"quest_id":617,"quest_name":"一捆海蛇草","note":"第15集再次出现接取提示，跨集状态冲突"}
+  ],
+  "explicitly_abandoned": [
+    {"quest_id":621,"quest_name":"赞吉尔的秘密"}
+  ],
+  "cross_episode_corrections": [
+    "调查营地在第15集完成",
+    "幽灵岛在第15集完成",
+    "海潮之石在第15集由幽灵岛解锁"
+  ],
+  "uldaman_finding": "本集未检测到奥达曼专属任务的接取、目标完成或交付；副本内追踪栏显示的是上一集遗留的荆棘谷任务。"
+}

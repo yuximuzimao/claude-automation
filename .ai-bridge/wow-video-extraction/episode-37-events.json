@@ -1,0 +1,105 @@
+{
+  "episode": 37,
+  "title": "北风苔原 魔枢 72",
+  "bvid": "BV1DQrhBVEQA",
+  "duration_seconds": 2605,
+  "display_duration": "43:25",
+  "series_index": "37/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 45,
+      "fine20_a": 66,
+      "fine20_b": 65,
+      "fine5_a": 28,
+      "fine5_b": 46,
+      "fine5_c": 40,
+      "fine5_d": 45
+    },
+    "formal_total": 335,
+    "manifest_count": 7,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "nexus_turnin_npcs": {
+      "11905": {"npc_id": 25314, "npc_name": "大法师伯林纳德"},
+      "11911": {"npc_id": 25314, "npc_name": "大法师伯林纳德"},
+      "13094": {"npc_id": 26110, "npc_name": "图书馆员塞尔拉"}
+    }
+  },
+  "level_evidence": [
+    {
+      "time_range": "episode_metadata",
+      "level": 72,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "标题为北风苔原 魔枢72；本集未捕获清晰72级角色面板或升级祝贺消息。"
+    },
+    {
+      "time_range": "next_episode_metadata",
+      "level": 72.5,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "下一集合集标题为北风苔原72.5，只作为系列连续性元数据。"
+    }
+  ],
+  "events": [
+    {"time_range":"04:20 approx","action":"complete","quest_id":11645,"quest_name":"恶心的雪地狗头人！","experience_shown":40200,"confidence":"high"},
+    {"time_range":"04:35-04:50","action":"accept","quest_id":11650,"quest_name":"还要一些东西……","confidence":"high"},
+    {"time_range":"17:40 approx","action":"complete_and_accept_next","quest_id":11944,"quest_name":"我们被包围了！","experience_shown":40600,"next_quest_id":12088,"next_quest_name":"死亡骑士萨萨里安","confidence":"high"},
+    {"time_range":"17:55-18:00","action":"complete","quest_id":12088,"quest_name":"死亡骑士萨萨里安","experience_shown":10200,"confidence":"high"},
+    {"time_range":"19:20 approx","action":"complete","quest_id":11956,"quest_name":"寻找护命匣","experience_shown":40200,"accept_time_confirmed":false,"confidence":"high_for_completion"},
+    {"time_range":"20:20 approx","action":"accept","quest_id":11938,"quest_name":"争取时间","confidence":"high"},
+    {"time_range":"24:00-24:40","action":"objective_complete_not_turnin","quest_id":13094,"quest_name":"他们丝毫不感到羞愧吗？","objective":"取得伯林纳德的研究笔记","faction_variant":"Alliance","confidence":"high"},
+    {"time_range":"31:20 approx","action":"objective_complete_not_turnin","quest_id":11905,"quest_name":"延缓灾难","objective":"1/1 延缓空间裂隙的形成","confidence":"high"},
+    {"time_range":"34:00-34:40","action":"objective_complete_not_turnin","quest_id":11911,"quest_name":"苏醒","objective":"奥术古树碎片 5/5","confidence":"high"},
+    {"time_range":"39:40-39:50","action":"complete_and_accept_next","quest_id":11729,"quest_name":"超声波螺丝刀","experience_shown":4000,"next_quest_id":11730,"next_quest_name":"主与仆","confidence":"high"},
+    {"time_range":"39:50-40:00","action":"complete_and_accept_next","quest_id":11710,"quest_name":"转换器怎么了？","experience_shown":40200,"next_quest_id":11692,"next_quest_name":"寻找比希","confidence":"high"},
+    {"time_range":"40:05-40:20","action":"complete","quest_id":11712,"quest_name":"物质转换注射器","experience_shown":40200,"confidence":"high"},
+    {"time_range":"41:35-41:50","action":"complete_pair_order_not_stable","quest_ids":[11905,11911],"quest_names":["延缓灾难","苏醒"],"experience_calibrated_each":80400,"turnin_npc_id":25314,"turnin_npc_name":"大法师伯林纳德","confidence":"high_for_both_completed_order_not_stable"},
+    {"time_range":"41:50-42:15","action":"complete","quest_id":13094,"quest_name":"他们丝毫不感到羞愧吗？","faction_variant":"Alliance","experience_shown":80400,"turnin_npc_id":26110,"turnin_npc_name":"图书馆员塞尔拉","confidence":"high"}
+  ],
+  "completed_quests": [11645,11944,12088,11956,11729,11710,11712,11905,11911,13094],
+  "completed_quest_count": 10,
+  "calibrated_completed_quest_xp_total": 456800,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":11650,"quest_name":"还要一些东西……","state":"本集约04:35-04:50接取；片尾仍可见超载电容器0/1，未闭环。"},
+    {"quest_id":11938,"quest_name":"争取时间","state":"本集约20:20接取；片尾仍显示消灭恩其拉中的天灾目标，未完成。"},
+    {"quest_id":11730,"quest_name":"主与仆","state":"11729完成后接取；片尾多个机器人目标仍未完成。"},
+    {"quest_id":11692,"quest_name":"寻找比希","state":"11710完成后接取；片尾未完成。"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"第36集遗留的后续/重复版本；本集无最终交付证据。"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"更早遗留；本集追踪栏仍出现机器人重新装配相关目标，无最终完成证据。"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":10004,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9900,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9925,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9882,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9937,"state":"联盟版本；更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9869,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":10810,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9962,"state":"此前明确失败；是否保留或放弃仍不确认。"}
+  ],
+  "closed_from_previous_unresolved": [11645,11710,11712,11905,11911,13094],
+  "next_episode": {
+    "episode": 38,
+    "title": "北风苔原72.5",
+    "bvid": "BV19NrhByEMe",
+    "duration_seconds": 3081,
+    "duration": "51:21",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 16,
+  "notes": [
+    "本集没有直接72级玩家等级证据，标题只能作为系列连续性元数据。",
+    "第36集留下的11905延缓灾难、11911苏醒、联盟版13094他们丝毫不感到羞愧吗在本集均先完成副本目标、后于片尾最终交付，已全部闭环。",
+    "11905和11911在大法师伯林纳德处连续交付，但OCR无法稳定区分两者具体先后顺序，因此事件结构保留为双任务连续完成而不强行排序。",
+    "第38集只从当前合集状态只读查询元数据，未导航、播放、截图或处理。"
+  ]
+}

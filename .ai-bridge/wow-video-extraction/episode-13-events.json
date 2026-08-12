@@ -1,0 +1,46 @@
+{
+  "episode": 13,
+  "title": "荆棘谷 36-37",
+  "bvid": "BV1U5ByBNEKP",
+  "duration_seconds": 3193,
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 54,
+    "fine": 75,
+    "all_verified_paused": true
+  },
+  "events": [
+    {"time_range":"02:00-02:20","action":"complete","quest_id":514,"quest_name":"铁炉堡的译码者","confidence":"high"},
+    {"time_range":"02:10-02:30","action":"accept","quest_id":525,"quest_name":"更大的谜团","confidence":"high"},
+    {"time_range":"10:50","action":"objective_complete_not_turnin","quest_id":201,"quest_name":"调查营地","confidence":"high"},
+    {"time_range":"10:50-11:40","action":"accept","quest_id":203,"quest_name":"以彼之道还施彼身","confidence":"high"},
+    {"time_range":"10:50-11:40","action":"accept","quest_id":204,"quest_name":"库尔森的药物","confidence":"high"},
+    {"time_range":"11:00-11:40","action":"accept","quest_id":210,"quest_name":"克拉兹克的烹调锅","confidence":"high"},
+    {"time_range":"11:50-12:30","action":"complete","quest_id":583,"quest_name":"欢迎来到丛林","confidence":"high"},
+    {"time_range":"12:00-14:00","action":"accept","quest_id":185,"quest_name":"猎虎","objective":"杀10只荆棘谷猛虎幼崽","confidence":"high"},
+    {"time_range":"12:00-14:00","action":"accept","quest_id":190,"quest_name":"猎豹","objective":"杀10只猎豹幼崽","confidence":"high"},
+    {"time_range":"12:00-14:00","action":"accept","quest_id":194,"quest_name":"猎龙","objective":"杀10只荆棘谷迅猛龙","confidence":"high"},
+    {"time_range":"12:10-14:00","action":"accept","quest_id":338,"quest_name":"荆棘谷的青山","confidence":"high"},
+    {"time_range":"12:10-14:00","action":"accept","quest_id":339,"quest_name":"荆棘谷的青山 - 第一章","confidence":"high"},
+    {"time_range":"12:10-14:00","action":"accept","quest_id":340,"quest_name":"荆棘谷的青山 - 第二章","confidence":"high"},
+    {"time_range":"12:10-14:00","action":"accept","quest_id":341,"quest_name":"荆棘谷的青山 - 第三章","confidence":"high"},
+    {"time_range":"12:10-14:00","action":"accept","quest_id":342,"quest_name":"荆棘谷的青山 - 第四章","confidence":"high"},
+    {"time_range":"29:10-30:10","action":"complete","quest_id":203,"quest_name":"以彼之道还施彼身","confidence":"high"},
+    {"time_range":"29:10-30:10","action":"complete","quest_id":204,"quest_name":"库尔森的药物","confidence":"high"},
+    {"time_range":"29:20-30:20","action":"accept","quest_id":574,"quest_name":"特种部队","confidence":"high"},
+    {"time_range":"29:30-31:00","action":"accept","quest_id":207,"quest_name":"库尔森的秘密","confidence":"high"},
+    {"time_range":"29:00-30:30","action":"complete_then_accept_next","quest_id":185,"next_quest_id":186,"quest_name":"猎虎","confidence":"medium_high"},
+    {"time_range":"29:30-30:50","action":"complete_then_accept_next","quest_id":190,"next_quest_id":191,"quest_name":"猎豹","confidence":"high"},
+    {"time_range":"41:10-42:30","action":"complete_then_accept_next","quest_id":186,"next_quest_id":187,"quest_name":"猎虎","confidence":"high"},
+    {"time_range":"41:10-42:40","action":"complete_then_accept_next","quest_id":191,"next_quest_id":192,"quest_name":"猎豹","confidence":"high"},
+    {"time_range":"41:10-42:40","action":"complete_then_accept_next","quest_id":194,"next_quest_id":195,"quest_name":"猎龙","confidence":"high"},
+    {"time_range":"49:50-50:20","action":"complete","quest_id":574,"quest_name":"特种部队","confidence":"high"},
+    {"time_range":"49:50-50:30","action":"accept","quest_id":202,"quest_name":"库尔森上校","confidence":"high"}
+  ],
+  "explicitly_incomplete_at_episode_end": [
+    {"quest_id":207,"quest_name":"库尔森的秘密"},
+    {"quest_id":202,"quest_name":"库尔森上校"}
+  ],
+  "tracker_warning": "右侧目标数量只表示当前追踪目标，不等于完整任务日志。"
+}

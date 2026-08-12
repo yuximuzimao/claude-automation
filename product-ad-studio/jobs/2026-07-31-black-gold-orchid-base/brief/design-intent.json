@@ -1,0 +1,71 @@
+{
+  "objective": "生成一张无文案、无独立 Logo 的钥黑黑金兰花基底图：真实三件套产品置于黑色台面，主体大幅放大撑满画面，以轻微仰视制造强烈视觉冲击，同时保持黑色产品清晰、真实、可识别。",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait",
+    "aspect_ratio": "9:16"
+  },
+  "asset_ids": [
+    "yaohei-set-three-primary",
+    "yaohei-ref-black-gold-03",
+    "yaohei-ref-black-gold-04"
+  ],
+  "input_roles": {
+    "yaohei-set-three-primary": "product_set",
+    "yaohei-ref-black-gold-03": "style_reference",
+    "yaohei-ref-black-gold-04": "style_reference",
+    "chat_attachment_file_0000000011d8822f971afb0898f71581": "style_reference"
+  },
+  "reference_attachment": {
+    "file_id": "file_0000000011d8822f971afb0898f71581",
+    "sandbox_name": "69ce065ecfe71e4be5c285fee112105e.jpg",
+    "role": "style_reference",
+    "local_archive_status": "not_imported",
+    "usage": "仅提取黑金色调、巨大黑兰花、暖金边缘光、细腻金粉、近距离主体放大和微仰视冲击感"
+  },
+  "content_hierarchy": [
+    "钥黑三件套产品是唯一一级主体，整体占据画面主要面积",
+    "黑色台面负责承托、接触阴影和轻微倒影",
+    "巨大黑兰花作为二级背景形态，不得压过产品",
+    "少量金粉和暖金轮廓光仅作为三级氛围细节"
+  ],
+  "layout_freedom": "high",
+  "product_constraints": {
+    "preserve_geometry": true,
+    "preserve_relative_scale": true,
+    "avoid_perspective": true,
+    "protect_logo": true,
+    "protect_signature_features": true,
+    "partial_overlap_allowed": true,
+    "no_packaging_regeneration": true,
+    "product_fill_target": "产品组视觉占画面宽度约 88% 至 96%，顶部与底部允许接近画布边缘但不得裁掉关键轮廓",
+    "camera": "轻微仰视，仰角克制，不造成瓶体形变"
+  },
+  "style_features": [
+    "高级黑金主色调",
+    "深黑背景中带暖金渐变和局部逆光",
+    "一朵巨大黑兰花占据大面积背景",
+    "黑兰花花瓣边缘有极细、柔和的金色轮廓光",
+    "空气中只有少量细腻金粉",
+    "黑色台面带克制的接触反射与微弱倒影",
+    "产品居中偏下并大幅放大，近距离英雄视角",
+    "产品通过主光、辅光、边缘高光和局部反射建立黑中有层次的质感",
+    "奢华、沉稳、神秘、克制，不做廉价炫光"
+  ],
+  "forbidden_reference_elements": [
+    "watermark",
+    "account_name",
+    "other_brand_logo",
+    "other_brand_product",
+    "other_brand_packaging_text",
+    "reference_image_exact_composition",
+    "dense_gold_particles",
+    "cheap_lens_flare",
+    "decorative_polygon",
+    "product_geometry_change",
+    "generated_packaging_text"
+  ],
+  "exact_copy": [],
+  "open_questions": []
+}

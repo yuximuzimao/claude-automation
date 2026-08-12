@@ -1,0 +1,57 @@
+{
+  "episode": 16,
+  "title": "荆棘谷 41 大号来复仇",
+  "bvid": "BV1oRvpB2Euw",
+  "duration_seconds": 4076,
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 69,
+    "fine_10_start": 49,
+    "fine_10_mid_a": 49,
+    "fine_5_level": 33,
+    "fine_20_mid_b": 31,
+    "fine_5_end": 52,
+    "total": 283,
+    "all_verified_paused": true
+  },
+  "events": [
+    {"time_range":"02:20-03:00","action":"complete","quest_id":200,"quest_name":"书呆子赫罗德","confidence":"high"},
+    {"time_range":"02:20-03:00","action":"accept","quest_id":328,"quest_name":"隐藏的钥匙","confidence":"high"},
+    {"time_range":"05:20-06:20","action":"complete","quest_id":328,"quest_name":"隐藏的钥匙","confidence":"high"},
+    {"time_range":"05:20-06:20","action":"accept","quest_id":329,"quest_name":"找出内鬼！","confidence":"high"},
+    {"time_range":"07:30-07:40","action":"complete","quest_id":329,"quest_name":"找出内鬼！","confidence":"high"},
+    {"time_range":"07:30-07:40","action":"accept","quest_id":330,"quest_name":"巡逻时间表","confidence":"high"},
+    {"time_range":"07:40-08:00","action":"complete","quest_id":330,"quest_name":"巡逻时间表","confidence":"high"},
+    {"time_range":"07:40-08:00","action":"accept","quest_id":331,"quest_name":"向多伦报告","confidence":"high"},
+    {"time_range":"08:00-08:20","action":"complete","quest_id":331,"quest_name":"向多伦报告","confidence":"high"},
+    {"time_range":"09:50-10:00","action":"objective_complete_not_turnin","quest_id":188,"quest_name":"猎虎","objective":"取得辛达尔的爪子","confidence":"high"},
+    {"time_range":"14:50-16:00","action":"objective_complete_not_turnin","quest_id":601,"quest_name":"水元素","objective":"收集6个水元素护腕","confidence":"high"},
+    {"time_range":"19:50-20:10","action":"objective_complete_not_turnin","quest_id":193,"quest_name":"猎豹","objective":"取得巴尔瑟拉的牙齿","confidence":"high"},
+    {"time_range":"31:00-33:00","action":"objective_complete_not_turnin","quest_id":209,"quest_name":"劈颅巨魔的獠牙","objective":"收集18根劈颅巨魔的獠牙","confidence":"high"},
+    {"time_range":"34:45","action":"level_up","level":41,"confidence":"high"},
+    {"time_range":"35:30-37:30","action":"objective_complete_not_turnin","quest_id":205,"quest_name":"巨魔巫术","objective":"收集4只劈颅巨魔神像","confidence":"high"},
+    {"time_range":"42:40-44:20","action":"objective_complete_not_turnin","quest_id":600,"quest_name":"风险投资公司","objective":"收集10块蓝色歌唱水晶","confidence":"high"},
+    {"time_range":"47:20-47:40","action":"objective_complete_not_turnin","quest_id":196,"quest_name":"猎龙","objective":"杀死10只丛林捕猎者","confidence":"high"},
+    {"time_range":"59:40-60:10","action":"objective_complete_not_turnin","quest_id":617,"quest_name":"一捆海蛇草","objective":"收集10根海蛇草","confidence":"high"},
+    {"time_range":"67:00-67:20","action":"complete","quest_id":600,"quest_name":"风险投资公司","confidence":"high"},
+    {"time_range":"67:20-67:40","action":"complete","quest_id":209,"quest_name":"劈颅巨魔的獠牙","confidence":"high"},
+    {"time_range":"67:25-67:45","action":"complete","quest_id":601,"quest_name":"水元素","confidence":"high"},
+    {"time_range":"67:25-67:45","action":"accept","quest_id":602,"quest_name":"魔法分析","confidence":"high"},
+    {"time_range":"67:40-67:55","action":"complete","quest_id":617,"quest_name":"一捆海蛇草","confidence":"high"},
+    {"time_range":"67:40-67:56","action":"accept","quest_id":623,"quest_name":"一捆海蛇草","objective":"把一束海蛇草带给塞拉摩的海盗格罗伊","confidence":"high"}
+  ],
+  "explicitly_held_at_episode_end": [
+    {"quest_id":188,"quest_name":"猎虎","state":"objective_complete_not_turnin"},
+    {"quest_id":193,"quest_name":"猎豹","state":"objective_complete_not_turnin"},
+    {"quest_id":196,"quest_name":"猎龙","state":"objective_complete_not_turnin"},
+    {"quest_id":205,"quest_name":"巨魔巫术","state":"objective_complete_not_turnin"},
+    {"quest_id":602,"quest_name":"魔法分析"},
+    {"quest_id":623,"quest_name":"一捆海蛇草"},
+    {"quest_id":2864,"quest_name":"特兰雷克","note":"沿用第15集已接取状态"}
+  ],
+  "cross_episode_notes": [
+    "第15集已接取特兰雷克，本集结尾重复可见的接取字样不重复计为新动作。",
+    "第14至15集的一捆海蛇草接取提示冲突，在本集通过完成617并接取后续623闭合。"
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "source_candidates": "data/routes/horde/blood-elf/35-55-candidates.json",
+  "source_constraints": "data/route-specs/35-55-speedrun-constraints.json",
+  "start": {
+    "level": 35,
+    "xp_into_level": 425,
+    "snapshot_status": "pre_quest_195_sync"
+  },
+  "target_level": 55,
+  "xp_to_next_level": {
+    "35": 55000,
+    "36": 58700,
+    "37": 62400,
+    "38": 66200,
+    "39": 70200,
+    "40": 74300,
+    "41": 78500,
+    "42": 82800,
+    "43": 87100,
+    "44": 91600,
+    "45": 96300,
+    "46": 101000,
+    "47": 105800,
+    "48": 110700,
+    "49": 115700,
+    "50": 120900,
+    "51": 126100,
+    "52": 131500,
+    "53": 137000,
+    "54": 142500
+  },
+  "xp_table_source": "AzerothCore 3.3.5 player_xp_for_level reference; level 23/24/35 values match project observations",
+  "exact_reference_gap_from_start": 1913875,
+  "forced_initial_task_ids": [
+    195
+  ],
+  "hard_excluded_task_ids": [
+    196
+  ],
+  "hard_excluded_route_flags": [
+    "dungeon_objective_source"
+  ],
+  "mandatory_zone_placeholders": [
+    {
+      "zone": "菲拉斯",
+      "min_selected_tasks": 1,
+      "reason": "exact screenshot subset missing"
+    },
+    {
+      "zone": "塔纳利斯",
+      "min_selected_tasks": 1,
+      "reason": "exact screenshot subset missing"
+    }
+  ],
+  "profiles": [
+    {
+      "name": "central_strict",
+      "scenario": "central",
+      "include_conditional_triggers": false,
+      "iterations": 60,
+      "risk_mode": "standard",
+      "max_quest_level_gap": 4
+    },
+    {
+      "name": "risk_averse",
+      "scenario": "central",
+      "include_conditional_triggers": false,
+      "iterations": 60,
+      "risk_mode": "risk_averse",
+      "max_quest_level_gap": 3
+    },
+    {
+      "name": "central_with_conditional",
+      "scenario": "central",
+      "include_conditional_triggers": true,
+      "iterations": 60,
+      "risk_mode": "standard",
+      "max_quest_level_gap": 4
+    },
+    {
+      "name": "optimistic_reference",
+      "scenario": "optimistic",
+      "include_conditional_triggers": false,
+      "iterations": 40,
+      "risk_mode": "standard",
+      "max_quest_level_gap": 5
+    }
+  ],
+  "search": {
+    "seed": 20260804,
+    "top_pool": 12,
+    "max_selected_tasks": 320,
+    "keep_per_profile": 8,
+    "random_log_jitter_sigma": 0.28
+  },
+  "risk_multipliers": {
+    "low_confidence": 1.15,
+    "elite_or_rare_target": 1.25,
+    "object_respawn_and_multi_click_unknown": 1.18,
+    "active_item_or_spell_use": 1.1,
+    "item_source_not_in_questie": 1.35,
+    "conditional_trigger": 1.3,
+    "needs_live_test": 1.12,
+    "conditional_stop_loss": 1.18
+  },
+  "limitations": [
+    "standalone travel is not task-block travel",
+    "no quest mutual-exclusion model yet",
+    "mandatory zones are placeholders until screenshot task IDs are restored",
+    "kill XP is not included",
+    "server-specific object multi-click rules are incomplete"
+  ],
+  "source_transport": "data/routes/horde/blood-elf/35-55-transport-edges.json",
+  "hard_excluded_zones": [
+    "Sunken Temple",
+    "黑石山",
+    "地狱火半岛"
+  ],
+  "source_priority_audit": "data/routes/horde/blood-elf/35-55-priority-task-audit.json",
+  "source_overlap_graph": "data/routes/horde/blood-elf/35-55-overlap-graph.json",
+  "audit_tendency_policy": {
+    "exclude_from_current_outdoor_optimizer": "exclude",
+    "defer_until_evidence_or_live_test": "exclude_strict_allow_conditional",
+    "conditional_candidate_with_stop_loss": "risk_penalty",
+    "retain_as_structurally_valid_candidate": "normal"
+  },
+  "overlap_score_multipliers": {
+    "same_kill_npc": 0.72,
+    "same_item_source_npc": 0.76,
+    "kill_and_item_source_same_npc": 0.7,
+    "direct_chain": 0.88,
+    "nearby_objective_cluster": 0.9
+  }
+}

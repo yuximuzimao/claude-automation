@@ -1,0 +1,489 @@
+{
+  "episode": 31,
+  "title": "纳格兰 66",
+  "bvid": "BV1kDiyBXEc7",
+  "duration_seconds": 3261.22633,
+  "playlist_duration_seconds": 3262,
+  "display_duration": "54:22",
+  "series_index": "31/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 55,
+      "fine20_a": 56,
+      "fine20_b": 56,
+      "fine20_c": 52,
+      "refined_open": 71,
+      "refined_telaar": 81,
+      "refined_item": 36,
+      "refined_eye": 71,
+      "refined_midturn": 74,
+      "refined_tail": 132
+    },
+    "formal_total": 684,
+    "manifest_count": 10,
+    "all_formal_batches_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 65,
+    "basis": "第30集约42:28完成9901《遗留事务》后有明确65级升级提示；第31集开场继续该状态。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "22000/11000",
+      "22600/11300",
+      "23300/11650"
+    ]
+  },
+  "discoveries": [
+    {
+      "time_range": "00:06",
+      "name": "风茅小径",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "00:14",
+      "name": "纳格兰",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:18-00:30",
+      "name": "奈辛瓦里狩猎队营地",
+      "experience_shown": 1080,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:18",
+      "name": "塔拉盆地",
+      "experience_shown": 1080,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:06",
+      "name": "天歌湖",
+      "experience_shown": 1080,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:18-12:27",
+      "name": "元素王座",
+      "experience_shown_approx": 1100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "40:24",
+      "name": "基尔索罗堡垒",
+      "experience_shown_approx": 1100,
+      "confidence": "high"
+    }
+  ],
+  "events": [
+    {
+      "time_range": "00:28-00:30",
+      "action": "accept",
+      "quest_id": 9789,
+      "quest_name": "狩猎裂蹄牛",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:32-00:34",
+      "action": "accept",
+      "quest_id": 9854,
+      "quest_name": "狩猎风鹏",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:36-00:40",
+      "action": "accept",
+      "quest_id": 9857,
+      "quest_name": "狩猎塔布羊",
+      "stage": 1,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:21-11:30",
+      "action": "complete_and_accept_next",
+      "quest_id": 9854,
+      "quest_name": "狩猎风鹏",
+      "stage": 1,
+      "experience_shown": 22000,
+      "next_quest_id": 9855,
+      "next_quest_name": "狩猎风鹏",
+      "next_stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:27-11:39",
+      "action": "complete_and_accept_next",
+      "quest_id": 9857,
+      "quest_name": "狩猎塔布羊",
+      "stage": 1,
+      "experience_shown": 22000,
+      "next_quest_id": 9858,
+      "next_quest_name": "狩猎塔布羊",
+      "next_stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:30-12:15",
+      "action": "complete_and_accept_next",
+      "quest_id": 9789,
+      "quest_name": "狩猎裂蹄牛",
+      "stage": 1,
+      "experience_shown": 22600,
+      "next_quest_id": 9850,
+      "next_quest_name": "狩猎裂蹄牛",
+      "next_stage": 2,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:24-12:54",
+      "action": "accept",
+      "quest_id": 9800,
+      "quest_name": "稀有的豆子",
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:24-12:54",
+      "action": "accept",
+      "quest_id": 9815,
+      "quest_name": "潜水",
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:24-12:54",
+      "action": "accept_and_complete_breadcrumb",
+      "quest_id": 9818,
+      "quest_name": "地下的滋扰",
+      "experience_shown": 0,
+      "next_quest_id": 9819,
+      "next_quest_name": "被折磨的地灵",
+      "confidence": "medium_high"
+    },
+    {
+      "time_range": "12:30-12:54",
+      "action": "accept",
+      "quest_id": 9819,
+      "quest_name": "被折磨的地灵",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:24-18:40",
+      "action": "accept_from_quest_item",
+      "quest_id": 9861,
+      "quest_name": "呼嚎之风",
+      "item_id": 24504,
+      "confidence": "high"
+    },
+    {
+      "time_range": "32:18-32:50",
+      "action": "accept",
+      "quest_id": 9917,
+      "quest_name": "是我眼花了？",
+      "confidence": "high"
+    },
+    {
+      "time_range": "37:12-38:03",
+      "action": "complete_and_accept_next",
+      "quest_id": 9917,
+      "quest_name": "是我眼花了？",
+      "experience_shown": 22000,
+      "next_quest_id": 9918,
+      "next_quest_name": "这是我的地盘！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:12-38:24",
+      "action": "complete_and_accept_next",
+      "quest_id": 9918,
+      "quest_name": "这是我的地盘！",
+      "experience_shown": 22000,
+      "next_quest_id": 9920,
+      "next_quest_name": "击碎者姆摩尔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:06",
+      "action": "complete_and_accept_next",
+      "quest_id": 9920,
+      "quest_name": "击碎者姆摩尔",
+      "experience_shown": 0,
+      "next_quest_id": 9921,
+      "next_quest_name": "火刃废墟",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 10476,
+      "quest_name": "强悍的敌人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 9935,
+      "quest_name": "通缉：巫婆吉塞尔达",
+      "faction_variant": "Alliance",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 9939,
+      "quest_name": "通缉：顾问佐尔布",
+      "faction_variant": "Alliance",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 9956,
+      "quest_name": "不幸的商队",
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 9869,
+      "quest_name": "元素王座",
+      "faction_variant": "Alliance",
+      "confidence": "high",
+      "note": "本集没有捕获独立最终奖励或明确完成提示。"
+    },
+    {
+      "time_range": "38:30-39:15",
+      "action": "accept",
+      "quest_id": 9874,
+      "quest_name": "阻止污染",
+      "confidence": "high"
+    },
+    {
+      "time_range": "50:08-50:30",
+      "action": "complete_and_accept_next",
+      "quest_id": 9850,
+      "quest_name": "狩猎裂蹄牛",
+      "stage": 2,
+      "experience_shown": 23300,
+      "next_quest_id": 9851,
+      "next_quest_name": "狩猎裂蹄牛",
+      "next_stage": 3,
+      "confidence": "high"
+    },
+    {
+      "time_range": "50:12-50:50",
+      "action": "complete_and_accept_next",
+      "quest_id": 9855,
+      "quest_name": "狩猎风鹏",
+      "stage": 2,
+      "experience_shown": 23300,
+      "next_quest_id": 9856,
+      "next_quest_name": "狩猎风鹏",
+      "next_stage": 3,
+      "confidence": "high"
+    },
+    {
+      "time_range": "50:50-51:08",
+      "action": "complete_and_accept_next",
+      "quest_id": 9858,
+      "quest_name": "狩猎塔布羊",
+      "stage": 2,
+      "experience_shown": 22600,
+      "next_quest_id": 9859,
+      "next_quest_name": "狩猎塔布羊",
+      "next_stage": 3,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:18-51:28",
+      "action": "complete_and_accept_next",
+      "quest_id": 9861,
+      "quest_name": "呼嚎之风",
+      "experience_shown": 23300,
+      "next_quest_id": 9862,
+      "next_quest_name": "暗血腐蚀者",
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:28-51:40",
+      "action": "complete_and_accept_next",
+      "quest_id": 9800,
+      "quest_name": "稀有的豆子",
+      "experience_shown": 22000,
+      "next_quest_id": 9804,
+      "next_quest_name": "天歌湖的元素",
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:32-51:44",
+      "action": "complete",
+      "quest_id": 9815,
+      "quest_name": "潜水",
+      "experience_shown": 22600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:50-52:02",
+      "action": "complete_and_accept_next",
+      "quest_id": 9819,
+      "quest_name": "被折磨的地灵",
+      "experience_shown": 22000,
+      "next_quest_id": 9821,
+      "next_quest_name": "吞食诅咒",
+      "confidence": "high"
+    },
+    {
+      "time_range": "51:50",
+      "action": "level_up",
+      "level": 66,
+      "trigger_quest_id": 9819,
+      "trigger_quest_name": "被折磨的地灵",
+      "evidence": [
+        "祝贺你，你升到了66级",
+        "最大生命值增加约224",
+        "最大法力值增加约175",
+        "获得一个天赋点",
+        "力量、耐力、智力和精神连续增长"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "54:14-54:20",
+      "action": "complete_and_accept_next",
+      "quest_id": 9804,
+      "quest_name": "天歌湖的元素",
+      "experience_shown": 22000,
+      "next_quest_id": 9805,
+      "next_quest_name": "伊森拉图斯的祝福",
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "from_level": 65,
+      "to_level": 66,
+      "time_range": "51:50",
+      "trigger_quest_id": 9819,
+      "trigger_quest_name": "被折磨的地灵",
+      "confidence": "high"
+    }
+  ],
+  "completed_quests": [
+    9854,
+    9857,
+    9789,
+    9855,
+    9858,
+    9850,
+    9818,
+    9917,
+    9918,
+    9920,
+    9861,
+    9800,
+    9815,
+    9819,
+    9804
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 9856,
+      "quest_name": "狩猎风鹏",
+      "stage": 3,
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9859,
+      "quest_name": "狩猎塔布羊",
+      "stage": 3,
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9851,
+      "quest_name": "狩猎裂蹄牛",
+      "stage": 3,
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9862,
+      "quest_name": "暗血腐蚀者",
+      "state": "片尾仍在追踪栏，目标未完成。"
+    },
+    {
+      "quest_id": 9821,
+      "quest_name": "吞食诅咒",
+      "state": "升级后新接取，目标未完成。"
+    },
+    {
+      "quest_id": 9805,
+      "quest_name": "伊森拉图斯的祝福",
+      "state": "片尾新接取，目标未完成。"
+    },
+    {
+      "quest_id": 9921,
+      "quest_name": "火刃废墟",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 10476,
+      "quest_name": "强悍的敌人",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9935,
+      "quest_name": "通缉：巫婆吉塞尔达",
+      "state": "联盟版本，已接取，未完成。"
+    },
+    {
+      "quest_id": 9939,
+      "quest_name": "通缉：顾问佐尔布",
+      "state": "联盟版本，已接取，未完成。"
+    },
+    {
+      "quest_id": 9956,
+      "quest_name": "不幸的商队",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9874,
+      "quest_name": "阻止污染",
+      "state": "已接取，未完成。"
+    },
+    {
+      "quest_id": 9869,
+      "quest_name": "元素王座",
+      "state": "接受明确；最终交付没有独立奖励窗口或明确完成提示。"
+    }
+  ],
+  "prior_episode_quests_without_new_evidence": [
+    9724,
+    9777,
+    9783,
+    9896,
+    9790,
+    9780,
+    9697,
+    9957
+  ],
+  "next_episode": {
+    "episode": 32,
+    "title": "纳格兰 67",
+    "bvid": "BV14aiSB3EJ6",
+    "duration_seconds": 3574,
+    "duration": "59:34",
+    "processed": false
+  },
+  "notes": [
+    "三条狩猎链每一阶段名称相同，必须用任务ID区分。",
+    "9920《击碎者姆摩尔》和9818《地下的滋扰》均为无经验短引导。",
+    "9935/9939是联盟版本，不能与部落版本9936/9940混用。",
+    "65到66由9819《被折磨的地灵》直接触发，系统明确显示66级和属性增长。",
+    "9869《元素王座》只确认接取，未捕获独立最终交付证据。",
+    "第32集信息来自合集状态；本轮未导航、播放、截图或处理第32集。"
+  ]
+}

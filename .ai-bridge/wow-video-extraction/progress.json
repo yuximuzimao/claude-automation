@@ -1,0 +1,68 @@
+{
+  "project": "wow-quest-route-video-extraction",
+  "updated_at": "2026-08-12T16:01:00+08:00",
+  "phase": "episode_fact_extraction",
+  "series": {
+    "total_episodes": 53,
+    "first_processed_episode": 13,
+    "completed_episodes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "latest_completed_episode": 38
+  },
+  "next_episode": {
+    "episode": 39,
+    "title": "北风苔原73",
+    "bvid": "BV1fdraBbE9B",
+    "duration": "45:09",
+    "duration_seconds": 2709,
+    "processed": false
+  },
+  "workflow_documents": {
+    "method": "/Users/chat/claude/wow-quest-route/docs/video-extraction/README.md",
+    "current": "/Users/chat/claude/wow-quest-route/docs/video-extraction/CURRENT.md",
+    "latest_neat_archive": "/Users/chat/claude/wow-quest-route/docs/video-extraction/sessions/2026-08-07-episode34-neat.md",
+    "post_extraction_plan": "/Users/chat/claude/wow-quest-route/docs/video-extraction/POST-EXTRACTION-PLAN.md",
+    "handoff": "/Users/chat/claude/wow-quest-route/docs/NEXT_CHAT_HANDOFF.md"
+  },
+  "checkpoint_root": "/Users/chat/claude/.ai-bridge/wow-video-extraction",
+  "raw_evidence_pattern": "/Users/chat/claude/wow-quest-route/.ai-bridge/video-epN",
+  "resume": {
+    "read_first": [
+      "/Users/chat/claude/wow-quest-route/docs/video-extraction/README.md",
+      "/Users/chat/claude/wow-quest-route/docs/video-extraction/CURRENT.md",
+      "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-38-extraction.md"
+    ],
+    "optional_machine_checkpoint": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-38-events.json",
+    "instruction": "只处理第39集《北风苔原73》，写独立Markdown/JSON并同步更新项目CURRENT、progress.json和桥接CURRENT，关闭本轮B站标签然后停止，不进入第40集。第38集已闭环11650《还要一些东西……》、11730《主与仆》、11692《寻找比希》；第39集优先核验11798《机甲专家麦卡佐德》和11713《侦查虫孔》的最终交付，以及11694《山洞中的瘟疫》后续。11938《争取时间》仍无完成或放弃证据，继续保留。"
+  },
+  "post_series": {
+    "trigger": "episode 53 completed and validated",
+    "instruction": "按POST-EXTRACTION-PLAN执行事件合并、跨集缺口审计、联盟任务块、部落映射，并接入已完成C1/C2与待完成G1-G4。"
+  }
+}

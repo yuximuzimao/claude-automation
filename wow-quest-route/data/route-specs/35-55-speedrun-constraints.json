@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-04T20:39:00+08:00",
+  "goal": {
+    "character_group": "five_blood_elf_paladins",
+    "current_lowest": {
+      "level": 35,
+      "xp": 425,
+      "note": "This is the pre-sync snapshot. Four characters still need to turn in quest 195."
+    },
+    "target_level": 55,
+    "deadline": "before_2026-08-06",
+    "optimization_objective": "minimum_effective_play_minutes",
+    "route_decisions_use_lowest_character": true
+  },
+  "mandatory_sections": [
+    {
+      "zone": "菲拉斯",
+      "map_area_id": 357,
+      "source": "user-referenced image",
+      "status": "zone_confirmed_exact_image_task_subset_missing_from_workspace"
+    },
+    {
+      "zone": "加基森/塔纳利斯",
+      "map_area_id": 440,
+      "source": "user-referenced image",
+      "status": "zone_confirmed_exact_image_task_subset_missing_from_workspace"
+    }
+  ],
+  "hard_rules": [
+    "The final player guide must be understandable by a new player and executable step by step.",
+    "Every task block must include exact start point, travel method, accepted quests, objective order, turn-ins, five-box interaction mode, expected XP, expected minutes, and stop-loss conditions.",
+    "Do not call a route fastest unless alternatives have been compared using the same cost model.",
+    "Do not full-clear a zone merely because quests exist there.",
+    "Personal high-count random drops are skipped by default unless mandatory or overlapping with multiple high-value tasks.",
+    "Shared kills, fixed objects, named targets, and route-overlapping travel quests receive priority.",
+    "Main-character control is not itself a penalty: riding, combat, a short jump, one spell/item use, or brief manual pathing are baseline control costs. Only incremental time beyond normal play is charged.",
+    "Five-box interaction cost must distinguish baseline main-character control, brief main-character path deviation, per-character serial switching, and formation-breaking operations such as follower loss, repeated positioning, respawn waiting, or failure retries.",
+    "A short main-character-only terrain action can be highly efficient when followers remain in range or complete automatically; do not penalize it merely because it requires manual execution.",
+    "The guaranteed route must not require auction-house purchases, mailed materials, crafted items, or meaningful upfront gold. Already-owned materials may unlock optional bonus branches but cannot be counted in guaranteed XP.",
+    "Single-character leveling videos are feasibility and location evidence only. They may prove quest order, entrances, dense spawn areas, mechanics, and practical task blocks, but they do not define the five-box candidate set, optimal zone order, or expected completion time.",
+    "The five-box optimizer must search the full Horde quest candidate pool independently of the video route. A task omitted by the video can still be optimal for five-box play because full quest XP is awarded to every character while shared kills are completed once for the party.",
+    "Corpse-use and scene-object tasks are not assumed to require simultaneous interaction. Treat them as group-shared when one use advances the party, otherwise as short sequential interactions; an in-use lock or normal respawn is not by itself a rejection reason.",
+    "Travel time includes riding, flight, ship, zeppelin, waiting, vertical navigation, and return visits, but only actual incremental minutes are charged.",
+    "Drop-rate estimates must be marked as assumptions until replaced by server-specific observations.",
+    "All deferred tasks must have a named future revisit trigger; otherwise they are classified as skipped.",
+    "The previous 35-to-43 full-clear draft is not evidence of fastest routing."
+  ],
+  "current_empirical_calibration": {
+    "session_1": {
+      "start": "30 24769/38800",
+      "end": "33 46902/48000",
+      "effective_minutes": 344,
+      "xp_gained": 147133
+    },
+    "session_2": {
+      "start": "33 46902/48000",
+      "end": "35 425/55000",
+      "effective_minutes": 230,
+      "xp_gained": 52923
+    },
+    "combined": {
+      "effective_minutes": 574,
+      "xp_gained": 200056,
+      "xp_per_hour": 20912
+    }
+  },
+  "known_low_efficiency_pattern": {
+    "example_quest_id": 1116,
+    "name": "沼泽中的梦境粉尘",
+    "reason": "five characters each need ten personal drops from a sparse, level-sensitive spawn group",
+    "route_rule": "analogous tasks require a very strong overlap justification or are skipped"
+  }
+}

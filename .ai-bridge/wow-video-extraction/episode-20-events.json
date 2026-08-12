@@ -1,0 +1,267 @@
+{
+  "episode": 20,
+  "title": "菲拉斯 47-48",
+  "bvid": "BV1eFiTBAENF",
+  "duration_seconds": 3228,
+  "series_index": "20/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 55,
+    "fine5_opening": 19,
+    "fine10_start": 31,
+    "fine5_oox": 37,
+    "fine5_hub": 55,
+    "fine5_zorbin": 37,
+    "fine5_turnin_a": 33,
+    "fine5_end": 58,
+    "total": 325,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "tracked_objectives_only": [
+      {
+        "quest_id": 2865,
+        "quest_name": "圣甲虫的壳",
+        "state": "目标完成，前往塔纳利斯的特兰雷克交付；00:10后进入交付窗口"
+      }
+    ],
+    "warning": "第0秒追踪栏只显示一个已完成待交目标，不能当完整任务日志。"
+  },
+  "events": [
+    {
+      "time_range": "00:10-00:15",
+      "action": "complete",
+      "quest_id": 2865,
+      "quest_name": "圣甲虫的壳",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:20-00:35",
+      "action": "complete",
+      "quest_id": 5863,
+      "quest_name": "砂槌食人魔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:50-01:05",
+      "action": "complete",
+      "quest_id": 82,
+      "quest_name": "腐化之巢",
+      "confidence": "high"
+    },
+    {
+      "time_range": "01:00-01:10",
+      "action": "accept",
+      "quest_id": 10,
+      "quest_name": "谢申克的救赎",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:00-23:35",
+      "action": "level_transition_unlocated",
+      "level": 47,
+      "confidence": "medium",
+      "basis": "第19集连续性记录以46级结束，本集23:35明确显示达到48级，因此本集前半段必然跨过47级；升级提示本身未被帧证据稳定定位，不给出伪精确秒数。"
+    },
+    {
+      "time_range": "17:50-18:05",
+      "action": "complete",
+      "quest_id": 351,
+      "quest_name": "寻找OOX-17/TN！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:55-18:05",
+      "action": "accept",
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:30-19:00",
+      "action": "objective_complete_not_turnin",
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "objective": "护送OOX-17/TN到安全地点",
+      "remaining": "前往藏宝海湾向奥格索普·奥布诺提斯报告",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:35",
+      "action": "level_up_explicit",
+      "level": 48,
+      "confidence": "high",
+      "basis": "系统文字明确显示“祝贺你达到了48级”。"
+    },
+    {
+      "time_range": "23:35-23:50",
+      "action": "complete",
+      "quest_id": 10,
+      "quest_name": "谢申克的救赎",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:35-23:50",
+      "action": "accept",
+      "quest_id": 110,
+      "quest_name": "昆虫研究",
+      "stage": "高级勘探员菲兹杜瑟到炼金师匹斯特苏格",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:45-24:10",
+      "action": "complete",
+      "quest_id": 110,
+      "quest_name": "昆虫研究",
+      "stage": "高级勘探员菲兹杜瑟到炼金师匹斯特苏格",
+      "confidence": "high"
+    },
+    {
+      "time_range": "23:45-24:10",
+      "action": "accept",
+      "quest_id": 113,
+      "quest_name": "昆虫研究",
+      "stage": "炼金师匹斯特苏格到高级勘探员菲兹杜瑟",
+      "confidence": "high"
+    },
+    {
+      "time_range": "24:10-24:40",
+      "action": "complete",
+      "quest_id": 113,
+      "quest_name": "昆虫研究",
+      "stage": "炼金师匹斯特苏格到高级勘探员菲兹杜瑟",
+      "confidence": "high"
+    },
+    {
+      "time_range": "24:10-24:45",
+      "action": "accept",
+      "quest_id": 162,
+      "quest_name": "异种蝎的威胁",
+      "faction_variant": "Alliance",
+      "objective": "把昆虫分析报告带给达纳苏斯的格拉希娜·灵风",
+      "confidence": "high"
+    },
+    {
+      "time_range": "24:55-25:05",
+      "action": "abandon",
+      "quest_id": 3520,
+      "quest_name": "尖啸者的灵魂",
+      "confidence": "medium_high",
+      "basis": "任务日志操作前为11/25，操作后为9/25；该任务随后从日志中消失。"
+    },
+    {
+      "time_range": "24:55-25:05",
+      "action": "abandon",
+      "quest_id": 3022,
+      "quest_name": "小心运送",
+      "confidence": "medium_high",
+      "basis": "任务日志操作前为11/25，操作后为9/25；该任务随后从日志中消失。"
+    },
+    {
+      "time_range": "35:50-35:55",
+      "action": "accept",
+      "quest_id": 7721,
+      "quest_name": "压缩器的动力",
+      "confidence": "high"
+    },
+    {
+      "time_range": "35:50-35:55",
+      "action": "accept",
+      "quest_id": 7003,
+      "quest_name": "被缩小的巨人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "47:05",
+      "action": "complete",
+      "quest_id": 7721,
+      "quest_name": "压缩器的动力",
+      "confidence": "high"
+    },
+    {
+      "time_range": "50:15",
+      "action": "complete",
+      "quest_id": 7003,
+      "quest_name": "被缩小的巨人",
+      "reward_evidence": "索尔宾的大砍刀",
+      "confidence": "high"
+    },
+    {
+      "time_range": "about 52:00",
+      "action": "area_discovery",
+      "area": "萨尔多岛",
+      "experience_shown": 505,
+      "confidence": "high"
+    },
+    {
+      "time_range": "53:35",
+      "action": "flight_path_discovery",
+      "flight_path": "羽月要塞",
+      "confidence": "high"
+    }
+  ],
+  "same_name_chain_note": {
+    "quest_ids": [110, 113],
+    "quest_name": "昆虫研究",
+    "calibration": "两项中文同名；依据Questie前后置关系、交付NPC和画面中的报告目标区分，不用OCR名称单独猜ID。"
+  },
+  "abandonment_note": {
+    "before_log_count": "11/25",
+    "after_log_count": "9/25",
+    "abandoned_quests": [3520, 3022],
+    "warning": "“放弃任务”按钮本身不足以证明动作；本记录同时依赖日志数量下降和任务条目消失。"
+  },
+  "explicit_end_tracker": [
+    {
+      "quest_id": 648,
+      "quest_name": "拯救OOX-17/TN！",
+      "state": "护送完成，待去藏宝海湾向奥格索普·奥布诺提斯报告"
+    },
+    {
+      "quest_id": 162,
+      "quest_name": "异种蝎的威胁",
+      "state": "持有昆虫分析报告，待交达纳苏斯的格拉希娜·灵风"
+    }
+  ],
+  "known_unfinished_not_all_tracked_at_end": [
+    {
+      "quest_id": 2874,
+      "quest_name": "给马克基雷的货物"
+    },
+    {
+      "quest_id": 2605,
+      "quest_name": "口渴的地精"
+    },
+    {
+      "quest_id": 3362,
+      "quest_name": "灌木谷"
+    },
+    {
+      "quest_id": 2768,
+      "quest_name": "探水棒"
+    },
+    {
+      "quest_id": 2770,
+      "quest_name": "加兹瑞拉"
+    },
+    {
+      "quest_id": 3042,
+      "quest_name": "巨魔调和剂"
+    }
+  ],
+  "next_episode": {
+    "episode": 21,
+    "title": "灼热峡谷49-51",
+    "bvid": null,
+    "duration": "55:21",
+    "processed": false,
+    "retrieval_note": "本轮未进入第21集；当前集合栏未暴露可直接读取的普通链接，下次开始时重新取得BVID。"
+  },
+  "notes": [
+    "本集没有打开结尾完整任务日志，explicit_end_tracker只表示最后追踪栏明确可见的两项。",
+    "47级的跨越可以由上集46级和本集明确48级确认，但具体升级秒数未被可靠捕获。",
+    "视频服务器显示的任务经验可能与Questie基础经验表不同；Questie只用于任务名称、ID和链路校准。",
+    "第21集没有被导航、播放、截图或处理。"
+  ]
+}

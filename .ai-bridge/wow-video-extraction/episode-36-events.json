@@ -1,0 +1,110 @@
+{
+  "episode": 36,
+  "title": "北风苔原 71",
+  "bvid": "BV1k46oBaEJX",
+  "duration_seconds": 4003,
+  "display_duration": "1:06:43",
+  "series_index": "36/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 68,
+      "fine20_a": 101,
+      "fine20_b": 100,
+      "fine5_a": 94,
+      "fine5_b": 86,
+      "fine5_c": 54,
+      "fine5_d": 83
+    },
+    "formal_total": 586,
+    "manifest_count": 7,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_range": "episode_metadata",
+      "level": 71,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "标题为北风苔原71；本集未捕获清晰角色等级数字。"
+    },
+    {
+      "time_range": "episode_end",
+      "level": 72,
+      "direct": false,
+      "status": "not_confirmed_in_game",
+      "note": "下一集标题为北风苔原 魔枢72，但本集未捕获71→72直接升级消息或72级角色面板。"
+    }
+  ],
+  "events": [
+    {"time_range":"11:15-11:30","action":"complete_and_accept_next","quest_id":11900,"quest_name":"监测数据","experience_shown":40200,"next_quest_id":11905,"next_quest_name":"延缓灾难","confidence":"high_for_chain"},
+    {"time_range":"11:20-12:30","action":"complete_and_accept_next","quest_id":11910,"quest_name":"古树的秘密","experience_calibrated":40200,"next_quest_id":11911,"next_quest_name":"苏醒","confidence":"high_for_action_calibrated_for_experience"},
+    {"time_range":"12:05-13:05","action":"complete_and_accept_next","quest_id":11918,"quest_name":"基本的训练","experience_shown":40200,"next_quest_id":11936,"next_quest_name":"蓝龙的卵","confidence":"high"},
+    {"time_range":"13:30-13:40","action":"complete_and_accept_next","quest_id":11912,"quest_name":"冰冷的草莓","experience_shown":40200,"next_quest_id":11914,"next_quest_name":"保持隐蔽","confidence":"high"},
+    {"time_range":"22:20-22:30","action":"complete","quest_id":11914,"quest_name":"保持隐蔽","experience_shown":40200,"confidence":"high"},
+    {"time_range":"21:40-22:20","action":"complete_and_accept_next","quest_id":11936,"quest_name":"蓝龙的卵","experience_shown":40200,"next_quest_id":11919,"next_quest_name":"猎龙","confidence":"high"},
+    {"time_range":"24:40-25:20","action":"complete_and_accept_next","quest_id":11919,"quest_name":"猎龙","experience_shown":40200,"next_quest_id":11931,"next_quest_name":"破译密码","additional_accepted_quest_id":11940,"additional_accepted_quest_name":"猎龙","confidence":"high"},
+    {"time_range":"30:00-31:40","action":"complete","quest_id":11931,"quest_name":"破译密码","experience_shown":40200,"confidence":"high"},
+    {"time_range":"32:50-33:40","action":"complete_and_accept_next","quest_id":11704,"quest_name":"国王姆嘎姆嘎","faction_variant":"Alliance","experience_shown":4000,"next_quest_id":11571,"next_quest_name":"学习沟通","confidence":"high"},
+    {"time_range":"34:50-35:40","action":"complete_and_accept_next","quest_id":11571,"quest_name":"学习沟通","experience_shown":40200,"next_quest_id":11559,"next_quest_name":"冬鳞鱼人的贸易","confidence":"high"},
+    {"time_range":"41:05-41:55","action":"complete_and_accept_next","quest_id":11559,"quest_name":"冬鳞鱼人的贸易","experience_shown":40200,"next_quest_ids":[11560,11561],"next_quest_names":["救救蝌蚪！","就是他们！"],"confidence":"high"},
+    {"time_range":"47:00-47:30","action":"complete","quest_id":11561,"quest_name":"就是他们！","experience_shown":40200,"confidence":"high"},
+    {"time_range":"47:15-47:35","action":"complete_and_accept_next","quest_id":11560,"quest_name":"救救蝌蚪！","experience_shown":40200,"next_quest_id":11562,"next_quest_name":"我被敲竹杠了！","confidence":"high"},
+    {"time_range":"47:30-48:20","action":"complete_and_accept_next","quest_id":11562,"quest_name":"我被敲竹杠了！","experience_shown":4000,"next_quest_id":11563,"next_quest_name":"咕噜咕噜呜啦哇啦！","confidence":"high"},
+    {"time_range":"48:10-48:30","action":"accept","quest_id":11564,"quest_name":"美味炖鲸肉","confidence":"high"},
+    {"time_range":"52:10-52:30","action":"complete_and_accept_next","quest_id":11563,"quest_name":"咕噜咕噜呜啦哇啦！","experience_shown":40200,"next_quest_id":11565,"next_quest_name":"备用的鱼人服","confidence":"high"},
+    {"time_range":"52:15-53:40","action":"complete","quest_id":11564,"quest_name":"美味炖鲸肉","experience_shown":40200,"confidence":"high"},
+    {"time_range":"53:40-53:55","action":"complete_and_accept_next","quest_id":11565,"quest_name":"备用的鱼人服","experience_shown":4000,"next_quest_id":11566,"next_quest_name":"决不投降！","confidence":"high"},
+    {"time_range":"58:30-59:10","action":"complete","quest_id":11569,"quest_name":"钥匙管理者呜啦咕噜","experience_shown":40200,"confidence":"high"},
+    {"time_range":"58:30-59:10","action":"accept_or_start_escort","quest_id":11570,"quest_name":"逃离冬鳞洞穴","confidence":"high"},
+    {"time_range":"64:20-64:30","action":"complete","quest_id":11566,"quest_name":"决不投降！","experience_shown":50800,"confidence":"high"},
+    {"time_range":"64:30-65:00","action":"complete","quest_id":11570,"quest_name":"逃离冬鳞洞穴","experience_shown":40200,"confidence":"high"},
+    {"time_range":"66:10 approx","action":"complete","quest_id":12728,"quest_name":"监视裂谷：冬鳞洞穴","experience_shown":50300,"confidence":"high"}
+  ],
+  "completed_quests": [11900,11910,11918,11912,11914,11936,11919,11931,11704,11571,11559,11560,11561,11562,11563,11564,11565,11569,11566,11570,12728],
+  "completed_quest_count": 21,
+  "calibrated_completed_quest_xp_total": 756300,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":11905,"quest_name":"延缓灾难","state":"11900后续，本集未完成；下一集魔枢阶段应继续核验。"},
+    {"quest_id":11911,"quest_name":"苏醒","state":"11910后续，本集未完成；下一集魔枢阶段应继续核验。"},
+    {"quest_id":13094,"quest_name":"他们丝毫不感到羞愧吗？","state":"联盟版本；第35集考达拉接取，本集未完成；下一集魔枢阶段应继续核验。"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"11919完成后出现的后续/重复版本，本集未见最终交付。"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"第35集遗留，本集无完成或放弃证据。"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"第35集遗留，本集无完成或放弃证据。"},
+    {"quest_id":11712,"quest_name":"物质转换注射器","state":"第35集遗留，本集无最终完成证据。"},
+    {"quest_id":11710,"quest_name":"转换器怎么了？","state":"第35集遗留，本集无最终完成证据。"},
+    {"quest_id":11645,"quest_name":"恶心的雪地狗头人！","state":"第35集遗留，本集无最终完成证据。"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"更早遗留，本集无完成或放弃证据。"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"更早遗留，本集无完成或放弃证据。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"更早遗留，本集无完成或放弃证据。"},
+    {"quest_id":10004,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9900,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9925,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9882,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9937,"state":"联盟版本；更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9869,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":10810,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9962,"state":"此前明确失败；是否保留或放弃仍不确认。"}
+  ],
+  "next_episode": {
+    "episode": 37,
+    "title": "北风苔原 魔枢 72",
+    "bvid": "BV1DQrhBVEQA",
+    "duration_seconds": 2605,
+    "duration": "43:25",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 17,
+  "notes": [
+    "本集没有直接71或72级玩家等级证据，不能根据标题绑定升级任务。",
+    "考达拉野外任务完成后，11905延缓灾难、11911苏醒、13094他们丝毫不感到羞愧吗继续留给下一集魔枢阶段。",
+    "冬鳞鱼人任务块从11704开始连续推进，11559后分叉11560/11561，再汇入11562-11566；并行完成11564、11569、11570与12728。",
+    "第37集仅查询合集元数据，未导航、播放、截图或处理。"
+  ]
+}

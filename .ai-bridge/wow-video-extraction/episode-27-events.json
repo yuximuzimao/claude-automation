@@ -1,0 +1,305 @@
+{
+  "episode": 27,
+  "title": "地狱火半岛 城墙 61",
+  "bvid": "BV1j8ijBeEfZ",
+  "duration_seconds": 2788.48,
+  "display_duration": "46:29",
+  "series_index": "27/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "coarse": 48,
+    "fine10_a": 100,
+    "fine10_b": 100,
+    "fine10_c": 80,
+    "refined_a": 153,
+    "refined_b": 100,
+    "refined_c": 169,
+    "total": 750,
+    "manifest_count": 7,
+    "all_verified_paused": true
+  },
+  "starting_evidence": {
+    "level": 60,
+    "basis": "第26集53:16-53:20交付任务：地狱岩床并升到60级；本集开场承接奔赴前线与返回荣耀堡。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "9700/4850",
+      "1950/970",
+      "19600/9800",
+      "40200/20100"
+    ]
+  },
+  "events": [
+    {
+      "time": "00:09",
+      "action": "accept",
+      "quest_id": 10058,
+      "quest_name": "古老的礼物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:18-00:27",
+      "action": "accept",
+      "quest_id": 9558,
+      "quest_name": "长须兄弟",
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:33-00:39",
+      "action": "complete",
+      "quest_id": 10903,
+      "quest_name": "返回荣耀堡",
+      "experience_shown": 9700,
+      "confidence": "high"
+    },
+    {
+      "time_range": "00:36-00:45",
+      "action": "accept_multiple",
+      "quest_ids": [10909, 10916],
+      "quest_names": ["邪灵", "挖掘念珠"],
+      "confidence": "high"
+    },
+    {
+      "time_range": "05:26-05:41",
+      "action": "complete_and_accept_next",
+      "quest_id": 10382,
+      "quest_name": "奔赴前线",
+      "experience_shown": 1950,
+      "next_quest_id": 10394,
+      "next_quest_name": "铸魔营地：暴虐",
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:37-12:55",
+      "action": "area_discovery",
+      "area": "铸魔营地：暴虐区域",
+      "experience_shown": 955,
+      "confidence": "high"
+    },
+    {
+      "time_range": "12:49-13:01",
+      "action": "complete_and_accept_next",
+      "quest_id": 10394,
+      "quest_name": "铸魔营地：暴虐",
+      "experience_shown": 19600,
+      "next_quest_id": 10396,
+      "next_quest_name": "我的敌人的敌人……",
+      "confidence": "high"
+    },
+    {
+      "time_range": "14:16-15:22",
+      "action": "complete_and_accept_next",
+      "quest_id": 10396,
+      "quest_name": "我的敌人的敌人……",
+      "experience_shown": 19600,
+      "next_quest_id": 10397,
+      "next_quest_name": "登陆场：歼灭",
+      "confidence": "high"
+    },
+    {
+      "time_range": "15:50-16:10",
+      "action": "key_objectives_complete",
+      "quest_id": 10397,
+      "quest_name": "登陆场：歼灭",
+      "objective": "击杀战争使者阿利萨玛尔并取得燃烧军团传送门钥匙",
+      "additional_drop": "燃烧军团信件",
+      "confidence": "high"
+    },
+    {
+      "time_range": "17:35-17:45",
+      "action": "accept_from_drop",
+      "quest_id": 10395,
+      "quest_name": "邪恶的信件",
+      "confidence": "high"
+    },
+    {
+      "time_range": "18:20-19:10",
+      "action": "complete",
+      "quest_id": 10397,
+      "quest_name": "登陆场：歼灭",
+      "experience_shown": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "19:55-20:05",
+      "action": "complete_and_accept_next",
+      "quest_id": 10395,
+      "quest_name": "邪恶的信件",
+      "experience_shown": 9700,
+      "next_quest_id": 10399,
+      "next_quest_name": "黑暗之心",
+      "confidence": "high"
+    },
+    {
+      "time_range": "20:05-20:40",
+      "action": "active_in_tracker",
+      "quest_ids": [9575, 10400],
+      "quest_names": ["攻陷城墙", "霸王"],
+      "confidence": "medium_high",
+      "note": "没有清晰接取弹窗，但此后持续出现在任务追踪中。"
+    },
+    {
+      "time_range": "24:48-25:04",
+      "action": "complete",
+      "quest_id": 10047,
+      "quest_name": "荣耀之路",
+      "experience_shown": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "26:00-26:16",
+      "action": "accept_multiple",
+      "quest_ids": [10093, 9355, 10079],
+      "quest_names": ["塔哈玛特神殿", "聪明人的工作", "乱糟糟的矿洞"],
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:40-29:16",
+      "action": "complete_and_accept_next",
+      "quest_id": 10079,
+      "quest_name": "乱糟糟的矿洞",
+      "experience_shown": 19600,
+      "next_quest_id": 10099,
+      "next_quest_name": "主谋",
+      "confidence": "high"
+    },
+    {
+      "time": "30:04",
+      "action": "objectives_complete_not_turnin",
+      "quest_id": 10099,
+      "quest_name": "主谋",
+      "objective": "击杀主谋兹克拉",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:00-31:16",
+      "action": "complete",
+      "quest_id": 10099,
+      "quest_name": "主谋",
+      "experience_shown": 19600,
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:20-31:40",
+      "action": "dungeon_group_and_entry",
+      "dungeon": "地狱火城墙",
+      "confidence": "high"
+    },
+    {
+      "time_range": "37:40-37:50",
+      "action": "boss_kill",
+      "boss": "巡视者加戈玛",
+      "quest_id": 9575,
+      "quest_name": "攻陷城墙",
+      "confidence": "high"
+    },
+    {
+      "time": "38:04",
+      "action": "quest_item_obtained",
+      "item_id": 23881,
+      "item_name": "加戈玛之手",
+      "progress": "1/1",
+      "quest_id": 9575,
+      "confidence": "high"
+    },
+    {
+      "time_range": "39:01-39:06",
+      "action": "level_up_explicit",
+      "level": 61,
+      "trigger": "地狱火城墙普通怪战斗经验",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:40-42:58",
+      "action": "boss_kill_and_quest_item",
+      "boss": "无疤者奥摩尔",
+      "item_id": 23886,
+      "item_name": "奥摩尔之蹄",
+      "progress": "1/1",
+      "quest_id": 9575,
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:16-44:40",
+      "action": "boss_encounter_and_kill",
+      "bosses": ["传令官瓦兹德", "纳杉"],
+      "combat_experience_shown_approx": 21500,
+      "quest_id": 9575,
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:48-44:56",
+      "action": "quest_item_obtained_and_objectives_complete",
+      "item_id": 23901,
+      "item_name": "纳杉徽记",
+      "progress": "1/1",
+      "quest_id": 9575,
+      "quest_name": "攻陷城墙",
+      "confidence": "high"
+    },
+    {
+      "time_range": "44:50-44:56",
+      "action": "item_obtained",
+      "item_name": "不祥的信件",
+      "possible_item_ids": [23890, 23892],
+      "confidence": "high",
+      "note": "视频未打开物品，也没有后续任务接取提示。"
+    },
+    {
+      "time_range": "46:16-46:24",
+      "action": "complete_and_accept_next",
+      "quest_id": 9575,
+      "quest_name": "攻陷城墙",
+      "experience_shown": 40200,
+      "money_shown": "5金40银",
+      "next_quest_id": 9607,
+      "next_quest_name": "愤怒之心",
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "time_range": "39:01-39:06",
+      "level": 61,
+      "trigger": "普通副本怪击杀经验",
+      "confidence": "high"
+    }
+  ],
+  "ending_active_quests": [
+    {"quest_id": 9607, "quest_name": "愤怒之心", "state": "交付攻陷城墙后接取，未继续。"},
+    {"quest_id": 10399, "quest_name": "黑暗之心", "state": "已接取，片尾未完成。"},
+    {"quest_id": 10400, "quest_name": "霸王", "state": "追踪中可见，残酷的阿拉修斯未击杀。"},
+    {"quest_id": 10093, "quest_name": "塔哈玛特神殿", "state": "已接取，未交付。"},
+    {"quest_id": 9355, "quest_name": "聪明人的工作", "state": "已接取，未完成。"},
+    {"quest_id": 10909, "quest_name": "邪灵", "state": "已接取，未完成。"},
+    {"quest_id": 10916, "quest_name": "挖掘念珠", "state": "已接取，未完成。"},
+    {"quest_id": 10058, "quest_name": "古老的礼物", "state": "已接取，未完成。"},
+    {"quest_id": 9558, "quest_name": "长须兄弟", "state": "已接取，未完成。"}
+  ],
+  "ending_items": [
+    {
+      "item_name": "不祥的信件",
+      "possible_item_ids": [23890, 23892],
+      "state": "已获得但未打开；没有任务接取证据。"
+    }
+  ],
+  "completed_quests": [10903, 10382, 10394, 10396, 10397, 10395, 10047, 10079, 10099, 9575],
+  "next_episode": {
+    "episode": 28,
+    "title": "地狱火半岛 62-63",
+    "bvid": "BV17uqcBdEWu",
+    "duration_seconds": 4811,
+    "duration": "80:11",
+    "processed": false
+  },
+  "notes": [
+    "本集从60级开始，39:01左右由普通副本怪战斗经验升到61级。",
+    "攻陷城墙的三个任务物品分别来自巡视者加戈玛、无疤者奥摩尔和纳杉。",
+    "44:50附近只确认获得不祥的信件，不确认其后续任务已经接取。",
+    "第28集信息来自合集状态；本轮未导航、播放、截图或处理第28集。"
+  ]
+}

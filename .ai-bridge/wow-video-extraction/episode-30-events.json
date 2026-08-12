@@ -1,0 +1,385 @@
+{
+  "episode": 30,
+  "title": "赞加沼泽 65",
+  "bvid": "BV1hHqcBmEoY",
+  "duration_seconds": 2596.159666,
+  "playlist_duration_seconds": 2597,
+  "display_duration": "43:17",
+  "series_index": "30/53",
+  "mode": "extract_only_no_route_analysis",
+  "autoplay_blocked_before_navigation": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 45,
+      "fine20_a": 44,
+      "fine20_b": 44,
+      "fine20_c": 43,
+      "refined_open": 61,
+      "refined_lake": 61,
+      "refined_umbrafen_turnin": 51,
+      "refined_pump": 37,
+      "refined_refuge": 85,
+      "refined_tail": 59
+    },
+    "formal_total": 530,
+    "manifest_count": 10,
+    "all_formal_batches_verified_paused": true,
+    "auxiliary_not_counted": {
+      "level_crop_variants": true
+    }
+  },
+  "starting_evidence": {
+    "level": 64,
+    "basis": "第29集从63级继续并进入64级阶段；精确升级提示未保留，但第30集开始前连续状态已经是64级阶段。"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2,
+    "examples": [
+      "15600/7800",
+      "20100/10050",
+      "20800/10400",
+      "25900/12950",
+      "26700/13350"
+    ]
+  },
+  "events": [
+    {
+      "time_range": "00:08-00:12",
+      "action": "complete",
+      "quest_id": 9752,
+      "quest_name": "逃离暗泽村",
+      "experience_shown": 20800,
+      "money_shown": "2金币90银币",
+      "confidence": "high",
+      "note": "第29集仅确认护送目标完成；本集开场才出现伊谢尔·风歌的最终奖励窗口。"
+    },
+    {
+      "time_range": "07:48-08:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 9716,
+      "quest_name": "暗泽湖的异常",
+      "experience_shown": 20800,
+      "next_quest_id": 9718,
+      "next_quest_name": "乌鸦的飞翔",
+      "confidence": "high"
+    },
+    {
+      "time_range": "10:08-10:12",
+      "action": "complete_and_accept_next",
+      "quest_id": 9718,
+      "quest_name": "乌鸦的飞翔",
+      "experience_shown": 15600,
+      "next_quest_id": 9720,
+      "next_quest_name": "恢复平衡",
+      "confidence": "high"
+    },
+    {
+      "time_range": "10:28-11:00",
+      "action": "complete",
+      "quest_id": 9747,
+      "quest_name": "暗泽部族",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "10:40-11:05",
+      "action": "accept",
+      "quest_id": 9788,
+      "quest_name": "阴冷之地",
+      "confidence": "high"
+    },
+    {
+      "time_range": "10:40-11:05",
+      "action": "accept",
+      "quest_id": 10096,
+      "quest_name": "拯救孢子人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:46-21:50",
+      "action": "accept_from_quest_item",
+      "quest_id": 9731,
+      "quest_name": "抽水泵结构图",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:20-31:25",
+      "action": "accept",
+      "quest_id": 9791,
+      "quest_name": "沼牙的威胁",
+      "confidence": "high",
+      "note": "由诺兰妮提供，目标为10只沼牙撕裂者；不是9770同名版本。"
+    },
+    {
+      "time_range": "30:20-31:25",
+      "action": "accept",
+      "quest_id": 9781,
+      "quest_name": "不堪重负",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:20-31:25",
+      "action": "accept",
+      "quest_id": 9777,
+      "quest_name": "灿烂的孢子",
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:20-31:25",
+      "action": "accept",
+      "quest_id": 9901,
+      "quest_name": "遗留事务",
+      "confidence": "medium_high",
+      "note": "接取文本受视频压缩影响；片尾完整交付和9896后续链提供连续证据。"
+    },
+    {
+      "time_range": "31:23-31:35",
+      "action": "complete",
+      "quest_id": 9720,
+      "quest_name": "恢复平衡",
+      "experience_shown": 26700,
+      "money_shown": "3金币10银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:29-31:41",
+      "action": "complete_and_accept_next",
+      "quest_id": 9731,
+      "quest_name": "抽水泵结构图",
+      "experience_shown": 20800,
+      "money_shown": "2金币90银币",
+      "next_quest_id": 9724,
+      "next_quest_name": "通知塞纳里奥议会",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:29-31:35",
+      "action": "accept",
+      "quest_id": 9782,
+      "quest_name": "死亡泥潭",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:44-32:02",
+      "action": "complete",
+      "quest_id": 9817,
+      "quest_name": "血鳞纳迦的领袖",
+      "experience_shown": 25900,
+      "money_shown": "5金币80银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:59-32:14",
+      "action": "complete",
+      "quest_id": 9728,
+      "quest_name": "热情的欢迎",
+      "experience_shown": 26700,
+      "money_shown": "3金币10银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "32:23-32:35",
+      "action": "complete",
+      "quest_id": 10096,
+      "quest_name": "拯救孢子人",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "32:38-32:47",
+      "action": "complete",
+      "quest_id": 9802,
+      "quest_name": "赞加沼泽的植物",
+      "experience_shown": 20800,
+      "reward_item": "一包鉴定过的植物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "32:44-32:59",
+      "action": "complete",
+      "quest_id": 9788,
+      "quest_name": "阴冷之地",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:12-42:20",
+      "action": "complete_and_accept_next",
+      "quest_id": 9782,
+      "quest_name": "死亡泥潭",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "next_quest_id": 9783,
+      "next_quest_name": "异样的干旱",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:28-42:34",
+      "action": "complete_and_accept_next",
+      "quest_id": 9901,
+      "quest_name": "遗留事务",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "next_quest_id": 9896,
+      "next_quest_name": "黑钉之刺",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:28-42:32",
+      "action": "level_up",
+      "level": 65,
+      "trigger_quest_id": 9901,
+      "trigger_quest_name": "遗留事务",
+      "evidence": [
+        "获得一个天赋点",
+        "最大生命值增加约214",
+        "最大法力值增加约159",
+        "力量提高2点",
+        "精神提高2点"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:38-42:58",
+      "action": "complete_and_accept_next",
+      "quest_id": 9781,
+      "quest_name": "不堪重负",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "next_quest_id": 9790,
+      "next_quest_name": "透明的虫翼",
+      "confidence": "high"
+    },
+    {
+      "time_range": "42:42-43:02",
+      "action": "complete_and_accept_next",
+      "quest_id": 9791,
+      "quest_name": "沼牙的威胁",
+      "experience_shown": 20100,
+      "money_shown": "2金币70银币",
+      "next_quest_id": 9780,
+      "next_quest_name": "电鳗鱼片",
+      "confidence": "high"
+    }
+  ],
+  "level_events": [
+    {
+      "from_level": 64,
+      "to_level": 65,
+      "time_range": "42:28-42:32",
+      "trigger_quest_id": 9901,
+      "trigger_quest_name": "遗留事务",
+      "confidence": "high",
+      "state": "完成9901后立即出现天赋点、生命、法力、力量和精神增长提示。"
+    }
+  ],
+  "completed_quests": [
+    9752,
+    9716,
+    9718,
+    9747,
+    9720,
+    9731,
+    9817,
+    9728,
+    10096,
+    9802,
+    9788,
+    9782,
+    9901,
+    9781,
+    9791
+  ],
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 9724,
+      "quest_name": "通知塞纳里奥议会",
+      "state": "已接取，片尾仍在追踪栏。"
+    },
+    {
+      "quest_id": 9777,
+      "quest_name": "灿烂的孢子",
+      "state": "已接取，未确认交付。"
+    },
+    {
+      "quest_id": 9783,
+      "quest_name": "异样的干旱",
+      "state": "片尾新接取，目标未完成。"
+    },
+    {
+      "quest_id": 9896,
+      "quest_name": "黑钉之刺",
+      "state": "升级后新接取，目标未完成。"
+    },
+    {
+      "quest_id": 9790,
+      "quest_name": "透明的虫翼",
+      "state": "片尾新接取，虫翼0/8。"
+    },
+    {
+      "quest_id": 9780,
+      "quest_name": "电鳗鱼片",
+      "state": "片尾新接取，鱼片0/8。"
+    },
+    {
+      "quest_id": 9697,
+      "quest_name": "观察者莉萨奥",
+      "state": "前集已接；本集没有可复核的交付或放弃证据。"
+    },
+    {
+      "quest_id": 9957,
+      "quest_name": "塞纳里奥树林出事了？",
+      "state": "前集已接；本集没有可复核的交付或放弃证据。"
+    },
+    {
+      "quest_id": 9385,
+      "quest_name": "钢牙掠食者",
+      "state": "旧任务；本集没有新的闭环证据。"
+    },
+    {
+      "quest_id": 10400,
+      "quest_name": "霸王",
+      "state": "旧任务；本集没有新的闭环证据。"
+    },
+    {
+      "quest_id": 9607,
+      "quest_name": "愤怒之心",
+      "state": "旧任务；本集没有新的闭环证据。"
+    },
+    {
+      "quest_id": 10916,
+      "quest_name": "挖掘念珠",
+      "state": "旧任务；本集没有新的闭环证据。"
+    }
+  ],
+  "ending_items_or_unresolved_triggers": [
+    {
+      "item_name": "一包鉴定过的植物",
+      "state": "交9802后获得；没有独立确认9784《鉴定植物》的接取或交付。"
+    },
+    {
+      "item_name": "不祥的信件",
+      "state": "此前已获得；本集仍没有打开或触发后续任务的证据。"
+    }
+  ],
+  "next_episode": {
+    "episode": 31,
+    "title": "纳格兰 66",
+    "bvid": "BV1kDiyBXEc7",
+    "duration_seconds": 3262,
+    "duration": "54:22",
+    "processed": false
+  },
+  "notes": [
+    "9752《逃离暗泽村》在第29集完成护送目标，第30集开场才最终交付。",
+    "9791是诺兰妮提供的联盟任务版本，不是9770同名任务。",
+    "31—33分钟系统聊天会持续显示旧完成提示，事件按首次奖励窗口和NPC组合判定。",
+    "获得一包鉴定过的植物不自动等于9784《鉴定植物》已经接取或完成。",
+    "64到65由9901《遗留事务》直接触发，升级证据包括天赋点和多项属性增长。",
+    "第31集信息来自合集状态；本轮未导航、播放、截图或处理第31集。"
+  ]
+}

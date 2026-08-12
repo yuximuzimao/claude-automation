@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-07-29
+更新时间：2026-07-31
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：售后文档状态已收口，主线为 LKWJ 剩余明细补录。LKWJ 的精灵、任务、进化、果实、家具、服装和遗迹基线已整理，剩余事项只看 `lkwj/tasks/todo.md`；百浩/悦希商品匹配已完成 36 个商品、57 个链接闭环核对，后续只按 `product-mapping/tasks/todo.md` 推进未覆盖 live smoke、L2 边界场景和 HEE 建档质量复核。
@@ -12,7 +12,8 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认按时间保留 8 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
-- **审单工具**：人工点击触发的普通单包审核 v1、500ms 状态驱动自动刷新和等体积口味白名单已完成归档并通过多次实际使用。长期规则见 `order-review/docs/2026-07-23-package-rule-foundation.md`；完成记录见 `order-review/docs/archive/2026-07-28-single-package-audit-v1/neat-handoff.md`。拆分订单尚未开放，下一阶段先采集拆分前后页面事实并做 dry-run，不能复用单包的单选数量规则。纸箱规格是离散集合，较大数量单包不证明较小数量可单包；商品/纸箱尺寸模型推迟到拆分实际功能完成后。
+- **审单工具**：普通单包审核、多包混合拆分并审核、等体积口味白名单和历史包裹模块精确组合均已实现；完整测试 `207 passed`。2026-08-05 修复了 ERP 实际拆分成功却因 `splitResult.success=false` 被误判停止的问题，并把“精确匹配历史方案后无需再点保存、可直接审核/拆分并审核”的快捷流程从单包扩展到多包。案例文件重复解析导致的线性内存高水位已通过按文件版本缓存仓库快照修复；连续 20 个合适真实订单验收延期但未取消。当前状态、唯一硬验收和后续尺寸模型方向见 `order-review/docs/CURRENT.md`；长期规则见 `order-review/docs/2026-07-23-package-rule-foundation.md`。
+- **生图授权门禁**：所有图片生成和编辑默认只讨论，只接受用户当前消息中的一次性明确执行授权；每次调用后立即恢复讨论模式。禁止继承上一轮意图，也禁止切换到本机脚本或 CLI/API 备用生图路径。完整规则和事件归档见 `product-ad-studio/docs/INDEX.md` 与 `product-ad-studio/docs/archive/2026-07-31-image-generation-authorization.md`。
 - **claude-mem**：已完全卸载（2026-07-15）。hooks 清空、插件禁用、数据已删除。Codex 无需关心 claude-mem 相关状态。
 - **Codex ↔ Claude 协作**：handoff 协议（inbox.json）照常运作，不受上述变更影响。
 

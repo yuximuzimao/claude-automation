@@ -1,0 +1,955 @@
+{
+  "schema_version": 1,
+  "scenario": "zero_purchase_incremental_control_cost",
+  "start": [
+    39,
+    40893
+  ],
+  "target_level": 55,
+  "xp_required": 1631007,
+  "assumptions": [
+    "保证路线不购买、不邮寄、不制作任务材料。",
+    "主号正常打怪、骑乘、短跳和一次任务物使用属于基线控制，不作为五开额外惩罚。",
+    "逐号切换、逐号拾取、断跟随、等待刷新和失败重跑才计入额外成本。",
+    "已经持有的秘银外壳等材料只开启额外奖励分支，不计入保证经验。"
+  ],
+  "blocks": [
+    {
+      "block": "菲拉斯首圈",
+      "completion_level": 40,
+      "guaranteed": [
+        {
+          "quest_id": 2862,
+          "name": "与豺狼人开战",
+          "xp": 7200
+        },
+        {
+          "quest_id": 2863,
+          "name": "突然袭击",
+          "xp": 7500
+        },
+        {
+          "quest_id": 2902,
+          "name": "调查木爪岭",
+          "xp": 5000
+        },
+        {
+          "quest_id": 2903,
+          "name": "作战计划",
+          "xp": 10100
+        },
+        {
+          "quest_id": 2973,
+          "name": "新斗篷的光辉",
+          "xp": 11100
+        },
+        {
+          "quest_id": 2974,
+          "name": "可怕的发现",
+          "xp": 11100
+        },
+        {
+          "quest_id": 2975,
+          "name": "菲拉斯的食人魔",
+          "xp": 7500
+        },
+        {
+          "quest_id": 2978,
+          "name": "戈杜尼卷轴",
+          "xp": 5000
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 2987,
+          "name": "戈杜尼钴矿石",
+          "xp": 10100
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        18000,
+        30000
+      ],
+      "minutes_range": [
+        70,
+        105
+      ],
+      "guaranteed_xp": 64500,
+      "free_conditional_xp": 10100,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "赛车场与塔纳利斯核心",
+      "completion_level": 43,
+      "guaranteed": [
+        {
+          "quest_id": 1117,
+          "name": "地精的谣言",
+          "xp": 5200
+        },
+        {
+          "quest_id": 1183,
+          "name": "地精赞助商",
+          "xp": 1450
+        },
+        {
+          "quest_id": 1186,
+          "name": "第十八个驾驶员",
+          "xp": 600
+        },
+        {
+          "quest_id": 1190,
+          "name": "跟上节奏",
+          "xp": 4500
+        },
+        {
+          "quest_id": 1194,
+          "name": "瑞兹尔的图表",
+          "xp": 4500
+        },
+        {
+          "quest_id": 1690,
+          "name": "废土的公正",
+          "xp": 10100
+        },
+        {
+          "quest_id": 1691,
+          "name": "废土的公正",
+          "xp": 10600
+        },
+        {
+          "quest_id": 2781,
+          "name": "通缉：卡利夫·斯科比斯汀",
+          "xp": 14400
+        },
+        {
+          "quest_id": 2872,
+          "name": "斯杜雷的债务",
+          "xp": 1100
+        },
+        {
+          "quest_id": 2873,
+          "name": "斯杜雷的货物",
+          "xp": 11100
+        },
+        {
+          "quest_id": 2875,
+          "name": "通缉：安德雷·费尔比德",
+          "xp": 11100
+        },
+        {
+          "quest_id": 8366,
+          "name": "南海复仇",
+          "xp": 11100
+        },
+        {
+          "quest_id": 992,
+          "name": "加基森水业公司",
+          "xp": 8600
+        },
+        {
+          "quest_id": 5863,
+          "name": "砂槌食人魔",
+          "xp": 13100
+        },
+        {
+          "quest_id": 3362,
+          "name": "灌木谷",
+          "xp": 13600
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 1187,
+          "name": "拉泽瑞克的调整",
+          "xp": 9200
+        },
+        {
+          "quest_id": 1707,
+          "name": "收集水袋",
+          "xp": 7900
+        },
+        {
+          "quest_id": 8365,
+          "name": "海盗的帽子！",
+          "xp": 11100
+        },
+        {
+          "quest_id": 82,
+          "name": "腐化之巢",
+          "xp": 9000
+        },
+        {
+          "quest_id": 10,
+          "name": "谢申克的救赎",
+          "xp": 12600
+        },
+        {
+          "quest_id": 2876,
+          "name": "船运时刻表",
+          "xp": 13800
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        35000,
+        60000
+      ],
+      "minutes_range": [
+        155,
+        225
+      ],
+      "guaranteed_xp": 121050,
+      "free_conditional_xp": 63600,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "塔纳利斯佐料链起点",
+      "completion_level": 45,
+      "guaranteed": [
+        {
+          "quest_id": 2605,
+          "name": "口渴的地精",
+          "xp": 13100
+        },
+        {
+          "quest_id": 2606,
+          "name": "好味道",
+          "xp": 1300
+        }
+      ],
+      "free_conditional": [],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        4000,
+        9000
+      ],
+      "minutes_range": [
+        12,
+        25
+      ],
+      "guaranteed_xp": 14400,
+      "free_conditional_xp": 0,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "菲拉斯高等级回访",
+      "completion_level": 46,
+      "guaranteed": [
+        {
+          "quest_id": 2980,
+          "name": "菲拉斯的食人魔",
+          "xp": 10600
+        },
+        {
+          "quest_id": 3062,
+          "name": "黑暗之心",
+          "xp": 17000
+        },
+        {
+          "quest_id": 3063,
+          "name": "对鹰身人的复仇",
+          "xp": 10200
+        },
+        {
+          "quest_id": 3520,
+          "name": "尖啸者的灵魂",
+          "xp": 10600
+        },
+        {
+          "quest_id": 7730,
+          "name": "祖卡什的入侵",
+          "xp": 11100
+        },
+        {
+          "quest_id": 7731,
+          "name": "毒刺鞭笞者",
+          "xp": 12100
+        },
+        {
+          "quest_id": 7732,
+          "name": "祖卡什报告",
+          "xp": 12600
+        },
+        {
+          "quest_id": 2976,
+          "name": "可怕的发现",
+          "xp": 13800
+        },
+        {
+          "quest_id": 3121,
+          "name": "奇怪的要求",
+          "xp": 5500
+        },
+        {
+          "quest_id": 3122,
+          "name": "向巫医尤克里回复",
+          "xp": 2800
+        },
+        {
+          "quest_id": 3123,
+          "name": "测试容器",
+          "xp": 12100
+        },
+        {
+          "quest_id": 3124,
+          "name": "角鹰兽灵魂精华",
+          "xp": 12100
+        },
+        {
+          "quest_id": 3125,
+          "name": "精灵龙灵魂精华",
+          "xp": 11100
+        },
+        {
+          "quest_id": 3126,
+          "name": "树人灵魂精华",
+          "xp": 13600
+        },
+        {
+          "quest_id": 3127,
+          "name": "山岭巨人灵魂精华",
+          "xp": 13600
+        }
+      ],
+      "free_conditional": [],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        50000,
+        82000
+      ],
+      "minutes_range": [
+        135,
+        205
+      ],
+      "guaranteed_xp": 168800,
+      "free_conditional_xp": 0,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "辛特兰恶齿村与辛萨罗",
+      "completion_level": 49,
+      "guaranteed": [
+        {
+          "quest_id": 7815,
+          "name": "钳嘴龟！",
+          "xp": 13600
+        },
+        {
+          "quest_id": 7816,
+          "name": "加莫里塔！",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7828,
+          "name": "银鬃捕猎者",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7829,
+          "name": "野蛮的枭兽",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7830,
+          "name": "死者的复仇",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7840,
+          "name": "拉尔德的午餐",
+          "xp": 13100
+        },
+        {
+          "quest_id": 7841,
+          "name": "给蛮锤部族的警告",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7842,
+          "name": "又一个给蛮锤部族的警告",
+          "xp": 15700
+        },
+        {
+          "quest_id": 7844,
+          "name": "野蛮的亲戚",
+          "xp": 12600
+        },
+        {
+          "quest_id": 7845,
+          "name": "被绑架的断齿长者！",
+          "xp": 14100
+        },
+        {
+          "quest_id": 7846,
+          "name": "找回钥匙！",
+          "xp": 17600
+        },
+        {
+          "quest_id": 7847,
+          "name": "向断齿族长复命",
+          "xp": 14100
+        },
+        {
+          "quest_id": 7849,
+          "name": "分离的痛苦",
+          "xp": 13600
+        },
+        {
+          "quest_id": 7850,
+          "name": "黑暗之瓶",
+          "xp": 17000
+        },
+        {
+          "quest_id": 7861,
+          "name": "通缉：邪恶祭司海克斯和她的爪牙",
+          "xp": 17600
+        },
+        {
+          "quest_id": 7862,
+          "name": "职位空缺：恶齿村卫兵队长",
+          "xp": 14100
+        },
+        {
+          "quest_id": 2641,
+          "name": "斯普琳科的秘密佐料",
+          "xp": 13100
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 7839,
+          "name": "邪枝窃贼",
+          "xp": 12600
+        },
+        {
+          "quest_id": 485,
+          "name": "找到OOX-09/HL！",
+          "xp": 12600
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        65000,
+        105000
+      ],
+      "minutes_range": [
+        175,
+        250
+      ],
+      "guaranteed_xp": 239200,
+      "free_conditional_xp": 25200,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "灼热峡谷核心",
+      "completion_level": 50,
+      "guaranteed": [
+        {
+          "quest_id": 3441,
+          "name": "Questie:3441",
+          "xp": 1250
+        },
+        {
+          "quest_id": 3442,
+          "name": "无瑕之焰",
+          "xp": 12600
+        },
+        {
+          "quest_id": 3443,
+          "name": "铸造火炬杆",
+          "xp": 12600
+        },
+        {
+          "quest_id": 3452,
+          "name": "烈焰之盒",
+          "xp": 13600
+        },
+        {
+          "quest_id": 3453,
+          "name": "Questie:3453",
+          "xp": 1350
+        },
+        {
+          "quest_id": 3454,
+          "name": "惩戒火炬",
+          "xp": 13600
+        },
+        {
+          "quest_id": 3462,
+          "name": "侍卫玛特拉克",
+          "xp": 1350
+        },
+        {
+          "quest_id": 3463,
+          "name": "烧掉它们！",
+          "xp": 22000
+        },
+        {
+          "quest_id": 7701,
+          "name": "悬赏：工头玛托留斯",
+          "xp": 13600
+        },
+        {
+          "quest_id": 7722,
+          "name": "绝密配方！",
+          "xp": 13600
+        },
+        {
+          "quest_id": 7723,
+          "name": "该死的手指头！",
+          "xp": 13100
+        },
+        {
+          "quest_id": 7724,
+          "name": "熔岩蜘蛛的威胁！",
+          "xp": 13100
+        },
+        {
+          "quest_id": 7727,
+          "name": "熏火龙",
+          "xp": 13100
+        },
+        {
+          "quest_id": 7729,
+          "name": "工作机会：肃清竞争对手",
+          "xp": 12600
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 4451,
+          "name": "自由的钥匙",
+          "xp": 15100
+        },
+        {
+          "quest_id": 7702,
+          "name": "让他们失眠！",
+          "xp": 13100
+        },
+        {
+          "quest_id": 7704,
+          "name": "看看它的个头！",
+          "xp": 14100
+        },
+        {
+          "quest_id": 7728,
+          "name": "被盗：鼓风机和望远镜",
+          "xp": 12600
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        42000,
+        70000
+      ],
+      "minutes_range": [
+        130,
+        195
+      ],
+      "guaranteed_xp": 157450,
+      "free_conditional_xp": 54900,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "炉石加基森集中交付",
+      "completion_level": 51,
+      "guaranteed": [
+        {
+          "quest_id": 2661,
+          "name": "给马林的粉末",
+          "xp": 1300
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 2662,
+          "name": "诺格弗格药剂",
+          "xp": 0
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        0,
+        0
+      ],
+      "minutes_range": [
+        3,
+        8
+      ],
+      "guaranteed_xp": 1300,
+      "free_conditional_xp": 0,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "安戈洛零购买核心",
+      "completion_level": 52,
+      "guaranteed": [
+        {
+          "quest_id": 3844,
+          "name": "无人知晓的秘密",
+          "xp": 3700
+        },
+        {
+          "quest_id": 3845,
+          "name": "无人知晓的秘密",
+          "xp": 14700
+        },
+        {
+          "quest_id": 3881,
+          "name": "抢救物资",
+          "xp": 15200
+        },
+        {
+          "quest_id": 3882,
+          "name": "挖骨头",
+          "xp": 14100
+        },
+        {
+          "quest_id": 3883,
+          "name": "异型的生态",
+          "xp": 14700
+        },
+        {
+          "quest_id": 4145,
+          "name": "拉瑞安和穆尔金",
+          "xp": 14700
+        },
+        {
+          "quest_id": 4289,
+          "name": "安戈洛的猩猩",
+          "xp": 16300
+        },
+        {
+          "quest_id": 4290,
+          "name": "拉克维的食物",
+          "xp": 15200
+        },
+        {
+          "quest_id": 4291,
+          "name": "拉克维的气味",
+          "xp": 15200
+        },
+        {
+          "quest_id": 4292,
+          "name": "拉克维的诱饵",
+          "xp": 21100
+        },
+        {
+          "quest_id": 4301,
+          "name": "强大的尤尔查",
+          "xp": 16300
+        },
+        {
+          "quest_id": 4491,
+          "name": "Questie:4491",
+          "xp": 16300
+        },
+        {
+          "quest_id": 4492,
+          "name": "走丢了！",
+          "xp": 8100
+        },
+        {
+          "quest_id": 4501,
+          "name": "当心翼手龙",
+          "xp": 16300
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 3884,
+          "name": "威利德的日记",
+          "xp": 10200
+        },
+        {
+          "quest_id": 4284,
+          "name": "能量水晶",
+          "xp": 15200
+        },
+        {
+          "quest_id": 4285,
+          "name": "Questie:4285",
+          "xp": 11400
+        },
+        {
+          "quest_id": 4287,
+          "name": "Questie:4287",
+          "xp": 11400
+        },
+        {
+          "quest_id": 4288,
+          "name": "Questie:4288",
+          "xp": 11400
+        },
+        {
+          "quest_id": 4494,
+          "name": "异种蝎的远征",
+          "xp": 1500
+        },
+        {
+          "quest_id": 4496,
+          "name": "擒虫先擒王",
+          "xp": 15200
+        },
+        {
+          "quest_id": 4503,
+          "name": "希兹尔的飞行器",
+          "xp": 14100
+        },
+        {
+          "quest_id": 4507,
+          "name": "捕捉皇后",
+          "xp": 15800
+        },
+        {
+          "quest_id": 4509,
+          "name": "临危不惧",
+          "xp": 1550
+        },
+        {
+          "quest_id": 4511,
+          "name": "临危不惧",
+          "xp": 23600
+        },
+        {
+          "quest_id": 974,
+          "name": "究根问底",
+          "xp": 16300
+        },
+        {
+          "quest_id": 980,
+          "name": "新的泉水",
+          "xp": 8100
+        }
+      ],
+      "owned_material_bonus": [
+        {
+          "quest_id": 4243,
+          "name": "找回A-Me 01",
+          "xp": 7600
+        },
+        {
+          "quest_id": 4244,
+          "name": "找回A-Me 01",
+          "xp": 11400
+        },
+        {
+          "quest_id": 4245,
+          "name": "Questie:4245",
+          "xp": 19000
+        }
+      ],
+      "kill_xp_range": [
+        48000,
+        82000
+      ],
+      "minutes_range": [
+        145,
+        215
+      ],
+      "guaranteed_xp": 201900,
+      "free_conditional_xp": 155750,
+      "owned_material_bonus_xp": 38000
+    },
+    {
+      "block": "西瘟疫四锅与安多哈尔",
+      "completion_level": 54,
+      "guaranteed": [
+        {
+          "quest_id": 5094,
+          "name": "战斗的号角：瘟疫之地！",
+          "xp": 1350
+        },
+        {
+          "quest_id": 5096,
+          "name": "Questie:5096",
+          "xp": 15200
+        },
+        {
+          "quest_id": 5098,
+          "name": "标记哨塔",
+          "xp": 16900
+        },
+        {
+          "quest_id": 5228,
+          "name": "瘟疫之锅",
+          "xp": 1500
+        },
+        {
+          "quest_id": 5229,
+          "name": "目标：费尔斯通农场",
+          "xp": 15200
+        },
+        {
+          "quest_id": 5230,
+          "name": "返回亡灵壁垒",
+          "xp": 7600
+        },
+        {
+          "quest_id": 5231,
+          "name": "目标：达尔松之泪",
+          "xp": 16300
+        },
+        {
+          "quest_id": 5232,
+          "name": "返回亡灵壁垒",
+          "xp": 8100
+        },
+        {
+          "quest_id": 5233,
+          "name": "目标：嚎哭鬼屋",
+          "xp": 16300
+        },
+        {
+          "quest_id": 5234,
+          "name": "返回亡灵壁垒",
+          "xp": 8100
+        },
+        {
+          "quest_id": 5235,
+          "name": "目标：盖罗恩农场",
+          "xp": 18000
+        },
+        {
+          "quest_id": 5236,
+          "name": "返回亡灵壁垒",
+          "xp": 9000
+        },
+        {
+          "quest_id": 5237,
+          "name": "任务完成！",
+          "xp": 27000
+        },
+        {
+          "quest_id": 4971,
+          "name": "时间问题",
+          "xp": 16900
+        },
+        {
+          "quest_id": 5021,
+          "name": "迟到总比不到好",
+          "xp": 7300
+        },
+        {
+          "quest_id": 6004,
+          "name": "未竟的事业",
+          "xp": 16900
+        },
+        {
+          "quest_id": 6023,
+          "name": "未完的任务",
+          "xp": 17500
+        },
+        {
+          "quest_id": 6025,
+          "name": "Questie:6025",
+          "xp": 18000
+        },
+        {
+          "quest_id": 4984,
+          "name": "大自然的苦楚",
+          "xp": 11800
+        },
+        {
+          "quest_id": 4985,
+          "name": "大自然的苦楚",
+          "xp": 12600
+        }
+      ],
+      "free_conditional": [
+        {
+          "quest_id": 4972,
+          "name": "找回时间",
+          "xp": 16900
+        },
+        {
+          "quest_id": 5050,
+          "name": "好运护符",
+          "xp": 7300
+        },
+        {
+          "quest_id": 5051,
+          "name": "两半合一",
+          "xp": 15800
+        },
+        {
+          "quest_id": 5060,
+          "name": "被锁起来的农夫",
+          "xp": 20400
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        65000,
+        105000
+      ],
+      "minutes_range": [
+        155,
+        235
+      ],
+      "guaranteed_xp": 261550,
+      "free_conditional_xp": 60400,
+      "owned_material_bonus_xp": 0
+    },
+    {
+      "block": "费伍德免费备用块",
+      "completion_level": 54,
+      "guaranteed": [],
+      "free_conditional": [
+        {
+          "quest_id": 8460,
+          "name": "木喉熊怪的盟友",
+          "xp": 10100
+        },
+        {
+          "quest_id": 5155,
+          "name": "加德纳尔的势力",
+          "xp": 14100
+        },
+        {
+          "quest_id": 4505,
+          "name": "腐化之井",
+          "xp": 15800
+        },
+        {
+          "quest_id": 6162,
+          "name": "最后一战",
+          "xp": 14100
+        },
+        {
+          "quest_id": 8462,
+          "name": "与纳菲恩交谈",
+          "xp": 1650
+        }
+      ],
+      "owned_material_bonus": [],
+      "kill_xp_range": [
+        0,
+        30000
+      ],
+      "minutes_range": [
+        0,
+        90
+      ],
+      "guaranteed_xp": 0,
+      "free_conditional_xp": 55750,
+      "owned_material_bonus_xp": 0
+    }
+  ],
+  "totals": {
+    "guaranteed_task_xp": 1230150,
+    "free_conditional_task_xp": 425700,
+    "owned_material_bonus_xp": 38000,
+    "kill_xp_low": 327000,
+    "kill_xp_high": 573000,
+    "minutes_low": 980,
+    "minutes_high": 1553
+  },
+  "guaranteed_low_xp": 1557150,
+  "free_pool_high_xp": 2228850,
+  "free_pool_margin": 597843,
+  "owned_material_pool_high_xp": 2266850,
+  "missing_quest_ids": []
+}

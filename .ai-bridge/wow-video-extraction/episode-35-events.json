@@ -1,0 +1,152 @@
+{
+  "episode": 35,
+  "title": "北风苔原 70.9",
+  "bvid": "BV1EQiQBKEVC",
+  "duration_seconds": 4332,
+  "display_duration": "1:12:12",
+  "series_index": "35/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 73,
+      "fine20_a": 73,
+      "fine20_b": 72,
+      "fine20_c": 72,
+      "fine5_a": 70,
+      "fine5_b": 70,
+      "fine5_c": 70,
+      "fine5_d": 64
+    },
+    "formal_total": 564,
+    "manifest_count": 8,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "diagnostic_derivative_images_excluded": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_range": "episode_metadata",
+      "level": 70,
+      "direct": false,
+      "status": "series_metadata_only",
+      "note": "标题为北风苔原70.9；本集未捕获清晰角色等级数字。"
+    },
+    {
+      "time_range": "52:40 and 64:40 approx",
+      "direct": true,
+      "evidence": "画面出现你在这个等级的游戏时间已累计几十分钟",
+      "level_number_visible": false,
+      "trigger_quest_confirmed": false
+    },
+    {
+      "time_range": "episode_end",
+      "level": 71,
+      "direct": false,
+      "status": "not_confirmed_in_game",
+      "note": "下一集标题为北风苔原71，但第35集未捕获70→71直接升级消息或71级角色面板。"
+    }
+  ],
+  "continuity_corrections": [
+    {
+      "previous_episode": 34,
+      "quest_ids": [11707, 11708],
+      "correction": "第34集只确认11707迫在眉睫已接取；第35集约40:25-40:35才完成11707并接11708，随后约41:40-42:20完成11708。第34集原完成记录应删除。",
+      "confidence": "high"
+    }
+  ],
+  "events": [
+    {"time_range":"00:10-00:25","action":"complete","quest_id":11864,"quest_name":"决战奈辛瓦里","experience_shown":4100,"confidence":"high"},
+    {"time_range":"00:20-00:30","action":"accept","quest_id":11866,"quest_name":"敌人的耳环","confidence":"high"},
+    {"time_range":"00:25-00:35","action":"accept","quest_id":11876,"quest_name":"帮助弱小","confidence":"high"},
+    {"time_range":"00:30-00:40","action":"accept","quest_id":11884,"quest_name":"尼达尔，犀牛之王……","confidence":"high"},
+    {"time_range":"04:45-05:20","action":"complete_and_accept_next","quest_id":11865,"quest_name":"死不足惜","experience_shown":40600,"next_quest_id":11868,"next_quest_name":"驯鹿杀手之死","confidence":"high"},
+    {"time_range":"04:50-05:20","action":"accept","quest_id":11869,"quest_name":"欢乐的蚌壳","confidence":"high"},
+    {"time_range":"11:25-11:55","action":"complete_and_accept_next","quest_id":11575,"quest_name":"千钧一发","experience_shown":20100,"next_quest_id":11587,"next_quest_name":"越狱","confidence":"high"},
+    {"time_range":"13:00-13:10","action":"accept","quest_id":11576,"quest_name":"监视裂谷：悬崖异常","confidence":"high"},
+    {"time_range":"13:25-13:40","action":"accept","quest_id":11605,"quest_name":"海象人的先祖","confidence":"high"},
+    {"time_range":"13:25-13:40","action":"accept","quest_id":11612,"quest_name":"夺回采掘场","confidence":"high"},
+    {"time_range":"16:20-17:45","action":"complete_and_accept_next","quest_id":11605,"quest_name":"海象人的先祖","experience_shown":40600,"next_quest_id":11607,"next_quest_name":"失落的灵魂","confidence":"high"},
+    {"time_range":"16:20-17:45","action":"complete_and_accept_next","quest_id":11612,"quest_name":"夺回采掘场","experience_shown":40600,"next_quest_id":11617,"next_quest_name":"别让他们逃了！","confidence":"high"},
+    {"time_range":"20:45-21:15","action":"complete_and_accept_next","quest_id":11607,"quest_name":"失落的灵魂","experience_shown":40600,"next_quest_id":11609,"next_quest_name":"寻找古器","confidence":"high"},
+    {"time_range":"23:35-24:00","action":"complete_and_accept_next","quest_id":11609,"quest_name":"寻找古器","experience_shown":40600,"next_quest_id":11610,"next_quest_name":"先祖的回归","confidence":"high"},
+    {"time_range":"28:40-29:00","action":"complete","quest_id":11610,"quest_name":"先祖的回归","experience_shown":50800,"confidence":"high"},
+    {"time_range":"29:25-30:00","action":"complete_and_accept_next","quest_id":11617,"quest_name":"别让他们逃了！","experience_shown":40600,"next_quest_id":11623,"next_quest_name":"拜访馆长","confidence":"high"},
+    {"time_range":"35:20 approx","action":"complete","quest_id":11623,"quest_name":"拜访馆长","experience_observed_exact":false,"experience_calibrated":40600,"confidence":"high_for_action_calibrated_for_experience"},
+    {"time_range":"35:35-36:15","action":"complete","quest_id":11866,"quest_name":"敌人的耳环","experience_shown":40600,"confidence":"high"},
+    {"time_range":"35:35-36:15","action":"complete_and_accept_next","quest_id":11876,"quest_name":"帮助弱小","experience_shown":40600,"next_quest_id":11878,"next_quest_name":"库诺克的智慧","confidence":"high"},
+    {"time_range":"35:35-36:15","action":"complete_and_accept_next","quest_id":11869,"quest_name":"欢乐的蚌壳","experience_shown":40600,"next_quest_id":11870,"next_quest_name":"遗弃海岸","confidence":"high"},
+    {"time_range":"38:00-38:25","action":"complete_and_accept_next","quest_id":11878,"quest_name":"库诺克的智慧","experience_shown":30500,"next_quest_id":11879,"next_quest_name":"猛犸毁灭者卡奥","confidence":"high"},
+    {"time_range":"40:25-40:35","action":"complete_and_accept_next","quest_id":11707,"quest_name":"迫在眉睫","experience_shown":4000,"next_quest_id":11708,"next_quest_name":"机械侏儒","confidence":"high","cross_episode_correction":true},
+    {"time_range":"41:40-42:20","action":"complete","quest_id":11708,"quest_name":"机械侏儒","experience_shown":4000,"confidence":"high","cross_episode_correction":true},
+    {"time_range":"43:00-43:40","action":"accept","quest_id":11712,"quest_name":"物质转换注射器","confidence":"high"},
+    {"time_range":"43:00-43:40","action":"accept","quest_id":11710,"quest_name":"转换器怎么了？","confidence":"high"},
+    {"time_range":"43:00-43:40","action":"accept","quest_id":11645,"quest_name":"恶心的雪地狗头人！","confidence":"high"},
+    {"time_range":"43:10-43:40","action":"complete","quest_id":11879,"quest_name":"猛犸毁灭者卡奥","experience_shown":50800,"confidence":"high"},
+    {"time_range":"40:20-48:15 cut gap","action":"complete_and_accept_next","quest_id":11870,"quest_name":"遗弃海岸","experience_observed_exact":false,"experience_calibrated":4100,"next_quest_id":11871,"next_quest_name":"不可容忍","confidence":"high_for_chain_completion_timestamp_unknown"},
+    {"time_range":"48:15 approx","action":"complete_and_accept_next","quest_id":11871,"quest_name":"不可容忍","experience_shown":40600,"next_quest_id":11872,"next_quest_name":"罪恶的蛤蜊主宰……","confidence":"high"},
+    {"time_range":"50:45 approx","action":"complete","quest_id":11868,"quest_name":"驯鹿杀手之死","experience_shown":40600,"confidence":"high"},
+    {"time_range":"53:05-53:20","action":"complete","quest_id":11892,"quest_name":"刺杀哈罗德·兰恩","experience_shown":60900,"confidence":"high"},
+    {"time_range":"60:40-61:15","action":"complete_and_accept_next","quest_id":11587,"quest_name":"越狱","experience_shown":40200,"next_quest_id":11590,"next_quest_name":"调查","confidence":"high"},
+    {"time_range":"61:10-62:15","action":"complete","quest_id":11590,"quest_name":"调查","experience_shown":40200,"next_quest_id":11646,"next_quest_name":"苔原上的审讯","confidence":"high"},
+    {"time_range":"61:10-62:15","action":"complete_and_accept_next","quest_id":11576,"quest_name":"监视裂谷：悬崖异常","experience_shown":30200,"next_quest_id":11582,"next_quest_name":"监视裂谷：峭壁断层","confidence":"high"},
+    {"time_range":"61:10-62:15","action":"complete_and_accept_next","quest_id":11646,"quest_name":"苔原上的审讯","experience_shown":10100,"next_quest_id":11648,"next_quest_name":"说服的艺术","confidence":"high"},
+    {"time_range":"63:25-64:10","action":"complete_and_accept_next","quest_id":11648,"quest_name":"说服的艺术","experience_shown":30200,"next_quest_id":11663,"next_quest_name":"分享情报","confidence":"high"},
+    {"time_range":"63:25-64:10","action":"complete_and_accept_next","quest_id":11663,"quest_name":"分享情报","experience_shown":4000,"next_quest_id":11671,"next_quest_name":"与时间赛跑","confidence":"high"},
+    {"time_range":"65:45-66:30","action":"complete_and_accept_next","quest_id":11671,"quest_name":"与时间赛跑","experience_shown":40200,"next_quest_id":11679,"next_quest_name":"重铸钥匙","confidence":"high"},
+    {"time_range":"66:20-69:35","action":"complete_and_accept_next","quest_id":11679,"quest_name":"重铸钥匙","experience_shown":null,"next_quest_id":11680,"next_quest_name":"准备飞翔","confidence":"high"},
+    {"time_range":"69:35-70:10","action":"complete_and_accept_next","quest_id":11582,"quest_name":"监视裂谷：峭壁断层","experience_shown":30200,"next_quest_id":12728,"next_quest_name":"监视裂谷：冬鳞洞穴","confidence":"high"},
+    {"time_range":"69:35-70:10","action":"complete_and_accept_next","quest_id":11680,"quest_name":"准备飞翔","experience_shown":4000,"next_quest_id":11681,"next_quest_name":"营救艾瓦诺尔","confidence":"high"},
+    {"time_range":"71:05-71:35","action":"complete_and_accept_next","quest_id":11681,"quest_name":"营救艾瓦诺尔","experience_shown":40200,"next_quest_id":11682,"next_quest_name":"苏雷斯塔兹","confidence":"high"},
+    {"time_range":"71:20-71:40","action":"complete_and_accept_next","quest_id":11682,"quest_name":"苏雷斯塔兹","experience_shown":20100,"next_quest_id":11733,"next_quest_name":"飞越裂谷","confidence":"high"},
+    {"time_range":"72:00 approx","action":"complete","quest_id":11733,"quest_name":"飞越裂谷","experience_shown":30200,"confidence":"high"},
+    {"time_range":"71:45-72:12","action":"accept","quest_id":11912,"quest_name":"冰冷的草莓","confidence":"high_from_end_tracker"},
+    {"time_range":"71:45-72:12","action":"accept","quest_id":13094,"quest_name":"他们丝毫不感到羞愧吗？","faction_variant":"Alliance","confidence":"high_from_end_tracker"},
+    {"time_range":"71:45-72:12","action":"accept","quest_id":11910,"quest_name":"古树的秘密","confidence":"high_from_npc_window_and_end_tracker"},
+    {"time_range":"71:45-72:12","action":"accept","quest_id":11900,"quest_name":"监测数据","confidence":"high_from_end_tracker_objectives"}
+  ],
+  "completed_quests": [11864,11865,11575,11605,11612,11607,11609,11610,11617,11623,11866,11876,11869,11878,11707,11708,11879,11870,11871,11868,11892,11587,11590,11576,11646,11648,11663,11671,11679,11582,11680,11681,11682,11733],
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"本集开头接受；无完成或放弃证据。"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"48分钟左右接受；无完成或放弃证据。"},
+    {"quest_id":11712,"quest_name":"物质转换注射器","state":"本集菲兹兰克机场接受；后段追踪状态可见，无最终完成证据。"},
+    {"quest_id":11710,"quest_name":"转换器怎么了？","state":"本集菲兹兰克机场接受；约53分钟追踪栏仍可见。"},
+    {"quest_id":11645,"quest_name":"恶心的雪地狗头人！","state":"本集菲兹兰克机场接受；约53分钟追踪栏仍可见。"},
+    {"quest_id":12728,"quest_name":"监视裂谷：冬鳞洞穴","state":"本集69-70分钟接受；片尾仍在追踪栏。"},
+    {"quest_id":11900,"quest_name":"监测数据","state":"片尾考达拉新接，未完成。"},
+    {"quest_id":11910,"quest_name":"古树的秘密","state":"片尾考达拉新接，未完成。"},
+    {"quest_id":11912,"quest_name":"冰冷的草莓","state":"片尾考达拉新接，未完成。"},
+    {"quest_id":13094,"quest_name":"他们丝毫不感到羞愧吗？","state":"联盟版本；片尾考达拉新接，未完成。"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"第34集遗留；本集无完成或放弃证据。"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"第34集遗留；本集无完成或放弃证据。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"第34集片尾接受；本集无完成或放弃证据。"},
+    {"quest_id":10004,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9900,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9925,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9882,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9937,"state":"联盟版本；更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9869,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":10810,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9962,"state":"此前明确失败；是否保留或放弃仍不确认。"}
+  ],
+  "next_episode": {
+    "episode": 36,
+    "title": "北风苔原 71",
+    "bvid": "BV1k46oBaEJX",
+    "duration_seconds": 4003,
+    "duration": "1:06:43",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 18,
+  "notes": [
+    "第35集未捕获可直接读取的70或71级玩家等级数字，不能绑定具体升级任务。",
+    "第35集直接纠正第34集11707/11708完成时间错配。",
+    "11870遗弃海岸的具体完成秒数落在剪辑缺口，但11871不可容忍的完成证明前置必已完成。",
+    "片尾11733飞越裂谷完成后已经进入考达拉，并开始11900/11910/11912/13094任务。",
+    "第36集仅查询合集元数据，未导航、播放、截图或处理。"
+  ]
+}
