@@ -29,10 +29,36 @@
 | 鲸灵 URL 正确但提示不是售后列表，或加载异常缓慢 | 路由已完成，但微应用列表 DOM 尚未挂载；也可能是本机 CPU 被残留进程占满 | Step 11 等待业务 DOM 就绪；先按 [售后列表就绪与慢加载判断](ops-jingling.md#售后列表就绪与慢加载判断) 排查，不先清缓存或重新登录 |
 | 排序下拉正确但工单时效顺序错误 | 平台当次列表渲染状态不一致 | Step 11 等 2 秒后只刷新当前列表页一次并复核，不重复点排序；仍错误则安全停止，不按 Session 失效处理 |
 | 提醒“倒计时解析失败，停止冻结48小时清单” | 旧代码按“后自动…”等文案白名单找倒计时，平台新增 `后供应商处理超时`、`后流转至客服` 就会漏读 | Step 10 必须从卡片 `.el-timer` 组件读取倒计时，不按后缀文案筛选；数字主体仍须严格解析，失败继续触发安全门禁 |
+| 已处理的反馈仍显示在“待洞察” | 手动修复规则后没有给 feedback 写入 `insightedAt` | 按下节精确归档对应反馈 ID，并读回验证可见待洞察数量 |
 
 ---
 
-## 3. 关键 URL 速查
+## 3. 反馈洞察归档
+
+统计页只把“有具体说明且没有 `insightedAt`”的反馈显示为待洞察。Claude Code / Codex 完成分析并落实规则或代码后，要显式关闭这条反馈状态；归档只增加时间标记，不删除 `data/feedback.jsonl` 中的原文。
+
+先只读列出页面可见的待洞察反馈：
+
+```bash
+node -e "const db=require('./lib/server/data'); console.log(db.readFeedback({uninsighted:true}).filter(f=>String(f.reason||'').trim()).map(f=>({id:f.id,workOrderNum:f.workOrderNum,reason:f.reason})))"
+```
+
+核对问题确实已经处理后，用明确 ID 归档并读回验证：
+
+```bash
+node -e "const db=require('./lib/server/data'); const ids=['fb-...']; db.markFeedbackInsighted(ids); const pending=db.readFeedback({uninsighted:true}).filter(f=>String(f.reason||'').trim()); console.log({archived:ids,pending:pending.map(f=>f.id)})"
+```
+
+操作边界：
+
+- 只归档已经完成分析并落实处理的反馈；仍待确认的问题继续保留。
+- 不删除反馈，不改 `verdict`、`reason` 或 simulation 状态。
+- 不要为了让 `uninsighted` 后端总数归零而批量标记没有说明的普通反馈；页面本来就不把它们列为待洞察。
+- 写入后必须重新读取，确认目标 ID 已有 `insightedAt`，并确认页面可见待洞察数量符合预期。
+
+---
+
+## 4. 关键 URL 速查
 
 | 系统 | 页面 | URL |
 |------|------|-----|
@@ -46,7 +72,7 @@
 
 ---
 
-## 4. 跨系统技术红线
+## 5. 跨系统技术红线
 
 - `[∞/永久保留]` **#1 导航参数**：鲸灵详情页导航必须用 `workOrderNum`，禁止用 `afterSaleId`
 - `[∞/永久保留]` **#2 Vue Router 导航**：禁止直接 URL 跳转鲸灵详情页（组件数据为空），必须先回列表再 router.push

@@ -58,6 +58,10 @@
 
 触发文件清单（任一即触发）：`lib/infer.js` · `lib/constants.js` · `lib/server/pipeline.js` · `lib/server/relogin-session.js` · `lib/jl/*.js` · `lib/jl-session-state.js` · `lib/jl-account-config.js` · `lib/erp/*.js`
 
+## 反馈洞察归档
+
+统计页的洞察由 Claude Code / Codex 手动处理。规则或代码处理完成后，必须调用 `lib/server/data.js` 的 `markFeedbackInsighted(ids)` 给对应反馈写入 `insightedAt`，再读回确认“有具体说明且未洞察”的数量已经减少；禁止删除反馈原文，也不要为了清零后端计数批量标记没有说明的普通反馈。操作命令见 `docs/ops-tech.md §3`。
+
 ## 单元测试
 
 | 测试 | 命令 | 何时必跑 |
