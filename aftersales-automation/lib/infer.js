@@ -1513,4 +1513,4 @@ function inferDecision(sim, queueItem) {
   return fin(escalate(`工单类型未识别: ${type || '未知'}`));
 }
 
-module.exports = { inferDecision };
+module.exports = { evaluateRefundOnlyTrackings, inferDecision };

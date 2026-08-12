@@ -6,6 +6,7 @@ const { proveReturnItems } = require('../return-item-proof');
 const ENABLED_AUTOMATION_CASES = new Set([
   'refund_return.received.exact.approve\u0000七天无理由退货（不喜欢/不合适）',
   'refund_only.unshipped.approve\u0000多拍/拍错/不想要',
+  'refund_only.safe_tracking.approve\u0000多拍/拍错/不想要',
 ]);
 
 const BRANCHES = Object.freeze({
@@ -500,6 +501,8 @@ function summarizeHistory({
         positiveCount: 0,
         negativeCount: 0,
         autoSuccessCount: 0,
+        manualExecutedCount: 0,
+        manualArchivedCount: 0,
         manualHandledCount: 0,
         confirmedNoActionCount: 0,
         noteCounts: new Map(),
@@ -517,8 +520,13 @@ function summarizeHistory({
       group.autoSuccessCount += 1;
     }
     const archivedSource = caseByWorkOrder.get(String(simulation.workOrderNum || ''))?.groundTruth?.source;
-    const archivedAsManual = ['manual_handled', 'executed', 'batch_executed'].includes(archivedSource);
-    if ((simulation.executedAt && !simulation.autoExecutedAt) || archivedAsManual) group.manualHandledCount += 1;
+    const archivedAsExecution = ['executed', 'batch_executed'].includes(archivedSource);
+    const archivedManually = archivedSource === 'manual_handled';
+    const executedThroughSystem = archivedAsExecution
+      || (!archivedSource && simulation.executedAt && !simulation.autoExecutedAt);
+    if (executedThroughSystem) group.manualExecutedCount += 1;
+    if (archivedManually) group.manualArchivedCount += 1;
+    if (executedThroughSystem || archivedManually) group.manualHandledCount += 1;
     if (archivedSource === 'confirmed_no_action') group.confirmedNoActionCount += 1;
 
     const note = redactNote(simulation.collectedData?.ticket?.buyerRemark);

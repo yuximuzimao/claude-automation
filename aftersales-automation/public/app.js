@@ -1571,7 +1571,8 @@ function renderAfterSalesBranches(report) {
         <div><span>真实自动成功</span><strong>${Number(item.autoSuccessCount || 0)}</strong></div>
         <div><span>好评</span><strong>${Number(item.positiveCount || 0)}</strong></div>
         <div><span>差评</span><strong>${Number(item.negativeCount || 0)}</strong></div>
-        <div><span>人工处理</span><strong>${Number(item.manualHandledCount || 0)}</strong></div>
+        <div><span>执行操作</span><strong>${Number(item.manualExecutedCount || 0)}</strong></div>
+        <div><span>手动归档</span><strong>${Number(item.manualArchivedCount || 0)}</strong></div>
         <div><span>确认无需处理</span><strong>${Number(item.confirmedNoActionCount || 0)}</strong></div>
       </div>
       ${notes ? `<div class="branch-notes"><span>历史备注</span>${notes}</div>` : ''}

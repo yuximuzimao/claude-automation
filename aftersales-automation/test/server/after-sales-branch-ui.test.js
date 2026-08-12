@@ -33,6 +33,8 @@ test('统计页展示新的最近30天分支清单，不再展示旧10次自动�
   assert.match(source, /可评估自动化/);
   assert.match(source, /仅人工/);
   assert.match(source, /autoSuccessCount/);
+  assert.match(source, /manualExecutedCount/);
+  assert.match(source, /manualArchivedCount/);
   assert.match(source, /item\.notes/);
   assert.doesNotMatch(source, /renderAutoExecConfidence/);
   assert.doesNotMatch(source, /执行 ≥10 次/);
@@ -62,21 +64,21 @@ test('分支页只展示采集和归类正常的数据，并按自动化价值�
         branchLabel: '退货退款 / 已入库 / 精确退回 / 同意退款',
         registered: true, automationStatus: 'enabled', expectedAction: 'approve',
         occurrenceCount: 4, autoSuccessCount: 4, positiveCount: 4,
-        negativeCount: 0, manualHandledCount: 0, missingFacts: [], notes: [],
+        negativeCount: 0, manualExecutedCount: 0, manualArchivedCount: 0, missingFacts: [], notes: [],
       },
       {
         afterSaleReason: '拒收', orderType: '仅退款',
         branchLabel: '仅退款 / 所有包裹已退回 / 同意退款',
         registered: true, automationStatus: 'candidate', expectedAction: 'approve',
         occurrenceCount: 3, autoSuccessCount: 2, positiveCount: 3,
-        negativeCount: 0, manualHandledCount: 1, missingFacts: [], notes: [],
+        negativeCount: 0, manualExecutedCount: 1, manualArchivedCount: 0, missingFacts: [], notes: [],
       },
       {
         afterSaleReason: '次品', orderType: '退货退款',
         branchLabel: '退货退款 / 无退货单号 / 转人工',
         registered: true, automationStatus: 'manual_only', expectedAction: 'escalate',
         occurrenceCount: 2, autoSuccessCount: 0, positiveCount: 0,
-        negativeCount: 0, manualHandledCount: 2, missingFacts: [], notes: [],
+        negativeCount: 0, manualExecutedCount: 0, manualArchivedCount: 2, missingFacts: [], notes: [],
       },
       {
         afterSaleReason: '错误搜索结果', orderType: '仅退款',
@@ -115,7 +117,7 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
       branchLabel: '仅退款 / 主品与赠品均未发货 / 同意退款',
       registered: true, automationStatus: 'candidate', expectedAction: 'approve',
       occurrenceCount: 16, autoSuccessCount: 15, positiveCount: 15,
-      negativeCount: 0, manualHandledCount: 1, missingFacts: [],
+      negativeCount: 0, manualExecutedCount: 1, manualArchivedCount: 0, missingFacts: [],
       notes: [{ value: '真正空值', count: 12 }, { value: '不要了', count: 4 }],
     },
     {
@@ -123,7 +125,7 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
       branchLabel: '仅退款 / 所有包裹已退回 / 同意退款',
       registered: true, automationStatus: 'candidate', expectedAction: 'approve',
       occurrenceCount: 12, autoSuccessCount: 7, positiveCount: 11,
-      negativeCount: 1, manualHandledCount: 5, missingFacts: [], notes: [],
+      negativeCount: 1, manualExecutedCount: 3, manualArchivedCount: 2, missingFacts: [], notes: [],
     },
   ] });
 
@@ -135,7 +137,9 @@ test('候选分支按自动化证据排序，并直接展示完整条件和历�
   assert.match(html, /真实自动成功[\s\S]*15/);
   assert.match(html, /好评[\s\S]*15/);
   assert.match(html, /差评[\s\S]*0/);
-  assert.match(html, /人工处理[\s\S]*1/);
+  assert.match(html, /执行操作[\s\S]*1/);
+  assert.match(html, /手动归档[\s\S]*0/);
+  assert.doesNotMatch(html, /<span>人工处理<\/span>/);
   assert.match(html, /真正空值（12）[\s\S]*不要了（4）/);
   assert.match(html, /<div class="branch-card-header">/);
   assert.doesNotMatch(html, /<header class="branch-card-header">/);
@@ -155,7 +159,8 @@ test('候选排序依次比较自动成功、好评、差评和出现次数', ()
     autoSuccessCount: auto,
     positiveCount: positive,
     negativeCount: negative,
-    manualHandledCount: 0,
+    manualExecutedCount: 0,
+    manualArchivedCount: 0,
     missingFacts: [],
     notes: [],
   });
@@ -202,6 +207,7 @@ test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为两列�
   assert.match(css, /\.branch-tier-enabled\s*\{[^}]*--tier-color:\s*var\(--green\)/);
   assert.match(css, /\.branch-tier-candidate\s*\{[^}]*--tier-color:\s*var\(--blue\)/);
   assert.match(css, /\.branch-tier-manual\s*\{[^}]*--tier-color:\s*var\(--gray-400\)/);
+  assert.match(css, /\.branch-metrics\s*\{[^}]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(100px,\s*1fr\)\)/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.branch-overview\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.branch-metrics\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.doesNotMatch(css, /branch-(?:card|tier)[^\n{]*attention|branch-result-counts \.has-negative/);

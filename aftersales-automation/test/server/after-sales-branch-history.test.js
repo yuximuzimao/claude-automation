@@ -153,6 +153,36 @@ test('仅开放多拍拍错的主品赠品均未发货分支，其他原因保�
   assert.notEqual(enabled.caseId, candidate.caseId);
 });
 
+test('多拍拍错的安全物流分支已授权，其他售后原因仍保持候选', () => {
+  const makeSafeTrackingSimulation = afterSaleReason => ({
+    collectedData: { ticket: { afterSaleReason } },
+    decision: {
+      action: 'approve',
+      reason: '主商品和赠品全部ERP行均未发货或物流已退回',
+      warnings: [],
+      rulesApplied: [{
+        doc: 'flow-5.2',
+        section: 'Step4',
+        summary: '全部ERP行逐行核验通过→同意退款',
+      }],
+    },
+  });
+
+  const enabled = classifySimulation(
+    makeSafeTrackingSimulation('多拍/拍错/不想要'),
+    { type: '仅退款' },
+  );
+  const candidate = classifySimulation(
+    makeSafeTrackingSimulation('拒收'),
+    { type: '仅退款' },
+  );
+
+  assert.equal(enabled.branchId, 'refund_only.safe_tracking.approve');
+  assert.equal(enabled.automationStatus, 'enabled');
+  assert.equal(candidate.branchId, 'refund_only.safe_tracking.approve');
+  assert.equal(candidate.automationStatus, 'candidate');
+});
+
 test('无法识别的旧结果明确列为未登记，不得猜测或允许自动处理', () => {
   const result = classifySimulation(makeSimulation({ noRule: true }), { type: '退货退款' });
 
@@ -301,6 +331,51 @@ test('已手动处理归档按工单计入人工处理次数', () => {
   });
 
   assert.equal(report.cases[0].manualHandledCount, 1);
+  assert.equal(report.cases[0].manualExecutedCount, 0);
+  assert.equal(report.cases[0].manualArchivedCount, 1);
+});
+
+test('执行操作与手动归档分别计数，同时保留旧人工处理合计', () => {
+  const simulations = [
+    makeSimulation({ id: 'sim-executed', workOrderNum: 'wo-executed', queueItemId: 'queue-executed' }),
+    makeSimulation({ id: 'sim-batch', workOrderNum: 'wo-batch', queueItemId: 'queue-batch' }),
+    makeSimulation({ id: 'sim-archived', workOrderNum: 'wo-archived', queueItemId: 'queue-archived' }),
+  ];
+  const report = summarizeHistory({
+    simulations,
+    queueItems: [
+      { id: 'queue-executed', workOrderNum: 'wo-executed', type: '退货退款' },
+      { id: 'queue-batch', workOrderNum: 'wo-batch', type: '退货退款' },
+      { id: 'queue-archived', workOrderNum: 'wo-archived', type: '退货退款' },
+    ],
+    archivedCases: [
+      { workOrderNum: 'wo-executed', addedAt: '2026-07-10T01:00:00.000Z', groundTruth: { source: 'executed' } },
+      { workOrderNum: 'wo-batch', addedAt: '2026-07-10T01:00:00.000Z', groundTruth: { source: 'batch_executed' } },
+      { workOrderNum: 'wo-archived', addedAt: '2026-07-10T01:00:00.000Z', groundTruth: { source: 'manual_handled' } },
+    ],
+    now: new Date('2026-07-18T00:00:00.000Z'),
+  });
+
+  assert.equal(report.cases[0].manualExecutedCount, 2);
+  assert.equal(report.cases[0].manualArchivedCount, 1);
+  assert.equal(report.cases[0].manualHandledCount, 3);
+});
+
+test('自动处理归档即使带 executedAt 也不得误算为执行操作', () => {
+  const report = summarizeHistory({
+    simulations: [makeSimulation({ executedAt: '2026-07-10T00:01:00.000Z' })],
+    queueItems: [{ id: 'queue-1', type: '退货退款' }],
+    archivedCases: [{
+      workOrderNum: 'wo-1',
+      addedAt: '2026-07-10T01:00:00.000Z',
+      groundTruth: { source: 'auto_executed' },
+    }],
+    now: new Date('2026-07-18T00:00:00.000Z'),
+  });
+
+  assert.equal(report.cases[0].manualExecutedCount, 0);
+  assert.equal(report.cases[0].manualArchivedCount, 0);
+  assert.equal(report.cases[0].manualHandledCount, 0);
 });
 
 test('待商家二次发货使用稳定独立分支，不归入未登记', () => {

@@ -1508,7 +1508,7 @@ summary.branch-tier-heading::before {
 }
 .branch-metrics {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   border-top: 1px solid var(--gray-100);
 }
 .branch-metrics > div {

@@ -6,6 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const {
+  proveRefundOnlySafeTracking,
   proveRefundOnlyUnshipped,
   shouldAutoExecute,
 } = require('../../lib/server/after-sales-auto-gate');
@@ -79,6 +80,39 @@ function refundOnlyDecision(overrides = {}) {
   return approveDecision({
     reason: '主商品+赠品均未发货（无快递单号）',
     rulesApplied: [{ doc: 'flow-5.2', section: 'Step4', summary: '主商品+赠品未发货→同意退款' }],
+    ...overrides,
+  });
+}
+
+function refundOnlySafeTrackingData(reason = '多拍/拍错/不想要') {
+  const data = refundOnlyUnshippedData(reason);
+  data.erpSearches[0].rows.rows[0] = {
+    status: '卖家已发货',
+    tracking: 'RETURNED-1',
+    trackings: ['RETURNED-1'],
+    platformOrderIds: ['MAIN-1'],
+  };
+  data.erpSearches[1].rows.rows[0] = {
+    status: '待打印快递单',
+    tracking: 'NOT-PICKED-1',
+    trackings: ['NOT-PICKED-1'],
+    platformOrderIds: ['MAIN-2'],
+  };
+  data.erpLogistics = { results: [
+    { tracking: 'RETURNED-1', logisticsText: '客户要求，快件已安排退回' },
+    { tracking: 'NOT-PICKED-1', logisticsText: '暂无物流信息，等待揽收' },
+  ] };
+  data.logistics = { packages: [
+    { text: '物流单号：RETURNED-1\n客户要求，快件已安排退回' },
+    { text: '物流单号：NOT-PICKED-1\n暂无物流信息，等待揽收' },
+  ] };
+  return data;
+}
+
+function refundOnlySafeTrackingDecision(overrides = {}) {
+  return approveDecision({
+    reason: '主商品和赠品全部ERP行均未发货或物流已退回',
+    rulesApplied: [{ doc: 'flow-5.2', section: 'Step4', summary: '全部ERP行逐行核验通过→同意退款' }],
     ...overrides,
   });
 }
@@ -157,6 +191,48 @@ test('多拍拍错仅退款的主品和赠品均严格证明未发货时允许�
 
   assert.equal(proveRefundOnlyUnshipped(data), true);
   assert.equal(shouldAutoExecute(refundOnlyDecision(), data, { type: '仅退款' }), true);
+});
+
+test('多拍拍错仅退款的所有运单均未揽收或已退回时允许自动执行', () => {
+  const data = refundOnlySafeTrackingData();
+
+  assert.equal(proveRefundOnlySafeTracking(data), true);
+  assert.equal(shouldAutoExecute(refundOnlySafeTrackingDecision(), data, { type: '仅退款' }), true);
+});
+
+test('安全物流分支只授权多拍拍错，其他售后原因保持人工', () => {
+  const data = refundOnlySafeTrackingData('拒收');
+
+  assert.equal(proveRefundOnlySafeTracking(data), true);
+  assert.equal(shouldAutoExecute(refundOnlySafeTrackingDecision(), data, { type: '仅退款' }), false);
+});
+
+test('安全物流分支出现任一在途、未知、额外运单或采集错误时禁止自动执行', () => {
+  const inTransit = refundOnlySafeTrackingData();
+  inTransit.erpLogistics.results[1].logisticsText = '快件已揽收，正在运输中';
+  inTransit.logistics.packages[1].text = '物流单号：NOT-PICKED-1\n快件已揽收，正在运输中';
+  assert.equal(proveRefundOnlySafeTracking(inTransit), false);
+
+  const unknown = refundOnlySafeTrackingData();
+  unknown.erpLogistics.results[1].logisticsText = '暂无物流信息';
+  unknown.logistics.packages[1].text = '物流单号：NOT-PICKED-1\n暂无物流信息';
+  assert.equal(proveRefundOnlySafeTracking(unknown), false);
+
+  const extraTracking = refundOnlySafeTrackingData();
+  extraTracking.logistics.packages.push({ text: '物流单号：EXTRA-1\n等待揽收' });
+  assert.equal(proveRefundOnlySafeTracking(extraTracking), false);
+
+  const extraErpTracking = refundOnlySafeTrackingData();
+  extraErpTracking.erpLogistics.results.push({ tracking: 'EXTRA-ERP-1', logisticsText: '等待揽收' });
+  assert.equal(proveRefundOnlySafeTracking(extraErpTracking), false);
+
+  const abnormalUntracked = refundOnlySafeTrackingData();
+  abnormalUntracked.giftErpSearches[0].rows.rows[0].status = '卖家已发货';
+  assert.equal(proveRefundOnlySafeTracking(abnormalUntracked), false);
+
+  const collectError = refundOnlySafeTrackingData();
+  collectError.collectErrors.push('erp-search: 子订单 MAIN-2 读取失败');
+  assert.equal(proveRefundOnlySafeTracking(collectError), false);
 });
 
 test('相同未发货分支的其他售后原因没有授权，仍保持人工', () => {
