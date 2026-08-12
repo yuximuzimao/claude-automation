@@ -6,7 +6,7 @@
 
 ERP 全行核验、平台交易号验单、搜索最多两次、退回待确认假信号、多包裹和全部赠品子订单采集已经完成。最终规则、验证和提交见：
 
-- `docs/superpowers/handovers/2026-07-17-refund-only-erp-logistics-handoff.md`
+- `docs/superpowers/archive/2026-07-existing-fixes/handovers/2026-07-17-refund-only-erp-logistics-handoff.md`
 - `84f43e9`、`b7dce8a`、`c0f20a1`
 
 ## 先处理的两个问题
@@ -44,7 +44,7 @@ ERP 全行核验、平台交易号验单、搜索最多两次、退回待确认�
 
 - 分支：`codex/aftersales-confidence-safety-v1`
 - 方案提交：`9968cd8 docs(confidence-v2): replace overdesigned plan with branch registry`
-- 方案文件：`aftersales-automation/docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md`
+- 当时方案文件：`aftersales-automation/docs/superpowers/archive/2026-07-branch-automation/specs/2026-07-16-after-sales-branch-automation-design.md`
 - 当前工作树：`/Users/chat/.config/superpowers/worktrees/claude/aftersales-confidence-safety-v1`
 
 ### 必须遵守的恢复规则

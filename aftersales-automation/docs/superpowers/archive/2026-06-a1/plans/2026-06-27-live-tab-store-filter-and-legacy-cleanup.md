@@ -1,6 +1,6 @@
 # Live Tab Store Filter And Legacy Cleanup Review Plan
 
-> **Status 2026-06-27:** Completed and archived in place. Do not create a local archive directory for this plan. Implementation and handoff are recorded in `docs/superpowers/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
+> **Status 2026-06-27:** Completed. Implementation and handoff are recorded in `docs/superpowers/archive/2026-06-a1/handovers/2026-06-27-live-tab-store-filter-neat-handoff.md`.
 >
 > **For GPT/CodexPro reviewers:** This is a review-first plan. Do not edit code during the first pass. Do not run real browser, JL, ERP, scan, collect, approve, reject, fixed-batch, or account-opening commands. Use read-only commands such as `rg`, `sed`, `nl`, `git diff`, `git status`, `node --check`, and unit tests only if explicitly asked after review.
 

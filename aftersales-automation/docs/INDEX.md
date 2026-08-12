@@ -106,6 +106,7 @@ node cli.js remind <工单号> <账号名> "<具体问题描述>"
 | ERP 技术问题 | 导航、登录、物流弹窗、凭证上传 | `docs/ops-erp.md` |
 | 测试与验收 | CLI、采集或 ERP 逻辑修改后 | `docs/ops-testing.md` |
 | 队列停止与恢复 | 操作卡住或需立即中断 | `docs/ops-queue.md` |
+| 自动处理与统计口径 | 查当前授权分支、执行前门禁或指标来源 | `docs/automation-policy.md` |
 | 其他技术问题 | 先查总入口和常见故障 | `docs/ops-tech.md` |
 
 > ⚠️ 仅退款时，必须先通过 ERP 搜索确认发货状态，再决定走 flow-5.2 还是 flow-5.3。

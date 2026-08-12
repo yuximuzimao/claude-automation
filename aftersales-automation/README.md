@@ -62,13 +62,13 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 - **A1 列表入口**（`scripts/jl-steps/11-prepare-after-sale-list.js`）：固定导航售后列表，不依赖首页菜单或首页弹窗；排序值正确但列表乱序时，只等待 2 秒并刷新当前列表一次，重新就绪后复核，不重复点击排序
 - **A1/A2 固定清单编排**（`scripts/jl-steps/14-process-single-account-fixed-batch.js`）：当前生产入口为 `POST /api/accounts/:num/a1-fixed-batch` → `op-queue` → `processSingleAccountFixedBatch`。入口固定单账号 + 48h 清单；前端“处理工单”按钮只在账号 session ok 时显示，点击后二次确认。Step14 严格串行逐单处理，写回原 queue/simulation；当前只有命中 `shouldAutoExecute` 且通过 `executionJournal` 安全门的已授权同意分支会真实 approve，其余进入待确认/等待重查。
 - **平台阶段观察**（`lib/after-sales-platform-stage.js`）：所有 48 小时工单保存售后列表原始阶段。当前只有“换货＋商家-待商家二次发货”覆盖为“无需处理、人工确认后归档”；不会执行平台按钮或写备注。同工单同阶段确认后只刷新观察时间，阶段变化才重新进入待确认。
-- **已授权自动分支**：授权粒度与统计复盘中的最小 `caseId` 一致，不按单号或粗场景放开。当前包括“七天无理由（不喜欢/不合适）＋退货退款＋严格精确退回”和“多拍/拍错/不想要＋仅退款＋主品赠品全部未发货”。后者执行前重新核验每个主品/赠品子订单的 ERP 结果、平台交易号、未发货状态及无运单事实。
+- **已授权自动分支**：授权粒度与统计复盘中的最小 `caseId` 一致，不按单号或粗场景放开。当前开放三个分支：七天无理由（不喜欢/不合适）的退货退款严格精确退回；多拍/拍错/不想要的仅退款主品赠品全部无单号未发货；同原因仅退款中全部运单明确未揽收或已退回。三者执行前都按 [当前自动处理政策](docs/automation-policy.md) 重新证明事实。
 - **人工确认执行边界**：换货及商责分支始终设置 `requiresHumanReview + autoExecutionBlocked`，不会进入扫描中的无人自动执行。退回规格、数量、良次品严格一致并给出明确 approve/reject 动作时，人工核对后仍可点击单笔“执行操作”或主动发起批量执行；换货由 `execute-decision.js` 精确分派到“同意换货/拒绝换货”，找不到对应类型按钮即停止，不会借用退款按钮。
 - **自动执行恢复账本**（`lib/server/auto-execution-journal.js`、`lib/server/auto-execution-recovery.js`）：`executionJournal` 已作为自动执行安全门使用，记录 `auto_executing/auto_executed/failed/manually_resolved` 和 phase，防重复执行并 fail-closed。`auto-execution-recovery` 只是本地状态收口能力，尚无外部 CLI/API/UI recovery 入口；当前实际处理中断工单通常走两条路：重新采集推理覆盖旧状态，或用户手动处理后在页面归档。归档只表示系统不再处理该工单，不代表系统知道平台真实执行结果。
 - **工具**（`lib/helpers.js`）：共享工具函数（已发货快递单号提取等）
 - **常量**（`lib/constants.js`）：扫描时间点、安全边际(8h)、重试上限等共享配置
 
-统计页的售后分支按“已授权自动 → 可评估自动化 → 仅人工”展示。只进入采集和归类完整的固定分支；资料缺失、未登记等异常历史仍保留在原始记录中，但不参与自动化评估。“人工确认无需处理”使用独立计数，不混入人工执行。历史会在打开页面、切回页面或收到现有实时事件时重新读取，无需人工定期更新，也不会根据次数自动开放权限。
+统计页的售后分支按“已授权自动 → 可评估自动化 → 仅人工”展示。只进入采集和归类完整的固定分支；资料缺失、未登记等异常历史仍保留在原始记录中，但不参与自动化评估。“执行操作”“手动归档”“确认无需处理”分别计数，自动处理不混入前两项。历史会在打开页面、切回页面或收到现有实时事件时重新读取，无需人工定期更新，也不会根据次数自动开放权限。
 
 ### 反馈洞察闭环
 
@@ -80,6 +80,7 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 |------|------|
 | [SKILL.md](SKILL.md) | AI Agent 运行时上下文入口（必读） |
 | [docs/INDEX.md](docs/INDEX.md) | 处理规则、错误分级、已知坑位 |
+| [docs/automation-policy.md](docs/automation-policy.md) | 当前自动处理授权、执行前证明与统计口径 |
 | [docs/flow-5.1.md](docs/flow-5.1.md) | 退货退款流程 |
 | [docs/flow-5.2.md](docs/flow-5.2.md) | 仅退款-未发货流程 |
 | [docs/flow-5.3.md](docs/flow-5.3.md) | 仅退款-已发货（含拦截）流程 |
@@ -91,5 +92,4 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 | [docs/ops-erp.md](docs/ops-erp.md) | ERP 导航、登录恢复、物流弹窗与凭证上传 |
 | [docs/ops-testing.md](docs/ops-testing.md) | CLI 与采集链路的分步测试规范 |
 | [docs/ops-queue.md](docs/ops-queue.md) | 队列紧急停止、验证与恢复 |
-| [售后分支清单与自动处理设计](docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md) | 当前生效口径：不自动学习，按最小最终分支独立统计并由用户明确授权 |
-| [历史设计归档](docs/superpowers/archive/README.md) | 2026-06 A1 计划/交接与 2026-07 已完成修复，仅供追溯，不作为当前实施依据 |
+| [历史设计归档](docs/superpowers/archive/README.md) | 已完成设计、计划与阶段交接，仅供追溯，不作为当前实施依据 |

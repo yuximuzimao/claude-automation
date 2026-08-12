@@ -54,7 +54,7 @@
 
 单账号固定清单全部处理完成后，等待 5 秒，切首页读取平台提醒；随后仅兜底关闭当前账号下除售后列表主 tab 外的鲸灵 tab，不动 ERP、专属售后系统或其他非鲸灵 tab，并复核只剩当前账号售后列表页。
 
-步骤 10/12/14、target-aware collector 和自动执行 journal 已产生代码草案，但原系统数据流尚未完全接回，质量审查仍有阻断项。完整确认清单和恢复门禁见 `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。
+步骤 10/12/14、target-aware collector 和自动执行 journal 已产生代码草案，但原系统数据流尚未完全接回，质量审查仍有阻断项。完整确认清单和恢复门禁见 `docs/superpowers/archive/2026-06-a1/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`。
 
 本设计同步仍只定义后续实现边界，不授权真实浏览器操作；任何真机验证都必须由用户另行明确指定账号和工单。
 

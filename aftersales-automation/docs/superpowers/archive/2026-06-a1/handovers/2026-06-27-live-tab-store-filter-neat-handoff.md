@@ -58,11 +58,11 @@ The dangerous gap was confirmed and closed: a filtered UI must not be allowed to
 No new archive directory was created.
 
 - Original plan was archived in place with a completion record:
-  - `docs/superpowers/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
+  - `docs/superpowers/archive/2026-06-a1/plans/2026-06-27-live-tab-store-filter-and-legacy-cleanup.md`
 - Main progress plan was updated:
-  - `docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md`
+  - `docs/superpowers/archive/2026-06-a1/plans/2026-06-27-a1-codexpro-parallel-tasks.md`
 - A1 confirmation/todo state was updated:
-  - `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`
+  - `docs/superpowers/archive/2026-06-a1/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`
   - `tasks/todo.md`
 - Workspace handoff was updated:
   - `docs/HANDOFF.md`
@@ -104,6 +104,6 @@ The next Codex-sized task should be design-only auto-execution journal recovery,
 
 Suggested target:
 
-- `docs/superpowers/plans/2026-06-27-a1-codexpro-parallel-tasks.md` → Task 6.
+- `docs/superpowers/archive/2026-06-a1/plans/2026-06-27-a1-codexpro-parallel-tasks.md` → Task 6.
 
 Do not implement or enable true automatic approve/reject from this handoff. Do not run real fixed-batch or restart server without separate explicit user authorization.

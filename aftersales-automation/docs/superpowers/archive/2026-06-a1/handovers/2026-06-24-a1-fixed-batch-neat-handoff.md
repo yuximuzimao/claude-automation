@@ -74,5 +74,5 @@ npm test
 - `lib/server/auto-execution-journal.js`
 - `test/jl/process-single-account-fixed-batch.test.js`
 - `test/server/auto-execution-journal.test.js`
-- `docs/superpowers/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`
+- `docs/superpowers/archive/2026-06-a1/plans/2026-06-19-a1-fixed-batch-user-confirmation.md`
 - `tasks/todo.md`

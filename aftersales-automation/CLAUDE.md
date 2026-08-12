@@ -20,7 +20,7 @@
 | `docs/flow-5.4.md` | 工单类型 = 换货 |
 | `docs/erp-query.md` | 涉及退货核验，需查商品对应表/档案V2 |
 | `docs/ops-tech.md` | 技术排查总入口（再按鲸灵、ERP、测试、队列分流） |
-| `docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md` | 自动执行授权、最小 `caseId` 与统计口径 |
+| `docs/automation-policy.md` | 当前自动执行授权、执行前证明与统计口径 |
 
 > 工单类型确认后只加载对应 flow 文档，不全量加载。
 

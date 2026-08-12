@@ -28,4 +28,4 @@
 - 新自动分支必须来自统计复盘中的独立 `caseId`，由用户明确授权，并在执行前用本次采集重新证明关键事实。
 - 修改 `lib/` 后执行完整测试并按 `/aftersales-restart` 安全重启；不得自动重跑已有工单。
 
-历史设计、实施计划和阶段交接统一见 `docs/superpowers/archive/`；当前自动化口径见 `docs/superpowers/specs/2026-07-16-after-sales-branch-automation-design.md`。
+历史设计、实施计划和阶段交接统一见 `docs/superpowers/archive/`；当前自动化口径见 `docs/automation-policy.md`。
