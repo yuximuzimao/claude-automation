@@ -680,6 +680,12 @@ async function execReinfer(op) {
   return execReprocessOne({ params: { queueItemId: sim.queueItemId }, _abortSignal: op._abortSignal });
 }
 
+async function processRecheckedOpenedDetail(context, options = {}) {
+  const step14 = options.step14 || require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
+  const dependencies = options.dependencies || step14.loadDefaultDependencies();
+  return step14.processOpenedDetailAndPersist(context, dependencies, { source: 'reprocess' });
+}
+
 async function execReprocessOne(op) {
   const { queueItemId } = op.params;
 
@@ -764,106 +770,30 @@ async function execReprocessOne(op) {
   await sleep(2000);
   assertNotAborted(op);
 
-  // ── Step 5: 采集 + 推理 + 自动执行（step 14 processOpenedDetail 完整链路）──
-  const { inferDecision } = require('../infer');
-  const { resolveSharedReturnGroup } = require('../return-tracking-group');
-  const { collectTicketTargetAware, resolveUniqueErpTargetId } = require('../jl/target-aware-collector');
-  const { shouldAutoExecute } = require('../server/after-sales-auto-gate');
-  const { createAutoExecutionJournal } = require('../server/auto-execution-journal');
-  const { executeTicketDecision } = require('../jl/execute-decision');
-  const fs = require('fs');
-
-  const erpTargetId = await resolveUniqueErpTargetId({ getTargets: cdp.getTargets }, null);
+  // ── Step 5: 完整复用扫描工单的采集、推理、自动执行和写回链路 ──
+  const processingDependencies = step14.loadDefaultDependencies();
+  const erpTargetId = await processingDependencies.resolveErpTargetId(null);
   const ticket = buildFreshReprocessTicket(queueItem, located.ticket, accountResult.matchedNote);
   db.updateQueueItem(queueItem.id, {
     type: ticket.type || null,
     platformStage: ticket.platformStage,
   });
-
-  const circuitFile = path.join(BASE, 'data/circuit-breaker.json');
-  const readCircuit = () => { try { return JSON.parse(fs.readFileSync(circuitFile, 'utf8')); } catch { return null; } };
-  const executionJournal = createAutoExecutionJournal();
-
-  const processed = await step14.processOpenedDetail({
-    account: accountResult,
-    listTargetId,
-    detailTargetId,
-    erpTargetId,
-    ticket,
-  }, {
-    collectDetail: (ctx) => collectTicketTargetAware({
-      detailTargetId: ctx.detailTargetId,
-      erpTargetId: ctx.erpTargetId,
-      workOrderNum: ctx.ticket.workOrderNum,
-      accountNote: ctx.account.matchedNote || ctx.ticket.accountNote || '',
-      type: ctx.ticket.type,
-    }),
-    inferDecision: (collectedData) => inferDecision({ collectedData }, queueItem),
-    resolveSharedReturnGroup: (collectedData, workOrderNum) =>
-      resolveSharedReturnGroup(collectedData, db.readSimulations(), workOrderNum),
-    shouldAutoExecute,
-    assertAutoExecutionAllowed: step14.createAutoExecutionGate({
-      readCircuit,
-      executionJournal,
-      readSimulations: () => db.readSimulations(),
-    }),
-    executeDecision: async ({ detailTargetId: dtId, ticket: t, decision }) => {
-      return executeTicketDecision({
-        targetId: dtId,
-        workOrderNum: t.workOrderNum,
-        type: t.type,
-        decision,
-      });
-    },
-    reserveAutoExecution: async ({ ticket: t, decision }) => executionJournal.reserve(t.workOrderNum, {
-      accountNote: accountResult.matchedNote || '', decisionAction: decision.action,
-    }),
-    markPageActionStarted: async ({ ticket: t }) => executionJournal.markPageActionStarted(t.workOrderNum),
-    markPageActionSucceeded: async ({ ticket: t }) => executionJournal.markPageActionSucceeded(t.workOrderNum),
-    markAutoExecuted: async ({ ticket: t }) => executionJournal.markExecuted(t.workOrderNum),
-  });
-
-  // ── 写回结果 ──────────────────────────────────────────────────
-  const now = new Date().toISOString();
-  const sim = {
-    id: `reprocess-${Date.now()}-${queueItem.workOrderNum}`,
-    workOrderNum: queueItem.workOrderNum,
-    queueItemId: queueItem.id,
-    accountNum,
-    accountNote: queueItem.accountNote || accountResult.matchedNote || '',
-    mode: 'live',
-    source: 'reprocess',
-    collectedData: processed.collectedData,
-    decision: processed.decision,
-    createdAt: now,
-  };
-  if (processed.status === 'auto_executed') {
-    sim.executedAt = now;
-    sim.autoExecutedAt = now;
-    sim.execution = processed.execution;
-  }
-  if (processed.autoBlockedReason) sim.autoBlockedReason = processed.autoBlockedReason;
-  db.appendSimulation(sim);
-
-  const queueStatus = step14.statusForProcessed(processed, queueItem);
-  db.updateQueueItem(queueItem.id, {
-    status: queueStatus,
-    waitingRescan: !!(processed.decision && processed.decision.waitingRescan),
-  });
-
-  log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.status === 'auto_executed' ? ' (已自动执行)' : processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
-
-  let detailClosed = false;
-  try { /* finally will close */ } finally {
-    // Step 6: 关闭详情 tab（无论成功失败）
-    try {
-      const { readShopName } = require('../../scripts/jl-steps/02-read-shop-name');
-      await step14.closeAndVerifyDetailTarget(detailTargetId, {
-        getTargets: cdp.getTargets, closeTarget: cdp.closeTarget, sleep,
-        readShopName: (id, waitMs) => readShopName(id, waitMs),
-      }, { account: accountResult, listTargetId });
-      detailClosed = true;
-    } catch(e) { log(`[reprocess] 关闭详情 tab 失败（非致命）: ${e.message}`); }
+  try {
+    const { processed } = await processRecheckedOpenedDetail({
+      account: accountResult,
+      listTargetId,
+      detailTargetId,
+      erpTargetId,
+      ticket,
+      queueItem,
+    }, { step14, dependencies: processingDependencies });
+    log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.status === 'auto_executed' ? ' (已自动执行)' : processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
+  } finally {
+    // Step 6: 关闭详情 tab（无论处理成功或失败）
+    await step14.closeAndVerifyDetailTarget(detailTargetId, processingDependencies, {
+      account: accountResult,
+      listTargetId,
+    });
   }
 
   return { done: true };
@@ -1159,4 +1089,5 @@ module.exports = {
   createScanReminderState,
   updateScanReminderState,
   sendScanSummaryReminders,
+  processRecheckedOpenedDetail,
 };

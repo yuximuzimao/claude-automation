@@ -426,7 +426,7 @@ async function processOpenedDetail(context, dependencies) {
       autoBlockedReason: 'fixed_batch 已显式关闭自动执行',
     };
   }
-  const auto = await dependencies.shouldAutoExecute(decision, collectedData, context.queueItem);
+  const auto = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
   if (!auto) return { status: 'simulated', collectedData, decision };
   if (typeof dependencies.assertAutoExecutionAllowed === 'function') {
     const gate = await dependencies.assertAutoExecutionAllowed({ ...context, collectedData, decision });
@@ -455,6 +455,25 @@ async function processOpenedDetail(context, dependencies) {
   }
   await dependencies.markAutoExecuted({ ...context, collectedData, decision, execution });
   return { status: 'auto_executed', collectedData, decision, execution };
+}
+
+async function processOpenedDetailAndPersist(context, dependencies, options = {}) {
+  if (!context || !context.queueItem || !context.queueItem.id) {
+    throw new Error('详情处理缺少完整 queue item，拒绝进入推理和自动执行');
+  }
+  if (typeof dependencies.persistOutcome !== 'function') {
+    throw new Error('原售后系统数据流写回未装配: persistOutcome 缺失');
+  }
+
+  const processed = await processOpenedDetail(context, dependencies);
+  const persisted = await dependencies.persistOutcome({
+    account: context.account,
+    queueItem: context.queueItem,
+    ticket: context.ticket,
+    processed,
+    source: options.source || 'fixed_batch',
+  });
+  return { processed, persisted };
 }
 
 async function reportProgress(dependencies, item) {
@@ -701,12 +720,15 @@ function loadDefaultDependencies() {
     markPageActionSucceeded: async ({ ticket }) => executionJournal.markPageActionSucceeded(ticket.workOrderNum),
     markAutoExecuted: async ({ ticket }) => executionJournal.markExecuted(ticket.workOrderNum),
     ensureQueueItem: createEnsureQueueItem(db),
-    persistOutcome: async ({ account, queueItem, ticket, processed }) => {
+    persistOutcome: async ({ account, queueItem, ticket, processed, source = 'fixed_batch' }) => {
       if (!queueItem || !queueItem.id) throw new Error(`工单 ${ticket.workOrderNum} 缺少 queue item，拒绝写回结果`);
-      const sim = buildSimulationPayload({ account, queueItem, ticket, processed });
+      const sim = buildSimulationPayload({ account, queueItem, ticket, processed, source });
       const queueStatus = statusForProcessed(processed, queueItem);
       db.appendSimulation(sim);
-      db.updateQueueItem(queueItem.id, { status: queueStatus });
+      db.updateQueueItem(queueItem.id, {
+        status: queueStatus,
+        waitingRescan: !!(processed.decision && processed.decision.waitingRescan),
+      });
       return { ...sim, queueStatus };
     },
     closeTarget: cdp.closeTarget,
@@ -821,7 +843,7 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
       detailTargetId = opened.newTargetId;
       item.detailTargetId = detailTargetId;
 
-      const processed = await processOpenedDetail({
+      const outcome = await processOpenedDetailAndPersist({
         account: accountResult,
         listTargetId: prepared.targetId,
         detailTargetId,
@@ -829,14 +851,9 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         ticket: item.ticket,
         queueItem: item.queueItem,
         disableAutoExecute: options.disableAutoExecute === true,
-      }, dependencies);
+      }, dependencies, { source: 'fixed_batch' });
+      const { processed, persisted } = outcome;
       Object.assign(item, processed);
-      const persisted = await dependencies.persistOutcome({
-        account: accountResult,
-        queueItem: item.queueItem,
-        ticket: item.ticket,
-        processed,
-      });
       if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
       item.persistedSimulationId = persisted && persisted.id;
     } catch (error) {
@@ -957,6 +974,7 @@ module.exports = {
   createAutoExecutionGate,
   locateWorkOrderOnFreshList,
   processOpenedDetail,
+  processOpenedDetailAndPersist,
   processSingleAccountFixedBatch,
   closeAndVerifyDetailTarget,
   cleanupCurrentAccountJlTargets,

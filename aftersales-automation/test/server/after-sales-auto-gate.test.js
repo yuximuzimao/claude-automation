@@ -197,18 +197,23 @@ test('旧决定只有分支文案但没有逐子订单证明时仍禁止自动�
   assert.equal(shouldAutoExecute(refundOnlyDecision(), refundOnlyData, { type: '仅退款' }), false);
 });
 
-test('所有生产自动执行入口都使用新分支门禁，不再读取旧置信模块', () => {
-  const files = [
+test('生产自动执行只由共享扫描链路持有新分支门禁，重查不得再复制一套', () => {
+  const directGateFiles = [
     '../../lib/server/pipeline.js',
-    '../../lib/server/op-queue.js',
     '../../scripts/jl-steps/14-process-single-account-fixed-batch.js',
   ];
 
-  for (const relative of files) {
+  for (const relative of directGateFiles) {
     const source = fs.readFileSync(path.join(__dirname, relative), 'utf8');
     assert.doesNotMatch(source, /auto-exec-confidence/);
     assert.match(source, /after-sales-auto-gate/);
   }
+
+  const reprocessSource = fs.readFileSync(path.join(__dirname, '../../lib/server/op-queue.js'), 'utf8');
+  assert.doesNotMatch(reprocessSource, /auto-exec-confidence/);
+  assert.doesNotMatch(reprocessSource, /require\(['"]\.\.\/server\/after-sales-auto-gate['"]\)/);
+  assert.match(reprocessSource, /step14\.loadDefaultDependencies\(\)/);
+  assert.match(reprocessSource, /step14\.processOpenedDetailAndPersist/);
 });
 
 test('反馈和重算接口不再更新旧置信文件', () => {
