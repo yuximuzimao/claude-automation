@@ -178,26 +178,7 @@ def test_dry_run_fails_closed_when_target_row_does_not_prove_pending_state():
     assert any(check.code == "ORDER_PENDING_STATE" for check in report.blockers)
 
 
-def test_preflight_accepts_stale_footer_one_when_no_checkbox_is_selected():
-    probe = _probe_payload()
-    probe["footerSelectedCounts"] = [1]
-    payloads = iter([probe, _order_payload()])
-
-    report = run_audit_preflight(
-        target_system_order_id=SYSTEM_ORDER_ID,
-        expected_source=_source(),
-        target_id="target-1",
-        evaluator=lambda _target_id, _js: next(payloads),
-    )
-
-    assert report.preflight_ready is True
-    assert not any(
-        check.code == "FOOTER_MULTIPLE_ORDER_GUARD"
-        for check in report.blockers
-    )
-
-
-def test_preflight_blocks_footer_two_for_single_order_audit():
+def test_preflight_treats_footer_as_history_before_checkbox_selection():
     probe = _probe_payload()
     probe["footerSelectedCounts"] = [2]
     payloads = iter([probe, _order_payload()])
@@ -209,8 +190,11 @@ def test_preflight_blocks_footer_two_for_single_order_audit():
         evaluator=lambda _target_id, _js: next(payloads),
     )
 
-    assert report.preflight_ready is False
-    assert any(
-        check.code == "FOOTER_MULTIPLE_ORDER_GUARD"
-        for check in report.blockers
+    assert report.preflight_ready is True
+    footer_check = next(
+        check
+        for check in report.checks
+        if check.code == "FOOTER_SELECTION_HISTORY"
     )
+    assert footer_check.status == "info"
+    assert "不参与放行判定" in footer_check.detail

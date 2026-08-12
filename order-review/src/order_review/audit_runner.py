@@ -400,8 +400,20 @@ def click_mouse_at(target_id: str, x: float, y: float) -> None:
     )
 
 
-def build_select_target_order_js(target_system_order_id: str) -> str:
+def build_select_target_order_js(
+    target_system_order_id: str,
+    *,
+    guard_footer_multiple: bool = True,
+) -> str:
     target_json = json.dumps(target_system_order_id, ensure_ascii=False)
+    footer_guard_js = (
+        """  if (footerCounts().some(function(value){ return value >= 2; })) {
+    return JSON.stringify({ok:false,error:'FOOTER_MULTIPLE_ORDERS'});
+  }
+"""
+        if guard_footer_multiple
+        else ""
+    )
     return rf"""/* ORDER_REVIEW_ACTION:SELECT_TARGET */
 (async function(){{
   var expected = {target_json};
@@ -454,9 +466,7 @@ def build_select_target_order_js(target_system_order_id: str) -> str:
   }}
   if (selected.length !== 0) return JSON.stringify({{ok:false,error:'EXISTING_SELECTION'}});
   if (dialogs.length !== 0) return JSON.stringify({{ok:false,error:'EXISTING_DIALOG'}});
-  if (footerCounts().some(function(value){{ return value >= 2; }})) {{
-    return JSON.stringify({{ok:false,error:'FOOTER_MULTIPLE_ORDERS'}});
-  }}
+{footer_guard_js}
   targetBoxes[0].click();
   await new Promise(function(resolve){{ setTimeout(resolve, 100); }});
   rows = Array.from(document.querySelectorAll('.module-trade-list-item')).filter(visible);

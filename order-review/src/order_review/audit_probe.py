@@ -517,13 +517,12 @@ def _build_probe_checks(
             f"真实选中行 {selected_count}，审核前必须为 0",
         )
     )
-    footer_safe = _single_order_footer_safe(footer_counts)
     checks.append(
-        _binary_check(
-            "FOOTER_MULTIPLE_ORDER_GUARD",
-            "底部多选反向保护",
-            footer_safe,
-            _single_order_footer_detail(footer_counts),
+        ProbeCheck(
+            code="FOOTER_SELECTION_HISTORY",
+            label="底部勾选数量",
+            status="info",
+            detail=_preflight_footer_history_detail(footer_counts),
         )
     )
     loading_count = int(probe.get("loadingCount") or 0)
@@ -621,21 +620,13 @@ def _binary_check(
     )
 
 
-def _single_order_footer_safe(values: list[Any] | tuple[Any, ...]) -> bool:
-    return all(
-        isinstance(value, int)
-        and not isinstance(value, bool)
-        and 0 <= value <= 1
-        for value in values
-    )
-
-
-def _single_order_footer_detail(values: list[Any] | tuple[Any, ...]) -> str:
+def _preflight_footer_history_detail(values: list[Any] | tuple[Any, ...]) -> str:
     if not values:
-        return "底部未显示数量；不作为正向证明"
-    if _single_order_footer_safe(values):
-        return f"底部计数 {list(values)}；0 或 1 可能是当前值或上一单残留"
-    return f"底部计数 {list(values)}；单包单订单出现 2 或更大时必须停止"
+        return "勾选前未显示数量；该区域不参与放行判定"
+    return (
+        f"勾选前显示 {list(values)}；可能是历史值，不参与放行判定。"
+        "单包审核只在完成勾选后核验该数量"
+    )
 
 
 def _utc_now() -> str:

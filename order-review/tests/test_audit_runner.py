@@ -421,6 +421,18 @@ def test_action_scripts_keep_scope_guards_and_only_selection_uses_dom_click():
     assert "Number(count[1]) !== 1" in confirm_js
 
 
+def test_split_selection_can_disable_only_the_stale_footer_guard():
+    select_js = build_select_target_order_js(
+        SYSTEM_ORDER_ID,
+        guard_footer_multiple=False,
+    )
+
+    assert "FOOTER_MULTIPLE_ORDERS" not in select_js
+    assert "TARGET_NOT_UNIQUE" in select_js
+    assert "EXISTING_SELECTION" in select_js
+    assert "EXISTING_DIALOG" in select_js
+
+
 def test_mouse_clicker_dispatches_one_physical_click(monkeypatch):
     calls = []
     monkeypatch.setattr(

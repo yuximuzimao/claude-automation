@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "pid": 63556,
+  "startedAtEpochSeconds": 1785413019.6634188,
+  "refreshMilestones": [
+    1,
+    5,
+    20
+  ],
+  "samples": [
+    {
+      "label": "startup",
+      "refreshCount": 0,
+      "elapsedSeconds": 0.028,
+      "rssKiB": 76708,
+      "tracedCurrentKiB": 47,
+      "tracedPeakKiB": 50,
+      "tkWidgetCount": 22,
+      "tkAfterTaskCount": 3,
+      "tclCommandCount": 213,
+      "threadCount": 1,
+      "trackedPythonObjects": {
+        "ConfirmedCase": 0,
+        "OrderAssignment": 0,
+        "RepositorySnapshot": 0,
+        "SidebarView": 1,
+        "SourceSnapshot": 0
+      },
+      "runtimeCounters": {
+        "auditEventQueueSize": 0,
+        "orderWatchEventQueueSize": 0,
+        "quantityCommitJobCount": 0,
+        "auditThreadAlive": 0,
+        "orderWatchThreadAlive": 0
+      }
+    },
+    {
+      "label": "refresh-1",
+      "refreshCount": 1,
+      "elapsedSeconds": 3.3,
+      "rssKiB": 327812,
+      "tracedCurrentKiB": 33706,
+      "tracedPeakKiB": 110560,
+      "tkWidgetCount": 102,
+      "tkAfterTaskCount": 2,
+      "tclCommandCount": 451,
+      "threadCount": 1,
+      "trackedPythonObjects": {
+        "ConfirmedCase": 271,
+        "OrderAssignment": 684,
+        "RepositorySnapshot": 1,
+        "SidebarView": 1,
+        "SourceSnapshot": 272
+      },
+      "runtimeCounters": {
+        "auditEventQueueSize": 0,
+        "orderWatchEventQueueSize": 0,
+        "quantityCommitJobCount": 0,
+        "auditThreadAlive": 0,
+        "orderWatchThreadAlive": 0
+      }
+    },
+    {
+      "label": "refresh-5",
+      "refreshCount": 5,
+      "elapsedSeconds": 3.637,
+      "rssKiB": 327980,
+      "tracedCurrentKiB": 33700,
+      "tracedPeakKiB": 110560,
+      "tkWidgetCount": 102,
+      "tkAfterTaskCount": 2,
+      "tclCommandCount": 451,
+      "threadCount": 1,
+      "trackedPythonObjects": {
+        "ConfirmedCase": 271,
+        "OrderAssignment": 684,
+        "RepositorySnapshot": 1,
+        "SidebarView": 1,
+        "SourceSnapshot": 272
+      },
+      "runtimeCounters": {
+        "auditEventQueueSize": 0,
+        "orderWatchEventQueueSize": 0,
+        "quantityCommitJobCount": 0,
+        "auditThreadAlive": 0,
+        "orderWatchThreadAlive": 0
+      }
+    },
+    {
+      "label": "refresh-20",
+      "refreshCount": 20,
+      "elapsedSeconds": 4.811,
+      "rssKiB": 328792,
+      "tracedCurrentKiB": 33701,
+      "tracedPeakKiB": 110560,
+      "tkWidgetCount": 102,
+      "tkAfterTaskCount": 2,
+      "tclCommandCount": 451,
+      "threadCount": 1,
+      "trackedPythonObjects": {
+        "ConfirmedCase": 271,
+        "OrderAssignment": 684,
+        "RepositorySnapshot": 1,
+        "SidebarView": 1,
+        "SourceSnapshot": 272
+      },
+      "runtimeCounters": {
+        "auditEventQueueSize": 0,
+        "orderWatchEventQueueSize": 0,
+        "quantityCommitJobCount": 0,
+        "auditThreadAlive": 0,
+        "orderWatchThreadAlive": 0
+      }
+    }
+  ]
+}

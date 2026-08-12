@@ -80,8 +80,9 @@ def _extract_eval_value(data: dict[str, Any]) -> Any:
 
 def _request_json(url: str, data: bytes | None = None) -> Any:
     request = urllib.request.Request(url, data=data, method="POST" if data is not None else "GET")
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     try:
-        with urllib.request.urlopen(request, timeout=10) as response:
+        with opener.open(request, timeout=10) as response:
             text = response.read().decode("utf-8")
     except urllib.error.URLError as exc:
         raise CdpError(f"Chrome DevTools HTTP request failed: {exc}") from exc

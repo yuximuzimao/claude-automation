@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass
+from functools import lru_cache
 import hashlib
 import json
 from typing import Mapping
@@ -12,6 +13,7 @@ from .order_identity import (
     package_order_structure_signature_key,
     package_total_product_signature,
     package_total_product_signature_key,
+    same_order_signature_key,
     total_product_signature,
 )
 from .package_plan import (
@@ -27,12 +29,19 @@ from .package_equivalence import PACKAGE_EQUIVALENCE_KEY_PREFIX
 
 RECOMMENDATION_ALGORITHM_VERSION = 1
 PACKAGE_EQUIVALENT_RECOMMENDATION_ALGORITHM_VERSION = 2
-SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 2
-PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 3
+SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 3
+PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 4
+HISTORICAL_PACKAGE_COMPOSITION_ALGORITHM_VERSION = 2
+PACKAGE_EQUIVALENT_COMPOSITION_ALGORITHM_VERSION = 3
 FREIGHT_REMINDER_ALGORITHM_VERSION = 1
 MATCH_EXACT_STRUCTURE = "exact_structure"
 MATCH_SINGLE_PACKAGE_TOTAL = "single_package_total"
 MATCH_SINGLE_PACKAGE_CAPACITY = "single_package_capacity"
+MATCH_HISTORICAL_PACKAGE_COMPOSITION = "historical_package_composition"
+MAX_COMPOSITION_PACKAGES = 5
+MAX_COMPOSITION_CANDIDATES = 5
+MAX_COMPOSITION_SEARCH_STATES = 50_000
+MIN_COMPOSITION_MODULE_CASES = 3
 
 
 @dataclass(frozen=True)
@@ -63,6 +72,14 @@ class RecommendationCandidate:
 class RecommendationResult:
     candidates: tuple[RecommendationCandidate, ...]
     conflict: bool
+    advisory_note: str = ""
+
+
+@dataclass(frozen=True)
+class _HistoricalPackageModule:
+    signature: tuple[tuple[tuple[str, ...], int], ...]
+    source_case_ids: tuple[str, ...]
+    observation_count: int
 
 
 @dataclass(frozen=True)
@@ -171,7 +188,11 @@ def _rule_id(
     )
     payload = f"{match_type}:{scope}:{_template_key(packages)}"
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20]
-    version = _recommendation_algorithm_version(packages)
+    version = (
+        _composition_algorithm_version(packages)
+        if match_type == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+        else _recommendation_algorithm_version(packages)
+    )
     return f"rule-v{version}-{digest}"
 
 
@@ -194,8 +215,9 @@ def _build_result(
     for key, grouped_cases in grouped.items():
         packages = _project_template_names(source, templates[key])
         rule_id = _rule_id(source, packages, match_type)
-        stats = (rule_stats or {}).get(rule_id)
-        usage_count = len(grouped_cases) + (stats.direct_use_count if stats else 0)
+        # 订单精确匹配由明细签名本身证明，不使用历史“采用次数”增加置信度。
+        # rule_stats 参数仅为兼容旧调用和旧文件结构保留。
+        usage_count = len(grouped_cases)
         algorithm_version = _recommendation_algorithm_version(packages)
         candidates.append(
             RecommendationCandidate(
@@ -245,6 +267,31 @@ def find_recommendations(
     if exact.candidates:
         return exact
 
+    single_total = find_single_package_total_recommendations(
+        source,
+        cases,
+        rule_stats,
+    )
+    if single_total.candidates:
+        return single_total
+
+    composition = find_historical_package_composition_recommendations(
+        source,
+        cases,
+        rule_stats,
+    )
+    if composition.candidates:
+        return composition
+
+    return find_single_package_capacity_recommendations(source, cases, rule_stats)
+
+
+def find_single_package_total_recommendations(
+    source: SourceSnapshot,
+    cases: list[ConfirmedCase],
+    rule_stats: Mapping[str, RuleStats] | None = None,
+) -> RecommendationResult:
+    """匹配商品总量完全相同、且历史已经确认为单包的案例。"""
     total_signature = package_total_product_signature(source)
     matching_single = [
         case
@@ -253,16 +300,245 @@ def find_recommendations(
         and len(case.package_plan.packages) == 1
         and package_total_product_signature(case.source_snapshot) == total_signature
     ]
-    single_total = _build_result(
+    return _build_result(
         source,
         matching_single,
         match_type=MATCH_SINGLE_PACKAGE_TOTAL,
         rule_stats=rule_stats,
     )
-    if single_total.candidates:
-        return single_total
 
-    return find_single_package_capacity_recommendations(source, cases, rule_stats)
+
+def find_historical_package_composition_recommendations(
+    source: SourceSnapshot,
+    cases: list[ConfirmedCase],
+    rule_stats: Mapping[str, RuleStats] | None = None,
+) -> RecommendationResult:
+    """用历史中原样确认过的包裹模块精确覆盖当前商品总量。"""
+    current_signature = package_total_product_signature(source)
+    if not current_signature:
+        return RecommendationResult(candidates=(), conflict=False)
+    current_keys = tuple(key for key, _ in current_signature)
+    current_totals = tuple(quantity for _, quantity in current_signature)
+    current_by_key = dict(current_signature)
+
+    module_sources: defaultdict[
+        tuple[tuple[tuple[str, ...], int], ...], set[str]
+    ] = defaultdict(set)
+    module_observations: defaultdict[
+        tuple[tuple[tuple[str, ...], int], ...], int
+    ] = defaultdict(int)
+    module_boundary_sources: defaultdict[
+        tuple[tuple[tuple[str, ...], int], ...], set[str]
+    ] = defaultdict(set)
+    for case in _latest_cases_per_order(cases):
+        if case.is_freight:
+            continue
+        for package in _template(case):
+            signature = tuple(
+                (item.match_key, item.quantity) for item in package.items
+            )
+            if not signature or any(
+                key not in current_by_key or quantity > current_by_key[key]
+                for key, quantity in signature
+            ):
+                continue
+            module_sources[signature].add(case.case_id)
+            module_observations[signature] += 1
+            if len(case.package_plan.packages) > 1:
+                module_boundary_sources[signature].add(case.case_id)
+
+    modules = tuple(
+        _HistoricalPackageModule(
+            signature=signature,
+            source_case_ids=tuple(sorted(module_sources[signature])),
+            observation_count=module_observations[signature],
+        )
+        for signature in sorted(
+            module_sources,
+            key=lambda value: json.dumps(
+                value,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+        )
+        if len(module_sources[signature]) >= MIN_COMPOSITION_MODULE_CASES
+        and module_boundary_sources[signature]
+    )
+    if not modules:
+        return RecommendationResult(candidates=(), conflict=False)
+
+    module_vectors = tuple(
+        tuple(dict(module.signature).get(key, 0) for key in current_keys)
+        for module in modules
+    )
+    solutions = _find_minimum_composition_solutions(
+        current_totals,
+        module_vectors,
+    )
+    candidates: list[RecommendationCandidate] = []
+    for solution in solutions:
+        raw_packages = tuple(
+            RecommendationPackage(
+                items=tuple(
+                    RecommendationItem(key, "", quantity)
+                    for key, quantity in modules[module_index].signature
+                )
+            )
+            for module_index in solution
+        )
+        packages = _project_template_names(source, raw_packages)
+        algorithm_version = _composition_algorithm_version(packages)
+        rule_id = _rule_id(
+            source,
+            packages,
+            MATCH_HISTORICAL_PACKAGE_COMPOSITION,
+        )
+        source_case_ids = tuple(
+            sorted(
+                {
+                    case_id
+                    for module_index in solution
+                    for case_id in modules[module_index].source_case_ids
+                }
+            )
+        )
+        stats = (rule_stats or {}).get(rule_id)
+        candidates.append(
+            RecommendationCandidate(
+                recommendation_id=rule_id,
+                rule_id=rule_id,
+                match_type=MATCH_HISTORICAL_PACKAGE_COMPOSITION,
+                packages=packages,
+                source_case_ids=source_case_ids,
+                usage_count=len(source_case_ids)
+                + (stats.direct_use_count if stats else 0),
+                algorithm_version=algorithm_version,
+                quantity_note=_composition_note(
+                    tuple(
+                        modules[module_index].observation_count
+                        for module_index in solution
+                    )
+                ),
+            )
+        )
+    candidates.sort(
+        key=lambda item: (
+            -item.usage_count,
+            _template_key(item.packages),
+            item.recommendation_id,
+        )
+    )
+    return RecommendationResult(
+        candidates=tuple(candidates),
+        conflict=len(candidates) > 1,
+    )
+
+
+def _latest_cases_per_order(
+    cases: list[ConfirmedCase],
+) -> tuple[ConfirmedCase, ...]:
+    latest: dict[str, ConfirmedCase] = {}
+    for case in cases:
+        key = (
+            same_order_signature_key(case.source_snapshot)
+            or f"snapshot:{case.source_snapshot.snapshot_id}"
+        )
+        current = latest.get(key)
+        if current is None or (
+            case.order_version,
+            case.confirmed_at,
+            case.case_id,
+        ) > (
+            current.order_version,
+            current.confirmed_at,
+            current.case_id,
+        ):
+            latest[key] = case
+    return tuple(latest.values())
+
+
+def _find_minimum_composition_solutions(
+    target: tuple[int, ...],
+    module_vectors: tuple[tuple[int, ...], ...],
+) -> tuple[tuple[int, ...], ...]:
+    modules_by_key = tuple(
+        tuple(
+            module_index
+            for module_index, vector in enumerate(module_vectors)
+            if vector[key_index] > 0
+        )
+        for key_index in range(len(target))
+    )
+    state_count = 0
+
+    class SearchLimitReached(RuntimeError):
+        pass
+
+    @lru_cache(maxsize=None)
+    def solve(remaining: tuple[int, ...]) -> tuple[tuple[int, ...], ...]:
+        nonlocal state_count
+        state_count += 1
+        if state_count > MAX_COMPOSITION_SEARCH_STATES:
+            raise SearchLimitReached
+        if not any(remaining):
+            return ((),)
+
+        positive_keys = [
+            key_index
+            for key_index, quantity in enumerate(remaining)
+            if quantity > 0
+        ]
+        pivot = min(
+            positive_keys,
+            key=lambda key_index: sum(
+                1
+                for module_index in modules_by_key[key_index]
+                if _vector_fits(module_vectors[module_index], remaining)
+            ),
+        )
+        fitting_modules = [
+            module_index
+            for module_index in modules_by_key[pivot]
+            if _vector_fits(module_vectors[module_index], remaining)
+        ]
+        if not fitting_modules:
+            return ()
+
+        best_length: int | None = None
+        solutions: set[tuple[int, ...]] = set()
+        for module_index in fitting_modules:
+            vector = module_vectors[module_index]
+            next_remaining = tuple(
+                quantity - used
+                for quantity, used in zip(remaining, vector)
+            )
+            for tail in solve(next_remaining):
+                solution = tuple(sorted((module_index, *tail)))
+                if len(solution) > MAX_COMPOSITION_PACKAGES:
+                    continue
+                if best_length is None or len(solution) < best_length:
+                    best_length = len(solution)
+                    solutions = {solution}
+                elif len(solution) == best_length:
+                    solutions.add(solution)
+        return tuple(sorted(solutions)[: MAX_COMPOSITION_CANDIDATES + 1])
+
+    try:
+        return solve(target)[:MAX_COMPOSITION_CANDIDATES]
+    except SearchLimitReached:
+        return ()
+
+
+def _vector_fits(vector: tuple[int, ...], remaining: tuple[int, ...]) -> bool:
+    return all(used <= quantity for used, quantity in zip(vector, remaining))
+
+
+def _composition_note(observations: tuple[int, ...]) -> str:
+    evidence = " / ".join(str(count) for count in observations)
+    return (
+        f"由 {len(observations)} 个历史已确认包裹精确组合；"
+        f"各包裹历史证据 {evidence} 次。未使用容量或比例推算。"
+    )
 
 
 def find_single_package_capacity_recommendations(
@@ -270,7 +546,7 @@ def find_single_package_capacity_recommendations(
     cases: list[ConfirmedCase],
     rule_stats: Mapping[str, RuleStats] | None = None,
 ) -> RecommendationResult:
-    """只复用数量不超过已确认历史容量的单包案例。"""
+    """提供较大数量单包参考；已有反向多包证据时阻断候选。"""
     current_signature = package_total_product_signature(source)
     current_totals = dict(current_signature)
     current_keys = tuple(key for key, _ in current_signature)
@@ -278,7 +554,8 @@ def find_single_package_capacity_recommendations(
         tuple[tuple[tuple[str, ...], int], ...], list[ConfirmedCase]
     ] = defaultdict(list)
 
-    for case in cases:
+    latest_cases = _latest_cases_per_order(cases)
+    for case in latest_cases:
         if case.is_freight or len(case.package_plan.packages) != 1:
             continue
         historical_signature = package_total_product_signature(case.source_snapshot)
@@ -310,6 +587,21 @@ def find_single_package_capacity_recommendations(
         )
 
     selected_capacity = min(matching_by_capacity, key=capacity_rank)
+    counterexample = _single_package_capacity_counterexample(
+        source,
+        latest_cases,
+        selected_capacity=selected_capacity,
+    )
+    if counterexample is not None:
+        return RecommendationResult(
+            candidates=(),
+            conflict=False,
+            advisory_note=_capacity_counterexample_note(
+                source,
+                selected_capacity=selected_capacity,
+                counterexample=counterexample,
+            ),
+        )
     matching = matching_by_capacity[selected_capacity]
     packages = _current_single_package_template(source)
     algorithm_version = _capacity_algorithm_version(selected_capacity)
@@ -339,6 +631,72 @@ def find_single_package_capacity_recommendations(
             ),
         ),
         conflict=False,
+    )
+
+
+def _single_package_capacity_counterexample(
+    source: SourceSnapshot,
+    cases: tuple[ConfirmedCase, ...],
+    *,
+    selected_capacity: tuple[tuple[tuple[str, ...], int], ...],
+) -> ConfirmedCase | None:
+    """找出不超过单包参考数量、但人工实际确认为多包的同商品反例。"""
+    capacity_totals = dict(selected_capacity)
+    capacity_keys = tuple(key for key, _ in selected_capacity)
+    counterexamples: list[ConfirmedCase] = []
+    for case in cases:
+        if case.is_freight or len(case.package_plan.packages) <= 1:
+            continue
+        signature = package_total_product_signature(case.source_snapshot)
+        if tuple(key for key, _ in signature) != capacity_keys:
+            continue
+        totals = dict(signature)
+        if all(totals[key] <= capacity_totals[key] for key in capacity_keys):
+            counterexamples.append(case)
+    if not counterexamples:
+        return None
+
+    current_totals = dict(package_total_product_signature(source))
+
+    def rank(case: ConfirmedCase) -> tuple[int, int, str, str]:
+        totals = dict(package_total_product_signature(case.source_snapshot))
+        distance = tuple(
+            abs(totals[key] - current_totals[key]) for key in capacity_keys
+        )
+        return (
+            sum(distance),
+            max(distance, default=0),
+            case.confirmed_at,
+            case.case_id,
+        )
+
+    return min(counterexamples, key=rank)
+
+
+def _capacity_counterexample_note(
+    source: SourceSnapshot,
+    *,
+    selected_capacity: tuple[tuple[tuple[str, ...], int], ...],
+    counterexample: ConfirmedCase,
+) -> str:
+    names: dict[tuple[str, ...], str] = {}
+    for product in source.products:
+        names.setdefault(product.package_match_key, product.display_name)
+
+    def summary(
+        signature: tuple[tuple[tuple[str, ...], int], ...],
+    ) -> str:
+        return "、".join(
+            f"{names[key]} ×{quantity}" for key, quantity in signature
+        )
+
+    multi_signature = package_total_product_signature(counterexample.source_snapshot)
+    return (
+        f"历史证据互相冲突：{summary(selected_capacity)} 曾单包，"
+        f"但 {summary(multi_signature)} 实际用了 "
+        f"{len(counterexample.package_plan.packages)} 个包裹。"
+        "这说明该商品受离散纸箱规格影响，系统已停止外推单包；"
+        "请按当前箱型人工创建方案。"
     )
 
 
@@ -388,7 +746,10 @@ def _capacity_note(
     current = "、".join(
         f"{names[key]} ×{current_totals[key]}" for key in sorted(current_totals)
     )
-    return f"历史已确认单包容量：{historical}；当前：{current}。"
+    return (
+        f"历史较大数量单包参考：{historical}；当前：{current}。"
+        "这不是连续容量结论，请结合实际纸箱核对。"
+    )
 
 
 def apply_recommendation(
@@ -498,6 +859,18 @@ def _capacity_algorithm_version(
     if any(_is_package_equivalence_key(key) for key, _ in capacity_signature):
         return PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION
     return SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION
+
+
+def _composition_algorithm_version(
+    packages: tuple[RecommendationPackage, ...],
+) -> int:
+    if any(
+        _is_package_equivalence_key(item.match_key)
+        for package in packages
+        for item in package.items
+    ):
+        return PACKAGE_EQUIVALENT_COMPOSITION_ALGORITHM_VERSION
+    return HISTORICAL_PACKAGE_COMPOSITION_ALGORITHM_VERSION
 
 
 def _is_package_equivalence_key(key: tuple[str, ...]) -> bool:

@@ -275,7 +275,7 @@ def test_repository_restores_previous_valid_file_after_post_write_audit_failure(
         return real_audit(audit_path)
 
     monkeypatch.setattr(
-        "order_review.case_repository.audit_case_file",
+        "order_review.case_repository.audit_case_file_isolated",
         fail_first_post_write_audit,
     )
     second_source = _source("ORDER-AFTER")

@@ -98,12 +98,16 @@ class AuditDialogValidation:
                 f"可能影响{affected}。未点击确定。"
             )
         if self.ready_to_submit:
+            count = self.target_package_count
             return (
-                "弹窗安全核对通过：范围仅限列表页勾选的 1 条目标订单。"
+                f"弹窗安全核对通过：范围仅限列表页已勾选的 {count} 条订单。"
                 "这只是允许进入下一道确认关卡，本次没有点击确定。"
             )
         details = "；".join(check.detail for check in self.blockers)
-        return f"已停止：弹窗状态不能证明只会处理当前 1 条目标订单。{details}。未点击确定。"
+        return (
+            "已停止：弹窗状态不能证明只会处理"
+            f"当前 {self.target_package_count} 条目标订单。{details}。未点击确定。"
+        )
 
 
 def validate_audit_dialog(
@@ -112,15 +116,16 @@ def validate_audit_dialog(
     target_system_order_id: str,
     target_package_count: int = 1,
 ) -> AuditDialogValidation:
-    checks = (
+    single_order = target_package_count == 1
+    checks: list[ProbeCheck] = [
         _check(
-            "SINGLE_PACKAGE_ORDER_SCOPE",
+            "AUDIT_PACKAGE_SCOPE",
             "适用范围",
-            target_package_count == 1,
+            target_package_count >= 1,
             (
                 "当前是单包单订单审核"
-                if target_package_count == 1
-                else f"当前方案有 {target_package_count} 个包裹，不能套用单订单审核规则"
+                if single_order
+                else f"当前是拆分后 {target_package_count} 个包裹的连续审核"
             ),
         ),
         _check(
@@ -164,57 +169,90 @@ def validate_audit_dialog(
         _check(
             "LIST_SELECTED_COUNT",
             "弹窗勾选数量",
-            probe.list_selected_count == 1,
+            probe.list_selected_count == target_package_count,
             f"弹窗显示已勾选 {probe.list_selected_count} 条订单"
             if probe.list_selected_count is not None
             else "弹窗没有显示已勾选数量",
         ),
-        _check(
-            "TARGET_SELECTION",
-            "页面目标订单",
+    ]
+    if single_order:
+        checks.extend(
             (
-                probe.selected_row_count == 1
-                and probe.selected_system_order_ids == (target_system_order_id,)
+                _check(
+                    "TARGET_SELECTION",
+                    "页面目标订单",
+                    (
+                        probe.selected_row_count == 1
+                        and probe.selected_system_order_ids == (target_system_order_id,)
+                    ),
+                    (
+                        f"页面仅选中目标订单 {target_system_order_id}"
+                        if (
+                            probe.selected_row_count == 1
+                            and probe.selected_system_order_ids
+                            == (target_system_order_id,)
+                        )
+                        else (
+                            f"选中行 {probe.selected_row_count}，"
+                            f"系统订单号 {list(probe.selected_system_order_ids)}"
+                        )
+                    ),
+                ),
+                _check(
+                    "FOOTER_MULTIPLE_ORDER_GUARD",
+                    "底部多选反向保护",
+                    _single_order_footer_safe(probe.footer_selected_counts),
+                    (
+                        f"底部计数 {list(probe.footer_selected_counts)}；"
+                        "只用于发现 2 或更大的危险值，不作为正向证明"
+                    ),
+                ),
             ),
+        )
+    else:
+        checks.extend(
             (
-                f"页面仅选中目标订单 {target_system_order_id}"
-                if (
-                    probe.selected_row_count == 1
-                    and probe.selected_system_order_ids == (target_system_order_id,)
-                )
-                else (
-                    f"选中行 {probe.selected_row_count}，"
-                    f"系统订单号 {list(probe.selected_system_order_ids)}"
-                )
+                ProbeCheck(
+                    code="SPLIT_SELECTION_ALREADY_VERIFIED",
+                    label="拆分结果勾选",
+                    status="info",
+                    detail=(
+                        "上一阶段已核对前 N 条勾选结果及逐包明细；"
+                        "本阶段再以审核弹窗的已勾选数量确认提交范围"
+                    ),
+                ),
+                ProbeCheck(
+                    code="FOOTER_SPLIT_INFORMATION",
+                    label="底部汇总",
+                    status="info",
+                    detail=(
+                        f"底部计数 {list(probe.footer_selected_counts)}；"
+                        "拆分后可能延迟，不参与放行"
+                    ),
+                ),
+            )
+        )
+    checks.extend(
+        (
+            _check(
+                "CONFIRM_BUTTON_UNIQUE",
+                "确定按钮",
+                probe.confirm_button_count == 1,
+                f"可见确定按钮 {probe.confirm_button_count} 个",
             ),
-        ),
-        _check(
-            "FOOTER_MULTIPLE_ORDER_GUARD",
-            "底部多选反向保护",
-            _single_order_footer_safe(probe.footer_selected_counts),
-            (
-                f"底部计数 {list(probe.footer_selected_counts)}；"
-                "只用于发现 2 或更大的危险值，不作为正向证明"
+            _check(
+                "CANCEL_BUTTON_UNIQUE",
+                "取消按钮",
+                probe.cancel_button_count == 1,
+                f"可见取消按钮 {probe.cancel_button_count} 个",
             ),
-        ),
-        _check(
-            "CONFIRM_BUTTON_UNIQUE",
-            "确定按钮",
-            probe.confirm_button_count == 1,
-            f"可见确定按钮 {probe.confirm_button_count} 个",
-        ),
-        _check(
-            "CANCEL_BUTTON_UNIQUE",
-            "取消按钮",
-            probe.cancel_button_count == 1,
-            f"可见取消按钮 {probe.cancel_button_count} 个",
-        ),
+        )
     )
     return AuditDialogValidation(
         target_system_order_id=target_system_order_id,
         target_package_count=target_package_count,
         probe=probe,
-        checks=checks,
+        checks=tuple(checks),
     )
 
 

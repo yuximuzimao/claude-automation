@@ -3,7 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import StrEnum
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 from typing import Any, Mapping
 
 from .order_identity import same_order_signature_key
@@ -101,6 +104,71 @@ def audit_case_file(path: str | Path) -> CaseAuditReport:
             ),
         )
     return validate_case_payload(value, path=str(file_path))
+
+
+def audit_case_file_isolated(path: str | Path) -> CaseAuditReport:
+    """在短生命周期子进程中校验大案例文件，避免主进程保留解析高水位。"""
+    file_path = Path(path)
+    environment = dict(os.environ)
+    source_root = str(Path(__file__).resolve().parents[1])
+    existing_pythonpath = environment.get("PYTHONPATH", "")
+    environment["PYTHONPATH"] = (
+        f"{source_root}{os.pathsep}{existing_pythonpath}"
+        if existing_pythonpath
+        else source_root
+    )
+    try:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "order_review.case_audit",
+                "--path",
+                str(file_path),
+                "--json",
+            ],
+            check=False,
+            capture_output=True,
+            env=environment,
+            text=True,
+            timeout=120,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return _single_error(
+            str(file_path),
+            "audit_process_failed",
+            f"案例隔离校验无法完成：{exc}",
+        )
+    try:
+        payload = json.loads(completed.stdout)
+        raw_issues = [
+            *payload.get("errors", []),
+            *payload.get("warnings", []),
+        ]
+        issues = tuple(
+            AuditIssue(
+                severity=AuditSeverity(str(item["severity"])),
+                code=str(item["code"]),
+                message=str(item["message"]),
+                location=str(item.get("location", "")),
+            )
+            for item in raw_issues
+        )
+        return CaseAuditReport(
+            path=str(payload.get("path", file_path)),
+            issues=issues,
+            case_count=int(payload.get("caseCount", 0)),
+            assignment_count=int(payload.get("assignmentCount", 0)),
+            rule_count=int(payload.get("ruleCount", 0)),
+        )
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        details = completed.stderr.strip() or completed.stdout.strip()
+        suffix = f"；输出：{details[:300]}" if details else ""
+        return _single_error(
+            str(file_path),
+            "audit_process_invalid",
+            f"案例隔离校验返回无效结果：{exc}{suffix}",
+        )
 
 
 def validate_case_payload(

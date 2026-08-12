@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "problems": [
+    {
+      "id": "enzyme-9-discrete-carton",
+      "label": "酵素4.0 ×9：大数量单包不能外推小数量单包",
+      "targetCaseId": "case-73018db0-8825-4b89-a192-9a336bdee1a8",
+      "expectedOutcome": "unsafe_single_package",
+      "desiredDirection": "不得继续推荐单包；没有可靠箱型证据时宁可不推荐"
+    },
+    {
+      "id": "sunscreen-mask-package-count",
+      "label": "防晒×9 + 面膜×3：历史模块能拼出，但包裹数不是最优",
+      "targetCaseId": "case-42325f52-97e2-44d1-9876-3f410da20f37",
+      "expectedOutcome": "package_count_inefficient",
+      "desiredDirection": "候选生成需要识别两包实际方案，不能把三个小包当成同等质量"
+    },
+    {
+      "id": "new-oil-11-valid-conflict",
+      "label": "新精油×11：三个三包方案属于正常冲突",
+      "targetCaseId": "case-19148285-2435-430d-b2ae-c2df01f1df6e",
+      "expectedOutcome": "conflict_actual_included",
+      "desiredDirection": "继续展示全部分支并交给人工选择，不得静默排序成唯一答案"
+    },
+    {
+      "id": "toner-lotion-no-history",
+      "label": "焕颜乳×2 + 焕颜水×1：四个阶段都没有历史候选",
+      "targetCaseId": "case-e504aedb-a69d-4d31-9207-b64373053617",
+      "expectedOutcome": "no_recommendation",
+      "desiredDirection": "先明确缺的是历史模块还是箱型证据；证据不足时保持不推荐"
+    }
+  ]
+}

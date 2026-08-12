@@ -1,4 +1,15 @@
-from order_review.case_replay import build_replay_report
+import json
+
+from order_review.case_replay import (
+    OUTCOME_CONFLICT_ACTUAL_INCLUDED,
+    OUTCOME_NO_RECOMMENDATION,
+    OUTCOME_PACKAGE_COUNT_INEFFICIENT,
+    OUTCOME_UNSAFE_SINGLE_PACKAGE,
+    ReplayCandidateDetail,
+    _classify_replay_outcome,
+    _render_markdown,
+    build_replay_report,
+)
 from order_review.case_repository import (
     Decision,
     DecisionSource,
@@ -84,6 +95,11 @@ def test_replay_does_not_use_target_case_as_its_own_history(tmp_path):
     assert report.replay_targets == 1
     assert report.recommended_targets == 0
     assert report.no_recommendation_targets == 1
+    assert report.outcome_counts == {OUTCOME_NO_RECOMMENDATION: 1}
+    assert report.target_details[0].outcome == OUTCOME_NO_RECOMMENDATION
+    assert [
+        item.candidate_count for item in report.target_details[0].stage_attempts
+    ] == [0, 0, 0, 0]
 
 
 def test_replay_only_uses_earlier_independent_orders(tmp_path):
@@ -168,7 +184,7 @@ def test_replay_aggregates_equivalent_flavor_rows_inside_one_package(tmp_path):
     assert report.wrong_recommendation_targets == 0
 
 
-def test_same_order_versions_and_rule_adoptions_do_not_inflate_full_samples(
+def test_same_order_versions_and_exact_reuse_do_not_inflate_observed_orders(
     tmp_path,
 ):
     path = tmp_path / "cases.json"
@@ -213,7 +229,7 @@ def test_same_order_versions_and_rule_adoptions_do_not_inflate_full_samples(
 
     assert report.complete_case_count == 2
     assert report.independent_full_case_orders == 1
-    assert report.observed_order_count == 2
+    assert report.observed_order_count == 1
     assert report.replay_targets == 1
 
 
@@ -237,6 +253,94 @@ def test_replay_identifies_wrong_recommendation_and_later_conflict(tmp_path):
     assert metrics["conflictTargets"] == 1
     assert metrics["wrongTargets"] == 1
     assert metrics["accuracyRate"] == 0.5
+    assert report.outcome_counts[OUTCOME_UNSAFE_SINGLE_PACKAGE] == 1
+    assert report.outcome_counts[OUTCOME_CONFLICT_ACTUAL_INCLUDED] == 1
+
+
+def test_replay_classifies_more_candidate_packages_as_possible_inefficiency(
+    tmp_path,
+):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    target = _save_split(
+        repository,
+        _source("ORDER-TARGET"),
+        "2026-07-23T01:00:00Z",
+    )
+    candidates = (
+        ReplayCandidateDetail(
+            match_type="historical_package_composition",
+            algorithm_version=1,
+            packages=("商品A ×1", "商品A ×1", "商品A ×1"),
+            source_case_ids=("case-source",),
+            matches_actual=False,
+        ),
+    )
+
+    assert (
+        _classify_replay_outcome(target, candidates)
+        == OUTCOME_PACKAGE_COUNT_INEFFICIENT
+    )
+
+
+def test_problem_set_validates_named_real_problem_baseline(tmp_path):
+    case_path = tmp_path / "cases.json"
+    repository = JsonCaseRepository(case_path)
+    target = _save(
+        repository,
+        _source("ORDER-1"),
+        "2026-07-23T01:00:00Z",
+    )
+    problem_path = tmp_path / "problem-set.json"
+    problem_path.write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "problems": [
+                    {
+                        "id": "known-no-recommendation",
+                        "label": "首个订单没有历史证据",
+                        "targetCaseId": target.case_id,
+                        "expectedOutcome": OUTCOME_NO_RECOMMENDATION,
+                        "desiredDirection": "保持不推荐",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    report = build_replay_report(
+        case_path,
+        problem_set_path=problem_path,
+    )
+
+    assert report.problem_set is not None
+    assert report.problem_set.valid
+    assert report.problem_set.passed_count == 1
+    assert report.to_dict()["problemSet"]["valid"] is True
+    assert "targetDetails" not in report.to_dict()
+    assert report.to_dict(include_details=True)["targetDetails"][0][
+        "outcome"
+    ] == OUTCOME_NO_RECOMMENDATION
+
+
+def test_detailed_markdown_explains_actual_candidate_and_stage_path(tmp_path):
+    path = tmp_path / "cases.json"
+    repository = JsonCaseRepository(path)
+    _save(repository, _source("ORDER-1"), "2026-07-23T01:00:00Z")
+    _save_split(repository, _source("ORDER-2"), "2026-07-23T02:00:00Z")
+
+    rendered = _render_markdown(
+        build_replay_report(path),
+        include_details=True,
+    )
+
+    assert "## 需要关注的逐单结果" in rendered
+    assert "安全错误：误推单包" in rendered
+    assert "人工实际：包裹 1" in rendered
+    assert "推荐路径：" in rendered
+    assert "来源案例：" in rendered
 
 
 def test_current_maturity_uses_latest_order_version_but_replay_uses_first(tmp_path):

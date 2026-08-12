@@ -2,12 +2,14 @@ import json
 
 import pytest
 
+import order_review.case_repository as case_repository_module
 from order_review.case_repository import (
     CaseRepositoryError,
     Decision,
     DecisionSource,
     DuplicateCaseError,
     JsonCaseRepository,
+    RuleStats,
     ShippingMode,
 )
 from order_review.models import OrderSnapshot, Product
@@ -88,6 +90,113 @@ def test_repository_saves_complete_versioned_case_with_atomic_json(tmp_path):
     assert repository.list_cases() == [saved]
 
 
+def test_repository_reuses_snapshot_until_atomic_file_change(tmp_path, monkeypatch):
+    path = tmp_path / "cases.json"
+    writer = JsonCaseRepository(path)
+    first_source = make_source()
+    writer.confirm(
+        first_source,
+        split_plan(first_source),
+        Decision(source=DecisionSource.MANUAL),
+    )
+
+    repository = JsonCaseRepository(path)
+    original_load = repository._load_payload
+    load_count = 0
+
+    def counted_load():
+        nonlocal load_count
+        load_count += 1
+        return original_load()
+
+    monkeypatch.setattr(repository, "_load_payload", counted_load)
+    first = repository.read_snapshot()
+    second = repository.read_snapshot()
+
+    assert load_count == 1
+    assert first.cases is second.cases
+    first.rule_stats["local-only"] = RuleStats("local-only")
+    assert "local-only" not in repository.read_snapshot().rule_stats
+
+    second_source = SourceSnapshot.from_order_snapshot(
+        OrderSnapshot(
+            is_expanded=True,
+            order_numbers=("ORDER-2",),
+            products=[
+                Product(
+                    title="商品C（简称C）",
+                    standard_name="商品C",
+                    short_name="简称C",
+                    quantity=1,
+                    merchant_code="CODE-C",
+                    spu_id="ITEM-C",
+                    sku_id="SKU-C",
+                )
+            ],
+        )
+    )
+    writer.confirm(
+        second_source,
+        PackageDraft.single_package(second_source).confirm(second_source),
+        Decision(source=DecisionSource.MANUAL),
+    )
+
+    refreshed = repository.read_snapshot()
+
+    assert load_count == 2
+    assert len(refreshed.cases) == 2
+
+
+def test_repository_reuses_cached_objects_for_the_next_write(tmp_path, monkeypatch):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    first_source = make_source()
+    repository.confirm(
+        first_source,
+        split_plan(first_source),
+        Decision(source=DecisionSource.MANUAL),
+    )
+    repository.read_snapshot()
+
+    def unexpected_reload():
+        raise AssertionError("缓存仍有效时不应重新解析完整案例文件")
+
+    monkeypatch.setattr(repository, "_load_payload", unexpected_reload)
+    second_source = make_source(quantity_a=4, quantity_b=2)
+
+    repository.confirm(
+        second_source,
+        split_plan(second_source),
+        Decision(source=DecisionSource.MANUAL),
+        allow_same_snapshot=True,
+    )
+
+    assert len(repository.list_cases()) == 2
+
+
+def test_successful_write_runs_best_effort_heap_cleanup(tmp_path, monkeypatch):
+    cleanup_calls = 0
+
+    def record_cleanup():
+        nonlocal cleanup_calls
+        cleanup_calls += 1
+
+    monkeypatch.setattr(
+        case_repository_module,
+        "_release_unused_heap_memory",
+        record_cleanup,
+    )
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    source = make_source()
+
+    repository.confirm(
+        source,
+        split_plan(source),
+        Decision(source=DecisionSource.MANUAL),
+    )
+
+    assert cleanup_calls == 1
+
+
 def test_repository_detects_repeated_confirmation_of_same_snapshot(tmp_path):
     source = make_source()
     repository = JsonCaseRepository(tmp_path / "cases.json")
@@ -103,10 +212,10 @@ def test_repository_does_not_report_success_when_persistence_fails(tmp_path, mon
     repository = JsonCaseRepository(tmp_path / "cases.json")
     source = make_source()
 
-    def fail(_payload):
+    def fail(_cases, _assignments, _stats):
         raise OSError("disk full")
 
-    monkeypatch.setattr(repository, "_atomic_write", fail)
+    monkeypatch.setattr(repository, "_atomic_write_state", fail)
     with pytest.raises(OSError, match="disk full"):
         repository.confirm(source, split_plan(source), Decision(DecisionSource.MANUAL))
 
@@ -183,9 +292,10 @@ def test_single_package_capacity_recommendation_projects_current_lower_quantitie
 
     assert result.conflict is False
     assert candidate.match_type == MATCH_SINGLE_PACKAGE_CAPACITY
-    assert candidate.algorithm_version == 2
+    assert candidate.algorithm_version == 3
     assert candidate.source_case_ids == (saved.case_id,)
-    assert "历史已确认单包容量" in candidate.quantity_note
+    assert "历史较大数量单包参考" in candidate.quantity_note
+    assert "不是连续容量结论" in candidate.quantity_note
     assert candidate.packages[0].items[0].quantity == 3
     assert candidate.packages[0].items[1].quantity == 2
     assert draft.confirm(current).total_quantity == 5

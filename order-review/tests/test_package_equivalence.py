@@ -24,6 +24,8 @@ EQUIVALENT_PAIRS = (
     ("6979499760099", "黑茶茉莉体验装", "6979265440019", "黑茶普洱体验装"),
     ("6977987940046", "蛋白粉牛油果正装", "6977987940039", "蛋白粉莓果正装"),
     ("6977987940107", "蛋白粉牛油果体验装", "6977987940084", "蛋白粉莓果体验装"),
+    ("6938582367386", "气垫亮肤色", "6938582367409", "气垫自然色"),
+    ("6938582367393", "气垫替换装亮肤色", "6938582367416", "气垫替换装自然色"),
 )
 
 
@@ -279,7 +281,7 @@ def test_equivalent_flavor_can_reuse_lower_single_package_capacity(tmp_path):
     plan = apply_recommendation(current, candidate).confirm(current)
 
     assert candidate.match_type == MATCH_SINGLE_PACKAGE_CAPACITY
-    assert candidate.algorithm_version == 3
+    assert candidate.algorithm_version == 4
     assert (
         plan.packages[0].items[0].source_product_id
         == current.products[0].source_product_id
@@ -287,7 +289,7 @@ def test_equivalent_flavor_can_reuse_lower_single_package_capacity(tmp_path):
     assert plan.packages[0].items[0].product_name == "蛋白粉莓果正装"
 
 
-def test_whitelist_contains_only_confirmed_six_spec_groups():
+def test_whitelist_contains_only_confirmed_eight_spec_groups():
     assert set(PACKAGE_EQUIVALENCE_GROUPS) == {
         "coffee_regular",
         "coffee_trial",
@@ -295,5 +297,25 @@ def test_whitelist_contains_only_confirmed_six_spec_groups():
         "black_tea_trial",
         "protein_regular",
         "protein_trial",
+        "cushion_regular",
+        "cushion_refill",
     }
     assert all(len(products) == 2 for products in PACKAGE_EQUIVALENCE_GROUPS.values())
+
+
+def test_cushion_regular_and_refill_never_match(tmp_path):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    historical = source("6938582367386", "气垫亮肤色")
+    repository.confirm(
+        historical,
+        PackageDraft.single_package(historical).confirm(historical),
+        Decision(DecisionSource.MANUAL),
+    )
+
+    current = source(
+        "6938582367393",
+        "气垫替换装亮肤色",
+        order_number="ORDER-2",
+    )
+
+    assert find_recommendations(current, repository.list_cases()).candidates == ()

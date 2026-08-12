@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+import gc
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import StrEnum
 import json
 import os
 from pathlib import Path
+import sys
 import tempfile
-from typing import Any, Mapping
+from typing import Any, Mapping, TextIO
 from uuid import uuid4
 
 from .case_backup import (
@@ -16,12 +18,14 @@ from .case_backup import (
     atomic_write_bytes,
     create_valid_backup,
     quarantine_file,
-    validate_payload_or_raise,
 )
-from .case_validation import audit_case_file
+from .case_validation import audit_case_file_isolated
 from .file_lock import exclusive_file_lock
 from .order_identity import same_order_signature_key
 from .package_plan import PackageDraft, PackagePlan, SCHEMA_VERSION, SourceSnapshot
+
+
+_CACHE_MISS = object()
 
 
 class CaseRepositoryError(RuntimeError):
@@ -209,10 +213,10 @@ class ResolvedOrderHistory:
 
 
 @dataclass(frozen=True)
-class RuleAdoption:
-    case: ConfirmedCase
-    assignment: OrderAssignment | None
-    package_plan: PackagePlan
+class RepositorySnapshot:
+    cases: tuple[ConfirmedCase, ...]
+    assignments: tuple[OrderAssignment, ...]
+    rule_stats: dict[str, RuleStats]
 
 
 def default_case_path() -> Path:
@@ -231,48 +235,80 @@ class JsonCaseRepository:
         self.backup_keep = backup_keep
         self.lock_timeout = lock_timeout
         self.lock_path = self.path.with_name(f"{self.path.name}.lock")
+        self._cached_file_token: tuple[int, int, int] | None | object = _CACHE_MISS
+        self._cached_snapshot: RepositorySnapshot | None = None
 
     def list_cases(self) -> list[ConfirmedCase]:
-        payload = self._load_payload()
+        return list(self.read_snapshot().cases)
+
+    def list_assignments(self) -> list[OrderAssignment]:
+        return list(self.read_snapshot().assignments)
+
+    def get_rule_stats(self) -> dict[str, RuleStats]:
+        return dict(self.read_snapshot().rule_stats)
+
+    def read_snapshot(self) -> RepositorySnapshot:
+        token = self._file_token()
+        if self._cached_file_token == token and self._cached_snapshot is not None:
+            return self._snapshot_copy(self._cached_snapshot)
+
+        with exclusive_file_lock(self.lock_path, timeout=self.lock_timeout):
+            token = self._file_token()
+            if self._cached_file_token == token and self._cached_snapshot is not None:
+                return self._snapshot_copy(self._cached_snapshot)
+            payload = self._load_payload()
+            snapshot = self._parse_snapshot(payload)
+            self._cached_file_token = self._file_token()
+            self._cached_snapshot = snapshot
+            return self._snapshot_copy(snapshot)
+
+    def _parse_snapshot(self, payload: Mapping[str, Any]) -> RepositorySnapshot:
         try:
-            return [ConfirmedCase.from_dict(item) for item in payload["cases"]]
+            return RepositorySnapshot(
+                cases=tuple(
+                    ConfirmedCase.from_dict(item) for item in payload["cases"]
+                ),
+                assignments=tuple(
+                    OrderAssignment.from_dict(item)
+                    for item in payload.get("orderAssignments", [])
+                ),
+                rule_stats=self._parse_rule_stats(payload),
+            )
         except (KeyError, TypeError, ValueError) as exc:
             raise CaseRepositoryError(f"本地案例内容无效：{exc}") from exc
 
-    def list_assignments(self) -> list[OrderAssignment]:
-        payload = self._load_payload()
-        try:
-            return [
-                OrderAssignment.from_dict(item)
-                for item in payload.get("orderAssignments", [])
-            ]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise CaseRepositoryError(f"本地订单方案索引无效：{exc}") from exc
+    @staticmethod
+    def _snapshot_copy(snapshot: RepositorySnapshot) -> RepositorySnapshot:
+        return RepositorySnapshot(
+            cases=snapshot.cases,
+            assignments=snapshot.assignments,
+            rule_stats=dict(snapshot.rule_stats),
+        )
 
-    def get_rule_stats(self) -> dict[str, RuleStats]:
-        payload = self._load_payload()
-        raw = payload.get("ruleStats", {})
-        if not isinstance(raw, dict):
-            raise CaseRepositoryError("本地规则统计结构无效")
+    def _file_token(self) -> tuple[int, int, int] | None:
         try:
-            return {
-                str(rule_id): RuleStats.from_dict(
-                    {"ruleId": rule_id, **(value if isinstance(value, dict) else {})}
-                )
-                for rule_id, value in raw.items()
-            }
-        except (KeyError, TypeError, ValueError) as exc:
-            raise CaseRepositoryError(f"本地规则统计内容无效：{exc}") from exc
+            stat = self.path.stat()
+        except FileNotFoundError:
+            return None
+        except OSError as exc:
+            raise CaseRepositoryError(f"读取案例文件状态失败：{exc}") from exc
+        return (stat.st_ino, stat.st_size, stat.st_mtime_ns)
 
-    def find_same_order(self, source: SourceSnapshot) -> ResolvedOrderHistory | None:
+    def find_same_order(
+        self,
+        source: SourceSnapshot,
+        *,
+        snapshot: RepositorySnapshot | None = None,
+    ) -> ResolvedOrderHistory | None:
         signature = same_order_signature_key(source)
         if signature is None:
             return None
-        cases = self.list_cases()
+        state = snapshot or self.read_snapshot()
+        cases = state.cases
         cases_by_id = {case.case_id: case for case in cases}
         matching_assignments = [
             item
-            for item in self.list_assignments()
+            for item in state.assignments
             if item.same_order_signature == signature and item.case_id in cases_by_id
         ]
         if matching_assignments:
@@ -307,7 +343,7 @@ class JsonCaseRepository:
         rule_id: str | None = None,
     ) -> ConfirmedCase:
         with exclusive_file_lock(self.lock_path, timeout=self.lock_timeout):
-            return self._confirm_locked(
+            result = self._confirm_locked(
                 source_snapshot,
                 package_plan,
                 decision,
@@ -316,6 +352,8 @@ class JsonCaseRepository:
                 previous_case_id=previous_case_id,
                 rule_id=rule_id,
             )
+        _release_unused_heap_memory()
+        return result
 
     def _confirm_locked(
         self,
@@ -328,13 +366,7 @@ class JsonCaseRepository:
         previous_case_id: str | None,
         rule_id: str | None,
     ) -> ConfirmedCase:
-        payload = self._load_payload()
-        cases = [ConfirmedCase.from_dict(item) for item in payload["cases"]]
-        assignments = [
-            OrderAssignment.from_dict(item)
-            for item in payload.get("orderAssignments", [])
-        ]
-        stats = self._parse_rule_stats(payload)
+        cases, assignments, stats = self._mutable_state_for_write()
         package_plan = PackageDraft(
             snapshot_id=source_snapshot.snapshot_id,
             packages=package_plan.packages,
@@ -408,82 +440,26 @@ class JsonCaseRepository:
                     decision=decision,
                 )
             )
-        if rule_id and decision.source is DecisionSource.RECOMMENDED_ACCEPTED:
-            stats[rule_id] = _increment_stats(stats.get(rule_id), rule_id, modified=False)
-        elif rule_id and decision.source in {
-            DecisionSource.RECOMMENDED_MODIFIED,
-            DecisionSource.ORDER_VERSION,
-        }:
-            stats[rule_id] = _increment_stats(stats.get(rule_id), rule_id, modified=True)
-
         self._write_state(cases, assignments, stats)
         return confirmed
 
-    def record_rule_adoption(
+    def _mutable_state_for_write(
         self,
-        source_snapshot: SourceSnapshot,
-        package_plan: PackagePlan,
-        decision: Decision,
-        *,
-        source_case_id: str,
-        rule_id: str,
-        assigned_at: str | None = None,
-    ) -> RuleAdoption:
-        with exclusive_file_lock(self.lock_path, timeout=self.lock_timeout):
-            return self._record_rule_adoption_locked(
-                source_snapshot,
-                package_plan,
-                decision,
-                source_case_id=source_case_id,
-                rule_id=rule_id,
-                assigned_at=assigned_at,
+    ) -> tuple[list[ConfirmedCase], list[OrderAssignment], dict[str, RuleStats]]:
+        token = self._file_token()
+        if self._cached_file_token == token and self._cached_snapshot is not None:
+            return (
+                list(self._cached_snapshot.cases),
+                list(self._cached_snapshot.assignments),
+                dict(self._cached_snapshot.rule_stats),
             )
-
-    def _record_rule_adoption_locked(
-        self,
-        source_snapshot: SourceSnapshot,
-        package_plan: PackagePlan,
-        decision: Decision,
-        *,
-        source_case_id: str,
-        rule_id: str,
-        assigned_at: str | None,
-    ) -> RuleAdoption:
         payload = self._load_payload()
-        cases = [ConfirmedCase.from_dict(item) for item in payload["cases"]]
-        assignments = [
-            OrderAssignment.from_dict(item)
-            for item in payload.get("orderAssignments", [])
-        ]
-        stats = self._parse_rule_stats(payload)
-        package_plan = PackageDraft(
-            snapshot_id=source_snapshot.snapshot_id,
-            packages=package_plan.packages,
-        ).confirm(source_snapshot)
-        source_case = next(
-            (case for case in cases if case.case_id == source_case_id),
-            None,
+        snapshot = self._parse_snapshot(payload)
+        return (
+            list(snapshot.cases),
+            list(snapshot.assignments),
+            dict(snapshot.rule_stats),
         )
-        if source_case is None:
-            raise CaseRepositoryError("历史规则来源案例不存在")
-
-        signature = same_order_signature_key(source_snapshot)
-        assignment: OrderAssignment | None = None
-        if signature is not None:
-            if any(item.same_order_signature == signature for item in assignments):
-                raise DuplicateCaseError("当前订单已经保存过包裹方案，不会重复采用")
-            assignment = self._new_assignment(
-                signature,
-                source_case.case_id,
-                assignments,
-                assigned_at=assigned_at or _utc_now(),
-                rule_id=rule_id,
-                decision=decision,
-            )
-            assignments.append(assignment)
-        stats[rule_id] = _increment_stats(stats.get(rule_id), rule_id, modified=False)
-        self._write_state(cases, assignments, stats)
-        return RuleAdoption(source_case, assignment, package_plan)
 
     def _new_assignment(
         self,
@@ -555,26 +531,20 @@ class JsonCaseRepository:
         assignments: list[OrderAssignment],
         stats: Mapping[str, RuleStats],
     ) -> None:
-        self._atomic_write(
-            {
-                "schemaVersion": SCHEMA_VERSION,
-                "cases": [item.to_dict() for item in cases],
-                "orderAssignments": [item.to_dict() for item in assignments],
-                "ruleStats": {rule_id: item.to_dict() for rule_id, item in stats.items()},
-            }
+        self._atomic_write_state(cases, assignments, stats)
+        self._cached_snapshot = RepositorySnapshot(
+            cases=tuple(cases),
+            assignments=tuple(assignments),
+            rule_stats=dict(stats),
         )
+        self._cached_file_token = self._file_token()
 
-    def _atomic_write(self, payload: Mapping[str, Any]) -> None:
-        backup_path: Path | None = None
-        try:
-            validate_payload_or_raise(payload)
-            if self.path.exists():
-                backup_path = create_valid_backup(
-                    self.path,
-                    keep=self.backup_keep,
-                )
-        except CaseBackupError as exc:
-            raise CaseRepositoryError(str(exc)) from exc
+    def _atomic_write_state(
+        self,
+        cases: list[ConfirmedCase],
+        assignments: list[OrderAssignment],
+        stats: Mapping[str, RuleStats],
+    ) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temporary_path: Path | None = None
         try:
@@ -587,16 +557,38 @@ class JsonCaseRepository:
                 delete=False,
             ) as handle:
                 temporary_path = Path(handle.name)
-                json.dump(payload, handle, ensure_ascii=False, indent=2)
-                handle.write("\n")
+                self._write_json_state(handle, cases, assignments, stats)
                 handle.flush()
                 os.fsync(handle.fileno())
-            os.replace(temporary_path, self.path)
         except OSError:
             if temporary_path is not None:
                 temporary_path.unlink(missing_ok=True)
             raise
-        report = audit_case_file(self.path)
+
+        pre_write_report = audit_case_file_isolated(temporary_path)
+        if not pre_write_report.valid:
+            details = "；".join(
+                issue.message for issue in pre_write_report.errors
+            )
+            temporary_path.unlink(missing_ok=True)
+            raise CaseRepositoryError(f"待写入案例未通过校验：{details}")
+
+        backup_path: Path | None = None
+        try:
+            if self.path.exists():
+                backup_path = create_valid_backup(
+                    self.path,
+                    keep=self.backup_keep,
+                )
+            os.replace(temporary_path, self.path)
+        except CaseBackupError as exc:
+            temporary_path.unlink(missing_ok=True)
+            raise CaseRepositoryError(str(exc)) from exc
+        except OSError:
+            temporary_path.unlink(missing_ok=True)
+            raise
+
+        report = audit_case_file_isolated(self.path)
         if not report.valid:
             details = "；".join(issue.message for issue in report.errors)
             try:
@@ -613,7 +605,7 @@ class JsonCaseRepository:
                 )
             try:
                 atomic_write_bytes(self.path, backup_path.read_bytes())
-                rollback_report = audit_case_file(self.path)
+                rollback_report = audit_case_file_isolated(self.path)
                 if not rollback_report.valid:
                     raise CaseRepositoryError("有效旧备份写回后仍未通过校验")
             except Exception as exc:
@@ -626,21 +618,65 @@ class JsonCaseRepository:
                 f"{failed_file}"
             )
 
-
-def _increment_stats(
-    current: RuleStats | None,
-    rule_id: str,
-    *,
-    modified: bool,
-) -> RuleStats:
-    current = current or RuleStats(rule_id=rule_id)
-    return RuleStats(
-        rule_id=rule_id,
-        direct_use_count=current.direct_use_count + (0 if modified else 1),
-        modified_count=current.modified_count + (1 if modified else 0),
-        last_used_at=_utc_now(),
-    )
+    @staticmethod
+    def _write_json_state(
+        handle: TextIO,
+        cases: list[ConfirmedCase],
+        assignments: list[OrderAssignment],
+        stats: Mapping[str, RuleStats],
+    ) -> None:
+        handle.write(f'{{"schemaVersion":{SCHEMA_VERSION},"cases":[')
+        for index, item in enumerate(cases):
+            if index:
+                handle.write(",")
+            json.dump(
+                item.to_dict(),
+                handle,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            )
+        handle.write('],"orderAssignments":[')
+        for index, item in enumerate(assignments):
+            if index:
+                handle.write(",")
+            json.dump(
+                item.to_dict(),
+                handle,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            )
+        handle.write('],"ruleStats":{')
+        for index, (rule_id, item) in enumerate(stats.items()):
+            if index:
+                handle.write(",")
+            json.dump(str(rule_id), handle, ensure_ascii=False)
+            handle.write(":")
+            json.dump(
+                item.to_dict(),
+                handle,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            )
+        handle.write("}}\n")
 
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _release_unused_heap_memory() -> None:
+    """写入大案例文件后回收临时对象，并在 macOS 归还空闲堆页。"""
+    gc.collect()
+    if sys.platform != "darwin":
+        return
+    try:
+        import ctypes
+
+        library = ctypes.CDLL("/usr/lib/libSystem.B.dylib")
+        release = library.malloc_zone_pressure_relief
+        release.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
+        release.restype = ctypes.c_size_t
+        release(None, 0)
+    except Exception:
+        # 内存回收是写入后的 best-effort 清理，失败不得改变案例保存结果。
+        return

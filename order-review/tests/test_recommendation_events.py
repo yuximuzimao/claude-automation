@@ -96,9 +96,7 @@ def test_modified_confirmation_and_unknown_abandonment_are_separate(tmp_path):
     counts = count_event_types(read_recommendation_events(event_path))
     assert counts["confirmed_modified"] == 1
     assert counts["abandoned_unknown"] == 2
-    stats = repository.get_rule_stats()
-    assert sum(item.modified_count for item in stats.values()) == 1
-    assert sum(item.direct_use_count for item in stats.values()) == 0
+    assert repository.get_rule_stats() == {}
 
 
 def test_new_session_closes_unfinished_previous_shown_as_unknown(tmp_path):
@@ -118,7 +116,7 @@ def test_new_session_closes_unfinished_previous_shown_as_unknown(tmp_path):
     assert counts["abandoned_unknown"] == 1
 
 
-def test_event_write_failure_does_not_turn_successful_rule_adoption_into_failure(
+def test_event_write_failure_does_not_block_in_memory_exact_reuse(
     tmp_path,
     caplog,
 ):
@@ -133,7 +131,7 @@ def test_event_write_failure_does_not_turn_successful_rule_adoption_into_failure
     assert workflow.confirmed_plan is not None
     assert workflow.draft is None
     assert len(repository.list_cases()) == 1
-    assert len(repository.list_assignments()) == 2
+    assert len(repository.list_assignments()) == 1
     assert "event disk failure" in workflow.event_warning
     assert "核心案例流程继续" in caplog.text
 

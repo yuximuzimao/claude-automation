@@ -1,4 +1,5 @@
 import tkinter as tk
+import threading
 import time
 from types import SimpleNamespace
 
@@ -6,6 +7,7 @@ import pytest
 
 from order_review.audit_probe import AuditExecutionState
 from order_review.audit_runner import SingleOrderAuditReport
+from order_review.split_runner import SplitOrderReport
 from order_review.case_repository import JsonCaseRepository
 from order_review.erp_reader import SequenceOneIdentityProbe
 from order_review.models import OrderSnapshot, Product
@@ -87,43 +89,67 @@ def _enter_quantity(root, window, value: int):
 
 @pytest.fixture
 def rendered_window(tmp_path, monkeypatch):
+    root = None
+    window = None
     try:
         root = tk.Tk()
     except tk.TclError as exc:
         pytest.skip(f"Tk unavailable: {exc}")
-    root.withdraw()
-    monkeypatch.setattr(ui, "get_chrome_window_bounds", lambda: None)
-    monkeypatch.setattr(ui, "get_chrome_window_state", lambda: None)
-    monkeypatch.setattr(ui, "WINDOW_FOLLOW_INTERVAL_MS", 60_000)
-    snapshot = OrderSnapshot(
-        is_expanded=True,
-        system_order_id="SYSTEM-ORDER-1",
-        products=[
-            Product(
-                title="商品A（简称A）",
-                standard_name="商品A",
-                short_name="简称A",
-                quantity=120,
-                merchant_code="CODE-A",
-                platform_order_number="ORDER-COPY",
-            )
-        ],
-        raw_payload={"ui": True},
-    )
-    window = ui.OrderReviewWindow(
-        root,
-        reader=lambda: snapshot,
-        repository=JsonCaseRepository(tmp_path / "cases.json"),
-    )
-    root.after_cancel(window._follow_browser_job)
-    window._follow_browser_job = None
-    root.after_cancel(window._order_watch_job)
-    window._order_watch_job = None
-    window.refresh()
-    root.update()
-    yield root, window
-    if root.winfo_exists():
-        window.close()
+    try:
+        root.withdraw()
+        monkeypatch.setattr(ui, "get_chrome_window_bounds", lambda: None)
+        monkeypatch.setattr(ui, "get_chrome_window_state", lambda: None)
+        monkeypatch.setattr(ui, "WINDOW_FOLLOW_INTERVAL_MS", 60_000)
+        snapshot = OrderSnapshot(
+            is_expanded=True,
+            system_order_id="SYSTEM-ORDER-1",
+            products=[
+                Product(
+                    title="商品A（简称A）",
+                    standard_name="商品A",
+                    short_name="简称A",
+                    quantity=120,
+                    merchant_code="CODE-A",
+                    platform_order_number="ORDER-COPY",
+                )
+            ],
+            raw_payload={"ui": True},
+        )
+        window = ui.OrderReviewWindow(
+            root,
+            reader=lambda: snapshot,
+            repository=JsonCaseRepository(tmp_path / "cases.json"),
+        )
+        root.after_cancel(window._follow_browser_job)
+        window._follow_browser_job = None
+        root.after_cancel(window._order_watch_job)
+        window._order_watch_job = None
+        window.refresh()
+        root.update()
+        yield root, window
+    finally:
+        if window is not None:
+            window._audit_running = False
+            window._cancel_quantity_commit_jobs()
+            for job_name in (
+                "_initial_refresh_job",
+                "_audit_poll_job",
+                "_follow_browser_job",
+                "_order_watch_job",
+            ):
+                job_id = getattr(window, job_name, None)
+                if job_id is not None:
+                    try:
+                        root.after_cancel(job_id)
+                    except tk.TclError:
+                        pass
+                    setattr(window, job_name, None)
+            window.package_workflow.close()
+        if root is not None:
+            try:
+                root.destroy()
+            except tk.TclError:
+                pass
 
 
 def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
@@ -159,8 +185,14 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
 
     _buttons(window, "单包方案")[0].invoke()
     root.update()
-    assert _buttons(window, "新增下一个包裹")[0].cget("state") == "disabled"
-    assert _buttons(window, "确认方案")[0].cget("fg") != "#ffffff"
+    assert _buttons(window, "新增包裹")[0].cget("state") == "disabled"
+    save_button = _buttons(window, "保存方案")[0]
+    assert save_button.cget("fg") != "#ffffff"
+    assert [
+        child.cget("text")
+        for child in save_button.master.winfo_children()
+        if isinstance(child, tk.Button)
+    ] == ["新增包裹", "恢复初始", "保存方案"]
     assert not _buttons(window, "确定")
     assert all(
         button.cget("fg") != "#ffffff" and int(button.cget("pady")) <= 4
@@ -168,12 +200,25 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
         if isinstance(button, tk.Button)
     )
 
-    _enter_quantity(root, window, 121)
+    quantity_entry = _quantity_entries(window)[0]
+    assert quantity_entry.bind("<Return>")
+    assert quantity_entry.bind("<FocusOut>")
+    assert quantity_entry.bind("<KeyRelease>")
+    _enter_quantity(root, window, 25)
+    assert window.package_workflow.remaining_quantity == 95
+
+    _enter_quantity(root, window, 120)
     assert window.package_workflow.remaining_quantity == 0
 
     _enter_quantity(root, window, 37)
     assert window.package_workflow.remaining_quantity == 83
-    assert _buttons(window, "新增下一个包裹")[0].cget("state") == "normal"
+    assert len(_micro_controls(window, "MIN")) == 1
+    _micro_controls(window, "MIN")[0].event_generate("<Button-1>")
+    root.update()
+    assert window.package_workflow.remaining_quantity == 120
+    _enter_quantity(root, window, 37)
+    assert window.package_workflow.remaining_quantity == 83
+    assert _buttons(window, "新增包裹")[0].cget("state") == "normal"
     assert all(control.winfo_width() <= 24 for control in _micro_controls(window, "+"))
     assert all(control.winfo_width() <= 24 for control in _micro_controls(window, "−"))
 
@@ -184,7 +229,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     root.update()
     assert window.package_workflow.remaining_quantity == 83
 
-    _buttons(window, "新增下一个包裹")[0].invoke()
+    _buttons(window, "新增包裹")[0].invoke()
     root.update()
     assert len(window.package_workflow.draft.packages) == 2
     assert len(_quantity_entries(window)) == 1
@@ -194,19 +239,35 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert len(window.package_workflow.draft.packages) == 1
     assert not _buttons(window, "删除空包裹")
 
-    _buttons(window, "新增下一个包裹")[0].invoke()
+    _buttons(window, "新增包裹")[0].invoke()
     root.update()
     assert len(_quantity_entries(window)) == 1
     assert len(_micro_controls(window, "MAX")) == 1
-    _micro_controls(window, "MAX")[0].event_generate("<Button-1>")
-    root.update()
-    assert window.package_workflow.remaining_quantity == 0
+    assert not _buttons(window, "剩余全部归入本包")
+    assert not _buttons(window, "取消")
+    assert window.package_workflow.remaining_quantity == 83
 
-    _buttons(window, "确认方案")[0].invoke()
+    _buttons(window, "保存方案")[0].invoke()
     root.update()
     assert window.package_workflow.confirmed_case is not None, window._package_feedback
+    assert [
+        package.total_quantity
+        for package in window.package_workflow.confirmed_plan.packages
+    ] == [37, 83]
+    assert "保存时已将剩余 83 件归入最后一个空包裹" in window._package_feedback
     assert not _buttons(window, "审核前检查")
     assert not _buttons(window, "审核当前订单")
+    assert any(
+        isinstance(item, tk.Label) and item.cget("text") == "订单拆分"
+        for item in _walk(window.content_frame)
+    )
+    assert any(
+        isinstance(item, tk.Text)
+        and "目标包裹：2 个" in item.get("1.0", "end-1c")
+        and "数量核对：120 / 120 件" in item.get("1.0", "end-1c")
+        for item in _walk(window.content_frame)
+    )
+    assert len(_buttons(window, "拆分并审核当前订单")) == 1
     text_widgets = [
         item
         for item in _walk(window.content_frame)
@@ -220,6 +281,56 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     root.update()
 
     assert "简称A" in root.clipboard_get()
+    widget.tag_remove("sel", "1.0", "end")
+    window._copy_text_selection(type("CopyEvent", (), {"widget": widget})())
+    root.update()
+    assert "简称A" in root.clipboard_get()
+    assert len(_buttons(window, "复制单号")) == 1
+    _buttons(window, "复制单号")[0].invoke()
+    root.update()
+    assert root.clipboard_get() == "ORDER-COPY"
+
+    split_calls = []
+
+    def fake_split_executor(**kwargs):
+        split_calls.append(kwargs)
+        kwargs["progress_callback"](
+            AuditExecutionState.AUDIT_DIALOG_VERIFYING,
+            "正在添加包裹 1/2",
+        )
+        return SplitOrderReport(
+            execution_id="split-ui-1",
+            started_at="2026-07-29T00:00:00Z",
+            finished_at="2026-07-29T00:00:01Z",
+            target_system_order_id=kwargs["target_system_order_id"],
+            source_snapshot_id=kwargs["expected_source"].snapshot_id,
+            confirmation_reference_id=kwargs["confirmation_reference_id"],
+            state=AuditExecutionState.SUCCESS,
+            steps=(),
+        )
+
+    window.split_executor = fake_split_executor
+    window._set_auto_refresh_enabled(True)
+    split_button = _buttons(window, "拆分并审核当前订单")[0]
+    assert split_button.cget("state") == "normal"
+    split_button.invoke()
+    for _ in range(20):
+        root.update()
+        if not window._audit_running:
+            break
+        time.sleep(0.01)
+
+    assert len(split_calls) == 1
+    assert split_calls[0]["target_system_order_id"] == "SYSTEM-ORDER-1"
+    assert len(split_calls[0]["plan"].packages) == 2
+    assert window._split_completed_system_order_id == "SYSTEM-ORDER-1"
+    assert window._auto_refresh_enabled is True
+    assert window.auto_refresh_button.cget("text") == "停止自动刷新"
+    assert (
+        _buttons(window, "拆分并审核当前订单")[0].cget("state")
+        == "disabled"
+    )
+    assert not _buttons(window, "审核当前订单")
 
     window.refresh()
     root.update()
@@ -229,7 +340,7 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     _buttons(window, "修改方案")[0].invoke()
     root.update()
     assert window.package_workflow.draft is not None
-    assert _buttons(window, "确认方案")
+    assert _buttons(window, "保存方案")
 
     large_snapshot = OrderSnapshot(
         is_expanded=True,
@@ -358,7 +469,11 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert window.package_workflow.auto_adopted_recommendation is True
     assert _buttons(window, "修改方案")
     assert _buttons(window, "审核当前订单")
-    assert not _buttons(window, "确认方案")
+    assert not _buttons(window, "保存方案")
+    assert window._can_poll_order_identity() is True
+    window._show_package_editor = True
+    assert window._can_poll_order_identity() is False
+    window._show_package_editor = False
 
     combined_calls = []
 
@@ -376,16 +491,165 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
         )
 
     window.audit_executor = stopped_audit_executor
+    original_confirm = window.package_workflow.confirm
+    audit_confirm_threads = []
+
+    def tracked_audit_confirm(**kwargs):
+        audit_confirm_threads.append(threading.current_thread().name)
+        return original_confirm(**kwargs)
+
+    window.package_workflow.confirm = tracked_audit_confirm
     _buttons(window, "审核当前订单")[0].invoke()
-    for _ in range(20):
+    for _ in range(500):
         root.update()
         if not window._audit_running:
             break
         time.sleep(0.01)
 
     assert len(combined_calls) == 1
-    assert window.package_workflow.confirmed_plan is not None
-    assert window.package_workflow.draft is None
+    assert audit_confirm_threads == []
+    assert window.package_workflow.confirmed_plan is None
+    assert window.package_workflow.draft is not None
+    window.package_workflow.confirm = original_confirm
+
+    historical_multi_snapshot = OrderSnapshot(
+        is_expanded=True,
+        system_order_id="SYSTEM-MULTI-HISTORY",
+        products=[
+            Product(
+                title="多包商品",
+                standard_name="多包商品",
+                short_name="多包商品",
+                quantity=4,
+                merchant_code="MULTI-CODE",
+                platform_order_number="MULTI-HISTORY-ORDER",
+            )
+        ],
+        raw_payload={"ui": "multi-history"},
+    )
+    window.current_snapshot = historical_multi_snapshot
+    window.package_workflow.load_order(historical_multi_snapshot)
+    window.package_workflow.start_split()
+    multi_product = window.package_workflow.source_snapshot.products[0]
+    first_package = window.package_workflow.draft.packages[0]
+    window.package_workflow.set_quantity(
+        first_package.package_id,
+        multi_product.source_product_id,
+        2,
+    )
+    window.package_workflow.add_package()
+    second_package = window.package_workflow.draft.packages[1]
+    window.package_workflow.set_quantity(
+        second_package.package_id,
+        multi_product.source_product_id,
+        2,
+    )
+    window.package_workflow.confirm()
+
+    matched_multi_snapshot = OrderSnapshot(
+        is_expanded=True,
+        system_order_id="SYSTEM-MULTI-CURRENT",
+        products=[
+            Product(
+                title="多包商品",
+                standard_name="多包商品",
+                short_name="多包商品",
+                quantity=4,
+                merchant_code="MULTI-CODE",
+                platform_order_number="MULTI-CURRENT-ORDER",
+            )
+        ],
+        raw_payload={"ui": "multi-current"},
+    )
+    window.current_snapshot = matched_multi_snapshot
+    window.package_workflow.load_order(matched_multi_snapshot)
+    window._show_package_editor = False
+    window._rerender_current_snapshot()
+    root.update()
+
+    assert window.package_workflow.auto_adopted_recommendation is True
+    assert len(window.package_workflow.draft.packages) == 2
+    assert _buttons(window, "修改方案")
+    assert _buttons(window, "拆分并审核当前订单")
+    assert not _buttons(window, "保存方案")
+    window._set_auto_refresh_enabled(True)
+    assert window._can_poll_order_identity() is True
+
+    split_calls.clear()
+    window.split_executor = fake_split_executor
+    original_confirm = window.package_workflow.confirm
+    split_confirm_threads = []
+
+    def tracked_split_confirm(**kwargs):
+        split_confirm_threads.append(threading.current_thread().name)
+        return original_confirm(**kwargs)
+
+    window.package_workflow.confirm = tracked_split_confirm
+    _buttons(window, "拆分并审核当前订单")[0].invoke()
+    for _ in range(500):
+        root.update()
+        if not window._audit_running:
+            break
+        time.sleep(0.01)
+
+    assert len(split_calls) == 1
+    assert split_confirm_threads == []
+    assert split_calls[0]["target_system_order_id"] == "SYSTEM-MULTI-CURRENT"
+    assert len(split_calls[0]["plan"].packages) == 2
+    assert window.package_workflow.confirmed_plan is None
+    assert window.package_workflow.draft is not None
+    assert window.package_workflow.confirmation_note == ""
+    assert window._auto_refresh_enabled is True
+    window.package_workflow.confirm = original_confirm
+
+    enzyme_snapshot = OrderSnapshot(
+        is_expanded=True,
+        system_order_id="SYSTEM-ENZYME-14",
+        order_numbers=("ORDER-ENZYME-1", "ORDER-ENZYME-2"),
+        products=[
+            Product(
+                title="酵素4.0",
+                standard_name="酵素4.0",
+                short_name="酵素4.0",
+                quantity=7,
+                merchant_code="ENZYME-4",
+                platform_order_number="ORDER-ENZYME-1",
+            ),
+            Product(
+                title="酵素4.0",
+                standard_name="酵素4.0",
+                short_name="酵素4.0",
+                quantity=7,
+                merchant_code="ENZYME-4",
+                platform_order_number="ORDER-ENZYME-2",
+            ),
+        ],
+        raw_payload={"ui": "enzyme-7-plus-7"},
+    )
+    window.reader = lambda: enzyme_snapshot
+    window.refresh()
+    root.update()
+
+    _buttons(window, "拆分包裹")[0].invoke()
+    root.update()
+    first, second = window.package_workflow.source_snapshot.products
+    _enter_quantity(root, window, 7)
+    assert window.package_workflow.remaining_quantity == 7
+
+    _buttons(window, "保存方案")[0].invoke()
+    root.update()
+
+    plan = window.package_workflow.confirmed_plan
+    assert plan is not None, window._package_feedback
+    assert [package.total_quantity for package in plan.packages] == [7, 7]
+    assert [
+        {item.source_product_id: item.quantity for item in package.items}
+        for package in plan.packages
+    ] == [
+        {first.source_product_id: 7},
+        {second.source_product_id: 7},
+    ]
+    assert "保存时已将剩余 7 件自动生成最后一个包裹" in window._package_feedback
 
 
 def _headless_auto_refresh_window(current_snapshot, clock):

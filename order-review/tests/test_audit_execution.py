@@ -93,6 +93,17 @@ def test_result_succeeds_when_target_disappears_even_if_footer_stays_one():
     assert "底部汇总可能残留" in validation.render_text()
 
 
+def test_split_audit_result_accepts_multi_package_scope_after_dialog_proof():
+    validation = validate_audit_result(
+        _result_probe("success_with_stale_footer.json"),
+        target_system_order_id=SYSTEM_ORDER_ID,
+        target_package_count=3,
+    )
+
+    assert validation.state == AuditExecutionState.SUCCESS
+    assert "审核弹窗确认的 3 条订单" in validation.render_text()
+
+
 def test_result_is_unknown_when_target_still_exists_and_never_retries():
     validation = validate_audit_result(
         _result_probe("unknown_target_still_present.json"),

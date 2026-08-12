@@ -20,6 +20,7 @@ from .package_plan import (
     SourceSnapshot,
 )
 from .recommendations import (
+    MATCH_HISTORICAL_PACKAGE_COMPOSITION,
     MATCH_EXACT_STRUCTURE,
     MATCH_SINGLE_PACKAGE_CAPACITY,
     MATCH_SINGLE_PACKAGE_TOTAL,
@@ -68,6 +69,7 @@ class PackagePlanWorkflow:
 
         self.confirmed_case: ConfirmedCase | None = None
         self.confirmed_plan: PackagePlan | None = None
+        self.direct_single_item_plan: PackagePlan | None = None
         self.confirmation_note = ""
         self.freight_pending = False
         self.freight_reminder: FreightReminder | None = None
@@ -93,13 +95,26 @@ class PackagePlanWorkflow:
             self._abandon_pending_recommendations()
         self.source_snapshot = source_snapshot
         self._reset_transient_state()
+        if source_snapshot.total_quantity == 1 and not order_snapshot.has_suite_action:
+            self.direct_single_item_plan = PackageDraft.single_package(
+                source_snapshot
+            ).confirm(source_snapshot)
         try:
-            history = self.repository.find_same_order(self.source_snapshot)
+            repository_snapshot = self.repository.read_snapshot()
+            history = self.repository.find_same_order(
+                self.source_snapshot,
+                snapshot=repository_snapshot,
+            )
             if history is not None:
                 self.historical_case = history.case
                 self.historical_rule_id = history.assignment.rule_id if history.assignment else None
                 if history.case.is_freight:
                     self.load_notice = "该订单已经保存为物流发货。"
+                    return
+                if self.direct_single_item_plan is not None:
+                    self.load_notice = (
+                        "总数量为 1，可直接审核；本单不保存方案或规则采用。"
+                    )
                     return
                 self.historical_plan = apply_case_plan(
                     self.source_snapshot, history.case
@@ -109,15 +124,17 @@ class PackagePlanWorkflow:
                 )
                 return
 
-            cases = self.repository.list_cases()
+            if self.direct_single_item_plan is not None:
+                self.load_notice = (
+                    "总数量为 1，可直接审核；本单不保存方案或规则采用。"
+                )
+                return
+
+            cases = list(repository_snapshot.cases)
             self.freight_reminder = find_freight_reminder(
                 self.source_snapshot, cases
             )
-            if source_snapshot.total_quantity == 1 and not order_snapshot.has_suite_action:
-                self.start_single_package()
-                self.load_notice = "总数量为 1 且非套件，已默认生成单包草稿，请确认。"
-                return
-            stats = self.repository.get_rule_stats()
+            stats = repository_snapshot.rule_stats
             self.recommendations = find_recommendations(
                 self.source_snapshot, cases, stats
             )
@@ -138,12 +155,12 @@ class PackagePlanWorkflow:
                 candidate = self.recommendations.candidates[0]
                 if candidate.match_type != MATCH_SINGLE_PACKAGE_CAPACITY:
                     self.adopt_recommendation(candidate.recommendation_id, automatic=True)
-                    match_label = (
-                        "完全匹配的历史方案"
-                        if candidate.match_type == MATCH_EXACT_STRUCTURE
-                        else "历史单包方案"
-                    )
-                    self.load_notice = f"已自动采用{match_label}，可直接确认或继续修改。"
+                    match_label = {
+                        MATCH_EXACT_STRUCTURE: "完全匹配的历史方案",
+                        MATCH_SINGLE_PACKAGE_TOTAL: "历史单包方案",
+                        MATCH_HISTORICAL_PACKAGE_COMPOSITION: "历史包裹组合方案",
+                    }[candidate.match_type]
+                    self.load_notice = f"已自动采用{match_label}，可直接审核或继续修改。"
         except CaseRepositoryError as exc:
             self._abandon_pending_recommendations()
             self.recommendations = RecommendationResult(candidates=(), conflict=False)
@@ -163,6 +180,7 @@ class PackagePlanWorkflow:
         self.editing_historical_case = None
         self.confirmed_case = None
         self.confirmed_plan = None
+        self.direct_single_item_plan = None
         self.confirmation_note = ""
         self.freight_pending = False
         self.freight_reminder = None
@@ -250,6 +268,56 @@ class PackagePlanWorkflow:
         )
         self._mark_modified()
 
+    def fill_package_with_remaining(self, package_id: str) -> None:
+        source, draft = self._require_draft()
+        if not any(item.package_id == package_id for item in draft.packages):
+            raise PackagePlanValidationError("包裹不存在")
+
+        updated = draft
+        for product in source.products:
+            remaining = updated.remaining_quantity(product)
+            if remaining <= 0:
+                continue
+            current = next(
+                (
+                    item.quantity
+                    for current_package in updated.packages
+                    if current_package.package_id == package_id
+                    for item in current_package.items
+                    if item.source_product_id == product.source_product_id
+                ),
+                0,
+            )
+            updated = updated.set_quantity(
+                package_id,
+                product.source_product_id,
+                current + remaining,
+                source=source,
+            )
+
+        if updated == draft:
+            return
+        self.draft = updated
+        self._mark_modified()
+
+    def move_remaining_to_final_package(self) -> tuple[int, str, bool]:
+        """把全部待分配商品放入独立的最后一包，并返回数量、包裹 ID、是否新建。"""
+        _, draft = self._require_draft()
+        remaining_quantity = self.remaining_quantity
+        if remaining_quantity <= 0:
+            raise PackagePlanValidationError("当前没有待分配商品")
+
+        final_package = draft.packages[-1]
+        target = final_package if not final_package.items else None
+        created = target is None
+        if target is None:
+            self.draft = draft.add_package()
+            self._mark_modified()
+            target = self.draft.packages[-1]
+
+        self.fill_package_with_remaining(target.package_id)
+        return remaining_quantity, target.package_id, created
+
     def add_package(self) -> None:
         _, draft = self._require_draft()
         if self.remaining_quantity <= 0:
@@ -329,22 +397,28 @@ class PackagePlanWorkflow:
         if (
             candidate is not None
             and not self.recommendation_modified
-            and candidate.match_type != MATCH_SINGLE_PACKAGE_CAPACITY
+            and candidate.match_type
+            not in {
+                MATCH_SINGLE_PACKAGE_CAPACITY,
+                MATCH_HISTORICAL_PACKAGE_COMPOSITION,
+            }
         ):
-            decision = self._build_decision()
-            adopted = self.repository.record_rule_adoption(
-                source,
-                package_plan,
-                decision,
-                source_case_id=candidate.source_case_ids[0],
-                rule_id=candidate.rule_id,
+            source_case = next(
+                (
+                    case
+                    for case in self.repository.read_snapshot().cases
+                    if case.case_id == candidate.source_case_ids[0]
+                ),
+                None,
             )
-            self.confirmed_case = adopted.case
-            self.confirmed_plan = adopted.package_plan
-            self.confirmation_note = "已确认采用历史规则；未重复保存完整案例。"
+            if source_case is None:
+                raise CaseRepositoryError("历史规则来源案例不存在")
+            self.confirmed_case = source_case
+            self.confirmed_plan = package_plan
+            self.confirmation_note = "已采用历史方案；未写入案例或采用统计。"
             self._record_recommendation_confirmation(candidate, modified=False)
             self._finish_confirmation()
-            return adopted.case
+            return source_case
 
         decision = self._build_decision()
         saved = self.repository.confirm(
@@ -362,6 +436,12 @@ class PackagePlanWorkflow:
             and not self.recommendation_modified
         ):
             self.confirmation_note = "已保存新的单包容量案例，并记录规则采用。"
+        elif (
+            candidate is not None
+            and candidate.match_type == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+            and not self.recommendation_modified
+        ):
+            self.confirmation_note = "已保存新的历史包裹组合案例，并记录规则采用。"
         elif candidate is not None:
             self.confirmation_note = "已保存修改后的方案分支。"
         else:

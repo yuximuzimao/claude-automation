@@ -9,7 +9,11 @@ import re
 import tempfile
 from typing import Any
 
-from .case_validation import audit_case_file, validate_case_payload
+from .case_validation import (
+    audit_case_file,
+    audit_case_file_isolated,
+    validate_case_payload,
+)
 from .file_lock import exclusive_file_lock
 
 
@@ -46,7 +50,7 @@ def create_valid_backup(
     source = Path(source_path)
     if not source.exists():
         return None
-    report = audit_case_file(source)
+    report = audit_case_file_isolated(source)
     if not report.valid:
         details = "；".join(issue.message for issue in report.errors)
         raise CaseBackupError(f"现有案例未通过校验，不会创建正式备份：{details}")
@@ -58,7 +62,7 @@ def create_valid_backup(
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     destination = destination_dir / f"{prefix}-{timestamp}.json"
     atomic_write_bytes(destination, data)
-    copied_report = audit_case_file(destination)
+    copied_report = audit_case_file_isolated(destination)
     if not copied_report.valid:
         destination.unlink(missing_ok=True)
         raise CaseBackupError("备份写入后未通过校验，已移除无效备份")

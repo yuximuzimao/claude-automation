@@ -92,18 +92,40 @@ def test_dialog_accepts_missing_or_stale_one_footer_as_non_positive_evidence():
         assert validation.ready_to_submit is True
 
 
-def test_dialog_rules_refuse_multi_package_plan():
+def test_split_audit_uses_dialog_count_after_prior_result_selection_validation():
+    payload = json.loads((FIXTURE_DIR / "correct.json").read_text(encoding="utf-8"))
+    payload["dialogs"][0]["listSelectedCount"] = 3
+    payload["dialogs"][0]["listOption"]["text"] = (
+        "处理列表页勾选的订单 已勾选 3 条订单"
+    )
+    payload["selectedRowCount"] = 1
+    payload["selectedSystemOrderIds"] = ["ONLY-VISIBLE-VIRTUAL-ROW"]
+    payload["footerSelectedCounts"] = [1]
+
+    validation = validate_audit_dialog(
+        AuditDialogProbe.from_payload(payload),
+        target_system_order_id=SYSTEM_ORDER_ID,
+        target_package_count=3,
+    )
+
+    assert validation.ready_to_submit is True
+    assert not validation.blockers
+    assert any(
+        check.code == "SPLIT_SELECTION_ALREADY_VERIFIED"
+        and check.status == "info"
+        for check in validation.checks
+    )
+
+
+def test_split_audit_blocks_when_dialog_count_differs_from_package_count():
     validation = validate_audit_dialog(
         _probe("correct.json"),
         target_system_order_id=SYSTEM_ORDER_ID,
-        target_package_count=2,
+        target_package_count=3,
     )
 
     assert validation.ready_to_submit is False
-    assert any(
-        check.code == "SINGLE_PACKAGE_ORDER_SCOPE"
-        for check in validation.blockers
-    )
+    assert any(check.code == "LIST_SELECTED_COUNT" for check in validation.blockers)
 
 
 def test_dialog_blocks_when_more_than_one_dialog_is_visible():

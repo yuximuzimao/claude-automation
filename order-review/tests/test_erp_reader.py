@@ -2,13 +2,18 @@ import pytest
 
 from order_review.erp_reader import (
     SequenceOneIdentityProbe,
+    build_expand_order_sequence_js,
     build_expand_sequence_one_js,
+    build_order_sequence_view_probe_js,
+    build_read_order_sequence_js,
     build_read_sequence_one_js,
     build_sequence_one_identity_probe_js,
     find_erp_toaudit_target,
+    read_order_at_sequence,
     read_sequence_one_identity,
     read_sequence_one_order,
     resolve_system_order_id,
+    scroll_order_sequence_into_view,
     snapshot_from_payload,
 )
 from order_review.window_position import ChromeActiveTab
@@ -61,6 +66,67 @@ def test_find_erp_target_requires_unique_matching_cdp_page():
     assert target_id == ""
 
 
+def test_find_erp_target_falls_back_to_accessibility_front_window_title(
+    monkeypatch,
+):
+    url = "https://erpb.superboss.cc/index.html#/trade/toaudit/"
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_active_tab",
+        lambda: None,
+    )
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_front_window_title",
+        lambda: "快麦ERP--待审核订单 - Google Chrome",
+    )
+
+    target_id = find_erp_toaudit_target(
+        [{"id": "abc", "type": "page", "title": "快麦ERP--待审核订单", "url": url}]
+    )
+
+    assert target_id == "abc"
+
+
+def test_accessibility_fallback_still_requires_unique_front_toaudit_page(
+    monkeypatch,
+):
+    url = "https://erpb.superboss.cc/index.html#/trade/toaudit/"
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_active_tab",
+        lambda: None,
+    )
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_front_window_title",
+        lambda: "快麦ERP--待审核订单 - Google Chrome",
+    )
+
+    target_id = find_erp_toaudit_target(
+        [
+            {"id": "first", "type": "page", "title": "快麦ERP--待审核订单", "url": url},
+            {"id": "second", "type": "page", "title": "快麦ERP--待审核订单", "url": url},
+        ]
+    )
+
+    assert target_id == ""
+
+
+def test_accessibility_fallback_rejects_background_toaudit_page(monkeypatch):
+    url = "https://erpb.superboss.cc/index.html#/trade/toaudit/"
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_active_tab",
+        lambda: None,
+    )
+    monkeypatch.setattr(
+        "order_review.erp_reader.get_chrome_front_window_title",
+        lambda: "订单管理 - Google Chrome",
+    )
+
+    target_id = find_erp_toaudit_target(
+        [{"id": "abc", "type": "page", "title": "快麦ERP--待审核订单", "url": url}]
+    )
+
+    assert target_id == ""
+
+
 def test_reader_js_targets_sequence_one_and_requires_expanded_row():
     js = build_read_sequence_one_js()
 
@@ -89,6 +155,96 @@ def test_expand_js_only_clicks_sequence_one_left_expand_control():
     assert "trigger.click()" in js
     assert "module-trade-list-item-open" in js
     assert "tr.order-temp, .item-snapshot-itemname" in js
+
+
+def test_generic_reader_and_expand_scripts_target_requested_sequence():
+    read_js = build_read_order_sequence_js(3)
+    expand_js = build_expand_order_sequence_js(3)
+
+    assert "seq(row)==='3'" in read_js
+    assert "seq(row)==='1'" not in read_js
+    assert "SEQ_3_NOT_FOUND" in read_js
+    assert "seq(row)==='3'" in expand_js
+    assert "seq(row)==='1'" not in expand_js
+    assert "trigger.click()" in expand_js
+
+
+def test_sequence_view_probe_is_read_only_and_scroll_uses_physical_wheel():
+    js = build_order_sequence_view_probe_js(3, "ORDER-3")
+    probes = iter(
+        [
+            {
+                "ok": True,
+                "found": False,
+                "mountedSequences": [1, 2],
+                "wheelX": 500,
+                "wheelY": 400,
+            },
+            {
+                "ok": True,
+                "found": True,
+                "inViewport": True,
+                "systemOrderId": "ORDER-3",
+                "mountedSequences": [2, 3, 4],
+                "wheelX": 500,
+                "wheelY": 400,
+            },
+        ]
+    )
+    wheels = []
+
+    result = scroll_order_sequence_into_view(
+        3,
+        "target-1",
+        expected_system_order_id="ORDER-3",
+        evaluator=lambda _target_id, _js: next(probes),
+        wheel_dispatcher=lambda *args: wheels.append(args),
+        sleeper=lambda _seconds: None,
+    )
+
+    assert "mountedSequences" in js
+    assert "expectedSystemOrderId" in js
+    assert ".click(" not in js
+    assert result["systemOrderId"] == "ORDER-3"
+    assert wheels == [("target-1", 500.0, 400.0, 520.0)]
+
+
+def test_sequence_view_probe_allows_identity_discovery_but_still_requires_identity():
+    js = build_order_sequence_view_probe_js(3, "")
+
+    assert "if (!systemOrderId)" in js
+    assert "expectedSystemOrderId && systemOrderId !== expectedSystemOrderId" in js
+    assert "if (!expectedSystemOrderId ||" not in js
+
+
+def test_generic_reader_stops_if_row_identity_changes_after_expand():
+    payloads = iter(
+        [
+            {
+                "ok": True,
+                "isExpanded": False,
+                "rowAttributes": {"uniqueid": "ORDER-2", "sid": "ORDER-2"},
+                "visibleSystemOrderId": "ORDER-2",
+                "products": [],
+            },
+            {"ok": True, "expanded": True, "clicked": True},
+            {
+                "ok": True,
+                "isExpanded": True,
+                "rowAttributes": {"uniqueid": "CHANGED", "sid": "CHANGED"},
+                "visibleSystemOrderId": "CHANGED",
+                "products": [],
+            },
+        ]
+    )
+
+    with pytest.raises(RuntimeError, match="展开第 2 行订单后目标发生变化"):
+        read_order_at_sequence(
+            2,
+            "target-1",
+            expected_system_order_id="ORDER-2",
+            evaluator=lambda _target_id, _js: next(payloads),
+        )
 
 
 def test_identity_probe_is_read_only_and_blocks_unsafe_page_states():

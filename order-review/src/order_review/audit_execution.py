@@ -195,10 +195,17 @@ class AuditResultValidation:
                 if self.probe.current_sequence_one_system_order_id
                 else "当前列表没有新的序号 1 订单，"
             )
+            if self.target_package_count == 1:
+                return (
+                    f"审核成功：目标订单 {self.target_system_order_id} "
+                    f"已从待审核列表消失，{next_order}且没有订单被继续勾选。"
+                    "底部汇总可能残留上一单数据，不参与成功判定。"
+                )
             return (
-                f"审核成功：目标订单 {self.target_system_order_id} 已从待审核列表消失，"
-                f"{next_order}且没有订单被继续勾选。"
-                "底部汇总可能残留上一单数据，不参与成功判定。"
+                f"拆分结果审核成功：审核弹窗确认的 {self.target_package_count} "
+                f"条订单已提交，原拆分订单已离开待审核列表，{next_order}"
+                "且没有订单被继续勾选。"
+                "底部汇总可能残留拆分前数据，不参与成功判定。"
             )
         if self.state == AuditExecutionState.STOPPED:
             details = "；".join(check.detail for check in self.blockers)
@@ -244,13 +251,13 @@ def validate_audit_result(
             ),
         ),
         _check(
-            "SINGLE_PACKAGE_ORDER_SCOPE",
+            "AUDIT_PACKAGE_SCOPE",
             "适用范围",
-            target_package_count == 1,
+            target_package_count >= 1,
             (
                 "当前是单包单订单审核"
                 if target_package_count == 1
-                else f"当前方案有 {target_package_count} 个包裹，不能套用单订单审核结果"
+                else f"当前是拆分后 {target_package_count} 个包裹的连续审核"
             ),
         ),
         _check(

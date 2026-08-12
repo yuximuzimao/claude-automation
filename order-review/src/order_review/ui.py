@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from dataclasses import dataclass, field
+import os
 import queue
 import threading
 import time
 import tkinter as tk
 from tkinter import ttk
-from typing import Callable
+from typing import Callable, Mapping
 
 from .audit_runner import (
     SingleOrderAuditReport,
@@ -26,15 +27,25 @@ from .erp_reader import (
     read_sequence_one_order_without_expand,
 )
 from .models import OrderSnapshot, Product
+from .memory_diagnostics import MemoryDiagnostics
+from .macos_companion import (
+    MacOSCompanionWindow,
+    companion_should_be_visible,
+    get_frontmost_application,
+)
 from .package_plan import PackagePlanValidationError
 from .package_workflow import PackagePlanWorkflow
 from .recommendations import (
     MATCH_EXACT_STRUCTURE,
+    MATCH_HISTORICAL_PACKAGE_COMPOSITION,
     MATCH_SINGLE_PACKAGE_CAPACITY,
     MATCH_SINGLE_PACKAGE_TOTAL,
 )
 from .rules import judge
+from .split_dry_run import build_split_dry_run
+from .split_runner import SplitOrderReport, run_mixed_order_split
 from .window_position import (
+    ChromeWindowState,
     get_chrome_window_bounds,
     get_chrome_window_state,
     panel_geometry_from_browser_bounds,
@@ -45,11 +56,14 @@ WINDOW_WIDTH = 360
 WINDOW_HEIGHT = 760
 WINDOW_GAP = 8
 WINDOW_FOLLOW_INTERVAL_MS = 1500
+WINDOW_FOLLOW_RESULT_POLL_MS = 100
+COMPANION_VISIBILITY_INTERVAL_MS = 100
 ORDER_WATCH_INTERVAL_MS = 500
 ORDER_CHANGE_STABLE_OBSERVATIONS = 2
 ORDER_CHANGE_STABLE_SECONDS = 0.5
 POST_AUDIT_REFRESH_DELAY_SECONDS = 0.0
 FONT_FAMILY = "Helvetica Neue"
+FONT_SCALE_FACTOR = 1.1
 MACOS_THEME = {
     "window_bg": "#f6f7f9",
     "titlebar_bg": "#ffffff",
@@ -406,6 +420,7 @@ class OrderReviewWindow:
         ),
         repository: JsonCaseRepository | None = None,
         audit_executor: Callable[..., SingleOrderAuditReport] = run_single_order_audit,
+        split_executor: Callable[..., SplitOrderReport] = run_mixed_order_split,
         order_identity_reader: Callable[[], SequenceOneIdentityProbe] = (
             read_sequence_one_identity
         ),
@@ -413,10 +428,13 @@ class OrderReviewWindow:
             read_sequence_one_order_if_matches
         ),
         monotonic: Callable[[], float] = time.monotonic,
+        memory_diagnostics: MemoryDiagnostics | None = None,
     ) -> None:
         self.root = root
         self.reader = reader
         self.passive_reader = passive_reader
+        current_scaling = float(self.root.tk.call("tk", "scaling"))
+        self.root.tk.call("tk", "scaling", current_scaling * FONT_SCALE_FACTOR)
         self.root.title("审单悬浮窗")
         self.root.geometry(self._initial_geometry())
         self.root.resizable(False, True)
@@ -430,9 +448,11 @@ class OrderReviewWindow:
         self.current_snapshot: OrderSnapshot | None = None
         self.package_workflow = PackagePlanWorkflow(repository)
         self.audit_executor = audit_executor
+        self.split_executor = split_executor
         self.order_identity_reader = order_identity_reader
         self.auto_refresh_reader = auto_refresh_reader
         self.monotonic = monotonic
+        self.memory_diagnostics = memory_diagnostics
         self.audit_log_store = AuditExecutionLogStore(
             default_audit_log_path(self.package_workflow.repository.path)
         )
@@ -442,6 +462,7 @@ class OrderReviewWindow:
         self._audit_running = False
         self._audit_progress = ""
         self._audit_completed_system_order_id = ""
+        self._split_completed_system_order_id = ""
         self._audit_thread: threading.Thread | None = None
         self._audit_events: queue.Queue[tuple[str, object]] = queue.Queue()
         self._audit_poll_job: str | None = None
@@ -461,8 +482,15 @@ class OrderReviewWindow:
         self._active_package_id: str | None = None
         self._quantity_commit_jobs: dict[tuple[str, str], str] = {}
         self._last_browser_bounds: tuple[int, int, int, int] | None = None
-        self._browser_was_minimized: bool | None = None
+        self._browser_minimized = False
+        self._browser_was_hidden: bool | None = None
+        self._native_companion = MacOSCompanionWindow("审单悬浮窗")
+        self._browser_state_events: queue.Queue[ChromeWindowState | None] = (
+            queue.Queue()
+        )
+        self._browser_state_thread: threading.Thread | None = None
         self._follow_browser_job: str | None = None
+        self._companion_visibility_job: str | None = None
         self._build()
         self._initial_refresh_job: str | None = self.root.after(
             300, self._run_initial_refresh
@@ -471,10 +499,17 @@ class OrderReviewWindow:
             WINDOW_FOLLOW_INTERVAL_MS,
             self._follow_browser_window,
         )
+        self._companion_visibility_job = self.root.after(
+            0,
+            self._sync_companion_visibility,
+        )
         self._order_watch_job = self.root.after(
             ORDER_WATCH_INTERVAL_MS,
             self._poll_order_watch,
         )
+        if self.memory_diagnostics is not None:
+            self.memory_diagnostics.runtime_counters = self._memory_runtime_counters
+            self.memory_diagnostics.record_startup(self.root)
 
     def _initial_geometry(self) -> str:
         bounds = get_chrome_window_bounds()
@@ -490,31 +525,73 @@ class OrderReviewWindow:
         if not self.root.winfo_exists():
             self._follow_browser_job = None
             return
-        state = get_chrome_window_state()
-        if state is None or state.minimized:
-            if state is not None and self._browser_was_minimized is not True:
-                self.root.withdraw()
-            if state is not None:
-                self._browser_was_minimized = True
+        try:
+            state = self._browser_state_events.get_nowait()
+        except queue.Empty:
+            state = None
         else:
-            became_visible = self._browser_was_minimized is True
-            bounds_changed = state.bounds != self._last_browser_bounds
-            if became_visible:
-                self.root.deiconify()
-            if became_visible or bounds_changed:
-                self.root.geometry(
-                    panel_geometry_from_browser_bounds(
-                        state.bounds,
-                        panel_width=WINDOW_WIDTH,
-                        gap=WINDOW_GAP,
+            self._browser_state_thread = None
+            if state is not None:
+                self._browser_minimized = state.minimized
+                if state.bounds != self._last_browser_bounds:
+                    self.root.geometry(
+                        panel_geometry_from_browser_bounds(
+                            state.bounds,
+                            panel_width=WINDOW_WIDTH,
+                            gap=WINDOW_GAP,
+                        )
                     )
-                )
-            self._last_browser_bounds = state.bounds
-            self._browser_was_minimized = False
+                    self._last_browser_bounds = state.bounds
+                self._sync_companion_visibility(schedule_next=False)
+            self._follow_browser_job = self.root.after(
+                WINDOW_FOLLOW_INTERVAL_MS,
+                self._follow_browser_window,
+            )
+            return
+        if self._browser_state_thread is None:
+            self._browser_state_thread = threading.Thread(
+                target=self._read_browser_window_state,
+                name="order-review-browser-window-state",
+                daemon=True,
+            )
+            self._browser_state_thread.start()
         self._follow_browser_job = self.root.after(
-            WINDOW_FOLLOW_INTERVAL_MS,
+            WINDOW_FOLLOW_RESULT_POLL_MS,
             self._follow_browser_window,
         )
+
+    def _read_browser_window_state(self) -> None:
+        self._browser_state_events.put(get_chrome_window_state())
+
+    def _set_companion_visible(self, visible: bool) -> None:
+        hidden = not visible
+        if self._browser_was_hidden is hidden:
+            return
+        if not self._native_companion.set_visible(visible):
+            if visible:
+                self.root.deiconify()
+            else:
+                self.root.withdraw()
+        self._browser_was_hidden = hidden
+
+    def _sync_companion_visibility(self, *, schedule_next: bool = True) -> None:
+        if not self.root.winfo_exists():
+            self._companion_visibility_job = None
+            return
+        frontmost = get_frontmost_application()
+        if frontmost is not None:
+            self._set_companion_visible(
+                not self._browser_minimized
+                and companion_should_be_visible(
+                    frontmost,
+                    companion_process_id=os.getpid(),
+                )
+            )
+        if schedule_next:
+            self._companion_visibility_job = self.root.after(
+                COMPANION_VISIBILITY_INTERVAL_MS,
+                self._sync_companion_visibility,
+            )
 
     def _poll_order_watch(self) -> None:
         self._order_watch_job = None
@@ -577,7 +654,7 @@ class OrderReviewWindow:
         if self.package_workflow.draft is not None:
             return (
                 not self._show_package_editor
-                and self._compact_reliable_single_plan() is not None
+                and self._compact_reliable_plan() is not None
             )
         return True
 
@@ -851,6 +928,9 @@ class OrderReviewWindow:
             self._auto_refresh_paused = False
             self._reset_order_change_candidate()
             self._render_view(build_sidebar_view(snapshot))
+            memory_diagnostics = getattr(self, "memory_diagnostics", None)
+            if memory_diagnostics is not None:
+                memory_diagnostics.record_refresh(self.root)
         except Exception as exc:
             self.current_snapshot = None
             self.package_workflow.clear_order()
@@ -1071,6 +1151,15 @@ class OrderReviewWindow:
             takefocus=True,
             cursor="xterm",
         )
+        entry.bind("<Button-1>", lambda event: self._focus_widget(event.widget))
+        entry.bind("<Command-c>", lambda event: event.widget.event_generate("<<Copy>>"))
+        entry.bind("<Control-c>", lambda event: event.widget.event_generate("<<Copy>>"))
+        entry.bind("<Command-a>", self._select_all_entry)
+        entry.bind("<Control-a>", self._select_all_entry)
+        entry.bind(
+            "<Control-Button-1>",
+            lambda event: self._show_copy_menu(event.widget, event),
+        )
         entry.bind("<Button-2>", lambda event: self._show_copy_menu(event.widget, event))
         entry.bind("<Button-3>", lambda event: self._show_copy_menu(event.widget, event))
         return entry
@@ -1110,14 +1199,21 @@ class OrderReviewWindow:
             exportselection=False,
             selectbackground=MACOS_THEME["accent_border"],
             selectforeground=MACOS_THEME["primary_text"],
+            insertwidth=0,
         )
         widget.insert("1.0", text)
-        widget.configure(state="disabled")
-        widget.bind("<Button-1>", lambda event: event.widget.focus_set())
+        widget.bind("<Button-1>", lambda event: self._focus_widget(event.widget))
         widget.bind("<Command-c>", self._copy_text_selection)
         widget.bind("<Control-c>", self._copy_text_selection)
         widget.bind("<Command-a>", self._select_all_text)
         widget.bind("<Control-a>", self._select_all_text)
+        widget.bind("<Key>", lambda _event: "break")
+        widget.bind("<<Paste>>", lambda _event: "break")
+        widget.bind("<<Cut>>", lambda _event: "break")
+        widget.bind(
+            "<Control-Button-1>",
+            lambda event: self._show_copy_menu(event.widget, event),
+        )
         widget.bind("<Button-2>", lambda event: self._show_copy_menu(event.widget, event))
         widget.bind("<Button-3>", lambda event: self._show_copy_menu(event.widget, event))
         return widget
@@ -1127,14 +1223,29 @@ class OrderReviewWindow:
         try:
             selected = widget.get("sel.first", "sel.last")
         except tk.TclError:
-            return "break"
-        self.root.clipboard_clear()
-        self.root.clipboard_append(selected)
+            selected = widget.get("1.0", "end-1c")
+        self._copy_value(selected)
         return "break"
+
+    def _copy_value(self, value: str) -> None:
+        self.root.clipboard_clear()
+        self.root.clipboard_append(value)
+        self.root.update_idletasks()
+
+    def _focus_widget(self, widget: tk.Misc) -> None:
+        try:
+            self.root.focus_force()
+            widget.focus_force()
+        except tk.TclError:
+            pass
 
     def _select_all_text(self, event: tk.Event) -> str:
         widget = event.widget
         widget.tag_add("sel", "1.0", "end-1c")
+        return "break"
+
+    def _select_all_entry(self, event: tk.Event) -> str:
+        event.widget.selection_range(0, "end")
         return "break"
 
     def _show_copy_menu(self, widget: tk.Misc, event: tk.Event) -> str:
@@ -1283,6 +1394,12 @@ class OrderReviewWindow:
             font=(FONT_FAMILY, 11, "bold"),
             wrap_chars=24,
         ).pack(side="left", fill="x", expand=True)
+        self._action_button(
+            header,
+            "复制单号",
+            lambda value=order_title: self._copy_value(value),
+            compact=True,
+        ).pack(side="right", padx=(3, 7), pady=5)
         tk.Label(
             header,
             text=f"{group.kind_count} 种 · {group.total_quantity} 件",
@@ -1316,12 +1433,14 @@ class OrderReviewWindow:
             self._render_package_plan_placeholder(placeholder)
             return
 
-        compact_reliable_plan = self._compact_reliable_single_plan()
+        compact_reliable_plan = self._compact_reliable_plan()
         status = "待选择"
         if workflow.freight_pending:
             status = "待确认物流"
+        elif workflow.direct_single_item_plan is not None:
+            status = "单件直审"
         elif compact_reliable_plan is not None and not self._show_package_editor:
-            status = "已有单包方案"
+            status = "已有历史方案"
         elif workflow.draft is not None:
             status = "编辑中"
         elif workflow.historical_case is not None and workflow.historical_case.is_freight:
@@ -1340,19 +1459,39 @@ class OrderReviewWindow:
             self._render_freight_confirmation()
             return
 
+        if workflow.direct_single_item_plan is not None:
+            self._render_readonly_package_plan(workflow.direct_single_item_plan)
+            self._render_package_notice(
+                workflow.load_notice
+                or "总数量为 1，可直接审核；本单不会保存方案。",
+                tone="success",
+            )
+            self._render_single_order_audit(workflow.direct_single_item_plan)
+            return
+
         if workflow.draft is not None:
             if compact_reliable_plan is not None and not self._show_package_editor:
                 self._render_readonly_package_plan(compact_reliable_plan)
                 self._render_package_notice(
-                    workflow.load_notice
-                    or "已找到可靠的历史单包方案。",
+                    workflow.load_notice or "已找到可靠的历史方案。",
                     tone="success",
                 )
-                self._render_single_order_audit(
-                    compact_reliable_plan,
-                    edit_command=self._open_current_draft_editor,
-                    confirm_before_audit=True,
-                )
+                if len(compact_reliable_plan.packages) == 1:
+                    self._render_single_order_audit(
+                        compact_reliable_plan,
+                        edit_command=self._open_current_draft_editor,
+                    )
+                else:
+                    self._render_split_dry_run(compact_reliable_plan)
+                    self._action_button(
+                        self.content_frame,
+                        "修改方案",
+                        lambda: self._package_action(
+                            self._open_current_draft_editor
+                        ),
+                        accented=True,
+                        enabled=not self._audit_running,
+                    ).pack(fill="x", pady=(0, 8))
                 return
             self._render_package_draft()
             return
@@ -1380,6 +1519,7 @@ class OrderReviewWindow:
                     ),
                 )
             else:
+                self._render_split_dry_run(workflow.historical_plan)
                 self._action_button(
                     self.content_frame,
                     "修改方案",
@@ -1399,7 +1539,10 @@ class OrderReviewWindow:
                 f"{workflow.confirmation_note} 未操作 ERP。",
                 tone="success",
             )
-            self._render_single_order_audit(workflow.confirmed_plan)
+            if len(workflow.confirmed_plan.packages) == 1:
+                self._render_single_order_audit(workflow.confirmed_plan)
+            else:
+                self._render_split_dry_run(workflow.confirmed_plan)
             return
 
         if workflow.freight_reminder is not None:
@@ -1412,7 +1555,7 @@ class OrderReviewWindow:
         if self._package_feedback:
             self._render_package_notice(self._package_feedback, tone="warning")
 
-    def _compact_reliable_single_plan(self):
+    def _compact_reliable_plan(self):
         workflow = self.package_workflow
         source = workflow.source_snapshot
         draft = workflow.draft
@@ -1423,14 +1566,18 @@ class OrderReviewWindow:
             or candidate is None
             or not workflow.auto_adopted_recommendation
             or candidate.match_type
-            not in {MATCH_EXACT_STRUCTURE, MATCH_SINGLE_PACKAGE_TOTAL}
+            not in {
+                MATCH_EXACT_STRUCTURE,
+                MATCH_SINGLE_PACKAGE_TOTAL,
+                MATCH_HISTORICAL_PACKAGE_COMPOSITION,
+            }
         ):
             return None
         try:
             plan = draft.confirm(source)
         except PackagePlanValidationError:
             return None
-        return plan if len(plan.packages) == 1 else None
+        return plan
 
     def _render_readonly_package_plan(self, plan) -> None:
         source = self.package_workflow.source_snapshot
@@ -1462,7 +1609,6 @@ class OrderReviewWindow:
         plan,
         *,
         edit_command: Callable[[], None] | None = None,
-        confirm_before_audit: bool = False,
     ) -> None:
         if len(plan.packages) != 1:
             return
@@ -1528,10 +1674,7 @@ class OrderReviewWindow:
         self._action_button(
             actions,
             "审核当前订单",
-            lambda: self._start_single_order_audit(
-                plan,
-                confirm_before_audit=confirm_before_audit,
-            ),
+            lambda: self._start_single_order_audit(plan),
             danger=True,
             enabled=can_audit,
         ).pack(
@@ -1539,11 +1682,7 @@ class OrderReviewWindow:
             fill="x",
             expand=edit_command is not None,
         )
-        action_note = (
-            "点击审核即采用当前方案；系统会先自动检查，不会继续下一单。"
-            if confirm_before_audit
-            else "点击后自动检查，只处理当前已确认的 1 单，不会继续下一单。"
-        )
+        action_note = "点击后自动检查，只处理当前 1 单，不会保存方案或继续下一单。"
         tk.Label(
             card,
             text=action_note,
@@ -1566,30 +1705,102 @@ class OrderReviewWindow:
                 tone = "warning"
             self._render_package_notice(self._audit_feedback, tone=tone)
 
+    def _render_split_dry_run(
+        self,
+        plan,
+    ) -> None:
+        source = self.package_workflow.source_snapshot
+        if source is None or len(plan.packages) < 2:
+            return
+        report = build_split_dry_run(source, plan)
+        card = tk.Frame(
+            self.content_frame,
+            bg=MACOS_THEME["warning_soft"],
+            highlightbackground="#ead8b9",
+            highlightthickness=1,
+            padx=9,
+            pady=9,
+        )
+        card.pack(fill="x", pady=(0, 8))
+        header = tk.Frame(card, bg=MACOS_THEME["warning_soft"])
+        header.pack(fill="x")
+        tk.Label(
+            header,
+            text="订单拆分",
+            bg=MACOS_THEME["warning_soft"],
+            fg=MACOS_THEME["primary_text"],
+            font=(FONT_FAMILY, 10, "bold"),
+            anchor="w",
+        ).pack(side="left")
+        status_text = "等待开始"
+        status_color = MACOS_THEME["muted_text"]
+        if self._audit_running:
+            status_text = self._audit_progress or "正在准备拆分"
+            status_color = MACOS_THEME["warning"]
+        elif self._split_completed_system_order_id == source.system_order_id:
+            status_text = "本单拆分并审核成功"
+            status_color = MACOS_THEME["success"]
+        tk.Label(
+            header,
+            text=status_text,
+            bg=MACOS_THEME["warning_soft"],
+            fg=status_color,
+            font=(FONT_FAMILY, 8, "bold"),
+            anchor="e",
+        ).pack(side="right")
+        package_lines = "\n".join(report.package_lines)
+        self._selectable_text(
+            card,
+            (
+                f"目标订单：{source.system_order_id or '未识别'}\n"
+                f"目标包裹：{len(plan.packages)} 个\n"
+                f"{package_lines}\n"
+                f"数量核对：{plan.total_quantity} / {source.total_quantity} 件"
+            ),
+            background=MACOS_THEME["warning_soft"],
+            foreground=MACOS_THEME["secondary_text"],
+            font=(FONT_FAMILY, 9),
+            wrap_chars=38,
+        ).pack(fill="x", pady=(6, 0))
+        can_split = (
+            report.local_plan_valid
+            and bool(source.system_order_id)
+            and not self._audit_running
+            and self._split_completed_system_order_id != source.system_order_id
+        )
+        self._action_button(
+            card,
+            "拆分并审核当前订单",
+            lambda: self._start_mixed_order_split(plan),
+            danger=True,
+            enabled=can_split,
+        ).pack(fill="x", pady=(8, 0))
+        tk.Label(
+            card,
+            text=(
+                "点击后连续完成当前订单拆分，并在审核弹窗显示的"
+                "已勾选数量等于目标包裹数时继续审核。"
+            ),
+            bg=MACOS_THEME["warning_soft"],
+            fg=MACOS_THEME["muted_text"],
+            font=(FONT_FAMILY, 8),
+            anchor="w",
+            justify="left",
+        ).pack(fill="x", pady=(6, 0))
+        if self._audit_feedback:
+            tone = "info"
+            if "成功" in self._audit_feedback:
+                tone = "success"
+            elif "停止" in self._audit_feedback or "不确定" in self._audit_feedback:
+                tone = "warning"
+            self._render_package_notice(self._audit_feedback, tone=tone)
+
     def _start_single_order_audit(
         self,
         plan,
-        *,
-        confirm_before_audit: bool = False,
     ) -> None:
         if self._audit_running:
             return
-        if confirm_before_audit:
-            try:
-                self.package_workflow.confirm()
-                plan = self.package_workflow.confirmed_plan
-                self._show_package_editor = False
-                self._package_feedback = self.package_workflow.confirmation_note
-            except (PackagePlanValidationError, RuntimeError) as exc:
-                self._audit_feedback = (
-                    f"当前方案无法确认：{exc}。没有执行 ERP 审核。"
-                )
-                self._rerender_current_snapshot()
-                return
-            if plan is None:
-                self._audit_feedback = "当前方案确认失败，没有执行 ERP 审核。"
-                self._rerender_current_snapshot()
-                return
         source = self.package_workflow.source_snapshot
         if source is None:
             self._audit_feedback = "当前没有已确认的订单方案，无法开始审核。"
@@ -1603,19 +1814,10 @@ class OrderReviewWindow:
             self._audit_feedback = "当前订单缺少可靠系统订单号，无法开始审核。"
             self._rerender_current_snapshot()
             return
-        confirmation_reference_id = (
-            self.package_workflow.confirmed_case.case_id
-            if self.package_workflow.confirmed_case is not None
-            else (
-                self.package_workflow.historical_case.case_id
-                if self.package_workflow.historical_case is not None
-                else ""
-            )
-        )
         self._audit_running = True
         self._order_watch_generation += 1
         self._audit_progress = "正在自动检查"
-        self._audit_feedback = "审核进行中：正在自动检查当前订单。"
+        self._audit_feedback = f"审核进行中：{self._audit_progress}。"
         self._auto_refresh_paused = False
         self._reset_order_change_candidate()
         self._rerender_current_snapshot()
@@ -1625,11 +1827,14 @@ class OrderReviewWindow:
 
         def worker() -> None:
             try:
+                worker_plan = plan
                 report = self.audit_executor(
                     target_system_order_id=source.system_order_id,
                     expected_source=source,
-                    confirmation_reference_id=confirmation_reference_id,
-                    target_package_count=len(plan.packages),
+                    confirmation_reference_id=(
+                        self._confirmation_reference_id()
+                    ),
+                    target_package_count=len(worker_plan.packages),
                     progress_callback=progress,
                     log_store=self.audit_log_store,
                 )
@@ -1646,6 +1851,80 @@ class OrderReviewWindow:
         if self._audit_poll_job is None:
             self._audit_poll_job = self.root.after(50, self._drain_audit_events)
 
+    def _start_mixed_order_split(
+        self,
+        plan,
+    ) -> None:
+        if self._audit_running:
+            return
+        source = self.package_workflow.source_snapshot
+        if source is None:
+            self._audit_feedback = "当前没有已确认的订单方案，无法开始拆分。"
+            self._rerender_current_snapshot()
+            return
+        if len(plan.packages) < 2:
+            self._audit_feedback = "当前不是多包方案，不能执行订单拆分。"
+            self._rerender_current_snapshot()
+            return
+        report = build_split_dry_run(source, plan)
+        if not report.local_plan_valid:
+            self._audit_feedback = (
+                f"当前方案无法拆分：{'；'.join(report.blocked_reasons)}。"
+            )
+            self._rerender_current_snapshot()
+            return
+        if not source.system_order_id:
+            self._audit_feedback = "当前订单缺少可靠系统订单号，无法开始拆分。"
+            self._rerender_current_snapshot()
+            return
+        self._audit_running = True
+        self._order_watch_generation += 1
+        self._audit_progress = "正在自动检查"
+        self._audit_feedback = (
+            f"拆分并审核进行中：{self._audit_progress}。"
+        )
+        self._reset_order_change_candidate()
+        self._rerender_current_snapshot()
+
+        def progress(state, detail) -> None:
+            self._audit_events.put(("split_progress", (state, detail)))
+
+        def worker() -> None:
+            try:
+                worker_plan = plan
+                split_report = self.split_executor(
+                    target_system_order_id=source.system_order_id,
+                    expected_source=source,
+                    plan=worker_plan,
+                    confirmation_reference_id=(
+                        self._confirmation_reference_id()
+                    ),
+                    progress_callback=progress,
+                    log_store=self.audit_log_store,
+                )
+                self._audit_events.put(("split_finished", split_report))
+            except Exception as exc:
+                self._audit_events.put(("split_error", str(exc)))
+
+        self._audit_thread = threading.Thread(
+            target=worker,
+            name="order-review-split",
+            daemon=True,
+        )
+        self._audit_thread.start()
+        if self._audit_poll_job is None:
+            self._audit_poll_job = self.root.after(50, self._drain_audit_events)
+
+    def _confirmation_reference_id(self) -> str:
+        if self.package_workflow.confirmed_case is not None:
+            return self.package_workflow.confirmed_case.case_id
+        if self.package_workflow.historical_case is not None:
+            return self.package_workflow.historical_case.case_id
+        candidate = self.package_workflow.selected_recommendation
+        if candidate is not None and candidate.source_case_ids:
+            return candidate.source_case_ids[0]
+        return ""
+
     def _drain_audit_events(self) -> None:
         self._audit_poll_job = None
         rerender = False
@@ -1658,6 +1937,11 @@ class OrderReviewWindow:
                 _state, detail = payload
                 self._audit_progress = str(detail)
                 self._audit_feedback = f"审核进行中：{detail}"
+                rerender = True
+            elif event == "split_progress":
+                _state, detail = payload
+                self._audit_progress = str(detail)
+                self._audit_feedback = f"拆分并审核进行中：{detail}"
                 rerender = True
             elif event == "finished":
                 report = payload
@@ -1688,6 +1972,30 @@ class OrderReviewWindow:
                     self._set_auto_refresh_enabled(False)
                 self._reset_order_change_candidate()
                 rerender = True
+            elif event == "split_finished":
+                report = payload
+                self._audit_running = False
+                self._audit_thread = None
+                self._audit_progress = ""
+                self._audit_feedback = report.render_text()
+                if report.successful:
+                    self._split_completed_system_order_id = (
+                        report.target_system_order_id
+                    )
+                    self._auto_refresh_not_before = (
+                        self.monotonic() + POST_AUDIT_REFRESH_DELAY_SECONDS
+                    )
+                    self._auto_refresh_paused = False
+                    if self._auto_refresh_enabled:
+                        self._audit_feedback = (
+                            f"拆分并审核成功：订单 {report.target_system_order_id} "
+                            "已离开待审核列表。正在快速确认新订单状态；"
+                            "确认稳定后会自动刷新下一单。"
+                        )
+                else:
+                    self._set_auto_refresh_enabled(False)
+                self._reset_order_change_candidate()
+                rerender = True
             elif event == "error":
                 self._audit_running = False
                 self._audit_thread = None
@@ -1696,6 +2004,16 @@ class OrderReviewWindow:
                 self._reset_order_change_candidate()
                 self._audit_feedback = (
                     f"审核已停止：{payload}。没有继续执行后续动作。"
+                )
+                rerender = True
+            elif event == "split_error":
+                self._audit_running = False
+                self._audit_thread = None
+                self._audit_progress = ""
+                self._set_auto_refresh_enabled(False)
+                self._reset_order_change_candidate()
+                self._audit_feedback = (
+                    f"拆分并审核已停止：{payload}。没有重试提交。"
                 )
                 rerender = True
         if rerender:
@@ -1808,21 +2126,39 @@ class OrderReviewWindow:
 
     def _render_recommendations(self) -> None:
         result = self.package_workflow.recommendations
+        if result.advisory_note:
+            self._render_package_notice(result.advisory_note, tone="warning")
         if not result.candidates:
             return
         has_capacity_candidate = any(
             candidate.match_type == MATCH_SINGLE_PACKAGE_CAPACITY
             for candidate in result.candidates
         )
+        has_composition_candidate = any(
+            candidate.match_type == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+            for candidate in result.candidates
+        )
         if result.conflict:
             self._render_package_notice(
-                "历史中存在不同拆分方案，请人工比较后选择；系统不会自动采用。",
+                (
+                    "历史包裹可以形成多种最少包裹组合，请人工比较后选择；"
+                    "系统不会自动采用。"
+                    if has_composition_candidate
+                    else "历史中存在不同拆分方案，请人工比较后选择；系统不会自动采用。"
+                ),
                 tone="warning",
+            )
+        elif has_composition_candidate:
+            self._render_package_notice(
+                "找到可精确覆盖本单数量的历史包裹组合；"
+                "每个包裹均原样来自已确认案例，请核对后采用。",
+                tone="info",
             )
         elif has_capacity_candidate:
             self._render_package_notice(
-                "找到数量不超过历史已确认容量的单包案例；请核对差异后决定是否采用。",
-                tone="info",
+                "找到较大数量曾单包的历史参考；纸箱规格可能不连续，"
+                "请核对当前箱型后再决定是否采用。",
+                tone="warning",
             )
         else:
             self._render_package_notice(
@@ -1844,14 +2180,24 @@ class OrderReviewWindow:
             header.pack(fill="x")
             tk.Label(
                 header,
-                text=f"候选 {candidate_index} · {len(candidate.packages)} 个包裹",
+                text=(
+                    f"组合候选 {candidate_index} · {len(candidate.packages)} 个包裹"
+                    if candidate.match_type
+                    == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+                    else f"候选 {candidate_index} · {len(candidate.packages)} 个包裹"
+                ),
                 bg=MACOS_THEME["surface"],
                 fg=MACOS_THEME["primary_text"],
                 font=(FONT_FAMILY, 10, "bold"),
             ).pack(side="left")
             tk.Label(
                 header,
-                text=f"历史使用 {candidate.usage_count} 次",
+                text=(
+                    f"历史包裹证据 {candidate.usage_count} 条"
+                    if candidate.match_type
+                    == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+                    else f"历史使用 {candidate.usage_count} 次"
+                ),
                 bg=MACOS_THEME["surface"],
                 fg=MACOS_THEME["package"],
                 font=(FONT_FAMILY, 9, "bold"),
@@ -1988,30 +2334,24 @@ class OrderReviewWindow:
         )
         self._action_button(
             actions,
-            "新增下一个包裹",
+            "新增包裹",
             lambda: self._package_action(self._add_next_package),
             compact=True,
             enabled=can_add_next,
-        ).pack(side="left", padx=(0, 4))
+        ).pack(side="left", fill="x", expand=True, padx=(0, 2))
         self._action_button(
             actions,
-            "恢复初始方案",
+            "恢复初始",
             lambda: self._package_action(self._reset_package_plan),
             compact=True,
-        ).pack(side="left", padx=4)
+        ).pack(side="left", fill="x", expand=True, padx=2)
         self._action_button(
             actions,
-            "取消",
-            lambda: self._package_action(self._cancel_package_plan),
-            compact=True,
-        ).pack(side="left", padx=4)
-        self._action_button(
-            actions,
-            "确认方案",
+            "保存方案",
             lambda: self._package_action(self._confirm_package_plan),
             primary=True,
             compact=True,
-        ).pack(side="right")
+        ).pack(side="left", fill="x", expand=True, padx=(2, 0))
         if workflow.can_add_package and active_package is not None and not active_package.items:
             tk.Label(
                 self.content_frame,
@@ -2160,6 +2500,17 @@ class OrderReviewWindow:
 
         self._micro_button(
             row,
+            "MIN",
+            lambda: self._package_action(
+                lambda: self._set_package_quantity(
+                    package_id, product.source_product_id, 0
+                )
+            ),
+            enabled=current > 0,
+            width=34,
+        ).pack(side="left", padx=(0, 2))
+        self._micro_button(
+            row,
             "−",
             lambda: self._package_action(
                 lambda: self._set_package_quantity(
@@ -2186,8 +2537,32 @@ class OrderReviewWindow:
         )
         quantity_entry.pack(side="left", padx=2, ipady=1)
         quantity_entry.bind(
+            "<Button-1>",
+            lambda event: self._focus_widget(event.widget),
+        )
+        quantity_entry.bind(
+            "<FocusIn>",
+            lambda event: self.root.after_idle(
+                lambda widget=event.widget: (
+                    widget.selection_range(0, "end")
+                    if widget.winfo_exists()
+                    else None
+                )
+            ),
+        )
+        quantity_entry.bind(
             "<KeyRelease>",
             lambda _event: self._schedule_quantity_commit(
+                package_id,
+                product.source_product_id,
+                quantity_var,
+                maximum,
+                current,
+            ),
+        )
+        quantity_entry.bind(
+            "<FocusOut>",
+            lambda _event: self._commit_package_quantity(
                 package_id,
                 product.source_product_id,
                 quantity_var,
@@ -2228,7 +2603,22 @@ class OrderReviewWindow:
         ).pack(side="left", padx=(2, 0))
 
     def _confirm_package_plan(self) -> None:
+        remaining_quantity = self.package_workflow.remaining_quantity
+        auto_fill_note = ""
+        if remaining_quantity > 0:
+            moved, target_package_id, created = (
+                self.package_workflow.move_remaining_to_final_package()
+            )
+            self._active_package_id = target_package_id
+            auto_fill_note = (
+                f"保存时已将剩余 {moved} 件自动生成最后一个包裹。"
+                if created
+                else f"保存时已将剩余 {moved} 件归入最后一个空包裹。"
+            )
         self.package_workflow.confirm()
+        self.package_workflow.confirmation_note = (
+            f"{auto_fill_note}{self.package_workflow.confirmation_note}"
+        )
         self._package_feedback = self.package_workflow.confirmation_note
         self._audit_feedback = ""
 
@@ -2280,6 +2670,18 @@ class OrderReviewWindow:
     def _delete_package(self, package_id: str) -> None:
         self.package_workflow.remove_package(package_id)
         self._active_package_id = self.package_workflow.draft.packages[-1].package_id
+
+    def _fill_current_package_with_remaining(self) -> None:
+        if self._active_package_id is None:
+            raise PackagePlanValidationError("当前没有正在编辑的包裹")
+        before = self.package_workflow.remaining_quantity
+        self.package_workflow.fill_package_with_remaining(self._active_package_id)
+        moved = before - self.package_workflow.remaining_quantity
+        self._package_feedback = (
+            f"已将剩余 {moved} 件商品全部放入当前包裹"
+            if moved
+            else "当前没有待分配商品"
+        )
 
     def _reset_package_plan(self) -> None:
         self.package_workflow.reset()
@@ -2507,8 +2909,8 @@ class OrderReviewWindow:
             borderwidth=0,
             highlightthickness=0,
             font=(FONT_FAMILY, 8 if compact else 9, "bold"),
-            padx=5 if compact else 7,
-            pady=2 if compact else 4,
+            padx=3 if compact else 6,
+            pady=1 if compact else 3,
             cursor="hand2" if enabled else "arrow",
         )
 
@@ -2540,7 +2942,7 @@ class OrderReviewWindow:
             text=text,
             bg=background,
             fg=foreground,
-            font=(FONT_FAMILY, 7 if text == "MAX" else 11, "bold"),
+            font=(FONT_FAMILY, 7 if text in {"MIN", "MAX"} else 11, "bold"),
             cursor="hand2" if enabled else "arrow",
         )
         label.pack(fill="both", expand=True)
@@ -2621,6 +3023,20 @@ class OrderReviewWindow:
         if self.canvas.winfo_exists():
             self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
+    def _memory_runtime_counters(self) -> Mapping[str, int]:
+        return {
+            "auditEventQueueSize": self._audit_events.qsize(),
+            "orderWatchEventQueueSize": self._order_watch_events.qsize(),
+            "quantityCommitJobCount": len(self._quantity_commit_jobs),
+            "auditThreadAlive": int(
+                self._audit_thread is not None and self._audit_thread.is_alive()
+            ),
+            "orderWatchThreadAlive": int(
+                self._order_watch_thread is not None
+                and self._order_watch_thread.is_alive()
+            ),
+        }
+
     def _start_drag(self, event: tk.Event) -> None:
         self._drag_offset = (
             event.x_root - self.root.winfo_x(),
@@ -2649,6 +3065,12 @@ class OrderReviewWindow:
             except tk.TclError:
                 pass
             self._follow_browser_job = None
+        if self._companion_visibility_job is not None:
+            try:
+                self.root.after_cancel(self._companion_visibility_job)
+            except tk.TclError:
+                pass
+            self._companion_visibility_job = None
         if self._order_watch_job is not None:
             try:
                 self.root.after_cancel(self._order_watch_job)
@@ -2659,7 +3081,7 @@ class OrderReviewWindow:
         self.root.destroy()
 
 
-def run_app() -> None:
+def run_app(memory_diagnostics: MemoryDiagnostics | None = None) -> None:
     root = tk.Tk()
-    OrderReviewWindow(root)
+    OrderReviewWindow(root, memory_diagnostics=memory_diagnostics)
     root.mainloop()

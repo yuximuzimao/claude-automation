@@ -4,7 +4,7 @@ from types import MappingProxyType
 from typing import Mapping
 
 
-PACKAGE_EQUIVALENCE_VERSION = 1
+PACKAGE_EQUIVALENCE_VERSION = 2
 PACKAGE_EQUIVALENCE_KEY_PREFIX = (
     f"package-equivalence-v{PACKAGE_EQUIVALENCE_VERSION}"
 )
@@ -47,6 +47,18 @@ PACKAGE_EQUIVALENCE_GROUPS: Mapping[str, Mapping[str, str]] = MappingProxyType(
             {
                 "6977987940107": "蛋白粉（牛油果猕猴桃味）三袋体验装",
                 "6977987940084": "蛋白粉（莓果味）三袋体验装",
+            }
+        ),
+        "cushion_regular": MappingProxyType(
+            {
+                "6938582367386": "悦希气垫（亮肤色）",
+                "6938582367409": "悦希气垫（自然色）",
+            }
+        ),
+        "cushion_refill": MappingProxyType(
+            {
+                "6938582367393": "悦希气垫替换装（亮肤色）",
+                "6938582367416": "悦希气垫替换装（自然色）",
             }
         ),
     }
