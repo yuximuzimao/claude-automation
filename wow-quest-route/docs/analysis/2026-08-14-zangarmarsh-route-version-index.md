@@ -7,7 +7,8 @@
 
 - R1–R62主要记录当时角色状态下的局部增量插入、特殊机制、条件任务、跨图任务和排除项；它们是历史审计材料，不是当前最终路线。
 - R63起开始补回当时角色已经完成、但从零可复用路线必须包含的任务；R63–R67属于最终复用结构恢复，R68–R71继续补齐副本模块归档。
-- Rn快照只保存当时结论，最终路线权威文件为`docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md`；任务边界权威文件为`docs/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md`。
+- Rn快照只保存当时结论；原第一版从零路线为`docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md`，但2026-08-14实跑确认其孢子村后声望Availability顺序不可执行，当前不得再视为执行权威；任务边界权威文件仍为`docs/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md`。
+- 声望错误后的新重建分支：`docs/analysis/2026-08-14-zangarmarsh-r4-constraint-rebuild-v1.md`。它从R4任务状态回滚，但不冻结R4炉石；待声望状态转移、规则冲突和XP滚动审计补齐后再生成新的最终复用路线。
 
 ## 版本
 

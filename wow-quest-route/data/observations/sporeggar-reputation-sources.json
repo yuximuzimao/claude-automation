@@ -1,0 +1,40 @@
+{
+  "faction_id": 970,
+  "faction_name": "孢子村 / Sporeggar",
+  "version_scope": "WotLK Classic public reference; current Titan client evidence overrides if different",
+  "starting_state": {
+    "standing": "Unfriendly",
+    "absolute_reputation_inference": -3000,
+    "confidence": "medium_high",
+    "reason": "Public WotLK references say characters start Unfriendly and require 3000 reputation to reach Neutral; local Questie uses absolute Neutral threshold 0, implying a from-zero starting value of -3000.",
+    "live_verification": "pending"
+  },
+  "kill_reputation": {
+    "per_eligible_kill": 15,
+    "cap_note": "Public WotLK NPC pages describe these kills as stopping at Honored; external guides phrase the usable range as Unfriendly through Honored / until Revered. The exact upper-cap wording is irrelevant to the current -3000→0→3000 leveling window and is not normalized here.",
+    "live_verification": "pending",
+    "npcs": [
+      {"npc_id": 18124, "name": "Withered Giant / 枯萎巨人"},
+      {"npc_id": 19402, "name": "Withered Bog Lord / 枯萎沼泽领主"},
+      {"npc_id": 18125, "name": "Starving Fungal Giant / 饥饿的真菌巨人"},
+      {"npc_id": 19519, "name": "Starving Bog Lord / 挨饿的沼泽领主"},
+      {"npc_id": 19734, "name": "Fungal Giant / 真菌巨人"},
+      {"npc_id": 18127, "name": "Bog Lord / 沼泽领主"}
+    ]
+  },
+  "quest_reward_crosscheck": {
+    "9739": 250,
+    "9743": 250,
+    "note": "WotLK Classic Wowhead pages match local Questie +250 values for these two one-time quests. Do not import 2026 TBC Anniversary +750 values into this WotLK/Titan route model."
+  },
+  "sources": [
+    "https://www.wowhead.com/wotlk/faction=970/sporeggar",
+    "https://www.wowhead.com/wotlk/npc=18127/bog-lord",
+    "https://www.wowhead.com/wotlk/npc=19402/withered-bog-lord",
+    "https://www.wowhead.com/wotlk/npc=18125/starving-fungal-giant",
+    "https://www.wowhead.com/wotlk/npc=19519/starving-bog-lord",
+    "https://www.wowhead.com/wotlk/npc=18124/withered-giant",
+    "https://www.wowhead.com/wotlk/quest=9739/the-sporelings-plight",
+    "https://www.wowhead.com/wotlk/quest=9743/natural-enemies"
+  ]
+}

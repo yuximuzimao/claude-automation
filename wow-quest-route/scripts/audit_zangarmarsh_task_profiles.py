@@ -40,11 +40,36 @@ def seq(table: Any) -> list[Any]:
     return [table[k] for k in sorted(k for k in table if isinstance(k, int))]
 
 
+def _rep_requirement(raw: Any) -> dict[str, int] | None:
+    if not isinstance(raw, dict):
+        return None
+    faction_id, value = raw.get(1), raw.get(2)
+    if not isinstance(faction_id, (int, float)) or not isinstance(value, (int, float)):
+        return None
+    return {"faction_id": int(faction_id), "value": int(value)}
+
+
+def _rep_rewards(raw: Any) -> list[dict[str, int]]:
+    if not isinstance(raw, dict):
+        return []
+    out = []
+    for key in sorted(k for k in raw if isinstance(k, int)):
+        parsed = _rep_requirement(raw[key])
+        if parsed:
+            out.append(parsed)
+    return out
+
+
 def eligibility(raw: dict[Any, Any] | None) -> dict[str, Any]:
     raw = raw or {}
     race_mask = raw.get(6)
     class_mask = raw.get(7)
     skill = raw.get(18)
+    min_rep = _rep_requirement(raw.get(19))
+    max_rep = _rep_requirement(raw.get(20))
+    special_flags = int(raw.get(24) or 0)
+    repeatable = bool(special_flags & 1)
+    rep_rewards = _rep_rewards(raw.get(26))
     required_spell = raw.get(30)
     class_ok = not class_mask or bool(int(class_mask) & PALADIN_MASK)
     race_ok = not race_mask or bool(int(race_mask) & BLOOD_ELF_MASK)
@@ -55,15 +80,25 @@ def eligibility(raw: dict[Any, Any] | None) -> dict[str, Any]:
         reasons.append(f"种族限制掩码={race_mask}，不包含血精灵")
     if skill:
         reasons.append(f"另有技能条件={seq(skill)}")
+    if min_rep:
+        reasons.append(f"最低声望条件=阵营{min_rep['faction_id']} 声望值>={min_rep['value']}")
+    if max_rep:
+        reasons.append(f"最高声望条件=阵营{max_rep['faction_id']} 声望值<{max_rep['value']}")
     if required_spell:
         reasons.append(f"另有法术条件={required_spell}")
     return {
         "required_race_mask": race_mask,
         "required_class_mask": class_mask,
         "required_skill": seq(skill),
+        "required_min_rep": min_rep,
+        "required_max_rep": max_rep,
+        "special_flags": special_flags,
+        "repeatable": repeatable,
+        "reputation_rewards": rep_rewards,
         "required_spell": required_spell,
         "blood_elf_paladin_class_race_ok": class_ok and race_ok,
         "has_additional_skill_or_spell_condition": bool(skill or required_spell),
+        "has_reputation_condition": bool(min_rep or max_rep),
         "reasons": reasons,
     }
 
@@ -95,6 +130,8 @@ def audit_quest(qid: int, profile: dict[str, Any], atlas_q: dict[str, Any], raw:
     if elig["has_additional_skill_or_spell_condition"]:
         flags.append("additional_skill_or_spell_condition")
         severity = "low"
+    if elig["has_reputation_condition"]:
+        notes.append("Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。")
 
     if primary == "handoff":
         for pattern, suggested, reason in ACTION_RULES:
@@ -171,8 +208,13 @@ def audit_quest(qid: int, profile: dict[str, Any], atlas_q: dict[str, Any], raw:
     if not flags:
         confidence = "high"
 
-    time_model_valid = confidence != "low" and elig["blood_elf_paladin_class_race_ok"] and not elig["has_additional_skill_or_spell_condition"]
-    if effective in ("search_or_trigger", "scripted_use_explore", "scripted_action", "special_unresolved", "material_or_alternative_source"):
+    time_model_valid = (
+        confidence != "low"
+        and elig["blood_elf_paladin_class_race_ok"]
+        and not elig["has_additional_skill_or_spell_condition"]
+        and not elig["has_reputation_condition"]
+    )
+    if effective in ("search_or_trigger", "scripted_use_explore", "scripted_action", "special_unresolved", "material_or_alternative_source", "object_collect_manual_local_loop"):
         time_model_valid = False
 
     return {
@@ -183,6 +225,7 @@ def audit_quest(qid: int, profile: dict[str, Any], atlas_q: dict[str, Any], raw:
         "risk_flags": sorted(set(flags)),
         "notes": notes,
         "eligibility": elig,
+        "availability_constraints": ["reputation"] if elig["has_reputation_condition"] else [],
         "time_model_valid_for_global_optimizer": time_model_valid,
     }
 
@@ -214,6 +257,56 @@ def apply_component_overrides(profile: dict[str, Any], override: dict[str, Any])
                     source["representative_point"] = point
                     if patch.get("manual_name"):
                         source["name"] = patch["manual_name"]
+        effective_drop_characters = patch.get("effective_drop_demand_characters")
+        if (
+            component.get("family") == "mob_drop"
+            and isinstance(effective_drop_characters, (int, float))
+            and effective_drop_characters > 0
+        ):
+            demand = float(component.get("needed_count") or 0) * float(effective_drop_characters)
+            source_by_id = {}
+            for source in component.get("sources") or []:
+                rate = source.get("drop_rate_percent")
+                per_kill = source.get("single_kill_seconds")
+                if not isinstance(rate, (int, float)) or rate <= 0 or not isinstance(per_kill, (int, float)):
+                    continue
+                expected_kills = demand / (float(rate) / 100.0)
+                service_seconds = expected_kills * float(per_kill)
+                source["expected_kills"] = expected_kills
+                source["expected_service_seconds"] = service_seconds
+                source["effective_drop_demand_characters"] = int(effective_drop_characters)
+                if isinstance(source.get("calculations"), dict):
+                    if isinstance(source["calculations"].get("expected_kills"), dict):
+                        source["calculations"]["expected_kills"]["inputs"]["characters"] = int(effective_drop_characters)
+                        source["calculations"]["expected_kills"]["inputs"]["five_box_required_count"] = demand
+                        source["calculations"]["expected_kills"]["result"] = expected_kills
+                    if isinstance(source["calculations"].get("expected_service_time"), dict):
+                        source["calculations"]["expected_service_time"]["inputs"]["expected_kills"] = expected_kills
+                        source["calculations"]["expected_service_time"]["result"] = service_seconds
+                source_by_id[source.get("entity_id")] = source
+            baseline = component.get("baseline_source")
+            if isinstance(baseline, dict) and baseline.get("entity_id") in source_by_id:
+                baseline.update(source_by_id[baseline.get("entity_id")])
+                service_seconds = baseline.get("expected_service_seconds")
+                if isinstance(service_seconds, (int, float)):
+                    service_seconds = float(service_seconds)
+                    component["estimated_objective_seconds"] = service_seconds
+                    component["estimated_objective_seconds_lower"] = service_seconds
+                    component["estimated_objective_seconds_upper"] = service_seconds
+                    component["calculation"] = {
+                        "formula": "shared_corpse_drop_demand / drop_rate * single_kill_seconds",
+                        "inputs": {
+                            "per_character_required_count": component.get("needed_count"),
+                            "effective_drop_demand_characters": int(effective_drop_characters),
+                            "baseline_entity_id": baseline.get("entity_id"),
+                        },
+                        "result": service_seconds,
+                        "unit": "seconds",
+                        "source": "user_verified_shared_corpse_loot_override",
+                        "quality": "user_verified_mechanic",
+                    }
+                    component["time_model"] = "shared_corpse_drop_demand"
+
         seconds = patch.get("estimated_objective_seconds")
         if isinstance(seconds, (int, float)):
             seconds = float(seconds)
@@ -290,9 +383,14 @@ def main() -> None:
             row["manual_notes"] = override.get("notes", [])
             route_policy = override.get("route_policy", "include")
             row["route_policy"] = route_policy
-            # Only route-policy=include can enter the current open-world optimizer.
-            # Conditional/excluded tasks remain fully described in the task layer but are not silently optimized.
-            row["time_model_valid_for_global_optimizer"] = route_policy == "include"
+            # Manual overrides may repair an automatically invalid task model, but they must not bypass
+            # unresolved availability constraints or explicitly unmeasured service geometry.
+            manual_time_unresolved = override.get("time_policy") in {"manual_spatial_loop_unmeasured"}
+            row["time_model_valid_for_global_optimizer"] = (
+                route_policy == "include"
+                and not row["eligibility"].get("has_reputation_condition")
+                and not manual_time_unresolved
+            )
         else:
             row["manual_override"] = False
             row["route_policy"] = "include"

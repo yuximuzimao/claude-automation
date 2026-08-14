@@ -1,7 +1,7 @@
 {
   "summary": {
     "low_confidence": 0,
-    "manual_resolved": 33
+    "manual_resolved": 41
   },
   "quests": {
     "9635": {
@@ -25,13 +25,20 @@
           202,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "另有技能条件=[202, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "object_collect_multi",
       "manual_override": true,
@@ -54,11 +61,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 75
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -76,11 +95,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -98,11 +129,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -122,11 +165,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -146,11 +201,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -166,17 +233,37 @@
         "missing_drop_rate"
       ],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "required_max_rep": null,
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=3000"
+        ]
       },
+      "availability_constraints": [
+        "reputation"
+      ],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -196,17 +283,37 @@
         "missing_drop_rate"
       ],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=3000"
+        ]
       },
+      "availability_constraints": [
+        "reputation"
+      ],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -228,11 +335,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -245,17 +364,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 0
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=0"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -276,11 +416,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 150
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "scripted_use_explore",
       "manual_override": true,
@@ -300,18 +452,38 @@
       "review_required": false,
       "risk_flags": [],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 0
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=0"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -328,11 +500,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -355,11 +539,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 75
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -372,17 +568,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -390,23 +607,48 @@
       "quest_id": 9727,
       "name": "既然我们仍是朋友......",
       "primary_raw": "kill",
-      "primary_effective": "kill",
-      "confidence": "high",
+      "primary_effective": "repeatable_reputation_no_xp",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "required_max_rep": null,
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
-      "route_policy": "include"
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "2026-08-15用户确认：重复任务不给经验；《既然我们仍是朋友......》不接。当前目标是升级效率，不为孢子村声望主动安排该任务。"
+      ],
+      "route_policy": "exclude_leveling_route"
     },
     "9728": {
       "quest_id": 9728,
@@ -423,11 +665,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -440,17 +694,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 42000
+        },
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=42000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -467,11 +742,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -489,11 +776,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "explore_trigger",
       "manual_override": true,
@@ -517,11 +816,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -539,11 +850,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 500
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -556,17 +879,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -574,23 +918,48 @@
       "quest_id": 9742,
       "name": "更多孢子囊",
       "primary_raw": "object_interact_single",
-      "primary_effective": "object_interact_single",
-      "confidence": "high",
+      "primary_effective": "repeatable_reputation_no_xp",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
-      "route_policy": "include"
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "object_interact_single",
+      "manual_override": true,
+      "manual_notes": [
+        "《更多孢子囊》属于零经验重复声望任务；练级路线不接第二轮。"
+      ],
+      "route_policy": "exclude_leveling_route"
     },
     "9743": {
       "quest_id": 9743,
@@ -600,17 +969,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -618,23 +1008,48 @@
       "quest_id": 9744,
       "name": "更多卷须！",
       "primary_raw": "mob_drop",
-      "primary_effective": "mob_drop",
-      "confidence": "high",
+      "primary_effective": "repeatable_reputation_no_xp",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
-      "route_policy": "include"
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "《更多卷须！》属于零经验重复声望任务；练级路线不接第二轮。"
+      ],
+      "route_policy": "exclude_leveling_route"
     },
     "9747": {
       "quest_id": 9747,
@@ -649,11 +1064,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -671,11 +1098,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 2,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "escort",
       "manual_override": true,
@@ -698,11 +1137,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 500
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -720,11 +1171,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 500
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -746,11 +1209,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -776,11 +1251,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 75
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -804,11 +1291,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -826,11 +1325,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -852,11 +1363,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "search_or_trigger",
       "manual_override": true,
@@ -869,8 +1392,8 @@
       "quest_id": 9772,
       "name": "尤尔巴的报告",
       "primary_raw": "mob_drop",
-      "primary_effective": "mob_drop",
-      "confidence": "high",
+      "primary_effective": "mob_drop_shared_corpse_loot",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
       "notes": [],
@@ -878,13 +1401,30 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "首组实跑确认：斥候尤尔巴的报告一旦掉落，同一具尸体五个角色都可分别拾取，因此掉落尝试次数按一份报告计算，不得乘五。",
+        "若在死亡泥潭顺路提前掉出，只更新任务完成状态；当前最终交付本来就与沼泽鼠其它交付合并，不因此改路线。"
+      ],
       "route_policy": "include"
     },
     "9773": {
@@ -900,11 +1440,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -924,11 +1476,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -946,11 +1510,18 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -968,11 +1539,18 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -988,17 +1566,37 @@
         "missing_drop_rate"
       ],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 942,
+          "value": 8999
+        },
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营942 声望值<8999"
+        ]
       },
+      "availability_constraints": [
+        "reputation"
+      ],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -1015,17 +1613,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 942,
+          "value": 3000
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 75
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营942 声望值>=3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -1042,11 +1661,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1064,11 +1695,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1086,11 +1724,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1108,11 +1753,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1128,17 +1780,37 @@
         "missing_drop_rate"
       ],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 942,
+          "value": 8999
+        },
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营942 声望值<8999"
+        ]
       },
+      "availability_constraints": [
+        "reputation"
+      ],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -1151,49 +1823,99 @@
       "quest_id": 9806,
       "name": "成熟的孢子",
       "primary_raw": "mob_drop",
-      "primary_effective": "mob_drop",
-      "confidence": "high",
+      "primary_effective": "background_tradeable_mob_drop",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 0
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=0"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "2026-08-15首组实跑确认24449《成熟的孢子》可交易。",
+        "实际在去穆玛基与去9822《战斗迫近》的北部主体移动中持续获得成熟孢子，最后自然回孢子村时可通过交易均衡五号库存并交付。",
+        "旧R15孢子村北/西北专门大型孢子蝠环降级为不足时fallback；不得在一接9806后就固定建立专门刷圈。"
+      ],
       "route_policy": "include"
     },
     "9807": {
       "quest_id": 9807,
       "name": "更多成熟的孢子",
       "primary_raw": "mob_drop",
-      "primary_effective": "mob_drop",
-      "confidence": "high",
+      "primary_effective": "repeatable_reputation_no_xp",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
       "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。",
         "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
       ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 0
+        },
+        "required_max_rep": null,
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=0"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
-      "route_policy": "include"
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "《更多成熟的孢子》属于零经验重复声望任务；练级路线不接第二轮。"
+      ],
+      "route_policy": "exclude_leveling_route"
     },
     "9808": {
       "quest_id": 9808,
@@ -1203,17 +1925,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -1221,30 +1964,55 @@
       "quest_id": 9809,
       "name": "更多亮顶蘑菇",
       "primary_raw": "object_interact_single",
-      "primary_effective": "object_interact_single",
-      "confidence": "high",
+      "primary_effective": "repeatable_reputation_no_xp",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 970,
+          "value": 3000
+        },
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营970 声望值<3000"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
-      "route_policy": "include"
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "object_interact_single",
+      "manual_override": true,
+      "manual_notes": [
+        "《更多亮顶蘑菇》属于零经验重复声望任务；练级路线不接第二轮。"
+      ],
+      "route_policy": "exclude_leveling_route"
     },
     "9814": {
       "quest_id": 9814,
       "name": "爆顶蘑菇",
       "primary_raw": "object_collect_multi",
-      "primary_effective": "object_collect_multi",
-      "confidence": "high",
+      "primary_effective": "object_collect_manual_local_loop",
+      "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
       "notes": [],
@@ -1252,13 +2020,30 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
-      "time_model_valid_for_global_optimizer": true,
-      "manual_override": false,
+      "availability_constraints": [],
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "object_collect_multi",
+      "manual_override": true,
+      "manual_notes": [
+        "首组实跑确认需要围绕萨布拉金做一圈本地采集，再自然接入后续西部路线；Questie刷新点数量不能证明该任务是0秒背景采集。",
+        "在获得实跑圈耗时前，不允许自动优化器把9814按免费背景任务处理。"
+      ],
       "route_policy": "include"
     },
     "9816": {
@@ -1274,11 +2059,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -1301,11 +2098,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 350
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1323,11 +2132,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1345,11 +2161,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1367,11 +2195,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1389,11 +2229,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -1415,11 +2267,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1439,11 +2303,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1461,11 +2337,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1483,11 +2371,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1505,11 +2405,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -1526,16 +2438,37 @@
       "confidence": "manual",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": {
+          "faction_id": 942,
+          "value": 20999
+        },
+        "special_flags": 1,
+        "repeatable": true,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 500
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最高声望条件=阵营942 声望值<20999"
+        ]
       },
+      "availability_constraints": [
+        "reputation"
+      ],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -1561,11 +2494,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "search_or_trigger",
       "manual_override": true,
@@ -1587,11 +2532,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1609,11 +2566,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1631,11 +2600,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1653,11 +2634,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1675,11 +2668,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1697,11 +2702,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1719,11 +2736,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -1745,11 +2774,18 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1762,17 +2798,38 @@
       "confidence": "high",
       "review_required": false,
       "risk_flags": [],
-      "notes": [],
+      "notes": [
+        "Questie存在requiredMinRep/requiredMaxRep；在声望状态进入路线状态机前，不得把任务静默视为随时可接。"
+      ],
       "eligibility": {
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": {
+          "faction_id": 970,
+          "value": 0
+        },
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 970,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
-        "reasons": []
+        "has_reputation_condition": true,
+        "reasons": [
+          "最低声望条件=阵营970 声望值>=0"
+        ]
       },
-      "time_model_valid_for_global_optimizer": true,
+      "availability_constraints": [
+        "reputation"
+      ],
+      "time_model_valid_for_global_optimizer": false,
       "manual_override": false,
       "route_policy": "include"
     },
@@ -1789,11 +2846,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 25
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1811,11 +2880,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1833,11 +2914,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1855,11 +2943,18 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1877,11 +2972,23 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1899,11 +3006,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 530,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -1931,13 +3050,25 @@
           171,
           325
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "另有技能条件=[171, 325]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,
@@ -1964,13 +3095,20 @@
           171,
           325
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "另有技能条件=[171, 325]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -1998,14 +3136,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2038,14 +3188,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "material_or_alternative_source",
       "manual_override": true,
@@ -2076,14 +3238,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "scripted_action",
       "manual_override": true,
@@ -2111,14 +3285,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2146,14 +3332,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2181,14 +3379,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 10
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2217,14 +3427,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 150
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "special_unresolved",
       "manual_override": true,
@@ -2252,14 +3474,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 500
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -2287,14 +3521,21 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2318,13 +3559,20 @@
         "required_race_mask": 1101,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": [
           "种族限制掩码=1101，不包含血精灵"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "handoff",
       "manual_override": true,
@@ -2346,11 +3594,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -2368,11 +3623,18 @@
         "required_race_mask": 690,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -2390,11 +3652,23 @@
         "required_race_mask": 0,
         "required_class_mask": null,
         "required_skill": [],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": true,
         "has_additional_skill_or_spell_condition": false,
+        "has_reputation_condition": false,
         "reasons": []
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": true,
       "manual_override": false,
       "route_policy": "include"
@@ -2418,14 +3692,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 250
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -2453,14 +3739,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 150
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "kill",
       "manual_override": true,
@@ -2488,14 +3786,26 @@
           762,
           300
         ],
+        "required_min_rep": null,
+        "required_max_rep": null,
+        "special_flags": 0,
+        "repeatable": false,
+        "reputation_rewards": [
+          {
+            "faction_id": 942,
+            "value": 150
+          }
+        ],
         "required_spell": null,
         "blood_elf_paladin_class_race_ok": false,
         "has_additional_skill_or_spell_condition": true,
+        "has_reputation_condition": false,
         "reasons": [
           "职业限制掩码=1024，不包含圣骑士",
           "另有技能条件=[762, 300]"
         ]
       },
+      "availability_constraints": [],
       "time_model_valid_for_global_optimizer": false,
       "auto_primary_effective": "mob_drop",
       "manual_override": true,

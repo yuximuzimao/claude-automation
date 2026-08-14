@@ -1,3 +1,4 @@
+from scripts.audit_zangarmarsh_task_profiles import apply_component_overrides
 from scripts.build_zangarmarsh_task_profiles import (
     FIVE_BOX_CHARACTERS,
     FIXED_KILL_SECONDS,
@@ -27,3 +28,30 @@ def test_five_box_collect_has_no_wait_when_first_round_is_enough():
     assert rounds == 1
     assert wait_rounds == 0
     assert seconds == 0.0
+
+
+def test_shared_corpse_drop_override_does_not_multiply_drop_attempts_by_five():
+    profile = {
+        "components": [
+            {
+                "family": "mob_drop",
+                "requirement_key": "item:24373",
+                "needed_count": 1,
+                "sources": [
+                    {"entity_id": 1, "drop_rate_percent": 10.0, "single_kill_seconds": 15.0},
+                    {"entity_id": 2, "drop_rate_percent": 100.0, "single_kill_seconds": 15.0},
+                ],
+                "baseline_source": {"entity_id": 2, "drop_rate_percent": 100.0, "single_kill_seconds": 15.0},
+                "estimated_objective_seconds": 75.0,
+            }
+        ],
+        "solo_time_estimate": {"total_travel_seconds": 0.0, "calculations": {}},
+    }
+    apply_component_overrides(
+        profile,
+        {"component_overrides": {"item:24373": {"effective_drop_demand_characters": 1}}},
+    )
+    sources = profile["components"][0]["sources"]
+    assert sources[0]["expected_kills"] == 10.0
+    assert sources[1]["expected_kills"] == 1.0
+    assert profile["components"][0]["estimated_objective_seconds"] == 15.0

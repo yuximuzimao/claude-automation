@@ -776,11 +776,23 @@ def main() -> None:
         if any(any(s.get("low_density_shortcut") for s in c.get("sources", [])) for c in components):
             labels.append("strategy:shortcut_source_available")
 
+        quest_level = quest.get("quest_level")
+        last_full_xp_level = int(quest_level) + 5 if isinstance(quest_level, (int, float)) else None
+        raw_quest = questie.quests.get(qid, {})
+        special_flags = int(raw_quest.get(24) or 0) if isinstance(raw_quest, dict) else 0
+        repeatable = bool(special_flags & 1)
+        quest_xp_row = questie.quest_xp.get(qid)
+        quest_xp_base = int(quest_xp_row.get(2)) if isinstance(quest_xp_row, dict) and isinstance(quest_xp_row.get(2), (int, float)) else None
         profiles[qid_text] = {
             "quest_id": qid,
             "name": quest.get("name"),
-            "quest_level": quest.get("quest_level"),
+            "quest_level": quest_level,
+            "last_full_xp_level": last_full_xp_level,
+            "quest_xp_base": quest_xp_base,
+            "quest_xp_source": "questie_xpdb_wotlk" if quest_xp_base is not None else None,
             "required_level": quest.get("required_level"),
+            "special_flags": special_flags,
+            "repeatable": repeatable,
             "classification": classification,
             "scope": scope,
             "labels": sorted(set(labels)),

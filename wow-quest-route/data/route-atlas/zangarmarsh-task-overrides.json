@@ -70,6 +70,41 @@
         "四个交互动作本身按0秒处理；主要任务成本是依次经过四个控制台的移动时间。Marker坐标继续作为定位实体使用。"
       ]
     },
+    "9727": {
+      "effective_type": "repeatable_reputation_no_xp",
+      "classification_source": "user_verified_leveling_policy",
+      "route_policy": "exclude_leveling_route",
+      "time_policy": "do_not_accept_for_xp_leveling",
+      "notes": ["2026-08-15用户确认：重复任务不给经验；《既然我们仍是朋友......》不接。当前目标是升级效率，不为孢子村声望主动安排该任务。"]
+    },
+    "9742": {
+      "effective_type": "repeatable_reputation_no_xp",
+      "classification_source": "user_verified_leveling_policy",
+      "route_policy": "exclude_leveling_route",
+      "time_policy": "do_not_accept_second_round_for_xp_leveling",
+      "notes": ["《更多孢子囊》属于零经验重复声望任务；练级路线不接第二轮。"]
+    },
+    "9744": {
+      "effective_type": "repeatable_reputation_no_xp",
+      "classification_source": "user_verified_leveling_policy",
+      "route_policy": "exclude_leveling_route",
+      "time_policy": "do_not_accept_second_round_for_xp_leveling",
+      "notes": ["《更多卷须！》属于零经验重复声望任务；练级路线不接第二轮。"]
+    },
+    "9807": {
+      "effective_type": "repeatable_reputation_no_xp",
+      "classification_source": "user_verified_leveling_policy",
+      "route_policy": "exclude_leveling_route",
+      "time_policy": "do_not_accept_second_round_for_xp_leveling",
+      "notes": ["《更多成熟的孢子》属于零经验重复声望任务；练级路线不接第二轮。"]
+    },
+    "9809": {
+      "effective_type": "repeatable_reputation_no_xp",
+      "classification_source": "user_verified_leveling_policy",
+      "route_policy": "exclude_leveling_route",
+      "time_policy": "do_not_accept_second_round_for_xp_leveling",
+      "notes": ["《更多亮顶蘑菇》属于零经验重复声望任务；练级路线不接第二轮。"]
+    },
     "9731": {
       "effective_type": "item_start_explore_trigger",
       "classification_source": "manual_verified_external_proxy",
@@ -92,6 +127,8 @@
       "notes": [
         "任务不是NPC接取：先从血鳞娜迦掉落抽水泵结构图，拾取/使用该物品后任务进入日志。",
         "Questie本包未给这个起始物的可用掉率，因此当前掉率是外部WotLK资料代理；Titan实跑可覆盖。",
+        "第三泵/毒蛇湖附近的血鳞监工20088与血鳞唤潮者20089同时是9728《热情的欢迎》纳迦爪子来源和本任务图纸来源；练级路线默认第二泵自然出图则保留但不强刷，第三泵刷爪子时优先这两类怪并在离开该区域前确保五开所需图纸齐全。",
+        "取得图纸后，9731排水口调查约50.34,40.87与9845《下钩钓鱼》泥爪水域约51.98,41.68视为同一次不可拆水域服务，避免重复进水/出水；水域包结束后优先直接在水中炉石回萨布拉金，避免从水域中心慢速游到岸边。第四个9720水泵本身在陆地，可在炉石落地后的陆地段或后续自然经过时处理；禁止把‘第四泵在水里’作为拆分理由。",
         "真正任务目标仍使用Questie triggerEnd：毒蛇湖排水口约50.34,40.87，交互/发现动作按0秒。"
       ]
     },
@@ -134,6 +171,18 @@
       },
       "notes": ["所谓‘搜寻斥候尤尔巴’实际是找到目标NPC后交任务；任务执行时间主要就是到该NPC的路线时间。"]
     },
+    "9772": {
+      "effective_type": "mob_drop_shared_corpse_loot",
+      "classification_source": "user_verified",
+      "route_policy": "include",
+      "time_policy": "single_drop_attempt_shared_by_five_characters",
+      "component_overrides": {
+        "item:24373": {
+          "effective_drop_demand_characters": 1
+        }
+      },
+      "notes": ["首组实跑确认：斥候尤尔巴的报告一旦掉落，同一具尸体五个角色都可分别拾取，因此掉落尝试次数按一份报告计算，不得乘五。", "若在死亡泥潭顺路提前掉出，只更新任务完成状态；当前最终交付本来就与沼泽鼠其它交付合并，不因此改路线。"]
+    },
     "9784": {
       "effective_type": "ambient_inventory_turnin_repeatable",
       "classification_source": "manual",
@@ -147,6 +196,24 @@
       "route_policy": "conditional_inventory",
       "time_policy": "zero_objective_time_if_required_items_already_owned",
       "notes": ["需要10株未鉴定过的植物；基础路线中按背景库存任务处理，而不是专程对刷怪来源建独立耗时。"]
+    },
+    "9806": {
+      "effective_type": "background_tradeable_mob_drop",
+      "classification_source": "user_verified_route_overlap_and_tradeability",
+      "route_policy": "include",
+      "time_policy": "background_corridor_then_explicit_fill_if_short",
+      "notes": [
+        "2026-08-15首组实跑确认24449《成熟的孢子》可交易。",
+        "实际在去穆玛基与去9822《战斗迫近》的北部主体移动中持续获得成熟孢子，最后自然回孢子村时可通过交易均衡五号库存并交付。",
+        "旧R15孢子村北/西北专门大型孢子蝠环降级为不足时fallback；不得在一接9806后就固定建立专门刷圈。"
+      ]
+    },
+    "9814": {
+      "effective_type": "object_collect_manual_local_loop",
+      "classification_source": "user_verified_spatial_geometry",
+      "route_policy": "include",
+      "time_policy": "manual_spatial_loop_unmeasured",
+      "notes": ["首组实跑确认需要围绕萨布拉金做一圈本地采集，再自然接入后续西部路线；Questie刷新点数量不能证明该任务是0秒背景采集。", "在获得实跑圈耗时前，不允许自动优化器把9814按免费背景任务处理。"]
     },
     "9816": {
       "effective_type": "scripted_item_use",

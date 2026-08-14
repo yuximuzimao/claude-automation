@@ -37,7 +37,11 @@ Q_OBJECTIVES = 10
 Q_PRE_GROUP = 12
 Q_PRE_SINGLE = 13
 Q_ZONE_OR_SORT = 17
+Q_REQUIRED_MIN_REP = 19
+Q_REQUIRED_MAX_REP = 20
 Q_NEXT = 22
+Q_SPECIAL_FLAGS = 24
+Q_REPUTATION_REWARD = 26
 
 N_NAME = 1
 N_SPAWNS = 7
@@ -110,6 +114,24 @@ def entity_refs(raw: Any) -> dict[str, list[int]]:
 
 def id_list(raw: Any) -> list[int]:
     return [int(v) for v in values(raw) if isinstance(v, (int, float))]
+
+
+def faction_rep_requirement(raw: Any) -> dict[str, int] | None:
+    if not isinstance(raw, dict):
+        return None
+    faction_id, value = raw.get(1), raw.get(2)
+    if not isinstance(faction_id, (int, float)) or not isinstance(value, (int, float)):
+        return None
+    return {"faction_id": int(faction_id), "value": int(value)}
+
+
+def reputation_rewards(raw: Any) -> list[dict[str, int]]:
+    out: list[dict[str, int]] = []
+    for row in values(raw):
+        parsed = faction_rep_requirement(row)
+        if parsed:
+            out.append(parsed)
+    return out
 
 
 def trigger_end_payload(raw: Any) -> dict[str, Any] | None:
@@ -230,6 +252,11 @@ def quest_payload(questie: QuestieData, quest_id: int) -> dict[str, Any]:
         "pre_quest_single": pre_single,
         "pre_quest_group": pre_group,
         "prerequisite_ids": prereq,
+        "required_min_rep": faction_rep_requirement(raw.get(Q_REQUIRED_MIN_REP)),
+        "required_max_rep": faction_rep_requirement(raw.get(Q_REQUIRED_MAX_REP)),
+        "special_flags": int(raw.get(Q_SPECIAL_FLAGS) or 0),
+        "repeatable": bool(int(raw.get(Q_SPECIAL_FLAGS) or 0) & 1),
+        "reputation_rewards": reputation_rewards(raw.get(Q_REPUTATION_REWARD)),
         "next_quest_id": int(next_id) if next_id is not None else None,
         "missing": False,
     }

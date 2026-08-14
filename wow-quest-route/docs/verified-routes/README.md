@@ -4,18 +4,22 @@
 
 ## 当前执行入口
 
-- 当前唯一执行入口为[`CURRENT.md`](CURRENT.md)：首组已进入时光服地狱火半岛并推进到61级，继续按现场可接任务与实跑反馈推进。历史艾萨拉、费伍德→冬泉和旧安戈洛方案均只保留作比较证据，不得覆盖当前真实状态。
-- [`sessions/2026-08-12-hellfire-58-61-midrun-neat.md`](sessions/2026-08-12-hellfire-58-61-midrun-neat.md)：最新阶段归档；记录时光服地狱火58→61首跑中段、五号经验、任务推进、老手2—2.5张图到68基线、分圈方法修正及经验积累型项目规则。
+- 当前唯一恢复入口为[`CURRENT.md`](CURRENT.md)：首组外域58→68已经闭合，五号已68级，最新已知位置奥格瑞玛；下一窗口才开始设计诺森德68级地面路线，当前不开工。
+- [`sessions/2026-08-15-route-atlas-hd-map-assets-neat.md`](sessions/2026-08-15-route-atlas-hd-map-assets-neat.md)：Route Atlas地图资源专项归档；记录68张地图中的65张HD底图、3张安全回退、经典旧世界/TBC共790个zhCN参考小标，以及“HTML+同级`maps/`目录即可离线复制”的运行时契约。
+- [`sessions/2026-08-15-nagrand-68-northrend-transition-neat.md`](sessions/2026-08-15-nagrand-68-northrend-transition-neat.md)：最新玩家进度阶段归档；记录纳格兰67→68首组实跑顺序、删除《证明你的力量》、暗血物品任务自然触发、敌对沙塔斯死亡/灵魂跑传送门转奥格，以及“当前诺森德按无飞行设计”的恢复约束。
+- [`sessions/2026-08-14-zangarmarsh-portable-html-test-ready-neat.md`](sessions/2026-08-14-zangarmarsh-portable-html-test-ready-neat.md)：赞加前端与可携带地图资源池阶段归档；记录HTML信息层级、同级`maps/`地图资源池与可携带目录契约。
+- [`sessions/2026-08-14-zangarmarsh-level65-current-route-neat.md`](sessions/2026-08-14-zangarmarsh-level65-current-route-neat.md)：65级赞加任务状态与路线裁剪历史归档。
+- [`sessions/2026-08-12-hellfire-58-61-midrun-neat.md`](sessions/2026-08-12-hellfire-58-61-midrun-neat.md)：时光服地狱火58→61首跑中段历史归档。
 - [`sessions/2026-08-11-level55-58-felwood-winterspring-closure-neat.md`](sessions/2026-08-11-level55-58-felwood-winterspring-closure-neat.md)：55→58首组实跑闭合；记录费伍德→冬泉实际经验、时间结构、怪物经验与预算错误。
 - [`sessions/2026-08-09-level50-55-ungoro-silithus-closure-neat.md`](sessions/2026-08-09-level50-55-ungoro-silithus-closure-neat.md)：50→55历史阶段闭合；确认安戈洛→希利苏斯实跑结果，并记录20/40级雕文购买遗漏。
-- [`VETERAN-LEVELING-BACKBONE.md`](VETERAN-LEVELING-BACKBONE.md)：当前50—80地图主轴；50—58现固定理解为安戈洛→希利苏斯→艾萨拉三段，外域与诺森德继续按连续地图轴推进。
+- [`VETERAN-LEVELING-BACKBONE.md`](VETERAN-LEVELING-BACKBONE.md)：当前50—80地图主轴；外域与诺森德继续按连续地图轴推进。
 - [`sessions/2026-08-09-level50-silvermoon-riding-to-ungoro-v1.md`](sessions/2026-08-09-level50-silvermoon-riding-to-ungoro-v1.md)：上一段转场历史，只负责灼热峡谷→银月骑术→加基森，不再作为安戈洛内部执行稿。
 - [`sessions/2026-08-08-actual-leveling-map-route-neat.md`](sessions/2026-08-08-actual-leveling-map-route-neat.md)：首组实际地图历程基线，用于和老手连续清图主轴对照，定位旧路线的地图振荡成本。
 - [`sessions/2026-08-07-level40-feralas-route-format-neat.md`](sessions/2026-08-07-level40-feralas-route-format-neat.md)：40级阶段历史NEAT归档，固化玩家可执行性复审、菲拉斯首趟顺序、卷轴随机重生机制、五号骑术与背包经济约束。
 
 ## 长期规则与恢复点
 
-- [`CURRENT.md`](CURRENT.md)：当前等级、位置、炉石、路线轴和唯一执行入口。
+- [`CURRENT.md`](CURRENT.md)：当前等级、位置、路线轴和唯一恢复入口。
 - [`RULES.md`](RULES.md)：任务路线编写、实跑记录、机制验证和人类可执行性复审规则。
 - [`ERROR-BOOK.md`](ERROR-BOOK.md)：已发现的路线错误、错误原因及禁止复发项。
 - [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组五开的飞行点状态；未列出的点按未开启处理。

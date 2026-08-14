@@ -31,6 +31,26 @@
       "note": "单号视频用于证明任务、地点、入口、顺序和机制可行，不用于证明五开最优路线或完成时间。单号杀怪慢、任务经验利用方式不同；老手五开能达到相近总升级时间，说明视频任务集合仍有五开专属优化空间。最终优化器必须从部落全任务池独立选块。"
     }
   },
+  "item_properties": {
+    "24290": {
+      "name": "成熟的孢子囊",
+      "used_by_quests": [9739, 9742],
+      "tradeable": {"value": true, "status": "user_confirmed", "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"},
+      "auction_house": {"value": null, "status": "needs_live_test", "note": "待用户实际检查拍卖行后回填。"}
+    },
+    "24291": {
+      "name": "沼泽领主的卷须",
+      "used_by_quests": [9743, 9744],
+      "tradeable": {"value": true, "status": "user_confirmed", "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"},
+      "auction_house": {"value": null, "status": "needs_live_test", "note": "待用户实际检查拍卖行后回填。"}
+    },
+    "24449": {
+      "name": "成熟的孢子",
+      "used_by_quests": [9806, 9807],
+      "tradeable": {"value": true, "status": "user_confirmed", "note": "2026-08-15首组赞加实跑确认：成熟的孢子可在角色之间交易，因此五开完成9806时允许跨角色重新分配库存。"},
+      "auction_house": {"value": null, "status": "needs_live_test", "note": "可交易已确认；是否能在当前Titan拍卖行稳定购买及价格效率下次单独测试。"}
+    }
+  },
   "tasks": {
     "8325": {
       "type": "kill_shared_confirmed",
@@ -101,6 +121,16 @@
       "type": "named_elite_single_kill_multi_person_loot",
       "status": "user_confirmed",
       "note": "《超适应齿轮》距离白沙岗哨近、任务经验高。首组实跑确认只需击杀一次被激怒的黑豹，同一具尸体可供五个角色分别拾取任务物品。"
+    },
+    "9772": {
+      "type": "shared_corpse_single_drop_multi_person_loot",
+      "status": "user_confirmed",
+      "note": "《尤尔巴的报告》实跑确认：报告一旦从怪物掉出，同一具尸体五个角色都可分别拾取。掉落期望只计算获得一份报告所需的击杀次数，不得乘五。若提前顺路掉出，只更新完成状态；当前交付本来与最终沼泽鼠停靠合并。"
+    },
+    "9814": {
+      "type": "object_collect_manual_local_loop",
+      "status": "user_confirmed_geometry_unmeasured_time",
+      "note": "《爆顶蘑菇》不能因为刷新点数量看似覆盖主体路线就按0秒背景采集。首组实跑需要围绕萨布拉金专门转一圈拾取；该本地圈可以自然接入后续西部路线。当前只确认空间服务形态，真实圈耗时仍待后续实跑记录。"
     },
     "1149": {
       "type": "personal_trigger_jump_hidden_slope_entrance",
