@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "version": "manual-overrides-v1",
+    "purpose": "Permanent per-quest overrides for low-confidence/special Zangarmarsh tasks. These override automatic classification and route-policy decisions without complicating the general classifier.",
+    "principle": "Normal completion method is the baseline. Rare bosses, generic containers, profession-only paths, dungeon-only sources, and already-owned inventory are treated as conditional/strategy states rather than redefining the base quest type."
+  },
+  "quests": {
+    "9635": {
+      "effective_type": "profession_object_collect",
+      "classification_source": "manual",
+      "route_policy": "conditional_profession",
+      "eligibility": {"required_skill_id": 202, "required_skill_value": 300},
+      "time_policy": "only_model_if_character_meets_profession_requirement",
+      "notes": ["工程专业条件任务；不属于所有角色通用练级任务。", "Questie多个蒸汽泵零件Object别名复用同一批坐标，点位数量必须按坐标去重。"]
+    },
+    "9714": {
+      "effective_type": "dungeon_item_turnin_repeatable",
+      "classification_source": "manual",
+      "route_policy": "exclude_open_world_baseline",
+      "time_policy": "dungeon_context_only",
+      "notes": ["红色木槿后续重复交付；目标物来源属于幽暗沼泽副本上下文，不作为赞加开放世界路线的基础任务。"]
+    },
+    "9715": {
+      "effective_type": "dungeon_item_turnin",
+      "classification_source": "manual",
+      "route_policy": "exclude_open_world_baseline",
+      "time_policy": "dungeon_context_only",
+      "notes": ["需要5朵红色木槿；属于幽暗沼泽副本材料任务，不应因Item掉落来源缺失而强行套开放世界刷怪掉率。"]
+    },
+    "9718": {
+      "effective_type": "scripted_transport",
+      "classification_source": "manual_verified_external",
+      "route_policy": "include",
+      "time_policy": "fixed_script_duration",
+      "special_mechanism": {
+        "type": "objective_area_not_route_entry",
+        "execution_mode": "scripted_flight",
+        "route_anchor": "mechanism_entry",
+        "objective_markers_role": "reference_only",
+        "entry": {
+          "kind": "quest_start_location",
+          "name": "伊谢尔·风歌处使用风暴乌鸦护符",
+          "point": [78.40, 62.02]
+        },
+        "warning": "不要按Questie调查目标点自己骑过去；在任务入口使用风暴乌鸦护符后由固定飞行路线自动经过目标区域。"
+      },
+      "time_override": {
+        "formula": "fixed_script_duration_seconds",
+        "inputs": {"duration_seconds": 150},
+        "result": 150,
+        "unit": "seconds",
+        "quality": "external_observation",
+        "source": "WotLK/TBC quest references describe an uncontrollable scripted Stormcrow flight; player reports cluster around 2 to 2.5 minutes"
+      },
+      "notes": ["使用风暴乌鸦护符后进入不可控制的固定飞行路径并自动完成调查。", "这是任务自身固定执行时间，不应按地图点位逐段骑乘计算。", "Route Atlas主路线必须指向机制入口，而不是Questie目标区域。"]
+    },
+    "9720": {
+      "effective_type": "multi_point_item_use",
+      "classification_source": "manual_verified_mechanic",
+      "route_policy": "include",
+      "time_policy": "four_zero_time_item_interactions",
+      "component_overrides": {
+        "entity:creature:17998": {"effective_family": "scripted_interact", "estimated_objective_seconds": 0},
+        "entity:creature:18002": {"effective_family": "scripted_interact", "estimated_objective_seconds": 0},
+        "entity:creature:18000": {"effective_family": "scripted_interact", "estimated_objective_seconds": 0},
+        "entity:creature:17999": {"effective_family": "scripted_interact", "estimated_objective_seconds": 0}
+      },
+      "notes": [
+        "Questie底层用Steam Pump Credit Marker记四个控制台进度，但正常完成方式不是击杀Marker，而是在四座蒸汽泵控制台旁使用任务提供的铁藤种子。",
+        "四个交互动作本身按0秒处理；主要任务成本是依次经过四个控制台的移动时间。Marker坐标继续作为定位实体使用。"
+      ]
+    },
+    "9731": {
+      "effective_type": "item_start_explore_trigger",
+      "classification_source": "manual_verified_external_proxy",
+      "route_policy": "include",
+      "time_policy": "acquire_start_item_then_trigger",
+      "start_acquisition": {
+        "item_id": 24330,
+        "item_name": "抽水泵结构图",
+        "mode": "mob_drop_starts_quest",
+        "sources": [
+          {"kind": "npc", "entity_id": 18088, "name": "血鳞女巫", "point": [26.10, 41.00], "drop_rate_percent": 8.0, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 12.5, "single_kill_seconds": 7.495, "expected_service_seconds": 93.6875},
+          {"kind": "npc", "entity_id": 18089, "name": "血鳞驱奴者", "point": [26.32, 40.25], "drop_rate_percent": 8.0, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 12.5, "single_kill_seconds": 9.368333333333334, "expected_service_seconds": 117.10416666666667},
+          {"kind": "npc", "entity_id": 18340, "name": "蒸汽泵监工", "point": [63.19, 64.06], "drop_rate_percent": 16.0, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 6.25, "single_kill_seconds": 9.056666666666667, "expected_service_seconds": 56.604166666666664},
+          {"kind": "npc", "entity_id": 20088, "name": "血鳞监工", "point": [63.04, 40.69], "drop_rate_percent": 16.0, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 6.25, "single_kill_seconds": 8.749166666666667, "expected_service_seconds": 54.68229166666667},
+          {"kind": "npc", "entity_id": 20089, "name": "血鳞唤潮者", "point": [62.96, 39.25], "drop_rate_percent": 8.0, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 12.5, "single_kill_seconds": 7.123333333333333, "expected_service_seconds": 89.04166666666666}
+        ],
+        "formula": "expected_kills = 1 / drop_rate; acquisition_seconds = expected_kills * single_kill_seconds",
+        "quality": "external_drop_rate_proxy + Questie NPC health + common DPS assumption"
+      },
+      "notes": [
+        "任务不是NPC接取：先从血鳞娜迦掉落抽水泵结构图，拾取/使用该物品后任务进入日志。",
+        "Questie本包未给这个起始物的可用掉率，因此当前掉率是外部WotLK资料代理；Titan实跑可覆盖。",
+        "真正任务目标仍使用Questie triggerEnd：毒蛇湖排水口约50.34,40.87，交互/发现动作按0秒。"
+      ]
+    },
+    "9752": {
+      "effective_type": "escort_scripted",
+      "classification_source": "manual_verified_mechanic",
+      "route_policy": "pending_manual_time_model",
+      "time_policy": "escort_path_plus_scripted_ambushes_pending",
+      "notes": [
+        "凯拉·长鬃从暗泽村按固定护送路径前往塞纳里奥庇护所；不能把接取点到交付NPC的玩家直线骑乘时间当成任务耗时。",
+        "公开任务脚本资料显示路径至少包含26个waypoint，初始约3秒动作延迟，两次约10秒脚本停顿/伏击，并在早期waypoint后切换为跑步；需要补完整waypoint路径长度和伏击击杀成本后再物化秒数。"
+      ]
+    },
+    "9765": {
+      "effective_type": "dungeon_item_turnin",
+      "classification_source": "manual",
+      "route_policy": "exclude_open_world_baseline",
+      "time_policy": "dungeon_context_only",
+      "notes": ["盘牙武器来自盘牙水库纳迦/副本上下文；任务等级70、需求67，不属于当前赞加开放世界基础练级路线。"]
+    },
+    "9766": {
+      "effective_type": "dungeon_item_turnin_repeatable",
+      "classification_source": "manual",
+      "route_policy": "exclude_open_world_baseline",
+      "time_policy": "dungeon_context_only",
+      "notes": ["《战争准备》的后续重复交付版本；不进入开放世界基线路线。"]
+    },
+    "9771": {
+      "effective_type": "find_npc_handoff",
+      "classification_source": "manual",
+      "route_policy": "include",
+      "time_policy": "movement_only_to_end_npc",
+      "objective_time_override": {
+        "formula": "0",
+        "inputs": {},
+        "result": 0,
+        "unit": "seconds",
+        "quality": "structural",
+        "source": "manual_quest_mechanic"
+      },
+      "notes": ["所谓‘搜寻斥候尤尔巴’实际是找到目标NPC后交任务；任务执行时间主要就是到该NPC的路线时间。"]
+    },
+    "9784": {
+      "effective_type": "ambient_inventory_turnin_repeatable",
+      "classification_source": "manual",
+      "route_policy": "conditional_inventory",
+      "time_policy": "zero_objective_time_if_required_items_already_owned",
+      "notes": ["未鉴定植物体系的重复交付；不建议为了它单独刷取，若自然获得足量物品则视为库存触发的顺路交付。"]
+    },
+    "9802": {
+      "effective_type": "ambient_inventory_turnin",
+      "classification_source": "manual",
+      "route_policy": "conditional_inventory",
+      "time_policy": "zero_objective_time_if_required_items_already_owned",
+      "notes": ["需要10株未鉴定过的植物；基础路线中按背景库存任务处理，而不是专程对刷怪来源建独立耗时。"]
+    },
+    "9816": {
+      "effective_type": "scripted_item_use",
+      "classification_source": "manual_verified_external",
+      "route_policy": "include",
+      "time_policy": "zero_time_item_use_at_fixed_point",
+      "component_overrides": {
+        "entity:creature:18152": {
+          "effective_family": "scripted_interact",
+          "estimated_objective_seconds": 0,
+          "manual_point": [26.81, 22.60],
+          "manual_name": "放置鱼人笼的位置"
+        }
+      },
+      "notes": [
+        "Questie底层用鱼人宝宝18152记录完成信用，但正常动作不是击杀鱼人宝宝，而是在匕潭村附近平坦岩石上放置任务提供的鱼人笼。",
+        "放置动作按0秒；定位代理使用26.81,22.60。"
+      ]
+    },
+    "9828": {
+      "effective_type": "item_start_mob_drop_handoff",
+      "classification_source": "manual_verified_external_proxy",
+      "route_policy": "include",
+      "time_policy": "acquire_start_item_then_turnin",
+      "start_acquisition": {
+        "item_id": 24484,
+        "item_name": "枯萎的孢芽",
+        "mode": "mob_drop_starts_quest",
+        "sources": [
+          {"kind": "npc", "entity_id": 18124, "name": "枯萎的巨人", "point": [80.96, 42.10], "drop_rate_percent": 1.53, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 65.35947712418302, "single_kill_seconds": 8.749166666666667, "expected_service_seconds": 571.8409586056646, "respawn_seconds_proxy": 300}
+        ],
+        "formula": "expected_kills = 1 / drop_rate; acquisition_seconds = expected_kills * single_kill_seconds",
+        "quality": "external_drop_rate_proxy + Questie NPC health + CMaNGOS respawn evidence"
+      },
+      "notes": ["枯萎的孢芽由枯萎的巨人掉落并直接开启任务；普通成群小怪按期望击杀数×单怪时间计算，不额外加刷新等待。"]
+    },
+    "9847": {
+      "effective_type": "scripted_summon_kill",
+      "classification_source": "manual_verified_external",
+      "route_policy": "include",
+      "time_policy": "item_use_then_summoned_kill",
+      "component_overrides": {
+        "entity:creature:18185": {
+          "effective_family": "scripted_summon_kill",
+          "estimated_objective_seconds": 9.368333333333334,
+          "manual_point": [44.36, 66.01],
+          "manual_name": "博哈姆废墟图腾放置点"
+        }
+      },
+      "notes": ["在博哈姆废墟台阶底部放置蛮沼图腾，召唤蛮沼毒蛇之魂后击杀；放置动作按0秒，召唤怪击杀按当前统一DPS模型约9.37秒。"]
+    },
+    "9875": {
+      "effective_type": "conditional_inventory_item_start",
+      "classification_source": "manual_verified_external",
+      "route_policy": "conditional_inventory",
+      "time_policy": "only_if_uncatalogued_species_already_generated",
+      "notes": ["未归类的植物不是普通地图固定掉落源；它来自鉴定植物奖励包的随机产物。基础全局路线不为它专程增加服务动作，实际获得后再作为零额外获取成本的条件交付。"]
+    },
+    "9911": {
+      "effective_type": "item_start_boss_drop_handoff",
+      "classification_source": "manual_verified_external_proxy",
+      "route_policy": "include",
+      "time_policy": "single_boss_expected_drop_with_failure_respawn",
+      "start_acquisition": {
+        "item_id": 25459,
+        "item_name": "‘伯爵’昂古拉的下颚骨",
+        "mode": "single_boss_drop_starts_quest",
+        "sources": [
+          {"kind": "npc", "entity_id": 18285, "name": "‘伯爵’昂古拉", "point": [32.81, 59.53], "drop_rate_percent": 82.7, "drop_rate_source": "external_wotlk_proxy", "expected_kills": 1.2091898428053205, "single_kill_seconds": 9.143333333333333, "respawn_seconds_proxy": 300, "expected_kill_seconds": 11.05602579604998, "expected_failure_wait_seconds": 62.756952841596146, "expected_service_seconds": 73.81297863764613}
+        ],
+        "formula": "kill_seconds/drop_rate + ((1-drop_rate)/drop_rate)*respawn_seconds",
+        "quality": "external_drop_rate_proxy + Questie NPC health + CMaNGOS single-spawn respawn proxy"
+      },
+      "notes": ["这是单点Boss自身掉落并开启任务，因此失败后没有普通小怪可继续刷；基础耗时额外计入掉落失败后的期望300秒重生等待。"]
+    },
+    "9876": {
+      "effective_type": "find_npc_handoff",
+      "classification_source": "manual",
+      "route_policy": "include",
+      "time_policy": "movement_only_to_end_npc",
+      "objective_time_override": {
+        "formula": "0",
+        "inputs": {},
+        "result": 0,
+        "unit": "seconds",
+        "quality": "structural",
+        "source": "manual_quest_mechanic"
+      },
+      "notes": ["前往盘牙水库入口寻找远征队德鲁伊，本质为找到目标NPC并交任务；服务时间按0处理，成本主要来自移动。"]
+    },
+    "10897": {
+      "effective_type": "profession_specialization_quest",
+      "classification_source": "manual",
+      "route_policy": "conditional_profession",
+      "eligibility": {"required_skill_id": 171, "required_skill_value": 325},
+      "time_policy": "exclude_unless_profession_goal_active",
+      "notes": ["炼金术药水大师专业任务，包含生态船副本Boss物品与药水材料；不属于通用练级路线。"]
+    },
+    "10905": {
+      "effective_type": "profession_handoff",
+      "classification_source": "manual",
+      "route_policy": "conditional_profession",
+      "eligibility": {"required_skill_id": 171, "required_skill_value": 325},
+      "time_policy": "exclude_unless_profession_goal_active",
+      "notes": ["药水大师专业链起始跑腿；仅炼金325角色需要。"]
+    },
+    "10955": {"effective_type": "class_quest_handoff", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属飞行形态任务链。"]},
+    "10961": {"effective_type": "class_quest_material_collection", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链；Dreaming Glory/Ancient Lichen等Item→Object来源不能用来定义当前圣骑士路线。"]},
+    "10964": {"effective_type": "class_quest_scripted_action", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10965": {"effective_type": "class_quest_escort_defense", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10978": {"effective_type": "class_quest_handoff", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10979": {"effective_type": "class_quest_handoff", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10980": {"effective_type": "class_quest_scripted_action", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10992": {"effective_type": "class_quest_kill_or_drop", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10993": {"effective_type": "class_quest_handoff", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "10994": {"effective_type": "class_quest_scripted_item", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链；无需继续为当前圣骑士路线补其特殊Item来源。"]},
+    "11001": {"effective_type": "class_quest_boss_kill", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "11011": {"effective_type": "class_quest_handoff", "classification_source": "manual", "route_policy": "exclude_current_character", "eligibility": {"required_class_mask": 1024}, "notes": ["德鲁伊专属链。"]},
+    "11829": {
+      "effective_type": "seasonal_handoff",
+      "classification_source": "manual",
+      "route_policy": "exclude_current_character",
+      "eligibility": {"required_race_mask": 1101},
+      "notes": ["联盟仲夏节火焰任务；当前部落血精灵不可接。"]
+    }
+  }
+}

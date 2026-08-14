@@ -1,0 +1,7492 @@
+{
+  "meta": {
+    "zone_id": 3521,
+    "quest_level_window": [
+      58,
+      68
+    ],
+    "candidate_rule": "route_policy=include AND time_model_valid AND quest_level 58..68 AND required_level<=68",
+    "questie_version": "11.34.0",
+    "questie_sha256": "3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861"
+  },
+  "summary": {
+    "candidate_quests": 70,
+    "hard_blockers": 14,
+    "solver_ready": 56,
+    "external_prerequisite_quests": 0,
+    "issue_counts": {
+      "component_without_service_point_or_cost": 4,
+      "no_local_turnin_location": 7,
+      "missing_escort_duration": 1,
+      "no_local_accept_location": 4
+    }
+  },
+  "candidate_ids": [
+    9697,
+    9701,
+    9702,
+    9708,
+    9709,
+    9716,
+    9717,
+    9718,
+    9719,
+    9720,
+    9724,
+    9726,
+    9727,
+    9728,
+    9729,
+    9730,
+    9731,
+    9732,
+    9738,
+    9739,
+    9742,
+    9743,
+    9744,
+    9747,
+    9769,
+    9770,
+    9771,
+    9772,
+    9773,
+    9774,
+    9775,
+    9778,
+    9785,
+    9788,
+    9795,
+    9796,
+    9797,
+    9806,
+    9807,
+    9808,
+    9809,
+    9814,
+    9816,
+    9817,
+    9820,
+    9822,
+    9823,
+    9828,
+    9841,
+    9842,
+    9845,
+    9846,
+    9847,
+    9876,
+    9894,
+    9895,
+    9898,
+    9899,
+    9903,
+    9904,
+    9911,
+    9912,
+    9919,
+    9957,
+    9968,
+    10096,
+    10103,
+    10105,
+    10117,
+    10118
+  ],
+  "external_prerequisites": [],
+  "quests": {
+    "9697": {
+      "quest_id": 9697,
+      "name": "观察者莉萨奥",
+      "effective_type": "handoff",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 198.38197036707288,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9701": {
+      "quest_id": 9701,
+      "name": "观察孢子人",
+      "effective_type": "explore_trigger",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9697
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9701:c1",
+          "family": "explore_trigger",
+          "label": "Investigate the Spawning Glen",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "trigger",
+              "entity_id": -9701,
+              "name": "Investigate the Spawning Glen",
+              "point": [
+                14.39,
+                61.05
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "trigger",
+              "entity_id": -9701,
+              "name": "Investigate the Spawning Glen",
+              "point": [
+                14.39,
+                61.05
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 68.7268513466702,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9702": {
+      "quest_id": 9702,
+      "name": "狼吞虎咽",
+      "effective_type": "object_collect_multi",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9701
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9702:c1",
+          "family": "object_collect_multi",
+          "label": "丢弃的食物",
+          "needed_count": 10,
+          "estimated_objective_seconds": 300.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182031,
+              "name": "丢弃的食物",
+              "point": [
+                31.01,
+                63.41
+              ],
+              "service_seconds": 300.0,
+              "shortcut": false
+            },
+            {
+              "kind": "object",
+              "entity_id": 182256,
+              "name": "丢弃的食物",
+              "point": [
+                30.11,
+                63.94
+              ],
+              "service_seconds": 300.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 300.0,
+      "estimated_total_seconds": 349.95964260885137,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9708": {
+      "quest_id": 9708,
+      "name": "熟悉的蘑菇",
+      "effective_type": "mob_drop",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9702
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9708:c1",
+          "family": "mob_drop",
+          "label": "蘑菇样本",
+          "needed_count": 15,
+          "estimated_objective_seconds": 1406.25,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18117,
+              "name": "安葛洛什食人魔",
+              "point": [
+                32.75,
+                31.79
+              ],
+              "service_seconds": 1406.25,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18118,
+              "name": "安葛洛什萨满祭司",
+              "point": [
+                32.88,
+                33.53
+              ],
+              "service_seconds": 1406.25,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18159,
+              "name": "大头目格罗阿克",
+              "point": [
+                34.82,
+                34.83
+              ],
+              "service_seconds": 1406.25,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20443,
+              "name": "安葛洛什哨兵",
+              "point": [
+                20.38,
+                23.25
+              ],
+              "service_seconds": 1406.25,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1406.25,
+      "estimated_total_seconds": 1584.4468493613103,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9709": {
+      "quest_id": 9709,
+      "name": "偷回蘑菇",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9708
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9709:c1",
+          "family": "mob_drop",
+          "label": "一箱蘑菇",
+          "needed_count": 10,
+          "estimated_objective_seconds": 937.5,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18120,
+              "name": "安葛洛什殴斗者",
+              "point": [
+                18.61,
+                7.03
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18121,
+              "name": "安葛洛什食魂者",
+              "point": [
+                19.76,
+                6.57
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18160,
+              "name": "戈尔费斯大王",
+              "point": [
+                18.39,
+                7.79
+              ],
+              "service_seconds": 937.5,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18992,
+              "name": "克罗什上尉",
+              "point": [
+                19.79,
+                26.73
+              ],
+              "service_seconds": 937.5,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20442,
+              "name": "波卡尔上尉",
+              "point": [
+                20.95,
+                22.88
+              ],
+              "service_seconds": 937.5,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20444,
+              "name": "安葛洛什暗影法师",
+              "point": [
+                18.64,
+                7.99
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 937.5,
+      "estimated_total_seconds": 1222.9061845463154,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9716": {
+      "quest_id": 9716,
+      "name": "暗泽湖的异常",
+      "effective_type": "explore_trigger",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9716:c1",
+          "family": "explore_trigger",
+          "label": "Umbrafen Lake Investigated",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "trigger",
+              "entity_id": -9716,
+              "name": "Umbrafen Lake Investigated",
+              "point": [
+                70.75,
+                80.15
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "trigger",
+              "entity_id": -9716,
+              "name": "Umbrafen Lake Investigated",
+              "point": [
+                70.75,
+                80.15
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 102.74145909809464,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9717": {
+      "quest_id": 9717,
+      "name": "孢子叶",
+      "effective_type": "object_interact_single",
+      "quest_level": 65,
+      "required_level": 63,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17857,
+          "name": "塔苏",
+          "local_points": 1,
+          "representative_point": [
+            19.37,
+            49.78
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17857,
+          "name": "塔苏",
+          "local_points": 1,
+          "representative_point": [
+            19.37,
+            49.78
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17857,
+          "name": "塔苏",
+          "local_points": 1,
+          "representative_point": [
+            19.37,
+            49.78
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17857,
+          "name": "塔苏",
+          "local_points": 1,
+          "representative_point": [
+            19.37,
+            49.78
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9717:c1",
+          "family": "object_interact_single",
+          "label": "幽暗孢子叶",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [],
+          "usable": false
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "component_without_service_point_or_cost"
+      ],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": true
+    },
+    "9718": {
+      "quest_id": 9718,
+      "name": "乌鸦的飞翔",
+      "effective_type": "scripted_transport",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9716
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 150,
+      "estimated_total_seconds": 150,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9719": {
+      "quest_id": 9719,
+      "name": "黑色阔步者",
+      "effective_type": "mob_drop",
+      "quest_level": 65,
+      "required_level": 63,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17866,
+          "name": "肯尼克斯",
+          "local_points": 1,
+          "representative_point": [
+            19.65,
+            49.7
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17866,
+          "name": "肯尼克斯",
+          "local_points": 1,
+          "representative_point": [
+            19.65,
+            49.7
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17866,
+          "name": "肯尼克斯",
+          "local_points": 1,
+          "representative_point": [
+            19.65,
+            49.7
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17866,
+          "name": "肯尼克斯",
+          "local_points": 1,
+          "representative_point": [
+            19.65,
+            49.7
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9719:c1",
+          "family": "mob_drop",
+          "label": "黑色阔步者的大脑",
+          "needed_count": 1,
+          "estimated_objective_seconds": null,
+          "usable_sources": [],
+          "usable": false
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "component_without_service_point_or_cost"
+      ],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": true
+    },
+    "9720": {
+      "quest_id": 9720,
+      "name": "恢复平衡",
+      "effective_type": "multi_point_item_use",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9718
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9720:c1",
+          "family": "scripted_interact",
+          "label": "Umbrafen Steam Pump Credit Marker",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 17998,
+              "name": "Umbrafen Steam Pump Credit Marker",
+              "point": [
+                70.6,
+                80.29
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 17998,
+              "name": "Umbrafen Steam Pump Credit Marker",
+              "point": [
+                70.6,
+                80.29
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9720:c2",
+          "family": "scripted_interact",
+          "label": "Marshlight Steam Pump Credit Marker",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18002,
+              "name": "Marshlight Steam Pump Credit Marker",
+              "point": [
+                25.4,
+                42.86
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18002,
+              "name": "Marshlight Steam Pump Credit Marker",
+              "point": [
+                25.4,
+                42.86
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9720:c3",
+          "family": "scripted_interact",
+          "label": "Serpent Steam Pump Credit Marker",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18000,
+              "name": "Serpent Steam Pump Credit Marker",
+              "point": [
+                61.97,
+                40.84
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18000,
+              "name": "Serpent Steam Pump Credit Marker",
+              "point": [
+                61.97,
+                40.84
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9720:c4",
+          "family": "scripted_interact",
+          "label": "Lagoon Steam Pump Credit Marker",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 17999,
+              "name": "Lagoon Steam Pump Credit Marker",
+              "point": [
+                63.11,
+                64.1
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 17999,
+              "name": "Lagoon Steam Pump Credit Marker",
+              "point": [
+                63.11,
+                64.1
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 452.96690387030264,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9724": {
+      "quest_id": 9724,
+      "name": "通知塞纳里奥议会",
+      "effective_type": "handoff",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 16885,
+          "name": "阿米希尔·迷雾行者",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9731
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9726": {
+      "quest_id": 9726,
+      "name": "既然我们是朋友......",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9726:c1",
+          "family": "kill",
+          "label": "血鳞驱奴者",
+          "needed_count": 12,
+          "estimated_objective_seconds": 180.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18089,
+              "name": "血鳞驱奴者",
+              "point": [
+                26.32,
+                40.25
+              ],
+              "service_seconds": 180.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9726:c2",
+          "family": "kill",
+          "label": "血鳞女巫",
+          "needed_count": 6,
+          "estimated_objective_seconds": 90.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18088,
+              "name": "血鳞女巫",
+              "point": [
+                26.1,
+                41.0
+              ],
+              "service_seconds": 90.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 270.0,
+      "estimated_total_seconds": 337.7477784777469,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9727": {
+      "quest_id": 9727,
+      "name": "既然我们仍是朋友......",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9726
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9727:c1",
+          "family": "kill",
+          "label": "血鳞驱奴者",
+          "needed_count": 12,
+          "estimated_objective_seconds": 180.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18089,
+              "name": "血鳞驱奴者",
+              "point": [
+                26.32,
+                40.25
+              ],
+              "service_seconds": 180.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9727:c2",
+          "family": "kill",
+          "label": "血鳞女巫",
+          "needed_count": 6,
+          "estimated_objective_seconds": 90.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18088,
+              "name": "血鳞女巫",
+              "point": [
+                26.1,
+                41.0
+              ],
+              "service_seconds": 90.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 270.0,
+      "estimated_total_seconds": 337.7477784777469,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9728": {
+      "quest_id": 9728,
+      "name": "热情的欢迎",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9778
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9728:c1",
+          "family": "mob_drop",
+          "label": "纳迦爪子",
+          "needed_count": 30,
+          "estimated_objective_seconds": 2250.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18044,
+              "name": "弗亚希王女",
+              "point": [
+                65.15,
+                40.91
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18046,
+              "name": "哈格哈兹王子",
+              "point": [
+                65.1,
+                68.67
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18086,
+              "name": "暗潮工头",
+              "point": [
+                62.65,
+                68.18
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18087,
+              "name": "暗潮海妖",
+              "point": [
+                62.6,
+                68.95
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18088,
+              "name": "血鳞女巫",
+              "point": [
+                26.1,
+                41.0
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18089,
+              "name": "血鳞驱奴者",
+              "point": [
+                26.32,
+                40.25
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18340,
+              "name": "蒸汽泵监工",
+              "point": [
+                63.19,
+                64.06
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19946,
+              "name": "暗潮奴役者",
+              "point": [
+                70.56,
+                78.03
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19947,
+              "name": "暗潮女巫",
+              "point": [
+                72.04,
+                76.29
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20088,
+              "name": "血鳞监工",
+              "point": [
+                63.04,
+                40.69
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20089,
+              "name": "血鳞召潮者",
+              "point": [
+                62.96,
+                39.25
+              ],
+              "service_seconds": 2250.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 2250.0,
+      "estimated_total_seconds": 2647.458974045824,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9729": {
+      "quest_id": 9729,
+      "name": "弗沃尔发怒了！",
+      "effective_type": "escort",
+      "quest_level": 65,
+      "required_level": 63,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17877,
+          "name": "弗沃尔",
+          "local_points": 1,
+          "representative_point": [
+            19.79,
+            50.83
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17877,
+          "name": "弗沃尔",
+          "local_points": 1,
+          "representative_point": [
+            19.79,
+            50.83
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17856,
+          "name": "舒特",
+          "local_points": 1,
+          "representative_point": [
+            19.54,
+            50.04
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "missing_escort_duration"
+      ],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": true
+    },
+    "9730": {
+      "quest_id": 9730,
+      "name": "暗潮纳迦的首领",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 58,
+      "local_starts": [
+        {
+          "kind": "objects",
+          "id": 182115,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            79.08,
+            64.88
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "objects",
+          "id": 182115,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            79.08,
+            64.88
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "objects"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9730:c1",
+          "family": "kill",
+          "label": "哈格哈兹王子",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18046,
+              "name": "哈格哈兹王子",
+              "point": [
+                65.1,
+                68.67
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": false
+    },
+    "9731": {
+      "quest_id": 9731,
+      "name": "抽水泵结构图",
+      "effective_type": "item_start_explore_trigger",
+      "quest_level": 63,
+      "required_level": 59,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "items",
+          "id": 24330,
+          "name": "抽水泵结构图",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "items"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9731:c1",
+          "family": "explore_trigger",
+          "label": "Drain Located",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "trigger",
+              "entity_id": -9731,
+              "name": "Drain Located",
+              "point": [
+                50.34,
+                40.87
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "trigger",
+              "entity_id": -9731,
+              "name": "Drain Located",
+              "point": [
+                50.34,
+                40.87
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": {
+        "item_id": 24330,
+        "item_name": "抽水泵结构图",
+        "mode": "mob_drop_starts_quest",
+        "sources": [
+          {
+            "kind": "npc",
+            "entity_id": 18088,
+            "name": "血鳞女巫",
+            "point": [
+              26.1,
+              41.0
+            ],
+            "drop_rate_percent": 8.0,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 62.5,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 937.5,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 199.80813987975995,
+            "post_acquisition_component_seconds": 0.0,
+            "standalone_total_seconds": 1137.30813987976
+          },
+          {
+            "kind": "npc",
+            "entity_id": 18089,
+            "name": "血鳞驱奴者",
+            "point": [
+              26.32,
+              40.25
+            ],
+            "drop_rate_percent": 8.0,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 62.5,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 937.5,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 199.03038726003115,
+            "post_acquisition_component_seconds": 0.0,
+            "standalone_total_seconds": 1136.5303872600311
+          },
+          {
+            "kind": "npc",
+            "entity_id": 18340,
+            "name": "蒸汽泵监工",
+            "point": [
+              63.19,
+              64.06
+            ],
+            "drop_rate_percent": 16.0,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 31.25,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 468.75,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 184.96170753174317,
+            "post_acquisition_component_seconds": 0.0,
+            "standalone_total_seconds": 653.7117075317432
+          },
+          {
+            "kind": "npc",
+            "entity_id": 20088,
+            "name": "血鳞监工",
+            "point": [
+              63.04,
+              40.69
+            ],
+            "drop_rate_percent": 16.0,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 31.25,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 468.75,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 158.372088733529,
+            "post_acquisition_component_seconds": 0.0,
+            "standalone_total_seconds": 627.122088733529
+          },
+          {
+            "kind": "npc",
+            "entity_id": 20089,
+            "name": "血鳞唤潮者",
+            "point": [
+              62.96,
+              39.25
+            ],
+            "drop_rate_percent": 8.0,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 62.5,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 937.5,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 158.2484942438593,
+            "post_acquisition_component_seconds": 0.0,
+            "standalone_total_seconds": 1095.7484942438593
+          }
+        ]
+      },
+      "objective_seconds": 468.75,
+      "estimated_total_seconds": 627.122088733529,
+      "issues": [],
+      "notes": [
+        "accept_is_materialized_start_acquisition"
+      ],
+      "hard_blocker": false
+    },
+    "9732": {
+      "quest_id": 9732,
+      "name": "返回沼泽",
+      "effective_type": "handoff",
+      "quest_level": 63,
+      "required_level": 60,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 16885,
+          "name": "阿米希尔·迷雾行者",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9724
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_accept_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9738": {
+      "quest_id": 9738,
+      "name": "失踪的同伴",
+      "effective_type": "kill",
+      "quest_level": 65,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9876
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9738:c1",
+          "family": "kill",
+          "label": "缚地者雷葛",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [],
+          "usable": false
+        },
+        {
+          "id": "q9738:c2",
+          "family": "kill",
+          "label": "博学者拜特",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [],
+          "usable": false
+        },
+        {
+          "id": "q9738:c3",
+          "family": "kill",
+          "label": "除草者格林萨姆",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [],
+          "usable": false
+        },
+        {
+          "id": "q9738:c4",
+          "family": "kill",
+          "label": "唤风者克劳恩",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [],
+          "usable": false
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "component_without_service_point_or_cost"
+      ],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": true
+    },
+    "9739": {
+      "quest_id": 9739,
+      "name": "孢子人的困境",
+      "effective_type": "object_collect_multi",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9739:c1",
+          "family": "object_collect_multi",
+          "label": "成熟的孢子囊",
+          "needed_count": 10,
+          "estimated_objective_seconds": 724.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182069,
+              "name": "成熟的孢子囊",
+              "point": [
+                12.6,
+                61.05
+              ],
+              "service_seconds": 724.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 724.0,
+      "estimated_total_seconds": 770.5767261106107,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9742": {
+      "quest_id": 9742,
+      "name": "更多孢子囊",
+      "effective_type": "object_interact_single",
+      "quest_level": 63,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9739
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9742:c1",
+          "family": "object_interact_single",
+          "label": "成熟的孢子囊",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182069,
+              "name": "成熟的孢子囊",
+              "point": [
+                12.6,
+                61.05
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 46.57672611061066,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9743": {
+      "quest_id": 9743,
+      "name": "天敌",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9743:c1",
+          "family": "mob_drop",
+          "label": "沼泽领主的卷须",
+          "needed_count": 6,
+          "estimated_objective_seconds": 1237.4842220761686,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18124,
+              "name": "枯萎的巨人",
+              "point": [
+                80.96,
+                42.1
+              ],
+              "service_seconds": 2282.745991244401,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18125,
+              "name": "饥饿的真菌巨人",
+              "point": [
+                17.08,
+                60.62
+              ],
+              "service_seconds": 1237.4842220761686,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18127,
+              "name": "沼泽领主",
+              "point": [
+                30.58,
+                64.39
+              ],
+              "service_seconds": 1262.909744050292,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19402,
+              "name": "枯萎的沼泽领主",
+              "point": [
+                81.35,
+                39.66
+              ],
+              "service_seconds": 1519.9262329134958,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19519,
+              "name": "挨饿的沼泽领主",
+              "point": [
+                17.86,
+                60.62
+              ],
+              "service_seconds": 2175.7314083751153,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1237.4842220761686,
+      "estimated_total_seconds": 1253.892523154544,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9744": {
+      "quest_id": 9744,
+      "name": "更多卷须！",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9743
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9744:c1",
+          "family": "mob_drop",
+          "label": "沼泽领主的卷须",
+          "needed_count": 1,
+          "estimated_objective_seconds": 206.2473703460281,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18124,
+              "name": "枯萎的巨人",
+              "point": [
+                80.96,
+                42.1
+              ],
+              "service_seconds": 380.45766520740017,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18125,
+              "name": "饥饿的真菌巨人",
+              "point": [
+                17.08,
+                60.62
+              ],
+              "service_seconds": 206.2473703460281,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18127,
+              "name": "沼泽领主",
+              "point": [
+                30.58,
+                64.39
+              ],
+              "service_seconds": 210.48495734171533,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19402,
+              "name": "枯萎的沼泽领主",
+              "point": [
+                81.35,
+                39.66
+              ],
+              "service_seconds": 253.32103881891598,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19519,
+              "name": "挨饿的沼泽领主",
+              "point": [
+                17.86,
+                60.62
+              ],
+              "service_seconds": 362.62190139585255,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 206.2473703460281,
+      "estimated_total_seconds": 222.6556714244036,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9747": {
+      "quest_id": 9747,
+      "name": "暗泽部族",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9747:c1",
+          "family": "kill",
+          "label": "卡塔鲁",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18080,
+              "name": "卡塔鲁",
+              "point": [
+                85.29,
+                90.93
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9747:c2",
+          "family": "kill",
+          "label": "暗泽神谕者",
+          "needed_count": 6,
+          "estimated_objective_seconds": 90.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18077,
+              "name": "暗泽神谕者",
+              "point": [
+                83.39,
+                84.63
+              ],
+              "service_seconds": 90.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9747:c3",
+          "family": "kill",
+          "label": "暗泽先知",
+          "needed_count": 8,
+          "estimated_objective_seconds": 120.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18079,
+              "name": "暗泽先知",
+              "point": [
+                84.09,
+                83.12
+              ],
+              "service_seconds": 120.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9747:c4",
+          "family": "kill",
+          "label": "暗泽巫医",
+          "needed_count": 6,
+          "estimated_objective_seconds": 90.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 20115,
+              "name": "暗泽巫医",
+              "point": [
+                83.24,
+                85.97
+              ],
+              "service_seconds": 90.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 315.0,
+      "estimated_total_seconds": 448.88073676331607,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9769": {
+      "quest_id": 9769,
+      "name": "时尚无罪",
+      "effective_type": "mob_drop",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9769:c1",
+          "family": "mob_drop",
+          "label": "透明的虫翼",
+          "needed_count": 8,
+          "estimated_objective_seconds": 1684.3192683317097,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18132,
+              "name": "暗光钉刺者",
+              "point": [
+                71.61,
+                68.42
+              ],
+              "service_seconds": 1684.3192683317097,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18133,
+              "name": "沼光抽血者",
+              "point": [
+                16.16,
+                39.51
+              ],
+              "service_seconds": 6943.239021003297,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18283,
+              "name": "黑钉",
+              "point": [
+                49.75,
+                60.06
+              ],
+              "service_seconds": 6522.235387475134,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20197,
+              "name": "水光针刺者",
+              "point": [
+                46.27,
+                35.3
+              ],
+              "service_seconds": 3057.652029006925,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20198,
+              "name": "沼光钉刺者",
+              "point": [
+                10.51,
+                50.18
+              ],
+              "service_seconds": 5312.602378274997,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1684.3192683317097,
+      "estimated_total_seconds": 1798.0587022656632,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9770": {
+      "quest_id": 9770,
+      "name": "沼牙的威胁",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9770:c1",
+          "family": "kill",
+          "label": "沼牙撕裂者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18130,
+              "name": "沼牙撕裂者",
+              "point": [
+                77.99,
+                50.54
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 150.0,
+      "estimated_total_seconds": 202.77168329614403,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9771": {
+      "quest_id": 9771,
+      "name": "寻找斥候尤尔巴",
+      "effective_type": "find_npc_handoff",
+      "quest_level": 62,
+      "required_level": 59,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18035,
+          "name": "斥候尤尔巴",
+          "local_points": 1,
+          "representative_point": [
+            80.75,
+            36.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18035,
+          "name": "斥候尤尔巴",
+          "local_points": 1,
+          "representative_point": [
+            80.75,
+            36.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9774
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 47.14266236691375,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9772": {
+      "quest_id": 9772,
+      "name": "尤尔巴的报告",
+      "effective_type": "mob_drop",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18035,
+          "name": "斥候尤尔巴",
+          "local_points": 1,
+          "representative_point": [
+            80.75,
+            36.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18035,
+          "name": "斥候尤尔巴",
+          "local_points": 1,
+          "representative_point": [
+            80.75,
+            36.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9771
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9772:c1",
+          "family": "mob_drop",
+          "label": "斥候尤尔巴的报告",
+          "needed_count": 1,
+          "estimated_objective_seconds": 75.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18124,
+              "name": "枯萎的巨人",
+              "point": [
+                80.96,
+                42.1
+              ],
+              "service_seconds": 750.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 19519,
+              "name": "挨饿的沼泽领主",
+              "point": [
+                17.86,
+                60.62
+              ],
+              "service_seconds": 75.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 75.0,
+      "estimated_total_seconds": 550.7261222296099,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9773": {
+      "quest_id": 9773,
+      "name": "别再提蘑菇了！",
+      "effective_type": "mob_drop",
+      "quest_level": 61,
+      "required_level": 58,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9773:c1",
+          "family": "mob_drop",
+          "label": "电鳗鱼片",
+          "needed_count": 8,
+          "estimated_objective_seconds": 1609.9430080175161,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18138,
+              "name": "暗泽鳗鱼",
+              "point": [
+                75.47,
+                70.28
+              ],
+              "service_seconds": 1609.9430080175161,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1609.9430080175161,
+      "estimated_total_seconds": 1709.4914700494458,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9774": {
+      "quest_id": 9774,
+      "name": "厚重多头蛇鳞片",
+      "effective_type": "mob_drop",
+      "quest_level": 62,
+      "required_level": 59,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9774:c1",
+          "family": "mob_drop",
+          "label": "厚重多头蛇鳞片",
+          "needed_count": 12,
+          "estimated_objective_seconds": 1125.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18213,
+              "name": "泥潭多头蛇",
+              "point": [
+                70.82,
+                65.25
+              ],
+              "service_seconds": 1125.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18214,
+              "name": "泥爪毁坏者",
+              "point": [
+                51.98,
+                41.68
+              ],
+              "service_seconds": 1125.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18286,
+              "name": "穆拉格什",
+              "point": [
+                42.23,
+                41.42
+              ],
+              "service_seconds": 1125.0,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20324,
+              "name": "干燥的多头蛇",
+              "point": [
+                81.21,
+                41.14
+              ],
+              "service_seconds": 1125.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1125.0,
+      "estimated_total_seconds": 1240.3777525765984,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9775": {
+      "quest_id": 9775,
+      "name": "向暗影猎手德恩加报到",
+      "effective_type": "handoff",
+      "quest_level": 62,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 196.05876817322857,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9778": {
+      "quest_id": 9778,
+      "name": "监护者哈穆特",
+      "effective_type": "handoff",
+      "quest_level": 64,
+      "required_level": 61,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 8.166535903476033,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9785": {
+      "quest_id": 9785,
+      "name": "古树的祝福",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 59,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9785:c1",
+          "family": "kill",
+          "label": "埃西恩",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 17900,
+              "name": "埃西恩",
+              "point": [
+                81.1,
+                63.87
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9785:c2",
+          "family": "kill",
+          "label": "克勒斯",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 17901,
+              "name": "克勒斯",
+              "point": [
+                78.97,
+                67.44
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 30.0,
+      "estimated_total_seconds": 53.011585905022784,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9788": {
+      "quest_id": 9788,
+      "name": "阴冷之地",
+      "effective_type": "object_interact_single",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17956,
+          "name": "伊卡因",
+          "local_points": 1,
+          "representative_point": [
+            80.4,
+            64.16
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9747
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9788:c1",
+          "family": "object_interact_single",
+          "label": "伊卡因的物品",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182122,
+              "name": "伊卡因的物品",
+              "point": [
+                70.49,
+                97.94
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 176.7257145827539,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9795": {
+      "quest_id": 9795,
+      "name": "食人魔的威胁",
+      "effective_type": "handoff",
+      "quest_level": 65,
+      "required_level": 64,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18248,
+          "name": "奈克塔尔",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9796": {
+      "quest_id": 9796,
+      "name": "赞加沼泽的来客",
+      "effective_type": "handoff",
+      "quest_level": 62,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18249,
+          "name": "莫萨卡",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9797": {
+      "quest_id": 9797,
+      "name": "支援加拉达尔",
+      "effective_type": "handoff",
+      "quest_level": 64,
+      "required_level": 64,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18091,
+          "name": "信使加兹格里戈",
+          "local_points": 1,
+          "representative_point": [
+            32.01,
+            50.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18091,
+          "name": "信使加兹格里戈",
+          "local_points": 1,
+          "representative_point": [
+            32.01,
+            50.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18090,
+          "name": "克洛坎上尉",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9806": {
+      "quest_id": 9806,
+      "name": "成熟的孢子",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9806:c1",
+          "family": "mob_drop",
+          "label": "成熟的孢子",
+          "needed_count": 6,
+          "estimated_objective_seconds": 1235.723955744606,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18128,
+              "name": "孢子蝠",
+              "point": [
+                45.71,
+                55.01
+              ],
+              "service_seconds": 1302.561994714493,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18129,
+              "name": "大型孢子蝠",
+              "point": [
+                19.56,
+                34.43
+              ],
+              "service_seconds": 1279.6014468027024,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18134,
+              "name": "沼泽阔步者",
+              "point": [
+                64.24,
+                59.69
+              ],
+              "service_seconds": 1235.723955744606,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18135,
+              "name": "泥沼游荡者",
+              "point": [
+                28.03,
+                44.31
+              ],
+              "service_seconds": 1247.8301619960844,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18280,
+              "name": "孢子之翼",
+              "point": [
+                78.01,
+                45.41
+              ],
+              "service_seconds": 1356.9052910260318,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18281,
+              "name": "沼泽之鞭",
+              "point": [
+                82.07,
+                71.39
+              ],
+              "service_seconds": 1403.718919323595,
+              "shortcut": true
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 1235.723955744606,
+      "estimated_total_seconds": 1563.353086228175,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9807": {
+      "quest_id": 9807,
+      "name": "更多成熟的孢子",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17925,
+          "name": "格沙弗",
+          "local_points": 1,
+          "representative_point": [
+            19.14,
+            49.38
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9806
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9807:c1",
+          "family": "mob_drop",
+          "label": "成熟的孢子",
+          "needed_count": 1,
+          "estimated_objective_seconds": 205.953992624101,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18128,
+              "name": "孢子蝠",
+              "point": [
+                45.71,
+                55.01
+              ],
+              "service_seconds": 217.0936657857488,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18129,
+              "name": "大型孢子蝠",
+              "point": [
+                19.56,
+                34.43
+              ],
+              "service_seconds": 213.26690780045044,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18134,
+              "name": "沼泽阔步者",
+              "point": [
+                64.24,
+                59.69
+              ],
+              "service_seconds": 205.953992624101,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18135,
+              "name": "泥沼游荡者",
+              "point": [
+                28.03,
+                44.31
+              ],
+              "service_seconds": 207.97169366601406,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18280,
+              "name": "孢子之翼",
+              "point": [
+                78.01,
+                45.41
+              ],
+              "service_seconds": 226.15088183767193,
+              "shortcut": true
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18281,
+              "name": "沼泽之鞭",
+              "point": [
+                82.07,
+                71.39
+              ],
+              "service_seconds": 233.95315322059915,
+              "shortcut": true
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 205.953992624101,
+      "estimated_total_seconds": 533.58312310767,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9808": {
+      "quest_id": 9808,
+      "name": "亮顶蘑菇",
+      "effective_type": "object_collect_multi",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9808:c1",
+          "family": "object_collect_multi",
+          "label": "亮顶蘑菇",
+          "needed_count": 10,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182053,
+              "name": "亮顶蘑菇",
+              "point": [
+                31.53,
+                41.29
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 99.53430451590172,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9809": {
+      "quest_id": 9809,
+      "name": "更多亮顶蘑菇",
+      "effective_type": "object_interact_single",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9808
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9809:c1",
+          "family": "object_interact_single",
+          "label": "亮顶蘑菇",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182053,
+              "name": "亮顶蘑菇",
+              "point": [
+                31.53,
+                41.29
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 99.53430451590172,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9814": {
+      "quest_id": 9814,
+      "name": "爆顶蘑菇",
+      "effective_type": "object_collect_multi",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9814:c1",
+          "family": "object_collect_multi",
+          "label": "爆顶蘑菇",
+          "needed_count": 6,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182095,
+              "name": "爆顶蘑菇",
+              "point": [
+                29.17,
+                51.96
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 30.49324465564962,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9816": {
+      "quest_id": 9816,
+      "name": "你见过鱼人吗？",
+      "effective_type": "scripted_item_use",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18014,
+          "name": "巫医托尔加什",
+          "local_points": 1,
+          "representative_point": [
+            32.89,
+            48.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9814
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9816:c1",
+          "family": "scripted_interact",
+          "label": "鱼人宝宝",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18152,
+              "name": "放置鱼人笼的位置",
+              "point": [
+                26.81,
+                22.6
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18152,
+              "name": "放置鱼人笼的位置",
+              "point": [
+                26.81,
+                22.6
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 133.25162741922492,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9817": {
+      "quest_id": 9817,
+      "name": "血鳞纳迦的领袖",
+      "effective_type": "kill",
+      "quest_level": 63,
+      "required_level": 58,
+      "local_starts": [
+        {
+          "kind": "objects",
+          "id": 182115,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            79.08,
+            64.88
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "objects",
+          "id": 182115,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            79.08,
+            64.88
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17858,
+          "name": "监护者哈穆特",
+          "local_points": 1,
+          "representative_point": [
+            79.09,
+            65.27
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "objects"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9817:c1",
+          "family": "kill",
+          "label": "弗亚希王女",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18044,
+              "name": "弗亚希王女",
+              "point": [
+                65.15,
+                40.91
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": false
+    },
+    "9820": {
+      "quest_id": 9820,
+      "name": "通缉：格罗阿克",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 58,
+      "local_starts": [
+        {
+          "kind": "objects",
+          "id": 182165,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            32.0,
+            49.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "objects",
+          "id": 182165,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            32.0,
+            49.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "objects"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9820:c1",
+          "family": "mob_drop",
+          "label": "格罗阿克的徽记",
+          "needed_count": 1,
+          "estimated_objective_seconds": 75.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18159,
+              "name": "大头目格罗阿克",
+              "point": [
+                34.82,
+                34.83
+              ],
+              "service_seconds": 75.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": false
+    },
+    "9822": {
+      "quest_id": 9822,
+      "name": "战斗迫近",
+      "effective_type": "object_interact_single",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9820
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9822:c1",
+          "family": "object_interact_single",
+          "label": "安葛洛什攻击计划",
+          "needed_count": 1,
+          "estimated_objective_seconds": 0.0,
+          "usable_sources": [
+            {
+              "kind": "object",
+              "entity_id": 182166,
+              "name": "安葛洛什攻击计划",
+              "point": [
+                19.88,
+                27.09
+              ],
+              "service_seconds": 0.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 0.0,
+      "estimated_total_seconds": 138.1015618977471,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9823": {
+      "quest_id": 9823,
+      "name": "你死我活",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9822
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9823:c1",
+          "family": "kill",
+          "label": "戈尔费斯大王",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18160,
+              "name": "戈尔费斯大王",
+              "point": [
+                18.39,
+                7.79
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9823:c2",
+          "family": "kill",
+          "label": "安葛洛什殴斗者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18120,
+              "name": "安葛洛什殴斗者",
+              "point": [
+                18.61,
+                7.03
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q9823:c3",
+          "family": "kill",
+          "label": "安葛洛什食魂者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18121,
+              "name": "安葛洛什食魂者",
+              "point": [
+                19.76,
+                6.57
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 315.0,
+      "estimated_total_seconds": 546.7836514576669,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9828": {
+      "quest_id": 9828,
+      "name": "枯萎的孢芽",
+      "effective_type": "item_start_mob_drop_handoff",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "items",
+          "id": 24484,
+          "name": "枯萎的孢芽",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "items"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": {
+        "item_id": 24484,
+        "item_name": "枯萎的孢芽",
+        "mode": "mob_drop_starts_quest",
+        "sources": [
+          {
+            "kind": "npc",
+            "entity_id": 18124,
+            "name": "枯萎的巨人",
+            "point": [
+              80.96,
+              42.1
+            ],
+            "drop_rate_percent": 1.53,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 326.797385620915,
+            "single_kill_seconds": 15.0,
+            "expected_service_seconds": 4901.9607843137255,
+            "respawn_seconds_proxy": 300,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "expected_failure_wait_seconds": 0.0,
+            "post_acquisition_travel_seconds": 31.972352887443495,
+            "post_acquisition_component_seconds": 0,
+            "standalone_total_seconds": 4933.933137201169
+          }
+        ]
+      },
+      "objective_seconds": 4901.9607843137255,
+      "estimated_total_seconds": 4933.933137201169,
+      "issues": [],
+      "notes": [
+        "accept_is_materialized_start_acquisition"
+      ],
+      "hard_blocker": false
+    },
+    "9841": {
+      "quest_id": 9841,
+      "name": "清除沼光抽血者",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9841:c1",
+          "family": "kill",
+          "label": "沼光抽血者",
+          "needed_count": 8,
+          "estimated_objective_seconds": 120.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18133,
+              "name": "沼光抽血者",
+              "point": [
+                16.16,
+                39.51
+              ],
+              "service_seconds": 120.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 120.0,
+      "estimated_total_seconds": 240.38118014448807,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9842": {
+      "quest_id": 9842,
+      "name": "最锋利的刀刃",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18015,
+          "name": "加巴林卡",
+          "local_points": 1,
+          "representative_point": [
+            31.63,
+            49.19
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9841
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9842:c1",
+          "family": "mob_drop",
+          "label": "沼牙切割者之刃",
+          "needed_count": 10,
+          "estimated_objective_seconds": 937.5,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18131,
+              "name": "沼牙切割者",
+              "point": [
+                30.85,
+                57.09
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18285,
+              "name": "\"伯爵\"昂古拉",
+              "point": [
+                32.81,
+                59.53
+              ],
+              "service_seconds": 937.5,
+              "shortcut": true
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 937.5,
+      "estimated_total_seconds": 975.743121928515,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9845": {
+      "quest_id": 9845,
+      "name": "下钩钓鱼",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9845:c1",
+          "family": "kill",
+          "label": "泥爪毁坏者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18214,
+              "name": "泥爪毁坏者",
+              "point": [
+                51.98,
+                41.68
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 150.0,
+      "estimated_total_seconds": 296.6923794032767,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9846": {
+      "quest_id": 9846,
+      "name": "蛮沼之灵",
+      "effective_type": "mob_drop",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9846:c1",
+          "family": "mob_drop",
+          "label": "蛮沼保护图腾",
+          "needed_count": 10,
+          "estimated_objective_seconds": 937.5,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18113,
+              "name": "蛮沼猎人",
+              "point": [
+                46.24,
+                61.32
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 18114,
+              "name": "蛮沼秘法师",
+              "point": [
+                46.57,
+                61.26
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            },
+            {
+              "kind": "npc",
+              "entity_id": 20270,
+              "name": "蛮沼德鲁伊",
+              "point": [
+                43.24,
+                63.37
+              ],
+              "service_seconds": 937.5,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 937.5,
+      "estimated_total_seconds": 1046.6626772224035,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9847": {
+      "quest_id": 9847,
+      "name": "灵魂之盟？",
+      "effective_type": "scripted_summon_kill",
+      "quest_level": 64,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18017,
+          "name": "先知亚尼迪",
+          "local_points": 1,
+          "representative_point": [
+            32.38,
+            51.96
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9846
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9847:c1",
+          "family": "scripted_summon_kill",
+          "label": "蛮沼毒蛇之魂",
+          "needed_count": 1,
+          "estimated_objective_seconds": 9.368333333333334,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18185,
+              "name": "博哈姆废墟图腾放置点",
+              "point": [
+                44.36,
+                66.01
+              ],
+              "service_seconds": 9.368333333333334,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 9.368333333333334,
+      "estimated_total_seconds": 118.58718619150095,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9876": {
+      "quest_id": 9876,
+      "name": "失踪的先遣队",
+      "effective_type": "find_npc_handoff",
+      "quest_level": 65,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17884,
+          "name": "观察者杰哈恩",
+          "local_points": 1,
+          "representative_point": [
+            52.29,
+            35.98
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9732
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 112.59390109725196,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9894": {
+      "quest_id": 9894,
+      "name": "保护观察者",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18070,
+          "name": "唤风者塔鲁·黑蹄",
+          "local_points": 1,
+          "representative_point": [
+            80.37,
+            64.73
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9747
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9894:c1",
+          "family": "kill",
+          "label": "克拉其大王",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18282,
+              "name": "克拉其大王",
+              "point": [
+                72.24,
+                93.89
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 15.0,
+      "estimated_total_seconds": 166.35307421279137,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9895": {
+      "quest_id": 9895,
+      "name": "崩溃的平衡",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9895:c1",
+          "family": "kill",
+          "label": "沼泽之鞭",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18281,
+              "name": "沼泽之鞭",
+              "point": [
+                82.07,
+                71.39
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 15.0,
+      "estimated_total_seconds": 61.93943119631274,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9898": {
+      "quest_id": 9898,
+      "name": "对方的尊重",
+      "effective_type": "mob_drop",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18012,
+          "name": "里维伊",
+          "local_points": 1,
+          "representative_point": [
+            84.96,
+            54.03
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9770
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9898:c1",
+          "family": "mob_drop",
+          "label": "黑钉之刺",
+          "needed_count": 1,
+          "estimated_objective_seconds": 75.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18283,
+              "name": "黑钉",
+              "point": [
+                49.75,
+                60.06
+              ],
+              "service_seconds": 75.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 75.0,
+      "estimated_total_seconds": 329.50570657378034,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9899": {
+      "quest_id": 9899,
+      "name": "未完的职责",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18016,
+          "name": "玛加沙",
+          "local_points": 1,
+          "representative_point": [
+            84.36,
+            54.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9773
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9899:c1",
+          "family": "kill",
+          "label": "孢子之翼",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18280,
+              "name": "孢子之翼",
+              "point": [
+                78.01,
+                45.41
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 15.0,
+      "estimated_total_seconds": 77.48359229797067,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9903": {
+      "quest_id": 9903,
+      "name": "多头蛇之王",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9845
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9903:c1",
+          "family": "kill",
+          "label": "穆拉格什",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18286,
+              "name": "穆拉格什",
+              "point": [
+                42.23,
+                41.42
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 15.0,
+      "estimated_total_seconds": 96.70075295349235,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9904": {
+      "quest_id": 9904,
+      "name": "猎杀恐爪",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18018,
+          "name": "苏尔加亚",
+          "local_points": 1,
+          "representative_point": [
+            32.25,
+            49.61
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9845
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9904:c1",
+          "family": "kill",
+          "label": "恐爪",
+          "needed_count": 1,
+          "estimated_objective_seconds": 15.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 20477,
+              "name": "恐爪",
+              "point": [
+                22.31,
+                45.78
+              ],
+              "service_seconds": 15.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 15.0,
+      "estimated_total_seconds": 88.70305122659684,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9911": {
+      "quest_id": 9911,
+      "name": "沼泽中的伯爵",
+      "effective_type": "item_start_boss_drop_handoff",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "items",
+          "id": 25459,
+          "name": "\"伯爵\"昂古拉的下颚骨",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17831,
+          "name": "观察者莉萨奥",
+          "local_points": 1,
+          "representative_point": [
+            23.32,
+            66.21
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "items"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": {
+        "item_id": 25459,
+        "item_name": "‘伯爵’昂古拉的下颚骨",
+        "mode": "single_boss_drop_starts_quest",
+        "sources": [
+          {
+            "kind": "npc",
+            "entity_id": 18285,
+            "name": "‘伯爵’昂古拉",
+            "point": [
+              32.81,
+              59.53
+            ],
+            "drop_rate_percent": 82.7,
+            "drop_rate_source": "external_wotlk_proxy",
+            "expected_kills": 6.045949214026602,
+            "single_kill_seconds": 15.0,
+            "respawn_seconds_proxy": 300,
+            "expected_kill_seconds": 11.05602579604998,
+            "expected_failure_wait_seconds": 313.78476420798046,
+            "expected_service_seconds": 404.4740024183795,
+            "per_character_required_count": 1,
+            "characters": 5,
+            "five_box_required_count": 5,
+            "post_acquisition_travel_seconds": 37.64331723647971,
+            "post_acquisition_component_seconds": 0,
+            "standalone_total_seconds": 442.1173196548592
+          }
+        ]
+      },
+      "objective_seconds": 404.4740024183795,
+      "estimated_total_seconds": 442.1173196548592,
+      "issues": [],
+      "notes": [
+        "accept_is_materialized_start_acquisition"
+      ],
+      "hard_blocker": false
+    },
+    "9912": {
+      "quest_id": 9912,
+      "name": "塞纳里奥远征队",
+      "effective_type": "handoff",
+      "quest_level": 62,
+      "required_level": 61,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 16885,
+          "name": "阿米希尔·迷雾行者",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17841,
+          "name": "伊谢尔·风歌",
+          "local_points": 1,
+          "representative_point": [
+            78.4,
+            62.02
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_accept_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9919": {
+      "quest_id": 9919,
+      "name": "孢子村",
+      "effective_type": "handoff",
+      "quest_level": 64,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17923,
+          "name": "法恩森",
+          "local_points": 1,
+          "representative_point": [
+            19.02,
+            62.43
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17924,
+          "name": "姆希菲",
+          "local_points": 1,
+          "representative_point": [
+            19.68,
+            52.07
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": 0,
+      "estimated_total_seconds": 24.9183695953006,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "9957": {
+      "quest_id": 9957,
+      "name": "塞纳里奥树林出事了？",
+      "effective_type": "handoff",
+      "quest_level": 63,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17834,
+          "name": "莱森·月火",
+          "local_points": 1,
+          "representative_point": [
+            78.53,
+            63.15
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18446,
+          "name": "缚地者塔弗格伦",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "9968": {
+      "quest_id": 9968,
+      "name": "奇怪的能量",
+      "effective_type": "mob_drop",
+      "quest_level": 63,
+      "required_level": 62,
+      "local_starts": [],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18446,
+          "name": "缚地者塔弗格伦",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18446,
+          "name": "缚地者塔弗格伦",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q9968:c1",
+          "family": "mob_drop",
+          "label": "邪恶巨蛾样本",
+          "needed_count": 4,
+          "estimated_objective_seconds": null,
+          "usable_sources": [],
+          "usable": false
+        },
+        {
+          "id": "q9968:c2",
+          "family": "mob_drop",
+          "label": "蛾子样本",
+          "needed_count": 4,
+          "estimated_objective_seconds": null,
+          "usable_sources": [],
+          "usable": false
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_accept_location",
+        "no_local_turnin_location",
+        "component_without_service_point_or_cost"
+      ],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": true
+    },
+    "10096": {
+      "quest_id": 10096,
+      "name": "拯救孢子人",
+      "effective_type": "kill",
+      "quest_level": 62,
+      "required_level": 60,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 17909,
+          "name": "劳兰娜·萨维尔",
+          "local_points": 1,
+          "representative_point": [
+            80.32,
+            64.17
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17909,
+          "name": "劳兰娜·萨维尔",
+          "local_points": 1,
+          "representative_point": [
+            80.32,
+            64.17
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 17909,
+          "name": "劳兰娜·萨维尔",
+          "local_points": 1,
+          "representative_point": [
+            80.32,
+            64.17
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 17909,
+          "name": "劳兰娜·萨维尔",
+          "local_points": 1,
+          "representative_point": [
+            80.32,
+            64.17
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9747
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q10096:c1",
+          "family": "kill",
+          "label": "沼泽掘泥者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18137,
+              "name": "沼泽掘泥者",
+              "point": [
+                73.71,
+                94.18
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q10096:c2",
+          "family": "kill",
+          "label": "沼泽潜伏者",
+          "needed_count": 10,
+          "estimated_objective_seconds": 150.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18136,
+              "name": "沼泽潜伏者",
+              "point": [
+                73.71,
+                94.18
+              ],
+              "service_seconds": 150.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 300.0,
+      "estimated_total_seconds": 451.34584541661286,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    },
+    "10103": {
+      "quest_id": 10103,
+      "name": "向祖莱报到",
+      "effective_type": "handoff",
+      "quest_level": 61,
+      "required_level": 61,
+      "local_starts": [],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 16789,
+          "name": "游侠队长维恩雷",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18011,
+          "name": "祖莱",
+          "local_points": 1,
+          "representative_point": [
+            85.28,
+            54.75
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_accept_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "10105": {
+      "quest_id": 10105,
+      "name": "给拉克妮亚的消息",
+      "effective_type": "handoff",
+      "quest_level": 62,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18385,
+          "name": "拉克妮亚",
+          "local_points": 0,
+          "representative_point": null,
+          "local_executable": false
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [
+        "no_local_turnin_location"
+      ],
+      "notes": [],
+      "hard_blocker": true
+    },
+    "10117": {
+      "quest_id": 10117,
+      "name": "通缉：穆玛基酋长",
+      "effective_type": "mob_drop",
+      "quest_level": 64,
+      "required_level": 58,
+      "local_starts": [
+        {
+          "kind": "objects",
+          "id": 182165,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            32.0,
+            49.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "objects",
+          "id": 182165,
+          "name": "通缉布告",
+          "local_points": 1,
+          "representative_point": [
+            32.0,
+            49.33
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "objects"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q10117:c1",
+          "family": "mob_drop",
+          "label": "穆玛基酋长的图腾",
+          "needed_count": 1,
+          "estimated_objective_seconds": 75.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 19174,
+              "name": "穆玛基酋长",
+              "point": [
+                23.78,
+                26.75
+              ],
+              "service_seconds": 75.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": null,
+      "estimated_total_seconds": null,
+      "issues": [],
+      "notes": [
+        "solo_total_missing_or_not_materialized"
+      ],
+      "hard_blocker": false
+    },
+    "10118": {
+      "quest_id": 10118,
+      "name": "警告匕潭失落者",
+      "effective_type": "kill",
+      "quest_level": 64,
+      "required_level": 62,
+      "local_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "local_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_starts": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "all_finishes": [
+        {
+          "kind": "npcs",
+          "id": 18013,
+          "name": "暗影猎手德恩加",
+          "local_points": 1,
+          "representative_point": [
+            30.74,
+            50.89
+          ],
+          "local_executable": true
+        }
+      ],
+      "start_kinds": [
+        "npcs"
+      ],
+      "finish_kinds": [
+        "npcs"
+      ],
+      "pre_any": [
+        9822
+      ],
+      "pre_all": [],
+      "external_pre_any": [],
+      "external_pre_all": [],
+      "components": [
+        {
+          "id": "q10118:c1",
+          "family": "kill",
+          "label": "匕潭刺客",
+          "needed_count": 3,
+          "estimated_objective_seconds": 45.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18116,
+              "name": "匕潭刺客",
+              "point": [
+                26.28,
+                22.46
+              ],
+              "service_seconds": 45.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        },
+        {
+          "id": "q10118:c2",
+          "family": "kill",
+          "label": "匕潭泥居者",
+          "needed_count": 15,
+          "estimated_objective_seconds": 225.0,
+          "usable_sources": [
+            {
+              "kind": "npc",
+              "entity_id": 18115,
+              "name": "匕潭泥居者",
+              "point": [
+                25.13,
+                23.78
+              ],
+              "service_seconds": 225.0,
+              "shortcut": false
+            }
+          ],
+          "usable": true
+        }
+      ],
+      "start_acquisition": null,
+      "objective_seconds": 270.0,
+      "estimated_total_seconds": 413.0944368210012,
+      "issues": [],
+      "notes": [],
+      "hard_blocker": false
+    }
+  }
+}

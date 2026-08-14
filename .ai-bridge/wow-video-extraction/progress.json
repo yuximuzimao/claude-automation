@@ -1,46 +1,21 @@
 {
   "project": "wow-quest-route-video-extraction",
-  "updated_at": "2026-08-12T16:01:00+08:00",
+  "updated_at": "2026-08-13T17:55:00+08:00",
   "phase": "episode_fact_extraction",
   "series": {
     "total_episodes": 53,
     "first_processed_episode": 13,
     "completed_episodes": [
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38
+      13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43
     ],
-    "latest_completed_episode": 38
+    "latest_completed_episode": 43
   },
   "next_episode": {
-    "episode": 39,
-    "title": "北风苔原73",
-    "bvid": "BV1fdraBbE9B",
-    "duration": "45:09",
-    "duration_seconds": 2709,
+    "episode": 44,
+    "title": "嚎风峡湾75",
+    "bvid": "BV1unkTB3Ejj",
+    "duration": "60:09",
+    "duration_seconds": 3609,
     "processed": false
   },
   "workflow_documents": {
@@ -56,10 +31,10 @@
     "read_first": [
       "/Users/chat/claude/wow-quest-route/docs/video-extraction/README.md",
       "/Users/chat/claude/wow-quest-route/docs/video-extraction/CURRENT.md",
-      "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-38-extraction.md"
+      "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-43-extraction.md"
     ],
-    "optional_machine_checkpoint": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-38-events.json",
-    "instruction": "只处理第39集《北风苔原73》，写独立Markdown/JSON并同步更新项目CURRENT、progress.json和桥接CURRENT，关闭本轮B站标签然后停止，不进入第40集。第38集已闭环11650《还要一些东西……》、11730《主与仆》、11692《寻找比希》；第39集优先核验11798《机甲专家麦卡佐德》和11713《侦查虫孔》的最终交付，以及11694《山洞中的瘟疫》后续。11938《争取时间》仍无完成或放弃证据，继续保留。"
+    "optional_machine_checkpoint": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-43-events.json",
+    "instruction": "只处理第44集《嚎风峡湾75》，写独立Markdown/JSON并同步更新项目CURRENT、progress.json和桥接CURRENT，关闭本轮B站标签然后停止，不进入第45集。第43集明确最终完成25项任务、Questie×2校准任务经验667700；片尾嚎风峡湾最高优先级是11448《探险者协会哨站》、11291《前往西部卫戍要塞！》，11252《杀入乌特加德！》与联盟13205《削减军备》已接受但未完成。第42集遗留12253《拯救暮冬城的平民》、12459《创造与毁灭的力量》、12456《奥雷托斯的羽毛》在第43集约38:40任务日志仍直接可见；12447、12470、12511、12794、12464没有新增最终交付/放弃证据，继续保留。12167《消灭教徒》仍为第40→41集剪辑缺口，不能补造或自动闭环。"
   },
   "post_series": {
     "trigger": "episode 53 completed and validated",

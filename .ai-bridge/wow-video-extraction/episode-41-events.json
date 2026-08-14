@@ -1,0 +1,110 @@
+{
+  "episode": 41,
+  "title": "龙骨荒野 74",
+  "bvid": "BV1BurjB1Ep3",
+  "duration_seconds": 2654,
+  "display_duration": "44:14",
+  "series_index": "41/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 45,
+      "fine20_a": 45,
+      "fine20_b": 44,
+      "fine20_c": 44,
+      "fine5_a": 59,
+      "fine5_b": 82,
+      "fine5_c": 74,
+      "fine5_d": 69
+    },
+    "formal_total": 462,
+    "manifest_count": 8,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [],
+  "level_continuity_note": "第41集内部没有新的直接玩家等级证据；标题74仅作为合集元数据，不用于绑定升级任务。",
+  "events": [
+    {"time_range":"02:20-03:20 approx","action":"complete_and_accept_next","quest_id":12098,"quest_name":"搜索因度雷村","experience_shown":40600,"next_quest_id":12107,"next_quest_name":"魔网能量线的终端","confidence":"high"},
+    {"time_range":"06:00-07:10 approx","action":"complete","quest_id":12117,"quest_name":"前往莫亚基港口","experience_shown":4100,"confidence":"high"},
+    {"time_range":"13:25-13:40 approx","action":"complete","quest_id":11960,"quest_name":"未来的种子","experience_shown":40600,"confidence":"high"},
+    {"time_range":"13:30-13:45 approx","action":"complete_and_accept_next","quest_id":11958,"quest_name":"不要浪费","experience_shown":40600,"next_quest_id":11959,"next_quest_name":"消灭洛根","confidence":"high","evidence_note":"此前持续拾取被偷走的莫亚基货物；Questie明确11958 next=11959、11959 pre=11958；长者库纳尼处第二条40600后任务窗口切为消灭洛根。"},
+    {"time_range":"16:10-16:40 approx","action":"complete_and_accept_next","quest_id":11959,"quest_name":"消灭洛根","experience_shown":51300,"next_quest_id":12028,"next_quest_name":"灵魂视界","confidence":"high"},
+    {"time_range":"16:40-17:00 approx","action":"accept","quest_id":12009,"quest_name":"图尔凯的螃蟹陷阱","confidence":"high"},
+    {"time_range":"19:35-20:20 approx","action":"complete_and_accept_next","quest_id":12028,"quest_name":"灵魂视界","experience_shown":40600,"next_quest_id":12030,"next_quest_name":"长者玛纳洛","confidence":"high"},
+    {"time_range":"23:15-24:00 approx","action":"complete","quest_id":12009,"quest_name":"图尔凯的螃蟹陷阱","experience_shown":40600,"confidence":"high"},
+    {"time_range":"25:45-26:20 approx","action":"complete_and_accept_next","quest_id":12030,"quest_name":"长者玛纳洛","experience_shown":40600,"next_quest_id":12031,"next_quest_name":"解脱和安息","confidence":"high"},
+    {"time_range":"29:45-30:35 approx","action":"complete_and_accept_next","quest_id":12031,"quest_name":"解脱和安息","experience_shown":40600,"next_quest_id":12032,"next_quest_name":"海洋女神","confidence":"high"},
+    {"time_range":"30:55-31:10 approx","action":"complete_and_accept_next","quest_id":12107,"quest_name":"魔网能量线的终端","experience_shown":50800,"next_quest_id":12119,"next_quest_name":"拜见巨龙女王","confidence":"high"},
+    {"time_range":"36:55-37:00 approx","action":"complete","quest_id":12032,"quest_name":"海洋女神","experience_calibrated":50800,"experience_source":"Questie base 25400 x2; task window/completion direct, XP line unstable","confidence":"high"},
+    {"time_range":"38:30-39:00 approx","action":"complete_and_accept_next","quest_id":12119,"quest_name":"拜见巨龙女王","experience_shown":10200,"next_quest_id":12766,"next_quest_name":"与你们的大使相谈","confidence":"high"},
+    {"time_range":"39:35-40:20 approx","action":"complete_and_accept_next","quest_id":12766,"quest_name":"与你们的大使相谈","experience_shown":4100,"next_quest_id":12460,"next_quest_name":"前往红玉巨龙圣地","confidence":"high"},
+    {"time_range":"around 42:00","action":"accept","quest_id":12447,"quest_name":"黑曜石巨龙圣地","confidence":"high"},
+    {"time_range":"around 42:00","action":"accept","quest_id":12470,"quest_name":"永恒之龙的秘密","confidence":"high"},
+    {"time_range":"42:20-43:20 approx","action":"active_newly_visible_accept_time_uncertain","quest_id":12458,"quest_name":"鞭笞者的种子","confidence":"high"}
+  ],
+  "completed_quests": [12098,12117,11960,11958,11959,12028,12009,12030,12031,12107,12032,12119,12766],
+  "completed_quest_count": 13,
+  "calibrated_completed_quest_xp_total": 455500,
+  "closed_from_previous_unresolved": [12098,12117],
+  "cross_episode_gaps": [
+    {
+      "quest_id":12167,
+      "quest_name":"消灭教徒",
+      "state":"turnin_unknown_across_cut",
+      "prior_state":"episode40_objectives_complete_not_turnin",
+      "evidence":"第41集0-80秒5秒级密集复查没有典狱官朱蒂·月歌交付窗口或可绑定40600；开场已发生剪辑且追踪栏不再显示任务。追踪栏缺失不能证明交付或放弃。"
+    }
+  ],
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":12460,"quest_name":"前往红玉巨龙圣地","state":"accepted_not_completed","priority":"highest","note":"12766严格后续，约40分钟后接受。"},
+    {"quest_id":12447,"quest_name":"黑曜石巨龙圣地","state":"accepted_not_completed","priority":"highest","note":"约42分钟直接接受，本集未完成。"},
+    {"quest_id":12470,"quest_name":"永恒之龙的秘密","state":"accepted_not_completed","priority":"highest","note":"约42分钟直接接受，本集未完成。"},
+    {"quest_id":12458,"quest_name":"鞭笞者的种子","state":"active_accept_time_uncertain","priority":"highest","note":"片尾追踪明确出现种子目标；精确接受帧未捕获。"},
+    {"quest_id":12794,"quest_name":"魔法王国达拉然","state":"active_accept_time_uncertain","priority":"high","note":"联盟版本；约35分钟后持续出现在追踪中，本集未完成。"},
+    {"quest_id":12167,"quest_name":"消灭教徒","state":"turnin_unknown_across_cut","priority":"gap_audit","note":"第40集目标完成，第41集无最终交付直接证据。"},
+    {"quest_id":12174,"quest_name":"高级指挥官哈尔弗·维姆班恩","state":"older_unresolved","priority":"high"},
+    {"quest_id":12511,"quest_name":"丘陵援兵","state":"older_unresolved","priority":"high"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"older_unresolved"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"older_unresolved"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"older_unresolved"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"older_unresolved"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"older_unresolved"},
+    {"quest_id":10004,"state":"older_unresolved"},
+    {"quest_id":9900,"state":"older_unresolved"},
+    {"quest_id":9925,"state":"older_unresolved"},
+    {"quest_id":9882,"state":"older_unresolved"},
+    {"quest_id":9937,"state":"older_unresolved_alliance_version"},
+    {"quest_id":9869,"state":"older_unresolved"},
+    {"quest_id":10810,"state":"older_unresolved"},
+    {"quest_id":9962,"state":"previously_failed_retention_or_abandonment_uncertain"}
+  ],
+  "evidence_cautions": [
+    "12167消灭教徒跨集开场不可见，但没有最终交付直接证据；不得因追踪栏缺失自动闭环。",
+    "11958不要浪费的完成名未稳定OCR，但被偷走的莫亚基货物、第二条40600、长者库纳尼窗口及Questie 11958→11959严格链共同确认。",
+    "12032海洋女神的完成窗口直接可见，经验用Questie基础25400×2校准为50800。",
+    "第41集没有新的直接玩家等级证据。"
+  ],
+  "next_episode": {
+    "episode": 42,
+    "title": "龙骨荒野 74.5",
+    "bvid": "BV1EwrWBeEMZ",
+    "duration_seconds": 3693,
+    "duration": "61:33",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 12,
+  "notes": [
+    "第40集遗留12098搜索因度雷村和12117前往莫亚基港口在本集闭环。",
+    "莫亚基/因度雷链推进并完成到12032海洋女神。",
+    "联盟魔网/龙眠链推进12107→12119→12766，并接12460前往红玉巨龙圣地。",
+    "片尾新活动任务包括12447、12470、12458；12794魔法王国达拉然也仍活动。",
+    "12167消灭教徒保留为跨集剪辑缺口，不计完成。",
+    "第42集只读查询元数据，未导航、播放、截图或处理。"
+  ]
+}

@@ -1,0 +1,1057 @@
+{
+  "meta": {
+    "model": "Route Atlas compressed deterministic exact v1-seconds",
+    "mother_model": "Precedence-Constrained Shortest Path (PC-SP)",
+    "status": "PROVEN_OPTIMAL",
+    "zone_id": 3521,
+    "zone_name": "赞加沼泽",
+    "quest_ids": [
+      9747,
+      9788,
+      9895,
+      9773,
+      9899,
+      9769,
+      9770,
+      9898
+    ],
+    "start_xy": [
+      78.4,
+      62.02
+    ],
+    "start_name": "塞纳里奥庇护所（伊谢尔·风歌锚点）",
+    "task_profiles_sha256": "cb48ed55ab8b432dd821f5045dfdcf7ac0805115cb63532a4fe36785ca68b0ed",
+    "questie_sha256": "3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861",
+    "movement_model": {
+      "map_width_yards": 5027.0835,
+      "map_height_yards": 3352.0833,
+      "travel_speed_yards_per_sec": 14.0,
+      "terrain": "ignored; uniform flat-map proxy"
+    },
+    "service_model": "Materialized seconds from task profiles. Kill: count * per-kill seconds. Drop: expected kills from Questie drop rate * per-kill seconds. Shared entity service uses max covered requirement seconds, not sum. Boss/rare low-density shortcut sources are excluded from baseline routing.",
+    "proof_scope": "PROVEN_OPTIMAL means no lower expected-time route exists inside this deterministic compressed v1 model. It does not prove Titan wall-clock optimality because terrain, combat variance, loot variance, spawn contention, and full-map task selection are not yet modeled exactly."
+  },
+  "result": {
+    "status": "PROVEN_OPTIMAL",
+    "total_seconds": 1293.2745,
+    "travel_seconds": 664.9391,
+    "service_seconds": 628.3354,
+    "expanded_states": 130803,
+    "route": [
+      {
+        "type": "MOVE",
+        "from": "START",
+        "to": "npc:17834",
+        "distance": 2.7456,
+        "travel_cost": 2.7456,
+        "from_name": "塞纳里奥庇护所（伊谢尔·风歌锚点）",
+        "to_name": "莱森·月火"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9895,
+        "quest": "崩溃的平衡",
+        "location": "npc:17834"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:17834",
+        "to": "npc:17956",
+        "distance": 7.1369,
+        "travel_cost": 7.1369,
+        "from_name": "莱森·月火",
+        "to_name": "伊卡因"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9747,
+        "quest": "暗泽部族",
+        "location": "npc:17956"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:17956",
+        "to": "npc:18012",
+        "distance": 29.2643,
+        "travel_cost": 29.2643,
+        "from_name": "伊卡因",
+        "to_name": "里维伊"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9770,
+        "quest": "沼牙的威胁",
+        "location": "npc:18012"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:18012",
+        "to": "npc:18016",
+        "distance": 2.2711,
+        "travel_cost": 2.2711,
+        "from_name": "里维伊",
+        "to_name": "玛加沙"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9769,
+        "quest": "时尚无罪",
+        "location": "npc:18016"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9773,
+        "quest": "别再提蘑菇了！",
+        "location": "npc:18016"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:18016",
+        "to": "service:18130",
+        "distance": 24.6076,
+        "travel_cost": 24.6076,
+        "from_name": "玛加沙",
+        "to_name": "沼牙撕裂者"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18130,
+        "entity": "沼牙撕裂者",
+        "location": "service:18130",
+        "requirements": [
+          "q9770:entity:creature:18130"
+        ],
+        "quests": [
+          9770
+        ],
+        "counts": {
+          "q9770:entity:creature:18130": 10
+        },
+        "requirement_service_costs": {
+          "q9770:entity:creature:18130": 67.5833
+        },
+        "service_cost": 67.5833
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9770,
+        "quest": "沼牙的威胁",
+        "location": "service:18130"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18130",
+        "to": "service:18138",
+        "distance": 48.1228,
+        "travel_cost": 48.1228,
+        "from_name": "沼牙撕裂者",
+        "to_name": "暗泽鳗鱼"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18138,
+        "entity": "暗泽鳗鱼",
+        "location": "service:18138",
+        "requirements": [
+          "q9773:item:24374"
+        ],
+        "quests": [
+          9773
+        ],
+        "counts": {
+          "q9773:item:24374": 8
+        },
+        "requirement_service_costs": {
+          "q9773:item:24374": 181.3332
+        },
+        "service_cost": 181.3332
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9773,
+        "quest": "别再提蘑菇了！",
+        "location": "service:18138"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18138",
+        "to": "service:18077",
+        "distance": 44.6016,
+        "travel_cost": 44.6016,
+        "from_name": "暗泽鳗鱼",
+        "to_name": "暗泽神谕者"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18077,
+        "entity": "暗泽神谕者",
+        "location": "service:18077",
+        "requirements": [
+          "q9747:entity:creature:18077"
+        ],
+        "quests": [
+          9747
+        ],
+        "counts": {
+          "q9747:entity:creature:18077": 6
+        },
+        "requirement_service_costs": {
+          "q9747:entity:creature:18077": 40.55
+        },
+        "service_cost": 40.55
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18077",
+        "to": "service:20115",
+        "distance": 3.2533,
+        "travel_cost": 3.2533,
+        "from_name": "暗泽神谕者",
+        "to_name": "暗泽巫医"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 20115,
+        "entity": "暗泽巫医",
+        "location": "service:20115",
+        "requirements": [
+          "q9747:entity:creature:20115"
+        ],
+        "quests": [
+          9747
+        ],
+        "counts": {
+          "q9747:entity:creature:20115": 6
+        },
+        "requirement_service_costs": {
+          "q9747:entity:creature:20115": 42.95
+        },
+        "service_cost": 42.95
+      },
+      {
+        "type": "MOVE",
+        "from": "service:20115",
+        "to": "service:18080",
+        "distance": 13.9723,
+        "travel_cost": 13.9723,
+        "from_name": "暗泽巫医",
+        "to_name": "卡塔鲁"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18080,
+        "entity": "卡塔鲁",
+        "location": "service:18080",
+        "requirements": [
+          "q9747:entity:creature:18080"
+        ],
+        "quests": [
+          9747
+        ],
+        "counts": {
+          "q9747:entity:creature:18080": 1
+        },
+        "requirement_service_costs": {
+          "q9747:entity:creature:18080": 8.5483
+        },
+        "service_cost": 8.5483
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18080",
+        "to": "service:18079",
+        "distance": 19.1899,
+        "travel_cost": 19.1899,
+        "from_name": "卡塔鲁",
+        "to_name": "暗泽先知"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18079,
+        "entity": "暗泽先知",
+        "location": "service:18079",
+        "requirements": [
+          "q9747:entity:creature:18079"
+        ],
+        "quests": [
+          9747
+        ],
+        "counts": {
+          "q9747:entity:creature:18079": 8
+        },
+        "requirement_service_costs": {
+          "q9747:entity:creature:18079": 54.0667
+        },
+        "service_cost": 54.0667
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9747,
+        "quest": "暗泽部族",
+        "location": "service:18079"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18079",
+        "to": "service:18281",
+        "distance": 29.0072,
+        "travel_cost": 29.0072,
+        "from_name": "暗泽先知",
+        "to_name": "沼泽之鞭"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18281,
+        "entity": "沼泽之鞭",
+        "location": "service:18281",
+        "requirements": [
+          "q9895:entity:creature:18281"
+        ],
+        "quests": [
+          9895
+        ],
+        "counts": {
+          "q9895:entity:creature:18281": 1
+        },
+        "requirement_service_costs": {
+          "q9895:entity:creature:18281": 25.79
+        },
+        "service_cost": 25.79
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9895,
+        "quest": "崩溃的平衡",
+        "location": "service:18281"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18281",
+        "to": "npc:17956",
+        "distance": 18.3203,
+        "travel_cost": 18.3203,
+        "from_name": "沼泽之鞭",
+        "to_name": "伊卡因"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9747,
+        "quest": "暗泽部族",
+        "location": "npc:17956"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9788,
+        "quest": "阴冷之地",
+        "location": "npc:17956"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:17956",
+        "to": "npc:18016",
+        "distance": 27.4983,
+        "travel_cost": 27.4983,
+        "from_name": "伊卡因",
+        "to_name": "玛加沙"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9773,
+        "quest": "别再提蘑菇了！",
+        "location": "npc:18016"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9899,
+        "quest": "未完的职责",
+        "location": "npc:18016"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:18016",
+        "to": "npc:18012",
+        "distance": 2.2711,
+        "travel_cost": 2.2711,
+        "from_name": "玛加沙",
+        "to_name": "里维伊"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9770,
+        "quest": "沼牙的威胁",
+        "location": "npc:18012"
+      },
+      {
+        "type": "ACCEPT",
+        "quest_id": 9898,
+        "quest": "对方的尊重",
+        "location": "npc:18012"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:18012",
+        "to": "service:18280",
+        "distance": 32.3848,
+        "travel_cost": 32.3848,
+        "from_name": "里维伊",
+        "to_name": "孢子之翼"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18280,
+        "entity": "孢子之翼",
+        "location": "service:18280",
+        "requirements": [
+          "q9899:entity:creature:18280"
+        ],
+        "quests": [
+          9899
+        ],
+        "counts": {
+          "q9899:entity:creature:18280": 1
+        },
+        "requirement_service_costs": {
+          "q9899:entity:creature:18280": 8.9017
+        },
+        "service_cost": 8.9017
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9899,
+        "quest": "未完的职责",
+        "location": "service:18280"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18280",
+        "to": "service:18283",
+        "distance": 107.3668,
+        "travel_cost": 107.3668,
+        "from_name": "孢子之翼",
+        "to_name": "黑钉"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18283,
+        "entity": "黑钉",
+        "location": "service:18283",
+        "requirements": [
+          "q9898:item:25448"
+        ],
+        "quests": [
+          9898
+        ],
+        "counts": {
+          "q9898:item:25448": 1
+        },
+        "requirement_service_costs": {
+          "q9898:item:25448": 8.9017
+        },
+        "service_cost": 8.9017
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9898,
+        "quest": "对方的尊重",
+        "location": "service:18283"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18283",
+        "to": "service:182122",
+        "distance": 117.3553,
+        "travel_cost": 117.3553,
+        "from_name": "黑钉",
+        "to_name": "伊卡因的物品"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 182122,
+        "entity": "伊卡因的物品",
+        "location": "service:182122",
+        "requirements": [
+          "q9788:item:24411"
+        ],
+        "quests": [
+          9788
+        ],
+        "counts": {
+          "q9788:item:24411": 1
+        },
+        "requirement_service_costs": {
+          "q9788:item:24411": 0.0
+        },
+        "service_cost": 0.0
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9788,
+        "quest": "阴冷之地",
+        "location": "service:182122"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:182122",
+        "to": "service:18132",
+        "distance": 70.7954,
+        "travel_cost": 70.7954,
+        "from_name": "伊卡因的物品",
+        "to_name": "暗光钉刺者"
+      },
+      {
+        "type": "SERVICE",
+        "entity_id": 18132,
+        "entity": "暗光钉刺者",
+        "location": "service:18132",
+        "requirements": [
+          "q9769:item:24372"
+        ],
+        "quests": [
+          9769
+        ],
+        "counts": {
+          "q9769:item:24372": 8
+        },
+        "requirement_service_costs": {
+          "q9769:item:24372": 189.7105
+        },
+        "service_cost": 189.7105
+      },
+      {
+        "type": "COMPLETE",
+        "quest_id": 9769,
+        "quest": "时尚无罪",
+        "location": "service:18132"
+      },
+      {
+        "type": "MOVE",
+        "from": "service:18132",
+        "to": "npc:17834",
+        "distance": 27.8684,
+        "travel_cost": 27.8684,
+        "from_name": "暗光钉刺者",
+        "to_name": "莱森·月火"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9895,
+        "quest": "崩溃的平衡",
+        "location": "npc:17834"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:17834",
+        "to": "npc:17956",
+        "distance": 7.1369,
+        "travel_cost": 7.1369,
+        "from_name": "莱森·月火",
+        "to_name": "伊卡因"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9788,
+        "quest": "阴冷之地",
+        "location": "npc:17956"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:17956",
+        "to": "npc:18016",
+        "distance": 27.4983,
+        "travel_cost": 27.4983,
+        "from_name": "伊卡因",
+        "to_name": "玛加沙"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9769,
+        "quest": "时尚无罪",
+        "location": "npc:18016"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9899,
+        "quest": "未完的职责",
+        "location": "npc:18016"
+      },
+      {
+        "type": "MOVE",
+        "from": "npc:18016",
+        "to": "npc:18012",
+        "distance": 2.2711,
+        "travel_cost": 2.2711,
+        "from_name": "玛加沙",
+        "to_name": "里维伊"
+      },
+      {
+        "type": "TURNIN",
+        "quest_id": 9898,
+        "quest": "对方的尊重",
+        "location": "npc:18012"
+      }
+    ]
+  },
+  "model": {
+    "locations": {
+      "START": {
+        "id": "START",
+        "name": "塞纳里奥庇护所（伊谢尔·风歌锚点）",
+        "x": 78.4,
+        "y": 62.02,
+        "kind": "start",
+        "entity_id": null
+      },
+      "npc:17956": {
+        "id": "npc:17956",
+        "name": "伊卡因",
+        "x": 80.4,
+        "y": 64.16,
+        "kind": "npc",
+        "entity_id": 17956
+      },
+      "service:18080": {
+        "id": "service:18080",
+        "name": "卡塔鲁",
+        "x": 85.29,
+        "y": 90.93,
+        "kind": "service",
+        "entity_id": 18080
+      },
+      "service:18077": {
+        "id": "service:18077",
+        "name": "暗泽神谕者",
+        "x": 83.39,
+        "y": 84.63,
+        "kind": "service",
+        "entity_id": 18077
+      },
+      "service:18079": {
+        "id": "service:18079",
+        "name": "暗泽先知",
+        "x": 84.09,
+        "y": 83.12,
+        "kind": "service",
+        "entity_id": 18079
+      },
+      "service:20115": {
+        "id": "service:20115",
+        "name": "暗泽巫医",
+        "x": 83.24,
+        "y": 85.97,
+        "kind": "service",
+        "entity_id": 20115
+      },
+      "service:182122": {
+        "id": "service:182122",
+        "name": "伊卡因的物品",
+        "x": 70.49,
+        "y": 97.94,
+        "kind": "service",
+        "entity_id": 182122
+      },
+      "npc:17834": {
+        "id": "npc:17834",
+        "name": "莱森·月火",
+        "x": 78.53,
+        "y": 63.15,
+        "kind": "npc",
+        "entity_id": 17834
+      },
+      "service:18281": {
+        "id": "service:18281",
+        "name": "沼泽之鞭",
+        "x": 82.07,
+        "y": 71.39,
+        "kind": "service",
+        "entity_id": 18281
+      },
+      "npc:18016": {
+        "id": "npc:18016",
+        "name": "玛加沙",
+        "x": 84.36,
+        "y": 54.33,
+        "kind": "npc",
+        "entity_id": 18016
+      },
+      "service:18138": {
+        "id": "service:18138",
+        "name": "暗泽鳗鱼",
+        "x": 75.47,
+        "y": 70.28,
+        "kind": "service",
+        "entity_id": 18138
+      },
+      "service:18280": {
+        "id": "service:18280",
+        "name": "孢子之翼",
+        "x": 78.01,
+        "y": 45.41,
+        "kind": "service",
+        "entity_id": 18280
+      },
+      "service:18132": {
+        "id": "service:18132",
+        "name": "暗光钉刺者",
+        "x": 71.61,
+        "y": 68.42,
+        "kind": "service",
+        "entity_id": 18132
+      },
+      "service:18133": {
+        "id": "service:18133",
+        "name": "沼光抽血者",
+        "x": 16.16,
+        "y": 39.51,
+        "kind": "service",
+        "entity_id": 18133
+      },
+      "service:20197": {
+        "id": "service:20197",
+        "name": "水光针刺者",
+        "x": 46.27,
+        "y": 35.3,
+        "kind": "service",
+        "entity_id": 20197
+      },
+      "service:20198": {
+        "id": "service:20198",
+        "name": "沼光钉刺者",
+        "x": 10.51,
+        "y": 50.18,
+        "kind": "service",
+        "entity_id": 20198
+      },
+      "npc:18012": {
+        "id": "npc:18012",
+        "name": "里维伊",
+        "x": 84.96,
+        "y": 54.03,
+        "kind": "npc",
+        "entity_id": 18012
+      },
+      "service:18130": {
+        "id": "service:18130",
+        "name": "沼牙撕裂者",
+        "x": 77.99,
+        "y": 50.54,
+        "kind": "service",
+        "entity_id": 18130
+      },
+      "service:18283": {
+        "id": "service:18283",
+        "name": "黑钉",
+        "x": 49.75,
+        "y": 60.06,
+        "kind": "service",
+        "entity_id": 18283
+      }
+    },
+    "quests": {
+      "9747": {
+        "id": 9747,
+        "name": "暗泽部族",
+        "accept_locations": [
+          "npc:17956"
+        ],
+        "turnin_locations": [
+          "npc:17956"
+        ],
+        "requirement_ids": [
+          "q9747:entity:creature:18080",
+          "q9747:entity:creature:18077",
+          "q9747:entity:creature:18079",
+          "q9747:entity:creature:20115"
+        ],
+        "pre_any": [],
+        "pre_all": []
+      },
+      "9788": {
+        "id": 9788,
+        "name": "阴冷之地",
+        "accept_locations": [
+          "npc:17956"
+        ],
+        "turnin_locations": [
+          "npc:17956"
+        ],
+        "requirement_ids": [
+          "q9788:item:24411"
+        ],
+        "pre_any": [
+          9747
+        ],
+        "pre_all": []
+      },
+      "9895": {
+        "id": 9895,
+        "name": "崩溃的平衡",
+        "accept_locations": [
+          "npc:17834"
+        ],
+        "turnin_locations": [
+          "npc:17834"
+        ],
+        "requirement_ids": [
+          "q9895:entity:creature:18281"
+        ],
+        "pre_any": [],
+        "pre_all": []
+      },
+      "9773": {
+        "id": 9773,
+        "name": "别再提蘑菇了！",
+        "accept_locations": [
+          "npc:18016"
+        ],
+        "turnin_locations": [
+          "npc:18016"
+        ],
+        "requirement_ids": [
+          "q9773:item:24374"
+        ],
+        "pre_any": [],
+        "pre_all": []
+      },
+      "9899": {
+        "id": 9899,
+        "name": "未完的职责",
+        "accept_locations": [
+          "npc:18016"
+        ],
+        "turnin_locations": [
+          "npc:18016"
+        ],
+        "requirement_ids": [
+          "q9899:entity:creature:18280"
+        ],
+        "pre_any": [
+          9773
+        ],
+        "pre_all": []
+      },
+      "9769": {
+        "id": 9769,
+        "name": "时尚无罪",
+        "accept_locations": [
+          "npc:18016"
+        ],
+        "turnin_locations": [
+          "npc:18016"
+        ],
+        "requirement_ids": [
+          "q9769:item:24372"
+        ],
+        "pre_any": [],
+        "pre_all": []
+      },
+      "9770": {
+        "id": 9770,
+        "name": "沼牙的威胁",
+        "accept_locations": [
+          "npc:18012"
+        ],
+        "turnin_locations": [
+          "npc:18012"
+        ],
+        "requirement_ids": [
+          "q9770:entity:creature:18130"
+        ],
+        "pre_any": [],
+        "pre_all": []
+      },
+      "9898": {
+        "id": 9898,
+        "name": "对方的尊重",
+        "accept_locations": [
+          "npc:18012"
+        ],
+        "turnin_locations": [
+          "npc:18012"
+        ],
+        "requirement_ids": [
+          "q9898:item:25448"
+        ],
+        "pre_any": [
+          9770
+        ],
+        "pre_all": []
+      }
+    },
+    "requirements": {
+      "q9747:entity:creature:18080": {
+        "id": "q9747:entity:creature:18080",
+        "quest_id": 9747,
+        "label": "卡塔鲁",
+        "count": 1,
+        "service_locations": [
+          "service:18080"
+        ],
+        "service_entity_ids": [
+          18080
+        ],
+        "service_cost_seconds": [
+          8.5483
+        ]
+      },
+      "q9747:entity:creature:18077": {
+        "id": "q9747:entity:creature:18077",
+        "quest_id": 9747,
+        "label": "暗泽神谕者",
+        "count": 6,
+        "service_locations": [
+          "service:18077"
+        ],
+        "service_entity_ids": [
+          18077
+        ],
+        "service_cost_seconds": [
+          40.55
+        ]
+      },
+      "q9747:entity:creature:18079": {
+        "id": "q9747:entity:creature:18079",
+        "quest_id": 9747,
+        "label": "暗泽先知",
+        "count": 8,
+        "service_locations": [
+          "service:18079"
+        ],
+        "service_entity_ids": [
+          18079
+        ],
+        "service_cost_seconds": [
+          54.0667
+        ]
+      },
+      "q9747:entity:creature:20115": {
+        "id": "q9747:entity:creature:20115",
+        "quest_id": 9747,
+        "label": "暗泽巫医",
+        "count": 6,
+        "service_locations": [
+          "service:20115"
+        ],
+        "service_entity_ids": [
+          20115
+        ],
+        "service_cost_seconds": [
+          42.95
+        ]
+      },
+      "q9788:item:24411": {
+        "id": "q9788:item:24411",
+        "quest_id": 9788,
+        "label": "伊卡因的物品",
+        "count": 1,
+        "service_locations": [
+          "service:182122"
+        ],
+        "service_entity_ids": [
+          182122
+        ],
+        "service_cost_seconds": [
+          0.0
+        ]
+      },
+      "q9895:entity:creature:18281": {
+        "id": "q9895:entity:creature:18281",
+        "quest_id": 9895,
+        "label": "沼泽之鞭",
+        "count": 1,
+        "service_locations": [
+          "service:18281"
+        ],
+        "service_entity_ids": [
+          18281
+        ],
+        "service_cost_seconds": [
+          25.79
+        ]
+      },
+      "q9773:item:24374": {
+        "id": "q9773:item:24374",
+        "quest_id": 9773,
+        "label": "电鳗鱼片",
+        "count": 8,
+        "service_locations": [
+          "service:18138"
+        ],
+        "service_entity_ids": [
+          18138
+        ],
+        "service_cost_seconds": [
+          181.3332
+        ]
+      },
+      "q9899:entity:creature:18280": {
+        "id": "q9899:entity:creature:18280",
+        "quest_id": 9899,
+        "label": "孢子之翼",
+        "count": 1,
+        "service_locations": [
+          "service:18280"
+        ],
+        "service_entity_ids": [
+          18280
+        ],
+        "service_cost_seconds": [
+          8.9017
+        ]
+      },
+      "q9769:item:24372": {
+        "id": "q9769:item:24372",
+        "quest_id": 9769,
+        "label": "透明的虫翼",
+        "count": 8,
+        "service_locations": [
+          "service:18132",
+          "service:18133",
+          "service:20197",
+          "service:20198"
+        ],
+        "service_entity_ids": [
+          18132,
+          18133,
+          20197,
+          20198
+        ],
+        "service_cost_seconds": [
+          189.7105,
+          838.4347,
+          362.9093,
+          641.5263
+        ]
+      },
+      "q9770:entity:creature:18130": {
+        "id": "q9770:entity:creature:18130",
+        "quest_id": 9770,
+        "label": "沼牙撕裂者",
+        "count": 10,
+        "service_locations": [
+          "service:18130"
+        ],
+        "service_entity_ids": [
+          18130
+        ],
+        "service_cost_seconds": [
+          67.5833
+        ]
+      },
+      "q9898:item:25448": {
+        "id": "q9898:item:25448",
+        "quest_id": 9898,
+        "label": "黑钉之刺",
+        "count": 1,
+        "service_locations": [
+          "service:18283"
+        ],
+        "service_entity_ids": [
+          18283
+        ],
+        "service_cost_seconds": [
+          8.9017
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "episode": 40,
+  "title": "龙骨荒野 73",
+  "bvid": "BV1qGrjBCEgr",
+  "duration_seconds": 3607,
+  "display_duration": "60:07",
+  "series_index": "40/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 61,
+      "fine20_a": 61,
+      "fine20_b": 60,
+      "fine20_c": 60,
+      "fine5_a": 58,
+      "fine5_b": 62,
+      "fine5_c": 66,
+      "fine5_d": 64
+    },
+    "formal_total": 492,
+    "manifest_count": 8,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [],
+  "level_continuity_note": "第40集内部没有新的直接玩家等级证据；第39集已直接确认73级人类圣骑士，因此只保留跨集73级连续性，不把标题当直接证据。",
+  "events": [
+    {"time_range":"02:00-02:50 approx","action":"complete_and_accept_next","quest_id":12157,"quest_name":"失踪的信使","experience_shown":10200,"next_quest_id":12171,"next_quest_name":"叛徒的名单","confidence":"high"},
+    {"time_range":"02:40-03:20 approx","action":"complete_and_accept_next","quest_id":12171,"quest_name":"叛徒的名单","experience_shown":4100,"next_quest_id":12174,"next_quest_name":"高级指挥官哈尔弗·维姆班恩","confidence":"high"},
+    {"time_range":"around 04:40","action":"accept","quest_id":12511,"quest_name":"丘陵援兵","confidence":"high"},
+    {"time_range":"22:15-23:30 approx","action":"complete_and_accept_next","quest_id":12006,"quest_name":"上层精灵的愤怒","experience_shown":40600,"next_quest_id":12013,"next_quest_name":"阿坎尼姆斯的终结","confidence":"high"},
+    {"time_range":"24:10-24:30 approx","action":"complete","quest_id":12013,"quest_name":"阿坎尼姆斯的终结","experience_calibrated":51300,"experience_source":"Questie base 25650 x2; direct small-font OCR unstable","confidence":"high"},
+    {"time_range":"29:45-30:10 approx","action":"complete_and_accept_next","quest_id":12000,"quest_name":"寻找线索","experience_shown":40600,"next_quest_id":12004,"next_quest_name":"阻碍协议","confidence":"high"},
+    {"time_range":"32:00-32:15 approx","action":"complete","quest_id":12004,"quest_name":"阻碍协议","experience_calibrated":51300,"experience_source":"Questie Alliance base 25650 x2; task window/completion direct, XP line unstable","confidence":"high"},
+    {"time_range":"32:00-32:50 approx","action":"complete_and_accept_next","quest_id":12055,"quest_name":"奇怪的设备","experience_shown":20300,"next_quest_id":12060,"next_quest_name":"投影和计划","confidence":"high"},
+    {"time_range":"34:20-35:20 approx","action":"complete_and_accept_next","quest_id":12060,"quest_name":"投影和计划","experience_shown":40600,"next_quest_id":12065,"next_quest_name":"海岸上的魔法焦点","confidence":"high"},
+    {"time_range":"38:45-39:20 approx","action":"complete_and_accept_next","quest_id":12065,"quest_name":"海岸上的魔法焦点","experience_shown":40600,"next_quest_id":12083,"next_quest_name":"森林上空","confidence":"high"},
+    {"time_range":"38:55-39:10 approx","action":"complete","quest_id":12067,"quest_name":"一封家书","experience_shown":40600,"confidence":"high","evidence_note":"OCR曾误成封冢书；Questie联盟版本的交付NPC为指挥官塞雅·蓝钢，与窗口NPC一致。"},
+    {"time_range":"46:30-46:50 approx","action":"complete","quest_id":12092,"quest_name":"强化古树","experience_shown":40600,"confidence":"high"},
+    {"time_range":"46:55-47:40 approx","action":"complete_and_accept_next","quest_id":12083,"quest_name":"森林上空","experience_shown":40600,"next_quest_id":12098,"next_quest_name":"搜索因度雷村","confidence":"high"},
+    {"time_range":"52:15-53:10 approx","action":"complete_and_accept_next","quest_id":12166,"quest_name":"艾露恩的火油","experience_shown":40600,"next_quest_id":12167,"next_quest_name":"消灭教徒","confidence":"high"},
+    {"time_range":"around 60:00","action":"objective_complete_not_turnin","quest_id":12167,"quest_name":"消灭教徒","state":"5/5 Functional Cultist Suits collected; no final turn-in","confidence":"high","evidence_note":"角色仍在阿努巴尔教徒区域；未返回典狱官朱蒂·月歌。60:05附近40600是前序艾露恩的火油聊天残留，不计为12167交付。"}
+  ],
+  "completed_quests": [12157,12171,12006,12013,12000,12004,12055,12060,12065,12067,12092,12083,12166],
+  "completed_quest_count": 13,
+  "calibrated_completed_quest_xp_total": 462000,
+  "closed_from_previous_unresolved": [12157],
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":12167,"quest_name":"消灭教徒","state":"objectives_complete_not_turnin","priority":"highest","note":"片尾5/5目标完成，未返回典狱官朱蒂·月歌，未最终交付。"},
+    {"quest_id":12098,"quest_name":"搜索因度雷村","state":"active","priority":"highest","note":"47分钟后接受；片尾仍有在因度雷村/因度雷湖寻找法师猎手指挥官的目标。"},
+    {"quest_id":12174,"quest_name":"高级指挥官哈尔弗·维姆班恩","state":"accepted_not_completed","priority":"high","note":"本集开头接受，无最终交付证据。"},
+    {"quest_id":12511,"quest_name":"丘陵援兵","state":"accepted_not_completed","priority":"high","note":"约4:40接受，目标为前往灰熊丘陵琥珀松木营地向杜蒙中尉报到。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"active_carryover","priority":"high","note":"更早遗留；本集约20分钟后仍明确在追踪中，无完成/放弃证据。"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"older_unresolved"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"older_unresolved"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"older_unresolved"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"older_unresolved"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"older_unresolved"},
+    {"quest_id":10004,"state":"older_unresolved"},
+    {"quest_id":9900,"state":"older_unresolved"},
+    {"quest_id":9925,"state":"older_unresolved"},
+    {"quest_id":9882,"state":"older_unresolved"},
+    {"quest_id":9937,"state":"older_unresolved_alliance_version"},
+    {"quest_id":9869,"state":"older_unresolved"},
+    {"quest_id":10810,"state":"older_unresolved"},
+    {"quest_id":9962,"state":"previously_failed_retention_or_abandonment_uncertain"}
+  ],
+  "non_quest_xp": [
+    {"type":"exploration","location":"湍流之针 / Surge Needle","experience":2000,"note":"不计入任务经验总和。"},
+    {"type":"exploration","location":"罗萨洛尔森林","experience":2000,"note":"不计入任务经验总和。"}
+  ],
+  "evidence_cautions": [
+    "约28-30分钟聊天区有多条旧完成/经验文字；未绑定可靠任务名的重复残留不计为新任务。",
+    "12067一封家书使用联盟ID；同名部落版本12085不适用。",
+    "12167消灭教徒片尾只是目标完成，不是最终交付。",
+    "任务追踪栏不是完整任务日志；旧任务暂时不可见不能自动视为放弃。"
+  ],
+  "next_episode": {
+    "episode": 41,
+    "title": "龙骨荒野 74",
+    "bvid": "BV1BurjB1Ep3",
+    "duration_seconds": 2654,
+    "duration": "44:14",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 13,
+  "notes": [
+    "第39集遗留12157失踪的信使在本集最终闭环。",
+    "本集联盟法师链推进到12098搜索因度雷村，但12098没有完成。",
+    "12167消灭教徒片尾5/5目标完成，必须在第41集继续核验最终交付。",
+    "第40集内部没有新的直接等级证据。",
+    "第41集只读查询元数据，未导航、播放、截图或处理。"
+  ]
+}

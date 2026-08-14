@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "version": "special-mechanism-registry-v1",
+    "purpose": "记录地图目标位置与玩家实际执行入口不一致的任务，以及已人工确认的特殊执行方式。",
+    "principle": "接取点、实际机制入口、地图目标区域必须分开保存；主路线优先使用实际机制入口。"
+  },
+  "quests": {
+    "9410": {
+      "name": "灵魂的指引",
+      "review_status": "confirmed_navigation_override_external_zone",
+      "mechanism_type": "player_follows_scripted_guide",
+      "execution_mode": "summon_and_follow_npc",
+      "route_anchor": "mechanism_entry",
+      "objective_markers_role": "misleading_or_incomplete",
+      "source_item_id": 23669,
+      "entry": {"kind": "manual_mechanism_entry", "name": "克伦·断脊者尸体附近使用先祖狼魂图腾", "point": [33.6, 43.5], "zone_id": 3483},
+      "guide_npc": {"entity_id": 17077, "name": "先祖狼魂"},
+      "turnin": {"entity_id": 16845, "name": "Gorkan Bloodfist"},
+      "warning": "不要直接去最终交任务点；先回到克伦·断脊者尸体附近使用先祖狼魂图腾，召唤先祖狼魂后保持跟随，直到它带你进入玛格汉营地。"
+    },
+    "9718": {
+      "name": "乌鸦的飞翔",
+      "review_status": "confirmed_navigation_override",
+      "mechanism_type": "objective_area_not_route_entry",
+      "execution_mode": "scripted_flight",
+      "route_anchor": "mechanism_entry",
+      "objective_markers_role": "reference_only",
+      "entry": {"kind": "quest_start_location", "name": "伊谢尔·风歌处使用风暴乌鸦护符", "point": [78.40, 62.02]},
+      "warning": "不要按Questie调查目标点自己骑过去；在入口使用任务物品后由固定飞行路线自动经过目标区域。"
+    },
+    "9845": {
+      "name": "下钩钓鱼",
+      "review_status": "reviewed_no_navigation_override",
+      "mechanism_type": "support_item_only",
+      "route_anchor": "objective_area",
+      "source_item_role": "support_consumable",
+      "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+    },
+    "9903": {
+      "name": "多头蛇之王",
+      "review_status": "reviewed_no_navigation_override",
+      "mechanism_type": "support_item_only",
+      "route_anchor": "objective_area",
+      "source_item_role": "support_consumable",
+      "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+    },
+    "9904": {
+      "name": "猎杀恐爪",
+      "review_status": "reviewed_no_navigation_override",
+      "mechanism_type": "support_item_only",
+      "route_anchor": "objective_area",
+      "source_item_role": "support_consumable",
+      "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+    },
+    "10162": {
+      "name": "任务：地狱岩床",
+      "review_status": "confirmed_navigation_override_external_zone",
+      "mechanism_type": "objective_area_not_route_entry",
+      "execution_mode": "scripted_flight_task",
+      "route_anchor": "mechanism_entry",
+      "objective_markers_role": "reference_only",
+      "source_item_id": 28132,
+      "entry": {"kind": "npc", "entity_id": 19401, "name": "Wing Commander Brack", "point": [66.10, 43.71], "zone_id": 3483},
+      "warning": "不要直接前往地狱岩床的地图目标区域；应先到飞行NPC处启动固定飞行任务流程，目标区域只作为执行过程中的参考。"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "episode": 39,
+  "title": "北风苔原73",
+  "bvid": "BV1fdraBbE9B",
+  "duration_seconds": 2709,
+  "display_duration": "45:09",
+  "series_index": "39/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse": 46,
+      "fine20_a": 68,
+      "fine20_b": 68,
+      "fine5_a": 50,
+      "fine5_b": 57,
+      "fine5_c": 59,
+      "fine5_d": 77
+    },
+    "formal_total": 425,
+    "manifest_count": 7,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_range": "31:45-32:15 approx",
+      "level": 73,
+      "direct": true,
+      "status": "direct_character_panel",
+      "note": "角色面板多帧可读为73级人类圣骑士；本集未捕获可靠升级祝贺消息，因此不能把72→73绑定到具体任务。"
+    }
+  ],
+  "events": [
+    {"time_range":"01:40-02:00","action":"complete","quest_id":11694,"quest_name":"山洞中的瘟疫","experience_shown":40200,"confidence":"high"},
+    {"time_range":"03:20-05:00","action":"complete_and_accept_next","quest_id":11697,"quest_name":"丁奇跑进浮空城了！","experience_shown":40200,"next_quest_id":11699,"next_quest_name":"我被困在笼子里了……","confidence":"high"},
+    {"time_range":"07:15-08:20","action":"complete_and_accept_next","quest_id":11699,"quest_name":"我被困在笼子里了……","experience_shown":40600,"next_quest_id":11700,"next_quest_name":"通知比希","confidence":"high"},
+    {"time_range":"08:45-08:55","action":"complete_and_accept_next","quest_id":11700,"quest_name":"通知比希","experience_shown":4000,"next_quest_id":11701,"next_quest_name":"返回机场","confidence":"high"},
+    {"time_range":"09:05-10:20","action":"complete","quest_id":11698,"quest_name":"顺便清理天灾士兵","experience_shown":40200,"confidence":"high"},
+    {"time_range":"10:15-10:30","action":"complete_and_accept_next","quest_id":11713,"quest_name":"侦查虫孔","experience_shown":40200,"next_quest_id":11715,"next_quest_name":"石油资源","confidence":"high"},
+    {"time_range":"10:45-10:50","action":"complete","quest_id":11701,"quest_name":"返回机场","experience_shown":50300,"confidence":"high"},
+    {"time_range":"10:35-11:30","action":"complete","quest_id":11798,"quest_name":"机甲专家麦卡佐德","experience_shown":50800,"confidence":"high","evidence_note":"完成窗口持续出现；之后任务从追踪中消失，系统显示50800，与Questie基础25400×2吻合。"},
+    {"time_range":"14:30-15:20","action":"complete_and_accept_next","quest_id":11715,"quest_name":"石油资源","experience_shown":40200,"next_quest_id":11718,"next_quest_name":"猛犸的毛皮","confidence":"high"},
+    {"time_range":"20:05-22:00","action":"complete_and_accept_next","quest_id":11718,"quest_name":"猛犸的毛皮","experience_shown":40200,"next_quest_id":11723,"next_quest_name":"天摇地动！","confidence":"high"},
+    {"time_range":"24:00-24:20","action":"complete","quest_id":11723,"quest_name":"天摇地动！","experience_shown":50300,"confidence":"high"},
+    {"time_range":"around 24:00 onward","action":"active_quest_seen_no_accept_timestamp","quest_id":12157,"quest_name":"失踪的信使","state":"active_or_held","confidence":"high_for_presence_only","evidence_note":"任务日志中可见且目标指向龙骨荒野；没有可靠接受时刻或本集完成/放弃证据。"},
+    {"time_range":"31:30-33:10","action":"complete_and_accept_next","quest_id":11938,"quest_name":"争取时间","experience_shown":40600,"next_quest_id":11942,"next_quest_name":"通行之语","confidence":"high"},
+    {"time_range":"39:10-40:15","action":"complete_and_accept_next","quest_id":11942,"quest_name":"通行之语","experience_shown":40600,"next_quest_id":12019,"next_quest_name":"最后的义务","confidence":"high"},
+    {"time_range":"43:35-43:45","action":"complete","quest_id":12019,"quest_name":"最后的义务","experience_shown":60900,"confidence":"high"}
+  ],
+  "completed_quests": [11694,11697,11699,11700,11698,11701,11713,11798,11715,11718,11723,11938,11942,12019],
+  "completed_quest_count": 14,
+  "calibrated_completed_quest_xp_total": 579300,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":12157,"quest_name":"失踪的信使","state":"约24分钟后任务日志中已存在，目标指向龙骨荒野；无可靠接受时刻，无完成或放弃证据；第40集优先核验。"},
+    {"quest_id":11940,"quest_name":"猎龙","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":11884,"quest_name":"尼达尔，犀牛之王……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":11872,"quest_name":"罪恶的蛤蜊主宰……","state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":12035,"quest_name":"重新装配","state":"更早遗留；本集无直接任务名完成证据。"},
+    {"quest_id":12086,"quest_name":"卡库特之子","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":12117,"quest_name":"前往莫亚基港口","state":"更早遗留；本集无最终完成或放弃证据。"},
+    {"quest_id":10004,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9900,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9925,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9882,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9937,"state":"联盟版本；更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9869,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":10810,"state":"更早遗留；本集无完成或放弃证据。"},
+    {"quest_id":9962,"state":"此前明确失败；是否保留或放弃仍不确认。"}
+  ],
+  "closed_from_previous_unresolved": [11694,11713,11798,11938],
+  "non_quest_xp": [
+    {"type":"exploration","location":"恩其拉相关区域","experience":2000,"time_range":"around 31 minutes","note":"不计入任务经验总和。"},
+    {"type":"exploration","location":"纳克萨纳尔","experience":2050,"time_range":"around 40 minutes","note":"不计入任务经验总和。"}
+  ],
+  "next_episode": {
+    "episode": 40,
+    "title": "龙骨荒野 73",
+    "bvid": "BV1qGrjBCEgr",
+    "duration_seconds": 3607,
+    "duration": "60:07",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 14,
+  "notes": [
+    "本集首次获得可靠直接73级角色面板证据，但没有升级瞬间，因此不能把升级绑定到具体任务。",
+    "第38集高优先级遗留11694山洞中的瘟疫、11713侦查虫孔、11798机甲专家麦卡佐德均在本集最终闭环；更早的11938争取时间也闭环。",
+    "12019最后的义务在本集内完成，60900经验与Questie基础30450×2吻合。",
+    "12157失踪的信使在任务日志中出现但缺少可靠接受时刻；本集未完成，作为第40集最高优先级连续性任务。",
+    "第40集只从当前合集状态只读查询元数据，未导航、播放、截图或处理。"
+  ]
+}

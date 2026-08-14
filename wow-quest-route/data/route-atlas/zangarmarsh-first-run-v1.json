@@ -1,0 +1,3048 @@
+{
+  "meta": {
+    "version": "first-run-v1",
+    "fingerprint": "e234be722b826a8939eb7e474f3267cb04d747c65a4ead589e5a799e024d644a",
+    "quest_ids": [
+      9697,
+      9701,
+      9702,
+      9708,
+      9709,
+      9716,
+      9718,
+      9720,
+      9726,
+      9727,
+      9728,
+      9730,
+      9739,
+      9742,
+      9743,
+      9744,
+      9747,
+      9769,
+      9770,
+      9771,
+      9772,
+      9773,
+      9774,
+      9775,
+      9778,
+      9785,
+      9788,
+      9806,
+      9807,
+      9808,
+      9809,
+      9814,
+      9816,
+      9817,
+      9820,
+      9822,
+      9823,
+      9841,
+      9842,
+      9845,
+      9846,
+      9847,
+      9876,
+      9894,
+      9895,
+      9898,
+      9899,
+      9903,
+      9904,
+      9919,
+      10096,
+      10117,
+      10118
+    ],
+    "quest_count": 53,
+    "opportunistic_item_start_quest_ids": [
+      9731,
+      9828,
+      9911
+    ],
+    "start_xy": [
+      78.4,
+      62.02
+    ],
+    "purpose": "First-run validation route: prioritize a good complete zone order, not an optimality proof.",
+    "availability_policy": "Local reputation/external-prerequisite quests stay in the plan; if Questie does not show one at runtime, skip it."
+  },
+  "instance": {
+    "actions": 227,
+    "requirements": 60
+  },
+  "baseline": {
+    "objective_seconds": 22163.683166594914,
+    "travel_seconds": 3922.769108828064,
+    "service_seconds": 18240.91405776685
+  },
+  "last_run": {
+    "seconds_limit": 30.0,
+    "status": "BEST_FOUND_WITH_GAP",
+    "objective_seconds": 21625.196,
+    "travel_seconds": 4059.283,
+    "service_seconds": 17565.912999999997,
+    "best_bound_seconds": 18116.9,
+    "relative_gap": 0.16223187063830535
+  },
+  "incumbent": {
+    "source": "BEST_FOUND_WITH_GAP",
+    "objective_seconds": 21625.196,
+    "travel_seconds": 4059.283,
+    "service_seconds": 17565.912999999997,
+    "action_order": [
+      "A:9716:1",
+      "A:9778:1",
+      "A:9876:1",
+      "A:9697:1",
+      "A:9895:1",
+      "A:9730:1",
+      "A:9817:1",
+      "T:9778:1",
+      "A:9728:1",
+      "A:9785:1",
+      "A:9747:1",
+      "S:('npc', 17900, 81.1, 63.87):q9785:c1",
+      "A:9769:1",
+      "A:9773:1",
+      "A:9770:1",
+      "A:9774:1",
+      "A:9775:1",
+      "S:('npc', 17901, 78.97, 67.44):q9785:c2",
+      "T:9785:1",
+      "S:('npc', 18130, 77.99, 50.54):q9770:c1",
+      "T:9770:1",
+      "A:9898:1",
+      "S:('npc', 18281, 82.07, 71.39):q9895:c1",
+      "S:('npc', 18080, 85.29, 90.93):q9747:c1",
+      "S:('npc', 20115, 83.24, 85.97):q9747:c4",
+      "S:('npc', 18077, 83.39, 84.63):q9747:c2",
+      "S:('npc', 18079, 84.09, 83.12):q9747:c3",
+      "S:('npc', 18138, 75.47, 70.28):q9773:c1",
+      "S:('npc', 19947, 72.04, 76.29):q9728:c1",
+      "S:('trigger', -9716, 70.75, 80.15):q9716:c1",
+      "S:('npc', 18046, 65.1, 68.67):q9730:c1",
+      "S:('npc', 18213, 70.82, 65.25):q9774:c1",
+      "S:('npc', 18132, 71.61, 68.42):q9769:c1",
+      "T:9895:1",
+      "T:9716:1",
+      "A:9718:1",
+      "T:9728:1",
+      "T:9730:1",
+      "T:9747:1",
+      "A:9788:1",
+      "A:10096:1",
+      "A:9894:1",
+      "T:9769:1",
+      "T:9773:1",
+      "A:9899:1",
+      "T:9774:1",
+      "A:9771:1",
+      "S:('fixed_script', 9718):q9718:fixed_script",
+      "T:9718:1",
+      "A:9720:1",
+      "S:('npc', 17998, 70.6, 80.29):q9720:c1",
+      "S:('object', 182122, 70.49, 97.94):q9788:c1",
+      "S:('npc', 17999, 63.11, 64.1):q9720:c4",
+      "S:('npc', 18000, 61.97, 40.84):q9720:c3",
+      "S:('npc', 18044, 65.15, 40.91):q9817:c1",
+      "T:9876:1",
+      "A:9814:1",
+      "A:9845:1",
+      "A:10117:1",
+      "A:9820:1",
+      "A:9841:1",
+      "T:9775:1",
+      "S:('aggregate', 'q9814:c1'):q9814:c1",
+      "A:9846:1",
+      "T:9814:1",
+      "A:9816:1",
+      "S:('npc', 18002, 25.4, 42.86):q9720:c2",
+      "A:9726:1",
+      "A:9806:1",
+      "A:9808:1",
+      "S:('aggregate', 'q9808:c1'):q9808:c1",
+      "T:9808:1",
+      "A:9809:1",
+      "S:('npc', 18133, 16.16, 39.51):q9841:c1",
+      "S:('object', 182053, 31.53, 41.29):q9809:c1",
+      "T:9809:1",
+      "T:9841:1",
+      "A:9842:1",
+      "S:('npc', 18088, 26.1, 41.0):q9726:c2",
+      "S:('npc', 18089, 26.32, 40.25):q9726:c1",
+      "S:('npc', 18131, 30.85, 57.09):q9842:c1",
+      "T:9842:1",
+      "S:('npc', 18135, 28.03, 44.31):q9806:c1",
+      "T:9806:1",
+      "A:9807:1",
+      "T:9726:1",
+      "A:9727:1",
+      "S:('npc', 18088, 26.1, 41.0):q9727:c2",
+      "S:('npc', 18089, 26.32, 40.25):q9727:c1",
+      "T:9727:1",
+      "S:('npc', 18135, 28.03, 44.31):q9807:c1",
+      "T:9807:1",
+      "A:9739:1",
+      "A:9743:1",
+      "A:9919:1",
+      "T:9697:1",
+      "A:9701:1",
+      "S:('aggregate', 'q9739:c1'):q9739:c1",
+      "T:9739:1",
+      "A:9742:1",
+      "S:('trigger', -9701, 14.39, 61.05):q9701:c1",
+      "S:('object', 182069, 12.6, 61.05):q9742:c1",
+      "T:9701:1",
+      "A:9702:1",
+      "T:9742:1",
+      "S:('npc', 18125, 17.08, 60.62):q9743:c1",
+      "T:9743:1",
+      "A:9744:1",
+      "S:('npc', 18125, 17.08, 60.62):q9744:c1",
+      "S:('aggregate', 'q9702:c1'):q9702:c1",
+      "T:9702:1",
+      "A:9708:1",
+      "S:('npc', 19174, 23.78, 26.75):q10117:c1",
+      "S:('npc', 18152, 26.81, 22.6):q9816:c1",
+      "S:('npc', 18118, 32.88, 33.53):q9708:c1",
+      "S:('npc', 18159, 34.82, 34.83):q9820:c1",
+      "T:9816:1",
+      "T:10117:1",
+      "T:9820:1",
+      "A:9822:1",
+      "T:9708:1",
+      "A:9709:1",
+      "T:9744:1",
+      "T:9919:1",
+      "S:('object', 182166, 19.88, 27.09):q9822:c1",
+      "T:9822:1",
+      "A:10118:1",
+      "A:9823:1",
+      "S:('npc', 18116, 26.28, 22.46):q10118:c1",
+      "S:('npc', 18160, 18.39, 7.79):q9823:c1",
+      "S:('npc', 18120, 18.61, 7.03):q9823:c2",
+      "S:('npc', 18121, 19.76, 6.57):q9823:c3",
+      "S:('npc', 18120, 18.61, 7.03):q9709:c1",
+      "S:('npc', 18115, 25.13, 23.78):q10118:c2",
+      "T:10118:1",
+      "T:9823:1",
+      "S:('npc', 18283, 49.75, 60.06):q9898:c1",
+      "S:('npc', 18114, 46.57, 61.26):q9846:c1",
+      "T:9846:1",
+      "A:9847:1",
+      "S:('npc', 18185, 44.36, 66.01):q9847:c1",
+      "T:9847:1",
+      "T:9720:1",
+      "T:9898:1",
+      "T:9771:1",
+      "A:9772:1",
+      "S:('npc', 18280, 78.01, 45.41):q9899:c1",
+      "S:('npc', 19519, 17.86, 60.62):q9772:c1",
+      "T:9899:1",
+      "T:9772:1",
+      "S:('npc', 18282, 72.24, 93.89):q9894:c1",
+      "S:('npc', 18136, 73.71, 94.18):q10096:c2",
+      "S:('npc', 18137, 73.71, 94.18):q10096:c1",
+      "T:9817:1",
+      "T:9788:1",
+      "T:9894:1",
+      "T:10096:1",
+      "S:('npc', 18214, 51.98, 41.68):q9845:c1",
+      "T:9845:1",
+      "A:9903:1",
+      "A:9904:1",
+      "T:9709:1",
+      "S:('npc', 20477, 22.31, 45.78):q9904:c1",
+      "S:('npc', 18286, 42.23, 41.42):q9903:c1",
+      "T:9904:1",
+      "T:9903:1"
+    ],
+    "route": [
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9716:1",
+        "name": "接 9716《暗泽湖的异常》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9716
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 1
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9778:1",
+        "name": "接 9778《监护者哈穆特》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9778
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 2
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9876:1",
+        "name": "接 9876《失踪的先遣队》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9876
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 3
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9697:1",
+        "name": "接 9697《观察者莉萨奥》 @ 莱森·月火",
+        "quest_ids": [
+          9697
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17834,
+        "x": 78.53,
+        "y": 63.15,
+        "travel_seconds": 2.746,
+        "service_seconds": 0.0,
+        "position": 4
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9895:1",
+        "name": "接 9895《崩溃的平衡》 @ 莱森·月火",
+        "quest_ids": [
+          9895
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17834,
+        "x": 78.53,
+        "y": 63.15,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 5
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9730:1",
+        "name": "接 9730《暗潮纳迦的首领》 @ 通缉布告",
+        "quest_ids": [
+          9730
+        ],
+        "requirement_ids": [],
+        "entity_kind": "objects",
+        "entity_id": 182115,
+        "x": 79.08,
+        "y": 64.88,
+        "travel_seconds": 4.589,
+        "service_seconds": 0.0,
+        "position": 6
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9817:1",
+        "name": "接 9817《血鳞纳迦的领袖》 @ 通缉布告",
+        "quest_ids": [
+          9817
+        ],
+        "requirement_ids": [],
+        "entity_kind": "objects",
+        "entity_id": 182115,
+        "x": 79.08,
+        "y": 64.88,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 7
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9778:1",
+        "name": "交 9778《监护者哈穆特》 @ 监护者哈穆特",
+        "quest_ids": [
+          9778
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17858,
+        "x": 79.09,
+        "y": 65.27,
+        "travel_seconds": 0.934,
+        "service_seconds": 0.0,
+        "position": 8
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9728:1",
+        "name": "接 9728《热情的欢迎》 @ 监护者哈穆特",
+        "quest_ids": [
+          9728
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17858,
+        "x": 79.09,
+        "y": 65.27,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 9
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9785:1",
+        "name": "接 9785《古树的祝福》 @ 唤风者塔鲁·黑蹄",
+        "quest_ids": [
+          9785
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18070,
+        "x": 80.37,
+        "y": 64.73,
+        "travel_seconds": 4.775,
+        "service_seconds": 0.0,
+        "position": 10
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9747:1",
+        "name": "接 9747《暗泽部族》 @ 伊卡因",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17956,
+        "x": 80.4,
+        "y": 64.16,
+        "travel_seconds": 1.369,
+        "service_seconds": 0.0,
+        "position": 11
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 17900, 81.1, 63.87):q9785:c1",
+        "name": "埃西恩",
+        "quest_ids": [
+          9785
+        ],
+        "requirement_ids": [
+          "q9785:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 17900,
+        "x": 81.1,
+        "y": 63.87,
+        "travel_seconds": 2.608,
+        "service_seconds": 15.0,
+        "position": 12
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9769:1",
+        "name": "接 9769《时尚无罪》 @ 玛加沙",
+        "quest_ids": [
+          9769
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 25.667,
+        "service_seconds": 0.0,
+        "position": 13
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9773:1",
+        "name": "接 9773《别再提蘑菇了！》 @ 玛加沙",
+        "quest_ids": [
+          9773
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 14
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9770:1",
+        "name": "接 9770《沼牙的威胁》 @ 里维伊",
+        "quest_ids": [
+          9770
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18012,
+        "x": 84.96,
+        "y": 54.03,
+        "travel_seconds": 2.271,
+        "service_seconds": 0.0,
+        "position": 15
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9774:1",
+        "name": "接 9774《厚重多头蛇鳞片》 @ 祖莱",
+        "quest_ids": [
+          9774
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18011,
+        "x": 85.28,
+        "y": 54.75,
+        "travel_seconds": 2.072,
+        "service_seconds": 0.0,
+        "position": 16
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9775:1",
+        "name": "接 9775《向暗影猎手德恩加报到》 @ 祖莱",
+        "quest_ids": [
+          9775
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18011,
+        "x": 85.28,
+        "y": 54.75,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 17
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 17901, 78.97, 67.44):q9785:c2",
+        "name": "克勒斯",
+        "quest_ids": [
+          9785
+        ],
+        "requirement_ids": [
+          "q9785:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 17901,
+        "x": 78.97,
+        "y": 67.44,
+        "travel_seconds": 37.902,
+        "service_seconds": 15.0,
+        "position": 18
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9785:1",
+        "name": "交 9785《古树的祝福》 @ 唤风者塔鲁·黑蹄",
+        "quest_ids": [
+          9785
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18070,
+        "x": 80.37,
+        "y": 64.73,
+        "travel_seconds": 8.208,
+        "service_seconds": 0.0,
+        "position": 19
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18130, 77.99, 50.54):q9770:c1",
+        "name": "沼牙撕裂者",
+        "quest_ids": [
+          9770
+        ],
+        "requirement_ids": [
+          "q9770:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18130,
+        "x": 77.99,
+        "y": 50.54,
+        "travel_seconds": 35.034,
+        "service_seconds": 150.0,
+        "position": 20
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9770:1",
+        "name": "交 9770《沼牙的威胁》 @ 里维伊",
+        "quest_ids": [
+          9770
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18012,
+        "x": 84.96,
+        "y": 54.03,
+        "travel_seconds": 26.386,
+        "service_seconds": 0.0,
+        "position": 21
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9898:1",
+        "name": "接 9898《对方的尊重》 @ 里维伊",
+        "quest_ids": [
+          9898
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18012,
+        "x": 84.96,
+        "y": 54.03,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 22
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18281, 82.07, 71.39):q9895:c1",
+        "name": "沼泽之鞭",
+        "quest_ids": [
+          9895
+        ],
+        "requirement_ids": [
+          "q9895:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18281,
+        "x": 82.07,
+        "y": 71.39,
+        "travel_seconds": 42.842,
+        "service_seconds": 15.0,
+        "position": 23
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18080, 85.29, 90.93):q9747:c1",
+        "name": "卡塔鲁",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [
+          "q9747:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18080,
+        "x": 85.29,
+        "y": 90.93,
+        "travel_seconds": 48.193,
+        "service_seconds": 15.0,
+        "position": 24
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 20115, 83.24, 85.97):q9747:c4",
+        "name": "暗泽巫医",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [
+          "q9747:c4"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 20115,
+        "x": 83.24,
+        "y": 85.97,
+        "travel_seconds": 13.972,
+        "service_seconds": 90.0,
+        "position": 25
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18077, 83.39, 84.63):q9747:c2",
+        "name": "暗泽神谕者",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [
+          "q9747:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18077,
+        "x": 83.39,
+        "y": 84.63,
+        "travel_seconds": 3.253,
+        "service_seconds": 90.0,
+        "position": 26
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18079, 84.09, 83.12):q9747:c3",
+        "name": "暗泽先知",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [
+          "q9747:c3"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18079,
+        "x": 84.09,
+        "y": 83.12,
+        "travel_seconds": 4.403,
+        "service_seconds": 120.0,
+        "position": 27
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18138, 75.47, 70.28):q9773:c1",
+        "name": "暗泽鳗鱼",
+        "quest_ids": [
+          9773
+        ],
+        "requirement_ids": [
+          "q9773:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18138,
+        "x": 75.47,
+        "y": 70.28,
+        "travel_seconds": 43.626,
+        "service_seconds": 1609.943,
+        "position": 28
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 19947, 72.04, 76.29):q9728:c1",
+        "name": "暗潮女巫",
+        "quest_ids": [
+          9728
+        ],
+        "requirement_ids": [
+          "q9728:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 19947,
+        "x": 72.04,
+        "y": 76.29,
+        "travel_seconds": 18.941,
+        "service_seconds": 2250.0,
+        "position": 29
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('trigger', -9716, 70.75, 80.15):q9716:c1",
+        "name": "Umbrafen Lake Investigated",
+        "quest_ids": [
+          9716
+        ],
+        "requirement_ids": [
+          "q9716:c1"
+        ],
+        "entity_kind": "trigger",
+        "entity_id": -9716,
+        "x": 70.75,
+        "y": 80.15,
+        "travel_seconds": 10.338,
+        "service_seconds": 0.0,
+        "position": 30
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18046, 65.1, 68.67):q9730:c1",
+        "name": "哈格哈兹王子",
+        "quest_ids": [
+          9730
+        ],
+        "requirement_ids": [
+          "q9730:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18046,
+        "x": 65.1,
+        "y": 68.67,
+        "travel_seconds": 34.163,
+        "service_seconds": 15.0,
+        "position": 31
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18213, 70.82, 65.25):q9774:c1",
+        "name": "泥潭多头蛇",
+        "quest_ids": [
+          9774
+        ],
+        "requirement_ids": [
+          "q9774:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18213,
+        "x": 70.82,
+        "y": 65.25,
+        "travel_seconds": 22.111,
+        "service_seconds": 1125.0,
+        "position": 32
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18132, 71.61, 68.42):q9769:c1",
+        "name": "暗光钉刺者",
+        "quest_ids": [
+          9769
+        ],
+        "requirement_ids": [
+          "q9769:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18132,
+        "x": 71.61,
+        "y": 68.42,
+        "travel_seconds": 8.103,
+        "service_seconds": 1684.319,
+        "position": 33
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9895:1",
+        "name": "交 9895《崩溃的平衡》 @ 莱森·月火",
+        "quest_ids": [
+          9895
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17834,
+        "x": 78.53,
+        "y": 63.15,
+        "travel_seconds": 27.868,
+        "service_seconds": 0.0,
+        "position": 34
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9716:1",
+        "name": "交 9716《暗泽湖的异常》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9716
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 2.746,
+        "service_seconds": 0.0,
+        "position": 35
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9718:1",
+        "name": "接 9718《乌鸦的飞翔》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9718
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 36
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9728:1",
+        "name": "交 9728《热情的欢迎》 @ 监护者哈穆特",
+        "quest_ids": [
+          9728
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17858,
+        "x": 79.09,
+        "y": 65.27,
+        "travel_seconds": 8.167,
+        "service_seconds": 0.0,
+        "position": 37
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9730:1",
+        "name": "交 9730《暗潮纳迦的首领》 @ 监护者哈穆特",
+        "quest_ids": [
+          9730
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17858,
+        "x": 79.09,
+        "y": 65.27,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 38
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9747:1",
+        "name": "交 9747《暗泽部族》 @ 伊卡因",
+        "quest_ids": [
+          9747
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17956,
+        "x": 80.4,
+        "y": 64.16,
+        "travel_seconds": 5.403,
+        "service_seconds": 0.0,
+        "position": 39
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9788:1",
+        "name": "接 9788《阴冷之地》 @ 伊卡因",
+        "quest_ids": [
+          9788
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17956,
+        "x": 80.4,
+        "y": 64.16,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 40
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:10096:1",
+        "name": "接 10096《拯救孢子人》 @ 劳兰娜·萨维尔",
+        "quest_ids": [
+          10096
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17909,
+        "x": 80.32,
+        "y": 64.17,
+        "travel_seconds": 0.288,
+        "service_seconds": 0.0,
+        "position": 41
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9894:1",
+        "name": "接 9894《保护观察者》 @ 唤风者塔鲁·黑蹄",
+        "quest_ids": [
+          9894
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18070,
+        "x": 80.37,
+        "y": 64.73,
+        "travel_seconds": 1.353,
+        "service_seconds": 0.0,
+        "position": 42
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9769:1",
+        "name": "交 9769《时尚无罪》 @ 玛加沙",
+        "quest_ids": [
+          9769
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 28.729,
+        "service_seconds": 0.0,
+        "position": 43
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9773:1",
+        "name": "交 9773《别再提蘑菇了！》 @ 玛加沙",
+        "quest_ids": [
+          9773
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 44
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9899:1",
+        "name": "接 9899《未完的职责》 @ 玛加沙",
+        "quest_ids": [
+          9899
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 45
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9774:1",
+        "name": "交 9774《厚重多头蛇鳞片》 @ 祖莱",
+        "quest_ids": [
+          9774
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18011,
+        "x": 85.28,
+        "y": 54.75,
+        "travel_seconds": 3.453,
+        "service_seconds": 0.0,
+        "position": 46
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9771:1",
+        "name": "接 9771《寻找斥候尤尔巴》 @ 祖莱",
+        "quest_ids": [
+          9771
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18011,
+        "x": 85.28,
+        "y": 54.75,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 47
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('fixed_script', 9718):q9718:fixed_script",
+        "name": "乌鸦的飞翔",
+        "quest_ids": [
+          9718
+        ],
+        "requirement_ids": [
+          "q9718:fixed_script"
+        ],
+        "entity_kind": "fixed_script",
+        "entity_id": null,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 30.221,
+        "service_seconds": 150.0,
+        "position": 48
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9718:1",
+        "name": "交 9718《乌鸦的飞翔》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9718
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 49
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9720:1",
+        "name": "接 9720《恢复平衡》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 50
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 17998, 70.6, 80.29):q9720:c1",
+        "name": "Umbrafen Steam Pump Credit Marker",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [
+          "q9720:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 17998,
+        "x": 70.6,
+        "y": 80.29,
+        "travel_seconds": 51.943,
+        "service_seconds": 0.0,
+        "position": 51
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('object', 182122, 70.49, 97.94):q9788:c1",
+        "name": "伊卡因的物品",
+        "quest_ids": [
+          9788
+        ],
+        "requirement_ids": [
+          "q9788:c1"
+        ],
+        "entity_kind": "object",
+        "entity_id": 182122,
+        "x": 70.49,
+        "y": 97.94,
+        "travel_seconds": 42.262,
+        "service_seconds": 0.0,
+        "position": 52
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 17999, 63.11, 64.1):q9720:c4",
+        "name": "Lagoon Steam Pump Credit Marker",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [
+          "q9720:c4"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 17999,
+        "x": 63.11,
+        "y": 64.1,
+        "travel_seconds": 85.248,
+        "service_seconds": 0.0,
+        "position": 53
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18000, 61.97, 40.84):q9720:c3",
+        "name": "Serpent Steam Pump Credit Marker",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [
+          "q9720:c3"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18000,
+        "x": 61.97,
+        "y": 40.84,
+        "travel_seconds": 55.843,
+        "service_seconds": 0.0,
+        "position": 54
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18044, 65.15, 40.91):q9817:c1",
+        "name": "弗亚希王女",
+        "quest_ids": [
+          9817
+        ],
+        "requirement_ids": [
+          "q9817:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18044,
+        "x": 65.15,
+        "y": 40.91,
+        "travel_seconds": 11.42,
+        "service_seconds": 15.0,
+        "position": 55
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9876:1",
+        "name": "交 9876《失踪的先遣队》 @ 观察者杰哈恩",
+        "quest_ids": [
+          9876
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17884,
+        "x": 52.29,
+        "y": 35.98,
+        "travel_seconds": 47.662,
+        "service_seconds": 0.0,
+        "position": 56
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9814:1",
+        "name": "接 9814《爆顶蘑菇》 @ 巫医托尔加什",
+        "quest_ids": [
+          9814
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18014,
+        "x": 32.89,
+        "y": 48.89,
+        "travel_seconds": 76.211,
+        "service_seconds": 0.0,
+        "position": 57
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9845:1",
+        "name": "接 9845《下钩钓鱼》 @ 苏尔加亚",
+        "quest_ids": [
+          9845
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 2.873,
+        "service_seconds": 0.0,
+        "position": 58
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:10117:1",
+        "name": "接 10117《通缉：穆玛基酋长》 @ 通缉布告",
+        "quest_ids": [
+          10117
+        ],
+        "requirement_ids": [],
+        "entity_kind": "objects",
+        "entity_id": 182165,
+        "x": 32.0,
+        "y": 49.33,
+        "travel_seconds": 1.12,
+        "service_seconds": 0.0,
+        "position": 59
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9820:1",
+        "name": "接 9820《通缉：格罗阿克》 @ 通缉布告",
+        "quest_ids": [
+          9820
+        ],
+        "requirement_ids": [],
+        "entity_kind": "objects",
+        "entity_id": 182165,
+        "x": 32.0,
+        "y": 49.33,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 60
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9841:1",
+        "name": "接 9841《清除沼光抽血者》 @ 加巴林卡",
+        "quest_ids": [
+          9841
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18015,
+        "x": 31.63,
+        "y": 49.19,
+        "travel_seconds": 1.37,
+        "service_seconds": 0.0,
+        "position": 61
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9775:1",
+        "name": "交 9775《向暗影猎手德恩加报到》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9775
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 5.175,
+        "service_seconds": 0.0,
+        "position": 62
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('aggregate', 'q9814:c1'):q9814:c1",
+        "name": "爆顶蘑菇",
+        "quest_ids": [
+          9814
+        ],
+        "requirement_ids": [
+          "q9814:c1"
+        ],
+        "entity_kind": "aggregate_object_region",
+        "entity_id": null,
+        "x": 29.17,
+        "y": 51.96,
+        "travel_seconds": 6.192,
+        "service_seconds": 0.0,
+        "position": 63
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9846:1",
+        "name": "接 9846《蛮沼之灵》 @ 先知亚尼迪",
+        "quest_ids": [
+          9846
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18017,
+        "x": 32.38,
+        "y": 51.96,
+        "travel_seconds": 11.526,
+        "service_seconds": 0.0,
+        "position": 64
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9814:1",
+        "name": "交 9814《爆顶蘑菇》 @ 巫医托尔加什",
+        "quest_ids": [
+          9814
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18014,
+        "x": 32.89,
+        "y": 48.89,
+        "travel_seconds": 7.575,
+        "service_seconds": 0.0,
+        "position": 65
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9816:1",
+        "name": "接 9816《你见过鱼人吗？》 @ 巫医托尔加什",
+        "quest_ids": [
+          9816
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18014,
+        "x": 32.89,
+        "y": 48.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 66
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18002, 25.4, 42.86):q9720:c2",
+        "name": "Marshlight Steam Pump Credit Marker",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [
+          "q9720:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18002,
+        "x": 25.4,
+        "y": 42.86,
+        "travel_seconds": 30.525,
+        "service_seconds": 0.0,
+        "position": 67
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9726:1",
+        "name": "接 9726《既然我们是朋友......》 @ 舒特",
+        "quest_ids": [
+          9726
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17856,
+        "x": 19.54,
+        "y": 50.04,
+        "travel_seconds": 27.172,
+        "service_seconds": 0.0,
+        "position": 68
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9806:1",
+        "name": "接 9806《成熟的孢子》 @ 格沙弗",
+        "quest_ids": [
+          9806
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17925,
+        "x": 19.14,
+        "y": 49.38,
+        "travel_seconds": 2.135,
+        "service_seconds": 0.0,
+        "position": 69
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9808:1",
+        "name": "接 9808《亮顶蘑菇》 @ 姆希菲",
+        "quest_ids": [
+          9808
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17924,
+        "x": 19.68,
+        "y": 52.07,
+        "travel_seconds": 6.726,
+        "service_seconds": 0.0,
+        "position": 70
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('aggregate', 'q9808:c1'):q9808:c1",
+        "name": "亮顶蘑菇",
+        "quest_ids": [
+          9808
+        ],
+        "requirement_ids": [
+          "q9808:c1"
+        ],
+        "entity_kind": "aggregate_object_region",
+        "entity_id": null,
+        "x": 31.53,
+        "y": 41.29,
+        "travel_seconds": 49.767,
+        "service_seconds": 0.0,
+        "position": 71
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9808:1",
+        "name": "交 9808《亮顶蘑菇》 @ 姆希菲",
+        "quest_ids": [
+          9808
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17924,
+        "x": 19.68,
+        "y": 52.07,
+        "travel_seconds": 49.767,
+        "service_seconds": 0.0,
+        "position": 72
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9809:1",
+        "name": "接 9809《更多亮顶蘑菇》 @ 姆希菲",
+        "quest_ids": [
+          9809
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17924,
+        "x": 19.68,
+        "y": 52.07,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 73
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18133, 16.16, 39.51):q9841:c1",
+        "name": "沼光抽血者",
+        "quest_ids": [
+          9841
+        ],
+        "requirement_ids": [
+          "q9841:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18133,
+        "x": 16.16,
+        "y": 39.51,
+        "travel_seconds": 32.621,
+        "service_seconds": 120.0,
+        "position": 74
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('object', 182053, 31.53, 41.29):q9809:c1",
+        "name": "亮顶蘑菇",
+        "quest_ids": [
+          9809
+        ],
+        "requirement_ids": [
+          "q9809:c1"
+        ],
+        "entity_kind": "object",
+        "entity_id": 182053,
+        "x": 31.53,
+        "y": 41.29,
+        "travel_seconds": 55.355,
+        "service_seconds": 0.0,
+        "position": 75
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9809:1",
+        "name": "交 9809《更多亮顶蘑菇》 @ 姆希菲",
+        "quest_ids": [
+          9809
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17924,
+        "x": 19.68,
+        "y": 52.07,
+        "travel_seconds": 49.767,
+        "service_seconds": 0.0,
+        "position": 76
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9841:1",
+        "name": "交 9841《清除沼光抽血者》 @ 加巴林卡",
+        "quest_ids": [
+          9841
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18015,
+        "x": 31.63,
+        "y": 49.19,
+        "travel_seconds": 43.46,
+        "service_seconds": 0.0,
+        "position": 77
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9842:1",
+        "name": "接 9842《最锋利的刀刃》 @ 加巴林卡",
+        "quest_ids": [
+          9842
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18015,
+        "x": 31.63,
+        "y": 49.19,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 78
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18088, 26.1, 41.0):q9726:c2",
+        "name": "血鳞女巫",
+        "quest_ids": [
+          9726
+        ],
+        "requirement_ids": [
+          "q9726:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18088,
+        "x": 26.1,
+        "y": 41.0,
+        "travel_seconds": 27.908,
+        "service_seconds": 90.0,
+        "position": 79
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18089, 26.32, 40.25):q9726:c1",
+        "name": "血鳞驱奴者",
+        "quest_ids": [
+          9726
+        ],
+        "requirement_ids": [
+          "q9726:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18089,
+        "x": 26.32,
+        "y": 40.25,
+        "travel_seconds": 1.962,
+        "service_seconds": 180.0,
+        "position": 80
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18131, 30.85, 57.09):q9842:c1",
+        "name": "沼牙切割者",
+        "quest_ids": [
+          9842
+        ],
+        "requirement_ids": [
+          "q9842:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18131,
+        "x": 30.85,
+        "y": 57.09,
+        "travel_seconds": 43.478,
+        "service_seconds": 937.5,
+        "position": 81
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9842:1",
+        "name": "交 9842《最锋利的刀刃》 @ 加巴林卡",
+        "quest_ids": [
+          9842
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18015,
+        "x": 31.63,
+        "y": 49.19,
+        "travel_seconds": 19.122,
+        "service_seconds": 0.0,
+        "position": 82
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18135, 28.03, 44.31):q9806:c1",
+        "name": "泥沼游荡者",
+        "quest_ids": [
+          9806
+        ],
+        "requirement_ids": [
+          "q9806:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18135,
+        "x": 28.03,
+        "y": 44.31,
+        "travel_seconds": 17.425,
+        "service_seconds": 1247.83,
+        "position": 83
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9806:1",
+        "name": "交 9806《成熟的孢子》 @ 格沙弗",
+        "quest_ids": [
+          9806
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17925,
+        "x": 19.14,
+        "y": 49.38,
+        "travel_seconds": 34.152,
+        "service_seconds": 0.0,
+        "position": 84
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9807:1",
+        "name": "接 9807《更多成熟的孢子》 @ 格沙弗",
+        "quest_ids": [
+          9807
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17925,
+        "x": 19.14,
+        "y": 49.38,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 85
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9726:1",
+        "name": "交 9726《既然我们是朋友......》 @ 舒特",
+        "quest_ids": [
+          9726
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17856,
+        "x": 19.54,
+        "y": 50.04,
+        "travel_seconds": 2.135,
+        "service_seconds": 0.0,
+        "position": 86
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9727:1",
+        "name": "接 9727《既然我们仍是朋友......》 @ 舒特",
+        "quest_ids": [
+          9727
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17856,
+        "x": 19.54,
+        "y": 50.04,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 87
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18088, 26.1, 41.0):q9727:c2",
+        "name": "血鳞女巫",
+        "quest_ids": [
+          9727
+        ],
+        "requirement_ids": [
+          "q9727:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18088,
+        "x": 26.1,
+        "y": 41.0,
+        "travel_seconds": 31.99,
+        "service_seconds": 90.0,
+        "position": 88
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18089, 26.32, 40.25):q9727:c1",
+        "name": "血鳞驱奴者",
+        "quest_ids": [
+          9727
+        ],
+        "requirement_ids": [
+          "q9727:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18089,
+        "x": 26.32,
+        "y": 40.25,
+        "travel_seconds": 1.962,
+        "service_seconds": 180.0,
+        "position": 89
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9727:1",
+        "name": "交 9727《既然我们仍是朋友......》 @ 舒特",
+        "quest_ids": [
+          9727
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17856,
+        "x": 19.54,
+        "y": 50.04,
+        "travel_seconds": 33.796,
+        "service_seconds": 0.0,
+        "position": 90
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18135, 28.03, 44.31):q9807:c1",
+        "name": "泥沼游荡者",
+        "quest_ids": [
+          9807
+        ],
+        "requirement_ids": [
+          "q9807:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18135,
+        "x": 28.03,
+        "y": 44.31,
+        "travel_seconds": 33.431,
+        "service_seconds": 207.972,
+        "position": 91
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9807:1",
+        "name": "交 9807《更多成熟的孢子》 @ 格沙弗",
+        "quest_ids": [
+          9807
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17925,
+        "x": 19.14,
+        "y": 49.38,
+        "travel_seconds": 34.152,
+        "service_seconds": 0.0,
+        "position": 92
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9739:1",
+        "name": "接 9739《孢子人的困境》 @ 法恩森",
+        "quest_ids": [
+          9739
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 31.249,
+        "service_seconds": 0.0,
+        "position": 93
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9743:1",
+        "name": "接 9743《天敌》 @ 法恩森",
+        "quest_ids": [
+          9743
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 94
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9919:1",
+        "name": "接 9919《孢子村》 @ 法恩森",
+        "quest_ids": [
+          9919
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 95
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9697:1",
+        "name": "交 9697《观察者莉萨奥》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9697
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 17.897,
+        "service_seconds": 0.0,
+        "position": 96
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9701:1",
+        "name": "接 9701《观察孢子人》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9701
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 97
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('aggregate', 'q9739:c1'):q9739:c1",
+        "name": "成熟的孢子囊",
+        "quest_ids": [
+          9739
+        ],
+        "requirement_ids": [
+          "q9739:c1"
+        ],
+        "entity_kind": "aggregate_object_region",
+        "entity_id": null,
+        "x": 12.6,
+        "y": 61.05,
+        "travel_seconds": 40.427,
+        "service_seconds": 724.0,
+        "position": 98
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9739:1",
+        "name": "交 9739《孢子人的困境》 @ 法恩森",
+        "quest_ids": [
+          9739
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 23.288,
+        "service_seconds": 0.0,
+        "position": 99
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9742:1",
+        "name": "接 9742《更多孢子囊》 @ 法恩森",
+        "quest_ids": [
+          9742
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 100
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('trigger', -9701, 14.39, 61.05):q9701:c1",
+        "name": "Investigate the Spawning Glen",
+        "quest_ids": [
+          9701
+        ],
+        "requirement_ids": [
+          "q9701:c1"
+        ],
+        "entity_kind": "trigger",
+        "entity_id": -9701,
+        "x": 14.39,
+        "y": 61.05,
+        "travel_seconds": 16.95,
+        "service_seconds": 0.0,
+        "position": 101
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('object', 182069, 12.6, 61.05):q9742:c1",
+        "name": "成熟的孢子囊",
+        "quest_ids": [
+          9742
+        ],
+        "requirement_ids": [
+          "q9742:c1"
+        ],
+        "entity_kind": "object",
+        "entity_id": 182069,
+        "x": 12.6,
+        "y": 61.05,
+        "travel_seconds": 6.427,
+        "service_seconds": 0.0,
+        "position": 102
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9701:1",
+        "name": "交 9701《观察孢子人》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9701
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 40.427,
+        "service_seconds": 0.0,
+        "position": 103
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9702:1",
+        "name": "接 9702《狼吞虎咽》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9702
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 104
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9742:1",
+        "name": "交 9742《更多孢子囊》 @ 法恩森",
+        "quest_ids": [
+          9742
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 17.897,
+        "service_seconds": 0.0,
+        "position": 105
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18125, 17.08, 60.62):q9743:c1",
+        "name": "饥饿的真菌巨人",
+        "quest_ids": [
+          9743
+        ],
+        "requirement_ids": [
+          "q9743:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18125,
+        "x": 17.08,
+        "y": 60.62,
+        "travel_seconds": 8.204,
+        "service_seconds": 1237.484,
+        "position": 106
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9743:1",
+        "name": "交 9743《天敌》 @ 法恩森",
+        "quest_ids": [
+          9743
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 8.204,
+        "service_seconds": 0.0,
+        "position": 107
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9744:1",
+        "name": "接 9744《更多卷须！》 @ 法恩森",
+        "quest_ids": [
+          9744
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 108
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18125, 17.08, 60.62):q9744:c1",
+        "name": "饥饿的真菌巨人",
+        "quest_ids": [
+          9744
+        ],
+        "requirement_ids": [
+          "q9744:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18125,
+        "x": 17.08,
+        "y": 60.62,
+        "travel_seconds": 8.204,
+        "service_seconds": 206.247,
+        "position": 109
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('aggregate', 'q9702:c1'):q9702:c1",
+        "name": "丢弃的食物",
+        "quest_ids": [
+          9702
+        ],
+        "requirement_ids": [
+          "q9702:c1"
+        ],
+        "entity_kind": "aggregate_object_region",
+        "entity_id": null,
+        "x": 30.11,
+        "y": 63.94,
+        "travel_seconds": 47.458,
+        "service_seconds": 300.0,
+        "position": 110
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9702:1",
+        "name": "交 9702《狼吞虎咽》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9702
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 24.98,
+        "service_seconds": 0.0,
+        "position": 111
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9708:1",
+        "name": "接 9708《熟悉的蘑菇》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9708
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 112
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 19174, 23.78, 26.75):q10117:c1",
+        "name": "穆玛基酋长",
+        "quest_ids": [
+          10117
+        ],
+        "requirement_ids": [
+          "q10117:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 19174,
+        "x": 23.78,
+        "y": 26.75,
+        "travel_seconds": 94.495,
+        "service_seconds": 75.0,
+        "position": 113
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18152, 26.81, 22.6):q9816:c1",
+        "name": "放置鱼人笼的位置",
+        "quest_ids": [
+          9816
+        ],
+        "requirement_ids": [
+          "q9816:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18152,
+        "x": 26.81,
+        "y": 22.6,
+        "travel_seconds": 14.735,
+        "service_seconds": 0.0,
+        "position": 114
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18118, 32.88, 33.53):q9708:c1",
+        "name": "安葛洛什萨满祭司",
+        "quest_ids": [
+          9708
+        ],
+        "requirement_ids": [
+          "q9708:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18118,
+        "x": 32.88,
+        "y": 33.53,
+        "travel_seconds": 34.058,
+        "service_seconds": 1406.25,
+        "position": 115
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18159, 34.82, 34.83):q9820:c1",
+        "name": "大头目格罗阿克",
+        "quest_ids": [
+          9820
+        ],
+        "requirement_ids": [
+          "q9820:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18159,
+        "x": 34.82,
+        "y": 34.83,
+        "travel_seconds": 7.63,
+        "service_seconds": 75.0,
+        "position": 116
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9816:1",
+        "name": "交 9816《你见过鱼人吗？》 @ 巫医托尔加什",
+        "quest_ids": [
+          9816
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18014,
+        "x": 32.89,
+        "y": 48.89,
+        "travel_seconds": 34.37,
+        "service_seconds": 0.0,
+        "position": 117
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:10117:1",
+        "name": "交 10117《通缉：穆玛基酋长》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          10117
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 9.085,
+        "service_seconds": 0.0,
+        "position": 118
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9820:1",
+        "name": "交 9820《通缉：格罗阿克》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9820
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 119
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9822:1",
+        "name": "接 9822《战斗迫近》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9822
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 120
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9708:1",
+        "name": "交 9708《熟悉的蘑菇》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9708
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 45.337,
+        "service_seconds": 0.0,
+        "position": 121
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9709:1",
+        "name": "接 9709《偷回蘑菇》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9709
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 122
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9744:1",
+        "name": "交 9744《更多卷须！》 @ 法恩森",
+        "quest_ids": [
+          9744
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17923,
+        "x": 19.02,
+        "y": 62.43,
+        "travel_seconds": 17.897,
+        "service_seconds": 0.0,
+        "position": 123
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9919:1",
+        "name": "交 9919《孢子村》 @ 姆希菲",
+        "quest_ids": [
+          9919
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17924,
+        "x": 19.68,
+        "y": 52.07,
+        "travel_seconds": 24.918,
+        "service_seconds": 0.0,
+        "position": 124
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('object', 182166, 19.88, 27.09):q9822:c1",
+        "name": "安葛洛什攻击计划",
+        "quest_ids": [
+          9822
+        ],
+        "requirement_ids": [
+          "q9822:c1"
+        ],
+        "entity_kind": "object",
+        "entity_id": 182166,
+        "x": 19.88,
+        "y": 27.09,
+        "travel_seconds": 59.815,
+        "service_seconds": 0.0,
+        "position": 125
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9822:1",
+        "name": "交 9822《战斗迫近》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9822
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 69.051,
+        "service_seconds": 0.0,
+        "position": 126
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:10118:1",
+        "name": "接 10118《警告匕潭失落者》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          10118
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 127
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9823:1",
+        "name": "接 9823《你死我活》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9823
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 128
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18116, 26.28, 22.46):q10118:c1",
+        "name": "匕潭刺客",
+        "quest_ids": [
+          10118
+        ],
+        "requirement_ids": [
+          "q10118:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18116,
+        "x": 26.28,
+        "y": 22.46,
+        "travel_seconds": 69.93,
+        "service_seconds": 45.0,
+        "position": 129
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18160, 18.39, 7.79):q9823:c1",
+        "name": "戈尔费斯大王",
+        "quest_ids": [
+          9823
+        ],
+        "requirement_ids": [
+          "q9823:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18160,
+        "x": 18.39,
+        "y": 7.79,
+        "travel_seconds": 45.127,
+        "service_seconds": 15.0,
+        "position": 130
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18120, 18.61, 7.03):q9823:c2",
+        "name": "安葛洛什殴斗者",
+        "quest_ids": [
+          9823
+        ],
+        "requirement_ids": [
+          "q9823:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18120,
+        "x": 18.61,
+        "y": 7.03,
+        "travel_seconds": 1.984,
+        "service_seconds": 150.0,
+        "position": 131
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18121, 19.76, 6.57):q9823:c3",
+        "name": "安葛洛什食魂者",
+        "quest_ids": [
+          9823
+        ],
+        "requirement_ids": [
+          "q9823:c3"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18121,
+        "x": 19.76,
+        "y": 6.57,
+        "travel_seconds": 4.274,
+        "service_seconds": 150.0,
+        "position": 132
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18120, 18.61, 7.03):q9709:c1",
+        "name": "安葛洛什殴斗者",
+        "quest_ids": [
+          9709
+        ],
+        "requirement_ids": [
+          "q9709:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18120,
+        "x": 18.61,
+        "y": 7.03,
+        "travel_seconds": 4.274,
+        "service_seconds": 937.5,
+        "position": 133
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18115, 25.13, 23.78):q10118:c2",
+        "name": "匕潭泥居者",
+        "quest_ids": [
+          10118
+        ],
+        "requirement_ids": [
+          "q10118:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18115,
+        "x": 25.13,
+        "y": 23.78,
+        "travel_seconds": 46.439,
+        "service_seconds": 225.0,
+        "position": 134
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:10118:1",
+        "name": "交 10118《警告匕潭失落者》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          10118
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 67.965,
+        "service_seconds": 0.0,
+        "position": 135
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9823:1",
+        "name": "交 9823《你死我活》 @ 暗影猎手德恩加",
+        "quest_ids": [
+          9823
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18013,
+        "x": 30.74,
+        "y": 50.89,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 136
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18283, 49.75, 60.06):q9898:c1",
+        "name": "黑钉",
+        "quest_ids": [
+          9898
+        ],
+        "requirement_ids": [
+          "q9898:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18283,
+        "x": 49.75,
+        "y": 60.06,
+        "travel_seconds": 71.705,
+        "service_seconds": 75.0,
+        "position": 137
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18114, 46.57, 61.26):q9846:c1",
+        "name": "蛮沼秘法师",
+        "quest_ids": [
+          9846
+        ],
+        "requirement_ids": [
+          "q9846:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18114,
+        "x": 46.57,
+        "y": 61.26,
+        "travel_seconds": 11.775,
+        "service_seconds": 937.5,
+        "position": 138
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9846:1",
+        "name": "交 9846《蛮沼之灵》 @ 先知亚尼迪",
+        "quest_ids": [
+          9846
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18017,
+        "x": 32.38,
+        "y": 51.96,
+        "travel_seconds": 55.606,
+        "service_seconds": 0.0,
+        "position": 139
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9847:1",
+        "name": "接 9847《灵魂之盟？》 @ 先知亚尼迪",
+        "quest_ids": [
+          9847
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18017,
+        "x": 32.38,
+        "y": 51.96,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 140
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18185, 44.36, 66.01):q9847:c1",
+        "name": "博哈姆废墟图腾放置点",
+        "quest_ids": [
+          9847
+        ],
+        "requirement_ids": [
+          "q9847:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18185,
+        "x": 44.36,
+        "y": 66.01,
+        "travel_seconds": 54.609,
+        "service_seconds": 9.368,
+        "position": 141
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9847:1",
+        "name": "交 9847《灵魂之盟？》 @ 先知亚尼迪",
+        "quest_ids": [
+          9847
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18017,
+        "x": 32.38,
+        "y": 51.96,
+        "travel_seconds": 54.609,
+        "service_seconds": 0.0,
+        "position": 142
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9720:1",
+        "name": "交 9720《恢复平衡》 @ 伊谢尔·风歌",
+        "quest_ids": [
+          9720
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17841,
+        "x": 78.4,
+        "y": 62.02,
+        "travel_seconds": 166.994,
+        "service_seconds": 0.0,
+        "position": 143
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9898:1",
+        "name": "交 9898《对方的尊重》 @ 里维伊",
+        "quest_ids": [
+          9898
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18012,
+        "x": 84.96,
+        "y": 54.03,
+        "travel_seconds": 30.345,
+        "service_seconds": 0.0,
+        "position": 144
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9771:1",
+        "name": "交 9771《寻找斥候尤尔巴》 @ 斥候尤尔巴",
+        "quest_ids": [
+          9771
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18035,
+        "x": 80.75,
+        "y": 36.27,
+        "travel_seconds": 45.131,
+        "service_seconds": 0.0,
+        "position": 145
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9772:1",
+        "name": "接 9772《尤尔巴的报告》 @ 斥候尤尔巴",
+        "quest_ids": [
+          9772
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18035,
+        "x": 80.75,
+        "y": 36.27,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 146
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18280, 78.01, 45.41):q9899:c1",
+        "name": "孢子之翼",
+        "quest_ids": [
+          9899
+        ],
+        "requirement_ids": [
+          "q9899:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18280,
+        "x": 78.01,
+        "y": 45.41,
+        "travel_seconds": 23.994,
+        "service_seconds": 15.0,
+        "position": 147
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 19519, 17.86, 60.62):q9772:c1",
+        "name": "挨饿的沼泽领主",
+        "quest_ids": [
+          9772
+        ],
+        "requirement_ids": [
+          "q9772:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 19519,
+        "x": 17.86,
+        "y": 60.62,
+        "travel_seconds": 219.034,
+        "service_seconds": 75.0,
+        "position": 148
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9899:1",
+        "name": "交 9899《未完的职责》 @ 玛加沙",
+        "quest_ids": [
+          9899
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18016,
+        "x": 84.36,
+        "y": 54.33,
+        "travel_seconds": 239.261,
+        "service_seconds": 0.0,
+        "position": 149
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9772:1",
+        "name": "交 9772《尤尔巴的报告》 @ 祖莱",
+        "quest_ids": [
+          9772
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18011,
+        "x": 85.28,
+        "y": 54.75,
+        "travel_seconds": 3.453,
+        "service_seconds": 0.0,
+        "position": 150
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18282, 72.24, 93.89):q9894:c1",
+        "name": "克拉其大王",
+        "quest_ids": [
+          9894
+        ],
+        "requirement_ids": [
+          "q9894:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18282,
+        "x": 72.24,
+        "y": 93.89,
+        "travel_seconds": 104.761,
+        "service_seconds": 15.0,
+        "position": 151
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18136, 73.71, 94.18):q10096:c2",
+        "name": "沼泽潜伏者",
+        "quest_ids": [
+          10096
+        ],
+        "requirement_ids": [
+          "q10096:c2"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18136,
+        "x": 73.71,
+        "y": 94.18,
+        "travel_seconds": 5.324,
+        "service_seconds": 150.0,
+        "position": 152
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18137, 73.71, 94.18):q10096:c1",
+        "name": "沼泽掘泥者",
+        "quest_ids": [
+          10096
+        ],
+        "requirement_ids": [
+          "q10096:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18137,
+        "x": 73.71,
+        "y": 94.18,
+        "travel_seconds": 0.0,
+        "service_seconds": 150.0,
+        "position": 153
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9817:1",
+        "name": "交 9817《血鳞纳迦的领袖》 @ 监护者哈穆特",
+        "quest_ids": [
+          9817
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17858,
+        "x": 79.09,
+        "y": 65.27,
+        "travel_seconds": 71.866,
+        "service_seconds": 0.0,
+        "position": 154
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9788:1",
+        "name": "交 9788《阴冷之地》 @ 伊卡因",
+        "quest_ids": [
+          9788
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17956,
+        "x": 80.4,
+        "y": 64.16,
+        "travel_seconds": 5.403,
+        "service_seconds": 0.0,
+        "position": 155
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9894:1",
+        "name": "交 9894《保护观察者》 @ 唤风者塔鲁·黑蹄",
+        "quest_ids": [
+          9894
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18070,
+        "x": 80.37,
+        "y": 64.73,
+        "travel_seconds": 1.369,
+        "service_seconds": 0.0,
+        "position": 156
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:10096:1",
+        "name": "交 10096《拯救孢子人》 @ 劳兰娜·萨维尔",
+        "quest_ids": [
+          10096
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17909,
+        "x": 80.32,
+        "y": 64.17,
+        "travel_seconds": 1.353,
+        "service_seconds": 0.0,
+        "position": 157
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18214, 51.98, 41.68):q9845:c1",
+        "name": "泥爪毁坏者",
+        "quest_ids": [
+          9845
+        ],
+        "requirement_ids": [
+          "q9845:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18214,
+        "x": 51.98,
+        "y": 41.68,
+        "travel_seconds": 115.132,
+        "service_seconds": 150.0,
+        "position": 158
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9845:1",
+        "name": "交 9845《下钩钓鱼》 @ 苏尔加亚",
+        "quest_ids": [
+          9845
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 73.346,
+        "service_seconds": 0.0,
+        "position": 159
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9903:1",
+        "name": "接 9903《多头蛇之王》 @ 苏尔加亚",
+        "quest_ids": [
+          9903
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 160
+      },
+      {
+        "type": "ACCEPT",
+        "action_id": "A:9904:1",
+        "name": "接 9904《猎杀恐爪》 @ 苏尔加亚",
+        "quest_ids": [
+          9904
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 161
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9709:1",
+        "name": "交 9709《偷回蘑菇》 @ 观察者莉萨奥",
+        "quest_ids": [
+          9709
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 17831,
+        "x": 23.32,
+        "y": 66.21,
+        "travel_seconds": 51.068,
+        "service_seconds": 0.0,
+        "position": 162
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 20477, 22.31, 45.78):q9904:c1",
+        "name": "恐爪",
+        "quest_ids": [
+          9904
+        ],
+        "requirement_ids": [
+          "q9904:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 20477,
+        "x": 22.31,
+        "y": 45.78,
+        "travel_seconds": 49.051,
+        "service_seconds": 15.0,
+        "position": 163
+      },
+      {
+        "type": "SERVICE",
+        "action_id": "S:('npc', 18286, 42.23, 41.42):q9903:c1",
+        "name": "穆拉格什",
+        "quest_ids": [
+          9903
+        ],
+        "requirement_ids": [
+          "q9903:c1"
+        ],
+        "entity_kind": "npc",
+        "entity_id": 18286,
+        "x": 42.23,
+        "y": 41.42,
+        "travel_seconds": 72.286,
+        "service_seconds": 15.0,
+        "position": 164
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9904:1",
+        "name": "交 9904《猎杀恐爪》 @ 苏尔加亚",
+        "quest_ids": [
+          9904
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 40.85,
+        "service_seconds": 0.0,
+        "position": 165
+      },
+      {
+        "type": "TURNIN",
+        "action_id": "T:9903:1",
+        "name": "交 9903《多头蛇之王》 @ 苏尔加亚",
+        "quest_ids": [
+          9903
+        ],
+        "requirement_ids": [],
+        "entity_kind": "npcs",
+        "entity_id": 18018,
+        "x": 32.25,
+        "y": 49.61,
+        "travel_seconds": 0.0,
+        "service_seconds": 0.0,
+        "position": 166
+      },
+      {
+        "type": "END",
+        "from": "T:9903:1",
+        "travel_seconds": 0.0
+      }
+    ]
+  }
+}

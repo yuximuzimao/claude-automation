@@ -16,6 +16,7 @@
 - 路线生成方法只读`docs/verified-routes/RULES.md`。
 - 历史实跑只按当前等级读取一份相关`docs/verified-routes/segments/*.md`，不要一次加载全部历史。
 - `docs/NEAT_SIMPLE_LEVELING_ROUTE.md`保存生成审计和项目背景；`docs/NEXT_CHAT_HANDOFF.md`只保存工作流分流入口，不复制当前状态。
+- 若任务是Route Atlas、地图路线、任务知识图谱、当前路线裁剪或动态图前端，先读无日期长期权威`docs/ROUTE_ATLAS_RULES.md`；再读`docs/analysis/2026-08-14-route-atlas-session-decision-index.md`及当前地图/NEAT文件恢复阶段状态。日期化decision/version文档负责历史与地图特定事实，不再承担永久规则入口。
 - 逐集视频拆解新对话先读`docs/video-extraction/README.md`和`docs/video-extraction/CURRENT.md`；不得先加载实时路线状态或全部已完成集。阶段性错误与恢复状态审计保存在`docs/video-extraction/sessions/`，仅按需读取最新一份NEAT归档。
 - 全部视频结束后的整合顺序固定读`docs/video-extraction/POST-EXTRACTION-PLAN.md`。
 

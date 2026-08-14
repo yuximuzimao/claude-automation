@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "purpose": "Find quests whose Questie objective markers may not represent the real execution entry or mechanic.",
+    "rule": "Automatic signals only create a review queue. They never change routing without a per-quest registry decision."
+  },
+  "summary": {
+    "flagged_or_registered": 14,
+    "unresolved_review_required": 10
+  },
+  "quests": {
+    "9718": {
+      "quest_id": 9718,
+      "name": "乌鸦的飞翔",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": false,
+      "registry": {
+        "name": "乌鸦的飞翔",
+        "review_status": "confirmed_navigation_override",
+        "mechanism_type": "objective_area_not_route_entry",
+        "execution_mode": "scripted_flight",
+        "route_anchor": "mechanism_entry",
+        "objective_markers_role": "reference_only",
+        "entry": {
+          "kind": "quest_start_location",
+          "name": "伊谢尔·风歌处使用风暴乌鸦护符",
+          "point": [
+            78.4,
+            62.02
+          ]
+        },
+        "warning": "不要按Questie调查目标点自己骑过去；在入口使用任务物品后由固定飞行路线自动经过目标区域。"
+      },
+      "source_item_id": 25465
+    },
+    "9720": {
+      "quest_id": 9720,
+      "name": "恢复平衡",
+      "risk_signals": [
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 24355
+    },
+    "9729": {
+      "quest_id": 9729,
+      "name": "弗沃尔发怒了！",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": null
+    },
+    "9752": {
+      "quest_id": 9752,
+      "name": "逃离暗泽村",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": null
+    },
+    "9816": {
+      "quest_id": 9816,
+      "name": "你见过鱼人吗？",
+      "risk_signals": [
+        "known_scripted_or_escort_type",
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 24470
+    },
+    "9845": {
+      "quest_id": 9845,
+      "name": "下钩钓鱼",
+      "risk_signals": [
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": false,
+      "registry": {
+        "name": "下钩钓鱼",
+        "review_status": "reviewed_no_navigation_override",
+        "mechanism_type": "support_item_only",
+        "route_anchor": "objective_area",
+        "source_item_role": "support_consumable",
+        "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+      },
+      "source_item_id": 25539
+    },
+    "9847": {
+      "quest_id": 9847,
+      "name": "灵魂之盟？",
+      "risk_signals": [
+        "known_scripted_or_escort_type",
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 24498
+    },
+    "9903": {
+      "quest_id": 9903,
+      "name": "多头蛇之王",
+      "risk_signals": [
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": false,
+      "registry": {
+        "name": "多头蛇之王",
+        "review_status": "reviewed_no_navigation_override",
+        "mechanism_type": "support_item_only",
+        "route_anchor": "objective_area",
+        "source_item_role": "support_consumable",
+        "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+      },
+      "source_item_id": 25539
+    },
+    "9904": {
+      "quest_id": 9904,
+      "name": "猎杀恐爪",
+      "risk_signals": [
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": false,
+      "registry": {
+        "name": "猎杀恐爪",
+        "review_status": "reviewed_no_navigation_override",
+        "mechanism_type": "support_item_only",
+        "route_anchor": "objective_area",
+        "source_item_role": "support_consumable",
+        "warning": "任务提供的辅助物品不改变正常目标区域导航。"
+      },
+      "source_item_id": 25539
+    },
+    "10964": {
+      "quest_id": 10964,
+      "name": "唤醒沉睡者",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 31953
+    },
+    "10994": {
+      "quest_id": 10994,
+      "name": "寻找月亮石",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": null
+    },
+    "11001": {
+      "quest_id": 11001,
+      "name": "消灭乌鸦之神",
+      "risk_signals": [
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 32462
+    },
+    "10965": {
+      "quest_id": 10965,
+      "name": "梦境危机",
+      "risk_signals": [
+        "known_scripted_or_escort_type"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": null
+    },
+    "10980": {
+      "quest_id": 10980,
+      "name": "乌鸦之书",
+      "risk_signals": [
+        "known_scripted_or_escort_type",
+        "provided_item_plus_creature_objectives"
+      ],
+      "review_required": true,
+      "registry": null,
+      "source_item_id": 32244
+    }
+  }
+}

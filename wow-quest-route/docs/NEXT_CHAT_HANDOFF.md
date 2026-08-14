@@ -51,12 +51,27 @@ data/routes/dk-55-80-world-tasks.html
 
 `docs/analysis/2026-08-08-northrend-daily-quests-unverified-source.md`只是用户提供的待核验线索；其中任务名、坐标、前置和奖励未经验证，不能直接写入正式母版。
 
-## E. 讨论“地图分圈可视化＋任务知识图谱”新方案
+## E. 恢复 Route Atlas / 地图路线 / 任务知识图谱工作
 
-直接读取：
+先读无日期长期总规则，再按任务需要读取日期化阶段索引与专项文档：
 
 ```text
-docs/analysis/2026-08-12-route-atlas-quest-knowledge-graph-concept.md
+docs/ROUTE_ATLAS_RULES.md
+docs/analysis/2026-08-14-route-atlas-session-decision-index.md
+docs/analysis/2026-08-14-route-atlas-cluster-incremental-insertion-method.md
+docs/analysis/2026-08-14-zangarmarsh-route-version-index.md
 ```
 
-该文档已经完整记录用户需求、初始架构、MVP建议和下一会话要确认的8个问题。下一会话若用户说“继续讨论新想法/地图方案/Obsidian式任务数据库”，先读该文档，不要求用户重新复述需求。该方向目前只是设计提案，不代表已经取代现有实跑方法。
+若继续当前首组的赞加执行，先以`docs/verified-routes/CURRENT.md`指定的当前执行稿为唯一玩家路线；不要从从零复用版自行剪枝。
+
+若正在继续赞加沼泽从零复用版设计，再读：
+
+```text
+docs/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md
+docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md
+data/routes/zangarmarsh-final-reusable-route-preview.html
+```
+
+`2026-08-12-route-atlas-quest-knowledge-graph-concept.md`保留最初需求来源；`2026-08-12-route-atlas-v1-contract.md`保留Questie/前端数据边界；`2026-08-13-route-atlas-optimization-framework.md`与mother-model/global-model文档保留路线计算理论与标签/关系设计。永久方法发生冲突时以`docs/ROUTE_ATLAS_RULES.md`为准；日期化决策索引、增量方法和版本索引用于恢复形成过程与地图特定细节。
+
+当前Route Atlas已经不是“仅设计提案”：赞加已完成R1–R71历史快照、完整任务宇宙审计、从零复用路线、最终整图动态审计和HTML工作台。旧exact/CP-SAT/MIP/solver只作为对照/异常检测/局部成本参考，不再直接生成玩家路线。

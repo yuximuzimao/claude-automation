@@ -1,0 +1,2508 @@
+{
+  "summary": {
+    "low_confidence": 0,
+    "manual_resolved": 33
+  },
+  "quests": {
+    "9635": {
+      "quest_id": 9635,
+      "name": "气阀微粒提取器！",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "profession_object_collect",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "duplicate_object_source_spawn_rows"
+      ],
+      "notes": [
+        "物品23981多个Object来源复用了同一批坐标；刷新点数必须去重：666→111"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [
+          202,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "另有技能条件=[202, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "object_collect_multi",
+      "manual_override": true,
+      "manual_notes": [
+        "工程专业条件任务；不属于所有角色通用练级任务。",
+        "Questie多个蒸汽泵零件Object别名复用同一批坐标，点位数量必须按坐标去重。"
+      ],
+      "route_policy": "conditional_profession"
+    },
+    "9697": {
+      "quest_id": 9697,
+      "name": "观察者莉萨奥",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9701": {
+      "quest_id": 9701,
+      "name": "观察孢子人",
+      "primary_raw": "explore_trigger",
+      "primary_effective": "explore_trigger",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9702": {
+      "quest_id": 9702,
+      "name": "狼吞虎咽",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "object_collect_multi",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9708": {
+      "quest_id": 9708,
+      "name": "熟悉的蘑菇",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9709": {
+      "quest_id": 9709,
+      "name": "偷回蘑菇",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9714": {
+      "quest_id": 9714,
+      "name": "我还要红色木槿！",
+      "primary_raw": "mob_drop",
+      "primary_effective": "dungeon_item_turnin_repeatable",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "红色木槿后续重复交付；目标物来源属于幽暗沼泽副本上下文，不作为赞加开放世界路线的基础任务。"
+      ],
+      "route_policy": "exclude_open_world_baseline"
+    },
+    "9715": {
+      "quest_id": 9715,
+      "name": "我要红色木槿！",
+      "primary_raw": "mob_drop",
+      "primary_effective": "dungeon_item_turnin",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "需要5朵红色木槿；属于幽暗沼泽副本材料任务，不应因Item掉落来源缺失而强行套开放世界刷怪掉率。"
+      ],
+      "route_policy": "exclude_open_world_baseline"
+    },
+    "9716": {
+      "quest_id": 9716,
+      "name": "暗泽湖的异常",
+      "primary_raw": "explore_trigger",
+      "primary_effective": "explore_trigger",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9717": {
+      "quest_id": 9717,
+      "name": "孢子叶",
+      "primary_raw": "object_interact_single",
+      "primary_effective": "object_interact_single",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9718": {
+      "quest_id": 9718,
+      "name": "乌鸦的飞翔",
+      "primary_raw": "handoff",
+      "primary_effective": "scripted_transport",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "handoff_has_non_handoff_action"
+      ],
+      "notes": [
+        "文本包含使用物品+调查"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "scripted_use_explore",
+      "manual_override": true,
+      "manual_notes": [
+        "使用风暴乌鸦护符后进入不可控制的固定飞行路径并自动完成调查。",
+        "这是任务自身固定执行时间，不应按地图点位逐段骑乘计算。",
+        "Route Atlas主路线必须指向机制入口，而不是Questie目标区域。"
+      ],
+      "route_policy": "include"
+    },
+    "9719": {
+      "quest_id": 9719,
+      "name": "黑色阔步者",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9720": {
+      "quest_id": 9720,
+      "name": "恢复平衡",
+      "primary_raw": "kill",
+      "primary_effective": "multi_point_item_use",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "Questie底层用Steam Pump Credit Marker记四个控制台进度，但正常完成方式不是击杀Marker，而是在四座蒸汽泵控制台旁使用任务提供的铁藤种子。",
+        "四个交互动作本身按0秒处理；主要任务成本是依次经过四个控制台的移动时间。Marker坐标继续作为定位实体使用。"
+      ],
+      "route_policy": "include"
+    },
+    "9724": {
+      "quest_id": 9724,
+      "name": "通知塞纳里奥议会",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9726": {
+      "quest_id": 9726,
+      "name": "既然我们是朋友......",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9727": {
+      "quest_id": 9727,
+      "name": "既然我们仍是朋友......",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9728": {
+      "quest_id": 9728,
+      "name": "热情的欢迎",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9729": {
+      "quest_id": 9729,
+      "name": "弗沃尔发怒了！",
+      "primary_raw": "escort",
+      "primary_effective": "escort",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9730": {
+      "quest_id": 9730,
+      "name": "暗潮纳迦的首领",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9731": {
+      "quest_id": 9731,
+      "name": "抽水泵结构图",
+      "primary_raw": "explore_trigger",
+      "primary_effective": "item_start_explore_trigger",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "explore_trigger",
+      "manual_override": true,
+      "manual_notes": [
+        "任务不是NPC接取：先从血鳞娜迦掉落抽水泵结构图，拾取/使用该物品后任务进入日志。",
+        "Questie本包未给这个起始物的可用掉率，因此当前掉率是外部WotLK资料代理；Titan实跑可覆盖。",
+        "真正任务目标仍使用Questie triggerEnd：毒蛇湖排水口约50.34,40.87，交互/发现动作按0秒。"
+      ],
+      "route_policy": "include"
+    },
+    "9732": {
+      "quest_id": 9732,
+      "name": "返回沼泽",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9738": {
+      "quest_id": 9738,
+      "name": "失踪的同伴",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9739": {
+      "quest_id": 9739,
+      "name": "孢子人的困境",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "object_collect_multi",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9742": {
+      "quest_id": 9742,
+      "name": "更多孢子囊",
+      "primary_raw": "object_interact_single",
+      "primary_effective": "object_interact_single",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9743": {
+      "quest_id": 9743,
+      "name": "天敌",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9744": {
+      "quest_id": 9744,
+      "name": "更多卷须！",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9747": {
+      "quest_id": 9747,
+      "name": "暗泽部族",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9752": {
+      "quest_id": 9752,
+      "name": "逃离暗泽村",
+      "primary_raw": "escort",
+      "primary_effective": "escort_scripted",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "escort",
+      "manual_override": true,
+      "manual_notes": [
+        "凯拉·长鬃从暗泽村按固定护送路径前往塞纳里奥庇护所；不能把接取点到交付NPC的玩家直线骑乘时间当成任务耗时。",
+        "公开任务脚本资料显示路径至少包含26个waypoint，初始约3秒动作延迟，两次约10秒脚本停顿/伏击，并在早期waypoint后切换为跑步；需要补完整waypoint路径长度和伏击击杀成本后再物化秒数。"
+      ],
+      "route_policy": "pending_manual_time_model"
+    },
+    "9763": {
+      "quest_id": 9763,
+      "name": "督军的末日",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9764": {
+      "quest_id": 9764,
+      "name": "瓦丝琪的命令",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9765": {
+      "quest_id": 9765,
+      "name": "战争准备",
+      "primary_raw": "mob_drop",
+      "primary_effective": "dungeon_item_turnin",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "盘牙武器来自盘牙水库纳迦/副本上下文；任务等级70、需求67，不属于当前赞加开放世界基础练级路线。"
+      ],
+      "route_policy": "exclude_open_world_baseline"
+    },
+    "9766": {
+      "quest_id": 9766,
+      "name": "盘牙武器",
+      "primary_raw": "mob_drop",
+      "primary_effective": "dungeon_item_turnin_repeatable",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "《战争准备》的后续重复交付版本；不进入开放世界基线路线。"
+      ],
+      "route_policy": "exclude_open_world_baseline"
+    },
+    "9769": {
+      "quest_id": 9769,
+      "name": "时尚无罪",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9770": {
+      "quest_id": 9770,
+      "name": "沼牙的威胁",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9771": {
+      "quest_id": 9771,
+      "name": "寻找斥候尤尔巴",
+      "primary_raw": "handoff",
+      "primary_effective": "find_npc_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "handoff_has_non_handoff_action"
+      ],
+      "notes": [
+        "文本包含搜索/寻找地点"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "search_or_trigger",
+      "manual_override": true,
+      "manual_notes": [
+        "所谓‘搜寻斥候尤尔巴’实际是找到目标NPC后交任务；任务执行时间主要就是到该NPC的路线时间。"
+      ],
+      "route_policy": "include"
+    },
+    "9772": {
+      "quest_id": 9772,
+      "name": "尤尔巴的报告",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9773": {
+      "quest_id": 9773,
+      "name": "别再提蘑菇了！",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9774": {
+      "quest_id": 9774,
+      "name": "厚重多头蛇鳞片",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9775": {
+      "quest_id": 9775,
+      "name": "向暗影猎手德恩加报到",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9778": {
+      "quest_id": 9778,
+      "name": "监护者哈穆特",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9784": {
+      "quest_id": 9784,
+      "name": "鉴定植物",
+      "primary_raw": "mob_drop",
+      "primary_effective": "ambient_inventory_turnin_repeatable",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "未鉴定植物体系的重复交付；不建议为了它单独刷取，若自然获得足量物品则视为库存触发的顺路交付。"
+      ],
+      "route_policy": "conditional_inventory"
+    },
+    "9785": {
+      "quest_id": 9785,
+      "name": "古树的祝福",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9788": {
+      "quest_id": 9788,
+      "name": "阴冷之地",
+      "primary_raw": "object_interact_single",
+      "primary_effective": "object_interact_single",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9795": {
+      "quest_id": 9795,
+      "name": "食人魔的威胁",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9796": {
+      "quest_id": 9796,
+      "name": "赞加沼泽的来客",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9797": {
+      "quest_id": 9797,
+      "name": "支援加拉达尔",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9802": {
+      "quest_id": 9802,
+      "name": "赞加沼泽的植物",
+      "primary_raw": "mob_drop",
+      "primary_effective": "ambient_inventory_turnin",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "需要10株未鉴定过的植物；基础路线中按背景库存任务处理，而不是专程对刷怪来源建独立耗时。"
+      ],
+      "route_policy": "conditional_inventory"
+    },
+    "9806": {
+      "quest_id": 9806,
+      "name": "成熟的孢子",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9807": {
+      "quest_id": 9807,
+      "name": "更多成熟的孢子",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9808": {
+      "quest_id": 9808,
+      "name": "亮顶蘑菇",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "object_collect_multi",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9809": {
+      "quest_id": 9809,
+      "name": "更多亮顶蘑菇",
+      "primary_raw": "object_interact_single",
+      "primary_effective": "object_interact_single",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9814": {
+      "quest_id": 9814,
+      "name": "爆顶蘑菇",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "object_collect_multi",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9816": {
+      "quest_id": 9816,
+      "name": "你见过鱼人吗？",
+      "primary_raw": "kill",
+      "primary_effective": "scripted_item_use",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "Questie底层用鱼人宝宝18152记录完成信用，但正常动作不是击杀鱼人宝宝，而是在匕潭村附近平坦岩石上放置任务提供的鱼人笼。",
+        "放置动作按0秒；定位代理使用26.81,22.60。"
+      ],
+      "route_policy": "include"
+    },
+    "9817": {
+      "quest_id": 9817,
+      "name": "血鳞纳迦的领袖",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9820": {
+      "quest_id": 9820,
+      "name": "通缉：格罗阿克",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9822": {
+      "quest_id": 9822,
+      "name": "战斗迫近",
+      "primary_raw": "object_interact_single",
+      "primary_effective": "object_interact_single",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9823": {
+      "quest_id": 9823,
+      "name": "你死我活",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9828": {
+      "quest_id": 9828,
+      "name": "枯萎的孢芽",
+      "primary_raw": "handoff",
+      "primary_effective": "item_start_mob_drop_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "枯萎的孢芽由枯萎的巨人掉落并直接开启任务；普通成群小怪按期望击杀数×单怪时间计算，不额外加刷新等待。"
+      ],
+      "route_policy": "include"
+    },
+    "9841": {
+      "quest_id": 9841,
+      "name": "清除沼光抽血者",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9842": {
+      "quest_id": 9842,
+      "name": "最锋利的刀刃",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9845": {
+      "quest_id": 9845,
+      "name": "下钩钓鱼",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9846": {
+      "quest_id": 9846,
+      "name": "蛮沼之灵",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9847": {
+      "quest_id": 9847,
+      "name": "灵魂之盟？",
+      "primary_raw": "kill",
+      "primary_effective": "scripted_summon_kill",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "在博哈姆废墟台阶底部放置蛮沼图腾，召唤蛮沼毒蛇之魂后击杀；放置动作按0秒，召唤怪击杀按当前统一DPS模型约9.37秒。"
+      ],
+      "route_policy": "include"
+    },
+    "9875": {
+      "quest_id": 9875,
+      "name": "未归类的植物",
+      "primary_raw": "handoff",
+      "primary_effective": "conditional_inventory_item_start",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "未归类的植物不是普通地图固定掉落源；它来自鉴定植物奖励包的随机产物。基础全局路线不为它专程增加服务动作，实际获得后再作为零额外获取成本的条件交付。"
+      ],
+      "route_policy": "conditional_inventory"
+    },
+    "9876": {
+      "quest_id": 9876,
+      "name": "失踪的先遣队",
+      "primary_raw": "handoff",
+      "primary_effective": "find_npc_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "handoff_has_non_handoff_action"
+      ],
+      "notes": [
+        "文本包含搜索/寻找地点"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "search_or_trigger",
+      "manual_override": true,
+      "manual_notes": [
+        "前往盘牙水库入口寻找远征队德鲁伊，本质为找到目标NPC并交任务；服务时间按0处理，成本主要来自移动。"
+      ],
+      "route_policy": "include"
+    },
+    "9894": {
+      "quest_id": 9894,
+      "name": "保护观察者",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9895": {
+      "quest_id": 9895,
+      "name": "崩溃的平衡",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9898": {
+      "quest_id": 9898,
+      "name": "对方的尊重",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9899": {
+      "quest_id": 9899,
+      "name": "未完的职责",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9903": {
+      "quest_id": 9903,
+      "name": "多头蛇之王",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9904": {
+      "quest_id": 9904,
+      "name": "猎杀恐爪",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9911": {
+      "quest_id": 9911,
+      "name": "沼泽中的伯爵",
+      "primary_raw": "handoff",
+      "primary_effective": "item_start_boss_drop_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "这是单点Boss自身掉落并开启任务，因此失败后没有普通小怪可继续刷；基础耗时额外计入掉落失败后的期望300秒重生等待。"
+      ],
+      "route_policy": "include"
+    },
+    "9912": {
+      "quest_id": 9912,
+      "name": "塞纳里奥远征队",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9919": {
+      "quest_id": 9919,
+      "name": "孢子村",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9957": {
+      "quest_id": 9957,
+      "name": "塞纳里奥树林出事了？",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10096": {
+      "quest_id": 10096,
+      "name": "拯救孢子人",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10103": {
+      "quest_id": 10103,
+      "name": "向祖莱报到",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10105": {
+      "quest_id": 10105,
+      "name": "给拉克妮亚的消息",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10117": {
+      "quest_id": 10117,
+      "name": "通缉：穆玛基酋长",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10118": {
+      "quest_id": 10118,
+      "name": "警告匕潭失落者",
+      "primary_raw": "kill",
+      "primary_effective": "kill",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10897": {
+      "quest_id": 10897,
+      "name": "药水大师",
+      "primary_raw": "mob_drop",
+      "primary_effective": "profession_specialization_quest",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "missing_drop_rate"
+      ],
+      "notes": [
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。",
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。",
+        "存在单点/稀有来源，只作为快捷策略，不作为基础耗时来源。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [
+          171,
+          325
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "另有技能条件=[171, 325]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "炼金术药水大师专业任务，包含生态船副本Boss物品与药水材料；不属于通用练级路线。"
+      ],
+      "route_policy": "conditional_profession"
+    },
+    "10905": {
+      "quest_id": 10905,
+      "name": "药水大师",
+      "primary_raw": "handoff",
+      "primary_effective": "profession_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [
+          171,
+          325
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "另有技能条件=[171, 325]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "药水大师专业链起始跑腿；仅炼金325角色需要。"
+      ],
+      "route_policy": "conditional_profession"
+    },
+    "10955": {
+      "quest_id": 10955,
+      "name": "莫希斯·轻翼",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属飞行形态任务链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10961": {
+      "quest_id": 10961,
+      "name": "唤醒戒卫",
+      "primary_raw": "object_collect_multi",
+      "primary_effective": "class_quest_material_collection",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "no_local_object_spawn_points",
+        "not_eligible_for_blood_elf_paladin",
+        "object_drop_is_not_proven_primary_quest_method"
+      ],
+      "notes": [
+        "Item→Object仅证明可能从该物体获得，不能证明它是任务正常主完成方式；贸易品/通用宝箱尤其危险。",
+        "Item→Object仅证明可能从该物体获得，不能证明它是任务正常主完成方式；贸易品/通用宝箱尤其危险。"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "material_or_alternative_source",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链；Dreaming Glory/Ancient Lichen等Item→Object来源不能用来定义当前圣骑士路线。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10964": {
+      "quest_id": 10964,
+      "name": "唤醒沉睡者",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_scripted_action",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "handoff_has_non_handoff_action",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [
+        "文本包含脚本/使用动作"
+      ],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "scripted_action",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10978": {
+      "quest_id": 10978,
+      "name": "返回莫希斯·轻翼身边",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10979": {
+      "quest_id": 10979,
+      "name": "前往常青林",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10993": {
+      "quest_id": 10993,
+      "name": "返回塞纳里奥庇护所",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10994": {
+      "quest_id": 10994,
+      "name": "寻找月亮石",
+      "primary_raw": "other",
+      "primary_effective": "class_quest_scripted_item",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "item_objective_without_resolved_source",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "special_unresolved",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链；无需继续为当前圣骑士路线补其特殊Item来源。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "11001": {
+      "quest_id": 11001,
+      "name": "消灭乌鸦之神",
+      "primary_raw": "kill",
+      "primary_effective": "class_quest_boss_kill",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "11011": {
+      "quest_id": 11011,
+      "name": "永恒的警惕",
+      "primary_raw": "handoff",
+      "primary_effective": "class_quest_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "11829": {
+      "quest_id": 11829,
+      "name": "祭拜这团火焰",
+      "primary_raw": "handoff",
+      "primary_effective": "seasonal_handoff",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 1101,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": [
+          "种族限制掩码=1101，不包含血精灵"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "handoff",
+      "manual_override": true,
+      "manual_notes": [
+        "联盟仲夏节火焰任务；当前部落血精灵不可接。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "11863": {
+      "quest_id": 11863,
+      "name": "祭拜这团火焰",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "11915": {
+      "quest_id": 11915,
+      "name": "玩火",
+      "primary_raw": "handoff",
+      "primary_effective": "handoff",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 690,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "9968": {
+      "quest_id": 9968,
+      "name": "奇怪的能量",
+      "primary_raw": "mob_drop",
+      "primary_effective": "mob_drop",
+      "confidence": "high",
+      "review_required": false,
+      "risk_flags": [],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": null,
+        "required_skill": [],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": true,
+        "has_additional_skill_or_spell_condition": false,
+        "reasons": []
+      },
+      "time_model_valid_for_global_optimizer": true,
+      "manual_override": false,
+      "route_policy": "include"
+    },
+    "10965": {
+      "quest_id": 10965,
+      "name": "梦境危机",
+      "primary_raw": "kill",
+      "primary_effective": "class_quest_escort_defense",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10980": {
+      "quest_id": 10980,
+      "name": "乌鸦之书",
+      "primary_raw": "kill",
+      "primary_effective": "class_quest_scripted_action",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "kill",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    },
+    "10992": {
+      "quest_id": 10992,
+      "name": "山鹰精华",
+      "primary_raw": "mob_drop",
+      "primary_effective": "class_quest_kill_or_drop",
+      "confidence": "manual",
+      "review_required": false,
+      "risk_flags": [
+        "additional_skill_or_spell_condition",
+        "not_eligible_for_blood_elf_paladin"
+      ],
+      "notes": [],
+      "eligibility": {
+        "required_race_mask": 0,
+        "required_class_mask": 1024,
+        "required_skill": [
+          762,
+          300
+        ],
+        "required_spell": null,
+        "blood_elf_paladin_class_race_ok": false,
+        "has_additional_skill_or_spell_condition": true,
+        "reasons": [
+          "职业限制掩码=1024，不包含圣骑士",
+          "另有技能条件=[762, 300]"
+        ]
+      },
+      "time_model_valid_for_global_optimizer": false,
+      "auto_primary_effective": "mob_drop",
+      "manual_override": true,
+      "manual_notes": [
+        "德鲁伊专属链。"
+      ],
+      "route_policy": "exclude_current_character"
+    }
+  }
+}

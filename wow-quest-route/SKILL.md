@@ -5,7 +5,8 @@
 2. 若用户要求继续视频拆解：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；不要先加载实时路线或全部视频历史。
 3. 若用户要求继续现有路线：读 `docs/verified-routes/README.md`、`CURRENT.md` 和其中指定的唯一执行稿。
 4. 若用户要求生成、修订或审计路线：再读 `ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md`、相关 `docs/task-library/` 任务卡和 `docs/INDEX.md`，执行逐任务复核与冷启动对抗复走。
-5. 代码与数据生成的核心入口：`cli.py`；纯攻略修订不先运行生成器，也不让脚本替代人工判断。
+5. 若用户明确在做 Route Atlas、地图路线、任务知识图谱、当前路线裁剪或动态图前端：先读 `docs/ROUTE_ATLAS_RULES.md` 获取长期总规则；再读 `docs/analysis/2026-08-14-route-atlas-session-decision-index.md` 及当前地图/NEAT文件恢复阶段状态。永久规则不得从日期化历史版本反推；不要从8月12日concept旧提案直接恢复。
+6. 代码与数据生成的核心入口：`cli.py`；纯攻略修订不先运行生成器，也不让脚本替代人工判断。
 
 ## ENTRY MAP
 | 文件 | 用途 | 何时读 |
@@ -25,6 +26,7 @@
 | `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
 | `docs/verified-routes/ERROR-BOOK.md` | 漏任务、额外往返和自动候选覆盖错误的错题本 | 每次生成、修订或审计执行路线前 |
 | `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` | 从任务库复用、逐任务核验、成稿后对抗复走的强制流程 | 继续、修订或审计路线前 |
+| `docs/ROUTE_ATLAS_RULES.md` | Route Atlas长期总规则：数据分层、主路线/当前路线分离、状态裁剪、增量插入、动态图与前端契约 | 处理任意Route Atlas或当前地图裁剪前 |
 | `docs/task-library/README.md` | 任务卡字段、证据和纠错写回规则 | 查询已核验任务或新增任务卡时 |
 | `docs/video-extraction/README.md` | 视频逐集提取方法、证据优先级与完成定义 | 处理任意视频集前 |
 | `docs/video-extraction/CURRENT.md` | 已完成集、下一集和最小恢复点 | 继续视频拆解时 |
