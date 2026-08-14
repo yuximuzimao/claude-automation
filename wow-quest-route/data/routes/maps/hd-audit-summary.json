@@ -1,0 +1,1229 @@
+{
+  "schema": "route-atlas-hd-audit/v1",
+  "map_count": 68,
+  "hd_count": 65,
+  "fallback_count": 3,
+  "validation_modes": {
+    "pre-cata-source-trust": 39,
+    "fallback-correlation": 26
+  },
+  "hd_total_bytes": 226441124,
+  "hd_total_mib": 215.95,
+  "bad_dimensions": [],
+  "fallbacks": [
+    {
+      "zone_id": 139,
+      "zone_dir": "139-eastern-plaguelands",
+      "fallback_file": "139-eastern-plaguelands.jpg",
+      "status": "fallback",
+      "reason": "WotLK Eastern Plaguelands requires ScarletEnclave1-4 overlay pieces not present in the ClassicTBC HD source; unsafe to substitute later-era RuinsOfTheScarletEnclave art."
+    },
+    {
+      "zone_id": 1519,
+      "zone_dir": "1519-stormwind-city",
+      "fallback_file": "1519-stormwind-city.jpg",
+      "status": "fallback",
+      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement."
+    },
+    {
+      "zone_id": 4395,
+      "zone_dir": "4395-dalaran",
+      "fallback_file": "4395-dalaran.png",
+      "status": "fallback",
+      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; the generic 4x3/12-tile compositor is not safe for this city map."
+    }
+  ],
+  "maps": [
+    {
+      "zone_id": 1,
+      "zone_dir": "1-dun-morogh",
+      "fallback_file": "1-dun-morogh.jpg",
+      "status": "hd",
+      "hd_file": "1-dun-morogh-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.394981,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 27
+    },
+    {
+      "zone_id": 10,
+      "zone_dir": "10-duskwood",
+      "fallback_file": "10-duskwood.jpg",
+      "status": "hd",
+      "hd_file": "10-duskwood-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.377283,
+      "validation_shift": [
+        -1,
+        0
+      ],
+      "overlay_map_area_id": 34
+    },
+    {
+      "zone_id": 12,
+      "zone_dir": "12-elwynn-forest",
+      "fallback_file": "12-elwynn-forest.jpg",
+      "status": "hd",
+      "hd_file": "12-elwynn-forest-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.418868,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 30
+    },
+    {
+      "zone_id": 130,
+      "zone_dir": "130-silverpine-forest",
+      "fallback_file": "130-silverpine-forest.jpg",
+      "status": "hd",
+      "hd_file": "130-silverpine-forest-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.410108,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 21
+    },
+    {
+      "zone_id": 1377,
+      "zone_dir": "1377-silithus",
+      "fallback_file": "1377-silithus.jpg",
+      "status": "hd",
+      "hd_file": "1377-silithus-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.647049,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 261
+    },
+    {
+      "zone_id": 139,
+      "zone_dir": "139-eastern-plaguelands",
+      "fallback_file": "139-eastern-plaguelands.jpg",
+      "status": "fallback",
+      "reason": "WotLK Eastern Plaguelands requires ScarletEnclave1-4 overlay pieces not present in the ClassicTBC HD source; unsafe to substitute later-era RuinsOfTheScarletEnclave art."
+    },
+    {
+      "zone_id": 14,
+      "zone_dir": "14-durotar",
+      "fallback_file": "14-durotar.jpg",
+      "status": "hd",
+      "hd_file": "14-durotar-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.358325,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 4
+    },
+    {
+      "zone_id": 141,
+      "zone_dir": "141-teldrassil",
+      "fallback_file": "141-teldrassil.jpg",
+      "status": "hd",
+      "hd_file": "141-teldrassil-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.304563,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 41
+    },
+    {
+      "zone_id": 148,
+      "zone_dir": "148-darkshore",
+      "fallback_file": "148-darkshore.jpg",
+      "status": "hd",
+      "hd_file": "148-darkshore-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.484011,
+      "validation_shift": [
+        0,
+        1
+      ],
+      "overlay_map_area_id": 42
+    },
+    {
+      "zone_id": 1497,
+      "zone_dir": "1497-undercity",
+      "fallback_file": "1497-undercity.jpg",
+      "status": "hd",
+      "hd_file": "1497-undercity-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.867084,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 382
+    },
+    {
+      "zone_id": 15,
+      "zone_dir": "15-dustwallow-marsh",
+      "fallback_file": "15-dustwallow-marsh.jpg",
+      "status": "hd",
+      "hd_file": "15-dustwallow-marsh-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.471937,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 141
+    },
+    {
+      "zone_id": 1519,
+      "zone_dir": "1519-stormwind-city",
+      "fallback_file": "1519-stormwind-city.jpg",
+      "status": "fallback",
+      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement."
+    },
+    {
+      "zone_id": 16,
+      "zone_dir": "16-azshara",
+      "fallback_file": "16-azshara.jpg",
+      "status": "hd",
+      "hd_file": "16-azshara-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.236967,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 181
+    },
+    {
+      "zone_id": 1637,
+      "zone_dir": "1637-orgrimmar",
+      "fallback_file": "1637-orgrimmar.jpg",
+      "status": "hd",
+      "hd_file": "1637-orgrimmar-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.35852,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 321
+    },
+    {
+      "zone_id": 1638,
+      "zone_dir": "1638-thunder-bluff",
+      "fallback_file": "1638-thunder-bluff.jpg",
+      "status": "hd",
+      "hd_file": "1638-thunder-bluff-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.906466,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 362
+    },
+    {
+      "zone_id": 1657,
+      "zone_dir": "1657-darnassus",
+      "fallback_file": "1657-darnassus.jpg",
+      "status": "hd",
+      "hd_file": "1657-darnassus-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.442774,
+      "validation_shift": [
+        -1,
+        1
+      ],
+      "overlay_map_area_id": 381
+    },
+    {
+      "zone_id": 17,
+      "zone_dir": "17-the-barrens",
+      "fallback_file": "17-the-barrens.jpg",
+      "status": "hd",
+      "hd_file": "17-the-barrens-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.428481,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 11
+    },
+    {
+      "zone_id": 210,
+      "zone_dir": "210-icecrown",
+      "fallback_file": "210-icecrown.jpg",
+      "status": "hd",
+      "hd_file": "210-icecrown-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.948224,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 492
+    },
+    {
+      "zone_id": 215,
+      "zone_dir": "215-mulgore",
+      "fallback_file": "215-mulgore.jpg",
+      "status": "hd",
+      "hd_file": "215-mulgore-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.462059,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 9
+    },
+    {
+      "zone_id": 267,
+      "zone_dir": "267-hillsbrad-foothills",
+      "fallback_file": "267-hillsbrad-foothills.jpg",
+      "status": "hd",
+      "hd_file": "267-hillsbrad-foothills-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.34081,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 24
+    },
+    {
+      "zone_id": 28,
+      "zone_dir": "28-western-plaguelands",
+      "fallback_file": "28-western-plaguelands.jpg",
+      "status": "hd",
+      "hd_file": "28-western-plaguelands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.407585,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 22
+    },
+    {
+      "zone_id": 3,
+      "zone_dir": "3-badlands",
+      "fallback_file": "3-badlands.jpg",
+      "status": "hd",
+      "hd_file": "3-badlands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.378392,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 17
+    },
+    {
+      "zone_id": 33,
+      "zone_dir": "33-stranglethorn-vale",
+      "fallback_file": "33-stranglethorn-vale.jpg",
+      "status": "hd",
+      "hd_file": "33-stranglethorn-vale-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.352422,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 37
+    },
+    {
+      "zone_id": 331,
+      "zone_dir": "331-ashenvale",
+      "fallback_file": "331-ashenvale.jpg",
+      "status": "hd",
+      "hd_file": "331-ashenvale-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.341757,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 43
+    },
+    {
+      "zone_id": 3430,
+      "zone_dir": "3430-eversong-woods",
+      "fallback_file": "3430-eversong-woods.jpg",
+      "status": "hd",
+      "hd_file": "3430-eversong-woods-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.881093,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 462
+    },
+    {
+      "zone_id": 3433,
+      "zone_dir": "3433-ghostlands",
+      "fallback_file": "3433-ghostlands.jpg",
+      "status": "hd",
+      "hd_file": "3433-ghostlands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.923117,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 463
+    },
+    {
+      "zone_id": 3483,
+      "zone_dir": "3483-hellfire-peninsula",
+      "fallback_file": "3483-hellfire-peninsula.jpg",
+      "status": "hd",
+      "hd_file": "3483-hellfire-peninsula-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.903525,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 465
+    },
+    {
+      "zone_id": 3487,
+      "zone_dir": "3487-silvermoon-city",
+      "fallback_file": "3487-silvermoon-city.jpg",
+      "status": "hd",
+      "hd_file": "3487-silvermoon-city-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.935023,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 480
+    },
+    {
+      "zone_id": 3518,
+      "zone_dir": "3518-nagrand",
+      "fallback_file": "3518-nagrand.jpg",
+      "status": "hd",
+      "hd_file": "3518-nagrand-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.913695,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 477
+    },
+    {
+      "zone_id": 3519,
+      "zone_dir": "3519-terokkar-forest",
+      "fallback_file": "3519-terokkar-forest.jpg",
+      "status": "hd",
+      "hd_file": "3519-terokkar-forest-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.905556,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 478
+    },
+    {
+      "zone_id": 3520,
+      "zone_dir": "3520-shadowmoon-valley",
+      "fallback_file": "3520-shadowmoon-valley.jpg",
+      "status": "hd",
+      "hd_file": "3520-shadowmoon-valley-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.888866,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 473
+    },
+    {
+      "zone_id": 3521,
+      "zone_dir": "3521-zangarmarsh",
+      "fallback_file": "3521-zangarmarsh.jpg",
+      "status": "hd",
+      "hd_file": "3521-zangarmarsh-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.906363,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 467
+    },
+    {
+      "zone_id": 3522,
+      "zone_dir": "3522-blade-s-edge-mountains",
+      "fallback_file": "3522-blade-s-edge-mountains.jpg",
+      "status": "hd",
+      "hd_file": "3522-blade-s-edge-mountains-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.901107,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 475
+    },
+    {
+      "zone_id": 3523,
+      "zone_dir": "3523-netherstorm",
+      "fallback_file": "3523-netherstorm.jpg",
+      "status": "hd",
+      "hd_file": "3523-netherstorm-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.894965,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 479
+    },
+    {
+      "zone_id": 3524,
+      "zone_dir": "3524-azuremyst-isle",
+      "fallback_file": "3524-azuremyst-isle.jpg",
+      "status": "hd",
+      "hd_file": "3524-azuremyst-isle-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.905114,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 464
+    },
+    {
+      "zone_id": 3525,
+      "zone_dir": "3525-bloodmyst-isle",
+      "fallback_file": "3525-bloodmyst-isle.jpg",
+      "status": "hd",
+      "hd_file": "3525-bloodmyst-isle-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.879864,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 476
+    },
+    {
+      "zone_id": 3537,
+      "zone_dir": "3537-borean-tundra",
+      "fallback_file": "3537-borean-tundra.jpg",
+      "status": "hd",
+      "hd_file": "3537-borean-tundra-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.933804,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 486
+    },
+    {
+      "zone_id": 357,
+      "zone_dir": "357-feralas",
+      "fallback_file": "357-feralas.jpg",
+      "status": "hd",
+      "hd_file": "357-feralas-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.395097,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 121
+    },
+    {
+      "zone_id": 36,
+      "zone_dir": "36-alterac-mountains",
+      "fallback_file": "36-alterac-mountains.jpg",
+      "status": "hd",
+      "hd_file": "36-alterac-mountains-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.589749,
+      "validation_shift": [
+        -2,
+        0
+      ],
+      "overlay_map_area_id": 15
+    },
+    {
+      "zone_id": 361,
+      "zone_dir": "361-felwood",
+      "fallback_file": "361-felwood.jpg",
+      "status": "hd",
+      "hd_file": "361-felwood-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.350024,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 182
+    },
+    {
+      "zone_id": 3703,
+      "zone_dir": "3703-shattrath-city",
+      "fallback_file": "3703-shattrath-city.jpg",
+      "status": "hd",
+      "hd_file": "3703-shattrath-city-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.945585,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 481
+    },
+    {
+      "zone_id": 3711,
+      "zone_dir": "3711-sholazar-basin",
+      "fallback_file": "3711-sholazar-basin.jpg",
+      "status": "hd",
+      "hd_file": "3711-sholazar-basin-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.940519,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 493
+    },
+    {
+      "zone_id": 394,
+      "zone_dir": "394-grizzly-hills",
+      "fallback_file": "394-grizzly-hills.jpg",
+      "status": "hd",
+      "hd_file": "394-grizzly-hills-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.940912,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 490
+    },
+    {
+      "zone_id": 4,
+      "zone_dir": "4-blasted-lands",
+      "fallback_file": "4-blasted-lands.jpg",
+      "status": "hd",
+      "hd_file": "4-blasted-lands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.398241,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 19
+    },
+    {
+      "zone_id": 40,
+      "zone_dir": "40-westfall",
+      "fallback_file": "40-westfall.jpg",
+      "status": "hd",
+      "hd_file": "40-westfall-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.65179,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 39
+    },
+    {
+      "zone_id": 400,
+      "zone_dir": "400-thousand-needles",
+      "fallback_file": "400-thousand-needles.jpg",
+      "status": "hd",
+      "hd_file": "400-thousand-needles-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.469866,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 61
+    },
+    {
+      "zone_id": 405,
+      "zone_dir": "405-desolace",
+      "fallback_file": "405-desolace.jpg",
+      "status": "hd",
+      "hd_file": "405-desolace-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.337883,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 101
+    },
+    {
+      "zone_id": 406,
+      "zone_dir": "406-stonetalon-mountains",
+      "fallback_file": "406-stonetalon-mountains.jpg",
+      "status": "hd",
+      "hd_file": "406-stonetalon-mountains-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.260308,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 81
+    },
+    {
+      "zone_id": 4080,
+      "zone_dir": "4080-isle-of-quel-danas",
+      "fallback_file": "4080-isle-of-quel-danas.jpg",
+      "status": "hd",
+      "hd_file": "4080-isle-of-quel-danas-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.923754,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 499
+    },
+    {
+      "zone_id": 41,
+      "zone_dir": "41-deadwind-pass",
+      "fallback_file": "41-deadwind-pass.jpg",
+      "status": "hd",
+      "hd_file": "41-deadwind-pass-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.621033,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 32
+    },
+    {
+      "zone_id": 4298,
+      "zone_dir": "4298-plaguelands-the-scarlet-enclave",
+      "fallback_file": "4298-plaguelands-the-scarlet-enclave.jpg",
+      "status": "hd",
+      "hd_file": "4298-plaguelands-the-scarlet-enclave-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.940252,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 502
+    },
+    {
+      "zone_id": 4395,
+      "zone_dir": "4395-dalaran",
+      "fallback_file": "4395-dalaran.png",
+      "status": "fallback",
+      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; the generic 4x3/12-tile compositor is not safe for this city map."
+    },
+    {
+      "zone_id": 44,
+      "zone_dir": "44-redridge-mountains",
+      "fallback_file": "44-redridge-mountains.jpg",
+      "status": "hd",
+      "hd_file": "44-redridge-mountains-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.39386,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 36
+    },
+    {
+      "zone_id": 440,
+      "zone_dir": "440-tanaris",
+      "fallback_file": "440-tanaris.jpg",
+      "status": "hd",
+      "hd_file": "440-tanaris-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.638475,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 161
+    },
+    {
+      "zone_id": 45,
+      "zone_dir": "45-arathi-highlands",
+      "fallback_file": "45-arathi-highlands.jpg",
+      "status": "hd",
+      "hd_file": "45-arathi-highlands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.392103,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 16
+    },
+    {
+      "zone_id": 46,
+      "zone_dir": "46-burning-steppes",
+      "fallback_file": "46-burning-steppes.jpg",
+      "status": "hd",
+      "hd_file": "46-burning-steppes-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.264926,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 29
+    },
+    {
+      "zone_id": 47,
+      "zone_dir": "47-the-hinterlands",
+      "fallback_file": "47-the-hinterlands.jpg",
+      "status": "hd",
+      "hd_file": "47-the-hinterlands-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.586738,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 26
+    },
+    {
+      "zone_id": 4742,
+      "zone_dir": "4742-hrothgar-s-landing",
+      "fallback_file": "4742-hrothgar-s-landing.jpg",
+      "status": "hd",
+      "hd_file": "4742-hrothgar-s-landing-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.964228,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 541
+    },
+    {
+      "zone_id": 490,
+      "zone_dir": "490-un-goro-crater",
+      "fallback_file": "490-un-goro-crater.jpg",
+      "status": "hd",
+      "hd_file": "490-un-goro-crater-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.485702,
+      "validation_shift": [
+        4,
+        0
+      ],
+      "overlay_map_area_id": 201
+    },
+    {
+      "zone_id": 493,
+      "zone_dir": "493-moonglade",
+      "fallback_file": "493-moonglade.jpg",
+      "status": "hd",
+      "hd_file": "493-moonglade-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.423496,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 241
+    },
+    {
+      "zone_id": 495,
+      "zone_dir": "495-howling-fjord",
+      "fallback_file": "495-howling-fjord.jpg",
+      "status": "hd",
+      "hd_file": "495-howling-fjord-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.933464,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 491
+    },
+    {
+      "zone_id": 51,
+      "zone_dir": "51-searing-gorge",
+      "fallback_file": "51-searing-gorge.jpg",
+      "status": "hd",
+      "hd_file": "51-searing-gorge-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.323771,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 28
+    },
+    {
+      "zone_id": 618,
+      "zone_dir": "618-winterspring",
+      "fallback_file": "618-winterspring.jpg",
+      "status": "hd",
+      "hd_file": "618-winterspring-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.509503,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 281
+    },
+    {
+      "zone_id": 65,
+      "zone_dir": "65-dragonblight",
+      "fallback_file": "65-dragonblight.jpg",
+      "status": "hd",
+      "hd_file": "65-dragonblight-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.953792,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 488
+    },
+    {
+      "zone_id": 66,
+      "zone_dir": "66-zul-drak",
+      "fallback_file": "66-zul-drak.jpg",
+      "status": "hd",
+      "hd_file": "66-zul-drak-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.936581,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 496
+    },
+    {
+      "zone_id": 67,
+      "zone_dir": "67-the-storm-peaks",
+      "fallback_file": "67-the-storm-peaks.jpg",
+      "status": "hd",
+      "hd_file": "67-the-storm-peaks-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "fallback-correlation",
+      "validation_corr": 0.929868,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 495
+    },
+    {
+      "zone_id": 8,
+      "zone_dir": "8-swamp-of-sorrows",
+      "fallback_file": "8-swamp-of-sorrows.jpg",
+      "status": "hd",
+      "hd_file": "8-swamp-of-sorrows-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.245489,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 38
+    },
+    {
+      "zone_id": 85,
+      "zone_dir": "85-tirisfal-glades",
+      "fallback_file": "85-tirisfal-glades.jpg",
+      "status": "hd",
+      "hd_file": "85-tirisfal-glades-hd.jpg",
+      "dimensions": [
+        4008,
+        2672
+      ],
+      "validation_mode": "pre-cata-source-trust",
+      "validation_corr": 0.437758,
+      "validation_shift": [
+        0,
+        0
+      ],
+      "overlay_map_area_id": 20
+    }
+  ]
+}
