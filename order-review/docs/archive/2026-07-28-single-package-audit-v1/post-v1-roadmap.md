@@ -5,8 +5,8 @@
 状态：阶段评审已完成并归档；当前状态以 `../../../README.md` 和 `../../../AGENTS.md` 为准
 前置文件：
 
-1. `2026-07-23-package-rule-foundation.md`
-2. `2026-07-22-approximate-recommendation-direction.md`
+1. `../../2026-07-23-package-rule-foundation.md`
+2. `../2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md`
 
 ## 0. 用户意图校正
 

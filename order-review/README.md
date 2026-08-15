@@ -44,7 +44,7 @@
   模块内部数量不缩放、同一完整模块可重复使用，组合后仍须逐商品精确守恒；
   唯一且无冲突的组合可直接进入可编辑草稿并显示拆分执行入口，冲突候选仍须人工选择。
 
-上述基础语义校正已经完成并通过测试。数量不同情况下的近似推荐第一版也已完成：当当前商品身份集合相同、且每种商品数量都不超过历史已确认的单包数量时，界面会显示带数量差异说明的单包参考候选；系统不会自动采用，仍由人工决定是否进入同一套可编辑草稿。真实案例已证明纸箱适配不是连续容量上限：同一商品 `18` 盒可使用约 `20` 盒箱单包，`9` 盒却因没有合适箱型需要拆成 `6 + 3`。因此较大数量单包不能证明所有较小数量都可单包；在商品与纸箱尺寸模型完成前，这类候选不得解释为可靠装箱结论。多包比例投影和多分支自动排序仍不实现；唯一允许的跨数量多包复用，是重复组合已达到证据门槛的完整历史包裹模块。唯一且无冲突的组合可自动进入可编辑草稿；用户点击拆分并审核后直接执行，未修改时不保存采用关系或次数。
+上述基础语义校正已经完成并通过测试。数量不同情况下的近似推荐第一版也已完成：当当前商品身份集合相同、且每种商品数量都不超过历史已确认的单包数量时，界面会显示带数量差异说明的单包参考候选；系统不会自动采用，仍由人工决定是否进入同一套可编辑草稿。真实案例已证明纸箱适配不是连续容量上限：同一商品 `18` 盒可使用约 `20` 盒箱单包，`9` 盒却因没有合适箱型需要拆成 `6 + 3`。离线三维尺寸底座现已建立，但尚未接入线上推荐；接入顺序固定为确认规则与精确保存方案优先，只有没有可靠结果的新组合才计算。`single_package_capacity` 仍只是人工参考，不能阻断更可靠的尺寸结果。多包比例投影和多分支自动排序仍不实现；唯一允许的跨数量多包复用，是重复组合已达到证据门槛的完整历史包裹模块。
 
 ### 相同包装规格的口味互换
 
@@ -208,8 +208,7 @@ PYTHONPATH=src python3.13 -m order_review.case_replay --details
 
 1. [当前状态与后续路线](docs/CURRENT.md)
 2. [审单与包裹规则根本约束](docs/2026-07-23-package-rule-foundation.md)
-3. [近似匹配推荐后续方向](docs/2026-07-22-approximate-recommendation-direction.md)
-4. [纸箱与商品尺寸数据采集清单](docs/2026-08-12-carton-data-collection.md)
+3. [纸箱尺寸与三维装箱阶段归档](docs/archive/2026-08-14-carton-packing-foundation/neat-handoff.md)
 
 已完成能力、后续方向和低优先级界面遗留统一记录在 `docs/CURRENT.md`。
 真实案例数量和推荐效果会随日常使用变化，必须以 `case_audit`、`case_replay` 和
@@ -230,3 +229,5 @@ PYTHONPATH=src python3.13 -m order_review.case_replay --details
 - [内存稳定性与历史包裹组合阶段归档](docs/archive/2026-07-30-memory-and-composition/memory-stability-worklog.md)
 - [拆分结果滚动与确定性直审阶段归档](docs/archive/2026-08-05-split-scroll-and-direct-review/neat-handoff.md)
 - [拆分结果读取稳定性阶段归档](docs/archive/2026-08-06-split-result-stability/neat-handoff.md)
+- [读取与悬浮窗稳定性阶段归档](docs/archive/2026-08-12-reading-and-window-stability/neat-handoff.md)
+- [纸箱尺寸与三维装箱底座阶段归档](docs/archive/2026-08-14-carton-packing-foundation/neat-handoff.md)

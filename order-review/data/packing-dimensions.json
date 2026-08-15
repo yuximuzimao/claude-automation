@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 2,
+  "unit": "mm",
+  "outerToInnerReductionMm": [5, 5, 5],
+  "cartonNameSemantics": "label_only",
+  "cartons": [
+    {
+      "cartonId": "carton-01",
+      "displayName": "黑茶三盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [173, 135, 154],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-02",
+      "displayName": "咖啡二十盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [323, 230, 225],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-03",
+      "displayName": "咖啡十六盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [320, 190, 222],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-04",
+      "displayName": "咖啡七盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [310, 110, 160],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-05",
+      "displayName": "咖啡二十四盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [323, 272, 225],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-06",
+      "displayName": "黑茶十八盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [360, 299, 154],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-07",
+      "displayName": "黑茶七盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [260, 173, 154],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-08",
+      "displayName": "咖啡三盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [138, 115, 166],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-09",
+      "displayName": "咖啡十盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [320, 235, 120],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-10",
+      "displayName": "酵素3.0三盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [233, 138, 185],
+      "dimensionType": "outer",
+      "inventoryStatus": "depleting",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-11",
+      "displayName": "蛋白粉七盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [240, 415, 240],
+      "dimensionType": "outer",
+      "inventoryStatus": "depleting",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-12",
+      "displayName": "酵素3.0十盒装",
+      "brandId": "kgos",
+      "dimensionsMm": [423, 385, 188],
+      "dimensionType": "outer",
+      "inventoryStatus": "depleting",
+      "evidenceSource": "user_provided"
+    },
+    {
+      "cartonId": "carton-13",
+      "displayName": "悦希单品四盒装",
+      "brandId": "yuexi",
+      "dimensionsMm": [200, 117, 122],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "usagePolicy": "confirmed_scope_only"
+    },
+    {
+      "cartonId": "carton-14",
+      "displayName": "悦希礼盒三盒装",
+      "brandId": "yuexi",
+      "dimensionsMm": [315, 232, 285],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "usagePolicy": "manual_only"
+    },
+    {
+      "cartonId": "carton-15",
+      "displayName": "悦希彩妆大箱",
+      "brandId": "yuexi",
+      "dimensionsMm": [158, 158, 188],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "usagePolicy": "manual_only"
+    },
+    {
+      "cartonId": "carton-16",
+      "displayName": "悦希修颜礼盒两套装",
+      "brandId": "yuexi",
+      "dimensionsMm": [245, 230, 135],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "usagePolicy": "fixed_plan_only"
+    }
+  ],
+  "products": [
+    {
+      "productSpecId": "coffee-regular-package",
+      "displayName": "咖啡正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6977987940138", "6979151090014"],
+      "dimensionsMm": [105, 42, 154],
+      "dimensionSource": "design_drawing",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "probiotic-regular-package",
+      "displayName": "益生菌正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6977987940053"],
+      "dimensionsMm": [115, 28, 93],
+      "dimensionSource": "design_drawing",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "enzyme-4-regular-package",
+      "displayName": "酵素4.0正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979151090007"],
+      "dimensionsMm": [171, 151, 73],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "candy-regular-package",
+      "displayName": "糖果/糖果2.0正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6976299500108"],
+      "dimensionsMm": [101, 36, 130],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "black-tea-regular-package",
+      "displayName": "黑茶正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760044", "6979265440002"],
+      "dimensionsMm": [157, 132, 35],
+      "dimensionSource": "derived_from_confirmed_cartons",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "black-tea-trial-package",
+      "displayName": "黑茶体验装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760099", "6979265440019"],
+      "dimensionsMm": [115, 61, 25],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "drink-bag-package",
+      "displayName": "饮料袋",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760082"],
+      "dimensionsMm": [275, 180, 42],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "body-measuring-tape-irregular",
+      "displayName": "三围尺（不规则外包络估算）",
+      "brandId": "kgos",
+      "merchantCodes": ["ZZ腰围尺-绿色"],
+      "dimensionsMm": [90, 63, 23],
+      "dimensionSource": "estimated",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "enzyme-4-trial-package",
+      "displayName": "酵素4.0体验装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760037"],
+      "dimensionsMm": [165, 70, 43],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-sunscreen-package",
+      "displayName": "悦希防晒",
+      "brandId": "yuexi",
+      "merchantCodes": ["6950328271429"],
+      "dimensionsMm": [128, 51, 36],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-new-face-oil-package",
+      "displayName": "悦希新精油",
+      "brandId": "yuexi",
+      "merchantCodes": ["6975183897416"],
+      "dimensionsMm": [107, 53, 43],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-moisturizing-mask-package",
+      "displayName": "悦希保湿面膜",
+      "brandId": "yuexi",
+      "merchantCodes": ["6977235921278"],
+      "dimensionsMm": [166, 117, 24],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    }
+  ],
+  "dedicatedOriginalCartons": [
+    {
+      "cartonId": "original-coffee-60",
+      "displayName": "咖啡原箱60盒",
+      "brandId": "kgos",
+      "capacity": 60,
+      "dimensionsMm": [445, 332, 328],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6977987940138", "6979151090014"],
+      "allowMixedEligibleProducts": true,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-enzyme-4-20",
+      "displayName": "酵素4.0原箱20盒",
+      "brandId": "kgos",
+      "capacity": 20,
+      "minimumShippableQuantity": 15,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6979151090007"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-probiotic-100",
+      "displayName": "益生菌原箱100盒",
+      "brandId": "kgos",
+      "capacity": 100,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6977987940053"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    },
+    {
+      "cartonId": "original-black-tea-72",
+      "displayName": "黑茶原箱72盒",
+      "brandId": "kgos",
+      "capacity": 72,
+      "dimensionsMm": [420, 405, 333],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6979499760044", "6979265440002"],
+      "allowMixedEligibleProducts": true,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false,
+      "confirmedArrangement": {
+        "productSpecId": "black-tea-regular-package",
+        "grid": [12, 3, 2],
+        "itemOrientationMm": [35, 132, 157]
+      }
+    },
+    {
+      "cartonId": "original-corn-chips-10",
+      "displayName": "玉米片原箱10包",
+      "brandId": "kgos",
+      "capacity": 10,
+      "dimensionsMm": null,
+      "dimensionType": "unknown",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6979499760105", "6979499760112"],
+      "allowMixedEligibleProducts": true,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false
+    }
+  ],
+  "confirmedCapacities": [
+    {"cartonId": "carton-08", "capacity": 3, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-04", "capacity": 7, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-09", "capacity": 10, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-03", "capacity": 16, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-02", "capacity": 20, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-05", "capacity": 24, "productSpecId": "coffee-regular-package", "isMaximum": true},
+    {"cartonId": "carton-01", "capacity": 3, "productSpecId": "black-tea-regular-package", "isMaximum": true},
+    {"cartonId": "carton-07", "capacity": 7, "productSpecId": "black-tea-regular-package", "isMaximum": true},
+    {"cartonId": "carton-06", "capacity": 18, "productSpecId": "black-tea-regular-package", "isMaximum": true},
+    {
+      "cartonId": "carton-13",
+      "capacity": 4,
+      "allowedMerchantCodes": ["6940079053009", "6940079096228", "6940079096211", "6940079050947"],
+      "isMaximum": false,
+      "scopeComplete": false,
+      "mixingPolicy": "not_confirmed"
+    }
+  ],
+  "confirmedParcelQuantityRules": [
+    {
+      "ruleId": "yuexi-new-face-oil-small-carton-1-to-5",
+      "displayName": "悦希新精油小箱每箱1至5瓶",
+      "allowedMerchantCodes": ["6975183897416"],
+      "minimumQuantity": 1,
+      "maximumQuantity": 5,
+      "allowMixedEligibleProducts": false,
+      "blocksGeometryAboveMaximum": true,
+      "reason": "仓库实测精油小箱最多5瓶；扁平礼盒箱不用于普通单品发货，避免运输受力和支撑不足"
+    }
+  ],
+  "confirmedSinglePackageExclusions": [
+    {
+      "ruleId": "enzyme-4-nine-requires-six-plus-three",
+      "exactItems": [
+        {"merchantCode": "6979151090007", "quantity": 9}
+      ],
+      "reason": "酵素4.0九盒没有合适的单箱规格，已确认拆为6盒加3盒"
+    },
+    {
+      "ruleId": "coffee-regular-36-use-two-parcels",
+      "allowedMerchantCodes": ["6977987940138", "6979151090014"],
+      "totalQuantity": 36,
+      "allowMixedEligibleProducts": true,
+      "reason": "咖啡正装36盒按咖啡箱拆成两包；18+18便于客户识别分包，16+20也可接受"
+    }
+  ],
+  "geometryExclusions": [
+    {
+      "ruleId": "yuexi-gift-box-products",
+      "productNameContains": ["礼盒"],
+      "fallback": "saved_package_plan",
+      "reason": "礼盒内部组合复杂，暂不进入通用三维计算"
+    }
+  ],
+  "fixedPackingRules": [
+    {
+      "ruleId": "xiuyan-gift-set-carton",
+      "cartonId": "carton-16",
+      "bundleItems": [
+        {"merchantCode": "6950328273508", "quantity": 1},
+        {"merchantCode": "yxxyld", "quantity": 1}
+      ],
+      "minimumBundlesPerCarton": 1,
+      "maximumBundlesPerCarton": 2,
+      "splitStrategy": "fill_two_then_remainder_one",
+      "fallback": "saved_package_plan"
+    }
+  ],
+  "pendingMappings": [
+    {
+      "label": "旧版糖果",
+      "sharesProductSpecId": "candy-regular-package",
+      "missingField": "merchantCode"
+    }
+  ]
+}

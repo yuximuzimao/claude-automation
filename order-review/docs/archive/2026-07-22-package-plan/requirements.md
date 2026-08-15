@@ -16,7 +16,8 @@
 - 推荐算法 v1 只匹配商品、数量和订单分组结构完全一致的历史案例。
 - 推荐可以直接采用、修改后确认或拒绝，并保留案例与算法版本追踪。
 
-下一阶段方向见 `../../2026-07-22-approximate-recommendation-direction.md`。
+当时的下一阶段方向现归档于
+`../2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md`。
 
 ## 1. 产品定位
 

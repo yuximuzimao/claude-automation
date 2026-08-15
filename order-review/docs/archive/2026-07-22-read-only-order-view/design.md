@@ -5,7 +5,7 @@
 状态：历史设计，第一阶段已完成  
 范围：快麦 ERP「订单处理 / 待审核订单」页面，当前序号 1 订单的只读读取和桌面悬浮窗展示
 
-> 当前方向见 `../../2026-07-22-approximate-recommendation-direction.md`。本文保留第一阶段设计背景和早期页面事实，不应覆盖当前代码与 `AGENTS.md` 中已经更新的字段语义。
+> 当时的近似推荐方向现归档于 `../2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md`。本文保留第一阶段设计背景和早期页面事实，不应覆盖当前代码与 `AGENTS.md` 中已经更新的字段语义。
 
 ## 1. 项目目标
 

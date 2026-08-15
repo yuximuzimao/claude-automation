@@ -469,6 +469,36 @@ def test_same_order_restores_saved_plan_and_merges_duplicate_rows(tmp_path):
     assert repeated.historical_plan.total_quantity == 2
 
 
+def test_same_order_saved_plan_short_circuits_candidate_generation(
+    tmp_path,
+    monkeypatch,
+):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    first = PackagePlanWorkflow(repository)
+    first.load_order(make_order("ORDER-SAVED", quantity=2))
+    first.start_split()
+    product_id = first.source_snapshot.products[0].source_product_id
+    first.set_quantity("package-1", product_id, 1)
+    first.add_package()
+    first.set_quantity("package-2", product_id, 1)
+    saved = first.confirm()
+
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError("已有保存方案时不得继续生成候选或调用后续尺寸计算")
+
+    monkeypatch.setattr(
+        "order_review.package_workflow.find_recommendations",
+        fail_if_called,
+    )
+    repeated = PackagePlanWorkflow(repository)
+    repeated.load_order(make_order("ORDER-SAVED", quantity=2))
+
+    assert repeated.historical_case == saved
+    assert repeated.historical_plan is not None
+    assert len(repeated.historical_plan.packages) == 2
+    assert repeated.recommendations.candidates == ()
+
+
 def test_editing_same_order_saves_linked_order_version(tmp_path):
     repository = JsonCaseRepository(tmp_path / "cases.json")
     first = PackagePlanWorkflow(repository)

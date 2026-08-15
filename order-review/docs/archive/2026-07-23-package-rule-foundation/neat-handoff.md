@@ -154,7 +154,8 @@ PYTHONPATH=/Users/chat/claude/order-review/src
 - 运费优化。
 - ERP 审核、拆单、提交及其成功判定。
 
-下一阶段入口：`../../2026-07-22-approximate-recommendation-direction.md`。
+当时的下一阶段入口现归档于
+`../2026-08-14-carton-packing-foundation/approximate-recommendation-direction.md`。
 
 ## 工作区说明
 
