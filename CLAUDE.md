@@ -87,12 +87,24 @@ How to apply:
 - 任何 commit 包含文件重命名/删除/新增/移动 → 同步更新所属项目 `SKILL.md` PATHS 区块，新文件属核心流程则补 ENTRY MAP
 - 谁制造变更谁更新地图：Claude 改的文件 Claude 更新，用户改的文件 Claude 主动检查并更新。pre-commit hook 做安全网
 
-## 目录约定
+## 项目结构与文档职责
 
-- 根目录：`CLAUDE.md`（Claude Code 项目规则）、`AGENTS.md`（Codex CLI 入口规则）、`docs/project-aliases.md`（中文项目别名路由）、子项目文件夹。`.txt` / 截图 / 临时脚本一律归属对应目录
-- 新子项目第一步写 CLAUDE.md
-- 临时产出放 `_sandbox/`（30 天后还有用→memory 或 docs/，没用→删）
-- `docs/HANDOFF.md`：跨 agent 交接文件，工作区脏或跨 session 未完成时写入；已验证完成的以 git commit 为准
+- 根目录只维护工作区级规则与路由：`CLAUDE.md`、`AGENTS.md`、`docs/project-aliases.md` 和跨项目协作文档；业务文件必须归属具体子项目。
+- 准备长期维护的子项目初始化时必须同时建立：`SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；需要人类快速理解时建立 `README.md`。不能只建其中一两个入口后边做边补。
+- **职责唯一，不复制当前状态**：`SKILL.md` = Agent导航；`CLAUDE.md` = 稳定Session启动/安全边界；`README.md` = 人类概览；`docs/INDEX.md` = 文档/数据导航；`tasks/todo.md` = 尚未完成事项。项目存在持续变化的当前状态时，必须单独设 `CURRENT.md`（可位于业务子目录），它是该状态的唯一真值。
+- **INDEX不是规则垃圾桶**：小项目可在 `docs/INDEX.md` 放少量通用规则；一旦出现多个独立工作流/规则域，或读取INDEX会被迫加载大量与当前任务无关的规则，必须建立 `docs/rules/README.md` 做路由并按主题拆文件。不要等到单文件几百行才拆。
+- **永久规则 / 当前状态 / 历史分离**：跨批次长期方法 → `docs/rules/`；当前状态 → `CURRENT.md`；单次分析/阶段证据 → `docs/archive/` 或项目既有历史目录；临时发现 → `tasks/lessons.md`，稳定后迁走并删除重复项。NEAT只是阶段归档，不承担永久规则入口。
+- 新项目的历史文档默认使用 `docs/archive/`（可按 `neat/`、日期或工作流继续分层）；`sessions/` 默认保留给运行时/认证会话。旧项目若已有 `docs/**/sessions/` 文档目录可以保留，但必须明确它是可版本化文档。
+- 临时产出放工作区 `_sandbox/`（30天后还有用 → 项目docs/memory，没用 → 删）；不要在项目内新增第二套临时目录。
+- `docs/HANDOFF.md`：跨 agent 交接，工作区脏或跨session未完成时使用；已验证完成状态以Git commit为准。
+
+## 项目结构变更门禁
+
+- 新增/删除/移动/重命名入口文档或核心文件时，必须同步 `SKILL.md` PATHS/ENTRY MAP、`docs/INDEX.md` 和所有CURRENT/README中的有效链接。
+- 被新结构替代的旧权威文件：先逐项确认内容已迁移，再搜索仓库内有效引用，迁完后直接删除。除非存在明确外部消费者，不保留“兼容跳转壳”；跳转壳会让权威边界继续漂移。
+- 删除后允许历史NEAT描述“旧文件当时存在”，但任何当前入口、代码生成器、SOP、todo不得再要求读取旧路径。
+- `.gitignore` 的目录规则必须审计作用域。只想忽略根目录时必须写根锚定形式（如 `/sessions/`），禁止用 `sessions/` 误伤子项目同名文档。新增/修改ignore后至少验证一个“应该忽略”样本和一个“绝不该忽略”样本。
+- 项目文档目录默认应进入Git。任何文档目录被ignore时必须先判断这是设计意图还是规则误伤，不能长期靠 `git add -f` 维持正常流程。
 
 ## Codex 协作
 
@@ -104,4 +116,13 @@ How to apply:
 
 ## 新项目开工
 
-详见 `docs/new-project-template.md`。触发：用户提到「新项目」「从零开始」「初始化项目」「scaffold」。
+触发：用户提到「新项目」「从零开始」「初始化项目」「scaffold」。必须先读并执行 `docs/new-project-template.md`，不能只创建代码目录后以后再补文档。
+
+完成初始化前必须同时：
+1. 建立模板要求的入口/状态/规则骨架；
+2. 在 `docs/project-aliases.md` 注册中文名/触发词；
+3. 在 `AGENTS.md` 子项目入口表登记该目录及最小必读文件；
+4. 检查 `.gitignore` 是否误伤新项目的文档/数据目录；
+5. 从空上下文模拟一次 `SKILL → todo/INDEX → 按需规则/CURRENT` 冷启动，确认不依赖聊天记忆才能恢复项目。
+
+以上任一未完成，不算“项目初始化完成”。
