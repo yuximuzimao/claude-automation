@@ -1526,7 +1526,7 @@ def render_audit_markdown(route: dict[str, Any]) -> str:
         "## N3 — 已验证路线小文档入口",
         "",
         "- 当前节点、通用生成规则和逐段实跑结果已迁移到`docs/verified-routes/`；本NEAT只保留项目级生成审计，不再堆积持续变化的逐任务细节。",
-        "- 新对话先读`docs/verified-routes/README.md`，再读`CURRENT.md`、`RULES.md`和当前等级相邻的一份`segments/*.md`。",
+        "- 新对话先读`docs/verified-routes/README.md`与`CURRENT.md`；涉及规则判断时从`docs/rules/README.md`按需加载对应子规则，历史分段只读当前等级相邻的一份`segments/*.md`。",
         "- 五开等级与经验始终以五个角色中等级/经验最低的角色为准；HTML只保留历史参考，执行路线使用短分区任务单。",
         "",
         "## E — 使用的数据",

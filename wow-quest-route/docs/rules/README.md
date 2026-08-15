@@ -40,4 +40,4 @@
 - `data/observations/`：当前服务器五开机制与阻断实测。
 - `docs/verified-routes/sessions/`：阶段 NEAT 存档，只保存当时状态、证据、判断和恢复点。
 
-旧入口 `docs/verified-routes/RULES.md` 与 `docs/ROUTE_ATLAS_RULES.md` 仅保留兼容跳转，不再承载完整规则正文。
+新代码、文档和NEAT一律从本索引路由永久规则，不再维护其它永久规则总入口。

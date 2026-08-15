@@ -190,7 +190,7 @@ docs/analysis/video-route-horde-mapping-audit.md
 
 ```text
 docs/verified-routes/CURRENT.md
-docs/verified-routes/RULES.md（仅新增稳定规则）
+docs/rules/README.md（仅将稳定规则路由到对应子文档）
 docs/verified-routes/ERROR-BOOK.md（视频审计发现的新增错误类型）
 docs/verified-routes/segments/*.md
 ```

@@ -1,7 +1,7 @@
 # Route Atlas 约束门控规则冲突审计
 
 日期：2026-08-14
-状态：用户已逐项确认，相关语义已写入`docs/ROUTE_ATLAS_RULES.md`并开始代码化。
+状态：用户已逐项确认；这些长期语义当时写入旧Route Atlas总规则，现已迁移到`docs/rules/route-atlas-optimization.md`与相关子规则并开始代码化。
 
 ## 结论
 

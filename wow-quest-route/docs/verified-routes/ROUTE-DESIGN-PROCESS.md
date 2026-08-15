@@ -370,7 +370,7 @@
 
 - [ ] 已读取 `CURRENT.md`
 - [ ] 已读取当前执行稿
-- [ ] 已读取 `RULES.md`
+- [ ] 已读取 `docs/rules/README.md`，并按本次工作范围加载对应子规则
 - [ ] 已读取 `ERROR-BOOK.md`
 - [ ] 已读取 `FLIGHT-POINTS.md`
 - [ ] 当前最低号等级/经验已确认
@@ -441,7 +441,7 @@
 ### D. 新错误属于通用错误
 
 - 追加/更新 `ERROR-BOOK.md`；
-- 若形成稳定规则，同步进 `RULES.md` 或本 SOP；
+- 若形成稳定规则，从 `docs/rules/README.md` 路由到对应永久规则文件；只有流程顺序本身变化才修改本 SOP；
 - 不只修当前攻略正文。
 
 ---

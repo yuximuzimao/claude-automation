@@ -15,6 +15,8 @@
 
 任务知识可关联：typed facts/relations、numeric features、稳定标签、Target Cluster、Spatial Instance、五开机制、地形、特殊操作、掉落/等待风险、可交易/可购买三态、source/confidence和实跑纠错。
 
+稳定标签家族至少包括 `scope:*`、`objective:*`、`chain:*`、`trip:*`、`terrain:*`、`route:*`；机器关系至少支持 `precedes`、`same_accept_npc`、`same_turnin_npc`、`same_direct/resolved_creature`、`same_direct/resolved_object`、`same_required_item`、`spatial_overlap`、`same_chain`、`same_excursion_block`。标签用于解释，不能替代底层事实和成本计算。
+
 掉落物必须保存真实五开拾取机制；同一次掉落事件如果同尸体五号都能分别拿任务物，期望击杀次数不能机械乘五。
 
 ## 2. 从零主路线和当前执行路线
@@ -116,7 +118,7 @@ RouteState声望变化时：
 6. 当前门槛处理完再看更高门槛；
 7. 新插入若继续改声望立即递归触发。
 
-Repeatable必须读取真实specialFlags/状态，但练级目标下第一轮后默认不生成第二轮候选；无经验重复后续默认不接，除非用户切换声望/物品目标或它是有经验任务硬前置。
+Repeatable真值读取Questie compact quest DB字段24 `specialFlags` 的bit 1，并在RouteState中维护 `turnin_count`，避免把重复任务误记成一次性completed。练级目标下第一轮后默认不生成第二轮候选；无经验重复后续默认不接，除非用户切换声望/物品目标或它是有经验任务硬前置。
 
 ## 9. 当前路线裁剪恢复流程
 

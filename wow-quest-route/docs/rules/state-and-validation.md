@@ -73,8 +73,9 @@ Questie compact DB中的声望与其它Availability条件都是硬约束：
 
 - `preQuestSingle`：列表中任意一个完成即可；
 - `preQuestGroup`：列表全部完成；
-- `requiredMinRep`：当前声望必须达到；
-- `requiredMaxRep`：当前声望必须低于上限；
+- compact quest DB字段19 `requiredMinRep`：当前声望必须达到，判断为 `current_rep >= requiredMinRep`；
+- 字段20 `requiredMaxRep`：当前声望必须低于上限，判断为 `current_rep < requiredMaxRep`；
+- 字段26 `reputationReward`：属于RouteState状态转移，必须传播到后续任务可接性；
 - 职业、种族、技能、法术等条件同样不能静默忽略。
 
 物品触发任务不能只扫描NPC任务列表，必须同时检查Item DB/触发来源。
@@ -112,6 +113,8 @@ Questie compact DB中的声望与其它Availability条件都是硬约束：
 7. 本阶段形成完整恢复点时写NEAT。
 
 不允许只写历史解释而保留错误正文。
+
+已验证历史段的边界：只有用户实跑确认的机制、经验和路径才进入`docs/verified-routes/segments/`；尚未实跑的建议留在当前规划、analysis、todo或NEAT中，不能因为静态审计通过就标成已验证实跑路线。
 
 ## 8. NEAT / CURRENT / rules 的边界
 

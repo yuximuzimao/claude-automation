@@ -44,7 +44,7 @@
 - `route-atlas-optimization.md`：Route Atlas数据分层、Target Cluster/Spatial Instance、Hard Validator、插入/裁剪、声望、炉石、经验截止、优化器。
 - `route-atlas-ui-and-assets.md`：唯一工作台、逻辑步骤、HUD、备注、缩放/播放、地图底图、中文标签和离线资源。
 
-旧`docs/verified-routes/RULES.md`与`docs/ROUTE_ATLAS_RULES.md`保留短兼容入口，避免历史链接失效，但不再承载大段正文。
+后续复审认为保留兼容入口仍会制造失效/漂移风险：项目内引用已迁移到`docs/rules/`后，旧`docs/verified-routes/RULES.md`与`docs/ROUTE_ATLAS_RULES.md`直接删除，不再维护兼容文件。
 
 ### 3. 阶段状态不得混入永久规则
 

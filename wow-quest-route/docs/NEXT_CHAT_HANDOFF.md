@@ -53,13 +53,13 @@ data/routes/dk-55-80-world-tasks.html
 
 ## E. 恢复 Route Atlas / 地图路线 / 任务知识图谱工作
 
-先读无日期长期总规则，再按任务需要读取日期化阶段索引与专项文档：
+先读永久规则路由，再按当前工作类型加载Route Atlas子规则；日期化阶段索引只用于恢复形成过程与地图特定历史：
 
 ```text
-docs/ROUTE_ATLAS_RULES.md
+docs/rules/README.md
+docs/rules/route-atlas-optimization.md
+docs/rules/route-atlas-ui-and-assets.md
 docs/analysis/2026-08-14-route-atlas-session-decision-index.md
-docs/analysis/2026-08-14-route-atlas-cluster-incremental-insertion-method.md
-docs/analysis/2026-08-14-zangarmarsh-route-version-index.md
 ```
 
 若继续当前首组的赞加执行，先以`docs/verified-routes/CURRENT.md`指定的当前执行稿为唯一玩家路线；不要从从零复用版自行剪枝。
@@ -72,6 +72,6 @@ docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md
 data/routes/route-atlas-workbench.html（地图选择“赞加沼泽”）
 ```
 
-`2026-08-12-route-atlas-quest-knowledge-graph-concept.md`保留最初需求来源；`2026-08-12-route-atlas-v1-contract.md`保留Questie/前端数据边界；`2026-08-13-route-atlas-optimization-framework.md`与mother-model/global-model文档保留路线计算理论与标签/关系设计。永久方法发生冲突时以`docs/ROUTE_ATLAS_RULES.md`为准；日期化决策索引、增量方法和版本索引用于恢复形成过程与地图特定细节。
+`2026-08-12-route-atlas-quest-knowledge-graph-concept.md`保留最初需求来源；`2026-08-12-route-atlas-v1-contract.md`保留Questie/前端数据边界；`2026-08-13-route-atlas-optimization-framework.md`与mother-model/global-model文档保留路线计算理论与标签/关系设计。永久方法发生冲突时以`docs/rules/README.md`路由到的对应子规则为准；日期化决策索引、增量方法和版本索引用于恢复形成过程与地图特定细节。
 
 当前Route Atlas已经不是“仅设计提案”：赞加已完成R1–R71历史快照、完整任务宇宙审计、从零复用路线、最终整图动态审计和HTML工作台。旧exact/CP-SAT/MIP/solver只作为对照/异常检测/局部成本参考，不再直接生成玩家路线。

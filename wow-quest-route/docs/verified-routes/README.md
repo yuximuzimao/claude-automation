@@ -23,7 +23,6 @@
 
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、路线轴和唯一恢复入口。
 - [`../rules/README.md`](../rules/README.md)：永久规则总路由；按当前任务只加载对应子规则。
-- [`RULES.md`](RULES.md)：旧路径兼容入口，只跳转到`docs/rules/`，不再承载完整规则正文。
 - [`ERROR-BOOK.md`](ERROR-BOOK.md)：已发现的路线错误、错误原因及禁止复发项；只在生成/修订/审计时加载。
 - [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组五开的飞行点状态；未列出的点按未开启处理。
 - [`PALADIN-COMBAT-NOTES.md`](PALADIN-COMBAT-NOTES.md)：圣骑士战斗、圣印与天赋记录。

@@ -10,7 +10,7 @@
 - 赞加首组已完整跑完，下一批从零权威骨架见`ZANGARMARSH-V2.md`；纳格兰67→68首组实跑顺序已闭合，外域不再回头补跨图遗留任务。
 - 下一批从1级练新号时另开“1—57低随机掉落实验”：只重点降权刷怪后随机掉任务物且需要补刷的任务，**不包括固定场景物拾取/固定交互**；若经验不足，只补回最少量、高重叠/高掉率/高后续价值的随机掉落任务。58进入外域后停止该实验，重新计入金币与装备出售收益。
 - 最新NEAT：`sessions/2026-08-16-borean-live-route-mechanics-neat.md`。
-- 永久规则总入口：`../rules/README.md`。北风路线数据/裁剪按`../rules/route-atlas-optimization.md`，任务执行备注按`../rules/execution-and-mechanics.md`；旧`../ROUTE_ATLAS_RULES.md`与`RULES.md`只保留兼容跳转。永久规则不得从日期化NEAT反推。
+- 永久规则总入口：`../rules/README.md`。北风路线数据/裁剪按`../rules/route-atlas-optimization.md`，任务执行备注按`../rules/execution-and-mechanics.md`。永久规则不得从日期化NEAT反推。
 
 ## 当前北风执行稿
 

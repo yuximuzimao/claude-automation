@@ -86,7 +86,7 @@
 ## 新对话执行约束
 
 1. 先读`docs/verified-routes/CURRENT.md`。
-2. 再读`docs/verified-routes/RULES.md`。
+2. 永久规则现从`docs/rules/README.md`按需加载；本条原先指向旧`docs/verified-routes/RULES.md`，旧路径已删除。
 3. 再读`docs/verified-routes/segments/25-26-hillsbrad-farms-mine-syndicate.md`。
 4. 当前未完成状态以用户新对话最新报告为准。
 5. 不得预先把498《拯救行动》、541《希尔斯布莱德之战》、547《亨伯特的长剑》或14351《希尔斯布莱德之战》标成完成。

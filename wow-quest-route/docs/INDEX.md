@@ -27,7 +27,7 @@
 | Route Atlas数据层、状态机、插入/裁剪、炉石、求解器 | `rules/route-atlas-optimization.md` |
 | Route Atlas HTML、逻辑步骤、HUD、地图底图/资源 | `rules/route-atlas-ui-and-assets.md` |
 
-旧 `verified-routes/RULES.md` 与 `ROUTE_ATLAS_RULES.md` 只保留兼容跳转，不再作为大规则正文。
+所有永久规则只从 `rules/README.md` 路由；禁止新增其它永久规则总入口。
 
 ## §3 路线设计与错误复查
 

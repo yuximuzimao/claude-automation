@@ -48,7 +48,7 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 - `route-atlas-optimization.md`：Route Atlas数据、状态机、插入/裁剪、炉石、求解器。
 - `route-atlas-ui-and-assets.md`：唯一HTML、逻辑步骤、HUD、底图、地图资源和离线复制。
 
-旧 `docs/verified-routes/RULES.md` 与 `docs/ROUTE_ATLAS_RULES.md` 只保留兼容跳转。
+永久规则只从 `docs/rules/README.md` 进入，不维护其它总规则入口。
 
 ## Route Atlas
 

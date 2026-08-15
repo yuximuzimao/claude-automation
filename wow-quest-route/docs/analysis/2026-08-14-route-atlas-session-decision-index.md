@@ -3,7 +3,7 @@
 日期：2026-08-14
 状态：历史/阶段决策索引；不再承担长期总规则入口
 
-长期权威：`docs/ROUTE_ATLAS_RULES.md`。跨地图、跨批次仍应遵守的数据分层、当前路线裁剪、增量插入、动态图验收与前端契约已经迁入无日期总规则；本文保留8/12—8/14形成过程、赞加阶段状态、理论探索和当时专项文档导航。
+长期权威现为`docs/rules/README.md`路由到的Route Atlas子规则：路线数据/裁剪/优化见`docs/rules/route-atlas-optimization.md`，前端与地图资源见`docs/rules/route-atlas-ui-and-assets.md`。本文只保留8/12—8/14形成过程、赞加阶段状态、理论探索和当时专项文档导航。
 
 用途：确认本轮围绕“地图路线 + 任务知识节点 + 关系图谱 + 路线计算 + 增量插入 + 动态HTML”的讨论是否已经落档，并明确旧方案与当时当前方案的层级。后续会话必须先读长期总规则，再按需使用本文恢复这段历史上下文。
 
@@ -154,9 +154,9 @@
 
 ## 9. 当前文档优先级
 
-长期方法已经迁入`docs/ROUTE_ATLAS_RULES.md`。后续恢复按以下层级理解：
+长期方法现由`docs/rules/README.md`路由到对应子规则。后续恢复按以下层级理解：
 1. 最新用户明确现场状态 + `docs/verified-routes/CURRENT.md`决定当前角色该做什么；
-2. `docs/ROUTE_ATLAS_RULES.md`决定跨地图长期方法与产品契约；
+2. `docs/rules/route-atlas-optimization.md`与`docs/rules/route-atlas-ui-and-assets.md`分别决定跨地图路线方法与前端/资源契约；
 3. 本索引、增量方法、赞加版本索引、complete-task-universe、final-map-audit与NEAT保存8/12—8/14形成过程和赞加地图特定事实；
 4. `2026-08-12-route-atlas-v1-contract.md`与8/13 optimization/mother-model/global-model保存早期契约、理论和数据设计来源；
 5. 更早concept文档保存原始需求来源，不覆盖后续长期总规则。
