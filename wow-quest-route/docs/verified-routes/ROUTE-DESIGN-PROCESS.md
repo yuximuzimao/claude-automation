@@ -1,6 +1,6 @@
 # 路线设计与修订强制流程
 
-用途：这是本项目所有“新建路线、修订路线、重算后续路线、回答跨区怎么走、根据实跑反馈继续规划”的统一 SOP。`RULES.md` 保存具体规则，`ERROR-BOOK.md` 保存历史错误；本文件规定**什么时候必须检查什么，以及检查顺序**。
+用途：这是本项目所有“新建路线、修订路线、重算后续路线、回答跨区怎么走、根据实跑反馈继续规划”的统一 SOP。本文件只规定**什么时候检查什么以及检查顺序**；具体永久规则从 `docs/rules/README.md` 按当前阶段渐进式加载，`ERROR-BOOK.md` 保存历史错误。
 
 任何涉及任务路线或跨区移动的答案，都不能只凭当前执行稿正文直接回答。必须先完成与问题范围对应的流程。新建/重构完整路线必须执行全流程；单纯问“从A怎么去B”至少执行阶段0、1、2、8。
 
@@ -27,13 +27,13 @@
 每次新建、修订或继续路线，先读取：
 
 - `docs/verified-routes/CURRENT.md`
-- `docs/verified-routes/RULES.md`
+- `docs/rules/README.md`，再按当前阶段加载对应子规则；完整路线设计通常需要 `leveling-and-selection.md`、`execution-and-mechanics.md` 和 `state-and-validation.md`
 - `docs/verified-routes/ERROR-BOOK.md`
 - `docs/verified-routes/FLIGHT-POINTS.md`
 - `CURRENT.md` 指向的当前执行稿
 - `docs/task-library/`中本轮任务已经存在的人工核验卡片
 
-只有问题明显局限在一个已验证小段时，才可减少其他历史文件读取；但上述五项不能因“我记得”而跳过。
+不要因为“我记得”跳过CURRENT、规则路由和错题本；但也不要为了一个局部问题一次性加载全部 `docs/rules/`、全部历史NEAT或全部任务卡。
 
 人工任务卡片存在且版本、等级、队伍和路线上下文仍适用时直接复用，不重复计算。只有卡片缺失、适用条件变化、底层来源更新或用户实服反馈冲突时，才重新核验受影响任务；核验结果必须回写任务卡片。
 

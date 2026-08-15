@@ -1,88 +1,98 @@
-# 魔兽世界任务路线规则
+# 魔兽世界任务路线文档索引
 
-## §1 目标
+用途：这是项目文档导航，不承载完整永久规则，也不保存当前角色状态。Agent进入项目先读 `SKILL.md`；当前进度只读 `docs/verified-routes/CURRENT.md`；永久规则从 `docs/rules/README.md` 按需加载。
 
-当前唯一主线目标是把首组五个血精灵圣骑士连续升到80级；死亡骑士计划暂缓。50级以后采用成熟地图主轴依次推进，并以“当前任务中心尽量全清、最少转圈、自然衔接下一地图、只排除当前缺前置/职业不可接/多日不可一次清空内容”为主要路线方法。老手给出的地图等级数字先作为连续阶段检查点，必须经本地图可执行经验核验后才能解释成单图离图等级；任务已经清空但未到口述数字时，不在原图无任务刷怪，顺势进入下一任务中心。路线只按一个主控角色移动，另外四个角色持续跟随。
+## §1 当前执行与恢复
 
-`data/routes/simple-leveling-route.html`保存圣骑士历史参考，`data/routes/dk-55-80-world-tasks.html`保存死亡骑士后续母版；两者都不是当前50—80玩家路线的唯一执行真值。当前执行采用`docs/verified-routes/CURRENT.md`指向的小文档与分区任务单；旧坐标导航器和分区域候选页只作为内部召回/数据来源。
+| 需求 | 入口 |
+| --- | --- |
+| 继续当前首组实跑 | `verified-routes/CURRENT.md` |
+| 查看已验证路线/NEAT索引 | `verified-routes/README.md` |
+| 当前飞行点状态 | `verified-routes/FLIGHT-POINTS.md` |
+| 圣骑士战斗/雕文/圣契 | `verified-routes/PALADIN-COMBAT-NOTES.md` |
+| 当前Route Atlas执行页 | `../data/routes/route-atlas-workbench.html` |
+| Route Atlas当前结构化路线 | `../data/route-atlas/workbench-routes.json` |
 
-## §2 文档读取入口
+`CURRENT.md` 是当前等级、位置、任务状态和唯一恢复点的真值。README、CLAUDE、SKILL和永久规则不得复制当前等级/任务栏长期维护。
 
-- 新对话先读`docs/verified-routes/README.md`。
-- 当前等级、经验和身上关键任务只读`docs/verified-routes/CURRENT.md`。
-- 当前玩家攻略只执行`CURRENT.md`指定的一份；旧完整攻略只保留跳转页，不提供可误执行正文。
-- 继续、生成、修订或审计路线先读`docs/verified-routes/ROUTE-DESIGN-PROCESS.md`，并复用`docs/task-library/`中已核验的逐任务事实。
-- 每次生成、修订或审计路线前必须读`docs/verified-routes/ERROR-BOOK.md`并执行固定复查清单。
-- 路线生成方法只读`docs/verified-routes/RULES.md`。
-- 历史实跑只按当前等级读取一份相关`docs/verified-routes/segments/*.md`，不要一次加载全部历史。
-- `docs/NEAT_SIMPLE_LEVELING_ROUTE.md`保存生成审计和项目背景；`docs/NEXT_CHAT_HANDOFF.md`只保存工作流分流入口，不复制当前状态。
-- 若任务是Route Atlas、地图路线、任务知识图谱、当前路线裁剪或动态图前端，先读无日期长期权威`docs/ROUTE_ATLAS_RULES.md`；再读`docs/analysis/2026-08-14-route-atlas-session-decision-index.md`及当前地图/NEAT文件恢复阶段状态。日期化decision/version文档负责历史与地图特定事实，不再承担永久规则入口。
-- Route Atlas唯一HTML入口固定为`data/routes/route-atlas-workbench.html`；所有地图当前路线共用这一工作台，版本历史只留Markdown，不再生成单地图/单版本HTML。
-- 逐集视频拆解新对话先读`docs/video-extraction/README.md`和`docs/video-extraction/CURRENT.md`；不得先加载实时路线状态或全部已完成集。阶段性错误与恢复状态审计保存在`docs/video-extraction/sessions/`，仅按需读取最新一份NEAT归档。
-- 全部视频结束后的整合顺序固定读`docs/video-extraction/POST-EXTRACTION-PLAN.md`。
+## §2 永久规则路由
 
-## §3 数据分层
+总入口：`rules/README.md`
 
-1. **Questie基础层**：任务ID、依赖、NPC/物体/物品、刷新点、中文名称。
-2. **路线骨架层**：接取、目标簇、交付和解锁顺序。
-3. **五开实测层**：击杀是否共享、物品是否个人、每号是否需点击、跟随卡点和地形。
-4. **人物历程层**：当前角色实际接取/完成顺序，用于比较而非替代任务关系。
-5. **RXP参考层**：只读取历史SavedVariables中实际存在的指南名称、等级段和衔接；没有逐步路线正文时不得推测接取或移动步骤。
-6. **视频事实层**：逐集保存任务动作、目标进度、剪辑缺口和交通实例；只作为第二阶段映射与优化证据，不直接覆盖Questie、当前人物状态或五开实测。
+| 规则主题 | 文档 |
+| --- | --- |
+| 经验预算、地图轴、任务取舍、随机掉落/护送 | `rules/leveling-and-selection.md` |
+| 玩家攻略、隐藏机制、掉落触发、五开共享、洞穴/楼层 | `rules/execution-and-mechanics.md` |
+| 当前/从零路线、Journey、完整性审计、NEAT/Git边界 | `rules/state-and-validation.md` |
+| Route Atlas数据层、状态机、插入/裁剪、炉石、求解器 | `rules/route-atlas-optimization.md` |
+| Route Atlas HTML、逻辑步骤、HUD、地图底图/资源 | `rules/route-atlas-ui-and-assets.md` |
 
-任何实测结论不得写回Questie基础层；RXP与Questie冲突只记录在内部归档，不进入用户页面。
+旧 `verified-routes/RULES.md` 与 `ROUTE_ATLAS_RULES.md` 只保留兼容跳转，不再作为大规则正文。
 
-## §4 路线生成规则
+## §3 路线设计与错误复查
 
-- 任务前置关系是硬约束。
-- 等级、当前经验、任务是否可接和是否需要补经验，始终以五个角色中等级/经验最低的角色为准。
-- 路线顺序以实际小区域和道路移动为主，不能按“接取/目标/交付”动作类型跨地点合并。
-- 自动候选可以作为明确标注“尚未实跑”的全任务审阅母版公开，用于先完成覆盖；只有经过逐任务人工取舍和实跑修正的地图段才能称为稳定攻略或固定打金流程。
-- 只有NPC或目标点确实位于同一小区域时才能合并；静态坐标平均值和大范围刷新边界不能证明它们接近。
-- 炉石绑定、飞行点、传送和远端任务后的回程属于路线步骤，不能省略为默认常识。
-- 个人拾取或点击任务以五个角色中的最低进度作为离开条件。
-- 红色表示高五开负担，而不是“出现任务物品”：普通怪随机掉落或多数量个人收集标红；单个命名怪必掉1件、固定物体单次点击标绿。
-- 任务是否可跳过与红绿颜色分开判断。可跳支线不插入主流程，统一放到地图末尾的补经验清单，并按同级基础经验降序排列。
-- 五开判断属于内部决策数据，不在用户详情中显示。详情只保留经验、突出前置、重点目标、地点和最短流程；单一前置要明确写“必须先完成”。
-- 怪物名、任务物品名和固定交互目标必须单独高亮，不能埋在长段落里。
-- 地图欧氏距离只用于审阅：0—2.5为同一区域、2.5—5为附近、5—8为不同任务点、大于8为较远；不能替代道路、桥梁、山体和实跑顺序。
-- 每个带坐标的路线切换显示距离档位，并允许用户标记“过远”后复制反馈。
-- 用户页面不在任务后追加旧分类标签，颜色直接落在任务名上。
-- 每一步固定区分地点、NPC、目标和操作，只描述一个实际地点，删除重复的“之后继续……”和大段技术说明。
-- 执行路线首选“出发前需要接的任务 → 同一区域A/B → 交付与本段结束状态 → 下一片区域”的短分区任务单，不再默认输出一次性HTML或长序号流水账。
-- 隐身、巡逻、楼层、洞穴入口、护送启动、跟随卡点和个人拾取机制必须显式备注，不能只给坐标和数量。
-- 路线终点应落在下一个任务中心或明确的交接任务上，并至少规划到下一地区第一批任务。
-- 任务接不到、交不了、入口封闭或服务器位面异常时，记录到`data/observations/blocked-tasks.json`并跳过；单个阻断任务不能卡住圣骑士到55级或死亡骑士打金主流程。
+- `verified-routes/ROUTE-DESIGN-PROCESS.md`：完整新建、重算、系统修订路线时才加载的SOP。
+- `verified-routes/ERROR-BOOK.md`：历史重复错误和发布前对抗复查；路线生成/修订/审计时加载。
+- `task-library/README.md`：单任务知识字段、证据和纠错写回规则。
 
-## §5 五开任务类型
+局部现场问题不必为了“保险”一次性读完整SOP、全部错题、全部任务卡和全部永久规则；按 `SKILL.md` 路由最小上下文。
 
-| 类型 | 含义 | 默认完成条件 |
-| --- | --- | --- |
-| `kill_shared_expected` | 击杀预计组队共享，尚未实测 | 五号任务进度都完成 |
-| `loot_personal_expected` | 掉落任务物品预计个人拾取 | 五号分别达到数量 |
-| `object_personal_expected` | 地面物体预计逐号点击/拾取 | 五号分别完成 |
-| `ability_personal` | 每个角色必须自己使用技能 | 五号分别触发 |
-| `dialogue_personal` | 每个角色分别接取、交付或对话 | 五号分别完成 |
-| `confirmed_*` | 已经由本服实测确认 | 按确认规则执行 |
+## §4 数据与证据层
 
-“预计”不得改成“确认”，除非用户实际观察到五号结果。
+1. **Questie Raw / Effective**：任务ID、前置、NPC/物体/物品、静态坐标、修正层；原始事实不被实跑覆盖。
+2. **任务知识层**：`task-library/`，保存可复用机制、地形、来源与证据。
+3. **五开实测层**：`../data/observations/`，保存共享/个人、阻断和服务器特定行为。
+4. **Route Atlas路线层**：`../data/route-atlas/`，保存当前有效结构化路线和地图任务基础数据。
+5. **人物历程层**：`../data/journey/`，只保存脱敏Journey，用于复盘接取/交付/升级，不代表移动轨迹。
+6. **阶段历史层**：`verified-routes/sessions/`，保存NEAT当时状态/证据/判断；不覆盖CURRENT和永久规则。
+7. **视频事实层**：`video-extraction/`，逐集保存视频事实，只有后续整合阶段才映射到当前路线。
 
-## §6 置信度
+证据冲突默认优先级：用户当前实测 > 最新Questie/实跑状态 > observations/verified route > Questie数据库 > 公共资料 > 旧路线假设。
 
-- **高**：Questie原始任务链、固定NPC/物体坐标、明确任务字段。
-- **中**：根据多个刷新点聚类出的目标区域和静态距离排序。
-- **低**：道路方向、跟随可达性、刷新效率、具体五开共享行为。
+## §5 Route Atlas
 
-每版路线必须把低置信度步骤显式列为验证项。
+- 唯一正式HTML：`../data/routes/route-atlas-workbench.html`。
+- 地图资源池：`../data/routes/maps/`。
+- 工作台构建：`../scripts/build_route_atlas_workbench.py`。
+- 路线数据：`../data/route-atlas/workbench-routes.json`。
+- 永久路线优化规则：`rules/route-atlas-optimization.md`。
+- 永久前端/地图资源规则：`rules/route-atlas-ui-and-assets.md`。
 
-## §7 已知坑位
+地图特定R快照、某次局部路线、某批角色等级经验和一次性异常只留analysis/NEAT，不提升为永久规则，除非明确验证为跨地图长期规律。
 
-1. 任务字段 `zoneOrSort=3431`，但NPC/物体刷新点使用地图区域ID `3430`；不能用同一ID直接做过滤。
-2. Questie人物历程位于账号级 `SavedVariables/Questie.lua` 的 `QuestieConfig.char[*].journey`；一个文件可包含多个角色条目。历程只记录接取、完成/交付、放弃和时间，不记录死亡、移动坐标与目标进度。
-3. WTF中的`RXPGuides.lua`已确认是历史残留或整合包预设；当前AddOns没有RXP。该文件包含指南元数据和任务状态缓存，但不含逐步路线正文，只能参考地图顺序和等级段。
-4. 逐日岛任务在Questie WotLK修正文件中未发现针对核心任务/NPC/物体的覆盖，但换插件版本后必须重新检查。
-5. 物品触发任务（如污染的奥术碎片）不能只从NPC任务列表推导，必须同时读取Item DB。
-6. Questie的`preQuestSingle`表示任意完成其中一个，`preQuestGroup`表示全部完成；最终路线必须跨地图做前置闭包，并删除无法由主路线满足前置的后续任务。
-7. 死亡骑士出生链使用特殊任务分类`zoneOrSort=-372`，生成时必须映射到区域4298“东瘟疫之地：血色领地”；普通正数区域筛选会漏掉整条出生链。
-8. 部落候选任务必须同时核对接取NPC与交付NPC阵营；只检查接取端会把暴风城等联盟不可交付任务混入母版。
-9. 自动`world-candidate`区域候选不是完整任务清单。2026-08-03确认《回家》（4770）未进入任何自动候选目录；野外护送、跨区归属、特殊分类、物品/物体触发和现场NPC任务必须通过`ERROR-BOOK.md`的候选并集与差集审计补查。
+## §6 Journey与Questie
+
+- 导出/脱敏说明：`JOURNEY_EXPORT.md`。
+- 当前脱敏历程：`../data/journey/current-paladin.json`。
+- Questie Journey位于账号级 `QuestieConfig.char[*].journey`；一个文件可能有多个角色。
+- Journey记录接取、完成/交付、放弃、升级、时间戳；不记录死亡、真实移动、找怪耗时或目标进度。
+- 原始Questie/WTF不提交Git；任务触发物、物体触发等不能只靠NPC任务列表推导。
+
+## §7 视频拆解
+
+- 方法：`video-extraction/README.md`
+- 当前集恢复点：`video-extraction/CURRENT.md`
+- 全集后整合：`video-extraction/POST-EXTRACTION-PLAN.md`
+- 阶段NEAT：`video-extraction/sessions/`
+
+视频逐集阶段只提取事实，不与当前首组Questie状态或路线优化混算。
+
+## §8 历史与归档
+
+- `verified-routes/sessions/`：首组练级/Route Atlas阶段NEAT。
+- `verified-routes/segments/`：已验证历史路线段。
+- `analysis/`：日期化分析、模型实验、地图特定审计和形成过程。
+- `NEAT_SIMPLE_LEVELING_ROUTE.md` 等旧文档仅作历史，不作为当前入口。
+
+历史文件只按当前问题需要读取一份或少量相关文件，禁止批量加载整个目录。
+
+## §9 临时待办与教训
+
+- `../tasks/todo.md`：只记录仍会改变下一步工作的事项。
+- `../tasks/lessons.md`：只记录尚未确定归宿的新发现；稳定后迁入 `rules/`、ERROR-BOOK、task-library、observations或NEAT，并从lessons删除。
+
+## §10 Git与sessions命名
+
+- 仓库根 `/sessions/`：浏览器/账号运行时会话，敏感数据，必须Git忽略。
+- `verified-routes/sessions/` 与 `video-extraction/sessions/`：项目Markdown历史，必须正常commit/push。
+- 根 `.gitignore` 必须使用 `/sessions/`，不能写成会误伤子项目文档的 `sessions/`。

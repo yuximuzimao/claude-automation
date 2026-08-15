@@ -5,7 +5,8 @@
 ## 当前执行入口
 
 - 当前唯一恢复入口为[`CURRENT.md`](CURRENT.md)：首组正在实跑北风苔原，最低号最新已69级约半管经验；现场至少已验证到战歌农场/血孢平原的《慈悲为怀》《授粉的巨蛾》《巨大的蛾卵》区段。北风继续按局部实跑修正，不从开场重算整图。
-- [`sessions/2026-08-16-borean-live-route-mechanics-neat.md`](sessions/2026-08-16-borean-live-route-mechanics-neat.md)：最新NEAT归档；记录北风221几何点/51逻辑步骤、167条逐任务可执行性审计、怪掉物触发任务强制说明、11606/11611/11602/11676五开机制、《授粉的巨蛾》与《巨大的蛾卵》同点合并，以及赞加/纳格兰物品触发任务回扫。
+- [`sessions/2026-08-16-borean-live-route-mechanics-neat.md`](sessions/2026-08-16-borean-live-route-mechanics-neat.md)：最新玩家路线NEAT；记录北风221几何点/51逻辑步骤、167条逐任务可执行性审计、怪掉物触发任务强制说明、11606/11611/11602/11676五开机制、《授粉的巨蛾》与《巨大的蛾卵》同点合并，以及赞加/纳格兰物品触发任务回扫。
+- [`sessions/2026-08-16-doc-architecture-and-session-ignore-neat.md`](sessions/2026-08-16-doc-architecture-and-session-ignore-neat.md)：文档基础设施NEAT；记录永久规则渐进式拆分、README/SKILL/CLAUDE/INDEX职责收口，以及根`/sessions/`与项目`docs/**/sessions/`的Git边界修复；不改变玩家现场恢复点。
 - [`sessions/2026-08-15-route-atlas-hd-map-assets-neat.md`](sessions/2026-08-15-route-atlas-hd-map-assets-neat.md)：Route Atlas地图资源专项归档；记录68张地图中的65张HD底图、3张安全回退、经典旧世界/TBC共790个zhCN参考小标，以及“HTML+同级`maps/`目录即可离线复制”的运行时契约。
 - [`sessions/2026-08-15-nagrand-68-northrend-transition-neat.md`](sessions/2026-08-15-nagrand-68-northrend-transition-neat.md)：外域闭合历史归档；记录纳格兰67→68首组实跑顺序、删除《证明你的力量》、暗血物品任务自然触发、敌对沙塔斯死亡/灵魂跑传送门转奥格，以及进入诺森德时按无飞行设计的恢复约束。
 - [`sessions/2026-08-14-zangarmarsh-portable-html-test-ready-neat.md`](sessions/2026-08-14-zangarmarsh-portable-html-test-ready-neat.md)：赞加前端与可携带地图资源池阶段归档；记录HTML信息层级、同级`maps/`地图资源池与可携带目录契约。
@@ -21,10 +22,13 @@
 ## 长期规则与恢复点
 
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、路线轴和唯一恢复入口。
-- [`RULES.md`](RULES.md)：任务路线编写、实跑记录、机制验证和人类可执行性复审规则。
-- [`ERROR-BOOK.md`](ERROR-BOOK.md)：已发现的路线错误、错误原因及禁止复发项。
+- [`../rules/README.md`](../rules/README.md)：永久规则总路由；按当前任务只加载对应子规则。
+- [`RULES.md`](RULES.md)：旧路径兼容入口，只跳转到`docs/rules/`，不再承载完整规则正文。
+- [`ERROR-BOOK.md`](ERROR-BOOK.md)：已发现的路线错误、错误原因及禁止复发项；只在生成/修订/审计时加载。
 - [`FLIGHT-POINTS.md`](FLIGHT-POINTS.md)：首组五开的飞行点状态；未列出的点按未开启处理。
 - [`PALADIN-COMBAT-NOTES.md`](PALADIN-COMBAT-NOTES.md)：圣骑士战斗、圣印与天赋记录。
+
+`docs/verified-routes/sessions/`中的NEAT是可版本化的项目Markdown历史，正常进入Git；它与工作区根`/sessions/`浏览器/账号运行时目录无关。
 
 ## 已验证分段与会话
 

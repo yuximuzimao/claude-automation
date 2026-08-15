@@ -1,78 +1,88 @@
 # 魔兽世界任务路线 SKILL.md
 
 ## DO FIRST
-1. 读 `tasks/todo.md` — 确认当前工作流和待办。
-2. 若用户要求继续视频拆解：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；不要先加载实时路线或全部视频历史。
-3. 若用户要求继续现有路线：读 `docs/verified-routes/README.md`、`CURRENT.md` 和其中指定的唯一执行稿。
-4. 若用户要求生成、修订或审计路线：再读 `ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md`、相关 `docs/task-library/` 任务卡和 `docs/INDEX.md`，执行逐任务复核与冷启动对抗复走。
-5. 若用户明确在做 Route Atlas、地图路线、任务知识图谱、当前路线裁剪或动态图前端：先读 `docs/ROUTE_ATLAS_RULES.md` 获取长期总规则；再读 `docs/analysis/2026-08-14-route-atlas-session-decision-index.md` 及当前地图/NEAT文件恢复阶段状态。永久规则不得从日期化历史版本反推；不要从8月12日concept旧提案直接恢复。
-6. 代码与数据生成的核心入口：`cli.py`；纯攻略修订不先运行生成器，也不让脚本替代人工判断。
+
+1. 先读 `tasks/todo.md`，只确认当前工作流和下一步，不加载历史。
+2. 读 `docs/INDEX.md`，它只负责文档/数据入口导航，不承载完整规则。
+3. **继续当前首组实跑**：读 `docs/verified-routes/CURRENT.md`；只有需要阶段背景时再读CURRENT指向的最新NEAT/执行稿。
+4. **生成/修订/审计任务路线**：读 `docs/rules/README.md`，只加载当前任务对应规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md` 和相关任务卡。
+5. **Route Atlas路线数据/裁剪/优化**：读 `docs/rules/route-atlas-optimization.md`；只有同时改玩家任务备注时加读 `execution-and-mechanics.md`。
+6. **Route Atlas HTML/地图/UI**：读 `docs/rules/route-atlas-ui-and-assets.md`；不要为了前端改动加载全部路线优化历史。
+7. **视频拆解**：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；不要先加载实时路线、Route Atlas规则或全部视频历史。
+8. 代码/数据生成入口是 `cli.py`；Route Atlas工作台构建入口是 `scripts/build_route_atlas_workbench.py`。纯攻略修订不先运行生成器，也不让脚本替代人工判断。
 
 ## ENTRY MAP
+
 | 文件 | 用途 | 何时读 |
 | --- | --- | --- |
-| `cli.py` | 命令入口 | 运行或增加命令时 |
-| `lib/questie_lua.py` | 解析 Questie 内嵌 Lua table | 数据读取失败或扩展字段时 |
-| `lib/questie_source.py` | 从 ZIP/目录加载 Questie任务、中文名和WotLK经验数据库 | 更换插件来源或经验字段时 |
-| `lib/route_builder.py` | 历史逐日岛路线骨架解析、数据补全和输出 | 修改旧逐日岛生成逻辑时 |
-| `lib/simple_route.py` | 共用单页渲染、首组圣骑士路线、任务详情和距离反馈 | 修改页面结构或首组参考路线时 |
-| `lib/world_builder.py` | 按角色配置生成圣骑士/死亡骑士全区域候选任务库 | 修改种族职业过滤或区域候选时 |
-| `scripts/build_route_atlas_workbench.py` | 将当前所有地图路线数据嵌入唯一通用工作台 | 更新任一地图Route Atlas执行页时 |
-| `data/route-atlas/workbench-routes.json` | 所有地图当前有效路线的统一前端数据源；版本历史不在此保留 | 修改工作台地图/停靠点/说明时 |
-| `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式HTML；所有地图共用 | 实跑、审图、复制到游戏电脑时 |
-| `lib/world_review.py` | 将死亡骑士55—80全任务合并为当前样式单页 | 修改打金任务母版时 |
-| `data/route-specs/simple-leveling-route.json` | 首组圣骑士1—55实跑参考与历史1—80阶段 | 调整首组任务顺序、炉石或实跑路段时 |
-| `data/journey/current-paladin.json` | 当前账号级日志中最新角色条目的脱敏历程 | 对比实跑顺序或继续追加历程时 |
-| `data/journey/2026-07-31-account-journey-analysis.md` | 6—20级历程、保存点差异、长空档与放弃任务分析 | 复盘本轮死亡和路线问题时 |
-| `data/journey/account-container-audit.md` | Questie账号级容器、`char`条目和脱敏边界 | 再次导入账号级日志时 |
-| `data/observations/blocked-tasks.json` | 无法进入、无法接交、服务器位面异常任务 | 用户反馈阻断时必须更新 |
-| `data/observations/fivebox-task-types.json` | 五开共享/个人操作实测 | 用户反馈任务行为时 |
-| `docs/verified-routes/ERROR-BOOK.md` | 漏任务、额外往返和自动候选覆盖错误的错题本 | 每次生成、修订或审计执行路线前 |
-| `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` | 从任务库复用、逐任务核验、成稿后对抗复走的强制流程 | 继续、修订或审计路线前 |
-| `docs/ROUTE_ATLAS_RULES.md` | Route Atlas长期总规则：数据分层、主路线/当前路线分离、状态裁剪、增量插入、动态图与前端契约 | 处理任意Route Atlas或当前地图裁剪前 |
-| `docs/task-library/README.md` | 任务卡字段、证据和纠错写回规则 | 查询已核验任务或新增任务卡时 |
-| `docs/video-extraction/README.md` | 视频逐集提取方法、证据优先级与完成定义 | 处理任意视频集前 |
-| `docs/video-extraction/CURRENT.md` | 已完成集、下一集和最小恢复点 | 继续视频拆解时 |
-| `docs/video-extraction/POST-EXTRACTION-PLAN.md` | 全集完成后的合并、映射、优化与实跑闭环 | 第53集完成后 |
-| `data/routes/dk-55-80-world-tasks.html` | 当前死亡骑士主任务母版 | 审阅55—80全任务覆盖时 |
+| `docs/INDEX.md` | 文档/数据导航索引，不承载完整规则 | 进入项目时读，确定后续最小读取范围 |
+| `docs/verified-routes/CURRENT.md` | 当前等级/现场状态/唯一恢复点 | 继续当前实跑时第一份业务文档 |
+| `docs/rules/README.md` | 永久规则路由，不存当前状态 | 任何路线规则问题先从这里选子规则 |
+| `docs/rules/leveling-and-selection.md` | 经验预算、地图轴、任务取舍、随机掉落/护送价值 | 规划/估时/筛任务时 |
+| `docs/rules/execution-and-mechanics.md` | 玩家攻略格式、隐藏机制、掉落触发、五开共享、洞穴/楼层 | 写攻略/补备注/处理任务机制时 |
+| `docs/rules/state-and-validation.md` | 当前/从零路线分离、Journey、完整性、NEAT/Git边界 | 裁路线/审计/归档时 |
+| `docs/rules/route-atlas-optimization.md` | Route Atlas数据层、状态机、插入/裁剪、炉石、求解器 | 改路线数据/优化逻辑时 |
+| `docs/rules/route-atlas-ui-and-assets.md` | 唯一HTML、逻辑步骤、HUD、地图资源、离线契约 | 改前端/底图/地图资源时 |
+| `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` | 完整路线设计/修订SOP | 真正新建或重算路线时 |
+| `docs/verified-routes/ERROR-BOOK.md` | 历史失败模式和发布前复查 | 生成/修订/审计路线前 |
+| `docs/task-library/README.md` | 单任务事实、证据、纠错写回 | 复用或核验具体任务时 |
+| `data/observations/fivebox-task-types.json` | 五开共享/个人机制实测 | 用户反馈任务行为时 |
+| `data/observations/blocked-tasks.json` | 本服阻断/不可做任务 | 接不到、交不了、位面异常时 |
+| `data/route-atlas/workbench-routes.json` | 所有地图当前Route Atlas路线数据 | 改地图步骤/坐标/备注时 |
+| `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式执行HTML | 实跑/审图/复制到游戏电脑 |
+| `scripts/build_route_atlas_workbench.py` | 将路线数据嵌入唯一工作台 | 修改Route Atlas数据/UI后构建 |
+| `docs/verified-routes/sessions/` | 日期化NEAT阶段存档 | 只按CURRENT/索引需要读一份，不批量加载 |
+| `docs/video-extraction/README.md` | 视频拆解方法 | 处理视频时 |
+| `docs/video-extraction/CURRENT.md` | 视频下一集恢复点 | 继续视频时 |
+| `cli.py` | 项目命令入口 | 运行生成/解析命令时 |
+| `lib/questie_source.py` | Questie任务/中文名/经验数据加载 | 更换插件来源或字段时 |
+| `lib/questie_lua.py` | Questie Lua解析 | 解析失败/扩字段时 |
+| `data/journey/current-paladin.json` | 脱敏人物历程 | 对比首组实际顺序时 |
 
 ## CORE FLOWS
 
-### 首组圣骑士参考页
-`Questie ZIP/目录 → 读取人工 route spec → 补全前置、坐标、距离档位和补经验清单 → 输出 simple-leveling-route.html`
+### 当前首组实跑
+`用户现场反馈/Questie → CURRENT真值 → 只打开受影响局部路线 → 修执行稿 → observations/任务卡 → 必要时NEAT`
 
-### 死亡骑士打金母版
-`Questie ZIP/目录 → death-knight角色与阵营过滤 → 65个可用区域候选JSON → 选择出生链及55—80级可执行任务 → 按接取/目标/交付整理 → 输出 dk-55-80-world-tasks.html + 内部归档`
+### 新建或修订路线
+`CURRENT → rules路由 → ROUTE-DESIGN-PROCESS → ERROR-BOOK → task-library/Questie → 玩家冷启动复走 → 发布`
 
-### 实测修正
-`用户异常记录 → blocked-tasks/lessons/人物历程 → 修正任务或地图步骤 → 重新生成 → 下一组死亡骑士复跑验证`
+### Route Atlas
+`任务事实/当前状态 → workbench-routes.json → 逻辑步骤/备注审计 → build_route_atlas_workbench.py → 唯一route-atlas-workbench.html → 测试/JS检查`
 
 ### 人物历程
-`账号级 QuestieConfig.char[*].journey → 脱敏接取/完成事件 → 与候选路线对比 → 定位回头路和遗漏`
+`QuestieConfig.char[*].journey → 脱敏事件 → 与当前路线对比 → 定位遗漏/折返/漏交 → 只修受影响窗口`
 
 ### 视频拆解
-`导航前禁止自动播放 → 全集时长粗扫 → 任务中心/日志/剪辑处精查 → Questie校准名称与ID → 单集Markdown+JSON检查点 → 更新CURRENT并停止`
+`视频事实 → 单集检查点 → video CURRENT → 全集结束后再整合；不与当前角色路线混算`
 
 ## FAILURE PATTERNS
-- 不把自动区域候选、Questie区域分类或当前任务日志当作完整覆盖证明；必须执行错题本中的NPC、现场任务、任务链和差集复查。
-- 不把 Questie 地图坐标当成道路导航；山、桥、洞穴和跟随卡点必须实测。
-- 不把击杀共享推断到拾取、点击、技能或任务物品。
-- 不按“护送、掉落、低等级”等固定任务类型整类排除；逐任务比较真实剩余路程、掉率、地形、等级差、五开机制和后续重叠。
-- 不重复从零计算已核验任务；先复用任务库，发现错误时同步修改任务卡与执行稿，再在错题本保留错误原因。
-- 不使用历史 RXP SavedVariables 作为当前插件或当前角色证据。
-- 不直接上传或提交完整 WTF；先脱敏人物历程。
-- 修正层可能改变基础数据库；生成结果必须记录 Questie 版本和来源哈希。
-- 视频第一遍只提取事实；`目标(N)`不是完整任务数，剪辑缺口不得补写，任务目标完成不得误记为已交付。
-- 每次只处理用户指定的一集，写独立检查点并关闭标签；不得自动开始下一集。
+
+- 不把自动候选、Questie区域分类或当前日志当完整覆盖证明。
+- 不把Questie平面坐标当道路/楼层/洞穴导航。
+- 不把击杀共享推断到拾取、点击、任务物或技能。
+- 不按任务类型整类保留/排除；逐任务比较真实剩余成本。
+- 不从日期化NEAT反推永久规则；永久规则只读 `docs/rules/`。
+- 不一次性加载全部规则、全部NEAT、全部任务卡；按当前任务渐进式读取。
+- 不把临时教训长期堆在 `tasks/lessons.md`；稳定后迁到规则/错题/任务卡/observations。
+- 不提交原始Questie/WTF/账号登录数据；先脱敏。
+- 视频第一遍只提事实，不把剪辑缺口补成路线事实。
 
 ## PATHS
+
 | 路径 | 说明 |
 | --- | --- |
-| `lib/` | 可复用解析与生成逻辑 |
-| `data/route-specs/` | 路线步骤骨架 |
-| `data/routes/` | 生成路线；Route Atlas只允许`route-atlas-workbench.html`这一份正式工作台HTML |
-| `data/observations/` | 实测修正 |
-| `docs/` | 操作规则和导出说明 |
-| `docs/verified-routes/sessions/` | 日期化NEAT阶段归档；只存阶段证据/判断/恢复点，不承载永久规则 |
-| `tasks/` | 待办与教训 |
+| `lib/` | 可复用解析/生成逻辑 |
+| `scripts/` | Route Atlas和审计脚本 |
+| `data/route-atlas/` | Route Atlas结构化路线/基础数据 |
+| `data/routes/` | 生成路线；Route Atlas只允许一份正式工作台HTML |
+| `data/routes/maps/` | 可离线复制的地图资源池 |
+| `data/observations/` | 当前服务器实测修正 |
+| `data/journey/` | 脱敏人物历程 |
+| `docs/rules/` | 分主题永久规则；按需加载 |
+| `docs/verified-routes/` | CURRENT、SOP、错题本、已验证路线索引 |
+| `docs/verified-routes/sessions/` | 日期化NEAT阶段存档，不承载永久规则 |
+| `docs/task-library/` | 单任务知识 |
+| `docs/video-extraction/` | 视频事实提取工作流 |
+| `tasks/` | 当前待办 + 尚未迁移的临时教训 |
 | `tests/` | 自动测试 |

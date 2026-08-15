@@ -1,144 +1,80 @@
 # 魔兽世界五开打金任务路线
 
-面向国服泰坦重铸“时光”服的五开任务与打金路线项目。路线只按一个主控角色计算，另外四个角色始终视为跟随；只有任务必须逐号拾取、点击、接取或交付时，页面才显示切换提醒。
+面向国服泰坦重铸“时光”服的五开练级/任务路线项目。一个主控角色负责移动和战斗，另外四号持续跟随；逐号拾取、点击、技能、任务物等机制只按逐任务实测处理。
 
-## 当前项目目标
+## 当前方向
 
-当前唯一主线是**先把首组五个血精灵圣骑士连续练到80级**；死亡骑士计划暂缓，等圣骑士80级以后再决定。
+当前唯一主线是**先把首组五个血精灵圣骑士连续练到80级**；死亡骑士资料保留但暂缓。
 
-50级以后路线方法改为“按成熟地图主轴依次推进 + 单地图全清”：安戈洛约50—58；达到外域进入条件后，外域各地图依次全清；约68级进入诺森德后继续按地图弧线推进。单地图内部优先解决接取/交付链和地形顺序，目标是最少转圈、最少重复横穿，而不是为了少量任务频繁换地图。
+README不保存具体当前等级、地图和任务进度。继续实跑只读：
 
-`data/routes/dk-55-80-world-tasks.html`继续保留为死亡骑士历史/后续母版，但不再是当前主页面或当前玩家决策依据。
+`docs/verified-routes/CURRENT.md`
 
-首组圣骑士的当前玩家执行入口不使用HTML或自动候选页。继续实跑时先读`docs/verified-routes/CURRENT.md`，再打开其中指定的唯一攻略。生成或修订路线必须遵循`docs/verified-routes/ROUTE-DESIGN-PROCESS.md`，优先复用`docs/task-library/`的逐任务核验资料；脚本只提供基础数据，不能替代前置、地形、任务链和实际五开机制判断。
+当前Route Atlas唯一正式执行页：
 
-## 安全边界
+`data/routes/route-atlas-workbench.html`
 
-- 只离线读取用户已提供的Questie插件文件和退出游戏后保存的Questie人物历程；
-- 不安装自制游戏内插件；
-- 不采集移动轨迹；
-- 不注入客户端、不读内存、不抓包、不自动接交任务；
-- 不进行输入广播、同步按键或自动控制角色。
+所有地图共用这一份HTML；复制到游戏电脑时同时复制同级 `data/routes/maps/` 目录即可离线使用。
 
-## 当前主成果与可信边界
+## 项目怎么读
 
-- `docs/verified-routes/CURRENT.md`及其唯一执行稿是当前圣骑士1—80主线真值；50级后的任务路线逐地图重新人工排序，不再受旧55级停止线约束。
-- `data/routes/simple-leveling-route.html`继续保留为圣骑士早期历史参考；50级以后以“单地图全清、最少转圈”的分区任务单为主。
-- `data/routes/dk-55-80-world-tasks.html`保留为死亡骑士后续母版，当前不执行、不因55级到达而自动切换。
-- 两份页面都按地图切换，显示连续编号清单，可勾选并独立保存在浏览器；不同路线使用不同本地存储键，不会互相覆盖进度。
-- 红色只表示会被“五个角色分别收集 × 多个数量 × 随机掉落/重复点击”显著放大的高负担任务；单个命名怪必掉物和单次固定点击仍标绿。
-- 任务名可展开查看基础经验、前置、重点目标、地点和流程；地图步骤继续保留距离档位与“标记过远”反馈。
-- Questie提供任务、前置和静态坐标；自动排序不能识别洞穴入口、建筑楼层、封闭城门、动态位面和服务器特有限制，必须由第一轮实跑修正。
-- 历史RXP元数据只用于参考地图阶段，不含逐步路线正文，不能替代Questie任务库和实跑反馈。
+这是一个渐进式文档项目，不要一次加载全部历史。
 
-生成当前死亡骑士主母版：
+1. Agent进入项目先读 `SKILL.md`。
+2. 当前待办读 `tasks/todo.md`。
+3. `docs/INDEX.md` 只做文档/数据导航，确定本次最小读取范围。
+4. 当前首组状态读 `docs/verified-routes/CURRENT.md`。
+5. 永久规则从 `docs/rules/README.md` 选择当前需要的子规则。
+6. 真正生成/修订完整路线才读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` 和 `ERROR-BOOK.md`。
+7. 具体任务事实优先复用 `docs/task-library/` 和 `data/observations/`。
+8. 历史阶段只按CURRENT/索引需要读取一份 `docs/verified-routes/sessions/` NEAT，不批量加载。
 
-```bash
-python3 cli.py build-dk-world \
-  --questie-source /Users/chat/claude/.ai-bridge/Questie.zip
-```
+## 主要数据层
 
-输出：
+- **Questie基础事实**：任务ID、前置、NPC/物体/物品、静态坐标；原始数据不被实跑覆盖。
+- **任务知识**：任务机制、地形、掉落来源、五开共享/个人行为和可复用任务卡。
+- **当前状态**：最低号等级经验、任务进度、当前地图、交通等，只在CURRENT/Journey维护。
+- **Route Atlas路线**：`data/route-atlas/workbench-routes.json` 保存当前有效路线数据。
+- **实测观察**：`data/observations/` 保存本服五开共享、阻断和特殊机制。
+- **阶段历史**：`docs/verified-routes/sessions/` 保存NEAT阶段快照。
 
-```text
-data/routes/world-candidate-dk/
-data/routes/dk-55-80-world-tasks.html
-docs/DK_55_80_WORLD_TASKS.md
-```
+## 永久规则分层
 
-重建首组圣骑士参考页：
+总入口：`docs/rules/README.md`
 
-```bash
-python3 cli.py build-simple \
-  --questie-source /Users/chat/claude/.ai-bridge/Questie.zip \
-  --rxp-source /Users/chat/claude/.ai-bridge/RXPGuides.lua
-```
+- `leveling-and-selection.md`：经验预算、地图轴、任务取舍、随机掉落/护送。
+- `execution-and-mechanics.md`：玩家攻略、任务备注、洞穴/楼层/道具/触发物、五开共享。
+- `state-and-validation.md`：当前状态、完整性、Journey、NEAT/Git边界。
+- `route-atlas-optimization.md`：Route Atlas数据、状态机、插入/裁剪、炉石、求解器。
+- `route-atlas-ui-and-assets.md`：唯一HTML、逻辑步骤、HUD、底图、地图资源和离线复制。
 
-历史RXP SavedVariables只包含当前指南、指南目录和衔接元数据，没有逐步`.accept/.goto/.turnin`路线正文；生成器不会虚构RXP步骤。
+旧 `docs/verified-routes/RULES.md` 与 `docs/ROUTE_ATLAS_RULES.md` 只保留兼容跳转。
 
-## 历史逐日岛V3导航器
+## Route Atlas
 
-生成：
+长期产品契约：
 
-```bash
-python3 cli.py build-sunstrider \
-  --questie-source ../_sandbox/wow-quest-route/Questie.zip
-```
+- 唯一正式HTML：`data/routes/route-atlas-workbench.html`。
+- 当前路线数据：`data/route-atlas/workbench-routes.json`。
+- 构建：`scripts/build_route_atlas_workbench.py`。
+- 地图资源池：`data/routes/maps/`。
+- 几何停靠点可以很多，但玩家步骤按自然任务块合并。
+- 地图默认全图；只有用户主动启用“跟随当前段”才自动裁剪。
+- 有特殊执行机制的逻辑步骤显示“有备注”。
+- Questie继续负责游戏内精确目标点，Route Atlas负责宏观路线、任务块顺序和需要额外记忆的机制。
 
-主要输出：
+## 安全与隐私边界
 
-```text
-data/routes/horde/blood-elf/sunstrider-isle-v3-navigator.html
-```
+- 只离线读取用户提供的Questie/WTF数据；不修改游戏文件。
+- 不注入客户端、不读内存、不抓包、不自动接交任务、不广播输入。
+- 不保存账号名、服务器名、角色名、GUID或登录信息。
+- 原始Questie/WTF/账号运行时数据不提交Git；只提交脱敏历程、结构化观察、路线和项目文档。
+- 工作区根 `/sessions/` 是浏览器/账号会话，保持Git忽略；项目 `docs/**/sessions/` 是Markdown历史，正常commit/push。
 
-使用方式：
+## 旧生成器
 
-1. 选择当前小区域和步骤；
-2. 在游戏地图上查看主控号当前X/Y坐标；
-3. 输入HTML顶部；
-4. 页面显示“向北/东北/东/东南/南/西南/西/西北”、目标坐标和X/Y差值；
-5. 多个目标分别显示，点击目标即可切换导航。
-
-页面不再尝试用没有底图的圆圈表达怪区。
-
-## 全世界区域候选版
-
-生成：
-
-```bash
-python3 cli.py build-world \
-  --questie-source ../_sandbox/wow-quest-route/Questie.zip
-```
-
-索引：
-
-```text
-data/routes/world-candidate/index.html
-```
-
-当前自动生成范围：
-
-- 东部王国、卡利姆多、外域、诺森德；
-- `build-world --profile paladin`生成血精灵圣骑士候选库，`build-world --profile death-knight`生成血精灵死亡骑士候选库；
-- 排除副本、团队、日常、周常、重复、节日和专业限定任务；
-- 城市任务和少量可接的中立跨区任务会保留；
-- 每个区域保留候选JSON与历史导航页，新的死亡骑士全任务母版把55—80级任务合并到一个现有样式的单页中。
-
-全量候选库的区域数量会随角色和阵营过滤变化：历史圣骑士候选库为68个区域，当前死亡骑士候选库为65个可用区域。它们用于先完成覆盖，不代表区域都已经人工证明为最优；洞穴入口、楼层、封闭区域和动态位面仍由实跑补正。
-
-## 人物历程
-
-Questie人物历程可用于离线复盘：
-
-- 接取；
-- 完成/交付；
-- 放弃；
-- 升级；
-- 时间戳；
-- 事件发生时的等级。
-
-它不记录移动轨迹、目标完成坐标、打怪过程和五个角色各自的实时进度。后续只使用人物历程检查任务顺序和回头交接，不再尝试采集移动轨迹。
-
-导出说明见：
-
-```text
-docs/JOURNEY_EXPORT.md
-```
+项目仍保留早期圣骑士参考页、死亡骑士母版和world-candidate生成代码，用于历史召回或后续研究；它们不是当前首组执行真值。需要修改这些生成器时从 `SKILL.md` 的ENTRY MAP定位，不在README长期维护具体旧命令和旧等级阶段。
 
 ## 测试
 
-```bash
-python3 -m unittest discover -s tests
-```
-
-单页路线JavaScript另外使用`node --check`检查。
-
-## 下一阶段
-
-按新的打金循环目标继续推进：
-
-- 当前首组圣骑士只要求安全、稳定地到55级；继续记录任务接不到、城门或位面阻断、洞穴死亡和明显折返，但不再要求先把1—55路线优化到速通标准。
-- 创建第一组死亡骑士后，从`dk-55-80-world-tasks.html`开始逐图全清。每张地图记录实际耗时、任务金币、掉落收益、死亡次数、逐号操作次数和必须跳过的阻断任务。
-- 根据第一轮数据确定“主要打金图”，将其提升为固定主流程；低收益、高死亡、长等待或动态位面不稳定的任务移入跳过清单。
-- 第二组及后续死亡骑士重复同一轮次，用人物历程验证任务顺序和回头交接，直到主要地图流程稳定。
-- 完整应用Questie WotLK修正层，重新核对任务前置、物品触发任务与死亡骑士职业任务。
+Route Atlas改动按对应规则运行专项pytest、工作台构建和JavaScript语法检查。其它解析/生成代码按受影响模块运行测试；测试入口和文件定位从 `SKILL.md` 查，不在README重复维护易过期的命令清单。

@@ -10,7 +10,7 @@
 - 赞加首组已完整跑完，下一批从零权威骨架见`ZANGARMARSH-V2.md`；纳格兰67→68首组实跑顺序已闭合，外域不再回头补跨图遗留任务。
 - 下一批从1级练新号时另开“1—57低随机掉落实验”：只重点降权刷怪后随机掉任务物且需要补刷的任务，**不包括固定场景物拾取/固定交互**；若经验不足，只补回最少量、高重叠/高掉率/高后续价值的随机掉落任务。58进入外域后停止该实验，重新计入金币与装备出售收益。
 - 最新NEAT：`sessions/2026-08-16-borean-live-route-mechanics-neat.md`。
-- Route Atlas长期规则：`../ROUTE_ATLAS_RULES.md`；通用路线规则：`RULES.md`。永久规则不得从日期化NEAT反推。
+- 永久规则总入口：`../rules/README.md`。北风路线数据/裁剪按`../rules/route-atlas-optimization.md`，任务执行备注按`../rules/execution-and-mechanics.md`；旧`../ROUTE_ATLAS_RULES.md`与`RULES.md`只保留兼容跳转。永久规则不得从日期化NEAT反推。
 
 ## 当前北风执行稿
 
@@ -34,7 +34,7 @@
 
 1. 先读本文件。
 2. 再读`sessions/2026-08-16-borean-live-route-mechanics-neat.md`。
-3. 若继续北风实跑/修正，再读`../analysis/2026-08-15-borean-leveling-clear-v1-audit.md`和`../ROUTE_ATLAS_RULES.md`；只重新打开用户反馈影响到的局部窗口，不从开场重算整图。
+3. 若继续北风实跑/修正，再读`../rules/README.md`并按问题选择`route-atlas-optimization.md`、`execution-and-mechanics.md`等对应规则；需要本图阶段背景时再读`../analysis/2026-08-15-borean-leveling-clear-v1-audit.md`。只重新打开用户反馈影响到的局部窗口，不从开场重算整图。
 4. 若要精确裁当前首组路线，不再读取早期Questie活动任务快照作为真值；优先使用用户最新现场描述或重新导入的Questie状态。
 5. 每个大任务块结束继续记录最低号真实等级/经验；北风整图跑完后记录离图等级/经验、机会任务/未完成状态，再开始龙骨荒野第一批具体路线。
 6. 后续龙骨荒野继续加入同一`route-atlas-workbench.html`，不创建新地图独立HTML。
