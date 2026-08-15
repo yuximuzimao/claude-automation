@@ -14,10 +14,11 @@ test('换货或商责显示人工核对提醒并保留系统执行入口', () =>
   assert.match(appSource, /需人工核对后执行/);
   assert.match(appSource, /▶ 执行操作/);
   assert.doesNotMatch(appSource, /!sim\.decision\.manualOnly/);
-  assert.match(routesSource, /humanTriggeredExecutionAllowed === false/);
-  assert.match(queueSource, /humanTriggeredExecutionAllowed === false/);
-  assert.match(routesSource, /尚无可安全执行/);
-  assert.match(queueSource, /尚无可安全执行/);
+  assert.match(routesSource, /if \(sim\.decision\.humanTriggeredExecutionAllowed === false\)/);
+  assert.match(queueSource, /if \(sim\.decision\?\.humanTriggeredExecutionAllowed === false\)/);
+  assert.match(appSource, /const canExecute = !executed && !manualArchiveOnly\s+&& sim\.decision\.humanTriggeredExecutionAllowed !== false/);
+  assert.match(routesSource, /当前结果不可执行，请先完成必要核验或重新采集/);
+  assert.match(queueSource, /当前结果不可执行，请先完成必要核验或重新采集/);
   assert.match(appSource, /manualArchiveOnly/);
   assert.match(appSource, /请人工确认后归档/);
   assert.match(appSource, /当前无需平台操作，请人工确认后手动归档/);

@@ -66,6 +66,10 @@ const BRANCHES = Object.freeze({
     label: '退货退款 / 共用退货单 / 少退 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'refund_return.shared.incomplete.manual': {
+    label: '退货退款 / 共用退货单 / ERP 入库证明不完整 / 人工处理',
+    automationStatus: 'manual_only',
+  },
   'refund_return.product_match_missing.manual': {
     label: '退货退款 / 商品对应表无法精确匹配 / 人工处理',
     automationStatus: 'manual_only',
@@ -237,6 +241,7 @@ const RULE_BRANCHES = Object.freeze({
   '全部子订单 attr1 mismatch → 上报': 'refund_return.product_match_missing.manual',
   '共用退货单含次品→上报人工': 'refund_return.shared.damaged.manual',
   '共用退货单逐规格不足→上报人工': 'refund_return.shared.short.manual',
+  '共用退货单入库行完整性不足→上报人工': 'refund_return.shared.incomplete.manual',
   '超售后期无理由退货→拒绝': 'refund_return.no_tracking.overdue.reject',
 });
 

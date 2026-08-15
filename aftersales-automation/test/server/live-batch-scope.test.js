@@ -92,6 +92,27 @@ test('核验未通过且无确定动作的人工分支不进入批量执行', ()
   assert.equal(selected.some(simulation => simulation.id === 's-14-late'), false);
 });
 
+test('关联组占位结果成为最新记录后，旧 approve 不再进入人工批量执行', () => {
+  const guardedSimulations = [
+    ...simulations,
+    {
+      id: 's-14-late-shared-placeholder',
+      queueItemId: 'q-14-late',
+      workOrderNum: '1004',
+      mode: 'live',
+      createdAt: '2026-06-27T03:00:00.000Z',
+      decision: {
+        action: 'escalate',
+        humanTriggeredExecutionAllowed: false,
+      },
+    },
+  ];
+  const scope = parseBatchExecuteRequest({ statusScope: 'pending', accountNum: 14 });
+  const selected = selectExecutableSimulations({ simulations: guardedSimulations, queueItems, scope });
+
+  assert.equal(selected.some(simulation => simulation.queueItemId === 'q-14-late'), false);
+});
+
 
 test('batch reprocess waiting scope selects only waiting items for the requested account', () => {
   const scope = parseBatchReprocessRequest({ statusScope: 'waiting', accountNum: 14 });

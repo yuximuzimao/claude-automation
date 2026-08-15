@@ -15,6 +15,7 @@ const { hasConfirmedReturn, REMIND_HOURS, RESCAN_INTERVAL_HOURS } = require('../
 const { extractShippedTrackings, createReminder } = require('../helpers');
 const { expireStaleAlerts } = require('../jl/alerts');
 const { getTicketPlatformStage } = require('../after-sales-platform-stage');
+const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -826,12 +827,12 @@ async function execExecute(op) {
   const sim = db.getSimulation(simId);
   if (!sim) throw new Error('simulation 未找到: ' + simId);
   if (sim.executedAt) return { skipped: true, reason: '已执行过' };
+  assertLatestSimulationForExecution(sim, db.readSimulations());
   if (sim.decision?.action === 'skip' && sim.decision?.manualArchiveOnly === true) {
     throw new Error('当前无需平台操作，请人工确认后手动归档');
   }
-  if (['approve', 'reject'].includes(sim.decision?.action)
-    && sim.decision?.humanTriggeredExecutionAllowed === false) {
-    throw new Error('当前退回核验未通过，尚无可安全执行的同意或拒绝动作');
+  if (sim.decision?.humanTriggeredExecutionAllowed === false) {
+    throw new Error('当前结果不可执行，请先完成必要核验或重新采集');
   }
 
   const queueItem = (db.readQueue().items || []).find(i => i.id === sim.queueItemId);

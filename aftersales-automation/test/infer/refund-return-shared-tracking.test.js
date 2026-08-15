@@ -4,12 +4,18 @@ const { describe, it } = require('node:test');
 const assert = require('node:assert');
 
 const { inferDecision } = require('../../lib/infer');
+const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
 
 function item(specCode, qtyGood, qtyBad = 0) {
   return { name: `商品${specCode}`, specCode, qty: qtyGood + qtyBad, qtyGood, qtyBad };
 }
 
 function makeCollectedData({ rows, sharedReturnGroup, multiUse = false }) {
+  const normalizedRows = rows.map((row, index) => ({
+    erpOrderId: `ERP-${index + 1}`,
+    tracking: 'TRACK-SHARED',
+    ...row,
+  }));
   return {
     ticket: {
       subOrders: [{ id: 'SUB-A', afterSaleNum: 1 }],
@@ -19,7 +25,7 @@ function makeCollectedData({ rows, sharedReturnGroup, multiUse = false }) {
       returnTrackingMultiUse: multiUse || undefined,
       returnTrackingUsedBy: multiUse ? ['100001700000000000002'] : undefined,
     },
-    erpAftersale: { tracking: 'TRACK-SHARED', rows },
+    erpAftersale: { tracking: 'TRACK-SHARED', rows: normalizedRows },
     productMatches: [{ subOrderId: 'SUB-A', specCode: 'A' }],
     productArchives: [{
       subOrderId: 'SUB-A',
@@ -71,7 +77,7 @@ describe('退货退款共用退货单号', () => {
   });
 
   it('不同子订单共用单号时按合并后的逐规格数量核对', () => {
-    const decision = infer(makeCollectedData({
+    const collectedData = makeCollectedData({
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 3, items: [item('A', 1), item('B', 2)] }],
       multiUse: true,
       sharedReturnGroup: {
@@ -82,11 +88,16 @@ describe('退货退款共用退货单号', () => {
           { specCode: 'B', name: '商品B', qty: 2 },
         ],
       },
-    }));
+    });
+    const decision = infer(collectedData);
 
     assert.equal(decision.action, 'approve');
     assert.match(decision.reason, /共用退货单/);
     assert.match(decision.reason, /逐规格核对通过/);
+    assert.equal(decision.requiresHumanReview, true);
+    assert.equal(decision.autoExecutionBlocked, true);
+    assert.equal(decision.humanTriggeredExecutionAllowed, true);
+    assert.equal(shouldAutoExecute(decision, collectedData, { type: '退货退款' }), false);
   });
 
   it('不同子订单合并核对后确认为多退时仍可同意，但明确提示多退', () => {
@@ -138,5 +149,53 @@ describe('退货退款共用退货单号', () => {
 
     assert.equal(decision.action, 'escalate');
     assert.match(decision.reason, /关联工单缺少商品档案/);
+  });
+
+  it('共用退货单已收货行的 ERP 售后单号重复时转人工', () => {
+    const decision = infer(makeCollectedData({
+      rows: [
+        { erpOrderId: 'ERP-DUP', goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] },
+        { erpOrderId: 'ERP-DUP', goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] },
+      ],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'distinct_suborders',
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
+      },
+    }));
+
+    assert.equal(decision.action, 'escalate');
+    assert.match(decision.reason, /ERP 售后单号ERP-DUP重复/);
+  });
+
+  it('共用退货单已收货行混入其他退货单号时转人工', () => {
+    const decision = infer(makeCollectedData({
+      rows: [
+        { goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] },
+        { tracking: 'OTHER-TRACKING', goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] },
+      ],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'distinct_suborders',
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
+      },
+    }));
+
+    assert.equal(decision.action, 'escalate');
+    assert.match(decision.reason, /退货单号与工单不一致/);
+  });
+
+  it('共用退货单已收货行退回总数与商品明细不一致时转人工', () => {
+    const decision = infer(makeCollectedData({
+      rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 2)] }],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'distinct_suborders',
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
+      },
+    }));
+
+    assert.equal(decision.action, 'escalate');
+    assert.match(decision.reason, /退回总数与良品次品合计不一致/);
   });
 });

@@ -1039,6 +1039,16 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
 
   // 不同子订单共用同一退货单：按平台关联到的工单记录合并逐规格核对
   if (sharedReturnGroup && sharedReturnGroup.mode === 'distinct_suborders') {
+    const receivedRowProof = proveReturnItems(cd);
+    if (receivedRowProof.missingFacts.length > 0) {
+      return fin(escalate(
+        `共用退货单的 ERP 已收货记录不完整：${receivedRowProof.missingFacts.join('；')}`,
+        {
+          confidence: 'high',
+          rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '共用退货单入库行完整性不足→上报人工' }],
+        }
+      ));
+    }
     const expectedItems = sharedReturnGroup.expectedItems || [];
     const expectedBySpec = new Map();
     for (const item of expectedItems) {
@@ -1106,6 +1116,10 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       `共用退货单逐规格核对通过：${summary}${extras.length ? `；确认多退：${extras.join('、')}` : ''}`,
       [{ doc: 'flow-5.1', section: 'Step4', summary: '不同子订单共用退货单，合并逐规格核对通过→同意退款' }]
     );
+    decision.requiresHumanReview = true;
+    decision.autoExecutionBlocked = true;
+    decision.humanTriggeredExecutionAllowed = true;
+    decision.recommendedActionLabel = '同意退款';
     if (extras.length) decision.warnings = [`客户实际多退：${extras.join('、')}`];
     return fin(decision);
   }

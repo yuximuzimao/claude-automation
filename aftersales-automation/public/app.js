@@ -1070,7 +1070,9 @@ function renderActions(item, sim, mode) {
       && sim.decision.manualExecutionAllowedWhileWaiting === true
       && sim.decision.reasonCode === 'INTERCEPT_WAITING';
     const manualArchiveOnly = sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true;
-    const canExecute = !executed && !manualArchiveOnly && (item.status !== 'waiting' || isWaitingIntercept);
+    const canExecute = !executed && !manualArchiveOnly
+      && sim.decision.humanTriggeredExecutionAllowed !== false
+      && (item.status !== 'waiting' || isWaitingIntercept);
     const humanReviewHint = manualArchiveOnly
       ? '⚠️ 请人工确认后归档'
       : ((sim.decision.requiresHumanReview || sim.decision.manualOnly)

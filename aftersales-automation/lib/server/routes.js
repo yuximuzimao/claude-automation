@@ -29,6 +29,7 @@ const {
   selectExecutableSimulations,
   selectReprocessQueueItems,
 } = require('./live-batch-scope');
+const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
 
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
@@ -279,16 +280,19 @@ router.post('/simulations/:id/execute', (req, res) => {
 
   const queueItem = (db.readQueue().items || []).find(item => item.id === sim.queueItemId);
   if (!queueItem) return res.status(404).json({ error: '队列项不存在' });
+  try {
+    assertLatestSimulationForExecution(sim, db.readSimulations());
+  } catch (error) {
+    return res.status(409).json({ error: error.message });
+  }
   if (sim.decision.action === 'skip' && sim.decision.manualArchiveOnly === true) {
     return res.status(400).json({ error: '当前无需平台操作，请人工确认后手动归档' });
   }
+  if (sim.decision.humanTriggeredExecutionAllowed === false) {
+    return res.status(400).json({ error: '当前结果不可执行，请先完成必要核验或重新采集' });
+  }
   if (queueItem.status === 'waiting' && !opQueue.canManuallyExecuteWaitingIntercept(queueItem, sim.decision)) {
     return res.status(400).json({ error: '等待重查工单仅允许拦截件人工提前拒绝' });
-  }
-
-  if (['approve', 'reject'].includes(sim.decision.action)
-    && sim.decision.humanTriggeredExecutionAllowed === false) {
-    return res.status(400).json({ error: '当前退回核验未通过，尚无可安全执行的同意或拒绝动作' });
   }
 
   // 防重复入队：同 simId 已在队列（running 或 queued）则直接返回

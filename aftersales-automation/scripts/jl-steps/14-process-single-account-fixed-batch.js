@@ -5,6 +5,7 @@ const { matchShopName } = require('../../lib/jl/login-state');
 const { getSkipCompletionStatus } = require('../../lib/server/pipeline-status');
 const { UNFINISHED_INTENT_BLOCK_REASON } = require('../../lib/server/auto-execution-journal');
 const { getHoursUntilNextScan } = require('../../lib/constants');
+const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
 const {
   getTicketPlatformStage,
   matchesConfirmedNoAction,
@@ -398,16 +399,76 @@ async function cleanupCurrentAccountJlTargets(context, dependencies) {
   return { closedTargetIds: closeIds };
 }
 
+function applyInboundSharedReturnLinks(collectedData, currentWorkOrderNum, sharedReturnContext) {
+  const ticket = collectedData && collectedData.ticket;
+  const records = sharedReturnContext && sharedReturnContext.collectedDataByWorkOrder;
+  const currentNum = String(currentWorkOrderNum || ticket && ticket.workOrderNum || '');
+  if (!ticket || !currentNum || !(records instanceof Map)) return;
+
+  const inboundWorkOrderNums = [];
+  for (const [otherNum, otherCollectedData] of records.entries()) {
+    if (String(otherNum) === currentNum) continue;
+    const otherTicket = otherCollectedData && otherCollectedData.ticket;
+    const linkedNums = Array.isArray(otherTicket && otherTicket.returnTrackingUsedBy)
+      ? otherTicket.returnTrackingUsedBy.map(String)
+      : [];
+    if (linkedNums.includes(currentNum)) inboundWorkOrderNums.push(String(otherNum));
+  }
+  if (!inboundWorkOrderNums.length) return;
+
+  ticket.returnTrackingMultiUse = true;
+  ticket.returnTrackingUsedBy = [...new Set([
+    ...(Array.isArray(ticket.returnTrackingUsedBy) ? ticket.returnTrackingUsedBy.map(String) : []),
+    ...inboundWorkOrderNums,
+  ])];
+  ticket.returnTrackingAssociationSources = [...new Set([
+    ...(Array.isArray(ticket.returnTrackingAssociationSources)
+      ? ticket.returnTrackingAssociationSources.map(String)
+      : []),
+    ...inboundWorkOrderNums,
+  ])];
+}
+
 async function processOpenedDetail(context, dependencies) {
   const collectedData = await dependencies.collectDetail(context);
+  const sharedReturnContext = context && context.sharedReturnContext;
+  const currentWorkOrderNum = context && context.ticket && context.ticket.workOrderNum;
+  if (sharedReturnContext && sharedReturnContext.collectedDataByWorkOrder instanceof Map && currentWorkOrderNum) {
+    sharedReturnContext.collectedDataByWorkOrder.set(String(currentWorkOrderNum), collectedData);
+  }
+  applyInboundSharedReturnLinks(collectedData, currentWorkOrderNum, sharedReturnContext);
   const platformStage = getTicketPlatformStage(context && context.ticket);
   collectedData.platformStage = platformStage;
   if (collectedData.ticket && collectedData.ticket.returnTrackingMultiUse &&
       typeof dependencies.resolveSharedReturnGroup === 'function') {
     collectedData.sharedReturnGroup = await dependencies.resolveSharedReturnGroup(
       collectedData,
-      context.ticket && context.ticket.workOrderNum
+      currentWorkOrderNum,
+      sharedReturnContext
     );
+    const batchWorkOrderNums = sharedReturnContext && sharedReturnContext.batchWorkOrderNums;
+    if (collectedData.sharedReturnGroup && batchWorkOrderNums instanceof Set &&
+        (collectedData.sharedReturnGroup.ignoredWorkOrderNums || []).some(num => batchWorkOrderNums.has(String(num)))) {
+      collectedData.sharedReturnGroup = {
+        mode: 'incomplete',
+        reason: '相同子订单的关联工单同时处于本批次待处理状态，无法按历史重新申请忽略，需人工确认有效工单',
+      };
+    }
+    const missingWorkOrderNums = collectedData.sharedReturnGroup &&
+      Array.isArray(collectedData.sharedReturnGroup.missingWorkOrderNums)
+      ? collectedData.sharedReturnGroup.missingWorkOrderNums.map(String)
+      : [];
+    const canDeferForBatch = (!context || context.allowSharedReturnDefer !== false) &&
+      missingWorkOrderNums.length > 0 &&
+      batchWorkOrderNums instanceof Set &&
+      missingWorkOrderNums.every(num => batchWorkOrderNums.has(num));
+    if (canDeferForBatch) {
+      return {
+        status: 'deferred_shared_return',
+        collectedData,
+        pendingSharedReturnWorkOrderNums: missingWorkOrderNums,
+      };
+    }
   }
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
   const baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
@@ -423,11 +484,20 @@ async function processOpenedDetail(context, dependencies) {
       status: 'simulated',
       collectedData,
       decision,
-      autoBlockedReason: 'fixed_batch 已显式关闭自动执行',
+      autoBlockedReason: context.autoBlockedReason || 'fixed_batch 已显式关闭自动执行',
     };
   }
   const auto = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
   if (!auto) return { status: 'simulated', collectedData, decision };
+  if (context && context.deferRefundReturnAutoUntilBatchComplete === true &&
+      context.ticket && context.ticket.type === '退货退款') {
+    return {
+      status: 'deferred_auto_execution',
+      collectedData,
+      decision,
+      autoBlockedReason: '退货退款自动执行等待当前批次关联关系采集完成',
+    };
+  }
   if (typeof dependencies.assertAutoExecutionAllowed === 'function') {
     const gate = await dependencies.assertAutoExecutionAllowed({ ...context, collectedData, decision });
     if (!gate || gate.allowed !== true) {
@@ -457,6 +527,51 @@ async function processOpenedDetail(context, dependencies) {
   return { status: 'auto_executed', collectedData, decision, execution };
 }
 
+function buildDeferredSafetyPlaceholder(processed) {
+  const isSharedReturn = processed && processed.status === 'deferred_shared_return';
+  const pendingNums = isSharedReturn
+    ? (processed.pendingSharedReturnWorkOrderNums || []).map(String).filter(Boolean)
+    : [];
+  const reason = isSharedReturn
+    ? `共用退货单关联组尚未采齐${pendingNums.length ? `（等待工单：${pendingNums.join('、')}）` : ''}，暂不可执行`
+    : '退货退款自动执行正在等待本批次关联关系采集完成，暂不可执行';
+  return {
+    status: 'simulated',
+    collectedData: processed.collectedData,
+    decision: {
+      action: 'escalate',
+      reason,
+      confidence: 'low',
+      requiresHumanReview: true,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: false,
+      warnings: [],
+    },
+    autoBlockedReason: reason,
+  };
+}
+
+function buildRelatedSharedReturnPlaceholder(relatedItem, sourceWorkOrderNum) {
+  const reason = `同批次工单 ${sourceWorkOrderNum} 已将当前工单列为共用退货单关联成员，关联组核验完成前暂不可执行`;
+  return {
+    status: 'simulated',
+    collectedData: {
+      ticket: relatedItem.ticket,
+      batchSafetyAssociation: { sourceWorkOrderNum: String(sourceWorkOrderNum) },
+    },
+    decision: {
+      action: 'escalate',
+      reason,
+      confidence: 'low',
+      requiresHumanReview: true,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: false,
+      warnings: [],
+    },
+    autoBlockedReason: reason,
+  };
+}
+
 async function processOpenedDetailAndPersist(context, dependencies, options = {}) {
   if (!context || !context.queueItem || !context.queueItem.id) {
     throw new Error('详情处理缺少完整 queue item，拒绝进入推理和自动执行');
@@ -466,6 +581,39 @@ async function processOpenedDetailAndPersist(context, dependencies, options = {}
   }
 
   const processed = await processOpenedDetail(context, dependencies);
+  if (processed && ['deferred_shared_return', 'deferred_auto_execution'].includes(processed.status)) {
+    const persisted = await dependencies.persistOutcome({
+      account: context.account,
+      queueItem: context.queueItem,
+      ticket: context.ticket,
+      processed: buildDeferredSafetyPlaceholder(processed),
+      source: options.source || 'fixed_batch',
+    });
+    const relatedSafetyPlaceholders = [];
+    if (processed.status === 'deferred_shared_return') {
+      const batchItemsByWorkOrder = context.sharedReturnContext &&
+        context.sharedReturnContext.batchItemsByWorkOrder;
+      if (batchItemsByWorkOrder instanceof Map) {
+        for (const pendingNum of processed.pendingSharedReturnWorkOrderNums || []) {
+          const relatedItem = batchItemsByWorkOrder.get(String(pendingNum));
+          if (!relatedItem || String(pendingNum) === String(context.ticket.workOrderNum)) continue;
+          const relatedPersisted = await dependencies.persistOutcome({
+            account: context.account,
+            queueItem: relatedItem.queueItem,
+            ticket: relatedItem.ticket,
+            processed: buildRelatedSharedReturnPlaceholder(relatedItem, context.ticket.workOrderNum),
+            source: options.source || 'fixed_batch',
+          });
+          relatedItem.persistedSimulationId = relatedPersisted && relatedPersisted.id;
+          relatedSafetyPlaceholders.push({
+            workOrderNum: String(pendingNum),
+            persisted: relatedPersisted,
+          });
+        }
+      }
+    }
+    return { processed, persisted, persistedSafetyPlaceholder: true, relatedSafetyPlaceholders };
+  }
   const persisted = await dependencies.persistOutcome({
     account: context.account,
     queueItem: context.queueItem,
@@ -620,7 +768,6 @@ function loadDefaultDependencies() {
   const { readShopName } = require('./02-read-shop-name');
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
-  const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
   const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
   const { executeTicketDecision } = require('../../lib/jl/execute-decision');
   const db = require('../../lib/server/data');
@@ -690,8 +837,13 @@ function loadDefaultDependencies() {
       type: context.ticket.type,
     }),
     inferDecision: (collectedData, ticket) => inferDecision({ collectedData }, ticket),
-    resolveSharedReturnGroup: (collectedData, workOrderNum) =>
-      resolveSharedReturnGroup(collectedData, db.readSimulations(), workOrderNum),
+    resolveSharedReturnGroup: (collectedData, workOrderNum, sharedReturnContext) =>
+      resolveSharedReturnGroupForBatch(
+        collectedData,
+        db.readSimulations(),
+        workOrderNum,
+        sharedReturnContext
+      ),
     shouldAutoExecute,
     assertBatchAllowed: async () => {
       const circuit = readCircuit();
@@ -736,6 +888,37 @@ function loadDefaultDependencies() {
     sleep,
     onProgress: async () => {},
   };
+}
+
+function resolveSharedReturnGroupForBatch(
+  collectedData,
+  historicalSimulations,
+  workOrderNum,
+  sharedReturnContext
+) {
+  const batchWorkOrderNums = sharedReturnContext && sharedReturnContext.batchWorkOrderNums instanceof Set
+    ? sharedReturnContext.batchWorkOrderNums
+    : null;
+  const collectedDataByWorkOrder = sharedReturnContext &&
+    sharedReturnContext.collectedDataByWorkOrder instanceof Map
+    ? sharedReturnContext.collectedDataByWorkOrder
+    : null;
+  const usableHistorical = batchWorkOrderNums
+    ? (historicalSimulations || []).filter(record =>
+      !batchWorkOrderNums.has(String(record && record.workOrderNum || ''))
+    )
+    : (historicalSimulations || []);
+  const freshBatchRecords = collectedDataByWorkOrder
+    ? [...collectedDataByWorkOrder.entries()].map(([num, data]) => ({
+      workOrderNum: num,
+      collectedData: data,
+    }))
+    : [];
+  return resolveSharedReturnGroup(
+    collectedData,
+    [...usableHistorical, ...freshBatchRecords],
+    workOrderNum
+  );
 }
 
 async function processSingleAccountFixedBatch(accountNum, options = {}) {
@@ -799,6 +982,11 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   const erpTargetId = processableItems.length && typeof dependencies.resolveErpTargetId === 'function'
     ? await dependencies.resolveErpTargetId(options.erpTargetId)
     : (options.erpTargetId || null);
+  const sharedReturnContext = {
+    batchWorkOrderNums: new Set(processableItems.map(item => String(item.workOrderNum))),
+    collectedDataByWorkOrder: new Map(),
+    batchItemsByWorkOrder: new Map(processableItems.map(item => [String(item.workOrderNum), item])),
+  };
 
   for (const item of processableItems) {
     if (options.abortSignal && options.abortSignal.aborted) {
@@ -851,11 +1039,211 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
         ticket: item.ticket,
         queueItem: item.queueItem,
         disableAutoExecute: options.disableAutoExecute === true,
+        sharedReturnContext,
+        allowSharedReturnDefer: true,
+        deferRefundReturnAutoUntilBatchComplete: true,
       }, dependencies, { source: 'fixed_batch' });
       const { processed, persisted } = outcome;
       Object.assign(item, processed);
+      if (persisted && persisted.queueStatus &&
+          !['deferred_shared_return', 'deferred_auto_execution'].includes(processed.status)) {
+        item.status = persisted.queueStatus;
+      }
+      item.persistedSimulationId = persisted && persisted.id;
+    } catch (error) {
+      processingError = error;
+      if (!detailTargetId && Array.isArray(error.newTargetIds)) {
+        for (const unexpectedTargetId of error.newTargetIds) {
+          try {
+            await closeAndVerifyDetailTarget(unexpectedTargetId, dependencies, {
+              account: accountResult,
+              listTargetId: prepared.targetId,
+            });
+          } catch (cleanupError) {
+            processingError = cleanupError;
+            break;
+          }
+        }
+      }
+    } finally {
+      if (detailTargetId) {
+        try {
+          await closeAndVerifyDetailTarget(detailTargetId, dependencies, {
+            account: accountResult,
+            listTargetId: prepared.targetId,
+          });
+          item.detailClosed = true;
+        } catch (closeError) {
+          processingError = closeError;
+        }
+      }
+    }
+
+    if (processingError) {
+      const failureProcessed = buildFailureProcessed(item.ticket, processingError);
+      try {
+        const persisted = await dependencies.persistOutcome({
+          account: accountResult,
+          queueItem: item.queueItem,
+          ticket: item.ticket,
+          processed: failureProcessed,
+        });
+        Object.assign(item, failureProcessed, {
+          status: 'simulated',
+          error: processingError.message,
+          persistedSimulationId: persisted && persisted.id,
+        });
+      } catch (persistError) {
+        item.status = 'failed';
+        item.error = `${processingError.message}; 写回失败: ${persistError.message}`;
+        processingError.persistError = persistError;
+      }
+      await reportProgress(dependencies, item);
+      processingError.batch = { success: false, account: accountResult, snapshot, items };
+      throw processingError;
+    }
+    await reportProgress(dependencies, item);
+  }
+
+  // 同一固定批次里的共用退货单必须先采集齐关联组，再统一推理。
+  // 第二阶段只复用内存中的采集结果，不重新打开工单，也不允许自动执行。
+  const deferredSharedReturnItems = processableItems.filter(item => item.status === 'deferred_shared_return');
+  for (const item of deferredSharedReturnItems) {
+    if (options.abortSignal && options.abortSignal.aborted) {
+      const err = new Error('操作已被用户停止');
+      err.name = 'AbortError';
+      throw err;
+    }
+    await assertBatchAllowed();
+    item.status = 'processing';
+    await reportProgress(dependencies, item);
+
+    try {
+      const replayDependencies = {
+        ...dependencies,
+        collectDetail: async () => item.collectedData,
+      };
+      const outcome = await processOpenedDetailAndPersist({
+        account: accountResult,
+        listTargetId: prepared.targetId,
+        detailTargetId: null,
+        erpTargetId,
+        ticket: item.ticket,
+        queueItem: item.queueItem,
+        disableAutoExecute: true,
+        autoBlockedReason: '共用退货单关联组回算只生成待人工确认结果',
+        sharedReturnContext,
+        allowSharedReturnDefer: false,
+      }, replayDependencies, { source: 'fixed_batch' });
+      const { processed, persisted } = outcome;
+      if (processed && processed.status === 'deferred_shared_return') {
+        throw new Error(`工单 ${item.workOrderNum} 关联组回算后仍处于等待状态`);
+      }
+      Object.assign(item, processed);
       if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
       item.persistedSimulationId = persisted && persisted.id;
+    } catch (error) {
+      const failureProcessed = buildFailureProcessed(item.ticket, error);
+      try {
+        const persisted = await dependencies.persistOutcome({
+          account: accountResult,
+          queueItem: item.queueItem,
+          ticket: item.ticket,
+          processed: failureProcessed,
+        });
+        Object.assign(item, failureProcessed, {
+          status: 'simulated',
+          error: error.message,
+          persistedSimulationId: persisted && persisted.id,
+        });
+      } catch (persistError) {
+        item.status = 'failed';
+        item.error = `${error.message}; 写回失败: ${persistError.message}`;
+        error.persistError = persistError;
+      }
+      await reportProgress(dependencies, item);
+      error.batch = { success: false, account: accountResult, snapshot, items };
+      throw error;
+    }
+    await reportProgress(dependencies, item);
+  }
+
+  // 普通退货退款即使命中自动分支，也要等当前批次所有详情采集完再执行。
+  // 这样后出现的工单若反向关联到它，能先把它改判为共用退货单人工确认，避免单向提示导致提前退款。
+  const deferredAutoExecutionItems = processableItems.filter(item => item.status === 'deferred_auto_execution');
+  for (const item of deferredAutoExecutionItems) {
+    if (options.abortSignal && options.abortSignal.aborted) {
+      const err = new Error('操作已被用户停止');
+      err.name = 'AbortError';
+      throw err;
+    }
+    await assertBatchAllowed();
+    item.status = 'processing';
+    await reportProgress(dependencies, item);
+    let detailTargetId = null;
+    let processingError = null;
+
+    try {
+      let autoEligibleAfterBatch = false;
+      const evaluationDependencies = {
+        ...dependencies,
+        collectDetail: async () => item.collectedData,
+        shouldAutoExecute: async (decision, collectedData, queueItem) => {
+          autoEligibleAfterBatch = await dependencies.shouldAutoExecute(decision, collectedData, queueItem);
+          return false;
+        },
+      };
+      const evaluated = await processOpenedDetail({
+        account: accountResult,
+        listTargetId: prepared.targetId,
+        detailTargetId: null,
+        erpTargetId,
+        ticket: item.ticket,
+        queueItem: item.queueItem,
+        sharedReturnContext,
+        allowSharedReturnDefer: false,
+        deferRefundReturnAutoUntilBatchComplete: false,
+      }, evaluationDependencies);
+      if (evaluated && ['deferred_shared_return', 'deferred_auto_execution'].includes(evaluated.status)) {
+        throw new Error(`工单 ${item.workOrderNum} 批次回算后仍处于等待状态`);
+      }
+
+      if (!autoEligibleAfterBatch) {
+        const persisted = await dependencies.persistOutcome({
+          account: accountResult,
+          queueItem: item.queueItem,
+          ticket: item.ticket,
+          processed: evaluated,
+          source: 'fixed_batch',
+        });
+        Object.assign(item, evaluated);
+        if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
+        item.persistedSimulationId = persisted && persisted.id;
+      } else {
+        const located = await dependencies.locateWorkOrder(prepared.targetId, item.workOrderNum);
+        item.location = located;
+        if (!located || !located.found) throw new Error('自动执行前无法重新定位工单');
+        const opened = await dependencies.clickWorkOrderAction(item.workOrderNum, { targetId: prepared.targetId });
+        if (!opened || !opened.success || !opened.newTargetId) throw stepError('自动执行前重新打开目标工单失败', opened);
+        detailTargetId = opened.newTargetId;
+        item.detailTargetId = detailTargetId;
+
+        const outcome = await processOpenedDetailAndPersist({
+          account: accountResult,
+          listTargetId: prepared.targetId,
+          detailTargetId,
+          erpTargetId,
+          ticket: item.ticket,
+          queueItem: item.queueItem,
+          sharedReturnContext,
+          allowSharedReturnDefer: false,
+          deferRefundReturnAutoUntilBatchComplete: false,
+        }, dependencies, { source: 'fixed_batch' });
+        const { processed, persisted } = outcome;
+        Object.assign(item, processed);
+        if (persisted && persisted.queueStatus) item.status = persisted.queueStatus;
+        item.persistedSimulationId = persisted && persisted.id;
+      }
     } catch (error) {
       processingError = error;
       if (!detailTargetId && Array.isArray(error.newTargetIds)) {
@@ -984,6 +1372,7 @@ module.exports = {
   buildSimulationPayload,
   createEnsureQueueItem,
   loadDefaultDependencies,
+  resolveSharedReturnGroupForBatch,
   runCli,
   MAX_PAGES,
 };

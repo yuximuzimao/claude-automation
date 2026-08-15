@@ -9,6 +9,9 @@ const cdp = require('../cdp');
 const { navigate } = require('./navigate');
 const { ok, fail } = require('../result');
 const { sleep, waitFor } = require('../wait');
+const { readReturnTrackingLinksFromPage } = require('./return-tracking-links');
+
+const READ_RETURN_TRACKING_LINKS_SOURCE = '(' + readReturnTrackingLinksFromPage.toString() + ')';
 
 // 递归读取 Vue orderInfo 的 JS（固定字符串，不动态生成）
 // 从 DOM innerText 补充读取 Vue orderInfo 中缺失的字段
@@ -22,24 +25,18 @@ const READ_ORDER_INFO_JS = `(function(){
     }
     return null;
   }
-  var info = findDeep(document.querySelector('#app').__vue__, 0);
+  var rootVm = document.querySelector('#app').__vue__;
+  var info = findDeep(rootVm, 0);
   if (!info) return JSON.stringify({error:'orderInfo not found'});
 
   var bodyText = document.body.innerText;
 
-  // 退货物流单号 + 多次使用检测（页面直接显示可见文本，非 tooltip）
+  // 退货物流单号 + 多次使用检测。关联工单号优先读 Vue 结构，tooltip textContent 兜底。
   var rtMatch = bodyText.match(/退货物流单号[：:]\\s*([A-Za-z0-9]+)/);
   var returnTracking = rtMatch ? rtMatch[1] : '';
-  var returnTrackingMultiUse = false;
-  var returnTrackingUsedBy = [];
-  if (returnTracking && bodyText.indexOf('多次使用') !== -1) {
-    returnTrackingMultiUse = true;
-    // 提取"多次使用"附近区域内的工单号（平台展示的关联工单，16-22位长数字）
-    var muIdx = bodyText.indexOf('多次使用');
-    var muSection = bodyText.substring(Math.max(0, muIdx - 100), muIdx + 600);
-    var muNums = muSection.match(/1\\d{16,21}/g) || [];
-    returnTrackingUsedBy = muNums;
-  }
+  var returnTrackingLinks = ${READ_RETURN_TRACKING_LINKS_SOURCE}(document, rootVm, returnTracking);
+  var returnTrackingMultiUse = returnTracking && returnTrackingLinks.multiUse;
+  var returnTrackingUsedBy = returnTrackingLinks.usedBy || [];
 
   // 售后说明（buyerRemark）：Vue 优先，DOM 补充
   var remarkMatch = bodyText.match(/售后说明[：:]\\s*([^\\n]+)/);
@@ -250,7 +247,6 @@ async function readTicket(targetId, workOrderNum) {
       data.returnTrackingUsedBy = data.returnTrackingUsedBy.filter(n => n !== workOrderNum);
       if (!data.returnTrackingUsedBy.length) {
         delete data.returnTrackingUsedBy;
-        delete data.returnTrackingMultiUse;
       }
     }
     return ok(data);
@@ -259,4 +255,4 @@ async function readTicket(targetId, workOrderNum) {
   }
 }
 
-module.exports = { readTicket };
+module.exports = { readTicket, READ_ORDER_INFO_JS };
