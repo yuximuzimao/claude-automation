@@ -6,7 +6,8 @@
 Thumbs.db
 
 # 敏感数据（绝不上传）
-sessions/
+# 只忽略仓库根目录的浏览器/账号会话；子项目 docs/**/sessions/ 是可提交的文档目录。
+/sessions/
 
 # 运行时数据 — aftersales 售后自动化
 aftersales-automation/data/

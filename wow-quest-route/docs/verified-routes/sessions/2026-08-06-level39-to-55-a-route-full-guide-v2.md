@@ -1,0 +1,5 @@
+# V2已废止
+
+旧正文包含纯任务ID、裸坐标、概括交付和过期路线状态，已移除，不能执行。
+
+当前唯一玩家攻略：[`2026-08-08-level45-mojache-to-55-player-route-v5.md`](2026-08-08-level45-mojache-to-55-player-route-v5.md)。历史内容从Git或工作区备份追溯。
