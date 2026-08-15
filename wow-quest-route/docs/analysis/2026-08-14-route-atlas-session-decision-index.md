@@ -115,7 +115,7 @@
 权威记录：
 - `docs/analysis/2026-08-14-zangarmarsh-route-version-index.md`
 - `docs/analysis/2026-08-14-zangarmarsh-final-map-audit.md`
-- `data/routes/zangarmarsh-final-reusable-route-preview.html`
+- `data/routes/route-atlas-workbench.html`（现行唯一工作台；当时独立赞加preview已取消）
 
 当前固定流程：
 - 不是“每插一个任务就看一次完整动态图”；

@@ -151,7 +151,7 @@
 
 ## 13. 动态攻略页与当前估时口径
 
-动态页：`data/routes/zangarmarsh-final-reusable-route-preview.html`。
+动态页：`data/routes/route-atlas-workbench.html`（地图选择“赞加沼泽”；旧独立preview已取消）。
 
 固定展示规则：
 - 地图在上，文字在下，不再使用窄右栏；

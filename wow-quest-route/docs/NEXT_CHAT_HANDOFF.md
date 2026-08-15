@@ -69,7 +69,7 @@ docs/analysis/2026-08-14-zangarmarsh-route-version-index.md
 ```text
 docs/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md
 docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md
-data/routes/zangarmarsh-final-reusable-route-preview.html
+data/routes/route-atlas-workbench.html（地图选择“赞加沼泽”）
 ```
 
 `2026-08-12-route-atlas-quest-knowledge-graph-concept.md`保留最初需求来源；`2026-08-12-route-atlas-v1-contract.md`保留Questie/前端数据边界；`2026-08-13-route-atlas-optimization-framework.md`与mother-model/global-model文档保留路线计算理论与标签/关系设计。永久方法发生冲突时以`docs/ROUTE_ATLAS_RULES.md`为准；日期化决策索引、增量方法和版本索引用于恢复形成过程与地图特定细节。

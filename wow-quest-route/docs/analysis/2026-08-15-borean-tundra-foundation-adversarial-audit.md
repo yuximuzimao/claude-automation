@@ -17,9 +17,9 @@
 - Questie：11.34.0；raw assigned=252，raw direct-touches=263，修正层Borean提示=13。
 - 北风主候选275条；加一跳外部前置/后续边界引用后总记录287条。边界前置6条、边界后续6条。
 - WotLK修正层：命中111，成功解析111，失败0。
-- 北风主候选Scope分布：`{"defer_future_level_revisit": 5, "exclude_alliance_or_other_faction": 79, "exclude_deprecated_or_system": 6, "exclude_no_xp": 2, "exclude_profession": 5, "exclude_repeatable_calendar": 4, "exclude_server_variant": 3, "include_later_cross_map_followup": 1, "include_later_cross_map_inbound": 1, "include_leveling_cross_map_outbound": 2, "include_leveling_dungeon": 4, "include_leveling_local": 162, "include_structural_zero_xp_prerequisite": 1}`。
+- 北风主候选Scope分布：`{"defer_future_level_revisit": 5, "exclude_alliance_or_other_faction": 81, "exclude_deprecated_or_system": 6, "exclude_no_xp": 2, "exclude_profession": 5, "exclude_repeatable_calendar": 4, "exclude_server_variant": 3, "include_later_cross_map_followup": 1, "include_later_cross_map_inbound": 1, "include_leveling_cross_map_outbound": 2, "include_leveling_dungeon": 4, "include_leveling_local": 160, "include_structural_zero_xp_prerequisite": 1}`。
 - 边界引用Scope分布：`{"boundary_followup_reference": 5, "boundary_irrelevant_reference": 5, "boundary_prerequisite_reference": 2}`。
-- Target Cluster：161个，其中多任务共享实体簇22个；普通目标为空的纳入任务77个。
+- Target Cluster：158个，其中多任务共享实体簇22个；普通目标为空的纳入任务76个。
 - Questie extraObjectives：纳入任务共31条特殊机制事实；形成37个实体锚点簇和4个纯坐标锚点。
 - 全清可错过约束：2条。
 
@@ -27,13 +27,13 @@
 
 - PASS `questie_corrections_parse_clean`：{"candidate_block_count": 111, "parsed_block_count": 111, "failed_block_count": 0, "unresolved_symbol_count": 0, "unresolved_symbols": {}, "kill_credit_objective_first": [11652], "parse_failures": {}, "changed_fields": {"7783": [13], "11566": [21], "11569": [13], "11570": [9], "11574": [13, 16], "11575": [16], "11576": [21], "11582": [21], "11585": [16], "11587": [13, 29], "11590": [10, 21], "11591": [16], "11592": [9], "11593": [21], "11594": [13], "11595": [12, 16], "11596": [13, 16], "11597": [12], "11606": [13], "11608": [21], "11610": [10, 21], "11611": [10, 13], "11626": [21], "11631": [21, 29], "11632": [2], "11633": [21], "11636": [29], "11637": [11], "11647": [21], "11648": [21], "11650": [21], "11652": [10, 29], "11653": [10, 21], "11654": [2, 13], "11656": [10, 21], "11661": [21], "11664": [9], "11670": [10, 21], "11671": [21, 29], "11673": [9], "11677": [10, 21], "11680": [21], "11686": [10], "11688": [13], "11690": [10, 21, 29], "11694": [10, 21], "11704": [13], "11705": [10], "11706": [10, 29], "11708": [10, 13], "11711": [9, 21, 29], "11712": [10, 21], "11713": [13], "11719": [9], "11721": [21], "11723": [10, 21], "11728": [21, 29], "11730": [10, 21], "11788": [29], "11794": [21], "11796": [21], "11798": [29], "11865": [21, 29], "11876": [21], "11878": [10, 29], "11879": [29], "11881": [21, 29], "11887": [10], "11888": [13], "11889": [21], "11890": [9], "11892": [21], "11893": [10, 21, 29], "11894": [29], "11895": [29], "11896": [10, 21], "11897": [21], "11898": [29], "11899": [10, 13, 21], "11905": [21, 29], "11906": [13], "11907": [29], "11908": [13], "11909": [29], "11913": [10, 21], "11919": [10, 17, 21, 29], "11930": [9], "11938": [10, 21], "11940": [10, 17, 21, 29], "11945": [26], "11946": [11], "11951": [21], "11956": [29], "11957": [21, 29], "11967": [29], "11969": [21, 29], "12019": [3, 29], "12035": [10, 21], "12117": [22], "12157": [16], "12171": [16], "12486": [13], "12500": [13], "12728": [21], "13242": [13], "13265": [30], "13270": [30], "13413": [29], "13414": [29], "13833": [29], "13950": [9, 13, 16]}}
 - PASS `every_task_has_scope_status`：287
-- PASS `every_excluded_task_has_reason`：104
+- PASS `every_excluded_task_has_reason`：106
 - PASS `no_alliance_task_included`：无异常
 - PASS `no_repeatable_calendar_task_included`：无异常
 - PASS `no_disallowed_pvp_included`：无异常
 - PASS `no_unjustified_zero_xp_included`：[11679]
 - PASS `server_variants_resolved_or_flagged`：[]
-- PASS `included_target_cluster_facts_present`：184
+- PASS `included_target_cluster_facts_present`：181
 - PASS `shared_target_clusters_have_coordinates`：[]
 - PASS `quest_log_metadata_complete`：无异常
 - PASS `full_clear_availability_constraints_not_mutually_impossible`：[]
@@ -73,6 +73,7 @@
 - `11601`《柳暗花明》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `11603`《酒中的真相》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `11604`《逃兵》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
+- `11622`《裂鞭海岸的秘密》 → `exclude_alliance_or_other_faction`：manual_horde_scope_override_alliance_counterpart_of_11620
 - `11645`《恶心的雪地狗头人！》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `11650`《还要一些东西……》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `11653`《大块头》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
@@ -141,6 +142,7 @@
 - `12088`《死亡骑士萨萨里安》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `12141`《外交任务》 → `exclude_alliance_or_other_faction`：required_races_excludes_blood_elf；start_npc_alliance_only
 - `12157`《失踪的信使》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
+- `12490`《维赫亚的复仇》 → `exclude_alliance_or_other_faction`：manual_horde_scope_override_alliance_legacy_riplash_continuation
 - `12794`《魔法王国达拉然》 → `exclude_alliance_or_other_faction`：required_races_excludes_blood_elf
 - `13004`《完美宝石》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only
 - `13088`《诺森德的厨师》 → `exclude_alliance_or_other_faction`：finish_npc_alliance_only；required_races_excludes_blood_elf；start_npc_alliance_only

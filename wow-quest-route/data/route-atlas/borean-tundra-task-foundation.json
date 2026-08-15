@@ -960,7 +960,7 @@
     "boundary_irrelevant_reference": 5,
     "boundary_prerequisite_reference": 2,
     "defer_future_level_revisit": 5,
-    "exclude_alliance_or_other_faction": 79,
+    "exclude_alliance_or_other_faction": 81,
     "exclude_deprecated_or_system": 6,
     "exclude_no_xp": 2,
     "exclude_profession": 5,
@@ -970,12 +970,12 @@
     "include_later_cross_map_inbound": 1,
     "include_leveling_cross_map_outbound": 2,
     "include_leveling_dungeon": 4,
-    "include_leveling_local": 162,
+    "include_leveling_local": 160,
     "include_structural_zero_xp_prerequisite": 1
   },
   "primary_scope_counts": {
     "defer_future_level_revisit": 5,
-    "exclude_alliance_or_other_faction": 79,
+    "exclude_alliance_or_other_faction": 81,
     "exclude_deprecated_or_system": 6,
     "exclude_no_xp": 2,
     "exclude_profession": 5,
@@ -985,7 +985,7 @@
     "include_later_cross_map_inbound": 1,
     "include_leveling_cross_map_outbound": 2,
     "include_leveling_dungeon": 4,
-    "include_leveling_local": 162,
+    "include_leveling_local": 160,
     "include_structural_zero_xp_prerequisite": 1
   },
   "boundary_scope_counts": {
@@ -12193,9 +12193,9 @@
         "hard_cap": 25,
         "soft_warning_at": 22
       },
-      "scope_status": "include_leveling_local",
+      "scope_status": "exclude_alliance_or_other_faction",
       "scope_reasons": [
-        "one_time_xp_horde_paladin_task"
+        "manual_horde_scope_override_alliance_counterpart_of_11620"
       ]
     },
     {
@@ -58047,9 +58047,9 @@
         "hard_cap": 25,
         "soft_warning_at": 22
       },
-      "scope_status": "include_leveling_local",
+      "scope_status": "exclude_alliance_or_other_faction",
       "scope_reasons": [
-        "one_time_xp_horde_paladin_task"
+        "manual_horde_scope_override_alliance_legacy_riplash_continuation"
       ]
     },
     {

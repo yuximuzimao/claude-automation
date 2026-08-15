@@ -235,6 +235,16 @@ PC-SP、state-space DP / labeling、MILP、Branch-and-Cut、CP-SAT、flexible se
 
 ## 12. HTML前端长期约束
 
+### 12.0 唯一通用工作台
+
+- Route Atlas运行时永远只保留一份正式HTML：`data/routes/route-atlas-workbench.html`。文件名与页面骨架固定，不因地图、当前角色、路线版本、R快照或“预览/正式”状态另建HTML。
+- 所有地图/区域的当前路线统一进入同一工作台，通过顶部“地图”选择器切换底图与路线数据；新增龙骨荒野、灰熊丘陵等地图时继续追加到同一工作台，不创建`<zone>-preview.html`、`<zone>-current.html`、`<zone>-authoritative.html`等分支页面。
+- 路线版本历史只保存Markdown文字记录/审计；结构化层只保存“当前有效路线数据”。不得为了保留某一版视觉结果复制HTML。
+- 当前工作台的生成期路线集合统一物化到`data/route-atlas/workbench-routes.json`，由`scripts/build_route_atlas_workbench.py`嵌入固定HTML。目标电脑运行时仍只依赖`route-atlas-workbench.html + maps/`，不读取JSON、Python或项目文档。
+- “预览”也必须直接使用正式工作台的既定布局与字段职责。禁止为了临时审图另做简化版页面、侧栏版页面或其它HTML模板；路线尚未冻结只体现在标题/状态文字与审计文档中。
+- 页面布局以已验收的外域工作台为基准：顶部标题/状态卡 → 控制条 → 全宽地图+左上HUD → 图例 → 下方步骤列表 → 页脚。每个位置展示什么内容继续遵守本节既有字段职责，不因地图变化重新设计。
+- 地图视窗默认全图。切步骤、上一段/下一段、播放、地图切换本身不得强制自动放大；只有用户主动勾选“跟随当前段”时才允许按当前段自动裁剪，取消后回到全图。
+
 当前稳定交互与视觉约束：
 
 - 地图全宽置顶；地图左上角使用固定宽度、内容高度自适应且可收起的当前任务预览框；任务知识卡放在地图下方，完整步骤列表更下方。

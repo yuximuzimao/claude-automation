@@ -1,7 +1,7 @@
 {
   "primary_counts": {
     "defer_future_level_revisit": 5,
-    "exclude_alliance_or_other_faction": 79,
+    "exclude_alliance_or_other_faction": 81,
     "exclude_deprecated_or_system": 6,
     "exclude_no_xp": 2,
     "exclude_profession": 5,
@@ -98,6 +98,14 @@
       "status": "exclude_deprecated_or_system",
       "reasons": [
         "deprecated_placeholder_or_system_quest"
+      ]
+    },
+    {
+      "quest_id": 11622,
+      "name": "裂鞭海岸的秘密",
+      "status": "exclude_alliance_or_other_faction",
+      "reasons": [
+        "manual_horde_scope_override_alliance_counterpart_of_11620"
       ]
     },
     {
@@ -839,6 +847,14 @@
         "finish_npc_alliance_only",
         "required_races_excludes_blood_elf",
         "start_npc_alliance_only"
+      ]
+    },
+    {
+      "quest_id": 12490,
+      "name": "维赫亚的复仇",
+      "status": "exclude_alliance_or_other_faction",
+      "reasons": [
+        "manual_horde_scope_override_alliance_legacy_riplash_continuation"
       ]
     },
     {

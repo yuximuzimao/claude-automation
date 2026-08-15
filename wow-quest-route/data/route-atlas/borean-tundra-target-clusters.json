@@ -1,7 +1,7 @@
 {
   "title": "北风苔原 Target Clusters（完全相同真实目标实体）",
   "method": "Questie effective facts -> exact real entity id; direct and resolved-item-source relations remain typed; route order not assigned here; scripted extraObjectives are kept in a separate special-anchor layer",
-  "cluster_count": 161,
+  "cluster_count": 158,
   "shared_cluster_count": 22,
   "targetless_included_quest_ids": [
     11562,
@@ -19,7 +19,6 @@
     11616,
     11618,
     11620,
-    11622,
     11624,
     11629,
     11631,
@@ -111,7 +110,6 @@
     11616,
     11618,
     11620,
-    11622,
     11624,
     11629,
     11632,
@@ -3794,99 +3792,6 @@
       ],
       "quest_ids": [
         11630
-      ],
-      "video_reference_episodes": [],
-      "shared_by_multiple_tasks": false,
-      "adversarial_flags": []
-    },
-    {
-      "cluster_id": "npc:25523",
-      "entity_type": "npc",
-      "entity_id": 25523,
-      "name": "斯卡迪尔水手",
-      "borean_representative": {
-        "x": 47.79,
-        "y": 90.98,
-        "spawn_count": 24,
-        "min_x": 44.64,
-        "max_x": 54.92,
-        "min_y": 88.47,
-        "max_y": 93.45
-      },
-      "spawn_count": 24,
-      "relations": [
-        {
-          "quest_id": 12490,
-          "quest_name": "维赫亚的复仇",
-          "relation_kind": "direct_creature",
-          "required_count": 6,
-          "item_id": null
-        }
-      ],
-      "quest_ids": [
-        12490
-      ],
-      "video_reference_episodes": [],
-      "shared_by_multiple_tasks": false,
-      "adversarial_flags": []
-    },
-    {
-      "cluster_id": "npc:25520",
-      "entity_type": "npc",
-      "entity_id": 25520,
-      "name": "斯卡迪尔符文法师",
-      "borean_representative": {
-        "x": 49.76,
-        "y": 90.47,
-        "spawn_count": 10,
-        "min_x": 48.26,
-        "max_x": 54.56,
-        "min_y": 89.06,
-        "max_y": 94.05
-      },
-      "spawn_count": 10,
-      "relations": [
-        {
-          "quest_id": 12490,
-          "quest_name": "维赫亚的复仇",
-          "relation_kind": "direct_creature",
-          "required_count": 2,
-          "item_id": null
-        }
-      ],
-      "quest_ids": [
-        12490
-      ],
-      "video_reference_episodes": [],
-      "shared_by_multiple_tasks": false,
-      "adversarial_flags": []
-    },
-    {
-      "cluster_id": "npc:25613",
-      "entity_type": "npc",
-      "entity_id": 25613,
-      "name": "斯卡迪尔织雾者",
-      "borean_representative": {
-        "x": 48.0,
-        "y": 91.26,
-        "spawn_count": 25,
-        "min_x": 43.22,
-        "max_x": 54.25,
-        "min_y": 76.52,
-        "max_y": 95.21
-      },
-      "spawn_count": 25,
-      "relations": [
-        {
-          "quest_id": 12490,
-          "quest_name": "维赫亚的复仇",
-          "relation_kind": "direct_creature",
-          "required_count": 3,
-          "item_id": null
-        }
-      ],
-      "quest_ids": [
-        12490
       ],
       "video_reference_episodes": [],
       "shared_by_multiple_tasks": false,

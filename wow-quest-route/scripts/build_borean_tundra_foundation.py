@@ -478,6 +478,15 @@ def variant_components(tasks_by_id: dict[int, dict[str, Any]]) -> list[list[int]
 
 def task_scope_status(task: dict[str, Any]) -> tuple[str, list[str]]:
     reasons: list[str] = []
+    # Manual Horde/Titan scope overrides. These two legacy Riplash rows have race mask 0
+    # and no normal start/finish entities, so the compact DB cannot faction-filter them.
+    # Old Horde Journey follows 11620 -> 11625 -> 11626 and never exposes these rows;
+    # WotLK reference material identifies 11622 as the Alliance counterpart and 12490
+    # as an Alliance/legacy continuation. Keep them out of the reusable Horde route.
+    if task.get("quest_id") == 11622:
+        return "exclude_alliance_or_other_faction", ["manual_horde_scope_override_alliance_counterpart_of_11620"]
+    if task.get("quest_id") == 12490:
+        return "exclude_alliance_or_other_faction", ["manual_horde_scope_override_alliance_legacy_riplash_continuation"]
     if not task["is_primary_candidate"]:
         kinds = task["boundary_reference_kinds"]
         if kinds == ["prerequisite"]:

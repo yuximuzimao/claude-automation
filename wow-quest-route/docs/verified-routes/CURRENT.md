@@ -3,21 +3,22 @@
 ## 当前唯一执行状态
 
 - 当前目标：首组外域58→68已经闭合；**五号均已68级，当前人在北风苔原战歌要塞，战歌要塞飞行点已开启。诺森德第一张地图固定按北风苔原开始设计。**
-- 玩家已经学习普通飞行，但当前服诺森德要到**77级**才能使用个人飞行，因此68→77路线继续按**无个人飞行**设计；鸟点、飞艇和任务脚本载具/飞行属于系统交通，可以进入路线模型。77级后再单独重算个人飞行对路线的影响。
+- 飞行不再作为本项目的路线优化变量：沿主体路线第一次自然经过飞行点就顺手开启；任务脚本载具/飞行照任务正常使用。用户确认后续新号不购买飞行训练，达拉然/风暴峭壁的免费借用飞行坐骑只作为顺路任务与交通点处理，不因此重排主体任务路线。
 - 纳格兰首组权威实跑顺序：吉塞尔达后不炉石，继续到塔拉附近先做羊/牛，再绕山杀鸟；随后炉石加拉达尔交任务→奈辛瓦里交任务→顾问佐尔布+裂肠者→回交后达到68。《证明你的力量》确认无必要，永久从当前67→68冲刺线删除。
 - 赞加首组已完整跑完。下一批赞加从零权威骨架见`ZANGARMARSH-V2.md`。
 - 当前跨图任务真值：9442《虚弱的疾病》已放弃；《支援加拉达尔》已经交付；《食人魔的威胁》《塞纳里奥树林出事了？》《赞加沼泽的来客》《通知塞纳里奥议会》继续携带，但当前68级后全部不再为其回头，直接进入诺森德。
 - 当前`.ai-bridge/Questie.lua`已经刷新到北风苔原现场：当前可见活动任务为`11598《夺回巨石采掘场》`、`11606《耐心是我们不需要的美德》`、`11611《被掠走的苦工》`、`11888《前往牦牛村》`。这些只描述首组现场进度，不用于裁剪从零复用路线。
+- 北风基础层已纠正两条旧数据库误召回：11622《裂鞭海岸的秘密》、12490《维赫亚的复仇》从部落第一遍升级范围排除；当前第一遍升级范围固定为167条，生成器对抗检查0失败。
 - 最新NEAT：`sessions/2026-08-15-nagrand-68-northrend-transition-neat.md`。
 - Route Atlas长期规则：`../ROUTE_ATLAS_RULES.md`（项目路径：`docs/ROUTE_ATLAS_RULES.md`）。
 
 ## 当前执行稿
 
-- **当前68级首组仍暂无可执行的北风苔原最终路线。** 本轮正在建立北风苔原基础任务事实、Target Cluster和对抗审查；在基础层冻结前不提前发布R1/R2执行稿。
+- **北风苔原升级主路线已经增量插入到可转场候选版，但尚未由首组实跑冻结。** Route Atlas唯一执行/审图入口固定为`../../data/routes/route-atlas-workbench.html`，地图选择“北风苔原”；当前路线数据统一位于`../../data/route-atlas/workbench-routes.json`的`borean`条目。修正后的第一遍升级范围为167条：165条在北风内确定性闭合，12117《前往莫亚基港口》跨图携带，11632《寒风中的怪兽……》只作不等待刷新的机会任务。任务栏峰值10/25，任务奖励下界审计无满经验冲突。
 - 正式复用路线统一从“飞艇刚抵达战歌要塞、未接未做”开始，包含开启战歌要塞飞行点这一动作；当前首组已经开过飞行点、做过普通跑路任务，只作为实跑参考，不从未来完整攻略中删除。
-- `data/routes/outland-route-atlas.html`、`segments/67-68-nagrand-sprint.md`均转为外域首组复盘/下一批参考，不再作为当前68级首组执行入口。
-- 下一批赞加从零权威骨架：`ZANGARMARSH-V2.md`；独立历史页`data/routes/zangarmarsh-authoritative-v2.html`保留。
-- `zangarmarsh-current-remaining-route.html`与旧preview只保留首组历史复盘/知识归档，不再执行。
+- 外域地图路线也已并入同一`route-atlas-workbench.html`；`segments/67-68-nagrand-sprint.md`保留为外域首组复盘/文字记录，不再维护独立外域HTML。
+- 下一批赞加从零权威骨架：`ZANGARMARSH-V2.md`；赞加当前路线只在统一工作台中维护，历史版本只留Markdown。
+- 旧赞加`current/preview/authoritative`独立HTML已取消；首组历史复盘只保留文字归档。
 
 ## 最新Questie状态
 
@@ -28,6 +29,6 @@
 
 1. 先读本文件。
 2. 再读`sessions/2026-08-15-nagrand-68-northrend-transition-neat.md`。
-3. 若需要复用外域路线，再按需读`segments/67-68-nagrand-sprint.md`、`ZANGARMARSH-V2.md`和`data/routes/outland-route-atlas.html`；不要先加载全部历史外域材料。
-4. 北风苔原路线设计先读`../analysis/2026-08-15-borean-tundra-foundation-adversarial-audit.md`以及对应`data/route-atlas/borean-tundra-*`基础数据；不要回退到旧158条自动候选直接排序。
-5. 诺森德68→77按无个人飞行设计；每次Target Cluster插入都必须同步检查25格任务栏计数、跨图占位和视频34—39集邻接参考。
+3. 若需要复用外域路线，再按需读`segments/67-68-nagrand-sprint.md`、`ZANGARMARSH-V2.md`，并在统一`data/routes/route-atlas-workbench.html`切换到对应地图；不要先加载全部历史外域材料。
+4. 北风苔原恢复先读`../analysis/2026-08-15-borean-leveling-clear-v1-audit.md`，再按需读`../analysis/2026-08-15-borean-tundra-foundation-adversarial-audit.md`与`data/route-atlas/borean-tundra-*`基础数据；不要回退到旧自动候选直接排序。
+5. 当前不再从R6继续插簇；167条升级范围已覆盖到11930《横贯冰原》转龙骨荒野。下一步统一在`data/routes/route-atlas-workbench.html`的北风苔原页审阅/实跑；实跑时按最新Questie状态裁掉已完成动作，但不得覆盖从零复用主路线。任何地形/五开机制异常只重新打开受影响窗口。

@@ -17,6 +17,9 @@
 | `lib/route_builder.py` | 历史逐日岛路线骨架解析、数据补全和输出 | 修改旧逐日岛生成逻辑时 |
 | `lib/simple_route.py` | 共用单页渲染、首组圣骑士路线、任务详情和距离反馈 | 修改页面结构或首组参考路线时 |
 | `lib/world_builder.py` | 按角色配置生成圣骑士/死亡骑士全区域候选任务库 | 修改种族职业过滤或区域候选时 |
+| `scripts/build_route_atlas_workbench.py` | 将当前所有地图路线数据嵌入唯一通用工作台 | 更新任一地图Route Atlas执行页时 |
+| `data/route-atlas/workbench-routes.json` | 所有地图当前有效路线的统一前端数据源；版本历史不在此保留 | 修改工作台地图/停靠点/说明时 |
+| `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式HTML；所有地图共用 | 实跑、审图、复制到游戏电脑时 |
 | `lib/world_review.py` | 将死亡骑士55—80全任务合并为当前样式单页 | 修改打金任务母版时 |
 | `data/route-specs/simple-leveling-route.json` | 首组圣骑士1—55实跑参考与历史1—80阶段 | 调整首组任务顺序、炉石或实跑路段时 |
 | `data/journey/current-paladin.json` | 当前账号级日志中最新角色条目的脱敏历程 | 对比实跑顺序或继续追加历程时 |
@@ -67,7 +70,7 @@
 | --- | --- |
 | `lib/` | 可复用解析与生成逻辑 |
 | `data/route-specs/` | 路线步骤骨架 |
-| `data/routes/` | 生成路线 |
+| `data/routes/` | 生成路线；Route Atlas只允许`route-atlas-workbench.html`这一份正式工作台HTML |
 | `data/observations/` | 实测修正 |
 | `docs/` | 操作规则和导出说明 |
 | `tasks/` | 待办与教训 |

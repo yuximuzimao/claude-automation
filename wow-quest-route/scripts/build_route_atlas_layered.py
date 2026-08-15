@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HTML = ROOT / "data" / "routes" / "zangarmarsh-route-atlas-prototype.html"
+HTML = ROOT / "_sandbox" / "zangarmarsh-route-atlas-prototype.html"  # historical developer-only prototype
 
 subprocess.run([sys.executable, str(ROOT / "scripts" / "build_route_atlas_prototype.py")], cwd=ROOT, check=True)
 text = HTML.read_text(encoding="utf-8")
