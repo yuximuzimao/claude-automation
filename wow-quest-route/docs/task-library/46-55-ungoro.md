@@ -111,4 +111,4 @@
 
 ## 当前执行稿
 
-玩家实际执行顺序见：`docs/verified-routes/sessions/2026-08-09-level50-58-ungoro-full-clear-v1.md`。
+玩家实际执行顺序见：`docs/archive/routes/2026-08-09-level50-58-ungoro-full-clear-v1.md`。

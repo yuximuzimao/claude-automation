@@ -27,7 +27,7 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 5. 永久规则从 `docs/rules/README.md` 选择当前需要的子规则。
 6. 真正生成/修订完整路线才读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md` 和 `ERROR-BOOK.md`。
 7. 具体任务事实优先复用 `docs/task-library/` 和 `data/observations/`。
-8. 历史阶段只按CURRENT/索引需要读取一份 `docs/verified-routes/sessions/` NEAT，不批量加载。
+8. 历史资料统一从 `docs/archive/README.md` 定向查；日常不批量加载archive，只有CURRENT/当前问题需要时再读对应历史文件。
 
 ## 主要数据层
 
@@ -36,7 +36,7 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 - **当前状态**：最低号等级经验、任务进度、当前地图、交通等，只在CURRENT/Journey维护。
 - **Route Atlas路线**：`data/route-atlas/workbench-routes.json` 保存当前有效路线数据。
 - **实测观察**：`data/observations/` 保存本服五开共享、阻断和特殊机制。
-- **阶段历史**：`docs/verified-routes/sessions/` 保存NEAT阶段快照。
+- **历史档案**：`docs/archive/` 保存旧方案、一次性分析、NEAT和视频历史；只在需要考古时定向读取。
 
 ## 永久规则分层
 
@@ -69,7 +69,7 @@ README不保存具体当前等级、地图和任务进度。继续实跑只读�
 - 不注入客户端、不读内存、不抓包、不自动接交任务、不广播输入。
 - 不保存账号名、服务器名、角色名、GUID或登录信息。
 - 原始Questie/WTF/账号运行时数据不提交Git；只提交脱敏历程、结构化观察、路线和项目文档。
-- 工作区根 `/sessions/` 是浏览器/账号会话，保持Git忽略；项目 `docs/**/sessions/` 是Markdown历史，正常commit/push。
+- 工作区根 `/sessions/` 是浏览器/账号会话，保持Git忽略；项目历史统一放 `docs/archive/`，正常commit/push但不参与日常默认读取。
 
 ## 旧生成器
 

@@ -8,7 +8,7 @@
 - 已完成：第13—43集。
 - 下一集：第44集。
 - 本轮停止点：第43集检查点、事件JSON、520帧正式原始证据、OCR和Questie交叉审计均已完成；第44集仅从当前合集状态只读查询元数据，未打开、未截图、未处理。
-- 最新NEAT归档仍为：`docs/video-extraction/sessions/2026-08-07-episode34-neat.md`；本轮未额外做NEAT归档。
+- 最新NEAT归档仍为：`docs/archive/video/neat/2026-08-07-episode34-neat.md`；本轮未额外做NEAT归档。
 
 ## 下一集唯一入口
 

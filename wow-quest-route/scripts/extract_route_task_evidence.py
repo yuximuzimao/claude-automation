@@ -167,7 +167,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--summary",
-        default="docs/analysis/2026-08-06-current-route-static-evidence-matrix.md",
+        default="docs/archive/analysis/2026-08-06-current-route-static-evidence-matrix.md",
     )
     args = parser.parse_args()
 

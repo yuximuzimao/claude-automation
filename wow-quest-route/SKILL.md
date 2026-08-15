@@ -4,12 +4,13 @@
 
 1. 先读 `tasks/todo.md`，只确认当前工作流和下一步，不加载历史。
 2. 读 `docs/INDEX.md`，它只负责文档/数据入口导航，不承载完整规则。
-3. **继续当前首组实跑**：读 `docs/verified-routes/CURRENT.md`；只有需要阶段背景时再读CURRENT指向的最新NEAT/执行稿。
+3. **继续当前首组实跑**：读 `docs/verified-routes/CURRENT.md`；只有CURRENT明确要求阶段背景时，再定向读 `docs/archive/neat/` 中对应的最近NEAT，不批量读历史。
 4. **生成/修订/审计任务路线**：读 `docs/rules/README.md`，只加载当前任务对应规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md` 和相关任务卡。
 5. **Route Atlas路线数据/裁剪/优化**：读 `docs/rules/route-atlas-optimization.md`；只有同时改玩家任务备注时加读 `execution-and-mechanics.md`。
 6. **Route Atlas HTML/地图/UI**：读 `docs/rules/route-atlas-ui-and-assets.md`；不要为了前端改动加载全部路线优化历史。
-7. **视频拆解**：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；不要先加载实时路线、Route Atlas规则或全部视频历史。
-8. 代码/数据生成入口是 `cli.py`；Route Atlas工作台构建入口是 `scripts/build_route_atlas_workbench.py`。纯攻略修订不先运行生成器，也不让脚本替代人工判断。
+7. **视频拆解**：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；历史NEAT只从 `docs/archive/video/` 定向读取。
+8. **DK 55—80母版**：只在处理DK路线时读 `docs/DK_55_80_WORLD_TASKS.md` 和对应生成数据，不加载首组历史路线。
+9. 代码/数据生成入口是 `cli.py`；Route Atlas工作台构建入口是 `scripts/build_route_atlas_workbench.py`。纯攻略修订不先运行生成器，也不让脚本替代人工判断。
 
 ## ENTRY MAP
 
@@ -31,7 +32,8 @@
 | `data/route-atlas/workbench-routes.json` | 所有地图当前Route Atlas路线数据 | 改地图步骤/坐标/备注时 |
 | `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式执行HTML | 实跑/审图/复制到游戏电脑 |
 | `scripts/build_route_atlas_workbench.py` | 将路线数据嵌入唯一工作台 | 修改Route Atlas数据/UI后构建 |
-| `docs/verified-routes/sessions/` | 日期化NEAT阶段存档 | 只按CURRENT/索引需要读一份，不批量加载 |
+| `docs/archive/README.md` | 历史档案总入口；旧方案、一次性分析、NEAT和视频历史 | 只有需要考古/回溯时按主题进入 |
+| `docs/archive/neat/` | 日期化NEAT阶段存档 | 只按CURRENT/索引需要读一份，不批量加载 |
 | `docs/video-extraction/README.md` | 视频拆解方法 | 处理视频时 |
 | `docs/video-extraction/CURRENT.md` | 视频下一集恢复点 | 继续视频时 |
 | `cli.py` | 项目命令入口 | 运行生成/解析命令时 |
@@ -63,6 +65,7 @@
 - 不把击杀共享推断到拾取、点击、任务物或技能。
 - 不按任务类型整类保留/排除；逐任务比较真实剩余成本。
 - 不从日期化NEAT反推永久规则；永久规则只读 `docs/rules/`。
+- `docs/archive/` 是历史考古区，不属于日常活跃知识；除非CURRENT/索引明确指向、当前任务需要回溯，或本轮刚修改了其中某文件，否则不批量读取。
 - 不一次性加载全部规则、全部NEAT、全部任务卡；按当前任务渐进式读取。
 - 不把临时教训长期堆在 `tasks/lessons.md`；稳定后迁到规则/错题/任务卡/observations。
 - 不提交原始Questie/WTF/账号登录数据；先脱敏。
@@ -80,9 +83,9 @@
 | `data/observations/` | 当前服务器实测修正 |
 | `data/journey/` | 脱敏人物历程 |
 | `docs/rules/` | 分主题永久规则；按需加载 |
-| `docs/verified-routes/` | CURRENT、SOP、错题本、已验证路线索引 |
-| `docs/verified-routes/sessions/` | 日期化NEAT阶段存档，不承载永久规则 |
+| `docs/verified-routes/` | CURRENT、SOP、错题本、仍有效/可复用的已验证路线 |
+| `docs/archive/` | 旧方案、一次性分析、NEAT、视频历史；默认不进入日常全文加载 |
 | `docs/task-library/` | 单任务知识 |
-| `docs/video-extraction/` | 视频事实提取工作流 |
+| `docs/video-extraction/` | 当前视频事实提取工作流 |
 | `tasks/` | 当前待办 + 尚未迁移的临时教训 |
 | `tests/` | 自动测试 |

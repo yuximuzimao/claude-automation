@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUESTIE_ZIP = ROOT / "_sandbox/sources/Questie-v11.32.3.zip"
 ROUTE_JSON = ROOT / "data/routes/world-candidate/3483-hellfire-peninsula/route.json"
 OUT_JSON = ROOT / "data/routes/horde/blood-elf/hellfire-chain-round-overlap.json"
-OUT_MD = ROOT / "docs/analysis/2026-08-11-hellfire-chain-round-overlap.md"
+OUT_MD = ROOT / "docs/archive/analysis/2026-08-11-hellfire-chain-round-overlap.md"
 
 HELLFIRE = 3483
 BLOOD_ELF = 512

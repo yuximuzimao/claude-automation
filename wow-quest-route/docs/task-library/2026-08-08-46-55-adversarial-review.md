@@ -1,6 +1,6 @@
 # 46—55路线冷启动对抗复核
 
-复核日期：2026-08-08。复核对象：`docs/verified-routes/sessions/2026-08-08-level45-mojache-to-55-player-route-v5.md`。
+复核日期：2026-08-08。复核对象：`docs/archive/routes/2026-08-08-level45-mojache-to-55-player-route-v5.md`。
 
 ## 复核结论
 

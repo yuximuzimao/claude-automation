@@ -23,7 +23,7 @@ from typing import Any, Iterable
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "data/routes/horde/blood-elf/35-55-optimizer-input.json"
 DEFAULT_OUTPUT = ROOT / "data/routes/horde/blood-elf/35-55-route-solutions.json"
-DEFAULT_AUDIT = ROOT / "docs/analysis/2026-08-04-35-55-optimizer-audit.md"
+DEFAULT_AUDIT = ROOT / "docs/archive/analysis/2026-08-04-35-55-optimizer-audit.md"
 
 CURRENTLY_AVAILABLE_STATES = {
     "available_at_35",

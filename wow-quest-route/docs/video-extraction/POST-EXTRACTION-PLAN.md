@@ -38,7 +38,7 @@
 ```text
 data/video-route/master-events.json
 data/video-route/episode-boundaries.json
-docs/analysis/video-route-master-audit.md
+docs/archive/analysis/video-route-master-audit.md
 ```
 
 处理：
@@ -63,7 +63,7 @@ docs/analysis/video-route-master-audit.md
 
 ```text
 data/video-route/cross-episode-gaps.json
-docs/analysis/video-route-cross-episode-audit.md
+docs/archive/analysis/video-route-cross-episode-audit.md
 ```
 
 检查：
@@ -89,7 +89,7 @@ docs/analysis/video-route-cross-episode-audit.md
 
 ```text
 data/video-route/alliance-route-blocks.json
-docs/analysis/video-route-block-audit.md
+docs/archive/analysis/video-route-block-audit.md
 ```
 
 按实际地理和交通切成任务块：
@@ -107,7 +107,7 @@ docs/analysis/video-route-block-audit.md
 读取现有基础：
 
 ```text
-docs/analysis/2026-08-04-35-55-data-contract-and-requirements.md
+docs/archive/analysis/2026-08-04-35-55-data-contract-and-requirements.md
 data/routes/horde/blood-elf/35-55-candidates.json
 data/routes/horde/blood-elf/35-55-overlap-blocks.json
 data/routes/horde/blood-elf/35-55-priority-task-audit.json
@@ -125,7 +125,7 @@ data/route-specs/35-55-speedrun-constraints.json
 
 ```text
 data/video-route/horde-mapping.json
-docs/analysis/video-route-horde-mapping-audit.md
+docs/archive/analysis/video-route-horde-mapping-audit.md
 ```
 
 每条映射必须保存任务ID、共同实体、地图、前置差异、阵营限制和置信度。名称相似不能作为唯一映射依据。

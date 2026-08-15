@@ -44,8 +44,8 @@
 3. **五开实测层**：`../data/observations/`，保存共享/个人、阻断和服务器特定行为。
 4. **Route Atlas路线层**：`../data/route-atlas/`，保存当前有效结构化路线和地图任务基础数据。
 5. **人物历程层**：`../data/journey/`，只保存脱敏Journey，用于复盘接取/交付/升级，不代表移动轨迹。
-6. **阶段历史层**：`verified-routes/sessions/`，保存NEAT当时状态/证据/判断；不覆盖CURRENT和永久规则。
-7. **视频事实层**：`video-extraction/`，逐集保存视频事实，只有后续整合阶段才映射到当前路线。
+6. **历史档案层**：`archive/`，保存旧方案、一次性analysis、NEAT和视频历史；只用于定向考古，不覆盖CURRENT和永久规则。
+7. **视频事实层**：`video-extraction/`，只保留当前视频工作流与恢复点；历史审计/NEAT进入 `archive/video/`。
 
 证据冲突默认优先级：用户当前实测 > 最新Questie/实跑状态 > observations/verified route > Questie数据库 > 公共资料 > 旧路线假设。
 
@@ -73,26 +73,30 @@
 - 方法：`video-extraction/README.md`
 - 当前集恢复点：`video-extraction/CURRENT.md`
 - 全集后整合：`video-extraction/POST-EXTRACTION-PLAN.md`
-- 阶段NEAT：`video-extraction/sessions/`
+- 阶段历史：`archive/video/`
 
 视频逐集阶段只提取事实，不与当前首组Questie状态或路线优化混算。
 
 ## §8 历史与归档
 
-- `verified-routes/sessions/`：首组练级/Route Atlas阶段NEAT。
-- `verified-routes/segments/`：已验证历史路线段。
-- `analysis/`：日期化分析、模型实验、地图特定审计和形成过程。
-- `NEAT_SIMPLE_LEVELING_ROUTE.md` 等旧文档仅作历史，不作为当前入口。
+总入口：`archive/README.md`。
 
-历史文件只按当前问题需要读取一份或少量相关文件，禁止批量加载整个目录。
+- `archive/neat/`：首组练级/Route Atlas阶段复盘与NEAT。
+- `archive/routes/`：曾经作为执行稿使用、后来被替代的历史路线版本。
+- `archive/analysis/`：日期化分析、模型实验、地图特定审计和形成过程。
+- `archive/proposed-routes/`：未进入正式执行、后来被放弃的候选路线。
+- `archive/video/`：视频阶段审计与NEAT。
+- `verified-routes/segments/`：仍然可信、后续可能复用的已验证路线段，因此不归入废弃历史。
+
+历史档案不是日常活跃知识。NEAT默认不全文重读整个archive；只审本轮改动的历史文件、archive索引，以及CURRENT/当前任务明确指向的最近历史。
 
 ## §9 临时待办与教训
 
 - `../tasks/todo.md`：只记录仍会改变下一步工作的事项。
 - `../tasks/lessons.md`：只记录尚未确定归宿的新发现；稳定后迁入 `rules/`、ERROR-BOOK、task-library、observations或NEAT，并从lessons删除。
 
-## §10 Git与sessions命名
+## §10 Git与历史目录
 
 - 仓库根 `/sessions/`：浏览器/账号运行时会话，敏感数据，必须Git忽略。
-- `verified-routes/sessions/` 与 `video-extraction/sessions/`：项目Markdown历史，必须正常commit/push。
+- 项目历史统一放 `docs/archive/`，正常commit/push，但退出日常默认读取范围。
 - 根 `.gitignore` 必须使用 `/sessions/`，不能写成会误伤子项目文档的 `sessions/`。

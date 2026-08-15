@@ -22,9 +22,9 @@ FOUNDATION_PATH = ROOT / "data/routes/horde/blood-elf/35-55-task-foundation-enri
 CONSTRAINTS_PATH = ROOT / "data/route-specs/35-55-speedrun-constraints.json"
 GRAPH_PATH = ROOT / "data/routes/horde/blood-elf/35-55-overlap-graph.json"
 BLOCKS_PATH = ROOT / "data/routes/horde/blood-elf/35-55-overlap-blocks.json"
-AUDIT_PATH = ROOT / "docs/analysis/2026-08-04-35-55-overlap-block-audit.md"
+AUDIT_PATH = ROOT / "docs/archive/analysis/2026-08-04-35-55-overlap-block-audit.md"
 PRIORITY_AUDIT_JSON_PATH = ROOT / "data/routes/horde/blood-elf/35-55-priority-task-audit.json"
-PRIORITY_AUDIT_MD_PATH = ROOT / "docs/analysis/2026-08-04-35-55-priority-task-audit.md"
+PRIORITY_AUDIT_MD_PATH = ROOT / "docs/archive/analysis/2026-08-04-35-55-priority-task-audit.md"
 
 PARAMETERS = {
     "objective_cluster_radius": 2.5,

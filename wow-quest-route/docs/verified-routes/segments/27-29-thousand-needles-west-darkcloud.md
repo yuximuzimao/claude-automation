@@ -77,4 +77,4 @@
 ## 下一段入口
 
 - 从当前29级12184/36300前往闪光平原。
-- 执行`docs/proposed-routes/2026-08-02-29-33-three-map-rounds-v1.md`第一轮。
+- 执行`docs/archive/proposed-routes/2026-08-02-29-33-three-map-rounds-v1.md`第一轮。

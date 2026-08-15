@@ -2,7 +2,7 @@
 
 用途：这是本项目永久规则的唯一总入口。不要一次性读取全部规则；先判断当前任务属于哪一类，再只加载对应子文档。
 
-当前状态、等级、任务进度和本批次局部路线不写在这里，统一读 `docs/verified-routes/CURRENT.md`。日期化 NEAT / analysis 只保存阶段证据和形成过程，不承担永久规则入口。
+当前状态、等级、任务进度和本批次局部路线不写在这里，统一读 `docs/verified-routes/CURRENT.md`。日期化 NEAT、一次性 analysis、旧候选路线统一在 `docs/archive/` 保存形成过程，不承担永久规则入口，也不属于日常默认加载范围。
 
 ## 所有工作都必须遵守的最小规则
 
@@ -21,12 +21,12 @@
 
 | 当前任务 | 必读规则 | 再按需读取 |
 | --- | --- | --- |
-| 继续当前实跑、回答“下一步去哪” | `docs/verified-routes/CURRENT.md` | 当前地图 NEAT / 执行稿 |
+| 继续当前实跑、回答“下一步去哪” | `docs/verified-routes/CURRENT.md` | CURRENT明确指向的最近NEAT/执行稿 |
 | 新建、修订、重算任务路线 | `leveling-and-selection.md` + `execution-and-mechanics.md` | `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md`、任务卡 |
 | 做经验预算、任务取舍、掉落/护送价值判断 | `leveling-and-selection.md` | 当前地图任务资料、observations |
 | 写玩家攻略、补任务备注、处理洞穴/道具/触发机制 | `execution-and-mechanics.md` | task-library、ERROR-BOOK |
 | 裁当前角色路线、导入 Journey、做完整性/发布审计 | `state-and-validation.md` | CURRENT、Journey 文档、ERROR-BOOK |
-| Route Atlas 路线数据、插入/裁剪、状态机、炉石、求解器 | `route-atlas-optimization.md` | 当前地图 analysis / NEAT |
+| Route Atlas 路线数据、插入/裁剪、状态机、炉石、求解器 | `route-atlas-optimization.md` | 需要考古时定向读 `docs/archive/analysis/` 或 `docs/archive/neat/` |
 | Route Atlas HTML、逻辑步骤、HUD、地图底图、离线资源 | `route-atlas-ui-and-assets.md` | `scripts/build_route_atlas_workbench.py`、地图资源 manifest |
 | 视频逐集拆解 | 不读以上路线规则 | `docs/video-extraction/README.md` + `CURRENT.md` |
 
@@ -38,6 +38,6 @@
 - `docs/verified-routes/ERROR-BOOK.md`：历史错误与发布前对抗复查，只在生成/修订/审计时加载。
 - `docs/task-library/`：单任务可复用事实。
 - `data/observations/`：当前服务器五开机制与阻断实测。
-- `docs/verified-routes/sessions/`：阶段 NEAT 存档，只保存当时状态、证据、判断和恢复点。
+- `docs/archive/`：历史考古区；NEAT、旧候选路线、一次性analysis和视频历史都在这里，默认不参与日常加载。
 
 新代码、文档和NEAT一律从本索引路由永久规则，不再维护其它永久规则总入口。

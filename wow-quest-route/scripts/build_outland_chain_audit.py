@@ -436,7 +436,7 @@ def main() -> None:
     lines.append("- 任务链若跨地图或属于结构前置，不能只依据最低任务等级机械拆开。")
     lines.append("- 完整逐任务字段见`data/routes/horde/blood-elf/outland-58-68-chain-audit.json`。")
 
-    out_md = ROOT / "docs/analysis/2026-08-11-outland-58-68-chain-master-table.md"
+    out_md = ROOT / "docs/archive/analysis/2026-08-11-outland-58-68-chain-master-table.md"
     out_md.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(json.dumps({

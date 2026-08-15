@@ -126,10 +126,10 @@ wow-quest-route/.ai-bridge/video-epN/
 
 ### 3.7 NEAT阶段归档与恢复状态同步
 
-阶段性归档保存在：
+阶段性历史统一归档到：
 
 ```text
-docs/video-extraction/sessions/
+docs/archive/video/
 ```
 
 NEAT归档只保存阶段结果、证据边界、错误修正和下一次约束，不复制整份单集时间轴。每次做NEAT归档时必须同步核对：
@@ -137,15 +137,14 @@ NEAT归档只保存阶段结果、证据边界、错误修正和下一次约束�
 - `docs/video-extraction/CURRENT.md`；
 - `/Users/chat/claude/.ai-bridge/wow-video-extraction/progress.json`；
 - `/Users/chat/claude/.ai-bridge/wow-video-extraction/CURRENT.md`；
-- `docs/NEXT_CHAT_HANDOFF.md`；
 - `tasks/todo.md`。
 
-这些入口不得指向不同的下一集。项目`CURRENT.md`仍是唯一人类主状态，`progress.json`用于机器恢复。
+这些状态不得指向不同的下一集。项目`CURRENT.md`仍是唯一人类主状态，`progress.json`用于机器恢复。
 
 当前最新NEAT归档：
 
 ```text
-docs/video-extraction/sessions/2026-08-07-episode34-neat.md
+docs/archive/video/neat/2026-08-07-episode34-neat.md
 ```
 
 ## 4. 证据优先级

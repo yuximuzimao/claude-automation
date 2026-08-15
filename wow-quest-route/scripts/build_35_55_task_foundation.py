@@ -1113,7 +1113,7 @@ def main() -> None:
     parser.add_argument("--questie", default="_sandbox/sources/Questie-v11.32.3.zip")
     parser.add_argument("--json", default="data/routes/horde/blood-elf/35-55-task-foundation.json")
     parser.add_argument("--csv", default="data/routes/horde/blood-elf/35-55-task-foundation.csv")
-    parser.add_argument("--review", default="docs/analysis/2026-08-04-35-55-task-foundation-review.md")
+    parser.add_argument("--review", default="docs/archive/analysis/2026-08-04-35-55-task-foundation-review.md")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[1]

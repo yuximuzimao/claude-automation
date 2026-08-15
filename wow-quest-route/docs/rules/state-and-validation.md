@@ -114,7 +114,7 @@ Questie compact DB中的声望与其它Availability条件都是硬约束：
 
 不允许只写历史解释而保留错误正文。
 
-已验证历史段的边界：只有用户实跑确认的机制、经验和路径才进入`docs/verified-routes/segments/`；尚未实跑的建议留在当前规划、analysis、todo或NEAT中，不能因为静态审计通过就标成已验证实跑路线。
+已验证历史段的边界：只有用户实跑确认且仍值得复用的机制、经验和路径才进入`docs/verified-routes/segments/`；尚未实跑的建议留在当前规划或todo，已经被替代的一次性分析/候选方案/旧执行稿统一进入`docs/archive/`，不能因为静态审计通过就标成已验证实跑路线。
 
 ## 8. NEAT / CURRENT / rules 的边界
 
@@ -122,7 +122,7 @@ Questie compact DB中的声望与其它Availability条件都是硬约束：
 
 只保存：当前目标、最新等级/位置/关键状态、当前唯一执行入口、下一窗口最小恢复顺序。
 
-### NEAT (`docs/verified-routes/sessions/`)
+### NEAT (`docs/archive/neat/`)
 
 保存某个阶段的：
 
@@ -132,7 +132,9 @@ Questie compact DB中的声望与其它Availability条件都是硬约束：
 - 下一恢复点；
 - 形成规则的证据来源。
 
-NEAT不是永久规则入口。后续若某结论升级为长期规则，必须写入 `docs/rules/`；NEAT保留形成过程即可。
+NEAT不是永久规则入口。后续若某结论升级为长期规则，必须写入 `docs/rules/`；NEAT只保留形成过程并归档。
+
+日常NEAT收尾必须全文审查当前活跃知识，但不重复全文审查整个 `docs/archive/`。历史区默认只审：归档索引、本轮新增/修改/移动的历史文件，以及CURRENT或当前任务明确需要回溯的最近历史文件。
 
 ### rules
 
@@ -140,9 +142,9 @@ NEAT不是永久规则入口。后续若某结论升级为长期规则，必须�
 
 ## 9. Git与文档持久化
 
-- `docs/verified-routes/sessions/` 和 `docs/video-extraction/sessions/` 是项目Markdown历史，必须正常纳入Git。
-- 工作区根 `/sessions/` 是浏览器/账号运行时会话，必须继续被 `.gitignore` 忽略；两者语义完全不同。
-- NEAT文件不要依赖 `git add -f` 作为常规流程；忽略规则必须只作用于根运行时目录。
+- `docs/archive/` 是可版本化项目历史，必须正常纳入Git；它只是从日常活跃知识中退出，不等于忽略或删除。
+- 工作区根 `/sessions/` 是浏览器/账号运行时会话，必须继续被 `.gitignore` 忽略；与项目历史档案语义完全不同。
+- 项目Markdown不要依赖 `git add -f` 作为常规流程；忽略规则必须只作用于真正的运行时/敏感目录。
 - 原始Questie/WTF/账号级输入不提交；只提交脱敏后的路线状态、任务知识和结构化观察。
 
 ## 10. 临时教训收件箱

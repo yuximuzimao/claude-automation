@@ -6,7 +6,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "data/routes/horde/blood-elf/39-55-a-route-task-details.json"
-OUTPUT = ROOT / "docs/analysis/2026-08-06-a-route-task-coordinate-summary.md"
+OUTPUT = ROOT / "docs/archive/analysis/2026-08-06-a-route-task-coordinate-summary.md"
 
 
 def fmt_points(points: list[dict[str, Any]]) -> str:

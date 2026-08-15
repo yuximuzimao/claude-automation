@@ -16,7 +16,7 @@
 1. 进入项目先读 `SKILL.md`。
 2. 读 `tasks/todo.md`，确认当前工作流，不加载历史。
 3. 读 `docs/INDEX.md`，只做文档/数据导航，确定本次最小读取范围。
-4. 继续当前实跑：读 `docs/verified-routes/CURRENT.md`；只有需要阶段背景时才读CURRENT指向的最新NEAT/执行稿。
+4. 继续当前实跑：读 `docs/verified-routes/CURRENT.md`；只有CURRENT明确要求阶段背景时，才定向读 `docs/archive/neat/` 中对应的最近NEAT；需要旧执行版本时从 `docs/archive/routes/` 定向读取。
 5. 新建/修订/审计路线：读 `docs/rules/README.md`，按任务选择子规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md` 和相关任务卡。
 6. Route Atlas数据/优化与Route Atlas HTML/UI分开加载规则，具体路由以 `SKILL.md` 和 `docs/rules/README.md` 为准。
 7. 视频拆解：只读 `docs/video-extraction/README.md`、`CURRENT.md` 和上一集检查点，不加载当前角色路线和Route Atlas历史。
@@ -38,7 +38,7 @@
 | `docs/JOURNEY_EXPORT.md` | 导出/分析Questie人物历程 |
 | `docs/video-extraction/README.md` | 视频事实提取 |
 
-禁止为了一个局部问题一次性加载全部永久规则、全部NEAT、全部任务卡或全部analysis。
+禁止为了一个局部问题一次性加载全部永久规则、全部任务卡或整个 `docs/archive/`。archive只在需要考古、CURRENT明确指向或本轮刚修改历史文件时定向读取。
 
 ## 教训沉淀流程
 
@@ -46,7 +46,7 @@
 - 稳定方法 → `docs/rules/`。
 - 重复失败模式 → `docs/verified-routes/ERROR-BOOK.md`。
 - 单任务事实 → `docs/task-library/` / `data/observations/`。
-- 阶段状态/证据 → `docs/verified-routes/sessions/` NEAT。
+- 阶段状态/证据 → `docs/archive/neat/` NEAT。
 - 迁移后从 `tasks/lessons.md` 删除，不重复维护。
 
 ## 数据边界
@@ -57,11 +57,11 @@
 - `data/routes/` 保存可复用路线/HTML；`data/observations/` 保存实测修正；`data/journey/` 只保存脱敏人物历程。
 - Route Atlas目标电脑只需要 `data/routes/route-atlas-workbench.html + data/routes/maps/`。
 
-## Git / sessions 边界
+## Git / 历史边界
 
 - 工作区根 `/sessions/` 是浏览器/账号运行时会话，必须被根 `.gitignore` 忽略。
-- `docs/verified-routes/sessions/` 与 `docs/video-extraction/sessions/` 是项目Markdown历史，必须正常commit/push，不得被全局 `sessions/` 规则误伤。
-- NEAT不靠 `git add -f` 作为正常流程。
+- 项目历史统一放 `docs/archive/`，必须正常commit/push；archive只是退出日常默认读取，不是Git忽略区。
+- 项目Markdown不靠 `git add -f` 作为正常流程。
 
 ## 目录说明
 
@@ -74,8 +74,9 @@
 | `data/observations/` | 五开机制、阻断、实测修正 |
 | `data/journey/` | 脱敏人物历程 |
 | `docs/rules/` | 分主题永久规则，渐进式加载 |
-| `docs/verified-routes/` | CURRENT、SOP、错题本、已验证路线与NEAT |
+| `docs/verified-routes/` | CURRENT、SOP、错题本、仍有效/可复用的已验证路线 |
+| `docs/archive/` | 旧方案、一次性analysis、NEAT和视频历史；默认不进入日常加载 |
 | `docs/task-library/` | 单任务可复用知识 |
-| `docs/video-extraction/` | 视频事实提取工作流 |
+| `docs/video-extraction/` | 当前视频事实提取工作流 |
 | `tasks/` | 当前待办与临时教训收件箱 |
 | `tests/` | 自动测试 |

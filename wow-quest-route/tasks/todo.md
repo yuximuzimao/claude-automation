@@ -1,6 +1,6 @@
 # 当前待办
 
-只记录尚未完成且会改变下一步工作的事项。已完成过程由Git、工作区备份、`docs/analysis/`和`docs/verified-routes/sessions/`中的NEAT归档保留，不在这里重复。
+只记录尚未完成且会改变下一步工作的事项。已完成过程由Git、工作区备份和`docs/archive/`保留，不在这里重复。
 
 ## 首组圣骑士到80级
 
@@ -33,7 +33,7 @@
 
 ## 后续资料
 
-- [ ] 用户提供的诺森德日常任务资料仍只存于`docs/analysis/2026-08-08-northrend-daily-quests-unverified-source.md`；圣骑士推进到对应等级后逐项核验，不直接视为事实。
+- [ ] 用户提供的诺森德日常任务资料仍只存于`docs/archive/analysis/2026-08-08-northrend-daily-quests-unverified-source.md`；圣骑士推进到对应等级后逐项核验，不直接视为事实。
 
 ## 代码与数据
 
