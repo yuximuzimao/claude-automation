@@ -1,0 +1,6537 @@
+{
+  "title": "北风苔原 Target Clusters（完全相同真实目标实体）",
+  "method": "Questie effective facts -> exact real entity id; direct and resolved-item-source relations remain typed; route order not assigned here; scripted extraObjectives are kept in a separate special-anchor layer",
+  "cluster_count": 161,
+  "shared_cluster_count": 22,
+  "targetless_included_quest_ids": [
+    11562,
+    11565,
+    11570,
+    11571,
+    11574,
+    11585,
+    11587,
+    11591,
+    11592,
+    11596,
+    11614,
+    11615,
+    11616,
+    11618,
+    11620,
+    11622,
+    11624,
+    11629,
+    11631,
+    11632,
+    11634,
+    11635,
+    11636,
+    11642,
+    11646,
+    11651,
+    11654,
+    11661,
+    11662,
+    11663,
+    11664,
+    11674,
+    11678,
+    11679,
+    11680,
+    11681,
+    11682,
+    11689,
+    11702,
+    11703,
+    11709,
+    11711,
+    11719,
+    11720,
+    11722,
+    11724,
+    11733,
+    11864,
+    11865,
+    11870,
+    11881,
+    11887,
+    11888,
+    11890,
+    11894,
+    11895,
+    11905,
+    11907,
+    11909,
+    11911,
+    11916,
+    11929,
+    11930,
+    11941,
+    11946,
+    11950,
+    11957,
+    11961,
+    11967,
+    11969,
+    11973,
+    12117,
+    12471,
+    12486,
+    13095,
+    13242,
+    13257
+  ],
+  "targetless_but_special_anchored_quest_ids": [
+    11587,
+    11631,
+    11636,
+    11711,
+    11865,
+    11881,
+    11894,
+    11895,
+    11907,
+    11909,
+    11957,
+    11969
+  ],
+  "pure_travel_or_dialogue_quest_ids": [
+    11562,
+    11565,
+    11570,
+    11571,
+    11574,
+    11585,
+    11591,
+    11592,
+    11596,
+    11614,
+    11615,
+    11616,
+    11618,
+    11620,
+    11622,
+    11624,
+    11629,
+    11632,
+    11634,
+    11635,
+    11642,
+    11646,
+    11651,
+    11654,
+    11661,
+    11662,
+    11663,
+    11664,
+    11674,
+    11678,
+    11679,
+    11680,
+    11681,
+    11682,
+    11689,
+    11702,
+    11703,
+    11709,
+    11719,
+    11720,
+    11722,
+    11724,
+    11733,
+    11864,
+    11870,
+    11887,
+    11888,
+    11890,
+    11905,
+    11911,
+    11916,
+    11929,
+    11930,
+    11941,
+    11946,
+    11950,
+    11961,
+    11967,
+    11973,
+    12117,
+    12471,
+    12486,
+    13095,
+    13242,
+    13257
+  ],
+  "clusters": [
+    {
+      "cluster_id": "npc:25479",
+      "entity_type": "npc",
+      "entity_id": 25479,
+      "name": "克瓦迪尔织雾者",
+      "borean_representative": {
+        "x": 30.23,
+        "y": 60.65,
+        "spawn_count": 24,
+        "min_x": 28.47,
+        "max_x": 32.47,
+        "min_y": 46.06,
+        "max_y": 66.36
+      },
+      "spawn_count": 24,
+      "relations": [
+        {
+          "quest_id": 11655,
+          "quest_name": "深入迷雾",
+          "relation_kind": "resolved_item_source:34814",
+          "required_count": 8,
+          "item_id": 34814
+        },
+        {
+          "quest_id": 11660,
+          "quest_name": "古代水手的号角",
+          "relation_kind": "resolved_item_source:34813",
+          "required_count": 1,
+          "item_id": 34813
+        }
+      ],
+      "quest_ids": [
+        11655,
+        11660
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25496",
+      "entity_type": "npc",
+      "entity_id": 25496,
+      "name": "克瓦迪尔迷雾领主",
+      "borean_representative": {
+        "x": 31.04,
+        "y": 59.9,
+        "spawn_count": 43,
+        "min_x": 27.09,
+        "max_x": 33.06,
+        "min_y": 46.86,
+        "max_y": 65.26
+      },
+      "spawn_count": 43,
+      "relations": [
+        {
+          "quest_id": 11644,
+          "quest_name": "超强度金属板！",
+          "relation_kind": "resolved_item_source:34786",
+          "required_count": 10,
+          "item_id": 34786
+        },
+        {
+          "quest_id": 11655,
+          "quest_name": "深入迷雾",
+          "relation_kind": "resolved_item_source:34814",
+          "required_count": 8,
+          "item_id": 34814
+        }
+      ],
+      "quest_ids": [
+        11644,
+        11655
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25215",
+      "entity_type": "npc",
+      "entity_id": 25215,
+      "name": "冬鳞巡滩者",
+      "borean_representative": {
+        "x": 41.4,
+        "y": 15.6,
+        "spawn_count": 37,
+        "min_x": 37.36,
+        "max_x": 43.3,
+        "min_y": 12.54,
+        "max_y": 19.74
+      },
+      "spawn_count": 37,
+      "relations": [
+        {
+          "quest_id": 11559,
+          "quest_name": "冬鳞鱼人的贸易",
+          "relation_kind": "resolved_item_source:34597",
+          "required_count": 5,
+          "item_id": 34597
+        },
+        {
+          "quest_id": 11561,
+          "quest_name": "就是他们！",
+          "relation_kind": "direct_event_source",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11559,
+        11561
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25217",
+      "entity_type": "npc",
+      "entity_id": 25217,
+      "name": "冬鳞战士",
+      "borean_representative": {
+        "x": 39.32,
+        "y": 18.44,
+        "spawn_count": 27,
+        "min_x": 36.39,
+        "max_x": 41.43,
+        "min_y": 15.06,
+        "max_y": 25.62
+      },
+      "spawn_count": 27,
+      "relations": [
+        {
+          "quest_id": 11559,
+          "quest_name": "冬鳞鱼人的贸易",
+          "relation_kind": "resolved_item_source:34597",
+          "required_count": 5,
+          "item_id": 34597
+        },
+        {
+          "quest_id": 11561,
+          "quest_name": "就是他们！",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11559,
+        11561
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25216",
+      "entity_type": "npc",
+      "entity_id": 25216,
+      "name": "冬鳞智者",
+      "borean_representative": {
+        "x": 39.45,
+        "y": 19.94,
+        "spawn_count": 20,
+        "min_x": 36.59,
+        "max_x": 41.56,
+        "min_y": 14.8,
+        "max_y": 25.21
+      },
+      "spawn_count": 20,
+      "relations": [
+        {
+          "quest_id": 11559,
+          "quest_name": "冬鳞鱼人的贸易",
+          "relation_kind": "resolved_item_source:34597",
+          "required_count": 5,
+          "item_id": 34597
+        },
+        {
+          "quest_id": 11561,
+          "quest_name": "就是他们！",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11559,
+        11561
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25836",
+      "entity_type": "npc",
+      "entity_id": 25836,
+      "name": "利欲熏心的潜水员",
+      "borean_representative": {
+        "x": 51.53,
+        "y": 44.39,
+        "spawn_count": 17,
+        "min_x": 50.48,
+        "max_x": 52.84,
+        "min_y": 43.05,
+        "max_y": 47.65
+      },
+      "spawn_count": 17,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        },
+        {
+          "quest_id": 11869,
+          "quest_name": "欢乐的蚌壳",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11866,
+        11869
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25843",
+      "entity_type": "npc",
+      "entity_id": 25843,
+      "name": "北海暴徒",
+      "borean_representative": {
+        "x": 60.07,
+        "y": 59.94,
+        "spawn_count": 2,
+        "min_x": 59.79,
+        "max_x": 60.35,
+        "min_y": 58.1,
+        "max_y": 61.77
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        },
+        {
+          "quest_id": 11871,
+          "quest_name": "不可容忍",
+          "relation_kind": "resolved_item_source:35222",
+          "required_count": 12,
+          "item_id": 35222
+        }
+      ],
+      "quest_ids": [
+        11866,
+        11871
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25839",
+      "entity_type": "npc",
+      "entity_id": 25839,
+      "name": "北海雇佣兵",
+      "borean_representative": {
+        "x": 59.9,
+        "y": 59.79,
+        "spawn_count": 19,
+        "min_x": 58.54,
+        "max_x": 61.47,
+        "min_y": 55.8,
+        "max_y": 63.98
+      },
+      "spawn_count": 19,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        },
+        {
+          "quest_id": 11871,
+          "quest_name": "不可容忍",
+          "relation_kind": "resolved_item_source:35222",
+          "required_count": 12,
+          "item_id": 35222
+        }
+      ],
+      "quest_ids": [
+        11866,
+        11871
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25203",
+      "entity_type": "npc",
+      "entity_id": 25203,
+      "name": "咕拉咕拉",
+      "borean_representative": {
+        "x": 39.67,
+        "y": 8.36,
+        "spawn_count": 1,
+        "min_x": 39.67,
+        "max_x": 39.67,
+        "min_y": 8.36,
+        "max_y": 8.36
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11563,
+          "quest_name": "咕噜咕噜呜啦哇啦！",
+          "relation_kind": "resolved_item_source:34617",
+          "required_count": 1,
+          "item_id": 34617
+        },
+        {
+          "quest_id": 11564,
+          "quest_name": "美味炖鲸肉",
+          "relation_kind": "resolved_item_source:34618",
+          "required_count": 7,
+          "item_id": 34618
+        }
+      ],
+      "quest_ids": [
+        11563,
+        11564
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25445",
+      "entity_type": "npc",
+      "entity_id": 25445,
+      "name": "尼鲁巴尔尸体收割者",
+      "borean_representative": {
+        "x": 41.63,
+        "y": 58.0,
+        "spawn_count": 15,
+        "min_x": 39.32,
+        "max_x": 44.67,
+        "min_y": 49.86,
+        "max_y": 60.48
+      },
+      "spawn_count": 15,
+      "relations": [
+        {
+          "quest_id": 11598,
+          "quest_name": "夺回巨石采掘场",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11606,
+          "quest_name": "耐心是我们不需要的美德",
+          "relation_kind": "resolved_item_source:34709",
+          "required_count": 15,
+          "item_id": 34709
+        }
+      ],
+      "quest_ids": [
+        11598,
+        11606
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:24566",
+      "entity_type": "npc",
+      "entity_id": 24566,
+      "name": "尼鲁巴尔掠行者",
+      "borean_representative": {
+        "x": 41.57,
+        "y": 56.85,
+        "spawn_count": 49,
+        "min_x": 39.34,
+        "max_x": 45.08,
+        "min_y": 49.7,
+        "max_y": 61.58
+      },
+      "spawn_count": 49,
+      "relations": [
+        {
+          "quest_id": 11598,
+          "quest_name": "夺回巨石采掘场",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11606,
+          "quest_name": "耐心是我们不需要的美德",
+          "relation_kind": "resolved_item_source:34709",
+          "required_count": 15,
+          "item_id": 34709
+        }
+      ],
+      "quest_ids": [
+        11598,
+        11606
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25294",
+      "entity_type": "npc",
+      "entity_id": 25294,
+      "name": "尼鲁巴尔蛛网领主",
+      "borean_representative": {
+        "x": 42.61,
+        "y": 56.49,
+        "spawn_count": 8,
+        "min_x": 39.33,
+        "max_x": 46.24,
+        "min_y": 48.52,
+        "max_y": 61.79
+      },
+      "spawn_count": 8,
+      "relations": [
+        {
+          "quest_id": 11598,
+          "quest_name": "夺回巨石采掘场",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11606,
+          "quest_name": "耐心是我们不需要的美德",
+          "relation_kind": "resolved_item_source:34709",
+          "required_count": 15,
+          "item_id": 34709
+        }
+      ],
+      "quest_ids": [
+        11598,
+        11606
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25682",
+      "entity_type": "npc",
+      "entity_id": 25682,
+      "name": "巫妖领主基尔温特",
+      "borean_representative": {
+        "x": 69.64,
+        "y": 13.87,
+        "spawn_count": 1,
+        "min_x": 69.64,
+        "max_x": 69.64,
+        "min_y": 13.87,
+        "max_y": 13.87
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11687,
+          "quest_name": "博士和巫妖领主",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683,
+        11687
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25678",
+      "entity_type": "npc",
+      "entity_id": 25678,
+      "name": "拉佐格林博士",
+      "borean_representative": {
+        "x": 69.88,
+        "y": 13.34,
+        "spawn_count": 1,
+        "min_x": 69.88,
+        "max_x": 69.88,
+        "min_y": 13.34,
+        "max_y": 13.34
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11687,
+          "quest_name": "博士和巫妖领主",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683,
+        11687
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25752",
+      "entity_type": "npc",
+      "entity_id": 25752,
+      "name": "清除机器人004-A8型",
+      "borean_representative": {
+        "x": 63.07,
+        "y": 21.0,
+        "spawn_count": 31,
+        "min_x": 59.01,
+        "max_x": 65.1,
+        "min_y": 16.61,
+        "max_y": 28.06
+      },
+      "spawn_count": 31,
+      "relations": [
+        {
+          "quest_id": 11896,
+          "quest_name": "闪电的力量",
+          "relation_kind": "direct_event_source",
+          "required_count": 15,
+          "item_id": null
+        },
+        {
+          "quest_id": 11906,
+          "quest_name": "净化水池",
+          "relation_kind": "resolved_item_source:34972",
+          "required_count": 15,
+          "item_id": 34972
+        }
+      ],
+      "quest_ids": [
+        11896,
+        11906
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25722",
+      "entity_type": "npc",
+      "entity_id": 25722,
+      "name": "考达拉织法者",
+      "borean_representative": {
+        "x": 29.21,
+        "y": 27.82,
+        "spawn_count": 30,
+        "min_x": 21.16,
+        "max_x": 34.91,
+        "min_y": 18.92,
+        "max_y": 37.06
+      },
+      "spawn_count": 30,
+      "relations": [
+        {
+          "quest_id": 11912,
+          "quest_name": "冰冷的草莓",
+          "relation_kind": "resolved_item_source:35492",
+          "required_count": 10,
+          "item_id": 35492
+        },
+        {
+          "quest_id": 11918,
+          "quest_name": "基本的训练",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11912,
+        11918
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25814",
+      "entity_type": "npc",
+      "entity_id": 25814,
+      "name": "菲兹兰克机械侏儒",
+      "borean_representative": {
+        "x": 64.36,
+        "y": 22.49,
+        "spawn_count": 35,
+        "min_x": 58.72,
+        "max_x": 67.76,
+        "min_y": 15.6,
+        "max_y": 29.52
+      },
+      "spawn_count": 35,
+      "relations": [
+        {
+          "quest_id": 11899,
+          "quest_name": "灵魂的解脱",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        },
+        {
+          "quest_id": 11906,
+          "quest_name": "净化水池",
+          "relation_kind": "resolved_item_source:34972",
+          "required_count": 15,
+          "item_id": 34972
+        }
+      ],
+      "quest_ids": [
+        11899,
+        11906
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25800",
+      "entity_type": "npc",
+      "entity_id": 25800,
+      "name": "蛤蜊主宰老K",
+      "borean_representative": {
+        "x": 62.29,
+        "y": 66.14,
+        "spawn_count": 1,
+        "min_x": 62.29,
+        "max_x": 62.29,
+        "min_y": 66.14,
+        "max_y": 66.14
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11866,
+        11872
+      ],
+      "video_reference_episodes": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25468",
+      "entity_type": "npc",
+      "entity_id": 25468,
+      "name": "血孢烘烤者",
+      "borean_representative": {
+        "x": 47.65,
+        "y": 62.23,
+        "spawn_count": 29,
+        "min_x": 43.93,
+        "max_x": 53.11,
+        "min_y": 50.0,
+        "max_y": 68.0
+      },
+      "spawn_count": 29,
+      "relations": [
+        {
+          "quest_id": 11714,
+          "quest_name": "清除北地狗头人",
+          "relation_kind": "direct_creature",
+          "required_count": 2,
+          "item_id": null
+        },
+        {
+          "quest_id": 11716,
+          "quest_name": "奇妙的血孢",
+          "relation_kind": "resolved_item_source:34974",
+          "required_count": 10,
+          "item_id": 34974
+        }
+      ],
+      "quest_ids": [
+        11714,
+        11716
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25753",
+      "entity_type": "npc",
+      "entity_id": 25753,
+      "name": "警戒机器人57-K型",
+      "borean_representative": {
+        "x": 63.37,
+        "y": 22.7,
+        "spawn_count": 56,
+        "min_x": 58.53,
+        "max_x": 68.11,
+        "min_y": 14.64,
+        "max_y": 29.02
+      },
+      "spawn_count": 56,
+      "relations": [
+        {
+          "quest_id": 11896,
+          "quest_name": "闪电的力量",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11906,
+          "quest_name": "净化水池",
+          "relation_kind": "resolved_item_source:34972",
+          "required_count": 15,
+          "item_id": 34972
+        }
+      ],
+      "quest_ids": [
+        11896,
+        11906
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25758",
+      "entity_type": "npc",
+      "entity_id": 25758,
+      "name": "防御坦克66D型",
+      "borean_representative": {
+        "x": 63.98,
+        "y": 22.3,
+        "spawn_count": 54,
+        "min_x": 59.21,
+        "max_x": 67.55,
+        "min_y": 15.54,
+        "max_y": 28.08
+      },
+      "spawn_count": 54,
+      "relations": [
+        {
+          "quest_id": 11896,
+          "quest_name": "闪电的力量",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 11906,
+          "quest_name": "净化水池",
+          "relation_kind": "resolved_item_source:34972",
+          "required_count": 15,
+          "item_id": 34972
+        }
+      ],
+      "quest_ids": [
+        11896,
+        11906
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25707",
+      "entity_type": "npc",
+      "entity_id": 25707,
+      "name": "魔缚古树",
+      "borean_representative": {
+        "x": 28.81,
+        "y": 28.76,
+        "spawn_count": 9,
+        "min_x": 24.57,
+        "max_x": 34.88,
+        "min_y": 21.64,
+        "max_y": 35.24
+      },
+      "spawn_count": 9,
+      "relations": [
+        {
+          "quest_id": 11910,
+          "quest_name": "古树的秘密",
+          "relation_kind": "resolved_item_source:35484",
+          "required_count": 3,
+          "item_id": 35484
+        },
+        {
+          "quest_id": 11912,
+          "quest_name": "冰冷的草莓",
+          "relation_kind": "resolved_item_source:35492",
+          "required_count": 10,
+          "item_id": 35492
+        }
+      ],
+      "quest_ids": [
+        11910,
+        11912
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": true,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187662",
+      "entity_type": "object",
+      "entity_id": 187662,
+      "name": "\"Elder Kesuk\"",
+      "borean_representative": {
+        "x": 50.86,
+        "y": 32.42,
+        "spawn_count": 1,
+        "min_x": 50.86,
+        "max_x": 50.86,
+        "min_y": 32.42,
+        "max_y": 32.42
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11605,
+          "quest_name": "海象人的先祖",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11605
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187663",
+      "entity_type": "object",
+      "entity_id": 187663,
+      "name": "\"Elder Sagani\"",
+      "borean_representative": {
+        "x": 52.81,
+        "y": 34.02,
+        "spawn_count": 1,
+        "min_x": 52.81,
+        "max_x": 52.81,
+        "min_y": 34.02,
+        "max_y": 34.02
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11605,
+          "quest_name": "海象人的先祖",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11605
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187664",
+      "entity_type": "object",
+      "entity_id": 187664,
+      "name": "\"Elder Takret\"",
+      "borean_representative": {
+        "x": 52.32,
+        "y": 31.12,
+        "spawn_count": 1,
+        "min_x": 52.32,
+        "max_x": 52.32,
+        "min_y": 31.12,
+        "max_y": 31.12
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11605,
+          "quest_name": "海象人的先祖",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11605
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188133",
+      "entity_type": "object",
+      "entity_id": 188133,
+      "name": "Blue Dragon Egg",
+      "borean_representative": {
+        "x": 28.47,
+        "y": 27.89,
+        "spawn_count": 15,
+        "min_x": 25.79,
+        "max_x": 29.59,
+        "min_y": 24.06,
+        "max_y": 29.71
+      },
+      "spawn_count": 15,
+      "relations": [
+        {
+          "quest_id": 11936,
+          "quest_name": "蓝龙的卵",
+          "relation_kind": "direct_object",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11936
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188657",
+      "entity_type": "object",
+      "entity_id": 188657,
+      "name": "Bor's Anvil",
+      "borean_representative": {
+        "x": 29.62,
+        "y": 61.93,
+        "spawn_count": 1,
+        "min_x": 29.62,
+        "max_x": 29.62,
+        "min_y": 61.93,
+        "max_y": 61.93
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11656,
+          "quest_name": "烧毁船只",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11656
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188653",
+      "entity_type": "object",
+      "entity_id": 188653,
+      "name": "Bor's Hammer",
+      "borean_representative": {
+        "x": 29.42,
+        "y": 53.06,
+        "spawn_count": 1,
+        "min_x": 29.42,
+        "max_x": 29.42,
+        "min_y": 53.06,
+        "max_y": 53.06
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11656,
+          "quest_name": "烧毁船只",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11656
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25309",
+      "entity_type": "npc",
+      "entity_id": 25309,
+      "name": "Borean - Westrift Cavern Anomaly",
+      "borean_representative": {
+        "x": 40.06,
+        "y": 19.89,
+        "spawn_count": 1,
+        "min_x": 40.06,
+        "max_x": 40.06,
+        "min_y": 19.89,
+        "max_y": 19.89
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 12728,
+          "quest_name": "监视裂谷：冬鳞洞穴",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        12728
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25308",
+      "entity_type": "npc",
+      "entity_id": 25308,
+      "name": "Borean - Westrift Chasm Anomaly",
+      "borean_representative": {
+        "x": 43.86,
+        "y": 28.64,
+        "spawn_count": 1,
+        "min_x": 43.86,
+        "max_x": 43.86,
+        "min_y": 28.64,
+        "max_y": 28.64
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11582,
+          "quest_name": "监视裂谷：峭壁断层",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11582
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25310",
+      "entity_type": "npc",
+      "entity_id": 25310,
+      "name": "Borean - Westrift Cleftcliff Anomaly",
+      "borean_representative": {
+        "x": 34.29,
+        "y": 42.16,
+        "spawn_count": 1,
+        "min_x": 34.29,
+        "max_x": 34.29,
+        "min_y": 42.16,
+        "max_y": 42.16
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11576,
+          "quest_name": "监视裂谷：悬崖异常",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11576
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187886",
+      "entity_type": "object",
+      "entity_id": 187886,
+      "name": "Burblegobble's Bauble",
+      "borean_representative": {
+        "x": 68.51,
+        "y": 40.37,
+        "spawn_count": 1,
+        "min_x": 68.51,
+        "max_x": 68.51,
+        "min_y": 40.37,
+        "max_y": 40.37
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11695,
+          "quest_name": "元素愤怒号角",
+          "relation_kind": "resolved_item_source:34964",
+          "required_count": null,
+          "item_id": 34964
+        }
+      ],
+      "quest_ids": [
+        11695
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188100",
+      "entity_type": "object",
+      "entity_id": 188100,
+      "name": "Coldarra Geological Monitor",
+      "borean_representative": {
+        "x": 28.31,
+        "y": 28.46,
+        "spawn_count": 1,
+        "min_x": 28.31,
+        "max_x": 28.31,
+        "min_y": 28.46,
+        "max_y": 28.46
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11900,
+          "quest_name": "监测数据",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11900
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188101",
+      "entity_type": "object",
+      "entity_id": 188101,
+      "name": "Coldarra Geological Monitor",
+      "borean_representative": {
+        "x": 28.53,
+        "y": 34.97,
+        "spawn_count": 2,
+        "min_x": 28.25,
+        "max_x": 28.81,
+        "min_y": 34.91,
+        "max_y": 35.04
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11900,
+          "quest_name": "监测数据",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11900
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188102",
+      "entity_type": "object",
+      "entity_id": 188102,
+      "name": "Coldarra Geological Monitor",
+      "borean_representative": {
+        "x": 31.48,
+        "y": 20.38,
+        "spawn_count": 2,
+        "min_x": 31.25,
+        "max_x": 31.72,
+        "min_y": 20.18,
+        "max_y": 20.57
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11900,
+          "quest_name": "监测数据",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11900
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188103",
+      "entity_type": "object",
+      "entity_id": 188103,
+      "name": "Coldarra Geological Monitor",
+      "borean_representative": {
+        "x": 22.49,
+        "y": 23.82,
+        "spawn_count": 2,
+        "min_x": 22.36,
+        "max_x": 22.62,
+        "min_y": 23.42,
+        "max_y": 24.21
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11900,
+          "quest_name": "监测数据",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11900
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187879",
+      "entity_type": "object",
+      "entity_id": 187879,
+      "name": "Den of Dying Plague Cauldron",
+      "borean_representative": {
+        "x": 76.53,
+        "y": 16.04,
+        "spawn_count": 2,
+        "min_x": 74.76,
+        "max_x": 78.3,
+        "min_y": 14.1,
+        "max_y": 17.97
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11677,
+          "quest_name": "阻止瘟疫",
+          "relation_kind": "direct_object",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11677
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191088",
+      "entity_type": "object",
+      "entity_id": 191088,
+      "name": "Elder Kesuk",
+      "borean_representative": {
+        "x": 50.85,
+        "y": 32.4,
+        "spawn_count": 1,
+        "min_x": 50.85,
+        "max_x": 50.85,
+        "min_y": 32.4,
+        "max_y": 32.4
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11610,
+          "quest_name": "先祖的回归",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11610
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191089",
+      "entity_type": "object",
+      "entity_id": 191089,
+      "name": "Elder Sagani",
+      "borean_representative": {
+        "x": 52.8,
+        "y": 34.04,
+        "spawn_count": 1,
+        "min_x": 52.8,
+        "max_x": 52.8,
+        "min_y": 34.04,
+        "max_y": 34.04
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11610,
+          "quest_name": "先祖的回归",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11610
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191090",
+      "entity_type": "object",
+      "entity_id": 191090,
+      "name": "Elder Takret",
+      "borean_representative": {
+        "x": 52.33,
+        "y": 31.14,
+        "spawn_count": 1,
+        "min_x": 52.33,
+        "max_x": 52.33,
+        "min_y": 31.14,
+        "max_y": 31.14
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11610,
+          "quest_name": "先祖的回归",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11610
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187673",
+      "entity_type": "object",
+      "entity_id": 187673,
+      "name": "Farseer Grimwalker's Remains",
+      "borean_representative": {
+        "x": 56.17,
+        "y": 9.09,
+        "spawn_count": 1,
+        "min_x": 56.17,
+        "max_x": 56.17,
+        "min_y": 9.09,
+        "max_y": 9.09
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11638,
+          "quest_name": "落叶归根",
+          "relation_kind": "resolved_item_source:34773",
+          "required_count": 1,
+          "item_id": 34773
+        }
+      ],
+      "quest_ids": [
+        11638
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187885",
+      "entity_type": "object",
+      "entity_id": 187885,
+      "name": "Gurgleboggle's Bauble",
+      "borean_representative": {
+        "x": 78.72,
+        "y": 28.33,
+        "spawn_count": 1,
+        "min_x": 78.72,
+        "max_x": 78.72,
+        "min_y": 28.33,
+        "max_y": 28.33
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11695,
+          "quest_name": "元素愤怒号角",
+          "relation_kind": "resolved_item_source:34963",
+          "required_count": null,
+          "item_id": 34963
+        }
+      ],
+      "quest_ids": [
+        11695
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187655",
+      "entity_type": "object",
+      "entity_id": 187655,
+      "name": "Nerub'ar Egg Sac",
+      "borean_representative": {
+        "x": 39.91,
+        "y": 58.41,
+        "spawn_count": 38,
+        "min_x": 38.89,
+        "max_x": 44.62,
+        "min_y": 50.49,
+        "max_y": 61.93
+      },
+      "spawn_count": 38,
+      "relations": [
+        {
+          "quest_id": 11602,
+          "quest_name": "切断虫源",
+          "relation_kind": "direct_object",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11602
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25403",
+      "entity_type": "npc",
+      "entity_id": 25403,
+      "name": "Nerub'ar Sinkhole (East)",
+      "borean_representative": {
+        "x": 44.24,
+        "y": 56.76,
+        "spawn_count": 1,
+        "min_x": 44.24,
+        "max_x": 44.24,
+        "min_y": 56.76,
+        "max_y": 56.76
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11608,
+          "quest_name": "活埋了那些蟑螂！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11608
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25405",
+      "entity_type": "npc",
+      "entity_id": 25405,
+      "name": "Nerub'ar Sinkhole (North)",
+      "borean_representative": {
+        "x": 41.34,
+        "y": 50.36,
+        "spawn_count": 1,
+        "min_x": 41.34,
+        "max_x": 41.34,
+        "min_y": 50.36,
+        "max_y": 50.36
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11608,
+          "quest_name": "活埋了那些蟑螂！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11608
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25402",
+      "entity_type": "npc",
+      "entity_id": 25402,
+      "name": "Nerub'ar Sinkhole (South)",
+      "borean_representative": {
+        "x": 41.62,
+        "y": 58.3,
+        "spawn_count": 1,
+        "min_x": 41.62,
+        "max_x": 41.62,
+        "min_y": 58.3,
+        "max_y": 58.3
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11608,
+          "quest_name": "活埋了那些蟑螂！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11608
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25404",
+      "entity_type": "npc",
+      "entity_id": 25404,
+      "name": "Nerub'ar Sinkhole (West)",
+      "borean_representative": {
+        "x": 39.81,
+        "y": 52.55,
+        "spawn_count": 1,
+        "min_x": 39.81,
+        "max_x": 39.81,
+        "min_y": 52.55,
+        "max_y": 52.55
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11608,
+          "quest_name": "活埋了那些蟑螂！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11608
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:187683",
+      "entity_type": "object",
+      "entity_id": 187683,
+      "name": "Pneumatic Tank Transjigamarig",
+      "borean_representative": {
+        "x": 32.38,
+        "y": 49.17,
+        "spawn_count": 1,
+        "min_x": 32.38,
+        "max_x": 32.38,
+        "min_y": 49.17,
+        "max_y": 49.17
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11643,
+          "quest_name": "莫布的坦克零件气动装配器",
+          "relation_kind": "resolved_item_source:34785",
+          "required_count": 1,
+          "item_id": 34785
+        }
+      ],
+      "quest_ids": [
+        11643
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25471",
+      "entity_type": "npc",
+      "entity_id": 25471,
+      "name": "Temple A",
+      "borean_representative": {
+        "x": 83.89,
+        "y": 20.47,
+        "spawn_count": 1,
+        "min_x": 83.89,
+        "max_x": 83.89,
+        "min_y": 20.47,
+        "max_y": 20.47
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11633,
+          "quest_name": "乔装潜入",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11633
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25472",
+      "entity_type": "npc",
+      "entity_id": 25472,
+      "name": "Temple B",
+      "borean_representative": {
+        "x": 88.07,
+        "y": 20.91,
+        "spawn_count": 1,
+        "min_x": 88.07,
+        "max_x": 88.07,
+        "min_y": 20.91,
+        "max_y": 20.91
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11633,
+          "quest_name": "乔装潜入",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11633
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25473",
+      "entity_type": "npc",
+      "entity_id": 25473,
+      "name": "Temple C",
+      "borean_representative": {
+        "x": 89.27,
+        "y": 28.78,
+        "spawn_count": 1,
+        "min_x": 89.27,
+        "max_x": 89.27,
+        "min_y": 28.78,
+        "max_y": 28.78
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11633,
+          "quest_name": "乔装潜入",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11633
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188655",
+      "entity_type": "object",
+      "entity_id": 188655,
+      "name": "The Kur Drakkar",
+      "borean_representative": {
+        "x": 30.77,
+        "y": 48.38,
+        "spawn_count": 1,
+        "min_x": 30.77,
+        "max_x": 30.77,
+        "min_y": 48.38,
+        "max_y": 48.38
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11656,
+          "quest_name": "烧毁船只",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11656
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:188656",
+      "entity_type": "object",
+      "entity_id": 188656,
+      "name": "The Serpent's Maw",
+      "borean_representative": {
+        "x": 31.33,
+        "y": 47.96,
+        "spawn_count": 1,
+        "min_x": 31.33,
+        "max_x": 31.33,
+        "min_y": 47.96,
+        "max_y": 47.96
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11656,
+          "quest_name": "烧毁船只",
+          "relation_kind": "direct_object",
+          "required_count": 4,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11656
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191698",
+      "entity_type": "object",
+      "entity_id": 191698,
+      "name": "Torp's Farm",
+      "borean_representative": {
+        "x": 36.84,
+        "y": 52.28,
+        "spawn_count": 1,
+        "min_x": 36.84,
+        "max_x": 36.84,
+        "min_y": 52.28,
+        "max_y": 52.28
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11686,
+          "quest_name": "战歌农场",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11686
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191697",
+      "entity_type": "object",
+      "entity_id": 191697,
+      "name": "Warsong Granary",
+      "borean_representative": {
+        "x": 34.92,
+        "y": 54.67,
+        "spawn_count": 1,
+        "min_x": 34.92,
+        "max_x": 34.92,
+        "min_y": 54.67,
+        "max_y": 54.67
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11686,
+          "quest_name": "战歌农场",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11686
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "object:191699",
+      "entity_type": "object",
+      "entity_id": 191699,
+      "name": "Warsong Slaughterhouse",
+      "borean_representative": {
+        "x": 39.54,
+        "y": 47.38,
+        "spawn_count": 1,
+        "min_x": 39.54,
+        "max_x": 39.54,
+        "min_y": 47.38,
+        "max_y": 47.38
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11686,
+          "quest_name": "战歌农场",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11686
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25968",
+      "entity_type": "npc",
+      "entity_id": 25968,
+      "name": "“午餐盒”",
+      "borean_representative": {
+        "x": 48.2,
+        "y": 40.08,
+        "spawn_count": 1,
+        "min_x": 48.2,
+        "max_x": 48.2,
+        "min_y": 40.08,
+        "max_y": 40.08
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11884
+      ],
+      "video_reference_episodes": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25665",
+      "entity_type": "npc",
+      "entity_id": 25665,
+      "name": "东北部虫孔",
+      "borean_representative": {
+        "x": 69.73,
+        "y": 32.57,
+        "spawn_count": 1,
+        "min_x": 69.73,
+        "max_x": 69.73,
+        "min_y": 32.57,
+        "max_y": 32.57
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11684,
+          "quest_name": "侦查虫孔",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11684
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25442",
+      "entity_type": "npc",
+      "entity_id": 25442,
+      "name": "东部平台",
+      "borean_representative": {
+        "x": 52.73,
+        "y": 34.61,
+        "spawn_count": 1,
+        "min_x": 52.73,
+        "max_x": 52.73,
+        "min_y": 34.61,
+        "max_y": 34.61
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11617,
+          "quest_name": "别让他们逃了！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11617
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25490",
+      "entity_type": "npc",
+      "entity_id": 25490,
+      "name": "东部恩其拉大锅",
+      "borean_representative": {
+        "x": 87.68,
+        "y": 29.93,
+        "spawn_count": 1,
+        "min_x": 87.68,
+        "max_x": 87.68,
+        "min_y": 29.93,
+        "max_y": 29.93
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11647,
+          "quest_name": "中和瘟疫之锅",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11647
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25492",
+      "entity_type": "npc",
+      "entity_id": 25492,
+      "name": "中部恩其拉大锅",
+      "borean_representative": {
+        "x": 86.15,
+        "y": 22.77,
+        "spawn_count": 1,
+        "min_x": 86.15,
+        "max_x": 86.15,
+        "min_y": 22.77,
+        "max_y": 22.77
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11647,
+          "quest_name": "中和瘟疫之锅",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11647
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25600",
+      "entity_type": "npc",
+      "entity_id": 25600,
+      "name": "亡灵猪",
+      "borean_representative": {
+        "x": 36.05,
+        "y": 49.7,
+        "spawn_count": 45,
+        "min_x": 33.72,
+        "max_x": 40.3,
+        "min_y": 45.63,
+        "max_y": 54.99
+      },
+      "spawn_count": 45,
+      "relations": [
+        {
+          "quest_id": 11688,
+          "quest_name": "该死的猪",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11688
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25425",
+      "entity_type": "npc",
+      "entity_id": 25425,
+      "name": "先知格雷姆沃克的灵魂",
+      "borean_representative": {
+        "x": 56.17,
+        "y": 9.11,
+        "spawn_count": 1,
+        "min_x": 56.17,
+        "max_x": 56.17,
+        "min_y": 9.11,
+        "max_y": 9.11
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11637,
+          "quest_name": "卡加尼舒",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11637
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25465",
+      "entity_type": "npc",
+      "entity_id": 25465,
+      "name": "克尔苏加德",
+      "borean_representative": {
+        "x": 36.68,
+        "y": 64.5,
+        "spawn_count": 1,
+        "min_x": 36.68,
+        "max_x": 36.68,
+        "min_y": 64.5,
+        "max_y": 64.5
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_creature",
+          "required_count": 100,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25209",
+      "entity_type": "npc",
+      "entity_id": 25209,
+      "name": "克拉西姆斯",
+      "borean_representative": {
+        "x": 37.54,
+        "y": 27.53,
+        "spawn_count": 1,
+        "min_x": 37.54,
+        "max_x": 37.54,
+        "min_y": 27.53,
+        "max_y": 27.53
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11566,
+          "quest_name": "决不投降！",
+          "relation_kind": "resolved_item_source:34621",
+          "required_count": 1,
+          "item_id": 34621
+        }
+      ],
+      "quest_ids": [
+        11566
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25760",
+      "entity_type": "npc",
+      "entity_id": 25760,
+      "name": "克瓦迪尔劫掠者",
+      "borean_representative": {
+        "x": 65.37,
+        "y": 48.08,
+        "spawn_count": 17,
+        "min_x": 62.95,
+        "max_x": 67.11,
+        "min_y": 45.28,
+        "max_y": 53.63
+      },
+      "spawn_count": 17,
+      "relations": [
+        {
+          "quest_id": 11949,
+          "quest_name": "战斗到底！",
+          "relation_kind": "direct_creature",
+          "required_count": 12,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11949
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25768",
+      "entity_type": "npc",
+      "entity_id": 25768,
+      "name": "克里卡希斯",
+      "borean_representative": {
+        "x": 70.29,
+        "y": 37.42,
+        "spawn_count": 1,
+        "min_x": 70.29,
+        "max_x": 70.29,
+        "min_y": 37.42,
+        "max_y": 37.42
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11706,
+          "quest_name": "天崩地裂",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        },
+        {
+          "quest_id": 11706,
+          "quest_name": "天崩地裂",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11706
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25201",
+      "entity_type": "npc",
+      "entity_id": 25201,
+      "name": "冬鳞蝌蚪",
+      "borean_representative": {
+        "x": 39.41,
+        "y": 19.9,
+        "spawn_count": 70,
+        "min_x": 36.25,
+        "max_x": 41.43,
+        "min_y": 15.6,
+        "max_y": 27.77
+      },
+      "spawn_count": 70,
+      "relations": [
+        {
+          "quest_id": 11560,
+          "quest_name": "救救蝌蚪！",
+          "relation_kind": "direct_creature",
+          "required_count": 20,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11560
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25715",
+      "entity_type": "npc",
+      "entity_id": 25715,
+      "name": "冰冷元素",
+      "borean_representative": {
+        "x": 87.39,
+        "y": 45.2,
+        "spawn_count": 26,
+        "min_x": 83.38,
+        "max_x": 93.11,
+        "min_y": 37.51,
+        "max_y": 48.48
+      },
+      "spawn_count": 53,
+      "relations": [
+        {
+          "quest_id": 11685,
+          "quest_name": "元素之心",
+          "relation_kind": "resolved_item_source:34956",
+          "required_count": 5,
+          "item_id": 34956
+        }
+      ],
+      "quest_ids": [
+        11685
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25709",
+      "entity_type": "npc",
+      "entity_id": 25709,
+      "name": "冰川古树",
+      "borean_representative": {
+        "x": 25.48,
+        "y": 27.63,
+        "spawn_count": 9,
+        "min_x": 21.18,
+        "max_x": 34.76,
+        "min_y": 18.03,
+        "max_y": 34.34
+      },
+      "spawn_count": 9,
+      "relations": [
+        {
+          "quest_id": 11910,
+          "quest_name": "古树的秘密",
+          "relation_kind": "resolved_item_source:35483",
+          "required_count": 3,
+          "item_id": 35483
+        }
+      ],
+      "quest_ids": [
+        11910
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25806",
+      "entity_type": "npc",
+      "entity_id": 25806,
+      "name": "利欲熏心的偷猎者",
+      "borean_representative": {
+        "x": 57.01,
+        "y": 50.69,
+        "spawn_count": 20,
+        "min_x": 55.32,
+        "max_x": 58.06,
+        "min_y": 45.95,
+        "max_y": 56.63
+      },
+      "spawn_count": 20,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        }
+      ],
+      "quest_ids": [
+        11866
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25979",
+      "entity_type": "npc",
+      "entity_id": 25979,
+      "name": "利欲熏心的猎人",
+      "borean_representative": {
+        "x": 49.69,
+        "y": 41.23,
+        "spawn_count": 10,
+        "min_x": 48.65,
+        "max_x": 51.67,
+        "min_y": 40.94,
+        "max_y": 45.04
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        }
+      ],
+      "quest_ids": [
+        11866
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26452",
+      "entity_type": "npc",
+      "entity_id": 26452,
+      "name": "利维洛斯",
+      "borean_representative": {
+        "x": 52.06,
+        "y": 88.18,
+        "spawn_count": 1,
+        "min_x": 52.06,
+        "max_x": 52.06,
+        "min_y": 88.18,
+        "max_y": 88.18
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11626,
+          "quest_name": "使者",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11626
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25441",
+      "entity_type": "npc",
+      "entity_id": 25441,
+      "name": "北部平台",
+      "borean_representative": {
+        "x": 52.27,
+        "y": 31.92,
+        "spawn_count": 1,
+        "min_x": 52.27,
+        "max_x": 52.27,
+        "min_y": 31.92,
+        "max_y": 31.92
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11617,
+          "quest_name": "别让他们逃了！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11617
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25418",
+      "entity_type": "npc",
+      "entity_id": 25418,
+      "name": "卓恩",
+      "borean_representative": {
+        "x": 45.88,
+        "y": 13.08,
+        "spawn_count": 1,
+        "min_x": 45.88,
+        "max_x": 45.88,
+        "min_y": 13.08,
+        "max_y": 13.08
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11627,
+          "quest_name": "沸点",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11627
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25664",
+      "entity_type": "npc",
+      "entity_id": 25664,
+      "name": "南部虫孔",
+      "borean_representative": {
+        "x": 70.33,
+        "y": 36.69,
+        "spawn_count": 1,
+        "min_x": 70.33,
+        "max_x": 70.33,
+        "min_y": 36.69,
+        "max_y": 36.69
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11684,
+          "quest_name": "侦查虫孔",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11684
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25427",
+      "entity_type": "npc",
+      "entity_id": 25427,
+      "name": "卡加尼舒",
+      "borean_representative": {
+        "x": 56.19,
+        "y": 12.77,
+        "spawn_count": 1,
+        "min_x": 56.19,
+        "max_x": 56.19,
+        "min_y": 12.77,
+        "max_y": 12.77
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11637,
+          "quest_name": "卡加尼舒",
+          "relation_kind": "resolved_item_source:34781",
+          "required_count": null,
+          "item_id": 34781
+        }
+      ],
+      "quest_ids": [
+        11637
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25880",
+      "entity_type": "npc",
+      "entity_id": 25880,
+      "name": "卡奥的爪牙",
+      "borean_representative": {
+        "x": 53.7,
+        "y": 24.23,
+        "spawn_count": 12,
+        "min_x": 52.98,
+        "max_x": 54.26,
+        "min_y": 23.04,
+        "max_y": 25.2
+      },
+      "spawn_count": 12,
+      "relations": [
+        {
+          "quest_id": 11866,
+          "quest_name": "敌人的耳环",
+          "relation_kind": "resolved_item_source:35188",
+          "required_count": 15,
+          "item_id": 35188
+        }
+      ],
+      "quest_ids": [
+        11866
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25321",
+      "entity_type": "npc",
+      "entity_id": 25321,
+      "name": "卡斯卡拉工匠",
+      "borean_representative": {
+        "x": 51.69,
+        "y": 31.65,
+        "spawn_count": 13,
+        "min_x": 50.81,
+        "max_x": 52.82,
+        "min_y": 30.5,
+        "max_y": 34.1
+      },
+      "spawn_count": 13,
+      "relations": [
+        {
+          "quest_id": 11607,
+          "quest_name": "失落的灵魂",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11607
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25322",
+      "entity_type": "npc",
+      "entity_id": 25322,
+      "name": "卡斯卡拉萨满祭司",
+      "borean_representative": {
+        "x": 52.26,
+        "y": 32.49,
+        "spawn_count": 7,
+        "min_x": 50.89,
+        "max_x": 53.58,
+        "min_y": 30.86,
+        "max_y": 34.67
+      },
+      "spawn_count": 7,
+      "relations": [
+        {
+          "quest_id": 11607,
+          "quest_name": "失落的灵魂",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11607
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27110",
+      "entity_type": "npc",
+      "entity_id": 27110,
+      "name": "受伤的战歌工程师",
+      "borean_representative": {
+        "x": 35.83,
+        "y": 62.77,
+        "spawn_count": 2,
+        "min_x": 34.8,
+        "max_x": 36.87,
+        "min_y": 58.18,
+        "max_y": 67.35
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27106",
+      "entity_type": "npc",
+      "entity_id": 27106,
+      "name": "受伤的战歌战士",
+      "borean_representative": {
+        "x": 37.68,
+        "y": 60.48,
+        "spawn_count": 10,
+        "min_x": 34.86,
+        "max_x": 38.22,
+        "min_y": 57.19,
+        "max_y": 63.99
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27107",
+      "entity_type": "npc",
+      "entity_id": 27107,
+      "name": "受伤的战歌法师",
+      "borean_representative": {
+        "x": 34.62,
+        "y": 62.0,
+        "spawn_count": 4,
+        "min_x": 34.22,
+        "max_x": 36.2,
+        "min_y": 57.48,
+        "max_y": 66.02
+      },
+      "spawn_count": 4,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27108",
+      "entity_type": "npc",
+      "entity_id": 27108,
+      "name": "受伤的战歌萨满祭司",
+      "borean_representative": {
+        "x": 38.2,
+        "y": 65.75,
+        "spawn_count": 3,
+        "min_x": 34.7,
+        "max_x": 38.24,
+        "min_y": 63.92,
+        "max_y": 67.09
+      },
+      "spawn_count": 3,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26266",
+      "entity_type": "npc",
+      "entity_id": 26266,
+      "name": "可怕的赫迦尔",
+      "borean_representative": {
+        "x": 67.41,
+        "y": 56.87,
+        "spawn_count": 1,
+        "min_x": 67.41,
+        "max_x": 67.41,
+        "min_y": 56.87,
+        "max_y": 56.87
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11968,
+          "quest_name": "情势扭转",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11968
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25804",
+      "entity_type": "npc",
+      "entity_id": 25804,
+      "name": "哈罗德·兰恩",
+      "borean_representative": {
+        "x": 49.9,
+        "y": 41.54,
+        "spawn_count": 1,
+        "min_x": 49.9,
+        "max_x": 49.9,
+        "min_y": 41.54,
+        "max_y": 41.54
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11892,
+          "quest_name": "刺杀哈罗德·兰恩",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11892
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25684",
+      "entity_type": "npc",
+      "entity_id": 25684,
+      "name": "塔尔拉玛斯憎恶",
+      "borean_representative": {
+        "x": 69.18,
+        "y": 14.25,
+        "spawn_count": 11,
+        "min_x": 66.85,
+        "max_x": 69.74,
+        "min_y": 12.26,
+        "max_y": 16.2
+      },
+      "spawn_count": 11,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25716",
+      "entity_type": "npc",
+      "entity_id": 25716,
+      "name": "塞鲁利恩将军",
+      "borean_representative": {
+        "x": 27.32,
+        "y": 20.4,
+        "spawn_count": 1,
+        "min_x": 27.32,
+        "max_x": 27.32,
+        "min_y": 20.4,
+        "max_y": 20.4
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11943,
+          "quest_name": "牢笼",
+          "relation_kind": "resolved_item_source:35668",
+          "required_count": null,
+          "item_id": 35668
+        }
+      ],
+      "quest_ids": [
+        11943
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25350",
+      "entity_type": "npc",
+      "entity_id": 25350,
+      "name": "复苏的远行者",
+      "borean_representative": {
+        "x": 49.39,
+        "y": 23.68,
+        "spawn_count": 23,
+        "min_x": 47.25,
+        "max_x": 51.25,
+        "min_y": 21.0,
+        "max_y": 27.11
+      },
+      "spawn_count": 23,
+      "relations": [
+        {
+          "quest_id": 11594,
+          "quest_name": "让他们安息",
+          "relation_kind": "direct_event_source",
+          "required_count": 20,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11594
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25610",
+      "entity_type": "npc",
+      "entity_id": 25610,
+      "name": "天灾囚犯",
+      "borean_representative": {
+        "x": 36.76,
+        "y": 49.0,
+        "spawn_count": 19,
+        "min_x": 34.53,
+        "max_x": 39.57,
+        "min_y": 46.83,
+        "max_y": 53.09
+      },
+      "spawn_count": 19,
+      "relations": [
+        {
+          "quest_id": 11676,
+          "quest_name": "慈悲为怀",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11676
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25452",
+      "entity_type": "npc",
+      "entity_id": 25452,
+      "name": "天灾猛犸",
+      "borean_representative": {
+        "x": 79.38,
+        "y": 25.2,
+        "spawn_count": 37,
+        "min_x": 71.79,
+        "max_x": 89.78,
+        "min_y": 15.33,
+        "max_y": 40.19
+      },
+      "spawn_count": 37,
+      "relations": [
+        {
+          "quest_id": 11628,
+          "quest_name": "天灾的外衣",
+          "relation_kind": "resolved_item_source:34775",
+          "required_count": 5,
+          "item_id": 34775
+        }
+      ],
+      "quest_ids": [
+        11628
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25615",
+      "entity_type": "npc",
+      "entity_id": 25615,
+      "name": "天灾猛犸人",
+      "borean_representative": {
+        "x": 77.09,
+        "y": 23.38,
+        "spawn_count": 22,
+        "min_x": 71.41,
+        "max_x": 82.14,
+        "min_y": 16.05,
+        "max_y": 30.93
+      },
+      "spawn_count": 22,
+      "relations": [
+        {
+          "quest_id": 11675,
+          "quest_name": "死亡的解脱",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11675
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25721",
+      "entity_type": "npc",
+      "entity_id": 25721,
+      "name": "奥术浮蛇",
+      "borean_representative": {
+        "x": 27.92,
+        "y": 25.8,
+        "spawn_count": 15,
+        "min_x": 22.93,
+        "max_x": 30.68,
+        "min_y": 22.51,
+        "max_y": 32.12
+      },
+      "spawn_count": 15,
+      "relations": [
+        {
+          "quest_id": 11914,
+          "quest_name": "保持隐蔽",
+          "relation_kind": "resolved_item_source:35493",
+          "required_count": 5,
+          "item_id": 35493
+        }
+      ],
+      "quest_ids": [
+        11914
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25720",
+      "entity_type": "npc",
+      "entity_id": 25720,
+      "name": "审讯者卡勒拉斯",
+      "borean_representative": {
+        "x": 32.7,
+        "y": 27.82,
+        "spawn_count": 1,
+        "min_x": 32.7,
+        "max_x": 32.7,
+        "min_y": 27.82,
+        "max_y": 27.82
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11931,
+          "quest_name": "破译密码",
+          "relation_kind": "resolved_item_source:35628",
+          "required_count": null,
+          "item_id": 35628
+        }
+      ],
+      "quest_ids": [
+        11931
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:24562",
+      "entity_type": "npc",
+      "entity_id": 24562,
+      "name": "尼鲁巴尔入侵者",
+      "borean_representative": {
+        "x": 40.23,
+        "y": 57.45,
+        "spawn_count": 25,
+        "min_x": 38.69,
+        "max_x": 46.07,
+        "min_y": 48.27,
+        "max_y": 63.06
+      },
+      "spawn_count": 25,
+      "relations": [
+        {
+          "quest_id": 11598,
+          "quest_name": "夺回巨石采掘场",
+          "relation_kind": "direct_event_source",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11598
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25284",
+      "entity_type": "npc",
+      "entity_id": 25284,
+      "name": "尼鲁巴尔受害者",
+      "borean_representative": {
+        "x": 41.34,
+        "y": 57.01,
+        "spawn_count": 42,
+        "min_x": 39.19,
+        "max_x": 45.39,
+        "min_y": 49.91,
+        "max_y": 60.62
+      },
+      "spawn_count": 42,
+      "relations": [
+        {
+          "quest_id": 11611,
+          "quest_name": "被掠走的苦工",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11611
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25211",
+      "entity_type": "npc",
+      "entity_id": 25211,
+      "name": "屠夫布咕布噜",
+      "borean_representative": {
+        "x": 42.03,
+        "y": 13.16,
+        "spawn_count": 1,
+        "min_x": 42.03,
+        "max_x": 42.03,
+        "min_y": 13.16,
+        "max_y": 13.16
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11649,
+          "quest_name": "风暴微粒",
+          "relation_kind": "resolved_item_source:34800",
+          "required_count": 5,
+          "item_id": 34800
+        }
+      ],
+      "quest_ids": [
+        11649
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25862",
+      "entity_type": "npc",
+      "entity_id": 25862,
+      "name": "巨兽库诺克",
+      "borean_representative": {
+        "x": 59.46,
+        "y": 30.37,
+        "spawn_count": 1,
+        "min_x": 59.46,
+        "max_x": 59.46,
+        "min_y": 30.37,
+        "max_y": 30.37
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11878,
+          "quest_name": "库诺克的智慧",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11878
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:24954",
+      "entity_type": "npc",
+      "entity_id": 24954,
+      "name": "年老的猛犸人",
+      "borean_representative": {
+        "x": 76.41,
+        "y": 16.25,
+        "spawn_count": 2,
+        "min_x": 74.66,
+        "max_x": 78.16,
+        "min_y": 14.26,
+        "max_y": 18.24
+      },
+      "spawn_count": 2,
+      "relations": [
+        {
+          "quest_id": 11675,
+          "quest_name": "死亡的解脱",
+          "relation_kind": "direct_event_source",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11675
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25204",
+      "entity_type": "npc",
+      "entity_id": 25204,
+      "name": "幽光海湾逆戟鲸",
+      "borean_representative": {
+        "x": 40.48,
+        "y": 11.31,
+        "spawn_count": 13,
+        "min_x": 36.11,
+        "max_x": 42.94,
+        "min_y": 6.29,
+        "max_y": 16.81
+      },
+      "spawn_count": 13,
+      "relations": [
+        {
+          "quest_id": 11564,
+          "quest_name": "美味炖鲸肉",
+          "relation_kind": "resolved_item_source:34618",
+          "required_count": 7,
+          "item_id": 34618
+        }
+      ],
+      "quest_ids": [
+        11564
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25351",
+      "entity_type": "npc",
+      "entity_id": 25351,
+      "name": "幽灵先知",
+      "borean_representative": {
+        "x": 49.39,
+        "y": 23.81,
+        "spawn_count": 26,
+        "min_x": 47.25,
+        "max_x": 51.73,
+        "min_y": 21.2,
+        "max_y": 27.4
+      },
+      "spawn_count": 26,
+      "relations": [
+        {
+          "quest_id": 11594,
+          "quest_name": "让他们安息",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11594
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25378",
+      "entity_type": "npc",
+      "entity_id": 25378,
+      "name": "恩其拉通灵师",
+      "borean_representative": {
+        "x": 84.11,
+        "y": 21.77,
+        "spawn_count": 24,
+        "min_x": 82.9,
+        "max_x": 88.85,
+        "min_y": 20.04,
+        "max_y": 27.55
+      },
+      "spawn_count": 24,
+      "relations": [
+        {
+          "quest_id": 11641,
+          "quest_name": "勇猛的进攻",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11641
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25393",
+      "entity_type": "npc",
+      "entity_id": 25393,
+      "name": "恩其拉食尸鬼",
+      "borean_representative": {
+        "x": 86.06,
+        "y": 24.93,
+        "spawn_count": 32,
+        "min_x": 83.03,
+        "max_x": 89.53,
+        "min_y": 19.39,
+        "max_y": 32.2
+      },
+      "spawn_count": 32,
+      "relations": [
+        {
+          "quest_id": 11641,
+          "quest_name": "勇猛的进攻",
+          "relation_kind": "direct_creature",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11641
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25534",
+      "entity_type": "npc",
+      "entity_id": 25534,
+      "name": "恩其拉鲜血宝珠",
+      "borean_representative": {
+        "x": 88.21,
+        "y": 20.63,
+        "spawn_count": 8,
+        "min_x": 87.23,
+        "max_x": 88.97,
+        "min_y": 19.61,
+        "max_y": 22.01
+      },
+      "spawn_count": 8,
+      "relations": [
+        {
+          "quest_id": 11659,
+          "quest_name": "击碎宝珠！",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11659
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25712",
+      "entity_type": "npc",
+      "entity_id": 25712,
+      "name": "战争使者戈德拉克",
+      "borean_representative": {
+        "x": 24.13,
+        "y": 29.6,
+        "spawn_count": 1,
+        "min_x": 24.13,
+        "max_x": 24.13,
+        "min_y": 29.6,
+        "max_y": 29.6
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11943,
+          "quest_name": "牢笼",
+          "relation_kind": "resolved_item_source:35669",
+          "required_count": null,
+          "item_id": 35669
+        }
+      ],
+      "quest_ids": [
+        11943
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25789",
+      "entity_type": "npc",
+      "entity_id": 25789,
+      "name": "折磨者迦莫斯拉",
+      "borean_representative": {
+        "x": 46.04,
+        "y": 62.01,
+        "spawn_count": 1,
+        "min_x": 46.04,
+        "max_x": 46.04,
+        "min_y": 62.01,
+        "max_y": 62.01
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11721,
+          "quest_name": "折磨者迦莫斯拉",
+          "relation_kind": "resolved_item_source:34980",
+          "required_count": 1,
+          "item_id": 34980
+        }
+      ],
+      "quest_ids": [
+        11721
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26451",
+      "entity_type": "npc",
+      "entity_id": 26451,
+      "name": "拉格纳·德拉卡伦",
+      "borean_representative": {
+        "x": 54.94,
+        "y": 88.57,
+        "spawn_count": 1,
+        "min_x": 54.94,
+        "max_x": 54.94,
+        "min_y": 88.57,
+        "max_y": 88.57
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11625,
+          "quest_name": "纳兹亚的三叉戟",
+          "relation_kind": "resolved_item_source:35774",
+          "required_count": 1,
+          "item_id": 35774
+        }
+      ],
+      "quest_ids": [
+        11625
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25701",
+      "entity_type": "npc",
+      "entity_id": 25701,
+      "name": "掘泥鳄鱼人",
+      "borean_representative": {
+        "x": 78.72,
+        "y": 33.1,
+        "spawn_count": 20,
+        "min_x": 76.73,
+        "max_x": 81.08,
+        "min_y": 28.34,
+        "max_y": 45.03
+      },
+      "spawn_count": 20,
+      "relations": [
+        {
+          "quest_id": 11630,
+          "quest_name": "腐化的土地",
+          "relation_kind": "resolved_item_source:34774",
+          "required_count": 8,
+          "item_id": 34774
+        }
+      ],
+      "quest_ids": [
+        11630
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25523",
+      "entity_type": "npc",
+      "entity_id": 25523,
+      "name": "斯卡迪尔水手",
+      "borean_representative": {
+        "x": 47.79,
+        "y": 90.98,
+        "spawn_count": 24,
+        "min_x": 44.64,
+        "max_x": 54.92,
+        "min_y": 88.47,
+        "max_y": 93.45
+      },
+      "spawn_count": 24,
+      "relations": [
+        {
+          "quest_id": 12490,
+          "quest_name": "维赫亚的复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        12490
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25520",
+      "entity_type": "npc",
+      "entity_id": 25520,
+      "name": "斯卡迪尔符文法师",
+      "borean_representative": {
+        "x": 49.76,
+        "y": 90.47,
+        "spawn_count": 10,
+        "min_x": 48.26,
+        "max_x": 54.56,
+        "min_y": 89.06,
+        "max_y": 94.05
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 12490,
+          "quest_name": "维赫亚的复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 2,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        12490
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25613",
+      "entity_type": "npc",
+      "entity_id": 25613,
+      "name": "斯卡迪尔织雾者",
+      "borean_representative": {
+        "x": 48.0,
+        "y": 91.26,
+        "spawn_count": 25,
+        "min_x": 43.22,
+        "max_x": 54.25,
+        "min_y": 76.52,
+        "max_y": 95.21
+      },
+      "spawn_count": 25,
+      "relations": [
+        {
+          "quest_id": 12490,
+          "quest_name": "维赫亚的复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        12490
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25521",
+      "entity_type": "npc",
+      "entity_id": 25521,
+      "name": "斯卡迪尔船工",
+      "borean_representative": {
+        "x": 46.7,
+        "y": 78.47,
+        "spawn_count": 26,
+        "min_x": 43.18,
+        "max_x": 49.9,
+        "min_y": 76.61,
+        "max_y": 80.97
+      },
+      "spawn_count": 26,
+      "relations": [
+        {
+          "quest_id": 11613,
+          "quest_name": "卡鲁克的誓言",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11613
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25522",
+      "entity_type": "npc",
+      "entity_id": 25522,
+      "name": "斯卡迪尔袭击者",
+      "borean_representative": {
+        "x": 46.41,
+        "y": 78.64,
+        "spawn_count": 23,
+        "min_x": 43.63,
+        "max_x": 50.36,
+        "min_y": 75.98,
+        "max_y": 81.13
+      },
+      "spawn_count": 23,
+      "relations": [
+        {
+          "quest_id": 11613,
+          "quest_name": "卡鲁克的誓言",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11613
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25333",
+      "entity_type": "npc",
+      "entity_id": 25333,
+      "name": "死灵侵犯者",
+      "borean_representative": {
+        "x": 36.2,
+        "y": 64.53,
+        "spawn_count": 60,
+        "min_x": 34.77,
+        "max_x": 37.09,
+        "min_y": 61.94,
+        "max_y": 67.18
+      },
+      "spawn_count": 60,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25618",
+      "entity_type": "npc",
+      "entity_id": 25618,
+      "name": "残忍的瓦雷杜斯",
+      "borean_representative": {
+        "x": 35.25,
+        "y": 46.26,
+        "spawn_count": 1,
+        "min_x": 35.25,
+        "max_x": 35.25,
+        "min_y": 46.26,
+        "max_y": 46.26
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11705,
+          "quest_name": "愚蠢的努力",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11705
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27859",
+      "entity_type": "npc",
+      "entity_id": 27859,
+      "name": "残忍的范瑟雷",
+      "borean_representative": {
+        "x": 85.6,
+        "y": 27.46,
+        "spawn_count": 1,
+        "min_x": 85.6,
+        "max_x": 85.6,
+        "min_y": 27.46,
+        "max_y": 27.46
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11898,
+          "quest_name": "过关斩将",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11898
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26449",
+      "entity_type": "npc",
+      "entity_id": 26449,
+      "name": "残忍的贾梅尔",
+      "borean_representative": {
+        "x": 46.42,
+        "y": 78.23,
+        "spawn_count": 1,
+        "min_x": 46.42,
+        "max_x": 46.42,
+        "min_y": 78.23,
+        "max_y": 78.23
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11619,
+          "quest_name": "残忍的贾梅尔",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11619
+      ],
+      "video_reference_episodes": [
+        34
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25429",
+      "entity_type": "npc",
+      "entity_id": 25429,
+      "name": "犸格莫斯劫掠者",
+      "borean_representative": {
+        "x": 56.34,
+        "y": 12.33,
+        "spawn_count": 29,
+        "min_x": 54.05,
+        "max_x": 60.38,
+        "min_y": 8.8,
+        "max_y": 16.06
+      },
+      "spawn_count": 29,
+      "relations": [
+        {
+          "quest_id": 11639,
+          "quest_name": "向犸格莫斯复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11639
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25434",
+      "entity_type": "npc",
+      "entity_id": 25434,
+      "name": "犸格莫斯碾压者",
+      "borean_representative": {
+        "x": 56.16,
+        "y": 12.09,
+        "spawn_count": 10,
+        "min_x": 53.34,
+        "max_x": 61.24,
+        "min_y": 10.27,
+        "max_y": 14.64
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 11639,
+          "quest_name": "向犸格莫斯复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11639
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25428",
+      "entity_type": "npc",
+      "entity_id": 25428,
+      "name": "犸格莫斯萨满祭司",
+      "borean_representative": {
+        "x": 55.75,
+        "y": 11.23,
+        "spawn_count": 64,
+        "min_x": 52.88,
+        "max_x": 61.3,
+        "min_y": 7.13,
+        "max_y": 16.15
+      },
+      "spawn_count": 64,
+      "relations": [
+        {
+          "quest_id": 11639,
+          "quest_name": "向犸格莫斯复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11639
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25432",
+      "entity_type": "npc",
+      "entity_id": 25432,
+      "name": "犸格莫斯雷加的配偶",
+      "borean_representative": {
+        "x": 54.84,
+        "y": 10.84,
+        "spawn_count": 6,
+        "min_x": 54.13,
+        "max_x": 56.32,
+        "min_y": 9.69,
+        "max_y": 13.22
+      },
+      "spawn_count": 6,
+      "relations": [
+        {
+          "quest_id": 11639,
+          "quest_name": "向犸格莫斯复仇",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11639
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25415",
+      "entity_type": "npc",
+      "entity_id": 25415,
+      "name": "狂怒的雷暴",
+      "borean_representative": {
+        "x": 43.95,
+        "y": 9.22,
+        "spawn_count": 22,
+        "min_x": 42.1,
+        "max_x": 46.1,
+        "min_y": 6.51,
+        "max_y": 11.54
+      },
+      "spawn_count": 22,
+      "relations": [
+        {
+          "quest_id": 11649,
+          "quest_name": "风暴微粒",
+          "relation_kind": "resolved_item_source:34800",
+          "required_count": 5,
+          "item_id": 34800
+        }
+      ],
+      "quest_ids": [
+        11649
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25802",
+      "entity_type": "npc",
+      "entity_id": 25802,
+      "name": "猛犸毁灭者卡奥",
+      "borean_representative": {
+        "x": 53.64,
+        "y": 24.53,
+        "spawn_count": 1,
+        "min_x": 53.64,
+        "max_x": 53.64,
+        "min_y": 24.53,
+        "max_y": 24.53
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11879,
+          "quest_name": "猛犸毁灭者卡奥",
+          "relation_kind": "resolved_item_source:35234",
+          "required_count": 1,
+          "item_id": 35234
+        }
+      ],
+      "quest_ids": [
+        11879
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25601",
+      "entity_type": "npc",
+      "entity_id": 25601,
+      "name": "瓦拉纳王子",
+      "borean_representative": {
+        "x": 86.19,
+        "y": 28.76,
+        "spawn_count": 1,
+        "min_x": 86.19,
+        "max_x": 86.19,
+        "min_y": 28.76,
+        "max_y": 28.76
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11898,
+          "quest_name": "过关斩将",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11898
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25660",
+      "entity_type": "npc",
+      "entity_id": 25660,
+      "name": "生疮的食尸鬼",
+      "borean_representative": {
+        "x": 68.51,
+        "y": 16.2,
+        "spawn_count": 33,
+        "min_x": 66.47,
+        "max_x": 71.32,
+        "min_y": 11.56,
+        "max_y": 20.33
+      },
+      "spawn_count": 33,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26126",
+      "entity_type": "npc",
+      "entity_id": 26126,
+      "name": "白骨战士",
+      "borean_representative": {
+        "x": 68.06,
+        "y": 16.11,
+        "spawn_count": 22,
+        "min_x": 66.08,
+        "max_x": 71.39,
+        "min_y": 11.52,
+        "max_y": 21.08
+      },
+      "spawn_count": 22,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25332",
+      "entity_type": "npc",
+      "entity_id": 25332,
+      "name": "缝合战歌恐尸",
+      "borean_representative": {
+        "x": 35.85,
+        "y": 64.38,
+        "spawn_count": 6,
+        "min_x": 34.82,
+        "max_x": 37.23,
+        "min_y": 62.21,
+        "max_y": 67.36
+      },
+      "spawn_count": 6,
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11652
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25718",
+      "entity_type": "npc",
+      "entity_id": 25718,
+      "name": "考达拉法师猎手",
+      "borean_representative": {
+        "x": 33.37,
+        "y": 28.36,
+        "spawn_count": 13,
+        "min_x": 31.49,
+        "max_x": 35.17,
+        "min_y": 25.71,
+        "max_y": 30.33
+      },
+      "spawn_count": 13,
+      "relations": [
+        {
+          "quest_id": 11951,
+          "quest_name": "诱饵",
+          "relation_kind": "resolved_item_source:35685",
+          "required_count": 10,
+          "item_id": 35685
+        }
+      ],
+      "quest_ids": [
+        11951
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25719",
+      "entity_type": "npc",
+      "entity_id": 25719,
+      "name": "考达拉缚法者",
+      "borean_representative": {
+        "x": 33.06,
+        "y": 28.03,
+        "spawn_count": 17,
+        "min_x": 31.46,
+        "max_x": 35.17,
+        "min_y": 25.75,
+        "max_y": 30.32
+      },
+      "spawn_count": 17,
+      "relations": [
+        {
+          "quest_id": 11931,
+          "quest_name": "破译密码",
+          "relation_kind": "resolved_item_source:35629",
+          "required_count": 3,
+          "item_id": 35629
+        }
+      ],
+      "quest_ids": [
+        11931
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25717",
+      "entity_type": "npc",
+      "entity_id": 25717,
+      "name": "考达拉鳞誓龙人",
+      "borean_representative": {
+        "x": 27.54,
+        "y": 20.09,
+        "spawn_count": 10,
+        "min_x": 25.87,
+        "max_x": 28.35,
+        "min_y": 18.59,
+        "max_y": 21.99
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 11912,
+          "quest_name": "冰冷的草莓",
+          "relation_kind": "resolved_item_source:35492",
+          "required_count": 10,
+          "item_id": 35492
+        }
+      ],
+      "quest_ids": [
+        11912
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25728",
+      "entity_type": "npc",
+      "entity_id": 25728,
+      "name": "考达拉龙人",
+      "borean_representative": {
+        "x": 26.12,
+        "y": 28.52,
+        "spawn_count": 38,
+        "min_x": 20.42,
+        "max_x": 35.17,
+        "min_y": 20.12,
+        "max_y": 36.55
+      },
+      "spawn_count": 38,
+      "relations": [
+        {
+          "quest_id": 11912,
+          "quest_name": "冰冷的草莓",
+          "relation_kind": "resolved_item_source:35492",
+          "required_count": 10,
+          "item_id": 35492
+        }
+      ],
+      "quest_ids": [
+        11912
+      ],
+      "video_reference_episodes": [
+        35,
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:24601",
+      "entity_type": "npc",
+      "entity_id": 24601,
+      "name": "蒸汽狂怒者",
+      "borean_representative": {
+        "x": 72.15,
+        "y": 30.12,
+        "spawn_count": 59,
+        "min_x": 68.77,
+        "max_x": 75.25,
+        "min_y": 22.82,
+        "max_y": 41.09
+      },
+      "spawn_count": 59,
+      "relations": [
+        {
+          "quest_id": 11893,
+          "quest_name": "元素的力量",
+          "relation_kind": "direct_creature",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11893
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25449",
+      "entity_type": "npc",
+      "entity_id": 25449,
+      "name": "蓝玉回收者",
+      "borean_representative": {
+        "x": 51.76,
+        "y": 33.73,
+        "spawn_count": 42,
+        "min_x": 49.33,
+        "max_x": 54.19,
+        "min_y": 29.41,
+        "max_y": 36.71
+      },
+      "spawn_count": 42,
+      "relations": [
+        {
+          "quest_id": 11609,
+          "quest_name": "寻找古器",
+          "relation_kind": "resolved_item_source:34713",
+          "required_count": 6,
+          "item_id": 34713
+        }
+      ],
+      "quest_ids": [
+        11609
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25316",
+      "entity_type": "npc",
+      "entity_id": 25316,
+      "name": "蓝玉巫师",
+      "borean_representative": {
+        "x": 42.34,
+        "y": 39.3,
+        "spawn_count": 12,
+        "min_x": 40.84,
+        "max_x": 43.31,
+        "min_y": 36.73,
+        "max_y": 41.34
+      },
+      "spawn_count": 12,
+      "relations": [
+        {
+          "quest_id": 11590,
+          "quest_name": "调查",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11590
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25585",
+      "entity_type": "npc",
+      "entity_id": 25585,
+      "name": "蓝玉法师猎手",
+      "borean_representative": {
+        "x": 41.91,
+        "y": 39.61,
+        "spawn_count": 20,
+        "min_x": 40.44,
+        "max_x": 43.11,
+        "min_y": 36.04,
+        "max_y": 43.13
+      },
+      "spawn_count": 20,
+      "relations": [
+        {
+          "quest_id": 11671,
+          "quest_name": "与时间赛跑",
+          "relation_kind": "resolved_item_source:34909",
+          "required_count": 1,
+          "item_id": 34909
+        }
+      ],
+      "quest_ids": [
+        11671
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25355",
+      "entity_type": "npc",
+      "entity_id": 25355,
+      "name": "蓝玉猎犬",
+      "borean_representative": {
+        "x": 51.58,
+        "y": 31.69,
+        "spawn_count": 20,
+        "min_x": 49.61,
+        "max_x": 53.77,
+        "min_y": 29.28,
+        "max_y": 36.22
+      },
+      "spawn_count": 20,
+      "relations": [
+        {
+          "quest_id": 11609,
+          "quest_name": "寻找古器",
+          "relation_kind": "resolved_item_source:34713",
+          "required_count": 6,
+          "item_id": 34713
+        }
+      ],
+      "quest_ids": [
+        11609
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25353",
+      "entity_type": "npc",
+      "entity_id": 25353,
+      "name": "蓝玉财宝猎人",
+      "borean_representative": {
+        "x": 52.14,
+        "y": 33.28,
+        "spawn_count": 36,
+        "min_x": 49.37,
+        "max_x": 54.53,
+        "min_y": 29.5,
+        "max_y": 36.21
+      },
+      "spawn_count": 36,
+      "relations": [
+        {
+          "quest_id": 11612,
+          "quest_name": "夺回采掘场",
+          "relation_kind": "direct_creature",
+          "required_count": 12,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11612
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25498",
+      "entity_type": "npc",
+      "entity_id": 25498,
+      "name": "蛾王阿斯帕萨",
+      "borean_representative": {
+        "x": 48.57,
+        "y": 58.88,
+        "spawn_count": 1,
+        "min_x": 48.57,
+        "max_x": 48.57,
+        "min_y": 58.88,
+        "max_y": 58.88
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11717,
+          "quest_name": "授粉的巨蛾",
+          "relation_kind": "resolved_item_source:34976",
+          "required_count": 5,
+          "item_id": 34976
+        }
+      ],
+      "quest_ids": [
+        11717
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25464",
+      "entity_type": "npc",
+      "entity_id": 25464,
+      "name": "血孢巨蛾",
+      "borean_representative": {
+        "x": 48.25,
+        "y": 57.79,
+        "spawn_count": 65,
+        "min_x": 43.12,
+        "max_x": 54.1,
+        "min_y": 49.07,
+        "max_y": 67.74
+      },
+      "spawn_count": 65,
+      "relations": [
+        {
+          "quest_id": 11717,
+          "quest_name": "授粉的巨蛾",
+          "relation_kind": "resolved_item_source:34976",
+          "required_count": 5,
+          "item_id": 34976
+        }
+      ],
+      "quest_ids": [
+        11717
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25467",
+      "entity_type": "npc",
+      "entity_id": 25467,
+      "name": "血孢收割者",
+      "borean_representative": {
+        "x": 47.39,
+        "y": 61.12,
+        "spawn_count": 60,
+        "min_x": 42.68,
+        "max_x": 54.16,
+        "min_y": 49.18,
+        "max_y": 68.56
+      },
+      "spawn_count": 60,
+      "relations": [
+        {
+          "quest_id": 11714,
+          "quest_name": "清除北地狗头人",
+          "relation_kind": "direct_creature",
+          "required_count": 8,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11714
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25470",
+      "entity_type": "npc",
+      "entity_id": 25470,
+      "name": "血孢点火者",
+      "borean_representative": {
+        "x": 46.79,
+        "y": 62.0,
+        "spawn_count": 59,
+        "min_x": 42.68,
+        "max_x": 54.03,
+        "min_y": 49.68,
+        "max_y": 68.61
+      },
+      "spawn_count": 59,
+      "relations": [
+        {
+          "quest_id": 11714,
+          "quest_name": "清除北地狗头人",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11714
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25850",
+      "entity_type": "npc",
+      "entity_id": 25850,
+      "name": "被困的猛犸象幼崽",
+      "borean_representative": {
+        "x": 55.55,
+        "y": 34.24,
+        "spawn_count": 22,
+        "min_x": 52.82,
+        "max_x": 59.31,
+        "min_y": 21.88,
+        "max_y": 45.29
+      },
+      "spawn_count": 22,
+      "relations": [
+        {
+          "quest_id": 11876,
+          "quest_name": "帮助弱小",
+          "relation_kind": "direct_creature",
+          "required_count": 8,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11876
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25478",
+      "entity_type": "npc",
+      "entity_id": 25478,
+      "name": "被封印的蓝玉巫师",
+      "borean_representative": {
+        "x": 46.32,
+        "y": 32.92,
+        "spawn_count": 1,
+        "min_x": 46.32,
+        "max_x": 46.32,
+        "min_y": 32.92,
+        "max_y": 32.92
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11648,
+          "quest_name": "说服的艺术",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11648
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25596",
+      "entity_type": "npc",
+      "entity_id": 25596,
+      "name": "被感染的科多兽",
+      "borean_representative": {
+        "x": 35.49,
+        "y": 50.07,
+        "spawn_count": 22,
+        "min_x": 33.34,
+        "max_x": 40.33,
+        "min_y": 45.59,
+        "max_y": 54.59
+      },
+      "spawn_count": 22,
+      "relations": [
+        {
+          "quest_id": 11690,
+          "quest_name": "把它们活着带回去",
+          "relation_kind": "direct_creature",
+          "required_count": 8,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11690
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25666",
+      "entity_type": "npc",
+      "entity_id": 25666,
+      "name": "西北部虫孔",
+      "borean_representative": {
+        "x": 66.38,
+        "y": 32.49,
+        "spawn_count": 1,
+        "min_x": 66.38,
+        "max_x": 66.38,
+        "min_y": 32.49,
+        "max_y": 32.49
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11684,
+          "quest_name": "侦查虫孔",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11684
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25416",
+      "entity_type": "npc",
+      "entity_id": 25416,
+      "name": "西米尔",
+      "borean_representative": {
+        "x": 50.96,
+        "y": 15.3,
+        "spawn_count": 1,
+        "min_x": 50.96,
+        "max_x": 50.96,
+        "min_y": 15.3,
+        "max_y": 15.3
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11627,
+          "quest_name": "沸点",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11627
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25443",
+      "entity_type": "npc",
+      "entity_id": 25443,
+      "name": "西部平台",
+      "borean_representative": {
+        "x": 50.95,
+        "y": 34.04,
+        "spawn_count": 1,
+        "min_x": 50.95,
+        "max_x": 50.95,
+        "min_y": 34.04,
+        "max_y": 34.04
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11617,
+          "quest_name": "别让他们逃了！",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11617
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25493",
+      "entity_type": "npc",
+      "entity_id": 25493,
+      "name": "西部恩其拉大锅",
+      "borean_representative": {
+        "x": 85.57,
+        "y": 20.08,
+        "spawn_count": 1,
+        "min_x": 85.57,
+        "max_x": 85.57,
+        "min_y": 20.08,
+        "max_y": 20.08
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11647,
+          "quest_name": "中和瘟疫之锅",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11647
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:24957",
+      "entity_type": "npc",
+      "entity_id": 24957,
+      "name": "诅咒教派药剂师",
+      "borean_representative": {
+        "x": 69.0,
+        "y": 16.23,
+        "spawn_count": 26,
+        "min_x": 66.81,
+        "max_x": 78.3,
+        "min_y": 12.77,
+        "max_y": 19.07
+      },
+      "spawn_count": 26,
+      "relations": [
+        {
+          "quest_id": 11683,
+          "quest_name": "坠落的浮空城",
+          "relation_kind": "direct_event_source",
+          "required_count": 20,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11683
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25342",
+      "entity_type": "npc",
+      "entity_id": 25342,
+      "name": "车队卫兵的尸体",
+      "borean_representative": {
+        "x": 49.03,
+        "y": 23.17,
+        "spawn_count": 19,
+        "min_x": 47.53,
+        "max_x": 50.38,
+        "min_y": 21.45,
+        "max_y": 27.0
+      },
+      "spawn_count": 19,
+      "relations": [
+        {
+          "quest_id": 11593,
+          "quest_name": "亡者的尊严",
+          "relation_kind": "direct_event_source",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11593
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25343",
+      "entity_type": "npc",
+      "entity_id": 25343,
+      "name": "车队工人的尸体",
+      "borean_representative": {
+        "x": 49.77,
+        "y": 23.05,
+        "spawn_count": 10,
+        "min_x": 47.18,
+        "max_x": 50.78,
+        "min_y": 21.28,
+        "max_y": 25.94
+      },
+      "spawn_count": 10,
+      "relations": [
+        {
+          "quest_id": 11593,
+          "quest_name": "亡者的尊严",
+          "relation_kind": "direct_event_source",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11593
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26202",
+      "entity_type": "npc",
+      "entity_id": 26202,
+      "name": "通灵塔防御者",
+      "borean_representative": {
+        "x": 83.11,
+        "y": 42.05,
+        "spawn_count": 21,
+        "min_x": 81.41,
+        "max_x": 86.38,
+        "min_y": 38.51,
+        "max_y": 44.52
+      },
+      "spawn_count": 21,
+      "relations": [
+        {
+          "quest_id": 11630,
+          "quest_name": "腐化的土地",
+          "relation_kind": "resolved_item_source:34774",
+          "required_count": 8,
+          "item_id": 34774
+        }
+      ],
+      "quest_ids": [
+        11630
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:27860",
+      "entity_type": "npc",
+      "entity_id": 27860,
+      "name": "邪恶的卢修恩",
+      "borean_representative": {
+        "x": 87.96,
+        "y": 28.98,
+        "spawn_count": 1,
+        "min_x": 87.96,
+        "max_x": 87.96,
+        "min_y": 28.98,
+        "max_y": 28.98
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11898,
+          "quest_name": "过关斩将",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11898
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25210",
+      "entity_type": "npc",
+      "entity_id": 25210,
+      "name": "钥匙管理者呜啦咕噜",
+      "borean_representative": {
+        "x": 39.17,
+        "y": 22.61,
+        "spawn_count": 1,
+        "min_x": 39.17,
+        "max_x": 39.17,
+        "min_y": 22.61,
+        "max_y": 22.61
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11569,
+          "quest_name": "钥匙管理者呜啦咕噜",
+          "relation_kind": "resolved_item_source:34600",
+          "required_count": 1,
+          "item_id": 34600
+        }
+      ],
+      "quest_ids": [
+        11569
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25448",
+      "entity_type": "npc",
+      "entity_id": 25448,
+      "name": "馆长因萨维斯",
+      "borean_representative": {
+        "x": 50.21,
+        "y": 32.55,
+        "spawn_count": 1,
+        "min_x": 50.21,
+        "max_x": 50.21,
+        "min_y": 32.55,
+        "max_y": 32.55
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11623,
+          "quest_name": "拜访馆长",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11623
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25803",
+      "entity_type": "npc",
+      "entity_id": 25803,
+      "name": "驯鹿杀手卡琳",
+      "borean_representative": {
+        "x": 57.2,
+        "y": 56.38,
+        "spawn_count": 1,
+        "min_x": 57.2,
+        "max_x": 57.2,
+        "min_y": 56.38,
+        "max_y": 56.38
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11868,
+          "quest_name": "驯鹿杀手之死",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11868
+      ],
+      "video_reference_episodes": [
+        35
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26073",
+      "entity_type": "npc",
+      "entity_id": 26073,
+      "name": "高阶祭司塔雷坎",
+      "borean_representative": {
+        "x": 89.38,
+        "y": 28.86,
+        "spawn_count": 1,
+        "min_x": 89.38,
+        "max_x": 89.38,
+        "min_y": 28.86,
+        "max_y": 28.86
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11640,
+          "quest_name": "力量之语",
+          "relation_kind": "resolved_item_source:35354",
+          "required_count": null,
+          "item_id": 35354
+        }
+      ],
+      "quest_ids": [
+        11640
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25392",
+      "entity_type": "npc",
+      "entity_id": 25392,
+      "name": "高阶祭司安多拉斯",
+      "borean_representative": {
+        "x": 88.05,
+        "y": 20.94,
+        "spawn_count": 1,
+        "min_x": 88.05,
+        "max_x": 88.05,
+        "min_y": 20.94,
+        "max_y": 20.94
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11640,
+          "quest_name": "力量之语",
+          "relation_kind": "resolved_item_source:35355",
+          "required_count": null,
+          "item_id": 35355
+        }
+      ],
+      "quest_ids": [
+        11640
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26076",
+      "entity_type": "npc",
+      "entity_id": 26076,
+      "name": "高阶祭司纳菲塞特",
+      "borean_representative": {
+        "x": 83.89,
+        "y": 20.46,
+        "spawn_count": 1,
+        "min_x": 83.89,
+        "max_x": 83.89,
+        "min_y": 20.46,
+        "max_y": 20.46
+      },
+      "spawn_count": 1,
+      "relations": [
+        {
+          "quest_id": 11640,
+          "quest_name": "力量之语",
+          "relation_kind": "resolved_item_source:35353",
+          "required_count": null,
+          "item_id": 35353
+        }
+      ],
+      "quest_ids": [
+        11640
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:26127",
+      "entity_type": "npc",
+      "entity_id": 26127,
+      "name": "魔枢雏龙",
+      "borean_representative": {
+        "x": 23.23,
+        "y": 26.17,
+        "spawn_count": 8,
+        "min_x": 21.64,
+        "max_x": 29.74,
+        "min_y": 18.06,
+        "max_y": 32.26
+      },
+      "spawn_count": 8,
+      "relations": [
+        {
+          "quest_id": 11919,
+          "quest_name": "猎龙",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "quest_ids": [
+        11919
+      ],
+      "video_reference_episodes": [
+        36
+      ],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    },
+    {
+      "cluster_id": "npc:25700",
+      "entity_type": "npc",
+      "entity_id": 25700,
+      "name": "鳄鱼人猎手",
+      "borean_representative": {
+        "x": 78.55,
+        "y": 31.48,
+        "spawn_count": 24,
+        "min_x": 74.77,
+        "max_x": 80.81,
+        "min_y": 27.11,
+        "max_y": 44.03
+      },
+      "spawn_count": 24,
+      "relations": [
+        {
+          "quest_id": 11630,
+          "quest_name": "腐化的土地",
+          "relation_kind": "resolved_item_source:34774",
+          "required_count": 8,
+          "item_id": 34774
+        }
+      ],
+      "quest_ids": [
+        11630
+      ],
+      "video_reference_episodes": [],
+      "shared_by_multiple_tasks": false,
+      "adversarial_flags": []
+    }
+  ],
+  "special_mechanism_anchor_clusters": [
+    {
+      "anchor_id": "object:187561",
+      "entity_type": "object",
+      "entity_id": 187561,
+      "name": "Arcane Prison",
+      "borean_representative": {
+        "x": 41.79,
+        "y": 39.15,
+        "spawn_count": 3,
+        "min_x": 40.44,
+        "max_x": 42.59,
+        "min_y": 36.75,
+        "max_y": 42.55
+      },
+      "relations": [
+        {
+          "quest_id": 11587,
+          "quest_name": "越狱",
+          "extra_index": 1,
+          "text": "Open the prison",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11587
+      ]
+    },
+    {
+      "anchor_id": "object:187995",
+      "entity_type": "object",
+      "entity_id": 187995,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.49,
+        "y": 46.13,
+        "spawn_count": 1,
+        "min_x": 56.49,
+        "max_x": 56.49,
+        "min_y": 46.13,
+        "max_y": 46.13
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:187996",
+      "entity_type": "object",
+      "entity_id": 187996,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.0,
+        "y": 47.17,
+        "spawn_count": 1,
+        "min_x": 57.0,
+        "max_x": 57.0,
+        "min_y": 47.17,
+        "max_y": 47.17
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:187997",
+      "entity_type": "object",
+      "entity_id": 187997,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.04,
+        "y": 47.32,
+        "spawn_count": 1,
+        "min_x": 56.04,
+        "max_x": 56.04,
+        "min_y": 47.32,
+        "max_y": 47.32
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:187998",
+      "entity_type": "object",
+      "entity_id": 187998,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.84,
+        "y": 47.74,
+        "spawn_count": 1,
+        "min_x": 57.84,
+        "max_x": 57.84,
+        "min_y": 47.74,
+        "max_y": 47.74
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:187999",
+      "entity_type": "object",
+      "entity_id": 187999,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.24,
+        "y": 48.57,
+        "spawn_count": 1,
+        "min_x": 57.24,
+        "max_x": 57.24,
+        "min_y": 48.57,
+        "max_y": 48.57
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188000",
+      "entity_type": "object",
+      "entity_id": 188000,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.41,
+        "y": 48.23,
+        "spawn_count": 1,
+        "min_x": 56.41,
+        "max_x": 56.41,
+        "min_y": 48.23,
+        "max_y": 48.23
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188001",
+      "entity_type": "object",
+      "entity_id": 188001,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.17,
+        "y": 49.36,
+        "spawn_count": 1,
+        "min_x": 56.17,
+        "max_x": 56.17,
+        "min_y": 49.36,
+        "max_y": 49.36
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188002",
+      "entity_type": "object",
+      "entity_id": 188002,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.93,
+        "y": 50.02,
+        "spawn_count": 1,
+        "min_x": 56.93,
+        "max_x": 56.93,
+        "min_y": 50.02,
+        "max_y": 50.02
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188003",
+      "entity_type": "object",
+      "entity_id": 188003,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.98,
+        "y": 49.45,
+        "spawn_count": 1,
+        "min_x": 57.98,
+        "max_x": 57.98,
+        "min_y": 49.45,
+        "max_y": 49.45
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188004",
+      "entity_type": "object",
+      "entity_id": 188004,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.67,
+        "y": 50.65,
+        "spawn_count": 1,
+        "min_x": 57.67,
+        "max_x": 57.67,
+        "min_y": 50.65,
+        "max_y": 50.65
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188005",
+      "entity_type": "object",
+      "entity_id": 188005,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.23,
+        "y": 50.53,
+        "spawn_count": 1,
+        "min_x": 56.23,
+        "max_x": 56.23,
+        "min_y": 50.53,
+        "max_y": 50.53
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188006",
+      "entity_type": "object",
+      "entity_id": 188006,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 56.81,
+        "y": 51.35,
+        "spawn_count": 1,
+        "min_x": 56.81,
+        "max_x": 56.81,
+        "min_y": 51.35,
+        "max_y": 51.35
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188007",
+      "entity_type": "object",
+      "entity_id": 188007,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 58.2,
+        "y": 51.76,
+        "spawn_count": 1,
+        "min_x": 58.2,
+        "max_x": 58.2,
+        "min_y": 51.76,
+        "max_y": 51.76
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188008",
+      "entity_type": "object",
+      "entity_id": 188008,
+      "name": "Caribou Trap",
+      "borean_representative": {
+        "x": 57.42,
+        "y": 52.16,
+        "spawn_count": 1,
+        "min_x": 57.42,
+        "max_x": 57.42,
+        "min_y": 52.16,
+        "max_y": 52.16
+      },
+      "relations": [
+        {
+          "quest_id": 11865,
+          "quest_name": "死不足惜",
+          "extra_index": 1,
+          "text": "Place fake fur near Caribou Traps",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11865
+      ]
+    },
+    {
+      "anchor_id": "object:188019",
+      "entity_type": "object",
+      "entity_id": 188019,
+      "name": "Crashed Flying Machine",
+      "borean_representative": {
+        "x": 61.09,
+        "y": 36.98,
+        "spawn_count": 3,
+        "min_x": 60.82,
+        "max_x": 63.36,
+        "min_y": 33.65,
+        "max_y": 40.12
+      },
+      "relations": [
+        {
+          "quest_id": 11881,
+          "quest_name": "运货行动！",
+          "extra_index": 1,
+          "text": "Use Jenny's Whistle near a crashed flying machine",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11881
+      ]
+    },
+    {
+      "anchor_id": "object:188086",
+      "entity_type": "object",
+      "entity_id": 188086,
+      "name": "Geyser Fields Steam Vent",
+      "borean_representative": {
+        "x": 66.91,
+        "y": 28.91,
+        "spawn_count": 17,
+        "min_x": 63.76,
+        "max_x": 71.11,
+        "min_y": 22.54,
+        "max_y": 35.41
+      },
+      "relations": [
+        {
+          "quest_id": 11894,
+          "quest_name": "修修补补",
+          "extra_index": 1,
+          "text": "Use Uncured Caribou Hide",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11894
+      ]
+    },
+    {
+      "anchor_id": "object:187986",
+      "entity_type": "object",
+      "entity_id": 187986,
+      "name": "Mid Point Station Valve",
+      "borean_representative": {
+        "x": 63.68,
+        "y": 22.51,
+        "spawn_count": 1,
+        "min_x": 63.68,
+        "max_x": 63.68,
+        "min_y": 22.51,
+        "max_y": 22.51
+      },
+      "relations": [
+        {
+          "quest_id": 11907,
+          "quest_name": "机械副官",
+          "extra_index": 3,
+          "text": "Use Valve",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11907
+      ]
+    },
+    {
+      "anchor_id": "object:187985",
+      "entity_type": "object",
+      "entity_id": 187985,
+      "name": "North Point Station Valve",
+      "borean_representative": {
+        "x": 65.4,
+        "y": 17.49,
+        "spawn_count": 1,
+        "min_x": 65.4,
+        "max_x": 65.4,
+        "min_y": 17.49,
+        "max_y": 17.49
+      },
+      "relations": [
+        {
+          "quest_id": 11907,
+          "quest_name": "机械副官",
+          "extra_index": 2,
+          "text": "Use Valve",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11907
+      ]
+    },
+    {
+      "anchor_id": "object:194151",
+      "entity_type": "object",
+      "entity_id": 194151,
+      "name": "Signal Fire",
+      "borean_representative": {
+        "x": 25.36,
+        "y": 21.75,
+        "spawn_count": 1,
+        "min_x": 25.36,
+        "max_x": 25.36,
+        "min_y": 21.75,
+        "max_y": 21.75
+      },
+      "relations": [
+        {
+          "quest_id": 11969,
+          "quest_name": "触动陷阱",
+          "extra_index": 1,
+          "text": "Use Raelorasz' Spark",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11969
+      ]
+    },
+    {
+      "anchor_id": "object:187987",
+      "entity_type": "object",
+      "entity_id": 187987,
+      "name": "South Point Station Valve",
+      "borean_representative": {
+        "x": 65.26,
+        "y": 28.78,
+        "spawn_count": 1,
+        "min_x": 65.26,
+        "max_x": 65.26,
+        "min_y": 28.78,
+        "max_y": 28.78
+      },
+      "relations": [
+        {
+          "quest_id": 11907,
+          "quest_name": "机械副官",
+          "extra_index": 4,
+          "text": "Use Valve",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11907
+      ]
+    },
+    {
+      "anchor_id": "object:190334",
+      "entity_type": "object",
+      "entity_id": 190334,
+      "name": "The Gearmaster's Manual",
+      "borean_representative": {
+        "x": 64.53,
+        "y": 23.42,
+        "spawn_count": 1,
+        "min_x": 64.53,
+        "max_x": 64.53,
+        "min_y": 23.42,
+        "max_y": 23.42
+      },
+      "relations": [
+        {
+          "quest_id": 11909,
+          "quest_name": "击败机甲专家",
+          "extra_index": 1,
+          "text": "Research the Gearmaster's Manual",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11909
+      ]
+    },
+    {
+      "anchor_id": "object:190335",
+      "entity_type": "object",
+      "entity_id": 190335,
+      "name": "The Gearmaster's Manual",
+      "borean_representative": {
+        "x": 64.42,
+        "y": 23.38,
+        "spawn_count": 1,
+        "min_x": 64.42,
+        "max_x": 64.42,
+        "min_y": 23.38,
+        "max_y": 23.38
+      },
+      "relations": [
+        {
+          "quest_id": 11909,
+          "quest_name": "击败机甲专家",
+          "extra_index": 1,
+          "text": "Research the Gearmaster's Manual",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11909
+      ]
+    },
+    {
+      "anchor_id": "object:187984",
+      "entity_type": "object",
+      "entity_id": 187984,
+      "name": "West Point Station Valve",
+      "borean_representative": {
+        "x": 60.23,
+        "y": 20.37,
+        "spawn_count": 1,
+        "min_x": 60.23,
+        "max_x": 60.23,
+        "min_y": 20.37,
+        "max_y": 20.37
+      },
+      "relations": [
+        {
+          "quest_id": 11907,
+          "quest_name": "机械副官",
+          "extra_index": 1,
+          "text": "Use Valve",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11907
+      ]
+    },
+    {
+      "anchor_id": "npc:25459",
+      "entity_type": "npc",
+      "entity_id": 25459,
+      "name": "亚尼",
+      "borean_representative": {
+        "x": 42.29,
+        "y": 55.68,
+        "spawn_count": 1,
+        "min_x": 42.29,
+        "max_x": 42.29,
+        "min_y": 55.68,
+        "max_y": 55.68
+      },
+      "relations": [
+        {
+          "quest_id": 11636,
+          "quest_name": "魔法飞毯",
+          "extra_index": 1,
+          "text": "Take a ride to Garrosh's Landing",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11636
+      ]
+    },
+    {
+      "anchor_id": "npc:25379",
+      "entity_type": "npc",
+      "entity_id": 25379,
+      "name": "典狱官诺克·血怒",
+      "borean_representative": {
+        "x": 43.71,
+        "y": 54.43,
+        "spawn_count": 1,
+        "min_x": 43.71,
+        "max_x": 43.71,
+        "min_y": 54.43,
+        "max_y": 54.43
+      },
+      "relations": [
+        {
+          "quest_id": 11711,
+          "quest_name": "逃兵快递，30分钟送到否则免费",
+          "extra_index": 1,
+          "text": "Get a new Deserter if you lose him/her",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11711
+      ]
+    },
+    {
+      "anchor_id": "npc:25607",
+      "entity_type": "npc",
+      "entity_id": 25607,
+      "name": "农夫托普",
+      "borean_representative": {
+        "x": 37.93,
+        "y": 52.31,
+        "spawn_count": 1,
+        "min_x": 37.93,
+        "max_x": 37.93,
+        "min_y": 52.31,
+        "max_y": 52.31
+      },
+      "relations": [
+        {
+          "quest_id": 11690,
+          "quest_name": "把它们活着带回去",
+          "extra_index": 1,
+          "text": "Bring the kodos to Farmer Torp",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11690
+      ]
+    },
+    {
+      "anchor_id": "npc:25664",
+      "entity_type": "npc",
+      "entity_id": 25664,
+      "name": "南部虫孔",
+      "borean_representative": {
+        "x": 70.33,
+        "y": 36.69,
+        "spawn_count": 1,
+        "min_x": 70.33,
+        "max_x": 70.33,
+        "min_y": 36.69,
+        "max_y": 36.69
+      },
+      "relations": [
+        {
+          "quest_id": 11706,
+          "quest_name": "天崩地裂",
+          "extra_index": 1,
+          "text": "Use The Horn of Elemental Fury near the southern sinkhole",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11706
+      ]
+    },
+    {
+      "anchor_id": "npc:25584",
+      "entity_type": "npc",
+      "entity_id": 25584,
+      "name": "审讯者莎尔兰德",
+      "borean_representative": {
+        "x": 41.8,
+        "y": 39.16,
+        "spawn_count": 1,
+        "min_x": 41.8,
+        "max_x": 41.8,
+        "min_y": 39.16,
+        "max_y": 39.16
+      },
+      "relations": [
+        {
+          "quest_id": 11671,
+          "quest_name": "与时间赛跑",
+          "extra_index": 1,
+          "text": "Kill Inquisitor Salrand",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11671
+      ]
+    },
+    {
+      "anchor_id": "npc:25455",
+      "entity_type": "npc",
+      "entity_id": 25455,
+      "name": "斯纳尔芬的图腾",
+      "borean_representative": {
+        "x": 50.25,
+        "y": 9.67,
+        "spawn_count": 1,
+        "min_x": 50.25,
+        "max_x": 50.25,
+        "min_y": 9.67,
+        "max_y": 9.67
+      },
+      "relations": [
+        {
+          "quest_id": 11631,
+          "quest_name": "空气的幻象",
+          "extra_index": 1,
+          "text": "Use Imperean's Primal on Snarlfang's Totem",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11631
+      ]
+    },
+    {
+      "anchor_id": "npc:25802",
+      "entity_type": "npc",
+      "entity_id": 25802,
+      "name": "猛犸毁灭者卡奥",
+      "borean_representative": {
+        "x": 53.64,
+        "y": 24.53,
+        "spawn_count": 1,
+        "min_x": 53.64,
+        "max_x": 53.64,
+        "min_y": 24.53,
+        "max_y": 24.53
+      },
+      "relations": [
+        {
+          "quest_id": 11879,
+          "quest_name": "猛犸毁灭者卡奥",
+          "extra_index": 2,
+          "text": "Kill Kaw the Mammoth Destroyer",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11879
+      ]
+    },
+    {
+      "anchor_id": "npc:26117",
+      "entity_type": "npc",
+      "entity_id": 26117,
+      "name": "莱洛拉斯",
+      "borean_representative": {
+        "x": 33.31,
+        "y": 34.54,
+        "spawn_count": 1,
+        "min_x": 33.31,
+        "max_x": 33.31,
+        "min_y": 34.54,
+        "max_y": 34.54
+      },
+      "relations": [
+        {
+          "quest_id": 11919,
+          "quest_name": "猎龙",
+          "extra_index": 1,
+          "text": "Bring the captured drake to Raelorasz",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11919
+      ]
+    },
+    {
+      "anchor_id": "npc:25849",
+      "entity_type": "npc",
+      "entity_id": 25849,
+      "name": "菲兹克斯·盖维斯特",
+      "borean_representative": {
+        "x": 77.49,
+        "y": 36.96,
+        "spawn_count": 1,
+        "min_x": 77.49,
+        "max_x": 77.49,
+        "min_y": 36.96,
+        "max_y": 36.96
+      },
+      "relations": [
+        {
+          "quest_id": 11881,
+          "quest_name": "运货行动！",
+          "extra_index": 2,
+          "text": "Return Jenny to safety without losing cargo",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11881
+      ]
+    },
+    {
+      "anchor_id": "npc:24601",
+      "entity_type": "npc",
+      "entity_id": 24601,
+      "name": "蒸汽狂怒者",
+      "borean_representative": {
+        "x": 72.15,
+        "y": 30.12,
+        "spawn_count": 59,
+        "min_x": 68.77,
+        "max_x": 75.25,
+        "min_y": 22.82,
+        "max_y": 41.09
+      },
+      "relations": [
+        {
+          "quest_id": 11893,
+          "quest_name": "元素的力量",
+          "extra_index": 1,
+          "text": "Use Windsoul Totem to collect energy from killing Steam Ragers",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11893
+      ]
+    },
+    {
+      "anchor_id": "npc:25334",
+      "entity_type": "npc",
+      "entity_id": 25334,
+      "name": "部落攻城坦克",
+      "borean_representative": {
+        "x": 31.75,
+        "y": 54.89,
+        "spawn_count": 6,
+        "min_x": 31.57,
+        "max_x": 31.92,
+        "min_y": 54.39,
+        "max_y": 55.45
+      },
+      "relations": [
+        {
+          "quest_id": 11652,
+          "quest_name": "纳萨姆平原",
+          "extra_index": 1,
+          "text": "Drive a tank",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11652
+      ]
+    },
+    {
+      "anchor_id": "npc:25743",
+      "entity_type": "npc",
+      "entity_id": 25743,
+      "name": "雄性长毛猛犸象",
+      "borean_representative": {
+        "x": 54.46,
+        "y": 32.17,
+        "spawn_count": 19,
+        "min_x": 47.81,
+        "max_x": 58.37,
+        "min_y": 20.33,
+        "max_y": 48.79
+      },
+      "relations": [
+        {
+          "quest_id": 11879,
+          "quest_name": "猛犸毁灭者卡奥",
+          "extra_index": 1,
+          "text": "Mount Wooly Mammoth Bull to assist in killing Kaw the Mammoth Destroyer",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11879
+      ]
+    },
+    {
+      "anchor_id": "npc:26048",
+      "entity_type": "npc",
+      "entity_id": 26048,
+      "name": "风暴图腾",
+      "borean_representative": {
+        "x": 77.06,
+        "y": 38.71,
+        "spawn_count": 1,
+        "min_x": 77.06,
+        "max_x": 77.06,
+        "min_y": 38.71,
+        "max_y": 38.71
+      },
+      "relations": [
+        {
+          "quest_id": 11895,
+          "quest_name": "风暴的主宰",
+          "extra_index": 1,
+          "text": "Use Storm Totem to summon Storm Tempest",
+          "relation_kind": "special_mechanism_anchor"
+        }
+      ],
+      "quest_ids": [
+        11895
+      ]
+    }
+  ],
+  "special_mechanism_coordinate_anchors": [
+    {
+      "quest_id": 11671,
+      "quest_name": "与时间赛跑",
+      "extra_index": 2,
+      "text": "Use Beryl Shield Detonator",
+      "points": [
+        [
+          41.8,
+          39.1
+        ]
+      ]
+    },
+    {
+      "quest_id": 11898,
+      "quest_name": "过关斩将",
+      "extra_index": 1,
+      "text": "Enter teleporter to access Naxxanar",
+      "points": [
+        [
+          86.55,
+          28.59
+        ]
+      ]
+    },
+    {
+      "quest_id": 11898,
+      "quest_name": "过关斩将",
+      "extra_index": 2,
+      "text": "Use Naxxanar teleporters",
+      "points": [
+        [
+          86.8,
+          30.12
+        ]
+      ]
+    },
+    {
+      "quest_id": 11957,
+      "quest_name": "莎拉苟萨的末日",
+      "extra_index": 2,
+      "text": "Use Arcane Power Focus",
+      "points": [
+        [
+          22.0,
+          22.6
+        ]
+      ]
+    }
+  ]
+}
