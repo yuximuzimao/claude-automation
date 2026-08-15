@@ -93,7 +93,7 @@ How to apply:
 - 准备长期维护的子项目初始化时必须同时建立：`SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；需要人类快速理解时建立 `README.md`。不能只建其中一两个入口后边做边补。
 - **职责唯一，不复制当前状态**：`SKILL.md` = Agent导航；`CLAUDE.md` = 稳定Session启动/安全边界；`README.md` = 人类概览；`docs/INDEX.md` = 文档/数据导航；`tasks/todo.md` = 尚未完成事项。项目存在持续变化的当前状态时，必须单独设 `CURRENT.md`（可位于业务子目录），它是该状态的唯一真值。
 - **INDEX不是规则垃圾桶**：小项目可在 `docs/INDEX.md` 放少量通用规则；一旦出现多个独立工作流/规则域，或读取INDEX会被迫加载大量与当前任务无关的规则，必须建立 `docs/rules/README.md` 做路由并按主题拆文件。不要等到单文件几百行才拆。
-- **永久规则 / 当前状态 / 历史分离**：跨批次长期方法 → `docs/rules/`；当前状态 → `CURRENT.md`；单次分析/阶段证据 → `docs/archive/` 或项目既有历史目录；临时发现 → `tasks/lessons.md`，稳定后迁走并删除重复项。NEAT只是阶段归档，不承担永久规则入口；但执行 `neat-freak` 收尾时必须把本工作区结构契约作为验收基准，全文审查项目Markdown并查缺补漏，重点检查职责混装、渐进式加载失效、重复权威和旧入口残留。
+- **永久规则 / 当前状态 / 历史分离**：跨批次长期方法 → `docs/rules/`；当前状态 → `CURRENT.md`；单次分析/阶段证据 → `docs/archive/` 或项目既有历史目录；临时发现 → `tasks/lessons.md`，稳定后迁走并删除重复项。NEAT只是阶段归档，不承担永久规则入口；执行 `neat-freak` 收尾时必须把本工作区结构契约作为验收基准，**全文审查当前活跃知识**并查缺补漏，重点检查职责混装、渐进式加载失效、重复权威和旧入口残留。历史archive完整枚举但不每次全文重读，只审archive索引、本轮有变更的历史文件和当前任务明确需要回溯的最近历史。
 - 新项目的历史文档默认使用 `docs/archive/`（可按 `neat/`、日期或工作流继续分层）；`sessions/` 默认保留给运行时/认证会话。旧项目若已有 `docs/**/sessions/` 文档目录可以保留，但必须明确它是可版本化文档。
 - 临时产出放工作区 `_sandbox/`（30天后还有用 → 项目docs/memory，没用 → 删）；不要在项目内新增第二套临时目录。
 - `docs/HANDOFF.md`：跨 agent 交接，工作区脏或跨session未完成时使用；已验证完成状态以Git commit为准。

@@ -138,7 +138,7 @@ CLAUDE只保存跨Session仍成立的东西。任何“当前是第几级/当前
 
 NEAT属于阶段归档。它可以记录“当时发生什么、为何这样决定、从哪里恢复”，但永久规则必须已经上提到正式规则层；下一窗口不能只靠日期NEAT恢复长期规则。
 
-新项目默认使用 `docs/archive/` 或 `docs/archive/neat/`，避免和运行时 `sessions/` 混淆。已有项目若使用 `docs/**/sessions/` 保存Markdown历史可保留，但必须确保Git正常追踪，并在SKILL/INDEX写清语义。
+新项目默认使用 `docs/archive/` 或 `docs/archive/neat/`，避免和运行时 `sessions/` 混淆。archive是**版本化历史档案，不是日常活跃知识**：NEAT每次全文审查活跃区，但历史区默认只读archive索引、本轮新增/修改/移动的历史文件，以及CURRENT/当前任务明确需要回溯的最近历史。只有明确做历史考古时才全读archive。旧方案、被替代设计稿和一次性分析一旦退出当前工作流，应迁入archive，不继续和现行规则混在顶层docs。
 
 ## 8. 文件存放与Git边界
 
