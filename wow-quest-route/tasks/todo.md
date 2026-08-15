@@ -1,26 +1,26 @@
 # 当前待办
 
-只记录尚未完成且会改变下一步工作的事项。已完成过程由Git、工作区备份、`docs/analysis/`和会话归档保留，不在这里重复。
+只记录尚未完成且会改变下一步工作的事项。已完成过程由Git、工作区备份、`docs/analysis/`和`docs/verified-routes/sessions/`中的NEAT归档保留，不在这里重复。
 
 ## 首组圣骑士到80级
 
-- [ ] 从`docs/verified-routes/CURRENT.md`指定的唯一玩家攻略继续，以最低号为准；当前主线一直推进到80级，不在55级停止。
-- [x] 55→58费伍德→冬泉效率分支已完成首组实跑并归档到`docs/verified-routes/sessions/2026-08-11-level55-58-felwood-winterspring-closure-neat.md`；该路线未证明优于老手艾萨拉基线，后续新号暂不直接固化替换。
-- [x] 当前首组已在奥格瑞玛提前买齐最终6种雕文；后续新号路线固定在20级、40级加入拍卖行雕文检查/购买节点。
-- [ ] 外域58→68首组正在实跑。当前五号均61级，地狱火Questie代表号已完成38个任务、仍有16个已接任务；继续按实际可接任务推进，不提前发布模型编排的完整任务顺序。地狱火分圈/重叠表只作辅助，任务存在性以时光服现场与历程为最高真值。阶段结束后读取Questie历程，按真实接取/交付/等级/折返重建第二版；仍保留最高号65/66/67/68四个等级截止检查。
-- [ ] 68级左右进入诺森德后沿成熟主轴连续清图；同样采用单地图全清、最少折返的路线方法，直到80级停止。
-- [ ] 每个实跑任务块结束后，用最低号真实等级/经验更新`CURRENT.md`；新等级覆盖旧理论预测。
-- [ ] 用户反馈掉率、共享机制、地形、接交异常或额外折返时，先修当前攻略和对应任务卡，再更新`data/observations/`与`ERROR-BOOK.md`。
-- [ ] Route Atlas 产品边界已冻结到`docs/analysis/2026-08-12-route-atlas-v1-contract.md`。赞加沼泽首个工作台：`data/routes/zangarmarsh-route-atlas-prototype.html`。2026-08-13用户已先后验证NPC与任务目标点云均和游戏内Questie对齐。几何分析基建已新增`lib/route_atlas_geometry.py`、`scripts/analyze_route_atlas_geometry.py`和`data/route-atlas/zangarmarsh-geometry-analysis.json`：当前58–68窗口内有45个任务具备本图可计算点云，共990个任务对；已计算中心、bbox、p50/p90半径、PCA主轴/方向强度、从接取NPC到最近目标点的方向和距离，以及双向最近邻p50/p90、中心距、最近点距和bbox IoU。首轮结果验证局部任务可自动得到进场方向/扫怪轴，同时暴露《时尚无罪》这类跨全图“背景任务”不能用单一中心代表；后续分圈必须区分局部怪区与广域背景任务。关系层同步修正为既比较直接objective，也比较Item→NPC/Object解析后的实际目标，因此可识别《偷回蘑菇》与《你死我活》虽然原始objective不同、实际却共享同一批安葛洛什怪。新增`docs/analysis/2026-08-13-route-atlas-optimization-framework.md`：路线优化正式采用“任务标签摘要 + typed relations + 事件DAG/偏序 + excursion block + multi-trip assignment master + precedence-constrained sequencing subproblem”的混合框架；事件DAG已进一步冻结为每个普通任务三个动作节点`A(Q)=接取 / C(Q)=完成 / T(Q)=交付`，内部依赖`A→C→T`，任务链依赖落在前后任务的具体事件之间（通常`T(Q1)→A(Q2)`）。任意时刻前置已全部满足且尚未执行的事件组成Ready Set；优先级不再使用模糊“高/低”或任意加权总分，而采用可复现规则：当前位置零移动成本的Ready事件先做local closure；需要移动时按`feasible → circle_slack升序 → defer_excursion_penalty降序 → defer_route_regret降序 → insertion_delta升序 → critical_unlock_gain降序 → same_stop_batch_gain降序 → stable ID`做字典序比较。Ready Accept只有在当前local closure中是必做，远距离Accept不享受永久类型bonus，其价值通过解锁收益/延期折返惩罚自然体现。以excursion depth而非普通任务链长度作为最低回访圈数下界，对待插入任务F先做前置可行性过滤，再比较插入A/B/C圈的边际成本；允许空间孤立但链内高度重合的任务链作为独立闭环候选。主优化目标进一步冻结为预计总完成时间最小，而非圈数最少；所有求解结果必须标记`PROVEN_OPTIMAL / BEST_FOUND_WITH_GAP / HEURISTIC_ONLY`，只有精确求解器证明无更优解时才称理论全局最优。当前已安装并固化`OR-Tools>=9.15,<10`作为第四层精确优化依赖；CP-SAT与SCIP/MIP均已接入，旧`slack/regret/insertion/local closure`字典序规则只作初始解/fallback，不承担最终路线决策。已核对实际Questie 11.34.0源码：`preQuestSingle`为OR（任一前置完成即可），`preQuestGroup`为AND（全部完成；正ID还涉及exclusiveTo替代语义，负ID跳过exclusiveTo检查），因此原型展示层合并的`prerequisite_ids`不能用于精确求解；已开始在生成数据中保留`pre_quest_single`与`pre_quest_group`原始类型。下一步实现稳定派生标签、A/C/T事件DAG、动态Ready Set、chain/excursion depth，并把几何、任务耗时和链结构共同送入全局求解；洞穴入口、上下层、不可直达地形等仍由任务卡人工补充。TitanReforged完整effective resolver仍是后续数据层任务。
+- [ ] 从`docs/verified-routes/CURRENT.md`指定的唯一恢复入口继续。当前正在首组实跑北风苔原，最低号最新已69级约半管经验；旧“到69再接”门槛全部废弃。
+- [ ] 当前现场至少已经验证到战歌农场/血孢平原的《慈悲为怀》《授粉的巨蛾》《巨大的蛾卵》区段；本轮后段未重新导入Questie精确任务栏。下一次需要精确裁当前路线时，优先使用用户最新现场描述或刷新后的Questie，不读取早期`11598 / 11606 / 11611 / 11888`快照作为当前位置真值。
+- [ ] 北风继续按“只重新打开受影响局部窗口”实跑修正；不要从战歌开场重新排序整张图。当前复用范围167条、221个几何点、51个玩家逻辑步骤，统一在`data/routes/route-atlas-workbench.html`中执行/审图。
+- [ ] 每个实跑任务块结束后继续记录最低号真实等级/经验；新现场等级覆盖旧理论预测。北风整图完成时记录最低号离图等级/经验、总耗时结构、11632等条件任务状态和任何未完成项。
+- [ ] 用户反馈掉率、共享机制、任务道具、护送/脚本、地形入口或额外折返时，先修当前执行路线，再同步`data/observations/`；若形成跨地图长期规则，再写`RULES.md / ROUTE_ATLAS_RULES.md`，不要只留日期化NEAT。
+- [ ] 北风整图闭合后开始龙骨荒野第一批具体路线；继续加入同一`route-atlas-workbench.html`，禁止创建龙骨荒野独立HTML。
 
-- [x] 2026-08-13 母模型与 exact 求解器结构验证已落地：`PC-SP + Stateful Service Requirements + Flexible Service Locations + Shared-Service Coverage`，实现见`lib/route_atlas_exact.py`。旧8任务 exact v0 只保留为求解器结构验证：后续审查确认`questDB.lua`字段12=`preQuestGroup`、13=`preQuestSingle`，而早期Route Atlas原型常量曾写反，旧v0前置类型因此可能被交换，不能继续当赞加路线结论；已修正原型常量，下一次必须用修正后的前置数据重新求解。
-- [x] 赞加任务基础数据层已完成第一版“公式+输入+物化结果”：`data/route-atlas/zangarmarsh-task-profiles.json`长期保存任务类型、数量/掉率/期望击杀、单怪时间、Objective/移动/总耗时及来源；特殊任务优先写`data/route-atlas/zangarmarsh-task-overrides.json`人工永久覆盖。CMaNGOS WotLK/TBC出生刷新代理已由Codex提取到`data/route-atlas/world-respawn-proxy.json`并接入任务公式；任务卡已显示刷新证据及Item-start起始物掉率/期望击杀/获取耗时。Item-start正式建模为`G(Q)=获取起始物 → A(Q) → Objective → T(Q)`，G可与同实体其他任务共享刷怪流；《抽水泵结构图》《你见过鱼人吗？》《枯萎的孢芽》《灵魂之盟？》《沼泽中的伯爵》已逐项补齐，《未归类的植物》改为条件库存任务。当前98任务分类仍为0未解决低置信度；第四层候选审计见`data/route-atlas/zangarmarsh-global-solver-input-audit.json`。
-- [x] 第四层精确优化实验已完成阶段性验证，现降级为对照工具。4A输入审计在58–68开放世界窗口当前得到70个候选、14个硬边界/特殊阻塞、56个可直接求解；剩余阻塞主要是跨区/副本边界与声望条件，不再当作本地数据缺口。为避免错误忽略动态声望，先冻结43个“赞加本地+无声望门槛”核心任务；CP-SAT见`lib/route_atlas_cpsat.py`，SCIP/MIP交叉验证见`lib/route_atlas_mip.py`，热启动见`lib/route_atlas_initial_solution.py`。8任务统一秒级回归仍由Dijkstra证明`1293.274s PROVEN_OPTIMAL`；CP-SAT/SCIP均可复现该incumbent但当前下界较松。43任务checkpoint脚本`solve_zangarmarsh_global_core43.py`会跨短跑保留incumbent与best lower bound，最新`data/route-atlas/zangarmarsh-global-core43-checkpoint.json`为`BEST_FOUND_WITH_GAP`：incumbent `7765.337s`、best bound `4277.903s`、gap `44.91%`。下一步不盲目延长搜索，而是做结构化精确分解/更强lower bound；之后再单独加入孢子人/塞纳里奥等动态声望状态和杀怪声望收益，最后才合并跨区边界。
+## Route Atlas持续规则验证
 
-- [ ] Route Atlas 第一版实跑地图的数据与自动裁剪已经生成。统一五开耗时口径保持：普通击杀15秒/怪；掉落任务默认按五号总需求÷掉率×15秒，但实跑确认“同一掉落事件五号都可拾取”的任务必须改用共享掉落需求；多刷新物等待=`刷新时间×(轮数-1)`；动态声望必须读取Questie字段19/20并进入Availability约束，不能再只按现场可见性处理；Item-start仅作机会任务。当前页面直接显示166个内部动作合并后的125个真实停靠点，并按圈内不重复坐标规则切成17圈；地图只画真实坐标间的黄色方向箭头，不显示宏观编号节点、步骤数字或路线圆点。页面默认自动裁剪放大第1圈，支持17个数字圈、“下一圈 →”、“适应本圈”和“全图”。2026-08-14用户确认大部分位置可看清，箭头已按8px最小点位比例从约21px缩到8px基准。随后确认真正问题不在点位算法，而在动作排序；旧17圈/166动作不再作为最终展示真源。新的正式方法已冻结到`docs/analysis/2026-08-14-route-atlas-cluster-incremental-insertion-method.md`：先按完全相同任务怪建立目标簇，再构建前置网，再人工拆真实空间实例，最后逐簇把A/C/T动作增量插入已有稳定路线。不同目标簇默认无先后，只有显式前置才建立跨簇顺序；目标簇编号和空间骨架都不是强制顺序；每加入一个新簇只允许局部重排，已验收路线不得反复全局洗牌。广域背景任务最后再插入，旧求解器只保留为对照/异常检测/局部成本参考。
-- [x] Route Atlas地图资源基础设施已闭合：68张地图中65张已有`4008×2672`HD底图，东瘟疫/暴风城/达拉然保留安全回退；经典旧世界+外域生成50图790个zhCN参考小标；HTML运行时继续只依赖同级`maps/`静态相对路径，生成期解析与标签JSON不成为游戏电脑运行依赖。归档见`docs/verified-routes/sessions/2026-08-15-route-atlas-hd-map-assets-neat.md`。
-- [x] 赞加沼泽首组实跑已完成并形成可收尾的下一批默认骨架。关键修正：零经验Repeatable不用于补声望；T9743后自然分支可接9726；9806改北部Background Layer；T9726延迟到自然回孢子村与T9806合并；9709+9823合并安葛洛什终局；终局后炉石萨布拉金批量交四个再T9709。东部水域新增稳定条件策略：9845已提前接取；第二泵图纸自然出则保留不强刷，第三泵借9728爪子怪确保9731《抽水泵结构图》到位；随后绑定`C9731+C9845`同一次水域服务并直接在水中炉石萨布拉金，避免慢速游岸；炉石落地T9845解锁9903/9904，第四泵在陆地段处理，再经萨布拉金飞塞纳里奥一次性交T9720+T9731及当时READY的塞纳里奥任务，继续尤尔巴→孢子之翼→沼泽鼠→黑钉东部尾段。赞加最终不再为9720/9731专程返东，收尾保持西南侧并衔接9797《支援加拉达尔》去纳格兰。AH/交易减少自然杀怪后的孢子人声望门槛仍作为下一批条件测试，不阻塞当前赞加路线收尾。
-- [ ] 下一批赞加从零实跑验证交通初始化：当前平面模型显示“专程开沼泽鼠/萨布拉金飞行点+绑定萨布拉金炉石+回塞纳里奥”约需5分20秒，而黑钉后自然骑到萨布拉金仅约54秒，因此不采用专门预跑；飞行点按第一次自然经过开启、炉石按第一次自然到萨布拉金绑定。现有从零预览中“黑钉后炉石①”仍是待实跑验证的旧前提，下一批不得默认它已经可用。
+- [ ] 新地图发布执行稿前必须逐任务完成“人类可执行性/隐藏机制审计”：高低层、悬崖、水下、洞穴入口、任务道具、钥匙/掉落物、召唤、尸体/固定物交互、脚本飞行/传送、护送/跟随、事件/特殊刷新。普通直观任务可以无备注；有特殊做法的逻辑步骤必须显示“有备注”。
+- [ ] 所有“怪物掉落任务起始物→触发任务”的任务必须完整写明：来源怪、主要位置、触发物、触发任务；特殊来源怪继续写事件/巡逻/召唤/前置/等待策略。后续每张地图先反向扫完整任务池，不能只看当前路线已有任务名。
+- [ ] 继续记录玩家逻辑步骤粒度反馈。几何点不等于玩家步骤；自然任务块可包含多条线路，上一/下一段、HUD和动画均按逻辑任务块工作。
+- [ ] 赞加下一批从零实跑时仍需验证交通初始化：飞行点自然经过时开、萨布拉金第一次自然到达时绑定炉石，不采用专门预跑；旧“黑钉后炉石①”前提不得默认成立。
+
+## 下一批新号实验
+
+- [ ] 下一批从1级练新号时执行“1—57低随机掉落实验”。只重点减少“刷怪后随机掉任务物、需要持续补刷”的任务，不包括固定场景物拾取/固定交互。每张图记录最低号转图等级与墙钟；若经验不足，只补回最少量、高重叠/高掉率/低数量/高后续价值的随机掉落任务。58进入外域后停止该实验，并重新计入任务金币与装备出售价值。详见`docs/verified-routes/VETERAN-LEVELING-BACKBONE.md`。
 
 ## 死亡骑士（暂缓）
 
@@ -29,7 +29,6 @@
 ## 视频路线事实拆解
 
 - [ ] 只按`docs/video-extraction/CURRENT.md`指定的下一集继续；每集完成后同步项目CURRENT、机器`progress.json`与检查点，然后停止。
-- [ ] 依次完成剩余集数；逐集阶段只提取事实，不做联盟到部落映射或路线优劣判断。
 - [ ] 第53集完成后按`docs/video-extraction/POST-EXTRACTION-PLAN.md`整合事件、审计跨集缺口并映射任务块。
 
 ## 后续资料
@@ -38,4 +37,4 @@
 
 ## 代码与数据
 
-- [ ] 只有解析、候选生成或HTML输出发生修改时才运行相应测试；纯攻略修订以任务ID、链接、状态和玩家视角复走为验收。
+- [ ] 只有解析、候选生成、Route Atlas数据/HTML或输出逻辑发生修改时才运行相应测试；纯攻略文字修订以任务ID、状态、玩家视角复走和必要来源核验为验收。

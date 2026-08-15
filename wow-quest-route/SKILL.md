@@ -73,5 +73,6 @@
 | `data/routes/` | 生成路线；Route Atlas只允许`route-atlas-workbench.html`这一份正式工作台HTML |
 | `data/observations/` | 实测修正 |
 | `docs/` | 操作规则和导出说明 |
+| `docs/verified-routes/sessions/` | 日期化NEAT阶段归档；只存阶段证据/判断/恢复点，不承载永久规则 |
 | `tasks/` | 待办与教训 |
 | `tests/` | 自动测试 |

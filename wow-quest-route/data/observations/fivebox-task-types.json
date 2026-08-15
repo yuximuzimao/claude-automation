@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-08",
+  "updated_at": "2026-08-16",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -34,21 +34,54 @@
   "item_properties": {
     "24290": {
       "name": "成熟的孢子囊",
-      "used_by_quests": [9739, 9742],
-      "tradeable": {"value": true, "status": "user_confirmed", "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"},
-      "auction_house": {"value": null, "status": "needs_live_test", "note": "待用户实际检查拍卖行后回填。"}
+      "used_by_quests": [
+        9739,
+        9742
+      ],
+      "tradeable": {
+        "value": true,
+        "status": "user_confirmed",
+        "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"
+      },
+      "auction_house": {
+        "value": null,
+        "status": "needs_live_test",
+        "note": "待用户实际检查拍卖行后回填。"
+      }
     },
     "24291": {
       "name": "沼泽领主的卷须",
-      "used_by_quests": [9743, 9744],
-      "tradeable": {"value": true, "status": "user_confirmed", "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"},
-      "auction_house": {"value": null, "status": "needs_live_test", "note": "待用户实际检查拍卖行后回填。"}
+      "used_by_quests": [
+        9743,
+        9744
+      ],
+      "tradeable": {
+        "value": true,
+        "status": "user_confirmed",
+        "note": "首组赞加实跑确认：一个号拾取后可交易给其他角色。"
+      },
+      "auction_house": {
+        "value": null,
+        "status": "needs_live_test",
+        "note": "待用户实际检查拍卖行后回填。"
+      }
     },
     "24449": {
       "name": "成熟的孢子",
-      "used_by_quests": [9806, 9807],
-      "tradeable": {"value": true, "status": "user_confirmed", "note": "2026-08-15首组赞加实跑确认：成熟的孢子可在角色之间交易，因此五开完成9806时允许跨角色重新分配库存。"},
-      "auction_house": {"value": null, "status": "needs_live_test", "note": "可交易已确认；是否能在当前Titan拍卖行稳定购买及价格效率下次单独测试。"}
+      "used_by_quests": [
+        9806,
+        9807
+      ],
+      "tradeable": {
+        "value": true,
+        "status": "user_confirmed",
+        "note": "2026-08-15首组赞加实跑确认：成熟的孢子可在角色之间交易，因此五开完成9806时允许跨角色重新分配库存。"
+      },
+      "auction_house": {
+        "value": null,
+        "status": "needs_live_test",
+        "note": "可交易已确认；是否能在当前Titan拍卖行稳定购买及价格效率下次单独测试。"
+      }
     }
   },
   "tasks": {
@@ -166,6 +199,31 @@
       "type": "corpse_item_use_sequential_fivebox_unknown",
       "status": "needs_live_test",
       "note": "《测试容器》（3123）在本版本目标为菲拉斯铁鬃熊/长牙奔跑者。公开玩家资料对同一尸体多角色使用存在‘需近乎同时使用、尸体会消失’的提示，不能套用通用尸体操作经验。首具尸体必须测试五号顺序使用；若不能依次推进，立即跳过《测试容器》（3123）及后续灵魂容器链。"
+    },
+    "11606": {
+      "type": "object_pickup_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《耐心是我们不需要的美德》军需箱五号不共享，同一个军需箱只能一个角色拾取；五号必须分别拾取，以最低角色15/15为离开条件。"
+    },
+    "11611": {
+      "type": "object_release_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《被掠走的苦工》蛛网释放苦工的任务进度五号共享；主控释放即可同步推进全队，不需要五号分别点蛛网。"
+    },
+    "11602": {
+      "type": "object_destroy_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《切断虫源》摧毁尼鲁巴尔蛛卵簇的进度五号共享；只需主控沿四虫孔路线摧毁，其他角色无需分别操作。"
+    },
+    "11676": {
+      "type": "object_release_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《慈悲为怀》释放天灾囚犯的数量进度五号共享；主控拿到牢笼钥匙后开笼即可同步推进全队，其他四号无需分别开同一批囚笼。"
+    },
+    "11717_11724_spatial_overlap": {
+      "type": "dense_kill_area_overlaps_item_start_object",
+      "status": "user_confirmed",
+      "note": "《授粉的巨蛾》的血孢巨蛾在《巨大的蛾卵》固定蛋附近非常集中。路线应在蛋旁完成巨蛾花粉后当场点击巨蛋接《巨大的蛾卵》，一次返回劳莉丝同时交付，不能把巨蛋继续拖到迦莫斯洞穴之后再单独爬山。"
     }
   }
 }
