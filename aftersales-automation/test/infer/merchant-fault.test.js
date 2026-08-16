@@ -41,16 +41,34 @@ describe('P0-1: MERCHANT_FAULT_REASONS 包含"质量问题"', () => {
     assert.ok(result.reason.includes('商责'));
   });
 
-  it('afterSaleReason="卖家发错货" → escalate 商责，禁止自动同意退款', () => {
+  it('afterSaleReason="卖家发错货"的退货申请 → 推荐人工拒绝退货，禁止自动执行', () => {
     const fixture = loadFixture('fb-1778868858729.json');
     fixture.queueItem.type = '退货退款';
     fixture.collectedData.ticket.afterSaleReason = '卖家发错货';
+    fixture.collectedData.platformStage = { raw: '商家-待处理' };
     const sim = makeSim(fixture);
     const result = inferDecision(sim, fixture.queueItem);
 
-    assert.equal(result.action, 'escalate');
+    assert.equal(result.action, 'reject');
+    assert.equal(result.recommendedActionLabel, '拒绝退货');
+    assert.equal(result.humanTriggeredExecutionAllowed, false);
     assert.ok(result.reason.includes('商责'), `reason 应含"商责"，实际: ${result.reason}`);
     assert.ok(result.reason.includes('卖家发错货'), `reason 应含原始售后原因，实际: ${result.reason}`);
+  });
+
+  it('afterSaleReason="瑕疵" → 识别为商责，不得落入普通无单号兜底', () => {
+    const fixture = loadFixture('fb-1778868858729.json');
+    fixture.queueItem.type = '退货退款';
+    fixture.collectedData.ticket.afterSaleReason = '瑕疵';
+    delete fixture.collectedData.ticket.returnTracking;
+    fixture.collectedData.erpAftersale = null;
+    fixture.collectedData.platformStage = { raw: '商家-待处理' };
+    const result = inferDecision(makeSim(fixture), fixture.queueItem);
+
+    assert.equal(result.action, 'reject');
+    assert.equal(result.recommendedActionLabel, '拒绝退货');
+    assert.ok(result.reason.includes('商责退货申请'));
+    assert.ok(!result.reason.includes('退货退款无快递单号，售后原因'));
   });
 
   it('afterSaleReason="七天无理由退货" → 不被误判为商责', () => {

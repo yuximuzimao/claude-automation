@@ -182,6 +182,10 @@ const BRANCHES = Object.freeze({
     label: '商责退货退款 / 退回核验异常或无单号 / 人工确认',
     automationStatus: 'manual_only',
   },
+  'merchant_fault.refund_return.application.manual_reject': {
+    label: '商责退货申请 / 尚无退货单号 / 优先建议人工拒绝退货',
+    automationStatus: 'manual_only',
+  },
   'merchant_fault.exchange.exact.manual_approve': {
     label: '商责换货 / 有退货单号 / 精确退回 / 推荐人工同意换货',
     automationStatus: 'manual_only',
@@ -212,6 +216,7 @@ const RULE_BRANCHES = Object.freeze({
   '商责退货退款核验通过→推荐人工同意退款': 'merchant_fault.refund_return.exact.manual_approve',
   '商责退货退款退回核验异常→人工确认': 'merchant_fault.refund_return.review.manual',
   '商责退货退款无退货单号→人工处理': 'merchant_fault.refund_return.review.manual',
+  '商责退货申请无单号→优先推荐人工拒绝退货': 'merchant_fault.refund_return.application.manual_reject',
   '商责换货退回核验通过→推荐人工同意换货': 'merchant_fault.exchange.exact.manual_approve',
   '商责换货退回核验异常→人工确认': 'merchant_fault.exchange.review.manual',
   '商责换货无退货单号→人工处理': 'merchant_fault.exchange.review.manual',
@@ -323,6 +328,7 @@ function classifySimulation(simulation, queueItem = {}) {
     merchant_refund_return_exact: 'merchant_fault.refund_return.exact.manual_approve',
     merchant_refund_return_review: 'merchant_fault.refund_return.review.manual',
     merchant_refund_return_no_tracking: 'merchant_fault.refund_return.review.manual',
+    merchant_refund_return_application_reject: 'merchant_fault.refund_return.application.manual_reject',
     merchant_exchange_return_exact: 'merchant_fault.exchange.exact.manual_approve',
     merchant_exchange_return_review: 'merchant_fault.exchange.review.manual',
     merchant_exchange_no_tracking: 'merchant_fault.exchange.review.manual',

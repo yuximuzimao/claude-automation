@@ -190,6 +190,19 @@ function summarizeReceivedReturnItems(cd) {
   }).join('、');
 }
 
+function merchantReturnApplicationRejectionGuidance(afterSaleReason, buyerRemark, imageCount) {
+  const reason = String(afterSaleReason || '').trim();
+  const remark = String(buyerRemark || '').trim();
+  const hasImages = Number(imageCount) > 0;
+  if (reason.includes('瑕疵') && /试用|不适合|不喜欢|不太适合/.test(remark)) {
+    return `客户说明偏向试用后的个人感受，未具体描述瑕疵点；请核对${hasImages ? '售后图片能否清晰证明具体瑕疵' : '客户是否能补充具体瑕疵凭证'}，不能证明时可按“商责主张与说明不一致、凭证不足”方向拒绝`;
+  }
+  if ((reason.includes('质量') || reason.includes('瑕疵')) && /过敏|不适|刺痛|发红/.test(remark)) {
+    return `客户仅描述个体使用后的不适反应，暂不能直接证明商品存在质量问题；请核对${hasImages ? '图片及其他凭证是否能证明产品本身异常' : '是否有能证明产品本身异常的凭证'}，不能证明时可按“未证明商品质量责任”方向拒绝`;
+  }
+  return `围绕客户主张是否具体、售后说明是否与所选商责原因一致、${hasImages ? '图片能否直接证明商品责任' : '是否缺少能证明商品责任的凭证'}进行核实；无法证明商责时优先拒绝退货`;
+}
+
 function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFault }) {
   const type = queueItem.type;
   const isExchange = type === '换货';
@@ -209,6 +222,71 @@ function inferManualReturnReview({ cd, ticket, queueItem, s, fin, isMerchantFaul
   s({ type: 'read', label: '退货快递单号', value: ticket.returnTracking || '无' });
 
   if (!ticket.returnTracking) {
+    const rawPlatformStage = cd.platformStage && cd.platformStage.raw
+      ? String(cd.platformStage.raw)
+      : '';
+    if (isMerchantFault && !isExchange && rawPlatformStage === '商家-待处理') {
+      const merchantReason = ticket.afterSaleReason || '未知';
+      const platformStage = rawPlatformStage;
+      const buyerRemark = String(ticket.buyerRemark || '').trim();
+      const imageCount = Number(ticket.imageCount) || 0;
+      const customerClaimsReturned = /寄回|退回|寄出/.test(buyerRemark);
+      const rejectionGuidance = merchantReturnApplicationRejectionGuidance(
+        merchantReason,
+        buyerRemark,
+        imageCount,
+      );
+      s({ type: 'read', label: '平台阶段', value: platformStage });
+      s({ type: 'read', label: '客户商责主张', value: merchantReason });
+      s({ type: 'read', label: '售后说明', value: buyerRemark || '无' });
+      s({ type: 'read', label: '售后图片', value: imageCount ? `${imageCount}张（内容需人工核实）` : '无' });
+      s({ type: 'read', label: '建议拒绝方向', value: rejectionGuidance });
+      s({ type: 'branch', text: '商责退货申请尚无退货单号 → 优先推荐人工拒绝退货；确认确属商责且无法合理拒绝时才同意退货' });
+      return fin({
+        action: 'reject',
+        reason: `【商责退货申请｜只推荐不执行】客户以「${merchantReason}」申请退货，当前处于「${platformStage}」且尚无退货单号；客户需先获商家同意才能填写单号，因此无单号属于正常申请阶段。优先建议拒绝退货，请人工根据客户填写内容寻找合理拒绝理由。拒绝方向：${rejectionGuidance}。只有核实确属商责且无法合理拒绝时才同意退货。`,
+        confidence: 'high',
+        requiresHumanReview: true,
+        autoExecutionBlocked: true,
+        humanTriggeredExecutionAllowed: false,
+        manualReviewKind: 'merchant_refund_return_application_reject',
+        manualReviewReasons: ['商责', '退货申请'],
+        recommendedActionLabel: '拒绝退货',
+        manualRejectionGuidance: rejectionGuidance,
+        reasonCode: 'MERCHANT_RETURN_APPLICATION_REVIEW',
+        rulesApplied: [{
+          doc: 'flow-5.1',
+          section: '商责退货申请阶段',
+          summary: '商责退货申请无单号→优先推荐人工拒绝退货',
+        }],
+        warnings: [
+          '⚠️ 仅推荐拒绝退货，不提供系统执行；请人工根据客户填写的原因寻找平台可成立的拒绝理由',
+          `建议拒绝方向：${rejectionGuidance}`,
+          '客户选择商责原因不等于商责已经确认；请人工核实售后凭证',
+          '只有确认确属商责且无法合理拒绝时，才改为同意退货',
+          ...(imageCount ? [`售后图片共${imageCount}张：系统只记录数量，不判断图片内容`] : []),
+          ...(customerClaimsReturned ? ['客户说明提到已寄回，但平台尚未授权退货且无退货单号，请核实是否为私下寄回'] : []),
+        ],
+      });
+    }
+    if (isMerchantFault && !isExchange) {
+      const stageLabel = rawPlatformStage || '未读取';
+      s({ type: 'read', label: '平台阶段', value: stageLabel });
+      s({ type: 'branch', text: '商责退货退款无退货单号，但无法确认仍处于商家待处理的申请阶段 → 人工确认流程阶段' });
+      return fin(escalate(`【商责退货退款｜流程阶段待确认】当前平台阶段「${stageLabel}」且无退货单号，无法确认这是待审核的退货申请还是后续流程异常；请先人工确认平台阶段，再判断拒绝或同意退货。`, {
+        requiresHumanReview: true,
+        autoExecutionBlocked: true,
+        humanTriggeredExecutionAllowed: false,
+        manualReviewKind: 'merchant_refund_return_no_tracking',
+        manualReviewReasons: ['商责'],
+        rulesApplied: [{
+          doc: 'flow-5.1',
+          section: '商责退货申请阶段',
+          summary: '商责退货退款无退货单号→人工处理',
+        }],
+        warnings: ['平台阶段不是明确的「商家-待处理」，不能套用退货申请优先拒绝规则'],
+      }));
+    }
     if (isMerchantFault && isExchange) {
       const merchantReason = ticket.afterSaleReason || '未知';
       s({ type: 'branch', text: `客户申请「${merchantReason}」退货，尚未提供退货单号 → 人工核实商责情况` });
@@ -1382,8 +1460,13 @@ function inferDecision(sim, queueItem) {
     s({ type: 'check', condition: '解析评价指令', result: hintAction ? `→ ${hintAction}` : '未识别' });
     if (hintAction) {
       s({ type: 'branch', text: `执行评价指令覆盖 → ${hintAction}` });
+      const hintedMerchantFault = MERCHANT_FAULT_REASONS.some(kw => String(ticket.afterSaleReason || '').includes(kw));
+      const merchantReturnApplication = hintedMerchantFault
+        && type === '退货退款'
+        && !String(ticket.returnTracking || '').trim()
+        && String(cd.platformStage && cd.platformStage.raw || '') === '商家-待处理';
       const constrainedReasons = [
-        ...(MERCHANT_FAULT_REASONS.some(kw => String(ticket.afterSaleReason || '').includes(kw)) ? ['商责'] : []),
+        ...(hintedMerchantFault ? ['商责'] : []),
         ...(type === '换货' ? ['换货'] : []),
       ];
       const hintedDecision = {
@@ -1397,13 +1480,19 @@ function inferDecision(sim, queueItem) {
       if (constrainedReasons.length) {
         hintedDecision.requiresHumanReview = true;
         hintedDecision.autoExecutionBlocked = true;
-        hintedDecision.humanTriggeredExecutionAllowed = hintAction === 'approve' || hintAction === 'reject';
+        hintedDecision.humanTriggeredExecutionAllowed = merchantReturnApplication
+          ? false
+          : hintAction === 'approve' || hintAction === 'reject';
         hintedDecision.manualReviewReasons = constrainedReasons;
-        hintedDecision.recommendedActionLabel = type === '换货' && hintAction === 'approve'
-          ? '同意换货'
-          : (type === '换货' && hintAction === 'reject' ? '拒绝换货' : undefined);
+        hintedDecision.recommendedActionLabel = merchantReturnApplication
+          ? ({ approve: '同意退货', reject: '拒绝退货', escalate: '人工判断' }[hintAction])
+          : (type === '换货' && hintAction === 'approve'
+              ? '同意换货'
+              : (type === '换货' && hintAction === 'reject' ? '拒绝换货' : undefined));
         hintedDecision.warnings = [
-          `⚠️ ${constrainedReasons.join('+')}工单禁止无人自动执行；当前动作只能由人工确认后触发`,
+          merchantReturnApplication
+            ? '⚠️ 商责退货申请只记录推荐，不提供系统执行；请人工在平台核实原因后操作'
+            : `⚠️ ${constrainedReasons.join('+')}工单禁止无人自动执行；当前动作只能由人工确认后触发`,
           ...(type === '换货' ? ['请确认正确商品是否已提前补发/换出，避免再次生成发货单'] : []),
         ];
       }

@@ -54,6 +54,7 @@ const MERCHANT_FAULT_REASONS = [
   '卖家发错货',
   '商品与描述不符',
   '质量问题',
+  '瑕疵',
 ];
 
 // 自动扫描时间点（server.js 和 pipeline.js 共用）
