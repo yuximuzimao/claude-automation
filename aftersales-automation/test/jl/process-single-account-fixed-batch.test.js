@@ -11,6 +11,8 @@ const {
   createWaitForPage,
   createCircuitReader,
   createAutoExecutionGate,
+  buildMissingWaitingRescanProcessed,
+  createReconcileWaitingRescanAbsences,
   loadDefaultDependencies,
   resolveSharedReturnGroupForBatch,
   locateWorkOrderOnFreshList,
@@ -34,6 +36,90 @@ const { resolveSharedReturnGroup } = require('../../lib/return-tracking-group');
 
 const ORDER_1 = '100001781188621717210';
 const ORDER_2 = '100001781188621717211';
+
+test('完整48小时清单缺失的自动等待重查项转待确认，不按扫描间隔判逾期', async () => {
+  const missingOrder = '100001781188621717212';
+  const otherAccountOrder = '100001781188621717213';
+  const manuallyWaitingOrder = '100001781188621717214';
+  const queue = {
+    items: [
+      { id: 'q-present', workOrderNum: ORDER_1, accountNum: '3', mode: 'live', status: 'waiting', waitingRescan: true },
+      { id: 'q-missing', workOrderNum: missingOrder, accountNum: 3, mode: 'live', status: 'waiting', waitingRescan: true, type: '退货退款' },
+      { id: 'q-other', workOrderNum: otherAccountOrder, accountNum: '4', mode: 'live', status: 'waiting', waitingRescan: true },
+      { id: 'q-manual', workOrderNum: manuallyWaitingOrder, accountNum: '3', mode: 'live', status: 'waiting', waitingRescan: false },
+    ],
+  };
+  const previousSimulation = {
+    id: 'sim-previous',
+    queueItemId: 'q-missing',
+    collectedData: {
+      ticket: { workOrderNum: missingOrder, type: '退货退款', returnTracking: 'YT1234567890123' },
+      erpAftersale: { rows: [] },
+    },
+    decision: { action: 'reject', waitingRescan: true },
+  };
+  const simulations = [previousSimulation];
+  const db = {
+    readQueue: () => queue,
+    readSimulations: () => simulations,
+    appendSimulation: simulation => simulations.push(simulation),
+    updateQueueItem: (id, patch) => {
+      const item = queue.items.find(candidate => candidate.id === id);
+      if (!item) return null;
+      Object.assign(item, patch);
+      return item;
+    },
+  };
+  const reconcile = createReconcileWaitingRescanAbsences(db);
+  const observedAt = '2026-08-15T00:00:00.000Z';
+  const result = await reconcile({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    snapshot: [{ workOrderNum: ORDER_1 }],
+    observedAt,
+  });
+
+  assert.equal(result.length, 1);
+  assert.equal(result[0].workOrderNum, missingOrder);
+  assert.equal(queue.items.find(item => item.id === 'q-missing').status, 'simulated');
+  assert.equal(queue.items.find(item => item.id === 'q-missing').waitingRescan, false);
+  assert.equal(queue.items.find(item => item.id === 'q-present').status, 'waiting');
+  assert.equal(queue.items.find(item => item.id === 'q-other').status, 'waiting');
+  assert.equal(queue.items.find(item => item.id === 'q-manual').status, 'waiting');
+
+  const anomaly = simulations.at(-1);
+  assert.equal(anomaly.source, 'waiting_rescan_missing');
+  assert.equal(anomaly.decision.action, 'escalate');
+  assert.equal(anomaly.decision.reasonCode, 'WAITING_RESCAN_MISSING_FROM_48H_LIST');
+  assert.equal(anomaly.decision.humanTriggeredExecutionAllowed, false);
+  assert.equal(anomaly.collectedData.ticket.returnTracking, 'YT1234567890123');
+  assert.deepEqual(anomaly.collectedData.erpAftersale, { rows: [] });
+  assert.deepEqual(anomaly.collectedData.waitingRescanAbsence, {
+    observedAt,
+    source: 'fixed_batch_48h_reconciliation',
+    previousSimulationId: 'sim-previous',
+  });
+
+  const second = await reconcile({
+    account: { accountNum: '3', matchedNote: '测试店铺' },
+    snapshot: [{ workOrderNum: ORDER_1 }],
+    observedAt: '2026-08-15T08:00:00.000Z',
+  });
+  assert.deepEqual(second, []);
+  assert.equal(simulations.length, 2);
+});
+
+test('等待重查缺失结果明确表示无法确认平台终态', () => {
+  const processed = buildMissingWaitingRescanProcessed(
+    { id: 'q-1', workOrderNum: ORDER_1 },
+    null,
+    '2026-08-15T00:00:00.000Z'
+  );
+  assert.equal(processed.status, 'simulated');
+  assert.match(processed.decision.reason, /未出现于本次完整48小时清单/);
+  assert.match(processed.decision.warnings.join('；'), /不能据此推断工单已关闭/);
+  assert.equal(processed.decision.requiresHumanReview, true);
+  assert.equal(processed.decision.autoExecutionBlocked, true);
+});
 
 function page(currentPage, tickets, options = {}) {
   return {
@@ -1264,12 +1350,17 @@ test('空清单直接返回成功，不打开工单、不读取首页提醒', as
 });
 
 test('首次48小时清单未完整读取时拒绝冻结和处理', async () => {
+  let reconciled = false;
   const fixture = batchDependencies({
     prepareAfterSaleList: async () => ({
       success: true,
       targetId: 'list-tab',
       list: { urgent: [{ workOrderNum: ORDER_1 }], totalCount: 21, complete: false, stopReason: '达到最大页数' },
     }),
+    reconcileWaitingRescanAbsences: async () => {
+      reconciled = true;
+      return [];
+    },
   });
 
   await assert.rejects(
@@ -1277,6 +1368,7 @@ test('首次48小时清单未完整读取时拒绝冻结和处理', async () => 
     /48小时清单读取不完整/
   );
   assert.equal(fixture.calls.some(call => call[0] === 'open'), false);
+  assert.equal(reconciled, false);
 });
 
 test('首次清单缺少有效totalCount时拒绝冻结', async () => {
@@ -1388,6 +1480,7 @@ test('默认依赖装配真实target-aware采集器，不走旧collect或pipelin
   assert.equal(typeof dependencies.collectDetail, 'function');
   assert.equal(typeof dependencies.resolveErpTargetId, 'function');
   assert.equal(typeof dependencies.resolveSharedReturnGroup, 'function');
+  assert.equal(typeof dependencies.reconcileWaitingRescanAbsences, 'function');
   assert.doesNotMatch(String(dependencies.collectDetail), /尚未接通/);
   assert.doesNotMatch(source, /require\(['"]\.\.\/\.\.\/collect\.js['"]\)/);
   assert.doesNotMatch(source, /require\(['"].*pipeline['"]\)/);
