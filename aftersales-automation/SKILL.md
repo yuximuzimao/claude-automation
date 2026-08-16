@@ -279,6 +279,7 @@ scripts/jl-steps/13-open-single-account-work-order.js
 scripts/jl-steps/14-process-single-account-fixed-batch.js
 docs/INDEX.md
 docs/automation-policy.md
+docs/superpowers/archive/
 public/app.js
 public/account-relogin-state.js
 public/index.html
