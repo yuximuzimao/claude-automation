@@ -78,6 +78,19 @@ def test_new_product_dimensions_are_bound_only_to_confirmed_codes(catalog):
     assert catalog.product("旧版糖果未知编码") is None
 
 
+def test_unmapped_fig_jelly_dimensions_and_original_carton_are_preserved(catalog):
+    record = next(
+        item for item in catalog.pending_mappings if item["label"] == "无花果果冻"
+    )
+
+    assert record["dimensionsMm"] == "136 × 87 × 41"
+    assert record["originalCartonCapacity"] == "64"
+    assert record["originalCartonDimensionsMm"] == "363 × 348 × 290"
+    assert record["confirmedArrangement"] == "4 × 8 × 2"
+    assert record["confirmedItemOrientationMm"] == "87 × 41 × 136"
+    assert record["missingField"] == "brandId,merchantCode"
+
+
 def test_black_tea_dimension_is_marked_as_carton_derived(catalog):
     jasmine = catalog.product(BLACK_TEA_JASMINE_CODE)
     puer = catalog.product(BLACK_TEA_PUER_CODE)
