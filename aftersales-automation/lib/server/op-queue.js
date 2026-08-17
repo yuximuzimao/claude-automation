@@ -16,6 +16,7 @@ const { extractShippedTrackings, createReminder } = require('../helpers');
 const { expireStaleAlerts } = require('../jl/alerts');
 const { getTicketPlatformStage } = require('../after-sales-platform-stage');
 const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
+const scanHud = require('./scan-hud');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -270,6 +271,62 @@ function isRunning() { return !!running; }
 
 function broadcast() { sse.broadcast('op-queue-update', getState()); }
 
+function updateScanHud(op, patch) {
+  const sessionId = op && op._scanHudSessionId;
+  if (!sessionId) return false;
+  try {
+    return scanHud.updateSession(sessionId, patch);
+  } catch (e) {
+    log(`[scan-hud] 状态更新失败: ${e.message}`);
+    return false;
+  }
+}
+
+function finishScanHud(op, outcome, payload = {}) {
+  try {
+    const sessionId = op && op._scanHudSessionId;
+    if (!sessionId) return;
+    const result = payload.result || {};
+    const error = payload.error;
+    const accountErrors = Number(result.accountErrors || 0);
+    const processedTickets = Number(result.processedTickets || 0);
+    const scanned = Number(result.scanned || 0);
+
+    if (outcome === 'cancelled') {
+      scanHud.finishSession(sessionId, {
+        phase: 'cancelled',
+        status: '本轮自动扫描已停止',
+        error: error ? String(error.message || error).slice(0, 160) : null,
+      });
+      return;
+    }
+
+    if (outcome === 'error') {
+      scanHud.finishSession(sessionId, {
+        phase: 'error',
+        status: '本轮自动扫描因异常结束',
+        error: error ? String(error.message || error).slice(0, 160) : '未知异常',
+      });
+      return;
+    }
+
+    scanHud.finishSession(sessionId, {
+      phase: accountErrors > 0 ? 'completed_with_errors' : 'done',
+      status: accountErrors > 0
+        ? `扫描完成，${accountErrors} 个店铺出现异常`
+        : '本轮工单自动扫描已完成',
+      shopIndex: scanned,
+      shopTotal: scanned,
+      remainingShops: 0,
+      processedTickets,
+      accountErrors,
+      error: null,
+    });
+  } catch (e) {
+    log(`[scan-hud] 状态窗收尾失败: ${e.message}`);
+  }
+}
+
 function processNext() {
   if (running || paused) return;
   const next = queue.find(op => op.status === 'queued');
@@ -279,13 +336,16 @@ function processNext() {
   log(`开始 [${next.id}] ${next.label}`); broadcast();
   executeOp(next).then(result => {
     next.status = 'done'; next.result = result; next.doneAt = new Date().toISOString();
+    finishScanHud(next, 'done', { result });
     log(`完成 [${next.id}] ${next.label}`);
   }).catch(e => {
     if (e.name === 'AbortError' || (e.message || '').includes('操作已被用户停止')) {
       next.status = 'cancelled'; next.result = { error: '操作已被用户停止' }; next.doneAt = new Date().toISOString();
+      finishScanHud(next, 'cancelled', { error: e });
       log(`已停止 [${next.id}] ${next.label}`);
     } else {
       next.status = 'error'; next.result = { error: e.message }; next.doneAt = new Date().toISOString();
+      finishScanHud(next, 'error', { error: e });
       if (next.type === 'execute' && next.params && next.params.simId) {
         try { db.updateSimulation(next.params.simId, { executeError: e.message }); } catch {}
       }
@@ -520,6 +580,23 @@ async function execScan(op) {
   const { accounts: specifiedAccounts = [] } = op.params;
   const scanReminderState = createScanReminderState();
 
+  if (op.label === '定时扫描工单') {
+    try {
+      const hud = scanHud.createSession({ countdownSeconds: 10 });
+      op._scanHudSessionId = hud.sessionId;
+      log('定时扫描状态窗已启动，10 秒后开始浏览器操作');
+    } catch (e) {
+      log(`[scan-hud] 状态窗启动失败: ${e.message}`);
+    }
+    await scanHud.wait(10000);
+    assertNotAborted(op);
+    updateScanHud(op, {
+      phase: 'running',
+      status: '正在准备自动扫描',
+      detail: '即将开始操作鲸灵和快麦 ERP。',
+    });
+  }
+
   const ACCOUNTS_FILE = path.join(SESSIONS_DIR, 'accounts.json');
   let accountsConfig = {};
   try { accountsConfig = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8')); } catch(e) {}
@@ -540,6 +617,23 @@ async function execScan(op) {
 
   const { processSingleAccountFixedBatch } = require('../../scripts/jl-steps/14-process-single-account-fixed-batch');
   const total = numsToScan.length;
+  let accountErrors = 0;
+  const processedTicketKeys = new Set();
+
+  updateScanHud(op, {
+    phase: 'running',
+    status: total > 0 ? '正在刷新快麦 ERP' : '没有需要扫描的店铺',
+    detail: total > 0 ? '扫描开始前正在校验 ERP 页面状态。' : '本轮没有启用且登录正常的店铺。',
+    shopIndex: 0,
+    shopTotal: total,
+    remainingShops: total,
+    shopName: null,
+    ticketIndex: 0,
+    ticketTotal: 0,
+    workOrderNum: null,
+    processedTickets: 0,
+    accountErrors: 0,
+  });
 
   // ERP 的隐性异常无法仅靠 DOM 提前识别：页面和控件可能看似正常，但查询链路已失效。
   // 因此整轮扫描开始前无条件刷新一次；后续检查只证明登录和基础控件已重新挂载。
@@ -569,6 +663,25 @@ async function execScan(op) {
     const num = numsToScan[i];
     const cfg = accountsConfig[String(num)] || {};
     const note = cfg.note || cfg.name || `账号${num}`;
+    const ticketOrder = [];
+    const ticketIndexByWorkOrder = new Map();
+    let activeWorkOrderNum = null;
+
+    updateScanHud(op, {
+      phase: 'running',
+      status: `正在切换到 ${note} 店铺`,
+      detail: '正在打开店铺并读取 48 小时待处理工单清单。',
+      shopIndex: i + 1,
+      shopTotal: total,
+      remainingShops: total - i - 1,
+      shopName: note,
+      ticketIndex: 0,
+      ticketTotal: 0,
+      workOrderNum: null,
+      processedTickets: processedTicketKeys.size,
+      accountErrors,
+      error: null,
+    });
 
     sse.broadcast('scan-progress', { type: 'start', num, note, current: i + 1, total });
     try {
@@ -582,13 +695,88 @@ async function execScan(op) {
             workOrderNum: item.workOrderNum,
             status: item.status,
           });
+
+          const workOrderNum = item && item.workOrderNum ? String(item.workOrderNum) : '';
+          if (!workOrderNum) return;
+
+          if (item.status === 'pending' && !ticketIndexByWorkOrder.has(workOrderNum)) {
+            ticketOrder.push(workOrderNum);
+            ticketIndexByWorkOrder.set(workOrderNum, ticketOrder.length);
+            return;
+          }
+
+          if (item.status === 'processing') {
+            if (!ticketIndexByWorkOrder.has(workOrderNum)) {
+              ticketOrder.push(workOrderNum);
+              ticketIndexByWorkOrder.set(workOrderNum, ticketOrder.length);
+            }
+            activeWorkOrderNum = workOrderNum;
+            processedTicketKeys.add(`${num}:${workOrderNum}`);
+            updateScanHud(op, {
+              status: `正在处理 ${note} 店铺工单`,
+              detail: '正在读取工单、查询 ERP 并判断处理方式。',
+              shopIndex: i + 1,
+              shopTotal: total,
+              remainingShops: total - i - 1,
+              shopName: note,
+              ticketIndex: ticketIndexByWorkOrder.get(workOrderNum),
+              ticketTotal: ticketOrder.length,
+              workOrderNum,
+              processedTickets: processedTicketKeys.size,
+              accountErrors,
+              error: null,
+            });
+            return;
+          }
+
+          if (workOrderNum === activeWorkOrderNum && ticketIndexByWorkOrder.has(workOrderNum)) {
+            const statusText = item.status === 'failed'
+              ? '当前工单处理异常'
+              : item.status === 'waiting'
+                ? '当前工单等待后续重查'
+                : item.status === 'auto_executed'
+                  ? '当前工单已自动处理'
+                  : '当前工单处理完成';
+            updateScanHud(op, {
+              status: statusText,
+              ticketIndex: ticketIndexByWorkOrder.get(workOrderNum),
+              ticketTotal: ticketOrder.length,
+              workOrderNum,
+              processedTickets: processedTicketKeys.size,
+              accountErrors,
+              error: item.error ? String(item.error).slice(0, 160) : null,
+            });
+          }
         },
       });
       updateScanReminderState(scanReminderState, result && result.items, getInterceptMark);
-      const count = (result && result.items ? result.items.length : null);
+      const count = (result && result.items ? result.items.length : 0);
       updateAccountStatus(num, { status: 'ok', lastScan: new Date().toISOString(), note });
       sse.broadcast('scan-progress', { type: 'done', num, note, count });
+      updateScanHud(op, {
+        status: `${note} 店铺处理完成`,
+        detail: i < total - 1 ? '10 秒后切换下一个店铺。' : '正在完成本轮扫描汇总。',
+        shopIndex: i + 1,
+        shopTotal: total,
+        remainingShops: total - i - 1,
+        shopName: note,
+        ticketIndex: ticketOrder.length,
+        ticketTotal: ticketOrder.length,
+        workOrderNum: null,
+        processedTickets: processedTicketKeys.size,
+        accountErrors,
+        error: null,
+      });
     } catch(e) {
+      if (e.name === 'AbortError' || (e.message || '').includes('操作已被用户停止')) {
+        updateScanHud(op, {
+          status: '正在停止自动扫描',
+          detail: '已收到停止指令，正在结束当前扫描。',
+          error: null,
+        });
+        throw e;
+      }
+      accountErrors++;
       updateScanReminderState(scanReminderState, e.batch && e.batch.items, getInterceptMark);
       const isExpired = /登录已失效|login|sso|鲸灵标签页未找到/.test(e.message || '');
       updateAccountStatus(num, {
@@ -598,6 +786,17 @@ async function execScan(op) {
         note,
       });
       sse.broadcast('scan-progress', { type: 'error', num, note, error: (e.message || '').slice(0, 100) });
+      updateScanHud(op, {
+        status: `${note} 店铺处理异常`,
+        detail: i < total - 1 ? '已记录异常，10 秒后继续下一个店铺。' : '已记录异常，正在完成本轮扫描汇总。',
+        shopIndex: i + 1,
+        shopTotal: total,
+        remainingShops: total - i - 1,
+        shopName: note,
+        processedTickets: processedTicketKeys.size,
+        accountErrors,
+        error: String(e.message || '未知异常').slice(0, 160),
+      });
       console.error(`[execScan] 账号${num} 失败:`, e.message);
     }
 
@@ -606,6 +805,21 @@ async function execScan(op) {
       await new Promise(r => setTimeout(r, 10000));
     }
   }
+
+  updateScanHud(op, {
+    status: '正在完成本轮扫描汇总',
+    detail: accountErrors > 0 ? `本轮有 ${accountErrors} 个店铺出现异常。` : '所有店铺扫描步骤已结束。',
+    shopIndex: total,
+    shopTotal: total,
+    remainingShops: 0,
+    shopName: null,
+    ticketIndex: 0,
+    ticketTotal: 0,
+    workOrderNum: null,
+    processedTickets: processedTicketKeys.size,
+    accountErrors,
+    error: null,
+  });
 
   const summaryReminderResults = sendScanSummaryReminders(scanReminderState);
   if (summaryReminderResults.some(result => !result)) {
@@ -632,7 +846,12 @@ async function execScan(op) {
   // 扫描完成后清过期的平台提醒（未扫描账号超过 24h → 清空）
   expireStaleAlerts(numsToScan);
 
-  return { ok: true, scanned: total };
+  return {
+    ok: true,
+    scanned: total,
+    accountErrors,
+    processedTickets: processedTicketKeys.size,
+  };
 }
 
 // ── 拦截记录清理 ─────────────────────────────────────────────────

@@ -91,5 +91,5 @@ legacy `collect.js` / `scan-all.js` / 旧 pipeline 文件仍保留，但不作�
 | [docs/ops-jingling.md](docs/ops-jingling.md) | 鲸灵页面、CDP、备注与账号 Session |
 | [docs/ops-erp.md](docs/ops-erp.md) | ERP 导航、登录恢复、物流弹窗与凭证上传 |
 | [docs/ops-testing.md](docs/ops-testing.md) | CLI 与采集链路的分步测试规范 |
-| [docs/ops-queue.md](docs/ops-queue.md) | 队列紧急停止、验证与恢复 |
+| [docs/ops-queue.md](docs/ops-queue.md) | 队列停止恢复、验证与定时扫描状态窗 |
 | [历史设计归档](docs/superpowers/archive/README.md) | 已完成设计、计划与阶段交接，仅供追溯，不作为当前实施依据 |
