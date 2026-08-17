@@ -29,6 +29,7 @@ BLACK_TEA_JASMINE_CODE = "6979499760044"
 BLACK_TEA_PUER_CODE = "6979265440002"
 BLACK_TEA_TRIAL_JASMINE_CODE = "6979499760099"
 BLACK_TEA_TRIAL_PUER_CODE = "6979265440019"
+FIG_JELLY_CODE = "6980319670009"
 
 
 @pytest.fixture(scope="module")
@@ -78,17 +79,28 @@ def test_new_product_dimensions_are_bound_only_to_confirmed_codes(catalog):
     assert catalog.product("旧版糖果未知编码") is None
 
 
-def test_unmapped_fig_jelly_dimensions_and_original_carton_are_preserved(catalog):
-    record = next(
-        item for item in catalog.pending_mappings if item["label"] == "无花果果冻"
-    )
+def test_fig_jelly_inventory_result_is_mapped_to_dimensions_and_original_carton(
+    catalog,
+):
+    product = catalog.product(FIG_JELLY_CODE)
+    original = catalog.original_carton("original-fig-jelly-64")
+    arrangement = original.confirmed_arrangement
 
-    assert record["dimensionsMm"] == "136 × 87 × 41"
-    assert record["originalCartonCapacity"] == "64"
-    assert record["originalCartonDimensionsMm"] == "363 × 348 × 290"
-    assert record["confirmedArrangement"] == "4 × 8 × 2"
-    assert record["confirmedItemOrientationMm"] == "87 × 41 × 136"
-    assert record["missingField"] == "brandId,merchantCode"
+    assert product is not None
+    assert product.display_name == "KGOS无花果果冻"
+    assert product.brand_id == "kgos"
+    assert product.dimensions == DimensionsMm(136, 87, 41)
+    assert product.dimension_source.value == "user_provided"
+    assert original.dimensions == DimensionsMm(363, 348, 290)
+    assert original.capacity == 64
+    assert original.accepts_closed_unit({FIG_JELLY_CODE: 64})
+    assert not original.accepts_closed_unit({FIG_JELLY_CODE: 63})
+    assert arrangement is not None
+    assert arrangement.grid == (4, 8, 2)
+    assert arrangement.item_orientation == DimensionsMm(87, 41, 136)
+    assert arrangement.occupied_dimensions == DimensionsMm(348, 328, 272)
+    assert arrangement.occupied_dimensions.fits_inside(DimensionsMm(358, 343, 285))
+    assert all(item["label"] != "无花果果冻" for item in catalog.pending_mappings)
 
 
 def test_black_tea_dimension_is_marked_as_carton_derived(catalog):

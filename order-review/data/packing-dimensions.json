@@ -195,6 +195,16 @@
       "stackable": true
     },
     {
+      "productSpecId": "fig-jelly-regular-package",
+      "displayName": "KGOS无花果果冻",
+      "brandId": "kgos",
+      "merchantCodes": ["6980319670009"],
+      "dimensionsMm": [136, 87, 41],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
       "productSpecId": "black-tea-regular-package",
       "displayName": "黑茶正装",
       "brandId": "kgos",
@@ -339,6 +349,25 @@
       }
     },
     {
+      "cartonId": "original-fig-jelly-64",
+      "displayName": "无花果果冻原箱64盒",
+      "brandId": "kgos",
+      "capacity": 64,
+      "dimensionsMm": [363, 348, 290],
+      "dimensionType": "outer",
+      "inventoryStatus": "active",
+      "evidenceSource": "user_provided",
+      "allowedMerchantCodes": ["6980319670009"],
+      "allowMixedEligibleProducts": false,
+      "closedShippingUnit": true,
+      "allowOtherProducts": false,
+      "confirmedArrangement": {
+        "productSpecId": "fig-jelly-regular-package",
+        "grid": [4, 8, 2],
+        "itemOrientationMm": [87, 41, 136]
+      }
+    },
+    {
       "cartonId": "original-corn-chips-10",
       "displayName": "玉米片原箱10包",
       "brandId": "kgos",
@@ -427,18 +456,6 @@
       "label": "旧版糖果",
       "sharesProductSpecId": "candy-regular-package",
       "missingField": "merchantCode"
-    },
-    {
-      "label": "无花果果冻",
-      "brandId": "待确认",
-      "merchantCode": "待补",
-      "dimensionsMm": "136 × 87 × 41",
-      "dimensionSource": "user_provided",
-      "originalCartonCapacity": "64",
-      "originalCartonDimensionsMm": "363 × 348 × 290",
-      "confirmedArrangement": "4 × 8 × 2",
-      "confirmedItemOrientationMm": "87 × 41 × 136",
-      "missingField": "brandId,merchantCode"
     }
   ]
 }
