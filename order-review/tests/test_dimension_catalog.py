@@ -93,8 +93,13 @@ def test_fig_jelly_inventory_result_is_mapped_to_dimensions_and_original_carton(
     assert product.dimension_source.value == "user_provided"
     assert original.dimensions == DimensionsMm(363, 348, 290)
     assert original.capacity == 64
-    assert original.accepts_closed_unit({FIG_JELLY_CODE: 64})
-    assert not original.accepts_closed_unit({FIG_JELLY_CODE: 63})
+    assert original.minimum_shippable_quantity == 56
+    assert all(
+        original.accepts_closed_unit({FIG_JELLY_CODE: quantity})
+        for quantity in range(56, 65)
+    )
+    assert not original.accepts_closed_unit({FIG_JELLY_CODE: 55})
+    assert not original.accepts_closed_unit({FIG_JELLY_CODE: 65})
     assert arrangement is not None
     assert arrangement.grid == (4, 8, 2)
     assert arrangement.item_orientation == DimensionsMm(87, 41, 136)
@@ -173,12 +178,18 @@ def test_black_tea_eighteen_uses_confirmed_capacity_despite_three_mm_gap(catalog
     assert catalog.carton("carton-06").dimensions.height == 154
 
 
-def test_dedicated_original_cartons_reject_other_products_and_wrong_capacity(catalog):
+def test_coffee_original_carton_accepts_confirmed_54_to_60_range(catalog):
     coffee = catalog.original_carton("original-coffee-60")
 
-    assert coffee.accepts_closed_unit({COFFEE_CODE: 60})
+    assert coffee.minimum_shippable_quantity == 54
+    assert all(
+        coffee.accepts_closed_unit({COFFEE_CODE: quantity})
+        for quantity in range(54, 61)
+    )
     assert coffee.accepts_closed_unit({COFFEE_CODE: 30, COCONUT_COFFEE_CODE: 30})
-    assert not coffee.accepts_closed_unit({COFFEE_CODE: 59})
+    assert coffee.accepts_closed_unit({COFFEE_CODE: 27, COCONUT_COFFEE_CODE: 27})
+    assert not coffee.accepts_closed_unit({COFFEE_CODE: 53})
+    assert not coffee.accepts_closed_unit({COFFEE_CODE: 61})
     assert not coffee.accepts_closed_unit({COFFEE_CODE: 59, PROBIOTIC_CODE: 1})
     assert not coffee.allow_other_products
     assert coffee.closed_shipping_unit

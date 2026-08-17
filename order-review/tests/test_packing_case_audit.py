@@ -75,24 +75,54 @@ def _case(
     )
 
 
-def test_exact_coffee_capacities_and_original_carton_are_supported():
+def test_coffee_confirmed_capacity_and_partial_original_carton_are_supported():
     catalog = DimensionCatalog.load()
     three = _case(
         _source([("6977987940138", "生椰咖啡", 3)], order_number="COFFEE-3"),
         case_id="coffee-3",
+    )
+    fifty_four = _case(
+        _source([("6977987940138", "生椰咖啡", 54)], order_number="COFFEE-54"),
+        case_id="coffee-54",
     )
     sixty = _case(
         _source([("6977987940138", "生椰咖啡", 60)], order_number="COFFEE-60"),
         case_id="coffee-60",
     )
 
-    report = build_packing_case_audit([three, sixty], catalog)
+    report = build_packing_case_audit([three, fifty_four, sixty], catalog)
 
     assert [item.status for item in report.package_details] == [
         PackageEvidenceStatus.CONFIRMED_CAPACITY,
         PackageEvidenceStatus.DEDICATED_ORIGINAL,
+        PackageEvidenceStatus.DEDICATED_ORIGINAL,
     ]
-    assert report.fully_supported_order_count == 2
+    assert all(
+        "54–60件" in item.note for item in report.package_details[1:]
+    )
+    assert report.fully_supported_order_count == 3
+
+
+def test_fig_jelly_original_carton_supports_confirmed_partial_shipping_range():
+    fifty_six = _case(
+        _source([("6980319670009", "无花果果冻", 56)], order_number="FIG-56"),
+        case_id="fig-56",
+    )
+    sixty_four = _case(
+        _source([("6980319670009", "无花果果冻", 64)], order_number="FIG-64"),
+        case_id="fig-64",
+    )
+
+    report = build_packing_case_audit(
+        [fifty_six, sixty_four],
+        DimensionCatalog.load(),
+    )
+
+    assert all(
+        item.status is PackageEvidenceStatus.DEDICATED_ORIGINAL
+        for item in report.package_details
+    )
+    assert all("56–64件" in item.note for item in report.package_details)
 
 
 def test_enzyme_original_carton_supports_confirmed_partial_shipping_range():
