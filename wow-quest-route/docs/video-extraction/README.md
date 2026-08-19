@@ -21,14 +21,18 @@
 
 这些工作统一留到全部视频提取完成后的第二阶段，见`POST-EXTRACTION-PLAN.md`。
 
+当前第一阶段的完整范围是第1—53集。正序第13—53集已完成；当前回补此前未拆解的第1—12集，从第1集开始逐集处理。只有第1—53集全部完成事实提取并通过检查点校验后，才进入第二阶段。
+
 ## 2. 新对话最小读取顺序
 
 用户说“继续处理第N集”时，只读：
 
 1. `docs/video-extraction/README.md`
 2. `docs/video-extraction/CURRENT.md`
-3. 上一集的`.ai-bridge/wow-video-extraction/episode-(N-1)-extraction.md`
-4. 如需机器结构，再读上一集对应`episode-(N-1)-events.json`
+3. 常规正序/回补连续处理中读上一已处理集的`.ai-bridge/wow-video-extraction/episode-*-extraction.md`
+4. 如需机器结构，再读该集对应`episode-*-events.json`
+
+当前从正序第53集切换到回补第1集是特殊边界：第1集开始前读`episode-53-extraction.md`作为阶段恢复点，不存在`episode-0`；完成第1集后，再按1→2→…→12使用上一回补集检查点。
 
 不要预先加载全部已完成集、整份NEAT、全部路线候选或实时Questie历程。
 

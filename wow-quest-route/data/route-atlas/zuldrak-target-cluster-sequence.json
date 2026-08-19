@@ -1,0 +1,3718 @@
+{
+  "status": "initial_whole_map_target_cluster_sequence_before_task_insertion",
+  "policy": "This ordered Target Cluster sequence is the initial whole-map backbone. Long edges are provisional and should be split naturally by newly available task clusters during insertion; do not preserve artificial macro-block boundaries.",
+  "entry_assumption": "Arrive from Grizzly Hills with 12789 carried from Dragonblight and turn it at Light's Breach.",
+  "instance_order": [
+    "light_breach_rageclaw",
+    "crusader_forward",
+    "ebon_watch",
+    "gymer_vehicle",
+    "voltarus",
+    "argent_stand",
+    "hebvalok_sseratus",
+    "draksotra",
+    "amphitheater",
+    "zimtorga_jinalai",
+    "harkoa",
+    "harkoa_quetzlun_ride",
+    "quetzlun",
+    "rhunok_zimrhuk",
+    "mamtoth_east_mid",
+    "gundrak_dubrajin_north"
+  ],
+  "cluster_count": 148,
+  "ordered_cluster_count": 148,
+  "missing_cluster_count": 0,
+  "missing_cluster_ids": [],
+  "provisional_long_edge_count": 9,
+  "provisional_long_edges": [
+    {
+      "ordinal": 11,
+      "cluster_id": "npc:29646",
+      "name": "夺魂女妖",
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 21.92
+    },
+    {
+      "ordinal": 20,
+      "cluster_id": "npc:28519",
+      "name": "干瘪的巨魔",
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 19.65
+    },
+    {
+      "ordinal": 25,
+      "cluster_id": "extra_anchor:12919:2:1",
+      "name": "Slay Scourge while riding Gymer",
+      "spatial_instance": "gymer_vehicle",
+      "edge_from_previous_map_percent": 19.95
+    },
+    {
+      "ordinal": 68,
+      "cluster_id": "npc:28133",
+      "name": "北伐军战士乔纳森",
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 22.64
+    },
+    {
+      "ordinal": 86,
+      "cluster_id": "npc:28043",
+      "name": "格隆迪尔上尉",
+      "spatial_instance": "amphitheater",
+      "edge_from_previous_map_percent": 19.44
+    },
+    {
+      "ordinal": 106,
+      "cluster_id": "npc:28403",
+      "name": "哈克娅镇压者",
+      "spatial_instance": "harkoa",
+      "edge_from_previous_map_percent": 19.64
+    },
+    {
+      "ordinal": 110,
+      "cluster_id": "npc:28671",
+      "name": "奎丝鲁恩先知",
+      "spatial_instance": "harkoa_quetzlun_ride",
+      "edge_from_previous_map_percent": 20.46
+    },
+    {
+      "ordinal": 124,
+      "cluster_id": "npc:28411",
+      "name": "冻土元素",
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 27.31
+    },
+    {
+      "ordinal": 133,
+      "cluster_id": "npc:28851",
+      "name": "被激怒的猛犸象",
+      "spatial_instance": "mamtoth_east_mid",
+      "edge_from_previous_map_percent": 21.1
+    }
+  ],
+  "sequence": [
+    {
+      "ordinal": 1,
+      "cluster_id": "npc:29697",
+      "name": "达库鲁先知",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 31.92,
+        "y": 74.06,
+        "spawn_count": 35,
+        "min_x": 25.05,
+        "max_x": 37.63,
+        "min_y": 68.11,
+        "max_y": 88.87
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": null,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 2,
+      "cluster_id": "npc:29654",
+      "name": "达库鲁饮血者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 33.16,
+        "y": 78.83,
+        "spawn_count": 46,
+        "min_x": 25.05,
+        "max_x": 37.63,
+        "min_y": 68.11,
+        "max_y": 88.87
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 4.93,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 3,
+      "cluster_id": "npc:29656",
+      "name": "达库鲁狂暴者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 34.03,
+        "y": 82.29,
+        "spawn_count": 6,
+        "min_x": 33.12,
+        "max_x": 35.65,
+        "min_y": 79.19,
+        "max_y": 85.8
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 3.57,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 4,
+      "cluster_id": "npc:29692",
+      "name": "棚屋火焰",
+      "quest_ids": [
+        12859
+      ],
+      "representative": {
+        "x": 34.66,
+        "y": 82.63,
+        "spawn_count": 45,
+        "min_x": 33.62,
+        "max_x": 35.91,
+        "min_y": 79.75,
+        "max_y": 85.45
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 0.72,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 5,
+      "cluster_id": "npc:29686",
+      "name": "被俘虏的怒爪狼獾人",
+      "quest_ids": [
+        12861
+      ],
+      "representative": {
+        "x": 35.06,
+        "y": 82.94,
+        "spawn_count": 17,
+        "min_x": 33.68,
+        "max_x": 35.75,
+        "min_y": 80.46,
+        "max_y": 85.84
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 0.51,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 6,
+      "cluster_id": "npc:29664",
+      "name": "怒鬃",
+      "quest_ids": [
+        12857
+      ],
+      "representative": {
+        "x": 38.62,
+        "y": 84.43,
+        "spawn_count": 1,
+        "min_x": 38.62,
+        "max_x": 38.62,
+        "min_y": 84.43,
+        "max_y": 84.43
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 3.86,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 7,
+      "cluster_id": "object:190534",
+      "name": "Mature Water-Poppy",
+      "quest_ids": [
+        12597
+      ],
+      "representative": {
+        "x": 42.86,
+        "y": 78.68,
+        "spawn_count": 54,
+        "min_x": 40.73,
+        "max_x": 45.53,
+        "min_y": 75.32,
+        "max_y": 82.45
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 7.14,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 8,
+      "cluster_id": "npc:28303",
+      "name": "达卡莱缚水者",
+      "quest_ids": [
+        12562,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 42.11,
+        "y": 77.9,
+        "spawn_count": 20,
+        "min_x": 38.64,
+        "max_x": 44.23,
+        "min_y": 73.06,
+        "max_y": 82.19
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 1.08,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 9,
+      "cluster_id": "npc:16570",
+      "name": "狂乱的水之魂",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 42.27,
+        "y": 76.68,
+        "spawn_count": 43,
+        "min_x": 38.13,
+        "max_x": 46.47,
+        "min_y": 72.38,
+        "max_y": 83.17
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 1.23,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 10,
+      "cluster_id": "npc:29698",
+      "name": "达库鲁掠食龙",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 27.23,
+        "y": 82.25,
+        "spawn_count": 11,
+        "min_x": 20.49,
+        "max_x": 30.27,
+        "min_y": 67.1,
+        "max_y": 83.22
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "light_breach_rageclaw",
+      "edge_from_previous_map_percent": 16.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 11,
+      "cluster_id": "npc:29646",
+      "name": "夺魂女妖",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12914
+      ],
+      "representative": {
+        "x": 25.85,
+        "y": 60.37,
+        "spawn_count": 41,
+        "min_x": 20.82,
+        "max_x": 33.3,
+        "min_y": 52.59,
+        "max_y": 65.22
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 21.92,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 12,
+      "cluster_id": "npc:29450",
+      "name": "瓦古符文领主",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12904
+      ],
+      "representative": {
+        "x": 19.75,
+        "y": 56.86,
+        "spawn_count": 8,
+        "min_x": 16.66,
+        "max_x": 20.69,
+        "min_y": 55.04,
+        "max_y": 59.08
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 7.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 13,
+      "cluster_id": "npc:29449",
+      "name": "瓦古唤亡者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12904
+      ],
+      "representative": {
+        "x": 19.32,
+        "y": 56.96,
+        "spawn_count": 11,
+        "min_x": 13.33,
+        "max_x": 20.69,
+        "min_y": 53.59,
+        "max_y": 65.23
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 0.44,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 14,
+      "cluster_id": "npc:29451",
+      "name": "瓦古杀戮者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12904
+      ],
+      "representative": {
+        "x": 20.17,
+        "y": 55.6,
+        "spawn_count": 20,
+        "min_x": 15.48,
+        "max_x": 25.46,
+        "min_y": 49.96,
+        "max_y": 62.97
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 1.6,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 15,
+      "cluster_id": "npc:29455",
+      "name": "戈尔克",
+      "quest_ids": [
+        12903
+      ],
+      "representative": {
+        "x": 17.64,
+        "y": 57.54,
+        "spawn_count": 1,
+        "min_x": 17.64,
+        "max_x": 17.64,
+        "min_y": 57.54,
+        "max_y": 57.54
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 3.19,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 16,
+      "cluster_id": "npc:29453",
+      "name": "瓦古瘟爪鹰",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 17.75,
+        "y": 59.11,
+        "spawn_count": 3,
+        "min_x": 17.36,
+        "max_x": 19.49,
+        "min_y": 56.65,
+        "max_y": 59.34
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 1.57,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 17,
+      "cluster_id": "npc:29454",
+      "name": "布尔",
+      "quest_ids": [
+        12903
+      ],
+      "representative": {
+        "x": 15.67,
+        "y": 59.41,
+        "spawn_count": 1,
+        "min_x": 15.67,
+        "max_x": 15.67,
+        "min_y": 59.41,
+        "max_y": 59.41
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 2.1,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 18,
+      "cluster_id": "npc:29452",
+      "name": "瓦古荒芜犬",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12901
+      ],
+      "representative": {
+        "x": 16.49,
+        "y": 61.92,
+        "spawn_count": 21,
+        "min_x": 13.27,
+        "max_x": 22.93,
+        "min_y": 54.41,
+        "max_y": 64.98
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 2.64,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 19,
+      "cluster_id": "npc:29468",
+      "name": "北伐军战士达加斯",
+      "quest_ids": [
+        12903
+      ],
+      "representative": {
+        "x": 25.05,
+        "y": 51.61,
+        "spawn_count": 1,
+        "min_x": 25.05,
+        "max_x": 25.05,
+        "min_y": 51.61,
+        "max_y": 51.61
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "crusader_forward",
+      "edge_from_previous_map_percent": 13.4,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 20,
+      "cluster_id": "npc:28519",
+      "name": "干瘪的巨魔",
+      "quest_ids": [
+        12565,
+        12615,
+        12630,
+        12655
+      ],
+      "representative": {
+        "x": 17.87,
+        "y": 69.9,
+        "spawn_count": 31,
+        "min_x": 12.97,
+        "max_x": 24.29,
+        "min_y": 66.0,
+        "max_y": 75.4
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 19.65,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 21,
+      "cluster_id": "npc:28532",
+      "name": "血玫瑰达图拉",
+      "quest_ids": [
+        12637
+      ],
+      "representative": {
+        "x": 14.28,
+        "y": 74.04,
+        "spawn_count": 1,
+        "min_x": 14.28,
+        "max_x": 14.28,
+        "min_y": 74.04,
+        "max_y": 74.04
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 5.48,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 22,
+      "cluster_id": "npc:29436",
+      "name": "冰霜大地狂怒者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12914
+      ],
+      "representative": {
+        "x": 13.35,
+        "y": 74.84,
+        "spawn_count": 19,
+        "min_x": 11.16,
+        "max_x": 16.98,
+        "min_y": 71.14,
+        "max_y": 79.78
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 1.23,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 23,
+      "cluster_id": "npc:28564",
+      "name": "腐烂憎恶",
+      "quest_ids": [
+        12565,
+        12615,
+        12629,
+        12655
+      ],
+      "representative": {
+        "x": 20.93,
+        "y": 76.66,
+        "spawn_count": 24,
+        "min_x": 17.53,
+        "max_x": 25.74,
+        "min_y": 68.66,
+        "max_y": 82.79
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 7.8,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 24,
+      "cluster_id": "npc:28565",
+      "name": "腐烂的食尸鬼",
+      "quest_ids": [
+        12565,
+        12615,
+        12652,
+        12655
+      ],
+      "representative": {
+        "x": 22.01,
+        "y": 76.68,
+        "spawn_count": 26,
+        "min_x": 18.67,
+        "max_x": 26.79,
+        "min_y": 70.79,
+        "max_y": 80.23
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "ebon_watch",
+      "edge_from_previous_map_percent": 1.08,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 25,
+      "cluster_id": "extra_anchor:12919:2:1",
+      "name": "Slay Scourge while riding Gymer",
+      "quest_ids": [
+        12919
+      ],
+      "representative": {
+        "x": 26.71,
+        "y": 57.29,
+        "spawn_count": 1
+      },
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "spatial_instance": "gymer_vehicle",
+      "edge_from_previous_map_percent": 19.95,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 26,
+      "cluster_id": "npc:29647",
+      "name": "盖米尔",
+      "quest_ids": [
+        12919
+      ],
+      "representative": {
+        "x": 19.91,
+        "y": 56.24,
+        "spawn_count": 1,
+        "min_x": 19.91,
+        "max_x": 19.91,
+        "min_y": 56.24,
+        "max_y": 56.24
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "gymer_vehicle",
+      "edge_from_previous_map_percent": 6.88,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 27,
+      "cluster_id": "npc:28793",
+      "name": "达穆克",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12686
+      ],
+      "representative": {
+        "x": 30.76,
+        "y": 51.05,
+        "spawn_count": 1,
+        "min_x": 30.76,
+        "max_x": 30.76,
+        "min_y": 51.05,
+        "max_y": 51.05
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 12.03,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 28,
+      "cluster_id": "object:190731",
+      "name": "Scourgewagon",
+      "quest_ids": [
+        12676
+      ],
+      "representative": {
+        "x": 30.72,
+        "y": 47.23,
+        "spawn_count": 9,
+        "min_x": 26.58,
+        "max_x": 32.92,
+        "min_y": 42.46,
+        "max_y": 52.19
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 3.82,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 29,
+      "cluster_id": "object:190720",
+      "name": "Harvested Blight Crystal",
+      "quest_ids": [
+        12677
+      ],
+      "representative": {
+        "x": 28.9,
+        "y": 46.93,
+        "spawn_count": 5,
+        "min_x": 27.96,
+        "max_x": 29.76,
+        "min_y": 43.32,
+        "max_y": 47.24
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 1.84,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 30,
+      "cluster_id": "npc:28750",
+      "name": "荒芜恶鬼",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12673
+      ],
+      "representative": {
+        "x": 29.06,
+        "y": 46.28,
+        "spawn_count": 38,
+        "min_x": 26.77,
+        "max_x": 31.72,
+        "min_y": 42.56,
+        "max_y": 51.96
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 0.67,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 31,
+      "cluster_id": "object:190716",
+      "name": "Crystallized Blight",
+      "quest_ids": [
+        12673
+      ],
+      "representative": {
+        "x": 29.05,
+        "y": 45.0,
+        "spawn_count": 23,
+        "min_x": 27.31,
+        "max_x": 29.54,
+        "min_y": 43.46,
+        "max_y": 47.35
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 1.28,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 32,
+      "cluster_id": "extra_anchor:12661:1:1",
+      "name": "Infiltrate Voltarus using Ensorcelled Choker",
+      "quest_ids": [
+        12661
+      ],
+      "representative": {
+        "x": 28.38,
+        "y": 44.85,
+        "spawn_count": 1
+      },
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 0.69,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 33,
+      "cluster_id": "extra_anchor:12710:2:1",
+      "name": "Take the teleporter to Drakuru's upper chamber",
+      "quest_ids": [
+        12710
+      ],
+      "representative": {
+        "x": 28.38,
+        "y": 44.85,
+        "spawn_count": 1
+      },
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 0.0,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 34,
+      "cluster_id": "npc:28503",
+      "name": "达库鲁大王",
+      "quest_ids": [
+        12661,
+        12669,
+        12676,
+        12677,
+        12713
+      ],
+      "representative": {
+        "x": 27.07,
+        "y": 46.16,
+        "spawn_count": 1,
+        "min_x": 27.07,
+        "max_x": 27.07,
+        "min_y": 46.16,
+        "max_y": 46.16
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 1.85,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 35,
+      "cluster_id": "object:190948",
+      "name": "Musty Coffin",
+      "quest_ids": [
+        12710
+      ],
+      "representative": {
+        "x": 27.23,
+        "y": 42.3,
+        "spawn_count": 1,
+        "min_x": 27.23,
+        "max_x": 27.23,
+        "min_y": 42.3,
+        "max_y": 42.3
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 3.86,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 36,
+      "cluster_id": "npc:28739",
+      "name": "Blight Cauldron Bunny 00",
+      "quest_ids": [
+        12669
+      ],
+      "representative": {
+        "x": 31.04,
+        "y": 45.17,
+        "spawn_count": 5,
+        "min_x": 26.83,
+        "max_x": 31.29,
+        "min_y": 43.2,
+        "max_y": 47.47
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "voltarus",
+      "edge_from_previous_map_percent": 4.77,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 37,
+      "cluster_id": "npc:29133",
+      "name": "被扰乱的灵魂",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 36.16,
+        "y": 61.15,
+        "spawn_count": 13,
+        "min_x": 34.52,
+        "max_x": 39.44,
+        "min_y": 57.69,
+        "max_y": 63.5
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 16.78,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 38,
+      "cluster_id": "npc:29129",
+      "name": "迷失的达卡莱灵魂",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12799
+      ],
+      "representative": {
+        "x": 39.13,
+        "y": 61.14,
+        "spawn_count": 18,
+        "min_x": 34.82,
+        "max_x": 50.02,
+        "min_y": 59.5,
+        "max_y": 85.94
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 2.97,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 39,
+      "cluster_id": "npc:28022",
+      "name": "腐烂吞食者",
+      "quest_ids": [
+        12503,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 37.65,
+        "y": 65.06,
+        "spawn_count": 4,
+        "min_x": 35.66,
+        "max_x": 38.55,
+        "min_y": 64.79,
+        "max_y": 68.77
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 4.19,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 40,
+      "cluster_id": "npc:28029",
+      "name": "银色北伐军战士",
+      "quest_ids": [
+        12740
+      ],
+      "representative": {
+        "x": 36.83,
+        "y": 65.29,
+        "spawn_count": 5,
+        "min_x": 35.72,
+        "max_x": 38.05,
+        "min_y": 64.72,
+        "max_y": 65.57
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 0.85,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 41,
+      "cluster_id": "npc:28026",
+      "name": "暴怒的恶鬼",
+      "quest_ids": [
+        12503,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 36.51,
+        "y": 64.79,
+        "spawn_count": 5,
+        "min_x": 29.65,
+        "max_x": 37.99,
+        "min_y": 64.55,
+        "max_y": 65.5
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 0.59,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 42,
+      "cluster_id": "npc:28246",
+      "name": "恐惧石像鬼",
+      "quest_ids": [
+        12503,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 36.65,
+        "y": 66.88,
+        "spawn_count": 15,
+        "min_x": 34.32,
+        "max_x": 38.4,
+        "min_y": 65.06,
+        "max_y": 69.28
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 2.09,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 43,
+      "cluster_id": "npc:28023",
+      "name": "腐烂的憎恶",
+      "quest_ids": [
+        12503,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 36.98,
+        "y": 68.26,
+        "spawn_count": 1,
+        "min_x": 36.98,
+        "max_x": 36.98,
+        "min_y": 68.26,
+        "max_y": 68.26
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 1.42,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 44,
+      "cluster_id": "npc:28028",
+      "name": "银色持盾战士",
+      "quest_ids": [
+        12740
+      ],
+      "representative": {
+        "x": 38.0,
+        "y": 67.76,
+        "spawn_count": 5,
+        "min_x": 37.4,
+        "max_x": 38.38,
+        "min_y": 67.19,
+        "max_y": 68.64
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 1.14,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 45,
+      "cluster_id": "npc:29211",
+      "name": "达卡莱土著",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 38.03,
+        "y": 72.3,
+        "spawn_count": 10,
+        "min_x": 36.71,
+        "max_x": 39.52,
+        "min_y": 70.77,
+        "max_y": 73.69
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 4.54,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 46,
+      "cluster_id": "object:190543",
+      "name": "Dead Thornwood",
+      "quest_ids": [
+        12599
+      ],
+      "representative": {
+        "x": 44.37,
+        "y": 61.9,
+        "spawn_count": 19,
+        "min_x": 41.36,
+        "max_x": 47.85,
+        "min_y": 55.25,
+        "max_y": 71.81
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 12.18,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 47,
+      "cluster_id": "object:190541",
+      "name": "Dead Thornwood",
+      "quest_ids": [
+        12599
+      ],
+      "representative": {
+        "x": 44.47,
+        "y": 61.8,
+        "spawn_count": 15,
+        "min_x": 41.48,
+        "max_x": 46.03,
+        "min_y": 56.56,
+        "max_y": 69.34
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "argent_stand",
+      "edge_from_previous_map_percent": 0.14,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 48,
+      "cluster_id": "npc:28221",
+      "name": "暗门爬行者",
+      "quest_ids": [
+        12565,
+        12609,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 41.66,
+        "y": 50.71,
+        "spawn_count": 41,
+        "min_x": 34.21,
+        "max_x": 50.53,
+        "min_y": 36.63,
+        "max_y": 86.81
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 11.44,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 49,
+      "cluster_id": "npc:28041",
+      "name": "银色士兵",
+      "quest_ids": [
+        12504
+      ],
+      "representative": {
+        "x": 40.57,
+        "y": 44.14,
+        "spawn_count": 32,
+        "min_x": 35.16,
+        "max_x": 43.12,
+        "min_y": 35.38,
+        "max_y": 53.3
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 6.66,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 50,
+      "cluster_id": "npc:28036",
+      "name": "西莱图斯勇士",
+      "quest_ids": [
+        12508,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 40.77,
+        "y": 42.85,
+        "spawn_count": 12,
+        "min_x": 35.15,
+        "max_x": 42.98,
+        "min_y": 35.58,
+        "max_y": 45.4
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 1.31,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 51,
+      "cluster_id": "npc:28068",
+      "name": "西莱图斯先知",
+      "quest_ids": [
+        12516,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 40.46,
+        "y": 42.53,
+        "spawn_count": 1,
+        "min_x": 40.46,
+        "max_x": 40.46,
+        "min_y": 42.53,
+        "max_y": 42.53
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.45,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 52,
+      "cluster_id": "npc:28035",
+      "name": "西莱图斯祭司",
+      "quest_ids": [
+        12508,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 39.64,
+        "y": 42.8,
+        "spawn_count": 17,
+        "min_x": 35.08,
+        "max_x": 43.35,
+        "min_y": 35.88,
+        "max_y": 44.52
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.86,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 53,
+      "cluster_id": "npc:28034",
+      "name": "达卡莱驯蛇者",
+      "quest_ids": [
+        12508,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 41.73,
+        "y": 41.61,
+        "spawn_count": 8,
+        "min_x": 38.24,
+        "max_x": 42.51,
+        "min_y": 36.45,
+        "max_y": 42.7
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 2.41,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 54,
+      "cluster_id": "npc:28233",
+      "name": "祖达克蝙蝠",
+      "quest_ids": [
+        12565,
+        12610,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 44.8,
+        "y": 43.44,
+        "spawn_count": 69,
+        "min_x": 33.86,
+        "max_x": 85.99,
+        "min_y": 16.26,
+        "max_y": 56.9
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 3.57,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 55,
+      "cluster_id": "npc:28843",
+      "name": "浮肿的憎恶",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 32.65,
+        "y": 43.41,
+        "spawn_count": 19,
+        "min_x": 30.53,
+        "max_x": 33.08,
+        "min_y": 38.77,
+        "max_y": 53.62
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 12.15,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 56,
+      "cluster_id": "npc:28803",
+      "name": "达库鲁的卫兵",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 29.02,
+        "y": 45.33,
+        "spawn_count": 4,
+        "min_x": 27.11,
+        "max_x": 29.6,
+        "min_y": 44.28,
+        "max_y": 46.76
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 4.11,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 57,
+      "cluster_id": "npc:28931",
+      "name": "瘟血巨魔",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12713
+      ],
+      "representative": {
+        "x": 28.99,
+        "y": 45.79,
+        "spawn_count": 3,
+        "min_x": 27.46,
+        "max_x": 29.31,
+        "min_y": 43.93,
+        "max_y": 46.24
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.46,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 58,
+      "cluster_id": "object:202357",
+      "name": "Drakuru's Last Wish",
+      "quest_ids": [
+        12713
+      ],
+      "representative": {
+        "x": 28.63,
+        "y": 44.54,
+        "spawn_count": 1,
+        "min_x": 28.63,
+        "max_x": 28.63,
+        "min_y": 44.54,
+        "max_y": 44.54
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 1.3,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 59,
+      "cluster_id": "npc:28759",
+      "name": "飞行魔",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 29.64,
+        "y": 47.3,
+        "spawn_count": 36,
+        "min_x": 27.0,
+        "max_x": 32.18,
+        "min_y": 43.44,
+        "max_y": 49.98
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 2.94,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 60,
+      "cluster_id": "npc:28802",
+      "name": "达库鲁的仆从",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 31.74,
+        "y": 47.85,
+        "spawn_count": 19,
+        "min_x": 30.6,
+        "max_x": 33.17,
+        "min_y": 42.01,
+        "max_y": 53.94
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 2.17,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 61,
+      "cluster_id": "npc:28603",
+      "name": "荒芜卫士",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 28.1,
+        "y": 48.84,
+        "spawn_count": 21,
+        "min_x": 19.04,
+        "max_x": 32.21,
+        "min_y": 42.0,
+        "max_y": 79.13
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 3.77,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 62,
+      "cluster_id": "object:190461",
+      "name": "Ancient Ectoplasm",
+      "quest_ids": [
+        12557
+      ],
+      "representative": {
+        "x": 34.91,
+        "y": 51.05,
+        "spawn_count": 6,
+        "min_x": 34.74,
+        "max_x": 35.1,
+        "min_y": 50.91,
+        "max_y": 51.61
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 7.16,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 63,
+      "cluster_id": "object:190459",
+      "name": "Amberseed",
+      "quest_ids": [
+        12557
+      ],
+      "representative": {
+        "x": 34.91,
+        "y": 51.08,
+        "spawn_count": 8,
+        "min_x": 34.74,
+        "max_x": 35.09,
+        "min_y": 50.9,
+        "max_y": 51.61
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.03,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 64,
+      "cluster_id": "npc:28205",
+      "name": "炼金师菲肯斯坦",
+      "quest_ids": [
+        12596
+      ],
+      "representative": {
+        "x": 35.02,
+        "y": 52.11,
+        "spawn_count": 1,
+        "min_x": 35.02,
+        "max_x": 35.02,
+        "min_y": 52.11,
+        "max_y": 52.11
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 1.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 65,
+      "cluster_id": "object:190478",
+      "name": "Muddy Mire Maggots",
+      "quest_ids": [
+        12557
+      ],
+      "representative": {
+        "x": 34.8,
+        "y": 52.55,
+        "spawn_count": 4,
+        "min_x": 34.72,
+        "max_x": 34.97,
+        "min_y": 51.31,
+        "max_y": 53.53
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.49,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 66,
+      "cluster_id": "object:190473",
+      "name": "Withered Batwing",
+      "quest_ids": [
+        12557
+      ],
+      "representative": {
+        "x": 34.88,
+        "y": 52.94,
+        "spawn_count": 8,
+        "min_x": 34.7,
+        "max_x": 35.11,
+        "min_y": 50.9,
+        "max_y": 53.5
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.4,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 67,
+      "cluster_id": "object:190462",
+      "name": "Chilled Serpent Mucus",
+      "quest_ids": [
+        12557
+      ],
+      "representative": {
+        "x": 35.11,
+        "y": 53.42,
+        "spawn_count": 1,
+        "min_x": 35.11,
+        "max_x": 35.11,
+        "min_y": 53.42,
+        "max_y": 53.42
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.53,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 68,
+      "cluster_id": "npc:28133",
+      "name": "北伐军战士乔纳森",
+      "quest_ids": [
+        12512
+      ],
+      "representative": {
+        "x": 50.67,
+        "y": 69.86,
+        "spawn_count": 1,
+        "min_x": 50.67,
+        "max_x": 50.67,
+        "min_y": 69.86,
+        "max_y": 69.86
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 22.64,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 69,
+      "cluster_id": "object:190555",
+      "name": "Nerubian Crater",
+      "quest_ids": [
+        12598
+      ],
+      "representative": {
+        "x": 54.16,
+        "y": 69.11,
+        "spawn_count": 8,
+        "min_x": 52.67,
+        "max_x": 56.27,
+        "min_y": 65.69,
+        "max_y": 71.06
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 3.57,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 70,
+      "cluster_id": "npc:28412",
+      "name": "哈沙尔孵化者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 54.7,
+        "y": 68.77,
+        "spawn_count": 10,
+        "min_x": 52.23,
+        "max_x": 56.19,
+        "min_y": 66.01,
+        "max_y": 71.16
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 0.64,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 71,
+      "cluster_id": "npc:28413",
+      "name": "蛛魔之茧",
+      "quest_ids": [
+        12606
+      ],
+      "representative": {
+        "x": 54.7,
+        "y": 68.73,
+        "spawn_count": 15,
+        "min_x": 52.28,
+        "max_x": 55.73,
+        "min_y": 65.57,
+        "max_y": 72.37
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 0.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 72,
+      "cluster_id": "npc:28044",
+      "name": "鲁伯特上尉",
+      "quest_ids": [
+        12596
+      ],
+      "representative": {
+        "x": 58.08,
+        "y": 72.43,
+        "spawn_count": 1,
+        "min_x": 58.08,
+        "max_x": 58.08,
+        "min_y": 72.43,
+        "max_y": 72.43
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 5.01,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 73,
+      "cluster_id": "npc:28125",
+      "name": "罗杰斯博士",
+      "quest_ids": [
+        12512
+      ],
+      "representative": {
+        "x": 58.68,
+        "y": 72.49,
+        "spawn_count": 1,
+        "min_x": 58.68,
+        "max_x": 58.68,
+        "min_y": 72.49,
+        "max_y": 72.49
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 0.6,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 74,
+      "cluster_id": "npc:28141",
+      "name": "北伐军战士拉莫夫",
+      "quest_ids": [
+        12512
+      ],
+      "representative": {
+        "x": 53.58,
+        "y": 75.0,
+        "spawn_count": 1,
+        "min_x": 53.58,
+        "max_x": 53.58,
+        "min_y": 75.0,
+        "max_y": 75.0
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 5.68,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 75,
+      "cluster_id": "npc:28158",
+      "name": "干瘪的银色步兵",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 51.69,
+        "y": 74.23,
+        "spawn_count": 25,
+        "min_x": 48.02,
+        "max_x": 55.98,
+        "min_y": 69.11,
+        "max_y": 78.69
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 2.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 76,
+      "cluster_id": "npc:28143",
+      "name": "北伐军战士约瑟芬",
+      "quest_ids": [
+        12512
+      ],
+      "representative": {
+        "x": 49.45,
+        "y": 74.71,
+        "spawn_count": 1,
+        "min_x": 49.45,
+        "max_x": 49.45,
+        "min_y": 74.71,
+        "max_y": 74.71
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 2.29,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 77,
+      "cluster_id": "object:190537",
+      "name": "Crashed Plague Sprayer",
+      "quest_ids": [
+        12583
+      ],
+      "representative": {
+        "x": 48.79,
+        "y": 75.55,
+        "spawn_count": 1,
+        "min_x": 48.79,
+        "max_x": 48.79,
+        "min_y": 75.55,
+        "max_y": 75.55
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 1.07,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 78,
+      "cluster_id": "npc:28042",
+      "name": "布兰顿上尉",
+      "quest_ids": [
+        12596
+      ],
+      "representative": {
+        "x": 48.8,
+        "y": 78.9,
+        "spawn_count": 1,
+        "min_x": 48.8,
+        "max_x": 48.8,
+        "min_y": 78.9,
+        "max_y": 78.9
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 3.35,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 79,
+      "cluster_id": "npc:28268",
+      "name": "受天灾疾病影响的银色步兵",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 56.38,
+        "y": 82.78,
+        "spawn_count": 4,
+        "min_x": 53.08,
+        "max_x": 57.69,
+        "min_y": 80.89,
+        "max_y": 84.37
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 8.52,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 80,
+      "cluster_id": "npc:28258",
+      "name": "哈沙尔撒网者",
+      "quest_ids": [
+        12553,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 56.67,
+        "y": 82.73,
+        "spawn_count": 20,
+        "min_x": 54.17,
+        "max_x": 59.72,
+        "min_y": 77.89,
+        "max_y": 87.62
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 0.29,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 81,
+      "cluster_id": "npc:28274",
+      "name": "药剂喷射器",
+      "quest_ids": [
+        12555
+      ],
+      "representative": {
+        "x": 57.44,
+        "y": 80.83,
+        "spawn_count": 16,
+        "min_x": 53.98,
+        "max_x": 59.11,
+        "min_y": 75.27,
+        "max_y": 84.02
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 2.05,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 82,
+      "cluster_id": "npc:29026",
+      "name": "科尔拉玛斯软泥怪",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 58.87,
+        "y": 78.96,
+        "spawn_count": 4,
+        "min_x": 58.59,
+        "max_x": 59.58,
+        "min_y": 78.48,
+        "max_y": 79.8
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 2.35,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 83,
+      "cluster_id": "npc:28257",
+      "name": "哈沙尔通灵师",
+      "quest_ids": [
+        12552,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 60.35,
+        "y": 79.11,
+        "spawn_count": 13,
+        "min_x": 53.89,
+        "max_x": 63.98,
+        "min_y": 75.4,
+        "max_y": 88.07
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 1.49,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 84,
+      "cluster_id": "npc:28255",
+      "name": "腐蚀者玛拉斯",
+      "quest_ids": [
+        12554,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 61.01,
+        "y": 77.98,
+        "spawn_count": 1,
+        "min_x": 61.01,
+        "max_x": 61.01,
+        "min_y": 77.98,
+        "max_y": 77.98
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 1.31,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 85,
+      "cluster_id": "object:190540",
+      "name": "Chunk of Saronite",
+      "quest_ids": [
+        12584
+      ],
+      "representative": {
+        "x": 61.46,
+        "y": 78.06,
+        "spawn_count": 61,
+        "min_x": 59.91,
+        "max_x": 62.63,
+        "min_y": 76.4,
+        "max_y": 80.45
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "draksotra",
+      "edge_from_previous_map_percent": 0.46,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 86,
+      "cluster_id": "npc:28043",
+      "name": "格隆迪尔上尉",
+      "quest_ids": [
+        12596
+      ],
+      "representative": {
+        "x": 48.15,
+        "y": 63.89,
+        "spawn_count": 1,
+        "min_x": 48.15,
+        "max_x": 48.15,
+        "min_y": 63.89,
+        "max_y": 63.89
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "amphitheater",
+      "edge_from_previous_map_percent": 19.44,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 87,
+      "cluster_id": "npc:28323",
+      "name": "青苔狂暴者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 44.23,
+        "y": 60.43,
+        "spawn_count": 9,
+        "min_x": 41.87,
+        "max_x": 49.65,
+        "min_y": 55.18,
+        "max_y": 65.27
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "amphitheater",
+      "edge_from_previous_map_percent": 5.23,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 88,
+      "cluster_id": "npc:28145",
+      "name": "潜伏的蜥蜴",
+      "quest_ids": [
+        12514,
+        12527,
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 43.64,
+        "y": 60.7,
+        "spawn_count": 34,
+        "min_x": 41.06,
+        "max_x": 50.28,
+        "min_y": 51.93,
+        "max_y": 71.5
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "amphitheater",
+      "edge_from_previous_map_percent": 0.65,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 89,
+      "cluster_id": "object:190542",
+      "name": "Dead Thornwood",
+      "quest_ids": [
+        12599
+      ],
+      "representative": {
+        "x": 43.79,
+        "y": 59.78,
+        "spawn_count": 14,
+        "min_x": 41.65,
+        "max_x": 45.5,
+        "min_y": 54.87,
+        "max_y": 67.81
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "amphitheater",
+      "edge_from_previous_map_percent": 0.93,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 90,
+      "cluster_id": "npc:28414",
+      "name": "达卡莱俘虏",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 53.39,
+        "y": 65.58,
+        "spawn_count": 1,
+        "min_x": 53.39,
+        "max_x": 53.39,
+        "min_y": 65.58,
+        "max_y": 65.58
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 11.22,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 91,
+      "cluster_id": "object:190630",
+      "name": "Green Cauldron",
+      "quest_ids": [
+        12627
+      ],
+      "representative": {
+        "x": 55.68,
+        "y": 64.32,
+        "spawn_count": 1,
+        "min_x": 55.68,
+        "max_x": 55.68,
+        "min_y": 64.32,
+        "max_y": 64.32
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 2.61,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 92,
+      "cluster_id": "object:193768",
+      "name": "Chulo the Mad's Totem",
+      "quest_ids": [
+        12622
+      ],
+      "representative": {
+        "x": 56.36,
+        "y": 64.82,
+        "spawn_count": 1,
+        "min_x": 56.36,
+        "max_x": 56.36,
+        "min_y": 64.82,
+        "max_y": 64.82
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.84,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 93,
+      "cluster_id": "npc:28496",
+      "name": "疯子克乌罗",
+      "quest_ids": [
+        12565,
+        12615,
+        12622,
+        12655
+      ],
+      "representative": {
+        "x": 56.38,
+        "y": 65.03,
+        "spawn_count": 1,
+        "min_x": 56.38,
+        "max_x": 56.38,
+        "min_y": 65.03,
+        "max_y": 65.03
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.21,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 94,
+      "cluster_id": "object:190618",
+      "name": "Blue Cauldron",
+      "quest_ids": [
+        12627
+      ],
+      "representative": {
+        "x": 57.21,
+        "y": 65.35,
+        "spawn_count": 1,
+        "min_x": 57.21,
+        "max_x": 57.21,
+        "min_y": 65.35,
+        "max_y": 65.35
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.89,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 95,
+      "cluster_id": "object:193770",
+      "name": "Kutube'sa's Totem",
+      "quest_ids": [
+        12622
+      ],
+      "representative": {
+        "x": 57.47,
+        "y": 63.7,
+        "spawn_count": 1,
+        "min_x": 57.47,
+        "max_x": 57.47,
+        "min_y": 63.7,
+        "max_y": 63.7
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 1.67,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 96,
+      "cluster_id": "object:190620",
+      "name": "Red Cauldron",
+      "quest_ids": [
+        12627
+      ],
+      "representative": {
+        "x": 58.78,
+        "y": 62.71,
+        "spawn_count": 1,
+        "min_x": 58.78,
+        "max_x": 58.78,
+        "min_y": 62.71,
+        "max_y": 62.71
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 1.64,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 97,
+      "cluster_id": "npc:28495",
+      "name": "加瓦尼尔",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 58.1,
+        "y": 62.1,
+        "spawn_count": 1,
+        "min_x": 58.1,
+        "max_x": 58.1,
+        "min_y": 62.1,
+        "max_y": 62.1
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.91,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 98,
+      "cluster_id": "object:193769",
+      "name": "Gawanil's Totem",
+      "quest_ids": [
+        12622
+      ],
+      "representative": {
+        "x": 58.1,
+        "y": 61.91,
+        "spawn_count": 1,
+        "min_x": 58.1,
+        "max_x": 58.1,
+        "min_y": 61.91,
+        "max_y": 61.91
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.19,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 99,
+      "cluster_id": "npc:28504",
+      "name": "金亚莱医师",
+      "quest_ids": [
+        12565,
+        12615,
+        12622,
+        12655
+      ],
+      "representative": {
+        "x": 58.58,
+        "y": 61.75,
+        "spawn_count": 5,
+        "min_x": 57.62,
+        "max_x": 59.51,
+        "min_y": 60.68,
+        "max_y": 62.63
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.51,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 100,
+      "cluster_id": "object:190619",
+      "name": "Purple Cauldron",
+      "quest_ids": [
+        12627
+      ],
+      "representative": {
+        "x": 57.61,
+        "y": 61.73,
+        "spawn_count": 1,
+        "min_x": 57.61,
+        "max_x": 57.61,
+        "min_y": 61.73,
+        "max_y": 61.73
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.97,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 101,
+      "cluster_id": "npc:28388",
+      "name": "金亚莱战士",
+      "quest_ids": [
+        12565,
+        12615,
+        12622,
+        12655
+      ],
+      "representative": {
+        "x": 57.11,
+        "y": 61.62,
+        "spawn_count": 16,
+        "min_x": 54.67,
+        "max_x": 59.64,
+        "min_y": 58.49,
+        "max_y": 63.8
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.51,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 102,
+      "cluster_id": "npc:28465",
+      "name": "赫布达卡打击者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12659
+      ],
+      "representative": {
+        "x": 63.77,
+        "y": 53.12,
+        "spawn_count": 17,
+        "min_x": 62.3,
+        "max_x": 69.13,
+        "min_y": 50.3,
+        "max_y": 56.65
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 10.8,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 103,
+      "cluster_id": "object:190695",
+      "name": "Heb'Jin's Drum",
+      "quest_ids": [
+        12662
+      ],
+      "representative": {
+        "x": 64.23,
+        "y": 52.52,
+        "spawn_count": 1,
+        "min_x": 64.23,
+        "max_x": 64.23,
+        "min_y": 52.52,
+        "max_y": 52.52
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.76,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 104,
+      "cluster_id": "npc:28600",
+      "name": "赫布达卡猎头者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12659
+      ],
+      "representative": {
+        "x": 64.32,
+        "y": 52.43,
+        "spawn_count": 19,
+        "min_x": 61.28,
+        "max_x": 67.85,
+        "min_y": 48.65,
+        "max_y": 56.3
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 0.13,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 105,
+      "cluster_id": "npc:28636",
+      "name": "赫布金",
+      "quest_ids": [
+        12662
+      ],
+      "representative": {
+        "x": 65.02,
+        "y": 51.4,
+        "spawn_count": 2,
+        "min_x": 64.39,
+        "max_x": 65.64,
+        "min_y": 50.46,
+        "max_y": 52.34
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "zimtorga_jinalai",
+      "edge_from_previous_map_percent": 1.25,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 106,
+      "cluster_id": "npc:28403",
+      "name": "哈克娅镇压者",
+      "quest_ids": [
+        12565,
+        12615,
+        12635,
+        12655,
+        12666
+      ],
+      "representative": {
+        "x": 62.52,
+        "y": 70.88,
+        "spawn_count": 3,
+        "min_x": 61.96,
+        "max_x": 63.49,
+        "min_y": 67.61,
+        "max_y": 72.32
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "harkoa",
+      "edge_from_previous_map_percent": 19.64,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 107,
+      "cluster_id": "npc:28848",
+      "name": "哈克娅先知",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 60.19,
+        "y": 70.85,
+        "spawn_count": 1,
+        "min_x": 60.19,
+        "max_x": 60.19,
+        "min_y": 70.85,
+        "max_y": 70.85
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "harkoa",
+      "edge_from_previous_map_percent": 2.33,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 108,
+      "cluster_id": "npc:28402",
+      "name": "哈克娅之爪",
+      "quest_ids": [
+        12565,
+        12615,
+        12635,
+        12655,
+        12666
+      ],
+      "representative": {
+        "x": 62.88,
+        "y": 74.15,
+        "spawn_count": 15,
+        "min_x": 59.87,
+        "max_x": 68.75,
+        "min_y": 63.43,
+        "max_y": 78.07
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "harkoa",
+      "edge_from_previous_map_percent": 4.26,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 109,
+      "cluster_id": "npc:28404",
+      "name": "被诅咒的哈克娅子嗣",
+      "quest_ids": [
+        12565,
+        12615,
+        12632,
+        12635,
+        12655
+      ],
+      "representative": {
+        "x": 63.43,
+        "y": 74.76,
+        "spawn_count": 17,
+        "min_x": 60.32,
+        "max_x": 69.52,
+        "min_y": 64.87,
+        "max_y": 78.48
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "harkoa",
+      "edge_from_previous_map_percent": 0.82,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 110,
+      "cluster_id": "npc:28671",
+      "name": "奎丝鲁恩先知",
+      "quest_ids": [
+        12665,
+        12685
+      ],
+      "representative": {
+        "x": 76.01,
+        "y": 58.62,
+        "spawn_count": 1,
+        "min_x": 76.01,
+        "max_x": 76.01,
+        "min_y": 58.62,
+        "max_y": 58.62
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "harkoa_quetzlun_ride",
+      "edge_from_previous_map_percent": 20.46,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 111,
+      "cluster_id": "npc:28672",
+      "name": "奎丝鲁恩",
+      "quest_ids": [
+        12685
+      ],
+      "representative": {
+        "x": 75.48,
+        "y": 58.65,
+        "spawn_count": 1,
+        "min_x": 75.48,
+        "max_x": 75.48,
+        "min_y": 58.65,
+        "max_y": 58.65
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.53,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 112,
+      "cluster_id": "npc:28748",
+      "name": "蛇灵狂暴者",
+      "quest_ids": [
+        12668
+      ],
+      "representative": {
+        "x": 74.13,
+        "y": 58.55,
+        "spawn_count": 14,
+        "min_x": 69.09,
+        "max_x": 77.98,
+        "min_y": 54.92,
+        "max_y": 62.73
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 1.35,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 113,
+      "cluster_id": "npc:28747",
+      "name": "奎丝鲁恩崇拜者",
+      "quest_ids": [
+        12668
+      ],
+      "representative": {
+        "x": 73.81,
+        "y": 58.62,
+        "spawn_count": 39,
+        "min_x": 69.58,
+        "max_x": 77.95,
+        "min_y": 54.84,
+        "max_y": 62.28
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.33,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 114,
+      "cluster_id": "object:190718",
+      "name": "Underworld Power Fragment",
+      "quest_ids": [
+        12672
+      ],
+      "representative": {
+        "x": 73.35,
+        "y": 58.31,
+        "spawn_count": 14,
+        "min_x": 69.68,
+        "max_x": 77.32,
+        "min_y": 54.32,
+        "max_y": 62.25
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.55,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 115,
+      "cluster_id": "npc:28784",
+      "name": "祭坛典狱官",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12729
+      ],
+      "representative": {
+        "x": 73.48,
+        "y": 59.19,
+        "spawn_count": 19,
+        "min_x": 68.66,
+        "max_x": 77.13,
+        "min_y": 54.35,
+        "max_y": 63.06
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.89,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 116,
+      "cluster_id": "npc:28477",
+      "name": "奎丝鲁恩之子",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 73.61,
+        "y": 60.05,
+        "spawn_count": 19,
+        "min_x": 68.51,
+        "max_x": 78.52,
+        "min_y": 54.55,
+        "max_y": 63.22
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.87,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 117,
+      "cluster_id": "object:190717",
+      "name": "Underworld Power Fragment",
+      "quest_ids": [
+        12672
+      ],
+      "representative": {
+        "x": 74.21,
+        "y": 59.78,
+        "spawn_count": 12,
+        "min_x": 68.66,
+        "max_x": 78.31,
+        "min_y": 56.13,
+        "max_y": 62.91
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.66,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 118,
+      "cluster_id": "object:190719",
+      "name": "Underworld Power Fragment",
+      "quest_ids": [
+        12672
+      ],
+      "representative": {
+        "x": 74.14,
+        "y": 60.77,
+        "spawn_count": 8,
+        "min_x": 68.69,
+        "max_x": 78.12,
+        "min_y": 54.99,
+        "max_y": 63.07
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.99,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 119,
+      "cluster_id": "npc:28754",
+      "name": "高阶祭司图亚图亚",
+      "quest_ids": [
+        12674
+      ],
+      "representative": {
+        "x": 73.55,
+        "y": 60.78,
+        "spawn_count": 1,
+        "min_x": 73.55,
+        "max_x": 73.55,
+        "min_y": 60.78,
+        "max_y": 60.78
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 0.59,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 120,
+      "cluster_id": "npc:28752",
+      "name": "高阶祭司穆弗努",
+      "quest_ids": [
+        12674
+      ],
+      "representative": {
+        "x": 74.53,
+        "y": 57.4,
+        "spawn_count": 1,
+        "min_x": 74.53,
+        "max_x": 74.53,
+        "min_y": 57.4,
+        "max_y": 57.4
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 3.52,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 121,
+      "cluster_id": "npc:28756",
+      "name": "高阶祭司哈文尼",
+      "quest_ids": [
+        12674
+      ],
+      "representative": {
+        "x": 76.22,
+        "y": 54.87,
+        "spawn_count": 1,
+        "min_x": 76.22,
+        "max_x": 76.22,
+        "min_y": 54.87,
+        "max_y": 54.87
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 3.04,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 122,
+      "cluster_id": "npc:29327",
+      "name": "冰霜雪豹",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        13549
+      ],
+      "representative": {
+        "x": 72.22,
+        "y": 66.48,
+        "spawn_count": 28,
+        "min_x": 58.44,
+        "max_x": 77.74,
+        "min_y": 60.25,
+        "max_y": 75.77
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 12.28,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 123,
+      "cluster_id": "npc:29319",
+      "name": "冰掌熊",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        13549
+      ],
+      "representative": {
+        "x": 73.87,
+        "y": 67.56,
+        "spawn_count": 22,
+        "min_x": 58.79,
+        "max_x": 78.01,
+        "min_y": 38.05,
+        "max_y": 73.51
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "quetzlun",
+      "edge_from_previous_map_percent": 1.97,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 124,
+      "cluster_id": "npc:28411",
+      "name": "冻土元素",
+      "quest_ids": [
+        12565,
+        12615,
+        12639,
+        12655
+      ],
+      "representative": {
+        "x": 56.1,
+        "y": 46.82,
+        "spawn_count": 21,
+        "min_x": 49.13,
+        "max_x": 58.37,
+        "min_y": 40.53,
+        "max_y": 55.06
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 27.31,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 125,
+      "cluster_id": "npc:28442",
+      "name": "伦诺克先知",
+      "quest_ids": [
+        12565,
+        12615,
+        12646,
+        12655
+      ],
+      "representative": {
+        "x": 54.1,
+        "y": 48.09,
+        "spawn_count": 1,
+        "min_x": 54.1,
+        "max_x": 54.1,
+        "min_y": 48.09,
+        "max_y": 48.09
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 2.37,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 126,
+      "cluster_id": "npc:28452",
+      "name": "元素裂隙",
+      "quest_ids": [
+        12640
+      ],
+      "representative": {
+        "x": 56.04,
+        "y": 44.17,
+        "spawn_count": 10,
+        "min_x": 49.71,
+        "max_x": 58.0,
+        "min_y": 41.54,
+        "max_y": 52.79
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 4.37,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 127,
+      "cluster_id": "npc:28597",
+      "name": "希姆鲁克守卫者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12729
+      ],
+      "representative": {
+        "x": 59.47,
+        "y": 44.2,
+        "spawn_count": 13,
+        "min_x": 57.86,
+        "max_x": 62.8,
+        "min_y": 40.03,
+        "max_y": 49.37
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 3.43,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 128,
+      "cluster_id": "npc:28916",
+      "name": "提里",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 63.82,
+        "y": 37.09,
+        "spawn_count": 1,
+        "min_x": 63.82,
+        "max_x": 63.82,
+        "min_y": 37.09,
+        "max_y": 37.09
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 8.34,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 129,
+      "cluster_id": "npc:28418",
+      "name": "达卡莱捕熊者",
+      "quest_ids": [
+        12565,
+        12615,
+        12650,
+        12655
+      ],
+      "representative": {
+        "x": 53.8,
+        "y": 38.02,
+        "spawn_count": 11,
+        "min_x": 50.05,
+        "max_x": 58.78,
+        "min_y": 37.41,
+        "max_y": 40.43
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 10.06,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 130,
+      "cluster_id": "npc:28417",
+      "name": "伦诺克的祭司",
+      "quest_ids": [
+        12565,
+        12615,
+        12650,
+        12655
+      ],
+      "representative": {
+        "x": 53.51,
+        "y": 37.05,
+        "spawn_count": 18,
+        "min_x": 49.63,
+        "max_x": 57.15,
+        "min_y": 34.93,
+        "max_y": 48.56
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 1.01,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 131,
+      "cluster_id": "npc:28575",
+      "name": "伦诺克的折磨者",
+      "quest_ids": [
+        12565,
+        12615,
+        12650,
+        12655
+      ],
+      "representative": {
+        "x": 53.38,
+        "y": 35.79,
+        "spawn_count": 1,
+        "min_x": 53.38,
+        "max_x": 53.38,
+        "min_y": 35.79,
+        "max_y": 35.79
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 1.27,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 132,
+      "cluster_id": "npc:28416",
+      "name": "伦诺克",
+      "quest_ids": [
+        12647
+      ],
+      "representative": {
+        "x": 53.48,
+        "y": 34.44,
+        "spawn_count": 1,
+        "min_x": 53.48,
+        "max_x": 53.48,
+        "min_y": 34.44,
+        "max_y": 34.44
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "rhunok_zimrhuk",
+      "edge_from_previous_map_percent": 1.35,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 133,
+      "cluster_id": "npc:28851",
+      "name": "被激怒的猛犸象",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12707
+      ],
+      "representative": {
+        "x": 73.37,
+        "y": 41.48,
+        "spawn_count": 12,
+        "min_x": 71.02,
+        "max_x": 75.14,
+        "min_y": 39.07,
+        "max_y": 44.51
+      },
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "spatial_instance": "mamtoth_east_mid",
+      "edge_from_previous_map_percent": 21.1,
+      "provisional_long_edge": true
+    },
+    {
+      "ordinal": 134,
+      "cluster_id": "npc:28861",
+      "name": "犸托斯信徒",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12707
+      ],
+      "representative": {
+        "x": 73.87,
+        "y": 42.74,
+        "spawn_count": 30,
+        "min_x": 70.06,
+        "max_x": 75.88,
+        "min_y": 37.88,
+        "max_y": 45.43
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "mamtoth_east_mid",
+      "edge_from_previous_map_percent": 1.36,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 135,
+      "cluster_id": "npc:28779",
+      "name": "犸托斯之血",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12684
+      ],
+      "representative": {
+        "x": 74.83,
+        "y": 49.62,
+        "spawn_count": 42,
+        "min_x": 68.1,
+        "max_x": 78.29,
+        "min_y": 45.17,
+        "max_y": 52.73
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "mamtoth_east_mid",
+      "edge_from_previous_map_percent": 6.95,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 136,
+      "cluster_id": "object:191123",
+      "name": "Convocation Summoning Circle",
+      "quest_ids": [
+        12730
+      ],
+      "representative": {
+        "x": 77.61,
+        "y": 36.65,
+        "spawn_count": 1,
+        "min_x": 77.61,
+        "max_x": 77.61,
+        "min_y": 36.65,
+        "max_y": 36.65
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 13.26,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 137,
+      "cluster_id": "npc:29236",
+      "name": "古达克蛮兵",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 78.63,
+        "y": 36.7,
+        "spawn_count": 14,
+        "min_x": 64.99,
+        "max_x": 82.1,
+        "min_y": 19.9,
+        "max_y": 44.91
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 1.02,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 138,
+      "cluster_id": "npc:29237",
+      "name": "古达克吞火者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 76.37,
+        "y": 35.54,
+        "spawn_count": 7,
+        "min_x": 66.96,
+        "max_x": 80.69,
+        "min_y": 22.01,
+        "max_y": 42.02
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 2.54,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 139,
+      "cluster_id": "npc:29334",
+      "name": "古达克迅猛龙",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        13556
+      ],
+      "representative": {
+        "x": 76.92,
+        "y": 28.38,
+        "spawn_count": 28,
+        "min_x": 71.5,
+        "max_x": 87.12,
+        "min_y": 15.75,
+        "max_y": 42.39
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 7.18,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 140,
+      "cluster_id": "npc:29332",
+      "name": "古达克蝙蝠骑士",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 76.98,
+        "y": 27.56,
+        "spawn_count": 9,
+        "min_x": 74.31,
+        "max_x": 86.77,
+        "min_y": 22.24,
+        "max_y": 33.63
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 0.82,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 141,
+      "cluster_id": "npc:28952",
+      "name": "阿卡里",
+      "quest_ids": [
+        12721
+      ],
+      "representative": {
+        "x": 78.61,
+        "y": 25.21,
+        "spawn_count": 1,
+        "min_x": 78.61,
+        "max_x": 78.61,
+        "min_y": 25.21,
+        "max_y": 25.21
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 2.86,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 142,
+      "cluster_id": "object:191018",
+      "name": "Akali Chain Anchor",
+      "quest_ids": [
+        12721
+      ],
+      "representative": {
+        "x": 78.62,
+        "y": 24.88,
+        "spawn_count": 4,
+        "min_x": 78.16,
+        "max_x": 79.1,
+        "min_y": 24.18,
+        "max_y": 25.58
+      },
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 0.33,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 143,
+      "cluster_id": "npc:29235",
+      "name": "古达克暴徒",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 78.78,
+        "y": 24.82,
+        "spawn_count": 6,
+        "min_x": 67.05,
+        "max_x": 82.41,
+        "min_y": 19.46,
+        "max_y": 41.98
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 0.17,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 144,
+      "cluster_id": "npc:28988",
+      "name": "阿卡里镇压者",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 79.07,
+        "y": 24.16,
+        "spawn_count": 9,
+        "min_x": 78.12,
+        "max_x": 79.86,
+        "min_y": 22.96,
+        "max_y": 26.69
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 0.72,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 145,
+      "cluster_id": "npc:28917",
+      "name": "亚拉",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 67.94,
+        "y": 32.71,
+        "spawn_count": 1,
+        "min_x": 67.94,
+        "max_x": 67.94,
+        "min_y": 32.71,
+        "max_y": 32.71
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 14.03,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 146,
+      "cluster_id": "npc:28902",
+      "name": "督军佐尔玛兹",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12712
+      ],
+      "representative": {
+        "x": 66.16,
+        "y": 32.79,
+        "spawn_count": 1,
+        "min_x": 66.16,
+        "max_x": 66.16,
+        "min_y": 32.79,
+        "max_y": 32.79
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 1.78,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 147,
+      "cluster_id": "npc:28882",
+      "name": "魔化蒂基面具战士",
+      "quest_ids": [
+        12565,
+        12615,
+        12655,
+        12708,
+        12709
+      ],
+      "representative": {
+        "x": 66.83,
+        "y": 35.91,
+        "spawn_count": 41,
+        "min_x": 63.78,
+        "max_x": 70.19,
+        "min_y": 32.46,
+        "max_y": 40.32
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 3.19,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 148,
+      "cluster_id": "npc:28918",
+      "name": "德克玛兹",
+      "quest_ids": [
+        12565,
+        12615,
+        12655
+      ],
+      "representative": {
+        "x": 68.2,
+        "y": 35.37,
+        "spawn_count": 1,
+        "min_x": 68.2,
+        "max_x": 68.2,
+        "min_y": 35.37,
+        "max_y": 35.37
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "gundrak_dubrajin_north",
+      "edge_from_previous_map_percent": 1.47,
+      "provisional_long_edge": false
+    }
+  ]
+}

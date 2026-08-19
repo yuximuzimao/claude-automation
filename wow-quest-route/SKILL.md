@@ -6,7 +6,7 @@
 2. 读 `docs/INDEX.md`，它只负责文档/数据入口导航，不承载完整规则。
 3. **继续当前首组实跑**：读 `docs/verified-routes/CURRENT.md`；只有CURRENT明确要求阶段背景时，再定向读 `docs/archive/neat/` 中对应的最近NEAT，不批量读历史。
 4. **生成/修订/审计任务路线**：读 `docs/rules/README.md`，只加载当前任务对应规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md` 和相关任务卡。
-5. **Route Atlas路线数据/裁剪/优化**：读 `docs/rules/route-atlas-optimization.md`；只有同时改玩家任务备注时加读 `execution-and-mechanics.md`。
+5. **Route Atlas路线数据/裁剪/优化**：读 `docs/rules/route-atlas-optimization.md` + `docs/rules/timing-and-benchmarking.md`；任何路线顺序、交通、步骤或任务块变化都必须同步重算受影响估时。只有同时改玩家任务备注时再加读 `execution-and-mechanics.md`。
 6. **Route Atlas HTML/地图/UI**：读 `docs/rules/route-atlas-ui-and-assets.md`；不要为了前端改动加载全部路线优化历史。
 7. **视频拆解**：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；历史NEAT只从 `docs/archive/video/` 定向读取。
 8. **DK 55—80母版**：只在处理DK路线时读 `docs/DK_55_80_WORLD_TASKS.md` 和对应生成数据，不加载首组历史路线。
@@ -19,7 +19,8 @@
 | `docs/INDEX.md` | 文档/数据导航索引，不承载完整规则 | 进入项目时读，确定后续最小读取范围 |
 | `docs/verified-routes/CURRENT.md` | 当前等级/现场状态/唯一恢复点 | 继续当前实跑时第一份业务文档 |
 | `docs/rules/README.md` | 永久规则路由，不存当前状态 | 任何路线规则问题先从这里选子规则 |
-| `docs/rules/leveling-and-selection.md` | 经验预算、地图轴、任务取舍、随机掉落/护送价值 | 规划/估时/筛任务时 |
+| `docs/rules/leveling-and-selection.md` | 经验预算、地图轴、任务取舍、随机掉落/护送价值 | 规划/筛任务时 |
+| `docs/rules/timing-and-benchmarking.md` | 分步骤/整图估时、clean baseline、实跑对比、长期基准处理 | 任何新路线、重排、估时或实跑效率复盘时 |
 | `docs/rules/execution-and-mechanics.md` | 玩家攻略格式、隐藏机制、掉落触发、五开共享、洞穴/楼层 | 写攻略/补备注/处理任务机制时 |
 | `docs/rules/state-and-validation.md` | 当前/从零路线分离、Journey、完整性、NEAT/Git边界 | 裁路线/审计/归档时 |
 | `docs/rules/route-atlas-optimization.md` | Route Atlas数据层、状态机、插入/裁剪、炉石、求解器 | 改路线数据/优化逻辑时 |
@@ -28,6 +29,7 @@
 | `docs/verified-routes/ERROR-BOOK.md` | 历史失败模式和发布前复查 | 生成/修订/审计路线前 |
 | `docs/task-library/README.md` | 单任务事实、证据、纠错写回 | 复用或核验具体任务时 |
 | `data/observations/fivebox-task-types.json` | 五开共享/个人机制实测 | 用户反馈任务行为时 |
+| `data/observations/route-timing-runs.json` | 路线预测/实跑墙钟、异常成本、长期目标基准 | 估时、效率复盘或记录新实测时 |
 | `data/observations/blocked-tasks.json` | 本服阻断/不可做任务 | 接不到、交不了、位面异常时 |
 | `data/route-atlas/workbench-routes.json` | 所有地图当前Route Atlas路线数据 | 改地图步骤/坐标/备注时 |
 | `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式执行HTML | 实跑/审图/复制到游戏电脑 |
@@ -50,7 +52,7 @@
 `CURRENT → rules路由 → ROUTE-DESIGN-PROCESS → ERROR-BOOK → task-library/Questie → 玩家冷启动复走 → 发布`
 
 ### Route Atlas
-`任务事实/当前状态 → workbench-routes.json → 逻辑步骤/备注审计 → build_route_atlas_workbench.py → 唯一route-atlas-workbench.html → 测试/JS检查`
+`任务事实/当前状态 → workbench-routes.json → 逻辑步骤/备注审计 → 重算受影响步骤/整图时间 → build_route_atlas_workbench.py → 唯一route-atlas-workbench.html → 测试/JS检查`
 
 ### 人物历程
 `QuestieConfig.char[*].journey → 脱敏事件 → 与当前路线对比 → 定位遗漏/折返/漏交 → 只修受影响窗口`

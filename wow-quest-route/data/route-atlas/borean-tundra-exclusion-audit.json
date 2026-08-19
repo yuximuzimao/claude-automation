@@ -3,6 +3,7 @@
     "defer_future_level_revisit": 5,
     "exclude_alliance_or_other_faction": 81,
     "exclude_deprecated_or_system": 6,
+    "exclude_dungeon_or_raid": 4,
     "exclude_no_xp": 2,
     "exclude_profession": 5,
     "exclude_repeatable_calendar": 4,
@@ -600,6 +601,14 @@
       ]
     },
     {
+      "quest_id": 11905,
+      "name": "延缓灾难",
+      "status": "exclude_dungeon_or_raid",
+      "reasons": [
+        "current_fivebox_outdoor_leveling_route_does_not_run_instances"
+      ]
+    },
+    {
       "quest_id": 11908,
       "name": "参考资料",
       "status": "exclude_alliance_or_other_faction",
@@ -607,6 +616,14 @@
         "finish_npc_alliance_only",
         "required_races_excludes_blood_elf",
         "start_npc_alliance_only"
+      ]
+    },
+    {
+      "quest_id": 11911,
+      "name": "苏醒",
+      "status": "exclude_dungeon_or_raid",
+      "reasons": [
+        "current_fivebox_outdoor_leveling_route_does_not_run_instances"
       ]
     },
     {
@@ -757,6 +774,14 @@
         "finish_npc_alliance_only",
         "required_races_excludes_blood_elf",
         "start_npc_alliance_only"
+      ]
+    },
+    {
+      "quest_id": 11973,
+      "name": "战争的囚徒",
+      "status": "exclude_dungeon_or_raid",
+      "reasons": [
+        "current_fivebox_outdoor_leveling_route_does_not_run_instances"
       ]
     },
     {
@@ -915,6 +940,14 @@
       "status": "exclude_alliance_or_other_faction",
       "reasons": [
         "required_races_excludes_blood_elf"
+      ]
+    },
+    {
+      "quest_id": 13095,
+      "name": "他们丝毫不感到羞愧吗？",
+      "status": "exclude_dungeon_or_raid",
+      "reasons": [
+        "current_fivebox_outdoor_leveling_route_does_not_run_instances"
       ]
     },
     {

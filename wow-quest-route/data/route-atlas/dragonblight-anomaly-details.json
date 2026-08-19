@@ -1,0 +1,625 @@
+{
+  "questie_version": "11.34.0",
+  "audit": {
+    "candidate_block_count": 5,
+    "parsed_block_count": 5,
+    "failed_block_count": 0,
+    "unresolved_symbol_count": 0,
+    "unresolved_symbols": {},
+    "kill_credit_objective_first": [],
+    "parse_failures": {},
+    "changed_fields": {
+      "11930": [
+        9
+      ],
+      "12033": [
+        10,
+        13
+      ],
+      "12050": [
+        12,
+        21
+      ],
+      "12052": [
+        12,
+        21
+      ],
+      "12112": [
+        12
+      ]
+    }
+  },
+  "rows": {
+    "11916": {
+      "name": "地狱咆哮的勇士",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 25237,
+          "name": "加尔鲁什·地狱咆哮",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 41.35,
+              "y": 53.58,
+              "spawn_count": 1,
+              "min_x": 41.35,
+              "max_x": 41.35,
+              "min_y": 53.58,
+              "max_y": 53.58
+            }
+          }
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 24703,
+          "name": "冬风酋长",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 75.89,
+              "y": 37.24,
+              "spawn_count": 1,
+              "min_x": 75.89,
+              "max_x": 75.89,
+              "min_y": 37.24,
+              "max_y": 37.24
+            }
+          }
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 25237,
+          "name": "加尔鲁什·地狱咆哮",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 41.35,
+              "y": 53.58,
+              "spawn_count": 1,
+              "min_x": 41.35,
+              "max_x": 41.35,
+              "min_y": 53.58,
+              "max_y": 53.58
+            }
+          }
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 24703,
+          "name": "冬风酋长",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 75.89,
+              "y": 37.24,
+              "spawn_count": 1,
+              "min_x": 75.89,
+              "max_x": 75.89,
+              "min_y": 37.24,
+              "max_y": 37.24
+            }
+          }
+        }
+      ],
+      "raw_pre_all": {
+        "1": 11652,
+        "2": 11705,
+        "3": 11722
+      },
+      "raw_pre_any": null,
+      "effective_pre_all": {
+        "1": 11652,
+        "2": 11705,
+        "3": 11722
+      },
+      "effective_pre_any": null,
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "前往牦牛村与冬风酋长谈一谈。",
+      "objective_en": "Seek out Chieftain Wintergale at Taunka'le Village."
+    },
+    "11930": {
+      "name": "横贯冰原",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26158,
+          "name": "陶拉努克宗母",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 78.33,
+              "y": 38.01,
+              "spawn_count": 1,
+              "min_x": 78.33,
+              "max_x": 78.33,
+              "min_y": 38.01,
+              "max_y": 38.01
+            }
+          }
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26156,
+          "name": "沃图克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 12.75,
+              "y": 51.7,
+              "spawn_count": 1,
+              "min_x": 12.75,
+              "max_x": 12.75,
+              "min_y": 51.7,
+              "max_y": 51.7
+            }
+          }
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26158,
+          "name": "陶拉努克宗母",
+          "zones": [
+            3537
+          ],
+          "representative_by_zone": {
+            "3537": {
+              "x": 78.33,
+              "y": 38.01,
+              "spawn_count": 1,
+              "min_x": 78.33,
+              "max_x": 78.33,
+              "min_y": 38.01,
+              "max_y": 38.01
+            }
+          }
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26156,
+          "name": "沃图克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 12.75,
+              "y": 51.7,
+              "spawn_count": 1,
+              "min_x": 12.75,
+              "max_x": 12.75,
+              "min_y": 51.7,
+              "max_y": 51.7
+            }
+          }
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": {
+        "1": 11929
+      },
+      "effective_pre_all": null,
+      "effective_pre_any": {
+        "1": 11929
+      },
+      "next": 11977,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "护送牦牛村撤离者穿越横贯冰原，与龙骨荒野边界处的沃图克碰面。",
+      "objective_en": "Escort the Taunka'le Evacuees across Transborea to Wartook Iceborn on the border of the Dragonblight."
+    },
+    "12033": {
+      "name": "萨鲁法尔的信",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26649,
+          "name": "信使托弗斯",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 37.32,
+              "y": 46.79,
+              "spawn_count": 1,
+              "min_x": 37.32,
+              "max_x": 37.32,
+              "min_y": 46.79,
+              "max_y": 46.79
+            }
+          }
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26649,
+          "name": "信使托弗斯",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 37.32,
+              "y": 46.79,
+              "spawn_count": 1,
+              "min_x": 37.32,
+              "max_x": 37.32,
+              "min_y": 46.79,
+              "max_y": 46.79
+            }
+          }
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26649,
+          "name": "信使托弗斯",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 37.32,
+              "y": 46.79,
+              "spawn_count": 1,
+              "min_x": 37.32,
+              "max_x": 37.32,
+              "min_y": 46.79,
+              "max_y": 46.79
+            }
+          }
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26649,
+          "name": "信使托弗斯",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 37.32,
+              "y": 46.79,
+              "spawn_count": 1,
+              "min_x": 37.32,
+              "max_x": 37.32,
+              "min_y": 46.79,
+              "max_y": 46.79
+            }
+          }
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": null,
+      "effective_pre_any": {
+        "1": 11916
+      },
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "阅读萨鲁法尔给你的信，然后摧毁它。 /  / 做完这件事情之后与信使托弗斯谈一谈。",
+      "objective_en": "Read the Letter from Saurfang and then destroy it. /  / Speak to Messenger Torvus once you have completed this task."
+    },
+    "12043": {
+      "name": "诺兹拉斯的防御",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": null,
+      "effective_pre_any": null,
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "在迦拉克隆之墓附近的挖掘站内杀死12个废土挖掘者和1个废土工头。完成任务之后向诺兹拉斯哨站的纳尔弗复命。",
+      "objective_en": "Kill 12 Wastes Diggers and 1 Wastes Taskmaster at the digs surrounding Galakrond's Rest. Return to Narf at Nozzlerust Post when the task is complete."
+    },
+    "12050": {
+      "name": "抢木材",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26660,
+          "name": "辛克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 55.02,
+              "y": 23.42,
+              "spawn_count": 1,
+              "min_x": 55.02,
+              "max_x": 55.02,
+              "min_y": 23.42,
+              "max_y": 23.42
+            }
+          }
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26660,
+          "name": "辛克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 55.02,
+              "y": 23.42,
+              "spawn_count": 1,
+              "min_x": 55.02,
+              "max_x": 55.02,
+              "min_y": 23.42,
+              "max_y": 23.42
+            }
+          }
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26660,
+          "name": "辛克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 55.02,
+              "y": 23.42,
+              "spawn_count": 1,
+              "min_x": 55.02,
+              "max_x": 55.02,
+              "min_y": 23.42,
+              "max_y": 23.42
+            }
+          }
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26660,
+          "name": "辛克",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 55.02,
+              "y": 23.42,
+              "spawn_count": 1,
+              "min_x": 55.02,
+              "max_x": 55.02,
+              "min_y": 23.42,
+              "max_y": 23.42
+            }
+          }
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": {
+        "1": 12046,
+        "2": 12047
+      },
+      "effective_pre_any": null,
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "前往北边的鹰身人巢穴，使用辛克的伐木机控制器召唤出一只伐木机器人。从该区域的树上收集50捆木材，然后把它们交给诺兹拉斯哨站的辛克。 /  / 如果你弄丢了辛克的伐木机控制器，就去找诺兹拉斯哨站的辛克再要一个。",
+      "objective_en": "Use Xink's Shredder Control Device to call a Shredder once you reach the Harpy Nesting Grounds in the North. Gather 50 Bundles of Lumber from the trees in the area, and then return to Xink at Nozzlerust Post. /  / Should you lose Xink's Shredder Control Device, speak to Xink at Nozzlerust Post to obtain a new one."
+    },
+    "12051": {
+      "name": "消灭鹰身人",
+      "raw_start": [],
+      "raw_finish": [],
+      "effective_start": [],
+      "effective_finish": [],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": null,
+      "effective_pre_any": null,
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "前往诺兹拉斯哨站的西北边，为诺兹拉斯哨站的纳尔弗消灭20个鹰身人。",
+      "objective_en": "Kill 20 Harpies Northwest of Nozzlerust Post for Narf at Nozzlerust Post."
+    },
+    "12052": {
+      "name": "该死的鹰身人！",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": {
+        "1": 12046,
+        "2": 12047
+      },
+      "effective_pre_any": null,
+      "next": null,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "前往诺兹拉斯哨站西北方的山地中，杀死冷风女王和15个冷风女巫。完成任务之后向纳尔弗复命。 /  / 如果你需要辛克的伐木机控制器，就去找诺兹拉斯哨站的辛克。",
+      "objective_en": "Kill the Mistress of the Coldwind and 15 Coldwind harpies in the mountains northwest of Nozzlerust Post. Return to Narf once the task is complete. /  / Should you be in need of Xink's Shredder Control Device, speak to Xink at Nozzlerust Post."
+    },
+    "12112": {
+      "name": "艰难的沟通",
+      "raw_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "raw_finish": [
+        {
+          "type": "npc",
+          "id": 26659,
+          "name": "佐特",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 59.4,
+              "y": 18.18,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 18.18,
+              "max_y": 18.18
+            }
+          }
+        }
+      ],
+      "effective_start": [
+        {
+          "type": "npc",
+          "id": 26647,
+          "name": "纳尔弗",
+          "zones": [],
+          "representative_by_zone": {}
+        }
+      ],
+      "effective_finish": [
+        {
+          "type": "npc",
+          "id": 26659,
+          "name": "佐特",
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 59.4,
+              "y": 18.18,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 18.18,
+              "max_y": 18.18
+            }
+          }
+        }
+      ],
+      "raw_pre_all": null,
+      "raw_pre_any": null,
+      "effective_pre_all": {
+        "1": 12050,
+        "2": 12052
+      },
+      "effective_pre_any": null,
+      "next": 12075,
+      "parent": null,
+      "available_starting_with": null,
+      "objective_zh": "前往诺兹拉斯哨站的东北方，在水晶裂痕中部找到佐特。",
+      "objective_en": "Locate Zort in the center of the Crystal Vice, northeast of Nozzlerust Post."
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "formal_remaining_p2_removal_impact_audit",
+  "route_key": "borean",
+  "confirmed_at": "2026-08-18",
+  "scope": "Remaining valid P2B/P2C candidates after the Coldarra retention override. HTML intentionally not rebuilt.",
+  "resolved_locked_fact_correction": {
+    "quest_id": 11606,
+    "name": "耐心是我们不需要的美德",
+    "confirmed_fact": "Warsong Munitions are personal ground-object pickups; one box can only be picked by one character.",
+    "previous_locked_label": "P2B",
+    "current_locked_label": "P3B",
+    "current_collection_source": "pickup",
+    "route_status": "kept; no longer belongs to the P2 deletion pass"
+  },
+  "removed_p2_roots": [
+    {"quest_id": 11644, "name": "超强度金属板！", "label": "P2C"},
+    {"quest_id": 11655, "name": "深入迷雾", "label": "P2B"},
+    {"quest_id": 11716, "name": "奇妙的血孢", "label": "P2C"},
+    {"quest_id": 11717, "name": "授粉的巨蛾", "label": "P2C"},
+    {"quest_id": 11871, "name": "不可容忍", "label": "P2C"}
+  ],
+  "borean_dependency_closure_removed": [
+    11644, 11651, 11652, 11655, 11656, 11662,
+    11716, 11717, 11719, 11720, 11721, 11722,
+    11871, 11872, 11892, 11916
+  ],
+  "dragonblight_dependency_closure_removed": [12033],
+  "dragonblight_dependency_note": "12033 《萨鲁法尔的信》 requires 11916 《地狱咆哮的勇士》 and is terminal; removing it does not cut a downstream Dragonblight chain.",
+  "route_geometry": {
+    "borean_points_before": 221,
+    "borean_points_after": 206,
+    "borean_step_groups_before": 68,
+    "borean_step_groups_after": 67,
+    "dragonblight_points_before": 194,
+    "dragonblight_points_after": 193,
+    "dragonblight_step_groups": 51,
+    "estimated_movement_minutes_saved": 5.92,
+    "hub_handling_minutes_before": {"borean": 134.89, "dragonblight": 124.25},
+    "hub_handling_minutes_after": {"borean": 124.41, "dragonblight": 123.60},
+    "estimated_hub_handling_minutes_saved": 11.13
+  },
+  "xp_lower_bound": {
+    "start": {"level": 68, "xp": 0},
+    "selected_borean_turnins": 143,
+    "selected_borean_task_count_including_crossmap_carry": 144,
+    "borean_task_reward_total": 4770500,
+    "dragonblight_entry": {"level": 72, "xp": 158500},
+    "entry_floor_required_level": 71,
+    "first_guaranteed_level_73_after_entry": {
+      "dragonblight_point_after_patch": 61,
+      "turnin": "寻找线索",
+      "state": {"level": 73, "xp": 23100},
+      "location": "阿格玛之锤"
+    },
+    "level_73_gate_handling": "Accept 《高级执行官需要你》 earlier if actual XP reaches 73; otherwise point 61 is the guaranteed same-Hub fallback, with no extra travel."
+  },
+  "incremental_time_saving_model": {
+    "certain_movement_plus_hub_minutes": 17.05,
+    "estimated_total_minutes_low": 54,
+    "estimated_total_minutes_high": 74,
+    "nassam_plains_user_timing_upper_bound_minutes": 15,
+    "uncertainty_note": "Range deliberately avoids double-counting Kvaldir/Bloodspore/Nesingwary shared farming. 《纳萨姆平原》 no longer uses the generic 31-minute mixed-objective model: user field data gives a maximum of about 3 minutes per character, so five sequential characters are capped at about 15 minutes."
+  },
+  "protected_package_unchanged": "Coldarra blue-dragon/dragon-hunt retention override remains active; 《破译密码》 keeps P2A but stays in route.",
+  "html_rebuilt": false
+}

@@ -1,0 +1,4733 @@
+{
+  "zone_id": 394,
+  "task_schema_keys": [
+    "all_route_zones",
+    "assigned_zone_id",
+    "assigned_zone_name",
+    "available_starting_with",
+    "breadcrumb_for",
+    "breadcrumbs",
+    "child_quests",
+    "class_allowed",
+    "disabled_by_quest",
+    "eligibility",
+    "english_name",
+    "exclusive_to",
+    "extra_objective_zones",
+    "extra_objectives",
+    "faction_reasons",
+    "finish_entities",
+    "first_run_policy",
+    "intrinsic_service_time",
+    "is_daily",
+    "is_deprecated_or_system",
+    "is_dungeon",
+    "is_monthly",
+    "is_raid_flagged",
+    "is_repeatable",
+    "is_weekly",
+    "name",
+    "next_quest",
+    "npc_faction_allowed",
+    "objective_review",
+    "objective_text_en",
+    "objective_text_zh",
+    "objective_zones",
+    "objectives",
+    "parent_active",
+    "pre_all",
+    "pre_any",
+    "pvp",
+    "quest_flags",
+    "quest_id",
+    "quest_level",
+    "race_allowed",
+    "required_classes",
+    "required_level",
+    "required_max_level",
+    "required_max_rep",
+    "required_min_rep",
+    "required_races",
+    "required_ranks",
+    "required_skill",
+    "required_specialization",
+    "required_spell",
+    "rewards",
+    "route_mechanism_note",
+    "special_flags",
+    "start_entities",
+    "start_zones",
+    "task_class",
+    "task_flags",
+    "touching_northrend_zone_ids",
+    "turnin_zones",
+    "xp"
+  ],
+  "sample_task": {
+    "quest_id": 11982,
+    "name": "巨石横飞",
+    "english_name": "Raining Down Destruction",
+    "assigned_zone_id": 394,
+    "assigned_zone_name": "灰熊丘陵",
+    "touching_northrend_zone_ids": [
+      394
+    ],
+    "required_level": 72,
+    "quest_level": 75,
+    "required_max_level": null,
+    "required_races": 0,
+    "required_classes": null,
+    "required_skill": null,
+    "required_min_rep": null,
+    "required_max_rep": null,
+    "required_spell": null,
+    "required_specialization": null,
+    "required_ranks": null,
+    "available_starting_with": [],
+    "disabled_by_quest": [],
+    "quest_flags": 128,
+    "special_flags": 0,
+    "race_allowed": true,
+    "class_allowed": true,
+    "npc_faction_allowed": true,
+    "faction_reasons": [],
+    "is_repeatable": false,
+    "is_daily": false,
+    "is_weekly": false,
+    "is_monthly": false,
+    "first_run_policy": "one_time",
+    "is_deprecated_or_system": false,
+    "is_dungeon": false,
+    "is_raid_flagged": false,
+    "pvp": {
+      "is_pvp": false,
+      "mode": "not_pvp",
+      "allowed_by_policy": true,
+      "evidence": []
+    },
+    "objective_text_zh": "在丘陵上俯瞰索尔莫丹的库伦要求你向索尔莫丹的露天区域投掷石块，以此骚扰铁矮人的挖掘工作。",
+    "objective_text_en": "Kurun on the hill overlooking Thor Modan wants you to disrupt the iron dwarves' work by throwing boulders into the exposed area of Thor Modan.",
+    "task_class": "shared_kill",
+    "task_flags": [],
+    "objective_review": [],
+    "objectives": [
+      {
+        "objective_type": "kill",
+        "required_count": 1,
+        "entity_ids": [
+          26270
+        ],
+        "item_id": null,
+        "item_name": null,
+        "sources": [
+          {
+            "entity_type": "npc",
+            "entity_id": 26270,
+            "name": "铁符文塑造者",
+            "min_level": 73,
+            "max_level": 74,
+            "min_health": 9940,
+            "max_health": 10282,
+            "rank": 0,
+            "spawn_count": 22,
+            "zones": [
+              394
+            ],
+            "representative_by_zone": {
+              "394": {
+                "x": 67.68,
+                "y": 15.66,
+                "spawn_count": 22,
+                "min_x": 65.12,
+                "max_x": 70.79,
+                "min_y": 13.12,
+                "max_y": 18.87
+              }
+            }
+          }
+        ],
+        "count_confidence": "implicit_single",
+        "fivebox_mode": "kill_progress_shared_expected",
+        "mechanic": "regular_shared_kills",
+        "difficulty_flags": []
+      }
+    ],
+    "extra_objectives": [],
+    "start_entities": [
+      {
+        "entity_type": "npc",
+        "entity_id": 26260,
+        "name": "库伦",
+        "min_level": 74,
+        "max_level": 74,
+        "min_health": 30846,
+        "max_health": 30846,
+        "rank": 1,
+        "spawn_count": 1,
+        "zones": [
+          394
+        ],
+        "representative_by_zone": {
+          "394": {
+            "x": 65.77,
+            "y": 17.78,
+            "spawn_count": 1,
+            "min_x": 65.77,
+            "max_x": 65.77,
+            "min_y": 17.78,
+            "max_y": 17.78
+          }
+        }
+      }
+    ],
+    "finish_entities": [
+      {
+        "entity_type": "npc",
+        "entity_id": 26260,
+        "name": "库伦",
+        "min_level": 74,
+        "max_level": 74,
+        "min_health": 30846,
+        "max_health": 30846,
+        "rank": 1,
+        "spawn_count": 1,
+        "zones": [
+          394
+        ],
+        "representative_by_zone": {
+          "394": {
+            "x": 65.77,
+            "y": 17.78,
+            "spawn_count": 1,
+            "min_x": 65.77,
+            "max_x": 65.77,
+            "min_y": 17.78,
+            "max_y": 17.78
+          }
+        }
+      }
+    ],
+    "start_zones": [
+      394
+    ],
+    "objective_zones": [
+      394
+    ],
+    "extra_objective_zones": [],
+    "turnin_zones": [
+      394
+    ],
+    "all_route_zones": [
+      394
+    ],
+    "pre_any": [],
+    "pre_all": [],
+    "parent_active": [],
+    "next_quest": 12070,
+    "child_quests": [],
+    "exclusive_to": [],
+    "breadcrumb_for": null,
+    "breadcrumbs": [],
+    "xp": {
+      "has_xp": true,
+      "xp_db_level": 75,
+      "xp_db_base": 20950,
+      "server_leveling_multiplier": 2.0,
+      "server_xp_at_earliest_route_level": 41900,
+      "max_level_bonus_money": {
+        "level": 80,
+        "xp_at_level_80_base": 20950,
+        "bonus_money_from_xp_copper": 125700,
+        "bonus_money_from_xp_gold_decimal": 12.57,
+        "display": "12g 57s 00c",
+        "no_money_from_xp": false,
+        "rate": "6 copper per base XP at level 80",
+        "server_leveling_xp_multiplier_applied": false
+      }
+    },
+    "rewards": {
+      "equipment_rewards": [],
+      "other_reward_items": [],
+      "direct_money_status": "not_yet_globally_audited"
+    },
+    "route_mechanism_note": null,
+    "eligibility": {
+      "status": "eligible_first_run",
+      "reasons": []
+    },
+    "intrinsic_service_time": {
+      "status": "estimated",
+      "minutes": 0.25,
+      "basis": "shared_kill_model"
+    }
+  },
+  "zone_name": "灰熊丘陵",
+  "source": "data/routes/world-candidate/394-grizzly-hills/route.json",
+  "strategy": "first-run continuous outdoor full-clear baseline; no speed/economic pruning before first run",
+  "step_count": 115,
+  "candidate_quest_count": 79,
+  "selected_after_structural_exclusions": 75,
+  "structural_exclusions_present": {
+    "11981": "与12074互斥；当前部落征服堡轴自然采用12074",
+    "12434": "可重复且无经验的后续；不生成第二轮",
+    "12446": "联盟阵营任务",
+    "12763": "与龙骨已携带的12789互斥"
+  },
+  "excluded_task_facts": {
+    "11981": {
+      "quest_id": 11981,
+      "name": "找到库伦！",
+      "english_name": "Find Kurun!",
+      "assigned_zone_id": 394,
+      "assigned_zone_name": "灰熊丘陵",
+      "touching_northrend_zone_ids": [
+        394
+      ],
+      "required_level": 72,
+      "quest_level": 75,
+      "required_max_level": null,
+      "required_races": 0,
+      "required_classes": null,
+      "required_skill": null,
+      "required_min_rep": null,
+      "required_max_rep": null,
+      "required_spell": null,
+      "required_specialization": null,
+      "required_ranks": null,
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "quest_flags": 136,
+      "special_flags": 0,
+      "race_allowed": true,
+      "class_allowed": true,
+      "npc_faction_allowed": true,
+      "faction_reasons": [],
+      "is_repeatable": false,
+      "is_daily": false,
+      "is_weekly": false,
+      "is_monthly": false,
+      "first_run_policy": "one_time",
+      "is_deprecated_or_system": false,
+      "is_dungeon": false,
+      "is_raid_flagged": false,
+      "pvp": {
+        "is_pvp": false,
+        "mode": "not_pvp",
+        "allowed_by_policy": true,
+        "evidence": []
+      },
+      "objective_text_zh": "前往俯瞰索尔莫丹的丘陵地带，在那里找到库伦。",
+      "objective_text_en": "Speak with Kurun on the hill overlooking Thor Modan.",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "extra_objectives": [],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 26335,
+          "name": "倒下的土灵战士",
+          "min_level": 74,
+          "max_level": 74,
+          "min_health": 4627,
+          "max_health": 4627,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 63.68,
+              "y": 23.14,
+              "spawn_count": 1,
+              "min_x": 63.68,
+              "max_x": 63.68,
+              "min_y": 23.14,
+              "max_y": 23.14
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 26260,
+          "name": "库伦",
+          "min_level": 74,
+          "max_level": 74,
+          "min_health": 30846,
+          "max_health": 30846,
+          "rank": 1,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 65.77,
+              "y": 17.78,
+              "spawn_count": 1,
+              "min_x": 65.77,
+              "max_x": 65.77,
+              "min_y": 17.78,
+              "max_y": 17.78
+            }
+          }
+        }
+      ],
+      "start_zones": [
+        394
+      ],
+      "objective_zones": [],
+      "extra_objective_zones": [],
+      "turnin_zones": [
+        394
+      ],
+      "all_route_zones": [
+        394
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11982,
+      "child_quests": [],
+      "exclusive_to": [
+        12074
+      ],
+      "breadcrumb_for": null,
+      "breadcrumbs": [],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 75,
+        "xp_db_base": 2100,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 4200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 2100,
+          "bonus_money_from_xp_copper": 12600,
+          "bonus_money_from_xp_gold_decimal": 1.26,
+          "display": "1g 26s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "rewards": {
+        "equipment_rewards": [],
+        "other_reward_items": [],
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "route_mechanism_note": null,
+      "eligibility": {
+        "status": "eligible_first_run",
+        "reasons": []
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    "12434": {
+      "quest_id": 12434,
+      "name": "继续寻找溶解剂",
+      "english_name": "Always Seeking Solvent",
+      "assigned_zone_id": 394,
+      "assigned_zone_name": "灰熊丘陵",
+      "touching_northrend_zone_ids": [
+        394
+      ],
+      "required_level": 73,
+      "quest_level": 74,
+      "required_max_level": null,
+      "required_races": 690,
+      "required_classes": null,
+      "required_skill": null,
+      "required_min_rep": null,
+      "required_max_rep": null,
+      "required_spell": null,
+      "required_specialization": null,
+      "required_ranks": null,
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "quest_flags": 8320,
+      "special_flags": 1,
+      "race_allowed": true,
+      "class_allowed": true,
+      "npc_faction_allowed": true,
+      "faction_reasons": [],
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "is_monthly": false,
+      "first_run_policy": "include_first_run_only",
+      "is_deprecated_or_system": false,
+      "is_dungeon": false,
+      "is_raid_flagged": false,
+      "pvp": {
+        "is_pvp": false,
+        "mode": "not_pvp",
+        "allowed_by_policy": true,
+        "evidence": []
+      },
+      "objective_text_zh": "",
+      "objective_text_en": "",
+      "task_class": "world_object_item_collection",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 1,
+          "entity_ids": [
+            189976
+          ],
+          "item_id": 37664,
+          "item_name": "Element 115",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 189976,
+              "name": "Element 115",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                394
+              ],
+              "representative_by_zone": {
+                "394": {
+                  "x": 16.4,
+                  "y": 80.3,
+                  "spawn_count": 2,
+                  "min_x": 16.36,
+                  "max_x": 16.44,
+                  "min_y": 80.26,
+                  "max_y": 80.33
+                }
+              }
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "extra_objectives": [],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27565,
+          "name": "古图尔",
+          "min_level": 70,
+          "max_level": 70,
+          "min_health": 8982,
+          "max_health": 8982,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 11.17,
+              "y": 76.62,
+              "spawn_count": 1,
+              "min_x": 11.17,
+              "max_x": 11.17,
+              "min_y": 76.62,
+              "max_y": 76.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27565,
+          "name": "古图尔",
+          "min_level": 70,
+          "max_level": 70,
+          "min_health": 8982,
+          "max_health": 8982,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 11.17,
+              "y": 76.62,
+              "spawn_count": 1,
+              "min_x": 11.17,
+              "max_x": 11.17,
+              "min_y": 76.62,
+              "max_y": 76.62
+            }
+          }
+        }
+      ],
+      "start_zones": [
+        394
+      ],
+      "objective_zones": [
+        394
+      ],
+      "extra_objective_zones": [],
+      "turnin_zones": [
+        394
+      ],
+      "all_route_zones": [
+        394
+      ],
+      "pre_any": [
+        12433
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "exclusive_to": [],
+      "breadcrumb_for": null,
+      "breadcrumbs": [],
+      "xp": {
+        "has_xp": false,
+        "xp_db_level": null,
+        "xp_db_base": null,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 0,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 0,
+          "bonus_money_from_xp_copper": 0,
+          "bonus_money_from_xp_gold_decimal": 0.0,
+          "display": "0g 00s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "rewards": {
+        "equipment_rewards": [],
+        "other_reward_items": [
+          {
+            "item_id": 37836,
+            "name": "Venture Coin",
+            "item_class": 10,
+            "item_subclass": 0,
+            "item_level": 1,
+            "required_level": 0
+          }
+        ],
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "route_mechanism_note": null,
+      "eligibility": {
+        "status": "eligible_first_run",
+        "reasons": []
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 0.5833333333333334,
+        "basis": "fixed_object_fivebox_model"
+      }
+    },
+    "12446": {
+      "quest_id": 12446,
+      "name": "继续寻找溶解剂",
+      "english_name": "Always Seeking Solvent",
+      "assigned_zone_id": 394,
+      "assigned_zone_name": "灰熊丘陵",
+      "touching_northrend_zone_ids": [
+        394
+      ],
+      "required_level": 73,
+      "quest_level": 74,
+      "required_max_level": null,
+      "required_races": 1101,
+      "required_classes": null,
+      "required_skill": null,
+      "required_min_rep": null,
+      "required_max_rep": null,
+      "required_spell": null,
+      "required_specialization": null,
+      "required_ranks": null,
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "quest_flags": 8320,
+      "special_flags": 1,
+      "race_allowed": false,
+      "class_allowed": true,
+      "npc_faction_allowed": false,
+      "faction_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "is_monthly": false,
+      "first_run_policy": "include_first_run_only",
+      "is_deprecated_or_system": false,
+      "is_dungeon": false,
+      "is_raid_flagged": false,
+      "pvp": {
+        "is_pvp": false,
+        "mode": "not_pvp",
+        "allowed_by_policy": true,
+        "evidence": []
+      },
+      "objective_text_zh": "",
+      "objective_text_en": "",
+      "task_class": "world_object_item_collection",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 1,
+          "entity_ids": [
+            189976
+          ],
+          "item_id": 37664,
+          "item_name": "Element 115",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 189976,
+              "name": "Element 115",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                394
+              ],
+              "representative_by_zone": {
+                "394": {
+                  "x": 16.4,
+                  "y": 80.3,
+                  "spawn_count": 2,
+                  "min_x": 16.36,
+                  "max_x": 16.44,
+                  "min_y": 80.26,
+                  "max_y": 80.33
+                }
+              }
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "extra_objectives": [],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27495,
+          "name": "巴布芬克",
+          "min_level": 72,
+          "max_level": 72,
+          "min_health": 11052,
+          "max_health": 11052,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 23.02,
+              "y": 80.16,
+              "spawn_count": 1,
+              "min_x": 23.02,
+              "max_x": 23.02,
+              "min_y": 80.16,
+              "max_y": 80.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27495,
+          "name": "巴布芬克",
+          "min_level": 72,
+          "max_level": 72,
+          "min_health": 11052,
+          "max_health": 11052,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 23.02,
+              "y": 80.16,
+              "spawn_count": 1,
+              "min_x": 23.02,
+              "max_x": 23.02,
+              "min_y": 80.16,
+              "max_y": 80.16
+            }
+          }
+        }
+      ],
+      "start_zones": [
+        394
+      ],
+      "objective_zones": [
+        394
+      ],
+      "extra_objective_zones": [],
+      "turnin_zones": [
+        394
+      ],
+      "all_route_zones": [
+        394
+      ],
+      "pre_any": [
+        12443
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "exclusive_to": [],
+      "breadcrumb_for": null,
+      "breadcrumbs": [],
+      "xp": {
+        "has_xp": false,
+        "xp_db_level": null,
+        "xp_db_base": null,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 0,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 0,
+          "bonus_money_from_xp_copper": 0,
+          "bonus_money_from_xp_gold_decimal": 0.0,
+          "display": "0g 00s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "rewards": {
+        "equipment_rewards": [],
+        "other_reward_items": [
+          {
+            "item_id": 37836,
+            "name": "Venture Coin",
+            "item_class": 10,
+            "item_subclass": 0,
+            "item_level": 1,
+            "required_level": 0
+          }
+        ],
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "route_mechanism_note": null,
+      "eligibility": {
+        "status": "impossible_or_excluded",
+        "reasons": [
+          "finish_npc_alliance_only",
+          "required_races_excludes_blood_elf",
+          "start_npc_alliance_only"
+        ]
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 0.5833333333333334,
+        "basis": "fixed_object_fivebox_model"
+      }
+    },
+    "12763": {
+      "quest_id": 12763,
+      "name": "前线告急",
+      "english_name": "Shifting Priorities",
+      "assigned_zone_id": 394,
+      "assigned_zone_name": "灰熊丘陵",
+      "touching_northrend_zone_ids": [
+        66,
+        394
+      ],
+      "required_level": 74,
+      "quest_level": 75,
+      "required_max_level": null,
+      "required_races": 690,
+      "required_classes": null,
+      "required_skill": null,
+      "required_min_rep": null,
+      "required_max_rep": null,
+      "required_spell": null,
+      "required_specialization": null,
+      "required_ranks": null,
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "quest_flags": 136,
+      "special_flags": 0,
+      "race_allowed": true,
+      "class_allowed": true,
+      "npc_faction_allowed": true,
+      "faction_reasons": [],
+      "is_repeatable": false,
+      "is_daily": false,
+      "is_weekly": false,
+      "is_monthly": false,
+      "first_run_policy": "one_time",
+      "is_deprecated_or_system": false,
+      "is_dungeon": false,
+      "is_raid_flagged": false,
+      "pvp": {
+        "is_pvp": false,
+        "mode": "not_pvp",
+        "allowed_by_policy": true,
+        "evidence": []
+      },
+      "objective_text_zh": "斥候沃塔肯要你前往祖达克的圣光据点，向莉安娜中士报到。 /  / 欧尼瓦营地的玛吉·冬风会提供前往圣光据点的交通工具。",
+      "objective_text_en": "Scout Vor'takh wants you to travel to Zul'Drak and report to Sergeant Riannah at Light's Breach. /  / Makki Wintergale in Camp Onequah will provide you transportation.",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "extra_objectives": [],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 26666,
+          "name": "斥候沃塔肯",
+          "min_level": 75,
+          "max_level": 75,
+          "min_health": 10635,
+          "max_health": 10635,
+          "rank": 0,
+          "spawn_count": 1,
+          "zones": [
+            394
+          ],
+          "representative_by_zone": {
+            "394": {
+              "x": 65.17,
+              "y": 47.67,
+              "spawn_count": 1,
+              "min_x": 65.17,
+              "max_x": 65.17,
+              "min_y": 47.67,
+              "max_y": 47.67
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 29137,
+          "name": "莉安娜中士",
+          "min_level": 75,
+          "max_level": 75,
+          "min_health": 13956,
+          "max_health": 13956,
+          "rank": 1,
+          "spawn_count": 1,
+          "zones": [
+            66
+          ],
+          "representative_by_zone": {
+            "66": {
+              "x": 32.03,
+              "y": 74.42,
+              "spawn_count": 1,
+              "min_x": 32.03,
+              "max_x": 32.03,
+              "min_y": 74.42,
+              "max_y": 74.42
+            }
+          }
+        }
+      ],
+      "start_zones": [
+        394
+      ],
+      "objective_zones": [],
+      "extra_objective_zones": [],
+      "turnin_zones": [
+        66
+      ],
+      "all_route_zones": [
+        66,
+        394
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "exclusive_to": [
+        12770,
+        12789,
+        12792,
+        12793
+      ],
+      "breadcrumb_for": null,
+      "breadcrumbs": [],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 75,
+        "xp_db_base": 2100,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 4200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 2100,
+          "bonus_money_from_xp_copper": 12600,
+          "bonus_money_from_xp_gold_decimal": 1.26,
+          "display": "1g 26s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "rewards": {
+        "equipment_rewards": [],
+        "other_reward_items": [],
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "route_mechanism_note": null,
+      "eligibility": {
+        "status": "eligible_first_run",
+        "reasons": []
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    }
+  },
+  "action_counts": {
+    "接取": 39,
+    "完成目标": 35,
+    "交付": 41
+  },
+  "required_levels": [
+    72,
+    73
+  ],
+  "selected_quest_ids": [
+    11982,
+    11984,
+    11985,
+    11989,
+    11990,
+    11991,
+    12007,
+    12026,
+    12029,
+    12042,
+    12054,
+    12058,
+    12068,
+    12070,
+    12073,
+    12074,
+    12081,
+    12093,
+    12094,
+    12099,
+    12113,
+    12114,
+    12116,
+    12120,
+    12121,
+    12134,
+    12137,
+    12152,
+    12164,
+    12165,
+    12175,
+    12176,
+    12177,
+    12178,
+    12190,
+    12195,
+    12196,
+    12197,
+    12198,
+    12199,
+    12201,
+    12202,
+    12203,
+    12204,
+    12207,
+    12208,
+    12213,
+    12229,
+    12231,
+    12236,
+    12241,
+    12242,
+    12256,
+    12257,
+    12259,
+    12279,
+    12328,
+    12329,
+    12411,
+    12412,
+    12413,
+    12415,
+    12422,
+    12423,
+    12424,
+    12425,
+    12433,
+    12436,
+    12451,
+    12453,
+    12468,
+    12483,
+    12484,
+    12487,
+    12802
+  ],
+  "selected_task_facts": [
+    {
+      "quest_id": 11982,
+      "name": "巨石横飞",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12070,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 11984,
+      "name": "抓巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 11985,
+      "name": "攻破防线",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12070
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12081,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 11989,
+      "name": "停战？",
+      "required_level": 73,
+      "quest_level": 73,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11984
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11990,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 11990,
+      "name": "幻象之瓶",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11989
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11991,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 11991,
+      "name": "解读象形文字",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11990
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12007,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12007,
+      "name": "必要的牺牲",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "item_source_not_in_questie",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11991
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12042,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12026,
+      "name": "破损的日记",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "item_source_not_in_questie",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12054,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12029,
+      "name": "净化天灾巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "mixed_objectives",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12484
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12037,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12042,
+      "name": "古树精华宝石",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12007
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12802,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12054,
+      "name": "翻译日记",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12026
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12058,
+      "name": "符文中的预言",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_objectives",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12054
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12068,
+      "name": "灰尘之声",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "world_object_item_collection",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12802
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12238,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12070,
+      "name": "鼓舞士气",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11985,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12073,
+      "name": "“钢铁之子”",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_objectives",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12054
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12074,
+      "name": "新的盟友",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12081,
+      "name": "加弗洛克",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11985
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12093,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12093,
+      "name": "压制符文",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12081
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12094,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12094,
+      "name": "潜在的能量",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12093
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12099,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12099,
+      "name": "终获解救",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "elite_or_boss_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12094
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12113,
+      "name": "等肉下锅",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12114,
+      "name": "心灵的创伤",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12116,
+      "name": "孤胆英雄……",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "world_object_item_collection",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12120,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12120,
+      "name": "达卡古尔之槌",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12116
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12121,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12121,
+      "name": "死后相见",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12120
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12137,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12134,
+      "name": "萨莎的狩猎",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12329
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12137,
+      "name": "冷静一下，伙计",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12121
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12152,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12152,
+      "name": "金亚拉克的末日",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12137
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12164,
+      "name": "狼人的末日",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12411
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12165,
+      "name": "有趣的计划",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "item_source_not_in_questie",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12195
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12196,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12175,
+      "name": "灰狼的毛皮",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12176,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12176,
+      "name": "替代品",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12175
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12177,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12177,
+      "name": "休尼克的掩饰",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12176
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12178,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12178,
+      "name": "给克雷娜送货",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12177
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12190,
+      "name": "跟我的小朋友打招呼",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12483
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12195,
+      "name": "不速之“客”",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12165,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12196,
+      "name": "收集零件",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12165
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12197,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12197,
+      "name": "我们有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12196
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12198,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12198,
+      "name": "……我们没有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_objectives",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12197
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12199,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12199,
+      "name": "击败铁领主",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12198
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12201,
+      "name": "监工的制服",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12204
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12202,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12202,
+      "name": "活灵活现",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_objectives",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12201
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12203,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12203,
+      "name": "洛肯的命令",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12202
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12204,
+      "name": "以洛肯之名",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12099,
+        12058
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12201,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12207,
+      "name": "沃达希尔的陨落",
+      "required_level": 72,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12413
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12208,
+      "name": "狩猎巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11984,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12213,
+      "name": "地下的黑暗",
+      "required_level": 72,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12413
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12229,
+      "name": "可能的关联",
+      "required_level": 72,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12207,
+        12213
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12231,
+      "name": "熊神的后代",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12207,
+        12213
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12236,
+      "name": "乌索克，巨熊之神",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12241,
+        12242
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12241,
+      "name": "摧毁树苗",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "item_source_not_in_questie",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12229,
+        12231
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12242,
+      "name": "沃达希尔的种子",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "world_object_item_collection",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12229,
+        12231
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12256,
+      "name": "缚焰者的秘密",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12468
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12257,
+      "name": "显示力量",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12468
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12259,
+      "name": "沃德伦的领主",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [
+        12256,
+        12257
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12279,
+      "name": "熊的美食",
+      "required_level": 72,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "item_source_not_in_questie",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12328,
+      "name": "卢娜的要求",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12161,
+        12425
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12327,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12329,
+      "name": "命运与巧合",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12327
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12411,
+      "name": "姐姐的誓言",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12330
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12412,
+      "name": "我的敌人的朋友",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "multi_target_shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12259
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12413,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12413,
+      "name": "攻击银溪镇",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12415,
+      "name": "惊吓野马",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12422,
+      "name": "顺藤摸瓜",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12424
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12423,
+      "name": "米克哈尔的日记",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12424,
+      "start_zones": [],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12424,
+      "name": "高戈娜",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12423
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12422,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12425,
+      "name": "盲眼卢娜",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12422
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12328,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12433,
+      "name": "寻找溶解剂",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "world_object_item_collection",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12436,
+      "name": "赚外快",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "multi_creature_personal_drop",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12451,
+      "name": "前往欧尼瓦营地",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12259
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12453,
+      "name": "白肩鹰的眼睛",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "shared_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12468,
+      "name": "征服者的指派",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12257,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12483,
+      "name": "蘑菇汤！",
+      "required_level": 73,
+      "quest_level": 75,
+      "scope_status": null,
+      "task_class": "mixed_with_personal_item",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12484
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12190,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12484,
+      "name": "清理天灾",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "single_named_kill",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        11990
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start_zones": [
+        394,
+        3433
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12487,
+      "name": "前往征服堡，自求多福吧！",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12468,
+      "start_zones": [
+        65
+      ],
+      "turnin_zones": [
+        394
+      ]
+    },
+    {
+      "quest_id": 12802,
+      "name": "尽在掌控",
+      "required_level": 73,
+      "quest_level": 74,
+      "scope_status": null,
+      "task_class": "travel_dialogue_or_turnin",
+      "is_dungeon": false,
+      "is_repeatable": false,
+      "pre_any": [
+        12042
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12068,
+      "start_zones": [
+        394
+      ],
+      "turnin_zones": [
+        394
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "index": 1,
+      "action": "接取",
+      "quest_ids": [
+        11981,
+        12026
+      ],
+      "quest_names": [
+        "找到库伦！",
+        "破损的日记"
+      ],
+      "anchor": {
+        "x": 63.989999999999995,
+        "y": 21.455,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 2,
+      "action": "接取",
+      "quest_ids": [
+        12113,
+        12114,
+        12116
+      ],
+      "quest_names": [
+        "等肉下锅",
+        "心灵的创伤",
+        "孤胆英雄……"
+      ],
+      "anchor": {
+        "x": 73.84,
+        "y": 34.07,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 3,
+      "action": "接取",
+      "quest_ids": [
+        12279
+      ],
+      "quest_names": [
+        "熊的美食"
+      ],
+      "anchor": {
+        "x": 69.1,
+        "y": 40.1,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 4,
+      "action": "接取",
+      "quest_ids": [
+        12074,
+        12195,
+        12415,
+        12763
+      ],
+      "quest_names": [
+        "新的盟友",
+        "不速之“客”",
+        "惊吓野马",
+        "前线告急"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 5,
+      "action": "接取",
+      "quest_ids": [
+        12411
+      ],
+      "quest_names": [
+        "姐姐的誓言"
+      ],
+      "anchor": {
+        "x": 57.53,
+        "y": 41.26,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 6,
+      "action": "接取",
+      "quest_ids": [
+        12329
+      ],
+      "quest_names": [
+        "命运与巧合"
+      ],
+      "anchor": {
+        "x": 44.04,
+        "y": 47.95,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 7,
+      "action": "接取",
+      "quest_ids": [
+        12175,
+        12207,
+        12208,
+        12213,
+        12229,
+        12231,
+        12236,
+        12241,
+        12242,
+        12256,
+        12259,
+        12412,
+        12436,
+        12453
+      ],
+      "quest_names": [
+        "灰狼的毛皮",
+        "沃达希尔的陨落",
+        "狩猎巨魔",
+        "地下的黑暗",
+        "可能的关联",
+        "熊神的后代",
+        "乌索克，巨熊之神",
+        "摧毁树苗",
+        "沃达希尔的种子",
+        "缚焰者的秘密",
+        "沃德伦的领主",
+        "我的敌人的朋友",
+        "赚外快",
+        "白肩鹰的眼睛"
+      ],
+      "anchor": {
+        "x": 22.125,
+        "y": 64.455,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 8,
+      "action": "接取",
+      "quest_ids": [
+        12433
+      ],
+      "quest_names": [
+        "寻找溶解剂"
+      ],
+      "anchor": {
+        "x": 11.17,
+        "y": 76.62,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 9,
+      "action": "接取",
+      "quest_ids": [
+        11984
+      ],
+      "quest_names": [
+        "抓巨魔"
+      ],
+      "anchor": {
+        "x": 16.19,
+        "y": 47.61,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 10,
+      "action": "完成目标",
+      "quest_ids": [
+        12436
+      ],
+      "quest_names": [
+        "赚外快"
+      ],
+      "anchor": {
+        "x": 26.36,
+        "y": 50.43,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 11,
+      "action": "完成目标",
+      "quest_ids": [
+        12207,
+        12213
+      ],
+      "quest_names": [
+        "沃达希尔的陨落",
+        "地下的黑暗"
+      ],
+      "anchor": {
+        "x": 33.11,
+        "y": 47.285,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 12,
+      "action": "完成目标",
+      "quest_ids": [
+        12175
+      ],
+      "quest_names": [
+        "灰狼的毛皮"
+      ],
+      "anchor": {
+        "x": 22.21,
+        "y": 58.44,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 13,
+      "action": "完成目标",
+      "quest_ids": [
+        12412
+      ],
+      "quest_names": [
+        "我的敌人的朋友"
+      ],
+      "anchor": {
+        "x": 36.185,
+        "y": 68.10499999999999,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 14,
+      "action": "完成目标",
+      "quest_ids": [
+        12256,
+        12259
+      ],
+      "quest_names": [
+        "缚焰者的秘密",
+        "沃德伦的领主"
+      ],
+      "anchor": {
+        "x": 28.405,
+        "y": 74.28999999999999,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 15,
+      "action": "完成目标",
+      "quest_ids": [
+        12433,
+        12434,
+        12446
+      ],
+      "quest_names": [
+        "寻找溶解剂",
+        "继续寻找溶解剂",
+        "继续寻找溶解剂"
+      ],
+      "anchor": {
+        "x": 16.4,
+        "y": 80.3,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 16,
+      "action": "完成目标",
+      "quest_ids": [
+        12231
+      ],
+      "quest_names": [
+        "熊神的后代"
+      ],
+      "anchor": {
+        "x": 57.41,
+        "y": 60.66,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 17,
+      "action": "完成目标",
+      "quest_ids": [
+        12229
+      ],
+      "quest_names": [
+        "可能的关联"
+      ],
+      "anchor": {
+        "x": 52.82,
+        "y": 46.33,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 18,
+      "action": "完成目标",
+      "quest_ids": [
+        12242
+      ],
+      "quest_names": [
+        "沃达希尔的种子"
+      ],
+      "anchor": {
+        "x": 51.55,
+        "y": 40.98,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 19,
+      "action": "完成目标",
+      "quest_ids": [
+        12195,
+        12415
+      ],
+      "quest_names": [
+        "不速之“客”",
+        "惊吓野马"
+      ],
+      "anchor": {
+        "x": 66.385,
+        "y": 47.815,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 20,
+      "action": "完成目标",
+      "quest_ids": [
+        12113
+      ],
+      "quest_names": [
+        "等肉下锅"
+      ],
+      "anchor": {
+        "x": 72.31,
+        "y": 39.085,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 21,
+      "action": "完成目标",
+      "quest_ids": [
+        12114
+      ],
+      "quest_names": [
+        "心灵的创伤"
+      ],
+      "anchor": {
+        "x": 72.275,
+        "y": 26.755000000000003,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 22,
+      "action": "完成目标",
+      "quest_ids": [
+        12116
+      ],
+      "quest_names": [
+        "孤胆英雄……"
+      ],
+      "anchor": {
+        "x": 70.83,
+        "y": 20.32,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 23,
+      "action": "交付",
+      "quest_ids": [
+        11981,
+        12074
+      ],
+      "quest_names": [
+        "找到库伦！",
+        "新的盟友"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 24,
+      "action": "交付",
+      "quest_ids": [
+        12113,
+        12114,
+        12116
+      ],
+      "quest_names": [
+        "等肉下锅",
+        "心灵的创伤",
+        "孤胆英雄……"
+      ],
+      "anchor": {
+        "x": 73.84,
+        "y": 34.07,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 25,
+      "action": "交付",
+      "quest_ids": [
+        12279
+      ],
+      "quest_names": [
+        "熊的美食"
+      ],
+      "anchor": {
+        "x": 69.1,
+        "y": 40.1,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 26,
+      "action": "交付",
+      "quest_ids": [
+        12026,
+        12195,
+        12411,
+        12415
+      ],
+      "quest_names": [
+        "破损的日记",
+        "不速之“客”",
+        "姐姐的誓言",
+        "惊吓野马"
+      ],
+      "anchor": {
+        "x": 65.105,
+        "y": 47.635,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 27,
+      "action": "交付",
+      "quest_ids": [
+        12329
+      ],
+      "quest_names": [
+        "命运与巧合"
+      ],
+      "anchor": {
+        "x": 57.53,
+        "y": 41.26,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 28,
+      "action": "交付",
+      "quest_ids": [
+        11984,
+        12208
+      ],
+      "quest_names": [
+        "抓巨魔",
+        "狩猎巨魔"
+      ],
+      "anchor": {
+        "x": 16.19,
+        "y": 47.61,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 29,
+      "action": "交付",
+      "quest_ids": [
+        12175,
+        12207,
+        12213,
+        12229,
+        12231,
+        12236,
+        12241,
+        12242,
+        12256,
+        12259,
+        12412,
+        12423,
+        12436,
+        12453,
+        12487
+      ],
+      "quest_names": [
+        "灰狼的毛皮",
+        "沃达希尔的陨落",
+        "地下的黑暗",
+        "可能的关联",
+        "熊神的后代",
+        "乌索克，巨熊之神",
+        "摧毁树苗",
+        "沃达希尔的种子",
+        "缚焰者的秘密",
+        "沃德伦的领主",
+        "我的敌人的朋友",
+        "米克哈尔的日记",
+        "赚外快",
+        "白肩鹰的眼睛",
+        "前往征服堡，自求多福吧！"
+      ],
+      "anchor": {
+        "x": 22.05,
+        "y": 64.17,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 30,
+      "action": "交付",
+      "quest_ids": [
+        12433
+      ],
+      "quest_names": [
+        "寻找溶解剂"
+      ],
+      "anchor": {
+        "x": 11.17,
+        "y": 76.62,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 31,
+      "action": "接取",
+      "quest_ids": [
+        12176,
+        12413,
+        12424,
+        12451,
+        12468
+      ],
+      "quest_names": [
+        "替代品",
+        "攻击银溪镇",
+        "高戈娜",
+        "前往欧尼瓦营地",
+        "征服者的指派"
+      ],
+      "anchor": {
+        "x": 21.01,
+        "y": 64.17,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 32,
+      "action": "接取",
+      "quest_ids": [
+        11989
+      ],
+      "quest_names": [
+        "停战？"
+      ],
+      "anchor": {
+        "x": 16.43,
+        "y": 47.77,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 33,
+      "action": "接取",
+      "quest_ids": [
+        12134,
+        12164
+      ],
+      "quest_names": [
+        "萨莎的狩猎",
+        "狼人的末日"
+      ],
+      "anchor": {
+        "x": 57.53,
+        "y": 41.26,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 34,
+      "action": "接取",
+      "quest_ids": [
+        12054,
+        12165
+      ],
+      "quest_names": [
+        "翻译日记",
+        "有趣的计划"
+      ],
+      "anchor": {
+        "x": 65.23,
+        "y": 47.635,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 35,
+      "action": "接取",
+      "quest_ids": [
+        12120
+      ],
+      "quest_names": [
+        "达卡古尔之槌"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 36,
+      "action": "接取",
+      "quest_ids": [
+        11982
+      ],
+      "quest_names": [
+        "巨石横飞"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 37,
+      "action": "完成目标",
+      "quest_ids": [
+        11982
+      ],
+      "quest_names": [
+        "巨石横飞"
+      ],
+      "anchor": {
+        "x": 69.24,
+        "y": 14.9,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 38,
+      "action": "完成目标",
+      "quest_ids": [
+        12120
+      ],
+      "quest_names": [
+        "达卡古尔之槌"
+      ],
+      "anchor": {
+        "x": 72.64,
+        "y": 29.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 39,
+      "action": "完成目标",
+      "quest_ids": [
+        12164
+      ],
+      "quest_names": [
+        "狼人的末日"
+      ],
+      "anchor": {
+        "x": 86.44999999999999,
+        "y": 26.495,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 40,
+      "action": "完成目标",
+      "quest_ids": [
+        12134
+      ],
+      "quest_names": [
+        "萨莎的狩猎"
+      ],
+      "anchor": {
+        "x": 61.73,
+        "y": 41.98,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 41,
+      "action": "完成目标",
+      "quest_ids": [
+        12176
+      ],
+      "quest_names": [
+        "替代品"
+      ],
+      "anchor": {
+        "x": 47.155,
+        "y": 36.03,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 42,
+      "action": "完成目标",
+      "quest_ids": [
+        12413
+      ],
+      "quest_names": [
+        "攻击银溪镇"
+      ],
+      "anchor": {
+        "x": 24.75,
+        "y": 33.32,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 43,
+      "action": "完成目标",
+      "quest_ids": [
+        12054
+      ],
+      "quest_names": [
+        "翻译日记"
+      ],
+      "anchor": {
+        "x": 66.6,
+        "y": 58.82,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 44,
+      "action": "交付",
+      "quest_ids": [
+        12054,
+        12165,
+        12451
+      ],
+      "quest_names": [
+        "翻译日记",
+        "有趣的计划",
+        "前往欧尼瓦营地"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 45,
+      "action": "交付",
+      "quest_ids": [
+        12134,
+        12164
+      ],
+      "quest_names": [
+        "萨莎的狩猎",
+        "狼人的末日"
+      ],
+      "anchor": {
+        "x": 57.53,
+        "y": 41.26,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 46,
+      "action": "交付",
+      "quest_ids": [
+        12120
+      ],
+      "quest_names": [
+        "达卡古尔之槌"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 47,
+      "action": "交付",
+      "quest_ids": [
+        11982
+      ],
+      "quest_names": [
+        "巨石横飞"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 48,
+      "action": "交付",
+      "quest_ids": [
+        11989
+      ],
+      "quest_names": [
+        "停战？"
+      ],
+      "anchor": {
+        "x": 16.43,
+        "y": 47.77,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 49,
+      "action": "交付",
+      "quest_ids": [
+        12176,
+        12413,
+        12424,
+        12468
+      ],
+      "quest_names": [
+        "替代品",
+        "攻击银溪镇",
+        "高戈娜",
+        "征服者的指派"
+      ],
+      "anchor": {
+        "x": 20.905,
+        "y": 64.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 50,
+      "action": "接取",
+      "quest_ids": [
+        12177,
+        12257,
+        12422
+      ],
+      "quest_names": [
+        "休尼克的掩饰",
+        "显示力量",
+        "顺藤摸瓜"
+      ],
+      "anchor": {
+        "x": 21.01,
+        "y": 64.09,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 51,
+      "action": "接取",
+      "quest_ids": [
+        11990
+      ],
+      "quest_names": [
+        "幻象之瓶"
+      ],
+      "anchor": {
+        "x": 16.43,
+        "y": 47.77,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 52,
+      "action": "接取",
+      "quest_ids": [
+        12058,
+        12073,
+        12196
+      ],
+      "quest_names": [
+        "符文中的预言",
+        "“钢铁之子”",
+        "收集零件"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 53,
+      "action": "接取",
+      "quest_ids": [
+        12121
+      ],
+      "quest_names": [
+        "死后相见"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 54,
+      "action": "接取",
+      "quest_ids": [
+        12070
+      ],
+      "quest_names": [
+        "鼓舞士气"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 55,
+      "action": "完成目标",
+      "quest_ids": [
+        12058,
+        12070,
+        12073
+      ],
+      "quest_names": [
+        "符文中的预言",
+        "鼓舞士气",
+        "“钢铁之子”"
+      ],
+      "anchor": {
+        "x": 68.755,
+        "y": 15.165,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 56,
+      "action": "完成目标",
+      "quest_ids": [
+        12196
+      ],
+      "quest_names": [
+        "收集零件"
+      ],
+      "anchor": {
+        "x": 76.31,
+        "y": 59.754999999999995,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 57,
+      "action": "完成目标",
+      "quest_ids": [
+        12257
+      ],
+      "quest_names": [
+        "显示力量"
+      ],
+      "anchor": {
+        "x": 28.77,
+        "y": 76.2,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 58,
+      "action": "完成目标",
+      "quest_ids": [
+        11990
+      ],
+      "quest_names": [
+        "幻象之瓶"
+      ],
+      "anchor": {
+        "x": 14.83,
+        "y": 40.05,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 59,
+      "action": "交付",
+      "quest_ids": [
+        11990
+      ],
+      "quest_names": [
+        "幻象之瓶"
+      ],
+      "anchor": {
+        "x": 16.43,
+        "y": 47.77,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 60,
+      "action": "交付",
+      "quest_ids": [
+        12177,
+        12257
+      ],
+      "quest_names": [
+        "休尼克的掩饰",
+        "显示力量"
+      ],
+      "anchor": {
+        "x": 21.53,
+        "y": 64.58,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 61,
+      "action": "交付",
+      "quest_ids": [
+        12422
+      ],
+      "quest_names": [
+        "顺藤摸瓜"
+      ],
+      "anchor": {
+        "x": 21.93,
+        "y": 29.92,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 62,
+      "action": "交付",
+      "quest_ids": [
+        12058,
+        12073,
+        12196
+      ],
+      "quest_names": [
+        "符文中的预言",
+        "“钢铁之子”",
+        "收集零件"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 63,
+      "action": "交付",
+      "quest_ids": [
+        12070,
+        12121
+      ],
+      "quest_names": [
+        "鼓舞士气",
+        "死后相见"
+      ],
+      "anchor": {
+        "x": 67.59,
+        "y": 18.630000000000003,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 64,
+      "action": "接取",
+      "quest_ids": [
+        11985,
+        12137
+      ],
+      "quest_names": [
+        "攻破防线",
+        "冷静一下，伙计"
+      ],
+      "anchor": {
+        "x": 67.59,
+        "y": 18.630000000000003,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 65,
+      "action": "接取",
+      "quest_ids": [
+        12197,
+        12204
+      ],
+      "quest_names": [
+        "我们有能源",
+        "以洛肯之名"
+      ],
+      "anchor": {
+        "x": 65.13499999999999,
+        "y": 47.46,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 66,
+      "action": "接取",
+      "quest_ids": [
+        12178,
+        12425
+      ],
+      "quest_names": [
+        "给克雷娜送货",
+        "盲眼卢娜"
+      ],
+      "anchor": {
+        "x": 21.425,
+        "y": 64.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 67,
+      "action": "接取",
+      "quest_ids": [
+        11991,
+        12484
+      ],
+      "quest_names": [
+        "解读象形文字",
+        "清理天灾"
+      ],
+      "anchor": {
+        "x": 16.08,
+        "y": 47.230000000000004,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 68,
+      "action": "完成目标",
+      "quest_ids": [
+        12204
+      ],
+      "quest_names": [
+        "以洛肯之名"
+      ],
+      "anchor": {
+        "x": 74.43,
+        "y": 36.85,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 69,
+      "action": "完成目标",
+      "quest_ids": [
+        12137
+      ],
+      "quest_names": [
+        "冷静一下，伙计"
+      ],
+      "anchor": {
+        "x": 69.35,
+        "y": 19.58,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 70,
+      "action": "完成目标",
+      "quest_ids": [
+        11985
+      ],
+      "quest_names": [
+        "攻破防线"
+      ],
+      "anchor": {
+        "x": 70.21,
+        "y": 12.93,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 71,
+      "action": "完成目标",
+      "quest_ids": [
+        12197
+      ],
+      "quest_names": [
+        "我们有能源"
+      ],
+      "anchor": {
+        "x": 75.85499999999999,
+        "y": 58.125,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 72,
+      "action": "交付",
+      "quest_ids": [
+        12197,
+        12204
+      ],
+      "quest_names": [
+        "我们有能源",
+        "以洛肯之名"
+      ],
+      "anchor": {
+        "x": 65.13499999999999,
+        "y": 47.46,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 73,
+      "action": "交付",
+      "quest_ids": [
+        12137
+      ],
+      "quest_names": [
+        "冷静一下，伙计"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 74,
+      "action": "交付",
+      "quest_ids": [
+        11985
+      ],
+      "quest_names": [
+        "攻破防线"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 75,
+      "action": "交付",
+      "quest_ids": [
+        12425
+      ],
+      "quest_names": [
+        "盲眼卢娜"
+      ],
+      "anchor": {
+        "x": 44.04,
+        "y": 47.95,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 76,
+      "action": "交付",
+      "quest_ids": [
+        12484
+      ],
+      "quest_names": [
+        "清理天灾"
+      ],
+      "anchor": {
+        "x": 16.67,
+        "y": 48.29,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 77,
+      "action": "交付",
+      "quest_ids": [
+        11991
+      ],
+      "quest_names": [
+        "解读象形文字"
+      ],
+      "anchor": {
+        "x": 13.24,
+        "y": 60.87,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 78,
+      "action": "交付",
+      "quest_ids": [
+        12178
+      ],
+      "quest_names": [
+        "给克雷娜送货"
+      ],
+      "anchor": {
+        "x": 20.7,
+        "y": 64.17,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 79,
+      "action": "接取",
+      "quest_ids": [
+        12007
+      ],
+      "quest_names": [
+        "必要的牺牲"
+      ],
+      "anchor": {
+        "x": 13.24,
+        "y": 60.87,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 80,
+      "action": "接取",
+      "quest_ids": [
+        12029,
+        12483
+      ],
+      "quest_names": [
+        "净化天灾巨魔",
+        "蘑菇汤！"
+      ],
+      "anchor": {
+        "x": 16.200000000000003,
+        "y": 47.489999999999995,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 81,
+      "action": "接取",
+      "quest_ids": [
+        12328
+      ],
+      "quest_names": [
+        "卢娜的要求"
+      ],
+      "anchor": {
+        "x": 44.04,
+        "y": 47.95,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 82,
+      "action": "接取",
+      "quest_ids": [
+        12198,
+        12201
+      ],
+      "quest_names": [
+        "……我们没有能源",
+        "监工的制服"
+      ],
+      "anchor": {
+        "x": 65.13499999999999,
+        "y": 47.46,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 83,
+      "action": "接取",
+      "quest_ids": [
+        12152
+      ],
+      "quest_names": [
+        "金亚拉克的末日"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 84,
+      "action": "接取",
+      "quest_ids": [
+        12081
+      ],
+      "quest_names": [
+        "加弗洛克"
+      ],
+      "anchor": {
+        "x": 65.77,
+        "y": 17.78,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 85,
+      "action": "完成目标",
+      "quest_ids": [
+        12328
+      ],
+      "quest_names": [
+        "卢娜的要求"
+      ],
+      "anchor": {
+        "x": 52.51,
+        "y": 32.44,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 86,
+      "action": "完成目标",
+      "quest_ids": [
+        12201
+      ],
+      "quest_names": [
+        "监工的制服"
+      ],
+      "anchor": {
+        "x": 76.62,
+        "y": 57.99,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 87,
+      "action": "完成目标",
+      "quest_ids": [
+        12483
+      ],
+      "quest_names": [
+        "蘑菇汤！"
+      ],
+      "anchor": {
+        "x": 13.23,
+        "y": 59.0,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 88,
+      "action": "交付",
+      "quest_ids": [
+        12029,
+        12483
+      ],
+      "quest_names": [
+        "净化天灾巨魔",
+        "蘑菇汤！"
+      ],
+      "anchor": {
+        "x": 16.200000000000003,
+        "y": 47.489999999999995,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 89,
+      "action": "交付",
+      "quest_ids": [
+        12007
+      ],
+      "quest_names": [
+        "必要的牺牲"
+      ],
+      "anchor": {
+        "x": 17.42,
+        "y": 36.36,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 90,
+      "action": "交付",
+      "quest_ids": [
+        12328
+      ],
+      "quest_names": [
+        "卢娜的要求"
+      ],
+      "anchor": {
+        "x": 44.04,
+        "y": 47.95,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 91,
+      "action": "交付",
+      "quest_ids": [
+        12198,
+        12201
+      ],
+      "quest_names": [
+        "……我们没有能源",
+        "监工的制服"
+      ],
+      "anchor": {
+        "x": 65.13499999999999,
+        "y": 47.46,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 92,
+      "action": "交付",
+      "quest_ids": [
+        12152
+      ],
+      "quest_names": [
+        "金亚拉克的末日"
+      ],
+      "anchor": {
+        "x": 73.91,
+        "y": 34.13,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 93,
+      "action": "交付",
+      "quest_ids": [
+        12081
+      ],
+      "quest_names": [
+        "加弗洛克"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 94,
+      "action": "接取",
+      "quest_ids": [
+        12093
+      ],
+      "quest_names": [
+        "压制符文"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 95,
+      "action": "接取",
+      "quest_ids": [
+        12199,
+        12202
+      ],
+      "quest_names": [
+        "击败铁领主",
+        "活灵活现"
+      ],
+      "anchor": {
+        "x": 65.13499999999999,
+        "y": 47.46,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 96,
+      "action": "接取",
+      "quest_ids": [
+        12042
+      ],
+      "quest_names": [
+        "古树精华宝石"
+      ],
+      "anchor": {
+        "x": 17.42,
+        "y": 36.36,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 97,
+      "action": "接取",
+      "quest_ids": [
+        12190
+      ],
+      "quest_names": [
+        "跟我的小朋友打招呼"
+      ],
+      "anchor": {
+        "x": 15.73,
+        "y": 46.69,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 98,
+      "action": "完成目标",
+      "quest_ids": [
+        12202
+      ],
+      "quest_names": [
+        "活灵活现"
+      ],
+      "anchor": {
+        "x": 76.97,
+        "y": 48.44,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 99,
+      "action": "完成目标",
+      "quest_ids": [
+        12199
+      ],
+      "quest_names": [
+        "击败铁领主"
+      ],
+      "anchor": {
+        "x": 76.37,
+        "y": 63.72,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 100,
+      "action": "交付",
+      "quest_ids": [
+        12199,
+        12202
+      ],
+      "quest_names": [
+        "击败铁领主",
+        "活灵活现"
+      ],
+      "anchor": {
+        "x": 65.215,
+        "y": 47.59,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 101,
+      "action": "交付",
+      "quest_ids": [
+        12190
+      ],
+      "quest_names": [
+        "跟我的小朋友打招呼"
+      ],
+      "anchor": {
+        "x": 73.77,
+        "y": 34.01,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 102,
+      "action": "交付",
+      "quest_ids": [
+        12093
+      ],
+      "quest_names": [
+        "压制符文"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 103,
+      "action": "交付",
+      "quest_ids": [
+        12042
+      ],
+      "quest_names": [
+        "古树精华宝石"
+      ],
+      "anchor": {
+        "x": 36.95,
+        "y": 32.35,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 104,
+      "action": "接取",
+      "quest_ids": [
+        12802
+      ],
+      "quest_names": [
+        "尽在掌控"
+      ],
+      "anchor": {
+        "x": 36.95,
+        "y": 32.35,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 105,
+      "action": "接取",
+      "quest_ids": [
+        12203
+      ],
+      "quest_names": [
+        "洛肯的命令"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 106,
+      "action": "接取",
+      "quest_ids": [
+        12094
+      ],
+      "quest_names": [
+        "潜在的能量"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 107,
+      "action": "完成目标",
+      "quest_ids": [
+        12094
+      ],
+      "quest_names": [
+        "潜在的能量"
+      ],
+      "anchor": {
+        "x": 74.09,
+        "y": 39.96,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 108,
+      "action": "交付",
+      "quest_ids": [
+        12094
+      ],
+      "quest_names": [
+        "潜在的能量"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 109,
+      "action": "交付",
+      "quest_ids": [
+        12203
+      ],
+      "quest_names": [
+        "洛肯的命令"
+      ],
+      "anchor": {
+        "x": 65.17,
+        "y": 47.67,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 110,
+      "action": "交付",
+      "quest_ids": [
+        12802
+      ],
+      "quest_names": [
+        "尽在掌控"
+      ],
+      "anchor": {
+        "x": 45.0,
+        "y": 28.36,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 111,
+      "action": "接取",
+      "quest_ids": [
+        12068
+      ],
+      "quest_names": [
+        "灰尘之声"
+      ],
+      "anchor": {
+        "x": 45.0,
+        "y": 28.36,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 112,
+      "action": "接取",
+      "quest_ids": [
+        12099
+      ],
+      "quest_names": [
+        "终获解救"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 113,
+      "action": "完成目标",
+      "quest_ids": [
+        12068
+      ],
+      "quest_names": [
+        "灰尘之声"
+      ],
+      "anchor": {
+        "x": 69.38,
+        "y": 18.21,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 114,
+      "action": "交付",
+      "quest_ids": [
+        12068
+      ],
+      "quest_names": [
+        "灰尘之声"
+      ],
+      "anchor": {
+        "x": 71.74,
+        "y": 26.2,
+        "zone_id": null,
+        "label": null
+      }
+    },
+    {
+      "index": 115,
+      "action": "交付",
+      "quest_ids": [
+        12099
+      ],
+      "quest_names": [
+        "终获解救"
+      ],
+      "anchor": {
+        "x": 79.76,
+        "y": 33.6,
+        "zone_id": null,
+        "label": null
+      }
+    }
+  ]
+}

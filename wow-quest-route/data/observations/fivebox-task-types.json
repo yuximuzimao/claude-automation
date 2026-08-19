@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-16",
+  "updated_at": "2026-08-18",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -203,7 +203,12 @@
     "11606": {
       "type": "object_pickup_personal_confirmed",
       "status": "user_confirmed",
-      "note": "《耐心是我们不需要的美德》军需箱五号不共享，同一个军需箱只能一个角色拾取；五号必须分别拾取，以最低角色15/15为离开条件。"
+      "note": "《耐心是我们不需要的美德》军需箱是地面拾取物，五号不共享；同一个军需箱只能一个角色拾取，五号必须分别拾取，以最低角色15/15为离开条件。"
+    },
+    "11652": {
+      "type": "vehicle_objective_per_character_user_timing_confirmed",
+      "status": "user_confirmed_timing_upper_bound",
+      "note": "《纳萨姆平原》用户实跑给出的量级为最长约3分钟/号。五号按分别完成计，当前整队任务自身服务时间采用不超过约15分钟的保守上限；这是上限口径，不作为15分钟平均值。"
     },
     "11611": {
       "type": "object_release_group_shared_confirmed",
@@ -224,6 +229,81 @@
       "type": "dense_kill_area_overlaps_item_start_object",
       "status": "user_confirmed",
       "note": "《授粉的巨蛾》的血孢巨蛾在《巨大的蛾卵》固定蛋附近非常集中。路线应在蛋旁完成巨蛾花粉后当场点击巨蛋接《巨大的蛾卵》，一次返回劳莉丝同时交付，不能把巨蛋继续拖到迦莫斯洞穴之后再单独爬山。"
+    },
+    "11876": {
+      "type": "object_release_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《帮助弱小》营救被困猛犸幼崽的数量进度五号共享；主控使用陷阱破坏锤释放幼崽即可同步推进全队，不需要五号分别操作。猛犸幼崽区紧邻冷石采掘场Hub，后续从零路线在这里顺手接《海象人的先祖》和《夺回采掘场》。"
+    },
+    "11605": {
+      "type": "object_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《海象人的先祖》三处先祖交互进度五号共享；主控依次完成三处交互即可同步推进全队，不需要五个角色分别点击。"
+    },
+    "11677": {
+      "type": "object_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《阻止瘟疫》对亡者之穴瘟疫锅使用净化之种后，任务进度五号共享；主控完成一次即可同步全队，不需要五个角色分别对锅操作。"
+    },
+    "11887": {
+      "type": "object_pickup_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《应急的物资》进度不共享。五个角色分别接任务时可各自先拾取1个侏儒应急工具包；任务每号需要7个，因此现场剩余需求为每号6个，五号合计再拾取30个。"
+    },
+    "11895": {
+      "type": "single_event_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《风暴的主宰》只需主控触发并击败一次狂乱风暴，五个角色任务进度同步完成，不需要五号重复召唤/击杀。"
+    },
+    "11899": {
+      "type": "corpse_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《灵魂的解脱》捕获菲兹兰克机械侏儒灵魂的进度五号共享；主控对尸体使用祖母的捕魂器累计10次即可同步推进全队。"
+    },
+    "11906": {
+      "type": "object_pickup_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《净化水池》的菲兹兰克备用零件进度不共享；五个角色需要分别完成15/15，离开区域以最低进度角色完成为准。"
+    },
+    "11936": {
+      "type": "shared_kill_plus_object_destroy_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《蓝龙的卵》实际先击杀5只考达拉龙人取得5把冰霜战斧，再用战斧打碎5枚蓝龙卵；冰霜战斧为100%掉落。打碎龙卵的任务进度五号共享，主控完成5只怪+5次交互即可同步全队，不需要五个角色分别操作。"
+    },
+    "11919": {
+      "type": "single_capture_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《猎龙》首组实跑确认任务进度五号共享；主控完成一次魔枢雏龙捕获并带回即可同步全队，不需要五个角色分别重复捕获。"
+    },
+    "11943": {
+      "type": "two_named_target_drop_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《牢笼》首组实跑确认能量核心与牢笼外壳的任务进度五号共享；主控分别击杀战争使者戈德拉克和塞鲁利恩将军并取得对应任务物即可同步全队，不需要五个角色各刷一套掉落物。"
+    },
+    "11894": {
+      "type": "item_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《修修补补》的蒸汽熟化鹿皮进度不共享；五个角色必须分别把未经熟化的鹿皮带到蒸汽喷口旁使用并各自做到5/5，以最低进度角色完成为离开条件。"
+    },
+    "11593": {
+      "type": "corpse_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《亡者的尊严》首组实跑确认烧尸体进度五号共享；主控对车队卫兵/工人尸体使用任务火把累计10次即可同步全队，不需要五号分别烧10具。"
+    },
+    "11571": {
+      "type": "single_corpse_item_use_personal_same_corpse_reusable",
+      "status": "user_confirmed",
+      "note": "《学习沟通》进度不共享，但同一具斯卡德尔尸体可供五个角色依次使用空贝壳；只需击杀一次，随后五号对同一尸体各操作一次即可。"
+    },
+    "11559": {
+      "type": "mixed_ground_pickup_or_mob_drop_pickup_preferred",
+      "status": "user_confirmed_source_method",
+      "note": "《冬鳞鱼人的贸易》的冬鳞蚌壳既可拾取地面蚌壳，也可通过击杀冬鳞鱼人获得；首组实跑确认地面拾取明显更快，固定路线优先沿路捡地面蚌壳，只有缺口再杀怪补。五号之间是否共享拾取尚未单独确认。"
+    },
+    "11560": {
+      "type": "kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《救救蝌蚪！》首组实跑确认20只冬鳞蝌蚪的任务进度五号共享；主控完成即可同步全队。"
     }
   }
 }

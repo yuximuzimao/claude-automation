@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "status": "LOCKED_OPTIMIZATION_DECISIONS",
+  "route_key": "dragonblight",
+  "rule": {
+    "eligible_collection_patterns": [
+      "repeated_same_item",
+      "repeated_plus_distinct"
+    ],
+    "excluded_collection_pattern": "multiple_distinct_one_each",
+    "base": "multi-item drop + no equipment/direct-money value + no valuable Dragonblight follow-up = P1",
+    "downgrade_one_level_each": [
+      "pickup instead of drop",
+      "current task has equipment or direct-money value",
+      "at least one current-map downstream task has equipment or direct-money value"
+    ],
+    "subtier": {
+      "A": "0 valuable descendants",
+      "B": "1 valuable descendant",
+      "C": "2+ valuable descendants"
+    },
+    "chain_scope": "Dragonblight only; future-map descendants are not speculatively valued."
+  },
+  "candidates": [
+    {
+      "quest_id": 12048,
+      "name": "天灾的装备",
+      "eligible": true,
+      "priority": 2,
+      "subtier": "A",
+      "priority_label": "P2A",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followups": []
+    },
+    {
+      "quest_id": 12009,
+      "name": "图尔凯的螃蟹陷阱",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followups": []
+    },
+    {
+      "quest_id": 12044,
+      "name": "囤积矿石",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followups": []
+    },
+    {
+      "quest_id": 12049,
+      "name": "难以下咽",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followups": []
+    },
+    {
+      "quest_id": 12303,
+      "name": "战争的开销",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followups": []
+    },
+    {
+      "quest_id": 12039,
+      "name": "尤格-萨隆的黑血",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "B",
+      "priority_label": "P3B",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 1,
+      "valuable_followups": [
+        {
+          "quest_id": 12048,
+          "name": "天灾的装备",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        }
+      ]
+    },
+    {
+      "quest_id": 12458,
+      "name": "鞭笞者的种子",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "B",
+      "priority_label": "P3B",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 1,
+      "valuable_followups": [
+        {
+          "quest_id": 12459,
+          "name": "创造与毁灭的力量",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        }
+      ]
+    },
+    {
+      "quest_id": 11958,
+      "name": "不要浪费",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 8,
+      "valuable_followups": [
+        {
+          "quest_id": 11959,
+          "name": "消灭洛根",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12009,
+          "name": "图尔凯的螃蟹陷阱",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12016,
+          "name": "诱饵",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12017,
+          "name": "鱼钩上的肉",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12028,
+          "name": "灵魂视界",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12030,
+          "name": "长者玛纳洛",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12031,
+          "name": "解脱和安息",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12032,
+          "name": "海洋女神",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        }
+      ]
+    },
+    {
+      "quest_id": 12045,
+      "name": "刨冰",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 12,
+      "valuable_followups": [
+        {
+          "quest_id": 12046,
+          "name": "柔软的包装",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12047,
+          "name": "不会融化的东西",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12049,
+          "name": "难以下咽",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12050,
+          "name": "抢木材",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12052,
+          "name": "该死的鹰身人！",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12075,
+          "name": "采集样本",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12076,
+          "name": "恶心的生意",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12077,
+          "name": "主动示好",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12078,
+          "name": "抓虫子",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12079,
+          "name": "践踏大地",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12080,
+          "name": "冰虫之母",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12112,
+          "name": "艰难的沟通",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        }
+      ]
+    },
+    {
+      "quest_id": 12046,
+      "name": "柔软的包装",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 11,
+      "valuable_followups": [
+        {
+          "quest_id": 12047,
+          "name": "不会融化的东西",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12049,
+          "name": "难以下咽",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12050,
+          "name": "抢木材",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12052,
+          "name": "该死的鹰身人！",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12075,
+          "name": "采集样本",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12076,
+          "name": "恶心的生意",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12077,
+          "name": "主动示好",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12078,
+          "name": "抓虫子",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12079,
+          "name": "践踏大地",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12080,
+          "name": "冰虫之母",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12112,
+          "name": "艰难的沟通",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        }
+      ]
+    },
+    {
+      "quest_id": 12188,
+      "name": "凋零药剂与你：如何自保",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 3,
+      "valuable_followups": [
+        {
+          "quest_id": 12221,
+          "name": "被遗忘者的凋零药剂",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12224,
+          "name": "库卡隆先锋！",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12498,
+          "name": "红龙之翼",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        }
+      ]
+    },
+    {
+      "quest_id": 12200,
+      "name": "翡翠龙泪",
+      "eligible": true,
+      "priority": 3,
+      "subtier": "C",
+      "priority_label": "P3C",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 3,
+      "valuable_followups": [
+        {
+          "quest_id": 12221,
+          "name": "被遗忘者的凋零药剂",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12224,
+          "name": "库卡隆先锋！",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12498,
+          "name": "红龙之翼",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        }
+      ]
+    },
+    {
+      "quest_id": 12209,
+      "name": "夺取装备",
+      "eligible": true,
+      "priority": 4,
+      "subtier": "B",
+      "priority_label": "P4B",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_plus_distinct",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 1,
+      "valuable_followups": [
+        {
+          "quest_id": 12214,
+          "name": "补充坐骑",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        }
+      ]
+    },
+    {
+      "quest_id": 12047,
+      "name": "不会融化的东西",
+      "eligible": true,
+      "priority": 4,
+      "subtier": "C",
+      "priority_label": "P4C",
+      "collection_source": "pickup",
+      "collection_pattern": "repeated_same_item",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 9,
+      "valuable_followups": [
+        {
+          "quest_id": 12050,
+          "name": "抢木材",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12052,
+          "name": "该死的鹰身人！",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12075,
+          "name": "采集样本",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12076,
+          "name": "恶心的生意",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12077,
+          "name": "主动示好",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12078,
+          "name": "抓虫子",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12079,
+          "name": "践踏大地",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        },
+        {
+          "quest_id": 12080,
+          "name": "冰虫之母",
+          "has_equipment_reward": true,
+          "has_direct_money": null
+        },
+        {
+          "quest_id": 12112,
+          "name": "艰难的沟通",
+          "has_equipment_reward": false,
+          "has_direct_money": true
+        }
+      ]
+    }
+  ]
+}

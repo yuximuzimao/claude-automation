@@ -1,0 +1,483 @@
+{
+  "status": "manual_foundation_review_no_route_order",
+  "reviewed_at": "2026-08-16",
+  "scope": "Dragonblight from-zero Horde blood-elf paladin foundation only; no insertion/order/hearth/HTML decisions",
+  "policy": {
+    "default_included_world_task_note_decision": "reviewed_no_extra_note",
+    "default_basis": "Questie effective objective/start/finish facts manually read once; special or non-obvious tasks are overridden below.",
+    "single_character_video_limit": "May confirm location/action shape, never fivebox sharing, loot mode, failure behavior, or timing.",
+    "fivebox_unknown_rule": "Keep sharing/loot mode unknown until current-server fivebox observation; do not invent shared behavior."
+  },
+  "manual_unavailable": {
+    "12015": "Test Quest for Craig: test/system residue; exclude from playable route foundation.",
+    "12021": "A Letter Home: obsolete/beta residue with no normal start/finish entities; exclude.",
+    "12023": "Sweeter Revenge: obsolete/beta residue; exclude.",
+    "12051": "Legacy/obsolete partial Harpy row; live quest is 12052《该死的鹰身人！》. Exclude 12051."
+  },
+  "manual_no_extra_note_ids": [
+    11978,
+    11980,
+    12005,
+    12006,
+    12031,
+    12048,
+    12100,
+    12102,
+    12144,
+    12188,
+    12205,
+    12221,
+    12262,
+    12304,
+    12469,
+    12545
+  ],
+  "entry_axis_relevance": {
+    "11930": "active_borean_to_dragonblight_entry",
+    "12117": "active_borean_inbound_to_moaki",
+    "12118": "alternate_howling_fjord_inbound_not_current_axis",
+    "12182": "howling_fjord_inbound_to_venomspite_not_current_axis",
+    "12189": "howling_fjord_side_of_venomspite_entry_chain_not_current_axis",
+    "12487": "dragonblight_outbound_to_grizzly_hills_candidate_only",
+    "12789": "dragonblight_outbound_to_zuldrak_candidate_only",
+    "12791": "outbound_to_dalaran_transport_candidate_only",
+    "13242": "post_wrathgate_return_to_borean_candidate_only"
+  },
+  "notes": {
+    "11930": {
+      "decision": "must_note",
+      "facts": ["Escort the Taunka evacuees across the Borean/Dragonblight boundary to Vortuk; this is the natural map handoff."],
+      "verification": ["fivebox escort completion sharing", "failure/reset behavior"]
+    },
+    "11959": {
+      "decision": "must_note",
+      "facts": ["Kill/loot Loguhn, then actively use Blood of Loguhn on yourself before returning; killing him alone is insufficient."],
+      "verification": ["whether each character must loot/use separately"]
+    },
+    "11983": {
+      "decision": "must_note",
+      "facts": ["This is dialogue interaction with Westwind Taunka refugees: continue the conversation until each oath/progress credit is granted; it is not a normal kill/loot quest."],
+      "verification": ["fivebox dialogue progress sharing vs per-character"]
+    },
+    "11999": {
+      "decision": "must_note",
+      "facts": ["Loot a dead Mage Hunter corpse for Personal Effects, then open/right-click the effects until the Moonrest Gardens Plans are obtained."],
+      "verification": ["corpse/item loot mode across five characters"]
+    },
+    "12008": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Simple travel/report quest to Agmar's Hammer despite generic 'use' wording in the localized objective; no special player operation identified."],
+      "verification": []
+    },
+    "12011": {
+      "decision": "must_note",
+      "facts": ["At the southwest Moa'ki dock, use the breathing aid/dive to the wrecked crab trap and interact with it to obtain/start the damaged-trap follow-up."],
+      "verification": ["fivebox object/item interaction mode"]
+    },
+    "12013": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Direct named kill of Arcanimus; no extra use action is required beyond reaching/killing the target."],
+      "verification": []
+    },
+    "12017": {
+      "decision": "must_note",
+      "facts": ["Follow the fishing line to the hook, use the bait at the hook to summon Tugowar, then kill him."],
+      "verification": ["whether summon/kill credit is shared for all five"]
+    },
+    "12028": {
+      "decision": "must_note",
+      "facts": ["Use the Spiritual Incense at the brazier immediately outside Toalu'u's tent; it triggers a scripted spirit-vision/flight sequence and normally needs no steering."],
+      "verification": ["fivebox object/use action shared vs per-character"]
+    },
+    "12032": {
+      "decision": "must_note",
+      "facts": ["Go to the deep-sea pearl, interact with it, follow the sea-goddess script, and when the compulsion/buff prompts you, jump into the water to continue the trial."],
+      "verification": ["whether each character must trigger the scripted sequence"]
+    },
+    "12033": {
+      "decision": "must_note",
+      "facts": ["Read Saurfang's letter, then destroy/burn it using the nearby firepot before speaking to the messenger."],
+      "verification": ["per-character use requirement"]
+    },
+    "12036": {
+      "decision": "must_note",
+      "facts": ["Narjun's Pit is below ground; descend through one of the pit openings/holes and explore the lower pit rather than searching only at the surface coordinate."],
+      "verification": ["safe fivebox descent/follow path"]
+    },
+    "12039": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Collect Yogg-Saron black-blood samples from fixed world deposits; the player-facing action is visually straightforward once in the area."],
+      "verification": ["fixed-object sharing vs personal pickup for fivebox timing only"]
+    },
+    "12040": {
+      "decision": "must_note",
+      "facts": ["The target area is inside Narjun's Pit; reach Kilix in the lower pit and kill Anub'ar Underlords there. Surface map coordinates alone are insufficient."],
+      "verification": ["fivebox descent/pathing"]
+    },
+    "12047": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Collect shattered bone pieces among dragon skeletons; no hidden operation beyond world-object pickup."],
+      "verification": ["object pickup sharing only for timing"]
+    },
+    "12049": {
+      "decision": "must_note",
+      "facts": ["Fight a Hulking Jormungar to roughly low health until it opens its mouth, then use the explosive during the mouth-open window; loot the charred meat after the explosion."],
+      "verification": ["fivebox loot mode", "whether one explosion can credit multiple characters"]
+    },
+    "12050": {
+      "decision": "must_note",
+      "facts": ["Use the shredder controller in the harpy area to summon/operate the shredder; collect marked lumber/trees with the vehicle and re-summon if the shredder is lost."],
+      "verification": ["vehicle ownership per character", "fivebox lumber credit mode"]
+    },
+    "12052": {
+      "decision": "must_note",
+      "facts": ["Do this in the same harpy/shredder area as 12050; kill Mistress of the Coldwind and the required harpies. Keep the shredder mechanics in view because both quests naturally share the area."],
+      "verification": ["ordinary kill sharing expected but verify current server"]
+    },
+    "12053": {
+      "decision": "must_note",
+      "facts": ["Plant the Warsong battle standard at Icemist Village and defend it until the event completes; do not leave after merely placing the banner."],
+      "verification": ["group completion sharing", "failure/reset radius"]
+    },
+    "12057": {
+      "decision": "must_note",
+      "facts": ["The Flesh-Bound Tome is a monster-dropped quest-start item from Anub'ar cultist/named mobs in the Icemist/Narjun area; loot it and right-click it to start the quest."],
+      "verification": ["drop rate/source priority", "same-corpse fivebox loot mode"]
+    },
+    "12059": {
+      "decision": "must_note",
+      "facts": ["Goramosh drops the Strange Device; loot and right-click the device to start the quest. Do not treat it as an NPC pickup."],
+      "verification": ["same-corpse fivebox loot mode"]
+    },
+    "12061": {
+      "decision": "must_note",
+      "facts": ["Use the teleporter at Moonrest Gardens to reach the projection area, then move forward/observe until the scripted projection credit fires."],
+      "verification": ["whether each character must trigger the teleporter/event"]
+    },
+    "12064": {
+      "decision": "must_note",
+      "facts": ["Three named Icemist targets carry separate key fragments; Anok'ra is on the lower/ground level while Sinok/Tivax can be at different points. Collect all fragments before returning."],
+      "verification": ["same-corpse fivebox fragment loot mode"]
+    },
+    "12066": {
+      "decision": "must_note",
+      "facts": ["Kill Captain Emmy Malin for the Ley Line Focus Control Ring, then use the ring at the large ley-line focus arch on the coast to read the focus."],
+      "verification": ["fivebox ring loot/use mode"]
+    },
+    "12069": {
+      "decision": "must_note",
+      "facts": ["Use the Anub'ar prison key to free the Taunka chieftain, help him fight Anub'ekhan, then loot the required carapace fragment; this is a rescue/event plus boss sequence."],
+      "verification": ["event sharing", "boss loot mode"]
+    },
+    "12072": {
+      "decision": "must_note",
+      "facts": ["Use the flare at Icemist Village to summon/mount a Kor'kron War Rider; use the vehicle abilities to kill the blightbeasts and return after the vehicle segment."],
+      "verification": ["vehicle must be run per character vs shared kill credit"]
+    },
+    "12075": {
+      "decision": "must_note",
+      "facts": ["The sample is taken from a ravaged crystalline giant corpse near/below the Crystal Vice cave entrance; click the corpse, not living giants."],
+      "verification": ["object sharing vs personal"]
+    },
+    "12076": {
+      "decision": "must_note",
+      "facts": ["Use Zort's Scraper on yourself when the worm applies/casts Corrosive Spit; repeat until two saliva samples are collected."],
+      "verification": ["each character must be spat on/use scraper separately"]
+    },
+    "12078": {
+      "decision": "must_note",
+      "facts": ["Inside the Crystal Vice cave, place/use the crate near a Jormungar Spawn; after the larva enters, pick/right-click the crate on the ground. Repeat for all three."],
+      "verification": ["crate/object state shared vs personal"]
+    },
+    "12079": {
+      "decision": "must_note",
+      "facts": ["The feeders are inside the northern Crystal Vice cave; use the cave entrance/path from the Crystal Vice task block rather than chasing surface coordinates."],
+      "verification": ["fivebox cave pathing only"]
+    },
+    "12080": {
+      "decision": "must_note",
+      "facts": ["Rattlebore is inside the Crystal Vice cave; use Zort's protective elixir if available to reduce the acid hazard before the named kill."],
+      "verification": ["whether protective item is per character"]
+    },
+    "12084": {
+      "decision": "must_note",
+      "facts": ["Lieutenant Ta'zinni drops the Ley Line Focus Control Amulet; use the amulet at the Lothalor Forest ley-line focus arch to obtain the reading."],
+      "verification": ["same-corpse fivebox amulet loot mode", "per-character use"]
+    },
+    "12085": {
+      "decision": "must_note",
+      "facts": ["Lieutenant Ta'zinni also drops the Horde letter; loot and right-click the letter to start 12085《一封家书》."],
+      "verification": ["same-corpse fivebox quest-start-item loot mode"]
+    },
+    "12096": {
+      "decision": "must_note",
+      "facts": ["Obtain Woodlands Walker Bark in Lothalor and use the bark on the non-hostile/eligible Lothalor Ancients to empower them; this is an item-on-NPC action, not a normal kill."],
+      "verification": ["fivebox item use sharing vs per-character"]
+    },
+    "12097": {
+      "decision": "must_note",
+      "facts": ["Speak to Rokhan at the dragon-hunter camp to bring Sarathstra down, then kill her and loot the Frozen Heart."],
+      "verification": ["summon ownership", "same-corpse heart loot mode"]
+    },
+    "12110": {
+      "decision": "must_note",
+      "facts": ["Use the ley-line talisman at the Indu'le Lake focus, then continue to the Azure Dragonshrine observation point; both spatial checks are required."],
+      "verification": ["per-character use/area trigger"]
+    },
+    "12111": {
+      "decision": "must_note",
+      "facts": ["Use the vaccine package on living Snowfall Elk and Arctic Grizzlies; it is an item-use vaccination quest, not a kill quest."],
+      "verification": ["fivebox credit sharing vs per-character"]
+    },
+    "12117": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Current route already carries the Borean version into Dragonblight; simply turn it in to Elder Ko'nani at Moa'ki Harbor when naturally reached."],
+      "verification": []
+    },
+    "12118": {
+      "decision": "not_current_entry_axis",
+      "facts": ["Alternate Howling Fjord version of the Moa'ki breadcrumb; current Borean-from-zero route uses 12117 instead."],
+      "verification": []
+    },
+    "12124": {
+      "decision": "must_note",
+      "facts": ["This Wyrmrest Temple handoff requires reaching the correct temple level; use the temple drake/taxi NPC to reach the upper level rather than searching the ground floor."],
+      "verification": ["exact floor/NPC handoff for Horde branch"]
+    },
+    "12125": {
+      "decision": "must_note",
+      "facts": ["Reduce a Deranged Indu'le Villager below the required health threshold, then use the Blood Gem on the weakened target to charge it."],
+      "verification": ["per-character gem use"]
+    },
+    "12126": {
+      "decision": "must_note",
+      "facts": ["Use the Unholy Gem on Duke Vallenhal as instructed to charge it; do not simply kill the target first."],
+      "verification": ["per-character gem use"]
+    },
+    "12127": {
+      "decision": "must_note",
+      "facts": ["Use the Frost Gem on the specified frost spirit target to charge it; this is a targeted quest-item action."],
+      "verification": ["per-character gem use"]
+    },
+    "12132": {
+      "decision": "must_note",
+      "facts": ["Enter the World of Shadows via Koltira's effect/dialogue, kill the Shadowy Tormentors there, then leave the phase/realm when finished rather than searching for them in normal Dragonblight."],
+      "verification": ["phase entry per character", "kill sharing inside phased state"]
+    },
+    "12140": {
+      "decision": "must_note",
+      "facts": ["Follow the Agmar/Roanauk script and exhaust Roanauk's dialogue/conversation until the allegiance event completes; it is not a normal single named kill despite database simplification."],
+      "verification": ["fivebox event/dialogue sharing"]
+    },
+    "12145": {
+      "decision": "must_note",
+      "facts": ["Follow the snobold trail through the canyon to Icefist rather than searching only the final coordinate; kill Icefist at the end of the trail."],
+      "verification": []
+    },
+    "12147": {
+      "decision": "must_note",
+      "facts": ["Icefist drops the Ornate Battle Horn; loot and right-click the horn to start this quest, then take it to Wyrmrest Temple for evaluation."],
+      "verification": ["same-corpse fivebox horn loot mode"]
+    },
+    "12149": {
+      "decision": "must_note",
+      "facts": ["The three magnataur are spread around Wyrmrest and are not identical fights; Ice Shatter has a dangerous channel, and Bloodfeast can heal from nearby maggots. Treat them as three named stops, not one generic kill area."],
+      "verification": []
+    },
+    "12150": {
+      "decision": "must_note",
+      "facts": ["Reach the runemaster on the cliff/cave side of the Mirror of Dawn; fight him only until the scripted surrender/immunity/quest update occurs. Do not keep trying to kill through the immune phase; avoid the purple runes."],
+      "verification": ["group credit on scripted surrender"]
+    },
+    "12151": {
+      "decision": "must_note",
+      "facts": ["Use the Ornate Battle Horn at the Torch Ring south of Azure Dragonshrine to summon Grom'thar; fight away from the cliff because the encounter has knockback risk."],
+      "verification": ["summon/kill credit sharing"]
+    },
+    "12182": {
+      "decision": "not_current_entry_axis",
+      "facts": ["Inbound breadcrumb from Howling Fjord to Venomspite; current reusable route enters Dragonblight from Borean, so keep it as boundary knowledge rather than an active first-pass task."],
+      "verification": []
+    },
+    "12189": {
+      "decision": "not_current_entry_axis",
+      "facts": ["Belongs to the Howling-Fjord-side Venomspite entry chain; retain as cross-map boundary knowledge, not current Borean-axis first-pass work."],
+      "verification": []
+    },
+    "12200": {
+      "decision": "reviewed_no_extra_note",
+      "facts": ["Emerald Dragon Tears are glowing ground pickups in the area; no hidden operation beyond collecting them."],
+      "verification": ["ground-object sharing only for fivebox timing"]
+    },
+    "12206": {
+      "decision": "must_note",
+      "facts": ["Stand by a Scarlet prisoner/soldier and use the blight flask on the target as instructed; the quest is item-use testing, not a normal kill."],
+      "verification": ["per-character item use"]
+    },
+    "12211": {
+      "decision": "must_note",
+      "facts": ["Kill Scarlet Onslaught members, then use the Container of Rats on their corpses; corpse use is required for progress."],
+      "verification": ["whether multiple characters can use the same corpse sequentially"]
+    },
+    "12214": {
+      "decision": "must_note",
+      "facts": ["Kill an Onslaught Knight to obtain a riding crop, use the crop on the riderless horse, mount it, ride back to Venomspite, and use vehicle ability 1 to deliver the horse. Killing horses directly is wrong."],
+      "verification": ["crop loot mode", "horse delivery must be repeated per character vs shared"]
+    },
+    "12218": {
+      "decision": "must_note",
+      "facts": ["Mount the Forsaken Blight Spreader at Venomspite's east side/gate and use the vehicle blight bombs to kill the required Scourge outside the camp."],
+      "verification": ["vehicle run per character vs shared kill credit"]
+    },
+    "12232": {
+      "decision": "must_note",
+      "facts": ["Use the collected siege bombs on New Hearthglen ballistae; the ballistae are fixed targets and must be bombed rather than attacked normally."],
+      "verification": ["fivebox bomb/object progress sharing"]
+    },
+    "12234": {
+      "decision": "must_note",
+      "facts": ["The three Daily Orders are in different New Hearthglen buildings/rooms, including barracks/abbey interiors; use building/floor notes instead of treating them as one flat coordinate cluster."],
+      "verification": ["object loot mode"]
+    },
+    "12240": {
+      "decision": "must_note",
+      "facts": ["Use the Levine-family termites at the lumbermill/lumber pile to force Foreman Kaleiki out, then kill him."],
+      "verification": ["summon ownership/kill sharing"]
+    },
+    "12243": {
+      "decision": "must_note",
+      "facts": ["Burn the ship's sails with the burning liquid, then use the short distraction window to go below deck, navigate the ship interior, kill Captain Shely, and loot the charts."],
+      "verification": ["per-character sail/item credit", "interior fivebox pathing"]
+    },
+    "12245": {
+      "decision": "must_note",
+      "facts": ["These named Scarlet targets are not ordinary kill credits: interact/talk as required to expose/trigger them, then kill them. Check each named NPC rather than mass-killing nearby soldiers."],
+      "verification": ["dialogue trigger sharing"]
+    },
+    "12252": {
+      "decision": "must_note",
+      "facts": ["Torturer LeCraft/Alphonse is inside the barracks/basement area; use the branding/interrogation tool five times to get the information before killing/finishing the sequence."],
+      "verification": ["per-character interrogation progress"]
+    },
+    "12260": {
+      "decision": "must_note",
+      "facts": ["Use the Banshee's Magic Mirror on an Onslaught Raven Priest to steal/copy the disguise image; this is a targeted quest-item action."],
+      "verification": ["per-character mirror use"]
+    },
+    "12261": {
+      "decision": "must_note",
+      "facts": ["At the Obsidian Dragonshrine exit/edge where the road becomes snowy, place the Destructive Ward and defend it until it finishes charging; placement alone does not complete the quest."],
+      "verification": ["group completion sharing", "failure/reset"]
+    },
+    "12263": {
+      "decision": "must_note",
+      "facts": ["Serinar disguises you as a cultist; travel through the Maw of Neltharion cave while disguised to the deep cult area to observe their intent. If the disguise is lost, return/reapply rather than searching outside the cave."],
+      "verification": ["disguise per character", "area-trigger sharing"]
+    },
+    "12264": {
+      "decision": "must_note",
+      "facts": ["The cultist targets are inside the Maw of Neltharion cave; combine with the same cave pass as 12263/12265/12267 rather than reading flat map coordinates."],
+      "verification": []
+    },
+    "12265": {
+      "decision": "must_note",
+      "facts": ["Inside the Maw of Neltharion cave, right-click/destroy the necromantic runes; they are fixed cave objects, not surface targets."],
+      "verification": ["fivebox object sharing vs personal"]
+    },
+    "12267": {
+      "decision": "must_note",
+      "facts": ["Go deep into the Maw of Neltharion, use Neltharion's Flame on the summoning area to trigger/cleanse it and draw out Rothin the Decaying, then kill him."],
+      "verification": ["per-character flame use", "boss credit sharing"]
+    },
+    "12271": {
+      "decision": "must_note",
+      "facts": ["The Torturer's Rod is a dropped quest-start item from the Scarlet torturer chain; loot and right-click it to start 12271 before returning to Venomspite."],
+      "verification": ["same-corpse fivebox rod loot mode"]
+    },
+    "12273": {
+      "decision": "must_note",
+      "facts": ["Find each named Scarlet official in the specified building/floor, use the Rod of Compulsion, wait for the denunciation/script, then kill the target."],
+      "verification": ["per-character rod use", "dialogue/event sharing"]
+    },
+    "12274": {
+      "decision": "must_note",
+      "facts": ["In disguise, enter the abbey, go up the spiral stairs to ring the bell rope, then return downstairs and speak to/follow the high abbot for the information. Onslaught Knights can see through the disguise."],
+      "verification": ["fivebox disguise/pathing", "bell/dialogue progress sharing"]
+    },
+    "12283": {
+      "decision": "must_note",
+      "facts": ["Abbendis's diary is inside an upper-floor room of the house near the chapel; vertical/building location matters more than the flat coordinate."],
+      "verification": ["world-object sharing vs personal"]
+    },
+    "12419": {
+      "decision": "must_note",
+      "facts": ["This turn-in is tied to the Ruby Dragonshrine fate chain and uses the recovered ruby brooch; keep the item/chain provenance explicit so it is not mistaken for a standalone Wyrmrest pickup."],
+      "verification": ["exact Horde predecessor item source"]
+    },
+    "12435": {
+      "decision": "must_note",
+      "facts": ["Wyrmrest Temple has multiple vertical levels; after the Queen/top-level handoff, use the temple drake/taxi or correct level transfer to reach Lord Devrestrasz on the proper level."],
+      "verification": ["exact Horde floor/transfer"]
+    },
+    "12447": {
+      "decision": "must_note",
+      "facts": ["Serinar is inside/at the Maw of Neltharion cave in the Obsidian Dragonshrine area; use the cave entrance rather than searching the surface marker."],
+      "verification": ["fivebox cave approach"]
+    },
+    "12449": {
+      "decision": "must_note",
+      "facts": ["Enter Ruby Dragonshrine from the south path, collect/use Ruby Acorns on dead red dragons so the corpses return to the earth; this is item-on-corpse interaction."],
+      "verification": ["same corpse usable by multiple characters vs per-character objects"]
+    },
+    "12450": {
+      "decision": "must_note",
+      "facts": ["Use the south approach into Ruby Dragonshrine; besides killing necromancers, destroy the corruption/source below the shrine. The second objective is not satisfied by kills alone."],
+      "verification": ["object/event sharing"]
+    },
+    "12456": {
+      "decision": "must_note",
+      "facts": ["Use the Skytalon Molts at the southeast glade to summon Alystros, then kill and loot the plume; the named target is summoned rather than simply standing at the map point."],
+      "verification": ["summon ownership", "same-corpse plume loot mode"]
+    },
+    "12459": {
+      "decision": "must_note",
+      "facts": ["Each named target must first be weakened with Seeds of Nature's Wrath and then killed; the targets are in separate locations, including a flying frost wyrm. Do not kill them before applying the seed."],
+      "verification": ["per-character seed use vs shared weakened state"]
+    },
+    "12470": {
+      "decision": "must_note",
+      "facts": ["Place/use the Hourglass of Eternity inside Bronze Dragonshrine to start a timed defense/event; protect it through the waves until the information is obtained. A Future You NPC may assist/tank."],
+      "verification": ["event completion sharing", "failure/reset"]
+    },
+    "12496": {
+      "decision": "must_note",
+      "facts": ["The Dragon Queen is on the upper Wyrmrest Temple level; ask/use the temple transport NPC to be sent upward instead of searching the ground floor."],
+      "verification": []
+    },
+    "12498": {
+      "decision": "must_note",
+      "facts": ["Use the Ruby Beacon to mount a ruby drake, use vehicle abilities to kill the required Scourge, then complete the boss/scythe sequence before returning to the Queen."],
+      "verification": ["vehicle run per character vs shared kills", "scythe loot mode"]
+    },
+    "12767": {
+      "decision": "must_note",
+      "facts": ["Wyrmrest Temple is multi-level; confirm the Horde ambassador's correct temple level before leaving the transport NPC, rather than relying on the flat coordinate."],
+      "verification": ["exact level"]
+    },
+    "12769": {
+      "decision": "must_note",
+      "facts": ["Speak to Tariolstrasz at Wyrmrest and use his drake/temple transport options to move between temple levels; this is the access mechanism for several follow-ups."],
+      "verification": []
+    },
+    "12791": {
+      "decision": "review_before_route",
+      "facts": ["Outbound Dalaran breadcrumb/transport task; keep it in boundary data but decide insertion only after comparing the Dragonblight endpoint and actual transport value."],
+      "verification": ["whether the NPC directly teleports current-server characters", "future-route cost"]
+    },
+    "13242": {
+      "decision": "must_note",
+      "facts": ["Post-Wrathgate continuation: collect Saurfang's battle armor on the battlefield, then carry it back across maps to Saurfang at Warsong Hold. This is not part of the initial Dragonblight opening block."],
+      "verification": ["exact unlock after 12500 and current-server event state"]
+    }
+  }
+}

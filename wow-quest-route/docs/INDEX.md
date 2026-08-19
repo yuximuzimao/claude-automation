@@ -22,6 +22,7 @@
 | 规则主题 | 文档 |
 | --- | --- |
 | 经验预算、地图轴、任务取舍、随机掉落/护送 | `rules/leveling-and-selection.md` |
+| 分步骤/整图估时、clean baseline、实跑对比、长期基准处理 | `rules/timing-and-benchmarking.md` |
 | 玩家攻略、隐藏机制、掉落触发、五开共享、洞穴/楼层 | `rules/execution-and-mechanics.md` |
 | 当前/从零路线、Journey、完整性审计、NEAT/Git边界 | `rules/state-and-validation.md` |
 | Route Atlas数据层、状态机、插入/裁剪、炉石、求解器 | `rules/route-atlas-optimization.md` |
@@ -41,7 +42,7 @@
 
 1. **Questie Raw / Effective**：任务ID、前置、NPC/物体/物品、静态坐标、修正层；原始事实不被实跑覆盖。
 2. **任务知识层**：`task-library/`，保存可复用机制、地形、来源与证据。
-3. **五开实测层**：`../data/observations/`，保存共享/个人、阻断和服务器特定行为。
+3. **实跑观测层**：`../data/observations/`，保存五开共享/个人、阻断、服务器特定行为，以及`route-timing-runs.json`中的路线预测/实跑墙钟和长期目标基准。
 4. **Route Atlas路线层**：`../data/route-atlas/`，保存当前有效结构化路线和地图任务基础数据。
 5. **人物历程层**：`../data/journey/`，只保存脱敏Journey，用于复盘接取/交付/升级，不代表移动轨迹。
 6. **历史档案层**：`archive/`，保存旧方案、一次性analysis、NEAT和视频历史；只用于定向考古，不覆盖CURRENT和永久规则。

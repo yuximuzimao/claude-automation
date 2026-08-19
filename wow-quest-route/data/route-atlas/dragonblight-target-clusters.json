@@ -1,0 +1,4286 @@
+{
+  "status": "foundation_only_no_route_order",
+  "zone": {
+    "id": 65,
+    "name": "龙骨荒野"
+  },
+  "cluster_count": 134,
+  "shared_cluster_count": 35,
+  "clusters": [
+    {
+      "cluster_id": "npc:27234",
+      "entity_type": "npc",
+      "entity_id": 27234,
+      "name": "铁匠古德曼",
+      "dragonblight_representative": {
+        "x": 70.62,
+        "y": 70.49,
+        "spawn_count": 1,
+        "min_x": 70.62,
+        "max_x": 70.62,
+        "min_y": 70.49,
+        "max_y": 70.49
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12209,
+        12211,
+        12273
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12209,
+          "quest_name": "夺取装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 37137
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12273,
+          "quest_name": "谴责",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27207",
+      "entity_type": "npc",
+      "entity_id": 27207,
+      "name": "先锋军工匠",
+      "dragonblight_representative": {
+        "x": 68.44,
+        "y": 74.35,
+        "spawn_count": 10,
+        "min_x": 67.99,
+        "max_x": 70.9,
+        "min_y": 70.42,
+        "max_y": 76.76
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12205,
+        12209,
+        12211
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12209,
+          "quest_name": "夺取装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 37137
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27203",
+      "entity_type": "npc",
+      "entity_id": 27203,
+      "name": "先锋军步兵",
+      "dragonblight_representative": {
+        "x": 70.89,
+        "y": 74.19,
+        "spawn_count": 108,
+        "min_x": 66.19,
+        "max_x": 74.28,
+        "min_y": 66.83,
+        "max_y": 81.27
+      },
+      "spawn_count": 108,
+      "quest_ids": [
+        12205,
+        12209,
+        12211
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12209,
+          "quest_name": "夺取装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 37136
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27202",
+      "entity_type": "npc",
+      "entity_id": 27202,
+      "name": "先锋军黑鸦祭司",
+      "dragonblight_representative": {
+        "x": 72.12,
+        "y": 74.28,
+        "spawn_count": 24,
+        "min_x": 68.06,
+        "max_x": 73.44,
+        "min_y": 70.98,
+        "max_y": 79.19
+      },
+      "spawn_count": 24,
+      "quest_ids": [
+        12205,
+        12211,
+        12260
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 20,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 15,
+          "item_id": null
+        },
+        {
+          "quest_id": 12260,
+          "quest_name": "完美的伪装",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27236",
+      "entity_type": "npc",
+      "entity_id": 27236,
+      "name": "兽栏管理员默希尔",
+      "dragonblight_representative": {
+        "x": 67.99,
+        "y": 75.67,
+        "spawn_count": 1,
+        "min_x": 67.99,
+        "max_x": 67.99,
+        "min_y": 75.67,
+        "max_y": 75.67
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211,
+        12273
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12273,
+          "quest_name": "谴责",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27237",
+      "entity_type": "npc",
+      "entity_id": 27237,
+      "name": "指挥官乔丹",
+      "dragonblight_representative": {
+        "x": 69.66,
+        "y": 71.78,
+        "spawn_count": 1,
+        "min_x": 69.66,
+        "max_x": 69.66,
+        "min_y": 71.78,
+        "max_y": 71.78
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211,
+        12273
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12273,
+          "quest_name": "谴责",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27246",
+      "entity_type": "npc",
+      "entity_id": 27246,
+      "name": "斯崔特主教",
+      "dragonblight_representative": {
+        "x": 69.2,
+        "y": 76.69,
+        "spawn_count": 1,
+        "min_x": 69.2,
+        "max_x": 69.2,
+        "min_y": 76.69,
+        "max_y": 76.69
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211,
+        12254
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12254,
+          "quest_name": "祈祷之书",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 37350
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27235",
+      "entity_type": "npc",
+      "entity_id": 27235,
+      "name": "炮兵队长泽尔哈特",
+      "dragonblight_representative": {
+        "x": 73.26,
+        "y": 77.63,
+        "spawn_count": 1,
+        "min_x": 73.26,
+        "max_x": 73.26,
+        "min_y": 77.63,
+        "max_y": 77.63
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211,
+        12273
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12273,
+          "quest_name": "谴责",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27232",
+      "entity_type": "npc",
+      "entity_id": 27232,
+      "name": "舍雷船长",
+      "dragonblight_representative": {
+        "x": 71.86,
+        "y": 84.0,
+        "spawn_count": 1,
+        "min_x": 71.86,
+        "max_x": 71.86,
+        "min_y": 84.0,
+        "max_y": 84.0
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211,
+        12243
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12243,
+          "quest_name": "水火之灾",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 37305
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27226",
+      "entity_type": "npc",
+      "entity_id": 27226,
+      "name": "被遗忘的农夫",
+      "dragonblight_representative": {
+        "x": 83.8,
+        "y": 70.59,
+        "spawn_count": 59,
+        "min_x": 78.91,
+        "max_x": 87.44,
+        "min_y": 65.25,
+        "max_y": 78.24
+      },
+      "spawn_count": 59,
+      "quest_ids": [
+        12188,
+        12303,
+        12304
+      ],
+      "relations": [
+        {
+          "quest_id": 12188,
+          "quest_name": "凋零药剂与你：如何自保",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 37121
+        },
+        {
+          "quest_id": 12303,
+          "quest_name": "战争的开销",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 37580
+        },
+        {
+          "quest_id": 12304,
+          "quest_name": "海边的地产",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27211",
+      "entity_type": "npc",
+      "entity_id": 27211,
+      "name": "先锋军刽子手",
+      "dragonblight_representative": {
+        "x": 71.58,
+        "y": 72.07,
+        "spawn_count": 1,
+        "min_x": 71.58,
+        "max_x": 71.58,
+        "min_y": 72.07,
+        "max_y": 72.07
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12211
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27233",
+      "entity_type": "npc",
+      "entity_id": 27233,
+      "name": "先锋军水手",
+      "dragonblight_representative": {
+        "x": 71.73,
+        "y": 82.75,
+        "spawn_count": 26,
+        "min_x": 70.24,
+        "max_x": 72.72,
+        "min_y": 80.28,
+        "max_y": 83.85
+      },
+      "spawn_count": 26,
+      "quest_ids": [
+        12205,
+        12211
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27004",
+      "entity_type": "npc",
+      "entity_id": 27004,
+      "name": "冰拳",
+      "dragonblight_representative": {
+        "x": 42.41,
+        "y": 39.63,
+        "spawn_count": 1,
+        "min_x": 42.41,
+        "max_x": 42.41,
+        "min_y": 39.63,
+        "max_y": 39.63
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144,
+        12145
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12145,
+          "quest_name": "峡谷追击",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26770",
+      "entity_type": "npc",
+      "entity_id": 26770,
+      "name": "击碎者提瓦克斯",
+      "dragonblight_representative": {
+        "x": 25.32,
+        "y": 39.08,
+        "spawn_count": 2,
+        "min_x": 23.87,
+        "max_x": 26.76,
+        "min_y": 39.05,
+        "max_y": 39.11
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        12048,
+        12064
+      ],
+      "relations": [
+        {
+          "quest_id": 12048,
+          "quest_name": "天灾的装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36736
+        },
+        {
+          "quest_id": 12064,
+          "quest_name": "阿努巴尔的束缚",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 36753
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26836",
+      "entity_type": "npc",
+      "entity_id": 26836,
+      "name": "吉加托尔",
+      "dragonblight_representative": {
+        "x": 47.2,
+        "y": 58.04,
+        "spawn_count": 1,
+        "min_x": 47.2,
+        "max_x": 47.2,
+        "min_y": 58.04,
+        "max_y": 58.04
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12090,
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12090,
+          "quest_name": "通缉：吉加托尔",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26616",
+      "entity_type": "npc",
+      "entity_id": 26616,
+      "name": "天灾麋鹿",
+      "dragonblight_representative": {
+        "x": 28.54,
+        "y": 49.42,
+        "spawn_count": 42,
+        "min_x": 15.69,
+        "max_x": 91.62,
+        "min_y": 19.76,
+        "max_y": 60.16
+      },
+      "spawn_count": 42,
+      "quest_ids": [
+        11978,
+        12100
+      ],
+      "relations": [
+        {
+          "quest_id": 11978,
+          "quest_name": "深入密林",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 35726
+        },
+        {
+          "quest_id": 12100,
+          "quest_name": "腐烂的器官",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12100,
+          "quest_name": "腐烂的器官",
+          "relation_kind": "resolved_item",
+          "required_count": 15,
+          "item_id": 36800
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26493",
+      "entity_type": "npc",
+      "entity_id": 26493,
+      "name": "废土工头",
+      "dragonblight_representative": {
+        "x": 54.12,
+        "y": 30.63,
+        "spawn_count": 4,
+        "min_x": 51.71,
+        "max_x": 57.99,
+        "min_y": 28.0,
+        "max_y": 37.45
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12043,
+        12044
+      ],
+      "relations": [
+        {
+          "quest_id": 12043,
+          "quest_name": "诺兹拉斯的防御",
+          "relation_kind": "direct_creature",
+          "required_count": 12,
+          "item_id": null
+        },
+        {
+          "quest_id": 12044,
+          "quest_name": "囤积矿石",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36727
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26492",
+      "entity_type": "npc",
+      "entity_id": 26492,
+      "name": "废土挖掘者",
+      "dragonblight_representative": {
+        "x": 56.02,
+        "y": 31.25,
+        "spawn_count": 33,
+        "min_x": 51.17,
+        "max_x": 59.51,
+        "min_y": 26.61,
+        "max_y": 39.28
+      },
+      "spawn_count": 33,
+      "quest_ids": [
+        12043,
+        12044
+      ],
+      "relations": [
+        {
+          "quest_id": 12043,
+          "quest_name": "诺兹拉斯的防御",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12044,
+          "quest_name": "囤积矿石",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36727
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26771",
+      "entity_type": "npc",
+      "entity_id": 26771,
+      "name": "影怒者西诺克",
+      "dragonblight_representative": {
+        "x": 25.7,
+        "y": 44.19,
+        "spawn_count": 1,
+        "min_x": 25.7,
+        "max_x": 25.7,
+        "min_y": 44.19,
+        "max_y": 44.19
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12048,
+        12064
+      ],
+      "relations": [
+        {
+          "quest_id": 12048,
+          "quest_name": "天灾的装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36736
+        },
+        {
+          "quest_id": 12064,
+          "quest_name": "阿努巴尔的束缚",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 36754
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27009",
+      "entity_type": "npc",
+      "entity_id": 27009,
+      "name": "德拉古尔",
+      "dragonblight_representative": {
+        "x": 67.62,
+        "y": 38.47,
+        "spawn_count": 1,
+        "min_x": 67.62,
+        "max_x": 67.62,
+        "min_y": 38.47,
+        "max_y": 38.47
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144,
+        12149
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12149,
+          "quest_name": "强大的猛犸人",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27209",
+      "entity_type": "npc",
+      "entity_id": 27209,
+      "name": "拷问者阿方斯",
+      "dragonblight_representative": {
+        "x": 69.8,
+        "y": 72.0,
+        "spawn_count": 1,
+        "min_x": 69.8,
+        "max_x": 69.8,
+        "min_y": 72.0,
+        "max_y": 72.0
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12211,
+        12252
+      ],
+      "relations": [
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12252,
+          "quest_name": "拷问者里克拉夫",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        },
+        {
+          "quest_id": 12252,
+          "quest_name": "拷问者里克拉夫",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26769",
+      "entity_type": "npc",
+      "entity_id": 26769,
+      "name": "操纵者安诺科拉",
+      "dragonblight_representative": {
+        "x": 24.94,
+        "y": 43.92,
+        "spawn_count": 1,
+        "min_x": 24.94,
+        "max_x": 24.94,
+        "min_y": 43.92,
+        "max_y": 43.92
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12048,
+        12064
+      ],
+      "relations": [
+        {
+          "quest_id": 12048,
+          "quest_name": "天灾的装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36736
+        },
+        {
+          "quest_id": 12064,
+          "quest_name": "阿努巴尔的束缚",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 36752
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27007",
+      "entity_type": "npc",
+      "entity_id": 27007,
+      "name": "破冰者",
+      "dragonblight_representative": {
+        "x": 66.17,
+        "y": 51.41,
+        "spawn_count": 1,
+        "min_x": 66.17,
+        "max_x": 66.17,
+        "min_y": 51.41,
+        "max_y": 51.41
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144,
+        12149
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12149,
+          "quest_name": "强大的猛犸人",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27254",
+      "entity_type": "npc",
+      "entity_id": 27254,
+      "name": "翡翠鞭笞者",
+      "dragonblight_representative": {
+        "x": 63.22,
+        "y": 72.94,
+        "spawn_count": 18,
+        "min_x": 61.38,
+        "max_x": 65.8,
+        "min_y": 70.93,
+        "max_y": 75.73
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        12200,
+        12458
+      ],
+      "relations": [
+        {
+          "quest_id": 12200,
+          "quest_name": "翡翠龙泪",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 37124
+        },
+        {
+          "quest_id": 12458,
+          "quest_name": "鞭笞者的种子",
+          "relation_kind": "resolved_item",
+          "required_count": 3,
+          "item_id": 37882
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27247",
+      "entity_type": "npc",
+      "entity_id": 27247,
+      "name": "虔诚的保镖",
+      "dragonblight_representative": {
+        "x": 73.47,
+        "y": 74.28,
+        "spawn_count": 2,
+        "min_x": 73.46,
+        "max_x": 73.49,
+        "min_y": 74.22,
+        "max_y": 74.35
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        12205,
+        12211
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27220",
+      "entity_type": "npc",
+      "entity_id": 27220,
+      "name": "被遗忘的上尉",
+      "dragonblight_representative": {
+        "x": 82.3,
+        "y": 69.68,
+        "spawn_count": 8,
+        "min_x": 78.26,
+        "max_x": 88.82,
+        "min_y": 65.17,
+        "max_y": 75.36
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        12188,
+        12304
+      ],
+      "relations": [
+        {
+          "quest_id": 12188,
+          "quest_name": "凋零药剂与你：如何自保",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 37121
+        },
+        {
+          "quest_id": 12304,
+          "quest_name": "海边的地产",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27229",
+      "entity_type": "npc",
+      "entity_id": 27229,
+      "name": "被遗忘的步兵",
+      "dragonblight_representative": {
+        "x": 83.62,
+        "y": 71.74,
+        "spawn_count": 33,
+        "min_x": 76.49,
+        "max_x": 89.1,
+        "min_y": 64.98,
+        "max_y": 76.55
+      },
+      "spawn_count": 33,
+      "quest_ids": [
+        12188,
+        12304
+      ],
+      "relations": [
+        {
+          "quest_id": 12188,
+          "quest_name": "凋零药剂与你：如何自保",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 37121
+        },
+        {
+          "quest_id": 12304,
+          "quest_name": "海边的地产",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27225",
+      "entity_type": "npc",
+      "entity_id": 27225,
+      "name": "被遗忘的火枪手",
+      "dragonblight_representative": {
+        "x": 81.13,
+        "y": 68.95,
+        "spawn_count": 53,
+        "min_x": 77.15,
+        "max_x": 87.65,
+        "min_y": 64.87,
+        "max_y": 75.11
+      },
+      "spawn_count": 53,
+      "quest_ids": [
+        12188,
+        12304
+      ],
+      "relations": [
+        {
+          "quest_id": 12188,
+          "quest_name": "凋零药剂与你：如何自保",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 37121
+        },
+        {
+          "quest_id": 12304,
+          "quest_name": "海边的地产",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27224",
+      "entity_type": "npc",
+      "entity_id": 27224,
+      "name": "被遗忘的骑士",
+      "dragonblight_representative": {
+        "x": 79.64,
+        "y": 69.05,
+        "spawn_count": 12,
+        "min_x": 76.6,
+        "max_x": 88.55,
+        "min_y": 65.16,
+        "max_y": 73.32
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        12188,
+        12304
+      ],
+      "relations": [
+        {
+          "quest_id": 12188,
+          "quest_name": "凋零药剂与你：如何自保",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 37121
+        },
+        {
+          "quest_id": 12304,
+          "quest_name": "海边的地产",
+          "relation_kind": "resolved_event",
+          "required_count": 20,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27006",
+      "entity_type": "npc",
+      "entity_id": 27006,
+      "name": "裂骨者",
+      "dragonblight_representative": {
+        "x": 51.27,
+        "y": 59.63,
+        "spawn_count": 1,
+        "min_x": 51.27,
+        "max_x": 51.27,
+        "min_y": 59.63,
+        "max_y": 59.63
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144,
+        12148
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12148,
+          "quest_name": "集结的信号",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 36854
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27680",
+      "entity_type": "npc",
+      "entity_id": 27680,
+      "name": "达莉亚",
+      "dragonblight_representative": {
+        "x": 47.64,
+        "y": 48.97,
+        "spawn_count": 1,
+        "min_x": 47.64,
+        "max_x": 47.64,
+        "min_y": 48.97,
+        "max_y": 48.97
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12102,
+        12450
+      ],
+      "relations": [
+        {
+          "quest_id": 12102,
+          "quest_name": "红玉丁香",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 36803
+        },
+        {
+          "quest_id": 12450,
+          "quest_name": "烈焰之地",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:26402",
+      "entity_type": "npc",
+      "entity_id": 26402,
+      "name": "阿努巴尔伏击者",
+      "dragonblight_representative": {
+        "x": 16.86,
+        "y": 49.28,
+        "spawn_count": 39,
+        "min_x": 14.42,
+        "max_x": 22.12,
+        "min_y": 44.52,
+        "max_y": 53.61
+      },
+      "spawn_count": 39,
+      "quest_ids": [
+        11978,
+        11980
+      ],
+      "relations": [
+        {
+          "quest_id": 11978,
+          "quest_name": "深入密林",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 35726
+        },
+        {
+          "quest_id": 11980,
+          "quest_name": "部落的荣耀",
+          "relation_kind": "direct_creature",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27210",
+      "entity_type": "npc",
+      "entity_id": 27210,
+      "name": "阿比迪斯将军",
+      "dragonblight_representative": {
+        "x": 71.1,
+        "y": 77.88,
+        "spawn_count": 1,
+        "min_x": 71.1,
+        "max_x": 71.1,
+        "min_y": 77.88,
+        "max_y": 77.88
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12211,
+        12285
+      ],
+      "relations": [
+        {
+          "quest_id": 12211,
+          "quest_name": "确保他们不再站起来！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12285,
+          "quest_name": "先发制人",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 37565
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27008",
+      "entity_type": "npc",
+      "entity_id": 27008,
+      "name": "食血者",
+      "dragonblight_representative": {
+        "x": 66.28,
+        "y": 70.77,
+        "spawn_count": 1,
+        "min_x": 66.28,
+        "max_x": 66.28,
+        "min_y": 70.77,
+        "max_y": 70.77
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144,
+        12149
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12149,
+          "quest_name": "强大的猛犸人",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:27245",
+      "entity_type": "npc",
+      "entity_id": 27245,
+      "name": "高阶修士兰德雷",
+      "dragonblight_representative": {
+        "x": 73.51,
+        "y": 74.29,
+        "spawn_count": 1,
+        "min_x": 73.51,
+        "max_x": 73.51,
+        "min_y": 74.29,
+        "max_y": 74.29
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12205,
+        12274
+      ],
+      "relations": [
+        {
+          "quest_id": 12205,
+          "quest_name": "通缉：血色先锋军",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12274,
+          "quest_name": "狼狈不堪",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "object:188713",
+      "entity_type": "object",
+      "entity_id": 188713,
+      "name": "Abbey Bell Rope",
+      "dragonblight_representative": {
+        "x": 72.9,
+        "y": 73.48,
+        "spawn_count": 1,
+        "min_x": 72.9,
+        "max_x": 72.9,
+        "min_y": 73.48,
+        "max_y": 73.48
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12274
+      ],
+      "relations": [
+        {
+          "quest_id": 12274,
+          "quest_name": "狼狈不堪",
+          "relation_kind": "direct_object",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188432",
+      "entity_type": "object",
+      "entity_id": 188432,
+      "name": "Black Blood of Yogg-Saron",
+      "dragonblight_representative": {
+        "x": 26.99,
+        "y": 49.25,
+        "spawn_count": 41,
+        "min_x": 25.66,
+        "max_x": 29.12,
+        "min_y": 46.81,
+        "max_y": 50.76
+      },
+      "spawn_count": 41,
+      "quest_ids": [
+        12039
+      ],
+      "relations": [
+        {
+          "quest_id": 12039,
+          "quest_name": "尤格-萨隆的黑血",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 36725
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188423",
+      "entity_type": "object",
+      "entity_id": 188423,
+      "name": "Burning Brazier",
+      "dragonblight_representative": {
+        "x": 37.36,
+        "y": 46.67,
+        "spawn_count": 1,
+        "min_x": 37.36,
+        "max_x": 37.36,
+        "min_y": 46.67,
+        "max_y": 46.67
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12033
+      ],
+      "relations": [
+        {
+          "quest_id": 12033,
+          "quest_name": "萨鲁法尔的信",
+          "relation_kind": "direct_object",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188695",
+      "entity_type": "object",
+      "entity_id": 188695,
+      "name": "Necromantic Rune",
+      "dragonblight_representative": {
+        "x": 32.87,
+        "y": 29.22,
+        "spawn_count": 9,
+        "min_x": 30.7,
+        "max_x": 33.74,
+        "min_y": 28.03,
+        "max_y": 31.01
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12265
+      ],
+      "relations": [
+        {
+          "quest_id": 12265,
+          "quest_name": "污染的能量",
+          "relation_kind": "direct_object",
+          "required_count": 8,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27450",
+      "entity_type": "npc",
+      "entity_id": 27450,
+      "name": "Neltharion's Flame Control Bunny",
+      "dragonblight_representative": {
+        "x": 30.65,
+        "y": 33.1,
+        "spawn_count": 1,
+        "min_x": 30.65,
+        "max_x": 30.65,
+        "min_y": 33.1,
+        "max_y": 33.1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12267
+      ],
+      "relations": [
+        {
+          "quest_id": 12267,
+          "quest_name": "奈萨里奥的烈焰",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188673",
+      "entity_type": "object",
+      "entity_id": 188673,
+      "name": "New Hearthglen Ballista",
+      "dragonblight_representative": {
+        "x": 71.21,
+        "y": 74.77,
+        "spawn_count": 21,
+        "min_x": 66.74,
+        "max_x": 73.75,
+        "min_y": 67.09,
+        "max_y": 81.74
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        12232
+      ],
+      "relations": [
+        {
+          "quest_id": 12232,
+          "quest_name": "炸毁弩炮",
+          "relation_kind": "direct_object",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27853",
+      "entity_type": "npc",
+      "entity_id": 27853,
+      "name": "Projections and Plans Kill Credit Bunny",
+      "dragonblight_representative": {
+        "x": 19.78,
+        "y": 59.79,
+        "spawn_count": 1,
+        "min_x": 19.78,
+        "max_x": 19.78,
+        "min_y": 59.79,
+        "max_y": 59.79
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12061
+      ],
+      "relations": [
+        {
+          "quest_id": 12061,
+          "quest_name": "投影和计划",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193197",
+      "entity_type": "object",
+      "entity_id": 193197,
+      "name": "Saurfang's Battle Armor",
+      "dragonblight_representative": {
+        "x": 38.16,
+        "y": 18.71,
+        "spawn_count": 1,
+        "min_x": 38.16,
+        "max_x": 38.16,
+        "min_y": 18.71,
+        "max_y": 18.71
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13242
+      ],
+      "relations": [
+        {
+          "quest_id": 13242,
+          "quest_name": "黑暗的骚动",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 43615
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188676",
+      "entity_type": "object",
+      "entity_id": 188676,
+      "name": "Scarlet Onslaught Daily Orders: Abbey",
+      "dragonblight_representative": {
+        "x": 73.42,
+        "y": 72.63,
+        "spawn_count": 1,
+        "min_x": 73.42,
+        "max_x": 73.42,
+        "min_y": 72.63,
+        "max_y": 72.63
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12234
+      ],
+      "relations": [
+        {
+          "quest_id": 12234,
+          "quest_name": "日常计划",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 37268
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188675",
+      "entity_type": "object",
+      "entity_id": 188675,
+      "name": "Scarlet Onslaught Daily Orders: Barracks",
+      "dragonblight_representative": {
+        "x": 69.72,
+        "y": 71.89,
+        "spawn_count": 1,
+        "min_x": 69.72,
+        "max_x": 69.72,
+        "min_y": 71.89,
+        "max_y": 71.89
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12234
+      ],
+      "relations": [
+        {
+          "quest_id": 12234,
+          "quest_name": "日常计划",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 37267
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188677",
+      "entity_type": "object",
+      "entity_id": 188677,
+      "name": "Scarlet Onslaught Daily Orders: Beach",
+      "dragonblight_representative": {
+        "x": 71.6,
+        "y": 80.42,
+        "spawn_count": 1,
+        "min_x": 71.6,
+        "max_x": 71.6,
+        "min_y": 80.42,
+        "max_y": 80.42
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12234
+      ],
+      "relations": [
+        {
+          "quest_id": 12234,
+          "quest_name": "日常计划",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 37269
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188441",
+      "entity_type": "object",
+      "entity_id": 188441,
+      "name": "Splintered Bone Chunk",
+      "dragonblight_representative": {
+        "x": 59.78,
+        "y": 26.64,
+        "spawn_count": 31,
+        "min_x": 51.12,
+        "max_x": 63.62,
+        "min_y": 22.03,
+        "max_y": 29.87
+      },
+      "spawn_count": 31,
+      "quest_ids": [
+        12047
+      ],
+      "relations": [
+        {
+          "quest_id": 12047,
+          "quest_name": "不会融化的东西",
+          "relation_kind": "resolved_item",
+          "required_count": 12,
+          "item_id": 36730
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:189293",
+      "entity_type": "object",
+      "entity_id": 189293,
+      "name": "The Diary of High General Abbendis",
+      "dragonblight_representative": {
+        "x": 68.28,
+        "y": 76.98,
+        "spawn_count": 1,
+        "min_x": 68.28,
+        "max_x": 68.28,
+        "min_y": 76.98,
+        "max_y": 76.98
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12283
+      ],
+      "relations": [
+        {
+          "quest_id": 12283,
+          "quest_name": "寻找真相",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 37540
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26889",
+      "entity_type": "npc",
+      "entity_id": 26889,
+      "name": "The End of the Line Area Trigger Kill Credit Bunny",
+      "dragonblight_representative": {
+        "x": 53.08,
+        "y": 64.83,
+        "spawn_count": 7,
+        "min_x": 52.99,
+        "max_x": 54.14,
+        "min_y": 62.97,
+        "max_y": 69.29
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        12110
+      ],
+      "relations": [
+        {
+          "quest_id": 12110,
+          "quest_name": "魔网能量线的终端",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:188416",
+      "entity_type": "object",
+      "entity_id": 188416,
+      "name": "Toalu'u's Brazier",
+      "dragonblight_representative": {
+        "x": 48.94,
+        "y": 75.75,
+        "spawn_count": 1,
+        "min_x": 48.94,
+        "max_x": 48.94,
+        "min_y": 75.75,
+        "max_y": 75.75
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12028
+      ],
+      "relations": [
+        {
+          "quest_id": 12028,
+          "quest_name": "灵魂视界",
+          "relation_kind": "direct_object",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27376",
+      "entity_type": "npc",
+      "entity_id": 27376,
+      "name": "亡灵卫兵斯克尼德",
+      "dragonblight_representative": {
+        "x": 71.4,
+        "y": 72.18,
+        "spawn_count": 1,
+        "min_x": 71.4,
+        "max_x": 71.4,
+        "min_y": 72.18,
+        "max_y": 72.18
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12245
+      ],
+      "relations": [
+        {
+          "quest_id": 12245,
+          "quest_name": "毫不留情",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27363",
+      "entity_type": "npc",
+      "entity_id": 27363,
+      "name": "冒烟的恶鬼",
+      "dragonblight_representative": {
+        "x": 32.75,
+        "y": 28.58,
+        "spawn_count": 19,
+        "min_x": 31.42,
+        "max_x": 35.98,
+        "min_y": 26.43,
+        "max_y": 31.41
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12264
+      ],
+      "relations": [
+        {
+          "quest_id": 12264,
+          "quest_name": "扫荡诅咒教派",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27362",
+      "entity_type": "npc",
+      "entity_id": 27362,
+      "name": "冒烟的构造体",
+      "dragonblight_representative": {
+        "x": 32.52,
+        "y": 29.09,
+        "spawn_count": 13,
+        "min_x": 30.64,
+        "max_x": 33.98,
+        "min_y": 25.28,
+        "max_y": 30.83
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        12264
+      ],
+      "relations": [
+        {
+          "quest_id": 12264,
+          "quest_name": "扫荡诅咒教派",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27360",
+      "entity_type": "npc",
+      "entity_id": 27360,
+      "name": "冒烟的骷髅",
+      "dragonblight_representative": {
+        "x": 38.86,
+        "y": 32.05,
+        "spawn_count": 15,
+        "min_x": 35.16,
+        "max_x": 41.73,
+        "min_y": 30.29,
+        "max_y": 33.52
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12262
+      ],
+      "relations": [
+        {
+          "quest_id": 12262,
+          "quest_name": "驱逐天灾",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27539",
+      "entity_type": "npc",
+      "entity_id": 27539,
+      "name": "冰冷通灵师",
+      "dragonblight_representative": {
+        "x": 47.21,
+        "y": 48.36,
+        "spawn_count": 14,
+        "min_x": 45.24,
+        "max_x": 48.65,
+        "min_y": 45.54,
+        "max_y": 52.45
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12450
+      ],
+      "relations": [
+        {
+          "quest_id": 12450,
+          "quest_name": "烈焰之地",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26705",
+      "entity_type": "npc",
+      "entity_id": 26705,
+      "name": "冰原徒工",
+      "dragonblight_representative": {
+        "x": 63.21,
+        "y": 46.38,
+        "spawn_count": 9,
+        "min_x": 54.26,
+        "max_x": 69.44,
+        "min_y": 29.83,
+        "max_y": 67.06
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27278",
+      "entity_type": "npc",
+      "entity_id": 27278,
+      "name": "冰原狂战士",
+      "dragonblight_representative": {
+        "x": 64.75,
+        "y": 50.42,
+        "spawn_count": 35,
+        "min_x": 55.15,
+        "max_x": 70.27,
+        "min_y": 32.1,
+        "max_y": 62.25
+      },
+      "spawn_count": 35,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 10,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27279",
+      "entity_type": "npc",
+      "entity_id": 27279,
+      "name": "冰原萨满祭司",
+      "dragonblight_representative": {
+        "x": 64.67,
+        "y": 49.3,
+        "spawn_count": 15,
+        "min_x": 55.5,
+        "max_x": 70.09,
+        "min_y": 32.41,
+        "max_y": 61.6
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26283",
+      "entity_type": "npc",
+      "entity_id": 26283,
+      "name": "冰雪亡魂",
+      "dragonblight_representative": {
+        "x": 67.37,
+        "y": 53.29,
+        "spawn_count": 11,
+        "min_x": 66.56,
+        "max_x": 68.17,
+        "min_y": 51.35,
+        "max_y": 56.2
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12127
+      ],
+      "relations": [
+        {
+          "quest_id": 12127,
+          "quest_name": "冰霜之约",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26358",
+      "entity_type": "npc",
+      "entity_id": 26358,
+      "name": "冷心冰虫喂食者",
+      "dragonblight_representative": {
+        "x": 53.64,
+        "y": 16.82,
+        "spawn_count": 24,
+        "min_x": 50.3,
+        "max_x": 62.48,
+        "min_y": 10.82,
+        "max_y": 20.5
+      },
+      "spawn_count": 24,
+      "quest_ids": [
+        12079
+      ],
+      "relations": [
+        {
+          "quest_id": 12079,
+          "quest_name": "践踏大地",
+          "relation_kind": "direct_creature",
+          "required_count": 8,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26577",
+      "entity_type": "npc",
+      "entity_id": 26577,
+      "name": "冷风女巫",
+      "dragonblight_representative": {
+        "x": 49.96,
+        "y": 17.13,
+        "spawn_count": 9,
+        "min_x": 45.43,
+        "max_x": 52.95,
+        "min_y": 13.12,
+        "max_y": 20.53
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12052
+      ],
+      "relations": [
+        {
+          "quest_id": 12052,
+          "quest_name": "该死的鹰身人！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26578",
+      "entity_type": "npc",
+      "entity_id": 26578,
+      "name": "冷风女王",
+      "dragonblight_representative": {
+        "x": 45.59,
+        "y": 9.33,
+        "spawn_count": 1,
+        "min_x": 45.59,
+        "max_x": 45.59,
+        "min_y": 9.33,
+        "max_y": 9.33
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12052
+      ],
+      "relations": [
+        {
+          "quest_id": 12052,
+          "quest_name": "该死的鹰身人！",
+          "relation_kind": "direct_creature",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26575",
+      "entity_type": "npc",
+      "entity_id": 26575,
+      "name": "冷风废土猎手",
+      "dragonblight_representative": {
+        "x": 49.86,
+        "y": 18.21,
+        "spawn_count": 9,
+        "min_x": 44.61,
+        "max_x": 52.74,
+        "min_y": 11.38,
+        "max_y": 19.72
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12052
+      ],
+      "relations": [
+        {
+          "quest_id": 12052,
+          "quest_name": "该死的鹰身人！",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27808",
+      "entity_type": "npc",
+      "entity_id": 27808,
+      "name": "卑鄙的图尔基德",
+      "dragonblight_representative": {
+        "x": 86.15,
+        "y": 46.95,
+        "spawn_count": 1,
+        "min_x": 86.15,
+        "max_x": 86.15,
+        "min_y": 46.95,
+        "max_y": 46.95
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12459
+      ],
+      "relations": [
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26349",
+      "entity_type": "npc",
+      "entity_id": 26349,
+      "name": "古拉莫什",
+      "dragonblight_representative": {
+        "x": 19.52,
+        "y": 58.12,
+        "spawn_count": 1,
+        "min_x": 19.52,
+        "max_x": 19.52,
+        "min_y": 58.12,
+        "max_y": 58.12
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12005
+      ],
+      "relations": [
+        {
+          "quest_id": 12005,
+          "quest_name": "阻碍协议",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 35801
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27381",
+      "entity_type": "npc",
+      "entity_id": 27381,
+      "name": "司法官亚麦",
+      "dragonblight_representative": {
+        "x": 72.63,
+        "y": 72.58,
+        "spawn_count": 1,
+        "min_x": 72.63,
+        "max_x": 72.63,
+        "min_y": 72.58,
+        "max_y": 72.58
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12245
+      ],
+      "relations": [
+        {
+          "quest_id": 12245,
+          "quest_name": "毫不留情",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26496",
+      "entity_type": "npc",
+      "entity_id": 26496,
+      "name": "商人穆法赫",
+      "dragonblight_representative": {
+        "x": 18.43,
+        "y": 58.89,
+        "spawn_count": 1,
+        "min_x": 18.43,
+        "max_x": 18.43,
+        "min_y": 58.89,
+        "max_y": 58.89
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12005
+      ],
+      "relations": [
+        {
+          "quest_id": 12005,
+          "quest_name": "阻碍协议",
+          "relation_kind": "resolved_item",
+          "required_count": null,
+          "item_id": 35800
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26344",
+      "entity_type": "npc",
+      "entity_id": 26344,
+      "name": "因度雷战士",
+      "dragonblight_representative": {
+        "x": 38.81,
+        "y": 65.79,
+        "spawn_count": 19,
+        "min_x": 36.44,
+        "max_x": 42.74,
+        "min_y": 62.53,
+        "max_y": 71.48
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12031
+      ],
+      "relations": [
+        {
+          "quest_id": 12031,
+          "quest_name": "解脱和安息",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26343",
+      "entity_type": "npc",
+      "entity_id": 26343,
+      "name": "因度雷渔夫",
+      "dragonblight_representative": {
+        "x": 39.69,
+        "y": 67.58,
+        "spawn_count": 15,
+        "min_x": 36.19,
+        "max_x": 41.91,
+        "min_y": 63.88,
+        "max_y": 69.95
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12031
+      ],
+      "relations": [
+        {
+          "quest_id": 12031,
+          "quest_name": "解脱和安息",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26336",
+      "entity_type": "npc",
+      "entity_id": 26336,
+      "name": "因度雷秘法师",
+      "dragonblight_representative": {
+        "x": 38.13,
+        "y": 67.08,
+        "spawn_count": 5,
+        "min_x": 36.6,
+        "max_x": 41.62,
+        "min_y": 64.89,
+        "max_y": 71.2
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        12031
+      ],
+      "relations": [
+        {
+          "quest_id": 12031,
+          "quest_name": "解脱和安息",
+          "relation_kind": "resolved_event",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26521",
+      "entity_type": "npc",
+      "entity_id": 26521,
+      "name": "基利瓦",
+      "dragonblight_representative": {
+        "x": 41.96,
+        "y": 79.9,
+        "spawn_count": 1,
+        "min_x": 41.96,
+        "max_x": 41.96,
+        "min_y": 79.9,
+        "max_y": 79.9
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12016
+      ],
+      "relations": [
+        {
+          "quest_id": 12016,
+          "quest_name": "诱饵",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 35831
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26841",
+      "entity_type": "npc",
+      "entity_id": 26841,
+      "name": "复活的冰霜巨龙",
+      "dragonblight_representative": {
+        "x": 55.2,
+        "y": 34.75,
+        "spawn_count": 14,
+        "min_x": 50.22,
+        "max_x": 69.27,
+        "min_y": 27.87,
+        "max_y": 48.28
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12459
+      ],
+      "relations": [
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26946",
+      "entity_type": "npc",
+      "entity_id": 26946,
+      "name": "复活的达卡莱部族成员",
+      "dragonblight_representative": {
+        "x": 89.05,
+        "y": 26.23,
+        "spawn_count": 16,
+        "min_x": 87.93,
+        "max_x": 91.42,
+        "min_y": 24.0,
+        "max_y": 30.84
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12545
+      ],
+      "relations": [
+        {
+          "quest_id": 12545,
+          "quest_name": "净化金萨卡拉",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27410",
+      "entity_type": "npc",
+      "entity_id": 27410,
+      "name": "天灾攻城锻造师",
+      "dragonblight_representative": {
+        "x": 85.25,
+        "y": 48.9,
+        "spawn_count": 38,
+        "min_x": 82.07,
+        "max_x": 89.89,
+        "min_y": 45.43,
+        "max_y": 55.34
+      },
+      "spawn_count": 38,
+      "quest_ids": [
+        12230
+      ],
+      "relations": [
+        {
+          "quest_id": 12230,
+          "quest_name": "收取炸弹",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 37248
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27005",
+      "entity_type": "npc",
+      "entity_id": 27005,
+      "name": "寒齿",
+      "dragonblight_representative": {
+        "x": 72.49,
+        "y": 29.25,
+        "spawn_count": 1,
+        "min_x": 72.49,
+        "max_x": 72.49,
+        "min_y": 29.25,
+        "max_y": 29.25
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26943",
+      "entity_type": "npc",
+      "entity_id": 26943,
+      "name": "崩溃的达卡莱狂暴者",
+      "dragonblight_representative": {
+        "x": 86.89,
+        "y": 20.95,
+        "spawn_count": 4,
+        "min_x": 85.49,
+        "max_x": 88.14,
+        "min_y": 19.1,
+        "max_y": 21.81
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12545
+      ],
+      "relations": [
+        {
+          "quest_id": 12545,
+          "quest_name": "净化金萨卡拉",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27379",
+      "entity_type": "npc",
+      "entity_id": 27379,
+      "name": "工程师布尔克",
+      "dragonblight_representative": {
+        "x": 72.72,
+        "y": 74.33,
+        "spawn_count": 1,
+        "min_x": 72.72,
+        "max_x": 72.72,
+        "min_y": 74.33,
+        "max_y": 74.33
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12245
+      ],
+      "relations": [
+        {
+          "quest_id": 12245,
+          "quest_name": "毫不留情",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26293",
+      "entity_type": "npc",
+      "entity_id": 26293,
+      "name": "巨大的冰虫",
+      "dragonblight_representative": {
+        "x": 60.06,
+        "y": 22.3,
+        "spawn_count": 10,
+        "min_x": 58.14,
+        "max_x": 61.82,
+        "min_y": 13.04,
+        "max_y": 26.94
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12049
+      ],
+      "relations": [
+        {
+          "quest_id": 12049,
+          "quest_name": "难以下咽",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 36731
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:28005",
+      "entity_type": "npc",
+      "entity_id": 28005,
+      "name": "废土挖掘者",
+      "dragonblight_representative": {
+        "x": 55.78,
+        "y": 34.43,
+        "spawn_count": 71,
+        "min_x": 53.56,
+        "max_x": 58.36,
+        "min_y": 31.87,
+        "max_y": 37.09
+      },
+      "spawn_count": 71,
+      "quest_ids": [
+        12498
+      ],
+      "relations": [
+        {
+          "quest_id": 12498,
+          "quest_name": "红龙之翼",
+          "relation_kind": "direct_creature",
+          "required_count": 30,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27003",
+      "entity_type": "npc",
+      "entity_id": 27003,
+      "name": "德雷格玛尔·符印",
+      "dragonblight_representative": {
+        "x": 72.76,
+        "y": 49.68,
+        "spawn_count": 1,
+        "min_x": 72.76,
+        "max_x": 72.76,
+        "min_y": 49.68,
+        "max_y": 49.68
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12150
+      ],
+      "relations": [
+        {
+          "quest_id": 12150,
+          "quest_name": "隐居的铭语师",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26838",
+      "entity_type": "npc",
+      "entity_id": 26838,
+      "name": "恐怖之爪",
+      "dragonblight_representative": {
+        "x": 46.29,
+        "y": 43.03,
+        "spawn_count": 1,
+        "min_x": 46.29,
+        "max_x": 46.29,
+        "min_y": 43.03,
+        "max_y": 43.03
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12091
+      ],
+      "relations": [
+        {
+          "quest_id": 12091,
+          "quest_name": "通缉：恐怖之爪",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27286",
+      "entity_type": "npc",
+      "entity_id": 27286,
+      "name": "恐骨入侵者",
+      "dragonblight_representative": {
+        "x": 88.23,
+        "y": 50.64,
+        "spawn_count": 39,
+        "min_x": 83.7,
+        "max_x": 91.27,
+        "min_y": 45.79,
+        "max_y": 54.53
+      },
+      "spawn_count": 39,
+      "quest_ids": [
+        12230
+      ],
+      "relations": [
+        {
+          "quest_id": 12230,
+          "quest_name": "收取炸弹",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 37248
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26467",
+      "entity_type": "npc",
+      "entity_id": 26467,
+      "name": "掘洞冰虫",
+      "dragonblight_representative": {
+        "x": 51.6,
+        "y": 23.92,
+        "spawn_count": 16,
+        "min_x": 48.83,
+        "max_x": 54.0,
+        "min_y": 20.78,
+        "max_y": 26.92
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12046
+      ],
+      "relations": [
+        {
+          "quest_id": 12046,
+          "quest_name": "柔软的包装",
+          "relation_kind": "resolved_item",
+          "required_count": 12,
+          "item_id": 36729
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26966",
+      "entity_type": "npc",
+      "entity_id": 26966,
+      "name": "暗影折磨者",
+      "dragonblight_representative": {
+        "x": 37.39,
+        "y": 46.51,
+        "spawn_count": 22,
+        "min_x": 34.91,
+        "max_x": 38.7,
+        "min_y": 45.35,
+        "max_y": 48.61
+      },
+      "spawn_count": 22,
+      "quest_ids": [
+        12132
+      ],
+      "relations": [
+        {
+          "quest_id": 12132,
+          "quest_name": "毁灭的力量",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26482",
+      "entity_type": "npc",
+      "entity_id": 26482,
+      "name": "极地灰熊",
+      "dragonblight_representative": {
+        "x": 44.55,
+        "y": 51.94,
+        "spawn_count": 41,
+        "min_x": 30.56,
+        "max_x": 90.1,
+        "min_y": 27.65,
+        "max_y": 74.11
+      },
+      "spawn_count": 41,
+      "quest_ids": [
+        12111
+      ],
+      "relations": [
+        {
+          "quest_id": 12111,
+          "quest_name": "野生动物的疫苗",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26316",
+      "entity_type": "npc",
+      "entity_id": 26316,
+      "name": "水晶冰雪元素",
+      "dragonblight_representative": {
+        "x": 51.28,
+        "y": 18.2,
+        "spawn_count": 27,
+        "min_x": 47.17,
+        "max_x": 58.91,
+        "min_y": 14.27,
+        "max_y": 20.73
+      },
+      "spawn_count": 27,
+      "quest_ids": [
+        12045
+      ],
+      "relations": [
+        {
+          "quest_id": 12045,
+          "quest_name": "刨冰",
+          "relation_kind": "resolved_item",
+          "required_count": 4,
+          "item_id": 36728
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27028",
+      "entity_type": "npc",
+      "entity_id": 27028,
+      "name": "汉瑟·鲍尔",
+      "dragonblight_representative": {
+        "x": 75.93,
+        "y": 61.88,
+        "spawn_count": 1,
+        "min_x": 75.93,
+        "max_x": 75.93,
+        "min_y": 61.88,
+        "max_y": 61.88
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12214
+      ],
+      "relations": [
+        {
+          "quest_id": 12214,
+          "quest_name": "补充坐骑",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26196",
+      "entity_type": "npc",
+      "entity_id": 26196,
+      "name": "洛根",
+      "dragonblight_representative": {
+        "x": 46.32,
+        "y": 59.14,
+        "spawn_count": 1,
+        "min_x": 46.32,
+        "max_x": 46.32,
+        "min_y": 59.14,
+        "max_y": 59.14
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11959
+      ],
+      "relations": [
+        {
+          "quest_id": 11959,
+          "quest_name": "消灭洛根",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26810",
+      "entity_type": "npc",
+      "entity_id": 26810,
+      "name": "洛纳乌克·冰雾",
+      "dragonblight_representative": {
+        "x": 36.25,
+        "y": 45.44,
+        "spawn_count": 1,
+        "min_x": 36.25,
+        "max_x": 36.25,
+        "min_y": 45.44,
+        "max_y": 45.44
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12140
+      ],
+      "relations": [
+        {
+          "quest_id": 12140,
+          "quest_name": "洛纳乌克万岁！",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26257",
+      "entity_type": "npc",
+      "entity_id": 26257,
+      "name": "湍流之针巫师",
+      "dragonblight_representative": {
+        "x": 19.7,
+        "y": 60.12,
+        "spawn_count": 22,
+        "min_x": 18.15,
+        "max_x": 21.24,
+        "min_y": 58.4,
+        "max_y": 61.86
+      },
+      "spawn_count": 22,
+      "quest_ids": [
+        12006
+      ],
+      "relations": [
+        {
+          "quest_id": 12006,
+          "quest_name": "上层精灵的愤怒",
+          "relation_kind": "resolved_event",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27356",
+      "entity_type": "npc",
+      "entity_id": 27356,
+      "name": "燃烧深渊通灵侍僧",
+      "dragonblight_representative": {
+        "x": 37.33,
+        "y": 31.27,
+        "spawn_count": 16,
+        "min_x": 34.51,
+        "max_x": 40.89,
+        "min_y": 28.29,
+        "max_y": 33.92
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12262
+      ],
+      "relations": [
+        {
+          "quest_id": 12262,
+          "quest_name": "驱逐天灾",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27358",
+      "entity_type": "npc",
+      "entity_id": 27358,
+      "name": "燃烧深渊通灵师",
+      "dragonblight_representative": {
+        "x": 33.31,
+        "y": 28.48,
+        "spawn_count": 8,
+        "min_x": 30.93,
+        "max_x": 34.19,
+        "min_y": 25.45,
+        "max_y": 30.53
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        12264
+      ],
+      "relations": [
+        {
+          "quest_id": 12264,
+          "quest_name": "扫荡诅咒教派",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26179",
+      "entity_type": "npc",
+      "entity_id": 26179,
+      "name": "牦牛村难民",
+      "dragonblight_representative": {
+        "x": 13.29,
+        "y": 48.59,
+        "spawn_count": 20,
+        "min_x": 12.33,
+        "max_x": 14.2,
+        "min_y": 45.55,
+        "max_y": 49.83
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        11983
+      ],
+      "relations": [
+        {
+          "quest_id": 11983,
+          "quest_name": "部落的血誓",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26184",
+      "entity_type": "npc",
+      "entity_id": 26184,
+      "name": "牦牛村难民",
+      "dragonblight_representative": {
+        "x": 13.51,
+        "y": 48.85,
+        "spawn_count": 21,
+        "min_x": 11.72,
+        "max_x": 14.36,
+        "min_y": 45.93,
+        "max_y": 49.9
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        11983
+      ],
+      "relations": [
+        {
+          "quest_id": 11983,
+          "quest_name": "部落的血誓",
+          "relation_kind": "resolved_event",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26643",
+      "entity_type": "npc",
+      "entity_id": 26643,
+      "name": "狂暴灰熊",
+      "dragonblight_representative": {
+        "x": 82.92,
+        "y": 49.15,
+        "spawn_count": 25,
+        "min_x": 24.26,
+        "max_x": 91.49,
+        "min_y": 21.38,
+        "max_y": 60.37
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        12100
+      ],
+      "relations": [
+        {
+          "quest_id": 12100,
+          "quest_name": "腐烂的器官",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        },
+        {
+          "quest_id": 12100,
+          "quest_name": "腐烂的器官",
+          "relation_kind": "resolved_item",
+          "required_count": 15,
+          "item_id": 36800
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26480",
+      "entity_type": "npc",
+      "entity_id": 26480,
+      "name": "猛犸人幼体",
+      "dragonblight_representative": {
+        "x": 64.0,
+        "y": 47.33,
+        "spawn_count": 14,
+        "min_x": 55.09,
+        "max_x": 68.53,
+        "min_y": 33.11,
+        "max_y": 60.62
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26295",
+      "entity_type": "npc",
+      "entity_id": 26295,
+      "name": "猛犸人族长",
+      "dragonblight_representative": {
+        "x": 63.85,
+        "y": 47.57,
+        "spawn_count": 13,
+        "min_x": 54.85,
+        "max_x": 68.54,
+        "min_y": 32.89,
+        "max_y": 60.22
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26481",
+      "entity_type": "npc",
+      "entity_id": 26481,
+      "name": "猛犸人突击者",
+      "dragonblight_representative": {
+        "x": 63.1,
+        "y": 46.52,
+        "spawn_count": 9,
+        "min_x": 54.19,
+        "max_x": 69.36,
+        "min_y": 29.74,
+        "max_y": 67.22
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12144
+      ],
+      "relations": [
+        {
+          "quest_id": 12144,
+          "quest_name": "害虫控制",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26926",
+      "entity_type": "npc",
+      "entity_id": 26926,
+      "name": "瓦伦哈尔公爵",
+      "dragonblight_representative": {
+        "x": 47.44,
+        "y": 51.82,
+        "spawn_count": 1,
+        "min_x": 47.44,
+        "max_x": 47.44,
+        "min_y": 51.82,
+        "max_y": 51.82
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12126
+      ],
+      "relations": [
+        {
+          "quest_id": 12126,
+          "quest_name": "邪恶之约",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26411",
+      "entity_type": "npc",
+      "entity_id": 26411,
+      "name": "疯狂的因度雷村民",
+      "dragonblight_representative": {
+        "x": 39.18,
+        "y": 67.66,
+        "spawn_count": 16,
+        "min_x": 35.7,
+        "max_x": 42.67,
+        "min_y": 62.27,
+        "max_y": 72.34
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12125
+      ],
+      "relations": [
+        {
+          "quest_id": 12125,
+          "quest_name": "邪能之约",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27122",
+      "entity_type": "npc",
+      "entity_id": 27122,
+      "name": "监工戴瑟盖斯",
+      "dragonblight_representative": {
+        "x": 89.53,
+        "y": 19.08,
+        "spawn_count": 1,
+        "min_x": 89.53,
+        "max_x": 89.53,
+        "min_y": 19.08,
+        "max_y": 19.08
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12459
+      ],
+      "relations": [
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26281",
+      "entity_type": "npc",
+      "entity_id": 26281,
+      "name": "眠月魔犬",
+      "dragonblight_representative": {
+        "x": 21.66,
+        "y": 62.08,
+        "spawn_count": 41,
+        "min_x": 15.62,
+        "max_x": 27.59,
+        "min_y": 53.25,
+        "max_y": 68.45
+      },
+      "spawn_count": 41,
+      "quest_ids": [
+        12006
+      ],
+      "relations": [
+        {
+          "quest_id": 12006,
+          "quest_name": "上层精灵的愤怒",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26948",
+      "entity_type": "npc",
+      "entity_id": 26948,
+      "name": "笨重的暴徒",
+      "dragonblight_representative": {
+        "x": 88.09,
+        "y": 21.59,
+        "spawn_count": 18,
+        "min_x": 85.84,
+        "max_x": 91.19,
+        "min_y": 18.25,
+        "max_y": 27.3
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        12545
+      ],
+      "relations": [
+        {
+          "quest_id": 12545,
+          "quest_name": "净化金萨卡拉",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27530",
+      "entity_type": "npc",
+      "entity_id": 27530,
+      "name": "红玉看守者",
+      "dragonblight_representative": {
+        "x": 47.45,
+        "y": 47.1,
+        "spawn_count": 9,
+        "min_x": 45.66,
+        "max_x": 50.24,
+        "min_y": 44.59,
+        "max_y": 52.65
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12449
+      ],
+      "relations": [
+        {
+          "quest_id": 12449,
+          "quest_name": "重归尘土",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26321",
+      "entity_type": "npc",
+      "entity_id": 26321,
+      "name": "罗萨洛尔古树",
+      "dragonblight_representative": {
+        "x": 32.53,
+        "y": 67.62,
+        "spawn_count": 9,
+        "min_x": 30.41,
+        "max_x": 34.71,
+        "min_y": 62.33,
+        "max_y": 73.55
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12096
+      ],
+      "relations": [
+        {
+          "quest_id": 12096,
+          "quest_name": "强化古树",
+          "relation_kind": "direct_creature",
+          "required_count": 3,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27244",
+      "entity_type": "npc",
+      "entity_id": 27244,
+      "name": "翡翠天爪枭",
+      "dragonblight_representative": {
+        "x": 63.93,
+        "y": 73.28,
+        "spawn_count": 13,
+        "min_x": 61.21,
+        "max_x": 66.1,
+        "min_y": 71.71,
+        "max_y": 76.99
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        12454
+      ],
+      "relations": [
+        {
+          "quest_id": 12454,
+          "quest_name": "生命的循环",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27355",
+      "entity_type": "npc",
+      "entity_id": 27355,
+      "name": "腐烂者洛森",
+      "dragonblight_representative": {
+        "x": 31.41,
+        "y": 31.01,
+        "spawn_count": 1,
+        "min_x": 31.41,
+        "max_x": 31.41,
+        "min_y": 31.01,
+        "max_y": 31.01
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12267
+      ],
+      "relations": [
+        {
+          "quest_id": 12267,
+          "quest_name": "奈萨里奥的烈焰",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26511",
+      "entity_type": "npc",
+      "entity_id": 26511,
+      "name": "莫亚基深海鲨鱼",
+      "dragonblight_representative": {
+        "x": 48.75,
+        "y": 79.04,
+        "spawn_count": 21,
+        "min_x": 44.18,
+        "max_x": 55.7,
+        "min_y": 76.36,
+        "max_y": 81.65
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        12009
+      ],
+      "relations": [
+        {
+          "quest_id": 12009,
+          "quest_name": "图尔凯的螃蟹陷阱",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 35802
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26858",
+      "entity_type": "npc",
+      "entity_id": 26858,
+      "name": "萨拉斯塔",
+      "dragonblight_representative": {
+        "x": 51.08,
+        "y": 32.75,
+        "spawn_count": 1,
+        "min_x": 51.08,
+        "max_x": 51.08,
+        "min_y": 32.75,
+        "max_y": 32.75
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12097
+      ],
+      "relations": [
+        {
+          "quest_id": 12097,
+          "quest_name": "萨拉斯塔，北地的灾祸",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 36793
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27349",
+      "entity_type": "npc",
+      "entity_id": 27349,
+      "name": "血色先锋军士兵",
+      "dragonblight_representative": {
+        "x": 77.04,
+        "y": 63.04,
+        "spawn_count": 1,
+        "min_x": 77.04,
+        "max_x": 77.04,
+        "min_y": 63.04,
+        "max_y": 63.04
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12206
+      ],
+      "relations": [
+        {
+          "quest_id": 12206,
+          "quest_name": "测试药剂",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27213",
+      "entity_type": "npc",
+      "entity_id": 27213,
+      "name": "血色先锋军战马",
+      "dragonblight_representative": {
+        "x": 72.3,
+        "y": 74.44,
+        "spawn_count": 29,
+        "min_x": 67.55,
+        "max_x": 75.27,
+        "min_y": 65.24,
+        "max_y": 81.99
+      },
+      "spawn_count": 29,
+      "quest_ids": [
+        12214
+      ],
+      "relations": [
+        {
+          "quest_id": 12214,
+          "quest_name": "补充坐骑",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26942",
+      "entity_type": "npc",
+      "entity_id": 26942,
+      "name": "衰弱的通灵师",
+      "dragonblight_representative": {
+        "x": 87.73,
+        "y": 20.22,
+        "spawn_count": 13,
+        "min_x": 85.99,
+        "max_x": 89.57,
+        "min_y": 18.78,
+        "max_y": 28.39
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        12545
+      ],
+      "relations": [
+        {
+          "quest_id": 12545,
+          "quest_name": "净化金萨卡拉",
+          "relation_kind": "resolved_event",
+          "required_count": 15,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26965",
+      "entity_type": "npc",
+      "entity_id": 26965,
+      "name": "被折磨的达卡莱巨魔",
+      "dragonblight_representative": {
+        "x": 89.01,
+        "y": 25.49,
+        "spawn_count": 25,
+        "min_x": 86.69,
+        "max_x": 91.7,
+        "min_y": 18.87,
+        "max_y": 28.37
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        12545
+      ],
+      "relations": [
+        {
+          "quest_id": 12545,
+          "quest_name": "净化金萨卡拉",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27531",
+      "entity_type": "npc",
+      "entity_id": 27531,
+      "name": "进攻的冰冷憎恶",
+      "dragonblight_representative": {
+        "x": 48.86,
+        "y": 50.25,
+        "spawn_count": 6,
+        "min_x": 45.01,
+        "max_x": 49.61,
+        "min_y": 48.49,
+        "max_y": 52.04
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        12448
+      ],
+      "relations": [
+        {
+          "quest_id": 12448,
+          "quest_name": "白热化的战斗",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26360",
+      "entity_type": "npc",
+      "entity_id": 26360,
+      "name": "钻雪虫",
+      "dragonblight_representative": {
+        "x": 50.59,
+        "y": 17.96,
+        "spawn_count": 1,
+        "min_x": 50.59,
+        "max_x": 50.59,
+        "min_y": 17.96,
+        "max_y": 17.96
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12080
+      ],
+      "relations": [
+        {
+          "quest_id": 12080,
+          "quest_name": "冰虫之母",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26413",
+      "entity_type": "npc",
+      "entity_id": 26413,
+      "name": "阿努巴尔恐怖编织者",
+      "dragonblight_representative": {
+        "x": 16.91,
+        "y": 48.61,
+        "spawn_count": 6,
+        "min_x": 15.78,
+        "max_x": 21.39,
+        "min_y": 45.54,
+        "max_y": 52.35
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        11978
+      ],
+      "relations": [
+        {
+          "quest_id": 11978,
+          "quest_name": "深入密林",
+          "relation_kind": "resolved_item",
+          "required_count": 10,
+          "item_id": 35726
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26319",
+      "entity_type": "npc",
+      "entity_id": 26319,
+      "name": "阿努巴尔教徒",
+      "dragonblight_representative": {
+        "x": 25.03,
+        "y": 40.39,
+        "spawn_count": 32,
+        "min_x": 22.79,
+        "max_x": 27.33,
+        "min_y": 37.58,
+        "max_y": 46.4
+      },
+      "spawn_count": 32,
+      "quest_ids": [
+        12048
+      ],
+      "relations": [
+        {
+          "quest_id": 12048,
+          "quest_name": "天灾的装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36736
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26606",
+      "entity_type": "npc",
+      "entity_id": 26606,
+      "name": "阿努巴尔杀戮者",
+      "dragonblight_representative": {
+        "x": 24.58,
+        "y": 41.36,
+        "spawn_count": 63,
+        "min_x": 20.88,
+        "max_x": 28.56,
+        "min_y": 36.5,
+        "max_y": 47.46
+      },
+      "spawn_count": 63,
+      "quest_ids": [
+        12048
+      ],
+      "relations": [
+        {
+          "quest_id": 12048,
+          "quest_name": "天灾的装备",
+          "relation_kind": "resolved_item",
+          "required_count": 8,
+          "item_id": 36736
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26607",
+      "entity_type": "npc",
+      "entity_id": 26607,
+      "name": "阿努巴尔荒芜兽",
+      "dragonblight_representative": {
+        "x": 25.27,
+        "y": 43.7,
+        "spawn_count": 46,
+        "min_x": 22.63,
+        "max_x": 27.86,
+        "min_y": 37.03,
+        "max_y": 47.75
+      },
+      "spawn_count": 46,
+      "quest_ids": [
+        12072
+      ],
+      "relations": [
+        {
+          "quest_id": 12072,
+          "quest_name": "该死的荒芜兽！",
+          "relation_kind": "direct_creature",
+          "required_count": 25,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26605",
+      "entity_type": "npc",
+      "entity_id": 26605,
+      "name": "阿努巴尔蛛魔领主",
+      "dragonblight_representative": {
+        "x": 26.78,
+        "y": 49.07,
+        "spawn_count": 15,
+        "min_x": 25.52,
+        "max_x": 28.8,
+        "min_y": 46.99,
+        "max_y": 50.23
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12040
+      ],
+      "relations": [
+        {
+          "quest_id": 12040,
+          "quest_name": "阿尔萨斯的死敌",
+          "relation_kind": "direct_creature",
+          "required_count": 6,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26370",
+      "entity_type": "npc",
+      "entity_id": 26370,
+      "name": "阿坎尼姆斯",
+      "dragonblight_representative": {
+        "x": 20.02,
+        "y": 59.64,
+        "spawn_count": 1,
+        "min_x": 20.02,
+        "max_x": 20.02,
+        "min_y": 59.64,
+        "max_y": 59.64
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12013
+      ],
+      "relations": [
+        {
+          "quest_id": 12013,
+          "quest_name": "阿坎尼姆斯的终结",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26615",
+      "entity_type": "npc",
+      "entity_id": 26615,
+      "name": "雪落麋鹿",
+      "dragonblight_representative": {
+        "x": 46.44,
+        "y": 52.55,
+        "spawn_count": 144,
+        "min_x": 30.53,
+        "max_x": 89.91,
+        "min_y": 23.15,
+        "max_y": 75.42
+      },
+      "spawn_count": 144,
+      "quest_ids": [
+        12111
+      ],
+      "relations": [
+        {
+          "quest_id": 12111,
+          "quest_name": "野生动物的疫苗",
+          "relation_kind": "direct_creature",
+          "required_count": 5,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26197",
+      "entity_type": "npc",
+      "entity_id": 26197,
+      "name": "飘雪林地掠夺者",
+      "dragonblight_representative": {
+        "x": 45.29,
+        "y": 64.62,
+        "spawn_count": 58,
+        "min_x": 40.65,
+        "max_x": 51.54,
+        "min_y": 57.19,
+        "max_y": 74.41
+      },
+      "spawn_count": 58,
+      "quest_ids": [
+        11958
+      ],
+      "relations": [
+        {
+          "quest_id": 11958,
+          "quest_name": "不要浪费",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 35686
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26198",
+      "entity_type": "npc",
+      "entity_id": 26198,
+      "name": "飘雪林地狼獾人",
+      "dragonblight_representative": {
+        "x": 46.83,
+        "y": 63.95,
+        "spawn_count": 49,
+        "min_x": 41.87,
+        "max_x": 52.25,
+        "min_y": 56.3,
+        "max_y": 74.11
+      },
+      "spawn_count": 49,
+      "quest_ids": [
+        11958
+      ],
+      "relations": [
+        {
+          "quest_id": 11958,
+          "quest_name": "不要浪费",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 35686
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26201",
+      "entity_type": "npc",
+      "entity_id": 26201,
+      "name": "飘雪林地萨满祭司",
+      "dragonblight_representative": {
+        "x": 45.87,
+        "y": 64.49,
+        "spawn_count": 9,
+        "min_x": 42.97,
+        "max_x": 50.61,
+        "min_y": 59.6,
+        "max_y": 72.51
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        11958
+      ],
+      "relations": [
+        {
+          "quest_id": 11958,
+          "quest_name": "不要浪费",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 35686
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26199",
+      "entity_type": "npc",
+      "entity_id": 26199,
+      "name": "飘雪林地雌性狼獾人",
+      "dragonblight_representative": {
+        "x": 45.17,
+        "y": 61.97,
+        "spawn_count": 21,
+        "min_x": 42.65,
+        "max_x": 47.5,
+        "min_y": 58.71,
+        "max_y": 72.07
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        11958
+      ],
+      "relations": [
+        {
+          "quest_id": 11958,
+          "quest_name": "不要浪费",
+          "relation_kind": "resolved_item",
+          "required_count": 6,
+          "item_id": 35686
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27290",
+      "entity_type": "npc",
+      "entity_id": 27290,
+      "name": "饥饿的死者",
+      "dragonblight_representative": {
+        "x": 85.21,
+        "y": 55.36,
+        "spawn_count": 57,
+        "min_x": 83.74,
+        "max_x": 86.55,
+        "min_y": 53.0,
+        "max_y": 56.42
+      },
+      "spawn_count": 57,
+      "quest_ids": [
+        12218
+      ],
+      "relations": [
+        {
+          "quest_id": 12218,
+          "quest_name": "传达好消息",
+          "relation_kind": "direct_creature",
+          "required_count": 30,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27378",
+      "entity_type": "npc",
+      "entity_id": 27378,
+      "name": "首席抄写员基尼迪乌斯",
+      "dragonblight_representative": {
+        "x": 69.37,
+        "y": 73.96,
+        "spawn_count": 1,
+        "min_x": 69.37,
+        "max_x": 69.37,
+        "min_y": 73.96,
+        "max_y": 73.96
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12245
+      ],
+      "relations": [
+        {
+          "quest_id": 12245,
+          "quest_name": "毫不留情",
+          "relation_kind": "direct_creature",
+          "required_count": null,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26655",
+      "entity_type": "npc",
+      "entity_id": 26655,
+      "name": "高阶教徒扎古斯",
+      "dragonblight_representative": {
+        "x": 28.88,
+        "y": 49.73,
+        "spawn_count": 1,
+        "min_x": 28.88,
+        "max_x": 28.88,
+        "min_y": 49.73,
+        "max_y": 49.73
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12056
+      ],
+      "relations": [
+        {
+          "quest_id": 12056,
+          "quest_name": "死亡名单：高阶教徒扎古斯",
+          "relation_kind": "resolved_item",
+          "required_count": 1,
+          "item_id": 36741
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26828",
+      "entity_type": "npc",
+      "entity_id": 26828,
+      "name": "魔导师凯尔多努斯",
+      "dragonblight_representative": {
+        "x": 21.09,
+        "y": 64.02,
+        "spawn_count": 1,
+        "min_x": 21.09,
+        "max_x": 21.09,
+        "min_y": 64.02,
+        "max_y": 64.02
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12089
+      ],
+      "relations": [
+        {
+          "quest_id": 12089,
+          "quest_name": "通缉：魔导师凯尔多努斯",
+          "relation_kind": "direct_creature",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26816",
+      "entity_type": "npc",
+      "entity_id": 26816,
+      "name": "魔法焦点巫师",
+      "dragonblight_representative": {
+        "x": 54.28,
+        "y": 65.87,
+        "spawn_count": 83,
+        "min_x": 23.39,
+        "max_x": 58.19,
+        "min_y": 61.69,
+        "max_y": 72.23
+      },
+      "spawn_count": 83,
+      "quest_ids": [
+        12006
+      ],
+      "relations": [
+        {
+          "quest_id": 12006,
+          "quest_name": "上层精灵的愤怒",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26483",
+      "entity_type": "npc",
+      "entity_id": 26483,
+      "name": "龙骨秃鹫",
+      "dragonblight_representative": {
+        "x": 52.6,
+        "y": 49.4,
+        "spawn_count": 83,
+        "min_x": 19.35,
+        "max_x": 85.81,
+        "min_y": 26.2,
+        "max_y": 68.99
+      },
+      "spawn_count": 83,
+      "quest_ids": [
+        12046
+      ],
+      "relations": [
+        {
+          "quest_id": 12046,
+          "quest_name": "柔软的包装",
+          "relation_kind": "resolved_item",
+          "required_count": 12,
+          "item_id": 36729
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:26280",
+      "entity_type": "npc",
+      "entity_id": 26280,
+      "name": "龙骨荒野法师猎手",
+      "dragonblight_representative": {
+        "x": 39.86,
+        "y": 65.61,
+        "spawn_count": 104,
+        "min_x": 14.9,
+        "max_x": 59.46,
+        "min_y": 53.11,
+        "max_y": 72.83
+      },
+      "spawn_count": 104,
+      "quest_ids": [
+        12006
+      ],
+      "relations": [
+        {
+          "quest_id": 12006,
+          "quest_name": "上层精灵的愤怒",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32572",
+      "entity_type": "npc",
+      "entity_id": 32572,
+      "name": "龙骨荒野法师猎手",
+      "dragonblight_representative": {
+        "x": 18.81,
+        "y": 59.08,
+        "spawn_count": 18,
+        "min_x": 15.98,
+        "max_x": 58.7,
+        "min_y": 53.02,
+        "max_y": 66.22
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        12006
+      ],
+      "relations": [
+        {
+          "quest_id": 12006,
+          "quest_name": "上层精灵的愤怒",
+          "relation_kind": "resolved_event",
+          "required_count": 1,
+          "item_id": null
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    }
+  ]
+}

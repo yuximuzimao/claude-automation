@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "ACTIVE_OPTIMIZATION_RETENTION_OVERRIDES",
+  "route_key": "borean",
+  "policy": "This file is optimization-decision data, not task-card/base facts. Priority labels remain unchanged. A retained package must not be removed by batch P-tier experiments unless the user explicitly requests a re-audit or deletion of that package.",
+  "packages": [
+    {
+      "package_id": "coldarra-blue-dragon-hunt-chain",
+      "label": "考达拉蓝龙 / 猎龙连续经验链",
+      "status": "temporarily_retained_until_explicit_user_reaudit",
+      "confirmed_at": "2026-08-18",
+      "reason": [
+        "The chain is a continuous block of quest XP rather than an isolated reward task.",
+        "《蓝龙的卵》is low-cost in five-box play: 5 kills for 5 guaranteed Frost Axes, then 5 shared egg interactions.",
+        "User field run confirms both 《猎龙》 and 《牢笼》 are five-box shared-progress tasks and are very fast; exact item drop percentages are not needed for five-box repetition because one successful main-character completion advances the group.",
+        "Current leveling objective values wall-clock XP efficiency above immediate equipment/gold collection. This package is retained because observed service cost is low relative to its continuous XP chain value."
+      ],
+      "protected_quest_ids": [
+        11936,
+        11919,
+        11931,
+        11941,
+        11943,
+        11946,
+        11951,
+        11957,
+        11967,
+        11969
+      ],
+      "priority_labels_preserved": {
+        "11931": "P2A",
+        "11951": "P3C"
+      },
+      "override_rule": "Keep this entire package in the reusable leveling route unless the user explicitly asks to re-audit or remove it. Do not clear or lower the existing P-tier labels; the retention override only blocks automatic deletion.",
+      "field_facts": {
+        "11936": "5 target kills + 5 guaranteed Frost Axes + 5 shared egg interactions; egg progress shared across all five characters.",
+        "11919": "User-confirmed group-shared quest progress: one main-character Nexus Drake capture/return advances all five characters.",
+        "11943": "User-confirmed group-shared item progress: one main-character Energy Core and Prison Casing set advances all five characters; no five-set farming."
+      }
+    }
+  ]
+}

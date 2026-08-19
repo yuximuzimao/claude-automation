@@ -1,0 +1,57 @@
+{
+  "status": "pre_route_foundation_manual_overrides",
+  "reviewed_at": "2026-08-19",
+  "policy": {
+    "purpose": "Resolve non-obvious player operations and timing placeholders before Target Cluster insertion; unresolved five-box sharing stays as live verification.",
+    "no_macro_block_layer": true
+  },
+  "manual_service_minutes": {
+    "12527": {"minutes": 6.0, "range": [3.5, 10.0], "basis": "rat_feed_basilisk_crystal_fivebox_unknown"},
+    "12555": {"minutes": 4.0, "range": [2.5, 7.0], "basis": "active_tool_five_targets"},
+    "12557": {"minutes": 3.5, "range": [2.0, 6.0], "basis": "four_fixed_lab_ingredients_fivebox"},
+    "12622": {"minutes": 6.5, "range": [4.0, 11.0], "basis": "three_jinalai_leader_treasure_subtargets"},
+    "12627": {"minutes": 3.5, "range": [2.0, 6.0], "basis": "four_fixed_jinalai_cauldron_interactions"},
+    "12648": {"minutes": 3.0, "range": [1.5, 6.0], "basis": "scourge_disguise_vendor_interaction"},
+    "12677": {"minutes": 7.0, "range": [4.0, 13.0], "basis": "voltarus_phase_plus_five_crystal_interactions"},
+    "12729": {"minutes": 8.0, "range": [4.5, 15.0], "basis": "two_separated_elite_personal_drop_targets"},
+    "12919": {"minutes": 12.0, "range": [6.0, 30.0], "basis": "gymer_vehicle_segment_fivebox_completion_unknown"}
+  },
+  "mechanism_codes": {
+    "12512": ["named_rescue_multi_target"],
+    "12516": ["scripted_named_target"],
+    "12527": ["feed_rat_to_basilisk", "collect_5_crystals"],
+    "12552": ["active_quest_item_or_spell"],
+    "12555": ["active_tool_5_plague_sprayers"],
+    "12557": ["compact_lab_4_fixed_ingredients"],
+    "12583": ["fixed_wreck_object_pickups"],
+    "12584": ["fixed_saronite_object_pickups"],
+    "12598": ["active_grenade_5_fixed_craters"],
+    "12622": ["jinalai_three_totems_spawn_leaders", "three_treasures"],
+    "12627": ["four_fixed_colored_cauldrons"],
+    "12632": ["use_whisker_on_harkoa_child_corpses"],
+    "12647": ["rhunok_altar_incense_script"],
+    "12648": ["ensourceled_choker_scourge_disguise", "purchase_bitter_plasma"],
+    "12652": ["active_feed_interaction"],
+    "12661": ["scourge_disguise", "voltarus_phased_instance"],
+    "12665": ["harkoa_scripted_ride_to_quetzlun"],
+    "12673": ["voltarus_scepter_geist_harvest"],
+    "12674": ["quetzlun_hexxing_stick_three_priests"],
+    "12677": ["voltarus_phased_instance", "five_fixed_crystal_pickups"],
+    "12686": ["reliquary_empowered_servant_vehicle_like"],
+    "12690": ["frigid_breach_abomination_control_segment"],
+    "12710": ["voltarus_upper_chamber_teleporter_finale"],
+    "12729": ["two_separated_elite_personal_drop_items"],
+    "12859": ["active_fire_interaction"],
+    "12861": ["active_rescue_interaction"],
+    "12912": ["gymer_scripted_handoff"],
+    "12914": ["mixed_personal_collection_near_gymer"],
+    "12916": ["fixed_object_interaction"],
+    "12919": ["gymer_vehicle_spatial_instance"]
+  },
+  "spatial_overrides": {
+    "voltarus": [12661, 12669, 12673, 12676, 12677, 12686, 12690, 12710],
+    "gymer_vehicle": [12919],
+    "harkoa_quetzlun_ride": [12665],
+    "rhunok_altar_script": [12647]
+  }
+}

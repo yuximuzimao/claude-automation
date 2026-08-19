@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "ACTIVE_OPTIMIZATION_RETENTION_OVERRIDES",
+  "route_key": "dragonblight",
+  "policy": "This file is optimization-decision data, not task-card/base facts. Protected quests are hard deletion blockers for later P-tier pruning unless the user explicitly requests a re-audit or deletion of the protected quest/package. A package may either preserve its old P label or explicitly remove the quest from P1-P4 candidate ranking when the user declares it structurally non-removable.",
+  "packages": [
+    {
+      "package_id": "dragonblight-westwind-agmar-main-axis",
+      "label": "西风避难营 → 阿格玛 → 库卡隆/红龙主轴入口",
+      "status": "retained_until_explicit_user_reaudit",
+      "confirmed_at": "2026-08-18",
+      "reason": [
+        "11978《深入密林》is not an isolated collection task: removing it makes 25 additional currently usable Dragonblight quests unreachable.",
+        "The affected dependency closure includes 《部落的血誓》, 《阿格玛之锤》, the Icemist branch, Kor'kron Vanguard, 《红龙之翼》 and 《黑暗的骚动》.",
+        "The user explicitly requested that this main-axis task be marked so later pruning cannot remove it by mistake."
+      ],
+      "protected_quest_ids": [11978],
+      "priority_behavior": "exclude_from_priority_candidates",
+      "former_priority_label": "P2C",
+      "dependency_closure_count_if_removed": 25,
+      "override_rule": "Keep 11978 in the reusable leveling route and exclude it from P1-P4 candidate ranking. It is structurally non-removable on the current leveling axis; only an explicit user request to re-audit or delete the protected main-axis task may remove this protection."
+    }
+  ]
+}

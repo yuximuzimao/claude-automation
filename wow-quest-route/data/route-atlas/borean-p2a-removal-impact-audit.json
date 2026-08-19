@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "status": "formal_route_optimization_impact_audit",
+  "route_key": "borean",
+  "scope": "Highest-current-removal-priority pass. Route actions changed; HTML intentionally not rebuilt yet.",
+  "baseline": {
+    "task_card_universe_count": 163,
+    "selected_task_count_before": 163,
+    "task_reward_only_start": {"level": 68, "xp": 0},
+    "task_reward_only_dragonblight_boundary": {"level": 72, "xp": 871500},
+    "task_reward_total": 5483500,
+    "clean_route_center_minutes": 884.5
+  },
+  "formal_removals": [
+    {
+      "quest_id": 11910,
+      "name": "古树的秘密",
+      "decision_label_at_removal": "P2A",
+      "quest_xp_lost": 40200,
+      "boundary_after_removal": {"level": 72, "xp": 831300},
+      "time_saved_minutes": {"low": 4.095, "high": 4.095},
+      "time_basis": "3 Glacial Splinters at 100% + 3 Magic-Bound Splinters at ~65.55%, project five-box slowest-character model, plus two per-quest hub operations; no route movement removed.",
+      "route_effect": "Removed accept/objective/turn-in references; monitoring/berry/weaver lap remains, so geometry unchanged."
+    },
+    {
+      "quest_id": 11914,
+      "name": "保持隐蔽",
+      "decision_label_at_removal": "P2A",
+      "quest_xp_lost": 40200,
+      "boundary_after_removal": {"level": 72, "xp": 791100},
+      "time_saved_minutes": {"low": 4.017, "high": 4.476},
+      "time_basis": "5 Nexus Mana Essences at audited WotLK drop-rate range ~70% to ~63.68%, project five-box slowest-character model, plus two per-quest hub operations; no route movement removed.",
+      "route_effect": "Removed accept/Arcane Serpent objective/turn-in; Blue Dragon Egg and fragment-trigger lap remains."
+    },
+    {
+      "quest_id": 11931,
+      "name": "破译密码",
+      "decision_label_at_removal": "P2A",
+      "quest_xp_lost": 40200,
+      "boundary_after_removal": {"level": 72, "xp": 750900},
+      "time_saved_minutes": {"low": 5.626, "high": 5.626},
+      "time_basis": "3 Shimmering Runes at ~38% from Coldarra Spellbinders + 1 Azure Codex at 100% from Inquisitor Caleras, project five-box slowest-character model, two per-quest hub operations, and ~0.025 min geometry improvement.",
+      "route_effect": "Originally removed during the first P2A pass, then restored on 2026-08-18 because the user marked the Coldarra blue-dragon / dragon-hunt package as a temporarily retained continuous XP chain. P2A label remains unchanged.",
+      "current_status": "restored_by_coldarra_retention_override",
+      "active_formal_removal": false
+    },
+    {
+      "quest_id": 11564,
+      "name": "美味炖鲸肉",
+      "decision_label_at_removal": "P2A",
+      "quest_xp_lost": 40200,
+      "boundary_after_removal": {"level": 72, "xp": 710700},
+      "time_saved_minutes": {"low": 3.180, "high": 3.630},
+      "time_basis": "7 Succulent Orca Blubber at ~94%; low case allows one retained Gurgle kill to cover one unit, high case assumes no usable overlap; project five-box slowest-character model plus two per-quest hub operations.",
+      "route_effect": "Removed butcher accept, blubber farming, and turn-in. Gurgle kill and Spare Murloc Suit chain remain, so geometry unchanged."
+    }
+  ],
+  "resolved_locked_fact_correction": {
+    "quest_id": 11906,
+    "name": "净化水池",
+    "confirmed_by_user": "2026-08-18",
+    "current_locked_decision": "P3A",
+    "current_locked_collection_source": "pickup",
+    "confirmed_fact": "Fizzcrank Spare Parts are multiple ground/world-object pickups in the Geyser Fields area, not monster drops.",
+    "route_status": "kept for current P2-wide deletion pass; reconsider at P3",
+    "hypothetical_task_xp_loss_if_later_removed": 40200,
+    "hypothetical_boundary_if_later_removed": {"level": 72, "xp": 710700}
+  },
+  "optimized_current": {
+    "selected_task_count": 160,
+    "removed_task_ids": [11910, 11914, 11564],
+    "restored_by_retention_override_ids": [11931],
+    "task_reward_xp_lost": 120600,
+    "task_reward_total": 5362900,
+    "task_reward_only_dragonblight_boundary": {"level": 72, "xp": 750900},
+    "active_removal_time_saved_minutes": {"low": 11.292, "high": 12.201, "mid": 11.747},
+    "notes": [
+      "Task-only XP deliberately excludes all mob/exploration XP, so removed-task kill XP cannot make this lower-bound entry state worse.",
+      "Quest 11931 remains P2A but is restored by data/route-atlas/borean-tundra-retention-overrides.json; do not count its former 5.626-minute removal as current savings.",
+      "Quest 11936 timing was corrected separately from 0.58 to about 1.83 minutes after the user confirmed its real 5-kill + 5-shared-interaction mechanism.",
+      "Current route geometry remains 221 points / 68 logical steps; HTML and whole-route timing have not been rebuilt yet."
+    ]
+  },
+  "dragonblight_entry_validation": {
+    "foundation_entry_level_floor": 71,
+    "optimized_entry_state": {"level": 72, "xp": 750900},
+    "steps_1_2_core_required_level": 71,
+    "level_73_gate_quest": {"quest_id": 12488, "name": "高级执行官需要你", "required_level": 73},
+    "task_reward_only_first_guaranteed_level_73": {"dragonblight_point_index": 37, "turnin": "囤积矿石", "state": {"level": 73, "xp": 4500}},
+    "natural_next_agmar_return_point_index": 56,
+    "route_adjustment": "At point 6 accept quest 12488 only if already level 73; otherwise pick it up at natural Agmar return point 56. No Borean XP restoration or extra travel is required."
+  }
+}

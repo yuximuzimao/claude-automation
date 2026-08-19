@@ -1,0 +1,5385 @@
+{
+  "status": "third_pass_chain_property_screen_locked_scope",
+  "scope": [
+    {
+      "zone_id": 65,
+      "name": "龙骨荒野"
+    },
+    {
+      "zone_id": 3537,
+      "name": "北风苔原"
+    }
+  ],
+  "summary": {
+    "chain_has_in_scope_followup_count": 120,
+    "chain_terminal_in_scope_count": 43,
+    "chain_dependency_confirmed_followup_count": 117,
+    "chain_explicit_followup_only_count": 3
+  },
+  "with_followup": [
+    {
+      "quest_id": 11585,
+      "name": "地狱咆哮的堡垒",
+      "first_route_step": 1,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11596,
+            "name": "战歌要塞的防御",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11596,
+      "name": "战歌要塞的防御",
+      "first_route_step": 1,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 6,
+        "direct_followups": [
+          {
+            "quest_id": 11574,
+            "name": "危在旦夕",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11598,
+            "name": "夺回巨石采掘场",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11606,
+            "name": "耐心是我们不需要的美德",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11611,
+            "name": "被掠走的苦工",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11888,
+            "name": "前往牦牛村",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 12486,
+            "name": "立即前往博古洛克前哨站！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11598,
+      "name": "夺回巨石采掘场",
+      "first_route_step": 2,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11602,
+            "name": "切断虫源",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11614,
+            "name": "隐藏的真相",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11606,
+      "name": "耐心是我们不需要的美德",
+      "first_route_step": 2,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11608,
+            "name": "活埋了那些蟑螂！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11888,
+      "name": "前往牦牛村",
+      "first_route_step": 2,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11890,
+            "name": "他们想干什么？",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11602,
+      "name": "切断虫源",
+      "first_route_step": 4,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11634,
+            "name": "驭风大师图波尔",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11614,
+      "name": "隐藏的真相",
+      "first_route_step": 4,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11615,
+            "name": "尼鲁巴尔的秘密",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11615,
+      "name": "尼鲁巴尔的秘密",
+      "first_route_step": 5,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11616,
+            "name": "通知地狱咆哮",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11634,
+      "name": "驭风大师图波尔",
+      "first_route_step": 6,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11636,
+            "name": "魔法飞毯",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11616,
+      "name": "通知地狱咆哮",
+      "first_route_step": 6,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11618,
+            "name": "增援来了……",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11636,
+      "name": "魔法飞毯",
+      "first_route_step": 7,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11642,
+            "name": "坦克可不会自己修好！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11618,
+      "name": "增援来了……",
+      "first_route_step": 7,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11676,
+            "name": "慈悲为怀",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11686,
+            "name": "战歌农场",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11642,
+      "name": "坦克可不会自己修好！",
+      "first_route_step": 8,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11643,
+            "name": "莫布的坦克零件气动装配器",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11644,
+            "name": "超强度金属板！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11643,
+      "name": "莫布的坦克零件气动装配器",
+      "first_route_step": 8,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11651,
+            "name": "坦克准备就绪！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11644,
+      "name": "超强度金属板！",
+      "first_route_step": 8,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11651,
+            "name": "坦克准备就绪！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11655,
+      "name": "深入迷雾",
+      "first_route_step": 8,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11656,
+            "name": "烧毁船只",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11660,
+      "name": "古代水手的号角",
+      "first_route_step": 8,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11661,
+            "name": "舵手奥拉布斯",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11651,
+      "name": "坦克准备就绪！",
+      "first_route_step": 10,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11652,
+            "name": "纳萨姆平原",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11656,
+      "name": "烧毁船只",
+      "first_route_step": 10,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11662,
+            "name": "找到卡鲁克！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11652,
+      "name": "纳萨姆平原",
+      "first_route_step": 10,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11613,
+      "name": "卡鲁克的誓言",
+      "first_route_step": 13,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11619,
+            "name": "残忍的贾梅尔",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11619,
+      "name": "残忍的贾梅尔",
+      "first_route_step": 13,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11620,
+            "name": "父亲的话",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11620,
+      "name": "父亲的话",
+      "first_route_step": 14,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11625,
+            "name": "纳兹亚的三叉戟",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11625,
+      "name": "纳兹亚的三叉戟",
+      "first_route_step": 14,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11626,
+            "name": "使者",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11574,
+      "name": "危在旦夕",
+      "first_route_step": 16,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": false,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11587,
+            "name": "越狱",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest"
+            ],
+            "dependency_kinds": []
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:explicit_followup_only"
+        ]
+      }
+    },
+    {
+      "quest_id": 12486,
+      "name": "立即前往博古洛克前哨站！",
+      "first_route_step": 16,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11624,
+            "name": "睿智的气元素",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11686,
+      "name": "战歌农场",
+      "first_route_step": 17,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11703,
+            "name": "暗影密探盖特莱",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11688,
+      "name": "该死的猪",
+      "first_route_step": 17,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11690,
+            "name": "把它们活着带回去",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11703,
+      "name": "暗影密探盖特莱",
+      "first_route_step": 19,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11705,
+            "name": "愚蠢的努力",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11705,
+      "name": "愚蠢的努力",
+      "first_route_step": 20,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11709,
+            "name": "诺克·血怒",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11709,
+      "name": "诺克·血怒",
+      "first_route_step": 21,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11711,
+            "name": "逃兵快递，30分钟送到否则免费",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11711,
+      "name": "逃兵快递，30分钟送到否则免费",
+      "first_route_step": 21,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11714,
+            "name": "清除北地狗头人",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11716,
+      "name": "奇妙的血孢",
+      "first_route_step": 21,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11717,
+            "name": "授粉的巨蛾",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11717,
+      "name": "授粉的巨蛾",
+      "first_route_step": 22,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11719,
+            "name": "完美的测试对象",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11719,
+      "name": "完美的测试对象",
+      "first_route_step": 22,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11720,
+            "name": "攻打迦莫斯",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11720,
+      "name": "攻打迦莫斯",
+      "first_route_step": 22,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11721,
+            "name": "折磨者迦莫斯拉",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11721,
+      "name": "折磨者迦莫斯拉",
+      "first_route_step": 22,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11722,
+            "name": "迦莫斯的战利品",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11722,
+      "name": "迦莫斯的战利品",
+      "first_route_step": 23,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11916,
+      "name": "地狱咆哮的勇士",
+      "first_route_step": 23,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 12033,
+            "name": "萨鲁法尔的信",
+            "zones": [
+              {
+                "zone_id": 65,
+                "name": "龙骨荒野"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11864,
+      "name": "决战奈辛瓦里",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 5,
+        "direct_followups": [
+          {
+            "quest_id": 11865,
+            "name": "死不足惜",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11866,
+            "name": "敌人的耳环",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11869,
+            "name": "欢乐的蚌壳",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11876,
+            "name": "帮助弱小",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11884,
+            "name": "尼达尔，犀牛之王……",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11865,
+      "name": "死不足惜",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11868,
+            "name": "驯鹿杀手之死",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11866,
+      "name": "敌人的耳环",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11869,
+      "name": "欢乐的蚌壳",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11870,
+            "name": "遗弃海岸",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11876,
+      "name": "帮助弱小",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11878,
+            "name": "库诺克的智慧",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11884,
+      "name": "尼达尔，犀牛之王……",
+      "first_route_step": 24,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11605,
+      "name": "海象人的先祖",
+      "first_route_step": 25,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11607,
+            "name": "失落的灵魂",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11612,
+      "name": "夺回采掘场",
+      "first_route_step": 25,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11617,
+            "name": "别让他们逃了！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11868,
+      "name": "驯鹿杀手之死",
+      "first_route_step": 26,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11870,
+      "name": "遗弃海岸",
+      "first_route_step": 26,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11871,
+            "name": "不可容忍",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11878,
+      "name": "库诺克的智慧",
+      "first_route_step": 26,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11879,
+            "name": "猛犸毁灭者卡奥",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11879,
+      "name": "猛犸毁灭者卡奥",
+      "first_route_step": 26,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11607,
+      "name": "失落的灵魂",
+      "first_route_step": 27,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11609,
+            "name": "寻找古器",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11617,
+      "name": "别让他们逃了！",
+      "first_route_step": 27,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11623,
+            "name": "拜访馆长",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11609,
+      "name": "寻找古器",
+      "first_route_step": 28,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11610,
+            "name": "先祖的回归",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11871,
+      "name": "不可容忍",
+      "first_route_step": 30,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11872,
+            "name": "罪恶的蛤蜊主宰……",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11872,
+      "name": "罪恶的蛤蜊主宰……",
+      "first_route_step": 30,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": true,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_all"
+            ],
+            "dependency_kinds": [
+              "mandatory"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:mandatory_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11949,
+      "name": "战斗到底！",
+      "first_route_step": 32,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11950,
+            "name": "穆希特的智慧",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11950,
+      "name": "穆希特的智慧",
+      "first_route_step": 32,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11961,
+            "name": "神灵的眷顾",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11961,
+      "name": "神灵的眷顾",
+      "first_route_step": 32,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11968,
+            "name": "情势扭转",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11968,
+      "name": "情势扭转",
+      "first_route_step": 33,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 12117,
+            "name": "前往莫亚基港口",
+            "zones": [
+              {
+                "zone_id": 65,
+                "name": "龙骨荒野"
+              },
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 12117,
+      "name": "前往莫亚基港口",
+      "first_route_step": 33,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": false,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11958,
+            "name": "不要浪费",
+            "zones": [
+              {
+                "zone_id": 65,
+                "name": "龙骨荒野"
+              }
+            ],
+            "relations": [
+              "next_quest"
+            ],
+            "dependency_kinds": []
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:explicit_followup_only"
+        ]
+      }
+    },
+    {
+      "quest_id": 11890,
+      "name": "他们想干什么？",
+      "first_route_step": 34,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11895,
+            "name": "风暴的主宰",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11684,
+      "name": "侦查虫孔",
+      "first_route_step": 34,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11685,
+            "name": "元素之心",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11881,
+      "name": "运货行动！",
+      "first_route_step": 34,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11893,
+            "name": "元素的力量",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11674,
+      "name": "先知赫米萨",
+      "first_route_step": 34,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11675,
+            "name": "死亡的解脱",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11893,
+      "name": "元素的力量",
+      "first_route_step": 35,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11894,
+            "name": "修修补补",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11685,
+      "name": "元素之心",
+      "first_route_step": 35,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11695,
+            "name": "元素愤怒号角",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11895,
+      "name": "风暴的主宰",
+      "first_route_step": 35,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 3,
+        "direct_followups": [
+          {
+            "quest_id": 11896,
+            "name": "闪电的力量",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11899,
+            "name": "灵魂的解脱",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11906,
+            "name": "净化水池",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11896,
+      "name": "闪电的力量",
+      "first_route_step": 35,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11907,
+            "name": "机械副官",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11899,
+      "name": "灵魂的解脱",
+      "first_route_step": 35,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11909,
+            "name": "击败机甲专家",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11675,
+      "name": "死亡的解脱",
+      "first_route_step": 37,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11677,
+            "name": "阻止瘟疫",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11677,
+      "name": "阻止瘟疫",
+      "first_route_step": 37,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11678,
+            "name": "找到萨安·钢角",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11683,
+            "name": "坠落的浮空城",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11678,
+      "name": "找到萨安·钢角",
+      "first_route_step": 38,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11687,
+            "name": "博士和巫妖领主",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11687,
+      "name": "博士和巫妖领主",
+      "first_route_step": 38,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11689,
+            "name": "报告坏消息",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11894,
+      "name": "修修补补",
+      "first_route_step": 39,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11628,
+            "name": "天灾的外衣",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11628,
+      "name": "天灾的外衣",
+      "first_route_step": 41,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11630,
+            "name": "腐化的土地",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11630,
+      "name": "腐化的土地",
+      "first_route_step": 41,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11633,
+            "name": "乔装潜入",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11633,
+      "name": "乔装潜入",
+      "first_route_step": 42,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 4,
+        "direct_followups": [
+          {
+            "quest_id": 11640,
+            "name": "力量之语",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11641,
+            "name": "勇猛的进攻",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11647,
+            "name": "中和瘟疫之锅",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11654,
+            "name": "鲜血尖塔",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11695,
+      "name": "元素愤怒号角",
+      "first_route_step": 42,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11706,
+            "name": "天崩地裂",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11640,
+      "name": "力量之语",
+      "first_route_step": 44,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11898,
+            "name": "过关斩将",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11654,
+      "name": "鲜血尖塔",
+      "first_route_step": 45,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11659,
+            "name": "击碎宝珠！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11898,
+      "name": "过关斩将",
+      "first_route_step": 45,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11929,
+            "name": "牦牛村的陷落",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11929,
+      "name": "牦牛村的陷落",
+      "first_route_step": 46,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11930,
+            "name": "横贯冰原",
+            "zones": [
+              {
+                "zone_id": 65,
+                "name": "龙骨荒野"
+              },
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11930,
+      "name": "横贯冰原",
+      "first_route_step": 46,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11977,
+            "name": "牦牛人中的牛头人",
+            "zones": [
+              {
+                "zone_id": 65,
+                "name": "龙骨荒野"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11587,
+      "name": "越狱",
+      "first_route_step": 47,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11590,
+            "name": "调查",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11576,
+      "name": "监视裂谷：悬崖异常",
+      "first_route_step": 47,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11582,
+            "name": "监视裂谷：峭壁断层",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11590,
+      "name": "调查",
+      "first_route_step": 48,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11646,
+            "name": "苔原上的审讯",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11582,
+      "name": "监视裂谷：峭壁断层",
+      "first_route_step": 48,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 12728,
+            "name": "监视裂谷：冬鳞洞穴",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11646,
+      "name": "苔原上的审讯",
+      "first_route_step": 49,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11648,
+            "name": "说服的艺术",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11648,
+      "name": "说服的艺术",
+      "first_route_step": 50,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11663,
+            "name": "分享情报",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11663,
+      "name": "分享情报",
+      "first_route_step": 50,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11671,
+            "name": "与时间赛跑",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11671,
+      "name": "与时间赛跑",
+      "first_route_step": 50,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11679,
+            "name": "重铸钥匙",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11679,
+      "name": "重铸钥匙",
+      "first_route_step": 50,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11680,
+            "name": "准备飞翔",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11680,
+      "name": "准备飞翔",
+      "first_route_step": 50,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11681,
+            "name": "营救艾瓦诺尔",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11681,
+      "name": "营救艾瓦诺尔",
+      "first_route_step": 51,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11682,
+            "name": "苏雷斯塔兹",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11682,
+      "name": "苏雷斯塔兹",
+      "first_route_step": 51,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11733,
+            "name": "飞越裂谷",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11912,
+      "name": "冰冷的草莓",
+      "first_route_step": 52,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11914,
+            "name": "保持隐蔽",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11918,
+      "name": "基本的训练",
+      "first_route_step": 52,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11936,
+            "name": "蓝龙的卵",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11936,
+      "name": "蓝龙的卵",
+      "first_route_step": 53,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11919,
+            "name": "猎龙",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11941,
+      "name": "奇怪……",
+      "first_route_step": 54,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11943,
+            "name": "牢笼",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11919,
+      "name": "猎龙",
+      "first_route_step": 54,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11931,
+            "name": "破译密码",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11943,
+      "name": "牢笼",
+      "first_route_step": 54,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11946,
+            "name": "克莉斯塔萨",
+            "zones": [],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11946,
+      "name": "克莉斯塔萨",
+      "first_route_step": 55,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11951,
+            "name": "诱饵",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11951,
+      "name": "诱饵",
+      "first_route_step": 55,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11957,
+            "name": "莎拉苟萨的末日",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11957,
+      "name": "莎拉苟萨的末日",
+      "first_route_step": 56,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11967,
+            "name": "集结红龙",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11967,
+      "name": "集结红龙",
+      "first_route_step": 56,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11969,
+            "name": "触动陷阱",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11624,
+      "name": "睿智的气元素",
+      "first_route_step": 59,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11627,
+            "name": "沸点",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11702,
+      "name": "国王姆嘎姆嘎",
+      "first_route_step": 59,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": false,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": false,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11571,
+            "name": "学习沟通",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest"
+            ],
+            "dependency_kinds": []
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:explicit_followup_only"
+        ]
+      }
+    },
+    {
+      "quest_id": 11627,
+      "name": "沸点",
+      "first_route_step": 60,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11649,
+            "name": "风暴微粒",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11649,
+      "name": "风暴微粒",
+      "first_route_step": 64,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11629,
+            "name": "返回灵语者身边",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11629,
+      "name": "返回灵语者身边",
+      "first_route_step": 64,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11631,
+            "name": "空气的幻象",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11631,
+      "name": "空气的幻象",
+      "first_route_step": 64,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11635,
+            "name": "先知格雷姆沃克之魂",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11639,
+            "name": "向犸格莫斯复仇",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11635,
+      "name": "先知格雷姆沃克之魂",
+      "first_route_step": 64,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11637,
+            "name": "卡加尼舒",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11637,
+      "name": "卡加尼舒",
+      "first_route_step": 65,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11638,
+            "name": "落叶归根",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11571,
+      "name": "学习沟通",
+      "first_route_step": 60,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 3,
+        "direct_followups": [
+          {
+            "quest_id": 11559,
+            "name": "冬鳞鱼人的贸易",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11569,
+            "name": "钥匙管理者呜啦咕噜",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11570,
+            "name": "逃离冬鳞洞穴",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11559,
+      "name": "冬鳞鱼人的贸易",
+      "first_route_step": 60,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11560,
+            "name": "救救蝌蚪！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11561,
+            "name": "就是他们！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11560,
+      "name": "救救蝌蚪！",
+      "first_route_step": 61,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11562,
+            "name": "我被敲竹杠了！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11562,
+      "name": "我被敲竹杠了！",
+      "first_route_step": 62,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 2,
+        "direct_followups": [
+          {
+            "quest_id": 11563,
+            "name": "咕噜咕噜呜啦哇啦！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          },
+          {
+            "quest_id": 11564,
+            "name": "美味炖鲸肉",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11563,
+      "name": "咕噜咕噜呜啦哇啦！",
+      "first_route_step": 62,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11565,
+            "name": "备用的鱼人服",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11565,
+      "name": "备用的鱼人服",
+      "first_route_step": 62,
+      "chain_screen": {
+        "scope_zone_ids": [
+          65,
+          3537
+        ],
+        "has_in_scope_followup": true,
+        "has_dependency_confirmed_followup": true,
+        "has_mandatory_dependency_followup": false,
+        "has_alternative_dependency_followup": true,
+        "direct_followup_count": 1,
+        "direct_followups": [
+          {
+            "quest_id": 11566,
+            "name": "决不投降！",
+            "zones": [
+              {
+                "zone_id": 3537,
+                "name": "北风苔原"
+              }
+            ],
+            "relations": [
+              "next_quest",
+              "pre_any"
+            ],
+            "dependency_kinds": [
+              "alternative"
+            ]
+          }
+        ],
+        "tags": [
+          "chain:has_in_scope_followup",
+          "chain:dependency_confirmed_followup",
+          "chain:alternative_dependency_followup"
+        ]
+      }
+    }
+  ],
+  "terminal_in_scope": [
+    {
+      "quest_id": 11611,
+      "name": "被掠走的苦工",
+      "first_route_step": 2
+    },
+    {
+      "quest_id": 11608,
+      "name": "活埋了那些蟑螂！",
+      "first_route_step": 4
+    },
+    {
+      "quest_id": 11664,
+      "name": "逃离迷雾",
+      "first_route_step": 9
+    },
+    {
+      "quest_id": 11661,
+      "name": "舵手奥拉布斯",
+      "first_route_step": 10
+    },
+    {
+      "quest_id": 11662,
+      "name": "找到卡鲁克！",
+      "first_route_step": 12
+    },
+    {
+      "quest_id": 12471,
+      "name": "残忍的科瓦迪尔",
+      "first_route_step": 13
+    },
+    {
+      "quest_id": 11626,
+      "name": "使者",
+      "first_route_step": 15
+    },
+    {
+      "quest_id": 11632,
+      "name": "寒风中的怪兽……",
+      "first_route_step": 16
+    },
+    {
+      "quest_id": 11676,
+      "name": "慈悲为怀",
+      "first_route_step": 17
+    },
+    {
+      "quest_id": 11690,
+      "name": "把它们活着带回去",
+      "first_route_step": 19
+    },
+    {
+      "quest_id": 11714,
+      "name": "清除北地狗头人",
+      "first_route_step": 21
+    },
+    {
+      "quest_id": 11724,
+      "name": "巨大的蛾卵",
+      "first_route_step": 22
+    },
+    {
+      "quest_id": 11623,
+      "name": "拜访馆长",
+      "first_route_step": 28
+    },
+    {
+      "quest_id": 11610,
+      "name": "先祖的回归",
+      "first_route_step": 29
+    },
+    {
+      "quest_id": 11892,
+      "name": "刺杀哈罗德·兰恩",
+      "first_route_step": 31
+    },
+    {
+      "quest_id": 11887,
+      "name": "应急的物资",
+      "first_route_step": 35
+    },
+    {
+      "quest_id": 11906,
+      "name": "净化水池",
+      "first_route_step": 35
+    },
+    {
+      "quest_id": 11683,
+      "name": "坠落的浮空城",
+      "first_route_step": 38
+    },
+    {
+      "quest_id": 11689,
+      "name": "报告坏消息",
+      "first_route_step": 38
+    },
+    {
+      "quest_id": 11907,
+      "name": "机械副官",
+      "first_route_step": 39
+    },
+    {
+      "quest_id": 11909,
+      "name": "击败机甲专家",
+      "first_route_step": 39
+    },
+    {
+      "quest_id": 11641,
+      "name": "勇猛的进攻",
+      "first_route_step": 44
+    },
+    {
+      "quest_id": 11647,
+      "name": "中和瘟疫之锅",
+      "first_route_step": 44
+    },
+    {
+      "quest_id": 11706,
+      "name": "天崩地裂",
+      "first_route_step": 44
+    },
+    {
+      "quest_id": 11659,
+      "name": "击碎宝珠！",
+      "first_route_step": 45
+    },
+    {
+      "quest_id": 12728,
+      "name": "监视裂谷：冬鳞洞穴",
+      "first_route_step": 49
+    },
+    {
+      "quest_id": 11733,
+      "name": "飞越裂谷",
+      "first_route_step": 51
+    },
+    {
+      "quest_id": 11900,
+      "name": "监测数据",
+      "first_route_step": 52
+    },
+    {
+      "quest_id": 11910,
+      "name": "古树的秘密",
+      "first_route_step": 52
+    },
+    {
+      "quest_id": 11914,
+      "name": "保持隐蔽",
+      "first_route_step": 53
+    },
+    {
+      "quest_id": 11931,
+      "name": "破译密码",
+      "first_route_step": 55
+    },
+    {
+      "quest_id": 11969,
+      "name": "触动陷阱",
+      "first_route_step": 57
+    },
+    {
+      "quest_id": 11591,
+      "name": "钢腭的车队",
+      "first_route_step": null
+    },
+    {
+      "quest_id": 11639,
+      "name": "向犸格莫斯复仇",
+      "first_route_step": 64
+    },
+    {
+      "quest_id": 11638,
+      "name": "落叶归根",
+      "first_route_step": 65
+    },
+    {
+      "quest_id": 11593,
+      "name": "亡者的尊严",
+      "first_route_step": 59
+    },
+    {
+      "quest_id": 11594,
+      "name": "让他们安息",
+      "first_route_step": 59
+    },
+    {
+      "quest_id": 11592,
+      "name": "攻击！",
+      "first_route_step": 59
+    },
+    {
+      "quest_id": 11561,
+      "name": "就是他们！",
+      "first_route_step": 61
+    },
+    {
+      "quest_id": 11564,
+      "name": "美味炖鲸肉",
+      "first_route_step": 62
+    },
+    {
+      "quest_id": 11566,
+      "name": "决不投降！",
+      "first_route_step": 62
+    },
+    {
+      "quest_id": 11569,
+      "name": "钥匙管理者呜啦咕噜",
+      "first_route_step": 61
+    },
+    {
+      "quest_id": 11570,
+      "name": "逃离冬鳞洞穴",
+      "first_route_step": 61
+    }
+  ]
+}

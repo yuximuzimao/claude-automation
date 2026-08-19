@@ -1,0 +1,2085 @@
+{
+  "status": "video_reverse_audit_generated_manual_order_review_required",
+  "policy": "video is reference evidence only; filter faction/dungeon/mutual-exclusion before omission/order review; route freeze requires explicit whole-map review when video exists",
+  "maps": {
+    "borean": {
+      "map": "北风苔原",
+      "episodes": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "formal_task_count": 165,
+      "formal_name_count": 165,
+      "video_distinct_task_count": 133,
+      "route_distinct_task_name_count": 188,
+      "common_route_video_name_count": 63,
+      "common_explicit_completion_count": 62,
+      "critical_video_omission_count": 0,
+      "critical_video_omissions": [],
+      "video_only_class_counts": {
+        "expected_not_in_current_route_scope": 69,
+        "video_faction_or_other_zone_only": 1
+      },
+      "video_only": [
+        {
+          "quest_id": 11224,
+          "name": "骡子和货物",
+          "episodes": [
+            34
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 495,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 11599,
+          "name": "萨萨里安，我的哥哥",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11600,
+          "name": "威廉·奥雷顿之死",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11601,
+          "name": "柳暗花明",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11603,
+          "name": "酒中的真相",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11604,
+          "name": "逃兵",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11707,
+          "name": "迫在眉睫",
+          "episodes": [
+            34,
+            35
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11727,
+          "name": "英雄的时代",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11789,
+          "name": "急需帮助的士兵",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11791,
+          "name": "通知阿洛斯",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11792,
+          "name": "圣光的敌人",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11793,
+          "name": "继续调查",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11794,
+          "name": "猎杀行动",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11797,
+          "name": "虫临城下",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11889,
+          "name": "空中的虫子",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11897,
+          "name": "炸毁虫孔",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11901,
+          "name": "军队？什么军队？",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11902,
+          "name": "致命的谷物",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf"
+          ]
+        },
+        {
+          "quest_id": 11903,
+          "name": "战斗的时刻",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11904,
+          "name": "劳动的果实",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11908,
+          "name": "参考资料",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11920,
+          "name": "隐藏的诅咒教徒",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf"
+          ]
+        },
+        {
+          "quest_id": 11927,
+          "name": "坊间的传言",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11928,
+          "name": "致远郡",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11932,
+          "name": "懦夫和蠢货",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11962,
+          "name": "最后一批矿石",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11963,
+          "name": "给致远郡的武器",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11965,
+          "name": "集结的钟声！",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12141,
+          "name": "外交任务",
+          "episodes": [
+            34
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11575,
+          "name": "千钧一发",
+          "episodes": [
+            35
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11645,
+          "name": "恶心的雪地狗头人！",
+          "episodes": [
+            35,
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11708,
+          "name": "机械侏儒",
+          "episodes": [
+            35
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11710,
+          "name": "转换器怎么了？",
+          "episodes": [
+            35,
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11712,
+          "name": "物质转换注射器",
+          "episodes": [
+            35,
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 13094,
+          "name": "他们丝毫不感到羞愧吗？",
+          "episodes": [
+            35,
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "required_races_excludes_blood_elf"
+          ]
+        },
+        {
+          "quest_id": 11650,
+          "name": "还要一些东西……",
+          "episodes": [
+            37,
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11729,
+          "name": "超声波螺丝刀",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf"
+          ]
+        },
+        {
+          "quest_id": 11905,
+          "name": "延缓灾难",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_dungeon_or_raid",
+          "scope_reasons": [
+            "current_fivebox_outdoor_leveling_route_does_not_run_instances"
+          ]
+        },
+        {
+          "quest_id": 11911,
+          "name": "苏醒",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_dungeon_or_raid",
+          "scope_reasons": [
+            "current_fivebox_outdoor_leveling_route_does_not_run_instances"
+          ]
+        },
+        {
+          "quest_id": 11938,
+          "name": "争取时间",
+          "episodes": [
+            37,
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11944,
+          "name": "我们被包围了！",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11956,
+          "name": "寻找护命匣",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12088,
+          "name": "死亡骑士萨萨里安",
+          "episodes": [
+            37
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11653,
+          "name": "大块头",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11658,
+          "name": "B计划",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11670,
+          "name": "是兽人干的！真的！",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11673,
+          "name": "带我出去！",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11692,
+          "name": "寻找比希",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11693,
+          "name": "好极了……天灾猛犸人！",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11725,
+          "name": "寻找“尾旋”",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11726,
+          "name": "一点辣椒",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11728,
+          "name": "狼的排泄物",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11730,
+          "name": "主与仆",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11788,
+          "name": "左膀右臂",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11795,
+          "name": "紧急情况守则：第8章，第2节，第3段",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11796,
+          "name": "紧急情况守则：第8章，第2节，第4段",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11798,
+          "name": "机甲专家麦卡佐德",
+          "episodes": [
+            38,
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11873,
+          "name": "通知菲兹兰克",
+          "episodes": [
+            38
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11694,
+          "name": "山洞中的瘟疫",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11697,
+          "name": "丁奇跑进浮空城了！",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11698,
+          "name": "顺便清理天灾士兵",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11699,
+          "name": "我被困在笼子里了……",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11700,
+          "name": "通知比希",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11701,
+          "name": "返回机场",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11715,
+          "name": "石油资源",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11718,
+          "name": "猛犸的毛皮",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11723,
+          "name": "天摇地动！",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11942,
+          "name": "通行之语",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12019,
+          "name": "最后的义务",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12157,
+          "name": "失踪的信使",
+          "episodes": [
+            39
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        }
+      ],
+      "completion_pair_count": 1868,
+      "completion_order_inversion_count": 141,
+      "completion_order_inversion_ratio": 0.0755,
+      "reversed_video_adjacencies": [
+        {
+          "video_first": "情势扭转",
+          "video_second": "决战奈辛瓦里",
+          "route_turnin_point_first": 116,
+          "route_turnin_point_second": 83,
+          "manual_resolution": "keep_current: video crosses a different Alliance map progression; current Horde route closes Nessingwary before the later Kaskala chain and does not create a shared local detour.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "先祖的回归",
+          "video_second": "别让他们逃了！",
+          "route_turnin_point_first": 99,
+          "route_turnin_point_second": 95,
+          "manual_resolution": "keep_current: both Coldrock chains are active in the same local loop; their turn-in order differs but current route completes both without an extra revisit.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "敌人的耳环",
+          "video_second": "帮助弱小",
+          "route_turnin_point_first": 106,
+          "route_turnin_point_second": 89,
+          "manual_resolution": "keep_current: Help the Weak is shared/fast and is turned in immediately; Earrings remains a background personal-drop task to avoid dedicated five-box farming.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "调查",
+          "video_second": "监视裂谷：悬崖异常",
+          "route_turnin_point_first": 158,
+          "route_turnin_point_second": 155,
+          "manual_resolution": "keep_current: the rift task is already available on Amber Ledge arrival while Investigation unlocks after the jailbreak return; the current order follows availability and the same hub cycle.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "重铸钥匙",
+          "video_second": "监视裂谷：峭壁断层",
+          "route_turnin_point_first": 161,
+          "route_turnin_point_second": 158,
+          "manual_resolution": "keep_current: the cliff-fault objective is completed on the outbound local pass; Reforging the Key unlocks later through the interrogation/time-race chain at the same hub.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "监视裂谷：冬鳞洞穴",
+          "video_second": "侦查虫孔",
+          "route_turnin_point_first": 220,
+          "route_turnin_point_second": 123,
+          "manual_resolution": "keep_current: these belong to separate Taunka/Winterfin phases; video episode order is not a local adjacency claim. Current route carries the rift quest through the north loop and uses the opened flight network for its final turn-in.",
+          "manual_review_status": "resolved"
+        }
+      ],
+      "unresolved_adjacent_reversal_count": 0,
+      "route_order_review_status": "pass_whole_map_video_reverse_review"
+    },
+    "dragonblight": {
+      "map": "龙骨荒野",
+      "episodes": [
+        40,
+        41,
+        42
+      ],
+      "formal_task_count": 147,
+      "formal_name_count": 147,
+      "video_distinct_task_count": 48,
+      "route_distinct_task_name_count": 147,
+      "common_route_video_name_count": 36,
+      "common_explicit_completion_count": 31,
+      "critical_video_omission_count": 0,
+      "critical_video_omissions": [],
+      "video_only_class_counts": {
+        "expected_not_in_current_route_scope": 12
+      },
+      "video_only": [
+        {
+          "quest_id": 12157,
+          "name": "失踪的信使",
+          "episodes": [
+            40
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12166,
+          "name": "艾露恩的火油",
+          "episodes": [
+            40
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12167,
+          "name": "消灭教徒",
+          "episodes": [
+            40
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12171,
+          "name": "叛徒的名单",
+          "episodes": [
+            40
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12511,
+          "name": "丘陵援兵",
+          "episodes": [
+            40,
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 11960,
+          "name": "未来的种子",
+          "episodes": [
+            41
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_repeatable_calendar",
+          "scope_reasons": [
+            "not_one_time_clearable"
+          ]
+        },
+        {
+          "quest_id": 12174,
+          "name": "高级指挥官哈尔弗·维姆班恩",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12235,
+          "name": "纳克萨玛斯与暮冬城的陷落",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12237,
+          "name": "拯救暮冬城平民",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12251,
+          "name": "向高级指挥官复命",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        },
+        {
+          "quest_id": 12372,
+          "name": "保卫龙眠神殿",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_repeatable_calendar",
+          "scope_reasons": [
+            "not_one_time_clearable"
+          ]
+        },
+        {
+          "quest_id": 12464,
+          "name": "我的老对手",
+          "episodes": [
+            42
+          ],
+          "class": "expected_not_in_current_route_scope",
+          "scope_status": "exclude_alliance_or_other_faction",
+          "scope_reasons": [
+            "finish_npc_alliance_only",
+            "required_races_excludes_blood_elf",
+            "start_npc_alliance_only"
+          ]
+        }
+      ],
+      "completion_pair_count": 459,
+      "completion_order_inversion_count": 8,
+      "completion_order_inversion_ratio": 0.0174,
+      "reversed_video_adjacencies": [
+        {
+          "video_first": "搜索因度雷村",
+          "video_second": "不要浪费",
+          "route_turnin_point_first": 86,
+          "route_turnin_point_second": 82,
+          "manual_resolution": "keep_current: video begins this section already on the Indu'le line. The Horde route from Agmar first reaches Moa'ki to unlock Don't Waste and the Kalu'ak chain, then threads back through Indu'le while those tasks are active; no duplicate standalone Indu'le revisit is introduced.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "图尔凯的螃蟹陷阱",
+          "video_second": "长者玛纳洛",
+          "route_turnin_point_first": 95,
+          "route_turnin_point_second": 87,
+          "manual_resolution": "keep_current: both are accepted from the same Moa'ki visit; current route advances Mana'loa/Indu'le before sweeping the southern coast so crab traps are collected along the coast loop instead of forcing an early shoreline return.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "魔网能量线的终端",
+          "video_second": "海洋女神",
+          "route_turnin_point_first": 98,
+          "route_turnin_point_second": 95,
+          "manual_resolution": "keep_current: the ley-line quest stays active while the coastal Ocean Goddess chain is closed, then is turned after the Moa'ki-to-Agmar flight; this batches the return transport rather than adding a separate Agmar trip.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "向德弗雷斯塔兹领主报到",
+          "video_second": "红玉巨龙圣地的命运",
+          "route_turnin_point_first": 122,
+          "route_turnin_point_second": 120,
+          "manual_resolution": "keep_current: both resolve inside Wyrmrest/Ruby chain state; the video Alliance unlock order differs, while the current route turns the Ruby Brooch as soon as it is obtained and immediately continues the same tower/hub chain.",
+          "manual_review_status": "resolved"
+        }
+      ],
+      "unresolved_adjacent_reversal_count": 0,
+      "route_order_review_status": "pass_whole_map_video_reverse_review"
+    },
+    "grizzly": {
+      "map": "灰熊丘陵",
+      "episodes": [
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "formal_task_count": 83,
+      "formal_name_count": 83,
+      "video_distinct_task_count": 90,
+      "route_distinct_task_name_count": 83,
+      "common_route_video_name_count": 42,
+      "common_explicit_completion_count": 40,
+      "critical_video_omission_count": 0,
+      "critical_video_omissions": [],
+      "video_only_class_counts": {
+        "video_faction_or_other_zone_only": 48
+      },
+      "video_only": [
+        {
+          "quest_id": 12210,
+          "name": "狩猎巨魔的季节！",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12212,
+          "name": "补充食物",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12215,
+          "name": "你死我活！",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12216,
+          "name": "猎熊！",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12217,
+          "name": "鹰的眼睛",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12223,
+          "name": "先发制人",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12225,
+          "name": "美味的琥珀种子！",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12226,
+          "name": "种子穿肠过……",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12227,
+          "name": "尽你的职责",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12292,
+          "name": "当地人的支持",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12293,
+          "name": "完成交易",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12294,
+          "name": "暂时的协议",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12295,
+          "name": "外交活动",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12299,
+          "name": "北边的敌人",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12307,
+          "name": "破狼草",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12444,
+          "name": "黑水伐木场的战斗",
+          "episodes": [
+            47,
+            51
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": true
+        },
+        {
+          "quest_id": 12511,
+          "name": "丘陵援兵",
+          "episodes": [
+            47
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12027,
+          "name": "小毛球的冒险",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12105,
+          "name": "坠入黑暗",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12109,
+          "name": "再次向格里安·斯托曼报到",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12158,
+          "name": "空石矿洞",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12159,
+          "name": "无法安息的灵魂",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12160,
+          "name": "往日的名字",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12219,
+          "name": "倒下的世界之树",
+          "episodes": [
+            48,
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12220,
+          "name": "黑暗的影响",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12300,
+          "name": "勇气的试炼",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12302,
+          "name": "萨莎的警告",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12308,
+          "name": "逃离银溪镇",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12310,
+          "name": "快速反应",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12414,
+          "name": "顺手牵马",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12770,
+          "name": "资源调配",
+          "episodes": [
+            48
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 11981,
+          "name": "找到库伦！",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": true,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 11988,
+          "name": "符文钥石",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 11998,
+          "name": "灵活的手段",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12002,
+          "name": "战斗中的兄弟",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12003,
+          "name": "寻找隧道",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12010,
+          "name": "奥尔隆德的命运",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12014,
+          "name": "坚如磐石？",
+          "episodes": [
+            49
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12128,
+          "name": "找到莱加尔",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12129,
+          "name": "完美的计划",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12130,
+          "name": "抢夺零件",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12153,
+          "name": "铁领主和他的保镖",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12154,
+          "name": "停电",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12180,
+          "name": "被俘虏的勘探员",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12183,
+          "name": "搜集制服",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12184,
+          "name": "拍摄照片",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12185,
+          "name": "笑脸面对洛肯！",
+          "episodes": [
+            50
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        },
+        {
+          "quest_id": 12248,
+          "name": "沃达希尔的树苗",
+          "episodes": [
+            51
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 394,
+          "race_allowed": false,
+          "npc_faction_allowed": false,
+          "is_dungeon": false,
+          "is_repeatable": false
+        }
+      ],
+      "completion_pair_count": 768,
+      "completion_order_inversion_count": 157,
+      "completion_order_inversion_ratio": 0.2044,
+      "reversed_video_adjacencies": [
+        {
+          "video_first": "解读象形文字",
+          "video_second": "清理天灾",
+          "route_turnin_point_first": 15,
+          "route_turnin_point_second": 14,
+          "manual_resolution": "keep_current: both lie on the same westward Drakuru/Forgotten-depths sweep; current route takes the nearby mummified-crusader branch before the first brazier with no later revisit.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "蘑菇汤！",
+          "video_second": "古树精华宝石",
+          "route_turnin_point_first": 24,
+          "route_turnin_point_second": 19,
+          "manual_resolution": "keep_current: Mushroom Soup is collected as a background task while the route continues east with the Drakuru gem chain; its delayed turn-in avoids returning to Granite Springs solely for the soup.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "灰尘之声",
+          "video_second": "跟我的小朋友打招呼",
+          "route_turnin_point_first": 52,
+          "route_turnin_point_second": 39,
+          "manual_resolution": "keep_current: both are long-carried tasks whose turn-in order reflects different endpoints; the route hands Little Friend at Harkor when first entering the northeast, while Dust Voice waits for the later Drakil'jin spatial instance.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "等肉下锅",
+          "video_second": "心灵的创伤",
+          "route_turnin_point_first": 69,
+          "route_turnin_point_second": 53,
+          "manual_resolution": "keep_current: Meat for the Pot is intentionally background-collected through later northeast/giant terrain; Healing with Herbs closes earlier when its local targets finish, avoiding dedicated meat farming.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "金亚拉克的末日",
+          "video_second": "破损的日记",
+          "route_turnin_point_first": 55,
+          "route_turnin_point_second": 32,
+          "manual_resolution": "keep_current: the diary is collected/turned during the earlier Thor Modan pass; Jin'arrak is a later Harkor/Drakil'jin chain. Video's Alliance macro traversal reaches these chains in the opposite order.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "攻破防线",
+          "video_second": "卢娜的要求",
+          "route_turnin_point_first": 38,
+          "route_turnin_point_second": 26,
+          "manual_resolution": "keep_current: Luna is closed before the northern giant chain because it is already available on the route into Onu'va; Break Through is a later strict giant-chain continuation, so swapping them would delay an already-open local loop.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "……我们没有能源",
+          "video_second": "可能的关联",
+          "route_turnin_point_first": 65,
+          "route_turnin_point_second": 34,
+          "manual_resolution": "keep_current: Possible Link is an earlier Vordrassil/Conquest Hold chain and is intentionally closed before the late Dun Argol golem chain. Video Alliance hub progression unlocks the counterpart later.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "终获解救",
+          "video_second": "沃达希尔的种子",
+          "route_turnin_point_first": 70,
+          "route_turnin_point_second": 44,
+          "manual_resolution": "keep_current: Vordrassil Seeds is completed in the mid-map Vordrassil pass and immediately unlocks the bear-god continuation; Free at Last is the terminal northern giant-chain task and cannot justify delaying the earlier tree pass.",
+          "manual_review_status": "resolved"
+        }
+      ],
+      "unresolved_adjacent_reversal_count": 0,
+      "route_order_review_status": "pass_whole_map_video_reverse_review"
+    },
+    "zuldrak": {
+      "map": "祖达克",
+      "episodes": [
+        52,
+        53
+      ],
+      "formal_task_count": 104,
+      "formal_name_count": 104,
+      "video_distinct_task_count": 43,
+      "route_distinct_task_name_count": 105,
+      "common_route_video_name_count": 42,
+      "common_explicit_completion_count": 37,
+      "critical_video_omission_count": 0,
+      "critical_video_omissions": [],
+      "video_only_class_counts": {
+        "video_faction_or_other_zone_only": 1
+      },
+      "video_only": [
+        {
+          "quest_id": 12664,
+          "name": "黑暗的地平线",
+          "episodes": [
+            52
+          ],
+          "class": "video_faction_or_other_zone_only",
+          "assigned_zone_id": 66,
+          "race_allowed": true,
+          "npc_faction_allowed": true,
+          "is_dungeon": false,
+          "is_repeatable": false
+        }
+      ],
+      "completion_pair_count": 655,
+      "completion_order_inversion_count": 35,
+      "completion_order_inversion_ratio": 0.0534,
+      "reversed_video_adjacencies": [
+        {
+          "video_first": "风暴将至",
+          "video_second": "圣光不能为我复仇",
+          "route_turnin_point_first": 10,
+          "route_turnin_point_second": 7,
+          "manual_resolution": "keep_current: Vargul Revenge is completed beside Gork during the same missing-crusader sweep, so turning it in immediately costs no revisit. Reproducing the video completion order would require carrying it away from its local turn-in and returning later.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "希姆埃巴的祝福",
+          "video_second": "银色北伐军的降落伞",
+          "route_turnin_point_first": 59,
+          "route_turnin_point_second": 39,
+          "manual_resolution": "keep_current: Zim'Abwa requires personal Drakkari Offerings. The five-box route keeps this as background accumulation through the southern Drakkari loops and closes it on the final south return instead of forcing a dedicated early personal-drop farm.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "银色北伐军的降落伞",
+          "video_second": "潜入沃尔塔鲁斯",
+          "route_turnin_point_first": 39,
+          "route_turnin_point_second": 28,
+          "manual_resolution": "keep_current: after the Gymer material loop the route is already back at Ebon Watch with Infiltrating Voltarus unlocked. Closing the phased Ebon chain before the one-way east transition avoids the video's later Ebon revisit after Argent Stand.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "给斯塔哈默中士的新命令",
+          "video_second": "实验室的学徒",
+          "route_turnin_point_first": 44,
+          "route_turnin_point_second": 40,
+          "manual_resolution": "keep_current: both orders are dependency-legal, but the current Argent→Heb'Valok→spirits→Heb'Valok→Sseratus→bat→Heb'Valok→Argent loop is about 76.3 map-percent versus about 84.3 for the video-shaped Sseratus-first alternative using the same route anchors.",
+          "manual_review_status": "resolved"
+        },
+        {
+          "video_first": "温暖的篝火",
+          "video_second": "扔手雷",
+          "route_turnin_point_first": 62,
+          "route_turnin_point_second": 52,
+          "manual_resolution": "keep_current: Throwing Down is turned in early specifically to unlock Cocooned, allowing Cocooned and One of a Kind? rescue targets to share one rescue pass. Creature Comforts remains a background wood collection and is turned later near the mushroom/basilisk return, avoiding a dedicated Drak'Jin wood loop.",
+          "manual_review_status": "resolved"
+        }
+      ],
+      "unresolved_adjacent_reversal_count": 0,
+      "route_order_review_status": "pass_whole_map_video_reverse_review"
+    }
+  }
+}

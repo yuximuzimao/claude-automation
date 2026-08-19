@@ -2,6 +2,8 @@ import json
 import re
 from pathlib import Path
 
+from scripts.audit_route_atlas_player_text import main as audit_player_text
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/route-atlas/workbench-routes.json"
 HTML = ROOT / "data/routes/route-atlas-workbench.html"
@@ -10,7 +12,11 @@ HTML = ROOT / "data/routes/route-atlas-workbench.html"
 def test_workbench_contains_all_current_route_maps_and_assets():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     assert set(routes) >= {"zang", "nagrand", "borean"}
-    assert len(routes["borean"]["points"]) == 221
+    assert len(routes["borean"]["points"]) >= 224
+    borean_text = json.dumps(routes["borean"], ensure_ascii=False)
+    assert "交《集结红龙》→接《触动陷阱》" in borean_text
+    assert "冬鳞洞穴一次通行：裂谷 + 钥匙 + 护送 + 决不投降" in borean_text
+    assert "龙骨荒野边界" in borean_text
     for route in routes.values():
         assert route["points"]
         assert (ROOT / "data/routes" / route["image"]).exists()
@@ -27,6 +33,10 @@ def test_route_text_never_leaks_internal_action_tokens():
     assert not re.search(
         r"(?<![A-Za-z])(?:A|C|T|A/T|C/T|C_partial|SCRIPT)\d{4,5}", visible
     )
+
+
+def test_player_visible_handoffs_are_explicit_and_lifecycle_closes():
+    audit_player_text()
 
 
 def test_single_workbench_uses_established_outland_layout_and_manual_follow():
@@ -52,12 +62,12 @@ def test_borean_player_steps_group_geometry_without_losing_points():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     borean = routes["borean"]
     groups = borean["stepGroups"]
-    assert len(groups) == 51
+    assert len(groups) >= 66
     covered = [i for group in groups for i in range(group["start"], group["end"] + 1)]
     assert covered == list(range(len(borean["points"])))
     titles = [group["title"] for group in groups]
     assert "码头接齐回音海岸任务" in titles
-    assert "零件 + 克瓦迪尔共享刷怪 + 短护送" in titles
+    assert "固定零件 + 克瓦迪尔三任务 + 短护送" in titles
     assert "护送交付并批量换下一轮任务" in titles
     assert "四艘船 + 奥拉布斯一次海岸闭环" in titles
 
@@ -76,6 +86,27 @@ def test_workbench_step_animation_is_group_aware():
     assert "function groupSegRange" in html
     assert "function prepareAnim" in html
     assert "步骤 ${cur+1}/${G.length}" in html
+
+
+def test_workbench_hud_lists_every_action_in_current_logical_step():
+    html = HTML.read_text(encoding="utf-8")
+    assert "/* HUD_GROUP_ACTIONS_START */" in html
+    assert "S.slice(gr.start,gr.end+1)" in html
+    assert "point.label}：${point.action" in html
+    assert "el.style.whiteSpace='pre-line'" in html
+
+
+def test_borean_amber_ledge_chain_is_explicit_in_player_text():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    borean = routes["borean"]
+    groups = borean["stepGroups"]
+    assert "交《调查》→接《苔原上的审讯》" in groups[48]["summary"]
+    assert "交《监视裂谷：峭壁断层》→接《监视裂谷：冬鳞洞穴》" in groups[48]["summary"]
+    assert "上法师塔二楼交《苔原上的审讯》→接《说服的艺术》" in groups[49]["summary"]
+    assert "交《准备飞翔》→接《营救艾瓦诺尔》" in groups[50]["summary"]
+    borean_text = json.dumps(borean, ensure_ascii=False)
+    assert "法师塔二楼·诺曼提斯" in borean_text
+    assert "下楼找多纳森交《分享情报》→接《与时间赛跑》" in borean_text
 
 
 def test_borean_monster_drop_quest_starters_document_sources_and_conditions():

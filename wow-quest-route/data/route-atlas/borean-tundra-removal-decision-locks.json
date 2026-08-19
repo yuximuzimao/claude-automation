@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "status": "LOCKED_OPTIMIZATION_DECISIONS",
+  "lock_policy": "Removal priority labels are derived optimization decisions, not task-card facts. Do not modify them unless the decision rule or an upstream locked fact is confirmed wrong and the user explicitly approves the correction.",
+  "route_key": "borean",
+  "rule": {
+    "eligible_collection_patterns": [
+      "repeated_same_item",
+      "repeated_plus_distinct"
+    ],
+    "excluded_collection_pattern": "multiple_distinct_one_each",
+    "base_priority": "P1 = multi-item drop + no equipment/direct-money value + no valuable in-scope follow-up",
+    "downgrade_one_level_each": [
+      "pickup instead of drop",
+      "current task has equipment or direct-money value",
+      "at least one in-scope downstream task has equipment or direct-money value"
+    ],
+    "within_priority_tier": {
+      "A": "0 valuable downstream tasks; highest removal urgency inside the same P level",
+      "B": "exactly 1 valuable downstream task",
+      "C": "2 or more valuable downstream tasks; lowest removal urgency inside the same P level"
+    }
+  },
+  "candidates": [
+    {
+      "quest_id": 11564,
+      "name": "美味炖鲸肉",
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11606,
+      "name": "耐心是我们不需要的美德",
+      "priority": 3,
+      "within_priority_tier": "B",
+      "priority_label": "P3B",
+      "collection_source": "pickup",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 1,
+      "valuable_followup_bucket": "1",
+      "valuable_followup_ids": [
+        11608
+      ]
+    },
+    {
+      "quest_id": 11609,
+      "name": "寻找古器",
+      "priority": 4,
+      "within_priority_tier": "B",
+      "priority_label": "P4B",
+      "collection_source": "pickup",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 1,
+      "valuable_followup_bucket": "1",
+      "valuable_followup_ids": [
+        11610
+      ]
+    },
+    {
+      "quest_id": 11628,
+      "name": "天灾的外衣",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 8,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11630,
+        11633,
+        11654,
+        11659,
+        11647,
+        11641,
+        11640,
+        11898
+      ]
+    },
+    {
+      "quest_id": 11630,
+      "name": "腐化的土地",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 7,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11633,
+        11654,
+        11659,
+        11647,
+        11641,
+        11640,
+        11898
+      ]
+    },
+    {
+      "quest_id": 11644,
+      "name": "超强度金属板！",
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 2,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11652,
+        11916
+      ]
+    },
+    {
+      "quest_id": 11649,
+      "name": "风暴微粒",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 5,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11631,
+        11639,
+        11635,
+        11637,
+        11638
+      ]
+    },
+    {
+      "quest_id": 11655,
+      "name": "深入迷雾",
+      "priority": 2,
+      "within_priority_tier": "B",
+      "priority_label": "P2B",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 1,
+      "valuable_followup_bucket": "1",
+      "valuable_followup_ids": [
+        11656
+      ]
+    },
+    {
+      "quest_id": 11685,
+      "name": "元素之心",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 2,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11695,
+        11706
+      ]
+    },
+    {
+      "quest_id": 11716,
+      "name": "奇妙的血孢",
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 2,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11722,
+        11916
+      ]
+    },
+    {
+      "quest_id": 11717,
+      "name": "授粉的巨蛾",
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 2,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11722,
+        11916
+      ]
+    },
+    {
+      "quest_id": 11866,
+      "name": "敌人的耳环",
+      "priority": 3,
+      "within_priority_tier": "B",
+      "priority_label": "P3B",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 1,
+      "valuable_followup_bucket": "1",
+      "valuable_followup_ids": [
+        11892
+      ]
+    },
+    {
+      "quest_id": 11871,
+      "name": "不可容忍",
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": false,
+      "valuable_followup_count": 2,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11872,
+        11892
+      ]
+    },
+    {
+      "quest_id": 11887,
+      "name": "应急的物资",
+      "priority": 3,
+      "within_priority_tier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11894,
+      "name": "修修补补",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 9,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11628,
+        11630,
+        11633,
+        11654,
+        11659,
+        11647,
+        11641,
+        11640,
+        11898
+      ]
+    },
+    {
+      "quest_id": 11906,
+      "name": "净化水池",
+      "priority": 3,
+      "within_priority_tier": "A",
+      "priority_label": "P3A",
+      "collection_source": "pickup",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11910,
+      "name": "古树的秘密",
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11912,
+      "name": "冰冷的草莓",
+      "priority": 4,
+      "within_priority_tier": "B",
+      "priority_label": "P4B",
+      "collection_source": "pickup",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 1,
+      "valuable_followup_bucket": "1",
+      "valuable_followup_ids": [
+        11914
+      ]
+    },
+    {
+      "quest_id": 11914,
+      "name": "保持隐蔽",
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11931,
+      "name": "破译密码",
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 0,
+      "valuable_followup_bucket": "0",
+      "valuable_followup_ids": []
+    },
+    {
+      "quest_id": 11951,
+      "name": "诱饵",
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "collection_source": "drop",
+      "direct_has_equipment_or_money_value": true,
+      "valuable_followup_count": 3,
+      "valuable_followup_bucket": "2_plus",
+      "valuable_followup_ids": [
+        11957,
+        11967,
+        11969
+      ]
+    }
+  ]
+}

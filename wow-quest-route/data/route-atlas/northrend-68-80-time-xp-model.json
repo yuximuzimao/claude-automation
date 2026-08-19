@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "status": "TASK_BASED_68_80_MODEL_V1",
+  "method": {
+    "xp": "formal Borean/Dragon turn-in order + cleaned Grizzly/Zul'Drak candidate turn-in order; exact WotLK level-dependent quest XP; live natural-XP calibration only locates level-80 point",
+    "time": "reviewed Borean/Dragon component model + task-card service / hub-operation / coordinate movement model for later maps; overlap and path-compression factors calibrated from reviewed maps",
+    "not_used": [
+      "XP per hour extrapolation",
+      "raw Journey discussion time",
+      "unopened future flight points",
+      "task-count times average-minutes shortcut"
+    ]
+  },
+  "live_natural_xp_calibration": {
+    "route_point_index": 212,
+    "turnins_before_checkpoint": 152,
+    "task_only_xp_to_checkpoint": 5169100,
+    "actual_total_xp_to_checkpoint": 6004558,
+    "natural_xp_lower_bound": 835458,
+    "natural_to_task_ratio_lower_bound": 0.16162542802422086,
+    "note": "Task-only simulation keeps the character lower-level and therefore tends to over-credit old quests; the difference is a conservative lower bound on natural kill/exploration XP."
+  },
+  "reach_80_cases": [
+    {
+      "natural_ratio": 0.0,
+      "reach_zone": "祖达克",
+      "turnin_index_in_zone": 87,
+      "quest_id": 12713,
+      "quest_name": "背叛",
+      "xp_into_80": 558,
+      "stage_counts": {
+        "北风剩余": 9,
+        "龙骨荒野": 141,
+        "灰熊丘陵": 75,
+        "祖达克": 87
+      }
+    },
+    {
+      "natural_ratio": 0.1,
+      "reach_zone": "祖达克",
+      "turnin_index_in_zone": 63,
+      "quest_id": 12615,
+      "quest_name": "希姆托加的祝福",
+      "xp_into_80": 6778,
+      "stage_counts": {
+        "北风剩余": 9,
+        "龙骨荒野": 141,
+        "灰熊丘陵": 75,
+        "祖达克": 63
+      }
+    },
+    {
+      "natural_ratio": 0.16162542802422086,
+      "reach_zone": "祖达克",
+      "turnin_index_in_zone": 47,
+      "quest_id": 12904,
+      "quest_name": "圣光不能为我复仇",
+      "xp_into_80": 196,
+      "stage_counts": {
+        "北风剩余": 9,
+        "龙骨荒野": 141,
+        "灰熊丘陵": 75,
+        "祖达克": 47
+      }
+    },
+    {
+      "natural_ratio": 0.2,
+      "reach_zone": "祖达克",
+      "turnin_index_in_zone": 40,
+      "quest_id": 12527,
+      "quest_name": "贪吃的蜥蜴",
+      "xp_into_80": 17838,
+      "stage_counts": {
+        "北风剩余": 9,
+        "龙骨荒野": 141,
+        "灰熊丘陵": 75,
+        "祖达克": 40
+      }
+    }
+  ],
+  "cleaned_candidate_counts": {
+    "grizzly_auto_qids": 79,
+    "grizzly_selected_qids": 75,
+    "grizzly_excluded_qids": [
+      11981,
+      12434,
+      12446,
+      12763
+    ],
+    "zuldrak_auto_qids": 96,
+    "zuldrak_selected_qids": 90,
+    "zuldrak_excluded_qids": [
+      12633,
+      12638,
+      12643,
+      12649,
+      12792,
+      12793
+    ]
+  },
+  "map_time_minutes": {
+    "borean_full": {
+      "low": 327.5,
+      "center": 415.4,
+      "high": 503.2
+    },
+    "dragonblight_full": {
+      "low": 364.4,
+      "center": 459.9,
+      "high": 558.2
+    },
+    "grizzly_full": {
+      "selected_route_task_count": 75,
+      "turnins_in_prefix": 75,
+      "objective_task_count_in_prefix": 40,
+      "accept_ops": 73,
+      "turnin_ops": 75,
+      "raw_normalized_path_distance": 2326.144076629948,
+      "raw_task_service_minutes": {
+        "low": 131.03259436641548,
+        "center": 168.2907429580193,
+        "high": 222.67796584542512
+      },
+      "overlapped_task_service_minutes": {
+        "low": 58.57156968178772,
+        "center": 86.83802336633796,
+        "high": 130.26661001957368
+      },
+      "hub_minutes": {
+        "low": 53.28,
+        "center": 62.9,
+        "high": 74.0
+      },
+      "movement_minutes": {
+        "low": 44.43121277889331,
+        "center": 57.566134229195804,
+        "high": 71.01857434595829
+      },
+      "total_minutes": {
+        "low": 156.28278246068103,
+        "center": 207.30415759553375,
+        "high": 275.28518436553196
+      },
+      "unknown_service_qids": []
+    },
+    "zuldrak_to_80_center": {
+      "selected_route_task_count": 90,
+      "turnins_in_prefix": 47,
+      "objective_task_count_in_prefix": 30,
+      "accept_ops": 51,
+      "turnin_ops": 47,
+      "raw_normalized_path_distance": 1286.8529827088437,
+      "raw_task_service_minutes": {
+        "low": 133.65996010167805,
+        "center": 167.8249501270975,
+        "high": 219.32243516522675
+      },
+      "overlapped_task_service_minutes": {
+        "low": 59.74600216545009,
+        "center": 86.59767426558231,
+        "high": 128.30362457165765
+      },
+      "hub_minutes": {
+        "low": 35.28,
+        "center": 41.65,
+        "high": 49.0
+      },
+      "movement_minutes": {
+        "low": 24.57992145212508,
+        "center": 31.846329846937973,
+        "high": 39.28839367389062
+      },
+      "total_minutes": {
+        "low": 119.60592361757517,
+        "center": 160.09400411252028,
+        "high": 216.59201824554827
+      },
+      "unknown_service_qids": []
+    },
+    "zuldrak_to_80_optimistic_20pct_natural": {
+      "selected_route_task_count": 90,
+      "turnins_in_prefix": 40,
+      "objective_task_count_in_prefix": 27,
+      "accept_ops": 42,
+      "turnin_ops": 40,
+      "raw_normalized_path_distance": 1056.5120173462933,
+      "raw_task_service_minutes": {
+        "low": 115.8226598949582,
+        "center": 145.5283248686977,
+        "high": 190.33682232930704
+      },
+      "overlapped_task_service_minutes": {
+        "low": 51.77272897304632,
+        "center": 75.09261563224801,
+        "high": 111.3470410626446
+      },
+      "hub_minutes": {
+        "low": 29.52,
+        "center": 34.85,
+        "high": 41.0
+      },
+      "movement_minutes": {
+        "low": 20.18022474092808,
+        "center": 26.145978323676527,
+        "high": 32.255945796792744
+      },
+      "total_minutes": {
+        "low": 101.4729537139744,
+        "center": 136.08859395592455,
+        "high": 184.60298685943735
+      },
+      "unknown_service_qids": []
+    },
+    "zuldrak_to_80_conservative_10pct_natural": {
+      "selected_route_task_count": 90,
+      "turnins_in_prefix": 63,
+      "objective_task_count_in_prefix": 36,
+      "accept_ops": 62,
+      "turnin_ops": 65,
+      "raw_normalized_path_distance": 1776.5944177983256,
+      "raw_task_service_minutes": {
+        "low": 160.78435701549034,
+        "center": 203.98044626936291,
+        "high": 268.52458015017174
+      },
+      "overlapped_task_service_minutes": {
+        "low": 71.87060758592419,
+        "center": 105.25391027499127,
+        "high": 157.08687938785047
+      },
+      "hub_minutes": {
+        "low": 45.72,
+        "center": 53.975,
+        "high": 63.5
+      },
+      "movement_minutes": {
+        "low": 33.93437465548226,
+        "center": 43.96618152474318,
+        "high": 54.24049353203356
+      },
+      "total_minutes": {
+        "low": 151.52498224140646,
+        "center": 203.19509179973446,
+        "high": 274.82737291988406
+      },
+      "unknown_service_qids": []
+    }
+  },
+  "total_68_80": {
+    "low_minutes": 949.6557361746554,
+    "center_minutes": 1242.698161708054,
+    "high_minutes": 1611.512557285416,
+    "low_hours": 15.827595602910923,
+    "center_hours": 20.711636028467566,
+    "high_hours": 26.858542621423602,
+    "veteran_benchmark_minutes": 840.0,
+    "center_gap_minutes": 402.69816170805393,
+    "center_gap_hours": 6.711636028467566,
+    "center_slower_percent": 47.94025734619689
+  },
+  "manual_special_task_service": {
+    "11990": {
+      "low": 4.0,
+      "center": 6.0,
+      "high": 9.0,
+      "basis": "Imbued Vial + Waterweed + 3 Haze Leaves mixed collection"
+    },
+    "12007": {
+      "low": 3.0,
+      "center": 4.5,
+      "high": 7.0,
+      "basis": "named mojo + brazier/elixir scripted use"
+    },
+    "12026": {
+      "low": 7.0,
+      "center": 10.0,
+      "high": 15.0,
+      "basis": "8 missing journal pages; five-box personal collection risk"
+    },
+    "12058": {
+      "low": 2.0,
+      "center": 3.5,
+      "high": 5.0,
+      "basis": "three rune-plate deciphers"
+    },
+    "12099": {
+      "low": 3.0,
+      "center": 4.5,
+      "high": 6.5,
+      "basis": "use Runebreaker to free 4 giants"
+    },
+    "12137": {
+      "low": 5.0,
+      "center": 8.0,
+      "high": 12.0,
+      "basis": "snow pickup + spirit-particle collection + script"
+    },
+    "12165": {
+      "low": 0.4,
+      "center": 0.7,
+      "high": 1.2,
+      "basis": "completed blueprint item handoff; no independent grind"
+    },
+    "12197": {
+      "low": 3.0,
+      "center": 4.5,
+      "high": 6.5,
+      "basis": "two named power cells"
+    },
+    "12241": {
+      "low": 2.0,
+      "center": 3.5,
+      "high": 5.5,
+      "basis": "burn Vordrassil sapling and recover ashes"
+    },
+    "12279": {
+      "low": 4.0,
+      "center": 7.0,
+      "high": 11.0,
+      "basis": "6 Northern Salmon; personal collection risk"
+    },
+    "12527": {
+      "low": 3.0,
+      "center": 5.0,
+      "high": 8.0,
+      "basis": "feed rats to basilisks; collect 5 crystals"
+    },
+    "12555": {
+      "low": 4.0,
+      "center": 5.5,
+      "high": 8.0,
+      "basis": "Tangled Skein Thrower destroys 5 plague sprayers"
+    },
+    "12557": {
+      "low": 3.0,
+      "center": 5.0,
+      "high": 8.0,
+      "basis": "four laboratory ingredients"
+    },
+    "12622": {
+      "low": 5.0,
+      "center": 7.5,
+      "high": 11.0,
+      "basis": "trigger/kill three Jin'Alai leaders and recover treasures"
+    },
+    "12627": {
+      "low": 2.0,
+      "center": 3.5,
+      "high": 5.5,
+      "basis": "disturb four cauldrons"
+    },
+    "12648": {
+      "low": 2.0,
+      "center": 3.5,
+      "high": 5.0,
+      "basis": "Scourge disguise + purchase Bitter Plasma"
+    },
+    "12677": {
+      "low": 3.0,
+      "center": 5.5,
+      "high": 8.5,
+      "basis": "Voltarus disguise package + 5 blight crystals"
+    },
+    "12729": {
+      "low": 3.0,
+      "center": 4.5,
+      "high": 7.0,
+      "basis": "two essence items"
+    },
+    "12919": {
+      "low": 8.0,
+      "center": 12.0,
+      "high": 18.0,
+      "basis": "Gymer vehicle: 100 Scourge + 3 named targets"
+    }
+  },
+  "calibration_constants": {
+    "overlap_factor": [
+      0.447,
+      0.516,
+      0.585
+    ],
+    "hub_minutes_per_quest_op": [
+      0.36,
+      0.425,
+      0.5
+    ],
+    "path_compression": [
+      0.376,
+      0.481,
+      0.586
+    ],
+    "minutes_per_normalized_unit": [
+      0.0508,
+      0.05145,
+      0.0521
+    ]
+  }
+}

@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 from lib.questie_effective import _reader, effective_quest_rows
 from lib.questie_lua import seq
 from lib.questie_source import QuestieData, load_questie
+from lib.wotlk_quest_rewards import max_level_bonus_money
 from lib.world_builder import (
     ITEM,
     QUEST,
@@ -48,7 +49,7 @@ OUTPUT_FOUNDATION = ROOT / "data" / "route-atlas" / "borean-tundra-task-foundati
 OUTPUT_CLUSTERS = ROOT / "data" / "route-atlas" / "borean-tundra-target-clusters.json"
 OUTPUT_VIDEO = ROOT / "data" / "route-atlas" / "borean-tundra-video-reference.json"
 OUTPUT_EXCLUSIONS = ROOT / "data" / "route-atlas" / "borean-tundra-exclusion-audit.json"
-OUTPUT_AUDIT = ROOT / "docs" / "analysis" / "2026-08-15-borean-tundra-foundation-adversarial-audit.md"
+OUTPUT_AUDIT = ROOT / "docs" / "archive" / "analysis" / "2026-08-15-borean-tundra-foundation-adversarial-audit.md"
 
 DAILY = 4096
 WEEKLY = 32768
@@ -341,6 +342,7 @@ def xp_facts(data: QuestieData, quest_id: int, row: dict[Any, Any]) -> dict[str,
         "server_multiplier": SERVER_QUEST_XP_MULTIPLIER,
         "server_xp_at_68": quest_xp_at_level(data, quest_id, START_LEVEL) if has_xp else 0,
         "full_xp_through_level": int(qlevel) + 5 if isinstance(qlevel, int) and qlevel > 0 else None,
+        "max_level_bonus_money": max_level_bonus_money(data, quest_id, row.get(23)) if has_xp else max_level_bonus_money(data, quest_id, row.get(23)),
     }
 
 
@@ -512,8 +514,8 @@ def task_scope_status(task: dict[str, Any]) -> tuple[str, list[str]]:
         return "defer_future_level_revisit", [f"required_level_{required_level}_above_first_pass_window"]
     if not task["xp"]["has_xp"]:
         return "exclude_no_xp_pending_dependency_audit", ["no_quest_xp"]
-    if task["is_dungeon"]:
-        return "include_leveling_dungeon", ["one_time_xp_dungeon_task"]
+    if task["is_dungeon"] or task["is_raid_flagged"]:
+        return "exclude_dungeon_or_raid", ["current_fivebox_outdoor_leveling_route_does_not_run_instances"]
     if task["is_cross_map"]:
         return "include_leveling_cross_map", ["accepted_or_objective_or_turnin_crosses_zone_boundary"]
     return "include_leveling_local", ["one_time_xp_horde_paladin_task"]
@@ -940,6 +942,7 @@ def main() -> None:
     check("no_alliance_task_included", not any(task["scope_status"].startswith("include_") and (not task["race_allowed"] or not task["npc_faction_allowed"]) for task in tasks), None)
     check("no_repeatable_calendar_task_included", not any(task["scope_status"].startswith("include_") and task["is_daily_weekly_monthly_or_repeatable"] for task in tasks), None)
     check("no_disallowed_pvp_included", not any(task["scope_status"].startswith("include_") and task["pvp"]["is_pvp"] and not task["pvp"]["allowed_by_policy"] for task in tasks), None)
+    check("no_dungeon_or_raid_included", not any(task["scope_status"].startswith("include_") and (task["is_dungeon"] or task["is_raid_flagged"]) for task in tasks), sorted(task["quest_id"] for task in tasks if task["scope_status"].startswith("include_") and (task["is_dungeon"] or task["is_raid_flagged"])))
     check("no_unjustified_zero_xp_included", not any(task["scope_status"].startswith("include_") and not task["xp"]["has_xp"] and task["scope_status"] != "include_structural_zero_xp_prerequisite" for task in tasks), sorted(task["quest_id"] for task in tasks if task["scope_status"].startswith("include_") and not task["xp"]["has_xp"]))
     unresolved_variants = []
     for row in variant_audit:
@@ -992,11 +995,11 @@ def main() -> None:
         bad = [
             {"quest_id": qid, "status": tasks_by_id[qid]["scope_status"] if qid in tasks_by_id else "missing"}
             for qid in quest_ids
-            if qid not in tasks_by_id or not tasks_by_id[qid]["scope_status"].startswith("include_")
+            if qid not in tasks_by_id or not (tasks_by_id[qid]["scope_status"].startswith("include_") or tasks_by_id[qid]["scope_status"] == "exclude_dungeon_or_raid")
         ]
         if bad:
             reference_group_failures.append({"group": group_name, "bad": bad})
-    check("video_reference_groups_survive_scope", not reference_group_failures, reference_group_failures)
+    check("video_reference_groups_resolved_or_intentionally_excluded", not reference_group_failures, reference_group_failures)
 
     cluster_by_id = {cluster["cluster_id"]: cluster for cluster in cluster_list}
     expected_shared = {
@@ -1126,8 +1129,8 @@ def main() -> None:
         "",
         "- 复用路线起点按飞艇刚到战歌要塞、未接未做；当前历程只用于服务器版本/现场事实参考。",
         "- 77级前禁止个人飞行；鸟点/飞艇等系统交通仍可使用。",
-        "- 诺森德一次性有经验任务按全清建模；跨地图任务必须进入候选和任务栏容量模型。",
-        "- 无经验任务默认不进入升级路线；若它是后续有经验任务的唯一/强制前置，则保留为结构性前置。",
+        "- 诺森德一次性有经验任务按完整知识候选建模；是否进入正式路线由后续经济边际比较决定。跨地图任务必须进入候选和任务栏容量模型。",
+        "- 无经验任务默认不因经验进入升级候选；若它是后续收益/打金能力的唯一或强制前置，则仍作为结构性前置评估。",
         "- 联盟/非血精灵圣骑任务排除。PvP仅允许普通任务怪击杀；玩家击杀/占点/夺旗等排除。",
         "- 任务栏硬上限25；每个接取记+1，每个交付/自动完成释放-1；22起软警告，后续每次插入必须重放计数器。",
         "- 视频34–39集和旧部落Journey只提供任务邻接/同片区参考，不覆盖我们的前置、Target Cluster、Spatial Instance与任务栏约束。",
@@ -1141,19 +1144,19 @@ def main() -> None:
         f"- 边界引用Scope分布：`{json.dumps(dict(sorted(boundary_counts.items())), ensure_ascii=False)}`。",
         f"- Target Cluster：{len(cluster_list)}个，其中多任务共享实体簇{sum(1 for c in cluster_list if c['shared_by_multiple_tasks'])}个；普通目标为空的纳入任务{len(targetless_included)}个。",
         f"- Questie extraObjectives：纳入任务共{included_extra_count}条特殊机制事实；形成{len(special_anchor_list)}个实体锚点簇和{len(special_coordinate_anchors)}个纯坐标锚点。",
-        f"- 全清可错过约束：{len(availability_constraints)}条。",
+        f"- 候选池可错过/互斥约束：{len(availability_constraints)}条。",
         "",
         "## 3. 对抗式检查",
         "",
     ]
     for row in checks:
         lines.append(f"- {'PASS' if row['ok'] else 'FAIL'} `{row['check']}`：{json.dumps(row['detail'], ensure_ascii=False) if row['detail'] is not None else '无异常'}")
-    lines.extend(["", "## 4. 全清可错过约束与跨图边界", ""])
+    lines.extend(["", "## 4. 候选池可错过/互斥约束与跨图边界", ""])
     for row in availability_constraints:
         peer_text = "、".join(f"`{qid}`《{tasks_by_id[qid]['name']}》" for qid in row["must_accept_before_quest_ids"])
-        lines.append(f"- `{row['quest_id']}`《{row['quest_name']}》必须先接，再让{peer_text}进入任务栏或完成；否则Questie `exclusiveTo` 语义会使前者不可接。")
+        lines.append(f"- 若路线计划完成`{row['quest_id']}`《{row['quest_name']}》，则必须先接，再让{peer_text}进入任务栏或完成；否则Questie `exclusiveTo` 会使前者失去可接资格。是否值得保留该可错过任务由经济边际比较决定。")
     lines.append("- 初次北风自然出图：`11930`《横贯冰原》、`12117`《前往莫亚基港口》；两者接取后会占用任务栏，直到龙骨荒野对应交付点释放。")
-    lines.append("- 后续回北风链：`13242`《黑暗的骚动》需要先完成龙骨荒野`12500`《返回安加萨》，之后回战歌要塞交；再解锁`13257`《战争的使者》并前往奥格瑞玛。这两条保留在全清宇宙，但不插入初次北风清图。")
+    lines.append("- 后续回北风链：`13242`《黑暗的骚动》需要先完成龙骨荒野`12500`《返回安加萨》，之后回战歌要塞交；再解锁`13257`《战争的使者》并前往奥格瑞玛。这两条保留在完整知识候选宇宙，但是否回访由后续经济边际比较决定。")
     relevant_boundary = [row for row in boundary_rows if row["status"] != "boundary_irrelevant_reference"]
     if relevant_boundary:
         lines.append("- 一跳跨图边界引用：")

@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "purpose": "保存同一路线的预测墙钟与实跑墙钟，用于后续批次对比和效率优化。预测记录正常刷新、无竞争、无明显操作失误的clean baseline；实跑记录保留异常/失误，不反向覆盖任务固有成本。",
+  "model": {
+    "name": "component-wall-clock-v1",
+    "formula": "T_total = T_move + T_objective_service + T_accept_turnin + T_wait + T_special",
+    "ground_mount_speed_yards_per_second": 16.8,
+    "combat_baseline_seconds_per_mob": 15,
+    "personal_loot_seconds_per_corpse": 9,
+    "fixed_object_seconds_per_character": 7,
+    "accept_turnin_base_minutes_per_stop": 0.65,
+    "accept_turnin_per_quest_minutes": 0.16,
+    "principles": [
+      "逐任务/逐任务块估时，不按任务数或经验线性外推",
+      "五号个人拾取/点击、刷新等待、护送/脚本、命名怪与跨区交通分别计价",
+      "用户实测机制覆盖默认共享/个人假设",
+      "系统飞行点按任务时点的已开启网络计算",
+      "个人飞行坐骑不参与当前路线排序与估时基线",
+      "副本/团队任务不进入当前五开户外升级主线"
+    ]
+  },
+  "recording_contract": {
+    "time_precision": "每条run可用time_precision标记exact、approximate、journey_derived或mixed；用户只记得大致开始/结束时间时也保留，不伪装成秒级精确值。",
+    "scope": "每条run必须写清实际覆盖的地图/步骤/端点；局部实测不得冒充整图实测。",
+    "comparison": "只有相同端点才直接比较actual与clean baseline；异常/学习成本单列。"
+  },
+  "project_objective": {
+    "primary_metric": "同一种打金方式自身的长期可重复净金币 / 玩家真实墙钟",
+    "current_method": "任务路线打金：一整组号从开始跑任务到任务路线定义终点，统计该任务周期总金币与总墙钟",
+    "separate_methods": ["团本打金", "日常打金"],
+    "constraints": ["低脑力可重复", "低失败/重跑风险", "低随机长尾", "高复用性"],
+    "note": "练级任务金币、装备变现、80级后一次性任务XP折金属于同一任务周期；团本/日常G每小时不得作为单任务删留机会成本。14小时仅是升级速度参考。"
+  },
+  "long_term_targets": [
+    {
+      "id": "northrend_68_80_veteran_fastest",
+      "scope": "诺森德68→80五开升级",
+      "target_minutes": 840,
+      "target_hours": 14,
+      "status": "user_reported_veteran_benchmark",
+      "evidence": "用户转述老手实测：诺森德68级升到80级最快约14小时。",
+      "route_characteristic_inference": "用户当前推测该老手路线几乎不做需要刷怪后拾取任务物品的任务；此项是推测，不当作已确认事实。",
+      "role": "升级速度参考基准；只用于判断纯墙钟维度还有多大压缩空间，不是项目最终目标，也不得单独决定任务删留。"
+    }
+  ],
+  "runs": [
+    {
+      "date": "2026-08-15",
+      "route_key": "nagrand",
+      "run_kind": "first_group_live_scoped",
+      "time_precision": "journey_derived",
+      "effective_start_local": "2026-08-15T04:12:14+08:00",
+      "effective_end_local": "2026-08-15T04:53:40+08:00",
+      "actual_minutes": 41.4333,
+      "route_window": "加拉达尔《支援加拉达尔》交付→Journey记录角色升到68；与当前67→68主路径高度一致，但不冒充从萨布拉金跨图起点开始的完整墙钟。",
+      "actual_contains_learning_or_route_errors": false,
+      "current_route_clean_baseline_minutes": 40.0,
+      "current_route_model_envelope_minutes": [31.6, 48.4],
+      "conditional_step_4_excluded_from_normal_total": true,
+      "status": "reliable_scoped_actual_recorded"
+    },
+    {
+      "date": "2026-08-16/17",
+      "route_key": "borean",
+      "run_kind": "first_group_live",
+      "time_precision": "mixed",
+      "effective_start_local": "2026-08-16T20:15:00+08:00",
+      "effective_end_local": "2026-08-17T01:35:00+08:00",
+      "actual_minutes": 320,
+      "route_window": "第30步中段至第46步完成；第47步仅收尾/转场开始，01:35后的零散接交不计有效跑图墙钟",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "卡斯卡拉后前往牦牛村曾走错方向并顺手开启乌努比飞行点",
+        "塔尔拉玛斯目标楼层、鲜血尖塔二楼等地形信息在本轮实跑中才补齐",
+        "蒸汽熟化鹿皮共享机制原先未知，本轮确认五号分别5/5",
+        "部分交通方案在实跑复审中发现未充分利用当时已开启的系统飞行网络"
+      ],
+      "questie_event_window": {
+        "snapshot_event_count": 1526,
+        "new_events_since_previous_snapshot": 86,
+        "complete_events": 43,
+        "accept_events": 41,
+        "level_up_events": 2
+      },
+      "same_endpoint_comparison": {
+        "endpoint": "第46步《过关斩将》完成",
+        "actual_endpoint_local": "2026-08-17T01:32:51+08:00",
+        "actual_minutes": 317.85,
+        "clean_baseline_minutes": 279.5,
+        "overrun_minutes": 38.35,
+        "overrun_percent": 13.72,
+        "clean_block_estimates_minutes": [
+          {"block": "第30步中段—31：仁德会南线/哈罗德收尾", "minutes": 26.5},
+          {"block": "第32—33步：卡斯卡拉完整链", "minutes": 22.0},
+          {"block": "第34—36步：牦牛村第一轮/补给护送/泵站第一圈", "minutes": 64.0},
+          {"block": "第37—39步：赫米萨/塔尔拉玛斯/Hub交接", "minutes": 24.0},
+          {"block": "第40—42步：泵站第二圈/天灾外衣/腐化土地", "minutes": 84.0},
+          {"block": "第43—46步：号角/恩其拉/纳克萨纳尔收尾", "minutes": 59.0}
+        ],
+        "note": "38.35分钟为同终点总超额；当前无法从Journey精确拆出其中每一项迷路/机制学习/地形搜索/随机刷新占比，后续批次按块记录开始结束时间后再归因。"
+      },
+      "remaining_prediction": {
+        "from_step": 48,
+        "through_step": 68,
+        "center_minutes": 220.1,
+        "model_envelope_minutes": [182.1, 258.7],
+        "source": "data/route-atlas/borean-timing-estimate.json",
+        "dungeon_tasks_included": false
+      },
+      "status": "actual_and_clean_baseline_recorded"
+    },
+    {
+      "date": "2026-08-17",
+      "route_key": "borean",
+      "run_kind": "first_group_live_step_block",
+      "time_precision": "approximate",
+      "effective_start_local": "2026-08-17T16:38:00+08:00",
+      "effective_end_local": "2026-08-17T17:12:00+08:00",
+      "actual_minutes": 34,
+      "route_window": "第48步开始→第51步完成",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "第49步结束后用户出现任务接不上；页面上层任务预览只暴露了被简写的步骤摘要，没有把本段完整接取/交付动作直接展示出来，产生现场判断成本",
+        "第50步需要上法师塔二楼交《苔原上的审讯》，此前步骤摘要没有明确二楼位置"
+      ],
+      "same_endpoint_comparison": {
+        "endpoint": "第51步《营救艾瓦诺尔 → 飞考达拉》完成",
+        "actual_minutes": 34,
+        "clean_baseline_minutes": 29.8,
+        "overrun_minutes": 4.2,
+        "overrun_percent": 14.09,
+        "step_actuals_minutes": [
+          {"step": 48, "actual": 8, "clean_baseline": 6.8, "delta": 1.2},
+          {"step": 49, "actual": 12, "clean_baseline": 7.1, "delta": 4.9, "note": "本段包含任务链交接信息不清导致的现场确认成本，不能直接回写为任务固有耗时"},
+          {"step": 50, "actual": 9, "clean_baseline": 8.2, "delta": 0.8},
+          {"step": 51, "actual": 5, "clean_baseline": 7.7, "delta": -2.7}
+        ]
+      },
+      "remaining_prediction": {
+        "from_step": 52,
+        "through_step": 68,
+        "center_minutes": 190.3,
+        "model_envelope_minutes": [155.9, 225.3],
+        "source": "data/route-atlas/borean-timing-estimate.json",
+        "dungeon_tasks_included": false
+      },
+      "status": "scoped_actual_and_clean_baseline_recorded"
+    },
+    {
+      "date": "2026-08-17",
+      "route_key": "borean",
+      "run_kind": "first_group_live_partial_step_block",
+      "time_precision": "approximate",
+      "effective_start_local": "2026-08-17T17:12:00+08:00",
+      "effective_end_local": "2026-08-17T17:59:00+08:00",
+      "actual_minutes": 47,
+      "route_window": "第52步开始→第53步执行中暂停；不是完成端点",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "《古树的秘密》目标区有其他玩家抢怪，古树击杀明显慢于clean baseline；该竞争等待不得反向覆盖正常刷新/击杀基线"
+      ],
+      "pause_state": {
+        "step": 53,
+        "completed_but_not_turned_in": ["冰冷的草莓", "基本的训练"],
+        "incomplete": [
+          {"quest": "古树的秘密", "status": "仍有3个角色未完成"},
+          {"quest": "监测数据", "status": "还差最后1个监测点"}
+        ]
+      },
+      "clean_baseline_reference_only": {
+        "step_52_minutes": 14.7,
+        "step_53_minutes": 14.1,
+        "combined_if_both_completed_minutes": 28.8,
+        "note": "当前17:59并未完成第53步，因此47分钟不能与28.8分钟做same-endpoint overrun比较；待第53步真正完成后再计算。"
+      },
+      "status": "partial_actual_recorded_waiting_for_endpoint"
+    }
+  ]
+}

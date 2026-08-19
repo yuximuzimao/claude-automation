@@ -1,0 +1,1178 @@
+{
+  "status": "fourth_pass_locked_removal_priority_labels_not_task_card_data",
+  "rule": {
+    "eligible_collection_patterns": [
+      "repeated_same_item",
+      "repeated_plus_distinct"
+    ],
+    "excluded_collection_pattern": "multiple_distinct_one_each",
+    "base": "multi-item drop + no equipment/direct-money value + no valuable in-scope follow-up = P1",
+    "downgrade_one_level_each": [
+      "pickup instead of drop",
+      "current task has equipment or direct-money value",
+      "at least one in-scope downstream task has equipment or direct-money value"
+    ],
+    "within_priority_tier": {
+      "A": "0 valuable downstream tasks; highest removal urgency inside same P",
+      "B": "exactly 1 valuable downstream task",
+      "C": "2 or more valuable downstream tasks; lowest removal urgency inside same P"
+    }
+  },
+  "summary": {
+    "removal_priority_1_count": 0,
+    "removal_priority_2_count": 9,
+    "removal_priority_3_count": 10,
+    "removal_priority_4_count": 2,
+    "removal_priority_pending_count": 0
+  },
+  "candidates": [
+    {
+      "quest_id": 11910,
+      "name": "古树的秘密",
+      "first_route_step": 52,
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "A",
+        "priority_label": "P2A",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_plus_distinct",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 7.15,
+          "basis": "mixed_personal_item_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_A"
+        ]
+      }
+    },
+    {
+      "quest_id": 11914,
+      "name": "保持隐蔽",
+      "first_route_step": 53,
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "A",
+        "priority_label": "P2A",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 5.52,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_A"
+        ]
+      }
+    },
+    {
+      "quest_id": 11931,
+      "name": "破译密码",
+      "first_route_step": 55,
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "A",
+        "priority_label": "P2A",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_plus_distinct",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "unknown",
+          "minutes": null,
+          "basis": "missing_mixed_item_count",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_A"
+        ]
+      }
+    },
+    {
+      "quest_id": 11564,
+      "name": "美味炖鲸肉",
+      "first_route_step": 62,
+      "priority": 2,
+      "within_priority_tier": "A",
+      "priority_label": "P2A",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "A",
+        "priority_label": "P2A",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 7.4,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_A"
+        ]
+      }
+    },
+    {
+      "quest_id": 11655,
+      "name": "深入迷雾",
+      "first_route_step": 8,
+      "priority": 2,
+      "within_priority_tier": "B",
+      "priority_label": "P2B",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "B",
+        "priority_label": "P2B",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 1,
+        "valuable_followup_bucket": "1",
+        "valuable_followups": [
+          {
+            "quest_id": 11656,
+            "name": "烧毁船只",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 8.32,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_B",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11644,
+      "name": "超强度金属板！",
+      "first_route_step": 8,
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "C",
+        "priority_label": "P2C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 2,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11652,
+            "name": "纳萨姆平原",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          12033
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 10.15,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11716,
+      "name": "奇妙的血孢",
+      "first_route_step": 21,
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "C",
+        "priority_label": "P2C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 2,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11722,
+            "name": "迦莫斯的战利品",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          12033
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 10.15,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11717,
+      "name": "授粉的巨蛾",
+      "first_route_step": 22,
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "C",
+        "priority_label": "P2C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 2,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11722,
+            "name": "迦莫斯的战利品",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11916,
+            "name": "地狱咆哮的勇士",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          12033
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 5.52,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11871,
+      "name": "不可容忍",
+      "first_route_step": 30,
+      "priority": 2,
+      "within_priority_tier": "C",
+      "priority_label": "P2C",
+      "screen": {
+        "eligible": true,
+        "priority": 2,
+        "within_priority_tier": "C",
+        "priority_label": "P2C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 2,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11872,
+            "name": "罪恶的蛤蜊主宰……",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 11.95,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_2",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11887,
+      "name": "应急的物资",
+      "first_route_step": 35,
+      "priority": 3,
+      "within_priority_tier": "A",
+      "priority_label": "P3A",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "A",
+        "priority_label": "P3A",
+        "collection_source": "pickup",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 4.08,
+          "basis": "special_service_override",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 1,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_A",
+          "removal:pickup_one_level_lower_than_drop"
+        ]
+      }
+    },
+    {
+      "quest_id": 11906,
+      "name": "净化水池",
+      "first_route_step": 35,
+      "priority": 3,
+      "within_priority_tier": "A",
+      "priority_label": "P3A",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "A",
+        "priority_label": "P3A",
+        "collection_source": "pickup",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": false,
+        "valuable_followup_count": 0,
+        "valuable_followup_bucket": "0",
+        "valuable_followups": [],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 14.63,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 1,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 0,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_A",
+          "removal:pickup_one_level_lower_than_drop"
+        ]
+      }
+    },
+    {
+      "quest_id": 11606,
+      "name": "耐心是我们不需要的美德",
+      "first_route_step": 2,
+      "priority": 3,
+      "within_priority_tier": "B",
+      "priority_label": "P3B",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "B",
+        "priority_label": "P3B",
+        "collection_source": "pickup",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": false,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 1,
+        "valuable_followup_bucket": "1",
+        "valuable_followups": [
+          {
+            "quest_id": 11608,
+            "name": "活埋了那些蟑螂！",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 8.75,
+          "basis": "special_service_override",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 1,
+          "direct_reward_downgrade": 0,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_B",
+          "removal:potential_value_followup",
+          "removal:pickup_one_level_lower_than_drop"
+        ]
+      }
+    },
+    {
+      "quest_id": 11866,
+      "name": "敌人的耳环",
+      "first_route_step": 24,
+      "priority": 3,
+      "within_priority_tier": "B",
+      "priority_label": "P3B",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "B",
+        "priority_label": "P3B",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 1,
+        "valuable_followup_bucket": "1",
+        "valuable_followups": [
+          {
+            "quest_id": 11892,
+            "name": "刺杀哈罗德·兰恩",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 14.63,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_B",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11685,
+      "name": "元素之心",
+      "first_route_step": 35,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 2,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11695,
+            "name": "元素愤怒号角",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11706,
+            "name": "天崩地裂",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 5.52,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11894,
+      "name": "修修补补",
+      "first_route_step": 39,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 9,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11628,
+            "name": "天灾的外衣",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11630,
+            "name": "腐化的土地",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11633,
+            "name": "乔装潜入",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11654,
+            "name": "鲜血尖塔",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11659,
+            "name": "击碎宝珠！",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11647,
+            "name": "中和瘟疫之锅",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11641,
+            "name": "勇猛的进攻",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11640,
+            "name": "力量之语",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11898,
+            "name": "过关斩将",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          11977
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 8.43,
+          "basis": "special_service_override",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11628,
+      "name": "天灾的外衣",
+      "first_route_step": 41,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 8,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11630,
+            "name": "腐化的土地",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11633,
+            "name": "乔装潜入",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11654,
+            "name": "鲜血尖塔",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11659,
+            "name": "击碎宝珠！",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11647,
+            "name": "中和瘟疫之锅",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11641,
+            "name": "勇猛的进攻",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11640,
+            "name": "力量之语",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11898,
+            "name": "过关斩将",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          11977
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 5.52,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11630,
+      "name": "腐化的土地",
+      "first_route_step": 41,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 7,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11633,
+            "name": "乔装潜入",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11654,
+            "name": "鲜血尖塔",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11659,
+            "name": "击碎宝珠！",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11647,
+            "name": "中和瘟疫之锅",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11641,
+            "name": "勇猛的进攻",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11640,
+            "name": "力量之语",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11898,
+            "name": "过关斩将",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [
+          11977
+        ],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 8.32,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11951,
+      "name": "诱饵",
+      "first_route_step": 55,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 3,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11957,
+            "name": "莎拉苟萨的末日",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11967,
+            "name": "集结红龙",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11969,
+            "name": "触动陷阱",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 10.15,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11649,
+      "name": "风暴微粒",
+      "first_route_step": 64,
+      "priority": 3,
+      "within_priority_tier": "C",
+      "priority_label": "P3C",
+      "screen": {
+        "eligible": true,
+        "priority": 3,
+        "within_priority_tier": "C",
+        "priority_label": "P3C",
+        "collection_source": "drop",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 5,
+        "valuable_followup_bucket": "2_plus",
+        "valuable_followups": [
+          {
+            "quest_id": 11631,
+            "name": "空气的幻象",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11639,
+            "name": "向犸格莫斯复仇",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          },
+          {
+            "quest_id": 11635,
+            "name": "先知格雷姆沃克之魂",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11637,
+            "name": "卡加尼舒",
+            "has_equipment_reward": false,
+            "has_direct_money": true
+          },
+          {
+            "quest_id": 11638,
+            "name": "落叶归根",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 5.52,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 0,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_3",
+          "removal:subtier_C",
+          "removal:potential_value_followup"
+        ]
+      }
+    },
+    {
+      "quest_id": 11609,
+      "name": "寻找古器",
+      "first_route_step": 28,
+      "priority": 4,
+      "within_priority_tier": "B",
+      "priority_label": "P4B",
+      "screen": {
+        "eligible": true,
+        "priority": 4,
+        "within_priority_tier": "B",
+        "priority_label": "P4B",
+        "collection_source": "pickup",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 1,
+        "valuable_followup_bucket": "1",
+        "valuable_followups": [
+          {
+            "quest_id": 11610,
+            "name": "先祖的回归",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 6.46,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 1,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_4",
+          "removal:subtier_B",
+          "removal:potential_value_followup",
+          "removal:pickup_one_level_lower_than_drop"
+        ]
+      }
+    },
+    {
+      "quest_id": 11912,
+      "name": "冰冷的草莓",
+      "first_route_step": 52,
+      "priority": 4,
+      "within_priority_tier": "B",
+      "priority_label": "P4B",
+      "screen": {
+        "eligible": true,
+        "priority": 4,
+        "within_priority_tier": "B",
+        "priority_label": "P4B",
+        "collection_source": "pickup",
+        "collection_pattern": "repeated_same_item",
+        "direct_has_equipment_or_money_value": true,
+        "has_valuable_followup": true,
+        "valuable_followup_count": 1,
+        "valuable_followup_bucket": "1",
+        "valuable_followups": [
+          {
+            "quest_id": 11914,
+            "name": "保持隐蔽",
+            "has_equipment_reward": true,
+            "has_direct_money": null
+          }
+        ],
+        "unresolved_descendant_ids": [],
+        "task_timing": {
+          "status": "estimated",
+          "minutes": 10.15,
+          "basis": "fivebox_personal_drop_model",
+          "scope": "intrinsic_task_service_only_excludes_route_movement_and_hub_handling"
+        },
+        "rule_components": {
+          "base_multi_drop_priority": 1,
+          "pickup_downgrade": 1,
+          "direct_reward_downgrade": 1,
+          "valuable_followup_downgrade": 1,
+          "within_priority_sort": "0 valuable followups > 1 valuable followup > 2+ valuable followups"
+        },
+        "tags": [
+          "removal:priority_4",
+          "removal:subtier_B",
+          "removal:potential_value_followup",
+          "removal:pickup_one_level_lower_than_drop"
+        ]
+      }
+    }
+  ]
+}

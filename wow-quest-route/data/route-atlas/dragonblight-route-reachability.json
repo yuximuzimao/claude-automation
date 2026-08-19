@@ -1,0 +1,4989 @@
+{
+  "status": "pre_insertion_reachability_filter",
+  "entry_completed": [
+    11930
+  ],
+  "entry_active": [
+    12117
+  ],
+  "candidate_world_count": 147,
+  "reachable_count": 142,
+  "unreachable_count": 5,
+  "rows": [
+    {
+      "quest_id": 11930,
+      "name": "横贯冰原",
+      "reachable_from_borean_axis": false,
+      "blocking_prereq_ids": [
+        11929
+      ],
+      "blocking_prereq_names": [
+        "牦牛村的陷落"
+      ],
+      "scope_status": "include_cross_map_inbound",
+      "entry_axis_relevance": "active_borean_to_dragonblight_entry",
+      "pre_all": [],
+      "pre_any": [
+        11929
+      ],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          12.75,
+          51.7
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 11958,
+      "name": "不要浪费",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          48.0,
+          74.88
+        ]
+      ],
+      "finish_coords": [
+        [
+          48.0,
+          74.88
+        ]
+      ],
+      "objective_coords": [
+        [
+          45.29,
+          64.62,
+          "飘雪林地掠夺者"
+        ],
+        [
+          46.83,
+          63.95,
+          "飘雪林地狼獾人"
+        ],
+        [
+          45.17,
+          61.97,
+          "飘雪林地雌性狼獾人"
+        ],
+        [
+          45.87,
+          64.49,
+          "飘雪林地萨满祭司"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11959,
+      "name": "消灭洛根",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11958
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          48.0,
+          74.88
+        ]
+      ],
+      "finish_coords": [
+        [
+          48.0,
+          74.88
+        ]
+      ],
+      "objective_coords": [
+        [
+          46.32,
+          59.14,
+          "洛根"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 11977,
+      "name": "牦牛人中的牛头人",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11930
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          12.75,
+          51.7
+        ]
+      ],
+      "finish_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11978,
+      "name": "深入密林",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11977,
+        11979
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "finish_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "objective_coords": [
+        [
+          16.86,
+          49.28,
+          "阿努巴尔伏击者"
+        ],
+        [
+          16.91,
+          48.61,
+          "阿努巴尔恐怖编织者"
+        ],
+        [
+          28.54,
+          49.42,
+          "天灾麋鹿"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11979,
+      "name": "牦牛人和牛头人",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "finish_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11980,
+      "name": "部落的荣耀",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          14.21,
+          49.82
+        ]
+      ],
+      "finish_coords": [
+        [
+          14.21,
+          49.82
+        ]
+      ],
+      "objective_coords": [
+        [
+          16.86,
+          49.28,
+          "阿努巴尔伏击者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11983,
+      "name": "部落的血誓",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11978
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "finish_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "objective_coords": [
+        [
+          13.51,
+          48.85,
+          "牦牛村难民"
+        ],
+        [
+          13.29,
+          48.59,
+          "牦牛村难民"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 11996,
+      "name": "前往阿格玛之锤",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.99,
+          74.76
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 11999,
+      "name": "寻找线索",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12005,
+      "name": "阻碍协议",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11999
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [
+        [
+          18.43,
+          58.89,
+          "商人穆法赫"
+        ],
+        [
+          19.52,
+          58.12,
+          "古拉莫什"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12006,
+      "name": "上层精灵的愤怒",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          24.19,
+          60.08
+        ]
+      ],
+      "finish_coords": [
+        [
+          24.19,
+          60.08
+        ]
+      ],
+      "objective_coords": [
+        [
+          19.7,
+          60.12,
+          "湍流之针巫师"
+        ],
+        [
+          21.66,
+          62.08,
+          "眠月魔犬"
+        ],
+        [
+          54.28,
+          65.87,
+          "魔法焦点巫师"
+        ],
+        [
+          18.81,
+          59.08,
+          "龙骨荒野法师猎手"
+        ],
+        [
+          39.86,
+          65.61,
+          "龙骨荒野法师猎手"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12008,
+      "name": "阿格玛之锤",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11983
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          13.3,
+          49.91
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12009,
+      "name": "图尔凯的螃蟹陷阱",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11959
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "finish_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "objective_coords": [
+        [
+          48.75,
+          79.04,
+          "莫亚基深海鲨鱼"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12011,
+      "name": "大麻烦的征兆",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11959
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.72,
+          79.99
+        ]
+      ],
+      "finish_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12013,
+      "name": "阿坎尼姆斯的终结",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12006
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          24.19,
+          60.08
+        ]
+      ],
+      "finish_coords": [
+        [
+          24.19,
+          60.08
+        ]
+      ],
+      "objective_coords": [
+        [
+          20.02,
+          59.64,
+          "阿坎尼姆斯"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12016,
+      "name": "诱饵",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12011
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "finish_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "objective_coords": [
+        [
+          41.96,
+          79.9,
+          "基利瓦"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12017,
+      "name": "鱼钩上的肉",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12016
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "finish_coords": [
+        [
+          47.99,
+          76.11
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12028,
+      "name": "灵魂视界",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11959
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          49.14,
+          75.65
+        ]
+      ],
+      "finish_coords": [
+        [
+          49.14,
+          75.65
+        ]
+      ],
+      "objective_coords": [
+        [
+          48.94,
+          75.75,
+          "Toalu'u's Brazier"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12030,
+      "name": "长者玛纳洛",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12028
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          49.14,
+          75.65
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.64,
+          64.96
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12031,
+      "name": "解脱和安息",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12030
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.64,
+          64.96
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.64,
+          64.96
+        ]
+      ],
+      "objective_coords": [
+        [
+          38.13,
+          67.08,
+          "因度雷秘法师"
+        ],
+        [
+          38.81,
+          65.79,
+          "因度雷战士"
+        ],
+        [
+          39.69,
+          67.58,
+          "因度雷渔夫"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12032,
+      "name": "海洋女神",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12031
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.64,
+          64.96
+        ]
+      ],
+      "finish_coords": [
+        [
+          49.14,
+          75.65
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12033,
+      "name": "萨鲁法尔的信",
+      "reachable_from_borean_axis": false,
+      "blocking_prereq_ids": [
+        11916
+      ],
+      "blocking_prereq_names": [
+        "地狱咆哮的勇士"
+      ],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11916
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.32,
+          46.79
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.32,
+          46.79
+        ]
+      ],
+      "objective_coords": [
+        [
+          37.36,
+          46.67,
+          "Burning Brazier"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12034,
+      "name": "胜利将近……",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12008
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12036,
+      "name": "艾卓-尼鲁布的深渊",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12034
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12039,
+      "name": "尤格-萨隆的黑血",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12034
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.61,
+          47.19
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.61,
+          47.19
+        ]
+      ],
+      "objective_coords": [
+        [
+          26.99,
+          49.25,
+          "Black Blood of Yogg-Saron"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12040,
+      "name": "阿尔萨斯的死敌",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          26.18,
+          50.78
+        ]
+      ],
+      "finish_coords": [
+        [
+          26.18,
+          50.78
+        ]
+      ],
+      "objective_coords": [
+        [
+          26.78,
+          49.07,
+          "阿努巴尔蛛魔领主"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12041,
+      "name": "失落的帝国",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12040
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          26.18,
+          50.78
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12043,
+      "name": "诺兹拉斯的防御",
+      "reachable_from_borean_axis": false,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [],
+      "objective_coords": [
+        [
+          54.12,
+          30.63,
+          "废土工头"
+        ],
+        [
+          56.02,
+          31.25,
+          "废土挖掘者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12044,
+      "name": "囤积矿石",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "finish_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "objective_coords": [
+        [
+          56.02,
+          31.25,
+          "废土挖掘者"
+        ],
+        [
+          54.12,
+          30.63,
+          "废土工头"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12045,
+      "name": "刨冰",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "finish_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "objective_coords": [
+        [
+          51.28,
+          18.2,
+          "水晶冰雪元素"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12046,
+      "name": "柔软的包装",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12045
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "finish_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "objective_coords": [
+        [
+          51.6,
+          23.92,
+          "掘洞冰虫"
+        ],
+        [
+          52.6,
+          49.4,
+          "龙骨秃鹫"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12047,
+      "name": "不会融化的东西",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12046
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "finish_coords": [
+        [
+          54.7,
+          23.25
+        ]
+      ],
+      "objective_coords": [
+        [
+          59.78,
+          26.64,
+          "Splintered Bone Chunk"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12048,
+      "name": "天灾的装备",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12039
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.61,
+          47.19
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.61,
+          47.19
+        ]
+      ],
+      "objective_coords": [
+        [
+          25.03,
+          40.39,
+          "阿努巴尔教徒"
+        ],
+        [
+          24.58,
+          41.36,
+          "阿努巴尔杀戮者"
+        ],
+        [
+          24.94,
+          43.92,
+          "操纵者安诺科拉"
+        ],
+        [
+          25.32,
+          39.08,
+          "击碎者提瓦克斯"
+        ],
+        [
+          25.7,
+          44.19,
+          "影怒者西诺克"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12049,
+      "name": "难以下咽",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12046
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "finish_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "objective_coords": [
+        [
+          60.06,
+          22.3,
+          "巨大的冰虫"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12050,
+      "name": "抢木材",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12046,
+        12047
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "finish_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12052,
+      "name": "该死的鹰身人！",
+      "reachable_from_borean_axis": false,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12046,
+        12047
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [],
+      "objective_coords": [
+        [
+          45.59,
+          9.33,
+          "冷风女王"
+        ],
+        [
+          49.86,
+          18.21,
+          "冷风废土猎手"
+        ],
+        [
+          49.96,
+          17.13,
+          "冷风女巫"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12053,
+      "name": "部落的力量",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12036
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12056,
+      "name": "死亡名单：高阶教徒扎古斯",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12034
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [
+        [
+          28.88,
+          49.73,
+          "高阶教徒扎古斯"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12057,
+      "name": "血之魔典",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12059,
+      "name": "奇怪的设备",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        11999
+      ],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12061,
+      "name": "投影和计划",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12059
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [
+        [
+          19.78,
+          59.79,
+          "Projections and Plans Kill Credit Bunny"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12063,
+      "name": "冰雾的力量",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12036
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.81,
+          46.94
+        ]
+      ],
+      "finish_coords": [
+        [
+          22.6,
+          41.73
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12064,
+      "name": "阿努巴尔的束缚",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12063
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          22.6,
+          41.73
+        ]
+      ],
+      "finish_coords": [
+        [
+          22.6,
+          41.73
+        ]
+      ],
+      "objective_coords": [
+        [
+          24.94,
+          43.92,
+          "操纵者安诺科拉"
+        ],
+        [
+          25.32,
+          39.08,
+          "击碎者提瓦克斯"
+        ],
+        [
+          25.7,
+          44.19,
+          "影怒者西诺克"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12066,
+      "name": "海岸上的魔法焦点",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12061
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12069,
+      "name": "大酋长归来",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12064
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          22.6,
+          41.73
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12071,
+      "name": "空中打击！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12053
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.21,
+          45.71
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12072,
+      "name": "该死的荒芜兽！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12071
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.21,
+          45.71
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.21,
+          45.71
+        ]
+      ],
+      "objective_coords": [
+        [
+          25.27,
+          43.7,
+          "阿努巴尔荒芜兽"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12075,
+      "name": "采集样本",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12076,
+      "name": "恶心的生意",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12075
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12077,
+      "name": "主动示好",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12076
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "finish_coords": [
+        [
+          58.98,
+          17.8
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12078,
+      "name": "抓虫子",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12077
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12079,
+      "name": "践踏大地",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12075
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          58.98,
+          17.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          58.98,
+          17.8
+        ]
+      ],
+      "objective_coords": [
+        [
+          53.64,
+          16.82,
+          "冷心冰虫喂食者"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12080,
+      "name": "冰虫之母",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12076
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          58.98,
+          17.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          58.98,
+          17.8
+        ]
+      ],
+      "objective_coords": [
+        [
+          50.59,
+          17.96,
+          "钻雪虫"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12084,
+      "name": "森林上空",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12066
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12085,
+      "name": "一封家书",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12089,
+      "name": "通缉：魔导师凯尔多努斯",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.68,
+          46.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [
+        [
+          21.09,
+          64.02,
+          "魔导师凯尔多努斯"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12090,
+      "name": "通缉：吉加托尔",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.68,
+          46.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [
+        [
+          47.2,
+          58.04,
+          "吉加托尔"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12091,
+      "name": "通缉：恐怖之爪",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.68,
+          46.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [
+        [
+          46.29,
+          43.03,
+          "恐怖之爪"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12095,
+      "name": "前往猎龙营地",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12089,
+        12090,
+        12091
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "finish_coords": [
+        [
+          47.19,
+          33.03
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12096,
+      "name": "强化古树",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12066
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.51,
+          47.87
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.51,
+          47.87
+        ]
+      ],
+      "objective_coords": [
+        [
+          32.53,
+          67.62,
+          "罗萨洛尔古树"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12097,
+      "name": "萨拉斯塔，北地的灾祸",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12095
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          47.19,
+          33.03
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [
+        [
+          51.08,
+          32.75,
+          "萨拉斯塔"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12100,
+      "name": "腐烂的器官",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12034
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "objective_coords": [
+        [
+          28.54,
+          49.42,
+          "天灾麋鹿"
+        ],
+        [
+          82.92,
+          49.15,
+          "狂暴灰熊"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12101,
+      "name": "好医生……",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12100
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.08,
+          48.88
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12102,
+      "name": "红玉丁香",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12101
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.08,
+          48.88
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.08,
+          48.88
+        ]
+      ],
+      "objective_coords": [
+        [
+          47.64,
+          48.97,
+          "达莉亚"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12104,
+      "name": "返回索艾身边",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12102
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.08,
+          48.88
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12106,
+      "name": "搜索因度雷村",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12084
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          40.25,
+          66.87
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12110,
+      "name": "魔网能量线的终端",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12106
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          40.25,
+          66.87
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "objective_coords": [
+        [
+          53.08,
+          64.83,
+          "The End of the Line Area Trigger Kill Credit Bunny"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12111,
+      "name": "野生动物的疫苗",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12104
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.08,
+          48.55
+        ]
+      ],
+      "objective_coords": [
+        [
+          46.44,
+          52.55,
+          "雪落麋鹿"
+        ],
+        [
+          44.55,
+          51.94,
+          "极地灰熊"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12112,
+      "name": "艰难的沟通",
+      "reachable_from_borean_axis": false,
+      "blocking_prereq_ids": [
+        12052
+      ],
+      "blocking_prereq_names": [
+        "该死的鹰身人！"
+      ],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12050,
+        12052
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          59.4,
+          18.18
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12115,
+      "name": "库尔迪拉和亡者之语",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12057
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12117,
+      "name": "前往莫亚基港口",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [
+        "情势扭转"
+      ],
+      "scope_status": "include_cross_map_inbound",
+      "entry_axis_relevance": "active_borean_inbound_to_moaki",
+      "pre_all": [],
+      "pre_any": [
+        11968
+      ],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          48.0,
+          74.88
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12122,
+      "name": "拜见巨龙女王",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12110
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ]
+      ],
+      "finish_coords": [
+        [
+          57.91,
+          54.17
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12124,
+      "name": "通知女王",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12769
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          57.91,
+          54.17
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12125,
+      "name": "邪能之约",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12115
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "objective_coords": [
+        [
+          39.18,
+          67.66,
+          "疯狂的因度雷村民"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12126,
+      "name": "邪恶之约",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12115
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "objective_coords": [
+        [
+          47.44,
+          51.82,
+          "瓦伦哈尔公爵"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12127,
+      "name": "冰霜之约",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12115
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "objective_coords": [
+        [
+          67.37,
+          53.29,
+          "冰雪亡魂"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12132,
+      "name": "毁灭的力量",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12125,
+        12126,
+        12127
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "finish_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "objective_coords": [
+        [
+          37.39,
+          46.51,
+          "暗影折磨者"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12136,
+      "name": "翻译过的魔典",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12132
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          37.11,
+          46.57
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.81,
+          48.39
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12140,
+      "name": "洛纳乌克万岁！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12069
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "finish_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "objective_coords": [
+        [
+          36.25,
+          45.44,
+          "洛纳乌克·冰雾"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12144,
+      "name": "害虫控制",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_cross_map",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          46.68,
+          33.5
+        ]
+      ],
+      "finish_coords": [
+        [
+          46.68,
+          33.5
+        ]
+      ],
+      "objective_coords": [
+        [
+          64.75,
+          50.42,
+          "冰原狂战士"
+        ],
+        [
+          64.67,
+          49.3,
+          "冰原萨满祭司"
+        ],
+        [
+          63.21,
+          46.38,
+          "冰原徒工"
+        ],
+        [
+          63.85,
+          47.57,
+          "猛犸人族长"
+        ],
+        [
+          64.0,
+          47.33,
+          "猛犸人幼体"
+        ],
+        [
+          47.2,
+          58.04,
+          "吉加托尔"
+        ],
+        [
+          42.41,
+          39.63,
+          "冰拳"
+        ],
+        [
+          72.49,
+          29.25,
+          "寒齿"
+        ],
+        [
+          51.27,
+          59.63,
+          "裂骨者"
+        ],
+        [
+          66.17,
+          51.41,
+          "破冰者"
+        ],
+        [
+          66.28,
+          70.77,
+          "食血者"
+        ],
+        [
+          67.62,
+          38.47,
+          "德拉古尔"
+        ],
+        [
+          63.1,
+          46.52,
+          "猛犸人突击者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12145,
+      "name": "峡谷追击",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12144
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          46.68,
+          33.5
+        ]
+      ],
+      "finish_coords": [
+        [
+          46.68,
+          33.5
+        ]
+      ],
+      "objective_coords": [
+        [
+          42.41,
+          39.63,
+          "冰拳"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12147,
+      "name": "古怪的暗示",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12148,
+      "name": "集结的信号",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12146,
+        12147
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "objective_coords": [
+        [
+          51.27,
+          59.63,
+          "裂骨者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12149,
+      "name": "强大的猛犸人",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12148
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "objective_coords": [
+        [
+          66.17,
+          51.41,
+          "破冰者"
+        ],
+        [
+          66.28,
+          70.77,
+          "食血者"
+        ],
+        [
+          67.62,
+          38.47,
+          "德拉古尔"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12150,
+      "name": "隐居的铭语师",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12149
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.76,
+          49.68,
+          "德雷格玛尔·符印"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12151,
+      "name": "暴虐的酋长",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12150
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.02,
+          55.2
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12188,
+      "name": "凋零药剂与你：如何自保",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "objective_coords": [
+        [
+          82.3,
+          69.68,
+          "被遗忘的上尉"
+        ],
+        [
+          79.64,
+          69.05,
+          "被遗忘的骑士"
+        ],
+        [
+          81.13,
+          68.95,
+          "被遗忘的火枪手"
+        ],
+        [
+          83.8,
+          70.59,
+          "被遗忘的农夫"
+        ],
+        [
+          83.62,
+          71.74,
+          "被遗忘的步兵"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12200,
+      "name": "翡翠龙泪",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12188
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "objective_coords": [
+        [
+          63.22,
+          72.94,
+          "翡翠鞭笞者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12205,
+      "name": "通缉：血色先锋军",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.96,
+          62.86
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.12,
+          74.28,
+          "先锋军黑鸦祭司"
+        ],
+        [
+          68.44,
+          74.35,
+          "先锋军工匠"
+        ],
+        [
+          71.58,
+          72.07,
+          "先锋军刽子手"
+        ],
+        [
+          71.86,
+          84.0,
+          "舍雷船长"
+        ],
+        [
+          71.73,
+          82.75,
+          "先锋军水手"
+        ],
+        [
+          70.62,
+          70.49,
+          "铁匠古德曼"
+        ],
+        [
+          73.26,
+          77.63,
+          "炮兵队长泽尔哈特"
+        ],
+        [
+          67.99,
+          75.67,
+          "兽栏管理员默希尔"
+        ],
+        [
+          69.66,
+          71.78,
+          "指挥官乔丹"
+        ],
+        [
+          73.51,
+          74.29,
+          "高阶修士兰德雷"
+        ],
+        [
+          69.2,
+          76.69,
+          "斯崔特主教"
+        ],
+        [
+          73.47,
+          74.28,
+          "虔诚的保镖"
+        ],
+        [
+          70.89,
+          74.19,
+          "先锋军步兵"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12206,
+      "name": "测试药剂",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "objective_coords": [
+        [
+          77.04,
+          63.04,
+          "血色先锋军士兵"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12209,
+      "name": "夺取装备",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          75.97,
+          63.26
+        ]
+      ],
+      "finish_coords": [
+        [
+          75.97,
+          63.26
+        ]
+      ],
+      "objective_coords": [
+        [
+          70.89,
+          74.19,
+          "先锋军步兵"
+        ],
+        [
+          68.44,
+          74.35,
+          "先锋军工匠"
+        ],
+        [
+          70.62,
+          70.49,
+          "铁匠古德曼"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12211,
+      "name": "确保他们不再站起来！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12206
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.12,
+          74.28,
+          "先锋军黑鸦祭司"
+        ],
+        [
+          70.89,
+          74.19,
+          "先锋军步兵"
+        ],
+        [
+          68.44,
+          74.35,
+          "先锋军工匠"
+        ],
+        [
+          69.8,
+          72.0,
+          "拷问者阿方斯"
+        ],
+        [
+          71.1,
+          77.88,
+          "阿比迪斯将军"
+        ],
+        [
+          71.58,
+          72.07,
+          "先锋军刽子手"
+        ],
+        [
+          71.86,
+          84.0,
+          "舍雷船长"
+        ],
+        [
+          71.73,
+          82.75,
+          "先锋军水手"
+        ],
+        [
+          70.62,
+          70.49,
+          "铁匠古德曼"
+        ],
+        [
+          73.26,
+          77.63,
+          "炮兵队长泽尔哈特"
+        ],
+        [
+          67.99,
+          75.67,
+          "兽栏管理员默希尔"
+        ],
+        [
+          69.66,
+          71.78,
+          "指挥官乔丹"
+        ],
+        [
+          69.2,
+          76.69,
+          "斯崔特主教"
+        ],
+        [
+          73.47,
+          74.28,
+          "虔诚的保镖"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12214,
+      "name": "补充坐骑",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12209
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          75.93,
+          61.88
+        ]
+      ],
+      "finish_coords": [
+        [
+          75.93,
+          61.88
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.3,
+          74.44,
+          "血色先锋军战马"
+        ],
+        [
+          75.93,
+          61.88,
+          "汉瑟·鲍尔"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12218,
+      "name": "传达好消息",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12200
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "objective_coords": [
+        [
+          85.21,
+          55.36,
+          "饥饿的死者"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12221,
+      "name": "被遗忘者的凋零药剂",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12218
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.67,
+          62.8
+        ]
+      ],
+      "finish_coords": [
+        [
+          36.08,
+          48.88
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12224,
+      "name": "库卡隆先锋！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [
+        12221,
+        12140,
+        12072
+      ],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.17,
+          46.33
+        ]
+      ],
+      "finish_coords": [
+        [
+          40.71,
+          18.06
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12230,
+      "name": "收取炸弹",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12211
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.8,
+          62.42
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.8,
+          62.42
+        ]
+      ],
+      "objective_coords": [
+        [
+          88.23,
+          50.64,
+          "恐骨入侵者"
+        ],
+        [
+          85.25,
+          48.9,
+          "天灾攻城锻造师"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12232,
+      "name": "炸毁弩炮",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12230
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.8,
+          62.42
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.8,
+          62.42
+        ]
+      ],
+      "objective_coords": [
+        [
+          71.21,
+          74.77,
+          "New Hearthglen Ballista"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12234,
+      "name": "日常计划",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12230
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.73,
+          63.03
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.73,
+          63.03
+        ]
+      ],
+      "objective_coords": [
+        [
+          73.42,
+          72.63,
+          "Scarlet Onslaught Daily Orders: Abbey"
+        ],
+        [
+          69.72,
+          71.89,
+          "Scarlet Onslaught Daily Orders: Barracks"
+        ],
+        [
+          71.6,
+          80.42,
+          "Scarlet Onslaught Daily Orders: Beach"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12239,
+      "name": "新壁炉谷的卧底",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12234
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.73,
+          63.03
+        ]
+      ],
+      "finish_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12240,
+      "name": "解决方案",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12230
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12243,
+      "name": "水火之灾",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12240
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "finish_coords": [
+        [
+          77.0,
+          62.92
+        ]
+      ],
+      "objective_coords": [
+        [
+          71.86,
+          84.0,
+          "舍雷船长"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12245,
+      "name": "毫不留情",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12205
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.73,
+          63.03
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          71.4,
+          72.18,
+          "亡灵卫兵斯克尼德"
+        ],
+        [
+          69.37,
+          73.96,
+          "首席抄写员基尼迪乌斯"
+        ],
+        [
+          72.72,
+          74.33,
+          "工程师布尔克"
+        ],
+        [
+          72.63,
+          72.58,
+          "司法官亚麦"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12252,
+      "name": "拷问者里克拉夫",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12245
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          69.8,
+          72.0,
+          "拷问者阿方斯"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12254,
+      "name": "祈祷之书",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12239
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "finish_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "objective_coords": [
+        [
+          69.2,
+          76.69,
+          "斯崔特主教"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12260,
+      "name": "完美的伪装",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12254
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "finish_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.12,
+          74.28,
+          "先锋军黑鸦祭司"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12261,
+      "name": "无路可逃",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12447
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12262,
+      "name": "驱逐天灾",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12447
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [
+        [
+          37.33,
+          31.27,
+          "燃烧深渊通灵侍僧"
+        ],
+        [
+          38.86,
+          32.05,
+          "冒烟的骷髅"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12263,
+      "name": "敌人的意图",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12261
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12264,
+      "name": "扫荡诅咒教派",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12263
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [
+        [
+          33.31,
+          28.48,
+          "燃烧深渊通灵师"
+        ],
+        [
+          32.52,
+          29.09,
+          "冒烟的构造体"
+        ],
+        [
+          32.75,
+          28.58,
+          "冒烟的恶鬼"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12265,
+      "name": "污染的能量",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12263
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [
+        [
+          32.87,
+          29.22,
+          "Necromantic Rune"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12266,
+      "name": "毁灭的故事",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12267
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.07,
+          54.2
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12267,
+      "name": "奈萨里奥的烈焰",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12265
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [
+        [
+          30.65,
+          33.1,
+          "Neltharion's Flame Control Bunny"
+        ],
+        [
+          31.41,
+          31.01,
+          "腐烂者洛森"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12271,
+      "name": "强制魔棒",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12245
+      ],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12273,
+      "name": "谴责",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12271
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          69.66,
+          71.78,
+          "指挥官乔丹"
+        ],
+        [
+          73.26,
+          77.63,
+          "炮兵队长泽尔哈特"
+        ],
+        [
+          70.62,
+          70.49,
+          "铁匠古德曼"
+        ],
+        [
+          67.99,
+          75.67,
+          "兽栏管理员默希尔"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12274,
+      "name": "狼狈不堪",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12260
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "finish_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "objective_coords": [
+        [
+          72.9,
+          73.48,
+          "Abbey Bell Rope"
+        ],
+        [
+          73.51,
+          74.29,
+          "高阶修士兰德雷"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12283,
+      "name": "寻找真相",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12274
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          73.58,
+          73.54
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          68.28,
+          76.98,
+          "The Diary of High General Abbendis"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12285,
+      "name": "先发制人",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12283
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [
+        [
+          71.1,
+          77.88,
+          "阿比迪斯将军"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12303,
+      "name": "战争的开销",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          75.97,
+          63.26
+        ]
+      ],
+      "finish_coords": [
+        [
+          75.97,
+          63.26
+        ]
+      ],
+      "objective_coords": [
+        [
+          83.8,
+          70.59,
+          "被遗忘的农夫"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12304,
+      "name": "海边的地产",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          79.35,
+          65.06
+        ]
+      ],
+      "finish_coords": [
+        [
+          79.35,
+          65.06
+        ]
+      ],
+      "objective_coords": [
+        [
+          79.64,
+          69.05,
+          "被遗忘的骑士"
+        ],
+        [
+          81.13,
+          68.95,
+          "被遗忘的火枪手"
+        ],
+        [
+          83.8,
+          70.59,
+          "被遗忘的农夫"
+        ],
+        [
+          83.62,
+          71.74,
+          "被遗忘的步兵"
+        ],
+        [
+          82.3,
+          69.68,
+          "被遗忘的上尉"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12419,
+      "name": "红玉巨龙圣地的命运",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [],
+      "finish_coords": [
+        [
+          59.79,
+          54.7
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12435,
+      "name": "向德弗雷斯塔兹领主报到",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12123,
+        12124
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.32,
+          54.31
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12447,
+      "name": "黑曜石巨龙圣地",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.07,
+          54.2
+        ]
+      ],
+      "finish_coords": [
+        [
+          35.21,
+          30.05
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12448,
+      "name": "白热化的战斗",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12461
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "finish_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "objective_coords": [
+        [
+          48.86,
+          50.25,
+          "进攻的冰冷憎恶"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12449,
+      "name": "重归尘土",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12448
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "finish_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "objective_coords": [
+        [
+          47.45,
+          47.1,
+          "红玉看守者"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12450,
+      "name": "烈焰之地",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12449
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "finish_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "objective_coords": [
+        [
+          47.21,
+          48.36,
+          "冰冷通灵师"
+        ],
+        [
+          47.64,
+          48.97,
+          "达莉亚"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12454,
+      "name": "生命的循环",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          65.04,
+          73.47
+        ]
+      ],
+      "finish_coords": [
+        [
+          65.04,
+          73.47
+        ]
+      ],
+      "objective_coords": [
+        [
+          63.93,
+          73.28,
+          "翡翠天爪枭"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12456,
+      "name": "奥雷托斯的羽毛",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12454
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          65.04,
+          73.47
+        ]
+      ],
+      "finish_coords": [
+        [
+          65.04,
+          73.47
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12458,
+      "name": "鞭笞者的种子",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.58,
+          54.43
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.58,
+          54.43
+        ]
+      ],
+      "objective_coords": [
+        [
+          63.22,
+          72.94,
+          "翡翠鞭笞者"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12459,
+      "name": "创造与毁灭的力量",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12458
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.58,
+          54.43
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.58,
+          54.43
+        ]
+      ],
+      "objective_coords": [
+        [
+          55.2,
+          34.75,
+          "复活的冰霜巨龙"
+        ],
+        [
+          86.15,
+          46.95,
+          "卑鄙的图尔基德"
+        ],
+        [
+          89.53,
+          19.08,
+          "监工戴瑟盖斯"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12461,
+      "name": "前往红玉巨龙圣地",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12767
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          58.1,
+          55.51
+        ]
+      ],
+      "finish_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12469,
+      "name": "退回发件人",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          48.46,
+          24.13
+        ]
+      ],
+      "finish_coords": [
+        [
+          55.02,
+          23.42
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12470,
+      "name": "永恒之龙的秘密",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          60.0,
+          54.51
+        ]
+      ],
+      "finish_coords": [
+        [
+          60.0,
+          54.51
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12487,
+      "name": "前往征服堡，自求多福吧！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_cross_map_outbound",
+      "entry_axis_relevance": "dragonblight_outbound_to_grizzly_hills_candidate_only",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "finish_coords": [],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12488,
+      "name": "高级执行官需要你",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          36.62,
+          46.58
+        ]
+      ],
+      "finish_coords": [
+        [
+          76.77,
+          63.28
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12496,
+      "name": "巨龙女王的指引",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12224
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          40.71,
+          18.06
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12497,
+      "name": "迦拉克隆与天灾军团",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_structural_zero_xp_prerequisite",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12495,
+        12496
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.51,
+          53.33
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12498,
+      "name": "红龙之翼",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12497
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.51,
+          53.33
+        ]
+      ],
+      "finish_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "objective_coords": [
+        [
+          55.78,
+          34.43,
+          "废土挖掘者"
+        ]
+      ],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12500,
+      "name": "返回安加萨",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12498
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          59.83,
+          54.66
+        ]
+      ],
+      "finish_coords": [
+        [
+          40.71,
+          18.06
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12542,
+      "name": "北伐军的召唤",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          87.24,
+          57.4
+        ]
+      ],
+      "finish_coords": [
+        [
+          83.98,
+          26.1
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12545,
+      "name": "净化金萨卡拉",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          83.98,
+          26.1
+        ]
+      ],
+      "finish_coords": [
+        [
+          83.98,
+          26.1
+        ]
+      ],
+      "objective_coords": [
+        [
+          87.73,
+          20.22,
+          "衰弱的通灵师"
+        ],
+        [
+          86.89,
+          20.95,
+          "崩溃的达卡莱狂暴者"
+        ],
+        [
+          89.05,
+          26.23,
+          "复活的达卡莱部族成员"
+        ],
+        [
+          88.09,
+          21.59,
+          "笨重的暴徒"
+        ],
+        [
+          89.01,
+          25.49,
+          "被折磨的达卡莱巨魔"
+        ]
+      ],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12767,
+      "name": "与你们的大使相谈",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12122
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          57.91,
+          54.17
+        ]
+      ],
+      "finish_coords": [
+        [
+          58.1,
+          55.51
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12769,
+      "name": "龙眠神殿的执事",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_leveling_local",
+      "entry_axis_relevance": "current_axis_or_local",
+      "pre_all": [],
+      "pre_any": [
+        12450
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          42.97,
+          50.89
+        ]
+      ],
+      "finish_coords": [
+        [
+          57.91,
+          54.17
+        ]
+      ],
+      "objective_coords": [],
+      "note_decision": "must_note"
+    },
+    {
+      "quest_id": 12789,
+      "name": "前往圣光据点！",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_cross_map_outbound",
+      "entry_axis_relevance": "dragonblight_outbound_to_zuldrak_candidate_only",
+      "pre_all": [],
+      "pre_any": [
+        12545
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          83.98,
+          26.1
+        ]
+      ],
+      "finish_coords": [],
+      "objective_coords": [],
+      "note_decision": "reviewed_no_extra_note"
+    },
+    {
+      "quest_id": 12791,
+      "name": "魔法王国达拉然",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_cross_map_outbound",
+      "entry_axis_relevance": "outbound_to_dalaran_transport_candidate_only",
+      "pre_all": [],
+      "pre_any": [],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.05,
+          46.22
+        ],
+        [
+          76.84,
+          63.23
+        ]
+      ],
+      "finish_coords": [],
+      "objective_coords": [],
+      "note_decision": "review_before_route"
+    },
+    {
+      "quest_id": 13242,
+      "name": "黑暗的骚动",
+      "reachable_from_borean_axis": true,
+      "blocking_prereq_ids": [],
+      "blocking_prereq_names": [],
+      "scope_status": "include_cross_map_outbound",
+      "entry_axis_relevance": "post_wrathgate_return_to_borean_candidate_only",
+      "pre_all": [],
+      "pre_any": [
+        12500
+      ],
+      "parent_active": [],
+      "start_coords": [
+        [
+          38.42,
+          19.25
+        ]
+      ],
+      "finish_coords": [],
+      "objective_coords": [
+        [
+          38.16,
+          18.71,
+          "Saurfang's Battle Armor"
+        ]
+      ],
+      "note_decision": "must_note"
+    }
+  ]
+}

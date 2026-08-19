@@ -1,0 +1,1515 @@
+{
+  "status": "amber_ledge_to_bogorok_forced_ground_corridor_audit",
+  "route_key": "borean",
+  "segment": {
+    "from_point": 169,
+    "from_label": "系统鸟点：考达拉 → 琥珀崖",
+    "from": {
+      "x": 45.2,
+      "y": 33.35
+    },
+    "to_point": 170,
+    "to_label": "博古洛克前哨站·斯纳尔芬",
+    "to": {
+      "x": 50.28,
+      "y": 9.72
+    },
+    "buffer_map_percent": 6.0,
+    "endpoint_radius_map_percent": 3.0
+  },
+  "interpretation": "Quest-giver/object starts near the straight route edge are screened. Bogorok endpoint tasks are separated from true in-between opportunities; tasks already routed before this segment are not new pickups.",
+  "interior_candidates": [
+    {
+      "quest_id": 11587,
+      "name": "越狱",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25262,
+        "entity_name": "图书馆员多纳森",
+        "x": 45.27,
+        "y": 33.35
+      },
+      "distance_to_direct_corridor": 0.07,
+      "distance_to_bogorok_endpoint": 24.16,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 135,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11590,
+      "name": "调查",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25262,
+        "entity_name": "图书馆员多纳森",
+        "x": 45.27,
+        "y": 33.35
+      },
+      "distance_to_direct_corridor": 0.07,
+      "distance_to_bogorok_endpoint": 24.16,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 138,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11587,
+            "name": "越狱",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11646,
+      "name": "苔原上的审讯",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25262,
+        "entity_name": "图书馆员多纳森",
+        "x": 45.27,
+        "y": 33.35
+      },
+      "distance_to_direct_corridor": 0.07,
+      "distance_to_bogorok_endpoint": 24.16,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 141,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11590,
+            "name": "调查",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11671,
+      "name": "与时间赛跑",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25262,
+        "entity_name": "图书馆员多纳森",
+        "x": 45.27,
+        "y": 33.35
+      },
+      "distance_to_direct_corridor": 0.07,
+      "distance_to_bogorok_endpoint": 24.16,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 142,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11663,
+            "name": "分享情报",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11679,
+      "name": "重铸钥匙",
+      "scope_status": "include_structural_zero_xp_prerequisite",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25262,
+        "entity_name": "图书馆员多纳森",
+        "x": 45.27,
+        "y": 33.35
+      },
+      "distance_to_direct_corridor": 0.07,
+      "distance_to_bogorok_endpoint": 24.16,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 144,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11671,
+            "name": "与时间赛跑",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11592,
+      "name": "攻击！",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25335,
+        "entity_name": "远行者达玛·傲蹄",
+        "x": 48.32,
+        "y": 19.76
+      },
+      "distance_to_direct_corridor": 0.19,
+      "distance_to_bogorok_endpoint": 10.23,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11576,
+      "name": "监视裂谷：悬崖异常",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25291,
+        "entity_name": "图书馆员盖伦",
+        "x": 44.98,
+        "y": 33.38
+      },
+      "distance_to_direct_corridor": 0.22,
+      "distance_to_bogorok_endpoint": 24.25,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 135,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11582,
+      "name": "监视裂谷：峭壁断层",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25291,
+        "entity_name": "图书馆员盖伦",
+        "x": 44.98,
+        "y": 33.38
+      },
+      "distance_to_direct_corridor": 0.22,
+      "distance_to_bogorok_endpoint": 24.25,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 138,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11576,
+            "name": "监视裂谷：悬崖异常",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 12728,
+      "name": "监视裂谷：冬鳞洞穴",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25291,
+        "entity_name": "图书馆员盖伦",
+        "x": 44.98,
+        "y": 33.38
+      },
+      "distance_to_direct_corridor": 0.22,
+      "distance_to_bogorok_endpoint": 24.25,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 141,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11582,
+            "name": "监视裂谷：峭壁断层",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11593,
+      "name": "亡者的尊严",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25336,
+        "entity_name": "步兵沃塔·怒拳",
+        "x": 48.45,
+        "y": 19.74
+      },
+      "distance_to_direct_corridor": 0.32,
+      "distance_to_bogorok_endpoint": 10.19,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11594,
+      "name": "让他们安息",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25336,
+        "entity_name": "步兵沃塔·怒拳",
+        "x": 48.45,
+        "y": 19.74
+      },
+      "distance_to_direct_corridor": 0.32,
+      "distance_to_bogorok_endpoint": 10.19,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11682,
+      "name": "苏雷斯塔兹",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25785,
+        "entity_name": "大法师艾瓦诺尔",
+        "x": 46.37,
+        "y": 32.4
+      },
+      "distance_to_direct_corridor": 0.94,
+      "distance_to_bogorok_endpoint": 23.01,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 146,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11681,
+            "name": "营救艾瓦诺尔",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11648,
+      "name": "说服的艺术",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25480,
+        "entity_name": "图书馆员诺曼提斯",
+        "x": 46.33,
+        "y": 32.84
+      },
+      "distance_to_direct_corridor": 1.0,
+      "distance_to_bogorok_endpoint": 23.45,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 142,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11646,
+            "name": "苔原上的审讯",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11663,
+      "name": "分享情报",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25480,
+        "entity_name": "图书馆员诺曼提斯",
+        "x": 46.33,
+        "y": 32.84
+      },
+      "distance_to_direct_corridor": 1.0,
+      "distance_to_bogorok_endpoint": 23.45,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 142,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11648,
+            "name": "说服的艺术",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11680,
+      "name": "准备飞翔",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 24795,
+        "entity_name": "苏雷斯塔兹",
+        "x": 45.33,
+        "y": 34.52
+      },
+      "distance_to_direct_corridor": 1.18,
+      "distance_to_bogorok_endpoint": 25.29,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 144,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11679,
+            "name": "重铸钥匙",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11733,
+      "name": "飞越裂谷",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 24795,
+        "entity_name": "苏雷斯塔兹",
+        "x": 45.33,
+        "y": 34.52
+      },
+      "distance_to_direct_corridor": 1.18,
+      "distance_to_bogorok_endpoint": 25.29,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 147,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11682,
+            "name": "苏雷斯塔兹",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11627,
+      "name": "沸点",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 171,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11624,
+            "name": "睿智的气元素",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11629,
+      "name": "返回灵语者身边",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 175,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11649,
+            "name": "风暴微粒",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11649,
+      "name": "风暴微粒",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 173,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11627,
+            "name": "沸点",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11681,
+      "name": "营救艾瓦诺尔",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25356,
+        "entity_name": "战斗法师安斯姆",
+        "x": 46.38,
+        "y": 37.31
+      },
+      "distance_to_direct_corridor": 4.13,
+      "distance_to_bogorok_endpoint": 27.86,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 145,
+      "already_routed_before_corridor": true,
+      "routed_at_or_after_corridor": false,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11680,
+            "name": "准备飞翔",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": true
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11559,
+      "name": "冬鳞鱼人的贸易",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 186,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11571,
+            "name": "学习沟通",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11560,
+      "name": "救救蝌蚪！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 188,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11559,
+            "name": "冬鳞鱼人的贸易",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11562,
+      "name": "我被敲竹杠了！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 190,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11560,
+            "name": "救救蝌蚪！",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11566,
+      "name": "决不投降！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 194,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11565,
+            "name": "备用的鱼人服",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11571,
+      "name": "学习沟通",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 185,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11637,
+      "name": "卡加尼舒",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25425,
+        "entity_name": "先知格雷姆沃克的灵魂",
+        "x": 56.17,
+        "y": 9.11
+      },
+      "distance_to_direct_corridor": 5.92,
+      "distance_to_bogorok_endpoint": 5.92,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 177,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11635,
+            "name": "先知格雷姆沃克之魂",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11638,
+      "name": "落叶归根",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25425,
+        "entity_name": "先知格雷姆沃克的灵魂",
+        "x": 56.17,
+        "y": 9.11
+      },
+      "distance_to_direct_corridor": 5.92,
+      "distance_to_bogorok_endpoint": 5.92,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 179,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11637,
+            "name": "卡加尼舒",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    }
+  ],
+  "scheduled_later_interior_candidates": [
+    {
+      "quest_id": 11592,
+      "name": "攻击！",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25335,
+        "entity_name": "远行者达玛·傲蹄",
+        "x": 48.32,
+        "y": 19.76
+      },
+      "distance_to_direct_corridor": 0.19,
+      "distance_to_bogorok_endpoint": 10.23,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11593,
+      "name": "亡者的尊严",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25336,
+        "entity_name": "步兵沃塔·怒拳",
+        "x": 48.45,
+        "y": 19.74
+      },
+      "distance_to_direct_corridor": 0.32,
+      "distance_to_bogorok_endpoint": 10.19,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11594,
+      "name": "让他们安息",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25336,
+        "entity_name": "步兵沃塔·怒拳",
+        "x": 48.45,
+        "y": 19.74
+      },
+      "distance_to_direct_corridor": 0.32,
+      "distance_to_bogorok_endpoint": 10.19,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 181,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11627,
+      "name": "沸点",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 171,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11624,
+            "name": "睿智的气元素",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11629,
+      "name": "返回灵语者身边",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 175,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11649,
+            "name": "风暴微粒",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11649,
+      "name": "风暴微粒",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25376,
+        "entity_name": "因波莉安",
+        "x": 46.57,
+        "y": 9.35
+      },
+      "distance_to_direct_corridor": 3.7,
+      "distance_to_bogorok_endpoint": 3.73,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 173,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11627,
+            "name": "沸点",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11559,
+      "name": "冬鳞鱼人的贸易",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 186,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11571,
+            "name": "学习沟通",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11560,
+      "name": "救救蝌蚪！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 188,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11559,
+            "name": "冬鳞鱼人的贸易",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11562,
+      "name": "我被敲竹杠了！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 190,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11560,
+            "name": "救救蝌蚪！",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11566,
+      "name": "决不投降！",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 194,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11565,
+            "name": "备用的鱼人服",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11571,
+      "name": "学习沟通",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25197,
+        "entity_name": "国王姆嘎姆嘎",
+        "x": 43.5,
+        "y": 13.97
+      },
+      "distance_to_direct_corridor": 5.74,
+      "distance_to_bogorok_endpoint": 8.0,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 185,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11637,
+      "name": "卡加尼舒",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 72,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25425,
+        "entity_name": "先知格雷姆沃克的灵魂",
+        "x": 56.17,
+        "y": 9.11
+      },
+      "distance_to_direct_corridor": 5.92,
+      "distance_to_bogorok_endpoint": 5.92,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 177,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11635,
+            "name": "先知格雷姆沃克之魂",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11638,
+      "name": "落叶归根",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25425,
+        "entity_name": "先知格雷姆沃克的灵魂",
+        "x": 56.17,
+        "y": 9.11
+      },
+      "distance_to_direct_corridor": 5.92,
+      "distance_to_bogorok_endpoint": 5.92,
+      "at_bogorok_endpoint": false,
+      "first_route_point": 179,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11637,
+            "name": "卡加尼舒",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    }
+  ],
+  "outstanding_interior_candidates": [],
+  "bogorok_endpoint_candidates": [
+    {
+      "quest_id": 11624,
+      "name": "睿智的气元素",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25339,
+        "entity_name": "灵语者斯纳尔芬",
+        "x": 50.28,
+        "y": 9.72
+      },
+      "distance_to_direct_corridor": 0.0,
+      "distance_to_bogorok_endpoint": 0.0,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 170,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 12486,
+            "name": "立即前往博古洛克前哨站！",
+            "accepted_before_corridor": true,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11631,
+      "name": "空气的幻象",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25339,
+        "entity_name": "灵语者斯纳尔芬",
+        "x": 50.28,
+        "y": 9.72
+      },
+      "distance_to_direct_corridor": 0.0,
+      "distance_to_bogorok_endpoint": 0.0,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 176,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11629,
+            "name": "返回灵语者身边",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11635,
+      "name": "先知格雷姆沃克之魂",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25339,
+        "entity_name": "灵语者斯纳尔芬",
+        "x": 50.28,
+        "y": 9.72
+      },
+      "distance_to_direct_corridor": 0.0,
+      "distance_to_bogorok_endpoint": 0.0,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 176,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11631,
+            "name": "空气的幻象",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11591,
+      "name": "钢腭的车队",
+      "scope_status": "include_leveling_local",
+      "required_level": 68,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25326,
+        "entity_name": "博古洛克大王",
+        "x": 49.62,
+        "y": 10.58
+      },
+      "distance_to_direct_corridor": 0.46,
+      "distance_to_bogorok_endpoint": 1.08,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 170,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11639,
+      "name": "向犸格莫斯复仇",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25374,
+        "entity_name": "奥尔托什",
+        "x": 49.55,
+        "y": 9.98
+      },
+      "distance_to_direct_corridor": 0.66,
+      "distance_to_bogorok_endpoint": 0.77,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 176,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": false,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [
+          {
+            "quest_id": 11631,
+            "name": "空气的幻象",
+            "accepted_before_corridor": false,
+            "completed_before_corridor": false
+          }
+        ],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    },
+    {
+      "quest_id": 11702,
+      "name": "国王姆嘎姆嘎",
+      "scope_status": "include_leveling_local",
+      "required_level": 69,
+      "quest_level": 71,
+      "start": {
+        "entity_type": "npc",
+        "entity_id": 25736,
+        "entity_name": "补给官塔尼斯",
+        "x": 48.96,
+        "y": 10.27
+      },
+      "distance_to_direct_corridor": 1.17,
+      "distance_to_bogorok_endpoint": 1.43,
+      "at_bogorok_endpoint": true,
+      "first_route_point": 170,
+      "already_routed_before_corridor": false,
+      "routed_at_or_after_corridor": true,
+      "prerequisite_evidence_ready": true,
+      "dependencies": {
+        "pre_all": [],
+        "pre_any": [],
+        "parent_active": [],
+        "available_starting_with": []
+      }
+    }
+  ],
+  "summary": {
+    "corridor_task_starts": 33,
+    "interior_task_starts": 27,
+    "scheduled_later_interior_task_starts": 13,
+    "outstanding_interior_task_starts": 0,
+    "bogorok_endpoint_task_starts": 6
+  }
+}

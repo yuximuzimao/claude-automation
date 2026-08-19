@@ -1,0 +1,315 @@
+{
+  "status": "route_timepoint_flight_state_audit",
+  "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
+  "routes": {
+    "borean": {
+      "route_key": "borean",
+      "flight_count": 6,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 184,
+          "label": "永生之盾·准备转北部",
+          "action": "到飞行管理员处，乘系统鸟返回琥珀崖",
+          "transport": "ride",
+          "destination_hub": "琥珀崖",
+          "opened_before_arrival": [
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        },
+        {
+          "point_index": 185,
+          "label": "系统鸟：考达拉 → 琥珀崖",
+          "action": "抵达琥珀崖后沿道路骑马北上，先经过钢腭车队战场",
+          "transport": "taxi",
+          "destination_hub": "琥珀崖",
+          "opened_before_arrival": [
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        },
+        {
+          "point_index": 218,
+          "label": "博古洛克飞行点",
+          "action": "乘系统鸟前往琥珀崖",
+          "transport": "ride",
+          "destination_hub": "琥珀崖",
+          "opened_before_arrival": [
+            "博古洛克",
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        },
+        {
+          "point_index": 219,
+          "label": "琥珀崖·盖伦",
+          "action": "交《监视裂谷：冬鳞洞穴》；裂谷监测链闭环",
+          "transport": "taxi",
+          "destination_hub": "琥珀崖",
+          "opened_before_arrival": [
+            "博古洛克",
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        },
+        {
+          "point_index": 220,
+          "label": "系统鸟：琥珀崖 → 牦牛村",
+          "action": "琥珀崖收尾后直接乘系统鸟飞牦牛村；战歌要塞此时没有需要处理的任务，不再中转战歌",
+          "transport": "taxi",
+          "destination_hub": "牦牛村",
+          "opened_before_arrival": [
+            "博古洛克",
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        },
+        {
+          "point_index": 221,
+          "label": "牦牛村·最终转场",
+          "action": "琥珀崖直飞牦牛村后，此时《牦牛村的陷落》早已交完，直接向陶拉努克宗母接《横贯冰原》",
+          "transport": "taxi",
+          "destination_hub": "牦牛村",
+          "opened_before_arrival": [
+            "博古洛克",
+            "战歌要塞",
+            "永生之盾",
+            "牦牛村",
+            "琥珀崖"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "博古洛克",
+        "战歌要塞",
+        "永生之盾",
+        "牦牛村",
+        "琥珀崖"
+      ]
+    },
+    "dragonblight": {
+      "route_key": "dragonblight",
+      "flight_count": 3,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 97,
+          "label": "系统鸟：莫亚基 → 阿格玛",
+          "action": "从莫亚基飞阿格玛；交《魔网能量线的终端》；接《拜见巨龙女王》；交《前往阿格玛之锤》；交《通缉：吉加托尔》",
+          "transport": "taxi",
+          "destination_hub": "阿格玛之锤",
+          "opened_before_arrival": [
+            "莫亚基港口",
+            "阿格玛之锤"
+          ]
+        },
+        {
+          "point_index": 187,
+          "label": "系统鸟：库卡隆 → 龙眠神殿",
+          "action": "飞到龙眠；到上层交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》",
+          "transport": "taxi",
+          "destination_hub": "龙眠神殿",
+          "opened_before_arrival": [
+            "库卡隆先锋营地",
+            "怨毒镇",
+            "莫亚基港口",
+            "阿格玛之锤",
+            "龙眠神殿"
+          ]
+        },
+        {
+          "point_index": 191,
+          "label": "系统鸟：龙眠 → 库卡隆",
+          "action": "飞回库卡隆先锋营地，交《返回安加萨》",
+          "transport": "taxi",
+          "destination_hub": "库卡隆先锋营地",
+          "opened_before_arrival": [
+            "库卡隆先锋营地",
+            "怨毒镇",
+            "莫亚基港口",
+            "阿格玛之锤",
+            "龙眠神殿"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "库卡隆先锋营地",
+        "怨毒镇",
+        "莫亚基港口",
+        "阿格玛之锤",
+        "龙眠神殿"
+      ]
+    },
+    "grizzly": {
+      "route_key": "grizzly",
+      "flight_count": 5,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 30,
+          "label": "系统鸟：征服堡 → 欧尼瓦",
+          "action": "飞欧尼瓦；交《不速之“客”》 → 接《有趣的计划》；交《惊吓野马》；顺路交《熊的美食》",
+          "transport": "taxi",
+          "destination_hub": "欧尼瓦营地",
+          "opened_before_arrival": [
+            "征服堡",
+            "欧尼瓦营地"
+          ]
+        },
+        {
+          "point_index": 34,
+          "label": "系统鸟：征服堡 → 欧尼瓦",
+          "action": "飞欧尼瓦；交《翻译日记》 → 接《“钢铁之子”》；接《符文中的预言》",
+          "transport": "taxi",
+          "destination_hub": "欧尼瓦营地",
+          "opened_before_arrival": [
+            "征服堡",
+            "欧尼瓦营地"
+          ]
+        },
+        {
+          "point_index": 44,
+          "label": "系统鸟：征服堡 → 欧尼瓦",
+          "action": "飞回欧尼瓦，继续东北收尾",
+          "transport": "taxi",
+          "destination_hub": "欧尼瓦营地",
+          "opened_before_arrival": [
+            "征服堡",
+            "欧尼瓦营地"
+          ]
+        },
+        {
+          "point_index": 46,
+          "label": "系统鸟：欧尼瓦 → 征服堡",
+          "action": "回欧尼瓦坐系统鸟到征服堡，交《乌索克，巨熊之神》",
+          "transport": "taxi",
+          "destination_hub": "征服堡",
+          "opened_before_arrival": [
+            "征服堡",
+            "欧尼瓦营地"
+          ]
+        },
+        {
+          "point_index": 47,
+          "label": "系统鸟：征服堡 → 欧尼瓦",
+          "action": "交完乌索克后立刻飞回欧尼瓦，继续东北收尾",
+          "transport": "taxi",
+          "destination_hub": "欧尼瓦营地",
+          "opened_before_arrival": [
+            "征服堡",
+            "欧尼瓦营地"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "征服堡",
+        "欧尼瓦营地"
+      ]
+    },
+    "zuldrak": {
+      "route_key": "zuldrak",
+      "flight_count": 5,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 66,
+          "label": "银色前沿·达拉然短往返",
+          "action": "《魔法王国达拉然》继续保留；五号分别与博学者泰罗努斯三世对话传送到达拉然；到下水道狡猾的维克斯处接《勇士的召唤！》；若达拉然飞行点未开启则顺手开启；五号乘系统飞行返回已经开启的银色前沿",
+          "transport": "taxi",
+          "destination_hub": "银色前沿",
+          "opened_before_arrival": [
+            "圣光据点",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        },
+        {
+          "point_index": 96,
+          "label": "系统鸟：古达克 → 希姆托加",
+          "action": "乘系统飞行回希姆托加；交《狂暴》给巫医库弗；接《诸神的指引》",
+          "transport": "taxi",
+          "destination_hub": "希姆托加",
+          "opened_before_arrival": [
+            "古达克",
+            "圣光据点",
+            "希姆托加",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        },
+        {
+          "point_index": 101,
+          "label": "古达克飞行点·第二次回程",
+          "action": "回到已开启的古达克飞行点，乘系统鸟飞希姆托加",
+          "transport": "ride",
+          "destination_hub": "希姆托加",
+          "opened_before_arrival": [
+            "古达克",
+            "圣光据点",
+            "希姆托加",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        },
+        {
+          "point_index": 102,
+          "label": "系统鸟：古达克 → 希姆托加",
+          "action": "交《在佐尔赫布相会》给附近哈克娅；接《未完的事情》",
+          "transport": "taxi",
+          "destination_hub": "希姆托加",
+          "opened_before_arrival": [
+            "古达克",
+            "圣光据点",
+            "希姆托加",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        },
+        {
+          "point_index": 103,
+          "label": "系统鸟：希姆托加 → 古达克",
+          "action": "从已开启的希姆托加飞行点乘系统鸟到已开启的古达克飞行点",
+          "transport": "taxi",
+          "destination_hub": "古达克",
+          "opened_before_arrival": [
+            "古达克",
+            "圣光据点",
+            "希姆托加",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "古达克",
+        "圣光据点",
+        "希姆托加",
+        "银色前沿",
+        "黑锋哨站"
+      ]
+    }
+  }
+}
