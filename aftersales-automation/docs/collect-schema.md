@@ -132,12 +132,17 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 {
   packages: [
     {
-      num:  string,  // 快递单号
-      text: string,  // 完整物流文本（用于关键词检测）
+      tab:  string,  // 包裹 tab 名，如“包裹1”；快递单号从 text 解析
+      text: string,  // 当前 tab 的物流文本（用于单号提取和关键词检测）
+      error?: string,
     }
-  ]
+  ],
+  warnings: string[],
+  closeErrors: Object[],
 }
 ```
+
+`warnings` / `closeErrors` 记录物流已经读取、但弹窗收尾失败的降级信息。推理仍可使用已采集的 `packages`，不能把关闭失败误报成“物流未读取”。
 
 ---
 
@@ -175,17 +180,20 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 
 ```js
 {
-  type:       string,   // "单品"/"套件"
-  subItemNum: number,   // 套件子商品数（单品=1）
+  type:       '0' | '1' | '2', // ERP 原始类型：普通商品/套件/组合装
+  subItemNum: number,   // ERP 原值；普通商品通常为 0，套件/组合装大于 0
   title:      string,   // 商品标题
   subItems: [
     {
-      name: string,
-      qty:  number,
+      name:     string,
+      specCode: string,
+      qty:      number,
     }
   ]
 }
 ```
+
+业务计算时普通商品 `subItemNum=0` 按 1 件处理；不得为了方便改写采集原值。
 
 ---
 

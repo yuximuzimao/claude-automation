@@ -2,16 +2,18 @@
 
 > 适用场景：鲸灵页面异常、CDP 调用、工单详情读取、内部备注、账号 Session 与重新登录。
 
-## 1. CDP 代理端点速查
+## 1. CDP 直连能力速查
 
-| 端点 | 用途 | 注意 |
+当前代码通过 `lib/cdp.js` 直接连接自动化 Chrome 的 9222 端口，不经过 HTTP 代理；3456 已由 web-access 使用。业务代码调用模块方法，不拼接 `/eval`、`/screenshot` 等旧代理 URL。
+
+| 方法 | 用途 | 注意 |
 |------|------|------|
-| `GET /targets` | 列出所有标签页（获取 targetId） | — |
-| `POST /eval?target={id}` | 在页面执行 JS | ⚠️ 必须加 `-H "Content-Type: text/plain"`，body 为纯 JS 文本；超时 120s |
-| `POST /clickAt?target={id}` | CSS 选择器真实点击 | 需要浏览器在前台 |
-| `GET /screenshot?target={id}&file=/tmp/x.png` | 截图保存到本地 | 不受窗口遮挡影响 |
-| `GET /navigate?target={id}&url={url}` | 导航到 URL | 用于跨系统跳转 |
-| `GET /scroll?target={id}&direction=bottom` | 滚动页面 | — |
+| `cdp.getTargets()` | 列出标签页并获取 `targetId` | 返回 Chrome `/json` 原始列表 |
+| `cdp.eval(targetId, js)` | 在页面执行 JS 并返回值 | JS 字符串直接作为第二参数；默认最长约 125 秒 |
+| `cdp.clickAt(targetId, selector)` | 按可见元素坐标发送真实鼠标事件 | 内部先激活目标标签页 |
+| `cdp.screenshot(targetId, filePath)` | 截图到本地文件 | 仅用于凭证或陌生布局 |
+| `cdp.navigate(targetId, url)` | 导航并等待页面加载 | 鲸灵详情仍须走业务路由规则 |
+| `cdp.scroll(targetId, direction)` | 页面滚动 | `direction` 为 `up` / `down` |
 
 ---
 
@@ -87,7 +89,7 @@ btns.find(b => b.textContent.trim() === "查看物流")?.click();
 // 读当前 tab
 var dialogs = Array.from(document.querySelectorAll(".el-dialog__wrapper"))
   .filter(d => window.getComputedStyle(d).display !== "none");
-var dialog = dialogs[0];
+var dialog = dialogs[dialogs.length - 1];  // 当前实现取最新打开的可见物流弹窗
 dialog.innerText  // 包含物流单号和物流节点
 
 // 切换到包裹2
@@ -96,6 +98,13 @@ var tab2 = Array.from(dialog.querySelectorAll(".el-tabs__item"))
 tab2?.click();
 // 等 1 秒后再读 dialog.innerText
 ```
+
+**拒绝取证后的关闭边界**：
+
+- `reject.js` 复用 `logistics.js` 的 `closeLogisticsDialog()`，不维护第二套关闭逻辑。
+- 主关闭按钮只点击一次；随后每 300ms 只读检查可见弹窗数量，最多等待 5 秒。
+- 主关闭超时后才允许使用已配置的固定坐标后备一次，再次只读验证。
+- 两种方式都失败时，拒绝流程必须停在打开拒绝表单之前；禁止重试整个拒绝操作。
 
 ### 2.4 内部备注操作（三次 eval）
 

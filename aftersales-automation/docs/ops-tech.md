@@ -85,7 +85,7 @@ node -e "const db=require('./lib/server/data'); const ids=['fb-...']; db.markFee
 - `[∞/永久保留]` **#16 ERP 弹窗判断**：ERP 订单详情弹窗是 `.el-dialog__wrapper.trade-detail-dialog`（标准 el-dialog 子类），用 `getBoundingClientRect().width > 0` 判断可见；`.js-logistics-container` 和 `.box-nav.box-toogle-el` 从未存在于生产DOM，禁止使用。运单号读 `.list-title[innerText="运单号:"].nextSibling`，物流文本读含 `h3.sub-title[includes("物流信息")]` 的 `.box` 容器；关闭弹窗用 `.el-dialog__closeBtn` 循环关直到可见数归零。**等待弹窗必须检测内容加载完成**：`h3.sub-title` 存在仅代表骨架渲染，内容区仍显示"暂无数据"（innerText <500 字符）；条件改为 `hasH3 && !(text.includes('暂无数据') && text.length < 500)`；timeout 15s，interval 800ms
 - `[∞/永久保留]` **#17 订单行展开状态**：禁止用 `trade-icon-close/plus` class 判断展开状态（与状态无关）；正确用 `.module-trade-list-item-row2` 是否存在
 - `[∞/永久保留]` **#18 识别字段必须多场景验证**：任何识别/判断字段，必须多订单、多场景对比验证后才能写入规则，一次测试不算验证
-- `[∞/永久保留]` **#19 eval body 格式**：`POST /eval?target={id}` 的 body 为纯 JS 文本，禁止用 JSON 格式 `{"targetId":...,"code":...}`
+- `[∞/永久保留]` **#19 CDP eval 调用格式**：当前无 HTTP eval 代理；统一调用 `cdp.eval(targetId, jsCode)`，第二参数直接传 JS 字符串，禁止把 `{targetId, code}` JSON 当作脚本传入。
 - `[∞/永久保留]` **#26 ERP 物流入口**：禁止点 `a[data-name=logistics_info]`（打开快递公司过滤面板）；直接点 `show_detail_dialog`；同次搜索所有行一次性处理完，不重复搜索
 - `[∞/永久保留]` **#34 截图需滚动**：截图前先 `window.scrollBy(0, el.getBoundingClientRect().top - 20)` 让内容贴近视口顶；内容超出视口时分段截图+PIL垂直拼接
 - `[∞/永久保留]` **#41 ERP 登录与扫描前刷新**：ERP 可能处于“页面能切标签、控件也可见，但查询链路已失效”的隐性异常，目前没有可靠 DOM 规律可以提前识别。每次定时扫描开始前必须无条件 reload 一次；刷新后再检测 `.inner-login-wrapper`、恢复登录、进入订单管理，并确认可见“系统单号”搜索框和 `mixKey` 已重新挂载。基础控件检查不代表深层健康，最终仍以搜索结果逐行验单为准。

@@ -127,47 +127,15 @@ var logisticsText = logBox ? logBox.innerText : '';
 
 ## 4. 图片上传（拒绝退款凭证）
 
+当前生产入口是 `lib/jl/reject.js` 的 `rejectTicket()`，统一通过 `lib/cdp.js` 直连 Chrome 9222，不再使用 3456 HTTP 代理。正常操作只调用：
+
 ```bash
-# Step 1: 截图 + 裁剪弹窗区域
-COOKIES=$(curl -s "http://localhost:3456/eval?target=$JLID" \
-  -d 'document.cookie' | python3 -c "import sys,json; print(json.load(sys.stdin)['value'])")
-
-curl -s "http://localhost:3456/screenshot?target=$JLID&file=/tmp/full.png"
-
-RECT=$(curl -s "http://localhost:3456/eval?target=$JLID" \
-  -d 'var d = document.querySelector(".el-dialog"); JSON.stringify(d.getBoundingClientRect())')
-python3 -c "
-from PIL import Image; import json
-rect = json.loads('$RECT')
-img = Image.open('/tmp/full.png')
-img.crop((int(rect['x']), int(rect['y']),
-          int(rect['x']+rect['width']), int(rect['y']+rect['height']))).save('/tmp/crop.png')
-"
-
-# Step 2: 上传
-RESULT=$(curl -s -b "$COOKIES" \
-  -F "fileUpload=@/tmp/crop.png;type=image/png" \
-  "https://seller-portal.jlsupp.com/base-service/imgUpload")
-IMG_URL=$(echo $RESULT | python3 -c "import sys,json; print(json.load(sys.stdin)['entry'][0])")
-
-# Step 3: 注入 Vue 组件
-curl -s "http://localhost:3456/eval?target=$JLID" \
-  -d "(function() {
-  function findComp(vm, name, d) {
-    if (d > 20 || !vm) return null;
-    if ((vm.\$options||{}).name === name) return vm;
-    for (var i=0; i<(vm.\$children||[]).length; i++) {
-      var r = findComp(vm.\$children[i], name, d+1);
-      if (r) return r;
-    }
-    return null;
-  }
-  var comp = findComp(document.querySelector('#app').__vue__, 'WorkOrderStateForm', 0);
-  comp.\$set(comp.formInfo, 'operaterEvidencePegUrl', ['$IMG_URL']);
-  comp.\$set(comp, 'templateRefusePictureList', ['$IMG_URL']);
-  return 'done';
-})()"
+node cli.js reject <工单号> <原因> "<详情文案>" [图片URL]
 ```
+
+未传图片 URL 时，模块按固定顺序执行：打开鲸灵物流弹窗 → 截图并裁剪 → 确认弹窗关闭 → 上传至鲸灵 CDN → 把 URL 注入 `WorkOrderStateForm` → 提交拒绝。关闭物流弹窗失败时必须在打开拒绝表单前停止。
+
+当前 `rejectTicket()` 只能截取鲸灵物流弹窗。若鲸灵没有物流、凭证必须来自 ERP，不得上传“暂无信息”截图，也不得复用当前执行入口；先按 `tasks/todo.md` 的独立分支保持不可执行。
 
 > ⚠️ **禁止**：DataTransfer 设置 file input / 开本地 HTTP 服务器 / 设置 XHR/fetch 全局拦截器（会导致堆栈溢出）
 
