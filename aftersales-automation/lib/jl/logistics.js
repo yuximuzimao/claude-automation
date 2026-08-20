@@ -202,4 +202,8 @@ async function getLogistics(targetId, workOrderNum) {
   }
 }
 
-module.exports = { getLogistics };
+module.exports = {
+  getLogistics,
+  closeLogisticsDialog,
+  VISIBLE_DIALOG_COUNT_JS,
+};

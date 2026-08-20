@@ -2,6 +2,7 @@
 
 const { describe, it, afterEach } = require('node:test');
 const assert = require('node:assert');
+const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '../..');
@@ -69,6 +70,75 @@ afterEach(() => {
 });
 
 describe('JL logistics close timeout tolerance', () => {
+  it('拒绝流程复用局部关闭能力，关闭失败会在打开拒绝表单前停止', () => {
+    const source = fs.readFileSync(modulePath('lib/jl/reject.js'), 'utf8');
+    const closeIndex = source.indexOf('await closeLogisticsDialog(targetId, beforeClose)');
+    const formIndex = source.indexOf('const alreadyOpen = await cdp.eval');
+
+    assert.ok(closeIndex > 0, 'reject.js 应调用共享物流弹窗关闭能力');
+    assert.ok(formIndex > closeIndex, '必须先确认物流弹窗关闭，再打开拒绝表单');
+    assert.doesNotMatch(source, /reject-close-dialog/);
+  });
+
+  for (const { label, falseChecks } of [
+    { label: '约800ms', falseChecks: 3 },
+    { label: '约2s', falseChecks: 7 },
+    { label: '接近5s', falseChecks: 16 },
+  ]) {
+    it(`关闭动画延迟${label}时持续只读等待，不重复点击`, async () => {
+      let waitOptions = null;
+      const evalResults = [
+        { closed: true },
+        ...Array(falseChecks).fill(2),
+        1,
+      ];
+      const loaded = loadLogisticsWithMocks({
+        evalResults,
+        waitForImpl: async (predicate, options) => {
+          waitOptions = options;
+          for (let i = 0; i <= falseChecks; i++) {
+            if (await predicate()) return true;
+          }
+          throw new Error('测试轮询未观察到弹窗关闭');
+        },
+      });
+
+      const result = await loaded.closeLogisticsDialog('target-1', 2);
+
+      assert.deepEqual(result, { closed: true, method: 'dialog-button' });
+      assert.deepEqual(waitOptions, {
+        timeoutMs: 5000,
+        intervalMs: 300,
+        label: '等待物流弹窗关闭',
+      });
+      assert.equal(loaded.clickPointCalls.length, 0);
+      assert.equal(
+        loaded.evalCalls.filter(call => call.js.includes('btn.click()')).length,
+        1,
+        '主关闭按钮只能点击一次'
+      );
+    });
+  }
+
+  it('页面同时有其他弹窗时，只要求可见弹窗数量减少，不要求全部消失', async () => {
+    const loaded = loadLogisticsWithMocks({
+      evalResults: [
+        { closed: true },
+        1,
+      ],
+      waitForImpl: async (predicate) => {
+        assert.equal(await predicate(), true);
+        return true;
+      },
+    });
+
+    const result = await loaded.closeLogisticsDialog('target-1', 2);
+
+    assert.equal(result.method, 'dialog-button');
+    assert.match(loaded.evalCalls[0].js, /dialogs\[dialogs\.length - 1\]/);
+    assert.equal(loaded.clickPointCalls.length, 0);
+  });
+
   it('主关闭等待超时但固定坐标后备成功时，不记录关闭失败', async () => {
     let waitCount = 0;
     const { getLogistics, clickPointCalls, sleepCalls } = loadLogisticsWithMocks({

@@ -9,6 +9,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const cdp = require('../cdp');
 const { navigate } = require('./navigate');
+const { closeLogisticsDialog, VISIBLE_DIALOG_COUNT_JS } = require('./logistics');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
@@ -48,24 +49,6 @@ const GET_DIALOG_RECT_JS = `(function(){
   if (!inner) return JSON.stringify({error:'el-dialog not found'});
   var r = inner.getBoundingClientRect();
   return JSON.stringify({x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height)});
-})()`;
-
-// 关闭弹窗
-const CLOSE_DIALOG_JS = `(function(){
-  var btn = Array.from(document.querySelectorAll('.el-dialog__headerbtn, .el-icon-close')).find(function(b){
-    return b.getBoundingClientRect().width > 0;
-  });
-  if (!btn) return JSON.stringify({error: '未找到关闭按钮'});
-  btn.click();
-  return JSON.stringify({closed: true});
-})()`;
-
-// 检查弹窗是否已关闭（无可见 el-dialog__wrapper）
-const CHECK_DIALOG_CLOSED_JS = `(function(){
-  var open = Array.from(document.querySelectorAll('.el-dialog__wrapper')).some(function(d){
-    return d.getBoundingClientRect().width > 0;
-  });
-  return JSON.stringify({closed: !open});
 })()`;
 
 // 截图 → PIL 裁剪 → 返回裁剪文件路径
@@ -249,15 +232,13 @@ async function rejectTicket(targetId, workOrderNum, reason, detail, imageUrl, pa
       // 截图并裁剪
       const cropPath = await screenshotDialog(targetId, rect);
 
-      // 关闭弹窗，等待其消失
-      await retry(async () => {
-        const closeRes = await cdp.eval(targetId, CLOSE_DIALOG_JS);
-        if (closeRes.error) throw new Error(`关闭物流弹窗: ${closeRes.error}`);
-        await sleep(800);
-        const checkRes = await cdp.eval(targetId, CHECK_DIALOG_CLOSED_JS);
-        if (!checkRes.closed) throw new Error('物流弹窗未关闭');
-      }, { maxRetries: 3, delayMs: 1000, label: `reject-close-dialog ${workOrderNum}`, domain: 'scrm.jlsupp.com' });
-      await sleep(800);
+      // 只点一次关闭，并只读等待弹窗数量减少；慢动画超时后才使用已验证的坐标后备。
+      // 这里不包 retry，避免关闭异常时重跑后续拒绝操作。
+      const beforeClose = await cdp.eval(targetId, VISIBLE_DIALOG_COUNT_JS);
+      if (!Number.isInteger(beforeClose) || beforeClose <= 0) {
+        throw new Error('关闭物流弹窗前未读到有效可见弹窗数量');
+      }
+      await closeLogisticsDialog(targetId, beforeClose);
 
       // 上传图片（带重试）
       imgUrl = await retry(async () => {
