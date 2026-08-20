@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-18",
+  "updated_at": "2026-08-19",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -304,6 +304,46 @@
       "type": "kill_progress_group_shared_confirmed",
       "status": "user_confirmed",
       "note": "《救救蝌蚪！》首组实跑确认20只冬鳞蝌蚪的任务进度五号共享；主控完成即可同步全队。"
+    },
+    "11983": {
+      "type": "dialogue_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《部落的血誓》首组龙骨实跑确认：主控与牦牛难民逐个对话时，任务计数五号共享同步推进。"
+    },
+    "12039": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《尤格-萨隆的黑血》首组龙骨实跑确认：黑血采集进度不共享，五个角色必须分别采集，以最低进度角色完成为离开条件。"
+    },
+    "12100": {
+      "type": "shared_kill_plus_single_drop_multi_person_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《腐烂的器官》首组龙骨实跑确认：防腐内脏只需实际掉出一次，同一具尸体上的这份任务物五个角色都可分别拾取；无需为五号各刷一次掉落。"
+    },
+    "12064": {
+      "type": "three_named_single_kill_multi_person_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《阿努巴尔的束缚》首组龙骨实跑确认：安诺科拉、提瓦克斯、西诺克各只需击杀一次；每具命名怪尸体可由五个角色分别拾取各自钥匙。"
+    },
+    "12053": {
+      "type": "event_personal_trigger_same_scene_concurrent_confirmed",
+      "status": "user_confirmed",
+      "note": "《部落的力量》首组龙骨实跑确认：任务完成不共享，五个角色都要各自插旗；但可以在同一位置连续/同时插旗并共同完成防守，不需要分五轮跑。"
+    },
+    "12069": {
+      "type": "event_group_shared_plus_named_corpse_multi_person_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《大酋长归来》首组龙骨实跑确认：救援/事件完成进度五号共享；虫王只需击杀一次，但外壳碎片需要五个角色分别从同一具尸体拾取。"
+    },
+    "12140": {
+      "type": "script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《洛纳乌克万岁！》首组龙骨实跑确认：主控触发并完成事件脚本后五号共享完成。"
+    },
+    "12057": {
+      "type": "post_prerequisite_item_trigger_fixed_route_task",
+      "status": "user_confirmed_with_external_support",
+      "note": "《血之魔典》不能在《死亡名单：扎古斯》完成前刷。首组实测确认扎古斯本体不掉；先回阿格玛交12056，再到冰雾村击杀阿努巴尔教徒获取魔典并右键接12057。该任务必须作为固定路线任务，不再按条件掉落触发处理。"
     }
   }
 }

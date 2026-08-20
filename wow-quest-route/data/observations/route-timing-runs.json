@@ -174,6 +174,66 @@
         "note": "当前17:59并未完成第53步，因此47分钟不能与28.8分钟做same-endpoint overrun比较；待第53步真正完成后再计算。"
       },
       "status": "partial_actual_recorded_waiting_for_endpoint"
+    },
+    {
+      "date": "2026-08-19/20",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_live_step_block",
+      "time_precision": "exact",
+      "effective_start_local": "2026-08-19T20:35:00+08:00",
+      "effective_end_local": "2026-08-20T00:40:00+08:00",
+      "actual_minutes": 245,
+      "route_window": "从龙骨路线步骤1任务接取完毕后开始计时→步骤11《刨冰 → 柔软的包装》完成。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "《血之魔典》原路线前置顺序错误：必须先完成并交付12056《死亡名单：扎古斯》，之后冰雾村阿努巴尔教徒才掉落任务起始物；首组现场因此产生额外确认成本。",
+        "步骤10曾转错方向，在完成《囤积矿石》前先进入《刨冰》区域并打了一部分目标。",
+        "从《刨冰》区域右上悬崖跳向《采集样本》方向时发生高风险坠落：四号存活、一号摔死。",
+        "返回《囤积矿石》途中再次失足死亡，被送回龙眠神殿；因此意外提前完成/交付了《古怪的暗示》相关节点并开启龙眠神殿飞行点，再返回继续矿石。"
+      ],
+      "live_mechanic_confirmations": [
+        "步骤2《部落的血誓》对话计数共享。",
+        "步骤5《尤格-萨隆的黑血》不共享；《腐烂的器官》防腐内脏只需掉落一次，同一尸体五号可分别拾取。",
+        "步骤7三把钥匙各命名怪只杀一次，同尸体五号分别拾取；《部落的力量》不共享，但五号可同场各自插旗完成。",
+        "步骤8《大酋长归来》事件共享，虫王外壳碎片五号分别从同一尸体拾取。",
+        "步骤9《洛纳乌克万岁！》共享。"
+      ],
+      "current_live_side_effects_not_for_zero_route": [
+        "首组龙眠神殿飞行点已因意外死亡提前开启。",
+        "首组《古怪的暗示》已因意外回到龙眠神殿提前推进；从零复用路线仍按正常顺路冰拳拿号角逻辑执行。"
+      ],
+      "scoped_task_actuals_minutes": [
+        {"quest_id": 12046, "quest": "柔软的包装", "actual": 25, "journey_accept_to_complete_minutes": 26.68, "note": "用户明确单独报时25分钟；Journey中00:13:49接取→00:40:30交付为26.68分钟，二者一致，25分钟可用于任务自身服务时间校准。"}
+      ],
+      "journey_source": {
+        "event_count": 1727,
+        "source_sha256": "9a705fc46929a2b63f4fed48fbe505e52c76f1f402c257e3e3b39837325e5ae8"
+      },
+      "journey_derived_blocks": [
+        {"scope": "步骤1近似", "actual_minutes": 21.18, "clean_baseline_minutes": 16.8, "delta_minutes": 4.38, "note": "20:35用户起点→20:56:11首次回西风交《深入密林》。Journey只能在交付点给边界，因此含少量步骤2回营地动作。"},
+        {"scope": "步骤2—6连续正常段", "actual_minutes": 52.17, "clean_baseline_minutes": 47.3, "delta_minutes": 4.87, "delta_percent": 10.29, "note": "20:56:11→21:48:21。用户未报告偏离路线；用连续块避免接交事件造成单步边界漂移。这是当前最可靠的正常路线校准块。"},
+        {"scope": "步骤7冰雾村", "actual_minutes": 52.82, "clean_baseline_minutes": 16.1, "delta_minutes": 36.72, "note": "21:48:21→22:41:10。包含《血之魔典》前置顺序错误的现场纠错，以及找西诺克的额外搜索，不能回写为成熟任务固有耗时。"},
+        {"scope": "步骤8—9连续段", "actual_minutes": 23.35, "clean_baseline_minutes": 18.3, "delta_minutes": 5.05, "delta_percent": 27.6, "note": "22:41:10→23:04:31。按当前路线完成大酋长收尾、炉石阿格玛、洛纳乌克和双足飞龙；可作为首跑实际，但只一组样本。"},
+        {"scope": "步骤10前半：恐怖之爪→冰拳→害虫控制→诺兹拉斯开场", "actual_minutes": 12.43, "clean_baseline_minutes": 7.61, "delta_minutes": 4.82, "note": "23:04:31→23:16:57，截止诺兹拉斯三任务接齐。路线方向正确，但首跑期间包含恐怖之爪/冰拳现场确认，不作为成熟重复速度硬校准。"},
+        {"scope": "步骤10后半异常段", "actual_minutes": 56.63, "note": "23:16:57→00:13:35。用户已明确报告转错去刨冰、提前接采集样本、两次坠落/复活、龙眠神殿意外转场；不与clean baseline直接比较。"}
+      ],
+      "same_endpoint_comparison": {
+        "endpoint": "步骤11《刨冰 → 柔软的包装》完成",
+        "actual_minutes": 245,
+        "corrected_clean_baseline_minutes": 152.4,
+        "overrun_minutes": 92.6,
+        "overrun_percent": 60.76,
+        "note": "clean baseline已修复估时器‘做《任务》’解析缺陷，并按《柔软的包装》25分钟实测校准。92.6分钟超额包含已知任务链纠错、走错方向、两次坠落/复活和龙眠意外转场，不得线性外推后续步骤。"
+      },
+      "endpoint_experience": [
+        "74级222324",
+        "74级200454",
+        "74级196437",
+        "74级200413",
+        "74级197717"
+      ],
+      "lowest_character_endpoint": "74级196437",
+      "status": "scoped_actual_endpoint_recorded_with_known_errors"
     }
   ]
 }

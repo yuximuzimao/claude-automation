@@ -9,7 +9,7 @@
 
 ## 1. 产品原始需求与知识图谱方向
 
-权威记录：`docs/analysis/2026-08-12-route-atlas-quest-knowledge-graph-concept.md`
+权威记录：`docs/archive/analysis/2026-08-12-route-atlas-quest-knowledge-graph-concept.md`
 
 已记录：
 - 地图负责执行导航，任务知识卡负责查细节，关系图谱负责设计/复盘；
@@ -20,7 +20,7 @@
 
 ## 2. Route Atlas 前端与Questie数据边界
 
-权威记录：`docs/analysis/2026-08-12-route-atlas-v1-contract.md`
+权威记录：`docs/archive/analysis/2026-08-12-route-atlas-v1-contract.md`
 
 当前有效：
 - 唯一前端载体为HTML工作台；不再以自动导出PNG/JPG作为主实现；
@@ -38,7 +38,7 @@
 
 ### 3.1 结构化标签/关系/数值特征
 
-权威记录：`docs/analysis/2026-08-13-route-atlas-optimization-framework.md`
+权威记录：`docs/archive/analysis/2026-08-13-route-atlas-optimization-framework.md`
 
 已记录并继续有效的数据原则：
 - 不使用只有关键词的扁平标签；底层同时保留 `typed facts + typed relations + numeric features`；
@@ -50,8 +50,8 @@
 ### 3.2 母模型/全局优化理论探索
 
 权威记录：
-- `docs/analysis/2026-08-13-route-atlas-mother-model-selection.md`
-- `docs/analysis/2026-08-13-route-atlas-global-optimization-model-v0.md`
+- `docs/archive/analysis/2026-08-13-route-atlas-mother-model-selection.md`
+- `docs/archive/analysis/2026-08-13-route-atlas-global-optimization-model-v0.md`
 
 已记录：
 - 曾选择PC-SP with Stateful Service Requirements and Flexible Service Locations作为最贴近问题结构的数学母模型；
@@ -62,7 +62,7 @@
 
 ### 3.3 当前真正生效的路线构建方法
 
-最高权威：`docs/analysis/2026-08-14-route-atlas-cluster-incremental-insertion-method.md`
+最高权威：`docs/archive/analysis/2026-08-14-route-atlas-cluster-incremental-insertion-method.md`
 
 当前冻结方法：
 1. Questie/人工事实层；
@@ -80,7 +80,7 @@
 
 ## 4. 一个一个插入、历史快照和Codex补档
 
-权威记录：`docs/analysis/2026-08-14-zangarmarsh-route-version-index.md`
+权威记录：`docs/archive/analysis/2026-08-14-zangarmarsh-route-version-index.md`
 
 当前状态：
 - Codex在2026-08-14补齐此前因写入/协作中断缺失的17个R快照；
@@ -95,7 +95,7 @@
 
 ## 5. 完整任务宇宙与最终复用路线
 
-任务边界权威：`docs/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md`
+任务边界权威：`docs/archive/analysis/2026-08-14-zangarmarsh-complete-task-universe-audit.md`
 
 结论：
 - Questie候选98条全部归类；
@@ -103,7 +103,7 @@
 - 副本/副本引导、跨图、库存条件、极低掉率机会、专业、职业、节日/阵营分别独立分类；
 - 不再把最初53条局部清单误当作完整任务宇宙。
 
-最终路线权威：`docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md`
+最终路线权威：`docs/archive/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md`
 
 状态：
 - 从零可复用版；
@@ -113,8 +113,8 @@
 ## 6. 动态地图审计流程
 
 权威记录：
-- `docs/analysis/2026-08-14-zangarmarsh-route-version-index.md`
-- `docs/analysis/2026-08-14-zangarmarsh-final-map-audit.md`
+- `docs/archive/analysis/2026-08-14-zangarmarsh-route-version-index.md`
+- `docs/archive/analysis/2026-08-14-zangarmarsh-final-map-audit.md`
 - `data/routes/route-atlas-workbench.html`（现行唯一工作台；当时独立赞加preview已取消）
 
 当前固定流程：
@@ -128,7 +128,7 @@
 
 ## 7. 当前前端显示决定（最新覆盖）
 
-记录位置：`docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md` §13。
+记录位置：`docs/archive/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md` §13。
 
 最新决定：
 - 地图在上，文字在下；不再使用窄右栏；
@@ -143,7 +143,7 @@
 
 ## 8. 十字军光环与估时
 
-记录位置：`docs/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md` §13。
+记录位置：`docs/archive/analysis/2026-08-14-zangarmarsh-final-reusable-route-v1.md` §13。
 
 当前口径：
 - 原纯跑图假设14 yd/s；

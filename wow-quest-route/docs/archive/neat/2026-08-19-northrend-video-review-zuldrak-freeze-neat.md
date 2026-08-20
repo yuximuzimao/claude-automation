@@ -66,7 +66,7 @@
 视频审计结果统一保存在：
 
 - `data/route-atlas/northrend-video-reverse-audit.json`
-- `docs/analysis/2026-08-19-northrend-video-reverse-audit.md`
+- `docs/archive/analysis/2026-08-19-northrend-video-reverse-audit.md`
 
 ## 祖达克基础层
 

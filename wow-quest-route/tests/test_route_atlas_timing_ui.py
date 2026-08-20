@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import re
+import runpy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -69,3 +71,31 @@ def test_northrend_68_80_veteran_benchmark_is_preserved_as_long_term_target() ->
     contract = data["recording_contract"]
     assert "approximate" in contract["time_precision"]
     assert "局部实测不得冒充整图实测" in contract["scope"]
+
+
+def test_explicit_do_quest_actions_are_never_dropped_from_timing_objectives() -> None:
+    estimator = runpy.run_path(str(ROOT / "scripts/estimate_route_atlas_timing.py"))
+    routes = json.loads(ROUTES.read_text(encoding="utf-8"))
+    foundation_paths = {
+        "borean": ROOT / "data/route-atlas/borean-tundra-task-foundation.json",
+        "dragonblight": ROOT / "data/route-atlas/dragonblight-task-foundation.json",
+        "grizzly": ROOT / "data/route-atlas/grizzly-hills-task-foundation.json",
+        "zuldrak": ROOT / "data/route-atlas/zuldrak-task-foundation.json",
+    }
+    for key, path in foundation_paths.items():
+        by_name, _ = estimator["load_foundation"](path)
+        known = set(by_name)
+        route = routes[key]
+        for step, group in enumerate(route["stepGroups"], 1):
+            recognized = set(estimator["objective_names_for_group"](route, group, known))
+            for point in route["points"][group["start"] : group["end"] + 1]:
+                for quest_name in re.findall(r"做《([^》]+)》", str(point[3])):
+                    if quest_name in known:
+                        assert quest_name in recognized, (key, step, quest_name, point[3])
+
+
+def test_dragonblight_soft_packaging_uses_live_calibration() -> None:
+    timing = json.loads((ROOT / "data/route-atlas/dragonblight-timing-estimate.json").read_text(encoding="utf-8"))
+    step_11 = next(row for row in timing["rows"] if row["step"] == 11)
+    assert "柔软的包装" in step_11["objectiveTasks"]
+    assert step_11["components"]["objectiveMinutes"] >= 25.0

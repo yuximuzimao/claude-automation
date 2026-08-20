@@ -120,6 +120,7 @@ SPECIAL_SERVICE_MINUTES: dict[str, float] = {
     "学习沟通": 1.2,  # one Scudder corpse + five sequential shell uses on the same corpse
     "冬鳞鱼人的贸易": 4.0,  # user-confirmed ground-clam pickup preferred; includes local search/5-box handling allowance
     "救救蝌蚪！": 4.0,  # user-confirmed group-shared progress; one 20-tadpole pass, not five separate passes
+    "柔软的包装": 25.0,  # 2026-08-20 first Dragonblight run: user-scoped objective service took 25 minutes
     "逃离冬鳞洞穴": 4.5,
     "横贯冰原": 6.0,
     # Grizzly Hills script/mixed-objective tasks. These are service-only centers; movement and Hub
@@ -343,7 +344,8 @@ def objective_names_for_group(route: dict[str, Any], group: dict[str, Any], know
             # Do not let words inside quest titles (e.g. 《夺取装备》) falsely
             # classify a pure accept/turn-in clause as objective execution.
             prose = re.sub(r"《[^》]+》", "", clause)
-            if not any(token in prose for token in OBJECTIVE_TOKENS):
+            explicit_do_quest = "做《" in clause
+            if not explicit_do_quest and not any(token in prose for token in OBJECTIVE_TOKENS):
                 continue
             # Background/conditional opportunity work is not charged as a full
             # foreground service block unless the clause explicitly completes it.

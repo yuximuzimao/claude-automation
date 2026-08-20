@@ -148,7 +148,7 @@ Route Atlas前端因此新增固定视觉提示：有有效执行备注的玩家
 
 ## T — 下一恢复点
 
-1. 下一窗口先读`docs/verified-routes/CURRENT.md`，再读本归档；若继续北风路线，再读`docs/analysis/2026-08-15-borean-leveling-clear-v1-audit.md`和统一Route Atlas工作台。
+1. 下一窗口先读`docs/verified-routes/CURRENT.md`，再读本归档；若继续北风路线，再读`docs/archive/analysis/2026-08-15-borean-leveling-clear-v1-audit.md`和统一Route Atlas工作台。
 2. 不再使用旧`.ai-bridge/Questie.lua`的11598/11606/11611/11888活动任务快照判断当前位置；若需要精确裁当前首组路线，优先使用用户新现场描述或重新导入的Questie状态。
 3. 当前首组已至少实跑验证到血孢巨蛾/巨蛋区段。若用户下一次直接报告任务机制或卡点，按对应受影响窗口继续修改；不要从战歌开场重算整张北风。
 4. 继续记录五开真值：共享/个人拾取、任务物使用、护送/脚本、地形入口与真实折返。确认后先改正式执行路线，再写`data/observations/`与必要的长期规则。

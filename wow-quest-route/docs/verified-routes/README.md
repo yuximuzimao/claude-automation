@@ -7,7 +7,8 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续首组实跑先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新诺森德路线阶段NEAT：[`../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md`](../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md)，包含北风/龙骨/灰熊视频反审、祖达克冻结与对抗性审查、斗兽场首跑门槛和下一地图恢复点。
+- 最新路线阶段NEAT：[`../archive/neat/2026-08-20-dragonblight-first-run-timing-estimator-neat.md`](../archive/neat/2026-08-20-dragonblight-first-run-timing-estimator-neat.md)，包含龙骨步骤1—11首跑、任务/五开纠错、估时器全局修正、四图重算和当前步骤12恢复点。
+- 上一阶段诺森德路线冻结NEAT：[`../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md`](../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md)，保留北风/龙骨/灰熊视频反审、祖达克冻结与斗兽场首跑门槛形成过程。
 - 上一阶段Route Atlas优化规则统一、动态交通与时间基准NEAT：[`../archive/neat/2026-08-17-route-atlas-optimization-rules-neat.md`](../archive/neat/2026-08-17-route-atlas-optimization-rules-neat.md)。
 - 若CURRENT明确需要更早首组北风机制形成过程，再定向读：[`../archive/neat/2026-08-16-borean-live-route-mechanics-neat.md`](../archive/neat/2026-08-16-borean-live-route-mechanics-neat.md)。
 - 若需要龙骨荒野成稿/冷启动复审形成过程，再定向读：[`../archive/neat/2026-08-16-dragonblight-player-review-neat.md`](../archive/neat/2026-08-16-dragonblight-player-review-neat.md)。

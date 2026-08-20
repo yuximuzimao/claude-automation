@@ -102,7 +102,7 @@ The exporter must not claim these values are TitanReforged values. They are a Wo
 
 Also write:
 
-`docs/analysis/2026-08-13-zangarmarsh-respawn-proxy-audit.md`
+`docs/archive/analysis/2026-08-13-zangarmarsh-respawn-proxy-audit.md`
 
 Include:
 

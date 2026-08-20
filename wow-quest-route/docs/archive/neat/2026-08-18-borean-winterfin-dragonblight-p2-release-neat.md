@@ -117,5 +117,5 @@ Questie物品反查存在把地面/脚本产物误判成怪掉落的情况。本
 
 - 本NEAT是本阶段最新形成过程恢复点。
 - `docs/verified-routes/CURRENT.md`是当前状态权威入口。
-- `data/route-atlas/dragonblight-p2-release-audit.json`与`docs/analysis/2026-08-18-dragonblight-p2-release-audit.md`是龙骨P2正式发布审计。
+- `data/route-atlas/dragonblight-p2-release-audit.json`与`docs/archive/analysis/2026-08-18-dragonblight-p2-release-audit.md`是龙骨P2正式发布审计。
 - 旧`2026-08-18-borean-flight-fix-dragonblight-tagging-html-neat.md`只作历史追溯，其中“11591必须先接”和最初266全量打标结论不得恢复为当前事实。

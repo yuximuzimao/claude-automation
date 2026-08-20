@@ -3,7 +3,7 @@
 日期：2026-08-14
 状态：约束正确性草案；用于替代R5以后旧插入顺序的重建分支。尚不是最终从零执行稿，也尚未覆盖用户仍在变化的当前实跑状态。
 基线：R4任务/目标簇状态；R4炉石不冻结。
-规则冲突审计：`docs/analysis/2026-08-14-route-atlas-constraint-gate-conflict-audit.md`。
+规则冲突审计：`docs/archive/analysis/2026-08-14-route-atlas-constraint-gate-conflict-audit.md`。
 
 ## 1. 为什么从R4开始
 

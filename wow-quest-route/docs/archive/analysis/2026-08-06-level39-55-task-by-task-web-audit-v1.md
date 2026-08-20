@@ -22,7 +22,7 @@
 
 - 97个能在35—55基础表中定位；
 - 3441、3453、4141、4245、4491未进入当前基础表，但可从Questie原始库或公开任务资料补齐；
-- 逐任务静态矩阵：`docs/analysis/2026-08-06-current-route-static-evidence-matrix.md`；
+- 逐任务静态矩阵：`docs/archive/analysis/2026-08-06-current-route-static-evidence-matrix.md`；
 - 原始压缩证据：`data/routes/horde/blood-elf/current-route-task-evidence.json`。
 
 V1并非102个都要执行：其中包括明确跳过项、上下文任务和备用任务。本报告对所有提及任务给出状态，不把“正文出现”误算成“主线选中”。

@@ -52,7 +52,7 @@
   - `data/route-atlas/dragonblight-removal-priority-tags.json`
   - `data/route-atlas/dragonblight-task-attribute-locks.json`
   - `data/route-atlas/dragonblight-removal-decision-locks.json`
-  - `docs/analysis/2026-08-18-dragonblight-removal-priority-tags.md`
+  - `docs/archive/analysis/2026-08-18-dragonblight-removal-priority-tags.md`
 
 ## Innovation / Reuse
 

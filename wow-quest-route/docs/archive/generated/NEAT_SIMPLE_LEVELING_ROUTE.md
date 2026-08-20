@@ -9,4 +9,4 @@
 3. `docs/task-library/`：逐任务等级、掉率、位置、地形、五开机制和取舍结论。
 4. `docs/verified-routes/ERROR-BOOK.md`：错误原因与禁止复发项。
 
-旧自动候选和生成结果仍可从`data/routes/`、`docs/analysis/`、Git历史及工作区备份查到，但不能作为玩家执行攻略。
+旧自动候选和生成结果仍可从`data/routes/`、`docs/archive/analysis/`、Git历史及工作区备份查到，但不能作为玩家执行攻略。

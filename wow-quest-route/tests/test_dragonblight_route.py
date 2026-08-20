@@ -36,7 +36,7 @@ def test_dragonblight_route_is_in_single_workbench_with_map_asset():
     route = routes["dragonblight"]
     assert route["image"] == "maps/65-dragonblight-hd.jpg"
     assert (ROOT / "data/routes" / route["image"]).exists()
-    assert len(route["points"]) == 194
+    assert len(route["points"]) == 195
     assert len(route["stepGroups"]) == 51
     assert "龙骨荒野" in HTML.read_text(encoding="utf-8")
 
@@ -58,8 +58,8 @@ def test_dragonblight_foundation_coverage_has_no_accidental_missing_tasks():
 def test_dragonblight_route_keeps_core_special_mechanics_visible():
     text = route_text(load_routes()["dragonblight"])
     required = (
-        "《血之魔典》由这里的教徒掉落任务起始物",
-        "插下战歌军旗后守到事件真正完成",
+        "必须先完成《死亡名单：扎古斯》",
+        "五个角色都需要各自插旗",
         "打到低血量等张嘴",
         "用控制器召伐木机收50捆木材",
         "腐蚀性唾液",
@@ -85,7 +85,7 @@ def test_dragonblight_route_uses_transport_and_player_facing_narf_fix():
     assert "系统鸟：莫亚基 → 阿格玛" in text
     assert "系统鸟：库卡隆 → 龙眠神殿" in text
     assert "系统鸟：龙眠 → 库卡隆" in text
-    assert sum(1 for point in route["points"] if point[6] == "hearth") == 3
+    assert sum(1 for point in route["points"] if point[6] == "hearth") == 4
     assert sum(1 for point in route["points"] if point[6] == "taxi") >= 3
 
 

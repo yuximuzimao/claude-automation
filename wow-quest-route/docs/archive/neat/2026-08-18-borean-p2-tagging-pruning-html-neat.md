@@ -114,7 +114,7 @@
 结构化审计见：
 
 - `data/route-atlas/borean-remaining-p2-removal-impact-audit.json`
-- `docs/analysis/2026-08-18-borean-remaining-p2-formal-removal-impact.md`
+- `docs/archive/analysis/2026-08-18-borean-remaining-p2-formal-removal-impact.md`
 
 ### 9. 路线几何实际重排
 
