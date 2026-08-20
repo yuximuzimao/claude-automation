@@ -979,6 +979,40 @@ async function execReprocessOne(op) {
   }
   assertNotAborted(op);
 
+  // 重新采集必须使用本次列表卡片的时效，不能沿用 queue 中的旧截止时间。
+  // 平台阶段变化可能把原本 <=48h 的倒计时延长到十几天；此时只刷新本地状态，不打开详情处理。
+  const freshState = buildFreshReprocessState(
+    queueItem,
+    located.ticket,
+    accountResult.matchedNote
+  );
+  const refreshedQueueItem = db.updateQueueItem(queueItem.id, freshState.queuePatch) || {
+    ...queueItem,
+    ...freshState.queuePatch,
+  };
+  const processingDependencies = step14.loadDefaultDependencies();
+  if (freshState.outside48Hours) {
+    const latestSimulation = db.readSimulations()
+      .filter(simulation => simulation && simulation.queueItemId === queueItem.id)
+      .at(-1) || null;
+    const processed = buildOutside48ReprocessProcessed(freshState, latestSimulation);
+    const reason = processed.decision.reason;
+    const persisted = await processingDependencies.persistOutcome({
+      account: accountResult,
+      queueItem: refreshedQueueItem,
+      ticket: freshState.ticket,
+      processed,
+      source: 'reprocess_outside_48h',
+    });
+    log(`[${queueItem.workOrderNum}] ${reason}`);
+    return {
+      skipped: true,
+      reason,
+      currentTotalHours: freshState.ticket.totalHours,
+      persistedSimulationId: persisted && persisted.id,
+    };
+  }
+
   // Step 4: 点击处理按钮，打开详情 tab
   const opened = await clickWorkOrderAction(queueItem.workOrderNum, { targetId: listTargetId });
   if (!opened || !opened.success || !opened.newTargetId) {
@@ -991,13 +1025,8 @@ async function execReprocessOne(op) {
   assertNotAborted(op);
 
   // ── Step 5: 完整复用扫描工单的采集、推理、自动执行和写回链路 ──
-  const processingDependencies = step14.loadDefaultDependencies();
   const erpTargetId = await processingDependencies.resolveErpTargetId(null);
-  const ticket = buildFreshReprocessTicket(queueItem, located.ticket, accountResult.matchedNote);
-  db.updateQueueItem(queueItem.id, {
-    type: ticket.type || null,
-    platformStage: ticket.platformStage,
-  });
+  const ticket = freshState.ticket;
   try {
     const { processed } = await processRecheckedOpenedDetail({
       account: accountResult,
@@ -1005,7 +1034,7 @@ async function execReprocessOne(op) {
       detailTargetId,
       erpTargetId,
       ticket,
-      queueItem,
+      queueItem: refreshedQueueItem,
     }, { step14, dependencies: processingDependencies });
     log(`[${queueItem.workOrderNum}] 重新采集推理完成 → ${processed.decision.action}${processed.status === 'auto_executed' ? ' (已自动执行)' : processed.decision.waitingRescan ? ' (等待重查)' : ''}`);
   } finally {
@@ -1038,6 +1067,73 @@ function buildFreshReprocessTicket(queueItem, locatedTicket, matchedNote = '') {
     type: freshTicket.type || queueItem.type,
     accountNote: queueItem.accountNote || matchedNote || '',
     platformStage: getTicketPlatformStage(freshTicket),
+    remaining: freshTicket.remaining || null,
+    totalHours: freshTicket.totalHours == null ? null : Number(freshTicket.totalHours),
+  };
+}
+
+function buildFreshReprocessState(queueItem, locatedTicket, matchedNote = '', nowMs = Date.now()) {
+  const ticket = buildFreshReprocessTicket(queueItem, locatedTicket, matchedNote);
+  if (!Number.isFinite(ticket.totalHours) || ticket.totalHours < 0) {
+    throw new Error(`工单 ${queueItem.workOrderNum} 当前倒计时解析失败，停止重新采集`);
+  }
+  const urgency = ticket.remaining || `${Math.floor(ticket.totalHours)}小时`;
+  return {
+    ticket,
+    outside48Hours: ticket.totalHours > 48,
+    queuePatch: {
+      type: ticket.type || null,
+      platformStage: ticket.platformStage,
+      urgency,
+      deadlineAt: new Date(nowMs + ticket.totalHours * 3600000).toISOString(),
+    },
+  };
+}
+
+function buildOutside48ReprocessProcessed(freshState, latestSimulation = null, observedAt = new Date().toISOString()) {
+  const ticket = freshState.ticket;
+  const previousCollectedData = latestSimulation && latestSimulation.collectedData;
+  const previousTicket = previousCollectedData && previousCollectedData.ticket;
+  const currentTimer = ticket.remaining || `${ticket.totalHours.toFixed(1)}小时`;
+  const reason = `当前倒计时为 ${currentTimer}，已超过48小时处理范围；本次不重新采集，达到48小时后系统会重新纳入清单。`;
+  return {
+    status: 'simulated',
+    internalStatus: 'reprocess_outside_48h',
+    collectedData: {
+      ...(previousCollectedData || {}),
+      ticket: {
+        ...(previousTicket || {}),
+        ...ticket,
+      },
+      platformStage: ticket.platformStage,
+      outside48h: {
+        observedAt,
+        totalHours: ticket.totalHours,
+        source: 'manual_reprocess_list',
+      },
+    },
+    decision: {
+      action: 'escalate',
+      recommendedActionLabel: '已移出48小时范围',
+      reason,
+      reasonCode: 'OUTSIDE_48H_DEFERRED',
+      confidence: 'high',
+      inferredAt: observedAt,
+      requiresHumanReview: false,
+      autoExecutionBlocked: true,
+      humanTriggeredExecutionAllowed: false,
+      rulesApplied: [{
+        doc: 'INDEX',
+        section: '3.1',
+        summary: '当前倒计时超过48小时→停止重采，等待重新进入处理范围',
+      }],
+      warnings: ['此结果只表示暂不处理，不代表平台工单已关闭或已完成。'],
+      context: {
+        workOrderNum: ticket.workOrderNum,
+        outside48Hours: true,
+        currentTotalHours: ticket.totalHours,
+      },
+    },
   };
 }
 
@@ -1305,6 +1401,8 @@ module.exports = {
   updateAccountStatus,
   canManuallyExecuteWaitingIntercept,
   buildFreshReprocessTicket,
+  buildFreshReprocessState,
+  buildOutside48ReprocessProcessed,
   buildA1FixedBatchFailureStatus,
   createScanReminderState,
   updateScanReminderState,

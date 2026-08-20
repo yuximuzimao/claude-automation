@@ -94,11 +94,88 @@ test('重新采集使用本次列表定位到的新阶段，不沿用 queue 旧�
     workOrderNum: '100001785233662360131',
     type: '换货',
     status: '商家-待商家二次发货',
+    remaining: '1 天 5 小时 30 分 后自动换货',
+    totalHours: 29.5,
   });
 
   assert.equal(ticket.platformStage.raw, '商家-待商家二次发货');
   assert.equal(ticket.platformStage.readState, 'read');
   assert.notEqual(ticket.platformStage.observedAt, '2026-08-10T03:00:00.000Z');
+  assert.equal(ticket.remaining, '1 天 5 小时 30 分 后自动换货');
+  assert.equal(ticket.totalHours, 29.5);
+});
+
+test('重新采集用当前列表倒计时覆盖旧截止时间，超过48小时则停止处理', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildFreshReprocessState } = require('../../lib/server/op-queue');
+  const nowMs = Date.parse('2026-08-20T08:00:00.000Z');
+  const state = buildFreshReprocessState({
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+    accountNote: '测试店铺',
+    urgency: '1 天 14 小时 9 分 后自动退货退款',
+    deadlineAt: '2026-08-21T02:09:47.537Z',
+  }, {
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+    status: '商家-待收货',
+    remaining: '12 天 23 小时 45 分 后自动退货退款',
+    totalHours: 311.75,
+  }, '测试店铺', nowMs);
+
+  assert.equal(state.outside48Hours, true);
+  assert.equal(state.queuePatch.urgency, '12 天 23 小时 45 分 后自动退货退款');
+  assert.equal(state.queuePatch.deadlineAt, '2026-09-02T07:45:00.000Z');
+  assert.notEqual(state.queuePatch.deadlineAt, '2026-08-21T02:09:47.537Z');
+});
+
+test('超过48小时的重新采集写入明确暂缓结果，不继续展示旧缺失告警', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildFreshReprocessState, buildOutside48ReprocessProcessed } = require('../../lib/server/op-queue');
+  const state = buildFreshReprocessState({
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+    accountNote: '测试店铺',
+  }, {
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+    status: '商家-待收货',
+    remaining: '12 天 23 小时 45 分 后自动退货退款',
+    totalHours: 311.75,
+  });
+  const processed = buildOutside48ReprocessProcessed(state, {
+    id: 'waiting-missing-old',
+    collectedData: {
+      ticket: { workOrderNum: '100001786710544972432', returnTracking: 'YT1234567890' },
+    },
+    decision: { reasonCode: 'WAITING_RESCAN_MISSING_FROM_48H_LIST' },
+  }, '2026-08-20T08:00:00.000Z');
+
+  assert.equal(processed.status, 'simulated');
+  assert.equal(processed.decision.reasonCode, 'OUTSIDE_48H_DEFERRED');
+  assert.equal(processed.decision.recommendedActionLabel, '已移出48小时范围');
+  assert.match(processed.decision.reason, /12 天 23 小时 45 分/);
+  assert.equal(processed.decision.humanTriggeredExecutionAllowed, false);
+  assert.equal(processed.collectedData.ticket.returnTracking, 'YT1234567890');
+  assert.deepEqual(processed.collectedData.outside48h, {
+    observedAt: '2026-08-20T08:00:00.000Z',
+    totalHours: 311.75,
+    source: 'manual_reprocess_list',
+  });
+});
+
+test('重新采集无法读取当前倒计时时安全停止', () => {
+  delete require.cache[require.resolve('../../lib/server/op-queue')];
+  const { buildFreshReprocessState } = require('../../lib/server/op-queue');
+  assert.throws(() => buildFreshReprocessState({
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+  }, {
+    workOrderNum: '100001786710544972432',
+    type: '退货退款',
+    remaining: null,
+    totalHours: null,
+  }), /当前倒计时解析失败/);
 });
 
 test('等待重查完整复用扫描处理链路，七天无理由命中后可自动执行并统一写回', async () => {
