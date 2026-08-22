@@ -1,0 +1,2515 @@
+{
+  "status": "foundation_scope_complete_route_not_yet_frozen",
+  "zone": {
+    "id": 4395,
+    "name": "达拉然"
+  },
+  "profile": "blood-elf-paladin",
+  "current_level": 77,
+  "from_zero_entry_state": {
+    "previous_zone": "龙骨荒野",
+    "dragonblight_complete": true,
+    "carried_in_quest_ids": [
+      12791
+    ]
+  },
+  "source": {
+    "questie_version": "11.34.0",
+    "source_sha256": "3c31d28a9c18189f3e245cdfb5b806210612e66da91c3661757c363724957861"
+  },
+  "candidate_recall": {
+    "assigned_count": 9,
+    "direct_touch_count": 128,
+    "correction_hint_count": 37,
+    "union_count": 153
+  },
+  "status_counts": {
+    "boundary_turnin_only": 2,
+    "defer_live_unavailable": 1,
+    "exclude_faction": 53,
+    "future_level": 5,
+    "include_carried_in_now": 1,
+    "include_local_now": 1,
+    "include_outbound_breadcrumb_now": 3,
+    "knowledge_calendar_event": 4,
+    "knowledge_dungeon_or_raid": 31,
+    "knowledge_event_or_legacy_sort": 19,
+    "knowledge_off_axis_outbound": 3,
+    "knowledge_profession": 22,
+    "knowledge_pvp": 3,
+    "knowledge_repeatable_or_calendar": 3,
+    "knowledge_touch_only": 1
+  },
+  "current_formal_ids": [
+    12521,
+    12790,
+    12791,
+    12853,
+    12974
+  ],
+  "local_close_now_ids": [
+    12790,
+    12791
+  ],
+  "outbound_breadcrumb_now_ids": [
+    12521,
+    12853,
+    12974
+  ],
+  "rows": [
+    {
+      "quest_id": 8367,
+      "name": "无上的荣耀",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_pvp",
+      "scope_reasons": [
+        "non_mob_pvp_not_in_outdoor_mainline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8388,
+      "name": "无上的荣耀",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_pvp",
+      "scope_reasons": [
+        "non_mob_pvp_not_in_outdoor_mainline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8827,
+      "name": "冬天的礼物",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8828,
+      "name": "冬天的礼物",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8860,
+      "name": "庆祝新年！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8861,
+      "name": "庆祝新年！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8867,
+      "name": "春节烟花",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8870,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8871,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8872,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8873,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8874,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8875,
+      "name": "春节将至！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 8883,
+      "name": "瓦拉达尔·星歌",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 10176,
+      "name": "守护者阿尔凯洛斯",
+      "required_level": 67,
+      "quest_level": 68,
+      "scope_status": "boundary_turnin_only",
+      "scope_reasons": [
+        "starts_outside_current_dalaran_route"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 10256,
+      "name": "钥匙的主人",
+      "required_level": 67,
+      "quest_level": 69,
+      "scope_status": "knowledge_off_axis_outbound",
+      "scope_reasons": [
+        "assigned_zone_3523_outside_current_northrend_spine"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 10257,
+      "name": "夺回钥石",
+      "required_level": 67,
+      "quest_level": 70,
+      "scope_status": "knowledge_off_axis_outbound",
+      "scope_reasons": [
+        "assigned_zone_3523_outside_current_northrend_spine"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11243,
+      "name": "如果瓦加德失守……",
+      "required_level": 68,
+      "quest_level": 70,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11335,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11336,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11337,
+      "name": "战斗的召唤：风暴之眼",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11338,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11339,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11340,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11341,
+      "name": "战斗的召唤：风暴之眼",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_calendar_event",
+      "scope_reasons": [
+        "event_not_part_of_reusable_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11342,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 11356,
+      "name": "穿戏服的孤儿院长",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11357,
+      "name": "戴面具的孤儿院长",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11441,
+      "name": "美酒节！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11446,
+      "name": "美酒节！",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11970,
+      "name": "节日博学者",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 11971,
+      "name": "节日诗人",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12521,
+      "name": "赫米特·奈辛瓦里哪去了？",
+      "required_level": 76,
+      "quest_level": 76,
+      "scope_status": "include_outbound_breadcrumb_now",
+      "scope_reasons": [
+        "one_time_current_level_starts_in_dalaran_on_main_axis"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12752,
+      "name": "绝望的研究",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12753,
+      "name": "绝望的联军",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12772,
+      "name": "绝望的联军",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12775,
+      "name": "绝望的联军",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12777,
+      "name": "绝望的联军",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12782,
+      "name": "绝望的研究",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12783,
+      "name": "绝望的研究",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12784,
+      "name": "绝望的研究",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12790,
+      "name": "来去如风",
+      "required_level": 68,
+      "quest_level": 74,
+      "scope_status": "include_local_now",
+      "scope_reasons": [
+        "one_time_current_level_local"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12791,
+      "name": "魔法王国达拉然",
+      "required_level": 74,
+      "quest_level": 74,
+      "scope_status": "include_carried_in_now",
+      "scope_reasons": [
+        "龙骨荒野已接《魔法王国达拉然》并携带进入达拉然"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12794,
+      "name": "魔法王国达拉然",
+      "required_level": 74,
+      "quest_level": 74,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12796,
+      "name": "魔法王国达拉然",
+      "required_level": 74,
+      "quest_level": 74,
+      "scope_status": "boundary_turnin_only",
+      "scope_reasons": [
+        "starts_outside_current_dalaran_route"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12808,
+      "name": "绝望的联军",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12811,
+      "name": "绝望的研究",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12853,
+      "name": "豪华的体验！",
+      "required_level": 77,
+      "quest_level": 78,
+      "scope_status": "include_outbound_breadcrumb_now",
+      "scope_reasons": [
+        "one_time_current_level_starts_in_dalaran_on_main_axis"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12958,
+      "name": "货单：血玉护符",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12959,
+      "name": "货单：炽热鹿牙雕像",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12960,
+      "name": "货单：邪恶太阳胸针",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12961,
+      "name": "货单：精致龙骨雕像",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12962,
+      "name": "货单：光芒护甲圣物",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12963,
+      "name": "货单：迅捷烈日古器",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 12974,
+      "name": "勇士的召唤！",
+      "required_level": 75,
+      "quest_level": 77,
+      "scope_status": "include_outbound_breadcrumb_now",
+      "scope_reasons": [
+        "one_time_current_level_starts_in_dalaran_on_main_axis"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13041,
+      "name": "完成订单",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13100,
+      "name": "魔法蘑菇肉片",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13101,
+      "name": "魔术旅馆的集会",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13102,
+      "name": "下水道炖肉",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13103,
+      "name": "兰尼德的奶酪",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13107,
+      "name": "荠菜热狗！",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13112,
+      "name": "魔法蘑菇肉片",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13113,
+      "name": "魔术旅馆的集会",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13114,
+      "name": "下水道炖肉",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13115,
+      "name": "兰尼德的奶酪",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13116,
+      "name": "荠菜热狗！",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13148,
+      "name": "修理项链",
+      "required_level": 77,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13158,
+      "name": "谨慎行事",
+      "required_level": 75,
+      "quest_level": 77,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13159,
+      "name": "堵截",
+      "required_level": 75,
+      "quest_level": 77,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13181,
+      "name": "冬拥湖的胜利",
+      "required_level": 78,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13183,
+      "name": "冬拥湖的胜利",
+      "required_level": 78,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13272,
+      "name": "布匹搜寻",
+      "required_level": 0,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13405,
+      "name": "战斗的召唤：远古海滩",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13407,
+      "name": "战斗的召唤：远古海滩",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_calendar_event",
+      "scope_reasons": [
+        "event_not_part_of_reusable_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13418,
+      "name": "作战准备",
+      "required_level": 77,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13419,
+      "name": "作战准备",
+      "required_level": 77,
+      "quest_level": 80,
+      "scope_status": "defer_live_unavailable",
+      "scope_reasons": [
+        "requires_learned_cold_weather_flying_current_route_uses_k3_loaner_instead"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13427,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13428,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13463,
+      "name": "糖罐",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13472,
+      "name": "糖罐",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13473,
+      "name": "糖罐",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13476,
+      "name": "无上的荣耀",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_pvp",
+      "scope_reasons": [
+        "non_mob_pvp_not_in_outdoor_mainline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13483,
+      "name": "春季收集者",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13484,
+      "name": "春季收藏者",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13571,
+      "name": "失而复得",
+      "required_level": 0,
+      "quest_level": 80,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13631,
+      "name": "结果好，一切都好",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13819,
+      "name": "英雄：结果好，一切都好",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13830,
+      "name": "幽灵鱼",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13832,
+      "name": "下水道中的珍宝",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13833,
+      "name": "危险的美食",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13834,
+      "name": "危险的美食",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13836,
+      "name": "胳膊丢了！",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 13845,
+      "name": "密封的毒药瓶",
+      "required_level": 70,
+      "quest_level": 80,
+      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_reasons": [
+        "not_one_time_baseline"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13926,
+      "name": "神谕者孤儿鲁鲁",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13927,
+      "name": "狼獾人孤儿科科",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13959,
+      "name": "返回孤儿院",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13960,
+      "name": "返回孤儿院",
+      "required_level": 70,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 13986,
+      "name": "受伤的同伴",
+      "required_level": 71,
+      "quest_level": 73,
+      "scope_status": "knowledge_off_axis_outbound",
+      "scope_reasons": [
+        "assigned_zone_1638_outside_current_northrend_spine"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14022,
+      "name": "感恩节",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14036,
+      "name": "感恩节",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_event_or_legacy_sort",
+      "scope_reasons": [
+        "negative_quest_level_or_sort_not_northrend_map_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14106,
+      "name": "纳·卡达的任务测试",
+      "required_level": 0,
+      "quest_level": 0,
+      "scope_status": "knowledge_touch_only",
+      "scope_reasons": [
+        "touches_dalaran_but_not_current_start_or_turnin"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14151,
+      "name": "赤玉石",
+      "required_level": 65,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14160,
+      "name": "功勋状",
+      "required_level": 1,
+      "quest_level": -1,
+      "scope_status": "knowledge_profession",
+      "scope_reasons": [
+        "requires_profession_or_skill"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14163,
+      "name": "战斗的召唤：征服之岛",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14164,
+      "name": "战斗的召唤：征服之岛",
+      "required_level": 71,
+      "quest_level": -1,
+      "scope_status": "knowledge_calendar_event",
+      "scope_reasons": [
+        "event_not_part_of_reusable_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14178,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14179,
+      "name": "战斗的召唤：风暴之眼",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14180,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14181,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14182,
+      "name": "战斗的召唤：风暴之眼",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_calendar_event",
+      "scope_reasons": [
+        "event_not_part_of_reusable_baseline"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14183,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 61,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 14203,
+      "name": "被浸透的配方",
+      "required_level": 70,
+      "quest_level": 80,
+      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_reasons": [
+        "not_one_time_baseline"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14409,
+      "name": "谨慎的回访",
+      "required_level": 71,
+      "quest_level": 73,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14444,
+      "name": "巨龙所知道的",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 14457,
+      "name": "夺日者的计划",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 20438,
+      "name": "适当的伪装",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 20439,
+      "name": "与魔导师会面",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "not_horde_blood_elf"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24216,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 21,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24217,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 11,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24218,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 21,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24219,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 11,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24220,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 21,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24221,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 21,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24223,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24224,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24225,
+      "name": "战斗的召唤：战歌峡谷",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24226,
+      "name": "战斗的召唤：阿拉希盆地",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24426,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24427,
+      "name": "战斗的召唤：奥特兰克山谷",
+      "required_level": 51,
+      "quest_level": -1,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": true
+    },
+    {
+      "quest_id": 24431,
+      "name": "被浸透的配方",
+      "required_level": 70,
+      "quest_level": 80,
+      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_reasons": [
+        "not_one_time_baseline"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24451,
+      "name": "会见奥术师",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "future_level",
+      "scope_reasons": [
+        "requires_level_80"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24454,
+      "name": "去见卡莱迪斯·亮矛",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24506,
+      "name": "进入寒冰堡垒",
+      "required_level": 78,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24510,
+      "name": "进入寒冰堡垒",
+      "required_level": 78,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24555,
+      "name": "巨龙所知道的",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "future_level",
+      "scope_reasons": [
+        "requires_level_80"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24556,
+      "name": "适当的伪装",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "future_level",
+      "scope_reasons": [
+        "requires_level_80"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24557,
+      "name": "银色盟约的计谋",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "future_level",
+      "scope_reasons": [
+        "requires_level_80"
+      ],
+      "assigned_to_dalaran": true,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": true,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24558,
+      "name": "去见麦雷昂·阳炎",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "future_level",
+      "scope_reasons": [
+        "requires_level_80"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24579,
+      "name": "消灭萨塔里奥！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24580,
+      "name": "阿努布雷坎必须死",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24581,
+      "name": "消灭药剂师诺斯！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24582,
+      "name": "消灭教官拉苏维奥斯！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24583,
+      "name": "消灭帕奇维克！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24584,
+      "name": "消灭玛里苟斯",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24585,
+      "name": "烈焰巨兽必须死！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24586,
+      "name": "消灭锋鳞",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24587,
+      "name": "消灭掌炉者伊格尼斯！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24588,
+      "name": "消灭XT-002拆解者！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24589,
+      "name": "消灭加拉克苏斯大王！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24590,
+      "name": "消灭玛洛加尔领主！",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 24796,
+      "name": "银色盟约的胜利",
+      "required_level": 80,
+      "quest_level": 80,
+      "scope_status": "exclude_faction",
+      "scope_reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": false,
+      "finish_in_dalaran": true,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    },
+    {
+      "quest_id": 26012,
+      "name": "龙眠之灾",
+      "required_level": 80,
+      "quest_level": 82,
+      "scope_status": "knowledge_dungeon_or_raid",
+      "scope_reasons": [
+        "outdoor_mainline_policy"
+      ],
+      "assigned_to_dalaran": false,
+      "start_in_dalaran": true,
+      "finish_in_dalaran": false,
+      "item_start_in_dalaran": false,
+      "objective_in_dalaran": false,
+      "correction_hint": false
+    }
+  ]
+}

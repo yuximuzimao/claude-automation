@@ -1,0 +1,97 @@
+{
+  "status": "foundation_complete_route_not_yet_frozen",
+  "zone": {
+    "id": 4395,
+    "name": "达拉然"
+  },
+  "cluster_count": 4,
+  "clusters": [
+    {
+      "entity_type": "npc",
+      "entity_id": 30490,
+      "name": "林·多克塔",
+      "representative": {
+        "x": 37.68,
+        "y": 50.17
+      },
+      "quest_ids": [
+        12853
+      ],
+      "relations": [
+        {
+          "quest_id": 12853,
+          "name": "豪华的体验！",
+          "role": "start"
+        }
+      ]
+    },
+    {
+      "entity_type": "npc",
+      "entity_id": 30137,
+      "name": "狡猾的维克斯",
+      "representative": {
+        "x": 48.18,
+        "y": 44.71
+      },
+      "quest_ids": [
+        12974
+      ],
+      "relations": [
+        {
+          "quest_id": 12974,
+          "name": "勇士的召唤！",
+          "role": "start"
+        }
+      ]
+    },
+    {
+      "entity_type": "npc",
+      "entity_id": 29156,
+      "name": "大法师塞琳德拉",
+      "representative": {
+        "x": 56.3,
+        "y": 46.72
+      },
+      "quest_ids": [
+        12790,
+        12791
+      ],
+      "relations": [
+        {
+          "quest_id": 12790,
+          "name": "来去如风",
+          "role": "start"
+        },
+        {
+          "quest_id": 12790,
+          "name": "来去如风",
+          "role": "finish"
+        },
+        {
+          "quest_id": 12791,
+          "name": "魔法王国达拉然",
+          "role": "finish"
+        }
+      ]
+    },
+    {
+      "entity_type": "npc",
+      "entity_id": 28160,
+      "name": "大法师伯塔鲁斯",
+      "representative": {
+        "x": 68.55,
+        "y": 42.05
+      },
+      "quest_ids": [
+        12521
+      ],
+      "relations": [
+        {
+          "quest_id": 12521,
+          "name": "赫米特·奈辛瓦里哪去了？",
+          "role": "start"
+        }
+      ]
+    }
+  ]
+}

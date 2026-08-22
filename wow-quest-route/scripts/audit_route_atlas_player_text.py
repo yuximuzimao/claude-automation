@@ -28,13 +28,10 @@ VAGUE_ACTION_PATTERNS = (
     r"显示锚点",
 )
 
-# Every accept / turn-in must carry its own verb. These patterns catch shorthand such as
-# `交《A》 + 《B》`, `接《A》《B》`, or `交《A》、《B》` where the second quest's action
-# has to be inferred by a player or an audit script.
-IMPLICIT_HANDOFF_PATTERNS = (
-    r"交《[^》]+》\s*(?:\+|、|，|及|和|与|/)?\s*《",
-    r"接《[^》]+》\s*(?:\+|、|，|及|和|与|/)?\s*《",
-)
+# Compact same-verb handoffs are intentionally allowed in the player HUD, for example
+# `交《A》《B》《C》` or `接《D》《E》`. The verb applies to the contiguous task-name run;
+# this keeps dense hub handoffs readable without repeating `交/接` before every quest.
+IMPLICIT_HANDOFF_PATTERNS: tuple[str, ...] = ()
 
 # Explicit cross-map carry tasks are allowed to remain open at the end of the current map.
 # Anything else accepted without a visible `交《任务名》` is a route integrity failure.
@@ -42,6 +39,7 @@ LIFECYCLE_ALLOWLIST = {
     "zang": {"通知塞纳里奥议会"},
     "borean": {"前往莫亚基港口"},
     "dragonblight": {"前往征服堡，自求多福吧！", "前往圣光据点！", "黑暗的骚动", "魔法王国达拉然"},
+    "dalaran": {"赫米特·奈辛瓦里哪去了？", "勇士的召唤！", "作战准备"},
 }
 
 
@@ -64,15 +62,16 @@ def main() -> None:
                 bad.append((route_key, step_index, group.get("title", ""), summary, "empty summary"))
 
     lifecycle = []
-    accept_re = re.compile(r"(?:接|自动接|右键接)(?:并(?:做|交))?《([^》]+)》")
-    turnin_re = re.compile(r"交《([^》]+)》")
+    handoff_re = re.compile(r"(?<!暂不)(自动接|右键接|接|交)((?:《[^》]+》(?:[、，\s]*))+)" )
     for route_key, route in routes.items():
         accepted: list[tuple[str, int]] = []
         turned_in: list[tuple[str, int]] = []
         for point_index, point in enumerate(route.get("points", []), 1):
             action = str(point[3]) if len(point) > 3 else ""
-            accepted.extend((name, point_index) for name in accept_re.findall(action))
-            turned_in.extend((name, point_index) for name in turnin_re.findall(action))
+            for verb, block in handoff_re.findall(action):
+                names = re.findall(r"《([^》]+)》", block)
+                target = turned_in if verb == "交" else accepted
+                target.extend((name, point_index) for name in names)
         turned_names = {name for name, _ in turned_in}
         allowed_open = LIFECYCLE_ALLOWLIST.get(route_key, set())
         for name, point_index in accepted:

@@ -800,8 +800,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 8.32,
-        "basis": "fivebox_personal_drop_model"
+        "minutes": 18.0,
+        "basis": "special_service_override"
       }
     },
     {
@@ -1173,8 +1173,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
+        "minutes": 10.0,
+        "basis": "special_service_override"
       }
     },
     {
@@ -1673,8 +1673,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 11.95,
-        "basis": "fivebox_personal_drop_model"
+        "minutes": 25.0,
+        "basis": "special_service_override"
       }
     },
     {
@@ -2438,7 +2438,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 0.58,
+        "minutes": 0.12,
         "basis": "fixed_object_fivebox_model"
       }
     },
@@ -2936,7 +2936,7 @@
       "quest_id": 12089,
       "name": "通缉：魔导师凯尔多努斯",
       "locked_tags": [
-        "chain:has_in_scope_followup",
+        "chain:terminal_in_scope",
         "reward:equipment",
         "scope:include_leveling_local",
         "timing:estimated"
@@ -2966,61 +2966,8 @@
         "scope_zone_ids": [
           65
         ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
-      }
-    },
-    {
-      "quest_id": 12090,
-      "name": "通缉：吉加托尔",
-      "locked_tags": [
-        "chain:has_in_scope_followup",
-        "reward:equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ],
-      "reward": {
-        "has_equipment_reward": true,
-        "has_direct_money": null,
-        "direct_money_status": "not_required_equipment_already_has_value",
-        "max_level_bonus_money": {
-          "level": 80,
-          "xp_at_level_80_base": 20750,
-          "bonus_money_from_xp_copper": 124500,
-          "bonus_money_from_xp_gold_decimal": 12.45,
-          "display": "12g 45s 00c",
-          "no_money_from_xp": false,
-          "rate": "6 copper per base XP at level 80",
-          "server_leveling_xp_multiplier_applied": false
-        }
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
+        "direct_followup_ids": [],
+        "descendant_ids": []
       },
       "timing": {
         "status": "estimated",
@@ -3032,7 +2979,7 @@
       "quest_id": 12091,
       "name": "通缉：恐怖之爪",
       "locked_tags": [
-        "chain:has_in_scope_followup",
+        "chain:terminal_in_scope",
         "reward:equipment",
         "scope:include_leveling_local",
         "timing:estimated"
@@ -3062,66 +3009,13 @@
         "scope_zone_ids": [
           65
         ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
+        "direct_followup_ids": [],
+        "descendant_ids": []
       },
       "timing": {
         "status": "estimated",
         "minutes": 1.5,
         "basis": "single_target_model"
-      }
-    },
-    {
-      "quest_id": 12095,
-      "name": "前往猎龙营地",
-      "locked_tags": [
-        "chain:has_in_scope_followup",
-        "reward:money_not_required_for_priority",
-        "reward:no_equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ],
-      "reward": {
-        "has_equipment_reward": false,
-        "has_direct_money": null,
-        "direct_money_status": "not_required_outside_priority_dependency_closure",
-        "max_level_bonus_money": {
-          "level": 80,
-          "xp_at_level_80_base": 2100,
-          "bonus_money_from_xp_copper": 12600,
-          "bonus_money_from_xp_gold_decimal": 1.26,
-          "display": "1g 26s 00c",
-          "no_money_from_xp": false,
-          "rate": "6 copper per base XP at level 80",
-          "server_leveling_xp_multiplier_applied": false
-        }
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [
-          12097
-        ],
-        "descendant_ids": [
-          12097
-        ]
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 0.0,
-        "basis": "no_independent_objective_service_hub_time_separate"
       }
     },
     {
@@ -3165,49 +3059,6 @@
         "status": "unknown",
         "minutes": null,
         "basis": "unsupported_task_class:elite_or_boss_kill"
-      }
-    },
-    {
-      "quest_id": 12097,
-      "name": "萨拉斯塔，北地的灾祸",
-      "locked_tags": [
-        "chain:terminal_in_scope",
-        "reward:equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ],
-      "reward": {
-        "has_equipment_reward": true,
-        "has_direct_money": null,
-        "direct_money_status": "not_required_equipment_already_has_value",
-        "max_level_bonus_money": {
-          "level": 80,
-          "xp_at_level_80_base": 31450,
-          "bonus_money_from_xp_copper": 188700,
-          "bonus_money_from_xp_gold_decimal": 18.87,
-          "display": "18g 87s 00c",
-          "no_money_from_xp": false,
-          "rate": "6 copper per base XP at level 80",
-          "server_leveling_xp_multiplier_applied": false
-        }
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [],
-        "descendant_ids": []
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
       }
     },
     {

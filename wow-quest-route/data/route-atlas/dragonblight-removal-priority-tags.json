@@ -9,7 +9,7 @@
       "11979": "mutually_exclusive_with_current_borean_entry_axis",
       "12033": "only_prerequisite_11916_removed_from_current_route"
     },
-    "usable_task_count": 145
+    "usable_task_count": 142
   },
   "chain_scope": [
     {
@@ -18,7 +18,7 @@
     }
   ],
   "summary": {
-    "task_card_count": 145,
+    "task_card_count": 142,
     "priority_candidate_count": 14,
     "priority_counts": {
       "P1": 0,
@@ -1688,8 +1688,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 8.32,
-        "basis": "fivebox_personal_drop_model"
+        "minutes": 18.0,
+        "basis": "special_service_override"
       },
       "removal_priority": {
         "eligible": true,
@@ -2294,8 +2294,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
+        "minutes": 10.0,
+        "basis": "special_service_override"
       },
       "removal_priority": {
         "eligible": false,
@@ -3090,8 +3090,8 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 11.95,
-        "basis": "fivebox_personal_drop_model"
+        "minutes": 25.0,
+        "basis": "special_service_override"
       },
       "removal_priority": {
         "eligible": true,
@@ -4503,7 +4503,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 0.58,
+        "minutes": 0.12,
         "basis": "fixed_object_fivebox_model"
       },
       "removal_priority": {
@@ -5343,13 +5343,8 @@
         "scope_zone_ids": [
           65
         ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
+        "direct_followup_ids": [],
+        "descendant_ids": []
       },
       "timing": {
         "status": "estimated",
@@ -5361,100 +5356,7 @@
         "reason": "not_multi_item_drop_or_pickup"
       },
       "tags": [
-        "chain:has_in_scope_followup",
-        "removal:not_eligible:not_multi_item_drop_or_pickup",
-        "reward:equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ]
-    },
-    {
-      "quest_id": 12090,
-      "name": "通缉：吉加托尔",
-      "english_name": "Wanted: Gigantaur",
-      "scope_status": "include_leveling_local",
-      "first_route_step": 4,
-      "has_equipment_reward": true,
-      "equipment_rewards": [
-        {
-          "item_id": 37969,
-          "name": "Chaos Mender Cloak",
-          "item_class": 4,
-          "item_subclass": 1,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38012,
-          "name": "Lothalar Woodwalker Bracers",
-          "item_class": 4,
-          "item_subclass": 2,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38055,
-          "name": "Ridgehunter Gauntlets",
-          "item_class": 4,
-          "item_subclass": 3,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38116,
-          "name": "Plated Magnataur Leggings",
-          "item_class": 4,
-          "item_subclass": 4,
-          "item_level": 146,
-          "required_level": 0
-        }
-      ],
-      "direct_money_status": "not_required_equipment_already_has_value",
-      "has_direct_money": null,
-      "max_level_bonus_money": {
-        "level": 80,
-        "xp_at_level_80_base": 20750,
-        "bonus_money_from_xp_copper": 124500,
-        "bonus_money_from_xp_gold_decimal": 12.45,
-        "display": "12g 45s 00c",
-        "no_money_from_xp": false,
-        "rate": "6 copper per base XP at level 80",
-        "server_leveling_xp_multiplier_applied": false
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null,
-        "objective_details": [],
-        "review_reasons": [],
-        "manual_override_source": null,
-        "manual_exclusion_reason": null,
-        "tags": []
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
-      },
-      "removal_priority": {
-        "eligible": false,
-        "reason": "not_multi_item_drop_or_pickup"
-      },
-      "tags": [
-        "chain:has_in_scope_followup",
+        "chain:terminal_in_scope",
         "removal:not_eligible:not_multi_item_drop_or_pickup",
         "reward:equipment",
         "scope:include_leveling_local",
@@ -5529,13 +5431,8 @@
         "scope_zone_ids": [
           65
         ],
-        "direct_followup_ids": [
-          12095
-        ],
-        "descendant_ids": [
-          12095,
-          12097
-        ]
+        "direct_followup_ids": [],
+        "descendant_ids": []
       },
       "timing": {
         "status": "estimated",
@@ -5547,69 +5444,9 @@
         "reason": "not_multi_item_drop_or_pickup"
       },
       "tags": [
-        "chain:has_in_scope_followup",
+        "chain:terminal_in_scope",
         "removal:not_eligible:not_multi_item_drop_or_pickup",
         "reward:equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ]
-    },
-    {
-      "quest_id": 12095,
-      "name": "前往猎龙营地",
-      "english_name": "To Dragon's Fall",
-      "scope_status": "include_leveling_local",
-      "first_route_step": 27,
-      "has_equipment_reward": false,
-      "equipment_rewards": [],
-      "direct_money_status": "not_required_outside_priority_dependency_closure",
-      "has_direct_money": null,
-      "max_level_bonus_money": {
-        "level": 80,
-        "xp_at_level_80_base": 2100,
-        "bonus_money_from_xp_copper": 12600,
-        "bonus_money_from_xp_gold_decimal": 1.26,
-        "display": "1g 26s 00c",
-        "no_money_from_xp": false,
-        "rate": "6 copper per base XP at level 80",
-        "server_leveling_xp_multiplier_applied": false
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null,
-        "objective_details": [],
-        "review_reasons": [],
-        "manual_override_source": null,
-        "manual_exclusion_reason": null,
-        "tags": []
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [
-          12097
-        ],
-        "descendant_ids": [
-          12097
-        ]
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 0.0,
-        "basis": "no_independent_objective_service_hub_time_separate"
-      },
-      "removal_priority": {
-        "eligible": false,
-        "reason": "not_multi_item_drop_or_pickup"
-      },
-      "tags": [
-        "chain:has_in_scope_followup",
-        "removal:not_eligible:not_multi_item_drop_or_pickup",
-        "reward:money_not_required_for_priority",
-        "reward:no_equipment",
         "scope:include_leveling_local",
         "timing:estimated"
       ]
@@ -5703,103 +5540,6 @@
       ]
     },
     {
-      "quest_id": 12097,
-      "name": "萨拉斯塔，北地的灾祸",
-      "english_name": "Sarathstra, Scourge of the North",
-      "scope_status": "include_leveling_local",
-      "first_route_step": 27,
-      "has_equipment_reward": true,
-      "equipment_rewards": [
-        {
-          "item_id": 38530,
-          "name": "Wrap of Vigorous Destruction",
-          "item_class": 4,
-          "item_subclass": 1,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38531,
-          "name": "Links of Righteous Persecution",
-          "item_class": 4,
-          "item_subclass": 3,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38532,
-          "name": "Belt of Vengeful Purification",
-          "item_class": 4,
-          "item_subclass": 2,
-          "item_level": 146,
-          "required_level": 0
-        },
-        {
-          "item_id": 38533,
-          "name": "Girdle of Forceful Annihilation",
-          "item_class": 4,
-          "item_subclass": 4,
-          "item_level": 146,
-          "required_level": 0
-        }
-      ],
-      "direct_money_status": "not_required_equipment_already_has_value",
-      "has_direct_money": null,
-      "max_level_bonus_money": {
-        "level": 80,
-        "xp_at_level_80_base": 31450,
-        "bonus_money_from_xp_copper": 188700,
-        "bonus_money_from_xp_gold_decimal": 18.87,
-        "display": "18g 87s 00c",
-        "no_money_from_xp": false,
-        "rate": "6 copper per base XP at level 80",
-        "server_leveling_xp_multiplier_applied": false
-      },
-      "collection": {
-        "is_multi_item_drop_or_pickup": false,
-        "trusted_item_units": 0,
-        "source_modes": [],
-        "collection_pattern": null,
-        "objective_details": [
-          {
-            "item_id": 36793,
-            "item_name": "Sarathstra's Frozen Heart",
-            "required_count": 1,
-            "mechanic": "single_named_creature_task_item",
-            "count_confidence": "implicit_single",
-            "source_mode": null
-          }
-        ],
-        "review_reasons": [],
-        "manual_override_source": null,
-        "manual_exclusion_reason": null,
-        "tags": []
-      },
-      "chain": {
-        "scope_zone_ids": [
-          65
-        ],
-        "direct_followup_ids": [],
-        "descendant_ids": []
-      },
-      "timing": {
-        "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
-      },
-      "removal_priority": {
-        "eligible": false,
-        "reason": "not_multi_item_drop_or_pickup"
-      },
-      "tags": [
-        "chain:terminal_in_scope",
-        "removal:not_eligible:not_multi_item_drop_or_pickup",
-        "reward:equipment",
-        "scope:include_leveling_local",
-        "timing:estimated"
-      ]
-    },
-    {
       "quest_id": 12100,
       "name": "腐烂的器官",
       "english_name": "Containing the Rot",
@@ -5878,7 +5618,7 @@
       "name": "好医生……",
       "english_name": "The Good Doctor...",
       "scope_status": "include_leveling_local",
-      "first_route_step": 20,
+      "first_route_step": 6,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "verified_absent_at_leveling_level",
@@ -5940,7 +5680,7 @@
       "name": "红玉丁香",
       "english_name": "In Search of the Ruby Lilac",
       "scope_status": "include_leveling_local",
-      "first_route_step": 20,
+      "first_route_step": 6,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "verified_absent_at_leveling_level",
@@ -6416,7 +6156,7 @@
       "name": "库尔迪拉和亡者之语",
       "english_name": "Koltira and the Language of Death",
       "scope_status": "include_leveling_local",
-      "first_route_step": 6,
+      "first_route_step": 9,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -6710,7 +6450,7 @@
       "name": "邪能之约",
       "english_name": "In Service of Blood",
       "scope_status": "include_leveling_local",
-      "first_route_step": 6,
+      "first_route_step": 9,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -6782,7 +6522,7 @@
       "name": "邪恶之约",
       "english_name": "In Service of the Unholy",
       "scope_status": "include_leveling_local",
-      "first_route_step": 6,
+      "first_route_step": 9,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -6854,7 +6594,7 @@
       "name": "冰霜之约",
       "english_name": "In Service of Frost",
       "scope_status": "include_leveling_local",
-      "first_route_step": 6,
+      "first_route_step": 9,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -7171,7 +6911,7 @@
       "name": "害虫控制",
       "english_name": "Pest Control",
       "scope_status": "include_leveling_cross_map",
-      "first_route_step": 27,
+      "first_route_step": 10,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -7319,7 +7059,7 @@
       "name": "古怪的暗示",
       "english_name": "Disturbing Implications",
       "scope_status": "include_leveling_local",
-      "first_route_step": 28,
+      "first_route_step": 10,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10698,7 +10438,7 @@
       "name": "烈焰之地",
       "english_name": "Through Fields of Flame",
       "scope_status": "include_leveling_local",
-      "first_route_step": 30,
+      "first_route_step": 20,
       "has_equipment_reward": true,
       "equipment_rewards": [
         {
@@ -12093,7 +11833,7 @@
       "name": "魔法王国达拉然",
       "english_name": "The Magical Kingdom of Dalaran",
       "scope_status": "include_cross_map_outbound",
-      "first_route_step": null,
+      "first_route_step": 17,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",

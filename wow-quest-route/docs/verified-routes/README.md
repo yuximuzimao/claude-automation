@@ -7,7 +7,9 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续首组实跑先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新路线阶段NEAT：[`../archive/neat/2026-08-20-dragonblight-first-run-timing-estimator-neat.md`](../archive/neat/2026-08-20-dragonblight-first-run-timing-estimator-neat.md)，包含龙骨步骤1—11首跑、任务/五开纠错、估时器全局修正、四图重算和当前步骤12恢复点。
+- 最新路线阶段NEAT：[`../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md`](../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md)，记录风暴峭壁步骤1—20全部按最终地点/NPC、五开关键词颜色、备注密度规则逐段统一，以及旧图以后必须使用“重构当下最终总规则”的恢复约束。
+- 上一阶段风暴正式路线发布NEAT：[`../archive/neat/2026-08-23-storm-peaks-route-release-neat.md`](../archive/neat/2026-08-23-storm-peaks-route-release-neat.md)，保留达拉然77级寒冷天气飞行门槛校准、风暴107/107正式路线发布与逐-objective几何门禁形成过程。
+- 上一阶段龙骨后半五开实测与执行文案/UI NEAT：[`../archive/neat/2026-08-22-dragonblight-fivebox-copy-ui-neat.md`](../archive/neat/2026-08-22-dragonblight-fivebox-copy-ui-neat.md)。
 - 上一阶段诺森德路线冻结NEAT：[`../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md`](../archive/neat/2026-08-19-northrend-video-review-zuldrak-freeze-neat.md)，保留北风/龙骨/灰熊视频反审、祖达克冻结与斗兽场首跑门槛形成过程。
 - 上一阶段Route Atlas优化规则统一、动态交通与时间基准NEAT：[`../archive/neat/2026-08-17-route-atlas-optimization-rules-neat.md`](../archive/neat/2026-08-17-route-atlas-optimization-rules-neat.md)。
 - 若CURRENT明确需要更早首组北风机制形成过程，再定向读：[`../archive/neat/2026-08-16-borean-live-route-mechanics-neat.md`](../archive/neat/2026-08-16-borean-live-route-mechanics-neat.md)。

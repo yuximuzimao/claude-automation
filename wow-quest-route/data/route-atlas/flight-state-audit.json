@@ -103,25 +103,14 @@
     },
     "dragonblight": {
       "route_key": "dragonblight",
-      "flight_count": 3,
+      "flight_count": 2,
       "violation_count": 0,
       "unknown_destination_count": 0,
       "flights": [
         {
-          "point_index": 98,
-          "label": "系统鸟：莫亚基 → 阿格玛",
-          "action": "从莫亚基飞阿格玛；交《魔网能量线的终端》；接《拜见巨龙女王》；交《前往阿格玛之锤》；交《通缉：吉加托尔》",
-          "transport": "taxi",
-          "destination_hub": "阿格玛之锤",
-          "opened_before_arrival": [
-            "莫亚基港口",
-            "阿格玛之锤"
-          ]
-        },
-        {
-          "point_index": 188,
-          "label": "系统鸟：库卡隆 → 龙眠神殿",
-          "action": "飞到龙眠；到上层交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》",
+          "point_index": 187,
+          "label": "系统鸟：库卡隆 → 龙眠顶层",
+          "action": "飞到龙眠\n地面西侧找塔里奥斯塔兹，上顶层\n向巨龙女王交《巨龙女王的指引》，接《迦拉克隆与天灾军团》",
           "transport": "taxi",
           "destination_hub": "龙眠神殿",
           "opened_before_arrival": [
@@ -133,9 +122,9 @@
           ]
         },
         {
-          "point_index": 192,
+          "point_index": 191,
           "label": "系统鸟：龙眠 → 库卡隆",
-          "action": "飞回库卡隆先锋营地，交《返回安加萨》",
+          "action": "飞回库卡隆先锋营地\n交《返回安加萨》",
           "transport": "taxi",
           "destination_hub": "库卡隆先锋营地",
           "opened_before_arrival": [
@@ -166,7 +155,7 @@
         {
           "point_index": 30,
           "label": "系统鸟：征服堡 → 欧尼瓦",
-          "action": "飞欧尼瓦；交《不速之“客”》 → 接《有趣的计划》；交《惊吓野马》；顺路交《熊的美食》",
+          "action": "飞欧尼瓦；交《不速之“客”》 → 接《有趣的计划》；交《惊吓野马》；交《熊的美食》",
           "transport": "taxi",
           "destination_hub": "欧尼瓦营地",
           "opened_before_arrival": [
@@ -188,7 +177,7 @@
         {
           "point_index": 44,
           "label": "系统鸟：征服堡 → 欧尼瓦",
-          "action": "飞回欧尼瓦，继续东北收尾",
+          "action": "飞回欧尼瓦",
           "transport": "taxi",
           "destination_hub": "欧尼瓦营地",
           "opened_before_arrival": [
@@ -210,7 +199,7 @@
         {
           "point_index": 47,
           "label": "系统鸟：征服堡 → 欧尼瓦",
-          "action": "交完乌索克后立刻飞回欧尼瓦，继续东北收尾",
+          "action": "飞回欧尼瓦",
           "transport": "taxi",
           "destination_hub": "欧尼瓦营地",
           "opened_before_arrival": [
@@ -228,18 +217,32 @@
     },
     "zuldrak": {
       "route_key": "zuldrak",
-      "flight_count": 5,
+      "flight_count": 6,
       "violation_count": 0,
       "unknown_destination_count": 0,
       "flights": [
         {
           "point_index": 66,
           "label": "银色前沿·达拉然短往返",
-          "action": "《魔法王国达拉然》继续保留；五号分别与博学者泰罗努斯三世对话传送到达拉然；到下水道狡猾的维克斯处接《勇士的召唤！》；若达拉然飞行点未开启则顺手开启；五号乘系统飞行返回已经开启的银色前沿",
+          "action": "《魔法王国达拉然》继续保留；五号分别与博学者泰罗努斯三世对话传送到达拉然；到下水道狡猾的维克斯处接《勇士的召唤！》；若达拉然飞行点未开启则开启；五号乘系统飞行返回已经开启的银色前沿",
           "transport": "taxi",
           "destination_hub": "银色前沿",
           "opened_before_arrival": [
             "圣光据点",
+            "银色前沿",
+            "黑锋哨站"
+          ]
+        },
+        {
+          "point_index": 95,
+          "label": "古达克飞行点",
+          "action": "回到已开启的古达克飞行点，乘系统鸟飞希姆托加",
+          "transport": "ride",
+          "destination_hub": "希姆托加",
+          "opened_before_arrival": [
+            "古达克",
+            "圣光据点",
+            "希姆托加",
             "银色前沿",
             "黑锋哨站"
           ]
@@ -260,7 +263,7 @@
         },
         {
           "point_index": 101,
-          "label": "古达克飞行点·第二次回程",
+          "label": "古达克飞行点",
           "action": "回到已开启的古达克飞行点，乘系统鸟飞希姆托加",
           "transport": "ride",
           "destination_hub": "希姆托加",
@@ -309,6 +312,49 @@
         "希姆托加",
         "银色前沿",
         "黑锋哨站"
+      ]
+    },
+    "storm": {
+      "route_key": "storm",
+      "flight_count": 2,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 88,
+          "label": "奥杜尔·飞行点",
+          "action": "开飞行点：奥杜尔（五号分别）\n系统飞行：奥杜尔 → 丹尼芬雷",
+          "transport": "fly",
+          "destination_hub": "丹尼芬雷",
+          "opened_before_arrival": [
+            "K3",
+            "丹尼芬雷",
+            "格罗玛什坠毁点"
+          ]
+        },
+        {
+          "point_index": 89,
+          "label": "丹尼芬雷·约库姆国王",
+          "action": "约库姆国王 → 交《清算之战》",
+          "transport": "taxi",
+          "destination_hub": "丹尼芬雷",
+          "opened_before_arrival": [
+            "K3",
+            "丹尼芬雷",
+            "奥杜尔",
+            "格罗玛什坠毁点"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "K3",
+        "丹尼芬雷",
+        "唐卡洛营地",
+        "奥杜尔",
+        "布德克拉格庇护所",
+        "格罗玛什坠毁点"
       ]
     }
   }

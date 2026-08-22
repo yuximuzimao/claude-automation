@@ -57,6 +57,36 @@ def test_single_workbench_uses_established_outland_layout_and_manual_follow():
     assert '/* ROUTE_DATA_END */;' in html
 
 
+def test_dragonblight_step45_semantic_hud_prototype_is_embedded():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    assert routes["dragonblight"]["stepGroups"][44]["title"] == "新壁炉谷：祈祷之书 → 完美伪装 → 狼狈不堪"
+    html = HTML.read_text(encoding="utf-8")
+    assert "raSemanticPrototypeStyle" in html
+    assert "↳</span><span class=\"ra-verb\">做" in html
+    assert "ra-task ra-turnin" in html
+    assert "ra-task ra-accept" in html
+    assert "ra-task ra-do-task" in html
+    assert "ra-map-pulse" not in html
+    assert "raFlashMapPoint" not in html
+
+
+def test_grizzly_step1_is_promoted_to_approved_semantic_hud():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    assert routes["grizzly"]["stepGroups"][0]["title"] == "征服堡 → 沃德伦 → 风险湾 → 沃德伦领主"
+    html = HTML.read_text(encoding="utf-8")
+    assert "raGrizzlyStep1ActionHtml" in html
+    assert "raGrizzlyStep1NoteHtml" in html
+    assert '<span class="ra-task ra-turnin">前往征服堡，自求多福吧！</span>' in html
+    assert '<span class="ra-task ra-accept">征服者的指派</span>' in html
+    assert '<span class="ra-task ra-do-task">沃德伦的领主</span>' in html
+    assert '<span class="ra-key">短时限返程</span>' in html
+
+
+def test_route_level_inert_legends_are_not_embedded_in_player_html():
+    html = HTML.read_text(encoding="utf-8")
+    for stale in ("<b>北风：</b>", "<b>灰熊：</b>", "<b>祖达克：</b>"):
+        assert stale not in html
+
 
 def test_borean_player_steps_group_geometry_without_losing_points():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
@@ -204,3 +234,107 @@ def test_deprecated_route_atlas_htmls_are_not_kept_in_routes_directory():
     existing = {p.name for p in (ROOT / "data/routes").glob("*.html")}
     assert forbidden.isdisjoint(existing)
     assert HTML.name in existing
+
+
+def test_storm_v45_full_step_cards_and_transport_state_are_locked():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    storm = routes["storm"]
+    assert storm["uiStandard"] == "semantic-hud-v45"
+    assert len(storm["stepGroups"]) == 20
+    assert all(group.get("actionHtml") for group in storm["stepGroups"])
+
+    action_html = "\n".join(group["actionHtml"] for group in storm["stepGroups"])
+    assert '<div class="ra-line ra-do-inline"><span class="ra-location">K3西侧·烧焦零件</span>' in storm["stepGroups"][1]["actionHtml"]
+    assert storm["stepGroups"][0].get("noteHtml", "") == ""
+    assert "《清理残骸》" not in storm["stepGroups"][1].get("noteHtml", "")
+    assert "按地面安全路线进入雷区；工具可连续拾取，一次通过即可。" in storm["stepGroups"][1].get("noteHtml", "")
+    assert "西侧野蛮岭营地优先开粮食箱，每箱约2—4份。" in storm["stepGroups"][1].get("noteHtml", "")
+    assert "《亲密接触》" not in storm["stepGroups"][2].get("noteHtml", "")
+    assert "《进入矿洞》" not in storm["stepGroups"][2].get("noteHtml", "")
+    assert "共享：五号只需一个角色点击受伤的地精矿工开始护送" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "共享：救援进度五号共享；仍需准备5把寒铁钥匙" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "不共享：最南建筑内一层和地下一层各有设备拾取点" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "系统飞行：奥杜尔 → 丹尼芬雷" in action_html
+    assert "开飞行点：丹尼芬雷（五号分别）" in action_html
+    assert "开飞行点：奥杜尔（五号分别）" in action_html
+    assert "炉石绑定：格罗玛什坠毁点" in action_html
+    assert "使用炉石：格罗玛什坠毁点" in action_html
+    assert storm["hearthChain"] == ["阿格玛之锤", "格罗玛什坠毁点"]
+    assert storm["stepGroups"][4]["title"].startswith("荒弃矿洞")
+    assert "格罗玛什近路" in storm["stepGroups"][8]["title"]
+    assert storm["stepGroups"][13]["title"].startswith("炉石格罗玛什")
+    for required_anchor in (
+        "上古寒冬山谷·战熊作战区",
+        "追踪终点·追踪者图林",
+        "布伦希尔达附近峭壁·始祖龙巢",
+        "风暴神殿东南·维拉努斯诱引点",
+        "智慧神殿附近·清算之战",
+        "发明家图书馆内层·控制台 / 档案员麦卡顿",
+        "浮冰深渊南侧·4道浮冰裂隙",
+        "唐卡洛南侧·北风时间点",
+    ):
+        assert required_anchor in action_html
+    for special_detail in ("布莱恩通讯器", "右键触发", "载具技能", "海德尼尔鱼叉"):
+        assert special_detail not in action_html
+
+    for group in storm["stepGroups"]:
+        note_titles = re.findall(r'class="ra-note-task">([^<]+)</div>', group.get("noteHtml", ""))
+        assert len(note_titles) == len(set(note_titles))
+
+    coverage = json.loads((ROOT / "data/route-atlas/storm-peaks-route-coverage.json").read_text(encoding="utf-8"))
+    assert coverage["system_flight_audit"] == [
+        {"from": "奥杜尔", "to": "丹尼芬雷", "status": "both_opened_before_departure"}
+    ]
+    assert {"K3", "丹尼芬雷", "奥杜尔"} <= set(coverage["opened_flight_points_final"])
+
+    foundation = json.loads((ROOT / "data/route-atlas/storm-peaks-task-foundation.json").read_text(encoding="utf-8"))
+    earthen_oath = next(task for task in foundation["tasks"] if task["quest_id"] == 13005)
+    assert [(objective["required_count"], objective["sources"][0]["name"]) for objective in earthen_oath["objectives"]] == [
+        (7, "铁哨兵"),
+        (20, "铁矮人攻击者"),
+    ]
+
+    objective_audit = json.loads((ROOT / "data/route-atlas/objective-anchor-audit.json").read_text(encoding="utf-8"))["routes"]["storm"]
+    assert objective_audit["failure_count"] == 0
+    assert {row["quest_id"] for row in objective_audit["reviews"]} == {12827, 12829}
+
+    flight_audit = json.loads((ROOT / "data/route-atlas/flight-state-audit.json").read_text(encoding="utf-8"))["routes"]["storm"]
+    assert flight_audit["violation_count"] == 0
+    assert flight_audit["unknown_destination_count"] == 0
+
+    html = HTML.read_text(encoding="utf-8")
+    assert "raApplySemanticStepCards" in html
+    assert "semanticGr=route()?.stepGroups?.[cur]" in html
+    assert ".stepsCard .step .sm{display:none!important}" in html
+    assert ".stepsCard .ra-step-semantic{display:none!important}" in html
+    assert ".hud.ra-semantic-panel" in html
+    assert "overflow-y:auto!important" in html
+    assert ".ra-flightpoint,.ra-flightpath" in html
+    assert "ra-point-anchor" in html
+
+
+def test_no_cold_weather_flying_route_excludes_skill_gates():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+    for qid in (12561, 12803, 13060, 13419):
+        assert by_id[qid]["cold_weather_flying_gate"] is True
+    assert by_id[12561]["required_spell"] == 54197
+    assert by_id[12803]["required_spell"] == 54197
+    assert by_id[13060]["required_level"] == 77 and by_id[13060]["quest_level"] == 78
+    assert by_id[13419]["required_level"] == 77 and by_id[13419]["quest_level"] == 80
+    assert by_id[12925]["required_level"] == 77 and by_id[12925]["quest_level"] == 80
+    assert by_id[12925]["cold_weather_flying_gate"] is False
+
+    gate_audit = json.loads((ROOT / "data/route-atlas/cold-weather-flying-gate-audit.json").read_text(encoding="utf-8"))
+    assert gate_audit["horde_paladin_direct_gate_ids"] == [12561, 12803, 13060, 13419]
+    sholazar_blocked = {
+        row["quest_id"] for row in [*gate_audit["direct_gates"], *gate_audit["dependency_blocked"]]
+        if row["zone_id"] == 3711
+    }
+    assert len(sholazar_blocked) == 13
+
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    storm_text = "\n".join(group["actionHtml"] for group in routes["storm"]["stepGroups"])
+    assert "终极运输方案" not in storm_text
+    assert "借用双足飞龙直接飞往格罗玛什坠毁点" not in storm_text
+    assert "借用双足飞龙返回" not in storm_text

@@ -5,10 +5,10 @@
     "name": "龙骨荒野"
   },
   "decision_counts": {
-    "must_note": 77,
-    "not_route_candidate": 119,
+    "must_note": 76,
+    "not_route_candidate": 122,
     "review_before_route": 1,
-    "reviewed_no_extra_note": 69
+    "reviewed_no_extra_note": 67
   },
   "manual_review_pending_count": 0,
   "rows": [
@@ -3392,23 +3392,25 @@
     {
       "quest_id": 12090,
       "name": "通缉：吉加托尔",
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "entry_axis_relevance": "current_axis_or_local",
       "task_class": "single_named_kill",
       "task_flags": [],
       "auto_screen": {
-        "decision": "no_extra_note",
-        "reasons": [],
+        "decision": "not_route_candidate",
+        "reasons": [
+          "defer_to_80_after_live_failure"
+        ],
         "verification_needed": [],
         "video_evidence_available": false,
         "unresolved_after_local_evidence": []
       },
       "final_review": {
-        "decision": "reviewed_no_extra_note",
+        "decision": "not_route_candidate",
         "facts": [],
         "verification": [],
         "background_verification": [],
-        "review_basis": "manual_objective_read_straightforward_player_action"
+        "review_basis": "scope_filter"
       },
       "video_reference": {
         "matches": [],
@@ -3507,23 +3509,25 @@
     {
       "quest_id": 12095,
       "name": "前往猎龙营地",
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "entry_axis_relevance": "current_axis_or_local",
       "task_class": "travel_dialogue_or_turnin",
       "task_flags": [],
       "auto_screen": {
-        "decision": "no_extra_note",
-        "reasons": [],
+        "decision": "not_route_candidate",
+        "reasons": [
+          "defer_to_80_after_live_failure"
+        ],
         "verification_needed": [],
         "video_evidence_available": false,
         "unresolved_after_local_evidence": []
       },
       "final_review": {
-        "decision": "reviewed_no_extra_note",
+        "decision": "not_route_candidate",
         "facts": [],
         "verification": [],
         "background_verification": [],
-        "review_basis": "manual_objective_read_straightforward_player_action"
+        "review_basis": "scope_filter"
       },
       "video_reference": {
         "matches": [],
@@ -3594,39 +3598,25 @@
     {
       "quest_id": 12097,
       "name": "萨拉斯塔，北地的灾祸",
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "entry_axis_relevance": "current_axis_or_local",
       "task_class": "single_named_drop",
       "task_flags": [],
       "auto_screen": {
-        "decision": "must_note",
+        "decision": "not_route_candidate",
         "reasons": [
-          "questie_extra_objective_or_script_anchor"
+          "defer_to_80_after_live_failure"
         ],
-        "verification_needed": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
+        "verification_needed": [],
         "video_evidence_available": false,
-        "unresolved_after_local_evidence": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ]
+        "unresolved_after_local_evidence": []
       },
       "final_review": {
-        "decision": "must_note",
-        "facts": [
-          "Speak to Rokhan at the dragon-hunter camp to bring Sarathstra down, then kill her and loot the Frozen Heart."
-        ],
-        "verification": [
-          "summon ownership",
-          "same-corpse heart loot mode"
-        ],
-        "background_verification": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
-        "review_basis": "manual_override_after_questie_and_reference_review"
+        "decision": "not_route_candidate",
+        "facts": [],
+        "verification": [],
+        "background_verification": [],
+        "review_basis": "scope_filter"
       },
       "video_reference": {
         "matches": [],
@@ -13816,50 +13806,6 @@
         ],
         "has_exact_id_evidence": false,
         "has_same_name_counterpart_evidence": true
-      }
-    },
-    {
-      "quest_id": 12097,
-      "name": "萨拉斯塔，北地的灾祸",
-      "scope_status": "include_leveling_local",
-      "entry_axis_relevance": "current_axis_or_local",
-      "task_class": "single_named_drop",
-      "task_flags": [],
-      "auto_screen": {
-        "decision": "must_note",
-        "reasons": [
-          "questie_extra_objective_or_script_anchor"
-        ],
-        "verification_needed": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
-        "video_evidence_available": false,
-        "unresolved_after_local_evidence": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ]
-      },
-      "final_review": {
-        "decision": "must_note",
-        "facts": [
-          "Speak to Rokhan at the dragon-hunter camp to bring Sarathstra down, then kill her and loot the Frozen Heart."
-        ],
-        "verification": [
-          "summon ownership",
-          "same-corpse heart loot mode"
-        ],
-        "background_verification": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
-        "review_basis": "manual_override_after_questie_and_reference_review"
-      },
-      "video_reference": {
-        "matches": [],
-        "episodes": [],
-        "has_exact_id_evidence": false,
-        "has_same_name_counterpart_evidence": false
       }
     },
     {

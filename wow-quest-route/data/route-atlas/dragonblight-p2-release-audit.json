@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "PASS",
+  "status": "FAIL",
   "scope": "Dragonblight P2-only formal removal and release gate before HTML rebuild",
   "p2_roots": [
     12048
@@ -132,10 +132,10 @@
     "note": "Equipment value is why the task is P2 rather than P1; project rules do not make equipment an automatic retain condition. Route overlap can reduce marginal time, so timing savings are not used as a release gate."
   },
   "experience": {
-    "borean_current_route_task_reward_total": 4766500,
+    "borean_current_route_task_reward_total": 5479500,
     "task_reward_only_borean_boundary_from_68_0": {
       "level": 72,
-      "xp": 338700
+      "xp": 1051700
     },
     "current_first_group_snapshot": {
       "minimum_level": 73,
@@ -146,80 +146,81 @@
       {
         "key": "level73_fallback_pickup",
         "before_point_title": "阿格玛·月影第一轮回收",
-        "point_index": 61,
+        "point_index": null,
         "required_level": 73,
-        "task_reward_xp_from_dragon_entry": 1339100,
+        "task_reward_xp_from_dragon_entry": 4990500,
         "task_reward_only_state": {
-          "level": 73,
-          "xp": 122100
+          "level": 75,
+          "xp": 1326800
         },
         "passes": true
       },
       {
         "key": "grizzly_outbound",
         "before_point_title": "怨毒镇·高级执行官",
-        "point_index": 134,
+        "point_index": 135,
         "required_level": 73,
-        "task_reward_xp_from_dragon_entry": 3165100,
+        "task_reward_xp_from_dragon_entry": 3154600,
         "task_reward_only_state": {
           "level": 74,
-          "xp": 376300
+          "xp": 1078800
         },
         "passes": true
       },
       {
         "key": "zuldrak_level74_gate",
         "before_point_title": "东部北伐军联络点",
-        "point_index": 157,
+        "point_index": 161,
         "required_level": 74,
-        "task_reward_xp_from_dragon_entry": 3942200,
+        "task_reward_xp_from_dragon_entry": 3931700,
         "task_reward_only_state": {
-          "level": 74,
-          "xp": 1153400
+          "level": 75,
+          "xp": 268000
         },
         "passes": true
       }
     ]
   },
   "quest_log": {
-    "peak": 17,
+    "peak": 19,
     "violations": [],
     "peak_rows": [
       {
-        "point": 135,
-        "title": "怨毒镇·药剂师",
-        "active_count": 17
-      },
-      {
-        "point": 136,
-        "title": "怨毒镇东部遗忘海岸",
-        "active_count": 17
+        "point": 137,
+        "title": "前往遗忘海岸途中·海边的地产",
+        "active_count": 19
       },
       {
         "point": 138,
-        "title": "翡翠巨龙圣地·尼瑟拉",
-        "active_count": 17
+        "title": "怨毒镇东部遗忘海岸",
+        "active_count": 19
       },
       {
-        "point": 139,
+        "point": 141,
+        "title": "翡翠巨龙圣地·尼瑟拉",
+        "active_count": 19
+      },
+      {
+        "point": 142,
         "title": "翡翠圣地东南端·奥雷托斯",
-        "active_count": 17
+        "active_count": 19
       }
     ]
   },
   "coverage": {
     "status": "dragonblight_route_inserted",
-    "expected_world_task_count": 147,
-    "covered_task_count": 143,
+    "expected_world_task_count": 144,
+    "covered_task_count": 142,
     "intentional_skip": {
-      "11979": "与11977互斥的反向面包屑；北风入图轴使用11977，不制造假折返。",
-      "12033": "唯一前置11916《地狱咆哮的勇士》已在北风正式删除，因此当前轴不可达。",
-      "12048": "P2A正式删除：无后续依赖，完整经验损失40600/号；冰雾村三钥匙与军旗路线本身保留。",
-      "12791": "达拉然交通任务保留为条件候选；当前服务器传送收益未验证，不强塞进主路线。"
+      "11979": "与11977互斥的反向面包屑；北风入图轴使用11977，互斥分支不能同时完成。",
+      "11996": "当前从零路线先到阿格玛、后到莫亚基；首组实测到莫亚基时该面包屑显示后续任务已完成或激活，无法接取，因此不应出现在执行稿。"
+    },
+    "route_extra_once": {
+      "12372": "《保卫龙眠神殿》在《向德弗雷斯塔兹领主报到》后原地解锁；首组确认击杀目标近距离五号共享，只有破坏碧蓝巨龙圣地需要五号分别执行，因此每组首次经过做一次，不安排日后重复回刷。"
     },
     "missing": [],
     "unexpected": [],
-    "point_count": 193,
+    "point_count": 197,
     "step_group_count": 51
   },
   "flight": {},
@@ -227,11 +228,11 @@
     "only_p2_scope": true,
     "retention_override": true,
     "dependency_closure": true,
-    "route_coverage": true,
+    "route_coverage": false,
     "next_map_level_gates": true,
     "quest_log_cap": true,
     "flight_state": true,
-    "removed_task_absent_from_player_route": true,
-    "geometry": true
+    "removed_task_absent_from_player_route": false,
+    "geometry": false
   }
 }

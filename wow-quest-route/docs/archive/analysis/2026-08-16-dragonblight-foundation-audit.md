@@ -10,11 +10,11 @@
 ## 基础统计
 
 - primary候选：266；连同一跳前置/后续边界：278。
-- scope：`{'defer_future_level_revisit': 11, 'exclude_alliance_or_other_faction': 87, 'exclude_current_entry_axis_alternate': 3, 'exclude_deprecated_or_system': 1, 'exclude_no_xp': 4, 'exclude_other_class': 1, 'exclude_profession': 1, 'exclude_removed_or_unavailable': 4, 'exclude_repeatable_calendar': 3, 'include_cross_map_inbound': 2, 'include_cross_map_outbound': 4, 'include_leveling_cross_map': 1, 'include_leveling_dungeon': 4, 'include_leveling_local': 139, 'include_structural_zero_xp_prerequisite': 1}`。
-- 精确目标簇：134；多任务共享目标簇：35。
-- 最终攻略备注判定：`{'must_note': 77, 'not_route_candidate': 119, 'review_before_route': 1, 'reviewed_no_extra_note': 69}`。
-- 当前纳入范围 must_note=77，review_before_route=1，reviewed_no_extra_note=69，manual_review_pending=0。
-- 仍需首组五开实测或交通核验的后台机制项=108；这些不等于都要显示在玩家攻略里。
+- scope：`{'defer_future_level_revisit': 11, 'defer_to_80_after_live_failure': 3, 'exclude_alliance_or_other_faction': 87, 'exclude_current_entry_axis_alternate': 3, 'exclude_deprecated_or_system': 1, 'exclude_no_xp': 4, 'exclude_other_class': 1, 'exclude_profession': 1, 'exclude_removed_or_unavailable': 4, 'exclude_repeatable_calendar': 3, 'include_cross_map_inbound': 2, 'include_cross_map_outbound': 4, 'include_leveling_cross_map': 1, 'include_leveling_dungeon': 4, 'include_leveling_local': 136, 'include_structural_zero_xp_prerequisite': 1}`。
+- 精确目标簇：133；多任务共享目标簇：34。
+- 最终攻略备注判定：`{'must_note': 76, 'not_route_candidate': 122, 'review_before_route': 1, 'reviewed_no_extra_note': 67}`。
+- 当前纳入范围 must_note=76，review_before_route=1，reviewed_no_extra_note=67，manual_review_pending=0。
+- 仍需首组五开实测或交通核验的后台机制项=107；这些不等于都要显示在玩家攻略里。
 
 ## 必须写攻略备注的任务
 
@@ -48,7 +48,6 @@
 - 12084《森林上空》：Lieutenant Ta'zinni drops the Ley Line Focus Control Amulet; use the amulet at the Lothalor Forest ley-line focus arch to obtain the reading.；首组待核验：same-corpse fivebox amulet loot mode, per-character use。
 - 12085《一封家书》：Lieutenant Ta'zinni also drops the Horde letter; loot and right-click the letter to start 12085《一封家书》.；首组待核验：same-corpse fivebox quest-start-item loot mode。
 - 12096《强化古树》：Obtain Woodlands Walker Bark in Lothalor and use the bark on the non-hostile/eligible Lothalor Ancients to empower them; this is an item-on-NPC action, not a normal kill.；首组待核验：fivebox item use sharing vs per-character。
-- 12097《萨拉斯塔，北地的灾祸》：Speak to Rokhan at the dragon-hunter camp to bring Sarathstra down, then kill her and loot the Frozen Heart.；首组待核验：summon ownership, same-corpse heart loot mode。
 - 12110《魔网能量线的终端》：Use the ley-line talisman at the Indu'le Lake focus, then continue to the Azure Dragonshrine observation point; both spatial checks are required.；首组待核验：per-character use/area trigger。
 - 12111《野生动物的疫苗》：Use the vaccine package on living Snowfall Elk and Arctic Grizzlies; it is an item-use vaccination quest, not a kill quest.；首组待核验：fivebox credit sharing vs per-character。
 - 12124《通知女王》：This Wyrmrest Temple handoff requires reaching the correct temple level; use the temple drake/taxi NPC to reach the upper level rather than searching the ground floor.；首组待核验：exact floor/NPC handoff for Horde branch。

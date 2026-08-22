@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-19",
+  "updated_at": "2026-08-22",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -13,6 +13,10 @@
     "escort_party_offer_popup_shared_acceptance": {
       "status": "user_confirmed",
       "note": "普通小队中，一个角色领取可共享的护送任务时，其余队员会收到是否接受的弹窗。路线执行时由主控领取，确认另外四号全部接受后再启动护送；护送不再因需要五号分别找NPC接取而降权。"
+    },
+    "escort_single_run_fivebox_completion": {
+      "status": "user_confirmed",
+      "note": "2026-08-20用户确认：所有护送任务都可以五号一起跑，一次护送即可让已接任务的五个角色共同完成，不需要逐号重复护送。后续护送任务的价值判断不再加入五倍执行惩罚；只比较护送脚本本身相对直接骑乘/正常路线的速度损失、战斗/等待、任务经验与后续链收益。"
     },
     "main_character_control_is_not_uniform_overhead": {
       "status": "user_confirmed",
@@ -344,6 +348,261 @@
       "type": "post_prerequisite_item_trigger_fixed_route_task",
       "status": "user_confirmed_with_external_support",
       "note": "《血之魔典》不能在《死亡名单：扎古斯》完成前刷。首组实测确认扎古斯本体不掉；先回阿格玛交12056，再到冰雾村击杀阿努巴尔教徒获取魔典并右键接12057。该任务必须作为固定路线任务，不再按条件掉落触发处理。"
+    },
+    "12050": {
+      "type": "vehicle_collection_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《抢木材》首组龙骨实跑确认：木材进度不共享；伐木机/载具也必须五个角色分别召唤并操作，每号完成自己的50捆木材。"
+    },
+    "12052": {
+      "type": "kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《该死的鹰身人！》首组龙骨实跑确认：鹰身人击杀进度五号共享。与同区《抢木材》不同，不需要五号分别重复击杀。"
+    },
+    "12075": {
+      "type": "fixed_object_interaction_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《采集样本》首组龙骨实跑确认：冰巨人尸体取样不共享；五个角色必须分别点击固定尸体完成取样。"
+    },
+    "12076": {
+      "type": "debuff_plus_self_item_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《恶心的生意》首组龙骨实跑确认：进度不共享。每个角色都必须自己获得腐蚀性唾液效果，再自己使用佐特的刮刀收集2瓶，以最低角色2/2为离开条件。"
+    },
+    "12078": {
+      "type": "capture_object_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《抓虫子》首组龙骨实跑确认：幼虫进度不共享；五个角色要分别对幼虫使用坚固的箱子，并分别拾取自己的落地箱子。"
+    },
+    "11999": {
+      "type": "loot_and_item_trigger_personal_confirmed_same_corpse_unknown",
+      "status": "user_confirmed_partial",
+      "note": "《寻找线索》首组龙骨实跑确认：完成进度不共享，五个角色都必须各自取得线索物并右键打开。本轮运气较差出现明显长尾；是否同一具法师猎手尸体可供五号分别拾取尚未单独确认。"
+    },
+    "12059": {
+      "type": "named_single_kill_multi_person_item_start_confirmed",
+      "status": "user_confirmed",
+      "note": "《奇怪的设备》首组龙骨实跑确认：古拉莫什只需击杀一次，同一具尸体可由五个角色分别拾取自己的任务起始物，并各自右键接任务。"
+    },
+    "12061": {
+      "type": "scripted_travel_group_shared_all_present_confirmed",
+      "status": "user_confirmed_partial",
+      "note": "《投影和计划》首组龙骨实跑确认：五个角色都进入并飞过投影脚本时，任务共享完成。尚未测试仅主控进入、其余四号留在原地是否也会同步，因此固定路线暂时让五号一起飞。"
+    },
+    "12080": {
+      "type": "named_elite_with_single_use_protection_consumable_failure_mode",
+      "status": "user_confirmed_failure_mode",
+      "note": "《冰虫之母》首组龙骨实跑：打拉特尔博尔时发生一次死亡，已使用的佐特防护药剂无法通过返回NPC重新取得，最终无药剂强打完成；死亡、复活和误跑NPC属于本轮异常墙钟，不应回写为任务正常固有耗时。路线应把药剂保留到真正拉Boss前再用。"
+    },
+    "12066": {
+      "type": "item_use_objective_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《海岸上的魔法焦点》首组龙骨实跑确认：任务进度五号共享；主控取得控制指环并在魔网焦点完成操作即可同步全队。"
+    },
+    "12096": {
+      "type": "single_item_source_plus_object_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《强化古树》首组龙骨实跑确认：所需树皮只需要一个角色取得；主控对古树执行强化后任务进度五号共享，不需要五号各拿一份树皮。"
+    },
+    "12126": {
+      "type": "named_target_item_use_personal_fast_respawn_confirmed",
+      "status": "user_confirmed",
+      "note": "《邪恶之约》首组龙骨实跑确认：瓦伦哈尔位于下陷地形/坑内，五个角色需要轮流分别完成邪恶宝石操作；目标刷新很快，逐号执行可连续完成。空间上与《红玉丁香》非常接近，适合并入同一步。"
+    },
+    "12111": {
+      "type": "live_target_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《野生动物的疫苗》首组龙骨实跑确认：疫苗接种进度五号共享；主控对活着的雪落麋鹿/极地灰熊使用疫苗包即可同步全队。"
+    },
+    "11958": {
+      "type": "personal_loot_single_corpse_single_character_confirmed",
+      "status": "user_confirmed",
+      "note": "《不要浪费》首组龙骨实跑确认：货物不共享，且同一具狼獾人尸体只能一个角色拾取自己的任务货物；五号必须分别补满6/6，以最低进度角色为离开条件。"
+    },
+    "11960": {
+      "type": "personal_object_pickup_full_route_overlap_daily_once_confirmed",
+      "status": "user_confirmed_promote_to_route_once",
+      "note": "《未来的种子》首组确认：幼崽为个人拾取，五号分别做满；目标与《不要浪费》处于同一飘雪林地狼獾人区域，清怪本来就要做，因此没有独立跑路。用户实测/游戏界面奖励约5G/号，五号约25G；固定练级路线每组首次经过做一次，不安排每日重复回刷。"
+    },
+    "11959": {
+      "type": "single_loot_and_self_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《消灭洛根》首组龙骨实跑确认：只需一个角色拾取洛根之血并使用一次即可让五号共享完成，不需要五号分别拾取/使用。"
+    },
+    "12028": {
+      "type": "scripted_flight_personal_low_incremental_cost_confirmed",
+      "status": "user_confirmed",
+      "note": "《灵魂视界》首组单号测试确认不共享；五个角色都要各自触发一次。但脚本飞行自动进行、基本无需操纵，因此逐号开始飞行的额外操作成本很低。"
+    },
+    "12009": {
+      "type": "fixed_object_pickup_personal_dedicated_underwater_loop_confirmed",
+      "status": "user_confirmed",
+      "note": "《图尔凯的螃蟹陷阱》首组龙骨实跑确认：五号需要各自8个，按40次个人进度连续处理；本轮没有靠其它海底任务自然顺满。连续采集、换两次图尔凯的呼吸气囊并回去交任务约20分钟。用户观察陷阱分布范围较集中，尚未验证更远的水下路线是否能稳定顺路覆盖。"
+    },
+    "12032": {
+      "type": "scripted_object_personal_shared_respawn_bottleneck_confirmed",
+      "status": "user_confirmed",
+      "note": "《海洋女神》首组龙骨实跑确认：任务不共享，五个角色必须分别点击深海珍珠触发。实测从一次点击开始到珍珠再次可点击约1分40秒，五号串行至少有4次刷新等待（约6分40秒）。触发后的角色应游到岸边，再从陆地跑回/向集合方向移动，不从水里一路游回珍珠。"
+    },
+    "12090": {
+      "type": "named_elite_current_power_gate_defer_to_80_confirmed",
+      "status": "user_confirmed_defer_to_80",
+      "note": "《通缉：吉加托尔》首组75级五开：第一次尝试团灭；第二次碰到别人正在打后再次尝试，最终五号死到只剩一个号才成功。该任务是12095→12097精英支线门槛，但不阻塞其它龙骨任务。未来固定练级稿不再当前强打，也不提前接，整条支线延后80后。"
+    },
+    "12097": {
+      "type": "suggested_five_player_elite_current_power_gate_defer_to_80_confirmed",
+      "status": "user_confirmed_defer_to_80_with_external_support",
+      "note": "《萨拉斯塔，北地的灾祸》首组75级五开实测打不过并保留为未完成任务；用户现场观察到的两批其他玩家最低约77级。外部WotLK资料将其标为Suggested players: 5。任务没有其它龙骨后续依赖，固定练级稿随吉加托尔支线一起延后80后。"
+    },
+    "12449": {
+      "type": "corpse_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《重归尘土》首组龙骨实跑确认：对红龙尸体使用红玉橡果后的任务进度五号共享；不需要五号分别对同一批尸体重复操作。"
+    },
+    "12147": {
+      "type": "single_corpse_multi_character_item_start_recalled_confirmed",
+      "status": "user_recalled_from_first_run",
+      "note": "《古怪的暗示》首组回忆：冰拳一次击杀后，同一具尸体的纹饰战斗号角五个角色都能分别拾取。固定路线因此不再前段提前杀冰拳，而是在接到《峡谷追击》后一次击杀同时完成正式计数并让五号取得号角。"
+    },
+    "12372": {
+      "type": "vehicle_daily_mixed_group_shared_kills_personal_shrine_confirmed",
+      "status": "user_confirmed_first_pass_only",
+      "note": "《保卫龙眠神殿》首组确认：碧蓝巨龙/幼龙击杀只要五号处于有效距离即可共享；‘破坏碧蓝巨龙圣地’不共享，五个角色必须分别骑龙到圣地各执行一次。任务在向德弗雷斯塔兹领主报到后中层原地解锁；固定练级路线每组首次经过做一次，不安排每日重复。"
+    },
+    "12261": {
+      "type": "single_event_trigger_group_shared_spawn_overlap_failure_confirmed",
+      "status": "user_confirmed",
+      "note": "《无路可逃》首组实测：进度五号共享，只需主控放一个毁灭结界。五号同时放置会叠加刷怪并导致团灭。事件刷出的怪还能计入《驱逐天灾》，因此必须先做《无路可逃》，结束后再补另一任务剩余目标。"
+    },
+    "12265": {
+      "type": "fixed_object_destroy_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《污染的能量》首组实测：摧毁通灵符文进度五号共享；主控右键摧毁固定符文即可，不需要五号分别互动。"
+    },
+    "12267": {
+      "type": "triggered_named_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《奈萨里奥的烈焰》首组实测：任务进度五号共享；主控在洛森附近使用任务物品触发并完成战斗一次即可。"
+    },
+    "12206": {
+      "type": "single_target_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《测试药剂》首组怨毒镇实测：进度五号共享，只需主控对指定血色士兵使用一次药剂；不需要五号分别操作。"
+    },
+    "12211": {
+      "type": "corpse_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《确保他们不再站起来！》首组实跑确认：对血色先锋军尸体使用老鼠箱后的15具尸体进度五号共享；主控处理尸体即可。用户从怨毒镇去翡翠圣地途中顺路完成，证明这条应与《通缉：血色先锋军》《物资掠夺》一起前移到新壁炉谷第一圈，而不是后面单独折返。"
+    },
+    "12470": {
+      "type": "personal_defense_event_three_batches_40yd_exclusion_confirmed",
+      "status": "user_confirmed",
+      "note": "《永恒之龙的秘密》首组实跑确认：沙漏防守进度不共享；40码内不能同时放置多个沙漏。五号采用2+2+1三批完成（两号双控、两号双控、最后一号单做），三批纯战斗/事件总计约10分钟，不含前后跑路。固定路线按三批执行。"
+    },
+    "12150": {
+      "type": "scripted_named_target_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《隐居的铭语师》首组实跑确认：主控把德雷格玛尔打到认输/免疫脚本后，任务进度五号共享；不需要五号分别触发。"
+    },
+    "12214": {
+      "type": "vehicle_delivery_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《补充坐骑》首组实跑确认：战马交付进度五号共享；主控完成3匹即可，不需要五个角色分别骑马交付。"
+    },
+    "12252": {
+      "type": "interrogation_script_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《拷问者里克拉夫》首组实跑确认：对拷问者连续使用审讯工具5次的任务进度五号共享；主控完成一轮审讯即可。"
+    },
+    "12271": {
+      "type": "quest_start_drop_same_source_fivebox_personal_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《强制魔棒》首组实跑确认：任务起始魔棒可由五个角色从同一掉落来源分别拾取；同一来源处理一次后五号依次拾取并各自右键接任务。"
+    },
+    "12218": {
+      "type": "vehicle_kill_credit_group_shared_in_range_confirmed",
+      "status": "user_confirmed",
+      "note": "《传达好消息》首组实跑确认：凋零战车击杀进度可共享，只要其他角色保持在附近有效距离内；主控开战车完成30只，其他四号不需要分别跑载具。"
+    },
+    "12230": {
+      "type": "personal_ground_or_drop_pickup_not_shared_same_corpse_exclusive_confirmed",
+      "status": "user_confirmed",
+      "note": "《收取炸弹》首组实跑确认：炸弹既可以直接拾取地面物品，也可以由攻城锻造师掉落；进度不共享，五个角色都需要取得自己的炸弹。怪物掉落时同一具尸体不能供五号分别拾取，因此不能按一次击杀五号轮流摸尸处理。固定执行优先顺手捡地面炸弹，掉落则只计当前实际可拾取角色自己的进度。"
+    },
+    "12459": {
+      "type": "quest_item_use_and_named_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《创造与毁灭的力量》首组实跑确认：自然愤怒之种削弱目标后的任务进度五号共享；三只命名目标均按主控使用种子并击杀即可，不需要五号分别使用。"
+    },
+    "12232": {
+      "type": "destructible_object_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《炸毁弩炮》首组实跑确认：主控使用攻城锻造师炸弹摧毁弩炮后，任务进度五号共享；不需要五号分别炸弩炮。"
+    },
+    "12234": {
+      "type": "fixed_document_pickup_personal_each_character_confirmed",
+      "status": "user_confirmed",
+      "note": "《日常计划》首组实跑确认：兵营、修道院、海滩三份血色先锋军日常命令均不共享，五个角色都必须分别拾取自己的三份文件。"
+    },
+    "12240": {
+      "type": "summon_named_target_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《解决方案》首组实跑确认：使用白蚁引出工头卡雷基并击杀后的任务进度五号共享；只需主控完成一次。"
+    },
+    "12243": {
+      "type": "ship_burning_shared_same_corpse_fivebox_personal_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《水火之灾》首组实跑确认：点燃罪人的愚行号进度五号共享；舍雷船长只需击杀一次，同一具尸体可供五个角色分别拾取各自任务物。"
+    },
+    "12283": {
+      "type": "fixed_document_pickup_personal_each_character_confirmed",
+      "status": "user_confirmed",
+      "note": "《寻找真相》首组实跑确认：阿比迪斯日记不共享，五个角色必须分别拾取自己的日记。"
+    },
+    "12273": {
+      "type": "forced_wand_named_targets_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《谴责》首组实跑确认：对默瑟、乔丹、古德曼、齐尔哈特使用强制魔棒并完成目标后的任务进度五号共享；四个目标都只需主控操作。"
+    },
+    "12254": {
+      "type": "single_kill_same_corpse_fivebox_personal_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《祈祷之书》首组实跑确认：斯崔特主教只需击杀一次，同一具尸体可供五个角色分别拾取各自的祈祷之书。"
+    },
+    "12260": {
+      "type": "quest_item_use_group_shared_then_npc_disguise_confirmed",
+      "status": "user_confirmed",
+      "note": "《完美的伪装》首组实跑确认：一个角色对黑鸦祭司使用女妖魔镜即可让五号任务完成；随后需要祭司伪装时可直接找斯古莉对话变身。"
+    },
+    "12274": {
+      "type": "bell_dialogue_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《狼狈不堪》首组实跑确认：敲钟以及与高阶修士交谈/后续事件进度五号共享；只需主控完整执行一次。"
+    },
+    "12498": {
+      "type": "vehicle_kill_group_shared_same_corpse_fivebox_personal_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《红龙之翼》首组实跑确认：主控使用红龙载具完成30个天灾目标时进度五号共享；安提沃克只需击杀一次，同一具尸体可供五个角色分别拾取各自的镰刀。"
+    },
+    "12851": {
+      "type": "vehicle_kill_group_shared_follow_mounts_confirmed",
+      "status": "user_confirmed",
+      "note": "《熊熊大作战》首组实跑确认：进度五号共享。其余四号先上各自坐骑跟随主号，主号骑冰牙完成载具击杀即可同步推进；冰牙不要使用加速技能。"
+    },
+    "12821": {
+      "type": "same_spawn_multi_pickup_personal_activation_confirmed",
+      "status": "user_confirmed",
+      "note": "能量电池可在同一刷新点由五个角色连续取得；每个角色都需分别激活传送器，随后分别传回K3。"
+    },
+    "12856": {
+      "type": "vehicle_rescue_group_shared_close_range_confirmed",
+      "status": "user_confirmed",
+      "note": "《冰冷的心》首组实跑确认：五号都与始祖幼龙互动并各自上龙后，保持较近距离一起执行可共享进度。实跑操作为先用一个号快速救囚犯，落地后换满血龙，再让五号一起出发。"
+    },
+    "12925": {
+      "type": "quest_item_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "瓦基里安始祖龙卵任务进度共享；先杀附近任务怪取得5个冰霜油膏，再由主号处理龙卵即可同步推进五号。"
     }
   }
 }

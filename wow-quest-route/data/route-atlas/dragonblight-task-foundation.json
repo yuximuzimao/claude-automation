@@ -985,6 +985,7 @@
   },
   "scope_counts": {
     "defer_future_level_revisit": 11,
+    "defer_to_80_after_live_failure": 3,
     "exclude_alliance_or_other_faction": 87,
     "exclude_current_entry_axis_alternate": 3,
     "exclude_deprecated_or_system": 1,
@@ -997,7 +998,7 @@
     "include_cross_map_outbound": 4,
     "include_leveling_cross_map": 1,
     "include_leveling_dungeon": 4,
-    "include_leveling_local": 139,
+    "include_leveling_local": 136,
     "include_structural_zero_xp_prerequisite": 1
   },
   "manual_review_pending_count": 0,
@@ -17423,24 +17424,26 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "scope_reasons": [
-        "one_time_xp_horde_paladin_task"
+        "首组75级五开两次尝试吉加托尔，包含一次团灭，第二次仅一号存活才完成；该任务还是12095/12097精英支线的唯一未完成门槛。现在做失败方差高，80后回收不阻塞其它龙骨任务且能兑现满级任务金币，因此从练级执行稿移出。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
-        "decision": "no_extra_note",
-        "reasons": [],
+        "decision": "not_route_candidate",
+        "reasons": [
+          "defer_to_80_after_live_failure"
+        ],
         "verification_needed": [],
         "video_evidence_available": false,
         "unresolved_after_local_evidence": []
       },
       "final_note_review": {
-        "decision": "reviewed_no_extra_note",
+        "decision": "not_route_candidate",
         "facts": [],
         "verification": [],
         "background_verification": [],
-        "review_basis": "manual_objective_read_straightforward_player_action"
+        "review_basis": "scope_filter"
       }
     },
     {
@@ -17985,24 +17988,26 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "scope_reasons": [
-        "one_time_xp_horde_paladin_task"
+        "只承接12090完成后的萨拉斯塔支线，本身不解锁其它龙骨任务；随12090整体延后到80后。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
-        "decision": "no_extra_note",
-        "reasons": [],
+        "decision": "not_route_candidate",
+        "reasons": [
+          "defer_to_80_after_live_failure"
+        ],
         "verification_needed": [],
         "video_evidence_available": false,
         "unresolved_after_local_evidence": []
       },
       "final_note_review": {
-        "decision": "reviewed_no_extra_note",
+        "decision": "not_route_candidate",
         "facts": [],
         "verification": [],
         "background_verification": [],
-        "review_basis": "manual_objective_read_straightforward_player_action"
+        "review_basis": "scope_filter"
       }
     },
     {
@@ -18432,40 +18437,26 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "include_leveling_local",
+      "scope_status": "defer_to_80_after_live_failure",
       "scope_reasons": [
-        "one_time_xp_horde_paladin_task"
+        "首组75级五开实测萨拉斯塔打不过；任务资料标记Suggested players: 5，且12097没有其它龙骨后续依赖。现在强打无必要，随整条精英支线延后到80后。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
-        "decision": "must_note",
+        "decision": "not_route_candidate",
         "reasons": [
-          "questie_extra_objective_or_script_anchor"
+          "defer_to_80_after_live_failure"
         ],
-        "verification_needed": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
+        "verification_needed": [],
         "video_evidence_available": false,
-        "unresolved_after_local_evidence": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ]
+        "unresolved_after_local_evidence": []
       },
       "final_note_review": {
-        "decision": "must_note",
-        "facts": [
-          "Speak to Rokhan at the dragon-hunter camp to bring Sarathstra down, then kill her and loot the Frozen Heart."
-        ],
-        "verification": [
-          "summon ownership",
-          "same-corpse heart loot mode"
-        ],
-        "background_verification": [
-          "fivebox_loot_mode_and_drop_variance",
-          "scripted_action_and_exact_player_input"
-        ],
-        "review_basis": "manual_override_after_questie_and_reference_review"
+        "decision": "not_route_candidate",
+        "facts": [],
+        "verification": [],
+        "background_verification": [],
+        "review_basis": "scope_filter"
       }
     },
     {

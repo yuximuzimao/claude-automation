@@ -1,0 +1,1941 @@
+{
+  "status": "k3_entry_scan_complete_route_not_yet_frozen",
+  "zone": {
+    "id": 67,
+    "name": "风暴峭壁"
+  },
+  "inbound_breadcrumb_id": 12853,
+  "hard_transport_action": {
+    "npc": "“诚实的”麦克斯",
+    "coordinate": [
+      40.6,
+      84.6
+    ],
+    "condition": "level >= 77 and no Cold Weather Flying",
+    "action": "five characters obtain Loaned Wind Rider Reins before questing",
+    "usable_zones": [
+      67,
+      210,
+      3711
+    ]
+  },
+  "all_k3_start_rows": [
+    {
+      "quest_id": 12818,
+      "name": "清理残骸",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12819,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "基尔·斯巴索克",
+          "entity_id": 29431,
+          "x": 41.02,
+          "y": 86.44,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的基尔·斯巴索克需要10份烧焦的零件。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 10,
+          "entity_ids": [
+            191530,
+            191531,
+            191532,
+            191533,
+            191534,
+            191535,
+            191536,
+            191537
+          ],
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191530,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 3,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.19,
+                  "y": 85.89,
+                  "spawn_count": 3,
+                  "min_x": 38.07,
+                  "max_x": 39.53,
+                  "min_y": 85.64,
+                  "max_y": 87.52
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191531,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 3,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.71,
+                  "y": 85.81,
+                  "spawn_count": 3,
+                  "min_x": 38.27,
+                  "max_x": 40.18,
+                  "min_y": 84.34,
+                  "max_y": 87.6
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191532,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.17,
+                  "y": 86.98,
+                  "spawn_count": 1,
+                  "min_x": 39.17,
+                  "max_x": 39.17,
+                  "min_y": 86.98,
+                  "max_y": 86.98
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191533,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 4,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.8,
+                  "y": 85.12,
+                  "spawn_count": 4,
+                  "min_x": 38.28,
+                  "max_x": 39.56,
+                  "min_y": 84.59,
+                  "max_y": 87.44
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191534,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.48,
+                  "y": 86.79,
+                  "spawn_count": 5,
+                  "min_x": 38.52,
+                  "max_x": 39.72,
+                  "min_y": 86.17,
+                  "max_y": 87.26
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191535,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.94,
+                  "y": 87.28,
+                  "spawn_count": 2,
+                  "min_x": 38.08,
+                  "max_x": 39.79,
+                  "min_y": 86.27,
+                  "max_y": 88.3
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191536,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.42,
+                  "y": 88.5,
+                  "spawn_count": 1,
+                  "min_x": 38.42,
+                  "max_x": 38.42,
+                  "min_y": 88.5,
+                  "max_y": 88.5
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191537,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.45,
+                  "y": 87.01,
+                  "spawn_count": 2,
+                  "min_x": 39.13,
+                  "max_x": 39.76,
+                  "min_y": 86.41,
+                  "max_y": 87.61
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12819,
+      "name": "雷区里的工具",
+      "scope_status": "include_candidate",
+      "pre_any": [
+        12818
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12826,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "基尔·斯巴索克",
+          "entity_id": 29431,
+          "x": 41.02,
+          "y": 86.44,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的基尔·斯巴索克要你进入雷区，取回斯巴索克的工具。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 1,
+          "entity_ids": [
+            191519
+          ],
+          "item_id": 40642,
+          "item_name": "Sparksocket's Tools",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191519,
+              "name": "Sparksocket's Tools",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 35.09,
+                  "y": 87.79,
+                  "spawn_count": 1,
+                  "min_x": 35.09,
+                  "max_x": 35.09,
+                  "min_y": 87.79,
+                  "max_y": 87.79
+                }
+              }
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12820,
+      "name": "亲密接触",
+      "scope_status": "include_candidate",
+      "pre_any": [
+        12826
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "mixed_objectives",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要求你前往加姆雷区，使用改进型地雷杀死12个从加姆方向冲过来的敌人。加姆入侵者和雪盲追随者都算数。",
+      "objectives": [
+        {
+          "objective_type": "event",
+          "required_count": 12,
+          "entity_ids": [
+            29619
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29619,
+              "name": "加姆入侵者",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 11,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 45.19,
+                  "y": 81.34,
+                  "spawn_count": 11,
+                  "min_x": 42.6,
+                  "max_x": 45.84,
+                  "min_y": 80.76,
+                  "max_y": 81.9
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "entity_ids": [
+            29618
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29618,
+              "name": "雪盲追随者",
+              "min_level": 76,
+              "max_level": 77,
+              "min_health": 11001,
+              "max_health": 11379,
+              "rank": 0,
+              "spawn_count": 74,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 44.76,
+                  "y": 81.16,
+                  "spawn_count": 74,
+                  "min_x": 42.28,
+                  "max_x": 45.86,
+                  "min_y": 80.12,
+                  "max_y": 82.49
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12821,
+      "name": "牢门探戈",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [
+        12820,
+        12828,
+        12832
+      ],
+      "parent_active": [],
+      "next_quest": 12822,
+      "task_class": "mixed_with_personal_item",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要你去找到传送器能量晶格，并用它启动加姆高地的传送器。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": null,
+          "entity_ids": [
+            29407
+          ],
+          "item_id": 40731,
+          "item_name": "Transporter Power Cell",
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29407,
+              "name": "雪盲信徒",
+              "min_level": 76,
+              "max_level": 77,
+              "min_health": 11001,
+              "max_health": 11379,
+              "rank": 0,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 45.68,
+                  "y": 82.35,
+                  "spawn_count": 5,
+                  "min_x": 45.12,
+                  "max_x": 45.94,
+                  "min_y": 82.26,
+                  "max_y": 82.66
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "personal_loot_roll_per_character_expected",
+          "mechanic": "multiple_creature_task_item_drops",
+          "difficulty_flags": []
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "entity_ids": [],
+          "item_id": null,
+          "item_name": null,
+          "sources": [],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12822,
+      "name": "无所畏惧",
+      "scope_status": "include_candidate",
+      "pre_any": [
+        12821
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "mixed_objectives",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要你去杀死6个加姆观察者和8个雪盲信徒。",
+      "objectives": [
+        {
+          "objective_type": "event",
+          "required_count": 6,
+          "entity_ids": [
+            29409
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29409,
+              "name": "加姆观察者",
+              "min_level": 78,
+              "max_level": 78,
+              "min_health": 11770,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 0,
+              "zones": [],
+              "representative_by_zone": {}
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        },
+        {
+          "objective_type": "event",
+          "required_count": 8,
+          "entity_ids": [
+            29553
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29553,
+              "name": "加姆观察者",
+              "min_level": 77,
+              "max_level": 77,
+              "min_health": 11379,
+              "max_health": 11379,
+              "rank": 0,
+              "spawn_count": 11,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 49.01,
+                  "y": 79.49,
+                  "spawn_count": 11,
+                  "min_x": 48.0,
+                  "max_x": 50.4,
+                  "min_y": 77.94,
+                  "max_y": 81.39
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "entity_ids": [
+            29407
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29407,
+              "name": "雪盲信徒",
+              "min_level": 76,
+              "max_level": 77,
+              "min_health": 11001,
+              "max_health": 11379,
+              "rank": 0,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 45.68,
+                  "y": 82.35,
+                  "spawn_count": 5,
+                  "min_x": 45.12,
+                  "max_x": 45.94,
+                  "min_y": 82.26,
+                  "max_y": 82.66
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "entity_ids": [
+            29554
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29554,
+              "name": "雪盲信徒",
+              "min_level": 77,
+              "max_level": 77,
+              "min_health": 11379,
+              "max_health": 11379,
+              "rank": 0,
+              "spawn_count": 19,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 50.14,
+                  "y": 78.87,
+                  "spawn_count": 19,
+                  "min_x": 49.01,
+                  "max_x": 50.69,
+                  "min_y": 76.95,
+                  "max_y": 80.25
+                }
+              }
+            }
+          ],
+          "count_confidence": "missing_counts",
+          "fivebox_mode": "event_or_use_per_character_unknown",
+          "mechanic": "spell_use_area_trigger_or_scripted_event",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12826,
+      "name": "新型地雷",
+      "scope_status": "include_candidate",
+      "pre_any": [
+        12819
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12820,
+      "task_class": "travel_dialogue_or_turnin",
+      "starts": [
+        {
+          "name": "基尔·斯巴索克",
+          "entity_id": 29431,
+          "x": 41.02,
+          "y": 86.44,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "把基尔的改进型地雷交给K3的莉吉特。",
+      "objectives": [],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 2150,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 4300,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 2150,
+          "bonus_money_from_xp_copper": 12900,
+          "bonus_money_from_xp_gold_decimal": 1.29,
+          "display": "1g 29s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12827,
+      "name": "收集粮食",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "multi_creature_personal_drop",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特想让你从附近的野蛮岭豺狼人那里夺取16份豺狼人的干粮。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 16,
+          "entity_ids": [
+            29404,
+            29622,
+            29623
+          ],
+          "item_id": 40645,
+          "item_name": "Dried Gnoll Rations",
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29404,
+              "name": "野蛮岭拾荒者",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 18,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.02,
+                  "y": 85.4,
+                  "spawn_count": 18,
+                  "min_x": 31.39,
+                  "max_x": 39.8,
+                  "min_y": 81.01,
+                  "max_y": 88.09
+                }
+              }
+            },
+            {
+              "entity_type": "npc",
+              "entity_id": 29622,
+              "name": "野蛮岭秘法师",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 9103,
+              "max_health": 9416,
+              "rank": 0,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 34.9,
+                  "y": 82.78,
+                  "spawn_count": 5,
+                  "min_x": 31.46,
+                  "max_x": 37.8,
+                  "min_y": 81.44,
+                  "max_y": 85.84
+                }
+              }
+            },
+            {
+              "entity_type": "npc",
+              "entity_id": 29623,
+              "name": "野蛮岭暴徒",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 20,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 35.11,
+                  "y": 83.97,
+                  "spawn_count": 20,
+                  "min_x": 31.22,
+                  "max_x": 38.5,
+                  "min_y": 81.39,
+                  "max_y": 86.76
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "personal_loot_roll_per_character_expected",
+          "mechanic": "multiple_creature_task_item_drops",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12828,
+      "name": "突发奇想",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [
+        12827,
+        12836
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要你去拿取一颗D16限时炸弹，用它炸翻一头猛犸象，然后收集8块巨大的猛犸肉。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 8,
+          "entity_ids": [
+            191567,
+            192693
+          ],
+          "item_id": 40728,
+          "item_name": "Hearty Mammoth Meat",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191567,
+              "name": "Mammoth Meat",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 0,
+              "zones": [],
+              "representative_by_zone": {}
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 192693,
+              "name": "Mammoth Carcass",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 0,
+              "zones": [],
+              "representative_by_zone": {}
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12836,
+      "name": "感激之情",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "single_named_kill",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要你去杀死瘤皮。",
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "entity_ids": [
+            30003
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 30003,
+              "name": "瘤皮",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 30.33,
+                  "y": 85.66,
+                  "spawn_count": 1,
+                  "min_x": 30.33,
+                  "max_x": 30.33,
+                  "min_y": 85.66,
+                  "max_y": 85.66
+                }
+              }
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "kill_progress_shared_expected",
+          "mechanic": "single_named_or_rare_kill",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12843,
+      "name": "她们把男人都抓走了！",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12846,
+      "task_class": "shared_kill",
+      "starts": [
+        {
+          "name": "格莱奇·菲兹巴克",
+          "entity_id": 29473,
+          "x": 41.15,
+          "y": 86.14,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "格莱奇·菲兹巴克要你前往希弗列尔达村，救出5名地精囚犯。",
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 5,
+          "entity_ids": [
+            29466
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29466,
+              "name": "地精囚犯",
+              "min_level": 78,
+              "max_level": 79,
+              "min_health": 11770,
+              "max_health": 12175,
+              "rank": 0,
+              "spawn_count": 10,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 41.21,
+                  "y": 71.86,
+                  "spawn_count": 10,
+                  "min_x": 39.26,
+                  "max_x": 41.77,
+                  "min_y": 69.26,
+                  "max_y": 74.33
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "kill_progress_shared_expected",
+          "mechanic": "regular_shared_kills",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 79,
+        "xp_db_base": 21800,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43600,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21800,
+          "bonus_money_from_xp_copper": 130800,
+          "bonus_money_from_xp_gold_decimal": 13.08,
+          "display": "13g 08s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12844,
+      "name": "夺回设备",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "格莱奇·菲兹巴克",
+          "entity_id": 29473,
+          "x": 41.15,
+          "y": 86.14,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "格莱奇·菲兹巴克要你前往K3北方的希弗列尔达村，找回8件K3设备。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 8,
+          "entity_ids": [
+            191568
+          ],
+          "item_id": 40726,
+          "item_name": "K3 Equipment",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191568,
+              "name": "K3 Equipment",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 19,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 41.02,
+                  "y": 72.48,
+                  "spawn_count": 19,
+                  "min_x": 39.38,
+                  "max_x": 42.42,
+                  "min_y": 67.57,
+                  "max_y": 75.88
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 79,
+        "xp_db_base": 21800,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43600,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21800,
+          "bonus_money_from_xp_copper": 130800,
+          "bonus_money_from_xp_gold_decimal": 13.08,
+          "display": "13g 08s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12846,
+      "name": "一个地精也不能少",
+      "scope_status": "include_candidate",
+      "pre_any": [
+        12843
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12841,
+      "task_class": "travel_dialogue_or_turnin",
+      "starts": [
+        {
+          "name": "格莱奇·菲兹巴克",
+          "entity_id": 29473,
+          "x": 41.15,
+          "y": 86.14,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "前往希弗列尔达村的北部，找到荒弃矿洞的入口，并寻找西弗·菲兹巴克的下落。",
+      "objectives": [],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 10800,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 21600,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 10800,
+          "bonus_money_from_xp_copper": 64800,
+          "bonus_money_from_xp_gold_decimal": 6.48,
+          "display": "6g 48s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    }
+  ],
+  "initial_no_storm_prereq_rows": [
+    {
+      "quest_id": 12818,
+      "name": "清理残骸",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12819,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "基尔·斯巴索克",
+          "entity_id": 29431,
+          "x": 41.02,
+          "y": 86.44,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的基尔·斯巴索克需要10份烧焦的零件。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 10,
+          "entity_ids": [
+            191530,
+            191531,
+            191532,
+            191533,
+            191534,
+            191535,
+            191536,
+            191537
+          ],
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191530,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 3,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.19,
+                  "y": 85.89,
+                  "spawn_count": 3,
+                  "min_x": 38.07,
+                  "max_x": 39.53,
+                  "min_y": 85.64,
+                  "max_y": 87.52
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191531,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 3,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.71,
+                  "y": 85.81,
+                  "spawn_count": 3,
+                  "min_x": 38.27,
+                  "max_x": 40.18,
+                  "min_y": 84.34,
+                  "max_y": 87.6
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191532,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.17,
+                  "y": 86.98,
+                  "spawn_count": 1,
+                  "min_x": 39.17,
+                  "max_x": 39.17,
+                  "min_y": 86.98,
+                  "max_y": 86.98
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191533,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 4,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.8,
+                  "y": 85.12,
+                  "spawn_count": 4,
+                  "min_x": 38.28,
+                  "max_x": 39.56,
+                  "min_y": 84.59,
+                  "max_y": 87.44
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191534,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.48,
+                  "y": 86.79,
+                  "spawn_count": 5,
+                  "min_x": 38.52,
+                  "max_x": 39.72,
+                  "min_y": 86.17,
+                  "max_y": 87.26
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191535,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.94,
+                  "y": 87.28,
+                  "spawn_count": 2,
+                  "min_x": 38.08,
+                  "max_x": 39.79,
+                  "min_y": 86.27,
+                  "max_y": 88.3
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191536,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.42,
+                  "y": 88.5,
+                  "spawn_count": 1,
+                  "min_x": 38.42,
+                  "max_x": 38.42,
+                  "min_y": 88.5,
+                  "max_y": 88.5
+                }
+              }
+            },
+            {
+              "entity_type": "object",
+              "entity_id": 191537,
+              "name": "Charred Wreckage",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 2,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 39.45,
+                  "y": 87.01,
+                  "spawn_count": 2,
+                  "min_x": 39.13,
+                  "max_x": 39.76,
+                  "min_y": 86.41,
+                  "max_y": 87.61
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12827,
+      "name": "收集粮食",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "multi_creature_personal_drop",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特想让你从附近的野蛮岭豺狼人那里夺取16份豺狼人的干粮。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 16,
+          "entity_ids": [
+            29404,
+            29622,
+            29623
+          ],
+          "item_id": 40645,
+          "item_name": "Dried Gnoll Rations",
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29404,
+              "name": "野蛮岭拾荒者",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 18,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 38.02,
+                  "y": 85.4,
+                  "spawn_count": 18,
+                  "min_x": 31.39,
+                  "max_x": 39.8,
+                  "min_y": 81.01,
+                  "max_y": 88.09
+                }
+              }
+            },
+            {
+              "entity_type": "npc",
+              "entity_id": 29622,
+              "name": "野蛮岭秘法师",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 9103,
+              "max_health": 9416,
+              "rank": 0,
+              "spawn_count": 5,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 34.9,
+                  "y": 82.78,
+                  "spawn_count": 5,
+                  "min_x": 31.46,
+                  "max_x": 37.8,
+                  "min_y": 81.44,
+                  "max_y": 85.84
+                }
+              }
+            },
+            {
+              "entity_type": "npc",
+              "entity_id": 29623,
+              "name": "野蛮岭暴徒",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 20,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 35.11,
+                  "y": 83.97,
+                  "spawn_count": 20,
+                  "min_x": 31.22,
+                  "max_x": 38.5,
+                  "min_y": 81.39,
+                  "max_y": 86.76
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "personal_loot_roll_per_character_expected",
+          "mechanic": "multiple_creature_task_item_drops",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12836,
+      "name": "感激之情",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "single_named_kill",
+      "starts": [
+        {
+          "name": "莉吉特",
+          "entity_id": 29428,
+          "x": 40.93,
+          "y": 85.31,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "K3的莉吉特要你去杀死瘤皮。",
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "entity_ids": [
+            30003
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 30003,
+              "name": "瘤皮",
+              "min_level": 77,
+              "max_level": 78,
+              "min_health": 11379,
+              "max_health": 11770,
+              "rank": 0,
+              "spawn_count": 1,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 30.33,
+                  "y": 85.66,
+                  "spawn_count": 1,
+                  "min_x": 30.33,
+                  "max_x": 30.33,
+                  "min_y": 85.66,
+                  "max_y": 85.66
+                }
+              }
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "kill_progress_shared_expected",
+          "mechanic": "single_named_or_rare_kill",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 78,
+        "xp_db_base": 21600,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43200,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21600,
+          "bonus_money_from_xp_copper": 129600,
+          "bonus_money_from_xp_gold_decimal": 12.96,
+          "display": "12g 96s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12843,
+      "name": "她们把男人都抓走了！",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12846,
+      "task_class": "shared_kill",
+      "starts": [
+        {
+          "name": "格莱奇·菲兹巴克",
+          "entity_id": 29473,
+          "x": 41.15,
+          "y": 86.14,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "格莱奇·菲兹巴克要你前往希弗列尔达村，救出5名地精囚犯。",
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 5,
+          "entity_ids": [
+            29466
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 29466,
+              "name": "地精囚犯",
+              "min_level": 78,
+              "max_level": 79,
+              "min_health": 11770,
+              "max_health": 12175,
+              "rank": 0,
+              "spawn_count": 10,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 41.21,
+                  "y": 71.86,
+                  "spawn_count": 10,
+                  "min_x": 39.26,
+                  "max_x": 41.77,
+                  "min_y": 69.26,
+                  "max_y": 74.33
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "kill_progress_shared_expected",
+          "mechanic": "regular_shared_kills",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 79,
+        "xp_db_base": 21800,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43600,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21800,
+          "bonus_money_from_xp_copper": 130800,
+          "bonus_money_from_xp_gold_decimal": 13.08,
+          "display": "13g 08s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    },
+    {
+      "quest_id": 12844,
+      "name": "夺回设备",
+      "scope_status": "include_candidate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "task_class": "world_object_item_collection",
+      "starts": [
+        {
+          "name": "格莱奇·菲兹巴克",
+          "entity_id": 29473,
+          "x": 41.15,
+          "y": 86.14,
+          "spawn_count": 1
+        }
+      ],
+      "objective_text_zh": "格莱奇·菲兹巴克要你前往K3北方的希弗列尔达村，找回8件K3设备。",
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 8,
+          "entity_ids": [
+            191568
+          ],
+          "item_id": 40726,
+          "item_name": "K3 Equipment",
+          "sources": [
+            {
+              "entity_type": "object",
+              "entity_id": 191568,
+              "name": "K3 Equipment",
+              "min_level": null,
+              "max_level": null,
+              "min_health": null,
+              "max_health": null,
+              "rank": null,
+              "spawn_count": 19,
+              "zones": [
+                67
+              ],
+              "representative_by_zone": {
+                "67": {
+                  "x": 41.02,
+                  "y": 72.48,
+                  "spawn_count": 19,
+                  "min_x": 39.38,
+                  "max_x": 42.42,
+                  "min_y": 67.57,
+                  "max_y": 75.88
+                }
+              }
+            }
+          ],
+          "count_confidence": "exact_text_order",
+          "fivebox_mode": "item_pickup_per_character_expected",
+          "mechanic": "task_item_world_object_pickup",
+          "difficulty_flags": []
+        }
+      ],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 79,
+        "xp_db_base": 21800,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 43600,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 21800,
+          "bonus_money_from_xp_copper": 130800,
+          "bonus_money_from_xp_gold_decimal": 13.08,
+          "display": "13g 08s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      }
+    }
+  ],
+  "initial_no_storm_prereq_ids": [
+    12818,
+    12827,
+    12836,
+    12843,
+    12844
+  ]
+}

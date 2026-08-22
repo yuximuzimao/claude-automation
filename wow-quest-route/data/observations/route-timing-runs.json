@@ -234,6 +234,271 @@
       ],
       "lowest_character_endpoint": "74级196437",
       "status": "scoped_actual_endpoint_recorded_with_known_errors"
+    },
+    {
+      "date": "2026-08-20",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_live_step_block",
+      "time_precision": "mixed",
+      "effective_start_local": "2026-08-20T19:31:00+08:00",
+      "effective_end_local": "2026-08-20T22:21:00+08:00",
+      "actual_minutes": 170,
+      "route_window": "步骤12开始→步骤17《眠月第二圈 → 投影》完成。步骤12—15有用户分钟级完成时刻；步骤16没有独立完成时刻，因此步骤16—17只保留合并墙钟。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "步骤15《冰虫之母》打拉特尔博尔时死亡一次；佐特防护药剂已经使用并在死亡后失去，随后误以为可以回NPC重新取得而白跑一趟，最终无药剂强打完成。死亡、复活和往返NPC属于异常墙钟。",
+        "步骤16《寻找线索》不共享，本轮运气较差，获取五号各自线索耗时出现明显随机长尾。",
+        "步骤16魔导师凯尔多努斯战斗期间发生一次死亡。",
+        "步骤16原路线只写‘回阿格玛交接’，没有在玩家操作层明确写出‘眠月花园→阿格玛之锤·夺日者影像’转场和交付点，现场需要按任务名自行查找，产生额外导航/判断成本。"
+      ],
+      "live_mechanic_confirmations": [
+        "步骤13鹰身人击杀进度共享；《抢木材》木材不共享，伐木机/载具也必须五号分别操作。",
+        "步骤14《采集样本》不共享，五号分别点击冰巨人尸体；《恶心的生意》不共享，每号自己中腐蚀性唾液并自己使用刮刀。",
+        "步骤15《抓虫子》幼虫进度不共享，五号分别装箱。",
+        "步骤16《寻找线索》不共享，五号分别取得并打开线索物品。",
+        "步骤17《奇怪的设备》古拉莫什只需击杀一次，同一具尸体可供五号分别拾取任务起始物。",
+        "步骤17《投影和计划》在五个角色都飞过投影脚本的执行方式下共享完成；尚未验证只让主控飞、其余四号原地等待是否也共享。"
+      ],
+      "manual_step_actuals_minutes": [
+        {"step": 12, "actual": 25, "clean_baseline": 16.1, "delta": 8.9, "endpoint_local": "2026-08-20T19:56:00+08:00"},
+        {"step": 13, "actual": 20, "clean_baseline": 11.8, "delta": 8.2, "endpoint_local": "2026-08-20T20:16:00+08:00", "note": "用户未报告死亡/迷路等异常；个人木材+个人载具机制说明当前clean baseline可能低估真实五开服务时间，但暂不以单次样本硬覆盖。"},
+        {"step": 14, "actual": 14, "clean_baseline": 8.2, "delta": 5.8, "endpoint_local": "2026-08-20T20:30:00+08:00", "note": "用户未报告额外异常；两个目标均为五号个人操作，当前clean baseline可能低估逐号交互成本。"},
+        {"step": 15, "actual": 28, "clean_baseline": 8.8, "delta": 19.2, "endpoint_local": "2026-08-20T20:58:00+08:00", "note": "包含死亡、药剂失效、误跑NPC和复活往返，不能直接回写任务固有耗时。"},
+        {"steps": "16-17", "actual": 83, "clean_baseline": 31.5, "delta": 51.5, "endpoint_local": "2026-08-20T22:21:00+08:00", "note": "步骤16独立终点未记录；用户只确认步骤16本身已超过30分钟。合并83分钟包含寻找线索随机长尾、凯尔多努斯死亡和交付转场信息不清等异常，禁止强行拆分。"}
+      ],
+      "same_endpoint_comparison": {
+        "endpoint": "步骤17《眠月第二圈 → 投影》完成",
+        "actual_minutes": 170,
+        "clean_baseline_minutes": 76.4,
+        "overrun_minutes": 93.6,
+        "overrun_percent": 122.51,
+        "note": "总超额不能整体拿来放大后续估时。步骤13、14是目前最值得后续复跑校准的正常段；步骤15、16明确包含异常成本，步骤16—17又缺少独立边界。"
+      },
+      "journey_source_check": {
+        "status": "updated_source_now_contains_this_block",
+        "observed_event_count": 1867,
+        "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+        "note": "2026-08-21用户重新更新Questie.lua后，步骤12—17相关事件已出现。Journey可用于核对接取/交付顺序与大致时间锚点，但Questie的Complete记录更接近交付事件，不能反向替代用户记录的逻辑步骤完成时刻；原手工边界继续保留为该run的主时间口径。"
+      },
+      "status": "scoped_actual_recorded_manual_primary_journey_crosschecked_with_known_errors"
+    },
+    {
+      "date": "2026-08-20/21",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_live_step_block",
+      "time_precision": "mixed",
+      "effective_start_local": "2026-08-20T22:21:00+08:00",
+      "effective_end_local": "2026-08-21T00:21:00+08:00",
+      "actual_minutes": 120,
+      "route_window": "步骤18开始→步骤24完成；用户提供分钟级步骤终点，更新后的Journey用于交付/接取事件交叉核对。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "步骤18首组因为前段动作较慢，炉石只差约25秒冷却，用户等待25秒并提前使用炉石返回；这是本轮偏离。固定路线仍把炉石留在步骤19罗萨洛尔收尾，因为成熟执行下步骤18更快时炉石未必冷却。",
+        "步骤19额外绕路提前完成《邪能之约》；用户明确要求维持原本因度雷路线，因此该绕路不进入固定路线。",
+        "步骤20首组顺手提前进入红玉洞穴击杀达莉亚并接红玉胸针任务；后续《烈焰之地》本来会再次自然击杀达莉亚，因此固定路线不采用这次提前击杀，避免重复Boss成本。",
+        "步骤22尝试吉加托尔但当前战力打不过；同时发现《前往阿格玛之锤》因后续任务已完成或激活而无法接取。",
+        "步骤23顺路额外接并完成《未来的种子》日常；经过吉加托尔附近又发生一次死亡；做《不要浪费》期间走错路并提前完成因度雷搜索；《灵魂视界》为确认不共享做了额外测试/重复执行。",
+        "步骤24因为因度雷搜索已在步骤23走错路时提前完成，本次11分钟不是完整步骤24的正常墙钟。"
+      ],
+      "live_mechanic_confirmations": [
+        "步骤18《海岸上的魔法焦点》进度五号共享，主控完成控制指环/魔网焦点操作即可。",
+        "步骤19《强化古树》只需一个角色取得树皮，强化进度五号共享。",
+        "步骤20《邪恶之约》在瓦伦哈尔下陷地形完成更顺路；五号需要轮流分别完成，目标刷新很快。",
+        "步骤21《野生动物的疫苗》进度五号共享。",
+        "步骤23《不要浪费》货物不共享，同一具尸体只能一个角色拾取自己的货物。",
+        "步骤23《消灭洛根》共享，只需一个角色拾取并使用洛根之血。",
+        "步骤23《灵魂视界》不共享，但五号分别触发自动飞行的额外操作很低。"
+      ],
+      "route_corrections_from_this_block": [
+        "《腐烂的器官》完成后第一次回阿格玛就顺手推进《好医生》到《红玉丁香》，不再拖到步骤20才做两次医生往返。",
+        "《邪恶之约》从原步骤22移动到步骤20，与《红玉丁香》地理合并。",
+        "步骤22改为直接前往莫亚基；当前不要尝试吉加托尔，后续处理点等待本轮后段实测决定。",
+        "11996《前往阿格玛之锤》在当前先阿格玛后莫亚基轴上实测不可接，加入有意不插集合。",
+        "《未来的种子》后续复审已升级为固定‘每组首次经过一次’日常例外：五号个人拾取，但与《不要浪费》完全同区、无独立跑路；用户确认每号约5G，五号约25G，收益足以覆盖个人点击成本。"
+      ],
+      "manual_step_actuals_minutes": [
+        {"step": 18, "actual": 7, "revised_clean_baseline": 7.7, "delta": -0.7, "endpoint_local": "2026-08-20T22:28:00+08:00", "note": "Journey中12066于22:28:32交付；首组额外等约25秒并提前用了炉石，不作为低于基线的校准证据。"},
+        {"step": 19, "actual": 19, "revised_clean_baseline": 7.6, "delta": 11.4, "endpoint_local": "2026-08-20T22:47:00+08:00", "note": "包含提前《邪能之约》和步骤18提前消耗炉石造成的路线偏离；Journey中12084于22:46:20交付。"},
+        {"step": 20, "actual": 16, "revised_clean_baseline": 7.5, "delta": 8.5, "endpoint_local": "2026-08-20T23:03:00+08:00", "note": "包含固定路线不采用的提前达莉亚击杀；Journey中12126于23:03:41、12102于23:03:58交付。"},
+        {"step": 21, "actual": 4, "revised_clean_baseline": 5.0, "delta": -1.0, "endpoint_local": "2026-08-20T23:07:00+08:00", "note": "机制共享且未报告明显异常；Journey中12111于23:07:29交付，是本批最接近clean baseline的校准样本。"},
+        {"step": 22, "actual": 11, "revised_clean_baseline": 3.2, "delta": 7.8, "endpoint_local": "2026-08-20T23:18:00+08:00", "note": "包含吉加托尔失败尝试和不可接面包屑确认；修正后的步骤22仅直接前往莫亚基，不可拿本次11分钟校准。Journey中12117于23:16:24交付。"},
+        {"step": 23, "actual": 52, "revised_clean_baseline": 19.0, "delta": 33.0, "endpoint_local": "2026-08-21T00:10:00+08:00", "note": "《未来的种子》现已固定纳入，因此在原15分钟基线上暂加4分钟个人拾取操作成本；仍包含吉加托尔死亡、走错因度雷和灵魂视界机制测试，52分钟不能线性校准。未来干净复跑再单独校准60次幼崽拾取与《不要浪费》个人货物成本。Journey中12028于00:09:32完成。"},
+        {"step": 24, "actual": 11, "revised_clean_baseline": 18.5, "delta": -7.5, "endpoint_local": "2026-08-21T00:21:00+08:00", "note": "因步骤23走错路已提前完成因度雷搜索，本次明显少做了一部分固定路线动作，不得作为完整步骤24速度样本。Journey中12031于00:19:39交付并接12032，与用户分钟边界相符。"}
+      ],
+      "same_endpoint_comparison": {
+        "endpoint": "步骤24完成",
+        "actual_minutes": 120,
+        "revised_clean_baseline_minutes": 64.5,
+        "overrun_minutes": 55.5,
+        "overrun_percent": 86.05,
+        "note": "55.5分钟总超额高度受路线学习与额外任务污染，不能线性放大后续估时。步骤21可作为较干净样本；步骤23的《不要浪费》仍需在无迷路/无额外任务条件下复跑后再校准其个人拾取成本。"
+      },
+      "journey_source": {
+        "event_count": 1867,
+        "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+        "status": "updated_and_crosschecked"
+      },
+      "status": "scoped_actual_and_revised_route_recorded_with_known_errors"
+    },
+    {
+      "date": "2026-08-21",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_live_step_block_with_post_boundary_route_divergence",
+      "time_precision": "manual_minutes_plus_journey_crosscheck",
+      "effective_start_local": "2026-08-21T00:21:00+08:00",
+      "effective_end_local": "2026-08-21T01:27:00+08:00",
+      "actual_minutes": 66,
+      "route_window": "步骤25开始→步骤26完成。步骤27之后发生大范围跳步，用户未给步骤27完成时刻，因此不把后续墙钟伪装成正常步骤27样本。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "步骤25首组没有按旧路线假设沿基利瓦/海洋女神路线顺便补陷阱，而是把五号共40个螃蟹陷阱连续做完；这暴露的是旧估时/顺路假设错误，不属于玩家迷路。",
+        "步骤25为确认《海洋女神》机制，实测一个号从点击珍珠到珍珠再次可点击约1分40秒；任务本身不共享，五号需串行触发。该刷新等待属于固有服务成本，应进入基线。",
+        "步骤26本应炉石回阿格玛；用户为了再次测试吉加托尔改走陆路，包含跑路、等怪、第一次团灭和第二次仅一号存活完成，因此27分钟不能回写到修正后的海线收尾基线。",
+        "步骤27开始后，因为首组此前意外死亡已提前开过龙眠飞行点，加上旧执行稿转场提示不够强，用户直接飞龙眠并按地图上的未来交付标记提前推进红玉链；随后又跑回猎龙营地。这一大段属于跨步骤路线偏离。",
+        "步骤27之后尝试《萨拉斯塔，北地的灾祸》失败；任务保持未完成。"
+      ],
+      "live_mechanic_confirmations": [
+        "《图尔凯的螃蟹陷阱》五号各8个，共40次个人进度；首组连续采集、换两次呼吸气囊并交任务约20分钟。",
+        "《海洋女神》不共享，五号必须分别点击深海珍珠；珍珠点击后约1分40秒才能再次点击。触发后从水中游到岸边，再由陆地跑回/向集合方向移动。",
+        "《重归尘土》红玉橡果处理尸体的任务进度五号共享。",
+        "吉加托尔在75级五开仍具有高失败风险：一次团灭，第二次最终只剩一个号存活才完成。",
+        "萨拉斯塔在75级五开实测打不过。"
+      ],
+      "route_corrections_from_this_block": [
+        "步骤25把《图尔凯的螃蟹陷阱》改成独立海底采集段，不再写成沿后续海路自然顺满；当前不假设用户未验证的更远水下陷阱覆盖。",
+        "步骤25把《海洋女神》明确为五号个人串行脚本，并把约100秒珍珠刷新锁纳入固有服务时间。",
+        "步骤26固定使用炉石从莫亚基回阿格玛，不再坐系统鸟，也不再为吉加托尔绕路。",
+        "步骤26抵达阿格玛后只交《通缉：魔导师凯尔多努斯》《通缉：恐怖之爪》；正常不会出现《前往猎龙营地》，因为吉加托尔支线已延后。",
+        "未来练级组从阿格玛第一次开场就不接《通缉：吉加托尔》，避免把一条计划80后处理的任务长期占在25任务栏位。",
+        "《通缉：吉加托尔》→《前往猎龙营地》→《萨拉斯塔，北地的灾祸》定义为同一条80后精英回收支线；《害虫控制》→《峡谷追击》是独立普通链，仍在当前等级做。",
+        "步骤27增加显式转场‘阿格玛→猎龙营地’，步骤28结束再显式‘猎龙营地→龙眠神殿并开飞行点’；禁止凭地图上的未来问号/交付点自行跳步骤。"
+      ],
+      "defer_to_80_decision": {
+        "tasks": [12090, 12095, 12097],
+        "now": "不选。75级首组已经证明吉加托尔和萨拉斯塔具有明显死亡/团灭方差；12097还是建议5人精英，当前强打会直接破坏连续路线稳定性。",
+        "at_80": "选。12097没有其它龙骨后续依赖，整条支线延后不会卡主线；80后战力更高，重新回阿格玛/猎龙营地的成本可控，同时这些任务的经验部分可按满级任务规则兑现为金币。",
+        "never": "不选。虽然可以省掉回访与战斗墙钟，但会永久损失任务直接奖励、装备价值与满级金币补偿，不符合任务打金周期的全收益目标。",
+        "decision": "defer_to_80"
+      },
+      "manual_step_actuals_minutes": [
+        {"step": 25, "actual": 39, "revised_clean_baseline": 33.9, "delta": 5.1, "endpoint_local": "2026-08-21T01:00:00+08:00", "note": "本段没有报告死亡/迷路；主要新增成本是真实五开40个陷阱与五号串行海洋女神。修正后模型33.9分钟、区间25.4—42.4，本次39分钟已落入区间，可作为有价值的首轮校准样本。"},
+        {"step": 26, "actual": 27, "revised_clean_baseline": 7.7, "delta": 19.3, "endpoint_local": "2026-08-21T01:27:00+08:00", "note": "包含为测试吉加托尔而放弃炉石、额外陆路、等怪、一次团灭及第二次残局完成。Journey于01:27:52记录12090完成/交付锚点；禁止据此放大修正后的步骤26。"}
+      ],
+      "post_step26_journey_divergence": [
+        "01:27:53 接12095《前往猎龙营地》；这是首组已经强行完成吉加托尔后才出现的状态，未来基线不会在此接到。",
+        "约01:31后直接进入龙眠并提前推进红玉链；12461、12448、12449、12450依次在01:39—02:01附近完成，证明首组已经跳过正常猎龙营地步骤顺序。",
+        "02:02:39 完成12095并在02:02:40接12097；随后萨拉斯塔尝试失败，12097在当前Journey末端仍保持激活。",
+        "02:14—02:17才回头完成12144《害虫控制》和12145《峡谷追击》，进一步确认这是路线跳步后的回补，不是正常步骤27/28墙钟。"
+      ],
+      "journey_source": {
+        "event_count": 1867,
+        "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+        "status": "updated_and_crosschecked"
+      },
+      "status": "steps25_26_recorded_step27_divergence_not_used_as_baseline"
+    },
+    {
+      "date": "2026-08-21",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_late_block_manual_endpoints_and_end_of_day_checkpoint",
+      "time_precision": "manual_minutes_with_journey_crosscheck",
+      "route_window": "补充步骤28机制；步骤33于03:03完成、步骤34于03:22完成；03:30停在步骤36怨毒镇镇内任务接取完毕、尚未去镇外接《海边的地产》。步骤29—32、35没有用户提供完整步骤终点，因此不反推这些步骤墙钟。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "旧路线曾在前段提前击杀冰拳，导致后面《峡谷追击》必须重复击杀；用户明确要求冰拳留到正式后续再打，已从前段移除。",
+        "步骤32首组顺路接并完成《保卫龙眠神殿》日常；这次机制测试确认其五开效率后，固定路线改为每组首次经过做一次，但不安排每日重复回刷。",
+        "步骤33先打了《驱逐天灾》的普通目标、随后五号同时放《无路可逃》毁灭结界，叠加刷怪导致团灭；这两项都属于首组操作错误。固定路线改为先由主控只放一个结界，利用事件刷怪同步推进《驱逐天灾》。",
+        "步骤34完成黑曜石链后，首组提前炉石回阿格玛交《冰霜之约》并完成《翻译过的魔典》，再飞龙眠；这是本轮提前清理动作，当前没有足够的同终点比较证明必须重排固定后续，因此暂不拿来校准步骤34正常墙钟。",
+        "步骤36在03:30只完成怨毒镇镇内接取/《测试药剂》，尚未前往约(79.35,65.06)接《海边的地产》；03:30不是步骤36完成时刻。"
+      ],
+      "live_mechanic_confirmations": [
+        "《害虫控制》约(55,51)存在非常集中的可计数目标区，后续优先在这里补最低角色进度。",
+        "《古怪的暗示》首组回忆：冰拳同一具尸体的号角五号都能分别拾取。",
+        "《保卫龙眠神殿》：碧蓝巨龙/幼龙击杀在有效距离内五号共享；破坏碧蓝巨龙圣地需要五号分别执行。",
+        "《无路可逃》进度五号共享，只需主控放一个毁灭结界；事件刷怪能顺便推进《驱逐天灾》。",
+        "《污染的能量》摧毁通灵符文进度五号共享。",
+        "《奈萨里奥的烈焰》进度五号共享。",
+        "《测试药剂》进度五号共享，只需主控使用一次。"
+      ],
+      "route_corrections_from_this_block": [
+        "删除恐怖之爪后提前杀冰拳/提前拿号角的动作；冰拳只在接到《峡谷追击》后击杀一次。",
+        "《害虫控制》固定补怪点改为约(55,51)高密度区。",
+        "《保卫龙眠神殿》作为明确例外加入每组首次经过一次的路线；它仍是日常，不进入每日重复循环。",
+        "《无路可逃》改成步骤33的第一战斗动作：一个结界、共享完成、事件刷怪后再补《驱逐天灾》。",
+        "黑曜石通灵符文和《奈萨里奥的烈焰》移除五开待实测标记并写成主控一次共享。",
+        "建立多层建筑永久规则：任务接交点必须在标题/主动作直接标地面层、中层、顶层、地下等层级；当前龙眠交接已按地面/中层/顶层重写。",
+        "怨毒镇不再重复提示《魔法王国达拉然》；该任务此前已经在阿格玛处理，步骤36无需再次操作。",
+        "修正《海边的地产》接交点：约(79.35,65.06)镇外NPC，不是在怨毒镇药剂师处；步骤36因此增加明确镇外接取与回收两点。"
+      ],
+      "manual_timing_evidence": [
+        {"step": 33, "endpoint_local": "2026-08-21T03:03:00+08:00", "actual_minutes": null, "note": "缺少步骤32完成时刻，且包含先刷错目标顺序和五号同时放结界造成的团灭，不能反推正常步骤33耗时。"},
+        {"step": 34, "endpoint_local": "2026-08-21T03:22:00+08:00", "actual_minutes_since_step33": 19, "note": "19分钟包含首组提前炉石回阿格玛处理《冰霜之约》/《翻译过的魔典》再飞龙眠的额外清理，不作为纯黑曜石步骤基线。"},
+        {"step": 36, "checkpoint_local": "2026-08-21T03:30:00+08:00", "status": "partial_town_open_only", "note": "只到怨毒镇镇内任务接取完毕并完成《测试药剂》；尚未去镇外接《海边的地产》，不是步骤完成。"}
+      ],
+      "end_of_day_progress": {
+        "level": 75,
+        "xp_values": [1379801, 1360294, 1363413, 1360219, 1359501],
+        "lowest_character_xp": 1359501,
+        "highest_character_xp": 1379801,
+        "spread_xp": 20300,
+        "checkpoint_local": "2026-08-21T03:30:00+08:00"
+      },
+      "journey_source": {
+        "event_count": 1867,
+        "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839",
+        "status": "crosschecked_existing_source_contains_late_block"
+      },
+      "status": "late_block_recorded_with_step33_failure_step34_extra_cleanup_and_step36_partial_checkpoint"
+    },
+    {
+      "date": "2026-08-21",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_afternoon_continuation",
+      "route_window": "15:22从步骤36中途点继续；16:14完成步骤36并暂停。恢复时间未提供。步骤37顺路完成《确保他们不再站起来！》并确认五号共享，奥雷托斯战斗有一次失败。18:33停在步骤38附近。",
+      "manual_timing_evidence": [
+        {"step": 36, "resume_local": "2026-08-21T15:22:00+08:00", "endpoint_local": "2026-08-21T16:14:00+08:00", "remainder_minutes": 52, "status": "partial_step_remainder_only", "note": "昨夜03:30已经完成怨毒镇镇内接取和《测试药剂》，所以52分钟只代表步骤36后半段。"},
+        {"step": 37, "actual_minutes": null, "status": "no_clean_timing", "note": "恢复时间未提供；顺路完成新壁炉谷任务，奥雷托斯战斗有一次失败。"},
+        {"step": 38, "checkpoint_local": "2026-08-21T18:33:00+08:00", "status": "mid_step_checkpoint", "note": "停在三只猛犸人目标相关位置；不根据措辞强判三目标是否已经完成，下次按实际任务日志接续。"}
+      ],
+      "live_mechanic_confirmations": [
+        "《确保他们不再站起来！》进度五号共享，主控处理即可。",
+        "《永恒之龙的秘密》进度不共享，且40码内不能同时放多个沙漏；五号实跑按2+2+1三批完成，三批纯战斗/事件约10分钟，不含跑路。"
+      ],
+      "route_corrections_from_this_block": [
+        "把新壁炉谷第一圈前移到怨毒镇去翡翠圣地途中；后续回怨毒镇只交付并接第二圈。",
+        "《永恒之龙的秘密》固定改成2+2+1三批执行，并把10分钟纯事件时间作为任务服务时间校准。"
+      ],
+      "journey_source": {"event_count": 1867, "source_sha256": "e0f055d8eca000b62da11ca2e03a4f2ee84fbaa0704a7ba01a480acbf9c0d839", "status": "stale_not_refreshed_for_afternoon_session"},
+      "status": "afternoon_continuation_recorded"
+    },
+    {
+      "date": "2026-08-22",
+      "route_key": "dragonblight",
+      "run_kind": "first_group_full_map_completion",
+      "route_window": "首组五号龙骨荒野整图完成；此前分段实跑存在暂停、失败和学习成本，因此本记录只封口最终状态，不从跨日Journey总跨度反推成熟路线总墙钟。",
+      "final_progress": {
+        "level": 77,
+        "xp_values": [44585, 34239, 34592, 40497, 32589],
+        "lowest_character_xp": 32589,
+        "highest_character_xp": 44585,
+        "spread_xp": 11996,
+        "status": "dragonblight_full_map_complete_user_confirmed"
+      },
+      "journey_final_boundary": {
+        "quest_12500_complete_local": "2026-08-22T02:07:11+08:00",
+        "cross_map_13242_accept_local": "2026-08-22T02:08:14+08:00",
+        "map_completion_boundary_local": "2026-08-22T02:08:14+08:00",
+        "note": "12500完成后只剩跨图保留任务的接取/携带；用户明确确认龙骨整张地图已做完，因此约02:08作为整图完成边界。"
+      },
+      "journey_source": {
+        "event_count": 1945,
+        "source_sha256": "1711b8cec722c34e0ae210ab4bf31c9549594b96076e3657439ebffcf42943c9",
+        "max_level": 77,
+        "active_quest_ids": [12097, 12487, 12789, 12791, 13242],
+        "status": "refreshed_and_crosschecked_full_map_completion"
+      },
+      "timing_use": "final_state_anchor_only_not_clean_total_duration",
+      "status": "dragonblight_first_group_closed"
     }
   ]
 }

@@ -13,6 +13,7 @@ BOREAN_FOUNDATION = ROOT / "data/route-atlas/borean-tundra-task-foundation.json"
 DRAGON_FOUNDATION = ROOT / "data/route-atlas/dragonblight-task-foundation.json"
 GRIZZLY_FOUNDATION = ROOT / "data/route-atlas/grizzly-hills-task-foundation.json"
 ZULDRAK_FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
+STORM_FOUNDATION = ROOT / "data/route-atlas/storm-peaks-task-foundation.json"
 ZANG_AUDIT = ROOT / "data/route-atlas/zangarmarsh-global-solver-input-audit.json"
 FIVEBOX_OBS = ROOT / "data/observations/fivebox-task-types.json"
 
@@ -26,6 +27,7 @@ MAP_SIZE_YARDS: dict[str, tuple[float, float]] = {
     "dragonblight": (5608.3333, 3739.5833),
     "grizzly": (5249.9999, 3499.9999),
     "zuldrak": (4993.75, 3329.1665),
+    "storm": (7112.5, 4741.6665),
 }
 
 GROUND_SPEED_YPS = 16.8
@@ -36,7 +38,10 @@ GROUND_PATH_FACTOR = {
     "dragonblight": 1.18,
     "grizzly": 1.18,
     "zuldrak": 1.20,
+    "storm": 1.05,
 }
+FLY_SPEED_YPS = 21.0
+FLY_PATH_FACTOR = 1.05
 TAXI_SPEED_YPS = 32.0
 TAXI_PATH_FACTOR = 1.25
 SCRIPT_SPEED_YPS = 28.0
@@ -56,12 +61,13 @@ HEARTH_CHAINS = {
     "dragonblight": ["阿格玛之锤"],
     "grizzly": ["征服堡"],
     "zuldrak": ["希姆托加"],
+    "storm": ["阿格玛之锤", "格罗玛什坠毁点"],
 }
 
 # Old Zangarmarsh/Nagrand point data predates typed transport fields, so these
 # point indices correct only the movement edge INTO the named point.
 TRANSPORT_OVERRIDES: dict[str, dict[int, str]] = {
-    "zang": {7: "hearth", 9: "taxi", 15: "hearth", 32: "hearth", 37: "hearth", 41: "hearth"},
+    "zang": {10: "hearth", 12: "taxi", 18: "hearth", 35: "hearth", 40: "hearth", 44: "hearth"},
     "nagrand": {6: "hearth"},
 }
 
@@ -72,6 +78,21 @@ ROUTE_POINT_EXTRA_MINUTES: dict[tuple[str, str], float] = {
     # use the long-carried Dalaran teleport, move to Vixx, accept 12974 on all five characters,
     # open Dalaran flight if needed, then taxi back to the already-open Argent Stand.
     ("zuldrak", "银色前沿·达拉然短往返"): 6.0,
+    # 12372 is a daily and therefore intentionally excluded from Dragonblight's one-time foundation.
+    # The live route nevertheless does it once per leveling group because kill credit shares in range;
+    # account for the five personal shrine-destabilize flights at the explicit route point.
+    ("dragonblight", "保卫龙眠神殿·五开一次"): 9.0,
+    # 11960 is fully overlapped with Let Nothing Go To Waste spatially, but five characters still
+    # need 12 personal pup interactions each. Use a small provisional interaction-only cost until a clean rerun isolates it.
+    ("dragonblight", "飘雪林地狼獾人 + 未来的种子"): 4.0,
+}
+
+# Clean live measurements that supersede the generic per-task estimator.
+# These are objective/service times only; route movement remains modeled separately.
+TASK_SERVICE_OVERRIDES: dict[tuple[str, str], float] = {
+    # 12470: five-box progress is personal; sandglasses cannot be placed within 40 yd of each other.
+    # Live run used 2+2+1 three batches and measured about 10 minutes total event/combat time.
+    ("dragonblight", "永恒之龙的秘密"): 10.0,
 }
 
 ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
@@ -91,6 +112,7 @@ ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
     "dragonblight": [],
     "grizzly": [],
     "zuldrak": [],
+    "storm": [],
 }
 
 # These tasks contain scripts/events whose service time is not recoverable from
@@ -121,6 +143,8 @@ SPECIAL_SERVICE_MINUTES: dict[str, float] = {
     "冬鳞鱼人的贸易": 4.0,  # user-confirmed ground-clam pickup preferred; includes local search/5-box handling allowance
     "救救蝌蚪！": 4.0,  # user-confirmed group-shared progress; one 20-tadpole pass, not five separate passes
     "柔软的包装": 25.0,  # 2026-08-20 first Dragonblight run: user-scoped objective service took 25 minutes
+    "图尔凯的螃蟹陷阱": 18.0,  # first Dragonblight run: 40 personal pickups + two breathing-aid cycles; ~20 min including turn-in, so keep hub handling separate here
+    "海洋女神": 10.0,  # five personal pearl triggers; measured pearl lockout ~100 sec gives 6m40s minimum respawn waiting before script/shore handling
     "逃离冬鳞洞穴": 4.5,
     "横贯冰原": 6.0,
     # Grizzly Hills script/mixed-objective tasks. These are service-only centers; movement and Hub
@@ -146,7 +170,7 @@ SPECIAL_SERVICE_MINUTES: dict[str, float] = {
 # budgets keep the verified route/task complexity while removing the obvious
 # first-run pauses and learning detours.
 ZANG_CENTER_OVERRIDES: dict[int, float] = {
-    1: 12.0, 2: 30.0, 3: 25.0, 4: 15.0, 5: 35.0, 6: 30.0, 7: 35.0,
+    1: 15.0, 2: 30.0, 3: 25.0, 4: 15.0, 5: 35.0, 6: 30.0, 7: 35.0,
     8: 22.0, 9: 42.0, 10: 32.0, 11: 15.0, 12: 35.0, 13: 12.0,
 }
 
@@ -162,7 +186,7 @@ BOREAN_CENTER_OVERRIDES: dict[int, float] = {}
 # Nagrand is only four player blocks and was actually run in a continuous
 # 41-minute sprint. The current reusable route stops at 68, so the conditional
 # fourth block is timed but excluded from the normal map total.
-NAGRAND_CENTER_OVERRIDES: dict[int, float] = {1: 8.5, 2: 19.5, 3: 12.0, 4: 16.0}
+NAGRAND_CENTER_OVERRIDES: dict[int, float] = {1: 8.5, 2: 19.5, 3: 12.0, 4: 20.5}
 NAGRAND_EXCLUDE_FROM_TOTAL = {4}
 
 OBJECTIVE_TOKENS = (
@@ -191,6 +215,19 @@ OBJECTIVE_TOKENS = (
     "打服",
     "使用",
     "补完",
+    "点击",
+    "触发",
+    "插旗",
+    "插",
+    "防守",
+    "敲钟",
+    "对话",
+    "交谈",
+    "召出",
+    "召唤",
+    "压到",
+    "点燃",
+    "进入阴影界",
 )
 
 
@@ -336,16 +373,34 @@ def estimate_foundation_task_service(task: dict[str, Any], observations: dict[st
     return 2.0
 
 
-def objective_names_for_group(route: dict[str, Any], group: dict[str, Any], known_names: set[str]) -> list[str]:
+def objective_names_for_group(
+    route: dict[str, Any],
+    group: dict[str, Any],
+    known_names: set[str],
+    tasks_by_id: dict[int, dict[str, Any]] | None = None,
+) -> list[str]:
     names: list[str] = []
     for point in route["points"][group["start"] : group["end"] + 1]:
         action = str(point[3])
-        for clause in re.split(r"[；。]", action):
+        clauses = re.split(r"[\n；。]", action)
+        pure_handling_names: set[str] = set()
+        has_execution = False
+
+        for clause in clauses:
             # Do not let words inside quest titles (e.g. 《夺取装备》) falsely
             # classify a pure accept/turn-in clause as objective execution.
             prose = re.sub(r"《[^》]+》", "", clause)
             explicit_do_quest = "做《" in clause
-            if not explicit_do_quest and not any(token in prose for token in OBJECTIVE_TOKENS):
+            clause_has_execution = explicit_do_quest or any(token in prose for token in OBJECTIVE_TOKENS)
+            has_execution = has_execution or clause_has_execution
+
+            # A line that only accepts/turns in quests is handling, not objective work.
+            # Capture every quest title on that line so compact lists such as
+            # `接《A》、《B》` remain unambiguous to the estimator.
+            if ("交" in prose or "接" in prose) and not clause_has_execution:
+                pure_handling_names.update(re.findall(r"《([^》]+)》", clause))
+
+            if not clause_has_execution:
                 continue
             # Background/conditional opportunity work is not charged as a full
             # foreground service block unless the clause explicitly completes it.
@@ -354,6 +409,24 @@ def objective_names_for_group(route: dict[str, Any], group: dict[str, Any], know
             for name in re.findall(r"《([^》]+)》", clause):
                 if name in known_names and name not in names:
                     names.append(name)
+
+        # Dragonblight points retain hidden quest-id metadata at index 9. This is
+        # deliberately structural: player copy can say `击杀拉特尔博尔` instead of
+        # `做《冰虫之母》` without silently deleting the task from the timing model.
+        # Pure accept/turn-in lines are excluded above; remaining qids on an
+        # execution point are objective work even when the quest title is omitted.
+        if tasks_by_id and len(point) > 9 and isinstance(point[9], list) and has_execution:
+            for raw_qid in point[9]:
+                try:
+                    task = tasks_by_id.get(int(raw_qid))
+                except (TypeError, ValueError):
+                    task = None
+                if not task:
+                    continue
+                name = str(task.get("name") or "")
+                if not name or name not in known_names or name in names or name in pure_handling_names:
+                    continue
+                names.append(name)
     return names
 
 
@@ -392,6 +465,8 @@ def movement_minutes(route_key: str, route: dict[str, Any], group: dict[str, Any
         kind = transport_kind(route_key, idx, b)
         if kind == "ride":
             total += distance / GROUND_SPEED_YPS / 60.0 * GROUND_PATH_FACTOR[route_key]
+        elif kind == "fly":
+            total += distance / FLY_SPEED_YPS / 60.0 * FLY_PATH_FACTOR
         elif kind == "taxi":
             total += distance / TAXI_SPEED_YPS / 60.0 * TAXI_PATH_FACTOR + 0.2
         elif kind == "script":
@@ -419,22 +494,29 @@ def estimate_route(
     route_key: str,
     route: dict[str, Any],
     foundation_by_name: dict[str, dict[str, Any]],
+    foundation_by_id: dict[int, dict[str, Any]],
     zang_seconds: dict[str, float],
     observations: dict[str, Any],
 ) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
-    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak"} else set(zang_seconds)
+    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm"} else set(zang_seconds)
 
     for step, group in enumerate(route["stepGroups"], 1):
         move = movement_minutes(route_key, route, group)
         hub = hub_minutes(route, group)
-        names = objective_names_for_group(route, group, known_names)
+        names = objective_names_for_group(route, group, known_names, foundation_by_id)
 
         if route_key == "zang":
             service = sum(zang_seconds[name] / 60.0 for name in names)
             uncertainty = 0.25 if names else 0.18
-        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak"}:
-            service = sum(estimate_foundation_task_service(foundation_by_name[name], observations) for name in names)
+        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm"}:
+            service = sum(
+                TASK_SERVICE_OVERRIDES.get(
+                    (route_key, name),
+                    estimate_foundation_task_service(foundation_by_name[name], observations),
+                )
+                for name in names
+            )
             uncertainty = generic_uncertainty(names, foundation_by_name)
         else:
             service = 0.0
@@ -549,10 +631,11 @@ def apply_to_routes(routes: dict[str, Any], estimates: dict[str, Any]) -> None:
 
 def main() -> None:
     routes = json.loads(ROUTES.read_text(encoding="utf-8"))
-    borean_by_name, _ = load_foundation(BOREAN_FOUNDATION)
-    dragon_by_name, _ = load_foundation(DRAGON_FOUNDATION)
-    grizzly_by_name, _ = load_foundation(GRIZZLY_FOUNDATION)
-    zuldrak_by_name, _ = load_foundation(ZULDRAK_FOUNDATION)
+    borean_by_name, borean_by_id = load_foundation(BOREAN_FOUNDATION)
+    dragon_by_name, dragon_by_id = load_foundation(DRAGON_FOUNDATION)
+    grizzly_by_name, grizzly_by_id = load_foundation(GRIZZLY_FOUNDATION)
+    zuldrak_by_name, zuldrak_by_id = load_foundation(ZULDRAK_FOUNDATION)
+    storm_by_name, storm_by_id = load_foundation(STORM_FOUNDATION)
     zang_seconds = load_zang_objective_seconds()
     observations = json.loads(FIVEBOX_OBS.read_text(encoding="utf-8"))
 
@@ -563,10 +646,20 @@ def main() -> None:
         "dragonblight": dragon_by_name,
         "grizzly": grizzly_by_name,
         "zuldrak": zuldrak_by_name,
+        "storm": storm_by_name,
+    }
+    foundations_by_id = {
+        "zang": {},
+        "nagrand": {},
+        "borean": borean_by_id,
+        "dragonblight": dragon_by_id,
+        "grizzly": grizzly_by_id,
+        "zuldrak": zuldrak_by_id,
+        "storm": storm_by_id,
     }
     estimates = {
-        key: estimate_route(key, routes[key], foundations[key], zang_seconds, observations)
-        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak")
+        key: estimate_route(key, routes[key], foundations[key], foundations_by_id[key], zang_seconds, observations)
+        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak", "storm")
     }
     apply_to_routes(routes, estimates)
     ROUTES.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

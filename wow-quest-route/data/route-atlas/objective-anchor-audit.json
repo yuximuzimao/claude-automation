@@ -1,0 +1,46 @@
+{
+  "status": "objective_anchor_distance_audit",
+  "rule": "Every geolocatable objective must be near at least one route point where that quest is executed. Distances >8 are hard failures; >5 require manual review.",
+  "routes": {
+    "storm": {
+      "route_key": "storm",
+      "zone_id": 67,
+      "warn_distance": 5.0,
+      "fail_distance": 8.0,
+      "objective_rows": 95,
+      "failure_count": 0,
+      "review_count": 2,
+      "failures": [],
+      "reviews": [
+        {
+          "quest_id": 12827,
+          "quest_name": "收集粮食",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 16,
+          "nearest_route_point_index": 5,
+          "nearest_route_point_title": "野蛮岭·瘤皮 / 粮食箱",
+          "nearest_source_name": "野蛮岭暴徒",
+          "nearest_source_x": 35.11,
+          "nearest_source_y": 83.97,
+          "distance": 5.11,
+          "status": "review"
+        },
+        {
+          "quest_id": 12829,
+          "quest_name": "进入矿洞",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "nearest_route_point_index": 10,
+          "nearest_route_point_title": "水晶蛛网洞穴·蜘蛛 / 矿石 / 受伤矿工",
+          "nearest_source_name": "冰尖爬行者",
+          "nearest_source_x": 47.44,
+          "nearest_source_y": 71.17,
+          "distance": 5.74,
+          "status": "review"
+        }
+      ]
+    }
+  }
+}

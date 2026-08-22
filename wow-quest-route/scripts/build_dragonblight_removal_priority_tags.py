@@ -209,8 +209,21 @@ def main() -> None:
     }
     tasks = [task for task in foundation.get("tasks", []) if is_current_usable_world_task(task)]
     tasks.sort(key=lambda task: int(task["quest_id"]))
-    if len(tasks) != 145:
-        raise RuntimeError(f"Expected 145 current-usable Dragonblight world tasks, got {len(tasks)}")
+    live_defer_count = sum(
+        1
+        for task in foundation.get("tasks", [])
+        if task.get("is_primary_candidate")
+        and str(task.get("scope_status") or "").startswith("defer_to_80_after_live_failure")
+        and not task.get("is_dungeon")
+        and not task.get("is_raid_flagged")
+        and not task.get("is_repeatable")
+    )
+    expected_current_usable = 145 - live_defer_count
+    if len(tasks) != expected_current_usable:
+        raise RuntimeError(
+            f"Expected {expected_current_usable} current-usable Dragonblight world tasks "
+            f"after {live_defer_count} live defer-to-80 decisions, got {len(tasks)}"
+        )
     if len({int(task["quest_id"]) for task in tasks}) != len(tasks):
         raise RuntimeError("Dragonblight task-card universe contains duplicate quest IDs")
 

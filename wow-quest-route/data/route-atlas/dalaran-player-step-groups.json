@@ -1,0 +1,59 @@
+{
+  "zone": "达拉然",
+  "pointCount": 10,
+  "groupCount": 4,
+  "groups": [
+    {
+      "title": "紫罗兰之门：魔法王国达拉然 → 来去如风",
+      "summary": "交达拉然入城任务，完成上下传送水晶教学并原地交回。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 6.0,
+        "rangeMinutes": [
+          4.0,
+          9.0
+        ],
+        "includeInTotal": true
+      }
+    },
+    {
+      "title": "克拉苏斯平台：索拉查引导 + 达拉然飞行点",
+      "summary": "把后续索拉查引导接走，但不触发离城；同时开启达拉然飞行点。",
+      "pointCount": 2,
+      "timing": {
+        "centerMinutes": 3.0,
+        "rangeMinutes": [
+          2.0,
+          5.0
+        ],
+        "includeInTotal": true
+      }
+    },
+    {
+      "title": "达拉然下水道：祖达克/风暴引导",
+      "summary": "从东入口进下水道，依次拿祖达克斗兽场引导和当前风暴K3引导，再从西入口返回地面。",
+      "pointCount": 4,
+      "timing": {
+        "centerMinutes": 6.0,
+        "rangeMinutes": [
+          4.0,
+          9.0
+        ],
+        "includeInTotal": true
+      }
+    },
+    {
+      "title": "紫罗兰之门 → K3",
+      "summary": "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
+      "pointCount": 1,
+      "timing": {
+        "centerMinutes": 8.0,
+        "rangeMinutes": [
+          5.0,
+          11.0
+        ],
+        "includeInTotal": true
+      }
+    }
+  ]
+}

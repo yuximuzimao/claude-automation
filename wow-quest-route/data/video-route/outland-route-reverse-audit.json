@@ -1,0 +1,1728 @@
+{
+  "schema": "outland-video-reverse-audit-v1",
+  "purpose": "route_reference_and_correction_only",
+  "maps": {
+    "zang": {
+      "map": "赞加沼泽",
+      "zone_id": 3521,
+      "route_task_action_name_count": 57,
+      "video_first_completion_count": 18,
+      "common_count": 15,
+      "candidate_count": 3,
+      "candidate_class_counts": {
+        "video_alliance_only": 3
+      },
+      "common": [
+        {
+          "quest_id": 9785,
+          "quest_name": "古树的祝福",
+          "video_order": 1
+        },
+        {
+          "quest_id": 9912,
+          "quest_name": "塞纳里奥远征队",
+          "video_order": 2
+        },
+        {
+          "quest_id": 9895,
+          "quest_name": "崩溃的平衡",
+          "video_order": 3
+        },
+        {
+          "quest_id": 9752,
+          "quest_name": "逃离暗泽村",
+          "video_order": 4
+        },
+        {
+          "quest_id": 9716,
+          "quest_name": "暗泽湖的异常",
+          "video_order": 5
+        },
+        {
+          "quest_id": 9718,
+          "quest_name": "乌鸦的飞翔",
+          "video_order": 6
+        },
+        {
+          "quest_id": 9747,
+          "quest_name": "暗泽部族",
+          "video_order": 7
+        },
+        {
+          "quest_id": 9720,
+          "quest_name": "恢复平衡",
+          "video_order": 8
+        },
+        {
+          "quest_id": 9731,
+          "quest_name": "抽水泵结构图",
+          "video_order": 9
+        },
+        {
+          "quest_id": 9817,
+          "quest_name": "血鳞纳迦的领袖",
+          "video_order": 10
+        },
+        {
+          "quest_id": 9728,
+          "quest_name": "热情的欢迎",
+          "video_order": 11
+        },
+        {
+          "quest_id": 10096,
+          "quest_name": "拯救孢子人",
+          "video_order": 12
+        },
+        {
+          "quest_id": 9802,
+          "quest_name": "赞加沼泽的植物",
+          "video_order": 13
+        },
+        {
+          "quest_id": 9788,
+          "quest_name": "阴冷之地",
+          "video_order": 14
+        },
+        {
+          "quest_id": 9791,
+          "quest_name": "沼牙的威胁",
+          "video_order": 18
+        }
+      ],
+      "video_only_candidates": [
+        {
+          "quest_id": 9782,
+          "quest_name": "死亡泥潭",
+          "video_order": 15,
+          "video_episode": 30,
+          "video_xp": 20100,
+          "questie_2x_xp_proxy": 20100,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18004,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18004,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 60,
+          "quest_level": 62,
+          "pre_quest": null,
+          "next_quest": 9783,
+          "start_distance_to_route_yards": 445.5,
+          "end_distance_to_route_yards": 445.5,
+          "manual_class": "video_alliance_only",
+          "manual_reason": "起止NPC守备官伊达尔为Alliance。",
+          "class": "video_alliance_only"
+        },
+        {
+          "quest_id": 9901,
+          "quest_name": "遗留事务",
+          "video_order": 16,
+          "video_episode": 30,
+          "video_xp": 20100,
+          "questie_2x_xp_proxy": 20100,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18295,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18295,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 60,
+          "quest_level": 62,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 437.6,
+          "end_distance_to_route_yards": 437.6,
+          "manual_class": "video_alliance_only",
+          "manual_reason": "Quest race mask excludes Blood Elf。",
+          "class": "video_alliance_only"
+        },
+        {
+          "quest_id": 9781,
+          "quest_name": "不堪重负",
+          "video_order": 17,
+          "video_episode": 30,
+          "video_xp": 20100,
+          "questie_2x_xp_proxy": 20100,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18005,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18005,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 60,
+          "quest_level": 62,
+          "pre_quest": null,
+          "next_quest": 9790,
+          "start_distance_to_route_yards": 377.3,
+          "end_distance_to_route_yards": 377.3,
+          "manual_class": "video_alliance_only",
+          "manual_reason": "起止NPC海尔伦为Alliance。",
+          "class": "video_alliance_only"
+        }
+      ]
+    },
+    "nagrand": {
+      "map": "纳格兰",
+      "zone_id": 3518,
+      "route_task_action_name_count": 10,
+      "video_first_completion_count": 53,
+      "common_count": 13,
+      "candidate_count": 40,
+      "candidate_class_counts": {
+        "intentional_sprint_exclusion_off_axis_chain": 12,
+        "video_faction_only": 18,
+        "not_available_or_off_axis_prechain": 3,
+        "intentional_sprint_exclusion_fivebox_loot_detour": 1,
+        "defer_speed_optimization_candidate": 2,
+        "not_available_from_current_sprint_state": 4
+      },
+      "common": [
+        {
+          "quest_id": 9854,
+          "quest_name": "狩猎风鹏",
+          "video_order": 1
+        },
+        {
+          "quest_id": 9857,
+          "quest_name": "狩猎塔布羊",
+          "video_order": 2
+        },
+        {
+          "quest_id": 9789,
+          "quest_name": "狩猎裂蹄牛",
+          "video_order": 3
+        },
+        {
+          "quest_id": 9850,
+          "quest_name": "狩猎裂蹄牛",
+          "video_order": 8
+        },
+        {
+          "quest_id": 9855,
+          "quest_name": "狩猎风鹏",
+          "video_order": 9
+        },
+        {
+          "quest_id": 9858,
+          "quest_name": "狩猎塔布羊",
+          "video_order": 10
+        },
+        {
+          "quest_id": 9935,
+          "quest_name": "通缉：巫婆吉塞尔达",
+          "video_order": 21
+        },
+        {
+          "quest_id": 9939,
+          "quest_name": "通缉：顾问佐尔布",
+          "video_order": 22
+        },
+        {
+          "quest_id": 9851,
+          "quest_name": "狩猎裂蹄牛",
+          "video_order": 27
+        },
+        {
+          "quest_id": 9859,
+          "quest_name": "狩猎塔布羊",
+          "video_order": 28
+        },
+        {
+          "quest_id": 9856,
+          "quest_name": "狩猎风鹏",
+          "video_order": 29
+        },
+        {
+          "quest_id": 9871,
+          "quest_name": "暗血入侵者",
+          "video_order": 34
+        },
+        {
+          "quest_id": 9852,
+          "quest_name": "终极挑战",
+          "video_order": 40
+        }
+      ],
+      "video_only_candidates": [
+        {
+          "quest_id": 9818,
+          "quest_name": "地下的滋扰",
+          "video_order": 4,
+          "video_episode": 31,
+          "video_xp": 0,
+          "questie_2x_xp_proxy": null,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18071,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": null,
+          "next_quest": 9819,
+          "start_distance_to_route_yards": 618.5,
+          "end_distance_to_route_yards": 570.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座任务中心位于当前冲刺主轴外，且此任务本身只是开启戈达乌连续链；当前实跑已在第二轮狩猎后到68。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9917,
+          "quest_name": "是我眼花了？",
+          "video_order": 5,
+          "video_episode": 31,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18353,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18353,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": null,
+          "next_quest": 9918,
+          "start_distance_to_route_yards": 498.7,
+          "end_distance_to_route_yards": 498.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9918,
+          "quest_name": "这是我的地盘！",
+          "video_order": 6,
+          "video_episode": 31,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18353,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18353,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9917
+          },
+          "next_quest": 9920,
+          "start_distance_to_route_yards": 498.7,
+          "end_distance_to_route_yards": 498.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9920,
+          "quest_name": "击碎者姆摩尔",
+          "video_order": 7,
+          "video_episode": 31,
+          "video_xp": 0,
+          "questie_2x_xp_proxy": null,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18353,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9918
+          },
+          "next_quest": 9921,
+          "start_distance_to_route_yards": 498.7,
+          "end_distance_to_route_yards": 531.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9861,
+          "quest_name": "呼嚎之风",
+          "video_order": 11,
+          "video_episode": 31,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [],
+            "end_npcs": [
+              {
+                "npc_id": 18074,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": 9862,
+          "start_distance_to_route_yards": null,
+          "end_distance_to_route_yards": 623.6,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座支线入口；需要专门进入元素王座任务块，不属于当前67→68共享狩猎主轴。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9800,
+          "quest_name": "稀有的豆子",
+          "video_order": 12,
+          "video_episode": 31,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": null,
+          "next_quest": 9804,
+          "start_distance_to_route_yards": 631.0,
+          "end_distance_to_route_yards": 631.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座连续任务入口，后续9804→9805→9810；整块需要额外Hub往返，当前冲刺不展开。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9815,
+          "quest_name": "潜水",
+          "video_order": 13,
+          "video_episode": 31,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 631.0,
+          "end_distance_to_route_yards": 631.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座独立收集任务；任务中心约631码偏离当前停靠点，当前共享狩猎已足够到68。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9819,
+          "quest_name": "被折磨的地灵",
+          "video_order": 14,
+          "video_episode": 31,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9818
+          },
+          "next_quest": 9821,
+          "start_distance_to_route_yards": 570.0,
+          "end_distance_to_route_yards": 570.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座戈达乌链，前置9818；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9804,
+          "quest_name": "天歌湖的元素",
+          "video_order": 15,
+          "video_episode": 31,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9800
+          },
+          "next_quest": 9805,
+          "start_distance_to_route_yards": 631.0,
+          "end_distance_to_route_yards": 631.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座鲁艾普链，前置9800；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9991,
+          "quest_name": "侦查大地",
+          "video_order": 16,
+          "video_episode": 32,
+          "video_xp": null,
+          "questie_2x_xp_proxy": 6100,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 66,
+          "quest_level": 68,
+          "pre_quest": {
+            "1": 9982,
+            "2": 9983
+          },
+          "next_quest": 9999,
+          "start_distance_to_route_yards": 1032.8,
+          "end_distance_to_route_yards": 1032.8,
+          "manual_class": "not_available_or_off_axis_prechain",
+          "manual_reason": "奥图里斯位于当前主轴西侧约1033码，且任务需要9982/9983前置；当前状态不具备。",
+          "class": "not_available_or_off_axis_prechain"
+        },
+        {
+          "quest_id": 9999,
+          "quest_name": "争取时间",
+          "video_order": 17,
+          "video_episode": 32,
+          "video_xp": 24000,
+          "questie_2x_xp_proxy": 24000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 66,
+          "quest_level": 68,
+          "pre_quest": {
+            "1": 9991
+          },
+          "next_quest": 10001,
+          "start_distance_to_route_yards": 1032.8,
+          "end_distance_to_route_yards": 1032.8,
+          "manual_class": "not_available_or_off_axis_prechain",
+          "manual_reason": "前置9991，而9991又依赖9982/9983；同时奥图里斯任务块远离当前冲刺主轴。",
+          "class": "not_available_or_off_axis_prechain"
+        },
+        {
+          "quest_id": 10001,
+          "quest_name": "主规划师",
+          "video_order": 18,
+          "video_episode": 32,
+          "video_xp": 24000,
+          "questie_2x_xp_proxy": 24000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18417,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 66,
+          "quest_level": 68,
+          "pre_quest": {
+            "1": 9999
+          },
+          "next_quest": 10004,
+          "start_distance_to_route_yards": 1032.8,
+          "end_distance_to_route_yards": 1032.8,
+          "manual_class": "not_available_or_off_axis_prechain",
+          "manual_reason": "前置9999；属于奥图里斯西部连续任务块，不是当前冲刺可独立拿取的24000经验。",
+          "class": "not_available_or_off_axis_prechain"
+        },
+        {
+          "quest_id": 9914,
+          "quest_name": "象牙生意",
+          "video_order": 19,
+          "video_episode": 32,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18333,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18333,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 560.5,
+          "end_distance_to_route_yards": 560.5,
+          "manual_class": "intentional_sprint_exclusion_fivebox_loot_detour",
+          "manual_reason": "象牙虽为野生雷象100%掉落，但每号需要3对，五开实际尸体拾取/分配成本尚未证明可压到共享击杀任务以下；任务Hub还在当前路线外约560码。当前不替换已实跑稳定的第二轮狩猎。",
+          "class": "intentional_sprint_exclusion_fivebox_loot_detour"
+        },
+        {
+          "quest_id": 9956,
+          "quest_name": "不幸的商队",
+          "video_order": 20,
+          "video_episode": 32,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18416,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18416,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 65,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 521.9,
+          "end_distance_to_route_yards": 521.9,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 10476,
+          "quest_name": "强悍的敌人",
+          "video_order": 23,
+          "video_episode": 32,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18408,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18408,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 65,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 497.2,
+          "end_distance_to_route_yards": 497.2,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9874,
+          "quest_name": "阻止污染",
+          "video_order": 24,
+          "video_episode": 32,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18222,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18222,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 523.6,
+          "end_distance_to_route_yards": 523.6,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9921,
+          "quest_name": "火刃废墟",
+          "video_order": 25,
+          "video_episode": 32,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9920
+          },
+          "next_quest": 9922,
+          "start_distance_to_route_yards": 531.7,
+          "end_distance_to_route_yards": 531.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9878,
+          "quest_name": "解决问题",
+          "video_order": 26,
+          "video_episode": 32,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18224,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18224,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 530.3,
+          "end_distance_to_route_yards": 530.3,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9805,
+          "quest_name": "伊森拉图斯的祝福",
+          "video_order": 30,
+          "video_episode": 32,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": {
+            "1": 9804
+          },
+          "next_quest": 9810,
+          "start_distance_to_route_yards": 631.0,
+          "end_distance_to_route_yards": 631.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座鲁艾普链，前置9804；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9862,
+          "quest_name": "暗血腐蚀者",
+          "video_order": 31,
+          "video_episode": 32,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18074,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18074,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9861
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 623.6,
+          "end_distance_to_route_yards": 623.6,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座莫格链，前置9861；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9821,
+          "quest_name": "吞食诅咒",
+          "video_order": 32,
+          "video_episode": 32,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9819
+          },
+          "next_quest": 9849,
+          "start_distance_to_route_yards": 570.0,
+          "end_distance_to_route_yards": 570.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座戈达乌链，前置9819；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9922,
+          "quest_name": "纳格兰的峡谷",
+          "video_order": 33,
+          "video_episode": 33,
+          "video_xp": 28300,
+          "questie_2x_xp_proxy": 28300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9921
+          },
+          "next_quest": 10108,
+          "start_distance_to_route_yards": 531.7,
+          "end_distance_to_route_yards": 531.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 10109,
+          "quest_name": "我想要这些鸟蛋！",
+          "video_order": 35,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 19035,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 19035,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": 10111,
+          "start_distance_to_route_yards": 412.4,
+          "end_distance_to_route_yards": 412.4,
+          "manual_class": "defer_speed_optimization_candidate",
+          "manual_reason": "瓦萨特只增加约0.43分钟路线偏移，任务经验22600；但每号3个气元素实体、80%掉率的五开拾取成本尚未实测。与10111合计50900经验，保留为未来压缩41分钟冲刺的专项替代候选，不直接改当前基线。",
+          "class": "defer_speed_optimization_candidate"
+        },
+        {
+          "quest_id": 10111,
+          "quest_name": "给我鸟蛋！",
+          "video_order": 36,
+          "video_episode": 33,
+          "video_xp": 28300,
+          "questie_2x_xp_proxy": 28300,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 19035,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 19035,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 10109
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 412.4,
+          "end_distance_to_route_yards": 412.4,
+          "manual_class": "defer_speed_optimization_candidate",
+          "manual_reason": "10109后续，单号视频目标阶段约40秒，但五号弹射/鸟蛋交互成本不能从单号外推。与10109成包评估，当前证据不足以证明优于第二轮共享狩猎。",
+          "class": "defer_speed_optimization_candidate"
+        },
+        {
+          "quest_id": 10108,
+          "quest_name": "外交手段",
+          "video_order": 37,
+          "video_episode": 33,
+          "video_xp": 17100,
+          "questie_2x_xp_proxy": 17100,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18223,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9922
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 531.7,
+          "end_distance_to_route_yards": 326.4,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9928,
+          "quest_name": "欺诈所需的军备",
+          "video_order": 38,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 326.4,
+          "end_distance_to_route_yards": 326.4,
+          "manual_class": "not_available_from_current_sprint_state",
+          "manual_reason": "部落需先沿泰罗卡/加拉达尔前置推进到10107《外交手段》后才自然进入兰特瑞索任务块；当前赞加→纳格兰冲刺状态不具备该前置。",
+          "class": "not_available_from_current_sprint_state"
+        },
+        {
+          "quest_id": 9927,
+          "quest_name": "无情的计谋",
+          "video_order": 39,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 326.4,
+          "end_distance_to_route_yards": 326.4,
+          "manual_class": "not_available_from_current_sprint_state",
+          "manual_reason": "同兰特瑞索任务块；当前路线没有9889→9890→9891→9906→9907→10107前置。",
+          "class": "not_available_from_current_sprint_state"
+        },
+        {
+          "quest_id": 9849,
+          "quest_name": "打碎外壳",
+          "video_order": 41,
+          "video_episode": 33,
+          "video_xp": 34900,
+          "questie_2x_xp_proxy": 34900,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9821
+          },
+          "next_quest": 9853,
+          "start_distance_to_route_yards": 570.0,
+          "end_distance_to_route_yards": 570.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座戈达乌后段，前置9821且需击杀30个目标；即使经验较高，也不是当前到68的低边际成本补充。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9810,
+          "quest_name": "污染的灵魂",
+          "video_order": 42,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18073,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9805
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 631.0,
+          "end_distance_to_route_yards": 631.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座鲁艾普后段，前置9805；当前冲刺不进入该链。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9873,
+          "quest_name": "奥托尔，我的老朋友……",
+          "video_order": 43,
+          "video_episode": 33,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9871
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 468.7,
+          "end_distance_to_route_yards": 468.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9923,
+          "quest_name": "救命啊！",
+          "video_order": 44,
+          "video_episode": 33,
+          "video_xp": 22000,
+          "questie_2x_xp_proxy": 22000,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18369,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 65,
+          "pre_quest": null,
+          "next_quest": 9924,
+          "start_distance_to_route_yards": 434.6,
+          "end_distance_to_route_yards": 468.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9931,
+          "quest_name": "以牙还牙",
+          "video_order": 45,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 326.4,
+          "end_distance_to_route_yards": 326.4,
+          "manual_class": "not_available_from_current_sprint_state",
+          "manual_reason": "9928后续；当前路线没有兰特瑞索前置链。",
+          "class": "not_available_from_current_sprint_state"
+        },
+        {
+          "quest_id": 9932,
+          "quest_name": "尸证",
+          "video_order": 46,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": 326.4,
+          "end_distance_to_route_yards": 326.4,
+          "manual_class": "not_available_from_current_sprint_state",
+          "manual_reason": "9927后续；当前路线没有兰特瑞索前置链。",
+          "class": "not_available_from_current_sprint_state"
+        },
+        {
+          "quest_id": 9853,
+          "quest_name": "侵占者古罗克",
+          "video_order": 47,
+          "video_episode": 33,
+          "video_xp": 34900,
+          "questie_2x_xp_proxy": 34900,
+          "blood_elf_and_npc_faction_allowed": true,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18099,
+                "faction": "AH"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9849
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 570.0,
+          "end_distance_to_route_yards": 570.0,
+          "manual_class": "intentional_sprint_exclusion_off_axis_chain",
+          "manual_reason": "元素王座戈达乌终段，必须先完成9818→9819→9821→9849；不能按单个34900经验任务看待。",
+          "class": "intentional_sprint_exclusion_off_axis_chain"
+        },
+        {
+          "quest_id": 9924,
+          "quest_name": "考尔奇又走丢了！",
+          "video_order": 48,
+          "video_episode": 33,
+          "video_xp": 22600,
+          "questie_2x_xp_proxy": 22600,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9923
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 468.7,
+          "end_distance_to_route_yards": 468.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9933,
+          "quest_name": "回到塔拉",
+          "video_order": 49,
+          "video_episode": 33,
+          "video_xp": 28300,
+          "questie_2x_xp_proxy": 28300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18261,
+                "faction": "AH"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 66,
+          "pre_quest": {
+            "1": 9931
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 326.4,
+          "end_distance_to_route_yards": 468.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 10076,
+          "quest_name": "沃舒古水晶尘",
+          "video_order": 50,
+          "video_episode": 33,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18817,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18817,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": null,
+          "next_quest": null,
+          "start_distance_to_route_yards": null,
+          "end_distance_to_route_yards": null,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 10077,
+          "quest_name": "沃舒古水晶尘样本",
+          "video_order": 51,
+          "video_episode": 33,
+          "video_xp": 17500,
+          "questie_2x_xp_proxy": 17500,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 0,
+            "race_allowed": true,
+            "start_npcs": [
+              {
+                "npc_id": 18817,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18817,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": true,
+          "required_level": 64,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 10076
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": null,
+          "end_distance_to_route_yards": null,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9954,
+          "quest_name": "考尔奇的赎金",
+          "video_order": 52,
+          "video_episode": 33,
+          "video_xp": 23300,
+          "questie_2x_xp_proxy": 23300,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18445,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 65,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9924
+          },
+          "next_quest": 9955,
+          "start_distance_to_route_yards": 468.7,
+          "end_distance_to_route_yards": 979.8,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        },
+        {
+          "quest_id": 9955,
+          "quest_name": "掠夺者考瓦尔",
+          "video_order": 53,
+          "video_episode": 33,
+          "video_xp": 29200,
+          "questie_2x_xp_proxy": 29200,
+          "blood_elf_and_npc_faction_allowed": false,
+          "faction_detail": {
+            "race_mask": 1101,
+            "race_allowed": false,
+            "start_npcs": [
+              {
+                "npc_id": 18445,
+                "faction": "A"
+              }
+            ],
+            "end_npcs": [
+              {
+                "npc_id": 18183,
+                "faction": "A"
+              }
+            ]
+          },
+          "repeatable": false,
+          "required_level": 65,
+          "quest_level": 67,
+          "pre_quest": {
+            "1": 9954
+          },
+          "next_quest": null,
+          "start_distance_to_route_yards": 979.8,
+          "end_distance_to_route_yards": 468.7,
+          "manual_class": null,
+          "manual_reason": null,
+          "class": "video_faction_only"
+        }
+      ]
+    }
+  }
+}

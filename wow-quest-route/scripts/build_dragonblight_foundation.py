@@ -268,6 +268,7 @@ def main() -> None:
     meta = _parse_zone_metadata(QUESTIE_ZIP)
     overrides = json.loads(OVERRIDES_FILE.read_text(encoding="utf-8"))
     manual_unavailable = {int(qid): reason for qid, reason in (overrides.get("manual_unavailable") or {}).items()}
+    manual_defer_to_80 = {int(qid): reason for qid, reason in (overrides.get("manual_defer_to_80") or {}).items()}
     entry_axis_relevance = {int(qid): value for qid, value in (overrides.get("entry_axis_relevance") or {}).items()}
     manual_notes = {int(qid): value for qid, value in (overrides.get("notes") or {}).items()}
     for qid in overrides.get("manual_no_extra_note_ids") or []:
@@ -373,6 +374,9 @@ def main() -> None:
         if quest_id in manual_unavailable:
             task["scope_status"] = "exclude_removed_or_unavailable"
             task["scope_reasons"] = [manual_unavailable[quest_id]]
+        elif quest_id in manual_defer_to_80:
+            task["scope_status"] = "defer_to_80_after_live_failure"
+            task["scope_reasons"] = [manual_defer_to_80[quest_id]]
         elif "not_current_axis" in task["entry_axis_relevance"]:
             task["scope_status"] = "exclude_current_entry_axis_alternate"
             task["scope_reasons"] = [task["entry_axis_relevance"]]

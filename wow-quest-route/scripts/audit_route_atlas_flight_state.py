@@ -36,6 +36,14 @@ HUB_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
         "希姆托加": ("希姆托加", "Zim'Torga"),
         "古达克": ("古达克", "Gundrak"),
     },
+    "storm": {
+        "K3": ("K3",),
+        "格罗玛什坠毁点": ("格罗玛什坠毁点", "Grom'arsh Crash-Site"),
+        "丹尼芬雷": ("丹尼芬雷", "Dun Niffelem"),
+        "奥杜尔": ("奥杜尔", "Ulduar"),
+        "布德克拉格庇护所": ("布德克拉格庇护所", "Bouldercrag's Refuge"),
+        "唐卡洛营地": ("唐卡洛营地", "Camp Tunka'lo"),
+    },
 }
 
 
@@ -130,7 +138,7 @@ def main() -> None:
         "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
         "routes": {
             key: audit_route(key, routes[key])
-            for key in ("borean", "dragonblight", "grizzly", "zuldrak")
+            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm")
         },
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -154,6 +162,8 @@ def main() -> None:
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     if any(row["unknown_destination_count"] for row in result["routes"].values()):
         raise SystemExit("Flight-state audit has unknown flight destinations; add an explicit hub alias before trusting the result.")
+    if any(row["violation_count"] for row in result["routes"].values()):
+        raise SystemExit("Flight-state audit found a system flight whose destination had not been opened earlier in the route timeline.")
 
 
 if __name__ == "__main__":

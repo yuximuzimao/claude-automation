@@ -29,6 +29,12 @@ PALADIN_FLAG = 2
 SERVER_XP_MULTIPLIER = 2.0
 START_LEVEL = 68
 MAX_LEVEL = 80
+COLD_WEATHER_FLYING_SPELL_ID = 54197
+# Questie explicitly carries requiredSpell=54197 for some Sholazar tasks, but misses several
+# WotLK quests whose availability is also gated by having learned Cold Weather Flying.
+# Keep those hidden gates as route facts so a no-CWF route can exclude them without confusing
+# "can physically reach this with the K3 loaner" with "NPC will actually offer the quest".
+COLD_WEATHER_FLYING_HIDDEN_GATE_IDS = {12862, 13060, 13418, 13419}
 
 DAILY = 4096
 WEEKLY = 32768
@@ -220,6 +226,10 @@ def main() -> None:
         earliest_level = max(START_LEVEL, int(required_level or START_LEVEL)) if not isinstance(required_level, int) or required_level <= MAX_LEVEL else int(required_level)
         xp_at_earliest = base_quest_xp_at_level(data, qid, earliest_level) * SERVER_XP_MULTIPLIER if earliest_level <= MAX_LEVEL else 0
 
+        cold_weather_flying_gate = (
+            row.get(30) == COLD_WEATHER_FLYING_SPELL_ID
+            or qid in COLD_WEATHER_FLYING_HIDDEN_GATE_IDS
+        )
         task: dict[str, Any] = {
             "quest_id": qid,
             "name": name,
@@ -236,6 +246,12 @@ def main() -> None:
             "required_min_rep": row.get(19),
             "required_max_rep": row.get(20),
             "required_spell": row.get(30),
+            "cold_weather_flying_gate": cold_weather_flying_gate,
+            "cold_weather_flying_gate_source": (
+                "questie_required_spell_54197"
+                if row.get(30) == COLD_WEATHER_FLYING_SPELL_ID
+                else ("verified_hidden_gate" if qid in COLD_WEATHER_FLYING_HIDDEN_GATE_IDS else None)
+            ),
             "required_specialization": row.get(31),
             "required_ranks": row.get(36),
             "available_starting_with": [int(x) for x in seq(row.get(34)) if isinstance(x, int)],

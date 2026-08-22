@@ -1,0 +1,282 @@
+{
+  "status": "current_no_cold_weather_flying_route_policy",
+  "policy": {
+    "learn_cold_weather_flying": false,
+    "loaner_mount_zones": [
+      67,
+      210,
+      3711
+    ],
+    "rule": "exclude learned-skill gates; keep quests that merely need physical flight because the K3 loaner can satisfy travel"
+  },
+  "all_direct_gate_ids": [
+    12561,
+    12803,
+    12862,
+    13060,
+    13418,
+    13419
+  ],
+  "horde_paladin_direct_gate_ids": [
+    12561,
+    12803,
+    13060,
+    13419
+  ],
+  "horde_paladin_blocked_ids_with_exclusive_descendants": [
+    12548,
+    12559,
+    12561,
+    12608,
+    12611,
+    12612,
+    12613,
+    12617,
+    12620,
+    12621,
+    12660,
+    12803,
+    12805,
+    13060,
+    13419
+  ],
+  "direct_gates": [
+    {
+      "quest_id": 12561,
+      "name": "信任危机",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": 54197,
+      "cold_weather_flying_gate_source": "questie_required_spell_54197",
+      "reason": "direct_cold_weather_flying_gate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12803,
+      "name": "自然的力量",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": 54197,
+      "cold_weather_flying_gate_source": "questie_required_spell_54197",
+      "reason": "direct_cold_weather_flying_gate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13060,
+      "name": "终极运输方案",
+      "zone_id": 67,
+      "zone_name": "风暴峭壁",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": "verified_hidden_gate",
+      "reason": "direct_cold_weather_flying_gate",
+      "pre_any": [
+        12824
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13419,
+      "name": "作战准备",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": "verified_hidden_gate",
+      "reason": "direct_cold_weather_flying_gate",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": []
+    }
+  ],
+  "dependency_blocked": [
+    {
+      "quest_id": 12548,
+      "name": "源生石像",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12613
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12559,
+      "name": "开启界门 - 造物者之座",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12621
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12608,
+      "name": "诅咒教派的袭击",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12612
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12611,
+      "name": "七倍奉还",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12561
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12612,
+      "name": "倒塌的水晶柱",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12611
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12613,
+      "name": "开启界门 - 造物者悬台",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12559
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12617,
+      "name": "消灭入侵者",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12608
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12620,
+      "name": "生命守卫者之怒",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        12617,
+        12660
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12621,
+      "name": "弗蕾亚的契约",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12620
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12660,
+      "name": "毁灭性的武器",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12608
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 12805,
+      "name": "回收生命的力量",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 77,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12611
+      ],
+      "pre_all": [],
+      "parent_active": []
+    }
+  ]
+}

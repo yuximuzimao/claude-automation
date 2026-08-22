@@ -14,30 +14,16 @@
       ],
       "formal_task_count": 165,
       "formal_name_count": 165,
-      "video_distinct_task_count": 133,
+      "video_distinct_task_count": 132,
       "route_distinct_task_name_count": 188,
       "common_route_video_name_count": 63,
       "common_explicit_completion_count": 62,
       "critical_video_omission_count": 0,
       "critical_video_omissions": [],
       "video_only_class_counts": {
-        "expected_not_in_current_route_scope": 69,
-        "video_faction_or_other_zone_only": 1
+        "expected_not_in_current_route_scope": 69
       },
       "video_only": [
-        {
-          "quest_id": 11224,
-          "name": "骡子和货物",
-          "episodes": [
-            34
-          ],
-          "class": "video_faction_or_other_zone_only",
-          "assigned_zone_id": 495,
-          "race_allowed": false,
-          "npc_faction_allowed": false,
-          "is_dungeon": false,
-          "is_repeatable": false
-        },
         {
           "quest_id": 11599,
           "name": "萨萨里安，我的哥哥",
@@ -1248,32 +1234,32 @@
         {
           "video_first": "搜索因度雷村",
           "video_second": "不要浪费",
-          "route_turnin_point_first": 86,
-          "route_turnin_point_second": 82,
+          "route_turnin_point_first": 87,
+          "route_turnin_point_second": 83,
           "manual_resolution": "keep_current: video begins this section already on the Indu'le line. The Horde route from Agmar first reaches Moa'ki to unlock Don't Waste and the Kalu'ak chain, then threads back through Indu'le while those tasks are active; no duplicate standalone Indu'le revisit is introduced.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "图尔凯的螃蟹陷阱",
           "video_second": "长者玛纳洛",
-          "route_turnin_point_first": 95,
-          "route_turnin_point_second": 87,
+          "route_turnin_point_first": 96,
+          "route_turnin_point_second": 88,
           "manual_resolution": "keep_current: both are accepted from the same Moa'ki visit; current route advances Mana'loa/Indu'le before sweeping the southern coast so crab traps are collected along the coast loop instead of forcing an early shoreline return.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "魔网能量线的终端",
           "video_second": "海洋女神",
-          "route_turnin_point_first": 98,
-          "route_turnin_point_second": 95,
+          "route_turnin_point_first": 99,
+          "route_turnin_point_second": 96,
           "manual_resolution": "keep_current: the ley-line quest stays active while the coastal Ocean Goddess chain is closed, then is turned after the Moa'ki-to-Agmar flight; this batches the return transport rather than adding a separate Agmar trip.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "向德弗雷斯塔兹领主报到",
           "video_second": "红玉巨龙圣地的命运",
-          "route_turnin_point_first": 122,
-          "route_turnin_point_second": 120,
+          "route_turnin_point_first": 123,
+          "route_turnin_point_second": 121,
           "manual_resolution": "keep_current: both resolve inside Wyrmrest/Ruby chain state; the video Alliance unlock order differs, while the current route turns the Ruby Brooch as soon as it is obtained and immediately continues the same tower/hub chain.",
           "manual_review_status": "resolved"
         }

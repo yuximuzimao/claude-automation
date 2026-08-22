@@ -1,0 +1,5665 @@
+{
+  "schema": "video-route-episode-boundaries-v1",
+  "episode_count": 53,
+  "series_video_seconds": 185084,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "北郡修道院 1-9",
+      "bvid": "BV1rYq6BkEWw",
+      "duration_seconds": 3752,
+      "series_seconds_start": 0,
+      "series_seconds_end": 3752,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-1-events.json",
+      "source_sha256": "f1680a36afe27dd2f484f9c937183e5e05f9a27f98d6b1e51f20ecf261f0e74b",
+      "normalized_event_count": 31,
+      "raw_events_present": false,
+      "synthetic_early_schema": true,
+      "ending_states": [
+        {
+          "quest_id": 3101,
+          "quest_name": "圣洁信件",
+          "state": "turnin_unknown_after_trainer_interaction",
+          "basis": "accept/item/trainer interaction direct; no independent final completion or 80 XP evidence",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 88,
+          "quest_name": "公主必须死！",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 76,
+          "quest_name": "玉石矿洞",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 35,
+          "quest_name": "卫兵托马斯",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 109,
+          "quest_name": "向格里安·斯托曼报到",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 300,
+          "level": 2,
+          "type": "direct_level_up_system_text",
+          "confidence": "high"
+        },
+        {
+          "time_seconds_approx": 425,
+          "level": 3,
+          "type": "direct_level_up_system_text",
+          "confidence": "high"
+        },
+        {
+          "time_seconds_approx": 1335,
+          "level": 6,
+          "type": "direct_level_up_system_text",
+          "confidence": "high",
+          "trigger_quest_id": 18,
+          "trigger_quest_name": "潜行者兄弟会"
+        },
+        {
+          "time_seconds_approx": 1955,
+          "level": 7,
+          "type": "direct_level_up_system_text",
+          "confidence": "high",
+          "trigger": "exploration_or_combat_not_bound_to_quest"
+        },
+        {
+          "time_seconds_approx": 2580,
+          "level": 8,
+          "type": "direct_level_up_system_text",
+          "confidence": "high",
+          "trigger_quest_id": 86,
+          "trigger_quest_name": "比利的馅饼"
+        },
+        {
+          "time_seconds_approx": 3115,
+          "level": 9,
+          "type": "direct_player_panel",
+          "confidence": "high"
+        },
+        {
+          "time_seconds_approx": 3165,
+          "level": 9,
+          "type": "direct_level_up_system_text",
+          "confidence": "high",
+          "trigger": "combat_not_bound_to_quest"
+        }
+      ],
+      "evidence_cautions": [
+        "Episode title 1-9 is metadata only; direct level evidence for levels 4 and 5 was not captured.",
+        "3101圣洁信件 is not counted complete because trainer interaction and tracker disappearance do not prove final turn-in.",
+        "21回音山清剿行动 is counted because the final same-NPC handoff into 54去闪金镇报到 is continuous without a large cut.",
+        "Quest IDs 86 and 84 share the same Chinese title 比利的馅饼 but are two separate completions; 86 triggers level 8.",
+        "87金牙 has a direct reward window and ~1750 OCR XP, calibrated to 1760.",
+        "Level 9 occurs during combat/loot and is not assigned to a quest.",
+        "40鱼人的威胁 title OCR is heavily garbled but 170 XP and direct successor 35卫兵托马斯 establish the calibration.",
+        "Exploration and mob XP are excluded from quest XP total."
+      ]
+    },
+    {
+      "episode": 2,
+      "title": "艾尔文森林 10-13",
+      "bvid": "BV1v1q6BeExv",
+      "duration_seconds": 4244,
+      "series_seconds_start": 3752,
+      "series_seconds_end": 7996,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-2-events.json",
+      "source_sha256": "5005439a9b56888295fe388bf72791aebd68eb0f13f2eb03d8e0e0459b671b72",
+      "normalized_event_count": 22,
+      "raw_events_present": false,
+      "synthetic_early_schema": true,
+      "ending_states": [
+        {
+          "quest_id": 3101,
+          "quest_name": "圣洁信件",
+          "state": "turnin_unknown_after_trainer_interaction",
+          "source_episode": 1,
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 353,
+          "quest_name": "雷矛的包裹",
+          "state": "objective_complete_not_turnin",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 109,
+          "quest_name": "向格里安·斯托曼报到",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 11,
+          "quest_name": "悬赏河爪豺狼人",
+          "state": "objective_complete_not_turnin",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 176,
+          "quest_name": "通缉：霍格",
+          "state": "active_first_observed_unclosed",
+          "first_observed_seconds": 2884,
+          "basis": "1-second supplemental sampling still found no direct accept system text",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 59,
+          "quest_name": "布甲和皮甲",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 1786,
+          "quest_name": "圣洁之书",
+          "state": "accepted_unclosed",
+          "objective": "带生命符记到艾尔文森林复活亨兹·法奥克",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": 399,
+          "quest_name": "童年的记忆",
+          "state": "accepted_unclosed",
+          "source_section": "unclosed_or_uncertain_quests"
+        },
+        {
+          "quest_id": null,
+          "quest_name": "冬天爷爷来了！",
+          "state": "accepted_unclosed_id_ambiguous",
+          "basis": "direct accept text but multiple Questie city/faction variants and source NPC not clear enough",
+          "source_section": "unclosed_or_uncertain_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 1245,
+          "level": 11,
+          "type": "direct_level_up_system_text",
+          "confidence": "high",
+          "trigger_quest_id": 45,
+          "trigger_quest_name": "罗尔夫的下落",
+          "basis": "continuous final chain handoff into 71回复托马斯"
+        }
+      ],
+      "evidence_cautions": [
+        "Episode title 10-13 is metadata only; only level 11 has direct player level-up evidence in episode 2.",
+        "88公主必须死 appears objective-complete in the log before its later NPC turn-in; XP is counted only at final turn-in.",
+        "11悬赏河爪豺狼人 is objective-complete but not finally turned in before a large cut to Stormwind; its XP is excluded.",
+        "176通缉：霍格 first appears active at 2884 seconds even with 1-second sampling; no direct accept text was captured.",
+        "Same-title 圣洁之书 quests are preserved by distinct Quest IDs and NPC/predecessor chain.",
+        "Zero-XP Holy Tome transition quests 1641 and 1781 are retained as completed facts but contribute zero XP.",
+        "Exploration and mob XP are excluded from the quest XP total."
+      ]
+    },
+    {
+      "episode": 3,
+      "title": "西部荒野 14-16",
+      "bvid": "BV1wUqUBvEuX",
+      "duration_seconds": 3828,
+      "series_seconds_start": 7996,
+      "series_seconds_end": 11824,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-3-events.json",
+      "source_sha256": "02b01d38c99a48f7116c5d18058e59d819b37cd36ead8171e39018c85f32eb36",
+      "normalized_event_count": 25,
+      "raw_events_present": false,
+      "synthetic_early_schema": true,
+      "ending_states": [
+        {
+          "quest_id": 246,
+          "quest_name": "审时度势",
+          "state": "accepted_unclosed",
+          "evidence": "direct accept text in the same sequence as 244 completion",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 399,
+          "quest_name": "童年的记忆",
+          "state": "accepted_unclosed",
+          "evidence": "continued active through the first/middle portion of episode 3",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 38,
+          "quest_name": "杂味炖肉",
+          "state": "accepted_or_active_unclosed",
+          "evidence": "active immediately after quest 36 completion; chain prerequisite confirms transition",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 9,
+          "quest_name": "清理荒野",
+          "state": "active_first_observed_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 22,
+          "quest_name": "猪肝馅饼",
+          "state": "active_first_observed_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 102,
+          "quest_name": "西部荒野的豺狼人",
+          "state": "accepted_unclosed",
+          "evidence": "direct accept text around 2325 seconds",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 6281,
+          "quest_name": "赶赴暴风城",
+          "state": "accepted_unclosed",
+          "evidence": "direct accept immediately after 6181 completion",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 13,
+          "quest_name": "西部荒野人民军",
+          "state": "accepted_unclosed",
+          "evidence": "direct accept immediately after quest 12 completion at episode tail",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 65,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "seen_quest_window_accept_not_confirmed",
+          "evidence": "quest window observed at Gryan Stoutmantle; no direct accept text or later unambiguous active state",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 3101,
+          "quest_name": "圣洁信件",
+          "state": "turnin_unknown_after_trainer_interaction",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 353,
+          "quest_name": "雷矛的包裹",
+          "state": "objective_complete_not_turnin",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 11,
+          "quest_name": "悬赏河爪豺狼人",
+          "state": "objective_complete_not_turnin",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 176,
+          "quest_name": "通缉：霍格",
+          "state": "active_first_observed_unclosed_later_state_unknown",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": null,
+          "quest_name": "冬天爷爷来了！",
+          "state": "accepted_unclosed_id_ambiguous_later_state_unknown",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "Episode title 14-16 is metadata only; episode 3 contains no reliable direct player-level evidence.",
+        "1787 Holy Tome is counted from continuous Jason Tenorm turn-in plus direct next-stage acceptance, not from reward window alone.",
+        "9 Clean Up and 22 Goretusk Liver Pie are first observed active; exact accept clicks were not captured.",
+        "65 The Defias Brotherhood was only seen in a quest window; acceptance is not asserted.",
+        "Absence of older unresolved quests from tracker/log views does not prove completion or abandonment.",
+        "Exploration and mob XP are excluded from the quest XP total."
+      ]
+    },
+    {
+      "episode": 4,
+      "title": "西部荒野 16-18",
+      "bvid": "BV1EJBsBcE1Z",
+      "duration_seconds": 3196,
+      "series_seconds_start": 11824,
+      "series_seconds_end": 15020,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-4-events.json",
+      "source_sha256": "7b55648f921a030d2e199ae3e0d396efcfc920d9047b460a9171d5e699f09d25",
+      "normalized_event_count": 12,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 14,
+          "quest_name": "西部荒野人民军",
+          "state": "accept_between_frames_active_confirmed",
+          "evidence": "follow-up window after quest 13 plus active 15/5/5 tracker; still active at episode end",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 38,
+          "quest_name": "杂味炖肉",
+          "state": "accepted_or_active_unclosed",
+          "evidence": "still active with incomplete materials around 37 minutes and later",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 9,
+          "quest_name": "清理荒野",
+          "state": "last_direct_progress_19_of_20_then_state_unknown",
+          "evidence": "direct 19/20 at 04:15; later tracker disappearance cannot prove completion or abandonment",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 6281,
+          "quest_name": "赶赴暴风城",
+          "state": "objective_complete_not_turnin",
+          "evidence": "quest log explicitly shows (完成) around 41:50; no final turn-in evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 65,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "held_unclosed_accept_time_unknown",
+          "evidence": "quest log explicitly lists the quest; exact accept time was not captured and no final turn-in is shown",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 246,
+          "quest_name": "审时度势",
+          "state": "accepted_unclosed_no_new_direct_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 3101,
+          "quest_name": "圣洁信件",
+          "state": "turnin_unknown_after_trainer_interaction",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 353,
+          "quest_name": "雷矛的包裹",
+          "state": "objective_complete_not_turnin",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 11,
+          "quest_name": "悬赏河爪豺狼人",
+          "state": "objective_complete_not_turnin",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": 176,
+          "quest_name": "通缉：霍格",
+          "state": "prior_uncertain_state_preserved",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        },
+        {
+          "quest_id": null,
+          "quest_name": "冬天爷爷来了！",
+          "state": "accepted_unclosed_id_ambiguous_later_state_unknown",
+          "source_section": "carried_uncertainties_no_new_direct_evidence"
+        }
+      ],
+      "level_evidence": [
+        {
+          "level": 17,
+          "time_seconds_approx": 700,
+          "time_display": "11:40",
+          "confidence": "high",
+          "basis": "direct player level-up system text; digit confirmed by 8x crop plus grayscale/contrast OCR"
+        }
+      ],
+      "evidence_cautions": [
+        "Episode title 16-18 is metadata only; direct player-level evidence proves level 17 only.",
+        "Tracker disappearance after quest 9 progress 19/20 is not treated as completion or abandonment.",
+        "Quest-log (完成) for quest 6281 is objective completion, not final turn-in.",
+        "Quest 65 is confirmed held by the quest log, but exact acceptance time is not reconstructed.",
+        "Quest 14 is confirmed active after quest 13 through follow-up window plus tracker; exact accept system line was not captured.",
+        "Direct video XP overrides Questie static XP reference when they differ due level scaling or server-specific values.",
+        "Exploration and mob XP are excluded from the task-XP total."
+      ]
+    },
+    {
+      "episode": 5,
+      "title": "赤脊山 19-20",
+      "bvid": "BV1c7B4BgEiZ",
+      "duration_seconds": 3870,
+      "series_seconds_start": 15020,
+      "series_seconds_end": 18890,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-5-events.json",
+      "source_sha256": "fbd896aefd5418606e4aa6bccb329e5c3e1625573b29483499bc6023259a950a",
+      "normalized_event_count": 27,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 125,
+          "quest_name": "丢失的工具",
+          "state": "objective_complete_not_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 20,
+          "quest_name": "黑石氏族的威胁",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 91,
+          "quest_name": "所罗门的律法",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 120,
+          "quest_name": "送往暴风城的信",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 169,
+          "quest_name": "通缉：加塞尔佐格",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 92,
+          "quest_name": "赤脊山炖肉",
+          "state": "accepted_unclosed_materials_incomplete",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 132,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "accepted_unclosed",
+          "last_direct_progress": "0/15",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 150,
+          "quest_name": "鱼人偷猎者",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 1220,
+          "action": "level_up",
+          "level": null,
+          "state": "direct_level_up_number_unreadable",
+          "confidence": "high_for_event_low_for_number",
+          "basis": "direct system text '祝贺你，你升到了…级！'; repeated crop/OCR attempts could not reliably read the digit"
+        }
+      ],
+      "evidence_cautions": [
+        "Episode title 19-20 is metadata only; the episode contains a direct level-up event but its numeric digit remains unreadable after repeated OCR enhancement.",
+        "Quest 125 quest-log 完成 is objective completion only; no final turn-in is claimed.",
+        "Quest 65 and 3741 completion actions are direct; their leading XP digit is restored from Questie because OCR consistently retains only the trailing 700.",
+        "Quest 129 completion action is direct and its 1080 XP is Questie-calibrated from a low-resolution video number.",
+        "Quest 131 is only counted final after the later 交完成 system text, not when its quest log first shows 完成.",
+        "Old tracker absences are not used to infer completion or abandonment."
+      ]
+    },
+    {
+      "episode": 6,
+      "title": "赤脊山 20-22",
+      "bvid": "BV1NaBNBnEca",
+      "duration_seconds": 4204,
+      "series_seconds_start": 18890,
+      "series_seconds_end": 23094,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-6-events.json",
+      "source_sha256": "c4a7901b0926039fef83fa41d8001adbb49ea0025963fa8c7fd70fdc99cd1a19",
+      "normalized_event_count": 20,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 121,
+          "quest_name": "送往暴风城的信",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "accepted_unclosed_materials_incomplete",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 125,
+          "quest_name": "丢失的工具",
+          "state": "objective_complete_not_turnin",
+          "last_direct_evidence": "奥斯洛的工具箱 acquired around 4175s",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 150,
+          "quest_name": "鱼人偷猎者",
+          "state": "accepted_unclosed",
+          "last_direct_progress": "6/8 approx",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 20,
+          "quest_name": "黑石氏族的威胁",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 91,
+          "quest_name": "所罗门的律法",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 169,
+          "quest_name": "通缉：加塞尔佐格",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 92,
+          "quest_name": "赤脊山炖肉",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "The video contains several hard cuts between regions; persistent system-chat lines are not counted again after a cut.",
+        "Same-name Tome of Valor and The Test of Righteousness stages are split by Questie IDs, while all action claims remain grounded in video evidence.",
+        "One OCR frame misread the Messenger to Stormwind XP as 1780; adjacent frames repeatedly preserve 780 and Questie overlevel scaling is consistent with 780, so 780 is recorded.",
+        "Quest 132 and 135 XP text is low-resolution near 1350; Questie static 680 with the project server x2 multiplier calibrates both to 1360 after direct completion is established.",
+        "Quest 125 changes from episode-5 objective-complete to episode-6 opening 0/1. The cross-episode cause is not visible and is not inferred.",
+        "Tracker absence and target-count changes are never used to infer completion or abandonment."
+      ]
+    },
+    {
+      "episode": 7,
+      "title": "赤脊山 23-26",
+      "bvid": "BV1EABNBgETt",
+      "duration_seconds": 4299,
+      "series_seconds_start": 23094,
+      "series_seconds_end": 27393,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-7-events.json",
+      "source_sha256": "e4def8623af0789841347bbc3c2074100a23f02758d58a315941be51312f3945",
+      "normalized_event_count": 16,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 89,
+          "quest_name": "止水湖上的桥",
+          "state": "accepted_unclosed",
+          "last_direct_progress": "铁矛 1/5 early in episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "accepted_unclosed",
+          "last_direct_evidence": "still tracked at 4260s",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "accepted_unclosed_materials_stage_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "accepted_unclosed_no_final_evidence_this_episode",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "3530-3550s approx",
+          "action": "level_up",
+          "level": 25,
+          "state": "direct_numeric_level_up",
+          "confidence": "high",
+          "basis": "multiple consecutive system-chat frames clearly read 你升到了25级"
+        }
+      ],
+      "evidence_cautions": [
+        "Persistent system-chat lines are not counted repeatedly; timestamps use the earliest frame that also matches the relevant NPC/task-window context.",
+        "Quest 150 completion lacks a reliably OCR-readable quest-name system line; the completion is medium-high confidence from direct active-state continuity, immediate 3100 quest reward, subsequent task-log state, and Questie 1550 x2 agreement.",
+        "Quest 19 completion-name OCR is degraded, but its unique badge objective, objective-complete log state, return-NPC sequence, 4000 XP and Questie level-25 2000 x2 value form a closed evidence chain.",
+        "Quest 92 XP is deliberately left null because the low-level quest may be subject to dynamic XP scaling and the video digits are not stable enough to resolve it.",
+        "The q121/q143/q144 messenger chain contains two Chinese quests with the same name. The episode shows progress but not enough clean system text to assign a final completed stage safely.",
+        "Tracker absence, 目标(N), and quest-log 完成 are never used alone to infer final turn-in."
+      ]
+    },
+    {
+      "episode": 8,
+      "title": "暮色森林 27-28",
+      "bvid": "BV1xYBTBtErC",
+      "duration_seconds": 3392,
+      "series_seconds_start": 27393,
+      "series_seconds_end": 30785,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-8-events.json",
+      "source_sha256": "4087ae9206e6e04facf551b373c30c2a51c41fbf93760f3ff98731961599544c",
+      "normalized_event_count": 16,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 58,
+          "quest_name": "守夜人",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 149,
+          "quest_name": "幽灵的发丝",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 101,
+          "quest_name": "惩罚图腾",
+          "state": "reward_window_seen_not_final_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 337,
+          "quest_name": "一本破旧的历史书",
+          "state": "active_unclosed_at_episode_end",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 95,
+          "quest_name": "斯温的复仇",
+          "state": "active_unclosed_at_episode_end",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 174,
+          "quest_name": "仰望星空",
+          "state": "chain_active_or_unclosed_no_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 89,
+          "quest_name": "止水湖上的桥",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds": 900,
+          "action": "player_level_observed",
+          "level": 26,
+          "state": "direct_numeric_player_character_ui",
+          "confidence": "high",
+          "basis": "character/equipment UI directly reads 等级26 人类圣骑士; minor OCR glyph damage does not affect the numeric level"
+        }
+      ],
+      "evidence_cautions": [
+        "Worgen in the Woods is a same-name multi-stage chain. The 21-minute and 56-minute completion lines are q173 and q221, not duplicate OCR; the intermediate Nightbane Dark Runner objective uniquely identifies q221.",
+        "The Night Watch is also a same-name chain. The late offer objective identifies q58, so the preceding q57 completion is established from the unique chain transition and adjacent 2200 reward; q56/q58 are not claimed complete.",
+        "Quest 165 completion-name text is not stable in OCR; its medium-high-confidence completion is based on direct reward context plus unique transition into q148.",
+        "Quest 66 XP 1800 is a digit repair after direct completion evidence, not a raw full-resolution video read.",
+        "Quest 148 directly gives 1980 XP, demonstrating dynamic low-level quest XP; static Questie XP x2 must not be mechanically substituted for every low-level quest.",
+        "Reward windows, quest-log 完成, tracker absence and 目标(N) never independently establish final turn-in. Quest 101 therefore remains uncompleted despite its reward window."
+      ]
+    },
+    {
+      "episode": 9,
+      "title": "暮色森林 29-30",
+      "bvid": "BV19VBjBwE5M",
+      "duration_seconds": 3286,
+      "series_seconds_start": 30785,
+      "series_seconds_end": 34071,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-9-events.json",
+      "source_sha256": "caf3fc721d180127a4ac93073a9e093256cc93dab0493db095f6ac233f55cd1d",
+      "normalized_event_count": 34,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 98,
+          "quest_name": "斯塔文的传说",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 223,
+          "quest_name": "森林里的狼人",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 323,
+          "quest_name": "证明你的实力",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 158,
+          "quest_name": "僵尸",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 101,
+          "quest_name": "惩罚图腾",
+          "state": "reward_window_seen_not_final_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 58,
+          "quest_name": "守夜人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 337,
+          "quest_name": "一本破旧的历史书",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 89,
+          "quest_name": "止水湖上的桥",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "Episode 9 contains many same-name Stalvan stages and hard cuts; IDs are assigned only where NPC, task item, XP, or unique chain transition supports them.",
+        "A unique followup can establish that its prerequisite completed, but the completion time remains unknown across a cut gap.",
+        "Reward window alone is not final turn-in; q101 remains uncompleted.",
+        "No new reliable numeric player level appears in episode 9; episode 8 level 26 remains the latest backfill numeric evidence.",
+        "Dynamic low-level XP prevents mechanical use of Questie static XP x2 except as explicit digit repair after the action is established."
+      ]
+    },
+    {
+      "episode": 10,
+      "title": "暮色森林 31-32",
+      "bvid": "BV1mxBUBVETo",
+      "duration_seconds": 3076,
+      "series_seconds_start": 34071,
+      "series_seconds_end": 37147,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-10-events.json",
+      "source_sha256": "346fbed500093760b697084ea576b70a768a48c3046517f5d6a71219fc88c243",
+      "normalized_event_count": 22,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 270,
+          "quest_name": "被诅咒的舰队",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 231,
+          "quest_name": "女儿的爱",
+          "state": "reward_window_seen_but_task_later_still_active",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 253,
+          "quest_name": "藏尸者的妻子",
+          "state": "objective_complete_not_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 98,
+          "quest_name": "斯塔文的传说",
+          "state": "accepted_or_active_unclosed",
+          "basis": "Mistmantle Manor location alone is insufficient evidence of objective completion or turn-in",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 223,
+          "quest_name": "森林里的狼人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 101,
+          "quest_name": "惩罚图腾",
+          "state": "reward_window_seen_not_final_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 58,
+          "quest_name": "守夜人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 337,
+          "quest_name": "一本破旧的历史书",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 89,
+          "quest_name": "止水湖上的桥",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "50:45-51:05 approx",
+          "action": "level_up",
+          "level": 32,
+          "state": "direct_numeric_level_up",
+          "confidence": "high",
+          "basis": "multiple consecutive system-chat frames directly show 你升到了32级"
+        }
+      ],
+      "evidence_cautions": [
+        "Reward window is not final turn-in: q231 remains active after its reward window.",
+        "Objective completion is not final turn-in: q253 has no return-to-mayor turn-in before episode end.",
+        "Mistmantle Manor location does not establish q98 completion; q98 remains unclosed without direct Stalvan/ring or Madame Eva evidence.",
+        "Unique followup transitions establish prerequisite completion but not exact timestamps across combat/cut gaps.",
+        "Dynamic low-level XP remains possible; Questie static XP x2 is used only as explicit calibration where direct video reward digits agree."
+      ]
+    },
+    {
+      "episode": 11,
+      "title": "湿地任务 33",
+      "bvid": "BV1UoBvByEkZ",
+      "duration_seconds": 3016,
+      "series_seconds_start": 37147,
+      "series_seconds_end": 40163,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-11-events.json",
+      "source_sha256": "61e2d35bb8bba58b61c8d073c427cd2b1e603f20752b816b988d0f432e0fc42c",
+      "normalized_event_count": 24,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 681,
+          "quest_name": "诺斯弗德农场",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 684,
+          "quest_name": "通缉：玛雷兹·考尔",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 685,
+          "quest_name": "通缉：奥图和法库雷斯特",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 540,
+          "quest_name": "保全书籍",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 565,
+          "quest_name": "巴图罗的雪人毛皮披风",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 564,
+          "quest_name": "损失惨重",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 500,
+          "quest_name": "破碎岭食人魔",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 505,
+          "quest_name": "辛迪加刺客",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 536,
+          "quest_name": "清理海岸",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 555,
+          "quest_name": "海龟汤",
+          "state": "accepted_or_active_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 9435,
+          "quest_name": "遗失的水晶",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 270,
+          "quest_name": "被诅咒的舰队",
+          "state": "accepted_unclosed_no_new_direct_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 231,
+          "quest_name": "女儿的爱",
+          "state": "reward_window_seen_but_task_later_still_active_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 253,
+          "quest_name": "藏尸者的妻子",
+          "state": "objective_complete_not_turnin_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 98,
+          "quest_name": "斯塔文的传说",
+          "state": "accepted_or_active_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 223,
+          "quest_name": "森林里的狼人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 101,
+          "quest_name": "惩罚图腾",
+          "state": "reward_window_seen_not_final_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 58,
+          "quest_name": "守夜人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 89,
+          "quest_name": "止水湖上的桥",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 128,
+          "quest_name": "悬赏：黑石氏族",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 141,
+          "quest_name": "迪菲亚兄弟会",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 1654,
+          "quest_name": "正义试炼",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 2040,
+          "quest_name": "地底突袭",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 118,
+          "quest_name": "马掌",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "Same-name q631/q632/q633 Thandol Span stages are separated by objective text and unique chain structure, not task name alone.",
+        "Balgaras's Earring acquisition is objective evidence only; q304 final completion is based on later NPC/system completion evidence.",
+        "q337 is a historical gap resolved only by q538 being directly active; exact completion episode/time remains unknown.",
+        "q270 is not auto-completed merely because the player is in Wetlands; no q321 or final-turn-in evidence was found.",
+        "Tracker absence never implies completion or abandonment."
+      ]
+    },
+    {
+      "episode": 12,
+      "title": "南海镇 34-35",
+      "bvid": "BV1GJBrBNEoZ",
+      "duration_seconds": 3930,
+      "series_seconds_start": 40163,
+      "series_seconds_end": 44093,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-12-events.json",
+      "source_sha256": "a2a6a4c88298ca83e59653cdef26dfaef751a7bdec20461c6ddb141ebcad6b6e",
+      "normalized_event_count": 19,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 563,
+          "quest_name": "人事调动",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 540,
+          "quest_name": "保全书籍",
+          "state": "partial_objective_5_of_5_books_complete_but_old_leather_book_0_of_1_not_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 564,
+          "quest_name": "损失惨重",
+          "state": "objective_complete_not_turnin",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 565,
+          "quest_name": "巴图罗的雪人毛皮披风",
+          "state": "carried_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 659,
+          "quest_name": "新的瘟疫？",
+          "state": "carried_unclosed_no_unique_followup_seen",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 504,
+          "quest_name": "破碎岭好战者",
+          "state": "accepted_unclosed_objective_0_of_10",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 512,
+          "quest_name": "贵族之死",
+          "state": "accepted_unclosed_objective_0_of_7",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 514,
+          "quest_name": "铁炉堡的译码者",
+          "state": "accepted_unclosed",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 505,
+          "quest_name": "辛迪加刺客",
+          "state": "reward_window_seen_not_final_proven",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 681,
+          "quest_name": "诺斯弗德农场",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 684,
+          "quest_name": "通缉：玛雷兹·考尔",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 685,
+          "quest_name": "通缉：奥图和法库雷斯特",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 270,
+          "quest_name": "被诅咒的舰队",
+          "state": "accepted_unclosed_no_q321_or_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 231,
+          "quest_name": "女儿的爱",
+          "state": "reward_window_seen_but_later_active_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 253,
+          "quest_name": "藏尸者的妻子",
+          "state": "objective_complete_not_turnin_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 98,
+          "quest_name": "斯塔文的传说",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        },
+        {
+          "quest_id": 223,
+          "quest_name": "森林里的狼人",
+          "state": "carried_unclosed_no_new_final_evidence",
+          "source_section": "accepted_or_active_unclosed"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "q559/q560/q561 share the same Chinese title 法尔林的证据; stages are separated by NPC, objective text and unique Questie chain, not chat-title count.",
+        "q505 reward window is not final completion evidence; no final claim is made.",
+        "q540 has 5/5 recovered books but old leather book remains 0/1, so the quest itself is not objective-complete.",
+        "q564 shows objective completion in the quest log but has no final NPC turn-in evidence.",
+        "q9435 uses direct system XP 3800 rather than reward-window-area 3300 or Questie static XP.",
+        "Tracker absence never implies completion or abandonment."
+      ]
+    },
+    {
+      "episode": 13,
+      "title": "荆棘谷 36-37",
+      "bvid": "BV1U5ByBNEKP",
+      "duration_seconds": 3193,
+      "series_seconds_start": 44093,
+      "series_seconds_end": 47286,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-13-events.json",
+      "source_sha256": "f0a1dffc410d5c15bd1e48194fe5d4d2ff108880401eb4b75e947cdc40f88943",
+      "normalized_event_count": 26,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 207,
+          "quest_name": "库尔森的秘密",
+          "state": "listed_unclosed",
+          "source_section": "explicitly_incomplete_at_episode_end"
+        },
+        {
+          "quest_id": 202,
+          "quest_name": "库尔森上校",
+          "state": "listed_unclosed",
+          "source_section": "explicitly_incomplete_at_episode_end"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 14,
+      "title": "奥达曼 38",
+      "bvid": "BV1o8vkBvEAc",
+      "duration_seconds": 1393,
+      "series_seconds_start": 47286,
+      "series_seconds_end": 48679,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-14-events.json",
+      "source_sha256": "6699840afc62c6322bba3a97ec779efea6f3467be50820e97cfa7a0f3c76ad58",
+      "normalized_event_count": 13,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 15,
+      "title": "荆棘谷 39-40",
+      "bvid": "BV1rTvmBdEqX",
+      "duration_seconds": 3858,
+      "series_seconds_start": 48679,
+      "series_seconds_end": 52537,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-15-events.json",
+      "source_sha256": "514dc312466f29a627678e3fc0bdea5def4cc529db56d0e2515d2fcf2f514f6e",
+      "normalized_event_count": 31,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 16,
+      "title": "荆棘谷 41 大号来复仇",
+      "bvid": "BV1oRvpB2Euw",
+      "duration_seconds": 4076,
+      "series_seconds_start": 52537,
+      "series_seconds_end": 56613,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-16-events.json",
+      "source_sha256": "908626f52239a5e7f7e5f2bdd03324d75b20f68215caf67a7c68ab7dd763b0cc",
+      "normalized_event_count": 24,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 17,
+      "title": "荆棘谷 42-43",
+      "bvid": "BV1sovHB4E1A",
+      "duration_seconds": 3764,
+      "series_seconds_start": 56613,
+      "series_seconds_end": 60377,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-17-events.json",
+      "source_sha256": "82765900395e3035ab76ff29c7809675ce875119bbbecc40dc2dad1b67c3fc64",
+      "normalized_event_count": 40,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 18,
+      "title": "荆棘谷 44 终于有钱学大马了",
+      "bvid": "BV1YBvHBzE2f",
+      "duration_seconds": 2857,
+      "series_seconds_start": 60377,
+      "series_seconds_end": 63234,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-18-events.json",
+      "source_sha256": "a9f3ea3574897302bbeeec62a20c0588830579ee0c5d7177c1f8d35a0f82bedc",
+      "normalized_event_count": 25,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 19,
+      "title": "加基森 45-46",
+      "bvid": "BV1hxveBTEek",
+      "duration_seconds": 2750,
+      "series_seconds_start": 63234,
+      "series_seconds_end": 65984,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-19-events.json",
+      "source_sha256": "d7350be81b932bba75d92679eb736f2e31cf2cd69b6b745c33f6f3e6ecd8e0a5",
+      "normalized_event_count": 32,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 20,
+      "title": "菲拉斯 47-48",
+      "bvid": "BV1eFiTBAENF",
+      "duration_seconds": 3228,
+      "series_seconds_start": 65984,
+      "series_seconds_end": 69212,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-20-events.json",
+      "source_sha256": "a58cb9affff7e04e05a1c2c7e0c357adafd12484f855d7bedbfb6c70438d7299",
+      "normalized_event_count": 23,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 21,
+      "title": "灼热峡谷49-51",
+      "bvid": "BV1CziKB2EaC",
+      "duration_seconds": 3321,
+      "series_seconds_start": 69212,
+      "series_seconds_end": 72533,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-21-events.json",
+      "source_sha256": "34fcc957bf8fad5eed217bb2873d8571636e9ffa8a8526494b040e861a0c14d9",
+      "normalized_event_count": 38,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 22,
+      "title": "安戈洛环形山 52",
+      "bvid": "BV1p2iMBDEMw",
+      "duration_seconds": 3725,
+      "series_seconds_start": 72533,
+      "series_seconds_end": 76258,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-22-events.json",
+      "source_sha256": "9a7481f48560c870b5188a9052eacdba4bcb253ab8b45855e7cdacf88a300b80",
+      "normalized_event_count": 31,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 23,
+      "title": "安戈洛环形山 53-54",
+      "bvid": "BV1mGvdBsENa",
+      "duration_seconds": 2936,
+      "series_seconds_start": 76258,
+      "series_seconds_end": 79194,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-23-events.json",
+      "source_sha256": "5d2a3d022f243baa2bdb7559659017383caf5ad5e019bf649dae4400797dba08",
+      "normalized_event_count": 30,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 24,
+      "title": "西瘟 54-56",
+      "bvid": "BV1jiirBiE2L",
+      "duration_seconds": 3909,
+      "series_seconds_start": 79194,
+      "series_seconds_end": 83103,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-24-events.json",
+      "source_sha256": "62cc2038061176d990965cd195e1ed20d9eb16c8b8c7a07ac3885a3678559b45",
+      "normalized_event_count": 47,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 25,
+      "title": "东瘟57-58",
+      "bvid": "BV1iVi7BPEtL",
+      "duration_seconds": 2870,
+      "series_seconds_start": 83103,
+      "series_seconds_end": 85973,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-25-events.json",
+      "source_sha256": "78f737b0d30e0bf7af0f1c47d702387c9de189e8258fcf2aefa3dd9c9d9c3601",
+      "normalized_event_count": 29,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 26,
+      "title": "地狱火半岛59-60",
+      "bvid": "BV12XijBmEhq",
+      "duration_seconds": 3220,
+      "series_seconds_start": 85973,
+      "series_seconds_end": 89193,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-26-events.json",
+      "source_sha256": "95f9f93b88bc519e86fc95fbef032745c05bf8756d731997549d3111e99252ba",
+      "normalized_event_count": 30,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 27,
+      "title": "地狱火半岛 城墙 61",
+      "bvid": "BV1j8ijBeEfZ",
+      "duration_seconds": 2788,
+      "series_seconds_start": 89193,
+      "series_seconds_end": 91981,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-27-events.json",
+      "source_sha256": "66b72be8736ba28feb89bf0ef136a986ec8acf95e01bf9a31909a9495e21f7a5",
+      "normalized_event_count": 27,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 28,
+      "title": "地狱火半岛 62-63",
+      "bvid": "BV17uqcBdEWu",
+      "duration_seconds": 4810,
+      "series_seconds_start": 91981,
+      "series_seconds_end": 96791,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-28-events.json",
+      "source_sha256": "3747f1e5a7059f17b51de256bac3d6e3e3846f8359e043cb42e846fbe0b2aa5a",
+      "normalized_event_count": 33,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 9912,
+          "quest_name": "塞纳里奥远征队",
+          "state": "已接取，前往赞加沼泽塞纳里奥庇护所。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10132,
+          "quest_name": "巨人的威胁",
+          "state": "已接取，片尾进度0/5。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10057,
+          "quest_name": "寻找首领",
+          "state": "目标全部完成，但没有NPC交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9385,
+          "quest_name": "钢牙掠食者",
+          "state": "已接取，野外段最高可见约9/10，没有最终完成或交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10400,
+          "quest_name": "霸王",
+          "state": "残酷的阿拉修斯0/1；战斗失败后没有成功击杀证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9607,
+          "quest_name": "愤怒之心",
+          "state": "没有进入鲜血熔炉，继续保留。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10916,
+          "quest_name": "挖掘念珠",
+          "state": "画面只出现驱魔仪式用念珠，没有独立完成或交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 29,
+      "title": "地狱火半岛 64",
+      "bvid": "BV1MtqcBCEZs",
+      "duration_seconds": 2327,
+      "series_seconds_start": 96791,
+      "series_seconds_end": 99118,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-29-events.json",
+      "source_sha256": "d1aae4d3c16fa7e08d36ec87603242cf7855c47833e2a1e035a7468afd161757",
+      "normalized_event_count": 28,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 9747,
+          "quest_name": "暗泽部族",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9802,
+          "quest_name": "赞加沼泽的植物",
+          "state": "已接取，片尾未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9817,
+          "quest_name": "血鳞纳迦的领袖",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9728,
+          "quest_name": "热情的欢迎",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9697,
+          "quest_name": "观察者莉萨奥",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9957,
+          "quest_name": "塞纳里奥树林出事了？",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9716,
+          "quest_name": "暗泽湖的异常",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9752,
+          "quest_name": "逃离暗泽村",
+          "state": "护送目标完成并抵达塞纳里奥庇护所，最终NPC交付未确认。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9385,
+          "quest_name": "钢牙掠食者",
+          "state": "前集遗留；本集没有最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10400,
+          "quest_name": "霸王",
+          "state": "本集多次仍显示残酷的阿拉修斯0/1。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9607,
+          "quest_name": "愤怒之心",
+          "state": "前集遗留；本集没有鲜血熔炉动作。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10916,
+          "quest_name": "挖掘念珠",
+          "state": "前集遗留；本集没有独立交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 30,
+      "title": "赞加沼泽 65",
+      "bvid": "BV1hHqcBmEoY",
+      "duration_seconds": 2596,
+      "series_seconds_start": 99118,
+      "series_seconds_end": 101714,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-30-events.json",
+      "source_sha256": "dd94e671751eeed9fdd38c7ed84a1d7420f63cb6bf8ce43fab6e86411f9b94f5",
+      "normalized_event_count": 24,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 9724,
+          "quest_name": "通知塞纳里奥议会",
+          "state": "已接取，片尾仍在追踪栏。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9777,
+          "quest_name": "灿烂的孢子",
+          "state": "已接取，未确认交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9783,
+          "quest_name": "异样的干旱",
+          "state": "片尾新接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9896,
+          "quest_name": "黑钉之刺",
+          "state": "升级后新接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9790,
+          "quest_name": "透明的虫翼",
+          "state": "片尾新接取，虫翼0/8。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9780,
+          "quest_name": "电鳗鱼片",
+          "state": "片尾新接取，鱼片0/8。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9697,
+          "quest_name": "观察者莉萨奥",
+          "state": "前集已接；本集没有可复核的交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9957,
+          "quest_name": "塞纳里奥树林出事了？",
+          "state": "前集已接；本集没有可复核的交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9385,
+          "quest_name": "钢牙掠食者",
+          "state": "旧任务；本集没有新的闭环证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10400,
+          "quest_name": "霸王",
+          "state": "旧任务；本集没有新的闭环证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9607,
+          "quest_name": "愤怒之心",
+          "state": "旧任务；本集没有新的闭环证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10916,
+          "quest_name": "挖掘念珠",
+          "state": "旧任务；本集没有新的闭环证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 31,
+      "title": "纳格兰 66",
+      "bvid": "BV1kDiyBXEc7",
+      "duration_seconds": 3261,
+      "series_seconds_start": 101714,
+      "series_seconds_end": 104975,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-31-events.json",
+      "source_sha256": "b7e5d5531b625da43fde38ce5c3ee249f5ec98e150b9988b7f8645afb28478e4",
+      "normalized_event_count": 30,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 9856,
+          "quest_name": "狩猎风鹏",
+          "stage": 3,
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9859,
+          "quest_name": "狩猎塔布羊",
+          "stage": 3,
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9851,
+          "quest_name": "狩猎裂蹄牛",
+          "stage": 3,
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9862,
+          "quest_name": "暗血腐蚀者",
+          "state": "片尾仍在追踪栏，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9821,
+          "quest_name": "吞食诅咒",
+          "state": "升级后新接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9805,
+          "quest_name": "伊森拉图斯的祝福",
+          "state": "片尾新接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9921,
+          "quest_name": "火刃废墟",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10476,
+          "quest_name": "强悍的敌人",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9935,
+          "quest_name": "通缉：巫婆吉塞尔达",
+          "state": "联盟版本，已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9939,
+          "quest_name": "通缉：顾问佐尔布",
+          "state": "联盟版本，已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9956,
+          "quest_name": "不幸的商队",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9874,
+          "quest_name": "阻止污染",
+          "state": "已接取，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "quest_name": "元素王座",
+          "state": "接受明确；最终交付没有独立奖励窗口或明确完成提示。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 32,
+      "title": "纳格兰 67",
+      "bvid": "BV14aiSB3EJ6",
+      "duration_seconds": 3573,
+      "series_seconds_start": 104975,
+      "series_seconds_end": 108548,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-32-events.json",
+      "source_sha256": "9c62b4e2da209ad7fe7d922d8723b58295efc9505084e5352baf80a68d6199a9",
+      "normalized_event_count": 24,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 10004,
+          "quest_name": "耐心与理解",
+          "state": "已接取，未捕获交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "quest_name": "加瓦克希",
+          "state": "已接取，未捕获交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "quest_name": "安全问题",
+          "state": "已接取，未捕获交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "quest_name": "偷盗贼的东西……能算偷么？",
+          "state": "已接取，未捕获交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "quest_name": "通缉：饥饿者杜恩",
+          "state": "联盟版本，已接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9922,
+          "quest_name": "纳格兰的峡谷",
+          "state": "已接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10109,
+          "quest_name": "我想要这些鸟蛋！",
+          "state": "已接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9852,
+          "quest_name": "终极挑战",
+          "state": "已接取，塔丝克之心0/1。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9810,
+          "quest_name": "污染的灵魂",
+          "state": "片尾新接取，目标未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "quest_name": "元素王座",
+          "state": "第31集接受明确；第31—32集均未捕获独立最终奖励或明确完成提示。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9849,
+          "quest_name": "打碎外壳",
+          "state": "后续任务窗口已打开，但接受未确认。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 33,
+      "title": "纳格兰 68",
+      "bvid": "BV1dziXBAEjY",
+      "duration_seconds": 4425,
+      "series_seconds_start": 108548,
+      "series_seconds_end": 112973,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-33-events.json",
+      "source_sha256": "38cdf0db912372694ac6591fe78f0b990573aa201a81abe68d2df1418a58b045",
+      "normalized_event_count": 27,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 10004,
+          "quest_name": "耐心与理解",
+          "state": "第32集已接取；第33集没有交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "quest_name": "加瓦克希",
+          "state": "第32集已接取；第33集没有交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "quest_name": "安全问题",
+          "state": "第32集已接取；第33集没有交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "quest_name": "偷盗贼的东西……能算偷么？",
+          "state": "第32集已接取；第33集没有交付或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "quest_name": "通缉：饥饿者杜恩",
+          "state": "联盟版本；第32集已接取，第33集没有明确完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "quest_name": "元素王座",
+          "state": "第31集接受明确；截至第33集仍没有独立最终奖励或明确完成提示。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "quest_name": "损坏的面具",
+          "state": "明确获得任务触发物，后续追踪文字可见；点击接受的具体时点和交付均未清晰捕获。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "quest_name": "鲜血竞技场：断蹄",
+          "state": "接受后失败；片尾是否仍保留或已经放弃不确认。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 34,
+      "title": "北风苔原 69-70",
+      "bvid": "BV11qiQB1ET2",
+      "duration_seconds": 3841,
+      "series_seconds_start": 112973,
+      "series_seconds_end": 116814,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-34-events.json",
+      "source_sha256": "fca9b8e5517867009ef403ea79f494b5d9369223c200e0d2cd73323da9d22972",
+      "normalized_event_count": 43,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "本集接受，未看到完成或放弃。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "本集接受，持续出现在追踪栏；没有11944后续证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "片尾接受，未交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11707,
+          "quest_name": "迫在眉睫",
+          "state": "本集约14:20—15:00已接受；第35集直接证据确认直到第35集约40:25才完成，因此第34集片尾仍未闭环。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "quest_name": "耐心与理解",
+          "state": "第33集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "quest_name": "加瓦克希",
+          "state": "第33集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "quest_name": "安全问题",
+          "state": "第33集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "quest_name": "偷盗贼的东西……能算偷么？",
+          "state": "第33集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "quest_name": "通缉：饥饿者杜恩",
+          "state": "联盟版本；第33集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "quest_name": "元素王座",
+          "state": "此前遗留，仍无独立最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "quest_name": "损坏的面具",
+          "state": "此前获得触发物，本集无后续交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "quest_name": "鲜血竞技场：断蹄",
+          "state": "第33集明确失败；是否保留或放弃仍不确认。",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "25:15",
+          "level": 69,
+          "evidence": "角色面板清晰显示“等级69 人类圣骑士”",
+          "direct": true,
+          "trigger_quest_confirmed": false
+        },
+        {
+          "time_range": "episode_end",
+          "level": 70,
+          "direct": false,
+          "status": "not_confirmed_in_game",
+          "note": "本集标题与下一集“北风苔原 70.9”仅构成系列连续性，未捕获游戏内70级面板或升级消息。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 35,
+      "title": "北风苔原 70.9",
+      "bvid": "BV1EQiQBKEVC",
+      "duration_seconds": 4332,
+      "series_seconds_start": 116814,
+      "series_seconds_end": 121146,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-35-events.json",
+      "source_sha256": "e8a957d46156e701358f9e17d347c67a89cf597ef2486fb5e297d20b7e434e43",
+      "normalized_event_count": 51,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "本集开头接受；无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "48分钟左右接受；无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11712,
+          "quest_name": "物质转换注射器",
+          "state": "本集菲兹兰克机场接受；后段追踪状态可见，无最终完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11710,
+          "quest_name": "转换器怎么了？",
+          "state": "本集菲兹兰克机场接受；约53分钟追踪栏仍可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11645,
+          "quest_name": "恶心的雪地狗头人！",
+          "state": "本集菲兹兰克机场接受；约53分钟追踪栏仍可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12728,
+          "quest_name": "监视裂谷：冬鳞洞穴",
+          "state": "本集69-70分钟接受；片尾仍在追踪栏。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11900,
+          "quest_name": "监测数据",
+          "state": "片尾考达拉新接，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11910,
+          "quest_name": "古树的秘密",
+          "state": "片尾考达拉新接，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11912,
+          "quest_name": "冰冷的草莓",
+          "state": "片尾考达拉新接，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13094,
+          "quest_name": "他们丝毫不感到羞愧吗？",
+          "state": "联盟版本；片尾考达拉新接，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "第34集遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "第34集遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "第34集片尾接受；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "联盟版本；更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "此前明确失败；是否保留或放弃仍不确认。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "episode_metadata",
+          "level": 70,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "标题为北风苔原70.9；本集未捕获清晰角色等级数字。"
+        },
+        {
+          "time_range": "52:40 and 64:40 approx",
+          "direct": true,
+          "evidence": "画面出现你在这个等级的游戏时间已累计几十分钟",
+          "level_number_visible": false,
+          "trigger_quest_confirmed": false
+        },
+        {
+          "time_range": "episode_end",
+          "level": 71,
+          "direct": false,
+          "status": "not_confirmed_in_game",
+          "note": "下一集标题为北风苔原71，但第35集未捕获70→71直接升级消息或71级角色面板。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 36,
+      "title": "北风苔原 71",
+      "bvid": "BV1k46oBaEJX",
+      "duration_seconds": 4003,
+      "series_seconds_start": 121146,
+      "series_seconds_end": 125149,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-36-events.json",
+      "source_sha256": "116e568fffbfe9d0fd1de999b1c5b0dd43c508763e82124e1255dca0badfd4e1",
+      "normalized_event_count": 25,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11905,
+          "quest_name": "延缓灾难",
+          "state": "11900后续，本集未完成；下一集魔枢阶段应继续核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11911,
+          "quest_name": "苏醒",
+          "state": "11910后续，本集未完成；下一集魔枢阶段应继续核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13094,
+          "quest_name": "他们丝毫不感到羞愧吗？",
+          "state": "联盟版本；第35集考达拉接取，本集未完成；下一集魔枢阶段应继续核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "11919完成后出现的后续/重复版本，本集未见最终交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "第35集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "第35集遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11712,
+          "quest_name": "物质转换注射器",
+          "state": "第35集遗留，本集无最终完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11710,
+          "quest_name": "转换器怎么了？",
+          "state": "第35集遗留，本集无最终完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11645,
+          "quest_name": "恶心的雪地狗头人！",
+          "state": "第35集遗留，本集无最终完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "更早遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "更早遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "更早遗留，本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "联盟版本；更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "此前明确失败；是否保留或放弃仍不确认。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "episode_metadata",
+          "level": 71,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "标题为北风苔原71；本集未捕获清晰角色等级数字。"
+        },
+        {
+          "time_range": "episode_end",
+          "level": 72,
+          "direct": false,
+          "status": "not_confirmed_in_game",
+          "note": "下一集标题为北风苔原 魔枢72，但本集未捕获71→72直接升级消息或72级角色面板。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 37,
+      "title": "北风苔原 魔枢 72",
+      "bvid": "BV1DQrhBVEQA",
+      "duration_seconds": 2605,
+      "series_seconds_start": 125149,
+      "series_seconds_end": 127754,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-37-events.json",
+      "source_sha256": "9d75caf924a1e1a3ba60de6a5f9ae412daafe6777bc5f07e6540ab421b878b63",
+      "normalized_event_count": 16,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11650,
+          "quest_name": "还要一些东西……",
+          "state": "本集约04:35-04:50接取；片尾仍可见超载电容器0/1，未闭环。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11938,
+          "quest_name": "争取时间",
+          "state": "本集约20:20接取；片尾仍显示消灭恩其拉中的天灾目标，未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11730,
+          "quest_name": "主与仆",
+          "state": "11729完成后接取；片尾多个机器人目标仍未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11692,
+          "quest_name": "寻找比希",
+          "state": "11710完成后接取；片尾未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "第36集遗留的后续/重复版本；本集无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "更早遗留；本集追踪栏仍出现机器人重新装配相关目标，无最终完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "联盟版本；更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "此前明确失败；是否保留或放弃仍不确认。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "episode_metadata",
+          "level": 72,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "标题为北风苔原 魔枢72；本集未捕获清晰72级角色面板或升级祝贺消息。"
+        },
+        {
+          "time_range": "next_episode_metadata",
+          "level": 72.5,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "下一集合集标题为北风苔原72.5，只作为系列连续性元数据。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 38,
+      "title": "北风苔原72.5",
+      "bvid": "BV19NrhByEMe",
+      "duration_seconds": 3081,
+      "series_seconds_start": 127754,
+      "series_seconds_end": 130835,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-38-events.json",
+      "source_sha256": "17adfbfb3dac18dd4355db1d6e950fa861f351e9248f1d8285485d946b50587b",
+      "normalized_event_count": 19,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11798,
+          "quest_name": "机甲专家麦卡佐德",
+          "state": "本集已完成研究手册与徽记目标，追踪状态要求回菲兹兰克机场；未见最终交付，优先在第39集核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11713,
+          "quest_name": "侦查虫孔",
+          "state": "本集已完成三个虫孔标记，追踪状态要求回菲兹兰克机场；未见最终交付，优先在第39集核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11694,
+          "quest_name": "山洞中的瘟疫",
+          "state": "片尾由11693严格后续开启，本集尚未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11938,
+          "quest_name": "争取时间",
+          "state": "第37集遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "更早遗留；本集无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "更早遗留；本集无直接任务名完成证据，不能与11730主与仆混同。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "联盟版本；更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "此前明确失败；是否保留或放弃仍不确认。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "episode_metadata",
+          "level": 72.5,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "标题为北风苔原72.5；本集未捕获清晰玩家等级数字或升级祝贺消息。"
+        },
+        {
+          "time_range": "next_episode_metadata",
+          "level": 73,
+          "direct": false,
+          "status": "series_metadata_only",
+          "note": "下一集合集标题为北风苔原73，只作为系列连续性元数据。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 39,
+      "title": "北风苔原73",
+      "bvid": "BV1fdraBbE9B",
+      "duration_seconds": 2709,
+      "series_seconds_start": 130835,
+      "series_seconds_end": 133544,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-39-events.json",
+      "source_sha256": "6be53b21ba5ef8b945e7d6316393eb20a57204e25de18e556931fb4375739004",
+      "normalized_event_count": 16,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12157,
+          "quest_name": "失踪的信使",
+          "state": "约24分钟后任务日志中已存在，目标指向龙骨荒野；无可靠接受时刻，无完成或放弃证据；第40集优先核验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "更早遗留；本集无直接任务名完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "更早遗留；本集无最终完成或放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "联盟版本；更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "更早遗留；本集无完成或放弃证据。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "此前明确失败；是否保留或放弃仍不确认。",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_range": "31:45-32:15 approx",
+          "level": 73,
+          "direct": true,
+          "status": "direct_character_panel",
+          "note": "角色面板多帧可读为73级人类圣骑士；本集未捕获可靠升级祝贺消息，因此不能把72→73绑定到具体任务。"
+        }
+      ],
+      "evidence_cautions": []
+    },
+    {
+      "episode": 40,
+      "title": "龙骨荒野 73",
+      "bvid": "BV1qGrjBCEgr",
+      "duration_seconds": 3607,
+      "series_seconds_start": 133544,
+      "series_seconds_end": 137151,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-40-events.json",
+      "source_sha256": "8cc235054d59f15ed6bdd079a504003eb0969394643e4f4e3c3c854ecbad9ba1",
+      "normalized_event_count": 15,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "objectives_complete_not_turnin",
+          "priority": "highest",
+          "note": "片尾5/5目标完成，未返回典狱官朱蒂·月歌，未最终交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12098,
+          "quest_name": "搜索因度雷村",
+          "state": "active",
+          "priority": "highest",
+          "note": "47分钟后接受；片尾仍有在因度雷村/因度雷湖寻找法师猎手指挥官的目标。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12174,
+          "quest_name": "高级指挥官哈尔弗·维姆班恩",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "note": "本集开头接受，无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "note": "约4:40接受，目标为前往灰熊丘陵琥珀松木营地向杜蒙中尉报到。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12117,
+          "quest_name": "前往莫亚基港口",
+          "state": "active_carryover",
+          "priority": "high",
+          "note": "更早遗留；本集约20分钟后仍明确在追踪中，无完成/放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "约28-30分钟聊天区有多条旧完成/经验文字；未绑定可靠任务名的重复残留不计为新任务。",
+        "12067一封家书使用联盟ID；同名部落版本12085不适用。",
+        "12167消灭教徒片尾只是目标完成，不是最终交付。",
+        "任务追踪栏不是完整任务日志；旧任务暂时不可见不能自动视为放弃。"
+      ]
+    },
+    {
+      "episode": 41,
+      "title": "龙骨荒野 74",
+      "bvid": "BV1BurjB1Ep3",
+      "duration_seconds": 2654,
+      "series_seconds_start": 137151,
+      "series_seconds_end": 139805,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-41-events.json",
+      "source_sha256": "705cc175d5d731e3508aac2af0d4f61ecad8600d90415d33d44daf489a2a02e8",
+      "normalized_event_count": 17,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12460,
+          "quest_name": "前往红玉巨龙圣地",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "12766严格后续，约40分钟后接受。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "约42分钟直接接受，本集未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "约42分钟直接接受，本集未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12458,
+          "quest_name": "鞭笞者的种子",
+          "state": "active_accept_time_uncertain",
+          "priority": "highest",
+          "note": "片尾追踪明确出现种子目标；精确接受帧未捕获。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "active_accept_time_uncertain",
+          "priority": "high",
+          "note": "联盟版本；约35分钟后持续出现在追踪中，本集未完成。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "priority": "gap_audit",
+          "note": "第40集目标完成，第41集无最终交付直接证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12174,
+          "quest_name": "高级指挥官哈尔弗·维姆班恩",
+          "state": "older_unresolved",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "older_unresolved",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "12167消灭教徒跨集开场不可见，但没有最终交付直接证据；不得因追踪栏缺失自动闭环。",
+        "11958不要浪费的完成名未稳定OCR，但被偷走的莫亚基货物、第二条40600、长者库纳尼窗口及Questie 11958→11959严格链共同确认。",
+        "12032海洋女神的完成窗口直接可见，经验用Questie基础25400×2校准为50800。",
+        "第41集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 42,
+      "title": "龙骨荒野 74.5",
+      "bvid": "BV1EwrWBeEMZ",
+      "duration_seconds": 3693,
+      "series_seconds_start": 139805,
+      "series_seconds_end": 143498,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-42-events.json",
+      "source_sha256": "3b917310a01d9a8317e89517d1e4ab5a57b03f48f9bc7bee4304b773fb54bbba",
+      "normalized_event_count": 20,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾61:05左右刚接受。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "active_not_turnedin",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "active_not_turnedin",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "active_not_turnedin_objective_counts_uncertain",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "priority": "gap_audit",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "任务日志中的完成/可交状态不等于最终交付；12456、12511、12794、12464均据此保留未闭环。",
+        "12459追踪目标文字含已消灭措辞，但小字号计数不稳定，因此不判定其目标已全部完成。",
+        "12167消灭教徒仍是第40到41集剪辑缺口，没有新增直接证据。",
+        "片尾12237的40600与12251的4100由5秒连续事件链确认，不是聊天残留。",
+        "第42集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 43,
+      "title": "嚎风峡湾 74.5",
+      "bvid": "BV14SrfBEE5W",
+      "duration_seconds": 3136,
+      "series_seconds_start": 143498,
+      "series_seconds_end": 146634,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-43-events.json",
+      "source_sha256": "9ebfe6daf7549c011d2cb991fcb482d89ed7a02762d38d6f6ef91ad852f5fa6d",
+      "normalized_event_count": 26,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "active_not_turnedin",
+          "priority": "highest",
+          "note": "片尾追踪栏仍可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11291,
+          "quest_name": "前往西部卫戍要塞！",
+          "state": "active_not_turnedin",
+          "priority": "highest",
+          "note": "片尾追踪栏仍可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "note": "约38:40任务日志直接可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "note": "约38:40任务日志直接可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "carryover",
+          "note": "约38:40任务日志直接可见。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "第43集开场切到嚎风峡湾不能作为龙骨荒野遗留已交付或放弃的证据。",
+        "约38:40任务日志直接证明12253、12459、12456仍然存在。",
+        "11255的最终完成由1295秒完成任务窗口与1300秒严格后续11290接受共同确认，经验按Questie×2校准。",
+        "11436冲浪去交付发生极快，使用3078-3087秒1秒级窗口拆分11344与11436。",
+        "任务追踪栏不是完整任务日志，片尾只显示两项不能用于清除旧任务。",
+        "第43集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 44,
+      "title": "嚎风峡湾75",
+      "bvid": "BV1unkTB3Ejj",
+      "duration_seconds": 3609,
+      "series_seconds_start": 146634,
+      "series_seconds_end": 150243,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-44-events.json",
+      "source_sha256": "83995b00ce9b502fa69f97bafe52cf1126aa930bc331eaa71bf9065855e93754",
+      "normalized_event_count": 27,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11175,
+          "quest_name": "我的女儿",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "3608秒最终帧仍在追踪。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11248,
+          "quest_name": "行动代号：斯克恩之怒",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "第44集片尾由11332接出，3608秒最终帧仍在追踪。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "high",
+          "note": "约19:35目标完成，但无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "high",
+          "note": "385秒仍追踪，390秒后消失；无完成文字/4000经验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "任务追踪栏不是完整任务日志，不能用追踪项消失清除旧任务。",
+        "11190《非标准炮弹》只确认目标完成，没有最终交付证据。",
+        "11448《探险者协会哨站》跨剪辑消失，但缺少完成文字或4000经验，保持turnin_unknown_across_cut。",
+        "11329《想尽办法！》不是11327→11332链条的一环，不应由OCR误读插入。",
+        "第44集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 45,
+      "title": "嚎风峡湾75.9",
+      "bvid": "BV1iWkKBJEhC",
+      "duration_seconds": 4135,
+      "series_seconds_start": 150243,
+      "series_seconds_end": 154378,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-45-events.json",
+      "source_sha256": "c37e9e92a3f0239d67a3b9200c9cfdb9e8bb08f6e276e83fe52af1d77c7bfba7",
+      "normalized_event_count": 30,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11322,
+          "quest_name": "净化",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "第45集约33:55仍直接显示清除内心杂念0/1；无最终交付/放弃证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11406,
+          "quest_name": "一切必须准备就绪",
+          "state": "active_first_directly_observed_episode45",
+          "priority": "high",
+          "note": "第45集开场已活动，约34:00仍追踪；精确接取可能跨第44→45集切点，未伪造接取时刻。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "high",
+          "note": "约19:35目标完成，但无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "high",
+          "note": "385秒仍追踪，390秒后消失；无完成文字/4000经验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "任务追踪栏不是完整任务日志；后半段追踪项变化不能用于清除11322、11406或更早遗留。",
+        "11395、11249、11237、11452属于掉落/物品或事件触发，未伪造NPC接取。",
+        "11237精确掉落秒点未隔离，只记录第一轮亚勒伯龙途中进入活动状态。",
+        "片尾4060-4134秒使用5秒层拆分五项连续最终交付。",
+        "第45集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 46,
+      "title": "嚎风峡湾76",
+      "bvid": "BV1KCkKBiEUh",
+      "duration_seconds": 3286,
+      "series_seconds_start": 154378,
+      "series_seconds_end": 157664,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-46-events.json",
+      "source_sha256": "ece9318a4b20ff661c6fa2dc04680835064cd8f727cd7f0bd941b44a1e505a49",
+      "normalized_event_count": 19,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "ready_to_turnin_not_completed",
+          "priority": "highest",
+          "faction": "Alliance",
+          "note": "第46集3280/3285秒停在观察者莉莎·月叶奖励选择窗口，尚无交付后完成证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "high",
+          "faction": "Alliance",
+          "note": "任务日志显示目标完成，但无最终交付/11349接取证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "note": "约24分钟接受；中段有钢羽巢穴相关对话，但无最终交付文字或19000经验。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "high",
+          "note": "第44集目标完成，但至第46集仍无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12511,
+          "quest_name": "丘陵援兵",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "任务日志中的（完成）只代表目标完成，不代表最终交付；11346《符文之书》因此未计完成。",
+        "11326《头狼》片尾50300只出现在奖励窗口，未计已获得经验。",
+        "11346/11355/11358/11359使用联盟维德瓦堡垒版本；11322后续使用观察者莉莎·月叶联盟分支。",
+        "11418《我们叫他钢羽》没有最终交付证据，不能因后续追踪栏不显示而清除。",
+        "第46集没有新的直接玩家等级证据。"
+      ]
+    },
+    {
+      "episode": 47,
+      "title": "灰熊丘陵 77",
+      "bvid": "BV1MGrQBhERs",
+      "duration_seconds": 4412,
+      "series_seconds_start": 157664,
+      "series_seconds_end": 162076,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-47-events.json",
+      "source_sha256": "fd66c43f3ab1888374fd6bfc355e53df700c9dc8f0b6efff2136646b170a5d5a",
+      "normalized_event_count": 38,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12029,
+          "quest_name": "净化天灾巨魔",
+          "state": "objective_complete_not_turnin",
+          "priority": "highest",
+          "note": "任务日志目标完成；片尾无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12483,
+          "quest_name": "蘑菇汤！",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "note": "片尾幽光雪菇仍0/5。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12042,
+          "quest_name": "古树精华宝石",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "high",
+          "faction": "Alliance",
+          "note": "第46集片尾奖励窗口已打开；第47集开场已剪辑到灰熊丘陵，无50300获得/完成文字。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds": 4305,
+          "time_display": "71:45 approx",
+          "level": 76,
+          "class": "圣骑士",
+          "race": "人类",
+          "evidence_type": "character_panel_direct",
+          "confidence": "high",
+          "note": "角色面板直接显示76级人类圣骑士；不是NPC/目标/物品等级。"
+        }
+      ],
+      "evidence_cautions": [
+        "最初coarse-01的17张截图无manifest，明确不计750帧正式证据。",
+        "12444《黑水伐木场的战斗》是联盟版本；12170为部落同名版本。",
+        "12255《沃德伦的领主》是联盟伐木工德拉克版本；12259为部落同名版本。",
+        "12029《净化天灾巨魔》日志（完成）只代表目标完成，不代表最终交付。",
+        "11326《头狼》跨第46→47集剪辑，不得因第47集不再追踪而自动闭环。",
+        "4305秒角色面板直接显示76级；合集标题77不作为等级证据。"
+      ]
+    },
+    {
+      "episode": 48,
+      "title": "灰熊丘陵 77.5",
+      "bvid": "BV1rnkHBqE8M",
+      "duration_seconds": 3839,
+      "series_seconds_start": 162076,
+      "series_seconds_end": 165915,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-48-events.json",
+      "source_sha256": "d6540024ab62e96aa2b85edc38defc78ee60b2ef1169f5321515f37afee6a913",
+      "normalized_event_count": 26,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12037,
+          "quest_name": "搜寻和营救",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11998,
+          "quest_name": "灵活的手段",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾冰风月光酒0/1。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12219,
+          "quest_name": "倒下的世界之树",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12220,
+          "quest_name": "黑暗的影响",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12328,
+          "quest_name": "卢娜的要求",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "note": "接受时幻境粉尘0/4。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12238,
+          "quest_name": "净化达克萨隆",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾新接，击杀目标0进度。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12113,
+          "quest_name": "等肉下锅",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾新接。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12114,
+          "quest_name": "心灵的创伤",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾新接。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "约10分钟聊天滚动区的OCR乱码沃演意府没有独立任务状态切换，不另造完成事件。",
+        "12414顺手牵马由NPC、目标、41900经验和Questie共同校准。",
+        "12068灰尘之声由片尾41900经验和接出12238净化达克萨隆共同校准。",
+        "12037搜寻和营救接受后从追踪栏消失不能视为完成或放弃。",
+        "本集无直接77级证据；标题77.5不作为等级证据。"
+      ]
+    },
+    {
+      "episode": 49,
+      "title": "灰熊丘陵 78",
+      "bvid": "BV1PFksBUE9j",
+      "duration_seconds": 3993,
+      "series_seconds_start": 165915,
+      "series_seconds_end": 169908,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-49-events.json",
+      "source_sha256": "9f40814a84bcd0764afe6ee24e7b14cd791853fd9d82a26bee712c5397f46343",
+      "normalized_event_count": 22,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12081,
+          "quest_name": "加弗洛克",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "note": "约65:40接受，片尾仍活动。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12128,
+          "quest_name": "找到莱加尔",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "最后几秒由坚如磐石？接出。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11993,
+          "quest_name": "符文中的预言",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "note": "约50分钟接受，片尾仍活动。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12279,
+          "quest_name": "熊的美食",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "note": "约03:00接受，本集无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12037,
+          "quest_name": "搜寻和营救",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12219,
+          "quest_name": "倒下的世界之树",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12220,
+          "quest_name": "黑暗的影响",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12328,
+          "quest_name": "卢娜的要求",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "note": "第48集接受时幻境粉尘0/4。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12238,
+          "quest_name": "净化达克萨隆",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds": 3285,
+          "time_display": "54:45",
+          "level": 78,
+          "evidence_type": "direct_system_level_up_text",
+          "confidence": "high",
+          "evidence": "系统聊天连续显示恭喜你升到了78级/你升到了78级，并显示生命值和法力值提升。"
+        }
+      ],
+      "evidence_cautions": [
+        "12113等肉下锅通过哈考尔营地、任务状态变化、31400经验与Questie×2一致性闭环；OCR未完整读出任务名+完成一句。",
+        "11981找到库伦只有4200经验，不能与11986破损的日记41900混记。",
+        "11988符文钥石与12003寻找隧道在约50分钟近同时交付，但各有独立41900与不同后续。",
+        "约54:45的升到78级是直接玩家系统消息。",
+        "本集无直接升到77级证据，不补造77级时间点。",
+        "12081加弗洛克片尾仍活动；12279熊的美食只确认接受。",
+        "追踪栏缺失不能替代完成或放弃证据。"
+      ]
+    },
+    {
+      "episode": 50,
+      "title": "灰熊丘陵 78.5",
+      "bvid": "BV1u6kMBjE11",
+      "duration_seconds": 4140,
+      "series_seconds_start": 169908,
+      "series_seconds_end": 174048,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-50-events.json",
+      "source_sha256": "af2c0afab41c214b993b2c18d9a929d6c29b878dfcc9d44948177bf2b7b0e0ba",
+      "normalized_event_count": 23,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12099,
+          "quest_name": "终获解救",
+          "state": "accepted_not_completed",
+          "priority": "highest",
+          "note": "片尾刚接，符文巨人0/4。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12248,
+          "quest_name": "沃达希尔的树苗",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "faction": "Alliance",
+          "note": "圣职者塞瑞恩支线，本集后段进入活动。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12250,
+          "quest_name": "沃达希尔的种子",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "faction": "Alliance",
+          "note": "圣职者塞瑞恩版本，本集后段持续活动。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12164,
+          "quest_name": "狼人的末日",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "note": "约17:50接受，本集无最终交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12247,
+          "quest_name": "乌索克的孩子",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "note": "本集前半首次直接观察到活动，后段仍出现。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12279,
+          "quest_name": "熊的美食",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "note": "第49集接受，本集仍有活动证据，无最终交付。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11993,
+          "quest_name": "符文中的预言",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12238,
+          "quest_name": "净化达克萨隆",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12037,
+          "quest_name": "搜寻和营救",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12220,
+          "quest_name": "黑暗的影响",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [],
+      "evidence_cautions": [
+        "12246可能的关联与12229同名；交付NPC圣职者塞瑞恩将其校准为12246。",
+        "12130抢夺零件与12183搜集制服在约32分钟连续交付，各有独立41900。",
+        "12131我们有能源与12184拍摄照片在约37分钟连续交付，各有独立41900。",
+        "约38:20的命运完成式OCR是任务详情奖励区域乱码，不是独立完成事件。",
+        "12153铁领主和他的保镖52400与12081加弗洛克4200是两笔独立交付。",
+        "12094潜在的能量片尾最终交付41900；12099终获解救仅接受，目标0/4。",
+        "本集没有直接79级证据；合集标题不能用于补造等级。",
+        "追踪栏缺失不能替代完成或放弃证据。"
+      ]
+    },
+    {
+      "episode": 51,
+      "title": "灰熊丘陵 79",
+      "bvid": "BV1uFkMByEaV",
+      "duration_seconds": 2339,
+      "series_seconds_start": 174048,
+      "series_seconds_end": 176387,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-51-events.json",
+      "source_sha256": "3025368cd22f2727066119dd5a992433136e54c8137aa34c6186893f0b822521",
+      "normalized_event_count": 10,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12164,
+          "quest_name": "狼人的末日",
+          "state": "objective_complete_not_turnin",
+          "priority": "highest",
+          "note": "本集任务日志直接显示（完成），但无最终交付证据。",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12247,
+          "quest_name": "乌索克的孩子",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12279,
+          "quest_name": "熊的美食",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11993,
+          "quest_name": "符文中的预言",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12238,
+          "quest_name": "净化达克萨隆",
+          "state": "accepted_not_completed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12037,
+          "quest_name": "搜寻和营救",
+          "state": "accepted_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12220,
+          "quest_name": "黑暗的影响",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11326,
+          "quest_name": "头狼",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11346,
+          "quest_name": "符文之书",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11418,
+          "quest_name": "我们叫他钢羽",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11190,
+          "quest_name": "非标准炮弹",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11448,
+          "quest_name": "探险者协会哨站",
+          "state": "turnin_unknown_across_cut",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11252,
+          "quest_name": "杀入乌特加德！",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 13205,
+          "quest_name": "削减军备",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "faction": "Alliance",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12253,
+          "quest_name": "拯救暮冬城的平民",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12459,
+          "quest_name": "创造与毁灭的力量",
+          "state": "older_active_unclosed",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12456,
+          "quest_name": "奥雷托斯的羽毛",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12447,
+          "quest_name": "黑曜石巨龙圣地",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12470,
+          "quest_name": "永恒之龙的秘密",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12794,
+          "quest_name": "魔法王国达拉然",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12464,
+          "quest_name": "我的老对手",
+          "state": "ready_to_turn_in_not_turnedin",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12167,
+          "quest_name": "消灭教徒",
+          "state": "turnin_unknown_across_cut",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11940,
+          "quest_name": "猎龙",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11884,
+          "quest_name": "尼达尔，犀牛之王……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11872,
+          "quest_name": "罪恶的蛤蜊主宰……",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12035,
+          "quest_name": "重新装配",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12086,
+          "quest_name": "卡库特之子",
+          "state": "older_unresolved",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10004,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9900,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9925,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9882,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9937,
+          "state": "older_unresolved_alliance_version",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9869,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 10810,
+          "state": "older_unresolved",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 9962,
+          "state": "previously_failed_retention_or_abandonment_uncertain",
+          "quest_name": null,
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 2150,
+          "time_display_approx": "35:50",
+          "level": 79,
+          "type": "direct_system_level_up",
+          "confidence": "high",
+          "evidence": "41500任务经验后系统聊天直接显示你升到了79级，并连续显示生命值、法力值和天赋点提升。",
+          "trigger_quest_id": 12444,
+          "trigger_quest_name": "黑水伐木场的战斗"
+        }
+      ],
+      "evidence_cautions": [
+        "12164狼人的末日只确认任务日志目标完成，未最终交付，不计任务经验。",
+        "12250沃达希尔的种子与12248沃达希尔的树苗在同一任务中心连续交付，各有独立41900。",
+        "12249乌索克，巨熊之神与12236同名；前置来自圣职者塞瑞恩支线，因此校准为12249。",
+        "12444黑水伐木场的战斗与12170同名；接取NPC斥候队长卡特尔对应12444。",
+        "12444的41500任务经验直接触发79级，是可靠直接等级证据。",
+        "追踪栏缺失不能替代完成或放弃证据。"
+      ]
+    },
+    {
+      "episode": 52,
+      "title": "祖达克79",
+      "bvid": "BV1pGkMBvEU1",
+      "duration_seconds": 4253,
+      "series_seconds_start": 176387,
+      "series_seconds_end": 180640,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-52-events.json",
+      "source_sha256": "df7bd8e832f9e1438095adbce10693126e764cb971f1f7636c5aa6391b73f8bb",
+      "normalized_event_count": 26,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12661,
+          "quest_name": "潜入沃尔塔鲁斯",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12919,
+          "quest_name": "风暴之王的复仇",
+          "state": "accepted_unclosed",
+          "priority": "highest",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12795,
+          "quest_name": "银色前沿",
+          "state": "objective_complete_not_turnin",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12664,
+          "quest_name": "黑暗的地平线",
+          "state": "active_first_observed_unclosed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12903,
+          "quest_name": "朋友的意义……",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12883,
+          "quest_name": "达库鲁的命令",
+          "state": "turnin_unknown_across_cut_chain_progressed",
+          "priority": "high",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12164,
+          "quest_name": "狼人的末日",
+          "state": "objective_complete_not_turnin",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12247,
+          "quest_name": "乌索克的孩子",
+          "state": "active_first_observed_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12279,
+          "quest_name": "熊的美食",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 11993,
+          "quest_name": "符文中的预言",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12238,
+          "quest_name": "净化达克萨隆",
+          "state": "accepted_not_completed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12037,
+          "quest_name": "搜寻和营救",
+          "state": "accepted_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12220,
+          "quest_name": "黑暗的影响",
+          "state": "active_first_observed_unclosed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 1585,
+          "time_display_approx": "26:25",
+          "level": 79,
+          "type": "direct_character_panel",
+          "confidence": "high",
+          "evidence": "角色面板直接显示79级人类圣骑士。"
+        }
+      ],
+      "evidence_cautions": [
+        "12903朋友的意义只出现奖励窗口，窗口后切镜，未见最终系统领取，因此不计42300。",
+        "12883达库鲁的命令只确认接受与后续链条跨剪辑推进，未补造交付时间或经验。",
+        "12795银色前沿日志显示完成只代表可交/目标完成，不是最终交付。",
+        "后半大量完成达库鲁大王的任务是12661潜入沃尔塔鲁斯的目标文字，不得重复计数。",
+        "本集没有80级直接证据，最新直接等级仍为79。"
+      ]
+    },
+    {
+      "episode": 53,
+      "title": "祖达克 80",
+      "bvid": "BV1N9kgBLE7W",
+      "duration_seconds": 4444,
+      "series_seconds_start": 180640,
+      "series_seconds_end": 185084,
+      "source_json": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-53-events.json",
+      "source_sha256": "e488c84b055520db50fafda731fb3eec3a9f7aa1a72cea696ca46739428da1da",
+      "normalized_event_count": 32,
+      "raw_events_present": true,
+      "synthetic_early_schema": false,
+      "ending_states": [
+        {
+          "quest_id": 12799,
+          "quest_name": "吸取灵魂",
+          "state": "active_at_video_end",
+          "priority": "direct_end_state",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12552,
+          "quest_name": "通灵师之死",
+          "state": "accepted_unclosed",
+          "priority": "direct_end_state",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12553,
+          "quest_name": "撒网者的喷丝头",
+          "state": "accepted_unclosed",
+          "priority": "direct_end_state",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12664,
+          "quest_name": "黑暗的地平线",
+          "state": "carryover_unclosed_no_new_evidence",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12903,
+          "quest_name": "朋友的意义……",
+          "state": "turnin_unknown_across_cut_after_reward_window",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        },
+        {
+          "quest_id": 12883,
+          "quest_name": "达库鲁的命令",
+          "state": "turnin_unknown_across_cut_chain_progressed",
+          "priority": "carryover",
+          "source_section": "ending_active_or_unclosed_quests"
+        }
+      ],
+      "level_evidence": [
+        {
+          "time_seconds_approx": 4395,
+          "time_display_approx": "73:15",
+          "level": 80,
+          "type": "direct_level_achievement",
+          "confidence": "high",
+          "trigger_quest_id": 12596,
+          "trigger_quest_name": "巡逻任务",
+          "evidence": "指挥官库恩斯处交付巡逻任务、获得42300后，系统/成就聊天直接显示[风吹岚烟]获得了成就[80级]；后续多个5秒帧重复可见。"
+        }
+      ],
+      "evidence_cautions": [
+        "12740银色北伐军的降落伞真正最终交付在约07:40；后续再次出现的完成文字属于聊天残留，不重复计数。",
+        "12504银色北伐军，撤退！与12508扫清巨魔是两笔独立42300。",
+        "12506西莱图斯祭坛的麻烦42300后紧接12507奇怪的魔精10600，同NPC但为两项任务。",
+        "12597止痛药和12599温暖的篝火按视频标题使用非巡逻员版本。",
+        "12606茧中人与12512一个也不能少在71:40附近连续交付，各42300；Questie目标和NPC不同。",
+        "12596巡逻任务42300直接触发80级成就；12514蘑菇混合剂发生在80级成就之后。",
+        "追踪栏缺失不能用于推断历史carryover任务完成或放弃。"
+      ]
+    }
+  ]
+}

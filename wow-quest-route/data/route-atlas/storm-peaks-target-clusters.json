@@ -1,0 +1,6577 @@
+{
+  "status": "foundation_complete_route_not_yet_frozen",
+  "zone": {
+    "id": 67,
+    "name": "风暴峭壁"
+  },
+  "cluster_type": "objective_and_extra_objective_targets",
+  "cluster_count": 151,
+  "shared_cluster_count": 21,
+  "clusters": [
+    {
+      "cluster_id": "npc:29380",
+      "entity_type": "npc",
+      "entity_id": 29380,
+      "name": "雷铸作战魔像",
+      "representative": {
+        "x": 29.05,
+        "y": 45.1,
+        "spawn_count": 23
+      },
+      "spawn_count": 23,
+      "quest_ids": [
+        12882,
+        12978,
+        12979
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29380,
+          "entity_name": "雷铸作战魔像",
+          "representative": {
+            "x": 29.05,
+            "y": 45.1,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12978,
+          "quest_name": "进攻尼达维里尔",
+          "objective_index": 3,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29380,
+          "entity_name": "雷铸作战魔像",
+          "representative": {
+            "x": 29.05,
+            "y": 45.1,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12979,
+          "quest_name": "黑暗的护甲板",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 4,
+          "item_id": 42204,
+          "item_name": "Dark Armor Sample",
+          "entity_type": "npc",
+          "entity_id": 29380,
+          "entity_name": "雷铸作战魔像",
+          "representative": {
+            "x": 29.05,
+            "y": 45.1,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29377",
+      "entity_type": "npc",
+      "entity_id": 29377,
+      "name": "雷铸袭击者",
+      "representative": {
+        "x": 27.62,
+        "y": 36.49,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        12882,
+        12931
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29377,
+          "entity_name": "雷铸袭击者",
+          "representative": {
+            "x": 27.62,
+            "y": 36.49,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12931,
+          "quest_name": "反击",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29377,
+          "entity_name": "雷铸袭击者",
+          "representative": {
+            "x": 27.62,
+            "y": 36.49,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29382",
+      "entity_type": "npc",
+      "entity_id": 29382,
+      "name": "雷铸掠夺者",
+      "representative": {
+        "x": 27.54,
+        "y": 37.31,
+        "spawn_count": 14
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12882,
+        12931
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29382,
+          "entity_name": "雷铸掠夺者",
+          "representative": {
+            "x": 27.54,
+            "y": 37.31,
+            "spawn_count": 14
+          },
+          "spawn_count": 14,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12931,
+          "quest_name": "反击",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29382,
+          "entity_name": "雷铸掠夺者",
+          "representative": {
+            "x": 27.54,
+            "y": 37.31,
+            "spawn_count": 14
+          },
+          "spawn_count": 14,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30184",
+      "entity_type": "npc",
+      "entity_id": 30184,
+      "name": "风暴之子",
+      "representative": {
+        "x": 65.12,
+        "y": 42.75,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        12882,
+        13049
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 30184,
+          "entity_name": "风暴之子",
+          "representative": {
+            "x": 65.12,
+            "y": 42.75,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13049,
+          "quest_name": "英雄的装备",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 42782,
+          "item_name": "Stormhoof's Spear",
+          "entity_type": "npc",
+          "entity_id": 30184,
+          "entity_name": "风暴之子",
+          "representative": {
+            "x": 65.12,
+            "y": 42.75,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13049,
+          "quest_name": "英雄的装备",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 42783,
+          "item_name": "Stormhoof's Mail",
+          "entity_type": "npc",
+          "entity_id": 30184,
+          "entity_name": "风暴之子",
+          "representative": {
+            "x": 65.12,
+            "y": 42.75,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29624",
+      "entity_type": "npc",
+      "entity_id": 29624,
+      "name": "风暴骑士",
+      "representative": {
+        "x": 27.91,
+        "y": 43.61,
+        "spawn_count": 26
+      },
+      "spawn_count": 26,
+      "quest_ids": [
+        12882,
+        12917
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29624,
+          "entity_name": "风暴骑士",
+          "representative": {
+            "x": 27.91,
+            "y": 43.61,
+            "spawn_count": 26
+          },
+          "spawn_count": 26,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12917,
+          "quest_name": "寒风的声音",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 41514,
+          "item_name": "Voice of the Wind",
+          "entity_type": "npc",
+          "entity_id": 29624,
+          "entity_name": "风暴骑士",
+          "representative": {
+            "x": 27.91,
+            "y": 43.61,
+            "spawn_count": 26
+          },
+          "spawn_count": 26,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29376",
+      "entity_type": "npc",
+      "entity_id": 29376,
+      "name": "雷铸技师",
+      "representative": {
+        "x": 30.04,
+        "y": 45.54,
+        "spawn_count": 29
+      },
+      "spawn_count": 29,
+      "quest_ids": [
+        12882,
+        12991
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29376,
+          "entity_name": "雷铸技师",
+          "representative": {
+            "x": 30.04,
+            "y": 45.54,
+            "spawn_count": 29
+          },
+          "spawn_count": 29,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12991,
+          "quest_name": "正中要害",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29376,
+          "entity_name": "雷铸技师",
+          "representative": {
+            "x": 30.04,
+            "y": 45.54,
+            "spawn_count": 29
+          },
+          "spawn_count": 29,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29370",
+      "entity_type": "npc",
+      "entity_id": 29370,
+      "name": "雷铸勇士",
+      "representative": {
+        "x": 25.25,
+        "y": 47.2,
+        "spawn_count": 16
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12882,
+        12978
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29370,
+          "entity_name": "雷铸勇士",
+          "representative": {
+            "x": 25.25,
+            "y": 47.2,
+            "spawn_count": 16
+          },
+          "spawn_count": 16,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12978,
+          "quest_name": "进攻尼达维里尔",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29370,
+          "entity_name": "雷铸勇士",
+          "representative": {
+            "x": 25.25,
+            "y": 47.2,
+            "spawn_count": 16
+          },
+          "spawn_count": 16,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29374",
+      "entity_type": "npc",
+      "entity_id": 29374,
+      "name": "雷铸大法师",
+      "representative": {
+        "x": 25.62,
+        "y": 47.87,
+        "spawn_count": 9
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12882,
+        12978
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29374,
+          "entity_name": "雷铸大法师",
+          "representative": {
+            "x": 25.62,
+            "y": 47.87,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12978,
+          "quest_name": "进攻尼达维里尔",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29374,
+          "entity_name": "雷铸大法师",
+          "representative": {
+            "x": 25.62,
+            "y": 47.87,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29369",
+      "entity_type": "npc",
+      "entity_id": 29369,
+      "name": "雷铸工头",
+      "representative": {
+        "x": 26.41,
+        "y": 51.1,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12882,
+        12957
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29369,
+          "entity_name": "雷铸工头",
+          "representative": {
+            "x": 26.41,
+            "y": 51.1,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12957,
+          "quest_name": "雷铸铁矮人的奴隶",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29369,
+          "entity_name": "雷铸工头",
+          "representative": {
+            "x": 26.41,
+            "y": 51.1,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29504",
+      "entity_type": "npc",
+      "entity_id": 29504,
+      "name": "火热的亡魂",
+      "representative": {
+        "x": 70.48,
+        "y": 60.12,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        12882,
+        12922
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29504,
+          "entity_name": "火热的亡魂",
+          "representative": {
+            "x": 70.48,
+            "y": 60.12,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12922,
+          "quest_name": "精炼之火",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 41558,
+          "item_name": "Furious Spark",
+          "entity_type": "npc",
+          "entity_id": 29504,
+          "entity_name": "火热的亡魂",
+          "representative": {
+            "x": 70.48,
+            "y": 60.12,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29695",
+      "entity_type": "npc",
+      "entity_id": 29695,
+      "name": "追踪者图林",
+      "representative": {
+        "x": 48.56,
+        "y": 60.82,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882,
+        12910
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29695,
+          "entity_name": "追踪者图林",
+          "representative": {
+            "x": 48.56,
+            "y": 60.82,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12910,
+          "quest_name": "追踪罪犯",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29695,
+          "entity_name": "追踪者图林",
+          "representative": {
+            "x": 48.56,
+            "y": 60.82,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30340",
+      "entity_type": "npc",
+      "entity_id": 30340,
+      "name": "尤卡塔尔",
+      "representative": {
+        "x": 54.7,
+        "y": 60.84,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13011,
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13011,
+          "quest_name": "斩除尤卡塔尔",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30340,
+          "entity_name": "尤卡塔尔",
+          "representative": {
+            "x": 54.7,
+            "y": 60.84,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 30340,
+          "entity_name": "尤卡塔尔",
+          "representative": {
+            "x": 54.7,
+            "y": 60.84,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29375",
+      "entity_type": "npc",
+      "entity_id": 29375,
+      "name": "雷铸铁巨人",
+      "representative": {
+        "x": 70.38,
+        "y": 61.61,
+        "spawn_count": 8
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        12882,
+        12915
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29375,
+          "entity_name": "雷铸铁巨人",
+          "representative": {
+            "x": 70.38,
+            "y": 61.61,
+            "spawn_count": 8
+          },
+          "spawn_count": 8,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12915,
+          "quest_name": "弥补关系",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29375,
+          "entity_name": "雷铸铁巨人",
+          "representative": {
+            "x": 70.38,
+            "y": 61.61,
+            "spawn_count": 8
+          },
+          "spawn_count": 8,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30046",
+      "entity_type": "npc",
+      "entity_id": 30046,
+      "name": "风暴语者伊尔达",
+      "representative": {
+        "x": 23.98,
+        "y": 61.83,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        12882,
+        12968
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 30046,
+          "entity_name": "风暴语者伊尔达",
+          "representative": {
+            "x": 23.98,
+            "y": 61.83,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12968,
+          "quest_name": "伊尔达的愚行",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30046,
+          "entity_name": "风暴语者伊尔达",
+          "representative": {
+            "x": 23.98,
+            "y": 61.83,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30291",
+      "entity_type": "npc",
+      "entity_id": 30291,
+      "name": "饥饿的冰虫",
+      "representative": {
+        "x": 55.05,
+        "y": 62.25,
+        "spawn_count": 20
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        12989,
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 12989,
+          "quest_name": "黑暗的冰虫",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30291,
+          "entity_name": "饥饿的冰虫",
+          "representative": {
+            "x": 55.05,
+            "y": 62.25,
+            "spawn_count": 20
+          },
+          "spawn_count": 20,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 30291,
+          "entity_name": "饥饿的冰虫",
+          "representative": {
+            "x": 55.05,
+            "y": 62.25,
+            "spawn_count": 20
+          },
+          "spawn_count": 20,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29605",
+      "entity_type": "npc",
+      "entity_id": 29605,
+      "name": "饥饿的冰虫",
+      "representative": {
+        "x": 55.79,
+        "y": 63.31,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12989,
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 12989,
+          "quest_name": "黑暗的冰虫",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29605,
+          "entity_name": "饥饿的冰虫",
+          "representative": {
+            "x": 55.79,
+            "y": 63.31,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 29605,
+          "entity_name": "饥饿的冰虫",
+          "representative": {
+            "x": 55.79,
+            "y": 63.31,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30146",
+      "entity_type": "npc",
+      "entity_id": 30146,
+      "name": "筋疲力尽的维库人",
+      "representative": {
+        "x": 44.33,
+        "y": 68.19,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12882,
+        12906
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 30146,
+          "entity_name": "筋疲力尽的维库人",
+          "representative": {
+            "x": 44.33,
+            "y": 68.19,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12906,
+          "quest_name": "训诫",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30146,
+          "entity_name": "筋疲力尽的维库人",
+          "representative": {
+            "x": 44.33,
+            "y": 68.19,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30147",
+      "entity_type": "npc",
+      "entity_id": 30147,
+      "name": "加哈尔",
+      "representative": {
+        "x": 45.41,
+        "y": 69.1,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882,
+        12907
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 30147,
+          "entity_name": "加哈尔",
+          "representative": {
+            "x": 45.41,
+            "y": 69.1,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12907,
+          "quest_name": "杀一儆百",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30147,
+          "entity_name": "加哈尔",
+          "representative": {
+            "x": 45.41,
+            "y": 69.1,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29518",
+      "entity_type": "npc",
+      "entity_id": 29518,
+      "name": "监督者希尔拉",
+      "representative": {
+        "x": 45.19,
+        "y": 70.97,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12841,
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12841,
+          "quest_name": "女巫的交易",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 40690,
+          "item_name": "Runes of the Yrkvinn",
+          "entity_type": "npc",
+          "entity_id": 29518,
+          "entity_name": "监督者希尔拉",
+          "representative": {
+            "x": 45.19,
+            "y": 70.97,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29518,
+          "entity_name": "监督者希尔拉",
+          "representative": {
+            "x": 45.19,
+            "y": 70.97,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29461",
+      "entity_type": "npc",
+      "entity_id": 29461,
+      "name": "冰尖爬行者",
+      "representative": {
+        "x": 47.44,
+        "y": 71.17,
+        "spawn_count": 14
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12829,
+        12831
+      ],
+      "relations": [
+        {
+          "quest_id": 12829,
+          "quest_name": "进入矿洞",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29461,
+          "entity_name": "冰尖爬行者",
+          "representative": {
+            "x": 47.44,
+            "y": 71.17,
+            "spawn_count": 14
+          },
+          "spawn_count": 14,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12831,
+          "quest_name": "未被遗忘",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 40944,
+          "item_name": "Icetip Venom Sac",
+          "entity_type": "npc",
+          "entity_id": 29461,
+          "entity_name": "冰尖爬行者",
+          "representative": {
+            "x": 47.44,
+            "y": 71.17,
+            "spawn_count": 14
+          },
+          "spawn_count": 14,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:29407",
+      "entity_type": "npc",
+      "entity_id": 29407,
+      "name": "雪盲信徒",
+      "representative": {
+        "x": 45.68,
+        "y": 82.35,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        12821,
+        12822
+      ],
+      "relations": [
+        {
+          "quest_id": 12821,
+          "quest_name": "牢门探戈",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 40731,
+          "item_name": "Transporter Power Cell",
+          "entity_type": "npc",
+          "entity_id": 29407,
+          "entity_name": "雪盲信徒",
+          "representative": {
+            "x": 45.68,
+            "y": 82.35,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 12822,
+          "quest_name": "无所畏惧",
+          "objective_index": 3,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29407,
+          "entity_name": "雪盲信徒",
+          "representative": {
+            "x": 45.68,
+            "y": 82.35,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "object:191845",
+      "entity_type": "object",
+      "entity_id": 191845,
+      "name": "Enchanted Earth",
+      "representative": {
+        "x": 24.53,
+        "y": 33.69,
+        "spawn_count": 10
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12930
+      ],
+      "relations": [
+        {
+          "quest_id": 12930,
+          "quest_name": "稀有的土壤",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 7,
+          "item_id": 41614,
+          "item_name": "Enchanted Earth",
+          "entity_type": "object",
+          "entity_id": 191845,
+          "entity_name": "Enchanted Earth",
+          "representative": {
+            "x": 24.53,
+            "y": 33.69,
+            "spawn_count": 10
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191844",
+      "entity_type": "object",
+      "entity_id": 191844,
+      "name": "Enchanted Earth",
+      "representative": {
+        "x": 25.73,
+        "y": 34.52,
+        "spawn_count": 20
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        12930
+      ],
+      "relations": [
+        {
+          "quest_id": 12930,
+          "quest_name": "稀有的土壤",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 7,
+          "item_id": 41614,
+          "item_name": "Enchanted Earth",
+          "entity_type": "object",
+          "entity_id": 191844,
+          "entity_name": "Enchanted Earth",
+          "representative": {
+            "x": 25.73,
+            "y": 34.52,
+            "spawn_count": 20
+          },
+          "spawn_count": 20,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30035",
+      "entity_type": "npc",
+      "entity_id": 30035,
+      "name": "倒下的土灵防御者",
+      "representative": {
+        "x": 27.02,
+        "y": 37.82,
+        "spawn_count": 25
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        12937
+      ],
+      "relations": [
+        {
+          "quest_id": 12937,
+          "quest_name": "救死扶伤",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30035,
+          "entity_name": "倒下的土灵防御者",
+          "representative": {
+            "x": 27.02,
+            "y": 37.82,
+            "spawn_count": 25
+          },
+          "spawn_count": 25,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30353",
+      "entity_type": "npc",
+      "entity_id": 30353,
+      "name": "符文巨人杜洛恩",
+      "representative": {
+        "x": 44.94,
+        "y": 38.03,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13035
+      ],
+      "relations": [
+        {
+          "quest_id": 13035,
+          "quest_name": "洛肯的副官",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30353,
+          "entity_name": "符文巨人杜洛恩",
+          "representative": {
+            "x": 44.94,
+            "y": 38.03,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30395",
+      "entity_type": "npc",
+      "entity_id": 30395,
+      "name": "迅矛酋长",
+      "representative": {
+        "x": 61.18,
+        "y": 39.0,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13037
+      ],
+      "relations": [
+        {
+          "quest_id": 13037,
+          "quest_name": "雷蹄的记忆",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30395,
+          "entity_name": "迅矛酋长",
+          "representative": {
+            "x": 61.18,
+            "y": 39.0,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30190",
+      "entity_type": "npc",
+      "entity_id": 30190,
+      "name": "随从托克",
+      "representative": {
+        "x": 32.04,
+        "y": 40.72,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12980
+      ],
+      "relations": [
+        {
+          "quest_id": 12980,
+          "quest_name": "护甲板的秘密",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30190,
+          "entity_name": "随从托克",
+          "representative": {
+            "x": 32.04,
+            "y": 40.72,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29724",
+      "entity_type": "npc",
+      "entity_id": 29724,
+      "name": "图书馆守卫者",
+      "representative": {
+        "x": 38.59,
+        "y": 41.14,
+        "spawn_count": 40
+      },
+      "spawn_count": 40,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29724,
+          "entity_name": "图书馆守卫者",
+          "representative": {
+            "x": 38.59,
+            "y": 41.14,
+            "spawn_count": 40
+          },
+          "spawn_count": 40,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29746",
+      "entity_type": "npc",
+      "entity_id": 29746,
+      "name": "数据库",
+      "representative": {
+        "x": 39.52,
+        "y": 41.15,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        12927
+      ],
+      "relations": [
+        {
+          "quest_id": 12927,
+          "quest_name": "采集数据",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 7,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29746,
+          "entity_name": "数据库",
+          "representative": {
+            "x": 39.52,
+            "y": 41.15,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192541",
+      "entity_type": "object",
+      "entity_id": 192541,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 64.84,
+        "y": 41.33,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192541,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 64.84,
+            "y": 41.33,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192543",
+      "entity_type": "object",
+      "entity_id": 192543,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 65.59,
+        "y": 41.7,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192543,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 65.59,
+            "y": 41.7,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192544",
+      "entity_type": "object",
+      "entity_id": 192544,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 65.92,
+        "y": 41.75,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192544,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 65.92,
+            "y": 41.75,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192120",
+      "entity_type": "object",
+      "entity_id": 192120,
+      "name": "Loken's Fury",
+      "representative": {
+        "x": 24.01,
+        "y": 42.64,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12965
+      ],
+      "relations": [
+        {
+          "quest_id": 12965,
+          "quest_name": "洛肯的礼物",
+          "objective_index": 1,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192120,
+          "entity_name": "Loken's Fury",
+          "representative": {
+            "x": 24.01,
+            "y": 42.64,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192545",
+      "entity_type": "object",
+      "entity_id": 192545,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 64.93,
+        "y": 43.11,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192545,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 64.93,
+            "y": 43.11,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30341",
+      "entity_type": "npc",
+      "entity_id": 30341,
+      "name": "伊森法斯",
+      "representative": {
+        "x": 55.31,
+        "y": 43.32,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13035
+      ],
+      "relations": [
+        {
+          "quest_id": 13035,
+          "quest_name": "洛肯的副官",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30341,
+          "entity_name": "伊森法斯",
+          "representative": {
+            "x": 55.31,
+            "y": 43.32,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192546",
+      "entity_type": "object",
+      "entity_id": 192546,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 65.53,
+        "y": 43.4,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192546,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 65.53,
+            "y": 43.4,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192542",
+      "entity_type": "object",
+      "entity_id": 192542,
+      "name": "Taunka Artifact",
+      "representative": {
+        "x": 64.91,
+        "y": 43.41,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        13048
+      ],
+      "relations": [
+        {
+          "quest_id": 13048,
+          "quest_name": "错误的时间流",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192542,
+          "entity_name": "Taunka Artifact",
+          "representative": {
+            "x": 64.91,
+            "y": 43.41,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "extra_reference",
+          "extra_text": "Attune the Lorehammer"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29390",
+      "entity_type": "npc",
+      "entity_id": 29390,
+      "name": "雪流冰虫",
+      "representative": {
+        "x": 27.57,
+        "y": 43.44,
+        "spawn_count": 9
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 29390,
+          "entity_name": "雪流冰虫",
+          "representative": {
+            "x": 27.57,
+            "y": 43.44,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192171",
+      "entity_type": "object",
+      "entity_id": 192171,
+      "name": "Colossus Attack Specs",
+      "representative": {
+        "x": 28.88,
+        "y": 44.05,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12993
+      ],
+      "relations": [
+        {
+          "quest_id": 12993,
+          "quest_name": "巨像的威胁",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 42475,
+          "item_name": "Colossus Attack Specs",
+          "entity_type": "object",
+          "entity_id": 192171,
+          "entity_name": "Colossus Attack Specs",
+          "representative": {
+            "x": 28.88,
+            "y": 44.05,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29984",
+      "entity_type": "npc",
+      "entity_id": 29984,
+      "name": "铁哨兵",
+      "representative": {
+        "x": 51.2,
+        "y": 44.12,
+        "spawn_count": 30
+      },
+      "spawn_count": 30,
+      "quest_ids": [
+        13005
+      ],
+      "relations": [
+        {
+          "quest_id": 13005,
+          "quest_name": "土灵的誓言",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 7,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29984,
+          "entity_name": "铁哨兵",
+          "representative": {
+            "x": 51.2,
+            "y": 44.12,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13005,
+          "quest_name": "土灵的誓言",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29984,
+          "entity_name": "铁哨兵",
+          "representative": {
+            "x": 51.2,
+            "y": 44.12,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
+          "source_kind": "extra_reference",
+          "extra_text": "Use the Horn of the Peaks and call on the Earthen to defeat Iron Dwarves and Iron Sentinels"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30448",
+      "entity_type": "npc",
+      "entity_id": 30448,
+      "name": "平原猛犸象",
+      "representative": {
+        "x": 64.57,
+        "y": 45.01,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        13038
+      ],
+      "relations": [
+        {
+          "quest_id": 13038,
+          "quest_name": "时间的扰动",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30448,
+          "entity_name": "平原猛犸象",
+          "representative": {
+            "x": 64.57,
+            "y": 45.01,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30300",
+      "entity_type": "npc",
+      "entity_id": 30300,
+      "name": "钢铁巨像",
+      "representative": {
+        "x": 27.51,
+        "y": 45.32,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13007
+      ],
+      "relations": [
+        {
+          "quest_id": 13007,
+          "quest_name": "钢铁巨像",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30300,
+          "entity_name": "钢铁巨像",
+          "representative": {
+            "x": 27.51,
+            "y": 45.32,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29978",
+      "entity_type": "npc",
+      "entity_id": 29978,
+      "name": "铁矮人攻击者",
+      "representative": {
+        "x": 51.8,
+        "y": 45.36,
+        "spawn_count": 82
+      },
+      "spawn_count": 82,
+      "quest_ids": [
+        13005
+      ],
+      "relations": [
+        {
+          "quest_id": 13005,
+          "quest_name": "土灵的誓言",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29978,
+          "entity_name": "铁矮人攻击者",
+          "representative": {
+            "x": 51.8,
+            "y": 45.36,
+            "spawn_count": 82
+          },
+          "spawn_count": 82,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13005,
+          "quest_name": "土灵的誓言",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29978,
+          "entity_name": "铁矮人攻击者",
+          "representative": {
+            "x": 51.8,
+            "y": 45.36,
+            "spawn_count": 82
+          },
+          "spawn_count": 82,
+          "source_kind": "extra_reference",
+          "extra_text": "Use the Horn of the Peaks and call on the Earthen to defeat Iron Dwarves and Iron Sentinels"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30376",
+      "entity_type": "npc",
+      "entity_id": 30376,
+      "name": "风之哈勒弗尼尔",
+      "representative": {
+        "x": 48.72,
+        "y": 45.65,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13035
+      ],
+      "relations": [
+        {
+          "quest_id": 13035,
+          "quest_name": "洛肯的副官",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30376,
+          "entity_name": "风之哈勒弗尼尔",
+          "representative": {
+            "x": 48.72,
+            "y": 45.65,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192172",
+      "entity_type": "object",
+      "entity_id": 192172,
+      "name": "Colossus Defense Specs",
+      "representative": {
+        "x": 29.9,
+        "y": 45.81,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12993
+      ],
+      "relations": [
+        {
+          "quest_id": 12993,
+          "quest_name": "巨像的威胁",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 42476,
+          "item_name": "Colossus Defense Specs",
+          "entity_type": "object",
+          "entity_id": 192172,
+          "entity_name": "Colossus Defense Specs",
+          "representative": {
+            "x": 29.9,
+            "y": 45.81,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30209",
+      "entity_type": "npc",
+      "entity_id": 30209,
+      "name": "北部闪电熔炉",
+      "representative": {
+        "x": 28.99,
+        "y": 45.84,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12988
+      ],
+      "relations": [
+        {
+          "quest_id": 12988,
+          "quest_name": "摧毁熔炉！",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30209,
+          "entity_name": "北部闪电熔炉",
+          "representative": {
+            "x": 28.99,
+            "y": 45.84,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30211",
+      "entity_type": "npc",
+      "entity_id": 30211,
+      "name": "中部闪电熔炉",
+      "representative": {
+        "x": 29.54,
+        "y": 45.9,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12988
+      ],
+      "relations": [
+        {
+          "quest_id": 12988,
+          "quest_name": "摧毁熔炉！",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30211,
+          "entity_name": "中部闪电熔炉",
+          "representative": {
+            "x": 29.54,
+            "y": 45.9,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30212",
+      "entity_type": "npc",
+      "entity_id": 30212,
+      "name": "南部闪电熔炉",
+      "representative": {
+        "x": 30.25,
+        "y": 46.15,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12988
+      ],
+      "relations": [
+        {
+          "quest_id": 12988,
+          "quest_name": "摧毁熔炉！",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30212,
+          "entity_name": "南部闪电熔炉",
+          "representative": {
+            "x": 30.25,
+            "y": 46.15,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29775",
+      "entity_type": "npc",
+      "entity_id": 29775,
+      "name": "档案员麦卡顿",
+      "representative": {
+        "x": 37.53,
+        "y": 46.53,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12928
+      ],
+      "relations": [
+        {
+          "quest_id": 12928,
+          "quest_name": "诺甘农之壳",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 41258,
+          "item_name": "Norgannon's Shell",
+          "entity_type": "npc",
+          "entity_id": 29775,
+          "entity_name": "档案员麦卡顿",
+          "representative": {
+            "x": 37.53,
+            "y": 46.53,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30167",
+      "entity_type": "npc",
+      "entity_id": 30167,
+      "name": "基莫拉克",
+      "representative": {
+        "x": 48.98,
+        "y": 46.55,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13056
+      ],
+      "relations": [
+        {
+          "quest_id": 13056,
+          "quest_name": "有仇必报",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30167,
+          "entity_name": "基莫拉克",
+          "representative": {
+            "x": 48.98,
+            "y": 46.55,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13058:1:1",
+      "entity_type": "extra_anchor",
+      "entity_id": "13058:1:1",
+      "name": "Use the Lorehammer to travel back in time",
+      "representative": {
+        "x": 64.4,
+        "y": 46.7,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13058
+      ],
+      "relations": [
+        {
+          "quest_id": 13058,
+          "quest_name": "改变风向",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13058:1:1",
+          "entity_name": "Use the Lorehammer to travel back in time",
+          "representative": {
+            "x": 64.4,
+            "y": 46.7,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Use the Lorehammer to travel back in time"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30148",
+      "entity_type": "npc",
+      "entity_id": 30148,
+      "name": "被感染的冰虫",
+      "representative": {
+        "x": 48.52,
+        "y": 46.91,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 30148,
+          "entity_name": "被感染的冰虫",
+          "representative": {
+            "x": 48.52,
+            "y": 46.91,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30164",
+      "entity_type": "npc",
+      "entity_id": 30164,
+      "name": "洞穴座狼",
+      "representative": {
+        "x": 48.48,
+        "y": 46.92,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        13000
+      ],
+      "relations": [
+        {
+          "quest_id": 13000,
+          "quest_name": "紧急措施",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 42510,
+          "item_name": "Worg Fur",
+          "entity_type": "npc",
+          "entity_id": 30164,
+          "entity_name": "洞穴座狼",
+          "representative": {
+            "x": 48.48,
+            "y": 46.92,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192121",
+      "entity_type": "object",
+      "entity_id": 192121,
+      "name": "Loken's Power",
+      "representative": {
+        "x": 26.17,
+        "y": 47.72,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12965
+      ],
+      "relations": [
+        {
+          "quest_id": 12965,
+          "quest_name": "洛肯的礼物",
+          "objective_index": 2,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192121,
+          "entity_name": "Loken's Power",
+          "representative": {
+            "x": 26.17,
+            "y": 47.72,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192122",
+      "entity_type": "object",
+      "entity_id": 192122,
+      "name": "Loken's Favor",
+      "representative": {
+        "x": 24.55,
+        "y": 48.44,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12965
+      ],
+      "relations": [
+        {
+          "quest_id": 12965,
+          "quest_name": "洛肯的礼物",
+          "objective_index": 3,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192122,
+          "entity_name": "Loken's Favor",
+          "representative": {
+            "x": 24.55,
+            "y": 48.44,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192556",
+      "entity_type": "object",
+      "entity_id": 192556,
+      "name": "Cave Mushroom",
+      "representative": {
+        "x": 48.61,
+        "y": 48.66,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 42926,
+          "item_name": "Cave Mushroom",
+          "entity_type": "object",
+          "entity_id": 192556,
+          "entity_name": "Cave Mushroom",
+          "representative": {
+            "x": 48.61,
+            "y": 48.66,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192081",
+      "entity_type": "object",
+      "entity_id": 192081,
+      "name": "Horn Fragment",
+      "representative": {
+        "x": 72.15,
+        "y": 48.96,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12975
+      ],
+      "relations": [
+        {
+          "quest_id": 12975,
+          "quest_name": "回首往事",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42162,
+          "item_name": "Horn Fragment",
+          "entity_type": "object",
+          "entity_id": 192081,
+          "entity_name": "Horn Fragment",
+          "representative": {
+            "x": 72.15,
+            "y": 48.96,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192082",
+      "entity_type": "object",
+      "entity_id": 192082,
+      "name": "Horn Fragment",
+      "representative": {
+        "x": 71.79,
+        "y": 50.04,
+        "spawn_count": 16
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12975
+      ],
+      "relations": [
+        {
+          "quest_id": 12975,
+          "quest_name": "回首往事",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42162,
+          "item_name": "Horn Fragment",
+          "entity_type": "object",
+          "entity_id": 192082,
+          "entity_name": "Horn Fragment",
+          "representative": {
+            "x": 71.79,
+            "y": 50.04,
+            "spawn_count": 16
+          },
+          "spawn_count": 16,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192494",
+      "entity_type": "object",
+      "entity_id": 192494,
+      "name": "Second History Scroll",
+      "representative": {
+        "x": 66.84,
+        "y": 50.1,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13034
+      ],
+      "relations": [
+        {
+          "quest_id": 13034,
+          "quest_name": "见证者与英雄",
+          "objective_index": 2,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192494,
+          "entity_name": "Second History Scroll",
+          "representative": {
+            "x": 66.84,
+            "y": 50.1,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30135",
+      "entity_type": "npc",
+      "entity_id": 30135,
+      "name": "永不疲倦的霜脉战士",
+      "representative": {
+        "x": 72.37,
+        "y": 50.35,
+        "spawn_count": 9
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 30135,
+          "entity_name": "永不疲倦的霜脉战士",
+          "representative": {
+            "x": 72.37,
+            "y": 50.35,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192493",
+      "entity_type": "object",
+      "entity_id": 192493,
+      "name": "First History Scroll",
+      "representative": {
+        "x": 65.82,
+        "y": 50.42,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13034
+      ],
+      "relations": [
+        {
+          "quest_id": 13034,
+          "quest_name": "见证者与英雄",
+          "objective_index": 1,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192493,
+          "entity_name": "First History Scroll",
+          "representative": {
+            "x": 65.82,
+            "y": 50.42,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192495",
+      "entity_type": "object",
+      "entity_id": 192495,
+      "name": "Third History Scroll",
+      "representative": {
+        "x": 67.49,
+        "y": 50.58,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13034
+      ],
+      "relations": [
+        {
+          "quest_id": 13034,
+          "quest_name": "见证者与英雄",
+          "objective_index": 3,
+          "objective_type": "object",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192495,
+          "entity_name": "Third History Scroll",
+          "representative": {
+            "x": 67.49,
+            "y": 50.58,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192058",
+      "entity_type": "object",
+      "entity_id": 192058,
+      "name": "Ore Cart",
+      "representative": {
+        "x": 26.52,
+        "y": 50.84,
+        "spawn_count": 19
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12964
+      ],
+      "relations": [
+        {
+          "quest_id": 12964,
+          "quest_name": "黑暗的矿石",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 42109,
+          "item_name": "Dark Ore Sample",
+          "entity_type": "object",
+          "entity_id": 192058,
+          "entity_name": "Ore Cart",
+          "representative": {
+            "x": 26.52,
+            "y": 50.84,
+            "spawn_count": 19
+          },
+          "spawn_count": 19,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29857",
+      "entity_type": "npc",
+      "entity_id": 29857,
+      "name": "霜齿",
+      "representative": {
+        "x": 40.75,
+        "y": 51.22,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12910
+      ],
+      "relations": [
+        {
+          "quest_id": 12910,
+          "quest_name": "追踪罪犯",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29857,
+          "entity_name": "霜齿",
+          "representative": {
+            "x": 40.75,
+            "y": 51.22,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Mount Frostbite to track scent"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29384",
+      "entity_type": "npc",
+      "entity_id": 29384,
+      "name": "机械侏儒俘虏",
+      "representative": {
+        "x": 26.41,
+        "y": 51.46,
+        "spawn_count": 19
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12957
+      ],
+      "relations": [
+        {
+          "quest_id": 12957,
+          "quest_name": "雷铸铁矮人的奴隶",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29384,
+          "entity_name": "机械侏儒俘虏",
+          "representative": {
+            "x": 26.41,
+            "y": 51.46,
+            "spawn_count": 19
+          },
+          "spawn_count": 19,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193560",
+      "entity_type": "object",
+      "entity_id": 193560,
+      "name": "Prospector Soren's Maps",
+      "representative": {
+        "x": 59.25,
+        "y": 51.48,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13273
+      ],
+      "relations": [
+        {
+          "quest_id": 13273,
+          "quest_name": "追查诺甘农之核",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43983,
+          "item_name": "Prospector Soren's Maps",
+          "entity_type": "object",
+          "entity_id": 193560,
+          "entity_name": "Prospector Soren's Maps",
+          "representative": {
+            "x": 59.25,
+            "y": 51.48,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30177",
+      "entity_type": "npc",
+      "entity_id": 30177,
+      "name": "野蛮洞穴座狼",
+      "representative": {
+        "x": 48.38,
+        "y": 51.96,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        13000
+      ],
+      "relations": [
+        {
+          "quest_id": 13000,
+          "quest_name": "紧急措施",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 42510,
+          "item_name": "Worg Fur",
+          "entity_type": "npc",
+          "entity_id": 30177,
+          "entity_name": "野蛮洞穴座狼",
+          "representative": {
+            "x": 48.38,
+            "y": 51.96,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31693",
+      "entity_type": "npc",
+      "entity_id": 31693,
+      "name": "雷铸破坏者",
+      "representative": {
+        "x": 59.5,
+        "y": 52.05,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 31693,
+          "entity_name": "雷铸破坏者",
+          "representative": {
+            "x": 59.5,
+            "y": 52.05,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31798",
+      "entity_type": "npc",
+      "entity_id": 31798,
+      "name": "亚申",
+      "representative": {
+        "x": 56.38,
+        "y": 52.11,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13274
+      ],
+      "relations": [
+        {
+          "quest_id": 13274,
+          "quest_name": "诺甘农之核的守护者",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 44047,
+          "item_name": "Norgannon's Core",
+          "entity_type": "npc",
+          "entity_id": 31798,
+          "entity_name": "亚申",
+          "representative": {
+            "x": 56.38,
+            "y": 52.11,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29368",
+      "entity_type": "npc",
+      "entity_id": 29368,
+      "name": "风暴之子瓦杜兰",
+      "representative": {
+        "x": 24.28,
+        "y": 52.16,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12984
+      ],
+      "relations": [
+        {
+          "quest_id": 12984,
+          "quest_name": "风暴之子瓦杜兰",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29368,
+          "entity_name": "风暴之子瓦杜兰",
+          "representative": {
+            "x": 24.28,
+            "y": 52.16,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193561",
+      "entity_type": "object",
+      "entity_id": 193561,
+      "name": "Prospector Khrona's Notes",
+      "representative": {
+        "x": 59.78,
+        "y": 52.65,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13273
+      ],
+      "relations": [
+        {
+          "quest_id": 13273,
+          "quest_name": "追查诺甘农之核",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43984,
+          "item_name": "Prospector Khrona's Notes",
+          "entity_type": "object",
+          "entity_id": 193561,
+          "entity_name": "Prospector Khrona's Notes",
+          "representative": {
+            "x": 59.78,
+            "y": 52.65,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29694",
+      "entity_type": "npc",
+      "entity_id": 29694,
+      "name": "海德比武会龙骑士",
+      "representative": {
+        "x": 33.02,
+        "y": 56.28,
+        "spawn_count": 25
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        12886
+      ],
+      "relations": [
+        {
+          "quest_id": 12886,
+          "quest_name": "驭龙赛",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29694,
+          "entity_name": "海德比武会龙骑士",
+          "representative": {
+            "x": 33.02,
+            "y": 56.28,
+            "spawn_count": 25
+          },
+          "spawn_count": 25,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29625",
+      "entity_type": "npc",
+      "entity_id": 29625,
+      "name": "海德比武会始祖龙",
+      "representative": {
+        "x": 33.03,
+        "y": 56.36,
+        "spawn_count": 26
+      },
+      "spawn_count": 26,
+      "quest_ids": [
+        12886
+      ],
+      "relations": [
+        {
+          "quest_id": 12886,
+          "quest_name": "驭龙赛",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29625,
+          "entity_name": "海德比武会始祖龙",
+          "representative": {
+            "x": 33.03,
+            "y": 56.36,
+            "spawn_count": 26
+          },
+          "spawn_count": 26,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Hyldnir Harpoon to land on nearby Proto-Drakes"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29445",
+      "entity_type": "npc",
+      "entity_id": 29445,
+      "name": "托里姆",
+      "representative": {
+        "x": 33.42,
+        "y": 57.9,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13064
+      ],
+      "relations": [
+        {
+          "quest_id": 13064,
+          "quest_name": "骨肉相残",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29445,
+          "entity_name": "托里姆",
+          "representative": {
+            "x": 33.42,
+            "y": 57.9,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Listen to Thorim's history"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191840",
+      "entity_type": "object",
+      "entity_id": 191840,
+      "name": "Plagued Proto-Drake Egg",
+      "representative": {
+        "x": 23.06,
+        "y": 58.05,
+        "spawn_count": 72
+      },
+      "spawn_count": 72,
+      "quest_ids": [
+        12925
+      ],
+      "relations": [
+        {
+          "quest_id": 12925,
+          "quest_name": "维持传统",
+          "objective_index": 1,
+          "objective_type": "object",
+          "required_count": 30,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 191840,
+          "entity_name": "Plagued Proto-Drake Egg",
+          "representative": {
+            "x": 23.06,
+            "y": 58.05,
+            "spawn_count": 72
+          },
+          "spawn_count": 72,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29754",
+      "entity_type": "npc",
+      "entity_id": 29754,
+      "name": "装饰石柱",
+      "representative": {
+        "x": 33.38,
+        "y": 58.34,
+        "spawn_count": 8
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        12886
+      ],
+      "relations": [
+        {
+          "quest_id": 12886,
+          "quest_name": "驭龙赛",
+          "objective_index": 2,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29754,
+          "entity_name": "装饰石柱",
+          "representative": {
+            "x": 33.38,
+            "y": 58.34,
+            "spawn_count": 8
+          },
+          "spawn_count": 8,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Hyldnir Harpoon on Column Ornaments to dismount"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29639",
+      "entity_type": "npc",
+      "entity_id": 29639,
+      "name": "布伦希尔达囚犯",
+      "representative": {
+        "x": 64.8,
+        "y": 59.33,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12856
+      ],
+      "relations": [
+        {
+          "quest_id": 12856,
+          "quest_name": "冰冷的心",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29639,
+          "entity_name": "布伦希尔达囚犯",
+          "representative": {
+            "x": 64.8,
+            "y": 59.33,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:12856:1:1",
+      "entity_type": "extra_anchor",
+      "entity_id": "12856:1:1",
+      "name": "Fly freed Proto-Drakes to safety while carrying rescued Brunnhildar Prisoners",
+      "representative": {
+        "x": 62.0,
+        "y": 59.5,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12856
+      ],
+      "relations": [
+        {
+          "quest_id": 12856,
+          "quest_name": "冰冷的心",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "12856:1:1",
+          "entity_name": "Fly freed Proto-Drakes to safety while carrying rescued Brunnhildar Prisoners",
+          "representative": {
+            "x": 62.0,
+            "y": 59.5,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Fly freed Proto-Drakes to safety while carrying rescued Brunnhildar Prisoners"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30163",
+      "entity_type": "npc",
+      "entity_id": 30163,
+      "name": "死亡的铁巨人",
+      "representative": {
+        "x": 69.46,
+        "y": 59.52,
+        "spawn_count": 8
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        12985
+      ],
+      "relations": [
+        {
+          "quest_id": 12985,
+          "quest_name": "雷铸徽记",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30163,
+          "entity_name": "死亡的铁巨人",
+          "representative": {
+            "x": 69.46,
+            "y": 59.52,
+            "spawn_count": 8
+          },
+          "spawn_count": 8,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Diamond Tipped Pick on the corpses of Dead Iron Giants"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29914",
+      "entity_type": "npc",
+      "entity_id": 29914,
+      "name": "死亡的铁巨人",
+      "representative": {
+        "x": 69.25,
+        "y": 59.77,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12985
+      ],
+      "relations": [
+        {
+          "quest_id": 12985,
+          "quest_name": "雷铸徽记",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29914,
+          "entity_name": "死亡的铁巨人",
+          "representative": {
+            "x": 69.25,
+            "y": 59.77,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Diamond Tipped Pick on the corpses of Dead Iron Giants"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30066",
+      "entity_type": "npc",
+      "entity_id": 30066,
+      "name": "瓦基里安鱼叉炮",
+      "representative": {
+        "x": 26.55,
+        "y": 59.92,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12953
+      ],
+      "relations": [
+        {
+          "quest_id": 12953,
+          "quest_name": "燃烧吧，瓦基里安",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30066,
+          "entity_name": "瓦基里安鱼叉炮",
+          "representative": {
+            "x": 26.55,
+            "y": 59.92,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Harpoon Guns to burn Dry Haystacks"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30105",
+      "entity_type": "npc",
+      "entity_id": 30105,
+      "name": "约库姆国王",
+      "representative": {
+        "x": 65.44,
+        "y": 60.15,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13010
+      ],
+      "relations": [
+        {
+          "quest_id": 13010,
+          "quest_name": "科洛米尔，风暴之锤",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30105,
+          "entity_name": "约库姆国王",
+          "representative": {
+            "x": 65.44,
+            "y": 60.15,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29569",
+      "entity_type": "npc",
+      "entity_id": 29569,
+      "name": "瓦基里安候选者",
+      "representative": {
+        "x": 25.33,
+        "y": 60.34,
+        "spawn_count": 14
+      },
+      "spawn_count": 14,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29569,
+          "entity_name": "瓦基里安候选者",
+          "representative": {
+            "x": 25.33,
+            "y": 60.34,
+            "spawn_count": 14
+          },
+          "spawn_count": 14,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29389",
+      "entity_type": "npc",
+      "entity_id": 29389,
+      "name": "机械侏儒劳工",
+      "representative": {
+        "x": 32.45,
+        "y": 60.66,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29389,
+          "entity_name": "机械侏儒劳工",
+          "representative": {
+            "x": 32.45,
+            "y": 60.66,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192191",
+      "entity_type": "object",
+      "entity_id": 192191,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.6,
+        "y": 60.68,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192191,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.6,
+            "y": 60.68,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29570",
+      "entity_type": "npc",
+      "entity_id": 29570,
+      "name": "初生的瓦格里",
+      "representative": {
+        "x": 26.03,
+        "y": 60.7,
+        "spawn_count": 24
+      },
+      "spawn_count": 24,
+      "quest_ids": [
+        12942
+      ],
+      "relations": [
+        {
+          "quest_id": 12942,
+          "quest_name": "黑暗的羽翼",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 12,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29570,
+          "entity_name": "初生的瓦格里",
+          "representative": {
+            "x": 26.03,
+            "y": 60.7,
+            "spawn_count": 24
+          },
+          "spawn_count": 24,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13011:1:1",
+      "entity_type": "extra_anchor",
+      "entity_id": "13011:1:1",
+      "name": "Place Icemaw Bear Flank",
+      "representative": {
+        "x": 54.71,
+        "y": 60.79,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13011
+      ],
+      "relations": [
+        {
+          "quest_id": 13011,
+          "quest_name": "斩除尤卡塔尔",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13011:1:1",
+          "entity_name": "Place Icemaw Bear Flank",
+          "representative": {
+            "x": 54.71,
+            "y": 60.79,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Place Icemaw Bear Flank"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29358",
+      "entity_type": "npc",
+      "entity_id": 29358,
+      "name": "冰霜座狼",
+      "representative": {
+        "x": 61.48,
+        "y": 60.81,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12851
+      ],
+      "relations": [
+        {
+          "quest_id": 12851,
+          "quest_name": "熊熊大作战",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 7,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29358,
+          "entity_name": "冰霜座狼",
+          "representative": {
+            "x": 61.48,
+            "y": 60.81,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192192",
+      "entity_type": "object",
+      "entity_id": 192192,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.64,
+        "y": 60.82,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192192,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.64,
+            "y": 60.82,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192189",
+      "entity_type": "object",
+      "entity_id": 192189,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.77,
+        "y": 60.83,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192189,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.77,
+            "y": 60.83,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192188",
+      "entity_type": "object",
+      "entity_id": 192188,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.78,
+        "y": 60.84,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192188,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.78,
+            "y": 60.84,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192190",
+      "entity_type": "object",
+      "entity_id": 192190,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.86,
+        "y": 60.92,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192190,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.86,
+            "y": 60.92,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192181",
+      "entity_type": "object",
+      "entity_id": 192181,
+      "name": "The Heart of the Storm",
+      "representative": {
+        "x": 36.13,
+        "y": 60.93,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12998
+      ],
+      "relations": [
+        {
+          "quest_id": 12998,
+          "quest_name": "风暴之心",
+          "objective_index": 1,
+          "objective_type": "object",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 192181,
+          "entity_name": "The Heart of the Storm",
+          "representative": {
+            "x": 36.13,
+            "y": 60.93,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29563",
+      "entity_type": "npc",
+      "entity_id": 29563,
+      "name": "受伤的冰喉母熊",
+      "representative": {
+        "x": 54.49,
+        "y": 60.95,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12983
+      ],
+      "relations": [
+        {
+          "quest_id": 12983,
+          "quest_name": "最后的母熊",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29563,
+          "entity_name": "受伤的冰喉母熊",
+          "representative": {
+            "x": 54.49,
+            "y": 60.95,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192187",
+      "entity_type": "object",
+      "entity_id": 192187,
+      "name": "Everfrost Shard",
+      "representative": {
+        "x": 54.86,
+        "y": 60.98,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13001
+      ],
+      "relations": [
+        {
+          "quest_id": 13001,
+          "quest_name": "打造霍迪尔之矛",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 42541,
+          "item_name": "Everfrost Shard",
+          "entity_type": "object",
+          "entity_id": 192187,
+          "entity_name": "Everfrost Shard",
+          "representative": {
+            "x": 54.86,
+            "y": 60.98,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30096",
+      "entity_type": "npc",
+      "entity_id": 30096,
+      "name": "干草垛",
+      "representative": {
+        "x": 26.46,
+        "y": 61.28,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12953
+      ],
+      "relations": [
+        {
+          "quest_id": 12953,
+          "quest_name": "燃烧吧，瓦基里安",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30096,
+          "entity_name": "干草垛",
+          "representative": {
+            "x": 26.46,
+            "y": 61.28,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29351",
+      "entity_type": "npc",
+      "entity_id": 29351,
+      "name": "尼芬雷冰霜巨人",
+      "representative": {
+        "x": 58.8,
+        "y": 61.49,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        12851
+      ],
+      "relations": [
+        {
+          "quest_id": 12851,
+          "quest_name": "熊熊大作战",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 15,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29351,
+          "entity_name": "尼芬雷冰霜巨人",
+          "representative": {
+            "x": 58.8,
+            "y": 61.49,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29708",
+      "entity_type": "npc",
+      "entity_id": 29708,
+      "name": "被捕获的始祖幼龙",
+      "representative": {
+        "x": 64.37,
+        "y": 61.65,
+        "spawn_count": 7
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        12856
+      ],
+      "relations": [
+        {
+          "quest_id": 12856,
+          "quest_name": "冰冷的心",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 9,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29708,
+          "entity_name": "被捕获的始祖幼龙",
+          "representative": {
+            "x": 64.37,
+            "y": 61.65,
+            "spawn_count": 7
+          },
+          "spawn_count": 7,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30099",
+      "entity_type": "npc",
+      "entity_id": 30099,
+      "name": "亚米尔德",
+      "representative": {
+        "x": 75.38,
+        "y": 63.6,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12924
+      ],
+      "relations": [
+        {
+          "quest_id": 12924,
+          "quest_name": "重铸盟约",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30099,
+          "entity_name": "亚米尔德",
+          "representative": {
+            "x": 75.38,
+            "y": 63.6,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29503",
+      "entity_type": "npc",
+      "entity_id": 29503,
+      "name": "弗约恩",
+      "representative": {
+        "x": 76.15,
+        "y": 63.91,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12915
+      ],
+      "relations": [
+        {
+          "quest_id": 12915,
+          "quest_name": "弥补关系",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29503,
+          "entity_name": "弗约恩",
+          "representative": {
+            "x": 76.15,
+            "y": 63.91,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30123",
+      "entity_type": "npc",
+      "entity_id": 30123,
+      "name": "斯诺雷",
+      "representative": {
+        "x": 75.68,
+        "y": 63.95,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12967
+      ],
+      "relations": [
+        {
+          "quest_id": 12967,
+          "quest_name": "元素之战",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30123,
+          "entity_name": "斯诺雷",
+          "representative": {
+            "x": 75.68,
+            "y": 63.95,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Ride Snorri"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191708",
+      "entity_type": "object",
+      "entity_id": 191708,
+      "name": "Disturbed Snow",
+      "representative": {
+        "x": 36.06,
+        "y": 64.13,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12895
+      ],
+      "relations": [
+        {
+          "quest_id": 12895,
+          "quest_name": "失踪的布莱恩·铜须",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 40947,
+          "item_name": "Burlap-Wrapped Note",
+          "entity_type": "object",
+          "entity_id": 191708,
+          "entity_name": "Disturbed Snow",
+          "representative": {
+            "x": 36.06,
+            "y": 64.13,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29652",
+      "entity_type": "npc",
+      "entity_id": 29652,
+      "name": "雷铸追踪者",
+      "representative": {
+        "x": 36.8,
+        "y": 64.13,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29652,
+          "entity_name": "雷铸追踪者",
+          "representative": {
+            "x": 36.8,
+            "y": 64.13,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30422",
+      "entity_type": "npc",
+      "entity_id": 30422,
+      "name": "游荡的冰虫",
+      "representative": {
+        "x": 56.5,
+        "y": 64.49,
+        "spawn_count": 30
+      },
+      "spawn_count": 30,
+      "quest_ids": [
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 30422,
+          "entity_name": "游荡的冰虫",
+          "representative": {
+            "x": 56.5,
+            "y": 64.49,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29598",
+      "entity_type": "npc",
+      "entity_id": 29598,
+      "name": "冰牙",
+      "representative": {
+        "x": 53.13,
+        "y": 65.61,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12851
+      ],
+      "relations": [
+        {
+          "quest_id": 12851,
+          "quest_name": "熊熊大作战",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29598,
+          "entity_name": "冰牙",
+          "representative": {
+            "x": 53.13,
+            "y": 65.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Mount Icefang"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29592",
+      "entity_type": "npc",
+      "entity_id": 29592,
+      "name": "布莉亚娜",
+      "representative": {
+        "x": 53.14,
+        "y": 65.72,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29592,
+          "entity_name": "布莉亚娜",
+          "representative": {
+            "x": 53.14,
+            "y": 65.72,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29794",
+      "entity_type": "npc",
+      "entity_id": 29794,
+      "name": "希尔拉娜·冰啸",
+      "representative": {
+        "x": 24.1,
+        "y": 66.67,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29794,
+          "entity_name": "希尔拉娜·冰啸",
+          "representative": {
+            "x": 24.1,
+            "y": 66.67,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30012",
+      "entity_type": "npc",
+      "entity_id": 30012,
+      "name": "获胜的挑战者",
+      "representative": {
+        "x": 50.45,
+        "y": 66.86,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12971
+      ],
+      "relations": [
+        {
+          "quest_id": 12971,
+          "quest_name": "迎接挑战者",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30012,
+          "entity_name": "获胜的挑战者",
+          "representative": {
+            "x": 50.45,
+            "y": 66.86,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:192536",
+      "entity_type": "object",
+      "entity_id": 192536,
+      "name": "Small Proto-Drake Egg",
+      "representative": {
+        "x": 45.19,
+        "y": 67.21,
+        "spawn_count": 7
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        13050
+      ],
+      "relations": [
+        {
+          "quest_id": 13050,
+          "quest_name": "维拉努斯",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 42784,
+          "item_name": "Small Proto-Drake Egg",
+          "entity_type": "object",
+          "entity_id": 192536,
+          "entity_name": "Small Proto-Drake Egg",
+          "representative": {
+            "x": 45.19,
+            "y": 67.21,
+            "spawn_count": 7
+          },
+          "spawn_count": 7,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29352",
+      "entity_type": "npc",
+      "entity_id": 29352,
+      "name": "基加拉格",
+      "representative": {
+        "x": 50.74,
+        "y": 67.31,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12996
+      ],
+      "relations": [
+        {
+          "quest_id": 12996,
+          "quest_name": "热身赛",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29352,
+          "entity_name": "基加拉格",
+          "representative": {
+            "x": 50.74,
+            "y": 67.31,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29792",
+      "entity_type": "npc",
+      "entity_id": 29792,
+      "name": "霜羽尖啸者",
+      "representative": {
+        "x": 33.24,
+        "y": 67.85,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29792,
+          "entity_name": "霜羽尖啸者",
+          "representative": {
+            "x": 33.24,
+            "y": 67.85,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29843",
+      "entity_type": "npc",
+      "entity_id": 29843,
+      "name": "雷铸学者",
+      "representative": {
+        "x": 25.97,
+        "y": 68.06,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29843,
+          "entity_name": "雷铸学者",
+          "representative": {
+            "x": 25.97,
+            "y": 68.06,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29793",
+      "entity_type": "npc",
+      "entity_id": 29793,
+      "name": "霜羽女巫",
+      "representative": {
+        "x": 32.38,
+        "y": 68.06,
+        "spawn_count": 18
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29793,
+          "entity_name": "霜羽女巫",
+          "representative": {
+            "x": 32.38,
+            "y": 68.06,
+            "spawn_count": 18
+          },
+          "spawn_count": 18,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29586",
+      "entity_type": "npc",
+      "entity_id": 29586,
+      "name": "雷铸抢劫者",
+      "representative": {
+        "x": 26.15,
+        "y": 68.15,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29586,
+          "entity_name": "雷铸抢劫者",
+          "representative": {
+            "x": 26.15,
+            "y": 68.15,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30174",
+      "entity_type": "npc",
+      "entity_id": 30174,
+      "name": "海德比武会战熊",
+      "representative": {
+        "x": 49.19,
+        "y": 68.6,
+        "spawn_count": 13
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        12997
+      ],
+      "relations": [
+        {
+          "quest_id": 12997,
+          "quest_name": "进入利齿之坑",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30174,
+          "entity_name": "海德比武会战熊",
+          "representative": {
+            "x": 49.19,
+            "y": 68.6,
+            "spawn_count": 13
+          },
+          "spawn_count": 13,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29885",
+      "entity_type": "npc",
+      "entity_id": 29885,
+      "name": "残酷的米尔德蕾",
+      "representative": {
+        "x": 44.39,
+        "y": 68.93,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29885,
+          "entity_name": "残酷的米尔德蕾",
+          "representative": {
+            "x": 44.39,
+            "y": 68.93,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29426",
+      "entity_type": "npc",
+      "entity_id": 29426,
+      "name": "海德尼尔监督者",
+      "representative": {
+        "x": 45.53,
+        "y": 69.02,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29426,
+          "entity_name": "海德尼尔监督者",
+          "representative": {
+            "x": 45.53,
+            "y": 69.02,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29975",
+      "entity_type": "npc",
+      "entity_id": 29975,
+      "name": "女巫洛莉拉",
+      "representative": {
+        "x": 47.47,
+        "y": 69.08,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12970
+      ],
+      "relations": [
+        {
+          "quest_id": 12970,
+          "quest_name": "海德比武会",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29975,
+          "entity_name": "女巫洛莉拉",
+          "representative": {
+            "x": 47.47,
+            "y": 69.08,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Listen to Lok'lira's proposal"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29427",
+      "entity_type": "npc",
+      "entity_id": 29427,
+      "name": "被俘虏的维库人",
+      "representative": {
+        "x": 44.16,
+        "y": 69.17,
+        "spawn_count": 21
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29427,
+          "entity_name": "被俘虏的维库人",
+          "representative": {
+            "x": 44.16,
+            "y": 69.17,
+            "spawn_count": 21
+          },
+          "spawn_count": 21,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30154",
+      "entity_type": "npc",
+      "entity_id": 30154,
+      "name": "安格妮塔·泰斯多达尔",
+      "representative": {
+        "x": 48.25,
+        "y": 69.77,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12969
+      ],
+      "relations": [
+        {
+          "quest_id": 12969,
+          "quest_name": "这是你的地精吗？",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30154,
+          "entity_name": "安格妮塔·泰斯多达尔",
+          "representative": {
+            "x": 48.25,
+            "y": 69.77,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29466",
+      "entity_type": "npc",
+      "entity_id": 29466,
+      "name": "地精囚犯",
+      "representative": {
+        "x": 41.21,
+        "y": 71.86,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12843
+      ],
+      "relations": [
+        {
+          "quest_id": 12843,
+          "quest_name": "她们把男人都抓走了！",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29466,
+          "entity_name": "地精囚犯",
+          "representative": {
+            "x": 41.21,
+            "y": 71.86,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29331",
+      "entity_type": "npc",
+      "entity_id": 29331,
+      "name": "希弗列尔达符文师",
+      "representative": {
+        "x": 40.75,
+        "y": 72.05,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29331,
+          "entity_name": "希弗列尔达符文师",
+          "representative": {
+            "x": 40.75,
+            "y": 72.05,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29323",
+      "entity_type": "npc",
+      "entity_id": 29323,
+      "name": "希弗列尔达风暴之女",
+      "representative": {
+        "x": 40.84,
+        "y": 72.43,
+        "spawn_count": 19
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12882
+      ],
+      "relations": [
+        {
+          "quest_id": 12882,
+          "quest_name": "远古的圣物",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42780,
+          "item_name": "Relic of Ulduar",
+          "entity_type": "npc",
+          "entity_id": 29323,
+          "entity_name": "希弗列尔达风暴之女",
+          "representative": {
+            "x": 40.84,
+            "y": 72.43,
+            "spawn_count": 19
+          },
+          "spawn_count": 19,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191568",
+      "entity_type": "object",
+      "entity_id": 191568,
+      "name": "K3 Equipment",
+      "representative": {
+        "x": 41.02,
+        "y": 72.48,
+        "spawn_count": 19
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12844
+      ],
+      "relations": [
+        {
+          "quest_id": 12844,
+          "quest_name": "夺回设备",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 40726,
+          "item_name": "K3 Equipment",
+          "entity_type": "object",
+          "entity_id": 191568,
+          "entity_name": "K3 Equipment",
+          "representative": {
+            "x": 41.02,
+            "y": 72.48,
+            "spawn_count": 19
+          },
+          "spawn_count": 19,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29875",
+      "entity_type": "npc",
+      "entity_id": 29875,
+      "name": "冰鬃雪人",
+      "representative": {
+        "x": 45.83,
+        "y": 74.15,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        12900
+      ],
+      "relations": [
+        {
+          "quest_id": 12900,
+          "quest_name": "制造挽具",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 41424,
+          "item_name": "Icemane Yeti Hide",
+          "entity_type": "npc",
+          "entity_id": 29875,
+          "entity_name": "冰鬃雪人",
+          "representative": {
+            "x": 45.83,
+            "y": 74.15,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29411",
+      "entity_type": "npc",
+      "entity_id": 29411,
+      "name": "水晶蛛网编织者",
+      "representative": {
+        "x": 40.2,
+        "y": 74.5,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12829
+      ],
+      "relations": [
+        {
+          "quest_id": 12829,
+          "quest_name": "进入矿洞",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 12,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29411,
+          "entity_name": "水晶蛛网编织者",
+          "representative": {
+            "x": 40.2,
+            "y": 74.5,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29412",
+      "entity_type": "npc",
+      "entity_id": 29412,
+      "name": "水晶蛛网喷毒者",
+      "representative": {
+        "x": 41.45,
+        "y": 74.78,
+        "spawn_count": 30
+      },
+      "spawn_count": 30,
+      "quest_ids": [
+        12829
+      ],
+      "relations": [
+        {
+          "quest_id": 12829,
+          "quest_name": "进入矿洞",
+          "objective_index": 3,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29412,
+          "entity_name": "水晶蛛网喷毒者",
+          "representative": {
+            "x": 41.45,
+            "y": 74.78,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29434",
+      "entity_type": "npc",
+      "entity_id": 29434,
+      "name": "受伤的地精矿工",
+      "representative": {
+        "x": 42.31,
+        "y": 74.89,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12832
+      ],
+      "relations": [
+        {
+          "quest_id": 12832,
+          "quest_name": "痛苦的离别",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29434,
+          "entity_name": "受伤的地精矿工",
+          "representative": {
+            "x": 42.31,
+            "y": 74.89,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Start the escort"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29413",
+      "entity_type": "npc",
+      "entity_id": 29413,
+      "name": "雪盲挖掘者",
+      "representative": {
+        "x": 43.3,
+        "y": 75.91,
+        "spawn_count": 34
+      },
+      "spawn_count": 34,
+      "quest_ids": [
+        12830
+      ],
+      "relations": [
+        {
+          "quest_id": 12830,
+          "quest_name": "收集矿石",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 40744,
+          "item_name": "Impure Saronite Ore",
+          "entity_type": "npc",
+          "entity_id": 29413,
+          "entity_name": "雪盲挖掘者",
+          "representative": {
+            "x": 43.3,
+            "y": 75.91,
+            "spawn_count": 34
+          },
+          "spawn_count": 34,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191842",
+      "entity_type": "object",
+      "entity_id": 191842,
+      "name": "Frostgut's Altar",
+      "representative": {
+        "x": 50.53,
+        "y": 77.79,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12823
+      ],
+      "relations": [
+        {
+          "quest_id": 12823,
+          "quest_name": "完美的计划",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 191842,
+          "entity_name": "Frostgut's Altar",
+          "representative": {
+            "x": 50.53,
+            "y": 77.79,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Place Hardpacked Explosive Bundle at Frostgut's Altar"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29999",
+      "entity_type": "npc",
+      "entity_id": 29999,
+      "name": "Cave Explosion Bunny",
+      "representative": {
+        "x": 50.42,
+        "y": 77.88,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        12823
+      ],
+      "relations": [
+        {
+          "quest_id": 12823,
+          "quest_name": "完美的计划",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29999,
+          "entity_name": "Cave Explosion Bunny",
+          "representative": {
+            "x": 50.42,
+            "y": 77.88,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29554",
+      "entity_type": "npc",
+      "entity_id": 29554,
+      "name": "雪盲信徒",
+      "representative": {
+        "x": 50.14,
+        "y": 78.87,
+        "spawn_count": 19
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12822
+      ],
+      "relations": [
+        {
+          "quest_id": 12822,
+          "quest_name": "无所畏惧",
+          "objective_index": 4,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29554,
+          "entity_name": "雪盲信徒",
+          "representative": {
+            "x": 50.14,
+            "y": 78.87,
+            "spawn_count": 19
+          },
+          "spawn_count": 19,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29553",
+      "entity_type": "npc",
+      "entity_id": 29553,
+      "name": "加姆观察者",
+      "representative": {
+        "x": 49.01,
+        "y": 79.49,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12822
+      ],
+      "relations": [
+        {
+          "quest_id": 12822,
+          "quest_name": "无所畏惧",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29553,
+          "entity_name": "加姆观察者",
+          "representative": {
+            "x": 49.01,
+            "y": 79.49,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191553",
+      "entity_type": "object",
+      "entity_id": 191553,
+      "name": "U.D.E.D. Dispenser",
+      "representative": {
+        "x": 41.63,
+        "y": 80.0,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12828
+      ],
+      "relations": [
+        {
+          "quest_id": 12828,
+          "quest_name": "突发奇想",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 191553,
+          "entity_name": "U.D.E.D. Dispenser",
+          "representative": {
+            "x": 41.63,
+            "y": 80.0,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Retrieve U.D.E.D."
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29618",
+      "entity_type": "npc",
+      "entity_id": 29618,
+      "name": "雪盲追随者",
+      "representative": {
+        "x": 44.76,
+        "y": 81.16,
+        "spawn_count": 74
+      },
+      "spawn_count": 74,
+      "quest_ids": [
+        12820
+      ],
+      "relations": [
+        {
+          "quest_id": 12820,
+          "quest_name": "亲密接触",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29618,
+          "entity_name": "雪盲追随者",
+          "representative": {
+            "x": 44.76,
+            "y": 81.16,
+            "spawn_count": 74
+          },
+          "spawn_count": 74,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29619",
+      "entity_type": "npc",
+      "entity_id": 29619,
+      "name": "加姆入侵者",
+      "representative": {
+        "x": 45.19,
+        "y": 81.34,
+        "spawn_count": 11
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        12820
+      ],
+      "relations": [
+        {
+          "quest_id": 12820,
+          "quest_name": "亲密接触",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 12,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29619,
+          "entity_name": "加姆入侵者",
+          "representative": {
+            "x": 45.19,
+            "y": 81.34,
+            "spawn_count": 11
+          },
+          "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191574",
+      "entity_type": "object",
+      "entity_id": 191574,
+      "name": "Teleportation Pad",
+      "representative": {
+        "x": 50.69,
+        "y": 81.9,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12821
+      ],
+      "relations": [
+        {
+          "quest_id": 12821,
+          "quest_name": "牢门探戈",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 191574,
+          "entity_name": "Teleportation Pad",
+          "representative": {
+            "x": 50.69,
+            "y": 81.9,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Activate the teleporter"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29622",
+      "entity_type": "npc",
+      "entity_id": 29622,
+      "name": "野蛮岭秘法师",
+      "representative": {
+        "x": 34.9,
+        "y": 82.78,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        12827
+      ],
+      "relations": [
+        {
+          "quest_id": 12827,
+          "quest_name": "收集粮食",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 16,
+          "item_id": 40645,
+          "item_name": "Dried Gnoll Rations",
+          "entity_type": "npc",
+          "entity_id": 29622,
+          "entity_name": "野蛮岭秘法师",
+          "representative": {
+            "x": 34.9,
+            "y": 82.78,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29402",
+      "entity_type": "npc",
+      "entity_id": 29402,
+      "name": "铁毛猛犸象",
+      "representative": {
+        "x": 37.62,
+        "y": 83.79,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        12828
+      ],
+      "relations": [
+        {
+          "quest_id": 12828,
+          "quest_name": "突发奇想",
+          "objective_index": 2,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 29402,
+          "entity_name": "铁毛猛犸象",
+          "representative": {
+            "x": 37.62,
+            "y": 83.79,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "extra_reference",
+          "extra_text": "Use U.D.E.D on Ironwool Mammoth"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29623",
+      "entity_type": "npc",
+      "entity_id": 29623,
+      "name": "野蛮岭暴徒",
+      "representative": {
+        "x": 35.11,
+        "y": 83.97,
+        "spawn_count": 20
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        12827
+      ],
+      "relations": [
+        {
+          "quest_id": 12827,
+          "quest_name": "收集粮食",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 16,
+          "item_id": 40645,
+          "item_name": "Dried Gnoll Rations",
+          "entity_type": "npc",
+          "entity_id": 29623,
+          "entity_name": "野蛮岭暴徒",
+          "representative": {
+            "x": 35.11,
+            "y": 83.97,
+            "spawn_count": 20
+          },
+          "spawn_count": 20,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191533",
+      "entity_type": "object",
+      "entity_id": 191533,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 38.8,
+        "y": 85.12,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191533,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 38.8,
+            "y": 85.12,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:29404",
+      "entity_type": "npc",
+      "entity_id": 29404,
+      "name": "野蛮岭拾荒者",
+      "representative": {
+        "x": 38.02,
+        "y": 85.4,
+        "spawn_count": 18
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        12827
+      ],
+      "relations": [
+        {
+          "quest_id": 12827,
+          "quest_name": "收集粮食",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 16,
+          "item_id": 40645,
+          "item_name": "Dried Gnoll Rations",
+          "entity_type": "npc",
+          "entity_id": 29404,
+          "entity_name": "野蛮岭拾荒者",
+          "representative": {
+            "x": 38.02,
+            "y": 85.4,
+            "spawn_count": 18
+          },
+          "spawn_count": 18,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30003",
+      "entity_type": "npc",
+      "entity_id": 30003,
+      "name": "瘤皮",
+      "representative": {
+        "x": 30.33,
+        "y": 85.66,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12836
+      ],
+      "relations": [
+        {
+          "quest_id": 12836,
+          "quest_name": "感激之情",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30003,
+          "entity_name": "瘤皮",
+          "representative": {
+            "x": 30.33,
+            "y": 85.66,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191531",
+      "entity_type": "object",
+      "entity_id": 191531,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 38.71,
+        "y": 85.81,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191531,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 38.71,
+            "y": 85.81,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191530",
+      "entity_type": "object",
+      "entity_id": 191530,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 39.19,
+        "y": 85.89,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191530,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 39.19,
+            "y": 85.89,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191534",
+      "entity_type": "object",
+      "entity_id": 191534,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 39.48,
+        "y": 86.79,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191534,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 39.48,
+            "y": 86.79,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191532",
+      "entity_type": "object",
+      "entity_id": 191532,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 39.17,
+        "y": 86.98,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191532,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 39.17,
+            "y": 86.98,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191537",
+      "entity_type": "object",
+      "entity_id": 191537,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 39.45,
+        "y": 87.01,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191537,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 39.45,
+            "y": 87.01,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191535",
+      "entity_type": "object",
+      "entity_id": 191535,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 38.94,
+        "y": 87.28,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191535,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 38.94,
+            "y": 87.28,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191519",
+      "entity_type": "object",
+      "entity_id": 191519,
+      "name": "Sparksocket's Tools",
+      "representative": {
+        "x": 35.09,
+        "y": 87.79,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12819
+      ],
+      "relations": [
+        {
+          "quest_id": 12819,
+          "quest_name": "雷区里的工具",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 40642,
+          "item_name": "Sparksocket's Tools",
+          "entity_type": "object",
+          "entity_id": 191519,
+          "entity_name": "Sparksocket's Tools",
+          "representative": {
+            "x": 35.09,
+            "y": 87.79,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:191536",
+      "entity_type": "object",
+      "entity_id": 191536,
+      "name": "Charred Wreckage",
+      "representative": {
+        "x": 38.42,
+        "y": 88.5,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12818
+      ],
+      "relations": [
+        {
+          "quest_id": 12818,
+          "quest_name": "清理残骸",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 40603,
+          "item_name": "Charred Wreckage",
+          "entity_type": "object",
+          "entity_id": 191536,
+          "entity_name": "Charred Wreckage",
+          "representative": {
+            "x": 38.42,
+            "y": 88.5,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    }
+  ]
+}

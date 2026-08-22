@@ -133,13 +133,27 @@
       ]
     },
     "9752": {
-      "effective_type": "escort_scripted",
-      "classification_source": "manual_verified_mechanic",
-      "route_policy": "pending_manual_time_model",
-      "time_policy": "escort_path_plus_scripted_ambushes_pending",
+      "effective_type": "escort_scripted_group_shared",
+      "classification_source": "user_confirmed_fivebox_plus_video_timing",
+      "route_policy": "include_when_umbrafen_to_cenarion_return_is_already_required",
+      "time_policy": "single_fivebox_escort_incremental_vs_required_return",
+      "objective_time_override": {
+        "formula": "video_escort_elapsed - modeled_direct_return",
+        "inputs": {
+          "video_escort_elapsed_seconds_approx": 230.0,
+          "direct_return_distance_yards": 827.2,
+          "ground_mount_speed_yards_per_second": 16.8,
+          "ground_path_factor": 1.2,
+          "fivebox_runs_required": 1
+        },
+        "result": 170.9,
+        "unit": "seconds_incremental",
+        "quality": "user_confirmed_shared_completion + direct_video_script_timing + modeled_return"
+      },
       "notes": [
-        "凯拉·长鬃从暗泽村按固定护送路径前往塞纳里奥庇护所；不能把接取点到交付NPC的玩家直线骑乘时间当成任务耗时。",
-        "公开任务脚本资料显示路径至少包含26个waypoint，初始约3秒动作延迟，两次约10秒脚本停顿/伏击，并在早期waypoint后切换为跑步；需要补完整waypoint路径长度和伏击击杀成本后再物化秒数。"
+        "2026-08-20用户确认：所有护送都可以五号一起跑，一次护送即可让已接任务的五个角色共同完成，不需要逐号重复护送。",
+        "视频第29集从开始护送到目标完成约3分50秒；暗泽村凯拉(83.38,85.54)到塞纳里奥(78.40,62.02)按赞加地图尺寸约827码，当前16.8 yd/s坐骑并计1.20道路系数约59秒，因此相对本来就要发生的回程新增墙钟中心值约171秒。",
+        "视频第30集最终交付直接显示20800经验。按约2.85分钟新增墙钟计算，这一任务的边际经验效率足够保留；保留理由是回程重叠后的边际效率成立，不是因为护送任务一律保留。"
       ]
     },
     "9765": {
