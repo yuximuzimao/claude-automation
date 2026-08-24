@@ -191,9 +191,9 @@ async function confirmDialog(erpId) {
   );
   if (r && r.error) throw new Error(r.error);
   // ERP 保存成功后的关闭时间会随页面负载波动，不能用固定 2 秒做一次性判断。
-  // 最多轮询 10 秒；「选择商品」关闭或「换对应商品」出现都表示确认已被接收。
+  // 最多轮询 30 秒；「选择商品」关闭或「换对应商品」出现都表示确认已被接收。
   let confirmState = null;
-  for (let attempt = 0; attempt < 20; attempt++) {
+  for (let attempt = 0; attempt < 60; attempt++) {
     await sleep(500);
     confirmState = await cdp.eval(erpId,
       `(function(){` +
@@ -207,7 +207,7 @@ async function confirmDialog(erpId) {
     if (confirmState && (confirmState.selectClosed || confirmState.rebindAppeared)) break;
   }
   if (!confirmState || (!confirmState.selectClosed && !confirmState.rebindAppeared)) {
-    throw new Error('点确定后弹窗 10 秒内未关闭');
+    throw new Error('点确定后弹窗 30 秒内未关闭');
   }
 
   // 检查是否出现「换对应商品」弹窗（已有同比例套件时触发）

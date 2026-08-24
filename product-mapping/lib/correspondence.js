@@ -10,9 +10,20 @@ const path = require('path');
 const cdp = require('./cdp');
 const { sleep } = require('./wait');
 const { navigateErp } = require('./navigate');
+const { recordKey } = require('./sku-identity');
 
 // 下载标记文件：downloadPlatformProducts 完成后写入，供 downloadProducts 防止重复下载
 const DOWNLOAD_MARKER_FILE = path.join(__dirname, '../data/.download-marker.json');
+
+function attachImageUrlsByLink(products, imgMap) {
+  for (const product of products) {
+    for (const sku of product.skus) {
+      const key = recordKey(product.productCode, sku.platformCode);
+      if (imgMap[key]) sku.imgUrl = imgMap[key];
+    }
+  }
+  return products;
+}
 
 /**
  * 触发 ERP「下载平台商品」：选店铺 → 全量下载 → 确认 → 等待完成
@@ -281,24 +292,24 @@ async function _readCorrData(erpId, shopName) {
 
   // 翻页循环读取全部数据（对应表每页 20 条，共可能 70+ 条）
   const allData = [];
-  const imgMap = {}; // platformCode -> imgUrl，跨页累积
+  const imgMap = {}; // productCode::platformCode -> imgUrl，跨页累积
   let page = 1;
 
   while (true) {
     // ── 展开当前页所有行 ──────────────────────────────────────────────────────
     await cdp.eval(erpId,
-      'var icons=document.querySelectorAll(".el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
+      'var icons=document.querySelectorAll(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody > tr.el-table__row .el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
       'for(var i=0;i<icons.length;i++) icons[i].click();'
     );
     await sleep(2000);
 
     // 补展开（防漏）
     const expandedCount = await cdp.eval(erpId,
-      '(function(){return document.querySelectorAll(".el-table__expand-icon--expanded").length;})()'
+      '(function(){return document.querySelectorAll(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody > tr.el-table__row .el-table__expand-icon--expanded").length;})()'
     );
     const mainCount = await cdp.eval(erpId,
       '(function(){' +
-      '  var tb=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
+      '  var tb=document.querySelector(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody");' +
       '  if(!tb) return 0;' +
       '  var rows=tb.children;var n=0;' +
       '  for(var i=0;i<rows.length;i++){if(rows[i].classList.contains("el-table__row"))n++;}' +
@@ -307,7 +318,7 @@ async function _readCorrData(erpId, shopName) {
     );
     if (expandedCount < mainCount) {
       await cdp.eval(erpId,
-        'var icons=document.querySelectorAll(".el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
+        'var icons=document.querySelectorAll(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody > tr.el-table__row .el-table__expand-icon:not(.el-table__expand-icon--expanded)");' +
         'for(var i=0;i<icons.length;i++) icons[i].click();'
       );
       await sleep(1500);
@@ -317,7 +328,7 @@ async function _readCorrData(erpId, shopName) {
     // ── 读取当前页文字数据 ─────────────────────────────────────────────────────
     const pageResults = await cdp.eval(erpId,
       '(function(){' +
-      '  var mainTbody=document.querySelector(".el-table__body-wrapper .el-table__body>tbody");' +
+      '  var mainTbody=document.querySelector(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody");' +
       '  if(!mainTbody) return JSON.stringify([]);' +
       '  var children=mainTbody.children;' +
       '  var results=[];var lastCode="";' +
@@ -361,22 +372,28 @@ async function _readCorrData(erpId, shopName) {
     const collectImgs = async () => {
       const batch = await cdp.eval(erpId,
         '(function(){' +
-        '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+        '  var expCells=document.querySelectorAll(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody > tr > td.el-table__expanded-cell");' +
         '  var map={};' +
         '  for(var i=0;i<expCells.length;i++){' +
+        '    var expRow=expCells[i].closest("tr");' +
+        '    var mainRow=expRow?expRow.previousElementSibling:null;' +
+        '    var mainTds=mainRow?mainRow.querySelectorAll("td"):[];' +
+        '    var productCode=mainTds[6]?mainTds[6].innerText.trim():"";' +
+        '    if(!productCode)continue;' +
         '    var rows=expCells[i].querySelectorAll("tbody tr");' +
         '    for(var j=0;j<rows.length;j++){' +
         '      var tds=rows[j].querySelectorAll("td");' +
         '      if(tds.length<6) continue;' +
         '      var pCode=tds[5]?tds[5].innerText.trim():"";' +
         '      if(!pCode) continue;' +
+        '      var imageKey=productCode+"::"+pCode;' +
         '      var imgEl=tds[3]?tds[3].querySelector("img"):null;' +
-        '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){map[pCode]=imgEl.src;continue;}' +
+        '      if(imgEl&&imgEl.src&&imgEl.src.indexOf("http")===0){map[imageKey]=imgEl.src;continue;}' +
         '      var elImg=tds[3]?tds[3].querySelector(".el-image"):null;' +
         '      if(!elImg) continue;' +
         '      var vm=elImg.__vue__;var up=6;' +
         '      while(vm&&!vm.src&&up-->0)vm=vm.$parent;' +
-        '      if(vm&&vm.src&&vm.src.indexOf("http")===0)map[pCode]=vm.src;' +
+        '      if(vm&&vm.src&&vm.src.indexOf("http")===0)map[imageKey]=vm.src;' +
         '    }' +
         '  }' +
         '  return JSON.stringify(map);' +
@@ -406,7 +423,7 @@ async function _readCorrData(erpId, shopName) {
     for (let attempt = 0; attempt < 4; attempt++) {
       const missingOnPage = await cdp.eval(erpId,
         '(function(){' +
-        '  var expCells=document.querySelectorAll(".el-table__expanded-cell");' +
+        '  var expCells=document.querySelectorAll(".el-table.prod-correspondence-table > .el-table__body-wrapper > .el-table__body > tbody > tr > td.el-table__expanded-cell");' +
         '  var miss=[];' +
         '  for(var i=0;i<expCells.length;i++){' +
         '    var rows=expCells[i].querySelectorAll("tbody tr");' +
@@ -455,11 +472,7 @@ async function _readCorrData(erpId, shopName) {
   // ── 合并图片 URL 回数据 ────────────────────────────────────────────────────
   const totalSkus = allData.reduce((n, p) => n + p.skus.length, 0);
   console.error(`[corr] 全部读取: ${allData.length}条产品, ${totalSkus} SKU, 图片${Object.keys(imgMap).length}张`);
-  for (const product of allData) {
-    for (const sku of product.skus) {
-      if (imgMap[sku.platformCode]) sku.imgUrl = imgMap[sku.platformCode];
-    }
-  }
+  attachImageUrlsByLink(allData, imgMap);
 
   const missing = allData.flatMap(p => p.skus).filter(s => !s.imgUrl);
   if (missing.length > 0) {
@@ -498,4 +511,10 @@ async function readCorrespondence(erpId, shopName, productCode) {
   return all.find(r => r.productCode === productCode) || null;
 }
 
-module.exports = { readAllCorrespondence, readCorrWithoutDownload, readCorrespondence, downloadPlatformProducts };
+module.exports = {
+  readAllCorrespondence,
+  readCorrWithoutDownload,
+  readCorrespondence,
+  downloadPlatformProducts,
+  attachImageUrlsByLink,
+};

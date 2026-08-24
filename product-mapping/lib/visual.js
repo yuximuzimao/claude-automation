@@ -14,9 +14,14 @@ const VERDICTS_FILE = path.join(__dirname, '../data/visual-verdicts.json');
 const SKU_RECORDS_FILE = path.join(__dirname, '../data/sku-records.json');
 const { recordKey, imageFileName } = require('./sku-identity');
 
+function recognitionType(items) {
+  const totalQty = items.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  return totalQty === 1 ? '单品' : '组合装';
+}
+
 /**
  * 将 notes 文本（"商品A×N；商品B×M"）解析为 recognition 结构
- * 单品：items.length===1；组合装：items.length>1
+ * 单品：所有 items 数量合计为 1；组合装：数量合计大于 1
  */
 function parseNotesToRecognition(notes) {
   if (!notes || !notes.trim()) return null;
@@ -35,7 +40,7 @@ function parseNotesToRecognition(notes) {
   }
   if (!items.length) return null;
   return {
-    type: items.length === 1 ? '单品' : '组合装',
+    type: recognitionType(items),
     items,
     raw: notes,
   };
@@ -158,7 +163,7 @@ function recordRecognition(productCode, platformCode, items, verdict = 'ok', mat
   });
   const notes = normalizedItems.map(item => `${item.name}×${item.qty}`).join('；');
   const recognition = {
-    type: normalizedItems.length === 1 ? '单品' : '组合装',
+    type: recognitionType(normalizedItems),
     items: normalizedItems,
     raw: notes,
   };
@@ -252,4 +257,5 @@ module.exports = {
   selectVerdictRecords,
   listPending,
   mergeVerdicts,
+  recognitionType,
 };

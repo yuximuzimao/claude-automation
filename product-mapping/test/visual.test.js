@@ -4,6 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
   parseNotesToRecognition,
+  recognitionType,
   selectVerdictRecords,
 } = require('../lib/visual');
 
@@ -33,4 +34,9 @@ test('duplicate platform codes require productCode before writing a verdict', ()
     selectVerdictRecords(records, 'same', 'b'),
     [records['b::same']]
   );
+});
+
+test('one product with quantity greater than one is a suite', () => {
+  assert.equal(recognitionType([{ name: '果冻', qty: 1 }]), '单品');
+  assert.equal(recognitionType([{ name: '果冻', qty: 3 }]), '组合装');
 });
