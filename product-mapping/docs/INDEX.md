@@ -98,6 +98,7 @@
    - **比对铁律（禁止简化）**：
      - 单品（archiveType=0）：识图名称 AND 识图数量=1，两者同时满足才算 match；识图数量≠1 = mismatch（ERP未建套件档案）
      - 套件（archiveType=2）：识图 items 与 ERP subItems 的 {name, qty} 集合完全一致才算 match
+     - 组合档案标题是创建时活动文案，不参与正确性判断；即使标题保留旧活动名称，只要 subItems 名称和数量完全一致就算 match
      - 任何一侧缺数量信息 = mismatch，禁止仅比名称
      - recognition 为空但 ERP 有档案明细 = mismatch，禁止归入 pending；verify-table 出现「无识图数据」即流程未完成
      - 有 recognition 但 ERP 无可比档案明细 = mismatch；若 erpCode 是规格编码，必须先用「规格商家编码」回退查询档案

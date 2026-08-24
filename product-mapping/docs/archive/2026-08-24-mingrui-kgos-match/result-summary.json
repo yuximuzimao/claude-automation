@@ -1,0 +1,61 @@
+{
+  "archive": "2026-08-24 茗瑞 / KGOS 商品匹配",
+  "shop": "茗瑞",
+  "brand": "kgos",
+  "activity": {
+    "productCount": 21,
+    "skuLinkCount": 67,
+    "originallyMatchedSkuCount": 11,
+    "newlyMatchedSkuCount": 56,
+    "newSuiteCount": 45,
+    "newSingleCount": 11
+  },
+  "autoMatch": {
+    "loggedDoneCount": 55,
+    "recoveredSuccessfulCount": 1,
+    "finalFailedCount": 0,
+    "source": "data/auto-match-log.json",
+    "sourceSha256": "e27228ada7424baf6b42066ac7f149c1eb97c4e72ccd1646244cb14e1eae2313"
+  },
+  "postCheck": {
+    "checkTime": "2026-08-24T09:35:09.241Z",
+    "fullyMatchedProducts": 21,
+    "partiallyMatchedProducts": 0,
+    "fullyUnmatchedProducts": 0,
+    "matchedSkuCount": 67,
+    "recognitionDone": 67,
+    "comparisonMatch": 67,
+    "comparisonMismatch": 0,
+    "comparisonPending": 0,
+    "pendingVisualReview": 0,
+    "unmatchedAwaitingMatch": 0,
+    "source": "data/reports/check-茗瑞-2026-08-24.json",
+    "sourceSha256": "f5b405928dc34a40edec0e05881ed5db779d85f8f2a0f004d239daeb571b23a5"
+  },
+  "imageIdentity": {
+    "correspondenceProductCount": 75,
+    "correspondenceSkuCount": 205,
+    "collectedImageCount": 205,
+    "activeImageCount": 67,
+    "activeMissingImageCount": 0,
+    "repeatedPlatformCodes": [
+      {
+        "platformCode": "260827-27",
+        "productCodes": ["kgoszhrm", "kgoskfzh", "hcsp"]
+      },
+      {
+        "platformCode": "260827-28",
+        "productCodes": ["kgoszhrm", "kgoskfzh", "hcsp"]
+      },
+      {
+        "platformCode": "260827-29",
+        "productCodes": ["kgoszhrm", "kgoskfzh"]
+      }
+    ]
+  },
+  "artifacts": {
+    "skuRecordsSha256": "027f1d13802bde62f2de8ebb9b85eb3e1dca946c577ace36f0c3f66e7eb1ea4d",
+    "previewMatchSha256": "43eda29051541d05666b2ef3f654b14ab51b62628ccb95a81249376fbe866e27"
+  },
+  "implementationCommit": "6724fef875d04e8944ead4fbe9b923229c9933c8"
+}

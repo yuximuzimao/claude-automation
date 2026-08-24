@@ -4,6 +4,11 @@
 
 ## P0：下次实战前必须看
 
+- [ ] **长批次期间保持 ERP 锁有效**
+  - 当前 `lib/erp-lock.js` 的 5 分钟自动恢复窗口短于本轮 56 SKU 批量匹配时长。
+  - 下次可能跨越售后 8/12/16/20 点扫描的真实匹配前，先实现锁续租、服务端租约或等价保护，并验证异常退出仍能恢复。
+  - 在修复前，长批次必须避开定时扫描窗口；不得把一次“刚好未重叠”当成长期安全证明。
+
 - [ ] **确认本轮店铺/品牌作用域**
   - 开始前读 `docs/preflight-brand.md` 和 `docs/brand-onboarding.md`。
   - 当前运行态仍是 one-brand-per-run：`check` 会自动清空 `data/imgs/`、`data/reports/` 并全量重写 `data/sku-records.json`。
