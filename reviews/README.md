@@ -47,6 +47,7 @@
 ## 已有洞察
 
 - `insights/2026-06-14-ai-view-of-me.md`
+- `insights/2026-08-24-play-and-value.md`
 
 ## 写作约定
 
