@@ -19,10 +19,12 @@
     "exclude_no_xp": 6,
     "include_candidate": 101,
     "include_conditional_route_state": 6,
+    "include_verified_calendar_first_run": 1,
+    "include_verified_calendar_first_run_conditional": 3,
     "knowledge_profession": 2,
-    "knowledge_repeatable_or_calendar": 13
+    "knowledge_repeatable_or_calendar": 9
   },
-  "formal_task_count": 107,
+  "formal_task_count": 111,
   "formal_task_ids": [
     12818,
     12819,
@@ -89,6 +91,7 @@
     12978,
     12979,
     12980,
+    12981,
     12983,
     12984,
     12985,
@@ -97,12 +100,14 @@
     12989,
     12991,
     12993,
+    12994,
     12996,
     12997,
     12998,
     13000,
     13001,
     13005,
+    13006,
     13007,
     13009,
     13010,
@@ -111,6 +116,7 @@
     13035,
     13037,
     13038,
+    13046,
     13047,
     13048,
     13049,
@@ -134,7 +140,7 @@
   ],
   "dependency_hard_gap_count": 0,
   "dependency_hard_gaps": [],
-  "task_card_ready_count": 107,
+  "task_card_ready_count": 111,
   "unknown_service_tasks": [],
   "unresolved_objective_review_tasks": [],
   "tasks": [
@@ -4246,7 +4252,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -17241,7 +17247,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "杀雷铸铁巨人拾取熔渣覆盖的金属接《精炼之火》；再收10份狂怒火花，在弗约恩之砧铁砧完成。",
+      "route_mechanism_note": "杀雷铸铁巨人拾取熔渣覆盖的金属，右键物品接《精炼之火》；再杀火热的亡魂收10份狂怒火花，直接点击弗约恩之砧的铁砧本体完成，不找NPC。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -17258,8 +17264,8 @@
         "use_fjorns_anvil"
       ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
-      "fivebox_check": "熔渣覆盖的金属和狂怒火花是否需五号分别拾取。",
+      "fivebox_resolved": "不共享：同一具雷铸铁巨人尸体可五号分别拾取熔渣覆盖的金属；狂怒火花不共享，五号分别收集10份。",
+      "fivebox_check": "",
       "scope_status": "include_candidate",
       "scope_reasons": [
         "one_time_outdoor_horde_paladin_xp"
@@ -20683,7 +20689,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "《希望的火花》由弗约恩之砧铁砧本体提供：交完《精炼之火》后继续点击同一个铁砧接取，再回风暴神殿交托里姆。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -21893,7 +21899,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "骑亚米尔德旁的斯诺里，用载具技能击杀10个火热的亡魂。",
+      "route_mechanism_note": "不共享：五号分别骑亚米尔德旁的斯诺里，用载具技能完成《元素之战》。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -21903,9 +21909,12 @@
         "minutes": 2.5,
         "basis": "shared_kill_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "snorri_vehicle_kill_objective",
+        "not_shared_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "不共享：《元素之战》五号分别完成载具目标。",
       "fivebox_check": "",
       "scope_status": "include_candidate",
       "scope_reasons": [
@@ -23447,7 +23456,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：雷暴台地的号角碎片五号分别拾取，以最低号8/8为离开条件。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -23457,9 +23466,12 @@
         "minutes": 4.666666666666667,
         "basis": "fixed_object_fivebox_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "collect_eight_horn_fragments",
+        "personal_not_shared_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "不共享：《回首往事》号角碎片五号分别拾取。",
       "fivebox_check": "",
       "scope_status": "include_candidate",
       "scope_reasons": [
@@ -23925,7 +23937,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -24798,7 +24810,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：每号先杀怪取得6份任务道具，再分别使用6次并拾取后续目标物；与霜原湖当前任务顺路完成。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -24808,14 +24820,20 @@
         "minutes": 3.5,
         "basis": "fixed_object_fivebox_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "kill_for_six_quest_items_per_character",
+        "use_item_six_times_then_pickup_outputs",
+        "personal_not_shared_user_verified",
+        "route_overlap_frostfield_lake_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "不共享：《热与冷》每号分别取得6份任务道具、使用6次并拾取后续目标物。",
       "fivebox_check": "",
-      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_status": "include_verified_calendar_first_run",
       "scope_reasons": [
-        "not_one_time_baseline"
-      ]
+        "user_verified_same_route_content_first_run_only"
+      ],
+      "task_card_status": "ready_for_route"
     },
     {
       "quest_id": 12983,
@@ -25506,7 +25524,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "对死亡的铁巨人使用钻石尖镐；可能直接出眼睛或刷3个伏击者，收齐8只眼。",
+      "route_mechanism_note": "不共享：同一具死亡铁巨人只能挖一次；谁用钻石尖镐，直接出的雷铸之眼归谁。若刷出伏击者，其掉落也按普通怪个人掉落处理，收齐各号8只眼。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -25524,13 +25542,15 @@
       },
       "route_mechanism_codes": [
         "use_diamond_tipped_pick_on_dead_iron_giants",
-        "collect_8_stormforged_eyes",
+        "single_mine_per_dead_giant_user_verified",
+        "direct_eye_assigned_to_mining_character",
         "possible_three_ambusher_spawn",
-        "phased"
+        "ambusher_loot_personal",
+        "not_shared_user_verified"
       ],
       "objective_review_resolution": "wowhead_confirms_eight_eyes_from_pick_on_dead_giants",
-      "fivebox_resolved": "",
-      "fivebox_check": "同一死亡铁巨人能否五号分别挖取，以及眼睛如何分配。",
+      "fivebox_resolved": "不共享：同一死亡铁巨人只能挖一次；直接出的眼睛归挖取角色，伏击者掉落按普通怪个人掉落。",
+      "fivebox_check": "",
       "scope_status": "include_conditional_route_state",
       "scope_reasons": [
         "reputation_condition_needs_route_state"
@@ -26050,7 +26070,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "丹尼芬雷北侧约(64.2,59.2)矮冰柱顶端使用宣告石板。",
+      "route_mechanism_note": "不共享：丹尼芬雷北侧约(64.2,59.2)矮冰柱顶端使用宣告石板，五号分别操作。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -26062,10 +26082,13 @@
         "minutes": 1.5,
         "basis": "single_target_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "use_declaration_tablet_on_ice_pillar",
+        "personal_not_shared_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
-      "fivebox_check": "宣告石板是否一号使用即可五号同步。",
+      "fivebox_resolved": "不共享：宣告石板五号分别使用。",
+      "fivebox_check": "",
       "scope_status": "include_conditional_route_state",
       "scope_reasons": [
         "reputation_condition_needs_route_state"
@@ -27374,7 +27397,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：对座狼尸体使用灵体座狼之牙召唤灵体冰霜座狼，跟随找到并击杀雷铸间谍；每次击杀后回尸体重新召唤，共3次，主控完成即可同步五号。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -27386,14 +27409,18 @@
         "minutes": 0.75,
         "basis": "shared_kill_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "daily_spy_hunt_progress",
+        "shared_progress_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "共享：《猎杀间谍》进度五号同步。",
       "fivebox_check": "",
-      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_status": "include_verified_calendar_first_run_conditional",
       "scope_reasons": [
-        "not_one_time_baseline"
-      ]
+        "reputation_condition_needs_route_state"
+      ],
+      "task_card_status": "ready_for_route"
     },
     {
       "quest_id": 12996,
@@ -28638,7 +28665,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "冬眠洞穴取3块永冻碎片；上古寒冬山谷取3张坚韧猛犸象毛皮。",
+      "route_mechanism_note": "不共享：五号分别取3块永冻碎片和3张坚韧猛犸象毛皮；永冻碎片同一刷新位置可连续给多个角色拾取。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -28652,11 +28679,13 @@
       },
       "route_mechanism_codes": [
         "three_everfrost_shards",
-        "three_stoic_mammoth_hides"
+        "three_stoic_mammoth_hides",
+        "both_personal_not_shared_user_verified",
+        "same_shard_spawn_sequential_pickup_user_verified"
       ],
       "objective_review_resolution": "localized_text_defines_three_shards_plus_three_hides",
-      "fivebox_resolved": "",
-      "fivebox_check": "永冻碎片和猛犸象毛皮是否五号各收3+3。",
+      "fivebox_resolved": "不共享：永冻碎片和猛犸象毛皮五号分别收集；同一永冻碎片刷新位置可连续拾取。",
+      "fivebox_check": "",
       "scope_status": "include_conditional_route_state",
       "scope_reasons": [
         "reputation_condition_needs_route_state"
@@ -28874,7 +28903,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -29395,7 +29424,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：五号分别完成《粘滞清洁》；目标怪刷新很快，有人抢怪时原地等刷新即可，不必换点绕圈。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -29407,14 +29436,19 @@
         "minutes": 5.517893276880822,
         "basis": "fivebox_personal_drop_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "daily_viscous_oil_personal_loot",
+        "fast_respawn_user_verified",
+        "wait_in_place_if_contested"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "不共享：《粘滞清洁》五号分别拾取；目标怪刷新很快，可原地等刷新。",
       "fivebox_check": "",
-      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_status": "include_verified_calendar_first_run_conditional",
       "scope_reasons": [
-        "not_one_time_baseline"
-      ]
+        "reputation_condition_needs_route_state"
+      ],
+      "task_card_status": "ready_for_route"
     },
     {
       "quest_id": 13007,
@@ -30312,7 +30346,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "在刷新点放冰喉熊肉引出尤卡塔尔再击杀。",
+      "route_mechanism_note": "共享：只需准备1块冰喉熊肉，在刷新点放肉引出尤卡塔尔并击杀一次即可同步五号。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -30324,9 +30358,12 @@
         "minutes": 1.5,
         "basis": "single_target_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "one_bear_meat_lure_sufficient",
+        "yokumtar_shared_progress_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "共享：《斩除尤卡塔尔》只需准备1块冰喉熊肉并诱引击杀一次。",
       "fivebox_check": "",
       "scope_status": "include_conditional_route_state",
       "scope_reasons": [
@@ -31524,7 +31561,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：对游荡的冰虫使用安格里姆之牙，再把灵体冰虫打到虚弱让安格里姆吞食；共5只，主控完成一轮即可同步五号。不要把目标直接打死。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -31536,14 +31573,18 @@
         "minutes": 1.25,
         "basis": "shared_kill_model"
       },
-      "route_mechanism_codes": [],
+      "route_mechanism_codes": [
+        "daily_feed_angrim_progress",
+        "shared_progress_user_verified"
+      ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
+      "fivebox_resolved": "共享：《喂饱安格里姆》进度五号同步。",
       "fivebox_check": "",
-      "scope_status": "knowledge_repeatable_or_calendar",
+      "scope_status": "include_verified_calendar_first_run_conditional",
       "scope_reasons": [
-        "not_one_time_baseline"
-      ]
+        "reputation_condition_needs_route_state"
+      ],
+      "task_card_status": "ready_for_route"
     },
     {
       "quest_id": 13047,
@@ -32811,7 +32852,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "风暴神殿东南约(38.8,65.5)使用偷来的始祖龙卵引出维拉努斯。",
+      "route_mechanism_note": "不共享：风暴神殿东南约(38.8,65.5)使用偷来的始祖龙卵引出维拉努斯，五号分别触发完成。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -32823,11 +32864,12 @@
       },
       "route_mechanism_codes": [
         "use_stolen_proto_drake_eggs_at_lure_point_southeast_of_temple_of_storms",
-        "veranus_event_then_return_to_thorim"
+        "veranus_event_personal_not_shared_user_verified",
+        "return_to_thorim"
       ],
       "objective_review_resolution": null,
-      "fivebox_resolved": "",
-      "fivebox_check": "维拉努斯事件是否一号触发即可五号同步。",
+      "fivebox_resolved": "不共享：《维拉努斯》五号分别触发完成。",
+      "fivebox_check": "",
       "scope_status": "include_candidate",
       "scope_reasons": [
         "one_time_outdoor_horde_paladin_xp"
@@ -36222,7 +36264,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "沿自然路线留意永冻碎片；首次拾取触发《永冻之冰》，回卡尔德交。",
+      "route_mechanism_note": "永冻碎片不是固定常驻点，而是在丹尼芬雷及周边雪地区域的多个候选点随机地面刷新，外观很小；沿自然路线看到就拾取，首次拾取后右键接《永冻之冰》并回卡尔德交。没看到直接继续，不原地等、不专门绕圈刷。",
       "eligibility": {
         "status": "conditional",
         "reasons": [
@@ -36455,7 +36497,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -36680,7 +36722,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -36903,7 +36945,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -37128,7 +37170,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -37353,7 +37395,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {
@@ -38565,7 +38607,7 @@
       "fivebox_check": "",
       "scope_status": "knowledge_repeatable_or_calendar",
       "scope_reasons": [
-        "not_one_time_baseline"
+        "not_yet_verified_for_first_route_run"
       ]
     },
     {

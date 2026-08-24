@@ -379,6 +379,10 @@ def objective_names_for_group(
     known_names: set[str],
     tasks_by_id: dict[int, dict[str, Any]] | None = None,
 ) -> list[str]:
+    structural_names = group.get("timingTaskNames")
+    if isinstance(structural_names, list):
+        return [str(name) for name in structural_names if str(name) in known_names]
+
     names: list[str] = []
     for point in route["points"][group["start"] : group["end"] + 1]:
         action = str(point[3])
@@ -434,13 +438,20 @@ def hub_minutes(route: dict[str, Any], group: dict[str, Any]) -> float:
     total = 0.0
     for point in route["points"][group["start"] : group["end"] + 1]:
         action = str(point[3])
-        # Player text now requires every accept/turn-in to carry its own explicit verb
-        # (`交《A》接《B》`, `交《A》交《B》接《C》`). Formatting punctuation must not
-        # change the wall-clock estimate: one geometric stop pays the base stop cost once,
-        # while each explicit accept/turn-in operation pays only the per-quest handling cost.
-        operations = re.findall(r"(?:交|接)《[^》]+》", action)
-        if operations:
-            total += ACCEPT_TURNIN_BASE_MINUTES + ACCEPT_TURNIN_PER_QUEST_MINUTES * len(operations)
+        operation_count = 0
+        for clause in re.split(r"[\n；。]", action):
+            # Count every task title after the first explicit handoff verb in each arrow segment.
+            # This keeps `接《A》《B》` / `交《A》、《B》` equivalent to repeating the verb,
+            # while avoiding titles that occur earlier in execution prose such as
+            # `完成《A》 → 交《B》`.
+            for segment in clause.split("→"):
+                positions = [pos for token in ("交", "接") if (pos := segment.find(token)) >= 0]
+                if not positions:
+                    continue
+                handoff_text = segment[min(positions) :]
+                operation_count += len(re.findall(r"《([^》]+)》", handoff_text))
+        if operation_count:
+            total += ACCEPT_TURNIN_BASE_MINUTES + ACCEPT_TURNIN_PER_QUEST_MINUTES * operation_count
     return total
 
 
@@ -522,10 +533,14 @@ def estimate_route(
             service = 0.0
             uncertainty = 0.20
 
-        point_extra = sum(
-            ROUTE_POINT_EXTRA_MINUTES.get((route_key, str(point[2])), 0.0)
-            for point in route["points"][group["start"] : group["end"] + 1]
-        )
+        structural_extra = group.get("timingExtraMinutes")
+        if isinstance(structural_extra, (int, float)):
+            point_extra = float(structural_extra)
+        else:
+            point_extra = sum(
+                ROUTE_POINT_EXTRA_MINUTES.get((route_key, str(point[2])), 0.0)
+                for point in route["points"][group["start"] : group["end"] + 1]
+            )
         special = (0.5 if names else 0.0) + point_extra
         center = move + hub + service + special
 

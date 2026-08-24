@@ -4,6 +4,10 @@ import json
 from pathlib import Path
 from typing import Any
 
+from dragonblight_semantic_steps import apply_dragonblight_semantic_overrides
+from dragonblight_semantic_steps_16_31 import apply_dragonblight_semantic_overrides_16_31
+from dragonblight_semantic_steps_32_51 import apply_dragonblight_semantic_overrides_32_51
+
 ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "data/route-atlas/dragonblight-task-foundation.json"
 WORKBENCH = ROOT / "data/route-atlas/workbench-routes.json"
@@ -24,6 +28,7 @@ TASKS = {int(t["quest_id"]): t for t in FOUNDATION_DATA["tasks"]}
 INTENTIONAL_SKIP = {
     11979: "与11977互斥的反向面包屑；北风入图轴使用11977，互斥分支不能同时完成。",
     11996: "当前从零路线先到阿格玛、后到莫亚基；首组实测到莫亚基时该面包屑显示后续任务已完成或激活，无法接取，因此不应出现在执行稿。",
+    12033: "北风路线已删除前置11916《地狱咆哮的勇士》，因此《萨鲁法尔的信》在当前轴不可解锁；不得在龙骨执行稿中重新加入。",
 }
 # Repeatable quests remain outside the one-time world-task coverage pool. These are explicit
 # exceptions that the live route does exactly once per leveling group because field data shows
@@ -87,7 +92,6 @@ def g_entry() -> None:
 
 
 def g_agmar_open() -> None:
-    P(37.32, 46.79, "阿格玛之锤·信使托弗斯", f"接{n(12033)}\n阅读并销毁信件，完成{n(12033)}\n原地交{n(12033)}", "agmar", "同一NPC原地完成；不用再找《地狱咆哮的勇士》。", "ride", (12033,))
     P(38.17, 46.33, "阿格玛之锤·阿格玛大王", f"交{n(12008)}\n接{n(12034)}\n接{n(12488)}，长期带到怨毒镇", "agmar", "", "ride", (12008, 12034, 12488))
     P(38.10, 46.40, "阿格玛之锤·炉石/飞行点", "【五号分别】开启飞行点\n【五号分别】炉石绑定阿格玛之锤", "agmar", "", "ride")
     P(36.62, 46.58, "军士长祖托克", f"交{n(12034)}\n接{n(12036)}", "agmar", "《部落的力量》要等深渊回来后才解锁。", "ride", (12034, 12036))
@@ -388,6 +392,9 @@ if offset != len(points):
         f"Dragonblight reviewed player groups cover {offset} points but builder produced {len(points)}; review step boundaries before rebuilding"
     )
 step_groups = reviewed_step_groups
+apply_dragonblight_semantic_overrides(points, step_groups)
+apply_dragonblight_semantic_overrides_16_31(points, step_groups)
+apply_dragonblight_semantic_overrides_32_51(points, step_groups)
 
 # Coverage validation: current-axis, non-dungeon, primary world tasks should all be represented,
 # except the two documented intentional skips. 11930 is an inherited transition row and is covered.
@@ -405,12 +412,13 @@ unexpected = sorted(covered - expected - {11930, 11916} - set(ROUTE_EXTRA_ONCE))
 route = {
     "order": 4,
     "title": "龙骨荒野 · 北风出口衔接 73+ 尽量清图路线",
-    "sub": "从北风《横贯冰原》在龙骨边界交付后开始；按页面步骤完成龙骨当前可达世界任务；主轴下一图直接进入祖达克圣光据点，其它跨图任务继续保留。",
-    "badgeTitle": "页面标记说明",
-    "badge": "普通“有备注”只说明任务怎么做；黄色“五开待实测”表示这一步需要你现场确认共享/个人机制，打开该步骤后HUD会写清具体观察项。洞穴、建筑楼层和龙眠神殿多层任务优先看备注。",
+    "sub": "从北风《横贯冰原》在龙骨边界交付后开始；按页面步骤完成龙骨当前可达世界任务；跨图任务继续保留到对应后续地图自然交付。",
+    "badgeTitle": "",
+    "badge": "炉石：阿格玛之锤",
+    "uiStandard": "semantic-hud-v45",
     "image": "maps/65-dragonblight-hd.jpg",
     "legend": "",
-    "footer": "",
+    "footer": "天谴之门拾取萨鲁法尔战甲后，本图龙骨荒野清理段结束；仍在日志中的跨图任务继续保留。",
     "labels": [
         [13.3, 49.9, "西风避难营"],
         [38.2, 46.3, "阿格玛之锤"],

@@ -477,7 +477,7 @@ def g9_astrid_pit() -> None:
     P(49.8, 71.8, "布伦希尔达村", "brunnhildar", [
         [NPC("艾丝崔·约利塔尔"), AR(), TG("turn", 12900), AR(), TG("accept", 12983, 12989)],
     ], movement="ride")
-    P(55.9, 63.9, "冬眠洞穴入口", "hibernal", [], movement="fly")
+    P(55.9, 63.9, "冬眠洞穴入口", "hibernal", [[TXT("从这里进入洞穴")]], movement="fly")
     P(55.2, 61.9, "冬眠洞穴内", "hibernal", [DO(12983, 12989)], movement="ride")
     P(49.8, 71.8, "布伦希尔达村", "brunnhildar", [
         [NPC("艾丝崔·约利塔尔"), AR(), TG("turn", 12983, 12989), AR(), TG("accept", 12996)],
@@ -513,7 +513,7 @@ def g10_drakkensryd_thorim() -> None:
         [FP("格罗玛什坠毁点")],
         [HB("格罗玛什坠毁点")],
     ], movement="fly", extra_notes=[(12882, "雷铸敌人沿后续路线自然累计；发明家图书馆补齐10件。")])
-    P(46.7, 55.2, "基莫拉克之巢入口", "brann", [], movement="fly")
+    P(46.7, 55.2, "基莫拉克之巢入口", "brann", [[TXT("从这里进入洞穴")]], movement="fly")
     P(48.5, 54.3, "基莫拉克之巢内", "brann", [
         DO(13000),
         [NPC("猎户瓦尔兹"), BR(), TG("do", 13054)],
@@ -536,50 +536,65 @@ def g11_mending_fences() -> None:
         [TXT("拾取熔渣覆盖的金属"), AR(), TG("accept", 12922)],
         DO(12922),
         [LOC("弗约恩之砧铁砧"), AR(), TG("turn", 12922), AR(), TG("accept", 12956)],
-    ], movement="fly")
+    ], movement="fly", extra_notes=[(12922, "不共享：狂怒火花五号分别收集10份；同一具雷铸铁巨人尸体的熔渣覆盖的金属可五号分别拾取。")])
+    P(37.3, 49.6, "格罗玛什坠毁点", "gromarsh", [
+        [HR("格罗玛什坠毁点")],
+        [NPC("血卫士洛尔加"), AR(), TG("turn", 13000)],
+    ], movement="hearth")
     P(33.4, 57.9, "风暴神殿", "thorim", [
         [NPC("托里姆"), AR(), TG("turn", 12915, 12956), AR(), TG("accept", 12924)],
     ], movement="fly")
 
 
-REPUTATION_ASSUMED_AVAILABLE = [12985, 13001, 13011, 13420]
+REPUTATION_ASSUMED_AVAILABLE = [12981, 12985, 12994, 13001, 13006, 13011, 13046, 13420]
 
 
-# 12. Dun Niffelem: first close Reforging an Alliance, then lock the local one-time tasks into one fixed loop.
+# 12. Dun Niffelem: unlock the Hodir hub, fold the verified first-run dailies into the same local loops,
+# then hearth to Grom'arsh so the next Thorim/Veranus block starts from the western hub.
 def g12_dun_first() -> None:
-    P(63.2, 63.2, "丹尼芬雷", "dun_niffelem", [
-        [NPC("亚米尔德"), AR(), TG("turn", 12924), AR(), TG("accept", 13009, 12985)],
-    ], movement="fly")
     P(65.4, 60.2, "丹尼芬雷", "dun_niffelem", [
         [NPC("约库姆国王"), AR(), TG("accept", 12966, 12975, 13011)],
         [NPC("博学者兰德维尔"), AR(), TG("accept", 13001)],
         [FP("丹尼芬雷")],
-    ], movement="ride", show_anchor=False)
-    P(69.4, 59.6, "霜原湖", "dun_niffelem", [DO(12985)], movement="fly")
-    P(63.2, 63.2, "丹尼芬雷", "dun_niffelem", [
-        [NPC("亚米尔德"), AR(), TG("turn", 12985), AR(), TG("accept", 12987)],
-    ], movement="fly")
-    P(64.2, 59.2, "丹尼芬雷北侧冰柱", "dun_niffelem", [DO(12987)], movement="fly")
-    P(63.2, 63.2, "丹尼芬雷", "dun_niffelem", [
-        [NPC("亚米尔德"), AR(), TG("turn", 12987)],
-    ], movement="fly")
-    P(54.9, 61.0, "冬眠洞穴 / 上古寒冬山谷", "dun_niffelem", [DO(13001, 13011)], movement="fly")
-    P(65.0, 59.1, "丹尼芬雷", "dun_niffelem", [
-        [NPC("博学者兰德维尔"), AR(), TG("turn", 13001)],
-        [NPC("约库姆国王"), AR(), TG("turn", 13011)],
     ], movement="fly")
     P(75.4, 63.6, "弗约恩之砧", "hodir", [
         [NPC("亚米尔德"), AR(), TG("turn", 12966), AR(), TG("accept", 12967)],
         DO(12967),
         [NPC("亚米尔德"), AR(), TG("turn", 12967)],
     ], movement="fly")
+    P(63.2, 63.2, "丹尼芬雷", "dun_niffelem", [
+        [LOC("弗约恩之砧"), AR(), TG("accept", 12981)],
+        [NPC("亚米尔德"), AR(), TG("turn", 12924), AR(), TG("accept", 13009, 12985)],
+    ], movement="fly")
+    P(69.4, 59.6, "霜原湖", "dun_niffelem", [DO(12981, 12985)], movement="fly")
+    P(63.8, 59.6, "丹尼芬雷", "dun_niffelem", [
+        [LOC("弗约恩之砧"), AR(), TG("turn", 12981)],
+        [NPC("亚米尔德"), AR(), TG("turn", 12985), AR(), TG("accept", 12987)],
+        [LOC("霍迪尔的头盔"), AR(), TG("accept", 13006)],
+        [NPC("冰霜座狼母兽"), AR(), TG("accept", 12994)],
+    ], movement="fly")
+    P(64.2, 59.2, "丹尼芬雷北侧冰柱", "dun_niffelem", [DO(12987)], movement="fly")
+    P(65.0, 59.4, "丹尼芬雷", "dun_niffelem", [
+        [NPC("亚米尔德"), AR(), TG("turn", 12987)],
+        [LOC("安格里姆的冰冻躯体"), AR(), TG("accept", 13046)],
+    ], movement="fly")
+    P(54.9, 61.0, "冬眠洞穴 / 上古寒冬山谷", "dun_niffelem", [DO(13001, 13006, 13011)], movement="fly")
+    P(57.2, 64.0, "上古寒冬山谷", "dun_niffelem", [DO(12994, 13046)], movement="ride")
+    P(65.0, 59.1, "丹尼芬雷", "dun_niffelem", [
+        [NPC("博学者兰德维尔"), AR(), TG("turn", 13001)],
+        [NPC("约库姆国王"), AR(), TG("turn", 13011)],
+        [LOC("霍迪尔的头盔"), AR(), TG("turn", 13006)],
+        [NPC("冰霜座狼母兽"), AR(), TG("turn", 12994)],
+        [LOC("安格里姆的冰冻躯体"), AR(), TG("turn", 13046)],
+    ], movement="fly")
     P(72.0, 49.5, "雷暴台地", "dun_niffelem", [DO(12975)], movement="fly")
     P(65.4, 60.2, "丹尼芬雷", "dun_niffelem", [
         [NPC("约库姆国王"), AR(), TG("turn", 12975), AR(), TG("accept", 12976)],
         [NPC("亚米尔德"), AR(), TG("turn", 12976)],
-        [LOC("丹尼芬雷外围永冻碎片"), AR(), TG("accept", 13420)],
-        [NPC("卡尔德"), AR(), TG("turn", 13420)],
-    ], movement="fly")
+    ], movement="fly", extra_notes=[(13420, note_text(13420))], cover=(13420,))
+    P(37.3, 49.6, "格罗玛什坠毁点", "gromarsh", [
+        [HR("格罗玛什坠毁点")],
+    ], movement="hearth")
 
 
 # 13. Veranus chain.
@@ -635,7 +650,6 @@ def g16_gromarsh_brann_start() -> None:
     P(37.3, 49.6, "格罗玛什坠毁点", "gromarsh", [
         [HR("格罗玛什坠毁点")],
         [NPC("伯克塔·血怒"), AR(), TG("turn", 12895), AR(), TG("accept", 12909)],
-        [NPC("血卫士洛尔加"), AR(), TG("turn", 13000)],
     ], movement="hearth")
     P(40.8, 51.2, "格罗玛什东侧", "brann", [
         [NPC("凯尔莉丝"), AR(), TG("turn", 12909), AR(), TG("accept", 12910)],
@@ -798,11 +812,11 @@ GROUPS = [
     ("布莉亚娜：熊熊大作战 → 冰冷的心", "完成冰牙载具战和丹尼芬雷营救，再回布莉亚娜。", g8_brianna),
     ("艾丝崔 → 冬眠洞穴 → 利齿之坑", "从冬眠洞穴入口进洞完成母熊/冰虫，再做基加拉格和利齿之坑。", g9_astrid_pit),
     ("驭龙赛 → 托里姆 → 格罗玛什", "完成驭龙赛和托里姆对话；到格罗玛什接任务、开飞行点、绑炉石，再进基莫拉克之巢完成猎人链和《紧急措施》。", g10_drakkensryd_thorim),
-    ("弗约恩之砧：弥补关系 + 精炼之火", "完成《弥补关系》，拾取熔渣覆盖的金属接《精炼之火》，同地完成后回托里姆。", g11_mending_fences),
-    ("丹尼芬雷：重铸盟约 → 霍迪尔任务 → 回首往事", "依次处理丹尼芬雷、霜原湖、冬眠洞穴/上古寒冬山谷和雷暴台地任务。", g12_dun_first),
-    ("托里姆：维拉努斯 → 科洛米尔", "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再引出维拉努斯并推进科洛米尔。", g13_veranus),
+    ("弗约恩之砧：弥补关系 + 精炼之火", "完成《弥补关系》；熔渣覆盖的金属右键接《精炼之火》，铁砧交《精炼之火》并接《希望的火花》后炉石回格罗玛什，顺手交《紧急措施》，再用借用双足飞龙去风暴神殿找托里姆。", g11_mending_fences),
+    ("丹尼芬雷：元素之战 → 霍迪尔任务 → 炉石格罗玛什", "完成《元素之战》后，把《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》首轮并入丹尼芬雷现有任务环；完成雷暴台地后炉石回格罗玛什。", g12_dun_first),
+    ("托里姆：维拉努斯 → 科洛米尔", "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再分别完成维拉努斯并推进《科洛米尔，风暴之锤》；布莱恩便笺留到后续自然回格罗玛什时交。", g13_veranus),
     ("造物者圣台 → 奥杜尔 → 丹尼芬雷", "完成造物者圣台任务和《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。", g15_thorim_finale),
-    ("炉石格罗玛什 → 兽人语 → 寒风", "炉石回格罗玛什交布莱恩便笺和《紧急措施》，继续霜齿追踪与兽人语任务。", g16_gromarsh_brann_start),
+    ("炉石格罗玛什 → 兽人语 → 寒风", "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。", g16_gromarsh_brann_start),
     ("寒风峡谷 → 发明家图书馆", "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。", g17_brann_library),
     ("布莱恩营地 → 诺甘农之核 → 格罗玛什", "取两份文件，进入洛肯的宝库取得诺甘农之核，再到创世神殿顶部完成钥石事件。", g18_brann_core_gromarsh),
     ("布德克拉格：土壤 → 雪流平原 → 尼达维里尔", "开布德克拉格飞行点，完成魔化土壤、雪流平原和尼达维里尔第一组任务。", g19_bouldercrag_first),
@@ -898,10 +912,10 @@ AUDIT_OUT.write_text("\n".join([
     "",
     "- 从零入口：达拉然当前77级路线完成后，12853《豪华的体验！》在K3交付；五号先拿借用双足飞龙并开K3飞行点。",
     f"- foundation正式池：{len(FORMAL)}项；路线覆盖：{len(covered & FORMAL)}；missing={missing}；unexpected={unexpected}。",
-    "- 声望策略按用户当前要求：路线内部不保留条件分支；12985/13001/13011/13420按排定位置无条件接做交。若首跑发现真实声望门槛卡住，再只校正其固定解锁位置。",
+    "- 声望策略按用户当前要求：路线内部不保留条件分支；12981/12985/12994/13001/13006/13011/13046/13420按首跑已验证节点无条件接做交。四个日常只纳入当前首轮，不生成第二轮循环。",
     "- 12930《稀有的土壤》不安排霜纹布获取；五号使用用户现有库存，只计算7块魔化土壤的现场动作。",
     "- 当前路线不学习寒冷天气飞行，因此排除13060《终极运输方案》；失去免费任务运输后，不再从K3提前绕行格罗玛什。",
-    "- 格罗玛什改为第一次到风暴神殿后顺路插入：接齐西侧任务、开飞行点并绑定炉石，同一趟完成基莫拉克之巢猎人链与《紧急措施》；布莱恩便笺后移到维拉努斯诱引点前顺路取得。托里姆/奥杜尔完成后从丹尼芬雷炉石回格罗玛什继续布莱恩线。普通自主飞行只由地图路线表达，不进入玩家动作文字。",
+    "- 格罗玛什第一次在风暴神殿后自然进入并绑定炉石。丹尼芬雷步骤结束后新增炉石回格罗玛什；下一步再进入托里姆/维拉努斯。维拉努斯途中取得《失踪的布莱恩·铜须》目标后不专程回交，直接继续《科洛米尔，风暴之锤》，待后续自然回格罗玛什时再交。普通自主飞行只由地图路线表达，不进入玩家动作文字。",
     "- 新路线从第一版即声明semantic-hud-v45；所有stepGroup均由结构化动作段直接生成actionHtml，不经过广义字符串替换器。",
 ]) + "\n", encoding="utf-8")
 

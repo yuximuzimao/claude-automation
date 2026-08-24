@@ -4,10 +4,10 @@
   "hearthChain": [
     "战歌要塞"
   ],
-  "centerMinutes": 615.4,
+  "centerMinutes": 687.8,
   "rangeMinutes": [
-    475.6,
-    755.2
+    530.0,
+    845.7
   ],
   "actualRuns": [],
   "rows": [
@@ -48,19 +48,23 @@
     {
       "step": 3,
       "title": "巨石采掘场第一扫",
-      "centerMinutes": 1.5,
+      "centerMinutes": 23.0,
       "rangeMinutes": [
-        1.2,
-        1.8
+        17.3,
+        28.8
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.5,
-        "objectiveMinutes": 0,
+        "objectiveMinutes": 22.0,
         "hubMinutes": 0.0,
-        "specialMinutes": 0.0
+        "specialMinutes": 0.5
       },
-      "objectiveTasks": []
+      "objectiveTasks": [
+        "夺回巨石采掘场",
+        "耐心是我们不需要的美德",
+        "被掠走的苦工"
+      ]
     },
     {
       "step": 4,
@@ -127,11 +131,13 @@
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.3,
-        "objectiveMinutes": 0,
+        "objectiveMinutes": 0.0,
         "hubMinutes": 1.9,
-        "specialMinutes": 0.0
+        "specialMinutes": 0.5
       },
-      "objectiveTasks": []
+      "objectiveTasks": [
+        "魔法飞毯"
+      ]
     },
     {
       "step": 8,
@@ -169,7 +175,8 @@
         "莫布的坦克零件气动装配器",
         "超强度金属板！",
         "深入迷雾",
-        "古代水手的号角"
+        "古代水手的号角",
+        "逃离迷雾"
       ]
     },
     {
@@ -297,13 +304,11 @@
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.6,
-        "objectiveMinutes": 0.0,
+        "objectiveMinutes": 0,
         "hubMinutes": 1.9,
-        "specialMinutes": 0.5
+        "specialMinutes": 0.0
       },
-      "objectiveTasks": [
-        "寒风中的怪兽……"
-      ]
+      "objectiveTasks": []
     },
     {
       "step": 17,
@@ -345,7 +350,7 @@
     },
     {
       "step": 19,
-      "title": "农场回收 + 科多救援",
+      "title": "战歌农场交付 → 科多救援",
       "centerMinutes": 6.1,
       "rangeMinutes": [
         5.0,
@@ -364,7 +369,7 @@
     },
     {
       "step": 20,
-      "title": "盖特莱收尾 + 瓦雷杜斯",
+      "title": "暗影密探盖特莱 → 残忍的瓦雷杜斯",
       "centerMinutes": 3.4,
       "rangeMinutes": [
         2.7,
@@ -383,69 +388,70 @@
     },
     {
       "step": 21,
-      "title": "炉石回战歌 → 诺克 → 图古克 / 劳莉丝",
-      "centerMinutes": 7.1,
+      "title": "炉石战歌 → 逃兵快递 → 图古克 / 劳莉丝",
+      "centerMinutes": 6.1,
       "rangeMinutes": [
-        5.8,
-        8.4
+        5.1,
+        7.2
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.2,
-        "objectiveMinutes": 1.5,
+        "objectiveMinutes": 0.0,
         "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "愚蠢的努力"
+        "逃兵快递，30分钟送到否则免费"
       ]
     },
     {
       "step": 22,
-      "title": "血孢平原一圈 + 巨蛾/蛾卵同点完成",
-      "centerMinutes": 26.9,
+      "title": "血孢平原 → 巨蛾/蛾卵 → 迦莫斯链",
+      "centerMinutes": 26.1,
       "rangeMinutes": [
-        20.2,
-        33.7
+        19.6,
+        32.7
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.9,
         "objectiveMinutes": 19.4,
-        "hubMinutes": 5.2,
+        "hubMinutes": 4.4,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "清除北地狗头人",
         "奇妙的血孢",
         "授粉的巨蛾",
-        "巨大的蛾卵",
-        "完美的测试对象",
-        "攻打迦莫斯"
+        "完美的测试对象"
       ]
     },
     {
       "step": 23,
-      "title": "迦莫斯洞穴收尾并回战歌",
-      "centerMinutes": 5.8,
+      "title": "迦莫斯洞穴 → 血孢平原 → 战歌要塞",
+      "centerMinutes": 22.3,
       "rangeMinutes": [
-        4.8,
-        6.8
+        16.7,
+        27.9
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.9,
-        "objectiveMinutes": 1.5,
+        "objectiveMinutes": 18.0,
         "hubMinutes": 1.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "折磨者迦莫斯拉"
+        "折磨者迦莫斯拉",
+        "纳萨姆平原",
+        "愚蠢的努力",
+        "地狱咆哮的勇士"
       ]
     },
     {
       "step": 24,
-      "title": "仁德会第一轮：尼达尔 / 潜水员 / 死不足惜",
+      "title": "仁德会·尼达尔 / 欢乐的蚌壳 / 死不足惜",
       "centerMinutes": 9.3,
       "rangeMinutes": [
         7.6,
@@ -466,47 +472,46 @@
     },
     {
       "step": 25,
-      "title": "顺接冷石任务 → 营救猛犸幼崽",
-      "centerMinutes": 7.5,
+      "title": "冷石采掘场 → 帮助弱小",
+      "centerMinutes": 4.2,
       "rangeMinutes": [
-        5.6,
-        9.4
+        3.4,
+        4.9
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.7,
-        "objectiveMinutes": 5.3,
+        "objectiveMinutes": 2.0,
         "hubMinutes": 1.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "海象人的先祖",
-        "夺回采掘场",
         "帮助弱小"
       ]
     },
     {
       "step": 26,
-      "title": "仁德会回收 + 库诺克/卡奥",
-      "centerMinutes": 6.3,
+      "title": "仁德会 → 库诺克 / 卡奥",
+      "centerMinutes": 7.8,
       "rangeMinutes": [
-        5.2,
-        7.4
+        6.4,
+        9.2
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.5,
-        "objectiveMinutes": 1.5,
+        "objectiveMinutes": 3.0,
         "hubMinutes": 2.7,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "库诺克的智慧",
         "猛犸毁灭者卡奥"
       ]
     },
     {
       "step": 27,
-      "title": "冷石第一圈",
+      "title": "冷石采掘场·海象人的先祖 / 夺回采掘场",
       "centerMinutes": 5.7,
       "rangeMinutes": [
         4.3,
@@ -526,7 +531,7 @@
     },
     {
       "step": 28,
-      "title": "冷石第二圈",
+      "title": "冷石采掘场·失落的灵魂 / 别让他们逃了！",
       "centerMinutes": 4.5,
       "rangeMinutes": [
         3.7,
@@ -546,7 +551,7 @@
     },
     {
       "step": 29,
-      "title": "冷石第三圈 + 先祖收尾",
+      "title": "冷石采掘场·寻找古器 / 先祖的回归",
       "centerMinutes": 13.4,
       "rangeMinutes": [
         10.0,
@@ -568,26 +573,27 @@
     {
       "step": 30,
       "title": "仁德会南线：卡琳 → 遗弃海岸 / 不可容忍",
-      "centerMinutes": 18.1,
+      "centerMinutes": 32.8,
       "rangeMinutes": [
-        13.6,
-        22.7
+        24.6,
+        41.0
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.4,
-        "objectiveMinutes": 13.5,
+        "objectiveMinutes": 28.1,
         "hubMinutes": 2.8,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "驯鹿杀手之死",
-        "不可容忍"
+        "不可容忍",
+        "敌人的耳环"
       ]
     },
     {
       "step": 31,
-      "title": "蛤蜊主宰 + 哈罗德终局",
+      "title": "仁德会·蛤蜊主宰 / 刺杀哈罗德·兰恩",
       "centerMinutes": 8.2,
       "rangeMinutes": [
         6.7,
@@ -607,7 +613,7 @@
     },
     {
       "step": 32,
-      "title": "卡斯卡拉：战斗到底到穆希特",
+      "title": "卡斯卡拉·战斗到底 / 穆希特的智慧",
       "centerMinutes": 7.4,
       "rangeMinutes": [
         6.1,
@@ -626,7 +632,7 @@
     },
     {
       "step": 33,
-      "title": "卡斯卡拉：神灵眷顾到转莫亚基",
+      "title": "卡斯卡拉·神灵的眷顾 / 情势扭转",
       "centerMinutes": 6.2,
       "rangeMinutes": [
         4.7,
@@ -646,7 +652,7 @@
     },
     {
       "step": 34,
-      "title": "牦牛村第一轮：接任务 → 三处虫孔调查",
+      "title": "牦牛村 → 三处虫孔",
       "centerMinutes": 4.8,
       "rangeMinutes": [
         4.0,
@@ -666,26 +672,28 @@
     },
     {
       "step": 35,
-      "title": "坠机补给 → 运货护送 → 回牦牛村交接",
-      "centerMinutes": 6.9,
+      "title": "应急的物资 / 运货行动 → 牦牛村",
+      "centerMinutes": 12.5,
       "rangeMinutes": [
-        5.6,
-        8.1
+        9.4,
+        15.6
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.7,
-        "objectiveMinutes": 1.5,
+        "objectiveMinutes": 7.1,
         "hubMinutes": 3.2,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "运货行动！"
+        "应急的物资",
+        "运货行动！",
+        "风暴的主宰"
       ]
     },
     {
       "step": 36,
-      "title": "蒸汽狂怒者 + 泵站机器人同圈",
+      "title": "元素的力量 / 菲兹兰克泵站",
       "centerMinutes": 31.4,
       "rangeMinutes": [
         23.6,
@@ -747,7 +755,7 @@
     },
     {
       "step": 39,
-      "title": "牦牛村第三次Hub交接",
+      "title": "牦牛村·任务交接",
       "centerMinutes": 3.6,
       "rangeMinutes": [
         2.9,
@@ -764,7 +772,7 @@
     },
     {
       "step": 40,
-      "title": "泵站第二圈：鹿皮 + 四阀门 + 机甲专家",
+      "title": "菲兹兰克泵站·修修补补 / 机械副官 / 击败机甲专家",
       "centerMinutes": 13.0,
       "rangeMinutes": [
         9.7,
@@ -785,7 +793,7 @@
     },
     {
       "step": 41,
-      "title": "泵站回收 → 天灾的外衣",
+      "title": "牦牛村 → 天灾的外衣",
       "centerMinutes": 10.4,
       "rangeMinutes": [
         7.8,
@@ -804,15 +812,15 @@
     },
     {
       "step": 42,
-      "title": "腐化土地 + 元素之心 → 回村交接",
-      "centerMinutes": 16.3,
+      "title": "腐化的土地 / 元素之心 → 牦牛村",
+      "centerMinutes": 17.4,
       "rangeMinutes": [
-        12.2,
-        20.4
+        13.1,
+        21.8
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 0.7,
+        "moveMinutes": 1.8,
         "objectiveMinutes": 13.8,
         "hubMinutes": 1.3,
         "specialMinutes": 0.5
@@ -824,7 +832,7 @@
     },
     {
       "step": 43,
-      "title": "元素愤怒号角走廊",
+      "title": "元素愤怒号角·上下半截",
       "centerMinutes": 3.9,
       "rangeMinutes": [
         2.9,
@@ -843,7 +851,7 @@
     },
     {
       "step": 44,
-      "title": "恩其拉第一层 → 回村解锁第二层",
+      "title": "恩其拉·乔装潜入 → 牦牛村",
       "centerMinutes": 4.4,
       "rangeMinutes": [
         3.6,
@@ -862,7 +870,7 @@
     },
     {
       "step": 45,
-      "title": "恩其拉第二层 + 鲜血尖塔 → 回村",
+      "title": "恩其拉·力量之语 / 鲜血尖塔 → 牦牛村",
       "centerMinutes": 14.9,
       "rangeMinutes": [
         11.2,
@@ -885,29 +893,27 @@
     },
     {
       "step": 46,
-      "title": "天崩地裂 + 纳克萨纳尔收尾",
-      "centerMinutes": 14.0,
+      "title": "天崩地裂 / 过关斩将 → 牦牛村",
+      "centerMinutes": 6.2,
       "rangeMinutes": [
-        10.5,
-        17.5
+        5.1,
+        7.3
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.3,
-        "objectiveMinutes": 9.2,
-        "hubMinutes": 1.9,
+        "objectiveMinutes": 1.2,
+        "hubMinutes": 2.1,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "天崩地裂",
-        "元素愤怒号角",
-        "过关斩将",
-        "横贯冰原"
+        "过关斩将"
       ]
     },
     {
       "step": 47,
-      "title": "炉石回战歌并转琥珀崖",
+      "title": "炉石战歌要塞 → 琥珀崖",
       "centerMinutes": 3.4,
       "rangeMinutes": [
         2.8,
@@ -924,7 +930,7 @@
     },
     {
       "step": 48,
-      "title": "蓝玉营地第一轮 + 悬崖异常 → 回琥珀崖",
+      "title": "蓝玉营地 / 悬崖异常 → 琥珀崖",
       "centerMinutes": 6.8,
       "rangeMinutes": [
         5.1,
@@ -944,7 +950,7 @@
     },
     {
       "step": 49,
-      "title": "调查押送 + 峭壁断层 → 回琥珀崖",
+      "title": "调查 / 峭壁断层 → 琥珀崖",
       "centerMinutes": 7.1,
       "rangeMinutes": [
         5.8,
@@ -964,7 +970,7 @@
     },
     {
       "step": 50,
-      "title": "审讯 → 与时间赛跑 → 准备飞翔",
+      "title": "法师塔二楼 → 与时间赛跑 → 苏雷斯塔兹",
       "centerMinutes": 8.2,
       "rangeMinutes": [
         6.7,
@@ -979,30 +985,31 @@
       },
       "objectiveTasks": [
         "说服的艺术",
-        "分享情报",
         "与时间赛跑"
       ]
     },
     {
       "step": 51,
-      "title": "营救艾瓦诺尔 → 飞考达拉",
-      "centerMinutes": 4.7,
+      "title": "营救艾瓦诺尔 → 苏雷斯塔兹 → 考达拉",
+      "centerMinutes": 7.7,
       "rangeMinutes": [
-        3.9,
-        5.5
+        6.3,
+        9.1
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.8,
-        "objectiveMinutes": 0,
+        "objectiveMinutes": 3.5,
         "hubMinutes": 2.9,
-        "specialMinutes": 0.0
+        "specialMinutes": 0.5
       },
-      "objectiveTasks": []
+      "objectiveTasks": [
+        "营救艾瓦诺尔"
+      ]
     },
     {
       "step": 52,
-      "title": "永生之盾开场 → 南 / 西监测点",
+      "title": "永生之盾 → 南部 / 西部监测点",
       "centerMinutes": 25.5,
       "rangeMinutes": [
         19.1,
@@ -1024,26 +1031,29 @@
     },
     {
       "step": 53,
-      "title": "北部监测 → 中央监测 → 永生之盾回收",
-      "centerMinutes": 5.6,
+      "title": "北部 / 东北 / 中央监测点 → 永生之盾",
+      "centerMinutes": 25.4,
       "rangeMinutes": [
-        4.2,
-        7.0
+        19.0,
+        31.7
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.5,
-        "objectiveMinutes": 2.0,
+        "objectiveMinutes": 21.8,
         "hubMinutes": 1.6,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "监测数据"
+        "监测数据",
+        "古树的秘密",
+        "冰冷的草莓",
+        "基本的训练"
       ]
     },
     {
       "step": 54,
-      "title": "考达拉第二圈 → 触发《奇怪……》",
+      "title": "考达拉外圈 → 奇怪…… → 永生之盾",
       "centerMinutes": 11.1,
       "rangeMinutes": [
         8.3,
@@ -1064,7 +1074,7 @@
     },
     {
       "step": 55,
-      "title": "牢笼 + 猎龙 → 克莉斯塔萨 / 诱饵",
+      "title": "戈德拉克 / 塞鲁利恩 → 猎龙 → 永生之盾",
       "centerMinutes": 8.6,
       "rangeMinutes": [
         6.5,
@@ -1079,34 +1089,34 @@
       },
       "objectiveTasks": [
         "牢笼",
-        "猎龙"
+        "猎龙",
+        "克莉斯塔萨"
       ]
     },
     {
       "step": 56,
-      "title": "诱饵 → 莎拉苟萨",
-      "centerMinutes": 21.2,
+      "title": "考达拉目标区 → 莎拉苟萨平台",
+      "centerMinutes": 19.2,
       "rangeMinutes": [
-        15.9,
-        26.5
+        14.4,
+        24.0
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.5,
-        "objectiveMinutes": 17.1,
+        "objectiveMinutes": 15.1,
         "hubMinutes": 2.1,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "诱饵",
         "破译密码",
-        "莎拉苟萨的末日",
-        "集结红龙"
+        "莎拉苟萨的末日"
       ]
     },
     {
       "step": 57,
-      "title": "集结红龙 → 触动陷阱 → 考达拉户外收尾",
+      "title": "永生之盾 → 信号火焰 → 莱洛拉斯",
       "centerMinutes": 7.2,
       "rangeMinutes": [
         5.9,
@@ -1125,7 +1135,7 @@
     },
     {
       "step": 58,
-      "title": "永生之盾收尾 → 系统鸟回琥珀崖",
+      "title": "永生之盾 → 系统鸟琥珀崖",
       "centerMinutes": 1.7,
       "rangeMinutes": [
         1.4,
@@ -1142,7 +1152,7 @@
     },
     {
       "step": 59,
-      "title": "钢腭战场顺路清 → 博古洛克开场",
+      "title": "钢腭车队 → 博古洛克前哨站",
       "centerMinutes": 14.0,
       "rangeMinutes": [
         10.5,
@@ -1156,14 +1166,14 @@
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "攻击！",
         "亡者的尊严",
-        "让他们安息",
-        "攻击！"
+        "让他们安息"
       ]
     },
     {
       "step": 60,
-      "title": "沸点途中做学习沟通 → 先推进冬鳞Hub链",
+      "title": "因波莉安 → 火水元素 → 冬鳞避难所",
       "centerMinutes": 6.5,
       "rangeMinutes": [
         4.9,
@@ -1183,7 +1193,7 @@
     },
     {
       "step": 61,
-      "title": "冬鳞外圈连续推进 → 接决不投降",
+      "title": "冬鳞外圈 → 幽光海湾 → 冬鳞避难所",
       "centerMinutes": 28.6,
       "rangeMinutes": [
         21.5,
@@ -1206,7 +1216,7 @@
     },
     {
       "step": 62,
-      "title": "冬鳞洞穴一次通行：裂谷 + 钥匙 + 护送 + 决不投降",
+      "title": "冬鳞洞穴：裂谷 → 钥匙 → 护送",
       "centerMinutes": 13.9,
       "rangeMinutes": [
         11.4,
@@ -1228,46 +1238,48 @@
     },
     {
       "step": 63,
-      "title": "沸点交付 → 风暴微粒 → 空气的幻象",
-      "centerMinutes": 10.3,
+      "title": "因波莉安 → 风暴微粒 → 博古洛克",
+      "centerMinutes": 13.3,
       "rangeMinutes": [
-        7.7,
-        12.9
+        10.0,
+        16.6
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.9,
-        "objectiveMinutes": 5.5,
+        "objectiveMinutes": 8.5,
         "hubMinutes": 3.4,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "风暴微粒"
+        "风暴微粒",
+        "空气的幻象"
       ]
     },
     {
       "step": 64,
-      "title": "犸格莫斯洞穴闭环",
-      "centerMinutes": 11.7,
+      "title": "犸格莫斯洞穴 → 博古洛克",
+      "centerMinutes": 12.3,
       "rangeMinutes": [
-        8.8,
-        14.6
+        9.2,
+        15.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.0,
-        "objectiveMinutes": 7.2,
+        "objectiveMinutes": 7.8,
         "hubMinutes": 2.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "卡加尼舒",
-        "向犸格莫斯复仇"
+        "向犸格莫斯复仇",
+        "落叶归根"
       ]
     },
     {
       "step": 65,
-      "title": "博古洛克飞琥珀崖 → 裂谷监测交付",
+      "title": "博古洛克 → 系统鸟琥珀崖",
       "centerMinutes": 2.7,
       "rangeMinutes": [
         2.2,
@@ -1284,7 +1296,7 @@
     },
     {
       "step": 66,
-      "title": "琥珀崖直飞牦牛村 → 横贯冰原转场",
+      "title": "系统鸟琥珀崖 → 牦牛村 → 横贯冰原",
       "centerMinutes": 10.6,
       "rangeMinutes": [
         8.7,

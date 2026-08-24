@@ -4,16 +4,16 @@
   "hearthChain": [
     "阿格玛之锤"
   ],
-  "centerMinutes": 675.1,
+  "centerMinutes": 684.5,
   "rangeMinutes": [
-    519.4,
-    831.6
+    525.6,
+    844.8
   ],
   "actualRuns": [],
   "rows": [
     {
       "step": 1,
-      "title": "龙骨边界 → 西风避难营第一轮",
+      "title": "龙骨边界 → 西风避难营 → 东侧林地",
       "centerMinutes": 16.8,
       "rangeMinutes": [
         12.6,
@@ -33,7 +33,7 @@
     },
     {
       "step": 2,
-      "title": "西风血誓 → 前往阿格玛",
+      "title": "西风避难营 → 部落的血誓 → 阿格玛之锤",
       "centerMinutes": 7.1,
       "rangeMinutes": [
         5.4,
@@ -52,43 +52,41 @@
     },
     {
       "step": 3,
-      "title": "阿格玛主线开场 + 萨鲁法尔的信 + 飞行点 / 炉石",
-      "centerMinutes": 5.9,
+      "title": "阿格玛之锤：主线 → 飞行点 / 炉石",
+      "centerMinutes": 4.8,
       "rangeMinutes": [
-        4.8,
-        7.0
+        4.0,
+        5.7
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.7,
-        "objectiveMinutes": 0.6,
-        "hubMinutes": 3.1,
-        "specialMinutes": 0.5
+        "objectiveMinutes": 0,
+        "hubMinutes": 2.1,
+        "specialMinutes": 0.0
       },
-      "objectiveTasks": [
-        "萨鲁法尔的信"
-      ]
+      "objectiveTasks": []
     },
     {
       "step": 4,
-      "title": "阿格玛补接深渊 / 通缉 / 月影任务",
-      "centerMinutes": 5.0,
+      "title": "阿格玛之锤：黑血 / 通缉 / 腐烂器官 / 寻找线索",
+      "centerMinutes": 4.9,
       "rangeMinutes": [
-        4.1,
-        5.9
+        4.0,
+        5.7
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.3,
         "objectiveMinutes": 0,
-        "hubMinutes": 3.7,
+        "hubMinutes": 3.6,
         "specialMinutes": 0.0
       },
       "objectiveTasks": []
     },
     {
       "step": 5,
-      "title": "纳尔苏深渊探索",
+      "title": "纳尔苏深渊：扎古斯 → 黑血 → 基里克斯 → 感染野兽",
       "centerMinutes": 26.1,
       "rangeMinutes": [
         19.6,
@@ -111,7 +109,7 @@
     },
     {
       "step": 6,
-      "title": "阿格玛深渊回收 / 解锁血之魔典",
+      "title": "阿格玛之锤：深渊交付 → 解锁血之魔典 → 红玉丁香",
       "centerMinutes": 5.4,
       "rangeMinutes": [
         4.4,
@@ -128,17 +126,17 @@
     },
     {
       "step": 7,
-      "title": "冰雾村：三钥匙 + 血之魔典 + 战歌军旗",
-      "centerMinutes": 15.3,
+      "title": "冰雾祖母 → 班索克 → 三钥匙 / 魔典 / 军旗",
+      "centerMinutes": 16.1,
       "rangeMinutes": [
-        11.5,
-        19.1
+        12.1,
+        20.1
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.2,
         "objectiveMinutes": 11.8,
-        "hubMinutes": 1.8,
+        "hubMinutes": 2.6,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -150,7 +148,7 @@
     },
     {
       "step": 8,
-      "title": "大酋长归来",
+      "title": "班索克 → 大酋长归来",
       "centerMinutes": 2.3,
       "rangeMinutes": [
         1.9,
@@ -169,17 +167,17 @@
     },
     {
       "step": 9,
-      "title": "炉石阿格玛 → 血之魔典/三宝石 → 洛纳乌克 → 双足飞龙",
-      "centerMinutes": 15.7,
+      "title": "炉石阿格玛 → 三宝石 → 洛纳乌克 → 荒芜兽",
+      "centerMinutes": 15.4,
       "rangeMinutes": [
-        12.9,
-        18.5
+        12.6,
+        18.2
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.1,
         "objectiveMinutes": 7.8,
-        "hubMinutes": 5.3,
+        "hubMinutes": 5.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -189,17 +187,17 @@
     },
     {
       "step": 10,
-      "title": "恐怖之爪 → 冰拳/害虫控制 → 诺兹拉斯第一轮",
-      "centerMinutes": 19.8,
+      "title": "恐怖之爪 → 猎龙营地 → 诺兹拉斯挖掘场",
+      "centerMinutes": 20.0,
       "rangeMinutes": [
-        14.9,
-        24.8
+        15.0,
+        25.0
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.5,
         "objectiveMinutes": 13.1,
-        "hubMinutes": 3.7,
+        "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -210,17 +208,17 @@
     },
     {
       "step": 11,
-      "title": "刨冰 → 柔软的包装",
-      "centerMinutes": 33.1,
+      "title": "刨冰 → 柔软的包装 → 不会融化的东西",
+      "centerMinutes": 33.2,
       "rangeMinutes": [
-        24.8,
-        41.3
+        24.9,
+        41.5
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.1,
         "objectiveMinutes": 29.6,
-        "hubMinutes": 1.9,
+        "hubMinutes": 2.1,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -230,17 +228,17 @@
     },
     {
       "step": 12,
-      "title": "骨片 / 巨大冰虫 → 解锁鹰身人",
-      "centerMinutes": 16.0,
+      "title": "破碎骨片 → 巨大冰虫 → 诺兹拉斯",
+      "centerMinutes": 16.1,
       "rangeMinutes": [
-        12.0,
-        20.0
+        12.1,
+        20.2
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.9,
         "objectiveMinutes": 13.5,
-        "hubMinutes": 1.1,
+        "hubMinutes": 1.3,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -264,13 +262,13 @@
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "抢木材",
-        "该死的鹰身人！"
+        "该死的鹰身人！",
+        "抢木材"
       ]
     },
     {
       "step": 14,
-      "title": "水晶裂痕：采样 → 酸液 → 冰虫之母前置",
+      "title": "水晶裂痕：采集样本 → 恶心的生意 → 冰虫之母",
       "centerMinutes": 8.2,
       "rangeMinutes": [
         6.2,
@@ -290,7 +288,7 @@
     },
     {
       "step": 15,
-      "title": "冰心洞穴 + 拉特尔博尔 → 炉石阿格玛",
+      "title": "冰心洞穴 → 拉特尔博尔 → 水晶裂痕 → 炉石阿格玛",
       "centerMinutes": 8.8,
       "rangeMinutes": [
         6.6,
@@ -311,7 +309,7 @@
     },
     {
       "step": 16,
-      "title": "眠月花园第一轮：计划书 + 伊瑟尼安 + 通缉",
+      "title": "眠月花园 → 阿格玛 → 伊瑟尼安",
       "centerMinutes": 23.1,
       "rangeMinutes": [
         17.4,
@@ -333,7 +331,7 @@
     },
     {
       "step": 17,
-      "title": "眠月第二圈 → 投影",
+      "title": "眠月花园 → 奇怪的设备 → 投影和计划",
       "centerMinutes": 9.9,
       "rangeMinutes": [
         7.4,
@@ -354,7 +352,7 @@
     },
     {
       "step": 18,
-      "title": "海岸魔网 → 接罗萨洛尔任务",
+      "title": "投影和计划 → 灿烂海岸 → 罗萨洛尔任务",
       "centerMinutes": 7.7,
       "rangeMinutes": [
         6.3,
@@ -394,7 +392,7 @@
     },
     {
       "step": 20,
-      "title": "红玉丁香 + 邪恶之约 → 接野生动物疫苗",
+      "title": "红玉丁香 → 邪恶之约 → 阿格玛疫苗链",
       "centerMinutes": 7.7,
       "rangeMinutes": [
         5.8,
@@ -414,7 +412,7 @@
     },
     {
       "step": 21,
-      "title": "野生动物疫苗 → 回索艾",
+      "title": "野生动物的疫苗 → 索艾",
       "centerMinutes": 5.0,
       "rangeMinutes": [
         4.1,
@@ -433,84 +431,87 @@
     },
     {
       "step": 22,
-      "title": "直接前往莫亚基首次",
-      "centerMinutes": 3.3,
+      "title": "莫亚基港口：库纳尼 / 莫伊 / 飞行点",
+      "centerMinutes": 3.5,
       "rangeMinutes": [
-        2.7,
-        3.9
+        2.9,
+        4.1
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.4,
         "objectiveMinutes": 0,
-        "hubMinutes": 1.0,
+        "hubMinutes": 1.1,
         "specialMinutes": 0.0
       },
       "objectiveTasks": []
     },
     {
       "step": 23,
-      "title": "狼獾人 → 洛根 → 灵魂视界",
-      "centerMinutes": 18.4,
+      "title": "飘雪林地 → 洛根 → 灵魂视界",
+      "centerMinutes": 19.1,
       "rangeMinutes": [
-        13.8,
-        23.0
+        14.3,
+        23.9
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.8,
-        "objectiveMinutes": 8.0,
-        "hubMinutes": 3.1,
+        "objectiveMinutes": 8.5,
+        "hubMinutes": 3.2,
         "specialMinutes": 4.5
       },
       "objectiveTasks": [
         "不要浪费",
-        "消灭洛根"
+        "消灭洛根",
+        "灵魂视界"
       ]
     },
     {
       "step": 24,
-      "title": "因度雷 / 玛纳洛 → 碧蓝圣地观察",
-      "centerMinutes": 18.0,
+      "title": "因度雷 → 长者玛纳洛 → 碧蓝圣地",
+      "centerMinutes": 18.5,
       "rangeMinutes": [
-        13.5,
-        22.5
+        13.8,
+        23.1
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.4,
-        "objectiveMinutes": 12.2,
+        "objectiveMinutes": 12.7,
         "hubMinutes": 2.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "魔网能量线的终端",
         "解脱和安息",
         "邪能之约"
       ]
     },
     {
       "step": 25,
-      "title": "海底破损陷阱 + 螃蟹专刷 → 基利瓦 → 海洋女神",
-      "centerMinutes": 15.9,
+      "title": "破损陷阱 → 螃蟹陷阱 → 诱饵 → 海洋女神",
+      "centerMinutes": 33.9,
       "rangeMinutes": [
-        13.0,
-        18.8
+        25.4,
+        42.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.0,
-        "objectiveMinutes": 11.5,
+        "objectiveMinutes": 29.5,
         "hubMinutes": 1.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "图尔凯的螃蟹陷阱",
         "诱饵",
         "海洋女神"
       ]
     },
     {
       "step": 26,
-      "title": "莫亚基海线回收 → 鱼钩 → 炉石阿格玛",
+      "title": "莫亚基 → 鱼钩 → 炉石阿格玛",
       "centerMinutes": 7.7,
       "rangeMinutes": [
         6.3,
@@ -529,24 +530,24 @@
     },
     {
       "step": 27,
-      "title": "阿格玛 → 龙眠首次解锁（只接任务，不清红玉）",
-      "centerMinutes": 6.4,
+      "title": "龙眠神殿：地面层 → 顶层任务",
+      "centerMinutes": 6.7,
       "rangeMinutes": [
-        5.4,
-        7.6
+        5.7,
+        7.9
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.7,
         "objectiveMinutes": 0,
-        "hubMinutes": 2.8,
+        "hubMinutes": 3.1,
         "specialMinutes": 0.0
       },
       "objectiveTasks": []
     },
     {
       "step": 28,
-      "title": "龙眠 → 害虫控制高密度点 → 猎龙营地 → 冰拳",
+      "title": "害虫控制 → 峡谷追击 → 冰拳",
       "centerMinutes": 21.7,
       "rangeMinutes": [
         16.3,
@@ -561,12 +562,13 @@
       },
       "objectiveTasks": [
         "害虫控制",
-        "峡谷追击"
+        "峡谷追击",
+        "古怪的暗示"
       ]
     },
     {
       "step": 29,
-      "title": "猎龙营地 → 红玉圣地前两轮",
+      "title": "红玉巨龙圣地：白热化的战斗 → 重归尘土",
       "centerMinutes": 11.6,
       "rangeMinutes": [
         9.5,
@@ -586,7 +588,7 @@
     },
     {
       "step": 30,
-      "title": "红玉第三轮 → 烈焰之地 → 收尾",
+      "title": "红玉巨龙圣地：烈焰之地 → 龙眠神殿的执事",
       "centerMinutes": 6.0,
       "rangeMinutes": [
         4.9,
@@ -600,13 +602,13 @@
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "红玉巨龙圣地的命运",
-        "烈焰之地"
+        "烈焰之地",
+        "红玉巨龙圣地的命运"
       ]
     },
     {
       "step": 31,
-      "title": "龙眠合并回收：红玉 + 冰拳号角 + 多层交接 / 日常",
+      "title": "龙眠：地面层 → 顶层 → 中层 → 保卫龙眠",
       "centerMinutes": 16.6,
       "rangeMinutes": [
         13.6,
@@ -623,17 +625,17 @@
     },
     {
       "step": 32,
-      "title": "裂骨者 → 黑曜石开场：先无路可逃",
-      "centerMinutes": 16.1,
+      "title": "裂骨者 → 奈萨里奥之喉 → 无路可逃",
+      "centerMinutes": 16.3,
       "rangeMinutes": [
-        12.1,
-        20.2
+        12.2,
+        20.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.4,
         "objectiveMinutes": 11.1,
-        "hubMinutes": 2.1,
+        "hubMinutes": 2.3,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -644,27 +646,28 @@
     },
     {
       "step": 33,
-      "title": "黑曜石：敌人的意图 → 共享符文清理",
-      "centerMinutes": 7.8,
+      "title": "敌人的意图 → 扫荡诅咒教派 / 污染的能量",
+      "centerMinutes": 8.0,
       "rangeMinutes": [
-        6.4,
-        9.3
+        6.6,
+        9.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 0.6,
         "objectiveMinutes": 4.7,
-        "hubMinutes": 2.1,
+        "hubMinutes": 2.3,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "敌人的意图",
         "扫荡诅咒教派",
         "污染的能量"
       ]
     },
     {
       "step": 34,
-      "title": "奈萨里奥烈焰 → 龙眠合并回收",
+      "title": "奈萨里奥的烈焰 → 龙眠地面层 / 顶层",
       "centerMinutes": 6.6,
       "rangeMinutes": [
         5.6,
@@ -683,7 +686,7 @@
     },
     {
       "step": 35,
-      "title": "晨曦之镜：冰霜宝石 + 破冰者 → 德拉古尔 / 青铜沙漏",
+      "title": "晨曦之镜 → 德拉古尔 → 青铜巨龙圣地",
       "centerMinutes": 14.3,
       "rangeMinutes": [
         10.7,
@@ -704,17 +707,17 @@
     },
     {
       "step": 36,
-      "title": "怨毒镇开场 → 镇外接海边地产 → 遗忘海岸 → 龙泪",
-      "centerMinutes": 39.9,
+      "title": "怨毒镇 → 遗忘海岸 → 翡翠龙泪",
+      "centerMinutes": 40.5,
       "rangeMinutes": [
-        29.9,
-        49.8
+        30.4,
+        50.6
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.0,
         "objectiveMinutes": 32.5,
-        "hubMinutes": 4.8,
+        "hubMinutes": 5.5,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -726,17 +729,17 @@
     },
     {
       "step": 37,
-      "title": "新壁炉谷顺路第一圈 → 翡翠巨龙圣地本地链",
-      "centerMinutes": 77.6,
+      "title": "新壁炉谷第一圈 → 翡翠巨龙圣地 → 奥雷托斯",
+      "centerMinutes": 77.2,
       "rangeMinutes": [
-        58.2,
-        97.0
+        57.9,
+        96.5
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.1,
-        "objectiveMinutes": 73.4,
-        "hubMinutes": 1.6,
+        "objectiveMinutes": 72.7,
+        "hubMinutes": 1.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -746,13 +749,12 @@
         "生命的循环",
         "翡翠龙泪",
         "鞭笞者的种子",
-        "强大的猛犸人",
         "奥雷托斯的羽毛"
       ]
     },
     {
       "step": 38,
-      "title": "翡翠收尾 → 龙眠地面/顶层分层回收",
+      "title": "龙眠地面层 → 顶层：猛犸 / 翡翠 / 青铜交付",
       "centerMinutes": 4.1,
       "rangeMinutes": [
         3.4,
@@ -769,26 +771,27 @@
     },
     {
       "step": 39,
-      "title": "德雷格玛尔 → 暴虐的酋长",
-      "centerMinutes": 7.4,
+      "title": "德雷格玛尔 → 奥拉斯塔萨 → 戈洛塔尔",
+      "centerMinutes": 8.9,
       "rangeMinutes": [
-        6.1,
-        8.7
+        7.3,
+        10.5
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 3.6,
-        "objectiveMinutes": 1.5,
+        "objectiveMinutes": 3.0,
         "hubMinutes": 1.8,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
+        "隐居的铭语师",
         "暴虐的酋长"
       ]
     },
     {
       "step": 40,
-      "title": "怨毒镇：翡翠 + 新壁炉谷第一圈集中回收",
+      "title": "怨毒镇：翡翠 / 血色第一圈交接",
       "centerMinutes": 4.8,
       "rangeMinutes": [
         4.0,
@@ -805,7 +808,7 @@
     },
     {
       "step": 41,
-      "title": "新壁炉谷第二圈 → 审讯 / 强制魔棒",
+      "title": "新壁炉谷：毫不留情 / 补充坐骑 → 地下审讯",
       "centerMinutes": 12.1,
       "rangeMinutes": [
         9.1,
@@ -821,56 +824,53 @@
       "objectiveTasks": [
         "毫不留情",
         "补充坐骑",
-        "强制魔棒",
-        "拷问者里克拉夫"
+        "拷问者里克拉夫",
+        "强制魔棒"
       ]
     },
     {
       "step": 42,
-      "title": "怨毒镇东北：凋零战车 → 攻城炸弹 → 北伐军",
-      "centerMinutes": 19.5,
+      "title": "怨毒镇东北：凋零战车 / 炸弹 / 图尔基德 / 北伐军",
+      "centerMinutes": 19.8,
       "rangeMinutes": [
-        14.6,
-        24.4
+        14.9,
+        24.8
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.2,
         "objectiveMinutes": 14.7,
-        "hubMinutes": 2.1,
+        "hubMinutes": 2.4,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "收取炸弹",
         "传达好消息",
+        "收取炸弹",
         "创造与毁灭的力量"
       ]
     },
     {
       "step": 43,
-      "title": "新壁炉谷高地：白蚁 / 兵营 / 铁匠铺",
-      "centerMinutes": 6.6,
+      "title": "新壁炉谷：卡雷基 / 默瑟 → 兵营乔丹 → 铁匠铺",
+      "centerMinutes": 3.0,
       "rangeMinutes": [
-        5.0,
-        8.3
+        2.5,
+        3.6
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.0,
-        "objectiveMinutes": 5.1,
+        "objectiveMinutes": 1.5,
         "hubMinutes": 0.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "解决方案",
-        "谴责",
-        "日常计划",
-        "炸毁弩炮"
+        "解决方案"
       ]
     },
     {
       "step": 44,
-      "title": "修道院命令 → 炮位 → 海滩命令",
+      "title": "修道院命令 → 齐尔哈特 / 弩炮 → 海滩命令",
       "centerMinutes": 4.6,
       "rangeMinutes": [
         3.5,
@@ -891,7 +891,7 @@
     },
     {
       "step": 45,
-      "title": "新壁炉谷：祈祷之书 → 完美伪装 → 狼狈不堪",
+      "title": "怨毒镇 → 斯古莉 → 祈祷之书 → 完美伪装 → 狼狈不堪",
       "centerMinutes": 11.0,
       "rangeMinutes": [
         8.2,
@@ -912,7 +912,7 @@
     },
     {
       "step": 46,
-      "title": "寻找真相 → 水火之灾",
+      "title": "寻找真相 → 罪人的愚行号",
       "centerMinutes": 4.9,
       "rangeMinutes": [
         3.6,
@@ -932,7 +932,7 @@
     },
     {
       "step": 47,
-      "title": "怨毒镇潜入链收尾",
+      "title": "怨毒镇 → 阿比迪斯将军 → 乌洛斯",
       "centerMinutes": 6.4,
       "rangeMinutes": [
         5.2,
@@ -951,27 +951,26 @@
     },
     {
       "step": 48,
-      "title": "龙骨东北角：圣光据点 → 金萨卡拉 → 炉石",
-      "centerMinutes": 18.7,
+      "title": "圣光据点 → 金萨卡拉 → 炉石阿格玛",
+      "centerMinutes": 17.9,
       "rangeMinutes": [
-        14.0,
-        23.3
+        13.4,
+        22.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.7,
-        "objectiveMinutes": 12.8,
+        "objectiveMinutes": 12.0,
         "hubMinutes": 2.8,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "净化金萨卡拉",
-        "创造与毁灭的力量"
+        "净化金萨卡拉"
       ]
     },
     {
       "step": 49,
-      "title": "三宝石 → 阴影界 → 翻译魔典",
+      "title": "冰霜之约 → 毁灭的力量 → 翻译过的魔典",
       "centerMinutes": 4.5,
       "rangeMinutes": [
         3.7,
@@ -990,45 +989,38 @@
     },
     {
       "step": 50,
-      "title": "库卡隆先锋 → 龙眠接红龙之翼",
-      "centerMinutes": 15.0,
+      "title": "阿格玛 → 库卡隆先锋 → 系统鸟龙眠 → 红龙之翼",
+      "centerMinutes": 7.8,
       "rangeMinutes": [
-        12.3,
-        17.7
+        6.8,
+        9.2
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 3.0,
-        "objectiveMinutes": 7.8,
+        "objectiveMinutes": 0,
         "hubMinutes": 3.7,
-        "specialMinutes": 0.5
+        "specialMinutes": 0.0
       },
-      "objectiveTasks": [
-        "该死的荒芜兽！",
-        "洛纳乌克万岁！",
-        "被遗忘者的凋零药剂"
-      ]
+      "objectiveTasks": []
     },
     {
       "step": 51,
-      "title": "红龙之翼 → 龙眠 → 安加萨 → 天谴之门",
-      "centerMinutes": 9.3,
+      "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门",
+      "centerMinutes": 8.5,
       "rangeMinutes": [
-        7.0,
-        11.6
+        6.4,
+        10.7
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 3.3,
-        "objectiveMinutes": 2.8,
+        "objectiveMinutes": 2.0,
         "hubMinutes": 2.8,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "红龙之翼",
-        "创造与毁灭的力量",
-        "前往征服堡，自求多福吧！",
-        "前往圣光据点！"
+        "红龙之翼"
       ]
     }
   ]

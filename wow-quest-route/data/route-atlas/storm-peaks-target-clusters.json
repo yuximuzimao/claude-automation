@@ -5,8 +5,8 @@
     "name": "风暴峭壁"
   },
   "cluster_type": "objective_and_extra_objective_targets",
-  "cluster_count": 151,
-  "shared_cluster_count": 21,
+  "cluster_count": 154,
+  "shared_cluster_count": 22,
   "clusters": [
     {
       "cluster_id": "npc:29380",
@@ -999,6 +999,66 @@
             "spawn_count": 4
           },
           "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30422",
+      "entity_type": "npc",
+      "entity_id": 30422,
+      "name": "游荡的冰虫",
+      "representative": {
+        "x": 56.5,
+        "y": 64.49,
+        "spawn_count": 30
+      },
+      "spawn_count": 30,
+      "quest_ids": [
+        13046,
+        13055
+      ],
+      "relations": [
+        {
+          "quest_id": 13046,
+          "quest_name": "喂饱安格里姆",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30422,
+          "entity_name": "游荡的冰虫",
+          "representative": {
+            "x": 56.5,
+            "y": 64.49,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13055,
+          "quest_name": "洞穴中的药品",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 42927,
+          "item_name": "Toxin Gland",
+          "entity_type": "npc",
+          "entity_id": 30422,
+          "entity_name": "游荡的冰虫",
+          "representative": {
+            "x": 56.5,
+            "y": 64.49,
+            "spawn_count": 30
+          },
+          "spawn_count": 30,
           "source_kind": "objective"
         }
       ],
@@ -4446,6 +4506,46 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:30325",
+      "entity_type": "npc",
+      "entity_id": 30325,
+      "name": "粘性油污",
+      "representative": {
+        "x": 54.75,
+        "y": 63.29,
+        "spawn_count": 18
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        13006
+      ],
+      "relations": [
+        {
+          "quest_id": 13006,
+          "quest_name": "粘滞清洁",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 42640,
+          "item_name": "Viscous Oil",
+          "entity_type": "npc",
+          "entity_id": 30325,
+          "entity_name": "粘性油污",
+          "representative": {
+            "x": 54.75,
+            "y": 63.29,
+            "spawn_count": 18
+          },
+          "spawn_count": 18,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:30099",
       "entity_type": "npc",
       "entity_id": 30099,
@@ -4477,6 +4577,46 @@
             "spawn_count": 1
           },
           "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30222",
+      "entity_type": "npc",
+      "entity_id": 30222,
+      "name": "雷铸渗透者",
+      "representative": {
+        "x": 57.55,
+        "y": 63.8,
+        "spawn_count": 16
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        12994
+      ],
+      "relations": [
+        {
+          "quest_id": 12994,
+          "quest_name": "猎杀间谍",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30222,
+          "entity_name": "雷铸渗透者",
+          "representative": {
+            "x": 57.55,
+            "y": 63.8,
+            "spawn_count": 16
+          },
+          "spawn_count": 16,
           "source_kind": "objective"
         }
       ],
@@ -4567,6 +4707,47 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:32569",
+      "entity_type": "npc",
+      "entity_id": 32569,
+      "name": "座狼的尸体",
+      "representative": {
+        "x": 57.23,
+        "y": 64.03,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12994
+      ],
+      "relations": [
+        {
+          "quest_id": 12994,
+          "quest_name": "猎杀间谍",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32569,
+          "entity_name": "座狼的尸体",
+          "representative": {
+            "x": 57.23,
+            "y": 64.03,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Ethereal Worg's Fang"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:191708",
       "entity_type": "object",
       "entity_id": 191708,
@@ -4638,46 +4819,6 @@
             "spawn_count": 6
           },
           "spawn_count": 6,
-          "source_kind": "objective"
-        }
-      ],
-      "source_kinds": [
-        "objective"
-      ],
-      "shared_by_multiple_tasks": false
-    },
-    {
-      "cluster_id": "npc:30422",
-      "entity_type": "npc",
-      "entity_id": 30422,
-      "name": "游荡的冰虫",
-      "representative": {
-        "x": 56.5,
-        "y": 64.49,
-        "spawn_count": 30
-      },
-      "spawn_count": 30,
-      "quest_ids": [
-        13055
-      ],
-      "relations": [
-        {
-          "quest_id": 13055,
-          "quest_name": "洞穴中的药品",
-          "objective_index": 2,
-          "objective_type": "item",
-          "required_count": 8,
-          "item_id": 42927,
-          "item_name": "Toxin Gland",
-          "entity_type": "npc",
-          "entity_id": 30422,
-          "entity_name": "游荡的冰虫",
-          "representative": {
-            "x": 56.5,
-            "y": 64.49,
-            "spawn_count": 30
-          },
-          "spawn_count": 30,
           "source_kind": "objective"
         }
       ],

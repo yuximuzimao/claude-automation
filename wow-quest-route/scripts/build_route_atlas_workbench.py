@@ -17,7 +17,7 @@ SEMANTIC_HUD_STANDARD = "semantic-hud-v45"
 # These routes predate the v45 HUD publication contract and are being migrated separately.
 # Any newly introduced route key must opt into the v45 contract instead of silently falling back
 # to the legacy plaintext HUD.
-LEGACY_PLAINTEXT_ROUTE_KEYS = {"zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak"}
+LEGACY_PLAINTEXT_ROUTE_KEYS: set[str] = set()
 TASK_NAME_RE = re.compile(r"《([^》]+)》")
 HUD_ACTIONS_PATCH = "\n" + HUD_ACTIONS_START + r"""
 const routeAtlasInfoWithFullActions=info;

@@ -13,9 +13,13 @@ def test_workbench_contains_all_current_route_maps_and_assets():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     assert set(routes) >= {"zang", "nagrand", "borean"}
     assert len(routes["borean"]["points"]) >= 224
-    borean_text = json.dumps(routes["borean"], ensure_ascii=False)
-    assert "交《集结红龙》→接《触动陷阱》" in borean_text
-    assert "冬鳞洞穴一次通行：裂谷 + 钥匙 + 护送 + 决不投降" in borean_text
+    borean = routes["borean"]
+    borean_text = json.dumps(borean, ensure_ascii=False)
+    assert borean["uiStandard"] == "semantic-hud-v45"
+    assert "莱洛拉斯" in borean["stepGroups"][56]["actionHtml"]
+    assert "集结红龙" in borean["stepGroups"][56]["actionHtml"]
+    assert "触动陷阱" in borean["stepGroups"][56]["actionHtml"]
+    assert "冬鳞洞穴：裂谷 → 钥匙 → 护送" in borean_text
     assert "龙骨荒野边界" in borean_text
     for route in routes.values():
         assert route["points"]
@@ -57,9 +61,15 @@ def test_single_workbench_uses_established_outland_layout_and_manual_follow():
     assert '/* ROUTE_DATA_END */;' in html
 
 
-def test_dragonblight_step45_semantic_hud_prototype_is_embedded():
+def test_dragonblight_is_fully_promoted_to_semantic_hud():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
-    assert routes["dragonblight"]["stepGroups"][44]["title"] == "新壁炉谷：祈祷之书 → 完美伪装 → 狼狈不堪"
+    dragon = routes["dragonblight"]
+    assert dragon["uiStandard"] == "semantic-hud-v45"
+    assert len(dragon["stepGroups"]) == 51
+    step45 = dragon["stepGroups"][44]
+    assert step45["title"] == "怨毒镇 → 斯古莉 → 祈祷之书 → 完美伪装 → 狼狈不堪"
+    for text in ("高级执行官乌洛斯", "斯古莉探员", "祈祷之书", "完美的伪装", "狼狈不堪"):
+        assert text in step45["actionHtml"]
     html = HTML.read_text(encoding="utf-8")
     assert "raSemanticPrototypeStyle" in html
     assert "↳</span><span class=\"ra-verb\">做" in html
@@ -70,16 +80,63 @@ def test_dragonblight_step45_semantic_hud_prototype_is_embedded():
     assert "raFlashMapPoint" not in html
 
 
-def test_grizzly_step1_is_promoted_to_approved_semantic_hud():
+def test_grizzly_is_fully_promoted_to_semantic_hud_and_handoffs_are_locked():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
-    assert routes["grizzly"]["stepGroups"][0]["title"] == "征服堡 → 沃德伦 → 风险湾 → 沃德伦领主"
+    grizzly = routes["grizzly"]
+    assert grizzly["uiStandard"] == "semantic-hud-v45"
+    assert len(grizzly["stepGroups"]) == 11
+    assert len(grizzly["points"]) == 79
+    assert all(group.get("actionHtml") for group in grizzly["stepGroups"])
+
+    step2 = grizzly["stepGroups"][1]["actionHtml"]
+    assert "征服者克雷娜" in step2 and "米克哈尔的日记" in step2 and "高戈娜" in step2
+    step7 = grizzly["stepGroups"][6]["actionHtml"]
+    assert "斥候沃塔肯" in step7 and "符文中的预言" in step7 and "先知帕鲁纳" in step7
+    step9 = grizzly["stepGroups"][8]["actionHtml"]
+    assert "哈里森·琼斯" in step9 and "克拉斯" in step9 and "萨莎" in step9
+    step10 = grizzly["stepGroups"][9]["actionHtml"]
+    for text in ("斥候沃塔肯", "勘探员罗卡尔", "托尔玛克", "洛肯的命令"):
+        assert text in step10
+
     html = HTML.read_text(encoding="utf-8")
-    assert "raGrizzlyStep1ActionHtml" in html
-    assert "raGrizzlyStep1NoteHtml" in html
     assert '<span class="ra-task ra-turnin">前往征服堡，自求多福吧！</span>' in html
     assert '<span class="ra-task ra-accept">征服者的指派</span>' in html
     assert '<span class="ra-task ra-do-task">沃德伦的领主</span>' in html
-    assert '<span class="ra-key">短时限返程</span>' in html
+
+
+def test_zuldrak_is_fully_promoted_to_semantic_hud_and_handoffs_are_locked():
+    routes = json.loads(DATA.read_text(encoding="utf-8"))
+    zuldrak = routes["zuldrak"]
+    assert zuldrak["uiStandard"] == "semantic-hud-v45"
+    assert len(zuldrak["stepGroups"]) == 12
+    assert len(zuldrak["points"]) == 107
+    assert all(group.get("actionHtml") for group in zuldrak["stepGroups"])
+
+    coverage = json.loads((ROOT / "data/route-atlas/zuldrak-route-coverage.json").read_text(encoding="utf-8"))
+    assert coverage["formal_task_count"] == 104
+    assert coverage["covered_task_count"] == 104
+    assert coverage["missing"] == []
+    assert coverage["unexpected"] == []
+
+    step1 = zuldrak["stepGroups"][0]["actionHtml"]
+    for text in ("莉安娜中士", "萨满长者莫奇", "怒爪酋长", "北伐军领主兰迪加", "悬浮的达库鲁命令卷轴"):
+        assert text in step1
+    step5 = zuldrak["stepGroups"][4]["actionHtml"]
+    for text in ("斯塔哈默中士", "玛加下士", "奇怪的魔精"):
+        assert text in step5
+    step6 = zuldrak["stepGroups"][5]["actionHtml"]
+    for text in ("穆尔沙·月影中士", "专家考格维尔", "狡猾的维克斯", "勇士的召唤！"):
+        assert text in step6
+    step7 = zuldrak["stepGroups"][6]["actionHtml"]
+    assert "古尔戈索克" in step7 and "巨魔仆从伍迪" in step7
+    later_text = "\n".join(group["actionHtml"] for group in zuldrak["stepGroups"][6:])
+    for text in ("巫医库弗", "剥皮师埃霍奈", "记载者图基尼", "元素驯服者德苟达"):
+        assert text in later_text
+
+    zuldrak_text = json.dumps(zuldrak, ensure_ascii=False)
+    for text in ("干瘪巨魔", "尸灵项圈", "某种邀请……", "西莱图斯祭坛", "奇怪的魔精"):
+        assert text in zuldrak_text
+    assert "返回已开启的古达克飞行点" not in zuldrak_text
 
 
 def test_route_level_inert_legends_are_not_embedded_in_player_html():
@@ -104,10 +161,12 @@ def test_borean_player_steps_group_geometry_without_losing_points():
 
 def test_borean_flight_point_is_deferred_to_magic_carpet_handoff():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
-    points = routes["borean"]["points"]
-    flight_actions = [(p[2], p[3]) for p in points if "开启战歌要塞飞行点" in p[3]]
-    assert flight_actions == [("驭风大师图波尔", flight_actions[0][1])]
-    assert "魔法飞毯" in flight_actions[0][1]
+    borean = routes["borean"]
+    points = borean["points"]
+    flight_actions = [(p[2], p[3]) for p in points if "开飞行点：战歌要塞（五号分别）" in p[3]]
+    assert flight_actions == [("战歌要塞飞行点", flight_actions[0][1])]
+    assert "驭风大师图波尔" in borean["stepGroups"][6]["actionHtml"]
+    assert "魔法飞毯" in borean["stepGroups"][6]["actionHtml"]
 
 
 def test_workbench_step_animation_is_group_aware():
@@ -130,13 +189,17 @@ def test_borean_amber_ledge_chain_is_explicit_in_player_text():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     borean = routes["borean"]
     groups = borean["stepGroups"]
-    assert "交《调查》→接《苔原上的审讯》" in groups[48]["summary"]
-    assert "交《监视裂谷：峭壁断层》→接《监视裂谷：冬鳞洞穴》" in groups[48]["summary"]
-    assert "上法师塔二楼交《苔原上的审讯》→接《说服的艺术》" in groups[49]["summary"]
-    assert "交《准备飞翔》→接《营救艾瓦诺尔》" in groups[50]["summary"]
-    borean_text = json.dumps(borean, ensure_ascii=False)
-    assert "法师塔二楼·诺曼提斯" in borean_text
-    assert "下楼找多纳森交《分享情报》→接《与时间赛跑》" in borean_text
+    assert groups[48]["title"] == "调查 / 峭壁断层 → 琥珀崖"
+    assert "图书管理员多纳森" in groups[48]["actionHtml"]
+    assert "苔原上的审讯" in groups[48]["actionHtml"]
+    assert "监视裂谷：冬鳞洞穴" in groups[48]["actionHtml"]
+    assert groups[49]["title"] == "法师塔二楼 → 与时间赛跑 → 苏雷斯塔兹"
+    assert "图书管理员诺曼提斯" in groups[49]["actionHtml"]
+    assert "图书管理员多纳森" in groups[49]["actionHtml"]
+    assert "苏雷斯塔兹" in groups[49]["actionHtml"]
+    assert groups[50]["title"] == "营救艾瓦诺尔 → 苏雷斯塔兹 → 考达拉"
+    assert "战斗法师安斯姆" in groups[50]["actionHtml"]
+    assert "启动任务飞行：考达拉" in groups[50]["actionHtml"]
 
 
 def test_borean_monster_drop_quest_starters_document_sources_and_conditions():
@@ -146,11 +209,11 @@ def test_borean_monster_drop_quest_starters_document_sources_and_conditions():
         "收割者伊斯里克斯",
         "伊斯里克斯的甲壳",
         "战歌要塞南门",
-        "黑暗堕落者达斯·血痕",
-        "Vial of Fresh Blood",
-        "必须先完成《乔装潜入》",
+        "达斯·血痕",
+        "鲜血瓶",
+        "完成《乔装潜入》后",
         "考达拉缚法者",
-        "Scintillating Fragment",
+        "闪光碎片",
         "不要误刷名称相近的考达拉织法者",
     )
     for text in required:
@@ -164,9 +227,9 @@ def test_borean_massive_moth_egg_is_merged_with_pollinated_moth_sweep():
         "《授粉的巨蛾》",
         "《巨大的蛾卵》",
         "48.55,59.04",
-        "Massive Glowing Egg",
-        "巨蛋旁集中刷完",
-        "不再为巨蛋上山",
+        "巨大的发光蛾卵",
+        "目标在巨蛋旁边非常集中",
+        "不要把蛋拖到迦莫斯洞穴之后再单独爬山",
     ):
         assert text in borean_text
     assert "49.6,66.1" not in borean_text
@@ -175,7 +238,13 @@ def test_borean_massive_moth_egg_is_merged_with_pollinated_moth_sweep():
 def test_borean_mercy_kill_prisoner_release_is_fivebox_shared():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     borean_text = json.dumps(routes["borean"], ensure_ascii=False)
-    for text in ("《慈悲为怀》", "囚犯数量五号共享", "主控开笼即可同步推进全队"):
+    for text in (
+        "《慈悲为怀》",
+        "共享：",
+        "5把天灾牢笼钥匙",
+        "开5个囚笼",
+        "同步全队",
+    ):
         assert text in borean_text
 
 
@@ -192,15 +261,15 @@ def test_borean_hidden_mechanics_audit_keeps_critical_execution_clues():
     borean_text = json.dumps(routes["borean"], ensure_ascii=False)
     required = (
         "55.3,50.8",
-        "海象人仪式物品",
-        "地精手榴弹",
-        "载具技能栏",
-        "纳克萨纳尔传送器",
+        "任务仪式物品",
+        "载具栏",
+        "外部传送器",
+        "内部传送器",
         "风魂图腾",
         "祖母的捕魂器",
         "奥术测量器",
         "先知格雷姆沃克灵魂脚下",
-        "任务自带飞行/传送",
+        "启动任务飞行：考达拉",
     )
     for text in required:
         assert text in borean_text
@@ -210,13 +279,13 @@ def test_outland_monster_drop_quest_starters_document_sources_and_conditions():
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     zang_text = json.dumps(routes["zang"], ensure_ascii=False)
     nagrand_text = json.dumps(routes["nagrand"], ensure_ascii=False)
-    for text in ("蒸汽泵监工", "血鳞监工", "血鳞召潮者", "《抽水泵结构图》", "《恢复平衡》", "铁藤种子"):
+    for text in ("蒸汽泵监工", "血鳞监工", "血鳞唤潮者", "《抽水泵结构图》", "《恢复平衡》", "铁藤种子"):
         assert text in zang_text
-    for text in ("伯爵”昂古拉", "Ungula's Mandible", "《沼泽中的伯爵》", "必掉任务起始物"):
+    for text in ("“伯爵”昂古拉", "昂古拉的下颚", "《沼泽中的伯爵》", "必掉"):
         assert text in zang_text
-    for text in ("枯萎的巨人", "Withered Basidium", "《枯萎的孢芽》", "不为它额外补刷"):
+    for text in ("枯萎的巨人", "枯萎的孢芽", "《枯萎的孢芽》", "不为它额外补刷"):
         assert text in zang_text
-    for text in ("三人一组巡逻的暗血入侵者", "Murkblood Invasion Plans", "《暗血入侵者》", "不按固定点等候"):
+    for text in ("三人组暗血入侵者", "暗血入侵计划", "《暗血入侵者》", "不按固定点等待"):
         assert text in nagrand_text
 
 
@@ -244,37 +313,50 @@ def test_storm_v45_full_step_cards_and_transport_state_are_locked():
     assert all(group.get("actionHtml") for group in storm["stepGroups"])
 
     action_html = "\n".join(group["actionHtml"] for group in storm["stepGroups"])
-    assert '<div class="ra-line ra-do-inline"><span class="ra-location">K3西侧·烧焦零件</span>' in storm["stepGroups"][1]["actionHtml"]
+    assert '<div class="ra-line ra-do-inline"><span class="ra-location">K3西侧</span>' in storm["stepGroups"][1]["actionHtml"]
     assert storm["stepGroups"][0].get("noteHtml", "") == ""
     assert "《清理残骸》" not in storm["stepGroups"][1].get("noteHtml", "")
     assert "按地面安全路线进入雷区；工具可连续拾取，一次通过即可。" in storm["stepGroups"][1].get("noteHtml", "")
     assert "西侧野蛮岭营地优先开粮食箱，每箱约2—4份。" in storm["stepGroups"][1].get("noteHtml", "")
-    assert "《亲密接触》" not in storm["stepGroups"][2].get("noteHtml", "")
-    assert "《进入矿洞》" not in storm["stepGroups"][2].get("noteHtml", "")
-    assert "共享：五号只需一个角色点击受伤的地精矿工开始护送" in storm["stepGroups"][2].get("noteHtml", "")
-    assert "共享：救援进度五号共享；仍需准备5把寒铁钥匙" in storm["stepGroups"][2].get("noteHtml", "")
-    assert "不共享：最南建筑内一层和地下一层各有设备拾取点" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "一个号开始护送即可，结束后五号同步完成。" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "准备5把寒铁钥匙，依次开启5个牢笼。" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "最南建筑" in storm["stepGroups"][2].get("noteHtml", "")
+    assert "两点来回拾取。" in storm["stepGroups"][2].get("noteHtml", "")
     assert "系统飞行：奥杜尔 → 丹尼芬雷" in action_html
     assert "开飞行点：丹尼芬雷（五号分别）" in action_html
     assert "开飞行点：奥杜尔（五号分别）" in action_html
     assert "炉石绑定：格罗玛什坠毁点" in action_html
-    assert "使用炉石：格罗玛什坠毁点" in action_html
+    assert action_html.count("使用炉石：格罗玛什坠毁点") >= 3
     assert storm["hearthChain"] == ["阿格玛之锤", "格罗玛什坠毁点"]
     assert storm["stepGroups"][4]["title"].startswith("荒弃矿洞")
-    assert "格罗玛什近路" in storm["stepGroups"][8]["title"]
+    assert storm["stepGroups"][8]["title"].endswith("格罗玛什")
+    assert storm["stepGroups"][10]["title"].startswith("丹尼芬雷：元素之战")
     assert storm["stepGroups"][13]["title"].startswith("炉石格罗玛什")
-    for required_anchor in (
-        "上古寒冬山谷·战熊作战区",
-        "追踪终点·追踪者图林",
-        "布伦希尔达附近峭壁·始祖龙巢",
-        "风暴神殿东南·维拉努斯诱引点",
-        "智慧神殿附近·清算之战",
-        "发明家图书馆内层·控制台 / 档案员麦卡顿",
-        "浮冰深渊南侧·4道浮冰裂隙",
-        "唐卡洛南侧·北风时间点",
+
+    step11_action = storm["stepGroups"][10]["actionHtml"]
+    step11_notes = storm["stepGroups"][10].get("noteHtml", "")
+    for task_name in ("热与冷", "猎杀间谍", "粘滞清洁", "喂饱安格里姆"):
+        assert task_name in step11_action
+    for expected_note in (
+        "五号分别骑亚米尔德旁的斯诺里",
+        "同一具死亡铁巨人只能挖一次",
+        "每号先杀怪取得6份任务道具",
+        "对座狼尸体使用灵体座狼之牙",
+        "五号分别完成《粘滞清洁》",
+        "对游荡的冰虫使用安格里姆之牙",
+        "雷暴台地的号角碎片五号分别拾取",
     ):
-        assert required_anchor in action_html
-    for special_detail in ("布莱恩通讯器", "右键触发", "载具技能", "海德尼尔鱼叉"):
+        assert expected_note in step11_notes
+
+    step12_action = storm["stepGroups"][11]["actionHtml"]
+    step12_notes = storm["stepGroups"][11].get("noteHtml", "")
+    assert "失踪的布莱恩·铜须" in step12_action
+    assert 'ra-turnin">失踪的布莱恩·铜须' not in step12_action
+    assert "风暴神殿东南" in step12_notes
+    assert "布莱恩便笺留到后续自然回格罗玛什时交" in storm["stepGroups"][11]["summary"]
+
+    assert "从这里进入洞穴" in action_html
+    for special_detail in ("右键触发", "载具技能", "海德尼尔鱼叉"):
         assert special_detail not in action_html
 
     for group in storm["stepGroups"]:
@@ -282,12 +364,20 @@ def test_storm_v45_full_step_cards_and_transport_state_are_locked():
         assert len(note_titles) == len(set(note_titles))
 
     coverage = json.loads((ROOT / "data/route-atlas/storm-peaks-route-coverage.json").read_text(encoding="utf-8"))
+    assert coverage["formal_task_count"] == 111
+    assert coverage["covered_task_count"] == 111
+    assert coverage["missing"] == []
+    assert coverage["unexpected"] == []
     assert coverage["system_flight_audit"] == [
         {"from": "奥杜尔", "to": "丹尼芬雷", "status": "both_opened_before_departure"}
     ]
     assert {"K3", "丹尼芬雷", "奥杜尔"} <= set(coverage["opened_flight_points_final"])
 
     foundation = json.loads((ROOT / "data/route-atlas/storm-peaks-task-foundation.json").read_text(encoding="utf-8"))
+    assert foundation["formal_task_count"] == 111
+    for qid in (12981, 12994, 13006, 13046):
+        task = next(task for task in foundation["tasks"] if task["quest_id"] == qid)
+        assert task["scope_status"].startswith("include_verified_calendar_first_run")
     earthen_oath = next(task for task in foundation["tasks"] if task["quest_id"] == 13005)
     assert [(objective["required_count"], objective["sources"][0]["name"]) for objective in earthen_oath["objectives"]] == [
         (7, "铁哨兵"),

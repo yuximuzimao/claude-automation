@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-22",
+  "updated_at": "2026-08-23",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -33,6 +33,10 @@
     "single_character_video_is_not_fivebox_speed_baseline": {
       "status": "user_confirmed_model_rule",
       "note": "单号视频用于证明任务、地点、入口、顺序和机制可行，不用于证明五开最优路线或完成时间。单号杀怪慢、任务经验利用方式不同；老手五开能达到相近总升级时间，说明视频任务集合仍有五开专属优化空间。最终优化器必须从部落全任务池独立选块。"
+    },
+    "normal_and_daily_same_content_no_route_distinction": {
+      "status": "user_confirmed_model_rule",
+      "note": "当普通任务与日常任务的实际执行内容、目标区和成本口径相同或等价时，路线规划不因‘普通/日常’标签本身区分处理；是否顺路做只按真实执行内容、共享机制、墙钟和路线重叠判断。"
     }
   },
   "item_properties": {
@@ -85,6 +89,23 @@
         "value": null,
         "status": "needs_live_test",
         "note": "可交易已确认；是否能在当前Titan拍卖行稳定购买及价格效率下次单独测试。"
+      }
+    },
+    "42780": {
+      "name": "奥杜尔的圣物",
+      "used_by_quests": [
+        12882,
+        13559
+      ],
+      "tradeable": {
+        "value": true,
+        "status": "user_confirmed",
+        "note": "2026-08-23风暴峭壁实跑确认：奥杜尔的圣物可在角色之间交易。"
+      },
+      "auction_house": {
+        "value": null,
+        "status": "prebuy_candidate",
+        "note": "可交易，因此后续批次应列入拍卖行一次性备货候选；在未实测当前Titan拍卖行供给与价格前，不把预购视为路线硬前提。"
       }
     }
   },
@@ -603,6 +624,61 @@
       "type": "quest_item_use_group_shared_confirmed",
       "status": "user_confirmed",
       "note": "瓦基里安始祖龙卵任务进度共享；先杀附近任务怪取得5个冰霜油膏，再由主号处理龙卵即可同步推进五号。"
+    },
+    "12967": {
+      "type": "vehicle_kill_progress_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《元素之战》首组实跑确认：任务进度不共享，五个角色需要分别完成载具击杀目标。"
+    },
+    "12985": {
+      "type": "corpse_mining_and_followup_loot_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《雷铸徽记》首组实跑确认：同一具死亡铁巨人不能由多个角色重复挖取；谁使用钻石尖镐，直接产出的雷铸之眼就归谁。若刷出伏击者，其掉落也按普通怪个人掉落处理。整条任务按不共享执行。"
+    },
+    "12981": {
+      "type": "daily_kill_loot_item_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《热与冷》首组实跑确认：不共享。每个角色都要自行杀怪取得6份任务道具，再分别使用6次任务道具并拾取后续目标物；本次在霜原湖任务区与其它任务顺路完成。"
+    },
+    "12987": {
+      "type": "quest_item_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "宣告石板进度不共享；五个角色需要分别使用。"
+    },
+    "13046": {
+      "type": "daily_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《喂饱安格里姆》首组实跑确认：任务进度五号共享，只需按共享任务执行一次。"
+    },
+    "12994": {
+      "type": "daily_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《猎杀间谍》首组实跑确认：任务进度五号共享，只需主控完成共享目标。"
+    },
+    "13001": {
+      "type": "mixed_ground_pickup_and_loot_personal_same_spawn_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "永冻碎片和坚韧猛犸象毛皮均不共享，五个角色分别完成自己的数量；永冻碎片同一刷新位置可由多个角色连续拾取，不必等待下一次刷新。"
+    },
+    "13011": {
+      "type": "summon_named_target_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《斩除尤卡塔尔》首组实跑确认：进度五号共享，只需割取/准备1块冰喉熊肉并由主控完成一次诱引击杀。"
+    },
+    "13006": {
+      "type": "daily_personal_loot_fast_respawn_confirmed",
+      "status": "user_confirmed",
+      "note": "《粘滞清洁》首组实跑确认：不共享，五个角色分别完成个人拾取。目标怪刷新很快；有人抢怪时可在原地等刷新，不必换点绕圈。"
+    },
+    "12975": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《回首往事》首组实跑确认：号角碎片进度不共享，五个角色分别拾取完成。"
+    },
+    "13051": {
+      "type": "triggered_event_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《维拉努斯》首组实跑确认：事件进度不共享，五个角色需要分别触发并完成。"
     }
   }
 }

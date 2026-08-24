@@ -22,6 +22,10 @@ INBOUND_QUEST_ID = 12853
 # generic Frostweave Cloth requirement expands to dungeon drop sources; its actual Enchanted Earth
 # objective and both quest NPCs are in Storm Peaks.
 DUNGEON_FALSE_POSITIVE_IDS = {12930}
+# User live run confirmed these calendar quests should be treated like ordinary tasks for the first
+# execution when their content is useful on the current route. They remain first-run-only; this does
+# not generate a second daily/repeatable loop.
+CALENDAR_FIRST_RUN_INCLUDE_IDS = {12981, 12994, 13006, 13046}
 # Questie contains two source-less records that are not executable Horde one-time quests in the
 # current WotLK route: 13053 is the removed beta Cold Weather Flying test-flight quest; 13417 is a
 # source-less duplicate/wrapper of the Alliance Bronzebeard finale rather than a Horde pickup.
@@ -49,8 +53,12 @@ def status_for(task: dict[str, Any]) -> tuple[str, list[str]]:
         return "knowledge_dungeon_or_raid", ["outdoor_mainline_policy"]
     if task.get("pvp", {}).get("is_pvp") and not task.get("pvp", {}).get("allowed_by_policy"):
         return "knowledge_pvp", ["non_mob_pvp"]
+    if qid in CALENDAR_FIRST_RUN_INCLUDE_IDS:
+        if task.get("eligibility", {}).get("status") == "conditional":
+            return "include_verified_calendar_first_run_conditional", list(task.get("eligibility", {}).get("reasons") or ["calendar_first_run_route_state"])
+        return "include_verified_calendar_first_run", ["user_verified_same_route_content_first_run_only"]
     if task.get("is_repeatable") or task.get("is_daily") or task.get("is_weekly") or task.get("is_monthly"):
-        return "knowledge_repeatable_or_calendar", ["not_one_time_baseline"]
+        return "knowledge_repeatable_or_calendar", ["not_yet_verified_for_first_route_run"]
     if task.get("eligibility", {}).get("status") == "conditional":
         return "include_conditional_route_state", list(task.get("eligibility", {}).get("reasons") or ["availability_requires_route_state"])
     if not task.get("xp", {}).get("has_xp"):
@@ -179,7 +187,12 @@ def main() -> None:
     formal_ids = {
         int(t["quest_id"])
         for t in rows
-        if t["scope_status"] in {"include_candidate", "include_conditional_route_state"}
+        if t["scope_status"] in {
+            "include_candidate",
+            "include_conditional_route_state",
+            "include_verified_calendar_first_run",
+            "include_verified_calendar_first_run_conditional",
+        }
     }
 
     # Promote zero-XP records only when they are the unique/mandatory dependency of a formal task.
@@ -382,7 +395,7 @@ def main() -> None:
         f"- 真实目标簇：{len(clusters)}；多任务共享目标簇：{sum(1 for cluster in clusters if cluster['shared_by_multiple_tasks'])}。目标簇只使用objective/extraObjective，不再拿接交NPC冒充任务目标。",
         f"- K3范围内正式任务起点：{len(k3_rows)}项；无Storm前置、首到即可接：{[row['quest_id'] for row in initial_k3]}。",
         "- K3入口硬交通动作：五号先找“诚实的”麦克斯领取借用双足飞龙；未取得前不开始大范围Storm目标路线。",
-        "- 声望条件的一次性霍迪尔任务保留为include_conditional_route_state，后续必须随路线声望状态逐步解锁；日常/重复版不进入首跑一次性主线。",
+        "- 声望条件任务保留为路线状态解锁；已由首跑确认与当前路线内容等价且顺路的12981/12994/13006/13046按第一轮普通任务处理，只做本轮一次，不生成第二轮日常/重复循环。",
         "",
         "## K3首到即可接",
         "",

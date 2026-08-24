@@ -1,0 +1,4832 @@
+{
+  "row_count": 104,
+  "tasks": [
+    {
+      "quest_id": 12503,
+      "name": "保卫银色前沿",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "指挥官法斯塔夫",
+          "entity_type": "npc",
+          "entity_id": 28059,
+          "representative_by_zone": {
+            "66": {
+              "x": 39.42,
+              "y": 66.96,
+              "spawn_count": 1,
+              "min_x": 39.42,
+              "max_x": 39.42,
+              "min_y": 66.96,
+              "max_y": 66.96
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "指挥官法斯塔夫",
+          "entity_type": "npc",
+          "entity_id": 28059,
+          "representative_by_zone": {
+            "66": {
+              "x": 39.42,
+              "y": 66.96,
+              "spawn_count": 1,
+              "min_x": 39.42,
+              "max_x": 39.42,
+              "min_y": 66.96,
+              "max_y": 66.96
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12504,
+      "name": "银色北伐军，撤退！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯塔哈默中士",
+          "entity_type": "npc",
+          "entity_id": 28056,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.42,
+              "y": 48.29,
+              "spawn_count": 1,
+              "min_x": 40.42,
+              "max_x": 40.42,
+              "min_y": 48.29,
+              "max_y": 48.29
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯塔哈默中士",
+          "entity_type": "npc",
+          "entity_id": 28056,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.42,
+              "y": 48.29,
+              "spawn_count": 1,
+              "min_x": 40.42,
+              "max_x": 40.42,
+              "min_y": 48.29,
+              "max_y": 48.29
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12505
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12505,
+      "name": "给斯塔哈默中士的新命令",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "指挥官库恩斯",
+          "entity_type": "npc",
+          "entity_id": 28039,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.27,
+              "y": 66.62,
+              "spawn_count": 1,
+              "min_x": 40.27,
+              "max_x": 40.27,
+              "min_y": 66.62,
+              "max_y": 66.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯塔哈默中士",
+          "entity_type": "npc",
+          "entity_id": 28056,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.42,
+              "y": 48.29,
+              "spawn_count": 1,
+              "min_x": 40.42,
+              "max_x": 40.42,
+              "min_y": 48.29,
+              "max_y": 48.29
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12740
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12504
+    },
+    {
+      "quest_id": 12506,
+      "name": "西莱图斯祭坛的麻烦",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12740
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12507,
+      "name": "奇怪的魔精",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [],
+      "finish_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12510
+    },
+    {
+      "quest_id": 12508,
+      "name": "扫清巨魔",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "玛加下士",
+          "entity_type": "npc",
+          "entity_id": 28099,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.36,
+              "y": 48.21,
+              "spawn_count": 1,
+              "min_x": 40.36,
+              "max_x": 40.36,
+              "min_y": 48.21,
+              "max_y": 48.21
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "玛加下士",
+          "entity_type": "npc",
+          "entity_id": 28099,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.36,
+              "y": 48.21,
+              "spawn_count": 1,
+              "min_x": 40.36,
+              "max_x": 40.36,
+              "min_y": 48.21,
+              "max_y": 48.21
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12505
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12510,
+      "name": "珍贵的元素液体",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12507
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12514
+    },
+    {
+      "quest_id": 12512,
+      "name": "一个也不能少",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "罗杰斯博士",
+          "entity_type": "npc",
+          "entity_id": 28125,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.68,
+              "y": 72.49,
+              "spawn_count": 1,
+              "min_x": 58.68,
+              "max_x": 58.68,
+              "min_y": 72.49,
+              "max_y": 72.49
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "罗杰斯博士",
+          "entity_type": "npc",
+          "entity_id": 28125,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.68,
+              "y": 72.49,
+              "spawn_count": 1,
+              "min_x": 58.68,
+              "max_x": 58.68,
+              "min_y": 72.49,
+              "max_y": 72.49
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12514,
+      "name": "蘑菇混合剂",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12510
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12516,
+      "name": "过犹不及",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12514
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12623
+    },
+    {
+      "quest_id": 12527,
+      "name": "贪吃的蜥蜴",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "学徒匹斯波特",
+          "entity_type": "npc",
+          "entity_id": 28204,
+          "representative_by_zone": {
+            "66": {
+              "x": 41.33,
+              "y": 65.13,
+              "spawn_count": 1,
+              "min_x": 41.33,
+              "max_x": 41.33,
+              "min_y": 65.13,
+              "max_y": 65.13
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "炼金师菲肯斯坦",
+          "entity_type": "npc",
+          "entity_id": 28205,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.02,
+              "y": 52.11,
+              "spawn_count": 1,
+              "min_x": 35.02,
+              "max_x": 35.02,
+              "min_y": 52.11,
+              "max_y": 52.11
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12510
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12552,
+      "name": "通灵师之死",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "穆尔沙·月影中士",
+          "entity_type": "npc",
+          "entity_id": 28283,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.06,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.06,
+              "max_x": 58.06,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "穆尔沙·月影中士",
+          "entity_type": "npc",
+          "entity_id": 28283,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.06,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.06,
+              "max_x": 58.06,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12598
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12554
+    },
+    {
+      "quest_id": 12553,
+      "name": "撒网者的喷丝头",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12598
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12554,
+      "name": "腐蚀者玛拉斯",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "穆尔沙·月影中士",
+          "entity_type": "npc",
+          "entity_id": 28283,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.06,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.06,
+              "max_x": 58.06,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "穆尔沙·月影中士",
+          "entity_type": "npc",
+          "entity_id": 28283,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.06,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.06,
+              "max_x": 58.06,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12552
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12555,
+      "name": "缠绕投网器",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12583
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12557,
+      "name": "实验室的学徒",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "炼金师菲肯斯坦",
+          "entity_type": "npc",
+          "entity_id": 28205,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.02,
+              "y": 52.11,
+              "spawn_count": 1,
+              "min_x": 35.02,
+              "max_x": 35.02,
+              "min_y": 52.11,
+              "max_y": 52.11
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "炼金师菲肯斯坦",
+          "entity_type": "npc",
+          "entity_id": 28205,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.02,
+              "y": 52.11,
+              "spawn_count": 1,
+              "min_x": 35.02,
+              "max_x": 35.02,
+              "min_y": 52.11,
+              "max_y": 52.11
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12596
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12562,
+      "name": "达卡莱巨魔不需要水元素！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "亚克斯中尉",
+          "entity_type": "npc",
+          "entity_id": 28309,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.18,
+              "y": 68.94,
+              "spawn_count": 1,
+              "min_x": 40.18,
+              "max_x": 40.18,
+              "min_y": 68.94,
+              "max_y": 68.94
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "亚克斯中尉",
+          "entity_type": "npc",
+          "entity_id": 28309,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.18,
+              "y": 68.94,
+              "spawn_count": 1,
+              "min_x": 40.18,
+              "max_x": 40.18,
+              "min_y": 68.94,
+              "max_y": 68.94
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12507
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12565,
+      "name": "希姆埃巴的祝福",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "Zim'Abwa",
+          "entity_type": "object",
+          "entity_id": 190535,
+          "representative_by_zone": {
+            "66": {
+              "x": 36.69,
+              "y": 72.81,
+              "spawn_count": 1,
+              "min_x": 36.69,
+              "max_x": 36.69,
+              "min_y": 72.81,
+              "max_y": 72.81
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12583,
+      "name": "坠毁的喷射器",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "专家考格维尔",
+          "entity_type": "npc",
+          "entity_id": 28284,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.26,
+              "y": 72.05,
+              "spawn_count": 1,
+              "min_x": 58.26,
+              "max_x": 58.26,
+              "min_y": 72.05,
+              "max_y": 72.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12553
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12584,
+      "name": "纯粹的邪恶",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "鲁伯特上尉",
+          "entity_type": "npc",
+          "entity_id": 28044,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.08,
+              "y": 72.43,
+              "spawn_count": 1,
+              "min_x": 58.08,
+              "max_x": 58.08,
+              "min_y": 72.43,
+              "max_y": 72.43
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "伊崔格",
+          "entity_type": "npc",
+          "entity_id": 28244,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.98,
+              "y": 66.64,
+              "spawn_count": 1,
+              "min_x": 40.98,
+              "max_x": 40.98,
+              "min_y": 66.64,
+              "max_y": 66.64
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12552
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12596,
+      "name": "巡逻任务",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "指挥官库恩斯",
+          "entity_type": "npc",
+          "entity_id": 28039,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.27,
+              "y": 66.62,
+              "spawn_count": 1,
+              "min_x": 40.27,
+              "max_x": 40.27,
+              "min_y": 66.62,
+              "max_y": 66.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "指挥官库恩斯",
+          "entity_type": "npc",
+          "entity_id": 28039,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.27,
+              "y": 66.62,
+              "spawn_count": 1,
+              "min_x": 40.27,
+              "max_x": 40.27,
+              "min_y": 66.62,
+              "max_y": 66.62
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12740
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12597,
+      "name": "止痛药",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "布兰顿上尉",
+          "entity_type": "npc",
+          "entity_id": 28042,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.8,
+              "y": 78.9,
+              "spawn_count": 1,
+              "min_x": 48.8,
+              "max_x": 48.8,
+              "min_y": 78.9,
+              "max_y": 78.9
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "布兰顿上尉",
+          "entity_type": "npc",
+          "entity_id": 28042,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.8,
+              "y": 78.9,
+              "spawn_count": 1,
+              "min_x": 48.8,
+              "max_x": 48.8,
+              "min_y": 78.9,
+              "max_y": 78.9
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12596
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12598,
+      "name": "扔手雷",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "鲁伯特上尉",
+          "entity_type": "npc",
+          "entity_id": 28044,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.08,
+              "y": 72.43,
+              "spawn_count": 1,
+              "min_x": 58.08,
+              "max_x": 58.08,
+              "min_y": 72.43,
+              "max_y": 72.43
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "鲁伯特上尉",
+          "entity_type": "npc",
+          "entity_id": 28044,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.08,
+              "y": 72.43,
+              "spawn_count": 1,
+              "min_x": 58.08,
+              "max_x": 58.08,
+              "min_y": 72.43,
+              "max_y": 72.43
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12596
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12599,
+      "name": "温暖的篝火",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "格隆迪尔上尉",
+          "entity_type": "npc",
+          "entity_id": 28043,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.15,
+              "y": 63.89,
+              "spawn_count": 1,
+              "min_x": 48.15,
+              "max_x": 48.15,
+              "min_y": 63.89,
+              "max_y": 63.89
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "格隆迪尔上尉",
+          "entity_type": "npc",
+          "entity_id": 28043,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.15,
+              "y": 63.89,
+              "spawn_count": 1,
+              "min_x": 48.15,
+              "max_x": 48.15,
+              "min_y": 63.89,
+              "max_y": 63.89
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12596
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12606,
+      "name": "茧中人",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "鲁伯特上尉",
+          "entity_type": "npc",
+          "entity_id": 28044,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.08,
+              "y": 72.43,
+              "spawn_count": 1,
+              "min_x": 58.08,
+              "max_x": 58.08,
+              "min_y": 72.43,
+              "max_y": 72.43
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "鲁伯特上尉",
+          "entity_type": "npc",
+          "entity_id": 28044,
+          "representative_by_zone": {
+            "66": {
+              "x": 58.08,
+              "y": 72.43,
+              "spawn_count": 1,
+              "min_x": 58.08,
+              "max_x": 58.08,
+              "min_y": 72.43,
+              "max_y": 72.43
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12598
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12609,
+      "name": "收集腐液",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12799
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12610,
+      "name": "蝙蝠翅膀",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12799
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12615,
+      "name": "希姆托加的祝福",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "Zim'Torga",
+          "entity_type": "object",
+          "entity_id": 190602,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.54,
+              "y": 57.2,
+              "spawn_count": 1,
+              "min_x": 59.54,
+              "max_x": 59.54,
+              "min_y": 57.2,
+              "max_y": 57.2
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12516
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12622,
+      "name": "金亚莱的领袖",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12623
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12640
+    },
+    {
+      "quest_id": 12623,
+      "name": "巫医库弗",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "妖术师乌布戈",
+          "entity_type": "npc",
+          "entity_id": 28062,
+          "representative_by_zone": {
+            "66": {
+              "x": 40.53,
+              "y": 65.61,
+              "spawn_count": 1,
+              "min_x": 40.53,
+              "max_x": 40.53,
+              "min_y": 65.61,
+              "max_y": 65.61
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12516
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12627
+    },
+    {
+      "quest_id": 12627,
+      "name": "横扫金亚莱",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12623
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12628,
+      "name": "与哈克娅交谈",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12627
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12632
+    },
+    {
+      "quest_id": 12629,
+      "name": "无处可藏",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12637
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12648
+    },
+    {
+      "quest_id": 12630,
+      "name": "纳斯和巨魔的毛发",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12884
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12631,
+      "name": "某种邀请……",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12637
+    },
+    {
+      "quest_id": 12632,
+      "name": "我的后裔",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12628
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12635,
+      "name": "雪豹之神的圣物",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12627
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12637,
+      "name": "幸免于难",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12631
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12629
+    },
+    {
+      "quest_id": 12639,
+      "name": "冻土精华",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12622
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12640,
+      "name": "封印裂隙",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12622
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12659
+    },
+    {
+      "quest_id": 12642,
+      "name": "伦诺克之魂",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12632
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12646
+    },
+    {
+      "quest_id": 12646,
+      "name": "我的先知，我的敌人",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12642
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12647
+    },
+    {
+      "quest_id": 12647,
+      "name": "结束痛苦",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12646
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12653
+    },
+    {
+      "quest_id": 12648,
+      "name": "乔装打扮",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12629
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12661
+    },
+    {
+      "quest_id": 12650,
+      "name": "自毁家园",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12635
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12652,
+      "name": "喂饱食尸鬼",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "骨肠",
+          "entity_type": "npc",
+          "entity_id": 28589,
+          "representative_by_zone": {
+            "66": {
+              "x": 19.86,
+              "y": 75.45,
+              "spawn_count": 1,
+              "min_x": 19.86,
+              "max_x": 19.86,
+              "min_y": 75.45,
+              "max_y": 75.45
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "骨肠",
+          "entity_type": "npc",
+          "entity_id": 28589,
+          "representative_by_zone": {
+            "66": {
+              "x": 19.86,
+              "y": 75.45,
+              "spawn_count": 1,
+              "min_x": 19.86,
+              "max_x": 19.86,
+              "min_y": 75.45,
+              "max_y": 75.45
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12629,
+        12643
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12653,
+      "name": "返回哈克娅身边",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "伦诺克之魂",
+          "entity_type": "npc",
+          "entity_id": 28561,
+          "representative_by_zone": {
+            "66": {
+              "x": 53.38,
+              "y": 39.01,
+              "spawn_count": 1,
+              "min_x": 53.38,
+              "max_x": 53.38,
+              "min_y": 39.01,
+              "max_y": 39.01
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12647
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12665
+    },
+    {
+      "quest_id": 12655,
+      "name": "希姆鲁克的祝福",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "Zim'Rhuk",
+          "entity_type": "object",
+          "entity_id": 190657,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.56,
+              "y": 44.13,
+              "spawn_count": 1,
+              "min_x": 59.56,
+              "max_x": 59.56,
+              "min_y": 44.13,
+              "max_y": 44.13
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12632
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12659,
+      "name": "巫毒头饰！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12640
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12661,
+      "name": "潜入沃尔塔鲁斯",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12648,
+        12649
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12669
+    },
+    {
+      "quest_id": 12662,
+      "name": "击落赫布金",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12640
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12665,
+      "name": "不祥的扰动",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12653
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12666
+    },
+    {
+      "quest_id": 12666,
+      "name": "进入灵界的准备",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12665
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12667
+    },
+    {
+      "quest_id": 12667,
+      "name": "寻找风蛇女神",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12666
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12672
+    },
+    {
+      "quest_id": 12668,
+      "name": "复仇的基础",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12672
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12674
+    },
+    {
+      "quest_id": 12669,
+      "name": "目前为止，一切很糟",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12661
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12677
+    },
+    {
+      "quest_id": 12672,
+      "name": "创造条件",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12667
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12668
+    },
+    {
+      "quest_id": 12673,
+      "name": "官大一级压死人",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12669
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12674,
+      "name": "地狱的复仇",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12668
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12675
+    },
+    {
+      "quest_id": 12675,
+      "name": "最后一步",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "奎丝鲁恩之魂",
+          "entity_type": "npc",
+          "entity_id": 28030,
+          "representative_by_zone": {
+            "66": {
+              "x": 75.39,
+              "y": 58.62,
+              "spawn_count": 1,
+              "min_x": 75.39,
+              "max_x": 75.39,
+              "min_y": 58.62,
+              "max_y": 58.62
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12674
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12684
+    },
+    {
+      "quest_id": 12676,
+      "name": "爆破活动",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12677
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12713
+    },
+    {
+      "quest_id": 12677,
+      "name": "危险的材料",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12669
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12676
+    },
+    {
+      "quest_id": 12684,
+      "name": "死去神灵的血液",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12675
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12685,
+      "name": "种瓜得瓜种豆得豆",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12684
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12686,
+      "name": "无法容忍",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12677
+      ],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12690,
+      "name": "火上浇油",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [
+        12676
+      ],
+      "next_quest": 12710
+    },
+    {
+      "quest_id": 12707,
+      "name": "猛犸的复仇",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "剥皮师埃霍奈",
+          "entity_type": "npc",
+          "entity_id": 28484,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.15,
+              "y": 56.2,
+              "spawn_count": 1,
+              "min_x": 59.15,
+              "max_x": 59.15,
+              "min_y": 56.2,
+              "max_y": 56.2
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12685
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12708,
+      "name": "魔化蒂基面具战士",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "元素驯服者德苟达",
+          "entity_type": "npc",
+          "entity_id": 28480,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.4,
+              "y": 56.41,
+              "spawn_count": 1,
+              "min_x": 59.4,
+              "max_x": 59.4,
+              "min_y": 56.41,
+              "max_y": 56.41
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12685
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12709,
+      "name": "妖术宝箱",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12685
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12710,
+      "name": "真相大白",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12690
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12712,
+      "name": "督军佐尔玛兹的钥匙",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12685
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12721
+    },
+    {
+      "quest_id": 12713,
+      "name": "背叛",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12676
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12721,
+      "name": "狂暴",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12712
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12729,
+      "name": "诸神的指引",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "巫医库弗",
+          "entity_type": "npc",
+          "entity_id": 28479,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.5,
+              "y": 58.05,
+              "spawn_count": 1,
+              "min_x": 59.5,
+              "max_x": 59.5,
+              "min_y": 58.05,
+              "max_y": 58.05
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12721
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12730
+    },
+    {
+      "quest_id": 12730,
+      "name": "在佐尔赫布相会",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12729
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12740,
+      "name": "银色北伐军的降落伞",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "指挥官法斯塔夫",
+          "entity_type": "npc",
+          "entity_id": 28059,
+          "representative_by_zone": {
+            "66": {
+              "x": 39.42,
+              "y": 66.96,
+              "spawn_count": 1,
+              "min_x": 39.42,
+              "max_x": 39.42,
+              "min_y": 66.96,
+              "max_y": 66.96
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "指挥官法斯塔夫",
+          "entity_type": "npc",
+          "entity_id": 28059,
+          "representative_by_zone": {
+            "66": {
+              "x": 39.42,
+              "y": 66.96,
+              "spawn_count": 1,
+              "min_x": 39.42,
+              "max_x": 39.42,
+              "min_y": 66.96,
+              "max_y": 66.96
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12789,
+      "name": "前往圣光据点！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "北伐军战士瓦鲁斯",
+          "entity_type": "npc",
+          "entity_id": 28228,
+          "representative_by_zone": {
+            "65": {
+              "x": 83.98,
+              "y": 26.1,
+              "spawn_count": 1,
+              "min_x": 83.98,
+              "max_x": 83.98,
+              "min_y": 26.1,
+              "max_y": 26.1
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "莉安娜中士",
+          "entity_type": "npc",
+          "entity_id": 29137,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.03,
+              "y": 74.42,
+              "spawn_count": 1,
+              "min_x": 32.03,
+              "max_x": 32.03,
+              "min_y": 74.42,
+              "max_y": 74.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12545
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12795,
+      "name": "银色前沿",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "血玫瑰达图拉",
+          "entity_type": "npc",
+          "entity_id": 28532,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.28,
+              "y": 74.04,
+              "spawn_count": 1,
+              "min_x": 14.28,
+              "max_x": 14.28,
+              "min_y": 74.04,
+              "max_y": 74.04
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "指挥官法斯塔夫",
+          "entity_type": "npc",
+          "entity_id": 28059,
+          "representative_by_zone": {
+            "66": {
+              "x": 39.42,
+              "y": 66.96,
+              "spawn_count": 1,
+              "min_x": 39.42,
+              "max_x": 39.42,
+              "min_y": 66.96,
+              "max_y": 66.96
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12630
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12503
+    },
+    {
+      "quest_id": 12799,
+      "name": "吸取灵魂",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "阿纳斯上尉",
+          "entity_type": "npc",
+          "entity_id": 28045,
+          "representative_by_zone": {
+            "66": {
+              "x": 35.62,
+              "y": 52.23,
+              "spawn_count": 1,
+              "min_x": 35.62,
+              "max_x": 35.62,
+              "min_y": 52.23,
+              "max_y": 52.23
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12857,
+      "name": "悬赏：怒鬃的鳍肢",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "Wanted!",
+          "entity_type": "object",
+          "entity_id": 191728,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.27,
+              "y": 75.68,
+              "spawn_count": 1,
+              "min_x": 32.27,
+              "max_x": 32.27,
+              "min_y": 75.68,
+              "max_y": 75.68
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "怒爪酋长",
+          "entity_type": "npc",
+          "entity_id": 29690,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.18,
+              "y": 75.64,
+              "spawn_count": 1,
+              "min_x": 32.18,
+              "max_x": 32.18,
+              "min_y": 75.64,
+              "max_y": 75.64
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12859,
+      "name": "火仍在烧！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "萨满长者莫奇",
+          "entity_type": "npc",
+          "entity_id": 29733,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.02,
+              "y": 75.6,
+              "spawn_count": 1,
+              "min_x": 32.02,
+              "max_x": 32.02,
+              "min_y": 75.6,
+              "max_y": 75.6
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "萨满长者莫奇",
+          "entity_type": "npc",
+          "entity_id": 29733,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.02,
+              "y": 75.6,
+              "spawn_count": 1,
+              "min_x": 32.02,
+              "max_x": 32.02,
+              "min_y": 75.6,
+              "max_y": 75.6
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12861,
+      "name": "巨魔疯啦！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "怒爪酋长",
+          "entity_type": "npc",
+          "entity_id": 29690,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.18,
+              "y": 75.64,
+              "spawn_count": 1,
+              "min_x": 32.18,
+              "max_x": 32.18,
+              "min_y": 75.64,
+              "max_y": 75.64
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "怒爪酋长",
+          "entity_type": "npc",
+          "entity_id": 29690,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.18,
+              "y": 75.64,
+              "spawn_count": 1,
+              "min_x": 32.18,
+              "max_x": 32.18,
+              "min_y": 75.64,
+              "max_y": 75.64
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12883,
+      "name": "达库鲁的命令",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "Orders From Drakuru",
+          "entity_type": "object",
+          "entity_id": 191766,
+          "representative_by_zone": {
+            "66": {
+              "x": 34.94,
+              "y": 83.9,
+              "spawn_count": 1,
+              "min_x": 34.94,
+              "max_x": 34.94,
+              "min_y": 83.9,
+              "max_y": 83.9
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军领主兰迪加",
+          "entity_type": "npc",
+          "entity_id": 29687,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.15,
+              "y": 75.73,
+              "spawn_count": 1,
+              "min_x": 32.15,
+              "max_x": 32.15,
+              "min_y": 75.73,
+              "max_y": 75.73
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12902
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12884
+    },
+    {
+      "quest_id": 12884,
+      "name": "黑锋哨站",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "北伐军领主兰迪加",
+          "entity_type": "npc",
+          "entity_id": 29687,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.15,
+              "y": 75.73,
+              "spawn_count": 1,
+              "min_x": 32.15,
+              "max_x": 32.15,
+              "min_y": 75.73,
+              "max_y": 75.73
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "斯特凡·瓦杜",
+          "entity_type": "npc",
+          "entity_id": 28518,
+          "representative_by_zone": {
+            "66": {
+              "x": 14.06,
+              "y": 73.8,
+              "spawn_count": 1,
+              "min_x": 14.06,
+              "max_x": 14.06,
+              "min_y": 73.8,
+              "max_y": 73.8
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12883
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12630
+    },
+    {
+      "quest_id": 12894,
+      "name": "北伐军前线营地",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "北伐军领主兰迪加",
+          "entity_type": "npc",
+          "entity_id": 29687,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.15,
+              "y": 75.73,
+              "spawn_count": 1,
+              "min_x": 32.15,
+              "max_x": 32.15,
+              "min_y": 75.73,
+              "max_y": 75.73
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军战士马克拉尔",
+          "entity_type": "npc",
+          "entity_id": 29689,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.28,
+              "y": 63.96,
+              "spawn_count": 1,
+              "min_x": 25.28,
+              "max_x": 25.28,
+              "min_y": 63.96,
+              "max_y": 63.96
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12883
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12903
+    },
+    {
+      "quest_id": 12901,
+      "name": "从无到有",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12894
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12902,
+      "name": "寻找答案",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "北伐军领主兰迪加",
+          "entity_type": "npc",
+          "entity_id": 29687,
+          "representative_by_zone": {
+            "66": {
+              "x": 32.15,
+              "y": 75.73,
+              "spawn_count": 1,
+              "min_x": 32.15,
+              "max_x": 32.15,
+              "min_y": 75.73,
+              "max_y": 75.73
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "Orders From Drakuru",
+          "entity_type": "object",
+          "entity_id": 191766,
+          "representative_by_zone": {
+            "66": {
+              "x": 34.94,
+              "y": 83.9,
+              "spawn_count": 1,
+              "min_x": 34.94,
+              "max_x": 34.94,
+              "min_y": 83.9,
+              "max_y": 83.9
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12883
+    },
+    {
+      "quest_id": 12903,
+      "name": "朋友的意义……",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "北伐军战士马克拉尔",
+          "entity_type": "npc",
+          "entity_id": 29689,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.28,
+              "y": 63.96,
+              "spawn_count": 1,
+              "min_x": 25.28,
+              "max_x": 25.28,
+              "min_y": 63.96,
+              "max_y": 63.96
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军战士马克拉尔",
+          "entity_type": "npc",
+          "entity_id": 29689,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.28,
+              "y": 63.96,
+              "spawn_count": 1,
+              "min_x": 25.28,
+              "max_x": 25.28,
+              "min_y": 63.96,
+              "max_y": 63.96
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12894
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12904,
+      "name": "圣光不能为我复仇",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "戈尔克",
+          "entity_type": "npc",
+          "entity_id": 29455,
+          "representative_by_zone": {
+            "66": {
+              "x": 17.64,
+              "y": 57.54,
+              "spawn_count": 1,
+              "min_x": 17.64,
+              "max_x": 17.64,
+              "min_y": 57.54,
+              "max_y": 57.54
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "戈尔克",
+          "entity_type": "npc",
+          "entity_id": 29455,
+          "representative_by_zone": {
+            "66": {
+              "x": 17.64,
+              "y": 57.54,
+              "spawn_count": 1,
+              "min_x": 17.64,
+              "max_x": 17.64,
+              "min_y": 57.54,
+              "max_y": 57.54
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12894
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12912,
+      "name": "风暴将至",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "盖米尔",
+          "entity_type": "npc",
+          "entity_id": 29647,
+          "representative_by_zone": {
+            "66": {
+              "x": 19.91,
+              "y": 56.24,
+              "spawn_count": 1,
+              "min_x": 19.91,
+              "max_x": 19.91,
+              "min_y": 56.24,
+              "max_y": 56.24
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12894
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12914
+    },
+    {
+      "quest_id": 12914,
+      "name": "拯救盖米尔",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12912
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12916
+    },
+    {
+      "quest_id": 12916,
+      "name": "唯一的希望",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "工程师里德",
+          "entity_type": "npc",
+          "entity_id": 29688,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.23,
+              "y": 63.88,
+              "spawn_count": 1,
+              "min_x": 25.23,
+              "max_x": 25.23,
+              "min_y": 63.88,
+              "max_y": 63.88
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "盖米尔",
+          "entity_type": "npc",
+          "entity_id": 29647,
+          "representative_by_zone": {
+            "66": {
+              "x": 19.91,
+              "y": 56.24,
+              "spawn_count": 1,
+              "min_x": 19.91,
+              "max_x": 19.91,
+              "min_y": 56.24,
+              "max_y": 56.24
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12914
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12919
+    },
+    {
+      "quest_id": 12919,
+      "name": "风暴之王的复仇",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "盖米尔",
+          "entity_type": "npc",
+          "entity_id": 29647,
+          "representative_by_zone": {
+            "66": {
+              "x": 19.91,
+              "y": 56.24,
+              "spawn_count": 1,
+              "min_x": 19.91,
+              "max_x": 19.91,
+              "min_y": 56.24,
+              "max_y": 56.24
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军战士马克拉尔",
+          "entity_type": "npc",
+          "entity_id": 29689,
+          "representative_by_zone": {
+            "66": {
+              "x": 25.28,
+              "y": 63.96,
+              "spawn_count": 1,
+              "min_x": 25.28,
+              "max_x": 25.28,
+              "min_y": 63.96,
+              "max_y": 63.96
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12916
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12932,
+      "name": "痛苦斗兽场：伊戈达斯！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12933
+    },
+    {
+      "quest_id": 12933,
+      "name": "痛苦斗兽场：猛犸人！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12932,
+        12954
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12934
+    },
+    {
+      "quest_id": 12934,
+      "name": "痛苦斗兽场：异界的对手！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12933
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12935
+    },
+    {
+      "quest_id": 12935,
+      "name": "痛苦斗兽场：海象人的末日！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12934
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12936
+    },
+    {
+      "quest_id": 12936,
+      "name": "痛苦斗兽场：血怒者科尔拉克！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12935
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12948
+    },
+    {
+      "quest_id": 12948,
+      "name": "痛苦斗兽场的冠军",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "巨魔仆从伍迪",
+          "entity_type": "npc",
+          "entity_id": 30009,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.47,
+              "y": 56.42,
+              "spawn_count": 1,
+              "min_x": 48.47,
+              "max_x": 48.47,
+              "min_y": 56.42,
+              "max_y": 56.42
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12936
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12974,
+      "name": "勇士的召唤！",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "狡猾的维克斯",
+          "entity_type": "npc",
+          "entity_id": 30137,
+          "representative_by_zone": {
+            "4395": {
+              "x": 48.18,
+              "y": 44.71,
+              "spawn_count": 1,
+              "min_x": 48.18,
+              "max_x": 48.18,
+              "min_y": 44.71,
+              "max_y": 44.71
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "古尔戈索克",
+          "entity_type": "npc",
+          "entity_id": 30007,
+          "representative_by_zone": {
+            "66": {
+              "x": 48.43,
+              "y": 56.36,
+              "spawn_count": 1,
+              "min_x": 48.43,
+              "max_x": 48.43,
+              "min_y": 56.36,
+              "max_y": 56.36
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12932
+    },
+    {
+      "quest_id": 13097,
+      "name": "未完的事情",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈克娅",
+          "entity_type": "npc",
+          "entity_id": 28401,
+          "representative_by_zone": {
+            "66": {
+              "x": 61.98,
+              "y": 64.08,
+              "spawn_count": 2,
+              "min_x": 60.25,
+              "max_x": 63.72,
+              "min_y": 57.74,
+              "max_y": 70.42
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "托玛尔",
+          "entity_type": "npc",
+          "entity_id": 30671,
+          "representative_by_zone": {
+            "66": {
+              "x": 70.01,
+              "y": 22.9,
+              "spawn_count": 1,
+              "min_x": 70.01,
+              "max_x": 70.01,
+              "min_y": 22.9,
+              "max_y": 22.9
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12730
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 13096
+    },
+    {
+      "quest_id": 13099,
+      "name": "核实情况",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "记载者拜基妮",
+          "entity_type": "npc",
+          "entity_id": 30676,
+          "representative_by_zone": {
+            "66": {
+              "x": 70.06,
+              "y": 20.92,
+              "spawn_count": 1,
+              "min_x": 70.06,
+              "max_x": 70.06,
+              "min_y": 20.92,
+              "max_y": 20.92
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 13098
+    },
+    {
+      "quest_id": 13549,
+      "name": "拎尾巴",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "记载者图基尼",
+          "entity_type": "npc",
+          "entity_id": 28527,
+          "representative_by_zone": {
+            "66": {
+              "x": 59.98,
+              "y": 57.93,
+              "spawn_count": 1,
+              "min_x": 59.98,
+              "max_x": 59.98,
+              "min_y": 57.93,
+              "max_y": 57.93
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12635
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 13556,
+      "name": "杜布拉金需要迅猛龙卵",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "哈瓦纳",
+          "entity_type": "npc",
+          "entity_id": 33025,
+          "representative_by_zone": {
+            "66": {
+              "x": 69.99,
+              "y": 20.96,
+              "spawn_count": 1,
+              "min_x": 69.99,
+              "max_x": 69.99,
+              "min_y": 20.96,
+              "max_y": 20.96
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "哈瓦纳",
+          "entity_type": "npc",
+          "entity_id": 33025,
+          "representative_by_zone": {
+            "66": {
+              "x": 69.99,
+              "y": 20.96,
+              "spawn_count": 1,
+              "min_x": 69.99,
+              "max_x": 69.99,
+              "min_y": 20.96,
+              "max_y": 20.96
+            }
+          }
+        }
+      ],
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null
+    }
+  ]
+}

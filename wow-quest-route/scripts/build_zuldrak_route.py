@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from zuldrak_semantic_steps import apply_zuldrak_semantic_overrides
+
 ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 MECHANISMS = ROOT / "data/route-atlas/zuldrak-special-mechanism-audit.json"
@@ -240,17 +242,20 @@ GROUPS = [
 for title, summary, fn in GROUPS:
     G(title, summary, fn)
 
+apply_zuldrak_semantic_overrides(points, step_groups)
+
 missing = sorted(FORMAL - covered - set(INTENTIONAL_DEFER))
 unexpected = sorted(covered - FORMAL)
 
 route = {
     "order": 6,
     "title": "祖达克 · 74+ 五开任务路线",
-    "sub": "从灰熊丘陵北侧进入圣光据点；中段炉石绑定希姆托加；完成杜布拉金迅猛龙卵任务后结束本图。",
+    "sub": "从圣光据点开始；中段炉石绑定希姆托加；完成杜布拉金迅猛龙卵任务后结束本图。",
     "badge": "炉石：希姆托加\n预计总时间：待组件模型重算",
+    "uiStandard": "semantic-hud-v45",
     "image": "maps/66-zul-drak-hd.jpg",
     "legend": "",
-    "footer": "《勇士的召唤！》必须在痛苦斗兽场任务开始前接取：从银色前沿利用《魔法王国达拉然》传送到达拉然，在下水道向狡猾的维克斯接取后乘系统鸟返回银色前沿。",
+    "footer": "在杜布拉金交《杜布拉金需要迅猛龙卵》后，本图祖达克清理段结束。",
     "labels": [
         [32.0, 74.4, "圣光据点"], [25.3, 64.0, "北伐军前线"], [14.1, 73.8, "黑锋哨站"],
         [28.5, 46.0, "沃尔塔鲁斯"], [40.3, 66.5, "银色前沿"], [40.4, 48.3, "西莱图斯祭坛"],
