@@ -32,6 +32,11 @@
 | `data/observations/route-timing-runs.json` | 路线预测/实跑墙钟、异常成本、长期目标基准 | 估时、效率复盘或记录新实测时 |
 | `data/observations/blocked-tasks.json` | 本服阻断/不可做任务 | 接不到、交不了、位面异常时 |
 | `data/route-atlas/workbench-routes.json` | 所有地图当前Route Atlas路线数据 | 改地图步骤/坐标/备注时 |
+| `data/route-atlas/northrend-task-universe.json` | 全诺森德任务卡、Availability、生命周期、执行/空间审计的生成真值 | 新地图scope、全任务池查漏、判断任务是否可进入路线时 |
+| `data/route-atlas/northrend-execution-review.json` | 全诺森德人类可执行性/空间审计汇总与待审队列 | 查洞穴/楼层/载具/脚本交通或确认是否仍有未审任务时 |
+| `data/route-atlas/*-task-overrides.json` | 地图级人工执行事实、五开检查与版本纠错 | 复用具体地图已核验任务机制时；不写路线顺序决策 |
+| `lib/northrend_execution_review.py` | 将地图人工审计回灌任务宇宙并执行平面坐标门禁 | 扩展/修正全诺森德执行审计逻辑时 |
+| `scripts/build_northrend_task_universe.py` | 生成全诺森德任务宇宙与审计汇总 | Availability/生命周期/服务器变体/执行事实发生变化后 |
 | `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式执行HTML | 实跑/审图/复制到游戏电脑 |
 | `scripts/build_route_atlas_workbench.py` | 将路线数据嵌入唯一工作台 | 修改Route Atlas数据/UI后构建 |
 | `docs/archive/README.md` | 历史档案总入口；旧方案、一次性分析、NEAT和视频历史 | 只有需要考古/回溯时按主题进入 |

@@ -1,0 +1,74 @@
+{
+  "status": "grizzly_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 394,
+  "zone_name": "灰熊丘陵",
+  "policy": {
+    "purpose": "补齐灰熊正式路线池之外的日常/PvP兼容NPC任务、载具、拾取与跨区交通事实。"
+  },
+  "reviewed_no_extra_note_ids": [12315, 12317],
+  "notes": {
+    "11981": {
+      "decision": "must_note",
+      "facts": ["库伦在索尔莫丹上方山顶约(65,17)。不要钻进他脚下的建筑；从约(62,24)取向西北的土路分叉，再沿山路爬上去。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer"],
+      "mechanism_codes": ["verified_hill_path", "not_building_interior"],
+      "evidence_sources": ["wowhead_wotlk_11981"]
+    },
+    "12170": {
+      "decision": "must_note",
+      "facts": ["黑水伐木场击杀10个联盟单位或玩家；可以全程通过联盟NPC士兵完成，不要求PVP击杀玩家，因此保留在户外任务宇宙。"],
+      "mechanism_codes": ["pvp_area_but_npc_completion_allowed"],
+      "evidence_sources": ["questie_objective", "grizzly_venture_daily_guide"]
+    },
+    "12270": {
+      "decision": "must_note",
+      "facts": ["在蓝天伐木场找到/夺取损坏伐木机，进入载具后把它开回Grekk身边交付，重复3次。可用Overclock加速；必须真正把载具带到NPC近距离。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["shredder_vehicle_delivery_three_times", "overclock_available"],
+      "fivebox_checks": ["公开旧资料称组队可能共享交付，但当前服务器五开仍需实测；不要据此预先少开载具。"],
+      "evidence_sources": ["wowhead_wotlk_12270", "grizzly_venture_daily_guide"]
+    },
+    "12280": {
+      "decision": "must_note",
+      "facts": ["4齿轮、3链轮、2弹簧都在蓝天伐木场河中岛/锯木厂附近地面拾取；不要到河外找。链轮通常平躺，齿轮更明显地竖出地面。"],
+      "mechanism_codes": ["island_only_ground_parts_collection"],
+      "fivebox_checks": ["确认三类地面零件是否个人拾取。"],
+      "evidence_sources": ["wowhead_wotlk_12280", "grizzly_venture_daily_guide"]
+    },
+    "12284": {
+      "decision": "must_note",
+      "facts": ["蓝天伐木场击杀15个联盟士兵或玩家；NPC士兵可以满足全部进度，不要求击杀玩家。"],
+      "mechanism_codes": ["pvp_area_but_npc_completion_allowed"],
+      "evidence_sources": ["questie_objective"]
+    },
+    "12288": {
+      "decision": "must_note",
+      "facts": ["在蓝天伐木场河中岛对10名友方Wounded Skirmisher使用急救止血带；目标即使显示满血也可用。任务物约7秒施法、15秒冷却，实际墙钟明显高于10次普通点击。"],
+      "mechanism_codes": ["provided_bandage_on_friendly_npcs", "long_cast_and_cooldown", "island_only_targets"],
+      "fivebox_checks": ["确认一个角色包扎是否共享；若不共享，这张五开操作成本极高。"],
+      "evidence_sources": ["wowhead_wotlk_12288", "grizzly_venture_daily_guide"]
+    },
+    "12324": {
+      "decision": "must_note",
+      "facts": ["风险湾用烟雾弹把20名风险投资公司游荡者从兵营、锯木厂、马厩等建筑里熏出来；可以一次影响靠得近的多名目标，目标已被拉到建筑外时也仍可用烟雾弹记进度。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["smoke_bomb_building_targets", "multi_target_possible"],
+      "evidence_sources": ["wowhead_wotlk_12324", "grizzly_venture_daily_guide"]
+    },
+    "12432": {
+      "decision": "must_note",
+      "facts": ["只有部落完全控制风险湾灯塔时任务NPC才出现。先到港口中间船只后部下一层取得115号元素；携带燃料后到码头乘红色火箭，立即自动前进并由玩家转向，避开浮冰后直接撞联盟木材运输船完成。燃料/火箭有时限，任务本身受PVP占点状态控制。"],
+      "spatial_tags": ["interior", "scripted_transport_or_phase"],
+      "mechanism_codes": ["requires_horde_lighthouse_control", "ship_lower_deck_element115", "rocket_vehicle_collision_objective"],
+      "fivebox_checks": ["五号若都做，确认占点资格和火箭是否必须分别驾驶。"],
+      "evidence_sources": ["wowhead_wotlk_12432", "grizzly_venture_daily_guide"]
+    },
+    "12763": {
+      "decision": "must_note",
+      "facts": ["欧尼瓦营地到祖达克圣光据点的跨区面包屑；玛吉·冬风提供任务专用交通。后续路线应使用这段交通，而不是按两地图坐标自行跑过去。"],
+      "spatial_tags": ["cross_zone_objective", "scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_provided_transport_to_zuldrak"],
+      "evidence_sources": ["questie_objective"]
+    }
+  }
+}

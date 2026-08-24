@@ -1,0 +1,18 @@
+{
+  "status": "hrothgar_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 4742,
+  "zone_name": "洛斯加尔登陆点",
+  "policy": {
+    "purpose": "补齐洛斯加尔登陆点随机掉落触发与洞穴目标的真实空间关系。"
+  },
+  "notes": {
+    "24442": {
+      "decision": "must_note",
+      "facts": ["先在洛斯加尔登陆点击杀任意Kvaldir随机取得Kvaldir Attack Plans并右键接任务；随后进入西侧Mistcaller's Cave，洞口/目标区约(43,24)，在洞内取得Heart of the Mists；最后带计划和雾之心回冰冠银色比武场Justicar Mariel Trueheart交付。不能把43,24当地表固定物。"],
+      "spatial_tags": ["cave", "interior", "cross_zone_objective"],
+      "mechanism_codes": ["random_kvaldir_drop_item_start", "mistcallers_cave_heart", "turnin_at_argent_tournament"],
+      "fivebox_checks": ["进攻计划属于随机任务物掉落；五号按各自获得任务物后分别接取，未实测前不假定一次掉落共享。雾之心拾取模式也需实测。"],
+      "evidence_sources": ["wowhead_wotlk_24442"]
+    }
+  }
+}

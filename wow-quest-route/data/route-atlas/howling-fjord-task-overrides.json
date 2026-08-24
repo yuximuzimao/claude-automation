@@ -1,0 +1,491 @@
+{
+  "status": "howling_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 495,
+  "zone_name": "嚎风峡湾",
+  "policy": {
+    "purpose": "路线排序前确认嚎风任务真实操作、洞穴/楼层、任务物触发、脚本交通和船舱/水下空间；不是最终路线顺序。",
+    "unlisted_tasks": "仍属未审状态，禁止按二维坐标自动判断为顺路。"
+  },
+  "reviewed_no_extra_note_ids": [11168, 11182, 11230, 11234, 11263, 11264, 11271, 11275, 11287, 11297, 11303, 11304, 11305, 11308, 11311, 11312, 11313, 11315, 11316, 11324, 11367, 11411, 11422, 11424, 11428, 11455, 11456, 11457, 11459, 11469, 11473, 11480, 11508, 11510, 11530, 11572, 12482, 12566, 11233, 11283],
+  "notes": {
+    "11167": {
+      "decision": "must_note",
+      "facts": ["新药剂容器在复仇港东南约(81,35)的失事船只上及周围地面，不是海怪掉落；真实执行区是沉船。"],
+      "spatial_tags": ["ship_or_wreck"],
+      "mechanism_codes": ["wrecked_ship_ground_containers"],
+      "fivebox_checks": ["确认容器是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11170": {
+      "decision": "must_note",
+      "facts": ["与Bat Handler Camille对话启动任务专用蝙蝠飞行；必须先下坐骑。飞行途中使用任务药剂瞄准联盟船只，属于自动航线空中投掷，不是玩家自行跑海面目标。旧攻略曾记录该脚本偶发不记进度。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_started_bat_flight", "airborne_item_use_on_ships", "possible_script_credit_failure"],
+      "fivebox_checks": ["五号预计需分别乘蝙蝠并操作任务物；实跑确认是否可同步。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11221": {
+      "decision": "must_note",
+      "facts": ["需要分别听取Razael与Dark Ranger Lyana的战况报告。Lyana会周期性离开坐标攻击联盟，突袭约持续30—60秒；她不在点位时应等待返回，不要误判NPC缺失。"],
+      "mechanism_codes": ["two_npc_reports", "patrolling_combat_npc_wait_if_absent"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11227": {
+      "decision": "must_note",
+      "facts": ["先杀Fjord Crow取得5块乌鸦肉，再逐次使用乌鸦肉完成5次任务效果；不是只收齐肉就完成。"],
+      "mechanism_codes": ["loot_five_crow_meat_then_use_each"],
+      "fivebox_checks": ["确认任务物使用是否个人进度。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11253": {
+      "decision": "must_note",
+      "facts": ["沿复仇港北侧海岸到约(75.9,19.7)，龙皮卷轴在洞穴内部；目标不是地表同坐标。完成后卷轴直接提供11254《龙皮地图》。"],
+      "spatial_tags": ["cave"],
+      "mechanism_codes": ["verified_coastal_cave", "object_followup_11254"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11254": {
+      "decision": "must_note",
+      "facts": ["由11253洞穴内的龙皮卷轴直接触发接取，再带回复仇港交付；没有额外NPC接任务点。"],
+      "spatial_tags": ["cave"],
+      "mechanism_codes": ["object_started_quest", "same_cave_as_11253"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11256": {
+      "decision": "must_note",
+      "facts": ["到斯克恩后使用冬蹄徽记召出Winterhoof Brave，并与其对话；11257/11258/11259都在现场从这个召唤出的勇士接取。不能回冬蹄营地找固定NPC。"],
+      "mechanism_codes": ["summon_winterhoof_brave", "field_quest_hub_11257_11258_11259"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11257": {
+      "decision": "must_note",
+      "facts": ["在斯克恩杀维库人后必须对每具尸体使用勇士的弯刀才记任务进度；若Winterhoof Brave消失，可重新用徽记召出后现场交任务。"],
+      "mechanism_codes": ["corpse_machete_use", "summoned_field_turnin"],
+      "fivebox_checks": ["确认一个角色砍尸是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11258": {
+      "decision": "must_note",
+      "facts": ["斯克恩三座建筑分别焚烧：西北长屋约(43.7,28.6)需要进入建筑内部使用火炬；东北长屋约(46.4,28.2)；南侧兵营约(45.9,30.7)。不是一个中心点连续烧3次。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["torch_three_structures", "northwest_longhouse_interior"],
+      "fivebox_checks": ["确认一次烧建筑是否全队共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11259": {
+      "decision": "must_note",
+      "facts": ["用勇士的照明弹分别标记4座塔；照明弹射程约90码，塔上法师会攻击靠太近的玩家，因此不必贴塔脚。四塔分散在斯克恩南/东南区域。"],
+      "mechanism_codes": ["flare_four_towers", "long_range_interaction_90yd"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11260": {
+      "decision": "must_note",
+      "facts": ["维库升华卷轴由斯克恩维库人掉落并通过UI/物品触发接取。到约(44.9,35.3)火葬堆旁使用卷轴召唤Halfdan，再击杀。"],
+      "mechanism_codes": ["mob_drop_item_started_quest", "use_scroll_at_pyre_to_summon_boss"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11261": {
+      "decision": "must_note",
+      "facts": ["11257/11258/11259三项都完成后，由现场召唤的Winterhoof Brave继续提供《斯克恩的征服者！》；它是斯克恩现场任务块收尾，不需要先回营地。"],
+      "mechanism_codes": ["summoned_field_followup", "skorn_block_completion"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11265": {
+      "decision": "must_note",
+      "facts": ["亚勒伯龙任意维库人掉牢笼钥匙；普通钥匙开普通笼，大型亚勒伯龙牢笼钥匙更稀有，中央大笼一次最多可放出约5名囚犯。优先用大笼可减少交互次数。"],
+      "mechanism_codes": ["vrykul_drop_cage_keys", "large_cage_key_multi_rescue"],
+      "fivebox_checks": ["确认钥匙是否个人拾取、开笼进度是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11266": {
+      "decision": "must_note",
+      "facts": ["亚勒伯龙攻击计划由当地维库人随机掉落，掉落后物品触发接取；应在11265等亚勒伯龙刷怪期间自然获取，不为Questie单点专门折返。"],
+      "mechanism_codes": ["vrykul_random_drop_item_start", "shared_gjalerbron_farm_block"],
+      "fivebox_checks": ["确认五号攻击计划掉落模式。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11267": {
+      "decision": "must_note",
+      "facts": ["在亚勒伯龙上部约(36.4,7.3)最后击杀Wyrmcaller Vile，拾取Wyrmcaller之角；使用号角才召来Glacion，再击杀冰霜巨龙。不是固定龙刷新点。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["named_drop_horn_then_summon_frost_wyrm"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11270": {
+      "decision": "must_note",
+      "facts": ["在复仇港东侧战场对倒地的被遗忘者/联盟尸体使用燃烧火炬；是尸体任务物交互，不是击杀计数。"],
+      "mechanism_codes": ["corpse_burning_torch"],
+      "fivebox_checks": ["确认一具尸体是否可供五号分别使用火炬。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11279": {
+      "decision": "must_note",
+      "facts": ["在Ember Clutch对龙蛋使用瘟疫罐，孵出/召出幼龙后击杀，再拾取样本；必须完成‘用罐→杀幼龙→拾样本’三步。"],
+      "mechanism_codes": ["plague_canister_on_eggs", "kill_spawned_whelp", "loot_specimen"],
+      "fivebox_checks": ["确认同一龙蛋/幼龙能否满足多号进度。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11280": {
+      "decision": "must_note",
+      "facts": ["在Ember Clutch始祖龙附近使用Tillinghast的染病肉，等待任务完成提示后再处理龙；使用后可能仍需击杀始祖龙。不要投肉后立刻离开。"],
+      "mechanism_codes": ["provided_meat_near_proto_drake", "wait_for_credit_message"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11281": {
+      "decision": "must_note",
+      "facts": ["到冰冻瀑布底部约(52.4,3.8)，必须贴近瀑布根部使用雕刻号角，召出Frostgore后击杀；不是普通野外命名怪。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["horn_at_frozen_waterfall_base", "summoned_frostgore"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11285": {
+      "decision": "must_note",
+      "facts": ["拜尔海姆多栋建筑需要使用任务火炬焚烧；建筑目标分散，属于固定结构交互，不是单一杀怪区。"],
+      "mechanism_codes": ["torch_multiple_baleheim_structures"],
+      "evidence_sources": ["questie_objective", "wow_pro_howling_horde"]
+    },
+    "11296": {
+      "decision": "must_note",
+      "facts": ["裂木森林打开Riven Widow茧释放囚犯；茧存在随机结果，需要继续开到任务完成，不能把目标数量等同于固定次数。"],
+      "mechanism_codes": ["cocoon_rescue_rng"],
+      "fivebox_checks": ["确认开茧进度是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11298": {
+      "decision": "must_note",
+      "facts": ["药剂师营地附近目标区点击发光酒桶并直接拾取；是固定物拾取，不是怪物掉落。"],
+      "mechanism_codes": ["sparkling_keg_ground_pickup"],
+      "fivebox_checks": ["确认酒桶是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11301": {
+      "decision": "must_note",
+      "facts": ["击杀Deranged Explorer后必须对尸体使用骨锯获取脑组织/进度；不是单纯击杀。可与11298同区域完成。"],
+      "mechanism_codes": ["bonesaw_on_explorer_corpses", "shared_area_11298"],
+      "fivebox_checks": ["确认尸体骨锯操作是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11306": {
+      "decision": "must_note",
+      "facts": ["在新阿加曼德营地炼金师身旁原地完成：先在右侧大锅旁用空药剂瓶，再到另一侧桌上的维库之血继续操作。过程有失败概率，可能多次重试；还可能触发约3000伤害的爆炸。"],
+      "mechanism_codes": ["camp_local_alchemy_minigame", "repeat_until_success", "explosion_failure_hazard"],
+      "fivebox_checks": ["五号预计需分别完成；记录平均重试次数。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11307": {
+      "decision": "must_note",
+      "facts": ["前往Halgrind对染疫维库人使用瘟疫喷雾取得进度；必须主动使用任务物，不能直接杀满目标。"],
+      "mechanism_codes": ["plague_spray_on_vrykul"],
+      "fivebox_checks": ["确认喷雾进度是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11309": {
+      "decision": "must_note",
+      "facts": ["需要6条Shoveltusk Ligament，同时目标NPC/零件相关对象Anton会沿新阿加曼德与Ancient Lift之间道路巡逻；若死亡会在路径点重生。任务并非单一固定点。"],
+      "mechanism_codes": ["mob_drop_ligaments", "patrolling_named_target_or_part_source"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11310": {
+      "decision": "must_note",
+      "facts": ["在Halgrind使用Abomination Kit直接控制憎恶。载具技能2可群拉/雷霆一击，聚约5只维库人后用技能1自爆取得击杀，再重新召出憎恶循环。按载具循环估时，不是普通群杀。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["abomination_vehicle", "gather_then_self_detonate", "repeat_vehicle_summon"],
+      "fivebox_checks": ["确认五号是否必须分别操作憎恶。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11314": {
+      "decision": "must_note",
+      "facts": ["在Twisted Glade对Chill Nymph使用Lurielle的吊坠进行净化/转化，直到完成；与Wild Vines在同一区域，可同次访问完成。"],
+      "mechanism_codes": ["pendant_on_chill_nymphs", "shared_area_wild_vines"],
+      "fivebox_checks": ["确认吊坠操作是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11317": {
+      "decision": "must_note",
+      "facts": ["从Steel Gate往西穿山，尽量走北侧小路上到山峰神龛约(61.2,2.1)，点击神龛后击杀Inner Turmoil。完成后获得漂浮/缓降效果，可从峰顶向冬蹄营地方向跳下快速返回。真实成本是上山路径，不是两点直线距离。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["mountain_path_to_summit_shrine", "scripted_inner_turmoil", "post_quest_levitation_drop_route"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11319": {
+      "decision": "must_note",
+      "facts": ["击杀Twisted Glade的Spore后，对尸体使用Enchanted Ice Core种下暗魂守护者种子；是尸体任务物操作，与同区域藤蔓怪可并做。"],
+      "mechanism_codes": ["ice_core_on_spore_corpses"],
+      "fivebox_checks": ["确认尸体使用是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11350": {
+      "decision": "must_note",
+      "facts": ["杀Iron Rune Stonecaller/Binder收齐3章符文书后，必须主动使用其中一章把3章合成为完整《符文之书》；收齐掉落本身不会自动完成。"],
+      "mechanism_codes": ["three_chapter_drops_then_combine"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11351": {
+      "decision": "must_note",
+      "facts": ["Iron Rune Carving Tools是小工具箱，会在5个帐篷/棚架之一刷新；必须找对当前刷新点拾取，不是固定一个坐标。"],
+      "mechanism_codes": ["rotating_toolbox_under_five_canopies"],
+      "fivebox_checks": ["确认工具箱是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11352": {
+      "decision": "must_note",
+      "facts": ["先对中立的Runed Stone Giant使用命令符文获得/控制巨人，再处理Binder Murdis；不能直接只杀Murdis。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["rune_of_command_on_stone_giant", "controlled_giant_then_named_target"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11365": {
+      "decision": "must_note",
+      "facts": ["击杀Runed Stone Giant后必须对巨人尸体使用Sage's Pick取得任务进度/样本；不是普通巨人击杀。"],
+      "mechanism_codes": ["pick_on_giant_corpses"],
+      "fivebox_checks": ["确认尸体采样是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11366": {
+      "decision": "must_note",
+      "facts": ["到约(72,17)破碎石板旁站近后使用Rune Sample；真实目标是固定Broken Tablet，不是周边怪物。"],
+      "mechanism_codes": ["rune_sample_at_broken_tablet"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11397": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11398": {
+      "decision": "must_note",
+      "facts": ["天灾装置由北部海岸天灾怪随机掉落，掉落物直接触发接取；应在11397刷怪期间自然获取，不是固定NPC任务。"],
+      "mechanism_codes": ["scourge_random_drop_item_start", "shared_farm_11397"],
+      "fivebox_checks": ["确认五号天灾装置掉落模式。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11399": {
+      "decision": "must_note",
+      "facts": ["3个Scourging Crystal分别在海岸约(22.7,31.2)、(21.9,28.8)、(21.5,24.6)。先用水晶控制器降盾，再由玩家亲自摧毁水晶；宠物代打可能不给进度。"],
+      "mechanism_codes": ["controller_lower_shield_then_player_destroy", "three_fixed_crystals", "pet_credit_risk"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11415": {
+      "decision": "must_note",
+      "facts": ["Bjomolf与Varg分处裂木森林西南/东侧，可使用狼形伪装减少途中干扰，但伪装不是击杀硬门槛。两个命名目标应按两个真实位置处理。"],
+      "mechanism_codes": ["two_separate_named_targets", "optional_worg_disguise"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11417": {
+      "decision": "must_note",
+      "facts": ["到瀑布底部Talonshrike巢穴，先点击蛋才召出/触发Talonshrike，再击杀；不是固定巨鹰刷新。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["click_nest_egg_then_spawn_eagle"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11423": {
+      "decision": "must_note",
+      "facts": ["三本史诗分别位于Nifflevar三座不同建筑：Val'kyr在第一座建筑，Winter Curse在篝火东侧小屋，Twins在篝火西侧长屋。必须进入建筑拾取，不能把3个点当室外散点。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["three_books_three_buildings"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11434": {
+      "decision": "must_note",
+      "facts": ["两个遗物在Scalawag Point外海两艘沉船。使用Fish Bladder获得水下呼吸；Eagle Figurine在沉船内部约(37.8,84.6)，Amani Vase在另一艘船约(37.1,85.5)。属于水下船舱任务。"],
+      "spatial_tags": ["water_or_underwater", "interior", "ship_or_wreck"],
+      "mechanism_codes": ["fish_bladder_underwater_breathing", "two_submerged_ship_treasures"],
+      "fivebox_checks": ["确认两个遗物是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11453": {
+      "decision": "must_note",
+      "facts": ["先在亚勒伯龙击杀Necro Overlord Mezhen取得Mezhen's Writings，由物品触发接取。随后从大门进入，绕到后方上平台击杀Queen Angerboda；目标在上层平台，不是门口地面。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["named_drop_item_started_quest", "rear_route_to_upper_platform_boss"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11464": {
+      "decision": "must_note",
+      "facts": ["在Scalawag Point与'Silvermoon' Harry对话发起讨债战斗，把他打到认输而不是杀死，再点击其新对话选项收债。"],
+      "mechanism_codes": ["dialogue_duel_until_surrender", "post_fight_dialogue_collect_debt"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11466": {
+      "decision": "must_note",
+      "facts": ["先与Olga对话并支付1金，让Jack Adams喝醉/昏倒；Jack倒下后再与他对话完成。不是直接与Jack打架或买任务物。"],
+      "mechanism_codes": ["pay_olga_one_gold", "wait_for_jack_pass_out", "dialogue_after_passout"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11467": {
+      "decision": "must_note",
+      "facts": ["从Scalawag Point北侧回大陆后到东侧高地，经桥到约(32.7,60.2)Dirt Mound；点击土堆召出Black Conrad's Ghost及随从，击杀后拾宝。真实锚点是桥后高地土堆。"],
+      "spatial_tags": ["bridge_or_crossing", "cliff_or_mountain"],
+      "mechanism_codes": ["dirt_mound_summons_ghost", "bridge_to_plateau"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11476": {
+      "decision": "must_note",
+      "facts": ["Scalawag Point本地完成：点击附近Scalawag Frog取得青蛙，同时向'Silvermoon' Harry购买Shiny Knife；一个目标是地面/NPC互动，一个是商店购买。"],
+      "mechanism_codes": ["frog_interaction_plus_vendor_purchase"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11504": {
+      "decision": "must_note",
+      "facts": ["Shield Hill四条线索分别位于四个固定墓地/石棺点约(57.7,77.6)、(59.3,77.0)、(59.8,79.4)、(62.0,80.1)，需要逐点拾取；与Shield Hill复生维库刷怪同区域。"],
+      "mechanism_codes": ["four_fixed_clue_pickups", "shield_hill_multi_point"],
+      "fivebox_checks": ["确认线索是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11511": {
+      "decision": "must_note",
+      "facts": ["风暴愤怒法杖在海上船只的下层船舱；需要先登船，再下楼拾取，甲板附近有精英。不能按海面船只中心点当成甲板目标。"],
+      "spatial_tags": ["interior", "vertical_layer", "ship_or_wreck"],
+      "mechanism_codes": ["ship_lower_hold_artifact"],
+      "fivebox_checks": ["确认法杖是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11512": {
+      "decision": "must_note",
+      "facts": ["伊斯多弗的冰冷之心在Hozzer/Jonah事件附近地面约(32.3,78.7)直接拾取；与11471同一局部可闭合。"],
+      "mechanism_codes": ["fixed_ground_artifact", "shared_area_11471"],
+      "fivebox_checks": ["确认冰心是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11529": {
+      "decision": "must_note",
+      "facts": ["在Captain Ellis的船上等船与Sorlof交战时，到另一侧Big Gun使用火炮；Sorlof死后需要从船上跳下去亲自拾取Sorlof's Booty。任务包含船上炮击→水边落地拾物两个空间阶段。"],
+      "spatial_tags": ["ship_or_wreck", "scripted_transport_or_phase"],
+      "mechanism_codes": ["ship_cannon_scripted_fight", "jump_off_and_loot_booty"],
+      "fivebox_checks": ["确认炮击是否一号即可共享击杀、战利品是否五号分别拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11567": {
+      "decision": "must_note",
+      "facts": ["先在Scalawag Point外码头与Alanya对话，由她用飞行器送到远处船只；到达后进入船舱底层拾取克瓦迪尔上古甲胄。完成后可利用目标船附近返回交通/地形，不应按直线跨海。"],
+      "spatial_tags": ["scripted_transport_or_phase", "interior", "vertical_layer", "ship_or_wreck"],
+      "mechanism_codes": ["npc_flight_to_remote_ship", "ship_hold_artifact"],
+      "fivebox_checks": ["五号预计需分别乘交通并拾取甲胄。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11568": {
+      "decision": "must_note",
+      "facts": ["四件维库遗物线全部完成后回Shield Hill，在11504四个原线索点分别使用Bundle of Vrykul Artifacts安葬遗物；四个固定点与11504完全重合，可视为同一空间模板的第二次访问。"],
+      "mechanism_codes": ["four_fixed_artifact_burial_points", "same_points_as_11504"],
+      "fivebox_checks": ["确认安葬交互是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11232": {
+      "decision": "must_note",
+      "facts": ["荒弃海岸北墙外有两个联盟火炮位置，分别约(80.3,38.2)与(79.3,40.2)。必须站在火炮应在的位置附近使用烟雾信号弹；即使炮模型暂时不在/被摧毁，只要站位正确仍可记进度。"],
+      "mechanism_codes": ["two_fixed_cannon_positions", "flare_credit_by_position_not_object_state"],
+      "fivebox_checks": ["确认信号弹操作是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11241": {
+      "decision": "must_note",
+      "facts": ["药剂师Hanes在11233最后一个目标Lieutenant Celeyne附近约(83.2,43.1)出现，现场接护送；护送终点直接到Dark Ranger Lyana前方，因此应接在11233后立即启动，不要先回复仇港。"],
+      "mechanism_codes": ["escort_spawns_at_previous_named_target", "ends_at_dark_ranger_lyana", "chain_directly_after_11233"],
+      "fivebox_checks": ["护送按项目已确认通则可一起跑；确认五号都已接任务再启动。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11282": {
+      "decision": "must_note",
+      "facts": ["先持续杀Winterskorn Defender分别逼出3名首领：Oric在北侧废墟房屋附近、Ulf在中部、Gunnar在塔旁。击杀首领后还必须对尸体插被遗忘者旗帜；无需玩家亲自tag首领，只要能对尸体插旗即可。"],
+      "mechanism_codes": ["kill_defenders_to_spawn_three_bosses", "banner_on_boss_corpses", "tag_not_required_for_banner_credit"],
+      "fivebox_checks": ["确认一具首领尸体能否让五号分别插旗，或一次插旗共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11471": {
+      "decision": "must_note",
+      "facts": ["先把‘疯狗’约纳·斯特林打到约30%触发Hozzer苏醒，再转杀Hozzer并从其身上拾取Jonah的望远镜；不能直接把Jonah打死。事件跨约(33.6,75.6)与(33.6,78.2)两个相邻点。"],
+      "mechanism_codes": ["health_threshold_trigger_hazzer", "do_not_kill_jonah", "loot_spyglass_from_hozzer"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11472": {
+      "decision": "must_note",
+      "facts": ["卡鲁亚克日常。先用Anuniaq的网在Twin Shores/Scalawag附近海中闪光鱼群收集Tasty Reef Fish；鱼群不属于普通钓鱼点，网有时会引出鲨鱼。再每隔一段距离向Reef Bull投鱼，把公海狮一步步引到Reef Cow附近，出现爱心后才完成。通常准备约6—12条鱼更稳。"],
+      "spatial_tags": ["water_or_underwater"],
+      "mechanism_codes": ["daily_first_run_only", "net_tasty_fish_schools", "stepwise_lure_bull_to_cow"],
+      "fivebox_checks": ["任务为日常；首轮只做一次内容。确认五号各自是否必须网鱼并独立引一头公海狮。"],
+      "evidence_sources": ["wowhead_wotlk_11472"]
+    },
+    "12481": {
+      "decision": "must_note",
+      "facts": ["在拜尔海姆约(64,39)对Bjorn Halgurdsson使用维库脏话后会强制引怪；使用前先清出回Lydell约(65.9,36.8)的退路，然后把Bjorn一路拉回伏击点，让Lydell接怪/抗住后击杀。真实任务路径是‘挑衅→撤退牵引→伏击’，不是原地Boss战。"],
+      "mechanism_codes": ["insult_to_force_aggro", "kite_named_boss_to_lydell_ambush", "clear_escape_path_first"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11229": {
+      "decision": "must_note",
+      "facts": ["回到复仇港与Bat Handler Camille对话，她会直接把角色飞到风行者舰队；落点在Windrunner号甲板，向Captain Harker报到。任务有专用交通，不应自行跑/游到舰队。"],
+      "spatial_tags": ["scripted_transport_or_phase", "ship_or_wreck"],
+      "mechanism_codes": ["npc_bat_flight_to_windrunner_fleet", "lands_on_ship_deck"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11268": {
+      "decision": "must_note",
+      "facts": ["不死看守者和腐烂畸形妖在亚勒伯龙外层，但Fearsome Horror需要进入The Waking Halls内部完成。三个目标并非同一平面怪区，不能只按亚勒伯龙中心坐标扫完。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["waking_halls_interior_target", "mixed_exterior_and_interior_kills"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11286": {
+      "decision": "must_note",
+      "facts": ["10件钢铁之门古器在Steel Gate大坑底部约(32.0,24.9)，外观像破碎石板；需要下到坑内收集，任务NPC在坑外/上方区域。二维坐标接近但有明显落差。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["steel_gate_pit_ground_artifacts"],
+      "fivebox_checks": ["确认古器是否个人拾取。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11295": {
+      "decision": "must_note",
+      "facts": ["从复仇港往西要利用Vengeance Lift升到上层台地，再向西南到前线哨站找Sergeant Gorth。路线成本包含固定升降机，不应按地图直线爬坡。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["vengeance_lift_vertical_transport"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11323": {
+      "decision": "must_note",
+      "facts": ["使用先知提供的座狼伪装进入裂木森林北端找Ulfang约(29.6,5.7)；伪装用于降低敌对狼/环境干扰，丢失可回先知补。目标靠地图最北边，不是普通中部林地NPC。"],
+      "mechanism_codes": ["worg_disguise", "far_north_ulfang_contact"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11433": {
+      "decision": "must_note",
+      "facts": ["先杀亚勒伯龙Necrolord收集5根Awakening Rod，再对休眠维库人使用法杖唤醒/处理；不是直接杀5个睡眠目标。与11268/11453同一亚勒伯龙深层访问可并做。"],
+      "mechanism_codes": ["necrolord_drop_awakening_rods", "rod_on_sleeping_vrykul", "shared_gjalerbron_deep_block"],
+      "fivebox_checks": ["确认法杖使用进度是否共享。"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11479": {
+      "decision": "must_note",
+      "facts": ["‘火柴腿’丹在Scalawag Point海盗船上约(36.0,83.6)，需要登船再击败；目标不是岛上地面NPC。"],
+      "spatial_tags": ["ship_or_wreck"],
+      "mechanism_codes": ["named_target_on_ship"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11507": {
+      "decision": "must_note",
+      "facts": ["从Orfus/Ancient Lift区域去Kamagua要乘上古升降梯跨到岛上，升降梯停靠后再向北骑行到村庄。任务虽是送包裹，真实路线含固定跨海升降机交通。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["ancient_lift_to_kamagua_island"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11509": {
+      "decision": "must_note",
+      "facts": ["与Grezzix交任务后，直接找旁边Lou the Cabin Boy对话，由小船把角色送到Scalawag Point，再找'Silvermoon' Harry。存在明确任务交通，不应游泳/自行绕岛。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["lou_cabin_boy_ferry_to_scalawag"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11519": {
+      "decision": "must_note",
+      "facts": ["任务NPC Captain Ellis在会移动/停靠的Mercy号上；要在Scalawag附近指定岛岸等待船靠近后登船交任务。不是固定陆地点。"],
+      "spatial_tags": ["ship_or_wreck", "scripted_transport_or_phase"],
+      "mechanism_codes": ["moving_ship_turnin", "wait_and_board_mercy"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    },
+    "11527": {
+      "decision": "must_note",
+      "facts": ["仍在Mercy号上完成；从甲板下到船舱/储藏室击杀Mutinous Sea Dog取得5桶炸药，再回甲板Captain Ellis。任务目标在船舱下层，不是岸上。"],
+      "spatial_tags": ["ship_or_wreck", "interior", "vertical_layer"],
+      "mechanism_codes": ["mercy_lower_hold_kills", "five_blasting_powder_barrels"],
+      "evidence_sources": ["wow_pro_howling_horde"]
+    }
+  }
+}

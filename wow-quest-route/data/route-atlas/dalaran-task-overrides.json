@@ -1,0 +1,41 @@
+{
+  "status": "dalaran_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 4395,
+  "zone_name": "达拉然",
+  "policy": {
+    "purpose": "补齐达拉然正式路线之外的任务物触发、下水道层级与奎尔德拉支线执行事实。"
+  },
+  "reviewed_no_extra_note_ids": [],
+  "notes": {
+    "12791": {
+      "decision": "must_note",
+      "facts": ["接取《魔法王国达拉然》后可利用任务提供的达拉然传送进入达拉然；交给紫罗兰之门的大法师塞琳德拉后这项一次性任务传送价值随任务结束。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["active_quest_dalaran_teleport"],
+      "evidence_sources": ["dragonblight_verified_route_transport_state", "dalaran_route"]
+    },
+    "13845": {
+      "decision": "must_note",
+      "facts": ["《密封的毒药瓶》不是固定NPC接取：先从达拉然钓鱼日常奖励袋/可交易任务物获得毒药瓶并右键触发，然后到达拉然下水道找炼金师辛奈斯拉交付。任务终点在Underbelly下层，不在城市地面。"],
+      "spatial_tags": ["underground", "vertical_layer"],
+      "mechanism_codes": ["external_item_start", "fishing_daily_reward_or_trade", "dalaran_sewers_turnin"],
+      "fivebox_checks": ["任务物按各角色持有情况分别触发；不能把一瓶视为五号共享。"],
+      "evidence_sources": ["wowhead_wotlk_13845"]
+    },
+    "24431": {
+      "decision": "must_note",
+      "facts": ["当前部落版本《被浸透的配方》由钓鱼日常奖励Bag of Fishing Treasures中的任务物触发，也可交易；取得后到达拉然地面层One More Glass酒馆约(54,32)找Christi Stockton交付。14203是联盟对应版本，当前血精灵配置不使用。"],
+      "mechanism_codes": ["horde_soaked_recipe_variant", "external_item_start", "fishing_daily_reward_or_trade", "one_more_glass_turnin"],
+      "fivebox_checks": ["任务物按各角色持有情况分别触发。"],
+      "evidence_sources": ["wowhead_wotlk_24431", "wowhead_wotlk_14203"]
+    },
+    "24557": {
+      "decision": "must_note",
+      "facts": ["奎尔德拉部落链：从部落旅店Magister Hathorel接取后进入达拉然下水道Cantrips and Crows酒馆，击杀可攻击的Silver Covenant Agent并从尸体100%拾取Silver Covenant Orders；离开下水道时还可能刷出额外伏击者。交任务回部落旅店。目标在Underbelly酒馆，不要去地面的银色领地找NPC。"],
+      "spatial_tags": ["underground", "interior", "vertical_layer"],
+      "mechanism_codes": ["quel_delar_horde_chain", "cantrips_and_crows_agent", "loot_orders_from_specific_agent", "possible_exit_ambusher"],
+      "fivebox_checks": ["奎尔德拉链由各号自己的任务状态驱动；订单按个人尸体拾取处理，未实测前不假定共享。"],
+      "evidence_sources": ["wowhead_wotlk_24557"]
+    }
+  }
+}

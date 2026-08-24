@@ -323,15 +323,23 @@ def test_storm_v45_full_step_cards_and_transport_state_are_locked():
     assert "最南建筑" in storm["stepGroups"][2].get("noteHtml", "")
     assert "两点来回拾取。" in storm["stepGroups"][2].get("noteHtml", "")
     assert "系统飞行：奥杜尔 → 丹尼芬雷" in action_html
+    assert "系统飞行：格罗玛什坠毁点 → 布德克拉格庇护所" in action_html
     assert "开飞行点：丹尼芬雷（五号分别）" in action_html
     assert "开飞行点：奥杜尔（五号分别）" in action_html
+    assert "开飞行点：布德克拉格庇护所（五号分别）" in action_html
+    assert 'ra-accept">奥杜尔的土灵' not in action_html
+    assert 'ra-turnin">奥杜尔的土灵' not in action_html
     assert "炉石绑定：格罗玛什坠毁点" in action_html
-    assert action_html.count("使用炉石：格罗玛什坠毁点") >= 3
+    assert action_html.count("使用炉石：格罗玛什坠毁点") >= 4
     assert storm["hearthChain"] == ["阿格玛之锤", "格罗玛什坠毁点"]
     assert storm["stepGroups"][4]["title"].startswith("荒弃矿洞")
     assert storm["stepGroups"][8]["title"].endswith("格罗玛什")
     assert storm["stepGroups"][10]["title"].startswith("丹尼芬雷：元素之战")
     assert storm["stepGroups"][13]["title"].startswith("炉石格罗玛什")
+    assert storm["stepGroups"][15]["title"].endswith("炉石格罗玛什")
+    assert "使用炉石：格罗玛什坠毁点" in storm["stepGroups"][15]["actionHtml"]
+    assert storm["stepGroups"][16]["title"].startswith("格罗玛什飞布德克拉格")
+    assert "系统飞行：格罗玛什坠毁点 → 布德克拉格庇护所" in storm["stepGroups"][16]["actionHtml"]
 
     step11_action = storm["stepGroups"][10]["actionHtml"]
     step11_notes = storm["stepGroups"][10].get("noteHtml", "")
@@ -365,13 +373,16 @@ def test_storm_v45_full_step_cards_and_transport_state_are_locked():
 
     coverage = json.loads((ROOT / "data/route-atlas/storm-peaks-route-coverage.json").read_text(encoding="utf-8"))
     assert coverage["formal_task_count"] == 111
-    assert coverage["covered_task_count"] == 111
+    assert coverage["covered_task_count"] == 110
+    assert coverage["intentional_route_skip_count"] == 1
+    assert set(coverage["intentional_route_skips"]) == {"12929"}
     assert coverage["missing"] == []
     assert coverage["unexpected"] == []
     assert coverage["system_flight_audit"] == [
-        {"from": "奥杜尔", "to": "丹尼芬雷", "status": "both_opened_before_departure"}
+        {"from": "奥杜尔", "to": "丹尼芬雷", "status": "both_opened_before_departure"},
+        {"from": "格罗玛什坠毁点", "to": "布德克拉格庇护所", "status": "both_opened_before_departure"},
     ]
-    assert {"K3", "丹尼芬雷", "奥杜尔"} <= set(coverage["opened_flight_points_final"])
+    assert {"K3", "丹尼芬雷", "奥杜尔", "布德克拉格庇护所", "格罗玛什坠毁点"} <= set(coverage["opened_flight_points_final"])
 
     foundation = json.loads((ROOT / "data/route-atlas/storm-peaks-task-foundation.json").read_text(encoding="utf-8"))
     assert foundation["formal_task_count"] == 111
@@ -408,10 +419,15 @@ def test_no_cold_weather_flying_route_excludes_skill_gates():
     by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
     for qid in (12561, 12803, 13060, 13419):
         assert by_id[qid]["cold_weather_flying_gate"] is True
+        assert by_id[qid]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "cold_weather_flying_excluded_by_route_policy" in by_id[qid]["eligibility"]["reasons"]
     assert by_id[12561]["required_spell"] == 54197
     assert by_id[12803]["required_spell"] == 54197
     assert by_id[13060]["required_level"] == 77 and by_id[13060]["quest_level"] == 78
     assert by_id[13419]["required_level"] == 77 and by_id[13419]["quest_level"] == 80
+    assert by_id[12548]["eligibility"]["status"] == "impossible_or_excluded"
+    assert "dependency_on_route_policy_excluded_quest" in by_id[12548]["eligibility"]["reasons"]
+    assert universe["summary"]["route_policy_blocked_count"] == 15
     assert by_id[12925]["required_level"] == 77 and by_id[12925]["quest_level"] == 80
     assert by_id[12925]["cold_weather_flying_gate"] is False
 
@@ -428,3 +444,232 @@ def test_no_cold_weather_flying_route_excludes_skill_gates():
     assert "终极运输方案" not in storm_text
     assert "借用双足飞龙直接飞往格罗玛什坠毁点" not in storm_text
     assert "借用双足飞龙返回" not in storm_text
+
+
+def test_northrend_execution_review_blocks_flat_coordinate_shortcuts_until_human_review():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    assert universe["summary"]["server_variant_unresolved_profile_group_count"] == 0
+    assert universe["summary"]["execution_review_queue_count"] == 0
+    assert universe["summary"]["execution_confirmed_nonflat_count"] > 0
+
+    narjun = by_id[12040]["execution_review"]
+    assert narjun["status"] == "reviewed_note_required"
+    assert "cave" in narjun["spatial_risk_signals"]
+    assert narjun["route_merge_policy"] == "requires_verified_spatial_anchor"
+
+    equipment = by_id[12844]["execution_review"]
+    assert equipment["status"] == "reviewed_note_required"
+    assert "vertical_layer" in equipment["spatial_risk_signals"]
+    assert equipment["route_merge_policy"] == "requires_verified_spatial_anchor"
+
+    pending = [
+        task
+        for task in universe["tasks"]
+        if task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending == []
+
+    excluded_unreviewed = [
+        task
+        for task in universe["tasks"]
+        if task["eligibility"]["status"] == "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert excluded_unreviewed
+    assert all(
+        task["execution_review"]["route_merge_policy"] == "block_flat_coordinate_auto_merge_until_reviewed"
+        for task in excluded_unreviewed
+    )
+
+
+def test_icecrown_universe_cleanup_closes_execution_and_availability_regressions():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    pending_icecrown = [
+        task
+        for task in universe["tasks"]
+        if task.get("assigned_zone_name") == "冰冠冰川"
+        and task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending_icecrown == []
+
+    for first_run, repeat in ((13092, 13093), (13239, 13261), (13279, 13281)):
+        assert by_id[first_run]["eligibility"]["status"] != "impossible_or_excluded"
+        assert by_id[repeat]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "calendar_repeat_form_not_separate_first_run_card" in by_id[repeat]["eligibility"]["reasons"]
+        assert by_id[first_run]["calendar_lifecycle_group"] == [first_run, repeat]
+
+    assert by_id[13234]["eligibility"]["status"] == "impossible_or_excluded"
+    assert "manual_route_policy_excluded" in by_id[13234]["eligibility"]["reasons"]
+    assert by_id[13481]["eligibility"]["status"] == "impossible_or_excluded"
+    assert by_id[13229]["eligibility"]["status"] != "impossible_or_excluded"
+
+    assert by_id[24554]["eligibility"]["status"] == "conditional"
+    assert "external_item_start_required" in by_id[24554]["eligibility"]["reasons"]
+    assert by_id[24560]["eligibility"]["status"] == "impossible_or_excluded"
+    assert by_id[24560]["is_dungeon"] is True
+    assert by_id[13374]["eligibility"]["status"] == "conditional"
+    assert "server_version_availability_needs_confirmation" in by_id[13374]["eligibility"]["reasons"]
+
+    for qid, spatial_signal in (
+        (12999, "cave"),
+        (13140, "vertical_layer"),
+        (13258, "vertical_layer"),
+        (13262, "vertical_layer"),
+        (13328, "vertical_layer"),
+    ):
+        review = by_id[qid]["execution_review"]
+        assert review["status"] == "reviewed_note_required"
+        assert spatial_signal in review["spatial_risk_signals"]
+        assert review["route_merge_policy"] == "requires_verified_spatial_anchor"
+
+
+def test_sholazar_execution_review_closes_spatial_companion_and_faction_state():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    pending_sholazar = [
+        task
+        for task in universe["tasks"]
+        if task.get("assigned_zone_name") == "索拉查盆地"
+        and task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending_sholazar == []
+
+    assert "not_cave" in by_id[12531]["execution_review"]["mechanism_codes"]
+    assert "cave" in by_id[12534]["execution_review"]["spatial_risk_signals"]
+    assert "faction_choice_state_machine" in by_id[12581]["execution_review"]["mechanism_codes"]
+    assert "land_button_required" in by_id[12671]["execution_review"]["mechanism_codes"]
+    assert "loaned_wind_rider_compatible" in by_id[12732]["execution_review"]["mechanism_codes"]
+    assert "loaned_wind_rider_compatible" in by_id[12741]["execution_review"]["mechanism_codes"]
+
+
+def test_zuldrak_execution_review_closes_daily_rotation_and_voltarus_transport():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    pending_zuldrak = [
+        task
+        for task in universe["tasks"]
+        if task.get("assigned_zone_name") == "祖达克"
+        and task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending_zuldrak == []
+
+    for first_run, repeat in ((12565, 12567), (12615, 12618), (12655, 12656)):
+        assert by_id[first_run]["eligibility"]["status"] != "impossible_or_excluded"
+        assert by_id[repeat]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "calendar_repeat_form_not_separate_first_run_card" in by_id[repeat]["eligibility"]["reasons"]
+
+    for qid in (12601, 12602):
+        assert by_id[qid]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "manual_legacy_or_replaced_task" in by_id[qid]["eligibility"]["reasons"]
+
+    assert "troll_patrol_calendar_rotation" in by_id[12501]["execution_review"]["mechanism_codes"]
+    assert "timed_random_reagent_minigame" in by_id[12541]["execution_review"]["mechanism_codes"]
+    assert "automatic_gargoyle_tour" in by_id[12663]["execution_review"]["mechanism_codes"]
+    assert "voltarus_teleporter" in by_id[12664]["execution_review"]["mechanism_codes"]
+
+
+def test_grizzly_execution_review_closes_transport_pvp_compatible_and_repeat_forms():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    pending_grizzly = [
+        task
+        for task in universe["tasks"]
+        if task.get("assigned_zone_name") == "灰熊丘陵"
+        and task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending_grizzly == []
+    assert by_id[11997]["eligibility"]["status"] == "impossible_or_excluded"
+    for first_run, repeat in ((12029, 12038), (12433, 12434)):
+        assert by_id[repeat]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "calendar_repeat_form_not_separate_first_run_card" in by_id[repeat]["eligibility"]["reasons"]
+    assert "verified_hill_path" in by_id[11981]["execution_review"]["mechanism_codes"]
+    assert "requires_horde_lighthouse_control" in by_id[12432]["execution_review"]["mechanism_codes"]
+
+
+def test_borean_and_global_execution_review_are_complete_for_current_route_pool():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+
+    pending_live = [
+        task
+        for task in universe["tasks"]
+        if task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"].startswith("review_required")
+    ]
+    assert pending_live == []
+
+    reviewed_no_extra = [
+        task
+        for task in universe["tasks"]
+        if task["eligibility"]["status"] != "impossible_or_excluded"
+        and task["execution_review"]["status"] == "reviewed_no_extra_note"
+    ]
+    assert all(task["execution_review"]["facts"] == [] for task in reviewed_no_extra)
+    assert all(task["execution_review"]["spatial_risk_signals"] == [] for task in reviewed_no_extra)
+
+    assert by_id[12791]["execution_review"]["status"] == "reviewed_note_required"
+    assert "active_quest_dalaran_teleport" in by_id[12791]["execution_review"]["mechanism_codes"]
+    assert by_id[12902]["execution_review"]["status"] == "reviewed_note_required"
+    assert "cave" in by_id[12902]["execution_review"]["spatial_risk_signals"]
+
+    for qid in (11622,):
+        assert by_id[qid]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "manual_legacy_or_replaced_task" in by_id[qid]["eligibility"]["reasons"]
+    for first_run, repeat in ((11866, 11867), (11919, 11940), (13413, 13414)):
+        assert by_id[first_run]["eligibility"]["status"] != "impossible_or_excluded"
+        assert by_id[repeat]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "calendar_repeat_form_not_separate_first_run_card" in by_id[repeat]["eligibility"]["reasons"]
+
+    assert "under_iceberg_leviroth" in by_id[11626]["execution_review"]["mechanism_codes"]
+    assert "cave" in by_id[11677]["execution_review"]["spatial_risk_signals"]
+    assert "naxxanar_outer_teleporter" in by_id[11898]["execution_review"]["mechanism_codes"]
+    assert "pump_station_top_command_hut_manual" in by_id[11909]["execution_review"]["mechanism_codes"]
+    assert "egg_above_gammoth_cave" in by_id[11724]["execution_review"]["mechanism_codes"]
+    assert "nexus_upper_ring_questgiver" in by_id[13413]["execution_review"]["mechanism_codes"]
+    assert "water_or_underwater" not in by_id[24431]["execution_review"]["spatial_risk_signals"]
+
+
+def test_northrend_global_universe_filters_unplayable_rows_and_external_raid_starts():
+    universe = json.loads((ROOT / "data/route-atlas/northrend-task-universe.json").read_text(encoding="utf-8"))
+    by_id = {int(task["quest_id"]): task for task in universe["tasks"]}
+    live = [task for task in universe["tasks"] if task["eligibility"]["status"] != "impossible_or_excluded"]
+
+    assert not [
+        task
+        for task in live
+        if not task.get("start_entities")
+        and not task.get("finish_entities")
+        and not task.get("xp", {}).get("has_xp")
+    ]
+
+    for qid in (11189, 11622, 12015, 12021, 12023, 12051, 12490, 12780, 13053):
+        assert by_id[qid]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "manual_legacy_or_replaced_task" in by_id[qid]["eligibility"]["reasons"]
+
+    assert by_id[12930]["is_dungeon"] is False
+    assert by_id[12930]["eligibility"]["status"] == "eligible_first_run"
+    for qid in (12931, 12937, 12957, 12964, 12965, 12978):
+        assert by_id[qid]["eligibility"]["status"] != "impossible_or_excluded"
+
+    for qid in (13372, 13375, 13845, 24431, 24442, 24554):
+        assert by_id[qid]["eligibility"]["status"] == "conditional"
+        assert "external_item_start_required" in by_id[qid]["eligibility"]["reasons"]
+
+    for qid in (13417, 14203):
+        assert by_id[qid]["eligibility"]["status"] == "impossible_or_excluded"
+        assert "manual_route_policy_excluded" in by_id[qid]["eligibility"]["reasons"]
+
+    assert by_id[12284]["eligibility"]["status"] != "impossible_or_excluded"
+    assert "联盟士兵或者联盟玩家" in by_id[12284]["objective_text_zh"]

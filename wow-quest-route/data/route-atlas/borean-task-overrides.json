@@ -1,0 +1,592 @@
+{
+  "status": "borean_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 3537,
+  "zone_name": "北风苔原",
+  "policy": {
+    "purpose": "把北风现行Route Atlas的实跑/人工审查事实迁移为路线排序前的独立任务执行与空间证据；路线取舍、顺路/折返判断不写回基础事实层。",
+    "unlisted_tasks": "未进入当前任务卡宇宙、后续新增或版本变化的任务仍需重新审计。"
+  },
+  "reviewed_no_extra_note_ids": [11585,11596,11598,11606,11888,11611,11608,11602,11614,11615,11634,11616,11636,11618,11642,11643,11644,11655,11660,11664,11651,11656,11661,11652,11662,11613,12471,11619,11620,11625,11626,11574,12486,11632,11686,11676,11688,11703,11690,11705,11709,11711,11714,11716,11717,11724,11719,11720,11721,11722,11916,11864,11865,11866,11869,11876,11884,11605,11612,11868,11870,11878,11879,11607,11617,11609,11623,11610,11871,11872,11892,11949,11950,11961,11968,12117,11890,11684,11881,11674,11887,11893,11685,11895,11896,11899,11906,11675,11677,11678,11683,11687,11689,11894,11907,11909,11628,11630,11633,11695,11640,11641,11647,11706,11654,11659,11898,11929,11930,11587,11576,11590,11582,11646,12728,11648,11663,11671,11679,11680,11681,11682,11733,11900,11910,11912,11918,11914,11936,11941,11919,11943,11931,11946,11951,11957,11967,11969,11624,11591,11702,11627,11649,11629,11631,11635,11639,11637,11638,11593,11594,11592,11571,11559,11560,11561,11562,11563,11564,11565,11566,11569,11570,11945,13412,13413],
+  "notes": {
+    "11566": {
+      "decision": "must_note",
+      "facts": ["目标Claximus在冬鳞洞穴深处；进入洞穴后贴右墙深入，击杀后拾取钳子再出洞。任务期间使用备用鱼人服可降低洞内鱼人干扰。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["winterfin_cave_deep_target", "claximus_claw_drop"],
+      "evidence_sources": ["wow_pro_borean", "wowhead_wotlk_11566"]
+    },
+    "11570": {
+      "decision": "must_note",
+      "facts": ["护送NPC在冬鳞洞穴内部下层，接取后沿洞穴路线护送到外面；不是洞口短距离对话。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["winterfin_cave_escort"],
+      "fivebox_checks": ["已按项目护送通则：五号都接好后一次护送；实跑已记录共享。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11571": {
+      "decision": "must_note",
+      "facts": ["Scalder在冬鳞避难所外海海底；击杀后对尸体使用空贝壳完成学习沟通。"],
+      "spatial_tags": ["water_or_underwater"],
+      "mechanism_codes": ["underwater_scalder", "conch_on_corpse"],
+      "fivebox_checks": ["不共享：同一具尸体可供五个角色依次使用空贝壳，每号各操作一次。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11574": {
+      "decision": "must_note",
+      "facts": ["这是状态敏感面包屑：必须在《越狱》进入任务日志/完成前接取，否则会因互斥状态失去可接资格。"],
+      "mechanism_codes": ["availability_before_jailbreak_state"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11576": {
+      "decision": "must_note",
+      "facts": ["约(34.3,42.2)到紫色裂隙处后必须主动使用奥术测量器；仅到达坐标不会自动完成。"],
+      "mechanism_codes": ["arcane_surveyor_at_rift"],
+      "fivebox_checks": ["测量是否共享仍需按实跑确认。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11582": {
+      "decision": "must_note",
+      "facts": ["目标裂谷在约(43.9,28.6)海底，需要下潜到紫色断层附近再使用奥术测量器；Questie平面坐标不能表达深度。"],
+      "spatial_tags": ["water_or_underwater", "vertical_layer"],
+      "mechanism_codes": ["underwater_rift_survey"],
+      "fivebox_checks": ["一次测量是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11587": {
+      "decision": "must_note",
+      "facts": ["先杀蓝玉法师猎手取得蓝玉监狱钥匙，再用钥匙开启约(41.8,39.2)一带的奥术牢笼。"],
+      "mechanism_codes": ["mage_hunter_key_then_arcane_cage"],
+      "fivebox_checks": ["钥匙/牢笼是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11590": {
+      "decision": "must_note",
+      "facts": ["把蓝玉巫师打到低血量后使用奥术镣铐捕获；不要直接击杀。镣铐有施法时间，成功后带回琥珀崖。"],
+      "mechanism_codes": ["low_health_capture", "arcane_binder"],
+      "fivebox_checks": ["捕获/押送是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11591": {
+      "decision": "must_note",
+      "facts": ["钢腭车队属于会随任务状态自然消失的移动/阶段Hub；这是项目唯一明确允许的自然消失例外。若当前还能接，去车队找步兵沃塔·怒拳；若已因后续状态消失，不为它回滚路线。"],
+      "mechanism_codes": ["state_sensitive_caravan_hub", "allowed_natural_disappearance_exception"],
+      "evidence_sources": ["user_live_rule", "borean_route_review"]
+    },
+    "11592": {
+      "decision": "must_note",
+      "facts": ["跟随远行者达玛·傲蹄突袭钢腭车队，包含两次伏击和最后精英战；让NPC顶住主要目标，护送结束后再补拾沿途尸体更稳。"],
+      "mechanism_codes": ["caravan_assault_escort", "two_ambushes_then_elite"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11593": {
+      "decision": "must_note",
+      "facts": ["对车队地面的部落卫兵/工人尸体使用任务火把，不是击杀计数。"],
+      "mechanism_codes": ["torch_on_caravan_corpses"],
+      "fivebox_checks": ["共享：主控对尸体使用火把即可同步。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11602": {
+      "decision": "must_note",
+      "facts": ["蛛卵位于巨石采掘场脚手架/结构上，需要沿脚手架上下清理，不是只在坑底杀蛛魔。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["quarry_scaffold_egg_sacks"],
+      "fivebox_checks": ["共享：主控摧毁蛛卵即可同步。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11605": {
+      "decision": "must_note",
+      "facts": ["三位海象人先祖是冷石采掘场内三个固定石像/灵体点，需要逐点互动。"],
+      "mechanism_codes": ["three_fixed_ancestor_interactions"],
+      "fivebox_checks": ["共享：先祖互动进度已实跑确认共享。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11607": {
+      "decision": "must_note",
+      "facts": ["先杀蓝玉猎犬取得邪恶之核，再对采掘场中看起来仍像普通卡斯卡拉工匠/萨满的目标使用核心释放灵魂；目标不会明显显示成幽灵。"],
+      "mechanism_codes": ["hound_core_then_use_on_tuskarr", "targets_look_normal"],
+      "fivebox_checks": ["核心获取和释放是否个人操作仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11608": {
+      "decision": "must_note",
+      "facts": ["用深水炸弹分别炸毁四个蛛魔虫孔；东约(44.2,56.8)、南约(41.6,58.3)、西约(39.8,52.5)、北约(41.3,50.4)。东虫孔在蛛网封口附近，西虫孔要走窄路。"],
+      "mechanism_codes": ["depth_charge_four_sinkholes"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11609": {
+      "decision": "must_note",
+      "facts": ["海象人仪式物品是冷石采掘场内的地面固定物拾取，后续11610会在三座石像前消耗。"],
+      "mechanism_codes": ["ground_ritual_object_collection"],
+      "fivebox_checks": ["五号是否各需6个仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11610": {
+      "decision": "must_note",
+      "facts": ["站在三座对应石像前使用仪式物品并等待完成提示；其中塔克勒特石像倒着/躺着，最容易漏掉。"],
+      "mechanism_codes": ["ritual_item_at_three_statues", "wait_for_credit"],
+      "fivebox_checks": ["三处仪式是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11611": {
+      "decision": "must_note",
+      "facts": ["在巨石采掘场点击蛛网/茧释放被掠苦工；这是固定物救援，不是击杀蛛魔自动计数。"],
+      "mechanism_codes": ["cocoon_rescue"],
+      "fivebox_checks": ["共享：蛛网释放苦工进度五号共享。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11617": {
+      "decision": "must_note",
+      "facts": ["东/西平台需要从采掘场外侧上沿/悬崖边取得手榴弹投掷角度；站在坑底可能超出射程。手榴弹由蓝玉回收者掉落。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer"],
+      "mechanism_codes": ["grenade_three_quarry_platforms", "upper_rim_throw_position"],
+      "fivebox_checks": ["三座平台进度是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11619": {
+      "decision": "must_note",
+      "facts": ["残忍的贾梅尔在裂鞭海岸洞穴内约(46.3,78.8)，不是海岸地表命名怪。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["riplash_beach_cave_named_target"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11625": {
+      "decision": "must_note",
+      "facts": ["前往裂鞭废墟击杀Ragnar Drakkarlund后从尸体拾取纳兹亚的三叉戟，再返回Veehja。"],
+      "mechanism_codes": ["named_target_personal_trident_drop"],
+      "fivebox_checks": ["同一具尸体三叉戟是否可五号分别拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11626": {
+      "decision": "must_note",
+      "facts": ["Leviroth在裂鞭废墟外海大冰山底部水下约(51—52,88)，需下潜找到后先使用纳兹亚的三叉戟再击杀；平面坐标不能表达深度。"],
+      "spatial_tags": ["water_or_underwater", "vertical_layer"],
+      "mechanism_codes": ["under_iceberg_leviroth", "trident_then_kill"],
+      "fivebox_checks": ["三叉戟使用/击杀是否一次共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11627": {
+      "decision": "must_note",
+      "facts": ["分别在炙热高地约(50,15)与沸腾池约(45.6,13.6)把Simmer和Churn打到投降；目标是‘迫使屈服’，不是普通掉落任务。"],
+      "mechanism_codes": ["two_elementals_submit_at_low_health", "two_fixed_areas"],
+      "evidence_sources": ["wowhead_wotlk_11627", "wow_pro_borean"]
+    },
+    "11631": {
+      "decision": "must_note",
+      "facts": ["就在博古洛克前哨站灵语者旁的图腾使用因波莉安的原始精华完成幻象，不需要去野外寻找目标。"],
+      "mechanism_codes": ["use_primal_at_local_totem"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11632": {
+      "decision": "must_note",
+      "facts": ["任务起始物不是普通蛛魔掉落：战歌要塞约每半小时发生天灾进攻，事件后段出现收割者伊斯里克斯；其死亡后地面生成硬化甲壳，拾取后触发任务。路线不应把Questie推荐怪点当固定掉落源。"],
+      "mechanism_codes": ["timed_warsong_attack_event", "harvester_ithrix_ground_shell_item_start"],
+      "fivebox_checks": ["同一事件甲壳能否五号分别拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11633": {
+      "decision": "must_note",
+      "facts": ["进入恩其拉后使用魔法天灾外衣伪装；恩其拉憎恶能识破。鲜血尖塔侦察点需要从外侧楼梯上到二楼中央才触发，不是地面同坐标。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["scourge_disguise", "abomination_sees_through", "bloodspire_second_floor_scout"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11635": {
+      "decision": "must_note",
+      "facts": ["先知格雷姆沃克之魂在犸格莫斯内部，需要进入洞穴/地下空间并一路向下寻找，不能在地表任务点等待。"],
+      "spatial_tags": ["cave", "interior", "vertical_layer"],
+      "mechanism_codes": ["magmoth_cave_spirit"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11636": {
+      "decision": "must_note",
+      "facts": ["到战歌要塞顶部后与Yanni对话，使用任务专用魔法飞毯自动前往加尔鲁什码头/回音海岸，落地后向Gorge交任务；这段应按脚本交通而非自主飞行计算。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_magic_carpet_transport"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11637": {
+      "decision": "must_note",
+      "facts": ["在犸格莫斯内部找到格雷姆沃克灵魂后，Kaganishu在附近侧洞；击杀拾神像后必须回灵魂处对残骸/灵魂使用神像，不能只杀目标。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["side_alcove_named_target", "fetish_then_use_on_spirit"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11638": {
+      "decision": "must_note",
+      "facts": ["接任务后立即拾取格雷姆沃克灵魂脚下的遗骸再离开犸格莫斯；目标固定在洞内NPC脚下。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["bones_at_spirit_feet"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11640": {
+      "decision": "must_note",
+      "facts": ["三名高阶祭司都在此前侦察过的恩其拉尖塔结构内；鲜血尖塔的安多拉斯位于上层。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["three_tower_priests", "andoras_upper_floor"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11643": {
+      "decision": "must_note",
+      "facts": ["莫布的坦克零件气动装配器是约(32.4,49.2)岸边小屋内部的固定零件，不在屋外地面。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["fixed_part_inside_shore_hut"],
+      "fivebox_checks": ["同一固定零件是否可五号连续拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11647": {
+      "decision": "must_note",
+      "facts": ["三口瘟疫锅是固定点：东约(87.7,29.9)、中约(86.2,22.8)、西约(85.6,20.1)，分别在锅旁主动使用先知埃恩雷的图腾。"],
+      "mechanism_codes": ["totem_at_three_fixed_cauldron_points"],
+      "fivebox_checks": ["净化进度是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11648": {
+      "decision": "must_note",
+      "facts": ["图书馆员诺曼提斯在琥珀崖法师塔二楼；目标被封印的蓝玉巫师就在旁边椅子上，对其反复使用催眠/神经魔杖直到完成。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["amber_ledge_tower_second_floor", "repeat_neural_needler_on_prisoner"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11652": {
+      "decision": "must_note",
+      "facts": ["使用部落攻城坦克在纳萨姆平原完成100个天灾目标、救援和指认指挥官；这是完整载具任务，不是普通击杀。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["horde_siege_tank_vehicle", "hundred_scourge_plus_rescue_and_commander"],
+      "fivebox_checks": ["不共享：五号分别上坦克完成；实跑单号最长约3分钟。"],
+      "evidence_sources": ["user_live_review", "borean_route_live_review"]
+    },
+    "11654": {
+      "decision": "must_note",
+      "facts": ["完成《乔装潜入》后，约(87.6,20.5)的目标才会掉鲜血瓶并触发《鲜血尖塔》；它是条件掉落触发，不是固定NPC接取。"],
+      "mechanism_codes": ["post_disguise_conditional_blood_vial_item_start"],
+      "fivebox_checks": ["鲜血瓶是否个人拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11656": {
+      "decision": "must_note",
+      "facts": ["四艘船都要站到船上/船体任务物有效范围主动使用海象人火炬；清船上怪不会自动完成烧船。"],
+      "spatial_tags": ["ship_or_wreck"],
+      "mechanism_codes": ["torch_four_kvaldir_ships"],
+      "fivebox_checks": ["一号点燃是否同步五号仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11659": {
+      "decision": "must_note",
+      "facts": ["鲜血宝珠主要分布在鲜血尖塔一楼，二楼也有；需要主动摧毁固定宝珠，不是击杀怪物计数。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["bloodspire_orbs_first_and_second_floor"],
+      "fivebox_checks": ["宝珠摧毁是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11661": {
+      "decision": "must_note",
+      "facts": ["到战歌码头最西端旗帜/塔附近约(26.8,54.8)使用古代水手的号角才触发舵手奥拉布斯事件；目标不是常驻NPC。"],
+      "mechanism_codes": ["horn_event_at_west_dock"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11664": {
+      "decision": "must_note",
+      "facts": ["这是克瓦迪尔迷雾区域的护送；五号都接好后启动一次即可。"],
+      "mechanism_codes": ["kvaldir_mist_escort"],
+      "fivebox_checks": ["共享：实跑确认一次护送同步完成。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11671": {
+      "decision": "must_note",
+      "facts": ["到蓝玉营地最大圆形平台，对审讯者莎尔兰德护盾使用护盾破坏道具；落地击杀后会生成锁箱，断裂钥匙从锁箱拾取，不是直接摸尸体。"],
+      "mechanism_codes": ["shield_detonator_then_kill", "loot_spawned_lockbox_not_corpse"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11676": {
+      "decision": "must_note",
+      "facts": ["杀恩其拉通灵领主/战歌畸变体取得5把天灾牢笼钥匙，再开5个囚笼救人。"],
+      "mechanism_codes": ["five_keys_then_five_cages"],
+      "fivebox_checks": ["共享：主控完成钥匙与开笼即可同步。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11677": {
+      "decision": "must_note",
+      "facts": ["瘟疫锅在洞穴里面，不在地表；入口约(74.8,14.2)，锅在洞内约(78,18)，进入后对锅使用赫米萨的净化之种。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["plague_cave_entrance", "seed_on_cauldron"],
+      "fivebox_checks": ["共享：现行路线实测按共享处理。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11680": {
+      "decision": "must_note",
+      "facts": ["把莎尔兰德钥匙交给琥珀崖Warmage Anzim启动营救事件；NPC在苏雷斯塔兹南侧。开始前保持下坐骑且不要立刻移动，旧Wrath脚本在骑乘/移动状态下存在不触发或任务消失的风险。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["warmage_anzim_script_start", "unmounted_stationary_start_recommended"],
+      "evidence_sources": ["wowhead_wotlk_11680", "borean_route_live_review"]
+    },
+    "11681": {
+      "decision": "must_note",
+      "facts": ["启动前下普通坐骑并停稳，按红龙脚本完成艾瓦诺尔营救；完成后脚本会直接送回琥珀崖，不要自己跳崖离开。"],
+      "spatial_tags": ["scripted_transport_or_phase", "vertical_layer"],
+      "mechanism_codes": ["scripted_dragon_rescue", "scripted_return_to_amber_ledge"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11686": {
+      "decision": "must_note",
+      "facts": ["需要依次侦察战歌粮仓、托普农场、战歌屠宰场三个固定地点；这是三处探索触发，不是杀怪数量任务。"],
+      "mechanism_codes": ["three_fixed_warsong_farm_scout_points"],
+      "evidence_sources": ["wow_pro_borean"]
+    },
+    "11684": {
+      "decision": "must_note",
+      "facts": ["在喷泉平原三个虫孔分别使用喷泉平原地图标记位置：南约(70,36)、西北约(66,32)、东北约(69,32)。必须主动使用地图，仅到达虫孔附近不会完成。"],
+      "mechanism_codes": ["map_use_at_three_sinkholes"],
+      "fivebox_checks": ["公开资料将任务标为不可共享；五号按分别使用地图处理，实跑后再校准。"],
+      "evidence_sources": ["wowhead_wotlk_11684"]
+    },
+    "11687": {
+      "decision": "must_note",
+      "facts": ["剃刀博士和寒冬巫妖领主都在塔尔拉玛斯上层建筑结构；剃刀约(69,13)，巫妖领主在更高层。平面点接近时不要留在地面绕。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["talramas_upper_levels_two_named_targets"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11690": {
+      "decision": "must_note",
+      "facts": ["对感染的科多兽使用托普的科多兽缰绳，骑回农夫托普后必须按载具栏的交付/放下科多技能才计数；任务缰绳有效10分钟。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["tame_and_ride_infected_kodo", "vehicle_delivery_button_required", "ten_minute_reins"],
+      "fivebox_checks": ["现行路线按每号8只建模；共享仍以实跑为准。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11695": {
+      "decision": "must_note",
+      "facts": ["西南和东北两处都要先杀水池旁酋长取钥匙，再用钥匙开启水中小台的宝珠取得号角半截；背包至少留2个空位，避免钥匙消耗后无空间拿任务物。"],
+      "mechanism_codes": ["two_chiefs_keys_then_orbs", "inventory_space_risk"],
+      "fivebox_checks": ["钥匙和号角半截是否个人拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11706": {
+      "decision": "must_note",
+      "facts": ["到南部虫孔使用元素愤怒号角触发塌陷，再击杀出现的克里卡希斯；Boss不是常驻。"],
+      "mechanism_codes": ["horn_at_south_sinkhole", "spawn_krikaxis"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11711": {
+      "decision": "must_note",
+      "facts": ["接任务后会有联盟逃兵跟随；必须把他带到东侧十字路口再使用战歌信号枪，不能接完直接去图古克。跟丢可回诺克重新领。"],
+      "mechanism_codes": ["escort_deserter_to_crossroads", "flare_at_destination"],
+      "fivebox_checks": ["逃兵/信号枪是否需要五号分别完成仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11719": {
+      "decision": "must_note",
+      "facts": ["接任务后就在血法师劳莉丝旁使用授过粉的血孢花完成测试，不需要再去野外找测试对象。"],
+      "mechanism_codes": ["use_pollinated_bloodspore_beside_questgiver"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11721": {
+      "decision": "must_note",
+      "facts": ["折磨者迦莫斯拉在迦莫斯洞穴底层；先用任务提供的碾碎血孢花粉袋削弱再击杀，最后拾取头颅。"],
+      "spatial_tags": ["cave", "interior", "vertical_layer"],
+      "mechanism_codes": ["gammoth_cave_bottom", "bloodspore_powder_then_kill", "loot_head"],
+      "fivebox_checks": ["同一具尸体头颅是否可五号分别拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11724": {
+      "decision": "must_note",
+      "facts": ["巨大的发光蛾卵位于迦莫斯洞穴上方高处约(48.55,59.04)，不是洞内；周围巨蛾高度集中。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer"],
+      "mechanism_codes": ["egg_above_gammoth_cave", "high_ground_not_in_cave"],
+      "fivebox_checks": ["同一个蛾卵能否五号依次点击接任务仍需实测。"],
+      "evidence_sources": ["user_live_review", "borean_route_live_review"]
+    },
+    "11865": {
+      "decision": "must_note",
+      "facts": ["不是击杀猎户；在仁德会南侧寻找可交互的驯鹿陷阱，对陷阱使用一堆人造毛皮触发任务效果。"],
+      "mechanism_codes": ["fake_fur_on_caribou_traps"],
+      "fivebox_checks": ["同一次陷阱事件是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11876": {
+      "decision": "must_note",
+      "facts": ["寻找被困的猛犸幼崽并对陷阱中的幼崽使用仁德会陷阱粉碎器；不是杀附近怪。个别陷阱不计数时换下一只。"],
+      "mechanism_codes": ["trap_smasher_on_trapped_mammoth_calves"],
+      "fivebox_checks": ["共享：主控操作即可同步。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11878": {
+      "decision": "must_note",
+      "facts": ["接任务后会有猛犸幼崽孤儿跟随，必须让幼崽一直跟到库诺克附近才完成；途中不要把跟随目标甩丢。"],
+      "mechanism_codes": ["mammoth_calf_follower_to_khunok"],
+      "fivebox_checks": ["五号是否各自生成幼崽、是否都必须到达仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11879": {
+      "decision": "must_note",
+      "facts": ["猛犸毁灭者卡奥死亡后战戟生成在地面，不是从尸体直接拾取。"],
+      "mechanism_codes": ["war_halberd_spawns_on_ground_after_kill"],
+      "fivebox_checks": ["一次击杀生成的战戟能否五号依次拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11881": {
+      "decision": "must_note",
+      "facts": ["在坠毁的飞行器附近使用Jenny's Whistle召出/取得驮货目标，然后护送/带她回牦牛村菲兹克斯处并确保货物不丢失；真实起点是坠毁飞行器，不是普通NPC。"],
+      "mechanism_codes": ["whistle_near_crashed_flying_machine", "cargo_escort_to_taunka_le"],
+      "fivebox_checks": ["现行实跑标记为共享；保持五号任务都已接取。"],
+      "evidence_sources": ["questie_extra_objective", "borean_route_live_review"]
+    },
+    "11884": {
+      "decision": "must_note",
+      "facts": ["Nedar骑着犀牛Lunchbox在库姆亚湖西侧高地约(47—48,40—44)巡游；先杀坐骑Lunchbox，Nedar会下马成为独立目标，再把他击杀。不是两个分散刷新的命名怪。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["roaming_rhino_mount_and_rider", "kill_mount_then_rider"],
+      "evidence_sources": ["wowhead_wotlk_11884"]
+    },
+    "11887": {
+      "decision": "must_note",
+      "facts": ["7个侏儒应急工具包来自坠毁菲兹兰克侦察机飞行员尸体的固定拾取/尸体目标，不是周边怪物掉落。"],
+      "mechanism_codes": ["crash_site_pilot_corpse_supply_pickups"],
+      "fivebox_checks": ["不共享：现行实跑按五号分别拾取。"],
+      "evidence_sources": ["borean_route_live_review", "questie_objective"]
+    },
+    "11892": {
+      "decision": "must_note",
+      "facts": ["目标就是在库姆亚湖西侧击杀Harold Lane；任务提供的塞纳里奥号角只是需要援助时召帮手的可选战斗工具，不使用号角也不影响任务完成。"],
+      "mechanism_codes": ["kill_harold_lane", "cenarion_horn_optional_combat_aid"],
+      "evidence_sources": ["wowhead_wotlk_11892"]
+    },
+    "11893": {
+      "decision": "must_note",
+      "facts": ["先放风魂图腾再杀目标；图腾有效范围有限，怪死得离图腾太远不会计入能量。"],
+      "mechanism_codes": ["place_wind_soul_totem_before_kills", "totem_range_credit"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11894": {
+      "decision": "must_note",
+      "facts": ["在菲兹兰克泵站蒸汽喷口上使用未处理的鹿皮处理材料；任务物必须在喷口环境点使用。"],
+      "mechanism_codes": ["use_hide_on_steam_vent"],
+      "fivebox_checks": ["不共享：现行路线按五号分别处理。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11895": {
+      "decision": "must_note",
+      "facts": ["狂乱风暴不是常驻怪；在牦牛村风暴图腾约(77.1,38.7)主动触发后再完成战斗。"],
+      "mechanism_codes": ["storm_totem_summons_frenzied_tempest"],
+      "fivebox_checks": ["共享：现行实跑确认共享。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11896": {
+      "decision": "must_note",
+      "facts": ["目标是机器人，不是机械侏儒；先对机器人使用先知的闪电棒，再击杀才获得正确进度。"],
+      "mechanism_codes": ["lightning_rod_on_robots_then_kill", "not_mechagnomes"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11898": {
+      "decision": "must_note",
+      "facts": ["先用外部传送器约(86.6,28.6)进入纳克萨纳尔，处理残忍的范瑟雷与邪恶的卢修恩；再用内部传送器约(86.8,30.1)上到更高层击杀瓦拉纳王子。瓦拉纳引导紫色光束时停止攻击，阶段会反伤。"],
+      "spatial_tags": ["interior", "vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["naxxanar_outer_teleporter", "inner_teleporter_upper_prince", "stop_attack_during_purple_reflect"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11899": {
+      "decision": "must_note",
+      "facts": ["对菲兹兰克机械侏儒尸体使用祖母的捕魂器释放灵魂；是尸体任务物操作。"],
+      "mechanism_codes": ["soul_trapper_on_mechagnome_corpses"],
+      "fivebox_checks": ["共享：现行实跑确认共享。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11900": {
+      "decision": "must_note",
+      "facts": ["四个监测点都是固定地质监测仪，必须主动点击读取数据：南约(28.5,35.0)、西约(22.5,23.8)、东北约(31.5,20.4)、中央约(28.3,28.5)。"],
+      "mechanism_codes": ["four_fixed_geological_monitor_clicks"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11907": {
+      "decision": "must_note",
+      "facts": ["四名机械副官不是常驻怪，必须分别操作四座泵站阀门召出后击杀。"],
+      "mechanism_codes": ["four_pump_valves_summon_lieutenants"],
+      "fivebox_checks": ["阀门召唤/击杀是否共享仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11909": {
+      "decision": "must_note",
+      "facts": ["操作手册在泵站顶部圆形指挥小屋；先上到顶部研究手册才会刷出麦卡佐德。平面坐标不能表达屋顶层级。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["pump_station_top_command_hut_manual", "manual_spawns_gearmaster"],
+      "fivebox_checks": ["研究手册与徽记拾取是否个人操作仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11919": {
+      "decision": "must_note",
+      "facts": ["对空中的魔枢雏龙使用莱洛拉斯的长矛进行捕获；不要把目标打死。命中后等待捕获生效，再把捕获的雏龙带回莱洛拉斯。11940是完成本任务后出现的相同日常版本，首轮路线不再重复。"],
+      "mechanism_codes": ["spear_airborne_nexus_drake_capture", "do_not_kill", "bring_captured_drake_back"],
+      "fivebox_checks": ["共享：现行实跑确认捕龙进度共享。"],
+      "evidence_sources": ["borean_route_live_review", "questie_objective"]
+    },
+    "11936": {
+      "decision": "must_note",
+      "facts": ["先杀考达拉龙人取得冰霜战斧，再对蓝龙卵使用战斧打碎；不是直接攻击蛋。"],
+      "mechanism_codes": ["frost_axe_then_break_blue_dragon_eggs"],
+      "fivebox_checks": ["共享：主控完成即可同步。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11941": {
+      "decision": "must_note",
+      "facts": ["闪光碎片必须由人形的考达拉缚法者掉落，常带蓝色猎犬；主要在考达拉西北/北部约(33—35,26—30)。不要误刷名称相近的考达拉织法者。拾取碎片后右键触发任务。"],
+      "mechanism_codes": ["spellbinder_specific_item_start", "do_not_confuse_spellweaver"],
+      "evidence_sources": ["user_live_review", "borean_route_live_review"]
+    },
+    "11943": {
+      "decision": "must_note",
+      "facts": ["分别击杀Warbringer Goredrak与General Cerulean取得能量核心和牢笼外壳，再回莱洛拉斯组合/推进奥术牢笼链。"],
+      "mechanism_codes": ["two_named_arcane_prison_parts"],
+      "fivebox_checks": ["共享：现行实跑确认两目标进度共享。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11957": {
+      "decision": "must_note",
+      "facts": ["莎拉苟萨不在地面常驻。使用强化奥术牢笼联系克莉斯塔萨并选择准备就绪，脚本送到高处平台；到平台后使用奥术能量源召出莎拉苟萨。击杀后通过克莉斯塔萨脚本继续/返回。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["keristrasza_teleport_to_saragosa_platform", "arcane_power_focus_summon"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "11961": {
+      "decision": "must_note",
+      "facts": ["伊鲁克尸体约(67.6,50.4)，位于水面与海底之间的半深处，不在岸边也不漂在水面；从尸体拾取伊斯利鲁克的图腾。"],
+      "spatial_tags": ["water_or_underwater", "vertical_layer"],
+      "mechanism_codes": ["midwater_iruk_corpse_totem"],
+      "fivebox_checks": ["同一具尸体图腾能否五号分别拾取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "11967": {
+      "decision": "must_note",
+      "facts": ["莎拉苟萨平台任务结束后不要跳下。使用强化奥术牢笼召出/与克莉斯塔萨交谈，她提供免费传送回永生之盾，再向莱洛拉斯交任务。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["keristrasza_teleport_down_to_transitus"],
+      "evidence_sources": ["wowhead_wotlk_11967", "wow_pro_borean"]
+    },
+    "11969": {
+      "decision": "must_note",
+      "facts": ["到信号火焰约(25.4,21.8)，站在火焰旁使用莱洛拉斯的火花触发事件；仅到坐标不会自动完成。"],
+      "mechanism_codes": ["spark_at_signal_fire_event"],
+      "evidence_sources": ["borean_route_live_review"]
+    },
+    "12471": {
+      "decision": "must_note",
+      "facts": ["先救出被俘虏的海象人，等他变成可接任务NPC后立即接《残忍的科瓦迪尔》；不是固定常驻NPC。"],
+      "mechanism_codes": ["rescue_then_temporary_questgiver"],
+      "fivebox_checks": ["同一次救援后临时NPC是否能让五号依次接取仍需实测。"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "12728": {
+      "decision": "must_note",
+      "facts": ["进入冬鳞洞穴后在裂谷异常点附近主动使用奥术测量器取得读数；不会自动探索完成。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["arcanometer_inside_winterfin_cave"],
+      "evidence_sources": ["borean_route_live_review", "wow_pro_borean"]
+    },
+    "13413": {
+      "decision": "must_note",
+      "facts": ["科拉丝塔萨在考达拉魔枢上层环形平台约(29.5,24.8)，需要先进入中央结构沿坡道/环道上到上层；与她对话骑红龙后用载具技能击杀5名鳞誓精英。13414是之后相同内容的日常版本，首轮不重复。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["nexus_upper_ring_questgiver", "red_drake_vehicle_combat_five_elites"],
+      "evidence_sources": ["wowhead_wotlk_13413", "wowhead_wotlk_13414"]
+    }
+  }
+}

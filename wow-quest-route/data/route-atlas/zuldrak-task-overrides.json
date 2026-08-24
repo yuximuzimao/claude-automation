@@ -1,8 +1,10 @@
 {
-  "status": "pre_route_foundation_manual_overrides",
-  "reviewed_at": "2026-08-19",
+  "status": "zuldrak_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 66,
+  "zone_name": "祖达克",
   "policy": {
-    "purpose": "Resolve non-obvious player operations and timing placeholders before Target Cluster insertion; unresolved five-box sharing stays as live verification.",
+    "purpose": "补齐祖达克正式路线审计之外仍残留在全局任务宇宙中的日常轮换、祝福重复、伪装/沃尔塔鲁斯交通与特殊操作事实。",
+    "unlisted_tasks": "未进入当前可执行池、后续新增或版本变化的任务仍需重新审计；不得因本文件未列出而自动推断为普通平面任务。",
     "no_macro_block_layer": true
   },
   "manual_service_minutes": {
@@ -53,5 +55,140 @@
     "gymer_vehicle": [12919],
     "harkoa_quetzlun_ride": [12665],
     "rhunok_altar_script": [12647]
+  },
+  "reviewed_no_extra_note_ids": [12509, 12594, 12792],
+  "notes": {
+    "12501": {
+      "decision": "must_note",
+      "facts": ["Troll Patrol主日常的轮换ID之一。当天需要依次完成Brandon、Rupert、Grondel各随机1个子任务，以及Finklestein固定炼金子任务；不能把所有10个子任务同时塞进路线。12501/12563/12587只代表当天可出现的主任务版本。"],
+      "mechanism_codes": ["troll_patrol_calendar_rotation", "four_post_daily_block", "three_random_one_fixed"],
+      "evidence_sources": ["wowhead_wotlk_troll_patrol", "argent_crusade_reputation_guide"]
+    },
+    "12563": {
+      "decision": "must_note",
+      "facts": ["Troll Patrol主日常轮换ID；与12501/12587属于同一当天巡逻结构，只执行服务器当天提供的版本。"],
+      "mechanism_codes": ["troll_patrol_calendar_rotation", "same_daily_structure_12501_12587"],
+      "evidence_sources": ["wowhead_wotlk_troll_patrol"]
+    },
+    "12587": {
+      "decision": "must_note",
+      "facts": ["Troll Patrol主日常轮换ID；与12501/12563属于同一当天巡逻结构，只执行服务器当天提供的版本。"],
+      "mechanism_codes": ["troll_patrol_calendar_rotation", "same_daily_structure_12501_12563"],
+      "evidence_sources": ["wowhead_wotlk_troll_patrol"]
+    },
+    "12502": {
+      "decision": "must_note",
+      "facts": ["Brandon的三选一日常之一；分别在Drak'Sotra南、北、东三个基座使用银色北伐军战旗，不是同一个中心点一次使用。"],
+      "mechanism_codes": ["troll_patrol_brandon_rotation", "three_fixed_banner_pedestals"],
+      "evidence_sources": ["wowhead_wotlk_12502", "wow_pro_argent_dailies"]
+    },
+    "12564": {
+      "decision": "must_note",
+      "facts": ["Brandon三选一日常之一；在Drak'Sotra农田采5份成熟水罂粟，属于地面植物拾取。"],
+      "mechanism_codes": ["troll_patrol_brandon_rotation", "ground_water_poppy_collection"],
+      "fivebox_checks": ["确认水罂粟是否五号分别拾取。"],
+      "evidence_sources": ["wowhead_wotlk_12564", "wow_pro_argent_dailies"]
+    },
+    "12588": {
+      "decision": "must_note",
+      "facts": ["Brandon三选一日常之一；在发光的上古土堆旁使用钢铲挖掘圣物，真实锚点是土堆而不是普通怪区。"],
+      "mechanism_codes": ["troll_patrol_brandon_rotation", "steel_spade_on_ancient_mounds"],
+      "fivebox_checks": ["确认一次挖掘是否仅操作角色获得进度。"],
+      "evidence_sources": ["wowhead_daily_guide", "wow_pro_argent_dailies"]
+    },
+    "12568": {
+      "decision": "must_note",
+      "facts": ["Rupert三选一日常之一；对5名战死银色步兵尸体使用焚化油。必须对尸体操作，不是击杀5个目标。"],
+      "mechanism_codes": ["troll_patrol_rupert_rotation", "corpse_item_use_five"],
+      "fivebox_checks": ["确认一个号焚化尸体是否共享进度。"],
+      "evidence_sources": ["wowhead_wotlk_12568"]
+    },
+    "12591": {
+      "decision": "must_note",
+      "facts": ["Rupert三选一日常之一；向西北方向5个蛛魔隧道/弹坑使用高能冲击手雷封洞。按5个固定洞口处理。"],
+      "mechanism_codes": ["troll_patrol_rupert_rotation", "grenade_five_nerubian_craters"],
+      "evidence_sources": ["wowhead_wotlk_12591"]
+    },
+    "12519": {
+      "decision": "must_note",
+      "facts": ["Grondel三选一日常之一；浅水中的达卡莱尸体通过短暂交互取得7枚勋章，不是正常击杀掉落。"],
+      "mechanism_codes": ["troll_patrol_grondel_rotation", "corpse_interaction_medallions"],
+      "fivebox_checks": ["确认同一尸体是否可供五号分别互动。"],
+      "evidence_sources": ["wowhead_wotlk_12519"]
+    },
+    "12585": {
+      "decision": "must_note",
+      "facts": ["Grondel三选一日常之一；在其西北浅水/湿地拾20份枯死棘木作为柴火，属于地面拾取。"],
+      "mechanism_codes": ["troll_patrol_grondel_rotation", "ground_dead_thornwood_collection"],
+      "fivebox_checks": ["确认枯木是否个人拾取。"],
+      "evidence_sources": ["wowhead_wotlk_12585"]
+    },
+    "12541": {
+      "decision": "must_note",
+      "facts": ["Finklestein固定巡逻子任务；对话启动限时炼金小游戏，按他随机喊出的原料名在实验室架子、桶、箱、袋中找到对应物并放入大锅。需要快速识别原料位置，不能按一个普通交互点估时。12601/12602是遗留重复ID，不进入可执行池。"],
+      "mechanism_codes": ["troll_patrol_fixed_alchemist_task", "timed_random_reagent_minigame", "legacy_ids_12601_12602_excluded"],
+      "fivebox_checks": ["确认五号是否必须分别完成整套炼金小游戏。"],
+      "evidence_sources": ["wowhead_wotlk_12541", "wow_pro_argent_dailies", "trinitycore_legacy_rows"]
+    },
+    "12604": {
+      "decision": "must_note",
+      "facts": ["《祝贺你！》是Troll Patrol的短后续；如果从接巡逻开始在20分钟计时内完成四个岗哨任务，会获得额外Patroller's Pack/奖励。路线评估时应保留这条20分钟整体计时，而不是把它当普通交谈任务。"],
+      "mechanism_codes": ["troll_patrol_twenty_minute_bonus", "post_patrol_reward"],
+      "evidence_sources": ["wowhead_daily_guide", "argent_crusade_reputation_guide"]
+    },
+    "12633": {
+      "decision": "must_note",
+      "facts": ["由扭曲项圈任务物触发/承接黑锋哨站支线，把项圈带给斯特凡。起点不是固定世界NPC任务点，路线应绑定实际获得项圈的位置。"],
+      "mechanism_codes": ["item_started_or_carried_choker_chain"],
+      "evidence_sources": ["questie_objective", "ebon_watch_chain"]
+    },
+    "12638": {
+      "decision": "must_note",
+      "facts": ["把扭曲项圈交给同营地的血玫瑰达图拉并观看/触发项圈用途揭示脚本；是营地内短脚本，不需要外出。"],
+      "mechanism_codes": ["camp_local_dialogue_script", "choker_purpose_reveal"],
+      "evidence_sources": ["wowhead_wotlk_12638"]
+    },
+    "12643": {
+      "decision": "must_note",
+      "facts": ["到折磨之匣下方区域：腐烂憎恶之物由憎恶掉落，黏稠食尸鬼口水是附近地面可拾物；两个目标来源不同，不能只按一个怪物掉落区理解。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["under_reliquary_area", "abomination_drop_plus_ground_drool"],
+      "evidence_sources": ["wowhead_wotlk_12643"]
+    },
+    "12649": {
+      "decision": "must_note",
+      "facts": ["先使用迷惑项圈变成天灾伪装，再去东侧约(19,75)找Gristlegut购买苦痛浆液。伪装可能自行掉落，Blightguard能看穿；攻击性技能也可能解除伪装。失去项圈可回斯特凡补。"],
+      "mechanism_codes": ["scourge_disguise_required", "vendor_purchase_under_disguise", "blightguard_sees_through", "disguise_can_drop"],
+      "fivebox_checks": ["此任务公开资料标为不可共享；五号按分别使用项圈和购买处理。"],
+      "evidence_sources": ["wowhead_wotlk_12649"]
+    },
+    "12663": {
+      "decision": "must_note",
+      "facts": ["在沃尔塔鲁斯同层东南露台约(29.6,48.0)找Gorebag，对话选择游览后自动骑石像鬼飞完整个祖达克并回到沃尔塔鲁斯；飞行约3—4分钟，不能按起终点直线距离估时。若Gorebag首次对话不触发，旧资料有重复对话/重上伪装后成功的脚本异常。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["voltarus_same_level_gorebag", "automatic_gargoyle_tour", "long_scripted_flight"],
+      "evidence_sources": ["wowhead_wotlk_12663"]
+    },
+    "12664": {
+      "decision": "must_note",
+      "facts": ["与12663相同的沃尔塔鲁斯Gorebag自动石像鬼游览版本；进入沃尔塔鲁斯需保持天灾伪装并通过地面中央传送平台上楼。Gorebag在Drakuru同层东南露台，不在地面。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["voltarus_teleporter", "automatic_gargoyle_tour", "scourge_disguise_state"],
+      "evidence_sources": ["wowhead_wotlk_12664"]
+    },
+    "12902": {
+      "decision": "must_note",
+      "facts": ["目标在怒爪巢穴内部；进入洞穴后再寻找线索，不能按地表平面坐标处理。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["rageclaw_den_interior_search"],
+      "evidence_sources": ["zuldrak_per_task_human_executability_screen"]
+    },
+    "12793": {
+      "decision": "must_note",
+      "facts": ["希姆托加到圣光据点的面包屑；任务NPC后方的Maaka可提供直接飞行交通。既然有任务专用交通，不应在路线里安排玩家自行跑完整段。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_provided_flight_to_lights_breach"],
+      "evidence_sources": ["wowhead_wotlk_12793"]
+    }
   }
 }

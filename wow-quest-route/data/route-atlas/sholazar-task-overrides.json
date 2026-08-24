@@ -1,0 +1,384 @@
+{
+  "status": "sholazar_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 3711,
+  "zone_name": "索拉查盆地",
+  "policy": {
+    "purpose": "路线排序前确认任务真实执行机制、随从/载具、空间入口、跨区交通和声望状态机；不是最终路线顺序。",
+    "unlisted_tasks": "未进入当前可执行池、后续新增或版本变化的任务仍需重新审计；不得因本文件未列出而自动推断为普通平面任务。",
+    "player_note_rule": "只有会改变玩家操作、入口/楼层判断、随从/载具状态、任务物使用、声望分支或失败风险的事实才进入最终任务备注。"
+  },
+  "reviewed_no_extra_note_ids": [12520, 12524, 12525, 12526, 12528, 12538, 12539, 12543, 12549, 12551, 12556, 12558, 12574, 12576, 12577, 12578, 12592, 12595, 12603, 12651, 12654, 12681, 12692, 12695, 12804],
+  "notes": {
+    "12489": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12522": {
+      "decision": "must_note",
+      "facts": ["飞行器引擎在最初坠机点约(38.6,56.8)，是地面固定物拾取；接任务处在奈辛瓦里营地约(25.4,58.4)，两者不是同一营地区域。"],
+      "mechanism_codes": ["fixed_ground_engine_pickup", "return_to_base_camp"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12523": {
+      "decision": "must_note",
+      "facts": ["7份风险投资公司备用零件散落在斯温迪格林挖掘场地面，可与12524击杀和12688护送同一片区域完成。"],
+      "mechanism_codes": ["ground_item_collection", "shared_digsite_12524_12688"],
+      "fivebox_checks": ["确认地面零件是否五号分别拾取；按当前项目规则未实测前不推断共享。"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12530": {
+      "decision": "must_note",
+      "facts": ["需要用格拉克伊克的镣铐召出Goregek；若随从/任务给予者不在身边，可回狂心岭找长者哈尔卡克重新取得镣铐。硬皮空地约(66,73)，对软皮幼猩猩使用软皮木棍，通常刺激2—3只后引出雌性硬皮猩猩。"],
+      "mechanism_codes": ["summoned_companion_questgiver", "provided_item_on_softknuckles", "spawn_matriarch_after_pokes"],
+      "fivebox_checks": ["确认五号是否都需要分别召Goregek/分别用木棍，还是击杀母猩猩全队共享。"],
+      "evidence_sources": ["wowhead_wotlk_12530"]
+    },
+    "12532": {
+      "decision": "must_note",
+      "facts": ["需要Dajik随行/旧粉笔召唤；捕捉12只逃跑的小鸡而不是击杀。若任务物丢失回狂心岭长者哈尔卡克补。"],
+      "mechanism_codes": ["summoned_companion", "provided_item", "capture_not_kill"],
+      "fivebox_checks": ["确认捕鸡是否个人进度；Questie缺物品来源，不能从目标计数推断共享。"],
+      "evidence_sources": ["questie_objective", "sholazar_companion_chain"]
+    },
+    "12535": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "sholazar_companion_chain"]
+    },
+    "12537": {
+      "decision": "must_note",
+      "facts": ["需要用瑟匹克的狩猎号角召出Zepik；雾语天气祭坛是湖边大石柱约(45,37)。必须紧贴石柱使用/放下通天水晶簇，再打碎触发任务。任务追踪器的点不是普通击杀区。"],
+      "mechanism_codes": ["summoned_companion_zepik", "fixed_weather_shrine", "place_then_break_crystal"],
+      "evidence_sources": ["wowhead_wotlk_12537"]
+    },
+    "12540": {
+      "decision": "must_note",
+      "facts": ["受伤的雨声神谕者约在(55.7,65.0)躺在地上；必须与其对话使其醒来，随后会出现鳄鱼事件，再与神谕者继续对话。完成后狂心声望转为仇恨、神谕者转为友善，并直接衔接12570护送。"],
+      "mechanism_codes": ["ground_npc_dialogue_trigger", "scripted_crocolisk_event", "frenzyheart_to_oracle_rep_flip", "direct_followup_12570"],
+      "evidence_sources": ["wowhead_wotlk_12540", "wow_pro_sholazar_neutral"]
+    },
+    "12544": {
+      "decision": "must_note",
+      "facts": ["诺兹隆之骨的祭品碗在巨大头骨前约(26.1,71.6)；到点使用索乌拉姆的薰香触发幻象/信息，不需要进入骨骸内部。"],
+      "mechanism_codes": ["fixed_offering_bowl", "provided_item_vision_trigger"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12550": {
+      "decision": "must_note",
+      "facts": ["任务不是杀恶刃豹，而是在苦潮湖附近点击/检查足迹，直到识别3条杉苟足迹；足迹属于地面固定物。"],
+      "mechanism_codes": ["ground_track_interaction", "three_shango_tracks"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12560": {
+      "decision": "must_note",
+      "facts": ["5片沙蕨叶沿河岸采集，主要在苦潮湖/河流附近；是地面植物拾取，不是鳄鱼掉落。"],
+      "mechanism_codes": ["riverbank_ground_plant_collection"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12569": {
+      "decision": "must_note",
+      "facts": ["到河流之心东侧湖边倒木约(46.5,63.5)，站在倒木上使用伪装/任务物启动鳄鱼伏击，再击杀丛林霸王取得颚骨。真实执行锚点是倒木，不是Boss普通刷新点。"],
+      "mechanism_codes": ["fixed_log_ambush_anchor", "provided_disguise", "scripted_crocolisk_spawn"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12570": {
+      "decision": "must_note",
+      "facts": ["从12540同一个受伤神谕者处立即接取；再次对话才真正启动护送。护送返回雨声树屋，过程中基本没有时间停下来做别的任务，应视为连续护送块。"],
+      "mechanism_codes": ["dialogue_starts_escort", "continuous_escort_from_12540", "ends_rainspeaker_canopy"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12571": {
+      "decision": "must_note",
+      "facts": ["需要Lafoo链状态；帝王眼镜蛇在雨声树屋周围，命名目标毒尖约(58.1,52.9)靠近雨声急流。可与12572带Lafoo挖宝同区域完成。"],
+      "mechanism_codes": ["companion_lafoo_block", "named_snake_plus_ten_cobras", "shared_area_12572"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12572": {
+      "decision": "must_note",
+      "facts": ["必须带Lafoo；宝物点是会闪烁/时隐时现的地面土堆，Lafoo几乎要站到土堆正上方才会挖出宝物。地图散点不能直接等同于可拾取物。"],
+      "mechanism_codes": ["summoned_companion_lafoo", "blinking_dirt_mounds", "companion_digs_treasure"],
+      "fivebox_checks": ["确认一个Lafoo挖出的宝物是否仅召唤者可拾，还是五号可分别拾取。"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12573": {
+      "decision": "must_note",
+      "facts": ["把雨声议和礼物带给俯瞰河流之心的萨满祭司维克伊克约(51.3,64.8)，通过对话转达回应；属于固定NPC往返，不是击杀。"],
+      "mechanism_codes": ["provided_gift_dialogue", "fixed_overlook_npc"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12575": {
+      "decision": "must_note",
+      "facts": ["雾语宝物位于Spearborn Encampment顶层约(41.6,19.6)；接近宝物后督军塔尔特克才出现攻击。必须按顶层平台处理，不能用平面坐标和下层营地怪群合并。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["top_level_treasure", "proximity_spawn_warlord_tartek"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12579": {
+      "decision": "must_note",
+      "facts": ["源血碎片在苔行祭坛附近地表收集；任务文本明确提示最好不要进入石柱中的洞穴，因此路线锚点应保持在地表祭坛区，不能因同坐标洞穴入口误导进洞。完成后可用Moodle的皮球召出Moodle交任务。"],
+      "spatial_tags": ["cave_avoidance", "surface_only"],
+      "mechanism_codes": ["surface_ground_shards", "summoned_companion_moodle_turnin"],
+      "evidence_sources": ["questie_objective", "wow_pro_sholazar_neutral"]
+    },
+    "12581": {
+      "decision": "must_note",
+      "facts": ["阿图里斯在Sundered Shard洞穴尽头约(72.3,57.4)。Boss降至约30%会免疫，两名冻结NPC Zepik与Jaloot解冻；必须先杀其中一名才能解除免疫。杀Zepik、保留Jaloot＝选择神谕者；杀Jaloot、保留Zepik＝选择狂心。保存NPC随后协助击杀阿图里斯并提供阵营任务。"],
+      "spatial_tags": ["cave"],
+      "mechanism_codes": ["faction_choice_state_machine", "boss_immunity_at_30_percent", "kill_one_save_one", "repeatable_faction_switch_event"],
+      "fivebox_checks": ["五号必须保持同一阵营选择；实跑确认一次击杀是否让五号都获得相同选择/交付状态，避免角色分支分裂。"],
+      "evidence_sources": ["wowhead_wotlk_12581", "wow_pro_sholazar_neutral"]
+    },
+    "12589": {
+      "decision": "must_note",
+      "facts": ["目标就在奈辛瓦里营地：选中幸运的威尔海姆，反复使用RJR步枪直到击中头顶苹果。是任务物射击小游戏，不需要离开营地。"],
+      "mechanism_codes": ["provided_rifle_minigame", "camp_local_objective"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12605": {
+      "decision": "must_note",
+      "facts": ["始生龙幼崽在多里安哨站东/东北燃烧林地约(47,27)。幼崽可由击破始生龙蛋产生，或等始生龙喷火孵化；幼崽是黄色可交互单位，出现后直接右键拾取，不要攻击，否则可能无法捡取。"],
+      "mechanism_codes": ["break_or_burn_eggs_to_spawn_hatchlings", "interact_not_kill_hatchlings"],
+      "fivebox_checks": ["确认同一幼崽是否仅一个角色可拾取；按公开资料先按个人拾取风险处理。"],
+      "evidence_sources": ["wowhead_wotlk_12605"]
+    },
+    "12607": {
+      "decision": "must_note",
+      "facts": ["只对中立裂牙猛犸使用猛犸缰绳，公牛不能驯。成功后进入猛犸控制状态，带回多里安哨站篝火/Zootfizzle附近，使用载具技能1交付。公开WotLK资料有载具UI/插件导致交付失败的历史反馈。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["mammoth_vehicle_control", "neutral_mammoth_only", "vehicle_skill_turnin"],
+      "fivebox_checks": ["确认五号是否必须各自驯一头猛犸；载具任务默认按个人操作待实测。"],
+      "evidence_sources": ["wowhead_wotlk_12607"]
+    },
+    "12634": {
+      "decision": "must_note",
+      "facts": ["水果不是普通掉落：在Wildgrowth Mangal拉/点击结实的藤蔓，随机掉出所需水果或NPC；若出现矮人可对话选择缺少的材料。"],
+      "mechanism_codes": ["hanging_vine_interaction", "random_fruit_or_npc", "npc_can_supply_missing_ingredient"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12644": {
+      "decision": "must_note",
+      "facts": ["在奈辛瓦里营地蒸馏器旁与‘醉鬼’麦克马努斯对话启动小游戏；站在同时够得到橙子、香蕉、木瓜、火盆和压力阀的位置，按随机喊话快速点击对应部件。属于原地随机指令脚本。"],
+      "mechanism_codes": ["distillery_minigame", "random_callout_sequence", "timed_local_interactions"],
+      "fivebox_checks": ["五号很可能需分别完成小游戏；实跑记录是否能同时触发/是否共享完成。"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12645": {
+      "decision": "must_note",
+      "facts": ["用丛林佳酿样品分别给Hemet、Hadrius和河流之心Lakeside Landing的Tamara品尝；前两人在奈辛瓦里营地，第三人在地图中央，属于跨两个Hub的三NPC任务。"],
+      "mechanism_codes": ["provided_sample_three_npcs", "two_hub_objective"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12683": {
+      "decision": "must_note",
+      "facts": ["苦潮多头蛇约在(38,39)湖中。必须让多头蛇把Hydra Sputum减益施加到玩家本人，再使用样本容器取样；杀得太快、宠物先吃到减益都可能导致没有样本。需要5样本并击杀5只。"],
+      "spatial_tags": ["water_or_underwater"],
+      "mechanism_codes": ["player_must_receive_debuff", "provided_sample_container", "do_not_kill_too_fast"],
+      "evidence_sources": ["wowhead_wotlk_12683"]
+    },
+    "12688": {
+      "decision": "must_note",
+      "facts": ["工程师赫莉丝在日灼之柱旁挖掘场平台约(35.5,47.5)，对话启动护送并从挖掘场撤离；可与12523地面零件、12524风险投资公司击杀同一次访问处理。"],
+      "mechanism_codes": ["escort", "shared_digsite_12523_12524"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12691": {
+      "decision": "must_note",
+      "facts": ["在造物者悬台/眺望台区域击杀Sholazar Guardians取得巨型石钥匙，再开古旧石箱。守卫在Maker's Overlook内部/隧道区域，石箱在入口右侧上方平台外侧。组队时单把钥匙只能一个角色拾取。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["guardian_drop_key", "key_opens_coffer", "personal_key_loot_risk"],
+      "fivebox_checks": ["公开资料明确单个钥匙掉落只够一个角色拾取；五号按需分别刷钥匙。"],
+      "evidence_sources": ["wowhead_wotlk_12691"]
+    },
+    "12696": {
+      "decision": "must_note",
+      "facts": ["这是从奈辛瓦里营地到Lakeside Landing飞行点的引导任务；完成锚点是与Pilot Vic交谈，不是自由飞行侦察目标。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["hub_to_hub_flight_breadcrumb"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12699": {
+      "decision": "must_note",
+      "facts": ["维克的钥匙藏在河流之心湖底的Raised Mud泥堆中，约(48.6,64.0)；需要潜水逐个检查泥堆。任务提供空气罐可用于水下。"],
+      "spatial_tags": ["water_or_underwater"],
+      "mechanism_codes": ["underwater_mud_pile_search", "provided_air_tank"],
+      "fivebox_checks": ["确认泥堆/钥匙是否个人拾取。"],
+      "evidence_sources": ["wow_pro_sholazar_neutral"]
+    },
+    "12703": {
+      "decision": "must_note",
+      "facts": ["狂心日常/分支任务：先取得纯净神谕者之血，在卡塔克祭坛召出卡塔克，进入其力量/控制效果后在祭坛附近击杀50个灵鳍鳄鱼人。不是普通50杀，必须先完成祭坛召唤。"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "summon_kartak_at_altar", "empowered_kill_block"],
+      "evidence_sources": ["questie_objective", "frenzyheart_daily_guide"]
+    },
+    "12705": {
+      "decision": "must_note",
+      "facts": ["神谕者日常/分支任务：从灵鳍湾狼獾人取得被污染水晶，带到闪电巨石召唤Soo-holu，再借助其力量在神祠附近杀50个狂心狼獾人。必须先完成水晶→巨石召唤。"],
+      "mechanism_codes": ["oracle_daily_rotation", "tainted_crystal_then_summon", "empowered_kill_block"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12726": {
+      "decision": "must_note",
+      "facts": ["到雷暴台地使用雷雨之鼓变身/控制Haiphoon。先把风暴亡魂或流水之魂打到30%以下，再用吞噬技能；吞噬不同元素会改变形态，需要完成3个风暴亡魂和3个流水之魂。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["haiphoon_vehicle_form", "devour_below_30_percent", "alternating_element_forms"],
+      "evidence_sources": ["oracle_reputation_guide"]
+    },
+    "12735": {
+      "decision": "must_note",
+      "facts": ["神谕者日常轮换之一；要在苦潮湖、冬拥河和河流之心三个不同水域敲净化之钟并击杀各处污染邪灵。三个目标区分散，不能当成一个中心坐标。"],
+      "mechanism_codes": ["oracle_daily_rotation", "provided_bell_three_water_sites"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12736": {
+      "decision": "must_note",
+      "facts": ["神谕者日常轮换之一；必须到光芒、日灼、苔光、通天四根巨柱的顶端使用沉思乐管。目标是四个柱顶高处，不是柱脚坐标。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["oracle_daily_rotation", "four_pillar_top_interactions"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12737": {
+      "decision": "must_note",
+      "facts": ["神谕者日常轮换之一；在造物者之座西北雷暴台地8堆肥沃土堆附近使用丰饶号角。按土堆固定点处理，不是普通击杀区域。"],
+      "mechanism_codes": ["oracle_daily_rotation", "eight_fertile_mound_interactions"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12758": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；先去斯温迪格林挖掘场取得风险投资公司炸药，再在指定目标/风暴看守相关位置使用炸药取得头盔。前置取炸药和实际使用点不是同一个目标。"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "pickup_explosives_then_use_for_headgear"],
+      "evidence_sources": ["questie_objective", "frenzyheart_daily_guide"]
+    },
+    "12759": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；先在卡塔克要塞取出Zepik藏的陷阱，再用陷阱处理50个灵鳍鳄鱼人。必须绑定陷阱任务物，不能当普通50杀。"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "retrieve_traps_then_kill_credit"],
+      "evidence_sources": ["questie_objective", "frenzyheart_daily_guide"]
+    },
+    "12760": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；先饮用神秘狂心饮料取得强化状态，再在卡塔克要塞附近杀30个灵鳍鳄鱼人。必须在任务buff状态下执行。"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "temporary_drink_buff_required", "thirty_kills_under_buff"],
+      "evidence_sources": ["questie_objective", "frenzyheart_daily_guide"]
+    },
+    "12761": {
+      "decision": "must_note",
+      "facts": ["神谕者日常轮换之一；在灵鳍湾取得防御水晶并激活其力量后杀50个狂心狼獾人。任务物/力量状态是计数前提。"],
+      "mechanism_codes": ["oracle_daily_rotation", "defense_crystal_power_required", "fifty_kills_under_power"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12762": {
+      "decision": "must_note",
+      "facts": ["神谕者日常轮换之一；先到源血之柱暴露处给休眠无瑕水晶充能，再去灵鳍湾用水晶力量杀30个狂心狼獾人。充能点和击杀区分离。"],
+      "mechanism_codes": ["oracle_daily_rotation", "charge_crystal_at_lifeblood_pillar", "thirty_kills_under_crystal_power"],
+      "evidence_sources": ["questie_objective", "oracle_reputation_guide"]
+    },
+    "12797": {
+      "decision": "must_note",
+      "facts": ["泰坦界门位于索拉查约(40,82)，会把角色传送到真实的安戈洛环形山高处界门；这不是副本。链中通过界门往返后带欧米伽符文回索拉查交弗蕾亚。安戈洛侧如果从高台跳下，无法直接沿原路径爬回界门，属于潜在单向地形陷阱。"],
+      "spatial_tags": ["cross_zone_objective", "scripted_transport_or_phase", "cliff_or_mountain"],
+      "mechanism_codes": ["sholazar_ungoro_waygate", "real_world_cross_continent_portal", "one_way_cliff_risk_if_jump_down"],
+      "evidence_sources": ["wowhead_wotlk_12797"]
+    },
+    "12658": {
+      "decision": "must_note",
+      "facts": ["7枚大鹏卵散落在多里安哨站东北的Bonefields，约(56,27)，属于发光地面拾取物，不是击杀大鹏掉落。"],
+      "mechanism_codes": ["bonefields_ground_egg_collection"],
+      "fivebox_checks": ["确认大鹏卵是否个人拾取。"],
+      "evidence_sources": ["wowhead_wotlk_12658"]
+    },
+    "12732": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；先到日灼之柱最顶端用Rejek的瓶子装Suntouched Water，再到盆地北缘击杀Goretalon Matriarch取得Heartblood，最后把两者组合成Suntouched Heartblood。柱顶需要飞行到达；当前不学寒冷天气飞行时可用K3出租双足飞龙。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "pillar_top_water_collection", "matriarch_drop_then_combine", "loaned_wind_rider_compatible"],
+      "evidence_sources": ["wowhead_wotlk_12732", "wowhead_loaned_wind_rider"]
+    },
+    "12734": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；分别击杀1只蓝玉虫巢巨蜂、1只硬皮冲锋者和3名雾语成员后，必须对每具尸体使用雷耶克之刃染血才计数。三个目标区分散，公开资料给出的参考点约为巨蜂(55,75)、冲锋者(60,70)、雾语成员(45,35)。"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "corpse_item_use_three_target_types"],
+      "fivebox_checks": ["确认一个角色对尸体使用刀是否给全队计数；未实测前按个人任务物操作处理。"],
+      "evidence_sources": ["wowhead_wotlk_12734"]
+    },
+    "12741": {
+      "decision": "must_note",
+      "facts": ["狂心日常轮换之一；从流水之魂取得3份季风精华、从风暴亡魂取得3份风暴精华，然后前往雷暴台地的雷雨祭坛约(22.4,33.8)，在祭坛附近被闪电击中才会转化为真正的雷雨之力。该祭坛区域需要飞行到达；当前可用K3出租双足飞龙。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer"],
+      "mechanism_codes": ["frenzyheart_daily_rotation", "two_essence_drops", "lightning_strike_conversion_at_shrine", "loaned_wind_rider_compatible"],
+      "evidence_sources": ["wowhead_wotlk_12741", "wowhead_loaned_wind_rider"]
+    },
+    "12529": {
+      "decision": "must_note",
+      "facts": ["狂心随从链任务；Goregek可由镣铐召出并作为随从存在。目标本身是硬皮抢夺者/冲锋者普通击杀，但不要因地图上看不到任务NPC而认为断链。"],
+      "mechanism_codes": ["summoned_companion_goregek", "normal_kill_objectives_with_companion_state"],
+      "evidence_sources": ["questie_objective", "sholazar_companion_chain"]
+    },
+    "12531": {
+      "decision": "must_note",
+      "facts": ["瑟菲克斯不在洞里。沿盆地南部河流的沙滩约(48—58,83—86)寻找会隆起/震动的松动岩石，角色踩过后沙虫从地下钻出，再击杀取得爪子。任务名‘地下的威胁’不能被误读成洞穴任务。"],
+      "spatial_tags": ["surface_only"],
+      "mechanism_codes": ["rumbling_loose_rock_spawn_trigger", "not_cave"],
+      "evidence_sources": ["wowhead_wotlk_12531"]
+    },
+    "12533": {
+      "decision": "must_note",
+      "facts": ["Dajik随从链任务；蓝玉虫巢巨蜂/雄蜂在Sapphire Hive外围和入口一带击杀。随从可通过旧粉笔重新召出。"],
+      "mechanism_codes": ["summoned_companion_dajik", "sapphire_hive_outer_kills"],
+      "evidence_sources": ["questie_objective", "sholazar_companion_chain"]
+    },
+    "12534": {
+      "decision": "must_note",
+      "facts": ["蓝玉虫巢蜂后在巨大棕色树干/蜂巢内部深处；入口约(59,79)，开口朝东。必须进入内部找蜂后，不能在外层同坐标等待刷新。"],
+      "spatial_tags": ["cave", "interior"],
+      "mechanism_codes": ["sapphire_hive_interior", "verified_hive_entrance"],
+      "evidence_sources": ["wowhead_wotlk_12534"]
+    },
+    "12536": {
+      "decision": "must_note",
+      "facts": ["在约(57,68)与被俘鳄鱼互动/骑乘后自动沿预设路线把角色送到雾语村约(46,39)；途中不需要玩家驾驶或使用技能。完成落点不是接任务位置。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["automatic_crocolisk_transport", "fixed_destination_mistwhisper"],
+      "fivebox_checks": ["确认五号是否都必须各自骑乘，以及跟随号是否会被自动分开。"],
+      "evidence_sources": ["wowhead_wotlk_12536"]
+    },
+    "12580": {
+      "decision": "must_note",
+      "facts": ["在苔行村对倒地受害者逐个互动/检查；结果有随机性，有些NPC会死亡不计数，因此通常要检查超过6个。村内及附近洞口/浅层都可能有受害者，不能把6个地图点理解成6次必成。"],
+      "mechanism_codes": ["victim_rescue_rng", "interact_until_six_successes"],
+      "fivebox_checks": ["确认同一受害者一次互动是否全队共享救援进度；公开资料对此并不一致，必须实测。"],
+      "evidence_sources": ["wowhead_wotlk_12580"]
+    },
+    "12582": {
+      "decision": "must_note",
+      "facts": ["《英雄的负担》结尾若杀Jaloot、保留Zepik，则由Zepik提供此任务，将狂心声望切换到尊敬/当前阵营状态。它是阵营切换结果，不是普通独立任务；以后可通过再次击杀阿图里斯改换阵营。"],
+      "mechanism_codes": ["faction_choice_result_frenzyheart", "repeatable_faction_switch"],
+      "evidence_sources": ["wowhead_wotlk_12582", "wowhead_wotlk_12581"]
+    },
+    "12614": {
+      "decision": "must_note",
+      "facts": ["母龙斯利维娜在Savage Thicket北缘约(47,20)。任务链提供猛犸/诱饵式打法，但公开WotLK实测可直接下坐骑击杀母龙并正常获得任务进度，因此载具不是硬性完成条件。"],
+      "mechanism_codes": ["named_broodmother", "mammoth_optional_direct_kill_valid"],
+      "evidence_sources": ["wowhead_wotlk_12614"]
+    },
+    "12624": {
+      "decision": "must_note",
+      "facts": ["金色订婚戒指是索拉查盆地大量普通生物的区域随机掉落，不对应某个固定Questie刷点。应从接任务后自然清图时顺带等待掉落，避免为地图推荐点专门折返刷怪。"],
+      "mechanism_codes": ["zone_wide_random_drop", "do_not_route_to_single_helper_point"],
+      "fivebox_checks": ["确认五号戒指掉落/拾取模式；不根据组队评论直接推断共享。"],
+      "evidence_sources": ["wowhead_wotlk_12624"]
+    },
+    "12671": {
+      "decision": "must_note",
+      "facts": ["与Pilot Vic启动侦察飞行后，去程大部分自动驾驶；遭攻击/飞机起火后需要玩家控制返航。回到湖边着陆场必须飞进水晶标出的着陆圈并使用载具LAND技能（通常技能1）完成，直接跳出载具不会给完成。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["scripted_aircraft_outbound", "manual_return_when_damaged", "land_button_required"],
+      "fivebox_checks": ["五号载具飞行预计需分别操作；实跑确认是否能同步启动及各号着陆操作量。"],
+      "evidence_sources": ["wowhead_wotlk_12671"]
+    },
+    "12689": {
+      "decision": "must_note",
+      "facts": ["《英雄的负担》结尾若杀Zepik、保留Jaloot，则由Jaloot提供此任务，将神谕者声望切换到尊敬/当前阵营状态。它是阵营选择结果而非独立普通任务，可通过再次击杀阿图里斯改换。"],
+      "mechanism_codes": ["faction_choice_result_oracles", "repeatable_faction_switch"],
+      "evidence_sources": ["wowhead_wotlk_12689", "wowhead_wotlk_12581"]
+    }
+  }
+}

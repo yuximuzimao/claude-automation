@@ -1,0 +1,834 @@
+{
+  "status": "icecrown_human_execution_review_complete_for_current_route_pool",
+  "zone_id": 210,
+  "zone_name": "冰冠冰川",
+  "policy": {
+    "purpose": "路线排序前的人类可执行性、隐藏机制与空间可达性事实；不是最终路线顺序。",
+    "unlisted_tasks": "未进入当前可执行池、后续新增或版本变化的任务仍需重新审计；不得因本文件未列出而自动推断为普通平面任务。",
+    "player_note_rule": "只有会改变玩家执行、入口判断、楼层判断、任务物使用、脚本/载具或失败风险的事实才进入最终任务备注。"
+  },
+  "reviewed_no_extra_note_ids": [12806, 12807, 12899, 12938, 12951, 13036, 13044, 13068, 13070, 13072, 13075, 13080, 13081, 13082, 13085, 13104, 13106, 13118, 13139, 13155, 13157, 13213, 13227, 13228, 13230, 13237, 13238, 13260, 13277, 13278, 13293, 13304, 13307, 13316, 13340, 13348, 13349, 13359, 13360, 13362, 13363, 13378, 13379, 24558, 24800],
+  "notes": {
+    "12810": {
+      "decision": "must_note",
+      "facts": ["目标在先锋军港口水域；下水击杀鲨鱼，并使用/依赖血囊收集鲨鱼血。"],
+      "spatial_tags": ["water_or_underwater"],
+      "mechanism_codes": ["provided_item", "water_objective"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12813": {
+      "decision": "must_note",
+      "facts": ["先锋军港口海滩杀卫兵；尸体钥匙用于开附近箱子，同时对尸体使用黑暗医者药剂。与12838共用同一区域和钥匙/箱子循环。"],
+      "mechanism_codes": ["corpse_item_use", "shared_area_with_12838"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12814": {
+      "decision": "must_note",
+      "facts": ["先在先锋军港口击杀狮鹫骑手，再使用先锋军狮鹫缰绳取得/控制狮鹫并飞回死亡高地。目标点不是普通地面杀怪终点。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["provided_item", "scripted_vehicle_return"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12815": {
+      "decision": "must_note",
+      "facts": ["击杀10名狮鹫骑手即可；骨狮鹫载具是可选完成方式，不应在路线中误写成必须乘载具。"],
+      "mechanism_codes": ["optional_vehicle"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12838": {
+      "decision": "must_note",
+      "facts": ["在先锋军港口通过钥匙持续开启箱子完成情报收集；与12813同区域可并做。"],
+      "mechanism_codes": ["key_and_chest_loop", "shared_area_with_12813"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12839": {
+      "decision": "must_note",
+      "facts": ["《海军上将的计划》来自先锋军港口箱子中的任务起始物，拾到后由UI/物品触发接取，不是固定NPC接取。"],
+      "mechanism_codes": ["item_started_quest", "chest_source"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12840": {
+      "decision": "must_note",
+      "facts": ["两个目标分别位于先锋军港口两艘船上，均靠近船舵；不能把两个坐标视为同一地面点。"],
+      "spatial_tags": ["separate_ship_interiors"],
+      "mechanism_codes": ["two_ship_targets"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12847": {
+      "decision": "must_note",
+      "facts": ["任务目标在大教堂内部，需要进入建筑并清理内部区域；完成/交付脚本有等待时间。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["interior_scripted_event"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12852": {
+      "decision": "must_note",
+      "facts": ["目标在洞内；入洞后向下走并右转。海军上将开启护盾时使用任务给予的消除器。"],
+      "spatial_tags": ["cave", "vertical_layer"],
+      "mechanism_codes": ["provided_item", "shield_counter"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12982": {
+      "decision": "must_note",
+      "facts": ["在尤顿海姆击杀维库人掉落钥匙，再用钥匙开启囚笼释放黑锋囚犯；不是单纯击杀计数。"],
+      "mechanism_codes": ["drop_key_then_cage"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12995": {
+      "decision": "must_note",
+      "facts": ["先击杀维库人，再对尸体附近使用旗帜留下标记；可与尤顿海姆维库击杀任务同做。"],
+      "mechanism_codes": ["corpse_area_item_use"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13008": {
+      "decision": "must_note",
+      "facts": ["打开蛛网/茧释放被困十字军；与同区域蜘蛛击杀和毒囊任务可并做。"],
+      "mechanism_codes": ["cocoon_rescue_interaction"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13042": {
+      "decision": "must_note",
+      "facts": ["地下大厅入口约(32.7,32.2)，是嵌入山体的建筑入口，不像普通洞穴。进门直走到岔路，右侧下第一段楼梯后立即左转再下第二段；学徒在楼梯下方/后方。", "不要过快击杀学徒；需先打到约40%触发拷问信息，再击杀。尸体掉落《打造更好的血肉巨人》并触发13043，应在离开地下大厅前接取。"],
+      "spatial_tags": ["cave", "vertical_layer", "interior"],
+      "mechanism_codes": ["health_threshold_dialogue", "item_started_followup", "same_instance_13043_13059"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_underhalls", "wowhead_wotlk_comments"]
+    },
+    "13043": {
+      "decision": "must_note",
+      "facts": ["由13042目标尸体掉落的书本触发；仍在地下大厅内部完成。学徒处向左进入恐怖大厅，控制Nergeld，撑过多波敌人后博士出现，再用载具技能击杀；博士治疗时可用践踏打断。"],
+      "spatial_tags": ["cave", "vertical_layer", "interior"],
+      "mechanism_codes": ["item_started_quest", "scripted_vehicle_event", "waves_then_boss", "same_instance_13042_13059"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_underhalls"]
+    },
+    "13045": {
+      "decision": "must_note",
+      "facts": ["在银色前线乘任务龙前往天灾城救俘虏，再把俘虏带回医务区篝火处释放；需要往返完成3次，不是单个目标点。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_rescue_roundtrip", "repeat_three_times"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13059": {
+      "decision": "must_note",
+      "facts": ["地下大厅入口后直走，在岔路左侧找Bethod Feigr接取；挑战区域再回到楼梯方向的房间，使用剑触发三名敌人依次出场。可与13042/13043同一次地下大厅访问完成。"],
+      "spatial_tags": ["cave", "vertical_layer", "interior"],
+      "mechanism_codes": ["provided_item_challenge", "same_instance_13042_13043"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_underhalls"]
+    },
+    "13091": {
+      "decision": "must_note",
+      "facts": ["在骨巫妖洞穴附近先解锁门，再控制水之恐兽击杀维库人；目标是载具/控制状态下完成。"],
+      "mechanism_codes": ["unlock_gate", "vehicle_combat"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13117": {
+      "decision": "must_note",
+      "facts": ["血肉作坊区域有4座祭坛，任选一座直接点击即可完成来源调查。"],
+      "mechanism_codes": ["fixed_object_interaction"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13119": {
+      "decision": "must_note",
+      "facts": ["先击杀巡逻的召唤大师Zarod取得法杖，再用法杖作用于4座祭坛。"],
+      "mechanism_codes": ["named_drop_then_multi_object_use"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13120": {
+      "decision": "must_note",
+      "facts": ["需要在3个不同支架/底座处放置宝珠；属于固定点交互，不是击杀任务。"],
+      "mechanism_codes": ["three_fixed_object_placements"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13121": {
+      "decision": "must_note",
+      "facts": ["目标在库尔加拉要塞内部/高处的巫妖王之眼；抵达眼睛附近后需等待观察脚本完成，而不是点击后立即离开。"],
+      "spatial_tags": ["interior", "cliff_or_mountain"],
+      "mechanism_codes": ["location_trigger_wait"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_through_the_eye"]
+    },
+    "13125": {
+      "decision": "must_note",
+      "facts": ["三名目标分散在天灾城不同位置，其中高阶祭司和Salranax都在建筑内部；接近目标后使用号角召唤援军，必须先由玩家命中目标以确保击杀归属。完成后可使用门传回回音谷。"],
+      "spatial_tags": ["interior", "scripted_transport_or_phase"],
+      "mechanism_codes": ["provided_item_summon_assist", "player_tag_required", "return_gate"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13133": {
+      "decision": "must_note",
+      "facts": ["进入先祖大厅，逐个唤醒沉睡的Mjordins，直到随机/脚本唤醒Iskaldar，再对其使用护符。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["wake_until_named_spawn", "provided_item"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13138": {
+      "decision": "must_note",
+      "facts": ["必须贴近Malykriss中央大熔炉（几乎站在炉边）使用任务物；只到地图坐标附近不会自动完成。"],
+      "mechanism_codes": ["proximity_item_use"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13141": {
+      "decision": "must_note",
+      "facts": ["到骷髅堆旁插下旗帜后进入防守脚本；连续多波怪，最后出现精英，全部清完才完成。"],
+      "mechanism_codes": ["provided_item", "defense_waves", "elite_finale"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13143": {
+      "decision": "must_note",
+      "facts": ["先把轻盈追迹者打到出现虚弱提示，再使用印记控制；不能直接在满血状态使用。"],
+      "mechanism_codes": ["health_threshold_item_use", "vehicle_control"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13145": {
+      "decision": "must_note",
+      "facts": ["使用统御之眼控制轻盈追迹者侦察Malykriss四处区域。追迹者可大幅跳跃且无坠落伤害；路线会跨坡道、城墙/桥和高低差，四个平面坐标不能直接当普通相邻点。", "推荐利用高低差移动：冰霜瞭望台在较高处，之后可直接跳落到血熔炉；只需进入区域取得探索进度，无需逐点点击。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain", "bridge_or_crossing", "scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_exploration", "vehicle_jump_no_fall_damage"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_the_vile_hold"]
+    },
+    "13146": {
+      "decision": "must_note",
+      "facts": ["继续控制轻盈追迹者；用载具技能拖拽炸弹到憎恶附近完成。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_drag_bomb"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13147": {
+      "decision": "must_note",
+      "facts": ["继续控制轻盈追迹者；在符文工坊区域对蛮兵使用载具技能挑起战斗，符文工坊是集中完成点。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_provoke_combat"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13152": {
+      "decision": "must_note",
+      "facts": ["目标在复生密室下层；先从木桩/束缚处释放Patches，博士随后出现，由Patches参与击杀。表面坐标不能代表目标层。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["free_npc_then_scripted_boss"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13160": {
+      "decision": "must_note",
+      "facts": ["继续使用轻盈追迹者；沉睡的冰皮哨兵/石像鬼分布在Malykriss边缘岩壁一带，使用追迹者的投掷/抛掷技能摧毁。"],
+      "spatial_tags": ["cliff_or_mountain", "scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_ranged_objective"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "warcraft_wiki_stunning_view"]
+    },
+    "13168": {
+      "decision": "must_note",
+      "facts": ["使用统御之眼控制Eidolon Watcher；后续13169/13170/13171应在同一次Watcher控制状态下并做。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_control", "shared_vehicle_block_13169_13170_13171"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13169": {
+      "decision": "must_note",
+      "facts": ["控制Eidolon Watcher时用载具技能喂食猎犬；与13170/13171同一控制状态并做。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_feed", "shared_vehicle_block_13168_13170_13171"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13170": {
+      "decision": "must_note",
+      "facts": ["控制Eidolon Watcher时用载具技能击杀瞭望者；与13169/13171同一控制状态并做。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_kill", "shared_vehicle_block_13168_13169_13171"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13171": {
+      "decision": "must_note",
+      "facts": ["控制Eidolon Watcher时摧毁水晶；与13169/13170同一次载具流程完成。退出载具后会回到任务NPC附近。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_destroy_crystal", "vehicle_exit_returns_to_giver", "shared_vehicle_block_13168_13169_13170"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13172": {
+      "decision": "must_note",
+      "facts": ["再次与任务NPC对话取得/乘坐狮鹫执行轰炸；轰炸结束后在哭泣采石场下机，再衔接采石场内部任务。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_granted_bombing_vehicle", "ends_in_quarry"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13174": {
+      "decision": "must_note",
+      "facts": ["哭泣采石场内需要收集/检查4份不同文档（Document、Ledger、Map、Schedule），是多个固定点，不是一个目标坐标。"],
+      "spatial_tags": ["quarry_multi_point"],
+      "mechanism_codes": ["four_fixed_documents"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13211": {
+      "decision": "must_note",
+      "facts": ["进入复生密室后使用任务物焚烧尸体；与13152共享同一室内区域。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["provided_item_on_corpses", "shared_interior_13152"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13212": {
+      "decision": "must_note",
+      "facts": ["在血肉作坊击杀Corpulent Horrors取得欧尔拉金部件；上层有80级精英血肉巨人，路线不能把上下层刷新混成同一平面怪区。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["personal_loot_parts", "upper_level_elite_hazard"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13220": {
+      "decision": "must_note",
+      "facts": ["复生密室内：缝合线在左侧房间；博士屠刀在经过Patches原位置后的桌上；最后在Patches原位置上方的平台/石台使用欧尔拉金残骸进行复生。", "三处操作存在房间和高度差，不能只按一个中心坐标聚类。"],
+      "spatial_tags": ["interior", "vertical_layer"],
+      "mechanism_codes": ["multi_object_collection", "provided_item_at_slab", "same_interior_13152_13211"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "gitgud_quest_13220"]
+    },
+    "13235": {
+      "decision": "must_note",
+      "facts": ["到目标处先与Margrave Dhakar对话启动血肉巨人冠军事件；不是直接击杀静态怪。旧资料提示偶发无法对话的脚本异常，实跑需留意。"],
+      "mechanism_codes": ["dialogue_started_event", "possible_script_failure"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13236": {
+      "decision": "must_note",
+      "facts": ["进入Arthas载具/角色控制事件；需用事件技能召唤食尸鬼、恢复资源并战斗，失败后回Matthias重新开始。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["scripted_vehicle_character", "restart_at_npc_on_failure"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13239": {
+      "decision": "must_note",
+      "facts": ["先在破碎前线收集骨堆、遗弃头盔、遗弃护甲各3份，再使用挥发油召出测试假人；使用后应离开假人附近，避免落下的龙被引到。"],
+      "mechanism_codes": ["three_ground_item_sets", "provided_item_summon", "avoid_spawned_dragon_aggro"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13263": {
+      "decision": "must_note",
+      "facts": ["炸弹堆任务交完后，下一交付点Pulsin Crystal在水下；这里是进入Naz'anak/被遗忘深渊地下链的空间切换点。"],
+      "spatial_tags": ["water_or_underwater", "underground_transition"],
+      "mechanism_codes": ["underwater_turnin", "enters_forgotten_depths_chain"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13264": {
+      "decision": "must_note",
+      "facts": ["先杀憎恶取得内脏，再对尸体使用复生工具包控制憎恶，把它送进敌群并引爆；重复直到完成。首次完成后会转为日常版本。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["loot_then_reanimate_vehicle", "vehicle_self_detonate", "normal_to_daily_lifecycle"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13271": {
+      "decision": "must_note",
+      "facts": ["任务发生在Naz'anak被遗忘深渊地下区域；从水下Pulsin Crystal接续，附近找到Matthias Lehner交付。后续13282明确通过传送门返回地表，因此不能和地表邻近坐标直接合并。"],
+      "spatial_tags": ["water_or_underwater", "underground", "scripted_transport_or_phase"],
+      "mechanism_codes": ["underground_chain", "surface_portal_chain"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "wowhead_wotlk_13271"]
+    },
+    "13282": {
+      "decision": "must_note",
+      "facts": ["在被遗忘深渊链尾使用传送门返回地表，之后再返回奥格瑞姆之锤；这是明确的地下→地表交通节点。"],
+      "spatial_tags": ["underground", "scripted_transport_or_phase"],
+      "mechanism_codes": ["portal_to_surface"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13283": {
+      "decision": "must_note",
+      "facts": ["乘机器人利用Jump Jets一路上山，到山顶插旗；这条路径是垂直爬升载具路线，不可按起终点直线距离估算。"],
+      "spatial_tags": ["cliff_or_mountain", "vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["vehicle_mountain_climb", "jump_jet_route", "banner_at_summit"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13301": {
+      "decision": "must_note",
+      "facts": ["跟随科尔克隆小队上山，途中有4次伏击；最终至少4名队员存活才给进度。路径本身属于护送/跟随路线。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["escort_follow_squad", "four_ambushes", "survivor_threshold"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13305": {
+      "decision": "must_note",
+      "facts": ["任务由几乎不可见的Matthias Lehner在损坏的攻城器附近给出；需要乘载具击杀区域敌人，巨型骷髅约需多次载具攻击。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["hard_to_see_phased_npc", "vehicle_combat"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13306": {
+      "decision": "must_note",
+      "facts": ["在堕落英雄谷寻找会淡入淡出的黑锋标记，在标记处使用任务物建立路障；标记不是稳定显眼的普通固定物。"],
+      "mechanism_codes": ["fading_marker", "provided_item_placement"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13310": {
+      "decision": "must_note",
+      "facts": ["在任务起点附近乘飞机前往伊米海姆；对鱼叉炮目标执行载具攻击/烟熏，渗透者会自动跳下。不是普通地面目标线路。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["aircraft_vehicle", "harpoon_gun_targets"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13313": {
+      "decision": "must_note",
+      "facts": ["使用任务火箭发射器击落空中的侦察机；必须主动使用任务物，不能只击杀地面怪。"],
+      "mechanism_codes": ["provided_item_ranged_target"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13351": {
+      "decision": "must_note",
+      "facts": ["需要依次飞越/到达Aldur'thar南、中、北和第四观察点取得探索进度；这是四个位置触发，不是单目标。"],
+      "mechanism_codes": ["four_location_triggers"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13352": {
+      "decision": "must_note",
+      "facts": ["先杀Bitter Initiates取得幻象宝珠，再对Dark Subjugators使用宝珠，让石像鬼把目标从高处扔下；任务物使用才产生进度。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["loot_then_item_use", "scripted_drop_credit"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13354": {
+      "decision": "must_note",
+      "facts": ["4名监工分散在Aldur'thar不同位置；Faedris在帐篷内，其余目标向北/东北延伸，最后Savryn在北部。不能当成单点命名怪。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["four_named_targets"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13355": {
+      "decision": "must_note",
+      "facts": ["在Aldur'thar约(49,33)一带的3口坩埚分别使用任务小瓶；属于多固定点任务物交互。"],
+      "mechanism_codes": ["provided_item_three_cauldron_uses"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13356": {
+      "decision": "must_note",
+      "facts": ["先饮用邪教药剂获得10分钟效果，击杀并收集10份污染精华；把精华合成Writhing Mass，再回坩埚投入。不同坩埚给不同2小时增益。"],
+      "mechanism_codes": ["temporary_buff_required", "collect_then_combine", "cauldron_turnin"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13358": {
+      "decision": "must_note",
+      "facts": ["饮用稀释邪教药剂后击杀虚空召唤者及随从；对死去的虚空行者使用虹吸法杖收集黑暗物质，另需点击漂浮水晶。"],
+      "mechanism_codes": ["temporary_buff_required", "corpse_item_use", "fixed_crystal_interaction"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13361": {
+      "decision": "must_note",
+      "facts": ["在骸骨之庭点击/使用地上的Bloodstained Stone启动Arthas战斗事件；进入特殊技能战斗，失败后可用另一块石头重新开始。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["fixed_object_starts_vehicle_battle", "retry_via_object"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13364": {
+      "decision": "must_note",
+      "facts": ["先在黑暗大教堂附近杀邪教侍僧取得兜帽，使用兜帽伪装后到篝火处与提里奥会合，跟随队伍进入大教堂观看脚本；结束后出现传送门离开。"],
+      "spatial_tags": ["interior", "scripted_transport_or_phase"],
+      "mechanism_codes": ["loot_disguise", "follow_script", "portal_exit"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13366": {
+      "decision": "must_note",
+      "facts": ["进入Aldur'thar内部击杀Cult Researchers取得3页论文，集齐后主动组合；研究员有击退/抽蓝，室内常会同时拉到多只。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["three_page_loot", "combine_items"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13367": {
+      "decision": "must_note",
+      "facts": ["先从多个箱子/固定点分别取得Alumeth的头骨、心脏、权杖、长袍，组合成遗骸；再在水晶附近使用遗骸召唤Alumeth。"],
+      "mechanism_codes": ["four_fixed_item_pickups", "combine_items", "summon_at_crystal"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12891": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "12892": {
+      "decision": "must_note",
+      "facts": ["魔眼在暗影拱顶最顶部；从高处平台用Eyesore Blaster攻击。旧WotLK资料提示只在超远距离射击可能不记最终摧毁进度，最后一击应确认角色已进入任务有效范围。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["provided_item_ranged_objective", "range_credit_risk"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12893": {
+      "decision": "must_note",
+      "facts": ["先击杀劣尸维尔、奈丝伍德夫人和跳跃者，再分别对尸体使用统治魔棒；三个目标不在同一平面：维尔和奈丝伍德夫人分处暗影拱顶两侧高台，跳跃者主要在入口上方/中层巡逻。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["corpse_item_use", "three_named_targets_different_levels"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "12897": {
+      "decision": "must_note",
+      "facts": ["进入暗影拱顶内部一直走到最深处的符文熔炉旁，点击将军的武器架才会召出莱斯班恩将军；不是在地图标记处等待固定刷新。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["fixed_object_summons_named_boss"],
+      "evidence_sources": ["wow_pro_icecrown_horde", "wowhead_wotlk_comments"]
+    },
+    "12939": {
+      "decision": "must_note",
+      "facts": ["在Savage Ledge对尤尔丁格斗者放置挑战之旗后再击败；与《消灭竞争者》共用同一斗技平台。平台边缘有击退坠落风险，尽量把战斗拉离边缘。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["provided_item_challenge", "shared_platform_12955", "knockback_fall_risk"],
+      "evidence_sources": ["wowhead_wotlk_12939", "wow_pro_icecrown_horde"]
+    },
+    "12943": {
+      "decision": "must_note",
+      "facts": ["进入乌弗朗大厅找到大领主乌弗朗，先在其面前使用/宣读暗影拱顶裁决令，再击杀；不能只直接杀目标。"],
+      "spatial_tags": ["interior"],
+      "mechanism_codes": ["provided_item_before_kill"],
+      "evidence_sources": ["wowhead_wotlk_12943", "wow_pro_icecrown_horde"]
+    },
+    "12955": {
+      "decision": "must_note",
+      "facts": ["Savage Ledge四名竞争者需要分别通过对话发起决斗后击败；与《荣耀的挑战》同一平台区域并做。"],
+      "spatial_tags": ["cliff_or_mountain"],
+      "mechanism_codes": ["dialogue_duels_four_named", "shared_platform_12939"],
+      "evidence_sources": ["wowhead_wotlk_12955", "wow_pro_icecrown_horde"]
+    },
+    "12992": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13039": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13069": {
+      "decision": "must_note",
+      "facts": ["使用Valhalas附近悬崖外伸平台上的尤顿海姆速射鱼叉炮击落始祖龙和骑手；这是固定炮台任务，真实执行锚点应是鱼叉炮平台而不是空中目标散点。"],
+      "spatial_tags": ["cliff_or_mountain", "scripted_transport_or_phase"],
+      "mechanism_codes": ["fixed_turret", "air_targets"],
+      "evidence_sources": ["wowhead_wotlk_13069"]
+    },
+    "13071": {
+      "decision": "must_note",
+      "facts": ["在尤顿海姆夺取/骑乘约尔达始祖龙，用载具火焰焚烧8幢可燃的维库建筑；巴拉加德堡垒不可点燃。路线锚点应按取龙点和载具飞行区域处理。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["proto_drake_vehicle", "burn_buildings"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13073": {
+      "decision": "must_note",
+      "facts": ["先在北伐军之峰/银色前线找大德鲁伊莉琳德拉对话，由她直接传送到月光林地，再找守护者雷姆洛斯；这是冰冠→月光林地的脚本传送，不是跨大陆自行跑图。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["npc_teleport_to_moonglade"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13074": {
+      "decision": "must_note",
+      "facts": ["在雷姆洛斯神殿进入翡翠梦境相位收3枚翡翠橡果；橡果较难看清。离开神殿附近范围/退出梦境效果后才回到现实世界，不能把相位内目标与普通月光林地点混排。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["emerald_dream_phase", "three_ground_acorns", "leave_shrine_to_exit_phase"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13083": {
+      "decision": "must_note",
+      "facts": ["由布雷登布莱德遗物/战袍任务物触发后续，随后把战袍带回北伐军之峰交提里奥；不是普通NPC首次接取。"],
+      "mechanism_codes": ["object_or_item_started_quest"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13084": {
+      "decision": "must_note",
+      "facts": ["在尤顿海姆对维库旗帜执行焚烧交互，共10面；可与同区域维库击杀任务一起做。"],
+      "mechanism_codes": ["fixed_banner_burn", "shared_area_jotunheim_kills"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13086": {
+      "decision": "must_note",
+      "facts": ["登上银色前线防御塔顶使用银色火炮；用普通炮火清100名攻击者，出现霜巢毁灭者时使用大威力弹药/技能处理3条龙。执行锚点是塔顶炮位，不是地面怪群中心。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["tower_cannon_vehicle", "two_target_types"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13110": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13130": {
+      "decision": "must_note",
+      "facts": ["虽然任务归入冰冠链，10根水晶心木和10块古代精灵石砖实际在晶歌森林收集；这是跨区任务，不能按冰冠平面坐标参与局部顺路聚类。"],
+      "spatial_tags": ["cross_zone_objective"],
+      "mechanism_codes": ["crystalsong_collection"],
+      "evidence_sources": ["wowhead_wotlk_13130", "wow_pro_icecrown_horde"]
+    },
+    "13134": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13136": {
+      "decision": "must_note",
+      "facts": ["先从尖刺食尸鬼等目标取得粗糙碎片触发任务/UI接取，再继续收齐10块后交给欧尔拉金；路线应把掉落触发放在来源怪区域，而不是只标交任务点。"],
+      "mechanism_codes": ["item_started_quest", "drop_source_then_collect_ten"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13137": {
+      "decision": "must_note",
+      "facts": ["伊斯卡德尔在战痕尖塔顶部的小平台事件；点击/使用信号火堆触发战斗。不要按地图提示钻进附近矿洞/洞穴寻找目标。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["bonfire_starts_named_fight", "not_nearby_cave"],
+      "evidence_sources": ["wowhead_wotlk_13137", "wow_pro_icecrown_horde"]
+    },
+    "13142": {
+      "decision": "must_note",
+      "facts": ["到巴拉加德堡垒挑战点使用战争号角/任务触发物召出大领主巴拉加德，再完成战斗；不是固定站桩刷新怪。"],
+      "mechanism_codes": ["provided_item_starts_boss"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13144": {
+      "decision": "must_note",
+      "facts": ["燃烧的骷髅在上层平台/山脊，锁住的憎恶在下一层；把燃烧骷髅引到憎恶旁让它触发摧毁进度。不要进入旁边洞穴，Questie平面标记容易把入口方向误导成洞内。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["upper_skeleton_lower_abomination", "not_cave", "proximity_credit"],
+      "evidence_sources": ["wowhead_wotlk_13144"]
+    },
+    "13214": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯斗兽场单场连续击败6名堕落英雄，完成后到斗兽场南缘外侧找残忍的亚纳尔继续；属于原地连续挑战事件，不应按6个普通命名怪散点排序。"],
+      "mechanism_codes": ["arena_multi_opponent_event", "south_lip_followup"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13229": {
+      "decision": "must_note",
+      "facts": ["当前Questie有真实出生点的卡玛洛斯神父任务版本；五号接好任务后按已确认护送通则只跑一次护送即可。该任务取代无有效出生点的旧ID 13481。"],
+      "mechanism_codes": ["escort", "live_kamaros_variant"],
+      "evidence_sources": ["current_questie_entity", "wowhead_wotlk_13229"]
+    },
+    "13262": {
+      "decision": "must_note",
+      "facts": ["萨隆邪铁炸弹堆就在任务NPC前方、深坑边。点燃引线后爆炸会把角色炸上空中并落入下方深坑，那里正是后续任务链区域；这是单向落层，不要把完成后位置仍记在NPC旁。落点存在摔死风险，五开跟随需实跑观察。"],
+      "spatial_tags": ["vertical_layer", "underground_transition"],
+      "mechanism_codes": ["fixed_bomb_stack", "explosion_forced_drop_to_next_area"],
+      "fivebox_checks": ["确认五号是否需要分别点燃/分别被炸下坑，以及跟随号落点安全性。"],
+      "evidence_sources": ["wowhead_wotlk_13262"]
+    },
+    "13279": {
+      "decision": "must_note",
+      "facts": ["莫德雷萨瘟疫锅在建筑/城墙第二层，约(63.4,62.1)一带；必须到正确楼层对瘟疫锅使用脊骨脓液。任务完成后解锁的13281是同一锅事件的重复/日常形态，不另算首轮任务内容。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["provided_item_on_cauldron", "normal_to_daily_13281"],
+      "evidence_sources": ["wowhead_wotlk_13279_13281"]
+    },
+    "13312": {
+      "decision": "must_note",
+      "facts": ["到格姆克尔之球/Orb附近使用任务符文召出邪恶的格姆克尔，再击杀；不是寻找固定刷新Boss。"],
+      "mechanism_codes": ["provided_item_summons_named_boss"],
+      "evidence_sources": ["wow_pro_icecrown_horde"]
+    },
+    "13328": {
+      "decision": "must_note",
+      "facts": ["三块破损碎片分在Corp'rethar城墙两层：一块在顶层，绝望与苦难两块在下一层。三个地图点不能按同一平面直接连线。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["three_shards_two_floors"],
+      "evidence_sources": ["wowhead_wotlk_13328"]
+    },
+    "13329": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13330": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13331": {
+      "decision": "reviewed_no_extra_note",
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13373": {
+      "decision": "must_note",
+      "facts": ["首次轰炸场任务：到塔兹拉/附近地精处启动轰炸机后完成训练目标。它是后续两条不同日常轰炸路线13406与13376的前置，不与两条日常合并。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["bomber_vehicle_training", "unlocks_distinct_bomber_dailies"],
+      "evidence_sources": ["wowhead_wotlk_13373"]
+    },
+    "13374": {
+      "decision": "must_note",
+      "facts": ["当前Questie把该ID列为非日常，但公开WotLK资料/旧路线对其是否存在及日常属性互相冲突。只有实服NPC实际提供时才进入路线；若可接，属于轰炸场载具任务。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["server_version_availability_check", "bomber_vehicle"],
+      "evidence_sources": ["current_questie", "wowhead_wotlk_13374", "legacy_icecrown_route"]
+    },
+    "13376": {
+      "decision": "must_note",
+      "facts": ["13373完成后解锁的长程日常轰炸路线，目标覆盖失落希望之谷；与13406的短程轰炸是两条不同任务，只能共享载具机制，不能当重复ID去重。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["long_range_bomber_daily", "distinct_from_13406"],
+      "evidence_sources": ["wowhead_wotlk_13376"]
+    },
+    "13406": {
+      "decision": "must_note",
+      "facts": ["13373完成后解锁的短程日常轰炸路线；找附近地精启动轰炸机完成Bombardment目标。与13376目标和路线不同，不做重复任务合并。"],
+      "spatial_tags": ["scripted_transport_or_phase"],
+      "mechanism_codes": ["short_range_bomber_daily", "distinct_from_13376"],
+      "evidence_sources": ["wowhead_wotlk_13406"]
+    },
+    "24451": {
+      "decision": "must_note",
+      "facts": ["穿上/保持借来的战袍伪装进入达拉然银色领地联盟区域；目标奥术师泰拜林在该区域顶层，离开联盟隧道后经右侧楼梯上去。伪装持续时间有限，不能把任务当普通同层NPC交互。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["temporary_disguise", "enemy_faction_area_access", "top_level_npc"],
+      "evidence_sources": ["wowhead_wotlk_24451"]
+    },
+    "24554": {
+      "decision": "must_note",
+      "facts": ["《残破的剑柄》由冰冠Frozen Halls英雄副本中的怪/Boss随机掉落，但物品可交易；当前户外路线只有在玩家已自行获得或购买剑柄时才开始这条链，不能把它当普通户外NPC可接任务。"],
+      "mechanism_codes": ["external_item_started_quest", "tradable_start_item"],
+      "evidence_sources": ["wowhead_wotlk_battered_hilt"]
+    },
+    "24556": {
+      "decision": "must_note",
+      "facts": ["山迪·格罗斯在达拉然命运丝线店楼上阳台。与他对话后完成洗衣小游戏：按喊话拾取/投递对应衣物或水，最后取得干净衣物/借来的战袍。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["laundry_minigame", "upstairs_balcony"],
+      "evidence_sources": ["wowhead_wotlk_24556"]
+    },
+    "12949": {
+      "decision": "must_note",
+      "facts": ["维林在乌弗朗大厅内、与大领主乌弗朗隔厅相对；钥匙由外面Savage Ledge约(37,24)巡逻的教官霍加尔掉落，取钥匙后再进大厅回交。不要在大厅内等钥匙怪刷新。"],
+      "spatial_tags": ["interior", "cliff_or_mountain"],
+      "mechanism_codes": ["interior_giver_external_named_drop", "shared_savage_ledge_area"],
+      "evidence_sources": ["wowhead_wotlk_12949"]
+    },
+    "12999": {
+      "decision": "must_note",
+      "facts": ["白骨女巫在约尔达村南侧洞穴内，入口约(32.2,42.4)。地图目标是洞内NPC位置，不要在地表同坐标寻找。"],
+      "spatial_tags": ["cave"],
+      "mechanism_codes": ["verified_cave_entrance"],
+      "evidence_sources": ["wowhead_wotlk_12999"]
+    },
+    "13040": {
+      "decision": "must_note",
+      "facts": ["遗忘深渊毒囊来自银色前线西北谷地约(84,77)的遗忘深渊蛛魔；公开WotLK资料提示旧任务助手容易给错点。与同区域蛛魔/天灾战术任务合并刷。"],
+      "mechanism_codes": ["mob_drop_venom_sacs", "verified_primary_farm_area", "shared_area_argent_vanguard_nerubians"],
+      "fivebox_checks": ["确认五号毒囊实际拾取/掉落模式；公开多开反馈只证明五号总量可在同一区域完成，不据此推断共享。"],
+      "evidence_sources": ["wowhead_wotlk_13040"]
+    },
+    "13092": {
+      "decision": "must_note",
+      "facts": ["白骨女巫仍在约尔达村洞穴内；15根维库人骨头由尤顿海姆维库人掉落，首轮13092完成后重复版本13093不再作为独立首轮任务。"],
+      "spatial_tags": ["cave"],
+      "mechanism_codes": ["jotunheim_vrykul_drop", "normal_to_repeat_13093"],
+      "evidence_sources": ["wowhead_wotlk_13092_13093"]
+    },
+    "13122": {
+      "decision": "must_note",
+      "facts": ["天灾石从天灾城/Scourgeholme的天灾怪物身上掉落；公开资料称掉率很高，并可与《永不安息的亡者》《净化天灾城》同一批怪完成。路线重叠应按怪群而不是交任务点判断。"],
+      "mechanism_codes": ["scourgeholme_mob_drop", "shared_mob_area_13110_13118"],
+      "evidence_sources": ["wowhead_wotlk_13122"]
+    },
+    "13135": {
+      "decision": "must_note",
+      "facts": ["8块结晶能量实际在晶歌森林东部Unbound Thicket从当地生物掉落，不在冰冠；与《公正堡的基石》同一晶歌森林任务区可一起完成。"],
+      "spatial_tags": ["cross_zone_objective"],
+      "mechanism_codes": ["crystalsong_mob_drop", "shared_area_13130"],
+      "evidence_sources": ["wowhead_wotlk_13135"]
+    },
+    "13140": {
+      "decision": "must_note",
+      "facts": ["符文萨隆邪铁板由Malykriss底层的骷髅符文锻造师掉落；公开资料明确写bottom level，顶层/高台不能因二维坐标接近而当成同一刷怪区。南侧底层约(58,71—75)锻造师较密。"],
+      "spatial_tags": ["vertical_layer"],
+      "mechanism_codes": ["bottom_level_runesmiths", "mob_drop_five_plates"],
+      "evidence_sources": ["wowhead_wotlk_13140"]
+    },
+    "13161": {
+      "decision": "must_note",
+      "facts": ["苦难高地三骑士之一；洛基尔为建议5人的户外精英。13161/13162/13163可视为同一精英战斗块，首个遭遇用于判断当前五开战斗能力是否值得继续。"],
+      "mechanism_codes": ["suggested_five_player_elite", "three_riders_parallel_combat_block"],
+      "fivebox_checks": ["首组确认击杀后五号任务是否全部同步完成；若共享正常，后两骑按同一方式处理。"],
+      "evidence_sources": ["wowhead_wotlk_13161", "project_fivebox_elite_gate_rule"]
+    },
+    "13162": {
+      "decision": "must_note",
+      "facts": ["苦难高地三骑士之一、建议多人精英；与13161/13163同一战斗块，不应被路线算法拆成三个独立远端任务块。"],
+      "mechanism_codes": ["suggested_five_player_elite", "three_riders_parallel_combat_block"],
+      "evidence_sources": ["wowhead_wotlk_13162", "project_fivebox_elite_gate_rule"]
+    },
+    "13163": {
+      "decision": "must_note",
+      "facts": ["苦难高地三骑士之一、建议多人精英；与13161/13162同一战斗块。完成三骑士后才进入血毒收尾。"],
+      "mechanism_codes": ["suggested_five_player_elite", "three_riders_parallel_combat_block"],
+      "evidence_sources": ["project_fivebox_elite_gate_rule"]
+    },
+    "13164": {
+      "decision": "must_note",
+      "facts": ["三骑士后的最终精英奥尔巴兹·血毒位于冰冠堡垒下方巨大深坑边缘，是建议5人的高强度户外战斗；不要把目标误判为深坑内部。公开资料显示黑锋援军/莫格莱尼会参与事件，但仍应按当前主控真实战斗能力放行。"],
+      "spatial_tags": ["vertical_layer", "cliff_or_mountain"],
+      "mechanism_codes": ["pit_lip_named_elite", "suggested_five_player_elite", "npc_assisted_event"],
+      "evidence_sources": ["wowhead_wotlk_13164", "project_fivebox_elite_gate_rule"]
+    },
+    "13215": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯连续挑战第二场：黑暗主宰西塔利克斯。与13214、13216—13219同一斗兽场连续完成，胜利后仍到南缘外侧亚纳尔处推进。"],
+      "mechanism_codes": ["valhalas_arena_chain", "same_arena_no_travel_between_rounds"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13216": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯连续挑战：齐格莉德·冰魂回归；同一斗兽场原地承接前后场次。"],
+      "mechanism_codes": ["valhalas_arena_chain", "same_arena_no_travel_between_rounds"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13217": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯连续挑战：血肉巨人卡纳基；同一斗兽场原地承接前后场次。"],
+      "mechanism_codes": ["valhalas_arena_chain", "same_arena_no_travel_between_rounds"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13218": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯连续挑战：‘死亡一击’巴纳霍格领主；同一斗兽场原地承接前后场次。"],
+      "mechanism_codes": ["valhalas_arena_chain", "same_arena_no_travel_between_rounds"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13219": {
+      "decision": "must_note",
+      "facts": ["瓦哈拉斯最终挑战萨杜瓦尔王子；打完后到斗兽场南缘外侧找残忍的亚纳尔收尾。整条13214—13219应保持一个连续竞技场块。"],
+      "mechanism_codes": ["valhalas_arena_chain_final", "south_lip_turnin"],
+      "evidence_sources": ["questie_objective", "wow_pro_icecrown_horde"]
+    },
+    "13224": {
+      "decision": "must_note",
+      "facts": ["目标是冰冠上空移动的奥格瑞姆之锤飞艇；Questie的NPC无固定地面出生坐标。路线锚点必须使用飞艇/登船点状态，不能把缺失坐标当作普通地面点。"],
+      "spatial_tags": ["moving_airship"],
+      "mechanism_codes": ["moving_gunship_hub"],
+      "evidence_sources": ["current_questie_entity", "questie_objective"]
+    },
+    "13258": {
+      "decision": "must_note",
+      "facts": ["克蕾迦中士在冰冠堡垒墙体缺口后的地下基础区域，约(54.9,84.2)。从主阶梯面向堡垒时沿右侧贴墙绕，找到地面的墙洞进入；NPC在墙后圆形区域，不在旁边洞穴。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["wall_gap_entrance", "not_cavern"],
+      "evidence_sources": ["wowhead_wotlk_13258"]
+    },
+    "13259": {
+      "decision": "must_note",
+      "facts": ["10只笨重恐尸就在13258进入后的冰冠堡垒地下基础/圆形区域完成；这是墙体内部下层空间，不与堡垒外地表怪点混排。"],
+      "spatial_tags": ["vertical_layer", "interior"],
+      "mechanism_codes": ["same_under_citadel_foundation_13258"],
+      "evidence_sources": ["quest_chain_context_13258_13262"]
+    },
+    "13275": {
+      "decision": "must_note",
+      "facts": ["仍发生在13263/13271进入的Naz'anak被遗忘深渊地下区域；从Faceless Lurker等无面者取得3份血。不要把地下怪点与冰冠堡垒地表坐标合并。"],
+      "spatial_tags": ["underground"],
+      "mechanism_codes": ["forgotten_depths_chain", "faceless_lurker_drop"],
+      "evidence_sources": ["wowhead_wotlk_13275"]
+    },
+    "13302": {
+      "decision": "must_note",
+      "facts": ["伊米海姆萨隆邪铁矿洞入口约(56—57,58)。进洞后与奴隶反复对话选择释放；奴隶可能成功逃走、发疯攻击或做无效反应，只有真正获救才计数，通常需要对话超过10名。"],
+      "spatial_tags": ["cave", "vertical_layer"],
+      "mechanism_codes": ["saronite_mine", "dialogue_rescue_random_outcome"],
+      "fivebox_checks": ["确认单号对话释放是否给全队进度；若不共享，五号分别对话的真实墙钟需记录。"],
+      "evidence_sources": ["wowhead_wotlk_13302"]
+    },
+    "13308": {
+      "decision": "must_note",
+      "facts": ["任务NPC黑暗低语者阿克希姆在同一萨隆邪铁矿洞内；工头约(55,59)在洞内中部，击杀工头取得钥匙后回洞内解开阿克希姆。目标为建议3人精英，但WotLK玩家资料显示惩戒骑等可单挑；当前五开仍按首组实战确认。"],
+      "spatial_tags": ["cave", "vertical_layer"],
+      "mechanism_codes": ["same_saronite_mine_13302", "elite_foreman_key_drop"],
+      "evidence_sources": ["wowhead_wotlk_13308"]
+    },
+    "24555": {
+      "decision": "must_note",
+      "facts": ["克拉苏斯在龙眠神殿顶层；到龙骨荒野后使用神殿的龙/交通NPC上到顶层，不要在地面层按同一平面坐标寻找。"],
+      "spatial_tags": ["vertical_layer", "scripted_transport_or_phase"],
+      "mechanism_codes": ["wyrmrest_top_level", "temple_drake_transport"],
+      "evidence_sources": ["dragonblight_verified_floor_rule", "wowhead_wotlk_quel_delar_chain"]
+    },
+    "24560": {
+      "decision": "must_note",
+      "facts": ["必须进入五人副本灵魂洪炉，击败末尾Boss后在灵魂坩锅淬火重铸的奎尔德拉；当前户外主轴应直接排除。"],
+      "spatial_tags": ["dungeon_instance"],
+      "mechanism_codes": ["forge_of_souls_required", "dungeon_excluded"],
+      "evidence_sources": ["wowhead_wotlk_24560"]
+    }
+  }
+}

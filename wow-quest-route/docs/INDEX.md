@@ -43,7 +43,7 @@
 1. **Questie Raw / Effective**：任务ID、前置、NPC/物体/物品、静态坐标、修正层；原始事实不被实跑覆盖。
 2. **任务知识层**：`task-library/`，保存可复用机制、地形、来源与证据。
 3. **实跑观测层**：`../data/observations/`，保存五开共享/个人、阻断、服务器特定行为，以及`route-timing-runs.json`中的路线预测/实跑墙钟和长期目标基准。
-4. **Route Atlas路线层**：`../data/route-atlas/`，保存当前有效结构化路线和地图任务基础数据。
+4. **Route Atlas路线层**：`../data/route-atlas/`，保存当前有效结构化路线和地图任务基础数据。全诺森德任务宇宙以`../data/route-atlas/northrend-task-universe.json`为生成真值；执行/空间审计汇总见`../data/route-atlas/northrend-execution-review.json`，地图人工事实见`../data/route-atlas/*-task-overrides.json`。
 5. **人物历程层**：`../data/journey/`，只保存脱敏Journey，用于复盘接取/交付/升级，不代表移动轨迹。
 6. **历史档案层**：`archive/`，保存旧方案、一次性analysis、NEAT和视频历史；只用于定向考古，不覆盖CURRENT和永久规则。
 7. **视频事实层**：`video-extraction/`，只保留当前视频工作流与恢复点；历史审计/NEAT进入 `archive/video/`。

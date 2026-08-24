@@ -15,6 +15,9 @@ AUDIT_OUT = ROOT / "docs/analysis/2026-08-22-storm-peaks-route-insertion-audit.m
 DATA = json.loads(FOUNDATION.read_text(encoding="utf-8"))
 TASKS = {int(t["quest_id"]): t for t in DATA["tasks"]}
 FORMAL = {int(qid) for qid in DATA["formal_task_ids"]}
+INTENTIONAL_ROUTE_SKIPS = {
+    12929: "提前接《稀有的土壤》会互斥关闭该低价值面包屑；主动牺牲4400经验换取更顺路线。",
+}
 
 points: list[list[Any]] = []
 covered: set[int] = set()
@@ -617,7 +620,7 @@ def g13_veranus() -> None:
     ], movement="script")
 
 
-# 14. Terrace of the Makers finale, Ulduar flight point, then hearth to the seeded western hub.
+# 14. Terrace finale; pre-open Bouldercrag, then Reckoning -> Ulduar -> Dun Niffelem.
 def g15_thorim_finale() -> None:
     P(56.0, 43.5, "造物者圣台", "terrace", [
         [NPC("托里姆"), AR(), TG("turn", 13057), AR(), TG("accept", 13005, 13035)],
@@ -634,6 +637,10 @@ def g15_thorim_finale() -> None:
     ], movement="ride")
     P(56.0, 43.5, "造物者圣台", "terrace", [
         [NPC("托里姆"), AR(), TG("turn", 13005, 13035), AR(), TG("accept", 13047)],
+    ], movement="fly")
+    P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
+        [FP("布德克拉格庇护所")],
+        [NPC("塑石者布德克拉格"), AR(), TG("accept", 12930)],
     ], movement="fly")
     P(35.9, 31.6, "智慧神殿附近桥上", "thorim", [DO(13047)], movement="fly")
     P(45.0, 28.0, "奥杜尔", "ulduar", [
@@ -681,7 +688,7 @@ def g17_brann_library() -> None:
     P(37.5, 46.8, "发明家图书馆内层", "library", [
         [LOC("控制台"), AR(), TG("turn", 13416), AR(), TG("accept", 12928)],
         DO(12928),
-        [LOC("布莱恩通讯器"), AR(), TG("turn", 12928), AR(), TG("accept", 12929, 13273)],
+        [LOC("布莱恩通讯器"), AR(), TG("turn", 12928), AR(), TG("accept", 13273)],
     ], movement="ride")
 
 
@@ -699,17 +706,18 @@ def g18_brann_core_gromarsh() -> None:
         [NPC("布莱恩"), BR(), TG("do", 13285)],
     ], movement="fly")
     P(37.3, 49.7, "格罗玛什坠毁点", "gromarsh", [
+        [HR("格罗玛什坠毁点")],
         [NPC("伯克塔·血怒"), AR(), TG("turn", 13285), AR(), TG("accept", 13426)],
         [NPC("奥鲁特·埃雷古"), AR(), TG("turn", 12882)],
-    ], movement="fly")
+    ], movement="hearth")
 
 
 # 19. Bouldercrag first wave.
 def g19_bouldercrag_first() -> None:
-    P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
-        [NPC("塑石者布德克拉格"), AR(), TG("turn", 12929), AR(), TG("accept", 12930)],
-        [FP("布德克拉格庇护所")],
-    ], movement="fly")
+    P(37.3, 49.7, "格罗玛什坠毁点", "gromarsh", [
+        [TAXI("格罗玛什坠毁点", "布德克拉格庇护所")],
+    ], movement="ride")
+    P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [], movement="taxi")
     P(25.1, 34.1, "庇护所西北", "bouldercrag", [DO(12930)], movement="fly")
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
         [NPC("塑石者布德克拉格"), AR(), TG("turn", 12930), AR(), TG("accept", 12931, 12937)],
@@ -815,11 +823,11 @@ GROUPS = [
     ("弗约恩之砧：弥补关系 + 精炼之火", "完成《弥补关系》；熔渣覆盖的金属右键接《精炼之火》，铁砧交《精炼之火》并接《希望的火花》后炉石回格罗玛什，顺手交《紧急措施》，再用借用双足飞龙去风暴神殿找托里姆。", g11_mending_fences),
     ("丹尼芬雷：元素之战 → 霍迪尔任务 → 炉石格罗玛什", "完成《元素之战》后，把《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》首轮并入丹尼芬雷现有任务环；完成雷暴台地后炉石回格罗玛什。", g12_dun_first),
     ("托里姆：维拉努斯 → 科洛米尔", "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再分别完成维拉努斯并推进《科洛米尔，风暴之锤》；布莱恩便笺留到后续自然回格罗玛什时交。", g13_veranus),
-    ("造物者圣台 → 奥杜尔 → 丹尼芬雷", "完成造物者圣台任务和《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。", g15_thorim_finale),
+    ("造物者圣台 → 布德克拉格 → 奥杜尔 → 丹尼芬雷", "完成造物者圣台后先顺路开布德克拉格飞行点并接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。", g15_thorim_finale),
     ("炉石格罗玛什 → 兽人语 → 寒风", "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。", g16_gromarsh_brann_start),
-    ("寒风峡谷 → 发明家图书馆", "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。", g17_brann_library),
-    ("布莱恩营地 → 诺甘农之核 → 格罗玛什", "取两份文件，进入洛肯的宝库取得诺甘农之核，再到创世神殿顶部完成钥石事件。", g18_brann_core_gromarsh),
-    ("布德克拉格：土壤 → 雪流平原 → 尼达维里尔", "开布德克拉格飞行点，完成魔化土壤、雪流平原和尼达维里尔第一组任务。", g19_bouldercrag_first),
+    ("寒风峡谷 → 发明家图书馆", "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿；《奥杜尔的土灵》因已提前接《稀有的土壤》而主动跳过。", g17_brann_library),
+    ("布莱恩营地 → 诺甘农之核 → 炉石格罗玛什", "取两份文件，进入洛肯的宝库取得诺甘农之核，到创世神殿顶部完成钥石事件后炉石回格罗玛什交任务。", g18_brann_core_gromarsh),
+    ("格罗玛什飞布德克拉格：土壤 → 雪流平原 → 尼达维里尔", "从格罗玛什飞行点系统飞到已提前开启的布德克拉格庇护所，直接完成《稀有的土壤》及后续雪流平原、尼达维里尔第一组任务。", g19_bouldercrag_first),
     ("布德克拉格：洛肯物件 → 黑暗护甲 → 瓦杜兰", "依次处理三件洛肯固定物、黑暗护甲板链和风暴之子瓦杜兰。", g20_bouldercrag_second),
     ("尼达维里尔熔炉 → 风暴之心 → 钢铁巨像", "完成三个闪电熔炉、两份规格说明书、风暴之心和钢铁巨像。", g21_bouldercrag_finale),
     ("唐卡洛营地 → 嚎风洞穴 → 北风", "开唐卡洛飞行点，完成雷蹄记忆、4道裂隙、嚎风洞穴和北风事件。", g22_tunkalo),
@@ -828,7 +836,8 @@ GROUPS = [
 for title, summary, fn in GROUPS:
     G(title, summary, fn)
 
-missing = sorted(FORMAL - covered)
+intentional_skip_ids = set(INTENTIONAL_ROUTE_SKIPS)
+missing = sorted(FORMAL - covered - intentional_skip_ids)
 unexpected = sorted(covered - FORMAL)
 
 route = {
@@ -883,9 +892,11 @@ routes = dict(sorted(routes.items(), key=lambda kv: (int(kv[1].get("order", 999)
 WORKBENCH.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 coverage = {
-    "status": "formal_storm_peaks_full_clear_fixed_route_pre_live_reputation_calibration",
+    "status": "formal_storm_peaks_fixed_route_with_explicit_low_value_skip_pre_live_reputation_calibration",
     "formal_task_count": len(FORMAL),
     "covered_task_count": len(covered & FORMAL),
+    "intentional_route_skip_count": len(intentional_skip_ids),
+    "intentional_route_skips": {str(qid): reason for qid, reason in sorted(INTENTIONAL_ROUTE_SKIPS.items())},
     "missing": missing,
     "unexpected": unexpected,
     "point_count": len(points),
@@ -911,8 +922,9 @@ AUDIT_OUT.write_text("\n".join([
     "# 风暴峭壁整图路线插入审计",
     "",
     "- 从零入口：达拉然当前77级路线完成后，12853《豪华的体验！》在K3交付；五号先拿借用双足飞龙并开K3飞行点。",
-    f"- foundation正式池：{len(FORMAL)}项；路线覆盖：{len(covered & FORMAL)}；missing={missing}；unexpected={unexpected}。",
+    f"- foundation正式池：{len(FORMAL)}项；路线实际覆盖：{len(covered & FORMAL)}；主动跳过：{len(intentional_skip_ids)}；missing={missing}；unexpected={unexpected}。",
     "- 声望策略按用户当前要求：路线内部不保留条件分支；12981/12985/12994/13001/13006/13011/13046/13420按首跑已验证节点无条件接做交。四个日常只纳入当前首轮，不生成第二轮循环。",
+    "- 12929《奥杜尔的土灵》主动放弃：在《清算之战》前顺路先开布德克拉格飞行点并接12930，会互斥关闭该面包屑；损失约4400经验，换取后续第17步可直接从格罗玛什系统飞布德克拉格。",
     "- 12930《稀有的土壤》不安排霜纹布获取；五号使用用户现有库存，只计算7块魔化土壤的现场动作。",
     "- 当前路线不学习寒冷天气飞行，因此排除13060《终极运输方案》；失去免费任务运输后，不再从K3提前绕行格罗玛什。",
     "- 格罗玛什第一次在风暴神殿后自然进入并绑定炉石。丹尼芬雷步骤结束后新增炉石回格罗玛什；下一步再进入托里姆/维拉努斯。维拉努斯途中取得《失踪的布莱恩·铜须》目标后不专程回交，直接继续《科洛米尔，风暴之锤》，待后续自然回格罗玛什时再交。普通自主飞行只由地图路线表达，不进入玩家动作文字。",

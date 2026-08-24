@@ -9156,7 +9156,7 @@
     "uiStandard": "semantic-hud-v45",
     "title": "风暴峭壁 · 77+ 五开整图路线",
     "sub": "K3取得借用双足飞龙后，按K3→希弗列尔达/布伦希尔达→霍迪尔/托里姆→格罗玛什/布莱恩→布德克拉格→唐卡洛固定顺序清一次性户外任务。",
-    "badge": "炉石：阿格玛之锤-格罗玛什坠毁点\n预计总时间：8小时7分（6小时13分—10小时3分）",
+    "badge": "炉石：阿格玛之锤-格罗玛什坠毁点\n预计总时间：8小时8分（6小时13分—10小时3分）",
     "image": "maps/67-the-storm-peaks-hd.jpg",
     "legend": "",
     "footer": "",
@@ -10262,6 +10262,17 @@
         ""
       ],
       [
+        31.4,
+        38.1,
+        "布德克拉格庇护所",
+        "开飞行点：布德克拉格庇护所（五号分别）\n塑石者布德克拉格 → 接《稀有的土壤》",
+        "bouldercrag",
+        "",
+        "fly",
+        false,
+        ""
+      ],
+      [
         35.9,
         31.6,
         "智慧神殿附近桥上",
@@ -10375,7 +10386,7 @@
         37.5,
         46.8,
         "发明家图书馆内层",
-        "控制台 → 交《图书馆的控制台》 → 接《诺甘农之壳》\n↳ 做《诺甘农之壳》\n布莱恩通讯器 → 交《诺甘农之壳》 → 接《奥杜尔的土灵》；接《追查诺甘农之核》",
+        "控制台 → 交《图书馆的控制台》 → 接《诺甘农之壳》\n↳ 做《诺甘农之壳》\n布莱恩通讯器 → 交《诺甘农之壳》 → 接《追查诺甘农之核》",
         "library",
         "《诺甘农之壳》：在SCRAP-E附近用充能圆盘召出档案员麦卡顿，击杀取诺甘农之壳；随后用布莱恩通讯器继续。",
         "ride",
@@ -10419,10 +10430,21 @@
         37.3,
         49.7,
         "格罗玛什坠毁点",
-        "伯克塔·血怒 → 交《铸造钥石》 → 接《见证者夏拉托尔》\n奥鲁特·埃雷古 → 交《远古的圣物》",
+        "使用炉石：格罗玛什坠毁点\n伯克塔·血怒 → 交《铸造钥石》 → 接《见证者夏拉托尔》\n奥鲁特·埃雷古 → 交《远古的圣物》",
         "gromarsh",
         "",
-        "fly",
+        "hearth",
+        false,
+        ""
+      ],
+      [
+        37.3,
+        49.7,
+        "格罗玛什坠毁点",
+        "系统飞行：格罗玛什坠毁点 → 布德克拉格庇护所",
+        "gromarsh",
+        "",
+        "ride",
         false,
         ""
       ],
@@ -10430,10 +10452,10 @@
         31.4,
         38.1,
         "布德克拉格庇护所",
-        "塑石者布德克拉格 → 交《奥杜尔的土灵》 → 接《稀有的土壤》\n开飞行点：布德克拉格庇护所（五号分别）",
+        "",
         "bouldercrag",
         "",
-        "fly",
+        "taxi",
         false,
         ""
       ],
@@ -10999,23 +11021,23 @@
       },
       {
         "start": 87,
-        "end": 95,
-        "title": "造物者圣台 → 奥杜尔 → 丹尼芬雷",
-        "summary": "完成造物者圣台任务和《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。",
-        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托里姆</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">造物者圣台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">土灵的誓言</span>、<span class=\"ra-task ra-accept\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塑造者之厅</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">伊森法斯</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">造物者圣台</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">土灵的誓言</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">风之哈勒弗尼尔</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">符文巨人杜洛恩</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托里姆</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">土灵的誓言</span>、<span class=\"ra-task ra-turnin\">洛肯的副官</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">清算之战</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">智慧神殿附近桥上</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">清算之战</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奥杜尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：奥杜尔（五号分别）</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：奥杜尔 → 丹尼芬雷</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">丹尼芬雷</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">约库姆国王</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">清算之战</span></div>",
+        "end": 96,
+        "title": "造物者圣台 → 布德克拉格 → 奥杜尔 → 丹尼芬雷",
+        "summary": "完成造物者圣台后先顺路开布德克拉格飞行点并接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。",
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托里姆</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">造物者圣台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">土灵的誓言</span>、<span class=\"ra-task ra-accept\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">塑造者之厅</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">伊森法斯</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">造物者圣台</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">土灵的誓言</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">风之哈勒弗尼尔</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">符文巨人杜洛恩</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的副官</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">造物者圣台</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">托里姆</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">土灵的誓言</span>、<span class=\"ra-task ra-turnin\">洛肯的副官</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">清算之战</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：布德克拉格庇护所（五号分别）</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">稀有的土壤</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">智慧神殿附近桥上</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">清算之战</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奥杜尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：奥杜尔（五号分别）</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：奥杜尔 → 丹尼芬雷</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">丹尼芬雷</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">约库姆国王</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">清算之战</span></div>",
         "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《洛肯的副官》</div><div class=\"ra-note-text\">伊森法斯约(55.3,43.3) → 风之哈勒弗尼尔约(48.7,45.7) → 符文巨人杜洛恩约(44.9,38.0)。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《土灵的誓言》</div><div class=\"ra-note-text\">先用峭壁号角召土灵援军，再完成击杀目标。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>土灵援军击杀进度是否五号共享。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《清算之战》</div><div class=\"ra-note-text\">智慧神殿附近桥上约(35.9,31.6)见证完整事件；<span class=\"ra-danger\">不要提前离开</span>。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>清算事件是否五号共享见证进度。</div></div>",
         "timing": {
-          "centerMinutes": 18.6,
+          "centerMinutes": 20.0,
           "rangeMinutes": [
-            15.3,
-            22.0
+            16.4,
+            23.6
           ],
           "includeInTotal": true
         }
       },
       {
-        "start": 96,
-        "end": 99,
+        "start": 97,
+        "end": 100,
         "title": "炉石格罗玛什 → 兽人语 → 寒风",
         "summary": "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。",
         "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">失踪的布莱恩·铜须</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">敏锐的嗅觉</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什东侧</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">凯尔莉丝</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">敏锐的嗅觉</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">追踪罪犯</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">追踪终点</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">追踪者图林</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">追踪罪犯</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">追踪罪犯</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">讲兽人语会死吗？</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">莫塔哈·风魂</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">讲兽人语会死吗？</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">寒风的声音</span></div>",
@@ -11030,56 +11052,56 @@
         }
       },
       {
-        "start": 100,
-        "end": 103,
+        "start": 101,
+        "end": 104,
         "title": "寒风峡谷 → 发明家图书馆",
-        "summary": "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。",
-        "actionHtml": "<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">西部峡谷</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">寒风的声音</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">莫塔哈·风魂</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">寒风的声音</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">联络布莱恩</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">联络布莱恩</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">联络布莱恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">拼图游戏</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">发明家图书馆</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">拼图游戏</span>、<span class=\"ra-task ra-do-task\">远古的圣物</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">拼图游戏</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">采集数据</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">采集数据</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">采集数据</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">图书馆的控制台</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">发明家图书馆内层</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">控制台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">图书馆的控制台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">诺甘农之壳</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">诺甘农之壳</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">诺甘农之壳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">奥杜尔的土灵</span>、<span class=\"ra-task ra-accept\">追查诺甘农之核</span></div>",
+        "summary": "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿；《奥杜尔的土灵》因已提前接《稀有的土壤》而主动跳过。",
+        "actionHtml": "<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">西部峡谷</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">寒风的声音</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">莫塔哈·风魂</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">寒风的声音</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">联络布莱恩</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">联络布莱恩</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">联络布莱恩</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">拼图游戏</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">发明家图书馆</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">拼图游戏</span>、<span class=\"ra-task ra-do-task\">远古的圣物</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">拼图游戏</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">采集数据</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">采集数据</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">采集数据</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">图书馆的控制台</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">发明家图书馆内层</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">控制台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">图书馆的控制台</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">诺甘农之壳</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">诺甘农之壳</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">诺甘农之壳</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">追查诺甘农之核</span></div>",
         "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《联络布莱恩》</div><div class=\"ra-note-text\">接任务后使用布莱恩通讯器，再回伯克塔·血怒交。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《拼图游戏》</div><div class=\"ra-note-text\">杀图书馆守卫者收6个磁盘碎片并合成磁盘；完成后用布莱恩通讯器继续。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>磁盘碎片和通讯器是否需五号分别完成。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《采集数据》</div><div class=\"ra-note-text\">对数据库使用发明家磁盘并完成7条秘密数据；随后用布莱恩通讯器继续。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《诺甘农之壳》</div><div class=\"ra-note-text\">在SCRAP-E附近用充能圆盘召出档案员麦卡顿，击杀取诺甘农之壳；随后用布莱恩通讯器继续。</div></div>",
         "timing": {
-          "centerMinutes": 38.8,
+          "centerMinutes": 38.7,
           "rangeMinutes": [
-            29.1,
-            48.5
+            29.0,
+            48.3
           ],
           "includeInTotal": true
         }
       },
       {
-        "start": 104,
-        "end": 107,
-        "title": "布莱恩营地 → 诺甘农之核 → 格罗玛什",
-        "summary": "取两份文件，进入洛肯的宝库取得诺甘农之核，再到创世神殿顶部完成钥石事件。",
-        "actionHtml": "<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">布莱恩营地上层</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">追查诺甘农之核</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">追查诺甘农之核</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">诺甘农之核的守护者</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">洛肯的宝库</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">诺甘农之核的守护者</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">诺甘农之核的守护者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">铸造钥石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">创世神殿顶部</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">布莱恩</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">铸造钥石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">铸造钥石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">见证者夏拉托尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">奥鲁特·埃雷古</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">远古的圣物</span></div>",
+        "start": 105,
+        "end": 108,
+        "title": "布莱恩营地 → 诺甘农之核 → 炉石格罗玛什",
+        "summary": "取两份文件，进入洛肯的宝库取得诺甘农之核，到创世神殿顶部完成钥石事件后炉石回格罗玛什交任务。",
+        "actionHtml": "<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">布莱恩营地上层</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">追查诺甘农之核</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">追查诺甘农之核</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">诺甘农之核的守护者</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">洛肯的宝库</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">诺甘农之核的守护者</span></div>\n<div class=\"ra-line\"><span class=\"ra-location\">布莱恩通讯器</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">诺甘农之核的守护者</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">铸造钥石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">创世神殿顶部</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">布莱恩</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">铸造钥石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-hearthstone\">使用炉石：格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">伯克塔·血怒</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">铸造钥石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">见证者夏拉托尔</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">奥鲁特·埃雷古</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">远古的圣物</span></div>",
         "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《追查诺甘农之核》</div><div class=\"ra-note-text\">布莱恩营地上层取克罗娜便笺和索雷地图，各1份。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>两份固定文档能否同一刷新点五号连续拾取。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《诺甘农之核的守护者》</div><div class=\"ra-note-text\"><span class=\"ra-not-shared\">不共享：</span>从洛肯的宝库圆形入口进入内层；诺甘农之核五号分别拾取。</div></div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《铸造钥石》</div><div class=\"ra-note-text\">创世神殿顶部约(45.5,49)找布莱恩完成合成钥石事件。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>合成钥石事件是否一号触发即可五号同步。</div></div>",
         "timing": {
-          "centerMinutes": 11.7,
+          "centerMinutes": 11.6,
           "rangeMinutes": [
-            8.8,
-            14.6
+            8.7,
+            14.5
           ],
           "includeInTotal": true
         }
       },
       {
-        "start": 108,
-        "end": 114,
-        "title": "布德克拉格：土壤 → 雪流平原 → 尼达维里尔",
-        "summary": "开布德克拉格飞行点，完成魔化土壤、雪流平原和尼达维里尔第一组任务。",
-        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">奥杜尔的土灵</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">稀有的土壤</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：布德克拉格庇护所（五号分别）</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">庇护所西北</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">稀有的土壤</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">稀有的土壤</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">反击</span>、<span class=\"ra-task ra-accept\">救死扶伤</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">雪流平原</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">反击</span>、<span class=\"ra-task ra-do-task\">救死扶伤</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">反击</span>、<span class=\"ra-task ra-turnin\">救死扶伤</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-accept\">黑暗的矿石</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">尼达维里尔</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-do-task\">黑暗的矿石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-turnin\">黑暗的矿石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">洛肯的礼物</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">进攻尼达维里尔</span></div>",
+        "start": 109,
+        "end": 116,
+        "title": "格罗玛什飞布德克拉格：土壤 → 雪流平原 → 尼达维里尔",
+        "summary": "从格罗玛什飞行点系统飞到已提前开启的布德克拉格庇护所，直接完成《稀有的土壤》及后续雪流平原、尼达维里尔第一组任务。",
+        "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">格罗玛什坠毁点</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpath\">系统飞行：格罗玛什坠毁点 → 布德克拉格庇护所</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">庇护所西北</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">稀有的土壤</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">稀有的土壤</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">反击</span>、<span class=\"ra-task ra-accept\">救死扶伤</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">雪流平原</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">反击</span>、<span class=\"ra-task ra-do-task\">救死扶伤</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">反击</span>、<span class=\"ra-task ra-turnin\">救死扶伤</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-accept\">黑暗的矿石</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">尼达维里尔</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-do-task\">黑暗的矿石</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">雷铸铁矮人的奴隶</span>、<span class=\"ra-task ra-turnin\">黑暗的矿石</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">洛肯的礼物</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">进攻尼达维里尔</span></div>",
         "noteHtml": "<div class=\"ra-note-heading\">备注</div><div class=\"ra-note-block\"><div class=\"ra-note-task\">《稀有的土壤》</div><div class=\"ra-note-text\">现场只收7块魔化土壤；5张霜纹布直接用库存。</div><div class=\"ra-fivebox-line\"><span class=\"ra-pending\">五开待实测：</span>魔化土壤是否五号各收7块。</div></div>",
         "timing": {
-          "centerMinutes": 28.0,
+          "centerMinutes": 27.1,
           "rangeMinutes": [
-            21.0,
-            35.0
+            20.3,
+            33.8
           ],
           "includeInTotal": true
         }
       },
       {
-        "start": 115,
-        "end": 123,
+        "start": 117,
+        "end": 125,
         "title": "布德克拉格：洛肯物件 → 黑暗护甲 → 瓦杜兰",
         "summary": "依次处理三件洛肯固定物、黑暗护甲板链和风暴之子瓦杜兰。",
         "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">尼达维里尔</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-location\">洛肯之怒</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的礼物</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-location\">洛肯之力</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的礼物</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-location\">洛肯之赐</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">洛肯的礼物</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">进攻尼达维里尔</span></div>\n<div class=\"ra-line\">拾取黑暗护甲板<span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">黑暗的护甲板</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">黑暗的护甲板</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">洛肯的礼物</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">进攻尼达维里尔</span>、<span class=\"ra-task ra-turnin\">黑暗的护甲板</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">护甲板的秘密</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">米米尔车间</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">随从托克</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">护甲板的秘密</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">护甲板的秘密</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">风暴之子瓦杜兰</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">尼达维里尔北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">风暴之子瓦杜兰</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">风暴之子瓦杜兰</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">风暴之子瓦杜兰</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">摧毁熔炉！</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">正中要害</span></div>",
@@ -11094,8 +11116,8 @@
         }
       },
       {
-        "start": 124,
-        "end": 131,
+        "start": 126,
+        "end": 133,
         "title": "尼达维里尔熔炉 → 风暴之心 → 钢铁巨像",
         "summary": "完成三个闪电熔炉、两份规格说明书、风暴之心和钢铁巨像。",
         "actionHtml": "<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">尼达维里尔</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">摧毁熔炉！</span>、<span class=\"ra-task ra-do-task\">正中要害</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">摧毁熔炉！</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">巨像的威胁</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">布鲁沃·斩铁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">正中要害</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">尼达维里尔下层</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">巨像的威胁</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">巨像的威胁</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">风暴之心</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">奥迪斯</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-location\">风暴之心</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">风暴之心</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">风暴之心</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">钢铁巨像</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">尼达维里尔</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">钢铁巨像</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">布德克拉格庇护所</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">塑石者布德克拉格</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">钢铁巨像</span></div>",
@@ -11110,8 +11132,8 @@
         }
       },
       {
-        "start": 132,
-        "end": 139,
+        "start": 134,
+        "end": 141,
         "title": "唐卡洛营地 → 嚎风洞穴 → 北风",
         "summary": "开唐卡洛飞行点，完成雷蹄记忆、4道裂隙、嚎风洞穴和北风事件。",
         "actionHtml": "<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">唐卡洛营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-system-action ra-flightpoint\">开飞行点：唐卡洛营地（五号分别）</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">见证者夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">见证者与英雄</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">见证者与英雄</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">见证者与英雄</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">雷蹄的记忆</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">唐卡洛北侧</span></div>\n<div class=\"ra-line ra-do\"><span class=\"ra-npc\">迅矛酋长</span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">雷蹄的记忆</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">迅矛酋长</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">时间的扰动</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">浮冰深渊南侧</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">时间的扰动</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">唐卡洛营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">雷蹄的记忆</span>、<span class=\"ra-task ra-turnin\">时间的扰动</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">错误的时间流</span>、<span class=\"ra-task ra-accept\">英雄的装备</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">嚎风洞穴</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">错误的时间流</span>、<span class=\"ra-task ra-do-task\">英雄的装备</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">唐卡洛营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">错误的时间流</span>、<span class=\"ra-task ra-turnin\">英雄的装备</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">接</span> <span class=\"ra-task ra-accept\">改变风向</span></div>\n<div class=\"ra-line ra-do-inline\"><span class=\"ra-location\">唐卡洛南侧</span><span class=\"ra-inline-sep\"> </span><span class=\"ra-branch\">↳</span><span class=\"ra-verb\">做</span> <span class=\"ra-task ra-do-task\">改变风向</span></div>\n<div class=\"ra-line ra-point-anchor\"><span class=\"ra-location\">唐卡洛营地</span></div>\n<div class=\"ra-line\"><span class=\"ra-npc\">夏拉托尔</span><span class=\"ra-arrow\">→</span><span class=\"ra-verb\">交</span> <span class=\"ra-task ra-turnin\">改变风向</span></div>",
@@ -11132,17 +11154,17 @@
       "格罗玛什坠毁点"
     ],
     "timing": {
-      "centerMinutes": 487.4,
+      "centerMinutes": 487.7,
       "rangeMinutes": [
-        372.8,
-        602.6
+        373.0,
+        602.7
       ],
       "actualRuns": [],
       "model": "component-wall-clock-v1"
     }
   },
   "zuldrak": {
-    "order": 6,
+    "order": 9,
     "title": "祖达克 · 74+ 五开任务路线",
     "sub": "从圣光据点开始；中段炉石绑定希姆托加；完成杜布拉金迅猛龙卵任务后结束本图。",
     "badge": "炉石：希姆托加\n预计总时间：7小时56分（5小时58分—9小时54分）",
@@ -12833,7 +12855,7 @@
     }
   },
   "grizzly": {
-    "order": 6,
+    "order": 10,
     "title": "灰熊丘陵 · 73+ 五开任务路线",
     "sub": "从征服堡开始；炉石绑定征服堡；按步骤完成灰熊丘陵任务。",
     "badge": "炉石：征服堡\n预计总时间：6小时24分（4小时48分—7小时59分）",

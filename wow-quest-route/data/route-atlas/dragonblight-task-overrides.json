@@ -71,7 +71,6 @@
     },
     "12008": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Simple travel/report quest to Agmar's Hammer despite generic 'use' wording in the localized objective; no special player operation identified."],
       "verification": []
     },
     "12011": {
@@ -81,7 +80,6 @@
     },
     "12013": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Direct named kill of Arcanimus; no extra use action is required beyond reaching/killing the target."],
       "verification": []
     },
     "12017": {
@@ -111,7 +109,6 @@
     },
     "12039": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Collect Yogg-Saron black-blood samples from fixed world deposits; the player-facing action is visually straightforward once in the area."],
       "verification": ["fixed-object sharing vs personal pickup for fivebox timing only"]
     },
     "12040": {
@@ -121,7 +118,6 @@
     },
     "12047": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Collect shattered bone pieces among dragon skeletons; no hidden operation beyond world-object pickup."],
       "verification": ["object pickup sharing only for timing"]
     },
     "12049": {
@@ -236,7 +232,6 @@
     },
     "12117": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Current route already carries the Borean version into Dragonblight; simply turn it in to Elder Ko'nani at Moa'ki Harbor when naturally reached."],
       "verification": []
     },
     "12118": {
@@ -311,7 +306,6 @@
     },
     "12200": {
       "decision": "reviewed_no_extra_note",
-      "facts": ["Emerald Dragon Tears are glowing ground pickups in the area; no hidden operation beyond collecting them."],
       "verification": ["ground-object sharing only for fivebox timing"]
     },
     "12206": {
@@ -476,8 +470,7 @@
     },
     "12791": {
       "decision": "review_before_route",
-      "facts": ["Outbound Dalaran breadcrumb/transport task; keep it in boundary data but decide insertion only after comparing the Dragonblight endpoint and actual transport value."],
-      "verification": ["whether the NPC directly teleports current-server characters", "future-route cost"]
+      "verification": []
     },
     "13242": {
       "decision": "must_note",

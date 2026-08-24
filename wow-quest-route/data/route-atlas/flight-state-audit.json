@@ -327,12 +327,12 @@
     },
     "storm": {
       "route_key": "storm",
-      "flight_count": 2,
+      "flight_count": 4,
       "violation_count": 0,
       "unknown_destination_count": 0,
       "flights": [
         {
-          "point_index": 94,
+          "point_index": 95,
           "label": "奥杜尔",
           "action": "开飞行点：奥杜尔（五号分别）\n系统飞行：奥杜尔 → 丹尼芬雷",
           "transport": "fly",
@@ -340,11 +340,12 @@
           "opened_before_arrival": [
             "K3",
             "丹尼芬雷",
+            "布德克拉格庇护所",
             "格罗玛什坠毁点"
           ]
         },
         {
-          "point_index": 95,
+          "point_index": 96,
           "label": "丹尼芬雷",
           "action": "约库姆国王 → 交《清算之战》",
           "transport": "taxi",
@@ -353,6 +354,35 @@
             "K3",
             "丹尼芬雷",
             "奥杜尔",
+            "布德克拉格庇护所",
+            "格罗玛什坠毁点"
+          ]
+        },
+        {
+          "point_index": 109,
+          "label": "格罗玛什坠毁点",
+          "action": "系统飞行：格罗玛什坠毁点 → 布德克拉格庇护所",
+          "transport": "ride",
+          "destination_hub": "布德克拉格庇护所",
+          "opened_before_arrival": [
+            "K3",
+            "丹尼芬雷",
+            "奥杜尔",
+            "布德克拉格庇护所",
+            "格罗玛什坠毁点"
+          ]
+        },
+        {
+          "point_index": 110,
+          "label": "布德克拉格庇护所",
+          "action": "",
+          "transport": "taxi",
+          "destination_hub": "布德克拉格庇护所",
+          "opened_before_arrival": [
+            "K3",
+            "丹尼芬雷",
+            "奥杜尔",
+            "布德克拉格庇护所",
             "格罗玛什坠毁点"
           ]
         }
