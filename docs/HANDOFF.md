@@ -1,9 +1,9 @@
 # Handoff
 
-更新时间：2026-07-31
+更新时间：2026-08-24
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
-当前焦点：售后文档状态已收口，主线为 LKWJ 剩余明细补录。LKWJ 的精灵、任务、进化、果实、家具、服装和遗迹基线已整理，剩余事项只看 `lkwj/tasks/todo.md`；百浩/悦希商品匹配已完成 36 个商品、57 个链接闭环核对，后续只按 `product-mapping/tasks/todo.md` 推进未覆盖 live smoke、L2 边界场景和 HEE 建档质量复核。
+当前焦点：售后文档状态已收口，主线仍为 LKWJ 剩余明细补录。商品匹配最新完成茗瑞/KGOS 21 个商品、67 个 SKU 闭环核对；历史证据见 `product-mapping/docs/archive/2026-08-24-mingrui-kgos-match/`。下次真实长批匹配前先处理 `product-mapping/tasks/todo.md` P0 的 ERP 锁续租问题，其余待办仍以各项目 `tasks/todo.md` 为准。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 
