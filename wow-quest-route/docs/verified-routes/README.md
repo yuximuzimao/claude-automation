@@ -7,7 +7,8 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md`](../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md)，记录五张旧Route Atlas逐段重构封口、旧版对比与最终HTML用户视角双重终审，以及下一会话切换到全诺森德任务卡基础宇宙清洗的恢复点。
+- 最新阶段NEAT：[`../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md`](../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md)，记录冰冠40步正式首版发布、163/163覆盖与最终门禁、永久规则结构性治理，以及下一恢复点“冰冠首组实跑校准”。
+- 上一阶段旧Route Atlas封口NEAT：[`../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md`](../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md)。
 - 上一阶段北风逐段重构NEAT：[`../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md`](../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md)。
 - 上一阶段风暴玩家文案NEAT：[`../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md`](../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md)，记录风暴峭壁步骤1—20全部按最终地点/NPC、五开关键词颜色、备注密度规则逐段统一，以及旧图以后必须使用“重构当下最终总规则”的恢复约束。
 - 上一阶段风暴正式路线发布NEAT：[`../archive/neat/2026-08-23-storm-peaks-route-release-neat.md`](../archive/neat/2026-08-23-storm-peaks-route-release-neat.md)，保留达拉然77级寒冷天气飞行门槛校准、风暴107/107正式路线发布与逐-objective几何门禁形成过程。

@@ -380,10 +380,14 @@ def objective_names_for_group(
     tasks_by_id: dict[int, dict[str, Any]] | None = None,
 ) -> list[str]:
     structural_names = group.get("timingTaskNames")
-    if isinstance(structural_names, list):
-        return [str(name) for name in structural_names if str(name) in known_names]
-
-    names: list[str] = []
+    names: list[str] = (
+        [str(name) for name in structural_names if str(name) in known_names]
+        if isinstance(structural_names, list)
+        else []
+    )
+    # Structural timing hints are seeds, not an override. Player-visible explicit execution
+    # must still be scanned so a stale/incomplete timingTaskNames list cannot suppress a
+    # `做《...》` task from objective service accounting.
     for point in route["points"][group["start"] : group["end"] + 1]:
         action = str(point[3])
         clauses = re.split(r"[\n；。]", action)

@@ -1,0 +1,890 @@
+{
+  "root": 12806,
+  "rows": [
+    {
+      "quest_id": 12806,
+      "name": "全速赶往死亡高地！",
+      "depth": 0,
+      "pre_any": [
+        12982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12807,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "向死亡高地的高级指挥官埃雷特报到。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "斯利文男爵",
+          "entity_type": "npc",
+          "entity_id": 29343,
+          "x": 42.84,
+          "y": 24.92
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [],
+      "economy": {
+        "xp_bonus_money_copper": 13200,
+        "xp_bonus_money_gold_decimal": 1.32,
+        "xp_bonus_money_display": "1g 32s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 12807,
+      "name": "迄今为止的故事……",
+      "depth": 1,
+      "pre_any": [
+        12982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12810,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "聆听死亡高地的高级指挥官埃雷特讲述的故事。",
+      "task_class": "single_named_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "高级指挥官埃雷特",
+              "entity_type": "npc",
+              "entity_id": 29344,
+              "rep": {
+                "x": 19.54,
+                "y": 48.15,
+                "spawn_count": 1,
+                "min_x": 19.54,
+                "max_x": 19.54,
+                "min_y": 48.15,
+                "max_y": 48.15
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 13200,
+        "xp_bonus_money_gold_decimal": 1.32,
+        "xp_bonus_money_display": "1g 32s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      }
+    },
+    {
+      "quest_id": 12810,
+      "name": "水中之血",
+      "depth": 2,
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12814,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "死亡高地的高级指挥官埃雷特要求你用10只饥饿的巨鲨的血装满血囊。",
+      "task_class": "shared_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "饥饿的巨鲨",
+              "entity_type": "npc",
+              "entity_id": 29392,
+              "rep": {
+                "x": 10.11,
+                "y": 42.76,
+                "spawn_count": 18,
+                "min_x": 4.79,
+                "max_x": 15.81,
+                "min_y": 35.33,
+                "max_y": 48.72
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 2.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 12813,
+      "name": "转化尸体",
+      "depth": 2,
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "is_daily": true,
+      "is_repeatable": true,
+      "objective_text_zh": "死亡高地的希塔尔·达克门德给了你一份达克门德的药剂，并要求你对先锋军港口一带的任意10具血色先锋军成员的尸体使用它。",
+      "task_class": "mixed_objectives",
+      "task_flags": [],
+      "objective_review": [
+        "objective_count:missing_counts",
+        "scripted_event_mechanic"
+      ],
+      "starts": [
+        {
+          "name": "希塔尔·达克门德",
+          "entity_type": "npc",
+          "entity_id": 29396,
+          "x": 19.67,
+          "y": 48.39
+        }
+      ],
+      "finishes": [
+        {
+          "name": "希塔尔·达克门德",
+          "entity_type": "npc",
+          "entity_id": 29396,
+          "x": 19.67,
+          "y": 48.39
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "event",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "先锋军圣骑士",
+              "entity_type": "npc",
+              "entity_id": 29329,
+              "rep": {
+                "x": 9.0,
+                "y": 40.6,
+                "spawn_count": 16,
+                "min_x": 5.64,
+                "max_x": 10.36,
+                "min_y": 35.84,
+                "max_y": 46.86
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "先锋军港口卫兵",
+              "entity_type": "npc",
+              "entity_id": 29330,
+              "rep": {
+                "x": 9.18,
+                "y": 41.86,
+                "spawn_count": 90,
+                "min_x": 5.17,
+                "max_x": 12.53,
+                "min_y": 36.24,
+                "max_y": 47.31
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "先锋军狮鹫骑士",
+              "entity_type": "npc",
+              "entity_id": 29333,
+              "rep": {
+                "x": 9.35,
+                "y": 42.18,
+                "spawn_count": 53,
+                "min_x": 4.42,
+                "max_x": 12.48,
+                "min_y": 36.96,
+                "max_y": 45.94
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "先锋军黑鸦主教",
+              "entity_type": "npc",
+              "entity_id": 29338,
+              "rep": {
+                "x": 9.3,
+                "y": 42.97,
+                "spawn_count": 24,
+                "min_x": 6.2,
+                "max_x": 10.56,
+                "min_y": 36.43,
+                "max_y": 47.0
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 7.8,
+        "basis": "mixed_objective_model"
+      }
+    },
+    {
+      "quest_id": 12838,
+      "name": "收集情报",
+      "depth": 2,
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "is_daily": true,
+      "is_repeatable": true,
+      "objective_text_zh": "死亡高地的奥卢克斯·邪鬃要求你去收集5份先锋军情报文档。",
+      "task_class": "world_object_item_collection",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "奥卢克斯·邪鬃",
+          "entity_type": "npc",
+          "entity_id": 29456,
+          "x": 20.28,
+          "y": 47.78
+        }
+      ],
+      "finishes": [
+        {
+          "name": "奥卢克斯·邪鬃",
+          "entity_type": "npc",
+          "entity_id": 29456,
+          "x": 20.28,
+          "y": 47.78
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 40640,
+          "item_name": "Onslaught Intel Documents",
+          "sources": [
+            {
+              "name": "Scarlet Onslaught Trunk",
+              "entity_type": "object",
+              "entity_id": 191543,
+              "rep": {
+                "x": 7.13,
+                "y": 41.09,
+                "spawn_count": 50,
+                "min_x": 4.93,
+                "max_x": 12.46,
+                "min_y": 36.27,
+                "max_y": 47.09
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 2.9166666666666665,
+        "basis": "fixed_object_fivebox_model"
+      }
+    },
+    {
+      "quest_id": 12839,
+      "name": "元帅的计划",
+      "depth": 2,
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12840,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "将韦斯温元帅的便笺交给死亡高地的高级指挥官埃雷特。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 12814,
+      "name": "你需要狮鹫",
+      "depth": 3,
+      "pre_any": [
+        12810
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "将一只先锋军狮鹫交给死亡高地的乌佐·唤亡者。",
+      "task_class": "mixed_objectives",
+      "task_flags": [],
+      "objective_review": [
+        "objective_count:missing_counts",
+        "scripted_event_mechanic"
+      ],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "finishes": [
+        {
+          "name": "乌佐·唤亡者",
+          "entity_type": "npc",
+          "entity_id": 29405,
+          "x": 19.64,
+          "y": 47.8
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "You'll Need a Gryphon Kill Credit Bunny",
+              "entity_type": "npc",
+              "entity_id": 29406,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "乌佐·唤亡者",
+              "entity_type": "npc",
+              "entity_id": 29405,
+              "rep": {
+                "x": 19.64,
+                "y": 47.8,
+                "spawn_count": 1,
+                "min_x": 19.64,
+                "max_x": 19.64,
+                "min_y": 47.8,
+                "max_y": 47.8
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "mixed_objective_model"
+      }
+    },
+    {
+      "quest_id": 12840,
+      "name": "心腹的情报",
+      "depth": 3,
+      "pre_any": [
+        12839
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12847,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "死亡高地的高级指挥官埃雷特要求你拷打维辛顿船长和哈弗德船长，并从他们口中得到情报。",
+      "task_class": "multi_target_shared_kill",
+      "task_flags": [],
+      "objective_review": [
+        "objective_count:missing_counts"
+      ],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "维辛顿船长",
+              "entity_type": "npc",
+              "entity_id": 29489,
+              "rep": {
+                "x": 5.67,
+                "y": 41.93,
+                "spawn_count": 1,
+                "min_x": 5.67,
+                "max_x": 5.67,
+                "min_y": 41.93,
+                "max_y": 41.93
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "哈弗德船长",
+              "entity_type": "npc",
+              "entity_id": 29490,
+              "rep": {
+                "x": 7.03,
+                "y": 41.92,
+                "spawn_count": 1,
+                "min_x": 7.03,
+                "max_x": 7.03,
+                "min_y": 41.92,
+                "max_y": 41.92
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 5,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 12815,
+      "name": "禁飞区",
+      "depth": 4,
+      "pre_any": [
+        12814
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "is_daily": true,
+      "is_repeatable": true,
+      "objective_text_zh": "死亡高地的乌佐·唤亡者要求你杀死10名先锋军狮鹫骑士。",
+      "task_class": "shared_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "乌佐·唤亡者",
+          "entity_type": "npc",
+          "entity_id": 29405,
+          "x": 19.64,
+          "y": 47.8
+        }
+      ],
+      "finishes": [
+        {
+          "name": "乌佐·唤亡者",
+          "entity_type": "npc",
+          "entity_id": 29405,
+          "x": 19.64,
+          "y": 47.8
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "先锋军狮鹫骑士",
+              "entity_type": "npc",
+              "entity_id": 29333,
+              "rep": {
+                "x": 9.35,
+                "y": 42.18,
+                "spawn_count": 53,
+                "min_x": 4.42,
+                "max_x": 12.48,
+                "min_y": 36.96,
+                "max_y": 45.94
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 2.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 12847,
+      "name": "第二次机会",
+      "depth": 4,
+      "pre_any": [
+        12840
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12852,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "杀死大主教兰德雷，并在他的尸体旁召唤出埃雷特之门。等高级指挥官埃雷特从大主教的灵魂那里拷问出情报以后，在赤色大教堂内与他谈一谈。",
+      "task_class": "mixed_objectives",
+      "task_flags": [
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [
+        "objective_count:missing_counts",
+        "scripted_event_mechanic"
+      ],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29560,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "大主教兰德雷",
+              "entity_type": "npc",
+              "entity_id": 29542,
+              "rep": {
+                "x": 9.53,
+                "y": 47.28,
+                "spawn_count": 1,
+                "min_x": 9.53,
+                "max_x": 9.53,
+                "min_y": 47.28,
+                "max_y": 47.28
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "Arete's Gate Summoned Kill Credit Bunny",
+              "entity_type": "npc",
+              "entity_id": 29550,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": []
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 165300,
+        "xp_bonus_money_gold_decimal": 16.53,
+        "xp_bonus_money_display": "16g 53s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "unknown",
+        "minutes": null,
+        "basis": "missing_mixed_objective_count"
+      }
+    },
+    {
+      "quest_id": 12852,
+      "name": "元帅的下落",
+      "depth": 5,
+      "pre_any": [
+        12847
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "is_daily": false,
+      "is_repeatable": false,
+      "objective_text_zh": "高级指挥官埃雷特希望你去除掉巴利·韦斯温元帅。等你完成任务之后，回到死亡高地向他复命。",
+      "task_class": "single_named_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "starts": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29560,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finishes": [
+        {
+          "name": "高级指挥官埃雷特",
+          "entity_type": "npc",
+          "entity_id": 29344,
+          "x": 19.54,
+          "y": 48.15
+        }
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "巴利·韦斯温元帅",
+              "entity_type": "npc",
+              "entity_id": 29621,
+              "rep": {
+                "x": 8.91,
+                "y": 46.17,
+                "spawn_count": 1,
+                "min_x": 8.91,
+                "max_x": 8.91,
+                "min_y": 46.17,
+                "max_y": 46.17
+              }
+            }
+          ]
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 165300,
+        "xp_bonus_money_gold_decimal": 16.53,
+        "xp_bonus_money_display": "16g 53s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      }
+    }
+  ]
+}

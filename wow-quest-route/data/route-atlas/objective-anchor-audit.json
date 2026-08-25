@@ -8,39 +8,116 @@
       "warn_distance": 5.0,
       "fail_distance": 8.0,
       "objective_rows": 98,
+      "manual_resolved_count": 0,
+      "manual_resolved": [],
       "failure_count": 0,
-      "review_count": 2,
+      "review_count": 0,
       "failures": [],
-      "reviews": [
+      "reviews": []
+    },
+    "icecrown": {
+      "route_key": "icecrown",
+      "zone_id": 210,
+      "warn_distance": 5.0,
+      "fail_distance": 8.0,
+      "objective_rows": 27,
+      "manual_resolved_count": 15,
+      "manual_resolved": [
         {
-          "quest_id": 12827,
-          "quest_name": "收集粮食",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 16,
-          "nearest_route_point_index": 5,
-          "nearest_route_point_title": "野蛮岭",
-          "nearest_source_name": "野蛮岭暴徒",
-          "nearest_source_x": 35.11,
-          "nearest_source_y": 83.97,
-          "distance": 5.11,
-          "status": "review"
+          "quest_id": 13086,
+          "quest_name": "最后一道防线",
+          "objective_review_resolution": "manual_route_card_resolves_100_attackers_plus_3_destroyers",
+          "manual_spatial_resolution": "argent_vanguard_cannon_fixed_at_step2"
         },
         {
-          "quest_id": 12829,
-          "quest_name": "进入矿洞",
-          "objective_index": 2,
-          "objective_type": "event",
-          "required_count": 1,
-          "nearest_route_point_index": 10,
-          "nearest_route_point_title": "水晶蛛网洞穴内",
-          "nearest_source_name": "冰尖爬行者",
-          "nearest_source_x": 47.44,
-          "nearest_source_y": 71.17,
-          "distance": 5.74,
-          "status": "review"
+          "quest_id": 13118,
+          "quest_name": "净化天灾城",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "scourgeholme_same_target_block_as_step3"
+        },
+        {
+          "quest_id": 13125,
+          "quest_name": "凝固的空气",
+          "objective_review_resolution": "manual_route_card_resolves_three_named_scourgeholme_bosses",
+          "manual_spatial_resolution": "three_named_scourgeholme_bosses_manually_anchored_step3"
+        },
+        {
+          "quest_id": 13042,
+          "quest_name": "地下大厅的深处",
+          "objective_review_resolution": "manual_route_card_resolves_underhalls_objective",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 12992,
+          "quest_name": "干掉那些维库人！",
+          "objective_review_resolution": "manual_route_card_resolves_vrykul_kill_block",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 12813,
+          "quest_name": "转化尸体",
+          "objective_review_resolution": "manual_route_card_resolves_missing_counts_and_script_sequence",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 12840,
+          "quest_name": "心腹的情报",
+          "objective_review_resolution": "manual_route_card_resolves_two_named_captains",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13301,
+          "quest_name": "地面突袭",
+          "objective_review_resolution": "manual_route_card_resolves_ground_assault_escort_script",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13310,
+          "quest_name": "空中突袭",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "ground_commander_kotea_suppression_turret_event_anchor_step19"
+        },
+        {
+          "quest_id": 13138,
+          "quest_name": "熔炼碎片",
+          "objective_review_resolution": "manual_route_card_resolves_missing_item_source_as_furnace_use",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13239,
+          "quest_name": "爆炸油",
+          "objective_review_resolution": "manual_route_card_resolves_three_frostbrood_sky_talon_lures",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13152,
+          "quest_name": "看医生",
+          "objective_review_resolution": "manual_route_card_resolves_patch_and_doctor_event",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13351,
+          "quest_name": "预览",
+          "objective_review_resolution": "manual_route_card_resolves_four_recon_points",
+          "manual_spatial_resolution": "four_manual_recon_points_54_44_54_40_54_34_51_33"
+        },
+        {
+          "quest_id": 13373,
+          "quest_name": "边缘科学的益处",
+          "objective_review_resolution": "manual_route_card_and_localized_override_resolve_40_8_15_counts",
+          "manual_spatial_resolution": "tazla_platform_54_36_bomber_route"
+        },
+        {
+          "quest_id": 13358,
+          "quest_name": "活动窃听器",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "aldurthar_north_54_55_29_30_plus_crystal_53_8_33_6"
         }
-      ]
+      ],
+      "failure_count": 0,
+      "review_count": 0,
+      "failures": [],
+      "reviews": []
     }
   }
 }

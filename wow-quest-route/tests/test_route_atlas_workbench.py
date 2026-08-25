@@ -386,7 +386,8 @@ def test_storm_v45_full_step_cards_and_transport_state_are_locked():
 
     objective_audit = json.loads((ROOT / "data/route-atlas/objective-anchor-audit.json").read_text(encoding="utf-8"))["routes"]["storm"]
     assert objective_audit["failure_count"] == 0
-    assert {row["quest_id"] for row in objective_audit["reviews"]} == {12827, 12829}
+    assert objective_audit["review_count"] == 0
+    assert objective_audit["reviews"] == []
 
     flight_audit = json.loads((ROOT / "data/route-atlas/flight-state-audit.json").read_text(encoding="utf-8"))["routes"]["storm"]
     assert flight_audit["violation_count"] == 0

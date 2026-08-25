@@ -52,8 +52,13 @@ NORTHREND_OUTDOOR_ZONE_IDS = {495, 3537, 65, 394, 3711, 66, 4395, 210, 67, 4197,
 # Known route-mechanism fact. This is not a global permission exception: the breadcrumb can disappear
 # after the Steeljaw battle trio is accepted/completed, so route economics must evaluate it accordingly.
 ROUTE_MECHANISM_NOTES = {
-    11591: "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。当前基线路线不做11591。",
+    11591: "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。是否纳入某版路线由该版路线决策层判断。",
     12177: "《休尼克的掩饰》需要1份煤块和5份面粉；两者都可在征服堡内向商人购买。Questie物品来源展开会把煤块的全世界掉落源带入route_zones，不能因此误判为副本任务。",
+    13373: "Questie zhCN目标文本把Bombardment Captains数量误写成80；英文任务文本与WotLK公开任务资料均为8。构建任务宇宙时按40步兵、8军官、15石像鬼修正。",
+}
+
+LOCALIZED_OBJECTIVE_OVERRIDES = {
+    13373: "边缘技师塔兹拉要你去杀死40个轰炸场步兵、8个轰炸场军官和15只石像鬼伏击者。",
 }
 
 # Item-source expansion can pollute route zones for vendor/common items. Keep explicit overrides only when
@@ -187,7 +192,7 @@ def main() -> None:
             continue
         preferred_zone = assigned if assigned in outdoor else touched[0]
         name = quest_name(data, qid, row)
-        objective_zh = shared.localized_objective(data, qid)
+        objective_zh = LOCALIZED_OBJECTIVE_OVERRIDES.get(qid, shared.localized_objective(data, qid))
         objective_en = shared.english_objective(row)
         classified, review = classify_objectives(data, row, preferred_zone, objective_zh or objective_en)
         objective_dicts = [asdict(obj) for obj in classified]

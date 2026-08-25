@@ -1,0 +1,2156 @@
+{
+  "candidate_count": 163,
+  "route_step_count": 40,
+  "covered_count": 163,
+  "uncovered_count": 0,
+  "covered_by_task_card_id": 142,
+  "covered_by_unique_quest_name": 21,
+  "ambiguous_duplicate_name_reference_count": 0,
+  "uncovered": [],
+  "ambiguous_duplicate_names": {},
+  "rows": [
+    {
+      "quest_id": 12806,
+      "name": "全速赶往死亡高地！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12807,
+      "name": "迄今为止的故事……",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12810,
+      "name": "水中之血",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12813,
+      "name": "转化尸体",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 12814,
+      "name": "你需要狮鹫",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12810
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12815,
+      "name": "禁飞区",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12814
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 12838,
+      "name": "收集情报",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 12839,
+      "name": "元帅的计划",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12807
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12840,
+      "name": "心腹的情报",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12839
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12847,
+      "name": "第二次机会",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12840
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12852,
+      "name": "元帅的下落",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12847
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12891,
+      "name": "我有一计……",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12887,
+        12892
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12892,
+      "name": "乐趣十足",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12893,
+      "name": "解放你的思想",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12891
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12897,
+      "name": "顽固的敌人",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12893
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12899,
+      "name": "暗影拱顶",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12897
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12938,
+      "name": "公爵",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12898,
+        12899
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12939,
+      "name": "荣耀的挑战",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12938
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12943,
+      "name": "暗影拱顶裁决令",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12939
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12949,
+      "name": "夺取钥匙",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12939
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12951,
+      "name": "通知男爵",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12949
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12955,
+      "name": "消灭竞争者",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12938
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12982,
+      "name": "黑锋囚犯",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13085
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12992,
+      "name": "干掉那些维库人！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12951
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 12995,
+      "name": "彰显军威",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12951
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 12999,
+      "name": "白骨女巫",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12955
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13008,
+      "name": "天灾的战术",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13036,
+      "name": "无上的荣耀",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13039,
+      "name": "保卫前线基地",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13040,
+      "name": "致命的剧毒",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13042,
+      "name": "地下大厅的深处",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12999
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13043,
+      "name": "一加一大于二",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12999
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13044,
+      "name": "如果还有幸存者……",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [
+        13008,
+        13039,
+        13040
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13045,
+      "name": "空中救兵",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13044
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13059,
+      "name": "瓦古的复仇",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13092
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13068,
+      "name": "勇气的传说",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13069,
+      "name": "把它们打下来！",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13070,
+      "name": "冷锋逼近",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13045
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13071,
+      "name": "维尔喜欢火焰！",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12992
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13072,
+      "name": "弥留的英雄",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13068
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13073,
+      "name": "守护者的帮助",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13072
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13074,
+      "name": "翡翠噩梦中的希望",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13073
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13075,
+      "name": "雷姆洛斯的恩赐",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13074
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13076,
+      "name": "仍有时间",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13075
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13077,
+      "name": "龙神的触摸",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13076
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13078,
+      "name": "达莉亚之泪",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13077
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13079,
+      "name": "阿莱克丝塔萨的恩赐",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13078
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13080,
+      "name": "仍有希望",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13079
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13081,
+      "name": "纳鲁的意志",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13080
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13082,
+      "name": "阿达尔的恩赐",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13081
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13083,
+      "name": "黑暗中的光明",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13082
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13084,
+      "name": "破坏尤顿海姆",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12951
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13085,
+      "name": "维林回来了",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        12951
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13086,
+      "name": "最后一道防线",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13070
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13091,
+      "name": "恐怖之水",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13043
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13092,
+      "name": "占命卜运",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12999
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13104,
+      "name": "再次前往突破口吧，英雄",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13086
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13106,
+      "name": "黑色观察站",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        12896,
+        12897
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13110,
+      "name": "永不安息的亡者",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13117,
+      "name": "它们从哪儿来的？",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13118,
+      "name": "净化天灾城",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13119,
+      "name": "摧毁祭坛",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13117
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13120,
+      "name": "死亡的凝视",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13117
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13121,
+      "name": "巫妖王之眼",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13091
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13122,
+      "name": "天灾石",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13125,
+      "name": "凝固的空气",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13122,
+        13118
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13130,
+      "name": "公正堡的基石",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13133,
+      "name": "找到古代英雄",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13121
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13134,
+      "name": "抛洒它们的血",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [
+        13119,
+        13120
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13135,
+      "name": "危险的能量",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13136,
+      "name": "粗糙的碎片",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13119,
+        13120
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13137,
+      "name": "不那么光彩的战斗",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13133
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13138,
+      "name": "熔炼碎片",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13136
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13139,
+      "name": "进入诺森德的冰冷腹地",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [
+        13125,
+        13130,
+        13135
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13140,
+      "name": "玛雷卡里斯的符文锻造师",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13136
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13141,
+      "name": "北伐军之峰的战斗",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13139
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13142,
+      "name": "女妖的复仇",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13137
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13143,
+      "name": "新兵",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13155
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13144,
+      "name": "一举两得",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13152,
+        13211
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13145,
+      "name": "邪恶城堡",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13143
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13146,
+      "name": "深信不疑",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13145
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13147,
+      "name": "煽风点火",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13145
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13152,
+      "name": "看医生",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13134,
+        13138,
+        13140
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13155,
+      "name": "狡诈者维雷斯",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [],
+      "pre_all": [
+        13172,
+        13174
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13157,
+      "name": "北伐军之峰",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13160,
+      "name": "壮观的景象",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13145
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13161,
+      "name": "邪恶骑士",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13160
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13162,
+      "name": "冰霜骑士",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13160
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13163,
+      "name": "鲜血骑士",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13160
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13164,
+      "name": "血毒的命运",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13161,
+        13162,
+        13163
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13168,
+      "name": "离别礼物",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13263,
+        13389
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13169,
+      "name": "亡灵的好朋友",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13168
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13170,
+      "name": "不择手段",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13168
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13171,
+      "name": "来去无踪",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13168
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13172,
+      "name": "混乱之种",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13169,
+        13170,
+        13171
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13174,
+      "name": "一片狼藉",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13169,
+        13170,
+        13171
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13211,
+      "name": "净化的火焰",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13134,
+        13138,
+        13140
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13212,
+      "name": "支离破碎",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13144
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13213,
+      "name": "瓦哈拉斯之战",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13142
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13214,
+      "name": "瓦哈拉斯之战：堕落的英雄",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13213
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13215,
+      "name": "瓦哈拉斯之战：黑暗主宰西塔利克斯",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13214
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13216,
+      "name": "瓦哈拉斯之战：齐格莉德归来",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13215
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13217,
+      "name": "瓦哈拉斯之战：血肉巨人卡纳基！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13216
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13218,
+      "name": "瓦哈拉斯之战：“死亡一击”领主",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13217
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13219,
+      "name": "瓦哈拉斯之战：终极挑战",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13218
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13220,
+      "name": "重新组合欧尔拉金",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13212
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13224,
+      "name": "奥格瑞姆之锤",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13157
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13228,
+      "name": "破碎前线",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13229,
+      "name": "我还没死！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13119,
+        13120
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13230,
+      "name": "为我复仇！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": [
+        13228
+      ],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13235,
+      "name": "最强大的血肉巨人",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13220
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13236,
+      "name": "召唤大军",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13305
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13237,
+      "name": "知己知彼",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13260
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13238,
+      "name": "有价值的帮手？",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13239,
+      "name": "爆炸油",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13238
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13258,
+      "name": "机会",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        12938,
+        13224
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13259,
+      "name": "确立优势",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13258
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13260,
+      "name": "知根知底",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13262,
+      "name": "引爆！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13259
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13263,
+      "name": "引线太短",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13262
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13264,
+      "name": "你的憎恶伙伴",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13237
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13271,
+      "name": "黑暗中的声音",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13263
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13275,
+      "name": "藏匿行踪",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13271
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13277,
+      "name": "对抗巨人",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13237
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13278,
+      "name": "污染者科普洛斯",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13277
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13279,
+      "name": "化学常识",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13277
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13282,
+      "name": "返回地面",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13275
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13283,
+      "name": "占山为王",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13293
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13293,
+      "name": "前往伊米海姆！",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13301,
+      "name": "地面突袭",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13340
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13302,
+      "name": "萨隆邪铁的奴隶",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13304,
+      "name": "战地维修",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13282
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13305,
+      "name": "竭尽全力",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13304
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13306,
+      "name": "构建路障",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13366
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13307,
+      "name": "溅血的旗帜",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13306
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13308,
+      "name": "思维诡计",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224,
+        13225
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13310,
+      "name": "空中突袭",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13340
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13312,
+      "name": "铁墙壁垒",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13306,
+        13367
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13313,
+      "name": "遮挡天空",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13306
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13316,
+      "name": "科雷萨的守卫者",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13329
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13328,
+      "name": "击破碎片",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13329
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13329,
+      "name": "在恐惧之门前",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [],
+      "pre_all": [
+        13307,
+        13312
+      ],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13330,
+      "name": "伊米亚之血",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13340,
+      "name": "协助突袭",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13348,
+      "name": "徒劳",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13236
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13349,
+      "name": "冰霜巨龙的摇篮",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13348
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13351,
+      "name": "预览",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13264
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13352,
+      "name": "从天而“降”",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13354,
+      "name": "指挥体系",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13355,
+      "name": "无法复制",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13356,
+      "name": "重新考验",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13355
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13358,
+      "name": "活动窃听器",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13352
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13359,
+      "name": "巨龙的墓地",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13348
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13360,
+      "name": "寻求答案",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13359
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13361,
+      "name": "猎人与王子",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13360
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13362,
+      "name": "知识是可怕的负担",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_unique_quest_name",
+      "pre_any": [
+        13361
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13363,
+      "name": "银色北伐军的协助",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13362
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13364,
+      "name": "提里奥的尝试",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13363
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13366,
+      "name": "需要更多情报",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13352
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13367,
+      "name": "片刻不得安宁",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13366
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13373,
+      "name": "边缘科学的益处",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13379
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    },
+    {
+      "quest_id": 13376,
+      "name": "长途轰炸：失落希望之谷！",
+      "scope_status": "include_first_run_repeatable_or_calendar",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13373
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": true,
+      "is_repeatable": true
+    },
+    {
+      "quest_id": 13379,
+      "name": "绿色科技",
+      "scope_status": "include_candidate",
+      "coverage": "covered_by_task_card_id",
+      "pre_any": [
+        13239
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "is_daily": false,
+      "is_repeatable": false
+    }
+  ]
+}

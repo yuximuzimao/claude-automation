@@ -1,0 +1,1563 @@
+{
+  "start": 13104,
+  "target": 13224,
+  "path": [
+    13104,
+    13130,
+    13139,
+    13141,
+    13157,
+    13224
+  ],
+  "rows": [
+    {
+      "quest_id": 13068,
+      "name": "勇气的传说",
+      "on_shortest_path": false,
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 13072,
+      "child_quests": [],
+      "objective_text_zh": "北伐军之峰的大领主提里奥·弗丁要你前往冰冠冰川东北部的沉默墓地，寻找战斗英雄布雷登布莱德的下落。从空中向下看去，他的篝火堆应该是最显眼的指示物。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "大领主提里奥·弗丁",
+          "entity_id": 31044,
+          "entity_type": "npc",
+          "x": 79.79,
+          "y": 71.76
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军战士布雷登布莱德",
+          "entity_id": 30562,
+          "entity_type": "npc",
+          "x": 79.84,
+          "y": 30.82
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 13200,
+        "xp_bonus_money_gold_decimal": 1.32,
+        "xp_bonus_money_display": "1g 32s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13086,
+      "name": "最后一道防线",
+      "on_shortest_path": false,
+      "pre_any": [
+        13070
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "使用银色火炮消灭100名天灾军团攻击者和3条霜巢毁灭者。 /  / 完成任务后向攻城大师菲斯克复命。",
+      "task_class": "mixed_objectives",
+      "task_flags": [
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [
+        "objective_count:missing_counts",
+        "scripted_event_mechanic"
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 100,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "霜巢毁灭者",
+              "entity_type": "npc",
+              "entity_id": 30575,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "霜巢毁灭者",
+              "entity_type": "npc",
+              "entity_id": 30575,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "遗忘深渊杀戮者",
+              "entity_type": "npc",
+              "entity_id": 30593,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "Scourge Proxy Chapter II",
+              "entity_type": "npc",
+              "entity_id": 30670,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "攻城大师菲斯克",
+          "entity_id": 30657,
+          "entity_type": "npc",
+          "x": 85.62,
+          "y": 76.01
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "攻城大师菲斯克",
+          "entity_id": 30657,
+          "entity_type": "npc",
+          "x": 85.62,
+          "y": 76.01
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 194400,
+        "xp_bonus_money_gold_decimal": 19.44,
+        "xp_bonus_money_display": "19g 44s 00c",
+        "equipment_reward_count": 3,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 28.0,
+        "basis": "mixed_objective_model"
+      }
+    },
+    {
+      "quest_id": 13104,
+      "name": "再次前往突破口吧，英雄",
+      "on_shortest_path": true,
+      "pre_any": [
+        13086
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "前往回音谷，向突破口外面的黑锋观察者报到。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "大领主提里奥·弗丁",
+          "entity_id": 30677,
+          "entity_type": "npc",
+          "x": 86.08,
+          "y": 75.78
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 12900,
+        "xp_bonus_money_gold_decimal": 1.29,
+        "xp_bonus_money_display": "1g 29s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13110,
+      "name": "永不安息的亡者",
+      "on_shortest_path": false,
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "冰冠冰川回音谷的古斯塔夫神父要你对复活的北伐军战士的尸体使用圣水，解放10个永不安息的灵魂。",
+      "task_class": "shared_kill",
+      "task_flags": [
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "复活的北伐军战士",
+              "entity_type": "npc",
+              "entity_id": 30202,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "古斯塔夫神父",
+          "entity_id": 30683,
+          "entity_type": "npc",
+          "x": 82.87,
+          "y": 72.78
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "古斯塔夫神父",
+          "entity_id": 30683,
+          "entity_type": "npc",
+          "x": 82.87,
+          "y": 72.78
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 129600,
+        "xp_bonus_money_gold_decimal": 12.96,
+        "xp_bonus_money_display": "12g 96s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 2.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 13118,
+      "name": "净化天灾城",
+      "on_shortest_path": false,
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "冰冠冰川回音谷的黑锋观察者要你去杀死3名遗忘深渊高阶祭司、3只遗忘深渊虫王和8名复活的北伐军战士。",
+      "task_class": "multi_target_shared_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "遗忘深渊高阶祭司",
+              "entity_type": "npc",
+              "entity_id": 30543,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "遗忘深渊虫王",
+              "entity_type": "npc",
+              "entity_id": 30541,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "复活的北伐军战士",
+              "entity_type": "npc",
+              "entity_id": 30202,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 129600,
+        "xp_bonus_money_gold_decimal": 12.96,
+        "xp_bonus_money_display": "12g 96s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 3.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 13122,
+      "name": "天灾石",
+      "on_shortest_path": false,
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "将15块天灾石交给冰冠冰川回音谷的黑锋观察者。",
+      "task_class": "multi_creature_personal_drop",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43169,
+          "item_name": "Scourgestone",
+          "sources": [
+            {
+              "name": "复活的北伐军战士",
+              "entity_type": "npc",
+              "entity_id": 30202,
+              "rep": null
+            },
+            {
+              "name": "怒击石像鬼",
+              "entity_type": "npc",
+              "entity_id": 30482,
+              "rep": null
+            },
+            {
+              "name": "遗忘深渊虫王",
+              "entity_type": "npc",
+              "entity_id": 30541,
+              "rep": null
+            },
+            {
+              "name": "遗忘深渊高阶祭司",
+              "entity_type": "npc",
+              "entity_id": 30543,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 129600,
+        "xp_bonus_money_gold_decimal": 12.96,
+        "xp_bonus_money_display": "12g 96s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 14.629068276024798,
+        "basis": "fivebox_personal_drop_model"
+      }
+    },
+    {
+      "quest_id": 13125,
+      "name": "凝固的空气",
+      "on_shortest_path": false,
+      "pre_any": [],
+      "pre_all": [
+        13122,
+        13118
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "冰冠冰川回音谷的黑锋观察者要你去杀死撕裂者萨兰纳克斯、虫王塔洛诺克斯和高阶祭司亚萨尔蒙。",
+      "task_class": "multi_target_shared_kill",
+      "task_flags": [],
+      "objective_review": [
+        "objective_count:missing_counts"
+      ],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "撕裂者萨兰纳克斯",
+              "entity_type": "npc",
+              "entity_id": 30829,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "虫王塔洛诺克斯",
+              "entity_type": "npc",
+              "entity_id": 30830,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "高阶祭司亚萨尔蒙",
+              "entity_type": "npc",
+              "entity_id": 30831,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "黑锋观察者",
+          "entity_id": 30596,
+          "entity_type": "npc",
+          "x": 83.02,
+          "y": 72.96
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 196200,
+        "xp_bonus_money_gold_decimal": 19.62,
+        "xp_bonus_money_display": "19g 62s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.75,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 13130,
+      "name": "公正堡的基石",
+      "on_shortest_path": true,
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "冰冠冰川回音谷的北伐军建筑师西拉斯要你去收集10根水晶心木和10块古代精灵石砖。",
+      "task_class": "mixed_with_personal_item",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 43217,
+          "item_name": "Crystalline Heartwood",
+          "sources": [
+            {
+              "name": "Crystalline Heartwood",
+              "entity_type": "object",
+              "entity_id": 192908,
+              "rep": null
+            }
+          ]
+        },
+        {
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 43218,
+          "item_name": "Ancient Elven Masonry",
+          "sources": [
+            {
+              "name": "Ancient Elven Masonry",
+              "entity_type": "object",
+              "entity_id": 192909,
+              "rep": null
+            },
+            {
+              "name": "Ancient Elven Masonry",
+              "entity_type": "object",
+              "entity_id": 192910,
+              "rep": null
+            },
+            {
+              "name": "Ancient Elven Masonry",
+              "entity_type": "object",
+              "entity_id": 192911,
+              "rep": null
+            },
+            {
+              "name": "Ancient Elven Masonry",
+              "entity_type": "object",
+              "entity_id": 192912,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "北伐军建筑师西拉斯",
+          "entity_id": 30686,
+          "entity_type": "npc",
+          "x": 83.03,
+          "y": 73.08
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军建筑师西拉斯",
+          "entity_id": 30686,
+          "entity_type": "npc",
+          "x": 83.03,
+          "y": 73.08
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 130800,
+        "xp_bonus_money_gold_decimal": 13.08,
+        "xp_bonus_money_display": "13g 08s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 20.2932505167996,
+        "basis": "mixed_personal_item_model"
+      }
+    },
+    {
+      "quest_id": 13135,
+      "name": "危险的能量",
+      "on_shortest_path": false,
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "冰冠冰川回音谷的北伐军技师斯比帕提克要你去收集8块结晶能量。",
+      "task_class": "multi_creature_personal_drop",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 8,
+          "item_id": 43225,
+          "item_name": "Crystallized Energy",
+          "sources": [
+            {
+              "name": "自由的欺诈者",
+              "entity_type": "npc",
+              "entity_id": 30856,
+              "rep": null
+            },
+            {
+              "name": "自由的树妖",
+              "entity_type": "npc",
+              "entity_id": 30860,
+              "rep": null
+            },
+            {
+              "name": "自由的古树",
+              "entity_type": "npc",
+              "entity_id": 30861,
+              "rep": null
+            },
+            {
+              "name": "自由的树人",
+              "entity_type": "npc",
+              "entity_id": 30862,
+              "rep": null
+            },
+            {
+              "name": "杉达拉德鲁伊之魂",
+              "entity_type": "npc",
+              "entity_id": 30863,
+              "rep": null
+            },
+            {
+              "name": "杉达拉猎人之魂",
+              "entity_type": "npc",
+              "entity_id": 30864,
+              "rep": null
+            },
+            {
+              "name": "杉达拉战士之魂",
+              "entity_type": "npc",
+              "entity_id": 30865,
+              "rep": null
+            },
+            {
+              "name": "自由的腐蚀者",
+              "entity_type": "npc",
+              "entity_id": 30868,
+              "rep": null
+            },
+            {
+              "name": "消沉的树人",
+              "entity_type": "npc",
+              "entity_id": 31041,
+              "rep": null
+            },
+            {
+              "name": "杉达拉幽魂之狼",
+              "entity_type": "npc",
+              "entity_id": 31123,
+              "rep": null
+            },
+            {
+              "name": "林地行者",
+              "entity_type": "npc",
+              "entity_id": 31228,
+              "rep": null
+            },
+            {
+              "name": "上古看护者",
+              "entity_type": "npc",
+              "entity_id": 31229,
+              "rep": null
+            },
+            {
+              "name": "绝望的树妖",
+              "entity_type": "npc",
+              "entity_id": 31230,
+              "rep": null
+            },
+            {
+              "name": "失落的杉达拉之魂",
+              "entity_type": "npc",
+              "entity_id": 31231,
+              "rep": null
+            },
+            {
+              "name": "强壮的野狼",
+              "entity_type": "npc",
+              "entity_id": 31233,
+              "rep": null
+            },
+            {
+              "name": "斑点雄鹿",
+              "entity_type": "npc",
+              "entity_id": 31236,
+              "rep": null
+            },
+            {
+              "name": "水晶巨龙",
+              "entity_type": "npc",
+              "entity_id": 31393,
+              "rep": null
+            },
+            {
+              "name": "碧蓝塑法者",
+              "entity_type": "npc",
+              "entity_id": 31401,
+              "rep": null
+            },
+            {
+              "name": "碧蓝刃鳞龙人",
+              "entity_type": "npc",
+              "entity_id": 31402,
+              "rep": null
+            },
+            {
+              "name": "碧蓝织法者",
+              "entity_type": "npc",
+              "entity_id": 31403,
+              "rep": null
+            },
+            {
+              "name": "碧蓝法力兽",
+              "entity_type": "npc",
+              "entity_id": 31404,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "北伐军技师斯比帕提克",
+          "entity_id": 30714,
+          "entity_type": "npc",
+          "x": 82.99,
+          "y": 73.08
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "北伐军技师斯比帕提克",
+          "entity_id": 30714,
+          "entity_type": "npc",
+          "x": 82.99,
+          "y": 73.08
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 130800,
+        "xp_bonus_money_gold_decimal": 13.08,
+        "xp_bonus_money_display": "13g 08s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 8.32,
+        "basis": "fivebox_personal_drop_model"
+      }
+    },
+    {
+      "quest_id": 13139,
+      "name": "进入诺森德的冰冷腹地",
+      "on_shortest_path": true,
+      "pre_any": [],
+      "pre_all": [
+        13125,
+        13130,
+        13135
+      ],
+      "parent_active": [],
+      "next_quest": 13141,
+      "child_quests": [],
+      "objective_text_zh": "将古斯塔夫神父的报告交给冰冠冰川银色前线基地的大领主提里奥·弗丁。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "古斯塔夫神父",
+          "entity_id": 30683,
+          "entity_type": "npc",
+          "x": 82.87,
+          "y": 72.78
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "大领主提里奥·弗丁",
+          "entity_id": 30677,
+          "entity_type": "npc",
+          "x": 86.08,
+          "y": 75.78
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 130800,
+        "xp_bonus_money_gold_decimal": 13.08,
+        "xp_bonus_money_display": "13g 08s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13141,
+      "name": "北伐军之峰的战斗",
+      "on_shortest_path": true,
+      "pre_any": [
+        13139
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 13157,
+      "child_quests": [],
+      "objective_text_zh": "前往北伐军之峰，在北伐军祭坛上使用北伐军的神圣军旗。保护旗帜，直到北伐军之峰得到净化，然后向冰冠冰川回音谷的古斯塔夫神父复命。",
+      "task_class": "single_named_kill",
+      "task_flags": [
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "死亡使者哈洛夫",
+              "entity_type": "npc",
+              "entity_id": 30989,
+              "rep": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "大领主提里奥·弗丁",
+          "entity_id": 30677,
+          "entity_type": "npc",
+          "x": 86.08,
+          "y": 75.78
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "古斯塔夫神父",
+          "entity_id": 30683,
+          "entity_type": "npc",
+          "x": 82.87,
+          "y": 72.78
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 130800,
+        "xp_bonus_money_gold_decimal": 13.08,
+        "xp_bonus_money_display": "13g 08s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      }
+    },
+    {
+      "quest_id": 13157,
+      "name": "北伐军之峰",
+      "on_shortest_path": true,
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "前往冰冠冰川的北伐军之峰，寻找大领主提里奥·弗丁。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "古斯塔夫神父",
+          "entity_id": 30683,
+          "entity_type": "npc",
+          "x": 82.87,
+          "y": 72.78
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "大领主提里奥·弗丁",
+          "entity_id": 31044,
+          "entity_type": "npc",
+          "x": 79.79,
+          "y": 71.76
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 196200,
+        "xp_bonus_money_gold_decimal": 19.62,
+        "xp_bonus_money_display": "19g 62s 00c",
+        "equipment_reward_count": 5,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13224,
+      "name": "奥格瑞姆之锤",
+      "on_shortest_path": true,
+      "pre_any": [
+        13157
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "前往冰冠冰川上空的奥格瑞姆之锤，找到掠天者考尔姆·黑痕。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "督军霍尔克·粗眉",
+          "entity_id": 31240,
+          "entity_type": "npc",
+          "x": 79.44,
+          "y": 72.71
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "掠天者考尔姆·黑痕",
+          "entity_id": 30824,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 32700,
+        "xp_bonus_money_gold_decimal": 3.27,
+        "xp_bonus_money_display": "3g 27s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13228,
+      "name": "破碎前线",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [
+        13230
+      ],
+      "objective_text_zh": "奥格瑞姆之锤的考尔姆·黑痕要你前往破碎前线，询问一名濒死的狂战士，然后向他汇报你收集到的情报。",
+      "task_class": "shared_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "濒死的狂战士",
+              "entity_type": "npc",
+              "entity_id": 31273,
+              "rep": {
+                "x": 68.0,
+                "y": 67.86,
+                "spawn_count": 8,
+                "min_x": 67.15,
+                "max_x": 70.0,
+                "min_y": 62.25,
+                "max_y": 71.15
+              }
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "掠天者考尔姆·黑痕",
+          "entity_id": 30824,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "掠天者考尔姆·黑痕",
+          "entity_id": 30824,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.25,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 13258,
+      "name": "机会",
+      "on_shortest_path": false,
+      "pre_any": [],
+      "pre_all": [
+        12938,
+        13224
+      ],
+      "parent_active": [],
+      "next_quest": 13259,
+      "child_quests": [],
+      "objective_text_zh": "与冰冠堡垒下面的克蕾迦中士谈一谈。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "库尔迪拉·织亡者",
+          "entity_id": 29795,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "克蕾迦中士",
+          "entity_id": 31440,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 66300,
+        "xp_bonus_money_gold_decimal": 6.63,
+        "xp_bonus_money_display": "6g 63s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13293,
+      "name": "前往伊米海姆！",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 13283,
+      "child_quests": [],
+      "objective_text_zh": "与伊米海姆的布拉斯·炸雷谈一谈。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "首席技师考伯克拉",
+          "entity_id": 30825,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "布拉斯·炸雷",
+          "entity_id": 31781,
+          "entity_type": "npc",
+          "x": 51.94,
+          "y": 57.59
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 13200,
+        "xp_bonus_money_gold_decimal": 1.32,
+        "xp_bonus_money_display": "1g 32s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    },
+    {
+      "quest_id": 13302,
+      "name": "萨隆邪铁的奴隶",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "奥格瑞姆之锤的凯尔坦修士要你去营救10名萨隆邪铁矿洞奴隶。",
+      "task_class": "shared_kill",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "萨隆邪铁矿洞奴隶",
+              "entity_type": "npc",
+              "entity_id": 31397,
+              "rep": {
+                "x": 55.3,
+                "y": 58.8,
+                "spawn_count": 45,
+                "min_x": 54.09,
+                "max_x": 56.52,
+                "min_y": 57.09,
+                "max_y": 60.19
+              }
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "凯尔坦修士",
+          "entity_id": 31261,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "凯尔坦修士",
+          "entity_id": 31261,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 2.5,
+        "basis": "shared_kill_model"
+      }
+    },
+    {
+      "quest_id": 13308,
+      "name": "思维诡计",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224,
+        13225
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "萨隆邪铁矿洞的黑暗低语者阿克希姆要你去找到工头的钥匙，帮它打开镣铐。",
+      "task_class": "single_named_drop",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 44153,
+          "item_name": "Foreman's Key",
+          "sources": [
+            {
+              "name": "工头沙尔德林",
+              "entity_type": "npc",
+              "entity_id": 31399,
+              "rep": {
+                "x": 55.12,
+                "y": 59.37,
+                "spawn_count": 1,
+                "min_x": 55.12,
+                "max_x": 55.12,
+                "min_y": 59.37,
+                "max_y": 59.37
+              }
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "黑暗低语者阿克希姆",
+          "entity_id": 31892,
+          "entity_type": "npc",
+          "x": 54.49,
+          "y": 59.3
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "黑暗低语者阿克希姆",
+          "entity_id": 31892,
+          "entity_type": "npc",
+          "x": 54.49,
+          "y": 59.3
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 165300,
+        "xp_bonus_money_gold_decimal": 16.53,
+        "xp_bonus_money_display": "16g 53s 00c",
+        "equipment_reward_count": 4,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      }
+    },
+    {
+      "quest_id": 13330,
+      "name": "伊米亚之血",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "奥格瑞姆之锤的战争使者达沃斯·里赫要你进入伊米海姆，杀死20个维库人。",
+      "task_class": "mixed_objectives",
+      "task_flags": [],
+      "objective_review": [
+        "objective_count:missing_counts",
+        "scripted_event_mechanic"
+      ],
+      "objectives": [
+        {
+          "objective_type": "event",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "天灾驯鹰者",
+              "entity_type": "npc",
+              "entity_id": 31262,
+              "rep": {
+                "x": 57.98,
+                "y": 54.73,
+                "spawn_count": 12,
+                "min_x": 53.22,
+                "max_x": 59.53,
+                "min_y": 51.3,
+                "max_y": 63.73
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "伊米亚元素师",
+              "entity_type": "npc",
+              "entity_id": 31267,
+              "rep": {
+                "x": 58.0,
+                "y": 57.42,
+                "spawn_count": 23,
+                "min_x": 52.25,
+                "max_x": 60.31,
+                "min_y": 52.52,
+                "max_y": 64.15
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "工头沙尔德林",
+              "entity_type": "npc",
+              "entity_id": 31399,
+              "rep": {
+                "x": 55.12,
+                "y": 59.37,
+                "spawn_count": 1,
+                "min_x": 55.12,
+                "max_x": 55.12,
+                "min_y": 59.37,
+                "max_y": 59.37
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "伊米海姆防御者",
+              "entity_type": "npc",
+              "entity_id": 31746,
+              "rep": {
+                "x": 59.91,
+                "y": 51.14,
+                "spawn_count": 6,
+                "min_x": 57.65,
+                "max_x": 61.41,
+                "min_y": 48.64,
+                "max_y": 62.61
+              }
+            }
+          ]
+        },
+        {
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "name": "伊米海姆天选战士",
+              "entity_type": "npc",
+              "entity_id": 31258,
+              "rep": {
+                "x": 58.49,
+                "y": 56.23,
+                "spawn_count": 36,
+                "min_x": 52.9,
+                "max_x": 60.27,
+                "min_y": 51.55,
+                "max_y": 63.5
+              }
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "name": "战争使者达沃斯·里赫",
+          "entity_id": 32301,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "战争使者达沃斯·里赫",
+          "entity_id": 32301,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 132300,
+        "xp_bonus_money_gold_decimal": 13.23,
+        "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 14.399999999999999,
+        "basis": "mixed_objective_model"
+      }
+    },
+    {
+      "quest_id": 13340,
+      "name": "协助突袭",
+      "on_shortest_path": false,
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "objective_text_zh": "向伊米海姆北面冰川边缘的地面指挥官科特亚报到。",
+      "task_class": "travel_dialogue_or_turnin",
+      "task_flags": [],
+      "objective_review": [],
+      "objectives": [],
+      "start_entities": [
+        {
+          "name": "战争使者达沃斯·里赫",
+          "entity_id": 32301,
+          "entity_type": "npc",
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "地面指挥官科特亚",
+          "entity_id": 31834,
+          "entity_type": "npc",
+          "x": 58.34,
+          "y": 46.0
+        }
+      ],
+      "economy": {
+        "xp_bonus_money_copper": 33000,
+        "xp_bonus_money_gold_decimal": 3.3,
+        "xp_bonus_money_display": "3g 30s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "service": {
+        "status": "estimated",
+        "minutes": 0.0,
+        "basis": "no_independent_objective_service_hub_time_separate"
+      }
+    }
+  ]
+}

@@ -11,8 +11,9 @@
     "repeatable_daily_weekly_monthly": "first run may be eligible; no second-run generation by default",
     "task_selection_policy": "no level-based all-clear or speed-only deletion; compare do-now / do-later / never-do by impact on this quest-cycle total gold, total wall-clock, and gold-per-hour; do not import raid/daily opportunity cost",
     "route_mechanism_notes": {
-      "11591": "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。当前基线路线不做11591。",
-      "12177": "《休尼克的掩饰》需要1份煤块和5份面粉；两者都可在征服堡内向商人购买。Questie物品来源展开会把煤块的全世界掉落源带入route_zones，不能因此误判为副本任务。"
+      "11591": "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。是否纳入某版路线由该版路线决策层判断。",
+      "12177": "《休尼克的掩饰》需要1份煤块和5份面粉；两者都可在征服堡内向商人购买。Questie物品来源展开会把煤块的全世界掉落源带入route_zones，不能因此误判为副本任务。",
+      "13373": "Questie zhCN目标文本把Bombardment Captains数量误写成80；英文任务文本与WotLK公开任务资料均为8。构建任务宇宙时按40步兵、8军官、15石像鬼修正。"
     },
     "max_level_gold": "Quest::XPValue(80) * 6 copper; base WotLK XP, no 2x leveling multiplier"
   },
@@ -56312,7 +56313,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。当前基线路线不做11591。",
+      "route_mechanism_note": "《钢腭的车队》是可选面包屑；11592/11593/11594可直接接做，之后11591会失去可接资格。是否纳入某版路线由该版路线决策层判断。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -287696,7 +287697,7 @@
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 17.5,
+        "minutes": 3.5,
         "basis": "fixed_object_fivebox_model"
       }
     },
@@ -361040,7 +361041,7 @@
         "allowed_by_policy": true,
         "evidence": []
       },
-      "objective_text_zh": "边缘技师塔兹拉要你去杀死40个轰炸场步兵、80个轰炸场军官和15只石像鬼伏击者。",
+      "objective_text_zh": "边缘技师塔兹拉要你去杀死40个轰炸场步兵、8个轰炸场军官和15只石像鬼伏击者。",
       "objective_text_en": "Fringe Engineer Tezzla wants you to kill 40 Bombardment Infantry, 8 Bombardment Captains and 15 Gargoyle Ambushers.",
       "task_class": "mixed_objectives",
       "task_flags": [],
@@ -361081,7 +361082,7 @@
         },
         {
           "objective_type": "kill",
-          "required_count": 80,
+          "required_count": 8,
           "entity_ids": [
             32188
           ],
@@ -361257,14 +361258,14 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "Questie zhCN目标文本把Bombardment Captains数量误写成80；英文任务文本与WotLK公开任务资料均为8。构建任务宇宙时按40步兵、8军官、15石像鬼修正。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 39.6,
+        "minutes": 21.6,
         "basis": "mixed_objective_model"
       }
     },

@@ -44,6 +44,12 @@ HUB_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
         "布德克拉格庇护所": ("布德克拉格庇护所", "Bouldercrag's Refuge"),
         "唐卡洛营地": ("唐卡洛营地", "Camp Tunka'lo"),
     },
+    "icecrown": {
+        "银色前线基地": ("银色前线基地", "Argent Vanguard"),
+        "北伐军之峰": ("北伐军之峰", "Crusaders' Pinnacle"),
+        "暗影拱顶": ("暗影拱顶", "The Shadow Vault"),
+        "死亡高地": ("死亡高地", "Death's Rise"),
+    },
 }
 
 
@@ -138,7 +144,7 @@ def main() -> None:
         "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
         "routes": {
             key: audit_route(key, routes[key])
-            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm")
+            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown")
         },
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
