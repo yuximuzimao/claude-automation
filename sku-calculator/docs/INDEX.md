@@ -25,7 +25,7 @@
 
 ## §3 数据文件规范
 
-**除 gift-sku-config.json 外，所有文件均为运行时产出，加入 .gitignore。**
+**`data/` 整个目录都是本地运行区，已加入工作区 `.gitignore`。** 其中只有 `gift-sku-config.json` 需要人工维护；其余文件每轮由命令覆盖生成。赠品配置也不提交 Git，下一轮必须按当次活动重新确认。
 
 | 文件 | 说明 | 生成命令 | 清空时机 |
 |------|------|----------|---------|
@@ -35,6 +35,8 @@
 | `data/warehouse-stock.json` | 云仓库存（displayName → 数量） | `resolve-stock` | 每次 resolve-stock 开始时清空 |
 | `data/cart-adds.json` | 本次加购数据（解析自鲸灵 Excel） | `parse` | 每次 parse 覆盖 |
 | `data/allocation-result.json` | 分配结果（赠品SKU 标记 isGift） | `calculate` | 每次 calculate 覆盖 |
+
+**页面加购数据**：鲸灵商品数据页无法导出 Excel 时，按 `docs/page-cart-scraping.md` 读取当前 SKU 明细并直接生成 `cart-adds.json`。必须记录页面时间范围、实时商家 ID、支付剔除项，并在写入后校验总数、唯一 key 和供应商一致性；不能把上次页面快照留给下一轮。
 
 ## §4 可配置参数
 
@@ -78,3 +80,11 @@ parse --supplier-id <商家ID> → resolve-components → resolve-stock → calc
 - **多项目 ERP 浏览器互扰**（2026-05-23 事故）：`aftersales-automation` 与 `sku-calculator` 共享同一 Chrome ERP tab，售后系统的 DOM 操作会破坏 resolve-components 的 Vue 状态（对应表`展开: 20/0`、档案V2 全量 `count=-1`）。跑 sku-calculator 前先停售后 server；失败后手动刷新对应表和档案V2两个页面
 - **加购 SKU 变体名含平台后缀导致全量 0 匹配**（2026-06-23 L9）：鲸灵平台规格列格式为 `规格名;KGOS`，corrIndex 构建时去分号，但原匹配代码漏掉去分号，导致全部未命中。诊断信号：所有 ⚠️ 中 key 格式为 `货号::…;KGOS`。修复：`resolve-components.js` 匹配前加 `.replace(/;.*$/, '')`
 - **resolve-stock pageSize 硬编码导致翻页重复读取**（2026-06-23 L10）：ERP 库存状态页每页条数设为 200 时，硬编码 `PAGE_SIZE=50` 会导致翻 4 页每次读全量（如 181×4=724）。诊断信号：读取条数 = 期望条数 × 整数倍。修复：运行时读 `.el-pagination .el-select .el-input__inner` 的 value，fallback 50
+
+## §7 文档与历史边界
+
+- `README.md`：人类使用入口；只说明当前输入方式、标准流程和安全边界。
+- `SKILL.md`：Agent 代码与文档导航，不保存批次状态。
+- `tasks/todo.md`：只保留未完成事项；已完成批次不得继续占位。
+- `tasks/lessons.md`：只暂存尚未稳定的新发现；稳定规则迁入本文或专项文档后删除重复。
+- `docs/archive/`：单次批次事实和历史交接。历史运行时 JSON 不是真值，下一轮必须从实时页面和 ERP 重跑。

@@ -11,6 +11,7 @@
 
 | 文件 | 用途 | 何时读 |
 |------|------|--------|
+| `README.md` | 人类使用入口、输入方式与安全边界 | 首次了解项目时 |
 | `cli.js` | CLI 入口，所有命令的分发 | 执行命令时 |
 | `lib/product-catalog.js` | 运行时产品目录读取（含 clearCache()） | 涉及单品名称时 |
 | `lib/parse-cart-adds.js` | 读鲸灵加购 Excel → JSON | 解析输入数据时 |
@@ -26,11 +27,14 @@
 | `data/warehouse-stock.json` | 云仓库存（运行时生成） | 查询/调试时 |
 | `data/cart-adds.json` | 解析后的加购数据（运行时生成） | 查看/调试时 |
 | `data/allocation-result.json` | 分配结果中间数据（运行时生成） | 调试算法时 |
+| `docs/page-cart-scraping.md` | 鲸灵 SKU 明细页 → cart-adds.json 的字段、分页和验证契约 | 无 Excel、从页面读取加购数据时 |
+| `docs/archive/README.md` | 历史批次索引；只用于追溯，禁止复用作下一轮输入 | 查历史批次时 |
 
 ## PATHS（git 变更时同步更新）
 
 ```
 sku-calculator/
+  README.md
   CLAUDE.md
   SKILL.md
   cli.js
@@ -43,14 +47,17 @@ sku-calculator/
     resolve-components.js     # ERP 组合明细 + 动态生成 product-columns.json
     query-stock.js            # ERP 库存查询（依赖 resolve-components 先跑）
     validate-supplier.js      # 供应商ID校验（parse --supplier-id 参数）
-  data/                       # 全部运行时生成，已加入 .gitignore
-    gift-sku-config.json      # 手动编辑：满赠SKU固定分配配置
+  data/                       # 本地运行数据与输入配置，整个目录已加入 .gitignore
+    gift-sku-config.json      # 手动编辑：满赠SKU固定分配配置（本地、不提交）
     product-columns.json      # resolve-components 生成（ERP原名即displayName）
     sku-components.json       # resolve-components 生成（含赠品SKU条目）
     warehouse-stock.json      # query-stock 生成
     cart-adds.json            # parse 生成
     allocation-result.json    # calculate 生成
-  docs/INDEX.md
+  docs/
+    INDEX.md
+    page-cart-scraping.md
+    archive/README.md
   tasks/todo.md
   tasks/lessons.md
   test/allocate.test.js

@@ -15,6 +15,8 @@
 |------|---------|
 | `docs/INDEX.md` | 任何操作前 |
 | `SKILL.md` | 首次操作时 |
+| `docs/page-cart-scraping.md` | 无 Excel、从鲸灵商品数据页读取加购时 |
+| `docs/archive/README.md` | 仅在追溯历史批次时 |
 | `tasks/lessons.md` | 遇到问题时 |
 
 ## 教训沉淀流程
@@ -36,10 +38,11 @@
 
 | 目录 | 用途 |
 |------|------|
+| `README.md` | 人类使用入口与标准流程 |
 | `lib/` | 核心模块 |
 | `data/` | 运行时数据（除 gift-sku-config.json 手动维护外均为运行时产出） |
-| `docs/` | 操作规范 |
-| `tasks/` | 待办和教训 |
+| `docs/` | 操作规范、页面抓取流程与历史归档 |
+| `tasks/` | 当前待办和未稳定教训，不放历史交接 |
 | `test/` | 单元测试 |
 
 ## 核心命令
