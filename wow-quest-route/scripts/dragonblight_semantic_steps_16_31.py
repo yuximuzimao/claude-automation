@@ -45,14 +45,14 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
             "points": [
                 {"title": "眠月花园", "action": "↳ 做《阻碍协议》\n↳ 接《奇怪的设备》", "note": "《奇怪的设备》：来源怪为古拉莫什；只杀一次，同一具尸体可供五号分别拾取任务起始物，五号各自右键接任务。"},
                 {"title": "阿格玛之锤", "action": "大法师艾萨斯·夺日者的影像 → 交《阻碍协议》《奇怪的设备》 → 接《投影和计划》《魔法王国达拉然》", "note": "《魔法王国达拉然》只保留传送能力，本段不去达拉然。"},
-                {"title": "湍流之针", "action": "↳ 做《投影和计划》", "note": "《投影和计划》：共享：固定路线让五号一起进入并飞过脚本；已确认这样可同步完成，未验证其余四号留原地是否也能完成。"},
+                {"title": "湍流之针", "action": "↳ 做《投影和计划》", "note": "《投影和计划》：共享：五号一起进入并完成脚本飞行即可同步。"},
             ],
             "action_html": [
                 do_at("眠月花园", "阻碍协议"), accept_at("眠月花园·古拉莫什", "奇怪的设备"),
                 point_anchor("阿格玛之锤"), npc_actions("大法师艾萨斯·夺日者的影像", turns=("阻碍协议", "奇怪的设备"), accepts=("投影和计划", "魔法王国达拉然")),
                 do_at("湍流之针", "投影和计划"),
             ],
-            "note_html": notes_html(note_block("奇怪的设备", "来源怪为眠月花园的古拉莫什；击杀后拾取掉落的“奇怪的设备”，五号分别右键接任务。古拉莫什只杀一次，同一具尸体可供五号分别拾取任务起始物。"), note_block("投影和计划", status_span("共享") + "固定路线让五号一起进入并飞过脚本；已确认这样可同步完成，未验证其余四号留原地是否也能完成。")),
+            "note_html": notes_html(note_block("奇怪的设备", "来源怪为眠月花园的古拉莫什；击杀后拾取掉落的“奇怪的设备”，五号分别右键接任务。古拉莫什只杀一次，同一具尸体可供五号分别拾取任务起始物。"), note_block("投影和计划", status_span("共享") + "五号一起进入并完成脚本飞行即可同步。")),
         },
         18: {
             "title": "投影和计划 → 灿烂海岸 → 罗萨洛尔任务",
@@ -101,9 +101,9 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
             "title": "莫亚基港口：库纳尼 / 莫伊 / 飞行点",
             "summary": "到莫亚基向长者库纳尼交北风带来的引导并接《不要浪费》；猎手莫伊接《未来的种子》，五号开启飞行点。",
             "points": [
-                {"title": "莫亚基港口", "action": "长者库纳尼 → 交《前往莫亚基港口》 → 接《不要浪费》\n猎手莫伊 → 接《未来的种子》\n开飞行点：莫亚基港口（五号分别）", "note": "《未来的种子》每组首次经过做一次，不安排每日重复。"},
+                {"title": "莫亚基港口", "action": "长者库纳尼 → 交《前往莫亚基港口》 → 接《不要浪费》\n猎手莫伊 → 接《未来的种子》\n开飞行点：莫亚基港口", "note": "《未来的种子》每组首次经过做一次，不安排每日重复。"},
             ],
-            "action_html": [point_anchor("莫亚基港口"), npc_actions("长者库纳尼", turns=("前往莫亚基港口",), accepts=("不要浪费",)), npc_actions("猎手莫伊", accepts=("未来的种子",)), system_line("开飞行点：莫亚基港口（五号分别）", "ra-flightpoint")],
+            "action_html": [point_anchor("莫亚基港口"), npc_actions("长者库纳尼", turns=("前往莫亚基港口",), accepts=("不要浪费",)), npc_actions("猎手莫伊", accepts=("未来的种子",)), system_line("开飞行点：莫亚基港口", "ra-flightpoint")],
         },
         23: {
             "title": "飘雪林地 → 洛根 → 灵魂视界",
@@ -160,12 +160,12 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
             "title": "龙眠神殿：地面层 → 顶层任务",
             "summary": "首次到龙眠先开飞行点；地面层经塔里奥斯塔兹与部落大使接到红玉任务，再乘龙上顶层接黑曜石、翡翠和青铜任务。",
             "points": [
-                {"title": "龙眠神殿", "action": "开飞行点：龙眠神殿（五号分别）"},
+                {"title": "龙眠神殿", "action": "开飞行点：龙眠神殿"},
                 {"title": "龙眠地面层", "action": "塔里奥斯塔兹 → 交《拜见巨龙女王》 → 接《与你们的大使相谈》"},
                 {"title": "龙眠地面层", "action": "古拉克·石拳 → 交《与你们的大使相谈》 → 接《前往红玉巨龙圣地》"},
                 {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n纳莉丝 → 接《黑曜石巨龙圣地》\n伊萨里奥斯勋爵 → 接《鞭笞者的种子》\n克罗米 → 接《永恒之龙的秘密》", "note": "龙眠为多层结构；这一趟只接任务，不做圣地目标。"},
             ],
-            "action_html": [point_anchor("龙眠神殿"), system_line("开飞行点：龙眠神殿（五号分别）", "ra-flightpoint"), point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("拜见巨龙女王",), accepts=("与你们的大使相谈",)), npc_actions("古拉克·石拳", turns=("与你们的大使相谈",), accepts=("前往红玉巨龙圣地",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", accepts=("黑曜石巨龙圣地",)), npc_actions("伊萨里奥斯勋爵", accepts=("鞭笞者的种子",)), npc_actions("克罗米", accepts=("永恒之龙的秘密",))],
+            "action_html": [point_anchor("龙眠神殿"), system_line("开飞行点：龙眠神殿", "ra-flightpoint"), point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("拜见巨龙女王",), accepts=("与你们的大使相谈",)), npc_actions("古拉克·石拳", turns=("与你们的大使相谈",), accepts=("前往红玉巨龙圣地",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", accepts=("黑曜石巨龙圣地",)), npc_actions("伊萨里奥斯勋爵", accepts=("鞭笞者的种子",)), npc_actions("克罗米", accepts=("永恒之龙的秘密",))],
         },
         28: {
             "title": "害虫控制 → 峡谷追击 → 冰拳",
@@ -213,7 +213,7 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
                 {"title": "碧蓝巨龙圣地 → 龙眠中层", "action": "↳ 做《保卫龙眠神殿》\n德弗雷斯塔兹领主 → 交《保卫龙眠神殿》", "note": "《保卫龙眠神殿》：共享：巨龙/幼龙击杀在有效距离内同步；不共享：破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。"},
             ],
             "action_html": [point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("龙眠神殿的执事",), accepts=("通知女王",)), npc_actions("奥拉斯塔萨", turns=("古怪的暗示",), accepts=("集结的信号",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("克拉苏斯", turns=("红玉巨龙圣地的命运",)), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("通知女王",), accepts=("向德弗雷斯塔兹领主报到",)), system_line("乘龙：龙眠顶层 → 中层"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("向德弗雷斯塔兹领主报到",), accepts=("保卫龙眠神殿",)), do_at("碧蓝巨龙圣地", "保卫龙眠神殿"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("保卫龙眠神殿",))],
-            "note_html": notes_html(note_block("保卫龙眠神殿", status_span("共享") + "巨龙/幼龙击杀在有效距离内同步；" + status_span("不共享") + "破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。每组首次经过只做一次。")),
+            "note_html": notes_html(note_block("保卫龙眠神殿", status_span("共享") + "巨龙/幼龙击杀在有效距离内同步；" + status_span("不共享") + "破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。")),
         },
     }
 

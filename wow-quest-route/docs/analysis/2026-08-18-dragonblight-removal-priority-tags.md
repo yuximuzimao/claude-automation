@@ -1,9 +1,9 @@
 # 龙骨荒野任务剔除优先级逐任务打标
 
 - 本轮只打标，不自动删除龙骨荒野正式路线任务。
-- 当前可用任务池固定为142个：effective foundation中147个include_*非副本世界候选，扣除当前入口互斥的11979《牦牛人和牛头人》和因北风前置11916已删除而不可解锁的12033《萨鲁法尔的信》。
+- 当前可用任务池固定为143个：effective foundation中的include_*非副本世界候选仅扣除当前入口互斥的11979《牦牛人和牛头人》；12033《萨鲁法尔的信》因北风全清已完成11916《地狱咆哮的勇士》而恢复为可达任务。
 - 12791《魔法王国达拉然》仍属于可用任务池，只是当前路线尚未证明值得选择。
-- 链价值范围只计算当前145个可用任务中的龙骨荒野内后续；尚未规划的下一地图不提前算价值。
+- 链价值范围只计算当前143个可用任务中的龙骨荒野内后续；尚未规划的下一地图不提前算价值。
 - 进入P1–P4判定的任务：14；P分布：{'P1': 0, 'P2': 1, 'P3': 11, 'P4': 2}；A/B/C：{'A': 5, 'B': 3, 'C': 6}。
 
 ## P1–P4候选
@@ -14,7 +14,7 @@
 - **P3A** 《图尔凯的螃蟹陷阱》（12009）：拾取；当前任务有价值=是；有价值后续=0；第23步。
 - **P3A** 《战争的开销》（12303）：拾取；当前任务有价值=是；有价值后续=0；第36步。
 - **P3B** 《尤格-萨隆的黑血》（12039）：拾取；当前任务有价值=否；有价值后续=1；第4步。
-- **P3B** 《鞭笞者的种子》（12458）：掉落；当前任务有价值=是；有价值后续=1；第29步。
+- **P3B** 《鞭笞者的种子》（12458）：掉落；当前任务有价值=是；有价值后续=1；第27步。
 - **P3C** 《刨冰》（12045）：掉落；当前任务有价值=是；有价值后续=12；第10步。
 - **P3C** 《柔软的包装》（12046）：掉落；当前任务有价值=是；有价值后续=11；第11步。
 - **P3C** 《不要浪费》（11958）：掉落；当前任务有价值=是；有价值后续=8；第22步。
@@ -23,7 +23,7 @@
 - **P4B** 《夺取装备》（12209）：拾取；当前任务有价值=是；有价值后续=1；第36步。
 - **P4C** 《不会融化的东西》（12047）：拾取；当前任务有价值=是；有价值后续=9；第11步。
 
-## 全部142张任务卡
+## 全部143张任务卡
 
 - 第1步｜非P候选｜《横贯冰原》（11930）｜`include_cross_map_inbound`
 - 第1步｜非P候选｜《牦牛人中的牛头人》（11977）｜`include_leveling_local`
@@ -31,9 +31,9 @@
 - 第1步｜非P候选｜《部落的荣耀》（11980）｜`include_leveling_local`
 - 第2步｜非P候选｜《部落的血誓》（11983）｜`include_leveling_local`
 - 第2步｜非P候选｜《阿格玛之锤》（12008）｜`include_leveling_local`
+- 第3步｜非P候选｜《萨鲁法尔的信》（12033）｜`include_leveling_local`
 - 第3步｜非P候选｜《胜利将近……》（12034）｜`include_leveling_local`
 - 第3步｜非P候选｜《艾卓-尼鲁布的深渊》（12036）｜`include_leveling_local`
-- 第3步｜非P候选｜《部落的力量》（12053）｜`include_leveling_local`
 - 第3步｜非P候选｜《高级执行官需要你》（12488）｜`include_leveling_local`
 - 第4步｜非P候选｜《寻找线索》（11999）｜`include_leveling_local`
 - 第4步｜P3B｜《尤格-萨隆的黑血》（12039）｜`include_leveling_local`
@@ -43,10 +43,11 @@
 - 第4步｜非P候选｜《腐烂的器官》（12100）｜`include_leveling_local`
 - 第5步｜非P候选｜《阿尔萨斯的死敌》（12040）｜`include_leveling_local`
 - 第5步｜非P候选｜《失落的帝国》（12041）｜`include_leveling_local`
-- 第5步｜非P候选｜《血之魔典》（12057）｜`include_leveling_local`
 - 第6步｜P2A｜《天灾的装备》（12048）｜`include_leveling_local`
+- 第6步｜非P候选｜《部落的力量》（12053）｜`include_leveling_local`
 - 第6步｜非P候选｜《好医生……》（12101）｜`include_leveling_local`
 - 第6步｜非P候选｜《红玉丁香》（12102）｜`include_leveling_local`
+- 第7步｜非P候选｜《血之魔典》（12057）｜`include_leveling_local`
 - 第7步｜非P候选｜《冰雾的力量》（12063）｜`include_leveling_local`
 - 第7步｜非P候选｜《阿努巴尔的束缚》（12064）｜`include_leveling_local`
 - 第8步｜非P候选｜《大酋长归来》（12069）｜`include_leveling_local`
@@ -61,7 +62,6 @@
 - 第10步｜P3A｜《囤积矿石》（12044）｜`include_leveling_local`
 - 第10步｜P3C｜《刨冰》（12045）｜`include_leveling_local`
 - 第10步｜非P候选｜《害虫控制》（12144）｜`include_leveling_cross_map`
-- 第10步｜非P候选｜《古怪的暗示》（12147）｜`include_leveling_local`
 - 第10步｜非P候选｜《退回发件人》（12469）｜`include_leveling_local`
 - 第11步｜P3C｜《柔软的包装》（12046）｜`include_leveling_local`
 - 第11步｜P4C｜《不会融化的东西》（12047）｜`include_leveling_local`
@@ -88,9 +88,7 @@
 - 第19步｜非P候选｜《搜索因度雷村》（12106）｜`include_leveling_local`
 - 第20步｜非P候选｜《返回索艾身边》（12104）｜`include_leveling_local`
 - 第20步｜非P候选｜《野生动物的疫苗》（12111）｜`include_leveling_local`
-- 第20步｜非P候选｜《烈焰之地》（12450）｜`include_leveling_local`
 - 第22步｜P3C｜《不要浪费》（11958）｜`include_leveling_local`
-- 第22步｜非P候选｜《前往阿格玛之锤》（11996）｜`include_leveling_local`
 - 第22步｜非P候选｜《前往莫亚基港口》（12117）｜`include_cross_map_inbound`
 - 第23步｜非P候选｜《消灭洛根》（11959）｜`include_leveling_local`
 - 第23步｜P3A｜《图尔凯的螃蟹陷阱》（12009）｜`include_leveling_local`
@@ -103,27 +101,29 @@
 - 第25步｜非P候选｜《诱饵》（12016）｜`include_leveling_local`
 - 第26步｜非P候选｜《鱼钩上的肉》（12017）｜`include_leveling_local`
 - 第26步｜非P候选｜《拜见巨龙女王》（12122）｜`include_leveling_local`
+- 第27步｜非P候选｜《黑曜石巨龙圣地》（12447）｜`include_leveling_local`
+- 第27步｜P3B｜《鞭笞者的种子》（12458）｜`include_leveling_local`
+- 第27步｜非P候选｜《前往红玉巨龙圣地》（12461）｜`include_leveling_local`
+- 第27步｜非P候选｜《永恒之龙的秘密》（12470）｜`include_leveling_local`
+- 第27步｜非P候选｜《与你们的大使相谈》（12767）｜`include_leveling_local`
 - 第28步｜非P候选｜《峡谷追击》（12145）｜`include_leveling_local`
-- 第29步｜非P候选｜《集结的信号》（12148）｜`include_leveling_local`
-- 第29步｜非P候选｜《黑曜石巨龙圣地》（12447）｜`include_leveling_local`
-- 第29步｜P3B｜《鞭笞者的种子》（12458）｜`include_leveling_local`
-- 第29步｜非P候选｜《前往红玉巨龙圣地》（12461）｜`include_leveling_local`
-- 第29步｜非P候选｜《永恒之龙的秘密》（12470）｜`include_leveling_local`
-- 第29步｜非P候选｜《与你们的大使相谈》（12767）｜`include_leveling_local`
-- 第30步｜非P候选｜《白热化的战斗》（12448）｜`include_leveling_local`
-- 第30步｜非P候选｜《重归尘土》（12449）｜`include_leveling_local`
-- 第31步｜非P候选｜《红玉巨龙圣地的命运》（12419）｜`include_leveling_local`
-- 第31步｜非P候选｜《龙眠神殿的执事》（12769）｜`include_leveling_local`
-- 第32步｜非P候选｜《通知女王》（12124）｜`include_leveling_local`
-- 第32步｜非P候选｜《向德弗雷斯塔兹领主报到》（12435）｜`include_leveling_local`
-- 第33步｜非P候选｜《无路可逃》（12261）｜`include_leveling_local`
-- 第33步｜非P候选｜《驱逐天灾》（12262）｜`include_leveling_local`
-- 第33步｜非P候选｜《敌人的意图》（12263）｜`include_leveling_local`
+- 第28步｜非P候选｜《古怪的暗示》（12147）｜`include_leveling_local`
+- 第29步｜非P候选｜《白热化的战斗》（12448）｜`include_leveling_local`
+- 第29步｜非P候选｜《重归尘土》（12449）｜`include_leveling_local`
+- 第30步｜非P候选｜《红玉巨龙圣地的命运》（12419）｜`include_leveling_local`
+- 第30步｜非P候选｜《烈焰之地》（12450）｜`include_leveling_local`
+- 第30步｜非P候选｜《龙眠神殿的执事》（12769）｜`include_leveling_local`
+- 第31步｜非P候选｜《通知女王》（12124）｜`include_leveling_local`
+- 第31步｜非P候选｜《集结的信号》（12148）｜`include_leveling_local`
+- 第31步｜非P候选｜《向德弗雷斯塔兹领主报到》（12435）｜`include_leveling_local`
+- 第32步｜非P候选｜《无路可逃》（12261）｜`include_leveling_local`
+- 第32步｜非P候选｜《驱逐天灾》（12262）｜`include_leveling_local`
+- 第32步｜非P候选｜《敌人的意图》（12263）｜`include_leveling_local`
 - 第33步｜非P候选｜《扫荡诅咒教派》（12264）｜`include_leveling_local`
 - 第33步｜非P候选｜《污染的能量》（12265）｜`include_leveling_local`
+- 第33步｜非P候选｜《奈萨里奥的烈焰》（12267）｜`include_leveling_local`
+- 第34步｜非P候选｜《强大的猛犸人》（12149）｜`include_leveling_local`
 - 第34步｜非P候选｜《毁灭的故事》（12266）｜`include_leveling_local`
-- 第34步｜非P候选｜《奈萨里奥的烈焰》（12267）｜`include_leveling_local`
-- 第35步｜非P候选｜《强大的猛犸人》（12149）｜`include_leveling_local`
 - 第36步｜P3C｜《凋零药剂与你：如何自保》（12188）｜`include_leveling_local`
 - 第36步｜P3C｜《翡翠龙泪》（12200）｜`include_leveling_local`
 - 第36步｜非P候选｜《通缉：血色先锋军》（12205）｜`include_leveling_local`
@@ -154,7 +154,7 @@
 - 第45步｜非P候选｜《水火之灾》（12243）｜`include_leveling_local`
 - 第45步｜非P候选｜《祈祷之书》（12254）｜`include_leveling_local`
 - 第45步｜非P候选｜《完美的伪装》（12260）｜`include_leveling_local`
-- 第46步｜非P候选｜《狼狈不堪》（12274）｜`include_leveling_local`
+- 第45步｜非P候选｜《狼狈不堪》（12274）｜`include_leveling_local`
 - 第46步｜非P候选｜《寻找真相》（12283）｜`include_leveling_local`
 - 第47步｜非P候选｜《先发制人》（12285）｜`include_leveling_local`
 - 第48步｜非P候选｜《净化金萨卡拉》（12545）｜`include_leveling_local`
@@ -167,3 +167,4 @@
 - 第50步｜非P候选｜《红龙之翼》（12498）｜`include_leveling_local`
 - 第51步｜非P候选｜《返回安加萨》（12500）｜`include_leveling_local`
 - 第51步｜非P候选｜《黑暗的骚动》（13242）｜`include_cross_map_outbound`
+- 未进当前路线｜非P候选｜《前往阿格玛之锤》（11996）｜`include_leveling_local`

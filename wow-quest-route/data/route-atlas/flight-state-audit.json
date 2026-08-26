@@ -327,12 +327,12 @@
     },
     "storm": {
       "route_key": "storm",
-      "flight_count": 2,
+      "flight_count": 3,
       "violation_count": 0,
       "unknown_destination_count": 0,
       "flights": [
         {
-          "point_index": 94,
+          "point_index": 96,
           "label": "奥杜尔",
           "action": "开飞行点：奥杜尔（五号分别）\n系统飞行：奥杜尔 → 丹尼芬雷",
           "transport": "fly",
@@ -340,11 +340,13 @@
           "opened_before_arrival": [
             "K3",
             "丹尼芬雷",
+            "唐卡洛营地",
+            "布德克拉格庇护所",
             "格罗玛什坠毁点"
           ]
         },
         {
-          "point_index": 95,
+          "point_index": 97,
           "label": "丹尼芬雷",
           "action": "约库姆国王 → 交《清算之战》",
           "transport": "taxi",
@@ -352,7 +354,24 @@
           "opened_before_arrival": [
             "K3",
             "丹尼芬雷",
+            "唐卡洛营地",
             "奥杜尔",
+            "布德克拉格庇护所",
+            "格罗玛什坠毁点"
+          ]
+        },
+        {
+          "point_index": 134,
+          "label": "唐卡洛营地",
+          "action": "系统飞行：布德克拉格庇护所 → 唐卡洛营地",
+          "transport": "taxi",
+          "destination_hub": "唐卡洛营地",
+          "opened_before_arrival": [
+            "K3",
+            "丹尼芬雷",
+            "唐卡洛营地",
+            "奥杜尔",
+            "布德克拉格庇护所",
             "格罗玛什坠毁点"
           ]
         }
@@ -377,10 +396,8 @@
       "violations": [],
       "unknown_destinations": [],
       "final_opened_flight_points": [
-        "北伐军之峰",
         "暗影拱顶",
-        "死亡高地",
-        "银色前线基地"
+        "死亡高地"
       ]
     }
   }

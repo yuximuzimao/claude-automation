@@ -8,6 +8,18 @@
     "service_minutes_exclude_inter_hub_route_travel": true,
     "objective_review_resolution_does_not_imply_fivebox_resolution": true
   },
+  "verified_hidden_dependencies": {
+    "13036": {
+      "pre_any": [13419],
+      "basis": "user_live_2026_08_25_no_cold_weather_flying_13036_and_its_three_children_unavailable",
+      "note": "Questie omits this edge on the current server. Treat 13419 as a hard hidden prerequisite before computing Icecrown reachability."
+    },
+    "13117": {
+      "pre_any": [13106],
+      "basis": "wotlk_task_chain_sources_require_blackwatch_before_where_are_they_coming_from",
+      "note": "Questie effective data omits this edge; WotLK task-chain sources list Blackwatch as the required predecessor."
+    }
+  },
   "manual_service_minutes": {
     "12810": {"minutes": 7.0, "range": [4.0, 12.0], "basis": "ten_shark_blood_pool_uses_per_character_kills_shared_interactions_personal"},
     "12847": {"minutes": 8.0, "range": [4.0, 20.0], "basis": "archbishop_landgren_kill_single_gate_per_kill_interrogation_script_fivebox_gate_credit_unresolved"},

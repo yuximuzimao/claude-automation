@@ -1,0 +1,82 @@
+{
+  "status": "pass_current_planned_icecrown_endpoint_revalidate_if_endpoint_changes",
+  "validator": "map_transition_contract",
+  "previous_zone": "冰冠冰川",
+  "previous_planned_endpoint": "奥格瑞姆之锤",
+  "previous_endpoint_state": "current_formal_icecrown_planned_endpoint_but_live_run_not_finished",
+  "transport_chain": [
+    {
+      "from": "奥格瑞姆之锤",
+      "to": "银色比武场",
+      "action": "K3借用双足飞龙自主飞行",
+      "proof": "loaner mount is valid in Icecrown; Icecrown step 1 already opens Argent Tournament Grounds flight point"
+    },
+    {
+      "from": "银色比武场",
+      "to": "达拉然",
+      "action": "系统飞行",
+      "proof": "Argent Tournament Grounds has a WotLK flight-path connection to Dalaran and is already opened in the current Icecrown route"
+    },
+    {
+      "from": "达拉然·大法师伯塔鲁斯",
+      "to": "索拉查盆地·蛮藤谷",
+      "action": "12521任务脚本运输",
+      "proof": "12521 objective text explicitly instructs talking to Pentarus to leave for Sholazar and then speaking with Monte in Wildgrowth Mangal"
+    }
+  ],
+  "inbound_bridge_task": {
+    "quest_id": 12521,
+    "name": "赫米特·奈辛瓦里哪去了？",
+    "assigned_zone_id": 3711,
+    "assigned_zone_name": "索拉查盆地",
+    "expected_state": "already_accepted_and_carried_from_dalaran",
+    "objective_text_zh": "当你准备好动身前往索拉查盆地时，就与大法师伯塔鲁斯谈一谈。到达索拉查盆地之后，与蛮藤谷的蒙特谈一谈。",
+    "extra_objectives": [
+      {
+        "index": 1,
+        "text": "Take a ride to Sholazar Basin",
+        "objective_index": 0,
+        "coordinates_by_zone": {},
+        "references": [
+          {
+            "entity_type": "npc",
+            "entity_id": 28160,
+            "name": "大法师伯塔鲁斯",
+            "min_level": 80,
+            "max_level": 80,
+            "min_health": 37800,
+            "max_health": 37800,
+            "rank": 1,
+            "spawn_count": 1,
+            "zones": [
+              4395
+            ],
+            "representative_by_zone": {
+              "4395": {
+                "x": 68.55,
+                "y": 42.05,
+                "spawn_count": 1,
+                "min_x": 68.55,
+                "max_x": 68.55,
+                "min_y": 42.05,
+                "max_y": 42.05
+              }
+            }
+          }
+        ],
+        "route_zones": [
+          4395
+        ]
+      }
+    ]
+  },
+  "known_sholazar_entry": {
+    "origin_npc": "大法师伯塔鲁斯",
+    "origin_zone": "达拉然",
+    "transport": "12521任务脚本运输",
+    "landing_area": "蛮藤谷",
+    "first_contact": "蒙特",
+    "basis": "12521 objective text: talk to Pentarus when ready; after arrival speak with Monte in Wildgrowth Mangal"
+  },
+  "revalidation_condition": "if the final Icecrown live-run endpoint changes from Orgrim's Hammer, revalidate only the first leg before freezing Sholazar publication"
+}

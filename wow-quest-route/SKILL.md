@@ -5,7 +5,7 @@
 1. 先读 `tasks/todo.md`，只确认当前工作流和下一步，不加载历史。
 2. 读 `docs/INDEX.md`，它只负责文档/数据入口导航，不承载完整规则。
 3. **继续当前首组实跑**：读 `docs/verified-routes/CURRENT.md`；只有CURRENT明确要求阶段背景时，再定向读 `docs/archive/neat/` 中对应的最近NEAT，不批量读历史。
-4. **生成/修订/审计任务路线**：读 `docs/rules/README.md`，只加载当前任务对应规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`、`ERROR-BOOK.md` 和相关任务卡。
+4. **生成/修订/审计任务路线**：读 `docs/rules/README.md`，只加载当前任务对应规则；再读 `docs/verified-routes/ROUTE-DESIGN-PROCESS.md`，按本轮风险定向检索 `ERROR-BOOK.md` 相关错题并读取相关任务卡，不默认全文加载错题本。
 5. **Route Atlas路线数据/裁剪/优化**：读 `docs/rules/route-atlas-optimization.md` + `docs/rules/timing-and-benchmarking.md`；任何路线顺序、交通、步骤或任务块变化都必须同步重算受影响估时。只有同时改玩家任务备注时再加读 `execution-and-mechanics.md`。
 6. **Route Atlas HTML/地图/UI**：读 `docs/rules/route-atlas-ui-and-assets.md`；不要为了前端改动加载全部路线优化历史。
 7. **视频拆解**：只读 `docs/video-extraction/README.md`、`docs/video-extraction/CURRENT.md` 和上一集检查点；历史NEAT只从 `docs/archive/video/` 定向读取。
@@ -39,6 +39,8 @@
 | `docs/video-extraction/README.md` | 视频拆解方法 | 处理视频时 |
 | `docs/video-extraction/CURRENT.md` | 视频下一集恢复点 | 继续视频时 |
 | `cli.py` | 项目命令入口 | 运行生成/解析命令时 |
+| `scripts/README.md` | 现役脚本与历史阶段脚本的边界 | 新增/整理builder、audit、迁移脚本时 |
+| `tests/README.md` | 永久不变量 / 当前开发验证 / 路线快照三类测试的选择规则 | 运行或修改测试前 |
 | `lib/questie_source.py` | Questie任务/中文名/经验数据加载 | 更换插件来源或字段时 |
 | `lib/questie_lua.py` | Questie Lua解析 | 解析失败/扩字段时 |
 | `data/journey/current-paladin.json` | 脱敏人物历程 | 对比首组实际顺序时 |
@@ -49,7 +51,7 @@
 `用户现场反馈/Questie → CURRENT真值 → 只打开受影响局部路线 → 修执行稿 → observations/任务卡 → 必要时NEAT`
 
 ### 新建或修订路线
-`CURRENT → rules路由 → ROUTE-DESIGN-PROCESS → ERROR-BOOK → task-library/Questie → 玩家冷启动复走 → 发布`
+`CURRENT → rules路由 → ROUTE-DESIGN-PROCESS → task-library/Questie → 任务簇插入时闭合 → 局部修改只重放受影响窗口 → 最终薄审查 → 发布`
 
 ### Route Atlas
 `任务事实/当前状态 → workbench-routes.json → 逻辑步骤/备注审计 → 重算受影响步骤/整图时间 → build_route_atlas_workbench.py → 唯一route-atlas-workbench.html → 测试/JS检查`
@@ -70,6 +72,10 @@
 - `docs/archive/` 是历史考古区，不属于日常活跃知识；除非CURRENT/索引明确指向、当前任务需要回溯，或本轮刚修改了其中某文件，否则不批量读取。
 - 不一次性加载全部规则、全部NEAT、全部任务卡；按当前任务渐进式读取。
 - 不把临时教训长期堆在 `tasks/lessons.md`；稳定后迁到规则/错题/任务卡/observations。
+- 已完成/已验证路线默认冻结；用户只授权文本或单点修正时，不因审计/测试顺手重排其它结构。发现新结构疑点先报告并等确认。
+- 验证只服务当前目标；固定步骤数/点数/精确文案/固定任务位置等快照测试不能反向覆盖用户实测、CURRENT和现役规则。
+- 任务簇插入时就闭合前置/可接性/交通/同区合并/交付解锁；局部修改只人工重放受影响状态窗口。禁止把这些已经闭合的事实再组织成发布前固定全量测试链。
+- 历史P级、旧阶段脚本和已被替代的派生结论只用于考古；若仍在现役builder/默认审计链中生效，按架构缺陷处理。
 - 不提交原始Questie/WTF/账号登录数据；先脱敏。
 - 视频第一遍只提事实，不把剪辑缺口补成路线事实。
 
@@ -87,6 +93,7 @@
 | `docs/rules/` | 分主题永久规则；按需加载 |
 | `docs/verified-routes/` | CURRENT、SOP、错题本、仍有效/可复用的已验证路线 |
 | `docs/archive/` | 旧方案、一次性分析、NEAT、视频历史；默认不进入日常全文加载 |
+| `docs/archive/scripts/` | 已退出当前实现链的阶段性脚本；只允许定向考古，不得作为现役执行入口 |
 | `docs/task-library/` | 单任务知识 |
 | `docs/video-extraction/` | 当前视频事实提取工作流 |
 | `tasks/` | 当前待办 + 尚未迁移的临时教训 |

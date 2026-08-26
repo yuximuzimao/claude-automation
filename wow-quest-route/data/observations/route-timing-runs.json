@@ -499,6 +499,49 @@
       },
       "timing_use": "final_state_anchor_only_not_clean_total_duration",
       "status": "dragonblight_first_group_closed"
+    },
+    {
+      "date": "2026-08-25/26",
+      "route_key": "storm",
+      "run_kind": "first_group_live_steps_13_20",
+      "time_precision": "exact_minute_with_explicit_pause",
+      "effective_start_local": "2026-08-25T19:47:00+08:00",
+      "effective_end_local": "2026-08-26T00:00:00+08:00",
+      "wall_clock_minutes": 253,
+      "explicit_pause_minutes": 3,
+      "actual_minutes": 250,
+      "route_window": "风暴峭壁玩家步骤13开始→步骤20完成；步骤13开始时《土灵的誓言》已完成、《洛肯的副官》只差符文巨人杜洛恩。",
+      "step_actuals_minutes": [
+        {"step": 13, "actual": 9, "endpoint_local": "2026-08-25T19:56:00+08:00"},
+        {"step": 14, "actual": 14, "endpoint_local": "2026-08-25T20:10:00+08:00"},
+        {"step": 15, "actual": 90, "endpoint_local": "2026-08-25T21:40:00+08:00", "contaminated": true, "note": "《寒风的声音》有人抢怪，且首跑只在较小区域找怪；实际刷新范围更大。下次优先飞去其它刷新点，不把90分钟回写为clean baseline。"},
+        {"step": 16, "actual": 22, "endpoint_local": "2026-08-25T22:02:00+08:00"},
+        {"step": 17, "actual": 41, "endpoint_local": "2026-08-25T22:43:00+08:00", "subcheckpoints": [{"local": "22:27", "state": "《稀有的土壤》完成并交付"}, {"local": "22:34", "state": "《救死扶伤》《反击》完成并交付"}, {"local": "22:43", "state": "奴隶/矿石任务完成后炉石回布德克拉格"}]},
+        {"step": 18, "actual": 22, "endpoint_local": "2026-08-25T23:05:00+08:00"},
+        {"step": 19, "actual": 29, "endpoint_local": "2026-08-25T23:34:00+08:00", "contaminated": true, "note": "钢铁巨像有人抢怪；单号骑被驯服的冰虫翻车后改成五号一起打。首跑还把炉石误用在《巨像的威胁》后，复用路线改为《风暴之心》完成后再炉石。"},
+        {"step": 20, "actual": 23, "wall_clock_minutes": 26, "explicit_pause_before_step_minutes": 3, "endpoint_local": "2026-08-26T00:00:00+08:00"}
+      ],
+      "live_mechanic_confirmations": [
+        "《侵犯领土》《土灵的誓言》《洛肯的副官》《清算之战》共享。",
+        "《追踪罪犯》Boss只打一遍；追踪气味源头与通讯器使用不共享，五号分别操作。",
+        "《联络布莱恩》不共享，五号分别使用通讯器；连续快速交互存在不计完成风险。",
+        "《拼图游戏》不共享；《采集数据》共享；《诺甘农之壳》Boss一次、同尸体五号依次拾取。",
+        "《追查诺甘农之核》固定文档五号分别但可连续拾取；《铸造钥石》共享。",
+        "《稀有的土壤》不共享且悬崖上下层搜索成本高；《救死扶伤》《反击》《雷铸铁矮人的奴隶》共享；《黑暗的矿石》不共享。",
+        "《洛肯的礼物》《护甲板的秘密》共享；黑暗护甲板起始物掉落后同一尸体五号可分别拾取，后续4份样品共享。",
+        "《摧毁熔炉！》《风暴之心》《错误的时间流》共享；《巨像的威胁》固定文档五号分别但可连续拾取；《英雄的装备》掉落后同尸体五号连续拾取。",
+        "后续回忆补齐：《完美的计划》《热身赛》《进入利齿之坑》《时间的扰动》《改变风向》共享；《见证者与英雄》三份卷轴五号分别交互但同一卷轴可连续切号点击；《维拉努斯》龙卵不共享且同一龙卵不能连续拾取；《黑暗的护甲板》后续4份样品共享。"
+      ],
+      "route_corrections_from_this_block": [
+        "《永冻之冰》因永冻碎片找不到已放弃，不再作为正式路线必做覆盖。",
+        "造物者圣台后先开布德克拉格飞行点并直接接《稀有的土壤》，因此《奥杜尔的土灵》面包屑自然失效。",
+        "雷暴台地附近提前开唐卡洛飞行点、做《见证者与英雄》并接《雷蹄的记忆》，因此《见证者夏拉托尔》面包屑自然失效。",
+        "布德克拉格正式任务块开始时绑定炉石；奴隶/矿石完成后炉石回。",
+        "《巨像的威胁》后正常飞回交接；《风暴之心》完成后再炉石。",
+        "《风暴之心》需要明确奥迪斯洞口和下层路径；钢铁巨像建议五号一起骑冰虫执行。"
+      ],
+      "timing_use": "steps_13_20_scoped_actual; contaminated steps retained as observed wall-clock, not clean baseline",
+      "status": "scoped_actual_recorded_with_learning_and_competition"
     }
   ]
 }

@@ -1,0 +1,99 @@
+{
+  "status": "pass",
+  "repeated_exact_instance_count": 6,
+  "unresolved_exact_instances": [],
+  "harmful_split_count": 0,
+  "player_step_merge_count": 2,
+  "reviews": [
+    {
+      "spatial_instance": "dorian_camp",
+      "windows": [
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "verdict": "forced_internal_returns_merge_player_step",
+      "reason": "12603完成后才开12607/58/81；12607送猛犸回营后才开12614。三次回营都是真前置，但最终前端合并为一个连续多里安任务块。"
+    },
+    {
+      "spatial_instance": "frenzyheart_hill",
+      "windows": [
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W13"
+      ],
+      "verdict": "forced_hub_chain",
+      "reason": "12528→12529/30→12533/34→12532→12531/35→12536逐层解锁，不能一次进场预做。"
+    },
+    {
+      "spatial_instance": "mistwhisper_village",
+      "windows": [
+        "W12",
+        "W16",
+        "W19"
+      ],
+      "verdict": "forced_phase_and_objective_return",
+      "reason": "W12是狂心阶段脚本到村；W16切神谕后才解锁12575/76；W19必须做完北部目标后回来交。"
+    },
+    {
+      "spatial_instance": "nesingwary_camp",
+      "windows": [
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W13"
+      ],
+      "verdict": "forced_hub_chain",
+      "reason": "多条奈辛瓦里任务链必须回营地交前一环再解锁下一环；W13还承担已优化的延迟交12569/12645并接12595。"
+    },
+    {
+      "spatial_instance": "rainspeaker_canopy",
+      "windows": [
+        "W14",
+        "W15",
+        "W16",
+        "W19",
+        "W21"
+      ],
+      "verdict": "forced_hub_chain",
+      "reason": "12570后分层解锁12571/72→12573→12574，之后12577和12695又分别从北部/阿图里斯链回交。"
+    },
+    {
+      "spatial_instance": "rivers_heart",
+      "windows": [
+        "W08",
+        "W16"
+      ],
+      "verdict": "optimized_delayed_turn",
+      "reason": "W08首次开Hub并做维克/塔玛拉；12654故意延后到W16做12573时顺交，避免从匹奇区域专门折返。"
+    },
+    {
+      "family": "swindlegrins_dig",
+      "windows": [
+        "W03",
+        "W04"
+      ],
+      "verdict": "forced_prerequisite_repeat",
+      "reason": "12525《工头斯温迪格林》只有12524回营交付后才能接，所以挖掘场必须二次进入；第一次已把零件、15杀、戒指、护送全部合并。"
+    },
+    {
+      "family": "final_east_campaign",
+      "windows": [
+        "W20",
+        "W21"
+      ],
+      "verdict": "merge_player_step_continuous_campaign",
+      "reason": "苔行东部服务完必须回莫乌德交12579才能接12581；随后立即去阿图里斯，不离开东部任务区。最终玩家步骤合并展示，不能表现成两次独立远征。"
+    }
+  ],
+  "post_insertion_changes": [
+    "12683《燃烧的唾液》已从错误的猛犸合并回路回插到W17始祖龙第一外圈。",
+    "12607《驯服猛犸象》改为抓最近中立猛犸后立即送回，不携带慢速载具绕路。"
+  ]
+}

@@ -161,19 +161,22 @@ def apply_dragonblight_semantic_overrides(points: list[list[Any]], groups: list[
             "note_html": notes_html(note_block("部落的血誓", status_span("共享") + "主控逐个与牦牛难民对话即可同步全队。")),
         },
         3: {
-            "title": "阿格玛之锤：主线 → 飞行点 / 炉石",
-            "summary": "向阿格玛大王交入口任务；五号开启飞行点并绑定炉石，再由军士长祖托克接深渊与怨毒镇引导。《萨鲁法尔的信》因北风前置已删除，不进入执行稿。",
+            "title": "阿格玛之锤：主线 → 飞行点 / 炉石 → 萨鲁法尔的信",
+            "summary": "向阿格玛大王交入口任务；五号开启飞行点并绑定炉石，向信使托弗斯原地完成《萨鲁法尔的信》，再由军士长祖托克接深渊与怨毒镇引导。",
             "points": [
                 {"title": "阿格玛之锤", "action": "阿格玛大王 → 交《阿格玛之锤》 → 接《胜利将近……》"},
-                {"title": "阿格玛之锤·飞行点 / 旅店", "action": "开飞行点：阿格玛之锤（五号分别）\n炉石绑定：阿格玛之锤（五号分别）"},
+                {"title": "阿格玛之锤·飞行点 / 旅店", "action": "开飞行点：阿格玛之锤\n炉石绑定：阿格玛之锤"},
+                {"title": "阿格玛之锤·信使托弗斯", "action": "信使托弗斯 → 接《萨鲁法尔的信》\n↳ 做《萨鲁法尔的信》\n信使托弗斯 → 交《萨鲁法尔的信》", "note": "《萨鲁法尔的信》：阅读信件并摧毁，然后原地与信使托弗斯交付。"},
                 {"title": "阿格玛之锤", "action": "军士长祖托克 → 交《胜利将近……》 → 接《艾卓-尼鲁布的深渊》《高级执行官需要你》", "note": "《高级执行官需要你》长期携带，到怨毒镇自然交付。"},
             ],
             "action_html": [
                 point_anchor("阿格玛之锤"), npc_actions("阿格玛大王", turns=("阿格玛之锤",), accepts=("胜利将近……",)),
-                system_line("开飞行点：阿格玛之锤（五号分别）", "ra-flightpoint"), system_line("炉石绑定：阿格玛之锤（五号分别）", "ra-hearth"),
+                system_line("开飞行点：阿格玛之锤", "ra-flightpoint"), system_line("炉石绑定：阿格玛之锤", "ra-hearth"),
+                npc_actions("信使托弗斯", accepts=("萨鲁法尔的信",)), do_at("阿格玛之锤·信使托弗斯", "萨鲁法尔的信"), npc_actions("信使托弗斯", turns=("萨鲁法尔的信",)),
                 npc_actions("军士长祖托克", turns=("胜利将近……",), accepts=("艾卓-尼鲁布的深渊", "高级执行官需要你")),
             ],
-            "note_html": notes_html(note_block("高级执行官需要你", "长期携带，到怨毒镇自然交付。")),
+            "note_html": notes_html(note_block("萨鲁法尔的信", "阅读信件并摧毁，然后原地与信使托弗斯交付。"), note_block("高级执行官需要你", "长期携带，到怨毒镇自然交付。")),
+            "timingTaskNames": ["萨鲁法尔的信"],
         },
         4: {
             "title": "阿格玛之锤：黑血 / 通缉 / 腐烂器官 / 寻找线索",

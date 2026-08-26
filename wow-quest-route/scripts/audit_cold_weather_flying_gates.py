@@ -6,12 +6,27 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 UNIVERSE = ROOT / "data/route-atlas/northrend-task-universe.json"
+ICECROWN_OVERRIDES = ROOT / "data/route-atlas/icecrown-task-overrides.json"
 OUT = ROOT / "data/route-atlas/cold-weather-flying-gate-audit.json"
 
 # Current no-Cold-Weather-Flying master-axis zones where the K3 loaner is intended to provide
 # physical flight capability. A cold-weather gate means the NPC checks the learned skill itself,
 # so the loaner cannot satisfy that quest's availability condition.
 ROUTE_ZONES = {67: "风暴峭壁", 210: "冰冠冰川", 3711: "索拉查盆地", 4395: "达拉然"}
+
+# Some mandatory chains temporarily leave the Northrend universe. 12548《源生石像》
+# sends the player through the Sholazar waygate into Un'Goro, where 12547《激活符文》
+# is mandatory before 12797《界门的回程》 becomes available. Because 12547 is outside
+# the Northrend task universe, normal dependency recursion cannot see this bridge.
+# Verified against the WotLK quest chain; once 12548 is blocked, 12797 is blocked too,
+# and ordinary recursion then blocks its Sholazar descendants such as 12546《力挽狂澜》.
+EXTERNAL_DEPENDENCY_BRIDGES = {
+    12797: {
+        "blocked_if": 12548,
+        "via": [12547],
+        "basis": "12548 -> Un'Goro 12547 -> 12797 -> Sholazar",
+    },
+}
 
 
 def dependency_blocked(task: dict[str, Any], blocked: set[int]) -> bool:
@@ -25,7 +40,23 @@ def dependency_blocked(task: dict[str, Any], blocked: set[int]) -> bool:
 
 def main() -> None:
     universe = json.loads(UNIVERSE.read_text(encoding="utf-8"))
-    tasks = {int(task["quest_id"]): task for task in universe.get("tasks", [])}
+    tasks = {int(task["quest_id"]): dict(task) for task in universe.get("tasks", [])}
+    overrides = json.loads(ICECROWN_OVERRIDES.read_text(encoding="utf-8"))
+    for qid_text, override in (overrides.get("verified_hidden_dependencies") or {}).items():
+        qid = int(qid_text)
+        task = tasks.get(qid)
+        if not task:
+            continue
+        for field in ("pre_any", "pre_all", "parent_active"):
+            if field not in override:
+                continue
+            merged = [int(x) for x in (task.get(field) or [])]
+            for dep in override.get(field) or []:
+                dep = int(dep)
+                if dep not in merged:
+                    merged.append(dep)
+            task[field] = merged
+        task["verified_hidden_dependency"] = override
 
     direct = {
         qid
@@ -39,9 +70,22 @@ def main() -> None:
     }
 
     blocked = set(horde_direct)
+    external_bridge_blocks: list[dict[str, Any]] = []
     changed = True
     while changed:
         changed = False
+        for downstream, bridge in EXTERNAL_DEPENDENCY_BRIDGES.items():
+            upstream = int(bridge["blocked_if"])
+            if upstream in blocked and downstream in tasks and downstream not in blocked:
+                blocked.add(downstream)
+                external_bridge_blocks.append({
+                    "quest_id": downstream,
+                    "name": tasks[downstream].get("name"),
+                    "blocked_if": upstream,
+                    "via": [int(x) for x in bridge.get("via", [])],
+                    "basis": bridge.get("basis"),
+                })
+                changed = True
         for qid, task in tasks.items():
             if qid in blocked or task.get("assigned_zone_id") not in ROUTE_ZONES:
                 continue
@@ -78,6 +122,7 @@ def main() -> None:
         "all_direct_gate_ids": sorted(direct),
         "horde_paladin_direct_gate_ids": sorted(horde_direct),
         "horde_paladin_blocked_ids_with_exclusive_descendants": sorted(blocked),
+        "external_dependency_bridge_blocks": external_bridge_blocks,
         "direct_gates": [row(qid, "direct_cold_weather_flying_gate") for qid in sorted(horde_direct)],
         "dependency_blocked": [
             row(qid, "exclusive_dependency_on_cold_weather_flying_blocked_chain")

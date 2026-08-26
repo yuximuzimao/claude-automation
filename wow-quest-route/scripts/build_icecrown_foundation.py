@@ -214,6 +214,9 @@ def main() -> None:
     spatial_resolutions = {int(qid): str(value) for qid, value in (overrides.get("manual_spatial_resolutions") or {}).items()}
     fivebox_resolved = {int(qid): str(value) for qid, value in (overrides.get("fivebox_resolved") or {}).items()}
     evidence_notes = {int(qid): str(value) for qid, value in (overrides.get("evidence_notes") or {}).items()}
+    hidden_dependencies = {
+        int(qid): value for qid, value in (overrides.get("verified_hidden_dependencies") or {}).items()
+    }
     universe_by_id = {int(task["quest_id"]): task for task in universe.get("tasks", [])}
     assigned = [
         dict(task)
@@ -242,6 +245,21 @@ def main() -> None:
         task["scope_origin"] = "cross_zone_chain_bridge" if qid in bridge_ids else "assigned_icecrown"
         if qid in bridge_ids:
             task["scope_bridge_reason"] = CROSS_ZONE_CHAIN_BRIDGE_IDS[qid]
+        if qid in hidden_dependencies:
+            override = hidden_dependencies[qid]
+            for field in ("pre_any", "pre_all", "parent_active"):
+                if field not in override:
+                    continue
+                merged = [int(x) for x in (task.get(field) or [])]
+                for dep in override.get(field) or []:
+                    dep = int(dep)
+                    if dep not in merged:
+                        merged.append(dep)
+                task[field] = merged
+            task["verified_hidden_dependency"] = {
+                "basis": override.get("basis"),
+                "note": override.get("note"),
+            }
         if qid in service_overrides:
             override = service_overrides[qid]
             task["intrinsic_service_time"] = {
@@ -438,13 +456,15 @@ def main() -> None:
     natural_airship = by_id.get(NATURAL_AIRSHIP_QUEST_ID) or {}
     blocked_transport = by_id.get(BLOCKED_TRANSPORT_QUEST_ID) or {}
     entry_payload = {
-        "status": "primary_entry_frozen_shadow_vault_probe_deferred_to_natural_airship_visit",
+        "status": "storm_to_argent_tournament_geographic_entry_then_reachable_root_scan",
         "zone": {"id": ZONE_ID, "name": ZONE_NAME},
         "current_level": CURRENT_LEVEL,
         "transport": {
             "cold_weather_flying_learned": False,
             "loaned_wind_rider_available": True,
-            "action": "use the loaned wind rider to enter Argent Vanguard first; do not chase the moving airship as the first hub",
+            "from_zone": "风暴峭壁",
+            "first_geographic_region": "银色比武场",
+            "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; do not route through Argent Vanguard",
         },
         "blocked_transport_quest": {
             "quest_id": BLOCKED_TRANSPORT_QUEST_ID,
@@ -452,13 +472,15 @@ def main() -> None:
             "scope_status": blocked_transport.get("scope_status"),
             "cold_weather_flying_gate": blocked_transport.get("cold_weather_flying_gate"),
         },
-        "primary_entry": {
+        "blocked_argent_vanguard_root": {
             "quest_id": PRIMARY_ENTRY_QUEST_ID,
             "name": primary_entry.get("name"),
             "scope_status": primary_entry.get("scope_status"),
+            "scope_reasons": primary_entry.get("scope_reasons") or [],
+            "pre_any": primary_entry.get("pre_any") or [],
             "starts": start_rows(primary_entry),
             "next_quest": primary_entry.get("next_quest"),
-            "reason": "independent Argent Vanguard root; geographically natural first hub and its chain later unlocks the Horde airship breadcrumb 13224",
+            "reason": "verified hidden dependency on 13419; the entire exclusive descendant chain is unreachable while Cold Weather Flying remains unlearned",
         },
         "skipped_breadcrumb": {
             "quest_id": SKIPPED_BREADCRUMB_QUEST_ID,
@@ -468,9 +490,11 @@ def main() -> None:
             "decision": "skip_permanently",
             "reason": "becomes unavailable after starting 13036 and is only 3.24G per character from max-level XP conversion; not worth a dedicated moving-airship detour before Argent Vanguard",
         },
-        "natural_airship_entry": {
+        "blocked_natural_airship_breadcrumb": {
             "quest_id": NATURAL_AIRSHIP_QUEST_ID,
             "name": natural_airship.get("name"),
+            "scope_status": natural_airship.get("scope_status"),
+            "scope_reasons": natural_airship.get("scope_reasons") or [],
             "pre_any": natural_airship.get("pre_any") or [],
             "starts": start_rows(natural_airship),
             "finishes": [
@@ -493,8 +517,8 @@ def main() -> None:
             "required_spell": entry_task.get("required_spell"),
             "cold_weather_flying_gate": entry_task.get("cold_weather_flying_gate"),
             "starts": start_rows(entry_task),
-            "live_check": "when quest 13224 naturally brings the group to Orgrim's Hammer, check whether Koltira Deathweaver offers quest 12892",
-            "if_missing": "record the live blocker; do not infer 13419 as a hard prerequisite solely from old public comments",
+            "live_check": "after entering Icecrown from Storm Peaks at the Argent Tournament Grounds, reach Orgrim's Hammer directly with the loaned mount and check whether Koltira Deathweaver offers quest 12892",
+            "if_missing": "record the real blocker and remove the Shadow Vault component from the executable route; do not unlock other airship tasks merely because their NPCs are present",
         },
         "independent_root_count": len(roots),
         "independent_roots": roots,
@@ -605,11 +629,11 @@ def main() -> None:
         "",
         "## 入口决策",
         "",
-        f"- 13419《{blocked_transport.get('name')}》：{blocked_transport.get('scope_status')}。继续绕过该任务，但借用双足飞龙先去银色前线基地，不追移动飞艇。",
-        f"- 首Hub：13036《{primary_entry.get('name')}》，无显式前置，起点={start_rows(primary_entry)}。完成后同区打开13008/13039/13040三任务簇。",
-        f"- 13227《{skipped_breadcrumb.get('name')}》：80级XP折金{((skipped_breadcrumb.get('level_80_economy') or {}).get('xp_bonus_money_gold_decimal'))}G/角色；会因先做13036失效。为它专程追飞艇再折回银色前线基地不划算，正式路线永久跳过。",
-        f"- 13224《{natural_airship.get('name')}》由pre_any={natural_airship.get('pre_any') or []}自然解锁，届时第一次登上奥格瑞姆之锤。",
-        f"- 12892《{entry_task.get('name')}》：Questie effective关系 pre_any={entry_task.get('pre_any') or []} / pre_all={entry_task.get('pre_all') or []} / parent_active={entry_task.get('parent_active') or []} / available_starting_with={entry_task.get('available_starting_with') or []} / required_spell={entry_task.get('required_spell')}。到13224自然登舰时再现场检查库尔迪拉是否给12892；若不给，只记录本服真实阻断，不把公开旧评论直接写成硬前置。",
+        "- 从风暴峭壁进入冰冠时，第一地理落点固定为地图东北的银色比武场；不再绕到东南银色前线基地作为入口。",
+        f"- 13419《{blocked_transport.get('name')}》：{blocked_transport.get('scope_status')}。当前不学寒冷天气飞行，因此保持不可执行。",
+        f"- 13036《{primary_entry.get('name')}》已应用实服隐藏前置13419，当前状态={primary_entry.get('scope_status')}，pre_any={primary_entry.get('pre_any') or []}；其独占后续必须递归传播不可达，不能再把它当独立根。",
+        f"- 13224《{natural_airship.get('name')}》当前状态={natural_airship.get('scope_status')}，pre_any={natural_airship.get('pre_any') or []}；因此不能拿它解锁飞艇上的《破碎前线》《前往伊米海姆！》《萨隆邪铁的奴隶》《伊米亚之血》《协助突袭》。",
+        f"- 12892《{entry_task.get('name')}》仍是当前唯一需要现场直接核验的飞艇根候选：从银色比武场进入后直接前往奥格瑞姆之锤检查库尔迪拉；如果不可接，就把暗影拱顶组件整体从当前可执行路线剔除。",
         "",
         "## 下一步",
         "",

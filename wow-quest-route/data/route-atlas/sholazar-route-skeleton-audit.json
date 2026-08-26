@@ -1,0 +1,2138 @@
+{
+  "status": "spatial_audit_only_not_route_order",
+  "formal_task_count": 66,
+  "formal_task_ids": [
+    12489,
+    12520,
+    12521,
+    12522,
+    12523,
+    12524,
+    12525,
+    12526,
+    12528,
+    12529,
+    12530,
+    12531,
+    12532,
+    12533,
+    12534,
+    12535,
+    12536,
+    12537,
+    12538,
+    12539,
+    12540,
+    12543,
+    12544,
+    12549,
+    12550,
+    12551,
+    12556,
+    12558,
+    12560,
+    12569,
+    12570,
+    12571,
+    12572,
+    12573,
+    12574,
+    12575,
+    12576,
+    12577,
+    12578,
+    12579,
+    12580,
+    12581,
+    12589,
+    12592,
+    12595,
+    12603,
+    12605,
+    12607,
+    12614,
+    12624,
+    12634,
+    12644,
+    12645,
+    12651,
+    12654,
+    12658,
+    12671,
+    12681,
+    12683,
+    12688,
+    12689,
+    12691,
+    12695,
+    12696,
+    12699,
+    12804
+  ],
+  "coarse_bins": {
+    "west_nesingwary": [
+      12489,
+      12520,
+      12521,
+      12522,
+      12523,
+      12524,
+      12525,
+      12526,
+      12543,
+      12544,
+      12549,
+      12550,
+      12551,
+      12556,
+      12558,
+      12560,
+      12569,
+      12589,
+      12592,
+      12624,
+      12634,
+      12644,
+      12645,
+      12651,
+      12688,
+      12696,
+      12804
+    ],
+    "center_rivers_heart": [
+      12529,
+      12530,
+      12531,
+      12532,
+      12533,
+      12534,
+      12535,
+      12536,
+      12539,
+      12540,
+      12570,
+      12571,
+      12572,
+      12573,
+      12578,
+      12654,
+      12671,
+      12699
+    ],
+    "north_west": [
+      12595
+    ],
+    "north_center": [
+      12574,
+      12575,
+      12576,
+      12577,
+      12603,
+      12605,
+      12607,
+      12614,
+      12658,
+      12681,
+      12683
+    ],
+    "east": [
+      12689,
+      12691
+    ],
+    "south_west": [],
+    "south_east": [
+      12528,
+      12695
+    ],
+    "unanchored": [
+      12537,
+      12538,
+      12579,
+      12580,
+      12581
+    ]
+  },
+  "tasks": [
+    {
+      "quest_id": 12489,
+      "name": "欢迎来到索拉查盆地",
+      "pre_any": [
+        12521
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒙特",
+          "entity_id": 27987,
+          "x": 39.68,
+          "y": 58.66
+        }
+      ],
+      "finish": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "objective_text_zh": "沿着西北方的道路前往蒙特提到的营地。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12520,
+      "name": "狩猎犀牛：初试身手",
+      "pre_any": [],
+      "pre_all": [
+        12523,
+        12525
+      ],
+      "parent_active": [],
+      "next_quest": 12526,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "finish": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "objective_text_zh": "杀死15头碎角犀牛，然后返回奈辛瓦里营地，向赫米特·奈辛瓦里复命。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12521,
+      "name": "赫米特·奈辛瓦里哪去了？",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12489,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "大法师伯塔鲁斯",
+          "entity_id": 28160,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒙特",
+          "entity_id": 27987,
+          "x": 39.68,
+          "y": 58.66
+        }
+      ],
+      "objective_text_zh": "当你准备好动身前往索拉查盆地时，就与大法师伯塔鲁斯谈一谈。到达索拉查盆地之后，与蛮藤谷的蒙特谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12522,
+      "name": "需要引擎",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12523,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "维斯雷·扭钳",
+          "entity_id": 28033,
+          "x": 25.35,
+          "y": 58.47
+        }
+      ],
+      "finish": [
+        {
+          "name": "维斯雷·扭钳",
+          "entity_id": 28033,
+          "x": 25.35,
+          "y": 58.47
+        }
+      ],
+      "objective_text_zh": "奈辛瓦里营地的维斯雷·扭钳要你帮他找到一台飞行器引擎。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12523,
+      "name": "借零件",
+      "pre_any": [
+        12522
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "维斯雷·扭钳",
+          "entity_id": 28033,
+          "x": 25.35,
+          "y": 58.47
+        }
+      ],
+      "finish": [
+        {
+          "name": "维斯雷·扭钳",
+          "entity_id": 28033,
+          "x": 25.35,
+          "y": 58.47
+        }
+      ],
+      "objective_text_zh": "将7份风险投资公司备用零件交给奈辛瓦里营地的维斯雷·扭钳。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12524,
+      "name": "风险投资公司的风险",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12525,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "objective_text_zh": "奈辛瓦里营地的蒂巴尔要你去杀死15名风险投资公司雇员，风险投资公司无赖或是风险投资公司挖掘者都可以。",
+      "fivebox_check": "确认风险投资公司15只击杀进度是否共享。",
+      "mechanism_note": "风险投资公司恶棍/挖掘者合计15个；与斯温迪格林挖掘场其它任务同区完成。"
+    },
+    {
+      "quest_id": 12525,
+      "name": "工头斯温迪格林",
+      "pre_any": [
+        12524
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "objective_text_zh": "杀死工头斯温迪格林和肉饼，然后返回奈辛瓦里营地，向蒂巴尔复命。",
+      "fivebox_check": "确认工头斯温迪格林/肉馅两项击杀是否共享。",
+      "mechanism_note": "工头斯温迪格林和肉馅都在挖掘场木制高台附近，连续击杀即可。"
+    },
+    {
+      "quest_id": 12526,
+      "name": "狩猎犀牛：乘胜追击",
+      "pre_any": [
+        12520
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12543,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "finish": [
+        {
+          "name": "神谕者索乌拉姆",
+          "entity_id": 28191,
+          "x": 25.59,
+          "y": 66.54
+        }
+      ],
+      "objective_text_zh": "与诺兹隆之骨的神谕者索乌拉姆谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12528,
+      "name": "伪装奴隶",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12529,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "猎手基克吉克",
+          "entity_id": 28095,
+          "x": 50.53,
+          "y": 76.59
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "以新“奴隶”的身份向狂心岭的高阶萨满祭司拉克亚克报到。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12529,
+      "name": "猩猩猎手的奴隶",
+      "pre_any": [
+        12528
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "狂心岭的高阶萨满祭司拉克亚克要你去杀死8只硬皮抢夺者和6只硬皮冲锋者。 /  / 如果你弄丢了格拉克伊克的镣铐，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12530,
+      "name": "狩猎硬皮猩猩",
+      "pre_any": [
+        12528
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "猩猩猎手格利基克",
+          "entity_id": 28214,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "对软皮猩猩使用格拉克伊克给你的软皮木棍，将雌性硬皮猩猩引出来。击败雌性硬皮猩猩，然后向狂心岭的高阶萨满祭司拉克亚克汇报情况。 /  / 如果你弄丢了格拉克伊克的镣铐，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12531,
+      "name": "地下的威胁",
+      "pre_any": [
+        12532
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "长者哈尔卡克",
+          "entity_id": 28138,
+          "x": 55.5,
+          "y": 69.68
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "前往南部河流的沙滩，找到并杀死瑟菲克斯，将他的爪子交给狂心岭的高阶萨满祭司拉克亚克。 /  / 如果你弄丢了达伊克的旧粉笔，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12532,
+      "name": "鸡飞狼跳！",
+      "pre_any": [],
+      "pre_all": [
+        12533,
+        12534
+      ],
+      "parent_active": [],
+      "next_quest": 12531,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "长者哈尔卡克",
+          "entity_id": 28138,
+          "x": 55.5,
+          "y": 69.68
+        }
+      ],
+      "finish": [
+        {
+          "name": "长者哈尔卡克",
+          "entity_id": 28138,
+          "x": 55.5,
+          "y": 69.68
+        }
+      ],
+      "objective_text_zh": "捕捉12只逃走的小鸡，然后向长者哈尔卡克复命。 /  / 如果你弄丢了达伊克的旧粉笔，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "确认捕鸡网抓取进度是否共享；若不共享则五号分别抓12只。",
+      "mechanism_note": "任务提供捕鸡网；在狂心岭周围对逃跑的小鸡使用网，抓满12只。"
+    },
+    {
+      "quest_id": 12533,
+      "name": "蓝蜂猎手的学徒",
+      "pre_any": [],
+      "pre_all": [
+        12529,
+        12530
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "狂心岭的高阶萨满祭司拉克亚克要你杀死6只蓝玉虫巢巨蜂和9只蓝玉虫巢雄蜂。 /  / 如果你弄丢了达伊克的旧粉笔，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12534,
+      "name": "蓝色蜂后",
+      "pre_any": [],
+      "pre_all": [
+        12529,
+        12530
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "长者哈尔卡克",
+          "entity_id": 28138,
+          "x": 55.5,
+          "y": 69.68
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "将蓝玉虫巢蜂后的钉刺交给狂心岭的高阶萨满祭司拉克亚克。 /  / 如果你弄丢了达伊克的旧粉笔，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12535,
+      "name": "恶作剧的材料",
+      "pre_any": [
+        12532
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "狂心岭的高阶萨满祭司拉克亚克要你去收集8块通天水晶簇。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12536,
+      "name": "颠簸的航行",
+      "pre_any": [
+        12531
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "finish": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "骑上被俘虏的鳄鱼前往雾语村，向瑟匹克寻求下一步的指示。 /  / 如果你弄丢了瑟匹克的狩猎号角，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12537,
+      "name": "闪电确实两次打中同一个地方！",
+      "pre_any": [
+        12536
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "瑟匹克要你在雾语天气祭坛前敲碎通天水晶簇。 /  / 如果你弄丢了瑟匹克的狩猎号角，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12538,
+      "name": "猎杀雾语鳄鱼人",
+      "pre_any": [
+        12536
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "瑟匹克要你去杀死12个雾语鳄鱼人。 /  / 如果你弄丢了瑟匹克的狩猎号角，就去找狂心岭的长者哈尔卡克。",
+      "fivebox_check": "确认雾语鳄鱼人12只击杀进度是否共享。",
+      "mechanism_note": "雾语战士/神谕者合计12个；泽匹克的狩猎号角可重新召出泽匹克。"
+    },
+    {
+      "quest_id": 12539,
+      "name": "步行回家",
+      "pre_any": [],
+      "pre_all": [
+        12537,
+        12538
+      ],
+      "parent_active": [],
+      "next_quest": 12540,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "鳄鱼人猎手瑟匹克",
+          "entity_id": 28216,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "objective_text_zh": "返回狂心岭，与高阶萨满祭司拉克亚克谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12540,
+      "name": "遵命行事",
+      "pre_any": [
+        12539
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶萨满祭司拉克亚克",
+          "entity_id": 28082,
+          "x": 54.99,
+          "y": 69.11
+        }
+      ],
+      "finish": [
+        {
+          "name": "受伤的雨声神谕者",
+          "entity_id": 28217,
+          "x": 56.64,
+          "y": 64.53
+        }
+      ],
+      "objective_text_zh": "狂心岭的高阶萨满祭司拉克亚克要你去找到一个受伤的雨声神谕者。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12543,
+      "name": "给索乌拉姆的祭品",
+      "pre_any": [
+        12526
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12544,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "神谕者索乌拉姆",
+          "entity_id": 28191,
+          "x": 25.59,
+          "y": 66.54
+        }
+      ],
+      "finish": [
+        {
+          "name": "神谕者索乌拉姆",
+          "entity_id": 28191,
+          "x": 25.59,
+          "y": 66.54
+        }
+      ],
+      "objective_text_zh": "将5颗完整的眼镜蛇牙交给诺兹隆之骨附近的神谕者索乌拉姆。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12544,
+      "name": "诺兹隆之骨",
+      "pre_any": [
+        12543
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "神谕者索乌拉姆",
+          "entity_id": 28191,
+          "x": 25.59,
+          "y": 66.54
+        }
+      ],
+      "finish": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "objective_text_zh": "在诺兹隆之骨附近使用索乌拉姆的薰香，然后返回奈辛瓦里营地，向赫米特·奈辛瓦里汇报你得到的情报。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12549,
+      "name": "狩猎恶刃豹：成为猎手",
+      "pre_any": [],
+      "pre_all": [
+        12523,
+        12525
+      ],
+      "parent_active": [],
+      "next_quest": 12550,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "finish": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "objective_text_zh": "杀死15只恶刃豹，然后向奈辛瓦里营地的巴克·坎维尔复命。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12550,
+      "name": "狩猎恶刃豹：追踪猎物",
+      "pre_any": [
+        12549
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12558,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "finish": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "objective_text_zh": "奈辛瓦里营地的巴克·坎维尔要你从苦潮湖附近的恶刃豹足迹中鉴别出3条杉苟的足迹。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12551,
+      "name": "狩猎鳄鱼：试炼",
+      "pre_any": [],
+      "pre_all": [
+        12520,
+        12549
+      ],
+      "parent_active": [],
+      "next_quest": 12560,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "objective_text_zh": "杀死15条蛮藤谷鳄鱼，然后向奈辛瓦里营地的蒂巴尔复命。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12556,
+      "name": "狩猎犀牛：终极决战",
+      "pre_any": [
+        12544
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "finish": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "objective_text_zh": "将法鲁恩的犄角交给奈辛瓦里营地的赫米特·奈辛瓦里。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12558,
+      "name": "狩猎恶刃豹：突然袭击",
+      "pre_any": [
+        12550
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "finish": [
+        {
+          "name": "巴克·坎维尔",
+          "entity_id": 28031,
+          "x": 26.67,
+          "y": 59.03
+        }
+      ],
+      "objective_text_zh": "将杉苟的毛皮交给奈辛瓦里营地的巴克·坎维尔。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12560,
+      "name": "狩猎鳄鱼：计划",
+      "pre_any": [
+        12551
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12569,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "objective_text_zh": "将5片沙蕨叶交给奈辛瓦里营地的蒂巴尔。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12569,
+      "name": "狩猎鳄鱼：伏击",
+      "pre_any": [
+        12560
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "蒂巴尔",
+          "entity_id": 28032,
+          "x": 27.25,
+          "y": 59.89
+        }
+      ],
+      "objective_text_zh": "将丛林霸王的颚骨交给奈辛瓦里营地的蒂巴尔。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12570,
+      "name": "幸福的误会",
+      "pre_any": [
+        12540
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12571,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "受伤的雨声神谕者",
+          "entity_id": 28217,
+          "x": 56.64,
+          "y": 64.53
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "护送受伤的雨声神谕者返回雨声树屋，然后与高阶神谕者索乌塞谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12571,
+      "name": "赶走坏蛇",
+      "pre_any": [
+        12570
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12573,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "雨声树屋的高阶神谕者索乌塞要你杀死毒尖和10条帝王眼镜蛇。 /  / 如果你弄丢了拉弗乌的虫袋，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "确认帝王眼镜蛇/毒尖击杀进度是否共享。",
+      "mechanism_note": "杀10条帝王眼镜蛇和毒尖；毒尖在雨声树屋东北瀑布附近。任务提供拉弗乌的虫袋，可召拉弗乌随行。"
+    },
+    {
+      "quest_id": 12572,
+      "name": "神祗喜欢亮闪闪的东西",
+      "pre_any": [
+        12570
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "拉弗乌",
+          "entity_id": 28120,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "收集6份拉弗乌从土堆里挖出的闪闪发亮的宝贝，将它们交给雨声树屋的高阶神谕者索乌塞。 /  / 如果你弄丢了拉弗乌的虫袋，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12573,
+      "name": "议和",
+      "pre_any": [
+        12571
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "雨声树屋的高阶神谕者索乌塞要你将雨声议和礼物交给萨满祭司维克伊克，然后转达他的回应。 /  / 如果你弄丢了拉弗乌的虫袋，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12574,
+      "name": "这么快就回来啦？",
+      "pre_any": [],
+      "pre_all": [
+        12572,
+        12573
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "finish": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "objective_text_zh": "前往雾语村，与唤雾者索乌甘谈一谈。 /  / 如果你弄丢了亚鲁乌特的宝贝水晶，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12575,
+      "name": "被抢走的雾语宝物",
+      "pre_any": [
+        12574
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "finish": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "objective_text_zh": "雾语村的唤雾者索乌甘要你杀死督军塔尔特克，并取回雾语宝物。 /  / 如果你弄丢了亚鲁乌特的宝贝水晶，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "确认塔尔特克击杀是否共享，以及同一份雾语宝物能否五号连续拾取。",
+      "mechanism_note": "到北侧矛生营地宝物高地触发督军塔尔特克；先杀塔尔特克，再拾取雾语宝物，避免提前拿宝物造成交互异常。"
+    },
+    {
+      "quest_id": 12576,
+      "name": "被迫出手",
+      "pre_any": [
+        12574
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "finish": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "objective_text_zh": "雾语村的唤雾者索乌甘要你杀死8个狂心持矛者和6个狂心清除者。 /  / 如果你弄丢了亚鲁乌特的宝贝水晶，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12577,
+      "name": "回家喽！",
+      "pre_any": [],
+      "pre_all": [
+        12575,
+        12576
+      ],
+      "parent_active": [],
+      "next_quest": 12578,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "唤雾者索乌甘",
+          "entity_id": 28114,
+          "x": 42.15,
+          "y": 38.65
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "返回雨声树屋。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12578,
+      "name": "愤怒的鳄鱼人",
+      "pre_any": [
+        12577
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "finish": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "抵达苔行村后与莫乌德谈一谈。 /  / 如果你弄丢了莫乌德的皮球，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12579,
+      "name": "苔行祭坛的源血碎片",
+      "pre_any": [
+        12578
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "莫乌德要你去收集10块源血碎片，但是你最好不要进入石柱中的洞穴。 /  / 如果你弄丢了莫乌德的皮球，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12580,
+      "name": "苔行村的救星",
+      "pre_any": [
+        12578
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "莫乌德要你前往苔行村搭救6名苔行村受害者。也许有些鳄鱼人已经命在旦夕，难以挽救了。 /  / 如果你弄丢了莫乌德的皮球，就去找雨声树屋的高阶神谕者索乌塞。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12581,
+      "name": "英雄的负担",
+      "pre_any": [
+        12579
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "莫乌德",
+          "entity_id": 28122,
+          "x": null,
+          "y": null
+        }
+      ],
+      "finish": [
+        {
+          "name": "Artruis's Phylactery",
+          "entity_id": 190777,
+          "x": null,
+          "y": null
+        }
+      ],
+      "objective_text_zh": "杀死残忍的阿图里斯。 /  / 莫乌德无法陪你执行这项任务，因此你最好召集其他伙伴帮忙。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12589,
+      "name": "后坐力？什么后坐力？",
+      "pre_any": [],
+      "pre_all": [
+        12523,
+        12525
+      ],
+      "parent_active": [],
+      "next_quest": 12592,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "德洛斯坦",
+          "entity_id": 28328,
+          "x": 27.08,
+          "y": 59.9
+        }
+      ],
+      "finish": [
+        {
+          "name": "德洛斯坦",
+          "entity_id": 28328,
+          "x": 27.08,
+          "y": 59.9
+        }
+      ],
+      "objective_text_zh": "使用RJR步枪击中幸运的威尔海姆头顶的苹果，然后与德洛斯坦谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12592,
+      "name": "猎人的挑战",
+      "pre_any": [
+        12589
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "德洛斯坦",
+          "entity_id": 28328,
+          "x": 27.08,
+          "y": 59.9
+        }
+      ],
+      "finish": [
+        {
+          "name": "德洛斯坦",
+          "entity_id": 28328,
+          "x": 27.08,
+          "y": 59.9
+        }
+      ],
+      "objective_text_zh": "在协助赫米特和探险队其他成员狩猎的过程中，杀死60只猎物。在你达成60个的击杀目标后，回到奈辛瓦里营地，与德洛斯坦比对猎物数量。",
+      "fivebox_check": "确认狩猎动物60只的击杀进度是否共享。",
+      "mechanism_note": "必须在大范围狩猎前先接；后续其它狩猎任务中的野兽击杀可自然累计到60，只在尾段补差额。"
+    },
+    {
+      "quest_id": 12595,
+      "name": "更大的猎物",
+      "pre_any": [],
+      "pre_all": [
+        12556,
+        12558,
+        12569
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "finish": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "objective_text_zh": "与索拉查盆地中多里安营地的多里安·达克斯托谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12603,
+      "name": "磨尖你的爪子",
+      "pre_any": [],
+      "pre_all": [
+        12556,
+        12558,
+        12569
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "finish": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "objective_text_zh": "杀死6只始生幼龙，然后与多里安哨站的多里安·达克斯托克谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12605,
+      "name": "诱龙出巢",
+      "pre_any": [],
+      "pre_all": [
+        12556,
+        12558,
+        12569
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "finish": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "objective_text_zh": "将6只始生龙幼崽交给多里安哨站的多里安·达克斯托克。",
+      "fivebox_check": "确认始祖龙宝宝是否个人拾取，以及同一个孵化目标能否五号连续取得。",
+      "mechanism_note": "多里安营地东/东北找始祖龙卵，打破后拾取/点击孵出的始祖龙宝宝，共6只。"
+    },
+    {
+      "quest_id": 12607,
+      "name": "驯服猛犸象",
+      "pre_any": [
+        12603
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "苏特菲兹",
+          "entity_id": 28374,
+          "x": 42.11,
+          "y": 28.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "苏特菲兹",
+          "entity_id": 28374,
+          "x": 42.11,
+          "y": 28.89
+        }
+      ],
+      "objective_text_zh": "将一头裂牙猛犸交给多里安哨站的苏特菲兹。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12614,
+      "name": "母龙之怒",
+      "pre_any": [
+        12607
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "finish": [
+        {
+          "name": "多里安·达克斯托克",
+          "entity_id": 28376,
+          "x": 42.34,
+          "y": 28.7
+        }
+      ],
+      "objective_text_zh": "杀死母龙斯利维娜，然后向多里安哨站的多里安·达克斯托克复命。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12624,
+      "name": "不知所踪！",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "查德",
+          "entity_id": 28497,
+          "x": 26.86,
+          "y": 58.94
+        }
+      ],
+      "finish": [
+        {
+          "name": "查德",
+          "entity_id": 28497,
+          "x": 26.86,
+          "y": 58.94
+        }
+      ],
+      "objective_text_zh": "在索拉查盆地的生物身上寻找金色订婚戒指。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12634,
+      "name": "酿酒的材料",
+      "pre_any": [],
+      "pre_all": [
+        12520,
+        12549
+      ],
+      "parent_active": [],
+      "next_quest": 12644,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "finish": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "objective_text_zh": "将1颗橙子、2串香蕉和1颗木瓜交给奈辛瓦里营地的葛瑞姆·雷酒。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12644,
+      "name": "酒香犹存",
+      "pre_any": [
+        12634
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12645,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "finish": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "objective_text_zh": "成功完成蒸馏作业，然后将雷酒的丛林佳酿交给奈辛瓦里营地的葛瑞姆·雷酒。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12645,
+      "name": "品酒",
+      "pre_any": [
+        12644
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "finish": [
+        {
+          "name": "葛瑞姆·雷酒",
+          "entity_id": 29157,
+          "x": 26.78,
+          "y": 60.07
+        }
+      ],
+      "objective_text_zh": "将雷酒的丛林佳酿的酒样交给赫米特·奈辛瓦里、哈迪乌斯·哈洛维和塔玛拉·摇链品尝，然后向奈辛瓦里营地的葛瑞姆·雷酒复命。",
+      "fivebox_check": "确认三个NPC的品酒进度是否需要五号分别使用丛林调酒样本。",
+      "mechanism_note": "对赫米特、哈德留斯、塔玛拉分别使用丛林调酒样本；前两人在奈辛瓦里营地，塔玛拉在河流之心的湖畔码头，按自然经过分两段完成。"
+    },
+    {
+      "quest_id": 12651,
+      "name": "湖边着陆场",
+      "pre_any": [],
+      "pre_all": [
+        12558,
+        12556,
+        12592
+      ],
+      "parent_active": [],
+      "next_quest": 12654,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "finish": [
+        {
+          "name": "塔玛拉·摇链",
+          "entity_id": 28568,
+          "x": 50.48,
+          "y": 62.13
+        }
+      ],
+      "objective_text_zh": "与湖边着陆场的塔玛拉·摇链谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12654,
+      "name": "兼职猎人",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "塔玛拉·摇链",
+          "entity_id": 28568,
+          "x": 50.48,
+          "y": 62.13
+        }
+      ],
+      "finish": [
+        {
+          "name": "塔玛拉·摇链",
+          "entity_id": 28568,
+          "x": 50.48,
+          "y": 62.13
+        }
+      ],
+      "objective_text_zh": "将匹奇的遗体交给湖边着陆场的塔玛拉·摇链。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12658,
+      "name": "我的宠物大鹏",
+      "pre_any": [
+        12603
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "苏特菲兹",
+          "entity_id": 28374,
+          "x": 42.11,
+          "y": 28.89
+        }
+      ],
+      "finish": [
+        {
+          "name": "苏特菲兹",
+          "entity_id": 28374,
+          "x": 42.11,
+          "y": 28.89
+        }
+      ],
+      "objective_text_zh": "将7枚大鹏卵交给多里安哨站的苏特菲兹。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12671,
+      "name": "侦察飞行",
+      "pre_any": [
+        12699
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "飞行员维克",
+          "entity_id": 28746,
+          "x": 49.95,
+          "y": 61.53
+        }
+      ],
+      "finish": [
+        {
+          "name": "飞行员维克",
+          "entity_id": 28746,
+          "x": 49.95,
+          "y": 61.53
+        }
+      ],
+      "objective_text_zh": "帮助飞行员维克完成侦察飞行。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12681,
+      "name": "猎取材料",
+      "pre_any": [
+        12603
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "考尔文·诺灵顿",
+          "entity_id": 28771,
+          "x": 42.07,
+          "y": 28.66
+        }
+      ],
+      "finish": [
+        {
+          "name": "考尔文·诺灵顿",
+          "entity_id": 28771,
+          "x": 42.07,
+          "y": 28.66
+        }
+      ],
+      "objective_text_zh": "将5只扭曲的大鹏爪交给多里安哨站的考尔文·诺灵顿。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12683,
+      "name": "燃烧的唾液",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "考尔文·诺灵顿",
+          "entity_id": 28771,
+          "x": 42.07,
+          "y": 28.66
+        }
+      ],
+      "finish": [
+        {
+          "name": "考尔文·诺灵顿",
+          "entity_id": 28771,
+          "x": 42.07,
+          "y": 28.66
+        }
+      ],
+      "objective_text_zh": "多里安哨站的考尔文·诺灵顿要你收集5份多头蛇唾液样本并杀死5只苦潮多头蛇。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12688,
+      "name": "工程师的逃亡",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "工程师赫莉丝",
+          "entity_id": 28787,
+          "x": 35.55,
+          "y": 47.42
+        }
+      ],
+      "finish": [
+        {
+          "name": "赫米特·奈辛瓦里",
+          "entity_id": 27986,
+          "x": 27.1,
+          "y": 58.64
+        }
+      ],
+      "objective_text_zh": "护送工程师赫莉丝逃离斯温迪格林挖掘场，然后与奈辛瓦里营地的赫米特·奈辛瓦里谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12689,
+      "name": "神谕者之手",
+      "pre_any": [
+        12581
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_structural_repeatable_first_run",
+      "start": [
+        {
+          "name": "亚鲁乌特",
+          "entity_id": 28667,
+          "x": 72.46,
+          "y": 57.52
+        }
+      ],
+      "finish": [
+        {
+          "name": "亚鲁乌特",
+          "entity_id": 28667,
+          "x": 72.46,
+          "y": 57.52
+        }
+      ],
+      "objective_text_zh": "",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12691,
+      "name": "古旧的石箱",
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "Timeworn Coffer",
+          "entity_id": 190768,
+          "x": 80.41,
+          "y": 55.81
+        }
+      ],
+      "finish": [
+        {
+          "name": "Timeworn Coffer",
+          "entity_id": 190768,
+          "x": 80.41,
+          "y": 55.81
+        }
+      ],
+      "objective_text_zh": "从索拉查卫士身上取得巨型石钥匙，用它打开造物者悬台上的古旧石箱。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12695,
+      "name": "友善的干燥皮肤朋友",
+      "pre_any": [
+        12689
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_conditional_route_state",
+      "start": [
+        {
+          "name": "亚鲁乌特",
+          "entity_id": 28667,
+          "x": 72.46,
+          "y": 57.52
+        }
+      ],
+      "finish": [
+        {
+          "name": "高阶神谕者索乌塞",
+          "entity_id": 28027,
+          "x": 54.59,
+          "y": 56.36
+        }
+      ],
+      "objective_text_zh": "返回雨声树屋，与高阶神谕者索乌塞谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12696,
+      "name": "空中侦察",
+      "pre_any": [
+        12523
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "卡尔维特教授",
+          "entity_id": 28266,
+          "x": 25.4,
+          "y": 58.47
+        }
+      ],
+      "finish": [
+        {
+          "name": "飞行员维克",
+          "entity_id": 28746,
+          "x": 49.95,
+          "y": 61.53
+        }
+      ],
+      "objective_text_zh": "卡尔维特教授要你飞往湖边着陆场，与飞行员维克谈一谈。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12699,
+      "name": "尴尬的处境",
+      "pre_any": [
+        12523
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12671,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "飞行员维克",
+          "entity_id": 28746,
+          "x": 49.95,
+          "y": 61.53
+        }
+      ],
+      "finish": [
+        {
+          "name": "飞行员维克",
+          "entity_id": 28746,
+          "x": 49.95,
+          "y": 61.53
+        }
+      ],
+      "objective_text_zh": "在河流之心的湖泊中寻找维克的钥匙。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    },
+    {
+      "quest_id": 12804,
+      "name": "猎人们的肉排",
+      "pre_any": [
+        12520
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "scope_status": "include_candidate",
+      "start": [
+        {
+          "name": "菜刀库尔格",
+          "entity_id": 28046,
+          "x": 26.71,
+          "y": 59.51
+        }
+      ],
+      "finish": [
+        {
+          "name": "菜刀库尔格",
+          "entity_id": 28046,
+          "x": 26.71,
+          "y": 59.51
+        }
+      ],
+      "objective_text_zh": "将5份食草长颈鹿肉排交给奈辛瓦里营地的菜刀库尔格。",
+      "fivebox_check": "",
+      "mechanism_note": ""
+    }
+  ]
+}

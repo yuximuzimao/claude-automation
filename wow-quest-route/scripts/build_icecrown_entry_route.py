@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -8,6 +9,76 @@ ENTRY_TASKS = ROOT / "data/route-atlas/icecrown-entry-tasks.json"
 STEP_TIMING = ROOT / "data/route-atlas/icecrown-step-timing-overrides.json"
 OUT_JSON = ROOT / "data/route-atlas/icecrown-entry-route-draft.json"
 OUT_MD = ROOT / "docs/analysis/2026-08-25-icecrown-entry-route-draft.md"
+
+TASK_ID_TOKEN = re.compile(r"(?<!\d)(\d{5})(?!\d)")
+TASK_GROUP_TOKEN = r"(?:《[^》]+》)+"
+FLOW_ACTION_RE = re.compile(rf"^[^：；;,，0-9]+(?:\s*→\s*(?:接|做|交){TASK_GROUP_TOKEN})+$")
+SYSTEM_ACTION_RE = re.compile(r"^(?:开飞行点|炉石绑定|使用炉石)：[^：；;,，0-9]+$")
+SYSTEM_FLIGHT_RE = re.compile(r"^系统飞行：[^：；;,，0-9]+\s*→\s*[^：；;,，0-9]+$")
+
+
+def validate_action_skeleton(text: str) -> None:
+    value = str(text).strip()
+    if SYSTEM_ACTION_RE.fullmatch(value) or SYSTEM_FLIGHT_RE.fullmatch(value) or FLOW_ACTION_RE.fullmatch(value):
+        return
+    raise RuntimeError(f"Icecrown player action violates closed action grammar: {value}")
+
+
+def player_task_names(text: str, by_id: dict[int, dict]) -> str:
+    """Remove internal quest IDs from player-facing Icecrown copy without losing task identity."""
+    value = re.sub(r"(?<!\d)\d{5}(?=《)", "", str(text))
+
+    def repl(match: re.Match[str]) -> str:
+        qid = int(match.group(1))
+        row = by_id.get(qid)
+        return f"《{row['name']}》" if row and row.get("name") else match.group(0)
+
+    return TASK_ID_TOKEN.sub(repl, value)
+
+
+def normalize_fivebox(qid: int, text: str) -> str:
+    """Publish only v45 shared/not-shared status or an explicit unresolved five-box check."""
+    value = str(text or "").strip()
+    if not value:
+        return ""
+    if value.startswith(("共享：", "不共享：")):
+        return value
+
+    resolved = {
+        12814: "共享：只需一个角色拾取缰绳并在乌佐身边执行交付，整组都会完成。",
+        13069: "共享：",
+        13143: "不共享：五号分别驯服。",
+        13219: "共享：角色死亡但不释放灵魂时，队友击杀Boss后仍可获得当前场信用。",
+        13361: "不共享：",
+        13161: "共享：",
+        13162: "共享：",
+        13163: "共享：",
+        13164: "共享：",
+    }
+    if qid in resolved:
+        return resolved[qid]
+
+    mixed_mechanism_terms = (
+        "交互", "任务物", "事件", "载具", "固定物", "调查", "召唤", "使用", "钥匙", "拾取", "血囊", "法杖", "祭坛", "遗物",
+    )
+    shared_kill_terms = (
+        "共享预期", "组队击杀共享", "组队击杀按共享", "组队击杀应一起计数", "单Boss组队击杀", "命名击杀按组队共享", "普通击杀共享",
+    )
+    if any(term in value for term in shared_kill_terms) and not any(term in value for term in mixed_mechanism_terms):
+        return "共享："
+
+    pending = re.sub(r"^(?:重点)?待实测[：:]\s*", "", value)
+    pending = pending.replace("共享预期", "是否共享")
+    pending = pending.replace("个人交互预期", "是否需要逐号交互")
+    pending = pending.replace("个人载具任务预期", "是否需要逐号完成载具任务")
+    pending = pending.replace("个人载具事件预期", "是否需要逐号完成载具事件")
+    pending = pending.replace("个人载具击杀预期", "是否需要逐号完成载具击杀")
+    pending = pending.replace("个人掉落预期", "是否为个人掉落")
+    pending = pending.replace("个人任务物预期", "是否为个人任务物")
+    pending = pending.replace("首跑", "")
+    pending = pending.replace("本服", "")
+    pending = re.sub(r"\s+", " ", pending).strip(" ；;，,")
+    return f"待实测：{pending}"
 
 
 def main() -> None:
@@ -39,24 +110,24 @@ def main() -> None:
                 "13008": {
                     "name": by_id[13008]["name"],
                     "objective": "解救8名被网住的北伐军士兵",
-                    "route_note": "与13039/13040完全同区；优先沿刷毒囊路径顺手释放，不单独绕点。",
+                    "route_note": "与《保卫前线基地》《致命的剧毒》完全同区；优先沿刷毒囊路径顺手释放，不单独绕点。",
                     "fivebox": "待实测：同一次释放/同一个蛛网目标是否五号同时计数；若不共享，再按个人交互处理。",
                 },
                 "13039": {
                     "name": by_id[13039]["name"],
                     "objective": "击杀15只遗忘深渊蛛魔",
-                    "route_note": "与13040刷50个个人毒囊天然重叠，正常无需单独补怪。",
-                    "fivebox": "普通组队击杀按共享预期；首跑只需确认是否存在异常不共享。",
+                    "route_note": "刷《致命的剧毒》毒囊时自然完成，通常无需单独补怪。",
+                    "fivebox": "共享：",
                 },
                 "13040": {
                     "name": by_id[13040]["name"],
                     "objective": "每号10个遗忘深渊毒囊；五号总计50个",
-                    "route_note": "个人拾取。公开WotLK Classic五开评论称任务物100%掉落，五账号50个约15分钟；当前作为外部基准，不替代本服首跑实测。",
-                    "fivebox": "不共享：按个人任务物处理。",
+                    "route_note": "个人拾取；五号合计需要50个毒囊。",
+                    "fivebox": "不共享：",
                     "timing_seed_minutes": 15.0,
                 },
             },
-            "gate": "13008 + 13039 + 13040三项全部完成后才解锁13044《如果还有幸存者……》。",
+            "gate": "《天灾的战术》《保卫前线基地》《致命的剧毒》全部完成后，再接《如果还有幸存者……》。",
         },
         {
             "step": 2,
@@ -333,7 +404,7 @@ def main() -> None:
                 "13092": {
                     "name": by_id[13092]["name"],
                     "objective": "每号15个维库人的徽记/骨头类任务物；五号总需求75",
-                    "route_note": "必须在第一次大范围Jotunheim杀怪前接到，避免之前杀的大量维库人无法贡献任务物。13093同名重复版本已从首轮池剔除。",
+                    "route_note": "必须在第一次大范围Jotunheim杀怪前接到，避免之前杀的大量维库人无法贡献任务物。",
                     "fivebox": "不共享：按个人掉落处理。",
                 },
             },
@@ -668,7 +739,7 @@ def main() -> None:
                 },
                 "13283": {"name": by_id[13283]["name"], "route_note": "布拉斯的跳跃机器人上山顶插旗；按个人载具事件预期，五号依次做，首号完成时先观察共享信用。"},
                 "13140": {"name": by_id[13140]["name"], "route_note": "符文锻造师集中在58—60,71—75；阶段正确时公开实测符文板100%掉落，五号以全部5/5为离开条件。"},
-                "13230": {"name": by_id[13230]["name"], "route_note": "破碎前线现场接；附近杀5名濒死士兵，普通组队击杀共享预期。"},
+                "13230": {"name": by_id[13230]["name"], "route_note": "破碎前线现场接；附近杀5名濒死士兵。", "fivebox": "共享："},
             },
             "exit": "东行包结束时位置已经在破碎前线；这时才追奥格瑞姆之锤，集中交掉此前多个移动Hub任务并拿到下一轮。",
         },
@@ -695,7 +766,7 @@ def main() -> None:
                 "13239": {
                     "name": by_id[13239]["name"],
                     "objective": "使用现场材料制作/使用爆炸油吸引3只霜巢天爪龙",
-                    "route_note": "一次性版本做完后会出现同内容日常13261；按项目规则后者不再做第二遍。",
+                    "route_note": "现场材料都在破碎前线同区；收齐后组合并使用爆炸油吸引3只霜巢天爪龙。",
                     "fivebox": "现场材料和使用油的事件按个人任务处理；首个完整事件测试是否有队伍信用。",
                 },
                 "13260": {"name": by_id[13260]["name"], "route_note": "纯舰内对话桥接，交给库尔迪拉后立即接《知己知彼》。"},
@@ -764,7 +835,7 @@ def main() -> None:
                 },
                 "13351": {"name": by_id[13351]["name"], "route_note": "由《你的憎恶伙伴》交付后解锁；调查荒凉之门四个区域，下一圈与《绿色科技》向西南的路线合并。"},
                 "13278": {"name": by_id[13278]["name"], "route_note": "莫德雷萨第二圈命名怪，约60.8,62.2；和《化学常识》同区一次做。"},
-                "13279": {"name": by_id[13279]["name"], "route_note": "莫德雷萨瘟疫之锅约60.8,63.4；一次性版本做完后出现同事件日常13281，按规则不再做第二遍。"},
+                "13279": {"name": by_id[13279]["name"], "route_note": "莫德雷萨瘟疫之锅约60.8,63.4；和《污染者科普洛斯》同区一次完成。"},
             },
             "exit": "第二次莫德雷萨只剩两个短目标；完成后不先回舰，继续向南做《战地维修》失落希望之谷。",
         },
@@ -772,7 +843,7 @@ def main() -> None:
             "step": 23,
             "title": "莫德雷萨第二圈 → 失落希望之谷 → 强制回舰",
             "actions": [
-                "莫德雷萨约60.8,62—63 → 同圈做《污染者科普洛斯》《化学常识》：击杀科普洛斯，并在瘟疫之锅完成一次性化学事件；13281同事件日常不做第二遍",
+                "莫德雷萨约60.8,62—63 → 同圈做《污染者科普洛斯》《化学常识》：击杀科普洛斯，并在瘟疫之锅完成化学事件",
                 "向东北进入失落希望之谷 → 沿路杀食腐的恶鬼，为《战地维修》收集五号各5块攻城车零件",
                 "损毁的攻城车约68.0,51.8 → 五号各自交《战地维修》→ 接《竭尽全力》",
                 "使用整修过的攻城车 → 在失落希望之谷消灭150只腐朽的食尸鬼、20个霜颅大法师、2个白骨巨人",
@@ -975,7 +1046,7 @@ def main() -> None:
                 },
                 "13351": {"name": by_id[13351]["name"], "route_note": "四个侦察点与塔兹拉平台在同一南北走廊；先把四点全部踩完再离开，避免交轰炸后还要回来补一个侦察信用。"},
             },
-            "exit": "回舰后正式打开奥尔杜萨第一轮三任务；日常13406已从163项首轮池排除，不会在塔兹拉处重复同一次短程轰炸。",
+            "exit": "回舰后打开奥尔杜萨第一轮三任务，下一步直接从南向北清奥尔杜萨。",
         },
         {
             "step": 28,
@@ -1001,10 +1072,10 @@ def main() -> None:
                 "北部约54—55,29—30 → 做《活动窃听器》：一次只处理一组虚空召唤者+被奴役的爪牙；杀死爪牙后立即选中尸体使用虹吸魔杖，五号各取得5份黑暗物质",
                 "黑暗物质齐后到大紫色召唤水晶约53.8,33.6 → 使用水晶召唤黑暗信使，先一号触发检查全队信用，再按实际结果补号",
                 "奥尔杜萨北部建筑入口约51,33 → 杀诅咒教派研究员，为五号分别收齐研究笔记第1/2/3页；每号三页齐后使用其中一页组合成《诅咒教派论文》",
-                "找奥格瑞姆之锤 → 交《重新考验》《活动窃听器》《需要更多情报》→ 接《构建路障》《片刻不得安宁》；对应同内容日常13357/13365不做第二遍",
+                "找奥格瑞姆之锤 → 交《重新考验》《活动窃听器》《需要更多情报》→ 接《构建路障》《片刻不得安宁》",
             ],
             "task_cards": {
-                "13356": {"name": by_id[13356]["name"], "route_note": "约49,33先收10份污染精华→合成蠕动的物质→丢进三口锅任一处即可。一次性版本做完后出现同内容日常13357，按规则不重复。", "fivebox": "精华/合成/投锅按个人任务处理。"},
+                "13356": {"name": by_id[13356]["name"], "route_note": "约49,33先收10份污染精华→合成蠕动的物质→丢进三口锅任一处即可。", "fivebox": "精华/合成/投锅按个人任务处理。"},
                 "13358": {
                     "name": by_id[13358]["name"],
                     "route_note": "爪牙主要在54—55,29—30，召唤水晶约53.8,33.6。虹吸最容易被无效操作打断：杀一组后立刻选中爪牙尸体使用魔杖并站定读条，完成虹吸前不要再杀下一只；不要把多具尸体堆在一起。",
@@ -1024,7 +1095,7 @@ def main() -> None:
             "actions": [
                 "荒凉之门/奥尔杜萨南缘约50.4,40.3一带 → 在黑锋标记处使用路障搭设工具建造8处路障，完成《构建路障》",
                 "奥尔杜萨北部奥鲁麦斯仪式房间 → 拾取/收集奥鲁麦斯的心脏、颅骨、权杖、长袍，组合遗骸后在房间水晶处使用，召唤晋升者奥鲁麦斯",
-                "五号一起击杀奥鲁麦斯完成《片刻不得安宁》；这项一次性版本完成后会出现同内容日常13368，默认不做第二遍",
+                "五号一起击杀奥鲁麦斯，完成《片刻不得安宁》",
                 "找奥格瑞姆之锤 → 交《构建路障》《片刻不得安宁》→ 接《溅血的旗帜》《遮挡天空》《铁墙壁垒》",
                 "先不要立即向南做三项；当前它们的目标从约50,40一路延伸到43,53，而暗影拱顶《离别礼物》后半从44,24经哭泣采掘场38—41后也正要南下，下一步先把两条纵向路线合并",
             ],
@@ -1151,10 +1222,322 @@ def main() -> None:
         },
     ]
 
-    # Step numbers are presentation order, not stable IDs. Insertion must renumber the affected
-    # suffix instead of leaving late-discovered chains as appended tail blocks.
+    # The original 40-step draft assumed the Argent Vanguard chain was reachable. Current-server
+    # evidence proves 13036 requires the Cold-Weather-Flying-gated 13419, so that entire exclusive
+    # descendant branch is removed before any player route is materialized. Reuse only the still
+    # reachable Shadow Vault / Jotunheim / Death's Rise / Blackwatch blocks.
+    old = {int(step["step"]): step for step in steps}
+
+    # In the old full route these two Jotunheim tasks were turned in during a much later Shadow
+    # Vault revisit. That revisit belonged to the now-blocked branch, so close them immediately
+    # after Valhalas before continuing southwest to Death's Rise.
+    old[14]["actions"].append("暗影拱顶 → 交《把它们打下来！》《维尔喜欢火焰！》")
+    old[14]["exit"] = "瓦哈拉斯连续挑战已结束，并顺路回暗影拱顶交清两项Jotunheim任务；下一步转死亡高地。"
+
+    entry = old[6]
+    entry["title"] = "银色比武场 → 奥格瑞姆之锤 → 暗影拱顶"
+    entry["entry"] = {
+        "from": "风暴峭壁",
+        "movement": "借用双足飞龙只作为地图移动能力；普通自主移动不写成系统交通动作",
+        "destination": "银色比武场",
+    }
+    entry["actions"] = [
+        "银色比武场·裁决者玛蕾尔·图哈特 → 接《银色锦标赛》",
+        "银色比武场·夺日者大帐·魔导师埃迪恩·炎谷 → 交《银色锦标赛》",
+        "银色比武场·夺日者大帐 → 接《近战训练》《碎盾训练》《冲锋训练》",
+        "银色比武场·候选者赛场训练场 → 做《近战训练》《碎盾训练》《冲锋训练》",
+        "银色比武场·夺日者大帐 → 交《近战训练》《碎盾训练》《冲锋训练》→ 接《学习驾驭》",
+        "银色比武场·候选者赛场训练场 → 做《学习驾驭》",
+        "银色比武场·夺日者大帐 → 交《学习驾驭》",
+        "开飞行点：银色比武场",
+        "奥格瑞姆之锤·库尔迪拉·织亡者 → 接《乐趣十足》",
+        "暗影拱顶顶部 → 做《乐趣十足》",
+        "暗影拱顶地面·斯利文男爵 → 交《乐趣十足》→ 接《我有一计……》",
+    ]
+    entry["task_cards"] = {
+        "13668": {"name": "银色锦标赛"},
+        "13829": {"name": "近战训练"},
+        "13838": {"name": "碎盾训练"},
+        "13839": {"name": "冲锋训练"},
+        "13677": {"name": "学习驾驭"},
+        "12892": entry["task_cards"]["12892"],
+    }
+    entry["exit"] = ""
+    entry.pop("gate", None)
+
+    malykriss = {
+        "step": 0,
+        "title": "玛雷卡里斯：熔炼碎片 + 符文锻造师",
+        "actions": [
+            "玛雷卡里斯底层熔炉附近 → 使用碎片包完成《熔炼碎片》",
+            "玛雷卡里斯约58—60,71—75 → 击杀骷髅符文锻造师，直到五号各取得5块符文萨隆邪铁板，完成《玛雷卡里斯的符文锻造师》",
+            "返回黑色观察站",
+        ],
+        "task_cards": {
+            "13138": old[18]["task_cards"]["13138"],
+            "13140": old[18]["task_cards"]["13140"],
+        },
+        "exit": "两项均已完成，回黑色观察站直接进入复生密室后半。",
+    }
+
+    blackwatch_finish = old[25]
+    blackwatch_finish["title"] = "黑色观察站第二阶段：复生密室 → 血肉巨人收尾"
+    blackwatch_finish["actions"] = blackwatch_finish["actions"][:-1]
+    blackwatch_finish["task_cards"].pop("13363", None)
+    blackwatch_finish["exit"] = "黑色观察站本地主链已闭合；最后去奥格瑞姆之锤交此前完成的《我还没死！》。"
+
+    final_airship = {
+        "step": 0,
+        "title": "奥格瑞姆之锤：交我还没死！",
+        "actions": [
+            "寻找奥格瑞姆之锤 → 凯尔坦修士交《我还没死！》",
+        ],
+        "task_cards": {},
+        "exit": "当前不学寒冷天气飞行条件下的冰冠可达任务全部闭合。",
+    }
+
+    steps = [entry]
+    steps.extend(old[number] for number in range(7, 19))
+    steps.extend([malykriss, blackwatch_finish, final_airship])
+
+    # Player flow is a closed action grammar. Mechanics/counts/conditions belong to task notes,
+    # never to the action stream. Keep the reusable full route here; current-run progress is
+    # represented separately in the payload/default group rather than by deleting historical steps.
+    clean_titles = [
+        "银色比武场 → 奥格瑞姆之锤 → 暗影拱顶",
+        "暗影拱顶：我有一计…… → 顽固的敌人",
+        "暗影拱顶 → Savage Ledge",
+        "乌弗朗之厅 → 暗影拱顶",
+        "白骨女巫 → 地下大厅",
+        "Jotunheim → 白骨女巫主线",
+        "战痕尖塔 → 巴拉加德堡垒 → 暗影拱顶",
+        "Jotunheim：鱼叉 + 纵火",
+        "瓦哈拉斯",
+        "死亡高地 → 先锋军港口",
+        "先锋军港口 → 死亡高地",
+        "先锋军港口 → 赤色大教堂 → 死亡高地",
+        "黑色观察站 → 缝合场",
+        "玛雷卡里斯",
+        "黑色观察站 → 复生密室 → 缝合场",
+        "奥格瑞姆之锤",
+    ]
+    clean_actions = [
+        entry["actions"],
+        [
+            "暗影拱顶周围 → 做《我有一计……》",
+            "暗影拱顶地面·斯利文男爵 → 交《我有一计……》→ 接《解放你的思想》",
+            "暗影拱顶周边 → 做《解放你的思想》",
+            "暗影拱顶地面·斯利文男爵 → 交《解放你的思想》→ 接《顽固的敌人》",
+            "暗影拱顶内部 → 做《顽固的敌人》",
+            "奥格瑞姆之锤·库尔迪拉·织亡者 → 交《顽固的敌人》→ 接《暗影拱顶》",
+            "暗影拱顶地面·斯利文男爵 → 交《暗影拱顶》",
+            "开飞行点：暗影拱顶",
+            "炉石绑定：暗影拱顶",
+        ],
+        [
+            "暗影拱顶·斯利文男爵 → 接《公爵》《黑色观察站》",
+            "暗影拱顶·兰克拉尔公爵 → 交《公爵》→ 接《荣耀的挑战》",
+            "暗影拱顶·跳跃者 → 接《消灭竞争者》",
+            "Savage Ledge → 做《荣耀的挑战》《消灭竞争者》",
+            "使用炉石：暗影拱顶",
+            "暗影拱顶 → 交《荣耀的挑战》《消灭竞争者》→ 接《暗影拱顶裁决令》《白骨女巫》",
+        ],
+        [
+            "乌弗朗之厅·被折磨的维林 → 接《夺取钥匙》",
+            "乌弗朗之厅 → 做《暗影拱顶裁决令》《夺取钥匙》",
+            "乌弗朗之厅·被折磨的维林 → 交《夺取钥匙》→ 接《通知男爵》",
+            "暗影拱顶·兰克拉尔公爵 → 交《暗影拱顶裁决令》",
+            "暗影拱顶·斯利文男爵 → 交《通知男爵》",
+            "暗影拱顶 → 接《干掉那些维库人！》《彰显军威》《破坏尤顿海姆》《维林回来了》",
+            "乌弗朗之厅·被折磨的维林 → 交《维林回来了》→ 接《黑锋囚犯》",
+        ],
+        [
+            "约尔达村洞穴·白骨女巫 → 交《白骨女巫》→ 接《地下大厅的深处》《一加一大于二》《占命卜运》",
+            "地下大厅·贝索德·菲格 → 接《瓦古的复仇》",
+            "地下大厅 → 做《地下大厅的深处》《一加一大于二》《瓦古的复仇》",
+            "地下大厅·贝索德·菲格 → 交《瓦古的复仇》",
+            "约尔达村洞穴·白骨女巫 → 交《地下大厅的深处》《一加一大于二》→ 接《恐怖之水》",
+        ],
+        [
+            "Jotunheim → 做《干掉那些维库人！》《彰显军威》《破坏尤顿海姆》《黑锋囚犯》《占命卜运》《恐怖之水》",
+            "约尔达村洞穴·白骨女巫 → 交《恐怖之水》《占命卜运》→ 接《巫妖王之眼》",
+            "巫妖王之眼 → 做《巫妖王之眼》",
+            "约尔达村洞穴·白骨女巫 → 交《巫妖王之眼》→ 接《找到古代英雄》",
+            "先祖大厅 → 做《找到古代英雄》",
+            "约尔达村洞穴·白骨女巫 → 交《找到古代英雄》→ 接《不那么光彩的战斗》",
+        ],
+        [
+            "战痕尖塔 → 做《不那么光彩的战斗》",
+            "约尔达村洞穴·白骨女巫 → 交《不那么光彩的战斗》→ 接《女妖的复仇》",
+            "巴拉加德堡垒顶部 → 做《女妖的复仇》",
+            "约尔达村洞穴·白骨女巫 → 交《女妖的复仇》→ 接《瓦哈拉斯之战》",
+            "使用炉石：暗影拱顶",
+            "暗影拱顶 → 交《干掉那些维库人！》《彰显军威》《破坏尤顿海姆》《黑锋囚犯》",
+            "暗影拱顶 → 接《维尔喜欢火焰！》《把它们打下来！》《全速赶往死亡高地！》",
+        ],
+        [
+            "瓦哈拉斯西南鱼叉平台 → 做《把它们打下来！》",
+            "约尔达村 → 做《维尔喜欢火焰！》",
+        ],
+        [
+            "瓦哈拉斯 → 交《瓦哈拉斯之战》→ 接《瓦哈拉斯之战：堕落的英雄》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：堕落的英雄》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：堕落的英雄》→ 接《瓦哈拉斯之战：黑暗主宰西塔利克斯》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：黑暗主宰西塔利克斯》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：黑暗主宰西塔利克斯》→ 接《瓦哈拉斯之战：齐格莉德归来》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：齐格莉德归来》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：齐格莉德归来》→ 接《瓦哈拉斯之战：血肉巨人卡纳基！》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：血肉巨人卡纳基！》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：血肉巨人卡纳基！》→ 接《瓦哈拉斯之战：“死亡一击”领主》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：“死亡一击”领主》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：“死亡一击”领主》→ 接《瓦哈拉斯之战：终极挑战》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：终极挑战》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：终极挑战》",
+            "暗影拱顶 → 交《把它们打下来！》《维尔喜欢火焰！》",
+        ],
+        [
+            "死亡高地·高级指挥官埃雷特 → 交《全速赶往死亡高地！》→ 接《迄今为止的故事……》",
+            "死亡高地·高级指挥官埃雷特 → 做《迄今为止的故事……》→ 交《迄今为止的故事……》",
+            "死亡高地 → 接《水中之血》《转化尸体》《收集情报》",
+            "开飞行点：死亡高地",
+            "先锋军港口外围水域 → 做《水中之血》",
+            "先锋军港口 → 做《转化尸体》《收集情报》",
+            "死亡高地 → 交《水中之血》《转化尸体》《收集情报》",
+            "死亡高地·高级指挥官埃雷特 → 接《你需要狮鹫》",
+        ],
+        [
+            "先锋军港口两艘船 → 做《心腹的情报》",
+            "先锋军港口 → 做《你需要狮鹫》",
+            "死亡高地·乌佐·唤亡者 → 交《你需要狮鹫》→ 接《禁飞区》",
+            "死亡高地·高级指挥官埃雷特 → 交《心腹的情报》→ 接《第二次机会》",
+        ],
+        [
+            "先锋军港口 → 做《禁飞区》",
+            "赤色大教堂 → 做《第二次机会》",
+            "赤色大教堂·高级指挥官埃雷特 → 交《第二次机会》→ 接《元帅的下落》",
+            "先锋军港口南侧洞穴 → 做《元帅的下落》",
+            "死亡高地 → 交《元帅的下落》《禁飞区》",
+        ],
+        [
+            "黑色观察站·黑暗骑士阿尔蕾 → 交《黑色观察站》→ 接《它们从哪儿来的？》",
+            "缝合场 → 做《它们从哪儿来的？》",
+            "黑色观察站 → 交《它们从哪儿来的？》→ 接《摧毁祭坛》《死亡的凝视》",
+            "缝合场 → 做《摧毁祭坛》《死亡的凝视》",
+            "黑色观察站 → 交《摧毁祭坛》《死亡的凝视》→ 接《抛洒它们的血》",
+            "缝合场 → 做《抛洒它们的血》",
+            "缝合场 → 接《粗糙的碎片》",
+            "缝合场 → 做《粗糙的碎片》",
+            "缝合场·卡玛洛斯神父 → 接《我还没死！》",
+            "缝合场 → 做《我还没死！》",
+            "黑色观察站 → 交《抛洒它们的血》《粗糙的碎片》→ 接《熔炼碎片》《玛雷卡里斯的符文锻造师》",
+        ],
+        [
+            "玛雷卡里斯 → 做《熔炼碎片》《玛雷卡里斯的符文锻造师》",
+        ],
+        [
+            "黑色观察站 → 交《熔炼碎片》《玛雷卡里斯的符文锻造师》→ 接《看医生》《净化的火焰》",
+            "复生密室 → 做《看医生》《净化的火焰》",
+            "黑色观察站 → 交《看医生》《净化的火焰》→ 接《一举两得》",
+            "缝合场 → 做《一举两得》",
+            "黑色观察站 → 交《一举两得》→ 接《支离破碎》",
+            "缝合场 → 做《支离破碎》",
+            "黑色观察站 → 交《支离破碎》→ 接《重新组合欧尔拉金》",
+            "复生密室 → 做《重新组合欧尔拉金》",
+            "黑色观察站 → 交《重新组合欧尔拉金》→ 接《最强大的血肉巨人》",
+            "缝合场 → 做《最强大的血肉巨人》",
+            "黑色观察站 → 交《最强大的血肉巨人》",
+        ],
+        [
+            "奥格瑞姆之锤·凯尔坦修士 → 交《我还没死！》",
+        ],
+    ]
+    if len(steps) != len(clean_titles) or len(steps) != len(clean_actions):
+        raise RuntimeError("Icecrown action skeleton table is out of sync with route steps")
+
+    # The underground hall is a single visit. After Terror Water, finish the entire Bone Witch
+    # chain through accepting Battle at Valhalas before hearthing to Shadow Vault; no later route
+    # returns to Ymirheim/Bone Witch. The harpoon/fire dailies stay on the following west-side pass.
+    steps[4]["task_cards"]["13059"] = steps[6]["task_cards"].pop("13059")
+    steps[5]["task_cards"]["13121"] = steps[6]["task_cards"].pop("13121")
+    steps[5]["task_cards"]["13133"] = steps[7]["task_cards"].pop("13133")
+    steps[6]["task_cards"]["13137"] = steps[7]["task_cards"].pop("13137")
+    steps[6]["task_cards"]["13142"] = steps[7]["task_cards"].pop("13142")
+    steps[7]["task_cards"]["13069"] = steps[6]["task_cards"].pop("13069")
+    steps[7]["task_cards"]["13071"] = steps[6]["task_cards"].pop("13071")
+
+    for step, title, actions in zip(steps, clean_titles, clean_actions):
+        step["title"] = title
+        step["actions"] = actions
+        step["gate"] = ""
+        step["exit"] = ""
+
+    # Shadow Vault live confirmations replace earlier generic/expected notes.
+    shadow_unlock = steps[1]
+    shadow_unlock["task_cards"]["12891"]["route_note"] = ""
+    shadow_unlock["task_cards"]["12891"]["fivebox"] = "不共享：天灾精华五号分别收集；教徒魔棒、憎恶弯钩、恶鬼绳子一旦掉落，同一尸体五号可依次拾取。"
+    shadow_unlock["task_cards"]["12893"]["route_note"] = ""
+    shadow_unlock["task_cards"]["12893"]["fivebox"] = "共享："
+    shadow_unlock["task_cards"]["12897"]["route_note"] = "暗影拱顶内部北侧锻炉附近点击武器架召出莱斯班恩将军；三名已转化NPC会来协助。"
+    shadow_unlock["task_cards"]["12897"]["fivebox"] = "待实测：五号都留在将军附近，只召唤一次，确认是否全组完成。"
+    shadow_unlock["task_cards"]["12899"]["route_note"] = ""
+
+    # Strip evidence provenance / route-design prose from player notes. Keep only operation-changing facts.
+    player_note_overrides = {
+        12892: ("五号全部保持在100码内再击杀，避免远距离无信用。", "待实测：五号都保持在100码内，只击杀一次，确认是否全组完成；未完成的号再单补。"),
+        12939: ("格斗者约36.4—37.9,22.8—24.8；优先挑单独且未进入战斗的目标，正在互殴/成对目标插旗可能不计数。", "共享："),
+        12955: ("四个目标都在Savage Ledge：齐格莉德约37.1,22.5；埃弗雷姆37.9,25.1；奥努森37.9,22.9；丁奇36.1,23.6。", "共享："),
+        13106: ("", ""),
+        12943: ("乌弗朗约40.1,23.9；必须先宣读裁决令再击杀。", "共享："),
+        12949: ("霍加尔约37.5,23.4。", "共享："),
+        13042: ("目标约34.2,36.6，在白骨女巫东北侧地下大厅。", "共享：同一目标可五号依次连续拾取。"),
+        13043: ("", "共享："),
+        12992: ("", "共享："),
+        12995: ("", "共享："),
+        13084: ("固定旗帜分散在Jotunheim，沿路顺手处理即可。", "共享："),
+        12982: ("需要8把牢笼钥匙；空笼会消耗钥匙但不给信用，开笼前确认里面有黑锋囚犯。", "共享："),
+        13069: ("鱼叉平台约32,24；把视角拉近后连续快速射击，能量耗尽时装填。", "共享："),
+        13071: ("始祖龙约27,39；同一建筑燃烧期间不要重复，换下一栋或等火熄。", "待实测：先由一号烧一栋建筑，确认五号是否同时获得建筑信用。"),
+        13059: ("约33.1,37.8附近使用事件物触发挑战。", "共享："),
+        13121: ("库尔加拉要塞入口约25,61；进入后约26,62点击蓝色的巫妖王之眼，完成后返回白骨女巫交任务。", "不共享：五号分别点击巫妖王之眼；同一交互点可五号依次连续点击。"),
+        13133: ("先祖大厅入口约28,47；控制伊斯卡德尔后用地面移动带回白骨女巫，飞得太快会把他甩脱并导致重做。", "共享："),
+        13091: ("", "共享："),
+        13137: ("信号火焰约28.7,51.9。", "待实测：只召唤一次被占据的伊斯卡德尔并击杀，确认五号是否同时完成。"),
+        13214: ("", ""),
+        13219: ("", "共享：角色死亡但不释放灵魂时，队友击杀Boss后仍可获得当前场信用。"),
+        12838: ("钥匙来自先锋军成员；只有部分箱子含情报，可能需要开超过5个。箱子还可能掉落触发《元帅的计划》的元帅信件。", "待实测：五号分别开箱；比较同一箱子是否可连续开启，以及各号元帅信件状态。"),
+        12839: ("元帅信件不保证在首轮情报箱内出现；未掉落时当天不重复刷《收集情报》。", ""),
+        12840: ("两名船长都在各自船只顶部/船尾；直接击杀即可获得情报，不需要压血或等待台词。", "共享："),
+        12815: ("不强制使用骨狮鹫，五号直接组队击杀先锋军狮鹫骑士也可。", "共享："),
+        12847: ("一具兰德雷尸体只能成功打开一个门；开门后留在教堂等审讯脚本结束，并向出现的埃雷特交任务/接后续。教堂小怪重生较快，Boss尽量拉到后侧处理。", "待实测：五号贴近兰德雷尸体，只让一号开门，确认五号是否同时获得事件信用；未获得的号再补。"),
+        13136: ("来源是缝合场尖刺食尸鬼，掉率很高。", "待实测：第一只尖刺食尸鬼死亡后比较五号各自的碎片掉落，确认是否为个人独立掉落。"),
+        13229: ("", "待实测：五号一起护送一次，确认是否全组完成。"),
+        13140: ("玛雷卡里斯骷髅符文锻造师掉落符文萨隆邪铁板，掉率接近100%。", ""),
+        13152: ("复生密室入口约34,69；点击金属桩释放补丁后留在附近等待脚本完成。", "待实测：只由一号点击金属桩，比较五号的释放补丁/击杀博士两个目标；若只缺交互目标再分别补。"),
+        13211: ("腐烂尸体在34,68洞内和32,69下层较密集，刷新快，可在小范围循环。", "待实测：第一具尸体只由一号使用火炬，确认五号是否同步。"),
+    }
+    for step in steps:
+        for qid_text, card in (step.get("task_cards") or {}).items():
+            override = player_note_overrides.get(int(qid_text))
+            if override is not None:
+                card["route_note"], card["fivebox"] = override
+
+    # Step numbers are presentation order, not stable IDs. Renumber after reachability pruning.
     for step_number, step in enumerate(steps, start=1):
         step["step"] = step_number
+        step["title"] = player_task_names(str(step.get("title") or ""), by_id)
+        for key in ("gate", "exit"):
+            if step.get(key):
+                step[key] = player_task_names(str(step[key]), by_id)
+        step["actions"] = [player_task_names(str(action), by_id) for action in (step.get("actions") or [])]
+        for action in step["actions"]:
+            validate_action_skeleton(action)
+        for qid_text, card in (step.get("task_cards") or {}).items():
+            qid = int(qid_text)
+            if card.get("route_note"):
+                card["route_note"] = player_task_names(str(card["route_note"]), by_id)
+            if card.get("fivebox"):
+                card["fivebox"] = player_task_names(normalize_fivebox(qid, str(card["fivebox"])), by_id)
+
         step_timing = timing_by_step.get(step_number)
         if not step_timing:
             raise RuntimeError(f"missing marginal timing for Icecrown step {step_number}")
@@ -1166,35 +1549,54 @@ def main() -> None:
         }
 
     payload = {
-        "status": "icecrown_full_zone_route_pre_live_calibration",
+        "status": "icecrown_reachable_route_live_entry_confirmed",
         "zone": {"id": 210, "name": "冰冠冰川"},
-        "profile": "level-80 blood-elf paladin fivebox",
+        "profile": "level-80 blood-elf paladin fivebox no-cold-weather-flying",
         "timing_policy": timing.get("policy") or {},
         "entry_decision": {
-            "first_hub": "银色前线基地",
-            "skip_13227": True,
-            "skip_reason": "13227《审判日降临！》会在接受13036后失效，但80级仅3.24G/角色；不值得为它先追移动飞艇再折回地图东南角。",
+            "from_zone": "风暴峭壁",
+            "geographic_entry": "银色比武场",
+            "geographic_entry_coord": [69.65, 22.86],
+            "first_quest_hub": "奥格瑞姆之锤",
             "cold_weather_flying": False,
             "blocked_13419": True,
-            "airship_first_natural_visit": "完成银色北伐军主链至13224《奥格瑞姆之锤》后",
-            "probe_12892": "第一次自然登舰时检查库尔迪拉是否提供12892《乐趣十足》",
+            "blocked_argent_vanguard_chain": True,
+            "blocked_13224_airship_breadcrumb": True,
+            "live_12892_confirmed": True,
+            "live_12892_completed": True,
+        },
+        "tournament_sidecar": {
+            "restored_one_time_tasks": [13668, 13829, 13838, 13839],
+            "same_area_daily_included": 13677,
+            "deferred_active_one_time": {
+                "13678": "《迎接挑战》需要15枚候选者徽记，至少跨3天日常，不阻断当日冰冠主线。",
+                "13634": "《银松森林的黑骑士？》为跨大陆一次性支线，已接但不在当前冰冠连续清图中专程折返。",
+            },
+            "ignored_or_deferred_dailies": [13674],
+        },
+        "current_group_progress": {
+            "journey_event_count": 2221,
+            "journey_complete_count": 941,
+            "completed_entry_tasks": [13668, 13829, 13838, 13839, 13677, 12892, 12891, 12893],
+            "active_icecrown_task": 12897,
+            "active_deferred_tasks": [13227, 13634, 13674, 13678],
         },
         "steps": steps,
     }
     OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     lines = [
-        "# 冰冠冰川正式整图路线构建摘要",
+        "# 冰冠冰川当前可达路线构建摘要",
         "",
-        "状态：40步整图拓扑、逐步边际估时、几何结构和semantic-hud-v45玩家稿均已生成；正式工作台发布后仅等待首跑校准随机触发与五开机制。",
+        f"状态：当前不学寒冷天气飞行条件下，冰冠主任务池仍为61项；路线压成{len(steps)}个玩家步骤。《乐趣十足》入口已经首组实服确认并完成。",
         "",
-        "- 正式首Hub：银色前线基地。借用双足飞龙只是交通能力，不把奥格瑞姆之锤当第一落点。",
-        "- 13227《审判日降临！》按路线经济性跳过；13419《作战准备》因寒冷天气飞行门槛排除。",
-        "- 13224《奥格瑞姆之锤》由银色北伐军主链自然解锁；第一次自然登舰时现场确认12892《乐趣十足》。",
-        "- 布雷登布莱德跨图链按真实解锁点插入第27—30步，不作为地图末尾补链。",
-        f"- 首跑前整图边际预算：{timing.get('policy', {}).get('route_total_center_minutes', 0):.0f}分钟；区间{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[0]:.0f}—{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[1]:.0f}分钟。",
+        "- 从风暴峭壁进入冰冠后，第一地理区域是银色比武场；补回独立银色锦标赛分类中的《银色锦标赛》《近战训练》《碎盾训练》《冲锋训练》，并顺手做同场日常《学习驾驭》。",
+        "- 《迎接挑战》需要至少3天候选者徽记，《银松森林的黑骑士？》需要跨大陆；两条已接一次性支线记录为延后，不阻断当前连续清图。",
+        "- 13419《作战准备》不可执行；13036《无上的荣耀》已按实服隐藏前置13419处理，其独占后续递归不可达。",
+        "- 12892《乐趣十足》已由最新历程确认可接且完成；当前首组已完成《我有一计……》《解放你的思想》，任务栏推进到12897《顽固的敌人》。",
+        f"- 当前可达路线边际预算：{timing.get('policy', {}).get('route_total_center_minutes', 0):.0f}分钟；区间{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[0]:.0f}—{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[1]:.0f}分钟。",
         "",
-        "## 40步正式顺序",
+        f"## {len(steps)}步当前顺序",
         "",
     ]
     for step in steps:

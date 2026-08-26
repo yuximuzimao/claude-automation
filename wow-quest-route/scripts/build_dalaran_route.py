@@ -111,9 +111,9 @@ def g2_east_breadcrumbs() -> None:
         68.55,
         42.05,
         "克拉苏斯平台西侧·大法师伯塔鲁斯",
-        f"接{n(12521)}；只接任务，不选择前往索拉查盆地的出发对话",
+        f"接{n(12521)}",
         "east",
-        f"{n(12521)}：先携带到后续索拉查阶段；现在不要让大法师把角色送走。",
+        f"{n(12521)}：先携带到后续索拉查阶段；不要选择前往索拉查盆地的出发对话。",
         "ride",
         (12521,),
     )
@@ -121,7 +121,7 @@ def g2_east_breadcrumbs() -> None:
         72.0,
         46.0,
         "克拉苏斯平台·飞行点",
-        "开飞行点：达拉然（五号分别）",
+        "开飞行点：达拉然",
         "east",
         "不要在附近学习寒冷天气飞行；当前路线要保留到K3领取免费借用双足飞龙的资格。",
         "ride",
@@ -129,15 +129,6 @@ def g2_east_breadcrumbs() -> None:
 
 
 def g3_underbelly() -> None:
-    P(
-        60.0,
-        47.5,
-        "克拉苏斯平台入口旁·下水道东入口",
-        "从东入口下到达拉然下水道，沿通道向西走",
-        "underbelly",
-        "",
-        "ride",
-    )
     P(
         48.18,
         44.71,
@@ -158,15 +149,6 @@ def g3_underbelly() -> None:
         "ride",
         (12853,),
     )
-    P(
-        35.0,
-        45.0,
-        "下水道西入口 → 紫罗兰之门",
-        "从西入口回到地面，向东返回紫罗兰之门",
-        "underbelly",
-        "",
-        "ride",
-    )
 
 
 def g4_to_k3() -> None:
@@ -174,9 +156,9 @@ def g4_to_k3() -> None:
         55.93,
         46.78,
         "紫罗兰之门 → 紫罗兰哨站 → K3",
-        f"五号分别点击下城水晶到紫罗兰哨站；落地后沿晶歌森林北部道路向东北骑入风暴峭壁K3；到K3找基尔·斯巴索克交{n(12853)}",
+        f"使用传送水晶：紫罗兰之门 → 紫罗兰哨站\nK3·基尔·斯巴索克 → 交{n(12853)}",
         "exit",
-        f"{n(12853)}：抵达K3后直接交付。下一步进入风暴峭壁路线，先找“诚实的”麦克斯领取借用双足飞龙。",
+        f"{n(12853)}：紫罗兰哨站落地后沿北部道路前往K3；抵达后直接交付。下一步先找“诚实的”麦克斯领取借用双足飞龙。",
         "crossmap",
         (12853,),
     )
@@ -205,13 +187,11 @@ G(
     g2_east_breadcrumbs,
     action_html="""
 <div class="ra-line"><span class="ra-location">克拉苏斯平台西侧</span>·<span class="ra-npc">大法师伯塔鲁斯</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">赫米特·奈辛瓦里哪去了？</span></div>
-<div class="ra-line"><span class="ra-danger">只接任务，不选择前往索拉查盆地的出发对话</span></div>
-<div class="ra-line"><span class="ra-system-action ra-flightpoint">开飞行点：达拉然（五号分别）</span></div>
+<div class="ra-line"><span class="ra-system-action ra-flightpoint">开飞行点：达拉然</span></div>
 """,
     note_html="""
 <div class="ra-note-heading">备注</div>
-<div class="ra-note-block"><div class="ra-note-task">《赫米特·奈辛瓦里哪去了？》</div><div class="ra-note-text">先携带到索拉查阶段。</div></div>
-<div class="ra-note-block"><div class="ra-note-task">免费飞行坐骑</div><div class="ra-note-text"><span class="ra-danger">不要在这里学习寒冷天气飞行</span>；到K3先领取借用双足飞龙。</div></div>
+<div class="ra-note-block"><div class="ra-note-task">《赫米特·奈辛瓦里哪去了？》</div><div class="ra-note-text">先携带到索拉查阶段；不要选择前往索拉查盆地的出发对话。</div></div>
 """,
     timing_center=3.0,
     timing_range=(2.0, 5.0),
@@ -222,10 +202,8 @@ G(
     "从东入口进下水道，依次拿祖达克斗兽场引导和当前风暴K3引导，再从西入口返回地面。",
     g3_underbelly,
     action_html="""
-<div class="ra-line"><span class="ra-location">克拉苏斯平台入口旁</span>·下水道东入口<span class="ra-arrow">→</span><span class="ra-location">达拉然下水道</span></div>
 <div class="ra-line"><span class="ra-npc">狡猾的维克斯</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">勇士的召唤！</span></div>
 <div class="ra-line"><span class="ra-npc">林·多克塔</span><span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">豪华的体验！</span></div>
-<div class="ra-line"><span class="ra-location">下水道西入口</span><span class="ra-arrow">→</span>回地面<span class="ra-arrow">→</span><span class="ra-location">紫罗兰之门</span></div>
 """,
     note_html="""
 <div class="ra-note-heading">备注</div>
@@ -241,14 +219,12 @@ G(
     "用已经解锁的下城水晶落到晶歌森林，地面骑到K3并交风暴引导。",
     g4_to_k3,
     action_html="""
-<div class="ra-line"><span class="ra-location">紫罗兰之门</span>·下城水晶<span class="ra-arrow">→</span><span class="ra-location">晶歌森林·紫罗兰哨站</span></div>
-<div class="ra-line"><span class="ra-location">紫罗兰哨站</span><span class="ra-arrow">→</span><span class="ra-transport">沿北部道路向东北骑行</span><span class="ra-arrow">→</span><span class="ra-location">风暴峭壁·K3</span></div>
+<div class="ra-line"><span class="ra-system-action">使用传送水晶：紫罗兰之门 → 紫罗兰哨站</span></div>
 <div class="ra-line"><span class="ra-location">K3</span>·<span class="ra-npc">基尔·斯巴索克</span><span class="ra-arrow">→</span><span class="ra-verb">交</span> <span class="ra-task ra-turnin">豪华的体验！</span></div>
-<div class="ra-line"><span class="ra-danger">到K3后先找“诚实的”麦克斯领取借用双足飞龙，再开始风暴任务</span></div>
 """,
     note_html="""
 <div class="ra-note-heading">备注</div>
-<div class="ra-note-block"><div class="ra-note-task">《豪华的体验！》</div><div class="ra-note-text">抵达K3后直接交付。</div></div>
+<div class="ra-note-block"><div class="ra-note-task">《豪华的体验！》</div><div class="ra-note-text">紫罗兰哨站落地后沿北部道路前往K3；抵达后直接交付，再找“诚实的”麦克斯领取借用双足飞龙。</div></div>
 """,
     timing_center=8.0,
     timing_range=(5.0, 11.0),
@@ -261,7 +237,7 @@ route = {
     "order": 5,
     "uiStandard": "semantic-hud-v45",
     "title": "达拉然 · 77级主轴任务清理",
-    "sub": "龙骨整图完成后进入达拉然：清完本地入城链，一次接走风暴/索拉查/祖达克三条当前可接主轴引导，然后下城去K3；冰冠《作战准备》在冰冠入口重新检查。",
+    "sub": "龙骨整图完成后进入达拉然：清完本地入城链，一次接走风暴/索拉查/祖达克三条当前可接主轴引导，然后下城去K3；《作战准备》要求寒冷天气飞行，本路线不接。",
     "badge": "炉石：阿格玛之锤\n预计总时间：约23分钟（15—34分钟）",
     "image": "maps/4395-dalaran.png",
     "legend": "",

@@ -197,7 +197,7 @@ def patch_steps_5_23_player_copy(route: dict) -> None:
 
     # Step 9: fixed item/overlap/escort mechanics belong in notes.
     update_point(9, "回音海岸南侧岸边小屋", "↳ 做《莫布的坦克零件气动装配器》：进入约(32.4,49.2)小屋，拾取屋内固定零件", "↳ 做《莫布的坦克零件气动装配器》", "《莫布的坦克零件气动装配器》：固定零件在约(32.4,49.2)岸边小屋内，不在屋外地面。")
-    update_point(9, "回音海岸克瓦迪尔怪区", "↳ 做《超强度金属板！》《深入迷雾》《古代水手的号角》：同一怪区一起推进；离开前确认五号均达到交付条件", "↳ 做《超强度金属板！》《深入迷雾》《古代水手的号角》", "三条任务在同一克瓦迪尔怪区推进；离开前确认五号均达到交付条件，不为其中任何一条单独折返。")
+    update_point(9, "回音海岸克瓦迪尔怪区", "↳ 做《超强度金属板！》《深入迷雾》《古代水手的号角》：同一怪区一起推进；离开前确认五号均达到交付条件", "↳ 做《超强度金属板！》《深入迷雾》《古代水手的号角》", "三条任务在同一克瓦迪尔怪区完成；五号都达到交付条件后离开。")
     update_point(9, "回音海岸", "小穆图 → 接《逃离迷雾》\n↳ 做《逃离迷雾》：护送小穆图", "小穆图 → 接《逃离迷雾》\n↳ 做《逃离迷雾》")
     route["stepGroups"][8]["actionHtml"] = "\n".join([
         do_at("回音海岸南侧岸边小屋", "莫布的坦克零件气动装配器"),
@@ -240,20 +240,20 @@ def patch_steps_5_23_player_copy(route: dict) -> None:
 
     # Step 15: target/use/loot mechanics are notes; task action stays skeletal.
     update_point(15, "裂鞭废墟东北部", "↳ 做《纳兹亚的三叉戟》：击杀拉格纳·德拉卡伦并拾取纳兹亚的三叉戟", "↳ 做《纳兹亚的三叉戟》", "《纳兹亚的三叉戟》：击杀拉格纳·德拉卡伦并拾取纳兹亚的三叉戟。")
-    update_point(15, "裂鞭废墟北部冰山下", "↳ 做《使者》：下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀", "↳ 做《使者》", "《使者》：目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。Questie约(52.1,88.2)只给平面坐标。")
+    update_point(15, "裂鞭废墟北部冰山下", "↳ 做《使者》：下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀", "↳ 做《使者》", "《使者》：目标在水下冰山底部；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。")
     g = route["stepGroups"][14]
     g["actionHtml"] = "\n".join([do_at("裂鞭废墟东北部", "纳兹亚的三叉戟"), npc_actions("维赫亚", turns=("纳兹亚的三叉戟",), accepts=("使者",)), do_at("裂鞭废墟北部冰山下", "使者"), npc_actions("卡鲁克", turns=("使者",))])
     g["noteHtml"] = notes_html(
         note_block("纳兹亚的三叉戟", '击杀拉格纳·德拉卡伦并拾取纳兹亚的三叉戟。<div class="ra-fivebox-line"><span class="ra-pending">五开待实测：</span>同一具尸体上的三叉戟是否能让五个角色分别拾取。</div>'),
-        note_block("使者", '<span class="ra-danger">目标在水下、冰山底部</span>；Questie约(52.1,88.2)只给平面坐标。下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。<div class="ra-fivebox-line"><span class="ra-pending">五开待实测：</span>是否只需一个角色使用三叉戟并参与击杀即可同步五号进度。</div>'),
+        note_block("使者", '<span class="ra-danger">目标在水下、冰山底部</span>；下潜找到利维洛斯，对它使用纳兹亚的三叉戟后击杀。<div class="ra-fivebox-line"><span class="ra-pending">五开待实测：</span>是否只需一个角色使用三叉戟并参与击杀即可同步五号进度。</div>'),
     )
 
     # Step 16: opportunity item-start quest follows the same drop-trigger display rule.
-    update_point(16, "战歌要塞南门·伊斯里克斯事件", "若事件正在进行 → 完成事件并击杀收割者伊斯里克斯 → 拾取伊斯里克斯的甲壳 → 接《寒风中的怪兽……》；若无事件/甲壳，直接继续，不等待", "若事件正在进行 → 接《寒风中的怪兽……》；否则继续，不等待")
+    update_point(16, "战歌要塞南门·伊斯里克斯事件", "若事件正在进行 → 接《寒风中的怪兽……》；否则继续，不等待", "↳ 接《寒风中的怪兽……》", "《寒风中的怪兽……》：只在路过时检查伊斯里克斯事件；事件正在进行才击杀收割者伊斯里克斯并拾取甲壳接任务，没有事件就直接继续，不等待。")
     g = route["stepGroups"][15]
-    verbose = '<div class="ra-line">若事件正在进行<span class="ra-arrow">→</span>完成事件并击杀<span class="ra-npc">收割者伊斯里克斯</span><span class="ra-arrow">→</span>拾取伊斯里克斯的甲壳<span class="ra-arrow">→</span><span class="ra-verb">接</span> <span class="ra-task ra-accept">寒风中的怪兽……</span></div>\n<div class="ra-line">若无事件/甲壳<span class="ra-arrow">→</span><span class="ra-danger">直接继续，不等待</span></div>'
-    concise = '<div class="ra-line">若事件正在进行' + arrow() + verb("接") + ' ' + task("寒风中的怪兽……", "accept") + '；否则<span class="ra-danger">继续，不等待</span></div>'
-    replace_action_html(g, verbose, concise, "step 16 Isrikk")
+    old_html = '<div class="ra-line">若事件正在进行' + arrow() + verb("接") + ' ' + task("寒风中的怪兽……", "accept") + '；否则<span class="ra-danger">继续，不等待</span></div>'
+    new_html = '<div class="ra-line ra-do">' + branch() + verb("接") + ' ' + task("寒风中的怪兽……", "accept") + '</div>'
+    replace_action_html(g, old_html, new_html, "step 16 Isrikk")
 
     # Step 18: reconnaissance/kill/count mechanics leave the action line.
     for title in ("托普的农场", "战歌粮仓", "战歌屠宰场"):
@@ -422,7 +422,7 @@ def main() -> None:
             "points": [
                 {
                     "title": "考达拉·永生之盾",
-                    "action": "开飞行点：永生之盾（五号分别）\n大法师伯林纳德 → 交《飞越裂谷》 → 接《监测数据》《古树的秘密》\n图书馆员塞尔拉 → 接《冰冷的草莓》\n莱洛拉斯 → 接《基本的训练》",
+                    "action": "开飞行点：永生之盾\n大法师伯林纳德 → 交《飞越裂谷》 → 接《监测数据》《古树的秘密》\n图书馆员塞尔拉 → 接《冰冷的草莓》\n莱洛拉斯 → 接《基本的训练》",
                 },
                 {
                     "title": "考达拉南部监测点",
@@ -436,7 +436,7 @@ def main() -> None:
             ],
             "action_html": [
                 point_anchor("考达拉·永生之盾"),
-                system_line("开飞行点：永生之盾（五号分别）", "ra-flightpoint"),
+                system_line("开飞行点：永生之盾", "ra-flightpoint"),
                 npc_actions("大法师伯林纳德", turns=("飞越裂谷",), accepts=("监测数据", "古树的秘密")),
                 npc_actions("图书馆员塞尔拉", accepts=("冰冷的草莓",)),
                 npc_actions("莱洛拉斯", accepts=("基本的训练",)),
@@ -670,7 +670,7 @@ def main() -> None:
                 },
                 {
                     "title": "博古洛克前哨站",
-                    "action": "开飞行点：博古洛克前哨站（五号分别）\n博古洛克大王 → 交《攻击！》\n灵语者斯纳尔芬 → 交《立即前往博古洛克前哨站！》 → 接《睿智的气元素》\n补给官塔尼斯 → 接《国王姆嘎姆嘎》",
+                    "action": "开飞行点：博古洛克前哨站\n博古洛克大王 → 交《攻击！》\n灵语者斯纳尔芬 → 交《立即前往博古洛克前哨站！》 → 接《睿智的气元素》\n补给官塔尼斯 → 接《国王姆嘎姆嘎》",
                 },
             ],
             "action_html": [
@@ -680,7 +680,7 @@ def main() -> None:
                 do_at("钢腭车队战场", "攻击！", "亡者的尊严", "让他们安息"),
                 npc_actions("步兵沃塔·怒拳", turns=("亡者的尊严", "让他们安息")),
                 point_anchor("博古洛克前哨站"),
-                system_line("开飞行点：博古洛克前哨站（五号分别）", "ra-flightpoint"),
+                system_line("开飞行点：博古洛克前哨站", "ra-flightpoint"),
                 npc_actions("博古洛克大王", turns=("攻击！",)),
                 npc_actions("灵语者斯纳尔芬", turns=("立即前往博古洛克前哨站！",), accepts=("睿智的气元素",)),
                 npc_actions("补给官塔尼斯", accepts=("国王姆嘎姆嘎",)),

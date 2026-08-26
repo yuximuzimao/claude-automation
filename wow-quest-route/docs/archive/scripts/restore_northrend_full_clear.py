@@ -151,7 +151,7 @@ def main() -> None:
     g = find_group(groups, "牦牛村第一轮：接任务 → 三处虫孔调查")
     g["summary"] = "开启牦牛村飞行点；交《前往牦牛村》和《地狱咆哮的勇士》，接齐虫孔/运货/先知任务并开始调查。"
     p = find_point(g, "牦牛村·第一次Hub扫描")
-    p[3] = "开启牦牛村飞行点；交《前往牦牛村》→接《他们想干什么？》；交《地狱咆哮的勇士》；接《侦查虫孔》 + 接《运货行动！》 + 接《先知赫米萨》"
+    p[3] = "开飞行点：牦牛村\n交《前往牦牛村》 → 接《他们想干什么？》\n交《地狱咆哮的勇士》\n接《侦查虫孔》《运货行动！》《先知赫米萨》"
 
     # Coldarra: restore Ancient Tree's Secret and Stay Hidden; dungeon/raid followups remain outside this outdoor route.
     g = find_group(groups, "永生之盾开场 → 南 / 西监测点")

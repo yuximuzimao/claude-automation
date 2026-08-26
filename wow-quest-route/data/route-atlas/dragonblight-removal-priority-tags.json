@@ -6,10 +6,9 @@
   "pool_definition": {
     "effective_world_candidates_before_current_axis_filter": 147,
     "excluded_current_unusable": {
-      "11979": "mutually_exclusive_with_current_borean_entry_axis",
-      "12033": "only_prerequisite_11916_removed_from_current_route"
+      "11979": "mutually_exclusive_with_current_borean_entry_axis"
     },
-    "usable_task_count": 142
+    "usable_task_count": 143
   },
   "chain_scope": [
     {
@@ -18,7 +17,7 @@
     }
   ],
   "summary": {
-    "task_card_count": 142,
+    "task_card_count": 143,
     "priority_candidate_count": 14,
     "priority_counts": {
       "P1": 0,
@@ -1225,7 +1224,7 @@
       "name": "前往阿格玛之锤",
       "english_name": "Your Presence is Required at Agmar's Hammer",
       "scope_status": "include_leveling_local",
-      "first_route_step": 22,
+      "first_route_step": null,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -2305,6 +2304,62 @@
         "chain:terminal_in_scope",
         "removal:not_eligible:not_multi_item_drop_or_pickup",
         "reward:equipment",
+        "scope:include_leveling_local",
+        "timing:estimated"
+      ]
+    },
+    {
+      "quest_id": 12033,
+      "name": "萨鲁法尔的信",
+      "english_name": "Message from the West",
+      "scope_status": "include_leveling_local",
+      "first_route_step": 3,
+      "has_equipment_reward": false,
+      "equipment_rewards": [],
+      "direct_money_status": "not_required_outside_priority_dependency_closure",
+      "has_direct_money": null,
+      "max_level_bonus_money": {
+        "level": 80,
+        "xp_at_level_80_base": 6100,
+        "bonus_money_from_xp_copper": 36600,
+        "bonus_money_from_xp_gold_decimal": 3.66,
+        "display": "3g 66s 00c",
+        "no_money_from_xp": false,
+        "rate": "6 copper per base XP at level 80",
+        "server_leveling_xp_multiplier_applied": false
+      },
+      "collection": {
+        "is_multi_item_drop_or_pickup": false,
+        "trusted_item_units": 0,
+        "source_modes": [],
+        "collection_pattern": null,
+        "objective_details": [],
+        "review_reasons": [],
+        "manual_override_source": null,
+        "manual_exclusion_reason": null,
+        "tags": []
+      },
+      "chain": {
+        "scope_zone_ids": [
+          65
+        ],
+        "direct_followup_ids": [],
+        "descendant_ids": []
+      },
+      "timing": {
+        "status": "estimated",
+        "minutes": 0.58,
+        "basis": "single_fixed_object_model"
+      },
+      "removal_priority": {
+        "eligible": false,
+        "reason": "not_multi_item_drop_or_pickup"
+      },
+      "tags": [
+        "chain:terminal_in_scope",
+        "removal:not_eligible:not_multi_item_drop_or_pickup",
+        "reward:money_not_required_for_priority",
+        "reward:no_equipment",
         "scope:include_leveling_local",
         "timing:estimated"
       ]
@@ -3802,7 +3857,7 @@
       "name": "部落的力量",
       "english_name": "The Might of the Horde",
       "scope_status": "include_leveling_local",
-      "first_route_step": 3,
+      "first_route_step": 6,
       "has_equipment_reward": true,
       "equipment_rewards": [
         {
@@ -3966,7 +4021,7 @@
       "name": "血之魔典",
       "english_name": "The Flesh-Bound Tome",
       "scope_status": "include_leveling_local",
-      "first_route_step": 5,
+      "first_route_step": 7,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -6390,7 +6445,7 @@
       "name": "通知女王",
       "english_name": "Informing the Queen",
       "scope_status": "include_leveling_local",
-      "first_route_step": 32,
+      "first_route_step": 31,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -7059,7 +7114,7 @@
       "name": "古怪的暗示",
       "english_name": "Disturbing Implications",
       "scope_status": "include_leveling_local",
-      "first_route_step": 10,
+      "first_route_step": 28,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -7122,7 +7177,7 @@
       "name": "集结的信号",
       "english_name": "One of a Kind",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 31,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -7193,7 +7248,7 @@
       "name": "强大的猛犸人",
       "english_name": "Mighty Magnataur",
       "scope_status": "include_leveling_local",
-      "first_route_step": 35,
+      "first_route_step": 34,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -8505,7 +8560,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 2.92,
+        "minutes": 0.58,
         "basis": "fixed_object_fivebox_model"
       },
       "removal_priority": {
@@ -9127,7 +9182,7 @@
       "name": "无路可逃",
       "english_name": "No Place to Run",
       "scope_status": "include_leveling_local",
-      "first_route_step": 33,
+      "first_route_step": 32,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -9191,7 +9246,7 @@
       "name": "驱逐天灾",
       "english_name": "No One to Save You",
       "scope_status": "include_leveling_local",
-      "first_route_step": 33,
+      "first_route_step": 32,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -9247,7 +9302,7 @@
       "name": "敌人的意图",
       "english_name": "The Best of Intentions",
       "scope_status": "include_leveling_local",
-      "first_route_step": 33,
+      "first_route_step": 32,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -9407,7 +9462,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 4.67,
+        "minutes": 0.93,
         "basis": "fixed_object_fivebox_model"
       },
       "removal_priority": {
@@ -9484,7 +9539,7 @@
       "name": "奈萨里奥的烈焰",
       "english_name": "Neltharion's Flame",
       "scope_status": "include_leveling_local",
-      "first_route_step": 34,
+      "first_route_step": 33,
       "has_equipment_reward": true,
       "equipment_rewards": [
         {
@@ -9724,7 +9779,7 @@
       "name": "狼狈不堪",
       "english_name": "A Fall From Grace",
       "scope_status": "include_leveling_local",
-      "first_route_step": 46,
+      "first_route_step": 45,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10132,7 +10187,7 @@
       "name": "红玉巨龙圣地的命运",
       "english_name": "The Fate of the Ruby Dragonshrine",
       "scope_status": "include_leveling_local",
-      "first_route_step": 31,
+      "first_route_step": 30,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10188,7 +10243,7 @@
       "name": "向德弗雷斯塔兹领主报到",
       "english_name": "Report to Lord Devrestrasz",
       "scope_status": "include_leveling_local",
-      "first_route_step": 32,
+      "first_route_step": 31,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10244,7 +10299,7 @@
       "name": "黑曜石巨龙圣地",
       "english_name": "The Obsidian Dragonshrine",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 27,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10311,7 +10366,7 @@
       "name": "白热化的战斗",
       "english_name": "Heated Battle",
       "scope_status": "include_leveling_local",
-      "first_route_step": 30,
+      "first_route_step": 29,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10375,7 +10430,7 @@
       "name": "重归尘土",
       "english_name": "Return to the Earth",
       "scope_status": "include_leveling_local",
-      "first_route_step": 30,
+      "first_route_step": 29,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10438,7 +10493,7 @@
       "name": "烈焰之地",
       "english_name": "Through Fields of Flame",
       "scope_status": "include_leveling_local",
-      "first_route_step": 20,
+      "first_route_step": 30,
       "has_equipment_reward": true,
       "equipment_rewards": [
         {
@@ -10689,7 +10744,7 @@
       "name": "鞭笞者的种子",
       "english_name": "Seeds of the Lashers",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 27,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "verified_present",
@@ -10871,7 +10926,7 @@
       "name": "前往红玉巨龙圣地",
       "english_name": "Report to the Ruby Dragonshrine",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 27,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -10996,7 +11051,7 @@
       "name": "永恒之龙的秘密",
       "english_name": "Mystery of the Infinite",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 27,
       "has_equipment_reward": true,
       "equipment_rewards": [
         {
@@ -11650,7 +11705,7 @@
       "name": "与你们的大使相谈",
       "english_name": "Speak with your Ambassador",
       "scope_status": "include_leveling_local",
-      "first_route_step": 29,
+      "first_route_step": 27,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",
@@ -11716,7 +11771,7 @@
       "name": "龙眠神殿的执事",
       "english_name": "The Steward of Wyrmrest Temple",
       "scope_status": "include_leveling_local",
-      "first_route_step": 31,
+      "first_route_step": 30,
       "has_equipment_reward": false,
       "equipment_rewards": [],
       "direct_money_status": "not_required_outside_priority_dependency_closure",

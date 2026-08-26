@@ -1,12 +1,22 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/route-atlas/workbench-routes.json"
 OUT_DIR = ROOT / ".ai-bridge"
+
+
+def html_to_text(value: str) -> str:
+    text = re.sub(r"<br\s*/?>", "\n", value or "", flags=re.I)
+    text = re.sub(r"</div\s*>", "\n", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = html.unescape(text)
+    return "\n".join(line.strip() for line in text.splitlines() if line.strip())
 
 
 def render_route(key: str, route: dict) -> str:
@@ -26,13 +36,22 @@ def render_route(key: str, route: dict) -> str:
             f"## 步骤 {idx}｜{group['title']}",
             f"摘要：{group.get('summary', '')}",
         ])
-        for point_idx in range(group["start"], group["end"] + 1):
-            point = points[point_idx]
-            lines.append(f"- {point[2]}：{point[3]}")
-            if len(point) > 5 and point[5]:
-                lines.append(f"  - 备注：{point[5]}")
-            if len(point) > 8 and point[8]:
-                lines.append(f"  - 五开待实测：{point[8]}")
+        action_html = str(group.get("actionHtml", "") or "").strip()
+        note_html = str(group.get("noteHtml", "") or "").strip()
+        if action_html:
+            lines.append("动作：")
+            lines.extend(f"- {line}" for line in html_to_text(action_html).splitlines())
+            if note_html:
+                lines.append("备注：")
+                lines.extend(f"- {line}" for line in html_to_text(note_html).splitlines())
+        else:
+            for point_idx in range(group["start"], group["end"] + 1):
+                point = points[point_idx]
+                lines.append(f"- {point[2]}：{point[3]}")
+                if len(point) > 5 and point[5]:
+                    lines.append(f"  - 备注：{point[5]}")
+                if len(point) > 8 and point[8]:
+                    lines.append(f"  - 五开待实测：{point[8]}")
         lines.append("")
     return "\n".join(lines)
 

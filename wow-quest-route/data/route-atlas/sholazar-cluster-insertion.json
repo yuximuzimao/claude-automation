@@ -1,0 +1,1543 @@
+{
+  "status": "task_cluster_insertion_draft_before_whole_map_merge_audit",
+  "policy": "Target Cluster visits are inserted into the current whole-map skeleton. Same-entity and nearby cross-phase repeats are explicitly surfaced for the post-insertion merge audit; coordinates never override real terrain or prerequisite state.",
+  "formal_task_count": 66,
+  "phase_count": 11,
+  "target_cluster_count": 92,
+  "cluster_visit_count": 62,
+  "cross_phase_same_entity_count": 1,
+  "cross_phase_same_entity": [
+    {
+      "cluster_id": "npc:28011",
+      "name": "帝王眼镜蛇",
+      "representative": {
+        "x": 47.56,
+        "y": 59.89,
+        "spawn_count": 61
+      },
+      "quest_ids": [
+        12543,
+        12571
+      ],
+      "phases": [
+        "S04",
+        "S09"
+      ],
+      "has_dependency_unlock_between": true,
+      "dependency_unlocks": [
+        {
+          "quest_id": 12571,
+          "phase": "S09",
+          "blocking_dependencies": [
+            12570
+          ]
+        }
+      ],
+      "review_priority": "normal"
+    }
+  ],
+  "nearby_cross_phase_count": 12,
+  "nearby_cross_phase": [
+    {
+      "distance_map_percent": 0.47,
+      "left": {
+        "cluster_id": "npc:28566",
+        "name": "“醉鬼”麦克马努斯",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:28054",
+        "name": "幸运的威尔海姆",
+        "quest_ids": [
+          12589
+        ],
+        "phases": [
+          "S03"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 0.5,
+      "left": {
+        "cluster_id": "object:190643",
+        "name": "Thunderbrew's Jungle Punch",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:28054",
+        "name": "幸运的威尔海姆",
+        "quest_ids": [
+          12589
+        ],
+        "phases": [
+          "S03"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 0.86,
+      "left": {
+        "cluster_id": "npc:28047",
+        "name": "哈迪乌斯·哈洛维",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      },
+      "right": {
+        "cluster_id": "object:190643",
+        "name": "Thunderbrew's Jungle Punch",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 0.9,
+      "left": {
+        "cluster_id": "npc:28566",
+        "name": "“醉鬼”麦克马努斯",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:28047",
+        "name": "哈迪乌斯·哈洛维",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 0.97,
+      "left": {
+        "cluster_id": "npc:28047",
+        "name": "哈迪乌斯·哈洛维",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:28054",
+        "name": "幸运的威尔海姆",
+        "quest_ids": [
+          12589
+        ],
+        "phases": [
+          "S03"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.07,
+      "left": {
+        "cluster_id": "npc:28011",
+        "name": "帝王眼镜蛇",
+        "quest_ids": [
+          12543,
+          12571
+        ],
+        "phases": [
+          "S04",
+          "S09"
+        ]
+      },
+      "right": {
+        "cluster_id": "object:190622",
+        "name": "Sturdy Vine",
+        "quest_ids": [
+          12634
+        ],
+        "phases": [
+          "S04"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.36,
+      "left": {
+        "cluster_id": "npc:27986",
+        "name": "赫米特·奈辛瓦里",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      },
+      "right": {
+        "cluster_id": "object:190643",
+        "name": "Thunderbrew's Jungle Punch",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.41,
+      "left": {
+        "cluster_id": "npc:28566",
+        "name": "“醉鬼”麦克马努斯",
+        "quest_ids": [
+          12644
+        ],
+        "phases": [
+          "S05"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:27986",
+        "name": "赫米特·奈辛瓦里",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.67,
+      "left": {
+        "cluster_id": "npc:27986",
+        "name": "赫米特·奈辛瓦里",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:28054",
+        "name": "幸运的威尔海姆",
+        "quest_ids": [
+          12589
+        ],
+        "phases": [
+          "S03"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.79,
+      "left": {
+        "cluster_id": "npc:28002",
+        "name": "蛮藤谷鳄鱼",
+        "quest_ids": [
+          12551
+        ],
+        "phases": [
+          "S04"
+        ]
+      },
+      "right": {
+        "cluster_id": "object:190533",
+        "name": "Sandfern",
+        "quest_ids": [
+          12560
+        ],
+        "phases": [
+          "S05"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 1.95,
+      "left": {
+        "cluster_id": "npc:28001",
+        "name": "恶刃豹",
+        "quest_ids": [
+          12549
+        ],
+        "phases": [
+          "S03"
+        ]
+      },
+      "right": {
+        "cluster_id": "npc:27986",
+        "name": "赫米特·奈辛瓦里",
+        "quest_ids": [
+          12645
+        ],
+        "phases": [
+          "S06"
+        ]
+      }
+    },
+    {
+      "distance_map_percent": 2.47,
+      "left": {
+        "cluster_id": "object:190533",
+        "name": "Sandfern",
+        "quest_ids": [
+          12560
+        ],
+        "phases": [
+          "S05"
+        ]
+      },
+      "right": {
+        "cluster_id": "object:190545",
+        "name": "Fallen Log",
+        "quest_ids": [
+          12569
+        ],
+        "phases": [
+          "S06"
+        ]
+      }
+    }
+  ],
+  "phases": [
+    {
+      "phase_id": "S01",
+      "title": "达拉然 → 蛮藤谷 → 奈辛瓦里营地",
+      "task_ids": [
+        12521,
+        12489
+      ],
+      "cluster_visit_count": 0,
+      "ordered_cluster_visits": []
+    },
+    {
+      "phase_id": "S02",
+      "title": "奈辛瓦里工程线 → 斯温迪格林挖掘场 → 开营地飞行点",
+      "task_ids": [
+        12522,
+        12523,
+        12524,
+        12624,
+        12688,
+        12525
+      ],
+      "cluster_visit_count": 9,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "object:190447",
+          "name": "Flying Machine Engine",
+          "entity_type": "object",
+          "entity_id": 190447,
+          "representative": {
+            "x": 38.69,
+            "y": 56.72,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12522
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28186",
+          "name": "工头斯温迪格林",
+          "entity_type": "npc",
+          "entity_id": 28186,
+          "representative": {
+            "x": 35.83,
+            "y": 50.39,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12525
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28188",
+          "name": "肉饼",
+          "entity_type": "npc",
+          "entity_id": 28188,
+          "representative": {
+            "x": 35.85,
+            "y": 50.15,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12525
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190455",
+          "name": "Venture Co. Spare Parts",
+          "entity_type": "object",
+          "entity_id": 190455,
+          "representative": {
+            "x": 35.58,
+            "y": 47.81,
+            "spawn_count": 15
+          },
+          "quest_ids": [
+            12523
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28124",
+          "name": "风险投资公司无赖",
+          "entity_type": "npc",
+          "entity_id": 28124,
+          "representative": {
+            "x": 35.48,
+            "y": 47.74,
+            "spawn_count": 17
+          },
+          "quest_ids": [
+            12524
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "manual:12624:swindlegrins_dig",
+          "name": "斯温迪格林挖掘场·金色订婚戒指",
+          "entity_type": "manual_spatial_service",
+          "entity_id": "12624:swindlegrins_dig",
+          "representative": {
+            "x": 35.55,
+            "y": 47.42,
+            "spawn_count": null
+          },
+          "quest_ids": [
+            12624
+          ],
+          "source_kinds": [
+            "manual_route_override"
+          ]
+        },
+        {
+          "cluster_id": "npc:28123",
+          "name": "风险投资公司挖掘者",
+          "entity_type": "npc",
+          "entity_id": 28123,
+          "representative": {
+            "x": 35.12,
+            "y": 47.41,
+            "spawn_count": 40
+          },
+          "quest_ids": [
+            12524
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190454",
+          "name": "Venture Co. Spare Parts",
+          "entity_type": "object",
+          "entity_id": 190454,
+          "representative": {
+            "x": 34.64,
+            "y": 47.35,
+            "spawn_count": 17
+          },
+          "quest_ids": [
+            12523
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190453",
+          "name": "Venture Co. Spare Parts",
+          "entity_type": "object",
+          "entity_id": 190453,
+          "representative": {
+            "x": 34.95,
+            "y": 46.63,
+            "spawn_count": 18
+          },
+          "quest_ids": [
+            12523
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S03",
+      "title": "奈辛瓦里初阶狩猎",
+      "task_ids": [
+        12520,
+        12549,
+        12589,
+        12592
+      ],
+      "cluster_visit_count": 3,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28054",
+          "name": "幸运的威尔海姆",
+          "entity_type": "npc",
+          "entity_id": 28054,
+          "representative": {
+            "x": 27.01,
+            "y": 60.31,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12589
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28001",
+          "name": "恶刃豹",
+          "entity_type": "npc",
+          "entity_id": 28001,
+          "representative": {
+            "x": 27.97,
+            "y": 56.89,
+            "spawn_count": 43
+          },
+          "quest_ids": [
+            12549
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28009",
+          "name": "碎角犀牛",
+          "entity_type": "npc",
+          "entity_id": 28009,
+          "representative": {
+            "x": 29.45,
+            "y": 50.36,
+            "spawn_count": 26
+          },
+          "quest_ids": [
+            12520
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S04",
+      "title": "奈辛瓦里南西综合狩猎",
+      "task_ids": [
+        12526,
+        12543,
+        12544,
+        12550,
+        12551,
+        12634,
+        12804
+      ],
+      "cluster_visit_count": 6,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28129",
+          "name": "食草长颈鹿",
+          "entity_type": "npc",
+          "entity_id": 28129,
+          "representative": {
+            "x": 28.43,
+            "y": 71.28,
+            "spawn_count": 36
+          },
+          "quest_ids": [
+            12804
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190507",
+          "name": "Offering Bowl",
+          "entity_type": "object",
+          "entity_id": 190507,
+          "representative": {
+            "x": 26.13,
+            "y": 71.53,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12544
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "npc:28002",
+          "name": "蛮藤谷鳄鱼",
+          "entity_type": "npc",
+          "entity_id": 28002,
+          "representative": {
+            "x": 43.54,
+            "y": 61.5,
+            "spawn_count": 42
+          },
+          "quest_ids": [
+            12551
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190622",
+          "name": "Sturdy Vine",
+          "entity_type": "object",
+          "entity_id": 190622,
+          "representative": {
+            "x": 47.34,
+            "y": 60.94,
+            "spawn_count": 24
+          },
+          "quest_ids": [
+            12634
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "npc:28011",
+          "name": "帝王眼镜蛇",
+          "entity_type": "npc",
+          "entity_id": 28011,
+          "representative": {
+            "x": 47.56,
+            "y": 59.89,
+            "spawn_count": 61
+          },
+          "quest_ids": [
+            12543
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190700",
+          "name": "Dreadsaber Track",
+          "entity_type": "object",
+          "entity_id": 190700,
+          "representative": {
+            "x": 32.58,
+            "y": 38.55,
+            "spawn_count": 7
+          },
+          "quest_ids": [
+            12550
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S05",
+      "title": "终极狩猎 → 沙蕨 → 炉石奈辛瓦里",
+      "task_ids": [
+        12644,
+        12556,
+        12558,
+        12560
+      ],
+      "cluster_visit_count": 5,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "object:190643",
+          "name": "Thunderbrew's Jungle Punch",
+          "entity_type": "object",
+          "entity_id": 190643,
+          "representative": {
+            "x": 26.68,
+            "y": 59.93,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12644
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28566",
+          "name": "“醉鬼”麦克马努斯",
+          "entity_type": "npc",
+          "entity_id": 28566,
+          "representative": {
+            "x": 26.67,
+            "y": 59.98,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12644
+          ],
+          "source_kinds": [
+            "extra_reference",
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190533",
+          "name": "Sandfern",
+          "entity_type": "object",
+          "entity_id": 190533,
+          "representative": {
+            "x": 43.88,
+            "y": 63.26,
+            "spawn_count": 73
+          },
+          "quest_ids": [
+            12560
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28288",
+          "name": "法鲁恩",
+          "entity_type": "npc",
+          "entity_id": 28288,
+          "representative": {
+            "x": 46.72,
+            "y": 42.84,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12556
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28297",
+          "name": "杉苟",
+          "entity_type": "npc",
+          "entity_id": 28297,
+          "representative": {
+            "x": 33.78,
+            "y": 33.66,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12558
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S06",
+      "title": "鳄鱼伏击 → 河流之心 → 匹奇 → 狂心岭",
+      "task_ids": [
+        12569,
+        12651,
+        12696,
+        12645,
+        12699,
+        12671,
+        12654,
+        12528
+      ],
+      "cluster_visit_count": 6,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:27986",
+          "name": "赫米特·奈辛瓦里",
+          "entity_type": "npc",
+          "entity_id": 27986,
+          "representative": {
+            "x": 27.1,
+            "y": 58.64,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12645
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28047",
+          "name": "哈迪乌斯·哈洛维",
+          "entity_type": "npc",
+          "entity_id": 28047,
+          "representative": {
+            "x": 27.36,
+            "y": 59.4,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12645
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190545",
+          "name": "Fallen Log",
+          "entity_type": "object",
+          "entity_id": 190545,
+          "representative": {
+            "x": 46.34,
+            "y": 63.43,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12569
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "object:190778",
+          "name": "Raised Mud",
+          "entity_type": "object",
+          "entity_id": 190778,
+          "representative": {
+            "x": 48.19,
+            "y": 63.31,
+            "spawn_count": 10
+          },
+          "quest_ids": [
+            12699
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28568",
+          "name": "塔玛拉·摇链",
+          "entity_type": "npc",
+          "entity_id": 28568,
+          "representative": {
+            "x": 50.48,
+            "y": 62.13,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12645
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28097",
+          "name": "匹奇",
+          "entity_type": "npc",
+          "entity_id": 28097,
+          "representative": {
+            "x": 50.53,
+            "y": 77.22,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12654
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S07",
+      "title": "狂心岭 → 硬皮猩猩 → 蓝玉虫巢 → 狂心岭",
+      "task_ids": [
+        12529,
+        12530,
+        12533,
+        12534,
+        12532
+      ],
+      "cluster_visit_count": 7,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28098",
+          "name": "硬皮抢夺者",
+          "entity_type": "npc",
+          "entity_id": 28098,
+          "representative": {
+            "x": 60.14,
+            "y": 72.2,
+            "spawn_count": 41
+          },
+          "quest_ids": [
+            12529
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28096",
+          "name": "硬皮冲锋者",
+          "entity_type": "npc",
+          "entity_id": 28096,
+          "representative": {
+            "x": 65.96,
+            "y": 71.57,
+            "spawn_count": 21
+          },
+          "quest_ids": [
+            12529
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28127",
+          "name": "软皮猩猩",
+          "entity_type": "npc",
+          "entity_id": 28127,
+          "representative": {
+            "x": 66.91,
+            "y": 74.29,
+            "spawn_count": 11
+          },
+          "quest_ids": [
+            12530
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "npc:28213",
+          "name": "雌性硬皮猩猩",
+          "entity_type": "npc",
+          "entity_id": 28213,
+          "representative": {
+            "x": 67.68,
+            "y": 74.34,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12530
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28085",
+          "name": "蓝玉虫巢雄蜂",
+          "entity_type": "npc",
+          "entity_id": 28085,
+          "representative": {
+            "x": 59.0,
+            "y": 81.63,
+            "spawn_count": 74
+          },
+          "quest_ids": [
+            12533
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28087",
+          "name": "蓝玉虫巢蜂后",
+          "entity_type": "npc",
+          "entity_id": 28087,
+          "representative": {
+            "x": 56.97,
+            "y": 79.62,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12534
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28086",
+          "name": "蓝玉虫巢巨蜂",
+          "entity_type": "npc",
+          "entity_id": 28086,
+          "representative": {
+            "x": 55.36,
+            "y": 83.31,
+            "spawn_count": 69
+          },
+          "quest_ids": [
+            12533
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S08",
+      "title": "狂心岭南部 → 雾语村 → 炉石奈辛瓦里 → 狂心岭",
+      "task_ids": [
+        12531,
+        12535,
+        12536,
+        12537,
+        12538,
+        12539
+      ],
+      "cluster_visit_count": 6,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28298",
+          "name": "被俘虏的鳄鱼",
+          "entity_type": "npc",
+          "entity_id": 28298,
+          "representative": {
+            "x": 57.3,
+            "y": 68.38,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12536
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28083",
+          "name": "劫掠者瑟菲克斯",
+          "entity_type": "npc",
+          "entity_id": 28083,
+          "representative": {
+            "x": 58.87,
+            "y": 85.59,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12531
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190500",
+          "name": "Skyreach Crystal Formation",
+          "entity_type": "object",
+          "entity_id": 190500,
+          "representative": {
+            "x": 54.56,
+            "y": 85.79,
+            "spawn_count": 54
+          },
+          "quest_ids": [
+            12535
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190502",
+          "name": "Arranged Crystal Formation",
+          "entity_type": "object",
+          "entity_id": 190502,
+          "representative": {
+            "x": 45.41,
+            "y": 37.24,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12537
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28110",
+          "name": "雾语神谕者",
+          "entity_type": "npc",
+          "entity_id": 28110,
+          "representative": {
+            "x": 44.56,
+            "y": 36.8,
+            "spawn_count": 19
+          },
+          "quest_ids": [
+            12538
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28109",
+          "name": "雾语战士",
+          "entity_type": "npc",
+          "entity_id": 28109,
+          "representative": {
+            "x": 43.94,
+            "y": 36.81,
+            "spawn_count": 29
+          },
+          "quest_ids": [
+            12538
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S09",
+      "title": "狂心岭 → 雨声树屋 → 河流之心近旁 → 雨声树屋",
+      "task_ids": [
+        12540,
+        12570,
+        12571,
+        12572,
+        12573,
+        12574
+      ],
+      "cluster_visit_count": 5,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28217",
+          "name": "受伤的雨声神谕者",
+          "entity_type": "npc",
+          "entity_id": 28217,
+          "representative": {
+            "x": 56.64,
+            "y": 64.53,
+            "spawn_count": 5
+          },
+          "quest_ids": [
+            12540,
+            12570
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "npc:28325",
+          "name": "贪婪的蛮藤谷鳄鱼",
+          "entity_type": "npc",
+          "entity_id": 28325,
+          "representative": {
+            "x": 55.34,
+            "y": 62.95,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12540
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28315",
+          "name": "萨满祭司维克伊克",
+          "entity_type": "npc",
+          "entity_id": 28315,
+          "representative": {
+            "x": 51.3,
+            "y": 64.64,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12573
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28011",
+          "name": "帝王眼镜蛇",
+          "entity_type": "npc",
+          "entity_id": 28011,
+          "representative": {
+            "x": 47.56,
+            "y": 59.89,
+            "spawn_count": 61
+          },
+          "quest_ids": [
+            12571
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28358",
+          "name": "毒尖",
+          "entity_type": "npc",
+          "entity_id": 28358,
+          "representative": {
+            "x": 56.85,
+            "y": 52.33,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12571
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S10",
+      "title": "雾语村 → 多里安营地 → 北部猎场 → 雾语村",
+      "task_ids": [
+        12575,
+        12576,
+        12595,
+        12603,
+        12605,
+        12683,
+        12607,
+        12658,
+        12681,
+        12614,
+        12577
+      ],
+      "cluster_visit_count": 11,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "npc:28003",
+          "name": "苦潮多头蛇",
+          "entity_type": "npc",
+          "entity_id": 28003,
+          "representative": {
+            "x": 41.32,
+            "y": 41.7,
+            "spawn_count": 13
+          },
+          "quest_ids": [
+            12683
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28374",
+          "name": "苏特菲兹",
+          "entity_type": "npc",
+          "entity_id": 28374,
+          "representative": {
+            "x": 42.11,
+            "y": 28.89,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12607
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28080",
+          "name": "狂心持矛者",
+          "entity_type": "npc",
+          "entity_id": 28080,
+          "representative": {
+            "x": 41.0,
+            "y": 23.32,
+            "spawn_count": 14
+          },
+          "quest_ids": [
+            12576
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28081",
+          "name": "狂心清除者",
+          "entity_type": "npc",
+          "entity_id": 28081,
+          "representative": {
+            "x": 41.19,
+            "y": 22.99,
+            "spawn_count": 15
+          },
+          "quest_ids": [
+            12576
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190578",
+          "name": "Mistwhisper Treasure",
+          "entity_type": "object",
+          "entity_id": 190578,
+          "representative": {
+            "x": 41.69,
+            "y": 19.48,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12575
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28467",
+          "name": "母龙斯利维娜",
+          "entity_type": "npc",
+          "entity_id": 28467,
+          "representative": {
+            "x": 47.08,
+            "y": 21.32,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12614
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28408",
+          "name": "始生龙卵",
+          "entity_type": "npc",
+          "entity_id": 28408,
+          "representative": {
+            "x": 47.67,
+            "y": 27.4,
+            "spawn_count": 13
+          },
+          "quest_ids": [
+            12605
+          ],
+          "source_kinds": [
+            "extra_reference"
+          ]
+        },
+        {
+          "cluster_id": "npc:28378",
+          "name": "始生幼龙",
+          "entity_type": "npc",
+          "entity_id": 28378,
+          "representative": {
+            "x": 48.23,
+            "y": 28.4,
+            "spawn_count": 15
+          },
+          "quest_ids": [
+            12603
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28379",
+          "name": "裂牙猛犸",
+          "entity_type": "npc",
+          "entity_id": 28379,
+          "representative": {
+            "x": 51.7,
+            "y": 33.1,
+            "spawn_count": 25
+          },
+          "quest_ids": [
+            12607
+          ],
+          "source_kinds": [
+            "extra_reference",
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28004",
+          "name": "血爪大鹏",
+          "entity_type": "npc",
+          "entity_id": 28004,
+          "representative": {
+            "x": 57.73,
+            "y": 27.24,
+            "spawn_count": 27
+          },
+          "quest_ids": [
+            12681
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "object:190660",
+          "name": "Roc Egg",
+          "entity_type": "object",
+          "entity_id": 190660,
+          "representative": {
+            "x": 56.52,
+            "y": 25.98,
+            "spawn_count": 39
+          },
+          "quest_ids": [
+            12658
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    },
+    {
+      "phase_id": "S11",
+      "title": "雨声树屋 → 苔行村 → 造物者悬台 → 阿图里斯 → 雨声树屋",
+      "task_ids": [
+        12578,
+        12579,
+        12580,
+        12691,
+        12581,
+        12689,
+        12695
+      ],
+      "cluster_visit_count": 4,
+      "ordered_cluster_visits": [
+        {
+          "cluster_id": "object:190702",
+          "name": "Lifeblood Shard",
+          "entity_type": "object",
+          "entity_id": 190702,
+          "representative": {
+            "x": 71.06,
+            "y": 57.98,
+            "spawn_count": 50
+          },
+          "quest_ids": [
+            12579
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28659",
+          "name": "残忍的阿图里斯",
+          "entity_type": "npc",
+          "entity_id": 28659,
+          "representative": {
+            "x": 72.11,
+            "y": 57.62,
+            "spawn_count": 1
+          },
+          "quest_ids": [
+            12581
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28113",
+          "name": "苔行村受害者",
+          "entity_type": "npc",
+          "entity_id": 28113,
+          "representative": {
+            "x": 75.73,
+            "y": 51.52,
+            "spawn_count": 37
+          },
+          "quest_ids": [
+            12580
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        },
+        {
+          "cluster_id": "npc:28069",
+          "name": "索拉查卫士",
+          "entity_type": "npc",
+          "entity_id": 28069,
+          "representative": {
+            "x": 81.26,
+            "y": 54.02,
+            "spawn_count": 6
+          },
+          "quest_ids": [
+            12691
+          ],
+          "source_kinds": [
+            "objective"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "status": "primary_entry_frozen_shadow_vault_probe_deferred_to_natural_airship_visit",
+  "status": "storm_to_argent_tournament_geographic_entry_then_reachable_root_scan",
   "zone": {
     "id": 210,
     "name": "冰冠冰川"
@@ -8,7 +8,9 @@
   "transport": {
     "cold_weather_flying_learned": false,
     "loaned_wind_rider_available": true,
-    "action": "use the loaned wind rider to enter Argent Vanguard first; do not chase the moving airship as the first hub"
+    "from_zone": "风暴峭壁",
+    "first_geographic_region": "银色比武场",
+    "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; do not route through Argent Vanguard"
   },
   "blocked_transport_quest": {
     "quest_id": 13419,
@@ -16,10 +18,16 @@
     "scope_status": "exclude_cold_weather_flying_gate",
     "cold_weather_flying_gate": true
   },
-  "primary_entry": {
+  "blocked_argent_vanguard_root": {
     "quest_id": 13036,
     "name": "无上的荣耀",
-    "scope_status": "include_candidate",
+    "scope_status": "exclude_dependency_on_blocked_task",
+    "scope_reasons": [
+      "blocked_by_13419"
+    ],
+    "pre_any": [
+      13419
+    ],
     "starts": [
       {
         "entity_type": "npc",
@@ -31,7 +39,7 @@
       }
     ],
     "next_quest": 13008,
-    "reason": "independent Argent Vanguard root; geographically natural first hub and its chain later unlocks the Horde airship breadcrumb 13224"
+    "reason": "verified hidden dependency on 13419; the entire exclusive descendant chain is unreachable while Cold Weather Flying remains unlearned"
   },
   "skipped_breadcrumb": {
     "quest_id": 13227,
@@ -41,9 +49,13 @@
     "decision": "skip_permanently",
     "reason": "becomes unavailable after starting 13036 and is only 3.24G per character from max-level XP conversion; not worth a dedicated moving-airship detour before Argent Vanguard"
   },
-  "natural_airship_entry": {
+  "blocked_natural_airship_breadcrumb": {
     "quest_id": 13224,
     "name": "奥格瑞姆之锤",
+    "scope_status": "exclude_dependency_on_blocked_task",
+    "scope_reasons": [
+      "blocked_by_13157"
+    ],
     "pre_any": [
       13157
     ],
@@ -76,10 +88,10 @@
     "required_spell": null,
     "cold_weather_flying_gate": false,
     "starts": [],
-    "live_check": "when quest 13224 naturally brings the group to Orgrim's Hammer, check whether Koltira Deathweaver offers quest 12892",
-    "if_missing": "record the live blocker; do not infer 13419 as a hard prerequisite solely from old public comments"
+    "live_check": "after entering Icecrown from Storm Peaks at the Argent Tournament Grounds, reach Orgrim's Hammer directly with the loaned mount and check whether Koltira Deathweaver offers quest 12892",
+    "if_missing": "record the real blocker and remove the Shadow Vault component from the executable route; do not unlock other airship tasks merely because their NPCs are present"
   },
-  "independent_root_count": 3,
+  "independent_root_count": 1,
   "independent_roots": [
     {
       "quest_id": 12892,
@@ -92,62 +104,6 @@
         "xp_bonus_money_copper": 132300,
         "xp_bonus_money_gold_decimal": 13.23,
         "xp_bonus_money_display": "13g 23s 00c",
-        "equipment_reward_count": 0,
-        "other_reward_item_count": 0,
-        "direct_money_copper": 0,
-        "direct_money_gold_decimal": 0.0,
-        "direct_money_status": "not_yet_globally_audited",
-        "direct_money_basis": null
-      }
-    },
-    {
-      "quest_id": 13036,
-      "name": "无上的荣耀",
-      "scope_status": "include_candidate",
-      "starts": [
-        {
-          "entity_type": "npc",
-          "entity_id": 28179,
-          "name": "大领主提里奥·弗丁",
-          "x": 87.46,
-          "y": 75.83,
-          "spawn_count": 1
-        }
-      ],
-      "required_min_rep": null,
-      "available_starting_with": [],
-      "level_80_economy": {
-        "xp_bonus_money_copper": 12900,
-        "xp_bonus_money_gold_decimal": 1.29,
-        "xp_bonus_money_display": "1g 29s 00c",
-        "equipment_reward_count": 0,
-        "other_reward_item_count": 0,
-        "direct_money_copper": 0,
-        "direct_money_gold_decimal": 0.0,
-        "direct_money_status": "not_yet_globally_audited",
-        "direct_money_basis": null
-      }
-    },
-    {
-      "quest_id": 13117,
-      "name": "它们从哪儿来的？",
-      "scope_status": "include_candidate",
-      "starts": [
-        {
-          "entity_type": "npc",
-          "entity_id": 30631,
-          "name": "黑暗骑士阿尔蕾",
-          "x": 35.39,
-          "y": 66.32,
-          "spawn_count": 1
-        }
-      ],
-      "required_min_rep": null,
-      "available_starting_with": [],
-      "level_80_economy": {
-        "xp_bonus_money_copper": 99300,
-        "xp_bonus_money_gold_decimal": 9.93,
-        "xp_bonus_money_display": "9g 93s 00c",
         "equipment_reward_count": 0,
         "other_reward_item_count": 0,
         "direct_money_copper": 0,

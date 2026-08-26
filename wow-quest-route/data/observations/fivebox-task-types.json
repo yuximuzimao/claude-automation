@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-23",
+  "updated_at": "2026-08-26",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -615,6 +615,11 @@
       "status": "user_confirmed",
       "note": "能量电池可在同一刷新点由五个角色连续取得；每个角色都需分别激活传送器，随后分别传回K3。"
     },
+    "12831": {
+      "type": "single_item_personal_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《未被遗忘》首组实跑确认：冰尖毒囊一次拾取只供一个角色，五号分别取得。"
+    },
     "12856": {
       "type": "vehicle_rescue_group_shared_close_range_confirmed",
       "status": "user_confirmed",
@@ -675,10 +680,240 @@
       "status": "user_confirmed",
       "note": "《回首往事》首组实跑确认：号角碎片进度不共享，五个角色分别拾取完成。"
     },
-    "13051": {
-      "type": "triggered_event_personal_confirmed",
+    "13050": {
+      "type": "fixed_ground_pickup_personal_no_same_spawn_sequential_confirmed",
       "status": "user_confirmed",
-      "note": "《维拉努斯》首组实跑确认：事件进度不共享，五个角色需要分别触发并完成。"
+      "note": "《维拉努斯》首组实跑确认：五个角色分别取得5枚小型始祖龙卵，不共享；同一龙卵不能由五号连续拾取，需要各自找可拾取的龙卵。"
+    },
+    "13051": {
+      "type": "triggered_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《侵犯领土》首组实跑确认：事件进度共享，主控触发完成即可同步五号。"
+    },
+    "12910": {
+      "type": "mixed_single_boss_shared_personal_tracking_and_communicator",
+      "status": "user_confirmed",
+      "note": "《追踪罪犯》首组实跑确认：终点Boss只需击杀一次；追踪气味源头不共享，五号分别完成，布莱恩通讯器也必须五号分别使用。"
+    },
+    "12920": {
+      "type": "communicator_interaction_personal_with_completion_race",
+      "status": "user_confirmed",
+      "note": "《联络布莱恩》不共享；五号分别使用通讯器。不要连续快速交互，确认当前角色任务完成后再切下一个，否则有概率不计完成。"
+    },
+    "12926": {
+      "type": "collection_and_combine_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《拼图游戏》不共享，五号分别收集磁盘碎片并完成自己的拼图。"
+    },
+    "12927": {
+      "type": "database_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《采集数据》首组实跑确认：秘密数据进度共享，一号完成即可同步五号。"
+    },
+    "12928": {
+      "type": "single_boss_shared_same_corpse_fivebox_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《诺甘农之壳》首组实跑确认：档案员麦卡顿只需击杀一次，同一尸体五个角色依次拾取诺甘农之壳即可。"
+    },
+    "12930": {
+      "type": "fixed_ground_pickup_personal_vertical_search_confirmed",
+      "status": "user_confirmed",
+      "note": "《稀有的土壤》不共享，五号各收7块魔化土壤；目标分布在悬崖上下层，需要反复升降寻找。"
+    },
+    "12931": {
+      "type": "kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《反击》首组实跑确认：击杀进度共享。"
+    },
+    "12937": {
+      "type": "rescue_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《救死扶伤》首组实跑确认：救援进度共享。"
+    },
+    "12957": {
+      "type": "rescue_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《雷铸铁矮人的奴隶》首组实跑确认：解救进度共享。"
+    },
+    "12964": {
+      "type": "ground_pickup_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《黑暗的矿石》不共享，五号分别拾取。"
+    },
+    "12965": {
+      "type": "fixed_object_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《洛肯的礼物》首组实跑确认：三件固定物由主控各互动一次即可同步五号。"
+    },
+    "12979": {
+      "type": "item_trigger_same_corpse_fivebox_loot_followup_samples_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《黑暗的护甲板》首组实跑确认：起始护甲板一旦掉落，同一具作战魔像五号都可分别拾取并接任务；后续4份黑暗护甲样品进度共享。"
+    },
+    "12980": {
+      "type": "npc_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《护甲板的秘密》只需与随从托克互动一次，五号同步完成。"
+    },
+    "12988": {
+      "type": "object_destroy_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《摧毁熔炉！》共享；三个闪电熔炉由主控各投弹一次即可同步五号。"
+    },
+    "12993": {
+      "type": "fixed_document_personal_same_spawn_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "《巨像的威胁》不共享；攻击/防御规格说明书同一固定刷新点可由五个角色连续拾取。"
+    },
+    "12998": {
+      "type": "fixed_object_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《风暴之心》首组实跑确认：固定物只需一号互动即可同步五号。"
+    },
+    "13005": {
+      "type": "mixed_summon_and_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《土灵的誓言》首组实跑确认：进度共享。"
+    },
+    "13035": {
+      "type": "named_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《洛肯的副官》首组实跑确认：三个命名副官各击杀一次即可同步五号。"
+    },
+    "13047": {
+      "type": "event_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《清算之战》首组实跑确认：事件进度共享。"
+    },
+    "13048": {
+      "type": "event_and_kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《错误的时间流》首组实跑确认：进度共享。"
+    },
+    "13049": {
+      "type": "random_drop_same_corpse_fivebox_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《英雄的装备》不共享个人拾取，但长矛或锁甲各自一旦掉落，同一尸体五号可连续拾取，无需为五号分别刷五次掉落。"
+    },
+    "12823": {
+      "type": "quest_item_script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《完美的计划》实跑确认：霜胆祭坛放炸药动作共享，只需主控完成一次。"
+    },
+    "12996": {
+      "type": "vehicle_named_fight_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《热身赛》实跑确认：基加拉格进度共享，只需主控骑熊完成一次。"
+    },
+    "12997": {
+      "type": "vehicle_kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《进入利齿之坑》实跑确认：6头海德比武会战熊进度共享，主控完成即可同步五号。"
+    },
+    "13034": {
+      "type": "fixed_object_interaction_personal_same_object_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "《见证者与英雄》实跑确认：3份历史卷轴五号分别交互；同一卷轴可连续切号各自点击。"
+    },
+    "13038": {
+      "type": "quest_item_objective_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《时间的扰动》实跑确认：4道浮冰裂隙进度共享，主控完成即可同步五号。"
+    },
+    "13058": {
+      "type": "script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《改变风向》实跑确认：北风事件共享，主控触发并完成一次即可同步五号。"
+    },
+    "13273": {
+      "type": "fixed_document_personal_same_spawn_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "《追查诺甘农之核》两份固定文档五号分别拾取；同一刷新点可连续拾取。"
+    },
+    "13285": {
+      "type": "script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《铸造钥石》首组实跑确认：合成钥石事件一号触发即可同步五号。"
+    },
+    "12891": {
+      "type": "mixed_personal_essence_same_corpse_sequential_loot_confirmed",
+      "status": "user_confirmed",
+      "note": "《我有一计……》首组实跑确认：天灾精华不共享，五号分别收集；教徒魔棒、憎恶弯钩、恶鬼绳子一旦在尸体上掉落，同一具尸体可由五个角色依次拾取。"
+    },
+    "12893": {
+      "type": "corpse_interaction_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《解放你的思想》首组实跑确认：任务进度共享。"
+    },
+    "12939": {
+      "type": "task_item_trigger_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《荣耀的挑战》首组实跑确认：共享。"
+    },
+    "12955": {
+      "type": "dialogue_combat_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《消灭竞争者》首组实跑确认：共享。"
+    },
+    "12943": {
+      "type": "task_item_trigger_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《暗影拱顶裁决令》首组实跑确认：共享。"
+    },
+    "12949": {
+      "type": "named_kill_task_item_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《夺取钥匙》首组实跑确认：共享。"
+    },
+    "12992": {
+      "type": "kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《干掉那些维库人！》首组实跑确认：共享。"
+    },
+    "12995": {
+      "type": "corpse_flag_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《彰显军威》首组实跑确认：共享。"
+    },
+    "13084": {
+      "type": "fixed_object_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《破坏尤顿海姆》首组实跑确认：共享。"
+    },
+    "12982": {
+      "type": "cage_rescue_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《黑锋囚犯》首组实跑确认：共享；整组需要8把牢笼钥匙完成8次有效解救。"
+    },
+    "13042": {
+      "type": "group_shared_same_target_sequential_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《地下大厅的深处》首组实跑确认：共享；同一目标可依次连续拾取/操作。"
+    },
+    "13043": {
+      "type": "script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《一加一大于二》首组实跑确认：共享。"
+    },
+    "13059": {
+      "type": "script_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《瓦古的复仇》首组实跑确认：共享；第一次进入地下大厅时即可接取、完成并在洞内直接交付，不需要第二次进入地下大厅。"
+    },
+    "13121": {
+      "type": "fixed_object_personal_same_spawn_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "《巫妖王之眼》首组实跑确认：不共享，五号分别交互；同一巫妖王之眼可由五个角色依次连续点击。"
+    },
+    "13133": {
+      "type": "escort_control_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《找到古代英雄》首组实跑确认：共享。"
+    },
+    "13091": {
+      "type": "vehicle_kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《恐怖之水》首组实跑确认：共享。"
     }
   }
 }

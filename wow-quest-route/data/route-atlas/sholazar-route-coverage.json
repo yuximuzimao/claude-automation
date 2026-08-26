@@ -1,0 +1,37 @@
+{
+  "status": "formal_sholazar_full_clear_initial_route_pre_live_fivebox_calibration",
+  "formal_task_count": 66,
+  "covered_task_count": 66,
+  "missing": [],
+  "unexpected": [],
+  "point_count": 72,
+  "step_group_count": 8,
+  "opened_flight_points_final": [
+    "奈辛瓦里营地",
+    "河流之心",
+    "达拉然",
+    "银色比武场",
+    "龙眠神殿"
+  ],
+  "system_flight_audit": [
+    {
+      "from": "银色比武场",
+      "to": "达拉然",
+      "status": "both_opened"
+    },
+    {
+      "from": "河流之心",
+      "to": "达拉然",
+      "status": "both_opened"
+    },
+    {
+      "from": "达拉然",
+      "to": "龙眠神殿",
+      "status": "both_opened"
+    }
+  ],
+  "transition_status": "pass_conservative_opened_flight_network",
+  "merge_status": "pass",
+  "harmful_split_count": 0,
+  "fivebox_policy": "未知五开机制保留待实测标记，不阻塞当前路线；首跑反馈只打开对应任务簇窗口。"
+}

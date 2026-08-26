@@ -149,12 +149,73 @@ def summarize(path: Path, preview: int) -> dict[str, Any]:
     }
 
 
+def export_latest_current(path: Path) -> dict[str, Any]:
+    config = parse_saved_variables(path)
+    char_table = config.get("char")
+    if not isinstance(char_table, dict):
+        raise ValueError("QuestieConfig.char is missing or not a table")
+
+    candidates: list[tuple[int, list[dict[str, Any]]]] = []
+    for entry in char_table.values():
+        if not isinstance(entry, dict):
+            continue
+        events_raw = seq(entry.get("journey"))
+        if not events_raw:
+            continue
+        events = [normalize_event(raw, index) for index, raw in enumerate(events_raw, start=1)]
+        latest = max((event_timestamp(event) or 0 for event in events), default=0)
+        candidates.append((latest, events))
+
+    if not candidates:
+        raise ValueError("No QuestieConfig.char journey entries found")
+
+    _, events = max(candidates, key=lambda item: item[0])
+    timestamps = [value for event in events if (value := event_timestamp(event)) is not None]
+    levels = [value for event in events if (value := event_level(event)) is not None]
+    complete_quest_ids = sorted({
+        int(event["quest_id"])
+        for event in events
+        if event.get("event") == "Complete" and isinstance(event.get("quest_id"), int)
+    })
+    quest_events = [event for event in events if isinstance(event.get("quest_id"), int)]
+    level_events = [event for event in events if event.get("event") == "LevelUp"]
+
+    return {
+        "source_scope": "account-level QuestieConfig.char latest journey entry",
+        "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "profile": "PALADIN_BLOODELF_CURRENT",
+        "total_events": len(events),
+        "quest_events": len(quest_events),
+        "level_events": len(level_events),
+        "earliest_timestamp": min(timestamps) if timestamps else None,
+        "latest_timestamp": max(timestamps) if timestamps else None,
+        "min_level": min(levels) if levels else None,
+        "max_level": max(levels) if levels else None,
+        "complete_quest_ids": complete_quest_ids,
+        "events": events,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Extract a redacted Questie journey summary")
     parser.add_argument("source", type=Path)
     parser.add_argument("--preview", type=int, default=40)
     parser.add_argument("--latest-only", action="store_true")
+    parser.add_argument("--export-current", type=Path, help="Write the latest journey entry as a full sanitized JSON cache")
     args = parser.parse_args()
+
+    if args.export_current:
+        result = export_latest_current(args.source)
+        args.export_current.parent.mkdir(parents=True, exist_ok=True)
+        args.export_current.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps({
+            "output": str(args.export_current),
+            "total_events": result["total_events"],
+            "complete_quest_count": len(result["complete_quest_ids"]),
+            "max_level": result["max_level"],
+            "latest_timestamp": result["latest_timestamp"],
+        }, ensure_ascii=False, indent=2))
+        return
 
     result = summarize(args.source, max(1, args.preview))
     if args.latest_only:

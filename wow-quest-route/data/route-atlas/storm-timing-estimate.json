@@ -3,14 +3,21 @@
   "model": "component-wall-clock-v1",
   "hearthChain": [
     "阿格玛之锤",
-    "格罗玛什坠毁点"
+    "格罗玛什坠毁点",
+    "布德克拉格庇护所"
   ],
-  "centerMinutes": 487.4,
+  "centerMinutes": 497.6,
   "rangeMinutes": [
-    372.8,
-    602.6
+    379.3,
+    616.2
   ],
-  "actualRuns": [],
+  "actualRuns": [
+    {
+      "label": "首组实测（步骤13—20，扣3分钟暂停）",
+      "minutes": 250.0,
+      "note": "2026-08-25 19:47→2026-08-26 00:00；墙钟253分钟，扣除明确暂停3分钟。包含《寒风的声音》抢怪/首跑找刷新点和钢铁巨像竞争，不作为clean baseline。"
+    }
+  ],
   "rows": [
     {
       "step": 1,
@@ -262,39 +269,40 @@
     },
     {
       "step": 12,
-      "title": "托里姆：维拉努斯 → 科洛米尔",
-      "centerMinutes": 16.4,
+      "title": "托里姆：维拉努斯 → 科洛米尔 → 唐卡洛开点",
+      "centerMinutes": 21.4,
       "rangeMinutes": [
-        13.5,
-        19.4
+        16.1,
+        26.8
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 5.6,
-        "objectiveMinutes": 6.5,
-        "hubMinutes": 3.9,
+        "moveMinutes": 5.9,
+        "objectiveMinutes": 10.0,
+        "hubMinutes": 5.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
         "维拉努斯",
         "失踪的布莱恩·铜须",
         "侵犯领土",
-        "科洛米尔，风暴之锤"
+        "科洛米尔，风暴之锤",
+        "见证者与英雄"
       ]
     },
     {
       "step": 13,
-      "title": "造物者圣台 → 奥杜尔 → 丹尼芬雷",
-      "centerMinutes": 18.6,
+      "title": "造物者圣台 → 布德克拉格开点 → 清算 → 奥杜尔",
+      "centerMinutes": 19.7,
       "rangeMinutes": [
-        15.3,
-        22.0
+        16.2,
+        23.3
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 6.0,
+        "moveMinutes": 6.3,
         "objectiveMinutes": 9.0,
-        "hubMinutes": 3.1,
+        "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -325,16 +333,16 @@
     {
       "step": 15,
       "title": "寒风峡谷 → 发明家图书馆",
-      "centerMinutes": 38.8,
+      "centerMinutes": 38.7,
       "rangeMinutes": [
-        29.1,
-        48.5
+        29.0,
+        48.3
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 1.9,
         "objectiveMinutes": 32.4,
-        "hubMinutes": 4.0,
+        "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -349,16 +357,16 @@
     {
       "step": 16,
       "title": "布莱恩营地 → 诺甘农之核 → 格罗玛什",
-      "centerMinutes": 11.7,
+      "centerMinutes": 11.6,
       "rangeMinutes": [
-        8.8,
-        14.6
+        8.7,
+        14.4
       ],
       "includeInTotal": true,
       "components": {
         "moveMinutes": 2.6,
         "objectiveMinutes": 5.5,
-        "hubMinutes": 3.1,
+        "hubMinutes": 2.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -369,17 +377,17 @@
     },
     {
       "step": 17,
-      "title": "布德克拉格：土壤 → 雪流平原 → 尼达维里尔",
-      "centerMinutes": 28.0,
+      "title": "布德克拉格：绑炉石 → 土壤 → 雪流平原 → 尼达维里尔",
+      "centerMinutes": 38.8,
       "rangeMinutes": [
-        21.0,
-        35.0
+        29.1,
+        48.5
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 3.0,
-        "objectiveMinutes": 19.8,
-        "hubMinutes": 4.7,
+        "moveMinutes": 2.8,
+        "objectiveMinutes": 31.8,
+        "hubMinutes": 3.7,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -415,16 +423,16 @@
     },
     {
       "step": 19,
-      "title": "尼达维里尔熔炉 → 风暴之心 → 钢铁巨像",
-      "centerMinutes": 18.3,
+      "title": "尼达维里尔熔炉 → 风暴之心 → 炉石 → 钢铁巨像",
+      "centerMinutes": 17.3,
       "rangeMinutes": [
-        13.7,
-        22.9
+        12.9,
+        21.6
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 3.8,
-        "objectiveMinutes": 10.1,
+        "moveMinutes": 3.3,
+        "objectiveMinutes": 9.6,
         "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
@@ -438,21 +446,20 @@
     },
     {
       "step": 20,
-      "title": "唐卡洛营地 → 嚎风洞穴 → 北风",
-      "centerMinutes": 33.2,
+      "title": "系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风",
+      "centerMinutes": 27.7,
       "rangeMinutes": [
-        24.9,
-        41.6
+        20.8,
+        34.7
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 4.3,
-        "objectiveMinutes": 23.1,
-        "hubMinutes": 5.3,
+        "moveMinutes": 4.1,
+        "objectiveMinutes": 19.1,
+        "hubMinutes": 4.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
-        "见证者与英雄",
         "雷蹄的记忆",
         "时间的扰动",
         "错误的时间流",

@@ -29,6 +29,10 @@ def task_text_line(prefix: str, quest_name: str, suffix: str = "") -> str:
     return '<div class="ra-line">' + html.escape(prefix) + task(quest_name, "do") + html.escape(suffix) + '</div>'
 
 
+def npc_do_line(npc_name: str, quest_name: str) -> str:
+    return '<div class="ra-line">' + npc(npc_name) + arrow() + verb("做") + ' ' + task(quest_name, "do") + '</div>'
+
+
 def accept_from_item_line(prefix: str, quest_name: str) -> str:
     return '<div class="ra-line">' + html.escape(prefix) + arrow() + verb("接") + ' ' + task(quest_name, "accept") + '</div>'
 
@@ -67,14 +71,14 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
             "summary": "进入征服堡接齐南侧任务并开点/绑炉石；沃德伦完成野兽与缚焰者任务，风险湾做短时限溶解剂，再骑任务龙击杀沃德伦领主。",
             "points": [
                 {"title": "征服堡", "action": "征服者克雷娜 → 交《前往征服堡，自求多福吧！》 → 接《征服者的指派》"},
-                {"title": "征服堡", "action": "纳兹格利姆中士 → 交《征服者的指派》 → 接《缚焰者的秘密》《显示力量》\n皮货商人休尼克 → 接《灰狼的毛皮》\n粮食商人洛克兰 → 接《赚外快》\n开飞行点：征服堡（五号分别）\n绑定炉石：征服堡"},
+                {"title": "征服堡", "action": "纳兹格利姆中士 → 交《征服者的指派》 → 接《缚焰者的秘密》《显示力量》\n皮货商人休尼克 → 接《灰狼的毛皮》\n粮食商人洛克兰 → 接《赚外快》\n开飞行点：征服堡\n绑定炉石：征服堡"},
                 {"title": "征服堡南侧 / 沃德伦", "action": "↳ 做《赚外快》《灰狼的毛皮》《缚焰者的秘密》《显示力量》", "note": "《赚外快》《灰狼的毛皮》《缚焰者的秘密》：不共享：任务物为个人掉落，五号分别拾取。\n《显示力量》：共享：击杀进度五号同步。"},
                 {"title": "征服堡", "action": "粮食商人洛克兰 → 交《赚外快》\n皮货商人休尼克 → 交《灰狼的毛皮》 → 接《替代品》\n纳兹格利姆中士 → 交《缚焰者的秘密》《显示力量》 → 接《沃德伦的领主》"},
                 {"title": "风险湾", "action": "古图尔 → 接《寻找溶解剂》\n↳ 做《寻找溶解剂》\n古图尔 → 交《寻找溶解剂》", "note": "拾取 Element 115 后开始短时限返程；立即原路返回古图尔，尽量不进战斗。", "fivebox": "请确认 Element 115 是否能同一刷新点连续五号拾取，以及返程窗口是否分别计时。"},
                 {"title": "沃德伦", "action": "↳ 做《沃德伦的领主》", "note": "骑任务龙完成载具战；贴近目标，高伤技能冷却好就用。"},
                 {"title": "征服堡", "action": "纳兹格利姆中士 → 交《沃德伦的领主》 → 接《前往欧尼瓦营地》\n征服者克雷娜 → 接《我的敌人的朋友》"},
             ],
-            "action_html": [point_anchor("征服堡"), npc_actions("征服者克雷娜", turns=("前往征服堡，自求多福吧！",), accepts=("征服者的指派",)), npc_actions("纳兹格利姆中士", turns=("征服者的指派",), accepts=("缚焰者的秘密", "显示力量")), npc_actions("皮货商人休尼克", accepts=("灰狼的毛皮",)), npc_actions("粮食商人洛克兰", accepts=("赚外快",)), system_line("开飞行点：征服堡（五号分别）", "ra-flightpoint"), system_line("绑定炉石：征服堡", "ra-hearth"), do_at("征服堡南侧 / 沃德伦", "赚外快", "灰狼的毛皮", "缚焰者的秘密", "显示力量"), point_anchor("征服堡"), npc_actions("粮食商人洛克兰", turns=("赚外快",)), npc_actions("皮货商人休尼克", turns=("灰狼的毛皮",), accepts=("替代品",)), npc_actions("纳兹格利姆中士", turns=("缚焰者的秘密", "显示力量"), accepts=("沃德伦的领主",)), point_anchor("风险湾"), npc_actions("古图尔", accepts=("寻找溶解剂",)), do_line("寻找溶解剂"), npc_actions("古图尔", turns=("寻找溶解剂",)), do_at("沃德伦", "沃德伦的领主"), point_anchor("征服堡"), npc_actions("纳兹格利姆中士", turns=("沃德伦的领主",), accepts=("前往欧尼瓦营地",)), npc_actions("征服者克雷娜", accepts=("我的敌人的朋友",))],
+            "action_html": [point_anchor("征服堡"), npc_actions("征服者克雷娜", turns=("前往征服堡，自求多福吧！",), accepts=("征服者的指派",)), npc_actions("纳兹格利姆中士", turns=("征服者的指派",), accepts=("缚焰者的秘密", "显示力量")), npc_actions("皮货商人休尼克", accepts=("灰狼的毛皮",)), npc_actions("粮食商人洛克兰", accepts=("赚外快",)), system_line("开飞行点：征服堡", "ra-flightpoint"), system_line("绑定炉石：征服堡", "ra-hearth"), do_at("征服堡南侧 / 沃德伦", "赚外快", "灰狼的毛皮", "缚焰者的秘密", "显示力量"), point_anchor("征服堡"), npc_actions("粮食商人洛克兰", turns=("赚外快",)), npc_actions("皮货商人休尼克", turns=("灰狼的毛皮",), accepts=("替代品",)), npc_actions("纳兹格利姆中士", turns=("缚焰者的秘密", "显示力量"), accepts=("沃德伦的领主",)), point_anchor("风险湾"), npc_actions("古图尔", accepts=("寻找溶解剂",)), do_line("寻找溶解剂"), npc_actions("古图尔", turns=("寻找溶解剂",)), do_at("沃德伦", "沃德伦的领主"), point_anchor("征服堡"), npc_actions("纳兹格利姆中士", turns=("沃德伦的领主",), accepts=("前往欧尼瓦营地",)), npc_actions("征服者克雷娜", accepts=("我的敌人的朋友",))],
             "note_html": notes_html(note_block("赚外快 / 灰狼的毛皮 / 缚焰者的秘密", status_span("不共享") + "任务物为个人掉落，五号分别拾取。"), note_block("显示力量", status_span("共享") + "击杀进度五号同步。"), note_block("寻找溶解剂", status_span("五开待实测") + "Element 115 是否能同一刷新点连续五号拾取、返程窗口是否分别计时。拾取后立即原路返回古图尔。"), note_block("沃德伦的领主", "骑任务龙完成载具战；贴近目标，高伤技能冷却好就用。")),
             "timingTaskNames": ["赚外快", "灰狼的毛皮", "缚焰者的秘密", "显示力量", "寻找溶解剂", "沃德伦的领主"],
         },
@@ -85,10 +89,10 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
                 {"title": "银溪镇南侧", "action": "↳ 做《我的敌人的朋友》\n↳ 接《米克哈尔的日记》", "note": "《米克哈尔的日记》：来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。"},
                 {"title": "银溪镇北侧", "action": "↳ 做《替代品》"},
                 {"title": "征服堡", "action": "征服者克雷娜 → 交《我的敌人的朋友》《米克哈尔的日记》 → 接《攻击银溪镇》《高戈娜》\n高戈娜 → 交《高戈娜》 → 接《顺藤摸瓜》\n皮货商人休尼克 → 交《替代品》 → 接《休尼克的掩饰》"},
-                {"title": "征服堡", "action": "购买5份面粉和1份煤块\n皮货商人休尼克 → 交《休尼克的掩饰》 → 接《给克雷娜送货》\n征服者克雷娜 → 交《给克雷娜送货》\n风之先知希尔·灰角 → 接《白肩鹰的眼睛》\n苏尔肯中士 → 接《狩猎巨魔》", "note": "《休尼克的掩饰》：面粉和煤块都在征服堡商人处购买。"},
+                {"title": "征服堡", "action": "皮货商人休尼克 → 交《休尼克的掩饰》 → 接《给克雷娜送货》\n征服者克雷娜 → 交《给克雷娜送货》\n风之先知希尔·灰角 → 接《白肩鹰的眼睛》\n苏尔肯中士 → 接《狩猎巨魔》", "note": "《休尼克的掩饰》：交任务前在征服堡商人购买5份面粉和1份煤块。"},
             ],
-            "action_html": [do_at("银溪镇南侧", "我的敌人的朋友"), drop_accept_line("米克哈尔的日记"), do_at("银溪镇北侧", "替代品"), point_anchor("征服堡"), npc_actions("征服者克雷娜", turns=("我的敌人的朋友", "米克哈尔的日记"), accepts=("攻击银溪镇", "高戈娜")), npc_actions("高戈娜", turns=("高戈娜",), accepts=("顺藤摸瓜",)), npc_actions("皮货商人休尼克", turns=("替代品",), accepts=("休尼克的掩饰",)), raw_line("购买5份面粉和1份煤块"), npc_actions("皮货商人休尼克", turns=("休尼克的掩饰",), accepts=("给克雷娜送货",)), npc_actions("征服者克雷娜", turns=("给克雷娜送货",)), npc_actions("风之先知希尔·灰角", accepts=("白肩鹰的眼睛",)), npc_actions("苏尔肯中士", accepts=("狩猎巨魔",))],
-            "note_html": notes_html(note_block("米克哈尔的日记", "来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。"), note_block("休尼克的掩饰", "面粉和煤块都在征服堡商人处购买。")),
+            "action_html": [do_at("银溪镇南侧", "我的敌人的朋友"), drop_accept_line("米克哈尔的日记"), do_at("银溪镇北侧", "替代品"), point_anchor("征服堡"), npc_actions("征服者克雷娜", turns=("我的敌人的朋友", "米克哈尔的日记"), accepts=("攻击银溪镇", "高戈娜")), npc_actions("高戈娜", turns=("高戈娜",), accepts=("顺藤摸瓜",)), npc_actions("皮货商人休尼克", turns=("替代品",), accepts=("休尼克的掩饰",)), npc_actions("皮货商人休尼克", turns=("休尼克的掩饰",), accepts=("给克雷娜送货",)), npc_actions("征服者克雷娜", turns=("给克雷娜送货",)), npc_actions("风之先知希尔·灰角", accepts=("白肩鹰的眼睛",)), npc_actions("苏尔肯中士", accepts=("狩猎巨魔",))],
+            "note_html": notes_html(note_block("米克哈尔的日记", "来源怪为银溪猎人；击杀后拾取掉落的任务起始物“米克哈尔的日记”，五号分别右键接任务。离开前确认五号日志里都有任务。"), note_block("休尼克的掩饰", "交任务前在征服堡商人购买5份面粉和1份煤块。")),
             "timingTaskNames": ["我的敌人的朋友", "米克哈尔的日记", "替代品"],
         },
         3: {
@@ -128,14 +132,14 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
             "title": "欧尼瓦 → 索尔莫丹 → 征服堡 → 欧尼瓦",
             "summary": "欧尼瓦首次按沃塔肯、索鲁克、托尔玛克分别交接并开点；东北做驯鹿/野马/鱼群，索尔莫丹收日记书页，炉石征服堡后再系统飞回欧尼瓦交任务。",
             "points": [
-                {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《前往欧尼瓦营地》 → 接《新的盟友》\n索鲁克·雷怒 → 接《惊吓野马》\n托尔玛克 → 接《不速之“客”》\n开飞行点：欧尼瓦营地（五号分别）"},
+                {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《前往欧尼瓦营地》 → 接《新的盟友》\n索鲁克·雷怒 → 接《惊吓野马》\n托尔玛克 → 接《不速之“客”》\n开飞行点：欧尼瓦营地"},
                 {"title": "欧尼瓦东北", "action": "↳ 做《不速之“客”》《惊吓野马》\n休·格兰斯 → 接《熊的美食》\n↳ 做《熊的美食》", "note": "《熊的美食》直接对鱼群使用任务渔网，不需要钓鱼专业。", "fivebox": "请确认鲑鱼任务物为个人获取还是共享。"},
                 {"title": "索尔莫丹外", "action": "↳ 接《破损的日记》\n↳ 做《破损的日记》", "note": "《破损的日记》：索尔莫丹外约(64.3,19.8)拾取地面的破损日记并右键接任务；随后收集8张缺失书页并合成完整日记后再下山。", "fivebox": "请确认8张书页是否逐号收集，及同一刷新点能否多号连续拾取。"},
                 {"title": "征服堡", "action": "使用炉石：征服堡\n风之先知希尔·灰角 → 交《白肩鹰的眼睛》《沃达希尔的陨落》《地下的黑暗》 → 接《可能的关联》《熊神的后代》"},
                 {"title": "欧尼瓦营地", "action": "系统飞行：征服堡 → 欧尼瓦营地\n托尔玛克 → 交《不速之“客”》 → 接《有趣的计划》\n索鲁克·雷怒 → 交《惊吓野马》\n休·格兰斯 → 交《熊的美食》"},
                 {"title": "欧尼瓦营地", "action": "先知帕鲁纳 → 交《破损的日记》 → 接《翻译日记》"},
             ],
-            "action_html": [point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("前往欧尼瓦营地",), accepts=("新的盟友",)), npc_actions("索鲁克·雷怒", accepts=("惊吓野马",)), npc_actions("托尔玛克", accepts=("不速之“客”",)), system_line("开飞行点：欧尼瓦营地（五号分别）", "ra-flightpoint"), do_at("欧尼瓦东北", "不速之“客”", "惊吓野马"), npc_actions("休·格兰斯", accepts=("熊的美食",)), do_line("熊的美食"), point_anchor("索尔莫丹外"), drop_accept_line("破损的日记"), do_line("破损的日记"), system_line("使用炉石：征服堡", "ra-hearth"), npc_actions("风之先知希尔·灰角", turns=("白肩鹰的眼睛", "沃达希尔的陨落", "地下的黑暗"), accepts=("可能的关联", "熊神的后代")), system_line("系统飞行：征服堡 → 欧尼瓦营地", "ra-flightpath"), npc_actions("托尔玛克", turns=("不速之“客”",), accepts=("有趣的计划",)), npc_actions("索鲁克·雷怒", turns=("惊吓野马",)), npc_actions("休·格兰斯", turns=("熊的美食",)), npc_actions("先知帕鲁纳", turns=("破损的日记",), accepts=("翻译日记",))],
+            "action_html": [point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("前往欧尼瓦营地",), accepts=("新的盟友",)), npc_actions("索鲁克·雷怒", accepts=("惊吓野马",)), npc_actions("托尔玛克", accepts=("不速之“客”",)), system_line("开飞行点：欧尼瓦营地", "ra-flightpoint"), do_at("欧尼瓦东北", "不速之“客”", "惊吓野马"), npc_actions("休·格兰斯", accepts=("熊的美食",)), do_line("熊的美食"), point_anchor("索尔莫丹外"), drop_accept_line("破损的日记"), do_line("破损的日记"), system_line("使用炉石：征服堡", "ra-hearth"), npc_actions("风之先知希尔·灰角", turns=("白肩鹰的眼睛", "沃达希尔的陨落", "地下的黑暗"), accepts=("可能的关联", "熊神的后代")), system_line("系统飞行：征服堡 → 欧尼瓦营地", "ra-flightpath"), npc_actions("托尔玛克", turns=("不速之“客”",), accepts=("有趣的计划",)), npc_actions("索鲁克·雷怒", turns=("惊吓野马",)), npc_actions("休·格兰斯", turns=("熊的美食",)), npc_actions("先知帕鲁纳", turns=("破损的日记",), accepts=("翻译日记",))],
             "note_html": notes_html(note_block("熊的美食", status_span("五开待实测") + "确认鲑鱼任务物是否共享；鱼群直接用任务渔网。"), note_block("破损的日记", "索尔莫丹外约(64.3,19.8)拾取地面的破损日记并右键接任务；随后收集8张缺失书页并合成完整日记后再下山。" + status_span("五开待实测") + "确认8张书页是否逐号收集、同一刷新点能否多号连续拾取。")),
             "timingTaskNames": ["不速之“客”", "惊吓野马", "熊的美食", "破损的日记"],
         },
@@ -189,7 +193,7 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
             "title": "符文监督者 → Drakil'jin墓穴多次往返 → 血月岛 → 加弗洛克",
             "summary": "监督者后进入Drakil'jin；先完成罐子/石板，再由哈里森接护送。墓穴链按克拉斯↔墓穴真实往返执行，随后血月岛完成狼人并回萨莎交，最后到加弗洛克。",
             "points": [
-                {"title": "符文监督者", "action": "↳ 做《压制符文》《心灵的创伤》\n沿路推进《等肉下锅》", "note": "每名监督者都要先击杀正在引导的铁符文织法者才会出现；《等肉下锅》这里只沿路累计，最后在符文巨人平原补齐。"},
+                {"title": "符文监督者", "action": "↳ 做《压制符文》《心灵的创伤》", "note": "每名监督者都要先击杀正在引导的铁符文织法者才会出现；《等肉下锅》这里只沿路累计，最后在符文巨人平原补齐。"},
                 {"title": "Drakil'jin遗迹", "action": "↳ 做《孤胆英雄……》《灰尘之声》\n达库鲁的影像 → 交《灰尘之声》\n哈里森·琼斯 → 接《喔——哒！！》\n↳ 做《喔——哒！！》", "note": "启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。"},
                 {"title": "哈考尔 / 克拉斯", "action": "哈考尔 → 交《心灵的创伤》《喔——哒！！》\n克拉斯 → 交《孤胆英雄……》 → 接《达卡古尔之槌》"},
                 {"title": "达卡古尔", "action": "↳ 做《达卡古尔之槌》"},
@@ -200,9 +204,9 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
                 {"title": "克拉斯", "action": "克拉斯 → 交《金亚拉克的末日》"},
                 {"title": "血月岛", "action": "↳ 做《狼人的末日》", "fivebox": "请确认最终阿鲁高脚本阶段五号均完成。"},
                 {"title": "萨莎", "action": "萨莎 → 交《狼人的末日》"},
-                {"title": "加弗洛克", "action": "加弗洛克 → 交《压制符文》 → 接《潜在的能量》\n与加弗洛克对话，完成《以洛肯之名》剩余目标\n↳ 做《潜在的能量》"},
+                {"title": "加弗洛克", "action": "加弗洛克 → 交《压制符文》 → 接《潜在的能量》\n加弗洛克 → 做《以洛肯之名》\n↳ 做《潜在的能量》"},
             ],
-            "action_html": [do_at("符文监督者", "压制符文", "心灵的创伤"), task_text_line("沿路推进 ", "等肉下锅"), do_at("Drakil'jin遗迹", "孤胆英雄……", "灰尘之声"), npc_actions("达库鲁的影像", turns=("灰尘之声",)), npc_actions("哈里森·琼斯", accepts=("喔——哒！！",)), do_line("喔——哒！！"), point_anchor("哈考尔 / 克拉斯"), npc_actions("哈考尔", turns=("心灵的创伤", "喔——哒！！")), npc_actions("克拉斯", turns=("孤胆英雄……",), accepts=("达卡古尔之槌",)), do_at("达卡古尔", "达卡古尔之槌"), npc_actions("克拉斯", turns=("达卡古尔之槌",), accepts=("死后相见",)), do_at("Drakil'jin墓穴", "死后相见"), npc_actions("甘休", turns=("死后相见",), accepts=("冷静一下，伙计",)), do_line("冷静一下，伙计"), npc_actions("克拉斯", turns=("冷静一下，伙计",), accepts=("金亚拉克的末日",)), do_at("Drakil'jin墓穴", "金亚拉克的末日"), npc_actions("克拉斯", turns=("金亚拉克的末日",)), do_at("血月岛", "狼人的末日"), npc_actions("萨莎", turns=("狼人的末日",)), point_anchor("加弗洛克"), npc_actions("加弗洛克", turns=("压制符文",), accepts=("潜在的能量",)), task_text_line("与加弗洛克对话，完成 ", "以洛肯之名", " 剩余目标"), do_line("潜在的能量")],
+            "action_html": [do_at("符文监督者", "压制符文", "心灵的创伤"), do_at("Drakil'jin遗迹", "孤胆英雄……", "灰尘之声"), npc_actions("达库鲁的影像", turns=("灰尘之声",)), npc_actions("哈里森·琼斯", accepts=("喔——哒！！",)), do_line("喔——哒！！"), point_anchor("哈考尔 / 克拉斯"), npc_actions("哈考尔", turns=("心灵的创伤", "喔——哒！！")), npc_actions("克拉斯", turns=("孤胆英雄……",), accepts=("达卡古尔之槌",)), do_at("达卡古尔", "达卡古尔之槌"), npc_actions("克拉斯", turns=("达卡古尔之槌",), accepts=("死后相见",)), do_at("Drakil'jin墓穴", "死后相见"), npc_actions("甘休", turns=("死后相见",), accepts=("冷静一下，伙计",)), do_line("冷静一下，伙计"), npc_actions("克拉斯", turns=("冷静一下，伙计",), accepts=("金亚拉克的末日",)), do_at("Drakil'jin墓穴", "金亚拉克的末日"), npc_actions("克拉斯", turns=("金亚拉克的末日",)), do_at("血月岛", "狼人的末日"), npc_actions("萨莎", turns=("狼人的末日",)), point_anchor("加弗洛克"), npc_actions("加弗洛克", turns=("压制符文",), accepts=("潜在的能量",)), npc_do_line("加弗洛克", "以洛肯之名"), do_line("潜在的能量")],
             "note_html": notes_html(note_block("压制符文", "四名符文监督者在Drakil'jin方向；每名监督者都要先击杀正在引导的铁符文织法者才会出现。"), note_block("喔——哒！！", "启动护送前先确认《孤胆英雄……》《灰尘之声》的遗迹内目标已完成。"), note_block("达卡古尔之槌", "达卡古尔会沿Drakil'jin遗迹道路巡逻。"), note_block("死后相见 / 冷静一下，伙计", status_span("五开待实测") + "确认灵魂/死亡阶段是否必须五号分别触发，以及任务道具/微粒是否逐号完成。墓穴链会多次进入：按当前任务依次敲锣、灵魂状态找甘休、取雪恢复；每次完成当前目标后再离开。"), note_block("金亚拉克的末日", status_span("五开待实测") + "确认供品拾取和最终锣互动是否逐号完成。取得供品后按任务要求合成，再进行最终敲锣。"), note_block("狼人的末日", status_span("五开待实测") + "确认最终阿鲁高脚本阶段五号均完成。")),
             "timingTaskNames": ["压制符文", "心灵的创伤", "孤胆英雄……", "灰尘之声", "喔——哒！！", "达卡古尔之槌", "死后相见", "冷静一下，伙计", "金亚拉克的末日", "狼人的末日", "潜在的能量"],
         },
@@ -210,19 +214,19 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
             "title": "欧尼瓦 ↔ Dun Argol：沃塔肯 / 罗卡尔 / 托尔玛克",
             "summary": "《以洛肯之名》交沃塔肯并接制服线；《有趣的计划》交罗卡尔并接零件/能源线。Dun Argol多次往返按真实NPC推进，最终铁领主交托尔玛克、洛肯命令交沃塔肯。",
             "points": [
-                {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《以洛肯之名》 → 接《监工的制服》\n确认日志已有《有趣的计划》"},
+                {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《以洛肯之名》 → 接《监工的制服》"},
                 {"title": "Dun Argol", "action": "↳ 做《监工的制服》《有趣的计划》", "note": "《有趣的计划》三张蓝图集齐后在背包合成。", "fivebox": "请确认三张蓝图是否个人掉落。"},
                 {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《监工的制服》 → 接《活灵活现》\n勘探员罗卡尔 → 交《有趣的计划》 → 接《收集零件》"},
                 {"title": "Dun Argol", "action": "↳ 做《活灵活现》《收集零件》"},
                 {"title": "欧尼瓦营地", "action": "斥候沃塔肯 → 交《活灵活现》 → 接《洛肯的命令》\n勘探员罗卡尔 → 交《收集零件》 → 接《我们有能源》"},
                 {"title": "Dun Argol上层", "action": "↳ 做《我们有能源》《洛肯的命令》", "note": "读取基座后《洛肯的命令》保持已完成未交；伪装留到铁领主结束。", "fivebox": "请确认两颗能量核心是否个人掉落/同尸多号可拾取。"},
-                {"title": "欧尼瓦营地", "action": "勘探员罗卡尔 → 交《我们有能源》 → 接《……我们没有能源》\n《洛肯的命令》暂不交"},
+                {"title": "欧尼瓦营地", "action": "勘探员罗卡尔 → 交《我们有能源》 → 接《……我们没有能源》"},
                 {"title": "Dun Argol外围", "action": "↳ 做《……我们没有能源》"},
                 {"title": "欧尼瓦营地", "action": "勘探员罗卡尔 → 交《……我们没有能源》 → 接《击败铁领主》"},
                 {"title": "Dun Argol上层", "action": "↳ 做《击败铁领主》", "note": "穿伪装上楼/乘电梯，使用魔像控制器；铁领主死亡后继续利用魔像/载具离开。", "fivebox": "请确认载具/控制器击杀进度是否共享。"},
                 {"title": "欧尼瓦营地", "action": "托尔玛克 → 交《击败铁领主》\n斥候沃塔肯 → 交《洛肯的命令》"},
             ],
-            "action_html": [point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("以洛肯之名",), accepts=("监工的制服",)), task_text_line("确认日志已有 ", "有趣的计划"), do_at("Dun Argol", "监工的制服", "有趣的计划"), point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("监工的制服",), accepts=("活灵活现",)), npc_actions("勘探员罗卡尔", turns=("有趣的计划",), accepts=("收集零件",)), do_at("Dun Argol", "活灵活现", "收集零件"), point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("活灵活现",), accepts=("洛肯的命令",)), npc_actions("勘探员罗卡尔", turns=("收集零件",), accepts=("我们有能源",)), do_at("Dun Argol上层", "我们有能源", "洛肯的命令"), point_anchor("欧尼瓦营地"), npc_actions("勘探员罗卡尔", turns=("我们有能源",), accepts=("……我们没有能源",)), task_text_line("保持已完成未交：", "洛肯的命令"), do_at("Dun Argol外围", "……我们没有能源"), point_anchor("欧尼瓦营地"), npc_actions("勘探员罗卡尔", turns=("……我们没有能源",), accepts=("击败铁领主",)), do_at("Dun Argol上层", "击败铁领主"), point_anchor("欧尼瓦营地"), npc_actions("托尔玛克", turns=("击败铁领主",)), npc_actions("斥候沃塔肯", turns=("洛肯的命令",))],
+            "action_html": [point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("以洛肯之名",), accepts=("监工的制服",)), do_at("Dun Argol", "监工的制服", "有趣的计划"), point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("监工的制服",), accepts=("活灵活现",)), npc_actions("勘探员罗卡尔", turns=("有趣的计划",), accepts=("收集零件",)), do_at("Dun Argol", "活灵活现", "收集零件"), point_anchor("欧尼瓦营地"), npc_actions("斥候沃塔肯", turns=("活灵活现",), accepts=("洛肯的命令",)), npc_actions("勘探员罗卡尔", turns=("收集零件",), accepts=("我们有能源",)), do_at("Dun Argol上层", "我们有能源", "洛肯的命令"), point_anchor("欧尼瓦营地"), npc_actions("勘探员罗卡尔", turns=("我们有能源",), accepts=("……我们没有能源",)), do_at("Dun Argol外围", "……我们没有能源"), point_anchor("欧尼瓦营地"), npc_actions("勘探员罗卡尔", turns=("……我们没有能源",), accepts=("击败铁领主",)), do_at("Dun Argol上层", "击败铁领主"), point_anchor("欧尼瓦营地"), npc_actions("托尔玛克", turns=("击败铁领主",)), npc_actions("斥候沃塔肯", turns=("洛肯的命令",))],
             "note_html": notes_html(note_block("有趣的计划", status_span("五开待实测") + "确认三张蓝图是否个人掉落；集齐后在背包合成。"), note_block("我们有能源", status_span("五开待实测") + "确认两颗能量核心是否个人掉落/同尸多号可拾取。"), note_block("击败铁领主", status_span("五开待实测") + "确认载具/控制器击杀进度是否共享。")),
             "timingTaskNames": ["监工的制服", "有趣的计划", "活灵活现", "收集零件", "我们有能源", "洛肯的命令", "……我们没有能源", "击败铁领主"],
         },

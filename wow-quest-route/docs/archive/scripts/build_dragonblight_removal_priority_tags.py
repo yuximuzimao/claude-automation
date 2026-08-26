@@ -30,13 +30,11 @@ ZONE_ID = 65
 ZONE_NAME = "龙骨荒野"
 
 # Current usable pool = effective-foundation primary world tasks on the current Borean->Dragonblight
-# axis. These two rows are structurally present but cannot be selected by the current route:
-# 11979 conflicts with the chosen inbound breadcrumb 11977; 12033 lost its only prerequisite
-# when Borean 11916 was formally removed. 12791 remains usable even though the current route
-# intentionally does not select it yet.
+# axis. 11979 conflicts with the chosen inbound breadcrumb 11977 and cannot be selected.
+# Borean full-clear restores 11916《地狱咆哮的勇士》, so 12033《萨鲁法尔的信》 is reachable
+# on first arrival at Agmar and belongs in the one-time world-task pool.
 CURRENT_UNUSABLE_TASKS: dict[int, str] = {
     11979: "mutually_exclusive_with_current_borean_entry_axis",
-    12033: "only_prerequisite_11916_removed_from_current_route",
 }
 
 # Questie's item->NPC reverse lookup can misclassify fixed ground objects or scripted
@@ -218,7 +216,7 @@ def main() -> None:
         and not task.get("is_raid_flagged")
         and not task.get("is_repeatable")
     )
-    expected_current_usable = 145 - live_defer_count
+    expected_current_usable = 146 - live_defer_count
     if len(tasks) != expected_current_usable:
         raise RuntimeError(
             f"Expected {expected_current_usable} current-usable Dragonblight world tasks "
@@ -567,9 +565,9 @@ def main() -> None:
         "# 龙骨荒野任务剔除优先级逐任务打标",
         "",
         "- 本轮只打标，不自动删除龙骨荒野正式路线任务。",
-        f"- 当前可用任务池固定为{len(rows)}个：effective foundation中147个include_*非副本世界候选，扣除当前入口互斥的11979《牦牛人和牛头人》和因北风前置11916已删除而不可解锁的12033《萨鲁法尔的信》。",
+        f"- 当前可用任务池固定为{len(rows)}个：effective foundation中的include_*非副本世界候选仅扣除当前入口互斥的11979《牦牛人和牛头人》；12033《萨鲁法尔的信》因北风全清已完成11916《地狱咆哮的勇士》而恢复为可达任务。",
         "- 12791《魔法王国达拉然》仍属于可用任务池，只是当前路线尚未证明值得选择。",
-        "- 链价值范围只计算当前145个可用任务中的龙骨荒野内后续；尚未规划的下一地图不提前算价值。",
+        f"- 链价值范围只计算当前{len(rows)}个可用任务中的龙骨荒野内后续；尚未规划的下一地图不提前算价值。",
         f"- 进入P1–P4判定的任务：{len(decisions)}；P分布：{ {f'P{k}': v for k, v in priority_counts.items()} }；A/B/C：{subtier_counts}。",
         "",
         "## P1–P4候选",

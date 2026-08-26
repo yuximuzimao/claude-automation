@@ -65,7 +65,7 @@ def render_plain(line: list[tuple[str, Any, tuple[int, ...]]]) -> str:
         if kind in {"loc", "npc", "txt", "transport", "key", "danger"}:
             out.append(str(value))
         elif kind == "flightpoint":
-            out.append(f"开飞行点：{value}（五号分别）")
+            out.append(f"开飞行点：{value}")
         elif kind == "taxi":
             origin, destination = value
             out.append(f"系统飞行：{origin} → {destination}")
@@ -103,7 +103,7 @@ def render_html(
         elif kind == "transport":
             parts.append(f'<span class="ra-transport">{html.escape(str(value))}</span>')
         elif kind == "flightpoint":
-            parts.append(f'<span class="ra-system-action ra-flightpoint">开飞行点：{html.escape(str(value))}（五号分别）</span>')
+            parts.append(f'<span class="ra-system-action ra-flightpoint">开飞行点：{html.escape(str(value))}</span>')
         elif kind == "taxi":
             origin, destination = value
             parts.append(f'<span class="ra-system-action ra-flightpath">系统飞行：{html.escape(str(origin))} → {html.escape(str(destination))}</span>')
@@ -533,7 +533,7 @@ def g10_drakkensryd_thorim() -> None:
 def g11_mending_fences() -> None:
     P(73.0, 62.8, "弗约恩之砧", "hodir", [
         DO(12915),
-        [TXT("拾取熔渣覆盖的金属"), AR(), TG("accept", 12922)],
+        [BR(), TG("accept", 12922)],
         DO(12922),
         [LOC("弗约恩之砧铁砧"), AR(), TG("turn", 12922), AR(), TG("accept", 12956)],
     ], movement="fly", extra_notes=[(12922, "不共享：狂怒火花五号分别收集10份；同一具雷铸铁巨人尸体的熔渣覆盖的金属可五号分别拾取。")])
@@ -546,7 +546,7 @@ def g11_mending_fences() -> None:
     ], movement="fly")
 
 
-REPUTATION_ASSUMED_AVAILABLE = [12981, 12985, 12994, 13001, 13006, 13011, 13046, 13420]
+REPUTATION_ASSUMED_AVAILABLE = [12981, 12985, 12994, 13001, 13006, 13011, 13046]
 
 
 # 12. Dun Niffelem: unlock the Hodir hub, fold the verified first-run dailies into the same local loops,
@@ -591,7 +591,7 @@ def g12_dun_first() -> None:
     P(65.4, 60.2, "丹尼芬雷", "dun_niffelem", [
         [NPC("约库姆国王"), AR(), TG("turn", 12975), AR(), TG("accept", 12976)],
         [NPC("亚米尔德"), AR(), TG("turn", 12976)],
-    ], movement="fly", extra_notes=[(13420, note_text(13420))], cover=(13420,))
+    ], movement="fly")
     P(37.3, 49.6, "格罗玛什坠毁点", "gromarsh", [
         [HR("格罗玛什坠毁点")],
     ], movement="hearth")
@@ -615,6 +615,12 @@ def g13_veranus() -> None:
     P(71.0, 49.0, "雷暴台地", "thorim", [
         [NPC("托里姆"), AR(), TG("turn", 13010), AR(), TG("accept", 13057)],
     ], movement="script")
+    P(65.7, 51.4, "唐卡洛营地", "tunkalo", [
+        [FP("唐卡洛营地")],
+        [NPC("夏拉托尔"), AR(), TG("accept", 13034)],
+        DO(13034),
+        [NPC("夏拉托尔"), AR(), TG("turn", 13034), AR(), TG("accept", 13037)],
+    ], movement="fly")
 
 
 # 14. Terrace of the Makers finale, Ulduar flight point, then hearth to the seeded western hub.
@@ -634,6 +640,10 @@ def g15_thorim_finale() -> None:
     ], movement="ride")
     P(56.0, 43.5, "造物者圣台", "terrace", [
         [NPC("托里姆"), AR(), TG("turn", 13005, 13035), AR(), TG("accept", 13047)],
+    ], movement="fly")
+    P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
+        [FP("布德克拉格庇护所")],
+        [NPC("塑石者布德克拉格"), AR(), TG("accept", 12930)],
     ], movement="fly")
     P(35.9, 31.6, "智慧神殿附近桥上", "thorim", [DO(13047)], movement="fly")
     P(45.0, 28.0, "奥杜尔", "ulduar", [
@@ -681,7 +691,7 @@ def g17_brann_library() -> None:
     P(37.5, 46.8, "发明家图书馆内层", "library", [
         [LOC("控制台"), AR(), TG("turn", 13416), AR(), TG("accept", 12928)],
         DO(12928),
-        [LOC("布莱恩通讯器"), AR(), TG("turn", 12928), AR(), TG("accept", 12929, 13273)],
+        [LOC("布莱恩通讯器"), AR(), TG("turn", 12928), AR(), TG("accept", 13273)],
     ], movement="ride")
 
 
@@ -699,7 +709,7 @@ def g18_brann_core_gromarsh() -> None:
         [NPC("布莱恩"), BR(), TG("do", 13285)],
     ], movement="fly")
     P(37.3, 49.7, "格罗玛什坠毁点", "gromarsh", [
-        [NPC("伯克塔·血怒"), AR(), TG("turn", 13285), AR(), TG("accept", 13426)],
+        [NPC("伯克塔·血怒"), AR(), TG("turn", 13285)],
         [NPC("奥鲁特·埃雷古"), AR(), TG("turn", 12882)],
     ], movement="fly")
 
@@ -707,8 +717,7 @@ def g18_brann_core_gromarsh() -> None:
 # 19. Bouldercrag first wave.
 def g19_bouldercrag_first() -> None:
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
-        [NPC("塑石者布德克拉格"), AR(), TG("turn", 12929), AR(), TG("accept", 12930)],
-        [FP("布德克拉格庇护所")],
+        [HB("布德克拉格庇护所")],
     ], movement="fly")
     P(25.1, 34.1, "庇护所西北", "bouldercrag", [DO(12930)], movement="fly")
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
@@ -720,9 +729,10 @@ def g19_bouldercrag_first() -> None:
     ], movement="fly")
     P(26.5, 50.9, "尼达维里尔", "nidavelir", [DO(12957, 12964)], movement="fly")
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
+        [HR("布德克拉格庇护所")],
         [NPC("塑石者布德克拉格"), AR(), TG("turn", 12957, 12964), AR(), TG("accept", 12965)],
         [NPC("布鲁沃·斩铁"), AR(), TG("accept", 12978)],
-    ], movement="fly")
+    ], movement="hearth")
 
 
 # 20. Loken objects, Dark Armor trigger, Varduran.
@@ -732,7 +742,7 @@ def g20_bouldercrag_second() -> None:
     P(24.6, 48.4, "尼达维里尔", "nidavelir", [[LOC("洛肯之赐"), BR(), TG("do", 12965)]], movement="ride", show_anchor=False)
     P(29.1, 45.1, "尼达维里尔", "nidavelir", [
         DO(12978),
-        [TXT("拾取黑暗护甲板"), AR(), TG("accept", 12979)],
+        [BR(), TG("accept", 12979)],
         DO(12979),
     ], movement="ride", show_anchor=False)
     P(31.3, 38.2, "布德克拉格庇护所", "bouldercrag", [
@@ -768,8 +778,9 @@ def g21_bouldercrag_finale() -> None:
     ], movement="fly")
     P(36.1, 60.9, "奥迪斯", "bouldercrag", [[LOC("风暴之心"), BR(), TG("do", 12998)]], movement="fly")
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
+        [HR("布德克拉格庇护所")],
         [NPC("塑石者布德克拉格"), AR(), TG("turn", 12998), AR(), TG("accept", 13007)],
-    ], movement="fly")
+    ], movement="hearth")
     P(27.5, 45.3, "尼达维里尔", "nidavelir", [DO(13007)], movement="fly")
     P(31.4, 38.1, "布德克拉格庇护所", "bouldercrag", [
         [NPC("塑石者布德克拉格"), AR(), TG("turn", 13007)],
@@ -779,11 +790,8 @@ def g21_bouldercrag_finale() -> None:
 # 22. Camp Tunka'lo final one-time chain.
 def g22_tunkalo() -> None:
     P(65.7, 51.4, "唐卡洛营地", "tunkalo", [
-        [FP("唐卡洛营地")],
-        [NPC("夏拉托尔"), AR(), TG("turn", 13426), AR(), TG("accept", 13034)],
-        DO(13034),
-        [NPC("夏拉托尔"), AR(), TG("turn", 13034), AR(), TG("accept", 13037)],
-    ], movement="fly")
+        [TAXI("布德克拉格庇护所", "唐卡洛营地")],
+    ], movement="taxi")
     P(61.2, 39.0, "唐卡洛北侧", "tunkalo", [
         [NPC("迅矛酋长"), BR(), TG("do", 13037)],
         [NPC("迅矛酋长"), AR(), TG("accept", 13038)],
@@ -812,17 +820,17 @@ GROUPS = [
     ("布莉亚娜：熊熊大作战 → 冰冷的心", "完成冰牙载具战和丹尼芬雷营救，再回布莉亚娜。", g8_brianna),
     ("艾丝崔 → 冬眠洞穴 → 利齿之坑", "从冬眠洞穴入口进洞完成母熊/冰虫，再做基加拉格和利齿之坑。", g9_astrid_pit),
     ("驭龙赛 → 托里姆 → 格罗玛什", "完成驭龙赛和托里姆对话；到格罗玛什接任务、开飞行点、绑炉石，再进基莫拉克之巢完成猎人链和《紧急措施》。", g10_drakkensryd_thorim),
-    ("弗约恩之砧：弥补关系 + 精炼之火", "完成《弥补关系》；熔渣覆盖的金属右键接《精炼之火》，铁砧交《精炼之火》并接《希望的火花》后炉石回格罗玛什，顺手交《紧急措施》，再用借用双足飞龙去风暴神殿找托里姆。", g11_mending_fences),
-    ("丹尼芬雷：元素之战 → 霍迪尔任务 → 炉石格罗玛什", "完成《元素之战》后，把《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》首轮并入丹尼芬雷现有任务环；完成雷暴台地后炉石回格罗玛什。", g12_dun_first),
-    ("托里姆：维拉努斯 → 科洛米尔", "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再分别完成维拉努斯并推进《科洛米尔，风暴之锤》；布莱恩便笺留到后续自然回格罗玛什时交。", g13_veranus),
-    ("造物者圣台 → 奥杜尔 → 丹尼芬雷", "完成造物者圣台任务和《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。", g15_thorim_finale),
+    ("弗约恩之砧：弥补关系 + 精炼之火", "完成《弥补关系》《精炼之火》，在弗约恩之砧接《希望的火花》；炉石回格罗玛什交《紧急措施》，再去风暴神殿找托里姆。", g11_mending_fences),
+    ("丹尼芬雷：元素之战 → 霍迪尔任务 → 炉石格罗玛什", "完成《元素之战》后，在丹尼芬雷完成《热与冷》《猎杀间谍》《粘滞清洁》《喂饱安格里姆》；完成雷暴台地任务后炉石回格罗玛什。", g12_dun_first),
+    ("托里姆：维拉努斯 → 科洛米尔 → 唐卡洛开点", "取5枚小型始祖龙卵；回托里姆后顺路拿布莱恩便笺，再分别完成维拉努斯并推进《科洛米尔，风暴之锤》；雷暴台地结束后顺手去唐卡洛开飞行点，做《见证者与英雄》并接《雷蹄的记忆》。", g13_veranus),
+    ("造物者圣台 → 布德克拉格开点 → 清算 → 奥杜尔", "完成造物者圣台任务后先去布德克拉格开飞行点并直接接《稀有的土壤》，再做《清算之战》，开奥杜尔飞行点后系统飞行到丹尼芬雷。", g15_thorim_finale),
     ("炉石格罗玛什 → 兽人语 → 寒风", "炉石回格罗玛什交布莱恩便笺，继续霜齿追踪与兽人语任务。", g16_gromarsh_brann_start),
     ("寒风峡谷 → 发明家图书馆", "完成寒风后进入发明家图书馆，连续推进磁盘、数据库和档案员麦卡顿。", g17_brann_library),
     ("布莱恩营地 → 诺甘农之核 → 格罗玛什", "取两份文件，进入洛肯的宝库取得诺甘农之核，再到创世神殿顶部完成钥石事件。", g18_brann_core_gromarsh),
-    ("布德克拉格：土壤 → 雪流平原 → 尼达维里尔", "开布德克拉格飞行点，完成魔化土壤、雪流平原和尼达维里尔第一组任务。", g19_bouldercrag_first),
+    ("布德克拉格：绑炉石 → 土壤 → 雪流平原 → 尼达维里尔", "在已开的布德克拉格庇护所绑定炉石；完成《稀有的土壤》《反击》《救死扶伤》后进入尼达维里尔，做完奴隶和矿石直接炉石回庇护所。", g19_bouldercrag_first),
     ("布德克拉格：洛肯物件 → 黑暗护甲 → 瓦杜兰", "依次处理三件洛肯固定物、黑暗护甲板链和风暴之子瓦杜兰。", g20_bouldercrag_second),
-    ("尼达维里尔熔炉 → 风暴之心 → 钢铁巨像", "完成三个闪电熔炉、两份规格说明书、风暴之心和钢铁巨像。", g21_bouldercrag_finale),
-    ("唐卡洛营地 → 嚎风洞穴 → 北风", "开唐卡洛飞行点，完成雷蹄记忆、4道裂隙、嚎风洞穴和北风事件。", g22_tunkalo),
+    ("尼达维里尔熔炉 → 风暴之心 → 炉石 → 钢铁巨像", "完成三个闪电熔炉和两份规格说明书；正常回庇护所交接后进奥迪斯取风暴之心，完成后炉石回庇护所，再做钢铁巨像。", g21_bouldercrag_finale),
+    ("系统飞唐卡洛 → 雷蹄记忆 → 嚎风洞穴 → 北风", "从布德克拉格庇护所系统飞行到已开的唐卡洛营地，继续已接的《雷蹄的记忆》，再完成裂隙、嚎风洞穴和北风事件。", g22_tunkalo),
 ]
 
 for title, summary, fn in GROUPS:
@@ -860,7 +868,7 @@ route = {
     "displayName": "风暴峭壁",
     "stepGroups": step_groups,
     "defaultGroupIndex": 0,
-    "hearthChain": ["阿格玛之锤", "格罗玛什坠毁点"],
+    "hearthChain": ["阿格玛之锤", "格罗玛什坠毁点", "布德克拉格庇护所"],
     "timing": {
         "centerMinutes": sum(float(g["timing"]["centerMinutes"]) for g in step_groups),
         "rangeMinutes": [

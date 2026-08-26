@@ -7,7 +7,8 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md`](../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md)，记录冰冠40步正式首版发布、163/163覆盖与最终门禁、永久规则结构性治理，以及下一恢复点“冰冠首组实跑校准”。
+- 最新阶段NEAT：[`../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md`](../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md)，记录冰冠白骨女巫/Jotunheim实跑校准、本轮前端文案/验证范围治理事故、旧P2策略污染现役builder的根因修正，以及下个会话“治理→旧图前端文案→索拉查”的固定恢复顺序。
+- 上一阶段冰冠首版/规则治理NEAT：[`../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md`](../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md)。
 - 上一阶段旧Route Atlas封口NEAT：[`../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md`](../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md)。
 - 上一阶段北风逐段重构NEAT：[`../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md`](../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md)。
 - 上一阶段风暴玩家文案NEAT：[`../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md`](../archive/neat/2026-08-23-storm-peaks-final-player-copy-neat.md)，记录风暴峭壁步骤1—20全部按最终地点/NPC、五开关键词颜色、备注密度规则逐段统一，以及旧图以后必须使用“重构当下最终总规则”的恢复约束。

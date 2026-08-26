@@ -4,10 +4,9 @@
   "route_key": "dragonblight",
   "source": "effective Dragonblight foundation include_* non-dungeon primary tasks, minus current-axis structural unavailability",
   "excluded_current_unusable": {
-    "11979": "mutually_exclusive_with_current_borean_entry_axis",
-    "12033": "only_prerequisite_11916_removed_from_current_route"
+    "11979": "mutually_exclusive_with_current_borean_entry_axis"
   },
-  "count": 142,
+  "count": 143,
   "tasks": [
     {
       "quest_id": 11930,
@@ -112,6 +111,11 @@
     {
       "quest_id": 12032,
       "name": "海洋女神",
+      "scope_status": "include_leveling_local"
+    },
+    {
+      "quest_id": 12033,
+      "name": "萨鲁法尔的信",
       "scope_status": "include_leveling_local"
     },
     {

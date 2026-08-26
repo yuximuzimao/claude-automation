@@ -61,7 +61,7 @@ HEARTH_CHAINS = {
     "dragonblight": ["阿格玛之锤"],
     "grizzly": ["征服堡"],
     "zuldrak": ["希姆托加"],
-    "storm": ["阿格玛之锤", "格罗玛什坠毁点"],
+    "storm": ["阿格玛之锤", "格罗玛什坠毁点", "布德克拉格庇护所"],
 }
 
 # Old Zangarmarsh/Nagrand point data predates typed transport fields, so these
@@ -112,7 +112,13 @@ ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
     "dragonblight": [],
     "grizzly": [],
     "zuldrak": [],
-    "storm": [],
+    "storm": [
+        {
+            "label": "首组实测（步骤13—20，扣3分钟暂停）",
+            "minutes": 250.0,
+            "note": "2026-08-25 19:47→2026-08-26 00:00；墙钟253分钟，扣除明确暂停3分钟。包含《寒风的声音》抢怪/首跑找刷新点和钢铁巨像竞争，不作为clean baseline。",
+        }
+    ],
 }
 
 # These tasks contain scripts/events whose service time is not recoverable from

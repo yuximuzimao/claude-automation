@@ -24,6 +24,7 @@
     13419
   ],
   "horde_paladin_blocked_ids_with_exclusive_descendants": [
+    12546,
     12548,
     12559,
     12561,
@@ -35,10 +36,111 @@
     12620,
     12621,
     12660,
+    12797,
     12803,
     12805,
+    13008,
+    13036,
+    13039,
+    13040,
+    13044,
+    13045,
     13060,
+    13068,
+    13070,
+    13072,
+    13073,
+    13074,
+    13075,
+    13076,
+    13077,
+    13086,
+    13104,
+    13110,
+    13118,
+    13122,
+    13125,
+    13130,
+    13135,
+    13139,
+    13141,
+    13157,
+    13224,
+    13228,
+    13230,
+    13234,
+    13236,
+    13237,
+    13238,
+    13239,
+    13258,
+    13259,
+    13260,
+    13261,
+    13262,
+    13263,
+    13264,
+    13271,
+    13275,
+    13276,
+    13277,
+    13278,
+    13279,
+    13281,
+    13282,
+    13283,
+    13293,
+    13301,
+    13302,
+    13304,
+    13305,
+    13306,
+    13307,
+    13310,
+    13312,
+    13313,
+    13316,
+    13328,
+    13329,
+    13330,
+    13331,
+    13340,
+    13348,
+    13349,
+    13351,
+    13352,
+    13353,
+    13354,
+    13355,
+    13356,
+    13357,
+    13358,
+    13359,
+    13360,
+    13361,
+    13362,
+    13363,
+    13364,
+    13365,
+    13366,
+    13367,
+    13368,
+    13373,
+    13376,
+    13379,
+    13406,
     13419
+  ],
+  "external_dependency_bridge_blocks": [
+    {
+      "quest_id": 12797,
+      "name": "界门的回程",
+      "blocked_if": 12548,
+      "via": [
+        12547
+      ],
+      "basis": "12548 -> Un'Goro 12547 -> 12797 -> Sholazar"
+    }
   ],
   "direct_gates": [
     {
@@ -101,6 +203,22 @@
     }
   ],
   "dependency_blocked": [
+    {
+      "quest_id": 12546,
+      "name": "力挽狂澜",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12797
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
     {
       "quest_id": 12548,
       "name": "源生石像",
@@ -263,6 +381,22 @@
       "parent_active": []
     },
     {
+      "quest_id": 12797,
+      "name": "界门的回程",
+      "zone_id": 3711,
+      "zone_name": "索拉查盆地",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        12547
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
       "quest_id": 12805,
       "name": "回收生命的力量",
       "zone_id": 3711,
@@ -274,6 +408,1440 @@
       "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
       "pre_any": [
         12611
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13008,
+      "name": "天灾的战术",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13036,
+      "name": "无上的荣耀",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13419
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13039,
+      "name": "保卫前线基地",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13040,
+      "name": "致命的剧毒",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13036
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13044,
+      "name": "如果还有幸存者……",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        13008,
+        13039,
+        13040
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13045,
+      "name": "空中救兵",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13044
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13068,
+      "name": "勇气的传说",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13070,
+      "name": "冷锋逼近",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13045
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13072,
+      "name": "弥留的英雄",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13068
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13073,
+      "name": "守护者的帮助",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13072
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13074,
+      "name": "翡翠噩梦中的希望",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13073
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13075,
+      "name": "雷姆洛斯的恩赐",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13074
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13076,
+      "name": "仍有时间",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13075
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13077,
+      "name": "龙神的触摸",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13076
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13086,
+      "name": "最后一道防线",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13070
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13104,
+      "name": "再次前往突破口吧，英雄",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13086
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13110,
+      "name": "永不安息的亡者",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13118,
+      "name": "净化天灾城",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13122,
+      "name": "天灾石",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 78,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13125,
+      "name": "凝固的空气",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        13122,
+        13118
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13130,
+      "name": "公正堡的基石",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13135,
+      "name": "危险的能量",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13104
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13139,
+      "name": "进入诺森德的冰冷腹地",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        13125,
+        13130,
+        13135
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13141,
+      "name": "北伐军之峰的战斗",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13139
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13157,
+      "name": "北伐军之峰",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13141
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13224,
+      "name": "奥格瑞姆之锤",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 79,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13157
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13228,
+      "name": "破碎前线",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13230,
+      "name": "为我复仇！",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": [
+        13228
+      ]
+    },
+    {
+      "quest_id": 13234,
+      "name": "血的代价！",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13236,
+      "name": "召唤大军",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13305
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13237,
+      "name": "知己知彼",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13260
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13238,
+      "name": "有价值的帮手？",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13239,
+      "name": "爆炸油",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13238
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13258,
+      "name": "机会",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        12938,
+        13224
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13259,
+      "name": "确立优势",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13258
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13260,
+      "name": "知根知底",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13228
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13261,
+      "name": "爆炸油",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13239
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13262,
+      "name": "引爆！",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13259
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13263,
+      "name": "引线太短",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13262
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13264,
+      "name": "你的憎恶伙伴",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13237
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13271,
+      "name": "黑暗中的声音",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13263
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13275,
+      "name": "藏匿行踪",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13271
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13276,
+      "name": "你的憎恶伙伴",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13264
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13277,
+      "name": "对抗巨人",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13237
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13278,
+      "name": "污染者科普洛斯",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13277
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13279,
+      "name": "化学常识",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13277
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13281,
+      "name": "中和瘟疫",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13279
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13282,
+      "name": "返回地面",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13275
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13283,
+      "name": "占山为王",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13293
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13293,
+      "name": "前往伊米海姆！",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13301,
+      "name": "地面突袭",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13340
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13302,
+      "name": "萨隆邪铁的奴隶",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13304,
+      "name": "战地维修",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13282
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13305,
+      "name": "竭尽全力",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13304
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13306,
+      "name": "构建路障",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13366
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13307,
+      "name": "溅血的旗帜",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13306
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13310,
+      "name": "空中突袭",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13340
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13312,
+      "name": "铁墙壁垒",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        13306,
+        13367
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13313,
+      "name": "遮挡天空",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13306
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13316,
+      "name": "科雷萨的守卫者",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13329
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13328,
+      "name": "击破碎片",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13329
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13329,
+      "name": "在恐惧之门前",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [],
+      "pre_all": [
+        13307,
+        13312
+      ],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13330,
+      "name": "伊米亚之血",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13331,
+      "name": "盲目的联盟",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13313
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13340,
+      "name": "协助突袭",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13224
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13348,
+      "name": "徒劳",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13236
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13349,
+      "name": "冰霜巨龙的摇篮",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13348
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13351,
+      "name": "预览",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13264
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13352,
+      "name": "从天而“降”",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13353,
+      "name": "从天而“降”",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13352
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13354,
+      "name": "指挥体系",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13355,
+      "name": "无法复制",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13351
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13356,
+      "name": "重新考验",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13355
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13357,
+      "name": "重新考验",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13356
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13358,
+      "name": "活动窃听器",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13352
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13359,
+      "name": "巨龙的墓地",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13348
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13360,
+      "name": "寻求答案",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13359
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13361,
+      "name": "猎人与王子",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13360
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13362,
+      "name": "知识是可怕的负担",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13361
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13363,
+      "name": "银色北伐军的协助",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13362
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13364,
+      "name": "提里奥的尝试",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13363
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13365,
+      "name": "活动窃听器",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13358
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13366,
+      "name": "需要更多情报",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13352
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13367,
+      "name": "片刻不得安宁",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13366
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13368,
+      "name": "片刻不得安宁",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13367
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13373,
+      "name": "边缘科学的益处",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13379
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13376,
+      "name": "长途轰炸：失落希望之谷！",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13373
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13379,
+      "name": "绿色科技",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13239
+      ],
+      "pre_all": [],
+      "parent_active": []
+    },
+    {
+      "quest_id": 13406,
+      "name": "短程行动：轰炸场",
+      "zone_id": 210,
+      "zone_name": "冰冠冰川",
+      "required_level": 77,
+      "quest_level": 80,
+      "required_spell": null,
+      "cold_weather_flying_gate_source": null,
+      "reason": "exclusive_dependency_on_cold_weather_flying_blocked_chain",
+      "pre_any": [
+        13373
       ],
       "pre_all": [],
       "parent_active": []

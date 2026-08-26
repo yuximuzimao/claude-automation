@@ -81,11 +81,10 @@ def main() -> None:
         hard.append({"type": "unexpected_system_flight_player_text"})
 
     expected_system_actions = {
-        "开飞行点：银色前线基地",
-        "开飞行点：北伐军之峰（五号分别）",
-        "开飞行点：暗影拱顶（五号分别）",
+        "开飞行点：银色比武场",
+        "开飞行点：暗影拱顶",
         "炉石绑定：暗影拱顶",
-        "开飞行点：死亡高地（五号分别）",
+        "开飞行点：死亡高地",
     }
     actual_system_actions = {
         line for line in action_text.splitlines()

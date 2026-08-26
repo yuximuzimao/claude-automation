@@ -33,6 +33,31 @@ VAGUE_ACTION_PATTERNS = (
 # this keeps dense hub handoffs readable without repeating `交/接` before every quest.
 IMPLICIT_HANDOFF_PATTERNS: tuple[str, ...] = ()
 
+# Step titles are player navigation labels, not authoring-stage/process labels.
+STEP_TITLE_PROCESS_PATTERNS = (
+    r"第[一二三四五六七八九十0-9]+轮",
+    r"回收",
+    r"收尾",
+    r"批量",
+    r"接齐",
+    r"机会任务",
+)
+
+# Route action text is a closed player-operation grammar. Mechanics, quantities, sharing,
+# conditions, route rationale and background progress belong in notes/summaries instead.
+# These patterns intentionally fail publication when prose leaks back into an action line.
+ACTION_GRAMMAR_FORBIDDEN_PATTERNS = (
+    r"》[:：]",                         # `做《任务》：机制/数量...`
+    r"（五号分别）",
+    r"(?:^|\n)\s*(?:若|否则|沿路推进|沿路补|推进《|确认《|暂不做|保持已完成未交|只携带|五号分别|立即检查)",
+    r"(?:^|\n)\s*购买\d",
+    r"(?:^|\n)\s*零经验重复任务",
+    r"；\s*(?:若|否则|立即检查|只携带|不等待|不专程)",
+    r"(?:^|\n).*不选择前往.*出发对话",
+    r"(?:^|\n).*回地面.*",
+    r"拾取[^\n]*→\s*接《",
+)
+
 # Explicit cross-map carry tasks are allowed to remain open at the end of the current map.
 # Anything else accepted without a visible `交《任务名》` is a route integrity failure.
 LIFECYCLE_ALLOWLIST = {
@@ -53,13 +78,18 @@ def main() -> None:
             if not title or not action:
                 bad.append((route_key, point_index, title, action, "empty title/action"))
                 continue
-            for pattern in (*VAGUE_ACTION_PATTERNS, *IMPLICIT_HANDOFF_PATTERNS):
+            for pattern in (*VAGUE_ACTION_PATTERNS, *IMPLICIT_HANDOFF_PATTERNS, *ACTION_GRAMMAR_FORBIDDEN_PATTERNS):
                 if re.search(pattern, action):
                     bad.append((route_key, point_index, title, action, pattern))
         for step_index, group in enumerate(route.get("stepGroups", []), 1):
+            group_title = str(group.get("title", ""))
             summary = str(group.get("summary", ""))
-            if not summary:
-                bad.append((route_key, step_index, group.get("title", ""), summary, "empty summary"))
+            action_html = str(group.get("actionHtml", ""))
+            if not summary and not action_html:
+                bad.append((route_key, step_index, group_title, summary, "empty summary and actionHtml"))
+            for pattern in STEP_TITLE_PROCESS_PATTERNS:
+                if re.search(pattern, group_title):
+                    bad.append((route_key, step_index, group_title, group_title, f"step-title:{pattern}"))
 
     lifecycle = []
     handoff_re = re.compile(r"(?<!暂不)(自动接|右键接|接|交)((?:《[^》]+》(?:[、，\s]*))+)" )

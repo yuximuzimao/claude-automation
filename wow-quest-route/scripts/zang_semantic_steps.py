@@ -180,7 +180,7 @@ def apply_zang_step1(route: dict[str, Any]) -> None:
             85.28,
             54.75,
             "沼泽鼠岗哨",
-            "开飞行点：沼泽鼠岗哨（五号分别）\n"
+            "开飞行点：沼泽鼠岗哨\n"
             "玛加沙 → 接《时尚无罪》《别再提蘑菇了！》\n"
             "里维伊 → 接《沼牙的威胁》\n"
             "祖莱 → 接《厚重多头蛇鳞片》《向暗影猎手德恩加报到》",
@@ -246,7 +246,7 @@ def apply_zang_step1(route: dict[str, Any]) -> None:
             npc_actions("劳兰娜·萨维尔", accepts=("拯救孢子人",)),
             npc_actions("唤风者塔鲁·黑蹄", accepts=("保护观察者",)),
             point_anchor("沼泽鼠岗哨"),
-            system_line("开飞行点：沼泽鼠岗哨（五号分别）", "ra-flightpoint"),
+            system_line("开飞行点：沼泽鼠岗哨", "ra-flightpoint"),
             npc_actions("玛加沙", accepts=("时尚无罪", "别再提蘑菇了！")),
             npc_actions("里维伊", accepts=("沼牙的威胁",)),
             npc_actions("祖莱", accepts=("厚重多头蛇鳞片", "向暗影猎手德恩加报到")),
@@ -345,7 +345,7 @@ def apply_zang_step3(route: dict[str, Any]) -> None:
             32.38,
             51.96,
             "萨布拉金",
-            "开飞行点：萨布拉金（五号分别）\n炉石绑定：萨布拉金（五号分别）\n"
+            "开飞行点：萨布拉金\n炉石绑定：萨布拉金\n"
             "暗影猎手德恩加 → 交《向暗影猎手德恩加报到》\n"
             "巫医托尔加什 → 接《爆顶蘑菇》\n苏尔加亚 → 接《下钩钓鱼》\n"
             "通缉布告 → 接《通缉：穆玛基酋长》《通缉：格罗阿克》\n"
@@ -377,8 +377,8 @@ def apply_zang_step3(route: dict[str, Any]) -> None:
     group["actionHtml"] = "\n".join(
         [
             point_anchor("萨布拉金"),
-            system_line("开飞行点：萨布拉金（五号分别）", "ra-flightpoint"),
-            system_line("炉石绑定：萨布拉金（五号分别）", "ra-hearth"),
+            system_line("开飞行点：萨布拉金", "ra-flightpoint"),
+            system_line("炉石绑定：萨布拉金", "ra-hearth"),
             npc_actions("暗影猎手德恩加", turns=("向暗影猎手德恩加报到",)),
             npc_actions("巫医托尔加什", accepts=("爆顶蘑菇",)),
             npc_actions("苏尔加亚", accepts=("下钩钓鱼",)),
@@ -564,7 +564,7 @@ def apply_zang_step6(route: dict[str, Any]) -> None:
             22.31,
             45.78,
             "恐爪刷新点",
-            "若恐爪在场 → ↳ 做《猎杀恐爪》",
+            "↳ 做《猎杀恐爪》",
             "west",
             "《猎杀恐爪》：经过刷新点时目标在场就做；不等刷新，未完成继续保留。",
             optional=True,
@@ -584,7 +584,7 @@ def apply_zang_step6(route: dict[str, Any]) -> None:
             do_at("蛮沼区", "蛮沼之灵"),
             point_anchor("萨布拉金"),
             npc_actions("先知亚尼迪", turns=("蛮沼之灵",), accepts=("灵魂之盟？",)),
-            '<div class="ra-line">若恐爪在场 ' + branch() + verb("做") + ' ' + task("猎杀恐爪", "do") + '</div>',
+            do_at("恐爪刷新点", "猎杀恐爪"),
         ]
     )
     group["noteHtml"] = notes_html(
@@ -655,7 +655,7 @@ def apply_zang_step8(route: dict[str, Any]) -> None:
             "昂古拉刷新点",
             "↳ 接《沼泽中的伯爵》",
             "west",
-            "《沼泽中的伯爵》：来源怪为“伯爵”昂古拉，主要位置约(32.8,59.5)；击杀后拾取必掉的任务起始物“昂古拉的下颚”，右键该物品接取任务。这是固定顺路目标，不按机会任务处理。",
+            "《沼泽中的伯爵》：来源怪为“伯爵”昂古拉，主要位置约(32.8,59.5)；击杀后拾取必掉的任务起始物“昂古拉的下颚”，右键该物品接取任务。",
         ),
         P(23.32, 66.21, "莉萨奥营地", "观察者莉萨奥 → 交《狼吞虎咽》《沼泽中的伯爵》 → 接《熟悉的蘑菇》", "west"),
     ]
@@ -672,7 +672,7 @@ def apply_zang_step8(route: dict[str, Any]) -> None:
         ]
     )
     group["noteHtml"] = notes_html(
-        note_block("沼泽中的伯爵", "来源怪：“伯爵”昂古拉；主要位置约(32.8,59.5)；任务起始物：“昂古拉的下颚”（必掉）。击杀昂古拉后拾取该掉落物，右键物品接《沼泽中的伯爵》。这是固定顺路目标，不按机会任务处理。"),
+        note_block("沼泽中的伯爵", "来源怪：“伯爵”昂古拉；主要位置约(32.8,59.5)；任务起始物：“昂古拉的下颚”（必掉）。击杀昂古拉后拾取该掉落物，右键物品接《沼泽中的伯爵》。"),
     )
     group["timingTaskNames"] = ["狼吞虎咽", "沼泽中的伯爵"]
 
@@ -690,7 +690,7 @@ def apply_zang_step9(route: dict[str, Any]) -> None:
             23.78,
             26.75,
             "穆玛基",
-            "↳ 做《通缉：穆玛基酋长》\n沿路推进《成熟的孢子》",
+            "↳ 做《通缉：穆玛基酋长》",
             "west",
             "《成熟的孢子》：可交易；沿北部主体路线顺手击杀大型孢子蝠自然累计，五号之间可调配库存，不在穆玛基附近单独绕圈补。",
         ),
@@ -707,7 +707,7 @@ def apply_zang_step9(route: dict[str, Any]) -> None:
             42.23,
             41.42,
             "多头蛇之王刷新点",
-            "若多头蛇之王在场 → ↳ 做《多头蛇之王》",
+            "↳ 做《多头蛇之王》",
             "west",
             "《多头蛇之王》：经过固定刷新点时目标在场就做；不等刷新，未完成继续保留。",
             optional=True,
@@ -721,10 +721,10 @@ def apply_zang_step9(route: dict[str, Any]) -> None:
         [
             do_at("血鳞区", "既然我们是朋友......"),
             do_at("穆玛基", "通缉：穆玛基酋长"),
-            task_text_line("沿路推进 ", "成熟的孢子"),
+
             do_at("匕潭鱼人笼点", "你见过鱼人吗？"),
             do_at("格罗阿克", "通缉：格罗阿克", "熟悉的蘑菇"),
-            '<div class="ra-line">若多头蛇之王在场 ' + branch() + verb("做") + ' ' + task("多头蛇之王", "do") + '</div>',
+            do_at("多头蛇之王刷新点", "多头蛇之王"),
         ]
     )
     group["noteHtml"] = notes_html(
@@ -750,7 +750,7 @@ def apply_zang_step10(route: dict[str, Any]) -> None:
             "使用炉石：萨布拉金\n"
             "暗影猎手德恩加 → 交《通缉：穆玛基酋长》《通缉：格罗阿克》 → 接《战斗迫近》\n"
             "巫医托尔加什 → 交《你见过鱼人吗？》\n"
-            "若已完成：苏尔加亚 → 交《多头蛇之王》《猎杀恐爪》",
+            "苏尔加亚 → 交《多头蛇之王》《猎杀恐爪》",
             "final",
             movement="hearth",
         ),
@@ -758,7 +758,7 @@ def apply_zang_step10(route: dict[str, Any]) -> None:
             19.88,
             27.09,
             "战斗迫近",
-            "↳ 做《战斗迫近》\n沿路补《成熟的孢子》",
+            "↳ 做《战斗迫近》",
             "final",
             "《成熟的孢子》：仍按背景采集处理；只有离自然回孢子村已经很近且数量不足时才顺手补，不单独开刷怪圈。",
         ),
@@ -781,10 +781,8 @@ def apply_zang_step10(route: dict[str, Any]) -> None:
             point_anchor("萨布拉金"),
             npc_actions("暗影猎手德恩加", turns=("通缉：穆玛基酋长", "通缉：格罗阿克"), accepts=("战斗迫近",)),
             npc_actions("巫医托尔加什", turns=("你见过鱼人吗？",)),
-            conditional_npc_turn_line("苏尔加亚", "：若已完成 ", "多头蛇之王"),
-            conditional_npc_turn_line("苏尔加亚", "：若已完成 ", "猎杀恐爪"),
+            npc_actions("苏尔加亚", turns=("多头蛇之王", "猎杀恐爪")),
             do_at("战斗迫近", "战斗迫近"),
-            task_text_line("沿路补 ", "成熟的孢子"),
             point_anchor("孢子村"),
             npc_actions("舒特", turns=("既然我们是朋友......",)),
             npc_actions("格沙弗", turns=("成熟的孢子",)),
@@ -907,7 +905,7 @@ def apply_zang_step13(route: dict[str, Any]) -> None:
     route["points"][start : end + 1] = points
 
     group["title"] = "炉石萨布拉金 → 莉萨奥"
-    group["summary"] = "炉石回萨布拉金交北部收尾任务，只顺手交已经完成的刷新目标；随后到莉萨奥交《偷回蘑菇》，赞加沼泽收口。"
+    group["summary"] = "炉石回萨布拉金交北部已完成任务；刷新目标只交已经完成的，随后到莉萨奥交《偷回蘑菇》。"
     group["actionHtml"] = "\n".join(
         [
             system_line("使用炉石：萨布拉金", "ra-hearth"),

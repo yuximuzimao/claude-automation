@@ -21,6 +21,15 @@ ROUTE_STATUSES = {
     "include_conditional_route_state",
     "include_first_run_repeatable_or_calendar",
 }
+TASK_GROUP_TOKEN = r"(?:《[^》]+》)+"
+FLOW_ACTION_RE = re.compile(rf"^[^：；;,，0-9]+(?:\s*→\s*(?:接|做|交){TASK_GROUP_TOKEN})+$")
+SYSTEM_ACTION_RE = re.compile(r"^(?:开飞行点|炉石绑定|使用炉石)：[^：；;,，0-9]+$")
+SYSTEM_FLIGHT_RE = re.compile(r"^系统飞行：[^：；;,，0-9]+\s*→\s*[^：；;,，0-9]+$")
+
+
+def action_skeleton_ok(text: str) -> bool:
+    value = str(text).strip()
+    return bool(SYSTEM_ACTION_RE.fullmatch(value) or SYSTEM_FLIGHT_RE.fullmatch(value) or FLOW_ACTION_RE.fullmatch(value))
 
 
 def main() -> None:
@@ -48,16 +57,27 @@ def main() -> None:
     checks["formal_task_count"] = len(formal)
     checks["step_count"] = len(steps)
     checks["point_count"] = len(points)
-    if len(formal) != 163:
-        hard.append({"type": "formal_task_count", "actual": len(formal), "expected": 163})
-    if len(steps) != 40 or len(groups) != 40:
-        hard.append({"type": "step_count", "draft": len(steps), "published": len(groups), "expected": 40})
-    if not str(draft.get("status") or "").startswith("icecrown_full_zone_route"):
+
+    action_skeleton_violations = [
+        {"step": int(step.get("step") or 0), "action": str(action)}
+        for step in steps
+        for action in (step.get("actions") or [])
+        if not action_skeleton_ok(str(action))
+    ]
+    checks["action_skeleton_violation_count"] = len(action_skeleton_violations)
+    if action_skeleton_violations:
+        hard.append({"type": "action_skeleton_contract", "rows": action_skeleton_violations})
+
+    if len(formal) != 61:
+        hard.append({"type": "formal_task_count", "actual": len(formal), "expected": 61})
+    if len(steps) != 16 or len(groups) != 16:
+        hard.append({"type": "step_count", "draft": len(steps), "published": len(groups), "expected": 16})
+    if str(draft.get("status") or "") != "icecrown_reachable_route_live_entry_confirmed":
         hard.append({"type": "stale_draft_status", "status": draft.get("status")})
 
     coverage_ok = (
-        int(coverage.get("candidate_count", -1)) == 163
-        and int(coverage.get("covered_count", -1)) == 163
+        int(coverage.get("candidate_count", -1)) == len(formal)
+        and int(coverage.get("covered_count", -1)) == len(formal)
         and int(coverage.get("uncovered_count", -1)) == 0
         and not coverage.get("uncovered")
     )
@@ -66,8 +86,8 @@ def main() -> None:
         hard.append({"type": "coverage", "payload": coverage})
 
     dependency_ok = (
-        int(dependency.get("candidate_count", -1)) == 163
-        and int(dependency.get("mentioned_candidate_count", -1)) == 163
+        int(dependency.get("candidate_count", -1)) == len(formal)
+        and int(dependency.get("mentioned_candidate_count", -1)) == len(formal)
         and int(dependency.get("missing_mention_count", -1)) == 0
         and int(dependency.get("dependency_order_violation_count", -1)) == 0
     )
@@ -94,8 +114,9 @@ def main() -> None:
 
     publication_ok = (
         route.get("uiStandard") == "semantic-hud-v45"
-        and route.get("status") == "formal_pre_live_fivebox_calibration"
+        and route.get("status") == "live_entry_confirmed_current_group_at_12897"
         and int(route.get("order") or -1) == 7
+        and int(route.get("defaultGroupIndex") or -1) == 1
     )
     checks["publication_contract_ok"] = publication_ok
     if not publication_ok:
@@ -110,8 +131,8 @@ def main() -> None:
     route_timing = route.get("timing") or {}
     timing_ok = (
         abs(group_center - float(route_timing.get("centerMinutes") or -1)) < 1e-6
-        and abs(group_center - 725.0) < 1e-6
-        and [float(x) for x in route_timing.get("rangeMinutes") or []] == [540.0, 960.0]
+        and abs(group_center - 289.0) < 1e-6
+        and [float(x) for x in route_timing.get("rangeMinutes") or []] == [216.0, 398.0]
     )
     checks["timing_ok"] = timing_ok
     checks["timing_center_minutes"] = group_center
@@ -157,6 +178,7 @@ def main() -> None:
 
     missing_route_notes: list[dict] = []
     missing_fivebox_notes: list[dict] = []
+    invalid_fivebox_format: list[dict] = []
     route_note_cards = 0
     fivebox_cards = 0
     for step in steps:
@@ -175,38 +197,133 @@ def main() -> None:
                     missing_route_notes.append({"quest_id": int(qid), "name": name, "step": step_no})
             if fivebox:
                 fivebox_cards += 1
-                if name not in note_html or html.escape(fivebox) not in note_html or "五开" not in note_html:
-                    missing_fivebox_notes.append({"quest_id": int(qid), "name": name, "step": step_no})
+                expected_marker = ""
+                expected_detail = ""
+                if fivebox.startswith("共享："):
+                    expected_marker = '<span class="ra-shared">共享：</span>'
+                    expected_detail = fivebox[len("共享："):].strip()
+                elif fivebox.startswith("不共享："):
+                    expected_marker = '<span class="ra-not-shared">不共享：</span>'
+                    expected_detail = fivebox[len("不共享："):].strip()
+                elif "待实测" in fivebox:
+                    expected_marker = '<span class="ra-pending">五开待实测：</span>'
+                    expected_detail = re.sub(r"^(?:重点)?待实测[：:]\s*", "", fivebox).strip()
+                else:
+                    invalid_fivebox_format.append({
+                        "quest_id": int(qid),
+                        "name": name,
+                        "step": step_no,
+                        "fivebox": fivebox,
+                    })
+                if expected_marker:
+                    published = name in note_html and expected_marker in note_html
+                    if expected_detail:
+                        published = published and html.escape(expected_detail) in note_html
+                    if not published:
+                        missing_fivebox_notes.append({"quest_id": int(qid), "name": name, "step": step_no})
     checks["route_note_cards"] = route_note_cards
     checks["fivebox_cards"] = fivebox_cards
     checks["missing_route_notes"] = len(missing_route_notes)
     checks["missing_fivebox_notes"] = len(missing_fivebox_notes)
+    checks["invalid_fivebox_format"] = len(invalid_fivebox_format)
     if missing_route_notes:
         hard.append({"type": "route_note_not_published", "rows": missing_route_notes})
     if missing_fivebox_notes:
         hard.append({"type": "fivebox_note_not_published", "rows": missing_fivebox_notes})
+    if invalid_fivebox_format:
+        hard.append({"type": "fivebox_format", "rows": invalid_fivebox_format})
+
+    def visible_text(raw: object) -> str:
+        return html.unescape(re.sub(r"<[^>]+>", "", str(raw or "")))
+
+    visible_fragments: list[tuple[str, str]] = [
+        ("route.title", visible_text(route.get("title"))),
+        ("route.sub", visible_text(route.get("sub"))),
+        ("route.badge", visible_text(route.get("badge"))),
+        ("route.footer", visible_text(route.get("footer"))),
+    ]
+    for step_no, group in enumerate(groups, start=1):
+        visible_fragments.extend([
+            (f"step.{step_no}.title", visible_text(group.get("title"))),
+            (f"step.{step_no}.summary", visible_text(group.get("summary"))),
+            (f"step.{step_no}.actionHtml", visible_text(group.get("actionHtml"))),
+            (f"step.{step_no}.noteHtml", visible_text(group.get("noteHtml"))),
+        ])
+
+    forbidden_player_terms = (
+        "首跑前预算",
+        "外部基准",
+        "本服首跑实测",
+        "共享预期",
+        "首跑只需确认",
+        "五开：",
+    )
+    player_text_violations: list[dict] = []
+    bare_task_id = re.compile(r"(?<!\d)\d{5}(?!\d)")
+    for field, text in visible_fragments:
+        terms = [term for term in forbidden_player_terms if term in text]
+        ids = sorted(set(bare_task_id.findall(text)))
+        if terms or ids:
+            player_text_violations.append({
+                "field": field,
+                "forbidden_terms": terms,
+                "bare_task_ids": ids,
+                "text": text[:500],
+            })
+    checks["player_text_violation_count"] = len(player_text_violations)
+    if player_text_violations:
+        hard.append({"type": "player_text_contract", "rows": player_text_violations})
+
+    blocked_dependency_names = {
+        str(task.get("name") or "")
+        for task in foundation.get("tasks", [])
+        if task.get("scope_status") == "exclude_dependency_on_blocked_task" and task.get("name")
+    }
+    published_task_names = set()
+    task_span_pattern = re.compile(r'<span class="ra-task(?: [^"]+)?">([^<]+)</span>')
+    for group in groups:
+        published_task_names.update(html.unescape(name) for name in task_span_pattern.findall(str(group.get("actionHtml") or "")))
+    blocked_task_leaks = sorted(blocked_dependency_names & published_task_names)
+    checks["blocked_dependency_task_count"] = len(blocked_dependency_names)
+    checks["blocked_task_leak_count"] = len(blocked_task_leaks)
+    if len(blocked_dependency_names) != 102:
+        hard.append({"type": "blocked_dependency_count", "actual": len(blocked_dependency_names), "expected": 102})
+    if blocked_task_leaks:
+        hard.append({"type": "blocked_dependency_task_published", "tasks": blocked_task_leaks})
 
     action_text = "\n".join(str(point[3]) for point in points)
+    task_note_text = "\n".join(
+        " ".join(str(card.get(key) or "") for key in ("route_note", "fivebox"))
+        for step in steps
+        for card in (step.get("task_cards") or {}).values()
+    )
     random_trigger_ok = (
-        "右键接《元帅的计划》" in action_text
-        and "若未掉落，不为它当天重复刷《收集情报》" in action_text
+        "元帅信件" in task_note_text
+        and "当天不重复刷" in task_note_text
     )
     checks["marshal_random_trigger_guard"] = random_trigger_ok
     if not random_trigger_ok:
         hard.append({"type": "marshal_random_trigger_guard_missing"})
 
-    probe_12892_ok = "12892《乐趣十足》" in str((draft.get("entry_decision") or {}).get("probe_12892") or "")
-    checks["probe_12892_present"] = probe_12892_ok
-    if not probe_12892_ok:
-        hard.append({"type": "probe_12892_missing"})
+    entry_decision = draft.get("entry_decision") or {}
+    live_12892_ok = (
+        entry_decision.get("live_12892_confirmed") is True
+        and entry_decision.get("live_12892_completed") is True
+        and "接《乐趣十足》" in action_text
+        and entry_decision.get("geographic_entry") == "银色比武场"
+        and entry_decision.get("first_quest_hub") == "奥格瑞姆之锤"
+    )
+    checks["live_12892_confirmed"] = live_12892_ok
+    if not live_12892_ok:
+        hard.append({"type": "live_12892_state_missing_or_wrong_entry"})
 
     payload = {
         "status": "PASS" if not hard else "FAIL",
         "hard_issue_count": len(hard),
         "hard_issues": hard,
         "checks": checks,
-        "publication_state": "formal_pre_live_fivebox_calibration",
-        "next_state": "first_live_run_calibration",
+        "publication_state": "live_entry_confirmed_current_group_at_12897",
+        "next_state": "continue_from_12897_and_calibrate_remaining_route",
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload, ensure_ascii=False, indent=2))

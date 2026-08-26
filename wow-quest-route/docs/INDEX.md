@@ -87,6 +87,7 @@
 - `archive/analysis/`：日期化分析、模型实验、地图特定审计和形成过程。
 - `archive/proposed-routes/`：未进入正式执行、后来被放弃的候选路线。
 - `archive/video/`：视频阶段审计与NEAT。
+- `archive/scripts/`：已退出当前实现链的阶段性脚本，只允许定向考古，不得作为现役builder/audit/test入口。
 - `verified-routes/segments/`：仍然可信、后续可能复用的已验证路线段，因此不归入废弃历史。
 
 历史档案不是日常活跃知识。NEAT默认不全文重读整个archive；只审本轮改动的历史文件、archive索引，以及CURRENT/当前任务明确指向的最近历史。

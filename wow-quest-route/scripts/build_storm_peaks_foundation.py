@@ -146,6 +146,8 @@ def main() -> None:
     review_resolutions = {int(qid): str(value) for qid, value in (overrides.get("objective_review_resolutions") or {}).items()}
     fivebox_resolved = {int(qid): str(value) for qid, value in (overrides.get("fivebox_resolved") or {}).items()}
     fivebox_checks = {int(qid): str(value) for qid, value in (overrides.get("fivebox_checks") or {}).items()}
+    scope_overrides = {int(qid): dict(value) for qid, value in (overrides.get("scope_overrides") or {}).items()}
+    dependency_overrides = {int(qid): dict(value) for qid, value in (overrides.get("dependency_overrides") or {}).items()}
     assigned = [dict(t) for t in universe.get("tasks", []) if t.get("assigned_zone_id") == ZONE_ID]
     touching = [dict(t) for t in universe.get("tasks", []) if ZONE_ID in (t.get("touching_northrend_zone_ids") or [])]
     assigned_ids = {int(t["quest_id"]) for t in assigned}
@@ -156,6 +158,12 @@ def main() -> None:
     status_counts: Counter[str] = Counter()
     for task in assigned:
         qid = int(task["quest_id"])
+        if qid in dependency_overrides:
+            override = dependency_overrides[qid]
+            for field in ("pre_any", "pre_all", "parent_active"):
+                if field in override:
+                    task[field] = [int(x) for x in (override.get(field) or [])]
+            task["dependency_override_basis"] = override.get("basis")
         if qid in objective_required_counts:
             counts = objective_required_counts[qid]
             objectives = task.get("objectives") or []
@@ -178,6 +186,10 @@ def main() -> None:
         task["fivebox_resolved"] = fivebox_resolved.get(qid, "")
         task["fivebox_check"] = fivebox_checks.get(qid, "")
         status, reasons = status_for(task)
+        if qid in scope_overrides:
+            override = scope_overrides[qid]
+            status = str(override["status"])
+            reasons = [str(override.get("reason") or "user_live_scope_override")]
         task["scope_status"] = status
         task["scope_reasons"] = reasons
         rows.append(task)

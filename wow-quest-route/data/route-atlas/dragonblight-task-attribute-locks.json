@@ -1178,6 +1178,50 @@
       }
     },
     {
+      "quest_id": 12033,
+      "name": "萨鲁法尔的信",
+      "locked_tags": [
+        "chain:terminal_in_scope",
+        "reward:money_not_required_for_priority",
+        "reward:no_equipment",
+        "scope:include_leveling_local",
+        "timing:estimated"
+      ],
+      "reward": {
+        "has_equipment_reward": false,
+        "has_direct_money": null,
+        "direct_money_status": "not_required_outside_priority_dependency_closure",
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 6100,
+          "bonus_money_from_xp_copper": 36600,
+          "bonus_money_from_xp_gold_decimal": 3.66,
+          "display": "3g 66s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "collection": {
+        "is_multi_item_drop_or_pickup": false,
+        "trusted_item_units": 0,
+        "source_modes": [],
+        "collection_pattern": null
+      },
+      "chain": {
+        "scope_zone_ids": [
+          65
+        ],
+        "direct_followup_ids": [],
+        "descendant_ids": []
+      },
+      "timing": {
+        "status": "estimated",
+        "minutes": 0.58,
+        "basis": "single_fixed_object_model"
+      }
+    },
+    {
       "quest_id": 12034,
       "name": "胜利将近……",
       "locked_tags": [
@@ -4947,7 +4991,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 2.92,
+        "minutes": 0.58,
         "basis": "fixed_object_fivebox_model"
       }
     },
@@ -5579,7 +5623,7 @@
       },
       "timing": {
         "status": "estimated",
-        "minutes": 4.67,
+        "minutes": 0.93,
         "basis": "fixed_object_fivebox_model"
       }
     },
