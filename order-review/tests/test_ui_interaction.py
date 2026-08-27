@@ -383,6 +383,15 @@ def test_package_buttons_refresh_visible_state_and_enforce_package_rules(
     assert len(_buttons(window, "编辑")) == 9
     assert len(_quantity_entries(window)) == 10
 
+    window.canvas.yview_moveto(0.5)
+    root.update()
+    scroll_offset = window.canvas.canvasy(0)
+    window._audit_feedback = "拆分进行中：" + "结果核对状态更新。\n" * 20
+    window._rerender_current_snapshot()
+    root.update()
+    assert abs(window.canvas.canvasy(0) - scroll_offset) <= 2
+    window._audit_feedback = ""
+
     single_snapshot = OrderSnapshot(
         is_expanded=True,
         system_order_id="SYSTEM-SINGLE-1",

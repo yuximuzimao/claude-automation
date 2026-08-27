@@ -1043,9 +1043,9 @@ class OrderReviewWindow:
         elif section == "backend":
             self._backend_expanded = not self._backend_expanded
         if self._current_view is not None:
-            scroll_position = self.canvas.yview()[0]
+            scroll_offset = self._capture_scroll_offset()
             self._render_view(self._current_view, reset_scroll=False)
-            self.canvas.yview_moveto(scroll_position)
+            self._restore_scroll_offset(scroll_offset)
 
     def _render_metrics(self, metrics: list[MetricView]) -> None:
         for child in self.metrics_frame.winfo_children():
@@ -2808,9 +2808,9 @@ class OrderReviewWindow:
     def _rerender_current_snapshot(self) -> None:
         if self.current_snapshot is None:
             return
-        scroll_position = self.canvas.yview()[0]
+        scroll_offset = self._capture_scroll_offset()
         self._render_view(build_sidebar_view(self.current_snapshot), reset_scroll=False)
-        self.canvas.yview_moveto(scroll_position)
+        self._restore_scroll_offset(scroll_offset)
 
     def _render_unassigned_pool(self, kind_count: int, quantity: int) -> None:
         has_remaining = quantity > 0
@@ -3018,6 +3018,23 @@ class OrderReviewWindow:
 
     def _sync_canvas_width(self, event: tk.Event) -> None:
         self.canvas.itemconfigure(self.content_window, width=event.width)
+
+    def _capture_scroll_offset(self) -> float:
+        """保存浮窗内容区顶部的绝对像素位置，避免重绘时按百分比跳动。"""
+        self.root.update_idletasks()
+        return max(0.0, float(self.canvas.canvasy(0)))
+
+    def _restore_scroll_offset(self, offset: float) -> None:
+        self.root.update_idletasks()
+        bounds = self.canvas.bbox("all")
+        if bounds is None:
+            self.canvas.yview_moveto(0)
+            return
+        top = float(bounds[1])
+        height = max(1.0, float(bounds[3] - bounds[1]))
+        self.canvas.configure(scrollregion=bounds)
+        fraction = max(0.0, min(1.0, (offset - top) / height))
+        self.canvas.yview_moveto(fraction)
 
     def _on_mousewheel(self, event: tk.Event) -> None:
         if self.canvas.winfo_exists():
