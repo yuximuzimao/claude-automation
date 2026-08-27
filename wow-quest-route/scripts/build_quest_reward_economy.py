@@ -249,7 +249,7 @@ def main() -> None:
         },
         "mechanics": {
             "xp_to_gold": "满级交任务时经验按6铜/XP折金，使用基础XP（不吃服务器2x经验倍率）",
-            "at80_money": "满级到手金币两种内核口径：TC3.3.5=max(RewardMoney, 折金)；AzerothCore=两者相加。本服(时光)实测证据支持max口径，最终以游戏内13215任务日志显示22g(max)或42g(相加)为准",
+            "at80_money": "满级到手金币两种内核口径：TC3.3.5=max(RewardMoney, 折金)；AzerothCore=两者相加。本服采信max口径：同为时光服的17173实测全清11095G与本表max口径10984G吻合，相加口径15733G与实测明显不符",
             "pre80_money": "未满级交任务只给RewardMoney，经验不折金",
             "choice_reward": "可选奖励六选一只拿一件，估值按最贵一件；选最贵vs选最便宜全诺森德差约903G",
             "flag_no_money_from_xp": "quest_flags含0x2000000(QUEST_FLAGS_NO_MONEY_FROM_XP)时满级不折金，只给RewardMoney",
