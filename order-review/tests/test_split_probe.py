@@ -214,6 +214,52 @@ def test_reader_retains_verified_rows_unmounted_after_scrolling():
     assert all(row.source is not None for row in observation.rows[:3])
 
 
+def test_reader_rechecks_only_current_row_once_after_transient_reflow():
+    detail_reads = {1: 0, 2: 0, 3: 0}
+    sleeps = []
+
+    def evaluator(_target_id, js):
+        if "checkboxCheckedCount" in js and "mountedSequences" not in js:
+            return _selection_payload()
+        for sequence in (1, 2, 3):
+            if f"seq(row)==='{sequence}'" not in js:
+                continue
+            if "mountedSequences" in js:
+                return {
+                    "ok": True,
+                    "found": True,
+                    "inViewport": True,
+                    "systemOrderId": f"SYSTEM-{sequence}",
+                    "checkboxCount": 1,
+                    "checkboxCheckedCount": 1,
+                    "mountedSequences": [1, 2, 3],
+                    "wheelX": 500,
+                    "wheelY": 400,
+                }
+            detail_reads[sequence] += 1
+            if sequence == 2 and detail_reads[sequence] == 1:
+                return {"ok": False, "error": "SEQ_2_NOT_FOUND"}
+            return _order_payload(sequence, expanded=True)
+        raise AssertionError("出现未预期的页面脚本")
+
+    observation = read_split_result_observation(
+        3,
+        "target-1",
+        evaluator=evaluator,
+        wheel_dispatcher=lambda *_args: None,
+        sleeper=lambda seconds: sleeps.append(seconds),
+    )
+
+    selected = [row for row in observation.rows if row.selected]
+    assert [row.source.system_order_id for row in selected] == [
+        "SYSTEM-1",
+        "SYSTEM-2",
+        "SYSTEM-3",
+    ]
+    assert detail_reads == {1: 1, 2: 2, 3: 1}
+    assert sleeps.count(SPLIT_RESULT_SETTLE_SECONDS) == 2
+
+
 def test_reader_discovers_selected_target_row_unmounted_in_initial_probe():
     mounted_sequences = {1, 2}
     wheels = []

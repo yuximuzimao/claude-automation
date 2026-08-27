@@ -175,44 +175,52 @@ def read_split_result_observation(
     if stable_enough_to_read:
         for row in selected:
             sequence = int(row["sequence"])
-            try:
-                positioned = scroll_order_sequence_into_view(
-                    sequence,
-                    target_id,
-                    expected_system_order_id=str(row["systemOrderId"]),
-                    evaluator=evaluator,
-                    wheel_dispatcher=wheel_dispatcher,
-                    sleeper=sleeper,
-                )
-                if (
-                    int(positioned.get("checkboxCount") or 0) != 1
-                    or int(positioned.get("checkboxCheckedCount") or 0) != 1
-                ):
-                    raise SplitResultProbeError(
-                        "TARGET_SELECTION_CHANGED",
-                        f"滚动到第 {sequence} 行后，该结果行已不再保持唯一勾选",
-                    )
-                verified_selected_sequences.add(sequence)
-                sources_by_sequence[sequence] = SourceSnapshot.from_order_snapshot(
-                    read_order_at_sequence(
+            source: SourceSnapshot | None = None
+            for attempt in range(2):
+                try:
+                    positioned = scroll_order_sequence_into_view(
                         sequence,
                         target_id,
                         expected_system_order_id=str(row["systemOrderId"]),
-                        expand_if_needed=True,
                         evaluator=evaluator,
+                        wheel_dispatcher=wheel_dispatcher,
+                        sleeper=sleeper,
                     )
-                )
-            except OrderSequenceReadError as exc:
-                if exc.code not in {
-                    f"SEQ_{sequence}_NOT_FOUND",
-                    f"SEQ_{sequence}_NOT_UNIQUE",
-                    f"SEQ_{sequence}_NOT_VISIBLE",
-                }:
-                    raise
-                # ERP 虚拟列表可能仍在滚动后重排。返回未就绪观察，
-                # 让上层只重试滚动与读取；绝不重试拆分或审核。
-                sources_by_sequence.clear()
+                    if (
+                        int(positioned.get("checkboxCount") or 0) != 1
+                        or int(positioned.get("checkboxCheckedCount") or 0) != 1
+                    ):
+                        raise SplitResultProbeError(
+                            "TARGET_SELECTION_CHANGED",
+                            f"滚动到第 {sequence} 行后，该结果行已不再保持唯一勾选",
+                        )
+                    source = SourceSnapshot.from_order_snapshot(
+                        read_order_at_sequence(
+                            sequence,
+                            target_id,
+                            expected_system_order_id=str(row["systemOrderId"]),
+                            expand_if_needed=True,
+                            evaluator=evaluator,
+                        )
+                    )
+                    break
+                except OrderSequenceReadError as exc:
+                    if exc.code not in {
+                        f"SEQ_{sequence}_NOT_FOUND",
+                        f"SEQ_{sequence}_NOT_UNIQUE",
+                        f"SEQ_{sequence}_NOT_VISIBLE",
+                    }:
+                        raise
+                    if attempt == 0:
+                        # 结果行展开会让虚拟列表原地重排；只复核当前行一次，
+                        # 不回到上层重新执行整轮上下滚动。
+                        sleeper(SPLIT_RESULT_SETTLE_SECONDS)
+                        continue
                 break
+            if source is None:
+                break
+            verified_selected_sequences.add(sequence)
+            sources_by_sequence[sequence] = source
 
         if verified_selected_sequences:
             first_row = selected[0]
