@@ -16,7 +16,7 @@ from .split_result import SplitResultObservation, SplitResultRow
 
 
 SPLIT_RESULT_SETTLE_SECONDS = 0.1
-SPLIT_RESULT_EXPANDED_SETTLE_SECONDS = 0.3
+SPLIT_RESULT_EXPANDED_SETTLE_SECONDS = 0.6
 
 
 class SplitResultProbeError(RuntimeError):

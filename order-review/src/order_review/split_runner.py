@@ -41,6 +41,8 @@ SPLIT_RESULT_WAIT_SECONDS = 15.0
 SPLIT_POLL_INTERVAL_SECONDS = 0.1
 SPLIT_ACTION_PAUSE_SECONDS = 0.3
 SPLIT_RESULT_RENDER_SETTLE_SECONDS = 0.3
+SPLIT_SECONDARY_CONFIRM_SETTLE_SECONDS = 1.0
+SPLIT_AUDIT_MENU_SETTLE_SECONDS = 1.0
 
 
 @dataclass(frozen=True)
@@ -423,6 +425,7 @@ def run_mixed_order_split(
             )
             sleeper(action_pause_seconds)
             mouse_clicker(target_id, float(confirm["x"]), float(confirm["y"]))
+            sleeper(SPLIT_SECONDARY_CONFIRM_SETTLE_SECONDS)
 
             secondary = _poll_payload(
                 target_id,
@@ -521,6 +524,7 @@ def run_mixed_order_split(
                     "逐包明细、平台子订单和商品总量与本地方案一致"
                 ),
             )
+            sleeper(SPLIT_AUDIT_MENU_SETTLE_SECONDS)
 
             audit_trigger = _poll_payload(
                 target_id,
