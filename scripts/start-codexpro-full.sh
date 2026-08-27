@@ -5,6 +5,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 # shellcheck source=lib/codexpro-startup-guard.sh
 source "$SCRIPT_DIR/lib/codexpro-startup-guard.sh"
 
+codexpro_entry="$(command -v codexpro)"
+codexpro_package_root="$(cd "$(dirname "$(realpath "$codexpro_entry")")/.." && pwd -P)"
+required_skill="${CODEXPRO_REQUIRED_SKILL:-chinese-polish}"
+node "$SCRIPT_DIR/lib/ensure-codexpro-required-skill.mjs" \
+  "$codexpro_package_root" \
+  "$required_skill"
+
 codexpro_stop_stale_server 8787
 
 cd /Users/chat/claude
