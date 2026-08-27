@@ -32,6 +32,7 @@
 | `data/observations/route-timing-runs.json` | 路线预测/实跑墙钟、异常成本、长期目标基准 | 估时、效率复盘或记录新实测时 |
 | `data/observations/blocked-tasks.json` | 本服阻断/不可做任务 | 接不到、交不了、位面异常时 |
 | `data/route-atlas/workbench-routes.json` | 所有地图当前Route Atlas路线数据 | 改地图步骤/坐标/备注时 |
+| `data/route-atlas/quest-reward-economy.json` | 全诺森德任务直接金币/满级XP折金/奖励装备卖店价（AzerothCore 3.3.5a口径，已对Wowhead交叉验证） | 计算任务打金收益、收益取舍或满级清图预算时 |
 | `data/routes/route-atlas-workbench.html` | 唯一Route Atlas正式执行HTML | 实跑/审图/复制到游戏电脑 |
 | `scripts/build_route_atlas_workbench.py` | 将路线数据嵌入唯一工作台 | 修改Route Atlas数据/UI后构建 |
 | `docs/archive/README.md` | 历史档案总入口；旧方案、一次性分析、NEAT和视频历史 | 只有需要考古/回溯时按主题进入 |
