@@ -413,6 +413,18 @@
       "allowMixedEligibleProducts": false,
       "blocksGeometryAboveMaximum": true,
       "reason": "仓库实测精油小箱最多5瓶；扁平礼盒箱不用于普通单品发货，避免运输受力和支撑不足"
+    },
+    {
+      "ruleId": "fig-jelly-current-carton-1-to-28",
+      "displayName": "无花果果冻现有普通纸箱每箱1至28盒",
+      "allowedMerchantCodes": [
+        "6980319670009"
+      ],
+      "minimumQuantity": 1,
+      "maximumQuantity": 28,
+      "allowMixedEligibleProducts": false,
+      "blocksGeometryAboveMaximum": true,
+      "reason": "仓库实测现有普通纸箱最多装28盒无花果果冻；1至28盒可按单包直接推送，超过28盒必须拆单；56至64盒优先使用64盒专用原箱"
     }
   ],
   "confirmedSinglePackageExclusions": [
