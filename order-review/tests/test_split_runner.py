@@ -417,6 +417,43 @@ def test_split_result_detail_mismatch_is_definitive_and_not_retried():
     )
 
 
+def test_split_result_missing_identity_after_stable_first_n_is_not_retried():
+    source, plan = _source_and_plan()
+    incomplete = SplitResultObservation(
+        loading_count=0,
+        visible_dialog_count=0,
+        rows=(
+            SplitResultRow(1, True, None),
+            SplitResultRow(2, True, None),
+            SplitResultRow(3, True, None),
+        ),
+    )
+    read_count = []
+
+    def reader(_target_count, _target_id, *, evaluator):
+        read_count.append(evaluator)
+        return incomplete
+
+    validation = split_runner._poll_split_result_validation(
+        "target-1",
+        source,
+        plan,
+        reader,
+        split_runner.validate_split_result,
+        lambda _target_id, _js: None,
+        1.0,
+        lambda _seconds: None,
+        lambda: 0.0,
+    )
+
+    assert not validation.verified
+    assert len(read_count) == 1
+    assert any(
+        check.code == "RESULT_SYSTEM_IDS_PRESENT" and not check.passed
+        for check in validation.checks
+    )
+
+
 def test_split_runner_stops_when_erp_returns_business_failure(monkeypatch):
     source, plan = _source_and_plan()
 

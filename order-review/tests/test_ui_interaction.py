@@ -135,6 +135,7 @@ def rendered_window(tmp_path, monkeypatch):
                 "_initial_refresh_job",
                 "_audit_poll_job",
                 "_follow_browser_job",
+                "_companion_visibility_job",
                 "_order_watch_job",
             ):
                 job_id = getattr(window, job_name, None)

@@ -1412,14 +1412,15 @@ def _split_result_validation_is_definitive(
     validation: SplitResultValidationReport,
 ) -> bool:
     checks = {check.code: check.passed for check in validation.checks}
+    # 前 N 行已经稳定勾选时，reader 已完成本轮真实滚动与逐行读取。
+    # 身份或明细仍不完整属于本次核验的安全阻断，不再靠重复整轮滚动等待；
+    # 只有加载、行数或位置尚未稳定时才允许继续只读轮询。
     return all(
         checks.get(code, False)
         for code in (
             "CONFIRMATION_UI_CLOSED",
             "SELECTED_RESULT_ROW_COUNT",
             "SELECTED_ROWS_ARE_FIRST_N",
-            "RESULT_SYSTEM_IDS_PRESENT",
-            "RESULT_DETAILS_READY",
         )
     )
 
