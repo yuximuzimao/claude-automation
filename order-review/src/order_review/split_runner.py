@@ -40,6 +40,7 @@ SPLIT_DIALOG_WAIT_SECONDS = 5.0
 SPLIT_RESULT_WAIT_SECONDS = 15.0
 SPLIT_POLL_INTERVAL_SECONDS = 0.1
 SPLIT_ACTION_PAUSE_SECONDS = 0.3
+SPLIT_RESULT_RENDER_SETTLE_SECONDS = 0.3
 
 
 @dataclass(frozen=True)
@@ -489,6 +490,7 @@ def run_mixed_order_split(
                     f"{len(plan.packages)} 条已勾选结果的逐包商品明细"
                 ),
             )
+            sleeper(SPLIT_RESULT_RENDER_SETTLE_SECONDS)
 
             try:
                 split_validation = _poll_split_result_validation(

@@ -247,6 +247,45 @@ def test_generic_reader_stops_if_row_identity_changes_after_expand():
         )
 
 
+def test_generic_reader_waits_after_expand_before_reading_details():
+    events = []
+    payloads = iter(
+        [
+            {
+                "ok": True,
+                "isExpanded": False,
+                "rowAttributes": {"uniqueid": "ORDER-2", "sid": "ORDER-2"},
+                "visibleSystemOrderId": "ORDER-2",
+                "products": [],
+            },
+            {"ok": True, "expanded": True, "clicked": True},
+            {
+                "ok": True,
+                "isExpanded": True,
+                "rowAttributes": {"uniqueid": "ORDER-2", "sid": "ORDER-2"},
+                "visibleSystemOrderId": "ORDER-2",
+                "products": [],
+            },
+        ]
+    )
+
+    def evaluator(_target_id, _js):
+        events.append("read")
+        return next(payloads)
+
+    snapshot = read_order_at_sequence(
+        2,
+        "target-1",
+        expected_system_order_id="ORDER-2",
+        evaluator=evaluator,
+        post_expand_wait_seconds=0.3,
+        sleeper=lambda seconds: events.append(("sleep", seconds)),
+    )
+
+    assert snapshot.system_order_id == "ORDER-2"
+    assert events == ["read", "read", ("sleep", 0.3), "read"]
+
+
 def test_identity_probe_is_read_only_and_blocks_unsafe_page_states():
     js = build_sequence_one_identity_probe_js()
 

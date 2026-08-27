@@ -6,6 +6,7 @@ from order_review.package_plan import (
     SourceSnapshot,
 )
 from order_review.split_probe import (
+    SPLIT_RESULT_EXPANDED_SETTLE_SECONDS,
     SPLIT_RESULT_SETTLE_SECONDS,
     build_split_result_selection_probe_js,
     read_split_result_observation,
@@ -155,8 +156,10 @@ def test_reader_expands_and_reads_exactly_the_selected_first_n_rows():
     ]
     assert mounted_sequences == {1, 2}
     assert events == [
+        ("sleep", SPLIT_RESULT_EXPANDED_SETTLE_SECONDS),
         ("wheel", 520.0),
         ("sleep", 0.18),
+        ("sleep", SPLIT_RESULT_EXPANDED_SETTLE_SECONDS),
         ("wheel", -520.0),
         ("sleep", 0.18),
         ("sleep", SPLIT_RESULT_SETTLE_SECONDS),

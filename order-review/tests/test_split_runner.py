@@ -338,7 +338,8 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
         js for js in evaluations if "PACKAGE_QUANTITY_INVALID" in js
     ]
     assert all("buttons[0].click()" not in js for js in fill_scripts)
-    assert sleeps.count(split_runner.SPLIT_ACTION_PAUSE_SECONDS) == 11
+    assert sleeps.count(split_runner.SPLIT_ACTION_PAUSE_SECONDS) == 12
+    assert split_runner.SPLIT_RESULT_RENDER_SETTLE_SECONDS in sleeps
     assert report.split_completed is True
     assert report.render_text().startswith("拆分并审核成功")
 

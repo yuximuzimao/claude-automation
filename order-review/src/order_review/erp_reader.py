@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 import time
-from typing import Any
+from typing import Any, Callable
 
 from . import cdp
 from .models import OrderDetailGroup, OrderSnapshot
@@ -611,6 +611,8 @@ def read_order_at_sequence(
     expected_system_order_id: str = "",
     expand_if_needed: bool = True,
     evaluator=cdp.eval_js,
+    post_expand_wait_seconds: float = 0.0,
+    sleeper: Callable[[float], None] = time.sleep,
 ) -> OrderSnapshot:
     """读取指定序号的有效订单行；仅在需要时展开一次。"""
     target_id = target_id or find_erp_toaudit_target()
@@ -646,6 +648,8 @@ def read_order_at_sequence(
                 f"展开第 {sequence} 行订单失败"
                 f"{f'：{detail}' if detail else ''}"
             )
+        if post_expand_wait_seconds > 0:
+            sleeper(post_expand_wait_seconds)
         payload = evaluator(target_id, read_js)
         if not isinstance(payload, dict) or not payload.get("ok"):
             code = (
