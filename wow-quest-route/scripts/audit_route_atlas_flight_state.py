@@ -50,6 +50,13 @@ HUB_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
         "暗影拱顶": ("暗影拱顶", "The Shadow Vault"),
         "死亡高地": ("死亡高地", "Death's Rise"),
     },
+    "howling": {
+        "药剂师营地": ("药剂师营地", "Apothecary Camp"),
+        "冬蹄营地": ("冬蹄营地", "Camp Winterhoof"),
+        "新阿加曼德": ("新阿加曼德", "New Agamand"),
+        "复仇港": ("复仇港", "Vengeance Landing"),
+        "卡玛古": ("卡玛古", "Kamagua"),
+    },
 }
 
 
@@ -102,7 +109,7 @@ def audit_route(route_key: str, route: dict[str, Any]) -> dict[str, Any]:
         # Transport metadata is authoritative. For legacy rows without taxi metadata, only the
         # step label/action may imply an actual flight; notes about *future* flight availability must not.
         action_text = " ".join(str(value or "") for value in point[2:4])
-        is_system_flight = transport == "taxi" or any(token in action_text for token in ("系统鸟", "系统航线", "系统飞行"))
+        is_system_flight = transport == "taxi" or (transport != "crossmap" and any(token in action_text for token in ("系统鸟", "系统航线", "系统飞行")))
 
         if is_system_flight:
             destination = flight_destination(point, aliases)
@@ -144,7 +151,7 @@ def main() -> None:
         "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
         "routes": {
             key: audit_route(key, routes[key])
-            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown")
+            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown", "howling")
         },
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

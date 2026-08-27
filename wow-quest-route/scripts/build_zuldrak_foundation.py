@@ -104,7 +104,7 @@ def main() -> None:
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     CLUSTERS.write_text(json.dumps({"status": "foundation_only_no_route_order", "zone": {"id": 66, "name": "祖达克"}, "cluster_count": len(clusters), "shared_cluster_count": sum(c["shared_by_multiple_tasks"] for c in clusters), "clusters": clusters}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = ["# 祖达克基础层审计（未排正式路线）", "", f"- 正式候选：{len(tasks)}项；requiredLevel：`{dict(sorted(levels.items()))}`。", f"- 强依赖缺口：{len(hard_gaps)}。", f"- 目标实体簇：{len(clusters)}；多任务共享簇：{sum(c['shared_by_multiple_tasks'] for c in clusters)}。", f"- 服务时间未知/特殊：{len(unknown)}。", "", "## 强依赖缺口", ""]
-    lines += [f"- {r['quest_id']}《{r['name']}》 missing={r['missing_mandatory']} pre_any={r['pre_any']}" for r in hard_gaps] or ["- 无。104项在当前龙骨入口状态下形成闭合依赖池。"]
+    lines += [f"- {r['quest_id']}《{r['name']}》 missing={r['missing_mandatory']} pre_any={r['pre_any']}" for r in hard_gaps] or [f"- 无。{len(tasks)}项在当前入口依赖状态下形成闭合依赖池。"]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(json.dumps({"formal_task_count": len(tasks), "dependency_hard_gap_count": len(hard_gaps), "cluster_count": len(clusters), "shared_cluster_count": sum(c["shared_by_multiple_tasks"] for c in clusters), "unknown_service_count": len(unknown)}, ensure_ascii=False, indent=2))
 

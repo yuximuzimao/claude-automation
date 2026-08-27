@@ -58,21 +58,21 @@ def test_dragonblight_foundation_coverage_has_no_accidental_missing_tasks():
 def test_dragonblight_route_keeps_core_special_mechanics_visible():
     text = route_text(load_routes()["dragonblight"])
     required = (
-        "先回阿格玛交《死亡名单：扎古斯》才会解锁魔典",
-        "【五号分别】各插1面旗",
+        "《血之魔典》此时还不能刷；必须先回阿格玛向高尔特上尉交《死亡名单：高阶教徒扎古斯》",
+        "五号各自插1面旗",
         "等张嘴时扔炸药",
-        "各用控制器召伐木机",
+        "五号分别召伐木机",
         "腐蚀性唾液",
-        "【五号分别】依次点击深海珍珠",
+        "五号分别点击深海珍珠",
         "珍珠约1分40秒刷新",
         "用图尔凯的呼吸气囊下潜",
-        "暂不接《通缉：吉加托尔》",
-        "龙眠神殿是多层结构",
+        "吉加托尔精英支线留80后",
+        "龙眠为多层结构",
         "只由主控放1个毁灭结界",
         "沙漏",
         "上顶层敲钟",
         "主控召红龙",
-        "安提沃克出现后必须下龙用角色本体击杀",
+        "等安提沃克出现后必须下龙，用角色本体击杀",
     )
     for value in required:
         assert value in text
@@ -81,12 +81,12 @@ def test_dragonblight_route_keeps_core_special_mechanics_visible():
 def test_dragonblight_route_uses_transport_and_player_facing_narf_fix():
     route = load_routes()["dragonblight"]
     text = route_text(route)
-    assert "纳尔弗约(54.5,23.6)，在哨站西侧找地精NPC" in text
+    assert "纳尔弗约(54.5,23.6)，在哨站西侧。" in text
     assert "Questie" not in player_visible_text(route)
     assert "人工锚点" not in player_visible_text(route)
-    assert "炉石：莫亚基 → 阿格玛" in text
-    assert "系统鸟：库卡隆 → 龙眠顶层" in text
-    assert "系统鸟：龙眠 → 库卡隆" in text
+    assert "使用炉石：阿格玛之锤" in text
+    assert "乘系统鸟：库卡隆先锋营地 → 龙眠神殿" in text
+    assert "乘系统鸟：龙眠神殿 → 库卡隆先锋营地" in text
     assert sum(1 for point in route["points"] if point[6] == "hearth") == 5
     assert sum(1 for point in route["points"] if point[6] == "taxi") >= 2
 
@@ -106,8 +106,8 @@ def test_dragonblight_route_hides_internal_route_design_copy():
     for value in forbidden:
         assert value not in text
     assert "《魔法王国达拉然》" in text
-    assert "夺日者影像·阻碍协议 / 奇怪的设备 → 投影和计划" in text
-    assert "龙眠地面层·奥拉斯塔萨｜隐居的铭语师 → 暴虐的酋长" in text
+    assert "交《阻碍协议》《奇怪的设备》 → 接《投影和计划》" in text
+    assert "奥拉斯塔萨 → 交《强大的猛犸人》 → 接《隐居的铭语师》" in text
     assert not re.search(r"·第[一二三四五六七八九十]+轮", text)
     assert not re.search(r"(?<![\d.])\b(?:1[12]\d{3}|13\d{3})\b(?![\d.])", text)
 
@@ -137,23 +137,24 @@ def test_dragonblight_html_renders_fivebox_checks_as_independent_ui():
 
 def test_dragonblight_corrected_objective_locations_are_preserved():
     route = load_routes()["dragonblight"]
-    by_title = {point[2]: point for point in route["points"]}
+    by_title: dict[str, list] = {}
+    for point in route["points"]:
+        by_title.setdefault(point[2], []).append(point[:2])
     expected = {
-        "深海珍珠 / 海洋女神": [34.0, 83.46],
-        "翡翠圣地东南端·奥雷托斯": [65.0, 78.0],
-        "火炬之环·戈洛塔尔": [57.0, 76.0],
-        "冰心洞穴·幼虫/喂食者": [55.3, 11.0],
-        "钻雪虫·拉特尔博尔": [50.67, 17.8],
-        "红玉圣地·巨树下洞穴": [48.0, 50.0],
-        "奈萨里奥之喉·洞穴深处": [31.75, 30.46],
-        "奈萨里奥之喉·洞穴深处清理": [31.93, 28.17],
-        "奈萨里奥之喉·最深处": [31.44, 30.95],
-        "新壁炉谷·兵营｜日常计划": [69.7, 71.9],
-        "新壁炉谷·修道院图书馆｜日常计划": [73.4, 72.6],
-        "新壁炉谷·海滩营地｜日常计划": [71.6, 80.4],
+        "深海珍珠": [[34.0, 83.46]],
+        "翡翠圣地东南端": [[65.0, 78.0]],
+        "火炬之环": [[57.0, 76.0]],
+        "冰心洞穴": [[55.3, 11.0]],
+        "钻雪虫·拉特尔博尔": [[50.67, 17.8]],
+        "红玉圣地·巨树下洞穴": [[48.0, 50.0]],
+        "奈萨里奥之喉·洞穴深处": [[31.75, 30.46], [31.93, 28.17]],
+                "奈萨里奥之喉·腐烂者洛森": [[31.44, 30.95]],
+        "新壁炉谷·兵营": [[69.7, 71.9]],
+        "新壁炉谷·修道院一楼图书馆": [[73.4, 72.6]],
+        "新壁炉谷·海滩营地": [[71.6, 80.4]],
     }
     for title, coords in expected.items():
-        assert by_title[title][:2] == coords
+        assert by_title.get(title) == coords
 
 
 def test_dragonblight_route_stays_reusable_not_live_progress_crop():

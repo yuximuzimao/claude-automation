@@ -4,12 +4,13 @@
   "strategy": "first-run continuous outdoor full-clear baseline; structural exclusions only",
   "assigned_task_count": 134,
   "status_counts": {
-    "exclude_no_xp": 3,
+    "exclude_no_xp": 2,
     "exclude_repeatable_calendar": 19,
     "exclude_structural": 8,
-    "include_candidate": 104
+    "include_candidate": 104,
+    "include_structural_zero_xp_scripted_child": 1
   },
-  "formal_candidate_count": 104,
+  "formal_candidate_count": 105,
   "formal_candidate_ids": [
     12503,
     12504,
@@ -62,6 +63,7 @@
     12659,
     12661,
     12662,
+    12664,
     12665,
     12666,
     12667,
@@ -117,13 +119,14 @@
     13556
   ],
   "required_level_counts": {
-    "74": 97,
+    "74": 98,
     "75": 7
   },
   "old_auto_selected_count": 96,
   "formal_missing_from_old_auto": [
     12506,
     12652,
+    12664,
     12665,
     12673,
     12686,
@@ -1793,9 +1796,9 @@
       "name": "黑暗的地平线",
       "required_level": 74,
       "quest_level": 75,
-      "status": "exclude_no_xp",
+      "status": "include_structural_zero_xp_scripted_child",
       "reasons": [
-        "no_xp_not_mandatory_for_included_task"
+        "mandatory_scripted_child_for_12661_current_non_dungeon_branch"
       ],
       "in_old_auto_route": false,
       "pre_any": [

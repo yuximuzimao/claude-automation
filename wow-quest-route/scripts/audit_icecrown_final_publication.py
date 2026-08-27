@@ -322,8 +322,8 @@ def main() -> None:
         "hard_issue_count": len(hard),
         "hard_issues": hard,
         "checks": checks,
-        "publication_state": "live_entry_confirmed_current_group_at_12897",
-        "next_state": "continue_from_12897_and_calibrate_remaining_route",
+        "publication_state": "icecrown_first_run_finished_with_valhalas_deferred",
+        "next_state": "start_sholazar_live_calibration",
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload, ensure_ascii=False, indent=2))

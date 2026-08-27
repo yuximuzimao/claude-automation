@@ -61,6 +61,7 @@ ACTION_GRAMMAR_FORBIDDEN_PATTERNS = (
 # Explicit cross-map carry tasks are allowed to remain open at the end of the current map.
 # Anything else accepted without a visible `交《任务名》` is a route integrity failure.
 LIFECYCLE_ALLOWLIST = {
+    "hellfire": {"向祖莱报到"},
     "zang": {"通知塞纳里奥议会"},
     "borean": {"前往莫亚基港口"},
     "dragonblight": {"前往征服堡，自求多福吧！", "前往圣光据点！", "黑暗的骚动", "魔法王国达拉然"},

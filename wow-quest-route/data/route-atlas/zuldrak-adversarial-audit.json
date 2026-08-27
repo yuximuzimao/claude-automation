@@ -1,138 +1,15 @@
 {
-  "status": "pass",
-  "hard_failures": [],
-  "formal_task_count": 104,
-  "covered_task_count": 104,
-  "coverage_missing": [],
-  "coverage_unexpected": [],
-  "intentional_defer": {},
-  "lifecycle": {
-    "max_active": 9,
-    "max_active_point": 51,
-    "max_active_title": "达克索塔·布兰顿 / 鲁伯特 / 罗杰斯博士",
-    "prerequisite_violations": [],
-    "duplicate_accepts": [],
-    "turnin_without_accept": [
-      {
-        "point": 0,
-        "quest_id": 12789,
-        "name": "前往圣光据点！",
-        "action": "从灰熊北侧进入祖达克，前往圣光据点；交《前往圣光据点！》；五号开启圣光据点飞行点"
-      }
-    ],
-    "active_at_end": [],
-    "completed_count": 104
-  },
-  "quest_log_safety_margin": 16,
-  "flight": {
-    "count": 5,
-    "violations": 0,
-    "unknown_destinations": 0
-  },
-  "video": {
-    "status": "pass_whole_map_video_reverse_review",
-    "common_completion": 37,
-    "critical_omissions": 0,
-    "adjacent_reversals": 5,
-    "unresolved_reversals": 0
-  },
-  "arena_breadcrumb": {
-    "dalaran_detour_point": 66,
-    "accept_point": 66,
-    "turnin_point": 67,
-    "arena_first_accept_point": 67
-  },
-  "fivebox_missing_checks": [],
-  "voltarus_illegal_interleaving": [],
-  "long_ride_edges_ge_18pct": [
-    {
-      "from_point": 92,
-      "to_point": 93,
-      "from": "希姆托加·佐尔玛兹回收",
-      "to": "古达克飞行点",
-      "map_percent_distance": 36.5,
-      "manual_resolution": "required_first_visit: 12721 is accepted only after the Zol'Maz tasks are turned in at Zim'Torga; Gundrak flight point is still unopened, so the first northbound leg must be ground travel."
-    },
-    {
-      "from_point": 99,
-      "to_point": 100,
-      "from": "哈克娅·诸神的指引",
-      "to": "佐尔赫布召唤圈",
-      "map_percent_distance": 36.5,
-      "manual_resolution": "direct_ground_is_shorter: both Zim'Torga and Gundrak are open, but route-model comparison gives about 1.57 min direct versus 2.27 min via Zim'Torga taxi Gundrak; keep direct ride."
-    },
-    {
-      "from_point": 91,
-      "to_point": 92,
-      "from": "佐尔玛兹要塞·三任务",
-      "to": "希姆托加·佐尔玛兹回收",
-      "map_percent_distance": 25.1,
-      "manual_resolution": "required_hub_unlock: 12707/12708/12709/12712 must be turned in at Zim'Torga to unlock 12721; cannot continue north before this hub return."
-    },
-    {
-      "from_point": 35,
-      "to_point": 36,
-      "from": "痛苦之匣·吹号最终",
-      "to": "银色前沿·首次到达",
-      "map_percent_distance": 24.7,
-      "manual_resolution": "direct_ground_is_shorter: Voltarus is already closed locally with Stefan's Horn; direct Pain→Argent is about 1.09 min versus about 2.46 min by backtracking to Ebon then taking taxi."
-    },
-    {
-      "from_point": 85,
-      "to_point": 86,
-      "from": "哈克娅·奎丝鲁恩收尾",
-      "to": "犸托斯祭坛",
-      "map_percent_distance": 23.6,
-      "manual_resolution": "strict_chain: 12675 turns in at Harkoa and directly unlocks 12684 at Mamtoth; no useful intermediate unlock exists on this edge."
-    },
-    {
-      "from_point": 86,
-      "to_point": 87,
-      "from": "犸托斯祭坛",
-      "to": "哈克娅·死去神灵回收",
-      "map_percent_distance": 23.6,
-      "manual_resolution": "strict_chain_return: 12684 must return to Harkoa to unlock 12685; this is the mandatory reverse leg of the same deity chain."
-    },
-    {
-      "from_point": 64,
-      "to_point": 65,
-      "from": "西莱图斯先知·第二趟",
-      "to": "银色前沿·巡逻总回收",
-      "map_percent_distance": 23.3,
-      "manual_resolution": "required_turnin: 12516 and 12596 both close at Argent Stand; no flight point exists at Sseratus and no newly unlocked cluster can replace the hub return."
-    },
-    {
-      "from_point": 57,
-      "to_point": 58,
-      "from": "药剂喷射器",
-      "to": "希姆埃巴雕像·回程",
-      "map_percent_distance": 22.2,
-      "manual_resolution": "whole-loop_order_checked: the current Sprayer→Zim'Abwa→Argent→Basilisk ordering is about 213 yards shorter than Argent→Zim'Abwa→Basilisk using the same anchors."
-    },
-    {
-      "from_point": 97,
-      "to_point": 98,
-      "from": "希姆鲁克守卫者",
-      "to": "奎丝鲁恩祭坛典狱官",
-      "map_percent_distance": 20.5,
-      "manual_resolution": "same_quest_two_sources: both are required essence sources for 12729; the long edge connects the two mandatory objectives before the single Harkoa turn-in."
-    },
-    {
-      "from_point": 80,
-      "to_point": 81,
-      "from": "哈克娅之爪·神圣符印",
-      "to": "奎丝鲁恩之魂",
-      "map_percent_distance": 20.0,
-      "manual_resolution": "strict_chain: turning 12666 at Harkoa unlocks 12667, whose next required endpoint is Quetz'lun; no intermediary task is available to break the edge."
-    },
-    {
-      "from_point": 10,
-      "to_point": 11,
-      "from": "前线周边·女妖精华",
-      "to": "黑锋入口·硅藻土",
-      "map_percent_distance": 19.1,
-      "manual_resolution": "intentional_cluster_bridge: these are the two material sources for 12914; diatomaceous earth is at the Ebon entrance, so this edge intentionally converts the Gymer material quest into the bridge to the Ebon chain."
-    }
+  "status": "retired",
+  "reason": "Pre-semantic full-map audit relied on obsolete point titles and single-task action parsing, so rerunning it after semantic-hud-v45 produced false dependency/fivebox/long-edge failures.",
+  "current_authority": [
+    "data/route-atlas/zuldrak-route-coverage.json",
+    "data/route-atlas/zuldrak-task-foundation.json",
+    "data/route-atlas/workbench-routes.json",
+    "tests/test_zuldrak_foundation.py",
+    "tests/test_zuldrak_route.py"
   ],
-  "unresolved_long_ride_edges": []
+  "historical_record": "docs/analysis/2026-08-19-zuldrak-adversarial-audit.md",
+  "current_formal_task_count": 105,
+  "current_route_points": 107,
+  "current_step_groups": 12
 }

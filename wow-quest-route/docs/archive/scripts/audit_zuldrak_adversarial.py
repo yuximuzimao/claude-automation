@@ -165,6 +165,10 @@ def index_of(route: dict[str, Any], token: str, field: int = 3) -> int | None:
 
 
 def main() -> None:
+    raise SystemExit(
+        "retired: this pre-semantic full-map adversarial audit parses obsolete point titles/action grammar; "
+        "use current route-local tests/audits instead"
+    )
     routes = load(ROUTES)
     route = routes["zuldrak"]
     tasks = formal_tasks()

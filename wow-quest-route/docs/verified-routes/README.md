@@ -7,7 +7,8 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md`](../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md)，记录冰冠白骨女巫/Jotunheim实跑校准、本轮前端文案/验证范围治理事故、旧P2策略污染现役builder的根因修正，以及下个会话“治理→旧图前端文案→索拉查”的固定恢复顺序。
+- 最新阶段NEAT：[`../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md`](../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md)，记录冰冠首组闭合、嚎风正式首版、全诺森德日常时间样本、地狱火下一批速度版及其448450 XP经验风险基线；下一现场固定为索拉查首跑。
+- 上一阶段冰冠实跑/治理NEAT：[`../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md`](../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md)。
 - 上一阶段冰冠首版/规则治理NEAT：[`../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md`](../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md)。
 - 上一阶段旧Route Atlas封口NEAT：[`../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md`](../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md)。
 - 上一阶段北风逐段重构NEAT：[`../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md`](../archive/neat/2026-08-23-borean-route-atlas-refactor-neat.md)。

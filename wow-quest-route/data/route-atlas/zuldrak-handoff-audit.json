@@ -1,5 +1,5 @@
 {
-  "row_count": 104,
+  "row_count": 105,
   "tasks": [
     {
       "quest_id": 12503,
@@ -2354,6 +2354,55 @@
       ],
       "pre_all": [],
       "parent_active": [],
+      "next_quest": null
+    },
+    {
+      "quest_id": 12664,
+      "name": "黑暗的地平线",
+      "scope_status": "include_current_full_clear",
+      "start_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "name": "达库鲁大王",
+          "entity_type": "npc",
+          "entity_id": 28503,
+          "representative_by_zone": {
+            "66": {
+              "x": 27.07,
+              "y": 46.16,
+              "spawn_count": 1,
+              "min_x": 27.07,
+              "max_x": 27.07,
+              "min_y": 46.16,
+              "max_y": 46.16
+            }
+          }
+        }
+      ],
+      "pre_any": [
+        12648
+      ],
+      "pre_all": [],
+      "parent_active": [
+        12661
+      ],
       "next_quest": null
     },
     {

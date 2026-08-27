@@ -1,0 +1,4923 @@
+{
+  "status": "foundation_only_no_route_order",
+  "zone": {
+    "id": 495,
+    "name": "嚎风峡湾"
+  },
+  "cluster_count": 112,
+  "shared_cluster_count": 8,
+  "clusters": [
+    {
+      "cluster_id": "npc:23919",
+      "entity_type": "npc",
+      "entity_id": 23919,
+      "name": "冰元素",
+      "representative": {
+        "x": 61.86,
+        "y": 23.1,
+        "spawn_count": 46,
+        "min_x": 58.73,
+        "max_x": 63.87,
+        "min_y": 19.96,
+        "max_y": 26.24
+      },
+      "spawn_count": 46,
+      "quest_ids": [
+        11271,
+        11313
+      ],
+      "relations": [
+        {
+          "quest_id": 11271,
+          "quest_name": "物资储备",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33348,
+          "entity_type": "npc",
+          "entity_id": 23919,
+          "entity_name": "冰元素",
+          "representative": {
+            "x": 61.86,
+            "y": 23.1,
+            "spawn_count": 46,
+            "min_x": 58.73,
+            "max_x": 63.87,
+            "min_y": 19.96,
+            "max_y": 26.24
+          },
+          "spawn_count": 46
+        },
+        {
+          "quest_id": 11313,
+          "quest_name": "冰之精魂",
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 33605,
+          "entity_type": "npc",
+          "entity_id": 23919,
+          "entity_name": "冰元素",
+          "representative": {
+            "x": 61.86,
+            "y": 23.1,
+            "spawn_count": 46,
+            "min_x": 58.73,
+            "max_x": 63.87,
+            "min_y": 19.96,
+            "max_y": 26.24
+          },
+          "spawn_count": 46
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:23874",
+      "entity_type": "npc",
+      "entity_id": 23874,
+      "name": "棘藤爬行者",
+      "representative": {
+        "x": 53.84,
+        "y": 17.56,
+        "spawn_count": 32,
+        "min_x": 52.0,
+        "max_x": 55.57,
+        "min_y": 14.87,
+        "max_y": 20.18
+      },
+      "spawn_count": 32,
+      "quest_ids": [
+        11271,
+        11316
+      ],
+      "relations": [
+        {
+          "quest_id": 11271,
+          "quest_name": "物资储备",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33348,
+          "entity_type": "npc",
+          "entity_id": 23874,
+          "entity_name": "棘藤爬行者",
+          "representative": {
+            "x": 53.84,
+            "y": 17.56,
+            "spawn_count": 32,
+            "min_x": 52.0,
+            "max_x": 55.57,
+            "min_y": 14.87,
+            "max_y": 20.18
+          },
+          "spawn_count": 32
+        },
+        {
+          "quest_id": 11316,
+          "quest_name": "扭曲之林",
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23874,
+          "entity_name": "棘藤爬行者",
+          "representative": {
+            "x": 53.84,
+            "y": 17.56,
+            "spawn_count": 32,
+            "min_x": 52.0,
+            "max_x": 55.57,
+            "min_y": 14.87,
+            "max_y": 20.18
+          },
+          "spawn_count": 32
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:23725",
+      "entity_type": "npc",
+      "entity_id": 23725,
+      "name": "石巨人",
+      "representative": {
+        "x": 69.77,
+        "y": 29.01,
+        "spawn_count": 5,
+        "min_x": 65.88,
+        "max_x": 71.95,
+        "min_y": 23.22,
+        "max_y": 30.54
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        11352,
+        11365
+      ],
+      "relations": [
+        {
+          "quest_id": 11352,
+          "quest_name": "命令符文",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23725,
+          "entity_name": "石巨人",
+          "representative": {
+            "x": 69.77,
+            "y": 29.01,
+            "spawn_count": 5,
+            "min_x": 65.88,
+            "max_x": 71.95,
+            "min_y": 23.22,
+            "max_y": 30.54
+          },
+          "spawn_count": 5
+        },
+        {
+          "quest_id": 11365,
+          "quest_name": "巨人的迁徙",
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23725,
+          "entity_name": "石巨人",
+          "representative": {
+            "x": 69.77,
+            "y": 29.01,
+            "spawn_count": 5,
+            "min_x": 65.88,
+            "max_x": 71.95,
+            "min_y": 23.22,
+            "max_y": 30.54
+          },
+          "spawn_count": 5
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:24228",
+      "entity_type": "npc",
+      "entity_id": 24228,
+      "name": "碎冰元素",
+      "representative": {
+        "x": 57.19,
+        "y": 5.38,
+        "spawn_count": 24,
+        "min_x": 50.52,
+        "max_x": 59.51,
+        "min_y": 1.29,
+        "max_y": 13.31
+      },
+      "spawn_count": 31,
+      "quest_ids": [
+        11271,
+        11311
+      ],
+      "relations": [
+        {
+          "quest_id": 11271,
+          "quest_name": "物资储备",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33348,
+          "entity_type": "npc",
+          "entity_id": 24228,
+          "entity_name": "碎冰元素",
+          "representative": {
+            "x": 57.19,
+            "y": 5.38,
+            "spawn_count": 24,
+            "min_x": 50.52,
+            "max_x": 59.51,
+            "min_y": 1.29,
+            "max_y": 13.31
+          },
+          "spawn_count": 31
+        },
+        {
+          "quest_id": 11311,
+          "quest_name": "压制元素生物",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24228,
+          "entity_name": "碎冰元素",
+          "representative": {
+            "x": 57.19,
+            "y": 5.38,
+            "spawn_count": 24,
+            "min_x": 50.52,
+            "max_x": 59.51,
+            "min_y": 1.29,
+            "max_y": 13.31
+          },
+          "spawn_count": 31
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:24546",
+      "entity_type": "npc",
+      "entity_id": 24546,
+      "name": "腐鳃",
+      "representative": {
+        "x": 23.4,
+        "y": 34.62,
+        "spawn_count": 1,
+        "min_x": 23.4,
+        "max_x": 23.4,
+        "min_y": 34.62,
+        "max_y": 34.62
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11397,
+        11422
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24546,
+          "entity_name": "腐鳃",
+          "representative": {
+            "x": 23.4,
+            "y": 34.62,
+            "spawn_count": 1,
+            "min_x": 23.4,
+            "max_x": 23.4,
+            "min_y": 34.62,
+            "max_y": 34.62
+          },
+          "spawn_count": 1
+        },
+        {
+          "quest_id": 11422,
+          "quest_name": "腐鳃的三叉戟",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34035,
+          "entity_type": "npc",
+          "entity_id": 24546,
+          "entity_name": "腐鳃",
+          "representative": {
+            "x": 23.4,
+            "y": 34.62,
+            "spawn_count": 1,
+            "min_x": 23.4,
+            "max_x": 23.4,
+            "min_y": 34.62,
+            "max_y": 34.62
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:24198",
+      "entity_type": "npc",
+      "entity_id": 24198,
+      "name": "被感染的掠龙符文法师",
+      "representative": {
+        "x": 50.37,
+        "y": 53.35,
+        "spawn_count": 5,
+        "min_x": 49.27,
+        "max_x": 50.92,
+        "min_y": 52.76,
+        "max_y": 57.29
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        11307,
+        11310
+      ],
+      "relations": [
+        {
+          "quest_id": 11307,
+          "quest_name": "药剂喷雾",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24198,
+          "entity_name": "被感染的掠龙符文法师",
+          "representative": {
+            "x": 50.37,
+            "y": 53.35,
+            "spawn_count": 5,
+            "min_x": 49.27,
+            "max_x": 50.92,
+            "min_y": 52.76,
+            "max_y": 57.29
+          },
+          "spawn_count": 5
+        },
+        {
+          "quest_id": 11310,
+          "quest_name": "集中处理",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24198,
+          "entity_name": "被感染的掠龙符文法师",
+          "representative": {
+            "x": 50.37,
+            "y": 53.35,
+            "spawn_count": 5,
+            "min_x": 49.27,
+            "max_x": 50.92,
+            "min_y": 52.76,
+            "max_y": 57.29
+          },
+          "spawn_count": 5
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:24199",
+      "entity_type": "npc",
+      "entity_id": 24199,
+      "name": "被感染的掠龙训练者",
+      "representative": {
+        "x": 50.19,
+        "y": 55.45,
+        "spawn_count": 8,
+        "min_x": 48.99,
+        "max_x": 51.33,
+        "min_y": 51.89,
+        "max_y": 57.9
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        11307,
+        11310
+      ],
+      "relations": [
+        {
+          "quest_id": 11307,
+          "quest_name": "药剂喷雾",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24199,
+          "entity_name": "被感染的掠龙训练者",
+          "representative": {
+            "x": 50.19,
+            "y": 55.45,
+            "spawn_count": 8,
+            "min_x": 48.99,
+            "max_x": 51.33,
+            "min_y": 51.89,
+            "max_y": 57.9
+          },
+          "spawn_count": 8
+        },
+        {
+          "quest_id": 11310,
+          "quest_name": "集中处理",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24199,
+          "entity_name": "被感染的掠龙训练者",
+          "representative": {
+            "x": 50.19,
+            "y": 55.45,
+            "spawn_count": 8,
+            "min_x": 48.99,
+            "max_x": 51.33,
+            "min_y": 51.89,
+            "max_y": 57.9
+          },
+          "spawn_count": 8
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:23564",
+      "entity_type": "npc",
+      "entity_id": 23564,
+      "name": "被感染的掠龙部族成员",
+      "representative": {
+        "x": 50.15,
+        "y": 54.27,
+        "spawn_count": 29,
+        "min_x": 48.81,
+        "max_x": 51.66,
+        "min_y": 51.68,
+        "max_y": 57.41
+      },
+      "spawn_count": 29,
+      "quest_ids": [
+        11307,
+        11310
+      ],
+      "relations": [
+        {
+          "quest_id": 11307,
+          "quest_name": "药剂喷雾",
+          "objective_type": "event",
+          "required_count": 10,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23564,
+          "entity_name": "被感染的掠龙部族成员",
+          "representative": {
+            "x": 50.15,
+            "y": 54.27,
+            "spawn_count": 29,
+            "min_x": 48.81,
+            "max_x": 51.66,
+            "min_y": 51.68,
+            "max_y": 57.41
+          },
+          "spawn_count": 29
+        },
+        {
+          "quest_id": 11310,
+          "quest_name": "集中处理",
+          "objective_type": "event",
+          "required_count": 20,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23564,
+          "entity_name": "被感染的掠龙部族成员",
+          "representative": {
+            "x": 50.15,
+            "y": 54.27,
+            "spawn_count": 29,
+            "min_x": 48.81,
+            "max_x": 51.66,
+            "min_y": 51.68,
+            "max_y": 57.41
+          },
+          "spawn_count": 29
+        }
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "object:186885",
+      "entity_type": "object",
+      "entity_id": 186885,
+      "name": "Amani Vase",
+      "representative": {
+        "x": 37.14,
+        "y": 85.51,
+        "spawn_count": 1,
+        "min_x": 37.14,
+        "max_x": 37.14,
+        "min_y": 85.51,
+        "max_y": 85.51
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11434
+      ],
+      "relations": [
+        {
+          "quest_id": 11434,
+          "quest_name": "被遗忘的宝藏",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34069,
+          "entity_type": "object",
+          "entity_id": 186885,
+          "entity_name": "Amani Vase",
+          "representative": {
+            "x": 37.14,
+            "y": 85.51,
+            "spawn_count": 1,
+            "min_x": 37.14,
+            "max_x": 37.14,
+            "min_y": 85.51,
+            "max_y": 85.51
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187027",
+      "entity_type": "object",
+      "entity_id": 187027,
+      "name": "Cannonball",
+      "representative": {
+        "x": 61.98,
+        "y": 80.04,
+        "spawn_count": 1,
+        "min_x": 61.98,
+        "max_x": 61.98,
+        "min_y": 80.04,
+        "max_y": 80.04
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11504
+      ],
+      "relations": [
+        {
+          "quest_id": 11504,
+          "quest_name": "亡者复生！",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34225,
+          "entity_type": "object",
+          "entity_id": 187027,
+          "entity_name": "Cannonball",
+          "representative": {
+            "x": 61.98,
+            "y": 80.04,
+            "spawn_count": 1,
+            "min_x": 61.98,
+            "max_x": 61.98,
+            "min_y": 80.04,
+            "max_y": 80.04
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186632",
+      "entity_type": "object",
+      "entity_id": 186632,
+      "name": "Dwarven Keg",
+      "representative": {
+        "x": 33.6,
+        "y": 37.75,
+        "spawn_count": 28,
+        "min_x": 27.86,
+        "max_x": 38.02,
+        "min_y": 33.2,
+        "max_y": 40.6
+      },
+      "spawn_count": 28,
+      "quest_ids": [
+        11298
+      ],
+      "relations": [
+        {
+          "quest_id": 11298,
+          "quest_name": "酒里有什么？",
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 33541,
+          "entity_type": "object",
+          "entity_id": 186632,
+          "entity_name": "Dwarven Keg",
+          "representative": {
+            "x": 33.6,
+            "y": 37.75,
+            "spawn_count": 28,
+            "min_x": 27.86,
+            "max_x": 38.02,
+            "min_y": 33.2,
+            "max_y": 40.6
+          },
+          "spawn_count": 28
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186684",
+      "entity_type": "object",
+      "entity_id": 186684,
+      "name": "Iron Rune Carving Tools",
+      "representative": {
+        "x": 71.14,
+        "y": 24.89,
+        "spawn_count": 3,
+        "min_x": 67.54,
+        "max_x": 73.3,
+        "min_y": 23.33,
+        "max_y": 28.76
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        11351
+      ],
+      "relations": [
+        {
+          "quest_id": 11351,
+          "quest_name": "掌控符文",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 33794,
+          "entity_type": "object",
+          "entity_id": 186684,
+          "entity_name": "Iron Rune Carving Tools",
+          "representative": {
+            "x": 71.14,
+            "y": 24.89,
+            "spawn_count": 3,
+            "min_x": 67.54,
+            "max_x": 73.3,
+            "min_y": 23.33,
+            "max_y": 28.76
+          },
+          "spawn_count": 3
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187026",
+      "entity_type": "object",
+      "entity_id": 187026,
+      "name": "Long Tail Feather",
+      "representative": {
+        "x": 59.79,
+        "y": 79.39,
+        "spawn_count": 1,
+        "min_x": 59.79,
+        "max_x": 59.79,
+        "min_y": 79.39,
+        "max_y": 79.39
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11504
+      ],
+      "relations": [
+        {
+          "quest_id": 11504,
+          "quest_name": "亡者复生！",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34224,
+          "entity_type": "object",
+          "entity_id": 187026,
+          "entity_name": "Long Tail Feather",
+          "representative": {
+            "x": 59.79,
+            "y": 79.39,
+            "spawn_count": 1,
+            "min_x": 59.79,
+            "max_x": 59.79,
+            "min_y": 79.39,
+            "max_y": 79.39
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187022",
+      "entity_type": "object",
+      "entity_id": 187022,
+      "name": "Mound of Debris",
+      "representative": {
+        "x": 57.69,
+        "y": 77.52,
+        "spawn_count": 1,
+        "min_x": 57.69,
+        "max_x": 57.69,
+        "min_y": 77.52,
+        "max_y": 77.52
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11504
+      ],
+      "relations": [
+        {
+          "quest_id": 11504,
+          "quest_name": "亡者复生！",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34222,
+          "entity_type": "object",
+          "entity_id": 187022,
+          "entity_name": "Mound of Debris",
+          "representative": {
+            "x": 57.69,
+            "y": 77.52,
+            "spawn_count": 1,
+            "min_x": 57.69,
+            "max_x": 57.69,
+            "min_y": 77.52,
+            "max_y": 77.52
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186390",
+      "entity_type": "object",
+      "entity_id": 186390,
+      "name": "Plague Container",
+      "representative": {
+        "x": 80.88,
+        "y": 35.48,
+        "spawn_count": 16,
+        "min_x": 80.19,
+        "max_x": 81.22,
+        "min_y": 34.82,
+        "max_y": 36.24
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        11167
+      ],
+      "relations": [
+        {
+          "quest_id": 11167,
+          "quest_name": "新的药剂",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33099,
+          "entity_type": "object",
+          "entity_id": 186390,
+          "entity_name": "Plague Container",
+          "representative": {
+            "x": 80.88,
+            "y": 35.48,
+            "spawn_count": 16,
+            "min_x": 80.19,
+            "max_x": 81.22,
+            "min_y": 34.82,
+            "max_y": 36.24
+          },
+          "spawn_count": 16
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186831",
+      "entity_type": "object",
+      "entity_id": 186831,
+      "name": "Saga of the Twins",
+      "representative": {
+        "x": 64.68,
+        "y": 53.57,
+        "spawn_count": 1,
+        "min_x": 64.68,
+        "max_x": 64.68,
+        "min_y": 53.57,
+        "max_y": 53.57
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11423
+      ],
+      "relations": [
+        {
+          "quest_id": 11423,
+          "quest_name": "敌人的史诗",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34040,
+          "entity_type": "object",
+          "entity_id": 186831,
+          "entity_name": "Saga of the Twins",
+          "representative": {
+            "x": 64.68,
+            "y": 53.57,
+            "spawn_count": 1,
+            "min_x": 64.68,
+            "max_x": 64.68,
+            "min_y": 53.57,
+            "max_y": 53.57
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186830",
+      "entity_type": "object",
+      "entity_id": 186830,
+      "name": "Saga of the Val'kyr",
+      "representative": {
+        "x": 67.42,
+        "y": 57.16,
+        "spawn_count": 1,
+        "min_x": 67.42,
+        "max_x": 67.42,
+        "min_y": 57.16,
+        "max_y": 57.16
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11423
+      ],
+      "relations": [
+        {
+          "quest_id": 11423,
+          "quest_name": "敌人的史诗",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34042,
+          "entity_type": "object",
+          "entity_id": 186830,
+          "entity_name": "Saga of the Val'kyr",
+          "representative": {
+            "x": 67.42,
+            "y": 57.16,
+            "spawn_count": 1,
+            "min_x": 67.42,
+            "max_x": 67.42,
+            "min_y": 57.16,
+            "max_y": 57.16
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:186832",
+      "entity_type": "object",
+      "entity_id": 186832,
+      "name": "Saga of the Winter Curse",
+      "representative": {
+        "x": 68.94,
+        "y": 52.62,
+        "spawn_count": 1,
+        "min_x": 68.94,
+        "max_x": 68.94,
+        "min_y": 52.62,
+        "max_y": 52.62
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11423
+      ],
+      "relations": [
+        {
+          "quest_id": 11423,
+          "quest_name": "敌人的史诗",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34041,
+          "entity_type": "object",
+          "entity_id": 186832,
+          "entity_name": "Saga of the Winter Curse",
+          "representative": {
+            "x": 68.94,
+            "y": 52.62,
+            "spawn_count": 1,
+            "min_x": 68.94,
+            "max_x": 68.94,
+            "min_y": 52.62,
+            "max_y": 52.62
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24102",
+      "entity_type": "npc",
+      "entity_id": 24102,
+      "name": "Skorn Barracks Bunny",
+      "representative": {
+        "x": 46.02,
+        "y": 30.74,
+        "spawn_count": 1,
+        "min_x": 46.02,
+        "max_x": 46.02,
+        "min_y": 30.74,
+        "max_y": 30.74
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11258
+      ],
+      "relations": [
+        {
+          "quest_id": 11258,
+          "quest_name": "燃烧吧，斯克恩，燃烧吧！",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24102,
+          "entity_name": "Skorn Barracks Bunny",
+          "representative": {
+            "x": 46.02,
+            "y": 30.74,
+            "spawn_count": 1,
+            "min_x": 46.02,
+            "max_x": 46.02,
+            "min_y": 30.74,
+            "max_y": 30.74
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24100",
+      "entity_type": "npc",
+      "entity_id": 24100,
+      "name": "Skorn Longhouse NE Bunny",
+      "representative": {
+        "x": 46.39,
+        "y": 28.13,
+        "spawn_count": 1,
+        "min_x": 46.39,
+        "max_x": 46.39,
+        "min_y": 28.13,
+        "max_y": 28.13
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11258
+      ],
+      "relations": [
+        {
+          "quest_id": 11258,
+          "quest_name": "燃烧吧，斯克恩，燃烧吧！",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24100,
+          "entity_name": "Skorn Longhouse NE Bunny",
+          "representative": {
+            "x": 46.39,
+            "y": 28.13,
+            "spawn_count": 1,
+            "min_x": 46.39,
+            "max_x": 46.39,
+            "min_y": 28.13,
+            "max_y": 28.13
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24098",
+      "entity_type": "npc",
+      "entity_id": 24098,
+      "name": "Skorn Longhouse NW Bunny",
+      "representative": {
+        "x": 43.65,
+        "y": 28.65,
+        "spawn_count": 1,
+        "min_x": 43.65,
+        "max_x": 43.65,
+        "min_y": 28.65,
+        "max_y": 28.65
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11258
+      ],
+      "relations": [
+        {
+          "quest_id": 11258,
+          "quest_name": "燃烧吧，斯克恩，燃烧吧！",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24098,
+          "entity_name": "Skorn Longhouse NW Bunny",
+          "representative": {
+            "x": 43.65,
+            "y": 28.65,
+            "spawn_count": 1,
+            "min_x": 43.65,
+            "max_x": 43.65,
+            "min_y": 28.65,
+            "max_y": 28.65
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24092",
+      "entity_type": "npc",
+      "entity_id": 24092,
+      "name": "Skorn Tower E Bunny",
+      "representative": {
+        "x": 46.7,
+        "y": 32.81,
+        "spawn_count": 1,
+        "min_x": 46.7,
+        "max_x": 46.7,
+        "min_y": 32.81,
+        "max_y": 32.81
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11259
+      ],
+      "relations": [
+        {
+          "quest_id": 11259,
+          "quest_name": "危险的塔楼",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24092,
+          "entity_name": "Skorn Tower E Bunny",
+          "representative": {
+            "x": 46.7,
+            "y": 32.81,
+            "spawn_count": 1,
+            "min_x": 46.7,
+            "max_x": 46.7,
+            "min_y": 32.81,
+            "max_y": 32.81
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24087",
+      "entity_type": "npc",
+      "entity_id": 24087,
+      "name": "Skorn Tower NW Bunny",
+      "representative": {
+        "x": 43.67,
+        "y": 29.91,
+        "spawn_count": 1,
+        "min_x": 43.67,
+        "max_x": 43.67,
+        "min_y": 29.91,
+        "max_y": 29.91
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11259
+      ],
+      "relations": [
+        {
+          "quest_id": 11259,
+          "quest_name": "危险的塔楼",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24087,
+          "entity_name": "Skorn Tower NW Bunny",
+          "representative": {
+            "x": 43.67,
+            "y": 29.91,
+            "spawn_count": 1,
+            "min_x": 43.67,
+            "max_x": 43.67,
+            "min_y": 29.91,
+            "max_y": 29.91
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24094",
+      "entity_type": "npc",
+      "entity_id": 24094,
+      "name": "Skorn Tower SE Bunny",
+      "representative": {
+        "x": 47.1,
+        "y": 36.8,
+        "spawn_count": 1,
+        "min_x": 47.1,
+        "max_x": 47.1,
+        "min_y": 36.8,
+        "max_y": 36.8
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11259
+      ],
+      "relations": [
+        {
+          "quest_id": 11259,
+          "quest_name": "危险的塔楼",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24094,
+          "entity_name": "Skorn Tower SE Bunny",
+          "representative": {
+            "x": 47.1,
+            "y": 36.8,
+            "spawn_count": 1,
+            "min_x": 47.1,
+            "max_x": 47.1,
+            "min_y": 36.8,
+            "max_y": 36.8
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24093",
+      "entity_type": "npc",
+      "entity_id": 24093,
+      "name": "Skorn Tower SW Bunny",
+      "representative": {
+        "x": 43.16,
+        "y": 36.14,
+        "spawn_count": 1,
+        "min_x": 43.16,
+        "max_x": 43.16,
+        "min_y": 36.14,
+        "max_y": 36.14
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11259
+      ],
+      "relations": [
+        {
+          "quest_id": 11259,
+          "quest_name": "危险的塔楼",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24093,
+          "entity_name": "Skorn Tower SW Bunny",
+          "representative": {
+            "x": 43.16,
+            "y": 36.14,
+            "spawn_count": 1,
+            "min_x": 43.16,
+            "max_x": 43.16,
+            "min_y": 36.14,
+            "max_y": 36.14
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187381",
+      "entity_type": "object",
+      "entity_id": 187381,
+      "name": "The Ancient Armor of the Kvaldir",
+      "representative": {
+        "x": 81.77,
+        "y": 73.91,
+        "spawn_count": 1,
+        "min_x": 81.77,
+        "max_x": 81.77,
+        "min_y": 73.91,
+        "max_y": 73.91
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11567
+      ],
+      "relations": [
+        {
+          "quest_id": 11567,
+          "quest_name": "克瓦迪尔上古甲胄",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34239,
+          "entity_type": "object",
+          "entity_id": 187381,
+          "entity_name": "The Ancient Armor of the Kvaldir",
+          "representative": {
+            "x": 81.77,
+            "y": 73.91,
+            "spawn_count": 1,
+            "min_x": 81.77,
+            "max_x": 81.77,
+            "min_y": 73.91,
+            "max_y": 73.91
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187032",
+      "entity_type": "object",
+      "entity_id": 187032,
+      "name": "The Frozen Heart of Isuldof",
+      "representative": {
+        "x": 32.33,
+        "y": 78.67,
+        "spawn_count": 1,
+        "min_x": 32.33,
+        "max_x": 32.33,
+        "min_y": 78.67,
+        "max_y": 78.67
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11512
+      ],
+      "relations": [
+        {
+          "quest_id": 11512,
+          "quest_name": "伊斯多弗的冰冷之心",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34237,
+          "entity_type": "object",
+          "entity_id": 187032,
+          "entity_name": "The Frozen Heart of Isuldof",
+          "representative": {
+            "x": 32.33,
+            "y": 78.67,
+            "spawn_count": 1,
+            "min_x": 32.33,
+            "max_x": 32.33,
+            "min_y": 78.67,
+            "max_y": 78.67
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187033",
+      "entity_type": "object",
+      "entity_id": 187033,
+      "name": "The Staff of Storm's Fury",
+      "representative": {
+        "x": 35.26,
+        "y": 64.84,
+        "spawn_count": 1,
+        "min_x": 35.26,
+        "max_x": 35.26,
+        "min_y": 64.84,
+        "max_y": 64.84
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11511
+      ],
+      "relations": [
+        {
+          "quest_id": 11511,
+          "quest_name": "风暴愤怒法杖",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34236,
+          "entity_type": "object",
+          "entity_id": 187033,
+          "entity_name": "The Staff of Storm's Fury",
+          "representative": {
+            "x": 35.26,
+            "y": 64.84,
+            "spawn_count": 1,
+            "min_x": 35.26,
+            "max_x": 35.26,
+            "min_y": 64.84,
+            "max_y": 64.84
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:187023",
+      "entity_type": "object",
+      "entity_id": 187023,
+      "name": "Unlocked Chest",
+      "representative": {
+        "x": 59.23,
+        "y": 76.97,
+        "spawn_count": 1,
+        "min_x": 59.23,
+        "max_x": 59.23,
+        "min_y": 76.97,
+        "max_y": 76.97
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11504
+      ],
+      "relations": [
+        {
+          "quest_id": 11504,
+          "quest_name": "亡者复生！",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34223,
+          "entity_type": "object",
+          "entity_id": 187023,
+          "entity_name": "Unlocked Chest",
+          "representative": {
+            "x": 59.23,
+            "y": 76.97,
+            "spawn_count": 1,
+            "min_x": 59.23,
+            "max_x": 59.23,
+            "min_y": 76.97,
+            "max_y": 76.97
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23957",
+      "entity_type": "npc",
+      "entity_id": 23957,
+      "name": "Westguard Cannon Credit Trigger East",
+      "representative": {
+        "x": 80.32,
+        "y": 38.17,
+        "spawn_count": 1,
+        "min_x": 80.32,
+        "max_x": 80.32,
+        "min_y": 38.17,
+        "max_y": 38.17
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11232
+      ],
+      "relations": [
+        {
+          "quest_id": 11232,
+          "quest_name": "指引方位",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23957,
+          "entity_name": "Westguard Cannon Credit Trigger East",
+          "representative": {
+            "x": 80.32,
+            "y": 38.17,
+            "spawn_count": 1,
+            "min_x": 80.32,
+            "max_x": 80.32,
+            "min_y": 38.17,
+            "max_y": 38.17
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23972",
+      "entity_type": "npc",
+      "entity_id": 23972,
+      "name": "Westguard Cannon Credit Trigger West",
+      "representative": {
+        "x": 79.34,
+        "y": 40.15,
+        "spawn_count": 1,
+        "min_x": 79.34,
+        "max_x": 79.34,
+        "min_y": 40.15,
+        "max_y": 40.15
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11232
+      ],
+      "relations": [
+        {
+          "quest_id": 11232,
+          "quest_name": "指引方位",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23972,
+          "entity_name": "Westguard Cannon Credit Trigger West",
+          "representative": {
+            "x": 79.34,
+            "y": 40.15,
+            "spawn_count": 1,
+            "min_x": 79.34,
+            "max_x": 79.34,
+            "min_y": 40.15,
+            "max_y": 40.15
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24184",
+      "entity_type": "npc",
+      "entity_id": 24184,
+      "name": "Winterskorn Barracks Credit",
+      "representative": {
+        "x": 63.72,
+        "y": 40.45,
+        "spawn_count": 4,
+        "min_x": 63.52,
+        "max_x": 63.91,
+        "min_y": 40.08,
+        "max_y": 40.93
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        11285
+      ],
+      "relations": [
+        {
+          "quest_id": 11285,
+          "quest_name": "拜尔海姆在燃烧！",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24184,
+          "entity_name": "Winterskorn Barracks Credit",
+          "representative": {
+            "x": 63.72,
+            "y": 40.45,
+            "spawn_count": 4,
+            "min_x": 63.52,
+            "max_x": 63.91,
+            "min_y": 40.08,
+            "max_y": 40.93
+          },
+          "spawn_count": 4
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24185",
+      "entity_type": "npc",
+      "entity_id": 24185,
+      "name": "Winterskorn Bridge Credit",
+      "representative": {
+        "x": 65.97,
+        "y": 39.89,
+        "spawn_count": 1,
+        "min_x": 65.97,
+        "max_x": 65.97,
+        "min_y": 39.89,
+        "max_y": 39.89
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11285
+      ],
+      "relations": [
+        {
+          "quest_id": 11285,
+          "quest_name": "拜尔海姆在燃烧！",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24185,
+          "entity_name": "Winterskorn Bridge Credit",
+          "representative": {
+            "x": 65.97,
+            "y": 39.89,
+            "spawn_count": 1,
+            "min_x": 65.97,
+            "max_x": 65.97,
+            "min_y": 39.89,
+            "max_y": 39.89
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24182",
+      "entity_type": "npc",
+      "entity_id": 24182,
+      "name": "Winterskorn Dwelling Credit",
+      "representative": {
+        "x": 63.82,
+        "y": 41.19,
+        "spawn_count": 2,
+        "min_x": 62.67,
+        "max_x": 64.97,
+        "min_y": 41.09,
+        "max_y": 41.28
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        11285
+      ],
+      "relations": [
+        {
+          "quest_id": 11285,
+          "quest_name": "拜尔海姆在燃烧！",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24182,
+          "entity_name": "Winterskorn Dwelling Credit",
+          "representative": {
+            "x": 63.82,
+            "y": 41.19,
+            "spawn_count": 2,
+            "min_x": 62.67,
+            "max_x": 64.97,
+            "min_y": 41.09,
+            "max_y": 41.28
+          },
+          "spawn_count": 2
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24183",
+      "entity_type": "npc",
+      "entity_id": 24183,
+      "name": "Winterskorn Watchtower Credit",
+      "representative": {
+        "x": 67.0,
+        "y": 39.83,
+        "spawn_count": 1,
+        "min_x": 67.0,
+        "max_x": 67.0,
+        "min_y": 39.83,
+        "max_y": 39.83
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11285
+      ],
+      "relations": [
+        {
+          "quest_id": 11285,
+          "quest_name": "拜尔海姆在燃烧！",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24183,
+          "entity_name": "Winterskorn Watchtower Credit",
+          "representative": {
+            "x": 67.0,
+            "y": 39.83,
+            "spawn_count": 1,
+            "min_x": 67.0,
+            "max_x": 67.0,
+            "min_y": 39.83,
+            "max_y": 39.83
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24713",
+      "entity_type": "npc",
+      "entity_id": 24713,
+      "name": "“火柴腿”丹",
+      "representative": {
+        "x": 35.95,
+        "y": 83.6,
+        "spawn_count": 1,
+        "min_x": 35.95,
+        "max_x": 35.95,
+        "min_y": 83.6,
+        "max_y": 83.6
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11479
+      ],
+      "relations": [
+        {
+          "quest_id": 11479,
+          "quest_name": "“火柴腿”丹",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24713,
+          "entity_name": "“火柴腿”丹",
+          "representative": {
+            "x": 35.95,
+            "y": 83.6,
+            "spawn_count": 1,
+            "min_x": 35.95,
+            "max_x": 35.95,
+            "min_y": 83.6,
+            "max_y": 83.6
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24013",
+      "entity_type": "npc",
+      "entity_id": 24013,
+      "name": "不死的看守者",
+      "representative": {
+        "x": 36.12,
+        "y": 11.13,
+        "spawn_count": 21,
+        "min_x": 32.84,
+        "max_x": 39.22,
+        "min_y": 8.1,
+        "max_y": 17.13
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        11268
+      ],
+      "relations": [
+        {
+          "quest_id": 11268,
+          "quest_name": "行尸走肉",
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24013,
+          "entity_name": "不死的看守者",
+          "representative": {
+            "x": 36.12,
+            "y": 11.13,
+            "spawn_count": 21,
+            "min_x": 32.84,
+            "max_x": 39.22,
+            "min_y": 8.1,
+            "max_y": 17.13
+          },
+          "spawn_count": 21
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23643",
+      "entity_type": "npc",
+      "entity_id": 23643,
+      "name": "不稳定的行尸鱼人",
+      "representative": {
+        "x": 22.51,
+        "y": 21.1,
+        "spawn_count": 10,
+        "min_x": 21.34,
+        "max_x": 22.85,
+        "min_y": 16.1,
+        "max_y": 29.68
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        11397
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 15,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23643,
+          "entity_name": "不稳定的行尸鱼人",
+          "representative": {
+            "x": 22.51,
+            "y": 21.1,
+            "spawn_count": 10,
+            "min_x": 21.34,
+            "max_x": 22.85,
+            "min_y": 16.1,
+            "max_y": 29.68
+          },
+          "spawn_count": 10
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24035",
+      "entity_type": "npc",
+      "entity_id": 24035,
+      "name": "亚勒伯龙囚犯",
+      "representative": {
+        "x": 35.86,
+        "y": 11.3,
+        "spawn_count": 37,
+        "min_x": 32.85,
+        "max_x": 39.14,
+        "min_y": 8.15,
+        "max_y": 16.46
+      },
+      "spawn_count": 37,
+      "quest_ids": [
+        11265
+      ],
+      "relations": [
+        {
+          "quest_id": 11265,
+          "quest_name": "钥匙和牢笼",
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24035,
+          "entity_name": "亚勒伯龙囚犯",
+          "representative": {
+            "x": 35.86,
+            "y": 11.3,
+            "spawn_count": 37,
+            "min_x": 32.85,
+            "max_x": 39.14,
+            "min_y": 8.15,
+            "max_y": 16.46
+          },
+          "spawn_count": 37
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23991",
+      "entity_type": "npc",
+      "entity_id": 23991,
+      "name": "亚勒伯龙战士",
+      "representative": {
+        "x": 35.75,
+        "y": 11.59,
+        "spawn_count": 32,
+        "min_x": 31.37,
+        "max_x": 41.03,
+        "min_y": 6.02,
+        "max_y": 18.99
+      },
+      "spawn_count": 32,
+      "quest_ids": [
+        11263
+      ],
+      "relations": [
+        {
+          "quest_id": 11263,
+          "quest_name": "亚勒伯龙的麻烦",
+          "objective_type": "kill",
+          "required_count": 15,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23991,
+          "entity_name": "亚勒伯龙战士",
+          "representative": {
+            "x": 35.75,
+            "y": 11.59,
+            "spawn_count": 32,
+            "min_x": 31.37,
+            "max_x": 41.03,
+            "min_y": 6.02,
+            "max_y": 18.99
+          },
+          "spawn_count": 32
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23989",
+      "entity_type": "npc",
+      "entity_id": 23989,
+      "name": "亚勒伯龙沉睡卫士",
+      "representative": {
+        "x": 36.23,
+        "y": 11.46,
+        "spawn_count": 16,
+        "min_x": 32.8,
+        "max_x": 41.64,
+        "min_y": 6.28,
+        "max_y": 16.19
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        11263
+      ],
+      "relations": [
+        {
+          "quest_id": 11263,
+          "quest_name": "亚勒伯龙的麻烦",
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23989,
+          "entity_name": "亚勒伯龙沉睡卫士",
+          "representative": {
+            "x": 36.23,
+            "y": 11.46,
+            "spawn_count": 16,
+            "min_x": 32.8,
+            "max_x": 41.64,
+            "min_y": 6.28,
+            "max_y": 16.19
+          },
+          "spawn_count": 16
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23990",
+      "entity_type": "npc",
+      "entity_id": 23990,
+      "name": "亚勒伯龙符文法师",
+      "representative": {
+        "x": 35.45,
+        "y": 11.78,
+        "spawn_count": 11,
+        "min_x": 33.07,
+        "max_x": 39.21,
+        "min_y": 8.89,
+        "max_y": 16.29
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        11263
+      ],
+      "relations": [
+        {
+          "quest_id": 11263,
+          "quest_name": "亚勒伯龙的麻烦",
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23990,
+          "entity_name": "亚勒伯龙符文法师",
+          "representative": {
+            "x": 35.45,
+            "y": 11.78,
+            "spawn_count": 11,
+            "min_x": 33.07,
+            "max_x": 39.21,
+            "min_y": 8.89,
+            "max_y": 16.29
+          },
+          "spawn_count": 11
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24877",
+      "entity_type": "npc",
+      "entity_id": 24877,
+      "name": "伊斯多弗·冷心",
+      "representative": {
+        "x": 59.71,
+        "y": 79.39,
+        "spawn_count": 1,
+        "min_x": 59.71,
+        "max_x": 59.71,
+        "min_y": 79.39,
+        "max_y": 79.39
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11568
+      ],
+      "relations": [
+        {
+          "quest_id": 11568,
+          "quest_name": "安息",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24877,
+          "entity_name": "伊斯多弗·冷心",
+          "representative": {
+            "x": 59.71,
+            "y": 79.39,
+            "spawn_count": 1,
+            "min_x": 59.71,
+            "max_x": 59.71,
+            "min_y": 79.39,
+            "max_y": 79.39
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24669",
+      "entity_type": "npc",
+      "entity_id": 24669,
+      "name": "休眠的维库人",
+      "representative": {
+        "x": 36.76,
+        "y": 12.17,
+        "spawn_count": 167,
+        "min_x": 32.68,
+        "max_x": 39.19,
+        "min_y": 6.53,
+        "max_y": 16.91
+      },
+      "spawn_count": 167,
+      "quest_ids": [
+        11433
+      ],
+      "relations": [
+        {
+          "quest_id": 11433,
+          "quest_name": "休眠的巨人",
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24669,
+          "entity_name": "休眠的维库人",
+          "representative": {
+            "x": 36.76,
+            "y": 12.17,
+            "spawn_count": 167,
+            "min_x": 32.68,
+            "max_x": 39.19,
+            "min_y": 6.53,
+            "max_y": 16.91
+          },
+          "spawn_count": 167
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24875",
+      "entity_type": "npc",
+      "entity_id": 24875,
+      "name": "克瓦迪尔的温丹",
+      "representative": {
+        "x": 61.95,
+        "y": 80.04,
+        "spawn_count": 1,
+        "min_x": 61.95,
+        "max_x": 61.95,
+        "min_y": 80.04,
+        "max_y": 80.04
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11568
+      ],
+      "relations": [
+        {
+          "quest_id": 11568,
+          "quest_name": "安息",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24875,
+          "entity_name": "克瓦迪尔的温丹",
+          "representative": {
+            "x": 61.95,
+            "y": 80.04,
+            "spawn_count": 1,
+            "min_x": 61.95,
+            "max_x": 61.95,
+            "min_y": 80.04,
+            "max_y": 80.04
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23678",
+      "entity_type": "npc",
+      "entity_id": 23678,
+      "name": "冰冷树妖",
+      "representative": {
+        "x": 51.64,
+        "y": 27.44,
+        "spawn_count": 22,
+        "min_x": 50.29,
+        "max_x": 53.14,
+        "min_y": 25.1,
+        "max_y": 29.01
+      },
+      "spawn_count": 22,
+      "quest_ids": [
+        11314
+      ],
+      "relations": [
+        {
+          "quest_id": 11314,
+          "quest_name": "堕落的姐妹",
+          "objective_type": "kill",
+          "required_count": 7,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23678,
+          "entity_name": "冰冷树妖",
+          "representative": {
+            "x": 51.64,
+            "y": 27.44,
+            "spawn_count": 22,
+            "min_x": 50.29,
+            "max_x": 53.14,
+            "min_y": 25.1,
+            "max_y": 29.01
+          },
+          "spawn_count": 22
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24638",
+      "entity_type": "npc",
+      "entity_id": 24638,
+      "name": "凋零之叶",
+      "representative": {
+        "x": 53.82,
+        "y": 17.97,
+        "spawn_count": 1,
+        "min_x": 53.82,
+        "max_x": 53.82,
+        "min_y": 17.97,
+        "max_y": 17.97
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11428
+      ],
+      "relations": [
+        {
+          "quest_id": 11428,
+          "quest_name": "凋零之叶",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24638,
+          "entity_name": "凋零之叶",
+          "representative": {
+            "x": 53.82,
+            "y": 17.97,
+            "spawn_count": 1,
+            "min_x": 53.82,
+            "max_x": 53.82,
+            "min_y": 17.97,
+            "max_y": 17.97
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23983",
+      "entity_type": "npc",
+      "entity_id": 23983,
+      "name": "北方舰队陆战队员",
+      "representative": {
+        "x": 84.15,
+        "y": 36.69,
+        "spawn_count": 33,
+        "min_x": 83.25,
+        "max_x": 85.61,
+        "min_y": 35.33,
+        "max_y": 38.91
+      },
+      "spawn_count": 33,
+      "quest_ids": [
+        11230
+      ],
+      "relations": [
+        {
+          "quest_id": 11230,
+          "quest_name": "伏击！",
+          "objective_type": "kill",
+          "required_count": 15,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23983,
+          "entity_name": "北方舰队陆战队员",
+          "representative": {
+            "x": 84.15,
+            "y": 36.69,
+            "spawn_count": 33,
+            "min_x": 83.25,
+            "max_x": 85.61,
+            "min_y": 35.33,
+            "max_y": 38.91
+          },
+          "spawn_count": 33
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24073",
+      "entity_type": "npc",
+      "entity_id": 24073,
+      "name": "可怕的丧尸",
+      "representative": {
+        "x": 36.85,
+        "y": 12.36,
+        "spawn_count": 63,
+        "min_x": 32.92,
+        "max_x": 39.06,
+        "min_y": 6.72,
+        "max_y": 16.73
+      },
+      "spawn_count": 63,
+      "quest_ids": [
+        11268
+      ],
+      "relations": [
+        {
+          "quest_id": 11268,
+          "quest_name": "行尸走肉",
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24073,
+          "entity_name": "可怕的丧尸",
+          "representative": {
+            "x": 36.85,
+            "y": 12.36,
+            "spawn_count": 63,
+            "min_x": 32.92,
+            "max_x": 39.06,
+            "min_y": 6.72,
+            "max_y": 16.73
+          },
+          "spawn_count": 63
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24229",
+      "entity_type": "npc",
+      "entity_id": 24229,
+      "name": "咆哮的旋风",
+      "representative": {
+        "x": 61.25,
+        "y": 5.51,
+        "spawn_count": 2,
+        "min_x": 59.58,
+        "max_x": 62.92,
+        "min_y": 3.1,
+        "max_y": 7.92
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        11311
+      ],
+      "relations": [
+        {
+          "quest_id": 11311,
+          "quest_name": "压制元素生物",
+          "objective_type": "event",
+          "required_count": 8,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24229,
+          "entity_name": "咆哮的旋风",
+          "representative": {
+            "x": 61.25,
+            "y": 5.51,
+            "spawn_count": 2,
+            "min_x": 59.58,
+            "max_x": 62.92,
+            "min_y": 3.1,
+            "max_y": 7.92
+          },
+          "spawn_count": 4
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24029",
+      "entity_type": "npc",
+      "entity_id": 24029,
+      "name": "唤龙者维尔",
+      "representative": {
+        "x": 36.45,
+        "y": 7.2,
+        "spawn_count": 1,
+        "min_x": 36.45,
+        "max_x": 36.45,
+        "min_y": 7.2,
+        "max_y": 7.2
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11267
+      ],
+      "relations": [
+        {
+          "quest_id": 11267,
+          "quest_name": "冰霜巨龙和它的主人",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24029,
+          "entity_name": "唤龙者维尔",
+          "representative": {
+            "x": 36.45,
+            "y": 7.2,
+            "spawn_count": 1,
+            "min_x": 36.45,
+            "max_x": 36.45,
+            "min_y": 7.2,
+            "max_y": 7.2
+          },
+          "spawn_count": 1
+        },
+        {
+          "quest_id": 11267,
+          "quest_name": "冰霜巨龙和它的主人",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 33282,
+          "entity_type": "npc",
+          "entity_id": 24029,
+          "entity_name": "唤龙者维尔",
+          "representative": {
+            "x": 36.45,
+            "y": 7.2,
+            "spawn_count": 1,
+            "min_x": 36.45,
+            "max_x": 36.45,
+            "min_y": 7.2,
+            "max_y": 7.2
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24518",
+      "entity_type": "npc",
+      "entity_id": 24518,
+      "name": "塔隆斯里克",
+      "representative": {
+        "x": 41.29,
+        "y": 35.88,
+        "spawn_count": 1,
+        "min_x": 41.29,
+        "max_x": 41.29,
+        "min_y": 35.88,
+        "max_y": 35.88
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11417
+      ],
+      "relations": [
+        {
+          "quest_id": 11417,
+          "quest_name": "巨鹰之眼",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34027,
+          "entity_type": "npc",
+          "entity_id": 24518,
+          "entity_name": "塔隆斯里克",
+          "representative": {
+            "x": 41.29,
+            "y": 35.88,
+            "spawn_count": 1,
+            "min_x": 41.29,
+            "max_x": 41.29,
+            "min_y": 35.88,
+            "max_y": 35.88
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23964",
+      "entity_type": "npc",
+      "entity_id": 23964,
+      "name": "塞雷尼中尉",
+      "representative": {
+        "x": 83.2,
+        "y": 43.15,
+        "spawn_count": 1,
+        "min_x": 83.2,
+        "max_x": 83.2,
+        "min_y": 43.15,
+        "max_y": 43.15
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11233
+      ],
+      "relations": [
+        {
+          "quest_id": 11233,
+          "quest_name": "致命的打击",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23964,
+          "entity_name": "塞雷尼中尉",
+          "representative": {
+            "x": 83.2,
+            "y": 43.15,
+            "spawn_count": 1,
+            "min_x": 83.2,
+            "max_x": 83.2,
+            "min_y": 43.15,
+            "max_y": 43.15
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24871",
+      "entity_type": "npc",
+      "entity_id": 24871,
+      "name": "复活的维库先祖",
+      "representative": {
+        "x": 59.88,
+        "y": 78.63,
+        "spawn_count": 21,
+        "min_x": 57.35,
+        "max_x": 62.58,
+        "min_y": 75.85,
+        "max_y": 82.17
+      },
+      "spawn_count": 21,
+      "quest_ids": [
+        11424
+      ],
+      "relations": [
+        {
+          "quest_id": 11424,
+          "quest_name": "盾牌岭",
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 34043,
+          "entity_type": "npc",
+          "entity_id": 24871,
+          "entity_name": "复活的维库先祖",
+          "representative": {
+            "x": 59.88,
+            "y": 78.63,
+            "spawn_count": 21,
+            "min_x": 57.35,
+            "max_x": 62.58,
+            "min_y": 75.85,
+            "max_y": 82.17
+          },
+          "spawn_count": 21
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24785",
+      "entity_type": "npc",
+      "entity_id": 24785,
+      "name": "大个子罗伊",
+      "representative": {
+        "x": 31.07,
+        "y": 79.05,
+        "spawn_count": 1,
+        "min_x": 31.07,
+        "max_x": 31.07,
+        "min_y": 79.05,
+        "max_y": 79.05
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11469
+      ],
+      "relations": [
+        {
+          "quest_id": 11469,
+          "quest_name": "制作肥皂的原料",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34122,
+          "entity_type": "npc",
+          "entity_id": 24785,
+          "entity_name": "大个子罗伊",
+          "representative": {
+            "x": 31.07,
+            "y": 79.05,
+            "spawn_count": 1,
+            "min_x": 31.07,
+            "max_x": 31.07,
+            "min_y": 79.05,
+            "max_y": 79.05
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24637",
+      "entity_type": "npc",
+      "entity_id": 24637,
+      "name": "大型暗礁鲨",
+      "representative": {
+        "x": 36.84,
+        "y": 77.64,
+        "spawn_count": 36,
+        "min_x": 26.45,
+        "max_x": 41.57,
+        "min_y": 66.55,
+        "max_y": 86.45
+      },
+      "spawn_count": 39,
+      "quest_ids": [
+        11434
+      ],
+      "relations": [
+        {
+          "quest_id": 11434,
+          "quest_name": "被遗忘的宝藏",
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 34070,
+          "entity_type": "npc",
+          "entity_id": 24637,
+          "entity_name": "大型暗礁鲨",
+          "representative": {
+            "x": 36.84,
+            "y": 77.64,
+            "spawn_count": 36,
+            "min_x": 26.45,
+            "max_x": 41.57,
+            "min_y": 66.55,
+            "max_y": 86.45
+          },
+          "spawn_count": 39
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24464",
+      "entity_type": "npc",
+      "entity_id": 24464,
+      "name": "天灾水晶",
+      "representative": {
+        "x": 22.21,
+        "y": 23.54,
+        "spawn_count": 6,
+        "min_x": 21.51,
+        "max_x": 22.91,
+        "min_y": 17.61,
+        "max_y": 31.15
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        11399
+      ],
+      "relations": [
+        {
+          "quest_id": 11399,
+          "quest_name": "关闭护盾",
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24464,
+          "entity_name": "天灾水晶",
+          "representative": {
+            "x": 22.21,
+            "y": 23.54,
+            "spawn_count": 6,
+            "min_x": 21.51,
+            "max_x": 22.91,
+            "min_y": 17.61,
+            "max_y": 31.15
+          },
+          "spawn_count": 6
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23876",
+      "entity_type": "npc",
+      "entity_id": 23876,
+      "name": "孢子",
+      "representative": {
+        "x": 53.78,
+        "y": 17.68,
+        "spawn_count": 29,
+        "min_x": 52.29,
+        "max_x": 55.56,
+        "min_y": 15.54,
+        "max_y": 19.3
+      },
+      "spawn_count": 29,
+      "quest_ids": [
+        11319
+      ],
+      "relations": [
+        {
+          "quest_id": 11319,
+          "quest_name": "暗魂守护者的种子",
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23876,
+          "entity_name": "孢子",
+          "representative": {
+            "x": 53.78,
+            "y": 17.68,
+            "spawn_count": 29,
+            "min_x": 52.29,
+            "max_x": 55.56,
+            "min_y": 15.54,
+            "max_y": 19.3
+          },
+          "spawn_count": 29
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24023",
+      "entity_type": "npc",
+      "entity_id": 24023,
+      "name": "安格博达女王",
+      "representative": {
+        "x": 40.88,
+        "y": 6.48,
+        "spawn_count": 1,
+        "min_x": 40.88,
+        "max_x": 40.88,
+        "min_y": 6.48,
+        "max_y": 6.48
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11453
+      ],
+      "relations": [
+        {
+          "quest_id": 11453,
+          "quest_name": "沉睡的国王",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24023,
+          "entity_name": "安格博达女王",
+          "representative": {
+            "x": 40.88,
+            "y": 6.48,
+            "spawn_count": 1,
+            "min_x": 40.88,
+            "max_x": 40.88,
+            "min_y": 6.48,
+            "max_y": 6.48
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23929",
+      "entity_type": "npc",
+      "entity_id": 23929,
+      "name": "巨型潮行蟹",
+      "representative": {
+        "x": 79.04,
+        "y": 25.75,
+        "spawn_count": 51,
+        "min_x": 76.31,
+        "max_x": 85.26,
+        "min_y": 17.41,
+        "max_y": 65.61
+      },
+      "spawn_count": 51,
+      "quest_ids": [
+        11168
+      ],
+      "relations": [
+        {
+          "quest_id": 11168,
+          "quest_name": "强化毒素",
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 33337,
+          "entity_type": "npc",
+          "entity_id": 23929,
+          "entity_name": "巨型潮行蟹",
+          "representative": {
+            "x": 79.04,
+            "y": 25.75,
+            "spawn_count": 51,
+            "min_x": 76.31,
+            "max_x": 85.26,
+            "min_y": 17.41,
+            "max_y": 65.61
+          },
+          "spawn_count": 51
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24238",
+      "entity_type": "npc",
+      "entity_id": 24238,
+      "name": "布约恩·哈古德森",
+      "representative": {
+        "x": 64.04,
+        "y": 39.79,
+        "spawn_count": 1,
+        "min_x": 64.04,
+        "max_x": 64.04,
+        "min_y": 39.79,
+        "max_y": 39.79
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12481
+      ],
+      "relations": [
+        {
+          "quest_id": 12481,
+          "quest_name": "骂阵",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24238,
+          "entity_name": "布约恩·哈古德森",
+          "representative": {
+            "x": 64.04,
+            "y": 39.79,
+            "spawn_count": 1,
+            "min_x": 64.04,
+            "max_x": 64.04,
+            "min_y": 39.79,
+            "max_y": 39.79
+          },
+          "spawn_count": 1
+        },
+        {
+          "quest_id": 12481,
+          "quest_name": "骂阵",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24238,
+          "entity_name": "布约恩·哈古德森",
+          "representative": {
+            "x": 64.04,
+            "y": 39.79,
+            "spawn_count": 1,
+            "min_x": 64.04,
+            "max_x": 64.04,
+            "min_y": 39.79,
+            "max_y": 39.79
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24485",
+      "entity_type": "npc",
+      "entity_id": 24485,
+      "name": "影魔仆从",
+      "representative": {
+        "x": 22.27,
+        "y": 23.0,
+        "spawn_count": 19,
+        "min_x": 21.31,
+        "max_x": 23.16,
+        "min_y": 17.18,
+        "max_y": 31.63
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        11397
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24485,
+          "entity_name": "影魔仆从",
+          "representative": {
+            "x": 22.27,
+            "y": 23.0,
+            "spawn_count": 19,
+            "min_x": 21.31,
+            "max_x": 23.16,
+            "min_y": 17.18,
+            "max_y": 31.63
+          },
+          "spawn_count": 19
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:27926",
+      "entity_type": "npc",
+      "entity_id": 27926,
+      "name": "托尔瓦德",
+      "representative": {
+        "x": 46.8,
+        "y": 68.09,
+        "spawn_count": 1,
+        "min_x": 46.8,
+        "max_x": 46.8,
+        "min_y": 68.09,
+        "max_y": 68.09
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11305
+      ],
+      "relations": [
+        {
+          "quest_id": 11305,
+          "quest_name": "量身订制",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 38098,
+          "entity_type": "npc",
+          "entity_id": 27926,
+          "entity_name": "托尔瓦德",
+          "representative": {
+            "x": 46.8,
+            "y": 68.09,
+            "spawn_count": 1,
+            "min_x": 46.8,
+            "max_x": 46.8,
+            "min_y": 68.09,
+            "max_y": 68.09
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23654",
+      "entity_type": "npc",
+      "entity_id": 23654,
+      "name": "掠龙战士",
+      "representative": {
+        "x": 68.35,
+        "y": 53.59,
+        "spawn_count": 19,
+        "min_x": 65.32,
+        "max_x": 71.18,
+        "min_y": 50.9,
+        "max_y": 57.38
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        12482
+      ],
+      "relations": [
+        {
+          "quest_id": 12482,
+          "quest_name": "进攻尼弗莱瓦",
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23654,
+          "entity_name": "掠龙战士",
+          "representative": {
+            "x": 68.35,
+            "y": 53.59,
+            "spawn_count": 19,
+            "min_x": 65.32,
+            "max_x": 71.18,
+            "min_y": 50.9,
+            "max_y": 57.38
+          },
+          "spawn_count": 19
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23994",
+      "entity_type": "npc",
+      "entity_id": 23994,
+      "name": "掠龙猎犬",
+      "representative": {
+        "x": 67.84,
+        "y": 54.82,
+        "spawn_count": 15,
+        "min_x": 67.05,
+        "max_x": 69.7,
+        "min_y": 52.36,
+        "max_y": 56.48
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12482
+      ],
+      "relations": [
+        {
+          "quest_id": 12482,
+          "quest_name": "进攻尼弗莱瓦",
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23994,
+          "entity_name": "掠龙猎犬",
+          "representative": {
+            "x": 67.84,
+            "y": 54.82,
+            "spawn_count": 15,
+            "min_x": 67.05,
+            "max_x": 69.7,
+            "min_y": 52.36,
+            "max_y": 56.48
+          },
+          "spawn_count": 15
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23656",
+      "entity_type": "npc",
+      "entity_id": 23656,
+      "name": "掠龙符文先知",
+      "representative": {
+        "x": 67.43,
+        "y": 53.93,
+        "spawn_count": 15,
+        "min_x": 64.76,
+        "max_x": 69.55,
+        "min_y": 51.93,
+        "max_y": 57.52
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        12482
+      ],
+      "relations": [
+        {
+          "quest_id": 12482,
+          "quest_name": "进攻尼弗莱瓦",
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23656,
+          "entity_name": "掠龙符文先知",
+          "representative": {
+            "x": 67.43,
+            "y": 53.93,
+            "spawn_count": 15,
+            "min_x": 64.76,
+            "max_x": 69.55,
+            "min_y": 51.93,
+            "max_y": 57.52
+          },
+          "spawn_count": 15
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23871",
+      "entity_type": "npc",
+      "entity_id": 23871,
+      "name": "掠龙训练者",
+      "representative": {
+        "x": 41.06,
+        "y": 53.05,
+        "spawn_count": 17,
+        "min_x": 40.28,
+        "max_x": 42.89,
+        "min_y": 50.04,
+        "max_y": 54.38
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        11182
+      ],
+      "relations": [
+        {
+          "quest_id": 11182,
+          "quest_name": "问题的根源",
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23871,
+          "entity_name": "掠龙训练者",
+          "representative": {
+            "x": 41.06,
+            "y": 53.05,
+            "spawn_count": 17,
+            "min_x": 40.28,
+            "max_x": 42.89,
+            "min_y": 50.04,
+            "max_y": 54.38
+          },
+          "spawn_count": 17
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23940",
+      "entity_type": "npc",
+      "entity_id": 23940,
+      "name": "斯克尔德·达拉克森",
+      "representative": {
+        "x": 41.46,
+        "y": 52.34,
+        "spawn_count": 1,
+        "min_x": 41.46,
+        "max_x": 41.46,
+        "min_y": 52.34,
+        "max_y": 52.34
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11182
+      ],
+      "relations": [
+        {
+          "quest_id": 11182,
+          "quest_name": "问题的根源",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23940,
+          "entity_name": "斯克尔德·达拉克森",
+          "representative": {
+            "x": 41.46,
+            "y": 52.34,
+            "spawn_count": 1,
+            "min_x": 41.46,
+            "max_x": 41.46,
+            "min_y": 52.34,
+            "max_y": 52.34
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23662",
+      "entity_type": "npc",
+      "entity_id": 23662,
+      "name": "斯克恩伐木工",
+      "representative": {
+        "x": 44.58,
+        "y": 27.31,
+        "spawn_count": 12,
+        "min_x": 43.12,
+        "max_x": 47.32,
+        "min_y": 26.56,
+        "max_y": 37.53
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23662,
+          "entity_name": "斯克恩伐木工",
+          "representative": {
+            "x": 44.58,
+            "y": 27.31,
+            "spawn_count": 12,
+            "min_x": 43.12,
+            "max_x": 47.32,
+            "min_y": 26.56,
+            "max_y": 37.53
+          },
+          "spawn_count": 12
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23657",
+      "entity_type": "npc",
+      "entity_id": 23657,
+      "name": "斯克恩吟游诗人",
+      "representative": {
+        "x": 63.57,
+        "y": 40.84,
+        "spawn_count": 8,
+        "min_x": 62.65,
+        "max_x": 66.94,
+        "min_y": 37.91,
+        "max_y": 45.64
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        11283
+      ],
+      "relations": [
+        {
+          "quest_id": 11283,
+          "quest_name": "血战拜尔海姆",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23657,
+          "entity_name": "斯克恩吟游诗人",
+          "representative": {
+            "x": 63.57,
+            "y": 40.84,
+            "spawn_count": 8,
+            "min_x": 62.65,
+            "max_x": 66.94,
+            "min_y": 37.91,
+            "max_y": 45.64
+          },
+          "spawn_count": 8
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23664",
+      "entity_type": "npc",
+      "entity_id": 23664,
+      "name": "斯克恩战士",
+      "representative": {
+        "x": 45.11,
+        "y": 31.03,
+        "spawn_count": 60,
+        "min_x": 43.29,
+        "max_x": 47.08,
+        "min_y": 27.22,
+        "max_y": 37.4
+      },
+      "spawn_count": 60,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23664,
+          "entity_name": "斯克恩战士",
+          "representative": {
+            "x": 45.11,
+            "y": 31.03,
+            "spawn_count": 60,
+            "min_x": 43.29,
+            "max_x": 47.08,
+            "min_y": 27.22,
+            "max_y": 37.4
+          },
+          "spawn_count": 60
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23663",
+      "entity_type": "npc",
+      "entity_id": 23663,
+      "name": "斯克恩持盾女战士",
+      "representative": {
+        "x": 45.0,
+        "y": 30.66,
+        "spawn_count": 51,
+        "min_x": 43.76,
+        "max_x": 47.08,
+        "min_y": 27.22,
+        "max_y": 36.99
+      },
+      "spawn_count": 51,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23663,
+          "entity_name": "斯克恩持盾女战士",
+          "representative": {
+            "x": 45.0,
+            "y": 30.66,
+            "spawn_count": 51,
+            "min_x": 43.76,
+            "max_x": 47.08,
+            "min_y": 27.22,
+            "max_y": 36.99
+          },
+          "spawn_count": 51
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23665",
+      "entity_type": "npc",
+      "entity_id": 23665,
+      "name": "斯克恩掠夺者",
+      "representative": {
+        "x": 45.02,
+        "y": 30.65,
+        "spawn_count": 48,
+        "min_x": 44.06,
+        "max_x": 47.08,
+        "min_y": 27.22,
+        "max_y": 38.52
+      },
+      "spawn_count": 48,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23665,
+          "entity_name": "斯克恩掠夺者",
+          "representative": {
+            "x": 45.02,
+            "y": 30.65,
+            "spawn_count": 48,
+            "min_x": 44.06,
+            "max_x": 47.08,
+            "min_y": 27.22,
+            "max_y": 38.52
+          },
+          "spawn_count": 48
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23666",
+      "entity_type": "npc",
+      "entity_id": 23666,
+      "name": "斯克恩狂暴者",
+      "representative": {
+        "x": 45.03,
+        "y": 30.64,
+        "spawn_count": 47,
+        "min_x": 44.07,
+        "max_x": 64.86,
+        "min_y": 27.22,
+        "max_y": 46.52
+      },
+      "spawn_count": 47,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23666,
+          "entity_name": "斯克恩狂暴者",
+          "representative": {
+            "x": 45.03,
+            "y": 30.64,
+            "spawn_count": 47,
+            "min_x": 44.07,
+            "max_x": 64.86,
+            "min_y": 27.22,
+            "max_y": 46.52
+          },
+          "spawn_count": 47
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23655",
+      "entity_type": "npc",
+      "entity_id": 23655,
+      "name": "斯克恩碾骨者",
+      "representative": {
+        "x": 64.47,
+        "y": 39.58,
+        "spawn_count": 10,
+        "min_x": 62.91,
+        "max_x": 66.26,
+        "min_y": 38.41,
+        "max_y": 42.44
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        11283
+      ],
+      "relations": [
+        {
+          "quest_id": 11283,
+          "quest_name": "血战拜尔海姆",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23655,
+          "entity_name": "斯克恩碾骨者",
+          "representative": {
+            "x": 64.47,
+            "y": 39.58,
+            "spawn_count": 10,
+            "min_x": 62.91,
+            "max_x": 66.26,
+            "min_y": 38.41,
+            "max_y": 42.44
+          },
+          "spawn_count": 10
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23667",
+      "entity_type": "npc",
+      "entity_id": 23667,
+      "name": "斯克恩符文先知",
+      "representative": {
+        "x": 46.46,
+        "y": 32.93,
+        "spawn_count": 15,
+        "min_x": 43.0,
+        "max_x": 64.67,
+        "min_y": 29.45,
+        "max_y": 47.24
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23667,
+          "entity_name": "斯克恩符文先知",
+          "representative": {
+            "x": 46.46,
+            "y": 32.93,
+            "spawn_count": 15,
+            "min_x": 43.0,
+            "max_x": 64.67,
+            "min_y": 29.45,
+            "max_y": 47.24
+          },
+          "spawn_count": 15
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23668",
+      "entity_type": "npc",
+      "entity_id": 23668,
+      "name": "斯克恩符文法师",
+      "representative": {
+        "x": 46.47,
+        "y": 33.24,
+        "spawn_count": 11,
+        "min_x": 43.17,
+        "max_x": 47.11,
+        "min_y": 29.54,
+        "max_y": 36.56
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23668,
+          "entity_name": "斯克恩符文法师",
+          "representative": {
+            "x": 46.47,
+            "y": 33.24,
+            "spawn_count": 11,
+            "min_x": 43.17,
+            "max_x": 47.11,
+            "min_y": 29.54,
+            "max_y": 36.56
+          },
+          "spawn_count": 11
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23661",
+      "entity_type": "npc",
+      "entity_id": 23661,
+      "name": "斯克恩部族成员",
+      "representative": {
+        "x": 45.51,
+        "y": 30.7,
+        "spawn_count": 20,
+        "min_x": 43.64,
+        "max_x": 47.25,
+        "min_y": 28.05,
+        "max_y": 35.13
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 20,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23661,
+          "entity_name": "斯克恩部族成员",
+          "representative": {
+            "x": 45.51,
+            "y": 30.7,
+            "spawn_count": 20,
+            "min_x": 43.64,
+            "max_x": 47.25,
+            "min_y": 28.05,
+            "max_y": 35.13
+          },
+          "spawn_count": 20
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23653",
+      "entity_type": "npc",
+      "entity_id": 23653,
+      "name": "斯克恩长矛手",
+      "representative": {
+        "x": 64.9,
+        "y": 41.22,
+        "spawn_count": 19,
+        "min_x": 62.22,
+        "max_x": 67.35,
+        "min_y": 37.44,
+        "max_y": 44.83
+      },
+      "spawn_count": 19,
+      "quest_ids": [
+        11283
+      ],
+      "relations": [
+        {
+          "quest_id": 11283,
+          "quest_name": "血战拜尔海姆",
+          "objective_type": "event",
+          "required_count": 16,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23653,
+          "entity_name": "斯克恩长矛手",
+          "representative": {
+            "x": 64.9,
+            "y": 41.22,
+            "spawn_count": 19,
+            "min_x": 62.22,
+            "max_x": 67.35,
+            "min_y": 37.44,
+            "max_y": 44.83
+          },
+          "spawn_count": 19
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23670",
+      "entity_type": "npc",
+      "entity_id": 23670,
+      "name": "斯克恩长者",
+      "representative": {
+        "x": 45.05,
+        "y": 33.66,
+        "spawn_count": 6,
+        "min_x": 44.31,
+        "max_x": 64.75,
+        "min_y": 28.64,
+        "max_y": 46.88
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23670,
+          "entity_name": "斯克恩长者",
+          "representative": {
+            "x": 45.05,
+            "y": 33.66,
+            "spawn_count": 6,
+            "min_x": 44.31,
+            "max_x": 64.75,
+            "min_y": 28.64,
+            "max_y": 46.88
+          },
+          "spawn_count": 6
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23669",
+      "entity_type": "npc",
+      "entity_id": 23669,
+      "name": "斯克恩预言者",
+      "representative": {
+        "x": 43.75,
+        "y": 36.1,
+        "spawn_count": 7,
+        "min_x": 43.3,
+        "max_x": 47.21,
+        "min_y": 30.29,
+        "max_y": 37.17
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        11257
+      ],
+      "relations": [
+        {
+          "quest_id": 11257,
+          "quest_name": "可怕而必要的手段",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23669,
+          "entity_name": "斯克恩预言者",
+          "representative": {
+            "x": 43.75,
+            "y": 36.1,
+            "spawn_count": 7,
+            "min_x": 43.3,
+            "max_x": 47.21,
+            "min_y": 30.29,
+            "max_y": 37.17
+          },
+          "spawn_count": 7
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24899",
+      "entity_type": "npc",
+      "entity_id": 24899,
+      "name": "斯库德",
+      "representative": {
+        "x": 38.85,
+        "y": 86.39,
+        "spawn_count": 1,
+        "min_x": 38.85,
+        "max_x": 38.85,
+        "min_y": 86.39,
+        "max_y": 86.39
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11510
+      ],
+      "relations": [
+        {
+          "quest_id": 11510,
+          "quest_name": "斯库德",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34235,
+          "entity_type": "npc",
+          "entity_id": 24899,
+          "entity_name": "斯库德",
+          "representative": {
+            "x": 38.85,
+            "y": 86.39,
+            "spawn_count": 1,
+            "min_x": 38.85,
+            "max_x": 38.85,
+            "min_y": 86.39,
+            "max_y": 86.39
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24019",
+      "entity_type": "npc",
+      "entity_id": 24019,
+      "name": "格拉希恩",
+      "representative": {
+        "x": 35.68,
+        "y": 7.81,
+        "spawn_count": 1,
+        "min_x": 35.68,
+        "max_x": 35.68,
+        "min_y": 7.81,
+        "max_y": 7.81
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11267
+      ],
+      "relations": [
+        {
+          "quest_id": 11267,
+          "quest_name": "冰霜巨龙和它的主人",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24019,
+          "entity_name": "格拉希恩",
+          "representative": {
+            "x": 35.68,
+            "y": 7.81,
+            "spawn_count": 1,
+            "min_x": 35.68,
+            "max_x": 35.68,
+            "min_y": 7.81,
+            "max_y": 7.81
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23962",
+      "entity_type": "npc",
+      "entity_id": 23962,
+      "name": "欧斯勒上尉",
+      "representative": {
+        "x": 81.5,
+        "y": 43.38,
+        "spawn_count": 1,
+        "min_x": 81.5,
+        "max_x": 81.5,
+        "min_y": 43.38,
+        "max_y": 43.38
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11233
+      ],
+      "relations": [
+        {
+          "quest_id": 11233,
+          "quest_name": "致命的打击",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23962,
+          "entity_name": "欧斯勒上尉",
+          "representative": {
+            "x": 81.5,
+            "y": 43.38,
+            "spawn_count": 1,
+            "min_x": 81.5,
+            "max_x": 81.5,
+            "min_y": 43.38,
+            "max_y": 43.38
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23998",
+      "entity_type": "npc",
+      "entity_id": 23998,
+      "name": "死亡猎手拉扎尔",
+      "representative": {
+        "x": 77.59,
+        "y": 34.7,
+        "spawn_count": 1,
+        "min_x": 77.59,
+        "max_x": 77.59,
+        "min_y": 34.7,
+        "max_y": 34.7
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11221
+      ],
+      "relations": [
+        {
+          "quest_id": 11221,
+          "quest_name": "战况报告",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23998,
+          "entity_name": "死亡猎手拉扎尔",
+          "representative": {
+            "x": 77.59,
+            "y": 34.7,
+            "spawn_count": 1,
+            "min_x": 77.59,
+            "max_x": 77.59,
+            "min_y": 34.7,
+            "max_y": 34.7
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24516",
+      "entity_type": "npc",
+      "entity_id": 24516,
+      "name": "比奥莫弗",
+      "representative": {
+        "x": 27.63,
+        "y": 21.14,
+        "spawn_count": 1,
+        "min_x": 27.63,
+        "max_x": 27.63,
+        "min_y": 21.14,
+        "max_y": 21.14
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11415
+      ],
+      "relations": [
+        {
+          "quest_id": 11415,
+          "quest_name": "兄弟的背叛",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24516,
+          "entity_name": "比奥莫弗",
+          "representative": {
+            "x": 27.63,
+            "y": 21.14,
+            "spawn_count": 1,
+            "min_x": 27.63,
+            "max_x": 27.63,
+            "min_y": 21.14,
+            "max_y": 21.14
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23963",
+      "entity_type": "npc",
+      "entity_id": 23963,
+      "name": "洛瑞克中士",
+      "representative": {
+        "x": 82.22,
+        "y": 40.72,
+        "spawn_count": 1,
+        "min_x": 82.22,
+        "max_x": 82.22,
+        "min_y": 40.72,
+        "max_y": 40.72
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11233
+      ],
+      "relations": [
+        {
+          "quest_id": 11233,
+          "quest_name": "致命的打击",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23963,
+          "entity_name": "洛瑞克中士",
+          "representative": {
+            "x": 82.22,
+            "y": 40.72,
+            "spawn_count": 1,
+            "min_x": 82.22,
+            "max_x": 82.22,
+            "min_y": 40.72,
+            "max_y": 40.72
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24633",
+      "entity_type": "npc",
+      "entity_id": 24633,
+      "name": "狂暴棕熊",
+      "representative": {
+        "x": 33.76,
+        "y": 77.79,
+        "spawn_count": 17,
+        "min_x": 31.4,
+        "max_x": 35.81,
+        "min_y": 75.43,
+        "max_y": 81.97
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        11455
+      ],
+      "relations": [
+        {
+          "quest_id": 11455,
+          "quest_name": "金币的芳香",
+          "objective_type": "item",
+          "required_count": 4,
+          "item_id": 34084,
+          "entity_type": "npc",
+          "entity_id": 24633,
+          "entity_name": "狂暴棕熊",
+          "representative": {
+            "x": 33.76,
+            "y": 77.79,
+            "spawn_count": 17,
+            "min_x": 31.4,
+            "max_x": 35.81,
+            "min_y": 75.43,
+            "max_y": 81.97
+          },
+          "spawn_count": 17
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24517",
+      "entity_type": "npc",
+      "entity_id": 24517,
+      "name": "瓦尔戈",
+      "representative": {
+        "x": 34.04,
+        "y": 28.94,
+        "spawn_count": 1,
+        "min_x": 34.04,
+        "max_x": 34.04,
+        "min_y": 28.94,
+        "max_y": 28.94
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11415
+      ],
+      "relations": [
+        {
+          "quest_id": 11415,
+          "quest_name": "兄弟的背叛",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24517,
+          "entity_name": "瓦尔戈",
+          "representative": {
+            "x": 34.04,
+            "y": 28.94,
+            "spawn_count": 1,
+            "min_x": 34.04,
+            "max_x": 34.04,
+            "min_y": 28.94,
+            "max_y": 28.94
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24676",
+      "entity_type": "npc",
+      "entity_id": 24676,
+      "name": "疯狂的北海奴隶贩子",
+      "representative": {
+        "x": 35.22,
+        "y": 64.3,
+        "spawn_count": 33,
+        "min_x": 29.99,
+        "max_x": 35.47,
+        "min_y": 62.2,
+        "max_y": 66.85
+      },
+      "spawn_count": 33,
+      "quest_ids": [
+        11458
+      ],
+      "relations": [
+        {
+          "quest_id": 11458,
+          "quest_name": "伊斯卡尔的复仇",
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24676,
+          "entity_name": "疯狂的北海奴隶贩子",
+          "representative": {
+            "x": 35.22,
+            "y": 64.3,
+            "spawn_count": 33,
+            "min_x": 29.99,
+            "max_x": 35.47,
+            "min_y": 62.2,
+            "max_y": 66.85
+          },
+          "spawn_count": 33
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24334",
+      "entity_type": "npc",
+      "entity_id": 24334,
+      "name": "缚石者穆迪斯",
+      "representative": {
+        "x": 71.85,
+        "y": 24.56,
+        "spawn_count": 1,
+        "min_x": 71.85,
+        "max_x": 71.85,
+        "min_y": 24.56,
+        "max_y": 24.56
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11352
+      ],
+      "relations": [
+        {
+          "quest_id": 11352,
+          "quest_name": "命令符文",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24334,
+          "entity_name": "缚石者穆迪斯",
+          "representative": {
+            "x": 71.85,
+            "y": 24.56,
+            "spawn_count": 1,
+            "min_x": 71.85,
+            "max_x": 71.85,
+            "min_y": 24.56,
+            "max_y": 24.56
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24874",
+      "entity_type": "npc",
+      "entity_id": 24874,
+      "name": "耻辱者芬基尔",
+      "representative": {
+        "x": 57.65,
+        "y": 77.75,
+        "spawn_count": 1,
+        "min_x": 57.65,
+        "max_x": 57.65,
+        "min_y": 77.75,
+        "max_y": 77.75
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11568
+      ],
+      "relations": [
+        {
+          "quest_id": 11568,
+          "quest_name": "安息",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24874,
+          "entity_name": "耻辱者芬基尔",
+          "representative": {
+            "x": 57.65,
+            "y": 77.75,
+            "spawn_count": 1,
+            "min_x": 57.65,
+            "max_x": 57.65,
+            "min_y": 77.75,
+            "max_y": 77.75
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24009",
+      "entity_type": "npc",
+      "entity_id": 24009,
+      "name": "联盟尸体",
+      "representative": {
+        "x": 75.07,
+        "y": 33.43,
+        "spawn_count": 11,
+        "min_x": 74.41,
+        "max_x": 76.19,
+        "min_y": 30.05,
+        "max_y": 35.2
+      },
+      "spawn_count": 11,
+      "quest_ids": [
+        11270
+      ],
+      "relations": [
+        {
+          "quest_id": 11270,
+          "quest_name": "地狱般的战争",
+          "objective_type": "event",
+          "required_count": 10,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24009,
+          "entity_name": "联盟尸体",
+          "representative": {
+            "x": 75.07,
+            "y": 33.43,
+            "spawn_count": 11,
+            "min_x": 74.41,
+            "max_x": 76.19,
+            "min_y": 30.05,
+            "max_y": 35.2
+          },
+          "spawn_count": 11
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23992",
+      "entity_type": "npc",
+      "entity_id": 23992,
+      "name": "腐烂的畸形妖",
+      "representative": {
+        "x": 37.59,
+        "y": 9.35,
+        "spawn_count": 6,
+        "min_x": 33.54,
+        "max_x": 39.97,
+        "min_y": 7.01,
+        "max_y": 16.48
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        11268
+      ],
+      "relations": [
+        {
+          "quest_id": 11268,
+          "quest_name": "行尸走肉",
+          "objective_type": "kill",
+          "required_count": 2,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23992,
+          "entity_name": "腐烂的畸形妖",
+          "representative": {
+            "x": 37.59,
+            "y": 9.35,
+            "spawn_count": 6,
+            "min_x": 33.54,
+            "max_x": 39.97,
+            "min_y": 7.01,
+            "max_y": 16.48
+          },
+          "spawn_count": 6
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23645",
+      "entity_type": "npc",
+      "entity_id": 23645,
+      "name": "腐蚀行尸鱼人",
+      "representative": {
+        "x": 22.0,
+        "y": 25.85,
+        "spawn_count": 8,
+        "min_x": 20.62,
+        "max_x": 22.57,
+        "min_y": 18.82,
+        "max_y": 31.82
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        11397
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23645,
+          "entity_name": "腐蚀行尸鱼人",
+          "representative": {
+            "x": 22.0,
+            "y": 25.85,
+            "spawn_count": 8,
+            "min_x": 20.62,
+            "max_x": 22.57,
+            "min_y": 18.82,
+            "max_y": 31.82
+          },
+          "spawn_count": 8
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24010",
+      "entity_type": "npc",
+      "entity_id": 24010,
+      "name": "被遗忘者的尸体",
+      "representative": {
+        "x": 74.57,
+        "y": 32.52,
+        "spawn_count": 8,
+        "min_x": 73.75,
+        "max_x": 75.63,
+        "min_y": 31.6,
+        "max_y": 35.1
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        11270
+      ],
+      "relations": [
+        {
+          "quest_id": 11270,
+          "quest_name": "地狱般的战争",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24010,
+          "entity_name": "被遗忘者的尸体",
+          "representative": {
+            "x": 74.57,
+            "y": 32.52,
+            "spawn_count": 8,
+            "min_x": 73.75,
+            "max_x": 75.63,
+            "min_y": 31.6,
+            "max_y": 35.1
+          },
+          "spawn_count": 8
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24277",
+      "entity_type": "npc",
+      "entity_id": 24277,
+      "name": "迦瓦尔",
+      "representative": {
+        "x": 28.29,
+        "y": 9.19,
+        "spawn_count": 1,
+        "min_x": 28.29,
+        "max_x": 28.29,
+        "min_y": 9.19,
+        "max_y": 9.19
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11324
+      ],
+      "relations": [
+        {
+          "quest_id": 11324,
+          "quest_name": "头狼",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24277,
+          "entity_name": "迦瓦尔",
+          "representative": {
+            "x": 28.29,
+            "y": 9.19,
+            "spawn_count": 1,
+            "min_x": 28.29,
+            "max_x": 28.29,
+            "min_y": 9.19,
+            "max_y": 9.19
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24018",
+      "entity_type": "npc",
+      "entity_id": 24018,
+      "name": "通灵主宰麦森",
+      "representative": {
+        "x": 38.79,
+        "y": 13.08,
+        "spawn_count": 1,
+        "min_x": 38.79,
+        "max_x": 38.79,
+        "min_y": 13.08,
+        "max_y": 13.08
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11264
+      ],
+      "relations": [
+        {
+          "quest_id": 11264,
+          "quest_name": "通灵主宰麦森",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24018,
+          "entity_name": "通灵主宰麦森",
+          "representative": {
+            "x": 38.79,
+            "y": 13.08,
+            "spawn_count": 1,
+            "min_x": 38.79,
+            "max_x": 38.79,
+            "min_y": 13.08,
+            "max_y": 13.08
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24540",
+      "entity_type": "npc",
+      "entity_id": 24540,
+      "name": "通灵技师",
+      "representative": {
+        "x": 22.2,
+        "y": 23.59,
+        "spawn_count": 12,
+        "min_x": 21.41,
+        "max_x": 23.14,
+        "min_y": 17.35,
+        "max_y": 31.12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        11397
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24540,
+          "entity_name": "通灵技师",
+          "representative": {
+            "x": 22.2,
+            "y": 23.59,
+            "spawn_count": 12,
+            "min_x": 21.41,
+            "max_x": 23.14,
+            "min_y": 17.35,
+            "max_y": 31.12
+          },
+          "spawn_count": 12
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24398",
+      "entity_type": "npc",
+      "entity_id": 24398,
+      "name": "钢铁之门挖掘者",
+      "representative": {
+        "x": 31.32,
+        "y": 26.97,
+        "spawn_count": 43,
+        "min_x": 29.84,
+        "max_x": 32.38,
+        "min_y": 25.1,
+        "max_y": 28.19
+      },
+      "spawn_count": 43,
+      "quest_ids": [
+        11286
+      ],
+      "relations": [
+        {
+          "quest_id": 11286,
+          "quest_name": "钢铁之门的古器",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33109,
+          "entity_type": "npc",
+          "entity_id": 24398,
+          "entity_name": "钢铁之门挖掘者",
+          "representative": {
+            "x": 31.32,
+            "y": 26.97,
+            "spawn_count": 43,
+            "min_x": 29.84,
+            "max_x": 32.38,
+            "min_y": 25.1,
+            "max_y": 28.19
+          },
+          "spawn_count": 43
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24400",
+      "entity_type": "npc",
+      "entity_id": 24400,
+      "name": "钢铁之门考古学家",
+      "representative": {
+        "x": 30.92,
+        "y": 26.97,
+        "spawn_count": 7,
+        "min_x": 30.04,
+        "max_x": 31.43,
+        "min_y": 25.22,
+        "max_y": 28.11
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        11286
+      ],
+      "relations": [
+        {
+          "quest_id": 11286,
+          "quest_name": "钢铁之门的古器",
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 33109,
+          "entity_type": "npc",
+          "entity_id": 24400,
+          "entity_name": "钢铁之门考古学家",
+          "representative": {
+            "x": 30.92,
+            "y": 26.97,
+            "spawn_count": 7,
+            "min_x": 30.04,
+            "max_x": 31.43,
+            "min_y": 25.22,
+            "max_y": 28.11
+          },
+          "spawn_count": 7
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23691",
+      "entity_type": "npc",
+      "entity_id": 23691,
+      "name": "铲齿雄鹿",
+      "representative": {
+        "x": 53.85,
+        "y": 57.53,
+        "spawn_count": 205,
+        "min_x": 33.85,
+        "max_x": 80.43,
+        "min_y": 39.57,
+        "max_y": 77.57
+      },
+      "spawn_count": 205,
+      "quest_ids": [
+        11309
+      ],
+      "relations": [
+        {
+          "quest_id": 11309,
+          "quest_name": "重要零件",
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 33611,
+          "entity_type": "npc",
+          "entity_id": 23691,
+          "entity_name": "铲齿雄鹿",
+          "representative": {
+            "x": 53.85,
+            "y": 57.53,
+            "spawn_count": 205,
+            "min_x": 33.85,
+            "max_x": 80.43,
+            "min_y": 39.57,
+            "max_y": 77.57
+          },
+          "spawn_count": 205
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23690",
+      "entity_type": "npc",
+      "entity_id": 23690,
+      "name": "铲齿鹿",
+      "representative": {
+        "x": 55.45,
+        "y": 58.45,
+        "spawn_count": 292,
+        "min_x": 34.03,
+        "max_x": 78.83,
+        "min_y": 39.58,
+        "max_y": 77.16
+      },
+      "spawn_count": 292,
+      "quest_ids": [
+        11309
+      ],
+      "relations": [
+        {
+          "quest_id": 11309,
+          "quest_name": "重要零件",
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 33611,
+          "entity_type": "npc",
+          "entity_id": 23690,
+          "entity_name": "铲齿鹿",
+          "representative": {
+            "x": 55.45,
+            "y": 58.45,
+            "spawn_count": 292,
+            "min_x": 34.03,
+            "max_x": 78.83,
+            "min_y": 39.58,
+            "max_y": 77.16
+          },
+          "spawn_count": 292
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24791",
+      "entity_type": "npc",
+      "entity_id": 24791,
+      "name": "铲齿鹿幼崽",
+      "representative": {
+        "x": 53.71,
+        "y": 59.01,
+        "spawn_count": 293,
+        "min_x": 33.96,
+        "max_x": 78.82,
+        "min_y": 39.63,
+        "max_y": 76.48
+      },
+      "spawn_count": 293,
+      "quest_ids": [
+        11309
+      ],
+      "relations": [
+        {
+          "quest_id": 11309,
+          "quest_name": "重要零件",
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 33611,
+          "entity_type": "npc",
+          "entity_id": 24791,
+          "entity_name": "铲齿鹿幼崽",
+          "representative": {
+            "x": 53.71,
+            "y": 59.01,
+            "spawn_count": 293,
+            "min_x": 33.96,
+            "max_x": 78.82,
+            "min_y": 39.63,
+            "max_y": 76.48
+          },
+          "spawn_count": 293
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24681",
+      "entity_type": "npc",
+      "entity_id": 24681,
+      "name": "长矛岛铲齿鹿",
+      "representative": {
+        "x": 30.08,
+        "y": 61.8,
+        "spawn_count": 25,
+        "min_x": 26.37,
+        "max_x": 32.71,
+        "min_y": 56.78,
+        "max_y": 66.6
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        11456
+      ],
+      "relations": [
+        {
+          "quest_id": 11456,
+          "quest_name": "难民的食物",
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 36776,
+          "entity_type": "npc",
+          "entity_id": 24681,
+          "entity_name": "长矛岛铲齿鹿",
+          "representative": {
+            "x": 30.08,
+            "y": 61.8,
+            "spawn_count": 25,
+            "min_x": 26.37,
+            "max_x": 32.71,
+            "min_y": 56.78,
+            "max_y": 66.6
+          },
+          "spawn_count": 25
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24547",
+      "entity_type": "npc",
+      "entity_id": 24547,
+      "name": "霍泽",
+      "representative": {
+        "x": 33.01,
+        "y": 78.55,
+        "spawn_count": 1,
+        "min_x": 33.01,
+        "max_x": 33.01,
+        "min_y": 78.55,
+        "max_y": 78.55
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11471
+      ],
+      "relations": [
+        {
+          "quest_id": 11471,
+          "quest_name": "取而代之",
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 34128,
+          "entity_type": "npc",
+          "entity_id": 24547,
+          "entity_name": "霍泽",
+          "representative": {
+            "x": 33.01,
+            "y": 78.55,
+            "spawn_count": 1,
+            "min_x": 33.01,
+            "max_x": 33.01,
+            "min_y": 78.55,
+            "max_y": 78.55
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24673",
+      "entity_type": "npc",
+      "entity_id": 24673,
+      "name": "霜翼奇美拉",
+      "representative": {
+        "x": 27.7,
+        "y": 60.48,
+        "spawn_count": 26,
+        "min_x": 25.18,
+        "max_x": 29.44,
+        "min_y": 51.6,
+        "max_y": 70.44
+      },
+      "spawn_count": 26,
+      "quest_ids": [
+        11457
+      ],
+      "relations": [
+        {
+          "quest_id": 11457,
+          "quest_name": "卡玛古的武装",
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 34101,
+          "entity_type": "npc",
+          "entity_id": 24673,
+          "entity_name": "霜翼奇美拉",
+          "representative": {
+            "x": 27.7,
+            "y": 60.48,
+            "spawn_count": 26,
+            "min_x": 25.18,
+            "max_x": 29.44,
+            "min_y": 51.6,
+            "max_y": 70.44
+          },
+          "spawn_count": 26
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23740",
+      "entity_type": "npc",
+      "entity_id": 23740,
+      "name": "霜角山羊",
+      "representative": {
+        "x": 55.12,
+        "y": 9.71,
+        "spawn_count": 170,
+        "min_x": 41.88,
+        "max_x": 74.85,
+        "min_y": 1.25,
+        "max_y": 18.04
+      },
+      "spawn_count": 211,
+      "quest_ids": [
+        11275
+      ],
+      "relations": [
+        {
+          "quest_id": 11275,
+          "quest_name": "制作号角",
+          "objective_type": "item",
+          "required_count": 6,
+          "item_id": 33351,
+          "entity_type": "npc",
+          "entity_id": 23740,
+          "entity_name": "霜角山羊",
+          "representative": {
+            "x": 55.12,
+            "y": 9.71,
+            "spawn_count": 170,
+            "min_x": 41.88,
+            "max_x": 74.85,
+            "min_y": 1.25,
+            "max_y": 18.04
+          },
+          "spawn_count": 211
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23644",
+      "entity_type": "npc",
+      "entity_id": 23644,
+      "name": "食腐行尸鱼人",
+      "representative": {
+        "x": 21.77,
+        "y": 23.87,
+        "spawn_count": 10,
+        "min_x": 20.95,
+        "max_x": 22.81,
+        "min_y": 18.45,
+        "max_y": 32.07
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        11397
+      ],
+      "relations": [
+        {
+          "quest_id": 11397,
+          "quest_name": "比鱼人更恶臭……",
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23644,
+          "entity_name": "食腐行尸鱼人",
+          "representative": {
+            "x": 21.77,
+            "y": 23.87,
+            "spawn_count": 10,
+            "min_x": 20.95,
+            "max_x": 22.81,
+            "min_y": 18.45,
+            "max_y": 32.07
+          },
+          "spawn_count": 10
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24876",
+      "entity_type": "npc",
+      "entity_id": 24876,
+      "name": "鲁莽者洛丁",
+      "representative": {
+        "x": 59.28,
+        "y": 76.87,
+        "spawn_count": 1,
+        "min_x": 59.28,
+        "max_x": 59.28,
+        "min_y": 76.87,
+        "max_y": 76.87
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11568
+      ],
+      "relations": [
+        {
+          "quest_id": 11568,
+          "quest_name": "安息",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24876,
+          "entity_name": "鲁莽者洛丁",
+          "representative": {
+            "x": 59.28,
+            "y": 76.87,
+            "spawn_count": 1,
+            "min_x": 59.28,
+            "max_x": 59.28,
+            "min_y": 76.87,
+            "max_y": 76.87
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:24371",
+      "entity_type": "npc",
+      "entity_id": 24371,
+      "name": "麦加利斯",
+      "representative": {
+        "x": 66.54,
+        "y": 9.54,
+        "spawn_count": 1,
+        "min_x": 66.54,
+        "max_x": 66.54,
+        "min_y": 9.54,
+        "max_y": 9.54
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11367
+      ],
+      "relations": [
+        {
+          "quest_id": 11367,
+          "quest_name": "击败麦加利斯",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 24371,
+          "entity_name": "麦加利斯",
+          "representative": {
+            "x": 66.54,
+            "y": 9.54,
+            "spawn_count": 1,
+            "min_x": 66.54,
+            "max_x": 66.54,
+            "min_y": 9.54,
+            "max_y": 9.54
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:23778",
+      "entity_type": "npc",
+      "entity_id": 23778,
+      "name": "黑暗游侠莉安娜",
+      "representative": {
+        "x": 78.68,
+        "y": 37.13,
+        "spawn_count": 1,
+        "min_x": 78.68,
+        "max_x": 78.68,
+        "min_y": 37.13,
+        "max_y": 37.13
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        11221
+      ],
+      "relations": [
+        {
+          "quest_id": 11221,
+          "quest_name": "战况报告",
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 23778,
+          "entity_name": "黑暗游侠莉安娜",
+          "representative": {
+            "x": 78.68,
+            "y": 37.13,
+            "spawn_count": 1,
+            "min_x": 78.68,
+            "max_x": 78.68,
+            "min_y": 37.13,
+            "max_y": 37.13
+          },
+          "spawn_count": 1
+        }
+      ],
+      "shared_by_multiple_tasks": false
+    }
+  ]
+}

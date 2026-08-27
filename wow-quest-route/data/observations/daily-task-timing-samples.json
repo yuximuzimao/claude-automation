@@ -1,0 +1,485 @@
+{
+  "schema_version": 2,
+  "purpose": "保存首组诺森德实跑中的日常任务接取→交付原始墙钟样本，供全部地图首跑完成后单独筛选每日值得重复做的日常。本文件不参与一次性清图Route Atlas排序。",
+  "source": {
+    "journey": "data/journey/current-paladin.json",
+    "source_sha256": "b1e0120900820f5a90814630d7af3cca6f2b0c35c0ee64397949f86cf30e3ec3",
+    "journey_latest_timestamp": 1787767864,
+    "timezone": "+08:00",
+    "generated_at": "2026-08-28T03:39:17+08:00"
+  },
+  "timing_policy": {
+    "metric": "journey_accept_to_complete_wall_interval_minutes",
+    "caveat": "原始区间可能混入其它任务、交通、等待、离线或人为停顿；现在只保存事实样本，不把它当净任务服务时间。",
+    "selection_policy": "后续筛日常优先比较同日短区间、重复样本和单独报时；跨日长区间只保留事实，不参与初步速度排名。",
+    "route_policy": "一次性清图Route Atlas中每个日常最多保留首轮；Journey里的跨日/重复接取只增加这里的时间样本，不生成第二轮路线动作。"
+  },
+  "summary": {
+    "observed_daily_task_count": 21,
+    "completed_sample_count": 23,
+    "repeat_sample_task_ids": [
+      11940,
+      12372,
+      12995
+    ],
+    "accepted_only_task_ids": [
+      13674
+    ]
+  },
+  "zones": {
+    "北风苔原": [
+      {
+        "quest_id": 11940,
+        "name": "猎龙",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "borean"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-18T02:16:26+08:00",
+            "complete_at": "2026-08-18T02:24:00+08:00",
+            "elapsed_minutes": 7.57,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-18T17:51:07+08:00",
+            "complete_at": "2026-08-18T17:57:20+08:00",
+            "elapsed_minutes": 6.22,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 6.22,
+        "best_same_day_observed_interval_minutes": 6.22
+      }
+    ],
+    "龙骨荒野": [
+      {
+        "quest_id": 11960,
+        "name": "未来的种子",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "dragonblight"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-20T23:16:55+08:00",
+            "complete_at": "2026-08-20T23:56:45+08:00",
+            "elapsed_minutes": 39.83,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 39.83,
+        "best_same_day_observed_interval_minutes": 39.83
+      },
+      {
+        "quest_id": 12372,
+        "name": "保卫龙眠神殿",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "dragonblight"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-21T02:24:04+08:00",
+            "complete_at": "2026-08-21T02:36:30+08:00",
+            "elapsed_minutes": 12.43,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-21T21:21:22+08:00",
+            "complete_at": "2026-08-21T21:29:01+08:00",
+            "elapsed_minutes": 7.65,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 7.65,
+        "best_same_day_observed_interval_minutes": 7.65
+      }
+    ],
+    "风暴峭壁": [
+      {
+        "quest_id": 12833,
+        "name": "库存过剩",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T00:35:28+08:00",
+            "complete_at": "2026-08-23T01:08:28+08:00",
+            "elapsed_minutes": 33.0,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 33.0,
+        "best_same_day_observed_interval_minutes": 33.0
+      },
+      {
+        "quest_id": 12981,
+        "name": "热与冷",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "storm"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T07:30:39+08:00",
+            "complete_at": "2026-08-23T08:17:55+08:00",
+            "elapsed_minutes": 47.27,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 47.27,
+        "best_same_day_observed_interval_minutes": 47.27
+      },
+      {
+        "quest_id": 12994,
+        "name": "猎杀间谍",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "storm"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T06:47:36+08:00",
+            "complete_at": "2026-08-23T09:31:27+08:00",
+            "elapsed_minutes": 163.85,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 163.85,
+        "best_same_day_observed_interval_minutes": 163.85
+      },
+      {
+        "quest_id": 13003,
+        "name": "屠龙记",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T09:32:40+08:00",
+            "complete_at": "2026-08-23T10:42:33+08:00",
+            "elapsed_minutes": 69.88,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 69.88,
+        "best_same_day_observed_interval_minutes": 69.88
+      },
+      {
+        "quest_id": 13006,
+        "name": "粘滞清洁",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "storm"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T08:21:58+08:00",
+            "complete_at": "2026-08-23T09:33:25+08:00",
+            "elapsed_minutes": 71.45,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 71.45,
+        "best_same_day_observed_interval_minutes": 71.45
+      },
+      {
+        "quest_id": 13046,
+        "name": "喂饱安格里姆",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "storm"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T06:49:18+08:00",
+            "complete_at": "2026-08-23T09:33:53+08:00",
+            "elapsed_minutes": 164.58,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 164.58,
+        "best_same_day_observed_interval_minutes": 164.58
+      },
+      {
+        "quest_id": 13422,
+        "name": "维持纪律",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T09:06:56+08:00",
+            "complete_at": "2026-08-23T09:12:41+08:00",
+            "elapsed_minutes": 5.75,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 5.75,
+        "best_same_day_observed_interval_minutes": 5.75
+      },
+      {
+        "quest_id": 13423,
+        "name": "卫冕战",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T01:43:41+08:00",
+            "complete_at": "2026-08-23T01:48:32+08:00",
+            "elapsed_minutes": 4.85,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 4.85,
+        "best_same_day_observed_interval_minutes": 4.85
+      },
+      {
+        "quest_id": 13424,
+        "name": "返回利齿之坑",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-23T03:46:31+08:00",
+            "complete_at": "2026-08-23T09:06:55+08:00",
+            "elapsed_minutes": 320.4,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 320.4,
+        "best_same_day_observed_interval_minutes": 320.4
+      }
+    ],
+    "冰冠冰川": [
+      {
+        "quest_id": 12813,
+        "name": "转化尸体",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T21:01:37+08:00",
+            "complete_at": "2026-08-26T23:13:58+08:00",
+            "elapsed_minutes": 132.35,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 132.35,
+        "best_same_day_observed_interval_minutes": 132.35
+      },
+      {
+        "quest_id": 12815,
+        "name": "禁飞区",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T23:21:20+08:00",
+            "complete_at": "2026-08-27T00:10:53+08:00",
+            "elapsed_minutes": 49.55,
+            "cross_day": true
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 49.55,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12838,
+        "name": "收集情报",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T21:01:21+08:00",
+            "complete_at": "2026-08-26T23:14:28+08:00",
+            "elapsed_minutes": 133.12,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 133.12,
+        "best_same_day_observed_interval_minutes": 133.12
+      },
+      {
+        "quest_id": 12995,
+        "name": "彰显军威",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T01:36:03+08:00",
+            "complete_at": "2026-08-26T03:38:24+08:00",
+            "elapsed_minutes": 122.35,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-27T00:42:22+08:00",
+            "complete_at": "2026-08-27T00:51:00+08:00",
+            "elapsed_minutes": 8.63,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 8.63,
+        "best_same_day_observed_interval_minutes": 8.63
+      },
+      {
+        "quest_id": 13069,
+        "name": "把它们打下来！",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T04:33:19+08:00",
+            "complete_at": "2026-08-27T00:42:02+08:00",
+            "elapsed_minutes": 1208.72,
+            "cross_day": true
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 1208.72,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 13071,
+        "name": "维尔喜欢火焰！",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-26T03:38:05+08:00",
+            "complete_at": "2026-08-27T00:37:57+08:00",
+            "elapsed_minutes": 1259.87,
+            "cross_day": true
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 1259.87,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 13674,
+        "name": "A Worthy Weapon",
+        "definition_source": "icecrown_tournament_sidecar",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null,
+        "open_accept": {
+          "accept_at": "2026-08-25T23:48:21+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13677,
+        "name": "学习驾驭",
+        "definition_source": "icecrown_tournament_sidecar",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-25T23:48:21+08:00",
+            "complete_at": "2026-08-25T23:56:34+08:00",
+            "elapsed_minutes": 8.22,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 8.22,
+        "best_same_day_observed_interval_minutes": 8.22
+      }
+    ],
+    "灰熊丘陵": [
+      {
+        "quest_id": 12170,
+        "name": "黑水伐木场的战斗",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-22T19:52:15+08:00",
+            "complete_at": "2026-08-22T20:20:31+08:00",
+            "elapsed_minutes": 28.27,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 28.27,
+        "best_same_day_observed_interval_minutes": 28.27
+      }
+    ]
+  }
+}

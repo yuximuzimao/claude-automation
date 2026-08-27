@@ -24,7 +24,7 @@ def test_grizzly_full_clear_route_is_closed() -> None:
     assert coverage["covered_task_count"] == 83
     assert coverage["missing"] == []
     assert coverage["unexpected"] == []
-    assert len(route["points"]) == 70
+    assert len(route["points"]) == 79
     assert len(route["stepGroups"]) == 11
 
 
@@ -35,10 +35,10 @@ def test_grizzly_from_zero_transport_and_flight_state_are_valid() -> None:
     flight = json.loads(FLIGHT_AUDIT.read_text(encoding="utf-8"))["routes"]["grizzly"]
 
     assert route["points"][0][6] == "crossmap"
-    assert "沿公路进入征服堡" in route["points"][0][2]
-    assert "开启征服堡飞行点" in text
-    assert "开启欧尼瓦飞行点" in text
-    assert flight["flight_count"] == 5
+    assert route["points"][0][2] == "征服堡"
+    assert "开飞行点：征服堡" in text
+    assert "开飞行点：欧尼瓦营地" in text
+    assert flight["flight_count"] == 6
     assert flight["violation_count"] == 0
     assert flight["unknown_destination_count"] == 0
 

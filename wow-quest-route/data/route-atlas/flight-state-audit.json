@@ -108,7 +108,7 @@
       "unknown_destination_count": 0,
       "flights": [
         {
-          "point_index": 186,
+          "point_index": 187,
           "label": "龙眠顶层",
           "action": "乘系统鸟：库卡隆先锋营地 → 龙眠神殿\n乘龙：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》",
           "transport": "taxi",
@@ -122,7 +122,7 @@
           ]
         },
         {
-          "point_index": 190,
+          "point_index": 191,
           "label": "库卡隆先锋营地",
           "action": "乘系统鸟：龙眠神殿 → 库卡隆先锋营地\n小萨鲁法尔 → 交《返回安加萨》",
           "transport": "taxi",
@@ -235,7 +235,7 @@
         {
           "point_index": 66,
           "label": "达拉然短往返",
-          "action": "博学者泰罗努斯三世 → 传送到达拉然\n狡猾的维克斯 → 接《勇士的召唤！》\n若未开达拉然飞行点则开启\n系统飞行：达拉然 → 银色前沿",
+          "action": "博学者泰罗努斯三世 → 传送到达拉然\n狡猾的维克斯 → 接《勇士的召唤！》\n系统飞行：达拉然 → 银色前沿",
           "transport": "taxi",
           "destination_hub": "银色前沿",
           "opened_before_arrival": [
@@ -334,7 +334,7 @@
         {
           "point_index": 96,
           "label": "奥杜尔",
-          "action": "开飞行点：奥杜尔（五号分别）\n系统飞行：奥杜尔 → 丹尼芬雷",
+          "action": "开飞行点：奥杜尔\n系统飞行：奥杜尔 → 丹尼芬雷",
           "transport": "fly",
           "destination_hub": "丹尼芬雷",
           "opened_before_arrival": [
@@ -398,6 +398,147 @@
       "final_opened_flight_points": [
         "暗影拱顶",
         "死亡高地"
+      ]
+    },
+    "howling": {
+      "route_key": "howling",
+      "flight_count": 9,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 48,
+          "label": "系统飞行：新阿加曼德 → 卡玛古",
+          "action": "系统飞行：新阿加曼德 → 卡玛古",
+          "transport": "taxi",
+          "destination_hub": "卡玛古",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 53,
+          "label": "系统飞行：卡玛古 → 新阿加曼德",
+          "action": "系统飞行：卡玛古 → 新阿加曼德",
+          "transport": "taxi",
+          "destination_hub": "新阿加曼德",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 97,
+          "label": "冬蹄营地",
+          "action": "系统飞行：复仇港 → 冬蹄营地\n远行者贝姆比 → 交《符文之书》 → 接《掌控符文》\n先知厄丹 → 交《巨人的迁徙》 → 接《破碎石板》",
+          "transport": "taxi",
+          "destination_hub": "冬蹄营地",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 98,
+          "label": "复仇港",
+          "action": "系统飞行：冬蹄营地 → 复仇港",
+          "transport": "taxi",
+          "destination_hub": "复仇港",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 101,
+          "label": "冬蹄营地",
+          "action": "系统飞行：复仇港 → 冬蹄营地\n远行者贝姆比 → 交《掌控符文》 → 接《命令符文》\n先知厄丹 → 交《破碎石板》 → 接《击败麦加利斯》",
+          "transport": "taxi",
+          "destination_hub": "冬蹄营地",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 102,
+          "label": "复仇港",
+          "action": "系统飞行：冬蹄营地 → 复仇港",
+          "transport": "taxi",
+          "destination_hub": "复仇港",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 113,
+          "label": "药剂师营地",
+          "action": "系统飞行：冬蹄营地 → 药剂师营地\n游荡者犹纳特 → 交《留神不速之客》\n药剂师玛尔苏斯 → 接《酒里有什么？》",
+          "transport": "taxi",
+          "destination_hub": "药剂师营地",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 120,
+          "label": "冬蹄营地",
+          "action": "系统飞行：药剂师营地 → 冬蹄营地",
+          "transport": "taxi",
+          "destination_hub": "冬蹄营地",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        },
+        {
+          "point_index": 123,
+          "label": "药剂师营地",
+          "action": "系统飞行：冬蹄营地 → 药剂师营地",
+          "transport": "taxi",
+          "destination_hub": "药剂师营地",
+          "opened_before_arrival": [
+            "冬蹄营地",
+            "卡玛古",
+            "复仇港",
+            "新阿加曼德",
+            "药剂师营地"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "冬蹄营地",
+        "卡玛古",
+        "复仇港",
+        "新阿加曼德",
+        "药剂师营地"
       ]
     }
   }

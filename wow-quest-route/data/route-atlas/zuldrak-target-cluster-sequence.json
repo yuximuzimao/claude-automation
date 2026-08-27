@@ -1,7 +1,7 @@
 {
   "status": "initial_whole_map_target_cluster_sequence_before_task_insertion",
   "policy": "This ordered Target Cluster sequence is the initial whole-map backbone. Long edges are provisional and should be split naturally by newly available task clusters during insertion; do not preserve artificial macro-block boundaries.",
-  "entry_assumption": "Arrive directly from Dragonblight with 12789 and turn it at Light's Breach; Grizzly Hills is not on the core pre-80 leveling spine.",
+  "entry_assumption": "Arrive from Grizzly Hills with 12789 carried from Dragonblight and turn it at Light's Breach.",
   "instance_order": [
     "light_breach_rageclaw",
     "crusader_forward",
@@ -20,8 +20,8 @@
     "mamtoth_east_mid",
     "gundrak_dubrajin_north"
   ],
-  "cluster_count": 148,
-  "ordered_cluster_count": 148,
+  "cluster_count": 149,
+  "ordered_cluster_count": 149,
   "missing_cluster_count": 0,
   "missing_cluster_ids": [],
   "provisional_long_edge_count": 9,
@@ -48,42 +48,42 @@
       "edge_from_previous_map_percent": 19.95
     },
     {
-      "ordinal": 68,
+      "ordinal": 69,
       "cluster_id": "npc:28133",
       "name": "北伐军战士乔纳森",
       "spatial_instance": "draksotra",
       "edge_from_previous_map_percent": 22.64
     },
     {
-      "ordinal": 86,
+      "ordinal": 87,
       "cluster_id": "npc:28043",
       "name": "格隆迪尔上尉",
       "spatial_instance": "amphitheater",
       "edge_from_previous_map_percent": 19.44
     },
     {
-      "ordinal": 106,
+      "ordinal": 107,
       "cluster_id": "npc:28403",
       "name": "哈克娅镇压者",
       "spatial_instance": "harkoa",
       "edge_from_previous_map_percent": 19.64
     },
     {
-      "ordinal": 110,
+      "ordinal": 111,
       "cluster_id": "npc:28671",
       "name": "奎丝鲁恩先知",
       "spatial_instance": "harkoa_quetzlun_ride",
       "edge_from_previous_map_percent": 20.46
     },
     {
-      "ordinal": 124,
+      "ordinal": 125,
       "cluster_id": "npc:28411",
       "name": "冻土元素",
       "spatial_instance": "rhunok_zimrhuk",
       "edge_from_previous_map_percent": 27.31
     },
     {
-      "ordinal": 133,
+      "ordinal": 134,
       "cluster_id": "npc:28851",
       "name": "被激怒的猛犸象",
       "spatial_instance": "mamtoth_east_mid",
@@ -1540,6 +1540,29 @@
     },
     {
       "ordinal": 60,
+      "cluster_id": "npc:28666",
+      "name": "高尔巴格",
+      "quest_ids": [
+        12664
+      ],
+      "representative": {
+        "x": 29.91,
+        "y": 47.84,
+        "spawn_count": 1,
+        "min_x": 29.91,
+        "max_x": 29.91,
+        "min_y": 47.84,
+        "max_y": 47.84
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "spatial_instance": "hebvalok_sseratus",
+      "edge_from_previous_map_percent": 0.6,
+      "provisional_long_edge": false
+    },
+    {
+      "ordinal": 61,
       "cluster_id": "npc:28802",
       "name": "达库鲁的仆从",
       "quest_ids": [
@@ -1560,11 +1583,11 @@
         "objective"
       ],
       "spatial_instance": "hebvalok_sseratus",
-      "edge_from_previous_map_percent": 2.17,
+      "edge_from_previous_map_percent": 1.83,
       "provisional_long_edge": false
     },
     {
-      "ordinal": 61,
+      "ordinal": 62,
       "cluster_id": "npc:28603",
       "name": "荒芜卫士",
       "quest_ids": [
@@ -1589,7 +1612,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 62,
+      "ordinal": 63,
       "cluster_id": "object:190461",
       "name": "Ancient Ectoplasm",
       "quest_ids": [
@@ -1612,7 +1635,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 63,
+      "ordinal": 64,
       "cluster_id": "object:190459",
       "name": "Amberseed",
       "quest_ids": [
@@ -1635,7 +1658,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 64,
+      "ordinal": 65,
       "cluster_id": "npc:28205",
       "name": "炼金师菲肯斯坦",
       "quest_ids": [
@@ -1658,7 +1681,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 65,
+      "ordinal": 66,
       "cluster_id": "object:190478",
       "name": "Muddy Mire Maggots",
       "quest_ids": [
@@ -1681,7 +1704,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 66,
+      "ordinal": 67,
       "cluster_id": "object:190473",
       "name": "Withered Batwing",
       "quest_ids": [
@@ -1704,7 +1727,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 67,
+      "ordinal": 68,
       "cluster_id": "object:190462",
       "name": "Chilled Serpent Mucus",
       "quest_ids": [
@@ -1727,7 +1750,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 68,
+      "ordinal": 69,
       "cluster_id": "npc:28133",
       "name": "北伐军战士乔纳森",
       "quest_ids": [
@@ -1750,7 +1773,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 69,
+      "ordinal": 70,
       "cluster_id": "object:190555",
       "name": "Nerubian Crater",
       "quest_ids": [
@@ -1773,7 +1796,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 70,
+      "ordinal": 71,
       "cluster_id": "npc:28412",
       "name": "哈沙尔孵化者",
       "quest_ids": [
@@ -1798,7 +1821,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 71,
+      "ordinal": 72,
       "cluster_id": "npc:28413",
       "name": "蛛魔之茧",
       "quest_ids": [
@@ -1821,7 +1844,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 72,
+      "ordinal": 73,
       "cluster_id": "npc:28044",
       "name": "鲁伯特上尉",
       "quest_ids": [
@@ -1844,7 +1867,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 73,
+      "ordinal": 74,
       "cluster_id": "npc:28125",
       "name": "罗杰斯博士",
       "quest_ids": [
@@ -1867,7 +1890,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 74,
+      "ordinal": 75,
       "cluster_id": "npc:28141",
       "name": "北伐军战士拉莫夫",
       "quest_ids": [
@@ -1890,7 +1913,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 75,
+      "ordinal": 76,
       "cluster_id": "npc:28158",
       "name": "干瘪的银色步兵",
       "quest_ids": [
@@ -1915,7 +1938,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 76,
+      "ordinal": 77,
       "cluster_id": "npc:28143",
       "name": "北伐军战士约瑟芬",
       "quest_ids": [
@@ -1938,7 +1961,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 77,
+      "ordinal": 78,
       "cluster_id": "object:190537",
       "name": "Crashed Plague Sprayer",
       "quest_ids": [
@@ -1961,7 +1984,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 78,
+      "ordinal": 79,
       "cluster_id": "npc:28042",
       "name": "布兰顿上尉",
       "quest_ids": [
@@ -1984,7 +2007,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 79,
+      "ordinal": 80,
       "cluster_id": "npc:28268",
       "name": "受天灾疾病影响的银色步兵",
       "quest_ids": [
@@ -2009,7 +2032,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 80,
+      "ordinal": 81,
       "cluster_id": "npc:28258",
       "name": "哈沙尔撒网者",
       "quest_ids": [
@@ -2035,7 +2058,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 81,
+      "ordinal": 82,
       "cluster_id": "npc:28274",
       "name": "药剂喷射器",
       "quest_ids": [
@@ -2058,7 +2081,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 82,
+      "ordinal": 83,
       "cluster_id": "npc:29026",
       "name": "科尔拉玛斯软泥怪",
       "quest_ids": [
@@ -2083,7 +2106,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 83,
+      "ordinal": 84,
       "cluster_id": "npc:28257",
       "name": "哈沙尔通灵师",
       "quest_ids": [
@@ -2109,7 +2132,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 84,
+      "ordinal": 85,
       "cluster_id": "npc:28255",
       "name": "腐蚀者玛拉斯",
       "quest_ids": [
@@ -2135,7 +2158,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 85,
+      "ordinal": 86,
       "cluster_id": "object:190540",
       "name": "Chunk of Saronite",
       "quest_ids": [
@@ -2158,7 +2181,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 86,
+      "ordinal": 87,
       "cluster_id": "npc:28043",
       "name": "格隆迪尔上尉",
       "quest_ids": [
@@ -2181,7 +2204,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 87,
+      "ordinal": 88,
       "cluster_id": "npc:28323",
       "name": "青苔狂暴者",
       "quest_ids": [
@@ -2206,7 +2229,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 88,
+      "ordinal": 89,
       "cluster_id": "npc:28145",
       "name": "潜伏的蜥蜴",
       "quest_ids": [
@@ -2234,7 +2257,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 89,
+      "ordinal": 90,
       "cluster_id": "object:190542",
       "name": "Dead Thornwood",
       "quest_ids": [
@@ -2257,7 +2280,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 90,
+      "ordinal": 91,
       "cluster_id": "npc:28414",
       "name": "达卡莱俘虏",
       "quest_ids": [
@@ -2282,7 +2305,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 91,
+      "ordinal": 92,
       "cluster_id": "object:190630",
       "name": "Green Cauldron",
       "quest_ids": [
@@ -2305,7 +2328,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 92,
+      "ordinal": 93,
       "cluster_id": "object:193768",
       "name": "Chulo the Mad's Totem",
       "quest_ids": [
@@ -2328,7 +2351,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 93,
+      "ordinal": 94,
       "cluster_id": "npc:28496",
       "name": "疯子克乌罗",
       "quest_ids": [
@@ -2354,7 +2377,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 94,
+      "ordinal": 95,
       "cluster_id": "object:190618",
       "name": "Blue Cauldron",
       "quest_ids": [
@@ -2377,7 +2400,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 95,
+      "ordinal": 96,
       "cluster_id": "object:193770",
       "name": "Kutube'sa's Totem",
       "quest_ids": [
@@ -2400,7 +2423,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 96,
+      "ordinal": 97,
       "cluster_id": "object:190620",
       "name": "Red Cauldron",
       "quest_ids": [
@@ -2423,7 +2446,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 97,
+      "ordinal": 98,
       "cluster_id": "npc:28495",
       "name": "加瓦尼尔",
       "quest_ids": [
@@ -2448,7 +2471,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 98,
+      "ordinal": 99,
       "cluster_id": "object:193769",
       "name": "Gawanil's Totem",
       "quest_ids": [
@@ -2471,7 +2494,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 99,
+      "ordinal": 100,
       "cluster_id": "npc:28504",
       "name": "金亚莱医师",
       "quest_ids": [
@@ -2498,7 +2521,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 100,
+      "ordinal": 101,
       "cluster_id": "object:190619",
       "name": "Purple Cauldron",
       "quest_ids": [
@@ -2521,7 +2544,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 101,
+      "ordinal": 102,
       "cluster_id": "npc:28388",
       "name": "金亚莱战士",
       "quest_ids": [
@@ -2548,7 +2571,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 102,
+      "ordinal": 103,
       "cluster_id": "npc:28465",
       "name": "赫布达卡打击者",
       "quest_ids": [
@@ -2574,7 +2597,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 103,
+      "ordinal": 104,
       "cluster_id": "object:190695",
       "name": "Heb'Jin's Drum",
       "quest_ids": [
@@ -2597,7 +2620,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 104,
+      "ordinal": 105,
       "cluster_id": "npc:28600",
       "name": "赫布达卡猎头者",
       "quest_ids": [
@@ -2623,7 +2646,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 105,
+      "ordinal": 106,
       "cluster_id": "npc:28636",
       "name": "赫布金",
       "quest_ids": [
@@ -2646,7 +2669,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 106,
+      "ordinal": 107,
       "cluster_id": "npc:28403",
       "name": "哈克娅镇压者",
       "quest_ids": [
@@ -2673,7 +2696,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 107,
+      "ordinal": 108,
       "cluster_id": "npc:28848",
       "name": "哈克娅先知",
       "quest_ids": [
@@ -2698,7 +2721,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 108,
+      "ordinal": 109,
       "cluster_id": "npc:28402",
       "name": "哈克娅之爪",
       "quest_ids": [
@@ -2725,7 +2748,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 109,
+      "ordinal": 110,
       "cluster_id": "npc:28404",
       "name": "被诅咒的哈克娅子嗣",
       "quest_ids": [
@@ -2752,7 +2775,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 110,
+      "ordinal": 111,
       "cluster_id": "npc:28671",
       "name": "奎丝鲁恩先知",
       "quest_ids": [
@@ -2776,7 +2799,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 111,
+      "ordinal": 112,
       "cluster_id": "npc:28672",
       "name": "奎丝鲁恩",
       "quest_ids": [
@@ -2799,7 +2822,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 112,
+      "ordinal": 113,
       "cluster_id": "npc:28748",
       "name": "蛇灵狂暴者",
       "quest_ids": [
@@ -2822,7 +2845,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 113,
+      "ordinal": 114,
       "cluster_id": "npc:28747",
       "name": "奎丝鲁恩崇拜者",
       "quest_ids": [
@@ -2845,7 +2868,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 114,
+      "ordinal": 115,
       "cluster_id": "object:190718",
       "name": "Underworld Power Fragment",
       "quest_ids": [
@@ -2868,7 +2891,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 115,
+      "ordinal": 116,
       "cluster_id": "npc:28784",
       "name": "祭坛典狱官",
       "quest_ids": [
@@ -2894,7 +2917,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 116,
+      "ordinal": 117,
       "cluster_id": "npc:28477",
       "name": "奎丝鲁恩之子",
       "quest_ids": [
@@ -2919,7 +2942,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 117,
+      "ordinal": 118,
       "cluster_id": "object:190717",
       "name": "Underworld Power Fragment",
       "quest_ids": [
@@ -2942,7 +2965,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 118,
+      "ordinal": 119,
       "cluster_id": "object:190719",
       "name": "Underworld Power Fragment",
       "quest_ids": [
@@ -2965,7 +2988,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 119,
+      "ordinal": 120,
       "cluster_id": "npc:28754",
       "name": "高阶祭司图亚图亚",
       "quest_ids": [
@@ -2988,7 +3011,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 120,
+      "ordinal": 121,
       "cluster_id": "npc:28752",
       "name": "高阶祭司穆弗努",
       "quest_ids": [
@@ -3011,7 +3034,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 121,
+      "ordinal": 122,
       "cluster_id": "npc:28756",
       "name": "高阶祭司哈文尼",
       "quest_ids": [
@@ -3034,7 +3057,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 122,
+      "ordinal": 123,
       "cluster_id": "npc:29327",
       "name": "冰霜雪豹",
       "quest_ids": [
@@ -3060,7 +3083,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 123,
+      "ordinal": 124,
       "cluster_id": "npc:29319",
       "name": "冰掌熊",
       "quest_ids": [
@@ -3086,7 +3109,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 124,
+      "ordinal": 125,
       "cluster_id": "npc:28411",
       "name": "冻土元素",
       "quest_ids": [
@@ -3112,7 +3135,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 125,
+      "ordinal": 126,
       "cluster_id": "npc:28442",
       "name": "伦诺克先知",
       "quest_ids": [
@@ -3138,7 +3161,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 126,
+      "ordinal": 127,
       "cluster_id": "npc:28452",
       "name": "元素裂隙",
       "quest_ids": [
@@ -3161,7 +3184,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 127,
+      "ordinal": 128,
       "cluster_id": "npc:28597",
       "name": "希姆鲁克守卫者",
       "quest_ids": [
@@ -3187,7 +3210,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 128,
+      "ordinal": 129,
       "cluster_id": "npc:28916",
       "name": "提里",
       "quest_ids": [
@@ -3212,7 +3235,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 129,
+      "ordinal": 130,
       "cluster_id": "npc:28418",
       "name": "达卡莱捕熊者",
       "quest_ids": [
@@ -3238,7 +3261,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 130,
+      "ordinal": 131,
       "cluster_id": "npc:28417",
       "name": "伦诺克的祭司",
       "quest_ids": [
@@ -3264,7 +3287,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 131,
+      "ordinal": 132,
       "cluster_id": "npc:28575",
       "name": "伦诺克的折磨者",
       "quest_ids": [
@@ -3290,7 +3313,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 132,
+      "ordinal": 133,
       "cluster_id": "npc:28416",
       "name": "伦诺克",
       "quest_ids": [
@@ -3313,7 +3336,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 133,
+      "ordinal": 134,
       "cluster_id": "npc:28851",
       "name": "被激怒的猛犸象",
       "quest_ids": [
@@ -3340,7 +3363,7 @@
       "provisional_long_edge": true
     },
     {
-      "ordinal": 134,
+      "ordinal": 135,
       "cluster_id": "npc:28861",
       "name": "犸托斯信徒",
       "quest_ids": [
@@ -3366,7 +3389,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 135,
+      "ordinal": 136,
       "cluster_id": "npc:28779",
       "name": "犸托斯之血",
       "quest_ids": [
@@ -3392,7 +3415,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 136,
+      "ordinal": 137,
       "cluster_id": "object:191123",
       "name": "Convocation Summoning Circle",
       "quest_ids": [
@@ -3415,7 +3438,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 137,
+      "ordinal": 138,
       "cluster_id": "npc:29236",
       "name": "古达克蛮兵",
       "quest_ids": [
@@ -3440,7 +3463,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 138,
+      "ordinal": 139,
       "cluster_id": "npc:29237",
       "name": "古达克吞火者",
       "quest_ids": [
@@ -3465,7 +3488,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 139,
+      "ordinal": 140,
       "cluster_id": "npc:29334",
       "name": "古达克迅猛龙",
       "quest_ids": [
@@ -3491,7 +3514,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 140,
+      "ordinal": 141,
       "cluster_id": "npc:29332",
       "name": "古达克蝙蝠骑士",
       "quest_ids": [
@@ -3516,7 +3539,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 141,
+      "ordinal": 142,
       "cluster_id": "npc:28952",
       "name": "阿卡里",
       "quest_ids": [
@@ -3539,7 +3562,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 142,
+      "ordinal": 143,
       "cluster_id": "object:191018",
       "name": "Akali Chain Anchor",
       "quest_ids": [
@@ -3562,7 +3585,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 143,
+      "ordinal": 144,
       "cluster_id": "npc:29235",
       "name": "古达克暴徒",
       "quest_ids": [
@@ -3587,7 +3610,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 144,
+      "ordinal": 145,
       "cluster_id": "npc:28988",
       "name": "阿卡里镇压者",
       "quest_ids": [
@@ -3612,7 +3635,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 145,
+      "ordinal": 146,
       "cluster_id": "npc:28917",
       "name": "亚拉",
       "quest_ids": [
@@ -3637,7 +3660,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 146,
+      "ordinal": 147,
       "cluster_id": "npc:28902",
       "name": "督军佐尔玛兹",
       "quest_ids": [
@@ -3663,7 +3686,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 147,
+      "ordinal": 148,
       "cluster_id": "npc:28882",
       "name": "魔化蒂基面具战士",
       "quest_ids": [
@@ -3690,7 +3713,7 @@
       "provisional_long_edge": false
     },
     {
-      "ordinal": 148,
+      "ordinal": 149,
       "cluster_id": "npc:28918",
       "name": "德克玛兹",
       "quest_ids": [

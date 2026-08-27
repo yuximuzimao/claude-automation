@@ -183,7 +183,7 @@ def apply_zang_step1(route: dict[str, Any]) -> None:
             "开飞行点：沼泽鼠岗哨\n"
             "玛加沙 → 接《时尚无罪》《别再提蘑菇了！》\n"
             "里维伊 → 接《沼牙的威胁》\n"
-            "祖莱 → 接《厚重多头蛇鳞片》《向暗影猎手德恩加报到》",
+            "祖莱 → 若携带《向祖莱报到》则交；接《厚重多头蛇鳞片》《向暗影猎手德恩加报到》",
             "east",
         ),
         P(
@@ -249,6 +249,7 @@ def apply_zang_step1(route: dict[str, Any]) -> None:
             system_line("开飞行点：沼泽鼠岗哨", "ra-flightpoint"),
             npc_actions("玛加沙", accepts=("时尚无罪", "别再提蘑菇了！")),
             npc_actions("里维伊", accepts=("沼牙的威胁",)),
+            conditional_npc_turn_line("祖莱", "：若携带向祖莱报到 ", "向祖莱报到"),
             npc_actions("祖莱", accepts=("厚重多头蛇鳞片", "向暗影猎手德恩加报到")),
             do_at("东部湖区", "沼牙的威胁", "崩溃的平衡", "别再提蘑菇了！", "时尚无罪", "厚重多头蛇鳞片", "热情的欢迎"),
             do_at("暗泽南缘", "阴冷之地", "拯救孢子人", "保护观察者"),
@@ -420,8 +421,7 @@ def apply_zang_step4(route: dict[str, Any]) -> None:
             "伊谢尔·风歌 → 交《恢复平衡》《抽水泵结构图》 → 接《通知塞纳里奥议会》\n"
             "监护者哈穆特 → 交《血鳞纳迦的领袖》《暗潮纳迦的首领》《热情的欢迎》\n"
             "唤风者塔鲁·黑蹄 → 交《保护观察者》\n莱森·月火 → 交《崩溃的平衡》\n"
-            "伊卡因 → 交《阴冷之地》\n劳兰娜·萨维尔 → 交《拯救孢子人》\n"
-            "若五号均已满足条件：劳兰娜·萨维尔 → 交《赞加沼泽的植物》",
+            "伊卡因 → 交《阴冷之地》\n劳兰娜·萨维尔 → 交《拯救孢子人》《赞加沼泽的植物》",
             "east",
             "《赞加沼泽的植物》：只有五号都已自然累计10株未鉴定过的植物时才交；不足就继续保留，不专门补刷。\n"
             "《通知塞纳里奥议会》：作为跨图任务继续携带，不为它专程返回地狱火半岛。",
@@ -453,8 +453,7 @@ def apply_zang_step4(route: dict[str, Any]) -> None:
             npc_actions("唤风者塔鲁·黑蹄", turns=("保护观察者",)),
             npc_actions("莱森·月火", turns=("崩溃的平衡",)),
             npc_actions("伊卡因", turns=("阴冷之地",)),
-            npc_actions("劳兰娜·萨维尔", turns=("拯救孢子人",)),
-            conditional_npc_turn_line("劳兰娜·萨维尔", "：若五号均已满足条件 ", "赞加沼泽的植物"),
+            npc_actions("劳兰娜·萨维尔", turns=("拯救孢子人", "赞加沼泽的植物")),
             system_line("系统飞行：塞纳里奥庇护所 → 沼泽鼠岗哨", "ra-flightpath"),
             point_anchor("沼泽鼠岗哨"),
             npc_actions("玛加沙", turns=("时尚无罪", "别再提蘑菇了！"), accepts=("未完的职责",)),
@@ -498,7 +497,7 @@ def apply_zang_step5(route: dict[str, Any]) -> None:
             84.36,
             54.33,
             "沼泽鼠岗哨",
-            "玛加沙 → 交《未完的职责》\n祖莱 → 交《尤尔巴的报告》\n若已接《枯萎的孢芽》：里维伊 → 交《枯萎的孢芽》",
+            "玛加沙 → 交《未完的职责》\n祖莱 → 交《尤尔巴的报告》\n里维伊 → 交《枯萎的孢芽》",
             "east",
             "《枯萎的孢芽》：没掉就忽略，不回头补刷。",
         ),
@@ -525,7 +524,7 @@ def apply_zang_step5(route: dict[str, Any]) -> None:
             point_anchor("沼泽鼠岗哨"),
             npc_actions("玛加沙", turns=("未完的职责",)),
             npc_actions("祖莱", turns=("尤尔巴的报告",)),
-            conditional_npc_turn_line("里维伊", "：若已接枯萎的孢芽 ", "枯萎的孢芽"),
+            npc_actions("里维伊", turns=("枯萎的孢芽",)),
             do_at("黑钉", "对方的尊重"),
             point_anchor("沼泽鼠岗哨"),
             npc_actions("里维伊", turns=("对方的尊重",)),

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html as html_lib
 import json
 import re
 from pathlib import Path
@@ -361,7 +362,7 @@ def main() -> None:
                     for point in route["points"][start_index : end_index + 1]
                     for task_name in TASK_NAME_RE.findall(str(point[3]))
                 }
-                semantic_text = re.sub(r"<[^>]+>", "", action_html)
+                semantic_text = html_lib.unescape(re.sub(r"<[^>]+>", "", action_html))
                 missing_semantic_tasks = sorted(task for task in plain_tasks if task not in semantic_text)
                 if missing_semantic_tasks:
                     raise SystemExit(

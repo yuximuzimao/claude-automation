@@ -24,6 +24,13 @@ STRUCTURAL_EXCLUDE = {
     12780: "deprecated_quest_typo_in_source_no_start_or_finish_entity",
 }
 
+# Zero-XP scripted child quests can still be mandatory to complete an included parent quest.
+# 12664 is the non-dungeon branch opened while 12661 is active after the current route's 12648 path;
+# completing its Gorebag flight tour is required before 12661 can be turned in to Stefan.
+STRUCTURAL_INCLUDE = {
+    12664: "mandatory_scripted_child_for_12661_current_non_dungeon_branch",
+}
+
 
 def entity_label(task: dict[str, Any], field: str) -> str:
     entities = task.get(field) or []
@@ -44,6 +51,8 @@ def reason(task: dict[str, Any]) -> tuple[str, list[str]]:
     qid = int(task["quest_id"])
     if qid in STRUCTURAL_EXCLUDE:
         return "exclude_structural", [STRUCTURAL_EXCLUDE[qid]]
+    if qid in STRUCTURAL_INCLUDE:
+        return "include_structural_zero_xp_scripted_child", [STRUCTURAL_INCLUDE[qid]]
     if not task.get("race_allowed") or not task.get("npc_faction_allowed"):
         return "exclude_faction", list(task.get("faction_reasons") or ["not_current_horde_axis"])
     if not task.get("class_allowed"):

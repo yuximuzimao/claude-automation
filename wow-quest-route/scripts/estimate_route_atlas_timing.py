@@ -14,6 +14,7 @@ DRAGON_FOUNDATION = ROOT / "data/route-atlas/dragonblight-task-foundation.json"
 GRIZZLY_FOUNDATION = ROOT / "data/route-atlas/grizzly-hills-task-foundation.json"
 ZULDRAK_FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 STORM_FOUNDATION = ROOT / "data/route-atlas/storm-peaks-task-foundation.json"
+HOWLING_FOUNDATION = ROOT / "data/route-atlas/howling-fjord-task-foundation.json"
 ZANG_AUDIT = ROOT / "data/route-atlas/zangarmarsh-global-solver-input-audit.json"
 FIVEBOX_OBS = ROOT / "data/observations/fivebox-task-types.json"
 
@@ -28,6 +29,7 @@ MAP_SIZE_YARDS: dict[str, tuple[float, float]] = {
     "grizzly": (5249.9999, 3499.9999),
     "zuldrak": (4993.75, 3329.1665),
     "storm": (7112.5, 4741.6665),
+    "howling": (6045.8330, 4031.2499),
 }
 
 GROUND_SPEED_YPS = 16.8
@@ -39,6 +41,7 @@ GROUND_PATH_FACTOR = {
     "grizzly": 1.18,
     "zuldrak": 1.20,
     "storm": 1.05,
+    "howling": 1.20,
 }
 FLY_SPEED_YPS = 21.0
 FLY_PATH_FACTOR = 1.05
@@ -62,6 +65,7 @@ HEARTH_CHAINS = {
     "grizzly": ["征服堡"],
     "zuldrak": ["希姆托加"],
     "storm": ["阿格玛之锤", "格罗玛什坠毁点", "布德克拉格庇护所"],
+    "howling": ["新阿加曼德"],
 }
 
 # Old Zangarmarsh/Nagrand point data predates typed transport fields, so these
@@ -119,6 +123,7 @@ ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
             "note": "2026-08-25 19:47→2026-08-26 00:00；墙钟253分钟，扣除明确暂停3分钟。包含《寒风的声音》抢怪/首跑找刷新点和钢铁巨像竞争，不作为clean baseline。",
         }
     ],
+    "howling": [],
 }
 
 # These tasks contain scripts/events whose service time is not recoverable from
@@ -520,7 +525,7 @@ def estimate_route(
     observations: dict[str, Any],
 ) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
-    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm"} else set(zang_seconds)
+    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling"} else set(zang_seconds)
 
     for step, group in enumerate(route["stepGroups"], 1):
         move = movement_minutes(route_key, route, group)
@@ -530,7 +535,7 @@ def estimate_route(
         if route_key == "zang":
             service = sum(zang_seconds[name] / 60.0 for name in names)
             uncertainty = 0.25 if names else 0.18
-        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm"}:
+        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling"}:
             service = sum(
                 TASK_SERVICE_OVERRIDES.get(
                     (route_key, name),
@@ -661,6 +666,7 @@ def main() -> None:
     grizzly_by_name, grizzly_by_id = load_foundation(GRIZZLY_FOUNDATION)
     zuldrak_by_name, zuldrak_by_id = load_foundation(ZULDRAK_FOUNDATION)
     storm_by_name, storm_by_id = load_foundation(STORM_FOUNDATION)
+    howling_by_name, howling_by_id = load_foundation(HOWLING_FOUNDATION)
     zang_seconds = load_zang_objective_seconds()
     observations = json.loads(FIVEBOX_OBS.read_text(encoding="utf-8"))
 
@@ -672,6 +678,7 @@ def main() -> None:
         "grizzly": grizzly_by_name,
         "zuldrak": zuldrak_by_name,
         "storm": storm_by_name,
+        "howling": howling_by_name,
     }
     foundations_by_id = {
         "zang": {},
@@ -681,10 +688,11 @@ def main() -> None:
         "grizzly": grizzly_by_id,
         "zuldrak": zuldrak_by_id,
         "storm": storm_by_id,
+        "howling": howling_by_id,
     }
     estimates = {
         key: estimate_route(key, routes[key], foundations[key], foundations_by_id[key], zang_seconds, observations)
-        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak", "storm")
+        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling")
     }
     apply_to_routes(routes, estimates)
     ROUTES.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

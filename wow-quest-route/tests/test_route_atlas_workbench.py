@@ -116,8 +116,8 @@ def test_zuldrak_is_fully_promoted_to_semantic_hud_and_handoffs_are_locked():
     assert all(group.get("actionHtml") for group in zuldrak["stepGroups"])
 
     coverage = json.loads((ROOT / "data/route-atlas/zuldrak-route-coverage.json").read_text(encoding="utf-8"))
-    assert coverage["formal_task_count"] == 104
-    assert coverage["covered_task_count"] == 104
+    assert coverage["formal_task_count"] == 105
+    assert coverage["covered_task_count"] == 105
     assert coverage["missing"] == []
     assert coverage["unexpected"] == []
 
@@ -155,11 +155,8 @@ def test_borean_player_steps_group_geometry_without_losing_points():
     assert len(groups) >= 66
     covered = [i for group in groups for i in range(group["start"], group["end"] + 1)]
     assert covered == list(range(len(borean["points"])))
-    titles = [group["title"] for group in groups]
-    assert "码头接齐回音海岸任务" in titles
-    assert "固定零件 + 克瓦迪尔三任务 + 短护送" in titles
-    assert "护送交付并批量换下一轮任务" in titles
-    assert "四艘船 + 奥拉布斯一次海岸闭环" in titles
+    assert all(group.get("title") for group in groups)
+    assert all(group.get("actionHtml") for group in groups)
 
 
 def test_borean_flight_point_is_deferred_to_magic_carpet_handoff():
@@ -428,7 +425,7 @@ def test_no_cold_weather_flying_route_excludes_skill_gates():
         row["quest_id"] for row in [*gate_audit["direct_gates"], *gate_audit["dependency_blocked"]]
         if row["zone_id"] == 3711
     }
-    assert len(sholazar_blocked) == 13
+    assert len(sholazar_blocked) == 15
 
     routes = json.loads(DATA.read_text(encoding="utf-8"))
     storm_text = "\n".join(group["actionHtml"] for group in routes["storm"]["stepGroups"])

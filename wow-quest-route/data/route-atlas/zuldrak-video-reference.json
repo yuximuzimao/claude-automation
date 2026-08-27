@@ -1478,6 +1478,55 @@
       "video_evidence_available": false,
       "exact_id_event_available": false
     },
+    "12664": {
+      "matches": [
+        {
+          "episode": 52,
+          "line": 47,
+          "match": "exact_id",
+          "text": "- 后段继续推进`12661《潜入沃尔塔鲁斯》`、`12919《风暴之王的复仇》`，并出现`12664《黑暗的地平线》`；均无最终交付证据。"
+        },
+        {
+          "episode": 52,
+          "line": 77,
+          "match": "exact_id",
+          "text": "| 后段 | 活动未闭环 | 黑暗的地平线 | 12664 | — | 后段任务进入活动；Questie无任务经验，未见最终交付 |"
+        },
+        {
+          "episode": 52,
+          "line": 96,
+          "match": "exact_id",
+          "text": "4. `12664《黑暗的地平线》`：后段进入活动，未最终交付。"
+        },
+        {
+          "episode": 53,
+          "line": 32,
+          "match": "exact_id",
+          "text": "- `12664《黑暗的地平线》`"
+        },
+        {
+          "episode": 53,
+          "line": 105,
+          "match": "exact_id",
+          "text": "- `12664《黑暗的地平线》`"
+        }
+      ],
+      "events": [
+        {
+          "episode": 52,
+          "time_range": "late episode",
+          "action": "active_first_observed_unclosed",
+          "quest_id": 12664,
+          "quest_name": "黑暗的地平线"
+        }
+      ],
+      "episodes": [
+        52,
+        53
+      ],
+      "video_evidence_available": true,
+      "exact_id_event_available": true
+    },
     "12665": {
       "matches": [],
       "events": [],
@@ -2621,5 +2670,5 @@
       "exact_id_event_available": false
     }
   },
-  "formal_task_with_video_count": 43
+  "formal_task_with_video_count": 44
 }

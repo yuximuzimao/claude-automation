@@ -4,7 +4,7 @@
     "id": 66,
     "name": "祖达克"
   },
-  "cluster_count": 148,
+  "cluster_count": 149,
   "shared_cluster_count": 83,
   "clusters": [
     {
@@ -11575,6 +11575,52 @@
             "max_x": 78.61,
             "min_y": 25.21,
             "max_y": 25.21
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:28666",
+      "entity_type": "npc",
+      "entity_id": 28666,
+      "name": "高尔巴格",
+      "representative": {
+        "x": 29.91,
+        "y": 47.84,
+        "spawn_count": 1,
+        "min_x": 29.91,
+        "max_x": 29.91,
+        "min_y": 47.84,
+        "max_y": 47.84
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        12664
+      ],
+      "relations": [
+        {
+          "quest_id": 12664,
+          "quest_name": "黑暗的地平线",
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "entity_type": "npc",
+          "entity_id": 28666,
+          "entity_name": "高尔巴格",
+          "representative": {
+            "x": 29.91,
+            "y": 47.84,
+            "spawn_count": 1,
+            "min_x": 29.91,
+            "max_x": 29.91,
+            "min_y": 47.84,
+            "max_y": 47.84
           },
           "spawn_count": 1,
           "source_kind": "objective"

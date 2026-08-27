@@ -13,11 +13,18 @@ OUT = ROOT / "data/route-atlas/objective-anchor-audit.json"
 ROUTE_FOUNDATIONS: dict[str, tuple[Path, int]] = {
     "storm": (ROOT / "data/route-atlas/storm-peaks-task-foundation.json", 67),
     "icecrown": (ROOT / "data/route-atlas/icecrown-task-foundation.json", 210),
+    "howling": (ROOT / "data/route-atlas/howling-fjord-task-foundation.json", 495),
 }
 
 DO_RE = re.compile(r"做《([^》]+)》")
 WARN_DISTANCE = 5.0
 FAIL_DISTANCE = 8.0
+
+# Explicit task-data exceptions confirmed against live WotLK quest text. These are audit-layer
+# exceptions only; they must never be used to move the route just to satisfy malformed objective rows.
+MANUAL_TASK_RESOLUTIONS: dict[tuple[str, int], str] = {
+    ("howling", 11397): "quest requires 15 Chillmere Coast Scourge of any eligible type; extra per-NPC event rows are alternative credit sources, not separate mandatory objectives",
+}
 
 
 def objective_sources(objective: dict[str, Any], zone_id: int) -> list[dict[str, Any]]:
@@ -70,6 +77,15 @@ def audit_route(route_key: str, route: dict[str, Any], foundation_path: Path, zo
     for task_name, points in execution_points.items():
         task = tasks_by_name.get(task_name)
         if not task:
+            continue
+        manual_reason = MANUAL_TASK_RESOLUTIONS.get((route_key, int(task["quest_id"])))
+        if manual_reason:
+            manual_resolved.append({
+                "quest_id": int(task["quest_id"]),
+                "quest_name": task_name,
+                "objective_review_resolution": manual_reason,
+                "manual_spatial_resolution": "audit_data_exception",
+            })
             continue
         resolution = str(task.get("objective_review_resolution") or "").strip()
         spatial_resolution = str(task.get("manual_spatial_resolution") or "").strip()

@@ -129,7 +129,7 @@
         53.5
       ],
       "kind": "surface",
-      "cluster_count": 20,
+      "cluster_count": 21,
       "cluster_ids": [
         "npc:28221",
         "npc:28931",
@@ -150,7 +150,8 @@
         "object:190478",
         "object:190473",
         "npc:28205",
-        "npc:28041"
+        "npc:28041",
+        "npc:28666"
       ]
     },
     {
@@ -3585,6 +3586,27 @@
         "objective"
       ],
       "instance_id": "gundrak_dubrajin_north",
+      "assignment_basis": "nearest_surface_anchor"
+    },
+    {
+      "cluster_id": "npc:28666",
+      "name": "高尔巴格",
+      "quest_ids": [
+        12664
+      ],
+      "representative": {
+        "x": 29.91,
+        "y": 47.84,
+        "spawn_count": 1,
+        "min_x": 29.91,
+        "max_x": 29.91,
+        "min_y": 47.84,
+        "max_y": 47.84
+      },
+      "source_kinds": [
+        "objective"
+      ],
+      "instance_id": "hebvalok_sseratus",
       "assignment_basis": "nearest_surface_anchor"
     },
     {
