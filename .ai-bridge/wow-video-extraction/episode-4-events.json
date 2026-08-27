@@ -1,0 +1,245 @@
+{
+  "episode": 4,
+  "title": "西部荒野 16-18",
+  "bvid": "BV1EJBsBcE1Z",
+  "cid": 34909192269,
+  "duration_seconds": 3196,
+  "display_duration": "00:53:16",
+  "series_index": "4/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 13,
+    "formal_total": 333,
+    "coarse_total": 54,
+    "fine20_total": 161,
+    "fine5_total": 118,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "coverage_seconds": "0-3195",
+    "derived_level_crop_not_counted_as_raw_frame": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Questie calibrates names, IDs, NPCs, chains and static XP reference. Direct video system XP is authoritative when visible because low-level quest XP can be reduced at player level 17."
+  },
+  "level_evidence": [
+    {
+      "level": 17,
+      "time_seconds_approx": 700,
+      "time_display": "11:40",
+      "confidence": "high",
+      "basis": "direct player level-up system text; digit confirmed by 8x crop plus grayscale/contrast OCR"
+    }
+  ],
+  "direct_level_evidence_note": "Episode 4 directly proves level 17 only. No reliable direct level-18 evidence; title 16-18 is metadata only.",
+  "completed_quests": [13, 102, 22, 399],
+  "completed_quest_count": 4,
+  "direct_completed_quest_xp_total": 7450,
+  "completed_quest_details": [
+    {
+      "quest_id": 13,
+      "quest_name": "西部荒野人民军",
+      "stage": "second",
+      "experience_direct_video": 1950,
+      "questie_static_x2_reference": 1960,
+      "time_range": "38:55-39:05 approx",
+      "confidence": "high",
+      "evidence": "turn-in/follow-up window plus direct completion system text and XP at Gryan Stoutmantle",
+      "followup_quest_id": 14
+    },
+    {
+      "quest_id": 102,
+      "quest_name": "西部荒野的豺狼人",
+      "experience_direct_video": 1950,
+      "questie_static_x2_reference": 1960,
+      "time_range": "39:10-39:20 approx",
+      "confidence": "high",
+      "evidence": "direct Complete Quest window at Captain Danuvin followed by completion system text and XP"
+    },
+    {
+      "quest_id": 22,
+      "quest_name": "猪肝馅饼",
+      "experience_direct_video": 1450,
+      "questie_static_x2_reference": 1820,
+      "time_range": "41:30-42:05 approx",
+      "confidence": "high",
+      "evidence": "direct completion system text and XP at Salma Saldean; reduced XP relative to static reference due level difference"
+    },
+    {
+      "quest_id": 399,
+      "quest_name": "童年的记忆",
+      "experience_direct_video": 2100,
+      "questie_static_x2_reference": 2100,
+      "time_range": "51:15-51:30 approx",
+      "confidence": "high",
+      "evidence": "direct completion system text and 2100 XP in Stormwind"
+    }
+  ],
+  "events": [
+    {
+      "time_range": "04:00-04:15 approx",
+      "action": "objective_progress",
+      "quest_id": 9,
+      "quest_name": "清理荒野",
+      "objective": "Harvest Watchers 19/20",
+      "confidence": "high",
+      "basis": "direct tracker progress"
+    },
+    {
+      "time_range": "04:20-04:30 approx",
+      "action": "tracker_disappearance_state_unknown",
+      "quest_id": 9,
+      "quest_name": "清理荒野",
+      "confidence": "high",
+      "basis": "tracker item disappears after last direct 19/20; no direct 20/20, turn-in or abandon evidence"
+    },
+    {
+      "time_range": "11:40 approx",
+      "action": "level_up",
+      "level": 17,
+      "confidence": "high",
+      "basis": "direct system text"
+    },
+    {
+      "time_range": "37:00 approx",
+      "action": "objective_complete_not_turnin",
+      "quest_id": 22,
+      "quest_name": "猪肝馅饼",
+      "confidence": "high",
+      "basis": "quest log shows 8/8 and complete; final turn-in occurs later"
+    },
+    {
+      "time_range": "37:00-41:50 approx",
+      "action": "held_confirmed",
+      "quest_id": 65,
+      "quest_name": "迪菲亚兄弟会",
+      "confidence": "high",
+      "basis": "quest is explicitly listed in quest log; exact accept time not captured"
+    },
+    {
+      "time_range": "38:55-39:05 approx",
+      "action": "complete",
+      "quest_id": 13,
+      "quest_name": "西部荒野人民军",
+      "experience_direct_video": 1950,
+      "confidence": "high"
+    },
+    {
+      "time_range": "38:55-39:40 approx",
+      "action": "accept_between_frames_active_confirmed",
+      "quest_id": 14,
+      "quest_name": "西部荒野人民军",
+      "confidence": "high",
+      "basis": "follow-up quest window immediately after quest 13 turn-in; later tracker shows 15/5/5 objectives active; exact accept system line missing"
+    },
+    {
+      "time_range": "39:10-39:20 approx",
+      "action": "complete",
+      "quest_id": 102,
+      "quest_name": "西部荒野的豺狼人",
+      "experience_direct_video": 1950,
+      "confidence": "high"
+    },
+    {
+      "time_range": "41:30-42:05 approx",
+      "action": "complete",
+      "quest_id": 22,
+      "quest_name": "猪肝馅饼",
+      "experience_direct_video": 1450,
+      "confidence": "high"
+    },
+    {
+      "time_range": "41:50 approx",
+      "action": "objective_complete_not_turnin",
+      "quest_id": 6281,
+      "quest_name": "赶赴暴风城",
+      "confidence": "high",
+      "basis": "quest log explicitly shows (完成); no final turn-in system text or XP"
+    },
+    {
+      "time_range": "51:15-51:30 approx",
+      "action": "complete",
+      "quest_id": 399,
+      "quest_name": "童年的记忆",
+      "experience_direct_video": 2100,
+      "confidence": "high"
+    },
+    {
+      "time_range": "52:00 approx",
+      "action": "trainer_window_viewed_no_learn_confirmed",
+      "confidence": "medium",
+      "basis": "paladin trainer window shows a new spell entry, but no direct learned-spell system text"
+    }
+  ],
+  "accepted_or_active_unclosed": [
+    {
+      "quest_id": 14,
+      "quest_name": "西部荒野人民军",
+      "state": "accept_between_frames_active_confirmed",
+      "evidence": "follow-up window after quest 13 plus active 15/5/5 tracker; still active at episode end"
+    },
+    {
+      "quest_id": 38,
+      "quest_name": "杂味炖肉",
+      "state": "accepted_or_active_unclosed",
+      "evidence": "still active with incomplete materials around 37 minutes and later"
+    },
+    {
+      "quest_id": 9,
+      "quest_name": "清理荒野",
+      "state": "last_direct_progress_19_of_20_then_state_unknown",
+      "evidence": "direct 19/20 at 04:15; later tracker disappearance cannot prove completion or abandonment"
+    },
+    {
+      "quest_id": 6281,
+      "quest_name": "赶赴暴风城",
+      "state": "objective_complete_not_turnin",
+      "evidence": "quest log explicitly shows (完成) around 41:50; no final turn-in evidence"
+    },
+    {
+      "quest_id": 65,
+      "quest_name": "迪菲亚兄弟会",
+      "state": "held_unclosed_accept_time_unknown",
+      "evidence": "quest log explicitly lists the quest; exact accept time was not captured and no final turn-in is shown"
+    },
+    {
+      "quest_id": 246,
+      "quest_name": "审时度势",
+      "state": "accepted_unclosed_no_new_direct_evidence"
+    }
+  ],
+  "carried_uncertainties_no_new_direct_evidence": [
+    {"quest_id": 3101, "quest_name": "圣洁信件", "state": "turnin_unknown_after_trainer_interaction"},
+    {"quest_id": 353, "quest_name": "雷矛的包裹", "state": "objective_complete_not_turnin"},
+    {"quest_id": 11, "quest_name": "悬赏河爪豺狼人", "state": "objective_complete_not_turnin"},
+    {"quest_id": 176, "quest_name": "通缉：霍格", "state": "prior_uncertain_state_preserved"},
+    {"quest_id": null, "quest_name": "冬天爷爷来了！", "state": "accepted_unclosed_id_ambiguous_later_state_unknown"}
+  ],
+  "evidence_cautions": [
+    "Episode title 16-18 is metadata only; direct player-level evidence proves level 17 only.",
+    "Tracker disappearance after quest 9 progress 19/20 is not treated as completion or abandonment.",
+    "Quest-log (完成) for quest 6281 is objective completion, not final turn-in.",
+    "Quest 65 is confirmed held by the quest log, but exact acceptance time is not reconstructed.",
+    "Quest 14 is confirmed active after quest 13 through follow-up window plus tracker; exact accept system line was not captured.",
+    "Direct video XP overrides Questie static XP reference when they differ due level scaling or server-specific values.",
+    "Exploration and mob XP are excluded from the task-XP total."
+  ],
+  "next_backfill_episode": {
+    "episode": 5,
+    "title": "赤脊山 19-20",
+    "bvid": "BV1c7B4BgEiZ",
+    "aid": 115763897697329,
+    "episode_id": 165524448,
+    "cid": 34911816884,
+    "duration_seconds": 3870,
+    "duration": "01:04:30",
+    "processed": false,
+    "metadata_only_read_from_episode_4_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_5",
+    "remaining_backfill": [5,6,7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

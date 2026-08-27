@@ -1,43 +1,41 @@
 {
   "project": "wow-quest-route-video-extraction",
-  "updated_at": "2026-08-13T17:55:00+08:00",
-  "phase": "episode_fact_extraction",
+  "updated_at": "2026-08-20T19:19:00+08:00",
+  "phase": "video_collection_complete",
   "series": {
     "total_episodes": 53,
-    "first_processed_episode": 13,
-    "completed_episodes": [
-      13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43
-    ],
-    "latest_completed_episode": 43
+    "completed_episodes": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53],
+    "completed_forward_range": "13-53",
+    "backfill_completed": [1,2,3,4,5,6,7,8,9,10,11,12],
+    "fact_extraction_complete": true,
+    "post_extraction_complete": true
   },
-  "next_episode": {
-    "episode": 44,
-    "title": "嚎风峡湾75",
-    "bvid": "BV1unkTB3Ejj",
-    "duration": "60:09",
-    "duration_seconds": 3609,
-    "processed": false
-  },
+  "next_episode": null,
+  "next_stage": null,
   "workflow_documents": {
     "method": "/Users/chat/claude/wow-quest-route/docs/video-extraction/README.md",
     "current": "/Users/chat/claude/wow-quest-route/docs/video-extraction/CURRENT.md",
-    "latest_neat_archive": "/Users/chat/claude/wow-quest-route/docs/video-extraction/sessions/2026-08-07-episode34-neat.md",
-    "post_extraction_plan": "/Users/chat/claude/wow-quest-route/docs/video-extraction/POST-EXTRACTION-PLAN.md",
-    "handoff": "/Users/chat/claude/wow-quest-route/docs/NEXT_CHAT_HANDOFF.md"
+    "final_neat_archive": "/Users/chat/claude/wow-quest-route/docs/archive/video/neat/2026-08-20-video-collection-complete-neat.md",
+    "post_extraction_record": "/Users/chat/claude/wow-quest-route/docs/video-extraction/POST-EXTRACTION-PLAN.md"
+  },
+  "reference_assets": {
+    "master_events": "/Users/chat/claude/wow-quest-route/data/video-route/master-events.json",
+    "map_reference_blocks": "/Users/chat/claude/wow-quest-route/data/video-route/map-reference-blocks.json",
+    "cross_episode_gaps": "/Users/chat/claude/wow-quest-route/data/video-route/cross-episode-gaps.json",
+    "outland_reverse_audit": "/Users/chat/claude/wow-quest-route/data/video-route/outland-route-reverse-audit.json"
   },
   "checkpoint_root": "/Users/chat/claude/.ai-bridge/wow-video-extraction",
   "raw_evidence_pattern": "/Users/chat/claude/wow-quest-route/.ai-bridge/video-epN",
-  "resume": {
-    "read_first": [
-      "/Users/chat/claude/wow-quest-route/docs/video-extraction/README.md",
-      "/Users/chat/claude/wow-quest-route/docs/video-extraction/CURRENT.md",
-      "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-43-extraction.md"
-    ],
-    "optional_machine_checkpoint": "/Users/chat/claude/.ai-bridge/wow-video-extraction/episode-43-events.json",
-    "instruction": "只处理第44集《嚎风峡湾75》，写独立Markdown/JSON并同步更新项目CURRENT、progress.json和桥接CURRENT，关闭本轮B站标签然后停止，不进入第45集。第43集明确最终完成25项任务、Questie×2校准任务经验667700；片尾嚎风峡湾最高优先级是11448《探险者协会哨站》、11291《前往西部卫戍要塞！》，11252《杀入乌特加德！》与联盟13205《削减军备》已接受但未完成。第42集遗留12253《拯救暮冬城的平民》、12459《创造与毁灭的力量》、12456《奥雷托斯的羽毛》在第43集约38:40任务日志仍直接可见；12447、12470、12511、12794、12464没有新增最终交付/放弃证据，继续保留。12167《消灭教徒》仍为第40→41集剪辑缺口，不能补造或自动闭环。"
+  "latest_direct_level_evidence": {
+    "episode": 53,
+    "level": 80,
+    "time_seconds_approx": 4395,
+    "trigger_quest_id": 12596,
+    "trigger_quest_name": "巡逻任务"
   },
-  "post_series": {
-    "trigger": "episode 53 completed and validated",
-    "instruction": "按POST-EXTRACTION-PLAN执行事件合并、跨集缺口审计、联盟任务块、部落映射，并接入已完成C1/C2与待完成G1-G4。"
+  "closed": true,
+  "resume": {
+    "active_work": false,
+    "instruction": "视频合集专项已完成，不自动恢复某一集或POST阶段。以后只在具体地图路线规划需要视频证据时，定向读取data/video-route索引或对应episode-N检查点。"
   }
 }

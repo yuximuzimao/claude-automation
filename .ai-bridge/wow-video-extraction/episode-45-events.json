@@ -1,0 +1,533 @@
+{
+  "episode": 45,
+  "title": "嚎风峡湾75.9",
+  "raw_collection_title": "嚎风峡湾75.9",
+  "bvid": "BV1iWkKBJEhC",
+  "cid": 35418867332,
+  "duration_seconds": 4135,
+  "display_duration": "01:08:55",
+  "series_index": "45/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse_01": 20,
+      "coarse_02": 20,
+      "coarse_03": 20,
+      "coarse_04": 10,
+      "fine20_01": 35,
+      "fine20_02": 35,
+      "fine20_03": 35,
+      "fine20_04": 35,
+      "fine20_05": 35,
+      "fine20_06": 33,
+      "fine5_a": 33,
+      "fine5_b": 49,
+      "fine5_c": 41,
+      "fine5_d": 49,
+      "fine5_e": 43,
+      "fine5_f": 39,
+      "fine5_g": 23,
+      "fine5_h": 16
+    },
+    "formal_total": 571,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "coverage_seconds": "0-4134"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [],
+  "level_continuity_note": "第45集没有新的直接玩家等级证据；合集标题75.9及画面中的NPC/物品等级文字不能作为玩家等级证据。",
+  "events": [
+    {
+      "time_range": "01:35-01:45 approx",
+      "action": "accept",
+      "quest_id": 11322,
+      "quest_name": "净化",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 01:40",
+      "action": "accept",
+      "quest_id": 11154,
+      "quest_name": "吓出它们的……",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 01:50",
+      "action": "complete_and_accept_next",
+      "quest_id": 11175,
+      "quest_name": "我的女儿",
+      "experience_shown": 4000,
+      "next_quest_id": 11176,
+      "next_quest_name": "工程的进展",
+      "confidence": "high"
+    },
+    {
+      "time_range": "01:55-02:05 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11176,
+      "quest_name": "工程的进展",
+      "experience_shown": 4000,
+      "next_quest_id": 11390,
+      "next_quest_name": "我有飞行器！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "03:30-03:45 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11390,
+      "quest_name": "我有飞行器！",
+      "experience_shown": 40200,
+      "next_quest_id": 11391,
+      "next_quest_name": "钢铁之门的巡逻兵",
+      "confidence": "high"
+    },
+    {
+      "time_range": "06:10-06:35 approx",
+      "action": "complete",
+      "quest_id": 11391,
+      "quest_name": "钢铁之门的巡逻兵",
+      "experience_shown": 40200,
+      "confidence": "high",
+      "evidence_note": "完成文字直接可读；经验按Questie基础20100×2校准。"
+    },
+    {
+      "time_range": "around 03:40",
+      "action": "accept",
+      "quest_id": 11393,
+      "quest_name": "探险者亚伦在哪里？",
+      "confidence": "medium",
+      "evidence_note": "系统接受文字在钢铁之门连续交接残留中可读；精确点击秒点未单独隔离。"
+    },
+    {
+      "time_range": "06:45-06:55 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11393,
+      "quest_name": "探险者亚伦在哪里？",
+      "experience_shown": 4000,
+      "next_quest_id": 11394,
+      "next_quest_name": "比鱼人更恶臭……",
+      "confidence": "high"
+    },
+    {
+      "time_range": "07:40-10:40 approx",
+      "action": "item_trigger_then_complete_and_accept_next",
+      "quest_id": 11395,
+      "quest_name": "天灾装置",
+      "experience_shown": 4000,
+      "next_quest_id": 11396,
+      "next_quest_name": "关闭护盾",
+      "confidence": "high",
+      "evidence_note": "任务先作为掉落触发进入追踪，约10:25-10:50完成并获得水晶控制器。"
+    },
+    {
+      "time_range": "11:45-12:05 approx",
+      "action": "complete",
+      "quest_id": 11394,
+      "quest_name": "比鱼人更恶臭……",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "11:55-12:15 approx",
+      "action": "complete",
+      "quest_id": 11396,
+      "quest_name": "关闭护盾",
+      "experience_shown": 50300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 20:05",
+      "action": "complete",
+      "quest_id": 11154,
+      "quest_name": "吓出它们的……",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:25-22:30 approx",
+      "action": "complete",
+      "quest_id": 11248,
+      "quest_name": "行动代号：斯克恩之怒",
+      "experience_shown": 4000,
+      "confidence": "high"
+    },
+    {
+      "time_range": "22:30-23:20 approx",
+      "action": "accept_branches",
+      "accepted_quest_ids": [
+        11245,
+        11246,
+        11247
+      ],
+      "accepted_quest_names": [
+        "危险的塔楼",
+        "可怕而必要的手段",
+        "燃烧吧，斯克恩，燃烧吧！"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:10-27:30 approx",
+      "action": "complete",
+      "quest_id": 11247,
+      "quest_name": "燃烧吧，斯克恩，燃烧吧！",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:30-29:00 approx",
+      "action": "complete",
+      "quest_id": 11246,
+      "quest_name": "可怕而必要的手段",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:50-31:40 approx",
+      "action": "complete_and_accept_return",
+      "quest_id": 11245,
+      "quest_name": "危险的塔楼",
+      "experience_shown": 40200,
+      "next_quest_id": 11250,
+      "next_quest_name": "向斯克恩的征服者致敬！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 33:20",
+      "action": "item_trigger_accept",
+      "quest_id": 11249,
+      "quest_name": "阻止升华！",
+      "confidence": "high",
+      "evidence_note": "明确获得维库升华卷轴；Questie确认该物品触发任务。"
+    },
+    {
+      "time_range": "33:45-33:55 approx",
+      "action": "complete_and_unlock_branches",
+      "quest_id": 11250,
+      "quest_name": "向斯克恩的征服者致敬！",
+      "experience_shown": 50800,
+      "unlocked_quest_ids": [
+        11231,
+        11235
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "first Aleberon pass, before 48:55",
+      "action": "item_trigger_accept",
+      "quest_id": 11237,
+      "quest_name": "亚勒伯龙攻击计划",
+      "confidence": "medium",
+      "evidence_note": "任务在约40:40后直接出现在追踪；精确掉落秒点未隔离。"
+    },
+    {
+      "time_range": "48:55-49:00 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11237,
+      "quest_name": "亚勒伯龙攻击计划",
+      "experience_shown": 40600,
+      "next_quest_id": 11238,
+      "next_quest_name": "冰霜巨龙和它的主人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 49:00",
+      "action": "complete_and_accept_next",
+      "quest_id": 11235,
+      "quest_name": "亚勒伯龙的麻烦",
+      "experience_shown": 40200,
+      "next_quest_id": 11236,
+      "next_quest_name": "通灵主宰麦森",
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:05-49:10 approx",
+      "action": "complete",
+      "quest_id": 11249,
+      "quest_name": "阻止升华！",
+      "experience_shown": 50800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "49:20-49:30 approx",
+      "action": "complete_and_accept_branches",
+      "quest_id": 11231,
+      "quest_name": "钥匙和牢笼",
+      "experience_shown": 40200,
+      "accepted_quest_ids": [
+        11239,
+        11432
+      ],
+      "accepted_quest_names": [
+        "为圣光效力",
+        "休眠的巨人"
+      ],
+      "confidence": "high"
+    },
+    {
+      "time_range": "63:40-64:00 approx",
+      "action": "item_or_event_trigger_accept",
+      "quest_id": 11452,
+      "quest_name": "沉睡的国王",
+      "confidence": "high",
+      "evidence_note": "安格博达女王战斗后进入追踪；Questie确认前置11235且由物品触发。"
+    },
+    {
+      "time_range": "around 68:10",
+      "action": "complete",
+      "quest_id": 11432,
+      "quest_name": "休眠的巨人",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "68:10-68:15 approx",
+      "action": "complete",
+      "quest_id": 11238,
+      "quest_name": "冰霜巨龙和它的主人",
+      "experience_shown": 50800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "68:15-68:20 approx",
+      "action": "complete",
+      "quest_id": 11452,
+      "quest_name": "沉睡的国王",
+      "experience_shown": 50800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "68:20-68:25 approx",
+      "action": "complete",
+      "quest_id": 11236,
+      "quest_name": "通灵主宰麦森",
+      "experience_shown": 50800,
+      "confidence": "high"
+    },
+    {
+      "time_range": "68:25-68:50 approx",
+      "action": "complete",
+      "quest_id": 11239,
+      "quest_name": "为圣光效力",
+      "experience_shown": 40200,
+      "confidence": "high"
+    }
+  ],
+  "completed_quests": [
+    11175,
+    11176,
+    11390,
+    11391,
+    11393,
+    11395,
+    11394,
+    11396,
+    11154,
+    11248,
+    11247,
+    11246,
+    11245,
+    11250,
+    11237,
+    11235,
+    11249,
+    11231,
+    11432,
+    11238,
+    11452,
+    11236,
+    11239
+  ],
+  "completed_quest_count": 23,
+  "calibrated_completed_quest_xp_total": 807100,
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 11322,
+      "quest_name": "净化",
+      "state": "accepted_not_completed",
+      "priority": "highest",
+      "note": "第45集约33:55仍直接显示清除内心杂念0/1；无最终交付/放弃证据。"
+    },
+    {
+      "quest_id": 11406,
+      "quest_name": "一切必须准备就绪",
+      "state": "active_first_directly_observed_episode45",
+      "priority": "high",
+      "note": "第45集开场已活动，约34:00仍追踪；精确接取可能跨第44→45集切点，未伪造接取时刻。"
+    },
+    {
+      "quest_id": 11190,
+      "quest_name": "非标准炮弹",
+      "state": "objective_complete_not_turnin",
+      "priority": "high",
+      "note": "约19:35目标完成，但无最终交付证据。"
+    },
+    {
+      "quest_id": 11448,
+      "quest_name": "探险者协会哨站",
+      "state": "turnin_unknown_across_cut",
+      "priority": "high",
+      "note": "385秒仍追踪，390秒后消失；无完成文字/4000经验。"
+    },
+    {
+      "quest_id": 11252,
+      "quest_name": "杀入乌特加德！",
+      "state": "accepted_not_completed",
+      "priority": "carryover"
+    },
+    {
+      "quest_id": 13205,
+      "quest_name": "削减军备",
+      "state": "accepted_not_completed",
+      "priority": "carryover",
+      "faction": "Alliance"
+    },
+    {
+      "quest_id": 12253,
+      "quest_name": "拯救暮冬城的平民",
+      "state": "older_active_unclosed",
+      "priority": "carryover"
+    },
+    {
+      "quest_id": 12459,
+      "quest_name": "创造与毁灭的力量",
+      "state": "older_active_unclosed",
+      "priority": "carryover"
+    },
+    {
+      "quest_id": 12456,
+      "quest_name": "奥雷托斯的羽毛",
+      "state": "ready_to_turn_in_not_turnedin",
+      "priority": "carryover"
+    },
+    {
+      "quest_id": 12447,
+      "quest_name": "黑曜石巨龙圣地",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 12470,
+      "quest_name": "永恒之龙的秘密",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 12511,
+      "quest_name": "丘陵援兵",
+      "state": "ready_to_turn_in_not_turnedin"
+    },
+    {
+      "quest_id": 12794,
+      "quest_name": "魔法王国达拉然",
+      "state": "ready_to_turn_in_not_turnedin"
+    },
+    {
+      "quest_id": 12464,
+      "quest_name": "我的老对手",
+      "state": "ready_to_turn_in_not_turnedin"
+    },
+    {
+      "quest_id": 12167,
+      "quest_name": "消灭教徒",
+      "state": "turnin_unknown_across_cut"
+    },
+    {
+      "quest_id": 11940,
+      "quest_name": "猎龙",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 11884,
+      "quest_name": "尼达尔，犀牛之王……",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 11872,
+      "quest_name": "罪恶的蛤蜊主宰……",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 12035,
+      "quest_name": "重新装配",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 12086,
+      "quest_name": "卡库特之子",
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 10004,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 9900,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 9925,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 9882,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 9937,
+      "state": "older_unresolved_alliance_version"
+    },
+    {
+      "quest_id": 9869,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 10810,
+      "state": "older_unresolved"
+    },
+    {
+      "quest_id": 9962,
+      "state": "previously_failed_retention_or_abandonment_uncertain"
+    }
+  ],
+  "cross_episode_gaps": [
+    {
+      "quest_id": 11448,
+      "quest_name": "探险者协会哨站",
+      "state": "turnin_unknown_across_cut",
+      "evidence": "第45集仍无新增最终交付/放弃证据；保持第44集跨剪辑缺口。"
+    },
+    {
+      "quest_id": 12167,
+      "quest_name": "消灭教徒",
+      "state": "turnin_unknown_across_cut",
+      "evidence": "第45集没有新增最终交付或放弃证据；保持既有缺口。"
+    }
+  ],
+  "evidence_cautions": [
+    "任务追踪栏不是完整任务日志；后半段追踪项变化不能用于清除11322、11406或更早遗留。",
+    "11395、11249、11237、11452属于掉落/物品或事件触发，未伪造NPC接取。",
+    "11237精确掉落秒点未隔离，只记录第一轮亚勒伯龙途中进入活动状态。",
+    "片尾4060-4134秒使用5秒层拆分五项连续最终交付。",
+    "第45集没有新的直接玩家等级证据。"
+  ],
+  "next_episode": {
+    "episode": 46,
+    "title": "嚎风峡湾76",
+    "bvid": "BV1KCkKBiEUh",
+    "cid": 35419654968,
+    "duration_seconds": 3286,
+    "duration": "54:46",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 8,
+  "notes": [
+    "本集明确最终完成23项任务，Questie×2校准任务经验合计807100。",
+    "11322《净化》和11406《一切必须准备就绪》仍未闭环。",
+    "11190仅目标完成、11448跨剪辑状态未知等旧缺口继续保留。",
+    "第46集元数据只从当前合集状态只读查询，未导航、播放、截图或处理。"
+  ]
+}

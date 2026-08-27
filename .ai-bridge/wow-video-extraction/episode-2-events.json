@@ -1,0 +1,100 @@
+{
+  "episode": 2,
+  "title": "艾尔文森林 10-13",
+  "bvid": "BV1v1q6BeExv",
+  "cid": 34869348372,
+  "duration_seconds": 4244,
+  "display_duration": "01:10:44",
+  "series_index": "2/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 21,
+    "formal_total": 604,
+    "coarse_total": 72,
+    "fine20_total": 213,
+    "fine5_total": 319,
+    "supplemental_fine1_total": 6,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "supplemental_verified_ok_paused": true,
+    "coverage_seconds": "0-4243"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_seconds_approx": 1245,
+      "level": 11,
+      "type": "direct_level_up_system_text",
+      "confidence": "high",
+      "trigger_quest_id": 45,
+      "trigger_quest_name": "罗尔夫的下落",
+      "basis": "continuous final chain handoff into 71回复托马斯"
+    }
+  ],
+  "missing_direct_level_evidence": [10, 12, 13],
+  "completed_quests": [1097,35,37,45,5545,71,52,83,112,39,76,114,88,239,2998,1641,1642,1643,1644,1780,1781],
+  "completed_quest_count": 21,
+  "calibrated_completed_quest_xp_total": 15420,
+  "completed_quest_details": [
+    {"quest_id":1097,"quest_name":"艾尔默的任务","experience":210,"time_range":"00:35 approx","confidence":"high"},
+    {"quest_id":35,"quest_name":"卫兵托马斯","experience":840,"time_range":"13:45-14:55 approx","confidence":"high"},
+    {"quest_id":37,"quest_name":"失踪的卫兵","experience":420,"time_range":"15:20-16:00 approx","confidence":"high"},
+    {"quest_id":45,"quest_name":"罗尔夫的下落","experience":840,"time_range":"20:35-20:45 approx","confidence":"high","level_reached":11},
+    {"quest_id":5545,"quest_name":"木材危机","experience":1560,"time_range":"27:20 approx","confidence":"high"},
+    {"quest_id":71,"quest_name":"回复托马斯","experience":420,"time_range":"27:25-27:40 approx","confidence":"high"},
+    {"quest_id":52,"quest_name":"保卫边境","experience":1260,"time_range":"27:30-27:40 approx","confidence":"high"},
+    {"quest_id":83,"quest_name":"红色亚麻布","experience":1560,"time_range":"34:45 approx","confidence":"high"},
+    {"quest_id":112,"quest_name":"收集海藻","experience":630,"time_range":"35:15-35:25 approx","confidence":"high"},
+    {"quest_id":39,"quest_name":"托马斯的报告","experience":2100,"time_range":"35:30-35:40 approx","confidence":"high"},
+    {"quest_id":76,"quest_name":"玉石矿洞","experience":1680,"time_range":"35:30-35:40 approx","confidence":"high"},
+    {"quest_id":114,"quest_name":"梅贝尔的隐形水","experience":1580,"time_range":"39:55-40:20 approx","confidence":"high"},
+    {"quest_id":88,"quest_name":"公主必须死！","experience":1560,"time_range":"42:40 approx","confidence":"high"},
+    {"quest_id":239,"quest_name":"西泉要塞","experience":420,"time_range":"45:00-45:10 approx","confidence":"high"},
+    {"quest_id":2998,"quest_name":"圣洁之书","experience":40,"time_range":"65:00-65:20 approx","confidence":"high","stage":"威尔海姆修士→达索瑞恩·拉尔"},
+    {"quest_id":1641,"quest_name":"圣洁之书","experience":0,"time_range":"65:10-65:25 approx","confidence":"high","stage":"达索瑞恩·拉尔同NPC零经验过渡"},
+    {"quest_id":1642,"quest_name":"圣洁之书","experience":20,"time_range":"65:15-65:25 approx","confidence":"high","stage":"圣洁之书物品触发→达索瑞恩·拉尔"},
+    {"quest_id":1643,"quest_name":"圣洁之书","experience":80,"time_range":"65:25-65:45 approx","confidence":"high","stage":"达索瑞恩·拉尔→斯蒂芬妮·特纳"},
+    {"quest_id":1644,"quest_name":"圣洁之书","experience":160,"time_range":"65:30-65:50 approx","confidence":"high","stage":"向斯蒂芬妮·特纳交10亚麻布"},
+    {"quest_id":1780,"quest_name":"圣洁之书","experience":40,"time_range":"66:10-67:20 approx","confidence":"high","stage":"斯蒂芬妮·特纳→达索瑞恩·拉尔"},
+    {"quest_id":1781,"quest_name":"圣洁之书","experience":0,"time_range":"67:30-67:45 approx","confidence":"high","stage":"达索瑞恩·拉尔→贾森·坦诺姆；获得生命符记并接1786"}
+  ],
+  "unclosed_or_uncertain_quests": [
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"turnin_unknown_after_trainer_interaction","source_episode":1},
+    {"quest_id":353,"quest_name":"雷矛的包裹","state":"objective_complete_not_turnin"},
+    {"quest_id":109,"quest_name":"向格里安·斯托曼报到","state":"accepted_unclosed"},
+    {"quest_id":11,"quest_name":"悬赏河爪豺狼人","state":"objective_complete_not_turnin"},
+    {"quest_id":176,"quest_name":"通缉：霍格","state":"active_first_observed_unclosed","first_observed_seconds":2884,"basis":"1-second supplemental sampling still found no direct accept system text"},
+    {"quest_id":59,"quest_name":"布甲和皮甲","state":"accepted_unclosed"},
+    {"quest_id":1786,"quest_name":"圣洁之书","state":"accepted_unclosed","objective":"带生命符记到艾尔文森林复活亨兹·法奥克"},
+    {"quest_id":399,"quest_name":"童年的记忆","state":"accepted_unclosed"},
+    {"quest_id":null,"quest_name":"冬天爷爷来了！","state":"accepted_unclosed_id_ambiguous","basis":"direct accept text but multiple Questie city/faction variants and source NPC not clear enough"}
+  ],
+  "evidence_cautions": [
+    "Episode title 10-13 is metadata only; only level 11 has direct player level-up evidence in episode 2.",
+    "88公主必须死 appears objective-complete in the log before its later NPC turn-in; XP is counted only at final turn-in.",
+    "11悬赏河爪豺狼人 is objective-complete but not finally turned in before a large cut to Stormwind; its XP is excluded.",
+    "176通缉：霍格 first appears active at 2884 seconds even with 1-second sampling; no direct accept text was captured.",
+    "Same-title 圣洁之书 quests are preserved by distinct Quest IDs and NPC/predecessor chain.",
+    "Zero-XP Holy Tome transition quests 1641 and 1781 are retained as completed facts but contribute zero XP.",
+    "Exploration and mob XP are excluded from the quest XP total."
+  ],
+  "next_backfill_episode": {
+    "episode": 3,
+    "title": "西部荒野 14-16",
+    "bvid": "BV1wUqUBvEuX",
+    "cid": 34883962832,
+    "duration_seconds": 3828,
+    "duration": "01:03:48",
+    "processed": false,
+    "metadata_only_read_from_episode_2_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_3",
+    "remaining_backfill": [3,4,5,6,7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

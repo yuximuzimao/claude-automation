@@ -1,0 +1,314 @@
+{
+  "episode": 7,
+  "title": "赤脊山 23-26",
+  "bvid": "BV1EABNBgETt",
+  "cid": 34921777951,
+  "duration_seconds": 4299,
+  "display_duration": "01:11:39",
+  "series_index": "7/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 10,
+    "formal_total": 229,
+    "coarse_total": 73,
+    "fine20_total": 66,
+    "fine5_total": 90,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-4298"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video action evidence is authoritative. Questie only resolves Chinese names, IDs, NPCs, prerequisites/followups and static XP structure after the video establishes the event."
+  },
+  "level_evidence": [
+    {
+      "time_range": "3530-3550s approx",
+      "action": "level_up",
+      "level": 25,
+      "state": "direct_numeric_level_up",
+      "confidence": "high",
+      "basis": "multiple consecutive system-chat frames clearly read 你升到了25级"
+    }
+  ],
+  "completed_quests": [125, 150, 34, 20, 180, 91, 92, 19, 169],
+  "completed_quest_count": 9,
+  "known_xp_subtotal_excluding_unreadable_completions": 21600,
+  "completed_quest_details": [
+    {
+      "quest_id": 125,
+      "quest_name": "丢失的工具",
+      "experience": null,
+      "experience_basis": "video_digits_unreadable",
+      "time_range": "00:05-00:10 approx",
+      "confidence": "high",
+      "basis": "quest active at 5s; by 10s Foreman Oslow is presenting q89, whose unique prerequisite is q125, with low-resolution prior completion chat present",
+      "followup_quest_id": 89
+    },
+    {
+      "quest_id": 150,
+      "quest_name": "鱼人偷猎者",
+      "experience": 3100,
+      "experience_basis": "video_reward_plus_immediate_state_transition_and_questie_static_x2_match",
+      "time_range": "00:15-00:30 approx",
+      "confidence": "medium_high",
+      "basis": "q150 remains directly tracked through 15s; 3100 quest XP appears around 20s in the Lakeshire turn-in sequence; q150 is absent from the 30s log; Questie base 1550 x2 matches 3100; quest-name completion line itself is not reliably OCR-readable"
+    },
+    {
+      "quest_id": 34,
+      "quest_name": "不速之客",
+      "experience": 3900,
+      "experience_basis": "direct_video",
+      "time_range": "00:45-01:05 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 20,
+      "quest_name": "黑石氏族的威胁",
+      "experience": null,
+      "experience_basis": "video_digits_unreadable",
+      "time_range": "27:15 approx",
+      "confidence": "high",
+      "followup_quest_id": 19
+    },
+    {
+      "quest_id": 180,
+      "quest_name": "通缉：范高雷中尉",
+      "experience": 5300,
+      "experience_basis": "direct_video",
+      "time_range": "27:35-27:45 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 91,
+      "quest_name": "所罗门的律法",
+      "experience": null,
+      "experience_basis": "completion_direct_xp_only_trailing_700_reliably_read",
+      "time_range": "28:15 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 92,
+      "quest_name": "赤脊山炖肉",
+      "experience": null,
+      "experience_basis": "completion_direct_xp_unreadable_and_dynamic_level_scaling_not_forced",
+      "time_range": "29:30 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 19,
+      "quest_name": "萨瑞尔祖恩",
+      "experience": 4000,
+      "experience_basis": "video_turnin_sequence_plus_direct_4000_xp_and_questie_level25_static_x2_match",
+      "time_range": "70:20-70:30 approx",
+      "confidence": "high",
+      "basis": "badge acquired earlier; quest log shows objective complete; at the return NPC the quest leaves active state and 4000 quest XP/reward appears; completion-line quest name is OCR-garbled but the event chain closes uniquely"
+    },
+    {
+      "quest_id": 169,
+      "quest_name": "通缉：加塞尔佐格",
+      "experience": 5300,
+      "experience_basis": "direct_video",
+      "time_range": "71:00 approx",
+      "confidence": "high"
+    }
+  ],
+  "events": [
+    {
+      "time_range": "00:05-00:10 approx",
+      "action": "complete",
+      "quest_id": 125,
+      "quest_name": "丢失的工具",
+      "experience": null,
+      "confidence": "high",
+      "basis": "direct transition from q125 active to unique followup q89 offer at Foreman Oslow"
+    },
+    {
+      "time_range": "00:15-00:30 approx",
+      "action": "complete",
+      "quest_id": 150,
+      "quest_name": "鱼人偷猎者",
+      "experience": 3100,
+      "confidence": "medium_high",
+      "basis": "directly active immediately before 3100 quest reward; then absent from opened task log; exact reward matches Questie 1550 x2"
+    },
+    {
+      "time_range": "00:45-01:05 approx",
+      "action": "complete",
+      "quest_id": 34,
+      "quest_name": "不速之客",
+      "experience": 3900,
+      "confidence": "high"
+    },
+    {
+      "time_range": "03:50 approx",
+      "action": "accept",
+      "quest_id": 89,
+      "quest_name": "止水湖上的桥",
+      "confidence": "high"
+    },
+    {
+      "time_range": "04:00-04:20 approx",
+      "action": "progress",
+      "quest_id": 89,
+      "quest_name": "止水湖上的桥",
+      "progress": "铁矛 0/5 -> 1/5",
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:15 approx",
+      "action": "complete",
+      "quest_id": 20,
+      "quest_name": "黑石氏族的威胁",
+      "experience": null,
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:15 approx",
+      "action": "accept",
+      "quest_id": 19,
+      "quest_name": "萨瑞尔祖恩",
+      "confidence": "high"
+    },
+    {
+      "time_range": "27:35-27:45 approx",
+      "action": "complete",
+      "quest_id": 180,
+      "quest_name": "通缉：范高雷中尉",
+      "experience": 5300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "28:15 approx",
+      "action": "complete",
+      "quest_id": 91,
+      "quest_name": "所罗门的律法",
+      "experience": null,
+      "confidence": "high"
+    },
+    {
+      "time_range": "29:30 approx",
+      "action": "complete",
+      "quest_id": 92,
+      "quest_name": "赤脊山炖肉",
+      "experience": null,
+      "confidence": "high"
+    },
+    {
+      "time_range": "30:25 approx",
+      "action": "objective_complete_not_turnin",
+      "quest_id": 19,
+      "quest_name": "萨瑞尔祖恩",
+      "confidence": "medium_high",
+      "basis": "quest log shows 完成; later direct badge acquisition confirms the objective state"
+    },
+    {
+      "time_range": "43:00 approx",
+      "action": "objective_item_acquired",
+      "quest_id": 19,
+      "quest_name": "萨瑞尔祖恩",
+      "item": "萨瑞尔祖恩的徽记",
+      "confidence": "high"
+    },
+    {
+      "time_range": "58:50-59:10 approx",
+      "action": "level_up",
+      "level": 25,
+      "confidence": "high"
+    },
+    {
+      "time_range": "70:20-70:30 approx",
+      "action": "complete",
+      "quest_id": 19,
+      "quest_name": "萨瑞尔祖恩",
+      "experience": 4000,
+      "confidence": "high",
+      "basis": "objective chain + return turn-in + 4000 XP; completion-name OCR itself is degraded"
+    },
+    {
+      "time_range": "71:00 approx",
+      "action": "complete",
+      "quest_id": 169,
+      "quest_name": "通缉：加塞尔佐格",
+      "experience": 5300,
+      "confidence": "high"
+    }
+  ],
+  "same_name_chain_ambiguity": {
+    "quest_ids": [121, 143, 144],
+    "names": ["送往暴风城的信", "送往西部荒野的信", "送往西部荒野的信"],
+    "state": "chain_progress_visible_but_stage_boundary_not_reliably_resolved",
+    "note": "The video log and late Solomon interaction show the messenger chain progressing, but low-resolution OCR cannot safely distinguish q143 versus q144 or establish a clear final-completion system line. No completion claim is made for q121/q143/q144 in episode 7."
+  },
+  "accepted_or_active_unclosed": [
+    {
+      "quest_id": 89,
+      "quest_name": "止水湖上的桥",
+      "state": "accepted_unclosed",
+      "last_direct_progress": "铁矛 1/5 early in episode"
+    },
+    {
+      "quest_id": 128,
+      "quest_name": "悬赏：黑石氏族",
+      "state": "accepted_unclosed",
+      "last_direct_evidence": "still tracked at 4260s"
+    },
+    {
+      "quest_id": 141,
+      "quest_name": "迪菲亚兄弟会",
+      "state": "accepted_unclosed_no_final_evidence_this_episode"
+    },
+    {
+      "quest_id": 1654,
+      "quest_name": "正义试炼",
+      "state": "accepted_unclosed_materials_stage_no_final_evidence_this_episode"
+    },
+    {
+      "quest_id": 2040,
+      "quest_name": "地底突袭",
+      "state": "accepted_unclosed_no_final_evidence_this_episode"
+    },
+    {
+      "quest_id": 118,
+      "quest_name": "马掌",
+      "state": "accepted_unclosed_no_final_evidence_this_episode"
+    }
+  ],
+  "carried_uncertainties_no_new_direct_final_evidence": [
+    {"quest_id":9,"quest_name":"清理荒野","state":"prior_uncertain_state_preserved"},
+    {"quest_id":38,"quest_name":"杂味炖肉","state":"accepted_or_active_unclosed"},
+    {"quest_id":6281,"quest_name":"赶赴暴风城","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"prior_uncertain_state_preserved"},
+    {"quest_id":353,"quest_name":"雷矛的包裹","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":11,"quest_name":"悬赏河爪豺狼人","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":176,"quest_name":"通缉：霍格","state":"prior_uncertain_state_preserved"},
+    {"quest_id":null,"quest_name":"冬天爷爷来了！","state":"prior_uncertain_state_preserved"}
+  ],
+  "evidence_cautions": [
+    "Persistent system-chat lines are not counted repeatedly; timestamps use the earliest frame that also matches the relevant NPC/task-window context.",
+    "Quest 150 completion lacks a reliably OCR-readable quest-name system line; the completion is medium-high confidence from direct active-state continuity, immediate 3100 quest reward, subsequent task-log state, and Questie 1550 x2 agreement.",
+    "Quest 19 completion-name OCR is degraded, but its unique badge objective, objective-complete log state, return-NPC sequence, 4000 XP and Questie level-25 2000 x2 value form a closed evidence chain.",
+    "Quest 92 XP is deliberately left null because the low-level quest may be subject to dynamic XP scaling and the video digits are not stable enough to resolve it.",
+    "The q121/q143/q144 messenger chain contains two Chinese quests with the same name. The episode shows progress but not enough clean system text to assign a final completed stage safely.",
+    "Tracker absence, 目标(N), and quest-log 完成 are never used alone to infer final turn-in."
+  ],
+  "next_backfill_episode": {
+    "episode": 8,
+    "title": "暮色森林 27-28",
+    "bvid": "BV1xYBTBtErC",
+    "aid": 115767873963981,
+    "episode_id": 165644206,
+    "cid": 34924988041,
+    "duration_seconds": 3392,
+    "duration": "00:56:32",
+    "processed": false,
+    "metadata_only_read_from_episode_7_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_8",
+    "remaining_backfill": [8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

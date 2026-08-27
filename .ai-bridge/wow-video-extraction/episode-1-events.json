@@ -1,0 +1,102 @@
+{
+  "episode": 1,
+  "title": "北郡修道院 1-9",
+  "raw_collection_title": "北郡修道院 1-9",
+  "bvid": "BV1rYq6BkEWw",
+  "cid": 34868822226,
+  "duration_seconds": 3752,
+  "display_duration": "01:02:32",
+  "series_index": "1/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 15,
+    "formal_total": 809,
+    "coarse_total": 64,
+    "fine20_total": 189,
+    "fine5_total": 556,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "coverage_seconds": "0-3751"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {"time_seconds_approx":300,"level":2,"type":"direct_level_up_system_text","confidence":"high"},
+    {"time_seconds_approx":425,"level":3,"type":"direct_level_up_system_text","confidence":"high"},
+    {"time_seconds_approx":1335,"level":6,"type":"direct_level_up_system_text","confidence":"high","trigger_quest_id":18,"trigger_quest_name":"潜行者兄弟会"},
+    {"time_seconds_approx":1955,"level":7,"type":"direct_level_up_system_text","confidence":"high","trigger":"exploration_or_combat_not_bound_to_quest"},
+    {"time_seconds_approx":2580,"level":8,"type":"direct_level_up_system_text","confidence":"high","trigger_quest_id":86,"trigger_quest_name":"比利的馅饼"},
+    {"time_seconds_approx":3115,"level":9,"type":"direct_player_panel","confidence":"high"},
+    {"time_seconds_approx":3165,"level":9,"type":"direct_level_up_system_text","confidence":"high","trigger":"combat_not_bound_to_quest"}
+  ],
+  "missing_direct_level_evidence": [4,5],
+  "completed_quests": [783,5261,33,7,15,21,18,6,3903,3904,3905,54,2158,85,86,84,87,106,111,62,40,60,107,61],
+  "completed_quest_count": 24,
+  "calibrated_completed_quest_xp_total": 13490,
+  "completed_quest_details": [
+    {"quest_id":783,"quest_name":"身边的危机","experience":80,"time_range":"04:20 approx","confidence":"high"},
+    {"quest_id":5261,"quest_name":"伊根·派特斯金纳","experience":170,"time_range":"04:45 approx","confidence":"high"},
+    {"quest_id":33,"quest_name":"林中的群狼","experience":340,"time_range":"08:35 approx","confidence":"high"},
+    {"quest_id":7,"quest_name":"剿灭狗头人","experience":340,"time_range":"09:50-10:00 approx","confidence":"high"},
+    {"quest_id":15,"quest_name":"回音山调查行动","experience":500,"time_range":"13:50-14:05 approx","confidence":"high"},
+    {"quest_id":21,"quest_name":"回音山清剿行动","experience":1120,"time_range":"19:35-19:45 approx","confidence":"high","basis":"continuous same-NPC prerequisite-to-successor handoff"},
+    {"quest_id":18,"quest_name":"潜行者兄弟会","experience":890,"time_range":"22:15 approx","confidence":"high","level_reached":6},
+    {"quest_id":6,"quest_name":"加瑞克·帕德弗特的赏金","experience":670,"time_range":"26:20-26:30 approx","confidence":"high"},
+    {"quest_id":3903,"quest_name":"米莉·奥斯沃斯","experience":70,"time_range":"23:40 approx","confidence":"high"},
+    {"quest_id":3904,"quest_name":"米莉的葡萄","experience":360,"time_range":"26:35-27:20 approx","confidence":"high"},
+    {"quest_id":3905,"quest_name":"葡萄出货单","experience":710,"time_range":"27:25-27:35 approx","confidence":"high"},
+    {"quest_id":54,"quest_name":"去闪金镇报到","experience":450,"time_range":"29:55-30:05 approx","confidence":"high"},
+    {"quest_id":2158,"quest_name":"休息和放松","experience":220,"time_range":"30:10-30:20 approx","confidence":"high"},
+    {"quest_id":85,"quest_name":"丢失的项链","experience":270,"time_range":"40:55-41:00 approx","confidence":"high"},
+    {"quest_id":86,"quest_name":"比利的馅饼","experience":810,"time_range":"42:55-43:00 approx","confidence":"high","level_reached":8},
+    {"quest_id":84,"quest_name":"比利的馅饼","experience":270,"time_range":"44:10-44:15 approx","confidence":"high"},
+    {"quest_id":87,"quest_name":"金牙","experience":1760,"time_range":"49:40-50:00 approx","confidence":"high"},
+    {"quest_id":106,"quest_name":"年轻的恋人","experience":270,"time_range":"50:15-50:20 approx","confidence":"high"},
+    {"quest_id":111,"quest_name":"托米的祖母","experience":270,"time_range":"50:35-50:45 approx","confidence":"high"},
+    {"quest_id":62,"quest_name":"法戈第矿洞","experience":950,"time_range":"53:15-53:30 approx","confidence":"high"},
+    {"quest_id":40,"quest_name":"鱼人的威胁","experience":170,"time_range":"53:25-53:40 approx","confidence":"high"},
+    {"quest_id":60,"quest_name":"狗头人的蜡烛","experience":950,"time_range":"53:55 approx","confidence":"high"},
+    {"quest_id":107,"quest_name":"给威廉·匹斯特的信","experience":270,"time_range":"54:00-54:10 approx","confidence":"high"},
+    {"quest_id":61,"quest_name":"送往暴风城的货物","experience":1580,"time_range":"56:20-56:30 approx","confidence":"high"}
+  ],
+  "exploration_evidence": [
+    {"location":"闪金镇","experience":45,"time_seconds_approx":1785},
+    {"location":"斯通菲尔德农场","experience":55,"time_seconds_approx":2335},
+    {"location":"暴风城","experience":85,"time_seconds_approx":3365}
+  ],
+  "unclosed_or_uncertain_quests": [
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"turnin_unknown_after_trainer_interaction","basis":"accept/item/trainer interaction direct; no independent final completion or 80 XP evidence"},
+    {"quest_id":88,"quest_name":"公主必须死！","state":"accepted_unclosed"},
+    {"quest_id":76,"quest_name":"玉石矿洞","state":"accepted_unclosed"},
+    {"quest_id":35,"quest_name":"卫兵托马斯","state":"accepted_unclosed"},
+    {"quest_id":109,"quest_name":"向格里安·斯托曼报到","state":"accepted_unclosed"}
+  ],
+  "evidence_cautions": [
+    "Episode title 1-9 is metadata only; direct level evidence for levels 4 and 5 was not captured.",
+    "3101圣洁信件 is not counted complete because trainer interaction and tracker disappearance do not prove final turn-in.",
+    "21回音山清剿行动 is counted because the final same-NPC handoff into 54去闪金镇报到 is continuous without a large cut.",
+    "Quest IDs 86 and 84 share the same Chinese title 比利的馅饼 but are two separate completions; 86 triggers level 8.",
+    "87金牙 has a direct reward window and ~1750 OCR XP, calibrated to 1760.",
+    "Level 9 occurs during combat/loot and is not assigned to a quest.",
+    "40鱼人的威胁 title OCR is heavily garbled but 170 XP and direct successor 35卫兵托马斯 establish the calibration.",
+    "Exploration and mob XP are excluded from quest XP total."
+  ],
+  "next_backfill_episode": {
+    "episode": 2,
+    "title": "艾尔文森林 10-13",
+    "bvid": "BV1v1q6BeExv",
+    "cid": 34869348372,
+    "duration_seconds": 4244,
+    "duration": "01:10:44",
+    "processed": false,
+    "metadata_only_read_from_episode_1_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_2",
+    "remaining_backfill": [2,3,4,5,6,7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

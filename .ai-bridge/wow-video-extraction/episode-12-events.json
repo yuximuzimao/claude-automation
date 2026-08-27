@@ -1,0 +1,114 @@
+{
+  "episode": 12,
+  "title": "南海镇 34-35",
+  "bvid": "BV1GJBrBNEoZ",
+  "aid": 115789248071885,
+  "episode_id": 166391228,
+  "cid": 35005796336,
+  "duration_seconds": 3930,
+  "display_duration": "01:05:30",
+  "series_index": "12/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 17,
+    "formal_total": 317,
+    "coarse_total": 67,
+    "fine20_total": 71,
+    "fine5_total": 100,
+    "fine2_total": 44,
+    "fine1_total": 35,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-3929"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video evidence is authoritative. Questie resolves Chinese names, IDs, unique chain transitions and degraded digits only after visible action/state establishes the quest event."
+  },
+  "level_evidence": [],
+  "latest_known_backfill_level": {
+    "episode": 10,
+    "level": 32,
+    "state": "direct_numeric_level_up",
+    "note": "episode 12 has no newer reliable numeric player-level evidence"
+  },
+  "direct_or_chain_completed_quests": [536,559,560,561,562,511,500,510,555,9435],
+  "events": [
+    {"time_range":"07:10-07:40 approx","action":"complete","quest_id":536,"quest_name":"清理海岸","experience":3700,"experience_basis":"direct_video_exact_and_questie_static_x2_match","confidence":"high"},
+    {"time_range":"07:30 approx onward","action":"accept","quest_id":559,"quest_name":"法尔林的证据","confidence":"high"},
+
+    {"time_range":"15:40-15:50 approx","action":"complete_by_chain_transition","quest_id":559,"quest_name":"法尔林的证据","experience":5420,"experience_basis":"degraded_video_about_5400_repaired_with_questie_2710_x2_after_action_confirmed","confidence":"high"},
+    {"time_range":"by 15:50","action":"accepted_by_chain_transition","quest_id":560,"quest_name":"法尔林的证据","confidence":"high","basis":"direct delivery-to-marshal objective unique to q560"},
+    {"time_range":"15:55-16:10 approx","action":"complete","quest_id":560,"quest_name":"法尔林的证据","experience":540,"experience_basis":"direct_video_digits_and_questie_270_x2_match","confidence":"high"},
+    {"time_range":"after q560 turnin","action":"accept","quest_id":561,"quest_name":"法尔林的证据","confidence":"high"},
+    {"time_range":"16:10-17:00 approx","action":"complete_by_chain_transition","quest_id":561,"quest_name":"法尔林的证据","experience":540,"experience_basis":"direct_video_digits_and_questie_270_x2_match","confidence":"high"},
+    {"time_range":"by 17:00","action":"accept","quest_id":562,"quest_name":"升官之道","confidence":"high"},
+    {"time_range":"24:55 approx","action":"complete","quest_id":562,"quest_name":"升官之道","experience":4000,"experience_basis":"direct_video_exact_and_questie_2000_x2_match","confidence":"high"},
+    {"time_range":"25:00-25:35 approx","action":"accept","quest_id":563,"quest_name":"人事调动","confidence":"high"},
+
+    {"time_range":"64:12 approx","action":"complete","quest_id":511,"quest_name":"密文信件","confidence":"high","basis":"direct completion-shaped system text plus unique followup q514 active"},
+    {"time_range":"64:12 approx onward","action":"accept","quest_id":514,"quest_name":"铁炉堡的译码者","confidence":"high"},
+    {"time_range":"64:14-64:16 approx","action":"complete","quest_id":500,"quest_name":"破碎岭食人魔","experience":8700,"experience_basis":"2s_video_digit_repair_plus_questie_4350_x2_match","confidence":"high"},
+    {"time_range":"64:35 approx","action":"accept","quest_id":504,"quest_name":"破碎岭好战者","confidence":"high"},
+
+    {"time_range":"64:26-64:33 approx","action":"reward_window_seen_not_final_proven","quest_id":505,"quest_name":"辛迪加刺客","confidence":"high","note":"No independent completion system line, uniquely attributable reward trigger, or unique followup; strict non-completion state retained."},
+
+    {"time_range":"64:34-64:36 approx","action":"complete_by_unique_followup","quest_id":510,"quest_name":"预备行动计划","confidence":"high","basis":"q512 贵族之死 direct quest window appears immediately after q510 turnin and is q510 unique followup"},
+    {"time_range":"64:36 approx","action":"accept","quest_id":512,"quest_name":"贵族之死","confidence":"high"},
+
+    {"time_range":"65:06-65:24 approx","action":"complete","quest_id":555,"quest_name":"海龟汤","confidence":"high","basis":"reward window followed by direct receipt of quest reward 食谱：海龟汤 and completion-shaped system text"},
+    {"time_range":"65:17-65:29 approx","action":"complete","quest_id":9435,"quest_name":"遗失的水晶","experience":3800,"experience_basis":"direct_system_credit_after_completion","confidence":"high","note":"3300 appears in reward-window area; actual system credit line repeatedly shows 3800, so 3800 is authoritative."}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":563,"quest_name":"人事调动","state":"accepted_unclosed"},
+    {"quest_id":540,"quest_name":"保全书籍","state":"partial_objective_5_of_5_books_complete_but_old_leather_book_0_of_1_not_turnin"},
+    {"quest_id":564,"quest_name":"损失惨重","state":"objective_complete_not_turnin"},
+    {"quest_id":565,"quest_name":"巴图罗的雪人毛皮披风","state":"carried_unclosed"},
+    {"quest_id":659,"quest_name":"新的瘟疫？","state":"carried_unclosed_no_unique_followup_seen"},
+    {"quest_id":504,"quest_name":"破碎岭好战者","state":"accepted_unclosed_objective_0_of_10"},
+    {"quest_id":512,"quest_name":"贵族之死","state":"accepted_unclosed_objective_0_of_7"},
+    {"quest_id":514,"quest_name":"铁炉堡的译码者","state":"accepted_unclosed"},
+    {"quest_id":505,"quest_name":"辛迪加刺客","state":"reward_window_seen_not_final_proven"},
+    {"quest_id":681,"quest_name":"诺斯弗德农场","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":684,"quest_name":"通缉：玛雷兹·考尔","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":685,"quest_name":"通缉：奥图和法库雷斯特","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":270,"quest_name":"被诅咒的舰队","state":"accepted_unclosed_no_q321_or_final_evidence"},
+    {"quest_id":231,"quest_name":"女儿的爱","state":"reward_window_seen_but_later_active_no_new_final_evidence"},
+    {"quest_id":253,"quest_name":"藏尸者的妻子","state":"objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":98,"quest_name":"斯塔文的传说","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":223,"quest_name":"森林里的狼人","state":"carried_unclosed_no_new_final_evidence"}
+  ],
+  "known_direct_or_calibrated_xp": [
+    {"quest_id":536,"quest_name":"清理海岸","experience":3700,"basis":"direct video"},
+    {"quest_id":559,"quest_name":"法尔林的证据","experience":5420,"basis":"degraded video + Questie x2 calibration after chain confirmation"},
+    {"quest_id":560,"quest_name":"法尔林的证据","experience":540,"basis":"direct video"},
+    {"quest_id":561,"quest_name":"法尔林的证据","experience":540,"basis":"direct video"},
+    {"quest_id":562,"quest_name":"升官之道","experience":4000,"basis":"direct video"},
+    {"quest_id":500,"quest_name":"破碎岭食人魔","experience":8700,"basis":"2s video + Questie x2 calibration"},
+    {"quest_id":9435,"quest_name":"遗失的水晶","experience":3800,"basis":"direct system credit"}
+  ],
+  "known_xp_subtotal": 26700,
+  "known_xp_subtotal_note": "Not full episode quest XP: q511/q510/q555 XP not safely attributable; q505 not counted complete; exploration XP excluded.",
+  "non_quest_xp_cautions": [
+    "Multiple discovery XP notifications around Alterac/Dalaran and other locations are world exploration XP, not quest XP."
+  ],
+  "evidence_cautions": [
+    "q559/q560/q561 share the same Chinese title 法尔林的证据; stages are separated by NPC, objective text and unique Questie chain, not chat-title count.",
+    "q505 reward window is not final completion evidence; no final claim is made.",
+    "q540 has 5/5 recovered books but old leather book remains 0/1, so the quest itself is not objective-complete.",
+    "q564 shows objective completion in the quest log but has no final NPC turn-in evidence.",
+    "q9435 uses direct system XP 3800 rather than reward-window-area 3300 or Questie static XP.",
+    "Tracker absence never implies completion or abandonment."
+  ],
+  "extraction_phase": {
+    "episodes_1_to_12_backfill_complete": true,
+    "episodes_13_to_53_forward_complete": true,
+    "episodes_1_to_53_fact_extraction_complete": true,
+    "post_extraction_started": false,
+    "next_stage": "post_extraction_merge_audit_and_route_integration",
+    "next_stage_document": "/Users/chat/claude/wow-quest-route/docs/video-extraction/POST-EXTRACTION-PLAN.md",
+    "instruction": "Do not start POST-EXTRACTION in the episode-12 turn; stop after checkpoint synchronization and closing the episode-12 Bilibili target."
+  }
+}

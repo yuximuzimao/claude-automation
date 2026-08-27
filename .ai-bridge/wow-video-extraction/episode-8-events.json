@@ -1,0 +1,283 @@
+{
+  "episode": 8,
+  "title": "暮色森林 27-28",
+  "bvid": "BV1xYBTBtErC",
+  "cid": 34924988041,
+  "duration_seconds": 3392,
+  "display_duration": "00:56:32",
+  "series_index": "8/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 11,
+    "formal_total": 265,
+    "coarse_total": 58,
+    "fine20_total": 64,
+    "fine5_total": 143,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-3391"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video action evidence is authoritative. Questie only resolves Chinese names, IDs, NPCs, prerequisites/followups and static XP structure after the video establishes the event."
+  },
+  "level_evidence": [
+    {
+      "time_seconds": 900,
+      "action": "player_level_observed",
+      "level": 26,
+      "state": "direct_numeric_player_character_ui",
+      "confidence": "high",
+      "basis": "character/equipment UI directly reads 等级26 人类圣骑士; minor OCR glyph damage does not affect the numeric level"
+    }
+  ],
+  "completed_quests": [173, 165, 164, 5, 57, 66, 148, 221],
+  "completed_quest_count": 8,
+  "known_xp_subtotal_excluding_unreadable_completions": 12590,
+  "completed_quest_details": [
+    {
+      "quest_id": 173,
+      "quest_name": "森林里的狼人",
+      "experience": 2300,
+      "experience_basis": "direct_video",
+      "time_range": "21:10 approx",
+      "confidence": "high",
+      "followup_quest_id": 221
+    },
+    {
+      "quest_id": 165,
+      "quest_name": "隐士",
+      "experience": 2000,
+      "experience_basis": "video_turnin_reward_plus_unique_followup_q148_and_questie_static_x2_match",
+      "time_range": "34:50-35:25 approx",
+      "confidence": "medium_high",
+      "basis": "2000 quest XP in the NPC handoff sequence followed by direct acceptance of q148, which is q165's unique followup; q165 completion-name system line itself is not stable in OCR"
+    },
+    {
+      "quest_id": 164,
+      "quest_name": "斯温的货物",
+      "experience": 1850,
+      "experience_basis": "direct_video",
+      "time_range": "52:15-52:25 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 5,
+      "quest_name": "饥肠辘辘的基特斯",
+      "experience": 460,
+      "experience_basis": "direct_video",
+      "time_range": "55:05 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 57,
+      "quest_name": "守夜人",
+      "experience": 2200,
+      "experience_basis": "q58_unique_followup_offer_and_acceptance_plus_adjacent_2200_reward_and_questie_static_x2_match",
+      "time_range": "55:15-55:55 approx",
+      "confidence": "high",
+      "followup_quest_id": 58
+    },
+    {
+      "quest_id": 66,
+      "quest_name": "斯塔文的传说",
+      "experience": 1800,
+      "experience_basis": "completion_action_direct_questie_repairs_degraded_xp_digits_to_static_x2",
+      "time_range": "56:00 approx",
+      "confidence": "high"
+    },
+    {
+      "quest_id": 148,
+      "quest_name": "来自夜色镇的货物",
+      "experience": 1980,
+      "experience_basis": "direct_video",
+      "time_range": "56:00-56:05 approx",
+      "confidence": "high",
+      "followup_quest_id": 149
+    },
+    {
+      "quest_id": 221,
+      "quest_name": "森林里的狼人",
+      "experience": null,
+      "experience_basis": "video_digits_unreadable",
+      "time_range": "56:15-56:31 approx",
+      "confidence": "high",
+      "basis": "second same-name completion is separated from q173 by ~35 minutes; after q173 the new Nightbane Dark Runner objective uniquely identifies q221 as active"
+    }
+  ],
+  "events": [
+    {
+      "time_range": "02:45-03:35 approx",
+      "action": "accept",
+      "quest_id": 173,
+      "quest_name": "森林里的狼人",
+      "confidence": "high"
+    },
+    {
+      "time_seconds": 900,
+      "action": "player_level_observed",
+      "level": 26,
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:10 approx",
+      "action": "complete",
+      "quest_id": 173,
+      "quest_name": "森林里的狼人",
+      "experience": 2300,
+      "confidence": "high"
+    },
+    {
+      "time_range": "21:10 onward",
+      "action": "accepted_or_active",
+      "quest_id": 221,
+      "quest_name": "森林里的狼人",
+      "confidence": "high",
+      "basis": "new tracker objective directly shows Nightbane Dark Runners, uniquely matching q221 after q173"
+    },
+    {
+      "time_range": "34:50-35:25 approx",
+      "action": "complete",
+      "quest_id": 165,
+      "quest_name": "隐士",
+      "experience": 2000,
+      "confidence": "medium_high",
+      "basis": "unique followup transition into q148 plus direct reward context"
+    },
+    {
+      "time_range": "35:25-35:50 approx",
+      "action": "accept",
+      "quest_id": 148,
+      "quest_name": "来自夜色镇的货物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "52:15-52:25 approx",
+      "action": "complete",
+      "quest_id": 164,
+      "quest_name": "斯温的货物",
+      "experience": 1850,
+      "confidence": "high"
+    },
+    {
+      "time_range": "54:30 approx",
+      "action": "accept",
+      "quest_id": 66,
+      "quest_name": "斯塔文的传说",
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:05 approx",
+      "action": "complete",
+      "quest_id": 5,
+      "quest_name": "饥肠辘辘的基特斯",
+      "experience": 460,
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:15-55:55 approx",
+      "action": "complete",
+      "quest_id": 57,
+      "quest_name": "守夜人",
+      "experience": 2200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "55:55 approx",
+      "action": "accept",
+      "quest_id": 58,
+      "quest_name": "守夜人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:00 approx",
+      "action": "complete",
+      "quest_id": 66,
+      "quest_name": "斯塔文的传说",
+      "experience": 1800,
+      "confidence": "high",
+      "note": "XP digits repaired with Questie only after the completion action was confirmed"
+    },
+    {
+      "time_range": "56:00 approx",
+      "action": "reward_window_seen_not_final_turnin",
+      "quest_id": 101,
+      "quest_name": "惩罚图腾",
+      "confidence": "high",
+      "basis": "reward window title is direct, but no final completion system line appears before episode end"
+    },
+    {
+      "time_range": "56:00-56:05 approx",
+      "action": "complete",
+      "quest_id": 148,
+      "quest_name": "来自夜色镇的货物",
+      "experience": 1980,
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:00-56:10 approx",
+      "action": "accept",
+      "quest_id": 149,
+      "quest_name": "幽灵的发丝",
+      "confidence": "high"
+    },
+    {
+      "time_range": "56:15-56:31 approx",
+      "action": "complete",
+      "quest_id": 221,
+      "quest_name": "森林里的狼人",
+      "experience": null,
+      "confidence": "high"
+    }
+  ],
+  "discovery_events": [
+    {
+      "time_range": "02:00 approx",
+      "action": "discover_location",
+      "location": "夜色镇",
+      "experience": 200,
+      "counted_in_quest_xp_subtotal": false
+    }
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":58,"quest_name":"守夜人","state":"accepted_unclosed"},
+    {"quest_id":149,"quest_name":"幽灵的发丝","state":"accepted_unclosed"},
+    {"quest_id":101,"quest_name":"惩罚图腾","state":"reward_window_seen_not_final_turnin"},
+    {"quest_id":337,"quest_name":"一本破旧的历史书","state":"active_unclosed_at_episode_end"},
+    {"quest_id":95,"quest_name":"斯温的复仇","state":"active_unclosed_at_episode_end"},
+    {"quest_id":174,"quest_name":"仰望星空","state":"chain_active_or_unclosed_no_final_evidence"},
+    {"quest_id":89,"quest_name":"止水湖上的桥","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":141,"quest_name":"迪菲亚兄弟会","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":1654,"quest_name":"正义试炼","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":2040,"quest_name":"地底突袭","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":118,"quest_name":"马掌","state":"carried_unclosed_no_new_final_evidence"}
+  ],
+  "evidence_cautions": [
+    "Worgen in the Woods is a same-name multi-stage chain. The 21-minute and 56-minute completion lines are q173 and q221, not duplicate OCR; the intermediate Nightbane Dark Runner objective uniquely identifies q221.",
+    "The Night Watch is also a same-name chain. The late offer objective identifies q58, so the preceding q57 completion is established from the unique chain transition and adjacent 2200 reward; q56/q58 are not claimed complete.",
+    "Quest 165 completion-name text is not stable in OCR; its medium-high-confidence completion is based on direct reward context plus unique transition into q148.",
+    "Quest 66 XP 1800 is a digit repair after direct completion evidence, not a raw full-resolution video read.",
+    "Quest 148 directly gives 1980 XP, demonstrating dynamic low-level quest XP; static Questie XP x2 must not be mechanically substituted for every low-level quest.",
+    "Reward windows, quest-log 完成, tracker absence and 目标(N) never independently establish final turn-in. Quest 101 therefore remains uncompleted despite its reward window."
+  ],
+  "next_backfill_episode": {
+    "episode": 9,
+    "title": "暮色森林 29-30",
+    "bvid": "BV19VBjBwE5M",
+    "aid": 115775004215487,
+    "episode_id": 165922351,
+    "cid": 34955853906,
+    "duration_seconds": 3286,
+    "duration": "00:54:46",
+    "processed": false,
+    "metadata_only_read_from_episode_8_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_9",
+    "remaining_backfill": [9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

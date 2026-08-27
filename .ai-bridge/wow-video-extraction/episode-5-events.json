@@ -1,0 +1,131 @@
+{
+  "episode": 5,
+  "title": "赤脊山 19-20",
+  "bvid": "BV1c7B4BgEiZ",
+  "cid": 34911816884,
+  "duration_seconds": 3870,
+  "display_duration": "01:04:30",
+  "series_index": "5/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 16,
+    "formal_total": 433,
+    "coarse_total": 66,
+    "fine20_total": 195,
+    "fine5_total": 172,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "coverage_seconds": "0-3869",
+    "derived_level_crops_not_counted_as_raw_frames": true
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video action evidence is authoritative. Direct video XP is used when legible; Questie resolves exact digits only where the completion itself is direct but OCR drops leading/interior digits."
+  },
+  "level_evidence": [
+    {
+      "time_seconds_approx": 1220,
+      "action": "level_up",
+      "level": null,
+      "state": "direct_level_up_number_unreadable",
+      "confidence": "high_for_event_low_for_number",
+      "basis": "direct system text '祝贺你，你升到了…级！'; repeated crop/OCR attempts could not reliably read the digit"
+    }
+  ],
+  "latest_reliable_numeric_level_in_backfill_continuity": {
+    "episode": 4,
+    "level": 17,
+    "note": "This is the latest reliable numeric evidence, not a claim that episode 5 remains level 17 after its direct level-up event."
+  },
+  "completed_quests": [104, 14, 65, 3741, 129, 246, 127, 130, 131],
+  "completed_quest_count": 9,
+  "calibrated_completed_quest_xp_total": 18260,
+  "completed_quest_details": [
+    {"quest_id":104,"quest_name":"海岸上的威胁","experience":3100,"experience_basis":"direct_video","time_range":"19:15-19:35 approx","confidence":"high"},
+    {"quest_id":14,"quest_name":"西部荒野人民军","stage":"third","experience":3200,"experience_basis":"direct_video","time_range":"22:45-23:25 approx","confidence":"high"},
+    {"quest_id":65,"quest_name":"迪菲亚兄弟会","experience":2700,"experience_basis":"video_completion_plus_questie_digit_calibration","time_range":"28:00-28:25 approx","confidence":"high","followup_quest_id":132},
+    {"quest_id":3741,"quest_name":"希拉里的项链","experience":2700,"experience_basis":"video_completion_plus_questie_digit_calibration","time_range":"30:25-31:20 approx","confidence":"high"},
+    {"quest_id":129,"quest_name":"免费的午餐","experience":1080,"experience_basis":"video_completion_plus_questie_digit_calibration","time_range":"33:35-34:25 approx","confidence":"high","followup_quest_id":130},
+    {"quest_id":246,"quest_name":"审时度势","experience":1900,"experience_basis":"direct_video","time_range":"61:15-61:25 approx","confidence":"high"},
+    {"quest_id":127,"quest_name":"卖鱼","experience":2500,"experience_basis":"direct_video","time_range":"62:05-62:20 approx","confidence":"high","followup_quest_id":150},
+    {"quest_id":130,"quest_name":"寻访草药师","experience":540,"experience_basis":"direct_video","time_range":"63:15-63:25 approx","confidence":"high","followup_quest_id":131},
+    {"quest_id":131,"quest_name":"水仙诉衷情","experience":540,"experience_basis":"final_turnin_direct_questie_xp_calibration","time_range":"64:10-64:20 approx","confidence":"high"}
+  ],
+  "events": [
+    {"time_range":"19:15-19:35 approx","action":"complete","quest_id":104,"quest_name":"海岸上的威胁","experience":3100,"confidence":"high"},
+    {"time_range":"20:20 approx","action":"level_up","level":null,"confidence":"high_for_event_low_for_number","basis":"direct level-up system text; digit unreadable"},
+    {"time_range":"22:45-23:25 approx","action":"complete","quest_id":14,"quest_name":"西部荒野人民军","experience":3200,"confidence":"high"},
+    {"time_range":"25:55 approx","action":"accept","quest_id":118,"quest_name":"马掌","confidence":"high"},
+    {"time_range":"26:10 approx","action":"accept","quest_id":125,"quest_name":"丢失的工具","confidence":"high"},
+    {"time_range":"26:45 approx","action":"accept","quest_id":127,"quest_name":"卖鱼","confidence":"high"},
+    {"time_range":"27:00-27:40 approx","action":"accept","quest_id":20,"quest_name":"黑石氏族的威胁","confidence":"high"},
+    {"time_range":"27:00-27:40 approx","action":"accept","quest_id":3741,"quest_name":"希拉里的项链","confidence":"high"},
+    {"time_range":"27:00-27:40 approx","action":"accept","quest_id":91,"quest_name":"所罗门的律法","confidence":"high"},
+    {"time_range":"27:10-27:45 approx","action":"accept","quest_id":120,"quest_name":"送往暴风城的信","confidence":"high"},
+    {"time_range":"27:20-27:50 approx","action":"accept","quest_id":169,"quest_name":"通缉：加塞尔佐格","confidence":"high"},
+    {"time_range":"27:45-28:30 approx","action":"accept","quest_id":129,"quest_name":"免费的午餐","confidence":"high"},
+    {"time_range":"28:00-28:25 approx","action":"complete","quest_id":65,"quest_name":"迪菲亚兄弟会","experience":2700,"confidence":"high"},
+    {"time_range":"28:00-28:25 approx","action":"accept","quest_id":132,"quest_name":"迪菲亚兄弟会","confidence":"high"},
+    {"time_range":"28:50-29:10 approx","action":"accept","quest_id":92,"quest_name":"赤脊山炖肉","confidence":"high"},
+    {"time_range":"30:25-31:20 approx","action":"complete","quest_id":3741,"quest_name":"希拉里的项链","experience":2700,"confidence":"high"},
+    {"time_range":"33:35-34:25 approx","action":"complete","quest_id":129,"quest_name":"免费的午餐","experience":1080,"confidence":"high"},
+    {"time_range":"33:45-34:25 approx","action":"accept","quest_id":130,"quest_name":"寻访草药师","confidence":"high"},
+    {"time_range":"61:15-61:25 approx","action":"complete","quest_id":246,"quest_name":"审时度势","experience":1900,"confidence":"high"},
+    {"time_range":"61:25-61:50 approx","action":"accept","quest_id":128,"quest_name":"悬赏：黑石氏族","confidence":"high"},
+    {"time_range":"61:35 approx","action":"objective_complete_not_turnin","quest_id":125,"quest_name":"丢失的工具","confidence":"high","basis":"quest log explicitly shows 完成; no final turn-in evidence"},
+    {"time_range":"62:05-62:20 approx","action":"complete","quest_id":127,"quest_name":"卖鱼","experience":2500,"confidence":"high"},
+    {"time_range":"62:05-62:20 approx","action":"accept","quest_id":150,"quest_name":"鱼人偷猎者","confidence":"high"},
+    {"time_range":"63:15-63:25 approx","action":"complete","quest_id":130,"quest_name":"寻访草药师","experience":540,"confidence":"high"},
+    {"time_range":"63:15-63:30 approx","action":"accept","quest_id":131,"quest_name":"水仙诉衷情","confidence":"high"},
+    {"time_range":"63:30 approx","action":"objective_complete_not_turnin","quest_id":131,"quest_name":"水仙诉衷情","confidence":"high","basis":"quest log shows 完成 after receiving daffodil"},
+    {"time_range":"64:10-64:20 approx","action":"complete","quest_id":131,"quest_name":"水仙诉衷情","experience":540,"confidence":"high","basis":"later direct system text includes 交完成"}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":118,"quest_name":"马掌","state":"accepted_unclosed"},
+    {"quest_id":125,"quest_name":"丢失的工具","state":"objective_complete_not_turnin"},
+    {"quest_id":20,"quest_name":"黑石氏族的威胁","state":"accepted_unclosed"},
+    {"quest_id":91,"quest_name":"所罗门的律法","state":"accepted_unclosed"},
+    {"quest_id":120,"quest_name":"送往暴风城的信","state":"accepted_unclosed"},
+    {"quest_id":169,"quest_name":"通缉：加塞尔佐格","state":"accepted_unclosed"},
+    {"quest_id":92,"quest_name":"赤脊山炖肉","state":"accepted_unclosed_materials_incomplete"},
+    {"quest_id":132,"quest_name":"迪菲亚兄弟会","state":"accepted_unclosed"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"accepted_unclosed","last_direct_progress":"0/15"},
+    {"quest_id":150,"quest_name":"鱼人偷猎者","state":"accepted_unclosed"}
+  ],
+  "carried_uncertainties_no_new_direct_final_evidence": [
+    {"quest_id":9,"quest_name":"清理荒野","state":"last_direct_progress_19_of_20_then_state_unknown"},
+    {"quest_id":38,"quest_name":"杂味炖肉","state":"accepted_or_active_unclosed"},
+    {"quest_id":6281,"quest_name":"赶赴暴风城","state":"objective_complete_not_turnin"},
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"turnin_unknown_after_trainer_interaction"},
+    {"quest_id":353,"quest_name":"雷矛的包裹","state":"objective_complete_not_turnin"},
+    {"quest_id":11,"quest_name":"悬赏河爪豺狼人","state":"objective_complete_not_turnin"},
+    {"quest_id":176,"quest_name":"通缉：霍格","state":"prior_uncertain_state_preserved"},
+    {"quest_id":null,"quest_name":"冬天爷爷来了！","state":"accepted_unclosed_id_ambiguous_later_state_unknown"}
+  ],
+  "evidence_cautions": [
+    "Episode title 19-20 is metadata only; the episode contains a direct level-up event but its numeric digit remains unreadable after repeated OCR enhancement.",
+    "Quest 125 quest-log 完成 is objective completion only; no final turn-in is claimed.",
+    "Quest 65 and 3741 completion actions are direct; their leading XP digit is restored from Questie because OCR consistently retains only the trailing 700.",
+    "Quest 129 completion action is direct and its 1080 XP is Questie-calibrated from a low-resolution video number.",
+    "Quest 131 is only counted final after the later 交完成 system text, not when its quest log first shows 完成.",
+    "Old tracker absences are not used to infer completion or abandonment."
+  ],
+  "next_backfill_episode": {
+    "episode": 6,
+    "title": "赤脊山 20-22",
+    "bvid": "BV1NaBNBnEca",
+    "aid": 115767051814694,
+    "episode_id": 165608384,
+    "cid": 34921122838,
+    "duration_seconds": 4204,
+    "duration": "01:10:04",
+    "processed": false,
+    "metadata_only_read_from_episode_5_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_6",
+    "remaining_backfill": [6,7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

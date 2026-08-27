@@ -1,0 +1,355 @@
+{
+  "episode": 46,
+  "title": "嚎风峡湾76",
+  "raw_collection_title": "嚎风峡湾76",
+  "bvid": "BV1KCkKBiEUh",
+  "cid": 35419654968,
+  "duration_seconds": 3286,
+  "display_duration": "54:46",
+  "series_index": "46/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_batches": {
+      "coarse_01": 19,
+      "coarse_02": 19,
+      "coarse_03": 18,
+      "fine20_01": 35,
+      "fine20_02": 35,
+      "fine20_03": 35,
+      "fine20_04": 35,
+      "fine20_05": 26,
+      "fine5_a": 29,
+      "fine5_b": 41,
+      "fine5_c": 33,
+      "fine5_d": 23,
+      "fine5_e": 21,
+      "fine5_f": 49,
+      "fine5_g": 33,
+      "fine5_h": 29,
+      "fine5_i": 29,
+      "fine5_j": 14
+    },
+    "formal_total": 523,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "coverage_seconds": "0-3285"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [],
+  "level_continuity_note": "第46集没有新的直接玩家等级证据；合集标题《嚎风峡湾76》及NPC/目标/物品等级文字不能作为玩家等级证据。",
+  "events": [
+    {
+      "time_range": "around 01:40",
+      "action": "accept",
+      "quest_id": 11329,
+      "quest_name": "想尽办法！",
+      "confidence": "high"
+    },
+    {
+      "time_range": "01:45-02:30 approx",
+      "action": "complete_and_accept_side_quest",
+      "quest_id": 11406,
+      "quest_name": "一切必须准备就绪",
+      "experience_shown": 2500,
+      "accepted_quest_id": 11292,
+      "accepted_quest_name": "陷阱中的猎物",
+      "confidence": "high"
+    },
+    {
+      "time_range": "02:25-02:30 approx",
+      "action": "accept",
+      "quest_id": 11269,
+      "quest_name": "羽绒披风",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 03:40",
+      "action": "accept",
+      "quest_id": 11284,
+      "quest_name": "隔壁的雪人",
+      "confidence": "high"
+    },
+    {
+      "time_range": "around 11:50",
+      "action": "complete_and_accept_next",
+      "quest_id": 11329,
+      "quest_name": "想尽办法！",
+      "experience_shown": 25300,
+      "next_quest_id": 11410,
+      "next_quest_name": "逃走的大鱼",
+      "confidence": "high"
+    },
+    {
+      "time_range": "13:20-14:00 approx",
+      "action": "complete_and_accept_new",
+      "quest_id": 11410,
+      "quest_name": "逃走的大鱼",
+      "experience_shown": 40200,
+      "accepted_quest_id": 11346,
+      "accepted_quest_name": "符文之书",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "by around 13:20",
+      "action": "active_first_directly_observed",
+      "quest_id": 11355,
+      "quest_name": "巨人的迁徙",
+      "confidence": "medium",
+      "faction": "Alliance",
+      "evidence_note": "视频同时出现符文搜寻之锄与分析符文石巨人尸体目标；精确接受秒点未隔离。"
+    },
+    {
+      "time_range": "around 23:25",
+      "action": "complete",
+      "quest_id": 11292,
+      "quest_name": "陷阱中的猎物",
+      "experience_calibrated": 25300,
+      "confidence": "medium_high",
+      "evidence_note": "1405秒系统完成文字OCR扭曲，但此前持续追踪、该帧完成文字与随后消失共同支持；XP按Questie基础12650×2校准。"
+    },
+    {
+      "time_range": "23:55-24:15 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11269,
+      "quest_name": "羽绒披风",
+      "experience_shown": 40200,
+      "next_quest_id": 11418,
+      "next_quest_name": "我们叫他钢羽",
+      "confidence": "high"
+    },
+    {
+      "time_range": "25:10-25:25 approx",
+      "action": "complete",
+      "quest_id": 11284,
+      "quest_name": "隔壁的雪人",
+      "experience_shown": 40200,
+      "confidence": "high"
+    },
+    {
+      "time_range": "31:55-32:05 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11355,
+      "quest_name": "巨人的迁徙",
+      "experience_shown": 40600,
+      "next_quest_id": 11358,
+      "next_quest_name": "破碎石板",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "34:35-35:00 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11358,
+      "quest_name": "破碎石板",
+      "experience_shown": 40600,
+      "next_quest_id": 11359,
+      "next_quest_name": "击败麦加利斯",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "around 36:40",
+      "action": "complete",
+      "quest_id": 11359,
+      "quest_name": "击败麦加利斯",
+      "experience_shown": 50800,
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "39:15-39:30 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11322,
+      "quest_name": "净化",
+      "experience_shown": 40200,
+      "next_quest_id": 11325,
+      "next_quest_name": "座狼的伪装",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "41:20-42:50 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11325,
+      "quest_name": "座狼的伪装",
+      "experience_shown": 40200,
+      "next_quest_id": 11414,
+      "next_quest_name": "兄弟的背叛",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "45:50-46:40 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11414,
+      "quest_name": "兄弟的背叛",
+      "experience_shown": 40200,
+      "next_quest_id": 11416,
+      "next_quest_name": "巨鹰之眼",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "51:10-52:00 approx",
+      "action": "complete_and_accept_next",
+      "quest_id": 11416,
+      "quest_name": "巨鹰之眼",
+      "experience_shown": 40200,
+      "next_quest_id": 11326,
+      "next_quest_name": "头狼",
+      "confidence": "high",
+      "faction": "Alliance"
+    },
+    {
+      "time_range": "54:35-end",
+      "action": "objective_complete_reward_window_open_not_turnedin",
+      "quest_id": 11326,
+      "quest_name": "头狼",
+      "reward_window_experience": 50300,
+      "confidence": "high",
+      "faction": "Alliance",
+      "evidence_note": "3280和3285秒仍停在观察者莉莎·月叶的奖励选择窗口；50300为待领取经验，不是已获得经验。"
+    },
+    {
+      "time_range": "by about 37:30",
+      "action": "objective_complete_not_turnin",
+      "quest_id": 11346,
+      "quest_name": "符文之书",
+      "confidence": "high",
+      "faction": "Alliance",
+      "evidence_note": "任务日志显示（完成）/目标满足，但没有最终交付文字，也没有可靠接出11349《掌控符文》的证据。"
+    }
+  ],
+  "completed_quests": [
+    11406,
+    11329,
+    11410,
+    11292,
+    11269,
+    11284,
+    11355,
+    11358,
+    11359,
+    11322,
+    11325,
+    11414,
+    11416
+  ],
+  "completed_quest_count": 13,
+  "calibrated_completed_quest_xp_total": 466500,
+  "ending_active_or_unclosed_quests": [
+    {
+      "quest_id": 11326,
+      "quest_name": "头狼",
+      "state": "ready_to_turnin_not_completed",
+      "priority": "highest",
+      "faction": "Alliance",
+      "note": "第46集3280/3285秒停在观察者莉莎·月叶奖励选择窗口，尚无交付后完成证据。"
+    },
+    {
+      "quest_id": 11346,
+      "quest_name": "符文之书",
+      "state": "objective_complete_not_turnin",
+      "priority": "high",
+      "faction": "Alliance",
+      "note": "任务日志显示目标完成，但无最终交付/11349接取证据。"
+    },
+    {
+      "quest_id": 11418,
+      "quest_name": "我们叫他钢羽",
+      "state": "accepted_unclosed",
+      "priority": "high",
+      "note": "约24分钟接受；中段有钢羽巢穴相关对话，但无最终交付文字或19000经验。"
+    },
+    {
+      "quest_id": 11190,
+      "quest_name": "非标准炮弹",
+      "state": "objective_complete_not_turnin",
+      "priority": "high",
+      "note": "第44集目标完成，但至第46集仍无最终交付证据。"
+    },
+    {
+      "quest_id": 11448,
+      "quest_name": "探险者协会哨站",
+      "state": "turnin_unknown_across_cut",
+      "priority": "high"
+    },
+    {
+      "quest_id": 11252,
+      "quest_name": "杀入乌特加德！",
+      "state": "accepted_not_completed",
+      "priority": "carryover"
+    },
+    {
+      "quest_id": 13205,
+      "quest_name": "削减军备",
+      "state": "accepted_not_completed",
+      "priority": "carryover",
+      "faction": "Alliance"
+    },
+    {"quest_id": 12253, "quest_name": "拯救暮冬城的平民", "state": "older_active_unclosed", "priority": "carryover"},
+    {"quest_id": 12459, "quest_name": "创造与毁灭的力量", "state": "older_active_unclosed", "priority": "carryover"},
+    {"quest_id": 12456, "quest_name": "奥雷托斯的羽毛", "state": "ready_to_turn_in_not_turnedin", "priority": "carryover"},
+    {"quest_id": 12447, "quest_name": "黑曜石巨龙圣地", "state": "older_unresolved"},
+    {"quest_id": 12470, "quest_name": "永恒之龙的秘密", "state": "older_unresolved"},
+    {"quest_id": 12511, "quest_name": "丘陵援兵", "state": "ready_to_turn_in_not_turnedin"},
+    {"quest_id": 12794, "quest_name": "魔法王国达拉然", "state": "ready_to_turn_in_not_turnedin"},
+    {"quest_id": 12464, "quest_name": "我的老对手", "state": "ready_to_turn_in_not_turnedin"},
+    {"quest_id": 12167, "quest_name": "消灭教徒", "state": "turnin_unknown_across_cut"},
+    {"quest_id": 11940, "quest_name": "猎龙", "state": "older_unresolved"},
+    {"quest_id": 11884, "quest_name": "尼达尔，犀牛之王……", "state": "older_unresolved"},
+    {"quest_id": 11872, "quest_name": "罪恶的蛤蜊主宰……", "state": "older_unresolved"},
+    {"quest_id": 12035, "quest_name": "重新装配", "state": "older_unresolved"},
+    {"quest_id": 12086, "quest_name": "卡库特之子", "state": "older_unresolved"},
+    {"quest_id": 10004, "state": "older_unresolved"},
+    {"quest_id": 9900, "state": "older_unresolved"},
+    {"quest_id": 9925, "state": "older_unresolved"},
+    {"quest_id": 9882, "state": "older_unresolved"},
+    {"quest_id": 9937, "state": "older_unresolved_alliance_version"},
+    {"quest_id": 9869, "state": "older_unresolved"},
+    {"quest_id": 10810, "state": "older_unresolved"},
+    {"quest_id": 9962, "state": "previously_failed_retention_or_abandonment_uncertain"}
+  ],
+  "cross_episode_gaps": [
+    {
+      "quest_id": 11448,
+      "quest_name": "探险者协会哨站",
+      "state": "turnin_unknown_across_cut",
+      "evidence": "第46集仍无新增最终交付/放弃证据。"
+    },
+    {
+      "quest_id": 12167,
+      "quest_name": "消灭教徒",
+      "state": "turnin_unknown_across_cut",
+      "evidence": "第46集没有新增闭环证据；保持既有跨集缺口。"
+    }
+  ],
+  "evidence_cautions": [
+    "任务日志中的（完成）只代表目标完成，不代表最终交付；11346《符文之书》因此未计完成。",
+    "11326《头狼》片尾50300只出现在奖励窗口，未计已获得经验。",
+    "11346/11355/11358/11359使用联盟维德瓦堡垒版本；11322后续使用观察者莉莎·月叶联盟分支。",
+    "11418《我们叫他钢羽》没有最终交付证据，不能因后续追踪栏不显示而清除。",
+    "第46集没有新的直接玩家等级证据。"
+  ],
+  "next_episode": {
+    "episode": 47,
+    "title": "灰熊丘陵 77",
+    "bvid": "BV1MGrQBhERs",
+    "cid": 35447770013,
+    "duration_seconds": 4412,
+    "duration": "01:13:32",
+    "processed": false
+  },
+  "remaining_episode_count_after_completion": 7,
+  "notes": [
+    "本集明确最终完成13项任务，Questie×2校准任务经验合计466500。",
+    "第45集遗留11406《一切必须准备就绪》和11322《净化》均在本集闭环。",
+    "片尾最高优先级为11326《头狼》奖励窗口待最终点击；11346《符文之书》仅目标完成；11418《我们叫他钢羽》仍未闭环。",
+    "第47集元数据只从当前第46集合集状态只读查询，未导航、播放、截图或处理。"
+  ]
+}

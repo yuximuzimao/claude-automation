@@ -1,0 +1,108 @@
+{
+  "episode": 52,
+  "title": "祖达克79",
+  "raw_collection_title": "祖达克79",
+  "bvid": "BV1pGkMBvEU1",
+  "cid": 35488664336,
+  "duration_seconds": 4253,
+  "display_duration": "01:10:53",
+  "series_index": "52/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 23,
+    "formal_total": 584,
+    "coarse_total": 72,
+    "fine20_total": 214,
+    "fine5_total": 298,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "coverage_seconds": "0-4252"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_seconds_approx": 1585,
+      "time_display_approx": "26:25",
+      "level": 79,
+      "type": "direct_character_panel",
+      "confidence": "high",
+      "evidence": "角色面板直接显示79级人类圣骑士。"
+    }
+  ],
+  "events": [
+    {"time_range":"around 00:40","action":"accept","quest_id":12859,"quest_name":"火仍在烧！","confidence":"high"},
+    {"time_range":"01:30-01:50 approx","action":"accept","quest_id":12883,"quest_name":"达库鲁的命令","confidence":"high"},
+    {"time_range":"05:15-05:25 approx","action":"complete","quest_id":12859,"quest_name":"火仍在烧！","experience_shown":41900,"confidence":"high"},
+    {"time_range":"19:20-19:50 approx","action":"complete","quest_id":12857,"quest_name":"悬赏：怒鬃的鳍肢","experience_shown":52400,"confidence":"high"},
+    {"time_range":"around 20:20","action":"complete","quest_id":12894,"quest_name":"北伐军前线营地","experience_shown":10500,"confidence":"high"},
+    {"time_range":"20:50 onward approx","action":"accept","quest_id":12903,"quest_name":"朋友的意义……","confidence":"high"},
+    {"time_range":"around 22:20","action":"accept","quest_id":12912,"quest_name":"风暴将至","confidence":"medium_high","basis":"OCR乱码结合Questie前后置校准"},
+    {"time_range":"around 22:20","action":"accept","quest_id":12904,"quest_name":"圣光不能为我复仇","confidence":"high"},
+    {"time_range":"around 26:00","action":"turnin_unknown_across_cut_after_reward_window","quest_id":12903,"quest_name":"朋友的意义……","confidence":"high","experience_not_counted":true},
+    {"time_range":"26:25-27:10 approx","action":"complete","quest_id":12901,"quest_name":"从无到有","experience_shown":42300,"confidence":"high"},
+    {"time_range":"around 27:00","action":"complete_and_accept_next","quest_id":12912,"quest_name":"风暴将至","experience_shown":4200,"next_quest_id":12914,"next_quest_name":"拯救盖米尔","confidence":"high"},
+    {"time_range":"33:15-34:00 approx","action":"complete","quest_id":12904,"quest_name":"圣光不能为我复仇","experience_shown":52900,"confidence":"high"},
+    {"time_range":"35:25-36:00 approx","action":"complete_and_accept_next","quest_id":12884,"quest_name":"黑锋哨站","experience_shown":10500,"next_quest_id":12630,"next_quest_name":"纳斯和巨魔的毛发","confidence":"high"},
+    {"time_range":"41:45-42:30 approx","action":"complete_and_accept_next","quest_id":12631,"quest_name":"某种邀请……","experience_shown":31400,"next_quest_id":12637,"next_quest_name":"幸免于难","confidence":"high"},
+    {"time_range":"43:25-44:50 approx","action":"complete_and_accept_next","quest_id":12637,"quest_name":"幸免于难","experience_shown":21000,"next_quest_id":12629,"next_quest_name":"无处可藏","confidence":"high"},
+    {"time_range":"48:20-49:00 approx","action":"complete_and_accept_next","quest_id":12629,"quest_name":"无处可藏","experience_shown":41900,"next_quest_id":12648,"next_quest_name":"乔装打扮","confidence":"high"},
+    {"time_range":"52:05-54:00 approx","action":"complete","quest_id":12652,"quest_name":"喂饱食尸鬼","experience_shown":41900,"confidence":"high","basis":"10/10目标、奖励窗口与Questie经验闭环"},
+    {"time_range":"54:35-54:50 approx","action":"complete","quest_id":12648,"quest_name":"乔装打扮","experience_shown":31400,"confidence":"high"},
+    {"time_range":"54:50-55:10 approx","action":"complete","quest_id":12630,"quest_name":"纳斯和巨魔的毛发","experience_shown":41900,"confidence":"high"},
+    {"time_range":"55:25-55:45 approx","action":"accept","quest_id":12661,"quest_name":"潜入沃尔塔鲁斯","confidence":"high"},
+    {"time_range":"around 55:00","action":"objective_complete_not_turnin","quest_id":12795,"quest_name":"银色前沿","confidence":"high","basis":"任务日志显示（完成），无最终系统任务经验"},
+    {"time_range":"55:50-56:10 approx","action":"complete_and_accept_next","quest_id":12914,"quest_name":"拯救盖米尔","experience_shown":42300,"next_quest_id":12916,"next_quest_name":"唯一的希望","confidence":"high"},
+    {"time_range":"56:35-57:05 approx","action":"complete_and_accept_next","quest_id":12916,"quest_name":"唯一的希望","experience_shown":21200,"next_quest_id":12919,"next_quest_name":"风暴之王的复仇","confidence":"high"},
+    {"time_range":"late episode","action":"active_first_observed_unclosed","quest_id":12664,"quest_name":"黑暗的地平线","confidence":"medium_high"},
+    {"time_range":"episode-wide cut gap","action":"turnin_unknown_across_cut_chain_progressed","quest_id":12883,"quest_name":"达库鲁的命令","confidence":"high","experience_not_counted":true,"basis":"直接接受后，后续12884与12894在较大剪辑间隔后进入活动；无最终交付系统证据"}
+  ],
+  "completed_quests": [12859,12857,12894,12901,12912,12904,12884,12631,12637,12629,12652,12648,12630,12914,12916],
+  "completed_quest_count": 15,
+  "calibrated_completed_quest_xp_total": 487700,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":12661,"quest_name":"潜入沃尔塔鲁斯","state":"accepted_unclosed","priority":"highest"},
+    {"quest_id":12919,"quest_name":"风暴之王的复仇","state":"accepted_unclosed","priority":"highest"},
+    {"quest_id":12795,"quest_name":"银色前沿","state":"objective_complete_not_turnin","priority":"high"},
+    {"quest_id":12664,"quest_name":"黑暗的地平线","state":"active_first_observed_unclosed","priority":"high"},
+    {"quest_id":12903,"quest_name":"朋友的意义……","state":"turnin_unknown_across_cut_after_reward_window","priority":"high"},
+    {"quest_id":12883,"quest_name":"达库鲁的命令","state":"turnin_unknown_across_cut_chain_progressed","priority":"high"},
+    {"quest_id":12164,"quest_name":"狼人的末日","state":"objective_complete_not_turnin","priority":"carryover"},
+    {"quest_id":12247,"quest_name":"乌索克的孩子","state":"active_first_observed_unclosed","priority":"carryover"},
+    {"quest_id":12279,"quest_name":"熊的美食","state":"accepted_unclosed","priority":"carryover"},
+    {"quest_id":11993,"quest_name":"符文中的预言","state":"accepted_unclosed","priority":"carryover"},
+    {"quest_id":12238,"quest_name":"净化达克萨隆","state":"accepted_not_completed","priority":"carryover"},
+    {"quest_id":12037,"quest_name":"搜寻和营救","state":"accepted_unclosed","priority":"carryover"},
+    {"quest_id":12220,"quest_name":"黑暗的影响","state":"active_first_observed_unclosed","priority":"carryover"}
+  ],
+  "evidence_cautions": [
+    "12903朋友的意义只出现奖励窗口，窗口后切镜，未见最终系统领取，因此不计42300。",
+    "12883达库鲁的命令只确认接受与后续链条跨剪辑推进，未补造交付时间或经验。",
+    "12795银色前沿日志显示完成只代表可交/目标完成，不是最终交付。",
+    "后半大量完成达库鲁大王的任务是12661潜入沃尔塔鲁斯的目标文字，不得重复计数。",
+    "本集没有80级直接证据，最新直接等级仍为79。"
+  ],
+  "next_episode": {
+    "episode": 53,
+    "title": "祖达克 80",
+    "bvid": "BV1N9kgBLE7W",
+    "cid": 35489450285,
+    "duration_seconds": 4444,
+    "duration": "01:14:04",
+    "processed": false
+  },
+  "remaining_forward_episode_count_after_completion": 1,
+  "post_series_sequence": {
+    "after_episode_53": "backfill_episodes_1_to_12",
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  },
+  "notes": [
+    "本集明确最终完成15项任务，Questie×2校准任务经验合计487700。",
+    "本集约26:25角色面板再次直接确认79级，没有80级直接证据。",
+    "第53集元数据只从第52集合集状态只读查询，未导航、播放、截图或处理。",
+    "第53集完成后回头补做第1—12集；1—53全部事实提取完成后才进入第二阶段。"
+  ]
+}

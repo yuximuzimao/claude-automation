@@ -1,0 +1,124 @@
+{
+  "episode": 11,
+  "title": "湿地任务 33",
+  "bvid": "BV1UoBvByEkZ",
+  "cid": 34999305144,
+  "duration_seconds": 3016,
+  "display_duration": "00:50:16",
+  "series_index": "11/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 14,
+    "formal_total": 229,
+    "coarse_total": 52,
+    "fine20_total": 52,
+    "fine5_total": 125,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-3015"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video evidence is authoritative. Questie resolves Chinese names, IDs, unique prerequisite/followup transitions and static XP only after visible state/action establishes the transition."
+  },
+  "level_evidence": [],
+  "latest_known_backfill_level": {
+    "episode": 10,
+    "level": 32,
+    "state": "direct_numeric_level_up"
+  },
+  "direct_completed_quests": [631,303,304,633,634,538,647],
+  "chain_transition_completed_quests": [337,632],
+  "events": [
+    {"time_range":"before or early episode 11","action":"complete_by_chain_transition","quest_id":337,"quest_name":"一本破旧的历史书","confidence":"high","exact_time_known":false,"basis":"q538 is directly active throughout episode 11 and q337 is its unique prerequisite"},
+
+    {"time_range":"28:35 approx","action":"complete","quest_id":631,"quest_name":"萨多尔大桥","confidence":"high","basis":"direct completion-shaped system text followed by same-name next-stage acceptance"},
+    {"time_range":"28:35-30:10 approx","action":"accept","quest_id":632,"quest_name":"萨多尔大桥","confidence":"high","basis":"direct same-name acceptance plus parchment-return objective unique to q632"},
+    {"time_range":"before 36:45","action":"complete_by_chain_transition","quest_id":632,"quest_name":"萨多尔大桥","confidence":"high","exact_time_known":false,"basis":"q633 destroy-explosives objective is directly active"},
+    {"time_range":"before 36:45","action":"accepted_by_chain_transition","quest_id":633,"quest_name":"萨多尔大桥","confidence":"high","exact_time_known":false},
+
+    {"time_range":"36:45 approx onward","action":"complete","quest_id":303,"quest_name":"黑铁战争","experience":4900,"experience_basis":"direct_video_and_questie_static_x2_match","confidence":"high"},
+    {"time_range":"35:00 approx","action":"objective_item_acquired","quest_id":304,"quest_name":"艰巨的任务","item":"巴尔加拉斯的耳环","confidence":"high","note":"objective evidence only, not final turn-in"},
+    {"time_range":"37:30-38:00 approx","action":"complete","quest_id":304,"quest_name":"艰巨的任务","confidence":"high"},
+
+    {"time_range":"39:00-40:20 approx","action":"complete","quest_id":633,"quest_name":"萨多尔大桥","confidence":"high","basis":"reward window plus later direct acceptance of unique followup q634"},
+    {"time_range":"40:20-41:10 approx","action":"accept","quest_id":634,"quest_name":"请求援助","confidence":"high"},
+    {"time_range":"43:50 approx","action":"complete","quest_id":634,"quest_name":"请求援助","experience":2500,"experience_basis":"degraded_video_digits_repaired_with_questie_static_x2","confidence":"high"},
+    {"time_range":"43:50 approx onward","action":"accept","quest_id":681,"quest_name":"诺斯弗德农场","confidence":"high"},
+    {"time_range":"45:15-45:35 approx","action":"accept","quest_id":684,"quest_name":"通缉：玛雷兹·考尔","confidence":"high"},
+    {"time_range":"45:20 onward","action":"accepted_or_active","quest_id":685,"quest_name":"通缉：奥图和法库雷斯特","confidence":"high","basis":"direct tracker entry during wanted-board interaction"},
+
+    {"time_range":"49:25-49:55 approx","action":"complete","quest_id":538,"quest_name":"南海镇","experience":1960,"experience_basis":"direct_degraded_digits_plus_questie_static_x2_calibration","confidence":"high"},
+    {"time_range":"49:25 onward","action":"accept","quest_id":540,"quest_name":"保全书籍","confidence":"high"},
+    {"time_range":"50:05-50:15 approx","action":"complete","quest_id":647,"quest_name":"马克里尔的月光酒","confidence":"high"},
+
+    {"time_range":"49:05 onward","action":"accepted_or_active","quest_id":565,"quest_name":"巴图罗的雪人毛皮披风","confidence":"high","basis":"direct unique tracker objectives"},
+    {"time_range":"49:10 onward","action":"accepted_or_active","quest_id":564,"quest_name":"损失惨重","confidence":"high","basis":"direct tracker entry and mountain-lion objectives"},
+    {"time_range":"49:35 approx","action":"accept","quest_id":500,"quest_name":"破碎岭食人魔","confidence":"high"},
+    {"time_range":"49:20-49:55 approx","action":"accepted_or_active","quest_id":505,"quest_name":"辛迪加刺客","confidence":"high","basis":"Mayor task window plus active tracker state"},
+    {"time_range":"49:50-50:15 approx","action":"accepted_or_active","quest_id":536,"quest_name":"清理海岸","confidence":"high","basis":"direct tracker with murloc kill objectives"},
+    {"time_range":"50:10-50:15 approx","action":"accepted_or_active","quest_id":555,"quest_name":"海龟汤","confidence":"high","basis":"direct tracker shows 海龟肉0/10"},
+    {"time_range":"50:10 approx","action":"accept","quest_id":9435,"quest_name":"遗失的水晶","confidence":"high"}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":681,"quest_name":"诺斯弗德农场","state":"accepted_unclosed"},
+    {"quest_id":684,"quest_name":"通缉：玛雷兹·考尔","state":"accepted_unclosed"},
+    {"quest_id":685,"quest_name":"通缉：奥图和法库雷斯特","state":"accepted_or_active_unclosed"},
+    {"quest_id":540,"quest_name":"保全书籍","state":"accepted_unclosed"},
+    {"quest_id":565,"quest_name":"巴图罗的雪人毛皮披风","state":"accepted_or_active_unclosed"},
+    {"quest_id":564,"quest_name":"损失惨重","state":"accepted_or_active_unclosed"},
+    {"quest_id":500,"quest_name":"破碎岭食人魔","state":"accepted_unclosed"},
+    {"quest_id":505,"quest_name":"辛迪加刺客","state":"accepted_or_active_unclosed"},
+    {"quest_id":536,"quest_name":"清理海岸","state":"accepted_or_active_unclosed"},
+    {"quest_id":555,"quest_name":"海龟汤","state":"accepted_or_active_unclosed"},
+    {"quest_id":9435,"quest_name":"遗失的水晶","state":"accepted_unclosed"},
+
+    {"quest_id":270,"quest_name":"被诅咒的舰队","state":"accepted_unclosed_no_new_direct_evidence"},
+    {"quest_id":231,"quest_name":"女儿的爱","state":"reward_window_seen_but_task_later_still_active_no_new_final_evidence"},
+    {"quest_id":253,"quest_name":"藏尸者的妻子","state":"objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":98,"quest_name":"斯塔文的传说","state":"accepted_or_active_unclosed_no_new_final_evidence"},
+    {"quest_id":223,"quest_name":"森林里的狼人","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":101,"quest_name":"惩罚图腾","state":"reward_window_seen_not_final_turnin"},
+    {"quest_id":58,"quest_name":"守夜人","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":89,"quest_name":"止水湖上的桥","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":141,"quest_name":"迪菲亚兄弟会","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":1654,"quest_name":"正义试炼","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":2040,"quest_name":"地底突袭","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":118,"quest_name":"马掌","state":"carried_unclosed_no_new_final_evidence"}
+  ],
+  "known_direct_or_calibrated_xp": [
+    {"quest_id":303,"quest_name":"黑铁战争","experience":4900,"basis":"direct video"},
+    {"quest_id":634,"quest_name":"请求援助","experience":2500,"basis":"degraded video digits + Questie x2"},
+    {"quest_id":538,"quest_name":"南海镇","experience":1960,"basis":"degraded video digits + Questie x2"}
+  ],
+  "non_quest_xp_cautions": [
+    "探索萨多尔大桥/避难谷地/南海镇出现的245等数字是探索经验，不计为任务经验。"
+  ],
+  "evidence_cautions": [
+    "Same-name q631/q632/q633 Thandol Span stages are separated by objective text and unique chain structure, not task name alone.",
+    "Balgaras's Earring acquisition is objective evidence only; q304 final completion is based on later NPC/system completion evidence.",
+    "q337 is a historical gap resolved only by q538 being directly active; exact completion episode/time remains unknown.",
+    "q270 is not auto-completed merely because the player is in Wetlands; no q321 or final-turn-in evidence was found.",
+    "Tracker absence never implies completion or abandonment."
+  ],
+  "next_backfill_episode": {
+    "episode": 12,
+    "title": "南海镇 34-35",
+    "bvid": "BV1GJBrBNEoZ",
+    "aid": 115789248071885,
+    "episode_id": 166391228,
+    "cid": 35005796336,
+    "duration_seconds": 3930,
+    "duration": "01:05:30",
+    "processed": false,
+    "metadata_only_read_from_episode_11_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_12",
+    "remaining_backfill": [12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "episode": 6,
+  "title": "赤脊山 20-22",
+  "bvid": "BV1NaBNBnEca",
+  "cid": 34921122838,
+  "duration_seconds": 4204,
+  "display_duration": "01:10:04",
+  "series_index": "6/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 12,
+    "formal_total": 266,
+    "coarse_total": 71,
+    "fine20_task_center_total": 75,
+    "fine5_total": 120,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "coverage_seconds": "0-4203"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video action evidence is authoritative. Questie is used only to resolve Chinese names, quest IDs, NPCs, same-name stages and static XP where the action is already direct."
+  },
+  "level_evidence": [],
+  "level_note": "No new independently readable numeric level-up system message was captured in episode 6. A low-resolution character-sheet level line around 20:00 is not promoted to numeric evidence, and the episode title is not used to infer level.",
+  "completed_quests": [1649, 120, 1650, 1651, 132, 135, 1652, 1653],
+  "completed_quest_count": 8,
+  "known_or_calibrated_xp_subtotal_excluding_two_unreadable_dynamic_class_stages": 10030,
+  "completed_quest_details": [
+    {"quest_id":1649,"quest_name":"勇气之书","experience":780,"experience_basis":"direct_video_approx","time_range":"00:25 approx","confidence":"high","followup_quest_id":1650},
+    {"quest_id":120,"quest_name":"送往暴风城的信","experience":780,"experience_basis":"adjacent_video_frames_plus_questie_overlevel_consistency","time_range":"04:20 approx","confidence":"high","followup_quest_id":121},
+    {"quest_id":1650,"quest_name":"勇气之书","experience":null,"experience_basis":"video_digits_unreadable","time_range":"08:40 approx","confidence":"high_for_completion","followup_quest_id":1651},
+    {"quest_id":1651,"quest_name":"勇气之书","experience":null,"experience_basis":"video_digits_unreadable","time_range":"11:40-12:00 approx","confidence":"high_for_completion_via_successful_defense_and_direct_followup_accept","followup_quest_id":1652},
+    {"quest_id":132,"quest_name":"迪菲亚兄弟会","experience":1360,"experience_basis":"direct_video_completion_plus_questie_static_xp_times_server_multiplier","time_range":"13:40 approx","confidence":"high","followup_quest_id":135},
+    {"quest_id":135,"quest_name":"迪菲亚兄弟会","experience":1360,"experience_basis":"direct_video_completion_plus_questie_static_xp_times_server_multiplier","time_range":"14:15 approx","confidence":"high","followup_quest_id":141},
+    {"quest_id":1652,"quest_name":"勇气之书","experience":4100,"experience_basis":"direct_video","time_range":"18:00 approx","confidence":"high","followup_quest_id":1653},
+    {"quest_id":1653,"quest_name":"正义试炼","experience":1650,"experience_basis":"direct_video_approx","time_range":"22:40-23:20 approx","confidence":"high","followup_quest_id":1654}
+  ],
+  "events": [
+    {"time_range":"00:25 approx","action":"complete","quest_id":1649,"quest_name":"勇气之书","experience":780,"confidence":"high"},
+    {"time_range":"00:25 approx","action":"accept","quest_id":1650,"quest_name":"勇气之书","confidence":"high"},
+    {"time_range":"04:20 approx","action":"complete","quest_id":120,"quest_name":"送往暴风城的信","experience":780,"confidence":"high"},
+    {"time_range":"04:20 approx","action":"accept","quest_id":121,"quest_name":"送往暴风城的信","confidence":"high"},
+    {"time_range":"08:40 approx","action":"complete","quest_id":1650,"quest_name":"勇气之书","experience":null,"confidence":"high"},
+    {"time_range":"08:40 approx","action":"accept","quest_id":1651,"quest_name":"勇气之书","confidence":"high"},
+    {"time_range":"11:40-12:00 approx","action":"complete","quest_id":1651,"quest_name":"勇气之书","experience":null,"confidence":"high","basis":"successful Daphne defense followed by direct acceptance of the unique next stage"},
+    {"time_range":"12:00 approx","action":"accept","quest_id":1652,"quest_name":"勇气之书","confidence":"high"},
+    {"time_range":"13:40 approx","action":"complete","quest_id":132,"quest_name":"迪菲亚兄弟会","experience":1360,"confidence":"high"},
+    {"time_range":"13:40 approx","action":"accept","quest_id":135,"quest_name":"迪菲亚兄弟会","confidence":"high"},
+    {"time_range":"14:15 approx","action":"complete","quest_id":135,"quest_name":"迪菲亚兄弟会","experience":1360,"confidence":"high"},
+    {"time_range":"14:15 approx","action":"accept","quest_id":141,"quest_name":"迪菲亚兄弟会","confidence":"high"},
+    {"time_range":"18:00 approx","action":"complete","quest_id":1652,"quest_name":"勇气之书","experience":4100,"confidence":"high"},
+    {"time_range":"18:00 approx","action":"accept","quest_id":1653,"quest_name":"正义试炼","confidence":"high"},
+    {"time_range":"18:40 approx","action":"accept","quest_id":2040,"quest_name":"地底突袭","confidence":"high","basis":"full quest window plus direct system accept"},
+    {"time_range":"22:40-23:20 approx","action":"complete","quest_id":1653,"quest_name":"正义试炼","experience":1650,"confidence":"high"},
+    {"time_range":"22:40-23:20 approx","action":"accept","quest_id":1654,"quest_name":"正义试炼","confidence":"high"},
+    {"time_range":"68:40 approx","action":"progress","quest_id":150,"quest_name":"鱼人偷猎者","progress":"4/8","confidence":"medium_high"},
+    {"time_range":"69:35 approx","action":"objective_complete_not_turnin","quest_id":125,"quest_name":"丢失的工具","confidence":"high","basis":"direct item text for 奥斯洛的工具箱; no final turn-in before video end"},
+    {"time_range":"70:03 end","action":"progress","quest_id":150,"quest_name":"鱼人偷猎者","progress":"6/8 approx","confidence":"medium_high"}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":121,"quest_name":"送往暴风城的信","state":"accepted_unclosed"},
+    {"quest_id":141,"quest_name":"迪菲亚兄弟会","state":"accepted_unclosed"},
+    {"quest_id":1654,"quest_name":"正义试炼","state":"accepted_unclosed_materials_incomplete"},
+    {"quest_id":2040,"quest_name":"地底突袭","state":"accepted_unclosed"},
+    {"quest_id":125,"quest_name":"丢失的工具","state":"objective_complete_not_turnin","last_direct_evidence":"奥斯洛的工具箱 acquired around 4175s"},
+    {"quest_id":150,"quest_name":"鱼人偷猎者","state":"accepted_unclosed","last_direct_progress":"6/8 approx"},
+    {"quest_id":20,"quest_name":"黑石氏族的威胁","state":"accepted_unclosed_no_final_evidence_this_episode"},
+    {"quest_id":91,"quest_name":"所罗门的律法","state":"accepted_unclosed_no_final_evidence_this_episode"},
+    {"quest_id":169,"quest_name":"通缉：加塞尔佐格","state":"accepted_unclosed_no_final_evidence_this_episode"},
+    {"quest_id":92,"quest_name":"赤脊山炖肉","state":"accepted_unclosed_no_final_evidence_this_episode"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"accepted_unclosed_no_final_evidence_this_episode"},
+    {"quest_id":118,"quest_name":"马掌","state":"accepted_unclosed_no_final_evidence_this_episode"}
+  ],
+  "cross_episode_state_discontinuities": [
+    {
+      "quest_id":125,
+      "quest_name":"丢失的工具",
+      "episode_5_checkpoint_state":"objective_complete_not_turnin",
+      "episode_6_opening_direct_state":"奥斯洛的工具箱 0/1",
+      "episode_6_late_state":"toolbox reacquired around 4175s",
+      "cause":"unknown_not_in_video",
+      "rule":"episode_6 direct evidence governs episode_6 state; do not guess why the state changed across the edit boundary"
+    }
+  ],
+  "carried_uncertainties_no_new_direct_final_evidence": [
+    {"quest_id":9,"quest_name":"清理荒野","state":"prior_uncertain_state_preserved"},
+    {"quest_id":38,"quest_name":"杂味炖肉","state":"accepted_or_active_unclosed"},
+    {"quest_id":6281,"quest_name":"赶赴暴风城","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"prior_uncertain_state_preserved"},
+    {"quest_id":353,"quest_name":"雷矛的包裹","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":11,"quest_name":"悬赏河爪豺狼人","state":"prior_objective_complete_not_turnin_no_new_final_evidence"},
+    {"quest_id":176,"quest_name":"通缉：霍格","state":"prior_uncertain_state_preserved"},
+    {"quest_id":null,"quest_name":"冬天爷爷来了！","state":"prior_uncertain_state_preserved"}
+  ],
+  "evidence_cautions": [
+    "The video contains several hard cuts between regions; persistent system-chat lines are not counted again after a cut.",
+    "Same-name Tome of Valor and The Test of Righteousness stages are split by Questie IDs, while all action claims remain grounded in video evidence.",
+    "One OCR frame misread the Messenger to Stormwind XP as 1780; adjacent frames repeatedly preserve 780 and Questie overlevel scaling is consistent with 780, so 780 is recorded.",
+    "Quest 132 and 135 XP text is low-resolution near 1350; Questie static 680 with the project server x2 multiplier calibrates both to 1360 after direct completion is established.",
+    "Quest 125 changes from episode-5 objective-complete to episode-6 opening 0/1. The cross-episode cause is not visible and is not inferred.",
+    "Tracker absence and target-count changes are never used to infer completion or abandonment."
+  ],
+  "next_backfill_episode": {
+    "episode": 7,
+    "title": "赤脊山 23-26",
+    "bvid": "BV1EABNBgETt",
+    "aid": 115767303473154,
+    "episode_id": 165618701,
+    "cid": 34921777951,
+    "duration_seconds": 4299,
+    "duration": "01:11:39",
+    "processed": false,
+    "metadata_only_read_from_episode_6_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_7",
+    "remaining_backfill": [7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

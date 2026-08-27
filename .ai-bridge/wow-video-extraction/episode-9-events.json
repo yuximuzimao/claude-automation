@@ -1,0 +1,114 @@
+{
+  "episode": 9,
+  "title": "暮色森林 29-30",
+  "bvid": "BV19VBjBwE5M",
+  "cid": 34955853906,
+  "duration_seconds": 3286,
+  "display_duration": "00:54:46",
+  "series_index": "9/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "recovered_after_interruption": true,
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 13,
+    "formal_total": 310,
+    "coarse_total": 56,
+    "fine20_total": 100,
+    "fine5_total": 154,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-3285"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video action evidence is authoritative. Questie resolves same-name stages and unique chain transitions only after video establishes the visible state/action."
+  },
+  "level_evidence": [],
+  "latest_known_backfill_level": {
+    "episode": 8,
+    "level": 26,
+    "state": "direct_numeric_player_character_ui"
+  },
+  "direct_completed_quests": [72,74,78,80,97,95,262,265,266,228,222,157,268],
+  "chain_transition_completed_quests": [70,75,79,230,453,225,227,149,154],
+  "events": [
+    {"time_range":"02:45-04:00 approx","action":"complete","quest_id":72,"quest_name":"斯塔文的传说","experience":460,"confidence":"high","basis":"completion chat plus torn diary page; Questie q72 static 230 x2 matches"},
+    {"time_range":"before q72 completion","action":"complete_by_chain_transition","quest_id":70,"quest_name":"斯塔文的传说","confidence":"high","exact_time_known":false},
+    {"time_range":"08:00 approx","action":"complete","quest_id":74,"quest_name":"斯塔文的传说","experience":2300,"confidence":"high","basis":"Magistrate Haggard is q74 unique endpoint; direct completion and XP"},
+    {"time_range":"08:00-08:30 approx","action":"accept","quest_id":75,"quest_name":"斯塔文的传说","confidence":"high"},
+    {"time_range":"cut gap before 40:45","action":"complete_by_chain_transition","quest_id":75,"quest_name":"斯塔文的传说","confidence":"high","exact_time_known":false},
+    {"time_range":"40:45-41:05 approx","action":"complete","quest_id":78,"quest_name":"斯塔文的传说","confidence":"high","basis":"Innkeeper Smitts is q78 unique endpoint"},
+    {"time_range":"41:05-41:20 approx","action":"complete_by_chain_transition","quest_id":79,"quest_name":"斯塔文的传说","confidence":"high","exact_time_known":false},
+    {"time_range":"41:20 approx","action":"complete","quest_id":80,"quest_name":"斯塔文的传说","experience":460,"confidence":"high","basis":"Clerk Daltry unique endpoint plus 460 XP"},
+    {"time_range":"41:45-41:55 approx","action":"complete","quest_id":97,"quest_name":"斯塔文的传说","confidence":"high"},
+    {"time_range":"41:45-42:00 approx","action":"accept_or_active","quest_id":98,"quest_name":"斯塔文的传说","confidence":"high"},
+
+    {"time_range":"20:10 approx","action":"complete","quest_id":95,"quest_name":"斯温的复仇","experience":2000,"experience_basis":"degraded_video_digits_repaired_with_questie_static_x2","confidence":"high"},
+    {"time_range":"20:20 onward","action":"accept","quest_id":230,"quest_name":"斯温的营地","confidence":"high"},
+    {"time_range":"before 43:00","action":"complete_by_chain_transition","quest_id":230,"quest_name":"斯温的营地","confidence":"high","exact_time_known":false},
+    {"time_range":"43:00 approx","action":"complete","quest_id":262,"quest_name":"模糊的人影","confidence":"high"},
+    {"time_range":"43:05 approx","action":"accept","quest_id":265,"quest_name":"继续搜寻","confidence":"high"},
+    {"time_range":"43:25-43:35 approx","action":"complete","quest_id":265,"quest_name":"继续搜寻","confidence":"high"},
+    {"time_range":"43:25-43:40 approx","action":"accept","quest_id":266,"quest_name":"调查旅店","confidence":"high"},
+    {"time_range":"43:40-44:20 approx","action":"complete","quest_id":266,"quest_name":"调查旅店","confidence":"high"},
+    {"time_range":"before 51:50","action":"complete_by_chain_transition","quest_id":453,"quest_name":"搜寻乌鸦岭","confidence":"high","exact_time_known":false},
+    {"time_range":"51:30-51:50 approx","action":"accept","quest_id":268,"quest_name":"回复斯温","confidence":"high"},
+    {"time_range":"52:15-52:30 approx","action":"complete","quest_id":268,"quest_name":"回复斯温","confidence":"high","basis":"direct transition into unique followup q323"},
+    {"time_range":"52:15-52:30 approx","action":"accept","quest_id":323,"quest_name":"证明你的实力","confidence":"high"},
+
+    {"time_range":"31:00 approx","action":"accept","quest_id":225,"quest_name":"饱经风霜的墓碑","confidence":"high"},
+    {"time_range":"before 42:00","action":"complete_by_chain_transition","quest_id":225,"quest_name":"饱经风霜的墓碑","confidence":"high","exact_time_known":false},
+    {"time_range":"before 42:00","action":"complete_by_chain_transition","quest_id":227,"quest_name":"摩根·拉迪莫尔","confidence":"high","exact_time_known":false},
+    {"time_range":"42:00 approx","action":"accept","quest_id":228,"quest_name":"摩拉迪姆","confidence":"high"},
+    {"time_range":"42:10-42:20 approx","action":"complete","quest_id":228,"quest_name":"摩拉迪姆","confidence":"high"},
+
+    {"time_range":"42:20-42:50 approx","action":"complete","quest_id":222,"quest_name":"森林里的狼人","confidence":"high","basis":"Calor reward window plus Calor's Note entering q223"},
+    {"time_range":"after q222 completion","action":"accepted_or_active","quest_id":223,"quest_name":"森林里的狼人","confidence":"high"},
+
+    {"time_range":"before 43:10","action":"complete_by_chain_transition","quest_id":149,"quest_name":"幽灵的发丝","confidence":"high","exact_time_known":false},
+    {"time_range":"before 43:10","action":"complete_by_chain_transition","quest_id":154,"quest_name":"归还梳子","confidence":"high","exact_time_known":false},
+    {"time_range":"42:50-43:10 approx","action":"accept_or_active","quest_id":157,"quest_name":"幽灵的发丝","confidence":"high"},
+    {"time_range":"53:50 approx","action":"complete","quest_id":157,"quest_name":"幽灵的发丝","experience":3300,"experience_basis":"direct_video_approx","confidence":"high"},
+    {"time_range":"54:00 onward","action":"accept","quest_id":158,"quest_name":"僵尸","confidence":"high"}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":98,"quest_name":"斯塔文的传说","state":"accepted_or_active_unclosed"},
+    {"quest_id":223,"quest_name":"森林里的狼人","state":"accepted_or_active_unclosed"},
+    {"quest_id":323,"quest_name":"证明你的实力","state":"accepted_unclosed"},
+    {"quest_id":158,"quest_name":"僵尸","state":"accepted_unclosed"},
+    {"quest_id":101,"quest_name":"惩罚图腾","state":"reward_window_seen_not_final_turnin"},
+    {"quest_id":58,"quest_name":"守夜人","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":337,"quest_name":"一本破旧的历史书","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":89,"quest_name":"止水湖上的桥","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":141,"quest_name":"迪菲亚兄弟会","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":1654,"quest_name":"正义试炼","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":2040,"quest_name":"地底突袭","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":118,"quest_name":"马掌","state":"carried_unclosed_no_new_final_evidence"}
+  ],
+  "evidence_cautions": [
+    "Episode 9 contains many same-name Stalvan stages and hard cuts; IDs are assigned only where NPC, task item, XP, or unique chain transition supports them.",
+    "A unique followup can establish that its prerequisite completed, but the completion time remains unknown across a cut gap.",
+    "Reward window alone is not final turn-in; q101 remains uncompleted.",
+    "No new reliable numeric player level appears in episode 9; episode 8 level 26 remains the latest backfill numeric evidence.",
+    "Dynamic low-level XP prevents mechanical use of Questie static XP x2 except as explicit digit repair after the action is established."
+  ],
+  "next_backfill_episode": {
+    "episode": 10,
+    "title": "暮色森林 31-32",
+    "bvid": "BV1mxBUBVETo",
+    "aid": 115777940226598,
+    "episode_id": 165989103,
+    "cid": 34962670396,
+    "duration_seconds": 3076,
+    "duration": "00:51:16",
+    "processed": false,
+    "metadata_only_read_from_episode_9_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_10",
+    "remaining_backfill": [10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

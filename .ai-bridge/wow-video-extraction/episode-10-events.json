@@ -1,0 +1,111 @@
+{
+  "episode": 10,
+  "title": "暮色森林 31-32",
+  "bvid": "BV1mxBUBVETo",
+  "cid": 34962670396,
+  "duration_seconds": 3076,
+  "display_duration": "00:51:16",
+  "series_index": "10/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 11,
+    "formal_total": 238,
+    "coarse_total": 53,
+    "fine20_total": 43,
+    "fine5_total": 142,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "all_formal_seek_times_verified": true,
+    "coverage_seconds": "0-3075"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "note": "Video evidence is authoritative. Questie resolves Chinese quest names, IDs, unique prerequisite/followup transitions and static XP only after visible state/action establishes the transition."
+  },
+  "level_evidence": [
+    {
+      "time_range": "50:45-51:05 approx",
+      "action": "level_up",
+      "level": 32,
+      "state": "direct_numeric_level_up",
+      "confidence": "high",
+      "basis": "multiple consecutive system-chat frames directly show 你升到了32级"
+    }
+  ],
+  "direct_completed_quests": [269,229,134,401,252],
+  "chain_transition_completed_quests": [323,158,156,159,133,160,251],
+  "events": [
+    {"time_range":"before 15:30","action":"complete_by_chain_transition","quest_id":323,"quest_name":"证明你的实力","confidence":"high","exact_time_known":false,"basis":"q269 is directly completed and q323 is its unique prerequisite"},
+    {"time_range":"15:30-15:45 approx","action":"complete","quest_id":269,"quest_name":"寻求指引","confidence":"high"},
+    {"time_range":"15:20-16:10 approx","action":"accept","quest_id":270,"quest_name":"被诅咒的舰队","confidence":"high"},
+
+    {"time_range":"before 16:15","action":"complete_by_chain_transition","quest_id":158,"quest_name":"僵尸","confidence":"high","exact_time_known":false,"basis":"q156 is directly accepted and q158 is its unique prerequisite"},
+    {"time_range":"16:15 approx","action":"accept","quest_id":156,"quest_name":"收集腐败之花","confidence":"high"},
+
+    {"time_range":"16:40 approx","action":"accept","quest_id":229,"quest_name":"幸存的女儿","confidence":"high"},
+    {"time_range":"17:15-17:40 approx","action":"complete","quest_id":229,"quest_name":"幸存的女儿","confidence":"high","basis":"completion-shaped system text plus direct acceptance of unique followup q231"},
+    {"time_range":"17:15-17:40 approx","action":"accept","quest_id":231,"quest_name":"女儿的爱","confidence":"high"},
+    {"time_range":"18:20-18:25 approx","action":"reward_window_seen_but_task_later_still_active","quest_id":231,"quest_name":"女儿的爱","confidence":"high","basis":"reward window appears, but tracker still shows the quest afterward through roughly 29 minutes"},
+
+    {"time_range":"before 36:30","action":"complete_by_chain_transition","quest_id":156,"quest_name":"收集腐败之花","confidence":"high","exact_time_known":false},
+    {"time_range":"before 36:30","action":"complete_by_chain_transition","quest_id":159,"quest_name":"僵尸酒","confidence":"high","exact_time_known":false},
+    {"time_range":"before 36:30","action":"complete_by_chain_transition","quest_id":133,"quest_name":"食尸鬼假人","confidence":"high","exact_time_known":false},
+    {"time_range":"36:30 approx","action":"complete","quest_id":134,"quest_name":"食人魔潜行者","experience":2400,"experience_basis":"direct_video_and_questie_static_x2_match","confidence":"high"},
+    {"time_range":"36:40-37:45 approx","action":"accept","quest_id":160,"quest_name":"给镇长的信","confidence":"high"},
+
+    {"time_range":"before 39:45","action":"complete_by_chain_transition","quest_id":160,"quest_name":"给镇长的信","confidence":"high","exact_time_known":false},
+    {"time_range":"before 39:45","action":"complete_by_chain_transition","quest_id":251,"quest_name":"翻译亚伯克隆比的信","confidence":"high","exact_time_known":false},
+    {"time_range":"39:45 approx","action":"complete","quest_id":401,"quest_name":"等待希拉完工","experience":3700,"experience_basis":"direct_video_and_questie_static_x2_match","confidence":"high"},
+    {"time_range":"39:45 onward","action":"accept_or_active","quest_id":252,"quest_name":"翻译好的信件","confidence":"high"},
+    {"time_range":"40:05-41:40 approx","action":"complete","quest_id":252,"quest_name":"翻译好的信件","confidence":"high"},
+    {"time_range":"40:05-41:40 approx","action":"accept","quest_id":253,"quest_name":"藏尸者的妻子","confidence":"high"},
+
+    {"time_range":"49:50-50:40 approx","action":"objective_complete_not_turnin","quest_id":253,"quest_name":"藏尸者的妻子","confidence":"medium_high","basis":"repeated completion-shaped OCR matches quest title; no return to Ello Ebonlocke or final turn-in occurs before episode end"},
+    {"time_range":"50:45-51:05 approx","action":"level_up","level":32,"confidence":"high"}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":270,"quest_name":"被诅咒的舰队","state":"accepted_unclosed"},
+    {"quest_id":231,"quest_name":"女儿的爱","state":"reward_window_seen_but_task_later_still_active"},
+    {"quest_id":253,"quest_name":"藏尸者的妻子","state":"objective_complete_not_turnin"},
+    {"quest_id":98,"quest_name":"斯塔文的传说","state":"accepted_or_active_unclosed","basis":"Mistmantle Manor location alone is insufficient evidence of objective completion or turn-in"},
+    {"quest_id":223,"quest_name":"森林里的狼人","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":101,"quest_name":"惩罚图腾","state":"reward_window_seen_not_final_turnin"},
+    {"quest_id":58,"quest_name":"守夜人","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":337,"quest_name":"一本破旧的历史书","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":89,"quest_name":"止水湖上的桥","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":128,"quest_name":"悬赏：黑石氏族","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":141,"quest_name":"迪菲亚兄弟会","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":1654,"quest_name":"正义试炼","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":2040,"quest_name":"地底突袭","state":"carried_unclosed_no_new_final_evidence"},
+    {"quest_id":118,"quest_name":"马掌","state":"carried_unclosed_no_new_final_evidence"}
+  ],
+  "known_direct_xp": [
+    {"quest_id":134,"quest_name":"食人魔潜行者","experience":2400},
+    {"quest_id":401,"quest_name":"等待希拉完工","experience":3700}
+  ],
+  "evidence_cautions": [
+    "Reward window is not final turn-in: q231 remains active after its reward window.",
+    "Objective completion is not final turn-in: q253 has no return-to-mayor turn-in before episode end.",
+    "Mistmantle Manor location does not establish q98 completion; q98 remains unclosed without direct Stalvan/ring or Madame Eva evidence.",
+    "Unique followup transitions establish prerequisite completion but not exact timestamps across combat/cut gaps.",
+    "Dynamic low-level XP remains possible; Questie static XP x2 is used only as explicit calibration where direct video reward digits agree."
+  ],
+  "next_backfill_episode": {
+    "episode": 11,
+    "title": "湿地任务 33",
+    "bvid": "BV1UoBvByEkZ",
+    "aid": 115786395946909,
+    "episode_id": 166324610,
+    "cid": 34999305144,
+    "duration_seconds": 3016,
+    "duration": "00:50:16",
+    "processed": false,
+    "metadata_only_read_from_episode_10_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_11",
+    "remaining_backfill": [11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

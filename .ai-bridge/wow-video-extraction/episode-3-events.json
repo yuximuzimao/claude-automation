@@ -1,0 +1,103 @@
+{
+  "episode": 3,
+  "title": "西部荒野 14-16",
+  "bvid": "BV1wUqUBvEuX",
+  "cid": 34883962832,
+  "duration_seconds": 3828,
+  "display_duration": "01:03:48",
+  "series_index": "3/53",
+  "mode": "backfill_extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 18,
+    "formal_total": 494,
+    "coarse_total": 65,
+    "fine20_total": 192,
+    "fine5_total": 237,
+    "supplemental_fine1_manifest_count": 4,
+    "supplemental_fine1_total": 74,
+    "all_formal_batches_verified_paused": true,
+    "all_formal_frames_verified_ok": true,
+    "supplemental_verified_ok_paused": true,
+    "coverage_seconds": "0-3827"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [],
+  "direct_level_evidence_note": "No reliable player level-up system text or clear player character panel in episode 3; title 14-16 is metadata only.",
+  "completed_quests": [1786,46,59,244,1787,1788,64,151,36,109,6181,153,12],
+  "completed_quest_count": 13,
+  "calibrated_completed_quest_xp_total": 13880,
+  "completed_quest_details": [
+    {"quest_id":1786,"quest_name":"圣洁之书","experience":120,"time_range":"07:59-08:03 approx","confidence":"high","evidence":"direct completion plus direct accept of next same-title stage at Henze Faulk"},
+    {"quest_id":46,"quest_name":"悬赏鱼人","experience":1680,"time_range":"15:55-16:15 approx","confidence":"high"},
+    {"quest_id":59,"quest_name":"布甲和皮甲","experience":420,"time_range":"17:05-17:35 approx","confidence":"high"},
+    {"quest_id":244,"quest_name":"豺狼人的入侵","experience":580,"time_range":"20:40-21:00 approx","confidence":"high","followup_accepted_quest_id":246},
+    {"quest_id":1787,"quest_name":"圣洁之书","experience":120,"time_range":"25:07-25:13 approx","confidence":"high","evidence":"Jason Tenorm reward interaction followed by direct accept of next same-title stage and target switch to Duthorian Rall"},
+    {"quest_id":1788,"quest_name":"圣洁之书","experience":200,"time_range":"25:50-26:00 approx","confidence":"high"},
+    {"quest_id":64,"quest_name":"遗失的怀表","experience":1820,"time_range":"36:25-36:35 approx","confidence":"high"},
+    {"quest_id":151,"quest_name":"老马布兰契","experience":2500,"time_range":"36:35-36:45 approx","confidence":"high"},
+    {"quest_id":36,"quest_name":"杂味炖肉","experience":840,"time_range":"37:15-37:25 approx","confidence":"high","stage":"Furlbrow recipe delivery to Salma Saldean"},
+    {"quest_id":109,"quest_name":"向格里安·斯托曼报到","experience":1260,"time_range":"38:36-39:00 approx","confidence":"high","followup_accepted_quest_id":12},
+    {"quest_id":6181,"quest_name":"快递消息","experience":420,"time_range":"40:00-40:25 approx","confidence":"high","followup_accepted_quest_id":6281},
+    {"quest_id":153,"quest_name":"红色皮质面罩","experience":2100,"time_range":"63:25-63:35 approx","confidence":"high"},
+    {"quest_id":12,"quest_name":"西部荒野人民军","experience":1820,"time_range":"63:20-63:30 approx","confidence":"high","followup_accepted_quest_id":13}
+  ],
+  "accepted_or_active_unclosed": [
+    {"quest_id":246,"quest_name":"审时度势","state":"accepted_unclosed","evidence":"direct accept text in the same sequence as 244 completion"},
+    {"quest_id":399,"quest_name":"童年的记忆","state":"accepted_unclosed","evidence":"continued active through the first/middle portion of episode 3"},
+    {"quest_id":38,"quest_name":"杂味炖肉","state":"accepted_or_active_unclosed","evidence":"active immediately after quest 36 completion; chain prerequisite confirms transition"},
+    {"quest_id":9,"quest_name":"清理荒野","state":"active_first_observed_unclosed"},
+    {"quest_id":22,"quest_name":"猪肝馅饼","state":"active_first_observed_unclosed"},
+    {"quest_id":102,"quest_name":"西部荒野的豺狼人","state":"accepted_unclosed","evidence":"direct accept text around 2325 seconds"},
+    {"quest_id":6281,"quest_name":"赶赴暴风城","state":"accepted_unclosed","evidence":"direct accept immediately after 6181 completion"},
+    {"quest_id":13,"quest_name":"西部荒野人民军","state":"accepted_unclosed","evidence":"direct accept immediately after quest 12 completion at episode tail"},
+    {"quest_id":65,"quest_name":"迪菲亚兄弟会","state":"seen_quest_window_accept_not_confirmed","evidence":"quest window observed at Gryan Stoutmantle; no direct accept text or later unambiguous active state"}
+  ],
+  "carried_uncertainties_no_new_direct_evidence": [
+    {"quest_id":3101,"quest_name":"圣洁信件","state":"turnin_unknown_after_trainer_interaction"},
+    {"quest_id":353,"quest_name":"雷矛的包裹","state":"objective_complete_not_turnin"},
+    {"quest_id":11,"quest_name":"悬赏河爪豺狼人","state":"objective_complete_not_turnin"},
+    {"quest_id":176,"quest_name":"通缉：霍格","state":"active_first_observed_unclosed_later_state_unknown"},
+    {"quest_id":null,"quest_name":"冬天爷爷来了！","state":"accepted_unclosed_id_ambiguous_later_state_unknown"}
+  ],
+  "acceptance_events": [
+    {"quest_id":46,"quest_name":"悬赏鱼人","time_seconds_approx":275,"confidence":"high"},
+    {"quest_id":1787,"quest_name":"圣洁之书","time_seconds_approx":482,"confidence":"high"},
+    {"quest_id":246,"quest_name":"审时度势","time_range":"1150-1260 approx","confidence":"high","note":"system line persists across frames; chain order calibrated by Questie"},
+    {"quest_id":1788,"quest_name":"圣洁之书","time_seconds_approx":1513,"confidence":"high"},
+    {"quest_id":36,"quest_name":"杂味炖肉","time_range":"1768-1776 approx","confidence":"high"},
+    {"quest_id":151,"quest_name":"老马布兰契","time_range":"1772-1774 approx","confidence":"high"},
+    {"quest_id":64,"quest_name":"遗失的怀表","time_range":"1772-1776 approx","confidence":"high"},
+    {"quest_id":12,"quest_name":"西部荒野人民军","time_seconds_approx":2319,"confidence":"high"},
+    {"quest_id":102,"quest_name":"西部荒野的豺狼人","time_seconds_approx":2325,"confidence":"high"},
+    {"quest_id":6181,"quest_name":"快递消息","time_range":"2345-2355 approx","confidence":"high"},
+    {"quest_id":6281,"quest_name":"赶赴暴风城","time_seconds_approx":2405,"confidence":"high"},
+    {"quest_id":13,"quest_name":"西部荒野人民军","time_seconds_approx":3805,"confidence":"high"}
+  ],
+  "evidence_cautions": [
+    "Episode title 14-16 is metadata only; episode 3 contains no reliable direct player-level evidence.",
+    "1787 Holy Tome is counted from continuous Jason Tenorm turn-in plus direct next-stage acceptance, not from reward window alone.",
+    "9 Clean Up and 22 Goretusk Liver Pie are first observed active; exact accept clicks were not captured.",
+    "65 The Defias Brotherhood was only seen in a quest window; acceptance is not asserted.",
+    "Absence of older unresolved quests from tracker/log views does not prove completion or abandonment.",
+    "Exploration and mob XP are excluded from the quest XP total."
+  ],
+  "next_backfill_episode": {
+    "episode": 4,
+    "title": "西部荒野 16-18",
+    "bvid": "BV1EJBsBcE1Z",
+    "cid": 34909192269,
+    "duration_seconds": 3196,
+    "duration": "00:53:16",
+    "processed": false,
+    "metadata_only_read_from_episode_3_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episode_4",
+    "remaining_backfill": [4,5,6,7,8,9,10,11,12],
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  }
+}

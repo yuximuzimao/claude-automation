@@ -1,0 +1,112 @@
+{
+  "episode": 53,
+  "title": "祖达克 80",
+  "raw_collection_title": "祖达克 80",
+  "bvid": "BV1N9kgBLE7W",
+  "cid": 35489450285,
+  "duration_seconds": 4444,
+  "display_duration": "01:14:04",
+  "series_index": "53/53",
+  "mode": "extract_only_no_route_analysis",
+  "media_paused_during_capture": true,
+  "screenshots": {
+    "formal_manifest_count": 26,
+    "formal_total": 656,
+    "coarse_total": 75,
+    "fine20_total": 223,
+    "fine5_total": 358,
+    "all_formal_batches_verified_paused": true,
+    "all_frames_verified_ok": true,
+    "coverage_seconds": "0-4443"
+  },
+  "questie_calibration": {
+    "version": "11.32.3",
+    "observed_experience_multiplier": 2
+  },
+  "level_evidence": [
+    {
+      "time_seconds_approx": 4395,
+      "time_display_approx": "73:15",
+      "level": 80,
+      "type": "direct_level_achievement",
+      "confidence": "high",
+      "trigger_quest_id": 12596,
+      "trigger_quest_name": "巡逻任务",
+      "evidence": "指挥官库恩斯处交付巡逻任务、获得42300后，系统/成就聊天直接显示[风吹岚烟]获得了成就[80级]；后续多个5秒帧重复可见。"
+    }
+  ],
+  "events": [
+    {"time_range":"01:10-02:10 approx","action":"complete","quest_id":12919,"quest_name":"风暴之王的复仇","experience_shown":63500,"confidence":"high"},
+    {"time_range":"02:25-02:50 approx","action":"complete_and_accept_next","quest_id":12795,"quest_name":"银色前沿","experience_shown":4200,"next_quest_id":12503,"next_quest_name":"保卫银色前沿","confidence":"high"},
+    {"time_range":"06:15-06:35 approx","action":"complete","quest_id":12503,"quest_name":"保卫银色前沿","experience_shown":42300,"confidence":"high"},
+    {"time_range":"06:45-07:20 approx","action":"complete","quest_id":12565,"quest_name":"希姆埃巴的祝福","experience_shown":42300,"confidence":"high"},
+    {"time_range":"07:25-07:45 approx","action":"complete","quest_id":12740,"quest_name":"银色北伐军的降落伞","experience_shown":42300,"confidence":"high"},
+    {"time_range":"around 07:45","action":"accept","quest_id":12505,"quest_name":"给斯塔哈默中士的新命令","confidence":"high"},
+    {"time_range":"around 07:45","action":"accept","quest_id":12596,"quest_name":"巡逻任务","confidence":"high"},
+    {"time_range":"around 11:20","action":"complete_and_accept_next","quest_id":12661,"quest_name":"潜入沃尔塔鲁斯","experience_shown":41900,"next_quest_id":12669,"next_quest_name":"目前为止，一切很糟","confidence":"high"},
+    {"time_range":"16:35-17:15 approx","action":"complete","quest_id":12673,"quest_name":"官大一级压死人","experience_shown":41900,"confidence":"high"},
+    {"time_range":"23:20-23:40 approx","action":"complete","quest_id":12669,"quest_name":"目前为止，一切很糟","experience_shown":41900,"confidence":"high"},
+    {"time_range":"24:45-25:10 approx","action":"complete","quest_id":12505,"quest_name":"给斯塔哈默中士的新命令","experience_shown":4200,"confidence":"high"},
+    {"time_range":"31:20-32:00 approx","action":"complete","quest_id":12557,"quest_name":"实验室的学徒","experience_shown":4200,"confidence":"high"},
+    {"time_range":"around 36:15","action":"complete","quest_id":12504,"quest_name":"银色北伐军，撤退！","experience_shown":42300,"confidence":"high"},
+    {"time_range":"36:20-36:25 approx","action":"complete","quest_id":12508,"quest_name":"扫清巨魔","experience_shown":42300,"confidence":"high"},
+    {"time_range":"36:30-36:40 approx","action":"complete","quest_id":12506,"quest_name":"西莱图斯祭坛的麻烦","experience_shown":42300,"confidence":"high"},
+    {"time_range":"36:35-36:40 approx","action":"complete","quest_id":12507,"quest_name":"奇怪的魔精","experience_shown":10600,"confidence":"high"},
+    {"time_range":"around 42:00","action":"accept","quest_id":12597,"quest_name":"止痛药","confidence":"high"},
+    {"time_range":"48:35-49:20 approx","action":"complete","quest_id":12597,"quest_name":"止痛药","experience_shown":10600,"confidence":"high"},
+    {"time_range":"52:50-53:40 approx","action":"complete","quest_id":12510,"quest_name":"珍贵的元素液体","experience_shown":42300,"confidence":"high"},
+    {"time_range":"55:15-55:30 approx","action":"complete","quest_id":12562,"quest_name":"达卡莱巨魔不需要水元素！","experience_shown":42300,"confidence":"high"},
+    {"time_range":"58:35-59:40 approx","action":"complete","quest_id":12599,"quest_name":"温暖的篝火","experience_shown":10600,"confidence":"high"},
+    {"time_range":"59:35-61:10 approx","action":"accept","quest_id":12598,"quest_name":"扔手雷","confidence":"high"},
+    {"time_range":"60:35-61:20 approx","action":"accept","quest_id":12512,"quest_name":"一个也不能少","confidence":"high"},
+    {"time_range":"66:25-66:35 approx","action":"complete","quest_id":12598,"quest_name":"扔手雷","experience_shown":10600,"confidence":"high"},
+    {"time_range":"66:45-67:10 approx","action":"accept","quest_id":12606,"quest_name":"茧中人","confidence":"high"},
+    {"time_range":"67:20 onward","action":"accept","quest_id":12552,"quest_name":"通灵师之死","confidence":"high"},
+    {"time_range":"67:20 onward","action":"accept","quest_id":12553,"quest_name":"撒网者的喷丝头","confidence":"high"},
+    {"time_range":"71:35-71:45 approx","action":"complete","quest_id":12606,"quest_name":"茧中人","experience_shown":42300,"confidence":"high","basis":"鲁伯特上尉任务窗口、42300、追踪7到6"},
+    {"time_range":"71:45-71:55 approx","action":"complete","quest_id":12512,"quest_name":"一个也不能少","experience_shown":42300,"confidence":"high","basis":"乔纳森/拉莫夫/约瑟芬目标闭环，追踪6到5，独立42300"},
+    {"time_range":"73:05-73:15 approx","action":"complete_and_level","quest_id":12596,"quest_name":"巡逻任务","experience_shown":42300,"level_reached":80,"confidence":"high"},
+    {"time_range":"73:20-73:35 approx","action":"complete","quest_id":12514,"quest_name":"蘑菇混合剂","experience_shown":42300,"confidence":"high"}
+  ],
+  "completed_quests": [12919,12795,12503,12565,12740,12661,12673,12669,12505,12557,12504,12508,12506,12507,12597,12510,12562,12599,12598,12606,12512,12596,12514],
+  "completed_quest_count": 23,
+  "calibrated_completed_quest_xp_total": 751800,
+  "ending_active_or_unclosed_quests": [
+    {"quest_id":12799,"quest_name":"吸取灵魂","state":"active_at_video_end","priority":"direct_end_state"},
+    {"quest_id":12552,"quest_name":"通灵师之死","state":"accepted_unclosed","priority":"direct_end_state"},
+    {"quest_id":12553,"quest_name":"撒网者的喷丝头","state":"accepted_unclosed","priority":"direct_end_state"},
+    {"quest_id":12664,"quest_name":"黑暗的地平线","state":"carryover_unclosed_no_new_evidence","priority":"carryover"},
+    {"quest_id":12903,"quest_name":"朋友的意义……","state":"turnin_unknown_across_cut_after_reward_window","priority":"carryover"},
+    {"quest_id":12883,"quest_name":"达库鲁的命令","state":"turnin_unknown_across_cut_chain_progressed","priority":"carryover"}
+  ],
+  "evidence_cautions": [
+    "12740银色北伐军的降落伞真正最终交付在约07:40；后续再次出现的完成文字属于聊天残留，不重复计数。",
+    "12504银色北伐军，撤退！与12508扫清巨魔是两笔独立42300。",
+    "12506西莱图斯祭坛的麻烦42300后紧接12507奇怪的魔精10600，同NPC但为两项任务。",
+    "12597止痛药和12599温暖的篝火按视频标题使用非巡逻员版本。",
+    "12606茧中人与12512一个也不能少在71:40附近连续交付，各42300；Questie目标和NPC不同。",
+    "12596巡逻任务42300直接触发80级成就；12514蘑菇混合剂发生在80级成就之后。",
+    "追踪栏缺失不能用于推断历史carryover任务完成或放弃。"
+  ],
+  "forward_sequence_complete": true,
+  "next_backfill_episode": {
+    "episode": 1,
+    "title": "北郡修道院 1-9",
+    "bvid": "BV1rYq6BkEWw",
+    "cid": 34868822226,
+    "duration_seconds": 3752,
+    "duration": "01:02:32",
+    "processed": false,
+    "metadata_only_read_from_episode_53_page": true
+  },
+  "post_series_sequence": {
+    "current_next_stage": "backfill_episodes_1_to_12",
+    "after_backfill_1_to_12": "post_extraction_merge_audit_and_route_integration"
+  },
+  "notes": [
+    "正序第13-53集至此全部完成事实提取。",
+    "本集明确最终完成23项任务，Questie×2校准任务经验合计751800。",
+    "约73:15巡逻任务交付42300后直接获得80级成就。",
+    "下一处理入口为回补第1集，不进入POST-EXTRACTION阶段。"
+  ]
+}
