@@ -59,7 +59,6 @@ EXTERNAL_ACQUISITION_IDS = {
     24801: "quel_delar_chain_requires_external_battered_hilt_and_dungeon_steps",
 }
 ROUTE_ECONOMICS_SKIP_IDS = {
-    13227: "breadcrumb_only_3_24g_per_character_requires_dedicated_moving_airship_detour_before_argent_vanguard",
     13234: "pvp_daily_requires_15_opposing_players_non_deterministic_external_player_dependency",
 }
 # A map route's dependency closure may cross assigned-zone boundaries. These tasks remain
@@ -464,7 +463,7 @@ def main() -> None:
             "loaned_wind_rider_available": True,
             "from_zone": "风暴峭壁",
             "first_geographic_region": "银色比武场",
-            "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; do not route through Argent Vanguard",
+            "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; use live quest state to continue the required 13227 → 13036 Argent Vanguard chain",
         },
         "blocked_transport_quest": {
             "quest_id": BLOCKED_TRANSPORT_QUEST_ID,
@@ -472,7 +471,7 @@ def main() -> None:
             "scope_status": blocked_transport.get("scope_status"),
             "cold_weather_flying_gate": blocked_transport.get("cold_weather_flying_gate"),
         },
-        "blocked_argent_vanguard_root": {
+        "argent_vanguard_root": {
             "quest_id": PRIMARY_ENTRY_QUEST_ID,
             "name": primary_entry.get("name"),
             "scope_status": primary_entry.get("scope_status"),
@@ -480,17 +479,17 @@ def main() -> None:
             "pre_any": primary_entry.get("pre_any") or [],
             "starts": start_rows(primary_entry),
             "next_quest": primary_entry.get("next_quest"),
-            "reason": "verified hidden dependency on 13419; the entire exclusive descendant chain is unreachable while Cold Weather Flying remains unlearned",
+            "reason": "live Journey confirms 13227《审判日降临！》 completes immediately before 13036 becomes available; 13419 is not part of this dependency",
         },
-        "skipped_breadcrumb": {
+        "required_breadcrumb": {
             "quest_id": SKIPPED_BREADCRUMB_QUEST_ID,
             "name": skipped_breadcrumb.get("name"),
             "xp_bonus_money_gold_decimal": ((skipped_breadcrumb.get("level_80_economy") or {}).get("xp_bonus_money_gold_decimal")),
             "next_quest": skipped_breadcrumb.get("next_quest"),
-            "decision": "skip_permanently",
-            "reason": "becomes unavailable after starting 13036 and is only 3.24G per character from max-level XP conversion; not worth a dedicated moving-airship detour before Argent Vanguard",
+            "decision": "include_required_live_bridge",
+            "reason": "latest Journey proves this breadcrumb is the real executable bridge into 13036; it must not be removed by route-economics filtering",
         },
-        "blocked_natural_airship_breadcrumb": {
+        "natural_airship_breadcrumb": {
             "quest_id": NATURAL_AIRSHIP_QUEST_ID,
             "name": natural_airship.get("name"),
             "scope_status": natural_airship.get("scope_status"),
@@ -629,11 +628,11 @@ def main() -> None:
         "",
         "## 入口决策",
         "",
-        "- 从风暴峭壁进入冰冠时，第一地理落点固定为地图东北的银色比武场；不再绕到东南银色前线基地作为入口。",
-        f"- 13419《{blocked_transport.get('name')}》：{blocked_transport.get('scope_status')}。当前不学寒冷天气飞行，因此保持不可执行。",
-        f"- 13036《{primary_entry.get('name')}》已应用实服隐藏前置13419，当前状态={primary_entry.get('scope_status')}，pre_any={primary_entry.get('pre_any') or []}；其独占后续必须递归传播不可达，不能再把它当独立根。",
-        f"- 13224《{natural_airship.get('name')}》当前状态={natural_airship.get('scope_status')}，pre_any={natural_airship.get('pre_any') or []}；因此不能拿它解锁飞艇上的《破碎前线》《前往伊米海姆！》《萨隆邪铁的奴隶》《伊米亚之血》《协助突袭》。",
-        f"- 12892《{entry_task.get('name')}》仍是当前唯一需要现场直接核验的飞艇根候选：从银色比武场进入后直接前往奥格瑞姆之锤检查库尔迪拉；如果不可接，就把暗影拱顶组件整体从当前可执行路线剔除。",
+        "- 从风暴峭壁进入冰冠时，第一地理区域仍是银色比武场；13419《作战准备》继续因寒冷天气飞行技能门槛排除，但不再影响银色北伐军主链。",
+        f"- 13419《{blocked_transport.get('name')}》：{blocked_transport.get('scope_status')}。当前不学寒冷天气飞行，因此只排除该任务本身。",
+        f"- 13227《{skipped_breadcrumb.get('name')}》为实服确认的必经桥接；完成后13036《{primary_entry.get('name')}》可正常接取，pre_any={primary_entry.get('pre_any') or []}。",
+        f"- 13224《{natural_airship.get('name')}》随该链正常解锁，当前状态={natural_airship.get('scope_status')}，pre_any={natural_airship.get('pre_any') or []}；后续飞艇任务包恢复可达。",
+        f"- 12892《{entry_task.get('name')}》已由首组实跑确认可正常接取并完成，不再作为未决入口探针。",
         "",
         "## 下一步",
         "",

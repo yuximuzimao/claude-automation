@@ -25,7 +25,7 @@ ENTRY_LEVEL = 71
 FIRST_PASS_MAX_REQUIRED_LEVEL = 74
 BLOOD_ELF_FLAG = 512
 PALADIN_FLAG = 2
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 VIDEO_ROOT = ROOT.parent / ".ai-bridge" / "wow-video-extraction"
 
 OUT_FOUNDATION = ROOT / "data/route-atlas/dragonblight-task-foundation.json"

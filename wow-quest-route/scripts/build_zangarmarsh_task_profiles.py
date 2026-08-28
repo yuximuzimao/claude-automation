@@ -16,7 +16,7 @@ from lib.questie_source import load_questie
 from lib.route_atlas_exact import infer_requirement_count_detail, representative_point
 from lib.world_respawn_proxy import WorldRespawnProxy
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 INPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 GEOMETRY = ROOT / "data" / "route-atlas" / "zangarmarsh-geometry-analysis.json"
 RESPAWN_PROXY = ROOT / "data" / "route-atlas" / "world-respawn-proxy.json"

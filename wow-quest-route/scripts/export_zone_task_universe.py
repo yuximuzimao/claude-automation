@@ -122,7 +122,7 @@ def main() -> None:
     parser.add_argument("--zone-id", type=int, required=True)
     parser.add_argument(
         "--questie-source",
-        default=str(ROOT.parent / ".ai-bridge" / "Questie.zip"),
+        default=str(ROOT / "data" / "sources" / "questie" / "Questie.zip"),
     )
     parser.add_argument("--profile", choices=tuple(CHARACTER_PROFILES), default="paladin")
     parser.add_argument("--start-level", type=int, default=68)

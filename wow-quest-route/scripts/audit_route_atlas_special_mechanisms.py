@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT))
 
 from lib.questie_source import load_questie
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 DEFAULT_ATLAS = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 DEFAULT_PROFILES = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
 DEFAULT_REGISTRY = ROOT / "data" / "route-atlas" / "special-mechanism-registry.json"

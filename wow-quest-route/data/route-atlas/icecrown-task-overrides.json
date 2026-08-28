@@ -1,6 +1,6 @@
 {
   "status": "pre_route_foundation_manual_overrides",
-  "reviewed_at": "2026-08-25",
+  "reviewed_at": "2026-08-28",
   "policy": {
     "purpose": "Resolve Icecrown parser gaps and generic-estimator misclassification into auditable pre-route service ranges without pretending first-run five-box mechanics are already live-verified.",
     "source_priority": "user live evidence > Questie effective DB > WotLK Classic task pages/comments > route-specific conservative model",
@@ -10,9 +10,9 @@
   },
   "verified_hidden_dependencies": {
     "13036": {
-      "pre_any": [13419],
-      "basis": "user_live_2026_08_25_no_cold_weather_flying_13036_and_its_three_children_unavailable",
-      "note": "Questie omits this edge on the current server. Treat 13419 as a hard hidden prerequisite before computing Icecrown reachability."
+      "pre_any": [13227],
+      "basis": "user_live_2026_08_28_journey_13227_complete_then_13036_available_without_13419",
+      "note": "Latest live Journey proves 13227《审判日降临！》 is the real bridge to 13036《无上的荣耀》. 13419《作战准备》 remains unavailable without Cold Weather Flying but is not required for this chain."
     },
     "13117": {
       "pre_any": [13106],

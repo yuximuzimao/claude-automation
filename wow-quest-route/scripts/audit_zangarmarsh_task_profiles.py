@@ -14,7 +14,7 @@ from lib.route_atlas_exact import representative_point
 from lib.route_atlas_special_tasks import materialize_manual_special_time
 from scripts.build_zangarmarsh_task_profiles import travel_seconds
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 PROFILE_PATH = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
 ATLAS_PATH = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 AUDIT_PATH = ROOT / "data" / "route-atlas" / "zangarmarsh-task-classification-audit.json"

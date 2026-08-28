@@ -19,7 +19,7 @@ from scripts import build_borean_tundra_foundation as shared
 from scripts.build_35_55_task_foundation import classify_objectives, classify_task
 from scripts.estimate_route_atlas_timing import estimate_foundation_task_service_audit
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 OBSERVATIONS = ROOT / "data/observations/fivebox-task-types.json"
 OUT = ROOT / "data/route-atlas/northrend-task-universe.json"
 REPORT = ROOT / "docs/analysis/2026-08-18-northrend-task-universe.md"

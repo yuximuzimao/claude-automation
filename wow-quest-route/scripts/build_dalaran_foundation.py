@@ -18,7 +18,7 @@ from lib.world_builder import QUEST, _ids, _parent_zone, _parse_zone_metadata
 from scripts import build_borean_tundra_foundation as shared
 from scripts.build_35_55_task_foundation import classify_objectives, classify_task, source_entities_for_item
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 OUT_SCOPE = ROOT / "data/route-atlas/dalaran-scope-audit.json"
 OUT_FOUNDATION = ROOT / "data/route-atlas/dalaran-task-foundation.json"
 OUT_CLUSTERS = ROOT / "data/route-atlas/dalaran-target-clusters.json"

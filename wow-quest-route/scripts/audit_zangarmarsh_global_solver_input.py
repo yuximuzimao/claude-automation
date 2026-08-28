@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT))
 from lib.questie_source import load_questie
 from lib.route_atlas_exact import representative_point
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 ATLAS = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 PROFILES = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
 OUTPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input-audit.json"

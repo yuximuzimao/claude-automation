@@ -15,7 +15,7 @@ from lib.questie_source import QuestieData, load_questie
 
 ZONE_ID = 3521
 ZONE_NAME = "赞加沼泽"
-DEFAULT_QUESTIE = ROOT.parent / ".ai-bridge" / "Questie.zip"
+DEFAULT_QUESTIE = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 DEFAULT_MAP = ROOT / "data" / "route-atlas" / "assets" / "zangarmarsh-base.jpg"
 DEFAULT_OUTPUT = ROOT / "_sandbox" / "zangarmarsh-route-atlas-prototype.html"  # historical developer-only prototype; never a user workbench
 DEFAULT_JSON = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"

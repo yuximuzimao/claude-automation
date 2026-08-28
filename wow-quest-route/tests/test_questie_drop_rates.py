@@ -3,7 +3,7 @@ from pathlib import Path
 from lib.questie_drop_rates import QuestieDropRateDB
 
 
-QUESTIE = Path(__file__).resolve().parents[2] / ".ai-bridge" / "Questie.zip"
+QUESTIE = Path(__file__).resolve().parents[1] / "data" / "sources" / "questie" / "Questie.zip"
 
 
 def test_wotlk_drop_rate_respects_forced_wowhead_correction():

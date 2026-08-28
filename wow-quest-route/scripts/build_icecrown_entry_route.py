@@ -51,6 +51,15 @@ def normalize_fivebox(qid: int, text: str) -> str:
         12814: "共享：只需击杀一名狮鹫骑士，缰绳100%掉落；一个角色拾取缰绳并带回乌佐身边使用载具交付技能，整组都会完成。",
         12838: "不共享：五号分别开箱收集5份情报文档。",
         12847: "共享：",
+        13045: "不共享：",
+        13086: "共享：",
+        13130: "不共享：",
+        13135: "不共享：",
+        13141: "共享：",
+        13228: "不共享：",
+        13301: "共享：",
+        13308: "共享：",
+        13310: "共享：",
         13069: "共享：",
         13071: "共享：",
         13117: "共享：",
@@ -117,7 +126,6 @@ def main() -> None:
                 "destination": "银色前线基地",
             },
             "actions": [
-                "开飞行点：银色前线基地",
                 "大领主提里奥·弗丁 → 接《无上的荣耀》",
                 "北伐军指挥官恩塔里 → 交《无上的荣耀》→ 接《天灾的战术》",
                 "古斯塔夫神父 → 接《致命的剧毒》",
@@ -154,6 +162,7 @@ def main() -> None:
             "title": "银色前线基地：空中救兵 → 最后一道防线",
             "actions": [
                 "本诺比奥斯 → 交《如果还有幸存者……》→ 接《空中救兵》",
+                "开飞行点：银色前线基地",
                 "被俘北伐军士兵区约78.3,65.1 → 做《空中救兵》：使用本诺比奥斯旁的银色天爪龙，每次带回1名士兵；每号共3名",
                 "银色前线基地医护所篝火约86,76 → 每次把士兵放下后立即返回78.3,65.1抓下一名，直到五号各完成3名",
                 "大领主提里奥·弗丁 → 交《空中救兵》→ 接《冷锋逼近》",
@@ -166,14 +175,14 @@ def main() -> None:
                 "13045": {
                     "name": by_id[13045]["name"],
                     "objective": "每个角色营救3名俘虏；天爪龙一次只能携带1名，因此是3次往返",
-                    "route_note": "俘虏约在78,65；放人点是银色前线基地医护所篝火附近约86,76。不要在天灾城中心落地。",
-                    "fivebox": "重点待实测：这是个人载具任务，不按当前task_class的普通共享击杀估时；确认五号能否同步各自驾驶天爪龙完成。",
+                    "route_note": "俘虏约在78,65；放人点是银色前线基地医护所篝火附近约86,76。",
+                    "fivebox": "不共享：五号分别完成营救。",
                 },
                 "13086": {
                     "name": by_id[13086]["name"],
                     "objective": "银色火炮：100名天灾攻击者 + 3条霜巢毁灭者",
-                    "route_note": "脚本/载具任务，foundation自动28分钟估时暂不采信，等待首跑墙钟。",
-                    "fivebox": "重点待实测：炮台击杀进度是否队伍共享、是否五号需分别上炮。",
+                    "route_note": "首组漏链实跑约3分46秒完成；使用基地附近银色火炮即可。",
+                    "fivebox": "共享：",
                 },
             },
             "exit": "13086完成后接13104《再次前往突破口吧，英雄》，进入回音谷任务簇。",
@@ -207,8 +216,8 @@ def main() -> None:
                 "13125": {
                     "name": by_id[13125]["name"],
                     "objective": "击杀3名天灾城首领",
-                    "route_note": "萨兰纳克斯在第一层；亚萨尔蒙在附近第二层灵魂塔；塔洛诺克斯在恶魔之坑高路。号角可召唤黑锋援军，等援军先建立仇恨再输出更稳。",
-                    "fivebox": "共享预期：组队击杀应一起计数；首跑确认三个首领是否五号同时完成。",
+                    "route_note": "先处理高阶祭司亚萨尔蒙和虫王塔洛诺克斯，最后再杀撕裂者萨兰纳克斯；萨兰纳克斯死亡后可直接使用出现的传送门回交任务。号角可召唤黑锋援军。",
+                    "fivebox": "共享：",
                 },
             },
             "gate": "13125完成只是三条硬门槛之一；13130《公正堡的基石》和13135《危险的能量》也必须完成后才会出现13139。",
@@ -256,12 +265,12 @@ def main() -> None:
                     "name": by_id[13141]["name"],
                     "objective": "在约80.1,72.0骷髅堆插旗并守到死亡使者哈洛夫出现",
                     "route_note": "站在旗帜附近会获得强力祝福；不要追怪下坡，最后哈洛夫死亡即结束事件。",
-                    "fivebox": "重点待实测：旧评论显示旁边未插旗玩家也能获得事件完成信用，倾向一次事件可覆盖五号。先只开一次事件，五号全部留在祝福范围内；若有号未完成再补。",
+                    "fivebox": "共享：",
                 },
                 "13157": {
                     "name": by_id[13157]["name"],
                     "objective": "回到已净化的北伐军之峰找提里奥",
-                    "route_note": "完成后北伐军之峰正式变成Hub并开放飞行点；立即五号分别开点。",
+                    "route_note": "完成后北伐军之峰正式变成Hub并开放飞行点；立即五号分别开点。任务奖励装备选择《北伐军的坚毅》。",
                 },
                 "13224": {
                     "name": by_id[13224]["name"],
@@ -752,9 +761,9 @@ def main() -> None:
                     "name": by_id[13301]["name"],
                     "objective": "护送库卡隆部队抵达伊米海姆大门",
                     "route_note": "事件有多轮伏击；四名库卡隆步兵需要活到终点。路上可治疗NPC；若现场已有别人的部队在推进，先观察能否直接加入同一事件。",
-                    "fivebox": "一次护送全队共享预期；五号一起贴近事件范围，首跑确认。",
+                    "fivebox": "共享：",
                 },
-                "13310": {"name": by_id[13310]["name"], "route_note": "压制炮台事件与地面突袭同起点。载具/炮台任务先按个人完成预期，首号做完时观察其他四号是否同步。"},
+                "13310": {"name": by_id[13310]["name"], "route_note": "压制炮台事件与地面突袭同起点。", "fivebox": "共享："},
                 "13302": {
                     "name": by_id[13302]["name"],
                     "objective": "五号各解救10名萨隆邪铁奴隶",
@@ -765,7 +774,7 @@ def main() -> None:
                     "name": by_id[13308]["name"],
                     "objective": "矿洞现场接取，杀工头拿钥匙并解开阿克希姆镣铐",
                     "route_note": "这是飞艇任务列表不会直接提示的现场NPC任务，必须在《萨隆邪铁的奴隶》同一次进矿时做掉。",
-                    "fivebox": "工头击杀共享预期；钥匙是否五号同时获得待首跑确认，先不要离开尸体。",
+                    "fivebox": "共享：",
                 },
                 "13283": {"name": by_id[13283]["name"], "route_note": "布拉斯的跳跃机器人上山顶插旗；按个人载具事件预期，五号依次做，首号完成时先观察共享信用。"},
                 "13140": {"name": by_id[13140]["name"], "route_note": "符文锻造师集中在58—60,71—75；阶段正确时公开实测符文板100%掉落，五号以全部5/5为离开条件。"},
@@ -1252,10 +1261,10 @@ def main() -> None:
         },
     ]
 
-    # The original 40-step draft assumed the Argent Vanguard chain was reachable. Current-server
-    # evidence proves 13036 requires the Cold-Weather-Flying-gated 13419, so that entire exclusive
-    # descendant branch is removed before any player route is materialized. Reuse only the still
-    # reachable Shadow Vault / Jotunheim / Death's Rise / Blackwatch blocks.
+    # The 16-step block below is only the previously published 61-task snapshot. Latest live Journey
+    # disproves the 13419 -> 13036 hard-gate assumption and reopens the Argent Vanguard branch.
+    # Keep this subset frozen only until the current missing-chain live run finishes; do not interpret
+    # omissions here as reachability truth and do not republish it as the final Icecrown route.
     old = {int(step["step"]): step for step in steps}
 
     # In the old full route these two Jotunheim tasks were turned in during a much later Shadow
@@ -1590,8 +1599,9 @@ def main() -> None:
             "first_quest_hub": "奥格瑞姆之锤",
             "cold_weather_flying": False,
             "blocked_13419": True,
-            "blocked_argent_vanguard_chain": True,
-            "blocked_13224_airship_breadcrumb": True,
+            "argent_vanguard_chain_reachable_live": True,
+            "airship_breadcrumb_reachable_after_live_chain": True,
+            "live_supplement_integration_pending": True,
             "live_12892_confirmed": True,
             "live_12892_completed": True,
         },
@@ -1605,15 +1615,17 @@ def main() -> None:
             "ignored_or_deferred_dailies": [13674],
         },
         "current_group_progress": {
-            "journey_event_count": 2332,
-            "journey_complete_count": 995,
-            "status": "icecrown_first_run_finished_with_valhalas_deferred",
-            "formal_pool_count": 61,
-            "formal_completed_count": 56,
+            "journey_event_count": 2407,
+            "journey_complete_count": 1028,
+            "status": "icecrown_missing_argent_chain_live_run_in_progress",
+            "legacy_published_formal_pool_count": 61,
+            "legacy_published_formal_completed_count": 56,
+            "current_active_tasks": [13237, 13239],
+            "current_excluded_pvp_task": 13234,
             "unfinished_valhalas_chain": [13215, 13216, 13217, 13218, 13219],
             "active_skipped_high_difficulty_task": 13215,
             "completed_entry_tasks": [13668, 13829, 13838, 13839, 13677, 12892, 12891, 12893],
-            "active_deferred_tasks": [13215, 13227, 13634, 13674, 13678],
+            "active_deferred_tasks": [13215, 13634, 13674, 13678],
             "next_zone_active_breadcrumb": 12521,
             "actual_icecrown_exit": "奥格瑞姆之锤",
         },
@@ -1624,12 +1636,12 @@ def main() -> None:
     lines = [
         "# 冰冠冰川当前可达路线构建摘要",
         "",
-        f"状态：当前不学寒冷天气飞行条件下，冰冠主任务池仍为61项；路线压成{len(steps)}个玩家步骤。《乐趣十足》入口已经首组实服确认并完成。",
+        f"状态：当前文件仍物化此前发布的61项/{len(steps)}步快照，仅作为冻结旧产物；银色北伐军漏链已由最新Journey证实可达，等待本轮实跑结束后再整体整合并重发。",
         "",
-        "- 从风暴峭壁进入冰冠后，第一地理区域是银色比武场；补回独立银色锦标赛分类中的《银色锦标赛》《近战训练》《碎盾训练》《冲锋训练》，并顺手做同场日常《学习驾驭》。所有日常在一次性清图路线里最多保留首次一轮，跨日重复接取只进入日常时间样本，不生成第二轮路线动作。",
+        "- 从风暴峭壁进入冰冠后，第一地理区域是银色比武场；独立银色锦标赛分类与首轮日常仍按原规则处理。",
         "- 《迎接挑战》需要至少3天候选者徽记，《银松森林的黑骑士？》需要跨大陆；两条已接一次性支线记录为延后，不阻断连续清图。",
-        "- 13419《作战准备》不可执行；13036《无上的荣耀》已按实服隐藏前置13419处理，其独占后续递归不可达。",
-        "- 首组冰冠实跑已结束：61项正式池中56项完成；13215—13219为主动停止的瓦哈拉斯高难后续，其中13215仍在日志中，其余尚未解锁。实际冰冠出口回到奥格瑞姆之锤，索拉查入口任务12521已在日志中。",
+        "- 13419《作战准备》仍因寒冷天气飞行技能门槛不可执行，但它不再被视为13036《无上的荣耀》的硬前置。13227《审判日降临！》完成后13036已由实服确认可接。",
+        "- 当前漏链实跑已推进到《知己知彼》《爆炸油》均已接；《血的代价！》已明确排除。正式Route Atlas继续冻结，等用户下一轮Journey反馈后再整合剩余真实链路。",
         f"- 当前可达路线边际预算：{timing.get('policy', {}).get('route_total_center_minutes', 0):.0f}分钟；区间{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[0]:.0f}—{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[1]:.0f}分钟。",
         "",
         f"## {len(steps)}步当前顺序",

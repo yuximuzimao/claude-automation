@@ -12,7 +12,7 @@ from lib.questie_source import load_questie
 from scripts import build_borean_tundra_foundation as helper
 
 ROOT = Path(__file__).resolve().parents[1]
-QUESTIE = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 OUT = ROOT / "data/route-atlas/dragonblight-anomaly-details.json"
 QIDS = {11916, 11930, 12033, 12043, 12050, 12051, 12052, 12112}
 

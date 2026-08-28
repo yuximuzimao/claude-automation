@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT))
 from lib.questie_source import load_questie
 from lib.wotlk_quest_rewards import base_quest_xp_at_level
 
-QUESTIE_ZIP = ROOT.parent / ".ai-bridge" / "Questie.zip"
+QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 ROUTES = ROOT / "data/route-atlas/workbench-routes.json"
 TIMING = ROOT / "data/route-atlas/route-atlas-timing-estimates.json"
 UNIVERSE = ROOT / "data/route-atlas/northrend-task-universe.json"
