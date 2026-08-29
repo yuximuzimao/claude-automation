@@ -22,15 +22,14 @@
   ],
   "status_counts": {
     "exclude_cold_weather_flying_gate": 2,
-    "exclude_dependency_on_blocked_task": 102,
     "exclude_manual_non_executable": 22,
     "exclude_route_economics": 2,
     "exclude_unavailable_or_policy": 82,
-    "include_candidate": 55,
-    "include_first_run_repeatable_or_calendar": 6,
+    "include_candidate": 152,
+    "include_first_run_repeatable_or_calendar": 11,
     "knowledge_external_acquisition": 9
   },
-  "route_candidate_count": 61,
+  "route_candidate_count": 163,
   "route_candidate_ids": [
     12806,
     12807,
@@ -58,29 +57,76 @@
     12992,
     12995,
     12999,
+    13008,
+    13036,
+    13039,
+    13040,
     13042,
     13043,
+    13044,
+    13045,
     13059,
+    13068,
     13069,
+    13070,
     13071,
+    13072,
+    13073,
+    13074,
+    13075,
+    13076,
+    13077,
+    13078,
+    13079,
+    13080,
+    13081,
+    13082,
+    13083,
     13084,
     13085,
+    13086,
     13091,
     13092,
+    13104,
     13106,
+    13110,
     13117,
+    13118,
     13119,
     13120,
     13121,
+    13122,
+    13125,
+    13130,
     13133,
     13134,
+    13135,
     13136,
     13137,
     13138,
+    13139,
     13140,
+    13141,
     13142,
+    13143,
     13144,
+    13145,
+    13146,
+    13147,
     13152,
+    13155,
+    13157,
+    13160,
+    13161,
+    13162,
+    13163,
+    13164,
+    13168,
+    13169,
+    13170,
+    13171,
+    13172,
+    13174,
     13211,
     13212,
     13213,
@@ -91,11 +137,66 @@
     13218,
     13219,
     13220,
+    13224,
+    13227,
+    13228,
     13229,
-    13235
+    13230,
+    13235,
+    13236,
+    13237,
+    13238,
+    13239,
+    13258,
+    13259,
+    13260,
+    13262,
+    13263,
+    13264,
+    13271,
+    13275,
+    13277,
+    13278,
+    13279,
+    13282,
+    13283,
+    13293,
+    13301,
+    13302,
+    13304,
+    13305,
+    13306,
+    13307,
+    13308,
+    13310,
+    13312,
+    13313,
+    13316,
+    13328,
+    13329,
+    13330,
+    13340,
+    13348,
+    13349,
+    13351,
+    13352,
+    13354,
+    13355,
+    13356,
+    13358,
+    13359,
+    13360,
+    13361,
+    13362,
+    13363,
+    13364,
+    13366,
+    13367,
+    13373,
+    13379
   ],
-  "level_80_xp_bonus_money_candidate_total_copper": 7713300,
-  "level_80_xp_bonus_money_candidate_total_gold_decimal": 771.33,
+  "level_80_xp_bonus_money_candidate_total_copper": 19339500,
+  "level_80_xp_bonus_money_candidate_total_gold_decimal": 1933.95,
   "direct_money_note": "Quest direct-money reward is not yet globally materialized; do not use this subtotal as final Icecrown gold.",
   "dependency_hard_gap_count": 0,
   "dependency_hard_gaps": [],
@@ -8679,9 +8780,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13036"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -8812,7 +8913,7 @@
         210
       ],
       "pre_any": [
-        13419
+        13227
       ],
       "pre_all": [],
       "parent_active": [],
@@ -8855,16 +8956,16 @@
       },
       "scope_origin": "assigned_icecrown",
       "verified_hidden_dependency": {
-        "basis": "user_live_2026_08_25_no_cold_weather_flying_13036_and_its_three_children_unavailable",
-        "note": "Questie omits this edge on the current server. Treat 13419 as a hard hidden prerequisite before computing Icecrown reachability."
+        "basis": "user_live_2026_08_28_journey_13227_complete_then_13036_available_without_13419",
+        "note": "Latest live Journey proves 13227《审判日降临！》 is the real bridge to 13036《无上的荣耀》. 13419《作战准备》 remains unavailable without Cold Weather Flying but is not required for this chain."
       },
       "objective_review_resolution": "",
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13419"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 12900,
@@ -9268,9 +9369,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13036"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -9589,9 +9690,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13036"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -10294,10 +10395,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13039",
-        "blocked_by_13040"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 12900,
@@ -10577,9 +10677,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "任务机制明确一次天爪龙只能带一名俘虏、每号需3名；正式预算不再使用shared_kill自动分类。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13044"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 162000,
@@ -11141,9 +11241,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13141"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -11589,9 +11689,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13045"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 12900,
@@ -12035,9 +12135,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13068"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -12254,9 +12354,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13072"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 99300,
@@ -12479,9 +12579,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13073"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -12659,9 +12759,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13074"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -12838,9 +12938,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13075"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 0,
@@ -13019,9 +13119,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13076"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 99300,
@@ -13246,9 +13346,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13077"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -13427,9 +13527,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13078"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -13606,9 +13706,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13079"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -13786,9 +13886,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13080"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 99300,
@@ -13966,9 +14066,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13081"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -14186,9 +14286,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13082"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 198600,
@@ -14940,9 +15040,9 @@
       "manual_spatial_resolution": "argent_vanguard_cannon_fixed_at_step2",
       "fivebox_resolved": "",
       "manual_evidence_note": "公开单角色评论显示炮台可在5分钟内完成；正式范围同时覆盖若本服五号需分别完成的上界。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13070"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 194400,
@@ -17100,9 +17200,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13086"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 12900,
@@ -17711,9 +17811,9 @@
       "manual_spatial_resolution": "scourgeholme_same_target_block_as_step3",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13104"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -18201,9 +18301,9 @@
       "manual_spatial_resolution": "scourgeholme_same_target_block_as_step3",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13104"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -19339,9 +19439,9 @@
       "manual_spatial_resolution": "scourgeholme_same_target_block_as_step3",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13104"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 129600,
@@ -19645,10 +19745,9 @@
       "manual_spatial_resolution": "three_named_scourgeholme_bosses_manually_anchored_step3",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13118",
-        "blocked_by_13122"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 196200,
@@ -20020,9 +20119,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13104"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 130800,
@@ -21307,9 +21406,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13104"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 130800,
@@ -22208,11 +22307,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13125",
-        "blocked_by_13130",
-        "blocked_by_13135"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 130800,
@@ -22713,9 +22810,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13139"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 130800,
@@ -23268,9 +23365,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "公开资料标记不可共享，路线明确五号分别驯服；自动shared_kill估时已废弃。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13155"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -24022,9 +24119,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13143"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -24325,9 +24422,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13145"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -24592,9 +24689,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13145"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -25069,10 +25166,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13172",
-        "blocked_by_13174"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 66300,
@@ -25290,9 +25386,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13141"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 196200,
@@ -25557,9 +25653,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13145"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -25814,9 +25910,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13160"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -26071,9 +26167,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13160"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -26328,9 +26424,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13160"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -26587,11 +26683,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13161",
-        "blocked_by_13162",
-        "blocked_by_13163"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 198600,
@@ -26814,10 +26908,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13263",
-        "blocked_by_13389"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -27078,9 +27171,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13168"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -27339,9 +27432,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13168"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -27604,9 +27697,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13168"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -27951,11 +28044,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13169",
-        "blocked_by_13170",
-        "blocked_by_13171"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -28422,11 +28513,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "四件文档坐标长期稳定，公开评论明确《混乱之种》80杀后可直接跳下拾取，避免额外往返。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13169",
-        "blocked_by_13170",
-        "blocked_by_13171"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -31566,9 +31655,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13157"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 32700,
@@ -32068,9 +32157,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_route_economics",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "breadcrumb_only_3_24g_per_character_requires_dedicated_moving_airship_detour_before_argent_vanguard"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 32400,
@@ -32264,9 +32353,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13224"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -32642,9 +32731,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13228"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -33914,9 +34003,9 @@
       "manual_spatial_resolution": "first_legion_forward_camp_64_5_44_script_anchor",
       "fivebox_resolved": "",
       "manual_evidence_note": "目标是脚本幻境而非真实击杀100只怪；自动mixed objective 61.2分钟估时已废弃。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13305"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -34213,9 +34302,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13260"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -34362,9 +34451,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13228"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -34634,9 +34723,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13238"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -34784,9 +34873,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13224"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 66300,
@@ -34995,9 +35084,9 @@
       "manual_spatial_resolution": "icecrown_citadel_ground_entrance_51_86_then_local_underground_block",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13258"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -35144,9 +35233,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13228"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -35554,9 +35643,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13259"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -35733,9 +35822,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13262"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -36034,9 +36123,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13237"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -36199,9 +36288,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13263"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -36440,9 +36529,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13271"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -36924,9 +37013,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13237"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -37120,9 +37209,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13277"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -37380,9 +37469,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13277"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -38058,9 +38147,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13275"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 66300,
@@ -38343,9 +38432,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_first_run_repeatable_or_calendar",
       "scope_reasons": [
-        "blocked_by_13293"
+        "first_run_only_user_rule_compare_real_content_not_calendar_label"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -40516,9 +40605,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13224"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,
@@ -42100,9 +42189,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_first_run_repeatable_or_calendar",
       "scope_reasons": [
-        "blocked_by_13340"
+        "first_run_only_user_rule_compare_real_content_not_calendar_label"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -42298,9 +42387,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_first_run_repeatable_or_calendar",
       "scope_reasons": [
-        "blocked_by_13224"
+        "first_run_only_user_rule_compare_real_content_not_calendar_label"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -42506,9 +42595,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13282"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -42868,9 +42957,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13304"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -43064,9 +43153,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13366"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -43338,9 +43427,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13306"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -43596,10 +43685,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13224",
-        "blocked_by_13225"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -44078,9 +44166,9 @@
       "manual_spatial_resolution": "ground_commander_kotea_suppression_turret_event_anchor_step19",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_first_run_repeatable_or_calendar",
       "scope_reasons": [
-        "blocked_by_13340"
+        "first_run_only_user_rule_compare_real_content_not_calendar_label"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -44300,10 +44388,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13306",
-        "blocked_by_13367"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -44501,9 +44588,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13306"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -45215,9 +45302,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13329"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -47162,9 +47249,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "公开评论确认恐惧碎片在上层、绝望与苦难碎片在下一层；路线已按两层固定。",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13329"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -47365,10 +47452,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13307",
-        "blocked_by_13312"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -47723,9 +47809,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_first_run_repeatable_or_calendar",
       "scope_reasons": [
-        "blocked_by_13224"
+        "first_run_only_user_rule_compare_real_content_not_calendar_label"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -50110,9 +50196,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13224"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 33000,
@@ -51291,9 +51377,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13236"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 66300,
@@ -51606,9 +51692,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13348"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -52059,9 +52145,9 @@
       "manual_spatial_resolution": "four_manual_recon_points_54_44_54_40_54_34_51_33",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13264"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 99300,
@@ -52255,9 +52341,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13351"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -52800,9 +52886,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13351"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -53082,9 +53168,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13351"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -53335,9 +53421,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13355"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -53785,9 +53871,9 @@
       "manual_spatial_resolution": "aldurthar_north_54_55_29_30_plus_crystal_53_8_33_6",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13352"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -53977,9 +54063,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13348"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -54126,9 +54212,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13359"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 33000,
@@ -54431,9 +54517,9 @@
       "manual_spatial_resolution": "bloodstained_stone_48_72_personal_scenario_anchor",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13360"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -54580,9 +54666,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13361"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 66300,
@@ -54745,9 +54831,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13362"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 99300,
@@ -55013,9 +55099,9 @@
       "manual_spatial_resolution": "dark_cathedral_entry_44_5_77_6_tirion_44_4_76_2",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13363"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 198600,
@@ -55380,9 +55466,9 @@
       "manual_spatial_resolution": "aldurthar_north_building_entry_51_33",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13352"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -55585,9 +55671,9 @@
       "manual_spatial_resolution": "aldurthar_north_ritual_room_manual_anchor",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13366"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 198600,
@@ -56059,9 +56145,9 @@
       "manual_spatial_resolution": "tazla_platform_54_36_bomber_route",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13379"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 132300,
@@ -56714,9 +56800,9 @@
       "manual_spatial_resolution": "tazla_platform_54_36_long_bomber_route",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "exclude_route_economics",
       "scope_reasons": [
-        "blocked_by_13373"
+        "optional_first_daily_long_bombing_has_no_one_time_unlock_value_and_is_not_core_route_work"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 165300,
@@ -56982,9 +57068,9 @@
       "manual_spatial_resolution": "",
       "fivebox_resolved": "",
       "manual_evidence_note": "",
-      "scope_status": "exclude_dependency_on_blocked_task",
+      "scope_status": "include_candidate",
       "scope_reasons": [
-        "blocked_by_13239"
+        "level_80_horde_paladin_outdoor_first_run"
       ],
       "level_80_economy": {
         "xp_bonus_money_copper": 13200,

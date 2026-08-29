@@ -10,7 +10,7 @@
     "loaned_wind_rider_available": true,
     "from_zone": "风暴峭壁",
     "first_geographic_region": "银色比武场",
-    "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; do not route through Argent Vanguard"
+    "action": "enter Icecrown from Storm Peaks at the Argent Tournament Grounds; use live quest state to continue the required 13227 → 13036 Argent Vanguard chain"
   },
   "blocked_transport_quest": {
     "quest_id": 13419,
@@ -18,15 +18,15 @@
     "scope_status": "exclude_cold_weather_flying_gate",
     "cold_weather_flying_gate": true
   },
-  "blocked_argent_vanguard_root": {
+  "argent_vanguard_root": {
     "quest_id": 13036,
     "name": "无上的荣耀",
-    "scope_status": "exclude_dependency_on_blocked_task",
+    "scope_status": "include_candidate",
     "scope_reasons": [
-      "blocked_by_13419"
+      "level_80_horde_paladin_outdoor_first_run"
     ],
     "pre_any": [
-      13419
+      13227
     ],
     "starts": [
       {
@@ -39,22 +39,22 @@
       }
     ],
     "next_quest": 13008,
-    "reason": "verified hidden dependency on 13419; the entire exclusive descendant chain is unreachable while Cold Weather Flying remains unlearned"
+    "reason": "live Journey confirms 13227《审判日降临！》 completes immediately before 13036 becomes available; 13419 is not part of this dependency"
   },
-  "skipped_breadcrumb": {
+  "required_breadcrumb": {
     "quest_id": 13227,
     "name": "审判日降临！",
     "xp_bonus_money_gold_decimal": 3.24,
     "next_quest": 13036,
-    "decision": "skip_permanently",
-    "reason": "becomes unavailable after starting 13036 and is only 3.24G per character from max-level XP conversion; not worth a dedicated moving-airship detour before Argent Vanguard"
+    "decision": "include_required_live_bridge",
+    "reason": "latest Journey proves this breadcrumb is the real executable bridge into 13036; it must not be removed by route-economics filtering"
   },
-  "blocked_natural_airship_breadcrumb": {
+  "natural_airship_breadcrumb": {
     "quest_id": 13224,
     "name": "奥格瑞姆之锤",
-    "scope_status": "exclude_dependency_on_blocked_task",
+    "scope_status": "include_candidate",
     "scope_reasons": [
-      "blocked_by_13157"
+      "level_80_horde_paladin_outdoor_first_run"
     ],
     "pre_any": [
       13157
@@ -91,7 +91,7 @@
     "live_check": "after entering Icecrown from Storm Peaks at the Argent Tournament Grounds, reach Orgrim's Hammer directly with the loaned mount and check whether Koltira Deathweaver offers quest 12892",
     "if_missing": "record the real blocker and remove the Shadow Vault component from the executable route; do not unlock other airship tasks merely because their NPCs are present"
   },
-  "independent_root_count": 1,
+  "independent_root_count": 2,
   "independent_roots": [
     {
       "quest_id": 12892,
@@ -104,6 +104,25 @@
         "xp_bonus_money_copper": 132300,
         "xp_bonus_money_gold_decimal": 13.23,
         "xp_bonus_money_display": "13g 23s 00c",
+        "equipment_reward_count": 0,
+        "other_reward_item_count": 0,
+        "direct_money_copper": 0,
+        "direct_money_gold_decimal": 0.0,
+        "direct_money_status": "not_yet_globally_audited",
+        "direct_money_basis": null
+      }
+    },
+    {
+      "quest_id": 13227,
+      "name": "审判日降临！",
+      "scope_status": "include_candidate",
+      "starts": [],
+      "required_min_rep": null,
+      "available_starting_with": [],
+      "level_80_economy": {
+        "xp_bonus_money_copper": 32400,
+        "xp_bonus_money_gold_decimal": 3.24,
+        "xp_bonus_money_display": "3g 24s 00c",
         "equipment_reward_count": 0,
         "other_reward_item_count": 0,
         "direct_money_copper": 0,

@@ -60,6 +60,7 @@ EXTERNAL_ACQUISITION_IDS = {
 }
 ROUTE_ECONOMICS_SKIP_IDS = {
     13234: "pvp_daily_requires_15_opposing_players_non_deterministic_external_player_dependency",
+    13376: "optional_first_daily_long_bombing_has_no_one_time_unlock_value_and_is_not_core_route_work",
 }
 # A map route's dependency closure may cross assigned-zone boundaries. These tasks remain
 # attributed to their original zone in the global universe, but are materialized here because

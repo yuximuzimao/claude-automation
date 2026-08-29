@@ -5,8 +5,8 @@
     "name": "冰冠冰川"
   },
   "cluster_type": "objective_and_extra_objective_targets",
-  "cluster_count": 90,
-  "shared_cluster_count": 15,
+  "cluster_count": 173,
+  "shared_cluster_count": 29,
   "clusters": [
     {
       "cluster_id": "npc:30037",
@@ -126,6 +126,110 @@
       "source_kinds": [
         "extra_reference",
         "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "object:193058",
+      "entity_type": "object",
+      "entity_id": 193058,
+      "name": "Eye of Dominion",
+      "representative": {
+        "x": 44.14,
+        "y": 24.72,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        13168,
+        13169,
+        13170,
+        13171
+      ],
+      "relations": [
+        {
+          "quest_id": 13168,
+          "quest_name": "离别礼物",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193058,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 44.14,
+            "y": 24.72,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Eye of Dominion"
+        },
+        {
+          "quest_id": 13169,
+          "quest_name": "亡灵的好朋友",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193058,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 44.14,
+            "y": 24.72,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of an Eidolon Watcher"
+        },
+        {
+          "quest_id": 13170,
+          "quest_name": "不择手段",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193058,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 44.14,
+            "y": 24.72,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of an Eidolon Watcher"
+        },
+        {
+          "quest_id": 13171,
+          "quest_name": "来去无踪",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193058,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 44.14,
+            "y": 24.72,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of an Eidolon Watcher"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
       ],
       "shared_by_multiple_tasks": true
     },
@@ -626,6 +730,110 @@
       ],
       "source_kinds": [
         "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "object:193424",
+      "entity_type": "object",
+      "entity_id": 193424,
+      "name": "Eye of Dominion",
+      "representative": {
+        "x": 54.26,
+        "y": 70.61,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13145,
+        13146,
+        13147,
+        13160
+      ],
+      "relations": [
+        {
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193424,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 54.26,
+            "y": 70.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of a Lithe Stalker"
+        },
+        {
+          "quest_id": 13146,
+          "quest_name": "深信不疑",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193424,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 54.26,
+            "y": 70.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of a Lithe Stalker"
+        },
+        {
+          "quest_id": 13147,
+          "quest_name": "煽风点火",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193424,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 54.26,
+            "y": 70.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of a Lithe Stalker"
+        },
+        {
+          "quest_id": 13160,
+          "quest_name": "壮观的景象",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193424,
+          "entity_name": "Eye of Dominion",
+          "representative": {
+            "x": 54.26,
+            "y": 70.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Seize Control of a Lithe Stalker"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
       ],
       "shared_by_multiple_tasks": true
     },
@@ -1133,6 +1341,86 @@
       "shared_by_multiple_tasks": true
     },
     {
+      "cluster_id": "npc:31399",
+      "entity_type": "npc",
+      "entity_id": 31399,
+      "name": "工头沙尔德林",
+      "representative": {
+        "x": 55.12,
+        "y": 59.37,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13092,
+        13308,
+        13330
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31399,
+          "entity_name": "工头沙尔德林",
+          "representative": {
+            "x": 55.12,
+            "y": 59.37,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13308,
+          "quest_name": "思维诡计",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 1,
+          "item_id": 44153,
+          "item_name": "Foreman's Key",
+          "entity_type": "npc",
+          "entity_id": 31399,
+          "entity_name": "工头沙尔德林",
+          "representative": {
+            "x": 55.12,
+            "y": 59.37,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_index": 3,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31399,
+          "entity_name": "工头沙尔德林",
+          "representative": {
+            "x": 55.12,
+            "y": 59.37,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
       "cluster_id": "npc:30751",
       "entity_type": "npc",
       "entity_id": 30751,
@@ -1273,6 +1561,66 @@
       "shared_by_multiple_tasks": true
     },
     {
+      "cluster_id": "npc:31783",
+      "entity_type": "npc",
+      "entity_id": 31783,
+      "name": "维库通灵领主",
+      "representative": {
+        "x": 70.04,
+        "y": 40.26,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13092,
+        13349
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31783,
+          "entity_name": "维库通灵领主",
+          "representative": {
+            "x": 70.04,
+            "y": 40.26,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13349,
+          "quest_name": "冰霜巨龙的摇篮",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31783,
+          "entity_name": "维库通灵领主",
+          "representative": {
+            "x": 70.04,
+            "y": 40.26,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
       "cluster_id": "npc:29333",
       "entity_type": "npc",
       "entity_id": 29333,
@@ -1324,6 +1672,606 @@
             "spawn_count": 53
           },
           "spawn_count": 53,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:31746",
+      "entity_type": "npc",
+      "entity_id": 31746,
+      "name": "伊米海姆防御者",
+      "representative": {
+        "x": 59.91,
+        "y": 51.14,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        13092,
+        13330
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31746,
+          "entity_name": "伊米海姆防御者",
+          "representative": {
+            "x": 59.91,
+            "y": 51.14,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_index": 4,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31746,
+          "entity_name": "伊米海姆防御者",
+          "representative": {
+            "x": 59.91,
+            "y": 51.14,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:31262",
+      "entity_type": "npc",
+      "entity_id": 31262,
+      "name": "天灾驯鹰者",
+      "representative": {
+        "x": 57.98,
+        "y": 54.73,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        13092,
+        13330
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31262,
+          "entity_name": "天灾驯鹰者",
+          "representative": {
+            "x": 57.98,
+            "y": 54.73,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31262,
+          "entity_name": "天灾驯鹰者",
+          "representative": {
+            "x": 57.98,
+            "y": 54.73,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:31258",
+      "entity_type": "npc",
+      "entity_id": 31258,
+      "name": "伊米海姆天选战士",
+      "representative": {
+        "x": 58.49,
+        "y": 56.23,
+        "spawn_count": 36
+      },
+      "spawn_count": 36,
+      "quest_ids": [
+        13092,
+        13330
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31258,
+          "entity_name": "伊米海姆天选战士",
+          "representative": {
+            "x": 58.49,
+            "y": 56.23,
+            "spawn_count": 36
+          },
+          "spawn_count": 36,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_index": 5,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31258,
+          "entity_name": "伊米海姆天选战士",
+          "representative": {
+            "x": 58.49,
+            "y": 56.23,
+            "spawn_count": 36
+          },
+          "spawn_count": 36,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:31267",
+      "entity_type": "npc",
+      "entity_id": 31267,
+      "name": "伊米亚元素师",
+      "representative": {
+        "x": 58.0,
+        "y": 57.42,
+        "spawn_count": 23
+      },
+      "spawn_count": 23,
+      "quest_ids": [
+        13092,
+        13330
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31267,
+          "entity_name": "伊米亚元素师",
+          "representative": {
+            "x": 58.0,
+            "y": 57.42,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31267,
+          "entity_name": "伊米亚元素师",
+          "representative": {
+            "x": 58.0,
+            "y": 57.42,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:31159",
+      "entity_type": "npc",
+      "entity_id": 31159,
+      "name": "贝洛克",
+      "representative": {
+        "x": 59.11,
+        "y": 71.99,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13092,
+        13163
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 31159,
+          "entity_name": "贝洛克",
+          "representative": {
+            "x": 59.11,
+            "y": 71.99,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13163,
+          "quest_name": "鲜血骑士",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31159,
+          "entity_name": "贝洛克",
+          "representative": {
+            "x": 59.11,
+            "y": 71.99,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30922",
+      "entity_type": "npc",
+      "entity_id": 30922,
+      "name": "阴暗蛮徒",
+      "representative": {
+        "x": 58.97,
+        "y": 74.32,
+        "spawn_count": 9
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        13092,
+        13147
+      ],
+      "relations": [
+        {
+          "quest_id": 13092,
+          "quest_name": "占命卜运",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 15,
+          "item_id": 43089,
+          "item_name": "Vrykul Bones",
+          "entity_type": "npc",
+          "entity_id": 30922,
+          "entity_name": "阴暗蛮徒",
+          "representative": {
+            "x": 58.97,
+            "y": 74.32,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13147,
+          "quest_name": "煽风点火",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30922,
+          "entity_name": "阴暗蛮徒",
+          "representative": {
+            "x": 58.97,
+            "y": 74.32,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30333",
+      "entity_type": "npc",
+      "entity_id": 30333,
+      "name": "遗忘深渊杀戮者",
+      "representative": {
+        "x": 83.56,
+        "y": 74.7,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        13039,
+        13040
+      ],
+      "relations": [
+        {
+          "quest_id": 13039,
+          "quest_name": "保卫前线基地",
+          "objective_index": 4,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30333,
+          "entity_name": "遗忘深渊杀戮者",
+          "representative": {
+            "x": 83.56,
+            "y": 74.7,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13040,
+          "quest_name": "致命的剧毒",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42770,
+          "item_name": "Forgotten Depths Venom Sac",
+          "entity_type": "npc",
+          "entity_id": 30333,
+          "entity_name": "遗忘深渊杀戮者",
+          "representative": {
+            "x": 83.56,
+            "y": 74.7,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30205",
+      "entity_type": "npc",
+      "entity_id": 30205,
+      "name": "遗忘深渊追随者",
+      "representative": {
+        "x": 84.44,
+        "y": 75.34,
+        "spawn_count": 4
+      },
+      "spawn_count": 4,
+      "quest_ids": [
+        13039,
+        13040
+      ],
+      "relations": [
+        {
+          "quest_id": 13039,
+          "quest_name": "保卫前线基地",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30205,
+          "entity_name": "遗忘深渊追随者",
+          "representative": {
+            "x": 84.44,
+            "y": 75.34,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13040,
+          "quest_name": "致命的剧毒",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42770,
+          "item_name": "Forgotten Depths Venom Sac",
+          "entity_type": "npc",
+          "entity_id": 30205,
+          "entity_name": "遗忘深渊追随者",
+          "representative": {
+            "x": 84.44,
+            "y": 75.34,
+            "spawn_count": 4
+          },
+          "spawn_count": 4,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30204",
+      "entity_type": "npc",
+      "entity_id": 30204,
+      "name": "遗忘深渊伏击者",
+      "representative": {
+        "x": 84.03,
+        "y": 75.6,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        13039,
+        13040
+      ],
+      "relations": [
+        {
+          "quest_id": 13039,
+          "quest_name": "保卫前线基地",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 15,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30204,
+          "entity_name": "遗忘深渊伏击者",
+          "representative": {
+            "x": 84.03,
+            "y": 75.6,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13040,
+          "quest_name": "致命的剧毒",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42770,
+          "item_name": "Forgotten Depths Venom Sac",
+          "entity_type": "npc",
+          "entity_id": 30204,
+          "entity_name": "遗忘深渊伏击者",
+          "representative": {
+            "x": 84.03,
+            "y": 75.6,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": true
+    },
+    {
+      "cluster_id": "npc:30206",
+      "entity_type": "npc",
+      "entity_id": 30206,
+      "name": "腐尸噬体者",
+      "representative": {
+        "x": 83.61,
+        "y": 75.61,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        13039,
+        13040
+      ],
+      "relations": [
+        {
+          "quest_id": 13039,
+          "quest_name": "保卫前线基地",
+          "objective_index": 3,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30206,
+          "entity_name": "腐尸噬体者",
+          "representative": {
+            "x": 83.61,
+            "y": 75.61,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13040,
+          "quest_name": "致命的剧毒",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 10,
+          "item_id": 42770,
+          "item_name": "Forgotten Depths Venom Sac",
+          "entity_type": "npc",
+          "entity_id": 30206,
+          "entity_name": "腐尸噬体者",
+          "representative": {
+            "x": 83.61,
+            "y": 75.61,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
           "source_kind": "objective"
         }
       ],
@@ -1695,6 +2643,47 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:30946",
+      "entity_type": "npc",
+      "entity_id": 30946,
+      "name": "克里托斯·血刃",
+      "representative": {
+        "x": 44.06,
+        "y": 24.54,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13172
+      ],
+      "relations": [
+        {
+          "quest_id": 13172,
+          "quest_name": "混乱之种",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30946,
+          "entity_name": "克里托斯·血刃",
+          "representative": {
+            "x": 44.06,
+            "y": 24.54,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Speak to Keritose Bloodblade to secure a Skeletal Gryphon"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:30081",
       "entity_type": "npc",
       "entity_id": 30081,
@@ -2014,6 +3003,46 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:32263",
+      "entity_type": "npc",
+      "entity_id": 32263,
+      "name": "工头维拉恩",
+      "representative": {
+        "x": 53.68,
+        "y": 29.2,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13354
+      ],
+      "relations": [
+        {
+          "quest_id": 13354,
+          "quest_name": "指挥体系",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32263,
+          "entity_name": "工头维拉恩",
+          "representative": {
+            "x": 53.68,
+            "y": 29.2,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:14688",
       "entity_type": "npc",
       "entity_id": 14688,
@@ -2042,6 +3071,86 @@
           "representative": {
             "x": 31.21,
             "y": 29.74,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32291",
+      "entity_type": "npc",
+      "entity_id": 32291,
+      "name": "工头沙维尔",
+      "representative": {
+        "x": 49.4,
+        "y": 31.19,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13354
+      ],
+      "relations": [
+        {
+          "quest_id": 13354,
+          "quest_name": "指挥体系",
+          "objective_index": 4,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32291,
+          "entity_name": "工头沙维尔",
+          "representative": {
+            "x": 49.4,
+            "y": 31.19,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32285",
+      "entity_type": "npc",
+      "entity_id": 32285,
+      "name": "工头夏克尔",
+      "representative": {
+        "x": 54.72,
+        "y": 32.62,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13354
+      ],
+      "relations": [
+        {
+          "quest_id": 13354,
+          "quest_name": "指挥体系",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32285,
+          "entity_name": "工头夏克尔",
+          "representative": {
+            "x": 54.72,
+            "y": 32.62,
             "spawn_count": 1
           },
           "spawn_count": 1,
@@ -2091,6 +3200,489 @@
       ],
       "source_kinds": [
         "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13356:1:3",
+      "entity_type": "extra_anchor",
+      "entity_id": "13356:1:3",
+      "name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+      "representative": {
+        "x": 48.9,
+        "y": 33.2,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13356
+      ],
+      "relations": [
+        {
+          "quest_id": 13356,
+          "quest_name": "重新考验",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13356:1:3",
+          "entity_name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+          "representative": {
+            "x": 48.9,
+            "y": 33.2,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Throw a Writhing Mass into a cauldron at Aldur'thar"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32242",
+      "entity_type": "npc",
+      "entity_id": 32242,
+      "name": "Blue Sample KC Bunny",
+      "representative": {
+        "x": 48.94,
+        "y": 33.2,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13355
+      ],
+      "relations": [
+        {
+          "quest_id": 13355,
+          "quest_name": "无法复制",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32242,
+          "entity_name": "Blue Sample KC Bunny",
+          "representative": {
+            "x": 48.94,
+            "y": 33.2,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31554",
+      "entity_type": "npc",
+      "entity_id": 31554,
+      "name": "永不休息的斥候",
+      "representative": {
+        "x": 40.41,
+        "y": 33.58,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        13172
+      ],
+      "relations": [
+        {
+          "quest_id": 13172,
+          "quest_name": "混乱之种",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 80,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31554,
+          "entity_name": "永不休息的斥候",
+          "representative": {
+            "x": 40.41,
+            "y": 33.58,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193403",
+      "entity_type": "object",
+      "entity_id": 193403,
+      "name": "Weeping Quarry Document",
+      "representative": {
+        "x": 39.11,
+        "y": 33.6,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13174
+      ],
+      "relations": [
+        {
+          "quest_id": 13174,
+          "quest_name": "一片狼藉",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43688,
+          "item_name": "Weeping Quarry Document",
+          "entity_type": "object",
+          "entity_id": 193403,
+          "entity_name": "Weeping Quarry Document",
+          "representative": {
+            "x": 39.11,
+            "y": 33.6,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32244",
+      "entity_type": "npc",
+      "entity_id": 32244,
+      "name": "Green Sample KC Bunny",
+      "representative": {
+        "x": 49.06,
+        "y": 34.18,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13355
+      ],
+      "relations": [
+        {
+          "quest_id": 13355,
+          "quest_name": "无法复制",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32244,
+          "entity_name": "Green Sample KC Bunny",
+          "representative": {
+            "x": 49.06,
+            "y": 34.18,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13356:1:2",
+      "entity_type": "extra_anchor",
+      "entity_id": "13356:1:2",
+      "name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+      "representative": {
+        "x": 49.1,
+        "y": 34.2,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13356
+      ],
+      "relations": [
+        {
+          "quest_id": 13356,
+          "quest_name": "重新考验",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13356:1:2",
+          "entity_name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+          "representative": {
+            "x": 49.1,
+            "y": 34.2,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Throw a Writhing Mass into a cauldron at Aldur'thar"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32245",
+      "entity_type": "npc",
+      "entity_id": 32245,
+      "name": "Dark Sample KC Bunny",
+      "representative": {
+        "x": 49.67,
+        "y": 34.37,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13355
+      ],
+      "relations": [
+        {
+          "quest_id": 13355,
+          "quest_name": "无法复制",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32245,
+          "entity_name": "Dark Sample KC Bunny",
+          "representative": {
+            "x": 49.67,
+            "y": 34.37,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13356:1:1",
+      "entity_type": "extra_anchor",
+      "entity_id": "13356:1:1",
+      "name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+      "representative": {
+        "x": 49.7,
+        "y": 34.4,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13356
+      ],
+      "relations": [
+        {
+          "quest_id": 13356,
+          "quest_name": "重新考验",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13356:1:1",
+          "entity_name": "Throw a Writhing Mass into a cauldron at Aldur'thar",
+          "representative": {
+            "x": 49.7,
+            "y": 34.4,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Throw a Writhing Mass into a cauldron at Aldur'thar"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31555",
+      "entity_type": "npc",
+      "entity_id": 31555,
+      "name": "复活的劳工",
+      "representative": {
+        "x": 38.35,
+        "y": 35.92,
+        "spawn_count": 55
+      },
+      "spawn_count": 55,
+      "quest_ids": [
+        13172
+      ],
+      "relations": [
+        {
+          "quest_id": 13172,
+          "quest_name": "混乱之种",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31555,
+          "entity_name": "复活的劳工",
+          "representative": {
+            "x": 38.35,
+            "y": 35.92,
+            "spawn_count": 55
+          },
+          "spawn_count": 55,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193404",
+      "entity_type": "object",
+      "entity_id": 193404,
+      "name": "Weeping Quarry Ledger",
+      "representative": {
+        "x": 39.2,
+        "y": 36.75,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        13174
+      ],
+      "relations": [
+        {
+          "quest_id": 13174,
+          "quest_name": "一片狼藉",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43689,
+          "item_name": "Weeping Quarry Ledger",
+          "entity_type": "object",
+          "entity_id": 193404,
+          "entity_name": "Weeping Quarry Ledger",
+          "representative": {
+            "x": 39.2,
+            "y": 36.75,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31131",
+      "entity_type": "npc",
+      "entity_id": 31131,
+      "name": "污染水晶",
+      "representative": {
+        "x": 39.4,
+        "y": 37.06,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        13171
+      ],
+      "relations": [
+        {
+          "quest_id": 13171,
+          "quest_name": "来去无踪",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31131,
+          "entity_name": "污染水晶",
+          "representative": {
+            "x": 39.4,
+            "y": 37.06,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30951",
+      "entity_type": "npc",
+      "entity_id": 30951,
+      "name": "永不休息的斥候",
+      "representative": {
+        "x": 39.59,
+        "y": 37.64,
+        "spawn_count": 32
+      },
+      "spawn_count": 32,
+      "quest_ids": [
+        13170
+      ],
+      "relations": [
+        {
+          "quest_id": 13170,
+          "quest_name": "不择手段",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30951,
+          "entity_name": "永不休息的斥候",
+          "representative": {
+            "x": 39.59,
+            "y": 37.64,
+            "spawn_count": 32
+          },
+          "spawn_count": 32,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
       ],
       "shared_by_multiple_tasks": false
     },
@@ -2176,6 +3768,86 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "object:193405",
+      "entity_type": "object",
+      "entity_id": 193405,
+      "name": "Weeping Quarry Map",
+      "representative": {
+        "x": 38.62,
+        "y": 39.39,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13174
+      ],
+      "relations": [
+        {
+          "quest_id": 13174,
+          "quest_name": "一片狼藉",
+          "objective_index": 3,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43691,
+          "item_name": "Weeping Quarry Map",
+          "entity_type": "object",
+          "entity_id": 193405,
+          "entity_name": "Weeping Quarry Map",
+          "representative": {
+            "x": 38.62,
+            "y": 39.39,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30952",
+      "entity_type": "npc",
+      "entity_id": 30952,
+      "name": "饥饿的天灾恶犬",
+      "representative": {
+        "x": 37.97,
+        "y": 39.5,
+        "spawn_count": 25
+      },
+      "spawn_count": 25,
+      "quest_ids": [
+        13169
+      ],
+      "relations": [
+        {
+          "quest_id": 13169,
+          "quest_name": "亡灵的好朋友",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 18,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30952,
+          "entity_name": "饥饿的天灾恶犬",
+          "representative": {
+            "x": 37.97,
+            "y": 39.5,
+            "spawn_count": 25
+          },
+          "spawn_count": 25,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:30196",
       "entity_type": "npc",
       "entity_id": 30196,
@@ -2216,37 +3888,117 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:31783",
+      "cluster_id": "npc:32257",
       "entity_type": "npc",
-      "entity_id": 31783,
-      "name": "维库通灵领主",
+      "entity_id": 32257,
+      "name": "天灾转化者",
       "representative": {
-        "x": 70.04,
-        "y": 40.26,
-        "spawn_count": 15
+        "x": 49.4,
+        "y": 39.75,
+        "spawn_count": 26
       },
-      "spawn_count": 15,
+      "spawn_count": 26,
       "quest_ids": [
-        13092
+        13307
       ],
       "relations": [
         {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
+          "quest_id": 13307,
+          "quest_name": "溅血的旗帜",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32257,
+          "entity_name": "天灾转化者",
+          "representative": {
+            "x": 49.4,
+            "y": 39.75,
+            "spawn_count": 26
+          },
+          "spawn_count": 26,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31718",
+      "entity_type": "npc",
+      "entity_id": 31718,
+      "name": "霜巢雏龙",
+      "representative": {
+        "x": 71.05,
+        "y": 39.96,
+        "spawn_count": 38
+      },
+      "spawn_count": 38,
+      "quest_ids": [
+        13359
+      ],
+      "relations": [
+        {
+          "quest_id": 13359,
+          "quest_name": "巨龙的墓地",
           "objective_index": 1,
           "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
+          "required_count": 6,
+          "item_id": 44631,
+          "item_name": "Whelp Bone Dust",
           "entity_type": "npc",
-          "entity_id": 31783,
-          "entity_name": "维库通灵领主",
+          "entity_id": 31718,
+          "entity_name": "霜巢雏龙",
           "representative": {
-            "x": 70.04,
-            "y": 40.26,
-            "spawn_count": 15
+            "x": 71.05,
+            "y": 39.96,
+            "spawn_count": 38
           },
-          "spawn_count": 15,
+          "spawn_count": 38,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31738",
+      "entity_type": "npc",
+      "entity_id": 31738,
+      "name": "诅咒教派腐蚀者",
+      "representative": {
+        "x": 70.19,
+        "y": 40.04,
+        "spawn_count": 37
+      },
+      "spawn_count": 37,
+      "quest_ids": [
+        13349
+      ],
+      "relations": [
+        {
+          "quest_id": 13349,
+          "quest_name": "冰霜巨龙的摇篮",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31738,
+          "entity_name": "诅咒教派腐蚀者",
+          "representative": {
+            "x": 70.19,
+            "y": 40.04,
+            "spawn_count": 37
+          },
+          "spawn_count": 37,
           "source_kind": "objective"
         }
       ],
@@ -2287,6 +4039,86 @@
             "spawn_count": 11
           },
           "spawn_count": 11,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31887",
+      "entity_type": "npc",
+      "entity_id": 31887,
+      "name": "黑锋标记",
+      "representative": {
+        "x": 50.39,
+        "y": 40.31,
+        "spawn_count": 22
+      },
+      "spawn_count": 22,
+      "quest_ids": [
+        13306
+      ],
+      "relations": [
+        {
+          "quest_id": 13306,
+          "quest_name": "构建路障",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31887,
+          "entity_name": "黑锋标记",
+          "representative": {
+            "x": 50.39,
+            "y": 40.31,
+            "spawn_count": 22
+          },
+          "spawn_count": 22,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32189",
+      "entity_type": "npc",
+      "entity_id": 32189,
+      "name": "破天号侦查机",
+      "representative": {
+        "x": 50.61,
+        "y": 40.42,
+        "spawn_count": 13
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        13313
+      ],
+      "relations": [
+        {
+          "quest_id": 13313,
+          "quest_name": "遮挡天空",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32189,
+          "entity_name": "破天号侦查机",
+          "representative": {
+            "x": 50.61,
+            "y": 40.42,
+            "spawn_count": 13
+          },
+          "spawn_count": 13,
           "source_kind": "objective"
         }
       ],
@@ -2488,6 +4320,46 @@
             "spawn_count": 9
           },
           "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193406",
+      "entity_type": "object",
+      "entity_id": 193406,
+      "name": "Weeping Quarry Schedule",
+      "representative": {
+        "x": 37.23,
+        "y": 41.6,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13174
+      ],
+      "relations": [
+        {
+          "quest_id": 13174,
+          "quest_name": "一片狼藉",
+          "objective_index": 4,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 43690,
+          "item_name": "Weeping Quarry Schedule",
+          "entity_type": "object",
+          "entity_id": 193406,
+          "entity_name": "Weeping Quarry Schedule",
+          "representative": {
+            "x": 37.23,
+            "y": 41.6,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
           "source_kind": "objective"
         }
       ],
@@ -2778,6 +4650,286 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:31731",
+      "entity_type": "npc",
+      "entity_id": 31731,
+      "name": "巨龙复活者",
+      "representative": {
+        "x": 73.58,
+        "y": 43.47,
+        "spawn_count": 16
+      },
+      "spawn_count": 16,
+      "quest_ids": [
+        13349
+      ],
+      "relations": [
+        {
+          "quest_id": 13349,
+          "quest_name": "冰霜巨龙的摇篮",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31731,
+          "entity_name": "巨龙复活者",
+          "representative": {
+            "x": 73.58,
+            "y": 43.47,
+            "spawn_count": 16
+          },
+          "spawn_count": 16,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31812",
+      "entity_type": "npc",
+      "entity_id": 31812,
+      "name": "腐朽的食尸鬼",
+      "representative": {
+        "x": 64.32,
+        "y": 44.92,
+        "spawn_count": 307
+      },
+      "spawn_count": 307,
+      "quest_ids": [
+        13305
+      ],
+      "relations": [
+        {
+          "quest_id": 13305,
+          "quest_name": "竭尽全力",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 20,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31812,
+          "entity_name": "腐朽的食尸鬼",
+          "representative": {
+            "x": 64.32,
+            "y": 44.92,
+            "spawn_count": 307
+          },
+          "spawn_count": 307,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31813",
+      "entity_type": "npc",
+      "entity_id": 31813,
+      "name": "霜颅大法师",
+      "representative": {
+        "x": 65.02,
+        "y": 45.42,
+        "spawn_count": 51
+      },
+      "spawn_count": 51,
+      "quest_ids": [
+        13305
+      ],
+      "relations": [
+        {
+          "quest_id": 13305,
+          "quest_name": "竭尽全力",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 2,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31813,
+          "entity_name": "霜颅大法师",
+          "representative": {
+            "x": 65.02,
+            "y": 45.42,
+            "spawn_count": 51
+          },
+          "spawn_count": 51,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31815",
+      "entity_type": "npc",
+      "entity_id": 31815,
+      "name": "白骨巨人",
+      "representative": {
+        "x": 64.59,
+        "y": 45.45,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        13305
+      ],
+      "relations": [
+        {
+          "quest_id": 13305,
+          "quest_name": "竭尽全力",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31815,
+          "entity_name": "白骨巨人",
+          "representative": {
+            "x": 64.59,
+            "y": 45.45,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32236",
+      "entity_type": "npc",
+      "entity_id": 32236,
+      "name": "黑暗压制者",
+      "representative": {
+        "x": 53.69,
+        "y": 45.64,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        13352
+      ],
+      "relations": [
+        {
+          "quest_id": 13352,
+          "quest_name": "从天而“降”",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32236,
+          "entity_name": "黑暗压制者",
+          "representative": {
+            "x": 53.69,
+            "y": 45.64,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31832",
+      "entity_type": "npc",
+      "entity_id": 31832,
+      "name": "库卡隆步兵",
+      "representative": {
+        "x": 58.21,
+        "y": 45.86,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13301
+      ],
+      "relations": [
+        {
+          "quest_id": 13301,
+          "quest_name": "地面突袭",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31832,
+          "entity_name": "库卡隆步兵",
+          "representative": {
+            "x": 58.21,
+            "y": 45.86,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31833",
+      "entity_type": "npc",
+      "entity_id": 31833,
+      "name": "库卡隆班长",
+      "representative": {
+        "x": 58.18,
+        "y": 45.92,
+        "spawn_count": 3
+      },
+      "spawn_count": 3,
+      "quest_ids": [
+        13301
+      ],
+      "relations": [
+        {
+          "quest_id": 13301,
+          "quest_name": "地面突袭",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31833,
+          "entity_name": "库卡隆班长",
+          "representative": {
+            "x": 58.18,
+            "y": 45.92,
+            "spawn_count": 3
+          },
+          "spawn_count": 3,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:29621",
       "entity_type": "npc",
       "entity_id": 29621,
@@ -2806,6 +4958,87 @@
           "representative": {
             "x": 8.91,
             "y": 46.17,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193622",
+      "entity_type": "object",
+      "entity_id": 193622,
+      "name": "Grimkor's Orb",
+      "representative": {
+        "x": 45.46,
+        "y": 46.55,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13312
+      ],
+      "relations": [
+        {
+          "quest_id": 13312,
+          "quest_name": "铁墙壁垒",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193622,
+          "entity_name": "Grimkor's Orb",
+          "representative": {
+            "x": 45.46,
+            "y": 46.55,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Rune of Distortion near Grimkor's Orb to summon Grimkor the Wicked"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32250",
+      "entity_type": "npc",
+      "entity_id": 32250,
+      "name": "工头法埃迪斯",
+      "representative": {
+        "x": 53.89,
+        "y": 46.83,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13354
+      ],
+      "relations": [
+        {
+          "quest_id": 13354,
+          "quest_name": "指挥体系",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32250,
+          "entity_name": "工头法埃迪斯",
+          "representative": {
+            "x": 53.89,
+            "y": 46.83,
             "spawn_count": 1
           },
           "spawn_count": 1,
@@ -2938,46 +5171,6 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:31746",
-      "entity_type": "npc",
-      "entity_id": 31746,
-      "name": "伊米海姆防御者",
-      "representative": {
-        "x": 59.91,
-        "y": 51.14,
-        "spawn_count": 6
-      },
-      "spawn_count": 6,
-      "quest_ids": [
-        13092
-      ],
-      "relations": [
-        {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
-          "entity_type": "npc",
-          "entity_id": 31746,
-          "entity_name": "伊米海姆防御者",
-          "representative": {
-            "x": 59.91,
-            "y": 51.14,
-            "spawn_count": 6
-          },
-          "spawn_count": 6,
-          "source_kind": "objective"
-        }
-      ],
-      "source_kinds": [
-        "objective"
-      ],
-      "shared_by_multiple_tasks": false
-    },
-    {
       "cluster_id": "object:193024",
       "entity_type": "object",
       "entity_id": 193024,
@@ -3060,6 +5253,126 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:32255",
+      "entity_type": "npc",
+      "entity_id": 32255,
+      "name": "被转化的英雄",
+      "representative": {
+        "x": 43.44,
+        "y": 52.66,
+        "spawn_count": 235
+      },
+      "spawn_count": 235,
+      "quest_ids": [
+        13307
+      ],
+      "relations": [
+        {
+          "quest_id": 13307,
+          "quest_name": "溅血的旗帜",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32255,
+          "entity_name": "被转化的英雄",
+          "representative": {
+            "x": 43.44,
+            "y": 52.66,
+            "spawn_count": 235
+          },
+          "spawn_count": 235,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31847",
+      "entity_type": "npc",
+      "entity_id": 31847,
+      "name": "食腐的恶鬼",
+      "representative": {
+        "x": 65.82,
+        "y": 53.01,
+        "spawn_count": 47
+      },
+      "spawn_count": 47,
+      "quest_ids": [
+        13304
+      ],
+      "relations": [
+        {
+          "quest_id": 13304,
+          "quest_name": "战地维修",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 44529,
+          "item_name": "Demolisher Parts",
+          "entity_type": "npc",
+          "entity_id": 31847,
+          "entity_name": "食腐的恶鬼",
+          "representative": {
+            "x": 65.82,
+            "y": 53.01,
+            "spawn_count": 47
+          },
+          "spawn_count": 47,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31900",
+      "entity_type": "npc",
+      "entity_id": 31900,
+      "name": "天灾旗手",
+      "representative": {
+        "x": 43.45,
+        "y": 53.29,
+        "spawn_count": 34
+      },
+      "spawn_count": 34,
+      "quest_ids": [
+        13307
+      ],
+      "relations": [
+        {
+          "quest_id": 13307,
+          "quest_name": "溅血的旗帜",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31900,
+          "entity_name": "天灾旗手",
+          "representative": {
+            "x": 43.45,
+            "y": 53.29,
+            "spawn_count": 34
+          },
+          "spawn_count": 34,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:191820",
       "entity_type": "object",
       "entity_id": 191820,
@@ -3091,86 +5404,6 @@
             "spawn_count": 33
           },
           "spawn_count": 33,
-          "source_kind": "objective"
-        }
-      ],
-      "source_kinds": [
-        "objective"
-      ],
-      "shared_by_multiple_tasks": false
-    },
-    {
-      "cluster_id": "npc:31262",
-      "entity_type": "npc",
-      "entity_id": 31262,
-      "name": "天灾驯鹰者",
-      "representative": {
-        "x": 57.98,
-        "y": 54.73,
-        "spawn_count": 12
-      },
-      "spawn_count": 12,
-      "quest_ids": [
-        13092
-      ],
-      "relations": [
-        {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
-          "entity_type": "npc",
-          "entity_id": 31262,
-          "entity_name": "天灾驯鹰者",
-          "representative": {
-            "x": 57.98,
-            "y": 54.73,
-            "spawn_count": 12
-          },
-          "spawn_count": 12,
-          "source_kind": "objective"
-        }
-      ],
-      "source_kinds": [
-        "objective"
-      ],
-      "shared_by_multiple_tasks": false
-    },
-    {
-      "cluster_id": "npc:31258",
-      "entity_type": "npc",
-      "entity_id": 31258,
-      "name": "伊米海姆天选战士",
-      "representative": {
-        "x": 58.49,
-        "y": 56.23,
-        "spawn_count": 36
-      },
-      "spawn_count": 36,
-      "quest_ids": [
-        13092
-      ],
-      "relations": [
-        {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
-          "entity_type": "npc",
-          "entity_id": 31258,
-          "entity_name": "伊米海姆天选战士",
-          "representative": {
-            "x": 58.49,
-            "y": 56.23,
-            "spawn_count": 36
-          },
-          "spawn_count": 36,
           "source_kind": "objective"
         }
       ],
@@ -3221,42 +5454,43 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:31267",
+      "cluster_id": "npc:31770",
       "entity_type": "npc",
-      "entity_id": 31267,
-      "name": "伊米亚元素师",
+      "entity_id": 31770,
+      "name": "布拉斯的跳跃机器人",
       "representative": {
-        "x": 58.0,
-        "y": 57.42,
-        "spawn_count": 23
+        "x": 51.95,
+        "y": 57.62,
+        "spawn_count": 1
       },
-      "spawn_count": 23,
+      "spawn_count": 1,
       "quest_ids": [
-        13092
+        13283
       ],
       "relations": [
         {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
+          "quest_id": 13283,
+          "quest_name": "占山为王",
+          "objective_index": 2,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
           "entity_type": "npc",
-          "entity_id": 31267,
-          "entity_name": "伊米亚元素师",
+          "entity_id": 31770,
+          "entity_name": "布拉斯的跳跃机器人",
           "representative": {
-            "x": 58.0,
-            "y": 57.42,
-            "spawn_count": 23
+            "x": 51.95,
+            "y": 57.62,
+            "spawn_count": 1
           },
-          "spawn_count": 23,
-          "source_kind": "objective"
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Get in the Jumpbot"
         }
       ],
       "source_kinds": [
-        "objective"
+        "extra_reference"
       ],
       "shared_by_multiple_tasks": false
     },
@@ -3341,34 +5575,195 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:31399",
+      "cluster_id": "npc:31397",
       "entity_type": "npc",
-      "entity_id": 31399,
-      "name": "工头沙尔德林",
+      "entity_id": 31397,
+      "name": "萨隆邪铁矿洞奴隶",
       "representative": {
-        "x": 55.12,
-        "y": 59.37,
+        "x": 55.3,
+        "y": 58.8,
+        "spawn_count": 45
+      },
+      "spawn_count": 45,
+      "quest_ids": [
+        13302
+      ],
+      "relations": [
+        {
+          "quest_id": 13302,
+          "quest_name": "萨隆邪铁的奴隶",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 10,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31397,
+          "entity_name": "萨隆邪铁矿洞奴隶",
+          "representative": {
+            "x": 55.3,
+            "y": 58.8,
+            "spawn_count": 45
+          },
+          "spawn_count": 45,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "object:193565",
+      "entity_type": "object",
+      "entity_id": 193565,
+      "name": "Ymirheim Peak Skulls",
+      "representative": {
+        "x": 54.87,
+        "y": 60.11,
         "spawn_count": 1
       },
       "spawn_count": 1,
       "quest_ids": [
-        13092
+        13283
       ],
       "relations": [
         {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
+          "quest_id": 13283,
+          "quest_name": "占山为王",
           "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
-          "entity_type": "npc",
-          "entity_id": 31399,
-          "entity_name": "工头沙尔德林",
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193565,
+          "entity_name": "Ymirheim Peak Skulls",
           "representative": {
-            "x": 55.12,
-            "y": 59.37,
+            "x": 54.87,
+            "y": 60.11,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Plant Horde Battle Standard"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31147",
+      "entity_type": "npc",
+      "entity_id": 31147,
+      "name": "残忍的恶鬼",
+      "representative": {
+        "x": 68.14,
+        "y": 60.8,
+        "spawn_count": 32
+      },
+      "spawn_count": 32,
+      "quest_ids": [
+        13264
+      ],
+      "relations": [
+        {
+          "quest_id": 13264,
+          "quest_name": "你的憎恶伙伴",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 15,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31147,
+          "entity_name": "残忍的恶鬼",
+          "representative": {
+            "x": 68.14,
+            "y": 60.8,
+            "spawn_count": 32
+          },
+          "spawn_count": 32,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31142",
+      "entity_type": "npc",
+      "entity_id": 31142,
+      "name": "冰寒食尸鬼",
+      "representative": {
+        "x": 68.31,
+        "y": 60.86,
+        "spawn_count": 38
+      },
+      "spawn_count": 38,
+      "quest_ids": [
+        13264
+      ],
+      "relations": [
+        {
+          "quest_id": 13264,
+          "quest_name": "你的憎恶伙伴",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 15,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31142,
+          "entity_name": "冰寒食尸鬼",
+          "representative": {
+            "x": 68.31,
+            "y": 60.86,
+            "spawn_count": 38
+          },
+          "spawn_count": 38,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31198",
+      "entity_type": "npc",
+      "entity_id": 31198,
+      "name": "污染者科普洛斯",
+      "representative": {
+        "x": 60.77,
+        "y": 62.16,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13278
+      ],
+      "relations": [
+        {
+          "quest_id": 13278,
+          "quest_name": "污染者科普洛斯",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31198,
+          "entity_name": "污染者科普洛斯",
+          "representative": {
+            "x": 60.77,
+            "y": 62.16,
             "spawn_count": 1
           },
           "spawn_count": 1,
@@ -3421,6 +5816,147 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:32467",
+      "entity_type": "npc",
+      "entity_id": 32467,
+      "name": "冰冠劫掠者",
+      "representative": {
+        "x": 44.87,
+        "y": 62.34,
+        "spawn_count": 51
+      },
+      "spawn_count": 51,
+      "quest_ids": [
+        13329
+      ],
+      "relations": [
+        {
+          "quest_id": 13329,
+          "quest_name": "在恐惧之门前",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 6,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32467,
+          "entity_name": "冰冠劫掠者",
+          "representative": {
+            "x": 44.87,
+            "y": 62.34,
+            "spawn_count": 51
+          },
+          "spawn_count": 51,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31773",
+      "entity_type": "npc",
+      "entity_id": 31773,
+      "name": "Plague Cauldron Target",
+      "representative": {
+        "x": 60.84,
+        "y": 63.39,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13279
+      ],
+      "relations": [
+        {
+          "quest_id": 13279,
+          "quest_name": "化学常识",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31773,
+          "entity_name": "Plague Cauldron Target",
+          "representative": {
+            "x": 60.84,
+            "y": 63.39,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13279,
+          "quest_name": "化学常识",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31773,
+          "entity_name": "Plague Cauldron Target",
+          "representative": {
+            "x": 60.84,
+            "y": 63.39,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Use Pustulant Spinal Fluid"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference",
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31583",
+      "entity_type": "npc",
+      "entity_id": 31583,
+      "name": "霜巢天爪龙",
+      "representative": {
+        "x": 67.5,
+        "y": 63.64,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        13239
+      ],
+      "relations": [
+        {
+          "quest_id": 13239,
+          "quest_name": "爆炸油",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31583,
+          "entity_name": "霜巢天爪龙",
+          "representative": {
+            "x": 67.5,
+            "y": 63.64,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:193060",
       "entity_type": "object",
       "entity_id": 193060,
@@ -3458,6 +5994,86 @@
       ],
       "source_kinds": [
         "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31304",
+      "entity_type": "npc",
+      "entity_id": 31304,
+      "name": "濒死的士兵",
+      "representative": {
+        "x": 68.81,
+        "y": 64.55,
+        "spawn_count": 35
+      },
+      "spawn_count": 35,
+      "quest_ids": [
+        13230
+      ],
+      "relations": [
+        {
+          "quest_id": 13230,
+          "quest_name": "为我复仇！",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31304,
+          "entity_name": "濒死的士兵",
+          "representative": {
+            "x": 68.81,
+            "y": 64.55,
+            "spawn_count": 35
+          },
+          "spawn_count": 35,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30407",
+      "entity_type": "npc",
+      "entity_id": 30407,
+      "name": "被俘虏的北伐军士兵",
+      "representative": {
+        "x": 78.33,
+        "y": 65.06,
+        "spawn_count": 20
+      },
+      "spawn_count": 20,
+      "quest_ids": [
+        13045
+      ],
+      "relations": [
+        {
+          "quest_id": 13045,
+          "quest_name": "空中救兵",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30407,
+          "entity_name": "被俘虏的北伐军士兵",
+          "representative": {
+            "x": 78.33,
+            "y": 65.06,
+            "spawn_count": 20
+          },
+          "spawn_count": 20,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
       ],
       "shared_by_multiple_tasks": false
     },
@@ -3502,6 +6118,86 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:32482",
+      "entity_type": "npc",
+      "entity_id": 32482,
+      "name": "起脓的巨像",
+      "representative": {
+        "x": 46.8,
+        "y": 65.22,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        13277
+      ],
+      "relations": [
+        {
+          "quest_id": 13277,
+          "quest_name": "对抗巨人",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 43997,
+          "item_name": "Pustulant Spine",
+          "entity_type": "npc",
+          "entity_id": 32482,
+          "entity_name": "起脓的巨像",
+          "representative": {
+            "x": 46.8,
+            "y": 65.22,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31145",
+      "entity_type": "npc",
+      "entity_id": 31145,
+      "name": "暗影专家",
+      "representative": {
+        "x": 68.53,
+        "y": 65.41,
+        "spawn_count": 17
+      },
+      "spawn_count": 17,
+      "quest_ids": [
+        13237
+      ],
+      "relations": [
+        {
+          "quest_id": 13237,
+          "quest_name": "知己知彼",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31145,
+          "entity_name": "暗影专家",
+          "representative": {
+            "x": 68.53,
+            "y": 65.41,
+            "spawn_count": 17
+          },
+          "spawn_count": 17,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:30597",
       "entity_type": "npc",
       "entity_id": 30597,
@@ -3533,6 +6229,86 @@
             "spawn_count": 38
           },
           "spawn_count": 38,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31140",
+      "entity_type": "npc",
+      "entity_id": 31140,
+      "name": "笨重的憎恶",
+      "representative": {
+        "x": 69.22,
+        "y": 66.56,
+        "spawn_count": 22
+      },
+      "spawn_count": 22,
+      "quest_ids": [
+        13237
+      ],
+      "relations": [
+        {
+          "quest_id": 13237,
+          "quest_name": "知己知彼",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31140,
+          "entity_name": "笨重的憎恶",
+          "representative": {
+            "x": 69.22,
+            "y": 66.56,
+            "spawn_count": 22
+          },
+          "spawn_count": 22,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31155",
+      "entity_type": "npc",
+      "entity_id": 31155,
+      "name": "邪恶通灵师",
+      "representative": {
+        "x": 68.63,
+        "y": 66.68,
+        "spawn_count": 13
+      },
+      "spawn_count": 13,
+      "quest_ids": [
+        13237
+      ],
+      "relations": [
+        {
+          "quest_id": 13237,
+          "quest_name": "知己知彼",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31155,
+          "entity_name": "邪恶通灵师",
+          "representative": {
+            "x": 68.63,
+            "y": 66.68,
+            "spawn_count": 13
+          },
+          "spawn_count": 13,
           "source_kind": "objective"
         }
       ],
@@ -3664,6 +6440,145 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:31273",
+      "entity_type": "npc",
+      "entity_id": 31273,
+      "name": "濒死的狂战士",
+      "representative": {
+        "x": 68.0,
+        "y": 67.86,
+        "spawn_count": 8
+      },
+      "spawn_count": 8,
+      "quest_ids": [
+        13228
+      ],
+      "relations": [
+        {
+          "quest_id": 13228,
+          "quest_name": "破碎前线",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31273,
+          "entity_name": "濒死的狂战士",
+          "representative": {
+            "x": 68.0,
+            "y": 67.86,
+            "spawn_count": 8
+          },
+          "spawn_count": 8,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32349",
+      "entity_type": "npc",
+      "entity_id": 32349,
+      "name": "诅咒教派碎片卫士",
+      "representative": {
+        "x": 47.88,
+        "y": 68.08,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13328
+      ],
+      "relations": [
+        {
+          "quest_id": 13328,
+          "quest_name": "击破碎片",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 44319,
+          "item_name": "Broken Shard of Horror",
+          "entity_type": "npc",
+          "entity_id": 32349,
+          "entity_name": "诅咒教派碎片卫士",
+          "representative": {
+            "x": 47.88,
+            "y": 68.08,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        },
+        {
+          "quest_id": 13328,
+          "quest_name": "击破碎片",
+          "objective_index": 2,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 44320,
+          "item_name": "Broken Shard of Despair",
+          "entity_type": "npc",
+          "entity_id": 32349,
+          "entity_name": "诅咒教派碎片卫士",
+          "representative": {
+            "x": 47.88,
+            "y": 68.08,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32278",
+      "entity_type": "npc",
+      "entity_id": 32278,
+      "name": "恐惧先驱",
+      "representative": {
+        "x": 47.85,
+        "y": 68.26,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        13316
+      ],
+      "relations": [
+        {
+          "quest_id": 13316,
+          "quest_name": "科雷萨的守卫者",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32278,
+          "entity_name": "恐惧先驱",
+          "representative": {
+            "x": 47.85,
+            "y": 68.26,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:192933",
       "entity_type": "object",
       "entity_id": 192933,
@@ -3695,6 +6610,166 @@
             "spawn_count": 18
           },
           "spawn_count": 18,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31137",
+      "entity_type": "npc",
+      "entity_id": 31137,
+      "name": "霜巢天爪龙",
+      "representative": {
+        "x": 68.66,
+        "y": 68.48,
+        "spawn_count": 9
+      },
+      "spawn_count": 9,
+      "quest_ids": [
+        13239
+      ],
+      "relations": [
+        {
+          "quest_id": 13239,
+          "quest_name": "爆炸油",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 3,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31137,
+          "entity_name": "霜巢天爪龙",
+          "representative": {
+            "x": 68.66,
+            "y": 68.48,
+            "spawn_count": 9
+          },
+          "spawn_count": 9,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31161",
+      "entity_type": "npc",
+      "entity_id": 31161,
+      "name": "萨芙",
+      "representative": {
+        "x": 61.88,
+        "y": 68.58,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13162
+      ],
+      "relations": [
+        {
+          "quest_id": 13162,
+          "quest_name": "冰霜骑士",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31161,
+          "entity_name": "萨芙",
+          "representative": {
+            "x": 61.88,
+            "y": 68.58,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:32280",
+      "entity_type": "npc",
+      "entity_id": 32280,
+      "name": "科雷萨守卫者",
+      "representative": {
+        "x": 46.31,
+        "y": 68.71,
+        "spawn_count": 6
+      },
+      "spawn_count": 6,
+      "quest_ids": [
+        13316
+      ],
+      "relations": [
+        {
+          "quest_id": 13316,
+          "quest_name": "科雷萨的守卫者",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": 5,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 32280,
+          "entity_name": "科雷萨守卫者",
+          "representative": {
+            "x": 46.31,
+            "y": 68.71,
+            "spawn_count": 6
+          },
+          "spawn_count": 6,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31064",
+      "entity_type": "npc",
+      "entity_id": 31064,
+      "name": "Malykriss Icy Lookout Bunny",
+      "representative": {
+        "x": 60.58,
+        "y": 68.75,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13145
+      ],
+      "relations": [
+        {
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_index": 3,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31064,
+          "entity_name": "Malykriss Icy Lookout Bunny",
+          "representative": {
+            "x": 60.58,
+            "y": 68.75,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
           "source_kind": "objective"
         }
       ],
@@ -3784,6 +6859,46 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "object:193793",
+      "entity_type": "object",
+      "entity_id": 193793,
+      "name": "Shard of Suffering",
+      "representative": {
+        "x": 45.83,
+        "y": 69.51,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        13328
+      ],
+      "relations": [
+        {
+          "quest_id": 13328,
+          "quest_name": "击破碎片",
+          "objective_index": 3,
+          "objective_type": "item",
+          "required_count": null,
+          "item_id": 44321,
+          "item_name": "Broken Shard of Suffering",
+          "entity_type": "object",
+          "entity_id": 193793,
+          "entity_name": "Shard of Suffering",
+          "representative": {
+            "x": 45.83,
+            "y": 69.51,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:192915",
       "entity_type": "object",
       "entity_id": 192915,
@@ -3820,6 +6935,47 @@
       ],
       "source_kinds": [
         "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31049",
+      "entity_type": "npc",
+      "entity_id": 31049,
+      "name": "Geist Return Bunny",
+      "representative": {
+        "x": 55.39,
+        "y": 69.89,
+        "spawn_count": 2
+      },
+      "spawn_count": 2,
+      "quest_ids": [
+        13143
+      ],
+      "relations": [
+        {
+          "quest_id": 13143,
+          "quest_name": "新兵",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31049,
+          "entity_name": "Geist Return Bunny",
+          "representative": {
+            "x": 55.39,
+            "y": 69.89,
+            "spawn_count": 2
+          },
+          "spawn_count": 2,
+          "source_kind": "extra_reference",
+          "extra_text": "Lead a subdued Lithe Stalker to the cliff above Vereth the Cunning"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
       ],
       "shared_by_multiple_tasks": false
     },
@@ -3984,6 +7140,86 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:30894",
+      "entity_type": "npc",
+      "entity_id": 30894,
+      "name": "轻盈追迹者",
+      "representative": {
+        "x": 57.26,
+        "y": 70.75,
+        "spawn_count": 18
+      },
+      "spawn_count": 18,
+      "quest_ids": [
+        13143
+      ],
+      "relations": [
+        {
+          "quest_id": 13143,
+          "quest_name": "新兵",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30894,
+          "entity_name": "轻盈追迹者",
+          "representative": {
+            "x": 57.26,
+            "y": 70.75,
+            "spawn_count": 18
+          },
+          "spawn_count": 18,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31068",
+      "entity_type": "npc",
+      "entity_id": 31068,
+      "name": "Malykriss Blood Forge Bunny",
+      "representative": {
+        "x": 58.09,
+        "y": 70.92,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13145
+      ],
+      "relations": [
+        {
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_index": 2,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31068,
+          "entity_name": "Malykriss Blood Forge Bunny",
+          "representative": {
+            "x": 58.09,
+            "y": 70.92,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "object:192858",
       "entity_type": "object",
       "entity_id": 192858,
@@ -4104,42 +7340,43 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:31159",
-      "entity_type": "npc",
-      "entity_id": 31159,
-      "name": "贝洛克",
+      "cluster_id": "object:193003",
+      "entity_type": "object",
+      "entity_id": 193003,
+      "name": "Pile of Crusader Skulls",
       "representative": {
-        "x": 59.11,
-        "y": 71.99,
+        "x": 80.07,
+        "y": 71.96,
         "spawn_count": 1
       },
       "spawn_count": 1,
       "quest_ids": [
-        13092
+        13141
       ],
       "relations": [
         {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
+          "quest_id": 13141,
+          "quest_name": "北伐军之峰的战斗",
           "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
-          "entity_type": "npc",
-          "entity_id": 31159,
-          "entity_name": "贝洛克",
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "object",
+          "entity_id": 193003,
+          "entity_name": "Pile of Crusader Skulls",
           "representative": {
-            "x": 59.11,
-            "y": 71.99,
+            "x": 80.07,
+            "y": 71.96,
             "spawn_count": 1
           },
           "spawn_count": 1,
-          "source_kind": "objective"
+          "source_kind": "extra_reference",
+          "extra_text": "Plant the Blessed Banner of the Crusade"
         }
       ],
       "source_kinds": [
-        "objective"
+        "extra_reference"
       ],
       "shared_by_multiple_tasks": false
     },
@@ -4225,6 +7462,87 @@
       "shared_by_multiple_tasks": false
     },
     {
+      "cluster_id": "npc:31139",
+      "entity_type": "npc",
+      "entity_id": 31139,
+      "name": "血肉巨人",
+      "representative": {
+        "x": 68.57,
+        "y": 72.64,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13277
+      ],
+      "relations": [
+        {
+          "quest_id": 13277,
+          "quest_name": "对抗巨人",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 5,
+          "item_id": 43997,
+          "item_name": "Pustulant Spine",
+          "entity_type": "npc",
+          "entity_id": 31139,
+          "entity_name": "血肉巨人",
+          "representative": {
+            "x": 68.57,
+            "y": 72.64,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30920",
+      "entity_type": "npc",
+      "entity_id": 30920,
+      "name": "笨拙的凶尸",
+      "representative": {
+        "x": 56.14,
+        "y": 72.97,
+        "spawn_count": 23
+      },
+      "spawn_count": 23,
+      "quest_ids": [
+        13146
+      ],
+      "relations": [
+        {
+          "quest_id": 13146,
+          "quest_name": "深信不疑",
+          "objective_index": 2,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30920,
+          "entity_name": "笨拙的凶尸",
+          "representative": {
+            "x": 56.14,
+            "y": 72.97,
+            "spawn_count": 23
+          },
+          "spawn_count": 23,
+          "source_kind": "extra_reference",
+          "extra_text": "Drag Scourge Bombs to Lumbering Atrocities"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
       "cluster_id": "npc:30921",
       "entity_type": "npc",
       "entity_id": 30921,
@@ -4256,6 +7574,86 @@
             "spawn_count": 21
           },
           "spawn_count": 21,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31075",
+      "entity_type": "npc",
+      "entity_id": 31075,
+      "name": "天灾炸弹",
+      "representative": {
+        "x": 57.95,
+        "y": 73.97,
+        "spawn_count": 10
+      },
+      "spawn_count": 10,
+      "quest_ids": [
+        13146
+      ],
+      "relations": [
+        {
+          "quest_id": 13146,
+          "quest_name": "深信不疑",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 4,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31075,
+          "entity_name": "天灾炸弹",
+          "representative": {
+            "x": 57.95,
+            "y": 73.97,
+            "spawn_count": 10
+          },
+          "spawn_count": 10,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30273",
+      "entity_type": "npc",
+      "entity_id": 30273,
+      "name": "被网住的北伐军士兵",
+      "representative": {
+        "x": 84.36,
+        "y": 73.97,
+        "spawn_count": 12
+      },
+      "spawn_count": 12,
+      "quest_ids": [
+        13008
+      ],
+      "relations": [
+        {
+          "quest_id": 13008,
+          "quest_name": "天灾的战术",
+          "objective_index": 1,
+          "objective_type": "event",
+          "required_count": 8,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30273,
+          "entity_name": "被网住的北伐军士兵",
+          "representative": {
+            "x": 84.36,
+            "y": 73.97,
+            "spawn_count": 12
+          },
+          "spawn_count": 12,
           "source_kind": "objective"
         }
       ],
@@ -4305,37 +7703,320 @@
       "shared_by_multiple_tasks": false
     },
     {
-      "cluster_id": "npc:30922",
+      "cluster_id": "npc:31066",
       "entity_type": "npc",
-      "entity_id": 30922,
-      "name": "阴暗蛮徒",
+      "entity_id": 31066,
+      "name": "Malykriss Runeworks Bunny",
       "representative": {
-        "x": 58.97,
-        "y": 74.32,
-        "spawn_count": 9
+        "x": 59.02,
+        "y": 74.49,
+        "spawn_count": 1
       },
-      "spawn_count": 9,
+      "spawn_count": 1,
       "quest_ids": [
-        13092
+        13145
       ],
       "relations": [
         {
-          "quest_id": 13092,
-          "quest_name": "占命卜运",
-          "objective_index": 1,
-          "objective_type": "item",
-          "required_count": 15,
-          "item_id": 43089,
-          "item_name": "Vrykul Bones",
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_index": 4,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
           "entity_type": "npc",
-          "entity_id": 30922,
-          "entity_name": "阴暗蛮徒",
+          "entity_id": 31066,
+          "entity_name": "Malykriss Runeworks Bunny",
           "representative": {
-            "x": 58.97,
-            "y": 74.32,
-            "spawn_count": 9
+            "x": 59.02,
+            "y": 74.49,
+            "spawn_count": 1
           },
-          "spawn_count": 9,
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30268",
+      "entity_type": "npc",
+      "entity_id": 30268,
+      "name": "被网住的北伐军士兵",
+      "representative": {
+        "x": 83.78,
+        "y": 74.7,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13008
+      ],
+      "relations": [
+        {
+          "quest_id": 13008,
+          "quest_name": "天灾的战术",
+          "objective_index": 2,
+          "objective_type": "event",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30268,
+          "entity_name": "被网住的北伐军士兵",
+          "representative": {
+            "x": 83.78,
+            "y": 74.7,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31012",
+      "entity_type": "npc",
+      "entity_id": 31012,
+      "name": "冰肤斥候",
+      "representative": {
+        "x": 59.6,
+        "y": 75.8,
+        "spawn_count": 15
+      },
+      "spawn_count": 15,
+      "quest_ids": [
+        13160
+      ],
+      "relations": [
+        {
+          "quest_id": 13160,
+          "quest_name": "壮观的景象",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 12,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31012,
+          "entity_name": "冰肤斥候",
+          "representative": {
+            "x": 59.6,
+            "y": 75.8,
+            "spawn_count": 15
+          },
+          "spawn_count": 15,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "extra_anchor:13045:2:1",
+      "entity_type": "extra_anchor",
+      "entity_id": "13045:2:1",
+      "name": "Drop Off Captured Crusader",
+      "representative": {
+        "x": 86.85,
+        "y": 76.61,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13045
+      ],
+      "relations": [
+        {
+          "quest_id": 13045,
+          "quest_name": "空中救兵",
+          "objective_index": 2,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "extra_anchor",
+          "entity_id": "13045:2:1",
+          "entity_name": "Drop Off Captured Crusader",
+          "representative": {
+            "x": 86.85,
+            "y": 76.61,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_coordinate",
+          "extra_text": "Drop Off Captured Crusader"
+        }
+      ],
+      "source_kinds": [
+        "extra_coordinate"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30630",
+      "entity_type": "npc",
+      "entity_id": 30630,
+      "name": "大德鲁伊莉琳德拉",
+      "representative": {
+        "x": 87.06,
+        "y": 77.02,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13073
+      ],
+      "relations": [
+        {
+          "quest_id": 13073,
+          "quest_name": "守护者的帮助",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30630,
+          "entity_name": "大德鲁伊莉琳德拉",
+          "representative": {
+            "x": 87.06,
+            "y": 77.02,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "extra_reference",
+          "extra_text": "Speak to Arch Druid Lilliandra for transportation to Moonglade"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:30500",
+      "entity_type": "npc",
+      "entity_id": 30500,
+      "name": "银色天爪龙",
+      "representative": {
+        "x": 87.27,
+        "y": 79.2,
+        "spawn_count": 5
+      },
+      "spawn_count": 5,
+      "quest_ids": [
+        13045
+      ],
+      "relations": [
+        {
+          "quest_id": 13045,
+          "quest_name": "空中救兵",
+          "objective_index": 1,
+          "objective_type": "extra_objective",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 30500,
+          "entity_name": "银色天爪龙",
+          "representative": {
+            "x": 87.27,
+            "y": 79.2,
+            "spawn_count": 5
+          },
+          "spawn_count": 5,
+          "source_kind": "extra_reference",
+          "extra_text": "Mount Argent Skytalon"
+        }
+      ],
+      "source_kinds": [
+        "extra_reference"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31065",
+      "entity_type": "npc",
+      "entity_id": 31065,
+      "name": "Malykriss Altar of Sacrifice Bunny",
+      "representative": {
+        "x": 56.17,
+        "y": 79.62,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13145
+      ],
+      "relations": [
+        {
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": null,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31065,
+          "entity_name": "Malykriss Altar of Sacrifice Bunny",
+          "representative": {
+            "x": 56.17,
+            "y": 79.62,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31160",
+      "entity_type": "npc",
+      "entity_id": 31160,
+      "name": "洛基尔",
+      "representative": {
+        "x": 56.17,
+        "y": 80.31,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13161
+      ],
+      "relations": [
+        {
+          "quest_id": 13161,
+          "quest_name": "邪恶骑士",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31160,
+          "entity_name": "洛基尔",
+          "representative": {
+            "x": 56.17,
+            "y": 80.31,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
           "source_kind": "objective"
         }
       ],
@@ -4376,6 +8057,86 @@
             "spawn_count": 7
           },
           "spawn_count": 7,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31691",
+      "entity_type": "npc",
+      "entity_id": 31691,
+      "name": "无面潜伏者",
+      "representative": {
+        "x": 58.02,
+        "y": 85.47,
+        "spawn_count": 7
+      },
+      "spawn_count": 7,
+      "quest_ids": [
+        13275
+      ],
+      "relations": [
+        {
+          "quest_id": 13275,
+          "quest_name": "藏匿行踪",
+          "objective_index": 1,
+          "objective_type": "item",
+          "required_count": 3,
+          "item_id": 44001,
+          "item_name": "Faceless One's Blood",
+          "entity_type": "npc",
+          "entity_id": 31691,
+          "entity_name": "无面潜伏者",
+          "representative": {
+            "x": 58.02,
+            "y": 85.47,
+            "spawn_count": 7
+          },
+          "spawn_count": 7,
+          "source_kind": "objective"
+        }
+      ],
+      "source_kinds": [
+        "objective"
+      ],
+      "shared_by_multiple_tasks": false
+    },
+    {
+      "cluster_id": "npc:31283",
+      "entity_type": "npc",
+      "entity_id": 31283,
+      "name": "奥尔巴兹·血毒",
+      "representative": {
+        "x": 55.1,
+        "y": 87.55,
+        "spawn_count": 1
+      },
+      "spawn_count": 1,
+      "quest_ids": [
+        13164
+      ],
+      "relations": [
+        {
+          "quest_id": 13164,
+          "quest_name": "血毒的命运",
+          "objective_index": 1,
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "entity_type": "npc",
+          "entity_id": 31283,
+          "entity_name": "奥尔巴兹·血毒",
+          "representative": {
+            "x": 55.1,
+            "y": 87.55,
+            "spawn_count": 1
+          },
+          "spawn_count": 1,
           "source_kind": "objective"
         }
       ],
