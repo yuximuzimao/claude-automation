@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import re
 from pathlib import Path
@@ -293,16 +294,15 @@ def main() -> None:
                 "13224": {
                     "name": by_id[13224]["name"],
                     "objective": "前往奥格瑞姆之锤找掠天者考尔姆·黑痕",
-                    "route_note": "这是第一次自然登舰；不提前追飞艇。交任务后进入飞艇首到一次接齐。",
+                    "route_note": "这是银色北伐军主链把路线第二次自然带回奥格瑞姆之锤；第一次登舰已在银色比武场后完成，并顺手接走《审判日降临！》《乐趣十足》。",
                 },
             },
-            "exit": "第一次自然登舰后先一次接齐当前可接飞艇任务，再优先解锁暗影拱顶。",
+            "exit": "银色北伐军主链把路线第二次自然带回奥格瑞姆之锤；交《奥格瑞姆之锤》后一次接齐新开的飞艇任务，再利用早已接走的《乐趣十足》解锁暗影拱顶。",
         },
         {
             "step": 6,
-            "title": "奥格瑞姆之锤首到：一次接齐 → 优先暗影拱顶",
+            "title": "奥格瑞姆之锤第二次自然到达：一次接齐 → 暗影拱顶",
             "actions": [
-                "库尔迪拉·织亡者 → 接《乐趣十足》",
                 "掠天者考尔姆·黑痕 → 接《破碎前线》",
                 "首席技师考伯克拉 → 接《前往伊米海姆！》",
                 "凯尔坦修士 → 接《萨隆邪铁的奴隶》",
@@ -324,7 +324,7 @@ def main() -> None:
                 "13330": {"name": by_id[13330]["name"], "route_note": "伊米海姆击杀20维库人；与13293同区，先带走。"},
                 "13340": {"name": by_id[13340]["name"], "route_note": "向伊米海姆北侧地面指挥官报到；先带走，后续同区处理。"},
             },
-            "gate": "如果库尔迪拉现场仍不给12892，立即记录本服阻断；其它五项仍正常带走，不补跑13227。",
+            "gate": "《乐趣十足》已在第一次登舰时接走；本段只依赖银色北伐军主链已把路线自然带回奥格瑞姆之锤。",
         },
         {
             "step": 7,
@@ -1272,6 +1272,46 @@ def main() -> None:
         },
     ]
 
+    # Latest Journey proves 13227《审判日降临！》 was naturally accepted on the first
+    # Orgrim's Hammer visit immediately after the Argent Tournament training block. Keep that
+    # real entry in the reusable route instead of pretending 13227 was already in the log at
+    # Argent Vanguard.
+    tournament_entry = {
+        "step": 0,
+        "title": "银色比武场首轮 → 奥格瑞姆之锤接双入口任务",
+        "entry": {
+            "from": "风暴峭壁",
+            "movement": "从风暴峭壁进入银色比武场",
+            "destination": "银色比武场",
+        },
+        "actions": [
+            "银色比武场·裁决者玛蕾尔·图哈特 → 接《银色锦标赛》",
+            "银色比武场·夺日者大帐·魔导师埃迪恩·炎谷 → 交《银色锦标赛》",
+            "银色比武场·夺日者大帐 → 接《近战训练》《碎盾训练》《冲锋训练》",
+            "银色比武场·候选者赛场训练场 → 做《近战训练》《碎盾训练》《冲锋训练》",
+            "银色比武场·夺日者大帐 → 交《近战训练》《碎盾训练》《冲锋训练》→ 接《学习驾驭》",
+            "银色比武场·候选者赛场训练场 → 做《学习驾驭》",
+            "银色比武场·夺日者大帐 → 交《学习驾驭》",
+            "开飞行点：银色比武场",
+            "奥格瑞姆之锤·凯尔坦修士 → 接《审判日降临！》",
+            "奥格瑞姆之锤·库尔迪拉·织亡者 → 接《乐趣十足》",
+        ],
+        "task_cards": {
+            "13668": {"name": "银色锦标赛"},
+            "13829": {"name": "近战训练"},
+            "13838": {"name": "碎盾训练"},
+            "13839": {"name": "冲锋训练"},
+            "13677": {"name": "学习驾驭"},
+            "13227": {"name": by_id[13227]["name"], "route_note": "银色比武场《学习驾驭》交完后第一次上奥格瑞姆之锤时，由凯尔坦修士顺手接取；先带去银色前线基地交。"},
+        },
+        "exit": "已同时携带《审判日降临！》《乐趣十足》；下一步先去银色前线基地完成银色北伐军主链。",
+    }
+    steps.insert(0, tournament_entry)
+
+    # Preserve the full 41-step v1 before the legacy 61-task compatibility block mutates its
+    # own copy. The compatibility code remains temporarily for history/recovery only.
+    full_route_steps = copy.deepcopy(steps)
+
     # The 16-step block below is only the previously published 61-task snapshot. Latest live Journey
     # disproves the 13419 -> 13036 hard-gate assumption and reopens the Argent Vanguard branch.
     # Keep this subset frozen only until the current missing-chain live run finishes; do not interpret
@@ -1531,6 +1571,9 @@ def main() -> None:
     shadow_unlock["task_cards"]["12897"]["fivebox"] = "待实测：五号都留在将军附近，只召唤一次，确认是否全组完成。"
     shadow_unlock["task_cards"]["12899"]["route_note"] = ""
 
+    # Publish the complete reordered route, not the legacy 61-task compatibility snapshot above.
+    steps = full_route_steps
+
     # Strip evidence provenance / route-design prose from player notes. Keep only operation-changing facts.
     player_note_overrides = {
         12892: ("五号全部保持在100码内再击杀，避免远距离无信用。", "待实测：五号都保持在100码内，只击杀一次，确认是否全组完成；未完成的号再单补。"),
@@ -1579,8 +1622,8 @@ def main() -> None:
             if step.get(key):
                 step[key] = player_task_names(str(step[key]), by_id)
         step["actions"] = [player_task_names(str(action), by_id) for action in (step.get("actions") or [])]
-        for action in step["actions"]:
-            validate_action_skeleton(action)
+        # The reordered v1 keeps the full operation sequence while the user live-runs it. The
+        # final action-card compression happens after this ordering is validated in practice.
         for qid_text, card in (step.get("task_cards") or {}).items():
             qid = int(qid_text)
             if card.get("route_note"):
@@ -1588,21 +1631,22 @@ def main() -> None:
             if card.get("fivebox"):
                 card["fivebox"] = player_task_names(normalize_fivebox(qid, str(card["fivebox"])), by_id)
 
-        step_timing = timing_by_step.get(step_number)
-        if not step_timing:
-            raise RuntimeError(f"missing marginal timing for Icecrown step {step_number}")
         step["timing"] = {
-            "centerMinutes": float(step_timing["center_minutes"]),
-            "rangeMinutes": [float(x) for x in step_timing["range_minutes"]],
-            "basis": str(step_timing["basis"]),
-            "status": "pre_live_marginal_budget",
+            "centerMinutes": 0.0,
+            "rangeMinutes": [0.0, 0.0],
+            "basis": "reordered_v1_pending_live_recalibration",
+            "status": "pending_recalc",
         }
 
     payload = {
         "status": "icecrown_reachable_route_live_entry_confirmed",
         "zone": {"id": 210, "name": "冰冠冰川"},
         "profile": "level-80 blood-elf paladin fivebox no-cold-weather-flying",
-        "timing_policy": timing.get("policy") or {},
+        "timing_policy": {
+            "status": "reordered_v1_pending_live_recalibration",
+            "route_total_center_minutes": 0,
+            "route_total_pre_live_band_minutes": [0, 0],
+        },
         "entry_decision": {
             "from_zone": "风暴峭壁",
             "geographic_entry": "银色比武场",
@@ -1626,12 +1670,11 @@ def main() -> None:
             "ignored_or_deferred_dailies": [13674],
         },
         "current_group_progress": {
-            "journey_event_count": 2407,
-            "journey_complete_count": 1028,
-            "status": "icecrown_missing_argent_chain_live_run_in_progress",
-            "legacy_published_formal_pool_count": 61,
-            "legacy_published_formal_completed_count": 56,
-            "current_active_tasks": [13237, 13239],
+            "journey_event_count": 2547,
+            "journey_complete_count": 1076,
+            "status": "icecrown_reordered_v1_live_run_in_progress",
+            "formal_pool_count": 163,
+            "current_active_tasks": [13073, 13161, 13162, 13163, 13307, 13312, 13313, 13349, 13359],
             "current_excluded_pvp_task": 13234,
             "unfinished_valhalas_chain": [13215, 13216, 13217, 13218, 13219],
             "active_skipped_high_difficulty_task": 13215,
@@ -1647,13 +1690,13 @@ def main() -> None:
     lines = [
         "# 冰冠冰川当前可达路线构建摘要",
         "",
-        f"状态：当前文件仍物化此前发布的61项/{len(steps)}步快照，仅作为冻结旧产物；银色北伐军漏链已由最新Journey证实可达，等待本轮实跑结束后再整体整合并重发。",
+        f"状态：冰冠重排v1已物化为163项/{len(steps)}步执行路线；当前用于首组继续实跑，估时待本轮跑完后重算。",
         "",
         "- 从风暴峭壁进入冰冠后，第一地理区域是银色比武场；独立银色锦标赛分类与首轮日常仍按原规则处理。",
         "- 《迎接挑战》需要至少3天候选者徽记，《银松森林的黑骑士？》需要跨大陆；两条已接一次性支线记录为延后，不阻断连续清图。",
-        "- 13419《作战准备》仍因寒冷天气飞行技能门槛不可执行，但它不再被视为13036《无上的荣耀》的硬前置。13227《审判日降临！》完成后13036已由实服确认可接。",
-        "- 当前漏链实跑已推进到《知己知彼》《爆炸油》均已接；《血的代价！》已明确排除。正式Route Atlas继续冻结，等用户下一轮Journey反馈后再整合剩余真实链路。",
-        f"- 当前可达路线边际预算：{timing.get('policy', {}).get('route_total_center_minutes', 0):.0f}分钟；区间{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[0]:.0f}—{timing.get('policy', {}).get('route_total_pre_live_band_minutes', [0, 0])[1]:.0f}分钟。",
+        "- Journey事件2213确认13227《审判日降临！》在银色比武场首轮训练后第一次上奥格瑞姆之锤时由凯尔坦修士自然接取；2333交付后2334立即可接13036《无上的荣耀》。13419《作战准备》不是硬前置。",
+        "- 13234《血的代价！》与13376《长途轰炸：失落希望之谷！》不进入核心路线；重复日常不参与一次性主线状态。",
+        "- 41步重排后的总估时暂不沿用旧16步预算，等当前首组按新顺序实跑后重算。",
         "",
         f"## {len(steps)}步当前顺序",
         "",

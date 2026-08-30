@@ -77,14 +77,14 @@ def main() -> None:
             hard.append({"type": "implausible_single_map_segment", "index": idx, "distance": round(distance, 2)})
 
     action_text = "\n".join(str(point[3]) for point in points)
-    if "系统飞行" in action_text:
-        hard.append({"type": "unexpected_system_flight_player_text"})
 
     expected_system_actions = {
         "开飞行点：银色比武场",
-        "开飞行点：暗影拱顶",
+        "开飞行点：银色前线基地",
+        "开飞行点：北伐军之峰（五号分别）",
+        "开飞行点：暗影拱顶（五号分别）",
         "炉石绑定：暗影拱顶",
-        "开飞行点：死亡高地",
+        "开飞行点：死亡高地（五号分别）",
     }
     actual_system_actions = {
         line for line in action_text.splitlines()
@@ -98,8 +98,9 @@ def main() -> None:
         })
 
     center_sum = sum(float(group["timing"]["centerMinutes"]) for group in groups)
-    if round(center_sum, 6) != round(float((route.get("timing") or {}).get("centerMinutes") or -1), 6):
-        hard.append({"type": "timing_center_mismatch", "groups": center_sum, "route": (route.get("timing") or {}).get("centerMinutes")})
+    route_center = float((route.get("timing") or {}).get("centerMinutes", -1))
+    if round(center_sum, 6) != round(route_center, 6):
+        hard.append({"type": "timing_center_mismatch", "groups": center_sum, "route": route_center})
 
     if coverage.get("missing") or coverage.get("unexpected") or int(coverage.get("coveredTaskCount") or 0) != int(coverage.get("formalTaskCount") or -1):
         hard.append({"type": "coverage_not_closed", "coverage": coverage})

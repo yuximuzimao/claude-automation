@@ -71,21 +71,46 @@ ANCHORS: dict[str, tuple[float, float]] = {
 # player-facing map anchor instead of guessing from the previous step.
 PRIMARY_STEP_ANCHOR: dict[int, tuple[float, float]] = {
     1: ANCHORS["银色比武场"],
-    2: ANCHORS["暗影拱顶"],
-    3: ANCHORS["暗影拱顶"],
-    4: ANCHORS["Savage Ledge"],
-    5: ANCHORS["白骨女巫"],
-    6: ANCHORS["Jotunheim"],
-    7: ANCHORS["Jotunheim"],
-    8: ANCHORS["白骨女巫"],
-    9: ANCHORS["瓦哈拉斯"],
-    10: ANCHORS["死亡高地"],
-    11: ANCHORS["先锋军港口"],
-    12: ANCHORS["先锋军港口"],
-    13: ANCHORS["黑色观察站"],
-    14: ANCHORS["玛雷卡里斯"],
-    15: ANCHORS["黑色观察站"],
-    16: ANCHORS["奥格瑞姆之锤"],
+    2: ANCHORS["银色前线基地"],
+    3: ANCHORS["银色前线基地"],
+    4: ANCHORS["回音谷"],
+    5: ANCHORS["银色前线基地"],
+    6: ANCHORS["北伐军之峰"],
+    7: ANCHORS["奥格瑞姆之锤"],
+    8: ANCHORS["暗影拱顶"],
+    9: ANCHORS["暗影拱顶"],
+    10: ANCHORS["乌弗朗之厅"],
+    11: ANCHORS["白骨女巫"],
+    12: ANCHORS["Jotunheim"],
+    13: ANCHORS["Jotunheim"],
+    14: ANCHORS["白骨女巫"],
+    15: ANCHORS["瓦哈拉斯"],
+    16: ANCHORS["死亡高地"],
+    17: ANCHORS["先锋军港口"],
+    18: ANCHORS["先锋军港口"],
+    19: ANCHORS["黑色观察站"],
+    20: ANCHORS["伊米海姆"],
+    21: ANCHORS["奥格瑞姆之锤"],
+    22: ANCHORS["冰冠堡垒"],
+    23: ANCHORS["莫德雷萨"],
+    24: ANCHORS["莫德雷萨"],
+    25: ANCHORS["辛达苟萨之墓"],
+    26: ANCHORS["黑色观察站"],
+    27: ANCHORS["北伐军之峰"],
+    28: ANCHORS["北伐军之峰"],
+    29: ANCHORS["银色前线基地"],
+    30: ANCHORS["银色前线基地"],
+    31: ANCHORS["银色前线基地"],
+    32: ANCHORS["荒凉之门"],
+    33: ANCHORS["奥尔杜萨"],
+    34: ANCHORS["奥尔杜萨"],
+    35: ANCHORS["奥尔杜萨"],
+    36: ANCHORS["暗影拱顶"],
+    37: ANCHORS["哭泣采掘场"],
+    38: ANCHORS["恐惧之门"],
+    39: ANCHORS["科雷萨"],
+    40: ANCHORS["玛雷卡里斯"],
+    41: ANCHORS["苦难高地"],
 }
 
 EXPLICIT_COORD = re.compile(r"(?<!\d)(\d{1,2}(?:\.\d+)?)\s*[,，]\s*(\d{1,2}(?:\.\d+)?)")
@@ -112,6 +137,10 @@ def infer_anchor(text: str) -> tuple[float, float] | None:
         return explicit
     prefix = text.split("→", 1)[0].split("↳", 1)[0].strip()
     # System transport names its destination explicitly; anchor the point at that destination.
+    if text.startswith("系统飞行："):
+        for name in sorted(ANCHORS, key=len, reverse=True):
+            if name in text.split("→")[-1]:
+                return ANCHORS[name]
     if prefix.startswith(("使用炉石：", "炉石绑定：", "开飞行点：")):
         for name in sorted(ANCHORS, key=len, reverse=True):
             if name in prefix:
@@ -131,7 +160,9 @@ def movement_kind(text: str, step: int) -> str:
         return "script"
     if "炉石" in text:
         return "hearth"
-    if step in {4, 28, 29, 30} and any(term in text for term in ("晶歌", "月光", "龙眠", "红玉", "沙塔斯", "达拉然")):
+    if step in {5, 29, 30, 31} and any(term in text for term in ("晶歌", "月光", "龙眠", "红玉", "沙塔斯", "达拉然")):
+        return "crossmap"
+    if text.startswith("系统飞行："):
         return "crossmap"
     return "fly"
 
@@ -145,6 +176,7 @@ def action_location(text: str) -> str:
 def decorate_task_tokens(text: str) -> str:
     safe = html.escape(text)
     safe = re.sub(r"(开飞行点：[^；<]+)", r'<span class="ra-system-action ra-flightpoint">\1</span>', safe)
+    safe = re.sub(r"(系统飞行：[^；<]+)", r'<span class="ra-system-action ra-flightpath">\1</span>', safe)
     safe = re.sub(r"(炉石绑定：[^；<]+)", r'<span class="ra-system-action ra-hearthstone">\1</span>', safe)
     safe = re.sub(r"(使用炉石：[^；<]+)", r'<span class="ra-system-action ra-hearthstone">\1</span>', safe)
 
@@ -288,8 +320,8 @@ def main() -> None:
             "timing": {
                 "centerMinutes": float(timing["centerMinutes"]),
                 "rangeMinutes": [float(x) for x in timing["rangeMinutes"]],
-                "includeInTotal": True,
-                "status": str(timing.get("status") or "pre_live_marginal_budget"),
+                "includeInTotal": str(timing.get("status") or "") != "pending_recalc",
+                "status": str(timing.get("status") or "pending_recalc"),
             },
             "questIds": sorted(qid for qid, first in first_step.items() if first == step_no and qid in formal),
         })
@@ -301,31 +333,26 @@ def main() -> None:
     route = {
         "order": 7,
         "uiStandard": "semantic-hud-v45",
-        "status": "live_entry_confirmed_current_group_at_12897",
-        "title": "冰冠冰川 · 80级五开可达路线",
-        "sub": "银色比武场入图；主任务可达链已由《乐趣十足》实服确认。",
-        "badge": (
-            f"炉石：格罗玛什坠毁点 → 暗影拱顶\\n"
-            f"预计总时间：{policy.get('route_total_center_minutes', 0)/60:.1f}小时"
-            f"（{policy.get('route_total_pre_live_band_minutes', [0, 0])[0]/60:.1f}–"
-            f"{policy.get('route_total_pre_live_band_minutes', [0, 0])[1]/60:.1f}小时）"
-        ),
+        "status": "icecrown_reordered_v1_live_run",
+        "title": "冰冠冰川 · 80级五开重排路线 v1",
+        "sub": "银色比武场首轮先上奥格瑞姆之锤接《审判日降临！》《乐趣十足》；随后按前置门槛与任务簇连续清图。",
+        "badge": "炉石：暗影拱顶（解锁后）\\n预计总时间：待首组按重排路线实跑后重算",
         "image": "maps/210-icecrown-hd.jpg",
         "legend": "",
         "footer": "",
         "labels": [[x, y, name] for name, (x, y) in ANCHORS.items() if name not in {"奥格瑞姆之锤"}],
         "points": points,
-        "defaultIndex": groups[1]["start"] if len(groups) > 1 else 0,
+        "defaultIndex": groups[24]["start"] if len(groups) > 24 else 0,
         "phaseColors": {f"ice{i:02d}": "#94a3b8" for i in range(1, len(groups) + 1)},
         "displayName": "冰冠冰川",
         "stepGroups": groups,
-        "defaultGroupIndex": 1 if len(groups) > 1 else 0,
-        "hearthChain": ["格罗玛什坠毁点", "暗影拱顶"],
+        "defaultGroupIndex": 24 if len(groups) > 24 else 0,
+        "hearthChain": ["暗影拱顶"],
         "timing": {
             "centerMinutes": float(policy.get("route_total_center_minutes") or 0),
             "rangeMinutes": [float(x) for x in (policy.get("route_total_pre_live_band_minutes") or [])],
             "actualRuns": [],
-            "model": "icecrown_16_step_reachable_live_entry_v3",
+            "model": "icecrown_41_step_reordered_v1_pending_recalc",
         },
         "geometryAudit": {
             "fallbackActionCount": len(geometry_fallbacks),

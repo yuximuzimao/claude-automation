@@ -15,7 +15,7 @@ def main() -> None:
     if audit.get("status") != "PASS" or int(audit.get("hardIssueCount") or 0) != 0:
         raise RuntimeError("Icecrown structured candidate has not passed the hard geometry/coverage audit")
 
-    candidate["status"] = "live_entry_confirmed_current_group_at_12897"
+    candidate["status"] = "icecrown_reordered_v1_live_run"
     routes = json.loads(WORKBENCH.read_text(encoding="utf-8"))
     routes["icecrown"] = candidate
 
