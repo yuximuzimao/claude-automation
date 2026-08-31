@@ -14,6 +14,7 @@ entry: cli.js
 5. **写操作（新增匹配）必须人工确认后执行**
 6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
+8. **处理 HEE/悦希前先查待补清单** → `data/products/hee/pending-products.json`；命中名称、简称或当前编码时按“已知待补”处理，不得归为未知，也不得套用旧版外观
 
 ## ENTRY MAP
 
@@ -22,6 +23,7 @@ entry: cli.js
 | `cli.js` | CLI 命令入口 | 了解可用命令或新增命令时 |
 | `lib/check.js` | 完整核查流程编排（扫描+标记+生成结构化比较事实） | 改核查流程时 |
 | `lib/brand-scope.js` | 首次指定品牌、后续继承与冲突拦截 | 改品牌作用域时 |
+| `data/products/hee/pending-products.json` | 悦希已知但缺图、缺稳定条码或缺装箱资料的商品清单 | 任何 HEE 识图、匹配、训练或装箱任务开始前 |
 | `lib/compare.js` | 识图结果 vs ERP 档案明细的精确比较 | 改 match/mismatch 判定时 |
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
@@ -175,6 +177,7 @@ visible.querySelector('button.el-button--primary').click();
 
 data/products/kgos/features.json
 data/products/hee/features.json
+data/products/hee/pending-products.json
 data/products/hee/accessories.json
 data/products/hee/sku-map.json
 docs/preflight-brand.md

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "brand": "hee",
+  "brandName": "悦希",
+  "lastUpdated": "2026-08-31",
+  "source": {
+    "system": "快麦 ERP",
+    "page": "商品档案 V2",
+    "scope": "用户指定的当前页面前 6 行"
+  },
+  "policy": {
+    "status": "known_pending_assets",
+    "recognition": "命中本清单时标记为已知待补，不得归为未知商品，也不得套用旧版产品外观猜测。",
+    "mapping": "商品图和稳定身份未齐前不得写入正式视觉特征或自动商品映射。",
+    "packing": "包装尺寸和箱规未确认前不得自动加入审单尺寸目录或悦希瓶装白名单。"
+  },
+  "products": [
+    {
+      "currentOuterId": "6950328226245",
+      "erpName": "HEE悦希淡纹润护精华口红 09古堡邂逅 3.2g",
+      "shortName": "悦希口红 09古堡邂逅",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions"
+    },
+    {
+      "currentOuterId": "6950328225903",
+      "erpName": "HEE悦希玻色因抗皱紧致焕颜面霜（3.0） 50g",
+      "shortName": "焕颜霜3.0",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions",
+      "mustNotReuseVisualFrom": ["面霜2.0"]
+    },
+    {
+      "currentOuterId": "6940079096228-1",
+      "erpName": "HEE悦希舒缓焕颜精华乳（2.0） 100g",
+      "shortName": "焕颜乳2.0",
+      "imageStatus": "missing",
+      "barcodeStatus": "known_invalid_pending_replacement",
+      "recognitionStatus": "known_pending_assets_and_barcode",
+      "packingStatus": "blocked_pending_final_barcode_and_dimensions",
+      "mustNotReuseVisualFrom": ["舒缓精华乳"],
+      "note": "当前编码只用于命中本条待办，不得进入正式映射、训练标签或装箱白名单。"
+    },
+    {
+      "currentOuterId": "6931583616811",
+      "erpName": "HEE悦希舒缓焕颜精萃水（2.0） 120ml",
+      "shortName": "焕颜水2.0",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions",
+      "mustNotReuseVisualFrom": ["舒缓精粹水"]
+    },
+    {
+      "currentOuterId": "6970240607953",
+      "erpName": "HEE悦希云朵净卸慕斯油 50ml 体验装",
+      "shortName": "慕斯油 体验装",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions"
+    },
+    {
+      "currentOuterId": "6970240607946",
+      "erpName": "HEE悦希云朵净卸慕斯油 150ml",
+      "shortName": "慕斯油",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions"
+    }
+  ]
+}

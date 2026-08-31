@@ -17,3 +17,4 @@
 | `2026-07-25-lanze-match/` | 澜泽 64 SKU 匹配、九类业务故障修复、自动核对结果、旧 lessons 快照，以及 ChatGPT + CodexPro 操作层记录 |
 | `2026-07-28-baihao-hee-match/` | 百浩/悦希 57 个商品链接核对，重复 platformCode 复合身份、人工修正边界及菜单/确认状态修复 |
 | `2026-08-24-mingrui-kgos-match/` | 茗瑞/KGOS 67 SKU 全量匹配、益生菌2.0、链接级图片身份补全及 67/67 最终验收 |
+| `2026-08-31-hee-new-products/` | 悦希 6 个缺图新品、焕颜乳 2.0 临时错误编码和三个下游项目的待补边界；现行状态以 HEE `pending-products.json` 为准 |

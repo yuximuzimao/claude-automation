@@ -26,7 +26,7 @@
 - **文字结合验证（暂缓）**：text50 gated 91.7%，等 train8 结果再决定是否继续三层管道
   - 相关工具仍保留：`scripts/ocr_verify.py`、`scripts/text50_eval.py`、`data/kgos_text_aliases.json`
 - **真实 KGOS SKU 主图源**：微信文件目录 `.../2026-05/1主图汇总`，270 张，只读参考
-- hee 未开始
+- hee 尚未训练；已知待图新品以 `../product-mapping/data/products/hee/pending-products.json` 为准，不能当作未知类别或借旧图建类
 
 ## ENTRY MAP
 
@@ -45,6 +45,7 @@
 | YOLO-first 文字纠正（暂缓） | `python scripts/ocr_verify.py` |
 | text50 gating 评估（暂缓） | `python scripts/text50_eval.py` |
 | KGOS 简称/模糊组表 | `data/kgos_text_aliases.json` |
+| HEE 已知待图新品 | `../product-mapping/data/products/hee/pending-products.json` |
 | train7 评估报告 | `docs/train7-evaluation-report.md` |
 | 推理测试 | `python scripts/infer.py --brand kgos --image xxx.jpg` |
 | 回归测试 | `python3 -m unittest tests.test_train tests.test_generate tests.test_verify tests.test_nms_sweep -v` |
@@ -81,6 +82,7 @@ scripts/
   text50_eval.py ← text50 exact-match / gating 评估（暂缓）
 data/
   kgos_text_aliases.json ← 可积累简称表，exact/ambiguous 语义分开
+../product-mapping/data/products/hee/pending-products.json ← HEE 跨项目待补商品真值
 tests/
   test_generate.py ← 生成规则与遮挡标注回归测试
 runs/            ← 训练日志和权重（git ignore）
@@ -102,6 +104,7 @@ runs/            ← 训练日志和权重（git ignore）
 3. 若处理标注 / SAM 出图问题，先读 `docs/annotation-tool-xanylabeling.md`（含 3 个已打的本机崩溃补丁说明），不要只从界面图标判断链路是否可用
 4. 当前主线由 Claude Code 执行 pilot；Codex 不要并行改计划或启动训练，除非用户明确转交
 5. 若继续标注，先确认 `gift_001.jpg` 一图端到端冒烟已通过
+6. 若任务涉及 HEE/悦希，先读 `../product-mapping/data/products/hee/pending-products.json`；待图商品只能标记为已知待补，不能生成训练类别
 
 ## 生成规则
 

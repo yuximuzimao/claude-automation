@@ -139,6 +139,8 @@
 - [ ] **P4** 集成到 product-mapping（替代 LLM 识图；需先通过黄金验证集）
 
 - [ ] **P5** hee 品牌训练（待素材图）
+  - 开始前读取 `../product-mapping/data/products/hee/pending-products.json`；清单内商品属于已知待补，不是未知类别。
+  - 商品图、稳定条码和 ERP 标准名未齐前，不创建类别、不生成训练样本、不复用旧版素材。
 
 ## 已完成
 

@@ -170,6 +170,7 @@ data/products/
     ...
   hee/             ← 悦希（HEE）品牌
     features.json  ← 商品视觉特征库
+    pending-products.json ← 已知但资料未齐的新品；命中后提示待补，不得当作未知或套用旧版
     accessories.json ← 不可见配件规则（每次活动更新）
     悦颜霜.jpg
     ...
@@ -185,6 +186,13 @@ data/products/
 
 - 视觉特征记录在 `data/products/{brand}/features.json`，字段：`erpName`（必填）、`颜色`、`特征`、`别名`
 - `erpName` 必须与 ERP 档案V2 精确一致，脚本做 Set 等值比对
+
+### pending-products.json — 待图/待稳定身份新品
+
+- 新品已经出现在 ERP、但商品图或稳定条码尚未齐全时，先进入此清单，不提前塞进 `features.json`。
+- 名称、简称或当前编码任一命中都表示“已知待补”，不能显示为普通未知商品；同时必须停止视觉自动判断，等待商品图或最终条码。
+- 新版产品不得复用旧版外观。商品图、ERP 精确名称和稳定条码齐全并验收后，才迁入 `features.json` / 参考图；迁完从待补清单删除。
+- 审单项目可以用此清单区分“已知待补尺寸”和真正未知商品，但尺寸、箱规未确认前仍不得自动归入装箱白名单。
 
 ### accessories.json — 不可见配件规则（悦希专用）
 
