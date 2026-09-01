@@ -1,0 +1,71 @@
+{
+  "archive": "2026-09-01 茗瑞 / KGOS 活动更新",
+  "shop": "茗瑞",
+  "brand": "kgos",
+  "activity": {
+    "productCount": 8,
+    "skuLinkCount": 19,
+    "originallyMatchedSkuCount": 13,
+    "newlyMatchedSkuCount": 6,
+    "newSuiteOrRebindCount": 4,
+    "newSingleCount": 2
+  },
+  "lastCompletedCheck": {
+    "checkTime": "2026-09-01T08:38:27.662Z",
+    "recognitionDone": 19,
+    "comparisonMatch": 16,
+    "comparisonMismatch": 0,
+    "comparisonPending": 3,
+    "matchedSkuCount": 16,
+    "unmatchedAwaitingMatch": 3,
+    "pendingRecordKeys": [
+      "kgosgd-cx::kgosgd-1",
+      "kgosysj2.0-cx::ysj2.0-1",
+      "kgosysj2.0-cx::ysj2.0-3"
+    ],
+    "source": "data/reports/check-茗瑞-2026-09-01.json",
+    "sourceSha256": "bcac48dd843cd2074892429999fc58a6b5a5772f78cf47d7016b396ce3edb3ca"
+  },
+  "targetedFinalVerification": {
+    "verifiedCount": 3,
+    "items": [
+      {
+        "recordKey": "kgosgd-cx::kgosgd-1",
+        "erpCode": "6980319670009",
+        "erpName": "KGOS动动冻TM无花果果冻 105g（15g*7条）",
+        "result": "match"
+      },
+      {
+        "recordKey": "kgosysj2.0-cx::ysj2.0-1",
+        "erpCode": "6980319670016",
+        "erpName": "KGOS益生菌固体饮料2.0 2g*15条/盒",
+        "result": "match"
+      },
+      {
+        "recordKey": "kgosysj2.0-cx::ysj2.0-3",
+        "erpCode": "ysj2.0-3",
+        "erpName": "KGOS益生菌固体饮料2.0 30g(2gx15)-益生菌2.0*3盒;KGOS",
+        "subItems": [
+          {
+            "name": "KGOS益生菌固体饮料2.0 2g*15条/盒",
+            "qty": 3
+          }
+        ],
+        "result": "match"
+      }
+    ]
+  },
+  "finalState": {
+    "recognitionDone": 19,
+    "erpBound": 19,
+    "missingErp": 0,
+    "knownMismatch": 0,
+    "completionEvidence": "16/19 completed check + exact targeted verification of the remaining 3 records",
+    "fullFinalCheckReportGenerated": false,
+    "fullFinalCheckLimitation": "After ERP refresh the correspondence scan completed 77 products / 212 SKU / 212 images, but CodexPro terminated the foreground check at the 180-second limit during per-product archive verification."
+  },
+  "artifacts": {
+    "skuRecordsSha256": "5fc552dc9da280c7e897ab5e229efb8848c505b5cab1dd38803e3b8752edff9f",
+    "previewMatchSha256": "c9b07357c509e3439dbf4e60e288b04fc73261e12a412f8dc5a7dab2e99cb6d8"
+  }
+}
