@@ -44,6 +44,7 @@
 - `monthly/2026-05.md`
 - `monthly/2026-06.md`
 - `monthly/2026-07.md`
+- `monthly/2026-08.md`
 
 ## 已有洞察
 
