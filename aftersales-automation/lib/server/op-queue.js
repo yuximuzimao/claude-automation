@@ -1275,7 +1275,9 @@ async function execExecute(op) {
         if (needsReminder) {
           try {
             const cd = sim.collectedData || {};
-            interceptTrackingsToRecord = extractShippedTrackings(cd);
+            interceptTrackingsToRecord = Array.isArray(sim.decision.interceptTrackings) && sim.decision.interceptTrackings.length
+              ? [...new Set(sim.decision.interceptTrackings.filter(Boolean).map(String))]
+              : extractShippedTrackings(cd);
             interceptAccountNote = queueItem && queueItem.accountNote || '未知账号';
           } catch(e) { log(`提取拦截单号失败（非致命）: ${e.message}`); }
         }

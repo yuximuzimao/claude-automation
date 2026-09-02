@@ -134,6 +134,10 @@ const BRANCHES = Object.freeze({
     label: '仅退款 / 部分签收且部分可拦截 / 人工处理',
     automationStatus: 'manual_only',
   },
+  'refund_only.mixed_signed_and_interceptable.reject': {
+    label: '仅退款 / 部分签收且部分可拦截 / 拒绝退款',
+    automationStatus: 'candidate',
+  },
   'global.merchant_fault.manual': {
     label: '商责售后原因 / 人工处理',
     automationStatus: 'manual_only',
@@ -241,6 +245,7 @@ const RULE_BRANCHES = Object.freeze({
   '赠品已发货无单号→上报人工': 'refund_only.gift_shipped_no_tracking.manual',
   '赠品已签收/驿站→上报人工': 'refund_only.gift_signed_or_station.manual',
   '部分签收+部分可拦截→拦截未签收件+签收件走退货退款': 'refund_only.mixed_signed_and_interceptable.manual',
+  '部分签收+部分可拦截→拒绝退款+拦截未签收件': 'refund_only.mixed_signed_and_interceptable.reject',
   '对应表缺规格→上报': 'refund_return.received.unmatched.manual',
   '无档案→上报人工（安全优先）': 'refund_return.archive_missing.manual',
   '全部子订单 attr1 mismatch → 上报': 'refund_return.product_match_missing.manual',

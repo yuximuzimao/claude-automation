@@ -1720,7 +1720,10 @@ function groupByBrand(items) {
 }
 
 // 从 collectedData 中收集所有需拦截的发货快递单号（主订单+赠品，含分包）
-function getShipRows(cd) {
+function getShipRows(cd, decision) {
+  if (Array.isArray(decision && decision.interceptTrackings) && decision.interceptTrackings.length) {
+    return [...new Set(decision.interceptTrackings.filter(Boolean).map(String))];
+  }
   const result = [];
   const seen = new Set();
   function addFrom(erpData) {
@@ -1769,7 +1772,7 @@ async function loadActionBadge() {
       const reason = sim.decision.reason || '';
       if (sim.decision.action === 'escalate' || sim.decision.action === 'reject') {
         if (!ticket.returnTracking && (reason.includes('拦截') || reason.includes('在途'))) {
-          count += getShipRows(sim.collectedData).filter(t => !dismissed || !dismissed[t]).length;
+          count += getShipRows(sim.collectedData, sim.decision).filter(t => !dismissed || !dismissed[t]).length;
         }
         if (isReturnWaitingAction(ticket, sim.decision) && !(dismissed && dismissed[ticket.returnTracking])) count++;
       }
@@ -1858,7 +1861,7 @@ async function loadActionList() {
     // 包含主订单所有分包快递单号 + 赠品子订单对应的快递单号
     if (decision && (decision.action === 'escalate' || decision.action === 'reject') && !ticket.returnTracking &&
         (reason.includes('拦截') || reason.includes('在途'))) {
-      getShipRows(cd).forEach(tracking => {
+      getShipRows(cd, decision).forEach(tracking => {
         if (dismissed && dismissed[tracking]) {
           dismissedIntercepts.push({ ...base, tracking });
         } else {

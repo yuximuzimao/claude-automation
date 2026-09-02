@@ -64,6 +64,25 @@ test('驿站拦截件保留驿站专属拒绝原因', () => {
   assert.equal(copy.reason, '已到驿站待取件');
 });
 
+test('混合签收分支使用独立拒绝原因和含单号详细文案', () => {
+  const copy = resolveRejectCopy({
+    decision: {
+      action: 'reject',
+      reasonCode: 'MIXED_SIGNED_INTERCEPTABLE',
+      reason: '一个包裹已签收，另一个仍在途',
+      rejectReason: '商品已签收，无法拦截，请自行申请退货退款',
+      rejectDetail: '快递单号SIGNED1已签收，无法拦截。快递单号TRANSIT1已反馈快递拦截。',
+    },
+    rejectReason: '其他',
+    rejectDetail: '外部覆盖文案',
+  });
+
+  assert.deepEqual(copy, {
+    reason: '商品已签收，无法拦截，请自行申请退货退款',
+    detail: '快递单号SIGNED1已签收，无法拦截。快递单号TRANSIT1已反馈快递拦截。',
+  });
+});
+
 test('拦截件缺少分支拒绝原因或独立文案时禁止兜底', () => {
   assert.throws(() => resolveRejectCopy({
     decision: {

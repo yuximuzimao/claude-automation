@@ -80,6 +80,19 @@ test('同一退货核对规则必须拆开精确退回和真实多退', () => {
   assert.notEqual(exact.caseId, excess.caseId);
 });
 
+test('部分签收且部分可拦截的新拒绝结果登记为候选分支', () => {
+  const result = classifySimulation(makeSimulation({
+    action: 'reject',
+    ruleDoc: 'flow-5.3',
+    ruleSummary: '部分签收+部分可拦截→拒绝退款+拦截未签收件',
+    reason: '一个包裹已签收，另一个包裹仍需拦截',
+  }), { type: '仅退款' });
+
+  assert.equal(result.branchId, 'refund_only.mixed_signed_and_interceptable.reject');
+  assert.equal(result.automationStatus, 'candidate');
+  assert.match(result.branchLabel, /拒绝退款/);
+});
+
 test('旧决定虽然写着核对通过，严格规格证明不完整时仍必须转人工分支', () => {
   const simulation = makeSimulation();
   simulation.collectedData.productArchives = [];

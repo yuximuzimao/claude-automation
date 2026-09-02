@@ -171,6 +171,31 @@ test('赠品带单号且仍在途时与主品使用相同规则并阻止退款',
   assert.equal(checkedLogistics(decision), true);
 });
 
+test('赠品仅在ERP显示已签收且主品仍在途时进入混合拒绝分支', () => {
+  const mainTracking = 'TESTMAININTRANSIT001';
+  const giftTracking = 'TESTGIFTSIGNED002';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', mainTracking)],
+    giftRows: [trackedRow('卖家已发货', giftTracking)],
+    erpLogs: [
+      { tracking: mainTracking, logisticsText: '揽收\n在途运输中' },
+      { tracking: giftTracking, logisticsText: '签收\n已由本人签收' },
+    ],
+    // 鲸灵只展示主品物流，赠品签收状态只能从 ERP 补充。
+    packages: [packageText(mainTracking, '揽收\n在途运输中')],
+  });
+
+  assert.equal(decision.action, 'reject');
+  assert.equal(decision.reasonCode, 'MIXED_SIGNED_INTERCEPTABLE');
+  assert.deepEqual(decision.interceptTrackings, [mainTracking]);
+  assert.match(decision.reason, new RegExp(giftTracking));
+  assert.match(decision.reason, new RegExp(mainTracking));
+  assert.match(decision.rejectDetail, new RegExp(`${giftTracking}已签收`));
+  assert.match(decision.rejectDetail, new RegExp(`${mainTracking}已反馈快递拦截`));
+  assert.ok(decision.warnings.some(warning => warning.includes('拦截提醒')));
+  assert.equal(decision.rulesApplied[0].summary, '部分签收+部分可拦截→拒绝退款+拦截未签收件');
+});
+
 test('只有本地拦截记录但物流仍在途时不得视为拦截成功', () => {
   const tracking = 'TEST-TRACK-INTERCEPT-RECORD';
   const decision = makeDecision({

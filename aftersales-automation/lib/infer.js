@@ -850,18 +850,44 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       giftActionParts.length ? `赠品${giftActionParts.join('，')}` : ''
     ].filter(Boolean).join('；');
 
-    const anySigned = signedPkgs.length > 0;
-    const interceptablePkgs = [...inTransitPkgs, ...yizhanPkgs];
+    // 鲸灵详情不展示赠品物流。这里只补充“鲸灵当前看不到”的赠品状态，
+    // 不改变现有主品包裹分类，也不让 ERP 覆盖鲸灵已经识别到的同一运单。
+    const jlPackageTrackings = new Set(packages.map(getPackageTracking).filter(Boolean));
+    const giftSupplementStatuses = giftPkgStatuses.filter(p => p.tr && !jlPackageTrackings.has(p.tr));
+    const allSignedPkgs = [...new Set([
+      ...signedPkgs,
+      ...giftSupplementStatuses.filter(p => p.status === 'signed').map(p => p.tr),
+    ])];
+    const allInTransitPkgs = [...new Set([
+      ...inTransitPkgs,
+      ...giftSupplementStatuses.filter(p => p.status === 'transit').map(p => p.tr),
+    ])];
+    const allYizhanPkgs = [...new Set([
+      ...yizhanPkgs,
+      ...giftSupplementStatuses.filter(p => p.status === 'yizhan').map(p => p.tr),
+    ])];
+
+    const anySigned = allSignedPkgs.length > 0;
+    const interceptablePkgs = [...new Set([...allInTransitPkgs, ...allYizhanPkgs])];
 
     if (anySigned) {
-      // 有包裹已签收：如果同时有可拦截包裹 → escalate（需拦截+已签收需退货退款）
-      // 如果全部已签收 → reject（无件可拦截）
+      // 有包裹已签收：如果同时有可拦截包裹 → 拒绝退款，并只提醒拦截未签收件。
+      // 如果全部已签收 → 沿用原有 reject（无件可拦截）。
       if (interceptablePkgs.length > 0) {
-        const desc = `已签收包裹（${signedPkgs.join('、')}）需买家申请退货退款；未签收包裹（${interceptablePkgs.join('、')}）需拦截`;
-        s({ type: 'branch', text: `上报 → 混合状态：${desc}` });
-        return fin(escalate(desc, {
-          rulesApplied: [{ doc: 'flow-5.3', section: 'Step4', summary: '部分签收+部分可拦截→拦截未签收件+签收件走退货退款' }],
-        }));
+        const desc = `已签收包裹（${allSignedPkgs.join('、')}）无法拦截；未签收包裹（${interceptablePkgs.join('、')}）需拦截`;
+        const rejectDetail = `快递单号${allSignedPkgs.join('、')}已签收，无法拦截，可联系快递尝试拒收；如无法拒收，请自行退回商品后申请退货退款。快递单号${interceptablePkgs.join('、')}已反馈快递拦截。`;
+        s({ type: 'branch', text: `拒绝退款 → 混合状态：${desc}` });
+        return fin({
+          ...reject(
+            desc,
+            interceptWarnings(cd),
+            [{ doc: 'flow-5.3', section: 'Step4', summary: '部分签收+部分可拦截→拒绝退款+拦截未签收件' }]
+          ),
+          reasonCode: 'MIXED_SIGNED_INTERCEPTABLE',
+          rejectReason: '商品已签收，无法拦截，请自行申请退货退款',
+          rejectDetail,
+          interceptTrackings: interceptablePkgs,
+        });
       }
       // 全部已签收，无在途件
       s({ type: 'branch', text: '拒绝退款 → 全部包裹已签收，无件可拦截，请申请退货退款' });
