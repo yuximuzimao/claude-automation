@@ -162,7 +162,11 @@ function renderQueuePanel(state) {
       showToast(`❌ ${lastCompleted.label}失败：${errMsg.slice(0, 60)}`, 'error');
       loadLive();
     } else if (lastCompleted.status === 'cancelled') {
-      showToast(`⏹️ 已停止：${lastCompleted.label}`);
+      if (lastCompleted.type === 'return-inbound' && _riOpId === lastCompleted.id) {
+        riOnStopped();
+      } else {
+        showToast(`⏹️ 已停止：${lastCompleted.label}`);
+      }
       loadLive();
     }
   }
@@ -2207,6 +2211,10 @@ async function addNewAccount() {
 let _riInputList = [];
 // 存储已完成结果（按输入顺序，tracking → status）
 let _riResults = {};
+// 当前退货入库队列操作，用于“当前单完成后停止”
+let _riOpId = null;
+let _riStopRequested = false;
+let _riCurrentTracking = null;
 
 async function riRun() {
   const raw = document.getElementById('ri-input').value;
@@ -2218,6 +2226,9 @@ async function riRun() {
 
   _riInputList = list;
   _riResults = {};
+  _riOpId = null;
+  _riStopRequested = false;
+  _riCurrentTracking = null;
 
   // 禁用按钮
   const btn = document.getElementById('ri-run-btn');
@@ -2238,7 +2249,11 @@ async function riRun() {
     if (!res.ok) {
       showToast(res.error || '提交失败', 'error');
       riResetBtn();
+      return;
     }
+    _riOpId = res.opId || null;
+    const stopBtn = document.getElementById('ri-stop-btn');
+    if (stopBtn) stopBtn.disabled = !_riOpId;
     // 后续由 SSE 驱动
   } catch(e) {
     showToast('请求失败: ' + e.message, 'error');
@@ -2250,6 +2265,98 @@ function riResetBtn() {
   const btn = document.getElementById('ri-run-btn');
   btn.disabled = false;
   btn.textContent = '开始处理';
+  const stopBtn = document.getElementById('ri-stop-btn');
+  if (stopBtn) {
+    stopBtn.disabled = true;
+    stopBtn.textContent = '停止';
+  }
+  _riOpId = null;
+  _riStopRequested = false;
+  _riCurrentTracking = null;
+}
+
+function riRenderResults() {
+  const el = document.getElementById('ri-results');
+  if (!el || _riInputList.length === 0) return;
+
+  const rows = _riInputList.map((tracking, i) => {
+    let status = _riResults[tracking];
+    if (!status) {
+      if (tracking === _riCurrentTracking) {
+        status = _riStopRequested ? '处理中（本条完成后停止）' : '处理中';
+      } else {
+        status = '待处理';
+      }
+    }
+    let cls = '';
+    if (status === '已入库') cls = 'color:#389e0d';
+    else if (status === '未出库无需入库' || status === '待处理') cls = 'color:#888';
+    else if (status.startsWith('错误')) cls = 'color:#cf1322';
+    else if (status.startsWith('处理中')) cls = 'color:#1677ff';
+    return `<tr>
+      <td style="color:#bbb;padding:5px 10px;font-size:12px">${i+1}</td>
+      <td style="font-family:monospace;font-size:12px;padding:5px 10px">${h(tracking)}</td>
+      <td style="padding:5px 10px;font-size:13px;${cls}">${h(status)}</td>
+    </tr>`;
+  }).join('');
+
+  const copyText = _riInputList.map(t => _riResults[t] || '未处理').join('\n');
+  el.innerHTML = `
+    <div style="margin-bottom:8px">
+      <button onclick="riCopyResults()" class="btn-ghost" style="font-size:12px">复制结果列（粘贴到WPS J列）</button>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <thead><tr style="background:#fafafa;color:#666;font-size:12px">
+        <th style="padding:7px 10px;text-align:left">#</th>
+        <th style="padding:7px 10px;text-align:left">快递单号</th>
+        <th style="padding:7px 10px;text-align:left">状态</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <textarea id="ri-copy-buf" style="position:absolute;left:-9999px;opacity:0">${h(copyText)}</textarea>`;
+}
+
+async function riStop() {
+  if (!_riOpId || _riStopRequested) return;
+  _riStopRequested = true;
+  const opId = _riOpId;
+  const stopBtn = document.getElementById('ri-stop-btn');
+  if (stopBtn) { stopBtn.disabled = true; stopBtn.textContent = '停止中...'; }
+  riRenderResults();
+
+  try {
+    const res = await fetch('/api/op-queue/' + encodeURIComponent(opId), { method: 'DELETE' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || '停止失败');
+
+    const stateRes = await fetch('/api/op-queue');
+    const state = await stateRes.json().catch(() => ({}));
+    const stillRunning = state.running && state.running.id === opId;
+    if (stillRunning) {
+      const prog = document.getElementById('ri-progress');
+      if (prog) prog.innerHTML += `<div style="margin-top:8px;color:#d48806">已请求停止：当前单完成后不再处理下一条</div>`;
+    } else {
+      riOnStopped();
+    }
+  } catch(e) {
+    _riStopRequested = false;
+    if (stopBtn) { stopBtn.disabled = false; stopBtn.textContent = '停止'; }
+    riRenderResults();
+    showToast('停止失败：' + e.message, 'error');
+  }
+}
+
+function riOnStopped() {
+  const done = Object.keys(_riResults).length;
+  const total = _riInputList.length;
+  const prog = document.getElementById('ri-progress');
+  if (prog) {
+    prog.style.display = 'block';
+    prog.innerHTML = `<span style="color:#d48806">已停止：已处理 ${done}/${total}，剩余 ${Math.max(0, total - done)} 条未处理</span>`;
+  }
+  _riCurrentTracking = null;
+  riRenderResults();
+  riResetBtn();
 }
 
 function riOnProgress(data) {
@@ -2259,9 +2366,12 @@ function riOnProgress(data) {
 
   const { total, done, current, phase, lastResult } = data;
 
-  // 更新结果记录
-  if (phase === 'completed' && lastResult) {
+  // 更新当前条和已完成结果；结果表格随每条 SSE 立即刷新。
+  if (phase === 'processing') {
+    _riCurrentTracking = current || null;
+  } else if (phase === 'completed' && lastResult) {
     _riResults[lastResult.tracking] = lastResult.status;
+    if (_riCurrentTracking === lastResult.tracking) _riCurrentTracking = null;
   }
 
   // 计算汇总
@@ -2284,11 +2394,13 @@ function riOnProgress(data) {
     <div style="margin-top:8px;background:#e8e8e8;border-radius:4px;height:6px;">
       <div style="background:#4a90e2;border-radius:4px;height:100%;width:${Math.round(done/total*100)}%;transition:width 0.3s"></div>
     </div>`;
+  riRenderResults();
 }
 
 function riOnDone(data) {
-  const { results } = data;
-  riResetBtn();
+  const { results = [] } = data;
+  for (const r of results) _riResults[r.tracking] = r.status;
+  _riCurrentTracking = null;
 
   const prog = document.getElementById('ri-progress');
   const inbounded = results.filter(r => r.status === '已入库').length;
@@ -2303,46 +2415,8 @@ function riOnDone(data) {
         ${errored > 0 ? `<span style="color:#cf1322">错误 <strong>${errored}</strong></span>` : ''}
       </div>`;
   }
-
-  // 按输入顺序构建结果
-  // 用 _riInputList 顺序，result 里可能有，也可能没（用 ri-error 处理了）
-  const orderedResults = _riInputList.map(t => {
-    const found = results.find(r => r.tracking === t);
-    return found || { tracking: t, status: '未处理' };
-  });
-
-  const el = document.getElementById('ri-results');
-  if (!el) return;
-
-  // 结果表格（轻量）
-  const rows = orderedResults.map((r, i) => {
-    let cls = '', label = r.status;
-    if (r.status === '已入库') { cls = 'color:#389e0d'; }
-    else if (r.status === '未出库无需入库') { cls = 'color:#888'; }
-    else if (r.status.startsWith('错误')) { cls = 'color:#cf1322'; }
-    return `<tr>
-      <td style="color:#bbb;padding:5px 10px;font-size:12px">${i+1}</td>
-      <td style="font-family:monospace;font-size:12px;padding:5px 10px">${h(r.tracking)}</td>
-      <td style="padding:5px 10px;font-size:13px;${cls}">${h(label)}</td>
-    </tr>`;
-  }).join('');
-
-  // 复制用文本：按输入顺序，每行一个状态
-  const copyText = orderedResults.map(r => r.status).join('\n');
-
-  el.innerHTML = `
-    <div style="margin-bottom:8px">
-      <button onclick="riCopyResults()" class="btn-ghost" style="font-size:12px">复制结果列（粘贴到WPS J列）</button>
-    </div>
-    <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)">
-      <thead><tr style="background:#fafafa;color:#666;font-size:12px">
-        <th style="padding:7px 10px;text-align:left">#</th>
-        <th style="padding:7px 10px;text-align:left">快递单号</th>
-        <th style="padding:7px 10px;text-align:left">状态</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <textarea id="ri-copy-buf" style="position:absolute;left:-9999px;opacity:0">${h(copyText)}</textarea>`;
+  riRenderResults();
+  riResetBtn();
 }
 
 function riOnError(data) {

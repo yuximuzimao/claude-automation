@@ -57,6 +57,7 @@ entry: cli.js
 | `lib/server/auto-execution-journal.js` | **自动执行审计风险层**：生产自动执行前置安全门，记录 reserve/page_action_started/page_action_succeeded/auto_executed，防重复执行并 fail-closed；不得作为自动重试助手 | 审阅自动执行异常、journal gate 或人工恢复时 |
 | `lib/server/auto-execution-recovery.js` | **自动执行中断后的本地状态收口能力**：不是“停止系统后重新启用”。当前没有 routes.js / cli.js / public UI 外部入口；实际处理中断工单通常重新采集推理覆盖旧状态，或用户手动处理后归档。归档只让系统不再处理该工单，不代表系统知道平台真实执行结果 | 未来实现 CLI/API 恢复入口时；不得调用 approve/reject/浏览器操作 |
 | `docs/automation-policy.md` | 当前自动分支授权、执行前独立证明、统计来源与变更规则 | 查/改自动处理或统计口径时 |
+| `docs/superpowers/archive/README.md` | 已完成历史阶段索引；只用于追溯，不作为当前实施依据 | neat 收尾或需要回溯已完成阶段时 |
 | `lib/server/after-sales-branch-history.js` | 固定售后分支注册表、最近 30 天去重分类和备注脱敏汇总；不同原因、不同最小结果分别累计 | 查分支清单或历史计数时 |
 | `lib/server/after-sales-auto-gate.js` | 当前唯一自动门禁：只允许用户明确授权的最小 `caseId` 自动同意；现开放七天无理由严格精确退回，以及多拍拍错仅退款的全无单未发货、安全物流两项，执行前分别重做事实证明 | 查/改自动执行条件时 |
 | `lib/return-item-proof.js` | 按规格编码严格证明精确退回/多退/少退/次品/未匹配/证据不完整 | 查退货商品核对边界时 |
@@ -83,6 +84,7 @@ entry: cli.js
 | `public/app.js` | 前端主逻辑 — 8 Tab 渲染、快递行动分类 `isReturnWaitingAction()`、徽章计数、品牌分组、倒计时格式化 | 改前端展示/分类逻辑时 |
 | `public/index.html` | 前端 HTML 骨架 — 8 Tab 结构、模版、header 控件 | 改页面结构时 |
 | `public/style.css` | 前端样式 — 紧急度颜色、面板布局、响应式 | 改样式时 |
+| `test/server/return-inbound-ui.test.js` | 退货入库 Web 集成契约：逐条结果、独立停止按钮、仅在单条边界中断 | 改退货入库前端或 op-queue 中断语义时 |
 | `../return-inbound/SKILL.md` | 退货入库项目导航地图（跨目录） | 调试/改退货入库 op 时；op-queue 的 `return-inbound` case 调用 `../return-inbound/lib/workflow.js` |
 
 ## CORE FLOWS

@@ -29,6 +29,7 @@ CLI（`cli.js`）保留用于调试，不用于日常业务。
 | `lib/result.js` | 导航等内部调用使用的 `{ success, data/error }` 结果封装 |
 | `cli.js` | 调试用 CLI，非日常使用 |
 | `test/workflow-timing.test.js` | 关联订单慢加载、超时错误和生产等待参数回归测试 |
+| `test/cold-start-contract.test.js` | 冷启动、后台标签页激活和输入确认契约测试 |
 
 ## 核心函数（workflow.js 导出）
 
@@ -59,8 +60,10 @@ CLI（`cli.js`）保留用于调试，不用于日常业务。
 - **ERP tab URL 用 includes**：`t.url.includes('superboss.cc')`（ERP 重定向后子域名变化）
 - **targetId 批次复用**：`findErpTarget()` 只调一次，整批 `processOne` 复用同一 targetId
 - **等待参数集中管理**：`workflow.js` 的 `TIMING` 统一控制超时、轮询和稳定延时；关联订单加载最多 45 秒、每 1 秒检查一次，点击后先留 1.5 秒启动缓冲
+- **冷启动 / 后台标签页保护**：导航前先激活 ERP；即使已经在目标页也必须重新确认页面内容就绪。`Input.insertText` 和 Enter 真正发送前再次激活目标标签页；单号写入后必须读回输入框确认等于当前单号，确认后才允许回车搜索
 - **状态检测与稳定延时并用**：弹窗、表格和成功状态用 `waitFor` 验证；输入、筛选、仓库和勾选等 Vue 状态切换后保留稳定时间
 - **提交不重试**：「创建并收货」点击后只等待明确成功信号，不重复点击，避免重复创建工单
+- **停止只发生在单条边界**：Web 面板的退货入库停止复用全局 `op-queue` 中断信号；当前单完整结束后才停止下一条，禁止在「创建并收货」提交中途强行打断
 
 ## 结果状态
 

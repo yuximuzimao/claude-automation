@@ -52,3 +52,7 @@ test('关联订单始终未加载时仍保留明确的超时错误', async () =>
     cdp.eval = originalEval;
   }
 });
+
+test('退货入库 CDP 提供标签页激活能力，供冷启动和后台输入前置使用', () => {
+  assert.equal(typeof cdp.activateTarget, 'function');
+});

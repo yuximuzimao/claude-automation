@@ -256,7 +256,29 @@ async function fillTracking(targetId, tracking) {
 
   // 用 Input.insertText 填入（必须通过 cdp typeText）
   await cdp.typeText(targetId, tracking);
-  await sleep(TIMING.inputSettleMs); // 等 Vue input handler 处理完输入再回车
+  await sleep(TIMING.inputSettleMs); // 等 Vue input handler 处理完输入
+
+  // 确认这次 Input 事件确实写进了目标输入框；失败时不要继续按回车触发错误搜索。
+  await waitFor(async () => {
+    return await cdp.eval(targetId, `(function(){
+      var wrapper = Array.from(document.querySelectorAll('.el-dialog__wrapper')).find(function(w){
+        var r = w.getBoundingClientRect(); if (r.width === 0 || r.height === 0) return false;
+        var t = w.querySelector('.el-dialog__title');
+        return t && t.textContent.includes('新建售后工单');
+      });
+      if (!wrapper) return false;
+      var inputs = Array.from(wrapper.querySelectorAll('input[type="text"], input:not([type])'));
+      var inp = inputs.find(function(i){
+        var r = i.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && !i.closest('.el-select');
+      });
+      return !!inp && inp.value === ${JSON.stringify(tracking)};
+    })()`);
+  }, {
+    timeoutMs: TIMING.standardTimeoutMs,
+    intervalMs: TIMING.pollIntervalMs,
+    label: '确认快递单号输入成功',
+  });
 
   // 回车
   await cdp.key(targetId, 'Enter');
@@ -576,6 +598,10 @@ async function waitForAssociationOrderLoad(targetId, options = {}) {
 // ============================================================
 async function processOne(targetId, tracking) {
   process.stdout.write(`[${tracking}] 开始处理\n`);
+
+  // Chrome 对后台标签页的 Input 事件并不稳定；每条开始前明确激活 ERP。
+  await cdp.activateTarget(targetId);
+  await sleep(TIMING.actionSettleMs);
 
   await ensureDialogOpen(targetId);
   await sleep(TIMING.actionSettleMs); // 等 Vue 完成弹窗 mount 初始化

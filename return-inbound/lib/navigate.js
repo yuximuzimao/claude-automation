@@ -57,7 +57,7 @@ async function recoverLogin(targetId) {
         return !!(cb || btn);
       })()`);
       if (!clicked) throw new Error('login modal not found');
-    }, { attempts: 5, delay: 2000 });
+    }, { maxRetries: 4, delayMs: 2000, label: '恢复ERP登录弹窗' });
     await sleep(6000);
   } else {
     // 场景B：完全退出，触发 Chrome 自动填充
@@ -92,7 +92,7 @@ async function waitForPageContent(targetId, timeoutMs = 15000) {
       return loading.length === 0;
     })()`);
     return r;
-  }, { timeout: timeoutMs, interval: 500 });
+  }, { timeoutMs, intervalMs: 500, label: '等待ERP页面内容加载' });
 }
 
 // ============================================================
@@ -119,6 +119,10 @@ async function navigateErp(targetId, pageName) {
   const hash = PAGE_MAP[pageName];
   if (!hash) throw new Error(`未知页面: ${pageName}`);
 
+  // 先把 ERP 拉到前台，让后台冻结的页面恢复渲染/计时，再判断是否已就绪。
+  await cdp.activateTarget(targetId);
+  await sleep(500);
+
   const cache = loadSessionCache();
   const cacheOk = cache.ts && (Date.now() - cache.ts < SESSION_TTL_MS);
 
@@ -127,7 +131,9 @@ async function navigateErp(targetId, pageName) {
     if (status.loggedIn) {
       const currentHash = await cdp.eval(targetId, 'location.hash');
       if (currentHash === hash) {
-        return; // 已在目标页面，无需操作
+        // 冷启动时即使 URL 已正确，也必须确认页面内容和 loading 状态已恢复可操作。
+        await waitForPageContent(targetId);
+        return;
       }
       // 切换标签页
       await retry(async () => {
@@ -139,7 +145,7 @@ async function navigateErp(targetId, pageName) {
         await sleep(1000);
         const h = await cdp.eval(targetId, 'location.hash');
         if (!h.includes(hash.replace('#', ''))) throw new Error('tab switch pending');
-      }, { attempts: 6, delay: 500 });
+      }, { maxRetries: 5, delayMs: 500, label: '切换ERP目标页签' });
       await waitForPageContent(targetId);
       return;
     }
@@ -151,7 +157,7 @@ async function navigateErp(targetId, pageName) {
   await waitFor(async () => {
     const r = await cdp.eval(targetId, 'document.readyState === "complete"');
     return r;
-  }, { timeout: 20000, interval: 500 });
+  }, { timeoutMs: 20000, intervalMs: 500, label: '等待ERP页面重载完成' });
 
   const statusAfterReload = await checkLogin(targetId);
   if (!statusAfterReload.loggedIn) {
@@ -167,7 +173,7 @@ async function navigateErp(targetId, pageName) {
     await sleep(1000);
     const h = await cdp.eval(targetId, 'location.hash');
     if (!h.includes(hash.replace('#', ''))) throw new Error('tab switch pending');
-  }, { attempts: 6, delay: 500 });
+  }, { maxRetries: 5, delayMs: 500, label: '重载后切换ERP目标页签' });
 
   await waitForPageContent(targetId);
   saveSessionCache({ ts: Date.now(), page: pageName });

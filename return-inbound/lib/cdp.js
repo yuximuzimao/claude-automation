@@ -138,16 +138,18 @@ async function scroll(targetId, direction) {
   return evalJs(targetId, `window.scrollBy(0, ${delta}); 'ok'`);
 }
 
-// 发送按键
+// 发送按键。Chrome 后台标签页的 Input 事件可能不触发，发送前先激活 ERP tab。
 async function key(targetId, keyName) {
+  await activateTarget(targetId);
   await cdpCall(targetId, 'Input.dispatchKeyEvent', { type: 'keyDown', key: keyName });
   await cdpCall(targetId, 'Input.dispatchKeyEvent', { type: 'keyUp', key: keyName });
   return { key: keyName };
 }
 
-// 向当前焦点元素插入文本（需先 clickAt 聚焦目标元素）
-// 使用 Input.insertText，可穿透前端框架的 value setter 拦截
+// 向当前焦点元素插入文本（需先 JS focus/select 目标元素）
+// 使用 Input.insertText，可穿透前端框架的 value setter 拦截；发送前确保 tab 在前台。
 async function typeText(targetId, text) {
+  await activateTarget(targetId);
   await cdpCall(targetId, 'Input.insertText', { text });
 }
 
