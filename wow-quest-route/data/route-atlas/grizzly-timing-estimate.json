@@ -6,24 +6,24 @@
   ],
   "centerMinutes": 382.5,
   "rangeMinutes": [
-    286.8,
-    477.9
+    288.7,
+    476.3
   ],
   "actualRuns": [],
   "rows": [
     {
       "step": 1,
-      "title": "征服堡 → 沃德伦 → 风险湾 → 沃德伦领主",
-      "centerMinutes": 28.1,
+      "title": "征服堡 → 沃德伦任务",
+      "centerMinutes": 22.0,
       "rangeMinutes": [
-        21.0,
-        35.1
+        16.6,
+        27.5
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 3.7,
-        "objectiveMinutes": 17.8,
-        "hubMinutes": 6.1,
+        "moveMinutes": 1.4,
+        "objectiveMinutes": 17.2,
+        "hubMinutes": 4.0,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -31,12 +31,31 @@
         "灰狼的毛皮",
         "缚焰者的秘密",
         "显示力量",
-        "寻找溶解剂",
         "沃德伦的领主"
       ]
     },
     {
       "step": 2,
+      "title": "风险湾 → 沃德伦领主 → 征服堡",
+      "centerMinutes": 6.1,
+      "rangeMinutes": [
+        5.0,
+        7.2
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 2.2,
+        "objectiveMinutes": 2.1,
+        "hubMinutes": 2.1,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
+        "寻找溶解剂",
+        "沃德伦的领主"
+      ]
+    },
+    {
+      "step": 3,
       "title": "银溪镇 → 征服堡：克雷娜 / 高戈娜 / 休尼克",
       "centerMinutes": 16.2,
       "rangeMinutes": [
@@ -57,18 +76,18 @@
       ]
     },
     {
-      "step": 3,
-      "title": "花岗岩之泉 → 达库鲁火盆 → 古树之心 → Drak'atal",
-      "centerMinutes": 62.1,
+      "step": 4,
+      "title": "花岗岩之泉：达库鲁 / 天灾",
+      "centerMinutes": 31.4,
       "rangeMinutes": [
-        46.5,
-        77.6
+        23.6,
+        39.3
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 5.7,
-        "objectiveMinutes": 47.4,
-        "hubMinutes": 8.6,
+        "moveMinutes": 1.5,
+        "objectiveMinutes": 40.9,
+        "hubMinutes": 3.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -78,6 +97,27 @@
         "清理天灾",
         "净化天灾巨魔",
         "解读象形文字",
+        "蘑菇汤！"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "达库鲁火盆 → 古树之心 → Drak'atal",
+      "centerMinutes": 30.7,
+      "rangeMinutes": [
+        23.0,
+        38.3
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 4.1,
+        "objectiveMinutes": 36.9,
+        "hubMinutes": 4.7,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
+        "净化天灾巨魔",
+        "解读象形文字",
         "必要的牺牲",
         "蘑菇汤！",
         "古树精华宝石",
@@ -85,26 +125,65 @@
       ]
     },
     {
-      "step": 4,
-      "title": "征服斗兽场 → 沃达希尔三洞 → 盲眼卢娜",
-      "centerMinutes": 30.5,
+      "step": 6,
+      "title": "征服堡：斗兽场准备",
+      "centerMinutes": 8.3,
       "rangeMinutes": [
-        22.9,
-        38.2
+        6.2,
+        10.3
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 3.0,
-        "objectiveMinutes": 20.8,
-        "hubMinutes": 6.3,
+        "moveMinutes": 0.0,
+        "objectiveMinutes": 8.7,
+        "hubMinutes": 1.5,
         "specialMinutes": 0.5
+      },
+      "objectiveTasks": [
+        "征服斗兽场：斗熊！",
+        "沃达希尔的陨落",
+        "地下的黑暗"
+      ]
+    },
+    {
+      "step": 7,
+      "title": "征服斗兽场五连",
+      "centerMinutes": 7.8,
+      "rangeMinutes": [
+        6.4,
+        9.2
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 0.4,
+        "objectiveMinutes": 7.5,
+        "hubMinutes": 2.1,
+        "specialMinutes": 0.0
       },
       "objectiveTasks": [
         "征服斗兽场：斗熊！",
         "征服斗兽场：疯狂的熊怪",
         "征服斗兽场：鲜血与金属",
         "征服斗兽场：九死一生",
-        "征服斗兽场：摊牌",
+        "征服斗兽场：摊牌"
+      ]
+    },
+    {
+      "step": 8,
+      "title": "花岗岩之泉 → 沃达希尔 → 盲眼卢娜",
+      "centerMinutes": 14.4,
+      "rangeMinutes": [
+        10.9,
+        18.1
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 2.6,
+        "objectiveMinutes": 13.3,
+        "hubMinutes": 2.7,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
         "沃达希尔的陨落",
         "地下的黑暗",
         "白肩鹰的眼睛",
@@ -113,18 +192,18 @@
       ]
     },
     {
-      "step": 5,
-      "title": "欧尼瓦 → 索尔莫丹 → 征服堡 → 欧尼瓦",
-      "centerMinutes": 38.0,
+      "step": 9,
+      "title": "欧尼瓦 → 索尔莫丹",
+      "centerMinutes": 19.1,
       "rangeMinutes": [
-        28.5,
-        47.4
+        14.3,
+        23.8
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 4.6,
+        "moveMinutes": 2.5,
         "objectiveMinutes": 26.3,
-        "hubMinutes": 6.6,
+        "hubMinutes": 2.9,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -135,7 +214,29 @@
       ]
     },
     {
-      "step": 6,
+      "step": 10,
+      "title": "炉石征服堡 → 欧尼瓦交接",
+      "centerMinutes": 18.9,
+      "rangeMinutes": [
+        14.2,
+        23.7
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 2.1,
+        "objectiveMinutes": 26.3,
+        "hubMinutes": 3.7,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
+        "不速之“客”",
+        "惊吓野马",
+        "熊的美食",
+        "破损的日记"
+      ]
+    },
+    {
+      "step": 11,
       "title": "欧尼瓦南侧 → 征服堡灰角 → 欧尼瓦",
       "centerMinutes": 18.1,
       "rangeMinutes": [
@@ -156,7 +257,7 @@
       ]
     },
     {
-      "step": 7,
+      "step": 12,
       "title": "库伦 / 索尔莫丹 → 哈考尔 / 加弗洛克 → 欧尼瓦",
       "centerMinutes": 22.9,
       "rangeMinutes": [
@@ -179,18 +280,18 @@
       ]
     },
     {
-      "step": 8,
-      "title": "萨莎 → 灰喉堡 → 乌索克 → 安娅 / 萨莎",
-      "centerMinutes": 29.1,
+      "step": 13,
+      "title": "萨莎 → 灰喉堡 → 乌索克",
+      "centerMinutes": 19.2,
       "rangeMinutes": [
-        21.8,
-        36.3
+        14.4,
+        24.0
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 10.2,
-        "objectiveMinutes": 13.2,
-        "hubMinutes": 5.2,
+        "moveMinutes": 4.2,
+        "objectiveMinutes": 12.7,
+        "hubMinutes": 2.7,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -198,23 +299,42 @@
         "阿纳托雷",
         "摧毁树苗",
         "沃达希尔的种子",
+        "乌索克，巨熊之神"
+      ]
+    },
+    {
+      "step": 14,
+      "title": "乌索克交付 → 安娅 / 萨莎",
+      "centerMinutes": 9.9,
+      "rangeMinutes": [
+        8.1,
+        11.7
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 6.0,
+        "objectiveMinutes": 2.0,
+        "hubMinutes": 2.4,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
         "乌索克，巨熊之神",
         "以洛肯之名"
       ]
     },
     {
-      "step": 9,
-      "title": "符文监督者 → Drakil'jin墓穴多次往返 → 血月岛 → 加弗洛克",
-      "centerMinutes": 59.7,
+      "step": 15,
+      "title": "符文监督者 → Drakil'jin墓穴",
+      "centerMinutes": 31.8,
       "rangeMinutes": [
-        44.8,
-        74.6
+        23.9,
+        39.7
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 8.9,
-        "objectiveMinutes": 42.6,
-        "hubMinutes": 7.8,
+        "moveMinutes": 3.1,
+        "objectiveMinutes": 28.8,
+        "hubMinutes": 4.2,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -225,6 +345,26 @@
         "喔——哒！！",
         "达卡古尔之槌",
         "死后相见",
+        "冷静一下，伙计"
+      ]
+    },
+    {
+      "step": 16,
+      "title": "金亚拉克 → 血月岛 → 加弗洛克",
+      "centerMinutes": 27.9,
+      "rangeMinutes": [
+        20.8,
+        34.8
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 5.8,
+        "objectiveMinutes": 22.8,
+        "hubMinutes": 3.6,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
+        "压制符文",
         "冷静一下，伙计",
         "金亚拉克的末日",
         "狼人的末日",
@@ -233,18 +373,18 @@
       ]
     },
     {
-      "step": 10,
-      "title": "欧尼瓦 ↔ Dun Argol：沃塔肯 / 罗卡尔 / 托尔玛克",
-      "centerMinutes": 47.8,
+      "step": 17,
+      "title": "欧尼瓦 ↔ Dun Argol：制服 / 能源",
+      "centerMinutes": 29.2,
       "rangeMinutes": [
-        35.8,
-        59.7
+        21.9,
+        36.5
       ],
       "includeInTotal": true,
       "components": {
-        "moveMinutes": 9.0,
-        "objectiveMinutes": 31.8,
-        "hubMinutes": 6.5,
+        "moveMinutes": 5.1,
+        "objectiveMinutes": 23.7,
+        "hubMinutes": 3.5,
         "specialMinutes": 0.5
       },
       "objectiveTasks": [
@@ -253,13 +393,33 @@
         "活灵活现",
         "收集零件",
         "我们有能源",
+        "洛肯的命令"
+      ]
+    },
+    {
+      "step": 18,
+      "title": "Dun Argol：能源 → 铁领主 → 欧尼瓦",
+      "centerMinutes": 18.6,
+      "rangeMinutes": [
+        13.9,
+        23.2
+      ],
+      "includeInTotal": true,
+      "components": {
+        "moveMinutes": 3.9,
+        "objectiveMinutes": 14.1,
+        "hubMinutes": 2.9,
+        "specialMinutes": 0.0
+      },
+      "objectiveTasks": [
+        "我们有能源",
         "洛肯的命令",
         "……我们没有能源",
         "击败铁领主"
       ]
     },
     {
-      "step": 11,
+      "step": 19,
       "title": "加弗洛克 → 符文巨人平原 → 哈考尔 → 加弗洛克",
       "centerMinutes": 30.0,
       "rangeMinutes": [

@@ -10,7 +10,7 @@
 ## 基础统计
 
 - primary候选：266；连同一跳前置/后续边界：278。
-- scope：`{'defer_future_level_revisit': 11, 'defer_to_80_after_live_failure': 3, 'exclude_alliance_or_other_faction': 87, 'exclude_current_entry_axis_alternate': 3, 'exclude_deprecated_or_system': 1, 'exclude_no_xp': 4, 'exclude_other_class': 1, 'exclude_profession': 1, 'exclude_removed_or_unavailable': 4, 'exclude_repeatable_calendar': 3, 'include_cross_map_inbound': 2, 'include_cross_map_outbound': 4, 'include_leveling_cross_map': 1, 'include_leveling_dungeon': 4, 'include_leveling_local': 136, 'include_structural_zero_xp_prerequisite': 1}`。
+- scope：`{'defer_first_group_retest_next_group': 3, 'defer_future_level_revisit': 11, 'exclude_alliance_or_other_faction': 87, 'exclude_current_entry_axis_alternate': 3, 'exclude_deprecated_or_system': 1, 'exclude_no_xp': 4, 'exclude_other_class': 1, 'exclude_profession': 1, 'exclude_removed_or_unavailable': 4, 'exclude_repeatable_calendar': 3, 'include_cross_map_inbound': 2, 'include_cross_map_outbound': 4, 'include_leveling_cross_map': 1, 'include_leveling_dungeon': 4, 'include_leveling_local': 136, 'include_structural_zero_xp_prerequisite': 1}`。
 - 精确目标簇：133；多任务共享目标簇：34。
 - 最终攻略备注判定：`{'must_note': 76, 'not_route_candidate': 122, 'review_before_route': 1, 'reviewed_no_extra_note': 67}`。
 - 当前纳入范围 must_note=76，review_before_route=1，reviewed_no_extra_note=67，manual_review_pending=0。

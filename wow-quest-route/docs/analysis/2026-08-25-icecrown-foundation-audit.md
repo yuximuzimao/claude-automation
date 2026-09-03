@@ -2,9 +2,9 @@
 
 - 当前状态：首组已80级并完成风暴峭壁；冰冠从一开始按满级一次性任务金币清理建模。
 - 交通：不学习寒冷天气飞行；继续使用K3借用双足飞龙。13419《作战准备》保持排除，不作为冰冠运输入口。
-- effective Northrend universe归属冰冠：279项；跨图任务链桥接：1项（[13078]）；物理touch：222项；touch-only=[12142, 12144, 12170, 12444, 24442]。
-- 当前首轮路线候选：163项；状态统计：`{'exclude_cold_weather_flying_gate': 2, 'exclude_manual_non_executable': 22, 'exclude_route_economics': 2, 'exclude_unavailable_or_policy': 82, 'include_candidate': 152, 'include_first_run_repeatable_or_calendar': 11, 'knowledge_external_acquisition': 9}`。日常/重复只代表首轮一次，不生成第二轮循环。
-- 候选任务80级XP折金小计：约1933.95G/角色；该数尚未包含普通直接金币和装备/物品变现，不能当整图最终金币。
+- effective Northrend universe归属冰冠：279项；跨图任务链桥接：2项（[13078, 13343]）；物理touch：222项；touch-only=[12142, 12144, 12170, 12444, 24442]。
+- 当前首轮路线候选：164项；状态统计：`{'exclude_cold_weather_flying_gate': 2, 'exclude_manual_non_executable': 22, 'exclude_route_economics': 2, 'exclude_unavailable_or_policy': 82, 'include_candidate': 153, 'include_first_run_repeatable_or_calendar': 11, 'knowledge_external_acquisition': 9}`。日常/重复只代表首轮一次，不生成第二轮循环。
+- 候选任务80级XP折金小计：约1950.48G/角色；该数尚未包含普通直接金币和装备/物品变现，不能当整图最终金币。
 - 冰冠内部强制依赖缺口：0。
 - 经济待核：0项（XP折金=0且无已索引奖励物，直接金币尚未全局物化）；服务时间未知=0；objective review=0。
 - 真实Target Cluster：173；多任务共享目标簇：29。

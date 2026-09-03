@@ -163,9 +163,9 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
                 {"title": "龙眠神殿", "action": "开飞行点：龙眠神殿"},
                 {"title": "龙眠地面层", "action": "塔里奥斯塔兹 → 交《拜见巨龙女王》 → 接《与你们的大使相谈》"},
                 {"title": "龙眠地面层", "action": "古拉克·石拳 → 交《与你们的大使相谈》 → 接《前往红玉巨龙圣地》"},
-                {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n纳莉丝 → 接《黑曜石巨龙圣地》\n伊萨里奥斯勋爵 → 接《鞭笞者的种子》\n克罗米 → 接《永恒之龙的秘密》", "note": "龙眠为多层结构；这一趟只接任务，不做圣地目标。"},
+                {"title": "龙眠顶层", "action": "固定交通：龙眠地面层 → 顶层\n纳莉丝 → 接《黑曜石巨龙圣地》\n伊萨里奥斯勋爵 → 接《鞭笞者的种子》\n克罗米 → 接《永恒之龙的秘密》", "note": "龙眠为多层结构；这一趟只接任务，不做圣地目标。"},
             ],
-            "action_html": [point_anchor("龙眠神殿"), system_line("开飞行点：龙眠神殿", "ra-flightpoint"), point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("拜见巨龙女王",), accepts=("与你们的大使相谈",)), npc_actions("古拉克·石拳", turns=("与你们的大使相谈",), accepts=("前往红玉巨龙圣地",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", accepts=("黑曜石巨龙圣地",)), npc_actions("伊萨里奥斯勋爵", accepts=("鞭笞者的种子",)), npc_actions("克罗米", accepts=("永恒之龙的秘密",))],
+            "action_html": [point_anchor("龙眠神殿"), system_line("开飞行点：龙眠神殿", "ra-flightpoint"), point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("拜见巨龙女王",), accepts=("与你们的大使相谈",)), npc_actions("古拉克·石拳", turns=("与你们的大使相谈",), accepts=("前往红玉巨龙圣地",)), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", accepts=("黑曜石巨龙圣地",)), npc_actions("伊萨里奥斯勋爵", accepts=("鞭笞者的种子",)), npc_actions("克罗米", accepts=("永恒之龙的秘密",))],
         },
         28: {
             "title": "害虫控制 → 峡谷追击 → 冰拳",
@@ -207,12 +207,12 @@ def apply_dragonblight_semantic_overrides_16_31(points: list[list[Any]], groups:
             "summary": "地面层交红玉执事和冰拳号角；乘龙上顶层交红玉命运并通知女王，再到中层完成首次《保卫龙眠神殿》。",
             "points": [
                 {"title": "龙眠地面层", "action": "塔里奥斯塔兹 → 交《龙眠神殿的执事》 → 接《通知女王》\n奥拉斯塔萨 → 交《古怪的暗示》 → 接《集结的信号》", "note": "《集结的信号》先携带，黑曜石路线途中再处理裂骨者。"},
-                {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n克拉苏斯 → 交《红玉巨龙圣地的命运》"},
-                {"title": "龙眠顶层", "action": "阿莱克丝塔萨，生命的缚誓者 → 交《通知女王》 → 接《向德弗雷斯塔兹领主报到》\n乘龙：龙眠顶层 → 中层"},
+                {"title": "龙眠顶层", "action": "固定交通：龙眠地面层 → 顶层\n克拉苏斯 → 交《红玉巨龙圣地的命运》"},
+                {"title": "龙眠顶层", "action": "阿莱克丝塔萨，生命的缚誓者 → 交《通知女王》 → 接《向德弗雷斯塔兹领主报到》\n固定交通：龙眠顶层 → 中层"},
                 {"title": "龙眠中层", "action": "德弗雷斯塔兹领主 → 交《向德弗雷斯塔兹领主报到》 → 接《保卫龙眠神殿》", "note": "《保卫龙眠神殿》每组首次经过做一次，不安排日常重复。"},
                 {"title": "碧蓝巨龙圣地 → 龙眠中层", "action": "↳ 做《保卫龙眠神殿》\n德弗雷斯塔兹领主 → 交《保卫龙眠神殿》", "note": "《保卫龙眠神殿》：共享：巨龙/幼龙击杀在有效距离内同步；不共享：破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。"},
             ],
-            "action_html": [point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("龙眠神殿的执事",), accepts=("通知女王",)), npc_actions("奥拉斯塔萨", turns=("古怪的暗示",), accepts=("集结的信号",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("克拉苏斯", turns=("红玉巨龙圣地的命运",)), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("通知女王",), accepts=("向德弗雷斯塔兹领主报到",)), system_line("乘龙：龙眠顶层 → 中层"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("向德弗雷斯塔兹领主报到",), accepts=("保卫龙眠神殿",)), do_at("碧蓝巨龙圣地", "保卫龙眠神殿"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("保卫龙眠神殿",))],
+            "action_html": [point_anchor("龙眠地面层"), npc_actions("塔里奥斯塔兹", turns=("龙眠神殿的执事",), accepts=("通知女王",)), npc_actions("奥拉斯塔萨", turns=("古怪的暗示",), accepts=("集结的信号",)), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("克拉苏斯", turns=("红玉巨龙圣地的命运",)), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("通知女王",), accepts=("向德弗雷斯塔兹领主报到",)), system_line("固定交通：龙眠顶层 → 中层"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("向德弗雷斯塔兹领主报到",), accepts=("保卫龙眠神殿",)), do_at("碧蓝巨龙圣地", "保卫龙眠神殿"), point_anchor("龙眠中层"), npc_actions("德弗雷斯塔兹领主", turns=("保卫龙眠神殿",))],
             "note_html": notes_html(note_block("保卫龙眠神殿", status_span("共享") + "巨龙/幼龙击杀在有效距离内同步；" + status_span("不共享") + "破坏碧蓝巨龙圣地，五号必须分别骑龙各执行1次。")),
         },
     }

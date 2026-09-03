@@ -1444,7 +1444,8 @@
         },
         "objectiveTasks": [
           "保持隐蔽",
-          "蓝龙的卵"
+          "蓝龙的卵",
+          "奇怪……"
         ]
       },
       {
@@ -2736,24 +2737,24 @@
     ],
     "centerMinutes": 382.5,
     "rangeMinutes": [
-      286.8,
-      477.9
+      288.7,
+      476.3
     ],
     "actualRuns": [],
     "rows": [
       {
         "step": 1,
-        "title": "征服堡 → 沃德伦 → 风险湾 → 沃德伦领主",
-        "centerMinutes": 28.1,
+        "title": "征服堡 → 沃德伦任务",
+        "centerMinutes": 22.0,
         "rangeMinutes": [
-          21.0,
-          35.1
+          16.6,
+          27.5
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 3.7,
-          "objectiveMinutes": 17.8,
-          "hubMinutes": 6.1,
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 17.2,
+          "hubMinutes": 4.0,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2761,12 +2762,31 @@
           "灰狼的毛皮",
           "缚焰者的秘密",
           "显示力量",
-          "寻找溶解剂",
           "沃德伦的领主"
         ]
       },
       {
         "step": 2,
+        "title": "风险湾 → 沃德伦领主 → 征服堡",
+        "centerMinutes": 6.1,
+        "rangeMinutes": [
+          5.0,
+          7.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.2,
+          "objectiveMinutes": 2.1,
+          "hubMinutes": 2.1,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "寻找溶解剂",
+          "沃德伦的领主"
+        ]
+      },
+      {
+        "step": 3,
         "title": "银溪镇 → 征服堡：克雷娜 / 高戈娜 / 休尼克",
         "centerMinutes": 16.2,
         "rangeMinutes": [
@@ -2787,18 +2807,18 @@
         ]
       },
       {
-        "step": 3,
-        "title": "花岗岩之泉 → 达库鲁火盆 → 古树之心 → Drak'atal",
-        "centerMinutes": 62.1,
+        "step": 4,
+        "title": "花岗岩之泉：达库鲁 / 天灾",
+        "centerMinutes": 31.4,
         "rangeMinutes": [
-          46.5,
-          77.6
+          23.6,
+          39.3
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 5.7,
-          "objectiveMinutes": 47.4,
-          "hubMinutes": 8.6,
+          "moveMinutes": 1.5,
+          "objectiveMinutes": 40.9,
+          "hubMinutes": 3.9,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2808,6 +2828,27 @@
           "清理天灾",
           "净化天灾巨魔",
           "解读象形文字",
+          "蘑菇汤！"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "达库鲁火盆 → 古树之心 → Drak'atal",
+        "centerMinutes": 30.7,
+        "rangeMinutes": [
+          23.0,
+          38.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 4.1,
+          "objectiveMinutes": 36.9,
+          "hubMinutes": 4.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "净化天灾巨魔",
+          "解读象形文字",
           "必要的牺牲",
           "蘑菇汤！",
           "古树精华宝石",
@@ -2815,26 +2856,65 @@
         ]
       },
       {
-        "step": 4,
-        "title": "征服斗兽场 → 沃达希尔三洞 → 盲眼卢娜",
-        "centerMinutes": 30.5,
+        "step": 6,
+        "title": "征服堡：斗兽场准备",
+        "centerMinutes": 8.3,
         "rangeMinutes": [
-          22.9,
-          38.2
+          6.2,
+          10.3
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 3.0,
-          "objectiveMinutes": 20.8,
-          "hubMinutes": 6.3,
+          "moveMinutes": 0.0,
+          "objectiveMinutes": 8.7,
+          "hubMinutes": 1.5,
           "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "征服斗兽场：斗熊！",
+          "沃达希尔的陨落",
+          "地下的黑暗"
+        ]
+      },
+      {
+        "step": 7,
+        "title": "征服斗兽场五连",
+        "centerMinutes": 7.8,
+        "rangeMinutes": [
+          6.4,
+          9.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.4,
+          "objectiveMinutes": 7.5,
+          "hubMinutes": 2.1,
+          "specialMinutes": 0.0
         },
         "objectiveTasks": [
           "征服斗兽场：斗熊！",
           "征服斗兽场：疯狂的熊怪",
           "征服斗兽场：鲜血与金属",
           "征服斗兽场：九死一生",
-          "征服斗兽场：摊牌",
+          "征服斗兽场：摊牌"
+        ]
+      },
+      {
+        "step": 8,
+        "title": "花岗岩之泉 → 沃达希尔 → 盲眼卢娜",
+        "centerMinutes": 14.4,
+        "rangeMinutes": [
+          10.9,
+          18.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.6,
+          "objectiveMinutes": 13.3,
+          "hubMinutes": 2.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "沃达希尔的陨落",
           "地下的黑暗",
           "白肩鹰的眼睛",
@@ -2843,18 +2923,18 @@
         ]
       },
       {
-        "step": 5,
-        "title": "欧尼瓦 → 索尔莫丹 → 征服堡 → 欧尼瓦",
-        "centerMinutes": 38.0,
+        "step": 9,
+        "title": "欧尼瓦 → 索尔莫丹",
+        "centerMinutes": 19.1,
         "rangeMinutes": [
-          28.5,
-          47.4
+          14.3,
+          23.8
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 4.6,
+          "moveMinutes": 2.5,
           "objectiveMinutes": 26.3,
-          "hubMinutes": 6.6,
+          "hubMinutes": 2.9,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2865,7 +2945,29 @@
         ]
       },
       {
-        "step": 6,
+        "step": 10,
+        "title": "炉石征服堡 → 欧尼瓦交接",
+        "centerMinutes": 18.9,
+        "rangeMinutes": [
+          14.2,
+          23.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.1,
+          "objectiveMinutes": 26.3,
+          "hubMinutes": 3.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "不速之“客”",
+          "惊吓野马",
+          "熊的美食",
+          "破损的日记"
+        ]
+      },
+      {
+        "step": 11,
         "title": "欧尼瓦南侧 → 征服堡灰角 → 欧尼瓦",
         "centerMinutes": 18.1,
         "rangeMinutes": [
@@ -2886,7 +2988,7 @@
         ]
       },
       {
-        "step": 7,
+        "step": 12,
         "title": "库伦 / 索尔莫丹 → 哈考尔 / 加弗洛克 → 欧尼瓦",
         "centerMinutes": 22.9,
         "rangeMinutes": [
@@ -2909,18 +3011,18 @@
         ]
       },
       {
-        "step": 8,
-        "title": "萨莎 → 灰喉堡 → 乌索克 → 安娅 / 萨莎",
-        "centerMinutes": 29.1,
+        "step": 13,
+        "title": "萨莎 → 灰喉堡 → 乌索克",
+        "centerMinutes": 19.2,
         "rangeMinutes": [
-          21.8,
-          36.3
+          14.4,
+          24.0
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 10.2,
-          "objectiveMinutes": 13.2,
-          "hubMinutes": 5.2,
+          "moveMinutes": 4.2,
+          "objectiveMinutes": 12.7,
+          "hubMinutes": 2.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2928,23 +3030,42 @@
           "阿纳托雷",
           "摧毁树苗",
           "沃达希尔的种子",
+          "乌索克，巨熊之神"
+        ]
+      },
+      {
+        "step": 14,
+        "title": "乌索克交付 → 安娅 / 萨莎",
+        "centerMinutes": 9.9,
+        "rangeMinutes": [
+          8.1,
+          11.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 6.0,
+          "objectiveMinutes": 2.0,
+          "hubMinutes": 2.4,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "乌索克，巨熊之神",
           "以洛肯之名"
         ]
       },
       {
-        "step": 9,
-        "title": "符文监督者 → Drakil'jin墓穴多次往返 → 血月岛 → 加弗洛克",
-        "centerMinutes": 59.7,
+        "step": 15,
+        "title": "符文监督者 → Drakil'jin墓穴",
+        "centerMinutes": 31.8,
         "rangeMinutes": [
-          44.8,
-          74.6
+          23.9,
+          39.7
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 8.9,
-          "objectiveMinutes": 42.6,
-          "hubMinutes": 7.8,
+          "moveMinutes": 3.1,
+          "objectiveMinutes": 28.8,
+          "hubMinutes": 4.2,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2955,6 +3076,26 @@
           "喔——哒！！",
           "达卡古尔之槌",
           "死后相见",
+          "冷静一下，伙计"
+        ]
+      },
+      {
+        "step": 16,
+        "title": "金亚拉克 → 血月岛 → 加弗洛克",
+        "centerMinutes": 27.9,
+        "rangeMinutes": [
+          20.8,
+          34.8
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 5.8,
+          "objectiveMinutes": 22.8,
+          "hubMinutes": 3.6,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "压制符文",
           "冷静一下，伙计",
           "金亚拉克的末日",
           "狼人的末日",
@@ -2963,18 +3104,18 @@
         ]
       },
       {
-        "step": 10,
-        "title": "欧尼瓦 ↔ Dun Argol：沃塔肯 / 罗卡尔 / 托尔玛克",
-        "centerMinutes": 47.8,
+        "step": 17,
+        "title": "欧尼瓦 ↔ Dun Argol：制服 / 能源",
+        "centerMinutes": 29.2,
         "rangeMinutes": [
-          35.8,
-          59.7
+          21.9,
+          36.5
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 9.0,
-          "objectiveMinutes": 31.8,
-          "hubMinutes": 6.5,
+          "moveMinutes": 5.1,
+          "objectiveMinutes": 23.7,
+          "hubMinutes": 3.5,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -2983,13 +3124,33 @@
           "活灵活现",
           "收集零件",
           "我们有能源",
+          "洛肯的命令"
+        ]
+      },
+      {
+        "step": 18,
+        "title": "Dun Argol：能源 → 铁领主 → 欧尼瓦",
+        "centerMinutes": 18.6,
+        "rangeMinutes": [
+          13.9,
+          23.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.9,
+          "objectiveMinutes": 14.1,
+          "hubMinutes": 2.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "我们有能源",
           "洛肯的命令",
           "……我们没有能源",
           "击败铁领主"
         ]
       },
       {
-        "step": 11,
+        "step": 19,
         "title": "加弗洛克 → 符文巨人平原 → 哈考尔 → 加弗洛克",
         "centerMinutes": 30.0,
         "rangeMinutes": [
@@ -3014,22 +3175,23 @@
     "route": "zuldrak",
     "model": "component-wall-clock-v1",
     "hearthChain": [
+      "银色前沿",
       "希姆托加"
     ],
-    "centerMinutes": 510.7,
+    "centerMinutes": 504.9,
     "rangeMinutes": [
-      383.8,
-      637.3
+      382.0,
+      628.1
     ],
     "actualRuns": [],
     "rows": [
       {
         "step": 1,
-        "title": "圣光据点 → 怒爪巢穴 → 兰迪加",
-        "centerMinutes": 13.2,
+        "title": "圣光据点 → 怒爪巢穴 → 圣光据点",
+        "centerMinutes": 15.8,
         "rangeMinutes": [
-          10.8,
-          15.5
+          12.9,
+          18.5
         ],
         "includeInTotal": true,
         "components": {
@@ -3046,7 +3208,7 @@
       },
       {
         "step": 2,
-        "title": "北伐军前线 → 三名失踪者 → 盖米尔材料",
+        "title": "北伐军前线 → 三名失踪者 → 盖米尔",
         "centerMinutes": 42.5,
         "rangeMinutes": [
           31.9,
@@ -3061,115 +3223,220 @@
         },
         "objectiveTasks": [
           "朋友的意义……",
+          "从无到有",
           "圣光不能为我复仇",
-          "风暴将至",
-          "拯救盖米尔",
-          "从无到有"
+          "拯救盖米尔"
         ]
       },
       {
         "step": 3,
-        "title": "黑锋哨站 → 骨肠伪装 → 盖米尔 → 沃尔塔鲁斯入口",
-        "centerMinutes": 64.0,
+        "title": "黑锋哨站 → 纳斯 → 无处可藏",
+        "centerMinutes": 35.6,
         "rangeMinutes": [
-          48.0,
-          80.1
+          26.7,
+          44.5
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 6.3,
-          "objectiveMinutes": 47.5,
-          "hubMinutes": 9.7,
+          "moveMinutes": 2.4,
+          "objectiveMinutes": 28.0,
+          "hubMinutes": 4.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "拯救盖米尔",
           "纳斯和巨魔的毛发",
-          "乔装打扮",
-          "无处可藏",
-          "喂饱食尸鬼",
-          "唯一的希望",
-          "风暴之王的复仇",
-          "潜入沃尔塔鲁斯",
-          "幸免于难"
+          "幸免于难",
+          "无处可藏"
         ]
       },
       {
         "step": 4,
-        "title": "沃尔塔鲁斯 ↔ 痛苦之匣：达库鲁 / 斯特凡完整链",
-        "centerMinutes": 52.2,
+        "title": "骨肠 → 盖米尔 → 沃尔塔鲁斯",
+        "centerMinutes": 26.5,
         "rangeMinutes": [
-          39.1,
-          65.2
+          19.9,
+          33.1
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 4.7,
-          "objectiveMinutes": 38.1,
-          "hubMinutes": 8.9,
+          "moveMinutes": 3.9,
+          "objectiveMinutes": 17.6,
+          "hubMinutes": 5.0,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "乔装打扮",
+          "喂饱食尸鬼",
+          "唯一的希望",
+          "风暴之王的复仇"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "黑暗的地平线 → 官大一级压死人",
+        "centerMinutes": 12.0,
+        "rangeMinutes": [
+          9.8,
+          14.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.3,
+          "objectiveMinutes": 5.3,
+          "hubMinutes": 3.9,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "黑暗的地平线",
           "潜入沃尔塔鲁斯",
           "官大一级压死人",
-          "目前为止，一切很糟",
-          "无法容忍",
-          "危险的材料",
-          "真相大白",
-          "爆破活动",
-          "背叛",
-          "火上浇油"
-        ]
-      },
-      {
-        "step": 5,
-        "title": "银色前沿 → 赫布瓦罗 → 西莱图斯 → 银色前沿",
-        "centerMinutes": 62.8,
-        "rangeMinutes": [
-          47.1,
-          78.4
-        ],
-        "includeInTotal": true,
-        "components": {
-          "moveMinutes": 4.9,
-          "objectiveMinutes": 48.5,
-          "hubMinutes": 8.9,
-          "specialMinutes": 0.5
-        },
-        "objectiveTasks": [
-          "保卫银色前沿",
-          "银色北伐军的降落伞",
-          "吸取灵魂",
-          "收集腐液",
-          "西莱图斯祭坛的麻烦",
-          "银色北伐军，撤退！",
-          "扫清巨魔",
-          "奇怪的魔精",
-          "蝙蝠翅膀",
-          "实验室的学徒"
+          "目前为止，一切很糟"
         ]
       },
       {
         "step": 6,
-        "title": "达克迦尔 / 达克索塔巡逻环 → 银色前沿 → 达拉然短往返",
-        "centerMinutes": 84.7,
+        "title": "危险的材料 → 真相大白 / 爆破",
+        "centerMinutes": 33.4,
         "rangeMinutes": [
-          63.5,
-          105.9
+          25.1,
+          41.8
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 9.3,
-          "objectiveMinutes": 55.0,
-          "hubMinutes": 13.9,
-          "specialMinutes": 6.5
+          "moveMinutes": 1.3,
+          "objectiveMinutes": 28.9,
+          "hubMinutes": 3.2,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "无法容忍",
+          "危险的材料",
+          "火上浇油",
+          "真相大白",
+          "爆破活动"
+        ]
+      },
+      {
+        "step": 7,
+        "title": "背叛 → 痛苦之匣",
+        "centerMinutes": 3.9,
+        "rangeMinutes": [
+          3.2,
+          4.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.1,
+          "objectiveMinutes": 0.6,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "背叛"
+        ]
+      },
+      {
+        "step": 8,
+        "title": "银色前沿：接任务 / 庭院 / 接后续",
+        "centerMinutes": 19.6,
+        "rangeMinutes": [
+          14.7,
+          24.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 15.0,
+          "hubMinutes": 2.7,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "保卫银色前沿",
+          "银色北伐军的降落伞"
+        ]
+      },
+      {
+        "step": 9,
+        "title": "赫布瓦罗 → 扎尔金之池 → 腐液 / 蝙蝠",
+        "centerMinutes": 28.2,
+        "rangeMinutes": [
+          21.2,
+          35.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.2,
+          "objectiveMinutes": 23.8,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "实验室的学徒",
+          "吸取灵魂",
+          "收集腐液",
+          "蝙蝠翅膀"
+        ]
+      },
+      {
+        "step": 10,
+        "title": "赫布瓦罗交付 → 西莱图斯 → 银色前沿",
+        "centerMinutes": 15.2,
+        "rangeMinutes": [
+          11.4,
+          19.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.7,
+          "objectiveMinutes": 9.7,
+          "hubMinutes": 3.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "西莱图斯祭坛的麻烦",
+          "银色北伐军，撤退！",
+          "扫清巨魔"
+        ]
+      },
+      {
+        "step": 11,
+        "title": "达克迦尔 → 布兰顿 → 鲁伯特 / 蛛魔弹坑",
+        "centerMinutes": 20.0,
+        "rangeMinutes": [
+          15.0,
+          25.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.9,
+          "objectiveMinutes": 11.9,
+          "hubMinutes": 4.7,
+          "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "止痛药",
           "达卡莱巨魔不需要水元素！",
           "珍贵的元素液体",
-          "扔手雷",
+          "扔手雷"
+        ]
+      },
+      {
+        "step": 12,
+        "title": "蛛魔救援区 → 达克索塔北侧 → 希姆埃巴",
+        "centerMinutes": 33.0,
+        "rangeMinutes": [
+          24.8,
+          41.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.1,
+          "objectiveMinutes": 25.4,
+          "hubMinutes": 4.5,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "一个也不能少",
           "茧中人",
           "通灵师之死",
@@ -3177,32 +3444,68 @@
           "腐蚀者玛拉斯",
           "坠毁的喷射器",
           "纯粹的邪恶",
-          "缠绕投网器",
+          "缠绕投网器"
+        ]
+      },
+      {
+        "step": 13,
+        "title": "炉石银色前沿 → 蘑菇 / 蜥蜴 → 巡逻任务",
+        "centerMinutes": 26.4,
+        "rangeMinutes": [
+          19.8,
+          33.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.6,
+          "objectiveMinutes": 17.6,
+          "hubMinutes": 5.2,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "蘑菇混合剂",
           "贪吃的蜥蜴",
           "过犹不及"
         ]
       },
       {
-        "step": 7,
-        "title": "痛苦斗兽场六连 → 希姆托加 → 金亚莱",
-        "centerMinutes": 28.2,
+        "step": 14,
+        "title": "痛苦斗兽场：伊戈达斯 → 海象人",
+        "centerMinutes": 11.2,
         "rangeMinutes": [
-          21.1,
-          35.2
+          8.4,
+          14.0
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 1.8,
-          "objectiveMinutes": 19.9,
-          "hubMinutes": 5.9,
+          "moveMinutes": 1.0,
+          "objectiveMinutes": 6.9,
+          "hubMinutes": 2.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "痛苦斗兽场：伊戈达斯！",
           "痛苦斗兽场：猛犸人！",
           "痛苦斗兽场：异界的对手！",
-          "痛苦斗兽场：海象人的末日！",
+          "痛苦斗兽场：海象人的末日！"
+        ]
+      },
+      {
+        "step": 15,
+        "title": "痛苦斗兽场：科尔拉克 / 冠军 → 希姆托加",
+        "centerMinutes": 17.0,
+        "rangeMinutes": [
+          12.8,
+          21.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.3,
+          "objectiveMinutes": 13.0,
+          "hubMinutes": 2.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "痛苦斗兽场：血怒者科尔拉克！",
           "痛苦斗兽场的冠军",
           "横扫金亚莱",
@@ -3210,18 +3513,35 @@
         ]
       },
       {
-        "step": 8,
-        "title": "哈克娅 → 伦诺克 → 赫布达卡 → 奎丝鲁恩侦察",
-        "centerMinutes": 62.0,
+        "step": 16,
+        "title": "希姆托加：金亚莱交任务 / 神灵链",
+        "centerMinutes": 3.0,
         "rangeMinutes": [
-          46.5,
-          77.5
+          2.5,
+          3.6
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 3.9,
-          "objectiveMinutes": 47.9,
-          "hubMinutes": 9.7,
+          "moveMinutes": 0.2,
+          "objectiveMinutes": 0,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 17,
+        "title": "哈克娅 → 伦诺克完整链",
+        "centerMinutes": 37.3,
+        "rangeMinutes": [
+          28.0,
+          46.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.9,
+          "objectiveMinutes": 29.9,
+          "hubMinutes": 5.0,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -3229,19 +3549,36 @@
           "我的后裔",
           "冻土精华",
           "封印裂隙",
+          "我的先知，我的敌人",
           "结束痛苦",
-          "返回哈克娅身边",
-          "自毁家园",
-          "巫毒头饰！",
-          "击落赫布金",
-          "不祥的扰动",
-          "进入灵界的准备",
-          "我的先知，我的敌人"
+          "自毁家园"
         ]
       },
       {
-        "step": 9,
-        "title": "奎丝鲁恩灵界链 → 哈克娅 → 犸托斯之血",
+        "step": 18,
+        "title": "希姆托加 → 赫布达卡 → 哈克娅",
+        "centerMinutes": 24.6,
+        "rangeMinutes": [
+          18.5,
+          30.8
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.0,
+          "objectiveMinutes": 17.9,
+          "hubMinutes": 4.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "巫毒头饰！",
+          "击落赫布金",
+          "不祥的扰动",
+          "进入灵界的准备"
+        ]
+      },
+      {
+        "step": 19,
+        "title": "奎丝鲁恩 → 哈克娅 → 炉石希姆托加",
         "centerMinutes": 34.5,
         "rangeMinutes": [
           25.9,
@@ -3264,39 +3601,57 @@
         ]
       },
       {
-        "step": 10,
-        "title": "希姆托加四NPC交接 → 犸托斯 → 佐尔玛兹 → 阿卡里",
-        "centerMinutes": 32.6,
+        "step": 20,
+        "title": "希姆托加 → 犸托斯 / 佐尔玛兹",
+        "centerMinutes": 24.0,
         "rangeMinutes": [
-          24.4,
-          40.7
+          18.0,
+          29.9
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 7.1,
-          "objectiveMinutes": 21.0,
-          "hubMinutes": 4.0,
+          "moveMinutes": 2.4,
+          "objectiveMinutes": 19.5,
+          "hubMinutes": 1.6,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "猛犸的复仇",
           "魔化蒂基面具战士",
           "妖术宝箱",
-          "督军佐尔玛兹的钥匙",
+          "督军佐尔玛兹的钥匙"
+        ]
+      },
+      {
+        "step": 21,
+        "title": "希姆托加 → 古达克 → 阿卡里",
+        "centerMinutes": 7.9,
+        "rangeMinutes": [
+          6.5,
+          9.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.9,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 2.4,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "狂暴"
         ]
       },
       {
-        "step": 11,
-        "title": "诸神的指引两精华 → 佐尔赫布 → 希姆托加",
-        "centerMinutes": 17.5,
+        "step": 22,
+        "title": "诸神的指引 → 古达克 / 希姆托加",
+        "centerMinutes": 16.8,
         "rangeMinutes": [
-          13.1,
-          21.9
+          12.6,
+          20.9
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 5.6,
+          "moveMinutes": 4.8,
           "objectiveMinutes": 9.5,
           "hubMinutes": 1.9,
           "specialMinutes": 0.5
@@ -3307,8 +3662,8 @@
         ]
       },
       {
-        "step": 12,
-        "title": "希姆托加 → 古达克 → 杜布拉金迅猛龙卵",
+        "step": 23,
+        "title": "杜布拉金 → 迅猛龙卵",
         "centerMinutes": 16.5,
         "rangeMinutes": [
           12.4,
@@ -3806,73 +4161,144 @@
     ],
     "centerMinutes": 455.3,
     "rangeMinutes": [
-      345.0,
-      565.8
+      348.6,
+      562.1
     ],
     "actualRuns": [],
     "rows": [
       {
         "step": 1,
-        "title": "灰熊出口 → 药剂师营地 → 冷原海岸",
-        "centerMinutes": 29.3,
+        "title": "灰熊出口 → 冷原海岸 / 护盾",
+        "centerMinutes": 18.2,
         "rangeMinutes": [
-          21.9,
-          36.6
+          13.6,
+          22.8
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 3.6,
-          "objectiveMinutes": 18.0,
-          "hubMinutes": 7.1,
+          "moveMinutes": 1.2,
+          "objectiveMinutes": 12.8,
+          "hubMinutes": 3.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "比鱼人更恶臭……",
-          "关闭护盾",
+          "关闭护盾"
+        ]
+      },
+      {
+        "step": 2,
+        "title": "钢铁之门前哨 → 老冰鳞",
+        "centerMinutes": 11.1,
+        "rangeMinutes": [
+          8.4,
+          13.9
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.5,
+          "objectiveMinutes": 5.2,
+          "hubMinutes": 3.4,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "裂木森林的囚犯",
           "疯狂的研究",
           "腐鳃的三叉戟"
         ]
       },
       {
-        "step": 2,
-        "title": "灰烬龙巢 → 奥弗斯 → 新阿加曼德 → 卡玛古",
-        "centerMinutes": 58.7,
+        "step": 3,
+        "title": "灰烬龙巢 → 新阿加曼德开场",
+        "centerMinutes": 9.2,
         "rangeMinutes": [
-          44.0,
-          73.4
+          7.6,
+          10.9
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 12.9,
-          "objectiveMinutes": 32.7,
-          "hubMinutes": 12.6,
+          "moveMinutes": 3.5,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 3.9,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
-          "问题的根源",
+          "问题的根源"
+        ]
+      },
+      {
+        "step": 4,
+        "title": "龙卵 / 龙胃 → 盾牌岭 → 奥弗斯",
+        "centerMinutes": 25.4,
+        "rangeMinutes": [
+          19.1,
+          31.8
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.7,
+          "objectiveMinutes": 19.2,
+          "hubMinutes": 2.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "绿色的龙卵和龙崽",
           "龙的胃病",
           "亡者复生！",
-          "盾牌岭",
+          "盾牌岭"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "卡玛古 → 长矛岛 → 伊斯卡尔",
+        "centerMinutes": 18.1,
+        "rangeMinutes": [
+          13.6,
+          22.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 3.3,
+          "objectiveMinutes": 12.0,
+          "hubMinutes": 3.1,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "难民的食物",
           "卡玛古的武装",
           "伊斯卡尔的复仇"
         ]
       },
       {
-        "step": 3,
-        "title": "无赖港 → 慈悲修女号",
-        "centerMinutes": 45.3,
+        "step": 6,
+        "title": "卡玛古 → 格雷兹克斯 → 银月哈瑞",
+        "centerMinutes": 6.0,
         "rangeMinutes": [
-          34.0,
-          56.6
+          5.0,
+          7.1
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 5.2,
-          "objectiveMinutes": 26.8,
-          "hubMinutes": 12.8,
+          "moveMinutes": 2.3,
+          "objectiveMinutes": 0,
+          "hubMinutes": 2.8,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 7,
+        "title": "斯库德 → 无赖港西侧",
+        "centerMinutes": 15.4,
+        "rangeMinutes": [
+          11.6,
+          19.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.2,
+          "objectiveMinutes": 10.1,
+          "hubMinutes": 3.6,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -3880,22 +4306,76 @@
           "被遗忘的宝藏",
           "金币的芳香",
           "制作肥皂的原料",
-          "伊斯多弗的冰冷之心",
+          "伊斯多弗的冰冷之心"
+        ]
+      },
+      {
+        "step": 8,
+        "title": "银月哈瑞 → 酒馆 → 长矛岛",
+        "centerMinutes": 10.5,
+        "rangeMinutes": [
+          7.8,
+          13.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.3,
+          "objectiveMinutes": 5.5,
+          "hubMinutes": 3.7,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "赌债",
           "有内鬼！",
           "嗜酒的杰克",
           "塞吉说……",
-          "死人的债务",
+          "死人的债务"
+        ]
+      },
+      {
+        "step": 9,
+        "title": "风暴愤怒法杖 → 无赖港权力链",
+        "centerMinutes": 9.7,
+        "rangeMinutes": [
+          7.3,
+          12.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 5.1,
+          "hubMinutes": 3.2,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "风暴愤怒法杖",
           "呱呱叫的和刮东西的",
           "“火柴腿”丹",
-          "取而代之",
+          "取而代之"
+        ]
+      },
+      {
+        "step": 10,
+        "title": "慈悲修女号",
+        "centerMinutes": 9.7,
+        "rangeMinutes": [
+          7.2,
+          12.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.3,
+          "objectiveMinutes": 6.1,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "慈悲修女号上的叛变",
           "索罗夫的宝藏"
         ]
       },
       {
-        "step": 4,
+        "step": 11,
         "title": "四遗物 → 炉石新阿加曼德 → 盾牌岭",
         "centerMinutes": 15.7,
         "rangeMinutes": [
@@ -3915,24 +4395,42 @@
         ]
       },
       {
-        "step": 5,
-        "title": "新阿加曼德 → 复仇港 → 本地三线",
-        "centerMinutes": 35.1,
+        "step": 12,
+        "title": "新阿加曼德 → 复仇港开场",
+        "centerMinutes": 22.5,
         "rangeMinutes": [
-          26.3,
-          43.8
+          16.8,
+          28.1
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 5.7,
-          "objectiveMinutes": 23.2,
-          "hubMinutes": 5.6,
+          "moveMinutes": 4.1,
+          "objectiveMinutes": 15.1,
+          "hubMinutes": 2.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "新的药剂",
           "让它们吃乌鸦",
-          "地狱般的战争",
+          "地狱般的战争"
+        ]
+      },
+      {
+        "step": 13,
+        "title": "复仇港前线 → 北岸 → 回港",
+        "centerMinutes": 12.6,
+        "rangeMinutes": [
+          9.5,
+          15.8
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.6,
+          "objectiveMinutes": 8.1,
+          "hubMinutes": 2.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "战况报告",
           "强化毒素",
           "嗅出敌人",
@@ -3940,7 +4438,7 @@
         ]
       },
       {
-        "step": 6,
+        "step": 14,
         "title": "风行者舰队 → 联盟前线",
         "centerMinutes": 12.3,
         "rangeMinutes": [
@@ -3961,87 +4459,141 @@
         ]
       },
       {
-        "step": 7,
-        "title": "拜尔海姆 → 尼弗莱瓦",
-        "centerMinutes": 30.8,
+        "step": 15,
+        "title": "戈斯中士 → 拜尔海姆",
+        "centerMinutes": 19.8,
         "rangeMinutes": [
-          23.1,
-          38.4
+          14.8,
+          24.7
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 3.7,
-          "objectiveMinutes": 20.1,
-          "hubMinutes": 6.5,
+          "moveMinutes": 1.5,
+          "objectiveMinutes": 14.3,
+          "hubMinutes": 3.4,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "领略恐惧",
           "血战拜尔海姆",
-          "拜尔海姆在燃烧！",
+          "拜尔海姆在燃烧！"
+        ]
+      },
+      {
+        "step": 16,
+        "title": "林德尔 → 尼弗莱瓦",
+        "centerMinutes": 11.0,
+        "rangeMinutes": [
+          8.2,
+          13.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.1,
+          "objectiveMinutes": 5.8,
+          "hubMinutes": 3.1,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "骂阵",
           "敌人的史诗",
           "进攻尼弗莱瓦"
         ]
       },
       {
-        "step": 8,
-        "title": "新阿加曼德药剂链",
-        "centerMinutes": 36.9,
+        "step": 17,
+        "title": "新阿加曼德：量身订制 → 药剂喷雾",
+        "centerMinutes": 18.0,
         "rangeMinutes": [
-          27.7,
-          46.1
+          13.5,
+          22.5
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 5.1,
-          "objectiveMinutes": 25.9,
-          "hubMinutes": 5.3,
+          "moveMinutes": 3.3,
+          "objectiveMinutes": 10.7,
+          "hubMinutes": 3.5,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "量身订制",
           "加热搅拌",
-          "药剂喷雾",
+          "药剂喷雾"
+        ]
+      },
+      {
+        "step": 18,
+        "title": "重要零件 → 集中处理",
+        "centerMinutes": 18.9,
+        "rangeMinutes": [
+          14.1,
+          23.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.9,
+          "objectiveMinutes": 15.2,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "重要零件",
           "集中处理"
         ]
       },
       {
-        "step": 9,
+        "step": 19,
         "title": "冬蹄营地 → 东北自然区",
-        "centerMinutes": 33.1,
+        "centerMinutes": 27.2,
         "rangeMinutes": [
-          24.8,
-          41.4
+          20.4,
+          34.0
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 4.8,
-          "objectiveMinutes": 23.5,
-          "hubMinutes": 4.4,
+          "moveMinutes": 3.2,
+          "objectiveMinutes": 22.0,
+          "hubMinutes": 1.5,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "物资储备",
           "制作号角",
-          "压制元素生物",
+          "压制元素生物"
+        ]
+      },
+      {
+        "step": 20,
+        "title": "冬蹄交接 → 冰瀑",
+        "centerMinutes": 5.9,
+        "rangeMinutes": [
+          4.9,
+          7.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.5,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 2.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "模仿叫声"
         ]
       },
       {
-        "step": 10,
-        "title": "鲁莉尔蕾 → 裂木森林",
-        "centerMinutes": 34.2,
+        "step": 21,
+        "title": "鲁莉尔蕾 → 裂木 / 凋零林地",
+        "centerMinutes": 28.9,
         "rangeMinutes": [
-          25.7,
-          42.8
+          21.6,
+          36.1
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 4.7,
-          "objectiveMinutes": 24.4,
-          "hubMinutes": 4.7,
+          "moveMinutes": 2.9,
+          "objectiveMinutes": 22.9,
+          "hubMinutes": 2.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
@@ -4049,36 +4601,72 @@
           "堕落的姐妹",
           "野蛮之藤",
           "扭曲之林",
-          "暗魂守护者的种子",
+          "暗魂守护者的种子"
+        ]
+      },
+      {
+        "step": 22,
+        "title": "鲁莉尔蕾 → 凋零之叶",
+        "centerMinutes": 5.3,
+        "rangeMinutes": [
+          4.3,
+          6.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.8,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 1.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "凋零之叶"
         ]
       },
       {
-        "step": 11,
-        "title": "巨人平原：符文 / 巨人同步",
-        "centerMinutes": 23.3,
+        "step": 23,
+        "title": "巨人平原：符文 / 巨人前两段",
+        "centerMinutes": 13.4,
         "rangeMinutes": [
-          17.4,
-          29.1
+          10.0,
+          16.7
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 11.1,
-          "objectiveMinutes": 8.1,
-          "hubMinutes": 3.5,
+          "moveMinutes": 5.5,
+          "objectiveMinutes": 6.1,
+          "hubMinutes": 1.3,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
           "符文之书",
           "巨人的迁徙",
           "掌控符文",
-          "破碎石板",
+          "破碎石板"
+        ]
+      },
+      {
+        "step": 24,
+        "title": "巨人平原：命令符文 / 麦加利斯",
+        "centerMinutes": 9.9,
+        "rangeMinutes": [
+          8.1,
+          11.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 5.6,
+          "objectiveMinutes": 2.0,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "命令符文",
           "击败麦加利斯"
         ]
       },
       {
-        "step": 12,
+        "step": 25,
         "title": "斯克恩",
         "centerMinutes": 26.7,
         "rangeMinutes": [
@@ -4101,7 +4689,7 @@
         ]
       },
       {
-        "step": 13,
+        "step": 26,
         "title": "亚勒伯龙·前段",
         "centerMinutes": 15.1,
         "rangeMinutes": [
@@ -4121,7 +4709,7 @@
         ]
       },
       {
-        "step": 14,
+        "step": 27,
         "title": "亚勒伯龙·后段",
         "centerMinutes": 14.7,
         "rangeMinutes": [
@@ -4144,46 +4732,561 @@
         ]
       },
       {
-        "step": 15,
-        "title": "冬蹄 → 药剂师营地 → 先知拉瑞恩",
-        "centerMinutes": 28.2,
+        "step": 28,
+        "title": "药剂师营地 → 拉瑞恩 / 钢铁之门",
+        "centerMinutes": 20.7,
         "rangeMinutes": [
-          21.1,
-          35.2
+          15.5,
+          25.8
         ],
         "includeInTotal": true,
         "components": {
-          "moveMinutes": 8.4,
-          "objectiveMinutes": 14.6,
-          "hubMinutes": 4.7,
-          "specialMinutes": 0.5
-        },
-        "objectiveTasks": [
-          "酒里有什么？",
-          "钢铁之门的古器",
-          "净化"
-        ]
-      },
-      {
-        "step": 16,
-        "title": "乌尔芬 → 兄弟 → 巨鹰 → 头狼",
-        "centerMinutes": 15.9,
-        "rangeMinutes": [
-          12.0,
-          19.9
-        ],
-        "includeInTotal": true,
-        "components": {
-          "moveMinutes": 7.7,
-          "objectiveMinutes": 4.0,
+          "moveMinutes": 3.4,
+          "objectiveMinutes": 13.1,
           "hubMinutes": 3.7,
           "specialMinutes": 0.5
         },
         "objectiveTasks": [
+          "酒里有什么？",
+          "钢铁之门的古器"
+        ]
+      },
+      {
+        "step": 29,
+        "title": "净化 → 药剂师营地 → 拉瑞恩",
+        "centerMinutes": 7.5,
+        "rangeMinutes": [
+          6.1,
+          8.8
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 5.0,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 1.0,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
+          "净化"
+        ]
+      },
+      {
+        "step": 30,
+        "title": "乌尔芬 → 兄弟 → 巨鹰",
+        "centerMinutes": 9.5,
+        "rangeMinutes": [
+          7.8,
+          11.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 5.1,
+          "objectiveMinutes": 2.0,
+          "hubMinutes": 1.9,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
           "兄弟的背叛",
-          "巨鹰之眼",
+          "巨鹰之眼"
+        ]
+      },
+      {
+        "step": 31,
+        "title": "乌尔芬 → 头狼 → 拉瑞恩",
+        "centerMinutes": 6.4,
+        "rangeMinutes": [
+          4.8,
+          8.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.6,
+          "objectiveMinutes": 2.0,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": [
           "头狼"
         ]
+      }
+    ]
+  },
+  "sholazar": {
+    "route": "sholazar",
+    "model": "component-wall-clock-v1",
+    "hearthChain": [
+      "奈辛瓦里营地",
+      "河流之心"
+    ],
+    "centerMinutes": 266.5,
+    "rangeMinutes": [
+      213.0,
+      320.1
+    ],
+    "actualRuns": [],
+    "rows": [
+      {
+        "step": 1,
+        "title": "入图 → 奈辛瓦里初始化",
+        "centerMinutes": 3.7,
+        "rangeMinutes": [
+          3.0,
+          4.4
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.5,
+          "objectiveMinutes": 0.0,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "赫米特·奈辛瓦里哪去了？"
+        ]
+      },
+      {
+        "step": 2,
+        "title": "飞行器引擎 → 挖掘场第一圈",
+        "centerMinutes": 19.4,
+        "rangeMinutes": [
+          14.6,
+          24.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 15.8,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "需要引擎",
+          "借零件",
+          "风险投资公司的风险",
+          "不知所踪！",
+          "工程师的逃亡"
+        ]
+      },
+      {
+        "step": 3,
+        "title": "奈辛瓦里集中交接 → 开飞行点",
+        "centerMinutes": 3.0,
+        "rangeMinutes": [
+          2.5,
+          3.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.4,
+          "objectiveMinutes": 0,
+          "hubMinutes": 1.6,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 4,
+        "title": "工头斯温迪格林 → 打开狩猎线",
+        "centerMinutes": 5.5,
+        "rangeMinutes": [
+          4.5,
+          6.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.8,
+          "objectiveMinutes": 2.0,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "工头斯温迪格林",
+          "后坐力？什么后坐力？"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "初阶豹 / 犀牛 → 营地接第二批",
+        "centerMinutes": 10.2,
+        "rangeMinutes": [
+          8.4,
+          12.1
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.5,
+          "objectiveMinutes": 7.5,
+          "hubMinutes": 1.8,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "狩猎恶刃豹：成为猎手",
+          "狩猎犀牛：初试身手"
+        ]
+      },
+      {
+        "step": 6,
+        "title": "索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒",
+        "centerMinutes": 21.4,
+        "rangeMinutes": [
+          16.0,
+          26.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.1,
+          "objectiveMinutes": 18.8,
+          "hubMinutes": 1.0,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "猎人们的肉排",
+          "猎人的挑战",
+          "给索乌拉姆的祭品",
+          "狩猎鳄鱼：试炼",
+          "酿酒的材料"
+        ]
+      },
+      {
+        "step": 7,
+        "title": "炉石回营 → 酒香犹存 / 品酒",
+        "centerMinutes": 3.6,
+        "rangeMinutes": [
+          3.0,
+          4.3
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.3,
+          "objectiveMinutes": 0.9,
+          "hubMinutes": 1.9,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "酒香犹存",
+          "品酒"
+        ]
+      },
+      {
+        "step": 8,
+        "title": "诺兹隆之骨 → 杉苟追踪",
+        "centerMinutes": 5.2,
+        "rangeMinutes": [
+          4.3,
+          6.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.9,
+          "objectiveMinutes": 1.9,
+          "hubMinutes": 1.9,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "诺兹隆之骨",
+          "狩猎恶刃豹：追踪猎物"
+        ]
+      },
+      {
+        "step": 9,
+        "title": "终极犀牛 / 鳄鱼计划 → 河流之心",
+        "centerMinutes": 8.1,
+        "rangeMinutes": [
+          6.6,
+          9.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.3,
+          "objectiveMinutes": 5.2,
+          "hubMinutes": 1.1,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "狩猎犀牛：终极决战",
+          "狩猎鳄鱼：计划",
+          "品酒"
+        ]
+      },
+      {
+        "step": 10,
+        "title": "尴尬的处境 → 侦察飞行 → 匹奇",
+        "centerMinutes": 5.1,
+        "rangeMinutes": [
+          4.2,
+          6.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.5,
+          "objectiveMinutes": 2.1,
+          "hubMinutes": 1.9,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "尴尬的处境",
+          "侦察飞行",
+          "兼职猎人"
+        ]
+      },
+      {
+        "step": 11,
+        "title": "炉石奈辛瓦里 → 鳄鱼伏击",
+        "centerMinutes": 4.7,
+        "rangeMinutes": [
+          3.8,
+          5.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.1,
+          "objectiveMinutes": 1.5,
+          "hubMinutes": 1.6,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "狩猎鳄鱼：伏击"
+        ]
+      },
+      {
+        "step": 12,
+        "title": "河流之心 → 狂心岭交接",
+        "centerMinutes": 3.0,
+        "rangeMinutes": [
+          2.5,
+          3.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.4,
+          "objectiveMinutes": 0,
+          "hubMinutes": 1.6,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 13,
+        "title": "狂心岭第一圈：猩猩 → 蓝玉虫巢",
+        "centerMinutes": 14.0,
+        "rangeMinutes": [
+          11.5,
+          16.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.0,
+          "objectiveMinutes": 10.2,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "猩猩猎手的奴隶",
+          "狩猎硬皮猩猩",
+          "蓝蜂猎手的学徒",
+          "蓝色蜂后"
+        ]
+      },
+      {
+        "step": 14,
+        "title": "狂心岭第二圈：抓鸡 → 南部任务",
+        "centerMinutes": 16.5,
+        "rangeMinutes": [
+          12.4,
+          20.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.1,
+          "objectiveMinutes": 12.2,
+          "hubMinutes": 2.7,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "鸡飞狼跳！",
+          "地下的威胁",
+          "恶作剧的材料"
+        ]
+      },
+      {
+        "step": 15,
+        "title": "颠簸航行 → 雾语村 → 杉苟",
+        "centerMinutes": 15.7,
+        "rangeMinutes": [
+          11.7,
+          19.6
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.5,
+          "objectiveMinutes": 11.4,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "颠簸的航行",
+          "闪电确实两次打中同一个地方！",
+          "猎杀雾语鳄鱼人",
+          "狩猎恶刃豹：突然袭击"
+        ]
+      },
+      {
+        "step": 16,
+        "title": "炉石奈辛瓦里 → 步行回家",
+        "centerMinutes": 4.7,
+        "rangeMinutes": [
+          3.8,
+          5.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 0,
+          "hubMinutes": 2.3,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 17,
+        "title": "受伤神谕者 → 雨声树屋 → 议和",
+        "centerMinutes": 12.2,
+        "rangeMinutes": [
+          10.0,
+          14.4
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.8,
+          "objectiveMinutes": 7.8,
+          "hubMinutes": 3.2,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "幸福的误会",
+          "赶走坏蛇",
+          "神祗喜欢亮闪闪的东西",
+          "议和"
+        ]
+      },
+      {
+        "step": 18,
+        "title": "河流之心 → 雨声树屋 → 雾语村",
+        "centerMinutes": 4.8,
+        "rangeMinutes": [
+          3.9,
+          5.7
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.9,
+          "objectiveMinutes": 0,
+          "hubMinutes": 2.9,
+          "specialMinutes": 0.0
+        },
+        "objectiveTasks": []
+      },
+      {
+        "step": 19,
+        "title": "多里安 → 燃烧林地 / 矛生营地",
+        "centerMinutes": 21.1,
+        "rangeMinutes": [
+          15.9,
+          26.4
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.9,
+          "objectiveMinutes": 17.0,
+          "hubMinutes": 2.7,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "磨尖你的爪子",
+          "诱龙出巢",
+          "被抢走的雾语宝物",
+          "被迫出手"
+        ]
+      },
+      {
+        "step": 20,
+        "title": "猛犸 → 母龙 / 大鹏 → 燃烧的唾液",
+        "centerMinutes": 35.0,
+        "rangeMinutes": [
+          29.8,
+          40.2
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.3,
+          "objectiveMinutes": 15.1,
+          "hubMinutes": 3.4,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "驯服猛犸象",
+          "母龙之怒",
+          "我的宠物大鹏",
+          "猎取材料",
+          "燃烧的唾液"
+        ]
+      },
+      {
+        "step": 21,
+        "title": "回家喽 → 苔行村 → 英雄的负担",
+        "centerMinutes": 31.4,
+        "rangeMinutes": [
+          25.7,
+          37.0
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 2.2,
+          "objectiveMinutes": 23.5,
+          "hubMinutes": 5.2,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "苔行村的救星",
+          "苔行祭坛的源血碎片",
+          "英雄的负担"
+        ]
+      },
+      {
+        "step": 22,
+        "title": "古旧石箱 → 神谕者交付",
+        "centerMinutes": 14.3,
+        "rangeMinutes": [
+          11.7,
+          16.9
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 1.4,
+          "objectiveMinutes": 10.0,
+          "hubMinutes": 2.4,
+          "specialMinutes": 0.5
+        },
+        "objectiveTasks": [
+          "古旧的石箱"
+        ]
+      },
+      {
+        "step": 23,
+        "title": "河流之心 → 龙眠神殿",
+        "centerMinutes": 3.9,
+        "rangeMinutes": [
+          3.2,
+          4.5
+        ],
+        "includeInTotal": true,
+        "components": {
+          "moveMinutes": 0.3,
+          "objectiveMinutes": 0,
+          "hubMinutes": 0.0,
+          "specialMinutes": 3.5
+        },
+        "objectiveTasks": []
       }
     ]
   }

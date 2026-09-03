@@ -7,7 +7,10 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md`](../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md)，记录冰冠首组闭合、嚎风正式首版、全诺森德日常时间样本、地狱火下一批速度版及其448450 XP经验风险基线；下一现场固定为索拉查首跑。
+- 最新阶段NEAT：[`../archive/neat/2026-09-02-sholazar-closure-zuldrak-80-optimization-neat.md`](../archive/neat/2026-09-02-sholazar-closure-zuldrak-80-optimization-neat.md)，记录索拉查首组收尾、神谕者断链机制，以及祖达克80级任务池差集、105/105→103点局部交通优化、首段37分钟实跑和当前《风暴将至》恢复点。
+- 上一阶段NEAT：[`../archive/neat/2026-08-31-icecrown-journey-closure-sholazar-player-steps-neat.md`](../archive/neat/2026-08-31-icecrown-journey-closure-sholazar-player-steps-neat.md)，记录冰冠最新Journey闭环后的164/164、54步/269点正式重排、主动跳过高难链状态，以及索拉查从8个超长步骤试拆为23个4—10行玩家步骤和新步骤19恢复点。
+- 再上一阶段NEAT：[`../archive/neat/2026-08-30-icecrown-missing-chain-reorder-v1-neat.md`](../archive/neat/2026-08-30-icecrown-missing-chain-reorder-v1-neat.md)，记录银色北伐军漏链根因、13227《审判日降临！》真实接取节点、补链五开实测、163项/41步冰冠重排v1发布与当时的Journey校准入口。
+- 更早阶段NEAT：[`../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md`](../archive/neat/2026-08-28-icecrown-closure-howling-hellfire-speed-neat.md)，记录当时冰冠61项阶段闭合判断、嚎风正式首版、全诺森德日常时间样本、地狱火下一批速度版及其448450 XP经验风险基线；其中冰冠状态已被后续NEAT覆盖。
 - 上一阶段冰冠实跑/治理NEAT：[`../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md`](../archive/neat/2026-08-26-icecrown-live-governance-correction-neat.md)。
 - 上一阶段冰冠首版/规则治理NEAT：[`../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md`](../archive/neat/2026-08-25-icecrown-formal-route-rules-governance-neat.md)。
 - 上一阶段旧Route Atlas封口NEAT：[`../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md`](../archive/neat/2026-08-24-legacy-route-atlas-closure-neat.md)。

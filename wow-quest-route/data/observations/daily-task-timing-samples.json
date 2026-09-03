@@ -3,10 +3,10 @@
   "purpose": "保存首组诺森德实跑中的日常任务接取→交付原始墙钟样本，供全部地图首跑完成后单独筛选每日值得重复做的日常。本文件不参与一次性清图Route Atlas排序。",
   "source": {
     "journey": "data/journey/current-paladin.json",
-    "source_sha256": "b1e0120900820f5a90814630d7af3cca6f2b0c35c0ee64397949f86cf30e3ec3",
-    "journey_latest_timestamp": 1787767864,
+    "source_sha256": "6886715a1eb1f8193224050338257cf0e8d6e93d5f264c69e0cdfa9d915f1b95",
+    "journey_latest_timestamp": 1788455389,
     "timezone": "+08:00",
-    "generated_at": "2026-08-28T03:39:17+08:00"
+    "generated_at": "2026-09-04T02:05:25+08:00"
   },
   "timing_policy": {
     "metric": "journey_accept_to_complete_wall_interval_minutes",
@@ -15,14 +15,37 @@
     "route_policy": "一次性清图Route Atlas中每个日常最多保留首轮；Journey里的跨日/重复接取只增加这里的时间样本，不生成第二轮路线动作。"
   },
   "summary": {
-    "observed_daily_task_count": 21,
-    "completed_sample_count": 23,
+    "observed_daily_task_count": 44,
+    "completed_sample_count": 81,
     "repeat_sample_task_ids": [
       11940,
       12372,
-      12995
+      12813,
+      12815,
+      12995,
+      13069,
+      13071,
+      13261,
+      13276,
+      13281,
+      13301,
+      13302,
+      13310,
+      13330,
+      13331,
+      13353,
+      13357,
+      13365,
+      13406,
+      13677
     ],
     "accepted_only_task_ids": [
+      12838,
+      13276,
+      13281,
+      13353,
+      13365,
+      13368,
       13674
     ]
   },
@@ -305,11 +328,18 @@
             "complete_at": "2026-08-26T23:13:58+08:00",
             "elapsed_minutes": 132.35,
             "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T19:07:13+08:00",
+            "complete_at": "2026-08-30T19:14:24+08:00",
+            "elapsed_minutes": 7.18,
+            "cross_day": false
           }
         ],
-        "sample_count": 1,
-        "best_observed_interval_minutes": 132.35,
-        "best_same_day_observed_interval_minutes": 132.35
+        "sample_count": 2,
+        "best_observed_interval_minutes": 7.18,
+        "best_same_day_observed_interval_minutes": 7.18
       },
       {
         "quest_id": 12815,
@@ -326,11 +356,25 @@
             "complete_at": "2026-08-27T00:10:53+08:00",
             "elapsed_minutes": 49.55,
             "cross_day": true
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T06:26:06+08:00",
+            "complete_at": "2026-08-29T06:32:33+08:00",
+            "elapsed_minutes": 6.45,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-30T19:06:53+08:00",
+            "complete_at": "2026-08-30T19:14:09+08:00",
+            "elapsed_minutes": 7.27,
+            "cross_day": false
           }
         ],
-        "sample_count": 1,
-        "best_observed_interval_minutes": 49.55,
-        "best_same_day_observed_interval_minutes": null
+        "sample_count": 3,
+        "best_observed_interval_minutes": 6.45,
+        "best_same_day_observed_interval_minutes": 6.45
       },
       {
         "quest_id": 12838,
@@ -351,7 +395,11 @@
         ],
         "sample_count": 1,
         "best_observed_interval_minutes": 133.12,
-        "best_same_day_observed_interval_minutes": 133.12
+        "best_same_day_observed_interval_minutes": 133.12,
+        "open_accept": {
+          "accept_at": "2026-08-29T06:32:09+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
       },
       {
         "quest_id": 12995,
@@ -375,9 +423,37 @@
             "complete_at": "2026-08-27T00:51:00+08:00",
             "elapsed_minutes": 8.63,
             "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-29T06:12:08+08:00",
+            "complete_at": "2026-08-29T06:38:04+08:00",
+            "elapsed_minutes": 25.93,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-08-29T09:48:20+08:00",
+            "complete_at": "2026-08-29T10:10:17+08:00",
+            "elapsed_minutes": 21.95,
+            "cross_day": false
+          },
+          {
+            "occurrence": 5,
+            "accept_at": "2026-08-30T18:56:33+08:00",
+            "complete_at": "2026-08-30T19:15:46+08:00",
+            "elapsed_minutes": 19.22,
+            "cross_day": false
+          },
+          {
+            "occurrence": 6,
+            "accept_at": "2026-09-03T00:31:19+08:00",
+            "complete_at": "2026-09-03T00:43:09+08:00",
+            "elapsed_minutes": 11.83,
+            "cross_day": false
           }
         ],
-        "sample_count": 2,
+        "sample_count": 6,
         "best_observed_interval_minutes": 8.63,
         "best_same_day_observed_interval_minutes": 8.63
       },
@@ -396,11 +472,39 @@
             "complete_at": "2026-08-27T00:42:02+08:00",
             "elapsed_minutes": 1208.72,
             "cross_day": true
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T06:11:57+08:00",
+            "complete_at": "2026-08-29T06:37:49+08:00",
+            "elapsed_minutes": 25.87,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-29T09:47:28+08:00",
+            "complete_at": "2026-08-29T10:10:07+08:00",
+            "elapsed_minutes": 22.65,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-08-30T18:56:29+08:00",
+            "complete_at": "2026-08-30T19:15:28+08:00",
+            "elapsed_minutes": 18.98,
+            "cross_day": false
+          },
+          {
+            "occurrence": 5,
+            "accept_at": "2026-09-03T00:31:46+08:00",
+            "complete_at": "2026-09-03T00:43:19+08:00",
+            "elapsed_minutes": 11.55,
+            "cross_day": false
           }
         ],
-        "sample_count": 1,
-        "best_observed_interval_minutes": 1208.72,
-        "best_same_day_observed_interval_minutes": null
+        "sample_count": 5,
+        "best_observed_interval_minutes": 11.55,
+        "best_same_day_observed_interval_minutes": 11.55
       },
       {
         "quest_id": 13071,
@@ -417,11 +521,540 @@
             "complete_at": "2026-08-27T00:37:57+08:00",
             "elapsed_minutes": 1259.87,
             "cross_day": true
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T06:11:46+08:00",
+            "complete_at": "2026-08-29T06:37:40+08:00",
+            "elapsed_minutes": 25.9,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-29T09:48:02+08:00",
+            "complete_at": "2026-08-29T10:10:13+08:00",
+            "elapsed_minutes": 22.18,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-08-30T18:56:24+08:00",
+            "complete_at": "2026-08-30T19:15:38+08:00",
+            "elapsed_minutes": 19.23,
+            "cross_day": false
+          },
+          {
+            "occurrence": 5,
+            "accept_at": "2026-09-03T00:31:21+08:00",
+            "complete_at": "2026-09-03T00:43:00+08:00",
+            "elapsed_minutes": 11.65,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 5,
+        "best_observed_interval_minutes": 11.65,
+        "best_same_day_observed_interval_minutes": 11.65
+      },
+      {
+        "quest_id": 13234,
+        "name": "血的代价！",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 13261,
+        "name": "爆炸油",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T05:15:32+08:00",
+            "complete_at": "2026-08-29T06:59:27+08:00",
+            "elapsed_minutes": 103.92,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T23:34:42+08:00",
+            "complete_at": "2026-08-30T01:34:44+08:00",
+            "elapsed_minutes": 120.03,
+            "cross_day": true
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-09-02T23:55:14+08:00",
+            "complete_at": "2026-09-03T00:45:56+08:00",
+            "elapsed_minutes": 50.7,
+            "cross_day": true
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-09-03T20:43:32+08:00",
+            "complete_at": "2026-09-03T21:41:21+08:00",
+            "elapsed_minutes": 57.82,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 4,
+        "best_observed_interval_minutes": 50.7,
+        "best_same_day_observed_interval_minutes": 57.82
+      },
+      {
+        "quest_id": 13276,
+        "name": "你的憎恶伙伴",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T07:01:49+08:00",
+            "complete_at": "2026-08-29T08:12:17+08:00",
+            "elapsed_minutes": 70.47,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T19:21:47+08:00",
+            "complete_at": "2026-08-30T20:50:06+08:00",
+            "elapsed_minutes": 88.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 70.47,
+        "best_same_day_observed_interval_minutes": 70.47,
+        "open_accept": {
+          "accept_at": "2026-09-03T20:44:20+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13281,
+        "name": "中和瘟疫",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T08:12:20+08:00",
+            "complete_at": "2026-08-29T10:54:25+08:00",
+            "elapsed_minutes": 162.08,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T19:21:47+08:00",
+            "complete_at": "2026-08-30T20:50:06+08:00",
+            "elapsed_minutes": 88.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 88.32,
+        "best_same_day_observed_interval_minutes": 88.32,
+        "open_accept": {
+          "accept_at": "2026-09-03T20:44:20+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13283,
+        "name": "占山为王",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-28T03:57:06+08:00",
+            "complete_at": "2026-08-28T04:18:44+08:00",
+            "elapsed_minutes": 21.63,
+            "cross_day": false
           }
         ],
         "sample_count": 1,
-        "best_observed_interval_minutes": 1259.87,
-        "best_same_day_observed_interval_minutes": null
+        "best_observed_interval_minutes": 21.63,
+        "best_same_day_observed_interval_minutes": 21.63
+      },
+      {
+        "quest_id": 13301,
+        "name": "地面突袭",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-28T03:46:27+08:00",
+            "complete_at": "2026-08-28T03:53:06+08:00",
+            "elapsed_minutes": 6.65,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T05:18:58+08:00",
+            "complete_at": "2026-08-29T05:29:19+08:00",
+            "elapsed_minutes": 10.35,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-30T19:56:50+08:00",
+            "complete_at": "2026-08-30T20:02:36+08:00",
+            "elapsed_minutes": 5.77,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-09-03T00:07:41+08:00",
+            "complete_at": "2026-09-03T00:20:55+08:00",
+            "elapsed_minutes": 13.23,
+            "cross_day": false
+          },
+          {
+            "occurrence": 5,
+            "accept_at": "2026-09-03T21:04:24+08:00",
+            "complete_at": "2026-09-03T21:40:27+08:00",
+            "elapsed_minutes": 36.05,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 5,
+        "best_observed_interval_minutes": 5.77,
+        "best_same_day_observed_interval_minutes": 5.77
+      },
+      {
+        "quest_id": 13302,
+        "name": "萨隆邪铁的奴隶",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-28T03:43:31+08:00",
+            "complete_at": "2026-08-28T04:29:23+08:00",
+            "elapsed_minutes": 45.87,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T05:16:16+08:00",
+            "complete_at": "2026-08-29T07:01:15+08:00",
+            "elapsed_minutes": 104.98,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-09-03T20:41:03+08:00",
+            "complete_at": "2026-09-03T21:41:58+08:00",
+            "elapsed_minutes": 60.92,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 3,
+        "best_observed_interval_minutes": 45.87,
+        "best_same_day_observed_interval_minutes": 45.87
+      },
+      {
+        "quest_id": 13310,
+        "name": "空中突袭",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-28T03:46:00+08:00",
+            "complete_at": "2026-08-28T04:30:39+08:00",
+            "elapsed_minutes": 44.65,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T05:18:41+08:00",
+            "complete_at": "2026-08-29T05:29:19+08:00",
+            "elapsed_minutes": 10.63,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-30T19:17:55+08:00",
+            "complete_at": "2026-08-30T19:56:39+08:00",
+            "elapsed_minutes": 38.73,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-09-03T00:20:56+08:00",
+            "complete_at": "2026-09-03T00:44:52+08:00",
+            "elapsed_minutes": 23.93,
+            "cross_day": false
+          },
+          {
+            "occurrence": 5,
+            "accept_at": "2026-09-03T21:04:36+08:00",
+            "complete_at": "2026-09-03T21:40:27+08:00",
+            "elapsed_minutes": 35.85,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 5,
+        "best_observed_interval_minutes": 10.63,
+        "best_same_day_observed_interval_minutes": 10.63
+      },
+      {
+        "quest_id": 13330,
+        "name": "伊米亚之血",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-28T03:44:45+08:00",
+            "complete_at": "2026-08-28T04:28:31+08:00",
+            "elapsed_minutes": 43.77,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-29T05:15:56+08:00",
+            "complete_at": "2026-08-29T07:00:55+08:00",
+            "elapsed_minutes": 104.98,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-09-02T23:56:07+08:00",
+            "complete_at": "2026-09-03T00:46:23+08:00",
+            "elapsed_minutes": 50.27,
+            "cross_day": true
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-09-03T20:43:17+08:00",
+            "complete_at": "2026-09-03T21:41:36+08:00",
+            "elapsed_minutes": 58.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 4,
+        "best_observed_interval_minutes": 43.77,
+        "best_same_day_observed_interval_minutes": 43.77
+      },
+      {
+        "quest_id": 13331,
+        "name": "盲目的联盟",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-30T19:22:06+08:00",
+            "complete_at": "2026-08-30T20:50:46+08:00",
+            "elapsed_minutes": 88.67,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-09-02T23:56:54+08:00",
+            "complete_at": "2026-09-03T00:46:49+08:00",
+            "elapsed_minutes": 49.92,
+            "cross_day": true
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-09-03T20:44:35+08:00",
+            "complete_at": "2026-09-03T21:42:21+08:00",
+            "elapsed_minutes": 57.77,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 3,
+        "best_observed_interval_minutes": 49.92,
+        "best_same_day_observed_interval_minutes": 57.77
+      },
+      {
+        "quest_id": 13353,
+        "name": "从天而“降”",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T10:54:25+08:00",
+            "complete_at": "2026-08-29T23:33:06+08:00",
+            "elapsed_minutes": 758.68,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T19:21:46+08:00",
+            "complete_at": "2026-08-30T20:50:04+08:00",
+            "elapsed_minutes": 88.3,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 88.3,
+        "best_same_day_observed_interval_minutes": 88.3,
+        "open_accept": {
+          "accept_at": "2026-09-03T20:44:19+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13357,
+        "name": "重新考验",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T23:34:42+08:00",
+            "complete_at": "2026-08-30T01:34:44+08:00",
+            "elapsed_minutes": 120.03,
+            "cross_day": true
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-09-02T23:55:30+08:00",
+            "complete_at": "2026-09-03T00:45:57+08:00",
+            "elapsed_minutes": 50.45,
+            "cross_day": true
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-09-03T20:43:33+08:00",
+            "complete_at": "2026-09-03T21:41:22+08:00",
+            "elapsed_minutes": 57.82,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 3,
+        "best_observed_interval_minutes": 50.45,
+        "best_same_day_observed_interval_minutes": 57.82
+      },
+      {
+        "quest_id": 13365,
+        "name": "活动窃听器",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T23:33:24+08:00",
+            "complete_at": "2026-08-30T01:35:22+08:00",
+            "elapsed_minutes": 121.97,
+            "cross_day": true
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T19:21:46+08:00",
+            "complete_at": "2026-08-30T20:50:05+08:00",
+            "elapsed_minutes": 88.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 2,
+        "best_observed_interval_minutes": 88.32,
+        "best_same_day_observed_interval_minutes": 88.32,
+        "open_accept": {
+          "accept_at": "2026-09-03T20:44:19+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13368,
+        "name": "片刻不得安宁",
+        "definition_source": "northrend_task_universe",
+        "route_status": "current_route_first_run_once",
+        "current_route_keys": [
+          "icecrown"
+        ],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-30T19:21:46+08:00",
+            "complete_at": "2026-08-30T20:50:05+08:00",
+            "elapsed_minutes": 88.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 1,
+        "best_observed_interval_minutes": 88.32,
+        "best_same_day_observed_interval_minutes": 88.32,
+        "open_accept": {
+          "accept_at": "2026-09-03T20:44:19+08:00",
+          "status": "accepted_only_no_complete_sample"
+        }
+      },
+      {
+        "quest_id": 13406,
+        "name": "短程行动：轰炸场",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [
+          {
+            "occurrence": 1,
+            "accept_at": "2026-08-29T06:48:54+08:00",
+            "complete_at": "2026-08-29T06:56:21+08:00",
+            "elapsed_minutes": 7.45,
+            "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-30T00:46:26+08:00",
+            "complete_at": "2026-08-30T00:53:08+08:00",
+            "elapsed_minutes": 6.7,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-30T20:39:41+08:00",
+            "complete_at": "2026-08-30T20:49:00+08:00",
+            "elapsed_minutes": 9.32,
+            "cross_day": false
+          }
+        ],
+        "sample_count": 3,
+        "best_observed_interval_minutes": 6.7,
+        "best_same_day_observed_interval_minutes": 6.7
       },
       {
         "quest_id": 13674,
@@ -453,11 +1086,122 @@
             "complete_at": "2026-08-25T23:56:34+08:00",
             "elapsed_minutes": 8.22,
             "cross_day": false
+          },
+          {
+            "occurrence": 2,
+            "accept_at": "2026-08-28T03:29:53+08:00",
+            "complete_at": "2026-08-28T04:26:58+08:00",
+            "elapsed_minutes": 57.08,
+            "cross_day": false
+          },
+          {
+            "occurrence": 3,
+            "accept_at": "2026-08-29T07:06:37+08:00",
+            "complete_at": "2026-08-29T08:09:33+08:00",
+            "elapsed_minutes": 62.93,
+            "cross_day": false
+          },
+          {
+            "occurrence": 4,
+            "accept_at": "2026-09-02T23:39:43+08:00",
+            "complete_at": "2026-09-02T23:59:13+08:00",
+            "elapsed_minutes": 19.5,
+            "cross_day": false
           }
         ],
-        "sample_count": 1,
+        "sample_count": 4,
         "best_observed_interval_minutes": 8.22,
         "best_same_day_observed_interval_minutes": 8.22
+      }
+    ],
+    "祖达克": [
+      {
+        "quest_id": 12501,
+        "name": "巡逻员",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12502,
+        "name": "巡逻员：战旗飘扬",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12519,
+        "name": "巡逻员：你想要勋章？",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12541,
+        "name": "巡逻员：炼金师的帮手",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12564,
+        "name": "巡逻员：止痛药",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12585,
+        "name": "巡逻员：温暖的篝火",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12588,
+        "name": "巡逻员：挖挖看？",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
+      },
+      {
+        "quest_id": 12594,
+        "name": "巡逻员：清理场地",
+        "definition_source": "northrend_task_universe",
+        "route_status": "observed_not_in_current_route",
+        "current_route_keys": [],
+        "samples": [],
+        "sample_count": 0,
+        "best_observed_interval_minutes": null,
+        "best_same_day_observed_interval_minutes": null
       }
     ],
     "灰熊丘陵": [

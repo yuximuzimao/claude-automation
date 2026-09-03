@@ -8,8 +8,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ROUTE = ROOT / "data/route-atlas/icecrown-route-structured-candidate.json"
 COVERAGE = ROOT / "data/route-atlas/icecrown-route-structured-coverage.json"
+FOUNDATION = ROOT / "data/route-atlas/icecrown-task-foundation.json"
 OUT = ROOT / "data/route-atlas/icecrown-structured-candidate-audit.json"
 
+ROUTE_STATUSES = {
+    "include_candidate",
+    "include_conditional_route_state",
+    "include_first_run_repeatable_or_calendar",
+}
+CONDITIONAL_TRIGGER_ACCEPT_EXEMPT = {12839}  # 《元帅的计划》由箱子信件条件触发，不伪造必然接取动作。
+TASK_ACTION_GROUP = re.compile(r"(接|做|交)((?:《[^》]+》[、，, ]*)+)")
 EXTERNAL_PLACES = ("无拘林地", "杉达拉废墟", "月光林地", "雷姆洛斯神殿", "龙眠神殿", "红玉巨龙圣地", "沙塔斯", "达拉然")
 SAME_ANCHOR_PREFIXES = (
     "做《", "↳", "五号", "先", "每", "离开条件", "单号", "使用", "接受", "接《", "交《",
@@ -26,6 +34,13 @@ SAME_ANCHOR_EXCEPTIONS = {
 def main() -> None:
     route = json.loads(ROUTE.read_text(encoding="utf-8"))
     coverage = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    foundation = json.loads(FOUNDATION.read_text(encoding="utf-8"))
+    formal_tasks = {
+        int(task["quest_id"]): task
+        for task in foundation.get("tasks", [])
+        if task.get("scope_status") in ROUTE_STATUSES
+    }
+    formal_by_name = {str(task.get("name")): qid for qid, task in formal_tasks.items()}
     hard: list[dict] = []
     classified: list[dict] = []
 
@@ -78,13 +93,32 @@ def main() -> None:
 
     action_text = "\n".join(str(point[3]) for point in points)
 
+    # Cleaning rich planning prose must never delete a real task action. Audit the final player
+    # skeleton itself: objective-bearing quests require 做, every formal quest requires 交, and
+    # ordinary quests require 接. Conditional item-triggered quests are explicitly exempted.
+    seen_actions: dict[int, set[str]] = {qid: set() for qid in formal_tasks}
+    for verb, group_text in TASK_ACTION_GROUP.findall(action_text):
+        for task_name in re.findall(r"《([^》]+)》", group_text):
+            qid = formal_by_name.get(task_name)
+            if qid is not None:
+                seen_actions[qid].add(verb)
+    for qid, task in formal_tasks.items():
+        seen = seen_actions[qid]
+        name = str(task.get("name") or qid)
+        if task.get("objectives") and "做" not in seen:
+            hard.append({"type": "task_action_missing_do", "quest_id": qid, "name": name, "seen": sorted(seen)})
+        if "交" not in seen:
+            hard.append({"type": "task_action_missing_turnin", "quest_id": qid, "name": name, "seen": sorted(seen)})
+        if qid not in CONDITIONAL_TRIGGER_ACCEPT_EXEMPT and "接" not in seen:
+            hard.append({"type": "task_action_missing_accept", "quest_id": qid, "name": name, "seen": sorted(seen)})
+
     expected_system_actions = {
         "开飞行点：银色比武场",
         "开飞行点：银色前线基地",
-        "开飞行点：北伐军之峰（五号分别）",
-        "开飞行点：暗影拱顶（五号分别）",
+        "开飞行点：北伐军之峰",
+        "开飞行点：暗影拱顶",
         "炉石绑定：暗影拱顶",
-        "开飞行点：死亡高地（五号分别）",
+        "开飞行点：死亡高地",
     }
     actual_system_actions = {
         line for line in action_text.splitlines()

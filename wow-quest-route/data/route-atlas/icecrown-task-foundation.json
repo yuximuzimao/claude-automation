@@ -8,9 +8,10 @@
   "current_level": 80,
   "source": null,
   "assigned_task_count": 279,
-  "cross_zone_chain_bridge_task_count": 1,
+  "cross_zone_chain_bridge_task_count": 2,
   "cross_zone_chain_bridge_ids": [
-    13078
+    13078,
+    13343
   ],
   "touching_task_count": 222,
   "touch_only_ids": [
@@ -25,11 +26,11 @@
     "exclude_manual_non_executable": 22,
     "exclude_route_economics": 2,
     "exclude_unavailable_or_policy": 82,
-    "include_candidate": 152,
+    "include_candidate": 153,
     "include_first_run_repeatable_or_calendar": 11,
     "knowledge_external_acquisition": 9
   },
-  "route_candidate_count": 163,
+  "route_candidate_count": 164,
   "route_candidate_ids": [
     12806,
     12807,
@@ -176,6 +177,7 @@
     13329,
     13330,
     13340,
+    13343,
     13348,
     13349,
     13351,
@@ -195,8 +197,8 @@
     13373,
     13379
   ],
-  "level_80_xp_bonus_money_candidate_total_copper": 19339500,
-  "level_80_xp_bonus_money_candidate_total_gold_decimal": 1933.95,
+  "level_80_xp_bonus_money_candidate_total_copper": 19504800,
+  "level_80_xp_bonus_money_candidate_total_gold_decimal": 1950.48,
   "direct_money_note": "Quest direct-money reward is not yet globally materialized; do not use this subtotal as final Icecrown gold.",
   "dependency_hard_gap_count": 0,
   "dependency_hard_gaps": [],
@@ -13334,13 +13336,13 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 7.0,
-        "basis": "manual_pre_route:ruby_sanctum_guardian_fire_then_dahlia_tear_spawn_fivebox_same_spawn_loot_reuse_unresolved",
+        "basis": "manual_pre_route:ruby_sanctum_guardian_fire_then_dahlia_tear_spawn_personal_pickup_fivebox_confirmed",
         "range_minutes": [
           2.0,
           15.0
         ]
       },
-      "scope_origin": "cross_zone_chain_bridge",
+      "scope_origin": "cross_zone_route",
       "scope_bridge_reason": "required_dragonblight_bridge_between_icecrown_13077_and_13079",
       "objective_review_resolution": "",
       "manual_spatial_resolution": "",
@@ -47238,7 +47240,7 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 4.0,
-        "basis": "manual_pre_route:three_fixed_corp_rethar_shards_split_across_two_battlement_levels_fivebox_pickup_unresolved",
+        "basis": "manual_pre_route:three_fixed_corp_rethar_shards_split_across_two_battlement_levels_personal_interaction_fivebox_confirmed",
         "range_minutes": [
           2.5,
           7.0
@@ -50626,6 +50628,243 @@
         "xp_bonus_money_gold_decimal": 13.23,
         "xp_bonus_money_display": "13g 23s 00c",
         "equipment_reward_count": 5,
+        "other_reward_item_count": 0,
+        "direct_money_copper": 0,
+        "direct_money_gold_decimal": 0.0,
+        "direct_money_status": "not_yet_globally_audited",
+        "direct_money_basis": null
+      }
+    },
+    {
+      "quest_id": 13343,
+      "name": "永恒之龙的秘密，再来一次",
+      "english_name": "Mystery of the Infinite, Redux",
+      "assigned_zone_id": 65,
+      "assigned_zone_name": "龙骨荒野",
+      "touching_northrend_zone_ids": [
+        65
+      ],
+      "required_level": 80,
+      "quest_level": 80,
+      "required_max_level": null,
+      "required_races": 0,
+      "required_classes": null,
+      "required_skill": null,
+      "required_min_rep": null,
+      "required_max_rep": null,
+      "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
+      "required_specialization": null,
+      "required_ranks": null,
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "quest_flags": 130,
+      "special_flags": 2,
+      "race_allowed": true,
+      "class_allowed": true,
+      "npc_faction_allowed": true,
+      "faction_reasons": [],
+      "is_repeatable": false,
+      "is_daily": false,
+      "is_weekly": false,
+      "is_monthly": false,
+      "first_run_policy": "one_time",
+      "is_deprecated_or_system": false,
+      "is_dungeon": false,
+      "is_raid_flagged": false,
+      "pvp": {
+        "is_pvp": false,
+        "mode": "not_pvp",
+        "allowed_by_policy": true,
+        "evidence": []
+      },
+      "objective_text_zh": "龙眠神殿顶层的克罗米要你再次返回青铜巨龙圣地。 /  / 进入圣地后，将永恒沙漏放在地上，和过去的你一起保护沙漏，令它免遭永恒之龙的破坏。",
+      "objective_text_en": "Chromie, at the top of Wyrmrest Temple, has asked you to travel once more to the Bronze Dragonshrine. /  / Once inside, place the Hourglass of Eternity on the ground and help your Past Self to protect it from the forces of the Infinite Dragonflight.",
+      "task_class": "single_named_kill",
+      "task_flags": [
+        "escort_or_defense_text",
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "entity_ids": [
+            32327
+          ],
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 32327,
+              "name": "永恒沙漏",
+              "min_level": 80,
+              "max_level": 80,
+              "min_health": 12600,
+              "max_health": 12600,
+              "rank": 0,
+              "spawn_count": 0,
+              "zones": [],
+              "representative_by_zone": {}
+            }
+          ],
+          "count_confidence": "implicit_single",
+          "fivebox_mode": "kill_progress_shared_expected",
+          "mechanic": "single_named_or_rare_kill",
+          "difficulty_flags": []
+        }
+      ],
+      "extra_objectives": [],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27856,
+          "name": "克罗米",
+          "min_level": 80,
+          "max_level": 80,
+          "min_health": 53420,
+          "max_health": 53420,
+          "rank": 1,
+          "spawn_count": 1,
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 60.0,
+              "y": 54.51,
+              "spawn_count": 1,
+              "min_x": 60.0,
+              "max_x": 60.0,
+              "min_y": 54.51,
+              "max_y": 54.51
+            }
+          }
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27856,
+          "name": "克罗米",
+          "min_level": 80,
+          "max_level": 80,
+          "min_health": 53420,
+          "max_health": 53420,
+          "rank": 1,
+          "spawn_count": 1,
+          "zones": [
+            65
+          ],
+          "representative_by_zone": {
+            "65": {
+              "x": 60.0,
+              "y": 54.51,
+              "spawn_count": 1,
+              "min_x": 60.0,
+              "max_x": 60.0,
+              "min_y": 54.51,
+              "max_y": 54.51
+            }
+          }
+        }
+      ],
+      "start_zones": [
+        65
+      ],
+      "objective_zones": [],
+      "extra_objective_zones": [],
+      "turnin_zones": [
+        65
+      ],
+      "all_route_zones": [
+        65
+      ],
+      "pre_any": [
+        12470
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "exclusive_to": [],
+      "breadcrumb_for": null,
+      "breadcrumbs": [],
+      "xp": {
+        "has_xp": true,
+        "xp_db_level": 80,
+        "xp_db_base": 27550,
+        "server_leveling_multiplier": 2.0,
+        "server_xp_at_earliest_route_level": 55100,
+        "max_level_bonus_money": {
+          "level": 80,
+          "xp_at_level_80_base": 27550,
+          "bonus_money_from_xp_copper": 165300,
+          "bonus_money_from_xp_gold_decimal": 16.53,
+          "display": "16g 53s 00c",
+          "no_money_from_xp": false,
+          "rate": "6 copper per base XP at level 80",
+          "server_leveling_xp_multiplier_applied": false
+        }
+      },
+      "rewards": {
+        "equipment_rewards": [
+          {
+            "item_id": 38763,
+            "name": "Futuresight Rune",
+            "item_class": 4,
+            "item_subclass": 0,
+            "item_level": 174,
+            "required_level": 0
+          },
+          {
+            "item_id": 38764,
+            "name": "Rune of Finite Variation",
+            "item_class": 4,
+            "item_subclass": 0,
+            "item_level": 174,
+            "required_level": 0
+          },
+          {
+            "item_id": 38765,
+            "name": "Rune of Infinite Power",
+            "item_class": 4,
+            "item_subclass": 0,
+            "item_level": 174,
+            "required_level": 0
+          }
+        ],
+        "other_reward_items": [],
+        "direct_money_status": "not_yet_globally_audited"
+      },
+      "route_mechanism_note": null,
+      "eligibility": {
+        "status": "eligible_first_run",
+        "reasons": []
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      },
+      "scope_origin": "cross_zone_route",
+      "scope_bridge_reason": "level_80_dragonblight_revisit_fits_existing_icecrown_wyrmrest_crossmap_window",
+      "objective_review_resolution": "",
+      "manual_spatial_resolution": "",
+      "fivebox_resolved": "",
+      "manual_evidence_note": "",
+      "scope_status": "include_candidate",
+      "scope_reasons": [
+        "level_80_horde_paladin_outdoor_first_run"
+      ],
+      "level_80_economy": {
+        "xp_bonus_money_copper": 165300,
+        "xp_bonus_money_gold_decimal": 16.53,
+        "xp_bonus_money_display": "16g 53s 00c",
+        "equipment_reward_count": 3,
         "other_reward_item_count": 0,
         "direct_money_copper": 0,
         "direct_money_gold_decimal": 0.0,
@@ -55088,7 +55327,7 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 15.0,
-        "basis": "manual_pre_route:tirion_gambit_hood_entry_full_cathedral_script_escape_portal_fivebox_event_credit_unresolved",
+        "basis": "manual_pre_route:tirion_gambit_all_five_hooded_then_single_interaction_group_shared_confirmed",
         "range_minutes": [
           7.0,
           35.0

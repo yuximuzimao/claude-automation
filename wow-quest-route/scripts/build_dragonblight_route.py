@@ -12,10 +12,12 @@ ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "data/route-atlas/dragonblight-task-foundation.json"
 WORKBENCH = ROOT / "data/route-atlas/workbench-routes.json"
 PLAYER_STEP_GROUPS = ROOT / "data/route-atlas/dragonblight-player-step-groups.json"
+TIMING_ESTIMATE = ROOT / "data/route-atlas/dragonblight-timing-estimate.json"
 COVERAGE_OUT = ROOT / "data/route-atlas/dragonblight-route-coverage.json"
 AUDIT_OUT = ROOT / "docs/archive/analysis/2026-08-16-dragonblight-route-insertion-audit.md"
 
 FOUNDATION_DATA = json.loads(FOUNDATION.read_text(encoding="utf-8"))
+TIMING_DATA = json.loads(TIMING_ESTIMATE.read_text(encoding="utf-8"))
 TASKS = {int(t["quest_id"]): t for t in FOUNDATION_DATA["tasks"]}
 
 # Current from-zero axis enters from Borean. 11979 is the mutually-exclusive reverse Agmar->Westwind
@@ -46,6 +48,12 @@ def n(qid: int) -> str:
 
 def names(*qids: int) -> str:
     return " + ".join(n(qid) for qid in qids)
+
+
+def format_minutes(value: float) -> str:
+    total = int(round(value))
+    hours, minutes = divmod(total, 60)
+    return f"{hours}小时{minutes}分" if hours and minutes else f"{hours}小时" if hours else f"{minutes}分钟"
 
 
 points: list[list[Any]] = []
@@ -396,6 +404,16 @@ apply_dragonblight_semantic_overrides(points, step_groups)
 apply_dragonblight_semantic_overrides_16_31(points, step_groups)
 apply_dragonblight_semantic_overrides_32_51(points, step_groups)
 
+timing_rows = TIMING_DATA.get("rows") or []
+if len(timing_rows) != len(step_groups):
+    raise RuntimeError(f"Dragonblight timing rows {len(timing_rows)} != step groups {len(step_groups)}")
+for group, row in zip(step_groups, timing_rows, strict=True):
+    group["timing"] = {
+        "centerMinutes": float(row["centerMinutes"]),
+        "rangeMinutes": [float(value) for value in row["rangeMinutes"]],
+        "includeInTotal": bool(row.get("includeInTotal", True)),
+    }
+
 # Coverage validation: current-axis, non-dungeon, primary world tasks should all be represented,
 # except the two documented intentional skips. 11930 is an inherited transition row and is covered.
 expected = {
@@ -408,13 +426,18 @@ expected = {
 # Narf rows are already included by foundation scope; 11930 is in expected despite entry state.
 missing = sorted(expected - covered - set(INTENTIONAL_SKIP))
 unexpected = sorted(covered - expected - {11930, 11916} - set(ROUTE_EXTRA_ONCE))
+timing_low, timing_high = TIMING_DATA["rangeMinutes"]
+timing_badge = (
+    f"炉石：{'-'.join(TIMING_DATA['hearthChain'])}\n"
+    f"预计总时间：{format_minutes(TIMING_DATA['centerMinutes'])}（{format_minutes(timing_low)}—{format_minutes(timing_high)}）"
+)
 
 route = {
     "order": 4,
     "title": "龙骨荒野 · 北风出口衔接 73+ 尽量清图路线",
     "sub": "从北风《横贯冰原》在龙骨边界交付后开始；按页面步骤完成龙骨当前可达世界任务；跨图任务继续保留到对应后续地图自然交付。",
     "badgeTitle": "",
-    "badge": "炉石：阿格玛之锤",
+    "badge": timing_badge,
     "uiStandard": "semantic-hud-v45",
     "image": "maps/65-dragonblight-hd.jpg",
     "legend": "",
@@ -472,7 +495,14 @@ route = {
     },
     "displayName": "龙骨荒野",
     "stepGroups": step_groups,
-    "defaultGroupIndex": 0
+    "defaultGroupIndex": 0,
+    "hearthChain": list(TIMING_DATA["hearthChain"]),
+    "timing": {
+        "centerMinutes": float(TIMING_DATA["centerMinutes"]),
+        "rangeMinutes": [float(value) for value in TIMING_DATA["rangeMinutes"]],
+        "actualRuns": list(TIMING_DATA.get("actualRuns") or []),
+        "model": str(TIMING_DATA["model"])
+    }
 }
 
 routes = json.loads(WORKBENCH.read_text(encoding="utf-8"))

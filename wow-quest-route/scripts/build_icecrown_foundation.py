@@ -62,11 +62,12 @@ ROUTE_ECONOMICS_SKIP_IDS = {
     13234: "pvp_daily_requires_15_opposing_players_non_deterministic_external_player_dependency",
     13376: "optional_first_daily_long_bombing_has_no_one_time_unlock_value_and_is_not_core_route_work",
 }
-# A map route's dependency closure may cross assigned-zone boundaries. These tasks remain
-# attributed to their original zone in the global universe, but are materialized here because
-# omitting them would make Icecrown chain coverage falsely appear complete.
-CROSS_ZONE_CHAIN_BRIDGE_IDS = {
+# A map route may legitimately materialize a task assigned to another zone when either a hard
+# dependency chain crosses the boundary or an already-required cross-map visit creates a clear
+# one-time revisit opportunity. The task keeps its original global zone attribution.
+CROSS_ZONE_ROUTE_IDS = {
     13078: "required_dragonblight_bridge_between_icecrown_13077_and_13079",
+    13343: "level_80_dragonblight_revisit_fits_existing_icecrown_wyrmrest_crossmap_window",
 }
 
 
@@ -230,7 +231,7 @@ def main() -> None:
     ]
     bridge_tasks = [
         dict(universe_by_id[qid])
-        for qid in sorted(CROSS_ZONE_CHAIN_BRIDGE_IDS)
+        for qid in sorted(CROSS_ZONE_ROUTE_IDS)
         if qid in universe_by_id
     ]
     assigned_ids = {int(task["quest_id"]) for task in assigned}
@@ -242,9 +243,9 @@ def main() -> None:
     status_counts: Counter[str] = Counter()
     for task in assigned + bridge_tasks:
         qid = int(task["quest_id"])
-        task["scope_origin"] = "cross_zone_chain_bridge" if qid in bridge_ids else "assigned_icecrown"
+        task["scope_origin"] = "cross_zone_route" if qid in bridge_ids else "assigned_icecrown"
         if qid in bridge_ids:
-            task["scope_bridge_reason"] = CROSS_ZONE_CHAIN_BRIDGE_IDS[qid]
+            task["scope_bridge_reason"] = CROSS_ZONE_ROUTE_IDS[qid]
         if qid in hidden_dependencies:
             override = hidden_dependencies[qid]
             for field in ("pre_any", "pre_all", "parent_active"):
@@ -647,7 +648,7 @@ def main() -> None:
         json.dumps(
             {
                 "assigned": len(assigned),
-                "cross_zone_chain_bridges": sorted(bridge_ids),
+                "cross_zone_route_tasks": sorted(bridge_ids),
                 "touching": len(touching),
                 "candidate": len(candidate_ids),
                 "status_counts": dict(sorted(status_counts.items())),

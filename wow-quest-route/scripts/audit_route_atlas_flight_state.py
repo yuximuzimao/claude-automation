@@ -57,6 +57,19 @@ HUB_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
         "复仇港": ("复仇港", "Vengeance Landing"),
         "卡玛古": ("卡玛古", "Kamagua"),
     },
+    "sholazar": {
+        "奈辛瓦里营地": ("奈辛瓦里营地", "Nesingwary Base Camp"),
+        "河流之心": ("河流之心", "River's Heart"),
+        "龙眠神殿": ("龙眠神殿", "Wyrmrest Temple"),
+        "达拉然": ("达拉然", "Dalaran"),
+        "银色比武场": ("银色比武场", "Argent Tournament"),
+    },
+}
+
+# Flight points inherited from already-completed earlier maps. Route-local opening actions are
+# still discovered from the point timeline below.
+INITIAL_OPENED_HUBS: dict[str, set[str]] = {
+    "sholazar": {"龙眠神殿", "达拉然", "银色比武场"},
 }
 
 
@@ -97,7 +110,7 @@ def flight_destination(point: list[Any], aliases: dict[str, tuple[str, ...]]) ->
 
 def audit_route(route_key: str, route: dict[str, Any]) -> dict[str, Any]:
     aliases = HUB_ALIASES[route_key]
-    opened: set[str] = set()
+    opened: set[str] = set(INITIAL_OPENED_HUBS.get(route_key, set()))
     flights: list[dict[str, Any]] = []
     violations: list[dict[str, Any]] = []
     unknown_destinations: list[dict[str, Any]] = []
@@ -151,7 +164,7 @@ def main() -> None:
         "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
         "routes": {
             key: audit_route(key, routes[key])
-            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown", "howling")
+            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown", "howling", "sholazar")
         },
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -56,6 +56,8 @@ ACTION_GRAMMAR_FORBIDDEN_PATTERNS = (
     r"(?:^|\n).*不选择前往.*出发对话",
     r"(?:^|\n).*回地面.*",
     r"拾取[^\n]*→\s*接《",
+    r"(?:^|\n)\s*(?:乘系统鸟：|乘龙：|任务脚本飞行：|启动任务飞行：)",
+    r"(?:^|\n).*传送到达拉然",
 )
 
 # Explicit cross-map carry tasks are allowed to remain open at the end of the current map.

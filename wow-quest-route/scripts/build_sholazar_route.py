@@ -21,6 +21,8 @@ covered: set[int] = set()
 step_groups: list[dict[str, Any]] = []
 _current_html: list[str] = []
 _current_note_blocks: list[tuple[int | None, str, str]] = []
+_current_point_html: list[list[str]] = []
+_current_point_note_blocks: list[list[tuple[int | None, str, str]]] = []
 opened_flight_points = {"银色比武场", "达拉然", "龙眠神殿"}
 flight_path_audit: list[dict[str, str]] = []
 
@@ -103,9 +105,9 @@ def render_note_text(text: str) -> str:
     return safe
 
 
-def note_html():
+def note_html(blocks: list[tuple[int | None, str, str]] | None = None):
     order=[]; grouped={}
-    for qid,kind,text in _current_note_blocks:
+    for qid,kind,text in (_current_note_blocks if blocks is None else blocks):
         key=(qid,)
         if key not in grouped:
             grouped[key]={"note":[],"fivebox":[]}; order.append(key)
@@ -120,7 +122,8 @@ def note_html():
 
 
 def P(x: float, y: float, title: str, phase: str, lines, *, movement="fly", notes=None, cover=(), show_anchor=True):
-    global _current_html, _current_note_blocks
+    global _current_html, _current_note_blocks, _current_point_html, _current_point_note_blocks
+    html_start=len(_current_html); note_start=len(_current_note_blocks)
     for line in lines:
         for kind,value,_ in line:
             if kind=="flightpoint": opened_flight_points.add(str(value))
@@ -147,12 +150,33 @@ def P(x: float, y: float, title: str, phase: str, lines, *, movement="fly", note
     for q,text in notes or []:
         regular.append(f"{n(q) if q else '本段'}：{text}"); _current_note_blocks.append((q,"note",text))
     points.append([x,y,title,action,phase,"\n".join(regular),movement,False,"\n".join(fb)])
+    _current_point_html.append(_current_html[html_start:])
+    _current_point_note_blocks.append(_current_note_blocks[note_start:])
 
 
 def G(title: str, summary: str, fn, center: float, lo: float, hi: float):
-    global _current_html,_current_note_blocks
-    start=len(points); _current_html=[]; _current_note_blocks=[]; fn(); end=len(points)-1
+    global _current_html,_current_note_blocks,_current_point_html,_current_point_note_blocks
+    start=len(points); _current_html=[]; _current_note_blocks=[]; _current_point_html=[]; _current_point_note_blocks=[]; fn(); end=len(points)-1
     step_groups.append({"start":start,"end":end,"title":title,"summary":summary,"actionHtml":"\n".join(_current_html),"noteHtml":note_html(),"timing":{"centerMinutes":center,"rangeMinutes":[lo,hi],"includeInTotal":True}})
+
+
+def GS(fn, segments: list[tuple[str, str, int]]) -> None:
+    global _current_html,_current_note_blocks,_current_point_html,_current_point_note_blocks
+    group_start=len(points); _current_html=[]; _current_note_blocks=[]; _current_point_html=[]; _current_point_note_blocks=[]; fn()
+    point_count=len(points)-group_start
+    if sum(count for _,_,count in segments) != point_count:
+        raise RuntimeError(f"split point count mismatch for {fn.__name__}: segments={sum(count for _,_,count in segments)} points={point_count}")
+    cursor=0
+    for title,summary,count in segments:
+        seg_html=[line for block in _current_point_html[cursor:cursor+count] for line in block]
+        seg_notes=[item for block in _current_point_note_blocks[cursor:cursor+count] for item in block]
+        start=group_start+cursor; end=start+count-1
+        step_groups.append({
+            "start":start,"end":end,"title":title,"summary":summary,
+            "actionHtml":"\n".join(seg_html),"noteHtml":note_html(seg_notes),
+            "timing":{"centerMinutes":0.0,"rangeMinutes":[0.0,0.0],"includeInTotal":False,"status":"pending_recalc_after_player_step_split"},
+        })
+        cursor += count
 
 # GROUP_DEFINITIONS
 
@@ -212,44 +236,36 @@ def g2_hunts_nozzlerust() -> None:
     P(25.6,66.5,"诺兹隆之骨·神谕者索乌拉姆","nozzlerust",[
         [NPC("神谕者索乌拉姆"),AR(),TG("turn",12526),AR(),TG("accept",12543)],
     ])
-    P(28.4,71.3,"诺兹隆之骨南侧","nozzlerust",[DO(12804)])
+    P(28.4,71.3,"诺兹隆之骨南侧","nozzlerust",[DO(12804,12592)],notes=[(12592,"这里只表示《猎人的挑战》随其它任务自然累计；不为它额外杀怪，独立耗时按0处理。")])
     P(47.0,61.0,"蛮藤谷中部","central",[DO(12543,12551,12634)])
-    P(25.6,66.5,"诺兹隆之骨","nozzlerust",[
-        [NPC("神谕者索乌拉姆"),AR(),TG("turn",12543),AR(),TG("accept",12544)],
-        DO(12544),
-    ])
-    P(32.6,38.5,"苦潮湖西北·杉苟足迹","tracks",[DO(12550)])
     P(27.1,58.6,"奈辛瓦里营地","camp",[
-        [NPC("赫米特·奈辛瓦里"),AR(),TG("turn",12544),AR(),TG("accept",12556)],
-        [NPC("巴克·坎维尔"),AR(),TG("turn",12550),AR(),TG("accept",12558)],
+        [HR("奈辛瓦里营地")],
         [NPC("蒂巴尔"),AR(),TG("turn",12551),AR(),TG("accept",12560)],
         [NPC("菜刀库尔格"),AR(),TG("turn",12804)],
         [NPC("葛瑞姆·雷酒"),AR(),TG("turn",12634),AR(),TG("accept",12644)],
+        [NPC("德洛斯坦"),AR(),TG("turn",12592)],
         DO(12644),
         [NPC("葛瑞姆·雷酒"),AR(),TG("turn",12644),AR(),TG("accept",12645)],
         [NPC("赫米特·奈辛瓦里"),BR(),TG("do",12645)],
         [NPC("哈迪乌斯·哈洛维"),BR(),TG("do",12645)],
-    ],notes=[(12645,"这里只完成赫米特和哈迪乌斯两个品酒目标；塔玛拉留到河流之心自然经过。")])
+    ],movement="hearth",notes=[(12645,"这里只完成赫米特和哈迪乌斯两个品酒目标；塔玛拉留到河流之心自然经过。")])
+    P(25.6,66.5,"诺兹隆之骨","nozzlerust",[
+        [NPC("神谕者索乌拉姆"),AR(),TG("turn",12543),AR(),TG("accept",12544)],
+        DO(12544),
+    ])
+    P(27.1,58.6,"奈辛瓦里营地","camp",[
+        [NPC("赫米特·奈辛瓦里"),AR(),TG("turn",12544),AR(),TG("accept",12556)],
+    ])
+    P(32.6,38.5,"苦潮湖西北·杉苟足迹","tracks",[DO(12550)])
 
 
 def g3_final_hunts_river() -> None:
-    P(43.9,63.3,"蛮藤谷河岸·沙蕨","final_hunt",[DO(12560)])
     P(46.7,42.8,"法鲁恩","final_hunt",[DO(12556)])
-    P(33.8,33.7,"杉苟","final_hunt",[DO(12558,12592)],notes=[(12592,"若还没60/60，返程沿路补足猎物；《湖边着陆场》要求这项已完成。")])
-    P(27.1,58.6,"奈辛瓦里营地","camp",[
-        [HR("奈辛瓦里营地")],
-        [NPC("赫米特·奈辛瓦里"),AR(),TG("turn",12556)],
-        [NPC("巴克·坎维尔"),AR(),TG("turn",12558)],
-        [NPC("蒂巴尔"),AR(),TG("turn",12560),AR(),TG("accept",12569)],
-        [NPC("德洛斯坦"),AR(),TG("turn",12592)],
-        [NPC("赫米特·奈辛瓦里"),AR(),TG("accept",12651)],
-    ],movement="hearth")
-    P(46.3,63.4,"蛮藤谷河岸·倒下的原木","river",[DO(12569)])
+    P(43.9,63.3,"蛮藤谷河岸·沙蕨","final_hunt",[DO(12560)])
     P(50.5,62.1,"河流之心","rivers_heart",[
         [FP("河流之心")],
-        [NPC("塔玛拉·摇链"),AR(),TG("turn",12651)],
-        [NPC("飞行员维克"),AR(),TG("turn",12696),AR(),TG("accept",12699)],
         [NPC("塔玛拉·摇链"),BR(),TG("do",12645)],
+        [NPC("飞行员维克"),AR(),TG("turn",12696),AR(),TG("accept",12699)],
         [NPC("塔玛拉·摇链"),AR(),TG("accept",12654)],
     ])
     P(48.2,63.3,"河流之心·湖内","rivers_heart",[DO(12699)])
@@ -261,6 +277,17 @@ def g3_final_hunts_river() -> None:
     P(50.5,77.2,"匹奇","pitch",[
         DO(12654),
         [NPC("猎手基克吉克"),AR(),TG("accept",12528)],
+    ])
+    P(27.1,58.6,"奈辛瓦里营地","camp",[
+        [HR("奈辛瓦里营地")],
+        [NPC("赫米特·奈辛瓦里"),AR(),TG("turn",12556)],
+        [NPC("巴克·坎维尔"),AR(),TG("turn",12550),AR(),TG("accept",12558)],
+        [NPC("蒂巴尔"),AR(),TG("turn",12560),AR(),TG("accept",12569)],
+        [NPC("葛瑞姆·雷酒"),AR(),TG("turn",12645)],
+    ],movement="hearth")
+    P(46.3,63.4,"蛮藤谷河岸·倒下的原木","river",[DO(12569)])
+    P(50.5,62.1,"河流之心","rivers_heart",[
+        [NPC("塔玛拉·摇链"),AR(),TG("turn",12654)],
     ])
     P(55.0,69.1,"狂心岭","frenzyheart",[
         [NPC("高阶萨满祭司拉克亚克"),AR(),TG("turn",12528)],
@@ -300,10 +327,12 @@ def g5_mistwhisper_hearth() -> None:
     P(42.1,38.6,"雾语村·瑟匹克","mistwhisper",[
         [NPC("鳄鱼人猎手瑟匹克"),AR(),TG("turn",12537,12538),AR(),TG("accept",12539)],
     ])
+    P(33.8,33.7,"杉苟","final_hunt",[DO(12558)])
     P(27.1,58.6,"奈辛瓦里营地","camp",[
         [HR("奈辛瓦里营地")],
+        [NPC("巴克·坎维尔"),AR(),TG("turn",12558)],
         [NPC("蒂巴尔"),AR(),TG("turn",12569)],
-        [NPC("葛瑞姆·雷酒"),AR(),TG("turn",12645)],
+        [NPC("赫米特·奈辛瓦里"),AR(),TG("accept",12651)],
         [NPC("赫米特·奈辛瓦里"),AR(),TG("accept",12595)],
     ],movement="hearth")
     P(55.0,69.1,"狂心岭","frenzyheart",[
@@ -326,7 +355,8 @@ def g6_oracle() -> None:
     ])
     P(51.3,64.6,"萨满祭司维克伊克","peace",[DO(12573)])
     P(50.5,62.1,"河流之心","rivers_heart",[
-        [NPC("塔玛拉·摇链"),AR(),TG("turn",12654)],
+        [NPC("塔玛拉·摇链"),AR(),TG("turn",12651)],
+        [HB("河流之心")],
     ])
     P(54.6,56.4,"雨声树屋","rainspeaker",[
         [NPC("高阶神谕者索乌塞"),AR(),TG("turn",12573),AR(),TG("accept",12574)],
@@ -342,10 +372,9 @@ def g7_dorian_north() -> None:
         [NPC("考尔文·诺灵顿"),AR(),TG("accept",12683)],
     ])
     P(48.0,27.5,"燃烧林地","burning_nest",[DO(12603,12605)])
-    P(41.3,41.7,"苦潮湖·多头蛇","bittertide",[DO(12683)])
+    P(41.5,21.5,"矛生营地","spearborn",[DO(12575,12576)])
     P(42.3,28.7,"多里安营地","dorian",[
         [NPC("多里安·达克斯托克"),AR(),TG("turn",12603,12605)],
-        [NPC("考尔文·诺灵顿"),AR(),TG("turn",12683)],
         [NPC("苏特菲兹"),AR(),TG("accept",12607,12658)],
         [NPC("考尔文·诺灵顿"),AR(),TG("accept",12681)],
     ])
@@ -353,29 +382,40 @@ def g7_dorian_north() -> None:
     P(42.3,28.7,"多里安营地","dorian",[
         [NPC("苏特菲兹"),AR(),TG("turn",12607)],
         [NPC("多里安·达克斯托克"),AR(),TG("accept",12614)],
-    ],notes=[(12607,"驯服最近的中立猛犸后直接送回营地并用载具技能交付；不要带着慢速猛犸绕路。")])
-    P(41.5,21.5,"矛生营地","spearborn",[DO(12575,12576)])
+    ])
     P(47.1,21.3,"母龙斯利维娜","north_hunt",[DO(12614)])
     P(56.8,26.5,"大鹏区","north_hunt",[DO(12658,12681)])
-    P(42.3,28.7,"多里安营地","dorian",[
-        [NPC("多里安·达克斯托克"),AR(),TG("turn",12614)],
-        [NPC("苏特菲兹"),AR(),TG("turn",12658)],
-        [NPC("考尔文·诺灵顿"),AR(),TG("turn",12681)],
-    ])
     P(42.1,38.6,"雾语村","mistwhisper",[
         [NPC("唤雾者索乌甘"),AR(),TG("turn",12575,12576),AR(),TG("accept",12577)],
     ])
-    P(54.6,56.4,"雨声树屋","rainspeaker",[
-        [NPC("高阶神谕者索乌塞"),AR(),TG("turn",12577),AR(),TG("accept",12578)],
+    P(41.3,41.7,"苦潮湖·多头蛇","bittertide",[DO(12683)])
+    P(42.3,28.7,"多里安营地","dorian",[
+        [NPC("多里安·达克斯托克"),AR(),TG("turn",12614)],
+        [NPC("苏特菲兹"),AR(),TG("turn",12658)],
+        [NPC("考尔文·诺灵顿"),AR(),TG("turn",12681,12683)],
     ])
 
 
 def g8_east_exit() -> None:
+    P(54.6,56.4,"雨声树屋","rainspeaker",[
+        [NPC("高阶神谕者索乌塞"),AR(),TG("turn",12577),AR(),TG("accept",12578)],
+    ])
     P(75.5,52.5,"苔行村·莫乌德","mosswalker",[
         [NPC("莫乌德"),AR(),TG("turn",12578),AR(),TG("accept",12579,12580)],
     ])
-    P(71.1,58.0,"苔行祭坛东侧","mosswalker",[DO(12579)])
     P(75.7,51.5,"苔行村东侧","mosswalker",[DO(12580)])
+    P(75.5,52.5,"苔行村·莫乌德","mosswalker",[
+        [NPC("莫乌德"),AR(),TG("turn",12580)],
+    ])
+    P(71.1,58.0,"苔行祭坛东侧","mosswalker",[DO(12579)])
+    P(75.5,52.5,"苔行村·莫乌德","mosswalker",[
+        [NPC("莫乌德"),AR(),TG("turn",12579),AR(),TG("accept",12581)],
+    ])
+    P(72.1,57.6,"残忍的阿图里斯","artruis",[
+        DO(12581),
+        [NPC("阿图里斯的护命匣"),AR(),TG("turn",12581)],
+        [NPC("亚鲁乌特"),AR(),TG("accept",12689),AR(),TG("turn",12689),AR(),TG("accept",12695)],
+    ])
     P(80.4,55.8,"造物者悬台·古旧石箱","makers",[
         [NPC("古旧石箱"),AR(),TG("accept",12691)],
     ])
@@ -383,35 +423,58 @@ def g8_east_exit() -> None:
     P(80.4,55.8,"造物者悬台·古旧石箱","makers",[
         [NPC("古旧石箱"),AR(),TG("turn",12691)],
     ])
-    P(75.5,52.5,"苔行村·莫乌德","mosswalker",[
-        [NPC("莫乌德"),AR(),TG("turn",12579,12580),AR(),TG("accept",12581)],
-    ])
-    P(72.1,57.6,"残忍的阿图里斯","artruis",[
-        DO(12581),
-        [NPC("阿图里斯的护命匣"),AR(),TG("turn",12581)],
-        [NPC("亚鲁乌特"),AR(),TG("accept",12689),AR(),TG("turn",12689),AR(),TG("accept",12695)],
-    ])
     P(54.6,56.4,"雨声树屋","rainspeaker",[
         [NPC("高阶神谕者索乌塞"),AR(),TG("turn",12695)],
     ])
-    P(50.5,62.1,"河流之心 → 祖达克","exit",[
-        [TAXI("河流之心","达拉然")],
-        [TAXI("达拉然","龙眠神殿")],
-    ],movement="taxi",notes=[(None,"龙眠神殿落地后沿龙骨东北道路到此前接《前往圣光据点！》的北伐军战士瓦鲁斯处，继续沿道路进入祖达克；到圣光据点找莉安娜中士交任务。")])
+    P(50.5,62.1,"河流之心·飞行点","exit",[
+        [HR("河流之心")],
+        [TAXI("河流之心","龙眠神殿")],
+    ],movement="hearth")
 
-GROUPS = [
-    ("入图 → 奈辛瓦里 → 挖掘场", "从达拉然脚本进入索拉查，绑定奈辛瓦里炉石；完成飞行器、挖掘场零件/击杀/戒指/护送，开营地飞行点后再回挖掘场杀工头。", g1_entry_engineering, 24, 16, 38),
-    ("初阶狩猎 → 诺兹隆之骨", "完成犀牛和恶刃豹初阶狩猎；继续做诺兹隆、鳄鱼、酿酒材料和猎豹足迹，回奈辛瓦里交接。", g2_hunts_nozzlerust, 24, 17, 34),
-    ("终极狩猎 → 河流之心 → 匹奇", "依次完成沙蕨、法鲁恩和杉苟后炉石回营；随后做鳄鱼伏击，开河流之心飞行点，完成维克任务并杀匹奇进入狂心岭。", g3_final_hunts_river, 21, 14, 31),
-    ("狂心岭 → 硬皮猩猩 → 蓝玉虫巢", "从狂心岭连续推进硬皮猩猩、蓝玉虫巢、抓鸡和南部任务，最后乘被俘鳄鱼进入雾语村。", g4_frenzyheart, 24, 16, 36),
-    ("雾语村 → 炉石奈辛瓦里 → 狂心岭", "完成第一轮雾语村任务后炉石回营集中交鳄鱼与品酒，接《更大的猎物》，再回狂心岭切入神谕者线。", g5_mistwhisper_hearth, 14, 9, 21),
-    ("雨声树屋 → 河流之心 → 雾语村", "护送受伤神谕者，完成坏蛇、亮闪闪宝物和议和；经过河流之心顺交塔玛拉任务，再回雾语村接北部任务。", g6_oracle, 19, 13, 29),
-    ("多里安营地 → 苦潮湖 → 北部猎场", "先完成始祖龙/幼崽和苦潮多头蛇；回多里安后就近送回猛犸，再去矛生营地、母龙和大鹏区域，最后回雨声树屋。", g7_dorian_north, 27, 18, 42),
-    ("苔行村 → 造物者悬台 → 阿图里斯", "完成苔行村东部任务和造物者悬台；回莫乌德接《英雄的负担》后立即去阿图里斯，选择神谕者并回雨声树屋，最后从河流之心转场祖达克。", g8_east_exit, 22, 14, 34),
+SPLIT_GROUPS = [
+    (g1_entry_engineering, [
+        ("入图 → 奈辛瓦里初始化", "进入索拉查后先完成欢迎任务、绑定炉石，并接第一轮工程/挖掘场任务。", 2),
+        ("飞行器引擎 → 挖掘场第一圈", "拿引擎回营接《借零件》，随后一次清挖掘场的零件、风险投资公司、戒指与工程师护送。", 3),
+        ("奈辛瓦里集中交接 → 开飞行点", "回营一次性交第一轮任务，开飞行点并接《空中侦察》。", 1),
+        ("工头斯温迪格林 → 打开狩猎线", "杀工头回营后接犀牛、恶刃豹、《后坐力》并打开《猎人的挑战》。", 4),
+    ]),
+    (g2_hunts_nozzlerust, [
+        ("初阶豹 / 犀牛 → 营地接第二批", "完成两项初阶狩猎，回营交接并一次拿齐追踪、鳄鱼、酿酒和肉排。", 3),
+        ("索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒", "接祭品后把南侧肉排、猎人挑战累计、祭品、鳄鱼试炼和酿酒材料一圈做完。", 3),
+        ("炉石回营 → 酒香犹存 / 品酒", "炉石回营集中交这一批，并完成《酒香犹存》和营地内两个品酒目标。", 1),
+        ("诺兹隆之骨 → 杉苟追踪", "做完诺兹隆之骨、打开终极犀牛后去杉苟足迹完成追踪。", 3),
+    ]),
+    (g3_final_hunts_river, [
+        ("终极犀牛 / 鳄鱼计划 → 河流之心", "完成法鲁恩和鳄鱼计划，进入河流之心开点、补最后品酒并接维克/兼职猎人。", 3),
+        ("尴尬的处境 → 侦察飞行 → 匹奇", "在河流之心连续做维克两项任务，再去匹奇完成兼职猎人并接《伪装奴隶》。", 3),
+        ("炉石奈辛瓦里 → 鳄鱼伏击", "炉石回营交终极狩猎/计划/品酒，接突然袭击与伏击后先做鳄鱼伏击。", 2),
+        ("河流之心 → 狂心岭交接", "顺交《兼职猎人》，再到狂心岭交《伪装奴隶》。", 2),
+    ]),
+    (g4_frenzyheart, [
+        ("狂心岭第一圈：猩猩 → 蓝玉虫巢", "接猩猩任务，清硬皮猩猩后回岭交接，再一圈做完蓝玉虫巢。", 4),
+        ("狂心岭第二圈：抓鸡 → 南部任务", "回岭完成抓鸡并打开地下/材料任务，南部清完后接《颠簸的航行》。", 3),
+    ]),
+    (g5_mistwhisper_hearth, [
+        ("颠簸航行 → 雾语村 → 杉苟", "乘被俘鳄鱼到雾语村，做完两项雾语任务接《步行回家》，顺路击杀杉苟。", 5),
+        ("炉石奈辛瓦里 → 步行回家", "炉石回营集中交狩猎任务并接湖边/更大猎物，再到狂心岭交《步行回家》。", 2),
+    ]),
+    (g6_oracle, [
+        ("受伤神谕者 → 雨声树屋 → 议和", "完成受伤神谕者、坏蛇和亮闪闪，接着处理《议和》。", 5),
+        ("河流之心 → 雨声树屋 → 雾语村", "顺交《湖边着陆场》，回雨声树屋交议和，再到雾语村接北部两项任务。", 3),
+    ]),
+    (g7_dorian_north, [
+        ("多里安 → 燃烧林地 / 矛生营地", "完成《磨尖你的爪子》《诱龙出巢》时一并处理雾语村北部两项，再回多里安交接。", 4),
+        ("猛犸 → 母龙 / 大鹏 → 燃烧的唾液", "驯服猛犸后先做母龙，再做大鹏和材料；随后交雾语村两项、做燃烧的唾液并回多里安交付。", 7),
+    ]),
+    (g8_east_exit, [
+        ("回家喽 → 苔行村 → 英雄的负担", "交《回家喽！》后进入苔行村；救星与源血碎片分别完成即交，再做《英雄的负担》。", 7),
+        ("古旧石箱 → 神谕者交付", "阿图里斯后继续古旧石箱；正常神谕者分支最后回雨声树屋交《友善的干燥皮肤朋友》。", 4),
+        ("河流之心 → 龙眠神殿", "使用炉石回河流之心后直接系统飞龙眠神殿。", 1),
+    ]),
 ]
 
-for title, summary, fn, center, lo, hi in GROUPS:
-    G(title, summary, fn, center, lo, hi)
+for fn, segments in SPLIT_GROUPS:
+    GS(fn, segments)
 
 missing = sorted(FORMAL - covered)
 unexpected = sorted(covered - FORMAL)
@@ -420,8 +483,8 @@ route = {
     "order": 8,
     "uiStandard": "semantic-hud-v45",
     "title": "索拉查盆地 · 80级五开整图路线",
-    "sub": "达拉然脚本入图后，以奈辛瓦里营地为前半段炉石Hub，依次完成狩猎、狂心/神谕者转换、多里安北部与阿图里斯线；最终固定选择神谕者，并从河流之心转场祖达克。",
-    "badge": "炉石：奈辛瓦里营地\n最终阵营：神谕者\n预计总时间：首轮约2小时55分",
+    "sub": "达拉然脚本入图后，以奈辛瓦里营地为前半段炉石Hub；进入神谕者北部线后改绑河流之心，完成多里安、阿图里斯与东部任务后炉石回河流之心，直接系统飞龙眠神殿转祖达克。",
+    "badge": "炉石：奈辛瓦里营地 → 河流之心\n最终阵营：神谕者\n预计总时间：步骤拆分确认后重算",
     "image": "maps/3711-sholazar-basin-hd.jpg",
     "legend": "",
     "footer": "",
@@ -444,7 +507,7 @@ route = {
     "displayName": "索拉查盆地",
     "stepGroups": step_groups,
     "defaultGroupIndex": 0,
-    "hearthChain": ["奈辛瓦里营地"],
+    "hearthChain": ["奈辛瓦里营地", "河流之心"],
     "timing": {
         "centerMinutes": sum(float(g["timing"]["centerMinutes"]) for g in step_groups),
         "rangeMinutes": [
@@ -452,7 +515,7 @@ route = {
             sum(float(g["timing"]["rangeMinutes"][1]) for g in step_groups),
         ],
         "actualRuns": [],
-        "model": "sholazar_initial_clean_baseline_pre_live_calibration",
+        "model": "sholazar_23_player_step_split_trial_pending_recalc",
     },
 }
 

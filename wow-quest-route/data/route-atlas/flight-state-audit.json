@@ -11,7 +11,7 @@
         {
           "point_index": 185,
           "label": "永生之盾飞行点",
-          "action": "乘系统鸟：永生之盾 → 琥珀崖",
+          "action": "系统飞行：永生之盾 → 琥珀崖",
           "transport": "ride",
           "destination_hub": "琥珀崖",
           "opened_before_arrival": [
@@ -37,7 +37,7 @@
         {
           "point_index": 219,
           "label": "博古洛克飞行点",
-          "action": "乘系统鸟：博古洛克 → 琥珀崖",
+          "action": "系统飞行：博古洛克 → 琥珀崖",
           "transport": "ride",
           "destination_hub": "琥珀崖",
           "opened_before_arrival": [
@@ -65,7 +65,7 @@
         {
           "point_index": 221,
           "label": "琥珀崖飞行点",
-          "action": "乘系统鸟：琥珀崖 → 牦牛村",
+          "action": "系统飞行：琥珀崖 → 牦牛村",
           "transport": "taxi",
           "destination_hub": "牦牛村",
           "opened_before_arrival": [
@@ -110,7 +110,7 @@
         {
           "point_index": 187,
           "label": "龙眠顶层",
-          "action": "乘系统鸟：库卡隆先锋营地 → 龙眠神殿\n乘龙：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》",
+          "action": "系统飞行：库卡隆先锋营地 → 龙眠神殿\n固定交通：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》",
           "transport": "taxi",
           "destination_hub": "龙眠神殿",
           "opened_before_arrival": [
@@ -124,7 +124,7 @@
         {
           "point_index": 191,
           "label": "库卡隆先锋营地",
-          "action": "乘系统鸟：龙眠神殿 → 库卡隆先锋营地\n小萨鲁法尔 → 交《返回安加萨》",
+          "action": "系统飞行：龙眠神殿 → 库卡隆先锋营地\n小萨鲁法尔 → 交《返回安加萨》",
           "transport": "taxi",
           "destination_hub": "库卡隆先锋营地",
           "opened_before_arrival": [
@@ -228,93 +228,10 @@
     },
     "zuldrak": {
       "route_key": "zuldrak",
-      "flight_count": 6,
+      "flight_count": 0,
       "violation_count": 0,
       "unknown_destination_count": 0,
-      "flights": [
-        {
-          "point_index": 66,
-          "label": "达拉然短往返",
-          "action": "博学者泰罗努斯三世 → 传送到达拉然\n狡猾的维克斯 → 接《勇士的召唤！》\n系统飞行：达拉然 → 银色前沿",
-          "transport": "taxi",
-          "destination_hub": "银色前沿",
-          "opened_before_arrival": [
-            "圣光据点",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        },
-        {
-          "point_index": 95,
-          "label": "古达克飞行点",
-          "action": "系统飞行：古达克 → 希姆托加",
-          "transport": "ride",
-          "destination_hub": "希姆托加",
-          "opened_before_arrival": [
-            "古达克",
-            "圣光据点",
-            "希姆托加",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        },
-        {
-          "point_index": 96,
-          "label": "希姆托加",
-          "action": "巫医库弗 → 交《狂暴》 → 接《诸神的指引》",
-          "transport": "taxi",
-          "destination_hub": "希姆托加",
-          "opened_before_arrival": [
-            "古达克",
-            "圣光据点",
-            "希姆托加",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        },
-        {
-          "point_index": 101,
-          "label": "古达克飞行点",
-          "action": "系统飞行：古达克 → 希姆托加",
-          "transport": "ride",
-          "destination_hub": "希姆托加",
-          "opened_before_arrival": [
-            "古达克",
-            "圣光据点",
-            "希姆托加",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        },
-        {
-          "point_index": 102,
-          "label": "希姆托加",
-          "action": "哈克娅 → 交《在佐尔赫布相会》 → 接《未完的事情》",
-          "transport": "taxi",
-          "destination_hub": "希姆托加",
-          "opened_before_arrival": [
-            "古达克",
-            "圣光据点",
-            "希姆托加",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        },
-        {
-          "point_index": 103,
-          "label": "古达克飞行点",
-          "action": "系统飞行：希姆托加 → 古达克",
-          "transport": "taxi",
-          "destination_hub": "古达克",
-          "opened_before_arrival": [
-            "古达克",
-            "圣光据点",
-            "希姆托加",
-            "银色前沿",
-            "黑锋哨站"
-          ]
-        }
-      ],
+      "flights": [],
       "violations": [],
       "unknown_destinations": [],
       "final_opened_flight_points": [
@@ -396,8 +313,10 @@
       "violations": [],
       "unknown_destinations": [],
       "final_opened_flight_points": [
+        "北伐军之峰",
         "暗影拱顶",
-        "死亡高地"
+        "死亡高地",
+        "银色前线基地"
       ]
     },
     "howling": {
@@ -539,6 +458,37 @@
         "复仇港",
         "新阿加曼德",
         "药剂师营地"
+      ]
+    },
+    "sholazar": {
+      "route_key": "sholazar",
+      "flight_count": 1,
+      "violation_count": 0,
+      "unknown_destination_count": 0,
+      "flights": [
+        {
+          "point_index": 74,
+          "label": "河流之心·飞行点",
+          "action": "使用炉石：河流之心\n系统飞行：河流之心 → 龙眠神殿",
+          "transport": "hearth",
+          "destination_hub": "龙眠神殿",
+          "opened_before_arrival": [
+            "奈辛瓦里营地",
+            "河流之心",
+            "达拉然",
+            "银色比武场",
+            "龙眠神殿"
+          ]
+        }
+      ],
+      "violations": [],
+      "unknown_destinations": [],
+      "final_opened_flight_points": [
+        "奈辛瓦里营地",
+        "河流之心",
+        "达拉然",
+        "银色比武场",
+        "龙眠神殿"
       ]
     }
   }

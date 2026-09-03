@@ -12,6 +12,8 @@ SYSTEM_PREFIXES = (
     "绑定炉石：",
     "使用炉石：",
     "系统飞行：",
+    "固定交通：",
+    "任务传送：",
 )
 
 
@@ -65,7 +67,49 @@ def _note_title(point: list[Any]) -> str:
     return str(point[2] if len(point) > 2 else "路线提醒")
 
 
+DISPLAY_SPLITS: dict[int, list[tuple[int, str]]] = {
+    1: [(5, "灰熊出口 → 冷原海岸 / 护盾"), (5, "钢铁之门前哨 → 老冰鳞")],
+    2: [(4, "灰烬龙巢 → 新阿加曼德开场"), (5, "龙卵 / 龙胃 → 盾牌岭 → 奥弗斯"), (6, "卡玛古 → 长矛岛 → 伊斯卡尔"), (3, "卡玛古 → 格雷兹克斯 → 银月哈瑞")],
+    3: [(6, "斯库德 → 无赖港西侧"), (5, "银月哈瑞 → 酒馆 → 长矛岛"), (4, "风暴愤怒法杖 → 无赖港权力链"), (3, "慈悲修女号")],
+    5: [(4, "新阿加曼德 → 复仇港开场"), (4, "复仇港前线 → 北岸 → 回港")],
+    7: [(4, "戈斯中士 → 拜尔海姆"), (4, "林德尔 → 尼弗莱瓦")],
+    8: [(5, "新阿加曼德：量身订制 → 药剂喷雾"), (4, "重要零件 → 集中处理")],
+    9: [(2, "冬蹄营地 → 东北自然区"), (3, "冬蹄交接 → 冰瀑")],
+    10: [(4, "鲁莉尔蕾 → 裂木 / 凋零林地"), (3, "鲁莉尔蕾 → 凋零之叶")],
+    11: [(6, "巨人平原：符文 / 巨人前两段"), (5, "巨人平原：命令符文 / 麦加利斯")],
+    15: [(6, "药剂师营地 → 拉瑞恩 / 钢铁之门"), (6, "净化 → 药剂师营地 → 拉瑞恩")],
+    16: [(5, "乌尔芬 → 兄弟 → 巨鹰"), (3, "乌尔芬 → 头狼 → 拉瑞恩")],
+}
+
+
+def _rebuild_display_groups(groups: list[dict[str, Any]]) -> None:
+    coarse = [dict(group) for group in groups]
+    rebuilt: list[dict[str, Any]] = []
+    for step_number, parent in enumerate(coarse, 1):
+        splits = DISPLAY_SPLITS.get(step_number)
+        if not splits:
+            rebuilt.append(parent)
+            continue
+        expected_points = int(parent["end"]) - int(parent["start"]) + 1
+        if sum(item[0] for item in splits) != expected_points:
+            raise RuntimeError(f"Howling display split {step_number} point drift")
+        point_cursor = int(parent["start"])
+        for split_index, (point_count, title) in enumerate(splits):
+            start = point_cursor
+            end = point_cursor + point_count - 1
+            rebuilt.append({
+                "start": start,
+                "end": end,
+                "title": title,
+                "summary": "",
+                "timingLogicalOverheadMinutes": 0.5 if split_index == 0 else 0.0,
+            })
+            point_cursor = end + 1
+    groups[:] = rebuilt
+
+
 def apply_howling_semantic_hud(points: list[list[Any]], groups: list[dict[str, Any]]) -> None:
+    _rebuild_display_groups(groups)
     for group in groups:
         start = int(group["start"])
         end = int(group["end"])

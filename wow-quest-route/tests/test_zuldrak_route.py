@@ -27,7 +27,7 @@ def test_zuldrak_full_clear_route_is_closed() -> None:
     assert coverage["missing"] == []
     assert coverage["unexpected"] == []
     assert len(route["points"]) == 107
-    assert len(route["stepGroups"]) == 12
+    assert len(route["stepGroups"]) == 23
 
 
 def test_zuldrak_route_uses_cluster_insertions_found_by_video_reverse_review() -> None:
@@ -43,7 +43,7 @@ def test_zuldrak_route_uses_cluster_insertions_found_by_video_reverse_review() -
     assert "水罂粟 / 水元素走廊" in text
     # The first rescue is deliberately held until Cocooned unlocks, so the rescue area is entered once.
     assert "蛛魔救援区" in text
-    assert "这里先不救人；先回达克索塔交《扔手雷》并接出《茧中人》" in text
+    assert "这里先不救人；先回鲁伯特上尉处交《扔手雷》并接出《茧中人》" in text
     # Stefan remains a local horn handoff rather than a fake Ebon Watch revisit.
     assert "使用斯特凡号角" in text
     assert "达库鲁的最后愿望" in text
@@ -95,4 +95,4 @@ def test_zuldrak_timing_and_html_are_published() -> None:
     assert "痛苦斗兽场" in html
     assert "第一场同时验证战斗压力和五号同步" in html
     assert "蛛魔救援区" in html
-    assert "这里先不救人；先回达克索塔交《扔手雷》并接出《茧中人》" in html
+    assert "这里先不救人；先回鲁伯特上尉处交《扔手雷》并接出《茧中人》" in html

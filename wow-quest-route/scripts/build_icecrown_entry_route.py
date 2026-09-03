@@ -12,17 +12,6 @@ OUT_JSON = ROOT / "data/route-atlas/icecrown-entry-route-draft.json"
 OUT_MD = ROOT / "docs/analysis/2026-08-25-icecrown-entry-route-draft.md"
 
 TASK_ID_TOKEN = re.compile(r"(?<!\d)(\d{5})(?!\d)")
-TASK_GROUP_TOKEN = r"(?:《[^》]+》)+"
-FLOW_ACTION_RE = re.compile(rf"^[^：；;,，0-9]+(?:\s*→\s*(?:接|做|交){TASK_GROUP_TOKEN})+$")
-SYSTEM_ACTION_RE = re.compile(r"^(?:开飞行点|炉石绑定|使用炉石)：[^：；;,，0-9]+$")
-SYSTEM_FLIGHT_RE = re.compile(r"^系统飞行：[^：；;,，0-9]+\s*→\s*[^：；;,，0-9]+$")
-
-
-def validate_action_skeleton(text: str) -> None:
-    value = str(text).strip()
-    if SYSTEM_ACTION_RE.fullmatch(value) or SYSTEM_FLIGHT_RE.fullmatch(value) or FLOW_ACTION_RE.fullmatch(value):
-        return
-    raise RuntimeError(f"Icecrown player action violates closed action grammar: {value}")
 
 
 def player_task_names(text: str, by_id: dict[int, dict]) -> str:
@@ -79,7 +68,14 @@ def normalize_fivebox(qid: int, text: str) -> str:
         13143: "共享：本轮实跑确认，由主控完成一次即可同步全队。",
         13219: "共享：角色死亡但不释放灵魂时，队友击杀Boss后仍可获得当前场信用。",
         13142: "共享：",
-        13361: "不共享：",
+        13313: "共享：本轮实跑确认。",
+        13329: "共享：本轮实跑确认。",
+        13360: "不共享：五号依次互动对话即可。",
+        13361: "不共享：本轮实跑确认。",
+        13074: "不共享：五号分别完成翡翠噩梦相位并拾取3枚翡翠橡果。",
+        13078: "不共享：达莉亚之泪需要每个号分别拾取。",
+        13328: "不共享：三个碎片需要五号分别轮流交互。",
+        13364: "共享：五号都装备侍僧兜帽并贴近提里奥后，只需一个号互动启动事件即可共享。",
         13161: "共享：",
         13162: "共享：",
         13163: "共享：",
@@ -216,7 +212,7 @@ def main() -> None:
                 "天灾城 → 同时做《净化天灾城》《天灾石》《永不安息的亡者》；以五号各15块天灾石为离开条件",
                 "回音谷 → 交《净化天灾城》《天灾石》《永不安息的亡者》→ 黑锋观察者接《凝固的空气》",
                 "天灾城 → 做《凝固的空气》：先击杀高阶祭司亚萨尔蒙、虫王塔洛诺克斯，最后击杀撕裂者萨兰纳克斯；需要时使用阿彻鲁斯战斗号角召援",
-                "撕裂者萨兰纳克斯死亡后出现的传送门 → 返回回音谷交《凝固的空气》",
+                "三名首领全部完成后使用最后出现的死亡之门 → 返回回音谷交《凝固的空气》",
             ],
             "task_cards": {
                 "13110": {
@@ -234,7 +230,7 @@ def main() -> None:
                 "13125": {
                     "name": by_id[13125]["name"],
                     "objective": "击杀3名天灾城首领",
-                    "route_note": "先处理高阶祭司亚萨尔蒙和虫王塔洛诺克斯，最后再杀撕裂者萨兰纳克斯；萨兰纳克斯死亡后可直接使用出现的传送门回交任务。号角可召唤黑锋援军。",
+                    "route_note": "先处理高阶祭司亚萨尔蒙和虫王塔洛诺克斯，最后再杀撕裂者萨兰纳克斯；三个首领都可用阿彻鲁斯战斗号角召唤黑锋援军。每场结束都会开死亡之门，三个首领全部完成后再使用最后一个门返回回音谷。",
                     "fivebox": "共享：",
                 },
             },
@@ -942,12 +938,12 @@ def main() -> None:
                     "route_note": "现场米斯希尔萨约71,37。公开评论提示相位切换可能影响现场交接，因此在离开辛达苟萨之墓前先把这项交掉并接《寻求答案》。",
                     "fivebox": "个人掉落任务；五号总需求30。以五号全部6/6为离开墓地条件。",
                 },
-                "13360": {"name": by_id[13360]["name"], "route_note": "白骨之庭正确NPC点约49.2,73.2；Questie旧标记可能不明显，直接按该位置找米斯希尔萨。"},
+                "13360": {"name": by_id[13360]["name"], "route_note": "白骨之庭正确NPC点约49.2,73.2；Questie旧标记可能不明显，直接按该位置找米斯希尔萨。", "fivebox": "不共享：本轮实跑确认，五号依次互动对话即可。"},
                 "13361": {
                     "name": by_id[13361]["name"],
                     "objective": "点击染血的石头，变身阿尔萨斯击败伊利丹",
                     "route_note": "染血石头约48,72。稳定打法：1格挡回蓝 → 蓝量足够后3击退 → 4追击重击 → 2输出，重复。失败后石头会再次出现。",
-                    "fivebox": "按个人场景/载具事件处理，五号分别完成；不把一个号的剧情战斗按共享计算。",
+                    "fivebox": "不共享：本轮实跑确认，五号分别完成个人剧情战斗。",
                 },
             },
             "exit": "现在持有完成待交《冰霜巨龙的摇篮》和待交飞艇的《知识是可怕的负担》；从49,73直接向西转黑色观察站，利用13138/13140已经完成的状态开第二阶段。",
@@ -985,28 +981,18 @@ def main() -> None:
                     "route_note": "Fleshwerks西端高台约29—30,61。必须先与玛格拉弗·塔卡尔对话启动事件；摩比乌斯本身未开事件时可能无法攻击/闪避。首组实跑确认整项共享。",
                     "fivebox": "共享：",
                 },
-                "13363": {"name": by_id[13363]["name"], "route_note": "由《知识是可怕的负担》交舰后解锁，目标北伐军之峰79.8,71.7。后续《提里奥的尝试》事件末尾可用传送门直接回峰，因此下一步现在闭合整条终章，再从东向西扫图。"},
+                "13363": {"name": by_id[13363]["name"], "route_note": "由《知识是可怕的负担》交舰后解锁，目标北伐军之峰79.8,71.7。交付后接走《提里奥的尝试》即可；黑暗大教堂目标与科雷萨南部任务区相邻，任务本身没有后续硬门槛，延后到南部收尾阶段再做。"},
             },
             "exit": "黑色观察站已完全闭合，并再次回到奥格瑞姆之锤。下一步先闭合《银色北伐军的协助》两环终章，再从北伐军之峰开始持续向西。",
         },
         {
             "step": 26,
-            "title": "银色北伐军终章：北伐军之峰 → 黑暗大教堂 → 传送回峰",
+            "title": "北伐军之峰：银色北伐军的协助 → 接《提里奥的尝试》",
             "actions": [
                 "北伐军之峰约79.8,71.7 → 提里奥交《银色北伐军的协助》→ 接《提里奥的尝试》",
-                "黑暗大教堂入口约44.5,77.6 → 五号各自从入口两侧诅咒教派侍僧取得侍僧兜帽并装备",
-                "装备兜帽后在入口右侧篝火附近约44.4,76.2找到无任务标记的提里奥；五号全部到场后只先由一个角色对话启动事件，检查同队其他角色是否同步获得剧情信用",
-                "跟随剧情进入大教堂；事件末尾出现逃生传送门时立即进入，正常会直接回北伐军之峰，不手动横穿返程",
-                "北伐军之峰 → 五号交《提里奥的尝试》；冰冠堡垒地下主链正式闭合；随后从东向西开始奥尔杜萨/荒凉之门剩余主块",
             ],
-            "task_cards": {
-                "13364": {
-                    "name": by_id[13364]["name"],
-                    "route_note": "兜帽可从大教堂入口两侧侍僧取得；装备后提里奥约44.4,76.2，头上没有任务标记。事件末尾优先立刻进逃生传送门，它会把角色送回北伐军之峰；若传送门因相位异常未出现，再自行返回交任务。公开旧攻略明确提示巫妖王终结技能会直接秒杀，连免疫类保命也不可靠，不要留在场内等技能结算。防骑号交任务时优先选坦克单手剑Blade of the Empty Void。",
-                    "fivebox": "强待实测：五号都装备兜帽并贴近提里奥，只由一号启动事件，观察剧情完成是否全队同步；若未同步再按号补事件，不预先做五遍。",
-                },
-            },
-            "exit": "终点：北伐军之峰79.8,71.7。此前在辛达苟萨东北段已经接走《弥留的英雄》，这里直接交付并进入布雷登布莱德跨图救治链。",
+            "task_cards": {},
+            "exit": "《提里奥的尝试》只接走，不在这里立刻去黑暗大教堂；它没有后续硬门槛，保留到南部科雷萨/苦难高地收尾阶段再做。当前原地进入《弥留的英雄》救治链。",
         },
         {
             "step": 27,
@@ -1029,31 +1015,40 @@ def main() -> None:
                 "↳ 做《翡翠噩梦中的希望》",
                 "守护者雷姆洛斯 → 交《翡翠噩梦中的希望》→ 接《雷姆洛斯的恩赐》",
                 "使用雷姆洛斯开启的返程传送门返回冰冠冰川",
+                "系统飞行：银色前线基地 → 银色比武场",
                 "沉默墓地·布雷登布莱德 → 交《雷姆洛斯的恩赐》→ 接《仍有时间》",
+                "系统飞行：银色比武场 → 北伐军之峰",
                 "北伐军之峰·提里奥 → 交《仍有时间》→ 接《龙神的触摸》",
             ],
             "task_cards": {
-                "13073": {"name": by_id[13073]["name"], "route_note": "到银色前线基地找大德鲁伊莉琳德拉，由她开启前往月光林地的任务传送门。公开旧攻略记录传送门偶尔不触发：贴近莉琳德拉重新选中/对话并在原地等几秒，比直接骑走重来更稳。"},
-                "13074": {"name": by_id[13074]["name"], "route_note": "在雷姆洛斯神殿范围内进入翡翠梦境，拾取3枚翡翠橡果；离开神殿范围会退出梦境，先确认3/3再走。", "fivebox": "五号分别进入任务相位并拾取；第一枚先观察固定物是否各号独立可见。"},
-                "13075": {"name": by_id[13075]["name"], "route_note": "接任务后使用雷姆洛斯开启的返程传送门。传送触发前不要立刻跑离神殿或骑走；若没传走，先回到雷姆洛斯附近重新等传送门。"},
+                "13073": {"name": by_id[13073]["name"], "route_note": "大德鲁伊莉琳德拉约87.06,77.02，插件地图不显示交互提醒；五号依次互动进入月光林地传送门。"},
+                "13074": {"name": by_id[13074]["name"], "route_note": "雷姆洛斯神殿范围内进入翡翠梦境，分别拾取3枚翡翠橡果。", "fivebox": "不共享：五号分别完成。"},
+                "13075": {"name": by_id[13075]["name"], "route_note": "雷姆洛斯开启返程传送门后，五号依次互动返回冰冠。"},
             },
             "exit": "回到北伐军之峰并接到《龙神的触摸》；下一步去龙眠神殿找阿莱克丝塔萨。",
         },
         {
             "step": 29,
-            "title": "龙眠神殿：阿莱克丝塔萨的救治",
+            "title": "龙眠神殿：阿莱克丝塔萨救治 + 80级青铜圣地回访",
             "actions": [
-                "龙眠神殿底层 → 乘神殿巨龙到顶层",
+                "系统飞行：北伐军之峰 → 龙眠神殿",
+                "固定交通：龙眠神殿底层 → 龙眠神殿顶层",
                 "顶层·阿莱克丝塔萨 → 交《龙神的触摸》→ 接《达莉亚之泪》",
+                "龙眠神殿顶层·克罗米 → 接《永恒之龙的秘密，再来一次》",
+                "青铜巨龙圣地 → 做《永恒之龙的秘密，再来一次》",
                 "红玉巨龙圣地（约51.1,52.5） ↳ 做《达莉亚之泪》",
+                "龙眠神殿顶层·克罗米 → 交《永恒之龙的秘密，再来一次》",
                 "龙眠神殿顶层·阿莱克丝塔萨 → 交《达莉亚之泪》→ 接《阿莱克丝塔萨的恩赐》",
+                "固定交通：龙眠神殿顶层 → 龙眠神殿底层",
+                "系统飞行：龙眠神殿 → 银色比武场",
                 "沉默墓地·布雷登布莱德 → 交《阿莱克丝塔萨的恩赐》→ 接《仍有希望》",
+                "系统飞行：银色比武场 → 北伐军之峰",
                 "北伐军之峰·提里奥 → 交《仍有希望》→ 接《纳鲁的意志》",
             ],
             "task_cards": {
-                "13077": {"name": by_id[13077]["name"], "route_note": "阿莱克丝塔萨在龙眠神殿顶层，不在地面飞行点层；到神殿后使用内部巨龙交通上顶层。"},
-                "13078": {"name": by_id[13078]["name"], "route_note": "到红玉巨龙圣地约51.1,52.5一带等红玉守卫者的火焰扫过地面；达莉亚之泪会出现在刚被净化的土地上。不是从尸体拾取。", "fivebox": "强待实测：第一朵花先让五号依次尝试拾取，确认同一刷新物是否可多人分别取得；若拾取后消失，再按号等待下一次火焰刷新。"},
-                "13079": {"name": by_id[13079]["name"], "route_note": "取得达莉亚之泪后必须先回阿莱克丝塔萨交任务并接到她的恩赐，再返回沉默墓地。"},
+                "13077": {"name": by_id[13077]["name"], "route_note": "龙眠神殿上下层与管家对话乘固定巨龙交通。"},
+                "13343": {"name": by_id[13343]["name"], "route_note": "克罗米顶层接/交；青铜巨龙圣地约72,39完成。", "fivebox": "待实测：先按12470的2+2+1三批方式执行。"},
+                "13078": {"name": by_id[13078]["name"], "route_note": "红玉巨龙圣地约51.1,52.5，火焰净化后出现达莉亚之泪。", "fivebox": "不共享：五号分别拾取。"},
             },
             "exit": "北伐军之峰已接《纳鲁的意志》；下一步通过任务传送前往沙塔斯。",
         },
@@ -1064,13 +1059,13 @@ def main() -> None:
                 "北伐军之峰 → 使用接取“纳鲁的意志”后现场开启的沙塔斯传送门",
                 "沙塔斯城·阿达尔 → 交《纳鲁的意志》→ 接《阿达尔的恩赐》",
                 "接受《阿达尔的恩赐》后按任务脚本返回达拉然",
+                "使用炉石：暗影拱顶",
                 "沉默墓地·布雷登布莱德 → 交《阿达尔的恩赐》",
                 "布雷登布莱德的遗物（79.8,30.8） → 接《黑暗中的光明》",
                 "北伐军之峰·提里奥 → 交《黑暗中的光明》",
             ],
             "task_cards": {
-                "13081": {"name": by_id[13081]["name"], "route_note": "接任务后使用现场出现的沙塔斯传送门，不需要自行规划跨大陆路线。"},
-                "13082": {"name": by_id[13082]["name"], "route_note": "在阿达尔处接取后会触发返回达拉然的任务运输；落地后再回冰冠沉默墓地。"},
+                "13081": {"name": by_id[13081]["name"], "route_note": "接任务后先别离开，等NPC过来开启前往外域·泰罗卡森林沙塔斯城的传送门；门出现后及时进入，等太久会关闭。"},
                 "13083": {"name": by_id[13083]["name"], "route_note": "《阿达尔的恩赐》交完后，任务起点变成布雷登布莱德身旁的遗物；先点遗物接任务，再离开沉默墓地。"},
             },
             "exit": "布雷登布莱德任务链在北伐军之峰闭合；下一步进入荒凉之门/奥尔杜萨任务块。",
@@ -1081,7 +1076,7 @@ def main() -> None:
             "actions": [
                 "从东向西进入奥尔杜萨 → 做《预览》四个侦察信用：南部约54,44 → 中部约54,40 → 北部约54,34 → 西北约51,33",
                 "经过约54,36时上到最高的小平台找边缘技师塔兹拉；若平台初到没人，落地停几秒等待相位刷新 → 交《绿色科技》→ 接《边缘科学的益处》",
-                "与莉兹·拉齐维格对话乘红外绿色轰炸机 → 做《边缘科学的益处》：40轰炸场步兵、8轰炸场军官、15石像鬼伏击者",
+                "莉兹·拉齐维格 → 做《边缘科学的益处》",
                 "单号目标全部完成后可直接退出载具，由救援机带回塔兹拉平台，比等整段航线自然返航更快；五号按首号共享实测结果处理",
                 "塔兹拉 → 交《边缘科学的益处》",
                 "奥格瑞姆之锤·库尔迪拉·织亡者 → 交《预览》→ 接《从天而“降”》《指挥体系》《无法复制》",
@@ -1120,9 +1115,9 @@ def main() -> None:
             "actions": [
                 "奥尔杜萨约49,33一带 → 做《重新考验》：击杀区域怪收集10份污染精华，合成蠕动的物质，再把它投入任意一口瘟疫之锅",
                 "北部约54—55,29—30 → 做《活动窃听器》：一次只处理一组虚空召唤者+被奴役的爪牙；杀死爪牙后立即选中尸体使用虹吸魔杖，五号各取得5份黑暗物质",
-                "黑暗物质齐后到大紫色召唤水晶约53.8,33.6 → 使用水晶召唤黑暗信使，先一号触发检查全队信用，再按实际结果补号",
+                "大紫色召唤水晶 → 做《活动窃听器》",
                 "奥尔杜萨北部建筑入口约51,33 → 杀诅咒教派研究员，为五号分别收齐研究笔记第1/2/3页；每号三页齐后使用其中一页组合成《诅咒教派论文》",
-                "找奥格瑞姆之锤 → 交《重新考验》《活动窃听器》《需要更多情报》→ 接《构建路障》《片刻不得安宁》",
+                "奥格瑞姆之锤 → 交《重新考验》《活动窃听器》《需要更多情报》 → 接《构建路障》《片刻不得安宁》",
             ],
             "task_cards": {
                 "13356": {"name": by_id[13356]["name"], "route_note": "约49,33先让五号都挂好滋补剂道具Buff，再杀目标收污染精华；同一具符合条件的尸体可由五号依次拾取。各号完成个人收集/合成后，再分别把蠕动的物质投入任意一口瘟疫之锅。", "fivebox": "不共享：但五号都有滋补剂Buff时，同一尸体可五号依次拾取任务物。"},
@@ -1146,7 +1141,7 @@ def main() -> None:
                 "荒凉之门/奥尔杜萨南缘约50.4,40.3一带 → 在黑锋标记处使用路障搭设工具建造8处路障，完成《构建路障》",
                 "奥尔杜萨北部奥鲁麦斯仪式房间 → 拾取/收集奥鲁麦斯的心脏、颅骨、权杖、长袍，组合遗骸后在房间水晶处使用，召唤晋升者奥鲁麦斯",
                 "五号一起击杀奥鲁麦斯，完成《片刻不得安宁》",
-                "找奥格瑞姆之锤 → 交《构建路障》《片刻不得安宁》→ 接《溅血的旗帜》《遮挡天空》《铁墙壁垒》",
+                "奥格瑞姆之锤 → 交《构建路障》《片刻不得安宁》 → 接《溅血的旗帜》《遮挡天空》《铁墙壁垒》",
                 "先不要立即向南做三项；当前它们的目标从约50,40一路延伸到43,53，而暗影拱顶《离别礼物》后半从44,24经哭泣采掘场38—41后也正要南下，下一步先把两条纵向路线合并",
             ],
             "task_cards": {
@@ -1188,7 +1183,7 @@ def main() -> None:
             "actions": [
                 "克里托斯对话取得《混乱之种》的骷髅狮鹫 → 前往哭泣采掘场轰杀80个亡灵；本轮实跑确认共享，只需主控驾驶轰杀，其他号保持在有效共享距离",
                 "80/80后不要坐狮鹫回暗影拱顶，直接退出/跳下进入采掘场；《一片狼藉》不共享，五号分别交互/拾取四件固定文档：文档约39.1,33.7 → 账目约39.2,36.7 → 地图约38.7,39.4 → 进度表在车上约37.2,41.7",
-                "四件文档全部齐后回暗影拱顶 → 交《混乱之种》《一片狼藉》→ 接《狡诈者维雷斯》；这一步完成后暗影拱顶这条主链只剩苦难高地后半",
+                "暗影拱顶 → 交《混乱之种》《一片狼藉》 → 接《狡诈者维雷斯》",
                 "开始由北向南：约48.9,35.4或47,43低岩 → 用SGM-3击落6架破天号侦查机，完成《遮挡天空》",
                 "约47.9,40.2 → 杀5个天灾转化者；继续到格姆克尔之球约45.5,46.6，使用扭曲符文召出/削弱邪恶的格姆克尔并五号一起击杀，完成《铁墙壁垒》",
                 "继续南到陨落英雄之谷约43.8,56.6 → 同一批怪完成《溅血的旗帜》剩余5个天灾旗手+20个被转化的英雄；五圣骑直接AoE处理，不按旧单刷攻略逐只拉",
@@ -1197,7 +1192,7 @@ def main() -> None:
             "task_cards": {
                 "13172": {"name": by_id[13172]["name"], "route_note": "骷髅狮鹫普通轰炸80只；本轮实跑确认共享，主控完成80只即可。杀满后直接跳下做《一片狼藉》，不先回暗影拱顶。", "fivebox": "共享：本轮实跑确认。"},
                 "13174": {"name": by_id[13174]["name"], "route_note": "四件物固定点：文档约39.1,33.7 / 账目约39.2,36.7 / 地图约38.7,39.4 / 进度表约37.2,41.7；最后一件是卷起来的进度表，放在车/货车边缘，比前三张纸更不显眼。", "fivebox": "不共享：本轮实跑确认，四件固定文档每个号都要逐一交互/拾取。"},
-                "13313": {"name": by_id[13313]["name"], "route_note": "破天号侦查机可在48.9,35.4或47,43附近地面持续锁定；SGM-3一发一架。", "fivebox": "先一号击落一架检查队伍信用；若不共享，五号各打6架。"},
+                "13313": {"name": by_id[13313]["name"], "route_note": "破天号侦查机可在48.9,35.4或47,43附近地面持续锁定；SGM-3一发一架。", "fivebox": "共享：本轮实跑确认，主控完成即可同步全队。"},
                 "13312": {"name": by_id[13312]["name"], "route_note": "格姆克尔之球约45.5,46.6；先使用任务符文触发，再杀格姆克尔。五号都贴近后只由一号开事件测试共享。", "fivebox": "Boss击杀共享预期；触发动作是否全队计数首跑确认。"},
                 "13307": {"name": by_id[13307]["name"], "route_note": "转化者约47.9,40.2；旗手与20个被转化英雄主要在43.8,56.6附近。五圣骑可直接组队AoE，不使用面向单人职业的逐只拉怪保守打法。", "fivebox": "普通组队击杀共享预期。"},
             },
@@ -1213,7 +1208,7 @@ def main() -> None:
                 "寻找奥格瑞姆之锤 → 交《在恐惧之门前》→ 接《科雷萨的守卫者》《击破碎片》",
             ],
             "task_cards": {
-                "13329": {"name": by_id[13329]["name"], "route_note": "冰冠劫掠者在恐惧之门北侧约43,65很多；任务关键不是击杀而是尸体上使用强酸。尸体叠在一起会非常难点，因此每只拉开一点再杀。", "fivebox": "强待实测：同一具尸体是否可被五号分别使用强酸。如果可复用，6只总击杀；如果不可复用，再补到个人6次。"},
+                "13329": {"name": by_id[13329]["name"], "route_note": "冰冠劫掠者在恐惧之门北侧约43,65很多；任务关键不是击杀而是尸体上使用强酸。尸体叠在一起会非常难点，因此每只拉开一点再杀。", "fivebox": "共享：本轮实跑确认，主控完成即可同步全队。"},
             },
             "exit": "回舰后拿到科雷萨两项；现在才进入最终南下：先清科雷萨城墙，再顺势到苦难高地把《狡诈者维雷斯》整条做完。",
         },
@@ -1229,7 +1224,7 @@ def main() -> None:
                 "苦难高地·狡诈者维雷斯 → 交《邪恶城堡》→ 接《深信不疑》《煽风点火》《壮观的景象》",
             ],
             "task_cards": {
-                "13328": {"name": by_id[13328]["name"], "route_note": "三个碎片不在同一层：恐惧47.7,68.6上层；绝望50.0,67.6下层；苦难46.0,70.0下层。不要在顶层找三颗。", "fivebox": "固定水晶/任务物按个人拾取预期；每个点五号逐一确认背包已有对应碎片再离开。"},
+                "13328": {"name": by_id[13328]["name"], "route_note": "恐惧47.7,68.6上层；绝望50.0,67.6下层；苦难46.0,70.0下层。", "fivebox": "不共享：三个碎片五号分别轮流交互。"},
                 "13316": {"name": by_id[13316]["name"], "route_note": "恐惧先驱与科雷萨守卫者都在恐惧之门城墙，和三碎片完全同场；五圣骑一起清守卫即可。", "fivebox": "普通击杀共享预期。"},
                 "13143": {"name": by_id[13143]["name"], "route_note": "只用桥/高处约55—56,70—74的轻盈追迹者；压到约30—40%血出现虚弱提示后马上用徽记，控制约1分钟，再带到约55.3,70.3岩石/道路边让它自动跑开完成。圣骑伤害过高时用低伤普通攻击或去武器，避免直接秒怪；不要用玛雷卡里斯内部低处的同名怪。", "fivebox": "共享：本轮实跑确认，实服结果覆盖旧公开资料的不可共享说法；先由主控完成一次即可。"},
                 "13145": {"name": by_id[13145]["name"], "route_note": "轻盈追迹者侦察载具可跃上墙体；四点约56.3,79.1 / 59.1,74.4 / 60.6,68.7 / 58.1,70.9。玛雷卡里斯怪对载具中立，按一圈踩点即可。", "fivebox": "个人载具探索预期；先一号完整跑一圈看是否有队伍共享，没有则五号分别跑。"},
@@ -1240,7 +1235,7 @@ def main() -> None:
             "step": 35,
             "title": "玛雷卡里斯轻盈追迹者三任务：炸弹拖尸 + 挑起争端 + 12冰肤斥候",
             "actions": [
-                "维雷斯附近再次控制轻盈追迹者 → 先到前门/玛雷卡里斯约57.5,75.9，用2号能力拖动天灾炸弹，把炸弹带到4个笨拙的凶尸身边完成《深信不疑》",
+                "轻盈追迹者 → 做《深信不疑》",
                 "符文工坊约59.1,74.4 → 用4号投石技能攻击靠近低级亡灵的阴暗蛮徒，制造5起争端完成《煽风点火》；优先在同一区域循环，不追远处目标",
                 "玛雷卡里斯外围山壁约61,74 → 用追迹者跳跃能力扑向/杀死12只熟睡的冰肤斥候，完成《壮观的景象》",
                 "三项全部完成后退出载具 → 回苦难高地一次性交《深信不疑》《煽风点火》《壮观的景象》→ 接《邪恶骑士》《冰霜骑士》《鲜血骑士》",
@@ -1254,21 +1249,30 @@ def main() -> None:
         },
         {
             "step": 36,
-            "title": "苦难高地收尾：三骑士 → 奥尔巴兹·血毒 → 回舰收科雷萨",
+            "title": "苦难高地收尾 → 黑暗大教堂《提里奥的尝试》→ 回舰收科雷萨",
             "actions": [
                 "五号一起从南到北/顺路击杀三名骑士：洛基尔·邪恶骑士约56.2,80.2 → 贝洛克·鲜血骑士约59.3,71.8 → 萨芙·冰霜骑士约61.9,68.6；三项按组队Boss击杀一次完成",
                 "回苦难高地维雷斯 → 交《邪恶骑士》《冰霜骑士》《鲜血骑士》→ 接《血毒的命运》",
                 "冰冠堡垒地下深渊边缘约54.4,86.2 → 找奥尔巴兹·血毒；现场有黑锋精锐协助，五圣骑一起击杀即可",
                 "回苦难高地·狡诈者维雷斯 → 交《血毒的命运》；这条后半任务链完整闭合",
+                "黑暗大教堂入口约44.5,77.6 → 五号各自从入口两侧诅咒教派侍僧取得侍僧兜帽并装备",
+                "装备兜帽后在入口右侧篝火附近约44.4,76.2找到无任务标记的提里奥；五号全部装备兜帽并贴近后，由一个号对话启动事件即可共享",
+                "跟随剧情进入大教堂；等剧情明确提示撤离/任务计数完成后再进入逃生传送门，返回北伐军之峰",
+                "北伐军之峰 → 五号交《提里奥的尝试》",
                 "最后寻找奥格瑞姆之锤 → 交《科雷萨的守卫者》《击破碎片》；奥格瑞姆之锤中西部主链至此完整闭合",
             ],
             "task_cards": {
-                "13161": {"name": by_id[13161]["name"], "route_note": "洛基尔约56.2,80.2；三骑士里公开旧攻略普遍认为这一只最麻烦，会召唤亡灵并挂持续伤害。五圣骑优先压Boss，防骑注意净化/驱散能处理的Debuff，召唤物过多时边移动边打，不要站桩把小怪越积越多。", "fivebox": "5人组队任务，五号都到场后一次击杀共享。"},
+                "13161": {"name": by_id[13161]["name"], "route_note": "洛基尔约56.2,80.2。当前首组1防骑+4惩戒已多次实跑失败：惩戒骑容易被击杀，防骑能存活但残局输出/回蓝不足；本轮暂时跳过，保留任务，只有后续想到稳定打法时再补。该任务与《冰霜骑士》《鲜血骑士》共同作为《血毒的命运》的三项前置；跳过只会锁住这个终点任务，不影响冰冠其它主线。", "fivebox": "5人组队任务，五号都到场后一次击杀共享。"},
                 "13162": {"name": by_id[13162]["name"], "route_note": "萨芙约61.9,68.6；冰霜爆发较强，但五圣骑满级按命名精英直接处理。", "fivebox": "一次组队击杀共享。"},
                 "13163": {"name": by_id[13163]["name"], "route_note": "贝洛克约59.3,71.8，会吸取生命；五号稍微分散站位即可，不需要特殊绕路。", "fivebox": "一次组队击杀共享。"},
-                "13164": {"name": by_id[13164]["name"], "route_note": "奥尔巴兹在冰冠堡垒下方巨大深渊边缘约54.4,86.2，楼梯/深坑附近；现场有黑锋骑士协助。", "fivebox": "最终5人Boss任务，五号同时到场一次击杀。"},
+                "13164": {"name": by_id[13164]["name"], "route_note": "需要《邪恶骑士》《冰霜骑士》《鲜血骑士》三项全部完成后才可接。当前因《邪恶骑士》暂时跳过，本轮不可接；以后若补掉洛基尔再顺手补做。该任务完成后没有后续，因此不会阻断冰冠其它任务链。奥尔巴兹在冰冠堡垒下方巨大深渊边缘约54.4,86.2，现场有黑锋骑士协助。", "fivebox": "最终5人Boss任务，五号同时到场一次击杀。"},
+                "13364": {
+                    "name": by_id[13364]["name"],
+                    "route_note": "提里奥约44.4,76.2且无任务标记；五号都装备兜帽再互动。逃生门若提前出现先别进，等剧情明确提示撤离/任务完成后再进入。",
+                    "fivebox": "共享：五号都装备兜帽并贴近提里奥后，一个号互动启动事件即可。",
+                },
             },
-            "exit": "冰冠整图主路线在本段闭合；163项正式候选的覆盖、依赖、几何与玩家文字由发布门禁统一验证。首跑只回填随机触发与五开机制，不把后发现/后确认内容追加成尾部补链。",
+            "exit": "南部任务完成后利用《提里奥的尝试》事件传送回北伐军之峰，再寻找奥格瑞姆之锤收科雷萨两项；冰冠整图主路线在本段闭合。",
         },
     ]
 
@@ -1302,15 +1306,293 @@ def main() -> None:
             "13838": {"name": "碎盾训练"},
             "13839": {"name": "冲锋训练"},
             "13677": {"name": "学习驾驭"},
-            "13227": {"name": by_id[13227]["name"], "route_note": "银色比武场《学习驾驭》交完后第一次上奥格瑞姆之锤时，由凯尔坦修士顺手接取；先带去银色前线基地交。"},
+            "13227": {"name": by_id[13227]["name"], "route_note": "银色比武场《学习驾驭》交完后第一次上奥格瑞姆之锤时，由凯尔坦修士顺手接取；首组Journey确认可先带着，不阻断暗影拱顶任务。完成暗影拱顶/Jotunheim/死亡高地/黑色观察站前段后，再回银色前线基地补交。"},
         },
-        "exit": "已同时携带《审判日降临！》《乐趣十足》；下一步先去银色前线基地完成银色北伐军主链。",
+        "exit": "已同时携带《审判日降临！》《乐趣十足》；按首组Journey先去暗影拱顶做《乐趣十足》并解锁固定Hub，《审判日降临！》继续带着。",
     }
     steps.insert(0, tournament_entry)
 
-    # Preserve the full 41-step v1 before the legacy 61-task compatibility block mutates its
+    # Preserve the full route before the legacy 61-task compatibility block mutates its
     # own copy. The compatibility code remains temporarily for history/recovery only.
     full_route_steps = copy.deepcopy(steps)
+
+    # Final first-run closure: use Journey to restore the real major-phase order instead of
+    # forcing the Argent Vanguard chain to the front just because it was discovered late.
+    # Inside one local task block we still keep the reusable spatially efficient order; Journey
+    # controls the phase sequence, not every incidental first-run detour or repeated daily.
+    live = {index: copy.deepcopy(step) for index, step in enumerate(full_route_steps, start=1)}
+
+    def fragment(index: int, title: str, action_indices: list[int], keep_cards: list[int] | None = None) -> dict:
+        row = copy.deepcopy(live[index])
+        row["title"] = title
+        row["actions"] = [row["actions"][i] for i in action_indices]
+        if keep_cards is not None:
+            keep = {str(qid) for qid in keep_cards}
+            row["task_cards"] = {qid: card for qid, card in (row.get("task_cards") or {}).items() if qid in keep}
+        row["gate"] = ""
+        row["exit"] = ""
+        return row
+
+    def custom(index: int, title: str, actions: list[str], keep_cards: list[int] | None = None) -> dict:
+        row = copy.deepcopy(live[index])
+        row["title"] = title
+        row["actions"] = list(actions)
+        if keep_cards is not None:
+            keep = {str(qid) for qid in keep_cards}
+            row["task_cards"] = {qid: card for qid, card in (row.get("task_cards") or {}).items() if qid in keep}
+        row["gate"] = ""
+        row["exit"] = ""
+        return row
+
+    def merge(title: str, *rows: dict) -> dict:
+        merged = copy.deepcopy(rows[0])
+        merged["title"] = title
+        merged["actions"] = []
+        merged["task_cards"] = {}
+        for row in rows:
+            merged["actions"].extend(row.get("actions") or [])
+            merged["task_cards"].update(copy.deepcopy(row.get("task_cards") or {}))
+        merged["gate"] = ""
+        merged["exit"] = ""
+        return merged
+
+    def slice_row(row: dict, title: str, start: int, end: int, keep_cards: list[int] | None = None) -> dict:
+        part = copy.deepcopy(row)
+        part["title"] = title
+        part["actions"] = part.get("actions", [])[start:end]
+        if keep_cards is not None:
+            keep = {str(qid) for qid in keep_cards}
+            part["task_cards"] = {qid: card for qid, card in (part.get("task_cards") or {}).items() if qid in keep}
+        part["gate"] = ""
+        part["exit"] = ""
+        return part
+
+    early_shadow = merge(
+        "暗影拱顶入口：乐趣十足 → 解锁固定Hub",
+        fragment(7, "暗影拱顶入口", [4, 5, 6], [12892]),
+        live[8],
+    )
+    early_shadow_intro = slice_row(
+        early_shadow,
+        "暗影拱顶入口：乐趣十足 → 解放你的思想",
+        0, 7,
+        [12891, 12892, 12893],
+    )
+    early_shadow_unlock = slice_row(
+        early_shadow,
+        "顽固的敌人 → 解锁暗影拱顶Hub",
+        7, len(early_shadow["actions"]),
+        [12897, 12899],
+    )
+    witch_before_banshee = fragment(
+        14,
+        "白骨女巫后半：古代英雄 → 接《女妖的复仇》",
+        [0, 1, 2, 3, 4, 5],
+        [13133, 13137, 13142],
+    )
+    banshee_finish = fragment(
+        14,
+        "巴拉加德：《女妖的复仇》→ 打开瓦哈拉斯",
+        [6, 7],
+        [13142, 13213],
+    )
+    valhalas_initial = custom(
+        15,
+        "瓦哈拉斯首轮：做到《堕落的英雄》→ 暗影拱顶顺交日常",
+        [
+            "瓦哈拉斯·基尔莉芙 → 交《瓦哈拉斯之战》→ 接《瓦哈拉斯之战：堕落的英雄》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：堕落的英雄》",
+            "瓦哈拉斯 → 交《瓦哈拉斯之战：堕落的英雄》→ 接《瓦哈拉斯之战：黑暗主宰西塔利克斯》",
+            "暗影拱顶 → 交《把它们打下来！》《维尔喜欢火焰！》",
+        ],
+        [13213, 13214, 13215],
+    )
+    blackwatch_local_finish = fragment(
+        26,
+        "黑色观察站第二阶段：玛雷卡里斯 → 复生密室 → 血肉巨人收尾",
+        list(range(0, 8)),
+        [13144, 13152, 13211, 13212, 13220, 13235],
+    )
+    blackwatch_local_finish["actions"].insert(0, "玛雷卡里斯 → 做《熔炼碎片》《玛雷卡里斯的符文锻造师》")
+    blackwatch_doctor = slice_row(
+        blackwatch_local_finish,
+        "玛雷卡里斯 → 看医生 / 净化的火焰 → 一举两得",
+        0, 5,
+        [13144, 13152, 13211],
+    )
+    blackwatch_reassembly = slice_row(
+        blackwatch_local_finish,
+        "支离破碎 → 重新组合欧尔拉金 → 血肉巨人",
+        5, len(blackwatch_local_finish["actions"]),
+        [13212, 13220, 13235],
+    )
+    escort_turn = custom(
+        19,
+        "奥格瑞姆之锤：顺交《我还没死！》",
+        ["奥格瑞姆之锤·凯尔坦修士 → 交《我还没死！》"],
+        [13229],
+    )
+    post_argent_airship = fragment(
+        7,
+        "奥格瑞姆之锤：银色北伐军链后一次接齐东部任务",
+        [0, 1, 2, 3],
+        [13228, 13293, 13302, 13330, 13340],
+    )
+    east_pass = fragment(
+        20,
+        "伊米海姆 / 矿洞 → 破碎前线",
+        [0, 1, 2, 3, 4, 5, 6, 7, 9, 10],
+        [13230, 13283, 13301, 13302, 13308, 13310],
+    )
+    braden = fragment(
+        25,
+        "沉默墓地：勇气的传说 → 弥留的英雄",
+        [3],
+        [13068],
+    )
+    airship_second = copy.deepcopy(live[21])
+    airship_second["title"] = "奥格瑞姆之锤：破碎前线交接 → 知己知彼 / 爆炸油"
+    airship_second["actions"][0] = "奥格瑞姆之锤 → 凯尔坦修士交《萨隆邪铁的奴隶》；战争使者达沃斯·里赫交《伊米亚之血》"
+    airship_second["gate"] = ""
+    airship_second["exit"] = ""
+    green_tazla = fragment(
+        32,
+        "奥尔杜萨高台：绿色科技 → 边缘科学",
+        [1, 2, 3, 4],
+        [13373, 13379],
+    )
+    mordreth_first = fragment(
+        23,
+        "莫德雷萨第一圈：憎恶爆破 + 对抗巨人",
+        list(range(0, 6)),
+        [13264, 13277, 13278, 13279, 13351],
+    )
+    chemistry_preview = merge(
+        "莫德雷萨化学任务 + 奥尔杜萨预览",
+        fragment(24, "莫德雷萨化学任务", [0], []),
+        fragment(32, "奥尔杜萨预览", [0, 5], [13351]),
+        fragment(23, "任务卡", [], [13278, 13279]),
+    )
+    chemistry_preview["actions"][-1] = "奥格瑞姆之锤·库尔迪拉·织亡者 → 交《污染者科普洛斯》《化学常识》《预览》→ 接《从天而“降”》《指挥体系》《无法复制》"
+    leave_gift = fragment(
+        36,
+        "暗影拱顶《离别礼物》→ 幻象观察者三任务",
+        list(range(1, 9)),
+        [13168, 13169, 13170, 13171],
+    )
+    war_machine = fragment(
+        24,
+        "失落希望之谷：战地维修 → 召唤大军",
+        [1, 2, 3, 4, 5],
+        [13304, 13305, 13236, 13348],
+    )
+    quarry_finish = fragment(
+        37,
+        "哭泣采掘场：混乱之种 / 一片狼藉 → 狡诈者维雷斯",
+        [0, 1, 2],
+        [13172, 13174],
+    )
+    vile_recruit = fragment(
+        39,
+        "苦难高地：狡诈者维雷斯 → 新兵 → 邪恶城堡",
+        [2, 3, 4, 5],
+        [13143, 13145],
+    )
+    futility_to_aldurthar = merge(
+        "奥格瑞姆之锤交《徒劳》→ 奥尔杜萨第三轮",
+        custom(24, "徒劳收尾", ["奥格瑞姆之锤·库尔迪拉·织亡者 → 交《徒劳》→ 接《冰霜巨龙的摇篮》"], [13348]),
+        live[35],
+    )
+    sindragosa_grave = fragment(
+        25,
+        "辛达苟萨之墓：冰霜巨龙的摇篮 + 巨龙的墓地",
+        [0, 1, 2],
+        [13349, 13359, 13360],
+    )
+    south_sweep = fragment(
+        37,
+        "奥尔杜萨南下：遮挡天空 / 铁墙壁垒 / 溅血的旗帜",
+        [3, 4, 5, 6],
+        [13307, 13312, 13313],
+    )
+    two_knights = custom(
+        41,
+        "玛雷卡里斯：本组完成冰霜骑士 + 鲜血骑士",
+        [
+            "玛雷卡里斯 → 做《冰霜骑士》《鲜血骑士》",
+            "苦难高地·狡诈者维雷斯 → 交《冰霜骑士》《鲜血骑士》",
+        ],
+        [13162, 13163],
+    )
+    whitebone_finish = fragment(
+        25,
+        "白骨之庭：寻求答案 → 猎人与王子 → 知识的负担",
+        [4, 5, 6],
+        [13360, 13361],
+    )
+    argent_aid_unlock = fragment(
+        26,
+        "奥格瑞姆之锤：交冰霜巨龙 / 知识负担 → 银色北伐军的协助",
+        [8],
+        [13363],
+    )
+    tirion = fragment(
+        41,
+        "黑暗大教堂：《提里奥的尝试》",
+        [4, 5, 6, 7],
+        [13364],
+    )
+    corprethar_finish = merge(
+        "科雷萨：守卫者 + 三碎片收尾",
+        fragment(39, "科雷萨", [0, 1], [13316, 13328]),
+        custom(41, "回舰交付", ["奥格瑞姆之锤 → 交《科雷萨的守卫者》《击破碎片》"], []),
+    )
+    dragonblight_sanctums = fragment(
+        30,
+        "龙眠神殿：阿莱克丝塔萨 + 克罗米",
+        list(range(0, 9)),
+        [13077, 13078, 13343],
+    )
+    dragonblight_return = fragment(
+        30,
+        "返回冰冠：阿莱克丝塔萨的恩赐 → 纳鲁的意志",
+        list(range(9, 13)),
+        [],
+    )
+    deferred_hard = custom(
+        15,
+        "高难可选收尾：瓦哈拉斯后续 + 邪恶骑士",
+        [
+            "使用炉石：暗影拱顶",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：黑暗主宰西塔利克斯》→ 交《瓦哈拉斯之战：黑暗主宰西塔利克斯》→ 接《瓦哈拉斯之战：齐格莉德归来》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：齐格莉德归来》→ 交《瓦哈拉斯之战：齐格莉德归来》→ 接《瓦哈拉斯之战：血肉巨人卡纳基！》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：血肉巨人卡纳基！》→ 交《瓦哈拉斯之战：血肉巨人卡纳基！》→ 接《瓦哈拉斯之战：“死亡一击”领主》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：“死亡一击”领主》→ 交《瓦哈拉斯之战：“死亡一击”领主》→ 接《瓦哈拉斯之战：终极挑战》",
+            "瓦哈拉斯 → 做《瓦哈拉斯之战：终极挑战》→ 交《瓦哈拉斯之战：终极挑战》",
+            "玛雷卡里斯 → 做《邪恶骑士》",
+            "苦难高地·狡诈者维雷斯 → 交《邪恶骑士》→ 接《血毒的命运》",
+            "冰冠堡垒地下深渊边缘 → 做《血毒的命运》",
+            "苦难高地·狡诈者维雷斯 → 交《血毒的命运》",
+        ],
+        [13215, 13216, 13217, 13218, 13219],
+    )
+    deferred_hard["task_cards"].update({
+        qid: copy.deepcopy(card)
+        for qid, card in (live[41].get("task_cards") or {}).items()
+        if qid in {"13161", "13164"}
+    })
+
+    full_route_steps = [
+        live[1], early_shadow_intro, early_shadow_unlock, live[9], live[10], live[11], live[12], live[13], witch_before_banshee,
+        live[16], live[17], live[18], banshee_finish, valhalas_initial,
+        live[19], blackwatch_doctor, blackwatch_reassembly, escort_turn,
+        live[2], live[3], live[4], live[5], live[6],
+        post_argent_airship, east_pass, braden, airship_second, green_tazla, mordreth_first, chemistry_preview,
+        live[22], leave_gift, live[33], live[34], war_machine, quarry_finish, vile_recruit, live[40],
+        futility_to_aldurthar, sindragosa_grave, south_sweep, live[38], two_knights, whitebone_finish,
+        argent_aid_unlock, live[27], tirion, live[28], live[29], corprethar_finish, dragonblight_sanctums, dragonblight_return, live[31],
+        deferred_hard,
+    ]
 
     # The 16-step block below is only the previously published 61-task snapshot. Latest live Journey
     # disproves the 13419 -> 13036 hard-gate assumption and reopens the Argent Vanguard branch.
@@ -1622,8 +1904,8 @@ def main() -> None:
             if step.get(key):
                 step[key] = player_task_names(str(step[key]), by_id)
         step["actions"] = [player_task_names(str(action), by_id) for action in (step.get("actions") or [])]
-        # The reordered v1 keeps the full operation sequence while the user live-runs it. The
-        # final action-card compression happens after this ordering is validated in practice.
+        # Reordered steps may retain rich planning/geometry facts internally. Player-facing actions
+        # are compacted in build_icecrown_route_structured.py and hard-gated again by the common HTML builder.
         for qid_text, card in (step.get("task_cards") or {}).items():
             qid = int(qid_text)
             if card.get("route_note"):
@@ -1643,7 +1925,7 @@ def main() -> None:
         "zone": {"id": 210, "name": "冰冠冰川"},
         "profile": "level-80 blood-elf paladin fivebox no-cold-weather-flying",
         "timing_policy": {
-            "status": "reordered_v1_pending_live_recalibration",
+            "status": "first_group_journey_closed_pending_clean_recalibration",
             "route_total_center_minutes": 0,
             "route_total_pre_live_band_minutes": [0, 0],
         },
@@ -1656,7 +1938,7 @@ def main() -> None:
             "blocked_13419": True,
             "argent_vanguard_chain_reachable_live": True,
             "airship_breadcrumb_reachable_after_live_chain": True,
-            "live_supplement_integration_pending": True,
+            "live_supplement_integration_pending": False,
             "live_12892_confirmed": True,
             "live_12892_completed": True,
         },
@@ -1670,18 +1952,18 @@ def main() -> None:
             "ignored_or_deferred_dailies": [13674],
         },
         "current_group_progress": {
-            "journey_event_count": 2547,
-            "journey_complete_count": 1076,
-            "status": "icecrown_reordered_v1_live_run_in_progress",
-            "formal_pool_count": 163,
-            "current_active_tasks": [13073, 13161, 13162, 13163, 13307, 13312, 13313, 13349, 13359],
+            "journey_event_count": 2734,
+            "journey_complete_count": 1189,
+            "status": "icecrown_first_group_main_route_closed",
+            "formal_pool_count": 164,
             "current_excluded_pvp_task": 13234,
-            "unfinished_valhalas_chain": [13215, 13216, 13217, 13218, 13219],
-            "active_skipped_high_difficulty_task": 13215,
+            "current_deferred_high_difficulty_tasks": [13161, 13216],
+            "unfinished_optional_valhalas_chain": [13216, 13217, 13218, 13219],
+            "repeatable_reaccepted_after_completion": [12838, 13261, 13302, 13330, 13357],
             "completed_entry_tasks": [13668, 13829, 13838, 13839, 13677, 12892, 12891, 12893],
-            "active_deferred_tasks": [13215, 13634, 13674, 13678],
+            "other_deferred_side_tasks": [13634, 13674, 13678],
             "next_zone_active_breadcrumb": 12521,
-            "actual_icecrown_exit": "奥格瑞姆之锤",
+            "actual_icecrown_exit": "主跑闭合后转索拉查；Journey最后冰冠节点为13215完成并接13216，13216未继续。",
         },
         "steps": steps,
     }
@@ -1690,13 +1972,13 @@ def main() -> None:
     lines = [
         "# 冰冠冰川当前可达路线构建摘要",
         "",
-        f"状态：冰冠重排v1已物化为163项/{len(steps)}步执行路线；当前用于首组继续实跑，估时待本轮跑完后重算。",
+        f"状态：冰冠首组Journey闭环已物化为164项/{len(steps)}步执行路线；主跑已结束，估时按最终顺序另行重算。",
         "",
         "- 从风暴峭壁进入冰冠后，第一地理区域是银色比武场；独立银色锦标赛分类与首轮日常仍按原规则处理。",
         "- 《迎接挑战》需要至少3天候选者徽记，《银松森林的黑骑士？》需要跨大陆；两条已接一次性支线记录为延后，不阻断连续清图。",
         "- Journey事件2213确认13227《审判日降临！》在银色比武场首轮训练后第一次上奥格瑞姆之锤时由凯尔坦修士自然接取；2333交付后2334立即可接13036《无上的荣耀》。13419《作战准备》不是硬前置。",
         "- 13234《血的代价！》与13376《长途轰炸：失落希望之谷！》不进入核心路线；重复日常不参与一次性主线状态。",
-        "- 41步重排后的总估时暂不沿用旧16步预算，等当前首组按新顺序实跑后重算。",
+        "- 54步为首组Journey闭环后的阶段顺序，并额外按玩家阅读负担拆开3个超过10行的长段；总估时不沿用旧41步预算，后续按最终路线重新逐块计算。",
         "",
         f"## {len(steps)}步当前顺序",
         "",

@@ -7,6 +7,10 @@
     "source_layer": "WotLK base tables from the supplied Questie package; Titan effective resolver is still a separate pending layer",
     "coordinate_space": "Questie zone-local x/y percentages, 0..100",
     "faction_scope": "Horde + neutral/both-faction quest-start NPCs",
+    "task_profile_version": "zangarmarsh-task-profiles-v1",
+    "special_mechanism_version": "special-mechanism-registry-v1",
+    "exact_route_circle_version": "exact-display-circles-v1",
+    "macro_route_version": "zangarmarsh-macro-route-v1",
     "analysis": "threshold-free point-cloud geometry; no nearby/overlap classification is hard-coded yet",
     "metric_notes": {
       "centroid_distance": "distance between mean centers in Questie map percentage units",
@@ -517,6 +521,66 @@
         [
           82.08,
           47.29
+        ]
+      ]
+    },
+    "9701": {
+      "quest_id": 9701,
+      "name": "观察孢子人",
+      "quest_level": 63,
+      "required_level": 61,
+      "target_kinds": {
+        "trigger": 1
+      },
+      "geometry": {
+        "point_count": 1,
+        "centroid": [
+          14.39,
+          61.05
+        ],
+        "bbox": {
+          "left": 14.39,
+          "top": 61.05,
+          "right": 14.39,
+          "bottom": 61.05,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "radius_p50": 0.0,
+        "radius_p90": 0.0,
+        "principal_axis": {
+          "dx": 0.0,
+          "dy": 0.0,
+          "lambda_major": 0.0,
+          "lambda_minor": 0.0,
+          "axis_strength": 0.0,
+          "direction": "无主轴"
+        }
+      },
+      "start_npc_ids": [
+        17831
+      ],
+      "entry_from_start": {
+        "distance": 10.314,
+        "origin": [
+          23.32,
+          66.21
+        ],
+        "target": [
+          14.39,
+          61.05
+        ],
+        "direction": "西北"
+      },
+      "objective_refs": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "points": [
+        [
+          14.39,
+          61.05
         ]
       ]
     },
@@ -1428,6 +1492,66 @@
         [
           19.92,
           6.34
+        ]
+      ]
+    },
+    "9716": {
+      "quest_id": 9716,
+      "name": "暗泽湖的异常",
+      "quest_level": 63,
+      "required_level": 61,
+      "target_kinds": {
+        "trigger": 1
+      },
+      "geometry": {
+        "point_count": 1,
+        "centroid": [
+          70.75,
+          80.15
+        ],
+        "bbox": {
+          "left": 70.75,
+          "top": 80.15,
+          "right": 70.75,
+          "bottom": 80.15,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "radius_p50": 0.0,
+        "radius_p90": 0.0,
+        "principal_axis": {
+          "dx": 0.0,
+          "dy": 0.0,
+          "lambda_major": 0.0,
+          "lambda_minor": 0.0,
+          "axis_strength": 0.0,
+          "direction": "无主轴"
+        }
+      },
+      "start_npc_ids": [
+        17841
+      ],
+      "entry_from_start": {
+        "distance": 19.678,
+        "origin": [
+          78.4,
+          62.02
+        ],
+        "target": [
+          70.75,
+          80.15
+        ],
+        "direction": "西南"
+      },
+      "objective_refs": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "points": [
+        [
+          70.75,
+          80.15
         ]
       ]
     },
@@ -3049,6 +3173,53 @@
         ]
       ]
     },
+    "9731": {
+      "quest_id": 9731,
+      "name": "抽水泵结构图",
+      "quest_level": 63,
+      "required_level": 59,
+      "target_kinds": {
+        "trigger": 1
+      },
+      "geometry": {
+        "point_count": 1,
+        "centroid": [
+          50.34,
+          40.87
+        ],
+        "bbox": {
+          "left": 50.34,
+          "top": 40.87,
+          "right": 50.34,
+          "bottom": 40.87,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "radius_p50": 0.0,
+        "radius_p90": 0.0,
+        "principal_axis": {
+          "dx": 0.0,
+          "dy": 0.0,
+          "lambda_major": 0.0,
+          "lambda_minor": 0.0,
+          "axis_strength": 0.0,
+          "direction": "无主轴"
+        }
+      },
+      "start_npc_ids": [],
+      "entry_from_start": null,
+      "objective_refs": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "points": [
+        [
+          50.34,
+          40.87
+        ]
+      ]
+    },
     "9739": {
       "quest_id": 9739,
       "name": "孢子人的困境",
@@ -4463,6 +4634,66 @@
         [
           82.91,
           79.9
+        ]
+      ]
+    },
+    "9752": {
+      "quest_id": 9752,
+      "name": "逃离暗泽村",
+      "quest_level": 63,
+      "required_level": 60,
+      "target_kinds": {
+        "trigger": 1
+      },
+      "geometry": {
+        "point_count": 1,
+        "centroid": [
+          78.77,
+          63.75
+        ],
+        "bbox": {
+          "left": 78.77,
+          "top": 63.75,
+          "right": 78.77,
+          "bottom": 63.75,
+          "width": 0.0,
+          "height": 0.0
+        },
+        "radius_p50": 0.0,
+        "radius_p90": 0.0,
+        "principal_axis": {
+          "dx": 0.0,
+          "dy": 0.0,
+          "lambda_major": 0.0,
+          "lambda_minor": 0.0,
+          "axis_strength": 0.0,
+          "direction": "无主轴"
+        }
+      },
+      "start_npc_ids": [
+        17969
+      ],
+      "entry_from_start": {
+        "distance": 22.272,
+        "origin": [
+          83.38,
+          85.54
+        ],
+        "target": [
+          78.77,
+          63.75
+        ],
+        "direction": "北"
+      },
+      "objective_refs": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "points": [
+        [
+          78.77,
+          63.75
         ]
       ]
     },
@@ -24454,6 +24685,30 @@
       "bbox_iou": 0.295
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9845,
+      "b_name": "下钩钓鱼",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 0.448,
+      "minimum_point_distance": 1.707,
+      "a_to_b_nn_p50": 1.707,
+      "b_to_a_nn_p50": 3.108,
+      "symmetric_nn_p50": 2.407,
+      "a_to_b_nn_p90": 1.707,
+      "b_to_a_nn_p90": 4.51,
+      "symmetric_nn_p90": 3.108,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 10117,
       "a_name": "通缉：穆玛基酋长",
       "b": 10118,
@@ -24499,6 +24754,78 @@
       "a_to_b_nn_p90": 8.313,
       "b_to_a_nn_p90": 0.457,
       "symmetric_nn_p90": 4.385,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9785,
+      "b_name": "古树的祝福",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 2.287,
+      "minimum_point_distance": 2.333,
+      "a_to_b_nn_p50": 2.333,
+      "b_to_a_nn_p50": 3.014,
+      "symmetric_nn_p50": 2.674,
+      "a_to_b_nn_p90": 2.333,
+      "b_to_a_nn_p90": 3.559,
+      "symmetric_nn_p90": 2.946,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9739,
+      "b_name": "孢子人的困境",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 1.707,
+      "minimum_point_distance": 1.79,
+      "a_to_b_nn_p50": 1.79,
+      "b_to_a_nn_p50": 3.585,
+      "symmetric_nn_p50": 2.687,
+      "a_to_b_nn_p90": 1.79,
+      "b_to_a_nn_p90": 3.938,
+      "symmetric_nn_p90": 2.864,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9742,
+      "b_name": "更多孢子囊",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 1.707,
+      "minimum_point_distance": 1.79,
+      "a_to_b_nn_p50": 1.79,
+      "b_to_a_nn_p50": 3.585,
+      "symmetric_nn_p50": 2.687,
+      "a_to_b_nn_p90": 1.79,
+      "b_to_a_nn_p90": 3.938,
+      "symmetric_nn_p90": 2.864,
       "bbox_iou": 0.0
     },
     {
@@ -25340,6 +25667,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9773,
+      "b_name": "别再提蘑菇了！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 8.684,
+      "minimum_point_distance": 2.342,
+      "a_to_b_nn_p50": 2.342,
+      "b_to_a_nn_p50": 8.452,
+      "symmetric_nn_p50": 5.397,
+      "a_to_b_nn_p90": 2.342,
+      "b_to_a_nn_p90": 16.454,
+      "symmetric_nn_p90": 9.398,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9728,
       "a_name": "热情的欢迎",
       "b": 9769,
@@ -25554,6 +25905,30 @@
       "b_to_a_nn_p90": 4.976,
       "symmetric_nn_p90": 9.041,
       "bbox_iou": 0.098
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9773,
+      "b_name": "别再提蘑菇了！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 9.596,
+      "minimum_point_distance": 1.415,
+      "a_to_b_nn_p50": 1.415,
+      "b_to_a_nn_p50": 10.824,
+      "symmetric_nn_p50": 6.119,
+      "a_to_b_nn_p90": 1.415,
+      "b_to_a_nn_p90": 17.142,
+      "symmetric_nn_p90": 9.278,
+      "bbox_iou": 0.0
     },
     {
       "a": 9806,
@@ -26402,6 +26777,30 @@
       "bbox_iou": 0.154
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9903,
+      "b_name": "多头蛇之王",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 8.129,
+      "minimum_point_distance": 8.129,
+      "a_to_b_nn_p50": 8.129,
+      "b_to_a_nn_p50": 8.129,
+      "symmetric_nn_p50": 8.129,
+      "a_to_b_nn_p90": 8.129,
+      "b_to_a_nn_p90": 8.129,
+      "symmetric_nn_p90": 8.129,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9814,
       "a_name": "爆顶蘑菇",
       "b": 9904,
@@ -26519,6 +26918,30 @@
       "a_to_b_nn_p90": 25.484,
       "b_to_a_nn_p90": 4.205,
       "symmetric_nn_p90": 14.845,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9895,
+      "b_name": "崩溃的平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 8.322,
+      "minimum_point_distance": 8.322,
+      "a_to_b_nn_p50": 8.322,
+      "b_to_a_nn_p50": 8.322,
+      "symmetric_nn_p50": 8.322,
+      "a_to_b_nn_p90": 8.322,
+      "b_to_a_nn_p90": 8.322,
+      "symmetric_nn_p90": 8.322,
       "bbox_iou": 0.0
     },
     {
@@ -26831,6 +27254,30 @@
       "a_to_b_nn_p90": 13.352,
       "b_to_a_nn_p90": 17.12,
       "symmetric_nn_p90": 15.236,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9770,
+      "b_name": "沼牙的威胁",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 13.147,
+      "minimum_point_distance": 2.754,
+      "a_to_b_nn_p50": 2.754,
+      "b_to_a_nn_p50": 16.891,
+      "symmetric_nn_p50": 9.823,
+      "a_to_b_nn_p90": 2.754,
+      "b_to_a_nn_p90": 29.189,
+      "symmetric_nn_p90": 15.972,
       "bbox_iou": 0.0
     },
     {
@@ -27804,6 +28251,30 @@
       "bbox_iou": 0.114
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9842,
+      "b_name": "最锋利的刀刃",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 15.635,
+      "minimum_point_distance": 5.096,
+      "a_to_b_nn_p50": 5.096,
+      "b_to_a_nn_p50": 18.483,
+      "symmetric_nn_p50": 11.789,
+      "a_to_b_nn_p90": 5.096,
+      "b_to_a_nn_p90": 25.832,
+      "symmetric_nn_p90": 15.464,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9709,
       "a_name": "偷回蘑菇",
       "b": 10117,
@@ -28096,6 +28567,54 @@
       "bbox_iou": 0.012
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 10096,
+      "b_name": "拯救孢子人",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 14.182,
+      "minimum_point_distance": 10.515,
+      "a_to_b_nn_p50": 10.515,
+      "b_to_a_nn_p50": 14.132,
+      "symmetric_nn_p50": 12.324,
+      "a_to_b_nn_p90": 10.515,
+      "b_to_a_nn_p90": 17.373,
+      "symmetric_nn_p90": 13.944,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9747,
+      "b_name": "暗泽部族",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 14.069,
+      "minimum_point_distance": 10.41,
+      "a_to_b_nn_p50": 10.41,
+      "b_to_a_nn_p50": 14.245,
+      "symmetric_nn_p50": 12.328,
+      "a_to_b_nn_p90": 10.41,
+      "b_to_a_nn_p90": 17.581,
+      "symmetric_nn_p90": 13.996,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9720,
       "a_name": "恢复平衡",
       "b": 9773,
@@ -28196,6 +28715,30 @@
       "b_to_a_nn_p90": 0.0,
       "symmetric_nn_p90": 19.315,
       "bbox_iou": 0.025
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9774,
+      "b_name": "厚重多头蛇鳞片",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 16.716,
+      "minimum_point_distance": 2.418,
+      "a_to_b_nn_p50": 2.418,
+      "b_to_a_nn_p50": 22.741,
+      "symmetric_nn_p50": 12.579,
+      "a_to_b_nn_p90": 2.418,
+      "b_to_a_nn_p90": 37.542,
+      "symmetric_nn_p90": 19.98,
+      "bbox_iou": 0.0
     },
     {
       "a": 9720,
@@ -28459,6 +29002,30 @@
       "a_to_b_nn_p90": 28.64,
       "b_to_a_nn_p90": 11.345,
       "symmetric_nn_p90": 19.992,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9730,
+      "b_name": "暗潮纳迦的首领",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.795,
+      "minimum_point_distance": 12.795,
+      "a_to_b_nn_p50": 12.795,
+      "b_to_a_nn_p50": 12.795,
+      "symmetric_nn_p50": 12.795,
+      "a_to_b_nn_p90": 12.795,
+      "b_to_a_nn_p90": 12.795,
+      "symmetric_nn_p90": 12.795,
       "bbox_iou": 0.0
     },
     {
@@ -29094,6 +29661,54 @@
       "bbox_iou": 0.065
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9808,
+      "b_name": "亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 17.796,
+      "minimum_point_distance": 8.018,
+      "a_to_b_nn_p50": 8.018,
+      "b_to_a_nn_p50": 19.003,
+      "symmetric_nn_p50": 13.51,
+      "a_to_b_nn_p90": 8.018,
+      "b_to_a_nn_p90": 32.972,
+      "symmetric_nn_p90": 20.495,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9809,
+      "b_name": "更多亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 17.796,
+      "minimum_point_distance": 8.018,
+      "a_to_b_nn_p50": 8.018,
+      "b_to_a_nn_p50": 19.003,
+      "symmetric_nn_p50": 13.51,
+      "a_to_b_nn_p90": 8.018,
+      "b_to_a_nn_p90": 32.972,
+      "symmetric_nn_p90": 20.495,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9772,
       "a_name": "尤尔巴的报告",
       "b": 9774,
@@ -29285,6 +29900,30 @@
       "a_to_b_nn_p90": 21.658,
       "b_to_a_nn_p90": 10.14,
       "symmetric_nn_p90": 15.899,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9894,
+      "b_name": "保护观察者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 13.821,
+      "minimum_point_distance": 13.821,
+      "a_to_b_nn_p50": 13.821,
+      "b_to_a_nn_p50": 13.821,
+      "symmetric_nn_p50": 13.821,
+      "a_to_b_nn_p90": 13.821,
+      "b_to_a_nn_p90": 13.821,
+      "symmetric_nn_p90": 13.821,
       "bbox_iou": 0.0
     },
     {
@@ -29688,6 +30327,54 @@
       "bbox_iou": 0.22
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9774,
+      "b_name": "厚重多头蛇鳞片",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 26.601,
+      "minimum_point_distance": 1.24,
+      "a_to_b_nn_p50": 1.24,
+      "b_to_a_nn_p50": 27.118,
+      "symmetric_nn_p50": 14.179,
+      "a_to_b_nn_p90": 1.24,
+      "b_to_a_nn_p90": 46.325,
+      "symmetric_nn_p90": 23.782,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9895,
+      "b_name": "崩溃的平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 14.314,
+      "minimum_point_distance": 14.314,
+      "a_to_b_nn_p50": 14.314,
+      "b_to_a_nn_p50": 14.314,
+      "symmetric_nn_p50": 14.314,
+      "a_to_b_nn_p90": 14.314,
+      "b_to_a_nn_p90": 14.314,
+      "symmetric_nn_p90": 14.314,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9726,
       "a_name": "既然我们是朋友......",
       "b": 9903,
@@ -29733,6 +30420,30 @@
       "a_to_b_nn_p90": 17.959,
       "b_to_a_nn_p90": 12.657,
       "symmetric_nn_p90": 15.308,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9702,
+      "b_name": "狼吞虎咽",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 15.925,
+      "minimum_point_distance": 12.763,
+      "a_to_b_nn_p50": 12.763,
+      "b_to_a_nn_p50": 15.968,
+      "symmetric_nn_p50": 14.366,
+      "a_to_b_nn_p90": 12.763,
+      "b_to_a_nn_p90": 18.417,
+      "symmetric_nn_p90": 15.59,
       "bbox_iou": 0.0
     },
     {
@@ -29904,6 +30615,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9730,
+      "a_name": "暗潮纳迦的首领",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 14.528,
+      "minimum_point_distance": 14.528,
+      "a_to_b_nn_p50": 14.528,
+      "b_to_a_nn_p50": 14.528,
+      "symmetric_nn_p50": 14.528,
+      "a_to_b_nn_p90": 14.528,
+      "b_to_a_nn_p90": 14.528,
+      "symmetric_nn_p90": 14.528,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9774,
       "a_name": "厚重多头蛇鳞片",
       "b": 9846,
@@ -29926,6 +30661,30 @@
       "b_to_a_nn_p90": 10.273,
       "symmetric_nn_p90": 23.569,
       "bbox_iou": 0.04
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9720,
+      "b_name": "恢复平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 27.83,
+      "minimum_point_distance": 0.205,
+      "a_to_b_nn_p50": 0.205,
+      "b_to_a_nn_p50": 29.027,
+      "symmetric_nn_p50": 14.616,
+      "a_to_b_nn_p90": 0.205,
+      "b_to_a_nn_p90": 53.182,
+      "symmetric_nn_p90": 26.694,
+      "bbox_iou": 0.0
     },
     {
       "a": 9730,
@@ -30000,6 +30759,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9817,
+      "b_name": "血鳞纳迦的领袖",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 14.81,
+      "minimum_point_distance": 14.81,
+      "a_to_b_nn_p50": 14.81,
+      "b_to_a_nn_p50": 14.81,
+      "symmetric_nn_p50": 14.81,
+      "a_to_b_nn_p90": 14.81,
+      "b_to_a_nn_p90": 14.81,
+      "symmetric_nn_p90": 14.81,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9708,
       "a_name": "熟悉的蘑菇",
       "b": 9904,
@@ -30046,6 +30829,54 @@
       "b_to_a_nn_p90": 27.778,
       "symmetric_nn_p90": 24.889,
       "bbox_iou": 0.007
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9784,
+      "b_name": "鉴定植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.274,
+      "minimum_point_distance": 1.707,
+      "a_to_b_nn_p50": 1.707,
+      "b_to_a_nn_p50": 28.319,
+      "symmetric_nn_p50": 15.013,
+      "a_to_b_nn_p90": 1.707,
+      "b_to_a_nn_p90": 43.602,
+      "symmetric_nn_p90": 22.654,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9802,
+      "b_name": "赞加沼泽的植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.274,
+      "minimum_point_distance": 1.707,
+      "a_to_b_nn_p50": 1.707,
+      "b_to_a_nn_p50": 28.319,
+      "symmetric_nn_p50": 15.013,
+      "a_to_b_nn_p90": 1.707,
+      "b_to_a_nn_p90": 43.602,
+      "symmetric_nn_p90": 22.654,
+      "bbox_iou": 0.0
     },
     {
       "a": 9806,
@@ -30238,6 +31069,54 @@
       "b_to_a_nn_p90": 11.613,
       "symmetric_nn_p90": 25.556,
       "bbox_iou": 0.021
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9814,
+      "b_name": "爆顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 18.698,
+      "minimum_point_distance": 12.001,
+      "a_to_b_nn_p50": 12.001,
+      "b_to_a_nn_p50": 18.419,
+      "symmetric_nn_p50": 15.21,
+      "a_to_b_nn_p90": 12.001,
+      "b_to_a_nn_p90": 25.15,
+      "symmetric_nn_p90": 18.575,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9774,
+      "b_name": "厚重多头蛇鳞片",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 19.845,
+      "minimum_point_distance": 1.707,
+      "a_to_b_nn_p50": 1.707,
+      "b_to_a_nn_p50": 28.888,
+      "symmetric_nn_p50": 15.297,
+      "a_to_b_nn_p90": 1.707,
+      "b_to_a_nn_p90": 42.123,
+      "symmetric_nn_p90": 21.915,
+      "bbox_iou": 0.0
     },
     {
       "a": 9842,
@@ -30944,6 +31823,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9785,
+      "b_name": "古树的祝福",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 17.214,
+      "minimum_point_distance": 15.136,
+      "a_to_b_nn_p50": 15.136,
+      "b_to_a_nn_p50": 17.214,
+      "symmetric_nn_p50": 16.175,
+      "a_to_b_nn_p90": 15.136,
+      "b_to_a_nn_p90": 18.876,
+      "symmetric_nn_p90": 17.006,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9743,
       "a_name": "天敌",
       "b": 9817,
@@ -30989,6 +31892,30 @@
       "a_to_b_nn_p90": 55.345,
       "b_to_a_nn_p90": 12.203,
       "symmetric_nn_p90": 33.774,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9841,
+      "b_name": "清除沼光抽血者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 22.002,
+      "minimum_point_distance": 6.254,
+      "a_to_b_nn_p50": 6.254,
+      "b_to_a_nn_p50": 26.818,
+      "symmetric_nn_p50": 16.536,
+      "a_to_b_nn_p90": 6.254,
+      "b_to_a_nn_p90": 35.385,
+      "symmetric_nn_p90": 20.819,
       "bbox_iou": 0.0
     },
     {
@@ -31109,6 +32036,30 @@
       "a_to_b_nn_p90": 16.625,
       "b_to_a_nn_p90": 16.625,
       "symmetric_nn_p90": 16.625,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9820,
+      "b_name": "通缉：格罗阿克",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 16.654,
+      "minimum_point_distance": 16.654,
+      "a_to_b_nn_p50": 16.654,
+      "b_to_a_nn_p50": 16.654,
+      "symmetric_nn_p50": 16.654,
+      "a_to_b_nn_p90": 16.654,
+      "b_to_a_nn_p90": 16.654,
+      "symmetric_nn_p90": 16.654,
       "bbox_iou": 0.0
     },
     {
@@ -31286,6 +32237,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9784,
+      "b_name": "鉴定植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.155,
+      "minimum_point_distance": 2.342,
+      "a_to_b_nn_p50": 2.342,
+      "b_to_a_nn_p50": 31.454,
+      "symmetric_nn_p50": 16.898,
+      "a_to_b_nn_p90": 2.342,
+      "b_to_a_nn_p90": 63.661,
+      "symmetric_nn_p90": 33.001,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9802,
+      "b_name": "赞加沼泽的植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.155,
+      "minimum_point_distance": 2.342,
+      "a_to_b_nn_p50": 2.342,
+      "b_to_a_nn_p50": 31.454,
+      "symmetric_nn_p50": 16.898,
+      "a_to_b_nn_p90": 2.342,
+      "b_to_a_nn_p90": 63.661,
+      "symmetric_nn_p90": 33.001,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9720,
       "a_name": "恢复平衡",
       "b": 9845,
@@ -31454,6 +32453,54 @@
       "bbox_iou": 0.008
     },
     {
+      "a": 9728,
+      "a_name": "热情的欢迎",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.953,
+      "minimum_point_distance": 9.226,
+      "a_to_b_nn_p50": 24.969,
+      "b_to_a_nn_p50": 9.226,
+      "symmetric_nn_p50": 17.098,
+      "a_to_b_nn_p90": 43.348,
+      "b_to_a_nn_p90": 9.226,
+      "symmetric_nn_p90": 26.287,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9708,
+      "a_name": "熟悉的蘑菇",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 21.407,
+      "minimum_point_distance": 14.375,
+      "a_to_b_nn_p50": 19.833,
+      "b_to_a_nn_p50": 14.375,
+      "symmetric_nn_p50": 17.104,
+      "a_to_b_nn_p90": 33.786,
+      "b_to_a_nn_p90": 14.375,
+      "symmetric_nn_p90": 24.081,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9702,
       "a_name": "狼吞虎咽",
       "b": 9841,
@@ -31619,6 +32666,30 @@
       "a_to_b_nn_p90": 20.737,
       "b_to_a_nn_p90": 15.165,
       "symmetric_nn_p90": 17.951,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9904,
+      "b_name": "猎杀恐爪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 17.202,
+      "minimum_point_distance": 17.202,
+      "a_to_b_nn_p50": 17.202,
+      "b_to_a_nn_p50": 17.202,
+      "symmetric_nn_p50": 17.202,
+      "a_to_b_nn_p90": 17.202,
+      "b_to_a_nn_p90": 17.202,
+      "symmetric_nn_p90": 17.202,
       "bbox_iou": 0.0
     },
     {
@@ -32104,6 +33175,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9808,
+      "b_name": "亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 26.585,
+      "minimum_point_distance": 6.838,
+      "a_to_b_nn_p50": 6.838,
+      "b_to_a_nn_p50": 28.636,
+      "symmetric_nn_p50": 17.737,
+      "a_to_b_nn_p90": 6.838,
+      "b_to_a_nn_p90": 40.1,
+      "symmetric_nn_p90": 23.469,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9809,
+      "b_name": "更多亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 26.585,
+      "minimum_point_distance": 6.838,
+      "a_to_b_nn_p50": 6.838,
+      "b_to_a_nn_p50": 28.636,
+      "symmetric_nn_p50": 17.737,
+      "a_to_b_nn_p90": 6.838,
+      "b_to_a_nn_p90": 40.1,
+      "symmetric_nn_p90": 23.469,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9770,
       "a_name": "沼牙的威胁",
       "b": 9806,
@@ -32152,6 +33271,30 @@
       "bbox_iou": 0.192
     },
     {
+      "a": 9728,
+      "a_name": "热情的欢迎",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.233,
+      "minimum_point_distance": 8.291,
+      "a_to_b_nn_p50": 27.195,
+      "b_to_a_nn_p50": 8.291,
+      "symmetric_nn_p50": 17.743,
+      "a_to_b_nn_p90": 58.081,
+      "b_to_a_nn_p90": 8.291,
+      "symmetric_nn_p90": 33.186,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9806,
       "a_name": "成熟的孢子",
       "b": 10117,
@@ -32197,6 +33340,30 @@
       "a_to_b_nn_p90": 59.779,
       "b_to_a_nn_p90": 2.929,
       "symmetric_nn_p90": 31.354,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9788,
+      "b_name": "阴冷之地",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 17.792,
+      "minimum_point_distance": 17.792,
+      "a_to_b_nn_p50": 17.792,
+      "b_to_a_nn_p50": 17.792,
+      "symmetric_nn_p50": 17.792,
+      "a_to_b_nn_p90": 17.792,
+      "b_to_a_nn_p90": 17.792,
+      "symmetric_nn_p90": 17.792,
       "bbox_iou": 0.0
     },
     {
@@ -32320,6 +33487,30 @@
       "bbox_iou": 0.187
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 18.256,
+      "minimum_point_distance": 18.256,
+      "a_to_b_nn_p50": 18.256,
+      "b_to_a_nn_p50": 18.256,
+      "symmetric_nn_p50": 18.256,
+      "a_to_b_nn_p90": 18.256,
+      "b_to_a_nn_p90": 18.256,
+      "symmetric_nn_p90": 18.256,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9708,
       "a_name": "熟悉的蘑菇",
       "b": 9823,
@@ -32392,6 +33583,30 @@
       "bbox_iou": 0.038
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9899,
+      "b_name": "未完的职责",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 18.356,
+      "minimum_point_distance": 18.356,
+      "a_to_b_nn_p50": 18.356,
+      "b_to_a_nn_p50": 18.356,
+      "symmetric_nn_p50": 18.356,
+      "a_to_b_nn_p90": 18.356,
+      "b_to_a_nn_p90": 18.356,
+      "symmetric_nn_p90": 18.356,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9728,
       "a_name": "热情的欢迎",
       "b": 9841,
@@ -32414,6 +33629,30 @@
       "b_to_a_nn_p90": 13.344,
       "symmetric_nn_p90": 30.297,
       "bbox_iou": 0.183
+    },
+    {
+      "a": 9747,
+      "a_name": "暗泽部族",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 21.925,
+      "minimum_point_distance": 15.687,
+      "a_to_b_nn_p50": 21.385,
+      "b_to_a_nn_p50": 15.687,
+      "symmetric_nn_p50": 18.536,
+      "a_to_b_nn_p90": 27.376,
+      "b_to_a_nn_p90": 15.687,
+      "symmetric_nn_p90": 21.532,
+      "bbox_iou": 0.0
     },
     {
       "a": 9730,
@@ -32536,6 +33775,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9720,
+      "a_name": "恢复平衡",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 16.888,
+      "minimum_point_distance": 11.63,
+      "a_to_b_nn_p50": 25.764,
+      "b_to_a_nn_p50": 11.63,
+      "symmetric_nn_p50": 18.697,
+      "a_to_b_nn_p90": 38.978,
+      "b_to_a_nn_p90": 11.63,
+      "symmetric_nn_p90": 25.304,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9822,
       "a_name": "战斗迫近",
       "b": 9904,
@@ -32557,6 +33820,78 @@
       "a_to_b_nn_p90": 18.847,
       "b_to_a_nn_p90": 18.847,
       "symmetric_nn_p90": 18.847,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9814,
+      "b_name": "爆顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 22.599,
+      "minimum_point_distance": 14.543,
+      "a_to_b_nn_p50": 14.543,
+      "b_to_a_nn_p50": 23.228,
+      "symmetric_nn_p50": 18.885,
+      "a_to_b_nn_p90": 14.543,
+      "b_to_a_nn_p90": 28.106,
+      "symmetric_nn_p90": 21.324,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9806,
+      "b_name": "成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.629,
+      "minimum_point_distance": 8.48,
+      "a_to_b_nn_p50": 8.48,
+      "b_to_a_nn_p50": 29.307,
+      "symmetric_nn_p50": 18.894,
+      "a_to_b_nn_p90": 8.48,
+      "b_to_a_nn_p90": 40.766,
+      "symmetric_nn_p90": 24.623,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9807,
+      "b_name": "更多成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 12.629,
+      "minimum_point_distance": 8.48,
+      "a_to_b_nn_p50": 8.48,
+      "b_to_a_nn_p50": 29.307,
+      "symmetric_nn_p50": 18.894,
+      "a_to_b_nn_p90": 8.48,
+      "b_to_a_nn_p90": 40.766,
+      "symmetric_nn_p90": 24.623,
       "bbox_iou": 0.0
     },
     {
@@ -32677,6 +34012,30 @@
       "a_to_b_nn_p90": 19.087,
       "b_to_a_nn_p90": 19.087,
       "symmetric_nn_p90": 19.087,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9898,
+      "b_name": "对方的尊重",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 19.199,
+      "minimum_point_distance": 19.199,
+      "a_to_b_nn_p50": 19.199,
+      "b_to_a_nn_p50": 19.199,
+      "symmetric_nn_p50": 19.199,
+      "a_to_b_nn_p90": 19.199,
+      "b_to_a_nn_p90": 19.199,
+      "symmetric_nn_p90": 19.199,
       "bbox_iou": 0.0
     },
     {
@@ -32852,6 +34211,30 @@
       "bbox_iou": 0.069
     },
     {
+      "a": 9720,
+      "a_name": "恢复平衡",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 24.444,
+      "minimum_point_distance": 15.664,
+      "a_to_b_nn_p50": 23.429,
+      "b_to_a_nn_p50": 15.664,
+      "symmetric_nn_p50": 19.546,
+      "a_to_b_nn_p90": 48.642,
+      "b_to_a_nn_p90": 15.664,
+      "symmetric_nn_p90": 32.153,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9814,
       "a_name": "爆顶蘑菇",
       "b": 9898,
@@ -32946,6 +34329,30 @@
       "b_to_a_nn_p90": 6.829,
       "symmetric_nn_p90": 28.336,
       "bbox_iou": 0.018
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9769,
+      "b_name": "时尚无罪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 11.198,
+      "minimum_point_distance": 6.899,
+      "a_to_b_nn_p50": 6.899,
+      "b_to_a_nn_p50": 32.321,
+      "symmetric_nn_p50": 19.61,
+      "a_to_b_nn_p90": 6.899,
+      "b_to_a_nn_p90": 45.885,
+      "symmetric_nn_p90": 26.392,
+      "bbox_iou": 0.0
     },
     {
       "a": 9728,
@@ -33068,6 +34475,30 @@
       "bbox_iou": 0.008
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9842,
+      "b_name": "最锋利的刀刃",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 26.836,
+      "minimum_point_distance": 13.418,
+      "a_to_b_nn_p50": 13.418,
+      "b_to_a_nn_p50": 26.166,
+      "symmetric_nn_p50": 19.792,
+      "a_to_b_nn_p90": 13.418,
+      "b_to_a_nn_p90": 39.325,
+      "symmetric_nn_p90": 26.372,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9784,
       "a_name": "鉴定植物",
       "b": 10118,
@@ -33114,6 +34545,30 @@
       "b_to_a_nn_p90": 2.643,
       "symmetric_nn_p90": 35.831,
       "bbox_iou": 0.006
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9728,
+      "b_name": "热情的欢迎",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 32.226,
+      "minimum_point_distance": 0.368,
+      "a_to_b_nn_p50": 0.368,
+      "b_to_a_nn_p50": 39.306,
+      "symmetric_nn_p50": 19.837,
+      "a_to_b_nn_p90": 0.368,
+      "b_to_a_nn_p90": 60.698,
+      "symmetric_nn_p90": 30.533,
+      "bbox_iou": 0.0
     },
     {
       "a": 9720,
@@ -33186,6 +34641,30 @@
       "b_to_a_nn_p90": 47.969,
       "symmetric_nn_p90": 28.807,
       "bbox_iou": 0.011
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9846,
+      "b_name": "蛮沼之灵",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 22.343,
+      "minimum_point_distance": 17.389,
+      "a_to_b_nn_p50": 17.389,
+      "b_to_a_nn_p50": 22.759,
+      "symmetric_nn_p50": 20.074,
+      "a_to_b_nn_p90": 17.389,
+      "b_to_a_nn_p90": 24.447,
+      "symmetric_nn_p90": 20.918,
+      "bbox_iou": 0.0
     },
     {
       "a": 9898,
@@ -33305,6 +34784,78 @@
       "a_to_b_nn_p90": 20.392,
       "b_to_a_nn_p90": 20.392,
       "symmetric_nn_p90": 20.392,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9726,
+      "b_name": "既然我们是朋友......",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 23.741,
+      "minimum_point_distance": 17.405,
+      "a_to_b_nn_p50": 17.405,
+      "b_to_a_nn_p50": 23.397,
+      "symmetric_nn_p50": 20.401,
+      "a_to_b_nn_p90": 17.405,
+      "b_to_a_nn_p90": 27.626,
+      "symmetric_nn_p90": 22.516,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9727,
+      "b_name": "既然我们仍是朋友......",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 23.741,
+      "minimum_point_distance": 17.405,
+      "a_to_b_nn_p50": 17.405,
+      "b_to_a_nn_p50": 23.397,
+      "symmetric_nn_p50": 20.401,
+      "a_to_b_nn_p90": 17.405,
+      "b_to_a_nn_p90": 27.626,
+      "symmetric_nn_p90": 22.516,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9770,
+      "b_name": "沼牙的威胁",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.517,
+      "minimum_point_distance": 7.917,
+      "a_to_b_nn_p50": 7.917,
+      "b_to_a_nn_p50": 32.887,
+      "symmetric_nn_p50": 20.402,
+      "a_to_b_nn_p90": 7.917,
+      "b_to_a_nn_p90": 45.662,
+      "symmetric_nn_p90": 26.789,
       "bbox_iou": 0.0
     },
     {
@@ -33524,6 +35075,30 @@
       "bbox_iou": 0.032
     },
     {
+      "a": 9635,
+      "a_name": "气阀微粒提取器！",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 24.203,
+      "minimum_point_distance": 16.79,
+      "a_to_b_nn_p50": 24.327,
+      "b_to_a_nn_p50": 16.79,
+      "symmetric_nn_p50": 20.558,
+      "a_to_b_nn_p90": 29.549,
+      "b_to_a_nn_p90": 16.79,
+      "symmetric_nn_p90": 23.169,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9823,
       "a_name": "你死我活",
       "b": 9841,
@@ -33618,6 +35193,54 @@
       "b_to_a_nn_p90": 62.977,
       "symmetric_nn_p90": 36.838,
       "bbox_iou": 0.01
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9784,
+      "b_name": "鉴定植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 32.639,
+      "minimum_point_distance": 0.368,
+      "a_to_b_nn_p50": 0.368,
+      "b_to_a_nn_p50": 40.935,
+      "symmetric_nn_p50": 20.652,
+      "a_to_b_nn_p90": 0.368,
+      "b_to_a_nn_p90": 63.141,
+      "symmetric_nn_p90": 31.754,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9802,
+      "b_name": "赞加沼泽的植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 32.639,
+      "minimum_point_distance": 0.368,
+      "a_to_b_nn_p50": 0.368,
+      "b_to_a_nn_p50": 40.935,
+      "symmetric_nn_p50": 20.652,
+      "a_to_b_nn_p90": 0.368,
+      "b_to_a_nn_p90": 63.141,
+      "symmetric_nn_p90": 31.754,
+      "bbox_iou": 0.0
     },
     {
       "a": 9814,
@@ -33761,6 +35384,30 @@
       "a_to_b_nn_p90": 18.959,
       "b_to_a_nn_p90": 24.659,
       "symmetric_nn_p90": 21.809,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9772,
+      "b_name": "尤尔巴的报告",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 21.536,
+      "minimum_point_distance": 16.38,
+      "a_to_b_nn_p50": 16.38,
+      "b_to_a_nn_p50": 25.79,
+      "symmetric_nn_p50": 21.085,
+      "a_to_b_nn_p90": 16.38,
+      "b_to_a_nn_p90": 61.24,
+      "symmetric_nn_p90": 38.81,
       "bbox_iou": 0.0
     },
     {
@@ -33953,6 +35600,54 @@
       "a_to_b_nn_p90": 52.587,
       "b_to_a_nn_p90": 12.475,
       "symmetric_nn_p90": 32.531,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9806,
+      "b_name": "成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.625,
+      "minimum_point_distance": 6.287,
+      "a_to_b_nn_p50": 6.287,
+      "b_to_a_nn_p50": 36.632,
+      "symmetric_nn_p50": 21.459,
+      "a_to_b_nn_p90": 6.287,
+      "b_to_a_nn_p90": 61.787,
+      "symmetric_nn_p90": 34.037,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9807,
+      "b_name": "更多成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.625,
+      "minimum_point_distance": 6.287,
+      "a_to_b_nn_p50": 6.287,
+      "b_to_a_nn_p50": 36.632,
+      "symmetric_nn_p50": 21.459,
+      "a_to_b_nn_p90": 6.287,
+      "b_to_a_nn_p90": 61.787,
+      "symmetric_nn_p90": 34.037,
       "bbox_iou": 0.0
     },
     {
@@ -34632,6 +36327,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9726,
+      "a_name": "既然我们是朋友......",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 23.763,
+      "minimum_point_distance": 20.649,
+      "a_to_b_nn_p50": 24.074,
+      "b_to_a_nn_p50": 20.649,
+      "symmetric_nn_p50": 22.362,
+      "a_to_b_nn_p90": 26.016,
+      "b_to_a_nn_p90": 20.649,
+      "symmetric_nn_p90": 23.332,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9727,
+      "a_name": "既然我们仍是朋友......",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 23.763,
+      "minimum_point_distance": 20.649,
+      "a_to_b_nn_p50": 24.074,
+      "b_to_a_nn_p50": 20.649,
+      "symmetric_nn_p50": 22.362,
+      "a_to_b_nn_p90": 26.016,
+      "b_to_a_nn_p90": 20.649,
+      "symmetric_nn_p90": 23.332,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9743,
       "a_name": "天敌",
       "b": 9842,
@@ -34944,6 +36687,54 @@
       "bbox_iou": 0.025
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9784,
+      "b_name": "鉴定植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 39.257,
+      "minimum_point_distance": 0.34,
+      "a_to_b_nn_p50": 0.34,
+      "b_to_a_nn_p50": 46.028,
+      "symmetric_nn_p50": 23.184,
+      "a_to_b_nn_p90": 0.34,
+      "b_to_a_nn_p90": 67.928,
+      "symmetric_nn_p90": 34.134,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9802,
+      "b_name": "赞加沼泽的植物",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 39.257,
+      "minimum_point_distance": 0.34,
+      "a_to_b_nn_p50": 0.34,
+      "b_to_a_nn_p50": 46.028,
+      "symmetric_nn_p50": 23.184,
+      "a_to_b_nn_p90": 0.34,
+      "b_to_a_nn_p90": 67.928,
+      "symmetric_nn_p90": 34.134,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9903,
       "a_name": "多头蛇之王",
       "b": 10118,
@@ -35037,6 +36828,54 @@
       "a_to_b_nn_p90": 52.708,
       "b_to_a_nn_p90": 12.378,
       "symmetric_nn_p90": 32.543,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9743,
+      "a_name": "天敌",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.115,
+      "minimum_point_distance": 16.38,
+      "a_to_b_nn_p50": 30.428,
+      "b_to_a_nn_p50": 16.38,
+      "symmetric_nn_p50": 23.404,
+      "a_to_b_nn_p90": 65.083,
+      "b_to_a_nn_p90": 16.38,
+      "symmetric_nn_p90": 40.731,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9744,
+      "a_name": "更多卷须！",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.115,
+      "minimum_point_distance": 16.38,
+      "a_to_b_nn_p50": 30.428,
+      "b_to_a_nn_p50": 16.38,
+      "symmetric_nn_p50": 23.404,
+      "a_to_b_nn_p90": 65.083,
+      "b_to_a_nn_p90": 16.38,
+      "symmetric_nn_p90": 40.731,
       "bbox_iou": 0.0
     },
     {
@@ -35256,6 +37095,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9769,
+      "b_name": "时尚无罪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.627,
+      "minimum_point_distance": 5.522,
+      "a_to_b_nn_p50": 5.522,
+      "b_to_a_nn_p50": 42.556,
+      "symmetric_nn_p50": 24.039,
+      "a_to_b_nn_p90": 5.522,
+      "b_to_a_nn_p90": 67.495,
+      "symmetric_nn_p90": 36.509,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9770,
       "a_name": "沼牙的威胁",
       "b": 10096,
@@ -35277,6 +37140,30 @@
       "a_to_b_nn_p90": 55.442,
       "b_to_a_nn_p90": 10.679,
       "symmetric_nn_p90": 33.061,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9769,
+      "b_name": "时尚无罪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 33.256,
+      "minimum_point_distance": 4.103,
+      "a_to_b_nn_p50": 4.103,
+      "b_to_a_nn_p50": 44.114,
+      "symmetric_nn_p50": 24.109,
+      "a_to_b_nn_p90": 4.103,
+      "b_to_a_nn_p90": 67.459,
+      "symmetric_nn_p90": 35.781,
       "bbox_iou": 0.0
     },
     {
@@ -35421,6 +37308,30 @@
       "a_to_b_nn_p90": 32.74,
       "b_to_a_nn_p90": 23.343,
       "symmetric_nn_p90": 28.042,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9770,
+      "b_name": "沼牙的威胁",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 29.704,
+      "minimum_point_distance": 19.15,
+      "a_to_b_nn_p50": 19.15,
+      "b_to_a_nn_p50": 29.83,
+      "symmetric_nn_p50": 24.49,
+      "a_to_b_nn_p90": 19.15,
+      "b_to_a_nn_p90": 38.665,
+      "symmetric_nn_p90": 28.907,
       "bbox_iou": 0.0
     },
     {
@@ -35640,6 +37551,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9806,
+      "b_name": "成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 42.275,
+      "minimum_point_distance": 4.243,
+      "a_to_b_nn_p50": 4.243,
+      "b_to_a_nn_p50": 45.51,
+      "symmetric_nn_p50": 24.877,
+      "a_to_b_nn_p90": 4.243,
+      "b_to_a_nn_p90": 74.543,
+      "symmetric_nn_p90": 39.393,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9807,
+      "b_name": "更多成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 42.275,
+      "minimum_point_distance": 4.243,
+      "a_to_b_nn_p50": 4.243,
+      "b_to_a_nn_p50": 45.51,
+      "symmetric_nn_p50": 24.877,
+      "a_to_b_nn_p90": 4.243,
+      "b_to_a_nn_p90": 74.543,
+      "symmetric_nn_p90": 39.393,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9730,
       "a_name": "暗潮纳迦的首领",
       "b": 10096,
@@ -35733,6 +37692,54 @@
       "a_to_b_nn_p90": 59.309,
       "b_to_a_nn_p90": 10.34,
       "symmetric_nn_p90": 34.825,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9806,
+      "b_name": "成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 44.964,
+      "minimum_point_distance": 3.839,
+      "a_to_b_nn_p50": 3.839,
+      "b_to_a_nn_p50": 46.723,
+      "symmetric_nn_p50": 25.281,
+      "a_to_b_nn_p90": 3.839,
+      "b_to_a_nn_p90": 79.478,
+      "symmetric_nn_p90": 41.658,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9807,
+      "b_name": "更多成熟的孢子",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 44.964,
+      "minimum_point_distance": 3.839,
+      "a_to_b_nn_p50": 3.839,
+      "b_to_a_nn_p50": 46.723,
+      "symmetric_nn_p50": 25.281,
+      "a_to_b_nn_p90": 3.839,
+      "b_to_a_nn_p90": 79.478,
+      "symmetric_nn_p90": 41.658,
       "bbox_iou": 0.0
     },
     {
@@ -35977,6 +37984,30 @@
       "a_to_b_nn_p90": 46.95,
       "b_to_a_nn_p90": 18.326,
       "symmetric_nn_p90": 32.638,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9841,
+      "b_name": "清除沼光抽血者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.144,
+      "minimum_point_distance": 20.215,
+      "a_to_b_nn_p50": 20.215,
+      "b_to_a_nn_p50": 31.237,
+      "symmetric_nn_p50": 25.726,
+      "a_to_b_nn_p90": 20.215,
+      "b_to_a_nn_p90": 35.653,
+      "symmetric_nn_p90": 27.934,
       "bbox_iou": 0.0
     },
     {
@@ -36344,6 +38375,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9769,
+      "b_name": "时尚无罪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 36.535,
+      "minimum_point_distance": 1.478,
+      "a_to_b_nn_p50": 1.478,
+      "b_to_a_nn_p50": 51.285,
+      "symmetric_nn_p50": 26.382,
+      "a_to_b_nn_p90": 1.478,
+      "b_to_a_nn_p90": 68.507,
+      "symmetric_nn_p90": 34.993,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9708,
       "a_name": "熟悉的蘑菇",
       "b": 9774,
@@ -36509,6 +38564,30 @@
       "a_to_b_nn_p90": 25.867,
       "b_to_a_nn_p90": 33.727,
       "symmetric_nn_p90": 29.797,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9817,
+      "b_name": "血鳞纳迦的领袖",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 26.593,
+      "minimum_point_distance": 26.593,
+      "a_to_b_nn_p50": 26.593,
+      "b_to_a_nn_p50": 26.593,
+      "symmetric_nn_p50": 26.593,
+      "a_to_b_nn_p90": 26.593,
+      "b_to_a_nn_p90": 26.593,
+      "symmetric_nn_p90": 26.593,
       "bbox_iou": 0.0
     },
     {
@@ -37380,6 +39459,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9899,
+      "b_name": "未完的职责",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.04,
+      "minimum_point_distance": 28.04,
+      "a_to_b_nn_p50": 28.04,
+      "b_to_a_nn_p50": 28.04,
+      "symmetric_nn_p50": 28.04,
+      "a_to_b_nn_p90": 28.04,
+      "b_to_a_nn_p90": 28.04,
+      "symmetric_nn_p90": 28.04,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9772,
       "a_name": "尤尔巴的报告",
       "b": 9814,
@@ -37521,6 +39624,30 @@
       "a_to_b_nn_p90": 29.718,
       "b_to_a_nn_p90": 27.956,
       "symmetric_nn_p90": 28.837,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9904,
+      "b_name": "猎杀恐爪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 28.457,
+      "minimum_point_distance": 28.457,
+      "a_to_b_nn_p50": 28.457,
+      "b_to_a_nn_p50": 28.457,
+      "symmetric_nn_p50": 28.457,
+      "a_to_b_nn_p90": 28.457,
+      "b_to_a_nn_p90": 28.457,
+      "symmetric_nn_p90": 28.457,
       "bbox_iou": 0.0
     },
     {
@@ -37692,6 +39819,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 10096,
+      "b_name": "拯救孢子人",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.638,
+      "minimum_point_distance": 26.66,
+      "a_to_b_nn_p50": 26.66,
+      "b_to_a_nn_p50": 30.843,
+      "symmetric_nn_p50": 28.751,
+      "a_to_b_nn_p90": 26.66,
+      "b_to_a_nn_p90": 34.375,
+      "symmetric_nn_p90": 30.518,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9846,
+      "b_name": "蛮沼之灵",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.487,
+      "minimum_point_distance": 26.378,
+      "a_to_b_nn_p50": 26.378,
+      "b_to_a_nn_p50": 31.213,
+      "symmetric_nn_p50": 28.795,
+      "a_to_b_nn_p90": 26.378,
+      "b_to_a_nn_p90": 32.869,
+      "symmetric_nn_p90": 29.624,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9808,
       "a_name": "亮顶蘑菇",
       "b": 9823,
@@ -37737,6 +39912,30 @@
       "a_to_b_nn_p90": 43.923,
       "b_to_a_nn_p90": 28.844,
       "symmetric_nn_p90": 36.383,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9702,
+      "a_name": "狼吞虎咽",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.55,
+      "minimum_point_distance": 27.07,
+      "a_to_b_nn_p50": 30.666,
+      "b_to_a_nn_p50": 27.07,
+      "symmetric_nn_p50": 28.868,
+      "a_to_b_nn_p90": 32.927,
+      "b_to_a_nn_p90": 27.07,
+      "symmetric_nn_p90": 29.998,
       "bbox_iou": 0.0
     },
     {
@@ -37860,6 +40059,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 10118,
+      "b_name": "警告匕潭失落者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.484,
+      "minimum_point_distance": 27.655,
+      "a_to_b_nn_p50": 27.655,
+      "b_to_a_nn_p50": 30.286,
+      "symmetric_nn_p50": 28.97,
+      "a_to_b_nn_p90": 27.655,
+      "b_to_a_nn_p90": 32.742,
+      "symmetric_nn_p90": 30.198,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9739,
       "a_name": "孢子人的困境",
       "b": 9846,
@@ -37905,6 +40128,54 @@
       "a_to_b_nn_p90": 31.402,
       "b_to_a_nn_p90": 31.307,
       "symmetric_nn_p90": 31.355,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9635,
+      "a_name": "气阀微粒提取器！",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.928,
+      "minimum_point_distance": 26.934,
+      "a_to_b_nn_p50": 31.17,
+      "b_to_a_nn_p50": 26.934,
+      "symmetric_nn_p50": 29.052,
+      "a_to_b_nn_p90": 33.823,
+      "b_to_a_nn_p90": 26.934,
+      "symmetric_nn_p90": 30.379,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9898,
+      "b_name": "对方的尊重",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 29.062,
+      "minimum_point_distance": 29.062,
+      "a_to_b_nn_p50": 29.062,
+      "b_to_a_nn_p50": 29.062,
+      "symmetric_nn_p50": 29.062,
+      "a_to_b_nn_p90": 29.062,
+      "b_to_a_nn_p90": 29.062,
+      "symmetric_nn_p90": 29.062,
       "bbox_iou": 0.0
     },
     {
@@ -37954,6 +40225,30 @@
       "b_to_a_nn_p90": 86.211,
       "symmetric_nn_p90": 45.493,
       "bbox_iou": 0.007
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9898,
+      "b_name": "对方的尊重",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 29.254,
+      "minimum_point_distance": 29.254,
+      "a_to_b_nn_p50": 29.254,
+      "b_to_a_nn_p50": 29.254,
+      "symmetric_nn_p50": 29.254,
+      "a_to_b_nn_p90": 29.254,
+      "b_to_a_nn_p90": 29.254,
+      "symmetric_nn_p90": 29.254,
+      "bbox_iou": 0.0
     },
     {
       "a": 9820,
@@ -38028,6 +40323,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9846,
+      "b_name": "蛮沼之灵",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 31.383,
+      "minimum_point_distance": 28.034,
+      "a_to_b_nn_p50": 28.034,
+      "b_to_a_nn_p50": 31.428,
+      "symmetric_nn_p50": 29.731,
+      "a_to_b_nn_p90": 28.034,
+      "b_to_a_nn_p90": 34.934,
+      "symmetric_nn_p90": 31.484,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9730,
       "a_name": "暗潮纳迦的首领",
       "b": 9788,
@@ -38049,6 +40368,78 @@
       "a_to_b_nn_p90": 29.762,
       "b_to_a_nn_p90": 29.762,
       "symmetric_nn_p90": 29.762,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 10117,
+      "b_name": "通缉：穆玛基酋长",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.08,
+      "minimum_point_distance": 30.08,
+      "a_to_b_nn_p50": 30.08,
+      "b_to_a_nn_p50": 30.08,
+      "symmetric_nn_p50": 30.08,
+      "a_to_b_nn_p90": 30.08,
+      "b_to_a_nn_p90": 30.08,
+      "symmetric_nn_p90": 30.08,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9743,
+      "b_name": "天敌",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 9.796,
+      "minimum_point_distance": 27.012,
+      "a_to_b_nn_p50": 27.012,
+      "b_to_a_nn_p50": 33.23,
+      "symmetric_nn_p50": 30.121,
+      "a_to_b_nn_p90": 27.012,
+      "b_to_a_nn_p90": 41.882,
+      "symmetric_nn_p90": 34.447,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9744,
+      "b_name": "更多卷须！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 9.796,
+      "minimum_point_distance": 27.012,
+      "a_to_b_nn_p50": 27.012,
+      "b_to_a_nn_p50": 33.23,
+      "symmetric_nn_p50": 30.121,
+      "a_to_b_nn_p90": 27.012,
+      "b_to_a_nn_p90": 41.882,
+      "symmetric_nn_p90": 34.447,
       "bbox_iou": 0.0
     },
     {
@@ -38220,6 +40611,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9772,
+      "b_name": "尤尔巴的报告",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 18.269,
+      "minimum_point_distance": 27.55,
+      "a_to_b_nn_p50": 27.55,
+      "b_to_a_nn_p50": 33.212,
+      "symmetric_nn_p50": 30.381,
+      "a_to_b_nn_p90": 27.55,
+      "b_to_a_nn_p90": 37.698,
+      "symmetric_nn_p90": 32.624,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9747,
       "a_name": "暗泽部族",
       "b": 9769,
@@ -38388,6 +40803,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9894,
+      "b_name": "保护观察者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 30.839,
+      "minimum_point_distance": 30.839,
+      "a_to_b_nn_p50": 30.839,
+      "b_to_a_nn_p50": 30.839,
+      "symmetric_nn_p50": 30.839,
+      "a_to_b_nn_p90": 30.839,
+      "b_to_a_nn_p90": 30.839,
+      "symmetric_nn_p90": 30.839,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9898,
       "a_name": "对方的尊重",
       "b": 9904,
@@ -38484,6 +40923,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9846,
+      "b_name": "蛮沼之灵",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 33.058,
+      "minimum_point_distance": 28.83,
+      "a_to_b_nn_p50": 28.83,
+      "b_to_a_nn_p50": 33.184,
+      "symmetric_nn_p50": 31.007,
+      "a_to_b_nn_p90": 28.83,
+      "b_to_a_nn_p90": 36.105,
+      "symmetric_nn_p90": 32.467,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9708,
       "a_name": "熟悉的蘑菇",
       "b": 9739,
@@ -38553,6 +41016,30 @@
       "a_to_b_nn_p90": 38.402,
       "b_to_a_nn_p90": 31.163,
       "symmetric_nn_p90": 34.783,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9708,
+      "b_name": "熟悉的蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.873,
+      "minimum_point_distance": 26.784,
+      "a_to_b_nn_p50": 26.784,
+      "b_to_a_nn_p50": 35.63,
+      "symmetric_nn_p50": 31.207,
+      "a_to_b_nn_p90": 26.784,
+      "b_to_a_nn_p90": 39.842,
+      "symmetric_nn_p90": 33.313,
       "bbox_iou": 0.0
     },
     {
@@ -38649,6 +41136,30 @@
       "a_to_b_nn_p90": 25.613,
       "b_to_a_nn_p90": 51.971,
       "symmetric_nn_p90": 38.792,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9730,
+      "a_name": "暗潮纳迦的首领",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 31.475,
+      "minimum_point_distance": 31.475,
+      "a_to_b_nn_p50": 31.475,
+      "b_to_a_nn_p50": 31.475,
+      "symmetric_nn_p50": 31.475,
+      "a_to_b_nn_p90": 31.475,
+      "b_to_a_nn_p90": 31.475,
+      "symmetric_nn_p90": 31.475,
       "bbox_iou": 0.0
     },
     {
@@ -39276,6 +41787,30 @@
       "bbox_iou": 0.26
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9820,
+      "b_name": "通缉：格罗阿克",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 33.24,
+      "minimum_point_distance": 33.24,
+      "a_to_b_nn_p50": 33.24,
+      "b_to_a_nn_p50": 33.24,
+      "symmetric_nn_p50": 33.24,
+      "a_to_b_nn_p90": 33.24,
+      "b_to_a_nn_p90": 33.24,
+      "symmetric_nn_p90": 33.24,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9814,
       "a_name": "爆顶蘑菇",
       "b": 9817,
@@ -39348,6 +41883,78 @@
       "bbox_iou": 0.017
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9822,
+      "b_name": "战斗迫近",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 33.432,
+      "minimum_point_distance": 33.432,
+      "a_to_b_nn_p50": 33.432,
+      "b_to_a_nn_p50": 33.432,
+      "symmetric_nn_p50": 33.432,
+      "a_to_b_nn_p90": 33.432,
+      "b_to_a_nn_p90": 33.432,
+      "symmetric_nn_p90": 33.432,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9743,
+      "b_name": "天敌",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.52,
+      "minimum_point_distance": 0.34,
+      "a_to_b_nn_p50": 0.34,
+      "b_to_a_nn_p50": 66.611,
+      "symmetric_nn_p50": 33.475,
+      "a_to_b_nn_p90": 0.34,
+      "b_to_a_nn_p90": 73.485,
+      "symmetric_nn_p90": 36.912,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9744,
+      "b_name": "更多卷须！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.52,
+      "minimum_point_distance": 0.34,
+      "a_to_b_nn_p50": 0.34,
+      "b_to_a_nn_p50": 66.611,
+      "symmetric_nn_p50": 33.475,
+      "a_to_b_nn_p90": 0.34,
+      "b_to_a_nn_p90": 73.485,
+      "symmetric_nn_p90": 36.912,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9702,
       "a_name": "狼吞虎咽",
       "b": 9730,
@@ -39417,6 +42024,30 @@
       "a_to_b_nn_p90": 40.038,
       "b_to_a_nn_p90": 31.58,
       "symmetric_nn_p90": 35.809,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9728,
+      "b_name": "热情的欢迎",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 38.724,
+      "minimum_point_distance": 17.405,
+      "a_to_b_nn_p50": 17.405,
+      "b_to_a_nn_p50": 50.102,
+      "symmetric_nn_p50": 33.754,
+      "a_to_b_nn_p90": 17.405,
+      "b_to_a_nn_p90": 59.727,
+      "symmetric_nn_p90": 38.566,
       "bbox_iou": 0.0
     },
     {
@@ -39660,6 +42291,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9903,
+      "b_name": "多头蛇之王",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.065,
+      "minimum_point_distance": 34.065,
+      "a_to_b_nn_p50": 34.065,
+      "b_to_a_nn_p50": 34.065,
+      "symmetric_nn_p50": 34.065,
+      "a_to_b_nn_p90": 34.065,
+      "b_to_a_nn_p90": 34.065,
+      "symmetric_nn_p90": 34.065,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9895,
       "a_name": "崩溃的平衡",
       "b": 9898,
@@ -39729,6 +42384,54 @@
       "a_to_b_nn_p90": 62.587,
       "b_to_a_nn_p90": 12.252,
       "symmetric_nn_p90": 37.42,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9822,
+      "b_name": "战斗迫近",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.401,
+      "minimum_point_distance": 34.401,
+      "a_to_b_nn_p50": 34.401,
+      "b_to_a_nn_p50": 34.401,
+      "symmetric_nn_p50": 34.401,
+      "a_to_b_nn_p90": 34.401,
+      "b_to_a_nn_p90": 34.401,
+      "symmetric_nn_p90": 34.401,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9773,
+      "b_name": "别再提蘑菇了！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 38.906,
+      "minimum_point_distance": 29.995,
+      "a_to_b_nn_p50": 29.995,
+      "b_to_a_nn_p50": 38.887,
+      "symmetric_nn_p50": 34.441,
+      "a_to_b_nn_p90": 29.995,
+      "b_to_a_nn_p90": 45.89,
+      "symmetric_nn_p90": 37.942,
       "bbox_iou": 0.0
     },
     {
@@ -39924,6 +42627,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9845,
+      "b_name": "下钩钓鱼",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 36.303,
+      "minimum_point_distance": 33.425,
+      "a_to_b_nn_p50": 33.425,
+      "b_to_a_nn_p50": 36.408,
+      "symmetric_nn_p50": 34.916,
+      "a_to_b_nn_p90": 33.425,
+      "b_to_a_nn_p90": 39.205,
+      "symmetric_nn_p90": 36.315,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9726,
       "a_name": "既然我们是朋友......",
       "b": 9772,
@@ -39993,6 +42720,30 @@
       "a_to_b_nn_p90": 79.382,
       "b_to_a_nn_p90": 7.729,
       "symmetric_nn_p90": 43.556,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9788,
+      "b_name": "阴冷之地",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 35.178,
+      "minimum_point_distance": 35.178,
+      "a_to_b_nn_p50": 35.178,
+      "b_to_a_nn_p50": 35.178,
+      "symmetric_nn_p50": 35.178,
+      "a_to_b_nn_p90": 35.178,
+      "b_to_a_nn_p90": 35.178,
+      "symmetric_nn_p90": 35.178,
       "bbox_iou": 0.0
     },
     {
@@ -40092,6 +42843,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9898,
+      "b_name": "对方的尊重",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 35.374,
+      "minimum_point_distance": 35.374,
+      "a_to_b_nn_p50": 35.374,
+      "b_to_a_nn_p50": 35.374,
+      "symmetric_nn_p50": 35.374,
+      "a_to_b_nn_p90": 35.374,
+      "b_to_a_nn_p90": 35.374,
+      "symmetric_nn_p90": 35.374,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9899,
+      "b_name": "未完的职责",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 35.49,
+      "minimum_point_distance": 35.49,
+      "a_to_b_nn_p50": 35.49,
+      "b_to_a_nn_p50": 35.49,
+      "symmetric_nn_p50": 35.49,
+      "a_to_b_nn_p90": 35.49,
+      "b_to_a_nn_p90": 35.49,
+      "symmetric_nn_p90": 35.49,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9739,
       "a_name": "孢子人的困境",
       "b": 10117,
@@ -40137,6 +42936,30 @@
       "a_to_b_nn_p90": 38.639,
       "b_to_a_nn_p90": 33.323,
       "symmetric_nn_p90": 35.981,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 10117,
+      "b_name": "通缉：穆玛基酋长",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 35.562,
+      "minimum_point_distance": 35.562,
+      "a_to_b_nn_p50": 35.562,
+      "b_to_a_nn_p50": 35.562,
+      "symmetric_nn_p50": 35.562,
+      "a_to_b_nn_p90": 35.562,
+      "b_to_a_nn_p90": 35.562,
+      "symmetric_nn_p90": 35.562,
       "bbox_iou": 0.0
     },
     {
@@ -40260,6 +43083,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9720,
+      "b_name": "恢复平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.078,
+      "minimum_point_distance": 21.263,
+      "a_to_b_nn_p50": 21.263,
+      "b_to_a_nn_p50": 50.255,
+      "symmetric_nn_p50": 35.759,
+      "a_to_b_nn_p90": 21.263,
+      "b_to_a_nn_p90": 57.096,
+      "symmetric_nn_p90": 39.179,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9728,
       "a_name": "热情的欢迎",
       "b": 9788,
@@ -40281,6 +43128,30 @@
       "a_to_b_nn_p90": 73.715,
       "b_to_a_nn_p90": 14.701,
       "symmetric_nn_p90": 44.208,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9772,
+      "b_name": "尤尔巴的报告",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 56.078,
+      "minimum_point_distance": 2.43,
+      "a_to_b_nn_p50": 2.43,
+      "b_to_a_nn_p50": 69.225,
+      "symmetric_nn_p50": 35.828,
+      "a_to_b_nn_p90": 2.43,
+      "b_to_a_nn_p90": 74.199,
+      "symmetric_nn_p90": 38.314,
       "bbox_iou": 0.0
     },
     {
@@ -40425,6 +43296,30 @@
       "a_to_b_nn_p90": 41.291,
       "b_to_a_nn_p90": 39.489,
       "symmetric_nn_p90": 40.39,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 36.493,
+      "minimum_point_distance": 36.493,
+      "a_to_b_nn_p50": 36.493,
+      "b_to_a_nn_p50": 36.493,
+      "symmetric_nn_p50": 36.493,
+      "a_to_b_nn_p90": 36.493,
+      "b_to_a_nn_p90": 36.493,
+      "symmetric_nn_p90": 36.493,
       "bbox_iou": 0.0
     },
     {
@@ -40764,6 +43659,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 10118,
+      "b_name": "警告匕潭失落者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 39.114,
+      "minimum_point_distance": 35.508,
+      "a_to_b_nn_p50": 35.508,
+      "b_to_a_nn_p50": 39.583,
+      "symmetric_nn_p50": 37.546,
+      "a_to_b_nn_p90": 35.508,
+      "b_to_a_nn_p90": 41.323,
+      "symmetric_nn_p90": 38.415,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9814,
       "a_name": "爆顶蘑菇",
       "b": 9823,
@@ -40857,6 +43776,30 @@
       "a_to_b_nn_p90": 31.908,
       "b_to_a_nn_p90": 48.976,
       "symmetric_nn_p90": 40.442,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9635,
+      "a_name": "气阀微粒提取器！",
+      "b": 9716,
+      "b_name": "暗泽湖的异常",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.814,
+      "minimum_point_distance": 34.758,
+      "a_to_b_nn_p50": 41.75,
+      "b_to_a_nn_p50": 34.758,
+      "symmetric_nn_p50": 38.254,
+      "a_to_b_nn_p90": 47.056,
+      "b_to_a_nn_p90": 34.758,
+      "symmetric_nn_p90": 40.907,
       "bbox_iou": 0.0
     },
     {
@@ -40956,6 +43899,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9785,
+      "b_name": "古树的祝福",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 38.679,
+      "minimum_point_distance": 38.408,
+      "a_to_b_nn_p50": 38.408,
+      "b_to_a_nn_p50": 38.734,
+      "symmetric_nn_p50": 38.571,
+      "a_to_b_nn_p90": 38.408,
+      "b_to_a_nn_p90": 38.994,
+      "symmetric_nn_p90": 38.701,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9817,
       "a_name": "血鳞纳迦的领袖",
       "b": 9841,
@@ -41025,6 +43992,30 @@
       "a_to_b_nn_p90": 58.63,
       "b_to_a_nn_p90": 31.824,
       "symmetric_nn_p90": 45.227,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9772,
+      "b_name": "尤尔巴的报告",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 35.221,
+      "minimum_point_distance": 33.877,
+      "a_to_b_nn_p50": 33.877,
+      "b_to_a_nn_p50": 43.651,
+      "symmetric_nn_p50": 38.764,
+      "a_to_b_nn_p90": 33.877,
+      "b_to_a_nn_p90": 57.051,
+      "symmetric_nn_p90": 45.464,
       "bbox_iou": 0.0
     },
     {
@@ -41220,6 +44211,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9817,
+      "b_name": "血鳞纳迦的领袖",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 39.638,
+      "minimum_point_distance": 39.638,
+      "a_to_b_nn_p50": 39.638,
+      "b_to_a_nn_p50": 39.638,
+      "symmetric_nn_p50": 39.638,
+      "a_to_b_nn_p90": 39.638,
+      "b_to_a_nn_p90": 39.638,
+      "symmetric_nn_p90": 39.638,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9739,
       "a_name": "孢子人的困境",
       "b": 9845,
@@ -41268,6 +44283,78 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9743,
+      "b_name": "天敌",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.49,
+      "minimum_point_distance": 33.877,
+      "a_to_b_nn_p50": 33.877,
+      "b_to_a_nn_p50": 45.643,
+      "symmetric_nn_p50": 39.76,
+      "a_to_b_nn_p90": 33.877,
+      "b_to_a_nn_p90": 60.19,
+      "symmetric_nn_p90": 47.034,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9744,
+      "b_name": "更多卷须！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 34.49,
+      "minimum_point_distance": 33.877,
+      "a_to_b_nn_p50": 33.877,
+      "b_to_a_nn_p50": 45.643,
+      "symmetric_nn_p50": 39.76,
+      "a_to_b_nn_p90": 33.877,
+      "b_to_a_nn_p90": 60.19,
+      "symmetric_nn_p90": 47.034,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9709,
+      "a_name": "偷回蘑菇",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 45.451,
+      "minimum_point_distance": 33.664,
+      "a_to_b_nn_p50": 45.89,
+      "b_to_a_nn_p50": 33.664,
+      "symmetric_nn_p50": 39.777,
+      "a_to_b_nn_p90": 48.158,
+      "b_to_a_nn_p90": 33.664,
+      "symmetric_nn_p90": 40.911,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9747,
       "a_name": "暗泽部族",
       "b": 9846,
@@ -41289,6 +44376,30 @@
       "a_to_b_nn_p90": 43.959,
       "b_to_a_nn_p90": 41.872,
       "symmetric_nn_p90": 42.916,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9845,
+      "b_name": "下钩钓鱼",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.674,
+      "minimum_point_distance": 37.332,
+      "a_to_b_nn_p50": 37.332,
+      "b_to_a_nn_p50": 42.442,
+      "symmetric_nn_p50": 39.887,
+      "a_to_b_nn_p90": 37.332,
+      "b_to_a_nn_p90": 44.088,
+      "symmetric_nn_p90": 40.71,
       "bbox_iou": 0.0
     },
     {
@@ -41556,6 +44667,102 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9774,
+      "b_name": "厚重多头蛇鳞片",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 51.153,
+      "minimum_point_distance": 34.065,
+      "a_to_b_nn_p50": 34.065,
+      "b_to_a_nn_p50": 47.562,
+      "symmetric_nn_p50": 40.813,
+      "a_to_b_nn_p90": 34.065,
+      "b_to_a_nn_p90": 69.888,
+      "symmetric_nn_p90": 51.976,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9739,
+      "b_name": "孢子人的困境",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 42.922,
+      "minimum_point_distance": 37.689,
+      "a_to_b_nn_p50": 37.689,
+      "b_to_a_nn_p50": 44.187,
+      "symmetric_nn_p50": 40.938,
+      "a_to_b_nn_p90": 37.689,
+      "b_to_a_nn_p90": 45.152,
+      "symmetric_nn_p90": 41.421,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9742,
+      "b_name": "更多孢子囊",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 42.922,
+      "minimum_point_distance": 37.689,
+      "a_to_b_nn_p50": 37.689,
+      "b_to_a_nn_p50": 44.187,
+      "symmetric_nn_p50": 40.938,
+      "a_to_b_nn_p90": 37.689,
+      "b_to_a_nn_p90": 45.152,
+      "symmetric_nn_p90": 41.421,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 41.227,
+      "minimum_point_distance": 41.227,
+      "a_to_b_nn_p50": 41.227,
+      "b_to_a_nn_p50": 41.227,
+      "symmetric_nn_p50": 41.227,
+      "a_to_b_nn_p90": 41.227,
+      "b_to_a_nn_p90": 41.227,
+      "symmetric_nn_p90": 41.227,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9728,
       "a_name": "热情的欢迎",
       "b": 9823,
@@ -41724,6 +44931,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9702,
+      "a_name": "狼吞虎咽",
+      "b": 9716,
+      "b_name": "暗泽湖的异常",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 43.85,
+      "minimum_point_distance": 40.016,
+      "a_to_b_nn_p50": 43.895,
+      "b_to_a_nn_p50": 40.016,
+      "symmetric_nn_p50": 41.955,
+      "a_to_b_nn_p90": 46.382,
+      "b_to_a_nn_p90": 40.016,
+      "symmetric_nn_p90": 43.199,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9822,
       "a_name": "战斗迫近",
       "b": 9846,
@@ -41769,6 +45000,54 @@
       "a_to_b_nn_p90": 42.237,
       "b_to_a_nn_p90": 42.237,
       "symmetric_nn_p90": 42.237,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9842,
+      "b_name": "最锋利的刀刃",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 46.581,
+      "minimum_point_distance": 36.076,
+      "a_to_b_nn_p50": 36.076,
+      "b_to_a_nn_p50": 48.411,
+      "symmetric_nn_p50": 42.243,
+      "a_to_b_nn_p90": 36.076,
+      "b_to_a_nn_p90": 54.045,
+      "symmetric_nn_p90": 45.06,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9845,
+      "b_name": "下钩钓鱼",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 44.254,
+      "minimum_point_distance": 40.309,
+      "a_to_b_nn_p50": 40.309,
+      "b_to_a_nn_p50": 44.304,
+      "symmetric_nn_p50": 42.307,
+      "a_to_b_nn_p90": 40.309,
+      "b_to_a_nn_p90": 47.705,
+      "symmetric_nn_p90": 44.007,
       "bbox_iou": 0.0
     },
     {
@@ -41841,6 +45120,30 @@
       "a_to_b_nn_p90": 61.684,
       "b_to_a_nn_p90": 38.206,
       "symmetric_nn_p90": 49.945,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9903,
+      "b_name": "多头蛇之王",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 42.823,
+      "minimum_point_distance": 42.823,
+      "a_to_b_nn_p50": 42.823,
+      "b_to_a_nn_p50": 42.823,
+      "symmetric_nn_p50": 42.823,
+      "a_to_b_nn_p90": 42.823,
+      "b_to_a_nn_p90": 42.823,
+      "symmetric_nn_p90": 42.823,
       "bbox_iou": 0.0
     },
     {
@@ -41961,6 +45264,30 @@
       "a_to_b_nn_p90": 38.947,
       "b_to_a_nn_p90": 68.842,
       "symmetric_nn_p90": 53.894,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9842,
+      "b_name": "最锋利的刀刃",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 49.361,
+      "minimum_point_distance": 39.942,
+      "a_to_b_nn_p50": 39.942,
+      "b_to_a_nn_p50": 46.841,
+      "symmetric_nn_p50": 43.392,
+      "a_to_b_nn_p90": 39.942,
+      "b_to_a_nn_p90": 59.406,
+      "symmetric_nn_p90": 49.674,
       "bbox_iou": 0.0
     },
     {
@@ -42180,6 +45507,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9895,
+      "b_name": "崩溃的平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 44.026,
+      "minimum_point_distance": 44.026,
+      "a_to_b_nn_p50": 44.026,
+      "b_to_a_nn_p50": 44.026,
+      "symmetric_nn_p50": 44.026,
+      "a_to_b_nn_p90": 44.026,
+      "b_to_a_nn_p90": 44.026,
+      "symmetric_nn_p90": 44.026,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9773,
       "a_name": "别再提蘑菇了！",
       "b": 9808,
@@ -42228,6 +45579,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9709,
+      "b_name": "偷回蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 53.155,
+      "minimum_point_distance": 34.742,
+      "a_to_b_nn_p50": 34.742,
+      "b_to_a_nn_p50": 53.475,
+      "symmetric_nn_p50": 44.109,
+      "a_to_b_nn_p90": 34.742,
+      "b_to_a_nn_p90": 56.883,
+      "symmetric_nn_p90": 45.812,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9731,
+      "b_name": "抽水泵结构图",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 44.266,
+      "minimum_point_distance": 44.266,
+      "a_to_b_nn_p50": 44.266,
+      "b_to_a_nn_p50": 44.266,
+      "symmetric_nn_p50": 44.266,
+      "a_to_b_nn_p90": 44.266,
+      "b_to_a_nn_p90": 44.266,
+      "symmetric_nn_p90": 44.266,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9635,
       "a_name": "气阀微粒提取器！",
       "b": 9708,
@@ -42273,6 +45672,30 @@
       "a_to_b_nn_p90": 61.182,
       "b_to_a_nn_p90": 41.584,
       "symmetric_nn_p90": 51.383,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9823,
+      "b_name": "你死我活",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 46.111,
+      "minimum_point_distance": 42.949,
+      "a_to_b_nn_p50": 42.949,
+      "b_to_a_nn_p50": 45.943,
+      "symmetric_nn_p50": 44.446,
+      "a_to_b_nn_p90": 42.949,
+      "b_to_a_nn_p90": 48.622,
+      "symmetric_nn_p90": 45.786,
       "bbox_iou": 0.0
     },
     {
@@ -42780,6 +46203,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9702,
+      "a_name": "狼吞虎咽",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 48.684,
+      "minimum_point_distance": 45.283,
+      "a_to_b_nn_p50": 48.649,
+      "b_to_a_nn_p50": 45.283,
+      "symmetric_nn_p50": 46.966,
+      "a_to_b_nn_p90": 51.014,
+      "b_to_a_nn_p90": 45.283,
+      "symmetric_nn_p90": 48.149,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9635,
       "a_name": "气阀微粒提取器！",
       "b": 9814,
@@ -42876,6 +46323,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9814,
+      "b_name": "爆顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 50.121,
+      "minimum_point_distance": 45.089,
+      "a_to_b_nn_p50": 45.089,
+      "b_to_a_nn_p50": 50.345,
+      "symmetric_nn_p50": 47.717,
+      "a_to_b_nn_p90": 45.089,
+      "b_to_a_nn_p90": 54.367,
+      "symmetric_nn_p90": 49.728,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9702,
       "a_name": "狼吞虎咽",
       "b": 9785,
@@ -42897,6 +46368,102 @@
       "a_to_b_nn_p90": 51.322,
       "b_to_a_nn_p90": 47.396,
       "symmetric_nn_p90": 49.359,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9814,
+      "b_name": "爆顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 50.373,
+      "minimum_point_distance": 43.979,
+      "a_to_b_nn_p50": 43.979,
+      "b_to_a_nn_p50": 51.612,
+      "symmetric_nn_p50": 47.796,
+      "a_to_b_nn_p90": 43.979,
+      "b_to_a_nn_p90": 53.633,
+      "symmetric_nn_p90": 48.806,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9808,
+      "b_name": "亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 51.224,
+      "minimum_point_distance": 42.276,
+      "a_to_b_nn_p50": 42.276,
+      "b_to_a_nn_p50": 53.476,
+      "symmetric_nn_p50": 47.876,
+      "a_to_b_nn_p90": 42.276,
+      "b_to_a_nn_p90": 59.521,
+      "symmetric_nn_p90": 50.899,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9809,
+      "b_name": "更多亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 51.224,
+      "minimum_point_distance": 42.276,
+      "a_to_b_nn_p50": 42.276,
+      "b_to_a_nn_p50": 53.476,
+      "symmetric_nn_p50": 47.876,
+      "a_to_b_nn_p90": 42.276,
+      "b_to_a_nn_p90": 59.521,
+      "symmetric_nn_p90": 50.899,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9903,
+      "b_name": "多头蛇之王",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 48.098,
+      "minimum_point_distance": 48.098,
+      "a_to_b_nn_p50": 48.098,
+      "b_to_a_nn_p50": 48.098,
+      "symmetric_nn_p50": 48.098,
+      "a_to_b_nn_p90": 48.098,
+      "b_to_a_nn_p90": 48.098,
+      "symmetric_nn_p90": 48.098,
       "bbox_iou": 0.0
     },
     {
@@ -43065,6 +46632,54 @@
       "a_to_b_nn_p90": 46.153,
       "b_to_a_nn_p90": 54.886,
       "symmetric_nn_p90": 50.519,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9808,
+      "b_name": "亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 54.231,
+      "minimum_point_distance": 43.412,
+      "a_to_b_nn_p50": 43.412,
+      "b_to_a_nn_p50": 55.797,
+      "symmetric_nn_p50": 49.605,
+      "a_to_b_nn_p90": 43.412,
+      "b_to_a_nn_p90": 61.1,
+      "symmetric_nn_p90": 52.256,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9809,
+      "b_name": "更多亮顶蘑菇",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 54.231,
+      "minimum_point_distance": 43.412,
+      "a_to_b_nn_p50": 43.412,
+      "b_to_a_nn_p50": 55.797,
+      "symmetric_nn_p50": 49.605,
+      "a_to_b_nn_p90": 43.412,
+      "b_to_a_nn_p90": 61.1,
+      "symmetric_nn_p90": 52.256,
       "bbox_iou": 0.0
     },
     {
@@ -43524,6 +47139,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9823,
+      "b_name": "你死我活",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 53.952,
+      "minimum_point_distance": 47.607,
+      "a_to_b_nn_p50": 47.607,
+      "b_to_a_nn_p50": 54.138,
+      "symmetric_nn_p50": 50.872,
+      "a_to_b_nn_p90": 47.607,
+      "b_to_a_nn_p90": 57.506,
+      "symmetric_nn_p90": 52.556,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9708,
       "a_name": "熟悉的蘑菇",
       "b": 9773,
@@ -43641,6 +47280,30 @@
       "a_to_b_nn_p90": 60.273,
       "b_to_a_nn_p90": 47.628,
       "symmetric_nn_p90": 53.95,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9730,
+      "b_name": "暗潮纳迦的首领",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 51.279,
+      "minimum_point_distance": 51.279,
+      "a_to_b_nn_p50": 51.279,
+      "b_to_a_nn_p50": 51.279,
+      "symmetric_nn_p50": 51.279,
+      "a_to_b_nn_p90": 51.279,
+      "b_to_a_nn_p90": 51.279,
+      "symmetric_nn_p90": 51.279,
       "bbox_iou": 0.0
     },
     {
@@ -43884,6 +47547,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9747,
+      "b_name": "暗泽部族",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 55.509,
+      "minimum_point_distance": 49.331,
+      "a_to_b_nn_p50": 49.331,
+      "b_to_a_nn_p50": 54.674,
+      "symmetric_nn_p50": 52.003,
+      "a_to_b_nn_p90": 49.331,
+      "b_to_a_nn_p90": 60.472,
+      "symmetric_nn_p90": 54.902,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9743,
       "a_name": "天敌",
       "b": 9894,
@@ -44001,6 +47688,30 @@
       "a_to_b_nn_p90": 46.899,
       "b_to_a_nn_p90": 62.664,
       "symmetric_nn_p90": 54.782,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9820,
+      "b_name": "通缉：格罗阿克",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 52.611,
+      "minimum_point_distance": 52.611,
+      "a_to_b_nn_p50": 52.611,
+      "b_to_a_nn_p50": 52.611,
+      "symmetric_nn_p50": 52.611,
+      "a_to_b_nn_p90": 52.611,
+      "b_to_a_nn_p90": 52.611,
+      "symmetric_nn_p90": 52.611,
       "bbox_iou": 0.0
     },
     {
@@ -44145,6 +47856,30 @@
       "a_to_b_nn_p90": 59.201,
       "b_to_a_nn_p90": 49.948,
       "symmetric_nn_p90": 54.575,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9708,
+      "a_name": "熟悉的蘑菇",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 57.679,
+      "minimum_point_distance": 50.784,
+      "a_to_b_nn_p50": 56.069,
+      "b_to_a_nn_p50": 50.784,
+      "symmetric_nn_p50": 53.427,
+      "a_to_b_nn_p90": 69.702,
+      "b_to_a_nn_p90": 50.784,
+      "symmetric_nn_p90": 60.243,
       "bbox_iou": 0.0
     },
     {
@@ -44388,6 +48123,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9817,
+      "b_name": "血鳞纳迦的领袖",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 54.609,
+      "minimum_point_distance": 54.609,
+      "a_to_b_nn_p50": 54.609,
+      "b_to_a_nn_p50": 54.609,
+      "symmetric_nn_p50": 54.609,
+      "a_to_b_nn_p90": 54.609,
+      "b_to_a_nn_p90": 54.609,
+      "symmetric_nn_p90": 54.609,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9785,
       "a_name": "古树的祝福",
       "b": 9820,
@@ -44580,6 +48339,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9726,
+      "a_name": "既然我们是朋友......",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 57.065,
+      "minimum_point_distance": 53.426,
+      "a_to_b_nn_p50": 57.238,
+      "b_to_a_nn_p50": 53.426,
+      "symmetric_nn_p50": 55.332,
+      "a_to_b_nn_p90": 59.638,
+      "b_to_a_nn_p90": 53.426,
+      "symmetric_nn_p90": 56.532,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9727,
+      "a_name": "既然我们仍是朋友......",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 57.065,
+      "minimum_point_distance": 53.426,
+      "a_to_b_nn_p50": 57.238,
+      "b_to_a_nn_p50": 53.426,
+      "symmetric_nn_p50": 55.332,
+      "a_to_b_nn_p90": 59.638,
+      "b_to_a_nn_p90": 53.426,
+      "symmetric_nn_p90": 56.532,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9845,
       "a_name": "下钩钓鱼",
       "b": 9894,
@@ -44724,6 +48531,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 10096,
+      "b_name": "拯救孢子人",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 58.088,
+      "minimum_point_distance": 54.662,
+      "a_to_b_nn_p50": 54.662,
+      "b_to_a_nn_p50": 58.013,
+      "symmetric_nn_p50": 56.337,
+      "a_to_b_nn_p90": 54.662,
+      "b_to_a_nn_p90": 60.429,
+      "symmetric_nn_p90": 57.545,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9635,
       "a_name": "气阀微粒提取器！",
       "b": 10117,
@@ -44745,6 +48576,78 @@
       "a_to_b_nn_p90": 62.229,
       "b_to_a_nn_p90": 54.467,
       "symmetric_nn_p90": 58.348,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9841,
+      "b_name": "清除沼光抽血者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 62.697,
+      "minimum_point_distance": 46.699,
+      "a_to_b_nn_p50": 46.699,
+      "b_to_a_nn_p50": 66.95,
+      "symmetric_nn_p50": 56.824,
+      "a_to_b_nn_p90": 46.699,
+      "b_to_a_nn_p90": 69.931,
+      "symmetric_nn_p90": 58.315,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9726,
+      "b_name": "既然我们是朋友......",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 59.24,
+      "minimum_point_distance": 54.445,
+      "a_to_b_nn_p50": 54.445,
+      "b_to_a_nn_p50": 59.246,
+      "symmetric_nn_p50": 56.845,
+      "a_to_b_nn_p90": 54.445,
+      "b_to_a_nn_p90": 62.507,
+      "symmetric_nn_p90": 58.476,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9727,
+      "b_name": "既然我们仍是朋友......",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 59.24,
+      "minimum_point_distance": 54.445,
+      "a_to_b_nn_p50": 54.445,
+      "b_to_a_nn_p50": 59.246,
+      "symmetric_nn_p50": 56.845,
+      "a_to_b_nn_p90": 54.445,
+      "b_to_a_nn_p90": 62.507,
+      "symmetric_nn_p90": 58.476,
       "bbox_iou": 0.0
     },
     {
@@ -44940,6 +48843,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9894,
+      "b_name": "保护观察者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 57.365,
+      "minimum_point_distance": 57.365,
+      "a_to_b_nn_p50": 57.365,
+      "b_to_a_nn_p50": 57.365,
+      "symmetric_nn_p50": 57.365,
+      "a_to_b_nn_p90": 57.365,
+      "b_to_a_nn_p90": 57.365,
+      "symmetric_nn_p90": 57.365,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9743,
       "a_name": "天敌",
       "b": 9823,
@@ -45009,6 +48936,30 @@
       "a_to_b_nn_p90": 64.927,
       "b_to_a_nn_p90": 55.503,
       "symmetric_nn_p90": 60.215,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9820,
+      "b_name": "通缉：格罗阿克",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 57.835,
+      "minimum_point_distance": 57.835,
+      "a_to_b_nn_p50": 57.835,
+      "b_to_a_nn_p50": 57.835,
+      "symmetric_nn_p50": 57.835,
+      "a_to_b_nn_p90": 57.835,
+      "b_to_a_nn_p90": 57.835,
+      "symmetric_nn_p90": 57.835,
       "bbox_iou": 0.0
     },
     {
@@ -45084,6 +49035,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9841,
+      "b_name": "清除沼光抽血者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 61.17,
+      "minimum_point_distance": 53.971,
+      "a_to_b_nn_p50": 53.971,
+      "b_to_a_nn_p50": 63.244,
+      "symmetric_nn_p50": 58.608,
+      "a_to_b_nn_p90": 53.971,
+      "b_to_a_nn_p90": 67.876,
+      "symmetric_nn_p90": 60.923,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9747,
       "a_name": "暗泽部族",
       "b": 9814,
@@ -45156,6 +49131,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9708,
+      "a_name": "熟悉的蘑菇",
+      "b": 9716,
+      "b_name": "暗泽湖的异常",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 63.144,
+      "minimum_point_distance": 55.425,
+      "a_to_b_nn_p50": 62.213,
+      "b_to_a_nn_p50": 55.425,
+      "symmetric_nn_p50": 58.819,
+      "a_to_b_nn_p90": 73.703,
+      "b_to_a_nn_p90": 55.425,
+      "symmetric_nn_p90": 64.564,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9730,
       "a_name": "暗潮纳迦的首领",
       "b": 10117,
@@ -45201,6 +49200,30 @@
       "a_to_b_nn_p90": 64.064,
       "b_to_a_nn_p90": 56.789,
       "symmetric_nn_p90": 60.427,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9773,
+      "b_name": "别再提蘑菇了！",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 61.022,
+      "minimum_point_distance": 56.631,
+      "a_to_b_nn_p50": 56.631,
+      "b_to_a_nn_p50": 61.395,
+      "symmetric_nn_p50": 59.013,
+      "a_to_b_nn_p90": 56.631,
+      "b_to_a_nn_p90": 64.04,
+      "symmetric_nn_p90": 60.335,
       "bbox_iou": 0.0
     },
     {
@@ -45252,6 +49275,102 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9739,
+      "b_name": "孢子人的困境",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 60.799,
+      "minimum_point_distance": 56.282,
+      "a_to_b_nn_p50": 56.282,
+      "b_to_a_nn_p50": 61.954,
+      "symmetric_nn_p50": 59.118,
+      "a_to_b_nn_p90": 56.282,
+      "b_to_a_nn_p90": 62.731,
+      "symmetric_nn_p90": 59.506,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9742,
+      "b_name": "更多孢子囊",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 60.799,
+      "minimum_point_distance": 56.282,
+      "a_to_b_nn_p50": 56.282,
+      "b_to_a_nn_p50": 61.954,
+      "symmetric_nn_p50": 59.118,
+      "a_to_b_nn_p90": 56.282,
+      "b_to_a_nn_p90": 62.731,
+      "symmetric_nn_p90": 59.506,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9904,
+      "b_name": "猎杀恐爪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 59.251,
+      "minimum_point_distance": 59.251,
+      "a_to_b_nn_p50": 59.251,
+      "b_to_a_nn_p50": 59.251,
+      "symmetric_nn_p50": 59.251,
+      "a_to_b_nn_p90": 59.251,
+      "b_to_a_nn_p90": 59.251,
+      "symmetric_nn_p90": 59.251,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9904,
+      "b_name": "猎杀恐爪",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 59.395,
+      "minimum_point_distance": 59.395,
+      "a_to_b_nn_p50": 59.395,
+      "b_to_a_nn_p50": 59.395,
+      "symmetric_nn_p50": 59.395,
+      "a_to_b_nn_p90": 59.395,
+      "b_to_a_nn_p90": 59.395,
+      "symmetric_nn_p90": 59.395,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9772,
       "a_name": "尤尔巴的报告",
       "b": 9823,
@@ -45273,6 +49392,30 @@
       "a_to_b_nn_p90": 72.667,
       "b_to_a_nn_p90": 53.442,
       "symmetric_nn_p90": 63.055,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9716,
+      "b_name": "暗泽湖的异常",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 59.508,
+      "minimum_point_distance": 59.508,
+      "a_to_b_nn_p50": 59.508,
+      "b_to_a_nn_p50": 59.508,
+      "symmetric_nn_p50": 59.508,
+      "a_to_b_nn_p90": 59.508,
+      "b_to_a_nn_p90": 59.508,
+      "symmetric_nn_p90": 59.508,
       "bbox_iou": 0.0
     },
     {
@@ -45345,6 +49488,30 @@
       "a_to_b_nn_p90": 57.238,
       "b_to_a_nn_p90": 66.843,
       "symmetric_nn_p90": 62.04,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9770,
+      "b_name": "沼牙的威胁",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 64.858,
+      "minimum_point_distance": 53.475,
+      "a_to_b_nn_p50": 53.475,
+      "b_to_a_nn_p50": 65.675,
+      "symmetric_nn_p50": 59.575,
+      "a_to_b_nn_p90": 53.475,
+      "b_to_a_nn_p90": 74.868,
+      "symmetric_nn_p90": 64.172,
       "bbox_iou": 0.0
     },
     {
@@ -45513,6 +49680,30 @@
       "a_to_b_nn_p90": 65.933,
       "b_to_a_nn_p90": 58.254,
       "symmetric_nn_p90": 62.093,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9731,
+      "a_name": "抽水泵结构图",
+      "b": 9788,
+      "b_name": "阴冷之地",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 60.523,
+      "minimum_point_distance": 60.523,
+      "a_to_b_nn_p50": 60.523,
+      "b_to_a_nn_p50": 60.523,
+      "symmetric_nn_p50": 60.523,
+      "a_to_b_nn_p90": 60.523,
+      "b_to_a_nn_p90": 60.523,
+      "symmetric_nn_p90": 60.523,
       "bbox_iou": 0.0
     },
     {
@@ -45876,6 +50067,54 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9739,
+      "a_name": "孢子人的困境",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 65.986,
+      "minimum_point_distance": 60.796,
+      "a_to_b_nn_p50": 66.613,
+      "b_to_a_nn_p50": 60.796,
+      "symmetric_nn_p50": 63.704,
+      "a_to_b_nn_p90": 67.815,
+      "b_to_a_nn_p90": 60.796,
+      "symmetric_nn_p90": 64.306,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9742,
+      "a_name": "更多孢子囊",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 65.986,
+      "minimum_point_distance": 60.796,
+      "a_to_b_nn_p50": 66.613,
+      "b_to_a_nn_p50": 60.796,
+      "symmetric_nn_p50": 63.704,
+      "a_to_b_nn_p90": 67.815,
+      "b_to_a_nn_p90": 60.796,
+      "symmetric_nn_p90": 64.306,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9635,
       "a_name": "气阀微粒提取器！",
       "b": 9709,
@@ -45897,6 +50136,30 @@
       "a_to_b_nn_p90": 65.913,
       "b_to_a_nn_p90": 66.756,
       "symmetric_nn_p90": 66.334,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 64.437,
+      "minimum_point_distance": 64.437,
+      "a_to_b_nn_p50": 64.437,
+      "b_to_a_nn_p50": 64.437,
+      "symmetric_nn_p50": 64.437,
+      "a_to_b_nn_p90": 64.437,
+      "b_to_a_nn_p90": 64.437,
+      "symmetric_nn_p90": 64.437,
       "bbox_iou": 0.0
     },
     {
@@ -46092,6 +50355,78 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9785,
+      "b_name": "古树的祝福",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 65.806,
+      "minimum_point_distance": 64.895,
+      "a_to_b_nn_p50": 64.895,
+      "b_to_a_nn_p50": 65.832,
+      "symmetric_nn_p50": 65.364,
+      "a_to_b_nn_p90": 64.895,
+      "b_to_a_nn_p90": 66.582,
+      "symmetric_nn_p90": 65.739,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 10118,
+      "b_name": "警告匕潭失落者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 66.936,
+      "minimum_point_distance": 64.147,
+      "a_to_b_nn_p50": 64.147,
+      "b_to_a_nn_p50": 66.776,
+      "symmetric_nn_p50": 65.462,
+      "a_to_b_nn_p90": 64.147,
+      "b_to_a_nn_p90": 69.17,
+      "symmetric_nn_p90": 66.659,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9899,
+      "b_name": "未完的职责",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 65.514,
+      "minimum_point_distance": 65.514,
+      "a_to_b_nn_p50": 65.514,
+      "b_to_a_nn_p50": 65.514,
+      "symmetric_nn_p50": 65.514,
+      "a_to_b_nn_p90": 65.514,
+      "b_to_a_nn_p90": 65.514,
+      "symmetric_nn_p90": 65.514,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9709,
       "a_name": "偷回蘑菇",
       "b": 9899,
@@ -46164,6 +50499,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 10117,
+      "b_name": "通缉：穆玛基酋长",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 66.279,
+      "minimum_point_distance": 66.279,
+      "a_to_b_nn_p50": 66.279,
+      "b_to_a_nn_p50": 66.279,
+      "symmetric_nn_p50": 66.279,
+      "a_to_b_nn_p90": 66.279,
+      "b_to_a_nn_p90": 66.279,
+      "symmetric_nn_p90": 66.279,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9788,
       "a_name": "阴冷之地",
       "b": 9841,
@@ -46185,6 +50544,30 @@
       "a_to_b_nn_p90": 53.156,
       "b_to_a_nn_p90": 83.975,
       "symmetric_nn_p90": 68.565,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9894,
+      "b_name": "保护观察者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 66.521,
+      "minimum_point_distance": 66.521,
+      "a_to_b_nn_p50": 66.521,
+      "b_to_a_nn_p50": 66.521,
+      "symmetric_nn_p50": 66.521,
+      "a_to_b_nn_p90": 66.521,
+      "b_to_a_nn_p90": 66.521,
+      "symmetric_nn_p90": 66.521,
       "bbox_iou": 0.0
     },
     {
@@ -46353,6 +50736,54 @@
       "a_to_b_nn_p90": 72.385,
       "b_to_a_nn_p90": 67.369,
       "symmetric_nn_p90": 69.877,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 10096,
+      "b_name": "拯救孢子人",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 67.971,
+      "minimum_point_distance": 66.311,
+      "a_to_b_nn_p50": 66.311,
+      "b_to_a_nn_p50": 67.927,
+      "symmetric_nn_p50": 67.119,
+      "a_to_b_nn_p90": 66.311,
+      "b_to_a_nn_p90": 69.435,
+      "symmetric_nn_p90": 67.873,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9788,
+      "b_name": "阴冷之地",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 67.142,
+      "minimum_point_distance": 67.142,
+      "a_to_b_nn_p50": 67.142,
+      "b_to_a_nn_p50": 67.142,
+      "symmetric_nn_p50": 67.142,
+      "a_to_b_nn_p90": 67.142,
+      "b_to_a_nn_p90": 67.142,
+      "symmetric_nn_p90": 67.142,
       "bbox_iou": 0.0
     },
     {
@@ -46668,6 +51099,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9635,
+      "a_name": "气阀微粒提取器！",
+      "b": 9701,
+      "b_name": "观察孢子人",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 70.189,
+      "minimum_point_distance": 66.178,
+      "a_to_b_nn_p50": 70.34,
+      "b_to_a_nn_p50": 66.178,
+      "symmetric_nn_p50": 68.259,
+      "a_to_b_nn_p90": 73.291,
+      "b_to_a_nn_p90": 66.178,
+      "symmetric_nn_p90": 69.734,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9785,
       "a_name": "古树的祝福",
       "b": 10117,
@@ -46689,6 +51144,30 @@
       "a_to_b_nn_p90": 68.54,
       "b_to_a_nn_p90": 68.29,
       "symmetric_nn_p90": 68.415,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9895,
+      "b_name": "崩溃的平衡",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 68.465,
+      "minimum_point_distance": 68.465,
+      "a_to_b_nn_p50": 68.465,
+      "b_to_a_nn_p50": 68.465,
+      "symmetric_nn_p50": 68.465,
+      "a_to_b_nn_p90": 68.465,
+      "b_to_a_nn_p90": 68.465,
+      "symmetric_nn_p90": 68.465,
       "bbox_iou": 0.0
     },
     {
@@ -46809,6 +51288,30 @@
       "a_to_b_nn_p90": 69.337,
       "b_to_a_nn_p90": 69.337,
       "symmetric_nn_p90": 69.337,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9822,
+      "b_name": "战斗迫近",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 69.368,
+      "minimum_point_distance": 69.368,
+      "a_to_b_nn_p50": 69.368,
+      "b_to_a_nn_p50": 69.368,
+      "symmetric_nn_p50": 69.368,
+      "a_to_b_nn_p90": 69.368,
+      "b_to_a_nn_p90": 69.368,
+      "symmetric_nn_p90": 69.368,
       "bbox_iou": 0.0
     },
     {
@@ -46980,6 +51483,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 10118,
+      "b_name": "警告匕潭失落者",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 72.64,
+      "minimum_point_distance": 69.551,
+      "a_to_b_nn_p50": 69.551,
+      "b_to_a_nn_p50": 72.569,
+      "symmetric_nn_p50": 71.06,
+      "a_to_b_nn_p90": 69.551,
+      "b_to_a_nn_p90": 75.001,
+      "symmetric_nn_p90": 72.276,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9739,
       "a_name": "孢子人的困境",
       "b": 9747,
@@ -47028,6 +51555,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 10117,
+      "b_name": "通缉：穆玛基酋长",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 71.118,
+      "minimum_point_distance": 71.118,
+      "a_to_b_nn_p50": 71.118,
+      "b_to_a_nn_p50": 71.118,
+      "symmetric_nn_p50": 71.118,
+      "a_to_b_nn_p90": 71.118,
+      "b_to_a_nn_p90": 71.118,
+      "symmetric_nn_p90": 71.118,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9785,
       "a_name": "古树的祝福",
       "b": 9822,
@@ -47049,6 +51600,30 @@
       "a_to_b_nn_p90": 71.539,
       "b_to_a_nn_p90": 71.419,
       "symmetric_nn_p90": 71.479,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9701,
+      "a_name": "观察孢子人",
+      "b": 9747,
+      "b_name": "暗泽部族",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 73.572,
+      "minimum_point_distance": 69.401,
+      "a_to_b_nn_p50": 69.401,
+      "b_to_a_nn_p50": 73.526,
+      "symmetric_nn_p50": 71.463,
+      "a_to_b_nn_p90": 69.401,
+      "b_to_a_nn_p90": 76.51,
+      "symmetric_nn_p90": 72.955,
       "bbox_iou": 0.0
     },
     {
@@ -47172,6 +51747,30 @@
       "bbox_iou": 0.0
     },
     {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9822,
+      "b_name": "战斗迫近",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 73.506,
+      "minimum_point_distance": 73.506,
+      "a_to_b_nn_p50": 73.506,
+      "b_to_a_nn_p50": 73.506,
+      "symmetric_nn_p50": 73.506,
+      "a_to_b_nn_p90": 73.506,
+      "b_to_a_nn_p90": 73.506,
+      "symmetric_nn_p90": 73.506,
+      "bbox_iou": 0.0
+    },
+    {
       "a": 9730,
       "a_name": "暗潮纳迦的首领",
       "b": 9823,
@@ -47193,6 +51792,30 @@
       "a_to_b_nn_p90": 73.037,
       "b_to_a_nn_p90": 79.574,
       "symmetric_nn_p90": 76.305,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9709,
+      "a_name": "偷回蘑菇",
+      "b": 9752,
+      "b_name": "逃离暗泽村",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 81.778,
+      "minimum_point_distance": 69.636,
+      "a_to_b_nn_p50": 82.176,
+      "b_to_a_nn_p50": 69.636,
+      "symmetric_nn_p50": 75.906,
+      "a_to_b_nn_p90": 84.338,
+      "b_to_a_nn_p90": 69.636,
+      "symmetric_nn_p90": 76.987,
       "bbox_iou": 0.0
     },
     {
@@ -47313,6 +51936,54 @@
       "a_to_b_nn_p90": 88.337,
       "b_to_a_nn_p90": 77.908,
       "symmetric_nn_p90": 83.123,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9752,
+      "a_name": "逃离暗泽村",
+      "b": 9823,
+      "b_name": "你死我活",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 82.409,
+      "minimum_point_distance": 79.44,
+      "a_to_b_nn_p50": 79.44,
+      "b_to_a_nn_p50": 82.186,
+      "symmetric_nn_p50": 80.813,
+      "a_to_b_nn_p90": 79.44,
+      "b_to_a_nn_p90": 84.556,
+      "symmetric_nn_p90": 81.998,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9709,
+      "a_name": "偷回蘑菇",
+      "b": 9716,
+      "b_name": "暗泽湖的异常",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 88.802,
+      "minimum_point_distance": 73.828,
+      "a_to_b_nn_p50": 89.207,
+      "b_to_a_nn_p50": 73.828,
+      "symmetric_nn_p50": 81.518,
+      "a_to_b_nn_p90": 91.768,
+      "b_to_a_nn_p90": 73.828,
+      "symmetric_nn_p90": 82.798,
       "bbox_iou": 0.0
     },
     {
@@ -47601,6 +52272,30 @@
       "a_to_b_nn_p90": 87.069,
       "b_to_a_nn_p90": 87.069,
       "symmetric_nn_p90": 87.069,
+      "bbox_iou": 0.0
+    },
+    {
+      "a": 9716,
+      "a_name": "暗泽湖的异常",
+      "b": 9823,
+      "b_name": "你死我活",
+      "shared": {
+        "creatures": [],
+        "objects": [],
+        "items": []
+      },
+      "resolved_shared": {
+        "npcs": [],
+        "objects": []
+      },
+      "centroid_distance": 89.522,
+      "minimum_point_distance": 85.474,
+      "a_to_b_nn_p50": 85.474,
+      "b_to_a_nn_p50": 89.267,
+      "symmetric_nn_p50": 87.37,
+      "a_to_b_nn_p90": 85.474,
+      "b_to_a_nn_p90": 92.203,
+      "symmetric_nn_p90": 88.839,
       "bbox_iou": 0.0
     },
     {

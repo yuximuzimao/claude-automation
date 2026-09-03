@@ -189,10 +189,10 @@ def patch_steps_5_23_player_copy(route: dict) -> None:
     ])
 
     # Step 7: task skeleton and scripted transport are separate player actions.
-    update_point(7, "战歌要塞·亚尼", "亚尼 → 做《魔法飞毯》：使用任务脚本飞毯前往加尔鲁什码头", "亚尼 → 做《魔法飞毯》\n任务脚本飞行：战歌要塞 → 加尔鲁什码头")
+    update_point(7, "战歌要塞·亚尼", "亚尼 → 做《魔法飞毯》\n任务脚本飞行：战歌要塞 → 加尔鲁什码头", "亚尼 → 做《魔法飞毯》\n任务传送：战歌要塞 → 加尔鲁什码头")
     g = route["stepGroups"][6]
-    old = '<div class="ra-line"><span class="ra-npc">亚尼</span><span class="ra-arrow">→</span><span class="ra-verb">做</span> <span class="ra-task ra-do-task">魔法飞毯</span>：<span class="ra-system-action ra-flightpath">任务脚本飞行前往加尔鲁什码头</span></div>'
-    new = "\n".join([do_at("战歌要塞·亚尼", "魔法飞毯"), system_line("任务脚本飞行：战歌要塞 → 加尔鲁什码头", "ra-flightpath")])
+    old = "\n".join([do_at("战歌要塞·亚尼", "魔法飞毯"), system_line("任务脚本飞行：战歌要塞 → 加尔鲁什码头", "ra-flightpath")])
+    new = "\n".join([do_at("战歌要塞·亚尼", "魔法飞毯"), system_line("任务传送：战歌要塞 → 加尔鲁什码头", "ra-flightpath")])
     replace_action_html(g, old, new, "step 7 magic carpet")
 
     # Step 9: fixed item/overlap/escort mechanics belong in notes.
@@ -387,7 +387,7 @@ def main() -> None:
             "points": [
                 {
                     "title": "琥珀崖·战斗法师安斯姆",
-                    "action": "战斗法师安斯姆 → 交《准备飞翔》 → 接《营救艾瓦诺尔》\n启动任务飞行：蓝玉营地上方平台\n↳ 做《营救艾瓦诺尔》",
+                    "action": "战斗法师安斯姆 → 交《准备飞翔》 → 接《营救艾瓦诺尔》\n任务传送：琥珀崖 → 蓝玉营地上方平台\n↳ 做《营救艾瓦诺尔》\n任务传送：蓝玉营地上方平台 → 琥珀崖",
                     "note": "《营救艾瓦诺尔》：启动前先下普通坐骑并停稳。落地后按任务脚本完成营救；完成后由艾瓦诺尔的脚本直接送回琥珀崖，不要自己跳崖离开。",
                 },
                 {
@@ -396,17 +396,18 @@ def main() -> None:
                 },
                 {
                     "title": "琥珀崖·苏雷斯塔兹",
-                    "action": "苏雷斯塔兹 → 交《苏雷斯塔兹》 → 接《飞越裂谷》\n启动任务飞行：考达拉",
+                    "action": "苏雷斯塔兹 → 交《苏雷斯塔兹》 → 接《飞越裂谷》\n任务传送：琥珀崖 → 考达拉",
                 },
             ],
             "action_html": [
                 point_anchor("琥珀崖"),
                 npc_actions("战斗法师安斯姆", turns=("准备飞翔",), accepts=("营救艾瓦诺尔",)),
-                system_line("启动任务飞行：蓝玉营地上方平台"),
+                system_line("任务传送：琥珀崖 → 蓝玉营地上方平台", "ra-flightpath"),
                 do_line("营救艾瓦诺尔"),
+                system_line("任务传送：蓝玉营地上方平台 → 琥珀崖", "ra-flightpath"),
                 npc_actions("大法师艾瓦诺尔", turns=("营救艾瓦诺尔",), accepts=("苏雷斯塔兹",)),
                 npc_actions("苏雷斯塔兹", turns=("苏雷斯塔兹",), accepts=("飞越裂谷",)),
-                system_line("启动任务飞行：考达拉"),
+                system_line("任务传送：琥珀崖 → 考达拉", "ra-flightpath"),
             ],
             "note_html": notes_html(
                 note_block(
@@ -641,12 +642,12 @@ def main() -> None:
             "summary": "考达拉任务结束后回永生之盾飞行管理员，乘系统鸟返回琥珀崖。",
             "points": [
                 {"title": "考达拉·永生之盾", "action": "到飞行管理员处"},
-                {"title": "永生之盾飞行点", "action": "乘系统鸟：永生之盾 → 琥珀崖"},
+                {"title": "永生之盾飞行点", "action": "系统飞行：永生之盾 → 琥珀崖"},
                 {"title": "琥珀崖", "action": "抵达琥珀崖"},
             ],
             "action_html": [
                 point_anchor("考达拉·永生之盾"),
-                system_line("乘系统鸟：永生之盾 → 琥珀崖", "ra-flightpath"),
+                system_line("系统飞行：永生之盾 → 琥珀崖", "ra-flightpath"),
                 point_anchor("琥珀崖"),
             ],
         },
@@ -913,11 +914,11 @@ def main() -> None:
             "title": "博古洛克 → 系统鸟琥珀崖",
             "summary": "从博古洛克乘系统鸟回琥珀崖，向图书馆员盖伦交《监视裂谷：冬鳞洞穴》。",
             "points": [
-                {"title": "博古洛克飞行点", "action": "乘系统鸟：博古洛克 → 琥珀崖"},
+                {"title": "博古洛克飞行点", "action": "系统飞行：博古洛克 → 琥珀崖"},
                 {"title": "琥珀崖", "action": "图书馆员盖伦 → 交《监视裂谷：冬鳞洞穴》"},
             ],
             "action_html": [
-                system_line("乘系统鸟：博古洛克 → 琥珀崖", "ra-flightpath"),
+                system_line("系统飞行：博古洛克 → 琥珀崖", "ra-flightpath"),
                 point_anchor("琥珀崖"),
                 npc_actions("图书馆员盖伦", turns=("监视裂谷：冬鳞洞穴",)),
             ],
@@ -929,7 +930,7 @@ def main() -> None:
             "points": [
                 {
                     "title": "琥珀崖飞行点",
-                    "action": "乘系统鸟：琥珀崖 → 牦牛村",
+                    "action": "系统飞行：琥珀崖 → 牦牛村",
                 },
                 {
                     "title": "牦牛村",
@@ -947,7 +948,7 @@ def main() -> None:
                 },
             ],
             "action_html": [
-                system_line("乘系统鸟：琥珀崖 → 牦牛村", "ra-flightpath"),
+                system_line("系统飞行：琥珀崖 → 牦牛村", "ra-flightpath"),
                 point_anchor("牦牛村"),
                 npc_actions("陶拉努克宗母", accepts=("横贯冰原",)),
                 do_at("陶拉努克撤离队", "横贯冰原"),

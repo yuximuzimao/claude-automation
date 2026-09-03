@@ -984,8 +984,8 @@
     }
   },
   "scope_counts": {
+    "defer_first_group_retest_next_group": 3,
     "defer_future_level_revisit": 11,
-    "defer_to_80_after_live_failure": 3,
     "exclude_alliance_or_other_faction": 87,
     "exclude_current_entry_axis_alternate": 3,
     "exclude_deprecated_or_system": 1,
@@ -17424,15 +17424,15 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "defer_to_80_after_live_failure",
+      "scope_status": "defer_first_group_retest_next_group",
       "scope_reasons": [
-        "首组75级五开两次尝试吉加托尔，包含一次团灭，第二次仅一号存活才完成；该任务还是12095/12097精英支线的唯一未完成门槛。现在做失败方差高，80后回收不阻塞其它龙骨任务且能兑现满级任务金币，因此从练级执行稿移出。"
+        "首组75级五开两次尝试吉加托尔，包含一次团灭，第二次仅一号存活才完成；因此首组固定练级基线先延后该精英支线。但这不是永久80级门槛：第二组已有1防骑+4惩戒且操作经验更高时，应在龙骨自然等级重新实测；若能稳定、快速击杀，则恢复到首跑路线。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
         "decision": "not_route_candidate",
         "reasons": [
-          "defer_to_80_after_live_failure"
+          "defer_first_group_retest_next_group"
         ],
         "verification_needed": [],
         "video_evidence_available": false,
@@ -17988,15 +17988,15 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "defer_to_80_after_live_failure",
+      "scope_status": "defer_first_group_retest_next_group",
       "scope_reasons": [
-        "只承接12090完成后的萨拉斯塔支线，本身不解锁其它龙骨任务；随12090整体延后到80后。"
+        "只承接12090完成后的萨拉斯塔支线，本身不解锁其它龙骨任务。首组基线随12090延后；第二组是否仍延后，跟随12090/12097在1防骑+4惩戒下的自然等级复测结果重新决定。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
         "decision": "not_route_candidate",
         "reasons": [
-          "defer_to_80_after_live_failure"
+          "defer_first_group_retest_next_group"
         ],
         "verification_needed": [],
         "video_evidence_available": false,
@@ -18437,15 +18437,15 @@
       "exclusive_to": [],
       "breadcrumb_for": null,
       "breadcrumbs": [],
-      "scope_status": "defer_to_80_after_live_failure",
+      "scope_status": "defer_first_group_retest_next_group",
       "scope_reasons": [
-        "首组75级五开实测萨拉斯塔打不过；任务资料标记Suggested players: 5，且12097没有其它龙骨后续依赖。现在强打无必要，随整条精英支线延后到80后。"
+        "首组75级五开实测萨拉斯塔打不过；本次80级1防骑+4惩戒回访实测击杀非常轻松，说明它不是机制性不可执行，只是低等级时可能战斗成本过高。该任务没有后续。当前首组不因这次回访把它插入冰冠→龙骨跨图链；第二组在龙骨自然等级用1防骑+4惩戒重新实测，若已能稳定且不费时则恢复首跑，否则继续利用无后续特性延后80级收尾。"
       ],
       "entry_axis_relevance": "current_axis_or_local",
       "auto_note_screen": {
         "decision": "not_route_candidate",
         "reasons": [
-          "defer_to_80_after_live_failure"
+          "defer_first_group_retest_next_group"
         ],
         "verification_needed": [],
         "video_evidence_available": false,

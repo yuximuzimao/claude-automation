@@ -19,7 +19,57 @@ SEMANTIC_HUD_STANDARD = "semantic-hud-v45"
 # Any newly introduced route key must opt into the v45 contract instead of silently falling back
 # to the legacy plaintext HUD.
 LEGACY_PLAINTEXT_ROUTE_KEYS: set[str] = set()
+# Routes published before the closed-action parser was wired into the common builder keep their
+# existing migration debt. Icecrown is intentionally absent, and every future route key is gated
+# automatically unless it is explicitly added here during a controlled legacy migration.
+CLOSED_ACTION_MIGRATION_EXEMPT_ROUTE_KEYS = {
+    "hellfire", "zang", "nagrand", "borean", "dragonblight", "dalaran", "storm",
+    "sholazar", "zuldrak", "grizzly", "howling",
+}
 TASK_NAME_RE = re.compile(r"《([^》]+)》")
+TASK_GROUP_TOKEN = r"(?:《[^》]+》[、，, ]*)+"
+TASK_ATOM_TOKEN = rf"(?:接|做|交){TASK_GROUP_TOKEN}"
+LOCATION_TOKEN = r"[^：；;,，《》()（）]+"
+FLOW_ACTION_RE = re.compile(rf"^(?:{LOCATION_TOKEN}\s*→\s*)?{TASK_ATOM_TOKEN}(?:\s*→\s*{TASK_ATOM_TOKEN})*$")
+LOCATION_ONLY_RE = re.compile(rf"^{LOCATION_TOKEN}$")
+SYSTEM_ACTION_RE = re.compile(r"^(?:开飞行点|炉石绑定|绑定炉石|使用炉石)：[^：；;,，《》()（）]+$")
+SYSTEM_FLIGHT_RE = re.compile(r"^系统飞行：[^：；;,，《》()（）]+\s*→\s*[^：；;,，《》()（）]+$")
+FIXED_TRANSPORT_RE = re.compile(r"^固定交通：[^：；;,，《》()（）]+\s*→\s*[^：；;,，《》()（）]+$")
+TASK_TRANSPORT_RE = re.compile(rf"^任务传送：[^：；;,，《》()（）]+\s*→\s*[^：；;,，《》()（）]+(?:\s*→\s*{TASK_ATOM_TOKEN})*$")
+FLOW_THEN_TASK_TRANSPORT_RE = re.compile(rf"^(?:{LOCATION_TOKEN}\s*→\s*)?{TASK_ATOM_TOKEN}(?:\s*→\s*{TASK_ATOM_TOKEN})*\s*→\s*任务传送：[^：；;,，《》()（）]+\s*→\s*[^：；;,，《》()（）]+$")
+FORBIDDEN_LOCATION_PROSE = re.compile(r"(?:^回(?!音谷)|五号|共享|不共享|主控|每号|同时|直到|顺路|沿路|完成后|击杀|收集|使用|等待|不要|离开条件|带走|折返|返回|寻找|重新找到|前往|刷新|掉落|优先|如果|若|任务物|技能|Boss|AOE)", re.IGNORECASE)
+COORDINATE_PROSE = re.compile(r"\d{1,2}(?:\.\d+)?\s*[,，]\s*\d{1,2}(?:\.\d+)?")
+
+
+def validate_closed_player_action(route_key: str, point_index: int, text: str, point_title: str | None = None) -> None:
+    value = str(text).strip()
+    value = re.sub(r"^↳\s*", "", value)
+    if not value:
+        raise SystemExit(f"closed action grammar: empty player action: {route_key} point {point_index}")
+    if COORDINATE_PROSE.search(value):
+        raise SystemExit(f"closed action grammar: coordinate leaked into action: {route_key} point {point_index}: {value}")
+    if any(pattern.fullmatch(value) for pattern in (
+        SYSTEM_ACTION_RE, SYSTEM_FLIGHT_RE, FIXED_TRANSPORT_RE, TASK_TRANSPORT_RE, FLOW_THEN_TASK_TRANSPORT_RE, FLOW_ACTION_RE,
+    )):
+        location = ""
+        if "→" in value and not value.startswith(("系统飞行：", "固定交通：", "任务传送：")):
+            first_segment = value.split("→", 1)[0].strip()
+            if not re.fullmatch(TASK_ATOM_TOKEN, first_segment):
+                location = first_segment
+        if location and FORBIDDEN_LOCATION_PROSE.search(location):
+            raise SystemExit(f"closed action grammar: prose used as location/NPC: {route_key} point {point_index}: {value}")
+        if location and point_title is not None and location != str(point_title).strip():
+            raise SystemExit(f"closed action grammar: action location must equal structured point title: {route_key} point {point_index}: {value}")
+        return
+    if LOCATION_ONLY_RE.fullmatch(value):
+        if FORBIDDEN_LOCATION_PROSE.search(value):
+            raise SystemExit(f"closed action grammar: prose used as location waypoint: {route_key} point {point_index}: {value}")
+        if point_title is not None and value != str(point_title).strip():
+            raise SystemExit(f"closed action grammar: location-only action must equal structured point title: {route_key} point {point_index}: {value}")
+        return
+    raise SystemExit(f"closed action grammar violation: {route_key} point {point_index}: {value}")
+
+
 HUD_ACTIONS_PATCH = "\n" + HUD_ACTIONS_START + r"""
 const routeAtlasInfoWithFullActions=info;
 
@@ -55,10 +105,18 @@ const routeAtlasInfoWithFullActions=info;
       .stepsCard .ra-step-note{display:none!important}
       .ra-semantic-notes{display:block!important;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.18);white-space:normal!important}
       .ra-note-heading{display:block!important;font-weight:850;color:#fff;margin-bottom:3px}
-      .ra-note-block{display:block!important;width:100%;padding:7px 0 8px;margin:0;clear:both}
-      .ra-note-block+.ra-note-block{border-top:1px dashed rgba(255,255,255,.16);margin-top:2px}
+      .ra-note-block{display:block!important;width:100%;padding:6px 0 7px;margin:0;clear:both;line-height:1.62}
+      .ra-note-block+.ra-note-block{border-top:1px solid rgba(255,255,255,.18);margin-top:2px}
       .ra-note-task{display:block!important;font-weight:800;color:#f0e4bd;margin:0 0 2px}
       .ra-note-text{display:block!important;line-height:1.62;color:#eee}
+      .ra-note-task.ra-note-task-inline{display:inline!important;margin:0;color:#f0e4bd}
+      .ra-note-task.ra-note-task-inline::after{content:'：';color:#b9bec5;font-weight:500}
+      .ra-note-text.ra-note-text-inline{display:inline!important;line-height:inherit;color:#eee}
+      .ra-note-ref{display:inline-block;margin-left:2px;font-size:.68em;line-height:0;vertical-align:super;font-weight:900;color:#d8c8ff!important;text-decoration:none!important}
+      .ra-note-ref.ra-note-ref-lead{margin:0 4px 0 0}
+      .ra-mechanic-tag{display:inline-block;margin:0 5px 0 1px;padding:1px 5px 2px;border-radius:4px;font-size:.72em;line-height:1.25;font-weight:900;vertical-align:1px;text-decoration:none!important;box-shadow:0 0 0 1px rgba(255,255,255,.16) inset}
+      .ra-mechanic-shared{background:#d8d0ff;color:#29234f!important}
+      .ra-mechanic-personal{background:#ffd3b6;color:#4b2614!important}
       .ra-fivebox-line{display:block!important;margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,214,107,.22);line-height:1.55;color:#eee}
       .ra-key{font-weight:400;color:#ff8f8f}
       .ra-shared{font-weight:700;color:#9fd8c5}
@@ -88,6 +146,79 @@ function raFindNoteBox(actionEl,create){
   box.dataset.raSemanticFallback='1';
   actionEl.insertAdjacentElement('afterend',box);
   return box;
+}
+function raTaskNamesFromNoteLabel(label){
+  const text=(label||'').trim();
+  const bracketNames=[...text.matchAll(/《([^》]+)》/g)].map(match=>match[1].trim()).filter(Boolean);
+  if(bracketNames.length)return bracketNames.flatMap(name=>name.split(/\s+\/\s+/).map(part=>part.trim()).filter(Boolean));
+  if(!text||text==='本段'||text==='五开待实测')return [];
+  return text.split(/\s+\/\s+/).map(part=>part.trim()).filter(Boolean);
+}
+function raPreferredTaskNode(actionEl,name){
+  const matches=[...actionEl.querySelectorAll('.ra-task')].filter(node=>(node.textContent||'').trim()===name);
+  return matches.find(node=>node.classList.contains('ra-do-task'))||matches[0]||null;
+}
+function raAddMechanicTag(actionEl,name,status){
+  const target=raPreferredTaskNode(actionEl,name);
+  if(!target)return;
+  const tag=document.createElement('span');
+  tag.className='ra-mechanic-tag '+(status==='shared'?'ra-mechanic-shared':'ra-mechanic-personal');
+  tag.textContent=status==='shared'?'共享':'不共享';
+  target.insertAdjacentElement('beforebegin',tag);
+}
+function raAddNoteReference(actionEl,names,index){
+  names.forEach(name=>{
+    const target=raPreferredTaskNode(actionEl,name);
+    if(!target)return;
+    const ref=document.createElement('sup');
+    ref.className='ra-note-ref';
+    ref.textContent=String(index);
+    target.insertAdjacentElement('afterend',ref);
+  });
+}
+function raDecorateSemanticAnnotations(actionEl,noteEl){
+  const blocks=[...noteEl.querySelectorAll('.ra-note-block')];
+  const referenced=[];
+  blocks.forEach(block=>{
+    const taskEl=block.querySelector('.ra-note-task');
+    const textEl=block.querySelector('.ra-note-text');
+    if(!taskEl||!textEl)return;
+    const names=raTaskNamesFromNoteLabel(taskEl.textContent||'');
+    const statusEl=textEl.querySelector('.ra-shared,.ra-not-shared');
+    if(statusEl&&names.length){
+      const status=statusEl.classList.contains('ra-shared')?'shared':'personal';
+      names.forEach(name=>raAddMechanicTag(actionEl,name,status));
+      statusEl.remove();
+      const remaining=(textEl.textContent||'').replace(/^[\s：:；;,，。]+/,'').trim();
+      if(!remaining){
+        block.remove();
+        return;
+      }
+    }
+    taskEl.classList.add('ra-note-task-inline');
+    textEl.classList.add('ra-note-text-inline');
+    if(taskEl.classList.contains('ra-pending')||(taskEl.textContent||'').trim()==='五开待实测'||!names.length)return;
+    referenced.push({block,taskEl,names});
+  });
+  referenced.forEach((item,offset)=>{
+    const index=offset+1;
+    const lead=document.createElement('sup');
+    lead.className='ra-note-ref ra-note-ref-lead';
+    lead.textContent=String(index);
+    item.taskEl.insertAdjacentElement('beforebegin',lead);
+    raAddNoteReference(actionEl,item.names,index);
+  });
+  const hasBlocks=Boolean(noteEl.querySelector('.ra-note-block'));
+  const heading=noteEl.querySelector('.ra-note-heading');
+  if(heading)heading.style.display=hasBlocks?'':'none';
+  return hasBlocks;
+}
+function raHideEmptySemanticNote(note){
+  note.innerHTML='';
+  note.classList.remove('ra-semantic-notes');
+  delete note.dataset.raSemantic;
+  if(note.id==='hudNote')note.style.display='none';
+  else note.remove();
 }
 function raPrototypeActionHtml(){
   return `
@@ -166,8 +297,23 @@ function raGrizzlyStep1NoteHtml(){
       <div class="ra-note-text">载具战贴近目标；技能冷却结束就优先使用高伤技能。</div>
     </div>`;
 }
+function raRawNoteHasDetail(raw){
+  return String(raw||'').split(/\n+/).some(line=>{
+    let text=line.trim();
+    if(!text)return false;
+    text=text.replace(/^《[^》]+》\s*[：:]\s*/,'');
+    text=text.replace(/^(?:共享|不共享)\s*[：:]\s*/,'');
+    return Boolean(text.trim());
+  });
+}
 function raApplySemanticStepCards(){
   document.querySelectorAll('.stepsCard [data-ra-step-note="1"],.stepsCard [data-ra-step-semantic="1"]').forEach(node=>node.remove());
+  document.querySelectorAll('.stepsCard .step').forEach((stepEl,index)=>{
+    const gr=Array.isArray(G)?G[index]:null;
+    if(!gr)return;
+    const hasDetail=S.slice(gr.start,gr.end+1).some(point=>raRawNoteHasDetail(point.note));
+    if(!hasDetail)stepEl.querySelector('.noteTag')?.remove();
+  });
 }
 
 info=function(){
@@ -195,12 +341,9 @@ info=function(){
       note.classList.add('ra-semantic-notes');
       note.dataset.raSemantic='1';
       note.innerHTML=gr.noteHtml;
+      if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
     }else{
-      note.innerHTML='';
-      note.classList.remove('ra-semantic-notes');
-      delete note.dataset.raSemantic;
-      if(note.id==='hudNote')note.style.display='none';
-      else note.remove();
+      raHideEmptySemanticNote(note);
     }
     return;
   }
@@ -212,6 +355,7 @@ info=function(){
     note.classList.add('ra-semantic-notes');
     note.dataset.raSemantic='1';
     note.innerHTML=raPrototypeNoteHtml();
+    if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
     return;
   }
   if(gr.title==='征服堡 → 沃德伦 → 风险湾 → 沃德伦领主'){
@@ -222,6 +366,7 @@ info=function(){
     note.classList.add('ra-semantic-notes');
     note.dataset.raSemantic='1';
     note.innerHTML=raGrizzlyStep1NoteHtml();
+    if(!raDecorateSemanticAnnotations(el,note))raHideEmptySemanticNote(note);
     return;
   }
   const note=raFindNoteBox(el,false);
@@ -346,6 +491,16 @@ def main() -> None:
             raise SystemExit(
                 f"new route must declare uiStandard={SEMANTIC_HUD_STANDARD}: {key}"
             )
+        requires_closed_action_gate = key not in CLOSED_ACTION_MIGRATION_EXEMPT_ROUTE_KEYS
+        if requires_semantic_hud and requires_closed_action_gate:
+            for point_index, point in enumerate(route["points"], 1):
+                if not isinstance(point, list) or len(point) < 4:
+                    raise SystemExit(f"closed action grammar: malformed route point: {key} point {point_index}")
+                action_lines = [line.strip() for line in str(point[3]).splitlines() if line.strip()]
+                if not action_lines:
+                    raise SystemExit(f"closed action grammar: empty route point: {key} point {point_index}")
+                for line_index, action_line in enumerate(action_lines, 1):
+                    validate_closed_player_action(key, point_index * 1000 + line_index, action_line, point[2])
         for index, group in enumerate(groups, 1):
             if requires_semantic_hud:
                 action_html = group.get("actionHtml")

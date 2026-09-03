@@ -1,110 +1,328 @@
 {
   "zone": "索拉查盆地",
-  "pointCount": 72,
-  "groupCount": 8,
+  "pointCount": 75,
+  "groupCount": 23,
   "groups": [
     {
-      "title": "入图 → 奈辛瓦里 → 挖掘场",
-      "summary": "从达拉然脚本进入索拉查，绑定奈辛瓦里炉石；完成飞行器、挖掘场零件/击杀/戒指/护送，开营地飞行点后再回挖掘场杀工头。",
-      "pointCount": 10,
+      "title": "入图 → 奈辛瓦里初始化",
+      "summary": "进入索拉查后先完成欢迎任务、绑定炉石，并接第一轮工程/挖掘场任务。",
+      "pointCount": 2,
       "timing": {
-        "centerMinutes": 24,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          16,
-          38
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "初阶狩猎 → 诺兹隆之骨",
-      "summary": "完成犀牛和恶刃豹初阶狩猎；继续做诺兹隆、鳄鱼、酿酒材料和猎豹足迹，回奈辛瓦里交接。",
-      "pointCount": 9,
+      "title": "飞行器引擎 → 挖掘场第一圈",
+      "summary": "拿引擎回营接《借零件》，随后一次清挖掘场的零件、风险投资公司、戒指与工程师护送。",
+      "pointCount": 3,
       "timing": {
-        "centerMinutes": 24,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          17,
-          34
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "终极狩猎 → 河流之心 → 匹奇",
-      "summary": "依次完成沙蕨、法鲁恩和杉苟后炉石回营；随后做鳄鱼伏击，开河流之心飞行点，完成维克任务并杀匹奇进入狂心岭。",
-      "pointCount": 10,
+      "title": "奈辛瓦里集中交接 → 开飞行点",
+      "summary": "回营一次性交第一轮任务，开飞行点并接《空中侦察》。",
+      "pointCount": 1,
       "timing": {
-        "centerMinutes": 21,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          14,
-          31
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "狂心岭 → 硬皮猩猩 → 蓝玉虫巢",
-      "summary": "从狂心岭连续推进硬皮猩猩、蓝玉虫巢、抓鸡和南部任务，最后乘被俘鳄鱼进入雾语村。",
+      "title": "工头斯温迪格林 → 打开狩猎线",
+      "summary": "杀工头回营后接犀牛、恶刃豹、《后坐力》并打开《猎人的挑战》。",
+      "pointCount": 4,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "初阶豹 / 犀牛 → 营地接第二批",
+      "summary": "完成两项初阶狩猎，回营交接并一次拿齐追踪、鳄鱼、酿酒和肉排。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "索乌拉姆 → 肉排 / 祭品 / 鳄鱼 / 酿酒",
+      "summary": "接祭品后把南侧肉排、猎人挑战累计、祭品、鳄鱼试炼和酿酒材料一圈做完。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "炉石回营 → 酒香犹存 / 品酒",
+      "summary": "炉石回营集中交这一批，并完成《酒香犹存》和营地内两个品酒目标。",
+      "pointCount": 1,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "诺兹隆之骨 → 杉苟追踪",
+      "summary": "做完诺兹隆之骨、打开终极犀牛后去杉苟足迹完成追踪。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "终极犀牛 / 鳄鱼计划 → 河流之心",
+      "summary": "完成法鲁恩和鳄鱼计划，进入河流之心开点、补最后品酒并接维克/兼职猎人。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "尴尬的处境 → 侦察飞行 → 匹奇",
+      "summary": "在河流之心连续做维克两项任务，再去匹奇完成兼职猎人并接《伪装奴隶》。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "炉石奈辛瓦里 → 鳄鱼伏击",
+      "summary": "炉石回营交终极狩猎/计划/品酒，接突然袭击与伏击后先做鳄鱼伏击。",
+      "pointCount": 2,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "河流之心 → 狂心岭交接",
+      "summary": "顺交《兼职猎人》，再到狂心岭交《伪装奴隶》。",
+      "pointCount": 2,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "狂心岭第一圈：猩猩 → 蓝玉虫巢",
+      "summary": "接猩猩任务，清硬皮猩猩后回岭交接，再一圈做完蓝玉虫巢。",
+      "pointCount": 4,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "狂心岭第二圈：抓鸡 → 南部任务",
+      "summary": "回岭完成抓鸡并打开地下/材料任务，南部清完后接《颠簸的航行》。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "颠簸航行 → 雾语村 → 杉苟",
+      "summary": "乘被俘鳄鱼到雾语村，做完两项雾语任务接《步行回家》，顺路击杀杉苟。",
+      "pointCount": 5,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "炉石奈辛瓦里 → 步行回家",
+      "summary": "炉石回营集中交狩猎任务并接湖边/更大猎物，再到狂心岭交《步行回家》。",
+      "pointCount": 2,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "受伤神谕者 → 雨声树屋 → 议和",
+      "summary": "完成受伤神谕者、坏蛇和亮闪闪，接着处理《议和》。",
+      "pointCount": 5,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "河流之心 → 雨声树屋 → 雾语村",
+      "summary": "顺交《湖边着陆场》，回雨声树屋交议和，再到雾语村接北部两项任务。",
+      "pointCount": 3,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "多里安 → 燃烧林地 / 矛生营地",
+      "summary": "完成《磨尖你的爪子》《诱龙出巢》时一并处理雾语村北部两项，再回多里安交接。",
+      "pointCount": 4,
+      "timing": {
+        "centerMinutes": 0.0,
+        "rangeMinutes": [
+          0.0,
+          0.0
+        ],
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
+      }
+    },
+    {
+      "title": "猛犸 → 母龙 / 大鹏 → 燃烧的唾液",
+      "summary": "驯服猛犸后先做母龙，再做大鹏和材料；随后交雾语村两项、做燃烧的唾液并回多里安交付。",
       "pointCount": 7,
       "timing": {
-        "centerMinutes": 24,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          16,
-          36
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "雾语村 → 炉石奈辛瓦里 → 狂心岭",
-      "summary": "完成第一轮雾语村任务后炉石回营集中交鳄鱼与品酒，接《更大的猎物》，再回狂心岭切入神谕者线。",
-      "pointCount": 6,
+      "title": "回家喽 → 苔行村 → 英雄的负担",
+      "summary": "交《回家喽！》后进入苔行村；救星与源血碎片分别完成即交，再做《英雄的负担》。",
+      "pointCount": 7,
       "timing": {
-        "centerMinutes": 14,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          9,
-          21
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "雨声树屋 → 河流之心 → 雾语村",
-      "summary": "护送受伤神谕者，完成坏蛇、亮闪闪宝物和议和；经过河流之心顺交塔玛拉任务，再回雾语村接北部任务。",
-      "pointCount": 8,
+      "title": "古旧石箱 → 神谕者交付",
+      "summary": "阿图里斯后继续古旧石箱；正常神谕者分支最后回雨声树屋交《友善的干燥皮肤朋友》。",
+      "pointCount": 4,
       "timing": {
-        "centerMinutes": 19,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          13,
-          29
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     },
     {
-      "title": "多里安营地 → 苦潮湖 → 北部猎场",
-      "summary": "先完成始祖龙/幼崽和苦潮多头蛇；回多里安后就近送回猛犸，再去矛生营地、母龙和大鹏区域，最后回雨声树屋。",
-      "pointCount": 12,
+      "title": "河流之心 → 龙眠神殿",
+      "summary": "使用炉石回河流之心后直接系统飞龙眠神殿。",
+      "pointCount": 1,
       "timing": {
-        "centerMinutes": 27,
+        "centerMinutes": 0.0,
         "rangeMinutes": [
-          18,
-          42
+          0.0,
+          0.0
         ],
-        "includeInTotal": true
-      }
-    },
-    {
-      "title": "苔行村 → 造物者悬台 → 阿图里斯",
-      "summary": "完成苔行村东部任务和造物者悬台；回莫乌德接《英雄的负担》后立即去阿图里斯，选择神谕者并回雨声树屋，最后从河流之心转场祖达克。",
-      "pointCount": 10,
-      "timing": {
-        "centerMinutes": 22,
-        "rangeMinutes": [
-          14,
-          34
-        ],
-        "includeInTotal": true
+        "includeInTotal": false,
+        "status": "pending_recalc_after_player_step_split"
       }
     }
   ]

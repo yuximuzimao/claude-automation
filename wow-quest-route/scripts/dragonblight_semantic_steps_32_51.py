@@ -52,9 +52,9 @@ def apply_dragonblight_semantic_overrides_32_51(points: list[list[Any]], groups:
                 {"title": "奈萨里奥之喉·腐烂者洛森", "action": "↳ 做《奈萨里奥的烈焰》", "note": "《奈萨里奥的烈焰》：共享：主控在洛森附近使用任务物品触发并完成战斗一次即可。"},
                 {"title": "奈萨里奥之喉", "action": "瑟里纳尔 → 交《奈萨里奥的烈焰》 → 接《毁灭的故事》"},
                 {"title": "龙眠地面层", "action": "奥拉斯塔萨 → 交《集结的信号》 → 接《强大的猛犸人》"},
-                {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n纳莉丝 → 交《毁灭的故事》"},
+                {"title": "龙眠顶层", "action": "固定交通：龙眠地面层 → 顶层\n纳莉丝 → 交《毁灭的故事》"},
             ],
-            "action_html": [do_at("奈萨里奥之喉·腐烂者洛森", "奈萨里奥的烈焰"), point_anchor("奈萨里奥之喉"), npc_actions("瑟里纳尔", turns=("奈萨里奥的烈焰",), accepts=("毁灭的故事",)), point_anchor("龙眠地面层"), npc_actions("奥拉斯塔萨", turns=("集结的信号",), accepts=("强大的猛犸人",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", turns=("毁灭的故事",))],
+            "action_html": [do_at("奈萨里奥之喉·腐烂者洛森", "奈萨里奥的烈焰"), point_anchor("奈萨里奥之喉"), npc_actions("瑟里纳尔", turns=("奈萨里奥的烈焰",), accepts=("毁灭的故事",)), point_anchor("龙眠地面层"), npc_actions("奥拉斯塔萨", turns=("集结的信号",), accepts=("强大的猛犸人",)), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("纳莉丝", turns=("毁灭的故事",))],
             "note_html": notes_html(note_block("奈萨里奥的烈焰", status_span("共享") + "主控在洛森附近使用任务物品触发并完成战斗一次即可。")),
         },
         35: {
@@ -98,9 +98,9 @@ def apply_dragonblight_semantic_overrides_32_51(points: list[list[Any]], groups:
             "summary": "从翡翠回龙眠地面层向奥拉斯塔萨交《强大的猛犸人》并接《隐居的铭语师》；乘龙上顶层向伊萨里奥斯和克罗米交圣地任务。",
             "points": [
                 {"title": "龙眠地面层", "action": "奥拉斯塔萨 → 交《强大的猛犸人》 → 接《隐居的铭语师》"},
-                {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n伊萨里奥斯勋爵 → 交《鞭笞者的种子》 → 接《创造与毁灭的力量》\n克罗米 → 交《永恒之龙的秘密》"},
+                {"title": "龙眠顶层", "action": "固定交通：龙眠地面层 → 顶层\n伊萨里奥斯勋爵 → 交《鞭笞者的种子》 → 接《创造与毁灭的力量》\n克罗米 → 交《永恒之龙的秘密》"},
             ],
-            "action_html": [point_anchor("龙眠地面层"), npc_actions("奥拉斯塔萨", turns=("强大的猛犸人",), accepts=("隐居的铭语师",)), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("伊萨里奥斯勋爵", turns=("鞭笞者的种子",), accepts=("创造与毁灭的力量",)), npc_actions("克罗米", turns=("永恒之龙的秘密",))],
+            "action_html": [point_anchor("龙眠地面层"), npc_actions("奥拉斯塔萨", turns=("强大的猛犸人",), accepts=("隐居的铭语师",)), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("伊萨里奥斯勋爵", turns=("鞭笞者的种子",), accepts=("创造与毁灭的力量",)), npc_actions("克罗米", turns=("永恒之龙的秘密",))],
         },
         39: {
             "title": "德雷格玛尔 → 奥拉斯塔萨 → 戈洛塔尔",
@@ -232,22 +232,22 @@ def apply_dragonblight_semantic_overrides_32_51(points: list[list[Any]], groups:
             "points": [
                 {"title": "阿格玛之锤", "action": "阿格玛大王 → 接《库卡隆先锋！》", "note": "若某号没有任务，检查《该死的荒芜兽！》《洛纳乌克万岁！》《被遗忘者的凋零药剂》是否都已完成。"},
                 {"title": "库卡隆先锋营地", "action": "小萨鲁法尔 → 交《库卡隆先锋！》 → 接《巨龙女王的指引》\n开飞行点：库卡隆先锋营地"},
-                {"title": "龙眠顶层", "action": "乘系统鸟：库卡隆先锋营地 → 龙眠神殿\n乘龙：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》", "note": "女王在顶层，不要下系统鸟后按平面坐标在地面找。"},
+                {"title": "龙眠顶层", "action": "系统飞行：库卡隆先锋营地 → 龙眠神殿\n固定交通：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《巨龙女王的指引》 → 接《迦拉克隆与天灾军团》", "note": "女王在顶层，不要下系统鸟后按平面坐标在地面找。"},
                 {"title": "龙眠顶层", "action": "托拉斯塔萨 → 交《迦拉克隆与天灾军团》 → 接《红龙之翼》"},
             ],
-            "action_html": [point_anchor("阿格玛之锤"), npc_actions("阿格玛大王", accepts=("库卡隆先锋！",)), point_anchor("库卡隆先锋营地"), npc_actions("小萨鲁法尔", turns=("库卡隆先锋！",), accepts=("巨龙女王的指引",)), system_line("开飞行点：库卡隆先锋营地", "ra-flightpoint"), system_line("乘系统鸟：库卡隆先锋营地 → 龙眠神殿", "ra-flightpath"), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("巨龙女王的指引",), accepts=("迦拉克隆与天灾军团",)), npc_actions("托拉斯塔萨", turns=("迦拉克隆与天灾军团",), accepts=("红龙之翼",))],
+            "action_html": [point_anchor("阿格玛之锤"), npc_actions("阿格玛大王", accepts=("库卡隆先锋！",)), point_anchor("库卡隆先锋营地"), npc_actions("小萨鲁法尔", turns=("库卡隆先锋！",), accepts=("巨龙女王的指引",)), system_line("开飞行点：库卡隆先锋营地", "ra-flightpoint"), system_line("系统飞行：库卡隆先锋营地 → 龙眠神殿", "ra-flightpath"), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("巨龙女王的指引",), accepts=("迦拉克隆与天灾军团",)), npc_actions("托拉斯塔萨", turns=("迦拉克隆与天灾军团",), accepts=("红龙之翼",))],
         },
         51: {
             "title": "红龙之翼 → 龙眠顶层 → 库卡隆 → 天谴之门",
             "summary": "迦拉克隆之墓共享完成《红龙之翼》并处理第三只自然愤怒目标；回龙眠顶层交任务，再乘系统鸟回库卡隆交《返回安加萨》，最后到天谴之门接《黑暗的骚动》并拾取战甲。",
             "points": [
                 {"title": "迦拉克隆之墓", "action": "↳ 做《红龙之翼》《创造与毁灭的力量》", "note": "《红龙之翼》：共享：主控召红龙完成30个天灾目标；用红龙击杀闪电使者提亚希，等安提沃克出现后必须下龙，用角色本体击杀。安提沃克尸体可供五号分别拾取镰刀。\n《创造与毁灭的力量》：第三只复活冰霜巨龙也只需主控使用自然愤怒之种并击杀。"},
-                {"title": "龙眠顶层", "action": "乘龙：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《红龙之翼》 → 接《返回安加萨》\n伊萨里奥斯勋爵 → 交《创造与毁灭的力量》"},
-                {"title": "库卡隆先锋营地", "action": "乘系统鸟：龙眠神殿 → 库卡隆先锋营地\n小萨鲁法尔 → 交《返回安加萨》"},
+                {"title": "龙眠顶层", "action": "固定交通：龙眠地面层 → 顶层\n阿莱克丝塔萨，生命的缚誓者 → 交《红龙之翼》 → 接《返回安加萨》\n伊萨里奥斯勋爵 → 交《创造与毁灭的力量》"},
+                {"title": "库卡隆先锋营地", "action": "系统飞行：龙眠神殿 → 库卡隆先锋营地\n小萨鲁法尔 → 交《返回安加萨》"},
                 {"title": "天谴之门战场", "action": "阿莱克丝塔萨，生命的缚誓者 → 接《黑暗的骚动》"},
                 {"title": "萨鲁法尔战甲", "action": "↳ 做《黑暗的骚动》", "note": "《黑暗的骚动》：拾取萨鲁法尔战甲；战甲约(38.2,18.7)，物件较小。任务继续携带，之后回战歌要塞交。"},
             ],
-            "action_html": [do_at("迦拉克隆之墓", "红龙之翼", "创造与毁灭的力量"), system_line("乘龙：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("红龙之翼",), accepts=("返回安加萨",)), npc_actions("伊萨里奥斯勋爵", turns=("创造与毁灭的力量",)), system_line("乘系统鸟：龙眠神殿 → 库卡隆先锋营地", "ra-flightpath"), point_anchor("库卡隆先锋营地"), npc_actions("小萨鲁法尔", turns=("返回安加萨",)), point_anchor("天谴之门战场"), npc_actions("阿莱克丝塔萨，生命的缚誓者", accepts=("黑暗的骚动",)), do_at("萨鲁法尔战甲", "黑暗的骚动")],
+            "action_html": [do_at("迦拉克隆之墓", "红龙之翼", "创造与毁灭的力量"), system_line("固定交通：龙眠地面层 → 顶层"), point_anchor("龙眠顶层"), npc_actions("阿莱克丝塔萨，生命的缚誓者", turns=("红龙之翼",), accepts=("返回安加萨",)), npc_actions("伊萨里奥斯勋爵", turns=("创造与毁灭的力量",)), system_line("系统飞行：龙眠神殿 → 库卡隆先锋营地", "ra-flightpath"), point_anchor("库卡隆先锋营地"), npc_actions("小萨鲁法尔", turns=("返回安加萨",)), point_anchor("天谴之门战场"), npc_actions("阿莱克丝塔萨，生命的缚誓者", accepts=("黑暗的骚动",)), do_at("萨鲁法尔战甲", "黑暗的骚动")],
             "note_html": notes_html(note_block("红龙之翼", status_span("共享") + "主控完成红龙载具30个天灾目标；安提沃克出现后必须下龙用角色本体击杀，同一具尸体可供五号分别拾取镰刀。"), note_block("黑暗的骚动", "拾取萨鲁法尔战甲；战甲约(38.2,18.7)，物件较小。任务继续携带，之后回战歌要塞交。")),
         },
     }

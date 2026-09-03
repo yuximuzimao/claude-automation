@@ -15,6 +15,7 @@ GRIZZLY_FOUNDATION = ROOT / "data/route-atlas/grizzly-hills-task-foundation.json
 ZULDRAK_FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 STORM_FOUNDATION = ROOT / "data/route-atlas/storm-peaks-task-foundation.json"
 HOWLING_FOUNDATION = ROOT / "data/route-atlas/howling-fjord-task-foundation.json"
+SHOLAZAR_FOUNDATION = ROOT / "data/route-atlas/sholazar-task-foundation.json"
 ZANG_AUDIT = ROOT / "data/route-atlas/zangarmarsh-global-solver-input-audit.json"
 FIVEBOX_OBS = ROOT / "data/observations/fivebox-task-types.json"
 
@@ -30,6 +31,7 @@ MAP_SIZE_YARDS: dict[str, tuple[float, float]] = {
     "zuldrak": (4993.75, 3329.1665),
     "storm": (7112.5, 4741.6665),
     "howling": (6045.8330, 4031.2499),
+    "sholazar": (4356.25, 2904.1665),
 }
 
 GROUND_SPEED_YPS = 16.8
@@ -42,6 +44,7 @@ GROUND_PATH_FACTOR = {
     "zuldrak": 1.20,
     "storm": 1.05,
     "howling": 1.20,
+    "sholazar": 1.15,
 }
 FLY_SPEED_YPS = 21.0
 FLY_PATH_FACTOR = 1.05
@@ -63,9 +66,10 @@ HEARTH_CHAINS = {
     "borean": ["战歌要塞"],
     "dragonblight": ["阿格玛之锤"],
     "grizzly": ["征服堡"],
-    "zuldrak": ["希姆托加"],
+    "zuldrak": ["银色前沿", "希姆托加"],
     "storm": ["阿格玛之锤", "格罗玛什坠毁点", "布德克拉格庇护所"],
     "howling": ["新阿加曼德"],
+    "sholazar": ["奈辛瓦里营地", "河流之心"],
 }
 
 # Old Zangarmarsh/Nagrand point data predates typed transport fields, so these
@@ -78,10 +82,6 @@ TRANSPORT_OVERRIDES: dict[str, dict[int, str]] = {
 # Actual timings are shown only when the recorded window is trustworthy and is
 # explicitly scoped. Empty means the HTML intentionally shows no actual line.
 ROUTE_POINT_EXTRA_MINUTES: dict[tuple[str, str], float] = {
-    # Cross-map five-box service that cannot be represented by same-map Route Atlas geometry:
-    # use the long-carried Dalaran teleport, move to Vixx, accept 12974 on all five characters,
-    # open Dalaran flight if needed, then taxi back to the already-open Argent Stand.
-    ("zuldrak", "银色前沿·达拉然短往返"): 6.0,
     # 12372 is a daily and therefore intentionally excluded from Dragonblight's one-time foundation.
     # The live route nevertheless does it once per leveling group because kill credit shares in range;
     # account for the five personal shrine-destabilize flights at the explicit route point.
@@ -89,6 +89,9 @@ ROUTE_POINT_EXTRA_MINUTES: dict[tuple[str, str], float] = {
     # 11960 is fully overlapped with Let Nothing Go To Waste spatially, but five characters still
     # need 12 personal pup interactions each. Use a small provisional interaction-only cost until a clean rerun isolates it.
     ("dragonblight", "飘雪林地狼獾人 + 未来的种子"): 4.0,
+    # Final Sholazar point uses hearth back to River's Heart, then a cross-map taxi to Wyrmrest.
+    # The local point geometry only represents the hearth endpoint; account for the direct taxi separately.
+    ("sholazar", "河流之心·飞行点"): 3.5,
 }
 
 # Clean live measurements that supersede the generic per-task estimator.
@@ -97,6 +100,15 @@ TASK_SERVICE_OVERRIDES: dict[tuple[str, str], float] = {
     # 12470: five-box progress is personal; sandglasses cannot be placed within 40 yd of each other.
     # Live run used 2+2+1 three batches and measured about 10 minutes total event/combat time.
     ("dragonblight", "永恒之龙的秘密"): 10.0,
+    # Sholazar first-group live calibration. These are objective/service centers only;
+    # route movement and Hub handling remain separate.
+    ("sholazar", "苔行村的救星"): 3.5,
+    ("sholazar", "苔行祭坛的源血碎片"): 12.0,
+    # The live 12581 run completed in 6m39s but failed to unlock 12689 because the event was rushed.
+    # Reserve extra event time for the corrected Jaloot/Zepik phase instead of calibrating to the broken fast kill.
+    ("sholazar", "英雄的负担"): 8.0,
+    # 12691 accept->turn-in took 12m51s live; keep local movement/Hub outside this service allowance.
+    ("sholazar", "古旧的石箱"): 10.0,
 }
 
 ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
@@ -124,6 +136,9 @@ ACTUAL_RUNS: dict[str, list[dict[str, Any]]] = {
         }
     ],
     "howling": [],
+    # Current Sholazar live evidence is partial (21:00 starts after step-19 objectives were already done),
+    # so it is retained in route-timing-runs.json but not shown as a full-map actual here.
+    "sholazar": [],
 }
 
 # These tasks contain scripts/events whose service time is not recoverable from
@@ -199,6 +214,44 @@ BOREAN_CENTER_OVERRIDES: dict[int, float] = {}
 # fourth block is timed but excluded from the normal map total.
 NAGRAND_CENTER_OVERRIDES: dict[int, float] = {1: 8.5, 2: 19.5, 3: 12.0, 4: 20.5}
 NAGRAND_EXCLUDE_FROM_TOTAL = {4}
+
+# Sholazar step 20 has a clean live anchor from accepting Mother of the Dragons at 21:03:44
+# through the Dorian turn-ins at 21:38:29 (~34m45s). Keep the rounded clean center here until a repeat run
+# gives enough task-level detail for the raptor/material subcomponents.
+SHOLAZAR_CENTER_OVERRIDES: dict[int, float] = {20: 35.0}
+
+# Zul'Drak's old coarse step 1 has a clean first-group live anchor: the user started at 23:32 while
+# turning in 12789 at Light's Breach and reached the Rageclaw/return handoff at 23:47:45. The route is
+# now uses a player-display step whose boundary matches that clean block, so preserve the 15.75-minute
+# anchor on the first display step instead of letting presentation regrouping erase the live baseline.
+ZULDRAK_CENTER_OVERRIDES: dict[int, float] = {}
+DISPLAY_BLOCK_CENTER_OVERRIDES: dict[str, dict[tuple[int, int], float]] = {
+    "zuldrak": {(1, 1): 15.75},
+    # Display-only regrouping must not change the already published whole-route baseline.
+    # Scale each newly split block back to its pre-split parent-step center.
+    "grizzly": {
+        (1, 2): 28.1,
+        (4, 5): 62.1,
+        (6, 8): 30.5,
+        (9, 10): 38.0,
+        (13, 14): 29.1,
+        (15, 16): 59.7,
+        (17, 18): 47.8,
+    },
+    "howling": {
+        (1, 2): 29.3,
+        (3, 6): 58.7,
+        (7, 10): 45.3,
+        (12, 13): 35.1,
+        (15, 16): 30.8,
+        (17, 18): 36.9,
+        (19, 20): 33.1,
+        (21, 22): 34.2,
+        (23, 24): 23.3,
+        (28, 29): 28.2,
+        (30, 31): 15.9,
+    },
+}
 
 OBJECTIVE_TOKENS = (
     "完成",
@@ -525,7 +578,7 @@ def estimate_route(
     observations: dict[str, Any],
 ) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
-    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling"} else set(zang_seconds)
+    known_names = set(foundation_by_name) if route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling", "sholazar"} else set(zang_seconds)
 
     for step, group in enumerate(route["stepGroups"], 1):
         move = movement_minutes(route_key, route, group)
@@ -535,7 +588,7 @@ def estimate_route(
         if route_key == "zang":
             service = sum(zang_seconds[name] / 60.0 for name in names)
             uncertainty = 0.25 if names else 0.18
-        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling"}:
+        elif route_key in {"borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling", "sholazar"}:
             service = sum(
                 TASK_SERVICE_OVERRIDES.get(
                     (route_key, name),
@@ -556,7 +609,12 @@ def estimate_route(
                 ROUTE_POINT_EXTRA_MINUTES.get((route_key, str(point[2])), 0.0)
                 for point in route["points"][group["start"] : group["end"] + 1]
             )
-        special = (0.5 if names else 0.0) + point_extra
+        logical_overhead = group.get("timingLogicalOverheadMinutes")
+        if isinstance(logical_overhead, (int, float)):
+            base_special = float(logical_overhead) if names else 0.0
+        else:
+            base_special = 0.5 if names else 0.0
+        special = base_special + point_extra
         center = move + hub + service + special
 
         if route_key == "zang":
@@ -568,6 +626,12 @@ def estimate_route(
         elif route_key == "borean" and step in BOREAN_CENTER_OVERRIDES:
             center = BOREAN_CENTER_OVERRIDES[step]
             uncertainty = 0.20 if step <= 47 else (0.22 if step in {52, 54, 56, 60, 61, 62, 64, 65} else 0.12)
+        elif route_key == "sholazar" and step in SHOLAZAR_CENTER_OVERRIDES:
+            center = SHOLAZAR_CENTER_OVERRIDES[step]
+            uncertainty = 0.15
+        elif route_key == "zuldrak" and step in ZULDRAK_CENTER_OVERRIDES:
+            center = ZULDRAK_CENTER_OVERRIDES[step]
+            uncertainty = 0.15
         else:
             # A logical route step with no typed objective still has task switching,
             # local navigation, formation and dialogue overhead not represented by
@@ -592,6 +656,16 @@ def estimate_route(
             "objectiveTasks": names,
         }
         rows.append(row)
+
+    for (start_step, end_step), target_minutes in DISPLAY_BLOCK_CENTER_OVERRIDES.get(route_key, {}).items():
+        block = rows[start_step - 1 : end_step]
+        current_minutes = sum(float(row["centerMinutes"]) for row in block)
+        if current_minutes <= 0:
+            continue
+        scale = float(target_minutes) / current_minutes
+        for row in block:
+            row["centerMinutes"] = round(float(row["centerMinutes"]) * scale, 1)
+            row["rangeMinutes"] = [round(float(value) * scale, 1) for value in row["rangeMinutes"]]
 
     included = [row for row in rows if row["includeInTotal"]]
     center_total = round(sum(row["centerMinutes"] for row in included), 1)
@@ -667,6 +741,7 @@ def main() -> None:
     zuldrak_by_name, zuldrak_by_id = load_foundation(ZULDRAK_FOUNDATION)
     storm_by_name, storm_by_id = load_foundation(STORM_FOUNDATION)
     howling_by_name, howling_by_id = load_foundation(HOWLING_FOUNDATION)
+    sholazar_by_name, sholazar_by_id = load_foundation(SHOLAZAR_FOUNDATION)
     zang_seconds = load_zang_objective_seconds()
     observations = json.loads(FIVEBOX_OBS.read_text(encoding="utf-8"))
 
@@ -679,6 +754,7 @@ def main() -> None:
         "zuldrak": zuldrak_by_name,
         "storm": storm_by_name,
         "howling": howling_by_name,
+        "sholazar": sholazar_by_name,
     }
     foundations_by_id = {
         "zang": {},
@@ -689,10 +765,11 @@ def main() -> None:
         "zuldrak": zuldrak_by_id,
         "storm": storm_by_id,
         "howling": howling_by_id,
+        "sholazar": sholazar_by_id,
     }
     estimates = {
         key: estimate_route(key, routes[key], foundations[key], foundations_by_id[key], zang_seconds, observations)
-        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling")
+        for key in ("zang", "nagrand", "borean", "dragonblight", "grizzly", "zuldrak", "storm", "howling", "sholazar")
     }
     apply_to_routes(routes, estimates)
     ROUTES.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

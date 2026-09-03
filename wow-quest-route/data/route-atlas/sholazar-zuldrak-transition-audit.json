@@ -1,5 +1,5 @@
 {
-  "status": "pass_conservative_opened_flight_network",
+  "status": "pass_direct_rivers_heart_to_wyrmrest_live_confirmed",
   "validator": "map_transition_contract",
   "from_zone": "索拉查盆地",
   "to_zone": "祖达克",
@@ -14,41 +14,30 @@
   },
   "transport_chain": [
     {
-      "from": "雨声树屋",
+      "from": "索拉查最后任务点",
       "to": "河流之心",
-      "action": "短距离地面移动",
-      "proof": "河流之心飞行点已在索拉查W08首次到达时开启"
+      "action": "使用炉石",
+      "proof": "首组实跑确认索拉查后段炉石已改绑河流之心；后续不再需要奈辛瓦里营地炉石"
     },
     {
       "from": "河流之心",
-      "to": "达拉然",
-      "action": "系统飞行",
-      "proof": "河流之心为正式飞行点；达拉然为已使用的诺森德交通Hub"
-    },
-    {
-      "from": "达拉然",
       "to": "龙眠神殿",
       "action": "系统飞行",
-      "proof": "首组龙眠神殿飞行点已明确开启；不假设未开启的晶歌/祖达克飞行点"
+      "proof": "首组实跑确认河流之心飞行管理员可直接选择已开启的龙眠神殿，不需要达拉然中转"
     },
     {
       "from": "龙眠神殿",
-      "to": "龙骨荒野东北Light's Trust",
-      "action": "地面移动",
-      "proof": "龙骨正式路线已实际到达83.98,26.10并在此接12789；该节点是当前已知通往祖达克桥接任务的来源点"
-    },
-    {
-      "from": "龙骨荒野东北Light's Trust",
       "to": "祖达克·圣光据点 / Light's Breach",
-      "action": "沿东北道路跨入祖达克西南入口并到莉安娜中士",
-      "proof": "12789本身就是从该来源节点指向祖达克Light's Breach的跨图引导；祖达克现役semantic步骤从Light's Breach开始交12789并开飞行点"
+      "action": "普通自主移动，经龙骨东北道路进入祖达克",
+      "proof": "12789从龙骨东北节点指向祖达克Light's Breach；普通移动由下一地图几何表达，不写成系统交通动作"
     }
   ],
   "rejected_assumptions": [
-    "不再沿用旧祖达克候选中的‘灰熊边界→圣光据点’作为当前主轴入口",
+    "删除河流之心→达拉然→龙眠神殿的无效中转",
+    "不把‘河流之心→祖达克’写成不存在的系统交通",
     "不假设夺日者指挥站、黑锋哨站、银色前沿等祖达克/晶歌飞行点已经开启",
     "不要求K3借用双足飞龙跨出索拉查后继续在晶歌/龙骨/祖达克使用"
   ],
-  "zuldrak_internal_route_change": "none; only incoming transition changes. Existing semantic step 1 already starts at Light's Breach and remains frozen.",
-  "publication_rule": "If live client shows River's Heart can directly select Wyrmrest Temple, collapse the two taxi legs into one player action without changing route geography."
+  "zuldrak_internal_route_change": "pending_level_80_reoptimization_by_user_request; entry remains Light's Breach until that work begins.",
+  "publication_rule": "Sholazar ends with hearth to River's Heart and one direct taxi to Wyrmrest Temple. Normal movement from Wyrmrest into Zul'Drak belongs to the next-map geometry, not the Sholazar action list."
 }

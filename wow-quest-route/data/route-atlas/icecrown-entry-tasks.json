@@ -2942,7 +2942,7 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 7.0,
-        "basis": "manual_pre_route:ruby_sanctum_guardian_fire_then_dahlia_tear_spawn_fivebox_same_spawn_loot_reuse_unresolved",
+        "basis": "manual_pre_route:ruby_sanctum_guardian_fire_then_dahlia_tear_spawn_personal_pickup_fivebox_confirmed",
         "range_minutes": [
           2.0,
           15.0
@@ -11858,6 +11858,83 @@
       }
     },
     {
+      "quest_id": 13343,
+      "name": "永恒之龙的秘密，再来一次",
+      "scope_status": "include_candidate",
+      "scope_reasons": [
+        "level_80_horde_paladin_outdoor_first_run"
+      ],
+      "pre_any": [
+        12470
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "child_quests": [],
+      "available_starting_with": [],
+      "disabled_by_quest": [],
+      "objective_text_zh": "龙眠神殿顶层的克罗米要你再次返回青铜巨龙圣地。 /  / 进入圣地后，将永恒沙漏放在地上，和过去的你一起保护沙漏，令它免遭永恒之龙的破坏。",
+      "task_class": "single_named_kill",
+      "task_flags": [
+        "escort_or_defense_text",
+        "active_item_or_spell_use"
+      ],
+      "objective_review": [],
+      "objectives": [
+        {
+          "objective_type": "kill",
+          "required_count": 1,
+          "item_id": null,
+          "item_name": null,
+          "sources": [
+            {
+              "entity_type": "npc",
+              "entity_id": 32327,
+              "name": "永恒沙漏",
+              "zones": [],
+              "representative": null
+            }
+          ]
+        }
+      ],
+      "start_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27856,
+          "name": "克罗米",
+          "x": null,
+          "y": null,
+          "spawn_count": null
+        }
+      ],
+      "finish_entities": [
+        {
+          "entity_type": "npc",
+          "entity_id": 27856,
+          "name": "克罗米",
+          "x": null,
+          "y": null,
+          "spawn_count": null
+        }
+      ],
+      "level_80_economy": {
+        "xp_bonus_money_copper": 165300,
+        "xp_bonus_money_gold_decimal": 16.53,
+        "xp_bonus_money_display": "16g 53s 00c",
+        "equipment_reward_count": 3,
+        "other_reward_item_count": 0,
+        "direct_money_copper": 0,
+        "direct_money_gold_decimal": 0.0,
+        "direct_money_status": "not_yet_globally_audited",
+        "direct_money_basis": null
+      },
+      "intrinsic_service_time": {
+        "status": "estimated",
+        "minutes": 1.5,
+        "basis": "single_target_model"
+      }
+    },
+    {
       "quest_id": 13348,
       "name": "徒劳",
       "scope_status": "include_candidate",
@@ -12489,7 +12566,7 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 15.0,
-        "basis": "manual_pre_route:tirion_gambit_hood_entry_full_cathedral_script_escape_portal_fivebox_event_credit_unresolved",
+        "basis": "manual_pre_route:tirion_gambit_all_five_hooded_then_single_interaction_group_shared_confirmed",
         "range_minutes": [
           7.0,
           35.0
@@ -14761,7 +14838,7 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 4.0,
-        "basis": "manual_pre_route:three_fixed_corp_rethar_shards_split_across_two_battlement_levels_fivebox_pickup_unresolved",
+        "basis": "manual_pre_route:three_fixed_corp_rethar_shards_split_across_two_battlement_levels_personal_interaction_fivebox_confirmed",
         "range_minutes": [
           2.5,
           7.0

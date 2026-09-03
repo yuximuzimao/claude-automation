@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-30",
+  "updated_at": "2026-09-04",
   "global_observations": {
     "party_converted_to_raid_blocks_normal_quest_drops": {
       "status": "user_confirmed",
@@ -466,14 +466,14 @@
       "note": "《海洋女神》首组龙骨实跑确认：任务不共享，五个角色必须分别点击深海珍珠触发。实测从一次点击开始到珍珠再次可点击约1分40秒，五号串行至少有4次刷新等待（约6分40秒）。触发后的角色应游到岸边，再从陆地跑回/向集合方向移动，不从水里一路游回珍珠。"
     },
     "12090": {
-      "type": "named_elite_current_power_gate_defer_to_80_confirmed",
-      "status": "user_confirmed_defer_to_80",
-      "note": "《通缉：吉加托尔》首组75级五开：第一次尝试团灭；第二次碰到别人正在打后再次尝试，最终五号死到只剩一个号才成功。该任务是12095→12097精英支线门槛，但不阻塞其它龙骨任务。未来固定练级稿不再当前强打，也不提前接，整条支线延后80后。"
+      "type": "named_elite_first_group_power_gate_second_group_protection_retest_pending",
+      "status": "user_confirmed_first_group_defer_second_group_retest",
+      "note": "《通缉：吉加托尔》首组75级五开：第一次尝试团灭；第二次碰到别人正在打后再次尝试，最终五号死到只剩一个号才成功。该任务是12095→12097精英支线门槛，但不阻塞其它龙骨任务。首组练级基线仍延后；第二组已有1防骑+4惩戒且操作经验更高，需在自然等级重新实测，若稳定且快速则恢复首跑。"
     },
     "12097": {
-      "type": "suggested_five_player_elite_current_power_gate_defer_to_80_confirmed",
-      "status": "user_confirmed_defer_to_80_with_external_support",
-      "note": "《萨拉斯塔，北地的灾祸》首组75级五开实测打不过并保留为未完成任务；用户现场观察到的两批其他玩家最低约77级。外部WotLK资料将其标为Suggested players: 5。任务没有其它龙骨后续依赖，固定练级稿随吉加托尔支线一起延后80后。"
+      "type": "suggested_five_player_elite_first_group_power_gate_level80_easy_second_group_retest_pending",
+      "status": "user_confirmed_level80_easy_second_group_retest",
+      "note": "《萨拉斯塔，北地的灾祸》首组75级五开实测打不过；本次80级1防骑+4惩戒回访实测击杀非常轻松。任务没有后续，因此低等级若很费力可以安全延后，但这不是固定80级任务。当前首组不把它并入冰冠→龙骨跨图链；第二组在龙骨自然等级用1防骑+4惩戒重测，核心判断从‘能不能打’改为‘是否稳定且值得当场打’。"
     },
     "12449": {
       "type": "corpse_item_use_group_shared_confirmed",
@@ -1159,6 +1159,301 @@
       "type": "tame_or_escort_group_shared_confirmed",
       "status": "user_confirmed",
       "note": "《新兵》本轮实跑确认：共享。"
+    },
+    "13073": {
+      "type": "portal_interaction_personal_transport_confirmed",
+      "status": "user_confirmed",
+      "note": "《守护者的帮助》：银色前线基地大德鲁伊莉琳德拉约87.06,77.02，插件地图不显示交互提醒；传送门需要五个号依次与莉琳德拉互动后分别通过。"
+    },
+    "13074": {
+      "type": "personal_phase_personal_pickup_confirmed",
+      "status": "user_confirmed",
+      "note": "《翡翠噩梦中的希望》本轮实跑确认：不共享，五号分别完成并各自拾取3枚翡翠橡果。"
+    },
+    "13075": {
+      "type": "portal_interaction_personal_transport_confirmed",
+      "status": "user_confirmed",
+      "note": "《雷姆洛斯的恩赐》：返程传送门需要五个号依次互动后分别通过。"
+    },
+    "13078": {
+      "type": "fixed_spawn_personal_pickup_confirmed",
+      "status": "user_confirmed",
+      "note": "《达莉亚之泪》本轮实跑确认：不共享，每个号分别拾取。"
+    },
+    "13328": {
+      "type": "fixed_object_personal_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《击破碎片》本轮实跑确认：不共享，三个碎片都需要五号轮流交互。"
+    },
+    "13364": {
+      "type": "scripted_event_group_shared_with_all_prerequisite_state_confirmed",
+      "status": "user_confirmed",
+      "note": "《提里奥的尝试》本轮实跑确认：共享；五号必须都先装备侍僧兜帽并贴近提里奥，再由一个号互动启动事件即可同步。"
+    },
+    "12520": {
+      "type": "kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《狩猎犀牛：初试身手》索拉查首组实跑确认：共享。"
+    },
+    "12523": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《借零件》索拉查首组实跑确认：不共享，五号分别拾取备用零件。"
+    },
+    "12524": {
+      "type": "kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《风险投资公司的风险》索拉查首组实跑确认：共享。"
+    },
+    "12525": {
+      "type": "named_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《工头斯温迪格林》索拉查首组实跑确认：共享。"
+    },
+    "12532": {
+      "type": "capture_progress_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《鸡飞狼跳！》索拉查首组实跑确认：不共享，五号分别完成捕鸡。"
+    },
+    "12544": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《诺兹隆之骨》索拉查首组实跑确认：共享。"
+    },
+    "12549": {
+      "type": "kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《狩猎恶刃豹：成为猎手》索拉查首组实跑确认：共享。"
+    },
+    "12550": {
+      "type": "tracking_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《狩猎恶刃豹：追踪猎物》索拉查首组实跑确认：共享。"
+    },
+    "12560": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《狩猎鳄鱼：计划》的沙蕨叶索拉查首组实跑确认：不共享，五号分别拾取。"
+    },
+    "12569": {
+      "type": "named_kill_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《狩猎鳄鱼：伏击》索拉查首组实跑确认：共享。"
+    },
+    "12589": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《后坐力？什么后坐力？》索拉查首组实跑确认：共享。"
+    },
+    "12624": {
+      "type": "personal_drop_same_drop_sequential_pickup_confirmed",
+      "status": "user_confirmed",
+      "note": "《不知所踪！》索拉查首组实跑确认：任务物本身按个人取得；但戒指一旦实际掉落，同一枚掉落可由五号依次拾取，因此掉落命中后不需要再为其余角色重新刷出四次。"
+    },
+    "12634": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《酿酒的材料》索拉查首组实跑确认：不共享。"
+    },
+    "12644": {
+      "type": "scripted_event_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《酒香犹存》索拉查首组实跑确认：共享。"
+    },
+    "12645": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《品酒》索拉查首组实跑确认：共享。"
+    },
+    "12688": {
+      "type": "escort_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《工程师的逃亡》索拉查首组实跑确认：共享，一次护送五号共同完成。"
+    },
+    "12699": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《尴尬的处境》索拉查首组实跑确认：不共享。"
+    },
+    "12804": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《猎人们的肉排》索拉查首组实跑确认：不共享。"
+    },
+    "12537": {
+      "type": "quest_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《闪电确实两次打中同一个地方！》索拉查首组实跑确认：不共享，五号分别完成。"
+    },
+    "12538": {
+      "type": "kill_credit_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《猎杀雾语鳄鱼人》索拉查首组实跑确认：共享。"
+    },
+    "12540": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《遵命行事》索拉查首组实跑确认：共享。"
+    },
+    "12573": {
+      "type": "quest_interaction_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《议和》索拉查首组实跑确认：不共享，五号分别完成。"
+    },
+    "12575": {
+      "type": "mixed_named_kill_shared_object_interaction_personal_respawn",
+      "status": "user_confirmed",
+      "note": "《被抢走的雾语宝物》索拉查首组实跑确认：督军塔尔特克Boss击杀共享；宝物交互不共享，一个角色交互后需要等待物体刷新，再由下一号依次交互。"
+    },
+    "12579": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《苔行祭坛的源血碎片》索拉查首组实跑确认：不共享，五号分别完成。"
+    },
+    "12580": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《苔行村的救星》索拉查首组实跑确认：共享。"
+    },
+    "12607": {
+      "type": "tame_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《驯服猛犸象》索拉查首组实跑确认：共享，一次驯服即可五号同步。"
+    },
+    "12614": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《母龙之怒》索拉查首组实跑确认：共享；接到任务后其余四号可取消骑乘跟随，由主控完成即可同步。"
+    },
+    "12691": {
+      "type": "quest_interaction_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《古旧的石箱》索拉查首组实跑确认：不共享，五号分别完成。"
+    },
+    "12914": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《拯救盖米尔》祖达克首组实跑确认：不共享，女妖精华与硅藻土按各号自己的任务进度完成。"
+    },
+    "12630": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《纳斯和巨魔的毛发》祖达克首组实跑确认：共享。"
+    },
+    "12631": {
+      "type": "personal_trigger_same_drop_sequential_pickup_confirmed",
+      "status": "user_confirmed",
+      "note": "《某种邀请……》祖达克首组实跑确认：尸灵项圈只需实际掉落一次，同一次掉落可由五号依次拾取并各自右键接任务。"
+    },
+    "12648": {
+      "type": "personal_disguise_interaction_confirmed",
+      "status": "user_confirmed",
+      "note": "《乔装打扮》祖达克首组实跑确认：不共享，五号都需要各自使用迷惑项圈进入伪装。"
+    },
+    "12652": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《喂饱食尸鬼》祖达克首组实跑确认：共享。"
+    },
+    "12916": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《唯一的希望》祖达克首组实跑确认：共享。"
+    },
+    "12919": {
+      "type": "vehicle_objective_group_shared_proximity_confirmed",
+      "status": "user_confirmed",
+      "note": "《风暴之王的复仇》祖达克首组实跑确认：共享；开始载具战斗前先把其余角色移动到Boss附近，避免距离过远丢失共享信用。"
+    },
+    "12673": {
+      "type": "vehicle_or_control_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《官大一级压死人》祖达克首组实跑确认：共享。"
+    },
+    "12669": {
+      "type": "quest_use_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《目前为止，一切很糟》祖达克首组实跑确认：共享。"
+    },
+    "12677": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《危险的材料》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12710": {
+      "type": "scripted_interaction_personal_sequential_confirmed",
+      "status": "user_confirmed",
+      "note": "《真相大白》祖达克首组实跑确认：不共享，五号依次交互完成。"
+    },
+    "12713": {
+      "type": "mixed_boss_shared_personal_loot_transport_confirmed",
+      "status": "user_confirmed",
+      "note": "《背叛》祖达克首组实跑确认：Boss战斗共享；结尾任务道具需要五号分别拾取，返回痛苦之匣也需要五号分别交互传送。"
+    },
+    "12557": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《实验室的学徒》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12799": {
+      "type": "quest_use_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《吸取灵魂》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12609": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《收集腐液》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12610": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《蝙蝠翅膀》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12599": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《温暖的篝火》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12597": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《止痛药》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12562": {
+      "type": "kill_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《达卡莱巨魔不需要水元素！》祖达克首组实跑确认：共享。"
+    },
+    "12510": {
+      "type": "quest_progress_group_shared_confirmed",
+      "status": "user_confirmed",
+      "note": "《珍贵的元素液体》祖达克首组实跑确认：共享。"
+    },
+    "12583": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《坠毁的喷射器》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12584": {
+      "type": "fixed_object_collect_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《纯粹的邪恶》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12514": {
+      "type": "personal_collection_confirmed",
+      "status": "user_confirmed",
+      "note": "《蘑菇混合剂》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "12527": {
+      "type": "quest_progress_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《贪吃的蜥蜴》祖达克首组实跑确认：不共享，五号分别完成。"
+    },
+    "13283": {
+      "type": "vehicle_objective_personal_confirmed",
+      "status": "user_confirmed",
+      "note": "《占山为王》冰冠首组实跑确认：不共享，五个角色必须分别使用跳跃机器人完成一次。"
     }
   }
 }

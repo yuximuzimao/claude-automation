@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import re
 from typing import Any
 
 from dragonblight_semantic_steps import (
@@ -62,6 +63,79 @@ def apply_step(points: list[list[Any]], groups: list[dict[str, Any]], step_numbe
         point[5] = point_spec.get("note", "")
         if "fivebox" in point_spec:
             point[8] = point_spec["fivebox"]
+
+
+ACTION_ROW_RE = re.compile(r'<div class="ra-line[^\"]*">.*?</div>', re.S)
+NOTE_BLOCK_RE = re.compile(r'<div class="ra-note-block">.*?</div></div>', re.S)
+
+
+DISPLAY_SPLITS: dict[int, list[tuple[int, int, str]]] = {
+    1: [(4, 12, "征服堡 → 沃德伦任务"), (3, 8, "风险湾 → 沃德伦领主 → 征服堡")],
+    3: [(3, 13, "花岗岩之泉：达库鲁 / 天灾"), (7, 11, "达库鲁火盆 → 古树之心 → Drak'atal")],
+    4: [(1, 5, "征服堡：斗兽场准备"), (1, 14, "征服斗兽场五连"), (3, 10, "花岗岩之泉 → 沃达希尔 → 盲眼卢娜")],
+    5: [(3, 11, "欧尼瓦 → 索尔莫丹"), (3, 7, "炉石征服堡 → 欧尼瓦交接")],
+    8: [(5, 9, "萨莎 → 灰喉堡 → 乌索克"), (6, 7, "乌索克交付 → 安娅 / 萨莎")],
+    9: [(6, 13, "符文监督者 → Drakil'jin墓穴"), (6, 9, "金亚拉克 → 血月岛 → 加弗洛克")],
+    10: [(6, 11, "欧尼瓦 ↔ Dun Argol：制服 / 能源"), (5, 9, "Dun Argol：能源 → 铁领主 → 欧尼瓦")],
+}
+
+
+def _plain_html(value: str) -> str:
+    return html.unescape(re.sub(r"<[^>]+>", "", value))
+
+
+def _note_html_for_action(parent_note_html: str, action_html: str) -> str:
+    if not parent_note_html.strip():
+        return ""
+    action_text = _plain_html(action_html)
+    blocks: list[str] = []
+    for block in NOTE_BLOCK_RE.findall(parent_note_html):
+        match = re.search(r'<div class="ra-note-task[^\"]*">(.*?)</div>', block, re.S)
+        if not match:
+            continue
+        label = _plain_html(match.group(1)).strip().strip("《》")
+        names = [part.strip() for part in label.split(" / ") if part.strip()]
+        if any(name in action_text for name in names) or (label and label in action_text):
+            blocks.append(block)
+    return notes_html(*blocks)
+
+
+def _rebuild_display_groups(groups: list[dict[str, Any]]) -> None:
+    coarse = [dict(group) for group in groups]
+    rebuilt: list[dict[str, Any]] = []
+    for step_number, parent in enumerate(coarse, 1):
+        splits = DISPLAY_SPLITS.get(step_number)
+        if not splits:
+            rebuilt.append(parent)
+            continue
+        action_rows = ACTION_ROW_RE.findall(str(parent.get("actionHtml", "")))
+        expected_points = int(parent["end"]) - int(parent["start"]) + 1
+        if sum(item[0] for item in splits) != expected_points:
+            raise RuntimeError(f"Grizzly display split {step_number} point drift")
+        if sum(item[1] for item in splits) != len(action_rows):
+            raise RuntimeError(f"Grizzly display split {step_number} action drift")
+        point_cursor = int(parent["start"])
+        action_cursor = 0
+        for split_index, (point_count, action_count, title) in enumerate(splits):
+            start = point_cursor
+            end = point_cursor + point_count - 1
+            split_action = "\n".join(action_rows[action_cursor : action_cursor + action_count])
+            timing_names = [
+                name for name in parent.get("timingTaskNames", []) if str(name) in _plain_html(split_action)
+            ]
+            rebuilt.append({
+                "start": start,
+                "end": end,
+                "title": title,
+                "summary": "",
+                "actionHtml": split_action,
+                "noteHtml": _note_html_for_action(str(parent.get("noteHtml", "")), split_action),
+                "timingTaskNames": timing_names,
+                "timingLogicalOverheadMinutes": 0.5 if split_index == 0 else 0.0,
+            })
+            point_cursor = end + 1
+            action_cursor += action_count
+    groups[:] = rebuilt
 
 
 def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[str, Any]]) -> None:
@@ -247,3 +321,4 @@ def apply_grizzly_semantic_overrides(points: list[list[Any]], groups: list[dict[
 
     for step_number, spec in specs.items():
         apply_step(points, groups, step_number, spec)
+    _rebuild_display_groups(groups)
