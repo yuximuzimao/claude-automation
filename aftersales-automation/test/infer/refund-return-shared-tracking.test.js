@@ -207,7 +207,7 @@ describe('退货退款共用退货单号', () => {
     assert.match(decision.reason, /商品B.*本次可用1件，应退2件/);
   });
 
-  it('不同子订单的关联数据不完整时转人工', () => {
+  it('不同子订单的关联数据不完整时转人工，但仍展示当前工单与ERP逐规格证据', () => {
     const decision = infer(makeCollectedData({
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] }],
       multiUse: true,
@@ -219,6 +219,11 @@ describe('退货退款共用退货单号', () => {
 
     assert.equal(decision.action, 'escalate');
     assert.match(decision.reason, /关联工单缺少商品档案/);
+    const evidence = (decision.steps || []).find(step => step.label === '当前工单 ↔ ERP逐规格对应');
+    assert.ok(evidence);
+    assert.match(evidence.value, /商品A\[A\]：当前工单应退1件、ERP良品1件/);
+    const note = (decision.steps || []).find(step => step.label === '对应关系说明');
+    assert.match(note && note.value, /不能据此单独判断多退、少退或是否应退款/);
   });
 
   it('共用退货单已收货行的 ERP 售后单号重复时转人工', () => {

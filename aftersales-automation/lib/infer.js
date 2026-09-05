@@ -190,6 +190,56 @@ function summarizeReceivedReturnItems(cd) {
   }).join('、');
 }
 
+function appendCurrentReturnEvidenceSteps(s, cd) {
+  const proof = proveReturnItems(cd);
+  const namesBySpec = new Map();
+  const rememberItems = items => {
+    for (const item of items || []) {
+      const specCode = String(item?.specCode || '').trim();
+      const name = String(item?.name || '').trim();
+      if (specCode && name && !namesBySpec.has(specCode)) namesBySpec.set(specCode, name);
+    }
+  };
+  for (const archive of cd.productArchives || []) rememberItems(archive?.subItems);
+  rememberItems(cd.productArchive?.subItems);
+  rememberItems(cd.giftProductArchive?.subItems);
+  for (const row of cd.erpAftersale?.rows || []) rememberItems(row?.items);
+
+  const expected = proof.expectedBySpec || {};
+  const receivedGood = proof.receivedGoodBySpec || {};
+  const receivedBad = proof.receivedBadBySpec || {};
+  const specCodes = [...new Set([
+    ...Object.keys(expected),
+    ...Object.keys(receivedGood),
+    ...Object.keys(receivedBad),
+  ])].sort();
+
+  s({ type: 'read', label: 'ERP已收货退货明细', value: summarizeReceivedReturnItems(cd) });
+  if (specCodes.length) {
+    const comparison = specCodes.map(specCode => {
+      const name = namesBySpec.get(specCode) || specCode;
+      const parts = [
+        `当前工单应退${Number(expected[specCode]) || 0}件`,
+        `ERP良品${Number(receivedGood[specCode]) || 0}件`,
+      ];
+      const badQty = Number(receivedBad[specCode]) || 0;
+      if (badQty) parts.push(`ERP次品${badQty}件`);
+      return `${name}[${specCode}]：${parts.join('、')}`;
+    }).join('；');
+    s({ type: 'read', label: '当前工单 ↔ ERP逐规格对应', value: comparison });
+  } else {
+    s({ type: 'read', label: '当前工单 ↔ ERP逐规格对应', value: '当前已取得数据中没有可对应的规格明细' });
+  }
+  if ((proof.missingFacts || []).length) {
+    s({ type: 'read', label: '当前退货证据缺失项', value: [...new Set(proof.missingFacts)].join('；') });
+  }
+  s({
+    type: 'read',
+    label: '对应关系说明',
+    value: '平台点名的关联工单资料缺失；以上仅展示当前工单与ERP已取得证据，不能据此单独判断多退、少退或是否应退款',
+  });
+}
+
 function merchantReturnApplicationRejectionGuidance(afterSaleReason, buyerRemark, imageCount) {
   const reason = String(afterSaleReason || '').trim();
   const remark = String(buyerRemark || '').trim();
@@ -1020,6 +1070,7 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       return fin(escalate(`退货快递单号已被多个工单共用${usedBy}，系统没有完成关联记录核对，需人工处理`));
     }
     if (sharedReturnGroup.mode === 'incomplete') {
+      appendCurrentReturnEvidenceSteps(s, cd);
       s({ type: 'branch', text: `上报 → ${sharedReturnGroup.reason}` });
       return fin(escalate(sharedReturnGroup.reason));
     }
