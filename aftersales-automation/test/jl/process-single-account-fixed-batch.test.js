@@ -252,6 +252,44 @@ test('平台提示重复退货单时，先解析关联工单再进行推理', as
   ]);
 });
 
+test('仅退款物流异常时先做百度补证，再用补证后的采集数据重新推理', async () => {
+  const calls = [];
+  const collectedData = {
+    ticket: { workOrderNum: ORDER_1 },
+  };
+  const result = await processOpenedDetail({
+    ticket: { workOrderNum: ORDER_1, type: '仅退款' },
+    queueItem: { workOrderNum: ORDER_1, type: '仅退款' },
+    disableAutoExecute: true,
+  }, {
+    collectDetail: async () => collectedData,
+    inferDecision: async data => {
+      calls.push(['infer', Boolean(data.externalLogistics)]);
+      return data.externalLogistics
+        ? { action: 'approve', reason: '百度补证后已退回' }
+        : { action: 'escalate', reason: '赠品未退回', rulesApplied: [{ doc: 'flow-5.3', section: 'Step3-gift' }] };
+    },
+    supplementExternalLogistics: async (data, decision) => {
+      calls.push(['baidu', decision.action]);
+      data.externalLogistics = {
+        source: 'baidu',
+        attemptedTrackings: ['YT7641388739489'],
+        results: [{ tracking: 'YT7641388739489', status: 'returned', confirmedReturn: true }],
+        errors: [],
+      };
+      return { attempted: true, changed: true };
+    },
+  });
+
+  assert.equal(result.status, 'simulated');
+  assert.equal(result.decision.action, 'approve');
+  assert.deepEqual(calls, [
+    ['infer', false],
+    ['baidu', 'escalate'],
+    ['infer', true],
+  ]);
+});
+
 test('关联工单在当前批次尚未重采时屏蔽旧 simulation，避免第一张使用过期数据', () => {
   const current = {
     ticket: {

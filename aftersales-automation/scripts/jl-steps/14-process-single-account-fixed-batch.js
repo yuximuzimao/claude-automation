@@ -464,7 +464,13 @@ async function processOpenedDetail(context, dependencies) {
     }
   }
   const queueItem = { ...context.queueItem, hoursUntilNextScan: getHoursUntilNextScan() };
-  const baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+  let baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+  if (typeof dependencies.supplementExternalLogistics === 'function') {
+    const supplement = await dependencies.supplementExternalLogistics(collectedData, baselineDecision, context);
+    if (supplement && supplement.attempted) {
+      baselineDecision = await dependencies.inferDecision(collectedData, queueItem);
+    }
+  }
   const stageResult = applyPlatformStageObservation({
     type: context && context.ticket && context.ticket.type,
     platformStage,
@@ -861,6 +867,7 @@ function loadDefaultDependencies() {
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
   const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
+  const { supplementBaiduLogisticsIfNeeded } = require('../../lib/external-logistics-baidu');
   const { executeTicketDecision } = require('../../lib/jl/execute-decision');
   const db = require('../../lib/server/data');
   const { createAutoExecutionJournal } = require('../../lib/server/auto-execution-journal');
@@ -929,6 +936,11 @@ function loadDefaultDependencies() {
       type: context.ticket.type,
     }),
     inferDecision: (collectedData, ticket) => inferDecision({ collectedData }, ticket),
+    supplementExternalLogistics: (collectedData, decision, context) => supplementBaiduLogisticsIfNeeded(
+      collectedData,
+      decision,
+      { type: context && context.ticket && context.ticket.type }
+    ),
     resolveSharedReturnGroup: (collectedData, workOrderNum, sharedReturnContext) =>
       resolveSharedReturnGroupForBatch(
         collectedData,

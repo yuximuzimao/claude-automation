@@ -14,7 +14,8 @@
   platformStageAssessment: Object | null, // 可选，命中观察期状态分支时保存原综合推理对照
   erpSearch:      Object | null,   // 第一个主商品子订单结果（旧字段兼容）
   erpSearches:    Object[],        // 全部主商品子订单 ERP 搜索结果
-  erpLogistics:   Object | null,   // 可选，仅退款-已发货补充物流源
+  erpLogistics:   Object | null,   // 可选，仅退款-已发货 ERP 补充物流源
+  externalLogistics: Object | null,// 可选，仅退款物流异常时的百度真实页面补证结果
   logistics:      Object | null,   // 可选，鲸灵发货物流
   erpAftersale:   Object | null,   // 退货退款/换货有 returnTracking 时必填
   productMatch:   Object | null,   // 可选，商品对应表结果
@@ -161,6 +162,35 @@ ERP 按子订单号搜索后，必须逐行核验“平台交易号”。合并�
 ```
 
 旧快照 `{ logisticsText: string }` 继续兼容。
+
+---
+
+## `externalLogistics` 字段（百度异常补证，仅退款）
+
+正常采集不生成该字段。只有鲸灵 + ERP 已完成正常物流判断后，原推理仍因某个已发货运单“未确认退回”而准备进入等待重查、拒绝或物流人工分支时，才针对这些尚未确认退回的运单查询真实 Chrome 百度搜索页。
+
+```js
+{
+  source: 'baidu',
+  attemptedAt: string,
+  attemptedTrackings: string[],
+  results: [
+    {
+      tracking: string,
+      source: 'baidu',
+      fetchedAt: string,
+      logisticsText: string, // 只保存百度搜索结果中的“物流追踪”卡片正文
+      status: 'returned' | 'signed' | 'yizhan' | 'transit',
+      confirmedReturn: boolean,
+    }
+  ],
+  errors: [
+    { tracking: string, error: string }
+  ]
+}
+```
+
+百度补证不是常规第三物流源：已有退回证据的运单不得再次查询；查询失败不写 `collectErrors`、不重试、不改变原推理的安全结论。成功结果只与同一 `tracking` 的 ERP/鲸灵文本合并后复用原 `hasConfirmedReturn()` 等规则，不新增独立退款判定。
 
 ---
 

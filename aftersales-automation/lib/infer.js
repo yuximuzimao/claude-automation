@@ -13,6 +13,7 @@
 
 const { hasConfirmedReturn, SIGNED_KEYWORDS, YIZHAN_KEYWORDS, EXEMPT_ACCESSORY_KEYWORDS, NON_MERCHANT_REASONS, MERCHANT_FAULT_REASONS, REMIND_HOURS, SAFETY_MARGIN_HOURS } = require('./constants');
 const { proveReturnItems } = require('./return-item-proof');
+const { mergeExternalLogisticsIntoErp } = require('./external-logistics-baidu');
 
 // 解析 urgency 字符串（如 "1天3小时" / "3小时"）为总小时数
 function parseUrgencyHours(urgency) {
@@ -72,9 +73,7 @@ const ACTUAL_SHIPMENT_RE = /揽收|在途|派件|签收|入站|到达|离开|运
 
 function evaluateRefundOnlyTrackings(cd, rows) {
   const trackings = [...new Set(rows.flatMap(getRowTrackings))];
-  const erpResults = cd.erpLogistics && Array.isArray(cd.erpLogistics.results)
-    ? cd.erpLogistics.results
-    : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+  const erpResults = mergeExternalLogisticsIntoErp(cd);
   const packages = (cd.logistics && cd.logistics.packages) || [];
   const packageTrackings = packages.map(getPackageTracking).filter(Boolean);
   const missingFromErpRows = packageTrackings.filter(tracking => !trackings.includes(tracking));
@@ -480,6 +479,19 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
   const giftRows = getErpRows(cd, 'giftErpSearch');
   const allRows = [...mainRows, ...giftRows];
   s({ type: 'read', label: 'ERP主商品状态', value: erpAgg.statuses.length ? erpAgg.statuses.join('/') : '未获取' });
+  if (cd.externalLogistics && Array.isArray(cd.externalLogistics.attemptedTrackings)) {
+    const results = Array.isArray(cd.externalLogistics.results) ? cd.externalLogistics.results : [];
+    const errors = Array.isArray(cd.externalLogistics.errors) ? cd.externalLogistics.errors : [];
+    const details = [
+      ...results.map(result => `${result.tracking}：${result.status === 'returned' ? '已退回' : result.status === 'signed' ? '已签收' : result.status === 'yizhan' ? '驿站待取' : '在途'}`),
+      ...errors.map(item => `${item.tracking}：查询失败（${item.error || '未知错误'}）`),
+    ];
+    s({
+      type: 'read',
+      label: '百度物流补证',
+      value: details.length ? details.join('；') : `已查询：${cd.externalLogistics.attemptedTrackings.join('、')}`,
+    });
+  }
 
   if (!erpStatus && !erpAgg.statuses.length) {
     s({ type: 'branch', text: '上报 → ERP状态未获取' });
@@ -564,9 +576,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
       if (!giftOk && giftAgg.hasShipped) {
         // 赠品有已发货行 → 读 ERP 物流判断是否可等待（与 flow-5.3 赠品逻辑一致）
-        const erpLogResults = cd.erpLogistics && cd.erpLogistics.results
-          ? cd.erpLogistics.results
-          : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+        const erpLogResults = mergeExternalLogisticsIntoErp(cd);
         const giftShippedRows52 = getErpRows(cd, 'giftErpSearch').filter(r =>
           ['卖家已发货', '交易成功', '交易关闭'].includes(r.status)
         );
@@ -672,11 +682,11 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
       value: packages ? `${packages.length}个：${packageTrackings.join('、') || '单号未识别'}` : '未获取',
     });
 
-    // ERP双源：同时检查 ERP 物流文本（鲸灵有时不更新退回状态）
+    // 第二物流证据源：正常为 ERP；若异常补证已触发，则把百度物流卡片按同一 tracking 合并后复用原判断。
     // erpLogistics 格式：{ results: [{ tracking, logisticsText }, ...] }（多行）或旧格式 { logisticsText }（单行兼容）
-    const allErpLogResults = cd.erpLogistics && cd.erpLogistics.results
-      ? cd.erpLogistics.results
-      : (cd.erpLogistics && cd.erpLogistics.logisticsText ? [cd.erpLogistics] : []);
+    const allErpLogResults = mergeExternalLogisticsIntoErp(cd);
+    const hasBaiduEvidence = Boolean(cd.externalLogistics && Array.isArray(cd.externalLogistics.results) && cd.externalLogistics.results.length);
+    const secondarySourceLabel = hasBaiduEvidence ? 'ERP/百度补证' : 'ERP';
     const erpLogResults = allErpLogResults.filter(result =>
       !result.tracking || shippedFlowTrackings.has(result.tracking)
     );
@@ -695,29 +705,29 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
 
     if (!packages || !packages.length) {
       if (erpReturned && !trackingEvaluation.outcomes.some(item => item.outcome === 'unknown')) {
-        s({ type: 'branch', text: '同意退款 → 鲸灵物流未读到，但ERP物流显示已退回' });
+        s({ type: 'branch', text: `同意退款 → 鲸灵物流未读到，但${secondarySourceLabel}物流显示已退回` });
         return fin(approve(
           '物流显示已退回',
           [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP双源核查→已退回→同意退款' }]
         ));
       }
-      // 鲸灵物流未读到，但 ERP 有物流数据 → 按 ERP 物流状态决策
+      // 鲸灵物流未读到，但 ERP/百度补证有物流数据 → 按合并后的物流状态决策
       if (erpLogsWithText.length > 0) {
         const anySigned = erpLogsWithText.some(r => SIGNED_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
         const anyYizhan = erpLogsWithText.some(r => YIZHAN_KEYWORDS.some(kw => r.logisticsText.includes(kw)));
         const erpDesc = erpTrackingStatuses.join('；');
         if (anySigned || anyYizhan) {
-          s({ type: 'branch', text: `上报 → 鲸灵物流未读到，ERP显示已签收/驿站：${erpDesc}` });
-          return fin(escalate(`鲸灵物流未读到，ERP显示${erpDesc}，需人工确认`));
+          s({ type: 'branch', text: `上报 → 鲸灵物流未读到，${secondarySourceLabel}显示已签收/驿站：${erpDesc}` });
+          return fin(escalate(`鲸灵物流未读到，${secondarySourceLabel}显示${erpDesc}，需人工确认`));
         }
         // 在途 → 等待重查
-        s({ type: 'branch', text: `等待重查 → 鲸灵物流未读到，ERP显示在途：${erpDesc}` });
+        s({ type: 'branch', text: `等待重查 → 鲸灵物流未读到，${secondarySourceLabel}显示在途：${erpDesc}` });
         return fin(withInterceptRejectCopy({
           action: 'reject',
           waitingRescan: true,
           manualExecutionAllowedWhileWaiting: true,
           reasonCode: 'INTERCEPT_WAITING',
-          reason: `鲸灵物流未读到，ERP显示${erpDesc}，拦截尚未退回，当前等待重查；人工可提前沿用该工单原拒绝原因执行拒绝`,
+          reason: `鲸灵物流未读到，${secondarySourceLabel}显示${erpDesc}，拦截尚未退回，当前等待重查；人工可提前沿用该工单原拒绝原因执行拒绝`,
           rulesApplied: [{ doc: 'flow-5.3', section: 'Step3', summary: 'ERP在途→等待重查，可人工提前拒绝' }],
           warnings: interceptWarnings(cd),
         }, INTERCEPT_REJECT_REASON_TRANSIT));
@@ -793,7 +803,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     // 赠品已发货独立校验：计算赠品物流状态，仅在主品全部退回时用于决策（不提前 escalate）
-    // 交叉验证原则：同一快递单号，鲸灵和 ERP 任一数据源显示「退回」即判退回。
+    // 交叉验证原则：同一快递单号，鲸灵、ERP 或已触发的百度补证任一来源显示「退回」即判退回。
     // 不再区分"主品/赠品包裹"或"哪个源优先"——退回信息只要存在就算数。
     const jlReturnedTrackings = new Set(
       (packages || []).filter(pkg => hasConfirmedReturn(pkg.text))
@@ -842,7 +852,7 @@ function inferRefundOnly({ cd, ticket, queueItem, s, fin }) {
     }
 
     const allReturned = collectionComplete && (allJLReturned || erpReturned);
-    s({ type: 'check', condition: `全部包裹有退回物流节点（鲸灵:${allJLReturned}，ERP:${erpReturned}，采集完整:${collectionComplete}）`, result: allReturned });
+    s({ type: 'check', condition: `全部包裹有退回物流节点（鲸灵:${allJLReturned}，${secondarySourceLabel}:${erpReturned}，采集完整:${collectionComplete}）`, result: allReturned });
 
     if (allReturned) {
       if (trackingEvaluation.outcomes.some(item => item.outcome === 'unknown')) {

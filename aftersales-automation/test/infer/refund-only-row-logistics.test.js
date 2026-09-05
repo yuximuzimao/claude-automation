@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { inferDecision } = require('../../lib/infer');
 
-function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], intercepted, queueItemOverrides = {} }) {
+function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], intercepted, externalLogistics, queueItemOverrides = {} }) {
   const gifts = giftRows.length ? [{ id: 'gift-1' }] : [];
   const collectedData = {
     ticket: {
@@ -26,6 +26,7 @@ function makeDecision({ mainRows, giftRows = [], erpLogs = [], packages = [], in
     logistics: { packages },
     collectErrors: [],
     intercepted,
+    externalLogistics,
   };
   const queueItem = {
     id: 'refund-only-row-test',
@@ -169,6 +170,40 @@ test('赠品带单号且仍在途时与主品使用相同规则并阻止退款',
   assert.equal(decision.reasonCode, 'INTERCEPT_WAITING');
   assert.equal(decision.rejectReason, '已通知快递拦截暂未退回');
   assert.equal(checkedLogistics(decision), true);
+});
+
+test('百度补证命中赠品退回节点后，与主品退回证据合并并允许继续退款判断', () => {
+  const mainTracking = 'YT7641388201852';
+  const giftTracking = 'YT7641388739489';
+  const decision = makeDecision({
+    mainRows: [trackedRow('卖家已发货', mainTracking)],
+    giftRows: [trackedRow('卖家已发货', giftTracking)],
+    erpLogs: [
+      { tracking: mainTracking, logisticsText: '2026-09-05 21:08:13\n已发往广州转运中心' },
+      { tracking: giftTracking, logisticsText: '2026-09-05 20:38:32\n您的快件离开【自贡转运中心】，已发往【广州转运中心】' },
+    ],
+    packages: [packageText(mainTracking, '退回\n您的快件已被安排退回，退回原因：客户要求退回')],
+    externalLogistics: {
+      source: 'baidu',
+      attemptedTrackings: [giftTracking],
+      results: [{
+        tracking: giftTracking,
+        source: 'baidu',
+        status: 'returned',
+        confirmedReturn: true,
+        logisticsText: '物流追踪\n2026年09月05日 下午03:32:11\n您的快件已被安排退回，退回原因：客户要求退回',
+      }],
+      errors: [],
+    },
+  });
+
+  assert.equal(decision.action, 'approve');
+  assert.match(decision.reason, /未发货或物流已退回|全部包裹物流显示已退回/);
+  const proofStep = decision.steps.find(step => step.label === '百度物流补证');
+  assert.ok(proofStep);
+  assert.match(proofStep.value, new RegExp(`${giftTracking}：已退回`));
+  const logisticsStep = decision.steps.find(step => step.label === '逐行物流核验');
+  assert.match(logisticsStep.value, new RegExp(`${giftTracking}：已退回`));
 });
 
 test('赠品仅在ERP显示已签收且主品仍在途时进入混合拒绝分支', () => {
