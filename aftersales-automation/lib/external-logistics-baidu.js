@@ -7,8 +7,10 @@ const SHIPPED_STATUSES = new Set(['卖家已发货', '交易成功', '交易关�
 const NOT_PICKED_UP_KEYWORDS = ['未揽收', '等待揽收', '尚未揽收'];
 const ACTUAL_SHIPMENT_RE = /揽收|在途|派件|签收|入站|到达|离开|运输/;
 const BAIDU_SEARCH_URL = 'https://www.baidu.com/s?wd=';
+const INITIAL_LOAD_WAIT_MS = 3000;
 const MAX_WAIT_MS = 8000;
 const POLL_MS = 400;
+const POST_READ_HOLD_MS = 2000;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -142,6 +144,8 @@ async function queryBaiduLogistics(tracking, customDependencies) {
     targetId = created && (created.id || created.targetId);
     if (!targetId) return { success: false, tracking: normalized, error: '百度查询页已创建但缺少 targetId' };
 
+    // 真实浏览器查询保留基础加载时间，避免刚开页就高频读取/秒关。
+    await deps.sleep(INITIAL_LOAD_WAIT_MS);
     const startedAt = Date.now();
     while (Date.now() - startedAt < MAX_WAIT_MS) {
       const page = await deps.eval(targetId, `(() => ({
@@ -159,6 +163,8 @@ async function queryBaiduLogistics(tracking, customDependencies) {
       if (queryMatches) {
         const card = extractBaiduLogisticsCard(pageText);
         if (card) {
+          // 已读到稳定物流卡片后再停留片刻，避免成功命中后立即关闭页面。
+          await deps.sleep(POST_READ_HOLD_MS);
           return {
             success: true,
             tracking: normalized,

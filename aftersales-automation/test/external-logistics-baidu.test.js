@@ -73,7 +73,7 @@ test('真实浏览器查询契约：命中目标搜索词后读取物流卡，�
       };
     },
     closeTarget: async id => calls.push(['close', id]),
-    sleep: async () => {},
+    sleep: async ms => calls.push(['sleep', ms]),
   });
 
   assert.equal(result.success, true);
@@ -81,7 +81,13 @@ test('真实浏览器查询契约：命中目标搜索词后读取物流卡，�
   assert.equal(result.status, 'returned');
   assert.equal(result.confirmedReturn, true);
   assert.match(result.logisticsText, /安排退回/);
-  assert.deepEqual(calls.at(-1), ['close', 'BAIDU-TAB']);
+  assert.deepEqual(calls, [
+    ['create', `https://www.baidu.com/s?wd=${TRACKING}`],
+    ['sleep', 3000],
+    ['eval', 'BAIDU-TAB'],
+    ['sleep', 2000],
+    ['close', 'BAIDU-TAB'],
+  ]);
 });
 
 test('异常补证只查询现有平台/ERP没有确认退回的已发货运单', async () => {
