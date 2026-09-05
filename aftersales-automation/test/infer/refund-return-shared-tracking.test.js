@@ -62,18 +62,88 @@ describe('退货退款共用退货单号', () => {
     assert.doesNotMatch(decision.reason, /多8件|实退10件/);
   });
 
-  it('相同子订单重新申请时忽略历史工单，不因多次使用转人工', () => {
+  it('相同主子订单的两个当前有效工单按两张申请数量合并核对', () => {
     const decision = infer(makeCollectedData({
-      rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] }],
+      rows: [{ goodsStatus: '卖家已收到退货', returnQty: 2, items: [item('A', 2)] }],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'same_suborders_only',
-        ignoredWorkOrderNums: ['100001700000000000002'],
+        mode: 'combined_applications',
+        workOrderNums: ['100001700000000000001', '100001700000000000002'],
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
       },
     }));
 
     assert.equal(decision.action, 'approve');
-    assert.doesNotMatch(decision.reason, /多个工单共用/);
+    assert.match(decision.reason, /逐规格核对通过/);
+  });
+
+  it('历史关联工单已成功退款时先扣除历史占用，阻止同一批退货再次退款', () => {
+    const decision = infer(makeCollectedData({
+      rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] }],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'combined_applications',
+        workOrderNums: ['100001700000000000001'],
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 1 }],
+        historicalConsumedItems: [{ specCode: 'A', name: '商品A', qty: 1 }],
+        historicalWorkOrders: [{
+          workOrderNum: '100001700000000000002',
+          action: 'approve',
+          executedAt: '2026-09-01T00:00:00.000Z',
+          consumesReturnQty: true,
+        }],
+      },
+    }));
+
+    assert.equal(decision.action, 'escalate');
+    assert.match(decision.reason, /本次可用0件/);
+    assert.match(decision.reason, /历史已退款占用1件/);
+  });
+
+  it('历史关联工单未成功执行退款时不占用退货数量', () => {
+    const decision = infer(makeCollectedData({
+      rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 1)] }],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'combined_applications',
+        workOrderNums: ['100001700000000000001'],
+        expectedItems: [{ specCode: 'A', name: '商品A', qty: 1 }],
+        historicalConsumedItems: [],
+        historicalWorkOrders: [{
+          workOrderNum: '100001700000000000002',
+          action: 'escalate',
+          executedAt: null,
+          consumesReturnQty: false,
+        }],
+      },
+    }));
+
+    assert.equal(decision.action, 'approve');
+    assert.match(decision.reason, /逐规格核对通过/);
+  });
+
+  it('真实结构回归：18×2主品加同一套12件赠品，ERP实收48不得误报多18件', () => {
+    const decision = infer(makeCollectedData({
+      rows: [{
+        goodsStatus: '卖家已收到退货',
+        returnQty: 48,
+        items: [item('MAIN', 36), item('GIFT', 12)],
+      }],
+      multiUse: true,
+      sharedReturnGroup: {
+        mode: 'combined_applications',
+        workOrderNums: ['100001700000000000001', '100001700000000000002'],
+        expectedItems: [
+          { specCode: 'MAIN', name: '主品', qty: 36 },
+          { specCode: 'GIFT', name: '赠品', qty: 12 },
+        ],
+      },
+    }));
+
+    assert.equal(decision.action, 'approve');
+    assert.doesNotMatch(decision.reason, /多18件/);
+    assert.match(decision.reason, /主品×36/);
+    assert.match(decision.reason, /赠品×12/);
   });
 
   it('不同子订单共用单号时按合并后的逐规格数量核对', () => {
@@ -81,7 +151,7 @@ describe('退货退款共用退货单号', () => {
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 3, items: [item('A', 1), item('B', 2)] }],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         workOrderNums: ['100001700000000000001', '100001700000000000003'],
         expectedItems: [
           { specCode: 'A', name: '商品A', qty: 1 },
@@ -105,7 +175,7 @@ describe('退货退款共用退货单号', () => {
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 4, items: [item('A', 2), item('B', 2)] }],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         workOrderNums: ['100001700000000000001', '100001700000000000003'],
         expectedItems: [
           { specCode: 'A', name: '商品A', qty: 1 },
@@ -124,7 +194,7 @@ describe('退货退款共用退货单号', () => {
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 2, items: [item('A', 1), item('B', 1)] }],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         workOrderNums: ['100001700000000000001', '100001700000000000003'],
         expectedItems: [
           { specCode: 'A', name: '商品A', qty: 1 },
@@ -134,7 +204,7 @@ describe('退货退款共用退货单号', () => {
     }));
 
     assert.equal(decision.action, 'escalate');
-    assert.match(decision.reason, /商品B.*退了1件，应退2件/);
+    assert.match(decision.reason, /商品B.*本次可用1件，应退2件/);
   });
 
   it('不同子订单的关联数据不完整时转人工', () => {
@@ -159,7 +229,7 @@ describe('退货退款共用退货单号', () => {
       ],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
       },
     }));
@@ -176,7 +246,7 @@ describe('退货退款共用退货单号', () => {
       ],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
       },
     }));
@@ -190,7 +260,7 @@ describe('退货退款共用退货单号', () => {
       rows: [{ goodsStatus: '卖家已收到退货', returnQty: 1, items: [item('A', 2)] }],
       multiUse: true,
       sharedReturnGroup: {
-        mode: 'distinct_suborders',
+        mode: 'combined_applications',
         expectedItems: [{ specCode: 'A', name: '商品A', qty: 2 }],
       },
     }));

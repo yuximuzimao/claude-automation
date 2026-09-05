@@ -237,7 +237,7 @@ test('平台提示重复退货单时，先解析关联工单再进行推理', as
     collectDetail: async () => collectedData,
     resolveSharedReturnGroup: async data => {
       calls.push(['resolve', data.ticket.workOrderNum]);
-      return { mode: 'same_suborders_only', ignoredWorkOrderNums: [ORDER_2] };
+      return { mode: 'combined_applications', workOrderNums: [ORDER_1, ORDER_2], expectedItems: [] };
     },
     inferDecision: async data => {
       calls.push(['infer', data.sharedReturnGroup.mode]);
@@ -248,7 +248,7 @@ test('平台提示重复退货单时，先解析关联工单再进行推理', as
   assert.equal(result.status, 'simulated');
   assert.deepEqual(calls, [
     ['resolve', ORDER_1],
-    ['infer', 'same_suborders_only'],
+    ['infer', 'combined_applications'],
   ]);
 });
 
@@ -291,7 +291,7 @@ test('关联工单在当前批次尚未重采时屏蔽旧 simulation，避免第
     resolveSharedReturnGroupForBatch(current, [staleRelated], ORDER_1, context),
     {
       mode: 'incomplete',
-      reason: `平台提示关联工单 ${ORDER_2}，但系统没有该工单的完整采集记录`,
+      reason: `平台提示关联工单 ${ORDER_2} 仍在当前48小时批次，但本轮尚未采集完整`,
       missingWorkOrderNums: [ORDER_2],
     }
   );
@@ -335,7 +335,7 @@ test('同批次关联工单第一张先到时延迟到组齐后回算，不受�
   fixture.dependencies.inferDecision = async data => {
     inferGroups.push(data.sharedReturnGroup);
     return {
-      action: data.sharedReturnGroup.mode === 'distinct_suborders' ? 'approve' : 'escalate',
+      action: data.sharedReturnGroup.mode === 'combined_applications' ? 'approve' : 'escalate',
       reason: data.sharedReturnGroup.reason || '关联组核对通过',
     };
   };
@@ -344,7 +344,7 @@ test('同批次关联工单第一张先到时延迟到组齐后回算，不受�
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
 
   assert.equal(inferGroups.length, 2);
-  assert.ok(inferGroups.every(group => group.mode === 'distinct_suborders'));
+  assert.ok(inferGroups.every(group => group.mode === 'combined_applications'));
   assert.ok(inferGroups.every(group =>
     group.expectedItems.length === 1 &&
     group.expectedItems[0].specCode === 'SPEC-SHARED' &&
@@ -396,7 +396,7 @@ test('同批次单向关联即使被关联工单先处理，也先延迟自动�
 
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
 
-  assert.ok(result.items.every(item => item.collectedData.sharedReturnGroup.mode === 'distinct_suborders'));
+  assert.ok(result.items.every(item => item.collectedData.sharedReturnGroup.mode === 'combined_applications'));
   assert.ok(result.items.every(item => item.status === 'simulated'));
   assert.equal(fixture.calls.some(call => call[0] === 'execute'), false);
   assert.deepEqual(
@@ -474,13 +474,13 @@ test('延迟关联组时立即写入不可执行占位结果，不能让旧 appr
   assert.equal(relatedItem.persistedSimulationId, `sim-safe-placeholder-${ORDER_2}`);
 });
 
-test('混合关联组存在同批次活跃重复工单时，即使还有不同子订单也整体转人工', async () => {
+test('同批次关联工单包含相同主子订单时不再触发旧去重守卫', async () => {
   let executed = false;
   const result = await processOpenedDetail({
     ticket: { workOrderNum: ORDER_1, type: '退货退款' },
     queueItem: { workOrderNum: ORDER_1, type: '退货退款' },
     sharedReturnContext: {
-      batchWorkOrderNums: new Set([ORDER_1, ORDER_2, '100001781188621717212']),
+      batchWorkOrderNums: new Set([ORDER_1, ORDER_2]),
       collectedDataByWorkOrder: new Map(),
     },
   }, {
@@ -488,19 +488,19 @@ test('混合关联组存在同批次活跃重复工单时，即使还有不同�
       ticket: { workOrderNum: ORDER_1, returnTrackingMultiUse: true },
     }),
     resolveSharedReturnGroup: async () => ({
-      mode: 'distinct_suborders',
+      mode: 'combined_applications',
+      workOrderNums: [ORDER_1, ORDER_2],
       expectedItems: [{ specCode: 'SPEC-1', qty: 2 }],
-      ignoredWorkOrderNums: ['100001781188621717212'],
     }),
     inferDecision: async data => {
-      assert.equal(data.sharedReturnGroup.mode, 'incomplete');
-      return { action: 'escalate', reason: data.sharedReturnGroup.reason };
+      assert.equal(data.sharedReturnGroup.mode, 'combined_applications');
+      return { action: 'approve', reason: '两张当前有效申请合并核对通过' };
     },
     shouldAutoExecute: async () => false,
     executeDecision: async () => { executed = true; return { success: true }; },
   });
 
-  assert.equal(result.decision.action, 'escalate');
+  assert.equal(result.decision.action, 'approve');
   assert.equal(executed, false);
 });
 
@@ -526,7 +526,7 @@ test('关联工单不在当前批次且没有完整记录时不延迟，直接�
     }),
     resolveSharedReturnGroup: async () => ({
       mode: 'incomplete',
-      reason: `平台提示关联工单 ${outsideOrder}，但系统没有该工单的完整采集记录`,
+      reason: `平台提示关联工单 ${outsideOrder}，但本轮48小时采集与历史记录均未找到；可能为历史记录缺失或特殊重复申请，需人工判断`,
       missingWorkOrderNums: [outsideOrder],
     }),
     inferDecision: async data => {
@@ -540,42 +540,53 @@ test('关联工单不在当前批次且没有完整记录时不延迟，直接�
   assert.equal(inferredGroup.missingWorkOrderNums[0], outsideOrder);
 });
 
-test('同批次关联工单指向相同子订单时不得按历史重申请忽略，也不得自动执行', async () => {
-  let executed = false;
-  const result = await processOpenedDetail({
-    ticket: { workOrderNum: ORDER_1 },
-    queueItem: { workOrderNum: ORDER_1 },
-    sharedReturnContext: {
-      batchWorkOrderNums: new Set([ORDER_1, ORDER_2]),
-      collectedDataByWorkOrder: new Map(),
+test('平台点名的关联工单不在当前批次时，从历史成功退款记录计算已占用数量', () => {
+  const current = {
+    ticket: {
+      workOrderNum: ORDER_1,
+      returnTracking: 'TRACK-SHARED',
+      returnTrackingMultiUse: true,
+      returnTrackingUsedBy: [ORDER_2],
+      subOrders: [{ id: 'SUB-SHARED', afterSaleNum: 1 }],
+      gifts: [],
     },
-  }, {
-    collectDetail: async () => ({
+    productArchives: [{
+      subOrderId: 'SUB-SHARED',
+      subItems: [{ name: '共享商品', specCode: 'SPEC-SHARED', qty: 1 }],
+    }],
+  };
+  const historical = {
+    workOrderNum: ORDER_2,
+    collectedData: {
       ticket: {
-        workOrderNum: ORDER_1,
-        returnTrackingMultiUse: true,
-        returnTrackingUsedBy: [ORDER_2],
+        workOrderNum: ORDER_2,
+        returnTracking: 'TRACK-SHARED',
+        subOrders: [{ id: 'SUB-SHARED', afterSaleNum: 1 }],
+        gifts: [],
       },
-    }),
-    resolveSharedReturnGroup: async () => ({
-      mode: 'same_suborders_only',
-      ignoredWorkOrderNums: [ORDER_2],
-    }),
-    inferDecision: async data => {
-      assert.equal(data.sharedReturnGroup.mode, 'incomplete');
-      assert.match(data.sharedReturnGroup.reason, /同时处于本批次待处理状态/);
-      return { action: 'escalate', reason: data.sharedReturnGroup.reason };
+      productArchives: [{
+        subOrderId: 'SUB-SHARED',
+        subItems: [{ name: '共享商品', specCode: 'SPEC-SHARED', qty: 1 }],
+      }],
     },
-    shouldAutoExecute: async decision => {
-      assert.equal(decision.action, 'escalate');
-      return false;
-    },
-    executeDecision: async () => { executed = true; return { success: true }; },
-  });
+    decision: { action: 'approve' },
+    executedAt: '2026-09-01T00:00:00.000Z',
+  };
+  const context = {
+    batchWorkOrderNums: new Set([ORDER_1]),
+    collectedDataByWorkOrder: new Map([[ORDER_1, current]]),
+  };
 
-  assert.equal(result.status, 'simulated');
-  assert.equal(result.decision.action, 'escalate');
-  assert.equal(executed, false);
+  const result = resolveSharedReturnGroupForBatch(current, [historical], ORDER_1, context);
+  assert.equal(result.mode, 'combined_applications');
+  assert.deepEqual(result.workOrderNums, [ORDER_1]);
+  assert.deepEqual(result.expectedItems, [
+    { specCode: 'SPEC-SHARED', name: '共享商品', qty: 1 },
+  ]);
+  assert.deepEqual(result.historicalConsumedItems, [
+    { specCode: 'SPEC-SHARED', name: '共享商品', qty: 1 },
+  ]);
+  assert.equal(result.historicalWorkOrders[0].consumesReturnQty, true);
 });
 
 test('换货待商家二次发货保留原推理作对照，最终进入无需处理人工归档', async () => {

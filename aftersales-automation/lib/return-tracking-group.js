@@ -4,14 +4,6 @@ function idOf(value) {
   return value == null ? '' : String(value).trim();
 }
 
-function subOrderIds(collectedData) {
-  const ticket = collectedData && collectedData.ticket;
-  if (!ticket) return [];
-  return [...(ticket.subOrders || []), ...(ticket.gifts || [])]
-    .map(order => idOf(order && order.id))
-    .filter(Boolean);
-}
-
 function archiveItems(archive) {
   if (!archive) return null;
   if (Array.isArray(archive.subItems) && archive.subItems.length) return archive.subItems;
@@ -25,7 +17,7 @@ function archiveItems(archive) {
   return null;
 }
 
-function expectedItemsOf(collectedData, workOrderNum) {
+function expectedItemsOf(collectedData, workOrderNum, countedGiftIds) {
   const ticket = collectedData && collectedData.ticket;
   if (!ticket) return { error: `关联工单 ${workOrderNum} 缺少工单详情` };
 
@@ -61,15 +53,20 @@ function expectedItemsOf(collectedData, workOrderNum) {
     return { error: `关联工单 ${workOrderNum} 有多个赠品子订单，现有记录不足以逐个核对` };
   }
   if (gifts.length === 1) {
-    const items = archiveItems(collectedData.giftProductArchive);
-    if (!items) return { error: `关联工单 ${workOrderNum} 的赠品子订单 ${idOf(gifts[0].id) || '未知'} 缺少商品档案` };
-    for (const item of items) {
-      const specCode = idOf(item && item.specCode);
-      const qty = Number(item && item.qty);
-      if (!specCode || !Number.isFinite(qty) || qty <= 0) {
-        return { error: `关联工单 ${workOrderNum} 的赠品商品档案不完整` };
+    const giftOrderId = idOf(gifts[0] && gifts[0].id);
+    if (!giftOrderId) return { error: `关联工单 ${workOrderNum} 的赠品子订单号缺失` };
+    if (!countedGiftIds || !countedGiftIds.has(giftOrderId)) {
+      const items = archiveItems(collectedData.giftProductArchive);
+      if (!items) return { error: `关联工单 ${workOrderNum} 的赠品子订单 ${giftOrderId} 缺少商品档案` };
+      for (const item of items) {
+        const specCode = idOf(item && item.specCode);
+        const qty = Number(item && item.qty);
+        if (!specCode || !Number.isFinite(qty) || qty <= 0) {
+          return { error: `关联工单 ${workOrderNum} 的赠品商品档案不完整` };
+        }
+        result.push({ specCode, name: item.name || specCode, qty });
       }
-      result.push({ specCode, name: item.name || specCode, qty });
+      if (countedGiftIds) countedGiftIds.add(giftOrderId);
     }
   }
 
@@ -77,106 +74,148 @@ function expectedItemsOf(collectedData, workOrderNum) {
   return { items: result };
 }
 
-function resolveSharedReturnGroup(currentCollectedData, simulations, currentWorkOrderNum) {
+function resolveSharedReturnGroup(currentCollectedData, simulations, currentWorkOrderNum, options = {}) {
   const ticket = currentCollectedData && currentCollectedData.ticket;
   if (!ticket || !ticket.returnTrackingMultiUse) return null;
 
   const currentNum = idOf(currentWorkOrderNum || ticket.workOrderNum);
-  const usedBy = [...new Set((ticket.returnTrackingUsedBy || []).map(idOf).filter(Boolean))]
+  const tracking = idOf(ticket.returnTracking);
+  const activeWorkOrderNums = options.activeWorkOrderNums instanceof Set
+    ? new Set([...options.activeWorkOrderNums].map(idOf).filter(Boolean))
+    : null;
+  const freshWorkOrderNums = options.freshWorkOrderNums instanceof Set
+    ? new Set([...options.freshWorkOrderNums].map(idOf).filter(Boolean))
+    : null;
+  const linkedWorkOrderNums = [...new Set((ticket.returnTrackingUsedBy || []).map(idOf).filter(Boolean))]
     .filter(workOrderNum => workOrderNum !== currentNum);
-  if (!usedBy.length) {
+  if (!linkedWorkOrderNums.length) {
     return { mode: 'incomplete', reason: '平台提示退货单号重复使用，但没有提供关联工单号' };
   }
 
-  const records = [];
-  const missingWorkOrderNums = [];
-  const pendingWorkOrderNums = [...usedBy];
-  const discoveredWorkOrderNums = new Set(usedBy);
+  const currentRecords = [];
+  const historicalRecords = [];
+  const missingCurrentWorkOrderNums = [];
+  const missingHistoricalWorkOrderNums = [];
+  const pendingWorkOrderNums = [...linkedWorkOrderNums];
+  const discoveredWorkOrderNums = new Set(linkedWorkOrderNums);
+
   while (pendingWorkOrderNums.length) {
     const workOrderNum = pendingWorkOrderNums.shift();
-    const simulation = [...(simulations || [])].reverse().find(item =>
-      idOf(item && item.workOrderNum) === workOrderNum && item.collectedData && item.collectedData.ticket
-    );
-    if (!simulation) {
-      missingWorkOrderNums.push(workOrderNum);
+    const isCurrentApplication = !activeWorkOrderNums || activeWorkOrderNums.has(workOrderNum);
+    if (isCurrentApplication && freshWorkOrderNums && !freshWorkOrderNums.has(workOrderNum)) {
+      missingCurrentWorkOrderNums.push(workOrderNum);
       continue;
     }
-    const record = { workOrderNum, collectedData: simulation.collectedData };
-    records.push(record);
 
-    const relatedTicket = record.collectedData.ticket;
-    const relatedLinks = [...new Set((relatedTicket.returnTrackingUsedBy || []).map(idOf).filter(Boolean))]
-      .filter(num => num !== currentNum && !discoveredWorkOrderNums.has(num));
-    if (relatedLinks.length > 0) {
-      const relatedTracking = idOf(relatedTicket.returnTracking);
-      if (!relatedTracking || relatedTracking !== idOf(ticket.returnTracking)) {
-        return {
-          mode: 'incomplete',
-          reason: `关联工单 ${workOrderNum} 还指向其他工单，但其退货单号记录不一致，无法继续汇总关联组`,
-        };
+    const matchingSimulations = (simulations || []).filter(item =>
+      idOf(item && item.workOrderNum) === workOrderNum && item.collectedData && item.collectedData.ticket
+    );
+    const newestFirst = [...matchingSimulations].reverse();
+    const simulation = isCurrentApplication
+      ? newestFirst[0]
+      : newestFirst.find(item => item.decision && item.decision.action === 'approve' && item.executedAt) || newestFirst[0];
+    if (!simulation) {
+      (isCurrentApplication ? missingCurrentWorkOrderNums : missingHistoricalWorkOrderNums).push(workOrderNum);
+      continue;
+    }
+
+    const relatedTicket = simulation.collectedData.ticket;
+    const relatedTracking = idOf(relatedTicket.returnTracking);
+    if (isCurrentApplication) {
+      if (!relatedTracking || relatedTracking !== tracking) {
+        return { mode: 'incomplete', reason: `当前关联工单 ${workOrderNum} 的退货单号记录不一致` };
       }
+      currentRecords.push({ workOrderNum, simulation, collectedData: simulation.collectedData });
+
+      const relatedLinks = [...new Set((relatedTicket.returnTrackingUsedBy || []).map(idOf).filter(Boolean))]
+        .filter(num => num !== currentNum && !discoveredWorkOrderNums.has(num));
       for (const linkedWorkOrderNum of relatedLinks) {
         discoveredWorkOrderNums.add(linkedWorkOrderNum);
         pendingWorkOrderNums.push(linkedWorkOrderNum);
       }
+    } else {
+      if (relatedTracking && relatedTracking !== tracking) {
+        return { mode: 'incomplete', reason: `历史关联工单 ${workOrderNum} 的退货单号记录与平台当前提示不一致` };
+      }
+      historicalRecords.push({ workOrderNum, simulation, collectedData: simulation.collectedData });
     }
   }
-  if (missingWorkOrderNums.length) {
+
+  if (missingCurrentWorkOrderNums.length) {
     return {
       mode: 'incomplete',
-      reason: `平台提示关联工单 ${missingWorkOrderNums.join('、')}，但系统没有该工单的完整采集记录`,
-      missingWorkOrderNums,
+      reason: `平台提示关联工单 ${missingCurrentWorkOrderNums.join('、')} 仍在当前48小时批次，但本轮尚未采集完整`,
+      missingWorkOrderNums: missingCurrentWorkOrderNums,
+    };
+  }
+  if (missingHistoricalWorkOrderNums.length) {
+    return {
+      mode: 'incomplete',
+      reason: `平台提示关联工单 ${missingHistoricalWorkOrderNums.join('、')}，但本轮48小时采集与历史记录均未找到；可能为历史记录缺失或特殊重复申请，需人工判断`,
+      missingWorkOrderNums: missingHistoricalWorkOrderNums,
+      missingHistoricalWorkOrderNums,
     };
   }
 
-  const currentIds = new Set(subOrderIds(currentCollectedData));
-  if (!currentIds.size) return { mode: 'incomplete', reason: '当前工单缺少子订单号，无法核对重复退货单' };
-
-  const includedIds = new Set(currentIds);
-  const ignoredWorkOrderNums = [];
-  const distinctRecords = [];
-  for (const record of records) {
-    const ids = subOrderIds(record.collectedData);
-    if (!ids.length) return { mode: 'incomplete', reason: `关联工单 ${record.workOrderNum} 缺少子订单号` };
-    const overlappingIds = ids.filter(id => includedIds.has(id));
-    if (overlappingIds.length === ids.length) {
-      ignoredWorkOrderNums.push(record.workOrderNum);
-      continue;
-    }
-    if (overlappingIds.length > 0) {
+  const countedGiftIds = new Set();
+  const historicalConsumedBySpec = new Map();
+  const historicalWorkOrders = [];
+  for (const record of historicalRecords) {
+    const action = record.simulation && record.simulation.decision && record.simulation.decision.action;
+    const executedAt = record.simulation && record.simulation.executedAt;
+    if (executedAt && !action) {
       return {
         mode: 'incomplete',
-        reason: `关联工单 ${record.workOrderNum} 同时包含已计入和未计入的子订单，无法安全拆分应退数量`,
+        reason: `历史关联工单 ${record.workOrderNum} 有执行记录但缺少决策动作，无法确认是否已占用退货数量`,
       };
     }
-    const relatedTracking = idOf(record.collectedData.ticket.returnTracking);
-    if (!relatedTracking || relatedTracking !== idOf(ticket.returnTracking)) {
-      return { mode: 'incomplete', reason: `平台关联工单 ${record.workOrderNum} 的退货单号记录不一致` };
+    const consumesReturnQty = action === 'approve' && Boolean(executedAt);
+    historicalWorkOrders.push({
+      workOrderNum: record.workOrderNum,
+      action: action || null,
+      executedAt: executedAt || null,
+      consumesReturnQty,
+    });
+    if (!consumesReturnQty) continue;
+
+    const consumed = expectedItemsOf(record.collectedData, record.workOrderNum, countedGiftIds);
+    if (consumed.error) {
+      return {
+        mode: 'incomplete',
+        reason: `历史关联工单 ${record.workOrderNum} 已执行同意退款，但无法还原其占用数量：${consumed.error}`,
+      };
     }
-    ids.forEach(id => includedIds.add(id));
-    distinctRecords.push(record);
+    for (const item of consumed.items) {
+      const existing = historicalConsumedBySpec.get(item.specCode);
+      if (existing) existing.qty += item.qty;
+      else historicalConsumedBySpec.set(item.specCode, { ...item });
+    }
   }
 
-  if (!distinctRecords.length) return { mode: 'same_suborders_only', ignoredWorkOrderNums };
-
-  const workOrderNums = [currentNum, ...distinctRecords.map(record => record.workOrderNum)].filter(Boolean);
-  const grouped = new Map();
-  for (const record of [{ workOrderNum: currentNum || '当前工单', collectedData: currentCollectedData }, ...distinctRecords]) {
-    const expected = expectedItemsOf(record.collectedData, record.workOrderNum);
+  const currentExpectedBySpec = new Map();
+  const currentGroup = [
+    { workOrderNum: currentNum || '当前工单', collectedData: currentCollectedData },
+    ...currentRecords,
+  ];
+  for (const record of currentGroup) {
+    const expected = expectedItemsOf(record.collectedData, record.workOrderNum, countedGiftIds);
     if (expected.error) return { mode: 'incomplete', reason: expected.error };
     for (const item of expected.items) {
-      const existing = grouped.get(item.specCode);
+      const existing = currentExpectedBySpec.get(item.specCode);
       if (existing) existing.qty += item.qty;
-      else grouped.set(item.specCode, { ...item });
+      else currentExpectedBySpec.set(item.specCode, { ...item });
     }
   }
 
   const result = {
-    mode: 'distinct_suborders',
-    workOrderNums,
-    expectedItems: [...grouped.values()],
+    mode: 'combined_applications',
+    workOrderNums: currentGroup.map(record => record.workOrderNum).filter(Boolean),
+    expectedItems: [...currentExpectedBySpec.values()],
   };
-  if (ignoredWorkOrderNums.length) result.ignoredWorkOrderNums = ignoredWorkOrderNums;
+  if (historicalWorkOrders.length) {
+    result.historicalConsumedItems = [...historicalConsumedBySpec.values()];
+    result.historicalWorkOrders = historicalWorkOrders;
+  }
   return result;
 }
 

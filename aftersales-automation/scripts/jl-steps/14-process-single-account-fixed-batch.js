@@ -447,13 +447,6 @@ async function processOpenedDetail(context, dependencies) {
       sharedReturnContext
     );
     const batchWorkOrderNums = sharedReturnContext && sharedReturnContext.batchWorkOrderNums;
-    if (collectedData.sharedReturnGroup && batchWorkOrderNums instanceof Set &&
-        (collectedData.sharedReturnGroup.ignoredWorkOrderNums || []).some(num => batchWorkOrderNums.has(String(num)))) {
-      collectedData.sharedReturnGroup = {
-        mode: 'incomplete',
-        reason: '相同子订单的关联工单同时处于本批次待处理状态，无法按历史重新申请忽略，需人工确认有效工单',
-      };
-    }
     const missingWorkOrderNums = collectedData.sharedReturnGroup &&
       Array.isArray(collectedData.sharedReturnGroup.missingWorkOrderNums)
       ? collectedData.sharedReturnGroup.missingWorkOrderNums.map(String)
@@ -1003,21 +996,26 @@ function resolveSharedReturnGroupForBatch(
     sharedReturnContext.collectedDataByWorkOrder instanceof Map
     ? sharedReturnContext.collectedDataByWorkOrder
     : null;
-  const usableHistorical = batchWorkOrderNums
-    ? (historicalSimulations || []).filter(record =>
-      !batchWorkOrderNums.has(String(record && record.workOrderNum || ''))
-    )
-    : (historicalSimulations || []);
-  const freshBatchRecords = collectedDataByWorkOrder
-    ? [...collectedDataByWorkOrder.entries()].map(([num, data]) => ({
-      workOrderNum: num,
-      collectedData: data,
-    }))
-    : [];
+  if (!batchWorkOrderNums || !collectedDataByWorkOrder) {
+    return {
+      mode: 'incomplete',
+      reason: '重复退货单关联组缺少本轮固定批次采集上下文，禁止使用历史 simulation 推断当前应退数量',
+    };
+  }
+
+  const freshBatchRecords = [...collectedDataByWorkOrder.entries()].map(([num, data]) => ({
+    workOrderNum: num,
+    collectedData: data,
+  }));
+  const freshWorkOrderNums = new Set(freshBatchRecords.map(record => String(record.workOrderNum)));
   return resolveSharedReturnGroup(
     collectedData,
-    [...usableHistorical, ...freshBatchRecords],
-    workOrderNum
+    [...(historicalSimulations || []), ...freshBatchRecords],
+    workOrderNum,
+    {
+      activeWorkOrderNums: batchWorkOrderNums,
+      freshWorkOrderNums,
+    }
   );
 }
 

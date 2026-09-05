@@ -66,7 +66,7 @@
 
 `returnTrackingMultiUse` 和 `returnTrackingUsedBy` 只来自平台详情提示，禁止通过扫描历史相同退货单号自行补充。关联号优先读取 Vue 物流结构中的 `logisticsUsedWorkOrderNumList`，缺失时读取「多次使用」按钮所引用悬浮层的 `textContent`；`document.body.innerText` 只用于确认页面出现了“多次使用”，不能作为关联号来源。
 
-生产推理会在采集后生成顶层 `sharedReturnGroup`：相同子订单标记为重复申请；不同子订单保存合并后的逐规格应退明细。关联工单命中当前固定批次但尚未采集时，当前工单先进入批次内延迟推理，并立即为当前工单及尚未采集的同批关联工单写入不可执行的安全占位结果，覆盖可能残留的旧 approve；待关联组采集齐后再回算。当前批次的组成员只认本轮新采集数据，A→B 的平台关联会反向约束本批 B，并沿关联链遍历完整组；仅当关联工单不在当前批次且系统没有完整记录，或批次结束仍缺少可信记录时，才标记为 `incomplete` 并转人工。
+生产推理会在采集后生成顶层 `sharedReturnGroup`，其业务定义必须服从 `INDEX §3.4.1`。当前模式为 `combined_applications`：`workOrderNums` 只列本轮当前有效关联工单，主商品按每张工单自己的 `afterSaleNum` 累计；`expectedItems` 是本轮当前申请的逐规格应退数量，主子订单号相同也不去重，赠品按 `giftSubBizOrderId` 去重。历史核查仅在平台当前详情明确 `returnTrackingMultiUse=true` 且给出 `returnTrackingUsedBy` 时启用，并且只按平台点名的工单号查询：本轮 48 小时固定批次成员必须使用本轮新采集，尚未采集则返回 `missingWorkOrderNums` 延迟；不在本轮批次的关联号才查历史 simulation。历史记录只有 `decision.action=approve` 且存在 `executedAt` 才写入 `historicalConsumedItems` 并在 `historicalWorkOrders[].consumesReturnQty=true`，表示已经成功退款占用的退货实物；其他历史动作占用为 0。推理使用 `ERP 当前实收 - historicalConsumedItems` 与 `expectedItems` 比较。平台点名的关联工单若本轮 48 小时采集与历史记录都不存在，则 `sharedReturnGroup.mode=incomplete`，reason 必须显示缺失工单号并说明可能为历史记录缺失或特殊重复申请，禁止猜测。赠品去重跨历史已退款占用与本轮当前申请共同生效。
 
 不同子订单合并核验复用严格退回证明：所有「卖家已收到退货」行必须有唯一 `erpOrderId`，`tracking` 必须与当前工单一致，`returnQty` 必须等于本行商品明细的 `qtyGood + qtyBad` 合计。任一条件不满足都不得用这些行凑综合总数。
 

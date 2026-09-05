@@ -51,11 +51,11 @@ const BRANCHES = Object.freeze({
     automationStatus: 'manual_only',
   },
   'refund_return.shared.exact.approve': {
-    label: '退货退款 / 不同子订单共用退货单 / 精确退回 / 同意退款',
+    label: '退货退款 / 共用退货单 / 扣除历史占用后精确退回 / 同意退款',
     automationStatus: 'candidate',
   },
   'refund_return.shared.excess.approve': {
-    label: '退货退款 / 不同子订单共用退货单 / 真实多退 / 同意退款',
+    label: '退货退款 / 共用退货单 / 扣除历史占用后真实多退 / 同意退款',
     automationStatus: 'candidate',
   },
   'refund_return.shared.damaged.manual': {
@@ -251,7 +251,9 @@ const RULE_BRANCHES = Object.freeze({
   '全部子订单 attr1 mismatch → 上报': 'refund_return.product_match_missing.manual',
   '共用退货单含次品→上报人工': 'refund_return.shared.damaged.manual',
   '共用退货单逐规格不足→上报人工': 'refund_return.shared.short.manual',
+  '扣除历史已成功退款占用后，本次逐规格数量不足→上报人工': 'refund_return.shared.short.manual',
   '共用退货单入库行完整性不足→上报人工': 'refund_return.shared.incomplete.manual',
+  '历史已退款占用超过当前可证明入库数量→上报人工': 'refund_return.shared.incomplete.manual',
   '超售后期无理由退货→拒绝': 'refund_return.no_tracking.overdue.reject',
 });
 
@@ -259,6 +261,7 @@ const REGISTERED_RULE_SUMMARIES = new Set([
   ...Object.keys(RULE_BRANCHES),
   '逐商品对比通过→同意退款',
   '不同子订单共用退货单，合并逐规格核对通过→同意退款',
+  '平台明确提示共用退货单；当前工单合并并扣除历史已成功退款占用后核对通过→同意退款',
   '退货异常→上报人工',
 ]);
 
@@ -287,7 +290,8 @@ function classifyRule(decision, collectedData) {
     return { branchId: proofBranches[proof.outcome] || 'refund_return.received.incomplete.manual', proof };
   }
 
-  if (summaries.includes('不同子订单共用退货单，合并逐规格核对通过→同意退款')) {
+  if (summaries.includes('不同子订单共用退货单，合并逐规格核对通过→同意退款') ||
+      summaries.includes('平台明确提示共用退货单；当前工单合并并扣除历史已成功退款占用后核对通过→同意退款')) {
     return { branchId: hasExcess(decision)
       ? 'refund_return.shared.excess.approve'
       : 'refund_return.shared.exact.approve' };

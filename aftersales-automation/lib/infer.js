@@ -1023,10 +1023,16 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       s({ type: 'branch', text: `上报 → ${sharedReturnGroup.reason}` });
       return fin(escalate(sharedReturnGroup.reason));
     }
-    if (sharedReturnGroup.mode === 'same_suborders_only') {
-      s({ type: 'read', label: '重复退货单处理', value: '关联工单为相同子订单的重复申请，只核对当前工单' });
-    } else if (sharedReturnGroup.mode === 'distinct_suborders') {
-      s({ type: 'read', label: '重复退货单处理', value: '关联工单包含不同子订单，合并应退商品后核对' });
+    if (sharedReturnGroup.mode === 'combined_applications') {
+      s({ type: 'read', label: '重复退货单处理', value: '当前48小时关联工单合并核对；历史关联只用于扣除已经成功退款占用的退货数量' });
+      for (const history of sharedReturnGroup.historicalWorkOrders || []) {
+        const status = history.consumesReturnQty
+          ? '历史已执行同意退款，本次需扣除其已占用退货数量'
+          : history.action === 'approve'
+            ? '历史曾建议同意但没有执行记录，不占用退货数量'
+            : `历史动作${history.action || '未知'}，未执行同意退款，不占用退货数量`;
+        s({ type: 'read', label: `历史关联工单 ${history.workOrderNum}`, value: status });
+      }
     } else {
       s({ type: 'branch', text: '上报 → 重复退货单关联结果无法识别' });
       return fin(escalate('重复退货单关联结果无法识别，需人工核对'));
@@ -1141,8 +1147,8 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
     issues.push({ type: 'qtyBad', message: `退货含次品：${badDesc}` });
   }
 
-  // 不同子订单共用同一退货单：按平台关联到的工单记录合并逐规格核对
-  if (sharedReturnGroup && sharedReturnGroup.mode === 'distinct_suborders') {
+  // 当前有效工单共用同一退货单：主品逐工单累计，赠品按赠品子订单去重后逐规格核对
+  if (sharedReturnGroup && sharedReturnGroup.mode === 'combined_applications') {
     const receivedRowProof = proveReturnItems(cd);
     if (receivedRowProof.missingFacts.length > 0) {
       return fin(escalate(
@@ -1154,18 +1160,30 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       ));
     }
     const expectedItems = sharedReturnGroup.expectedItems || [];
+    const historicalConsumedItems = sharedReturnGroup.historicalConsumedItems || [];
     const expectedBySpec = new Map();
+    const consumedBySpec = new Map();
     for (const item of expectedItems) {
       const specCode = String(item.specCode || '').trim();
       const qty = Number(item.qty);
       if (!specCode || !Number.isFinite(qty) || qty <= 0) {
-        return fin(escalate('共用退货单的应退商品记录不完整，需人工核对'));
+        return fin(escalate('共用退货单的当前应退商品记录不完整，需人工核对'));
       }
       const existing = expectedBySpec.get(specCode);
       if (existing) existing.qty += qty;
       else expectedBySpec.set(specCode, { specCode, name: item.name || specCode, qty });
     }
-    if (!expectedBySpec.size) return fin(escalate('共用退货单没有可核对的应退商品记录'));
+    if (!expectedBySpec.size) return fin(escalate('共用退货单没有可核对的当前应退商品记录'));
+    for (const item of historicalConsumedItems) {
+      const specCode = String(item.specCode || '').trim();
+      const qty = Number(item.qty);
+      if (!specCode || !Number.isFinite(qty) || qty <= 0) {
+        return fin(escalate('共用退货单的历史退款占用记录不完整，需人工核对'));
+      }
+      const existing = consumedBySpec.get(specCode);
+      if (existing) existing.qty += qty;
+      else consumedBySpec.set(specCode, { specCode, name: item.name || specCode, qty });
+    }
 
     const receivedBySpec = new Map();
     const missingSpecItems = [];
@@ -1196,29 +1214,53 @@ function inferRefundReturn({ cd, ticket, queueItem, s, fin }) {
       }));
     }
 
+    const invalidHistoricalOccupancy = [];
+    for (const consumed of consumedBySpec.values()) {
+      const received = receivedBySpec.get(consumed.specCode);
+      const actual = received ? received.qtyGood : 0;
+      if (actual < consumed.qty) {
+        invalidHistoricalOccupancy.push(`${consumed.name}（ERP现有${actual}件，历史已退款占用${consumed.qty}件）`);
+      }
+    }
+    if (invalidHistoricalOccupancy.length) {
+      return fin(escalate(`共用退货单历史退款占用与当前ERP入库矛盾：${invalidHistoricalOccupancy.join('、')}`, {
+        confidence: 'high',
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '历史已退款占用超过当前可证明入库数量→上报人工' }],
+      }));
+    }
+
     const shortages = [];
     for (const expected of expectedBySpec.values()) {
       const received = receivedBySpec.get(expected.specCode);
       const actual = received ? received.qtyGood : 0;
-      if (actual < expected.qty) shortages.push(`${expected.name}（退了${actual}件，应退${expected.qty}件）`);
+      const consumed = consumedBySpec.get(expected.specCode);
+      const occupied = consumed ? consumed.qty : 0;
+      const available = Math.max(0, actual - occupied);
+      if (available < expected.qty) {
+        shortages.push(
+          `${expected.name}（本次可用${available}件，应退${expected.qty}件${occupied ? `；历史已退款占用${occupied}件` : ''}）`
+        );
+      }
     }
     if (shortages.length) {
-      return fin(escalate(`共用退货单退货数量不足：${shortages.join('、')}`, {
+      return fin(escalate(`共用退货单可用于本次退款的退货数量不足：${shortages.join('、')}`, {
         confidence: 'high',
-        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '共用退货单逐规格不足→上报人工' }],
+        rulesApplied: [{ doc: 'flow-5.1', section: 'Step4', summary: '扣除历史已成功退款占用后，本次逐规格数量不足→上报人工' }],
       }));
     }
 
     const extras = [];
     for (const received of receivedBySpec.values()) {
       const expected = expectedBySpec.get(received.specCode);
-      const extraQty = received.qtyGood - (expected ? expected.qty : 0);
+      const consumed = consumedBySpec.get(received.specCode);
+      const extraQty = received.qtyGood - (consumed ? consumed.qty : 0) - (expected ? expected.qty : 0);
       if (extraQty > 0) extras.push(`${received.name}多${extraQty}件`);
     }
     const summary = [...expectedBySpec.values()].map(item => `${item.name}×${item.qty}`).join('、');
+    const consumedSummary = [...consumedBySpec.values()].map(item => `${item.name}×${item.qty}`).join('、');
     const decision = approve(
-      `共用退货单逐规格核对通过：${summary}${extras.length ? `；确认多退：${extras.join('、')}` : ''}`,
-      [{ doc: 'flow-5.1', section: 'Step4', summary: '不同子订单共用退货单，合并逐规格核对通过→同意退款' }]
+      `共用退货单逐规格核对通过：${summary}${consumedSummary ? `；历史已退款占用：${consumedSummary}` : ''}${extras.length ? `；确认多退：${extras.join('、')}` : ''}`,
+      [{ doc: 'flow-5.1', section: 'Step4', summary: '平台明确提示共用退货单；当前工单合并并扣除历史已成功退款占用后核对通过→同意退款' }]
     );
     decision.requiresHumanReview = true;
     decision.autoExecutionBlocked = true;
