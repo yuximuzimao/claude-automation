@@ -3753,7 +3753,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：先对西莱图斯先知使用混乱魔精，再击杀。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -12785,7 +12785,7 @@
         ],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：三个首领分别在对应图腾附近触发；每个首领只需击杀一次，再由五号依次拾取各自的宝藏，不用逐号重打。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -12793,11 +12793,11 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 6.5,
-        "basis": "manual_pre_route:three_jinalai_leader_treasure_subtargets",
         "range_minutes": [
-          4.0,
-          11.0
-        ]
+          4,
+          11
+        ],
+        "basis": "manual_pre_route:three_bosses_once_five_characters_sequential_treasure_loot"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true,
@@ -13281,7 +13281,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：分别点击蓝、绿、紫、红四口大锅，完成破坏。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -13289,11 +13289,11 @@
       "intrinsic_service_time": {
         "status": "estimated",
         "minutes": 3.5,
-        "basis": "manual_pre_route:four_fixed_jinalai_cauldron_interactions",
         "range_minutes": [
-          2.0,
-          6.0
-        ]
+          2,
+          6
+        ],
+        "basis": "manual_pre_route:four_shared_cauldron_interactions_with_local_positioning"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true,
@@ -14251,7 +14251,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：杀死被诅咒的哈克娅后裔后，由主控对尸体使用哈克娅的胡须。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -14510,7 +14510,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -14955,7 +14955,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -15160,7 +15160,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：直接攻击并摧毁元素裂隙，无须任务道具。裂隙将被打掉时会刷出冻土元素，击杀后各号分别拾取《冻土精华》。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -19198,15 +19198,19 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：在赫布达卡杀死巨魔，先拾取尸体，再选中尸体使用埃霍奈的小刀；由主控累计拆下10份头饰即可。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 6.6,
-        "basis": "mixed_objective_model"
+        "minutes": 5.166666666666667,
+        "range_minutes": [
+          4,
+          8
+        ],
+        "basis": "manual_pre_route:ten_shared_kills_loot_then_single_controller_knife_use"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true,
@@ -19752,7 +19756,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：点击赫布达卡建筑坡道底部的大鼓（约64，52），等赫布金骑蝙蝠下来后击杀。可用任务物“蝙蝠网”困住落地的蝙蝠，减少同时承伤；用网不是完成条件。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -20169,20 +20173,25 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：直接到奎丝鲁恩祭坛的先知附近（约75.8，58.6），靠近后触发完成，再回哈克娅交付；不必乘坐她的子嗣。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
+        "minutes": 1.92,
+        "range_minutes": [
+          1.5,
+          3.5
+        ],
+        "basis": "manual_pre_route:local_round_trip_harkoa_quetzlun_proximity_scouting_no_combat"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true,
       "route_mechanism_codes": [
-        "harkoa_scripted_ride_to_quetzlun"
+        "proximity_scouting_credit",
+        "optional_harkoa_scout_ride"
       ]
     },
     {
@@ -20402,7 +20411,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -20812,15 +20821,19 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：把奎丝鲁恩崇拜者或蛇灵狂暴者拉到灵魂之泉旁边再击杀；离泉太远不计数，先看一次进度跳字再继续。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 7.8,
-        "basis": "mixed_objective_model"
+        "minutes": 3.0,
+        "range_minutes": [
+          3,
+          6
+        ],
+        "basis": "manual_pre_route:twelve_shared_kills_at_soul_font_dragging_uncertainty"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true,
@@ -21355,7 +21368,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -21925,7 +21938,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：由主控对三名高阶祭司分别使用奎丝鲁恩妖术棒，再击杀；不要先杀后用。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -22851,7 +22864,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "不共享：",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -30474,7 +30487,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "主控正面接怪，其余角色站侧后方；每场五号都接好任务再开打。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -30668,7 +30681,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "有近身持续伤害和击退；血线下降时开减伤，主控被击退后及时接稳仇恨。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -30946,7 +30959,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "随机出现风、火、土、水之一的元素领主；主控接住元素小怪，集中输出首领，避开土元素落石。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -31164,7 +31177,7 @@
         ],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "会招来企鹅和宠物海狮；主控用群攻接住小怪，继续集中打海象人。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -31357,7 +31370,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "战斗中持续叠加伤害，后段狂暴时攻速提高；集中输出，把减伤和应急治疗留给后半段。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -31599,7 +31612,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "最后一个Boss下象后，可以由一名队员骑上留下的猛犸象（大象），用载具技能协助坦怪和输出。Boss旋转攻击时拉开，结束后再贴近。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []
@@ -32334,7 +32347,7 @@
         "other_reward_items": [],
         "direct_money_status": "not_yet_globally_audited"
       },
-      "route_mechanism_note": null,
+      "route_mechanism_note": "共享：脱战后对冰霜豹、冰爪熊使用图基尼的吹管，等动物睡倒，再右键选择掀尾巴检查。雌性计数，雄性会攻击；各找到3只雌性即可，无须护送回营地。",
       "eligibility": {
         "status": "eligible_first_run",
         "reasons": []

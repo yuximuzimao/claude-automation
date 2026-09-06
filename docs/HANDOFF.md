@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-06
+更新时间：2026-09-07
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
@@ -8,6 +8,8 @@
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
 
 LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 核对基线一致。`/api/save` 使用 ETag/If-Match 拒绝旧标签页整文件覆盖，428/409/200 路径均已在线验证。
+
+魔兽祖达克：2026-09-07历程已同步到步骤20接取结束，本轮共享/攻略/炉石修订已完成，下一步从《猛犸的复仇》继续。唯一恢复点见 `wow-quest-route/docs/verified-routes/CURRENT.md`；此次没有修改其它地图路线。
 
 ## 系统级配置（Codex 启动时注意）
 

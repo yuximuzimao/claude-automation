@@ -1,12 +1,12 @@
 {
   "source_scope": "account-level QuestieConfig.char latest journey entry",
-  "source_sha256": "6886715a1eb1f8193224050338257cf0e8d6e93d5f264c69e0cdfa9d915f1b95",
+  "source_sha256": "db2fe7d60bb8317ca5c94878c6f1db9a7940275ba12bafc9882c0eef4859247e",
   "profile": "PALADIN_BLOODELF_CURRENT",
-  "total_events": 2936,
-  "quest_events": 2862,
+  "total_events": 3020,
+  "quest_events": 2946,
   "level_events": 74,
   "earliest_timestamp": 1785438261,
-  "latest_timestamp": 1788455389,
+  "latest_timestamp": 1788715829,
   "min_level": 6,
   "max_level": 80,
   "complete_quest_ids": [
@@ -827,6 +827,8 @@
     12508,
     12510,
     12512,
+    12514,
+    12516,
     12520,
     12521,
     12522,
@@ -834,6 +836,7 @@
     12524,
     12525,
     12526,
+    12527,
     12528,
     12529,
     12530,
@@ -883,8 +886,10 @@
     12589,
     12592,
     12595,
+    12596,
     12597,
     12598,
+    12599,
     12603,
     12605,
     12606,
@@ -892,27 +897,53 @@
     12609,
     12610,
     12614,
+    12615,
+    12622,
+    12623,
     12624,
+    12627,
+    12628,
     12629,
     12630,
     12631,
+    12632,
     12634,
+    12635,
     12637,
+    12639,
+    12640,
+    12642,
     12644,
     12645,
+    12646,
+    12647,
     12648,
+    12650,
     12652,
+    12653,
     12654,
+    12655,
     12658,
+    12659,
     12661,
+    12662,
     12664,
+    12665,
+    12666,
+    12667,
+    12668,
     12669,
     12671,
+    12672,
     12673,
+    12674,
+    12675,
     12676,
     12677,
     12681,
     12683,
+    12684,
+    12685,
     12686,
     12688,
     12690,
@@ -1007,11 +1038,17 @@
     12928,
     12930,
     12931,
+    12932,
+    12933,
+    12934,
+    12935,
+    12936,
     12937,
     12938,
     12939,
     12942,
     12943,
+    12948,
     12949,
     12951,
     12953,
@@ -1027,6 +1064,7 @@
     12970,
     12971,
     12972,
+    12974,
     12975,
     12976,
     12978,
@@ -1226,6 +1264,7 @@
     13422,
     13423,
     13424,
+    13549,
     13668,
     13676,
     13677,
@@ -21790,6 +21829,594 @@
       "quest_id": 12567,
       "level": 80,
       "timestamp": 1788455389
+    },
+    {
+      "index": 2937,
+      "event": "Accept",
+      "quest_id": 12597,
+      "level": 80,
+      "timestamp": 1788698593
+    },
+    {
+      "index": 2938,
+      "event": "Complete",
+      "quest_id": 12597,
+      "level": 80,
+      "timestamp": 1788698914
+    },
+    {
+      "index": 2939,
+      "event": "Complete",
+      "quest_id": 12599,
+      "level": 80,
+      "timestamp": 1788701414
+    },
+    {
+      "index": 2940,
+      "event": "Complete",
+      "quest_id": 12596,
+      "level": 80,
+      "timestamp": 1788701505
+    },
+    {
+      "index": 2941,
+      "event": "Complete",
+      "quest_id": 12514,
+      "level": 80,
+      "timestamp": 1788701534
+    },
+    {
+      "index": 2942,
+      "event": "Accept",
+      "quest_id": 12516,
+      "level": 80,
+      "timestamp": 1788701535
+    },
+    {
+      "index": 2943,
+      "event": "Complete",
+      "quest_id": 12527,
+      "level": 80,
+      "timestamp": 1788701644
+    },
+    {
+      "index": 2944,
+      "event": "Accept",
+      "quest_id": 12541,
+      "level": 80,
+      "timestamp": 1788701644
+    },
+    {
+      "index": 2945,
+      "event": "Abandon",
+      "quest_id": 12541,
+      "level": 80,
+      "timestamp": 1788701650
+    },
+    {
+      "index": 2946,
+      "event": "Complete",
+      "quest_id": 12516,
+      "level": 80,
+      "timestamp": 1788701804
+    },
+    {
+      "index": 2947,
+      "event": "Accept",
+      "quest_id": 12623,
+      "level": 80,
+      "timestamp": 1788701806
+    },
+    {
+      "index": 2948,
+      "event": "Complete",
+      "quest_id": 12974,
+      "level": 80,
+      "timestamp": 1788701896
+    },
+    {
+      "index": 2949,
+      "event": "Accept",
+      "quest_id": 12932,
+      "level": 80,
+      "timestamp": 1788701948
+    },
+    {
+      "index": 2950,
+      "event": "Complete",
+      "quest_id": 12932,
+      "level": 80,
+      "timestamp": 1788702043
+    },
+    {
+      "index": 2951,
+      "event": "Accept",
+      "quest_id": 12933,
+      "level": 80,
+      "timestamp": 1788702045
+    },
+    {
+      "index": 2952,
+      "event": "Abandon",
+      "quest_id": 12933,
+      "level": 80,
+      "timestamp": 1788702062
+    },
+    {
+      "index": 2953,
+      "event": "Accept",
+      "quest_id": 12933,
+      "level": 80,
+      "timestamp": 1788702119
+    },
+    {
+      "index": 2954,
+      "event": "Complete",
+      "quest_id": 12933,
+      "level": 80,
+      "timestamp": 1788702238
+    },
+    {
+      "index": 2955,
+      "event": "Accept",
+      "quest_id": 12934,
+      "level": 80,
+      "timestamp": 1788702261
+    },
+    {
+      "index": 2956,
+      "event": "Complete",
+      "quest_id": 12934,
+      "level": 80,
+      "timestamp": 1788702362
+    },
+    {
+      "index": 2957,
+      "event": "Accept",
+      "quest_id": 12935,
+      "level": 80,
+      "timestamp": 1788702386
+    },
+    {
+      "index": 2958,
+      "event": "Complete",
+      "quest_id": 12935,
+      "level": 80,
+      "timestamp": 1788702516
+    },
+    {
+      "index": 2959,
+      "event": "Accept",
+      "quest_id": 12936,
+      "level": 80,
+      "timestamp": 1788702539
+    },
+    {
+      "index": 2960,
+      "event": "Complete",
+      "quest_id": 12936,
+      "level": 80,
+      "timestamp": 1788702665
+    },
+    {
+      "index": 2961,
+      "event": "Accept",
+      "quest_id": 12948,
+      "level": 80,
+      "timestamp": 1788702692
+    },
+    {
+      "index": 2962,
+      "event": "Complete",
+      "quest_id": 12948,
+      "level": 80,
+      "timestamp": 1788703004
+    },
+    {
+      "index": 2963,
+      "event": "Accept",
+      "quest_id": 13099,
+      "level": 80,
+      "timestamp": 1788703630
+    },
+    {
+      "index": 2964,
+      "event": "Complete",
+      "quest_id": 12623,
+      "level": 80,
+      "timestamp": 1788703645
+    },
+    {
+      "index": 2965,
+      "event": "Accept",
+      "quest_id": 12627,
+      "level": 80,
+      "timestamp": 1788703645
+    },
+    {
+      "index": 2966,
+      "event": "Accept",
+      "quest_id": 12615,
+      "level": 80,
+      "timestamp": 1788703646
+    },
+    {
+      "index": 2967,
+      "event": "Complete",
+      "quest_id": 12615,
+      "level": 80,
+      "timestamp": 1788703675
+    },
+    {
+      "index": 2968,
+      "event": "Accept",
+      "quest_id": 12622,
+      "level": 80,
+      "timestamp": 1788703708
+    },
+    {
+      "index": 2969,
+      "event": "Complete",
+      "quest_id": 12627,
+      "level": 80,
+      "timestamp": 1788705105
+    },
+    {
+      "index": 2970,
+      "event": "Accept",
+      "quest_id": 12628,
+      "level": 80,
+      "timestamp": 1788705105
+    },
+    {
+      "index": 2971,
+      "event": "Accept",
+      "quest_id": 12635,
+      "level": 80,
+      "timestamp": 1788705132
+    },
+    {
+      "index": 2972,
+      "event": "Complete",
+      "quest_id": 12622,
+      "level": 80,
+      "timestamp": 1788705148
+    },
+    {
+      "index": 2973,
+      "event": "Accept",
+      "quest_id": 12640,
+      "level": 80,
+      "timestamp": 1788705148
+    },
+    {
+      "index": 2974,
+      "event": "Accept",
+      "quest_id": 12639,
+      "level": 80,
+      "timestamp": 1788705175
+    },
+    {
+      "index": 2975,
+      "event": "Complete",
+      "quest_id": 12628,
+      "level": 80,
+      "timestamp": 1788705238
+    },
+    {
+      "index": 2976,
+      "event": "Accept",
+      "quest_id": 12632,
+      "level": 80,
+      "timestamp": 1788705239
+    },
+    {
+      "index": 2977,
+      "event": "Complete",
+      "quest_id": 12632,
+      "level": 80,
+      "timestamp": 1788706353
+    },
+    {
+      "index": 2978,
+      "event": "Accept",
+      "quest_id": 12642,
+      "level": 80,
+      "timestamp": 1788706354
+    },
+    {
+      "index": 2979,
+      "event": "Complete",
+      "quest_id": 12635,
+      "level": 80,
+      "timestamp": 1788706437
+    },
+    {
+      "index": 2980,
+      "event": "Accept",
+      "quest_id": 12650,
+      "level": 80,
+      "timestamp": 1788706438
+    },
+    {
+      "index": 2981,
+      "event": "Accept",
+      "quest_id": 13549,
+      "level": 80,
+      "timestamp": 1788706438
+    },
+    {
+      "index": 2982,
+      "event": "Accept",
+      "quest_id": 12655,
+      "level": 80,
+      "timestamp": 1788706466
+    },
+    {
+      "index": 2983,
+      "event": "Complete",
+      "quest_id": 12642,
+      "level": 80,
+      "timestamp": 1788707948
+    },
+    {
+      "index": 2984,
+      "event": "Accept",
+      "quest_id": 12646,
+      "level": 80,
+      "timestamp": 1788707949
+    },
+    {
+      "index": 2985,
+      "event": "Complete",
+      "quest_id": 12646,
+      "level": 80,
+      "timestamp": 1788708287
+    },
+    {
+      "index": 2986,
+      "event": "Accept",
+      "quest_id": 12647,
+      "level": 80,
+      "timestamp": 1788708287
+    },
+    {
+      "index": 2987,
+      "event": "Complete",
+      "quest_id": 12647,
+      "level": 80,
+      "timestamp": 1788708573
+    },
+    {
+      "index": 2988,
+      "event": "Accept",
+      "quest_id": 12653,
+      "level": 80,
+      "timestamp": 1788708573
+    },
+    {
+      "index": 2989,
+      "event": "Complete",
+      "quest_id": 12655,
+      "level": 80,
+      "timestamp": 1788709426
+    },
+    {
+      "index": 2990,
+      "event": "Complete",
+      "quest_id": 12650,
+      "level": 80,
+      "timestamp": 1788709557
+    },
+    {
+      "index": 2991,
+      "event": "Complete",
+      "quest_id": 12639,
+      "level": 80,
+      "timestamp": 1788709600
+    },
+    {
+      "index": 2992,
+      "event": "Complete",
+      "quest_id": 12640,
+      "level": 80,
+      "timestamp": 1788709623
+    },
+    {
+      "index": 2993,
+      "event": "Accept",
+      "quest_id": 12659,
+      "level": 80,
+      "timestamp": 1788709624
+    },
+    {
+      "index": 2994,
+      "event": "Accept",
+      "quest_id": 12662,
+      "level": 80,
+      "timestamp": 1788709651
+    },
+    {
+      "index": 2995,
+      "event": "Complete",
+      "quest_id": 12662,
+      "level": 80,
+      "timestamp": 1788710053
+    },
+    {
+      "index": 2996,
+      "event": "Complete",
+      "quest_id": 12659,
+      "level": 80,
+      "timestamp": 1788710084
+    },
+    {
+      "index": 2997,
+      "event": "Complete",
+      "quest_id": 12653,
+      "level": 80,
+      "timestamp": 1788710161
+    },
+    {
+      "index": 2998,
+      "event": "Accept",
+      "quest_id": 12665,
+      "level": 80,
+      "timestamp": 1788710161
+    },
+    {
+      "index": 2999,
+      "event": "Complete",
+      "quest_id": 12665,
+      "level": 80,
+      "timestamp": 1788710352
+    },
+    {
+      "index": 3000,
+      "event": "Accept",
+      "quest_id": 12666,
+      "level": 80,
+      "timestamp": 1788710353
+    },
+    {
+      "index": 3001,
+      "event": "Complete",
+      "quest_id": 12666,
+      "level": 80,
+      "timestamp": 1788712158
+    },
+    {
+      "index": 3002,
+      "event": "Accept",
+      "quest_id": 12667,
+      "level": 80,
+      "timestamp": 1788712159
+    },
+    {
+      "index": 3003,
+      "event": "Complete",
+      "quest_id": 12667,
+      "level": 80,
+      "timestamp": 1788712275
+    },
+    {
+      "index": 3004,
+      "event": "Accept",
+      "quest_id": 12672,
+      "level": 80,
+      "timestamp": 1788712276
+    },
+    {
+      "index": 3005,
+      "event": "Complete",
+      "quest_id": 12672,
+      "level": 80,
+      "timestamp": 1788713191
+    },
+    {
+      "index": 3006,
+      "event": "Accept",
+      "quest_id": 12668,
+      "level": 80,
+      "timestamp": 1788713192
+    },
+    {
+      "index": 3007,
+      "event": "Complete",
+      "quest_id": 12668,
+      "level": 80,
+      "timestamp": 1788713525
+    },
+    {
+      "index": 3008,
+      "event": "Accept",
+      "quest_id": 12674,
+      "level": 80,
+      "timestamp": 1788713525
+    },
+    {
+      "index": 3009,
+      "event": "Complete",
+      "quest_id": 12674,
+      "level": 80,
+      "timestamp": 1788713820
+    },
+    {
+      "index": 3010,
+      "event": "Accept",
+      "quest_id": 12675,
+      "level": 80,
+      "timestamp": 1788713821
+    },
+    {
+      "index": 3011,
+      "event": "Complete",
+      "quest_id": 12675,
+      "level": 80,
+      "timestamp": 1788713924
+    },
+    {
+      "index": 3012,
+      "event": "Accept",
+      "quest_id": 12684,
+      "level": 80,
+      "timestamp": 1788713925
+    },
+    {
+      "index": 3013,
+      "event": "Complete",
+      "quest_id": 12684,
+      "level": 80,
+      "timestamp": 1788715143
+    },
+    {
+      "index": 3014,
+      "event": "Accept",
+      "quest_id": 12685,
+      "level": 80,
+      "timestamp": 1788715144
+    },
+    {
+      "index": 3015,
+      "event": "Complete",
+      "quest_id": 12685,
+      "level": 80,
+      "timestamp": 1788715396
+    },
+    {
+      "index": 3016,
+      "event": "Complete",
+      "quest_id": 13549,
+      "level": 80,
+      "timestamp": 1788715415
+    },
+    {
+      "index": 3017,
+      "event": "Accept",
+      "quest_id": 12709,
+      "level": 80,
+      "timestamp": 1788715417
+    },
+    {
+      "index": 3018,
+      "event": "Accept",
+      "quest_id": 12707,
+      "level": 80,
+      "timestamp": 1788715455
+    },
+    {
+      "index": 3019,
+      "event": "Accept",
+      "quest_id": 12708,
+      "level": 80,
+      "timestamp": 1788715500
+    },
+    {
+      "index": 3020,
+      "event": "Accept",
+      "quest_id": 12712,
+      "level": 80,
+      "timestamp": 1788715829
     }
   ]
 }

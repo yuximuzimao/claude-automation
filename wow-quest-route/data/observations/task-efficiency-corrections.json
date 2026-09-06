@@ -230,7 +230,14 @@
     {
       "recorded_at": "2026-08-27T02:15:00+08:00",
       "quest_id": 13213,
-      "related_quest_ids": [13214, 13215, 13216, 13217, 13218, 13219],
+      "related_quest_ids": [
+        13214,
+        13215,
+        13216,
+        13217,
+        13218,
+        13219
+      ],
       "scope": "combat_difficulty_chain_skip_candidate",
       "previous": "瓦哈拉斯七场挑战按连续链完整保留",
       "corrected": "首组完成13213；13214《堕落的英雄》勉强通过；13215《黑暗主宰西塔利克斯》未打过并停止继续。整条瓦哈拉斯系列暂时仍留在正式路线，但标记为后续高概率整链跳过候选。",
@@ -272,6 +279,51 @@
       "corrected": "标记为前半段65.07分钟联合野外块的主要耗时来源；其余《给索乌拉姆的祭品》《狩猎鳄鱼：试炼》《酿酒的材料》用户判断本身不长。当前没有独立Journey边界，不写伪精确单任务分钟数。",
       "reason": "用户首组实跑复盘明确判断肉排是该联合块耗时最长的任务。",
       "source": "用户2026-08-31索拉查首组实跑复盘 + Journey联合块"
+    },
+    {
+      "recorded_at": "2026-09-07T00:00:00+08:00",
+      "quest_id": 12665,
+      "scope": "zuldrak_live_mechanics_and_player_notes",
+      "previous": "备注将骑乘哈克娅子嗣写成必需脚本飞行；目标服务按命名击杀估算。",
+      "corrected": "直接接近奎丝鲁恩先知附近即可完成；骑乘为可选侦察方式。本次共享；估时改为局部往返加靠近触发。",
+      "reason": "祖达克首组实跑反馈；补齐会改变现场操作的机制，不调整任务集合或总体顺序。",
+      "source": "用户2026-09-07反馈；https://www.wowhead.com/wotlk/quest=12665"
+    },
+    {
+      "recorded_at": "2026-09-07T00:00:00+08:00",
+      "quest_id": 12659,
+      "scope": "zuldrak_live_mechanics_and_player_notes",
+      "previous": "执行备注为空，缺先拾取尸体再用小刀的顺序。",
+      "corrected": "主控杀死赫布达卡巨魔，先拾取尸体，再用埃霍奈的小刀；10次进度共享。",
+      "reason": "祖达克首组实跑反馈；补齐会改变现场操作的机制，不调整任务集合或总体顺序。",
+      "source": "用户2026-09-07反馈；https://www.wowhead.com/wotlk/quest=12659"
+    },
+    {
+      "recorded_at": "2026-09-07T00:00:00+08:00",
+      "quest_id": 12668,
+      "scope": "zuldrak_live_mechanics_and_player_notes",
+      "previous": "缺少灵魂之泉距离条件，服务模型按一般混合目标估算。",
+      "corrected": "在灵魂之泉近旁击杀12个目标才计数；进度共享，靠泉拉怪操作写入备注。",
+      "reason": "祖达克首组实跑反馈；补齐会改变现场操作的机制，不调整任务集合或总体顺序。",
+      "source": "用户2026-09-07反馈；https://www.wowhead.com/wotlk/quest=12668"
+    },
+    {
+      "recorded_at": "2026-09-07T00:00:00+08:00",
+      "quest_id": 12948,
+      "scope": "zuldrak_live_mechanics_and_player_notes",
+      "previous": "正式备注未保留最后Boss可骑大象技巧。",
+      "corrected": "Boss下象后可由队员骑留下的猛犸协助承伤/输出；旋转时拉开。本组80级实测打完比较轻松，保留攻略供复用。",
+      "reason": "祖达克首组实跑反馈；补齐会改变现场操作的机制，不调整任务集合或总体顺序。",
+      "source": "用户2026-09-07反馈；https://www.wowhead.com/wotlk/quest=12948"
+    },
+    {
+      "recorded_at": "2026-09-07T00:00:00+08:00",
+      "quest_id": 12622,
+      "scope": "zuldrak_live_mechanics_and_player_notes",
+      "previous": "仅提醒三个首领位置，没有说明五号拾取方式。",
+      "corrected": "每个首领只打一次，五号依次拾取各自宝藏；击杀与个人拾取分开记录。",
+      "reason": "祖达克首组实跑反馈；补齐会改变现场操作的机制，不调整任务集合或总体顺序。",
+      "source": "用户2026-09-07反馈；https://www.wowhead.com/wotlk/quest=12622"
     }
   ]
 }

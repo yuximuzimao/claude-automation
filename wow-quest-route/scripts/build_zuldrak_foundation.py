@@ -46,6 +46,7 @@ def main() -> None:
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8"))
     service_overrides = {int(qid): value for qid, value in (overrides.get("manual_service_minutes") or {}).items()}
     mechanism_codes = {int(qid): list(value) for qid, value in (overrides.get("mechanism_codes") or {}).items()}
+    mechanic_notes = {int(qid): value["note"] for qid, value in (overrides.get("verified_mechanic_notes") or {}).items()}
     all_tasks = {int(t["quest_id"]): t for t in universe["tasks"]}
     formal_ids = {int(q) for q in scope["formal_candidate_ids"]}
     tasks = []
@@ -62,6 +63,8 @@ def main() -> None:
                 "range_minutes": [float(x) for x in override.get("range", [])],
             }
         task["route_mechanism_codes"] = mechanism_codes.get(qid, [])
+        if qid in mechanic_notes:
+            task["route_mechanism_note"] = mechanic_notes[qid]
         tasks.append(task)
 
     dep_rows, hard_gaps = [], []

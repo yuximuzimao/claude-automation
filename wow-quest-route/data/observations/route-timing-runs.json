@@ -831,6 +831,97 @@
         ]
       },
       "status": "reliable_scoped_actual_steps_8_10_recorded"
+    },
+    {
+      "date": "2026-09-06",
+      "route_key": "zuldrak",
+      "run_kind": "first_group_live_after_painkiller_through_step20_accepts",
+      "time_precision": "mixed_journey_exact_start_user_minute_stop",
+      "effective_start_local": "2026-09-06T20:48:34+08:00",
+      "effective_end_local": "2026-09-07T01:31:00+08:00",
+      "actual_minutes": 282.4333,
+      "latest_journey_event_local": "2026-09-07T01:30:29+08:00",
+      "actual_to_latest_event_minutes": 281.9167,
+      "route_window": "用户先为一个角色补做上次漏接的止痛药，从交付后开始；经过步骤13余段、斗兽场、金亚莱、哈克娅/伦诺克/奎丝鲁恩链，到步骤20希姆托加四项任务接取完毕。用户01:31停止；不是完整地图实测。",
+      "excluded_before_start": "20:43:13接止痛药至20:48:34交付及其之前的单号补做，全部排除。",
+      "known_error_or_learning_sources": [
+        "接核实情况前整理背包数分钟，无法精确扣减。21:56:44交斗兽场冠军至22:07:10接核实情况共10分26秒还含交通，不能全算背包时间。",
+        "用户评价路线大体无问题、斗兽场打完比较轻松；首跑机制学习与五开操作成本仍未独立量化。"
+      ],
+      "clean_actual_minutes": null,
+      "journey_source": {
+        "event_count": 3020,
+        "source_sha256": "db2fe7d60bb8317ca5c94878c6f1db9a7940275ba12bafc9882c0eef4859247e",
+        "scope": "当前单一脱敏Journey；不外推五号状态完全一致。"
+      },
+      "same_endpoint_comparison": {
+        "route_window": "步骤14开始至步骤18末尾寻找风蛇女神接取；完整包含中间炉石返回，不受步骤17/18书签边界调整影响。",
+        "start_local": "2026-09-06T21:36:46+08:00",
+        "end_local": "2026-09-07T00:29:19+08:00",
+        "actual_minutes": 172.55,
+        "previous_clean_baseline_minutes": 93.1,
+        "previous_range_minutes": [
+          70.2,
+          116.3
+        ],
+        "clean_baseline_minutes": 92.0,
+        "overrun_minutes": 80.55,
+        "step_actuals_against_previous_route": [
+          {
+            "steps": [
+              14
+            ],
+            "start": "2026-09-06T21:36:46+08:00",
+            "end": "2026-09-06T21:48:36+08:00",
+            "actual_minutes": 11.8333,
+            "previous_clean_baseline_minutes": 11.2
+          },
+          {
+            "steps": [
+              15,
+              16
+            ],
+            "start": "2026-09-06T21:48:36+08:00",
+            "end": "2026-09-06T22:32:55+08:00",
+            "actual_minutes": 44.3167,
+            "previous_clean_baseline_minutes": 20.0,
+            "note": "本次希姆托加的祝福22:07:55提前交付，因此合并比较。含接核实情况前整理背包数分钟，具体时长未知。"
+          },
+          {
+            "steps": [
+              17
+            ],
+            "start": "2026-09-06T22:32:55+08:00",
+            "end": "2026-09-06T23:43:46+08:00",
+            "actual_minutes": 70.85,
+            "previous_clean_baseline_minutes": 37.3,
+            "note": "止于希姆鲁克的祝福交付；新版步骤17末尾炉石不属于该精确端点。"
+          },
+          {
+            "steps": [
+              18
+            ],
+            "start": "2026-09-06T23:43:46+08:00",
+            "end": "2026-09-07T00:29:19+08:00",
+            "actual_minutes": 45.55,
+            "previous_clean_baseline_minutes": 24.6,
+            "note": "起于希姆鲁克祝福交付，包含之后的返回希姆托加；与新版步骤18起点不同。"
+          }
+        ]
+      },
+      "partial_windows": [
+        {
+          "scope": "交止痛药后至步骤13结束；补做回归起点不等于完整步骤13",
+          "actual_minutes": 48.2
+        },
+        {
+          "scope": "步骤19和步骤20接取阶段至用户停止；Journey不记录炉石，不拆为精确完整步骤19",
+          "start_local": "2026-09-07T00:29:19+08:00",
+          "end_local": "2026-09-07T01:31:00+08:00",
+          "actual_minutes": 61.6833
+        }
+      ],
+      "status": "scoped_first_run_reference_bag_cleanup_unquantified"
     }
   ]
 }

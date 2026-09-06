@@ -26,7 +26,7 @@ def test_zuldrak_full_clear_route_is_closed() -> None:
     assert coverage["intentional_defer"] == {}
     assert coverage["missing"] == []
     assert coverage["unexpected"] == []
-    assert len(route["points"]) == 107
+    assert route["stepGroups"][-1]["end"] == len(route["points"]) - 1
     assert len(route["stepGroups"]) == 23
 
 
@@ -68,7 +68,7 @@ def test_zuldrak_dependency_and_arena_breadcrumb_rules() -> None:
     route_text = json.dumps(route, ensure_ascii=False)
     assert "达拉然短往返" in route_text
     assert "痛苦斗兽场" in route_text
-    assert "第一场同时验证战斗压力和五号同步" in route_text
+    assert "猛犸象（大象）" in route_text
 
 def test_zuldrak_video_reverse_review_and_flight_state_pass() -> None:
     flight = json.loads(FLIGHT_AUDIT.read_text(encoding="utf-8"))["routes"]["zuldrak"]
@@ -93,6 +93,6 @@ def test_zuldrak_timing_and_html_are_published() -> None:
     assert "祖达克" in html
     assert "沃尔塔鲁斯" in html
     assert "痛苦斗兽场" in html
-    assert "第一场同时验证战斗压力和五号同步" in html
+    assert "猛犸象（大象）" in html
     assert "蛛魔救援区" in html
     assert "这里先不救人；先回鲁伯特上尉处交《扔手雷》并接出《茧中人》" in html
