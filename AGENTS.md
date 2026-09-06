@@ -65,7 +65,7 @@
 - 完成工作后更新 `docs/HANDOFF.md`（如果做了实质性改动），确保 Claude Code 下次启动能接上。
 - `codex-plugin-cc` 适合做审查和救援：普通审查用 `/codex:review`，挑战设计和风险假设用 `/codex:adversarial-review`。
 - 审查和修复分阶段进行。审查阶段只报告问题；修复阶段再改代码。
-- `AGENTS.md` / `CLAUDE.md` / 项目 `SKILL.md` 是开工前的预防性入口；`neat-freak` 是阶段收尾兜底，必须全文审查当前活跃知识并反向审计项目是否偏离这些结构规范，包括职责混装、渐进式加载失效、重复权威、旧入口残留和Git忽略误伤。历史archive完整枚举但不默认全文重读，只检查archive索引、本轮有变更的历史文件和当前任务明确需要回溯的最近历史。`systematic-debugging` 和 `verification-before-completion` 用于 bug 和完成前验证；`pua` 只在反复失败、被动等待或用户明确触发时使用。
+- `AGENTS.md` / `CLAUDE.md` / 项目 `SKILL.md` 是开工前的预防性入口；`neat-freak` 是阶段收尾兜底，必须全文审查当前活跃知识并反向审计项目是否偏离这些结构规范，包括职责混装、渐进式加载失效、重复权威、旧入口残留和Git忽略误伤。历史archive完整枚举但不默认全文重读，只检查archive索引、本轮有变更的历史文件和当前任务明确需要回溯的最近历史。`systematic-debugging` 和 `verification-before-completion` 用于 bug 和完成前验证。
 
 ### Codex → Claude Code 协作收件箱
 
