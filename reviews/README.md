@@ -36,6 +36,7 @@
 - `weekly/2026-W33.md`
 - `weekly/2026-W34.md`
 - `weekly/2026-W35.md`
+- `weekly/2026-W36.md`
 
 ## 已有月回顾
 
