@@ -11,6 +11,8 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 魔兽祖达克：2026-09-07历程已同步到步骤20接取结束，本轮共享/攻略/炉石修订已完成，下一步从《猛犸的复仇》继续。唯一恢复点见 `wow-quest-route/docs/verified-routes/CURRENT.md`；此次没有修改其它地图路线。
 
+魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
+
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认按时间保留 8 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
