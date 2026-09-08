@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-07
+更新时间：2026-09-08
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
@@ -12,6 +12,8 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 魔兽祖达克：2026-09-07历程已同步到步骤20接取结束，本轮共享/攻略/炉石修订已完成，下一步从《猛犸的复仇》继续。唯一恢复点见 `wow-quest-route/docs/verified-routes/CURRENT.md`；此次没有修改其它地图路线。
 
 魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
+
+审单新品资料：2026-09-08 用户补充两款咖啡新版正装为7袋/盒、80盒/箱，与旧版12条分开；六款悦希新品单品尺寸已按原值保存。资料权威为 `order-review/data/packing-dimensions.json` 的 `pendingMappings`，悦希待补索引已同步引用。新版咖啡待商家编码及单盒尺寸，焕颜乳2.0仍待最终有效编码；悦希箱型适用范围未确认，现有计算器仅接受整数毫米，51.5/39.5不得截断。此次仅保存资料，未修改有效尺寸、旧咖啡规则、等体积白名单或ERP执行。
 
 ## 系统级配置（Codex 启动时注意）
 
