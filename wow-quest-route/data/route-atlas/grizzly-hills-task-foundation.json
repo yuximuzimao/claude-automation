@@ -6,9 +6,10 @@
   },
   "strategy": "first-run continuous outdoor full-clear baseline; structural exclusions only; no pre-run economic pruning",
   "entry_contract": {
-    "from_zone": "龙骨荒野",
+    "from_zone": "祖达克",
     "carried_in_quest_id": 12487,
     "carried_in_quest_name": "前往征服堡，自求多福吧！",
+    "carried_in_quest_origin": "龙骨荒野阶段已接取并长期保留",
     "carried_through_quest_ids": [
       12789,
       13242
@@ -1388,98 +1389,7 @@
       "note": "《休尼克的掩饰》需要1份煤块和5份面粉；两者都可在征服堡内向商人购买。Questie物品来源展开会把煤块的全世界掉落源带入route_zones，不能因此误判为副本任务。"
     }
   ],
-  "unknown_service_tasks": [
-    {
-      "quest_id": 11990,
-      "name": "幻象之瓶",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
-      }
-    },
-    {
-      "quest_id": 12007,
-      "name": "必要的牺牲",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
-      }
-    },
-    {
-      "quest_id": 12026,
-      "name": "破损的日记",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
-      }
-    },
-    {
-      "quest_id": 12058,
-      "name": "符文中的预言",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_objective_count"
-      }
-    },
-    {
-      "quest_id": 12099,
-      "name": "终获解救",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "unsupported_task_class:elite_or_boss_kill"
-      }
-    },
-    {
-      "quest_id": 12137,
-      "name": "冷静一下，伙计",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
-      }
-    },
-    {
-      "quest_id": 12165,
-      "name": "有趣的计划",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
-      }
-    },
-    {
-      "quest_id": 12197,
-      "name": "我们有能源",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
-      }
-    },
-    {
-      "quest_id": 12241,
-      "name": "摧毁树苗",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
-      }
-    },
-    {
-      "quest_id": 12279,
-      "name": "熊的美食",
-      "service": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
-      }
-    }
-  ],
+  "unknown_service_tasks": [],
   "tasks": [
     {
       "quest_id": 11982,
@@ -1499,6 +1409,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -1699,6 +1611,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -2119,6 +2033,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -2354,6 +2270,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -2583,6 +2501,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -2815,9 +2735,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
+        "status": "estimated",
+        "minutes": 6.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -2840,6 +2760,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -3073,6 +2995,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -3241,9 +3165,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
+        "status": "estimated",
+        "minutes": 4.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -3266,6 +3190,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -3413,9 +3339,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
+        "status": "estimated",
+        "minutes": 10.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -3438,6 +3364,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -3741,6 +3669,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -3909,6 +3839,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -4111,6 +4043,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -4403,9 +4337,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_objective_count"
+        "status": "estimated",
+        "minutes": 3.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -4428,6 +4362,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -4691,6 +4627,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -4927,6 +4865,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -5172,6 +5112,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -5331,6 +5273,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -5490,6 +5434,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -5658,8 +5604,8 @@
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 0.0,
-        "basis": "no_independent_objective_service_hub_time_separate"
+        "minutes": 4.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -5682,6 +5628,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -5956,6 +5904,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -6240,6 +6190,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -6462,9 +6414,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "unsupported_task_class:elite_or_boss_kill"
+        "status": "estimated",
+        "minutes": 4.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -6487,6 +6439,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -6727,6 +6681,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -7010,6 +6966,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -7210,6 +7168,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -7445,6 +7405,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -7650,8 +7612,8 @@
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
+        "minutes": 3.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -7674,6 +7636,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -7909,6 +7873,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -8218,9 +8184,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
+        "status": "estimated",
+        "minutes": 8.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -8243,6 +8209,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -8497,8 +8465,8 @@
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 1.5,
-        "basis": "single_target_model"
+        "minutes": 4.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -8521,6 +8489,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -8870,8 +8840,8 @@
       },
       "intrinsic_service_time": {
         "status": "estimated",
-        "minutes": 1.0,
-        "basis": "shared_kill_model"
+        "minutes": 8.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -8894,6 +8864,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -9043,9 +9015,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
+        "status": "estimated",
+        "minutes": 0.7,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -9068,6 +9040,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -9301,6 +9275,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -9562,6 +9538,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -11131,6 +11109,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -11290,6 +11270,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -11449,6 +11431,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -11651,6 +11635,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -11905,6 +11891,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -12124,9 +12112,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "missing_mixed_item_count"
+        "status": "estimated",
+        "minutes": 4.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -12149,6 +12137,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -12421,6 +12411,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -12658,6 +12650,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -12860,6 +12854,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -13227,6 +13223,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -13454,6 +13452,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -13701,6 +13701,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -13936,6 +13938,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -14095,6 +14099,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -14381,6 +14387,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -14721,6 +14729,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -14970,6 +14980,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -15251,6 +15263,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -15403,9 +15417,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
+        "status": "estimated",
+        "minutes": 3.5,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -15428,6 +15442,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -15656,6 +15672,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -15858,6 +15876,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -16060,6 +16080,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -16347,6 +16369,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -16494,9 +16518,9 @@
         "reasons": []
       },
       "intrinsic_service_time": {
-        "status": "unknown",
-        "minutes": null,
-        "basis": "item_source_not_in_questie"
+        "status": "estimated",
+        "minutes": 7.0,
+        "basis": "special_service_override"
       },
       "scope_status": "include_current_full_clear",
       "is_primary_candidate": true
@@ -16519,6 +16543,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -16717,6 +16743,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -16953,6 +16981,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -17112,6 +17142,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -17321,6 +17353,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -17480,6 +17514,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -17765,6 +17801,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18008,6 +18046,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18208,6 +18248,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18367,6 +18409,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18496,6 +18540,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18655,6 +18701,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -18814,6 +18862,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -19004,6 +19054,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -19194,6 +19246,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -19384,6 +19438,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -19574,6 +19630,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -19805,6 +19863,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -20014,6 +20074,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -20214,6 +20276,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -20373,6 +20437,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -20602,6 +20668,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -20759,6 +20827,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -21067,6 +21137,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -21305,6 +21377,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],
@@ -21463,6 +21537,8 @@
       "required_min_rep": null,
       "required_max_rep": null,
       "required_spell": null,
+      "cold_weather_flying_gate": false,
+      "cold_weather_flying_gate_source": null,
       "required_specialization": null,
       "required_ranks": null,
       "available_starting_with": [],

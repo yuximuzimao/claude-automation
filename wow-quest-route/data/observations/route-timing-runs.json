@@ -922,6 +922,34 @@
         }
       ],
       "status": "scoped_first_run_reference_bag_cleanup_unquantified"
+    },
+    {
+      "date": "2026-09-07",
+      "route_key": "icecrown",
+      "run_kind": "fivebox_daily_batch_with_cross_map_entry",
+      "time_precision": "user_reported_minute",
+      "source": "用户本轮实跑反馈；日期按本次会话当地日期记录。",
+      "effective_start_local": "2026-09-07T19:37:00+08:00",
+      "effective_end_local": "2026-09-07T20:33:00+08:00",
+      "actual_minutes": 56,
+      "route_window": "五开冰冠日常整轮，从祖达克起飞开始，到用户20:33宣布结束；包括跨图交通和两次死亡复活，不属于祖达克一次性任务实跑。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "用户报告本次死亡2次，复活花费很长时间，导致总用时较长；具体异常耗时未知。"
+      ],
+      "death_count": 2,
+      "death_recovery_minutes": null,
+      "clean_actual_minutes": null,
+      "current_route_clean_baseline_minutes": null,
+      "quest_set_note": "沿用当前10项日常讨论背景；用户未逐项确认本轮交付清单，也未明确本轮是否已用实战训练替换爆炸油，不把候选清单当实际完成证明。",
+      "entry_variant": {
+        "condition": "从其他地图进入冰冠做日常，经银色比武场进入",
+        "replace_quest": "爆炸油",
+        "with_quest": "实战训练",
+        "reason": "用户现场判断从其他地图飞来时银色比武场最近，可顺路选择实战训练。",
+        "applied_in_this_run": null
+      },
+      "status": "user_reported_batch_recorded_death_recovery_unquantified"
     }
   ]
 }

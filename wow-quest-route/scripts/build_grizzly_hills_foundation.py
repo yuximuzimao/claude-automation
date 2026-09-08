@@ -129,9 +129,10 @@ def main() -> None:
         "zone": {"id": ZONE_ID, "name": "灰熊丘陵"},
         "strategy": "first-run continuous outdoor full-clear baseline; structural exclusions only; no pre-run economic pruning",
         "entry_contract": {
-            "from_zone": "龙骨荒野",
+            "from_zone": "祖达克",
             "carried_in_quest_id": 12487,
             "carried_in_quest_name": "前往征服堡，自求多福吧！",
+            "carried_in_quest_origin": "龙骨荒野阶段已接取并长期保留",
             "carried_through_quest_ids": [12789, 13242],
             "first_hub": "征服堡",
         },
