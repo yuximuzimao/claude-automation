@@ -15,6 +15,8 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 审单模拟器规划：2026-09-09 本轮仅计划与资料保存，用户明确暂不开发、后续由GPT执行。完整计划 `order-review/docs/2026-09-08-packing-simulator-plan.md`，活动简写原文 `order-review/data/packing-campaign-notes-2026-09-08.txt`，尚未解析。悦希合单依据已纠正为固定商品组合而非SKU；修颜礼盒按封装成品；箱体反推只作估算示意。新版咖啡编码/完整名称/简称已按用户逐字确认分字段保存，六组悦希箱规按厘米原文转毫米记录，两新箱仍待集成。先做资料页与KGOS指定单箱实验，再多包与盲测；当前入口见 `order-review/docs/CURRENT.md`。
 
+审单礼盒尺寸补充（2026-09-09）：两类礼盒与礼袋已按用户值录入，礼袋5 mm厚度明确为估计。袋先铺底的显式布局验证印花1/2/3套、修颜1/2套适配对应箱规。现有求解器因固定体积排序遗漏部分解，已记入计划3.4，未修改算法；坐标与条件证据见 `order-review/data/packing-dimensions.json` 的 `giftPackingFitChecks`。
+
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认按时间保留 8 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
