@@ -225,7 +225,12 @@ def test_corn_chips_original_carton_accepts_single_or_five_plus_five(catalog):
     assert corn.accepts_closed_unit(
         {"6979499760105": 5, "6979499760112": 5}
     )
-    assert not corn.accepts_closed_unit({"6979499760105": 5})
+    for quantity in (1, 5, 9, 10):
+        assert corn.accepts_closed_unit({"6979499760105": quantity})
+    for quantity in (0, 11):
+        assert not corn.accepts_closed_unit({"6979499760105": quantity})
+    assert corn.accepts_closed_unit({"6979499760105": 2, "6979499760112": 3})
+    assert not corn.accepts_closed_unit({"6979499760105": 5, COFFEE_CODE: 1})
     assert not corn.allow_other_products
 
 

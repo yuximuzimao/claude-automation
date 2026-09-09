@@ -1,6 +1,7 @@
 {
   "schemaVersion": 2,
   "unit": "mm",
+  "productMeasurementBasis": "以实际发货的塑封后商品纸盒外尺寸为准，不使用裸瓶、裸罐或内容物尺寸；用户2026-09-08确认。",
   "outerToInnerReductionMm": [5, 5, 5],
   "cartonNameSemantics": "label_only",
   "cartons": [
@@ -374,6 +375,9 @@
       "displayName": "玉米片原箱10包",
       "brandId": "kgos",
       "capacity": 10,
+      "minimumShippableQuantity": 1,
+      "usualOrderQuantities": [5, 10],
+      "quantityEvidence": "用户2026-09-08确认：两种口味合计1至10包可独立一箱，常见数量5或10；不与其他品类混发，特殊情况人工指定。",
       "dimensionsMm": null,
       "dimensionType": "unknown",
       "inventoryStatus": "active",
@@ -465,11 +469,914 @@
       "fallback": "saved_package_plan"
     }
   ],
+  "cartonMeasurementReceipts": [
+    {
+      "cartonId": "carton-14",
+      "reportedLabel": "悦希印花礼盒三盒箱",
+      "reportedDimensionsText": "31.5*23.2*28.5",
+      "interpretedInputUnit": "cm",
+      "dimensionsMm": [
+        315,
+        232,
+        285
+      ],
+      "dimensionType": "outer",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08"
+    },
+    {
+      "cartonId": "carton-16",
+      "reportedLabel": "修颜礼盒箱",
+      "reportedDimensionsText": "24.5*23*13.5",
+      "interpretedInputUnit": "cm",
+      "dimensionsMm": [
+        245,
+        230,
+        135
+      ],
+      "dimensionType": "outer",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08"
+    },
+    {
+      "cartonId": "carton-13",
+      "reportedLabel": "悦希旧单品四盒纸箱",
+      "reportedDimensionsText": "20*11.7*12.2",
+      "interpretedInputUnit": "cm",
+      "dimensionsMm": [
+        200,
+        117,
+        122
+      ],
+      "dimensionType": "outer",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08"
+    },
+    {
+      "cartonId": "carton-15",
+      "reportedLabel": "悦希彩妆大箱",
+      "reportedDimensionsText": "15.8*15.8*18.8",
+      "interpretedInputUnit": "cm",
+      "dimensionsMm": [
+        158,
+        158,
+        188
+      ],
+      "dimensionType": "outer",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08"
+    }
+  ],
+  "giftPackingFitChecks": [
+    {
+      "checkId": "gift-fit-2026-09-09-printed-one",
+      "label": "印花单套箱",
+      "cartonId": "carton-17",
+      "quantitySets": 1,
+      "containerInnerMm": [
+        310,
+        227,
+        90
+      ],
+      "occupiedMm": [
+        305,
+        225,
+        84
+      ],
+      "clearanceMm": [
+        5,
+        2,
+        6
+      ],
+      "result": "explicit_layout_verified_conditional_on_bag_thickness",
+      "evidenceSource": "constructed_flat_stack_checked_with_existing_geometry_validator",
+      "assumptions": [
+        "礼袋厚度按用户估计5mm建模",
+        "礼袋平铺箱底，礼盒置于上方；不另外折叠或压缩",
+        "礼袋在几何检查中视作可承托的平面，此处不验证材料承重"
+      ],
+      "automaticSolverStatus": "unknown",
+      "automaticSolverNodes": 9,
+      "placements": [
+        {
+          "instanceId": "printed-gift-bag#1",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            0
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#1",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            5
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        }
+      ],
+      "giftBoxPlanarClearanceMm": [
+        7,
+        25
+      ],
+      "clearanceInterpretation": "2mm属于薄礼袋外廓宽度余量，礼盒本体平面余量为7×25mm。用户确认实际较宽松；礼袋硬纸厚度可轻微压缩但未量化，计算仍用5mm。",
+      "dimensionRevision": "printed-gift-box-manufacturing-303-79-202"
+    },
+    {
+      "checkId": "gift-fit-2026-09-09-printed-two",
+      "label": "印花三套箱装两套",
+      "cartonId": "carton-14",
+      "quantitySets": 2,
+      "containerInnerMm": [
+        310,
+        227,
+        280
+      ],
+      "occupiedMm": [
+        305,
+        225,
+        168
+      ],
+      "clearanceMm": [
+        5,
+        2,
+        112
+      ],
+      "result": "explicit_layout_verified_conditional_on_bag_thickness",
+      "evidenceSource": "constructed_flat_stack_checked_with_existing_geometry_validator",
+      "assumptions": [
+        "礼袋厚度按用户估计5mm建模",
+        "礼袋平铺箱底，礼盒置于上方；不另外折叠或压缩",
+        "礼袋在几何检查中视作可承托的平面，此处不验证材料承重"
+      ],
+      "automaticSolverStatus": "found",
+      "automaticSolverNodes": 64,
+      "placements": [
+        {
+          "instanceId": "printed-gift-bag#1",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            0
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-bag#2",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            5
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#1",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            10
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#2",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            89
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        }
+      ],
+      "giftBoxPlanarClearanceMm": [
+        7,
+        25
+      ],
+      "clearanceInterpretation": "2mm属于薄礼袋外廓宽度余量，礼盒本体平面余量为7×25mm。用户确认实际较宽松；礼袋硬纸厚度可轻微压缩但未量化，计算仍用5mm。",
+      "dimensionRevision": "printed-gift-box-manufacturing-303-79-202"
+    },
+    {
+      "checkId": "gift-fit-2026-09-09-printed-three",
+      "label": "印花三套箱装三套",
+      "cartonId": "carton-14",
+      "quantitySets": 3,
+      "containerInnerMm": [
+        310,
+        227,
+        280
+      ],
+      "occupiedMm": [
+        305,
+        225,
+        252
+      ],
+      "clearanceMm": [
+        5,
+        2,
+        28
+      ],
+      "result": "explicit_layout_verified_conditional_on_bag_thickness",
+      "evidenceSource": "constructed_flat_stack_checked_with_existing_geometry_validator",
+      "assumptions": [
+        "礼袋厚度按用户估计5mm建模",
+        "礼袋平铺箱底，礼盒置于上方；不另外折叠或压缩",
+        "礼袋在几何检查中视作可承托的平面，此处不验证材料承重"
+      ],
+      "automaticSolverStatus": "found",
+      "automaticSolverNodes": 156,
+      "placements": [
+        {
+          "instanceId": "printed-gift-bag#1",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            0
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-bag#2",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            5
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-bag#3",
+          "packingUnitId": "printed-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            10
+          ],
+          "dimensionsMm": [
+            305,
+            225,
+            5
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#1",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            15
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#2",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            94
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        },
+        {
+          "instanceId": "printed-gift-box#3",
+          "packingUnitId": "printed-gift-box",
+          "positionMm": [
+            0,
+            0,
+            173
+          ],
+          "dimensionsMm": [
+            303,
+            202,
+            79
+          ]
+        }
+      ],
+      "giftBoxPlanarClearanceMm": [
+        7,
+        25
+      ],
+      "clearanceInterpretation": "2mm属于薄礼袋外廓宽度余量，礼盒本体平面余量为7×25mm。用户确认实际较宽松；礼袋硬纸厚度可轻微压缩但未量化，计算仍用5mm。",
+      "dimensionRevision": "printed-gift-box-manufacturing-303-79-202"
+    },
+    {
+      "checkId": "gift-fit-2026-09-09-xiuyan-one",
+      "label": "修颜专箱装一套",
+      "cartonId": "carton-16",
+      "quantitySets": 1,
+      "containerInnerMm": [
+        240,
+        225,
+        130
+      ],
+      "occupiedMm": [
+        237,
+        215,
+        60
+      ],
+      "clearanceMm": [
+        3,
+        10,
+        70
+      ],
+      "result": "explicit_layout_verified_conditional_on_bag_thickness",
+      "evidenceSource": "constructed_flat_stack_checked_with_existing_geometry_validator",
+      "assumptions": [
+        "礼袋厚度按用户估计5mm建模",
+        "礼袋平铺箱底，礼盒置于上方；不另外折叠或压缩",
+        "礼袋在几何检查中视作可承托的平面，此处不验证材料承重"
+      ],
+      "automaticSolverStatus": "unknown",
+      "automaticSolverNodes": 9,
+      "placements": [
+        {
+          "instanceId": "xiuyan-gift-bag#1",
+          "packingUnitId": "xiuyan-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            0
+          ],
+          "dimensionsMm": [
+            237,
+            215,
+            5
+          ]
+        },
+        {
+          "instanceId": "xiuyan-gift-box#1",
+          "packingUnitId": "xiuyan-gift-box",
+          "positionMm": [
+            0,
+            0,
+            5
+          ],
+          "dimensionsMm": [
+            228,
+            190,
+            55
+          ]
+        }
+      ]
+    },
+    {
+      "checkId": "gift-fit-2026-09-09-xiuyan-two",
+      "label": "修颜专箱装两套",
+      "cartonId": "carton-16",
+      "quantitySets": 2,
+      "containerInnerMm": [
+        240,
+        225,
+        130
+      ],
+      "occupiedMm": [
+        237,
+        215,
+        120
+      ],
+      "clearanceMm": [
+        3,
+        10,
+        10
+      ],
+      "result": "explicit_layout_verified_conditional_on_bag_thickness",
+      "evidenceSource": "constructed_flat_stack_checked_with_existing_geometry_validator",
+      "assumptions": [
+        "礼袋厚度按用户估计5mm建模",
+        "礼袋平铺箱底，礼盒置于上方；不另外折叠或压缩",
+        "礼袋在几何检查中视作可承托的平面，此处不验证材料承重"
+      ],
+      "automaticSolverStatus": "unknown",
+      "automaticSolverNodes": 21,
+      "placements": [
+        {
+          "instanceId": "xiuyan-gift-bag#1",
+          "packingUnitId": "xiuyan-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            0
+          ],
+          "dimensionsMm": [
+            237,
+            215,
+            5
+          ]
+        },
+        {
+          "instanceId": "xiuyan-gift-bag#2",
+          "packingUnitId": "xiuyan-gift-bag",
+          "positionMm": [
+            0,
+            0,
+            5
+          ],
+          "dimensionsMm": [
+            237,
+            215,
+            5
+          ]
+        },
+        {
+          "instanceId": "xiuyan-gift-box#1",
+          "packingUnitId": "xiuyan-gift-box",
+          "positionMm": [
+            0,
+            0,
+            10
+          ],
+          "dimensionsMm": [
+            228,
+            190,
+            55
+          ]
+        },
+        {
+          "instanceId": "xiuyan-gift-box#2",
+          "packingUnitId": "xiuyan-gift-box",
+          "positionMm": [
+            0,
+            0,
+            65
+          ],
+          "dimensionsMm": [
+            228,
+            190,
+            55
+          ]
+        }
+      ]
+    }
+  ],
   "pendingMappings": [
     {
       "label": "旧版糖果",
       "sharesProductSpecId": "candy-regular-package",
       "missingField": "merchantCode"
+    },
+    {
+      "label": "美式咖啡七条装",
+      "brandId": "kgos",
+      "bagsPerBox": 7,
+      "originalCartonQuantityBoxes": 80,
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "identity_and_carton_quantity_confirmed_pending_product_dimensions",
+      "missingField": "dimensionsMm",
+      "note": "新版两口味等尺寸、可混装80盒原箱；约70盒以上仅为用户预计。完整商品名称保留原始空格、全角/半角括号和*，与简称分字段；不得继承旧版12条正装尺寸、60盒原箱或36盒规则。共同单盒尺寸与80盒原箱尺寸未提供。",
+      "sameSizeGroup": "coffee-7-bag-new-package",
+      "allowMixedEligibleFlavors": true,
+      "partialOriginalCartonAllowed": true,
+      "estimatedMinimumShippableQuantityBoxes": 70,
+      "minimumQuantityEvidenceStatus": "user_estimate_not_tested",
+      "currentMerchantCode": "6980319670023",
+      "merchantCodeStatus": "current",
+      "erpFullName": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*7袋/盒",
+      "shortName": "美式咖啡七条装",
+      "identityEvidence": {
+        "source": "用户当前ERP商品档案V2第9/10行只读读取，随后用户逐字补发确认",
+        "rowNumber": 10,
+        "confirmedAt": "2026-09-08",
+        "preserveExactText": true
+      }
+    },
+    {
+      "label": "生椰拿铁咖啡七条装",
+      "brandId": "kgos",
+      "bagsPerBox": 7,
+      "originalCartonQuantityBoxes": 80,
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "identity_and_carton_quantity_confirmed_pending_product_dimensions",
+      "missingField": "dimensionsMm",
+      "note": "新版两口味等尺寸、可混装80盒原箱；约70盒以上仅为用户预计。完整商品名称保留原始空格、全角/半角括号和*，与简称分字段；不得继承旧版12条正装尺寸、60盒原箱或36盒规则。共同单盒尺寸与80盒原箱尺寸未提供。",
+      "sameSizeGroup": "coffee-7-bag-new-package",
+      "allowMixedEligibleFlavors": true,
+      "partialOriginalCartonAllowed": true,
+      "estimatedMinimumShippableQuantityBoxes": 70,
+      "minimumQuantityEvidenceStatus": "user_estimate_not_tested",
+      "currentMerchantCode": "6980319670030",
+      "merchantCodeStatus": "current",
+      "erpFullName": "甘油二酯咖啡固体饮料（生椰拿铁味） 8g*7袋/盒",
+      "shortName": "生椰拿铁咖啡七条装",
+      "identityEvidence": {
+        "source": "用户当前ERP商品档案V2第9/10行只读读取，随后用户逐字补发确认",
+        "rowNumber": 9,
+        "confirmedAt": "2026-09-08",
+        "preserveExactText": true
+      }
+    },
+    {
+      "label": "焕颜水2.0",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6931583616811",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        52,
+        52,
+        200
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        51.5,
+        51.5,
+        200
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。"
+    },
+    {
+      "label": "焕颜乳2.0",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6940079096228-1",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        52,
+        52,
+        182
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        51.5,
+        51.5,
+        182
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。",
+      "merchantCodeConfirmedAt": "2026-09-08",
+      "merchantCodeEvidence": "用户明确确认以后使用6940079096228-1，取代此前无效待更换标记。"
+    },
+    {
+      "label": "焕颜霜3.0",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6950328225903",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        76,
+        76,
+        85
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        76,
+        76,
+        85
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。"
+    },
+    {
+      "label": "悦希口红 09古堡邂逅",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6950328226245",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        25,
+        25,
+        85
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        25,
+        25,
+        85
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。"
+    },
+    {
+      "label": "慕斯油",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6970240607946",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        48,
+        48,
+        197
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        48,
+        48,
+        197
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。"
+    },
+    {
+      "label": "慕斯油 体验装",
+      "brandId": "yuexi",
+      "currentMerchantCode": "6970240607953",
+      "merchantCodeStatus": "current",
+      "dimensionsMm": [
+        40,
+        40,
+        128
+      ],
+      "dimensionSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_carton_scope",
+      "missingField": "confirmedCartonScope",
+      "note": "用户提供的单品尺寸；reportedDimensionsMm保留原值，dimensionsMm按用户确认向上取整用于后续计算。箱型适用范围仍待确认，未加入箱型白名单。",
+      "reportedDimensionsMm": [
+        39.5,
+        39.5,
+        128
+      ],
+      "roundingPolicy": "ceil_to_integer_mm",
+      "roundingEvidence": "用户2026-09-08确认：半毫米直接向上进一位，保留原始尺寸。"
+    },
+    {
+      "label": "悦希印花礼盒一盒装运输纸箱",
+      "brandId": "yuexi",
+      "status": "carton_and_unit_dimensions_recorded_pending_integration",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "confirmedBundle": {
+        "printedGiftBoxes": 1,
+        "printedGiftBags": 1
+      },
+      "fitEvidence": "用户确认恰好合适",
+      "missingField": "packingUnitIntegration",
+      "note": "礼盒制作尺寸303×79×202mm（平放303×202×79），礼袋225×305×5mm且厚度估计、硬纸可轻微挤压。未压缩条件占用305×225×84mm，保守内径310×227×90mm。2mm余量只对应礼袋，礼盒本体平面余量为7×25mm；用户确认实际较宽松。",
+      "cartonId": "carton-17",
+      "dimensionsMm": [
+        315,
+        232,
+        95
+      ],
+      "dimensionType": "outer",
+      "reportedDimensionsText": "31.5*23.2*9.5",
+      "interpretedInputUnit": "cm",
+      "unitInterpretationEvidence": "与同批四个既有箱尺寸逐一对应，按厘米换算毫米，不先取整。",
+      "packingUnitRefs": [
+        "printed-gift-box",
+        "printed-gift-bag"
+      ],
+      "fitCheckIds": [
+        "gift-fit-2026-09-09-printed-one"
+      ]
+    },
+    {
+      "label": "悦希礼盒三盒装运输纸箱组合",
+      "brandId": "yuexi",
+      "cartonId": "carton-14",
+      "status": "bundle_unit_dimensions_recorded_pending_composition_mapping",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "confirmedBundles": [
+        {
+          "printedGiftBoxes": 2,
+          "printedGiftBags": 2
+        },
+        {
+          "printedGiftBoxes": 3,
+          "printedGiftBags": 3
+        }
+      ],
+      "additionalSinglesAllowedWithTwoBundles": true,
+      "additionalSinglesScope": "具体商品和数量未给定，需使用外部包装尺寸实验，不得按余量直接放行。",
+      "missingField": "confirmedCompositionMapping",
+      "note": "按制作尺寸平放礼盒303×202×79mm，2套/3套分别占用305×225×168/252mm，保守内径310×227×280mm；礼袋仍按5mm估计厚度未压缩计算。余量需区分薄礼袋外廓与礼盒主体，额外单品仍单独核验。",
+      "packingUnitRefs": [
+        "printed-gift-box",
+        "printed-gift-bag"
+      ],
+      "fitCheckIds": [
+        "gift-fit-2026-09-09-printed-two",
+        "gift-fit-2026-09-09-printed-three"
+      ]
+    },
+    {
+      "label": "悦希修颜礼盒专箱外部组合",
+      "brandId": "yuexi",
+      "cartonId": "carton-16",
+      "status": "gift_dimensions_recorded_pending_extra_cream_evidence",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "maximumGiftSetsPerCarton": 2,
+      "confirmedBundle": {
+        "giftBoxMerchantCode": "6950328273508",
+        "giftBoxQuantity": 2,
+        "giftBagMerchantCode": "yxxyld",
+        "giftBagQuantity": 2
+      },
+      "designatedCartonRequired": true,
+      "extraCreamQuantityTwoEvidence": "pending_user_clarification",
+      "extraCreamQuantityFourEvidence": "user_estimate_not_tested",
+      "missingField": "extraCreamMerchantCode, extraCreamDimensionsMm",
+      "note": "修颜礼盒为封装成品190×228×55mm，礼袋237×215×5mm且厚度估计。两袋铺底再叠两礼盒，占用237×215×120mm，保守内径240×225×130mm。自动搜索未知但显式布局有效；额外2/4个面霜仍未放行。",
+      "giftProductType": "sealed_finished_product",
+      "packingUnitRefs": [
+        "xiuyan-gift-box",
+        "xiuyan-gift-bag"
+      ],
+      "fitCheckIds": [
+        "gift-fit-2026-09-09-xiuyan-one",
+        "gift-fit-2026-09-09-xiuyan-two"
+      ]
+    },
+    {
+      "label": "悦希新四盒装纸箱",
+      "recordType": "carton_pending_integration",
+      "brandId": "yuexi",
+      "cartonId": "carton-18",
+      "dimensionsMm": [
+        215,
+        123,
+        123
+      ],
+      "dimensionType": "outer",
+      "reportedDimensionsText": "21.5*12.3*12.3",
+      "interpretedInputUnit": "cm",
+      "unitInterpretationEvidence": "与同批四个既有箱尺寸逐一对应，按厘米换算毫米，不先取整。",
+      "evidenceSource": "user_provided",
+      "confirmedAt": "2026-09-08",
+      "status": "dimensions_confirmed_pending_experimental_catalog_integration",
+      "note": "与旧四盒纸箱carton-13独立保留，不覆盖旧尺寸；名称含四盒不代表任意商品或组合最多/恰好四件。用户活动笔记只保存原文，不据此建立自动规则。"
+    },
+    {
+      "label": "印花礼盒",
+      "packingUnitId": "printed-gift-box",
+      "dimensionsMm": [
+        303,
+        79,
+        202
+      ],
+      "reportedDimensionsText": "303*79*202mm",
+      "dimensionSource": "user_provided",
+      "dimensionSourceByAxis": [
+        "user_provided",
+        "user_provided",
+        "user_provided"
+      ],
+      "physicalType": "assembled_gift_box",
+      "brandId": "yuexi",
+      "recordType": "packing_unit_pending_integration",
+      "interpretedInputUnit": "mm",
+      "confirmedAt": "2026-09-09",
+      "status": "dimensions_recorded_after_conditional_fit_check",
+      "note": "以用户确认制作尺寸303×79×202mm为准；平放朝向为303×202×79mm。保留原始轴序，不把摆放旋转当作源尺寸修改。礼盒本体平面小于礼袋，不能用礼袋外廓余量概括礼盒可用空间。",
+      "measurementBasis": "user_confirmed_manufacturing_spec",
+      "supersededMeasurement": {
+        "dimensionsMm": [
+          302,
+          202,
+          80
+        ],
+        "reportedDimensionsText": "30.2*20.2*8",
+        "inputUnit": "cm",
+        "source": "用户先前手工测量",
+        "reason": "以本次用户确认制作尺寸为准，旧测量值仅供追溯"
+      }
+    },
+    {
+      "label": "印花礼袋",
+      "packingUnitId": "printed-gift-bag",
+      "dimensionsMm": [
+        225,
+        305,
+        5
+      ],
+      "reportedDimensionsText": "22.5*30.5*0.5",
+      "dimensionSource": "user_provided_with_estimated_thickness",
+      "dimensionSourceByAxis": [
+        "user_provided",
+        "user_provided",
+        "estimated"
+      ],
+      "estimatedAxis": "height",
+      "physicalType": "folded_flexible_gift_bag",
+      "brandId": "yuexi",
+      "recordType": "packing_unit_pending_integration",
+      "interpretedInputUnit": "cm",
+      "confirmedAt": "2026-09-09",
+      "status": "dimensions_recorded_after_conditional_fit_check",
+      "note": "label为用户本次称谓，不冒充ERP完整名称或简称。尺寸原值按厘米转毫米；含礼袋的组合按礼袋5mm估计厚度做条件适配，尚未接入现役求解目录。 2mm是礼袋外廓相对纸箱的宽度余量，不代表礼盒本体或整箱空间。计算仍采用5mm估计厚度，不擅自量化压缩量。",
+      "material": "hard_paper",
+      "thicknessSlightlyCompressible": true,
+      "compressionAllowanceMm": null,
+      "packingExperience": "用户确认礼袋为硬纸，厚度可轻微挤压，实际摆放较宽松。"
+    },
+    {
+      "label": "修颜礼袋",
+      "packingUnitId": "xiuyan-gift-bag",
+      "currentMerchantCode": "yxxyld",
+      "dimensionsMm": [
+        237,
+        215,
+        5
+      ],
+      "reportedDimensionsText": "23.7*21.5*0.5",
+      "dimensionSource": "user_provided_with_estimated_thickness",
+      "dimensionSourceByAxis": [
+        "user_provided",
+        "user_provided",
+        "estimated"
+      ],
+      "estimatedAxis": "height",
+      "physicalType": "folded_flexible_gift_bag",
+      "brandId": "yuexi",
+      "recordType": "packing_unit_pending_integration",
+      "interpretedInputUnit": "cm",
+      "confirmedAt": "2026-09-09",
+      "status": "dimensions_recorded_after_conditional_fit_check",
+      "note": "label为用户本次称谓，不冒充ERP完整名称或简称。尺寸原值按厘米转毫米；含礼袋的组合按礼袋5mm估计厚度做条件适配，尚未接入现役求解目录。"
+    },
+    {
+      "label": "修颜礼盒",
+      "packingUnitId": "xiuyan-gift-box",
+      "currentMerchantCode": "6950328273508",
+      "dimensionsMm": [
+        190,
+        228,
+        55
+      ],
+      "reportedDimensionsText": "19*22.8*5.5",
+      "dimensionSource": "user_provided",
+      "dimensionSourceByAxis": [
+        "user_provided",
+        "user_provided",
+        "user_provided"
+      ],
+      "physicalType": "sealed_finished_product",
+      "brandId": "yuexi",
+      "recordType": "packing_unit_pending_integration",
+      "interpretedInputUnit": "cm",
+      "confirmedAt": "2026-09-09",
+      "status": "dimensions_recorded_after_conditional_fit_check",
+      "note": "label为用户本次称谓，不冒充ERP完整名称或简称。尺寸原值按厘米转毫米；含礼袋的组合按礼袋5mm估计厚度做条件适配，尚未接入现役求解目录。"
     }
   ]
 }

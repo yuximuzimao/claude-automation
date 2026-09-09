@@ -162,6 +162,18 @@ def test_corn_chips_ten_unit_original_carton_supports_five_plus_five():
     assert detail.evidence_ids == ("original-corn-chips-10",)
 
 
+def test_partial_corn_chips_original_is_supported_without_single_product_dimensions():
+    catalog = DimensionCatalog.load()
+    source = _source([("6979499760105", "香菜牛肉味玉米片", 5)])
+    assert catalog.product("6979499760105") is None
+
+    report = build_packing_case_audit([_case(source)], catalog)
+
+    assert report.package_details[0].status == PackageEvidenceStatus.DEDICATED_ORIGINAL
+    assert report.package_details[0].evidence_ids == ("original-corn-chips-10",)
+    assert report.fully_supported_order_count == 1
+
+
 def test_new_face_oil_limit_overrides_outer_geometry_for_whole_order():
     case = _case(
         _source([("6975183897416", "悦希新精油", 6)]),
