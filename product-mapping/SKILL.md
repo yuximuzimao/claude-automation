@@ -14,7 +14,7 @@ entry: cli.js
 5. **写操作（新增匹配）必须人工确认后执行**
 6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
-8. **处理 HEE/悦希前先查待补清单** → `data/products/hee/pending-products.json`；命中名称、简称或当前编码时按“已知待补”处理，不得归为未知，也不得套用旧版外观
+8. **处理 HEE/悦希前先查待补清单** → `data/products/hee/pending-products.json`；命中名称、简称或当前编码时按“已知待补”处理，不得归为未知，也不得套用旧版外观；包装证据与后续固定组合定义指向 `../order-review/SKILL.md`，不从活动简写猜规则。
 
 ## ENTRY MAP
 
@@ -124,7 +124,10 @@ await cdp.clickAt(targetId, 'button.el-button--primary');
 window.__sv.searchData.outerId = code;
 
 // ✅ 正确：DOM 输入 + dispatch 事件
-const input = document.querySelector('input[placeholder="主商家编码"]');
+const input = [...document.querySelectorAll('input[placeholder="主商家编码"]')].find(el => {
+  const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+});
+if (!input) throw new Error("未找到可见的主商家编码输入框");
 input.value = code;
 input.dispatchEvent(new Event('input', { bubbles: true }));
 input.dispatchEvent(new Event('change', { bubbles: true }));

@@ -52,7 +52,7 @@
 | `lkwj/` | `SKILL.md` |
 | `douyin-workout/` | `SKILL.md` |
 | `codex-monitor/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
-| `order-review/` | 当前旧结构：项目内 `AGENTS.md`、`CLAUDE.md`、`README.md`、`docs/CURRENT.md`；缺 `SKILL.md/tasks/todo.md/docs/INDEX.md`，下次结构性维护先按新项目规范补骨架 |
+| `order-review/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；状态见 `docs/CURRENT.md` |
 | `product-ad-studio/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
 | `wow-quest-route/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前状态再按SKILL读 `docs/verified-routes/CURRENT.md` |
 

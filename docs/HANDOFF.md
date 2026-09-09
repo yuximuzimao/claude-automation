@@ -13,14 +13,12 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
 
-审单模拟器规划：2026-09-09 本轮仅计划与资料保存，用户明确暂不开发、后续由GPT执行。完整计划 `order-review/docs/2026-09-08-packing-simulator-plan.md`，活动简写原文 `order-review/data/packing-campaign-notes-2026-09-08.txt`，尚未解析。悦希合单依据已纠正为固定商品组合而非SKU；修颜礼盒按封装成品；箱体反推只作估算示意。新版咖啡编码/完整名称/简称已按用户逐字确认分字段保存，六组悦希箱规按厘米原文转毫米记录，两新箱仍待集成。先做资料页与KGOS指定单箱实验，再多包与盲测；当前入口见 `order-review/docs/CURRENT.md`。
-
-审单礼盒尺寸补充（2026-09-09）：印花礼盒改用用户确认制作尺寸303×79×202mm，原手测值保留追溯；印花1/2/3套含礼袋的占用高度重算为84/168/252mm。2mm只对应礼袋外廓，礼盒本体平面余量7×25mm；用户确认硬纸礼袋可轻微挤压、实际较宽松，厚度仍按5mm估计。修颜数据不变。显式布局有效但现有求解器部分遗漏仍记在计划3.4，未修改算法。
+审单交接（2026-09-09）：本轮规划与资料已NEAT收口；后续GPT从 `order-review/SKILL.md` → `tasks/todo.md` / `docs/INDEX.md` → `docs/CURRENT.md` 进入。待执行计划保留在 `order-review/docs/2026-09-08-packing-simulator-plan.md`，本轮未开发页面或修改算法。阶段证据在 `order-review/docs/archive/2026-09-09-packing-simulator-planning/`；尺寸与原始活动笔记保持本地原件。
 
 ## 系统级配置（Codex 启动时注意）
 
 - **工作区备份**：已移交 macOS launchd 管理，每周日 08:07 自动执行 `backup-workspace.sh`，默认按时间保留 8 份 `workspace-YYYYMMDD-HHMMSS-PID.tar.gz`。Codex **不需要**再调度或触发备份任务。审单案例或推荐事件异常时仍完成工作区归档，但健康状态为 `degraded`、退出码为 3；恢复排查同时查看归档内 `order-review-data/` 和 `/Users/chat/backups/order-review-health.txt`。
-- **审单工具**：普通单包审核、多包混合拆分并审核、等体积口味白名单和历史包裹模块精确组合均已实现；完整测试 `207 passed`。2026-08-05 修复了 ERP 实际拆分成功却因 `splitResult.success=false` 被误判停止的问题，并把“精确匹配历史方案后无需再点保存、可直接审核/拆分并审核”的快捷流程从单包扩展到多包。案例文件重复解析导致的线性内存高水位已通过按文件版本缓存仓库快照修复；连续 20 个合适真实订单验收延期但未取消。当前状态、唯一硬验收和后续尺寸模型方向见 `order-review/docs/CURRENT.md`；长期规则见 `order-review/docs/2026-07-23-package-rule-foundation.md`。
+- **审单工具**：当前能力、验证范围和未提交工作区边界只见 `order-review/docs/CURRENT.md`，不在此重复旧测试数字或已过期的内存验收状态。
 - **生图授权门禁**：所有图片生成和编辑默认只讨论，只接受用户当前消息中的一次性明确执行授权；每次调用后立即恢复讨论模式。禁止继承上一轮意图，也禁止切换到本机脚本或 CLI/API 备用生图路径。完整规则和事件归档见 `product-ad-studio/docs/INDEX.md` 与 `product-ad-studio/docs/archive/2026-07-31-image-generation-authorization.md`。
 - **claude-mem**：已完全卸载（2026-07-15）。hooks 清空、插件禁用、数据已删除。Codex 无需关心 claude-mem 相关状态。
 - **Codex ↔ Claude 协作**：handoff 协议（inbox.json）照常运作，不受上述变更影响。

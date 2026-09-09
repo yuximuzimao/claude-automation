@@ -6,16 +6,12 @@
 
 ## 数据隔离检查
 
-- [ ] **data/imgs/ 是否干净？**
-  - 验证：`ls data/imgs/ | wc -l` → 应为 0
-  - 如有旧图片：**直接清空**，无需备份 → `rm -f data/imgs/*`
-  - （data/imgs/ 是一次性工作区，每次 check 重新下载，不需要保留历史图片）
+- [ ] 先确认店铺、品牌和活动范围；同一活动续跑必须保留已确认识图及断点状态。
+- [ ] 新活动使用标准`check`流程自动清理图片/报告并重建SKU记录，不在预检阶段手工清空文件。
+- [ ] 后置核查使用`check --reuse-active --skip-download`，不得先清空它依赖的图片、识图或SKU记录。
+- [ ] `sku-map.json`按确认的新活动更新，不因为执行预检就直接写成空对象。
 
-- [ ] **data/sku-records.json 是否已重置？**
-  - 如果是新品牌/新店铺：直接清空 → `echo '{}' > data/sku-records.json`
-
-- [ ] **data/products/{brand}/sku-map.json 是否已清空？**
-  - 如果存在旧 sku-map：`echo '{}' > data/products/{brand}/sku-map.json`
+这里与`docs/brand-onboarding.md`的自动清理流程一致；不得把旧的手动清空示例当作步骤执行。
 
 ---
 
