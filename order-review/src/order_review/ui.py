@@ -1440,7 +1440,13 @@ class OrderReviewWindow:
         elif workflow.direct_single_item_plan is not None:
             status = "单件直审"
         elif compact_reliable_plan is not None and not self._show_package_editor:
-            status = "已有历史方案"
+            status = (
+                "历史组合建议"
+                if workflow.selected_recommendation is not None
+                and workflow.selected_recommendation.match_type
+                == MATCH_HISTORICAL_PACKAGE_COMPOSITION
+                else "已有历史方案"
+            )
         elif workflow.draft is not None:
             status = "编辑中"
         elif workflow.historical_case is not None and workflow.historical_case.is_freight:

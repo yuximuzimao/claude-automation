@@ -160,7 +160,15 @@ class PackagePlanWorkflow:
                         MATCH_SINGLE_PACKAGE_TOTAL: "历史单包方案",
                         MATCH_HISTORICAL_PACKAGE_COMPOSITION: "历史包裹组合方案",
                     }[candidate.match_type]
-                    self.load_notice = f"已自动采用{match_label}，可直接审核或继续修改。"
+                    if candidate.match_type == MATCH_HISTORICAL_PACKAGE_COMPOSITION:
+                        self.load_notice = (
+                            f"已自动采用{match_label}；这是由历史包裹模块新组合的建议，"
+                            "不是曾保存过的完整方案。可直接审核或继续修改。"
+                        )
+                    else:
+                        self.load_notice = (
+                            f"已自动采用{match_label}，可直接审核或继续修改。"
+                        )
         except CaseRepositoryError as exc:
             self._abandon_pending_recommendations()
             self.recommendations = RecommendationResult(candidates=(), conflict=False)

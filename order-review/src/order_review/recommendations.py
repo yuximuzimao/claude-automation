@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from functools import lru_cache
 import hashlib
@@ -31,8 +31,8 @@ RECOMMENDATION_ALGORITHM_VERSION = 1
 PACKAGE_EQUIVALENT_RECOMMENDATION_ALGORITHM_VERSION = 2
 SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 3
 PACKAGE_EQUIVALENT_SINGLE_PACKAGE_CAPACITY_ALGORITHM_VERSION = 4
-HISTORICAL_PACKAGE_COMPOSITION_ALGORITHM_VERSION = 2
-PACKAGE_EQUIVALENT_COMPOSITION_ALGORITHM_VERSION = 3
+HISTORICAL_PACKAGE_COMPOSITION_ALGORITHM_VERSION = 4
+PACKAGE_EQUIVALENT_COMPOSITION_ALGORITHM_VERSION = 5
 FREIGHT_REMINDER_ALGORITHM_VERSION = 1
 MATCH_EXACT_STRUCTURE = "exact_structure"
 MATCH_SINGLE_PACKAGE_TOTAL = "single_package_total"
@@ -80,6 +80,7 @@ class _HistoricalPackageModule:
     signature: tuple[tuple[tuple[str, ...], int], ...]
     source_case_ids: tuple[str, ...]
     observation_count: int
+    max_repetitions: int
 
 
 @dataclass(frozen=True)
@@ -330,9 +331,13 @@ def find_historical_package_composition_recommendations(
     module_boundary_sources: defaultdict[
         tuple[tuple[tuple[str, ...], int], ...], set[str]
     ] = defaultdict(set)
+    module_max_repetitions: defaultdict[
+        tuple[tuple[tuple[str, ...], int], ...], int
+    ] = defaultdict(int)
     for case in _latest_cases_per_order(cases):
         if case.is_freight:
             continue
+        case_signatures: list[tuple[tuple[tuple[str, ...], int], ...]] = []
         for package in _template(case):
             signature = tuple(
                 (item.match_key, item.quantity) for item in package.items
@@ -342,16 +347,23 @@ def find_historical_package_composition_recommendations(
                 for key, quantity in signature
             ):
                 continue
+            case_signatures.append(signature)
             module_sources[signature].add(case.case_id)
             module_observations[signature] += 1
             if len(case.package_plan.packages) > 1:
                 module_boundary_sources[signature].add(case.case_id)
+        for signature, repetitions in Counter(case_signatures).items():
+            module_max_repetitions[signature] = max(
+                module_max_repetitions[signature],
+                repetitions,
+            )
 
     modules = tuple(
         _HistoricalPackageModule(
             signature=signature,
             source_case_ids=tuple(sorted(module_sources[signature])),
             observation_count=module_observations[signature],
+            max_repetitions=module_max_repetitions[signature],
         )
         for signature in sorted(
             module_sources,
@@ -374,6 +386,7 @@ def find_historical_package_composition_recommendations(
     solutions = _find_minimum_composition_solutions(
         current_totals,
         module_vectors,
+        tuple(module.max_repetitions for module in modules),
     )
     candidates: list[RecommendationCandidate] = []
     for solution in solutions:
@@ -460,7 +473,12 @@ def _latest_cases_per_order(
 def _find_minimum_composition_solutions(
     target: tuple[int, ...],
     module_vectors: tuple[tuple[int, ...], ...],
+    module_limits: tuple[int, ...] | None = None,
 ) -> tuple[tuple[int, ...], ...]:
+    if module_limits is None:
+        module_limits = tuple(1 for _ in module_vectors)
+    if len(module_limits) != len(module_vectors):
+        raise ValueError("历史包裹模块数量与重复上限数量不一致")
     modules_by_key = tuple(
         tuple(
             module_index
@@ -475,7 +493,10 @@ def _find_minimum_composition_solutions(
         pass
 
     @lru_cache(maxsize=None)
-    def solve(remaining: tuple[int, ...]) -> tuple[tuple[int, ...], ...]:
+    def solve(
+        remaining: tuple[int, ...],
+        remaining_uses: tuple[int, ...],
+    ) -> tuple[tuple[int, ...], ...]:
         nonlocal state_count
         state_count += 1
         if state_count > MAX_COMPOSITION_SEARCH_STATES:
@@ -493,12 +514,14 @@ def _find_minimum_composition_solutions(
             key=lambda key_index: sum(
                 1
                 for module_index in modules_by_key[key_index]
+                if remaining_uses[module_index] > 0
                 if _vector_fits(module_vectors[module_index], remaining)
             ),
         )
         fitting_modules = [
             module_index
             for module_index in modules_by_key[pivot]
+            if remaining_uses[module_index] > 0
             if _vector_fits(module_vectors[module_index], remaining)
         ]
         if not fitting_modules:
@@ -512,7 +535,12 @@ def _find_minimum_composition_solutions(
                 quantity - used
                 for quantity, used in zip(remaining, vector)
             )
-            for tail in solve(next_remaining):
+            next_remaining_uses = (
+                *remaining_uses[:module_index],
+                remaining_uses[module_index] - 1,
+                *remaining_uses[module_index + 1 :],
+            )
+            for tail in solve(next_remaining, next_remaining_uses):
                 solution = tuple(sorted((module_index, *tail)))
                 if len(solution) > MAX_COMPOSITION_PACKAGES:
                     continue
@@ -524,7 +552,7 @@ def _find_minimum_composition_solutions(
         return tuple(sorted(solutions)[: MAX_COMPOSITION_CANDIDATES + 1])
 
     try:
-        return solve(target)[:MAX_COMPOSITION_CANDIDATES]
+        return solve(target, module_limits)[:MAX_COMPOSITION_CANDIDATES]
     except SearchLimitReached:
         return ()
 

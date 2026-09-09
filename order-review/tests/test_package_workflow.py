@@ -150,6 +150,59 @@ def save_combo_module_evidence(
         )
 
 
+def save_repeated_combo_module_evidence(
+    repository: JsonCaseRepository,
+    *,
+    quantities: tuple[int, int],
+    prefix: str,
+) -> None:
+    for index in range(3):
+        source = SourceSnapshot.from_order_snapshot(
+            make_grouped_order(
+                [
+                    (
+                        f"{prefix}-{index}",
+                        [("A", quantities[0] * 2), ("B", quantities[1] * 2)],
+                    )
+                ]
+            )
+        )
+        first, second = source.products
+        plan = (
+            PackageDraft.split(source)
+            .set_quantity(
+                "package-1",
+                first.source_product_id,
+                quantities[0],
+                source=source,
+            )
+            .set_quantity(
+                "package-1",
+                second.source_product_id,
+                quantities[1],
+                source=source,
+            )
+            .set_quantity(
+                "package-2",
+                first.source_product_id,
+                quantities[0],
+                source=source,
+            )
+            .set_quantity(
+                "package-2",
+                second.source_product_id,
+                quantities[1],
+                source=source,
+            )
+            .confirm(source)
+        )
+        repository.confirm(
+            source,
+            plan,
+            Decision(source=DecisionSource.MANUAL),
+        )
+
+
 def test_refresh_invalidates_unconfirmed_draft_even_when_order_content_is_same(tmp_path):
     workflow = PackagePlanWorkflow(JsonCaseRepository(tmp_path / "cases.json"))
     workflow.load_order(make_order())
@@ -652,6 +705,7 @@ def test_historical_packages_can_exactly_compose_an_unseen_order(tmp_path):
     assert candidate.match_type == MATCH_HISTORICAL_PACKAGE_COMPOSITION
     assert len(candidate.packages) == 2
     assert "未使用容量或比例推算" in candidate.quantity_note
+    assert "不是曾保存过的完整方案" in current.load_notice
 
     assert sorted(package.total_quantity for package in current.draft.packages) == [2, 3]
     saved = current.confirm()
@@ -665,55 +719,69 @@ def test_historical_packages_can_exactly_compose_an_unseen_order(tmp_path):
     assert "历史包裹组合案例" in current.confirmation_note
 
 
-@pytest.mark.parametrize(
-    "copy_count,expected_packages",
-    (
-        (3, ((6, 2), (3, 1))),
-        (4, ((6, 2), (6, 2))),
-        (5, ((6, 2), (6, 2), (3, 1))),
-        (6, ((6, 2), (6, 2), (6, 2))),
-    ),
-)
-def test_historical_package_modules_can_repeat_for_exact_copy_counts(
+def test_historical_package_modules_do_not_repeat_without_same_order_evidence(
     tmp_path,
-    copy_count,
-    expected_packages,
 ):
     repository = JsonCaseRepository(tmp_path / "cases.json")
-    save_combo_module_evidence(
+    save_standard_module_evidence(
+        repository,
+        name="A",
+        quantity=25,
+        prefix="ORDER-25",
+    )
+    save_standard_module_evidence(
+        repository,
+        name="A",
+        quantity=5,
+        prefix="ORDER-5",
+    )
+
+    current = PackagePlanWorkflow(repository)
+    current.load_order(make_order("CURRENT", quantity=40))
+
+    assert current.draft is None
+    assert current.recommendations.candidates == ()
+
+
+def test_historical_package_module_repeat_count_uses_observed_same_order_limit(
+    tmp_path,
+):
+    repository = JsonCaseRepository(tmp_path / "cases.json")
+    save_repeated_combo_module_evidence(
         repository,
         quantities=(6, 2),
         prefix="DOUBLE",
     )
-    save_combo_module_evidence(
-        repository,
-        quantities=(3, 1),
-        prefix="SINGLE",
-    )
 
-    current = PackagePlanWorkflow(repository)
-    current.load_order(
+    supported = PackagePlanWorkflow(repository)
+    supported.load_order(
         make_grouped_order(
-            [("CURRENT", [("A", 3 * copy_count), ("B", copy_count)])]
+            [
+                ("CURRENT-2-A", [("A", 6), ("B", 2)]),
+                ("CURRENT-2-B", [("A", 6), ("B", 2)]),
+            ]
         )
     )
 
-    assert current.auto_adopted_recommendation is True
-    assert current.selected_recommendation.match_type == (
+    assert supported.auto_adopted_recommendation is True
+    assert supported.selected_recommendation.match_type == (
         MATCH_HISTORICAL_PACKAGE_COMPOSITION
     )
-    source = current.source_snapshot
-    projected = []
-    for package in current.draft.packages:
-        quantities = {
-            source.product_by_id[item.source_product_id].merchant_code: item.quantity
-            for item in package.items
-        }
-        projected.append((quantities["CODE-A"], quantities["CODE-B"]))
-    assert tuple(sorted(projected, reverse=True)) == tuple(
-        sorted(expected_packages, reverse=True)
+    assert len(supported.draft.packages) == 2
+
+    unsupported = PackagePlanWorkflow(repository)
+    unsupported.load_order(
+        make_grouped_order(
+            [
+                ("CURRENT-3-A", [("A", 6), ("B", 2)]),
+                ("CURRENT-3-B", [("A", 6), ("B", 2)]),
+                ("CURRENT-3-C", [("A", 6), ("B", 2)]),
+            ]
+        )
     )
-    assert "可直接审核或继续修改" in current.load_notice
+
+    assert unsupported.draft is None
+    assert unsupported.recommendations.candidates == ()
 
 
 def test_historical_package_composition_search_exposes_minimum_conflicts():
