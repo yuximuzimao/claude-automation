@@ -167,6 +167,20 @@ def validate_split_result(
             ),
         )
     )
+    checks.append(
+        _check(
+            "RESULT_SYSTEM_IDS_UNIQUE",
+            "结果订单身份唯一",
+            len(result_system_order_ids) == target_count
+            and len(set(result_system_order_ids)) == target_count,
+            (
+                f"{target_count} 条结果订单号互不重复"
+                if len(result_system_order_ids) == target_count
+                and len(set(result_system_order_ids)) == target_count
+                else f"结果订单号存在重复或缺失：{list(result_system_order_ids)}"
+            ),
+        )
+    )
 
     source_identity_ready = _identity_ready(source)
     results_identity_ready = (

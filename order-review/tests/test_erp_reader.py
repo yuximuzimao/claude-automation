@@ -204,6 +204,8 @@ def test_sequence_view_probe_is_read_only_and_scroll_uses_physical_wheel():
 
     assert "mountedSequences" in js
     assert "expectedSystemOrderId" in js
+    assert "anchorY >= margin" in js
+    assert "rect.bottom <= viewport.height - margin" not in js
     assert ".click(" not in js
     assert result["systemOrderId"] == "ORDER-3"
     assert wheels == [("target-1", 500.0, 400.0, 520.0)]

@@ -148,58 +148,68 @@ def read_split_result_observation(
             "请先把 Chrome 当前标签页切换到快麦 ERP「订单处理 → 待审核订单」",
         )
 
-    initial = _discover_target_selection_rows(
-        target_package_count,
-        target_id,
-        evaluator=evaluator,
-        wheel_dispatcher=wheel_dispatcher,
-        sleeper=sleeper,
-    )
+    initial = probe_split_result_selection(target_id, evaluator=evaluator)
     initial_rows = _row_payloads(initial)
-    selected = tuple(
-        row
-        for row in initial_rows
-        if int(row.get("checkboxCheckedCount") or 0) > 0
-    )
-    expected_sequences = tuple(range(1, target_package_count + 1))
-    selected_sequences = tuple(int(row.get("sequence") or 0) for row in selected)
-
     sources_by_sequence: dict[int, SourceSnapshot] = {}
     verified_selected_sequences: set[int] = set()
-    stable_enough_to_read = (
+    combined = {
+        int(row.get("sequence") or 0): row
+        for row in initial_rows
+        if int(row.get("sequence") or 0) > 0
+    }
+    first_row = combined.get(1)
+    ready_to_read = (
         int(initial.get("loadingCount") or 0) == 0
         and int(initial.get("visibleDialogCount") or 0) == 0
-        and len(selected) == target_package_count
-        and selected_sequences == expected_sequences
-        and all(str(row.get("systemOrderId") or "") for row in selected)
+        and first_row is not None
+        and int(first_row.get("checkboxCount") or 0) == 1
+        and int(first_row.get("checkboxCheckedCount") or 0) == 1
+        and bool(str(first_row.get("systemOrderId") or ""))
     )
-    if stable_enough_to_read:
-        for row in selected:
-            sequence = int(row["sequence"])
+    if ready_to_read:
+        for sequence in range(1, target_package_count + 1):
+            row = combined.get(sequence, {})
+            expected_system_order_id = str(row.get("systemOrderId") or "")
             source: SourceSnapshot | None = None
             for attempt in range(2):
                 try:
-                    positioned = scroll_order_sequence_into_view(
-                        sequence,
-                        target_id,
-                        expected_system_order_id=str(row["systemOrderId"]),
-                        evaluator=evaluator,
-                        wheel_dispatcher=wheel_dispatcher,
-                        sleeper=sleeper,
-                    )
+                    if sequence == 1:
+                        # 拆分完成后页面本来就在顶部；第 1 条直接读取，避免
+                        # 对已经展开且可能高于视口的订单做无意义的回滚定位。
+                        positioned = row
+                    else:
+                        positioned = scroll_order_sequence_into_view(
+                            sequence,
+                            target_id,
+                            expected_system_order_id=expected_system_order_id,
+                            evaluator=evaluator,
+                            wheel_dispatcher=wheel_dispatcher,
+                            sleeper=sleeper,
+                        )
+                        expected_system_order_id = str(
+                            positioned.get("systemOrderId") or ""
+                        )
                     if (
-                        int(positioned.get("checkboxCount") or 0) != 1
+                        not expected_system_order_id
+                        or int(positioned.get("checkboxCount") or 0) != 1
                         or int(positioned.get("checkboxCheckedCount") or 0) != 1
                     ):
                         raise SplitResultProbeError(
                             "TARGET_SELECTION_CHANGED",
                             f"滚动到第 {sequence} 行后，该结果行已不再保持唯一勾选",
                         )
+                    combined[sequence] = {
+                        **row,
+                        "sequence": sequence,
+                        "systemOrderId": expected_system_order_id,
+                        "checkboxCount": 1,
+                        "checkboxCheckedCount": 1,
+                    }
                     source = SourceSnapshot.from_order_snapshot(
                         read_order_at_sequence(
                             sequence,
                             target_id,
-                            expected_system_order_id=str(row["systemOrderId"]),
+                            expected_system_order_id=expected_system_order_id,
                             expand_if_needed=True,
                             evaluator=evaluator,
                             post_expand_wait_seconds=(
@@ -227,37 +237,12 @@ def read_split_result_observation(
             verified_selected_sequences.add(sequence)
             sources_by_sequence[sequence] = source
 
-        if verified_selected_sequences:
-            first_row = selected[0]
-            returned = scroll_order_sequence_into_view(
-                1,
-                target_id,
-                expected_system_order_id=str(first_row["systemOrderId"]),
-                evaluator=evaluator,
-                wheel_dispatcher=wheel_dispatcher,
-                sleeper=sleeper,
-            )
-            if (
-                int(returned.get("checkboxCount") or 0) != 1
-                or int(returned.get("checkboxCheckedCount") or 0) != 1
-            ):
-                raise SplitResultProbeError(
-                    "FIRST_RESULT_SELECTION_CHANGED",
-                    "滚回第 1 行后，该结果行已不再保持唯一勾选",
-                )
-            sleeper(SPLIT_RESULT_SETTLE_SECONDS)
-
     final = probe_split_result_selection(target_id, evaluator=evaluator)
     final_rows = _row_payloads(final)
-    if stable_enough_to_read:
+    if ready_to_read:
         # 真实滚动到后续行后，虚拟列表可能卸载已核对的前序行。
         # 保留逐行滚动时取得的勾选证据，同时把最终可见的新行并入，
         # 以便额外勾选仍能阻断。
-        combined = {
-            int(row.get("sequence") or 0): row
-            for row in initial_rows
-            if int(row.get("sequence") or 0) > 0
-        }
         combined.update(
             {
                 int(row.get("sequence") or 0): row
@@ -294,119 +279,3 @@ def _row_payloads(payload: dict[str, Any]) -> tuple[dict[str, Any], ...]:
     if not isinstance(rows, list):
         return ()
     return tuple(row for row in rows if isinstance(row, dict))
-
-
-def _discover_target_selection_rows(
-    target_package_count: int,
-    target_id: str,
-    *,
-    evaluator: Callable[[str, str], Any],
-    wheel_dispatcher: Callable[[str, float, float, float], None],
-    sleeper: Callable[[float], None],
-) -> dict[str, Any]:
-    """滚动收集虚拟列表前 N 行的身份和勾选状态，并回到第 1 行。"""
-    initial = probe_split_result_selection(target_id, evaluator=evaluator)
-    initial_rows = _row_payloads(initial)
-    target_rows = tuple(
-        row
-        for row in initial_rows
-        if 1 <= int(row.get("sequence") or 0) <= target_package_count
-    )
-    mounted_sequences = tuple(
-        int(row.get("sequence") or 0) for row in target_rows
-    )
-    selected_sequences = tuple(
-        int(row.get("sequence") or 0)
-        for row in target_rows
-        if int(row.get("checkboxCheckedCount") or 0) > 0
-    )
-    first_row = next(
-        (
-            row
-            for row in target_rows
-            if int(row.get("sequence") or 0) == 1
-        ),
-        None,
-    )
-    first_system_order_id = (
-        str(first_row.get("systemOrderId") or "") if first_row else ""
-    )
-
-    safe_prefix = (
-        int(initial.get("loadingCount") or 0) == 0
-        and int(initial.get("visibleDialogCount") or 0) == 0
-        and bool(first_system_order_id)
-        and mounted_sequences
-        == tuple(range(1, len(mounted_sequences) + 1))
-        and selected_sequences == mounted_sequences
-        and all(
-            int(row.get("checkboxCount") or 0) == 1
-            and int(row.get("checkboxCheckedCount") or 0) == 1
-            and str(row.get("systemOrderId") or "")
-            for row in target_rows
-        )
-    )
-    if not safe_prefix or len(mounted_sequences) >= target_package_count:
-        return initial
-
-    combined = {
-        int(row.get("sequence") or 0): row
-        for row in initial_rows
-        if int(row.get("sequence") or 0) > 0
-    }
-    try:
-        for sequence in range(len(mounted_sequences) + 1, target_package_count + 1):
-            positioned = scroll_order_sequence_into_view(
-                sequence,
-                target_id,
-                expected_system_order_id="",
-                evaluator=evaluator,
-                wheel_dispatcher=wheel_dispatcher,
-                sleeper=sleeper,
-            )
-            if (
-                not str(positioned.get("systemOrderId") or "")
-                or int(positioned.get("checkboxCount") or 0) != 1
-                or int(positioned.get("checkboxCheckedCount") or 0) != 1
-            ):
-                break
-            observed = probe_split_result_selection(
-                target_id,
-                evaluator=evaluator,
-            )
-            combined.update(
-                {
-                    int(row.get("sequence") or 0): row
-                    for row in _row_payloads(observed)
-                    if int(row.get("sequence") or 0) > 0
-                }
-            )
-    finally:
-        returned = scroll_order_sequence_into_view(
-            1,
-            target_id,
-            expected_system_order_id=first_system_order_id,
-            evaluator=evaluator,
-            wheel_dispatcher=wheel_dispatcher,
-            sleeper=sleeper,
-        )
-        if (
-            int(returned.get("checkboxCount") or 0) != 1
-            or int(returned.get("checkboxCheckedCount") or 0) != 1
-        ):
-            raise SplitResultProbeError(
-                "FIRST_RESULT_SELECTION_CHANGED",
-                "滚回第 1 行后，该结果行已不再保持唯一勾选",
-            )
-        sleeper(SPLIT_RESULT_SETTLE_SECONDS)
-
-    final = probe_split_result_selection(target_id, evaluator=evaluator)
-    combined.update(
-        {
-            int(row.get("sequence") or 0): row
-            for row in _row_payloads(final)
-            if int(row.get("sequence") or 0) > 0
-        }
-    )
-    final["rows"] = [combined[key] for key in sorted(combined)]
-    return final

@@ -1,3 +1,5 @@
+import pytest
+
 from order_review.models import OrderSnapshot, Product
 from order_review.package_plan import (
     Package,
@@ -8,6 +10,7 @@ from order_review.package_plan import (
 from order_review.split_probe import (
     SPLIT_RESULT_EXPANDED_SETTLE_SECONDS,
     SPLIT_RESULT_SETTLE_SECONDS,
+    SplitResultProbeError,
     build_split_result_selection_probe_js,
     read_split_result_observation,
 )
@@ -150,20 +153,17 @@ def test_reader_expands_and_reads_exactly_the_selected_first_n_rows():
     ]
     assert all(row.source.products for row in selected)
     assert clicked_sequences == [2, 3]
-    assert wheels == [
-        ("target-1", 500.0, 400.0, 520.0),
-        ("target-1", 500.0, 400.0, -520.0),
-    ]
-    assert mounted_sequences == {1, 2}
+    assert wheels == [("target-1", 500.0, 400.0, 520.0)]
+    assert mounted_sequences == {2, 3}
     assert events == [
         ("sleep", SPLIT_RESULT_EXPANDED_SETTLE_SECONDS),
         ("wheel", 520.0),
         ("sleep", 0.18),
         ("sleep", SPLIT_RESULT_EXPANDED_SETTLE_SECONDS),
-        ("wheel", -520.0),
-        ("sleep", 0.18),
-        ("sleep", SPLIT_RESULT_SETTLE_SECONDS),
     ]
+    assert not any(
+        "seq(row)==='1'" in js and "mountedSequences" in js for js in calls
+    )
     assert sum(
         "checkboxCheckedCount" in js and "mountedSequences" not in js
         for js in calls
@@ -260,7 +260,7 @@ def test_reader_rechecks_only_current_row_once_after_transient_reflow():
         "SYSTEM-3",
     ]
     assert detail_reads == {1: 1, 2: 2, 3: 1}
-    assert sleeps.count(SPLIT_RESULT_SETTLE_SECONDS) == 2
+    assert sleeps.count(SPLIT_RESULT_SETTLE_SECONDS) == 1
 
 
 def test_reader_discovers_selected_target_row_unmounted_in_initial_probe():
@@ -325,7 +325,7 @@ def test_reader_discovers_selected_target_row_unmounted_in_initial_probe():
     selected = [row for row in observation.rows if row.selected]
     assert [row.sequence for row in selected] == [1, 2, 3]
     assert all(row.source is not None for row in selected)
-    assert [args[-1] for args in wheels] == [520.0, -520.0, 520.0, -520.0]
+    assert [args[-1] for args in wheels] == [520.0]
 
 
 def test_reader_stops_when_discovered_target_row_is_not_selected():
@@ -381,17 +381,17 @@ def test_reader_stops_when_discovered_target_row_is_not_selected():
             mounted_sequences.clear()
             mounted_sequences.update({1, 2})
 
-    observation = read_split_result_observation(
-        3,
-        "target-1",
-        evaluator=evaluator,
-        wheel_dispatcher=wheel_dispatcher,
-        sleeper=lambda _seconds: None,
-    )
+    with pytest.raises(SplitResultProbeError, match="不再保持唯一勾选"):
+        read_split_result_observation(
+            3,
+            "target-1",
+            evaluator=evaluator,
+            wheel_dispatcher=wheel_dispatcher,
+            sleeper=lambda _seconds: None,
+        )
 
-    assert [row.sequence for row in observation.rows if row.selected] == [1, 2]
-    assert detail_reads == []
-    assert [args[-1] for args in wheels] == [520.0, -520.0]
+    assert detail_reads == [1, 2]
+    assert [args[-1] for args in wheels] == [520.0]
 
 
 def test_reader_output_can_be_validated_without_product_type_mismatch():

@@ -24,7 +24,7 @@ from .audit_probe import (
     run_audit_preflight,
 )
 from .audit_runner import AuditStep, build_select_target_order_js, click_mouse_at
-from .erp_reader import find_erp_toaudit_target
+from .erp_reader import find_erp_toaudit_target, scroll_order_sequence_into_view
 from .file_lock import FileLock
 from .package_plan import PackagePlan, SourceSnapshot
 from .split_dry_run import build_split_dry_run
@@ -134,6 +134,9 @@ def run_mixed_order_split(
         [SourceSnapshot, PackagePlan, SplitResultObservation],
         SplitResultValidationReport,
     ] = validate_split_result,
+    post_audit_scroller: Callable[..., dict[str, Any]] = (
+        scroll_order_sequence_into_view
+    ),
     progress_callback: Callable[[AuditExecutionState, str], None] | None = None,
     log_store: AuditExecutionLogStore | None = None,
     sleeper: Callable[[float], None] = time.sleep,
@@ -517,6 +520,7 @@ def run_mixed_order_split(
                     AuditExecutionState.RESULT_VERIFYING,
                     split_validation.to_text(),
                 )
+            result_system_order_ids = split_validation.result_system_order_ids
             record(
                 AuditExecutionState.RESULT_VERIFYING,
                 (
@@ -530,7 +534,7 @@ def run_mixed_order_split(
                 target_id,
                 evaluator,
                 lambda: build_prepare_split_audit_menu_trigger_js(
-                    len(plan.packages)
+                    result_system_order_ids
                 ),
                 dialog_wait_seconds,
                 sleeper,
@@ -556,7 +560,7 @@ def run_mixed_order_split(
                 target_id,
                 evaluator,
                 lambda: build_prepare_split_ordinary_audit_item_js(
-                    len(plan.packages)
+                    result_system_order_ids
                 ),
                 dialog_wait_seconds,
                 sleeper,
@@ -652,8 +656,51 @@ def run_mixed_order_split(
                     "限定时间内没有获得完整的拆分后审核结果"
                 )
             if audit_result.state == AuditExecutionState.SUCCESS:
+                completion_builder = lambda: build_verify_split_audit_completion_js(
+                    result_system_order_ids
+                )
+                before_scroll = evaluator(target_id, completion_builder())
+                if not (
+                    isinstance(before_scroll, dict)
+                    and before_scroll.get("ok")
+                    and "rowCount" in before_scroll
+                    and int(before_scroll.get("rowCount") or 0) == 0
+                ):
+                    try:
+                        post_audit_scroller(
+                            1,
+                            target_id,
+                            expected_system_order_id="",
+                            evaluator=evaluator,
+                            sleeper=sleeper,
+                        )
+                    except Exception as exc:
+                        raise _SplitSubmittedUncertain(
+                            f"审核已提交，但无法回到新的第 1 条核对结果：{exc}"
+                        ) from exc
+                completion = _poll_payload(
+                    target_id,
+                    evaluator,
+                    completion_builder,
+                    result_wait_seconds,
+                    sleeper,
+                    monotonic,
+                )
+                if completion is None:
+                    raise _SplitSubmittedUncertain(
+                        "审核已提交，但拆分结果订单仍未全部离开待审核列表"
+                    )
                 final_state = AuditExecutionState.SUCCESS
-                record(AuditExecutionState.SUCCESS, audit_result.render_text())
+                next_order_id = str(
+                    completion.get("currentSequenceOneSystemOrderId") or ""
+                )
+                record(
+                    AuditExecutionState.SUCCESS,
+                    (
+                        f"拆分结果订单已全部离开待审核列表；"
+                        f"已回到新的第 1 条{f' {next_order_id}' if next_order_id else ''}"
+                    ),
+                )
             elif audit_result.state == AuditExecutionState.STOPPED:
                 final_state = AuditExecutionState.STOPPED
                 record(
@@ -989,12 +1036,12 @@ def build_read_split_network_result_js(execution_id: str) -> str:
 
 
 def build_prepare_split_audit_menu_trigger_js(
-    target_package_count: int,
+    result_system_order_ids: tuple[str, ...],
 ) -> str:
-    count_json = json.dumps(target_package_count)
+    ids_json = json.dumps(result_system_order_ids, ensure_ascii=False)
     return rf"""/* ORDER_REVIEW_ACTION:PREPARE_SPLIT_AUDIT_MENU */
 (function(){{
-  var expectedCount = {count_json};
+  var expectedIds = {ids_json};
   { _common_page_helpers_js() }
   if (location.hash.indexOf('#/trade/toaudit/') !== 0 ||
       document.title.indexOf('快麦ERP--待审核订单') < 0)
@@ -1009,15 +1056,18 @@ def build_prepare_split_audit_menu_trigger_js(
   )).filter(visible);
   if (loading.length !== 0)
     return JSON.stringify({{ok:false,error:'PAGE_LOADING'}});
-  var selected = Array.from(document.querySelectorAll(
+  var mounted = Array.from(document.querySelectorAll(
     '.module-trade-list-item'
-  )).filter(visible).filter(checked);
-  var selectedSequences = selected.map(sequence).sort(function(a,b){{ return a-b; }});
-  var expectedSequences = Array.from(
-    {{length:expectedCount}}, function(_value,index){{ return index + 1; }}
-  );
-  if (selected.length !== expectedCount ||
-      JSON.stringify(selectedSequences) !== JSON.stringify(expectedSequences))
+  )).filter(visible);
+  var mountedExpected = mounted.filter(function(row){{
+    return expectedIds.indexOf(systemOrderId(row)) >= 0;
+  }});
+  var selected = mounted.filter(checked);
+  if (!mountedExpected.length ||
+      mountedExpected.some(function(row){{ return !checked(row); }}) ||
+      selected.some(function(row){{
+        return expectedIds.indexOf(systemOrderId(row)) < 0;
+      }}))
     return JSON.stringify({{ok:false,error:'SPLIT_SELECTION_CHANGED'}});
   var toolbars = Array.from(document.querySelectorAll('.toolbar-list-item'))
     .filter(function(el){{
@@ -1038,25 +1088,28 @@ def build_prepare_split_audit_menu_trigger_js(
 
 
 def build_prepare_split_ordinary_audit_item_js(
-    target_package_count: int,
+    result_system_order_ids: tuple[str, ...],
 ) -> str:
-    count_json = json.dumps(target_package_count)
+    ids_json = json.dumps(result_system_order_ids, ensure_ascii=False)
     return rf"""/* ORDER_REVIEW_ACTION:PREPARE_SPLIT_ORDINARY_AUDIT */
 (function(){{
-  var expectedCount = {count_json};
+  var expectedIds = {ids_json};
   { _common_page_helpers_js() }
   if (location.hash.indexOf('#/trade/toaudit/') !== 0 ||
       document.title.indexOf('快麦ERP--待审核订单') < 0)
     return JSON.stringify({{ok:false,error:'NOT_TOAUDIT_PAGE'}});
-  var selected = Array.from(document.querySelectorAll(
+  var mounted = Array.from(document.querySelectorAll(
     '.module-trade-list-item'
-  )).filter(visible).filter(checked);
-  var selectedSequences = selected.map(sequence).sort(function(a,b){{ return a-b; }});
-  var expectedSequences = Array.from(
-    {{length:expectedCount}}, function(_value,index){{ return index + 1; }}
-  );
-  if (selected.length !== expectedCount ||
-      JSON.stringify(selectedSequences) !== JSON.stringify(expectedSequences))
+  )).filter(visible);
+  var mountedExpected = mounted.filter(function(row){{
+    return expectedIds.indexOf(systemOrderId(row)) >= 0;
+  }});
+  var selected = mounted.filter(checked);
+  if (!mountedExpected.length ||
+      mountedExpected.some(function(row){{ return !checked(row); }}) ||
+      selected.some(function(row){{
+        return expectedIds.indexOf(systemOrderId(row)) < 0;
+      }}))
     return JSON.stringify({{ok:false,error:'SPLIT_SELECTION_CHANGED'}});
   var menus = Array.from(document.querySelectorAll(
     '.toolbar-sub_list'
@@ -1157,6 +1210,48 @@ def build_prepare_split_audit_confirm_js(
   window.__orderReviewAuditObservation = observation;
   window.__orderReviewAuditObserver = observer;
   return center(confirm[0]);
+}})()"""
+
+
+def build_verify_split_audit_completion_js(
+    result_system_order_ids: tuple[str, ...],
+) -> str:
+    ids_json = json.dumps(result_system_order_ids, ensure_ascii=False)
+    return rf"""/* ORDER_REVIEW_ACTION:VERIFY_SPLIT_AUDIT_COMPLETION */
+(function(){{
+  var expectedIds = {ids_json};
+  { _common_page_helpers_js() }
+  if (location.hash.indexOf('#/trade/toaudit/') !== 0 ||
+      document.title.indexOf('快麦ERP--待审核订单') < 0)
+    return JSON.stringify({{ok:false,error:'NOT_TOAUDIT_PAGE'}});
+  var dialogs = Array.from(new Set(Array.from(document.querySelectorAll(
+    '[role="dialog"],.el-message-box__wrapper'
+  )))).filter(visible);
+  var loading = Array.from(document.querySelectorAll(
+    '.el-loading-mask,.ivu-spin-fix,.ant-spin-spinning,[aria-busy="true"]'
+  )).filter(visible);
+  if (dialogs.length || loading.length)
+    return JSON.stringify({{ok:false,error:'PAGE_NOT_SETTLED'}});
+  var rows = Array.from(document.querySelectorAll(
+    '.module-trade-list-item'
+  )).filter(visible);
+  var selected = rows.filter(checked);
+  var remainingResultIds = rows.map(systemOrderId).filter(function(value){{
+    return expectedIds.indexOf(value) >= 0;
+  }});
+  var first = rows.filter(function(row){{ return sequence(row) === 1; }});
+  if (selected.length || remainingResultIds.length ||
+      (rows.length && first.length !== 1))
+    return JSON.stringify({{ok:false,error:'RESULT_ORDERS_STILL_PRESENT'}});
+  var firstId = first.length === 1 ? systemOrderId(first[0]) : '';
+  if (firstId && expectedIds.indexOf(firstId) >= 0)
+    return JSON.stringify({{ok:false,error:'FIRST_ROW_IS_OLD_RESULT'}});
+  return JSON.stringify({{
+    ok:true,
+    rowCount:rows.length,
+    currentSequenceOneSystemOrderId:firstId,
+    verifiedResultCount:expectedIds.length
+  }});
 }})()"""
 
 

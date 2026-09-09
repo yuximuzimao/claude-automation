@@ -247,6 +247,35 @@ def test_selected_rows_must_be_exactly_the_first_target_rows():
     assert not _check(report, "SELECTED_ROWS_ARE_FIRST_N").passed
 
 
+def test_result_system_order_ids_must_be_unique():
+    source = _original_source()
+    observation = _successful_observation()
+    duplicate = replace(
+        observation.rows[2],
+        source=replace(
+            observation.rows[2].source,
+            system_order_id=observation.rows[1].source.system_order_id,
+        ),
+    )
+
+    report = validate_split_result(
+        source,
+        _plan(source),
+        replace(
+            observation,
+            rows=(
+                observation.rows[0],
+                observation.rows[1],
+                duplicate,
+                observation.rows[3],
+            ),
+        ),
+    )
+
+    assert not report.verified
+    assert not _check(report, "RESULT_SYSTEM_IDS_UNIQUE").passed
+
+
 def test_platform_order_universe_must_equal_original_after_deduplication():
     source = _original_source()
     observation = _successful_observation()

@@ -248,6 +248,7 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
     moves = []
     sleeps = []
     split_result_reads = []
+    post_audit_scrolls = []
 
     def evaluator(_target_id, js):
         evaluations.append(js)
@@ -296,6 +297,12 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
             return {"ok": True, "x": 70, "y": 80}
         if "ORDER_REVIEW_ACTION:PREPARE_SPLIT_AUDIT_CONFIRM" in js:
             return {"ok": True, "x": 80, "y": 90}
+        if "ORDER_REVIEW_ACTION:VERIFY_SPLIT_AUDIT_COMPLETION" in js:
+            return {
+                "ok": True,
+                "currentSequenceOneSystemOrderId": "NEXT-ORDER",
+                "verifiedResultCount": 3,
+            }
         raise AssertionError("出现未预期的页面脚本")
 
     preflight = SimpleNamespace(preflight_ready=True, blockers=())
@@ -316,11 +323,18 @@ def test_split_runner_executes_one_continuous_protected_flow(monkeypatch):
         split_result_reader=split_result_reader,
         audit_dialog_reader=_split_audit_dialog,
         audit_result_reader=_split_audit_success_result,
+        post_audit_scroller=lambda *args, **kwargs: post_audit_scrolls.append(
+            (args, kwargs)
+        )
+        or {"ok": True},
         sleeper=lambda seconds: sleeps.append(seconds),
     )
 
     assert report.state == AuditExecutionState.SUCCESS
     assert split_result_reads == [(3, "target-1", evaluator)]
+    assert len(post_audit_scrolls) == 1
+    assert post_audit_scrolls[0][0] == (1, "target-1")
+    assert post_audit_scrolls[0][1]["expected_system_order_id"] == ""
     assert moves == [("target-1", 10.0, 20.0)]
     assert clicks == [
         ("target-1", 20.0, 30.0),
@@ -552,22 +566,24 @@ def test_network_observer_keeps_missing_split_success_as_unknown():
 
 
 def test_split_audit_actions_recheck_exact_package_selection_before_dialog():
-    trigger = split_runner.build_prepare_split_audit_menu_trigger_js(3)
-    ordinary = split_runner.build_prepare_split_ordinary_audit_item_js(3)
+    result_ids = ("RESULT-1", "RESULT-2", "RESULT-3")
+    trigger = split_runner.build_prepare_split_audit_menu_trigger_js(result_ids)
+    ordinary = split_runner.build_prepare_split_ordinary_audit_item_js(result_ids)
     confirm = split_runner.build_prepare_split_audit_confirm_js(
         "SYSTEM-1",
         3,
     )
 
-    assert "var expectedCount = 3" in trigger
-    assert "selected.length !== expectedCount" in trigger
+    assert 'var expectedIds = ["RESULT-1", "RESULT-2", "RESULT-3"]' in trigger
+    assert "mountedExpected.some" in trigger
+    assert "expectedIds.indexOf(systemOrderId(row)) < 0" in trigger
     assert "SPLIT_SELECTION_CHANGED" in trigger
     assert "TARGET_SELECTION_CHANGED" not in trigger
     assert "FOOTER_MULTIPLE_ORDERS" not in trigger
     assert "batch_audit" in ordinary
     assert "batch_force_audit" in ordinary
-    assert "var expectedCount = 3" in ordinary
-    assert "selected.length !== expectedCount" in ordinary
+    assert 'var expectedIds = ["RESULT-1", "RESULT-2", "RESULT-3"]' in ordinary
+    assert "mountedExpected.some" in ordinary
     assert "SPLIT_SELECTION_CHANGED" in ordinary
     assert "var expectedCount = 3" in confirm
     assert "Number(count[1]) !== expectedCount" in confirm

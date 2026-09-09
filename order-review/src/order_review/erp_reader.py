@@ -509,6 +509,13 @@ def build_order_sequence_view_probe_js(
     return JSON.stringify({{ok:false,error:'ROW_IDENTITY_CHANGED'}});
   }}
   var rect = row.getBoundingClientRect();
+  var anchors = Array.from(row.querySelectorAll(
+    '.trade-plus .trade-expand [data-name="trigger_show_orders"],' +
+    'input.J_Checkbox[data-name="check_select_item"]'
+  )).filter(visible);
+  var anchor = anchors.length ? anchors[0] : row;
+  var anchorRect = anchor.getBoundingClientRect();
+  var anchorY = anchorRect.top + anchorRect.height / 2;
   var boxes = checkboxState(row);
   var margin = 40;
   return JSON.stringify({{
@@ -517,11 +524,18 @@ def build_order_sequence_view_probe_js(
     systemOrderId:systemOrderId,
     checkboxCount:boxes.count,
     checkboxCheckedCount:boxes.checkedCount,
-    inViewport:rect.top >= margin && rect.bottom <= viewport.height - margin,
-    direction:rect.bottom > viewport.height - margin ? 'down' : 'up',
+    inViewport:anchorY >= margin && anchorY <= viewport.height - margin,
+    direction:anchorY > viewport.height - margin ? 'down' : 'up',
     rect:{{top:rect.top,bottom:rect.bottom,left:rect.left,right:rect.right}},
+    anchorRect:{{
+      top:anchorRect.top,bottom:anchorRect.bottom,
+      left:anchorRect.left,right:anchorRect.right
+    }},
     mountedSequences:mountedSequences,
-    wheelX:Math.max(20, Math.min(viewport.width - 20, rect.left + rect.width / 2)),
+    wheelX:Math.max(20, Math.min(
+      viewport.width - 20,
+      anchorRect.left + anchorRect.width / 2
+    )),
     wheelY:wheelY
   }});
 }})()"""
