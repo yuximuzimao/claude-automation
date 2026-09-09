@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-08
+更新时间：2026-09-09
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
@@ -13,7 +13,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
 
-审单实验与包装资料：2026-09-08 用户明确模拟页面需支持手动指定同品牌纸箱、真实立体摆放及品牌/箱型/商品外盒/原箱/礼盒组合资料展示，尚未开发。已确认塑封外盒测量口径、悦希普通合单按同实际商品限制、KGOS无此合单限制、礼盒内部组合免几何且只计算外部礼盒+礼袋。玉米片原箱已支持1～10包独立发货；新版咖啡同尺寸可混装80盒原箱，70盒下限仅估计；修颜专箱最多2套，额外2个面霜待确认、4个未实测。现役执行不变；当前范围见 `order-review/docs/CURRENT.md`，长期规则见根本规则7.5～7.7，资料在 `order-review/data/packing-dimensions.json`。
+审单模拟器规划：2026-09-09 本轮仅计划与资料保存，用户明确暂不开发、后续由GPT执行。完整计划 `order-review/docs/2026-09-08-packing-simulator-plan.md`，活动简写原文 `order-review/data/packing-campaign-notes-2026-09-08.txt`，尚未解析。悦希合单依据已纠正为固定商品组合而非SKU；修颜礼盒按封装成品；箱体反推只作估算示意。新版咖啡编码/完整名称/简称已按用户逐字确认分字段保存，六组悦希箱规按厘米原文转毫米记录，两新箱仍待集成。先做资料页与KGOS指定单箱实验，再多包与盲测；当前入口见 `order-review/docs/CURRENT.md`。
 
 ## 系统级配置（Codex 启动时注意）
 
