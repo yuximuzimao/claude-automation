@@ -126,4 +126,103 @@ describe('productArchive suite sub-items', () => {
     assert.match(result.error, /可见弹窗/);
     assert.match(result.error, /trade-detail-dialog/);
   });
+
+  it('悦希特殊规格编码只走规格商家编码查询，并保留ERP返回主编码供退货核对', async () => {
+    const { productArchive, evalCalls } = loadArchiveWithMocks([
+      { alreadySet: true },
+      { searched: '6940079096228' },
+      {
+        outerId: 'yx005',
+        title: '悦希舒缓焕颜精华乳100ml',
+        subItemNum: 0,
+        type: '0',
+        hasProduct: true,
+      },
+    ]);
+
+    const result = await productArchive('erp-target', '6940079096228');
+
+    assert.equal(result.success, true);
+    assert.equal(result.data.outerId, 'yx005');
+    assert.deepEqual(result.data.subItems, []);
+    assert.match(evalCalls[1].js, /规格商家编码/);
+    assert.match(evalCalls[2].js, /规格商家编码/);
+
+    const { proveReturnItems } = require(modulePath('lib/return-item-proof.js'));
+    const proof = proveReturnItems({
+      ticket: {
+        returnTracking: 'SF_TEST',
+        subOrders: [{ id: '762403213', afterSaleNum: 1 }],
+        gifts: [],
+      },
+      productArchives: [{ ...result.data, subOrderId: '762403213' }],
+      erpAftersale: {
+        rows: [{
+          erpOrderId: 'ERP_TEST',
+          goodsStatus: '卖家已收到退货',
+          tracking: 'SF_TEST',
+          returnQty: 1,
+          items: [{ name: '悦希舒缓焕颜精华乳100ml', specCode: 'yx005', qtyGood: 1, qtyBad: 0 }],
+        }],
+      },
+      collectErrors: [],
+    });
+    assert.equal(proof.outcome, 'exact');
+    assert.deepEqual(proof.expectedBySpec, { yx005: 1 });
+  });
+
+  it('焕颜面霜1.0旧款条码也命中特殊规格编码白名单', async () => {
+    const { productArchive, evalCalls } = loadArchiveWithMocks([
+      { alreadySet: true },
+      { searched: '6975183893197' },
+      {
+        outerId: 'yx002',
+        title: '悦希玻色因抗皱紧致焕颜面霜50g',
+        subItemNum: 0,
+        type: '0',
+        hasProduct: true,
+      },
+    ]);
+
+    const result = await productArchive('erp-target', '6975183893197');
+
+    assert.equal(result.success, true);
+    assert.equal(result.data.outerId, 'yx002');
+    assert.deepEqual(result.data.subItems, []);
+    assert.match(evalCalls[1].js, /规格商家编码/);
+    assert.match(evalCalls[2].js, /规格商家编码/);
+  });
+
+  it('特殊规格编码查询后再查普通商品时，先清空规格商家编码残留', async () => {
+    const { productArchive, evalCalls } = loadArchiveWithMocks([
+      { alreadySet: true },
+      { searched: '6940079096228' },
+      {
+        outerId: 'yx005',
+        title: '悦希舒缓焕颜精华乳100ml',
+        subItemNum: 0,
+        type: '0',
+        hasProduct: true,
+      },
+      { alreadySet: true },
+      { searched: '6950328262755' },
+      {
+        outerId: '6950328262755',
+        title: 'HEE悦希玻色因抗皱紧致焕颜面霜（2.0）',
+        subItemNum: 0,
+        type: '0',
+        hasProduct: true,
+      },
+    ]);
+
+    const special = await productArchive('erp-target', '6940079096228');
+    const normal = await productArchive('erp-target', '6950328262755');
+
+    assert.equal(special.success, true);
+    assert.equal(normal.success, true);
+    assert.equal(normal.data.outerId, '6950328262755');
+    assert.match(evalCalls[4].js, /规格商家编码/);
+    assert.match(evalCalls[4].js, /specInp\.value = ''/);
+    assert.match(evalCalls[4].js, /主商家编码/);
+  });
 });

@@ -10,6 +10,15 @@ const { navigateErp } = require('../erp/navigate');
 const { sleep, retry } = require('../wait');
 const { ok, fail } = require('../result');
 
+// 悦希仅这 4 个已确认单品的对应表 erpCode 实际是「规格商家编码」，不是主商家编码。
+// 其余商品保持原来的主商家编码查询路径，避免扩大影响面。
+const SPEC_CODE_ONLY_ARCHIVE_CODES = new Set([
+  '6940079096228', // yx005 悦希舒缓焕颜精华乳100ml
+  '6940079096211', // yx004 悦希舒缓焕颜精粹水100ml
+  '6975183893203', // yx003 悦希氨基酸表活焕颜洁面膏100g
+  '6975183893197', // yx002 悦希玻色因抗皱紧致焕颜面霜50g（1.0旧款）
+]);
+
 // 切换查询类型为「精确查询」（见 docs/erp-query.md §2）
 const SET_EXACT_QUERY_JS = `(function(){
   var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
@@ -48,6 +57,12 @@ function makeSearchSpecCodeJS(specCode) {
     });
     var mainInp = inputs.find(function(i){ return i.placeholder === '主商家编码'; });
     if (!mainInp) return JSON.stringify({error:'主商家编码输入框不存在'});
+    var specInp = inputs.find(function(i){ return i.placeholder === '规格商家编码'; });
+    if (specInp) {
+      specInp.value = '';
+      specInp.dispatchEvent(new Event('input', {bubbles:true}));
+      specInp.dispatchEvent(new Event('change', {bubbles:true}));
+    }
     mainInp.value = '${specCode}';
     mainInp.dispatchEvent(new Event('input', {bubbles:true}));
     mainInp.dispatchEvent(new Event('change', {bubbles:true}));
@@ -89,6 +104,72 @@ const READ_DATALIST_JS = `(function(){
     hasProduct: item.hasProduct
   });
 })()`;
+
+function makeSearchSpecialSpecCodeJS(specCode) {
+  return `(function(){
+    var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
+      var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    inputs.forEach(function(i){
+      if (i.placeholder === '主商家编码' || i.placeholder === '规格商家编码') {
+        i.value = '';
+        i.dispatchEvent(new Event('input', {bubbles:true}));
+        i.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+    var inp = inputs.find(function(i){ return i.placeholder === '规格商家编码'; });
+    if (!inp) return JSON.stringify({error:'规格商家编码输入框不存在'});
+    inp.value = '${specCode}';
+    inp.dispatchEvent(new Event('input', {bubbles:true}));
+    inp.dispatchEvent(new Event('change', {bubbles:true}));
+    var el = inp; var sv = null;
+    for (var i = 0; i < 12; i++) {
+      if (!el) break;
+      var v = el.__vue__;
+      if (v && typeof v.handleQuery === 'function') { sv = v; break; }
+      el = el.parentElement;
+    }
+    if (!sv) return JSON.stringify({error:'未找到 handleQuery'});
+    sv.handleQuery();
+    return JSON.stringify({searched: '${specCode}', searchData: sv.searchData});
+  })()`;
+}
+
+function makeReadSpecialDataListJS(specCode) {
+  return `(function(){
+    var inputs = Array.from(document.querySelectorAll('input.el-input__inner')).filter(function(i){
+      var r = i.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    });
+    var el = inputs.find(function(i){ return i.placeholder === '规格商家编码'; });
+    if (!el) return JSON.stringify({error:'未找到规格商家编码输入框'});
+    var v = el; var sv = null;
+    for (var i = 0; i < 12; i++) {
+      if (!v) break;
+      var vm = v.__vue__;
+      if (vm && vm.dataList) { sv = vm; break; }
+      v = v.parentElement;
+    }
+    if (!sv || !sv.dataList || !sv.dataList.length) {
+      return JSON.stringify({error:'dataList 为空', count: sv ? sv.dataList.length : -1});
+    }
+    var expected = '${specCode}';
+    function containsExact(value, depth) {
+      if (depth < 0 || value === null || value === undefined) return false;
+      if (typeof value !== 'object') return String(value).trim() === expected;
+      if (Array.isArray(value)) return value.some(function(x){ return containsExact(x, depth - 1); });
+      return Object.keys(value).some(function(k){ return containsExact(value[k], depth - 1); });
+    }
+    var item = sv.dataList.find(function(candidate){ return containsExact(candidate, 4); });
+    if (!item) return JSON.stringify({error:'dataList 未包含查询规格编码', count:sv.dataList.length});
+    return JSON.stringify({
+      outerId: item.outerId,
+      title: item.title,
+      subItemNum: item.subItemNum || 0,
+      type: item.type,
+      hasProduct: item.hasProduct
+    });
+  })()`;
+}
 
 // 点击子商品数字链接（a.ml_15）展开单品明细
 function makeClickSubItemLinkJS(subItemNum) {
@@ -198,6 +279,7 @@ async function productArchive(targetId, specCode) {
 
 async function archiveWithRetry(targetId, specCode, isRetry) {
   try {
+    const searchBySpecCode = SPEC_CODE_ONLY_ARCHIVE_CODES.has(String(specCode));
     await navigateErp(targetId, '商品档案V2');
 
     // 设置精确查询
@@ -212,12 +294,18 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
       }
     }, { maxRetries: 3, delayMs: 800, label: 'set exact query' });
 
-    // 搜索
+    // 搜索：仅白名单中的 4 个悦希单品走「规格商家编码」，其余完全保持原主商家编码路径。
     const data = await retry(async () => {
-      const search = await cdp.eval(targetId, makeSearchSpecCodeJS(specCode));
+      const searchJs = searchBySpecCode
+        ? makeSearchSpecialSpecCodeJS(specCode)
+        : makeSearchSpecCodeJS(specCode);
+      const readJs = searchBySpecCode
+        ? makeReadSpecialDataListJS(specCode)
+        : READ_DATALIST_JS;
+      const search = await cdp.eval(targetId, searchJs);
       if (search.error) throw new Error(search.error);
       await sleep(3500);
-      const d = await cdp.eval(targetId, READ_DATALIST_JS);
+      const d = await cdp.eval(targetId, readJs);
       if (d.error) throw new Error(d.error);
       return d;
     }, { maxRetries: 3, delayMs: 2000, label: `product-archive ${specCode}` });
@@ -257,6 +345,8 @@ async function archiveWithRetry(targetId, specCode, isRetry) {
       }
     }
 
+    // 特殊单品按「规格商家编码」定位档案，但 ERP 已收货明细使用返回的 outerId（yx00x）核对。
+    // 单品保持 subItems=[]，让既有核对逻辑按 title + outerId 构造单品，避免把查询条码误当成入库规格编码。
     return ok({ ...data, subItems });
   } catch (e) {
     if (!isRetry && /顶部标签未找到/.test(e.message)) {

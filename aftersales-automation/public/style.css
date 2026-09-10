@@ -338,6 +338,7 @@ header {
 .decision-tag.approve { background: var(--green-light); color: var(--green); }
 .decision-tag.reject { background: var(--red-light); color: var(--red); }
 .decision-tag.escalate { background: var(--orange-light); color: var(--orange); }
+.decision-tag.skip { background: #e0f2fe; color: #0369a1; }
 .decision-tag.pending { background: var(--gray-100); color: var(--gray-400); }
 
 .confidence-indicator {
@@ -361,6 +362,7 @@ header {
 .decision-box.approve { background: var(--green-light); border-color: #bbf7d0; }
 .decision-box.reject { background: var(--red-light); border-color: #fecaca; }
 .decision-box.escalate { background: var(--orange-light); border-color: #fde68a; }
+.decision-box.skip { background: #f0f9ff; border-color: #bae6fd; }
 
 .decision-box-title { font-weight: 600; font-size: 13.5px; margin-bottom: 5px; }
 .decision-box-reason { color: var(--gray-600); font-size: 13px; line-height: 1.5; }
