@@ -7,70 +7,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 ROUTES = ROOT / "data/route-atlas/workbench-routes.json"
 OUT = ROOT / "data/route-atlas/flight-state-audit.json"
+CONFIG = ROOT / "data/route-atlas/route-atlas-flight-state-config.json"
 
-# Canonical flight hubs and the player-facing aliases that may appear in route text.
-# This is intentionally route-layer state, not a global "all known flight points" list.
-HUB_ALIASES: dict[str, dict[str, tuple[str, ...]]] = {
-    "borean": {
-        "战歌要塞": ("战歌要塞",),
-        "琥珀崖": ("琥珀崖",),
-        "永生之盾": ("永生之盾", "Transitus Shield"),
-        "牦牛村": ("牦牛村", "牦牛人村"),
-        "博古洛克": ("博古洛克",),
-    },
-    "dragonblight": {
-        "阿格玛之锤": ("阿格玛之锤", "阿格玛"),
-        "莫亚基港口": ("莫亚基港口", "莫亚基"),
-        "龙眠神殿": ("龙眠神殿", "龙眠"),
-        "怨毒镇": ("怨毒镇",),
-        "库卡隆先锋营地": ("库卡隆先锋营地", "库卡隆"),
-    },
-    "grizzly": {
-        "征服堡": ("征服堡", "Conquest Hold"),
-        "欧尼瓦营地": ("欧尼瓦营地", "欧尼瓦", "Camp Oneqwah"),
-    },
-    "zuldrak": {
-        "圣光据点": ("圣光据点", "Light's Breach"),
-        "黑锋哨站": ("黑锋哨站", "Ebon Watch"),
-        "银色前沿": ("银色前沿", "The Argent Stand", "Argent Stand"),
-        "希姆托加": ("希姆托加", "Zim'Torga"),
-        "古达克": ("古达克", "Gundrak"),
-    },
-    "storm": {
-        "K3": ("K3",),
-        "格罗玛什坠毁点": ("格罗玛什坠毁点", "Grom'arsh Crash-Site"),
-        "丹尼芬雷": ("丹尼芬雷", "Dun Niffelem"),
-        "奥杜尔": ("奥杜尔", "Ulduar"),
-        "布德克拉格庇护所": ("布德克拉格庇护所", "Bouldercrag's Refuge"),
-        "唐卡洛营地": ("唐卡洛营地", "Camp Tunka'lo"),
-    },
-    "icecrown": {
-        "银色前线基地": ("银色前线基地", "Argent Vanguard"),
-        "北伐军之峰": ("北伐军之峰", "Crusaders' Pinnacle"),
-        "暗影拱顶": ("暗影拱顶", "The Shadow Vault"),
-        "死亡高地": ("死亡高地", "Death's Rise"),
-    },
-    "howling": {
-        "药剂师营地": ("药剂师营地", "Apothecary Camp"),
-        "冬蹄营地": ("冬蹄营地", "Camp Winterhoof"),
-        "新阿加曼德": ("新阿加曼德", "New Agamand"),
-        "复仇港": ("复仇港", "Vengeance Landing"),
-        "卡玛古": ("卡玛古", "Kamagua"),
-    },
-    "sholazar": {
-        "奈辛瓦里营地": ("奈辛瓦里营地", "Nesingwary Base Camp"),
-        "河流之心": ("河流之心", "River's Heart"),
-        "龙眠神殿": ("龙眠神殿", "Wyrmrest Temple"),
-        "达拉然": ("达拉然", "Dalaran"),
-        "银色比武场": ("银色比武场", "Argent Tournament"),
-    },
-}
-
-# Flight points inherited from already-completed earlier maps. Route-local opening actions are
-# still discovered from the point timeline below.
-INITIAL_OPENED_HUBS: dict[str, set[str]] = {
-    "sholazar": {"龙眠神殿", "达拉然", "银色比武场"},
-}
+# Hub aliases and inherited opened-flight state are route facts, not audit-engine logic.
+# The engine consumes the explicit RouteState configuration above.
 
 
 def point_text(point: list[Any]) -> str:
@@ -108,9 +48,12 @@ def flight_destination(point: list[Any], aliases: dict[str, tuple[str, ...]]) ->
     return hubs[-1]
 
 
-def audit_route(route_key: str, route: dict[str, Any]) -> dict[str, Any]:
-    aliases = HUB_ALIASES[route_key]
-    opened: set[str] = set(INITIAL_OPENED_HUBS.get(route_key, set()))
+def audit_route(route_key: str, route: dict[str, Any], route_config: dict[str, Any]) -> dict[str, Any]:
+    aliases = {
+        str(canonical): tuple(str(alias) for alias in names)
+        for canonical, names in (route_config.get("hub_aliases") or {}).items()
+    }
+    opened: set[str] = {str(name) for name in (route_config.get("initial_opened_hubs") or [])}
     flights: list[dict[str, Any]] = []
     violations: list[dict[str, Any]] = []
     unknown_destinations: list[dict[str, Any]] = []
@@ -159,12 +102,14 @@ def audit_route(route_key: str, route: dict[str, Any]) -> dict[str, Any]:
 
 def main() -> None:
     routes = json.loads(ROUTES.read_text(encoding="utf-8"))
+    config = json.loads(CONFIG.read_text(encoding="utf-8"))
+    route_configs = config.get("routes") or {}
     result = {
         "status": "route_timepoint_flight_state_audit",
         "rule": "A system-flight destination may be used only after that destination flight point has been opened earlier in the route timeline.",
         "routes": {
-            key: audit_route(key, routes[key])
-            for key in ("borean", "dragonblight", "grizzly", "zuldrak", "storm", "icecrown", "howling", "sholazar")
+            key: audit_route(key, routes[key], route_config)
+            for key, route_config in route_configs.items()
         },
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

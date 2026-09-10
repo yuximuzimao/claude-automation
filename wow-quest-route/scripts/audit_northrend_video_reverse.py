@@ -40,43 +40,24 @@ SPECS = {
 }
 
 QUOTE_RE = re.compile(r"《([^》]+)》")
+ACTION_TOKEN_RE = re.compile(r"(右键接|自动接|回交|交付|完成|接|交|做)|《([^》]+)》")
 COMPLETE_ACTIONS = {"complete", "complete_and_accept_next", "object_trigger_active_then_complete"}
 
-# Whole-map manual resolutions for current adjacent-order alarms. These are deliberately keyed by
-# task names so any newly introduced reversal remains unresolved and blocks freeze until reviewed.
-MANUAL_RESOLUTIONS = {
-    "borean": {
-        ("情势扭转", "决战奈辛瓦里"): "keep_current: video crosses a different Alliance map progression; current Horde route closes Nessingwary before the later Kaskala chain and does not create a shared local detour.",
-        ("先祖的回归", "别让他们逃了！"): "keep_current: both Coldrock chains are active in the same local loop; their turn-in order differs but current route completes both without an extra revisit.",
-        ("敌人的耳环", "帮助弱小"): "keep_current: Help the Weak is shared/fast and is turned in immediately; Earrings remains a background personal-drop task to avoid dedicated five-box farming.",
-        ("调查", "监视裂谷：悬崖异常"): "keep_current: the rift task is already available on Amber Ledge arrival while Investigation unlocks after the jailbreak return; the current order follows availability and the same hub cycle.",
-        ("重铸钥匙", "监视裂谷：峭壁断层"): "keep_current: the cliff-fault objective is completed on the outbound local pass; Reforging the Key unlocks later through the interrogation/time-race chain at the same hub.",
-        ("监视裂谷：冬鳞洞穴", "侦查虫孔"): "keep_current: these belong to separate Taunka/Winterfin phases; video episode order is not a local adjacency claim. Current route carries the rift quest through the north loop and uses the opened flight network for its final turn-in.",
-    },
-    "dragonblight": {
-        ("搜索因度雷村", "不要浪费"): "keep_current: video begins this section already on the Indu'le line. The Horde route from Agmar first reaches Moa'ki to unlock Don't Waste and the Kalu'ak chain, then threads back through Indu'le while those tasks are active; no duplicate standalone Indu'le revisit is introduced.",
-        ("图尔凯的螃蟹陷阱", "长者玛纳洛"): "keep_current: both are accepted from the same Moa'ki visit; current route advances Mana'loa/Indu'le before sweeping the southern coast so crab traps are collected along the coast loop instead of forcing an early shoreline return.",
-        ("魔网能量线的终端", "海洋女神"): "keep_current: the ley-line quest stays active while the coastal Ocean Goddess chain is closed, then is turned after the Moa'ki-to-Agmar flight; this batches the return transport rather than adding a separate Agmar trip.",
-        ("向德弗雷斯塔兹领主报到", "红玉巨龙圣地的命运"): "keep_current: both resolve inside Wyrmrest/Ruby chain state; the video Alliance unlock order differs, while the current route turns the Ruby Brooch as soon as it is obtained and immediately continues the same tower/hub chain.",
-    },
-    "grizzly": {
-        ("解读象形文字", "清理天灾"): "keep_current: both lie on the same westward Drakuru/Forgotten-depths sweep; current route takes the nearby mummified-crusader branch before the first brazier with no later revisit.",
-        ("蘑菇汤！", "古树精华宝石"): "keep_current: Mushroom Soup is collected as a background task while the route continues east with the Drakuru gem chain; its delayed turn-in avoids returning to Granite Springs solely for the soup.",
-        ("灰尘之声", "跟我的小朋友打招呼"): "keep_current: both are long-carried tasks whose turn-in order reflects different endpoints; the route hands Little Friend at Harkor when first entering the northeast, while Dust Voice waits for the later Drakil'jin spatial instance.",
-        ("等肉下锅", "心灵的创伤"): "keep_current: Meat for the Pot is intentionally background-collected through later northeast/giant terrain; Healing with Herbs closes earlier when its local targets finish, avoiding dedicated meat farming.",
-        ("金亚拉克的末日", "破损的日记"): "keep_current: the diary is collected/turned during the earlier Thor Modan pass; Jin'arrak is a later Harkor/Drakil'jin chain. Video's Alliance macro traversal reaches these chains in the opposite order.",
-        ("攻破防线", "卢娜的要求"): "keep_current: Luna is closed before the northern giant chain because it is already available on the route into Onu'va; Break Through is a later strict giant-chain continuation, so swapping them would delay an already-open local loop.",
-        ("……我们没有能源", "可能的关联"): "keep_current: Possible Link is an earlier Vordrassil/Conquest Hold chain and is intentionally closed before the late Dun Argol golem chain. Video Alliance hub progression unlocks the counterpart later.",
-        ("终获解救", "沃达希尔的种子"): "keep_current: Vordrassil Seeds is completed in the mid-map Vordrassil pass and immediately unlocks the bear-god continuation; Free at Last is the terminal northern giant-chain task and cannot justify delaying the earlier tree pass.",
-    },
-    "zuldrak": {
-        ("风暴将至", "圣光不能为我复仇"): "keep_current: Vargul Revenge is completed beside Gork during the same missing-crusader sweep, so turning it in immediately costs no revisit. Reproducing the video completion order would require carrying it away from its local turn-in and returning later.",
-        ("希姆埃巴的祝福", "银色北伐军的降落伞"): "keep_current: Zim'Abwa requires personal Drakkari Offerings. The five-box route keeps this as background accumulation through the southern Drakkari loops and closes it on the final south return instead of forcing a dedicated early personal-drop farm.",
-        ("银色北伐军的降落伞", "潜入沃尔塔鲁斯"): "keep_current: after the Gymer material loop the route is already back at Ebon Watch with Infiltrating Voltarus unlocked. Closing the phased Ebon chain before the one-way east transition avoids the video's later Ebon revisit after Argent Stand.",
-        ("给斯塔哈默中士的新命令", "实验室的学徒"): "keep_current: both orders are dependency-legal, but the current Argent→Heb'Valok→spirits→Heb'Valok→Sseratus→bat→Heb'Valok→Argent loop is about 76.3 map-percent versus about 84.3 for the video-shaped Sseratus-first alternative using the same route anchors.",
-        ("温暖的篝火", "扔手雷"): "keep_current: Throwing Down is turned in early specifically to unlock Cocooned, allowing Cocooned and One of a Kind? rescue targets to share one rescue pass. Creature Comforts remains a background wood collection and is turned later near the mushroom/basilisk return, avoiding a dedicated Drak'Jin wood loop.",
-    },
-}
+RESOLUTIONS = ROOT / "data/route-atlas/northrend-video-reverse-resolutions.json"
+
+
+def load_manual_resolutions() -> dict[str, dict[tuple[str, str], str]]:
+    data = json.loads(RESOLUTIONS.read_text(encoding="utf-8"))
+    result: dict[str, dict[tuple[str, str], str]] = {}
+    for key, rows in (data.get("maps") or {}).items():
+        result[key] = {
+            (str(row["video_first"]), str(row["video_second"])): str(row["resolution"])
+            for row in rows
+        }
+    return result
+
+
+MANUAL_RESOLUTIONS = load_manual_resolutions()
 
 
 def load_json(path: Path) -> Any:
@@ -104,13 +85,22 @@ def route_positions(route: dict[str, Any]) -> tuple[dict[str, int], dict[str, in
     first: dict[str, int] = {}
     explicit_turnin: dict[str, int] = {}
     names: set[str] = set()
+    turnin_ops = {"交", "交付", "完成", "回交"}
     for index, point in enumerate(route.get("points", []), 1):
         text = str(point[3]) if len(point) > 3 else ""
-        for name in QUOTE_RE.findall(text):
-            names.add(name)
-            first.setdefault(name, index)
-            if any(token in text for token in (f"交《{name}》", f"交付《{name}》", f"完成《{name}》", f"回交《{name}》")):
-                explicit_turnin[name] = index
+        for line in text.splitlines():
+            current_op: str | None = None
+            for match in ACTION_TOKEN_RE.finditer(line):
+                verb, name = match.groups()
+                if verb:
+                    current_op = verb
+                    continue
+                if not name:
+                    continue
+                names.add(name)
+                first.setdefault(name, index)
+                if current_op in turnin_ops:
+                    explicit_turnin[name] = index
     return first, explicit_turnin, names
 
 
@@ -280,7 +270,7 @@ def audit_map(
     return result
 
 
-def main() -> None:
+def main() -> int:
     routes = load_json(ROUTES)
     universe = load_json(UNIVERSE)
     universe_by_id = {int(t["quest_id"]): t for t in universe.get("tasks", [])}
@@ -289,9 +279,15 @@ def main() -> None:
         universe_by_name.setdefault(str(task.get("name") or ""), []).append(task)
 
     results = {key: audit_map(key, spec, routes, universe_by_id, universe_by_name) for key, spec in SPECS.items()}
+    blocking_maps = [
+        key for key, row in results.items()
+        if row["critical_video_omission_count"] or row["unresolved_adjacent_reversal_count"]
+    ]
+    overall_status = "pass_whole_map_video_reverse_review" if not blocking_maps else "manual_review_required"
     OUT.write_text(json.dumps({
-        "status": "video_reverse_audit_generated_manual_order_review_required",
+        "status": overall_status,
         "policy": "video is reference evidence only; filter faction/dungeon/mutual-exclusion before omission/order review; route freeze requires explicit whole-map review when video exists",
+        "blocking_maps": blocking_maps,
         "maps": results,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -334,7 +330,8 @@ def main() -> None:
         "adjacent_reversals": len(value["reversed_video_adjacencies"]),
         "status": value["route_order_review_status"],
     } for key, value in results.items()}, ensure_ascii=False, indent=2))
+    return 0 if not blocking_maps else 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

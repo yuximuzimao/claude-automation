@@ -2,9 +2,9 @@
   "status": "PASS",
   "hardIssueCount": 0,
   "hardIssues": [],
-  "pointCount": 269,
+  "pointCount": 270,
   "stepGroupCount": 54,
-  "geometryFallbackCount": 69,
+  "geometryFallbackCount": 68,
   "geometryFallbackClassifications": [
     {
       "step": 2,
@@ -391,8 +391,8 @@
       "action": 2,
       "text": "先做《地面突袭》：跟随库卡隆班长和步兵推进到伊米海姆大门；四名步兵必须存活，能治疗NPC就顺手治疗",
       "fallback": [
-        52.0,
-        58.0
+        58.3,
+        46.0
       ],
       "classification": "same_anchor_action"
     },
@@ -401,8 +401,8 @@
       "action": 3,
       "text": "做《空中突袭》：使用库卡隆压制炮台压制鱼叉炮，让运兵机安全降落并卸下部队",
       "fallback": [
-        52.0,
-        58.0
+        58.3,
+        46.0
       ],
       "classification": "same_anchor_action"
     },
@@ -471,20 +471,10 @@
       "action": 2,
       "text": "先由一个角色试做《你的憎恶伙伴》：让五号都进入战斗/给目标打上伤害标签，再用复活憎恶聚怪、AOE后自爆；检查五号是否同时获得三类击杀信用",
       "fallback": [
-        68.0,
-        68.0
+        70.8,
+        62.2
       ],
       "classification": "same_anchor_action"
-    },
-    {
-      "step": 32,
-      "action": 3,
-      "text": "《不择手段》共享：直接用角色本体组队击杀20名永不休息的斥候；不必使用幻象观察者刺杀",
-      "fallback": [
-        44.1,
-        24.7
-      ],
-      "classification": "same_hub_npc_or_instruction"
     },
     {
       "step": 34,
@@ -521,8 +511,8 @@
       "action": 4,
       "text": "三项全部完成后退出载具 → 回苦难高地一次性交《深信不疑》《煽风点火》《壮观的景象》→ 接《邪恶骑士》《冰霜骑士》《鲜血骑士》",
       "fallback": [
-        58.0,
-        72.0
+        61.0,
+        74.0
       ],
       "classification": "same_anchor_action"
     },
@@ -561,8 +551,8 @@
       "action": 3,
       "text": "米斯希尔萨 → 交《猎人与王子》→ 接《知识是可怕的负担》；先不要追奥格瑞姆之锤，从白骨之庭直接向西去黑色观察站",
       "fallback": [
-        49.2,
-        73.2
+        48.0,
+        72.0
       ],
       "classification": "same_hub_npc_or_instruction"
     },
@@ -739,84 +729,84 @@
       "to": "苦难高地"
     },
     {
-      "fromIndex": 222,
-      "toIndex": 223,
-      "distance": 35.77,
+      "fromIndex": 223,
+      "toIndex": 224,
+      "distance": 35.79,
       "movement": "fly",
       "from": "北伐军之峰",
       "to": "黑暗大教堂入口"
     },
     {
-      "fromIndex": 224,
-      "toIndex": 225,
+      "fromIndex": 225,
+      "toIndex": 226,
       "distance": 35.77,
       "movement": "fly",
       "from": "黑暗大教堂",
       "to": "北伐军之峰"
     },
     {
-      "fromIndex": 232,
-      "toIndex": 233,
+      "fromIndex": 233,
+      "toIndex": 234,
       "distance": 55.74,
       "movement": "crossmap",
       "from": "月光林地",
       "to": "银色前线基地"
     },
     {
-      "fromIndex": 234,
-      "toIndex": 235,
+      "fromIndex": 235,
+      "toIndex": 236,
       "distance": 41.0,
       "movement": "crossmap",
       "from": "沉默墓地·布雷登布莱德",
       "to": "银色比武场"
     },
     {
-      "fromIndex": 249,
-      "toIndex": 250,
+      "fromIndex": 250,
+      "toIndex": 251,
       "distance": 41.0,
       "movement": "crossmap",
       "from": "沉默墓地·布雷登布莱德",
       "to": "银色比武场"
     },
     {
-      "fromIndex": 254,
-      "toIndex": 255,
+      "fromIndex": 255,
+      "toIndex": 256,
       "distance": 59.1,
       "movement": "hearth",
       "from": "沙塔斯",
       "to": "暗影拱顶"
     },
     {
-      "fromIndex": 255,
-      "toIndex": 256,
+      "fromIndex": 256,
+      "toIndex": 257,
       "distance": 36.22,
       "movement": "fly",
       "from": "暗影拱顶",
       "to": "沉默墓地·布雷登布莱德"
     },
     {
-      "fromIndex": 257,
-      "toIndex": 258,
+      "fromIndex": 258,
+      "toIndex": 259,
       "distance": 41.0,
       "movement": "fly",
       "from": "布雷登布莱德的遗物",
       "to": "北伐军之峰·提里奥"
     },
     {
-      "fromIndex": 258,
-      "toIndex": 259,
+      "fromIndex": 259,
+      "toIndex": 260,
       "distance": 59.1,
       "movement": "hearth",
       "from": "北伐军之峰·提里奥",
       "to": "暗影拱顶"
     },
     {
-      "fromIndex": 264,
-      "toIndex": 265,
-      "distance": 50.93,
+      "fromIndex": 265,
+      "toIndex": 266,
+      "distance": 57.2,
       "movement": "fly",
       "from": "瓦哈拉斯",
-      "to": "玛雷卡里斯"
+      "to": "洛基尔"
     }
   ],
   "transportStateActions": [
@@ -828,6 +818,36 @@
     "炉石绑定：暗影拱顶"
   ],
   "timingCenterMinutes": 0.0,
+  "publicationIntegrity": {
+    "missingRouteNotes": [],
+    "missingFiveboxNotes": [],
+    "invalidFiveboxFormat": [],
+    "questLogPeakActive": 13,
+    "questLogPeakStep": 40,
+    "questLogPeakTasks": [
+      "你的憎恶伙伴",
+      "冰霜巨龙的摇篮",
+      "冰霜骑士",
+      "对抗巨人",
+      "巨龙的墓地",
+      "弥留的英雄",
+      "溅血的旗帜",
+      "瓦哈拉斯之战：黑暗主宰西塔利克斯",
+      "绿色科技",
+      "遮挡天空",
+      "邪恶骑士",
+      "铁墙壁垒",
+      "鲜血骑士"
+    ],
+    "questLogFinalActive": [
+      "你的憎恶伙伴",
+      "对抗巨人",
+      "绿色科技"
+    ],
+    "blockedDependencyTaskCount": 0,
+    "blockedTaskLeaks": [],
+    "playerTextViolations": []
+  },
   "coverage": {
     "formal": 164,
     "covered": 164,

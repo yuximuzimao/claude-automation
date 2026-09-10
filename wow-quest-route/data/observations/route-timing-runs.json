@@ -950,6 +950,50 @@
         "applied_in_this_run": null
       },
       "status": "user_reported_batch_recorded_death_recovery_unquantified"
+    },
+    {
+      "date": "2026-09-11",
+      "route_key": "howling",
+      "run_kind": "fivebox_first_run_partial_live_window",
+      "time_precision": "journey_anchor_plus_user_reported_minute_stop",
+      "source": "最新Questie Journey + 用户本轮嚎风首组实跑反馈。",
+      "effective_start_local": "2026-09-11T01:03:12+08:00",
+      "effective_end_local": "2026-09-11T02:39:00+08:00",
+      "actual_minutes": 95.8,
+      "route_window": "最新Journey从首次接11301《疯狂的研究》作为稳定起点，到用户02:39明确暂停嚎风开始日常。期间完成西侧开场、钢铁之门、酒桶、《问题的根源》，并到新阿加曼德接出11279《绿色的龙卵和龙崽》与11424《盾牌岭》；首个接取事件以前的征服堡→药剂师营地交通未包含在95.8分钟内。",
+      "actual_contains_learning_or_route_errors": true,
+      "known_error_or_learning_sources": [
+        "首组现场发现旧路线漏在开场接《酒里有什么？》，并把无前置的《钢铁之门的古器》错误拖到后期；当前已按实跑局部重排，因此95.8分钟不得直接当成熟路线baseline。"
+      ],
+      "clean_actual_minutes": null,
+      "current_route_clean_baseline_minutes": null,
+      "status": "raw_first_group_partial_sample_do_not_recalibrate_final_model"
+    },
+    {
+      "date": "2026-09-11",
+      "route_key": "icecrown",
+      "run_kind": "fivebox_daily_batch_from_howling",
+      "time_precision": "user_reported_minute",
+      "source": "用户本轮实跑反馈。",
+      "effective_start_local": "2026-09-11T02:39:00+08:00",
+      "effective_end_local": "2026-09-11T03:32:00+08:00",
+      "actual_minutes": 53,
+      "route_window": "用户02:39暂停嚎风后从新阿加曼德出发做固定日常，到03:32结束；原始总时长包括去程跨图系统飞行，末尾炉石/返程属于日常正常收尾并保留在有效日常时间中。",
+      "transport_samples": [
+        {
+          "from": "新阿加曼德",
+          "to": "银色比武场",
+          "mode": "system_flight",
+          "actual_minutes": 7.3333,
+          "display": "7分20秒"
+        }
+      ],
+      "daily_effective_minutes_excluding_outbound_system_flight": 45.6667,
+      "daily_effective_display": "45分40秒",
+      "daily_timing_contract": "每轮同时保留原始总时长，并扣除进入日常前的去程系统飞行得到有效日常时间；末尾炉石/返程时间不扣除。继续逐轮记录，只有多轮结果趋于稳定后才整理并固化正式日常基线。",
+      "clean_actual_minutes": null,
+      "current_route_clean_baseline_minutes": null,
+      "status": "raw_daily_sample_do_not_recalibrate_final_model"
     }
   ]
 }

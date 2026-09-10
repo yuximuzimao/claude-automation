@@ -1,0 +1,3472 @@
+{
+  "zone_id": 394,
+  "zone_name": "灰熊丘陵",
+  "strategy": "first-run continuous outdoor full-clear baseline; structural exclusions only",
+  "touching_task_count": 170,
+  "status_counts": {
+    "exclude_deprecated": 1,
+    "exclude_faction": 68,
+    "exclude_no_xp": 3,
+    "exclude_repeatable_calendar": 10,
+    "exclude_structural": 5,
+    "include_candidate": 83
+  },
+  "formal_candidate_count": 83,
+  "formal_candidate_ids": [
+    11982,
+    11984,
+    11985,
+    11989,
+    11990,
+    11991,
+    12007,
+    12026,
+    12029,
+    12042,
+    12054,
+    12058,
+    12068,
+    12070,
+    12073,
+    12074,
+    12081,
+    12082,
+    12093,
+    12094,
+    12099,
+    12113,
+    12114,
+    12116,
+    12120,
+    12121,
+    12134,
+    12137,
+    12152,
+    12164,
+    12165,
+    12175,
+    12176,
+    12177,
+    12178,
+    12190,
+    12195,
+    12196,
+    12197,
+    12198,
+    12199,
+    12201,
+    12202,
+    12203,
+    12204,
+    12207,
+    12208,
+    12213,
+    12229,
+    12231,
+    12236,
+    12241,
+    12242,
+    12256,
+    12257,
+    12259,
+    12279,
+    12327,
+    12328,
+    12329,
+    12330,
+    12411,
+    12412,
+    12413,
+    12415,
+    12422,
+    12423,
+    12424,
+    12425,
+    12427,
+    12428,
+    12429,
+    12430,
+    12431,
+    12433,
+    12436,
+    12451,
+    12453,
+    12468,
+    12483,
+    12484,
+    12487,
+    12802
+  ],
+  "required_level_counts": {
+    "72": 14,
+    "73": 69
+  },
+  "old_auto_selected_count": 75,
+  "formal_missing_from_old_auto": [
+    12082,
+    12327,
+    12330,
+    12427,
+    12428,
+    12429,
+    12430,
+    12431
+  ],
+  "old_auto_extra_vs_formal": [],
+  "rows": [
+    {
+      "quest_id": 11981,
+      "name": "找到库伦！",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "exclude_structural",
+      "reasons": [
+        "mutually_exclusive_with_12074_current_axis"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11982,
+      "start": "倒下的土灵战士@(63.7,23.1)",
+      "finish": "库伦@(65.8,17.8)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 11982,
+      "name": "巨石横飞",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12070,
+      "start": "库伦@(65.8,17.8)",
+      "finish": "库伦@(65.8,17.8)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 11984,
+      "name": "抓巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "萨米尔@(16.2,47.6)",
+      "finish": "萨米尔@(16.2,47.6)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 11985,
+      "name": "攻破防线",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12070
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12081,
+      "start": "库伦@(65.8,17.8)",
+      "finish": "库伦@(65.8,17.8)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 11986,
+      "name": "破损的日记",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "Battered Journal@(64.3,19.8)",
+      "finish": "托尔森·迪普迪格@(59.8,27.4)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 11988,
+      "name": "符文钥石",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        11986
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "托尔森·迪普迪格@(59.8,27.4)",
+      "finish": "托尔森·迪普迪格@(59.8,27.4)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 11989,
+      "name": "停战？",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11984
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11990,
+      "start": "达库鲁@(16.4,47.8)",
+      "finish": "达库鲁@(16.4,47.8)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 11990,
+      "name": "幻象之瓶",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11989
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11991,
+      "start": "达库鲁@(16.4,47.8)",
+      "finish": "达库鲁@(16.4,47.8)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 11991,
+      "name": "解读象形文字",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11990
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12007,
+      "start": "达库鲁@(16.4,47.8)",
+      "finish": "达库鲁的影像@(13.2,60.9)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 11993,
+      "name": "符文中的预言",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        11988
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "托尔森·迪普迪格@(59.8,27.4)",
+      "finish": "托尔森·迪普迪格@(59.8,27.4)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 11997,
+      "name": "再次向格里安·斯托曼报到",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_structural",
+      "reasons": [
+        "alliance_westfall_brigade_breadcrumb"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "—",
+      "finish": "—",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 11998,
+      "name": "灵活的手段",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12002,
+      "start": "格里安·斯托曼上尉@(59.4,26.0)",
+      "finish": "布鲁加尔·石剪@(59.8,27.6)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12002,
+      "name": "战斗中的兄弟",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        11998
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12003,
+      "start": "布鲁加尔·石剪@(59.8,27.6)",
+      "finish": "布鲁加尔·石剪@(59.8,27.6)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12003,
+      "name": "寻找隧道",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12002
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12010,
+      "start": "布鲁加尔·石剪@(59.8,27.6)",
+      "finish": "布鲁加尔·石剪@(59.8,27.6)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12007,
+      "name": "必要的牺牲",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11991
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12042,
+      "start": "达库鲁的影像@(13.2,60.9)",
+      "finish": "达库鲁的影像@(17.4,36.4)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12010,
+      "name": "奥尔隆德的命运",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12003
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12014,
+      "start": "布鲁加尔·石剪@(59.8,27.6)",
+      "finish": "勘查员奥尔隆德@(67.5,15.3)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12014,
+      "name": "坚如磐石？",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12010
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "勘查员奥尔隆德@(67.5,15.3)",
+      "finish": "布鲁加尔·石剪@(59.8,27.6)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12026,
+      "name": "破损的日记",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12054,
+      "start": "Battered Journal@(64.3,19.8)",
+      "finish": "先知帕鲁纳@(65.2,47.8)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12027,
+      "name": "小毛球的冒险",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "艾米莉@(49.2,34.1)",
+      "finish": "侍从瓦尔特@(59.1,26.5)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12029,
+      "name": "净化天灾巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12484
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12037,
+      "start": "马克·菲尔森@(16.7,48.3)",
+      "finish": "马克·菲尔森@(16.7,48.3)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12038,
+      "name": "净化天灾巨魔",
+      "required_level": 70,
+      "quest_level": 72,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12029
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "马克·菲尔森@(16.7,48.3)",
+      "finish": "马克·菲尔森@(16.7,48.3)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12042,
+      "name": "古树精华宝石",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12007
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12802,
+      "start": "达库鲁的影像@(17.4,36.4)",
+      "finish": "Heart of the Ancients@(37.0,32.4)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12054,
+      "name": "翻译日记",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12026
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "先知帕鲁纳@(65.2,47.8)",
+      "finish": "先知帕鲁纳@(65.2,47.8)",
+      "task_class": "single_named_drop"
+    },
+    {
+      "quest_id": 12058,
+      "name": "符文中的预言",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12054
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "先知帕鲁纳@(65.2,47.8)",
+      "finish": "先知帕鲁纳@(65.2,47.8)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12068,
+      "name": "灰尘之声",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12802
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12238,
+      "start": "达库鲁的影像@(45.0,28.4)",
+      "finish": "达库鲁的影像@(71.7,26.2)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12070,
+      "name": "鼓舞士气",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11982
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11985,
+      "start": "库伦@(65.8,17.8)",
+      "finish": "库伦@(65.8,17.8)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12073,
+      "name": "“钢铁之子”",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12054
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12074,
+      "name": "新的盟友",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "库伦@(65.8,17.8)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12081,
+      "name": "加弗洛克",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11985
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12093,
+      "start": "库伦@(65.8,17.8)",
+      "finish": "加弗洛克@(79.8,33.6)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12082,
+      "name": "喔——哒！！",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "哈里森·琼斯@(69.5,17.5)",
+      "finish": "哈考尔@(73.8,34.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12093,
+      "name": "压制符文",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12081
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12094,
+      "start": "加弗洛克@(79.8,33.6)",
+      "finish": "加弗洛克@(79.8,33.6)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12094,
+      "name": "潜在的能量",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12093
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12099,
+      "start": "加弗洛克@(79.8,33.6)",
+      "finish": "加弗洛克@(79.8,33.6)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12099,
+      "name": "终获解救",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12094
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "加弗洛克@(79.8,33.6)",
+      "finish": "加弗洛克@(79.8,33.6)",
+      "task_class": "elite_or_boss_kill"
+    },
+    {
+      "quest_id": 12105,
+      "name": "坠入黑暗",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12109,
+      "start": "—",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12109,
+      "name": "再次向格里安·斯托曼报到",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12105
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12158,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "格里安·斯托曼上尉@(59.4,26.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12113,
+      "name": "等肉下锅",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "哈考尔@(73.8,34.0)",
+      "finish": "哈考尔@(73.8,34.0)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12114,
+      "name": "心灵的创伤",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "哈考尔@(73.8,34.0)",
+      "finish": "哈考尔@(73.8,34.0)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12116,
+      "name": "孤胆英雄……",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12120,
+      "start": "克拉斯@(73.9,34.1)",
+      "finish": "克拉斯@(73.9,34.1)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12120,
+      "name": "达卡古尔之槌",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12116
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12121,
+      "start": "克拉斯@(73.9,34.1)",
+      "finish": "克拉斯@(73.9,34.1)",
+      "task_class": "single_named_drop"
+    },
+    {
+      "quest_id": 12121,
+      "name": "死后相见",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12120
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12137,
+      "start": "克拉斯@(73.9,34.1)",
+      "finish": "甘休@(69.4,19.5)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12128,
+      "name": "找到莱加尔",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12014
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12129,
+      "start": "布鲁加尔·石剪@(59.8,27.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12129,
+      "name": "完美的计划",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12128
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12130,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12130,
+      "name": "抢夺零件",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12129
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12131,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12131,
+      "name": "我们有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12130
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12138,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12134,
+      "name": "萨莎的狩猎",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12329
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "萨莎@(57.5,41.3)",
+      "finish": "萨莎@(57.5,41.3)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12137,
+      "name": "冷静一下，伙计",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12121
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12152,
+      "start": "甘休@(69.4,19.5)",
+      "finish": "克拉斯@(73.9,34.1)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12138,
+      "name": "……我们没有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12131
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12152,
+      "name": "金亚拉克的末日",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12137
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "克拉斯@(73.9,34.1)",
+      "finish": "克拉斯@(73.9,34.1)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12153,
+      "name": "铁领主和他的保镖",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12138
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12154,
+      "name": "停电",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12138
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "莱加尔·断眉@(77.1,48.6)",
+      "finish": "莱加尔·断眉@(77.1,48.6)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12158,
+      "name": "空石矿洞",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12109
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12159,
+      "start": "格里安·斯托曼上尉@(59.4,26.0)",
+      "finish": "派特洛夫@(55.1,23.4)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12159,
+      "name": "无法安息的灵魂",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "not_horde_blood_elf"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12158
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12160,
+      "start": "派特洛夫@(55.1,23.4)",
+      "finish": "派特洛夫@(55.1,23.4)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12160,
+      "name": "往日的名字",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12159
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "派特洛夫@(55.1,23.4)",
+      "finish": "格里安·斯托曼上尉@(59.4,26.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12161,
+      "name": "盲眼卢娜",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12160
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12328,
+      "start": "列兵艾伦@(59.2,26.2)",
+      "finish": "盲眼卢娜@(44.0,48.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12162,
+      "name": "Solstice Village",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "exclude_no_xp",
+      "reasons": [
+        "no_xp_not_mandatory_for_included_task"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "—",
+      "finish": "—",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12163,
+      "name": "The Evil Below",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "exclude_no_xp",
+      "reasons": [
+        "no_xp_not_mandatory_for_included_task"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "—",
+      "finish": "—",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12164,
+      "name": "狼人的末日",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12411
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "萨莎@(57.5,41.3)",
+      "finish": "萨莎@(57.5,41.3)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12165,
+      "name": "有趣的计划",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12195
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12196,
+      "start": "托尔玛克@(65.3,47.5)",
+      "finish": "勘探员罗卡尔@(65.1,47.2)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12170,
+      "name": "黑水伐木场的战斗",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "骑兵队长克洛恩@(26.4,65.8)",
+      "finish": "骑兵队长克洛恩@(26.4,65.8)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12175,
+      "name": "灰狼的毛皮",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12176,
+      "start": "皮货商人休尼克@(22.1,65.1)",
+      "finish": "皮货商人休尼克@(22.1,65.1)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12176,
+      "name": "替代品",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12175
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12177,
+      "start": "皮货商人休尼克@(22.1,65.1)",
+      "finish": "皮货商人休尼克@(22.1,65.1)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12177,
+      "name": "休尼克的掩饰",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12176
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12178,
+      "start": "皮货商人休尼克@(22.1,65.1)",
+      "finish": "皮货商人休尼克@(22.1,65.1)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12178,
+      "name": "给克雷娜送货",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12177
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "皮货商人休尼克@(22.1,65.1)",
+      "finish": "征服者克雷娜@(20.7,64.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12180,
+      "name": "被俘虏的勘探员",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12014
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "巡山人基连@(77.0,48.4)",
+      "finish": "巡山人基连@(77.0,48.4)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12183,
+      "name": "搜集制服",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12180
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12184,
+      "start": "巡山人基连@(77.0,48.4)",
+      "finish": "巡山人基连@(77.0,48.4)",
+      "task_class": "single_named_drop"
+    },
+    {
+      "quest_id": 12184,
+      "name": "拍摄照片",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12183
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12185,
+      "start": "巡山人基连@(77.0,48.4)",
+      "finish": "巡山人基连@(77.0,48.4)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12185,
+      "name": "笑脸面对洛肯！",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12184
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "巡山人基连@(77.0,48.4)",
+      "finish": "巡山人基连@(77.0,48.4)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12190,
+      "name": "跟我的小朋友打招呼",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12483
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "普雷蒙@(15.7,46.7)",
+      "finish": "哈考尔@(73.8,34.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12195,
+      "name": "不速之“客”",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12165,
+      "start": "托尔玛克@(65.3,47.5)",
+      "finish": "托尔玛克@(65.3,47.5)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12196,
+      "name": "收集零件",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12165
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12197,
+      "start": "勘探员罗卡尔@(65.1,47.2)",
+      "finish": "勘探员罗卡尔@(65.1,47.2)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12197,
+      "name": "我们有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12196
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12198,
+      "start": "勘探员罗卡尔@(65.1,47.2)",
+      "finish": "勘探员罗卡尔@(65.1,47.2)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12198,
+      "name": "……我们没有能源",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12197
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12199,
+      "start": "勘探员罗卡尔@(65.1,47.2)",
+      "finish": "勘探员罗卡尔@(65.1,47.2)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12199,
+      "name": "击败铁领主",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12198
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "勘探员罗卡尔@(65.1,47.2)",
+      "finish": "托尔玛克@(65.3,47.5)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12201,
+      "name": "监工的制服",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12204
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12202,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "single_named_drop"
+    },
+    {
+      "quest_id": 12202,
+      "name": "活灵活现",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12201
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12203,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12203,
+      "name": "洛肯的命令",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12202
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12204,
+      "name": "以洛肯之名",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12099,
+        12058
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12201,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12207,
+      "name": "沃达希尔的陨落",
+      "required_level": 72,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12413
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12208,
+      "name": "狩猎巨魔",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11984,
+      "start": "苏尔肯中士@(22.2,64.7)",
+      "finish": "萨米尔@(16.2,47.6)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12210,
+      "name": "狩猎巨魔的季节！",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12212
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 11984,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "萨米尔@(16.2,47.6)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12212,
+      "name": "补充食物",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12216,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12213,
+      "name": "地下的黑暗",
+      "required_level": 72,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12413
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12215,
+      "name": "你死我活！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12217,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12216,
+      "name": "猎熊！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12212
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12217,
+      "name": "鹰的眼睛",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12215
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12219,
+      "name": "倒下的世界之树",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12310
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12220,
+      "name": "黑暗的影响",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12310
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12222,
+      "name": "缚焰者的秘密",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12294
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "伐木工德拉克@(32.4,59.9)",
+      "finish": "伐木工德拉克@(32.4,59.9)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12223,
+      "name": "先发制人",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12294
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "伐木工德拉克@(32.4,59.9)",
+      "finish": "伐木工德拉克@(32.4,59.9)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12225,
+      "name": "美味的琥珀种子！",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12226,
+      "start": "Amberseed@(31.8,59.5)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12226,
+      "name": "种子穿肠过……",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12225
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12227,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12227,
+      "name": "尽你的职责",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12226
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "护林主管安德霍尔@(32.1,60.0)",
+      "finish": "护林主管安德霍尔@(32.1,60.0)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12229,
+      "name": "可能的关联",
+      "required_level": 72,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12207,
+        12213
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12231,
+      "name": "熊神的后代",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12207,
+        12213
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12233,
+      "name": "处理种子",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_no_xp",
+      "reasons": [
+        "no_xp_not_mandatory_for_included_task"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "—",
+      "finish": "—",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12236,
+      "name": "乌索克，巨熊之神",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12241,
+        12242
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12241,
+      "name": "摧毁树苗",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12229,
+        12231
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12242,
+      "name": "沃达希尔的种子",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12229,
+        12231
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12244,
+      "name": "翻修伐木机",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "塞尼普斯@(39.5,43.6)",
+      "finish": "塞尼普斯@(39.5,43.6)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12246,
+      "name": "可能的关联",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12220,
+        12219
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12247,
+      "name": "乌索克的孩子",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12219,
+        12220
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12248,
+      "name": "沃达希尔的树苗",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12246,
+        12247
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12249,
+      "name": "乌索克，巨熊之神",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12248,
+        12250
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12250,
+      "name": "沃达希尔的种子",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12247,
+        12246
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "圣职者塞瑞恩@(31.2,59.5)",
+      "finish": "圣职者塞瑞恩@(31.2,59.5)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12255,
+      "name": "沃德伦的领主",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12222,
+        12223
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "伐木工德拉克@(32.4,59.9)",
+      "finish": "伐木工德拉克@(32.4,59.9)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12256,
+      "name": "缚焰者的秘密",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12468
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "纳兹格利姆中士@(21.0,64.0)",
+      "finish": "纳兹格利姆中士@(21.0,64.0)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12257,
+      "name": "显示力量",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12468
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "纳兹格利姆中士@(21.0,64.0)",
+      "finish": "纳兹格利姆中士@(21.0,64.0)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12259,
+      "name": "沃德伦的领主",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [
+        12256,
+        12257
+      ],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "纳兹格利姆中士@(21.0,64.0)",
+      "finish": "纳兹格利姆中士@(21.0,64.0)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12268,
+      "name": "伐木机零件",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "皮普斯维克@(39.6,43.4)",
+      "finish": "皮普斯维克@(39.6,43.4)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12270,
+      "name": "收割联盟",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "格利克@(34.5,32.5)",
+      "finish": "格利克@(34.5,32.5)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12279,
+      "name": "熊的美食",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "休·格兰斯@(69.1,40.1)",
+      "finish": "休·格兰斯@(69.1,40.1)",
+      "task_class": "item_source_not_in_questie"
+    },
+    {
+      "quest_id": 12280,
+      "name": "修理伐木机",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "鲁尔兹@(34.4,32.6)",
+      "finish": "鲁尔兹@(34.4,32.6)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12284,
+      "name": "穷追不舍",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "指挥官巴尔格克@(34.5,33.0)",
+      "finish": "指挥官巴尔格克@(34.5,33.0)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12288,
+      "name": "力不能支！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "奥曼娜@(33.9,32.7)",
+      "finish": "奥曼娜@(33.9,32.7)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12289,
+      "name": "乘胜追击",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "哈斯曼中士@(39.4,43.9)",
+      "finish": "哈斯曼中士@(39.4,43.9)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12292,
+      "name": "当地人的支持",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12293,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12293,
+      "name": "完成交易",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12292
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12294,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "伊凡@(34.8,55.6)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12294,
+      "name": "暂时的协议",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12293
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12295,
+      "start": "伊凡@(34.8,55.6)",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12295,
+      "name": "外交活动",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12294
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "杜卡尔特使@(26.4,35.7)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12296,
+      "name": "生存或是死亡",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "蕾安娜@(40.5,42.6)",
+      "finish": "蕾安娜@(40.5,42.6)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12299,
+      "name": "北边的敌人",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "not_horde_blood_elf"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12295
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "瑟尔基@(26.5,35.8)",
+      "finish": "瑟尔基@(26.5,35.8)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12300,
+      "name": "勇气的试炼",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "not_horde_blood_elf"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [
+        12299,
+        12307
+      ],
+      "parent_active": [],
+      "next_quest": 12302,
+      "start": "瑟尔基@(26.5,35.8)",
+      "finish": "被囚禁的猎户@(21.9,29.9)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12302,
+      "name": "萨莎的警告",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12300
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "被囚禁的猎户@(21.9,29.9)",
+      "finish": "笼中的囚犯@(26.4,31.7)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12307,
+      "name": "破狼草",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "not_horde_blood_elf"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "卡娅@(25.6,33.3)",
+      "finish": "卡娅@(25.6,33.3)",
+      "task_class": "world_object_collection"
+    },
+    {
+      "quest_id": 12308,
+      "name": "逃离银溪镇",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12302
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12310,
+      "start": "笼中的囚犯@(26.4,31.7)",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "scripted_use_or_event"
+    },
+    {
+      "quest_id": 12310,
+      "name": "快速反应",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12308
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "杜蒙特中尉@(31.8,60.2)",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12314,
+      "name": "除掉佐娜船长！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "弗里曼男爵@(22.2,81.2)",
+      "finish": "弗里曼男爵@(22.2,81.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12315,
+      "name": "消灭布莱沃特船长！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "卡兹加尔将军@(10.1,77.2)",
+      "finish": "卡兹加尔将军@(10.1,77.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12316,
+      "name": "夺取港口！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斯图亚特中尉@(22.1,81.2)",
+      "finish": "斯图亚特中尉@(22.1,81.2)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12317,
+      "name": "港口中的联盟",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "百夫长卡格鲁姆@(10.1,77.3)",
+      "finish": "百夫长卡格鲁姆@(10.1,77.3)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12323,
+      "name": "把他们熏出来！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "杜内恩中士@(22.0,80.7)",
+      "finish": "杜内恩中士@(22.0,80.7)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12324,
+      "name": "把他们熏出来！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "石头守卫诺卡·怒火图腾@(11.4,76.7)",
+      "finish": "石头守卫诺卡·怒火图腾@(11.4,76.7)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12327,
+      "name": "梦游体验",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12328
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12329,
+      "start": "盲眼卢娜@(44.0,48.0)",
+      "finish": "盲眼卢娜@(44.0,48.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12328,
+      "name": "卢娜的要求",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12161,
+        12425
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12327,
+      "start": "盲眼卢娜@(44.0,48.0)",
+      "finish": "盲眼卢娜@(44.0,48.0)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12329,
+      "name": "命运与巧合",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12327
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "盲眼卢娜@(44.0,48.0)",
+      "finish": "萨莎@(57.5,41.3)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12330,
+      "name": "阿纳托雷",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12329
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "萨莎@(57.5,41.3)",
+      "finish": "萨莎@(57.5,41.3)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12411,
+      "name": "姐姐的誓言",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12330
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "萨莎@(57.5,41.3)",
+      "finish": "安娅@(64.8,43.4)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12412,
+      "name": "我的敌人的朋友",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12259
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12413,
+      "start": "征服者克雷娜@(20.7,64.2)",
+      "finish": "征服者克雷娜@(20.7,64.2)",
+      "task_class": "multi_target_shared_kill"
+    },
+    {
+      "quest_id": 12413,
+      "name": "攻击银溪镇",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "征服者克雷娜@(20.7,64.2)",
+      "finish": "征服者克雷娜@(20.7,64.2)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12414,
+      "name": "顺手牵马",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "侍从皮尔斯@(59.1,26.6)",
+      "finish": "侍从皮尔斯@(59.1,26.6)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12415,
+      "name": "惊吓野马",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "索鲁克·雷怒@(65.0,47.9)",
+      "finish": "索鲁克·雷怒@(65.0,47.9)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12422,
+      "name": "顺藤摸瓜",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12424
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "高戈娜@(20.8,64.1)",
+      "finish": "被囚禁的猎户@(21.9,29.9)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12423,
+      "name": "米克哈尔的日记",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12424,
+      "start": "—",
+      "finish": "征服者克雷娜@(20.7,64.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12424,
+      "name": "高戈娜",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12423
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12422,
+      "start": "征服者克雷娜@(20.7,64.2)",
+      "finish": "高戈娜@(20.8,64.1)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12425,
+      "name": "盲眼卢娜",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12422
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12328,
+      "start": "高戈娜@(20.8,64.1)",
+      "finish": "盲眼卢娜@(44.0,48.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12426,
+      "name": "DEPRECATED",
+      "required_level": 72,
+      "quest_level": 75,
+      "status": "exclude_deprecated",
+      "reasons": [
+        "deprecated_or_system"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "—",
+      "finish": "—",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12427,
+      "name": "征服斗兽场：斗熊！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12413
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12428,
+      "start": "格里尼克斯·西维格@(22.4,63.9)",
+      "finish": "赌徒维尔金@(22.3,64.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12428,
+      "name": "征服斗兽场：疯狂的熊怪",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12427
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12429,
+      "start": "格里尼克斯·西维格@(22.4,63.9)",
+      "finish": "赌徒维尔金@(22.3,64.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12429,
+      "name": "征服斗兽场：鲜血与金属",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12428
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12430,
+      "start": "格里尼克斯·西维格@(22.4,63.9)",
+      "finish": "赌徒维尔金@(22.3,64.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12430,
+      "name": "征服斗兽场：九死一生",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12429
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12431,
+      "start": "格里尼克斯·西维格@(22.4,63.9)",
+      "finish": "赌徒维尔金@(22.3,64.2)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12431,
+      "name": "征服斗兽场：摊牌",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12430
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "格里尼克斯·西维格@(22.4,63.9)",
+      "finish": "高戈娜@(20.8,64.1)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12432,
+      "name": "驾驶红色火箭",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_repeatable_calendar",
+      "reasons": [
+        "not_one_time_baseline"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "高洛克将军",
+      "finish": "高洛克将军",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12433,
+      "name": "寻找溶解剂",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "古图尔@(11.2,76.6)",
+      "finish": "古图尔@(11.2,76.6)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12434,
+      "name": "继续寻找溶解剂",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_structural",
+      "reasons": [
+        "repeatable_zero_xp_second_round_not_generated"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12433
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "古图尔@(11.2,76.6)",
+      "finish": "古图尔@(11.2,76.6)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12436,
+      "name": "赚外快",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "粮食商人洛克兰@(22.7,66.2)",
+      "finish": "粮食商人洛克兰@(22.7,66.2)",
+      "task_class": "multi_creature_personal_drop"
+    },
+    {
+      "quest_id": 12437,
+      "name": "红色鱼雷",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "霍瑟尔司令",
+      "finish": "霍瑟尔司令",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12443,
+      "name": "寻找溶解剂",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "巴布芬克@(23.0,80.2)",
+      "finish": "巴布芬克@(23.0,80.2)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12444,
+      "name": "黑水伐木场的战斗",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斥候队长卡特尔@(29.9,59.8)",
+      "finish": "斥候队长卡特尔@(29.9,59.8)",
+      "task_class": "mixed_objectives"
+    },
+    {
+      "quest_id": 12446,
+      "name": "继续寻找溶解剂",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_structural",
+      "reasons": [
+        "alliance_counterpart"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [
+        12443
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "巴布芬克@(23.0,80.2)",
+      "finish": "巴布芬克@(23.0,80.2)",
+      "task_class": "world_object_item_collection"
+    },
+    {
+      "quest_id": 12451,
+      "name": "前往欧尼瓦营地",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12259
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "纳兹格利姆中士@(21.0,64.0)",
+      "finish": "斥候沃塔肯@(65.2,47.7)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12453,
+      "name": "白肩鹰的眼睛",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12412
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "风之先知希尔·灰角@(22.5,62.9)",
+      "finish": "风之先知希尔·灰角@(22.5,62.9)",
+      "task_class": "shared_kill"
+    },
+    {
+      "quest_id": 12468,
+      "name": "征服者的指派",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12257,
+      "start": "征服者克雷娜@(20.7,64.2)",
+      "finish": "纳兹格利姆中士@(21.0,64.0)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12483,
+      "name": "蘑菇汤！",
+      "required_level": 73,
+      "quest_level": 75,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12484
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12190,
+      "start": "普雷蒙@(15.7,46.7)",
+      "finish": "普雷蒙@(15.7,46.7)",
+      "task_class": "mixed_with_personal_item"
+    },
+    {
+      "quest_id": 12484,
+      "name": "清理天灾",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        11990
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "普雷蒙",
+      "finish": "马克·菲尔森@(16.7,48.3)",
+      "task_class": "single_named_kill"
+    },
+    {
+      "quest_id": 12487,
+      "name": "前往征服堡，自求多福吧！",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12468,
+      "start": "高级执行官乌洛斯",
+      "finish": "征服者克雷娜@(20.7,64.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12511,
+      "name": "丘陵援兵",
+      "required_level": 73,
+      "quest_level": 73,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only",
+        "finish_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "狮鹫指挥官乌瑞克",
+      "finish": "杜蒙特中尉@(31.8,60.2)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12763,
+      "name": "前线告急",
+      "required_level": 74,
+      "quest_level": 75,
+      "status": "exclude_structural",
+      "reasons": [
+        "mutually_exclusive_with_carried_12789"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "斥候沃塔肯@(65.2,47.7)",
+      "finish": "莉安娜中士",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12770,
+      "name": "资源调配",
+      "required_level": 74,
+      "quest_level": 75,
+      "status": "exclude_faction",
+      "reasons": [
+        "start_npc_alliance_only"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": null,
+      "start": "格里安·斯托曼上尉@(59.4,26.0)",
+      "finish": "莉安娜中士",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 12802,
+      "name": "尽在掌控",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "include_candidate",
+      "reasons": [
+        "one_time_outdoor_horde_paladin_xp"
+      ],
+      "in_old_auto_route": true,
+      "pre_any": [
+        12042
+      ],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12068,
+      "start": "Heart of the Ancients@(37.0,32.4)",
+      "finish": "达库鲁的影像@(45.0,28.4)",
+      "task_class": "travel_dialogue_or_turnin"
+    },
+    {
+      "quest_id": 13524,
+      "name": "逃离银溪镇",
+      "required_level": 73,
+      "quest_level": 74,
+      "status": "exclude_faction",
+      "reasons": [
+        "not_horde_blood_elf"
+      ],
+      "in_old_auto_route": false,
+      "pre_any": [],
+      "pre_all": [],
+      "parent_active": [],
+      "next_quest": 12310,
+      "start": "—",
+      "finish": "—",
+      "task_class": "single_named_kill"
+    }
+  ]
+}

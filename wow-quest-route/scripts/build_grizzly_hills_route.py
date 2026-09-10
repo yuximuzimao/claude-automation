@@ -8,7 +8,6 @@ from grizzly_semantic_steps import apply_grizzly_semantic_overrides
 
 ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "data/route-atlas/grizzly-hills-task-foundation.json"
-MECHANISMS = ROOT / "data/route-atlas/grizzly-hills-special-mechanism-audit.json"
 WORKBENCH = ROOT / "data/route-atlas/workbench-routes.json"
 COVERAGE_OUT = ROOT / "data/route-atlas/grizzly-hills-route-coverage.json"
 PLAYER_GROUPS_OUT = ROOT / "data/route-atlas/grizzly-hills-player-step-groups.json"
@@ -17,8 +16,6 @@ AUDIT_OUT = ROOT / "docs/analysis/2026-08-18-grizzly-hills-route-insertion-audit
 FOUNDATION_DATA = json.loads(FOUNDATION.read_text(encoding="utf-8"))
 TASKS = {int(t["quest_id"]): t for t in FOUNDATION_DATA["tasks"]}
 FORMAL = set(TASKS)
-MECH_DATA = json.loads(MECHANISMS.read_text(encoding="utf-8"))
-MECH = {int(row["quest_id"]): row for row in MECH_DATA.get("rows", [])}
 
 
 def n(qid: int) -> str:
@@ -29,13 +26,9 @@ def names(*qids: int) -> str:
     return " + ".join(n(qid) for qid in qids)
 
 
-def fb(*qids: int) -> str:
-    rows = []
-    for qid in qids:
-        text = (MECH.get(qid) or {}).get("fivebox_check")
-        if text and text not in rows:
-            rows.append(text)
-    return "；".join(rows)
+def fb(*_qids: int) -> str:
+    # Baseline points no longer own five-box uncertainty; semantic overrides are the single live owner.
+    return ""
 
 
 points: list[list[Any]] = []
@@ -207,6 +200,7 @@ route = {
     "title": "灰熊丘陵 · 80级五开任务路线",
     "sub": "祖达克结束后进入灰熊丘陵，先到征服堡；炉石绑定征服堡；按步骤完成灰熊丘陵任务。",
     "badge": "炉石：征服堡\n预计总时间：待正式时间模型重算",
+    "hearthChain": ["征服堡"],
     "uiStandard": "semantic-hud-v45",
     "image": "maps/394-grizzly-hills-hd.jpg",
     "legend": "",
@@ -260,7 +254,7 @@ routes["grizzly"] = route
 WORKBENCH.write_text(json.dumps(routes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 coverage = {
-    "status": "pre_run_frozen_full_clear_baseline",
+    "status": "first_run_completed_frozen_full_clear_baseline",
     "expected_world_task_count": len(FORMAL),
     "covered_task_count": len(covered & FORMAL),
     "missing": [{"quest_id": qid, "name": TASKS[qid]["name"]} for qid in missing],
@@ -286,7 +280,7 @@ lines = [
     "- 当前整图顺序从祖达克接入灰熊丘陵，第一Hub仍为征服堡；12487继续按此前龙骨阶段已接取并长期保留处理，抵达后五号开征服堡飞行点并绑定炉石。",
     "- 欧尼瓦首次到达后五号开飞行点；从此跨东西Hub优先系统飞行，只有任务目标区本身才骑行。",
     "- 副本后续12238、重复/日常、联盟和互斥分支均不进入这张户外首跑全清路线。",
-    "- 斗兽场12427→12431作为一次性户外链纳入首跑；17类未知五开机制以黄色fivebox_check收集实测，不阻塞首跑。",
+    "- 斗兽场12427→12431作为一次性户外链纳入首跑；用户已确认的五开结论不再保留黄色待实测，其余未知机制继续以fivebox_check收集实测，不阻塞首跑。",
 ]
 AUDIT_OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

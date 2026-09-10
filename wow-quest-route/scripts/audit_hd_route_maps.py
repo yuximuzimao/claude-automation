@@ -11,18 +11,12 @@ MAP_DIR = ROOT / "data/routes/maps"
 MANIFEST = MAP_DIR / "manifest.json"
 OUT = MAP_DIR / "hd-audit-summary.json"
 
-FALLBACK_REASONS = {
-    139: "WotLK Eastern Plaguelands requires ScarletEnclave1-4 overlay pieces not present in the ClassicTBC HD source; unsafe to substitute later-era RuinsOfTheScarletEnclave art.",
-    1519: "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement.",
-    4395: "Dalaran uses a non-standard map-tile layout in the available HD source; the generic 4x3/12-tile compositor is not safe for this city map.",
-}
-
-
 def main() -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     rows = []
     modes: dict[str, int] = {}
     bad_dimensions = []
+    unapproved_fallbacks = []
     total_bytes = 0
 
     for entry in manifest["maps"]:
@@ -53,7 +47,16 @@ def main() -> int:
             if dims != [4008, 2672]:
                 bad_dimensions.append({"zone_id": zone_id, "file": hd_file, "dimensions": dims})
         else:
-            row["reason"] = FALLBACK_REASONS.get(zone_id, "No accepted HD asset recorded in manifest.")
+            fallback_reason = str(entry.get("hd_fallback_reason") or "").strip()
+            approved_fallback = entry.get("hd_status") == "fallback" and bool(fallback_reason)
+            row["reason"] = fallback_reason or "Missing HD asset without an explicit approved fallback reason in manifest."
+            row["approved_fallback"] = approved_fallback
+            if not approved_fallback:
+                unapproved_fallbacks.append({
+                    "zone_id": zone_id,
+                    "zone_dir": entry["zone_dir"],
+                    "reason": row["reason"],
+                })
         rows.append(row)
 
     summary = {
@@ -65,13 +68,14 @@ def main() -> int:
         "hd_total_bytes": total_bytes,
         "hd_total_mib": round(total_bytes / 1024 / 1024, 2),
         "bad_dimensions": bad_dimensions,
+        "unapproved_fallbacks": unapproved_fallbacks,
         "fallbacks": [row for row in rows if row["status"] == "fallback"],
         "maps": rows,
     }
     OUT.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({k: summary[k] for k in ("map_count", "hd_count", "fallback_count", "validation_modes", "hd_total_mib", "bad_dimensions")}, ensure_ascii=False, indent=2))
+    print(json.dumps({k: summary[k] for k in ("map_count", "hd_count", "fallback_count", "validation_modes", "hd_total_mib", "bad_dimensions", "unapproved_fallbacks")}, ensure_ascii=False, indent=2))
     print("fallbacks", [(x["zone_id"], x["zone_dir"], x["reason"]) for x in summary["fallbacks"]])
-    return 0 if not bad_dimensions else 1
+    return 0 if not bad_dimensions and not unapproved_fallbacks else 1
 
 
 if __name__ == "__main__":

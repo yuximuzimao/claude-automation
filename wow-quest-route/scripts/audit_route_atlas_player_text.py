@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/route-atlas/workbench-routes.json"
+EXCEPTIONS = ROOT / "data/route-atlas/route-atlas-audit-exceptions.json"
 
 # These phrases are not automatically wrong in prose, but in point actions they usually
 # hide the exact accept/turn-in/task operation the player needs while actively playing.
@@ -44,12 +45,12 @@ STEP_TITLE_PROCESS_PATTERNS = (
 )
 
 # Route action text is a closed player-operation grammar. Mechanics, quantities, sharing,
-# conditions, route rationale and background progress belong in notes/summaries instead.
-# These patterns intentionally fail publication when prose leaks back into an action line.
+# route rationale and background progress belong in notes/summaries. A concise condition is
+# allowed only when the same line still contains an explicit accept/do/turn-in task operation.
 ACTION_GRAMMAR_FORBIDDEN_PATTERNS = (
     r"》[:：]",                         # `做《任务》：机制/数量...`
     r"（五号分别）",
-    r"(?:^|\n)\s*(?:若|否则|沿路推进|沿路补|推进《|确认《|暂不做|保持已完成未交|只携带|五号分别|立即检查)",
+    r"(?:^|\n)\s*(?:否则|沿路推进|沿路补|推进《|确认《|暂不做|保持已完成未交|只携带|五号分别|立即检查)",
     r"(?:^|\n)\s*购买\d",
     r"(?:^|\n)\s*零经验重复任务",
     r"；\s*(?:若|否则|立即检查|只携带|不等待|不专程)",
@@ -60,19 +61,19 @@ ACTION_GRAMMAR_FORBIDDEN_PATTERNS = (
     r"(?:^|\n).*传送到达拉然",
 )
 
-# Explicit cross-map carry tasks are allowed to remain open at the end of the current map.
-# Anything else accepted without a visible `交《任务名》` is a route integrity failure.
-LIFECYCLE_ALLOWLIST = {
-    "hellfire": {"向祖莱报到"},
-    "zang": {"通知塞纳里奥议会"},
-    "borean": {"前往莫亚基港口"},
-    "dragonblight": {"前往征服堡，自求多福吧！", "前往圣光据点！", "黑暗的骚动", "魔法王国达拉然"},
-    "dalaran": {"赫米特·奈辛瓦里哪去了？", "勇士的召唤！", "作战准备"},
-}
+# Explicit cross-map carry tasks are allowed to remain open at the end of the current map,
+# but the task list is route fact/configuration rather than audit-engine logic.
+CONDITIONAL_LINE_RE = re.compile(r"^\s*若")
+EXPLICIT_TASK_OPERATION_RE = re.compile(r"(?:接|做|交)《[^》]+》")
 
 
 def main() -> None:
     routes = json.loads(DATA.read_text(encoding="utf-8"))
+    exceptions = json.loads(EXCEPTIONS.read_text(encoding="utf-8"))
+    lifecycle_allowlist = {
+        route_key: set(names)
+        for route_key, names in (exceptions.get("player_text", {}).get("lifecycle_allowlist", {})).items()
+    }
     bad = []
     for route_key, route in routes.items():
         for point_index, point in enumerate(route.get("points", []), 1):
@@ -81,8 +82,14 @@ def main() -> None:
             if not title or not action:
                 bad.append((route_key, point_index, title, action, "empty title/action"))
                 continue
+            for line in action.splitlines():
+                if CONDITIONAL_LINE_RE.search(line) and not EXPLICIT_TASK_OPERATION_RE.search(line):
+                    bad.append((route_key, point_index, title, action, "conditional line lacks explicit task operation"))
+            # Quest names are opaque labels. Strip their inner wording before checking player-action
+            # prose so a legitimate title such as 《返回地面》 cannot trigger the `回地面` rule.
+            audit_action = re.sub(r"《[^》]+》", "《任务》", action)
             for pattern in (*VAGUE_ACTION_PATTERNS, *IMPLICIT_HANDOFF_PATTERNS, *ACTION_GRAMMAR_FORBIDDEN_PATTERNS):
-                if re.search(pattern, action):
+                if re.search(pattern, audit_action):
                     bad.append((route_key, point_index, title, action, pattern))
         for step_index, group in enumerate(route.get("stepGroups", []), 1):
             group_title = str(group.get("title", ""))
@@ -106,7 +113,7 @@ def main() -> None:
                 target = turned_in if verb == "交" else accepted
                 target.extend((name, point_index) for name in names)
         turned_names = {name for name, _ in turned_in}
-        allowed_open = LIFECYCLE_ALLOWLIST.get(route_key, set())
+        allowed_open = lifecycle_allowlist.get(route_key, set())
         for name, point_index in accepted:
             if name not in turned_names and name not in allowed_open:
                 lifecycle.append((route_key, point_index, name))

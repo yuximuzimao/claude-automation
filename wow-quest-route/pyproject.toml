@@ -7,5 +7,10 @@ dependencies = [
   "ortools>=9.15,<10",
 ]
 
+[project.optional-dependencies]
+test = [
+  "pytest",
+]
+
 [tool.ruff]
 line-length = 100

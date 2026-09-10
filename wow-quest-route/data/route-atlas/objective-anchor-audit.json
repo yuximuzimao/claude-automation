@@ -20,9 +20,15 @@
       "zone_id": 210,
       "warn_distance": 5.0,
       "fail_distance": 8.0,
-      "objective_rows": 19,
-      "manual_resolved_count": 18,
+      "objective_rows": 50,
+      "manual_resolved_count": 44,
       "manual_resolved": [
+        {
+          "quest_id": 12891,
+          "quest_name": "我有一计……",
+          "objective_review_resolution": "manual_route_card_and_public_sources_resolve_required_components",
+          "manual_spatial_resolution": ""
+        },
         {
           "quest_id": 12893,
           "quest_name": "解放你的思想",
@@ -42,34 +48,16 @@
           "manual_spatial_resolution": ""
         },
         {
-          "quest_id": 13214,
-          "quest_name": "瓦哈拉斯之战：堕落的英雄",
-          "objective_review_resolution": "manual_route_card_resolves_valhalas_first_challenge_script",
-          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
+          "quest_id": 13091,
+          "quest_name": "恐怖之水",
+          "objective_review_resolution": "manual_route_card_resolves_vehicle_kill_10",
+          "manual_spatial_resolution": ""
         },
         {
-          "quest_id": 13215,
-          "quest_name": "瓦哈拉斯之战：黑暗主宰西塔利克斯",
-          "objective_review_resolution": "",
-          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
-        },
-        {
-          "quest_id": 13216,
-          "quest_name": "瓦哈拉斯之战：齐格莉德归来",
-          "objective_review_resolution": "",
-          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
-        },
-        {
-          "quest_id": 13217,
-          "quest_name": "瓦哈拉斯之战：血肉巨人卡纳基！",
-          "objective_review_resolution": "",
-          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
-        },
-        {
-          "quest_id": 13218,
-          "quest_name": "瓦哈拉斯之战：“死亡一击”领主",
-          "objective_review_resolution": "",
-          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
+          "quest_id": 13059,
+          "quest_name": "瓦古的复仇",
+          "objective_review_resolution": "manual_route_card_and_public_source_resolve_challenge_event",
+          "manual_spatial_resolution": ""
         },
         {
           "quest_id": 12813,
@@ -94,6 +82,12 @@
           "quest_name": "第二次机会",
           "objective_review_resolution": "manual_route_card_resolves_landgren_gate_and_interrogation_sequence",
           "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13214,
+          "quest_name": "瓦哈拉斯之战：堕落的英雄",
+          "objective_review_resolution": "manual_route_card_resolves_valhalas_first_challenge_script",
+          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
         },
         {
           "quest_id": 13119,
@@ -130,6 +124,168 @@
           "quest_name": "最强大的血肉巨人",
           "objective_review_resolution": "",
           "manual_spatial_resolution": "fleshwerks_west_platform_29_30_61_event_anchor"
+        },
+        {
+          "quest_id": 13086,
+          "quest_name": "最后一道防线",
+          "objective_review_resolution": "manual_route_card_resolves_100_attackers_plus_3_destroyers",
+          "manual_spatial_resolution": "argent_vanguard_cannon_fixed_at_step2"
+        },
+        {
+          "quest_id": 13118,
+          "quest_name": "净化天灾城",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "scourgeholme_same_target_block_as_step3"
+        },
+        {
+          "quest_id": 13125,
+          "quest_name": "凝固的空气",
+          "objective_review_resolution": "manual_route_card_resolves_three_named_scourgeholme_bosses",
+          "manual_spatial_resolution": "three_named_scourgeholme_bosses_manually_anchored_step3"
+        },
+        {
+          "quest_id": 13301,
+          "quest_name": "地面突袭",
+          "objective_review_resolution": "manual_route_card_resolves_ground_assault_escort_script",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13310,
+          "quest_name": "空中突袭",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "ground_commander_kotea_suppression_turret_event_anchor_step19"
+        },
+        {
+          "quest_id": 13330,
+          "quest_name": "伊米亚之血",
+          "objective_review_resolution": "manual_route_card_resolves_20_ymirjar_kills",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13239,
+          "quest_name": "爆炸油",
+          "objective_review_resolution": "manual_route_card_resolves_three_frostbrood_sky_talon_lures",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13373,
+          "quest_name": "边缘科学的益处",
+          "objective_review_resolution": "manual_route_card_and_localized_override_resolve_40_8_15_counts",
+          "manual_spatial_resolution": "tazla_platform_54_36_bomber_route"
+        },
+        {
+          "quest_id": 13351,
+          "quest_name": "预览",
+          "objective_review_resolution": "manual_route_card_resolves_four_recon_points",
+          "manual_spatial_resolution": "four_manual_recon_points_54_44_54_40_54_34_51_33"
+        },
+        {
+          "quest_id": 13259,
+          "quest_name": "确立优势",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "icecrown_citadel_ground_entrance_51_86_then_local_underground_block"
+        },
+        {
+          "quest_id": 13354,
+          "quest_name": "指挥体系",
+          "objective_review_resolution": "manual_route_card_resolves_four_overseer_kills",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13355,
+          "quest_name": "无法复制",
+          "objective_review_resolution": "manual_route_card_resolves_three_cauldron_uses",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13358,
+          "quest_name": "活动窃听器",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "aldurthar_north_54_55_29_30_plus_crystal_53_8_33_6"
+        },
+        {
+          "quest_id": 13366,
+          "quest_name": "需要更多情报",
+          "objective_review_resolution": "manual_route_card_resolves_missing_item_source_as_three_research_pages",
+          "manual_spatial_resolution": "aldurthar_north_building_entry_51_33"
+        },
+        {
+          "quest_id": 13305,
+          "quest_name": "竭尽全力",
+          "objective_review_resolution": "manual_route_card_resolves_vehicle_150_20_2_counts",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13236,
+          "quest_name": "召唤大军",
+          "objective_review_resolution": "manual_route_card_resolves_scripted_100_ghoul_vision",
+          "manual_spatial_resolution": "first_legion_forward_camp_64_5_44_script_anchor"
+        },
+        {
+          "quest_id": 13172,
+          "quest_name": "混乱之种",
+          "objective_review_resolution": "manual_route_card_resolves_80_vehicle_kills",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13174,
+          "quest_name": "一片狼藉",
+          "objective_review_resolution": "manual_route_card_and_public_coords_resolve_four_fixed_documents",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13145,
+          "quest_name": "邪恶城堡",
+          "objective_review_resolution": "manual_route_card_resolves_four_vehicle_scout_points",
+          "manual_spatial_resolution": ""
+        },
+        {
+          "quest_id": 13367,
+          "quest_name": "片刻不得安宁",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "aldurthar_north_ritual_room_manual_anchor"
+        },
+        {
+          "quest_id": 13307,
+          "quest_name": "溅血的旗帜",
+          "objective_review_resolution": "route task card explicitly resolves the split objective locations: Scourge Converters around 47.9,40.2; flag bearers and converted heroes around 43.8,56.6",
+          "manual_spatial_resolution": "audit_data_exception"
+        },
+        {
+          "quest_id": 13361,
+          "quest_name": "猎人与王子",
+          "objective_review_resolution": "manual_route_card_resolves_arthas_illidan_scenario",
+          "manual_spatial_resolution": "bloodstained_stone_48_72_personal_scenario_anchor"
+        },
+        {
+          "quest_id": 13364,
+          "quest_name": "提里奥的尝试",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "dark_cathedral_entry_44_5_77_6_tirion_44_4_76_2"
+        },
+        {
+          "quest_id": 13215,
+          "quest_name": "瓦哈拉斯之战：黑暗主宰西塔利克斯",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
+        },
+        {
+          "quest_id": 13216,
+          "quest_name": "瓦哈拉斯之战：齐格莉德归来",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
+        },
+        {
+          "quest_id": 13217,
+          "quest_name": "瓦哈拉斯之战：血肉巨人卡纳基！",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
+        },
+        {
+          "quest_id": 13218,
+          "quest_name": "瓦哈拉斯之战：“死亡一击”领主",
+          "objective_review_resolution": "",
+          "manual_spatial_resolution": "valhalas_single_arena_anchor_30_7_29_0"
         }
       ],
       "failure_count": 0,

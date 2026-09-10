@@ -1,6 +1,7 @@
 {
   "meta": {
-    "purpose": "Find quests whose Questie objective markers may not represent the real execution entry or mechanic.",
+    "scope": "zangarmarsh_task_profile_pipeline",
+    "purpose": "Find Zangarmarsh quests whose Questie objective markers may not represent the real execution entry or mechanic.",
     "rule": "Automatic signals only create a review queue. They never change routing without a per-quest registry decision."
   },
   "summary": {

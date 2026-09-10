@@ -5,10 +5,11 @@ import json
 import re
 from pathlib import Path
 
+from icecrown_route_task_index import build_route_task_index
+
 ROOT = Path(__file__).resolve().parents[1]
 DRAFT = ROOT / "data/route-atlas/icecrown-entry-route-draft.json"
 FOUNDATION = ROOT / "data/route-atlas/icecrown-task-foundation.json"
-DEPENDENCY = ROOT / "data/route-atlas/icecrown-route-dependency-order-audit.json"
 OUT = ROOT / "data/route-atlas/icecrown-route-structured-candidate.json"
 COVERAGE = ROOT / "data/route-atlas/icecrown-route-structured-coverage.json"
 
@@ -177,6 +178,27 @@ def extract_coord(text: str) -> tuple[float, float] | None:
     x, y = float(match.group(1)), float(match.group(2))
     if 0 <= x <= 100 and 0 <= y <= 100:
         return x, y
+    return None
+
+
+def infer_action_specific_coord(raw_action: str, display_action: str) -> tuple[float, float] | None:
+    """Prefer the raw action's precise coordinate for this specific published row.
+
+    Compact player actions intentionally strip coordinates. When one rich action expands into
+    multiple published rows, match the published location label back to the corresponding raw
+    segment; otherwise only trust a raw coordinate when the rich action contains exactly one.
+    """
+    display_location = clean_display_location(display_action)
+    if display_location and display_location in raw_action:
+        segment = raw_action.split(display_location, 1)[1].split("→", 1)[0]
+        coord = extract_coord(segment)
+        if coord:
+            return coord
+    matches = EXPLICIT_COORD.findall(raw_action)
+    if len(matches) == 1:
+        x, y = float(matches[0][0]), float(matches[0][1])
+        if 0 <= x <= 100 and 0 <= y <= 100:
+            return x, y
     return None
 
 
@@ -394,13 +416,12 @@ def note_html(step: dict) -> str:
 def main() -> None:
     draft = json.loads(DRAFT.read_text(encoding="utf-8"))
     foundation = json.loads(FOUNDATION.read_text(encoding="utf-8"))
-    dependency = json.loads(DEPENDENCY.read_text(encoding="utf-8"))
-    first_step = {int(qid): int(step) for qid, step in (dependency.get("first_step_by_quest_id") or {}).items()}
-    formal = {
-        int(task["quest_id"])
-        for task in foundation.get("tasks", [])
+    formal_tasks = [
+        task for task in foundation.get("tasks", [])
         if task.get("scope_status") in ROUTE_STATUSES
-    }
+    ]
+    formal = {int(task["quest_id"]) for task in formal_tasks}
+    first_step = build_route_task_index(formal_tasks, draft)["first_step"]
 
     points: list[list] = []
     groups: list[dict] = []
@@ -433,7 +454,7 @@ def main() -> None:
             # Geometry is derived from the rich internal planning line; only the compact closed-set
             # action is published to the player. This keeps coordinates/mechanics out of HUD text
             # without throwing away the map position they were originally used to establish.
-            coord = infer_anchor(display_action) or infer_anchor(raw_action)
+            coord = infer_action_specific_coord(raw_action, display_action) or infer_anchor(display_action) or infer_anchor(raw_action)
             if coord is None:
                 coord = current
                 geometry_fallbacks.append({

@@ -9,6 +9,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 ROUTES = ROOT / "data/route-atlas/workbench-routes.json"
 OUT = ROOT / "data/route-atlas/objective-anchor-audit.json"
+EXCEPTIONS = ROOT / "data/route-atlas/route-atlas-audit-exceptions.json"
 
 ROUTE_FOUNDATIONS: dict[str, tuple[Path, int]] = {
     "storm": (ROOT / "data/route-atlas/storm-peaks-task-foundation.json", 67),
@@ -20,11 +21,8 @@ DO_RE = re.compile(r"做《([^》]+)》")
 WARN_DISTANCE = 5.0
 FAIL_DISTANCE = 8.0
 
-# Explicit task-data exceptions confirmed against live WotLK quest text. These are audit-layer
-# exceptions only; they must never be used to move the route just to satisfy malformed objective rows.
-MANUAL_TASK_RESOLUTIONS: dict[tuple[str, int], str] = {
-    ("howling", 11397): "quest requires 15 Chillmere Coast Scourge of any eligible type; extra per-NPC event rows are alternative credit sources, not separate mandatory objectives",
-}
+# Verified task-data exceptions live in route-atlas-audit-exceptions.json. The audit engine
+# consumes them but does not own map/task facts or move routes to satisfy malformed objective rows.
 
 
 def objective_sources(objective: dict[str, Any], zone_id: int) -> list[dict[str, Any]]:
@@ -56,7 +54,13 @@ def distance_to_source(px: float, py: float, source: dict[str, Any]) -> float:
     return math.hypot(dx, dy)
 
 
-def audit_route(route_key: str, route: dict[str, Any], foundation_path: Path, zone_id: int) -> dict[str, Any]:
+def audit_route(
+    route_key: str,
+    route: dict[str, Any],
+    foundation_path: Path,
+    zone_id: int,
+    manual_task_resolutions: dict[int, str],
+) -> dict[str, Any]:
     foundation = json.loads(foundation_path.read_text(encoding="utf-8"))
     tasks_by_name = {
         str(task["name"]): task
@@ -78,7 +82,7 @@ def audit_route(route_key: str, route: dict[str, Any], foundation_path: Path, zo
         task = tasks_by_name.get(task_name)
         if not task:
             continue
-        manual_reason = MANUAL_TASK_RESOLUTIONS.get((route_key, int(task["quest_id"])))
+        manual_reason = manual_task_resolutions.get(int(task["quest_id"]))
         if manual_reason:
             manual_resolved.append({
                 "quest_id": int(task["quest_id"]),
@@ -89,7 +93,7 @@ def audit_route(route_key: str, route: dict[str, Any], foundation_path: Path, zo
             continue
         resolution = str(task.get("objective_review_resolution") or "").strip()
         spatial_resolution = str(task.get("manual_spatial_resolution") or "").strip()
-        if resolution.startswith("manual_route_card_resolves") or spatial_resolution:
+        if resolution.startswith("manual_route_card") or spatial_resolution:
             manual_resolved.append({
                 "quest_id": int(task["quest_id"]),
                 "quest_name": task_name,
@@ -156,17 +160,24 @@ def audit_route(route_key: str, route: dict[str, Any], foundation_path: Path, zo
 
 def main() -> None:
     routes = json.loads(ROUTES.read_text(encoding="utf-8"))
+    exceptions = json.loads(EXCEPTIONS.read_text(encoding="utf-8"))
+    manual_by_route = exceptions.get("objective_anchors", {}).get("manual_task_resolutions", {})
     result = {
         "status": "objective_anchor_distance_audit",
         "rule": "Every geolocatable objective must be near at least one route point where that quest is executed. Distances >8 are hard failures; >5 require manual review.",
         "routes": {},
     }
     for route_key, (foundation_path, zone_id) in ROUTE_FOUNDATIONS.items():
+        manual_task_resolutions = {
+            int(qid): str(reason)
+            for qid, reason in (manual_by_route.get(route_key, {})).items()
+        }
         result["routes"][route_key] = audit_route(
             route_key,
             routes[route_key],
             foundation_path,
             zone_id,
+            manual_task_resolutions,
         )
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     summary = {

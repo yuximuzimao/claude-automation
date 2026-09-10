@@ -11,7 +11,7 @@ DATA = ROOT / "data/route-atlas/workbench-routes.json"
 OUT = ROOT / ".ai-bridge/route-atlas-action-sequence-audit.md"
 
 TASK_RE = re.compile(r"《([^》]+)》")
-AUTHOR_WORDS = ("第一轮", "第二轮", "第三轮", "回访", "回收", "收尾", "终局", "开场", "机会插点", "本轮")
+CONDITIONAL_TOKENS = ("若携带", "若已", "若途中", "若死亡泥潭", "若五号")
 
 
 def ordered_task_events(action: str) -> list[tuple[str, str]]:
@@ -33,6 +33,7 @@ def ordered_task_events(action: str) -> list[tuple[str, str]]:
 def audit_route(key: str, route: dict) -> list[str]:
     lines = [f"# {route['title']} ({key})", ""]
     active = defaultdict(int)
+    seen: set[str] = set()
     suspicious: list[str] = []
 
     for step_no, group in enumerate(route["stepGroups"], 1):
@@ -44,20 +45,43 @@ def audit_route(key: str, route: dict) -> list[str]:
             rendered = action.replace("\n", "\n    ")
             lines.append(f"- {label}：{rendered}")
 
-            for word in AUTHOR_WORDS:
-                if word in label or word in action:
-                    suspicious.append(f"步骤{step_no} {label}: 仍含作者过程词“{word}”")
-
+            conditional = any(token in action for token in CONDITIONAL_TOKENS)
             for verb, task in ordered_task_events(action):
                 if verb == "接":
                     active[task] += 1
-                elif verb == "交":
+                    seen.add(task)
+                    continue
+
+                if verb == "交":
                     if active[task] > 0:
                         active[task] -= 1
-                    elif not any(token in action for token in ("若携带", "若已", "若途中", "若死亡泥潭", "若五号")):
-                        suspicious.append(f"步骤{step_no} {label}: 《{task}》出现交付，但此前动作序列未见对应接取（可能是跨图携带/解析误报，需人工确认）")
-                elif verb == "做" and active[task] <= 0:
-                    suspicious.append(f"步骤{step_no} {label}: 《{task}》出现执行，但此前动作序列未见对应接取（可能是同名后续/解析误报，需人工确认）")
+                    elif conditional:
+                        # Conditional/fallback turn-ins can legitimately appear at more than one
+                        # natural hub visit. This diagnostic does not branch the task state.
+                        pass
+                    elif task in seen:
+                        suspicious.append(
+                            f"步骤{step_no} {label}: 《{task}》再次交付，但当前序列已无激活实例（优先检查重复/过期动作）"
+                        )
+                    else:
+                        suspicious.append(
+                            f"步骤{step_no} {label}: 《{task}》首次出现就是交付；当前审计未建模地图入口前已接/跨图携带状态，需人工确认入口状态"
+                        )
+                    seen.add(task)
+                    continue
+
+                if verb == "做" and active[task] <= 0:
+                    if conditional:
+                        pass
+                    elif task in seen:
+                        suspicious.append(
+                            f"步骤{step_no} {label}: 《{task}》执行时当前序列无激活实例（优先检查重排后漏接/过期动作）"
+                        )
+                    else:
+                        suspicious.append(
+                            f"步骤{step_no} {label}: 《{task}》首次出现就是执行；当前审计未建模地图入口前已接/跨图携带状态，需人工确认入口状态"
+                        )
+                    seen.add(task)
         lines.append("")
 
     lines.append("### 自动异常信号")
@@ -71,7 +95,13 @@ def audit_route(key: str, route: dict) -> list[str]:
 
 def main() -> None:
     routes = json.loads(DATA.read_text(encoding="utf-8"))
-    keys = sys.argv[1:] or ["zang", "nagrand"]
+    keys = sys.argv[1:]
+    if not keys:
+        raise SystemExit(
+            "Specify one or more Route Atlas route keys explicitly, e.g. "
+            "python3 scripts/audit_route_atlas_action_sequence.py zang nagrand. "
+            "This is a diagnostic, not a default all-route publication gate, because route-entry carried task state is not modeled yet."
+        )
     out: list[str] = []
     for key in keys:
         if key not in routes:

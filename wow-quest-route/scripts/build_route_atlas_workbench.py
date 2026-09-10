@@ -524,11 +524,17 @@ def main() -> None:
                         f"v45 actionHtml lost player action tasks: {key} step {index}: {missing_semantic_tasks}"
                     )
             step_timing = group.get("timing")
-            if not isinstance(step_timing, dict) or not isinstance(step_timing.get("centerMinutes"), (int, float)):
+            if not isinstance(step_timing, dict):
                 raise SystemExit(f"step timing missing: {key} step {index}")
-            step_range = step_timing.get("rangeMinutes")
-            if not isinstance(step_range, list) or len(step_range) != 2:
-                raise SystemExit(f"step timing range missing: {key} step {index}")
+            if step_timing.get("status") == "pending_recalibration":
+                if step_timing.get("centerMinutes") is not None or step_timing.get("rangeMinutes") is not None:
+                    raise SystemExit(f"pending step timing must not publish stale numbers: {key} step {index}")
+            else:
+                if not isinstance(step_timing.get("centerMinutes"), (int, float)):
+                    raise SystemExit(f"step timing missing: {key} step {index}")
+                step_range = step_timing.get("rangeMinutes")
+                if not isinstance(step_range, list) or len(step_range) != 2:
+                    raise SystemExit(f"step timing range missing: {key} step {index}")
         if route.get("badgeTitle"):
             raise SystemExit(f"route top-right card must not have a title: {key}")
         if "炉石：" not in str(route.get("badge", "")) or "预计总时间：" not in str(route.get("badge", "")):

@@ -7,7 +7,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 UNIVERSE = ROOT / "data/route-atlas/northrend-task-universe.json"
-SCOPE = ROOT / "data/route-atlas/howling-fjord-scope-audit.json"
+SCOPE = ROOT / "data/route-atlas/howling-fjord-scope.json"
 OUT = ROOT / "data/route-atlas/howling-fjord-task-foundation.json"
 CLUSTERS = ROOT / "data/route-atlas/howling-fjord-target-clusters.json"
 REPORT = ROOT / "docs/analysis/2026-08-26-howling-fjord-foundation-audit.md"

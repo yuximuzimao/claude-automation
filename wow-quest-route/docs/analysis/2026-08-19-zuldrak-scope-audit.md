@@ -1,33 +1,12 @@
-# 祖达克正式 scope 审计（全清基线）
+# RETIRED：祖达克 scope audit
 
-- 目标：只建立首组户外一次性全清任务池；不做速度/金币裁剪。
-- Questie assigned 到祖达克：134；正式候选：105。
-- requiredLevel：`{74: 98, 75: 7}`。
-- 旧自动路线：96；漏召回15；多出6。
+该旧 audit 名称已经退役。它实际承担的是正式任务 scope 生成职责，而不是独立验证。
 
-## 旧自动路线漏掉的正式候选
+当前现役入口：
 
-- 12506《西莱图斯祭坛的麻烦》｜接：妖术师乌布戈@(40.5,65.6)｜交：妖术师乌布戈@(40.5,65.6)｜pre=[12740]｜parent=[]
-- 12652《喂饱食尸鬼》｜接：骨肠@(19.9,75.5)｜交：骨肠@(19.9,75.5)｜pre=[12629, 12643]｜parent=[]
-- 12664《黑暗的地平线》｜接：达库鲁大王@(27.1,46.2)｜交：达库鲁大王@(27.1,46.2)｜pre=[12648]｜parent=[12661]
-- 12665《不祥的扰动》｜接：哈克娅@(62.0,64.1)｜交：哈克娅@(62.0,64.1)｜pre=[12653]｜parent=[]
-- 12673《官大一级压死人》｜接：达库鲁大王@(27.1,46.2)｜交：达库鲁大王@(27.1,46.2)｜pre=[]｜parent=[12669]
-- 12686《无法容忍》｜接：达库鲁大王@(27.1,46.2)｜交：达库鲁大王@(27.1,46.2)｜pre=[]｜parent=[12677]
-- 12690《火上浇油》｜接：达库鲁大王@(27.1,46.2)｜交：达库鲁大王@(27.1,46.2)｜pre=[]｜parent=[12676]
-- 12710《真相大白》｜接：达库鲁大王@(27.1,46.2)｜交：达库鲁大王@(27.1,46.2)｜pre=[12690]｜parent=[]
-- 12721《狂暴》｜接：哈克娅@(62.0,64.1)｜交：巫医库弗@(59.5,58.0)｜pre=[12712]｜parent=[]
-- 12932《痛苦斗兽场：伊戈达斯！》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[]｜parent=[]
-- 12933《痛苦斗兽场：猛犸人！》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[12932, 12954]｜parent=[]
-- 12934《痛苦斗兽场：异界的对手！》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[12933]｜parent=[]
-- 12935《痛苦斗兽场：海象人的末日！》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[12934]｜parent=[]
-- 12936《痛苦斗兽场：血怒者科尔拉克！》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[12935]｜parent=[]
-- 12948《痛苦斗兽场的冠军》｜接：古尔戈索克@(48.4,56.4)｜交：巨魔仆从伍迪@(48.5,56.4)｜pre=[12936]｜parent=[]
+- `scripts/build_zuldrak_scope.py`
+- `data/route-atlas/zuldrak-scope.json`
+- `scripts/build_zuldrak_foundation.py`
 
-## 旧自动路线中应结构性排除
-
-- 12633《黑暗的召唤》：exclude_structural / alternate_branch_requires_dungeon_prerequisite_12238
-- 12638《侥幸逃脱》：exclude_structural / alternate_branch_requires_dungeon_prerequisite_12238
-- 12643《一线希望》：exclude_structural / alternate_branch_requires_dungeon_prerequisite_12238
-- 12649《乔装打扮！》：exclude_structural / alternate_branch_requires_dungeon_prerequisite_12238
-- 12792《紧急事务》：exclude_structural / mutually_exclusive_entry_breadcrumb_current_axis_carries_12789
-- 12793《地平线上的硝烟》：exclude_structural / mutually_exclusive_entry_breadcrumb_current_axis_carries_12789
+迁移前后整份 scope JSON 完全相等，foundation 与目标测试已重新验证。详细说明见：
+`docs/archive/analysis/2026-09-10-zuldrak-scope-audit-migration.md`。

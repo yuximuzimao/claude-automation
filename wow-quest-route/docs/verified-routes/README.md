@@ -7,8 +7,8 @@
 - [`CURRENT.md`](CURRENT.md)：当前等级、位置、任务状态和唯一恢复点。继续当前项目先读它。
 - 当前Route Atlas执行数据：`../../data/route-atlas/workbench-routes.json`。
 - 当前Route Atlas正式页面：`../../data/routes/route-atlas-workbench.html`。
-- 最新阶段NEAT：[`../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md`](../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md)，记录祖达克首组最终闭环、灰熊80级完整性复审与首段实测、最新Journey恢复点，以及本次知识层NEAT收敛。
-- 上一阶段NEAT：[`../archive/neat/2026-09-04-zuldrak-live-daily-selection-neat.md`](../archive/neat/2026-09-04-zuldrak-live-daily-selection-neat.md)，记录祖达克中段实跑、日常筛选与五号Journey交叉校验。
+- 最新阶段NEAT：[`../archive/neat/2026-09-11-audit-governance-grizzly-closure-howling-live-neat.md`](../archive/neat/2026-09-11-audit-governance-grizzly-closure-howling-live-neat.md)，记录审计体系逐项治理闭环、灰熊首组完成冻结、嚎风首段实跑/局部重排、固定日常时间采样口径与新阿加曼德恢复点。
+- 上一阶段NEAT：[`../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md`](../archive/neat/2026-09-08-zuldrak-closure-grizzly-live-neat.md)，记录祖达克首组最终闭环、灰熊80级完整性复审与首段实测。
 - 更早历史统一从[`../archive/README.md`](../archive/README.md)按日期/主题定向查找，不在当前入口维护长链索引。
 
 ## 仍有效的路线与支撑文档

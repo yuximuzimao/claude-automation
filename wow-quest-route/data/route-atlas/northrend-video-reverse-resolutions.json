@@ -1,0 +1,128 @@
+{
+  "schema": "northrend-video-reverse-resolutions/v1",
+  "maps": {
+    "borean": [
+      {
+        "video_first": "情势扭转",
+        "video_second": "决战奈辛瓦里",
+        "resolution": "keep_current: video crosses a different Alliance map progression; current Horde route closes Nessingwary before the later Kaskala chain and does not create a shared local detour."
+      },
+      {
+        "video_first": "先祖的回归",
+        "video_second": "别让他们逃了！",
+        "resolution": "keep_current: both Coldrock chains are active in the same local loop; their turn-in order differs but current route completes both without an extra revisit."
+      },
+      {
+        "video_first": "敌人的耳环",
+        "video_second": "帮助弱小",
+        "resolution": "keep_current: Help the Weak is shared/fast and is turned in immediately; Earrings remains a background personal-drop task to avoid dedicated five-box farming."
+      },
+      {
+        "video_first": "调查",
+        "video_second": "监视裂谷：悬崖异常",
+        "resolution": "keep_current: the rift task is already available on Amber Ledge arrival while Investigation unlocks after the jailbreak return; the current order follows availability and the same hub cycle."
+      },
+      {
+        "video_first": "重铸钥匙",
+        "video_second": "监视裂谷：峭壁断层",
+        "resolution": "keep_current: the cliff-fault objective is completed on the outbound local pass; Reforging the Key unlocks later through the interrogation/time-race chain at the same hub."
+      },
+      {
+        "video_first": "监视裂谷：冬鳞洞穴",
+        "video_second": "侦查虫孔",
+        "resolution": "keep_current: these belong to separate Taunka/Winterfin phases; video episode order is not a local adjacency claim. Current route carries the rift quest through the north loop and uses the opened flight network for its final turn-in."
+      }
+    ],
+    "dragonblight": [
+      {
+        "video_first": "搜索因度雷村",
+        "video_second": "前往莫亚基港口",
+        "resolution": "keep_current: the Horde route enters Dragonblight carrying 《前往莫亚基港口》 from Borean and naturally turns it on the first Moa'ki visit. 《搜索因度雷村》 unlocks later from the Agmar chain, so reproducing the video's entry-state order would require delaying an already-carried cross-map turn-in."
+      },
+      {
+        "video_first": "图尔凯的螃蟹陷阱",
+        "video_second": "长者玛纳洛",
+        "resolution": "keep_current: both are accepted from the same Moa'ki visit; current route advances Mana'loa/Indu'le before sweeping the southern coast so crab traps are collected along the coast loop instead of forcing an early shoreline return."
+      },
+      {
+        "video_first": "魔网能量线的终端",
+        "video_second": "海洋女神",
+        "resolution": "keep_current: the ley-line quest stays active while the coastal Ocean Goddess chain is closed, then is turned after the Moa'ki-to-Agmar flight; this batches the return transport rather than adding a separate Agmar trip."
+      },
+      {
+        "video_first": "保卫龙眠神殿",
+        "video_second": "红玉巨龙圣地的命运",
+        "resolution": "keep_current: the current Horde route reaches Wyrmrest top floor with 《红玉巨龙圣地的命运》 ready, turns it there, then advances 《通知女王》 to unlock 《向德弗雷斯塔兹领主报到》 and only afterward reaches the middle floor where 《保卫龙眠神殿》 becomes available. The route order follows the current unlock and floor traversal."
+      }
+    ],
+    "grizzly": [
+      {
+        "video_first": "解读象形文字",
+        "video_second": "清理天灾",
+        "resolution": "keep_current: both lie on the same westward Drakuru/Forgotten-depths sweep; current route takes the nearby mummified-crusader branch before the first brazier with no later revisit."
+      },
+      {
+        "video_first": "蘑菇汤！",
+        "video_second": "古树精华宝石",
+        "resolution": "keep_current: Mushroom Soup is collected as a background task while the route continues east with the Drakuru gem chain; its delayed turn-in avoids returning to Granite Springs solely for the soup."
+      },
+      {
+        "video_first": "灰尘之声",
+        "video_second": "跟我的小朋友打招呼",
+        "resolution": "keep_current: both are long-carried tasks whose turn-in order reflects different endpoints; the route hands Little Friend at Harkor when first entering the northeast, while Dust Voice waits for the later Drakil'jin spatial instance."
+      },
+      {
+        "video_first": "等肉下锅",
+        "video_second": "心灵的创伤",
+        "resolution": "keep_current: Meat for the Pot is intentionally background-collected through later northeast/giant terrain; Healing with Herbs closes earlier when its local targets finish, avoiding dedicated meat farming."
+      },
+      {
+        "video_first": "金亚拉克的末日",
+        "video_second": "破损的日记",
+        "resolution": "keep_current: the diary is collected/turned during the earlier Thor Modan pass; Jin'arrak is a later Harkor/Drakil'jin chain. Video's Alliance macro traversal reaches these chains in the opposite order."
+      },
+      {
+        "video_first": "攻破防线",
+        "video_second": "卢娜的要求",
+        "resolution": "keep_current: Luna is closed before the northern giant chain because it is already available on the route into Onu'va; Break Through is a later strict giant-chain continuation, so swapping them would delay an already-open local loop."
+      },
+      {
+        "video_first": "……我们没有能源",
+        "video_second": "可能的关联",
+        "resolution": "keep_current: Possible Link is an earlier Vordrassil/Conquest Hold chain and is intentionally closed before the late Dun Argol golem chain. Video Alliance hub progression unlocks the counterpart later."
+      },
+      {
+        "video_first": "终获解救",
+        "video_second": "沃达希尔的种子",
+        "resolution": "keep_current: Vordrassil Seeds is completed in the mid-map Vordrassil pass and immediately unlocks the bear-god continuation; Free at Last is the terminal northern giant-chain task and cannot justify delaying the earlier tree pass."
+      }
+    ],
+    "zuldrak": [
+      {
+        "video_first": "风暴将至",
+        "video_second": "圣光不能为我复仇",
+        "resolution": "keep_current: Vargul Revenge is completed beside Gork during the same missing-crusader sweep, so turning it in immediately costs no revisit. Reproducing the video completion order would require carrying it away from its local turn-in and returning later."
+      },
+      {
+        "video_first": "希姆埃巴的祝福",
+        "video_second": "银色北伐军的降落伞",
+        "resolution": "keep_current: Zim'Abwa requires personal Drakkari Offerings. The five-box route keeps this as background accumulation through the southern Drakkari loops and closes it on the final south return instead of forcing a dedicated early personal-drop farm."
+      },
+      {
+        "video_first": "银色北伐军的降落伞",
+        "video_second": "潜入沃尔塔鲁斯",
+        "resolution": "keep_current: after the Gymer material loop the route is already back at Ebon Watch with Infiltrating Voltarus unlocked. Closing the phased Ebon chain before the one-way east transition avoids the video's later Ebon revisit after Argent Stand."
+      },
+      {
+        "video_first": "给斯塔哈默中士的新命令",
+        "video_second": "实验室的学徒",
+        "resolution": "keep_current: both orders are dependency-legal, but the current Argent→Heb'Valok→spirits→Heb'Valok→Sseratus→bat→Heb'Valok→Argent loop is about 76.3 map-percent versus about 84.3 for the video-shaped Sseratus-first alternative using the same route anchors."
+      },
+      {
+        "video_first": "温暖的篝火",
+        "video_second": "扔手雷",
+        "resolution": "keep_current: Throwing Down is turned in early specifically to unlock Cocooned, allowing Cocooned and One of a Kind? rescue targets to share one rescue pass. Creature Comforts remains a background wood collection and is turned later near the mushroom/basilisk return, avoiding a dedicated Drak'Jin wood loop."
+      }
+    ]
+  }
+}

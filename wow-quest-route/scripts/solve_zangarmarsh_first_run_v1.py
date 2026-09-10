@@ -14,7 +14,7 @@ from lib.route_atlas_region_planner import build_region_first_feasible_order
 
 ATLAS = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 PROFILES = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
-AUDIT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input-audit.json"
+SOLVER_INPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input.json"
 OUTPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-first-run-v1.json"
 REPORT = ROOT / "docs" / "analysis" / "2026-08-13-zangarmarsh-first-run-v1.md"
 START_XY = (78.40, 62.02)
@@ -49,8 +49,8 @@ def main() -> None:
 
     atlas = json.loads(ATLAS.read_text(encoding="utf-8"))
     profiles = json.loads(PROFILES.read_text(encoding="utf-8"))
-    audit = json.loads(AUDIT.read_text(encoding="utf-8"))
-    solver_ready_ids = sorted(int(qid) for qid, row in audit["quests"].items() if not row.get("hard_blocker"))
+    solver_input = json.loads(SOLVER_INPUT.read_text(encoding="utf-8"))
+    solver_ready_ids = sorted(int(qid) for qid, row in solver_input["quests"].items() if not row.get("hard_blocker"))
     opportunistic_ids = sorted(
         qid
         for qid in solver_ready_ids
@@ -58,14 +58,14 @@ def main() -> None:
     )
     quest_ids = [qid for qid in solver_ready_ids if qid not in set(opportunistic_ids)]
     fp = fingerprint(
-        [ATLAS, PROFILES, AUDIT, ROOT / "lib" / "route_atlas_cpsat.py", ROOT / "lib" / "route_atlas_region_planner.py"],
+        [ATLAS, PROFILES, SOLVER_INPUT, ROOT / "lib" / "route_atlas_cpsat.py", ROOT / "lib" / "route_atlas_region_planner.py"],
         quest_ids,
     )
 
     instance = build_instance_from_materialized_data(
         atlas,
         profiles,
-        audit,
+        solver_input,
         quest_ids,
         start_xy=START_XY,
         instance_name="zangarmarsh-first-run-v1",

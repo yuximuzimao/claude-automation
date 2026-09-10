@@ -10,27 +10,31 @@
   "hd_total_bytes": 226441124,
   "hd_total_mib": 215.95,
   "bad_dimensions": [],
+  "unapproved_fallbacks": [],
   "fallbacks": [
     {
       "zone_id": 139,
       "zone_dir": "139-eastern-plaguelands",
       "fallback_file": "139-eastern-plaguelands.jpg",
       "status": "fallback",
-      "reason": "WotLK Eastern Plaguelands requires ScarletEnclave1-4 overlay pieces not present in the ClassicTBC HD source; unsafe to substitute later-era RuinsOfTheScarletEnclave art."
+      "reason": "WotLK Eastern Plaguelands needs ScarletEnclave1-4 overlay pieces absent from the ClassicTBC HD source; later-era substitutes are not accepted.",
+      "approved_fallback": true
     },
     {
       "zone_id": 1519,
       "zone_dir": "1519-stormwind-city",
       "fallback_file": "1519-stormwind-city.jpg",
       "status": "fallback",
-      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement."
+      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement.",
+      "approved_fallback": true
     },
     {
       "zone_id": 4395,
       "zone_dir": "4395-dalaran",
       "fallback_file": "4395-dalaran.png",
       "status": "fallback",
-      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; the generic 4x3/12-tile compositor is not safe for this city map."
+      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; generic 4x3 composition is not accepted.",
+      "approved_fallback": true
     }
   ],
   "maps": [
@@ -129,7 +133,8 @@
       "zone_dir": "139-eastern-plaguelands",
       "fallback_file": "139-eastern-plaguelands.jpg",
       "status": "fallback",
-      "reason": "WotLK Eastern Plaguelands requires ScarletEnclave1-4 overlay pieces not present in the ClassicTBC HD source; unsafe to substitute later-era RuinsOfTheScarletEnclave art."
+      "reason": "WotLK Eastern Plaguelands needs ScarletEnclave1-4 overlay pieces absent from the ClassicTBC HD source; later-era substitutes are not accepted.",
+      "approved_fallback": true
     },
     {
       "zone_id": 14,
@@ -226,7 +231,8 @@
       "zone_dir": "1519-stormwind-city",
       "fallback_file": "1519-stormwind-city.jpg",
       "status": "fallback",
-      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement."
+      "reason": "Stormwind changed in WotLK with the harbor; ClassicTBC HD art is not an exact Wrath-era replacement.",
+      "approved_fallback": true
     },
     {
       "zone_id": 16,
@@ -935,7 +941,8 @@
       "zone_dir": "4395-dalaran",
       "fallback_file": "4395-dalaran.png",
       "status": "fallback",
-      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; the generic 4x3/12-tile compositor is not safe for this city map."
+      "reason": "Dalaran uses a non-standard map-tile layout in the available HD source; generic 4x3 composition is not accepted.",
+      "approved_fallback": true
     },
     {
       "zone_id": 44,

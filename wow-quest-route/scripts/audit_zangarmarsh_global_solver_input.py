@@ -14,7 +14,7 @@ from lib.route_atlas_exact import representative_point
 QUESTIE_ZIP = ROOT / "data" / "sources" / "questie" / "Questie.zip"
 ATLAS = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 PROFILES = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
-OUTPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input-audit.json"
+OUTPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input.json"
 REPORT = ROOT / "docs" / "analysis" / "2026-08-13-zangarmarsh-global-solver-input-audit.md"
 ZONE_ID = 3521
 MIN_QL = 58
@@ -306,4 +306,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(
+        "RETIRED CLI: this module now provides the internal implementation for scripts/build_zangarmarsh_global_solver_input.py. "
+        "Use the builder entrypoint; the generated solver input is not an audit result."
+    )

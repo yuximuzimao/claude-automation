@@ -9,7 +9,7 @@ def load(name: str):
 
 
 def test_zuldrak_scope_and_dependency_pool_is_closed():
-    scope = load("zuldrak-scope-audit.json")
+    scope = load("zuldrak-scope.json")
     foundation = load("zuldrak-task-foundation.json")
     assert scope["formal_candidate_count"] == 105
     assert foundation["formal_task_count"] == 105

@@ -5,10 +5,11 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from icecrown_route_task_index import build_route_task_index
+
 ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "data/route-atlas/icecrown-task-foundation.json"
 ROUTE = ROOT / "data/route-atlas/icecrown-entry-route-draft.json"
-DEPENDENCY_AUDIT = ROOT / "data/route-atlas/icecrown-route-dependency-order-audit.json"
 OUT = ROOT / "data/route-atlas/icecrown-draft-readiness-audit.json"
 ROUTE_STATUSES = {
     "include_candidate",
@@ -50,13 +51,12 @@ def route_cards_by_qid(route: dict[str, Any]) -> dict[int, list[dict[str, Any]]]
 def main() -> None:
     foundation = json.loads(FOUNDATION.read_text(encoding="utf-8"))
     route = json.loads(ROUTE.read_text(encoding="utf-8"))
-    dependency = json.loads(DEPENDENCY_AUDIT.read_text(encoding="utf-8"))
-    first_step = {int(qid): int(step) for qid, step in (dependency.get("first_step_by_quest_id") or {}).items()}
     cards = route_cards_by_qid(route)
     steps_by_number = {int(step["step"]): step for step in route.get("steps", [])}
 
     tasks = [task for task in foundation.get("tasks", []) if task.get("scope_status") in ROUTE_STATUSES]
     by_id = {int(task["quest_id"]): task for task in tasks}
+    first_step = build_route_task_index(tasks, route)["first_step"]
     rows: list[dict[str, Any]] = []
 
     for qid in sorted(by_id):
@@ -132,6 +132,8 @@ def main() -> None:
         key=lambda step: (-step["risk_count"], -step["risky_quest_count"], step["step"]),
     )
     result = {
+        "role": "maintenance_review_queue",
+        "blocking": False,
         "candidate_count": len(rows),
         "route_step_count": len(step_rows),
         "risky_candidate_count": sum(bool(row["risks"]) for row in rows),
@@ -139,7 +141,7 @@ def main() -> None:
         "priority_steps": priority_steps,
         "steps": step_rows,
         "tasks": rows,
-        "note": "Readiness flags are review triggers, not proof that a route step is wrong. Clear them with task facts, route notes, source verification or live five-box evidence before formal publication.",
+        "note": "Readiness flags are maintenance review triggers, not route failures or publication blockers. Resolve them when stronger task facts, route notes, source verification or later five-box evidence becomes available.",
     }
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(

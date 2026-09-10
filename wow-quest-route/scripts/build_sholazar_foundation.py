@@ -7,8 +7,8 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 UNIVERSE = ROOT / "data/route-atlas/northrend-task-universe.json"
-COLD_AUDIT = ROOT / "data/route-atlas/cold-weather-flying-gate-audit.json"
-VIDEO_AUDIT = ROOT / "data/route-atlas/northrend-video-reverse-audit.json"
+COLD_GATE_STATE = ROOT / "data/route-atlas/cold-weather-flying-gate-state.json"
+VIDEO_MAPS = ROOT / "data/video-route/map-reference-blocks.json"
 OVERRIDES = ROOT / "data/route-atlas/sholazar-task-overrides.json"
 OUT_SCOPE = ROOT / "data/route-atlas/sholazar-scope-audit.json"
 OUT_FOUNDATION = ROOT / "data/route-atlas/sholazar-task-foundation.json"
@@ -132,8 +132,8 @@ def mandatory_dependencies(task: dict[str, Any]) -> set[int]:
 
 def main() -> None:
     universe = json.loads(UNIVERSE.read_text(encoding="utf-8"))
-    cold = json.loads(COLD_AUDIT.read_text(encoding="utf-8"))
-    video = json.loads(VIDEO_AUDIT.read_text(encoding="utf-8"))
+    cold = json.loads(COLD_GATE_STATE.read_text(encoding="utf-8"))
+    video_maps = json.loads(VIDEO_MAPS.read_text(encoding="utf-8"))
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8"))
 
     all_tasks = {int(t["quest_id"]): t for t in universe.get("tasks", [])}
@@ -317,10 +317,9 @@ def main() -> None:
     ))
 
     inbound = all_tasks.get(INBOUND_QUEST_ID) or {}
-    video_maps = video.get("maps") or {}
     video_status = "video_index_contains_sholazar" if any(
-        key.lower() == "sholazar" or str(value.get("map") or "") == ZONE_NAME
-        for key, value in video_maps.items()
+        int(value.get("zone_id") or 0) == ZONE_ID
+        for value in (video_maps.get("maps") or [])
     ) else "no_sholazar_video_in_current_index"
 
     entry_transition = {

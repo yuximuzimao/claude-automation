@@ -15,7 +15,7 @@ from lib.route_atlas_initial_solution import build_greedy_feasible_order
 
 ATLAS = ROOT / "data" / "route-atlas" / "zangarmarsh-npc-validation.json"
 PROFILES = ROOT / "data" / "route-atlas" / "zangarmarsh-task-profiles.json"
-AUDIT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input-audit.json"
+SOLVER_INPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-solver-input.json"
 OUTPUT = ROOT / "data" / "route-atlas" / "zangarmarsh-global-core43-checkpoint.json"
 HISTORY = ROOT / "data" / "route-atlas" / "zangarmarsh-global-core43-history.json"
 REPORT = ROOT / "docs" / "analysis" / "2026-08-13-zangarmarsh-global-core43-checkpoint.md"
@@ -38,7 +38,7 @@ def fingerprint() -> str:
     model_files = (
         ATLAS,
         PROFILES,
-        AUDIT,
+        SOLVER_INPUT,
         ROOT / "lib" / "route_atlas_cpsat.py",
         ROOT / "lib" / "route_atlas_initial_solution.py",
     )
@@ -69,13 +69,13 @@ def main() -> None:
 
     atlas = json.loads(ATLAS.read_text(encoding="utf-8"))
     profiles = json.loads(PROFILES.read_text(encoding="utf-8"))
-    audit = json.loads(AUDIT.read_text(encoding="utf-8"))
+    solver_input = json.loads(SOLVER_INPUT.read_text(encoding="utf-8"))
     fp = fingerprint()
 
     instance = build_instance_from_materialized_data(
         atlas,
         profiles,
-        audit,
+        solver_input,
         CORE43,
         start_xy=START_XY,
         instance_name="zangarmarsh-reputation-independent-local-core43",
@@ -162,7 +162,7 @@ def main() -> None:
             "input_fingerprint": fp,
             "atlas_sha256": file_sha(ATLAS),
             "profiles_sha256": file_sha(PROFILES),
-            "audit_sha256": file_sha(AUDIT),
+            "solver_input_sha256": file_sha(SOLVER_INPUT),
             "quest_ids": CORE43,
             "quest_count": len(CORE43),
             "start_xy": list(START_XY),

@@ -479,4 +479,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(
+        "RETIRED CLI: this module now provides the internal implementation for scripts/refine_zangarmarsh_task_profiles.py. "
+        "Use the refinement entrypoint; this stage materializes task-profile decisions and is not a pure audit."
+    )

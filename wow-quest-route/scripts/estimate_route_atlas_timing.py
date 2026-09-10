@@ -16,7 +16,7 @@ ZULDRAK_FOUNDATION = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 STORM_FOUNDATION = ROOT / "data/route-atlas/storm-peaks-task-foundation.json"
 HOWLING_FOUNDATION = ROOT / "data/route-atlas/howling-fjord-task-foundation.json"
 SHOLAZAR_FOUNDATION = ROOT / "data/route-atlas/sholazar-task-foundation.json"
-ZANG_AUDIT = ROOT / "data/route-atlas/zangarmarsh-global-solver-input-audit.json"
+ZANG_SOLVER_INPUT = ROOT / "data/route-atlas/zangarmarsh-global-solver-input.json"
 FIVEBOX_OBS = ROOT / "data/observations/fivebox-task-types.json"
 
 # WoW map dimensions in yards. The first two are already used by the project;
@@ -313,7 +313,7 @@ def load_foundation(path: Path) -> tuple[dict[str, dict[str, Any]], dict[int, di
 
 
 def load_zang_objective_seconds() -> dict[str, float]:
-    data = json.loads(ZANG_AUDIT.read_text(encoding="utf-8"))
+    data = json.loads(ZANG_SOLVER_INPUT.read_text(encoding="utf-8"))
     result: dict[str, float] = {}
 
     def walk(value: Any) -> None:

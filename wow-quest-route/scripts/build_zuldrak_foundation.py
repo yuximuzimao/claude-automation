@@ -7,7 +7,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 UNIVERSE = ROOT / "data/route-atlas/northrend-task-universe.json"
-SCOPE = ROOT / "data/route-atlas/zuldrak-scope-audit.json"
+SCOPE = ROOT / "data/route-atlas/zuldrak-scope.json"
 OVERRIDES = ROOT / "data/route-atlas/zuldrak-task-overrides.json"
 OUT = ROOT / "data/route-atlas/zuldrak-task-foundation.json"
 CLUSTERS = ROOT / "data/route-atlas/zuldrak-target-clusters.json"

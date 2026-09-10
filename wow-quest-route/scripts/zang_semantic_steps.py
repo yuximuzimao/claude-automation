@@ -749,7 +749,7 @@ def apply_zang_step10(route: dict[str, Any]) -> None:
             "使用炉石：萨布拉金\n"
             "暗影猎手德恩加 → 交《通缉：穆玛基酋长》《通缉：格罗阿克》 → 接《战斗迫近》\n"
             "巫医托尔加什 → 交《你见过鱼人吗？》\n"
-            "苏尔加亚 → 交《多头蛇之王》《猎杀恐爪》",
+            "若已完成：苏尔加亚 → 交《多头蛇之王》《猎杀恐爪》",
             "final",
             movement="hearth",
         ),
@@ -780,7 +780,8 @@ def apply_zang_step10(route: dict[str, Any]) -> None:
             point_anchor("萨布拉金"),
             npc_actions("暗影猎手德恩加", turns=("通缉：穆玛基酋长", "通缉：格罗阿克"), accepts=("战斗迫近",)),
             npc_actions("巫医托尔加什", turns=("你见过鱼人吗？",)),
-            npc_actions("苏尔加亚", turns=("多头蛇之王", "猎杀恐爪")),
+            conditional_npc_turn_line("苏尔加亚", "：若已完成 ", "多头蛇之王"),
+            conditional_npc_turn_line("苏尔加亚", "：若已完成 ", "猎杀恐爪"),
             do_at("战斗迫近", "战斗迫近"),
             point_anchor("孢子村"),
             npc_actions("舒特", turns=("既然我们是朋友......",)),

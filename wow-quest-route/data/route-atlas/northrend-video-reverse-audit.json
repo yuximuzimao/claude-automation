@@ -1,6 +1,7 @@
 {
-  "status": "video_reverse_audit_generated_manual_order_review_required",
+  "status": "pass_whole_map_video_reverse_review",
   "policy": "video is reference evidence only; filter faction/dungeon/mutual-exclusion before omission/order review; route freeze requires explicit whole-map review when video exists",
+  "blocking_maps": [],
   "maps": {
     "borean": {
       "map": "北风苔原",
@@ -15,7 +16,7 @@
       "formal_task_count": 165,
       "formal_name_count": 165,
       "video_distinct_task_count": 132,
-      "route_distinct_task_name_count": 188,
+      "route_distinct_task_name_count": 162,
       "common_route_video_name_count": 63,
       "common_explicit_completion_count": 62,
       "critical_video_omission_count": 0,
@@ -1017,23 +1018,23 @@
         {
           "video_first": "调查",
           "video_second": "监视裂谷：悬崖异常",
-          "route_turnin_point_first": 158,
-          "route_turnin_point_second": 155,
+          "route_turnin_point_first": 159,
+          "route_turnin_point_second": 156,
           "manual_resolution": "keep_current: the rift task is already available on Amber Ledge arrival while Investigation unlocks after the jailbreak return; the current order follows availability and the same hub cycle.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "重铸钥匙",
           "video_second": "监视裂谷：峭壁断层",
-          "route_turnin_point_first": 161,
-          "route_turnin_point_second": 158,
+          "route_turnin_point_first": 162,
+          "route_turnin_point_second": 159,
           "manual_resolution": "keep_current: the cliff-fault objective is completed on the outbound local pass; Reforging the Key unlocks later through the interrogation/time-race chain at the same hub.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "监视裂谷：冬鳞洞穴",
           "video_second": "侦查虫孔",
-          "route_turnin_point_first": 220,
+          "route_turnin_point_first": 221,
           "route_turnin_point_second": 123,
           "manual_resolution": "keep_current: these belong to separate Taunka/Winterfin phases; video episode order is not a local adjacency claim. Current route carries the rift quest through the north loop and uses the opened flight network for its final turn-in.",
           "manual_review_status": "resolved"
@@ -1049,16 +1050,16 @@
         41,
         42
       ],
-      "formal_task_count": 147,
-      "formal_name_count": 147,
+      "formal_task_count": 144,
+      "formal_name_count": 144,
       "video_distinct_task_count": 48,
-      "route_distinct_task_name_count": 147,
-      "common_route_video_name_count": 36,
-      "common_explicit_completion_count": 31,
+      "route_distinct_task_name_count": 144,
+      "common_route_video_name_count": 38,
+      "common_explicit_completion_count": 34,
       "critical_video_omission_count": 0,
       "critical_video_omissions": [],
       "video_only_class_counts": {
-        "expected_not_in_current_route_scope": 12
+        "expected_not_in_current_route_scope": 10
       },
       "video_only": [
         {
@@ -1133,18 +1134,6 @@
           ]
         },
         {
-          "quest_id": 11960,
-          "name": "未来的种子",
-          "episodes": [
-            41
-          ],
-          "class": "expected_not_in_current_route_scope",
-          "scope_status": "exclude_repeatable_calendar",
-          "scope_reasons": [
-            "not_one_time_clearable"
-          ]
-        },
-        {
           "quest_id": 12174,
           "name": "高级指挥官哈尔弗·维姆班恩",
           "episodes": [
@@ -1201,18 +1190,6 @@
           ]
         },
         {
-          "quest_id": 12372,
-          "name": "保卫龙眠神殿",
-          "episodes": [
-            42
-          ],
-          "class": "expected_not_in_current_route_scope",
-          "scope_status": "exclude_repeatable_calendar",
-          "scope_reasons": [
-            "not_one_time_clearable"
-          ]
-        },
-        {
           "quest_id": 12464,
           "name": "我的老对手",
           "episodes": [
@@ -1227,23 +1204,23 @@
           ]
         }
       ],
-      "completion_pair_count": 459,
-      "completion_order_inversion_count": 8,
-      "completion_order_inversion_ratio": 0.0174,
+      "completion_pair_count": 555,
+      "completion_order_inversion_count": 11,
+      "completion_order_inversion_ratio": 0.0198,
       "reversed_video_adjacencies": [
         {
           "video_first": "搜索因度雷村",
-          "video_second": "不要浪费",
-          "route_turnin_point_first": 87,
-          "route_turnin_point_second": 83,
-          "manual_resolution": "keep_current: video begins this section already on the Indu'le line. The Horde route from Agmar first reaches Moa'ki to unlock Don't Waste and the Kalu'ak chain, then threads back through Indu'le while those tasks are active; no duplicate standalone Indu'le revisit is introduced.",
+          "video_second": "前往莫亚基港口",
+          "route_turnin_point_first": 86,
+          "route_turnin_point_second": 80,
+          "manual_resolution": "keep_current: the Horde route enters Dragonblight carrying 《前往莫亚基港口》 from Borean and naturally turns it on the first Moa'ki visit. 《搜索因度雷村》 unlocks later from the Agmar chain, so reproducing the video's entry-state order would require delaying an already-carried cross-map turn-in.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "图尔凯的螃蟹陷阱",
           "video_second": "长者玛纳洛",
-          "route_turnin_point_first": 96,
-          "route_turnin_point_second": 88,
+          "route_turnin_point_first": 93,
+          "route_turnin_point_second": 87,
           "manual_resolution": "keep_current: both are accepted from the same Moa'ki visit; current route advances Mana'loa/Indu'le before sweeping the southern coast so crab traps are collected along the coast loop instead of forcing an early shoreline return.",
           "manual_review_status": "resolved"
         },
@@ -1256,11 +1233,11 @@
           "manual_review_status": "resolved"
         },
         {
-          "video_first": "向德弗雷斯塔兹领主报到",
+          "video_first": "保卫龙眠神殿",
           "video_second": "红玉巨龙圣地的命运",
-          "route_turnin_point_first": 123,
-          "route_turnin_point_second": 121,
-          "manual_resolution": "keep_current: both resolve inside Wyrmrest/Ruby chain state; the video Alliance unlock order differs, while the current route turns the Ruby Brooch as soon as it is obtained and immediately continues the same tower/hub chain.",
+          "route_turnin_point_first": 120,
+          "route_turnin_point_second": 117,
+          "manual_resolution": "keep_current: the current Horde route reaches Wyrmrest top floor with 《红玉巨龙圣地的命运》 ready, turns it there, then advances 《通知女王》 to unlock 《向德弗雷斯塔兹领主报到》 and only afterward reaches the middle floor where 《保卫龙眠神殿》 becomes available. The route order follows the current unlock and floor traversal.",
           "manual_review_status": "resolved"
         }
       ],
@@ -1915,9 +1892,9 @@
           "is_repeatable": false
         }
       ],
-      "completion_pair_count": 768,
+      "completion_pair_count": 771,
       "completion_order_inversion_count": 157,
-      "completion_order_inversion_ratio": 0.2044,
+      "completion_order_inversion_ratio": 0.2036,
       "reversed_video_adjacencies": [
         {
           "video_first": "解读象形文字",
@@ -1938,7 +1915,7 @@
         {
           "video_first": "灰尘之声",
           "video_second": "跟我的小朋友打招呼",
-          "route_turnin_point_first": 52,
+          "route_turnin_point_first": 54,
           "route_turnin_point_second": 39,
           "manual_resolution": "keep_current: both are long-carried tasks whose turn-in order reflects different endpoints; the route hands Little Friend at Harkor when first entering the northeast, while Dust Voice waits for the later Drakil'jin spatial instance.",
           "manual_review_status": "resolved"
@@ -1946,15 +1923,15 @@
         {
           "video_first": "等肉下锅",
           "video_second": "心灵的创伤",
-          "route_turnin_point_first": 69,
-          "route_turnin_point_second": 53,
+          "route_turnin_point_first": 78,
+          "route_turnin_point_second": 55,
           "manual_resolution": "keep_current: Meat for the Pot is intentionally background-collected through later northeast/giant terrain; Healing with Herbs closes earlier when its local targets finish, avoiding dedicated meat farming.",
           "manual_review_status": "resolved"
         },
         {
           "video_first": "金亚拉克的末日",
           "video_second": "破损的日记",
-          "route_turnin_point_first": 55,
+          "route_turnin_point_first": 61,
           "route_turnin_point_second": 32,
           "manual_resolution": "keep_current: the diary is collected/turned during the earlier Thor Modan pass; Jin'arrak is a later Harkor/Drakil'jin chain. Video's Alliance macro traversal reaches these chains in the opposite order.",
           "manual_review_status": "resolved"
@@ -1970,7 +1947,7 @@
         {
           "video_first": "……我们没有能源",
           "video_second": "可能的关联",
-          "route_turnin_point_first": 65,
+          "route_turnin_point_first": 73,
           "route_turnin_point_second": 34,
           "manual_resolution": "keep_current: Possible Link is an earlier Vordrassil/Conquest Hold chain and is intentionally closed before the late Dun Argol golem chain. Video Alliance hub progression unlocks the counterpart later.",
           "manual_review_status": "resolved"
@@ -1978,7 +1955,7 @@
         {
           "video_first": "终获解救",
           "video_second": "沃达希尔的种子",
-          "route_turnin_point_first": 70,
+          "route_turnin_point_first": 79,
           "route_turnin_point_second": 44,
           "manual_resolution": "keep_current: Vordrassil Seeds is completed in the mid-map Vordrassil pass and immediately unlocks the bear-god continuation; Free at Last is the terminal northern giant-chain task and cannot justify delaying the earlier tree pass.",
           "manual_review_status": "resolved"
@@ -1993,33 +1970,17 @@
         52,
         53
       ],
-      "formal_task_count": 104,
-      "formal_name_count": 104,
+      "formal_task_count": 105,
+      "formal_name_count": 105,
       "video_distinct_task_count": 43,
       "route_distinct_task_name_count": 105,
-      "common_route_video_name_count": 42,
+      "common_route_video_name_count": 43,
       "common_explicit_completion_count": 37,
       "critical_video_omission_count": 0,
       "critical_video_omissions": [],
-      "video_only_class_counts": {
-        "video_faction_or_other_zone_only": 1
-      },
-      "video_only": [
-        {
-          "quest_id": 12664,
-          "name": "黑暗的地平线",
-          "episodes": [
-            52
-          ],
-          "class": "video_faction_or_other_zone_only",
-          "assigned_zone_id": 66,
-          "race_allowed": true,
-          "npc_faction_allowed": true,
-          "is_dungeon": false,
-          "is_repeatable": false
-        }
-      ],
-      "completion_pair_count": 655,
+      "video_only_class_counts": {},
+      "video_only": [],
+      "completion_pair_count": 656,
       "completion_order_inversion_count": 35,
       "completion_order_inversion_ratio": 0.0534,
       "reversed_video_adjacencies": [
@@ -2034,7 +1995,7 @@
         {
           "video_first": "希姆埃巴的祝福",
           "video_second": "银色北伐军的降落伞",
-          "route_turnin_point_first": 59,
+          "route_turnin_point_first": 61,
           "route_turnin_point_second": 39,
           "manual_resolution": "keep_current: Zim'Abwa requires personal Drakkari Offerings. The five-box route keeps this as background accumulation through the southern Drakkari loops and closes it on the final south return instead of forcing a dedicated early personal-drop farm.",
           "manual_review_status": "resolved"
@@ -2050,7 +2011,7 @@
         {
           "video_first": "给斯塔哈默中士的新命令",
           "video_second": "实验室的学徒",
-          "route_turnin_point_first": 44,
+          "route_turnin_point_first": 46,
           "route_turnin_point_second": 40,
           "manual_resolution": "keep_current: both orders are dependency-legal, but the current Argent→Heb'Valok→spirits→Heb'Valok→Sseratus→bat→Heb'Valok→Argent loop is about 76.3 map-percent versus about 84.3 for the video-shaped Sseratus-first alternative using the same route anchors.",
           "manual_review_status": "resolved"
@@ -2058,8 +2019,8 @@
         {
           "video_first": "温暖的篝火",
           "video_second": "扔手雷",
-          "route_turnin_point_first": 62,
-          "route_turnin_point_second": 52,
+          "route_turnin_point_first": 64,
+          "route_turnin_point_second": 54,
           "manual_resolution": "keep_current: Throwing Down is turned in early specifically to unlock Cocooned, allowing Cocooned and One of a Kind? rescue targets to share one rescue pass. Creature Comforts remains a background wood collection and is turned later near the mushroom/basilisk return, avoiding a dedicated Drak'Jin wood loop.",
           "manual_review_status": "resolved"
         }

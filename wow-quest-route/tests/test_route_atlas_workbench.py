@@ -419,10 +419,10 @@ def test_no_cold_weather_flying_route_excludes_skill_gates():
     assert by_id[12925]["required_level"] == 77 and by_id[12925]["quest_level"] == 80
     assert by_id[12925]["cold_weather_flying_gate"] is False
 
-    gate_audit = json.loads((ROOT / "data/route-atlas/cold-weather-flying-gate-audit.json").read_text(encoding="utf-8"))
-    assert gate_audit["horde_paladin_direct_gate_ids"] == [12561, 12803, 13060, 13419]
+    gate_state = json.loads((ROOT / "data/route-atlas/cold-weather-flying-gate-state.json").read_text(encoding="utf-8"))
+    assert gate_state["horde_paladin_direct_gate_ids"] == [12561, 12803, 13060, 13419]
     sholazar_blocked = {
-        row["quest_id"] for row in [*gate_audit["direct_gates"], *gate_audit["dependency_blocked"]]
+        row["quest_id"] for row in [*gate_state["direct_gates"], *gate_state["dependency_blocked"]]
         if row["zone_id"] == 3711
     }
     assert len(sholazar_blocked) == 15
