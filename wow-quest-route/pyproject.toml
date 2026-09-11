@@ -12,5 +12,8 @@ test = [
   "pytest",
 ]
 
+[tool.setuptools]
+packages = ["lib"]
+
 [tool.ruff]
 line-length = 100

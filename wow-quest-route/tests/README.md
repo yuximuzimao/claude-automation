@@ -29,7 +29,14 @@
 
 ## 测试环境
 
-`pytest` 是项目测试依赖，声明在 `pyproject.toml` 的 `test` extra 中。运行测试时应使用安装了该 extra 的项目 Python 环境；不要依赖某台机器全局环境里“碰巧装过 pytest”。
+`pytest` 是项目测试依赖，声明在 `pyproject.toml` 的 `test` extra 中。使用 Python 3.13 创建项目虚拟环境并安装测试依赖：
+
+```bash
+python3.13 -m venv .venv
+.venv/bin/python -m pip install -e '.[test]'
+```
+
+后续测试统一使用 `.venv/bin/python -m pytest ...`。不要改系统 Python，也不要依赖某台机器全局环境里“碰巧装过 pytest”。
 
 ## 按目标选择验证
 

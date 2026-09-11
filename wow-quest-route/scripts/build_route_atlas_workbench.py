@@ -562,11 +562,20 @@ def main() -> None:
             if existing_patch_end < 0:
                 raise SystemExit(error_text)
             existing_patch_end += len(patch_end)
-            html = html[:existing_patch_start] + html[existing_patch_end:]
+            html = (
+                html[:existing_patch_start].rstrip()
+                + "\n"
+                + html[existing_patch_end:].lstrip()
+            )
     script_close = html.rfind("</script>")
     if script_close < 0:
         raise SystemExit("workbench closing script tag not found")
-    html = html[:script_close] + HUD_ACTIONS_PATCH + RESUME_PATCH + html[script_close:]
+    html = (
+        html[:script_close].rstrip()
+        + HUD_ACTIONS_PATCH
+        + RESUME_PATCH
+        + html[script_close:]
+    )
 
     # User-visible route text must not expose internal A/C/T quest-id notation.
     visible = "\n".join(

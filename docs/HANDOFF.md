@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-09
+更新时间：2026-09-11
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
@@ -9,9 +9,9 @@
 
 LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 核对基线一致。`/api/save` 使用 ETag/If-Match 拒绝旧标签页整文件覆盖，428/409/200 路径均已在线验证。
 
-魔兽祖达克：2026-09-07历程已同步到步骤20接取结束，本轮共享/攻略/炉石修订已完成，下一步从《猛犸的复仇》继续。唯一恢复点见 `wow-quest-route/docs/verified-routes/CURRENT.md`；此次没有修改其它地图路线。
+魔兽当前状态：灰熊丘陵已完成并冻结，首组正在实跑嚎风峡湾；当前恢复点为新阿加曼德首轮接任务阶段。唯一真值见 `wow-quest-route/docs/verified-routes/CURRENT.md`，后续只按Journey和现场反馈修受影响任务簇。
 
-魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
+魔兽工程收尾（2026-09-11）：赞加步骤10/13的《多头蛇之王》《猎杀恐爪》条件交付已重新物化到正式Route Atlas JSON/HTML；生成器中《赞加沼泽的植物》《枯萎的孢芽》条件语义也已收口。Python 3.13隔离环境可安装`test` extra，指定player-text pytest已通过；原`tasks/codex-handoff.md`已归档到项目`docs/archive/neat/`。
 
 审单交接（2026-09-09）：本轮规划与资料已NEAT收口；后续GPT从 `order-review/SKILL.md` → `tasks/todo.md` / `docs/INDEX.md` → `docs/CURRENT.md` 进入。待执行计划保留在 `order-review/docs/2026-09-08-packing-simulator-plan.md`，本轮未开发页面或修改算法。阶段证据在 `order-review/docs/archive/2026-09-09-packing-simulator-planning/`；尺寸与原始活动笔记保持本地原件。
 
