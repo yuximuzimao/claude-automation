@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "unit": "mm",
+  "identitySource": "../product-mapping/data/products/*/features.json",
+  "note": "商品目录身份由 product-mapping 提供；本文件只保存审单装箱范围、装箱尺寸、零体积配件和算法兼容引用。productKeys 使用稳定的 brandId::视觉源标签，不随 ERP 正式简称变化。",
+  "activePackingBrands": ["kgos", "yuexi"],
+  "deprecatedBrandKeywords": ["RITEKOKO", "KOKO", "希凝", "钥黑"],
+  "excludedFromWarehousePackingProducts": [
+    {
+      "merchantCodes": ["kgostzc"],
+      "displayName": "KGOS体脂秤",
+      "reason": "一件代发产品；仓库可能收到退货，但不参与仓库发货装箱。"
+    }
+  ],
+  "ignoredZeroSpaceProducts": [
+    {
+      "productKey": "kgos::黑茶茉莉花茶味卡片",
+      "merchantCodes": ["hcmlhckp"],
+      "displayName": "黑茶茉莉花茶味卡片",
+      "reason": "说明卡片类配件，订单事实保留但不计装箱体积，默认可随货放入。"
+    },
+    {
+      "productKey": "yuexi::雪梨纸",
+      "merchantCodes": ["6976299500122"],
+      "displayName": "悦希雪梨纸",
+      "reason": "薄纸类配件，订单事实保留但不计装箱体积，默认可随货放入。"
+    }
+  ],
+  "products": [
+    {
+      "productSpecId": "coffee-regular-package",
+      "productKeys": ["kgos::美式咖啡", "kgos::生椰拿铁"],
+      "displayName": "咖啡正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6977987940138", "6979151090014"],
+      "dimensionsMm": [105, 42, 154],
+      "dimensionSource": "design_drawing",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "probiotic-regular-package",
+      "productKeys": ["kgos::益生菌"],
+      "displayName": "益生菌正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6977987940053"],
+      "dimensionsMm": [115, 28, 93],
+      "dimensionSource": "design_drawing",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "enzyme-4-regular-package",
+      "productKeys": ["kgos::酵素4.0"],
+      "displayName": "酵素4.0正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979151090007"],
+      "dimensionsMm": [171, 151, 73],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "candy-2-regular-package",
+      "productKeys": ["kgos::糖果2.0"],
+      "displayName": "糖果2.0正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6976299500108"],
+      "dimensionsMm": [101, 36, 130],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "fig-jelly-regular-package",
+      "productKeys": ["kgos::果冻"],
+      "displayName": "KGOS无花果果冻",
+      "brandId": "kgos",
+      "merchantCodes": ["6980319670009"],
+      "dimensionsMm": [136, 87, 41],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "black-tea-regular-package",
+      "productKeys": ["kgos::黑茶-茉莉花茶味", "kgos::黑茶-青柑普洱味"],
+      "displayName": "黑茶正装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760044", "6979265440002"],
+      "dimensionsMm": [157, 132, 35],
+      "dimensionSource": "derived_from_confirmed_cartons",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "black-tea-trial-package",
+      "productKeys": ["kgos::黑茶体验装-茉莉花茶味", "kgos::黑茶体验装-青柑普洱味"],
+      "displayName": "黑茶体验装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760099", "6979265440019"],
+      "dimensionsMm": [115, 61, 25],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "drink-bag-package",
+      "productKeys": ["kgos::一次性吸管袋"],
+      "displayName": "饮料袋",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760082"],
+      "dimensionsMm": [275, 180, 42],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "body-measuring-tape-irregular",
+      "productKeys": ["kgos::腰围卡尺"],
+      "displayName": "腰围卡尺",
+      "brandId": "kgos",
+      "merchantCodes": ["ZZ腰围尺-绿色"],
+      "dimensionsMm": [90, 63, 23],
+      "dimensionSource": "estimated",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "enzyme-4-trial-package",
+      "productKeys": ["kgos::酵素4.0体验装"],
+      "displayName": "酵素4.0体验装",
+      "brandId": "kgos",
+      "merchantCodes": ["6979499760037"],
+      "dimensionsMm": [165, 70, 43],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-sunscreen-package",
+      "productKeys": ["yuexi::防晒精华"],
+      "displayName": "悦希防晒",
+      "brandId": "yuexi",
+      "merchantCodes": ["6950328271429"],
+      "dimensionsMm": [128, 51, 36],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-new-face-oil-package",
+      "productKeys": ["yuexi::精油"],
+      "displayName": "悦希新精油",
+      "brandId": "yuexi",
+      "merchantCodes": ["6975183897416"],
+      "dimensionsMm": [107, 53, 43],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-moisturizing-mask-package",
+      "productKeys": ["yuexi::保湿舒缓面膜"],
+      "displayName": "悦希保湿面膜",
+      "brandId": "yuexi",
+      "merchantCodes": ["6977235921278"],
+      "dimensionsMm": [166, 117, 24],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-lipstick-09-package",
+      "productKeys": ["yuexi::悦希口红 09古堡邂逅"],
+      "displayName": "悦希口红 09古堡邂逅",
+      "brandId": "yuexi",
+      "merchantCodes": ["6950328226245"],
+      "dimensionsMm": [25, 25, 85],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-rejuvenating-cream-3-package",
+      "productKeys": ["yuexi::焕颜霜3.0"],
+      "displayName": "焕颜霜3.0",
+      "brandId": "yuexi",
+      "merchantCodes": ["6950328225903"],
+      "dimensionsMm": [76, 76, 85],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-rejuvenating-lotion-2-package",
+      "productKeys": ["yuexi::焕颜乳2.0"],
+      "displayName": "焕颜乳2.0",
+      "brandId": "yuexi",
+      "merchantCodes": ["6940079096228-1"],
+      "dimensionsMm": [52, 52, 182],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-rejuvenating-water-2-package",
+      "productKeys": ["yuexi::焕颜水2.0"],
+      "displayName": "焕颜水2.0",
+      "brandId": "yuexi",
+      "merchantCodes": ["6931583616811"],
+      "dimensionsMm": [52, 52, 200],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-mousse-oil-trial-package",
+      "productKeys": ["yuexi::慕斯油 体验装"],
+      "displayName": "慕斯油 体验装",
+      "brandId": "yuexi",
+      "merchantCodes": ["6970240607953"],
+      "dimensionsMm": [40, 40, 128],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    },
+    {
+      "productSpecId": "yuexi-mousse-oil-package",
+      "productKeys": ["yuexi::慕斯油"],
+      "displayName": "慕斯油",
+      "brandId": "yuexi",
+      "merchantCodes": ["6970240607946"],
+      "dimensionsMm": [48, 48, 197],
+      "dimensionSource": "user_provided",
+      "orientationPolicy": "all_axis_aligned",
+      "stackable": true
+    }
+  ]
+}

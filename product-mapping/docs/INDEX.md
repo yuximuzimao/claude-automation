@@ -184,20 +184,24 @@ data/products/
 
 ### features.json 维护规范
 
-- 视觉特征记录在 `data/products/{brand}/features.json`，字段：`erpName`（必填）、`颜色`、`特征`、`别名`
-- `erpName` 必须与 ERP 档案V2 精确一致，脚本做 Set 等值比对
+- 视觉特征记录在 `data/products/{brand}/features.json`，字段：`erpName`（必填）、`颜色`、`特征`、`别名`；顶层 key 只是视觉识别标签，不等于 ERP 正式商品简称。
+- `erpName` 必须与 ERP 档案V2 精确一致，脚本做 Set 等值比对。
+- 正式商品简称和编码不再从 features 的 key 猜测，统一读取 `data/products/erp-identities.json`：其中 `shortName` 是 ERP `shortTitle`，`mainMerchantCode` 是商品档案 `outerId`。
+- `erp-identities.json` 是**ERP 商品身份参考快照，不是当前商品目录**。2026-09-11 当前商品档案页一次加载 200/200 条，全部只读保存，目的是给商品匹配、审单等项目补正式简称/编码和做人工核对；是否真正进入商品匹配仍只由 `features.json`、`pending-products.json` 和已确认单品记录决定。禁止因为某条存在于这份 200 条参考表里就自动启用它。
+- 悦希历史 4 个规格编码是一次性兼容特例：焕颜水、焕颜乳、焕颜洁面、焕颜霜1.0旧款。主商家编码仍保存 ERP `outerId`（`yx004/yx005/yx003/yx002`），规格商家编码只放在 `specMerchantCodes` 备注查询身份；后续普通商品不得照此扩展成通用规则。
 
 ### pending-products.json — 待图/待稳定身份新品
 
 - 新品已经出现在 ERP、但商品图或稳定条码尚未齐全时，先进入此清单，不提前塞进 `features.json`。
+- 当前目录只收实际售卖会用到的规格：正式商品正常纳入；名称中的“体验装”表示有独立纸盒/塑封、可能正式售卖，可以纳入；“小样”表示只有瓶器/散装试用，不作为当前商品匹配目录商品。ERP 身份参考表可以保留小样事实，但不得因此自动启用。
 - 名称、简称或当前编码任一命中都表示“已知待补”，不能显示为普通未知商品；同时必须停止视觉自动判断，等待商品图或最终条码。
 - 新版产品不得复用旧版外观。商品图、ERP 精确名称和稳定条码齐全并验收后，才迁入 `features.json` / 参考图；迁完从待补清单删除。
 - 审单项目可以用此清单区分“已知待补尺寸”和真正未知商品，但尺寸、箱规未确认前仍不得自动归入装箱白名单。
 
 ### 与审单装箱资料的交接
 
-完整ERP名称、商品简称和商家编码必须分字段，名称保留原始空格、全半角括号及符号；不能用简称替代匹配基准。
-HEE待补清单中的包装证据指向 [审单包装资料](../../order-review/data/packing-dimensions.json)；仅收到尺寸不代表视觉资料或装箱白名单已完成。
+完整ERP名称、商品简称和商家编码必须分字段，名称保留原始空格、全半角括号及符号；不能用简称替代匹配基准。正式简称/主商家编码优先读取 `data/products/erp-identities.json`，features 顶层 key 只作视觉标签。
+HEE/KGOS待补清单中的包装证据指向[审单包装资料](../../order-review/data/packing-dimensions.json)及其单品尺寸文件；仅收到尺寸不代表视觉资料或装箱白名单已完成。ERP身份快照只负责补正式简称/编码，不替代 features/pending 对现役商品范围的定义。
 悦希装箱组合以用户确认的固定商品组合明细为基础，SKU保留为来源；不得按SKU相同或数量成比例自动归并。活动简写尚未解析，待匹配后逐项对应，入口见[审单导航](../../order-review/SKILL.md)。
 
 ### accessories.json — 不可见配件规则（悦希专用）

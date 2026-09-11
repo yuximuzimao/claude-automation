@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "brand": "hee",
   "brandName": "悦希",
-  "lastUpdated": "2026-08-31",
+  "lastUpdated": "2026-09-11",
   "source": {
     "system": "快麦 ERP",
     "page": "商品档案 V2",
-    "scope": "用户指定的当前页面前 6 行"
+    "scope": "当前在售新品清单；2026-09-11 用户截图再次确认前 6 行均需进入商品匹配待补资料"
   },
   "policy": {
     "status": "known_pending_assets",
@@ -22,7 +22,7 @@
       "imageStatus": "missing",
       "barcodeStatus": "current",
       "recognitionStatus": "known_pending_assets",
-      "packingStatus": "pending_dimensions"
+      "packingStatus": "dimensions_recorded_in_order_review"
     },
     {
       "currentOuterId": "6950328225903",
@@ -31,7 +31,7 @@
       "imageStatus": "missing",
       "barcodeStatus": "current",
       "recognitionStatus": "known_pending_assets",
-      "packingStatus": "pending_dimensions",
+      "packingStatus": "dimensions_recorded_in_order_review",
       "mustNotReuseVisualFrom": ["面霜2.0"]
     },
     {
@@ -39,11 +39,10 @@
       "erpName": "HEE悦希舒缓焕颜精华乳（2.0） 100g",
       "shortName": "焕颜乳2.0",
       "imageStatus": "missing",
-      "barcodeStatus": "known_invalid_pending_replacement",
-      "recognitionStatus": "known_pending_assets_and_barcode",
-      "packingStatus": "blocked_pending_final_barcode_and_dimensions",
-      "mustNotReuseVisualFrom": ["舒缓精华乳"],
-      "note": "当前编码只用于命中本条待办，不得进入正式映射、训练标签或装箱白名单。"
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "dimensions_recorded_in_order_review",
+      "mustNotReuseVisualFrom": ["舒缓精华乳"]
     },
     {
       "currentOuterId": "6931583616811",
@@ -52,7 +51,7 @@
       "imageStatus": "missing",
       "barcodeStatus": "current",
       "recognitionStatus": "known_pending_assets",
-      "packingStatus": "pending_dimensions",
+      "packingStatus": "dimensions_recorded_in_order_review",
       "mustNotReuseVisualFrom": ["舒缓精粹水"]
     },
     {
@@ -62,7 +61,7 @@
       "imageStatus": "missing",
       "barcodeStatus": "current",
       "recognitionStatus": "known_pending_assets",
-      "packingStatus": "pending_dimensions"
+      "packingStatus": "dimensions_recorded_in_order_review"
     },
     {
       "currentOuterId": "6970240607946",
@@ -71,7 +70,7 @@
       "imageStatus": "missing",
       "barcodeStatus": "current",
       "recognitionStatus": "known_pending_assets",
-      "packingStatus": "pending_dimensions"
+      "packingStatus": "dimensions_recorded_in_order_review"
     }
   ]
 }

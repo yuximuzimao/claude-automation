@@ -141,7 +141,13 @@
 
 ## 2026-09-09 装箱实验规划与资料收口
 
-- [NEAT交接](2026-09-09-packing-simulator-planning/neat-handoff.md)：本轮确认范围、资料位置、几何验证、求解局限及交接边界。
-- `2026-09-09-packing-simulator-planning/audit-inventory.json`：活跃/历史Markdown盘点与处置记录。
+- [NEAT交接](2026-09-09-packing-simulator-planning/neat-handoff.md)：该阶段确认范围、资料位置、几何验证、求解局限及交接边界。
+- `2026-09-09-packing-simulator-planning/audit-inventory.json`：当时的活跃/历史Markdown盘点与处置记录。
 - `2026-09-09-packing-simulator-planning/previous-implementation-state.md`：从根本规则移出的过期实现状态原文，不再作为当前依据。
-- 待执行计划仍在 `../2026-09-08-packing-simulator-plan.md`；不把尚未开发的模拟器归为已完成。
+- 该归档中的“模拟器尚未开发”已被2026-09-11阶段取代；当前状态以 `../CURRENT.md` 为准。
+
+## 2026-09-11 装箱实验 P1 页面、资料与实验服务收口
+
+- [NEAT交接](2026-09-11-packing-simulator-p1/neat-handoff.md)：P1本地实验页、商品/包装资料分层、产品原箱手选、现役品牌/配件边界、当前求解器局限及下一会话算法研究入口。
+- `2026-09-11-packing-simulator-p1/audit-inventory.json`：本轮跨 `order-review` / `product-mapping` 的活跃知识区盘点与处置记录。
+- 下一阶段不是继续扩页面，而是先研究完整1～N箱算法的理论来源、成熟/GitHub实现及适用场景；当前单箱搜索不得被误称为成熟多箱算法核心。

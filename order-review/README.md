@@ -9,15 +9,15 @@
 PYTHONPATH=src python3.13 -m order_review.app
 ```
 
-需要已有Chrome调试连接和正确的待审核页面；启动、刷新、审核、恢复与诊断的完整
-说明见[使用指南](docs/usage.md)。已有浮窗实例时不要重复启动。
+审单浮窗需要已有Chrome调试连接和正确的待审核页面；独立装箱实验页面不连接ERP/CDP。
+两类入口、刷新、审核、恢复与诊断的完整说明见[使用指南](docs/usage.md)。已有浮窗实例时不要重复启动。
 
 ## 接手开发
 
 - Agent 从 [SKILL.md](SKILL.md) 开始。
 - [当前状态](docs/CURRENT.md)区分已实现能力、未验证场景和实验进度。
-- [待执行装箱计划](docs/2026-09-08-packing-simulator-plan.md)用于后续GPT接手；不是已上线功能。
-- [待办](tasks/todo.md)与[文档索引](docs/INDEX.md)给出具体入口。
+- [装箱实验计划](docs/2026-09-08-packing-simulator-plan.md)记录P1已完成骨架与下一阶段1～N箱算法研究；本地实验页不等于已接入正式审单浮窗。
+- [待办](tasks/todo.md)与[文档索引](docs/INDEX.md)给出具体入口；当前接手先做算法来源/成熟实现研究，不继续扩前端。
 - [根本规则](docs/2026-07-23-package-rule-foundation.md)规定方案语义；[安全边界](AGENTS.md)约束真实ERP操作。
 
 包装尺寸和原箱资料见 `data/packing-dimensions.json`；正式案例保存在应用数据目录，

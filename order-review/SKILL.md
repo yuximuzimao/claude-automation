@@ -16,14 +16,14 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 
 | 任务 | 入口 |
 |---|---|
-| 接手装箱实验 | `docs/2026-09-08-packing-simulator-plan.md` |
+| 接手装箱实验 / 下一步算法研究 | `tasks/todo.md` → `docs/CURRENT.md` → `docs/2026-09-08-packing-simulator-plan.md` → `docs/archive/2026-09-11-packing-simulator-p1/neat-handoff.md` |
 | 包裹业务规则 | `docs/rules/README.md` → `docs/2026-07-23-package-rule-foundation.md` |
 | ERP审核/拆分与读取 | `docs/rules/erp-execution.md`；`src/order_review/audit_runner.py`、`split_runner.py`、`erp_reader.py` |
 | 原单、草稿和推荐 | `package_plan.py`、`package_workflow.py`、`recommendations.py`（均在`src/order_review/`） |
-| 尺寸与单箱求解 | `data/packing-dimensions.json`；`dimension_catalog.py`、`carton_packing.py` |
+| 尺寸与单箱求解 | 纸箱/规则 `data/packing-dimensions.json`；单品尺寸 `data/packing-product-dimensions.json`；`dimension_catalog.py`、`carton_packing.py` |
 | 案例/备份/回放 | `docs/usage.md`；`case_repository.py`、`case_restore.py`、`case_replay.py`、`packing_case_audit.py` |
-| 界面 | `src/order_review/ui.py`；实验新界面按待执行计划，勿当作已经存在 |
-| 本阶段证据 | `docs/archive/2026-09-09-packing-simulator-planning/neat-handoff.md` |
+| 界面 | 审单浮窗：`src/order_review/ui.py`；装箱实验：`src/order_review/packing_simulator_web.py`、`packing_simulator_service.py`、`packing_simulator_static/` |
+| 本阶段证据 | P1收口：`docs/archive/2026-09-11-packing-simulator-p1/neat-handoff.md`；前置规划：`docs/archive/2026-09-09-packing-simulator-planning/neat-handoff.md` |
 
 ## CORE FLOWS
 
@@ -35,6 +35,7 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 
 - 同一SKU不等于同一固定组合；组合相同比例也不能自动推断为同一套餐。
 - 几何UNKNOWN不等于装不下；规则支持不等于三维求解成功。
+- 当前求解器的“完整底面支撑”是已知过严的算法假设，不得升级成业务装箱规则；几何可行性与运输稳定性后续分层。
 - 礼盒内部商品不能与封装礼盒重复计体积；礼袋估计厚度不能标成实测。
 - `pendingMappings`和`giftPackingFitChecks`目前含待集成资料/实验坐标，不能当作加载器已经启用的产品或箱型。
 - 正式案例、原始活动笔记和ERP日志保持事实，不为通过回放或匹配计划改写。
@@ -47,7 +48,7 @@ description: 审单项目导航：原订单读取、本地包裹方案、受控E
 - `docs/rules/README.md`、`docs/rules/erp-execution.md`
 - `docs/2026-07-23-package-rule-foundation.md`
 - `docs/2026-09-08-packing-simulator-plan.md`
-- `docs/archive/README.md`、`docs/archive/2026-09-09-packing-simulator-planning/`
-- `data/packing-dimensions.json`、`data/replay-problem-set.json`
+- `docs/archive/README.md`、`docs/archive/2026-09-11-packing-simulator-p1/`、`docs/archive/2026-09-09-packing-simulator-planning/`
+- `data/packing-dimensions.json`、`data/packing-product-dimensions.json`、`data/replay-problem-set.json`
 - `data/packing-campaign-notes-2026-09-08.txt`（未解析原文）
 - `src/order_review/`、`tests/`、`pyproject.toml`

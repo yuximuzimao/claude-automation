@@ -1,8 +1,8 @@
 # Handoff
 
-更新时间：2026-09-09
+更新时间：2026-09-11
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
-当前分支：main（唯一 trunk）
+主工作区 trunk：main；审单装箱实验当前隔离分支：`order-review-packing-simulator`
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
 
 稳定能力：个人 Codex Skill `dispatching-workbuddy` 已完成安全派工与验证；仅可用于明确为 `non_sensitive` 的受限代码任务。权威规则、架构和验证记录见 `docs/superpowers/README.md`，严禁把它当作同一 macOS 用户下的进程级沙箱。
@@ -13,7 +13,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 魔兽日常：2026-09-07已记录祖达克起飞至日常结束的整轮实测，含两次死亡复活；计时证据见 `wow-quest-route/data/observations/route-timing-runs.json`。跨图经银色比武场进入时，《实战训练》可替换《爆炸油》，候选选择见 `wow-quest-route/tasks/todo.md`；不据此更改祖达克首组恢复点。
 
-审单交接（2026-09-09）：本轮规划与资料已NEAT收口；后续GPT从 `order-review/SKILL.md` → `tasks/todo.md` / `docs/INDEX.md` → `docs/CURRENT.md` 进入。待执行计划保留在 `order-review/docs/2026-09-08-packing-simulator-plan.md`，本轮未开发页面或修改算法。阶段证据在 `order-review/docs/archive/2026-09-09-packing-simulator-planning/`；尺寸与原始活动笔记保持本地原件。
+审单交接（2026-09-11）：装箱实验P1页面、资料分层与KGOS单箱实验已NEAT收口；后续GPT从 `order-review/SKILL.md` → `tasks/todo.md` → `docs/CURRENT.md` → `docs/2026-09-08-packing-simulator-plan.md` 进入。下一步先追溯理论/论文/成熟与GitHub实现，研究完整1～N箱算法并向用户解释“原算法→借用部分→改造部分”，不要继续扩前端或直接在现有简化单箱搜索上叠多箱。阶段证据在 `order-review/docs/archive/2026-09-11-packing-simulator-p1/`；前置规划仍见2026-09-09归档。
 
 ## 系统级配置（Codex 启动时注意）
 

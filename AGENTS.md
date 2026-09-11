@@ -56,7 +56,7 @@
 | `product-ad-studio/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md` |
 | `wow-quest-route/` | `SKILL.md`、`CLAUDE.md`、`tasks/todo.md`、`docs/INDEX.md`；当前状态再按SKILL读 `docs/verified-routes/CURRENT.md` |
 
-悦希/HEE 商品相关任务还有一个跨项目入口：先读 `product-mapping/data/products/hee/pending-products.json`。清单命中名称、简称或当前编码时，应判断为“已知待补”，不得归为未知商品；商品图、稳定条码或包装资料未齐时，也不得复用旧版外观、创建训练类别或加入审单装箱白名单。
+KGOS/悦希商品相关任务还有跨项目待补入口：先读 `product-mapping/data/products/{brand}/pending-products.json`。当前 HEE 与 KGOS 均有在售待补条目；清单命中名称、简称或当前编码时，应判断为“已知待补”，不得归为未知商品。商品图、稳定识别资料或包装资料未齐时，也不得复用旧版外观、创建训练类别或加入审单装箱白名单；ERP 200条身份快照只作正式名称/编码参考，不代表当前在售目录。
 
 ## Codex / Claude Code 协作
 

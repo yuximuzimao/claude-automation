@@ -59,7 +59,7 @@
 
 先读 `SKILL.md` → `tasks/todo.md` → `docs/INDEX.md`；当前实现与授权范围以
 `docs/CURRENT.md` 为准。修改 ERP 执行或读取时再读 `docs/rules/erp-execution.md`；
-实现装箱实验时读取索引中的待执行计划。历史材料只作追溯，不能驱动现役实现。
+继续装箱实验或算法研究时读取索引中的活跃计划和最新NEAT交接。历史材料只作追溯，不能驱动现役实现。
 
 ## 数据与运行安全
 

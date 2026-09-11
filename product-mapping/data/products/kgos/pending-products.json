@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "brand": "kgos",
+  "brandName": "KGOS",
+  "lastUpdated": "2026-09-11",
+  "source": {
+    "system": "快麦 ERP",
+    "page": "商品档案 V2",
+    "scope": "当前正式售卖但平台商品图/前端资料尚未齐全的新品"
+  },
+  "policy": {
+    "status": "known_pending_assets",
+    "recognition": "正式售卖商品先进入待补清单；平台图和可稳定识别特征齐全后再迁入 features.json。命名含‘体验装’且有独立纸盒/塑封的正式售卖规格可纳入；‘小样’仅瓶器无正式包装，不纳入当前商品匹配目录。",
+    "mapping": "不得复用旧版12条咖啡外观或尺寸猜测新版7条装。",
+    "packing": "装箱项目已确认两款7条装身份及80盒原箱关系，但共同单盒尺寸仍待补。"
+  },
+  "products": [
+    {
+      "currentOuterId": "6980319670030",
+      "erpName": "甘油二酯咖啡固体饮料（生椰拿铁味） 8g*7袋/盒",
+      "shortName": "生椰拿铁咖啡七条装",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions"
+    },
+    {
+      "currentOuterId": "6980319670023",
+      "erpName": "KGOS甘油二酯咖啡固体饮料(美式咖啡风味) 5g*7袋/盒",
+      "shortName": "美式咖啡七条装",
+      "imageStatus": "missing",
+      "barcodeStatus": "current",
+      "recognitionStatus": "known_pending_assets",
+      "packingStatus": "pending_dimensions"
+    }
+  ]
+}
