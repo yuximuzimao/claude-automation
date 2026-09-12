@@ -298,7 +298,8 @@ class DimensionCatalog:
 
     @classmethod
     def load(cls, path: str | Path = DEFAULT_DIMENSION_CATALOG_PATH) -> DimensionCatalog:
-        payload = json.loads(Path(path).read_text(encoding="utf-8"))
+        catalog_path = Path(path)
+        payload = json.loads(catalog_path.read_text(encoding="utf-8"))
         if not isinstance(payload, dict):
             raise ValueError("尺寸目录顶层必须是对象")
         if payload.get("schemaVersion") != 2:
@@ -312,7 +313,18 @@ class DimensionCatalog:
         )
 
         cartons = tuple(_parse_carton(item) for item in _items(payload, "cartons"))
-        products = tuple(_parse_product(item) for item in _items(payload, "products"))
+        product_payload = payload
+        product_dimensions_path = str(payload.get("productDimensionsPath") or "").strip()
+        if product_dimensions_path:
+            product_path = catalog_path.parent / product_dimensions_path
+            product_payload = json.loads(product_path.read_text(encoding="utf-8"))
+            if not isinstance(product_payload, dict):
+                raise ValueError("商品尺寸目录顶层必须是对象")
+            if product_payload.get("schemaVersion") != 1:
+                raise ValueError("不支持的商品尺寸目录版本")
+            if product_payload.get("unit") != "mm":
+                raise ValueError("商品尺寸目录必须统一使用毫米")
+        products = tuple(_parse_product(item) for item in _items(product_payload, "products"))
         original_cartons = tuple(
             _parse_original_carton(item)
             for item in _items(payload, "dedicatedOriginalCartons")

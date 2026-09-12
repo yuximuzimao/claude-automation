@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
+from time import monotonic
 from typing import Iterable, Iterator
 
 from .dimension_catalog import (
@@ -15,6 +16,8 @@ from .dimension_catalog import (
 
 
 DEFAULT_MAX_SEARCH_NODES = 100_000
+DEFAULT_MAX_SEARCH_SECONDS = 2.0
+MAX_EXHAUSTIVE_ORDER_UNITS = 8
 
 
 class GeometryStatus(StrEnum):
@@ -153,6 +156,7 @@ def assess_catalog_carton(
     lines: Iterable[PackingLine],
     *,
     max_search_nodes: int = DEFAULT_MAX_SEARCH_NODES,
+    max_search_seconds: float = DEFAULT_MAX_SEARCH_SECONDS,
 ) -> CartonAssessment:
     carton = catalog.carton(carton_id)
     units = units_from_catalog(catalog, lines)
@@ -171,6 +175,7 @@ def assess_catalog_carton(
             else ""
         ),
         max_search_nodes=max_search_nodes,
+        max_search_seconds=max_search_seconds,
     )
 
 
@@ -182,6 +187,7 @@ def assess_carton(
     effective_dimension_type: DimensionType | None = None,
     dimension_note: str = "",
     max_search_nodes: int = DEFAULT_MAX_SEARCH_NODES,
+    max_search_seconds: float = DEFAULT_MAX_SEARCH_SECONDS,
 ) -> CartonAssessment:
     unit_items = tuple(units)
     container = container_dimensions or carton.dimensions
@@ -190,6 +196,7 @@ def assess_carton(
         container,
         unit_items,
         max_search_nodes=max_search_nodes,
+        max_search_seconds=max_search_seconds,
     )
     status, message = _interpret_geometry(dimension_type, geometry)
     if dimension_note:
@@ -209,12 +216,19 @@ def search_packing(
     units: Iterable[PackingUnit],
     *,
     max_search_nodes: int = DEFAULT_MAX_SEARCH_NODES,
+    max_search_seconds: float = DEFAULT_MAX_SEARCH_SECONDS,
 ) -> PackingGeometryResult:
     unit_items = tuple(units)
     if not unit_items:
         raise ValueError("装箱商品不能为空")
     if isinstance(max_search_nodes, bool) or max_search_nodes <= 0:
         raise ValueError("搜索节点上限必须是正整数")
+    if (
+        isinstance(max_search_seconds, bool)
+        or not isinstance(max_search_seconds, (int, float))
+        or max_search_seconds <= 0
+    ):
+        raise ValueError("搜索时间上限必须是正数")
 
     orientations_by_id: dict[str, tuple[DimensionsMm, ...]] = {}
     for unit in unit_items:
@@ -248,79 +262,232 @@ def search_packing(
             reason="商品总体积大于纸箱空间",
         )
 
-    ordered_units = tuple(
-        sorted(
-            unit_items,
-            key=lambda item: (
-                -item.dimensions.volume,
-                -max(item.dimensions.as_tuple()),
-                item.product_spec_id,
-                item.instance_id,
-            ),
-        )
-    )
-    placements: list[PlacedUnit] = []
+    deadline = monotonic() + float(max_search_seconds)
     searched_nodes = 0
-    limit_reached = False
+    node_limit_reached = False
+    deadline_reached = False
+    attempted_orders = 0
 
-    def place_next(index: int) -> tuple[PlacedUnit, ...] | None:
-        nonlocal searched_nodes, limit_reached
-        if index == len(ordered_units):
-            return tuple(placements)
+    def budget_exhausted() -> bool:
+        nonlocal deadline_reached
+        if node_limit_reached:
+            return True
+        if monotonic() >= deadline:
+            deadline_reached = True
+            return True
+        return False
 
-        unit = ordered_units[index]
-        for dimensions in orientations_by_id[unit.instance_id]:
-            for position in _candidate_positions(container, placements):
-                searched_nodes += 1
-                if searched_nodes > max_search_nodes:
-                    limit_reached = True
-                    return None
-                candidate = PlacedUnit(
-                    instance_id=unit.instance_id,
-                    merchant_code=unit.merchant_code,
-                    product_spec_id=unit.product_spec_id,
-                    display_name=unit.display_name,
-                    position=position,
-                    dimensions=dimensions,
-                    stackable=unit.stackable,
-                )
-                if not _inside(container, candidate):
-                    continue
-                if any(_overlaps(candidate, placed) for placed in placements):
-                    continue
-                if not _fully_supported(candidate, placements):
-                    continue
-                placements.append(candidate)
-                result = place_next(index + 1)
-                if result is not None:
-                    return result
-                placements.pop()
-                if limit_reached:
-                    return None
-        return None
+    def try_order(
+        ordered_units: tuple[PackingUnit, ...],
+    ) -> tuple[PlacedUnit, ...] | None:
+        nonlocal searched_nodes, node_limit_reached
+        placements: list[PlacedUnit] = []
 
-    result = place_next(0)
-    if result is not None:
-        return PackingGeometryResult(
-            status=GeometryStatus.FOUND,
-            container=container,
-            placements=result,
-            searched_nodes=searched_nodes,
-            max_search_nodes=max_search_nodes,
-            reason="已找到边界内、不重叠且完整支撑的摆放",
+        def place_next(index: int) -> tuple[PlacedUnit, ...] | None:
+            nonlocal searched_nodes, node_limit_reached
+            if index == len(ordered_units):
+                return tuple(placements)
+            if budget_exhausted():
+                return None
+
+            unit = ordered_units[index]
+            for dimensions in orientations_by_id[unit.instance_id]:
+                for position in _candidate_positions(container, placements):
+                    if budget_exhausted():
+                        return None
+                    if searched_nodes >= max_search_nodes:
+                        node_limit_reached = True
+                        return None
+                    searched_nodes += 1
+                    candidate = PlacedUnit(
+                        instance_id=unit.instance_id,
+                        merchant_code=unit.merchant_code,
+                        product_spec_id=unit.product_spec_id,
+                        display_name=unit.display_name,
+                        position=position,
+                        dimensions=dimensions,
+                        stackable=unit.stackable,
+                    )
+                    if not _inside(container, candidate):
+                        continue
+                    if any(_overlaps(candidate, placed) for placed in placements):
+                        continue
+                    if not _fully_supported(candidate, placements):
+                        continue
+                    placements.append(candidate)
+                    result = place_next(index + 1)
+                    if result is not None:
+                        return result
+                    placements.pop()
+                    if budget_exhausted():
+                        return None
+            return None
+
+        return place_next(0)
+
+    for ordered_units in _candidate_unit_orders(unit_items):
+        if budget_exhausted():
+            break
+        attempted_orders += 1
+        result = try_order(ordered_units)
+        if result is not None:
+            return PackingGeometryResult(
+                status=GeometryStatus.FOUND,
+                container=container,
+                placements=result,
+                searched_nodes=searched_nodes,
+                max_search_nodes=max_search_nodes,
+                reason=(
+                    "已找到边界内、不重叠且完整支撑的摆放；"
+                    f"已尝试{attempted_orders}种等价去重后的物件顺序"
+                ),
+            )
+
+    if deadline_reached:
+        reason = (
+            "达到搜索时间上限，尚未找到摆放；"
+            f"已尝试{attempted_orders}种等价去重后的物件顺序"
+        )
+    elif node_limit_reached:
+        reason = (
+            "达到搜索节点上限，尚未找到摆放；"
+            f"已尝试{attempted_orders}种等价去重后的物件顺序"
+        )
+    else:
+        reason = (
+            "当前有界摆放策略已尝试"
+            f"{attempted_orders}种等价去重后的物件顺序但未找到解，"
+            "不能据此证明装不下"
         )
     return PackingGeometryResult(
         status=GeometryStatus.UNKNOWN,
         container=container,
         placements=(),
-        searched_nodes=min(searched_nodes, max_search_nodes),
+        searched_nodes=searched_nodes,
         max_search_nodes=max_search_nodes,
-        reason=(
-            "达到搜索节点上限，尚未找到摆放"
-            if limit_reached
-            else "当前有界摆放策略未找到解，不能据此证明装不下"
+        reason=reason,
+    )
+
+
+def _candidate_unit_orders(
+    units: tuple[PackingUnit, ...],
+) -> Iterator[tuple[PackingUnit, ...]]:
+    def stable_key(item: PackingUnit) -> tuple[str, str]:
+        return (item.product_spec_id, item.instance_id)
+
+    def max_face_area(item: PackingUnit) -> int:
+        length, width, height = item.dimensions.as_tuple()
+        return max(length * width, length * height, width * height)
+
+    deterministic_orders = (
+        tuple(
+            sorted(
+                units,
+                key=lambda item: (
+                    -item.dimensions.volume,
+                    -max(item.dimensions.as_tuple()),
+                    *stable_key(item),
+                ),
+            )
+        ),
+        tuple(
+            sorted(
+                units,
+                key=lambda item: (
+                    not item.stackable,
+                    -max_face_area(item),
+                    min(item.dimensions.as_tuple()),
+                    -item.dimensions.volume,
+                    *stable_key(item),
+                ),
+            )
+        ),
+        tuple(
+            sorted(
+                units,
+                key=lambda item: (
+                    not item.stackable,
+                    min(item.dimensions.as_tuple()),
+                    -max_face_area(item),
+                    -item.dimensions.volume,
+                    *stable_key(item),
+                ),
+            )
+        ),
+        tuple(
+            sorted(
+                units,
+                key=lambda item: (
+                    -max(item.dimensions.as_tuple()),
+                    -max_face_area(item),
+                    -item.dimensions.volume,
+                    *stable_key(item),
+                ),
+            )
         ),
     )
+
+    equivalence_key_by_id = {
+        item.instance_id: _unit_order_equivalence_key(item) for item in units
+    }
+    seen_sequences: set[tuple[object, ...]] = set()
+
+    for ordered_units in deterministic_orders:
+        sequence = tuple(
+            equivalence_key_by_id[item.instance_id] for item in ordered_units
+        )
+        if sequence in seen_sequences:
+            continue
+        seen_sequences.add(sequence)
+        yield ordered_units
+
+    if len(units) > MAX_EXHAUSTIVE_ORDER_UNITS:
+        return
+
+    members_by_key: dict[object, list[PackingUnit]] = {}
+    key_order: list[object] = []
+    for item in sorted(units, key=stable_key):
+        key = equivalence_key_by_id[item.instance_id]
+        if key not in members_by_key:
+            members_by_key[key] = []
+            key_order.append(key)
+        members_by_key[key].append(item)
+
+    remaining = {key: len(members) for key, members in members_by_key.items()}
+    prefix: list[object] = []
+
+    def build_sequences() -> Iterator[tuple[object, ...]]:
+        if len(prefix) == len(units):
+            yield tuple(prefix)
+            return
+        for key in key_order:
+            if remaining[key] <= 0:
+                continue
+            remaining[key] -= 1
+            prefix.append(key)
+            yield from build_sequences()
+            prefix.pop()
+            remaining[key] += 1
+
+    for sequence in build_sequences():
+        if sequence in seen_sequences:
+            continue
+        seen_sequences.add(sequence)
+        indexes = {key: 0 for key in members_by_key}
+        ordered_units: list[PackingUnit] = []
+        for key in sequence:
+            index = indexes[key]
+            ordered_units.append(members_by_key[key][index])
+            indexes[key] = index + 1
+        yield tuple(ordered_units)
+
+
+def _unit_order_equivalence_key(unit: PackingUnit) -> tuple[object, ...]:
+    orientations = tuple(
+        item.as_tuple()
+        for item in unit.dimensions.orientations(unit.orientation_policy)
+    )
+    return (orientations, unit.stackable)
 
 
 def layout_is_valid(

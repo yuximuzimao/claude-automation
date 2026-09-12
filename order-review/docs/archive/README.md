@@ -144,4 +144,16 @@
 - [NEAT交接](2026-09-09-packing-simulator-planning/neat-handoff.md)：本轮确认范围、资料位置、几何验证、求解局限及交接边界。
 - `2026-09-09-packing-simulator-planning/audit-inventory.json`：活跃/历史Markdown盘点与处置记录。
 - `2026-09-09-packing-simulator-planning/previous-implementation-state.md`：从根本规则移出的过期实现状态原文，不再作为当前依据。
-- 待执行计划仍在 `../2026-09-08-packing-simulator-plan.md`；不把尚未开发的模拟器归为已完成。
+- 该归档中的“模拟器尚未开发”已被2026-09-11阶段取代；当前状态以 `../CURRENT.md` 为准。
+
+## 2026-09-11 装箱实验 P1 页面、资料与实验服务收口
+
+- [NEAT交接](2026-09-11-packing-simulator-p1/neat-handoff.md)：P1本地实验页、商品/包装资料分层、产品原箱手选、现役品牌/配件边界及当时求解器局限的阶段记录。
+- `2026-09-11-packing-simulator-p1/audit-inventory.json`：当时跨 `order-review` / `product-mapping` 的活跃知识区盘点与处置快照，保持原始历史内容。
+- 该阶段之后已完成算法研究与主干迁移校准；KGOS七条咖啡的商品匹配待补文件、视觉 `productKey` 装箱挂接等旧方案已被后续决策取代。现行身份链、算法架构和运行状态统一以 `../CURRENT.md`、`../2026-09-12-packing-algorithm-research.md` 和源代码为准。
+
+## 2026-09-13 worktree → main 对账收口
+
+- [NEAT交接](2026-09-13-packing-worktree-reconciliation/neat-handoff.md)：P1 worktree 全文件分类、200条ERP身份快照回迁、商品身份链纠正、pending机制退役、3466主干接管和下一轮页面实测入口。
+- `2026-09-13-packing-worktree-reconciliation/audit-inventory.json`：本轮保留/废弃项、主干API冒烟计数与回归结果的结构化快照。
+- 本阶段之后不再从 `order-review-packing-simulator` worktree 回抄业务事实；当前状态以 `../CURRENT.md` 和 `../tasks/todo.md` 为准。

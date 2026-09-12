@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>装箱实验</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-block">
+      <div class="brand-mark">箱</div>
+      <div>
+        <h1>装箱实验</h1>
+        <p>独立算法验证 · 不操作 ERP</p>
+      </div>
+    </div>
+    <nav class="main-tabs" aria-label="主导航">
+      <button class="main-tab is-active" data-tab="experiment">装箱实验</button>
+      <button class="main-tab" data-tab="catalog">包装资料</button>
+    </nav>
+    <div class="safety-note">本地实验</div>
+  </header>
+
+  <main>
+    <section id="experiment" class="page is-active">
+      <div class="experiment-layout">
+        <section class="setup-card">
+          <div class="setup-heading">
+            <h2>选择商品</h2>
+            <button id="load-example" class="example-button">示例：咖啡正装 ×3</button>
+          </div>
+
+          <div class="source-switch" role="group" aria-label="实验来源">
+            <button id="mode-custom" class="source-button is-active">自己选商品</button>
+            <button id="mode-history" class="source-button">历史订单</button>
+          </div>
+
+          <div id="custom-source">
+            <div class="field-block">
+              <span class="label">品牌</span>
+              <div id="brand-buttons" class="brand-buttons"></div>
+            </div>
+
+            <div class="field-block product-search-block">
+              <label class="label" for="product-search-input">添加商品</label>
+              <input id="product-search-input" type="search" autocomplete="off" placeholder="搜索商品简称或全称">
+              <div id="product-search-results" class="search-results" hidden></div>
+            </div>
+
+            <div class="add-row">
+              <div id="selected-product-name" class="selected-product">先搜索并选择商品</div>
+              <div class="qty-field">
+                <label class="label" for="quantity-input">数量</label>
+                <input id="quantity-input" type="number" min="1" value="1">
+              </div>
+              <button id="add-product" class="secondary-button" disabled>加入</button>
+            </div>
+          </div>
+
+          <div id="history-source" hidden>
+            <label class="label" for="case-search">历史订单</label>
+            <input id="case-search" type="search" placeholder="搜索订单号或商品名">
+            <div id="case-list" class="case-list"></div>
+          </div>
+
+          <div class="selection-head">
+            <h3>本次商品</h3>
+            <button id="clear-lines" class="link-button">清空</button>
+          </div>
+          <div id="experiment-lines" class="product-list empty">还没有商品</div>
+        </section>
+
+        <section class="result-card">
+          <div class="result-head">
+            <h2>装箱模拟</h2>
+            <span id="result-badge" class="result-badge idle">等待计算</span>
+          </div>
+
+          <div class="simulation-controls">
+            <div class="simulation-note">
+              <strong id="simulation-brand-name">KGOS</strong>
+              <span id="brand-capability">纯算法模拟，不使用已保存的固定箱规答案。</span>
+            </div>
+            <div class="carton-inline">
+              <label for="carton-select">纸箱</label>
+              <select id="carton-select">
+                <option value="">系统自动选择</option>
+              </select>
+              <button id="run-assessment" class="primary-button" disabled>开始模拟</button>
+            </div>
+            <div id="run-error" class="error" hidden></div>
+          </div>
+
+          <div class="viewer-toolbar">
+            <div>
+              <button class="view-button is-active" data-view="iso">立体</button>
+              <button class="view-button" data-view="top">顶视</button>
+              <button class="view-button" data-view="front">正视</button>
+            </div>
+            <label class="layer-control">查看层高 <input id="layer-slider" type="range" min="0" max="100" value="100"></label>
+          </div>
+
+          <div class="canvas-wrap main-canvas-wrap">
+            <canvas id="packing-canvas" width="980" height="620"></canvas>
+            <div id="result-empty" class="result-empty canvas-overlay">
+              <div class="empty-illustration">□</div>
+              <strong>选择商品后开始模拟</strong>
+              <p>纸箱可以留空，由算法自己尝试。</p>
+            </div>
+            <div id="canvas-message" class="canvas-message" hidden></div>
+          </div>
+
+          <div id="result-content" class="result-content" hidden>
+            <div class="answer-strip">
+              <div>
+                <span class="answer-label">模拟使用</span>
+                <div id="selected-carton-name" class="carton-answer">—</div>
+              </div>
+              <div id="answer-note" class="answer-note"></div>
+            </div>
+            <div id="placement-legend" class="legend"></div>
+
+            <details class="reason-panel">
+              <summary>查看算法判断</summary>
+              <div class="reason-grid">
+                <div><span>输入</span><strong id="business-status">—</strong><p id="business-detail"></p></div>
+                <div><span>摆放</span><strong id="geometry-status">—</strong><p id="geometry-detail"></p></div>
+                <div><span>依据</span><strong id="evidence-status">—</strong><p id="evidence-detail"></p></div>
+              </div>
+            </details>
+          </div>
+
+          <section id="history-answer-panel" class="saved-answer" hidden>
+            <div class="saved-answer-head">
+              <div>
+                <span>人工保存的原方案</span>
+                <strong>只读对照</strong>
+              </div>
+              <span class="mini-badge">用于算法验证</span>
+            </div>
+            <div id="saved-packages" class="saved-packages"></div>
+          </section>
+        </section>
+      </div>
+    </section>
+
+    <section id="catalog" class="page">
+      <div class="catalog-toolbar">
+        <div class="catalog-tabs" role="tablist">
+          <button class="catalog-tab is-active" data-section="cartons">包装纸箱</button>
+          <button class="catalog-tab" data-section="products">单品尺寸</button>
+          <button class="catalog-tab" data-section="businessRules">包装规则</button>
+        </div>
+        <input id="catalog-search" type="search" placeholder="搜索名称、编码">
+      </div>
+      <div id="catalog-content" class="catalog-list"></div>
+    </section>
+  </main>
+
+  <template id="catalog-row-template">
+    <article class="catalog-row">
+      <div class="catalog-row-copy">
+        <strong class="catalog-title"></strong>
+        <span class="catalog-subtitle"></span>
+      </div>
+      <div class="catalog-facts"></div>
+      <div class="catalog-tags"></div>
+      <button class="catalog-detail-button" aria-expanded="false"><span>详情</span><span class="detail-chevron">▾</span></button>
+      <pre class="catalog-inline-detail" hidden></pre>
+    </article>
+  </template>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

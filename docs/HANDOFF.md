@@ -1,6 +1,6 @@
 # Handoff
 
-更新时间：2026-09-11
+更新时间：2026-09-13
 当前负责人：Codex（主力）/ Claude Code（低频辅助）
 当前分支：main（唯一 trunk）
 当前焦点：工作区存在多项目并行未提交改动，不设单一业务主线；各项目当前状态与待办以各自 `CURRENT.md` / `tasks/todo.md` 为准。本轮全局 AGENTS / Skills 指令审计已完成并归档，历史证据见 `docs/archive/2026-09-06-agents-skills-instruction-audit/`。
@@ -13,7 +13,7 @@ LKWJ 当前个人进度基线：果实 62/169；其他标签页与 2026-07-21 �
 
 魔兽工程收尾（2026-09-11）：赞加步骤10/13的《多头蛇之王》《猎杀恐爪》条件交付已重新物化到正式Route Atlas JSON/HTML；生成器中《赞加沼泽的植物》《枯萎的孢芽》条件语义也已收口。Python 3.13隔离环境可安装`test` extra，指定player-text pytest已通过；原`tasks/codex-handoff.md`已归档到项目`docs/archive/neat/`。
 
-审单交接（2026-09-09）：本轮规划与资料已NEAT收口；后续GPT从 `order-review/SKILL.md` → `tasks/todo.md` / `docs/INDEX.md` → `docs/CURRENT.md` 进入。待执行计划保留在 `order-review/docs/2026-09-08-packing-simulator-plan.md`，本轮未开发页面或修改算法。阶段证据在 `order-review/docs/archive/2026-09-09-packing-simulator-planning/`；尺寸与原始活动笔记保持本地原件。
+审单交接（2026-09-13）：装箱实验页面、独立本地服务、固定3466入口、商品尺寸拆表和标准ERP身份链已迁回 main，worktree 全文件对账也已收口；3466 已确认由 main 启动。完整1～N箱算法研究已完成，当前从 `order-review/SKILL.md` → `tasks/todo.md` → `docs/CURRENT.md` → `docs/2026-09-12-packing-algorithm-research.md` 接手。下一轮先做主干页面实测，不预防性重做前端；正式审单浮窗仍未接入。最终迁移证据见 `order-review/docs/archive/2026-09-13-packing-worktree-reconciliation/`。
 
 ## 系统级配置（Codex 启动时注意）
 

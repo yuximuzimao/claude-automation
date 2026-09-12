@@ -1,0 +1,41 @@
+{
+  "auditDate": "2026-09-13",
+  "scope": "reconcile order-review packing simulator worktree into main without raw merge",
+  "worktreeBranch": "order-review-packing-simulator",
+  "worktreeP1Commit": "ee54804",
+  "result": "all business content classified; no future source retrieval from worktree required",
+  "keptOrRebuilt": [
+    "order-review packing simulator service/web/static/tests/launcher",
+    "packing dimension split and dimension_catalog compatibility",
+    "single-carton order-search v2 phase-1 solver changes",
+    "2026-09-11 ERP 200-record read-only identity snapshot",
+    "P1 historical archive with later correction notes"
+  ],
+  "discardedOrRetired": [
+    "product-mapping/data/products/kgos/pending-products.json",
+    "P1 KGOS features patch without real images/features",
+    "product-mapping/data/products/hee/pending-products.json",
+    "visual-label productKeys in packing dimensions",
+    "visual-name special cases such as 阻断片→糖果2.0",
+    "legacy candy pending/data"
+  ],
+  "runtimeTakeover": {
+    "address": "http://127.0.0.1:3466/",
+    "source": "main",
+    "algorithmVersion": "single-carton-order-search-v2",
+    "productDirectoryCount": 82,
+    "packingProductCount": 19,
+    "cartonCount": 16,
+    "pendingCount": 16,
+    "pendingCartonCount": 2,
+    "originalCartonCount": 6
+  },
+  "verification": {
+    "orderReviewTargeted": "58 passed",
+    "orderReviewFull": "316 passed",
+    "productMapping": "18/18 passed",
+    "productDetect": "14/14 passed",
+    "erpIdentitySnapshot": "200/200 semantic equality with worktree source"
+  },
+  "next": "User validates the main 3466 page. Do not preemptively redesign UI. After acceptance, remove the local historical worktree."
+}

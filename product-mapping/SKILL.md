@@ -14,7 +14,7 @@ entry: cli.js
 5. **写操作（新增匹配）必须人工确认后执行**
 6. **新品牌建档前必读** → `docs/preflight-brand.md`（checklist 门禁） + `docs/brand-onboarding.md`（SOP 完整流程）；`docs/INDEX.md §7` 只保留入口原则
 7. **ChatGPT 通过 CodexPro 操作时必读** → `docs/chatgpt-codexpro-operations.md`（本地图片桥接、前台时间边界、target 刷新、长任务交给本地 Codex）
-8. **处理 HEE/悦希前先查待补清单** → `data/products/hee/pending-products.json`；命中名称、简称或当前编码时按“已知待补”处理，不得归为未知，也不得套用旧版外观；包装证据与后续固定组合定义指向 `../order-review/SKILL.md`，不从活动简写猜规则。
+8. **处理 HEE/悦希新品前先查当前待办** → `tasks/todo.md`；尚未补齐图片/识图特征的新品按待办中的标准 ERP 名称和编码识别，不能归为普通未知，也不得复用旧版视觉。装箱尺寸、箱规和组合规则属于 `../order-review/`，不在这里维护。
 
 ## ENTRY MAP
 
@@ -23,7 +23,8 @@ entry: cli.js
 | `cli.js` | CLI 命令入口 | 了解可用命令或新增命令时 |
 | `lib/check.js` | 完整核查流程编排（扫描+标记+生成结构化比较事实） | 改核查流程时 |
 | `lib/brand-scope.js` | 首次指定品牌、后续继承与冲突拦截 | 改品牌作用域时 |
-| `data/products/hee/pending-products.json` | 悦希已知但缺图、缺稳定条码或缺装箱资料的商品清单 | 任何 HEE 识图、匹配、训练或装箱任务开始前 |
+| `tasks/todo.md` | 当前仍需补齐的新品图片/识图特征、已确认标准名称与编码 | 开始任何 HEE/KGOS 新品识图或匹配前 |
+| `data/products/erp-identities.json` | 2026-09-11 ERP 商品档案 V2 的 200 条只读身份快照；仅供人工核对正式全名、简称、主/规格商家编码，不是商品目录，也不参与现有 check/match/识图运行逻辑 | 需要追溯当时 ERP 身份事实时 |
 | `lib/compare.js` | 识图结果 vs ERP 档案明细的精确比较 | 改 match/mismatch 判定时 |
 | `lib/match-one.js` | 单货号 7 步闭环编排器 | 改匹配流程/加步骤时 |
 | `lib/match.js` | 批量匹配入口 | 批量匹配时 |
@@ -180,7 +181,6 @@ visible.querySelector('button.el-button--primary').click();
 
 data/products/kgos/features.json
 data/products/hee/features.json
-data/products/hee/pending-products.json
 data/products/hee/accessories.json
 data/products/hee/sku-map.json
 docs/preflight-brand.md
