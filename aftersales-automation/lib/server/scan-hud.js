@@ -64,10 +64,12 @@ function createSession(options = {}) {
   const now = Date.now();
   const status = {
     sessionId,
+    mode: options.mode || 'aftersales',
     phase: 'countdown',
-    title: '售后自动扫描',
-    status: `${countdownSeconds} 秒后开始工单自动扫描`,
-    detail: '请暂存当前工作，并暂时停止鼠标键盘操作。',
+    title: options.title || (options.mode === 'wanwu' ? '万物定时扫描' : '售后自动扫描'),
+    status: options.status || `${countdownSeconds} 秒后开始${options.mode === 'wanwu' ? '万物待办扫描' : '工单自动扫描'}`,
+    detail: options.detail || '请暂存当前工作，并暂时停止鼠标键盘操作。',
+    countdownSeconds,
     countdownUntil: now + countdownSeconds * 1000,
     shopIndex: 0,
     shopTotal: 0,

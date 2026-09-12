@@ -8,6 +8,7 @@ function connectSSE() {
   es.addEventListener('connected', () => {
     setConnected(true);
     loadAllLiveTabs();
+    loadWanwuStatus();
     // [stopped-2026-06-16] 定时扫描已停，next-scan-label 已从页面摘除，不再调 loadNextScanTime()。
     loadJlAlerts();
     // 重连后恢复队列面板状态（先同步 lastCompletedOpId，避免弹出历史完成通知）
@@ -87,6 +88,9 @@ function connectSSE() {
   });
   es.addEventListener('accounts-update', () => {
     if (currentTab === 'accounts') loadAccounts();
+  });
+  es.addEventListener('wanwu-status', (e) => {
+    try { renderWanwuStatus(JSON.parse(e.data || '{}')); } catch { loadWanwuStatus(); }
   });
   es.addEventListener('ri-progress', (e) => {
     try { riOnProgress(JSON.parse(e.data || '{}')); } catch {}
@@ -279,6 +283,30 @@ document.addEventListener('click', (e) => {
 
 function setConnected(ok) {
   document.getElementById('connection-status').className = 'conn-dot ' + (ok ? 'connected' : 'disconnected');
+}
+
+function renderWanwuStatus(data = {}) {
+  const box = document.getElementById('wanwu-status');
+  const text = document.getElementById('wanwu-status-text');
+  if (!box || !text) return;
+  const status = data.scanning ? 'scanning' : (data.status || 'never');
+  const allowed = ['never', 'scanning', 'ok', 'attention', 'error'];
+  box.className = `wanwu-status ${allowed.includes(status) ? status : 'error'}`;
+  text.textContent = status === 'scanning' ? '扫描中' : (data.message || '等待扫描');
+
+  const details = [];
+  if (data.lastSuccessAt) details.push(`上次成功：${new Date(data.lastSuccessAt).toLocaleString('zh-CN')}`);
+  if (data.nextScanAt) details.push(`下次扫描：${new Date(data.nextScanAt).toLocaleString('zh-CN')}`);
+  if (data.error) details.push(`异常：${data.error}`);
+  box.title = details.length ? details.join('\n') : '万物尚未扫描';
+}
+
+async function loadWanwuStatus() {
+  try {
+    renderWanwuStatus(await api('/wanwu-status'));
+  } catch(e) {
+    renderWanwuStatus({ status: 'error', message: '状态异常', error: e.message });
+  }
 }
 
 // ── Tab ──────────────────────────────────────────────────────────
@@ -2016,6 +2044,7 @@ fetch('/api/stop-event').then(r => r.json()).then(ev => {
   }
 }).catch(() => {});
 loadAllLiveTabs();
+loadWanwuStatus();
 loadActionBadge();
 refreshDeadlineAlert();
 setInterval(refreshDeadlineAlert, 60000);

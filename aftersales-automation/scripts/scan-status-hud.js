@@ -25,11 +25,12 @@ function setText(field, value) {
   field.setStringValue(String(value == null ? '' : value));
 }
 
-function terminalTitle(phase) {
-  if (phase === 'done') return '自动扫描完成';
-  if (phase === 'completed_with_errors') return '自动扫描完成 · 有异常';
-  if (phase === 'cancelled') return '自动扫描已停止';
-  return '自动扫描异常结束';
+function terminalTitle(phase, state) {
+  const prefix = state && state.mode === 'wanwu' ? '万物扫描' : '自动扫描';
+  if (phase === 'done') return `${prefix}完成`;
+  if (phase === 'completed_with_errors') return `${prefix}完成 · 有异常`;
+  if (phase === 'cancelled') return `${prefix}已停止`;
+  return `${prefix}异常结束`;
 }
 
 function terminalStatus(state) {
@@ -54,12 +55,44 @@ function render(state, fields) {
   if (phase === 'countdown') {
     const remainingMs = Math.max(0, safeNumber(state.countdownUntil, now) - now);
     const seconds = Math.ceil(remainingMs / 1000);
-    setText(fields.title, '售后自动扫描即将开始');
-    setText(fields.status, `${seconds} 秒后开始工单自动扫描`);
+    const isWanwu = state.mode === 'wanwu';
+    setText(fields.title, isWanwu ? '万物定时扫描即将开始' : '售后自动扫描即将开始');
+    setText(fields.status, `${seconds} 秒后开始${isWanwu ? '万物待办扫描' : '工单自动扫描'}`);
     setText(fields.detail, state.detail || '请暂存当前工作，并暂时停止鼠标键盘操作。');
     setText(fields.shop, '准备时间');
     setText(fields.ticket, `00:${String(seconds).padStart(2, '0')}`);
-    fields.progress.setDoubleValue(Math.max(0, Math.min(1, 1 - seconds / 10)));
+    const countdownSeconds = Math.max(1, safeNumber(state.countdownSeconds, 10));
+    fields.progress.setDoubleValue(Math.max(0, Math.min(1, 1 - seconds / countdownSeconds)));
+    return;
+  }
+
+  if (state.mode === 'wanwu') {
+    if (phase === 'queued') {
+      setText(fields.title, '万物定时扫描准备中');
+      setText(fields.status, state.status || '等待扫描队列');
+      setText(fields.detail, state.detail || '自动扫描尚未开始浏览器操作。');
+      setText(fields.shop, '后台：棒棒糖后台管理');
+      setText(fields.ticket, '状态：等待开始');
+      fields.progress.setDoubleValue(0);
+      return;
+    }
+
+    if (['done', 'completed_with_errors', 'error', 'cancelled'].includes(phase)) {
+      setText(fields.title, terminalTitle(phase, state));
+      setText(fields.status, terminalStatus(state));
+      setText(fields.detail, state.error ? `异常：${state.error}` : (state.detail || '可以继续正常使用电脑。'));
+      setText(fields.shop, '后台：棒棒糖后台管理');
+      setText(fields.ticket, state.summary || '本轮扫描已结束');
+      fields.progress.setDoubleValue(1);
+      return;
+    }
+
+    setText(fields.title, '万物定时扫描进行中');
+    setText(fields.status, state.status || '正在处理');
+    setText(fields.detail, state.detail || '请暂时不要操作自动化浏览器。');
+    setText(fields.shop, '后台：棒棒糖后台管理');
+    setText(fields.ticket, state.summary || '正在等待读取结果');
+    fields.progress.setDoubleValue(safeNumber(state.progress, 0.35));
     return;
   }
 
@@ -74,7 +107,7 @@ function render(state, fields) {
   }
 
   if (['done', 'completed_with_errors', 'error', 'cancelled'].includes(phase)) {
-    setText(fields.title, terminalTitle(phase));
+    setText(fields.title, terminalTitle(phase, state));
     setText(fields.status, terminalStatus(state));
     setText(
       fields.detail,

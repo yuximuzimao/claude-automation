@@ -78,6 +78,7 @@ entry: cli.js
 | `lib/server/a1-fixed-batch-entry.js` | A1 固定清单后端入口构造和校验：`POST /api/accounts/:num/a1-fixed-batch` 只允许显式单账号入队，固定 48h，忽略前端传入的 thresholdHours / accounts / disableAutoExecute 等可篡改参数；是否自动执行由 Step14 的 shouldAutoExecute + executionJournal 决定 | 改 A1 后端入口或入队参数时 |
 | `lib/server/op-queue.js` | 全局操作队列（串行化浏览器操作）。`execExecute`/`execReprocessOne`/`execReinfer` 已全面迁移到 A1 安全链路（openAccountFlow → 列表定位 → 点击处理按钮 → 执行/采集推理），不再走旧 pipeline/collect.js。固定批次失败会持久写入账号 `error/expired` 状态；紧急停止使用 AbortController + 步骤间检查点；定时自动扫描在浏览器操作前先启动 10 秒状态窗并持续推送店铺/工单进度，详见 `docs/ops-queue.md` | 改队列/执行/重新采集/停止/定时扫描进度逻辑时 |
 | `lib/server/scan-hud.js` + `scripts/scan-status-hud.js` | macOS 定时扫描浮动状态窗：10 秒预告倒计时、店铺/工单实时进度、异常/停止/完成终态后自动关闭；只观察队列状态，不改变业务决策 | 改自动扫描提醒、状态窗文案或显示字段时 |
+| `wanwu/` | 万物心选（棒棒糖后台管理）独立只读巡检模块：每天 07:00/15:00 通过统一 op-queue 扫描，必要时单次登录，待办数字间隔 3 秒双读一致后才确认；无论成功失败均关闭本次标签页。复用提醒、状态窗和顶部红绿状态框，不保存账号密码或平台 Session | 改万物扫描、登录、待办口径、调度或顶部状态时 |
 | `lib/server/account-session-status.js` | 账号 session 状态判定——`getAccountOpenGuard()` 按 ok/unknown/expired/error 决定是否拦截打开后台 | 改打开后台/状态拦截逻辑时 |
 | `lib/server/pipeline-status.js` | 扫描终态归类——明确终态 skip 进 auto_executed 而非静默 done | 改终态归档逻辑时 |
 | `lib/server/sse.js` | Server-Sent Events 实时推送 | 改前端实时更新时 |

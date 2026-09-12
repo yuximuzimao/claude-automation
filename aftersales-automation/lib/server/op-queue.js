@@ -17,6 +17,14 @@ const { expireStaleAlerts } = require('../jl/alerts');
 const { getTicketPlatformStage } = require('../after-sales-platform-stage');
 const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
 const scanHud = require('./scan-hud');
+const wanwuState = require('../../wanwu/state');
+const { scanWanwu } = require('../../wanwu/scanner');
+const {
+  totalCount: totalWanwuCount,
+  summarizeCounts: summarizeWanwuCounts,
+  sendPendingReminder: sendWanwuPendingReminder,
+  sendFailureReminder: sendWanwuFailureReminder,
+} = require('../../wanwu/reminder');
 
 const fs = require('fs');
 const BASE = path.join(__dirname, '../..');
@@ -292,6 +300,34 @@ function finishScanHud(op, outcome, payload = {}) {
     const processedTickets = Number(result.processedTickets || 0);
     const scanned = Number(result.scanned || 0);
 
+    if (op && op.type === 'wanwu-scan') {
+      if (outcome === 'cancelled') {
+        scanHud.finishSession(sessionId, {
+          phase: 'cancelled',
+          status: '万物扫描已停止',
+          error: null,
+          summary: '未完成本轮读取',
+        });
+        return;
+      }
+      if (outcome === 'error') {
+        scanHud.finishSession(sessionId, {
+          phase: 'error',
+          status: '万物扫描异常结束',
+          error: error ? String(error.message || error).slice(0, 160) : '未知异常',
+          summary: '请根据提醒检查后台',
+        });
+        return;
+      }
+      scanHud.finishSession(sessionId, {
+        phase: 'done',
+        status: result.total > 0 ? `万物扫描完成：发现 ${result.total} 条待办` : '万物扫描完成：无待办',
+        detail: result.total > 0 ? '已创建一条汇总提醒。' : '本轮无需人工处理。',
+        summary: result.summary || '无待办',
+      });
+      return;
+    }
+
     if (outcome === 'cancelled') {
       scanHud.finishSession(sessionId, {
         phase: 'cancelled',
@@ -381,6 +417,7 @@ function assertNotAborted(op) {
 async function executeOp(op) {
   switch (op.type) {
     case 'scan':           return execScan(op);
+    case 'wanwu-scan':     return execWanwuScan(op);
     case 'scan-finalize':  return execScanFinalize(op);
     case 'open-account':   return execOpenAccount(op);
     case 'reinfer':        return execReinfer(op);
@@ -393,6 +430,98 @@ async function executeOp(op) {
 }
 
 // ── 各类操作实现 ──────────────────────────────────────────────────
+
+function wanwuErrorMessage(error, stopped) {
+  if (stopped) return '扫描已停止';
+  const message = String(error && error.message || error || '扫描异常');
+  if (message.includes('登录')) return '登录异常';
+  if (message.includes('风控') || message.includes('captcha')) return '风控异常';
+  if (message.includes('标签页')) return '标签页异常';
+  return '扫描异常';
+}
+
+async function execWanwuScan(op) {
+  const previous = wanwuState.readState();
+  const lastAttemptAt = new Date().toISOString();
+  let current = wanwuState.writeState({
+    ...previous,
+    status: 'scanning',
+    message: '扫描中',
+    lastAttemptAt,
+    error: null,
+  });
+  sse.broadcast('wanwu-status', current);
+
+  try {
+    const hud = scanHud.createSession({
+      mode: 'wanwu',
+      countdownSeconds: 10,
+      title: '万物定时扫描',
+      detail: '请暂存当前工作，并暂时停止鼠标键盘操作。',
+    });
+    op._scanHudSessionId = hud.sessionId;
+    log('万物定时扫描状态窗已启动，10 秒后开始浏览器操作');
+  } catch (error) {
+    log(`[scan-hud] 万物状态窗启动失败: ${error.message}`);
+  }
+
+  await scanHud.wait(10000);
+  assertNotAborted(op);
+  updateScanHud(op, {
+    phase: 'running',
+    status: '正在打开棒棒糖后台管理',
+    detail: '本轮只读取待办数字，完成后自动关闭标签页。',
+    progress: 0.15,
+  });
+
+  try {
+    const result = await scanWanwu({
+      assertNotAborted: () => assertNotAborted(op),
+      onStage: stage => {
+        const stageMap = {
+          opening: { status: '正在打开棒棒糖后台管理', detail: '正在等待页面和浏览器自动填充。', progress: 0.2 },
+          login: { status: '正在登录万物后台', detail: '只点击一次“登陆”，正在等待首页就绪。', progress: 0.4 },
+          reading: { status: '正在读取万物待办', detail: '两次读取间隔 3 秒，结果一致后才确认。', progress: 0.7 },
+          closing: { status: '正在关闭万物标签页', detail: '正在核对本次扫描没有留下标签页。', progress: 0.9 },
+        };
+        if (stageMap[stage]) updateScanHud(op, { phase: 'running', ...stageMap[stage] });
+      },
+    });
+    const total = totalWanwuCount(result.counts);
+    const summary = summarizeWanwuCounts(result.counts);
+    const shortSummary = summarizeWanwuCounts(result.counts, { limit: 2 });
+    current = wanwuState.writeState({
+      status: total > 0 ? 'attention' : 'ok',
+      message: total > 0 ? shortSummary : '无待办',
+      counts: result.counts,
+      total,
+      summary,
+      shortSummary,
+      lastAttemptAt,
+      lastSuccessAt: result.checkedAt,
+      error: null,
+    });
+    sse.broadcast('wanwu-status', current);
+    if (total > 0 && !sendWanwuPendingReminder(result.counts)) {
+      log('[预警] 万物待办快捷指令失败，已降级为系统通知');
+    }
+    return { ok: true, total, summary, counts: result.counts, loggedInDuringScan: result.loggedInDuringScan };
+  } catch (error) {
+    const stopped = error && (error.name === 'AbortError' || String(error.message || '').includes('操作已被用户停止'));
+    current = wanwuState.writeState({
+      ...wanwuState.readState(),
+      status: 'error',
+      message: wanwuErrorMessage(error, stopped),
+      lastAttemptAt,
+      error: String(error && error.message || error).slice(0, 200),
+    });
+    sse.broadcast('wanwu-status', current);
+    if (!stopped && !sendWanwuFailureReminder(error)) {
+      log('[预警] 万物异常快捷指令失败，已降级为系统通知');
+    }
+    throw error;
+  }
+}
 
 // ── 退货入库 ──────────────────────────────────────────────────────
 

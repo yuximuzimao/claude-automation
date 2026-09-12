@@ -104,3 +104,22 @@ test('scan HUD update is a no-op for an unknown session', () => {
   assert.equal(scanHud.updateSession('missing-scan-hud-session', { phase: 'running' }), false);
   assert.equal(scanHud.finishSession('missing-scan-hud-session', { phase: 'done' }), false);
 });
+
+test('scan HUD supports the Wanwu countdown profile', () => {
+  const sessionId = `test-wanwu-${process.pid}-${Date.now()}`;
+  try {
+    scanHud.createSession({
+      sessionId,
+      mode: 'wanwu',
+      countdownSeconds: 10,
+      spawnImpl: fakeSpawn,
+    });
+    const state = scanHud.readStatus(sessionId);
+    assert.equal(state.mode, 'wanwu');
+    assert.equal(state.title, '万物定时扫描');
+    assert.equal(state.status, '10 秒后开始万物待办扫描');
+    assert.equal(state.countdownSeconds, 10);
+  } finally {
+    cleanup(sessionId);
+  }
+});

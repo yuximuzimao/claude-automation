@@ -96,6 +96,42 @@ header {
   margin-left: 4px;
 }
 .tab-badge:empty { display: none; }
+.wanwu-status {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 150px;
+  max-width: 250px;
+  height: 32px;
+  margin-left: 14px;
+  padding: 0 11px;
+  border: 1px solid var(--gray-200);
+  border-radius: 7px;
+  color: var(--gray-600);
+  background: var(--gray-100);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.wanwu-status-name { font-weight: 700; flex-shrink: 0; }
+#wanwu-status-text { overflow: hidden; text-overflow: ellipsis; }
+.wanwu-status.ok {
+  color: #166534;
+  background: var(--green-light);
+  border-color: #86efac;
+}
+.wanwu-status.attention,
+.wanwu-status.error {
+  color: #991b1b;
+  background: var(--red-light);
+  border-color: #fca5a5;
+}
+.wanwu-status.scanning {
+  color: #92400e;
+  background: var(--orange-light);
+  border-color: #fcd34d;
+}
 .seq-num {
   color: var(--gray-400);
   font-size: 12px;

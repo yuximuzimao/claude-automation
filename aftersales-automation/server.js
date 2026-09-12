@@ -79,6 +79,7 @@ const express = require('express');
 const routes = require('./lib/server/routes');
 const opQueue = require('./lib/server/op-queue');
 const { SCAN_HOURS } = require('./lib/constants');
+const { getNextWanwuScanAt } = require('./wanwu/schedule');
 
 const PORT = process.env.PORT || 3457;
 const SESSIONS_DIR = path.join(__dirname, '../sessions');
@@ -113,6 +114,7 @@ function runAutoScan() {
 
 // 精确到点的定时调度（8/12/16/20）
 let scanTimer = null;
+let wanwuScanTimer = null;
 
 // 定时调度框架（2026-06-30 恢复）：每天按 SCAN_HOURS 整点触发。
 function scheduleNextScan() {
@@ -140,13 +142,36 @@ function scheduleNextScan() {
   }, ms);
 }
 
+function runAutoWanwuScan() {
+  console.log('[wanwu-auto-scan] 开始定时扫描');
+  opQueue.enqueue('wanwu-scan', '万物定时扫描', {});
+}
+
+function scheduleNextWanwuScan() {
+  if (wanwuScanTimer) { clearTimeout(wanwuScanTimer); wanwuScanTimer = null; }
+  const now = new Date();
+  const next = getNextWanwuScanAt(now);
+  const ms = next.getTime() - now.getTime();
+  console.log(`[wanwu-auto-scan] 下次: ${next.toLocaleString('zh-CN')}（${Math.round(ms / 60000)} 分钟后）`);
+  app.locals.nextWanwuScanAt = next.toISOString();
+
+  wanwuScanTimer = setTimeout(() => {
+    wanwuScanTimer = null;
+    if (!opQueue.isPaused()) runAutoWanwuScan();
+    scheduleNextWanwuScan();
+  }, ms);
+}
+
 // stopScan/resumeScan：/emergency-stop 暂停定时调度，/resume 恢复
 app.locals.stopScan = () => {
   if (scanTimer) { clearTimeout(scanTimer); scanTimer = null; }
+  if (wanwuScanTimer) { clearTimeout(wanwuScanTimer); wanwuScanTimer = null; }
   app.locals.nextScanAt = null;
+  app.locals.nextWanwuScanAt = null;
 };
 app.locals.resumeScan = () => {
-  scheduleNextScan(); // 恢复定时调度
+  scheduleNextScan();
+  scheduleNextWanwuScan();
 };
 
 app.listen(PORT, async () => {
@@ -180,6 +205,7 @@ app.listen(PORT, async () => {
 
   // 恢复定时扫描（2026-06-30）：runAutoScan 走 execScan 新路径，遵守 scanEnabled 开关。
   scheduleNextScan();
+  scheduleNextWanwuScan();
 
   // 启动时补齐老账号 scanEnabled 字段（一次性迁移）
   (() => {

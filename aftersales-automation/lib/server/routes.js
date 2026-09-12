@@ -30,6 +30,7 @@ const {
   selectReprocessQueueItems,
 } = require('./live-batch-scope');
 const { assertLatestSimulationForExecution } = require('./simulation-execution-guard');
+const wanwuState = require('../../wanwu/state');
 
 const router = express.Router();
 const CLI = path.join(__dirname, '../../cli.js');
@@ -447,6 +448,19 @@ router.get('/scan-status', (req, res) => {
   } catch(e) {
     res.json({ scanning: false, lastScanAt: null, lastResult: null });
   }
+});
+
+router.get('/wanwu-status', (req, res) => {
+  const data = wanwuState.readState();
+  const queueState = opQueue.getState();
+  data.scanning = !!(queueState.running && queueState.running.type === 'wanwu-scan') ||
+                  queueState.queued.some(op => op.type === 'wanwu-scan');
+  if (data.scanning) {
+    data.status = 'scanning';
+    data.message = '扫描中';
+  }
+  data.nextScanAt = req.app.locals.nextWanwuScanAt || null;
+  res.json(data);
 });
 
 router.post('/scan', (req, res) => {
