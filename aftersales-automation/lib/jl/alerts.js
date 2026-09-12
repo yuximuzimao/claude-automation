@@ -11,8 +11,64 @@ const fs = require('fs');
 const cdp = require('../cdp');
 
 const CACHE_FILE = path.join(__dirname, '../../data/jl-alerts-cache.json');
+const ACCOUNTS_FILE = path.join(__dirname, '../../../sessions/accounts.json');
+
+function readAccountNotes() {
+  try {
+    const accounts = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf8'));
+    return Object.fromEntries(Object.entries(accounts).map(([num, account]) => [
+      String(num),
+      String((account && (account.note || account.name)) || `账号${num}`).trim(),
+    ]));
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(cache) {
+  const serialized = JSON.stringify(cache);
+  const tmpPath = `${CACHE_FILE}.${process.pid}.${Date.now()}.tmp`;
+  fs.writeFileSync(tmpPath, serialized);
+  fs.renameSync(tmpPath, CACHE_FILE);
+  const readBack = fs.readFileSync(CACHE_FILE, 'utf8');
+  if (readBack !== serialized) throw new Error('平台提醒缓存写入后校验失败');
+}
+
+function reconcileCacheAccounts(cache, accountNotes) {
+  if (!cache || !cache.byAccount || !accountNotes) return { cache, changed: false };
+  const next = { ...cache, byAccount: { ...cache.byAccount } };
+  let changed = false;
+  for (const [key, entry] of Object.entries(next.byAccount)) {
+    const expectedNote = accountNotes[String(key)];
+    const cachedNote = String((entry && entry.note) || '').trim();
+    if (!expectedNote || cachedNote !== expectedNote) {
+      delete next.byAccount[key];
+      changed = true;
+    }
+  }
+  if (changed) next.updatedAt = new Date().toISOString();
+  return { cache: next, changed };
+}
+
+function validateAlertAccount(accountNum, accountNote, accountNotes) {
+  const key = String(accountNum || 'unknown');
+  const suppliedNote = String(accountNote || '').trim();
+  if (!accountNotes) return { ok: true, key, note: suppliedNote || key };
+  const expectedNote = accountNotes[key];
+  if (!expectedNote) return { ok: false, key, reason: '账号不存在' };
+  if (suppliedNote !== expectedNote) return { ok: false, key, reason: '店铺显示名不匹配' };
+  return { ok: true, key, note: expectedNote };
+}
 
 async function fetchAndCacheAlerts(accountNum, accountNote) {
+  const accountNotes = readAccountNotes();
+  const accountGuard = validateAlertAccount(accountNum, accountNote, accountNotes);
+  if (!accountGuard.ok) {
+    console.warn(`[alerts] 账号${accountGuard.key}${accountGuard.reason}，拒绝读取首页提醒`);
+    return readCache();
+  }
+  const { key } = accountGuard;
+
   const targets = await cdp.getTargets();
   const jl = targets.find(t => t.url && t.url.includes('scrm.jlsupp.com'));
   if (!jl) return readCache();
@@ -46,10 +102,9 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
 
   if (Array.isArray(items) && items.length > 0) {
     const cache = readCache() || { byAccount: {} };
-    const key = String(accountNum || 'unknown');
-    cache.byAccount[key] = { num: accountNum, note: accountNote || key, items, fetchedAt: new Date().toISOString() };
+    cache.byAccount[key] = { num: accountNum, note: accountGuard.note, items, fetchedAt: new Date().toISOString() };
     cache.updatedAt = new Date().toISOString();
-    try { fs.writeFileSync(CACHE_FILE, JSON.stringify(cache)); } catch(e) {}
+    try { writeCache(cache); } catch(e) {}
     return cache;
   }
   return readCache();
@@ -57,18 +112,22 @@ async function fetchAndCacheAlerts(accountNum, accountNote) {
 
 function readCache() {
   try {
-    const raw = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+    let raw = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
     // 兼容旧格式（items 数组）→ 迁移为 byAccount
     if (raw && raw.items && !raw.byAccount) {
-      return { byAccount: {}, updatedAt: raw.fetchedAt };
+      raw = { byAccount: {}, updatedAt: raw.fetchedAt };
     }
-    return raw;
+    const reconciled = reconcileCacheAccounts(raw, readAccountNotes());
+    if (reconciled.changed) {
+      try { writeCache(reconciled.cache); } catch(e) {}
+    }
+    return reconciled.cache;
   } catch { return null; }
 }
 
 // 向后兼容旧接口
 function getCache() { return readCache(); }
-function setCache(v) { try { fs.writeFileSync(CACHE_FILE, JSON.stringify(v)); } catch(e) {} }
+function setCache(v) { try { writeCache(v); } catch(e) {} }
 
 /**
  * 每次扫描完成后调：对未扫描的账号做 24h 过期判断。
@@ -103,9 +162,17 @@ function expireStaleAlerts(scannedNums) {
 
   if (changed) {
     cache.updatedAt = new Date().toISOString();
-    try { fs.writeFileSync(CACHE_FILE, JSON.stringify(cache)); } catch(e) {}
+    try { writeCache(cache); } catch(e) {}
   }
   return cache;
 }
 
-module.exports = { fetchAndCacheAlerts, getCache, setCache, expireStaleAlerts };
+module.exports = {
+  fetchAndCacheAlerts,
+  getCache,
+  setCache,
+  expireStaleAlerts,
+  reconcileCacheAccounts,
+  validateAlertAccount,
+  readAccountNotes,
+};

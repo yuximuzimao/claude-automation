@@ -867,6 +867,7 @@ function loadDefaultDependencies() {
   const step10 = require('./10-read-urgent-after-sale-list');
   const { inferDecision } = require('../../lib/infer');
   const { shouldAutoExecute } = require('../../lib/server/after-sales-auto-gate');
+  const { fetchAndCacheAlerts } = require('../../lib/jl/alerts');
   const { supplementBaiduLogisticsIfNeeded } = require('../../lib/external-logistics-baidu');
   const { executeTicketDecision } = require('../../lib/jl/execute-decision');
   const db = require('../../lib/server/data');
@@ -928,6 +929,7 @@ function loadDefaultDependencies() {
       closeTarget: cdp.closeTarget,
       readShopName: (targetId, waitMs = 0) => readShopName(targetId, waitMs),
     }),
+    fetchAndCacheAlerts,
     collectDetail: context => collectTicketTargetAware({
       detailTargetId: context.detailTargetId,
       erpTargetId: context.erpTargetId,
@@ -1427,9 +1429,11 @@ async function processSingleAccountFixedBatch(accountNum, options = {}) {
   }
 
   try {
-    const { fetchAndCacheAlerts } = require('../../lib/jl/alerts');
     const accountNote = (accountResult && accountResult.matchedNote) || `账号${accountNum}`;
-    await fetchAndCacheAlerts(accountNum, accountNote);
+    if (typeof dependencies.fetchAndCacheAlerts !== 'function') {
+      throw new Error('首页提醒采集依赖未装配');
+    }
+    await dependencies.fetchAndCacheAlerts(accountNum, accountNote);
   } catch(e) {
     console.warn('[step14] fetchAndCacheAlerts 非致命错误:', e.message);
   }

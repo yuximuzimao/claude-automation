@@ -172,4 +172,10 @@ var addBtn = Array.from(document.querySelectorAll('button'))
 - 已有 Session 的普通重新登录不提取、不覆盖手机号。禁止只写登录过程返回的 session 字段；否则会丢 `phone`，下次打开登录页无法自动填入账号。
 - 直接维护重新登录自动填写手机号时，只修改 `../sessions/accounts.json` 对应账号的 `phone` 并读回验证；这不是网页操作，不启动 CDP、不运行 `jl add`、不触发登录，也不修改 `accountN.json`。只有用户明确要求立即重新登录或在平台实际修改手机号时，才进入重新登录流程。
 
+### 2.6 首页平台提醒缓存
+
+- 首页提醒由 Step14 在单账号工单处理收尾后调用 `dependencies.fetchAndCacheAlerts` 读取，缓存到 `data/jl-alerts-cache.json`。业务流程禁止在函数尾部临时 `require()` 真实实现，否则单元测试无法替换浏览器和缓存副作用。
+- 缓存展示前按 `../sessions/accounts.json` 校验账号是否存在、`note` 是否与当前店铺显示名一致；不存在或名称不匹配的条目直接失效，不能改名后继续沿用，因为提醒内容可能来自另一个真实账号。
+- 单元测试 fixture 必须提供 `fetchAndCacheAlerts` 替身。回归时比较缓存文件测试前后的校验值，具体命令见 `docs/ops-testing.md §5`。
+
 ---

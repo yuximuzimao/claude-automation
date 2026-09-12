@@ -197,6 +197,10 @@ function batchDependencies(overrides = {}) {
         : `https://scrm.jlsupp.com/micro-customer/business/after-sale-detail?workOrderNum=${id.replace(/^detail-/, '')}`,
     })),
     readShopName: async () => ({ success: true, state: 'logged-in', shopName: '测试店铺' }),
+    fetchAndCacheAlerts: async (accountNum, accountNote) => {
+      calls.push(['fetchAlerts', accountNum, accountNote]);
+      return { byAccount: {} };
+    },
     onProgress: async progress => calls.push(['progress', progress.workOrderNum, progress.status]),
     ...overrides,
   };
@@ -1380,14 +1384,15 @@ test('详情tab关闭后仍存在时立即停止，且不得继续下一单', as
   );
 });
 
-test('空清单直接返回成功，不打开工单、不读取首页提醒', async () => {
+test('空清单直接返回成功，不打开工单，但仍在账号收尾时读取首页提醒', async () => {
+  const alertCalls = [];
   const fixture = batchDependencies({
     prepareAfterSaleList: async () => ({
       success: true,
       targetId: 'list-tab',
       list: { urgent: [], totalCount: 0, complete: true },
     }),
-    fetchAndCacheAlerts: async () => assert.fail('本步骤不读取首页提醒'),
+    fetchAndCacheAlerts: async (accountNum, accountNote) => alertCalls.push([accountNum, accountNote]),
   });
 
   const result = await processSingleAccountFixedBatch('3', { dependencies: fixture.dependencies });
@@ -1396,6 +1401,7 @@ test('空清单直接返回成功，不打开工单、不读取首页提醒', as
   assert.deepEqual(result.snapshot, []);
   assert.deepEqual(result.items, []);
   assert.equal(fixture.calls.some(call => call[0] === 'open'), false);
+  assert.deepEqual(alertCalls, [['3', '测试店铺']]);
 });
 
 test('首次48小时清单未完整读取时拒绝冻结和处理', async () => {

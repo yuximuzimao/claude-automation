@@ -53,4 +53,23 @@ node test.js all <工单号>
 - **全量**：所有步骤均 ≥ 9/10
 - **新命令上线前**：至少跑对应 step × 3次 + 相关 chain 一遍
 
+## 5. 单元测试隔离
+
+单元测试只能使用模拟依赖，禁止触发真实平台或修改生产运行状态：
+
+- CDP、页面读取、登录、提醒和 `data/` 写入函数必须通过依赖注入进入业务编排；测试 fixture 必须显式提供替身。
+- 禁止在被测函数尾部临时 `require()` 带副作用模块，这会绕过 fixture。默认生产依赖统一在 `loadDefaultDependencies()` 装配，业务流程只调用 `dependencies.*`。
+- 涉及现有生产缓存的回归，测试前后必须比较文件校验值；发生变化即视为测试失败，即使断言全部通过。
+- 测试临时文件只放系统临时目录，并在 `finally` 中清理；浏览器测试还要按本次精确 `targetId` 验证零新增标签页。
+
+平台提醒专项回归：
+
+```bash
+shasum data/jl-alerts-cache.json
+node --test test/jl/alerts-cache.test.js test/jl/process-single-account-fixed-batch.test.js
+shasum data/jl-alerts-cache.json
+```
+
+两次校验值必须一致。
+
 ---

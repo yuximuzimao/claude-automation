@@ -66,7 +66,7 @@ entry: cli.js
 | `lib/jl/add-note.js` | 添加内部备注 | 改备注逻辑时 |
 | `lib/jl/navigate.js` | 鲸灵页面导航 | 需要跳鲸灵页面时 |
 | `lib/jl/logistics.js` | 读鲸灵物流信息 | 查鲸灵侧物流时 |
-| `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示。**新 A1 完整闭环目标**：仅在账号工单全部处理后调用，沿用 `.scroll-item` DOM 读取且不主动关弹窗。旧停用 `op-queue.js`/`scan-all.js` 仍会列表读完即调用，恢复前必须由第三步接管或删除 | 改平台提醒逻辑时 |
+| `lib/jl/alerts.js` | 鲸灵首页平台提醒采集，按账号缓存 `data/jl-alerts-cache.json`，前端触发条+展开面板展示。缓存读取会按 `accounts.json` 校验账号存在性和店铺显示名，名称不匹配的数据直接失效；Step14 必须通过 `dependencies.fetchAndCacheAlerts` 调用，单测不得落回真实 CDP/生产缓存。**新 A1 完整闭环目标**：仅在账号工单全部处理后调用，沿用 `.scroll-item` DOM 读取且不主动关弹窗。旧停用 `op-queue.js`/`scan-all.js` 仍会列表读完即调用，恢复前必须由第三步接管或删除 | 改平台提醒逻辑时 |
 | `lib/jl-session-state.js` | 鲸灵当前账号缓存读写（`data/current-session.json`） | 改多账号扫描、采集注入、op-queue 注入判断时 |
 | `lib/jl-account-config.js` | 保存登录态时合并账号配置；首次新增可从 `supplierInfo.supplierMobileList[0]` 初始化 phone，后续保存保留已有 phone/name/note/file | 改店铺管理新增/重登保存逻辑时 |
 | `lib/server/relogin-session.js` | 新增店铺与重新登录共用的临时登录进程启动、端口等待和首次手机号初始化参数判定 | 改店铺管理登录窗口启动流程时 |
@@ -216,3 +216,4 @@ await cdp.navigate(targetId, 'https://...');
 | 34 | 重新采集沿用 queue 旧截止时间 | 平台可能在工单阶段变化后把原本 `<=48h` 的倒计时延长到十几天。`execReprocessOne` 定位到当前列表卡片后必须保留并校验本次 `remaining/totalHours`，同步刷新 queue 的 `urgency/deadlineAt` 再推理；当前 `totalHours>48` 时只保留待确认并停止打开详情，禁止用旧 `deadlineAt` 再次写回等待重查。2026-08-20 两张退货退款工单触发。 |
 | 35 | 拒绝取证后固定等 800ms 就判物流弹窗未关闭 | 拒绝流程必须复用 `logistics.js` 的局部关闭能力，禁止在 `reject.js` 自建固定延时或重试整个拒绝操作；关闭失败必须停在拒绝表单之前。轮询与后备边界见 `docs/ops-jingling.md §2.3`。 |
 | 36 | 新增业务动作后只补前端逻辑、漏补对应视觉状态 | 2026-09-05 工单 `100001788353201502945` 命中“换货 + 商家-待商家二次发货”观察分支，`app.js` 已支持 `decision.action='skip'` / “无需处理”，但 `style.css` 未同步定义 `.decision-tag.skip` 与 `.decision-box.skip`，导致该段呈现为异常裸样式。**规则**：新增任何会进入 `renderCard()` / `renderBody()` 的 decision action、status 或推荐动作时，必须同时检查标签、结果框及状态样式是否有完整映射；业务逻辑支持不等于前端展示已完成。修复只补对应 CSS，不改业务分支。 |
+| 37 | 单元测试漏注入平台提醒依赖，污染真实缓存 | Step14 过去在函数尾部直接 `require('../../lib/jl/alerts')`，导致使用“测试店铺”的单测读取真实鲸灵页面并写进 `data/jl-alerts-cache.json`。**规则**：浏览器、平台读取、提醒和生产缓存写入必须由默认依赖装配并允许测试覆盖；测试必须核对关键生产状态文件前后校验值一致。平台提醒缓存还要按 `accounts.json` 校验账号和店铺名，不匹配数据直接失效。 |
