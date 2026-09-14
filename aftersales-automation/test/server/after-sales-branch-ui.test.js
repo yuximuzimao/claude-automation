@@ -41,7 +41,7 @@ test('统计页展示新的最近30天分支清单，不再展示旧10次自动�
   assert.doesNotMatch(source, /confidence-update/);
 });
 
-test('AI 洞察明细只保留填写了具体评论的反馈', () => {
+test('反馈洞察只把有具体说明的好评差评作为待处理材料，并用洞察记录代表已处理结果', () => {
   const { hasSpecificFeedbackComment } = loadStatsHelpers();
   assert.equal(hasSpecificFeedbackComment({ verdict: 'positive', reason: '' }), false);
   assert.equal(hasSpecificFeedbackComment({ verdict: 'positive', reason: '   ' }), false);
@@ -50,7 +50,10 @@ test('AI 洞察明细只保留填写了具体评论的反馈', () => {
 
   const source = fs.readFileSync(path.join(__dirname, '../../public/app.js'), 'utf8');
   assert.match(source, /pendingInsight[^;]*\.filter\(hasSpecificFeedbackComment\)/s);
-  assert.match(source, /feedbacks[^;]*\.filter\(hasSpecificFeedbackComment\)/s);
+  assert.match(source, /反馈洞察/);
+  assert.match(source, /待处理反馈/);
+  assert.match(source, /已处理洞察/);
+  assert.doesNotMatch(source, /api\('\/feedback\?limit=50'\)/);
 });
 
 test('分支页只展示采集和归类正常的数据，并按自动化价值分层', () => {
@@ -204,6 +207,7 @@ test('分支卡片所有动态文本都使用生产转义函数', () => {
 
 test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为两列指标', () => {
   const css = fs.readFileSync(path.join(__dirname, '../../public/style.css'), 'utf8');
+  assert.match(css, /\.tab-btn\s*\{[\s\S]*?padding:\s*0 16px;/);
   assert.match(css, /\.branch-tier-enabled\s*\{[^}]*--tier-color:\s*var\(--green\)/);
   assert.match(css, /\.branch-tier-candidate\s*\{[^}]*--tier-color:\s*var\(--blue\)/);
   assert.match(css, /\.branch-tier-manual\s*\{[^}]*--tier-color:\s*var\(--gray-400\)/);

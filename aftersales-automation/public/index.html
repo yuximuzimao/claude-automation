@@ -18,7 +18,6 @@
       <button class="tab-btn" data-tab="waiting-tab">等待重查 <span class="tab-badge" id="waiting-tab-count"></span></button>
       <button class="tab-btn" data-tab="action">快递行动 <span class="tab-badge" id="action-tab-count"></span></button>
       <button class="tab-btn" data-tab="return-inbound">退货入库</button>
-      <button class="tab-btn" data-tab="history">历史记录</button>
       <button class="tab-btn" data-tab="stats">统计复盘</button>
       <button class="tab-btn" data-tab="accounts">店铺管理 <span class="tab-badge" id="accounts-tab-count"></span></button>
       <div id="wanwu-status" class="wanwu-status never" title="万物尚未扫描">
@@ -123,15 +122,6 @@
       <div id="ri-progress" style="display:none;margin-bottom:12px;padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:13px;"></div>
       <div id="ri-results"></div>
     </div>
-  </section>
-
-  <!-- Tab: 历史记录 -->
-  <section id="tab-history" class="tab-content">
-    <div class="toolbar">
-      <h2>历史记录 <span id="history-count" class="count-badge">—</span></h2>
-      <button class="btn-ghost" onclick="loadHistory()">刷新</button>
-    </div>
-    <div id="history-list"></div>
   </section>
 
   <!-- Tab: 统计复盘 -->

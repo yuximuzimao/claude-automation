@@ -21,7 +21,7 @@ function connectSSE() {
   es.addEventListener('queue-update', () => { loadLive(); loadSim(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
   es.addEventListener('simulation-update', () => { loadLive(); loadSim(); if (currentTab === 'stats') loadStats(); if (currentTab === 'action') loadActionList(); else loadActionBadge(); });
   es.addEventListener('feedback-new', () => { if (currentTab === 'stats') loadStats(); });
-  es.addEventListener('cases-update', () => { if (currentTab === 'history') loadHistory(); if (currentTab === 'stats') loadStats(); });
+  es.addEventListener('cases-update', () => { if (currentTab === 'stats') loadStats(); });
   es.addEventListener('insight-ready', () => { if (currentTab === 'stats') loadStats(); showToast('洞察已生成，已刷新统计页'); });
   es.addEventListener('insight-error', (e) => {
     try { const d = JSON.parse(e.data); showToast('洞察生成失败：' + (d.error || '未知错误') + '，请重新生成', 'error'); } catch {}
@@ -323,7 +323,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     if (['pending', 'auto', 'waiting-tab'].includes(currentTab)) loadAllLiveTabs();
     if (currentTab === 'action') loadActionList(); else loadActionBadge();
     if (currentTab === 'return-inbound') { /* 无需加载，等用户操作 */ }
-    if (currentTab === 'history') { historyPage = 1; loadHistory(); }
     if (currentTab === 'stats') loadStats();
     if (currentTab === 'accounts') loadAccounts();
   });
@@ -775,7 +774,7 @@ async function submitAdd() {
 }
 
 // ── 历史记录（cases.jsonl）────────────────────────────────────────
-const HISTORY_PAGE_SIZE = 30;
+const HISTORY_PAGE_SIZE = 10;
 let historyPage = 1;
 
 async function loadHistory(page) {
@@ -791,7 +790,8 @@ async function loadHistory(page) {
   const total = result.total || 0;
   const totalPages = Math.max(1, Math.ceil(total / HISTORY_PAGE_SIZE));
 
-  document.getElementById('history-count').textContent = total;
+  const countEl = document.getElementById('history-count');
+  if (countEl) countEl.textContent = total;
 
   // 按工单号建立反馈索引（每个工单只取最新一条）
   const fbByNum = {};
@@ -803,6 +803,9 @@ async function loadHistory(page) {
   });
 
   const el = document.getElementById('history-list');
+  if (!el) return;
+  const historySection = el.closest('details[data-stats-section="history"]');
+  if (historySection) historySection.dataset.loaded = 'true';
   if (!total) {
     el.innerHTML = '<div class="empty-state">暂无历史记录。执行实际工单后自动归档，或运行 <code>node simulate.js import</code> 导入案例。</div>';
     return;
@@ -1453,10 +1456,43 @@ function hasSpecificFeedbackComment(feedback) {
   return Boolean(String(feedback && feedback.reason || '').trim());
 }
 
+const STATS_SECTION_STATE_KEY = 'aftersales.stats.section-state.v1';
+const STATS_SECTION_DEFAULTS = { branches: true, insights: false, history: false };
+
+function getStatsSectionState() {
+  try {
+    return { ...STATS_SECTION_DEFAULTS, ...(JSON.parse(localStorage.getItem(STATS_SECTION_STATE_KEY) || '{}') || {}) };
+  } catch {
+    return { ...STATS_SECTION_DEFAULTS };
+  }
+}
+
+function isStatsSectionOpen(key) {
+  return !!getStatsSectionState()[key];
+}
+
+function saveStatsSectionState(key, open) {
+  const state = getStatsSectionState();
+  state[key] = !!open;
+  try { localStorage.setItem(STATS_SECTION_STATE_KEY, JSON.stringify(state)); } catch {}
+}
+
+function bindStatsSectionState(root) {
+  root.querySelectorAll('details[data-stats-section]').forEach(section => {
+    section.addEventListener('toggle', () => {
+      const key = section.dataset.statsSection;
+      saveStatsSectionState(key, section.open);
+      if (key === 'history' && section.open && section.dataset.loaded !== 'true') {
+        historyPage = 1;
+        loadHistory();
+      }
+    });
+  });
+}
+
 async function loadStats() {
-  const [stats, feedbacks, pendingInsight, recentInsights, confData] = await Promise.all([
+  const [stats, pendingInsight, recentInsights, confData] = await Promise.all([
     api('/stats'),
-    api('/feedback?limit=50'),
     api('/feedback?uninsighted=1'),
     api('/insights'),
     api('/auto-exec-confidence'),
@@ -1472,63 +1508,65 @@ async function loadStats() {
   <div class="stat-card"><div class="stat-number red">${stats.negative||0}</div><div class="stat-label">❌ 错误</div></div>
 </div>`;
 
-  // 待洞察反馈区（洞察生成已改为手动，不通过 API）
+  // 反馈洞察：有说明的好评/差评是待处理材料，生成后的洞察记录是已处理结果。
   const visiblePendingInsight = (pendingInsight || []).filter(hasSpecificFeedbackComment);
   const pendingCount = visiblePendingInsight.length;
+  const processedCount = (recentInsights || []).length;
   const insightHtml = `
-<div class="chart-section">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-    <h3 style="margin:0">AI 洞察</h3>
-    <span style="font-size:12px;color:var(--gray-500)">通过 Claude Code / Codex 手动生成</span>
-    <span style="font-size:13px;color:${pendingCount > 0 ? 'var(--blue)' : 'var(--gray-400)'}">待洞察：${pendingCount} 条</span>
-  </div>
-  ${pendingCount > 0 ? `
-  <div style="font-size:13px;color:var(--gray-600);margin-bottom:8px">待洞察反馈：</div>
-  ${visiblePendingInsight.map(f => `
-  <div class="feedback-item" style="margin-bottom:6px">
-    <div class="fb-icon">${f.verdict==='positive'?'✅':'❌'}</div>
-    <div class="fb-content">
-      <div class="fb-num">${f.workOrderNum||'—'}</div>
-      <div class="fb-reason">${h(f.reason)}</div>
-    </div>
-  </div>`).join('')}` : ''}
-  ${(recentInsights||[]).length ? `
-  <div style="font-size:13px;color:var(--gray-600);margin-top:12px;margin-bottom:6px">历史洞察：</div>
-  ${(recentInsights||[]).map(ins => `
-  <div style="border:1px solid ${ins.failed ? 'var(--red-300,#fca5a5)' : 'var(--gray-200)'};border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px${ins.failed ? ';background:#fff5f5' : ''}">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <span style="color:${ins.failed ? '#dc2626' : 'var(--gray-500)'}">
-        ${ins.failed ? '⚠️ 生成失败 · ' : ''}${ins.createdAt}
-      </span>
-      <div style="display:flex;gap:6px">
-        ${ins.failed ? `<span style="font-size:12px;color:var(--gray-400)">生成失败</span>` : `<button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>`}
+<details class="chart-section stats-section" data-stats-section="insights" ${isStatsSectionOpen('insights') ? 'open' : ''}>
+  <summary class="stats-section-summary">
+    <span class="stats-section-title">反馈洞察</span>
+    <span class="stats-section-meta">待处理 ${pendingCount} 条 · 已处理 ${processedCount} 次</span>
+  </summary>
+  <div class="stats-section-body">
+    <div class="stats-section-note">有具体说明的好评/差评会进入待处理；通过 Claude Code / Codex 汇总后，只保留洞察记录作为已处理结果。</div>
+    ${pendingCount > 0 ? `
+    <div class="stats-subheading">待处理反馈</div>
+    ${visiblePendingInsight.map(f => `
+    <div class="feedback-item" style="margin-bottom:6px">
+      <div class="fb-icon">${f.verdict==='positive'?'✅':'❌'}</div>
+      <div class="fb-content">
+        <div class="fb-num">${f.workOrderNum||'—'}</div>
+        <div class="fb-reason">${h(f.reason)}</div>
       </div>
-    </div>
-    ${ins.failed ? '' : `<div style="margin-top:4px;color:var(--gray-700);white-space:pre-wrap">${h(ins.preview)}…</div>`}
-  </div>`).join('')}` : ''}
-</div>`;
-
-  // 最近有说明的反馈记录（已洞察的也展示，供回顾）
-  const recentFb = (feedbacks || []).filter(hasSpecificFeedbackComment).reverse();
-  const fbHtml = recentFb.length ? `
-<div class="chart-section"><h3>反馈记录（有说明）</h3>
-  ${recentFb.map(f => `
-  <div class="feedback-item" style="margin-bottom:8px">
-    <div class="fb-icon">${f.verdict==='positive'?'✅':'❌'}</div>
-    <div class="fb-content">
-      <div class="fb-num">${f.workOrderNum||'—'}${f.insightedAt ? ' <span style="font-size:11px;color:var(--gray-400)">已洞察</span>' : ''}</div>
-      <div class="fb-reason">${h(f.reason)}</div>
-      <div class="fb-time">${new Date(f.createdAt).toLocaleString('zh-CN')}</div>
-    </div>
-  </div>`).join('')}
-</div>` : '';
+    </div>`).join('')}` : '<div class="stats-section-empty">暂无待处理反馈。</div>'}
+    ${processedCount > 0 ? `
+    <div class="stats-subheading">已处理洞察</div>
+    ${(recentInsights||[]).map(ins => `
+    <div style="border:1px solid ${ins.failed ? 'var(--red-300,#fca5a5)' : 'var(--gray-200)'};border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:13px${ins.failed ? ';background:#fff5f5' : ''}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="color:${ins.failed ? '#dc2626' : 'var(--gray-500)'}">
+          ${ins.failed ? '⚠️ 生成失败 · ' : ''}${ins.createdAt}
+        </span>
+        <div style="display:flex;gap:6px">
+          ${ins.failed ? `<span style="font-size:12px;color:var(--gray-400)">生成失败</span>` : `<button class="btn-ghost" style="font-size:12px;padding:2px 8px" onclick="viewInsight('${ins.file}')">查看全文</button>`}
+        </div>
+      </div>
+      ${ins.failed ? '' : `<div style="margin-top:4px;color:var(--gray-700);white-space:pre-wrap">${h(ins.preview)}…</div>`}
+    </div>`).join('')}` : ''}
+  </div>
+</details>`;
 
   // 最近 30 天售后分支清单（只读，不自动学习）
   const confHtml = confData && Array.isArray(confData.cases)
     ? renderAfterSalesBranches(confData)
     : '';
 
-  el.innerHTML = cardsHtml + confHtml + insightHtml + fbHtml;
+  const historyHtml = `
+<details class="chart-section stats-section" data-stats-section="history" ${isStatsSectionOpen('history') ? 'open' : ''}>
+  <summary class="stats-section-summary">
+    <span class="stats-section-title">历史记录</span>
+    <span class="stats-section-meta">共 <span id="history-count">—</span> 条 · 每页 ${HISTORY_PAGE_SIZE} 条</span>
+  </summary>
+  <div class="stats-section-body">
+    <div id="history-list"><div class="stats-section-empty">展开后加载历史记录。</div></div>
+  </div>
+</details>`;
+
+  el.innerHTML = cardsHtml + confHtml + insightHtml + historyHtml;
+  bindStatsSectionState(el);
+  const historySection = el.querySelector('details[data-stats-section="history"]');
+  if (historySection && historySection.open) loadHistory();
 }
 
 // ── 最近 30 天售后分支清单 ──────────────────────────────────────────
@@ -1631,19 +1669,24 @@ function renderAfterSalesBranches(report) {
     0
   );
 
-  return `<div class="chart-section">
-    <h3>售后自动化分支（最近30天）</h3>
-    <div class="branch-section-note">
-      最近30天有效工单 ${validWorkOrders} 单 · 正常固定分支 ${cases.length} 个。历史会自动刷新，但不会自动学习或自行开放权限。
+  return `<details class="chart-section stats-section" data-stats-section="branches" ${isStatsSectionOpen('branches') ? 'open' : ''}>
+    <summary class="stats-section-summary">
+      <span class="stats-section-title">售后自动化分支（最近30天）</span>
+      <span class="stats-section-meta">有效 ${validWorkOrders} 单 · 已授权 ${tiers.enabled.length} · 可评估 ${tiers.candidate.length} · 仅人工 ${tiers.manual_only.length}</span>
+    </summary>
+    <div class="stats-section-body">
+      <div class="branch-section-note">
+        最近30天有效工单 ${validWorkOrders} 单 · 正常固定分支 ${cases.length} 个。历史会自动刷新，但不会自动学习或自行开放权限。
+      </div>
+      <div class="branch-overview">
+        <div class="branch-overview-card is-enabled"><div class="branch-overview-value">${tiers.enabled.length}</div><div class="branch-overview-label">已授权自动</div></div>
+        <div class="branch-overview-card is-candidate"><div class="branch-overview-value">${tiers.candidate.length}</div><div class="branch-overview-label">可评估自动化</div></div>
+      </div>
+      ${cases.length
+        ? enabledHtml + candidateHtml + manualHtml
+        : '<div class="branch-tier-empty">最近30天暂无可评估的正常分支。</div>'}
     </div>
-    <div class="branch-overview">
-      <div class="branch-overview-card is-enabled"><div class="branch-overview-value">${tiers.enabled.length}</div><div class="branch-overview-label">已授权自动</div></div>
-      <div class="branch-overview-card is-candidate"><div class="branch-overview-value">${tiers.candidate.length}</div><div class="branch-overview-label">可评估自动化</div></div>
-    </div>
-    ${cases.length
-      ? enabledHtml + candidateHtml + manualHtml
-      : '<div class="branch-tier-empty">最近30天暂无可评估的正常分支。</div>'}
-  </div>`;
+  </details>`;
 }
 
 function generateInsights(stats) {

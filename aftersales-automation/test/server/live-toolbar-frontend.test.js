@@ -65,11 +65,24 @@ test('混合签收分支只展示并记录显式可拦截单号', () => {
   assert.match(opQueueJs, /extractShippedTrackings\(cd\)/);
 });
 
-test('历史记录复用待处理详情渲染并优先使用完整归档决策', () => {
+test('历史记录并入统计复盘，保持完整详情并改为每页10条', () => {
+  assert.doesNotMatch(indexHtml, /data-tab="history"/);
+  assert.doesNotMatch(indexHtml, /id="tab-history"/);
+  assert.match(appJs, /const HISTORY_PAGE_SIZE = 10/);
+  assert.match(appJs, /data-stats-section="history"/);
+  assert.doesNotMatch(appJs, /stats-history-toolbar/);
   assert.match(appJs, /const historyDecision = c\.decision \|\|/);
   assert.match(appJs, /const historyBody = c\.collectedData/);
   assert.match(appJs, /renderBody\(/);
   assert.match(appJs, /该历史记录未保存采集详情/);
   assert.match(routesJs, /decision: decision \|\| null/);
   assert.match(opQueueJs, /decision: sim\.decision/);
+});
+
+test('统计复盘三大区块记住上次展开状态，历史记录仅展开后加载', () => {
+  assert.match(appJs, /STATS_SECTION_DEFAULTS = \{ branches: true, insights: false, history: false \}/);
+  assert.match(appJs, /localStorage\.setItem\(STATS_SECTION_STATE_KEY/);
+  assert.match(appJs, /data-stats-section="branches"/);
+  assert.match(appJs, /data-stats-section="insights"/);
+  assert.match(appJs, /key === 'history' && section\.open && section\.dataset\.loaded !== 'true'/);
 });
