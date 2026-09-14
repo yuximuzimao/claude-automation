@@ -208,6 +208,7 @@ test('分支卡片所有动态文本都使用生产转义函数', () => {
 test('分支卡片用绿蓝灰表达自动化层级，并在窄屏改为两列指标', () => {
   const css = fs.readFileSync(path.join(__dirname, '../../public/style.css'), 'utf8');
   assert.match(css, /\.tab-btn\s*\{[\s\S]*?padding:\s*0 16px;/);
+  assert.match(css, /\.tab-content\s*\{[^}]*margin:\s*0 auto;/);
   assert.match(css, /\.branch-tier-enabled\s*\{[^}]*--tier-color:\s*var\(--green\)/);
   assert.match(css, /\.branch-tier-candidate\s*\{[^}]*--tier-color:\s*var\(--blue\)/);
   assert.match(css, /\.branch-tier-manual\s*\{[^}]*--tier-color:\s*var\(--gray-400\)/);
